@@ -152,23 +152,44 @@ public class SetaiinShotokuJohoFinder {
         if (所得基準年月日 == null) {
             所得基準年月日 = YMDHMS.now();
         }
-        //TODO :get所得情報登録用世帯員情報は見直しが入るため、実装後コメントアウト外す
-        // by GC 所得情報照会画面をテストするために、ダミーソースを呼び出す。
-        return  get世帯員所得情報(識別コード, null, 所得年度, 所得基準年月日,  true);
-//        世帯員Finder.get所得情報登録用世帯員情報();
-        //世帯員情報リストが空であれば空のリストを返す。
-
-        //世帯員情報リストに対するループ処理
-        //TODO :世帯員Finder.get所得情報登録用世帯員情報()で取得したリストに対する処理を行う。
-        //被保険者台帳Manager.find被保険者台帳(世帯員情報の識別コード)で直近の被保険者台帳を取得する。
-        //KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得Alive(識別コード, 所得年度, 所得基準年月日);
-        //SetaiinShotoku 世帯所得 = new SetaiinShotoku(new ShikibetsuCode("123456789012345"),
-        //HihokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY, null, RString.EMPTY,
-        //        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.HALF_SPACE,
-        //        RString.HALF_SPACE, RString.EMPTY, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO,
-        //        RString.EMPTY, null, false, null, null, RString.HALF_SPACE, RString.EMPTY, 0, RString.EMPTY);
-        //リストに追加する
-        //ループ終了後、リストを返す。
-//        return new ArrayList();
+        List<SetaiinJoho> 世帯員情報リスト = 世帯員Finder.get所得情報登録用世帯員情報(識別コード);
+        if (世帯員情報リスト.isEmpty()) {
+            return new ArrayList();
+        }
+        List<SetaiinShotoku> 世帯員所得情報リスト = new ArrayList();
+        for (SetaiinJoho 世帯員所得 : 世帯員情報リスト) {
+            HihokenshaDaicho 被保険者台帳 = 被保険者台帳Manager.find最新被保険者台帳(世帯員所得.get識別対象().get識別コード());
+            KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得Alive(世帯員所得.get識別対象().get識別コード(), 所得年度, 所得基準年月日);
+            世帯員所得情報リスト.add(new SetaiinShotoku(
+                    世帯員所得.get識別対象().get識別コード(),
+                    被保険者台帳 != null ? 被保険者台帳.get被保険者番号() : new HihokenshaNo(RString.EMPTY),
+                    世帯員所得.get識別対象().get名称().getName().value(),
+                    世帯員所得.get識別対象().get名称().getKana().value(),
+                    世帯員所得.get識別対象().to個人().get生年月日().toFlexibleDate(),
+                    世帯員所得.get識別対象().to個人().get性別().getCode(),
+                    世帯員所得.get識別対象().to個人().get性別().getCommonName(),
+                    世帯員所得.get識別対象().to個人().get続柄コードリスト().toRString(),
+                    世帯員所得.get識別対象().to個人().get続柄(),
+                    世帯員所得.get識別対象().to個人().get住民状態().コード(),
+                    世帯員所得.get識別対象().to個人().get住民状態().住民状態略称(),
+                    介護所得 != null ? 介護所得.get課税区分_住民税減免前() : RString.EMPTY,
+                    介護所得 != null ? 介護所得.get課税区分_住民税減免後() : RString.EMPTY,
+                    介護所得 != null ? 介護所得.get激変緩和措置() : RString.EMPTY,
+                    介護所得 != null ? 介護所得.get合計所得金額() : null,
+                    介護所得 != null ? 介護所得.get年金収入額() : null,
+                    介護所得 != null ? 介護所得.get年金所得額() : null,
+                    介護所得 != null ? 介護所得.get課税所得額() : null,
+                    介護所得 != null ? 介護所得.get登録業務() : RString.EMPTY,
+                    介護所得 != null ? new FlexibleDate(介護所得.get更正日().toDateString()) : new FlexibleDate(RString.EMPTY),
+                    false,
+                    世帯員所得.get識別対象().get異動年月日(),
+                    世帯員所得.get識別対象().to個人().get住定異動年月日(),
+                    世帯員所得.get識別対象().get異動事由().get異動事由コード(),
+                    世帯員所得.get識別対象().get異動事由().get異動事由正式名称(),
+                    世帯員所得.get識別対象().to個人().to住基個人().get住民票表示順(),
+                    世帯員所得.get本人区分(),
+                    世帯員所得.get識別対象().to個人().get世帯コード().value()));
+        }
+        return 世帯員所得情報リスト;
     }
 }

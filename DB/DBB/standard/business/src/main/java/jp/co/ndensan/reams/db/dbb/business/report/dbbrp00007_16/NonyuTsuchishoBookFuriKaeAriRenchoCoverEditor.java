@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
+ * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼あり）通知書_連帳 NonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
  *
- * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼あり）通知書_連帳
- * NonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
+ * @reamsid_L DBB-9110-160 liangbc
  */
 public class NonyuTsuchishoBookFuriKaeAriRenchoCoverEditor implements INonyuTsuchishoBookFuriKaeAriRenchoCoverEditor {
 

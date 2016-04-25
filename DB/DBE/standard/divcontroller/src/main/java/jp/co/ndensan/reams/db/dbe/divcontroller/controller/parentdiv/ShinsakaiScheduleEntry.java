@@ -44,7 +44,7 @@ public class ShinsakaiScheduleEntry {
 
         div.getShinakaiScheduleList().getDgShinakaiScheduleList().setDataSource(createRowShinsakaiListTestData());
         div.getShinakaiScheduleList().getDgShinakaiScheduleList().setSortOrder(new RString("shinsakaiNo"));
-        div.getShinakaiScheduleList().getDgShinakaiScheduleList().getSortOrder().toUpperCase();
+        //div.getShinakaiScheduleList().getDgShinakaiScheduleList().getSortOrder().toUpperCase();
 
         response.data = div;
         return response;
@@ -174,7 +174,7 @@ public class ShinsakaiScheduleEntry {
         for (dgShinsakaiList_Row row : arrayData) {
             shinsakaiMei = (new RString("第" + _toRString(kaisaiNo) + "回審査会"));
             row.setShinsakaiNo(shinsakaiMei);
-            kaisaiNo = ++kaisaiNo;
+            kaisaiNo = kaisaiNo + 1;
         }
 
         div.getShinsakaiList().getDgShinsakaiList().setDataSource(arrayData);

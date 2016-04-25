@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuN
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -50,7 +51,7 @@ public final class JuryoininJigyoshaMapper {
         JuryoininJigyosha 受領委任事業者 = new JuryoininJigyosha(
                 create契約番号(entity.getKeiyakuJigyoshaNo()),
                 create契約期間(entity),
-                null,
+                YMDHMS.now(),
                 //                entity.getKaishiYMD(),
                 //                create届出者(entity),
                 //                entity.getShuryoYMD(),

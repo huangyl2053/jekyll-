@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.business.core.nenreitoutatsuyoteishacheck.Nenr
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsuyoteishaichiranhyo.NenreitotatsuYoteishaIchiranhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.torokunenreitoutatsuyoteishacheck.NenreiToutatsuYoteishaCheckListMybatisParameter;
-import jp.co.ndensan.reams.db.dba.definition.processhprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitoutatsuyoteishachecklist.NenreiToutatsuYoteishaCheckListEucCsvEntity;
@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -51,9 +52,10 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -114,9 +116,6 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
         super.beforeExecute();
         nenreiCheckListJyohoEntity = new NenreiToutatsuYoteishaCheckListJyohoEntity();
         nenreiCheckListMapper = getMapper(INenreiToutatsuYoteishaCheckListMapper.class);
-//        TODO QA377 AccessLogの実装方式
-//        PersonalData personalData = toPersonalData(new NenreiToutatsuYoteishaCheckListEntity());
-//        AccessLogger.log(AccessLogType.照会, personalData);
         if (出力対象者_登録対象者.equals(processParameter.getSyutsuryokutaisyo())) {
             getTorokuSya();
         } else if (出力対象者_全ての対象者.equals(processParameter.getSyutsuryokutaisyo())) {
@@ -193,9 +192,8 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        List<PersonalData> list = new ArrayList<>();
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, list);
-        manager.spool(eucFilePath, accessLogUUID);
+        AccessLogger.log(AccessLogType.照会, toPersonalData());
+        manager.spool(eucFilePath);
     }
 
     private void mainsyori() {
@@ -462,10 +460,10 @@ public class NenreiToutatsuYoteishaCheckListProcess extends SimpleBatchProcessBa
     private void getTennyushutsuHoryuTaishosha() {
         dbT1010Entity = nenreiCheckListMapper.getTennyushutsuHoryuTaishosha();
     }
-    //TODO QA377 AccessLogの実装方式
-//    private PersonalData toPersonalData(NenreiToutatsuYoteishaCheckListEntity nenreiToutatsuYoteisha) {
-//        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("01")), new RString("検索項目"), new RString("被保険者番号"));
-//        PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
-//        return PersonalData.of(nenreiToutatsuYoteisha.getShikibetsuCode(), expandedInfo);
-//    }
+
+    private PersonalData toPersonalData() {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト().get(0).getHihokenshaNo().value());
+        return PersonalData.of(nenreiCheckListJyohoEntity.get年齢到達予定者チェックリスト().get(0).getShikibetsuCode(), expandedInfo);
+    }
 }

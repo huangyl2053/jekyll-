@@ -4,8 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0600031;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
@@ -22,7 +25,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.Fu
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -54,9 +56,6 @@ public class PnlKeteiJohoMsg {
     private static final RString 業務区分 = new RString("02");
     private static final RString 連番 = new RString("1");
     private static final RString 明細番号 = new RString("0001");
-    private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo("888888");
-    private static List<dgSyokanbaraikete_Row> 償還払決定一覧;
-    private static KetteJoho 決定情報;
 
     /**
      * onLoad事件
@@ -88,8 +87,16 @@ public class PnlKeteiJohoMsg {
         } else {
             div.getCcdKetteiList().loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_照会);
         }
-        償還払決定一覧 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
-        決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
+        List<dgSyokanbaraikete_Row> 決定情報登録_償還払決定一覧 = div.getCcdKetteiList().
+                getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
+        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
+        Map<RString, Integer> map_Row = new HashMap<>();
+        for (dgSyokanbaraikete_Row list : 決定情報登録_償還払決定一覧) {
+            map_Row.put(list.getNo(), list.getSagakuKingaku().getValue().intValue());
+        }
+        ViewStateHolder.put(ViewStateKeys.決定情報登録_償還払決定一覧, (Serializable) map_Row);
+        ViewStateHolder.put(ViewStateKeys.決定情報登録_決定情報, 決定情報登録_決定情報);
         return ResponseData.of(div).respond();
     }
 
@@ -100,18 +107,27 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請一覧画面へ遷移
      */
     public ResponseData<PnlKeteiJohoMsgDiv> onClick_btnFree(PnlKeteiJohoMsgDiv div) {
-        if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
-                || モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
+        Map<RString, Integer> 決定情報登録_償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
+        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
+        if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
+        ))
+                || モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
+                        ))) {
+            return ResponseData.of(div)
+                    .forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
         }
-        boolean flag = getHandler(div).is内容変更状態(償還払決定一覧, 決定情報);
-        if (flag && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
-                || モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
+        boolean flag = getHandler(div).is内容変更状態(決定情報登録_償還払決定一覧, 決定情報登録_決定情報);
+        if (flag
+                && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
+                        ))
+                || モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
+                        )))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
+
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -120,11 +136,16 @@ public class PnlKeteiJohoMsg {
                 return ResponseData.of(div).respond();
             }
         }
-        if ((!flag && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))))
-                || (モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
+        if ((!flag
+                && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
+                        ))))
+                || (モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
+                        )))) {
+            return ResponseData.of(div)
+                    .forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div)
+                .respond();
     }
 
     /**
@@ -180,6 +201,8 @@ public class PnlKeteiJohoMsg {
      * @return 福祉用具購入費支給申請_明細登録へ遷移す
      */
     private ResponseData<PnlKeteiJohoMsgDiv> 登録修正Update(PnlKeteiJohoMsgDiv div) {
+        Map<RString, Integer> 決定情報登録_償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
+        KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
@@ -189,7 +212,7 @@ public class PnlKeteiJohoMsg {
         if (adiv.getTxtKetebi().getValue() == null) {
             return ResponseData.of(div).addValidationMessages(getHandler(div).getCheckMessage()).respond();
         }
-        boolean flag = getHandler(div).is内容変更状態(償還払決定一覧, 決定情報);
+        boolean flag = getHandler(div).is内容変更状態(決定情報登録_償還払決定一覧, 決定情報登録_決定情報);
         if (!flag) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
@@ -207,11 +230,11 @@ public class PnlKeteiJohoMsg {
                                         .getTxtKetebi().getValue().getYearMonth().toString()))
                         .set支給区分コード(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
                                 getRdoShikyukubun().getSelectedKey())
-                        .set支払金額(new Integer(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
+                        .set支払金額(Integer.valueOf(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                         .getTxtShiharaikingakugoke().getValue().toString()))
                         .set増減点(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                 .getTxtZogentani().getValue().intValue())
-                        .set請求額差額金額(new Integer(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
+                        .set請求額差額金額(Integer.valueOf(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
                                         getTxtSagakuGoke().getValue().toString()))
                         .set増減理由等(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                 .getTxtZogenriyu().getValue())
@@ -222,8 +245,6 @@ public class PnlKeteiJohoMsg {
                         .build();
                 ShokanHanteiKekka shokanhanteikekka = new ShokanHanteiKekka(被保険者番号, サービス年月, 整理番号)
                         .createBuilderForEdit()
-                        //TODO画面に「保険者の選択値」を取得できない 、「888888」で固定
-                        .set証記載保険者番号(証記載保険者番号)
                         .set決定年月日(new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                         .getTxtKetebi().getValue().toString()))
                         .set支給_不支給決定区分(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
@@ -243,17 +264,18 @@ public class PnlKeteiJohoMsg {
                 entity.set画面モード(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
                 entity.set決定日(new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
                         getTxtKetebi().getValue().toString()));
-                entity.set差額金額登録フラグ(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete()
-                        .getGridSetting().getColumn("sagakuKingaku").getCellDetails().getDisabled());
                 List<ShokanFukushiYoguHanbaihi> 福祉用具販売費リスト = new ArrayList<>();
                 List<dgSyokanbaraikete_Row> list = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
                         getDgSyokanbaraikete().getDataSource();
+                boolean 差額金額登録フラグ = true;
                 for (dgSyokanbaraikete_Row row : list) {
+                    差額金額登録フラグ = row.getSagakuKingaku().isDisabled();
                     ShokanFukushiYoguHanbaihi shokanFukushiYoguHanbaihi = new ShokanFukushiYoguHanbaihi(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, row.getMeisaiNo(), row.getRenban())
                             .createBuilderForEdit().set差額金額(row.getSagakuKingaku().getValue().intValue()).build();
                     福祉用具販売費リスト.add(shokanFukushiYoguHanbaihi);
                 }
+                entity.set差額金額登録フラグ(差額金額登録フラグ);
                 entity.add福祉用具販売費リスト(ViewStateHolder.get(ViewStateKeys.状態, RString.class), 福祉用具販売費リスト);
                 FukushiyoguKonyuhiShikyuShinsei.createInstance().updKetteJoho(entity);
                 div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),

@@ -83,7 +83,10 @@ public class GemmenGengakuShinseiHandler {
 
         KaigoJigyoshaManager manager = KaigoJigyoshaManager.createInstance();
 
-        KaigoJigyosha kaigoJigyosha = manager.select介護事業者By申請日(減免減額申請情報.get申請届出代行事業者番号(), 申請日);
+        KaigoJigyosha kaigoJigyosha = null;
+        if (減免減額申請情報.get申請届出代行事業者番号() != null && 申請日 != null) {
+            kaigoJigyosha = manager.select介護事業者By申請日(減免減額申請情報.get申請届出代行事業者番号(), 申請日);
+        }
         if (kaigoJigyosha != null) {
             div.getTxtJigyoshaCode().setValue(減免減額申請情報.get申請届出代行事業者番号().getColumnValue());
             div.getTxtJigyoshaName().setValue(kaigoJigyosha.get事業者名称().getColumnValue());

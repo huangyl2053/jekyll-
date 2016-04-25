@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
 
     private final JutakuKaishuShinseiJyohoTorokuDiv div;
-    private static RString 画面モード;
+    private final RString 画面モード;
     private static final RString 画面モード_取消 = new RString("取消モード");
 
     /**
@@ -39,7 +39,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     public JutakuKaishuShinseiJyohoTorokuValidationHandler(RString 画面モード,
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
-        JutakuKaishuShinseiJyohoTorokuValidationHandler.画面モード = 画面モード;
+        this.画面モード = 画面モード;
     }
 
     /**
@@ -49,6 +49,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      */
     public JutakuKaishuShinseiJyohoTorokuValidationHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
+        this.画面モード = null;
     }
 
     /**
@@ -57,7 +58,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      * @return バリデーション突合結果
      */
     public ValidationMessageControlPairs validate() {
-        IValidationMessages messages = new ControlValidator(div).validate();
+        IValidationMessages messages = new ControlValidator(this.div, this.画面モード).validate();
         return createDictionary().check(messages);
     }
 
@@ -67,7 +68,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      * @return バリデーション突合結果
      */
     public ValidationMessageControlPairs validate住宅改修内容() {
-        IValidationMessages messages = new ControlValidator(div).validate住宅改修内容();
+        IValidationMessages messages = new ControlValidator(div, this.画面モード).validate住宅改修内容();
         return create住宅改修内容Dictionary().check(messages);
     }
 
@@ -87,6 +88,8 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                         div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD())
                 .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請日が未入力,
                         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD())
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.証明書が未入力,
+                        div.getCommHeadPanel().getDdlSyomeisyo())
                 .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請取消事由が未入力,
                         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu())
                 .build();
@@ -95,9 +98,11 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     private static class ControlValidator {
 
         private final JutakuKaishuShinseiJyohoTorokuDiv div;
+        private final RString 画面モード;
 
-        public ControlValidator(JutakuKaishuShinseiJyohoTorokuDiv div) {
+        public ControlValidator(JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード) {
             this.div = div;
+            this.画面モード = 画面モード;
         }
 
         /**
@@ -116,6 +121,8 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                     .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.領収日が未入力)
                     .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.申請日が入力)
                     .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請日が未入力)
+                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.証明書が入力)
+                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.証明書が未入力)
                     .messages());
             if (画面モード_取消.equals(画面モード)) {
                 messages.add(ValidateChain.validateStart(div)
@@ -150,7 +157,8 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         申請日が未入力(UrErrorMessages.必須, "申請日"),
         申請取消事由が未入力(UrErrorMessages.必須, "申請取消事由"),
         領収日が未入力(UrErrorMessages.必須, "領収日"),
-        提供着工年月が申請日の年月と一致しない(DbcErrorMessages.着工日不一致);
+        証明書が未入力(UrErrorMessages.必須, "証明書"),
+        提供着工年月が申請日の年月と一致しない(DbcErrorMessages.年月と不一致, "申請日", "提供（着工）年月");
         private final Message message;
 
         JutakuKaishuShinseiJyohoTorokuValidationMessages(IMessageGettable message, String... replacements) {

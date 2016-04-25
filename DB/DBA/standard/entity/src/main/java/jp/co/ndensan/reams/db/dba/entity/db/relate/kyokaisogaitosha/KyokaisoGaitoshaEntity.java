@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 
 /**
  * 境界層該当者RelateEntityクラスです。

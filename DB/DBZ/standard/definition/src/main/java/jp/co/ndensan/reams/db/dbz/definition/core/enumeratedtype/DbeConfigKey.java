@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype;
 /**
  * DBEの業務ConfigKeyの枚挙クラスです。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum DbeConfigKey {
 

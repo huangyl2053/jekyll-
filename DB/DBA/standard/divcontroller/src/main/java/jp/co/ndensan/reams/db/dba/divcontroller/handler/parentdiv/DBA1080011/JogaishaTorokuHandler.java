@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -85,10 +87,8 @@ public class JogaishaTorokuHandler {
         div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(rowList);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().setDisabled(true);
         LockingKey lockingKey = new LockingKey(new RString("ShikakuShutokuJogaishaToroku"));
-        if (RealInitialLocker.tryGetLock(lockingKey)) {
-            RealInitialLocker.lock(lockingKey);
-        } else {
-            div.getJogaishaTorokuIchiran().setDisabled(true);
+        if (!RealInitialLocker.tryGetLock(lockingKey)) {
+            div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
         アクセスログ();
@@ -284,7 +284,7 @@ public class JogaishaTorokuHandler {
     }
 
     private void アクセスログ() {
-//        AccessLogger.log(AccessLogType.照会, toPersonalData(new ShikibetsuCode(dgRowList.get(i).getShikibetsuCode())));
+        AccessLogger.log(AccessLogType.照会, toPersonalData(ShikibetsuCode.EMPTY));
     }
 
     private void set除外対象者エリア(dgNenreiTotatshusha_Row row) {

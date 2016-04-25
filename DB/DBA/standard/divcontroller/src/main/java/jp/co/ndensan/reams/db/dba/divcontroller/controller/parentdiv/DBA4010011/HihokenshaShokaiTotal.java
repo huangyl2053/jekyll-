@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.Hiho
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichosakusei.HihokenshaDaichoSakuseiManager;
 import jp.co.ndensan.reams.db.dba.service.report.hihokenshadaicho.HihokenshaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -49,7 +49,7 @@ public class HihokenshaShokaiTotal {
      */
     public ResponseData<HihokenshaShokaiTotalDiv> onLoad(HihokenshaShokaiTotalDiv div) {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPublish"), false);
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
         div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(shikibetsuCode);
@@ -78,7 +78,7 @@ public class HihokenshaShokaiTotal {
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
     public ResponseData<SourceDataCollection> onClick_btnPublish(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         SearchResult<HihokenshaDaichoSakusei> 被保険者情報 = HihokenshaDaichoSakuseiManager.createInstance().getHihokenshaDaichoSakusei(
                 HihokenshaDaichoSakuseiParameter.createSelectByKeyParam(key.get識別コード(), key.get被保険者番号()));
         HihokenshaDaichoPrintService printService = new HihokenshaDaichoPrintService();
@@ -112,7 +112,7 @@ public class HihokenshaShokaiTotal {
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
     public ResponseData<HihokenshaShokaiTotalDiv> onChange_tabHihokenshaShokai(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
         if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())) {

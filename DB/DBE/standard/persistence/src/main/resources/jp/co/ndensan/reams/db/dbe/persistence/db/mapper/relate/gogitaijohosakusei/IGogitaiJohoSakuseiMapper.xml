@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakusei.IGogitaiJohoSakuseiMapper">
 
-    <select id="getGogitaiJohoSakuseiGridList" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity" fetchSize="500">
+    <select id="getGogitaiJohoSakuseiGridList" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity">
         <include refid="selectGogitaiJohoSakuseiGridList" />        
     </select>
     <sql id="selectGogitaiJohoSakuseiGridList">
@@ -39,6 +39,8 @@
         </where>
         ORDER BY 
             DbT5591GogitaiJoho."gogitaiNo"
+        LIMIT 
+            #{最大表示件数}
     </sql>
     
     

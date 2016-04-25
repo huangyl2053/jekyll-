@@ -5,20 +5,46 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 賦課帳票共通項目編集（本算定）クラスです。
@@ -26,6 +52,29 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBB-9020-160 sunhaidi
  */
 public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
+
+    private static final RString 文字列_第 = new RString("第");
+    private static final RString 文字列_段階 = new RString("段階");
+    private static final RString 文字列_ケ月 = new RString("ケ月");
+    private static final RString 文字列_SP = new RString(" ");
+    private static final RString 期_1 = new RString("1");
+    private static final RString 期_2 = new RString("2");
+    private static final RString 期_3 = new RString("3");
+    private static final RString 期_4 = new RString("4");
+    private static final RString 期_5 = new RString("5");
+    private static final RString 期_6 = new RString("6");
+    private static final RString 期_7 = new RString("7");
+    private static final RString 期_8 = new RString("8");
+    private static final RString 期_9 = new RString("9");
+    private static final RString 期_10 = new RString("10");
+    private static final RString 期_11 = new RString("11");
+    private static final RString 期_12 = new RString("12");
+    private static final RString 期_13 = new RString("13");
+    private static final RString 期_14 = new RString("14");
+
+    private static final int SIZE_3 = 3;
+    private static final int SIZE_6 = 6;
+    private static final int SIZE_14 = 14;
 
     /**
      * 本算定通知書共通情報を作成する。
@@ -35,7 +84,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
      */
     public EditedHonSanteiTsuchiShoKyotsu create本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
 
-        RString 普徴最終期 = new FuchoKiUtil().get期月リスト().filtered本算定期間().getLast().get期();
         GennenKanen 現年度_過年度区分 = 本算定通知書情報.get現年度_過年度区分();
         Decimal 普徴納付済額_未到来期含む;
         Decimal 普徴納付済額_未到来期含まない;
@@ -44,19 +92,69 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         Decimal 納付済額_未到来期含む;
         Decimal 納付済額_未到来期含まない;
         Decimal 未到来期の納付済額;
+        Decimal 普徴既に納付すべき額;
+        Decimal 普徴今後納付すべき額_調定元に;
+        Decimal 普徴今後納付すべき額_収入元に;
+        Decimal 特徴既に納付すべき額;
+        Decimal 特徴今後納付すべき額;
+        Decimal 既に納付すべき額;
+        Decimal 今後納付すべき額;
         if (GennenKanen.現年度.equals(現年度_過年度区分)) {
-            普徴納付済額_未到来期含まない = Decimal.ZERO; // TODO
-            普徴納付済額_未到来期含む = Decimal.ZERO; // TODO
-            特徴納付済額_未到来期含む = Decimal.ZERO; // TODO
-            特徴納付済額_未到来期含まない = Decimal.ZERO; // TODO
+            List<NokiJoho> 普徴納期情報リスト = 本算定通知書情報.get普徴納期情報リスト();
+            int 普徴_最初期 = 0;
+            int 普徴_納付済期 = 0;
+            int 普徴_最大期 = 0;
+            if (!普徴納期情報リスト.isEmpty()) {
+                普徴_最初期 = 普徴納期情報リスト.get(0).get納期().get期別();
+                普徴_最大期 = 普徴納期情報リスト.get(普徴納期情報リスト.size() - 1).get納期().get期別();
+            }
+            for (NokiJoho nokiJoho : 普徴納期情報リスト) {
+                if (nokiJoho.get納期().get納期開始日().isBeforeOrEquals(本算定通知書情報.get発行日())
+                        && 本算定通知書情報.get発行日().isBeforeOrEquals(nokiJoho.get納期().get納期終了日())) {
+                    普徴_納付済期 = nokiJoho.get納期().get期別();
+                }
+            }
+
+            普徴納付済額_未到来期含まない = get普徴納付済額(本算定通知書情報.get収入情報(), 普徴_最初期, 普徴_納付済期);
+            普徴納付済額_未到来期含む = get普徴納付済額(本算定通知書情報.get収入情報(), 普徴_最初期, 普徴_最大期);
+            List<NokiJoho> 特徴納期情報リスト = 本算定通知書情報.get特徴納期情報リスト();
+            int 特徴_最初期 = 0;
+            int 特徴_納付済期 = 0;
+            int 特徴_最大期 = 0;
+            if (!特徴納期情報リスト.isEmpty()) {
+                特徴_最初期 = 特徴納期情報リスト.get(0).get納期().get期別();
+                特徴_最大期 = 特徴納期情報リスト.get(特徴納期情報リスト.size() - 1).get納期().get期別();
+            }
+            for (NokiJoho nokiJoho : 特徴納期情報リスト) {
+                if (nokiJoho.get納期().get納期開始日().isBeforeOrEquals(本算定通知書情報.get発行日())
+                        && 本算定通知書情報.get発行日().isBeforeOrEquals(nokiJoho.get納期().get納期終了日())) {
+                    特徴_納付済期 = nokiJoho.get納期().get期別();
+                }
+            }
+
+            特徴納付済額_未到来期含む = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_納付済期);
+            特徴納付済額_未到来期含まない = get特徴納付済額(本算定通知書情報.get収入情報(), 特徴_最初期, 特徴_最大期);
             納付済額_未到来期含む = 普徴納付済額_未到来期含む.add(特徴納付済額_未到来期含む);
             納付済額_未到来期含まない = 普徴納付済額_未到来期含まない.add(特徴納付済額_未到来期含まない);
             未到来期の納付済額 = 納付済額_未到来期含む.subtract(納付済額_未到来期含まない);
 
             RString 普徴現在期 = new KoseiTsukiHantei().find更正月(本算定通知書情報.get発行日()).get期();
+            FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
+            普徴既に納付すべき額 = get普徴納付済額(賦課情報, 1, Integer.parseInt(普徴現在期.toString()));
+            RString 普徴最終期 = new FuchoKiUtil().get期月リスト().get最終法定納期().get期();
+            Decimal 納付済額 = get普徴納付済額(賦課情報, 1, Integer.parseInt(普徴最終期.toString()));
+
+            普徴今後納付すべき額_調定元に = 納付済額.subtract(普徴既に納付すべき額);
+            普徴今後納付すべき額_収入元に = 納付済額.subtract(普徴納付済額_未到来期含む);
+            RString 月 = new RString(本算定通知書情報.get発行日().getMonthValue());
+            RString 特徴現在期 = new TokuchoKiUtil().get期月リスト().get月の期(Tsuki.toValue(月.padZeroToLeft(2))).get期();
+            特徴既に納付すべき額 = get特徴納付済額(賦課情報, 1, Integer.parseInt(特徴現在期.toString()));
+            特徴今後納付すべき額 = get特徴納付済額(賦課情報, 1, SIZE_6).subtract(特徴既に納付すべき額);
+            既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
+            今後納付すべき額 = 普徴今後納付すべき額_調定元に.add(特徴今後納付すべき額);
         } else {
-            Decimal 普徴納付済額 = Decimal.ZERO; // TODO
-            Decimal 特徴納付済額 = Decimal.ZERO; // TODO
+            Decimal 普徴納付済額 = get普徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_14);
+            Decimal 特徴納付済額 = get特徴納付済額(本算定通知書情報.get収入情報(), 1, SIZE_6);
             Decimal 納付済額 = 普徴納付済額.add(特徴納付済額);
 
             普徴納付済額_未到来期含まない = 普徴納付済額;
@@ -66,9 +164,424 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             納付済額_未到来期含む = 納付済額;
             納付済額_未到来期含まない = 納付済額;
             未到来期の納付済額 = Decimal.ZERO;
+            普徴既に納付すべき額 = 普徴納付済額;
+            普徴今後納付すべき額_調定元に = 普徴既に納付すべき額.subtract(普徴納付済額);
+            普徴今後納付すべき額_収入元に = 普徴既に納付すべき額.subtract(普徴納付済額);
+            特徴既に納付すべき額 = 特徴納付済額;
+            特徴今後納付すべき額 = Decimal.ZERO;
+            既に納付すべき額 = 普徴既に納付すべき額.add(特徴既に納付すべき額);
+            今後納付すべき額 = 普徴今後納付すべき額_収入元に;
         }
 
-        return new EditedHonSanteiTsuchiShoKyotsu();
+        FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
+        EditedHonSanteiTsuchiShoKyotsu shoKyotsu = new EditedHonSanteiTsuchiShoKyotsu();
+        shoKyotsu.set被保険者番号(賦課情報.get被保険者番号());
+        shoKyotsu.set調定年度(賦課情報.get調定年度());
+        shoKyotsu.set調定年度_年度あり(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        shoKyotsu.set調定年度_年度なし(賦課情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        shoKyotsu.set賦課年度(賦課情報.get賦課年度());
+        shoKyotsu.set賦課年度_年度あり(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        shoKyotsu.set賦課年度_年度なし(賦課情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        shoKyotsu.set識別コード(賦課情報.get識別コード());
+        shoKyotsu.set通知書番号(賦課情報.get通知書番号());
+        EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前 = get更正前(本算定通知書情報);
+        shoKyotsu.set更正前(更正前);
+        EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection();
+        shoKyotsu.set更正後(更正後);
+        shoKyotsu.set減免額(賦課情報.get減免額());
+        Decimal 確定保険料_年額 = 更正後.get確定保険料_年額();
+        if (確定保険料_年額 == null) {
+            確定保険料_年額 = Decimal.ZERO;
+        }
+        shoKyotsu.set増減額(確定保険料_年額.subtract(更正前.get確定保険料_年額()));
+        shoKyotsu.set納付済額_未到来期含む(納付済額_未到来期含む);
+        shoKyotsu.set納付済額_未到来期含まない(納付済額_未到来期含まない);
+        shoKyotsu.set未到来期の納付済額(未到来期の納付済額);
+        shoKyotsu.set普徴納付済額_未到来期含む(普徴納付済額_未到来期含む);
+        shoKyotsu.set特徴納付済額_未到来期含む(特徴納付済額_未到来期含む);
+
+        shoKyotsu.set普徴納付済額_未到来期含まない(普徴納付済額_未到来期含まない);
+        shoKyotsu.set特徴納付済額_未到来期含まない(特徴納付済額_未到来期含まない);
+        shoKyotsu.set納付済額算出年月日(本算定通知書情報.get発行日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        shoKyotsu.set既に納付すべき額(既に納付すべき額);
+        shoKyotsu.set今後納付すべき額(今後納付すべき額);
+        shoKyotsu.set普徴既に納付すべき額(普徴既に納付すべき額);
+        shoKyotsu.set特徴既に納付すべき額(特徴既に納付すべき額);
+        shoKyotsu.set普徴今後納付すべき額_調定元に(普徴今後納付すべき額_調定元に);
+        shoKyotsu.set普徴今後納付すべき額_収入元に(普徴今後納付すべき額_収入元に);
+        shoKyotsu.set特徴今後納付すべき額(特徴今後納付すべき額);
+        edit編集後本算定通知書共通情報(本算定通知書情報, shoKyotsu);
+        return shoKyotsu;
+    }
+
+    private void edit編集後本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu) {
+        IKojin kojin = ShikibetsuTaishoFactory.createKojin(本算定通知書情報.get賦課の情報_更正前().get宛名().toEntity());
+        EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通());
+        IShikibetsuTaisho 宛名 = 本算定通知書情報.get賦課の情報_更正後().get宛名();
+        HyojiCodeResearcher hyojiCodeResearcher = new HyojiCodeResearcher();
+        HyojiCodes 表示コード = hyojiCodeResearcher.create表示コード情報(本算定通知書情報.get帳票制御共通().toEntity(),
+                宛名.get住所().get町域コード().value(),
+                宛名.get行政区画().getChugakkoku().getコード().value(),
+                宛名.get行政区画().getChiku1().getコード().value(),
+                宛名.get行政区画().getChiku2().getコード().value(),
+                宛名.get行政区画().getChiku3().getコード().value(),
+                本算定通知書情報.get納組情報().getNokumi().getNokumiCode());
+        EditedAtesaki editedAtesaki = new EditedAtesaki(本算定通知書情報.get宛先情報(),
+                本算定通知書情報.get地方公共団体(),
+                本算定通知書情報.get帳票制御共通());
+        EditedKoza editedKoza = new EditedKoza(本算定通知書情報.get口座情報(), 本算定通知書情報.get帳票制御共通());
+        shoKyotsu.set編集後宛先(editedAtesaki);
+        shoKyotsu.set編集後個人(editedKojin);
+        shoKyotsu.set表示コード(表示コード);
+        shoKyotsu.set編集後口座(editedKoza);
+        FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
+        shoKyotsu.set調定事由１(賦課情報.get調定事由1());
+        shoKyotsu.set調定事由２(賦課情報.get調定事由2());
+        shoKyotsu.set調定事由３(賦課情報.get調定事由3());
+        shoKyotsu.set調定事由４(賦課情報.get調定事由4());
+        shoKyotsu.set普徴納期情報リスト(get納期情報リスト(本算定通知書情報.get普徴納期情報リスト()));
+        shoKyotsu.set特徴納期情報リスト(get納期情報リスト(本算定通知書情報.get特徴納期情報リスト()));
+        shoKyotsu.set普徴期数_現年度(本算定通知書情報.get普徴納期情報リスト().size());
+        shoKyotsu.set保険者名(本算定通知書情報.get地方公共団体().get市町村名());
+        shoKyotsu.set保険者番号(new HihokenshaNo(本算定通知書情報.get地方公共団体().get地方公共団体コード().value()));
+    }
+
+    private List<AfterEditInformation> get納期情報リスト(List<NokiJoho> 納期情報リスト) {
+        List<AfterEditInformation> 普徴納期情報リスト = new ArrayList<>();
+        for (NokiJoho nokiJoho : 納期情報リスト) {
+            AfterEditInformation afterEditInformation = new AfterEditInformation();
+            afterEditInformation.set期(nokiJoho.get期月().get期().padLeft(文字列_SP, 2));
+            afterEditInformation.set月(new RString(nokiJoho.get期月().get月AsInt()).padLeft(文字列_SP, 2));
+            if (is随時期(nokiJoho.get期月())) {
+                afterEditInformation.set随時(new RString("随時"));
+            } else {
+                afterEditInformation.set随時(RString.EMPTY);
+            }
+            afterEditInformation.set納期開始日(nokiJoho.get納期().get納期開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    fillType(FillType.BLANK).toDateString());
+            afterEditInformation.set納期開始日_西暦(nokiJoho.get納期().get納期開始日().seireki().separator(Separator.SLASH).
+                    fillType(FillType.BLANK).toDateString());
+            afterEditInformation.set納期終了日(nokiJoho.get納期().get納期終了日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    fillType(FillType.BLANK).toDateString());
+            afterEditInformation.set納期終了日_西暦(nokiJoho.get納期().get納期終了日().seireki().separator(Separator.SLASH).
+                    fillType(FillType.BLANK).toDateString());
+            afterEditInformation.set納期限(nokiJoho.get納期().get納期限().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    fillType(FillType.BLANK).toDateString());
+            afterEditInformation.set納期限_西暦(nokiJoho.get納期().get納期限().seireki().separator(Separator.SLASH).
+                    fillType(FillType.BLANK).toDateString());
+            afterEditInformation.set現年過年区分(nokiJoho.get納期().get現年過年区分());
+            afterEditInformation.set通知書発行日(nokiJoho.get納期().get通知書発行日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    fillType(FillType.BLANK).toDateString());
+            afterEditInformation.set通知書発行日_西暦(nokiJoho.get納期().get通知書発行日().seireki().separator(Separator.SLASH).
+                    fillType(FillType.BLANK).toDateString());
+        }
+        return 普徴納期情報リスト;
+    }
+
+    private RString edit段階(RString 段階数) {
+        RStringBuilder 表記SB = new RStringBuilder();
+        if (!RString.isNullOrEmpty(段階数)) {
+            int 段階数値 = Integer.parseInt(段階数.substring(0, 2).toString());
+            表記SB.append(文字列_第);
+            表記SB.append(段階数値);
+            表記SB.append(文字列_段階);
+        }
+        return 表記SB.toRString();
+    }
+
+    private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection get更正前(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        FukaJoho 更正前_賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
+        FukaJoho 更正後_賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
+        EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前 = new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection();
+        if (更正前_賦課情報.get算定年額保険料2() != null) {
+            更正前.set保険料率(更正前_賦課情報.get算定年額保険料2());
+        } else {
+            更正前.set保険料率(更正前_賦課情報.get算定年額保険料1());
+        }
+        更正前.set減免前保険料_年額(更正前_賦課情報.get減免前介護保険料_年額());
+        更正前.set減免額(更正前_賦課情報.get減免額());
+        更正前.set確定保険料_年額(更正前_賦課情報.get確定介護保険料_年額());
+        if (!RString.isNullOrEmpty(更正前_賦課情報.get保険料算定段階2())) {
+            更正前.set保険料段階(edit段階(更正前_賦課情報.get保険料算定段階2()));
+        } else {
+            更正前.set保険料段階(edit段階(更正前_賦課情報.get保険料算定段階1()));
+        }
+        更正前.set保険料算定段階1(edit段階(更正前_賦課情報.get保険料算定段階1()));
+        更正前.set算定年額保険料1(更正前_賦課情報.get算定年額保険料1());
+        更正前.set月割開始年月1(更正前_賦課情報.get月割開始年月1().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set月割開始年月1_西暦(更正前_賦課情報.get月割開始年月1().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set月割終了年月1(更正前_賦課情報.get月割終了年月1().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set月割終了年月1_西暦(更正前_賦課情報.get月割終了年月1().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set保険料算定段階2(edit段階(更正前_賦課情報.get保険料算定段階2()));
+        更正前.set算定年額保険料2(更正前_賦課情報.get算定年額保険料2());
+        更正前.set月割開始年月2(更正前_賦課情報.get月割開始年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set月割開始年月2_西暦(更正前_賦課情報.get月割開始年月2().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set月割終了年月2(更正前_賦課情報.get月割終了年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set月割終了年月2_西暦(更正前_賦課情報.get月割終了年月2().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        FlexibleDate 期間_自 = getFlexibleDate自(更正前_賦課情報.get月割開始年月1());
+        更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        FlexibleDate 期間_至 = getFlexibleDate至(更正前_賦課情報.get月割終了年月2());
+        更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        int 月数 = 期間_至.getBetweenMonths(期間_自);
+        更正前.set月数(月数);
+        更正前.set月数_ケ月(get月数_ケ月(月数));
+        更正前.set市町村民税課税区分_本人(更正前_賦課情報.get課税区分());
+        更正前.set市町村民税課税区分_世帯(更正前_賦課情報.get世帯課税区分());
+        更正前.set合計所得金額(更正前_賦課情報.get合計所得金額());
+        更正前.set公的年金収入額(更正前_賦課情報.get公的年金収入額());
+        更正前.set生活保護扶助種類(更正前_賦課情報.get生活保護扶助種類());
+        更正前.set生保開始日(更正前_賦課情報.get生保開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set生保開始日_西暦(更正前_賦課情報.get生保開始日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set生保廃止日(更正後_賦課情報.get生保廃止日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set生保廃止日_西暦(更正後_賦課情報.get生保廃止日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+
+        更正前.set老齢開始日(更正前_賦課情報.get老年開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set老齢開始日_西暦(更正前_賦課情報.get老年開始日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set老齢廃止日(更正前_賦課情報.get老年廃止日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set老齢廃止日_西暦(更正前_賦課情報.get老年廃止日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        List<CharacteristicsPhase> 特徴期別金額リスト = get特徴期別金額リスト(本算定通知書情報);
+        更正前.set特徴期別金額リスト(特徴期別金額リスト);
+        更正前.set特別徴収額合計(get特徴納付済額(本算定通知書情報.get賦課の情報_更正前().get賦課情報(), 1, SIZE_6));
+        List<UniversalPhase> 普徴期別金額リスト = get普徴期別金額リスト(本算定通知書情報);
+        更正前.set普徴期別金額リスト(普徴期別金額リスト);
+        更正前.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正前().get賦課情報(), 1, SIZE_14));
+        NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前 = 本算定通知書情報.get対象者_追加含む_情報_更正前();
+
+        RString 特別徴収義務者 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
+        更正前.set特別徴収義務者(特別徴収義務者);
+        更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
+        ChoshuHoho 徴収方法情報_更正前 = 本算定通知書情報.get徴収方法情報_更正前();
+        RString 年金コード = 徴収方法情報_更正前.get本徴収_年金コード();
+        if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), new Code(年金コード.substring(0, SIZE_3)));
+            更正前.set特別徴収対象年金(特別徴収対象年金);
+        }
+        更正前.set特別徴収対象年金コード(年金コード);
+        更正前.set口座区分(KozaKubun.toValue(更正前_賦課情報.get口座区分()));
+        if (特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
+            更正前.set徴収方法(new RString("普通徴収"));
+        } else if (!特徴期別金額リスト.isEmpty() && 普徴期別金額リスト.isEmpty()) {
+            更正前.set徴収方法(new RString("特別徴収"));
+        } else if (!特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
+            更正前.set徴収方法(new RString("特別徴収　普通徴収"));
+        }
+        return 更正前;
+    }
+
+    private List<CharacteristicsPhase> get特徴期別金額リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
+        List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
+        CharacteristicsPhase characteristicsPhase1 = new CharacteristicsPhase();
+        characteristicsPhase1.set期(期_1);
+        characteristicsPhase1.set金額(賦課情報.get特徴期別金額01());
+        特徴期別金額リスト.add(characteristicsPhase1);
+        CharacteristicsPhase characteristicsPhase2 = new CharacteristicsPhase();
+        characteristicsPhase2.set期(期_1);
+        characteristicsPhase2.set金額(賦課情報.get特徴期別金額02());
+        特徴期別金額リスト.add(characteristicsPhase2);
+        CharacteristicsPhase characteristicsPhase3 = new CharacteristicsPhase();
+        characteristicsPhase3.set期(期_1);
+        characteristicsPhase3.set金額(賦課情報.get特徴期別金額03());
+        特徴期別金額リスト.add(characteristicsPhase3);
+        CharacteristicsPhase characteristicsPhase4 = new CharacteristicsPhase();
+        characteristicsPhase4.set期(期_1);
+        characteristicsPhase4.set金額(賦課情報.get特徴期別金額04());
+        特徴期別金額リスト.add(characteristicsPhase4);
+        CharacteristicsPhase characteristicsPhase5 = new CharacteristicsPhase();
+        characteristicsPhase5.set期(期_1);
+        characteristicsPhase5.set金額(賦課情報.get特徴期別金額05());
+        特徴期別金額リスト.add(characteristicsPhase5);
+        CharacteristicsPhase characteristicsPhase6 = new CharacteristicsPhase();
+        characteristicsPhase6.set期(期_1);
+        characteristicsPhase6.set金額(賦課情報.get特徴期別金額06());
+        特徴期別金額リスト.add(characteristicsPhase6);
+        return 特徴期別金額リスト;
+    }
+
+    private List<UniversalPhase> get普徴期別金額リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
+        List<UniversalPhase> 普徴期別金額リスト = new ArrayList<>();
+        UniversalPhase universalPhase1 = new UniversalPhase();
+        universalPhase1.set期(Integer.parseInt(期_1.toString()));
+        universalPhase1.set金額(賦課情報.get普徴期別金額01());
+        普徴期別金額リスト.add(universalPhase1);
+        UniversalPhase universalPhase2 = new UniversalPhase();
+        universalPhase2.set期(Integer.parseInt(期_2.toString()));
+        universalPhase2.set金額(賦課情報.get普徴期別金額02());
+        普徴期別金額リスト.add(universalPhase2);
+        UniversalPhase universalPhase3 = new UniversalPhase();
+        universalPhase3.set期(Integer.parseInt(期_3.toString()));
+        universalPhase3.set金額(賦課情報.get普徴期別金額03());
+        普徴期別金額リスト.add(universalPhase3);
+        UniversalPhase universalPhase4 = new UniversalPhase();
+        universalPhase4.set期(Integer.parseInt(期_4.toString()));
+        universalPhase4.set金額(賦課情報.get普徴期別金額04());
+        普徴期別金額リスト.add(universalPhase4);
+        UniversalPhase universalPhase5 = new UniversalPhase();
+        universalPhase5.set期(Integer.parseInt(期_5.toString()));
+        universalPhase5.set金額(賦課情報.get普徴期別金額05());
+        普徴期別金額リスト.add(universalPhase5);
+        UniversalPhase universalPhase6 = new UniversalPhase();
+        universalPhase6.set期(Integer.parseInt(期_6.toString()));
+        universalPhase6.set金額(賦課情報.get普徴期別金額06());
+        普徴期別金額リスト.add(universalPhase6);
+        UniversalPhase universalPhase7 = new UniversalPhase();
+        universalPhase7.set期(Integer.parseInt(期_7.toString()));
+        universalPhase7.set金額(賦課情報.get普徴期別金額07());
+        普徴期別金額リスト.add(universalPhase7);
+        UniversalPhase universalPhase8 = new UniversalPhase();
+        universalPhase8.set期(Integer.parseInt(期_8.toString()));
+        universalPhase8.set金額(賦課情報.get普徴期別金額08());
+        普徴期別金額リスト.add(universalPhase8);
+        UniversalPhase universalPhase9 = new UniversalPhase();
+        universalPhase9.set期(Integer.parseInt(期_9.toString()));
+        universalPhase9.set金額(賦課情報.get普徴期別金額09());
+        普徴期別金額リスト.add(universalPhase9);
+        UniversalPhase universalPhase10 = new UniversalPhase();
+        universalPhase10.set期(Integer.parseInt(期_10.toString()));
+        universalPhase10.set金額(賦課情報.get普徴期別金額10());
+        普徴期別金額リスト.add(universalPhase10);
+        UniversalPhase universalPhase11 = new UniversalPhase();
+        universalPhase11.set期(Integer.parseInt(期_11.toString()));
+        universalPhase11.set金額(賦課情報.get普徴期別金額11());
+        普徴期別金額リスト.add(universalPhase11);
+        UniversalPhase universalPhase12 = new UniversalPhase();
+        universalPhase12.set期(Integer.parseInt(期_12.toString()));
+        universalPhase12.set金額(賦課情報.get普徴期別金額12());
+        普徴期別金額リスト.add(universalPhase12);
+        UniversalPhase universalPhase13 = new UniversalPhase();
+        universalPhase13.set期(Integer.parseInt(期_13.toString()));
+        universalPhase13.set金額(賦課情報.get普徴期別金額13());
+        普徴期別金額リスト.add(universalPhase13);
+        UniversalPhase universalPhase14 = new UniversalPhase();
+        universalPhase14.set期(Integer.parseInt(期_14.toString()));
+        universalPhase14.set金額(賦課情報.get普徴期別金額14());
+        普徴期別金額リスト.add(universalPhase14);
+
+        return 普徴期別金額リスト;
+    }
+
+    private RString get月数_ケ月(int 月数) {
+        RStringBuilder 月数SB = new RStringBuilder(RStringUtil.convert半角to全角(new RString(月数).padZeroToLeft(2)));
+        月数SB.append(文字列_ケ月);
+        return 月数SB.toRString();
+    }
+
+    private FlexibleDate getFlexibleDate自(FlexibleYearMonth 年月) {
+        RStringBuilder 年月SB = new RStringBuilder(年月.toDateString());
+        年月SB.append("01");
+        return new FlexibleDate(年月SB.toRString());
+    }
+
+    private FlexibleDate getFlexibleDate至(FlexibleYearMonth 年月) {
+        RStringBuilder 年月SB = new RStringBuilder(年月.toDateString());
+        年月SB.append(年月.getLastDay());
+        return new FlexibleDate(年月SB.toRString());
+    }
+
+    private Decimal get普徴納付済額(FukaJoho fukaJoho, int start, int end) {
+        Decimal 普徴納付済額 = Decimal.ZERO;
+
+        for (int i = start; i <= end; i++) {
+            RStringBuilder sb = new RStringBuilder("get普徴期別金額");
+            sb.append(new RString(i).padZeroToLeft(2));
+            Class clazz = fukaJoho.getClass();
+            try {
+                Method getMethod = clazz.getDeclaredMethod(sb.toString());
+                普徴納付済額.add((Decimal) getMethod.invoke(fukaJoho));
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+                Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return 普徴納付済額;
+    }
+
+    private Decimal get特徴納付済額(FukaJoho fukaJoho, int start, int end) {
+        Decimal 特徴納付済額 = Decimal.ZERO;
+
+        for (int i = start; i <= end; i++) {
+            RStringBuilder sb = new RStringBuilder("get特徴期別金額");
+            sb.append(new RString(i).padZeroToLeft(2));
+            Class clazz = fukaJoho.getClass();
+            try {
+                Method getMethod = clazz.getDeclaredMethod(sb.toString());
+                特徴納付済額.add((Decimal) getMethod.invoke(fukaJoho));
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+                Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return 特徴納付済額;
+    }
+
+    private Decimal get普徴納付済額(ShunyuJoho shunyuJoho, int start, int end) {
+        Decimal 普徴納付済額 = Decimal.ZERO;
+
+        for (int i = start; i <= end; i++) {
+            RStringBuilder sb = new RStringBuilder("get普徴収入額");
+            sb.append(new RString(i).padZeroToLeft(2));
+            Class clazz = shunyuJoho.getClass();
+            try {
+                Method getMethod = clazz.getDeclaredMethod(sb.toString());
+                普徴納付済額.add((Decimal) getMethod.invoke(shunyuJoho));
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+                Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return 普徴納付済額;
+    }
+
+    private Decimal get特徴納付済額(ShunyuJoho shunyuJoho, int start, int end) {
+        Decimal 特徴納付済額 = Decimal.ZERO;
+
+        for (int i = start; i <= end; i++) {
+            RStringBuilder sb = new RStringBuilder("get特徴収入額");
+            sb.append(new RString(i).padZeroToLeft(2));
+            Class clazz = shunyuJoho.getClass();
+            try {
+                Method getMethod = clazz.getDeclaredMethod(sb.toString());
+                特徴納付済額.add((Decimal) getMethod.invoke(shunyuJoho));
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
+                Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return 特徴納付済額;
     }
 
     /**

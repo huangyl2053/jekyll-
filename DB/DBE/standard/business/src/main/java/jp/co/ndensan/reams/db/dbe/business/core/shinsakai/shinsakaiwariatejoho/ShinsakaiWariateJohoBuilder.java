@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -147,7 +146,7 @@ public class ShinsakaiWariateJohoBuilder {
      * キーが一致しない場合、新たに追加します。<br>
      *
      * @param 要介護認定申請情報 {@link NinteiShinseiJoho}
-     * @return {@link NinteiShinseiJohoBuilder}
+     * @return {@link ShinsakaiWariateJohoBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
     public ShinsakaiWariateJohoBuilder setNinteiShinseiJoho(NinteiShinseiJoho 要介護認定申請情報) {

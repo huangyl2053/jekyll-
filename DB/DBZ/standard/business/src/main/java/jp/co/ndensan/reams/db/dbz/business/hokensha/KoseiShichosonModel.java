@@ -13,7 +13,9 @@ import java.io.Serializable;
  * @author N3327 三浦 凌
  */
 public class KoseiShichosonModel implements Serializable {
-
+    
+    private static final long serialVersionUID = 4608496724785307408L;
+    
     private final transient KoseiShichosonMasterModel masterModel;
 
     /**
@@ -33,4 +35,5 @@ public class KoseiShichosonModel implements Serializable {
     public KoseiShichosonMasterModel get構成市町村() {
         return this.masterModel;
     }
+    
 }

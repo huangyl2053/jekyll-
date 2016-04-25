@@ -6,18 +6,19 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 編集後仮算定通知書共通情報です。
  *
  * @reamsid_L DBB-9110-020 wangjie2
@@ -68,12 +69,12 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     private RString 調定事由２;
     private RString 調定事由３;
     private RString 調定事由４;
-    private List 特徴納期情報リスト;
-    //List<期月>
+    private List<Kitsuki> 特徴納期情報リスト;
     private List<UniversalSignDeliveryInformation> 普徴納期情報リスト;
     private List<OrdinaryIncomeInformation> 普徴収入情報リスト;
     private int 普徴期数;
     private RString 保険者名;
+    private LasdecCode 保険者番号;
     private List<OrdinaryIncomeInformation> 特徴収入情報リスト;
 
 }

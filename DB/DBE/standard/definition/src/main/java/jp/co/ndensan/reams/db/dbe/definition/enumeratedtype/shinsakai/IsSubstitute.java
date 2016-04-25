@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 補欠を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsSubstitute {
 
@@ -32,7 +32,7 @@ public enum IsSubstitute {
      *
      * @return 補欠のコード
      */
-    public boolean getコード() {
+    public boolean is補欠() {
         return code;
     }
 

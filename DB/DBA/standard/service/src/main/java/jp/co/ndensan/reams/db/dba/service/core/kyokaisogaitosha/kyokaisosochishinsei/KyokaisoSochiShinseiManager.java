@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.basic.DbT1013KyokaisoSochiShinseiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1013KyokaisoSochiShinseiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -61,8 +61,8 @@ public class KyokaisoSochiShinseiManager {
 
         DbT1013KyokaisoSochiShinseiEntity entity = dac.selectByKey(
                 被保険者番号,
-                履歴番号,
-                リンク番号);
+                履歴番号.intValue(),
+                リンク番号.intValue());
         if (entity == null) {
             return null;
         }

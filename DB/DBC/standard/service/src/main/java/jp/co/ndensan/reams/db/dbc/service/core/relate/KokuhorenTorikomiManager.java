@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.service.core.relate;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.KokuhorenTorikomiConfigKeysFactory;
+import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiConfigKeysFactory;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenTorikomiJohoModel;
 import jp.co.ndensan.reams.db.dbc.business.core.view.KokuhorenTorikomiJoho;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKokuhorenTorikomi;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.IConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
@@ -59,8 +59,7 @@ public class KokuhorenTorikomiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KokuhorenTorikomiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KokuhorenTorikomiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KokuhorenTorikomiManager}のインスタンス
      */
     public static KokuhorenTorikomiManager createInstance() {
         return InstanceProvider.create(KokuhorenTorikomiManager.class);

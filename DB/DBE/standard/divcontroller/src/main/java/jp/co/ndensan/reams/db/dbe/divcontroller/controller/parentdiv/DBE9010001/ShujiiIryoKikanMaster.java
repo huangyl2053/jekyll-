@@ -7,17 +7,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9010001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterCSV;
 import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.DBE9010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.DBE9010001TransitionEventName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiIryoKikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterValidationHandler;
-import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterCsvManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.ShujiiIryoKikanJohoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
@@ -27,20 +26,34 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyoke
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
- * 認定調査員マスタ処理のクラスです。
+ * 主治医医療機関情報処理のクラスです。
  *
  * @reamsid_L DBE-0240-010 dongyabin
  */
@@ -49,6 +62,8 @@ public class ShujiiIryoKikanMaster {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString CSVファイル名 = new RString("主治医医療機関情報.csv");
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
      * コンストラクタです。
@@ -208,48 +223,43 @@ public class ShujiiIryoKikanMaster {
      * ＣＳＶを出力するボタンが押下された場合、ＣＳＶを出力します。
      *
      * @param div ShujiiIryoKikanMasterDiv
+     * @param response IDownLoadServletResponse
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnOutputCsv(ShujiiIryoKikanMasterDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForOutputCsv();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+    public IDownLoadServletResponse onClick_btnOutputCsv(ShujiiIryoKikanMasterDiv div, IDownLoadServletResponse response) {
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        try (CsvWriter<KoseiShujiiIryoKikanMasterCsvEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
+            for (dgShujiiIchiran_Row row : dataList) {
+                csvWriter.writeLine(getCsvData(row));
             }
-            KoseiShujiiIryoKikanMasterCsvManager.createInstance().getCSVoutput(getCsvData(div));
-            return ResponseData.of(div).addMessage(
-                    UrInformationMessages.正常終了.getMessage().replace("CSV出力")).respond();
+            csvWriter.close();
         }
-        return ResponseData.of(div).respond();
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
-    private List<KoseiShujiiIryoKikanMasterCSV> getCsvData(ShujiiIryoKikanMasterDiv div) {
-        List<KoseiShujiiIryoKikanMasterCSV> list = new ArrayList<>();
-        List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
-        for (dgShujiiIchiran_Row row : dataList) {
-            list.add(new KoseiShujiiIryoKikanMasterCSV(
-                    row.getShichosonCode(),
-                    row.getShichoson(),
-                    row.getShujiiIryoKikanCode().getValue(),
-                    row.getIryoKikanCode(),
-                    row.getShujiiIryoKikan(),
-                    row.getShujiiIryoKikankana(),
-                    row.getYubinNo(),
-                    row.getJusho(),
-                    row.getTelNo(),
-                    row.getFaxNo(),
-                    row.getDaihyosha(),
-                    row.getDaihyoshakana(),
-                    row.getJokyoFlag()));
-        }
-        return list;
+    private KoseiShujiiIryoKikanMasterCsvEntity getCsvData(dgShujiiIchiran_Row row) {
+        KoseiShujiiIryoKikanMasterCsvEntity data = new KoseiShujiiIryoKikanMasterCsvEntity(
+                row.getShichosonCode(),
+                row.getShichoson(),
+                row.getShujiiIryoKikanCode().getValue(),
+                row.getIryoKikanCode(),
+                row.getShujiiIryoKikan(),
+                row.getShujiiIryoKikankana(),
+                row.getYubinNo(),
+                row.getJusho(),
+                row.getTelNo(),
+                row.getFaxNo(),
+                row.getDaihyosha(),
+                row.getDaihyoshakana(),
+                row.getJokyoFlag());
+        return data;
     }
 
     /**

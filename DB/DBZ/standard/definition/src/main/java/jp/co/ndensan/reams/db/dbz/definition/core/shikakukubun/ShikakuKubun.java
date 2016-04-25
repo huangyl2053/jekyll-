@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 資格区分を表す列挙型です。
  *
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum ShikakuKubun {
 //TODO DBAから遷移か

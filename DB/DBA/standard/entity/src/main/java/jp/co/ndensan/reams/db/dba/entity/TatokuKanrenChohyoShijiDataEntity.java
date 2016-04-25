@@ -33,5 +33,5 @@ public class TatokuKanrenChohyoShijiDataEntity {
     private RString edaNo;
     private FlexibleDate 入所年月日;
     private ShikibetsuCode 識別コード;
-
+    private boolean 住所出力不要フラグ;
 }

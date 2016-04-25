@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 特別徴収開始通知書（仮算定）帳票 B5横タイプ連帳Source
  *
- * @reamsid_L DBB-0790-060 surun
+ * @reamsid_L DBB-0790-060 lijunjun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

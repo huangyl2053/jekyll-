@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NijiHantei
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.param.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -162,51 +164,73 @@ public class YokaigoNinteiTaskListHandler {
     public void initialize(RString モード) {
         共通状態();
         if (更新対象モード.equals(モード)) {
-            List<KoShiTaisyoBusiness> 更新対象List = YokaigoNinteiTaskListFinder.createInstance().get更新対象モード().records();
+            List<KoShiTaisyoBusiness> 更新対象List = YokaigoNinteiTaskListFinder.
+                    createInstance().get更新対象モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             更新対象モード(更新対象List);
         }
         if (申請受付モード.equals(モード)) {
 
-            List<ShiSeiKeTuKeBusiness> 申請受付List = YokaigoNinteiTaskListFinder.createInstance().get申請受付モード().records();
+            List<ShiSeiKeTuKeBusiness> 申請受付List = YokaigoNinteiTaskListFinder.createInstance().
+                    get申請受付モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             申請受付モード(申請受付List);
         }
         if (調査依頼モード.equals(モード)) {
 
-            List<CyoSaiRaiBusiness> 調査依頼List = YokaigoNinteiTaskListFinder.createInstance().get調査依頼モード().records();
+            List<CyoSaiRaiBusiness> 調査依頼List = YokaigoNinteiTaskListFinder.createInstance().
+                    get調査依頼モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             調査依頼モード(調査依頼List);
         }
         if (意見書依頼モード.equals(モード)) {
 
-            List<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().get意見書依頼モード().records();
+            List<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().
+                    get意見書依頼モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             意見書依頼モード(意見書依頼List);
         }
         if (調査入手モード.equals(モード)) {
-            List<CyoSaNyuSyuBusiness> 調査入手List = YokaigoNinteiTaskListFinder.createInstance().get調査入手モード().records();
+            List<CyoSaNyuSyuBusiness> 調査入手List = YokaigoNinteiTaskListFinder.createInstance().
+                    get調査入手モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             調査入手モード(調査入手List);
         }
         if (意見書入手モード.equals(モード)) {
-            List<IkenSyoNyuSyuBusiness> 意見書入手List = YokaigoNinteiTaskListFinder.createInstance().get意見書入手モード().records();
+            List<IkenSyoNyuSyuBusiness> 意見書入手List = YokaigoNinteiTaskListFinder.createInstance().
+                    get意見書入手モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             意見書入手モード(意見書入手List);
         }
 
         if (一次判定モード.equals(モード)) {
-            List<IChiJiHanTeiBusiness> 一次判定List = YokaigoNinteiTaskListFinder.createInstance().get一次判定モード().records();
+            List<IChiJiHanTeiBusiness> 一次判定List = YokaigoNinteiTaskListFinder.createInstance().
+                    get一次判定モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             一次判定モード(一次判定List);
         }
         if (マスキングモード.equals(モード)) {
-            List<MaSuKinGuBusiness> マスキングList = YokaigoNinteiTaskListFinder.createInstance().getマスキングモード().records();
+            List<MaSuKinGuBusiness> マスキングList = YokaigoNinteiTaskListFinder.createInstance().
+                    getマスキングモード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             マスキングモード(マスキングList);
         }
         if (審査会登録モード.equals(モード)) {
-            List<ShinSaKaiToRoKuBusiness> 審査会登録List = YokaigoNinteiTaskListFinder.createInstance().get審査会登録モード().records();
+            List<ShinSaKaiToRoKuBusiness> 審査会登録List = YokaigoNinteiTaskListFinder.createInstance().
+                    get審査会登録モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             審査会登録モード(審査会登録List);
         }
         if (二次判定モード.equals(モード)) {
-            List<NiJiHanTeiBusiness> 二次判定List = YokaigoNinteiTaskListFinder.createInstance().get二次判定モード().records();
+            List<NiJiHanTeiBusiness> 二次判定List = YokaigoNinteiTaskListFinder.createInstance().
+                    get二次判定モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             二次判定モード(二次判定List);
         }
         if (月例処理モード.equals(モード)) {
-            List<GeTuReiSyoRiBusiness> 月例処理List = YokaigoNinteiTaskListFinder.createInstance().get月例処理モード().records();
+            List<GeTuReiSyoRiBusiness> 月例処理List = YokaigoNinteiTaskListFinder.createInstance().
+                    get月例処理モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             月例処理モード(月例処理List);
         }
     }

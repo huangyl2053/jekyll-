@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -256,7 +257,7 @@ public class KyokaisoSochiShinsei extends ModelBase<KyokaisoSochiShinseiIdentifi
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -318,5 +319,30 @@ public class KyokaisoSochiShinsei extends ModelBase<KyokaisoSochiShinseiIdentifi
         return new KyokaisoSochiShinsei(
                 modifiedEntity, id);
     }
-    private static final long serialVersionUID = 3715155420030811842L;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.entity);
+        hash = 89 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KyokaisoSochiShinsei other = (KyokaisoSochiShinsei) obj;
+        if (!Objects.equals(this.entity, other.entity)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

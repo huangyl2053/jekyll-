@@ -9,26 +9,9 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNony
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】（連帳）CoverのEditorです。
@@ -38,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
-    private ReportSourceWriter<KarisanteiNonyuTsuchishoCVSMultiSource> reportSourceWriter;
 
     private static final RString HOKENRYO_RITU = new RString("保険料率");
     private static final RString NENGAKU_HOKENRYO = new RString("年額保険料");
@@ -332,38 +314,38 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
 
     private void edit雛形部品(KarisanteiNonyuTsuchishoCVSMultiSource source) {
 
-        if (item.get発行日() != null) {
-            ChohyoSeigyoKyotsu 帳票制御共通
-                    = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, new ReportId("DBB100026_KarisanteiNonyuTsuchishoCVSMultiCover"));
-            INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-            Ninshosha ninshosha = ninshoshaManager.get帳票認証者(
-                    GyomuCode.DB介護保険,
-                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                    item.get発行日());
-            IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
-            Association association = associationFinder.getAssociation();
-            INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    ninshosha,
-                    association,
-                    reportSourceWriter.getImageFolderPath(),
-                    new RDate(item.get発行日().toString()),
-                    new RString("1").equals(帳票制御共通.get首長名印字位置()),
-                    !帳票制御共通.is電子公印印字有無(),
-                    KenmeiFuyoKubunType.付与なし);
-            NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
-
-            if (ninshoshaSource != null) {
-                source.denshiKoin = ninshoshaSource.denshiKoin;
-                source.hakkoYMD = ninshoshaSource.hakkoYMD;
-                source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-                source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
-                source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-                source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
-                source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-                source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-                source.koinShoryaku = ninshoshaSource.koinShoryaku;
-            }
-        }
+//        if (item.get発行日() != null) {
+//            ChohyoSeigyoKyotsu 帳票制御共通
+//                    = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, new ReportId("DBB100026_KarisanteiNonyuTsuchishoCVSMultiCover"));
+//            INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
+//            Ninshosha ninshosha = ninshoshaManager.get帳票認証者(
+//                    GyomuCode.DB介護保険,
+//                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+//                    item.get発行日());
+//            IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
+//            Association association = associationFinder.getAssociation();
+//            INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+//                    ninshosha,
+//                    association,
+//                    reportSourceWriter.getImageFolderPath(),
+//                    new RDate(item.get発行日().toString()),
+//                    new RString("1").equals(帳票制御共通.get首長名印字位置()),
+//                    !帳票制御共通.is電子公印印字有無(),
+//                    KenmeiFuyoKubunType.付与なし);
+//            NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
+//
+//            if (ninshoshaSource != null) {
+//                source.denshiKoin = ninshoshaSource.denshiKoin;
+//                source.hakkoYMD = ninshoshaSource.hakkoYMD;
+//                source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+//                source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+//                source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+//                source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+//                source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+//                source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+//                source.koinShoryaku = ninshoshaSource.koinShoryaku;
+//            }
+//        }
     }
 
     private void editCompSofubutsuAtesaki(KarisanteiNonyuTsuchishoCVSMultiSource source) {

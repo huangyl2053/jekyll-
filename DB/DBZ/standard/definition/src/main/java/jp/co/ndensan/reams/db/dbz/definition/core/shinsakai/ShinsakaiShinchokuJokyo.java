@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定審査会進捗状況を表す列挙型です。
  *
- * @reamsid_L DBB-9999-023 wangchao
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum ShinsakaiShinchokuJokyo {
 

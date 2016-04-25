@@ -45,7 +45,7 @@ public class RiyoshaFutangakuGengakuService {
     /**
      * コンストラクタです。
      */
-    public RiyoshaFutangakuGengakuService() {
+    RiyoshaFutangakuGengakuService() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
         dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
     }
@@ -70,7 +70,8 @@ public class RiyoshaFutangakuGengakuService {
         IRiyoshaFutangakuGengakuMapper riyoshaFutangakuGengakuMapper = mapperProvider.create(IRiyoshaFutangakuGengakuMapper.class);
         List<RiyoshaFutangakuGengakuEntity> 利用者負担額減額の情報 = riyoshaFutangakuGengakuMapper.
                 select利用者負担額減額情報By被保険者番号(
-                        RiyoshaFutangakuGengakuServiceMapperParameter.createParameter(GemmenGengakuShurui.利用者負担額減額.getコード(), 被保険者番号));
+                        RiyoshaFutangakuGengakuServiceMapperParameter.createParameter(GemmenGengakuShurui.利用者負担額減額.getコード(),
+                                被保険者番号, RString.EMPTY));
 
         List<RiyoshaFutangakuGengaku> list = new ArrayList<>();
         for (RiyoshaFutangakuGengakuEntity entity : 利用者負担額減額の情報) {
@@ -122,7 +123,9 @@ public class RiyoshaFutangakuGengakuService {
         }
         IDbT3114RiyoshaFutanWariaiMeisaiMapper riyoshaFutanWariaiMeisaiMapper = mapperProvider.create(IDbT3114RiyoshaFutanWariaiMeisaiMapper.class);
         DbT3114RiyoshaFutanWariaiMeisaiEntity entity = riyoshaFutanWariaiMeisaiMapper
-                .notExists_maxRirekiNo(被保険者番号.getColumnValue(), new RString(基準日.toString()));
+                .notExists_maxRirekiNo(
+                        RiyoshaFutangakuGengakuServiceMapperParameter.createParameter(
+                                null, 被保険者番号, new RString(基準日.toString())));
         if (entity != null) {
             RString 負担割合区分 = entity.getFutanWariaiKubun();
             try {

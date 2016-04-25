@@ -128,7 +128,9 @@ public class ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu {
             entity.setサービス提供年月(償還払請求集計.getServiceTeikyoYM());
             entity.set整理番号(償還払請求集計.getSeiriNo());
             entity.set事業所番号(償還払請求集計.getJigyoshoNo());
-            entity.setサービス種類コード(償還払請求集計.getServiceShuruiCode());
+            if (!償還払請求集計.getServiceShuruiCode().isEmpty()) {
+                entity.setサービス種類コード(償還払請求集計.getServiceShuruiCode());
+            }
             entity.set支給区分コード(償還払請求集計.getShikyuKubunCode());
             entity.set点数_金額(償還払請求集計.getTensuKingaku());
             entity.set不支給理由等(償還払請求集計.getBikoOne());

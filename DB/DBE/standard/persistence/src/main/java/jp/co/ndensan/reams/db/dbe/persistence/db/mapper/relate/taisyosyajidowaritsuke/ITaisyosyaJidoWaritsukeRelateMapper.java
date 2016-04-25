@@ -18,9 +18,10 @@ public interface ITaisyosyaJidoWaritsukeRelateMapper {
     /**
      * 対象者を取得します。
      *
+     * @param isIchijiHanteiGo 一次判定後
      * @return List<TaisyosyaJidoWaritsukeEntity>
      */
-    List<TaisyosyaJidoWaritsukeEntity> selectTaisyosya();
+    List<TaisyosyaJidoWaritsukeEntity> selectTaisyosya(boolean isIchijiHanteiGo);
 
     /**
      * 介護認定審査会開催予定情報を取得します。

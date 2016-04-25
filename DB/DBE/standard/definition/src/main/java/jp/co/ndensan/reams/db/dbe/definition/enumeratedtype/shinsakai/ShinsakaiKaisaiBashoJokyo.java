@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会開催場所状況を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum ShinsakaiKaisaiBashoJokyo {
 
@@ -32,7 +32,7 @@ public enum ShinsakaiKaisaiBashoJokyo {
      *
      * @return 審査会開催場所状況のコード
      */
-    public boolean getコード() {
+    public boolean is審査会開催場所状況() {
         return code;
     }
 

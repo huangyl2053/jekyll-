@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * 介護完了メッセージのビジネスクラス。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum KaigoKanryoMessage implements IMessageGettable {
 

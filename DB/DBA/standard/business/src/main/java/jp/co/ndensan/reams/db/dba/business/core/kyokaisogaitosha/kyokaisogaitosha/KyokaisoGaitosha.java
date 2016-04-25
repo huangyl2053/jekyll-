@@ -8,15 +8,16 @@ package jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisogaitos
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankai;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisohokenryodankai.KyokaisoHokenryoDankaiIdentifier;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinsei;
 import jp.co.ndensan.reams.db.dba.business.core.kyokaisogaitosha.kyokaisosochishinsei.KyokaisoSochiShinseiIdentifier;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -267,7 +268,7 @@ public class KyokaisoGaitosha extends ParentModelBase<KyokaisoGaitoshaIdentifier
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -423,5 +424,38 @@ public class KyokaisoGaitosha extends ParentModelBase<KyokaisoGaitoshaIdentifier
     public KyokaisoGaitoshaBuilder createBuilderForEdit() {
         return new KyokaisoGaitoshaBuilder(entity, id, kyokaisoSochiShinsei, kyokaisoHokenryoDankai);
     }
-    private static final long serialVersionUID = -565691849644191052L;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.entity);
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.kyokaisoSochiShinsei);
+        hash = 79 * hash + Objects.hashCode(this.kyokaisoHokenryoDankai);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KyokaisoGaitosha other = (KyokaisoGaitosha) obj;
+        if (!Objects.equals(this.entity, other.entity)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.kyokaisoSochiShinsei, other.kyokaisoSochiShinsei)) {
+            return false;
+        }
+        if (!Objects.equals(this.kyokaisoHokenryoDankai, other.kyokaisoHokenryoDankai)) {
+            return false;
+        }
+        return true;
+    }
 }

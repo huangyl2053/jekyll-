@@ -14,11 +14,10 @@ import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB90200
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.TokubetsuChoshuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020002.TokubetsuChoshuTotalHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020002.TokubetsuChoshuTotalValidationHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -36,7 +35,6 @@ public class TokubetsuChoshuTotal {
 
     private static final FlexibleYear 平成21年 = new FlexibleYear("2009");
     private static final FlexibleYear 平成17年 = new FlexibleYear("2005");
-    private static final RString 前排他メッセージ = new RString("対象の情報は他のユーザーによって作業中です。");
     private static final RString 終了メッセージ1 = new RString("調定年度：");
     private static final RString 終了メッセージ2 = new RString("年度");
     private static final RString 終了メッセージ3 = new RString("システム管理登録_特別徴収保存処理");
@@ -58,8 +56,7 @@ public class TokubetsuChoshuTotal {
     public ResponseData<TokubetsuChoshuTotalDiv> onLoad(TokubetsuChoshuTotalDiv div) {
         boolean gotLock = getHandler(div).前排他キーのセット();
         if (!gotLock) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage()
-                    .replace(前排他メッセージ.toString()).evaluate());
+            throw new PessimisticLockingException();
         }
         getHandler(div).set初期化();
         if (div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey().isEmpty()) {

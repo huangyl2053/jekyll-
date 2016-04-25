@@ -101,11 +101,12 @@ public class KaigoKakushuShinseishoHakko {
      * @param entityList 介護各種申請書発行情報リストEntity
      * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
+     * @param 住宅福祉出力区分 RString
      */
     public void printKakushuShinseishoHakko(
             List<KaigoKakushuShinseishoHakkoEntity> entityList,
             ShikibetsuCode 識別コード,
-            HihokenshaNo 被保険者番号) {
+            HihokenshaNo 被保険者番号, RString 住宅福祉出力区分) {
         if (entityList.isEmpty()) {
             RLogger.error(new RString("実行対象が選択されていません。"));
         } else {
@@ -113,7 +114,7 @@ public class KaigoKakushuShinseishoHakko {
             set業務賦課の帳票発行(entityList, 識別コード, 被保険者番号);
             set業務認定の帳票発行(entityList, 識別コード, 被保険者番号);
             set業務受給の帳票発行(entityList, 識別コード, 被保険者番号);
-            set業務給付の帳票発行(entityList, 識別コード, 被保険者番号);
+            set業務給付の帳票発行(entityList, 識別コード, 被保険者番号, 住宅福祉出力区分);
         }
     }
 
@@ -233,7 +234,8 @@ public class KaigoKakushuShinseishoHakko {
     private void set業務給付の帳票発行(
             List<KaigoKakushuShinseishoHakkoEntity> entityList,
             ShikibetsuCode 識別コード,
-            HihokenshaNo 被保険者番号) {
+            HihokenshaNo 被保険者番号,
+            RString 住宅福祉出力区分) {
         for (KaigoKakushuShinseishoHakkoEntity entity : entityList) {
             if (ShinseishoChohyoShurui.介護保険受領委任払い取扱事業者登録申請書.getコード().equals(entity.get申請書ID())) {
                 JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho juryoIninbaraiToriatsukai
@@ -241,9 +243,8 @@ public class KaigoKakushuShinseishoHakko {
                 juryoIninbaraiToriatsukai.createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo();
             }
             if (ShinseishoChohyoShurui.介護保険受領委任払い契約申請書.getコード().equals(entity.get申請書ID())) {
-                // TODO 入力引数を不一致。
                 JuryoIninbaraiKeiyakuShinseisho juryoIninbaraiKeiyaku = new JuryoIninbaraiKeiyakuShinseisho();
-                juryoIninbaraiKeiyaku.createJuryoIninbaraiKeiyakuShinseishoChohyo(new RString("1"));
+                juryoIninbaraiKeiyaku.createJuryoIninbaraiKeiyakuShinseishoChohyo(住宅福祉出力区分);
             }
             if (ShinseishoChohyoShurui.居宅_介護予防_サービス計画作成依頼_変更_届出書.getコード().equals(entity.get申請書ID())) {
                 KyotakuServiceKeikakuSakuseiIraiTodokedesho kyotakuServiceKeikaku

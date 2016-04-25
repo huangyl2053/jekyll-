@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.HolidayAccessor;
+import jp.co.ndensan.reams.uz.uza.lang.HolidayCategory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -778,7 +779,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         getConfig時間枠();
         FlexibleDate zenbuDate = new FlexibleDate(Integer.parseInt(年月.substring(0, INDEX_4).toString()),
                 Integer.parseInt(年月.substring(INDEX_4).toString()), 1);
-        List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList();
+        List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList(HolidayCategory.日本の休日.getCategoryId());
         int dayCount = zenbuDate.getLastDay();
         if (モード.equals(モード_月) || モード.equals(モード_初期化)) {
             yoteiJohoEntityList = new ArrayList<>();

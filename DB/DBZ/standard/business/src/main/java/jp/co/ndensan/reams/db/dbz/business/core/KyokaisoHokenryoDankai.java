@@ -19,9 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 境界層保険料段階を管理するクラスです。
  */
-public class KyokaisoHokenryoDankai
-        extends ModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai>
-        implements Serializable {
+public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai> implements Serializable {
 
     private final DbT1007KyokaisoHokenryoDankaiEntity entity;
     private final KyokaisoHokenryoDankaiIdentifier id;
@@ -137,7 +135,7 @@ public class KyokaisoHokenryoDankai
     public RString get保険料納付減額後保険料段階() {
         return entity.getGengakuGoHokenryoDankai();
     }
-
+    
     /**
      * 論理削除フラグを返します。
      *
@@ -146,7 +144,7 @@ public class KyokaisoHokenryoDankai
     public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
-
+    
     /**
      * {@link DbT1007KyokaisoHokenryoDankaiEntity}のクローンを返します。
      *

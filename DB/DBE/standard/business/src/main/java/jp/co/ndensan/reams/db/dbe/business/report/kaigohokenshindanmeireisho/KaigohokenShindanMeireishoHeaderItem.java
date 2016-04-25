@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 介護保険診断命令書のITEMです。
@@ -14,42 +15,49 @@ import lombok.Getter;
  * @reamsid_L DBE-0080-070 wangxiaodong
  */
 @Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigohokenShindanMeireishoHeaderItem {
 
-    private final RString shomeiHakkoYMD;
-    private final RString shichosonMei;
-    private final RString shuchoMei;
-    private final RString koinShoryaku;
-    private final RString denshiKoin;
-    private final RString bunshoNo;
-    private final RString hakkoYMD;
-    private final RString tsuchibun1;
-    private final RString tsuchibun2;
-    private final RString hihokenshaNo;
-    private final RString hihokenshaName;
-    private final RString iryokikanName;
-    private final RString tantoIshiName;
-    private final RString iryokikanJusho;
-    private final RString telNo;
-    private final RString jushinKikan;
-    private final RString jushinArea;
-    private final RString tsuchibun3;
-    private final RString tsuchibun4;
-    private final RString tsuchibun5;
-    private final RString tsuchibun6;
-    private final RString tsuchibun7;
-    private final RString tsuchibun8;
-    private final RString tsuchibun9;
-    private final RString tsuchibun10;
-    private final RString tsuchibun11;
-    private final RString tsuchibun12;
-    private final RString tsuchibun13;
-    private final RString tsuchibun14;
-    private final RString tsuchibun15;
-    private final RString tsuchibun16;
-    private final RString tsuchibun17;
-    private final RString remban;
+    private RString shomeiHakkoYMD;
+    private RString shichosonMei;
+    private RString shuchoMei;
+    private RString koinShoryaku;
+    private RString denshiKoin;
+    private RString bunshoNo;
+    private RString hakkoYMD;
+    private RString tsuchibun1;
+    private RString tsuchibun2;
+    private RString hihokenshaNo;
+    private RString hihokenshaName;
+    private RString iryokikanName;
+    private RString tantoIshiName;
+    private RString iryokikanJusho;
+    private RString telNo;
+    private RString jushinKikan;
+    private RString jushinArea;
+    private RString tsuchibun3;
+    private RString tsuchibun4;
+    private RString tsuchibun5;
+    private RString tsuchibun6;
+    private RString tsuchibun7;
+    private RString tsuchibun8;
+    private RString tsuchibun9;
+    private RString tsuchibun10;
+    private RString tsuchibun11;
+    private RString tsuchibun12;
+    private RString tsuchibun13;
+    private RString tsuchibun14;
+    private RString tsuchibun15;
+    private RString tsuchibun16;
+    private RString tsuchibun17;
+    private RString remban;
+
+    /**
+     * インスタンスを生成します。
+     */
+    public KaigohokenShindanMeireishoHeaderItem() {
+    }
 
     /**
      * インスタンスを生成します。

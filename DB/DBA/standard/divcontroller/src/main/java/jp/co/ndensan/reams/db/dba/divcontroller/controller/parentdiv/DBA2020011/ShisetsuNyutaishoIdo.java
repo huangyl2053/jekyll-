@@ -1,11 +1,12 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2020011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoIdoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2020011.ShisetsuNyutaishoIdoHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nyutaishoshakanri.NyutaishoshaKanriFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -40,13 +43,13 @@ public class ShisetsuNyutaishoIdo {
     public ResponseData<ShisetsuNyutaishoIdoDiv> onLoad(ShisetsuNyutaishoIdoDiv div) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
 
-        TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
-        new ShisetsuNyutaishoIdoHandler(div).initLoad(対象者.get識別コード());
+        new ShisetsuNyutaishoIdoHandler(div).initLoad(
+                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        } else {
-            RealInitialLocker.lock(前排他ロックキー);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(ShisetsuNyutaishoIdoErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         response.data = div;
         return response;
@@ -58,9 +61,10 @@ public class ShisetsuNyutaishoIdo {
      * @param div 施設入退所異動Div
      * @return レスポンス
      */
-    public ResponseData<ShisetsuNyutaishoIdoDiv> onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
+    public ResponseData onClick_commonButtonBack(ShisetsuNyutaishoIdoDiv div) {
+
         RealInitialLocker.release(前排他ロックキー);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBA2020011TransitionEventName.検索に戻る).respond();
     }
 
     /**

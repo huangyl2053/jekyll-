@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.otheraddressinformation.IOtherAddressInformationMapper">
     <select id="get他市町村住所地特例者情報の取得処理" resultMap="resultMap_OtherAddressInfFromDBEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.otheraddressledger.OtherAddressInformationParameter"  fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.otheraddressledger.OtherAddressInformationParameter"  fetchSize="500">
         SELECT A."識別コード" AS "識別コード",
         A."異動日" AS "異動日",
         A."枝番" AS "枝番",
@@ -72,7 +72,7 @@
         GROUP BY T2."shikibetsuCode",T2."idoYMD")AS T3
         WHERE T1."shikibetsuCode"=T3."識別コード" AND T1."idoYMD"=T3."異動日" AND T1."edaNo"=T3."枝番")AS T4
         LEFT JOIN rgur."UrT0507Hokenja" T5
-        ON T4."措置保険者番号"=T5."hokenjaNo" AND T5."hokenjaShubetsu"='介護保険') AS A
+        ON T4."措置保険者番号"=T5."hokenjaNo" AND T5."hokenjaShubetsu"=#{保険者種別}) AS A
         INNER JOIN rgdb."DbT1004ShisetsuNyutaisho" B
         ON B."shikibetsuCode"=A."識別コード"
         AND B."daichoShubetsu"='2'

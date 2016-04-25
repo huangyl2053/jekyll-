@@ -701,8 +701,16 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
 
     @Override
     public void initialize(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード,
-            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日) {
-        getHandler().initialize(市町村コード, 導入形態コード, 広住特措置元市町村コード, 被保険者番号, 異動日, 枝番, 識別コード, 資格取得日);
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日,
+            RString 台帳種別) {
+        getHandler().initialize(市町村コード, 導入形態コード, 広住特措置元市町村コード, 被保険者番号, 異動日, 枝番, 識別コード, 資格取得日, 台帳種別);
+    }
+
+    @Override
+    public void initilize(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード,
+            HihokenshaNo 被保険者番号, FlexibleDate 異動日, RString 枝番, ShikibetsuCode 識別コード, FlexibleDate 資格取得日,
+            RString 台帳種別) {
+        getHandler().initilize(市町村コード, 導入形態コード, 広住特措置元市町村コード, 被保険者番号, 異動日, 枝番, 識別コード, 資格取得日, 台帳種別);
     }
 
     @Override

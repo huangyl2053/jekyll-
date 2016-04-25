@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyuketteitsuchiichiran;
 
+import java.nio.charset.Charset;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyuketteitsuchiichiran.ShokanbaraiShikyuFushikyuReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -54,16 +55,16 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         source.listUpper_3 = item.getKeteiTsuchiNo();
         source.listUpper_4 = item.getHihokenshaNo();
         RString hihokenshanamelenthMax = item.getHihokenshaName();
-        byte[] hihokenshaname = hihokenshanamelenthMax.toString().getBytes();
+        byte[] hihokenshaname = hihokenshanamelenthMax.toString().getBytes(Charset.forName("utf-8"));
         byte[] getHihokenshaName = new byte[hihokenshaname.length <= MAX ? hihokenshaname.length : MAX];
         System.arraycopy(hihokenshaname, MIN, getHihokenshaName, MIN, hihokenshaname.length <= MAX ? hihokenshaname.length : MAX);
-        source.listUpper_5 = new RString(new String(getHihokenshaName));
+        source.listUpper_5 = new RString(new String(getHihokenshaName, Charset.forName("utf-8")));
 
         RString jusholenthMax = item.getJusho();
-        byte[] jusho = jusholenthMax.toString().getBytes();
+        byte[] jusho = jusholenthMax.toString().getBytes(Charset.forName("utf-8"));
         byte[] getJusho = new byte[jusho.length <= MAX ? jusho.length : MAX];
         System.arraycopy(jusho, MIN, getJusho, MIN, jusho.length <= MAX ? jusho.length : MAX);
-        source.listLower_1 = new RString(new String(getJusho));
+        source.listLower_1 = new RString(new String(getJusho, Charset.forName("utf-8")));
 
         source.listUpper_6 = item.getYubinBango();
         source.listUpper_7 = item.getTeikyo();

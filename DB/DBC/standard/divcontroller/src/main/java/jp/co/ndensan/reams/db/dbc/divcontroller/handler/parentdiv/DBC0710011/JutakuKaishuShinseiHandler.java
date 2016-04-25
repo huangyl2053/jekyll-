@@ -32,9 +32,6 @@ public final class JutakuKaishuShinseiHandler {
     private final RString 審査済み = new RString("審査済み");
     private final RString 未審査 = new RString("未審査");
     private final RString 事前申請有る = new RString("○");
-    private final RString 申請区分事前申請 = new RString("1");
-    private final RString 申請区分支給申請 = new RString("2");
-    private final RString 申請区分取消 = new RString("9");
     private final RString 事前申請登録モード = new RString("事前申請登録モード");
     private final RString 修正モード = new RString("修正モード");
     private final RString 取消モード = new RString("取消モード");

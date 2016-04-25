@@ -71,7 +71,7 @@
     </resultMap>
 
     <select id="notExists_maxRirekiNo" resultMap="ResultMap_DbT3114RiyoshaFutanWariaiMeisaiEntity"
-            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter" fetchSize="500">
         SELECT *
         FROM rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS A
         WHERE A."hihokenshaNo" = #{被保険者番号}
@@ -84,7 +84,7 @@
         AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo"
         )
         AND (A."yukoKaishiYMD" <![CDATA[<=]]> #{基準日} AND A."yukoShuryoYMD" <![CDATA[>=]]> #{基準日})
-        AND A."isDeleted" = false
+        AND A."logicalDeletedFlag" = false
     </select>
 
 </mapper>

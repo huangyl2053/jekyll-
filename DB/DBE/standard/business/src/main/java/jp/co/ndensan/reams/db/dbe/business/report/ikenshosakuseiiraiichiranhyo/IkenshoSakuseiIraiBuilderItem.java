@@ -15,18 +15,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 public class IkenshoSakuseiIraiBuilderItem implements IkenshoSakuseiIraiIchiranhyoBuilder {
 
-    private final IkenshoSakuseiIraiIchiranhyoEditor headEditor;
     private final IkenshoSakuseiIraiIchiranhyoEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headEditor {@link IkenshoSakuseiIraiIchiranhyoEditor}
      * @param bodyEditor {@link IkenshoSakuseiIraiIchiranhyoEditor}
      */
-    public IkenshoSakuseiIraiBuilderItem(IkenshoSakuseiIraiIchiranhyoEditor headEditor,
-            IkenshoSakuseiIraiIchiranhyoEditor bodyEditor) {
-        this.headEditor = headEditor;
+    public IkenshoSakuseiIraiBuilderItem(IkenshoSakuseiIraiIchiranhyoEditor bodyEditor) {
         this.bodyEditor = bodyEditor;
     }
 
@@ -37,7 +33,6 @@ public class IkenshoSakuseiIraiBuilderItem implements IkenshoSakuseiIraiIchiranh
      */
     @Override
     public IkenshoSakuseiIraiIchiranhyoReportSource build() {
-        return ReportEditorJoiner.from(new IkenshoSakuseiIraiIchiranhyoReportSource())
-                .join(headEditor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new IkenshoSakuseiIraiIchiranhyoReportSource()).join(bodyEditor).buildSource();
     }
 }

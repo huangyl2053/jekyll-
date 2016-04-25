@@ -82,7 +82,7 @@ public class ShiharaiHohoJyohoHandler {
             if (ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
                 div.getRadJyryoinin().setSelectedKey(支払方法区分.getコード());
                 JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
-                        getKeiyakuJigyosya(KeiyakushaParameter.
+                        getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
                                 createParam(支給申請情報.getHihokenshaNo(), 支給申請情報.
                                         getShikyushinseiServiceYM(), 支給申請情報.getShikyushinseiSeiriNo(), 支給申請情報.getShiharaiBasho()));
                 受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);

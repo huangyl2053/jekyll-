@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 認定調査票（特記情報）のデータアクセスクラスです。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205NinteichosahyoTokkijikoEntity> {
 

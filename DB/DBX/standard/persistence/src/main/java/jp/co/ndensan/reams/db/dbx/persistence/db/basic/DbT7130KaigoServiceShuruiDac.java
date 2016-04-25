@@ -174,27 +174,26 @@ public class DbT7130KaigoServiceShuruiDac {
     }
 
     /**
-     * 介護サービス種類名称を取得します。
+     * 給付種類を取得します。
      *
      * @param サービス種類コード サービス種類コード
-     * @param 認定有効期間開始 認定有効期間開始
-     * @param 認定有効期間終了 認定有効期間終了
+     * @param サービス提供年月 サービス提供年月
      * @return DbT7130KaigoServiceShuruiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT7130KaigoServiceShuruiEntity select種類名称(
+    public DbT7130KaigoServiceShuruiEntity select給付種類(
             ServiceShuruiCode サービス種類コード,
-            FlexibleYearMonth 認定有効期間開始,
-            FlexibleYearMonth 認定有効期間終了) throws NullPointerException {
-
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
         return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(eq(DbT7130KaigoServiceShurui.serviceShuruiCd, サービス種類コード),
-                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, 認定有効期間終了),
-                                leq(認定有効期間開始, DbT7130KaigoServiceShurui.teikyoKaishiYM)))
+                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, サービス提供年月),
+                                or(leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM),
+                                        isNULL(DbT7130KaigoServiceShurui.teikyoshuryoYM))))
                 .order(by(DbT7130KaigoServiceShurui.teikyoKaishiYM, Order.DESC))
                 .limit(1)
                 .toObject(DbT7130KaigoServiceShuruiEntity.class);

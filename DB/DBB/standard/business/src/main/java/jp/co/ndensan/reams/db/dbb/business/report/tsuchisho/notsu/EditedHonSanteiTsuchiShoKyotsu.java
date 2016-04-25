@@ -64,6 +64,7 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private RString 調定事由３;
     private RString 調定事由４;
     private List<AfterEditInformation> 普徴納期情報リスト;
+    private List<AfterEditInformation> 特徴納期情報リスト;
     private int 普徴期数_現年度;
     private RString 保険者名;
     private HihokenshaNo 保険者番号;

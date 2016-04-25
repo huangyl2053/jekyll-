@@ -201,12 +201,6 @@
             <if test="uses保険者コード">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
-            <if test="uses主治医医療機関コード">
-                AND  DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = #{temp_主治医医療機関コード}
-            </if>
-            <if test="uses主治医コード">
-                AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
-            </if>
         </where>
     </select>
 </mapper>

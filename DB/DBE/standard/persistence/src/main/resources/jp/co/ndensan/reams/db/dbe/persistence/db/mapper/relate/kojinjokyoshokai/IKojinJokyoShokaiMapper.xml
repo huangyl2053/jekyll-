@@ -509,7 +509,7 @@
         <id property="renban" column="dbT5150Renra_renban" />
         <result property="renrakusakiKubunNo" column="dbT5150Renra_renrakusakiKubunNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shishoCode" column="dbT5150Renra_shishoCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShishoCodeTypeHandler"/>
-        <result property="renrakusakiShimei" column="dbT5150Renra_renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renrakusakiShimei" column="dbT5150Renra_renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="renrakusakiKanaSimei" column="dbT5150Renra_renrakusakiKanaSimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="renrakusakiTuzukigara" column="dbT5150Renra_renrakusakiTuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="renrakusakiYubinNo" column="dbT5150Renra_renrakusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>

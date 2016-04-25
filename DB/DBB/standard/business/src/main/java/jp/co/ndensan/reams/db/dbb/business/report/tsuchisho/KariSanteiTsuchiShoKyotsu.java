@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
-import jp.co.ndensan.reams.db.dbb.business.core.zenkaifuka.ZenkaiFuka;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
@@ -40,7 +40,7 @@ public class KariSanteiTsuchiShoKyotsu {
     private List<NokiJoho> 普徴納期情報リスト;
     private List<NokiJoho> 特徴納期情報リスト;
     private IAtesaki 宛先情報;
-    private ZenkaiFuka 前年度賦課情報;
+    private FukaJoho 前年度賦課情報;
     private IKoza 口座情報;
     private ChoshuHoho 徴収方法情報_更正前;
     private ChoshuHoho 徴収方法情報_更正後;

@@ -168,6 +168,7 @@ public class ShinsakaiOnseiJoho
     }
 
     private static final class _SerializationProxy implements Serializable {
+        private static final long serialVersionUID = -5086517189704801195L;
 
         private final DbT5512ShinsakaiOnseiJohoEntity entity;
         private final ShinsakaiOnseiJohoIdentifier id;

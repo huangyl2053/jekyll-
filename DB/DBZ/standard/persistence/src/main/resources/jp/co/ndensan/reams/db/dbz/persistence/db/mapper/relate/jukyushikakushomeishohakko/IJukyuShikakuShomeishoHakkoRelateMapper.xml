@@ -77,8 +77,10 @@
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS C
         ON   TB1."shinseishoKanriNo" = C."shinseishoKanriNo"
         AND C."isDeleted" = FALSE
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'',false,'','','','','','','','','','','',false,'','','','','','','',false,'','','','','','','','','','','',true,true,false,false,false,false,true,true,true,true,false,'','','','','','','','',false,'','',false,false,false) AS D
-        ON   TB1."shinseishoKanriNo" = D."shikibetsuCode";
+        LEFT JOIN 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS D
+        ON    
+            TB1."shikibetsuCode" = D."shikibetsuCode"
     </select>
 
     <select id="getServiceCode" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">

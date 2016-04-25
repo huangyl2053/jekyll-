@@ -21,9 +21,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求福祉用具販売費を管理するクラスです。
+ *
+ * @reamsid_L DBC-1020-050 chenaoqi
  */
 public class ShokanFukushiYoguHanbaihi
-        extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, DbT3048ShokanFukushiYoguHanbaihiEntity, ShokanFukushiYoguHanbaihi> implements Serializable {
+        extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, DbT3048ShokanFukushiYoguHanbaihiEntity, ShokanFukushiYoguHanbaihi>
+        implements Serializable {
 
     private final DbT3048ShokanFukushiYoguHanbaihiEntity entity;
     private final ShokanFukushiYoguHanbaihiIdentifier id;

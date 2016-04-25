@@ -23,4 +23,12 @@ public interface IKaigoNinteiShinsakaiScheduleMapper {
      * @return List<KaigoNinteiShinsakaiScheduleRelateEntity>
      */
     List<KaigoNinteiShinsakaiScheduleRelateEntity> get出力明細一覧(KaigoNinteiShinsakaiScheduleMybitisParamter param);
+
+    /**
+     * 出力明細一覧データを取得します。
+     *
+     * @param param 介護認定審査会スケジュール表のパラメータ
+     * @return List<KaigoNinteiShinsakaiScheduleRelateEntity>
+     */
+    List<KaigoNinteiShinsakaiScheduleRelateEntity> get年間(KaigoNinteiShinsakaiScheduleMybitisParamter param);
 }

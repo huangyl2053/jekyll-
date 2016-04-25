@@ -25,12 +25,12 @@ public class IsHaishiTest extends DbeTestBase {
 
     @Test
     public void 廃止を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsHaishi.廃止.getコード(), is(true));
+        assertThat(IsHaishi.廃止.is廃止(), is(true));
     }
 
     @Test
     public void 廃止されていないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsHaishi.廃止されていない.getコード(), is(false));
+        assertThat(IsHaishi.廃止されていない.is廃止(), is(false));
     }
 
     @Test

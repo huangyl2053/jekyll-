@@ -23,9 +23,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class TekiyoJogaiRirekiValidationHandler {
 
-    private static final RString 状態_追加 = new RString("追加モード");
-    private static final RString 状態_修正 = new RString("修正モード");
-    private static final RString 状態_削除 = new RString("削除モード");
+    private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_修正 = new RString("修正");
+    private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_適用登録 = new RString("適用登録モード");
     private static final RString 状態_解除 = new RString("解除モード");
     private static final RString 状態_訂正履歴 = new RString("訂正履歴モード");
@@ -186,7 +186,9 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
                 }
             }
-            期間重複チェック(div.getDatagridTekiyoJogai().getDataSource(), 最新の適用情報, validPairs);
+            if (状態_訂正履歴.equals(画面状態)) {
+                期間重複チェック(div.getDatagridTekiyoJogai().getDataSource(), 最新の適用情報, validPairs);
+            }
         }
         return validPairs;
     }

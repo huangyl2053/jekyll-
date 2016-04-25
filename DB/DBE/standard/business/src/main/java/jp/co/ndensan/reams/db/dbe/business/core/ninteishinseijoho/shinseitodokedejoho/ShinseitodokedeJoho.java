@@ -35,7 +35,7 @@ public class ShinseitodokedeJoho
      * コンストラクタです。<br/>
      * 申請届出情報の新規作成時に使用します。
      *
-     * @param 申請書管理番号
+     * @param 申請書管理番号 申請書管理番号
      */
     public ShinseitodokedeJoho(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
@@ -227,6 +227,7 @@ public class ShinseitodokedeJoho
     }
 
     private static final class _SerializationProxy implements Serializable {
+        private static final long serialVersionUID = -6227957924560881664L;
 
         private final DbT5120ShinseitodokedeJohoEntity entity;
         private final ShinseitodokedeJohoIdentifier id;

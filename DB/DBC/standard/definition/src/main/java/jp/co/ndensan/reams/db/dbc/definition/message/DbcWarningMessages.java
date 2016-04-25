@@ -19,7 +19,8 @@ public enum DbcWarningMessages implements IMessageGettable {
 
     // TODO 一つ目の要素が定義されたらこの要素は削除する。
     ダミーメッセージ(0, ""),
-    日数が30日を超える(1, "?～?間の日数が30日を超える。");
+    日数が30日を超える(1, "?～?間の日数が30日を超える。"),
+    住宅改修限度額確認(3, "登録された住宅改修明細の合計改修費は住宅改修限度額を超えています。金額を修正しますか？");
 
     private final Message message;
 

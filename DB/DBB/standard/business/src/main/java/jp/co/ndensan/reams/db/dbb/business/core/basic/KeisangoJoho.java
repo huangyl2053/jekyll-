@@ -988,7 +988,7 @@ public class KeisangoJoho
      *
      * @return 依頼情報送付済みフラグ
      */
-    public boolean get依頼情報送付済みフラグ() {
+    public boolean is依頼情報送付済みフラグ() {
         return entity.getIraiSohuzumiFlag();
     }
 
@@ -997,7 +997,7 @@ public class KeisangoJoho
      *
      * @return 追加依頼情報送付済みフラグ
      */
-    public boolean get追加依頼情報送付済みフラグ() {
+    public boolean is追加依頼情報送付済みフラグ() {
         return entity.getTsuikaIraiSohuzumiFlag();
     }
 

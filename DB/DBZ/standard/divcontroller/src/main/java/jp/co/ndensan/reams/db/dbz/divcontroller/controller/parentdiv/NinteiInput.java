@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.helper.NinteiInputHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.helper.NinteiInputValidationHelper;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiInput.NinteiInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 

@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 旧措置者区分を表す列挙型です。
  *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum KyusochishaKubun {
 

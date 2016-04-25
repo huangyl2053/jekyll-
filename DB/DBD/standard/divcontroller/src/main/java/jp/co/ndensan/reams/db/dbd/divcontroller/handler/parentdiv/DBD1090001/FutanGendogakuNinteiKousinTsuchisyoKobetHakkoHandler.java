@@ -23,15 +23,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
 
-    private final FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div;
-
     /**
      * コンストラクタです。
      *
      * @param div 負担限度額認定更新のお知らせ通知書個別発行のコントロールdiv
      */
     public FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-        this.div = div;
     }
 
     /**
@@ -47,7 +44,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
         FutanGendogakuNinteiParameter parameter
                 = FutanGendogakuNinteiParameter.createSelectParam(GemmenGengakuShurui.負担限度額認定.getコード(), 被保険者番号);
         ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List = futanGendogakuNinteiManager.get負担限度額認定画面用リスト(parameter);
-        ViewStateHolder.put(介護保険負担限度額認定.リストキー, 介護保険負担限度額認定List);
+        ViewStateHolder.put(KgHoukenFutanGendogakuNintei.リストキー, 介護保険負担限度額認定List);
     }
 
     /**
@@ -57,15 +54,18 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
      * @param 識別コード 識別コード
      */
     public void setアクセスログ(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
-        FutanGendogakuNinteiKanshoTsuchisho futanGendogakuNinteiKanshoTsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
-        futanGendogakuNinteiKanshoTsuchisho.setAccessLogger(被保険者番号, 識別コード);
+        FutanGendogakuNinteiKanshoTsuchisho tsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
+        tsuchisho.setAccessLogger(被保険者番号, 識別コード);
     }
 
     /**
      * 介護保険負担限度額認定のenumクラスです。
      */
-    public enum 介護保険負担限度額認定 {
+    public enum KgHoukenFutanGendogakuNintei {
 
+        /**
+         * リストキー
+         */
         リストキー;
     }
 }

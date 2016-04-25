@@ -9,25 +9,21 @@
         <include refid="selectKyokaisoGaitoshaEntity" />
     </select>
 
-    <select id="select境界層該当者リストBy主キー1" resultMap="resultMap_KyokaisoGaitoshaEntity" fetchSize="500">
-        <include refid="selectKyokaisoGaitoshaEntity" />
-    </select>
-
     <sql id="selectKyokaisoGaitoshaEntity">
         SELECT
         DbT1006KyokaisoGaitosha.*,
         DbT1013KyokaisoSochiShinsei.*,
         DbT1007KyokaisoHokenryoDankai.*
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS DbT1006KyokaisoGaitosha
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.noDeleted_DbT1006KyokaisoGaitosha" />) AS DbT1006KyokaisoGaitosha
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.noDeleted_DbT1013KyokaisoSochiShinsei" />) AS DbT1013KyokaisoSochiShinsei
         ON
         DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_hihokenshaNo" and
         DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_rirekiNo" and
-        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitoshka_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
+        DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1013KyokaisoSochiShinsei."dbT1013KyokaisoSochiShinsei_linkNo"
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.noDeleted_DbT1007KyokaisoHokenryoDankai" />) AS DbT1007KyokaisoHokenryoDankai
         ON
         DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_hihokenshaNo" and
         DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_rirekiNo" and
@@ -51,11 +47,11 @@
         <id property="境界層該当者情報Entity.rirekiNo" column="dbT1006KyokaisoGaitosha_rirekiNo" />
         <id property="境界層該当者情報Entity.linkNo" column="dbT1006KyokaisoGaitosha_linkNo" />
         <association property="境界層該当者情報Entity"
-                     resultMap="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.ResultMap_DbT1006KyokaisoGaitoshaEntity"/>
-        <association property="境界層措置申請Entity"
-                     resultMap="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.ResultMap_DbT1013KyokaisoSochiShinseiEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.ResultMap_DbT1006KyokaisoGaitoshaEntity"/>
+        <collection property="境界層措置申請Entity"
+                    resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1013KyokaisoSochiShinseiMapper.ResultMap_DbT1013KyokaisoSochiShinseiEntity"/>
         <collection property="境界層保険料段階Entity"
-                    resultMap="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.ResultMap_DbT1007KyokaisoHokenryoDankaiEntity"/>
+                    resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1007KyokaisoHokenryoDankaiMapper.ResultMap_DbT1007KyokaisoHokenryoDankaiEntity"/>
     </resultMap>
 
 </mapper>

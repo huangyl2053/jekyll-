@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 他住所地特例者管理のRelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0380-020 houtianpeng
  */
 @lombok.Getter
 @lombok.Setter

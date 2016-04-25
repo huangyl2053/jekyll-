@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikanryojo
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiiinjogaijoho.ShinsakaiIinJogaiJoho;
@@ -1134,9 +1133,9 @@ public class NinteiShinseiJohoBuilder {
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
-    private boolean hasSameIdentifier(NinteiKekkaJohoIdentifier 要介護認定結果情報識別子) {
-        return (id.get申請書管理番号().equals(要介護認定結果情報識別子.get申請書管理番号()));
-    }
+//    private boolean hasSameIdentifier(NinteiKekkaJohoIdentifier 要介護認定結果情報識別子) {
+//        return (id.get申請書管理番号().equals(要介護認定結果情報識別子.get申請書管理番号()));
+//    }
 
     /**
      * 介護連絡先情報を設定します。

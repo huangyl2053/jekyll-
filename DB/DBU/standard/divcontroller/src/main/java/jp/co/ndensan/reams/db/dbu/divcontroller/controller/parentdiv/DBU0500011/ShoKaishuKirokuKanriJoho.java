@@ -32,9 +32,14 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -72,6 +77,14 @@ public class ShoKaishuKirokuKanriJoho {
     public ResponseData<ShoKaishuKirokuKanriJohoDiv> onLoad(ShoKaishuKirokuKanriJohoDiv div) {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         getHandler(div).onLoad(key.get識別コード(), key.get被保険者番号());
+        アクセスログ(key.get識別コード());
+        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
+            div.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -121,6 +134,17 @@ public class ShoKaishuKirokuKanriJoho {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「完了する」ボタンを押下する。
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
+     */
+    public ResponseData<ShoKaishuKirokuKanriJohoDiv> onClick_btnComplete(ShoKaishuKirokuKanriJohoDiv div) {
+        RealInitialLocker.release(LOCKINGKEY);
+        return ResponseData.of(div).respond();
+    }
+
     private void setHozon(ShoKaishuKirokuKanriJohoDiv div) {
         Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> models
                 = ViewStateHolder.get(ViewStateKeys.証交付回収情報, Models.class);
@@ -166,5 +190,20 @@ public class ShoKaishuKirokuKanriJoho {
 
     private FlexibleDate getDate(RString date) {
         return new FlexibleDate(new FlexibleDate(date.replace(POINT, RString.EMPTY)).seireki().toDateString().replace(POINT, RString.EMPTY));
+    }
+
+    private enum TekiyoJogaiTotalErrorMessage implements IValidationMessage {
+
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        private final Message message;
+
+        private TekiyoJogaiTotalErrorMessage(IMessageGettable message) {
+            this.message = message.getMessage();
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

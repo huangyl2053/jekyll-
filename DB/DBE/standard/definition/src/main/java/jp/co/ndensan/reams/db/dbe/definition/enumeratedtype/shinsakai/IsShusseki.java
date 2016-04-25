@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 委員出席を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsShusseki {
 
@@ -32,7 +32,7 @@ public enum IsShusseki {
      *
      * @return 委員出席のコード
      */
-    public boolean getコード() {
+    public boolean is委員出席() {
         return code;
     }
 

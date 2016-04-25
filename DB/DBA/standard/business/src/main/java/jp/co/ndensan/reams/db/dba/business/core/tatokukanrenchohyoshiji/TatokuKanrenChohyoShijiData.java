@@ -155,4 +155,13 @@ public class TatokuKanrenChohyoShijiData implements Serializable {
     public ShikibetsuCode get識別コード() {
         return entity.get識別コード();
     }
+
+    /**
+     * 住所出力不要フラグを取得します。
+     *
+     * @return 住所出力不要フラグ
+     */
+    public boolean get住所出力不要フラグ() {
+        return entity.is住所出力不要フラグ();
+    }
 }

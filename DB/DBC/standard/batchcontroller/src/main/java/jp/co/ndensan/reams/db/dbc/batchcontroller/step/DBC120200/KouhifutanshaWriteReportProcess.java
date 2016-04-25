@@ -55,8 +55,7 @@ public class KouhifutanshaWriteReportProcess extends BatchKeyBreakBase<SaishisaK
             + "relate.saishinsakohifutansha."
             + "IKagoKetteiKohishaMapper.select一時テーブル");
 
-    private static final RString KAI_PAGE_HIHOKENSHA = new RString("listLower_2");
-
+//    private static final RString KAI_PAGE_HIHOKENSHA = new RString("listLower_2");
     @BatchWriter
     private BatchReportWriter<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> batchReportWriter;
     private ReportSourceWriter<SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> reportSourceWriter;

@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 転入転出未登録一覧表です。
  *
  * @reamsid_L DBU-4110-010 yaodongsheng

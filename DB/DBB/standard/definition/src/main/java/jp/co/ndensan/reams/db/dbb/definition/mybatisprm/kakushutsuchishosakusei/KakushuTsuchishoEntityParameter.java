@@ -22,6 +22,7 @@ public final class KakushuTsuchishoEntityParameter {
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
+    private final int 履歴番号;
     private final YMDHMS 調定日時;
     private final RString 調定日;
 
@@ -31,6 +32,7 @@ public final class KakushuTsuchishoEntityParameter {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
+     * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
      * @param 調定日 調定日
      */
@@ -38,11 +40,13 @@ public final class KakushuTsuchishoEntityParameter {
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
+            int 履歴番号,
             YMDHMS 調定日時,
             RString 調定日) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
+        this.履歴番号 = 履歴番号;
         this.調定日時 = 調定日時;
         this.調定日 = 調定日;
     }
@@ -53,6 +57,7 @@ public final class KakushuTsuchishoEntityParameter {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
+     * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
      * @param 調定日 調定日
      * @return パラメータ
@@ -61,8 +66,9 @@ public final class KakushuTsuchishoEntityParameter {
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
+            int 履歴番号,
             YMDHMS 調定日時,
             RString 調定日) {
-        return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 調定日時, 調定日);
+        return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 履歴番号, 調定日時, 調定日);
     }
 }

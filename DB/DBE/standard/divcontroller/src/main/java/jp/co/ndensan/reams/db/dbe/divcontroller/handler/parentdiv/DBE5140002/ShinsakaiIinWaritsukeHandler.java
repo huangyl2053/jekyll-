@@ -76,7 +76,7 @@ public class ShinsakaiIinWaritsukeHandler {
         div.getTxtKaisaiBasho().setValue(nullToEmpty(business.get開催場所()));
         div.getTxtShuryoYoteiTime().setValue(new RTime(nullToEmpty(business.get終了予定時間())));
         div.getTxtYoteiTeiin().setValue(new RString(String.valueOf(business.get予定定員())));
-        if (IsGogitaiSeishinkaSonzai.toValue(business.is精神科医()).getコード()) {
+        if (IsGogitaiSeishinkaSonzai.toValue(business.is精神科医()).is合議体精神科医存在()) {
             chkSeishinkailist.add(SELECTEDKEY);
         }
         div.getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);

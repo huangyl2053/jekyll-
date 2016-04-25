@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 20 15:29:50 CST 2016
+ * Thu Apr 21 11:16:22 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,6 +36,7 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
     private TextBoxCode txtMeisaiNo;
     private TextBoxCode txtShinsaNo;
     private TextBoxNum rowNum;
+    private TextBox shikibetsuCode;
 
     public dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row() {
         super();
@@ -54,6 +55,7 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
         this.txtMeisaiNo = new TextBoxCode();
         this.txtShinsaNo = new TextBoxCode();
         this.rowNum = new TextBoxNum();
+        this.shikibetsuCode = new TextBox();
         this.setOriginalData("txtJotai", txtJotai);
         this.setOriginalData("txtShikyuShinseiDate", txtShikyuShinseiDate);
         this.setOriginalData("txtTenkyoYM", txtTenkyoYM);
@@ -69,9 +71,10 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
         this.setOriginalData("txtMeisaiNo", txtMeisaiNo);
         this.setOriginalData("txtShinsaNo", txtShinsaNo);
         this.setOriginalData("rowNum", rowNum);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
     }
 
-    public dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row(RString txtJotai, TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTenkyoYM, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotal, TextBox txtShinsaResult, TextBox txtSeiriNo, TextBoxCode txtJigyoshaNo, TextBoxCode txtYoshikiNo, TextBoxCode txtMeisaiNo, TextBoxCode txtShinsaNo, TextBoxNum rowNum) {
+    public dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row(RString txtJotai, TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTenkyoYM, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotal, TextBox txtShinsaResult, TextBox txtSeiriNo, TextBoxCode txtJigyoshaNo, TextBoxCode txtYoshikiNo, TextBoxCode txtMeisaiNo, TextBoxCode txtShinsaNo, TextBoxNum rowNum, TextBox shikibetsuCode) {
         super();
         this.setOriginalData("txtJotai", txtJotai);
         this.setOriginalData("txtShikyuShinseiDate", txtShikyuShinseiDate);
@@ -88,6 +91,7 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
         this.setOriginalData("txtMeisaiNo", txtMeisaiNo);
         this.setOriginalData("txtShinsaNo", txtShinsaNo);
         this.setOriginalData("rowNum", rowNum);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
         this.txtJotai = txtJotai;
         this.txtShikyuShinseiDate = txtShikyuShinseiDate;
         this.txtTenkyoYM = txtTenkyoYM;
@@ -103,6 +107,7 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
         this.txtMeisaiNo = txtMeisaiNo;
         this.txtShinsaNo = txtShinsaNo;
         this.rowNum = rowNum;
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     public RString getTxtJotai() {
@@ -163,6 +168,10 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
 
     public TextBoxNum getRowNum() {
         return rowNum;
+    }
+
+    public TextBox getShikibetsuCode() {
+        return shikibetsuCode;
     }
 
     public void setTxtJotai(RString txtJotai) {
@@ -238,6 +247,11 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
     public void setRowNum(TextBoxNum rowNum) {
         this.setOriginalData("rowNum", rowNum);
         this.rowNum = rowNum;
+    }
+
+    public void setShikibetsuCode(TextBox shikibetsuCode) {
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     // </editor-fold>

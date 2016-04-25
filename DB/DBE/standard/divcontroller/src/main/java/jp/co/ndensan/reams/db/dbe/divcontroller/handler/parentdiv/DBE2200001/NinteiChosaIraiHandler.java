@@ -587,8 +587,8 @@ public class NinteiChosaIraiHandler {
                 break;
             }
         }
-        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
-        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaRow : dgWaritsukeZumiShinseishaIchiran) {
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseisha = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaRow : dgWaritsukeZumiShinseisha) {
             if (MIWARITSUKE.equals(waritsukeZumiShinseishaRow.getJotai())) {
                 isUpdate = true;
                 break;
@@ -605,8 +605,8 @@ public class NinteiChosaIraiHandler {
     public int get既存割付済み人数() {
         List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseisha = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
         int count = 0;
-        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseisha) {
-            RString jotai = waritsukeZumiShinseishaIchiran_Row.getJotai();
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseisha : dgWaritsukeZumiShinseisha) {
+            RString jotai = waritsukeZumiShinseisha.getJotai();
             if (RString.EMPTY.equals(jotai) || WARITSUKE_ZUMI.equals(jotai)) {
                 count++;
             }
@@ -637,7 +637,6 @@ public class NinteiChosaIraiHandler {
      */
     public List<ChosaIraishoHeadItem> create認定調査依頼書印刷用パラメータ() {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
-        int renban = 1;
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());

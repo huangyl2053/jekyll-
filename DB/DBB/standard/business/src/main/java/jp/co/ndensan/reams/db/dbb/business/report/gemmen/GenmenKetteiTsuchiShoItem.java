@@ -56,9 +56,7 @@ public class GenmenKetteiTsuchiShoItem {
     private RString 発行日;
     private RString 電子公印;
     private RString 認証者役職名;
-    private RString 認証者役職名1;
     private RString 公印文字列;
-    private RString 認証者役職名2;
     private RString 認証者氏名公印に掛けない;
     private RString 認証者氏名公印に掛ける;
     private RString 公印省略;
@@ -100,4 +98,6 @@ public class GenmenKetteiTsuchiShoItem {
     private RString 様分1;
     private RString 様分氏名Small1;
     private RString カスタマバーコード;
+    // TODO (QA655)世帯主名 将来に追加する
+    // TODO (QA655)様方 将来に追加する
 }

@@ -75,8 +75,8 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource implements IRepor
     public RString hokenryoGaku12Gatsu1;
     @ReportItem(name = "hokenryoGaku2Gatsu1", length = 6, order = 27)
     public RString hokenryoGaku2Gatsu1;
-    @ReportItem(name = "SanteiKisoNendo1", length = 4, order = 28)
-    public RString SanteiKisoNendo1;
+    @ReportItem(name = "santeiKisoNendo1", length = 4, order = 28)
+    public RString santeiKisoNendo1;
     @ReportItem(name = "santeikisoKikan", length = 23, order = 29)
     public RString santeikisoKikan;
     @ReportItem(name = "santeikisoTsukisu", length = 4, order = 30)

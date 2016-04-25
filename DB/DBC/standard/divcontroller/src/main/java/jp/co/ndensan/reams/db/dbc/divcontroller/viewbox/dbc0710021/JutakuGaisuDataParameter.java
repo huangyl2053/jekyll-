@@ -19,6 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JutakuGaisuDataParameter implements Serializable {
 
-    private RString 住宅改修データ;
+    private List<JutakuGaisuListDataParameter> 住宅改修データ;
     private List<RString> 限度額リセット;
 }

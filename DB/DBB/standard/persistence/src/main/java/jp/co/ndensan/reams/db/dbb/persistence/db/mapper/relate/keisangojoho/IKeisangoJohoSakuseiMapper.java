@@ -7,69 +7,70 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity;
 
 /**
  * 計算後情報作成のマッパーインタフェースです。
  *
  * @reamsid_L DBB-9060-010 duanzhanli
- *
  */
 public interface IKeisangoJohoSakuseiMapper {
 
     /**
-     * 計算後情報_最新2を取得します。
+     * 調定日時が指定されない且つ帳票分類IDが指定されない場合、全賦課最新の情報を取得します。
+     *
+     * @param param 計算後情報作成のパラメータ
+     * @return List<DbT2002FukaEntity>
+     */
+    List<DbT2002FukaEntity> get全賦課最新情報2(KeisangoJohoSakuseiMybitisParamter param);
+
+    /**
+     * 調定日時が指定された且つ帳票分類IDが指定されない場合、全賦課最新の情報を取得します。
+     *
+     * @param param 計算後情報作成のパラメータ
+     * @return List<DbT2002FukaEntity>
+     */
+    List<DbT2002FukaEntity> get全賦課最新情報3(KeisangoJohoSakuseiMybitisParamter param);
+
+    /**
+     * 調定日時が指定されない且つ帳票分類IDが指定された場合、全賦課最新の情報を取得します。
+     *
+     * @param param 計算後情報作成のパラメータ
+     * @return List<DbT2002FukaEntity>
+     */
+    List<DbT2002FukaEntity> get全賦課最新情報4(KeisangoJohoSakuseiMybitisParamter param);
+
+    /**
+     * 調定日時が指定された且つ帳票分類IDが指定された場合、全賦課最新の情報を取得します。
+     *
+     * @param param 計算後情報作成のパラメータ
+     * @return List<DbT2002FukaEntity>
+     */
+    List<DbT2002FukaEntity> get全賦課最新情報5(KeisangoJohoSakuseiMybitisParamter param);
+
+    /**
+     * 計算後情報_期別金額を取得します。
      *
      * @param param 計算後情報作成のパラメータ
      * @return List<KeisangoJohoSakuseiRelateEntity>
      */
-    List<KeisangoJohoSakuseiRelateEntity> get計算後情報_最新2(KeisangoJohoSakuseiMybitisParamter param);
+    List<KeisangoJohoSakuseiRelateEntity> get期別金額(KeisangoJohoSakuseiMybitisParamter param);
 
     /**
-     * 計算後情報_履歴を取得します。
-     *
-     * @param entity dbT2015KeisangoJohoEntity
-     * @return List<KeisangoJohoSakuseiRelateEntity>
-     */
-    List<KeisangoJohoSakuseiRelateEntity> get計算後情報_履歴(DbT2015KeisangoJohoEntity entity);
-
-    /**
-     * 計算後情報_最新3を取得します。
+     * 計算後情報_収入情報を取得します。
      *
      * @param param 計算後情報作成のパラメータ
      * @return List<KeisangoJohoSakuseiRelateEntity>
      */
-    List<KeisangoJohoSakuseiRelateEntity> get計算後情報_最新3(KeisangoJohoSakuseiMybitisParamter param);
+    List<KeisangoJohoSakuseiRelateEntity> get収入情報(KeisangoJohoSakuseiMybitisParamter param);
 
     /**
-     * 計算後情報_最新4を取得します。
+     * 計算後情報_更新前賦課情報を取得します。
      *
      * @param param 計算後情報作成のパラメータ
-     * @return List<KeisangoJohoSakuseiRelateEntity>
+     * @return List<DbT2002FukaEntity>
      */
-    List<KeisangoJohoSakuseiRelateEntity> get計算後情報_最新4(KeisangoJohoSakuseiMybitisParamter param);
+    List<DbT2002FukaEntity> get更新前賦課情報(KeisangoJohoSakuseiMybitisParamter param);
 
-    /**
-     * 計算後情報_最新5を取得します。
-     *
-     * @param param 計算後情報作成のパラメータ
-     * @return List<KeisangoJohoSakuseiRelateEntity>
-     */
-    List<KeisangoJohoSakuseiRelateEntity> get計算後情報_最新5(KeisangoJohoSakuseiMybitisParamter param);
-
-    /**
-     * 計算後情報一時を削除します。
-     *
-     * @return DbT2015KeisangoJohoTemp
-     */
-    int dropDbT2015KeisangoJohoTemp();
-
-    /**
-     * 計算後情報一時に登録します。
-     *
-     * @param entity dbT2015KeisangoJohoEntity
-     * @return 登録件数
-     */
-    int insertDbT2015KeisangoJohoTemp(DbT2015KeisangoJohoEntity entity);
 }

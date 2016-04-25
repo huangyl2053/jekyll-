@@ -3,7 +3,7 @@
 <!-- 概要： 合議体情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<!-- @reamsid_L DBA-0540-160 houtp -->
+<!-- @reamsid_L DBA-0540-160 houtianpeng -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoRelateMapper">
 
     <!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->

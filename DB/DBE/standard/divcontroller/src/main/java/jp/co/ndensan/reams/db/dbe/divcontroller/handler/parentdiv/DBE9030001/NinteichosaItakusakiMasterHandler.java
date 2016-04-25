@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaKikanKubu
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosaitakusakimaster.NinteichosaItakusakiManager;
-import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -51,7 +50,6 @@ public class NinteichosaItakusakiMasterHandler {
 
     private final NinteichosaItakusakiMasterDiv div;
     private static final int DROPDOWNLIST_BLANK = 0;
-    private final KoseiShichosonMasterManager masterManager;
     private final NinteichosaItakusakiJohoManager johoManager;
     private static final RString 状況フラグ有効 = new RString("有効");
     private static final RString 状況フラグ無効 = new RString("無効");
@@ -77,7 +75,6 @@ public class NinteichosaItakusakiMasterHandler {
     public NinteichosaItakusakiMasterHandler(NinteichosaItakusakiMasterDiv div) {
         this.div = div;
         johoManager = NinteichosaItakusakiJohoManager.createInstance();
-        masterManager = KoseiShichosonMasterManager.createInstance();
     }
 
     /**

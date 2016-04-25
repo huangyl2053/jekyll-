@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 保険料納入通知書（本算定）【期毎タイプ】 雛形部品
+ *
+ * @reamsid_L DBB-9110-160 liangbc
  */
 @lombok.Getter
 @lombok.Setter

@@ -25,12 +25,12 @@ public class JibiinkokajyushinUmuTest extends DbeTestBase {
 
     @Test
     public void ありを指定した場合_getコードは_Trueを返す() {
-        assertThat(JibiinkokajyushinUmu.あり.getコード(), is(true));
+        assertThat(JibiinkokajyushinUmu.あり.is耳鼻咽喉科受診(), is(true));
     }
 
     @Test
     public void なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(JibiinkokajyushinUmu.なし.getコード(), is(false));
+        assertThat(JibiinkokajyushinUmu.なし.is耳鼻咽喉科受診(), is(false));
     }
 
     @Test

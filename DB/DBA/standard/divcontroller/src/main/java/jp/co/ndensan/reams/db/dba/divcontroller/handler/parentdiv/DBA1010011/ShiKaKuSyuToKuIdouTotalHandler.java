@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -69,8 +70,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      */
     public ShiKaKuSyuToKuIdouTotalHandler(ShikakuShutokuIdoTotalDiv div) {
         this.div = div;
-        被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        被保険者番号 = key.get被保険者番号();
+        識別コード = key.get識別コード();
     }
 
     /**
@@ -86,9 +88,11 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      * 被保履歴タブを打開です。
      */
     public void onOpenTplDefault() {
-        if (!状態_被保履歴タブ.equals(FIRSTREQUEST以外)) {
+        状態_被保履歴タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class);
+        if (RString.isNullOrEmpty(状態_被保履歴タブ) || !状態_被保履歴タブ.equals(FIRSTREQUEST以外)) {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
             状態_被保履歴タブ = FIRSTREQUEST以外;
+            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_被保履歴タブ, 状態_被保履歴タブ);
         }
         setDdlShikakuShutokuJiyu();
         get被保番号表示有無制御();
@@ -98,10 +102,12 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      * 医療保険タブを打開です。
      */
     public void onOpenTplIryou() {
-        if (!状態_医療保険タブ.equals(FIRSTREQUEST以外)) {
+        状態_医療保険タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_医療保険タブ, RString.class);
+        if (RString.isNullOrEmpty(状態_医療保険タブ) || !状態_医療保険タブ.equals(FIRSTREQUEST以外)) {
             div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekiMain().getCcdIryoHokenRireki()
                     .initialize(状態_登録, 識別コード.getColumnValue());
             状態_医療保険タブ = FIRSTREQUEST以外;
+            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_医療保険タブ, 状態_医療保険タブ);
         }
     }
 
@@ -109,9 +115,11 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      * 老福年金タブを打開です。
      */
     public void onOpenTplRoNen() {
-        if (!状態_老福年金タブ.equals(FIRSTREQUEST以外)) {
+        状態_老福年金タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_老福年金タブ, RString.class);
+        if (RString.isNullOrEmpty(状態_老福年金タブ) || !状態_老福年金タブ.equals(FIRSTREQUEST以外)) {
             div.getShikakuShutokuJoho().getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().initialize(識別コード, 被保険者番号);
             状態_老福年金タブ = FIRSTREQUEST以外;
+            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_老福年金タブ, 状態_老福年金タブ);
         }
     }
 
@@ -119,9 +127,11 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      * 施設入退所タブを打開です。
      */
     public void onOpenTplShisetsu() {
-        if (!状態_施設入退所タブ.equals(FIRSTREQUEST以外)) {
+        状態_施設入退所タブ = ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_施設入退所タブ, RString.class);
+        if (RString.isNullOrEmpty(状態_施設入退所タブ) || !状態_施設入退所タブ.equals(FIRSTREQUEST以外)) {
             div.getShikakuShutokuJoho().getTplShisetsuNyutaisho().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード);
             状態_施設入退所タブ = FIRSTREQUEST以外;
+            ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_施設入退所タブ, 状態_施設入退所タブ);
         }
     }
 
@@ -176,7 +186,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
             return;
         }
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setDataSource(keyValueList);
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(0);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(1);
     }
 
     /**
@@ -187,8 +197,6 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().clearValue();
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().clearValue();
         setDdlShikakuShutokuJiyu();
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(true);
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
     }
 
     /**

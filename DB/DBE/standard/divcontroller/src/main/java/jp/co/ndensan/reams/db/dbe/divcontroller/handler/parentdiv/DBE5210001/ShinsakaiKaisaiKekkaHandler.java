@@ -154,7 +154,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     private List<KeyValueDataSource> setIsChikokuUmu() {
         List<KeyValueDataSource> chikokuUmu = new ArrayList<>();
         for (IsChikokuUmu isChikokuUmu : IsChikokuUmu.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(isChikokuUmu.getコード())), isChikokuUmu.get名称());
+            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(isChikokuUmu.is委員遅刻())), isChikokuUmu.get名称());
             chikokuUmu.add(dataSource);
         }
         return chikokuUmu;

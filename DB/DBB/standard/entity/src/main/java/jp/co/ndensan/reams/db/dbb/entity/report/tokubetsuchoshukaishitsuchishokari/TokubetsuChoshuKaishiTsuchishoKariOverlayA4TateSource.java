@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 特別徴収開始通知書（仮算定）帳票 A4縦・オーバーレイタイプSource
  *
- * @reamsid_L DBB-0790-060 surun
+ * @reamsid_L DBB-0790-060 lijunjun
  */
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -71,12 +71,12 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource implements IR
     public RString hokenryoGaku6Gatsu1;
     @ReportItem(name = "hokenryoGaku8Gatsu1", length = 9, order = 27)
     public RString hokenryoGaku8Gatsu1;
-    @ReportItem(name = "SanteiKisoNendo1", length = 4, order = 28)
-    public RString SanteiKisoNendo1;
-    @ReportItem(name = "SanteiKisoNendo2", length = 4, order = 29)
-    public RString SanteiKisoNendo2;
-    @ReportItem(name = "SanteiKisoNendo3", length = 4, order = 30)
-    public RString SanteiKisoNendo3;
+    @ReportItem(name = "santeiKisoNendo1", length = 4, order = 28)
+    public RString santeiKisoNendo1;
+    @ReportItem(name = "santeiKisoNendo2", length = 4, order = 29)
+    public RString santeiKisoNendo2;
+    @ReportItem(name = "santeiKisoNendo3", length = 4, order = 30)
+    public RString santeiKisoNendo3;
     @ReportItem(name = "shotokuDankai", length = 8, order = 31)
     public RString shotokuDankai;
     @ReportItem(name = "karisanteiGakuGokei1", length = 9, order = 32)
@@ -95,8 +95,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource implements IR
     public RString hokenryoGaku8Gatsu2;
     @ReportItem(name = "tsuchibun", order = 39)
     public RString tsuchibun;
-    @ReportItem(name = "Text2", order = 40)
-    public RString Text2;
+    @ReportItem(name = "text2", order = 40)
+    public RString text2;
     @ReportItem(name = "denshiKoin", order = 41)
     public RString denshiKoin;
     @ReportItem(name = "hakkoYMD", length = 12, order = 42)

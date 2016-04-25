@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuEntity;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShienJigyoshaBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShikakushashoHakkoBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigohokenshikakushasho.KaigoHokenShikakushashoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.HihokenshaDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.HokenshaBangoMeishoInDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.KaigoHokenShikakushashoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -69,13 +68,14 @@ public class KaigoHokenShikakushasho {
     private static final RString 居宅支援事業者履歴_2 = new RString("2");
     private static final RString 居宅支援事業者履歴_3 = new RString("3");
     private static final ReportId 帳票分類ID = new ReportId("DBA100003_Shikakushasho");
-    private static final RString 帳票独自 = new RString("1");
-    private static final RString 市町村共通 = new RString("0");
-    private static final RString 編集方法_1 = new RString("1");
-    private static final RString 編集方法_2 = new RString("2");
-    private static final RString 編集方法_3 = new RString("3");
-    private static final RString 編集方法_4 = new RString("4");
-    private static final RString 編集方法_5 = new RString("5");
+    // TODO QA:1088 Redmine：  (住所の編集方法がわかりません。)
+//    private static final RString 帳票独自 = new RString("1");
+//    private static final RString 市町村共通 = new RString("0");
+//    private static final RString 編集方法_1 = new RString("1");
+//    private static final RString 編集方法_2 = new RString("2");
+//    private static final RString 編集方法_3 = new RString("3");
+//    private static final RString 編集方法_4 = new RString("4");
+//    private static final RString 編集方法_5 = new RString("5");
     private static final RString 管内区分 = new RString("1");
     private static final RString 管外区分 = new RString("2");
     private static final RString 年号_明治 = new RString("明治");
@@ -125,7 +125,7 @@ public class KaigoHokenShikakushasho {
      * @return KaigoHokenShikakushashoDataBusiness
      */
     public KaigoHokenShikakushashoDataBusiness setKaigoHokenShikakushasho(ShikakushashoHakkoBusiness business) {
-        KaigoHokenShikakushashoDataEntity dataEntity = new KaigoHokenShikakushashoDataEntity();
+        KaigoHokenShikakushashoDataBusiness dataEntity = new KaigoHokenShikakushashoDataBusiness();
         dataEntity.setYukoKigen(business.get有効期限());
         dataEntity.setHihokenshaNo(business.get被保番号());
         帳票制御共通Entity = dac.selectByKey(SubGyomuCode.DBA介護資格, 帳票分類ID);
@@ -143,23 +143,23 @@ public class KaigoHokenShikakushasho {
         dataEntity.setNinteiYMD(business.get認定日());
         dataEntity.setYukoKaishiYMD(business.get有効期間の開始日付());
         dataEntity.setYukoShuryoYMD(business.get有効期間の終了日付());
-        dataEntity.setKubunShikyuYukoKaishiYMD(business.get区分支給限度額の有効期間の開始日付());
-        dataEntity.setKubunShikyuYukoShuryoYMD(business.get区分支給限度額の有効期間の終了日付());
+        dataEntity.setKubunShikyuYukoKaishiYMD(business.get区分支給限度額の有効開始日付());
+        dataEntity.setKubunShikyuYukoShuryoYMD(business.get区分支給限度額の有効終了日付());
         dataEntity.setKizyunngaku(business.get区分支給限度額の基準額());
         dataEntity.setTaniShurui(単位種類);
         dataEntity.setTani(固定文字_単位);
         if (business.getうち種類支給限度基準額の情報() != null) {
-            Collections.sort(business.getうち種類支給限度基準額の情報(), new Comparator<ShuruiShikyuGendoKizyunngakuEntity>() {
+            Collections.sort(business.getうち種類支給限度基準額の情報(), new Comparator<ShuruiShikyuGendoKizyunngakuBusiness>() {
                 @Override
-                public int compare(ShuruiShikyuGendoKizyunngakuEntity entity1, ShuruiShikyuGendoKizyunngakuEntity entity2) {
-                    return entity1.getServiceShurui().compareTo(entity2.getServiceShurui());
+                public int compare(ShuruiShikyuGendoKizyunngakuBusiness business1, ShuruiShikyuGendoKizyunngakuBusiness business2) {
+                    return business1.getServiceShurui().compareTo(business2.getServiceShurui());
                 }
             });
             int i = 0;
-            List<ShuruiShikyuGendoKizyunngakuEntity> shikyuGendoKizyungakuList = new ArrayList<>();
-            for (ShuruiShikyuGendoKizyunngakuEntity kizyunngakuEntity : business.getうち種類支給限度基準額の情報()) {
+            List<ShuruiShikyuGendoKizyunngakuBusiness> shikyuGendoKizyungakuList = new ArrayList<>();
+            for (ShuruiShikyuGendoKizyunngakuBusiness kizyunngakuBusiness : business.getうち種類支給限度基準額の情報()) {
                 if (i < 画面のデータ件数) {
-                    shikyuGendoKizyungakuList.add(kizyunngakuEntity);
+                    shikyuGendoKizyungakuList.add(kizyunngakuBusiness);
                     dataEntity.setShikyuGendoKizyungakuList(shikyuGendoKizyungakuList);
                     dataEntity.getShikyuGendoKizyungakuList().get(i).setShuruiShikyuKizyunngakuTani(固定文字_単位);
                 } else {
@@ -168,7 +168,7 @@ public class KaigoHokenShikakushasho {
                 i = i + 1;
             }
         }
-        dataEntity.setServiceShitei(business.get認定審査会の意見及びサービスの種類の指定());
+        dataEntity.setServiceShitei(business.get種類の指定());
         dataEntity.setKyufuseigenDataList(business.get給付制限の情報());
         dataEntity.setJigyoshaName1(getShienJigyoshajouhou(business).getJigyoshaName1());
         dataEntity.setTodokedeYMD1(getShienJigyoshajouhou(business).getTodokedeYMD1());
@@ -198,7 +198,7 @@ public class KaigoHokenShikakushasho {
         dataEntity.setDenshiKoin(hokenshaBangoMeishoInEntity.getDenshiKoin());
         dataEntity.setRemban(null);
         dataEntity.setSubTitle(RString.EMPTY);
-        return new KaigoHokenShikakushashoDataBusiness(dataEntity);
+        return dataEntity;
     }
 
     private HihokenshaDateEntity getHihokenshajouhou(RString shikibetsuCode) {
@@ -250,7 +250,7 @@ public class KaigoHokenShikakushasho {
 
     }
 
-    // TODO QA:1088 Redmine：  (住所の編集方法)
+    // TODO QA:1088 Redmine：  (住所の編集方法がわかりません。)
     private RString set住所() {
 //        if (市町村共通.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
 //
@@ -357,10 +357,10 @@ public class KaigoHokenShikakushasho {
     private ShienJigyoshaDataEntity getShienJigyoshajouhou(ShikakushashoHakkoBusiness business) {
         ShienJigyoshaDataEntity shienJigyoshaDataEntity = new ShienJigyoshaDataEntity();
         if (business.get支援事業者の情報() != null) {
-            Collections.sort(business.get支援事業者の情報(), new Comparator<ShienJigyoshaEntity>() {
+            Collections.sort(business.get支援事業者の情報(), new Comparator<ShienJigyoshaBusiness>() {
                 @Override
-                public int compare(ShienJigyoshaEntity entity1, ShienJigyoshaEntity entity2) {
-                    return entity2.getTekiyoKaishiYMD().compareTo(entity1.getTekiyoKaishiYMD());
+                public int compare(ShienJigyoshaBusiness business1, ShienJigyoshaBusiness business2) {
+                    return business2.getTekiyoKaishiYMD().compareTo(business1.getTekiyoKaishiYMD());
                 }
             });
             set支援事業者情報(business, shienJigyoshaDataEntity);
@@ -389,7 +389,7 @@ public class KaigoHokenShikakushasho {
         return shienJigyoshaDataEntity;
     }
 
-    private void setNameAndYMDBy居宅支援事業者履歴(List<ShienJigyoshaEntity> list, ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
+    private void setNameAndYMDBy居宅支援事業者履歴(List<ShienJigyoshaBusiness> list, ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
         if (居宅支援事業者履歴_0.equals(
                 BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者履歴, SubGyomuCode.DBD介護受給))) {
             setNameAndYMD(list, shienJigyoshaDataEntity);
@@ -410,7 +410,7 @@ public class KaigoHokenShikakushasho {
         }
     }
 
-    private void setNameAndYMD(List<ShienJigyoshaEntity> list, ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
+    private void setNameAndYMD(List<ShienJigyoshaBusiness> list, ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
         if (list.size() >= SIZE_2) {
             shienJigyoshaDataEntity.setJigyoshaName2(list.get(1).getJigyosha());
             shienJigyoshaDataEntity.setTodokedeYMD2(list.get(1).getTodokedeYMD());

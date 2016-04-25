@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * その他受診科の有無を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum SonotaJushinkaUmu {
 
@@ -32,7 +32,7 @@ public enum SonotaJushinkaUmu {
      *
      * @return その他受診科の有無のコード
      */
-    public boolean getコード() {
+    public boolean isその他受診科() {
         return code;
     }
 

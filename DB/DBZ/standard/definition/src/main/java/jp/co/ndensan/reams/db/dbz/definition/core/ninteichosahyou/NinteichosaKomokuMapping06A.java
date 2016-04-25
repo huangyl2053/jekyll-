@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定調査票06A（データベース内連番）を表す列挙型です。
  *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum NinteichosaKomokuMapping06A {
 

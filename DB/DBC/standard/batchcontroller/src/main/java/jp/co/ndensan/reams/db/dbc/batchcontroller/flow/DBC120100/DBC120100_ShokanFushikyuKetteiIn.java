@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopy;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuDbUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuTableInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuTableUpdateProcess;
@@ -44,7 +44,7 @@ public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_Sh
         executeStep(CSVFILE_COPY);
 
         HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(CSVFILE_COPY),
-                SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
+                SharedFileCopyProcess.PARAMETER_OUT_FILEPATHLIST);
         fileNameList = new ArrayList<>();
         for (RString filename : filePathList.keySet()) {
             fileNameList.add(filename);
@@ -61,10 +61,10 @@ public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_Sh
     @Step(CSVFILE_COPY)
     IBatchFlowCommand csvFileCopy() {
         Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString("/home/D209007/shared/DB120100/"));
-        processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
-        processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
-        return simpleBatch(SharedFileCopy.class).arguments(processParameter).define();
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_FILEPATH, new RString("/home/D209007/shared/DB120100/"));
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_SHAREDNAME, sharedFileKey);
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
+        return simpleBatch(SharedFileCopyProcess.class).arguments(processParameter).define();
     }
 
     @Step(TEMP_TABLE_INSERT)

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config;
 /**
  * 被保険者表示方法に関連する業務コンフィグです。
  *
- * @reamsid_L DBA-9999-021 zhangzhiming
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public enum ConfigKeysJukyuShikakuShomeishoHakko {
 

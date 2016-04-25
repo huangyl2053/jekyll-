@@ -12,9 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -34,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class ShoKaishuKirokuKanriHandler {
 
     private final ShoKaishuKirokuKanriDiv div;
-    private boolean False;
     private static final RString 状態_照会 = new RString("照会");
     private static final RString 状態_更新 = new RString("更新");
     private static final RString CODESHUBETSU_0014 = new RString("0014");
@@ -60,11 +57,12 @@ public class ShoKaishuKirokuKanriHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void initialize(RString 状態, HihokenshaNo 被保険者番号) {
+        ViewStateHolder.put(ViewStateKeys.証交付回収情報_被保番号, 被保険者番号);
         div.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0116)));
         div.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0015)));
         if (状態_照会.equals(状態)) {
             List<ShoKofuKaishu> businessList = ShoKofuKaishuJohoManager.createInstance()
-                    .getShoKofuKaishuJohoList(被保険者番号, False).records();
+                    .getShoKofuKaishuJohoList(被保険者番号, false).records();
             Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> shoKofuKaishu = Models.create(businessList);
             ViewStateHolder.put(ViewStateKeys.証交付回収情報, shoKofuKaishu);
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
@@ -83,15 +81,15 @@ public class ShoKaishuKirokuKanriHandler {
                 }
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
             }
-            div.getPanelInput().setVisible(False);
-            div.getDgKoufuKaishu().getGridSetting().getColumn(new RString("status")).setVisible(False);
-            div.getDgKoufuKaishu().getGridSetting().setIsShowDeleteButtonColumn(False);
-            div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(False);
-            div.getDgKoufuKaishu().getGridSetting().setIsShowRowState(False);
+            div.getPanelInput().setVisible(false);
+            div.getDgKoufuKaishu().getGridSetting().getColumn(new RString("status")).setVisible(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowRowState(false);
         }
         if (状態_更新.equals(状態)) {
             List<ShoKofuKaishu> businessList = ShoKofuKaishuJohoManager.createInstance().
-                    getShoKofuKaishuJohoList(被保険者番号, False).records();
+                    getShoKofuKaishuJohoList(被保険者番号, false).records();
             Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> shoKofuKaishu = Models.create(businessList);
             ViewStateHolder.put(ViewStateKeys.証交付回収情報, shoKofuKaishu);
             List<dgKoufuKaishu_Row> dgKoufuKaishuList = new ArrayList();
@@ -114,7 +112,7 @@ public class ShoKaishuKirokuKanriHandler {
                 }
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
             }
-            div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(False);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getPanelInput().getBtnCancel().setDisabled(true);
             div.getPanelInput().getBtnConfirm().setDisabled(true);
         }
@@ -148,7 +146,7 @@ public class ShoKaishuKirokuKanriHandler {
         List<dgKoufuKaishu_Row> listRow = div.getDgKoufuKaishu().getDataSource();
         for (dgKoufuKaishu_Row dgKoufuKaishu : listRow) {
             ShoKofuKaishuIdentifier key = new ShoKofuKaishuIdentifier(
-                    ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.証交付回収情報_被保番号, HihokenshaNo.class),
                     dgKoufuKaishu.getKoufuTypeNo(), Integer.valueOf(dgKoufuKaishu.getRirekiNo().toString()));
             ShoKofuKaishu shoKofuKaishu = 証交付回収情報Model.get(key);
             ShoKofuKaishuBuilder builder = shoKofuKaishu.createBuilderForEdit();

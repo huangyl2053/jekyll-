@@ -25,12 +25,12 @@ public class ShinsakaiKaisaiBashoJokyoTest extends DbeTestBase {
 
     @Test
     public void 有効を指定した場合_getコードは_Trueを返す() {
-        assertThat(ShinsakaiKaisaiBashoJokyo.有効.getコード(), is(true));
+        assertThat(ShinsakaiKaisaiBashoJokyo.有効.is審査会開催場所状況(), is(true));
     }
 
     @Test
     public void 無効を指定した場合_getコードは_Falseを返す() {
-        assertThat(ShinsakaiKaisaiBashoJokyo.無効.getコード(), is(false));
+        assertThat(ShinsakaiKaisaiBashoJokyo.無効.is審査会開催場所状況(), is(false));
     }
 
     @Test

@@ -37,7 +37,7 @@ public class HihokenshaDaichoRoreiFukushiEditor implements IHihokenshaDaichoEdit
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get老齢福祉No().size() <= index) {
+        if (entity == null || entity.get老齢福祉No().isEmpty() || entity.get老齢福祉No().size() <= index) {
             return source;
         }
         return editBody(source);
@@ -45,8 +45,8 @@ public class HihokenshaDaichoRoreiFukushiEditor implements IHihokenshaDaichoEdit
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listRoreiFukushi_1 = entity.get老齢福祉No().get(index);
-        source.listRoreiFukushi_2 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給開始日().get(index));
-        source.listRoreiFukushi_3 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給終了日().get(index));
+        source.listRoreiFukushi_2 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給開始日(), index);
+        source.listRoreiFukushi_3 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給終了日(), index);
         return source;
     }
 }

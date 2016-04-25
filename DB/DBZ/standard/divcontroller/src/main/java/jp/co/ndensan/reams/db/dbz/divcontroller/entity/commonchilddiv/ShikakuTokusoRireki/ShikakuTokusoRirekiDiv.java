@@ -395,6 +395,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
             try {
                 row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getName());
+                row.setShutokuJiyuKey(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getCode());
             } catch (IllegalArgumentException e) {
                 row.setShutokuJiyu(RString.EMPTY);
             }
@@ -414,6 +415,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
             try {
                 row.setSoshitsuJiyu(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).get名称());
+                row.setSoshitsuJiyuKey(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).getコード());
             } catch (IllegalArgumentException e) {
                 row.setSoshitsuJiyu(RString.EMPTY);
             }

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 合議体精神科医存在フラグを表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsGogitaiSeishinkaSonzai {
 
@@ -32,7 +32,7 @@ public enum IsGogitaiSeishinkaSonzai {
      *
      * @return 合議体精神科医存在フラグのコード
      */
-    public boolean getコード() {
+    public boolean is合議体精神科医存在() {
         return code;
     }
 

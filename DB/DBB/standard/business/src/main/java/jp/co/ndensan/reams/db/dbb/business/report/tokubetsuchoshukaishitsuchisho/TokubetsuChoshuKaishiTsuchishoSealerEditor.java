@@ -70,13 +70,13 @@ public class TokubetsuChoshuKaishiTsuchishoSealerEditor implements ITokubetsuCho
             source.hokenryoCalGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get減免前保険料_年額(), 0);
             source.fuchoNofuGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get普通徴収額合計(), 0);
         }
-        // TODO 被保険者方書 QA649
         source.gekihenHeader = RString.EMPTY;
         source.gekihenMongon = RString.EMPTY;
         if (編集後本算定通知書共通情報.get編集後個人() != null) {
             source.birthYMD = 編集後本算定通知書共通情報.get編集後個人().get生年月日();
             source.seibetsu = 編集後本算定通知書共通情報.get編集後個人().get性別();
             source.setainushiName = 編集後本算定通知書共通情報.get編集後個人().get世帯主名().value();
+            source.hihokenshaKatagaki = 編集後本算定通知書共通情報.get編集後個人().get方書().value();
         }
         if (編集後本算定通知書共通情報.get更正後() != null) {
             source.tokuchoGimushaName = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();

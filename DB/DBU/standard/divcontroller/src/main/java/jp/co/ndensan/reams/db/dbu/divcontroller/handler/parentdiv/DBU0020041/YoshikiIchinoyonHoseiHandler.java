@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * Mainハンドラークラスです。
+ *
+ * @reamsid_L DBU-1100-040 yebangqiang
  */
 public final class YoshikiIchinoyonHoseiHandler {
 

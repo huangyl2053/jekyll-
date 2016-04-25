@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShokanFukushiYoguHanbaihi}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-1020-050 chenaoqi
  */
 public class ShokanFukushiYoguHanbaihiBuilder {
 

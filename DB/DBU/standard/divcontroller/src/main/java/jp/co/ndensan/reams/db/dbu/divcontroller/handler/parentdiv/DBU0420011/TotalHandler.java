@@ -7,18 +7,28 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0420011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.KyufuseigenBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.NyushoShisetsuBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4.HihokenshashoA4BodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4.HihokenshashoB4Item;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushasho.ShikakushashoBodyItem;
-import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashochohyo.HihokenshashoChohyoBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashochohyo.HihokenshashoChoBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShienJigyoshaBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShikakushashoHakkoBusiness;
 import jp.co.ndensan.reams.db.dbu.business.jukyushikakushomeisho.JukyuShikakuShomeishoData;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.HihokenshashoChohyoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.JushochitokureiTekiParameter;
+import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.NyutaiShoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.ShiteiServiceParameter;
+import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.ShutokuTodokedeParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.TotalDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashochohyo.HihokenshashoChohyoFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.jukyushikakushomeisho.JukyuShikakuShomeishoFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokenshikakushasho.KaigoHokenShikakushasho;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshashikakuhakko.HihokenshaShikakuHakko.dgShuruiShikyuGendoKijunGaku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -82,37 +92,139 @@ public class TotalHandler {
     public List<HihokenshashoA4BodyItem> hihokenshashoA4() {
         List<HihokenshashoA4BodyItem> bodyItemlist = new ArrayList<>();
         List<HihokenshashoChohyoParameter> hihoken = new ArrayList<>();
-        HihokenshashoChohyoParameter parameter = new HihokenshashoChohyoParameter();
-        // TODO QA1050 パラメタ不明
-        hihoken.add(parameter);
-        List<HihokenshashoChohyoBusiness> business = HihokenshashoChohyoFinder.createInstance().createHihokenshashoChohyo(hihoken).records();
-        for (HihokenshashoChohyoBusiness item : business) {
-            HihokenshashoA4BodyItem bodyItem = new HihokenshashoA4BodyItem(item.getYukokigen1(), item.getYukokigen2(), item.getHihokenshanno(),
-                    item.getYubinno(), item.getGyoseiku1(), item.getGyoseiku2(), item.getHihojusho(), item.getHihokana(), item.getHihoname(),
-                    item.getUmareMm(), item.getUmareMm(), item.getUmareMm(),
-                    item.getKofuymd(), item.getKofuymd(), item.getKofuymd(), item.getSeibetsuMan1(), item.getSaikofu1(),
-                    item.getHokenshano1(), item.getHokenshano2(), item.getHokenshano3(), item.getHokenshano4(), item.getHokenshano5(),
-                    item.getHokenshano6(), item.getKaigokbn(), item.getNinteiymd(), item.getYukokikanst(), item.getYukokikannamisen(),
-                    item.getYukokikaned(), item.getHomonkikanst(), item.getYukokikannamisen(), item.getHomonkikaned(), item.getService(),
-                    item.getTen0(), item.getShurui1(), item.getShurui2(), item.getShurui3(), item.getShurui4(), item.getShurui5(),
-                    item.getShurui6(), item.getShuruigendo1(), item.getShuruigendo2(), item.getShuruigendo3(), item.getShuruigendo4(),
-                    item.getShuruigendo5(), item.getShuruigendo6(), item.getTen1(), item.getTen2(), item.getTen3(), item.getTen4(), item.getTen5(),
-                    item.getTen6(), item.getRyui(), item.getSaikofu2(), item.getSeigen1(), item.getSeigenLong1(), item.getSeigen2(),
-                    item.getSeigenLong2(), item.getSeigen3(), item.getSeigenLong3(), item.getSeigen4(), item.getSeigenLong4(), item.getSeigen5(),
-                    item.getSeigenLong5(), item.getSeigen6(), item.getSeigenLong6(), item.getSeigenSt1(), item.getSeigenEd1(),
-                    item.getSeigenSt2(), item.getSeigenEd2(), item.getSeigenSt3(), item.getSeigenEd3(), item.getGyosha1(), item.getTodokeYmd1(),
-                    item.getGyosha2(), item.getGyosha2Asa(), item.getGyosha2Massho(), item.getTodokeYmd2(), item.getTodokeYmd3Asa(),
-                    item.getTodokeYmd3Massho(), item.getGyosha3(), item.getGyosha3Asa(), item.getTodokeYmd3(), item.getGyosha3Massho(),
-                    item.getShisetsuSyu1(), item.getTodokeYmd3Asa(), item.getTodokeYmd3Massho(), item.getShisetsuname1(), item.getNyushochk1(),
-                    item.getNyuinchk1(), item.getTaishochk1(), item.getTaiinchk1(), item.getNyushoymd1(), item.getTaiinymd1(), item.getShisetsuSyu2(),
-                    item.getShisetsuname2(), item.getNyushochk2(), item.getNyuinchk2(), item.getTaishochk2(), item.getTaiinchk2(),
-                    item.getNyushoymd2(), item.getTaiinymd2(), item.getRenban(), item.getSeiShogai1(), item.getSeiShogai2(),
-                    item.getKosekiSeibetsu1(), item.getKosekiSeibetsu2(), item.getItakuGyosha1(), item.getItakuGyosha2(), item.getItakuGyosha2Asa(),
-                    item.getItakuGyosha2Massho(), item.getItakuGyosha3(), item.getItakuGyosha3Asa(), item.getItakuGyosha3Massho(),
-                    item.getImageField1());
+        hihoken.add(paramter());
+        List<HihokenshashoChoBusiness> business = HihokenshashoChohyoFinder.createInstance().createHihokenshashoChohyo(hihoken).records();
+        for (HihokenshashoChoBusiness item : business) {
+            HihokenshashoA4BodyItem bodyItem = new HihokenshashoA4BodyItem(item.get有効期限1(), item.get有効期限2(), item.get被保険者番号(),
+                    item.get郵便番号(), item.get行政区1(), item.get行政区2(), item.get住所(), item.get氏名カナ(), item.get氏名(), item.get年号(),
+                    item.get西暦年(), item.get和暦年(), item.get月(), item.get日(), item.get交付年月日(), item.get性別(), item.get再交付(),
+                    item.get保険者NO1(), item.get保険者NO2(), item.get保険者NO3(), item.get保険者NO4(), item.get保険者NO5(), item.get保険者NO6(),
+                    item.get要介護認定区分(), item.get認定年月日(), item.get認定有効期間開始年月日(), item.get有効期間波線(),
+                    item.get認定有効期間終了年月日(), item.get訪問期間開始年月日(), item.get訪問期間波線(), item.get訪問期間終了年月日(),
+                    item.getサービス(), item.get点数(), item.getサービス種類1(), item.getサービス種類2(), item.getサービス種類3(),
+                    item.getサービス種類4(), item.getサービス種類5(), item.getサービス種類6(), item.getサービス種類1つ目の限度額(),
+                    item.getサービス種類2つ目の限度額(), item.getサービス種類3つ目の限度額(), item.getサービス種類4つ目の限度額(),
+                    item.getサービス種類5つ目の限度額(), item.getサービス種類6つ目の限度額(), item.get点数1(), item.get点数2(), item.get点数3(),
+                    item.get点数4(), item.get点数5(), item.get点数6(), item.get認定審査会意見等(), item.get再交付2(), item.get給付制限1(),
+                    item.get給付制限長1(), item.get給付制限2(), item.get給付制限長2(), item.get給付制限3(), item.get給付制限長3(),
+                    item.get給付制限4(), item.get給付制限長4(), item.get給付制限5(), item.get給付制限長5(), item.get給付制限6(),
+                    item.get給付制限長6(), item.get給付制限開始年月日1(), item.get給付制限終了年月日1(), item.get給付制限開始年月日2(),
+                    item.get給付制限終了年月日2(), item.get給付制限開始年月日3(), item.get給付制限終了年月日3(), item.get居宅介護事業者1(),
+                    item.get届出年月日1(), item.get居宅介護事業者2(), item.get居宅介護事業者星2(), item.get居宅介護事業者取消2(),
+                    item.get届出年月日2(), item.get届出年月日星2(), item.get届出年月日取消2(), item.get居宅介護事業者3(),
+                    item.get居宅介護事業者星3(), item.get届出年月日3(), item.get居宅介護事業者取消3(), item.get施設種類11(),
+                    item.get届出年月日星3(), item.get届出年月日取消3(), item.get施設名1(), item.get入所チェック1(), item.get入院チェック1(),
+                    item.get退所チェック1(), item.get退院チェック1(), item.get入所年月日1(), item.get退院年月日1(), item.get施設種類2(),
+                    item.get施設名2(), item.get入所チェック2(), item.get入院チェック2(), item.get退所チェック2(), item.get退院チェック2(),
+                    item.get入所年月日2(), item.get退院年月日2(), item.get連番(), item.get性障害1(), item.get性障害2(), item.get構成性別1(),
+                    item.get構成性別2(), item.get居宅介護事業者長1(), item.get居宅介護事業者長2(), item.get居宅介護事業者長星2(),
+                    item.get居宅介護事業者長取消2(), item.get居宅介護事業者長3(), item.get居宅介護事業者長星3(), item.get居宅介護事業者長取消3(),
+                    item.get複合コントロール());
             bodyItemlist.add(bodyItem);
         }
         return bodyItemlist;
+    }
+
+    private HihokenshashoChohyoParameter paramter() {
+        HihokenshashoChohyoParameter para = new HihokenshashoChohyoParameter();
+        para.set被保険者番号(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue());
+        para.set識別コード(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        para.set交付日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue());
+        para.set保険者(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtHokensha().getValue());
+        para.set要介護認定状態区分コード(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtYokaigodo().getValue());
+        para.set認定年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtNinteiYMD().getValue());
+        para.set認定有効期間開始年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtNinteiYukoFromYMD().getValue());
+        para.set認定有効期間終了年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtNinteiYukoToYMD().getValue());
+        para.set支給限度有効開始年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai().getTblGendoGaku()
+                .getKubunGendoGaku().getTxtYukoFromYMD().getValue());
+        para.set支給限度有効終了年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai().getTblGendoGaku()
+                .getKubunGendoGaku().getTxtYukoToYMD().getValue());
+        para.set支給限度単位数(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai().getTblGendoGaku()
+                .getKubunGendoGaku().getTxtKubunShikyuGendoKijunGaku().getValue());
+        List<dgShuruiShikyuGendoKijunGaku_Row> rowList = div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTblGendoGaku().getShuruiShikyuGendoKijungaku().getDgShuruiShikyuGendoKijunGaku().getDataSource();
+        List<ShiteiServiceParameter> list = new ArrayList<>();
+        for (dgShuruiShikyuGendoKijunGaku_Row row : rowList) {
+            ShiteiServiceParameter shitei = new ShiteiServiceParameter();
+            shitei.setサービス種類限度額(row.getGendoGaku());
+            shitei.set指定サービス種類(row.getServiceShurui());
+            list.add(shitei);
+        }
+        para.set指定サービス種類(list);
+        para.set介護認定審査会意見(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai().getTplShinsakaiIken()
+                .getTxtShinsakaiIken().getValue());
+        List<JushochitokureiTekiParameter> jushoList = new ArrayList<>();
+        JushochitokureiTekiParameter jusho1 = new JushochitokureiTekiParameter();
+        jusho1.set給付制限内容(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenNaiyo1().getValue());
+        jusho1.set適用開始年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getFromValue());
+        jusho1.set適用終了年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getToValue());
+        jushoList.add(jusho1);
+        JushochitokureiTekiParameter jusho2 = new JushochitokureiTekiParameter();
+        jusho2.set給付制限内容(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenNaiyo2().getValue());
+        jusho2.set適用開始年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getFromValue());
+        jusho2.set適用終了年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getToValue());
+        jushoList.add(jusho2);
+        JushochitokureiTekiParameter jusho3 = new JushochitokureiTekiParameter();
+        jusho3.set給付制限内容(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenNaiyo3().getValue());
+        jusho3.set適用開始年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getFromValue());
+        jusho3.set適用終了年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getToValue());
+        jushoList.add(jusho3);
+        para.set適用年月日(jushoList);
+        List<ShutokuTodokedeParameter> shutoList = new ArrayList<>();
+        ShutokuTodokedeParameter shuto1 = new ShutokuTodokedeParameter();
+        shuto1.set届出年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTodokedeYMD1().getValue());
+        shuto1.set計画事業者番号(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtJigyosha1().getValue());
+        shuto1.set適用終了日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTekiyoStYMD1().getValue());
+        ShutokuTodokedeParameter shuto2 = new ShutokuTodokedeParameter();
+        shuto2.set届出年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTodokedeYMD2().getValue());
+        shuto2.set計画事業者番号(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtJigyosha2().getValue());
+        shuto2.set適用終了日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTekiyoStYMD2().getValue());
+        ShutokuTodokedeParameter shuto3 = new ShutokuTodokedeParameter();
+        shuto3.set届出年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTodokedeYMD3().getValue());
+        shuto3.set計画事業者番号(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtJigyosha3().getValue());
+        shuto3.set適用終了日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTekiyoStYMD3().getValue());
+        shutoList.add(shuto1);
+        shutoList.add(shuto2);
+        shutoList.add(shuto3);
+        para.set届出年月日(shutoList);
+        List<NyutaiShoParameter> nyutaiList = new ArrayList<>();
+        NyutaiShoParameter nyutai1 = new NyutaiShoParameter();
+        nyutai1.set入所年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate1().getValue());
+        nyutai1.set退所年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate1().getValue());
+        //TODO 入所施設コードと入所施設種類が存在しません
+        nyutai1.set入所施設コード(RString.EMPTY);
+        nyutai1.set入所施設種類(RString.EMPTY);
+        NyutaiShoParameter nyutai2 = new NyutaiShoParameter();
+        nyutai2.set入所年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate2().getValue());
+        nyutai2.set退所年月日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate2().getValue());
+        nyutai2.set入所施設コード(RString.EMPTY);
+        nyutai2.set入所施設種類(RString.EMPTY);
+        nyutaiList.add(nyutai1);
+        nyutaiList.add(nyutai2);
+        para.set入退所年月日(nyutaiList);
+        return para;
     }
 
     /**
@@ -123,32 +235,34 @@ public class TotalHandler {
     public List<HihokenshashoB4Item> hihokenshashoB4() {
         List<HihokenshashoB4Item> items = new ArrayList<>();
         List<HihokenshashoChohyoParameter> hihoken = new ArrayList<>();
-        HihokenshashoChohyoParameter parameter = new HihokenshashoChohyoParameter();
-        // TODO QA1050 パラメタ不明
-        hihoken.add(parameter);
-        List<HihokenshashoChohyoBusiness> business = HihokenshashoChohyoFinder.createInstance().createHihokenshashoChohyo(hihoken).records();
-        for (HihokenshashoChohyoBusiness item : business) {
-            HihokenshashoB4Item bodyItem = new HihokenshashoB4Item(item.getYukokigen1(), item.getHihokenshanno(), item.getYubinno(),
-                    item.getGyoseiku1(), item.getGyoseiku2(), item.getHihojusho(), item.getHihokana(), item.getHihoname(), item.getUmareMeiji1(),
-                    item.getUmareTaisho1(), item.getUmareShowa1(), item.getUmareMm(), item.getSeibetsuMan1(), item.getSeibetsuWoman1(),
-                    item.getKofuymd(), item.getSaikofu1(), item.getHokenshano1(), item.getHokenshano2(), item.getHokenshano3(),
-                    item.getHokenshano4(), item.getHokenshano5(), item.getHokenshano6(), item.getKaigokbn(), item.getNinteiymd(),
-                    item.getYukokikanst(), item.getYukokikaned(), item.getHomonkikanst(), item.getHomonkikaned(), item.getService0(),
-                    item.getService(), item.getTen0(), item.getShurui1(), item.getShurui2(), item.getShurui3(), item.getShurui4(), item.getShurui5(),
-                    item.getShurui6(), item.getShuruigendo1(), item.getShuruigendo2(), item.getShuruigendo3(), item.getShuruigendo4(),
-                    item.getShuruigendo5(), item.getShuruigendo6(), item.getTen1(), item.getTen2(), item.getTen3(), item.getTen4(), item.getTen5(),
-                    item.getTen6(), item.getRyui(), item.getSaikofu2(), item.getSeigen1(), item.getSeigenLong1(), item.getSeigen2(),
-                    item.getSeigenLong2(), item.getSeigen3(), item.getSeigenLong3(), item.getSeigen4(), item.getSeigenLong4(), item.getSeigen5(),
-                    item.getSeigenLong5(), item.getSeigen6(), item.getSeigenLong6(), item.getSeigenSt1(), item.getSeigenEd1(), item.getSeigenSt2(),
-                    item.getSeigenEd2(), item.getSeigenSt3(), item.getSeigenEd3(), item.getGyosha1(), item.getTodokeYmd1(), item.getGyosha2(),
-                    item.getGyosha2Asa(), item.getGyosha2Massho(), item.getTodokeYmd2(), item.getTodokeYmd2Asa(), item.getTodokeYmd2Massho(),
-                    item.getGyosha3(), item.getGyosha3Asa(), item.getGyosha3Massho(), item.getTodokeYmd3(), item.getTodokeYmd3Asa(),
-                    item.getTodokeYmd3Massho(), item.getShisetsuSyu1(), item.getShisetsuname1(), item.getNyushochk1(), item.getNyuinchk1(),
-                    item.getTaishochk1(), item.getTaiinchk1(), item.getNyushoymd1(), item.getTaiinymd1(),
-                    item.getShisetsuSyu2(), item.getShisetsuname2(), item.getNyushochk2(), item.getNyuinchk2(), item.getTaishochk2(),
-                    item.getTaiinchk2(), item.getNyushoymd2(), item.getTaiinymd2(), item.getRenban(), item.getSeiShogai1(), item.getSeiShogai2(),
-                    item.getKosekiSeibetsu1(), item.getKosekiSeibetsu2(), item.getItakuGyosha1(), item.getItakuGyosha2(), item.getItakuGyosha2Asa(),
-                    item.getItakuGyosha2Massho(), item.getItakuGyosha3(), item.getItakuGyosha3Asa(), item.getItakuGyosha3Massho());
+        hihoken.add(paramter());
+        List<HihokenshashoChoBusiness> business = HihokenshashoChohyoFinder.createInstance().createHihokenshashoChohyo(hihoken).records();
+        for (HihokenshashoChoBusiness item : business) {
+            HihokenshashoB4Item bodyItem = new HihokenshashoB4Item(item.get有効期限1(), item.get被保険者番号(), item.get郵便番号(),
+                    item.get行政区1(), item.get行政区2(), item.get住所(), item.get氏名カナ(), item.get氏名(), item.get明治(),
+                    item.get大正(), item.get昭和(), item.get生年月日(), item.get男(), item.get女(),
+                    item.get交付年月日(), item.get再交付(), item.get保険者NO1(), item.get保険者NO2(), item.get保険者NO3(),
+                    item.get保険者NO4(), item.get保険者NO5(), item.get保険者NO6(), item.get要介護認定区分(), item.get認定年月日(),
+                    item.get認定有効期間開始年月日(), item.get認定有効期間終了年月日(), item.get訪問期間開始年月日(), item.get訪問期間終了年月日(),
+                    item.getサービス単位(), item.getサービス(), item.get点数(), item.getサービス種類1(), item.getサービス種類2(),
+                    item.getサービス種類3(), item.getサービス種類4(), item.getサービス種類5(), item.getサービス種類6(),
+                    item.getサービス種類1つ目の限度額(), item.getサービス種類2つ目の限度額(), item.getサービス種類3つ目の限度額(),
+                    item.getサービス種類4つ目の限度額(), item.getサービス種類5つ目の限度額(), item.getサービス種類6つ目の限度額(),
+                    item.get点数1(), item.get点数2(), item.get点数3(), item.get点数4(), item.get点数5(), item.get点数6(), item.get認定審査会意見等(),
+                    item.get再交付2(), item.get給付制限1(), item.get給付制限長1(), item.get給付制限2(), item.get給付制限長2(), item.get給付制限3(),
+                    item.get給付制限長3(), item.get給付制限4(), item.get給付制限長4(), item.get給付制限5(), item.get給付制限長5(),
+                    item.get給付制限6(), item.get給付制限長6(), item.get給付制限開始年月日1(), item.get給付制限終了年月日1(),
+                    item.get給付制限開始年月日2(), item.get給付制限終了年月日2(), item.get給付制限開始年月日3(), item.get給付制限終了年月日3(),
+                    item.get居宅介護事業者1(), item.get届出年月日1(), item.get居宅介護事業者2(), item.get居宅介護事業者星2(),
+                    item.get居宅介護事業者取消2(), item.get届出年月日2(), item.get届出年月日星2(), item.get届出年月日取消2(),
+                    item.get居宅介護事業者3(), item.get居宅介護事業者長星3(), item.get居宅介護事業者取消3(), item.get届出年月日3(),
+                    item.get届出年月日星3(), item.get届出年月日取消3(), item.get施設種類11(), item.get施設名1(), item.get入所チェック1(),
+                    item.get入院チェック1(), item.get退所チェック1(), item.get退院チェック1(), item.get入所年月日1(), item.get退院年月日1(),
+                    item.get施設種類2(), item.get施設名2(), item.get入所チェック2(), item.get入院チェック2(), item.get退所チェック2(),
+                    item.get退所チェック2(), item.get入所年月日2(), item.get退院年月日2(), item.get連番(), item.get性障害1(), item.get性障害2(),
+                    item.get構成性別1(), item.get構成性別2(), item.get居宅介護事業者長1(), item.get居宅介護事業者長2(),
+                    item.get居宅介護事業者長星2(), item.get居宅介護事業者長取消2(), item.get居宅介護事業者長3(),
+                    item.get居宅介護事業者長星3(), item.get居宅介護事業者長取消3());
             items.add(bodyItem);
         }
         return items;
@@ -161,27 +275,139 @@ public class TotalHandler {
      */
     public List<ShikakushashoBodyItem> shikakushasho() {
         List<ShikakushashoBodyItem> items = new ArrayList<>();
-        // TODO QA1050 パラメタ不明
-        KaigoHokenShikakushashoDataBusiness business = KaigoHokenShikakushasho.createInstance().setKaigoHokenShikakushasho(null);
-        ShikakushashoBodyItem item = new ShikakushashoBodyItem(business.getサーブタイトル(), business.get有効期限(), business.get被保険者番号(),
-                business.get被保険者住所(), business.get被保険者フリガナ(), business.get被保険者氏名(), business.get明治(), business.get大正(),
-                business.get昭和(), business.get被保険者性別(), business.get被保険者生年月日(), business.get交付年月日(), business.get要介護状態区分等(),
-                business.get認定年月日(), business.get認定の有効期間開始年月日(), business.get認定の有効期間終了年月日(),
-                business.get居宅サービス等の単位(), business.get居宅サービス等の区分支給限度開始年月日(),
-                business.get居宅サービス等の区分支給限度終了年月日(), business.get居宅サービス等の単位種類(), business.get居宅サービス等の単位(),
-                business.getうち種類支給限度基準額の情報(), business.get認定審査会の意見及びサービスの種類の指定(), business.get給付制限の情報(),
-                business.get支援事業者情報の名称の内容1(), business.get支援事業者情報の名称の届出年月日1(), business.get支援事業者情報の名称の内容2(),
-                business.get支援事業者情報の名称の内容アスタリスク2(), business.get支援事業者情報の名称の内容取消2(),
-                business.get支援事業者情報の名称の届出年月日2(), business.get支援事業者情報の名称の届出年月日アスタリスク2(),
-                business.get支援事業者情報の名称の届出年月日取消2(), business.get支援事業者情報の名称の内容アスタリスク3(),
-                business.get支援事業者情報の名称の内容3(), business.get支援事業者情報の名称の内容取消3(), business.get支援事業者情報の名称の届出年月日3(),
-                business.get支援事業者情報の名称の届出年月日アスタリスク3(), business.get支援事業者情報の名称の届出年月日取消3(),
-                business.get介護保険施設等の情報(), business.get施設入所(), business.get施設入院(), business.get施設退所(), business.get施設退院(),
-                business.get保険者番号及びに保険者の名称及び印の保険者番号(), business.get保険者番号及びに保険者の名称及び印の住所(),
-                business.get保険者番号及びに保険者の名称及び印の保険者名称(), business.get保険者番号及びに保険者の名称及び印の電話番号(),
-                business.get連番(), business.get保険者番号及びに保険者の名称及び印の印字編集());
+        KaigoHokenShikakushashoDataBusiness business = KaigoHokenShikakushasho.createInstance().setKaigoHokenShikakushasho(shikaku());
+        ShikakushashoBodyItem item = new ShikakushashoBodyItem(business.getSubTitle(), business.getYukoKigen(), business.getHihokenshaNo(),
+                business.getJusho(), business.getHihokenshaNameKana(), business.getHihokenshaName(), business.getBirthGengoMeiji(),
+                business.getBirthGengoTaisho(), business.getBirthGengoShowa(), business.getSeibetsu(), business.getBirthYMD(),
+                business.getKofuYMD(), business.getYokaigoJotaiKubun(), business.getNinteiYMD(), business.getYukoKaishiYMD(),
+                business.getYukoShuryoYMD(), business.getTani(), business.getKubunShikyuYukoKaishiYMD(), business.getKubunShikyuYukoShuryoYMD(),
+                business.getTaniShurui(), business.getTani(), business.getShikyuGendoKizyungakuList(), business.getServiceShitei(),
+                business.getKyufuseigenDataList(), business.getJigyoshaName1(), business.getTodokedeYMD1(), business.getJigyoshaName2(),
+                business.getJigyoshaName2Asutarisuku(), business.getJigyoshaName2Masshosen(), business.getTodokedeYMD2(),
+                business.getTodokedeYMD2Asutarisuku(), business.getTodokedeYMD2Masshosen(), business.getJigyoshaName3Asutarisuku(),
+                business.getJigyoshaName3(), business.getJigyoshaName3Masshosen(), business.getTodokedeYMD3(),
+                business.getTodokedeYMD3Asutarisuku(), business.getTodokedeYMD3Masshosen(), business.getNyushoShisetsuDataList(),
+                business.getShisetsuNyusho(), business.getShisetsuNyuin(), business.getShisetsuTaisho(), business.getShisetsuTaiin(),
+                business.getHokenshaNo(), business.getHokenshaJusho(), business.getHokenshaName(), business.getHokenshaTelno(),
+                business.getRemban(), business.getDenshiKoin());
         items.add(item);
         return items;
+    }
+
+    private ShikakushashoHakkoBusiness shikaku() {
+        ShikakushashoHakkoBusiness shikaku = new ShikakushashoHakkoBusiness();
+        shikaku.set交付日(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko()
+                .getYukoKigenInfo().getTxtKofuDate().getValue().toString()));
+        shikaku.set保険者番号(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtHokensha().getValue());
+        shikaku.set保険者名称(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtHokensha().getValue());
+        shikaku.set有効期限(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo()
+                .getTxtYukoKigen().getValue().toDateString());
+        shikaku.set被保番号(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue());
+        shikaku.set介護状態(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtYokaigodo().getValue());
+        shikaku.set認定日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo()
+                .getTxtNinteiYMD().getValue().toDateString());
+        shikaku.set有効期間の開始日付(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo()
+                .getTxtNinteiYukoFromYMD().getValue().toDateString());
+        shikaku.set有効期間の終了日付(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo()
+                .getTxtNinteiYukoToYMD().getValue().toDateString());
+        shikaku.set区分支給限度額の有効開始日付(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko()
+                .getTabHihokenshaShikakuShosai().getTblGendoGaku().getKubunGendoGaku().getTxtYukoFromYMD().getValue().toDateString());
+        shikaku.set区分支給限度額の有効終了日付(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko()
+                .getTabHihokenshaShikakuShosai().getTblGendoGaku().getKubunGendoGaku().getTxtYukoToYMD().getValue().toDateString());
+        shikaku.set区分支給限度額の基準額(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTblGendoGaku().getKubunGendoGaku().getTxtKubunShikyuGendoKijunGaku().getValue().toString()));
+        List<dgShuruiShikyuGendoKijunGaku_Row> rowList = div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTblGendoGaku().getShuruiShikyuGendoKijungaku().getDgShuruiShikyuGendoKijunGaku().getDataSource();
+        List<ShuruiShikyuGendoKizyunngakuBusiness> list = new ArrayList<>();
+        for (dgShuruiShikyuGendoKijunGaku_Row row : rowList) {
+            ShuruiShikyuGendoKizyunngakuBusiness shurui = new ShuruiShikyuGendoKizyunngakuBusiness();
+            shurui.setShuruiShikyuKizyunngaku(row.getGendoGaku());
+            shurui.setServiceShurui(row.getServiceShurui());
+            list.add(shurui);
+        }
+        shikaku.setうち種類支給限度基準額の情報(list);
+        shikaku.set種類の指定(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai().getTplShinsakaiIken()
+                .getTxtShinsakaiIken().getValue());
+        List<KyufuseigenBusiness> jushoList = new ArrayList<>();
+        KyufuseigenBusiness jusho1 = new KyufuseigenBusiness();
+        jusho1.setKyufuseigenNaiyo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenNaiyo1().getValue());
+        jusho1.setKyufuseigenKaishiYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getFromValue().toDateString());
+        jusho1.setKyufuseigenShuryoYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getToValue().toDateString());
+        jushoList.add(jusho1);
+        KyufuseigenBusiness jusho2 = new KyufuseigenBusiness();
+        jusho2.setKyufuseigenNaiyo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenNaiyo2().getValue());
+        jusho2.setKyufuseigenKaishiYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getFromValue().toDateString());
+        jusho2.setKyufuseigenShuryoYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getToValue().toDateString());
+        jushoList.add(jusho2);
+        KyufuseigenBusiness jusho3 = new KyufuseigenBusiness();
+        jusho3.setKyufuseigenNaiyo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenNaiyo3().getValue());
+        jusho3.setKyufuseigenKaishiYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getFromValue().toDateString());
+        jusho3.setKyufuseigenShuryoYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getToValue().toDateString());
+        jushoList.add(jusho3);
+        shikaku.set給付制限の情報(jushoList);
+        List<ShienJigyoshaBusiness> shutoList = new ArrayList<>();
+        ShienJigyoshaBusiness shuto1 = new ShienJigyoshaBusiness();
+        shuto1.setTodokedeYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTodokedeYMD1().getValue().toString()));
+        shuto1.setJigyosha(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtJigyosha1().getValue());
+        shuto1.setTekiyoKaishiYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTekiyoStYMD1().getValue().toString()));
+        ShienJigyoshaBusiness shuto2 = new ShienJigyoshaBusiness();
+        shuto2.setTodokedeYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTodokedeYMD2().getValue().toString()));
+        shuto2.setJigyosha(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtJigyosha2().getValue());
+        shuto2.setTekiyoKaishiYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTekiyoStYMD2().getValue().toString()));
+        ShienJigyoshaBusiness shuto3 = new ShienJigyoshaBusiness();
+        shuto3.setTodokedeYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTodokedeYMD3().getValue().toString()));
+        shuto3.setJigyosha(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtJigyosha3().getValue());
+        shuto3.setTekiyoKaishiYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShienJigyosha().getTxtTekiyoStYMD3().getValue().toString()));
+        shutoList.add(shuto1);
+        shutoList.add(shuto2);
+        shutoList.add(shuto3);
+        shikaku.set支援事業者の情報(shutoList);
+        List<NyushoShisetsuBusiness> nyutaiList = new ArrayList<>();
+        NyushoShisetsuBusiness nyutai1 = new NyushoShisetsuBusiness();
+        nyutai1.setShisetsuNyushoYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate1().getValue().toString()));
+        nyutai1.setShisetsuTaishoYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate1().getValue().toString()));
+        nyutai1.setNyushoShisetsuName(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtNyushoShisetsu1().getValue());
+        NyushoShisetsuBusiness nyutai2 = new NyushoShisetsuBusiness();
+        nyutai2.setShisetsuNyushoYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate2().getValue().toString()));
+        nyutai2.setShisetsuTaishoYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate2().getValue().toString()));
+        nyutai2.setNyushoShisetsuName(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtNyushoShisetsu2().getValue());
+        NyushoShisetsuBusiness nyutai3 = new NyushoShisetsuBusiness();
+        nyutai3.setShisetsuNyushoYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate2().getValue().toString()));
+        nyutai3.setShisetsuTaishoYMD(new RString(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate2().getValue().toString()));
+        nyutai3.setNyushoShisetsuName(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getTabHihokenshaShikakuShosai()
+                .getTplShisetsuNyutaisho().getTxtNyushoShisetsu3().getValue());
+        nyutaiList.add(nyutai1);
+        nyutaiList.add(nyutai2);
+        nyutaiList.add(nyutai3);
+        shikaku.set介護保険施設等の情報(nyutaiList);
+        shikaku.set識別コード(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード().getColumnValue());
+        return shikaku;
     }
 
     /**

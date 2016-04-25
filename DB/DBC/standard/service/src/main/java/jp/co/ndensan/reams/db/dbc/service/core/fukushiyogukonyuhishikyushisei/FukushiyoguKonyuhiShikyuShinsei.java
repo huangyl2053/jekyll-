@@ -705,12 +705,14 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 dbT3036Entity.setHiHokenshaNo(福祉用具購入費支給申請決定情報画面.get被保険者番号());
                 dbT3036Entity.setServiceTeikyoYM(福祉用具購入費支給申請決定情報画面.get提供_購入_年月());
                 dbT3036Entity.setSeiriNo(福祉用具購入費支給申請決定情報画面.get整理番号());
+                dbT3036Entity.setKetteiYMD(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().get決定年月日());
+                dbT3036Entity.setShikyuHushikyuKetteiKubun(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().get支給_不支給決定区分());
+                dbT3036Entity.setShiharaiKingaku(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().get支払金額());
                 dbT3036Entity.setShoKisaiHokenshaNo(dbT3034Entity.getShoKisaiHokenshaNo());
                 dbT3036Entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(dbT3036Entity);
                 修正前支給区分 = 支給区分_不支給;
             } else {
-                データ.setShoKisaiHokenshaNo(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().get証記載保険者番号());
                 データ.setKetteiYMD(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().get決定年月日());
                 データ.setShikyuHushikyuKetteiKubun(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().
                         get支給_不支給決定区分());
@@ -734,6 +736,14 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 dbT3053_Entity.setYoshikiNo(福祉用具購入費支給申請決定情報画面.get償還払集計().get様式番号());
                 dbT3053_Entity.setMeisaiNo(福祉用具購入費支給申請決定情報画面.get償還払集計().get明細番号());
                 dbT3053_Entity.setRenban(連番);
+                dbT3053Entity.setShinsaYM(福祉用具購入費支給申請決定情報画面.get決定日().getYearMonth());
+                dbT3053Entity.setShikyuKubunCode(福祉用具購入費支給申請決定情報画面.get償還払集計().get支給区分コード());
+                dbT3053Entity.setShikyuKingaku(福祉用具購入費支給申請決定情報画面.get償還払集計().get支払金額());
+                dbT3053Entity.setZougenten(福祉用具購入費支給申請決定情報画面.get償還払集計().get増減点());
+                dbT3053Entity.setSeikyugakuSagakuKingaku(福祉用具購入費支給申請決定情報画面.get償還払集計().get請求額差額金額());
+                dbT3053Entity.setZougenRiyu(福祉用具購入費支給申請決定情報画面.get償還払集計().get増減理由等());
+                dbT3053Entity.setHushikyuRiyu(福祉用具購入費支給申請決定情報画面.get償還払集計().get不支給理由等());
+                dbT3053Entity.setKounyuKaishuRireki(福祉用具購入費支給申請決定情報画面.get償還払集計().get購入_改修履歴等());
                 dbT3053_Entity.setState(EntityDataState.Added);
                 償還払請求集計Dac.save(dbT3053_Entity);
                 修正前支給区分 = 支給区分_不支給;
@@ -771,6 +781,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                     dbT3048_Entity.setYoshikiNo(償還払請求福祉用具販売費.get様式番号());
                     dbT3048_Entity.setMeisaiNo(償還払請求福祉用具販売費.get明細番号());
                     dbT3048_Entity.setRenban(償還払請求福祉用具販売費.get連番());
+                    dbT3048Entity.setSagakuKingaku(償還払請求福祉用具販売費.get差額金額());
                     dbT3048_Entity.setState(EntityDataState.Added);
                     償還払請求福祉用具販売費Dac.save(dbT3048_Entity);
                     修正前支給区分 = 支給区分_不支給;

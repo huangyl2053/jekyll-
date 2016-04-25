@@ -68,7 +68,13 @@ public class NinteiShinseiJohoValidate {
         return false;
     }
 
-    //主治医
+    /**
+     * 主治医のチェック処理です。
+     *
+     * @param shujiiCode 主治医コード
+     * @param shujiiName 主治医名
+     * @return チェック結果
+     */
     public boolean validateShujii(RString shujiiCode, RString shujiiName) {
         if (shujiiCode.isEmpty() && shujiiName.isEmpty()) {
             return false;

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -30,14 +29,8 @@ public class MainPanel {
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
 
-        // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        // TODO 該当者検索画面ViewState．被保険者番号
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(new RString("88888888")));
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        // TODO 該当者検索画面ViewState．賦課年度
-        ViewStateHolder.put(ViewStateKeys.賦課年度, new FlexibleYear(new RString("2016")));
         FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
 
         MainPanelHandler handler = new MainPanelHandler(div);

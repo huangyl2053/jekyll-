@@ -173,7 +173,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 「前へ」ボタンの操作処理を行う。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onClick_btnBeforeTokkiJiko() {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -204,7 +203,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 「次へ」ボタンの操作処理を行う。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onClick_btnAfterTokkiJiko() {
 
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
@@ -254,7 +252,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 特記事項番号1のlostfocus。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo1() {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -318,7 +315,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 特記事項番号2のlostfocus。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo2() {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -381,7 +377,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 特記事項番号3のlostfocus。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo3() {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -445,7 +440,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 特記事項番号4のlostfocus。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo4() {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -509,7 +503,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 特記事項番号5のlostfocus。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo5() {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -568,7 +561,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 「特記事項を保存する」ボタンの操作処理を行う。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onClick_Save() {
 
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
@@ -631,7 +623,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 「入力内容を取り消し」ボタンの操作処理を行う。
      *
      */
-    @SuppressWarnings("unchecked")
     public void onClick_btnCancel() {
 
         gaikyoTokkiNyurokuMap = ViewStateHolder.get(DBE2210003Keys.入力内容を取り消す用データ, HashMap.class);
@@ -840,7 +831,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * @param record record
      * @param 特記事項 特記事項
      */
-    @SuppressWarnings("unchecked")
     public void tokkiJikoHasChanged(int record, RString 特記事項) {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -865,7 +855,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * @param record record
      * @param マスキングされたファイルID マスキングされたファイルID
      */
-    @SuppressWarnings("unchecked")
     public void imgHasChanged(int record, RString マスキングされたファイルID) {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
@@ -891,7 +880,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      *
      * @return notEmptyFlg notEmptyFlg
      */
-    @SuppressWarnings("unchecked")
     public boolean onClick_btnBack() {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);

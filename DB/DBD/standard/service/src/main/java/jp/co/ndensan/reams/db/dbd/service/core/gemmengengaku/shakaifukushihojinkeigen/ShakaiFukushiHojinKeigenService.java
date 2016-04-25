@@ -71,6 +71,7 @@ public class ShakaiFukushiHojinKeigenService {
     @Transaction
     public List<ShakaifukuRiyoshaFutanKeigen> load社会福祉法人等利用者負担軽減申請All(HihokenshaNo 被保険者番号) {
         List<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = new ArrayList<>();
+        //TODO DBDEnum.減免減額種類.社会福祉法人等利用者負担軽減.コード
         ShakaiFukushiHojinKeigenParameter 検索条件 = new ShakaiFukushiHojinKeigenParameter(
                 被保険者番号, GemmenGengakuShurui.社会福祉法人等軽減.getコード());
         IShakaiFukushiHojinKeigenMapper mapper = mapperProvider.create(IShakaiFukushiHojinKeigenMapper.class);
@@ -93,7 +94,6 @@ public class ShakaiFukushiHojinKeigenService {
         if (null == 適用日 || 適用日.isEmpty()) {
             return FlexibleDate.EMPTY;
         }
-        FlexibleDate 有効期限;
         RString 有効期限RString;
         if (適用日.isBeforeOrEquals(new FlexibleDate(new RString("20050930")))) {
             有効期限RString = BusinessConfig.get(ConfigNameDBD.減免期限_法人減免,

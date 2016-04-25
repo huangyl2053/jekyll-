@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.PnlTotalSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.dgKeyakusya_Row;
@@ -39,6 +39,10 @@ public class PnlTotalSearchHandler {
     private final PnlTotalSearchDiv div;
     private static final RString 参照 = new RString("参照");
     private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
+    private static final RString 契約者選択 = new RString("契約者選択");
+    private static final RString 対象者検索 = new RString("対象者検索");
+    private static final RString 事業者検索 = new RString("事業者検索");
 
     /**
      * 初期化
@@ -61,29 +65,41 @@ public class PnlTotalSearchHandler {
 
     /**
      * 初期化設定
+     *
+     * @param 画面モード RString
      */
-    public void set初期化状態() {
+    public void set初期化状態(RString 画面モード) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (修正.equals(状態)) {
+        if (修正.equals(状態) || 削除.equals(状態)) {
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowSelectButtonColumn(false);
         } else if (参照.equals(状態)) {
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(createDropDownList());
-        JuryoininKeiyakuJigyosha data = ViewStateHolder
-                .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
-        if (data != null) {
-            ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
-                    .get(ViewStateKeys.基本情報パラメータ, ShokanJuryoininKeiyakushaParameter.class);
-            set基本情報パラメータ(parameter);
-            div.getPnlSearch().getTxtJigyoshakeiyakuNo().setValue(data.get契約事業者番号());
-            div.getPnlSearch().getTxtJigyoshakeiyakuName().setValue(new RString(data.get契約事業者名称().toString()));
-        } else {
+        if (画面モード == null || 画面モード.isEmpty()) {
             div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
             div.getPnlSearch().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
                     get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
                             SubGyomuCode.DBU介護統計報告).toString()));
+        } else {
+            ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
+                    .get(ViewStateKeys.基本情報パラメータ, ShokanJuryoininKeiyakushaParameter.class);
+            set基本情報パラメータ(parameter);
+            if (対象者検索.equals(画面モード)) {
+                // TODO QA No.511(Redmine#80700)
+                RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+                RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
+                div.getPnlSearch().getTxtHihokenshaNo().setValue(被保険者番号);
+                div.getPnlSearch().getTxtJigyoshakeiyakuName().setValue(被保険者名);
+            } else if (事業者検索.equals(画面モード)) {
+                JuryoininKeiyakuJigyosha data = ViewStateHolder
+                        .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                ViewStateHolder.put(ViewStateKeys.契約事業者番号, data.get契約事業者番号());
+                ViewStateHolder.put(ViewStateKeys.契約事業者名, data.get契約事業者名称().getColumnValue());
+                div.getPnlSearch().getTxtJigyoshakeiyakuNo().setValue(data.get契約事業者番号());
+                div.getPnlSearch().getTxtJigyoshakeiyakuName().setValue(data.get契約事業者名称().getColumnValue());
+            }
         }
         div.getPnlSearch().setDisplayNone(false);
         div.getPnlKeiyakusyaList().setDisplayNone(true);
@@ -146,10 +162,6 @@ public class PnlTotalSearchHandler {
                 KeiyakuServiceShurui.予防福祉用具.getコード(), KeiyakuServiceShurui.予防福祉用具.get名称()));
         keiyakuServiceShuruiList.add(new KeyValueDataSource(
                 KeiyakuServiceShurui.予防住宅改修.getコード(), KeiyakuServiceShurui.予防住宅改修.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                KeiyakuServiceShurui.償還払支給.getコード(), KeiyakuServiceShurui.償還払支給.get名称()));
-        keiyakuServiceShuruiList.add(new KeyValueDataSource(
-                KeiyakuServiceShurui.高額給付支給.getコード(), KeiyakuServiceShurui.高額給付支給.get名称()));
         return keiyakuServiceShuruiList;
     }
 
@@ -159,11 +171,9 @@ public class PnlTotalSearchHandler {
      * @param parameter パラメータ
      * @return List<ShokanJuryoininKeiyakusha>
      */
-    public List<ShokanJuryoininKeiyakusha> get契約者一覧(ShokanJuryoininKeiyakushaParameter parameter) {
+    public List<ShokanJuryoininKeiyakushaResult> get契約者一覧(ShokanJuryoininKeiyakushaParameter parameter) {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
-        // TODO
-//        return finder.getShokanJuryoininKeiyakushaList(parameter);
-        return null;
+        return finder.getShokanJuryoininKeiyakushaList(parameter);
     }
 
     /**
@@ -171,7 +181,7 @@ public class PnlTotalSearchHandler {
      *
      * @param shokanList List<ShokanJuryoininKeiyakusha>
      */
-    public void initializeGrid(List<ShokanJuryoininKeiyakusha> shokanList) {
+    public void initializeGrid(List<ShokanJuryoininKeiyakushaResult> shokanList) {
         div.getPnlSearch().setDisplayNone(true);
         div.getPnlKeiyakusyaList().setDisplayNone(false);
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(false);
@@ -182,22 +192,25 @@ public class PnlTotalSearchHandler {
         }
         int maxCount = div.getPnlSearch().getTxtMaxCount().getValue().intValue();
         int count = 0;
-        for (ShokanJuryoininKeiyakusha list : shokanList) {
+        for (ShokanJuryoininKeiyakushaResult list : shokanList) {
             dgKeyakusya_Row row = new dgKeyakusya_Row();
-            row.setTxtKeiyakuNo(list.get契約番号());
-            if (list.get契約サービス種類() != null && !list.get契約サービス種類().isEmpty()) {
-                row.setTxtServiceShurui(KeiyakuServiceShurui.toValue(list.get契約サービス種類()).get名称());
+            row.setTxtKeiyakuNo(list.getEntity().getDbt3078entity().getKeiyakuNo());
+            if (list.getEntity().getDbt3078entity().getKeiyakuServiceShurui() != null
+                    && !list.getEntity().getDbt3078entity().getKeiyakuServiceShurui().isEmpty()) {
+                row.setTxtServiceShurui(KeiyakuServiceShurui
+                        .toValue(list.getEntity().getDbt3078entity().getKeiyakuServiceShurui()).get名称());
             }
-            row.setTxtHihoNo(list.get被保険者番号().getColumnValue());
-            // TODO QA.334(Redmine#:78267)
-            row.setTxtShimei(new RString("宛名"));
-            row.getTxtKeiyakuShenseibi().setValue(new RDate(list.get申請年月日().toString()));
-            if (list.get決定年月日() != null && !list.get決定年月日().isEmpty()) {
-                row.getTxtKeiyakuKeteibi().setValue(new RDate(list.get決定年月日().toString()));
+            row.setTxtHihoNo(list.getEntity().getDbt3078entity().getHihokenshaNo().getColumnValue());
+            if (list.getEntity().get氏名().getName() != null) {
+                row.setTxtShimei(list.getEntity().get氏名().getName().getColumnValue());
             }
-            row.setTxtKeiyakuJigyoshaNo(list.get契約事業者番号());
-            // TODO QA.375(Redmine#:78535)
-            row.setTxtKeiyakuJigyoshamei(new RString("届出者事業者名称"));
+            row.getTxtKeiyakuShenseibi().setValue(new RDate(list.getEntity().getDbt3078entity().getShinseiYMD().toString()));
+            if (list.getEntity().getDbt3078entity().getKetteiYMD() != null
+                    && !list.getEntity().getDbt3078entity().getKetteiYMD().isEmpty()) {
+                row.getTxtKeiyakuKeteibi().setValue(new RDate(list.getEntity().getDbt3078entity().getKetteiYMD().toString()));
+            }
+            row.setTxtKeiyakuJigyoshaNo(list.getEntity().getDbt3078entity().getKeiyakuJigyoshaNo());
+            row.setTxtKeiyakuJigyoshamei(list.getEntity().getDbt3077entity().getKeiyakuJigyoshaName().getColumnValue());
             rowList.add(row);
             count = count + 1;
             if (count >= maxCount) {
@@ -235,6 +248,7 @@ public class PnlTotalSearchHandler {
                 row.getTxtKeiyakuJigyoshamei());
         ViewStateHolder.put(ViewStateKeys.契約者一覧情報, pnlTotalSearchParameter);
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
+        ViewStateHolder.put(ViewStateKeys.画面モード, 契約者選択);
         ViewStateHolder.put(ViewStateKeys.処理モード, 状態);
     }
 

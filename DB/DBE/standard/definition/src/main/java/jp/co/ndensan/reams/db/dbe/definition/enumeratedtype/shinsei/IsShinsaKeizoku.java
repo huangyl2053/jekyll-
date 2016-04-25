@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査継続区分を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsShinsaKeizoku {
 
@@ -32,7 +32,7 @@ public enum IsShinsaKeizoku {
      *
      * @return 審査継続区分のコード
      */
-    public boolean getコード() {
+    public boolean is継続する() {
         return code;
     }
 

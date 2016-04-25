@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 帳票制御汎用のデータアクセスクラスです。
  *
- * @reamsid_L DBC-9999-012 xicongwang
+ * @reamsid_L DBZ-9999-012 xicongwang
  */
 public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigyoHanyoEntity> {
 

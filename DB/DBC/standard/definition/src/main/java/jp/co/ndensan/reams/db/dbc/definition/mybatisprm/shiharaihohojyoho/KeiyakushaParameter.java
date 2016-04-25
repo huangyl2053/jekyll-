@@ -31,7 +31,7 @@ public class KeiyakushaParameter {
      * @param 整理番号 整理番号
      * @param 契約番号 契約番号
      */
-    private KeiyakushaParameter(HihokenshaNo 被保険者番号,
+    public KeiyakushaParameter(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             RString 契約番号) {
@@ -50,7 +50,7 @@ public class KeiyakushaParameter {
      * @param 契約番号 契約番号
      * @return 介護認定審査会委員情報パラメータ
      */
-    public static KeiyakushaParameter createParam(
+    public KeiyakushaParameter createParam(
             @lombok.NonNull HihokenshaNo 被保険者番号,
             @lombok.NonNull FlexibleYearMonth サービス提供年月,
             @lombok.NonNull RString 整理番号,

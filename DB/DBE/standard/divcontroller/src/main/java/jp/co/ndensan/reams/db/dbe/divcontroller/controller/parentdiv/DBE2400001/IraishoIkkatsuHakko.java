@@ -106,7 +106,8 @@ public class IraishoIkkatsuHakko {
                             div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号(),
                             div.getChkNinteiChosahyo().getSelectedKeys(),
                             Collections.<RString>emptyList(),
-                            Collections.<RString>emptyList());
+                            Collections.<RString>emptyList(),
+                            div.getTxtChosaDispMax().getValue());
             resultList = service.getNinteiChousaIrai(param).records();
         }
         if (STATE_SHUJII.equals(div.getState())) {
@@ -118,10 +119,22 @@ public class IraishoIkkatsuHakko {
                             div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号(),
                             Collections.<RString>emptyList(),
                             div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys(),
-                            div.getChkShujiiIkensho().getSelectedKeys());
+                            div.getChkShujiiIkensho().getSelectedKeys(),
+                            div.getTxtIkenshoDispMax().getValue());
             resultList = service.getShuziiIkenshoIrai(param).records();
         }
         getHandler(div).setDataGrid(resultList);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 条件をクリアするボタン押下します。
+     *
+     * @param div 依頼書一括発行Div
+     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     */
+    public ResponseData<IraishoIkkatsuHakkoDiv> onClick_btnJokenClear(IraishoIkkatsuHakkoDiv div) {
+        getHandler(div).clearJoken();
         return ResponseData.of(div).respond();
     }
 

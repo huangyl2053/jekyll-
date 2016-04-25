@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支給申請情報検索キー
  *
- * @author Qi
+ * @reamsid_L DBC-1021-100 chenaoqi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -24,7 +24,6 @@ public final class ShikyuShiseiJohoKensakuKey {
     private final RString 整理番号;
     private final JigyoshaNo 事業者番号;
     private final RString 様式番号;
-    // TODO 明細番号
     private final RString 明細番号;
 
     /**

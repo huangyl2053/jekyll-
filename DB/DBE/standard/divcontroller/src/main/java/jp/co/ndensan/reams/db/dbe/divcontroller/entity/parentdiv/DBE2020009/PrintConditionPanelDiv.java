@@ -5,17 +5,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020009;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * PrintConditionPanel のクラスファイル 
  * 
+ * @author 自動生成
  */
 public class PrintConditionPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,10 +27,8 @@ public class PrintConditionPanelDiv extends Panel {
     private DropDownList ddlTaishoShichoson;
     @JsonProperty("ddlTaishoNinteiChosainShozokuKikan")
     private DropDownList ddlTaishoNinteiChosainShozokuKikan;
-    @JsonProperty("txtNinteiChosaYoteiYMDFrom")
-    private TextBoxFlexibleDate txtNinteiChosaYoteiYMDFrom;
-    @JsonProperty("txtNinteiChosaYoteiYMDTo")
-    private TextBoxFlexibleDate txtNinteiChosaYoteiYMDTo;
+    @JsonProperty("txtNinteiChosaYoteiYMD")
+    private TextBoxDateRange txtNinteiChosaYoteiYMD;
     @JsonProperty("radJokyo")
     private RadioButton radJokyo;
     @JsonProperty("ddlTaishoNinteiChosain")
@@ -100,39 +97,21 @@ public class PrintConditionPanelDiv extends Panel {
     }
 
     /*
-     * gettxtNinteiChosaYoteiYMDFrom
-     * @return txtNinteiChosaYoteiYMDFrom
+     * gettxtNinteiChosaYoteiYMD
+     * @return txtNinteiChosaYoteiYMD
      */
-    @JsonProperty("txtNinteiChosaYoteiYMDFrom")
-    public TextBoxFlexibleDate getTxtNinteiChosaYoteiYMDFrom() {
-        return txtNinteiChosaYoteiYMDFrom;
+    @JsonProperty("txtNinteiChosaYoteiYMD")
+    public TextBoxDateRange getTxtNinteiChosaYoteiYMD() {
+        return txtNinteiChosaYoteiYMD;
     }
 
     /*
-     * settxtNinteiChosaYoteiYMDFrom
-     * @param txtNinteiChosaYoteiYMDFrom txtNinteiChosaYoteiYMDFrom
+     * settxtNinteiChosaYoteiYMD
+     * @param txtNinteiChosaYoteiYMD txtNinteiChosaYoteiYMD
      */
-    @JsonProperty("txtNinteiChosaYoteiYMDFrom")
-    public void setTxtNinteiChosaYoteiYMDFrom(TextBoxFlexibleDate txtNinteiChosaYoteiYMDFrom) {
-        this.txtNinteiChosaYoteiYMDFrom = txtNinteiChosaYoteiYMDFrom;
-    }
-
-    /*
-     * gettxtNinteiChosaYoteiYMDTo
-     * @return txtNinteiChosaYoteiYMDTo
-     */
-    @JsonProperty("txtNinteiChosaYoteiYMDTo")
-    public TextBoxFlexibleDate getTxtNinteiChosaYoteiYMDTo() {
-        return txtNinteiChosaYoteiYMDTo;
-    }
-
-    /*
-     * settxtNinteiChosaYoteiYMDTo
-     * @param txtNinteiChosaYoteiYMDTo txtNinteiChosaYoteiYMDTo
-     */
-    @JsonProperty("txtNinteiChosaYoteiYMDTo")
-    public void setTxtNinteiChosaYoteiYMDTo(TextBoxFlexibleDate txtNinteiChosaYoteiYMDTo) {
-        this.txtNinteiChosaYoteiYMDTo = txtNinteiChosaYoteiYMDTo;
+    @JsonProperty("txtNinteiChosaYoteiYMD")
+    public void setTxtNinteiChosaYoteiYMD(TextBoxDateRange txtNinteiChosaYoteiYMD) {
+        this.txtNinteiChosaYoteiYMD = txtNinteiChosaYoteiYMD;
     }
 
     /*

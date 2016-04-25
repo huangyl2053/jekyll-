@@ -64,13 +64,32 @@ public class NonyuTsuchIchiranReportProcess extends SimpleBatchProcessBase {
     private ReportSourceWriter<NonyuTsuchIchiranSource> reportSourceWriter;
     InputParameter<List<EditedHonSanteiTsuchiShoKyotsu>> 編集後本算定通知書共通情報;
     InputParameter<NonyuTsuchIchiranBatchParameter> バッチパラメータ;
-    InputParameter<RString> タイトル;
     InputParameter<Long> 出力順ID;
+    InputParameter<RString> 帳票作成日時;
+
+    /**
+     * 変数初期化
+     *
+     * @param 編集後本算定通知書共通情報 InputParameter<List<EditedHonSanteiTsuchiShoKyotsu>>
+     * @param バッチパラメータ InputParameter<NonyuTsuchIchiranBatchParameter>
+     * @param 出力順ID InputParameter<Long>
+     * @param 帳票作成日時 InputParameter<RString>
+     */
+    public NonyuTsuchIchiranReportProcess(InputParameter<List<EditedHonSanteiTsuchiShoKyotsu>> 編集後本算定通知書共通情報,
+            InputParameter<NonyuTsuchIchiranBatchParameter> バッチパラメータ,
+            InputParameter<Long> 出力順ID,
+            InputParameter<RString> 帳票作成日時) {
+        this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
+        this.バッチパラメータ = バッチパラメータ;
+        this.出力順ID = 出力順ID;
+        this.帳票作成日時 = 帳票作成日時;
+    }
 
     @Override
     protected void process() {
-//        作成したdataを帳票に引き渡す(編集後本算定通知書共通情報.getValue(), 出力順ID.getValue(),
-//                帳票作成日時.getValue(), タイトル.getValue());
+        作成したdataを帳票に引き渡す(編集後本算定通知書共通情報.getValue(), バッチパラメータ.getValue(), 出力順ID.getValue(),
+                帳票作成日時.getValue()
+        );
     }
 
     /**

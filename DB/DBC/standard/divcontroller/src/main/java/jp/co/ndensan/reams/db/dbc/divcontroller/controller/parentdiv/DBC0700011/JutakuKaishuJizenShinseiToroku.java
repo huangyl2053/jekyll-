@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JutakuKaishuJizenShinseiToroku {
 
     private static final RString 登録モード = new RString("登録");
-    private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
     private static final RString 要介護状態区分_KEY = new RString("threeUp");
@@ -66,7 +65,7 @@ public class JutakuKaishuJizenShinseiToroku {
 //        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("800000008"));
 //        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
 //        ViewStateHolder.put(ViewStateKeys.整理番号, new RString("0000000001"));
-//        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth("199008"));
+//        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth("201604"));
         被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().onLoad(識別コード);
@@ -182,6 +181,18 @@ public class JutakuKaishuJizenShinseiToroku {
     }
 
     /**
+     * チェックボックスの変更
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData<JutakuKaishuJizenShinseiTorokuDiv>
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onClick_chkResetInfo(JutakuKaishuJizenShinseiTorokuDiv div) {
+        JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
+        handler.チェックボックスの変更();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「過去の住宅改修費を確認する」ボタン
      *
      * @param div JutakuKaishuJizenShinseiTorokuDiv
@@ -213,7 +224,7 @@ public class JutakuKaishuJizenShinseiToroku {
         handler.住宅改修内容のチェック();
         handler.費用額合計の設定();
 
-        if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg()) && handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
+        if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
                 && !selectedItems.contains(要介護状態区分)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
@@ -231,7 +242,7 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidSandannkaiMsgFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
-        } else if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg()) && !handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
+        } else if (!非表示用フラグ_TRUE.equals(div.getHidSandannkaiMsgFlg()) && !handler.要介護状態３段階変更の有効性チェック(hihokenshaNo)
                 && selectedItems.contains(要介護状態区分)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
@@ -244,14 +255,22 @@ public class JutakuKaishuJizenShinseiToroku {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 selectedItems.remove(要介護状態区分);
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
-                        .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setDataSource(selectedItems);
+                        .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setSelectedItems(selectedItems);
                 div.setHidSandannkaiMsgFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidSandannkaiMsgFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
         }
-        限度額リセットチェック(div, hihokenshaNo);
+        QuestionMessage msg = 限度額リセットチェック(div, hihokenshaNo);
+        if (msg != null) {
+            if (QuestionMessage.NO_MESSAGE.getCode().equals(msg.getCode())) {
+                return ResponseData.of(div).respond();
+            } else {
+                return ResponseData.of(div).addMessage(msg).respond();
+            }
+        }
+
         boolean 限度額のチェック結果 = handler.限度額チェック(hihokenshaNo, seiriNo);
         if (!限度額のチェック結果) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitNGMsgDisplayedFlg())) {
@@ -266,33 +285,31 @@ public class JutakuKaishuJizenShinseiToroku {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 selectedItems.remove(住宅住所変更);
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
-                        .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setDataSource(selectedItems);
+                        .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setSelectedItems(selectedItems);
             } else {
                 div.setHidLimitNGMsgDisplayedFlg(RString.EMPTY);
                 return ResponseData.of(div).respond();
             }
         }
-
         handler.支払結果の設定(hihokenshaNo);
-
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<JutakuKaishuJizenShinseiTorokuDiv> 限度額リセットチェック(JutakuKaishuJizenShinseiTorokuDiv div,
+    private QuestionMessage 限度額リセットチェック(JutakuKaishuJizenShinseiTorokuDiv div,
             HihokenshaNo hihokenshaNo) {
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         KeyValueDataSource 住宅住所変更 = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
         if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
-                && handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
+                && !handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
                 && !selectedItems.contains(住宅住所変更)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgDisplayedFlg())) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().evaluate());
                 div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
-                return ResponseData.of(div).addMessage(message).respond();
+                return message;
             }
             if (new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
@@ -302,26 +319,28 @@ public class JutakuKaishuJizenShinseiToroku {
                 div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
+                return new QuestionMessage(QuestionMessage.NO_MESSAGE.getCode(), QuestionMessage.NO_MESSAGE.evaluate());
             }
         } else if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgNotNeedFlg())
-                && !handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
+                && handler.改修住所変更による限度額リセットチェック(hihokenshaNo)
                 && selectedItems.contains(住宅住所変更)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidLimitMsgDisplayedFlg())) {
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode(),
                         DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().evaluate());
                 div.setHidLimitMsgDisplayedFlg(非表示用フラグ_TRUE);
-                return ResponseData.of(div).addMessage(message).respond();
+                return message;
             }
             if (new RString(DbcQuestionMessages.改修住所変更_限度額リセット対象外.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 selectedItems.remove(住宅住所変更);
-                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
-                        .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().setDataSource(selectedItems);
+                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                        .getChkResetInfo().setSelectedItems(selectedItems);
                 div.setHidLimitMsgNotNeedFlg(非表示用フラグ_TRUE);
             } else {
                 div.setHidLimitMsgNotNeedFlg(RString.EMPTY);
+                return new QuestionMessage(QuestionMessage.NO_MESSAGE.getCode(), QuestionMessage.NO_MESSAGE.evaluate());
             }
         }
         return null;
@@ -340,8 +359,45 @@ public class JutakuKaishuJizenShinseiToroku {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
 
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        boolean 入力チェック結果 = false;
         if (!削除モード.equals(state)) {
-            削除以外のチェック(div, handler, state, hihokenshaNo);
+            入力チェック結果 = handler.入力チェック(state, hihokenshaNo);
+        }
+        if (入力チェック結果) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(
+                        DbcQuestionMessages.旧措置者_保存確認.getMessage().getCode(),
+                        DbcQuestionMessages.旧措置者_保存確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbcQuestionMessages.旧措置者_保存確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+
+//        if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
+//            throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate().toString());
+//        }
+        boolean 確認対象変更有無チェック結果 = false;
+        if (!削除モード.equals(state)) {
+            確認対象変更有無チェック結果 = handler.確認対象変更有無チェック();
+        }
+        if (確認対象変更有無チェック結果) {
+            if (!非表示用フラグ_TRUE.equals(div.getHidInputCheckMsgDisplayedFlg())) {
+                QuestionMessage message = new QuestionMessage(
+                        DbcQuestionMessages.限度額変更確認.getMessage().getCode(),
+                        DbcQuestionMessages.限度額変更確認.getMessage().evaluate());
+                div.setHidInputCheckMsgDisplayedFlg(非表示用フラグ_TRUE);
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbcQuestionMessages.限度額変更確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                div.setHidInputCheckMsgDisplayedFlg(RString.EMPTY);
+                return ResponseData.of(div).respond();
+            }
         }
         if (削除モード.equals(state)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidInputConfirmMsgDisplayedFlg())) {
@@ -385,46 +441,6 @@ public class JutakuKaishuJizenShinseiToroku {
         handler.承認結果通知書作成(hihokenshaNo, 識別コード, seiriNo, state);
 
         return ResponseData.of(div).setState(更新完了);
-    }
-
-    private ResponseData<JutakuKaishuJizenShinseiTorokuDiv> 削除以外のチェック(
-            JutakuKaishuJizenShinseiTorokuDiv div,
-            JutakuKaishuJizenShinseiTorokuDivHandler handler,
-            RString state, HihokenshaNo hihokenshaNo) {
-        boolean 入力チェック結果 = handler.入力チェック(state, hihokenshaNo);
-        if (入力チェック結果) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.旧措置者_保存確認.getMessage().getCode(),
-                        DbcQuestionMessages.旧措置者_保存確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbcQuestionMessages.旧措置者_保存確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-        }
-
-//        if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
-//            throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate().toString());
-//        }
-        boolean 確認対象変更有無チェック結果 = handler.確認対象変更有無チェック();
-        if (確認対象変更有無チェック結果) {
-            if (!非表示用フラグ_TRUE.equals(div.getHidInputCheckMsgDisplayedFlg())) {
-                QuestionMessage message = new QuestionMessage(
-                        DbcQuestionMessages.限度額変更確認.getMessage().getCode(),
-                        DbcQuestionMessages.限度額変更確認.getMessage().evaluate());
-                div.setHidInputCheckMsgDisplayedFlg(非表示用フラグ_TRUE);
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(DbcQuestionMessages.限度額変更確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-        }
-        return null;
     }
 
     /**

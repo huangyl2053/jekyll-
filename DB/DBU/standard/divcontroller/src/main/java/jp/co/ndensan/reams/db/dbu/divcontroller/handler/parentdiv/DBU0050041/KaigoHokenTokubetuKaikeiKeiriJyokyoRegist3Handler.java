@@ -257,9 +257,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         if (!実質的な収支についてデータs.isEmpty()) {
             data実質的な収支についてデータ = 実質的な収支についてデータs.get(0);
         }
-        set前年度以前データ(data前年度以前データ);
-        set今年度データ(data今年度データ);
-        set実質的な収支についてデータ(data実質的な収支についてデータ);
+        if (data前年度以前データ != null) {
+            set前年度以前データ(data前年度以前データ);
+        }
+        if (data今年度データ != null) {
+            set今年度データ(data今年度データ);
+        }
+        if (data実質的な収支についてデータ != null) {
+            set実質的な収支についてデータ(data実質的な収支についてデータ);
+        }
         if ((null == data前年度以前データ || data前年度以前データ.get詳細データエリア().isEmpty())
                 && (null == data今年度データ || data今年度データ.get詳細データエリア().isEmpty())
                 && (null == data実質的な収支についてデータ || data実質的な収支についてデータ.get詳細データエリア().isEmpty())

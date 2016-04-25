@@ -93,6 +93,9 @@
         AND DbT5101."shinseishoKanriNo" NOT IN
         (SELECT "shinseishoKanriNo"
         FROM rgdb."DbT5502ShinsakaiWariateJoho")
+        <if test="isIchijiHanteiGo">
+            AND DbT5105."maskingKanryoYMD" IS NOT NULL
+        </if>
         ORDER BY
         DbT5101."shinsakaiYusenWaritsukeKubunCode" DESC
         , DbT5101."ninteiShinseiYMD" ASC

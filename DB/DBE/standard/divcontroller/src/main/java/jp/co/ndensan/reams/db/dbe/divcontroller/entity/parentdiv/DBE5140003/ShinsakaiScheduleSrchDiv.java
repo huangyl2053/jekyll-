@@ -10,8 +10,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinsakaiScheduleSrch のクラスファイル。
- *
+ * ShinsakaiScheduleSrch のクラスファイル
  */
 public class ShinsakaiScheduleSrchDiv extends Panel {
 
@@ -30,6 +29,8 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
     private CheckBoxList chkShinsakaiScheduleKagami;
     @JsonProperty("chkShinsakaiScheduleNenkan")
     private CheckBoxList chkShinsakaiScheduleNenkan;
+    @JsonProperty("txtNendo")
+    private TextBoxDate txtNendo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -107,6 +108,24 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
     @JsonProperty("chkShinsakaiScheduleNenkan")
     public void setChkShinsakaiScheduleNenkan(CheckBoxList chkShinsakaiScheduleNenkan) {
         this.chkShinsakaiScheduleNenkan = chkShinsakaiScheduleNenkan;
+    }
+
+    /*
+     * gettxtNendo
+     * @return txtNendo
+     */
+    @JsonProperty("txtNendo")
+    public TextBoxDate getTxtNendo() {
+        return txtNendo;
+    }
+
+    /*
+     * settxtNendo
+     * @param txtNendo txtNendo
+     */
+    @JsonProperty("txtNendo")
+    public void setTxtNendo(TextBoxDate txtNendo) {
+        this.txtNendo = txtNendo;
     }
 
     // </editor-fold>

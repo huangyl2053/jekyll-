@@ -9,21 +9,28 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShuto
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.DBA1040011StateName;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.DBA1040011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.ShikakuHenkouIdouDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1040011.ShikakuHenkouIdouHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.shikakuhenkouidou.HihokenshaShikakuHenkoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格変更異動のコントローラです。
@@ -32,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class ShikakuHenkouIdou {
 
+    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuHenkoIdo");
     private final HihokenshaShikakuHenkoManager henkoManager;
     private final HihokenshaShikakuShutokuManager shutokuManager;
 
@@ -51,8 +59,7 @@ public class ShikakuHenkouIdou {
      * @return ResponseData<ShikakuHenkouIdouDiv>
      */
     public ResponseData<ShikakuHenkouIdouDiv> onLoad(ShikakuHenkouIdouDiv div) {
-//        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
-        TaishoshaKey key = new TaishoshaKey(new HihokenshaNo(new RString("20160409")), new ShikibetsuCode(new RString("000000000022502")), SetaiCode.EMPTY);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         div.getCcdKaigoAtenaInfo().onLoad(key.get識別コード());
         if (key.get被保険者番号() == null) {
             div.getCcdKaigoShikakuKihon().setVisible(true);
@@ -62,6 +69,13 @@ public class ShikakuHenkouIdou {
         HihokenshaShutokuJyoho hihokensha = shutokuManager.getSaishinDeta(
                 key.get識別コード(), key.get被保険者番号());
         getHandler(div).load(hihokensha);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            div.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(ShikakuHenkouValidationMessages.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -78,7 +92,19 @@ public class ShikakuHenkouIdou {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             saveGamenData(div);
         }
+        RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
+    }
+
+    /**
+     * 対象者検索に戻るボタン押下の場合、対象者検索画面に戻る
+     *
+     * @param div 資格変更異動DIV
+     * @return ResponseData<ShikakuHenkouIdouDiv>
+     */
+    public ResponseData<ShikakuHenkouIdouDiv> onClick_btnReSearch(ShikakuHenkouIdouDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
+        return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
     }
 
     private ShikakuHenkouIdouHandler getHandler(ShikakuHenkouIdouDiv div) {
@@ -99,5 +125,20 @@ public class ShikakuHenkouIdou {
             }
         }
         div.getCcdHihosyosai().施設入退所保存処理();
+    }
+
+    private static enum ShikakuHenkouValidationMessages implements IValidationMessage {
+
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        private final Message message;
+
+        private ShikakuHenkouValidationMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

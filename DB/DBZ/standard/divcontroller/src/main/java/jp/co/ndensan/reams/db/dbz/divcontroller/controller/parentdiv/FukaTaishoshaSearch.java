@@ -160,32 +160,7 @@ public class FukaTaishoshaSearch {
         boolean is全年度 = div.getSearchCondition().getCcdSearchCondition().get賦課年度().isMaxOrMin();
         IItemList<FukaTaishoshaRelateEntity> list = ItemList.empty();
         if (!result.records().isEmpty()) {
-            if (is全年度) {
-                RString 被保険者番号 = RString.EMPTY;
-                for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                    RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
-                    if (!被保険者番号.equals(被保険者番号_絞り込み前)) {
-                        list = list.added(entity);
-                        被保険者番号 = 被保険者番号_絞り込み前;
-                    }
-                }
-            } else {
-                RString 被保険者番号 = RString.EMPTY;
-                RString 賦課年度 = RString.EMPTY;
-                RString 通知書番号 = RString.EMPTY;
-                for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                    RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
-                    RString 賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
-                    RString 通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
-                    if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
-                            && 通知書番号.equals(通知書番号_絞り込み前))) {
-                        list = list.added(entity);
-                        被保険者番号 = 被保険者番号_絞り込み前;
-                        賦課年度 = 賦課年度_絞り込み前;
-                        通知書番号 = 通知書番号_絞り込み前;
-                    }
-                }
-            }
+            list = editList(result, is全年度);
         }
         SearchResult<FukaTaishoshaRelateEntity> newResult = SearchResult.of(list);
 
@@ -227,6 +202,39 @@ public class FukaTaishoshaSearch {
             // 画面状態遷移
             return ResponseData.of(div).setState(該当者一覧);
         }
+    }
+
+    private IItemList<FukaTaishoshaRelateEntity> editList(
+            SearchResult<FukaTaishoshaRelateEntity> result,
+            boolean is全年度) {
+        IItemList<FukaTaishoshaRelateEntity> list = ItemList.empty();
+        if (is全年度) {
+            RString 被保険者番号 = RString.EMPTY;
+            for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
+                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                if (!被保険者番号.equals(被保険者番号_絞り込み前)) {
+                    list = list.added(entity);
+                    被保険者番号 = 被保険者番号_絞り込み前;
+                }
+            }
+        } else {
+            RString 被保険者番号 = RString.EMPTY;
+            RString 賦課年度 = RString.EMPTY;
+            RString 通知書番号 = RString.EMPTY;
+            for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
+                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                RString 賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
+                RString 通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
+                if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
+                        && 通知書番号.equals(通知書番号_絞り込み前))) {
+                    list = list.added(entity);
+                    被保険者番号 = 被保険者番号_絞り込み前;
+                    賦課年度 = 賦課年度_絞り込み前;
+                    通知書番号 = 通知書番号_絞り込み前;
+                }
+            }
+        }
+        return list;
     }
 
     /**

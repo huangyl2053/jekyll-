@@ -55,6 +55,14 @@ public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBasePro
     public void initialize(ShikibetsuCode 識別コード);
 
     /**
+     * 施設入退所履歴に初期化を設定します。
+     *
+     * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
+     */
+    public void initialize(ShikibetsuCode 識別コード, RString 台帳種別);
+
+    /**
      * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
      */
     public void saveShisetsuNyutaisho();

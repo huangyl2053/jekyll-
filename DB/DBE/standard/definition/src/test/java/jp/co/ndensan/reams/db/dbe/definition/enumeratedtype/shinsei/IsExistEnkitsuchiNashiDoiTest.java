@@ -25,12 +25,12 @@ public class IsExistEnkitsuchiNashiDoiTest extends DbeTestBase {
 
     @Test
     public void 同意するを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistEnkitsuchiNashiDoi.同意する.getコード(), is(true));
+        assertThat(IsExistEnkitsuchiNashiDoi.同意する.is同意する(), is(true));
     }
 
     @Test
     public void 同意しないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistEnkitsuchiNashiDoi.同意しない.getコード(), is(false));
+        assertThat(IsExistEnkitsuchiNashiDoi.同意しない.is同意する(), is(false));
     }
 
     @Test
