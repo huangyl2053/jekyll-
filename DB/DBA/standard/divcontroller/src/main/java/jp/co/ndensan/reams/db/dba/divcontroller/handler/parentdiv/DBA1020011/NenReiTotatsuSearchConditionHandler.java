@@ -88,7 +88,6 @@ public class NenReiTotatsuSearchConditionHandler {
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
         if (!checkFlag2) {
-            // TODO 20160419  QA1081を待ち　
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２,
                     "前回処理期間終了日", "年齢到達期間開始日")));
         }
