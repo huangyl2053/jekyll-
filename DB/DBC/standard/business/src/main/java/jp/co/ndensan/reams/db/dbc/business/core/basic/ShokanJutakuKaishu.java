@@ -245,7 +245,7 @@ public class ShokanJutakuKaishu
     /**
      * 住宅改修住宅内容を返します。
      *
-     * @return
+     * @return 住宅改修住宅内容
      */
     public RString get住宅改修住宅内容() {
         return entity.getJutakuKaishuNaiyo();
