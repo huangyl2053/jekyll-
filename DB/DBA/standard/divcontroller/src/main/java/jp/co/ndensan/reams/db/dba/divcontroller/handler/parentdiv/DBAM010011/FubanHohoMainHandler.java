@@ -5,12 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBAM010011;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.HihokenshaNoFubammotoJoho;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.HihokenshaNoFubanHoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.FubanHohoMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -44,20 +49,52 @@ public class FubanHohoMainHandler {
      * 被保険者番号付番方法情報へのデータを設定します。
      */
     public void setFubanHoho() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        KeyValueDataSource bangoFubanHohoData1 = new KeyValueDataSource(HihokenshaNoFubanHoho.カスタマイズ付番.getコード(),
+                HihokenshaNoFubanHoho.カスタマイズ付番.get名称());
+        KeyValueDataSource bangoFubanHohoData2 = new KeyValueDataSource(HihokenshaNoFubanHoho.任意手入力付番.getコード(),
+                HihokenshaNoFubanHoho.任意手入力付番.get名称());
+        KeyValueDataSource bangoFubanHohoData3 = new KeyValueDataSource(HihokenshaNoFubanHoho.住民コード付番.getコード(),
+                HihokenshaNoFubanHoho.住民コード付番.get名称());
+        KeyValueDataSource bangoFubanHohoData4 = new KeyValueDataSource(HihokenshaNoFubanHoho.自動連番MCD10付番.getコード(),
+                HihokenshaNoFubanHoho.自動連番MCD10付番.get名称());
+        KeyValueDataSource bangoFubanHohoData5 = new KeyValueDataSource(HihokenshaNoFubanHoho.自動連番付番.getコード(),
+                HihokenshaNoFubanHoho.自動連番付番.get名称());
+        dataSource.add(bangoFubanHohoData1);
+        dataSource.add(bangoFubanHohoData2);
+        dataSource.add(bangoFubanHohoData3);
+        dataSource.add(bangoFubanHohoData4);
+        dataSource.add(bangoFubanHohoData5);
+        div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().setDataSource(dataSource);
+        dataSource.clear();
+        KeyValueDataSource motoJohoData1 = new KeyValueDataSource(HihokenshaNoFubammotoJoho.未設定.getコード(),
+                HihokenshaNoFubammotoJoho.未設定.get名称());
+        KeyValueDataSource motoJohoData2 = new KeyValueDataSource(HihokenshaNoFubammotoJoho.住民コード.getコード(),
+                HihokenshaNoFubammotoJoho.住民コード.get名称());
+        KeyValueDataSource motoJohoData3 = new KeyValueDataSource(HihokenshaNoFubammotoJoho.自動連番.getコード(),
+                HihokenshaNoFubammotoJoho.自動連番.get名称());
+        dataSource.add(motoJohoData1);
+        dataSource.add(motoJohoData2);
+        dataSource.add(motoJohoData3);
+        div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().setDataSource(dataSource);
         div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().setSelectedKey(BusinessConfig.get(
                 ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格));
         div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().setSelectedKey(BusinessConfig.get(
                 ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, SubGyomuCode.DBA介護資格));
         RString 開始位置 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, SubGyomuCode.DBA介護資格);
-        div.getFubanHoho().getFubanMotoJoho().getTxtKaishiKetaIchi().setValue(開始位置.isNullOrEmpty() ? Decimal.ZERO : new Decimal(開始位置.toString()));
+        div.getFubanHoho().getFubanMotoJoho().getTxtKaishiKetaIchi().setValue(RString.isNullOrEmpty(開始位置)
+                ? Decimal.ZERO : new Decimal(開始位置.toString()));
         RString 有効桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, SubGyomuCode.DBA介護資格);
-        div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setValue(有効桁数.isNullOrEmpty() ? Decimal.ZERO : new Decimal(有効桁数.toString()));
+        div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setValue(RString.isNullOrEmpty(有効桁数)
+                ? Decimal.ZERO : new Decimal(有効桁数.toString()));
         RString 前付加桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数, SubGyomuCode.DBA介護資格);
-        div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().setValue(前付加桁数.isNullOrEmpty() ? Decimal.ZERO : new Decimal(前付加桁数.toString()));
+        div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().setValue(RString.isNullOrEmpty(前付加桁数)
+                ? Decimal.ZERO : new Decimal(前付加桁数.toString()));
         div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().setValue(BusinessConfig.get(
                 ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, SubGyomuCode.DBA介護資格));
         RString 後付加桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, SubGyomuCode.DBA介護資格);
-        div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().setValue(後付加桁数.isNullOrEmpty() ? Decimal.ZERO : new Decimal(後付加桁数.toString()));
+        div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().setValue(RString.isNullOrEmpty(後付加桁数)
+                ? Decimal.ZERO : new Decimal(後付加桁数.toString()));
         div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().setValue(BusinessConfig.get(
                 ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, SubGyomuCode.DBA介護資格));
     }

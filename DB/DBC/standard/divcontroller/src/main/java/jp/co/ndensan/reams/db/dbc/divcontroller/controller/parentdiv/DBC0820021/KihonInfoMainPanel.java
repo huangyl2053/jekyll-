@@ -127,6 +127,8 @@ public class KihonInfoMainPanel {
             HokenKyufuRitsu 保険給付率 = JutakuKaishuJizenShinsei.createInstance().getKyufuritsu(被保険者番号, サービス年月);
             if (保険給付率 != null) {
                 div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(保険給付率.value());
+            } else {
+                div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(null);
             }
         }
         return ResponseData.of(div).respond();
@@ -167,24 +169,25 @@ public class KihonInfoMainPanel {
      * @return ResponseData
      */
     public ResponseData<KihonInfoMainPanelDiv> onClick_btnSave(KihonInfoMainPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(削除.toString())).respond();
-            }
-            if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())) {
+        try {
+            if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+                if (!ResponseHolder.isReRequest()) {
+                    getHandler(div).保存処理();
+                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                            .replace(削除.toString())).respond();
+                }
                 return ResponseData.of(div).respond();
-            }
-            return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
-        } else {
-            boolean flag = getHandler(div).get内容変更状態();
-            if (flag) {
-                return check入力項目(div);
             } else {
-                return check内容変更(div);
+                boolean flag = getHandler(div).get内容変更状態();
+                if (flag) {
+                    return check入力項目(div);
+                } else {
+                    return check内容変更(div);
+                }
             }
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
     }
 
@@ -210,17 +213,11 @@ public class KihonInfoMainPanel {
     }
 
     private ResponseData<KihonInfoMainPanelDiv> 保存処理(KihonInfoMainPanelDiv div, RString 状態) {
+        RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
+        RDate 退所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue();
         if (!new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && !new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())) {
-            RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
-            if (入所_院年月日 == null) {
-                入所_院年月日 = RDate.MAX;
-            }
-            RDate 退所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue();
-            if (退所_院年月日 == null) {
-                退所_院年月日 = RDate.MAX;
-            }
+                .equals(ResponseHolder.getMessageCode()) && (入所_院年月日 != null && 退所_院年月日 != null)) {
             int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
             Decimal 外泊日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().getValue();
             Decimal 入所_院実日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().getValue();
@@ -254,12 +251,7 @@ public class KihonInfoMainPanel {
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString()))
                     .respond();
         }
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
-        }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**

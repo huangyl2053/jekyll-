@@ -76,7 +76,12 @@ public class JukyuShikakuShomeishoPrintService {
                             bodyItem.getYukoShuryoYMD(),
                             bodyItem.getShinsakaiIken(),
                             bodyItem.getBiko(),
-                            bodyItem.getRemban());
+                            bodyItem.getRemban(),
+                            ninshoshaSource.koinMojiretsu,
+                            ninshoshaSource.ninshoshaShimeiKakenai,
+                            ninshoshaSource.ninshoshaShimeiKakeru,
+                            ninshoshaSource.ninshoshaYakushokuMei1,
+                            ninshoshaSource.ninshoshaYakushokuMei2);
                     for (JukyuShikakuShomeishoReport report : toReports(new JukyuShikakuShomeishoJoho(bodyItem))) {
                         ReportSourceWriter<JukyuShikakuShomeishoReportSource> reportSourceWrite = new ReportSourceWriter(assembler);
                         report.writeBy(reportSourceWrite);
