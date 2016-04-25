@@ -26,6 +26,7 @@ public class ShinsakaiScheduleHakkoValidationHandler {
     private static final RString KIKAN = new RString("介護認定審査会開催予定期間");
     private static final RString NIIN = new RString("介護認定審査会委員");
     private static final RString JYOKEN = new RString("発行条件");
+    private static final RString NENDO = new RString("年度");
     private static final RString 介護認定審査会スケジュール表鑑 = new RString("key0");
     private final ShinsakaiScheduleHakkoDiv div;
 
@@ -81,6 +82,20 @@ public class ShinsakaiScheduleHakkoValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
                     UrErrorMessages.選択されていない, JYOKEN.toString()), div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule(),
                     div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami()));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 年間チェックです。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 年間チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
+                    UrErrorMessages.必須項目_追加メッセージあり, NENDO.toString()), div.getShinsakaiScheduleSrch().getTxtNendo()));
         }
         return validationMessages;
     }

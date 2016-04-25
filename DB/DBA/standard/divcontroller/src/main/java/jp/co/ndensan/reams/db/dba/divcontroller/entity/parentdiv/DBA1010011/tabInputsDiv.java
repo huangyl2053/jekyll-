@@ -8,16 +8,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IIryohokenRirekiCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.IRoreiFukushiNenkinShokaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
- * tabInputs のクラスファイル
- *
+ * tabInputs のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class tabInputsDiv extends TabContainer {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -121,7 +124,7 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain) {
+    public void  setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain) {
         this.getTplShikakuJoho().setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMain);
     }
 
@@ -131,7 +134,7 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setIryoHokenRirekiMain(IryoHokenRirekiMainDiv IryoHokenRirekiMain) {
+    public void  setIryoHokenRirekiMain(IryoHokenRirekiMainDiv IryoHokenRirekiMain) {
         this.getTplIryoHoken().setIryoHokenRirekiMain(IryoHokenRirekiMain);
     }
 
@@ -146,7 +149,7 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
+    public void  setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
         this.getTplRofukuNenkin().setRohukuNenkin(RohukuNenkin);
     }
 
@@ -161,7 +164,7 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
+    public void  setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
         this.getTplShisetsuNyutaisho().setShisetsuNyutaishoRireki(ShisetsuNyutaishoRireki);
     }
 
