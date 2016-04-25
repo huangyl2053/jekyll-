@@ -99,7 +99,7 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
         source.hokenryoGaku10Gatsu1 = set特徴期別金額(特徴期別金額4期);
         source.hokenryoGaku12Gatsu1 = set特徴期別金額(特徴期別金額5期);
         source.hokenryoGaku2Gatsu1 = set特徴期別金額(特徴期別金額6期);
-        source.SanteiKisoNendo1 = 編集後本算定通知書共通情報.get調定年度().toDateString();
+        source.santeiKisoNendo1 = 編集後本算定通知書共通情報.get調定年度().toDateString();
         if (編集後本算定通知書共通情報.get更正後() != null) {
             source.santeikisoKikan = 編集後本算定通知書共通情報.get更正後().get期間_自().concat(TOKEN)
                     .concat(編集後本算定通知書共通情報.get更正後().get期間_至());
