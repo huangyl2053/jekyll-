@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInItem;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity;
@@ -67,6 +69,13 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
                         並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁));
             }
         }
+        Comparator<ShokanFushikyuKetteiInItem> comparator = new Comparator<ShokanFushikyuKetteiInItem>() {
+            @Override
+            public int compare(ShokanFushikyuKetteiInItem s1, ShokanFushikyuKetteiInItem s2) {
+                return s2.get保険者番号().compareTo(s1.get保険者番号());
+            }
+        };
+        Collections.sort(itemList, comparator);
         return itemList;
 
     }
