@@ -160,12 +160,16 @@ public class DBD1030001 {
                     && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
                 getHandler(div).情報エリアクリア();
                 div.getDgShinseiList().setDisabled(false);
+                div.getShinseiList().setDisplayNone(false);
+                div.getShinseiDetail().setDisplayNone(true);
                 return ResponseData.of(div).setState(一覧);
             } else {
                 return ResponseData.of(div).respond();
             }
         }
         div.getDgShinseiList().setDisabled(false);
+        div.getShinseiList().setDisplayNone(false);
+        div.getShinseiDetail().setDisplayNone(true);
         return ResponseData.of(div).setState(一覧);
     }
 

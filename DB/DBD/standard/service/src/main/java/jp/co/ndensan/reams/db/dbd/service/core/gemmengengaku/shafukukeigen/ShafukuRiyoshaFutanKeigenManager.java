@@ -135,4 +135,23 @@ public class ShafukuRiyoshaFutanKeigenManager {
             減免減額申請Manager.save減免減額申請(減免減額申請);
         }
     }
+
+    /**
+     * 利用者負担額減額{@link ShakaifukuRiyoshaFutanKeigen}を保存します。
+     *
+     * @param 社会福祉法人等利用者負担軽減 {@link ShakaifukuRiyoshaFutanKeigen}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean delete社会福祉法人等利用者負担軽減(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減) {
+        requireNonNull(社会福祉法人等利用者負担軽減, UrSystemErrorMessages.値がnull.getReplacedMessage("社会福祉法人等利用者負担軽減"));
+        delete減免減額申請リスト(社会福祉法人等利用者負担軽減.getGemmenGengakuShinseiList());
+        return 1 == 社会福祉法人等利用者負担軽減Dac.delete(社会福祉法人等利用者負担軽減.toEntity());
+    }
+
+    private void delete減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
+            減免減額申請Manager.delete減免減額申請(減免減額申請);
+        }
+    }
 }
