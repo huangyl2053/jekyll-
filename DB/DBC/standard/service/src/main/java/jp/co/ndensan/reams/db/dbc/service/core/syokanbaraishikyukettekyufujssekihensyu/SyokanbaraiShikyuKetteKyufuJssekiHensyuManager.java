@@ -1144,6 +1144,6 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      * @return FlexibleDate
      */
     private RString format(int 項目) {
-        return new RString(String.format("%02d", 項目));
+        return new RString(String.format(定値_フォーマット.toString(), 項目));
     }
 }
