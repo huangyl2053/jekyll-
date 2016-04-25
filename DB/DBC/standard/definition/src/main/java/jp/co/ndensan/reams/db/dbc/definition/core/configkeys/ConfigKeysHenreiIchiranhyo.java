@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 請求明細給付管理票返戻保留一覧表情報コンフィグキーを表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ConfigKeysHenreiIchiranhyo {
 

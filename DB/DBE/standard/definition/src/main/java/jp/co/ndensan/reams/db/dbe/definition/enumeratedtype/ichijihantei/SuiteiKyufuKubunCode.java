@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認知機能及び状態安定性から推定される給付区分コードを表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum SuiteiKyufuKubunCode {
 

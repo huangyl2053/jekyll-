@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 業務分類です
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBX-9999-023 liangbc
  */
 public enum GyomuBunrui {
 

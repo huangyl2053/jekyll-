@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会メモの有無を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistShinsakaiMemo {
 

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定審査会意見種類を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum NinteiShinsakaiIkenShurui {
 

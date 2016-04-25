@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 帳票文言様式を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ChohyoMongonYoshiki {
 

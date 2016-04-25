@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 住所編集都道府県名表示有無を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum JushoHenshuTodofukenHyojiUmu {
 

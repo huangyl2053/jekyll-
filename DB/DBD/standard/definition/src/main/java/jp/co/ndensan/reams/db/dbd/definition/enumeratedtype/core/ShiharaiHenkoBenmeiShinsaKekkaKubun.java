@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支払方法変更弁明審査結果区分を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum ShiharaiHenkoBenmeiShinsaKekkaKubun {
 

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 特徴開始月6月捕捉を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum TokuchoKaishiTsuki6GatsuHosoku {
 

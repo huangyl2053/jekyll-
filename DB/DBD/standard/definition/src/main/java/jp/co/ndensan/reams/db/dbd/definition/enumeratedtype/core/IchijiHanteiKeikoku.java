@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 一次判定警告コード09を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum IchijiHanteiKeikoku {
 

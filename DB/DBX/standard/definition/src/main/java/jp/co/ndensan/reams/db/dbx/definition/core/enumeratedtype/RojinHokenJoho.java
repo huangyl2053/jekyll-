@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype;
 /**
  * このクラスでは、業務Config 老人保健情報 に対応するキーをまとめています。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBX-9999-023 liangbc
  */
 public enum RojinHokenJoho implements IConfigKey {
 
