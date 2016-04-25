@@ -7,23 +7,25 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolist
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku1Input.Chiku1InputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku1Input.IChiku1InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.Chiku2InputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.IChiku2InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku3Input.Chiku3InputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku3Input.IChiku3InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.GyoseikuInputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
@@ -35,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNumRange;
  * @author 自動生成
  */
 public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSelectDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -178,7 +181,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDvJokenSelect(DvJokenSelectDiv DvJokenSelect) {
+    public void setDvJokenSelect(DvJokenSelectDiv DvJokenSelect) {
         this.getDvAtena().setDvJokenSelect(DvJokenSelect);
     }
 
@@ -188,7 +191,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setRadSelectKijun(RadioButton radSelectKijun) {
+    public void setRadSelectKijun(RadioButton radSelectKijun) {
         this.getDvAtena().getDvJokenSelect().setRadSelectKijun(radSelectKijun);
     }
 
@@ -198,7 +201,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDvKensakuJoken(dvKensakuJokenDiv dvKensakuJoken) {
+    public void setDvKensakuJoken(dvKensakuJokenDiv dvKensakuJoken) {
         this.getDvAtena().getDvJokenSelect().setDvKensakuJoken(dvKensakuJoken);
     }
 
@@ -208,7 +211,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setTxtNenrei(TextBoxNumRange txtNenrei) {
+    public void setTxtNenrei(TextBoxNumRange txtNenrei) {
         this.getDvAtena().getDvJokenSelect().getDvKensakuJoken().setTxtNenrei(txtNenrei);
     }
 
@@ -218,7 +221,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setTxtNenreiKijunbi(TextBoxDate txtNenreiKijunbi) {
+    public void setTxtNenreiKijunbi(TextBoxDate txtNenreiKijunbi) {
         this.getDvAtena().getDvJokenSelect().getDvKensakuJoken().setTxtNenreiKijunbi(txtNenreiKijunbi);
     }
 
@@ -228,7 +231,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setTxtSeinengappi(TextBoxDateRange txtSeinengappi) {
+    public void setTxtSeinengappi(TextBoxDateRange txtSeinengappi) {
         this.getDvAtena().getDvJokenSelect().getDvKensakuJoken().setTxtSeinengappi(txtSeinengappi);
     }
 
@@ -243,7 +246,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDvChiku(DvChikuDiv DvChiku) {
+    public void setDvChiku(DvChikuDiv DvChiku) {
         this.getDvAtena().setDvChiku(DvChiku);
     }
 
@@ -253,7 +256,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setDdlChikuSelect(DropDownList ddlChikuSelect) {
+    public void setDdlChikuSelect(DropDownList ddlChikuSelect) {
         this.getDvAtena().getDvChiku().setDdlChikuSelect(ddlChikuSelect);
     }
 
@@ -263,7 +266,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setLblStart(Label lblStart) {
+    public void setLblStart(Label lblStart) {
         this.getDvAtena().getDvChiku().setLblStart(lblStart);
     }
 
@@ -298,7 +301,7 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     }
 
     @JsonIgnore
-    public void  setLblEnd(Label lblEnd) {
+    public void setLblEnd(Label lblEnd) {
         this.getDvAtena().getDvChiku().setLblEnd(lblEnd);
     }
 
@@ -329,5 +332,198 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void initialize(HokenshaKosei 保険者構成) {
+        getHandler().initialize(保険者構成);
+    }
+
+    @Override
+    public void initialize() {
+        getHandler().initialize();
+    }
+
+    @Override
+    public NenreiSoChushutsuHoho get年齢層抽出方法() {
+        return getHandler().get年齢層抽出方法();
+    }
+
+    @Override
+    public void set年齢層抽出方法(RString 年齢層抽出方法) {
+        getHandler().set年齢層抽出方法(年齢層抽出方法);
+    }
+
+    @Override
+    public Decimal get年齢開始() {
+        return getHandler().get年齢開始();
+    }
+
+    @Override
+    public void set年齢開始(Decimal 年齢開始) {
+        getHandler().set年齢開始(年齢開始);
+    }
+
+    @Override
+    public Decimal get年齢終了() {
+        return getHandler().get年齢開始();
+    }
+
+    @Override
+    public void set年齢終了(Decimal 年齢終了) {
+        getHandler().set年齢終了(年齢終了);
+    }
+
+    @Override
+    public RDate get年齢基準日() {
+        return getHandler().get年齢基準日();
+    }
+
+    @Override
+    public void set年齢基準日(RDate 年齢基準日) {
+        getHandler().set年齢基準日(年齢基準日);
+    }
+
+    @Override
+    public RDate get生年月日開始() {
+        return getHandler().get生年月日開始();
+    }
+
+    @Override
+    public void set生年月日開始(RDate 生年月日開始) {
+        getHandler().set生年月日開始(生年月日開始);
+    }
+
+    @Override
+    public RDate get生年月日終了() {
+        return getHandler().get生年月日終了();
+    }
+
+    @Override
+    public void set生年月日終了(RDate 生年月日終了) {
+        getHandler().set生年月日終了(生年月日終了);
+    }
+
+    @Override
+    public HokenshaSummary get保険者() {
+        return getHandler().get保険者();
+    }
+
+    @Override
+    public void set保険者() {
+        getHandler().set保険者();
+    }
+
+    @Override
+    public Chiku get地区() {
+        return getHandler().get地区();
+    }
+
+    @Override
+    public void set地区(RString 地区) {
+        getHandler().set地区(地区);
+    }
+
+    @Override
+    public RString get住所開始() {
+        return getHandler().get住所開始();
+    }
+
+    @Override
+    public void set住所開始(ChoikiCode 町域コード) {
+        getHandler().set住所開始(町域コード);
+    }
+
+    @Override
+    public RString get行政区開始() {
+        return getHandler().get行政区開始();
+    }
+
+    @Override
+    public void set行政区開始(GyoseikuCode 行政区コード) {
+        getHandler().set行政区開始(行政区コード);
+    }
+
+    @Override
+    public RString get地区１開始() {
+        return getHandler().get地区１開始();
+    }
+
+    @Override
+    public void set地区１開始(ChikuCode 地区1コード) {
+        getHandler().set地区１開始(地区1コード);
+    }
+
+    @Override
+    public RString get地区２開始() {
+        return getHandler().get地区２開始();
+    }
+
+    @Override
+    public void set地区２開始(ChikuCode 地区2コード) {
+        getHandler().set地区２開始(地区2コード);
+    }
+
+    @Override
+    public RString get地区３開始() {
+        return getHandler().get地区３開始();
+    }
+
+    @Override
+    public void set地区３開始(ChikuCode 地区3コード) {
+        getHandler().set地区３開始(地区3コード);
+    }
+
+    @Override
+    public RString get住所終了() {
+        return getHandler().get住所終了();
+    }
+
+    @Override
+    public void set住所終了(ChoikiCode 町域コード) {
+        getHandler().set住所終了(町域コード);
+    }
+
+    @Override
+    public RString get行政区終了() {
+        return getHandler().get行政区終了();
+    }
+
+    @Override
+    public void set行政区終了(GyoseikuCode 行政区コード) {
+        getHandler().set行政区終了(行政区コード);
+    }
+
+    @Override
+    public RString get地区１終了() {
+        return getHandler().get地区１終了();
+    }
+
+    @Override
+    public void set地区１終了(ChikuCode 地区1コード) {
+        getHandler().set地区１終了(地区1コード);
+    }
+
+    @Override
+    public RString get地区２終了() {
+        return getHandler().get地区２終了();
+    }
+
+    @Override
+    public void set地区２終了(ChikuCode 地区2コード) {
+        getHandler().set地区２終了(地区2コード);
+    }
+
+    @Override
+    public RString get地区３終了() {
+        return getHandler().get地区３終了();
+    }
+
+    @Override
+    public void set地区３終了(ChikuCode 地区3コード) {
+        getHandler().set地区３終了(地区3コード);
+    }
+
+    private HanyoListAtenaSelectHandler getHandler() {
+        return new HanyoListAtenaSelectHandler(this);
+    }
 
 }
