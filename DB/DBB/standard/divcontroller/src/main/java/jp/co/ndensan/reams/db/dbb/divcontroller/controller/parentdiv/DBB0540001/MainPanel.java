@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.Main
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0540001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -29,9 +31,10 @@ public class MainPanel {
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
+        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
+        HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
+        FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
 
         MainPanelHandler handler = new MainPanelHandler(div);
         handler.setヘッダエリア(識別コード, 被保険者番号);
