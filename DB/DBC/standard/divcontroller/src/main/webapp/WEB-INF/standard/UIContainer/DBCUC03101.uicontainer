@@ -1,5 +1,5 @@
 ﻿{
- "uiContainerName": "DBCUC03100",
+ "uiContainerName": "DBCUC03101",
  "displayWizard": false,
  "subGyomuCode": "DBC",
  "steps": [
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0310011",
      "toLayoutTitle": "受領委任契約申請登録・修正",
-     "toState": "修正モード"
+     "toState": "照会モード"
     },
     {
      "id": "2",

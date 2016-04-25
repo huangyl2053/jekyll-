@@ -72,13 +72,14 @@ public class PnlTotalPanelHandler {
     /**
      * 初期データ状態の設定する。
      *
-     * @param 状態 状態
-     * @param 受付年月日 受付年月日
+     * @param 画面モード RString
+     * @param shokanData ShokanJuryoininKeiyakusha
      */
-    public void set初期データ状態(RString 状態, FlexibleDate 受付年月日) {
-        if (修正.equals(状態)) {
+    public void set初期データ状態(RString 画面モード, ShokanJuryoininKeiyakusha shokanData) {
+        if (修正.equals(画面モード)) {
             div.getPnlCommon().getCcdAtena().setDisabled(true);
-            if (受付年月日.isEmpty()) {
+            div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(true);
+            if (shokanData.get受付年月日() == null || shokanData.get受付年月日().isEmpty()) {
                 div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
@@ -86,17 +87,35 @@ public class PnlTotalPanelHandler {
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
+            } else if (shokanData.get承認結果区分() == null || shokanData.get承認結果区分().isEmpty()
+                    || ShoninKubun.承認しない.getコード().equals(shokanData.get承認結果区分())) {
+                div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
+            } else if (ShoninKubun.承認する.getコード().equals(shokanData.get承認結果区分())) {
+                div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(false);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(false);
             }
         } else {
-            if (参照.equals(状態)) {
+            if (参照.equals(画面モード)) {
                 CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存する, true);
             }
             div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().setDisabled(true);
-            div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().setDisabled(true);
-            div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().setDisabled(true);
-            div.getPnlCommon().getPnlDetail().getBtnKeiyakuJigyoshaNoIcon().setDisabled(true);
-            div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setDisabled(true);
-            div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
@@ -111,6 +130,11 @@ public class PnlTotalPanelHandler {
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
         }
+        div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().setDisabled(true);
+        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().setDisabled(true);
+        div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setDisabled(true);
+        div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setDisabled(true);
+        div.getPnlCommon().getPnlDetail().getBtnKeiyakuJigyoshaNoIcon().setDisabled(true);
         div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninchutisyosakuseibi().setDisabled(true);
 
     }
@@ -313,12 +337,12 @@ public class PnlTotalPanelHandler {
     /**
      * 保存処理メソッド
      *
-     * @param 状態 状態
+     * @param 画面モード RString
      */
-    public void 保存処理(RString 状態) {
+    public void 保存処理(RString 画面モード) {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
         ShokanJuryoininKeiyakusha shokan;
-        if (登録.equals(状態)) {
+        if (登録.equals(画面モード)) {
             shokan = new ShokanJuryoininKeiyakusha(
                     new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
                     new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
@@ -329,9 +353,9 @@ public class PnlTotalPanelHandler {
         } else {
             shokan = ViewStateHolder.
                     get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
-            if (修正.equals(状態)) {
+            if (修正.equals(画面モード)) {
                 finder.updShokanJuryoininKeiyakusha(build契約者情報(shokan));
-            } else if (削除.equals(状態)) {
+            } else if (削除.equals(画面モード)) {
                 finder.delShokanJuryoininKeiyakusha(shokan);
             }
         }

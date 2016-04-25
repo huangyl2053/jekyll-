@@ -16,7 +16,9 @@ public enum DBC0310011StateName implements IStateEnumerations {
 
     NoChange(""),
     検索条件("検索条件"),
-    契約者一覧("契約者一覧");
+    契約者一覧("契約者一覧"),
+    修正モード("修正モード"),
+    照会モード("照会モード");
 
     private final RString name;
 

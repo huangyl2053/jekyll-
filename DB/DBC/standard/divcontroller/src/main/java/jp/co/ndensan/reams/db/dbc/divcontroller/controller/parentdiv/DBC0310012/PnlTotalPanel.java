@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearc
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -46,6 +45,7 @@ public class PnlTotalPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
+    private static final RString 参照 = new RString("参照");
     private static final RString 事業者検索 = new RString("事業者検索");
     private static final Decimal 一割 = new Decimal(0.1);
     private static final Decimal 九割 = new Decimal(0.9);
@@ -72,9 +72,9 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onLoad(PnlTotalPanelDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         getHandler(div).createDropDownList();
-        if (登録.equals(状態)) {
+        if (登録.equals(画面モード)) {
             div.getPnlCommon().getCcdAtena().setDisabled(true);
             div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
@@ -90,23 +90,24 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtShikyuumukubun().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtServiceYM().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtSyokanseriNo().setDisabled(true);
-            // TODO QA No.511(Redmine#80700)
-            TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
+            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             if (識別コード != null || !識別コード.isEmpty()) {
                 div.getPnlCommon().getCcdAtena().onLoad(識別コード);
             }
-            HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
             if (被保険者番号 != null || !被保険者番号.isEmpty()) {
                 div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
             }
-            RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-            if (事業者検索.equals(画面モード)) {
+            RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+            if (事業者検索.equals(表示モード)) {
                 PnlTotalPanelParameter param = ViewStateHolder
                         .get(ViewStateKeys.受領委任契約契約者詳細データ, PnlTotalPanelParameter.class);
                 getHandler(div).set登録データ(param);
                 JuryoininKeiyakuJigyosha data = ViewStateHolder
                         .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                ViewStateHolder.put(ViewStateKeys.契約事業者番号, data.get契約事業者番号());
+                ViewStateHolder.put(ViewStateKeys.契約事業者名, data.get契約事業者名称() == null
+                        || data.get契約事業者名称().isEmpty() ? null : data.get契約事業者名称().getColumnValue());
                 div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().setValue(data.get契約事業者番号());
                 div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName()
                         .setValue(data.get契約事業者名称() == null || data.get契約事業者名称().isEmpty() ? null
@@ -128,7 +129,7 @@ public class PnlTotalPanel {
             HihokenshaNo 被保険者番号 = new HihokenshaNo(parameter.get被保番号());
             div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
 
-            getHandler(div).set初期データ状態(状態, shokanData.get受付年月日());
+            getHandler(div).set初期データ状態(画面モード, shokanData);
             getHandler(div).set初期データ(shokanData, parameter);
         }
         return ResponseData.of(div).respond();
@@ -160,12 +161,12 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_txtKeyakujigyosyaNo(PnlTotalPanelDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (登録.equals(状態)) {
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (登録.equals(画面モード)) {
             PnlTotalPanelParameter parameter = getHandler(div).createParameter();
             ViewStateHolder.put(ViewStateKeys.受領委任契約契約者詳細データ, parameter);
-            ViewStateHolder.put(ViewStateKeys.画面モード, 事業者検索);
-            // TODO QA No.511(Redmine#80700)
+            ViewStateHolder.put(ViewStateKeys.表示モード, 事業者検索);
+            ViewStateHolder.put(ViewStateKeys.状態, 参照);
             return ResponseData.of(div).forwardWithEventName(DBC0310011TransitionEventName.事業者検索).respond();
         }
         return ResponseData.of(div).respond();
@@ -178,13 +179,12 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onChange_ddlKeiyakuServiceType(PnlTotalPanelDiv div) {
-        // TODO QA No.417(Redmine#:79199)
-        RString code = div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey();
-        if (KeiyakuServiceShurui.住宅改修.getコード().equals(code)
-                || KeiyakuServiceShurui.予防住宅改修.getコード().equals(code)) {
+        RString コード = div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey();
+        if (KeiyakuServiceShurui.住宅改修.getコード().equals(コード)
+                || KeiyakuServiceShurui.予防住宅改修.getコード().equals(コード)) {
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_0);
-        } else if (KeiyakuServiceShurui.福祉用具.getコード().equals(code)
-                || KeiyakuServiceShurui.予防福祉用具.getコード().equals(code)) {
+        } else if (KeiyakuServiceShurui.福祉用具.getコード().equals(コード)
+                || KeiyakuServiceShurui.予防福祉用具.getコード().equals(コード)) {
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setValue(番号_1);
         }
         return ResponseData.of(div).respond();
@@ -331,8 +331,8 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_btnCancel(PnlTotalPanelDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (登録.equals(状態) || 修正.equals(状態)) {
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (登録.equals(画面モード) || 修正.equals(画面モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -356,12 +356,12 @@ public class PnlTotalPanel {
      * @return ResponseData<PnlTotalPanelDiv>
      */
     public ResponseData<PnlTotalPanelDiv> onClick_btnUpdate(PnlTotalPanelDiv div) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         ValidationMessageControlPairs valid = getPnlTotalPanelValidationHandler(div).validate();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        if (削除.equals(状態)) {
+        if (削除.equals(画面モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                         UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -370,7 +370,7 @@ public class PnlTotalPanel {
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).保存処理(状態);
+                getHandler(div).保存処理(画面モード);
             } else {
                 return ResponseData.of(div).respond();
             }
@@ -384,7 +384,7 @@ public class PnlTotalPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).保存処理(状態);
+                getHandler(div).保存処理(画面モード);
             } else {
                 return ResponseData.of(div).respond();
             }
