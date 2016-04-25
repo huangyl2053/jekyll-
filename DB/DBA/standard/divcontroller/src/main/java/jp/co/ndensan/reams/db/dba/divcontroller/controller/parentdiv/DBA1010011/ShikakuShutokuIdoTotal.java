@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 資格取得異動の対象者情報を表示するためのDivControllerです。
  *
- * @reamsid_L DBA-0552-030 wangkun
+ * @reamsid_L DBA-0520-030 wangkun
  */
 public class ShikakuShutokuIdoTotal {
 

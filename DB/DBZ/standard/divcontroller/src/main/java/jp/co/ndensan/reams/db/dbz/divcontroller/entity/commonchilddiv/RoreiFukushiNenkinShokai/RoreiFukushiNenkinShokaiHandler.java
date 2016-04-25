@@ -199,7 +199,7 @@ public class RoreiFukushiNenkinShokaiHandler {
             row.setJotai(eventJotai);
             div.getDatagridRireki().getDataSource().add(row);
         } else if (状態_削除.equals(eventJotai)) {
-            div.getDatagridRireki().getDataSource().remove(index);
+            row.setJotai(eventJotai);
         } else {
             row.setJotai(eventJotai);
             div.getDatagridRireki().getDataSource().set(index, row);

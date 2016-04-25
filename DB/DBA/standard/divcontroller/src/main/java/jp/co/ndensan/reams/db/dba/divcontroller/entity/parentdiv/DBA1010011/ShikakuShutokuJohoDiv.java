@@ -8,17 +8,20 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IIryohokenRirekiCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.IRoreiFukushiNenkinShokaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShikakuShutokuJoho のクラスファイル
- *
+ * ShikakuShutokuJoho のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShikakuShutokuJohoDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -162,7 +165,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplShikakuJoho(tplShikakuJohoDiv tplShikakuJoho) {
+    public void  setTplShikakuJoho(tplShikakuJohoDiv tplShikakuJoho) {
         this.getTabInputs().setTplShikakuJoho(tplShikakuJoho);
     }
 
@@ -172,7 +175,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain) {
+    public void  setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain) {
         this.getTabInputs().getTplShikakuJoho().setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMain);
     }
 
@@ -182,7 +185,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
+    public void  setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
         this.getTabInputs().setTplIryoHoken(tplIryoHoken);
     }
 
@@ -192,7 +195,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setIryoHokenRirekiMain(IryoHokenRirekiMainDiv IryoHokenRirekiMain) {
+    public void  setIryoHokenRirekiMain(IryoHokenRirekiMainDiv IryoHokenRirekiMain) {
         this.getTabInputs().getTplIryoHoken().setIryoHokenRirekiMain(IryoHokenRirekiMain);
     }
 
@@ -207,7 +210,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
+    public void  setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
         this.getTabInputs().setTplRofukuNenkin(tplRofukuNenkin);
     }
 
@@ -217,7 +220,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
+    public void  setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
         this.getTabInputs().getTplRofukuNenkin().setRohukuNenkin(RohukuNenkin);
     }
 
@@ -232,7 +235,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
+    public void  setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
         this.getTabInputs().setTplShisetsuNyutaisho(tplShisetsuNyutaisho);
     }
 
@@ -242,7 +245,7 @@ public class ShikakuShutokuJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
+    public void  setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
         this.getTabInputs().getTplShisetsuNyutaisho().setShisetsuNyutaishoRireki(ShisetsuNyutaishoRireki);
     }
 

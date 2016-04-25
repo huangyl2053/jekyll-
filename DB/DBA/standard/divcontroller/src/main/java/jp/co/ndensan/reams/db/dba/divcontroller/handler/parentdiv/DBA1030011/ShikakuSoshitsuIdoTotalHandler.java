@@ -92,7 +92,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
             ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, 状態_被保履歴タブ);
         }
         setDdlShikakuSoshitsuJiyu();
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタンの表示状態(true);
+        資格喪失情報パネルの初期化();
     }
 
     /**
@@ -200,9 +200,10 @@ public class ShikakuSoshitsuIdoTotalHandler {
      * 資格喪失情報パネルの初期化
      */
     public void 資格喪失情報パネルの初期化() {
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタンの表示状態(true);
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate().clearValue();
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().clearValue();
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(true);
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setReadOnly(true);
         setDdlShikakuSoshitsuJiyu();
     }
 
