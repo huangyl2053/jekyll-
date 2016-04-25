@@ -51,13 +51,13 @@ public class MishorishaIchiranSakuseiValidationHandler {
                 && (div.getBatchParamterInfo().getTxtZenkaiKaishi().getValue().isEmpty()
                 || div.getBatchParamterInfo().getTxtZenkaiKara().getValue().isEmpty())) {
             if (div.getBatchParamterInfo().getTxtZenkaiKaishi().getValue().isEmpty()) {
-                validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.Validate転出転入作成事由,
+                validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.Validate開始終了日,
                         div.getBatchParamterInfo().getTxtZenkaiKaishi()));
             } else if (div.getBatchParamterInfo().getTxtZenkaiKara().getValue().isEmpty()) {
-                validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.Validate転出転入作成事由,
+                validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.Validate開始終了日,
                         div.getBatchParamterInfo().getTxtZenkaiKara()));
             } else {
-                validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.Validate転出転入作成事由,
+                validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.Validate開始終了日,
                         div.getBatchParamterInfo().getTxtZenkaiKaishi(), div.getBatchParamterInfo().getTxtZenkaiKara()));
             }
         }
