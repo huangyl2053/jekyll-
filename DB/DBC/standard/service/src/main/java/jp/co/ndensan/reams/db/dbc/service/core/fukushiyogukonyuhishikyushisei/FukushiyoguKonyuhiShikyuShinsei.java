@@ -713,7 +713,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 償還払支給判定結果Dac.save(dbT3036Entity);
                 修正前支給区分 = 支給区分_不支給;
             } else {
-                データ.setShoKisaiHokenshaNo(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().get証記載保険者番号());
                 データ.setKetteiYMD(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().get決定年月日());
                 データ.setShikyuHushikyuKetteiKubun(福祉用具購入費支給申請決定情報画面.get償還払支給判定結果().
                         get支給_不支給決定区分());

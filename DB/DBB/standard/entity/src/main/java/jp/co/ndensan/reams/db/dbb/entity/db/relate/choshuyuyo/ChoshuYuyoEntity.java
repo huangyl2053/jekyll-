@@ -13,31 +13,26 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity
 
 /**
  * 介護賦課徴収猶予RelateEntityクラスです。
+ *
+ * @reamsid_L DBB-9999-013 huangh
  */
 @lombok.Getter
 @lombok.Setter
 public class ChoshuYuyoEntity implements Cloneable, Serializable {
 
-
     /**
-     * -- GETTER --
-     * 介護賦課徴収猶予Entityを返します。
+     * -- GETTER -- 介護賦課徴収猶予Entityを返します。
      *
-     * @return 介護賦課徴収猶予Entity
-     * -- SETTER --
-     * 介護賦課徴収猶予Entityを設定します。
+     * @return 介護賦課徴収猶予Entity -- SETTER -- 介護賦課徴収猶予Entityを設定します。
      *
      * @param 介護賦課徴収猶予Entity 介護賦課徴収猶予Entity
      */
     private DbT2006ChoshuYuyoEntity 介護賦課徴収猶予Entity;
 
     /**
-     * -- GETTER --
-     * 介護期別徴収猶予EntityListを返します。
+     * -- GETTER -- 介護期別徴収猶予EntityListを返します。
      *
-     * @return 介護期別徴収猶予EntityList
-     * -- SETTER --
-     * 介護期別徴収猶予EntityListを設定します。
+     * @return 介護期別徴収猶予EntityList -- SETTER -- 介護期別徴収猶予EntityListを設定します。
      *
      * @param 介護期別徴収猶予EntityList 介護期別徴収猶予EntityList
      */
