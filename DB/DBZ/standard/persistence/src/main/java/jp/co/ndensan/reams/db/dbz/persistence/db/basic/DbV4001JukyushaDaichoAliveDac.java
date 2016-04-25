@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 受給者台帳Aliveのデータアクセスクラスです。
  *
- * @reamsid_L DBB-9999-012 xicongwang
+ * @reamsid_L DBZ-9999-012 xicongwang
  */
 public class DbV4001JukyushaDaichoAliveDac implements ISaveable<DbV4001JukyushaDaichoEntity> {
 
