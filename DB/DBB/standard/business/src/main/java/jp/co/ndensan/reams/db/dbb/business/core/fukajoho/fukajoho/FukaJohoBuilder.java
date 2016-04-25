@@ -615,8 +615,8 @@ public class FukaJohoBuilder {
 
     private boolean hasSameIdentifier(KibetsuIdentifier 介護期別情報識別子) {
         return (id.get調定年度().equals(介護期別情報識別子.get調定年度())
-                && id.get賦課年度() == 介護期別情報識別子.get賦課年度()
-                && id.get通知書番号() == 介護期別情報識別子.get通知書番号()
+                && id.get賦課年度().equals(介護期別情報識別子.get賦課年度())
+                && id.get通知書番号().equals(介護期別情報識別子.get通知書番号())
                 && id.get履歴番号() == 介護期別情報識別子.get履歴番号());
     }
 

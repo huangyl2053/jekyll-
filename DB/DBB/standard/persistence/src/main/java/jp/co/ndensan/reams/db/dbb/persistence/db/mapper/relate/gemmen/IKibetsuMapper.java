@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity;
 
 /**
  * 介護期別のマッパーインタフェースです。
+ *
+ * @reamsid_L DBB-9999-013 huangh
  */
 public interface IKibetsuMapper {
 

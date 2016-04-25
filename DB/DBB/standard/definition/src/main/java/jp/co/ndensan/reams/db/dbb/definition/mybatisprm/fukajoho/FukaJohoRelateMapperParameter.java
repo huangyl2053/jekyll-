@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 賦課の情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBB-9999-013 huangh
  */
 @lombok.Getter
 public final class FukaJohoRelateMapperParameter {
