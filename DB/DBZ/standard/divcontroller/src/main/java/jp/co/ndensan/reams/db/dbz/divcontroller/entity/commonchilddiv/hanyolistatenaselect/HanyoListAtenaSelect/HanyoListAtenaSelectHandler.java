@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect;
 
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -40,28 +43,126 @@ public class HanyoListAtenaSelectHandler {
      * @param 保険者構成 保険者構成
      */
     public void initialize(HokenshaKosei 保険者構成) {
-
+        if (HokenshaKosei.単一市町村.code().equals(保険者構成.code())) {
+            div.getCcdHokenshaList().setVisible(false);
+            div.getDvChiku().setVisible(true);
+        } else if (HokenshaKosei.広域市町村.code().equals(保険者構成.code())) {
+            div.getCcdHokenshaList().setVisible(true);
+            div.getCcdHokenshaList().loadHokenshaList();
+            div.getDvChiku().setVisible(false);
+        }
+        set初期項目状態();
+        set初期項目内容();
     }
 
     /**
      * 汎用リスト宛名抽出条件共有子Divを初期化します(パラメータがなし)。
      */
     public void initialize() {
-
+        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報 != null && 市町村情報.get導入形態コード() != null && 市町村情報.get導入形態コード().is広域()) {
+            div.getCcdHokenshaList().setVisible(true);
+            div.getCcdHokenshaList().loadHokenshaList();
+            div.getDvChiku().setVisible(false);
+        } else {
+            div.getCcdHokenshaList().setVisible(false);
+            div.getDvChiku().setVisible(true);
+        }
+        set初期項目状態();
+        set初期項目内容();
     }
 
     /**
      * 「宛名検索条件」ラジオボタン連動処理をします。
      */
     public void onChange_SelectKijun() {
-
+        RString 年齢層抽出方法 = div.getRadSelectKijun().getSelectedKey();
+        if (NenreiSoChushutsuHoho.年齢範囲.getコード().equals(年齢層抽出方法)) {
+            div.getRadSelectKijun().setDisabled(false);
+            div.getTxtNenrei().setDisabled(false);
+            div.getTxtNenrei().setFromPlaceHolder(RString.EMPTY);
+            div.getTxtNenrei().setToPlaceHolder(RString.EMPTY);
+            div.getTxtSeinengappi().setDisabled(true);
+            div.getTxtSeinengappi().setFromPlaceHolder(RString.EMPTY);
+            div.getTxtSeinengappi().setToPlaceHolder(RString.EMPTY);
+            div.getTxtNenreiKijunbi().setDisabled(false);
+            div.getTxtNenreiKijunbi().clearValue();
+        } else if (NenreiSoChushutsuHoho.生年月日範囲.getコード().equals(年齢層抽出方法)) {
+            div.getRadSelectKijun().setDisabled(false);
+            div.getTxtNenrei().setDisabled(true);
+            div.getTxtNenrei().setFromPlaceHolder(RString.EMPTY);
+            div.getTxtNenrei().setToPlaceHolder(RString.EMPTY);
+            div.getTxtSeinengappi().setDisabled(false);
+            div.getTxtSeinengappi().setFromPlaceHolder(RString.EMPTY);
+            div.getTxtSeinengappi().setToPlaceHolder(RString.EMPTY);
+            div.getTxtNenreiKijunbi().setDisabled(false);
+            div.getTxtNenreiKijunbi().clearValue();
+        }
     }
 
     /**
      * 「地区」DDL連動処理をします。
      */
     public void onChange_ChikuSelect() {
-
+        RString 地区 = div.getDdlChikuSelect().getSelectedKey();
+        div.getDdlChikuSelect().setDisabled(false);
+        if (Chiku.全て.getコード().equals(地区)) {
+            div.getCcdJushoFrom().setDisabled(true);
+            div.getCcdJushoFrom().clear();
+            div.getCcdGyoseikuFrom().setVisible(false);
+            div.getCcdChiku1From().setVisible(false);
+            div.getCcdChiku2From().setVisible(false);
+            div.getCcdChiku3From().setVisible(false);
+            div.getCcdJushoTo().setDisabled(true);
+            div.getCcdJushoTo().clear();
+            div.getCcdGyoseikuTo().setVisible(false);
+            div.getCcdChiku1To().setVisible(false);
+            div.getCcdChiku2To().setVisible(false);
+            div.getCcdChiku3To().setVisible(false);
+        } else if (Chiku.住所.getコード().equals(地区)) {
+            div.getCcdJushoFrom().setDisabled(false);
+            div.getCcdJushoFrom().clear();
+            div.getCcdGyoseikuFrom().setVisible(false);
+            div.getCcdChiku1From().setVisible(false);
+            div.getCcdChiku2From().setVisible(false);
+            div.getCcdChiku3From().setVisible(false);
+            div.getCcdJushoTo().setDisabled(false);
+            div.getCcdJushoTo().clear();
+            div.getCcdGyoseikuTo().setVisible(false);
+            div.getCcdChiku1To().setVisible(false);
+            div.getCcdChiku2To().setVisible(false);
+            div.getCcdChiku3To().setVisible(false);
+        } else if (Chiku.行政区.getコード().equals(地区)) {
+            div.getCcdJushoFrom().setVisible(false);
+            div.getCcdGyoseikuFrom().setDisabled(false);
+            div.getCcdGyoseikuFrom().clear();
+            div.getCcdChiku1From().setVisible(false);
+            div.getCcdChiku2From().setVisible(false);
+            div.getCcdChiku3From().setVisible(false);
+            div.getCcdJushoTo().setVisible(false);
+            div.getCcdGyoseikuTo().setDisabled(false);
+            div.getCcdGyoseikuTo().clear();
+            div.getCcdChiku1To().setVisible(false);
+            div.getCcdChiku2To().setVisible(false);
+            div.getCcdChiku3To().setVisible(false);
+        } else if (Chiku.地区.getコード().equals(地区)) {
+            div.getCcdJushoFrom().setVisible(false);
+            div.getCcdGyoseikuFrom().setVisible(false);
+            div.getCcdChiku1From().setDisabled(false);
+            div.getCcdChiku1From().clear();
+            div.getCcdChiku2From().setDisabled(false);
+            div.getCcdChiku2From().clear();
+            div.getCcdChiku3From().setDisabled(false);
+            div.getCcdChiku3From().clear();
+            div.getCcdJushoTo().setVisible(false);
+            div.getCcdGyoseikuTo().setVisible(false);
+            div.getCcdChiku1To().setDisabled(false);
+            div.getCcdChiku1To().clear();
+            div.getCcdChiku2To().setDisabled(false);
+            div.getCcdChiku2To().clear();
+            div.getCcdChiku3To().setDisabled(false);
+            div.getCcdChiku3To().clear();
+        }
     }
 
     /**
@@ -385,6 +486,46 @@ public class HanyoListAtenaSelectHandler {
      */
     public void set地区３終了(ChikuCode 地区3コード) {
         div.getCcdChiku3To().load(地区3コード);
+    }
+
+    private void set初期項目状態() {
+        div.getRadSelectKijun().setDisabled(false);
+        div.getTxtNenrei().setDisabled(false);
+        div.getTxtSeinengappi().setDisabled(true);
+        div.getTxtNenreiKijunbi().setDisabled(false);
+        div.getDdlChikuSelect().setDisabled(false);
+        div.getCcdJushoFrom().setDisabled(true);
+        div.getCcdGyoseikuFrom().setVisible(false);
+        div.getCcdChiku1From().setVisible(false);
+        div.getCcdChiku2From().setVisible(false);
+        div.getCcdChiku3From().setVisible(false);
+        div.getCcdJushoTo().setDisabled(true);
+        div.getCcdGyoseikuTo().setVisible(false);
+        div.getCcdChiku1To().setVisible(false);
+        div.getCcdChiku2To().setVisible(false);
+        div.getCcdChiku3To().setVisible(false);
+    }
+
+    private void set初期項目内容() {
+        set宛名抽出条件ラジオボタン();
+        div.getRadSelectKijun().setSelectedKey(NenreiSoChushutsuHoho.年齢範囲.getコード());
+        div.getTxtNenrei().setFromPlaceHolder(RString.EMPTY);
+        div.getTxtNenrei().setToPlaceHolder(RString.EMPTY);
+        div.getTxtSeinengappi().setFromPlaceHolder(RString.EMPTY);
+        div.getTxtSeinengappi().setToPlaceHolder(RString.EMPTY);
+        div.getTxtNenreiKijunbi().clearValue();
+        set地区DDL();
+        div.getDdlChikuSelect().setSelectedKey(Chiku.全て.getコード());
+        div.getCcdJushoFrom().clear();
+        div.getCcdJushoTo().clear();
+    }
+
+    private void set宛名抽出条件ラジオボタン() {
+
+    }
+
+    private void set地区DDL() {
+
     }
 
 }
