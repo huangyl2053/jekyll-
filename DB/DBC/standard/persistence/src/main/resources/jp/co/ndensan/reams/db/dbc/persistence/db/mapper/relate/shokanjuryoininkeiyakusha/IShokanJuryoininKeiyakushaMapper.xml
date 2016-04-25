@@ -7,6 +7,10 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanjuryoininkeiyakusha.IShokanJuryoininKeiyakushaMapper">
 
     <resultMap id="resultMap_ShokanJuryoininKeiyakusha" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaEntity" autoMapping="true">
+        <id property="dbt3078entity.hihokenshaNo" column="dbT3078ShokanJuryoininKeiyakusha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="dbt3078entity.shinseiYMD" column="dbT3078ShokanJuryoininKeiyakusha_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="dbt3078entity.keiyakuJigyoshaNo" column="dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dbt3078entity.keiyakuServiceShurui" column="dbT3078ShokanJuryoininKeiyakusha_keiyakuServiceShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbt3078entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3078ShokanJuryoininKeiyakushaMapper.ResultMap_DbT3078ShokanJuryoininKeiyakushaEntity"/>
         <association property="dbt3077entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"/>
     </resultMap>    
