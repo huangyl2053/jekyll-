@@ -38,17 +38,17 @@ public class HihokenshaDaichoSetaiRightEditor implements IHihokenshaDaichoEditor
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get世帯右被保険者番号().size() <= index) {
+        if (entity == null || entity.get世帯右被保険者番号().isEmpty() || entity.get世帯右被保険者番号().size() <= index) {
             return source;
         }
         return editBody(source);
     }
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
-        source.listSetaiRight_1 = entity.get世帯右性別().get(index);
-        source.listSetaiRight_2 = HihokenshaDaichoEditor.dataFomart(entity.get世帯右生年月日().get(index));
-        source.listSetaiRight_3 = entity.get世帯右続柄().get(index);
-        source.listSetaiRight_4 = entity.get世帯右被保険者番号().get(index) == null
+        source.listSetaiRight_1 = HihokenshaDaichoEditor.getIndexValue(entity.get世帯右性別(), index);
+        source.listSetaiRight_2 = HihokenshaDaichoEditor.dataFomart(entity.get世帯右生年月日(), index);
+        source.listSetaiRight_3 = HihokenshaDaichoEditor.getIndexValue(entity.get世帯右続柄(), index);
+        source.listSetaiRight_4 = entity.get世帯右被保険者番号().isEmpty() || entity.get世帯右被保険者番号().get(index) == null
                 ? RString.EMPTY : entity.get世帯右被保険者番号().get(index).value();
         return source;
     }

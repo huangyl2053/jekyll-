@@ -37,7 +37,7 @@ public class HihokenshaDaichoShoRireki2Editor implements IHihokenshaDaichoEditor
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get証履歴No2().size() <= index) {
+        if (entity == null || entity.get証履歴No2().isEmpty() || entity.get証履歴No2().size() <= index) {
             return source;
         }
         return editBody(source);
@@ -45,9 +45,9 @@ public class HihokenshaDaichoShoRireki2Editor implements IHihokenshaDaichoEditor
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listShoRireki2_1 = entity.get証履歴No2().get(index);
-        source.listShoRireki2_2 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴発行日2().get(index));
-        source.listShoRireki2_3 = entity.get証履歴事由名称2().get(index);
-        source.listShoRireki2_4 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴回収日2().get(index));
+        source.listShoRireki2_2 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴発行日2(), index);
+        source.listShoRireki2_3 = HihokenshaDaichoEditor.getIndexValue(entity.get証履歴事由名称2(), index);
+        source.listShoRireki2_4 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴回収日2(), index);
         return source;
     }
 }
