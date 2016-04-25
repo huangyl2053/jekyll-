@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshosak
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiikenshosakuseiiraiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
@@ -41,4 +43,12 @@ public interface IShujiiIkenshoSakuseiIraiMapper {
      * @return 要介護認定申請情報Entity
      */
     List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param);
+
+    /**
+     * 宛名情報を取得します。
+     *
+     * @param param 宛名情報のMyBatis用パラメータ
+     * @return 宛名情報Entity
+     */
+    ShujiiIraiAtenaJohoRelateEntity get宛名情報(ShujiiIraiAtenaJohoParameter param);
 }
