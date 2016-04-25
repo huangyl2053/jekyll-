@@ -54,10 +54,12 @@ public class KihonInfoMainPanelHandler {
     private static final RString 退所年月日 = new RString("退所年月日");
     private static final RString KEY = new RString("key0");
     private static final RString 有 = new RString("2");
+    private static final RString 無し = new RString("1");
     private static final int 日数 = 30;
     private static final int NUM_1 = 1;
     private static final FlexibleYearMonth 平成２１年３月 = new FlexibleYearMonth("200903");
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
+    private static final FlexibleYearMonth 平成14年１月 = new FlexibleYearMonth("200201");
     private static final RString コード_0001 = new RString("0001");
     private static final RString コード_0009 = new RString("0009");
     private static final RString コード_0048 = new RString("0048");
@@ -77,6 +79,18 @@ public class KihonInfoMainPanelHandler {
     private static final RString STR_21A1 = new RString("21A1");
     private static final RString STR_21A2 = new RString("21A2");
     private static final RString STR_21A3 = new RString("21A3");
+    private static final RString STR_2144 = new RString("2144");
+    private static final RString STR_2154 = new RString("2154");
+    private static final RString STR_2156 = new RString("2156");
+    private static final RString STR_2165 = new RString("2165");
+    private static final RString STR_2142 = new RString("2142");
+    private static final RString STR_2143 = new RString("2143");
+    private static final RString STR_2152 = new RString("2152");
+    private static final RString STR_2153 = new RString("2153");
+    private static final RString STR_2155 = new RString("2155");
+    private static final RString STR_2162 = new RString("2162");
+    private static final RString STR_2163 = new RString("2163");
+    private static final RString STR_2164 = new RString("2164");
 
     /**
      * コンストラクタです。
@@ -218,16 +232,11 @@ public class KihonInfoMainPanelHandler {
                         shokanKihon.get中止理由_入所_院前の状況コード());
             }
         } else if (平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号)) {
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisplayNone(false);
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisplayNone(true);
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDisplayNone(false);
             if (shokanKihon.get中止理由_入所_院前の状況コード() != null
                     && !shokanKihon.get中止理由_入所_院前の状況コード().isEmpty()) {
                 div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setSelectedKey(
-                        shokanKihon.get中止理由_入所_院前の状況コード());
-            }
-            if (shokanKihon.get中止理由_入所_院前の状況コード() != null
-                    && !shokanKihon.get中止理由_入所_院前の状況コード().isEmpty()) {
-                div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setSelectedKey(
                         shokanKihon.get中止理由_入所_院前の状況コード());
             }
         } else {
@@ -284,11 +293,10 @@ public class KihonInfoMainPanelHandler {
 
     private ShokanKihon save基本情報(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月, RString 様式番号) {
         List<RString> keyList = div.getPanelKihon().getPanelKyotaku().getChkKyusochi().getSelectedKeys();
-        // TODO QA526
         if (!keyList.isEmpty()) {
-            shokanKihon = shokanKihon.createBuilderForEdit().set旧措置入所者特例コード(設定不可).build();
+            shokanKihon = shokanKihon.createBuilderForEdit().set旧措置入所者特例コード(有).build();
         } else {
-            shokanKihon = shokanKihon.createBuilderForEdit().set旧措置入所者特例コード(null).build();
+            shokanKihon = shokanKihon.createBuilderForEdit().set旧措置入所者特例コード(無し).build();
         }
         RString 居宅サービス計画作成区分Key = div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun()
                 .getSelectedKey();
@@ -372,24 +380,15 @@ public class KihonInfoMainPanelHandler {
             if (!中止理由Key.equals(KEY)) {
                 shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(中止理由Key).build();
             } else {
-                shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(null).build();
+                shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(無し).build();
             }
         } else if (平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号)) {
-            // TODO QA526  画面の中止理由　あるいは　入所（院）前の状況
             中止理由Key = div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu()
-                    .getSelectedKey();
-            入所_院前の状況Key = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState()
                     .getSelectedKey();
             if (!中止理由Key.equals(KEY)) {
                 shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(中止理由Key).build();
             } else {
-                shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(null).build();
-            }
-            if (!入所_院前の状況Key.equals(KEY)) {
-                shokanKihon = shokanKihon.createBuilderForEdit()
-                        .set中止理由_入所_院前の状況コード(入所_院前の状況Key).build();
-            } else {
-                shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(null).build();
+                shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(無し).build();
             }
         } else {
             入所_院前の状況Key = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState()
@@ -398,7 +397,7 @@ public class KihonInfoMainPanelHandler {
                 shokanKihon = shokanKihon.createBuilderForEdit()
                         .set中止理由_入所_院前の状況コード(入所_院前の状況Key).build();
             } else {
-                shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(null).build();
+                shokanKihon = shokanKihon.createBuilderForEdit().set中止理由_入所_院前の状況コード(無し).build();
             }
         }
         return shokanKihon;
@@ -436,14 +435,18 @@ public class KihonInfoMainPanelHandler {
             return true;
         }
 
-        // TODO QA526
-//        RString 旧措置入所者特例コード = shokanKihon.get旧措置入所者特例コード();
-//        List<RString> keyList = div.getPanelKihon().getPanelKyotaku().getChkKyusochi().getSelectedKeys();
-//        if (!keyList.isEmpty() && !有.equals(旧措置入所者特例コード)) {
-//            return true;
-//        } else if (keyList.isEmpty() && !無.equals(旧措置入所者特例コード)) {
-//            return true;
-//        }
+        RString 旧措置入所者特例コード = shokanKihon.get旧措置入所者特例コード();
+        List<RString> keyList = div.getPanelKihon().getPanelKyotaku().getChkKyusochi().getSelectedKeys();
+        if (旧措置入所者特例コード == null && !keyList.isEmpty()) {
+            return true;
+        }
+        if (旧措置入所者特例コード != null) {
+            if (!keyList.isEmpty() && !有.equals(旧措置入所者特例コード)) {
+                return true;
+            } else if (keyList.isEmpty() && !無し.equals(旧措置入所者特例コード)) {
+                return true;
+            }
+        }
         JigyoshaNo 居宅サービス計画事業者番号 = shokanKihon.get居宅サービス計画事業者番号();
         RString 事業者 = div.getPanelKihon().getPanelKyotaku().getCcdShisetsuJoho().getNyuryokuShisetsuKodo();
         if (居宅サービス計画事業者番号 == null) {
@@ -816,18 +819,33 @@ public class KihonInfoMainPanelHandler {
      */
     public ValidationMessageControlPairs get入力チェックメッセージ() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        // TODO QA526
-        if (div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue() == null) {
-            pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
-                    UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
-                    div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD()));
+        ArrayList<RString> list = new ArrayList<>();
+        list.add(STR_2144);
+        list.add(STR_2154);
+        list.add(STR_2156);
+        list.add(STR_2165);
+        list.add(STR_2142);
+        list.add(STR_2143);
+        list.add(STR_2152);
+        list.add(STR_2153);
+        list.add(STR_2155);
+        list.add(STR_2162);
+        list.add(STR_2163);
+        list.add(STR_2164);
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        if (サービス年月.isBeforeOrEquals(平成14年１月) && list.contains(様式番号)) {
+            if (div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue() == null) {
+                pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
+                        UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
+                        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD()));
+            }
         }
         RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
         RDate 退所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue();
         if (入所_院年月日 != null && 退所_院年月日 != null) {
             int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
             if (期間_日数 > 日数) {
-                // TODO 526
                 pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
                         DbcWarningMessages.日数が30日を超える, 入所年月日.toString(), 退所年月日.toString()),
                         div.getPanelKihon().getPanelShisetuNyutaisyoInfo()));
