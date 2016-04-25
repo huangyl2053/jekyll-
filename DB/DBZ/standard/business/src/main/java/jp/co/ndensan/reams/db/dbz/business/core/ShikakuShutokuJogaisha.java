@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 資格取得除外者を管理するクラスです。
  *
- * @reamsid_L DBA-9999-011 zhangzhiming
+ * @reamsid_L DBZ-9999-011 zhangzhiming
  */
 public class ShikakuShutokuJogaisha extends
         ParentModelBase<ShikakuShutokuJogaishaIdentifier, DbT1009ShikakuShutokuJogaishaEntity, ShikakuShutokuJogaisha> implements Serializable {

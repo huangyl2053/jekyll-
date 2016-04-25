@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 不服審査申立情報を管理するクラスです。
  *
- * @reamsid_L DBU-9999-011 lizhuoxuan
+ * @reamsid_L DBZ-9999-011 lizhuoxuan
  */
 public class FufukuMoshitate extends
         ParentModelBase<FufukuMoshitateIdentifier, DbT7001FufukuMoshitateEntity, FufukuMoshitate> implements Serializable {
