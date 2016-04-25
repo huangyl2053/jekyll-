@@ -10,15 +10,22 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IHistoryIterator;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -40,6 +47,8 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     private static final RString 認定履歴ボタン = new RString("HihokenrirekiNashiMode");
     private static final RString 被保履歴ボタン = new RString("NinteirirekiNashiMode");
     private static final RString 状態_登録 = new RString("登録");
+    private static final RString 合併あり = new RString("1");
+    private static final RString 合併なし = new RString("0");
 
     private static final RString DBAMN21001_転入により取得 = new RString("DBAMN21001");
     private static final RString DBAMN21002_第2号被保険者取得申請により取得 = new RString("DBAMN21002");
@@ -233,6 +242,27 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
     }
 
+    private LasdecCode get市町村コード() {
+        ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報セキュリティ情報 != null && 市町村情報セキュリティ情報.get導入形態コード() != null) {
+            if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    || new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    || new RString("211").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+                IHistoryIterator<IShikibetsuTaisho> ite = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                        .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().getAll();
+                if (ite.hasPrevious()) {
+                    return ite.previous().get現全国地方公共団体コード();
+                }
+            } else if (new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    || new RString("220").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+                KoikiShichosonJohoFinder johoFinder = KoikiShichosonJohoFinder.createInstance();
+                List<KoikiZenShichosonJoho> johoList = johoFinder.koseiShichosonJoho().records();
+                return johoList.get(0).get市町村コード();
+            }
+        }
+        return LasdecCode.EMPTY;
+    }
+
     private void save資格得喪履歴() {
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
@@ -245,8 +275,16 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
                 build.set資格取得届出年月日(row.getShutokuTodokedeDate().getValue());
                 build.set資格取得事由コード(row.getShutokuJiyuKey());
                 build.set資格取得年月日(row.getShutokuDate().getValue());
-                build.set市町村コード(LasdecCode.EMPTY);
+                build.set市町村コード(get市町村コード());
                 build.set被保険者区分コード(RString.EMPTY);
+                if (合併あり.equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+                    IHistoryIterator<IShikibetsuTaisho> ite = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                            .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().getAll();
+                    build.set旧市町村コード(ite.previous().get旧全国地方公共団体コード());
+                } else if (合併なし.equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+                    build.set旧市町村コード(LasdecCode.EMPTY);
+                }
+                build.set広住特措置元市町村コード(LasdecCode.EMPTY);
                 build.set識別コード(識別コード);
                 build.set異動事由コード(row.getShutokuJiyuKey());
                 boolean checkFlag = manager.shikakuShutokuTorokuCheck(DateOfBirthFactory.createInstance(div.getKihonJoho()

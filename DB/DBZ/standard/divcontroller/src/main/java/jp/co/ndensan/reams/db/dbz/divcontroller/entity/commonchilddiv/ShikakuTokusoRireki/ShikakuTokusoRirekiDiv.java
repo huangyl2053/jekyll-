@@ -372,57 +372,49 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
             }
         }
-
         ShikakuTokusoFinder shikakuTokusoFinder = ShikakuTokusoFinder.createInstance();
         ShikakuTokusoParameter parmeter = ShikakuTokusoParameter.createParam(hihokenshaNo, shikibetsuCode);
 
         // 「ビジネス設計_DBAMN00000_資格得喪履歴」の「一覧データ取得」を参照する
         SearchResult<ShikakuTokuso> result = shikakuTokusoFinder.getShikakuTokuso(parmeter);
         List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
-
-        // 画面設定
         for (ShikakuTokuso shikakuTokuso : result.records()) {
-
             dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
 
             TextBoxFlexibleDate 資格取得日 = new TextBoxFlexibleDate();
             資格取得日.setValue(shikakuTokuso.get資格取得年月日());
             row.setShutokuDate(資格取得日);
-
             TextBoxFlexibleDate 資格取得届出日 = new TextBoxFlexibleDate();
             資格取得届出日.setValue(shikakuTokuso.get資格取得届出年月日());
             row.setShutokuTodokedeDate(資格取得届出日);
-
-            try {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get取得事由コード())) {
                 row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getName());
                 row.setShutokuJiyuKey(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getCode());
-            } catch (IllegalArgumentException e) {
+            } else {
                 row.setShutokuJiyu(RString.EMPTY);
+                row.setShutokuJiyuKey(RString.EMPTY);
             }
-            try {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get被保険者区分コード())) {
                 row.setHihokenshaKubun(ShikakuKubun.toValue(shikakuTokuso.get被保険者区分コード()).get略称());
-            } catch (IllegalArgumentException e) {
+            } else {
                 row.setHihokenshaKubun(RString.EMPTY);
             }
-
             TextBoxFlexibleDate 資格喪失日 = new TextBoxFlexibleDate();
             資格喪失日.setValue(shikakuTokuso.get資格喪失年月日());
             row.setSoshitsuDate(資格喪失日);
-
             TextBoxFlexibleDate 資格喪失届出日 = new TextBoxFlexibleDate();
             資格喪失届出日.setValue(shikakuTokuso.get資格喪失届出年月日());
             row.setSoshitsuTodokedeDate(資格喪失届出日);
-
-            try {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get喪失事由コード())) {
                 row.setSoshitsuJiyu(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).get名称());
                 row.setSoshitsuJiyuKey(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).getコード());
-            } catch (IllegalArgumentException e) {
+            } else {
                 row.setSoshitsuJiyu(RString.EMPTY);
+                row.setSoshitsuJiyuKey(RString.EMPTY);
             }
-
-            try {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get住所地特例フラグ())) {
                 row.setJutokuKubun(JushochitokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
-            } catch (IllegalArgumentException e) {
+            } else {
                 row.setJutokuKubun(RString.EMPTY);
             }
             row.setShozaiHokensha(shikakuTokuso.get市町村名称());
@@ -484,5 +476,4 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     public void set追加するボタンの表示状態(boolean 表示モード) {
         this.getBtnAddShikakuShutoku().setDisplayNone(表示モード);
     }
-
 }
