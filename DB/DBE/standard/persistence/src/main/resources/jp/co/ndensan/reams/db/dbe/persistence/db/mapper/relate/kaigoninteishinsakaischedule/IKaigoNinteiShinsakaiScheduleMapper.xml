@@ -52,4 +52,23 @@
         ORDER BY 
             dbT5501."shinsakaiKaisaiYoteiYMD" 
     </select>  
+    
+    <resultMap id="resultMap_getNenkan" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleRelateEntity" autoMapping="true">
+	   <result property="kaisaiYMD"  column="shinsakaiKaisaiYoteiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="gogitai"  column="gogitaiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+     <select id="get年間" resultMap="resultMap_getNenkan" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleMybitisParamter" fetchSize="500">
+         SELECT
+            "shinsakaiKaisaiYoteiYMD",
+            "gogitaiNo"
+         FROM 
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+         WHERE
+            "shinsakaiKaisaiYoteiYMD" LIKE #{nendo} || '%'
+         ORDER BY
+            "shinsakaiKaisaiYoteiYMD",
+            "gogitaiNo"
+     </select>
 </mapper>

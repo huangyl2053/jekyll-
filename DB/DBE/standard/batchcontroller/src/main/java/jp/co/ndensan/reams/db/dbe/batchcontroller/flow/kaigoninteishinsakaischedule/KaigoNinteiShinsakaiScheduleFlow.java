@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.kaigoninteishinsakaischedule;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.kaigoninteishinsakaischedule.NenkanReportProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleBatchParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -22,13 +23,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleBatchParamter> {
 
     private static final String SHINSAKAISCHEDULEHYO = "shinsakaischedulehyo";
+    private static final String NENKAN = "nenkanReport";
     private static final String CALL_KAGAMIFLOW = "kaigoNinteiShinsakaiScheduleKagamiFlow";
     private static final RString SCHEDULEKAGAMIFLOW_FLOWID = new RString("KaigoNinteiShinsakaiScheduleKagamiFlow");
 
     @Override
     protected void defineFlow() {
         executeStep(SHINSAKAISCHEDULEHYO);
-        if (!getParameter().getShinsakaiIinCodeList().isEmpty()) {
+        executeStep(NENKAN);
+        if (getParameter().getShinsakaiIinCodeList() != null && !getParameter().getShinsakaiIinCodeList().isEmpty()) {
             executeStep(CALL_KAGAMIFLOW);
         }
     }
@@ -50,11 +53,12 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
      *
      * @return 帳票_介護認定審査会スケジュール表(年間)
      */
-//    @Step(SHINSAKAISCHEDULEHYO)
-//    protected IBatchFlowCommand shinsakaiSchedule() {
-//        return loopBatch(KaigoNinteiShinsakaiScheduleProcess.class)
-//                .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
-//    }
+    @Step(NENKAN)
+    protected IBatchFlowCommand nenkanReportProcess() {
+        return loopBatch(NenkanReportProcess.class)
+                .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
+    }
+
     /**
      * 介護認定審査会スケジュール表かがみバッチのです。
      *
