@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbd.business.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.DBD1020001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.ddlShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
@@ -42,9 +43,9 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -95,37 +97,12 @@ public class RiyoshaFutangakuGengakuHandler {
     /**
      * 初期化の処理です。
      */
-    public void initialize() {
+    public ResponseData<RiyoshaFutangakuGengakuPanelDiv> initialize() {
 
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
 
-        if (ResponseHolder.getMenuID().equals(申請メニュー)
-                && (被保険者番号 == null || 被保険者番号.getColumnValue().isEmpty())) {
-            div.getBtnShowGemmenJoho().setDisabled(true);
-            div.getBtnInputNew().setDisabled(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
-            div.getDdlShinseiIchiran().setDisabled(true);
-
-            throw new ApplicationException(DbdInformationMessages.受給共通_被保データなし.getMessage());  // TODO #82400
-        }
-
-        RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
-        List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = service.load利用者負担額減額申請All(被保険者番号);
-        if (利用者負担額減額の情報List != null) {
-            ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, new ArrayList<>(利用者負担額減額の情報List));
-            一覧エリアの設定(利用者負担額減額の情報List);
-        }
-
-        div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoKihon().onLoad(被保険者番号);
-        div.getCcdShinseiJoho().initialize(識別コード);
-        PersonalData personalData = toPersonalData(識別コード, 被保険者番号);
-        AccessLogger.log(AccessLogType.照会, personalData);
-        前排他の設定();
-
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
-
             div.getBtnInputNew().setText(申請情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(申請情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 申請情報を.toString());
@@ -140,7 +117,37 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getBtnShinseiKakutei().setDisplayNone(true);
         }
 
+        div.getCcdAtenaInfo().onLoad(識別コード);
+        div.getCcdShinseiJoho().initialize(識別コード);
+
+        if (!ResponseHolder.isReRequest()
+                && (被保険者番号 == null || 被保険者番号.getColumnValue().isEmpty())) {
+            div.getBtnShowGemmenJoho().setDisabled(true);
+            div.getBtnInputNew().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
+            div.getDdlShinseiIchiran().setDisabled(true);
+            InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
+                    DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        } else if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
+        }
+
+        div.getCcdKaigoKihon().onLoad(被保険者番号);
+        RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+        List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = service.load利用者負担額減額申請All(被保険者番号);
+        if (利用者負担額減額の情報List != null) {
+            ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, new ArrayList<>(利用者負担額減額の情報List));
+            一覧エリアの設定(利用者負担額減額の情報List);
+        }
+
+        PersonalData personalData = toPersonalData(識別コード, 被保険者番号);
+        AccessLogger.log(AccessLogType.照会, personalData);
+        前排他の設定();
         ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 0);
+
+        return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
 
     /**
@@ -784,26 +791,23 @@ public class RiyoshaFutangakuGengakuHandler {
 
     private boolean 申請情報_変更あり(RiyoshaFutangakuGengaku 該当DB申請) {
 
-        RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
-        if (承認する_KEY.equals(決定区分)) {
+        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
             return !(is等しい(該当DB申請.get申請事由(), div.getTxtShinseiRiyu().getValue())
                     && 該当DB申請.get申請年月日().equals(div.getTxtShinseiYmd().getValue())
-                    && is減免減額申請共有子Div等しい(該当DB申請)
-                    && is承認情報等しい(該当DB申請, 決定区分));
+                    && is減免減額申請共有子Div等しい(該当DB申請));
         }
         return !(is等しい(該当DB申請.get申請事由(), div.getTxtShinseiRiyu().getValue())
                 && 該当DB申請.get申請年月日().equals(div.getTxtShinseiYmd().getValue())
                 && is減免減額申請共有子Div等しい(該当DB申請)
-                && is承認情報等しい(該当DB申請, 決定区分));
+                && is承認情報等しい(該当DB申請));
     }
 
-    private boolean is承認情報等しい(RiyoshaFutangakuGengaku 該当DB申請, RString 決定区分) {
+    private boolean is承認情報等しい(RiyoshaFutangakuGengaku 該当DB申請) {
 
+        RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
         RString 決定区分コード = RString.EMPTY;
 
-        if (ResponseHolder.getMenuID().equals(申請メニュー)) {
-            決定区分コード = 該当DB申請.get決定区分();
-        } else if (承認する_KEY.equals(決定区分)) {
+        if (承認する_KEY.equals(決定区分)) {
             決定区分コード = KetteiKubun.承認する.getコード();
         } else if (承認しない_KEY.equals(決定区分)) {
             決定区分コード = KetteiKubun.承認しない.getコード();
@@ -814,18 +818,13 @@ public class RiyoshaFutangakuGengakuHandler {
         }
 
         Decimal 給付率data = 該当DB申請.get給付率() == null ? HokenKyufuRitsu.ZERO.getColumnValue() : 該当DB申請.get給付率().getColumnValue();
-        if (承認する_KEY.equals(決定区分)) {
-            return is等しい(該当DB申請.get決定区分(), 決定区分コード)
-                    && 該当DB申請.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
-                    && 該当DB申請.get適用開始年月日().equals(div.getTxtTekiyoYmd().getValue())
-                    && 該当DB申請.get適用終了年月日().equals(div.getTxtYukoKigenYmd().getValue())
-                    && 該当DB申請.is旧措置者有無() == is旧措置者有無
-                    && 給付率data.compareTo(div.getTxtKyufuRitsu().getValue()) == 0;
-        }
         return is等しい(該当DB申請.get決定区分(), 決定区分コード)
                 && 該当DB申請.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
+                && 該当DB申請.get適用開始年月日().equals(div.getTxtTekiyoYmd().getValue())
+                && 該当DB申請.get適用終了年月日().equals(div.getTxtYukoKigenYmd().getValue())
                 && 該当DB申請.is旧措置者有無() == is旧措置者有無
-                && is等しい(該当DB申請.get非承認理由(), div.getTxtShinseiRiyu().getText());
+                && 給付率data.compareTo(div.getTxtKyufuRitsu().getValue()) == 0
+                && is等しい(該当DB申請.get非承認理由(), div.getTxtHiShoninRiyu().getValue());
     }
 
     private boolean is減免減額申請共有子Div等しい(RiyoshaFutangakuGengaku 該当DB申請) {
@@ -877,7 +876,7 @@ public class RiyoshaFutangakuGengakuHandler {
     }
 
     private RString get申請届出者氏名data(GemmenGengakuShinsei gemmenGengakuShinsei) {
-        RString 申請届出者氏名カナdata = gemmenGengakuShinsei.get申請届出者氏名カナ() == null ? RString.EMPTY : gemmenGengakuShinsei.get申請届出者氏名カナ().getColumnValue();
+        RString 申請届出者氏名カナdata = gemmenGengakuShinsei.get申請届出者氏名() == null ? RString.EMPTY : gemmenGengakuShinsei.get申請届出者氏名().getColumnValue();
         return 申請届出者氏名カナdata;
     }
 

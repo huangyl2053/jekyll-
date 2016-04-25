@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.Tekiyojog
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4030011.TeikiyoJogaishaShokaiDiv;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.tekiyojogaishadaicho.TekiyojogaishaDaichoPrintService;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
