@@ -35,13 +35,20 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -57,6 +64,7 @@ public class JigyoshaTouroku {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
+    private static final LockingKey 前排他ロックキー = new LockingKey("KaigoJigyoshaToroku");
     private KaigoJigyoshaShisetsuKanriMapperParameter 事業者登録パラメータ;
     private KaigoJogaiTokureiParameter サービス一覧パラメータ;
     private final KaigoJigyoshaShisetsuKanriManager manager = KaigoJigyoshaShisetsuKanriManager.createInstance();
@@ -95,6 +103,12 @@ public class JigyoshaTouroku {
             getHandler(div).initialize(初期_状態);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010013StateName.照会状態);
+        }
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            div.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(JigyoshaTourokuErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -194,6 +208,7 @@ public class JigyoshaTouroku {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の登録処理(事業者番号, div);
+                RealInitialLocker.release(前排他ロックキー);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
         } else if (初期_状態.equals(状態_修正)) {
@@ -202,6 +217,7 @@ public class JigyoshaTouroku {
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                RealInitialLocker.release(前排他ロックキー);
                 get事業者情報の更新処理(div, 事業者番号, 有効開始日);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
@@ -211,6 +227,7 @@ public class JigyoshaTouroku {
             }
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                RealInitialLocker.release(前排他ロックキー);
                 get事業者情報の削除処理(div);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
@@ -455,6 +472,7 @@ public class JigyoshaTouroku {
         }
         if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.検索に戻る).respond();
         }
         return ResponseData.of(div).respond();
@@ -467,6 +485,7 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnComplete(JigyoshaTourokuDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.完了).respond();
     }
 
@@ -483,5 +502,20 @@ public class JigyoshaTouroku {
 
     private JigyoshaTourokuHandler getHandler(JigyoshaTourokuDiv div) {
         return new JigyoshaTourokuHandler(div);
+    }
+
+    private enum JigyoshaTourokuErrorMessage implements IValidationMessage {
+
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        private final Message message;
+
+        private JigyoshaTourokuErrorMessage(IMessageGettable message) {
+            this.message = message.getMessage();
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
