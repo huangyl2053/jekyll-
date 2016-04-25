@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class PnlConditionDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,7 +26,7 @@ public class PnlConditionDiv extends Panel {
     @JsonProperty("rdoBango")
     private RadioButton rdoBango;
     @JsonProperty("txtJigyosyakeyakuNo")
-    private TextBoxNum txtJigyosyakeyakuNo;
+    private TextBoxCode txtJigyosyakeyakuNo;
     @JsonProperty("rdoMeisyo")
     private RadioButton rdoMeisyo;
     @JsonProperty("rdoJyusyo")
@@ -83,7 +83,7 @@ public class PnlConditionDiv extends Panel {
      * @return txtJigyosyakeyakuNo
      */
     @JsonProperty("txtJigyosyakeyakuNo")
-    public TextBoxNum getTxtJigyosyakeyakuNo() {
+    public TextBoxCode getTxtJigyosyakeyakuNo() {
         return txtJigyosyakeyakuNo;
     }
 
@@ -92,7 +92,7 @@ public class PnlConditionDiv extends Panel {
      * @param txtJigyosyakeyakuNo txtJigyosyakeyakuNo
      */
     @JsonProperty("txtJigyosyakeyakuNo")
-    public void setTxtJigyosyakeyakuNo(TextBoxNum txtJigyosyakeyakuNo) {
+    public void setTxtJigyosyakeyakuNo(TextBoxCode txtJigyosyakeyakuNo) {
         this.txtJigyosyakeyakuNo = txtJigyosyakeyakuNo;
     }
 

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -43,7 +42,7 @@ public class PtnTotal {
             handler.click契約事業者番号();
             div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
             div.getPnlCondition().getTxtJigyosyakeyakuNo()
-                    .setValue(new Decimal(searchKey.getKeiyakuJigyoshaNo().toString()));
+                    .setValue(searchKey.getKeiyakuJigyoshaNo());
         }
         if (searchKey.isSelectedName()) {
             handler.click契約事業者名称();
