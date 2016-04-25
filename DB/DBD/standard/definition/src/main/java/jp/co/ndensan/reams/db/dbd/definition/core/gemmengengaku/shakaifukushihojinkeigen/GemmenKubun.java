@@ -16,32 +16,43 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum GemmenKubun {
 
     /**
-     * コード:無 名称:非課税_老年受給 略称:非課税_老年受給
+     * コード:11 名称:非課税_老年受給 略称:非課税_老年受給
      */
-    非課税_老年受給("非課税_老年受給", "非課税_老年受給"),
+    非課税_老年受給("11", "非課税_老年受給", "非課税_老年受給"),
     /**
-     * コード:無 名称:生保に準ずる 略称:生保に準ずる
+     * コード:12 名称:生保に準ずる 略称:生保に準ずる
      */
-    生保に準ずる("生保に準ずる", "生保に準ずる"),
+    生保に準ずる("12", "生保に準ずる", "生保に準ずる"),
     /**
-     * コード:無 名称:その他 略称:非課税_老年受給
+     * コード:13 名称:その他 略称:非課税_老年受給
      */
-    その他("その他", "その他"),
+    その他("13", "その他", "その他"),
     /**
-     * コード:無 名称:生計困難 略称:生計困難
+     * コード:14 名称:生計困難 略称:生計困難
      */
-    生計困難("生計困難", "生計困難"),
+    生計困難("14", "生計困難", "生計困難"),
     /**
-     * コード:無 名称:激変緩和 略称:激変緩和
+     * コード:15 名称:激変緩和 略称:激変緩和
      */
-    激変緩和("激変緩和", "激変緩和");
+    激変緩和("15", "激変緩和", "激変緩和");
 
+    private final RString code;
     private final RString fullName;
     private final RString shortName;
 
-    private GemmenKubun(String fullname, String shortName) {
+    private GemmenKubun(String code, String fullname, String shortName) {
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
         this.shortName = new RString(shortName);
+    }
+
+    /**
+     * 減免区分のコードを返します。
+     *
+     * @return 減免区分のコード
+     */
+    public RString getコード() {
+        return code;
     }
 
     /**
@@ -65,12 +76,12 @@ public enum GemmenKubun {
     /**
      * 減免区分のコードと一致する内容を探します。
      *
-     * @param fullName 減免区分の名称
+     * @param code 減免区分のコード
      * @return {@code code} に対応する減免区分
      */
-    public static GemmenKubun toValue(RString fullName) {
+    public static GemmenKubun toValue(RString code) {
         for (GemmenKubun gemmenKubun : GemmenKubun.values()) {
-            if (gemmenKubun.fullName.equals(fullName)) {
+            if (gemmenKubun.code.equals(code)) {
                 return gemmenKubun;
             }
         }
