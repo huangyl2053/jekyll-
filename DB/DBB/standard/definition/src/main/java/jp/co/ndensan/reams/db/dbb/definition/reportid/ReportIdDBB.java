@@ -348,7 +348,20 @@ public enum ReportIdDBB {
     /**
      * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
      */
-    DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書 本算定"));
+    DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書 本算定")),
+    /**
+     * 保険料納入通知書（本算定現年度異動）発行一覧表の帳票ID
+     */
+    DBB200016(new ReportId("DBB200016_HonsanteiGennendoIdoNonyutsuchishoHakkoIchiran"), new RString("保険料納入通知書（本算定現年度異動）発行一覧表")),
+    /**
+     * 保険料納入通知書（本算定過年度異動）発行一覧表の帳票ID
+     */
+    DBB200017(new ReportId("DBB200017_HonsanteiKanendoIdoNonyutsuchishoHakkoIchiran"), new RString("保険料納入通知書（本算定過年度異動）発行一覧表")),
+    /**
+     * 本算定異動（過年度）結果一覧表の帳票ID
+     */
+    DBB200027(new ReportId("DBB200027_KanendoIdouKekkaIchiran"), new RString("本算定異動（過年度）結果一覧表"));
+
     private final ReportId reportId;
     private final RString reportName;
 
