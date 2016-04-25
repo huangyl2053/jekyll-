@@ -245,7 +245,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         key.append(shiharai.get提供年月().wareki().toDateString());
         key.append(shiharai.get整理番号());
         key.append(shiharai.get被保険者番号().value());
-        key.append(shiharai.get種類());
+        key.append(shiharai.getサービス種類コード());
         return key.toRString();
     }
 
