@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity
 
 /**
  * 減免の情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBB-9999-013 huangh
  */
 public interface IGemmenJohoRelateMapper {
 

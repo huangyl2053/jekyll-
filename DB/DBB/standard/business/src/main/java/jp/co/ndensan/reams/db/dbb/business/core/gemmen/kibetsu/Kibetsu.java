@@ -268,7 +268,7 @@ public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, 
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity();
+        return hasChangedEntity() | choteiKyotsu.hasAnyChanged();
     }
 
     private static final class _SerializationProxy implements Serializable {
