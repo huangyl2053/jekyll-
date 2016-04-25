@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 処理日付管理マスタを管理するクラスです。
  *
- * @reamsid_L DBB-9999-022 cuilin
+ * @reamsid_L DBZ-9999-022 cuilin
  */
 public class ShoriDateKanriManager {
 
