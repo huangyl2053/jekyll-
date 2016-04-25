@@ -155,12 +155,13 @@ public class JutakuKaishuShinseiJyohoToroku {
         引き継ぎデータEntity.set整理番号(整理番号);
 
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード).validate();
+                div, 画面モード, null).validate();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
+        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード).validate住宅改修内容();
+                div, 画面モード, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
         if (valid2.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid2).respond();
         }
@@ -177,7 +178,6 @@ public class JutakuKaishuShinseiJyohoToroku {
                 ResponseHolder.getMessageCode());
         boolean 確認_汎用 = new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
-        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         if (!handler.is画面データが変更()) {
             if (isCheckデータ変更(内容変更, 判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
                 QuestionMessage message = new QuestionMessage(
@@ -223,11 +223,13 @@ public class JutakuKaishuShinseiJyohoToroku {
         return isCheckTow(限度額, 削除の確認) && !保存の確認 && !確認_汎用;
     }
 
-    private boolean isCheckFive(boolean 判断基準, boolean 限度額, boolean 削除の確認, boolean 保存の確認, boolean 確認_汎用) {
+    private boolean isCheckFive(boolean 判断基準, boolean 限度額, boolean 削除の確認, boolean 保存の確認,
+            boolean 確認_汎用) {
         return isCheckFour(判断基準, 限度額, 削除の確認, 保存の確認) && !確認_汎用;
     }
 
-    private boolean isCheckデータ変更(boolean 内容変更, boolean 判断基準, boolean 限度額, boolean 削除の確認, boolean 保存の確認, boolean 確認_汎用) {
+    private boolean isCheckデータ変更(boolean 内容変更, boolean 判断基準, boolean 限度額, boolean 削除の確認,
+            boolean 保存の確認, boolean 確認_汎用) {
         return isCheckFive(内容変更, 判断基準, 限度額, 削除の確認, 保存の確認) && !確認_汎用;
     }
 
@@ -262,7 +264,8 @@ public class JutakuKaishuShinseiJyohoToroku {
             set完了状態(div);
             return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
         } else if (is状態CheckTow(画面モード)) {
-            RString 償還 = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            RString 償還 = DbBusinessConifg.get(
+                    ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             if (給付実績連動_受託なし.equals(償還) && !確認_汎用) {
                 QuestionMessage message = new QuestionMessage(
                         UrQuestionMessages.確認_汎用.getMessage().getCode(),
@@ -388,7 +391,6 @@ public class JutakuKaishuShinseiJyohoToroku {
      */
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnCopyInfoOfAtena(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
-        // TODO 電話番号
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         handler.set本人情報();
         return ResponseData.of(div).respond();
@@ -594,7 +596,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuDiv div) {
 
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null).validate住宅改修内容();
+                div, null, null).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
@@ -616,7 +618,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 div.getTxtTeikyoYM().getValue().getYearMonth().toDateString());
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null).validate住宅改修内容();
+                div, null, null).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
@@ -707,7 +709,8 @@ public class JutakuKaishuShinseiJyohoToroku {
                 || !要介護状態区分３段階変更チェック.contains(住宅住所変更による));
     }
 
-    private boolean is要介護状態３段階変更(boolean 要介護状態３段階変更の判定, List<RString> 要介護状態区分３段階変更チェック) {
+    private boolean is要介護状態３段階変更(boolean 要介護状態３段階変更の判定,
+            List<RString> 要介護状態区分３段階変更チェック) {
         return 要介護状態３段階変更の判定 && (要介護状態区分３段階変更チェック.isEmpty()
                 || !要介護状態区分３段階変更チェック.contains(要介護状態区分3段階変更による));
     }
@@ -770,9 +773,10 @@ public class JutakuKaishuShinseiJyohoToroku {
     }
 
     private JutakuKaishuShinseiJyohoTorokuValidationHandler getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-            JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード) {
+            JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード, RString 住宅改修内容チェックエラーメッセージ) {
         if (画面モード != null) {
-            return new JutakuKaishuShinseiJyohoTorokuValidationHandler(画面モード, div);
+            return new JutakuKaishuShinseiJyohoTorokuValidationHandler(
+                    画面モード, div, 住宅改修内容チェックエラーメッセージ);
         } else {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(div);
         }

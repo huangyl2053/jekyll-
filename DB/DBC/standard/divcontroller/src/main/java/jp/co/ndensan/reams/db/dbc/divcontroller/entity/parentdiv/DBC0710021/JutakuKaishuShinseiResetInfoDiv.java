@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * JutakuKaishuShinseiResetInfo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-0992-120 yebangqiang
  */
 public class JutakuKaishuShinseiResetInfoDiv extends Panel {
 

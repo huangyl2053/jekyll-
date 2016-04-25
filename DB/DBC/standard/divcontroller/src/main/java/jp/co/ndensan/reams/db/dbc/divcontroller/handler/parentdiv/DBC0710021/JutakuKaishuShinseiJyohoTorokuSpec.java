@@ -5,14 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710021;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JyutakuGaisyunaiyoListParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  * {@link JutakuKaishuShinseiJyohoTorokuDiv}の仕様クラスです。
@@ -77,6 +85,15 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 }
             },
     /**
+     * 住宅改修内容一覧が妥当チェック
+     */
+    住宅改修内容一覧が妥当 {
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is住宅改修内容一覧妥当(div);
+                }
+            },
+    /**
      * 住宅所有者入力必須チェック
      */
     提供着工年月が申請日の年月と一致しない {
@@ -113,6 +130,28 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                     .getSelectedKey().isNullOrEmpty();
         }
 
+        public static boolean is住宅改修内容一覧妥当(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
+                    .get住宅改修内容一覧();
+            if (!gridList.isEmpty()) {
+                List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
+                JyutakuGaisyunaiyoListParameter param;
+                for (dgGaisyuList_Row row : gridList) {
+                    param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
+                            RowState.valueOf(row.getTxtJyotai().toString()),
+                            row.getTxtJutakuAddress(), new FlexibleDate(row.getTxtChakkoYoteibi()));
+                    paramList.add(param);
+                }
+                RString 住宅改修内容一覧チェック = JutakukaishuSikyuShinseiManager.createInstance()
+                        .checkJyutakuGaisyunaiyoList(paramList,
+                                new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
+                if (!住宅改修内容一覧チェック.isNullOrEmpty()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public static boolean is提供着工年月が申請日の年月と一致しない(JutakuKaishuShinseiJyohoTorokuDiv div) {
             RString 給付実績連動_受託なし = new RString("1");
             RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
@@ -123,7 +162,8 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 申請日年月 = div.getJutakuKaishuShinseiContents().getShinseishaInfo()
                         .getTxtShinseiYMD().getValue().getYearMonth();
             }
-            RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+            RString 償還 = DbBusinessConifg.get(
+                    ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             if (給付実績連動_受託なし.equals(償還) && ((申請日 == null)
                     || (!画面提供着工年月.getYearMonth().equals(申請日年月)))) {
                 return false;
