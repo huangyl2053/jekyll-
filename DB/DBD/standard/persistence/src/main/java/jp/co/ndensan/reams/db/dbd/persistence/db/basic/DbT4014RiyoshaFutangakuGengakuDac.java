@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
@@ -39,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT4014RiyoshaFutangakuGengakuDac {
 
-    private static final int 区分_いち = 1;
+    private static final RString 定数_いち = new RString("01");
 
     @InjectSession
     private SqlSession session;
@@ -131,7 +132,7 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(ketteiKubun, KetteiKubun.承認する.getコード()),
-                                leq(tekiyoKaishiYMD, サービス提供年月.plusMonth(区分_いち)),
+                                leq(tekiyoKaishiYMD, new FlexibleDate(サービス提供年月.toDateString().toString() + 定数_いち)),
                                 leq(new FlexibleDate(サービス提供年月.toDateString().toString()
                                                 + サービス提供年月.getLastDay()), tekiyoShuryoYMD))).
                 order(by(rirekiNo, DESC)).

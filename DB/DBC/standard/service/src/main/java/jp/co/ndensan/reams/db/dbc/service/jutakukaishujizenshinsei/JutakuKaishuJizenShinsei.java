@@ -49,6 +49,8 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -66,6 +68,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -92,7 +95,6 @@ public class JutakuKaishuJizenShinsei {
     private static final RString キー = new RString("hiHokenshaNo");
     private static final RString モード_修正 = new RString("修正");
     private static final RString 単一市町村情報_メッセージ = new RString("介護共通の保険者情報");
-    private static final RString 市町村情報_メッセージ = new RString("市町村情報");
     private static final RString 様式番号編集_メッセージ = new RString("?:要介護対象");
     private static final RString 様式番号_21D1 = new RString("21D1");
     private static final RString 様式番号_21D2 = new RString("21D2");
@@ -148,6 +150,7 @@ public class JutakuKaishuJizenShinsei {
      * @param hohoHenkoDac hohoHenkoDac
      * @param 負担額減額Dac 負担額減額Dac
      * @param 介護事業者Dac 介護事業者Dac
+     * @param 介護サービス種類Dac DbT7130KaigoServiceShuruiDac
      */
     public JutakuKaishuJizenShinsei(MapperProvider mapperProvider,
             DbT4001JukyushaDaichoDac 受給者台帳Dac,
@@ -428,22 +431,26 @@ public class JutakuKaishuJizenShinsei {
         }
         ShichosonSecurityJoho 市町村情報セキュリティ情報
                 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報セキュリティ情報 == null) {
+            return null;
+        }
         Code 導入形態コード = 市町村情報セキュリティ情報.get導入形態コード();
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         if ((new Code(DonyuKeitaiCode.事務単一.getCode()).equals(導入形態コード))) {
-            if (finder.koseiShichosonJoho() == null) {
+            SearchResult<KoikiZenShichosonJoho> 単一市町村情報 = finder.koseiShichosonJoho();
+            if (単一市町村情報 == null || 単一市町村情報.records().isEmpty()) {
                 throw new ApplicationException(DbxErrorMessages.業務コンフィグなし
                         .getMessage().replace(単一市町村情報_メッセージ.toString()).evaluate());
             }
-            return finder.koseiShichosonJoho().records().get(0).get証記載保険者番号();
+            return 単一市町村情報.records().get(0).get証記載保険者番号();
         }
         if ((new Code(DonyuKeitaiCode.事務広域.getCode()).equals(導入形態コード))
                 || (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).equals(導入形態コード))) {
-            if (finder.shichosonCodeYoriShichosonJoho(市町村コード) == null) {
-                throw new ApplicationException(UrErrorMessages.対象データなし
-                        .getMessage().replace(市町村情報_メッセージ.toString()).evaluate());
+            SearchResult<ShichosonCodeYoriShichoson> 市町村Entity = finder.shichosonCodeYoriShichosonJoho(市町村コード);
+            if (市町村Entity == null || 市町村Entity.records().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
             }
-            return finder.shichosonCodeYoriShichosonJoho(市町村コード).records().get(0).get証記載保険者番号();
+            return 市町村Entity.records().get(0).get証記載保険者番号();
         }
         return null;
     }
