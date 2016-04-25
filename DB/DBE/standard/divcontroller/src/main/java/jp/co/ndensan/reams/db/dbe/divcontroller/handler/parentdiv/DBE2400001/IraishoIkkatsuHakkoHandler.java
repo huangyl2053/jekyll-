@@ -63,7 +63,6 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
         setNinteiChkShinseiTani(true);
         div.getChkNinteiChosaIraiChohyo().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkNinteiChosaIraiChohyo().setDisabledItemsByKey(selectKeys);
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_NINTEIO);
@@ -87,7 +86,6 @@ public class IraishoIkkatsuHakkoHandler {
         setShujiiChkShinseiTani(true);
         div.getChkShujiiIkenshoShutsuryoku().setSelectedItemsByKey(Collections.<RString>emptyList());
         List<RString> disabledKeys = new ArrayList<>();
-        disabledKeys.add(COMMON_SELECTED);
         disabledKeys.add(CHOHYO_CHECKED);
         div.getChkShujiiIkenshoShutsuryoku().setDisabledItemsByKey(disabledKeys);
         div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
@@ -163,6 +161,32 @@ public class IraishoIkkatsuHakkoHandler {
         }
     }
 
+    /**
+     * 条件をクリアするボタンの押す処理です。
+     */
+    public void clearJoken() {
+        if (STATE_NINTEIO.equals(div.getState())) {
+            div.getTxtIraibiFrom().clearValue();
+            div.getTxtIraibiTo().clearValue();
+            List<RString> selectKeys = new ArrayList<>();
+            selectKeys.add(COMMON_SELECTED);
+            div.getChkNinteioChosaIraisho().setSelectedItemsByKey(selectKeys);
+            div.getCcdNinteiChosaHokensha().loadHokenshaList();
+            div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
+            div.getTxtChosaDispMax().clearValue();
+        }
+        if (STATE_SHUJII.equals(div.getState())) {
+            div.getTxtShujiiIkenshoSakuseiIraibiFrom().clearValue();
+            div.getTxtShujiiIkenshoSakuseiIraibiTo().clearValue();
+            List<RString> selectKeys = new ArrayList<>();
+            selectKeys.add(COMMON_SELECTED);
+            div.getChkShujiiikenshoSakuseiIrai().setSelectedItemsByKey(selectKeys);
+            div.getCcdShujiiIkenshoHokensha().loadHokenshaList();
+            div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
+            div.getTxtIkenshoDispMax().clearValue();
+        }
+    }
+
     private void setShujiiChkShinseiTani(boolean flag) {
         if (!flag) {
             List<RString> shujiiIkenshoDisabledKeys = new ArrayList<>();
@@ -174,43 +198,42 @@ public class IraishoIkkatsuHakkoHandler {
                 ocrDisabledKeys.add(CHOHYO_CHECKED);
                 div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(ocrDisabledKeys);
             }
-        } else {
-            div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabled(flag);
         }
+        // TODO 帳票「主治医意見書記入用紙」が未実装
+        List<RString> disabledKeys = new ArrayList<>();
+        disabledKeys.add(COMMON_SELECTED);
+        disabledKeys.add(CHOHYO_CHECKED);
+        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(disabledKeys);
         div.getChkShujiiIkenshoSakuseiIraisho().setDisabled(flag);
-        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabled(true);
-        div.getChkShindanMeireishoAndTeishutsuIraisho().setDisabled(true);
+        div.getChkShindanMeireishoAndTeishutsuIraisho().setDisabled(flag);
     }
 
     private void setNinteiChkShinseiTani(boolean flag) {
-//        if (!flag) {
-//            List<RString> ninteiChosahyoDisabledKeys = new ArrayList<>();
-//            List<RString> ocrDisabledKeys = new ArrayList<>();
-//            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-//                ninteiChosahyoDisabledKeys.add(COMMON_SELECTED);
-//            } else {
-//                ocrDisabledKeys.add(COMMON_SELECTED);
-//            }
-//            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-//                ninteiChosahyoDisabledKeys.add(CHOHYO_CHECKED);
-//            } else {
-//                ocrDisabledKeys.add(CHOHYO_CHECKED);
-//            }
-//            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-//                ninteiChosahyoDisabledKeys.add(SHUTSU_CHECKED);
-//            } else {
-//                ocrDisabledKeys.add(SHUTSU_CHECKED);
-//            }
-//            div.getChkNinteiChosahyoShurui().setDisabledItemsByKey(ninteiChosahyoDisabledKeys);
-//            div.getChkNinteiChosahyoOcrShurui().setDisabledItemsByKey(ocrDisabledKeys);
-//        } else {
-//            div.getChkNinteiChosahyoShurui().setDisabled(flag);
-//            div.getChkNinteiChosahyoOcrShurui().setDisabled(flag);
-//        }
-        div.getChkNinteiChosahyoShurui().setDisabled(true);
-        div.getChkNinteiChosahyoOcrShurui().setDisabled(true);
+        div.getChkNinteiChosahyoShurui().setDisabled(flag);
+        div.getChkNinteiChosahyoOcrShurui().setDisabled(flag);
         div.getChkNinteiChosaIraisho().setDisabled(flag);
-        div.getChkNinteiChosahyoSonota().setDisabled(true);
+        div.getChkNinteiChosahyoSonota().setDisabled(flag);
+        if (!flag) {
+            List<RString> ninteiChosahyoDisabledKeys = new ArrayList<>();
+            List<RString> ocrDisabledKeys = new ArrayList<>();
+            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, SubGyomuCode.DBE認定支援))) {
+                ninteiChosahyoDisabledKeys.add(COMMON_SELECTED);
+            } else {
+                ocrDisabledKeys.add(COMMON_SELECTED);
+            }
+            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
+                ninteiChosahyoDisabledKeys.add(CHOHYO_CHECKED);
+            } else {
+                ocrDisabledKeys.add(CHOHYO_CHECKED);
+            }
+            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, SubGyomuCode.DBE認定支援))) {
+                ninteiChosahyoDisabledKeys.add(SHUTSU_CHECKED);
+            } else {
+                ocrDisabledKeys.add(SHUTSU_CHECKED);
+            }
+            div.getChkNinteiChosahyoShurui().setDisabledItemsByKey(ninteiChosahyoDisabledKeys);
+            div.getChkNinteiChosahyoOcrShurui().setDisabledItemsByKey(ocrDisabledKeys);
+        }
     }
 
     private void setHakkobiAndTeishutsuKigen(RString ninteiShinsei) {
