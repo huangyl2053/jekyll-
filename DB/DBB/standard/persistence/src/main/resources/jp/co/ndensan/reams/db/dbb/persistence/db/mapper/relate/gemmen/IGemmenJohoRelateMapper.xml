@@ -33,7 +33,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.ur.urc.persistence.db.mapper.basic.shuno.chotei.IUrT0705ChoteiKyotsuMapper.allColumn_UrT0705ChoteiKyotsu" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
         FROM
         rgdb."UrT0705ChoteiKyotsu"
         ) AS UrT0705ChoteiKyotsu
@@ -62,7 +62,7 @@
             <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
             <collection property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
             <collection property="賦課減免Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2004GemmenMapper.ResultMap_DbT2004GemmenEntity"/>
-            <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.ur.urc.persistence.db.mapper.basic.shuno.chotei.IUrT0705ChoteiKyotsuMapper.resultMap_UrT0705ChoteiKyotsuEntity"/>
+            <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
         </resultMap>
 
 </mapper>

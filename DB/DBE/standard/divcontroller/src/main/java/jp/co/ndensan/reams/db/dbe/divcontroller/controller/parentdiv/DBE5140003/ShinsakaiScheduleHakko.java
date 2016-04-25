@@ -121,7 +121,9 @@ public class ShinsakaiScheduleHakko {
         }
         return new KaigoNinteiShinsakaiScheduleBatchParamter(
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toDateString(),
-                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(), 審査会委員コードリスト);
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(),
+                new RString("xx"),
+                審査会委員コードリスト);
     }
 
     private ValidationMessageControlPairs getCheck(ShinsakaiScheduleHakkoValidationHandler validationHandler) {

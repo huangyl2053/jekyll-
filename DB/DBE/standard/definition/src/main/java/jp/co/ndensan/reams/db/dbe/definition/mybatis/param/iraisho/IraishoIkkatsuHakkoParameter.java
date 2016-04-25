@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 依頼書一括発行のパラメータクラス
@@ -27,6 +28,7 @@ public final class IraishoIkkatsuHakkoParameter {
     private final List<RString> 認定調査票;
     private final List<RString> 主治医意見書作成依頼書;
     private final List<RString> 主治医意見書;
+    private final Decimal 最大表示件数;
     private final RString 通常 = ShoriJotaiKubun.通常.getコード();
     private final RString 延期 = ShoriJotaiKubun.延期.getコード();
     private final boolean is依頼日From;
@@ -55,6 +57,7 @@ public final class IraishoIkkatsuHakkoParameter {
      * @param 認定調査票 認定調査票
      * @param 主治医意見書作成依頼書 主治医意見書作成依頼書
      * @param 主治医意見書 主治医意見書
+     * @param 最大表示件数 最大表示件数
      * @param is依頼日From is依頼日From
      * @param is依頼日To is依頼日To
      * @param is認定調査依頼書未印刷 is認定調査依頼書未印刷
@@ -76,6 +79,7 @@ public final class IraishoIkkatsuHakkoParameter {
             List<RString> 認定調査票,
             List<RString> 主治医意見書作成依頼書,
             List<RString> 主治医意見書,
+            Decimal 最大表示件数,
             boolean is依頼日From,
             boolean is依頼日To,
             boolean is認定調査依頼書未印刷,
@@ -98,6 +102,7 @@ public final class IraishoIkkatsuHakkoParameter {
         this.認定調査票 = 認定調査票;
         this.主治医意見書作成依頼書 = 主治医意見書作成依頼書;
         this.主治医意見書 = 主治医意見書;
+        this.最大表示件数 = 最大表示件数;
         this.is依頼日From = is依頼日From;
         this.is依頼日To = is依頼日To;
         this.is認定調査依頼書未印刷 = is認定調査依頼書未印刷;
@@ -125,6 +130,7 @@ public final class IraishoIkkatsuHakkoParameter {
      * @param 認定調査票 認定調査票
      * @param 主治医意見書作成依頼書 主治医意見書作成依頼書
      * @param 主治医意見書 主治医意見書
+     * @param 最大表示件数 最大表示件数
      * @return 依頼書一括発行パラメータークラス
      */
     public static IraishoIkkatsuHakkoParameter createIraishoIkkatsuHakkoParameter(
@@ -134,7 +140,8 @@ public final class IraishoIkkatsuHakkoParameter {
             ShoKisaiHokenshaNo 保険者,
             List<RString> 認定調査票,
             List<RString> 主治医意見書作成依頼書,
-            List<RString> 主治医意見書) {
+            List<RString> 主治医意見書,
+            Decimal 最大表示件数) {
 
         boolean is依頼日From = false;
         boolean is依頼日To = false;
@@ -157,6 +164,7 @@ public final class IraishoIkkatsuHakkoParameter {
                 認定調査票,
                 主治医意見書作成依頼書,
                 主治医意見書,
+                最大表示件数,
                 is依頼日From,
                 is依頼日To,
                 is未印刷(認定調査依頼書),
