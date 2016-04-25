@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNumRange;
 /**
  * HanyoListAtenaSelect のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-1610-040 dingyi
  */
 public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSelectDiv {
 

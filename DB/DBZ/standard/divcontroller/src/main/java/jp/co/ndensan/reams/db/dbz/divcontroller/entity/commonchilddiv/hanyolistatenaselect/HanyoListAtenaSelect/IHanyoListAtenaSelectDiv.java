@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
+
+ * @reamsid_L DBA-1610-040 dingyi
  */
 public interface IHanyoListAtenaSelectDiv extends ICommonChildDivBaseProperties {
 
