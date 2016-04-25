@@ -41,6 +41,8 @@ public class ShinsakaiScheduleHakko {
         div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().clear();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
+        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().getSelectedKeys().clear();
+        div.getShinsakaiScheduleSrch().getTxtNendo().clearValue();
         CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKO_BTTON, false);
         return ResponseData.of(div).respond();
     }
@@ -119,10 +121,14 @@ public class ShinsakaiScheduleHakko {
         for (dgShinsakaiScheduleKagami_Row row : rowList) {
             審査会委員コードリスト.add(row.getShinsakaiIinCode());
         }
+        RString nendoParameter = RString.EMPTY;
+        if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
+            nendoParameter = div.getShinsakaiScheduleSrch().getTxtNendo().getValue().toDateString();
+        }
         return new KaigoNinteiShinsakaiScheduleBatchParamter(
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toDateString(),
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(),
-                new RString("xx"),
+                nendoParameter,
                 審査会委員コードリスト);
     }
 
@@ -136,6 +142,10 @@ public class ShinsakaiScheduleHakko {
             return validPairs;
         }
         validPairs = validationHandler.印刷対象介護認定審査会委員選択チェック();
+        if (validPairs.iterator().hasNext()) {
+            return validPairs;
+        }
+        validPairs = validationHandler.年間チェック();
         if (validPairs.iterator().hasNext()) {
             return validPairs;
         }
