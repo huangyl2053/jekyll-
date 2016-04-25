@@ -36,7 +36,6 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     private static final String SHIKAKUCHUSHUTSU_KUBUN = "shikakuChushutsuKubun";
     private static final String SHUTOKUJIYU = "shutokujiyu";
     private static final String SOSHITSUJIYU = "soshitsujiyu";
-    private static final String PSMCHUSHUTSU_JYOUKEN = "psmChushutsuJyouken";
     private static final String SHUTSURYOKUKOMUKU_ID = "shutsuryokuKomuku_Id";
     private static final String PAGESHUTURYOKUJUN_ID = "pageShuturyokujun_Id";
     private static final String CHOHYO_ID = "chohyoId";
@@ -46,9 +45,18 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     private static final String PSMSEINENGAPPIYMD_START = "psmSeinengappiYMD_Start";
     private static final String PSMSEINENGAPPIYMD_END = "psmSeinengappiYMD_End";
     private static final String PSMAGEKIJUNNI = "psmAgeKijunni";
+    private static final String SHICHOSON_CODE = "shichoson_Code";
     private static final String PSMCHIKU_KUBUN = "psmChiku_Kubun";
-    private static final String PSMCHIKU_START = "psmChiku_Start";
-    private static final String PSMCHIKU_END = "psmChiku_End";
+    private static final String PSMJUSHO_FROM = "psmJusho_From";
+    private static final String PSMJUSHO_TO = "psmJusho_To";
+    private static final String PSMGYOSEIKU_FROM = "psmGyoseiku_From";
+    private static final String PSMGYOSEIKU_TO = "psmGyoseiku_To";
+    private static final String PSMCHIKU1_FROM = "psmChiku1_From";
+    private static final String PSMCHIKU1_TO = "psmChiku1_To";
+    private static final String PSMCHIKU2_FROM = "psmChiku2_From";
+    private static final String PSMCHIKU2_TO = "psmChiku2_To";
+    private static final String PSMCHIKU3_FROM = "psmChiku3_From";
+    private static final String PSMCHIKU3_TO = "psmChiku3_To";
 
     @BatchParameter(key = KOMUKUFUKAMEYI, name = "項目名付加")
     private boolean komukuFukaMeyi;
@@ -78,15 +86,13 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     private List<RString> shutokujiyu;
     @BatchParameter(key = SOSHITSUJIYU, name = "喪失事由")
     private List<RString> soshitsujiyu;
-    @BatchParameter(key = PSMCHUSHUTSU_JYOUKEN, name = "宛名抽出条件")
-    private RString psmChushutsuJyouken;
     @BatchParameter(key = PAGESHUTURYOKUJUN_ID, name = "改頁出力順ID")
     private RString pageShuturyokujun_Id;
     @BatchParameter(key = SHUTSURYOKUKOMUKU_ID, name = "出力項目ID")
     private RString shutsuryokuKomuku_Id;
     @BatchParameter(key = CHOHYO_ID, name = "帳票ID")
     private RString chohyoId;
-    @BatchParameter(key = PSMCHUSHUTSU_KUBUN, name = "宛名抽出区分")
+    @BatchParameter(key = PSMCHUSHUTSU_KUBUN, name = "年齢層抽出方法")
     private RString psmChushutsu_Kubun;
     @BatchParameter(key = PSMCHUSHUTSUAGE_START, name = "宛名抽出年齢開始")
     private RString psmChushutsuAge_Start;
@@ -96,14 +102,32 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     private RString psmSeinengappiYMD_Start;
     @BatchParameter(key = PSMSEINENGAPPIYMD_END, name = "宛名抽出生年月日終了")
     private RString psmSeinengappiYMD_End;
-    @BatchParameter(key = PSMAGEKIJUNNI, name = "宛名抽出年齢基準日")
+    @BatchParameter(key = PSMAGEKIJUNNI, name = "年齢基準日")
     private FlexibleDate psmAgeKijunni;
-    @BatchParameter(key = PSMCHIKU_KUBUN, name = "宛名抽出地区区分")
+    @BatchParameter(key = SHICHOSON_CODE, name = "市町村コード")
+    private RString shichoson_Code;
+    @BatchParameter(key = PSMCHIKU_KUBUN, name = "地区区分")
     private RString psmChiku_Kubun;
-    @BatchParameter(key = PSMCHIKU_START, name = "宛名抽出地区開始")
-    private RString psmChiku_Start;
-    @BatchParameter(key = PSMCHIKU_END, name = "宛名抽出地区終了")
-    private RString psmChiku_End;
+    @BatchParameter(key = PSMJUSHO_FROM, name = "町域From")
+    private RString psmJusho_From;
+    @BatchParameter(key = PSMJUSHO_TO, name = "町域To")
+    private RString psmJusho_To;
+    @BatchParameter(key = PSMGYOSEIKU_FROM, name = "行政区From")
+    private RString psmGyoseiku_From;
+    @BatchParameter(key = PSMGYOSEIKU_TO, name = "行政区To")
+    private RString psmGyoseiku_To;
+    @BatchParameter(key = PSMCHIKU1_FROM, name = "地区１From")
+    private RString psmChiku1_From;
+    @BatchParameter(key = PSMCHIKU1_TO, name = "地区１To")
+    private RString psmChiku1_To;
+    @BatchParameter(key = PSMCHIKU2_FROM, name = "地区２From")
+    private RString psmChiku2_From;
+    @BatchParameter(key = PSMCHIKU2_TO, name = "地区２To")
+    private RString psmChiku2_To;
+    @BatchParameter(key = PSMCHIKU3_FROM, name = "地区３From")
+    private RString psmChiku3_From;
+    @BatchParameter(key = PSMCHIKU3_TO, name = "地区３To")
+    private RString psmChiku3_To;
 
     /**
      * コンストラクタです。
@@ -132,7 +156,6 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
                 this.shikakuChushutsuKubun,
                 this.shutokujiyu,
                 this.soshitsujiyu,
-                this.psmChushutsuJyouken,
                 this.pageShuturyokujun_Id,
                 this.shutsuryokuKomuku_Id,
                 this.chohyoId,
@@ -142,8 +165,18 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
                 this.psmSeinengappiYMD_Start,
                 this.psmSeinengappiYMD_End,
                 this.psmAgeKijunni,
+                this.shichoson_Code,
                 this.psmChiku_Kubun,
-                this.psmChiku_Start,
-                this.psmChiku_End);
+                this.psmJusho_From,
+                this.psmJusho_To,
+                this.psmGyoseiku_From,
+                this.psmGyoseiku_To,
+                this.psmChiku1_From,
+                this.psmChiku1_To,
+                this.psmChiku2_From,
+                this.psmChiku2_To,
+                this.psmChiku3_From,
+                this.psmChiku3_To
+        );
     }
 }

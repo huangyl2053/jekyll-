@@ -33,7 +33,6 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
     private final RString shikakuChushutsuKubun;
     private final List<RString> shutokujiyu;
     private final List<RString> soshitsujiyu;
-    private final RString psmChushutsuJyouken;
     private final RString pageShuturyokujun_Id;
     private final RString shutsuryokuKomuku_Id;
     private final RString chohyoId;
@@ -43,9 +42,19 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
     private final RString psmSeinengappiYMD_Start;
     private final RString psmSeinengappiYMD_End;
     private final FlexibleDate psmAgeKijunni;
+    private final RString shichoson_Code;
     private final RString psmChiku_Kubun;
-    private final RString psmChiku_Start;
-    private final RString psmChiku_End;
+    private final RString psmJusho_From;
+    private final RString psmJusho_To;
+    private final RString psmGyoseiku_From;
+    private final RString psmGyoseiku_To;
+    private final RString psmChiku1_From;
+    private final RString psmChiku1_To;
+    private final RString psmChiku2_From;
+    private final RString psmChiku2_To;
+    private final RString psmChiku3_From;
+    private final RString psmChiku3_To;
+
     private RString psmShikibetsuTaisho;
     private boolean is直近;
     private boolean is基準日;
@@ -95,7 +104,6 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
      * @param shikakuChushutsuKubun 資格抽出区分
      * @param shutokujiyu 取得事由
      * @param soshitsujiyu 喪失事由
-     * @param psmChushutsuJyouken 宛名抽出条件
      * @param pageShuturyokujun_Id 改頁出力順ID
      * @param shutsuryokuKomuku_Id 出力項目ID
      * @param chohyoId 帳票ID
@@ -105,9 +113,18 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
      * @param psmSeinengappiYMD_Start 宛名抽出生年月日開始
      * @param psmSeinengappiYMD_End 宛名抽出生年月日終了
      * @param psmAgeKijunni 宛名抽出年齢基準日
+     * @param shichoson_Code 市町村コード
      * @param psmChiku_Kubun 宛名抽出地区区分
-     * @param psmChiku_Start 宛名抽出地区開始
-     * @param psmChiku_End 宛名抽出地区終了
+     * @param psmJusho_From 町域From
+     * @param psmJusho_To 町域To
+     * @param psmGyoseiku_From 行政区From
+     * @param psmGyoseiku_To 行政区To
+     * @param psmChiku1_From 地区１From
+     * @param psmChiku1_To 地区１To
+     * @param psmChiku2_From 地区２From
+     * @param psmChiku2_To 地区２To
+     * @param psmChiku3_From 地区３From
+     * @param psmChiku3_To 地区３To
      */
     public HanyoListHihokenshadaichoProcessParameter(
             boolean komukuFukaMeyi,
@@ -124,7 +141,6 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
             RString shikakuChushutsuKubun,
             List<RString> shutokujiyu,
             List<RString> soshitsujiyu,
-            RString psmChushutsuJyouken,
             RString pageShuturyokujun_Id,
             RString shutsuryokuKomuku_Id,
             RString chohyoId,
@@ -134,9 +150,18 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
             RString psmSeinengappiYMD_Start,
             RString psmSeinengappiYMD_End,
             FlexibleDate psmAgeKijunni,
+            RString shichoson_Code,
             RString psmChiku_Kubun,
-            RString psmChiku_Start,
-            RString psmChiku_End) {
+            RString psmJusho_From,
+            RString psmJusho_To,
+            RString psmGyoseiku_From,
+            RString psmGyoseiku_To,
+            RString psmChiku1_From,
+            RString psmChiku1_To,
+            RString psmChiku2_From,
+            RString psmChiku2_To,
+            RString psmChiku3_From,
+            RString psmChiku3_To) {
         this.komukuFukaMeyi = komukuFukaMeyi;
         this.rembanfuka = rembanfuka;
         this.hidukeHensyu = hidukeHensyu;
@@ -151,7 +176,6 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
         this.shikakuChushutsuKubun = shikakuChushutsuKubun;
         this.shutokujiyu = shutokujiyu;
         this.soshitsujiyu = soshitsujiyu;
-        this.psmChushutsuJyouken = psmChushutsuJyouken;
         this.pageShuturyokujun_Id = pageShuturyokujun_Id;
         this.shutsuryokuKomuku_Id = shutsuryokuKomuku_Id;
         this.chohyoId = chohyoId;
@@ -161,9 +185,18 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
         this.psmSeinengappiYMD_Start = psmSeinengappiYMD_Start;
         this.psmSeinengappiYMD_End = psmSeinengappiYMD_End;
         this.psmAgeKijunni = psmAgeKijunni;
+        this.shichoson_Code = shichoson_Code;
         this.psmChiku_Kubun = psmChiku_Kubun;
-        this.psmChiku_Start = psmChiku_Start;
-        this.psmChiku_End = psmChiku_End;
+        this.psmJusho_From = psmJusho_From;
+        this.psmJusho_To = psmJusho_To;
+        this.psmGyoseiku_From = psmGyoseiku_From;
+        this.psmGyoseiku_To = psmGyoseiku_To;
+        this.psmChiku1_From = psmChiku1_From;
+        this.psmChiku1_To = psmChiku1_To;
+        this.psmChiku2_From = psmChiku2_From;
+        this.psmChiku2_To = psmChiku2_To;
+        this.psmChiku3_From = psmChiku3_From;
+        this.psmChiku3_To = psmChiku3_To;
     }
 
     /**
@@ -187,7 +220,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
                 shikakuChushutsuKubun,
                 shutokujiyu,
                 soshitsujiyu,
-                psmChushutsuJyouken,
+                RString.EMPTY,
                 pageShuturyokujun_Id,
                 shutsuryokuKomuku_Id,
                 chohyoId,
@@ -197,9 +230,18 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
                 psmSeinengappiYMD_Start,
                 psmSeinengappiYMD_End,
                 psmAgeKijunni,
+                shichoson_Code,
                 psmChiku_Kubun,
-                psmChiku_Start,
-                psmChiku_End,
+                psmJusho_From,
+                psmJusho_To,
+                psmGyoseiku_From,
+                psmGyoseiku_To,
+                psmChiku1_From,
+                psmChiku1_To,
+                psmChiku2_From,
+                psmChiku2_To,
+                psmChiku3_From,
+                psmChiku3_To,
                 is直近,
                 is基準日,
                 is範囲,
