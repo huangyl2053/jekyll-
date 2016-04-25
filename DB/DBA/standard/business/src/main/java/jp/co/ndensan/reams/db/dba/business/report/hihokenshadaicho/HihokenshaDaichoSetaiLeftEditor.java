@@ -39,7 +39,7 @@ public class HihokenshaDaichoSetaiLeftEditor implements IHihokenshaDaichoEditor 
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (joho.get世帯左情報() == null || joho.get世帯左情報().get世帯左No().size() <= index) {
+        if (joho.get世帯左情報() == null || joho.get世帯左情報().get世帯左No().isEmpty() || joho.get世帯左情報().get世帯左No().size() <= index) {
             return source;
         }
         return editBody(source);
@@ -47,8 +47,8 @@ public class HihokenshaDaichoSetaiLeftEditor implements IHihokenshaDaichoEditor 
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         SetaiLeftEntity 世帯左情報 = joho.get世帯左情報();
-        source.listSetaiLeft_1 = 世帯左情報.get世帯左No().get(index);
-        source.listSetaiLeft_2 = 世帯左情報.get世帯左識別コード().get(index) == null
+        source.listSetaiLeft_1 = HihokenshaDaichoEditor.getIndexValue(世帯左情報.get世帯左No(), index);
+        source.listSetaiLeft_2 = 世帯左情報.get世帯左識別コード().isEmpty() || 世帯左情報.get世帯左識別コード().get(index) == null
                 ? RString.EMPTY : 世帯左情報.get世帯左識別コード().get(index).value();
         return source;
     }

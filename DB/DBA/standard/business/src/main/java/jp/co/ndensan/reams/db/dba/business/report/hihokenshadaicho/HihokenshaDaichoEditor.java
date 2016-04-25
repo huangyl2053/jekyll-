@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaicho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaichosakusei.HihokenshaDaichoSakusei;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaicho.HihokenshaDaichoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -88,14 +89,34 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
     /**
      * 日付型はFlexibleDateをRStringに変換します。
      *
-     * @param date 変換前 yyyyMMdd
+     * @param dateList 変換前 yyyyMMdd
+     * @param index 指定Index
+     *
      * @return 変換後 yyyy/MM/dd
      */
-    public static RString dataFomart(FlexibleDate date) {
+    public static RString dataFomart(List<FlexibleDate> dateList, int index) {
+        if (dateList.isEmpty()) {
+            return RString.EMPTY;
+        }
+        FlexibleDate date = dateList.get(index);
         RString fomartDate = RString.EMPTY;
         if (date != null) {
             fomartDate = date.seireki().toDateString().replace(FOMART_TEN, FOMART_LINE);
         }
         return fomartDate;
+    }
+
+    /**
+     * リスト項目の指定Index項を取得します。
+     *
+     * @param list リスト項目
+     * @param index 指定Index
+     * @return リスト項目の指定Index項
+     */
+    public static RString getIndexValue(List<RString> list, int index) {
+        if (list.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return list.get(index);
     }
 }

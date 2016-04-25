@@ -38,29 +38,31 @@ public class HihokenshaDaichoShikakuIdoEditor implements IHihokenshaDaichoEditor
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get資格異動No().size() <= index) {
+        if (entity == null || entity.get資格異動No().isEmpty() || entity.get資格異動No().size() <= index) {
             return source;
         }
         return editBody(source);
     }
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
-        source.listShikakuIdo_1 = entity.get資格異動No().get(index);
-        source.listShikakuIdo_2 = entity.get取得日().get(index);
-        source.listShikakuIdo_3 = entity.get取得事由コード().get(index);
-        source.listShikakuIdo_4 = entity.get取得事由名称().get(index);
-        source.listShikakuIdo_5 = entity.get一号取得日().get(index);
-        source.listShikakuIdo_6 = entity.get喪失日().get(index);
-        source.listShikakuIdo_7 = entity.get喪失事由コード().get(index);
-        source.listShikakuIdo_8 = entity.get喪失事由名称().get(index);
-        source.listShikakuIdo_9 = entity.get資格区分().get(index);
-        source.listShikakuIdo_10 = entity.get変更日().get(index);
-        source.listShikakuIdo_11 = entity.get変更事由コード().get(index);
-        source.listShikakuIdo_12 = entity.get変更事由名称().get(index);
-        source.listShikakuIdo_13 = entity.get住特適用日().get(index);
-        source.listShikakuIdo_14 = entity.get住特解除日().get(index);
-        source.listShikakuIdo_15 = entity.get措置保険者().get(index) == null ? RString.EMPTY : entity.get措置保険者().get(index).value();
-        source.listShikakuIdo_16 = entity.get旧保険者().get(index) == null ? RString.EMPTY : entity.get旧保険者().get(index).value();
+        source.listShikakuIdo_1 = HihokenshaDaichoEditor.getIndexValue(entity.get資格異動No(), index);
+        source.listShikakuIdo_2 = HihokenshaDaichoEditor.getIndexValue(entity.get取得日(), index);
+        source.listShikakuIdo_3 = HihokenshaDaichoEditor.getIndexValue(entity.get取得事由コード(), index);
+        source.listShikakuIdo_4 = HihokenshaDaichoEditor.getIndexValue(entity.get取得事由名称(), index);
+        source.listShikakuIdo_5 = HihokenshaDaichoEditor.getIndexValue(entity.get一号取得日(), index);
+        source.listShikakuIdo_6 = HihokenshaDaichoEditor.getIndexValue(entity.get喪失日(), index);
+        source.listShikakuIdo_7 = HihokenshaDaichoEditor.getIndexValue(entity.get喪失事由コード(), index);
+        source.listShikakuIdo_8 = HihokenshaDaichoEditor.getIndexValue(entity.get喪失事由名称(), index);
+        source.listShikakuIdo_9 = HihokenshaDaichoEditor.getIndexValue(entity.get資格区分(), index);
+        source.listShikakuIdo_10 = HihokenshaDaichoEditor.getIndexValue(entity.get変更日(), index);
+        source.listShikakuIdo_11 = HihokenshaDaichoEditor.getIndexValue(entity.get変更事由コード(), index);
+        source.listShikakuIdo_12 = HihokenshaDaichoEditor.getIndexValue(entity.get変更事由名称(), index);
+        source.listShikakuIdo_13 = HihokenshaDaichoEditor.getIndexValue(entity.get住特適用日(), index);
+        source.listShikakuIdo_14 = HihokenshaDaichoEditor.getIndexValue(entity.get住特解除日(), index);
+        source.listShikakuIdo_15 = entity.get措置保険者().isEmpty() || entity.get措置保険者().get(index) == null ? RString.EMPTY
+                : entity.get措置保険者().get(index).value();
+        source.listShikakuIdo_16 = entity.get旧保険者().isEmpty() || entity.get旧保険者().get(index) == null ? RString.EMPTY
+                : entity.get旧保険者().get(index).value();
         return source;
     }
 }

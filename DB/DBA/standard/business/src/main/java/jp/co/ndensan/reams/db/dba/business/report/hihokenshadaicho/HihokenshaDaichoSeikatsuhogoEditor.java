@@ -37,7 +37,7 @@ public class HihokenshaDaichoSeikatsuhogoEditor implements IHihokenshaDaichoEdit
      */
     @Override
     public HihokenshaDaichoReportSource edit(HihokenshaDaichoReportSource source) {
-        if (entity == null || entity.get生活保護No().size() <= index) {
+        if (entity == null || entity.get生活保護No().isEmpty() || entity.get生活保護No().size() <= index) {
             return source;
         }
         return editBody(source);
@@ -45,11 +45,11 @@ public class HihokenshaDaichoSeikatsuhogoEditor implements IHihokenshaDaichoEdit
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listSeikatsuhogo_1 = entity.get生活保護No().get(index);
-        source.listSeikatsuhogo_2 = HihokenshaDaichoEditor.dataFomart(entity.get受給開始日().get(index));
-        source.listSeikatsuhogo_3 = HihokenshaDaichoEditor.dataFomart(entity.get受給廃止日().get(index));
-        source.listSeikatsuhogo_4 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止開始日().get(index));
-        source.listSeikatsuhogo_5 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止終了日().get(index));
-        source.listSeikatsuhogo_6 = entity.get扶助種類().get(index);
+        source.listSeikatsuhogo_2 = HihokenshaDaichoEditor.dataFomart(entity.get受給開始日(), index);
+        source.listSeikatsuhogo_3 = HihokenshaDaichoEditor.dataFomart(entity.get受給廃止日(), index);
+        source.listSeikatsuhogo_4 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止開始日(), index);
+        source.listSeikatsuhogo_5 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止終了日(), index);
+        source.listSeikatsuhogo_6 = HihokenshaDaichoEditor.getIndexValue(entity.get扶助種類(), index);
         return source;
     }
 }
