@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo;
 
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
-import jp.co.ndensan.reams.db.dba.definition.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
