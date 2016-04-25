@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050011.TekiyoJogaiTotalHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -47,7 +48,7 @@ public class TekiyoJogaiTotal {
      * @return レスポンス
      */
     public ResponseData onLoad(TekiyoJogaiTotalDiv requestDiv) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, ShikibetsuCode.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         RString menuId = ResponseHolder.getMenuID();
         getHandler(requestDiv).initialize(識別コード, menuId);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
@@ -92,7 +93,7 @@ public class TekiyoJogaiTotal {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, ShikibetsuCode.class);
+            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
             RString menuId = ResponseHolder.getMenuID();
             if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_解除.equals(menuId)) {
                 requestDiv.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().saveTekiyoJogaisha(識別コード);
