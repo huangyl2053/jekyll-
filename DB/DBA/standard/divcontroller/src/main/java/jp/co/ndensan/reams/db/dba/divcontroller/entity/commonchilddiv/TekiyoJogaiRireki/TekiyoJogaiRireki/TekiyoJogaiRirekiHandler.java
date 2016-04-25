@@ -59,8 +59,8 @@ public class TekiyoJogaiRirekiHandler {
     private static final RString 台帳種別表示無し = new RString("台帳種別表示無し");
     private static final RString 適用除外者 = new RString("適用除外者");
     private static final int PADZERO = 4;
-    private static final CodeShubetsu 介護除外適用理由 = new CodeShubetsu("0119");
-    private static final CodeShubetsu 介護除外解除理由 = new CodeShubetsu("0123");
+    private static final CodeShubetsu 介護除外適用理由 = new CodeShubetsu("0009");
+    private static final CodeShubetsu 介護除外解除理由 = new CodeShubetsu("0012");
     private static final RString 開始枝番 = new RString("0001");
     private final TekiyoJogaiRirekiDiv div;
 
