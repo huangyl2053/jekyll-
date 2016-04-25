@@ -25,21 +25,24 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor implements
         ITokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor {
 
-//    private static final RString NENDO = new RString("年度");
     private final KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報;
     private final RString 宛名連番;
+    private final EditedAtesaki 編集後宛先;
     private final NinshoshaSource ninshoshaSource;
 
     /**
      * コンストラクタです
      *
+     * @param 編集後宛先 EditedAtesaki
      * @param ninshoshaSource NinshoshaSource
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
      * @param 宛名連番 RString
      */
-    public TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor(NinshoshaSource ninshoshaSource,
+    public TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor(EditedAtesaki 編集後宛先,
+            NinshoshaSource ninshoshaSource,
             KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             RString 宛名連番) {
+        this.編集後宛先 = 編集後宛先;
         this.ninshoshaSource = ninshoshaSource;
         this.仮算定特徴開始通知書情報 = 仮算定特徴開始通知書情報;
         this.宛名連番 = 宛名連番;
@@ -133,53 +136,54 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor implements
             source.hokenryoGaku8Gatsu1 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get更正後().get更正後特徴期別金額03(), 0);
         }
-        // TODO 内部番号647
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定特徴開始通知書情報.get宛先情報(), 仮算定特徴開始通知書情報.get地方公共団体(),
-                仮算定特徴開始通知書情報.get帳票制御共通(), null, null, true,
-                null, null, null, null);
-        SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-        source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
-        source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
-        source.jusho3 = sofubutsuAtesakiSource.jusho3;
-        source.jushoText = sofubutsuAtesakiSource.jushoText;
-        source.jusho1 = sofubutsuAtesakiSource.jusho1;
-        source.jusho2 = sofubutsuAtesakiSource.jusho2;
-        source.katagakiText = sofubutsuAtesakiSource.katagakiText;
-        source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
-        source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-        source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
-        source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-        source.shimei2 = sofubutsuAtesakiSource.shimei2;
-        source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
-        source.shimeiText = sofubutsuAtesakiSource.shimeiText;
-        source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
-        source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
-        source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
-        source.shimei1 = sofubutsuAtesakiSource.shimei1;
-        source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
-        source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-        source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
-        source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
-        source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
-        source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
-        source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
-        source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
-        source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
-        source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
-        source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
-        source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
-        source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        // TODO 世帯主名
-        //source.setainusimei = item.get世帯主名();
-        // TODO 様方
-        //source.samaKata = item.get様方();
-        source.hakkoYMD = ninshoshaSource.hakkoYMD;
-        source.denshiKoin = ninshoshaSource.denshiKoin;
-        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-        source.koinShoryaku = ninshoshaSource.koinShoryaku;
-        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+        if (編集後宛先 != null) {
+            SofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+            source.yubinNo1 = sofubutsuAtesakiSource.yubinNo;
+            source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
+            source.jusho3 = sofubutsuAtesakiSource.jusho3;
+            source.jushoText = sofubutsuAtesakiSource.jushoText;
+            source.jusho1 = sofubutsuAtesakiSource.jusho1;
+            source.jusho2 = sofubutsuAtesakiSource.jusho2;
+            source.katagakiText = sofubutsuAtesakiSource.katagakiText;
+            source.katagaki2 = sofubutsuAtesakiSource.katagaki2;
+            source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
+            source.katagaki1 = sofubutsuAtesakiSource.katagaki1;
+            source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
+            source.shimei2 = sofubutsuAtesakiSource.shimei2;
+            source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
+            source.shimeiText = sofubutsuAtesakiSource.shimeiText;
+            source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
+            source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
+            source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
+            source.shimei1 = sofubutsuAtesakiSource.shimei1;
+            source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
+            source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
+            source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
+            source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
+            source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
+            source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
+            source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
+            source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
+            source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
+            source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
+            source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
+            source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
+            source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
+            // TODO 世帯主名
+            //source.setainusimei = item.get世帯主名();
+            // TODO 様方
+            //source.samaKata = item.get様方();
+        }
+        if (ninshoshaSource != null) {
+            source.hakkoYMD = ninshoshaSource.hakkoYMD;
+            source.denshiKoin = ninshoshaSource.denshiKoin;
+            source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+            source.koinShoryaku = ninshoshaSource.koinShoryaku;
+            source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+            source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+            source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+        }
+
         return source;
     }
 
