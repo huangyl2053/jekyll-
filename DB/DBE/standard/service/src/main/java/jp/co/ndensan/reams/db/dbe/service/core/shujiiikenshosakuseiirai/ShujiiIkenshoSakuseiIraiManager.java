@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.ShujiiIraiAtenaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.Shujiiikenshosakuseiirai;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiikenshosakuseiiraiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshosakuseiirai.IShujiiIkenshoSakuseiIraiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
@@ -139,5 +142,21 @@ public class ShujiiIkenshoSakuseiIraiManager {
         DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
         entity.setState(state);
         要介護認定申請情報dac.save(entity);
+    }
+
+    /**
+     * 宛先情報を取得します。
+     *
+     * @param atenaJohoParameter 宛先情報取得のパラメータ
+     * @return 宛先情報
+     */
+    @Transaction
+    public ShujiiIraiAtenaJoho get宛先情報(ShujiiIraiAtenaJohoParameter atenaJohoParameter) {
+        IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
+        ShujiiIraiAtenaJohoRelateEntity entity = mapper.get宛名情報(atenaJohoParameter);
+        if (entity == null) {
+            return null;
+        }
+        return new ShujiiIraiAtenaJoho(entity);
     }
 }

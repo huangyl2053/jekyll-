@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 主治医意見書作成依頼インターフェースです。
+ * 主治医意見書作成依頼Businessです。
  *
  * @reamsid_L DBE-0050-010 zuotao
  */

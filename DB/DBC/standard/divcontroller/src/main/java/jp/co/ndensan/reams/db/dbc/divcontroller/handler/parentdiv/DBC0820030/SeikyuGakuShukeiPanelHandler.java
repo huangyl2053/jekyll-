@@ -420,12 +420,12 @@ public class SeikyuGakuShukeiPanelHandler {
                     様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード);
         }
         if (falg1 && falg2) {
-            throw new ApplicationException("限度額対象単位および限度額対象外単位数が計画単位数を一致しません");
+            throw new ApplicationException("限度額対象単位および限度額対象外単位数が計画単位数を一致しません。");
         }
         for (ShokanShukeiResult shokanShukeiResult : shkonlist) {
             サービス種類コード = shokanShukeiResult.getShukei().getサービス種類コード();
-            if (sercode.getTxtServiceType().getValue() == サービス種類コード.value()) {
-                throw new ApplicationException("サービス種類が登録されていますん");
+            if (sercode.getTxtServiceType().getValue().equals(サービス種類コード.value())) {
+                throw new ApplicationException("サービス種類が登録されています。");
             }
         }
         if (falg3) {
