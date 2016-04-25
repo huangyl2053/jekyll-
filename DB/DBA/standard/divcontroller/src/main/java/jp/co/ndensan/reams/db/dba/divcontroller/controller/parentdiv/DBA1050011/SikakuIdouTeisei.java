@@ -82,7 +82,7 @@ public class SikakuIdouTeisei {
      * @param div 画面情報
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
-    public ResponseData<SikakuIdouTeiseiDiv> onClick_Delete(SikakuIdouTeiseiDiv div) {
+    public ResponseData<SikakuIdouTeiseiDiv> onClick_Delete_bak(SikakuIdouTeiseiDiv div) {
         getHandler(div).setパラメータ(状態_削除);
         return ResponseData.of(div).forwardWithEventName(DBA1050011TransitionEventName.削除).respond();
     }
@@ -113,9 +113,10 @@ public class SikakuIdouTeisei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save();
+            RealInitialLocker.release(前排他ロックキー);
+            return ResponseData.of(div).setState(DBA1050011StateName.完了状態);
         }
-        RealInitialLocker.release(前排他ロックキー);
-        return ResponseData.of(div).setState(DBA1050011StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     /**

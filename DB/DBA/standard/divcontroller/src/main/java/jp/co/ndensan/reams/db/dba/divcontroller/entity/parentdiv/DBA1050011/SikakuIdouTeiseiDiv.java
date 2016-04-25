@@ -8,19 +8,25 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IIryohokenRirekiCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.IRoreiFukushiNenkinShokaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.IShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SikakuIdouTeisei のクラスファイル
- *
+ * SikakuIdouTeisei のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class SikakuIdouTeiseiDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -119,7 +125,7 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTabInputs(tabInputsDiv tabInputs) {
+    public void  setTabInputs(tabInputsDiv tabInputs) {
         this.getShikakuShutokuJoho().setTabInputs(tabInputs);
     }
 
@@ -129,7 +135,7 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplShikakuJoho(tplShikakuJohoDiv tplShikakuJoho) {
+    public void  setTplShikakuJoho(tplShikakuJohoDiv tplShikakuJoho) {
         this.getShikakuShutokuJoho().getTabInputs().setTplShikakuJoho(tplShikakuJoho);
     }
 
@@ -139,7 +145,7 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShikakuTokusoRirekii(ShikakuTokusoRirekiiDiv ShikakuTokusoRirekii) {
+    public void  setShikakuTokusoRirekii(ShikakuTokusoRirekiiDiv ShikakuTokusoRirekii) {
         this.getShikakuShutokuJoho().getTabInputs().getTplShikakuJoho().setShikakuTokusoRirekii(ShikakuTokusoRirekii);
     }
 
@@ -154,7 +160,7 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
+    public void  setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
         this.getShikakuShutokuJoho().getTabInputs().setTplIryoHoken(tplIryoHoken);
     }
 
@@ -164,7 +170,7 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setIryoHokenRirekii(IryoHokenRirekiiDiv IryoHokenRirekii) {
+    public void  setIryoHokenRirekii(IryoHokenRirekiiDiv IryoHokenRirekii) {
         this.getShikakuShutokuJoho().getTabInputs().getTplIryoHoken().setIryoHokenRirekii(IryoHokenRirekii);
     }
 
@@ -179,7 +185,7 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
+    public void  setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
         this.getShikakuShutokuJoho().getTabInputs().setTplRofukuNenkin(tplRofukuNenkin);
     }
 
@@ -189,7 +195,7 @@ public class SikakuIdouTeiseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
+    public void  setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
         this.getShikakuShutokuJoho().getTabInputs().getTplRofukuNenkin().setRohukuNenkin(RohukuNenkin);
     }
 

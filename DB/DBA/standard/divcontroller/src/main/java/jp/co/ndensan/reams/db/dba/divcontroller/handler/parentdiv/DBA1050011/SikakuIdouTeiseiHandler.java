@@ -67,6 +67,10 @@ public class SikakuIdouTeiseiHandler {
         kaigoShikakuKihon_onload(被保険者番号, 表示モード);
         kaigoNinteiAtenaInfo_onload(識別コード);
         div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().initialize(被保険者番号, 識別コード);
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekii().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
+            throw new ApplicationException(
+                    UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("被保履歴情報"));
+        }
         setButtonDisable();
         div.getShikakuShutokuJoho().getTplIryoHoken().getIryoHokenRirekii().getCcdIryoHokenRireki().
                 initialize(状態_登録, 識別コード.getColumnValue());

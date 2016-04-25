@@ -8,16 +8,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1050011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IIryohokenRirekiCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.IRoreiFukushiNenkinShokaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.IShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
- * tabInputs のクラスファイル
- *
+ * tabInputs のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class tabInputsDiv extends TabContainer {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -101,7 +104,7 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setShikakuTokusoRirekii(ShikakuTokusoRirekiiDiv ShikakuTokusoRirekii) {
+    public void  setShikakuTokusoRirekii(ShikakuTokusoRirekiiDiv ShikakuTokusoRirekii) {
         this.getTplShikakuJoho().setShikakuTokusoRirekii(ShikakuTokusoRirekii);
     }
 
@@ -116,7 +119,7 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setIryoHokenRirekii(IryoHokenRirekiiDiv IryoHokenRirekii) {
+    public void  setIryoHokenRirekii(IryoHokenRirekiiDiv IryoHokenRirekii) {
         this.getTplIryoHoken().setIryoHokenRirekii(IryoHokenRirekii);
     }
 
@@ -131,7 +134,7 @@ public class tabInputsDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
+    public void  setRohukuNenkin(RohukuNenkinDiv RohukuNenkin) {
         this.getTplRofukuNenkin().setRohukuNenkin(RohukuNenkin);
     }
 
