@@ -127,13 +127,23 @@ public class HihokenshashikakusoshitsuManager {
             FlexibleDate 資格取得年月日 = hihokenshaShutokuJyoho.get資格取得年月日();
             FlexibleDate 資格喪失年月日 = hihokenshaShutokuJyoho.get資格喪失年月日();
             if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 == null || 資格喪失年月日.isEmpty())) {
-                errorCode = new RString(DbaErrorMessages.住所地特例として適用済.getMessage().getCode());
+                解除年月日の再判定(hihokenshaShutokuJyoho);
             }
             if ((資格取得年月日 != null && !資格取得年月日.isEmpty()) && (資格喪失年月日 != null && !資格喪失年月日.isEmpty())) {
                 errorCode = new RString(DbaErrorMessages.資格喪失登録不可.getMessage().getCode());
             }
         } else {
             errorCode = new RString(DbaErrorMessages.資格喪失登録不可.getMessage().getCode());
+        }
+        return errorCode;
+    }
+
+    private RString 解除年月日の再判定(HihokenshaShutokuJyoho hihokenshaShutokuJyoho) {
+        RString errorCode = RString.EMPTY;
+        FlexibleDate 適用年月日 = hihokenshaShutokuJyoho.get適用年月日();
+        FlexibleDate 解除年月日 = hihokenshaShutokuJyoho.get解除年月日();
+        if ((適用年月日 != null && !適用年月日.isEmpty()) && (解除年月日 == null || 解除年月日.isEmpty())) {
+            errorCode = new RString(DbaErrorMessages.住所地特例として適用済.getMessage().getCode());
         }
         return errorCode;
     }
