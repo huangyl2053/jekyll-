@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定調査票09B（厚労省IF連携フォーマット_データ送信_項番）を表す列挙型です。
  *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum NinteichosaSoshinIfMapping09B {
 

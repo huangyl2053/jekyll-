@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 住所地特例者区分列挙型です。
  *
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum JushochitokureishaKubun {
 
