@@ -118,7 +118,8 @@ public final class PnlKeteiJohoMsgHandler {
         RString rdoShikyukubunNew = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
         if (equal支給区分(決定情報, rdoShikyukubunNew)) {
             flag = true;
-        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(ShikyuFushikyuKubun.支給.getコード())) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().
+                equals(ShikyuFushikyuKubun.支給.getコード())) {
             RString zogenriyu = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtZogenriyu().getValue();
             if (zogenriyu != null && !zogenriyu.equals(決定情報.getZougenRiyu())) {
                 flag = true;
@@ -132,7 +133,8 @@ public final class PnlKeteiJohoMsgHandler {
             if (shiharaikingakugoke != 決定情報.getShiharaiKingaku()) {
                 flag = true;
             }
-        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().equals(ShikyuFushikyuKubun.不支給.getコード())) {
+        } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && 決定情報.getShikyuHushikyuKetteiKubun().
+                equals(ShikyuFushikyuKubun.不支給.getコード())) {
             RString fuSyikyuriyu1 = div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().getTxtFuSyikyuriyu1().getValue();
             if (fuSyikyuriyu1 != null && !fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
                 flag = true;

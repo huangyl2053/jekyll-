@@ -109,17 +109,12 @@ public class PnlKeteiJohoMsg {
     public ResponseData<PnlKeteiJohoMsgDiv> onClick_btnFree(PnlKeteiJohoMsgDiv div) {
         Map<RString, Integer> 決定情報登録_償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
         KetteJoho 決定情報登録_決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
-        if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
-        ))
-                || モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
-                        ))) {
-            return ResponseData.of(div)
-                    .forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
+        if (モード_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
+                || モード_参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).is内容変更状態(決定情報登録_償還払決定一覧, 決定情報登録_決定情報);
-        if (flag
-                && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
-                        ))
+        if (flag && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 || モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
                         )))) {
             if (!ResponseHolder.isReRequest()) {
@@ -127,7 +122,6 @@ public class PnlKeteiJohoMsg {
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -136,16 +130,11 @@ public class PnlKeteiJohoMsg {
                 return ResponseData.of(div).respond();
             }
         }
-        if ((!flag
-                && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
-                        ))))
-                || (モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class
-                        )))) {
-            return ResponseData.of(div)
-                    .forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
+        if ((!flag && (モード_登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))))
+                || (モード_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
+            return ResponseData.of(div).forwardWithEventName(DBC0600031TransitionEventName.一覧に戻る).respond();
         }
-        return ResponseData.of(div)
-                .respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -165,8 +154,7 @@ public class PnlKeteiJohoMsg {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
             }
-            if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.
-                    getMessageCode())
+            if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 FukushiyoguKonyuhiShikyuShinsei fukuShinsei = new FukushiyoguKonyuhiShikyuShinsei();
                 fukuShinsei.delete(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 識別コード);
@@ -208,6 +196,7 @@ public class PnlKeteiJohoMsg {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 決定情報_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         ShokanbaraiketteiJohoDiv adiv = (ShokanbaraiketteiJohoDiv) div.getCcdKetteiList();
         if (adiv.getTxtKetebi().getValue() == null) {
             return ResponseData.of(div).addValidationMessages(getHandler(div).getCheckMessage()).respond();
@@ -253,7 +242,7 @@ public class PnlKeteiJohoMsg {
                                 .getTxtShiharaikingakugoke().getValue())
                         .build();
                 FukushiYoguKonyuhiShikyuShiseiKetteDivEntity entity = FukushiYoguKonyuhiShikyuShiseiKetteDivEntity.createEntity(
-                        ViewStateHolder.get(ViewStateKeys.状態, RString.class), shokanhanteikekka, shokanshukei);
+                        決定情報_状態, shokanhanteikekka, shokanshukei);
                 entity.set被保険者番号(被保険者番号);
                 entity.set事業者番号(事業者番号);
                 entity.set提供_購入_年月(サービス年月);
@@ -261,7 +250,7 @@ public class PnlKeteiJohoMsg {
                 entity.set証明書コード(様式番号);
                 entity.set明細番号(明細番号);
                 entity.set識別コード(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-                entity.set画面モード(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
+                entity.set画面モード(決定情報_状態);
                 entity.set決定日(new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
                         getTxtKetebi().getValue().toString()));
                 List<ShokanFukushiYoguHanbaihi> 福祉用具販売費リスト = new ArrayList<>();
@@ -276,7 +265,7 @@ public class PnlKeteiJohoMsg {
                     福祉用具販売費リスト.add(shokanFukushiYoguHanbaihi);
                 }
                 entity.set差額金額登録フラグ(差額金額登録フラグ);
-                entity.add福祉用具販売費リスト(ViewStateHolder.get(ViewStateKeys.状態, RString.class), 福祉用具販売費リスト);
+                entity.add福祉用具販売費リスト(決定情報_状態, 福祉用具販売費リスト);
                 FukushiyoguKonyuhiShikyuShinsei.createInstance().updKetteJoho(entity);
                 div.getCcdMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                         RString.EMPTY, RString.EMPTY, true);
