@@ -29,8 +29,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.setai.ISetai;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.setai.ISetaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,6 +45,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class FutangendogakuNinteiService {
 
     private static final int INT_4 = 4;
+    private static final FlexibleDate 基準日_2015年4月1日 = new FlexibleDate("20150401");
+    private static final FlexibleDate 基準日_2012年4月1日 = new FlexibleDate("20120401");
     private final MapperProvider mapperProvider;
 
     /**
@@ -104,8 +106,9 @@ public class FutangendogakuNinteiService {
         if (適用日 == null || 適用日.isEmpty()) {
             return FlexibleDate.EMPTY;
         }
-        RString 減免期限_特定入所者 = BusinessConfig.get(ConfigNameDBD.減免期限_特定入所者, RDate.getNowDate(), LasdecCode.EMPTY);
-        if (減免期限_特定入所者.isNullOrEmpty()) {
+        RString 減免期限_特定入所者 = BusinessConfig.get(ConfigNameDBD.減免期限_特定入所者,
+                new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
+        if (null == 減免期限_特定入所者 || 減免期限_特定入所者.isEmpty()) {
             return FlexibleDate.EMPTY;
         }
         FlexibleDate 有効期限候補 = new FlexibleDate(
@@ -142,82 +145,82 @@ public class FutangendogakuNinteiService {
     public List<RString> load食費負担限度額候補(RString 旧措置者区分, FlexibleDate 基準日, RString 利用者負担段階) {
 
         if (旧措置者区分.isEmpty()) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_食費２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_食費３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_食費２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_食費３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_食費２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費３, RDate.getNowDate(), LasdecCode.EMPTY));
-            }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_食費３, 基準日));
             }
         } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置食費２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置食費３, 基準日));
+            }
+        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費３, 基準日));
+            } else {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費３, 基準日));
             }
         }
         return new ArrayList<>();
@@ -234,82 +237,82 @@ public class FutangendogakuNinteiService {
     public List<RString> loadユニット型個室負担限度額候補(RString 旧措置者区分, FlexibleDate 基準日, RString 利用者負担段階) {
 
         if (旧措置者区分.isEmpty()) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型個室３, 基準日));
             }
         } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室３, 基準日));
+            }
+        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室３, 基準日));
+            } else {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室３, 基準日));
             }
         }
         return new ArrayList<>();
@@ -326,88 +329,82 @@ public class FutangendogakuNinteiService {
     public List<RString> loadユニット型準個室負担限度額候補(RString 旧措置者区分, FlexibleDate 基準日, RString 利用者負担段階) {
 
         if (旧措置者区分.isEmpty()) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室３, 基準日));
             }
         } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室２, 基準日),
                         RString.EMPTY,
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室２, 基準日),
                         RString.EMPTY,
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室２, 基準日),
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室３, 基準日));
+            }
+        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の２, 基準日),
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の２, 基準日),
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室３, 基準日));
+            } else {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の２, 基準日),
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室３, 基準日));
             }
         }
         return new ArrayList<>();
@@ -424,90 +421,82 @@ public class FutangendogakuNinteiService {
     public List<RString> load従来型個室特養等負担限度額候補(RString 旧措置者区分, FlexibleDate 基準日, RString 利用者負担段階) {
 
         if (旧措置者区分.isEmpty()) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個特養２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
-            }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個特養３, 基準日));
             }
         } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の３, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の３, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の３, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養３, 基準日));
+            }
+        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の２, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の３, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の２, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の３, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養３, 基準日));
+            } else {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の２, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の３, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養３, 基準日));
             }
         }
         return new ArrayList<>();
@@ -523,30 +512,30 @@ public class FutangendogakuNinteiService {
      */
     public List<RString> load従来型個室老健等負担限度額候補(RString 旧措置者区分, FlexibleDate 基準日, RString 利用者負担段階) {
 
-        if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+        if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
             return this.金額リスト作成(
                     利用者負担段階,
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健１, RDate.getNowDate(), LasdecCode.EMPTY),
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健２, RDate.getNowDate(), LasdecCode.EMPTY),
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健１, 基準日),
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健２, 基準日),
                     RString.EMPTY,
                     RString.EMPTY,
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健３, RDate.getNowDate(), LasdecCode.EMPTY));
-        } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健３, 基準日));
+        } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
             return this.金額リスト作成(
                     利用者負担段階,
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健１, RDate.getNowDate(), LasdecCode.EMPTY),
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健２, RDate.getNowDate(), LasdecCode.EMPTY),
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健１, 基準日),
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健２, 基準日),
                     RString.EMPTY,
                     RString.EMPTY,
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健３, RDate.getNowDate(), LasdecCode.EMPTY));
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健３, 基準日));
         } else {
             return this.金額リスト作成(
                     利用者負担段階,
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健１, RDate.getNowDate(), LasdecCode.EMPTY),
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健２, RDate.getNowDate(), LasdecCode.EMPTY),
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個老健１, 基準日),
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個老健２, 基準日),
                     RString.EMPTY,
                     RString.EMPTY,
-                    BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健３, RDate.getNowDate(), LasdecCode.EMPTY));
+                    getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個老健３, 基準日));
         }
     }
 
@@ -561,88 +550,82 @@ public class FutangendogakuNinteiService {
     public List<RString> load多床室負担限度額候補(RString 旧措置者区分, FlexibleDate 基準日, RString 利用者負担段階) {
 
         if (旧措置者区分.isEmpty()) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_多床室２, 基準日),
                         RString.EMPTY,
                         RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else {
-                return this.金額リスト作成(
-                        利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_多床室３, 基準日));
             }
         } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
-            if (基準日.isBeforeOrEquals(new FlexibleDate("20150401"))) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室２, 基準日),
                         RString.EMPTY,
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
-            } else if (基準日.isBeforeOrEquals(new FlexibleDate("20120401"))) {
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室３, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の２, RDate.getNowDate(), LasdecCode.EMPTY),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室２, 基準日),
                         RString.EMPTY,
-                        BusinessConfig.get(
-                                ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室３, 基準日));
             } else {
                 return this.金額リスト作成(
                         利用者負担段階,
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の１, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の２, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の３, RDate.getNowDate(), LasdecCode.EMPTY),
-                        BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養３, RDate.getNowDate(), LasdecCode.EMPTY));
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置多床室２, 基準日),
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置多床室３, 基準日));
+            }
+        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+            if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の２, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室３, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室１, 基準日));
+            } else if (基準日.isBeforeOrEquals(基準日_2012年4月1日)) {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の２, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室３, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室１, 基準日));
+            } else {
+                return this.金額リスト作成(
+                        利用者負担段階,
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の１, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の２, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の３, 基準日),
+                        getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養３, 基準日));
             }
         }
         return new ArrayList<>();
@@ -758,5 +741,9 @@ public class FutangendogakuNinteiService {
         }
 
         return 金額リスト;
+    }
+
+    private RString getBusinessConfig(ConfigNameDBD configName, FlexibleDate 適用日) {
+        return BusinessConfig.get(configName, new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
     }
 }
