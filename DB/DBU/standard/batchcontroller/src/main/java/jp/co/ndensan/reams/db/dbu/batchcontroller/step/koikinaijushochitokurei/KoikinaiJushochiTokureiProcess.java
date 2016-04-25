@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.koikinaijushochitokurei;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoHeadItem;
-import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReport;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
+import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbu.business.koikinaijushochitokurei.KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiItiranEntity;
@@ -29,13 +31,16 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 広域内住所地特例者情報の設定クラスです。
  *
  * @reamsid_L DBU-1140-020 dongyabin
@@ -52,10 +57,15 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     private RString 市町村名称;
     private RString 並び順;
     private RString 改頁;
-    private List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist;
+    @BatchWriter
+    private BatchReportWriter<KoikinaiJushochitokureishaIchiranhyoReportSource> batchWrite;
+    private ReportSourceWriter<KoikinaiJushochitokureishaIchiranhyoReportSource> retortWrite;
+    private List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist = new ArrayList<>();
 
     @Override
     protected void beforeExecute() {
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200013.getReportId().getColumnValue()).create();
+        retortWrite = new ReportSourceWriter<>(batchWrite);
         mapper = getMapper(IKoikinaiJushochiTokureiMapper.class);
         super.beforeExecute();
     }
@@ -65,42 +75,61 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         set並び順と改頁();
         get市町村コードと市町村名称();
         set出力順ソート();
-        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
-        // List<KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei> 帳票データlist
         帳票データlist = is帳票データ作成(is広域内住所地特例者一覧表情報Entity作成(get広域内住所地特例者情報()));
-
     }
 
     @Override
     protected void afterExecute() {
-        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
-        KoikinaiJushochitokureishaIchiranhyoProperty property = new KoikinaiJushochitokureishaIchiranhyoProperty();
-
-    }
-
-    private List<KoikinaiJushochitokureishaIchiranhyoReport> toReports() {
-        List<KoikinaiJushochitokureishaIchiranhyoReport> list = new ArrayList<>();
-        // TODO QA 440 董亜彬 帳票仕様とフォームファイルがありません
-//        list.add(KoikinaiJushochitokureishaIchiranhyoReport.createFrom(
-//                getHeadItem(),
-//                reportJoho.getBodyItemList()));
-        return list;
+        KoikinaiJushochitokureishaIchiranhyoReport report = KoikinaiJushochitokureishaIchiranhyoReport.createFrom(getHeadItem(), getBodyItem());
+        report.writeBy(retortWrite);
     }
 
     private KoikinaiJushochitokureishaIchiranhyoHeadItem getHeadItem() {
-        return new KoikinaiJushochitokureishaIchiranhyoHeadItem(基準日,
-                市町村コード,
-                市町村名称,
-                並び順,
-                並び順,
-                並び順,
-                並び順,
-                並び順,
-                改頁,
-                改頁,
-                改頁,
-                改頁,
-                改頁);
+        KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei business = 帳票データlist.get(0);
+        return new KoikinaiJushochitokureishaIchiranhyoHeadItem(business.get印刷日時(),
+                business.get市町村コード(),
+                business.get市町村名(),
+                business.get並び順１(),
+                business.get並び順２(),
+                business.get並び順３(),
+                business.get並び順４(),
+                business.get並び順５(),
+                business.get改頁１(),
+                business.get改頁２(),
+                business.get改頁３(),
+                business.get改頁４(),
+                business.get改頁５());
+    }
+
+    private List<KoikinaiJushochitokureishaIchiranhyoBodyItem> getBodyItem() {
+        List<KoikinaiJushochitokureishaIchiranhyoBodyItem> itemList = new ArrayList<>();
+        for (KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei data : 帳票データlist) {
+            KoikinaiJushochitokureishaIchiranhyoBodyItem item = new KoikinaiJushochitokureishaIchiranhyoBodyItem(data.get被保険者番号(),
+                    data.get氏名カナ(),
+                    data.get生年月日(),
+                    data.get住所コード(),
+                    data.get行政区CD(),
+                    data.get行政区(),
+                    data.get取得日(),
+                    data.get取得届出日(),
+                    data.get喪失日(),
+                    data.get喪失届出日(),
+                    data.get資格区分(),
+                    data.get住特(),
+                    data.get識別コード(),
+                    data.get氏名(),
+                    data.get性別(),
+                    data.get世帯コード(),
+                    data.get住所(),
+                    data.get広住取得日(),
+                    data.get広住取得届出日(),
+                    data.get広住喪失日(),
+                    data.get広住喪失届出日(),
+                    data.get措置市町村コード(),
+                    data.get措置市町村名称());
+            itemList.add(item);
+        }
+        return itemList;
     }
 
     private List<KoikinaiJushochiTokureiEntity> get広域内住所地特例者情報() {
