@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoProperty;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReport;
@@ -19,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReport;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
@@ -97,11 +101,11 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
      */
     public void print介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> 介護保険診断命令書ItemList) {
         List<KaigohokenShindanMeireishoReport> list = new ArrayList<>();
-        for (KaigohokenShindanMeireishoHeaderItem item : 介護保険診断命令書ItemList) {
-            list.add(KaigohokenShindanMeireishoReport.createFrom(item));
-        }
         KaigohokenShindanMeireishoProperty property = new KaigohokenShindanMeireishoProperty();
         try (ReportAssembler<KaigohokenShindanMeireishoReportSource> assembler = createAssembler(property, reportManager)) {
+            INinshoshaSourceBuilder ninshosha = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険, RString.EMPTY,
+                    RDate.getNowDate(), assembler.getImageFolderPath());
+            list.add(KaigohokenShindanMeireishoReport.createFrom(set介護保険診断命令書(介護保険診断命令書ItemList, ninshosha.buildSource())));
             for (KaigohokenShindanMeireishoReport report : list) {
                 ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
@@ -129,17 +133,25 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         }
     }
 
-//      public void print主治医意見書作成依頼一覧表(List<IkenshoSakuseiIraiIchiranhyoItem> 主治医意見書作成依頼一覧表ItemList) {
-    //            List<IkenshoSakuseiIraiIchiranhyoReport> list = new ArrayList<>();
-//            list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom(主治医意見書作成依頼一覧表ItemList));
-//            IkenshoSakuseiIraiIchiranhyoProperty property = new IkenshoSakuseiIraiIchiranhyoProperty();
-//            try (ReportAssembler<IkenshoSakuseiIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
-//                for (IkenshoSakuseiIraiIchiranhyoReport report : list) {
-//                    ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-//                    report.writeBy(reportSourceWriter);
-//                }
-//            }
-//      }
+    /**
+     * 主治医意見書作成依頼一覧表を出力します。
+     *
+     * @param 主治医意見書作成依頼一覧表ItemList 主治医意見書作成依頼一覧表ItemList
+     */
+    public void print主治医意見書作成依頼一覧表(List<IkenshoSakuseiIraiIchiranhyoItem> 主治医意見書作成依頼一覧表ItemList) {
+        List<IkenshoSakuseiIraiIchiranhyoReport> list = new ArrayList<>();
+        IkenshoSakuseiIraiIchiranhyoProperty property = new IkenshoSakuseiIraiIchiranhyoProperty();
+        try (ReportAssembler<IkenshoSakuseiIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
+            INinshoshaSourceBuilder ninshoshaSourceBuilder = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険, RString.EMPTY,
+                    RDate.getNowDate(), assembler.getImageFolderPath());
+            list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom(set主治医意見書作成依頼一覧表認定者(主治医意見書作成依頼一覧表ItemList, ninshoshaSourceBuilder.buildSource())));
+            for (IkenshoSakuseiIraiIchiranhyoReport report : list) {
+                ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
     private List<ShujiiIkenshoTeishutsuIraishoItem> setNishosha(List<ShujiiIkenshoTeishutsuIraishoItem> itemList, NinshoshaSource ninshosha) {
         List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
         for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
@@ -151,6 +163,42 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
             item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
             item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+            item.setKoinShoryaku(ninshosha.koinShoryaku);
+            resultList.add(item);
+        }
+        return resultList;
+    }
+
+    private List<IkenshoSakuseiIraiIchiranhyoItem> set主治医意見書作成依頼一覧表認定者(List<IkenshoSakuseiIraiIchiranhyoItem> itemList,
+            NinshoshaSource ninshosha) {
+        List<IkenshoSakuseiIraiIchiranhyoItem> resultList = new ArrayList<>();
+        for (IkenshoSakuseiIraiIchiranhyoItem item : itemList) {
+            item.setHakkoYMD(ninshosha.hakkoYMD);
+            item.setDenshiKoin(ninshosha.denshiKoin);
+            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+            item.setKoinShoryaku(ninshosha.koinShoryaku);
+            resultList.add(item);
+        }
+        return resultList;
+    }
+
+    private List<KaigohokenShindanMeireishoHeaderItem> set介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> itemList,
+            NinshoshaSource ninshosha) {
+        List<KaigohokenShindanMeireishoHeaderItem> resultList = new ArrayList<>();
+        for (KaigohokenShindanMeireishoHeaderItem item : itemList) {
+            item.setShomeiHakkoYMD(ninshosha.hakkoYMD);
+            item.setDenshiKoin(ninshosha.denshiKoin);
+//            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+//            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+//            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+//            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+//            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+//            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
             item.setKoinShoryaku(ninshosha.koinShoryaku);
             resultList.add(item);
         }

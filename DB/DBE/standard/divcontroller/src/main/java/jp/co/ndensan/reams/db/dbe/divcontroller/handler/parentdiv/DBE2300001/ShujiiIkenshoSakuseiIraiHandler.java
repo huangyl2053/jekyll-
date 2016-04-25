@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2300001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.Shujiiikenshosakuseiirai;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoIraiKubun;
@@ -14,6 +15,9 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
@@ -55,6 +59,19 @@ public class ShujiiIkenshoSakuseiIraiHandler {
     }
 
     /**
+     * 画面初期設定します。
+     */
+    public void load() {
+        div.getCcdNinteishinseishaFinder().initialize();
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(
+                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+        div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
+        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告).toString()));
+    }
+
+    /**
      * 申請者一覧を設定します。
      *
      * @param 申請者情報一覧 申請者情報一覧
@@ -68,8 +85,6 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             div.getRadkigen().setDisabled(false);
             div.getTxtkigenymd().setDisabled(false);
         }
-        div.getIraiprint().getTxtkigenymd().setValue(RDate.getNowDate());
-        div.getTxtShujiiIkensahoSakuseiIraiDay().setValue(RDate.getNowDate());
     }
 
     private void set申請者一覧(List<Shujiiikenshosakuseiirai> 申請者情報一覧) {
@@ -136,6 +151,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             row.setShisetsuNyushoFlag(申請者.isTemp_施設利用フラグ());
             申請者一覧.add(row);
         }
+        div.getShinseishaIchiran().setIsOpen(true);
         div.getDgShinseishaIchiran().setDataSource(申請者一覧);
     }
 
@@ -167,96 +183,10 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         }
     }
 
-//    public ShujiiIkenshoSakuseiIraiParameter setSqlParameter() {
-//        ShujiiIkenshoSakuseiIraiParameter parameter = new ShujiiIkenshoSakuseiIraiParameter();
-//        NinteiShinseishaFinderDiv 認定申請者Div = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
-//        parameter.setHihokenshaNo(認定申請者Div.getTxtHihokenshaNumber().getValue());
-//        parameter.setShokikaiHokenshaNo(認定申請者Div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号().value());
-//        parameter.setShishoCode(認定申請者Div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
-//        parameter.setHihokenshaShimei(認定申請者Div.getTxtHihokenshaName().getValue());
-//        parameter.setHihokenshaNameMatchType(認定申請者Div.getDdlHihokenshaNameMatchType().getSelectedKey());
-//        if (!認定申請者Div.getChkMinashiFlag().getSelectedKeys().isEmpty()) {
-//            parameter.setChkMinashiFlag(Boolean.parseBoolean(認定申請者Div.getChkMinashiFlag().getSelectedKeys().get(数字_0).toString()));
-//        }
-//        parameter.setNinteiShinseiDateFrom(認定申請者Div.getTxtNinteiShinseiDateFrom().getValue());
-//        parameter.setNinteiShinseiDateTo(認定申請者Div.getTxtNinteiShinseiDateTo().getValue());
-//        parameter.setBirthDateFrom(認定申請者Div.getTxtBirthDateFrom().getValue());
-//        parameter.setBirthDateTo(認定申請者Div.getTxtBirthDateTO().getValue());
-//        parameter.setShinseijiShinseiKubun(認定申請者Div.getDdlShinseijiShinseiKubun().getSelectedKey());
-//        parameter.setChkSeibetsu(認定申請者Div.getChkSeibetsu().getSelectedKeys());
-//        parameter.setHihokenshaKubun(認定申請者Div.getDdlHihokenshaKubun().getSelectedKey());
-//        parameter.setHoreiShinseiji(認定申請者Div.getDdlHoreiShinseiji().getSelectedKey());
-//        parameter.setShoriKubun(認定申請者Div.getDdlShoriKubun().getSelectedKey());
-//        parameter.setKoroshoShikibetsuCode(認定申請者Div.getDdlKoroshoShikibetsuCode().getSelectedKey());
-//        parameter.setYubinNo(認定申請者Div.getTxtYubinNo().getValue().getYubinNo());
-//        parameter.setShisetsuNyusho(認定申請者Div.getRadShisetsuNyusho().getSelectedValue());
-//        parameter.setNinteiChosaItakusakiCode(認定申請者Div.getHdnChosaItakusakiCode());
-//        parameter.setNinteiChosainCode(認定申請者Div.getHdnChosainCode());
-//        parameter.setChosaJisshiBasho(認定申請者Div.getDdlChosaJisshiBasho().getSelectedKey());
-//        parameter.setChosaKubun(認定申請者Div.getDdlChosaKubun().getSelectedKey());
-//        parameter.setChosaJisshiDateFrom(認定申請者Div.getTxtChosaJisshiDateFrom().getValue());
-//        parameter.setChosaJisshiDateTo(認定申請者Div.getTxtChosaJisshiDateTo().getValue());
-//        parameter.setNinteiChosaNetakirido(認定申請者Div.getDdlNinteiChosaNetakirido().getSelectedKey());
-//        parameter.setNinteiChosaNinchido(認定申請者Div.getDdlNinteiChosaNinchido().getSelectedKey());
-//        parameter.setShujiiIryokikanCode(認定申請者Div.getHdnShujiiIryokikanCode());
-//        parameter.setShujiiCode(認定申請者Div.getHdnShujiiCode());
-//        parameter.setShujiIkubun(認定申請者Div.getDdlShujiIkubun().getSelectedKey());
-//        parameter.setIkenshoKinyuDateFrom(認定申請者Div.getTxtIkenshoKinyuDateFrom().getValue());
-//        parameter.setIkenshoKinyuDateTo(認定申請者Div.getTxtIkenshoKinyuDateTo().getValue());
-//        parameter.setShujiJohoNetakirido(認定申請者Div.getDdlShujiJohoNetakirido().getSelectedKey());
-//        parameter.setIchijiHanteiDateFrom(認定申請者Div.getTxtIchijiHanteiDateFrom().getValue());
-//        parameter.setIchijiHanteiDateTo(認定申請者Div.getTxtIchijiHanteiDateTo().getValue());
-//        parameter.setIchijiHanteiKekka(認定申請者Div.getDdlIchijiHanteiKekka().getSelectedKey());
-//        parameter.setIchiGoHanteiDateFrom(認定申請者Div.getTxtIchiGoHanteiDateFrom().getValue());
-//        parameter.setIchiGoHanteiDateTo(認定申請者Div.getTxtIchiGoHanteiDateTo().getValue());
-//        parameter.setIchiGohanteiKekka(認定申請者Div.getDdlIchiGohanteiKekka().getSelectedKey());
-//        parameter.setNijiHanteiKekka(認定申請者Div.getDdlNijiHanteiKekka().getSelectedKey());
-//        parameter.setNinteiYukoKikan(認定申請者Div.getTxtNinteiYukoKikan().getValue());
-//        parameter.setCheckDay(認定申請者Div.getTxtCheckDay().getValue());
-//        parameter.setNinteiYukoKaishiDateFrom(認定申請者Div.getTxtNinteiYukoKaishiDateFrom().getValue());
-//        parameter.setNinteiYukoKaishiDateTo(認定申請者Div.getTxtNinteiYukoKaishiDateTo().getValue());
-//        parameter.setNinteiYukoShuryoDateFrom(認定申請者Div.getTxtNinteiYukoShuryoDateFrom().getValue());
-//        parameter.setNinteiYukoShuryoDateTo(認定申請者Div.getTxtNinteiYukoShuryoDate().getValue());
-//        parameter.setNijiHanteiDateFrom(認定申請者Div.getTxtNijiHanteiDateFrom().getValue());
-//        parameter.setNijiHanteiDateTo(認定申請者Div.getTxtNijiHnateiDateTo().getValue());
-//        parameter.setKaisaiDateFrom(認定申請者Div.getTxtKaisaiDateFrom().getValue());
-//        parameter.setKaisaiDateTo(認定申請者Div.getTxtKaisaiDateTo().getValue());
-//        parameter.setKaisaiNumberStart(認定申請者Div.getTxtKaisaiNumberStart().getValue());
-//        parameter.setKaisaiNumberEnd(認定申請者Div.getTxtKaisaiNumberEnd().getValue());
-//        parameter.setZenkaiNinteiChosaItakusakiCode(認定申請者Div.getHdnZenkaiChosaItakusakiCode());
-//        parameter.setZenkaiShujiiIryokikanCode(認定申請者Div.getHdnZenkaiShujiiIryokikanCode());
-//        parameter.setZenkaiNijiHanteiKekka(認定申請者Div.getDdlZenkaiNijiHanteiKekka().getSelectedKey());
-//        parameter.setZenkaiNinteiYukoKikan(認定申請者Div.getTxtZenkaiNinteiYukoKikan().getValue());
-//        parameter.setZenkaiYukoKaishiDateFrom(認定申請者Div.getTxtZenkaiYukoKaishiDateFrom().getValue());
-//        parameter.setZenkaiYukoKaishiDateTo(認定申請者Div.getTxtZenkaiYukoKaishiDateTo().getValue());
-//        parameter.setGeninShikkanCode(認定申請者Div.getTxtGeninShikkanCode().getValue());
-//        parameter.setShinseiKeikaNissuFrom(認定申請者Div.getTxtShinseiKeikaNissu().getFromValue());
-//        parameter.setShinseiKeikaNissuTo(認定申請者Div.getTxtShinseiKeikaNissu().getToValue());
-//        parameter.setNowPhase(認定申請者Div.getDdlNowPhase().getSelectedKey());
-//        if (!認定申請者Div.getChkShoriJotai().getSelectedKeys().isEmpty()) {
-//            parameter.setShoriJotai(認定申請者Div.getChkShoriJotai().getSelectedKeys().get(数字_0));
-//        }
-//        parameter.setChkKoshinTaishoChushutsu(認定申請者Div.getChkKoshinTaishoChushutsu().getSelectedKeys());
-//        parameter.setChkIchijiHantei(認定申請者Div.getChkIchijiHantei().getSelectedKeys());
-//        parameter.setChkShinseiUketsuke(認定申請者Div.getChkShinseiUketsuke().getSelectedKeys());
-//        parameter.setChkMasking(認定申請者Div.getChkMasking().getSelectedKeys());
-//        parameter.setChkChosaIrai(認定申請者Div.getChkChosaIrai().getSelectedKeys());
-//        parameter.setChkShinsakaiToroku(認定申請者Div.getChkShinsakaiToroku().getSelectedKeys());
-//        parameter.setChkIkenshoIrai(認定申請者Div.getChkIkenshoIrai().getSelectedKeys());
-//        parameter.setChkNijiHantei(認定申請者Div.getChkNijiHantei().getSelectedKeys());
-//        parameter.setChkChosaNyushu(認定申請者Div.getChkChosaNyushu().getSelectedKeys());
-//        parameter.setChkTsuchiShori(認定申請者Div.getChkTsuchiShori().getSelectedKeys());
-//        parameter.setChkIkenshoNyushu(認定申請者Div.getChkIkenshoNyushu().getSelectedKeys());
-//        parameter.setChkGetsureiShori(認定申請者Div.getChkGetsureiShori().getSelectedKeys());
-//        parameter.setMaxDispCount(div.getKensakuOption().getTxtMaxDisp().getValue());
-//        parameter.setShoriJotaiKubunTsujo(ShoriJotaiKubun.通常.getコード());
-//        parameter.setShoriJotaiKubunEnki(ShoriJotaiKubun.延期.getコード());
-//        return parameter;
-//    }
     /**
      * 検索条件を作成します。
      *
-     * @return 検索条件
+     * @return 検索条件パラメータ
      */
     public ShujiiIkenshoSakuseiIraiParameter createParameter() {
         ShujiiIkenshoSakuseiIraiParameter parameter = new ShujiiIkenshoSakuseiIraiParameter();

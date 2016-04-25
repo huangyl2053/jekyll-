@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshosakuseiiraiichira
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -52,6 +53,7 @@ public class IkenshoSakuseiIraiIchiranhyoReportSource implements IReportSource {
     @ReportItem(name = "listIchiranhyo_2", length = 18, order = 17)
     public RString listIchiranhyo_2;
     @ReportItem(name = "listIchiranhyo_3", length = 10, order = 18)
+    @ReportExpandedInfo(id = "X")
     public RString listIchiranhyo_3;
     @ReportItem(name = "listIchiranhyo_4", length = 16, order = 19)
     public RString listIchiranhyo_4;
