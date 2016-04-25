@@ -152,7 +152,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiHenshu {
     public List<SaishinsaMeisaiPsmEntity> getSaishinsaKetteiTsuchishoMeisaiJyoho() {
         ISaishinsaKetteiHokenshaInMapper mapper = mapperProvider.create(ISaishinsaKetteiHokenshaInMapper.class);
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.未定義);
+                KensakuYusenKubun.住登内優先);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         SaishinsaKetteiHokenshaInParameter parameter = new SaishinsaKetteiHokenshaInParameter(searchKey);
         List<SaishinsaMeisaiPsmEntity> 明細情報List = mapper.select再審査決定通知書明細情報リスト(parameter);
@@ -186,7 +186,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiHenshu {
         dbt3104entity.setChushutsuKaishiTimestamp(null);
         dbt3104entity.setChushutsuShuryoTimestamp(null);
         dbt3104entity.setSaiShoriKanoKubun(false);
-        dbt3104entity.setShoriJikkoKaisu(Decimal.ONE);
+        dbt3104entity.setShoriJikkoKaisu(dbt3104entity.getShoriJikkoKaisu().add(Decimal.ZERO));
         dbt3104entity.setSaiShoriFukaKubun(false);
         dbt3104entity.setFileName1(fileNameList == null || fileNameList.isEmpty()
                 || fileNameList.get(0) == null ? RString.EMPTY : fileNameList.get(0));
