@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 /**
  * 導入形態コードを定義した列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBX-9999-023 liangbc
  */
 public enum DonyuKeitaiCode implements IRStringConvertable {
 

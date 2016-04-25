@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定一次判定結果コード09（認知症加算）を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum IchijiHanteiKekkaNinchishoKasanCode {
 

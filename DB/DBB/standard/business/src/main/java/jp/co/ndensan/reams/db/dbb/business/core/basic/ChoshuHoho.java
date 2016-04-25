@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護徴収方法を管理するクラスです。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHohoEntity, ChoshuHoho> implements Serializable {
 
