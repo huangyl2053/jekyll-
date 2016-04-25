@@ -408,7 +408,9 @@ public class RiyoshaFutangakuGengakuHandler {
      * 「申請情報を追加する/承認情報を追加する」ボタン押下の処理です。
      */
     public void 追加するボタン押下() {
-        該当データのリセット();
+        該当情報ViewStateのクリア();
+        入力情報をクリア();
+
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
             申請情報エリ状態(true);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
@@ -424,7 +426,8 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public void 申請一覧の修正ボタンをクリック() {
 
-        該当データのリセット();
+        該当情報ViewStateのクリア();
+        入力情報をクリア();
         div.getDdlShinseiIchiran().setDisabled(true);
 
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
@@ -978,7 +981,7 @@ public class RiyoshaFutangakuGengakuHandler {
         RealInitialLocker.lock(排他キー);
     }
 
-    private void 該当データのリセット() {
+    private void 該当情報ViewStateのクリア() {
         ViewStateHolder.put(Dbd1020001Keys.該当DB申請, null);
         ViewStateHolder.put(Dbd1020001Keys.該当申請のViewState, null);
     }
