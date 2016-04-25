@@ -71,7 +71,6 @@ public class BatchPanel {
         RDate kaishubiTo = div.getTxtKaishubiRange().getToValue();
         boolean flg = HihokenshashoHakkoKanriboFinder.createInstance().checkInput(
                 koufubiFrom, koufubiTo, kaishubiFrom, kaishubiTo);
-        // TODO  内部QA:924 Redmine： (必須チェックの処理は回答待ち)
         if (flg) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(
