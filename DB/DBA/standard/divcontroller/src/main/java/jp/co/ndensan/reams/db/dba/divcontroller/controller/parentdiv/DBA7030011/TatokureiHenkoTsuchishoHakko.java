@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishiset
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoItem;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.definition.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoValidationHandler;
