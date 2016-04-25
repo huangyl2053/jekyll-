@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -107,7 +108,7 @@ public class ValidationHandler {
         Validate必須(UrErrorMessages.必須, "交付事由"),
         Validate桁数(UrErrorMessages.桁数が不正, "交付理由", "256"),
         Validate桁数2(UrErrorMessages.桁数が不正, "回収理由", "256"),
-        Validate順番(UrErrorMessages.期間が不正_追加メッセージあり２, "交付日", "回収日"),
+        Validate順番(UrWarningMessages.日付の前後関係逆転以降, "交付日", "回収日"),
         Validate交付日(UrErrorMessages.必須項目_追加メッセージあり, "交付日"),
         Validate交付事由(UrErrorMessages.必須項目_追加メッセージあり, "交付事由"),
         Validate回収日(UrErrorMessages.必須項目_追加メッセージあり, "回収日"),
