@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.Fu
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -57,7 +56,6 @@ public class PnlKeteiJohoMsg {
     private static final RString 業務区分 = new RString("02");
     private static final RString 連番 = new RString("1");
     private static final RString 明細番号 = new RString("0001");
-    private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo("888888");
 
     /**
      * onLoad事件
@@ -247,8 +245,6 @@ public class PnlKeteiJohoMsg {
                         .build();
                 ShokanHanteiKekka shokanhanteikekka = new ShokanHanteiKekka(被保険者番号, サービス年月, 整理番号)
                         .createBuilderForEdit()
-                        //TODO画面に「保険者の選択値」を取得できない 、「888888」で固定
-                        .set証記載保険者番号(証記載保険者番号)
                         .set決定年月日(new FlexibleDate(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv()
                                         .getTxtKetebi().getValue().toString()))
                         .set支給_不支給決定区分(div.getCcdKetteiList().getShokanbaraiketteiJohoDiv().
