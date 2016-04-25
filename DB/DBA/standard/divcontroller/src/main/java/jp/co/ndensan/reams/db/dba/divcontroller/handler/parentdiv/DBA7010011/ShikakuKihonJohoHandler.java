@@ -93,7 +93,7 @@ public class ShikakuKihonJohoHandler {
                 ? FlexibleDate.EMPTY : master.getShisetsuTaishoTsuchiHakkoYMD());
         row.getShisetsuHenkoTuchiHakkoDate().setValue(master.getShisetsuHenkoTsuchiHakkoYMD() == null
                 ? FlexibleDate.EMPTY : master.getShisetsuHenkoTsuchiHakkoYMD());
-        row.getIdoYMD().setValue(master.getIdoYMD() == null ? FlexibleDate.EMPTY : master.getIdoYMD());
+        row.getIdoYMD().setValue(master.getIdoYMD());
         row.setEdaNo(master.getEdaNo() == null ? RString.EMPTY : master.getEdaNo());
     }
 
@@ -137,7 +137,7 @@ public class ShikakuKihonJohoHandler {
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
                 getTxtYubinNo().setValue(hokenja.get郵便番号() == null ? YubinNo.EMPTY : hokenja.get郵便番号());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().
-                setValue(hokenja.get住所() == null ?RString.EMPTY : hokenja.get住所());
+                setValue(hokenja.get住所() == null ? RString.EMPTY : hokenja.get住所());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYakushoMei().setValue(row.getSochiHokenshaMeisho());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().setValue(文書番号取得);
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().set枝番(row.getEdaNo());
