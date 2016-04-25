@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.GemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.IGemmenGengakuShinseiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -77,8 +75,6 @@ public class ShinseiDetailDiv extends Panel {
     private Button btnShinseiKakutei;
     @JsonProperty("btnBackToShinseiList")
     private Button btnBackToShinseiList;
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ccdGemmenGengakuShinsei")
     private GemmenGengakuShinseiDiv ccdGemmenGengakuShinsei;
 
@@ -536,15 +532,6 @@ public class ShinseiDetailDiv extends Panel {
     @JsonProperty("btnBackToShinseiList")
     public void setBtnBackToShinseiList(Button btnBackToShinseiList) {
         this.btnBackToShinseiList = btnBackToShinseiList;
-    }
-
-    /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
     }
 
     /*

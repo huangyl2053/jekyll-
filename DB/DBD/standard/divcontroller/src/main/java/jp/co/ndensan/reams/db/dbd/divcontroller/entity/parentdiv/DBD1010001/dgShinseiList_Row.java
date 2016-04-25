@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Apr 16 14:22:44 CST 2016 
+ * Sat Apr 23 10:53:16 CST 2016 
  */
 
 
@@ -26,6 +26,8 @@ public class dgShinseiList_Row extends DataRow {
     private RString jotai;
     private TextBoxFlexibleDate txtShinseiYMD;
     private RString shinseiRiyu;
+    private RString haigushaKazeiKubun;
+    private Boolean shisanHoyuu;
     private RString ketteiKubun;
     private TextBoxFlexibleDate txtKetteiYMD;
     private TextBoxFlexibleDate txtTekiyoYMD;
@@ -48,6 +50,8 @@ public class dgShinseiList_Row extends DataRow {
         this.jotai = RString.EMPTY;
         this.txtShinseiYMD = new TextBoxFlexibleDate();
         this.shinseiRiyu = RString.EMPTY;
+        this.haigushaKazeiKubun = RString.EMPTY;
+        this.shisanHoyuu = false;
         this.ketteiKubun = RString.EMPTY;
         this.txtKetteiYMD = new TextBoxFlexibleDate();
         this.txtTekiyoYMD = new TextBoxFlexibleDate();
@@ -67,6 +71,8 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
         this.setOriginalData("shinseiRiyu", shinseiRiyu);
+        this.setOriginalData("haigushaKazeiKubun", haigushaKazeiKubun);
+        this.setOriginalData("shisanHoyuu", shisanHoyuu);
         this.setOriginalData("ketteiKubun", ketteiKubun);
         this.setOriginalData("txtKetteiYMD", txtKetteiYMD);
         this.setOriginalData("txtTekiyoYMD", txtTekiyoYMD);
@@ -85,11 +91,13 @@ public class dgShinseiList_Row extends DataRow {
         this.setOriginalData("shoninShinaiRiyu", shoninShinaiRiyu);
     }
 
-    public dgShinseiList_Row(RString jotai, TextBoxFlexibleDate txtShinseiYMD, RString shinseiRiyu, RString ketteiKubun, TextBoxFlexibleDate txtKetteiYMD, TextBoxFlexibleDate txtTekiyoYMD, TextBoxFlexibleDate txtYukoKigenYMD, Boolean isKyusochisha, RString riyoshaHutanDankai, RString kyoshitsuShubetsu, Boolean isKyokaisho, Boolean isGekihenKanwaTaisho, TextBoxNum txtShokuhiHutanGendogaku, TextBoxNum txtUnitGataKoshitsu, TextBoxNum txtUnitGataJunKoshitsu, TextBoxNum txtJuraigataKoshitsuTokuyo, TextBoxNum txtJuraigataKoshitsuRoken, TextBoxNum txtTashoshitsu, RString shoninShinaiRiyu) {
+    public dgShinseiList_Row(RString jotai, TextBoxFlexibleDate txtShinseiYMD, RString shinseiRiyu, RString haigushaKazeiKubun, Boolean shisanHoyuu, RString ketteiKubun, TextBoxFlexibleDate txtKetteiYMD, TextBoxFlexibleDate txtTekiyoYMD, TextBoxFlexibleDate txtYukoKigenYMD, Boolean isKyusochisha, RString riyoshaHutanDankai, RString kyoshitsuShubetsu, Boolean isKyokaisho, Boolean isGekihenKanwaTaisho, TextBoxNum txtShokuhiHutanGendogaku, TextBoxNum txtUnitGataKoshitsu, TextBoxNum txtUnitGataJunKoshitsu, TextBoxNum txtJuraigataKoshitsuTokuyo, TextBoxNum txtJuraigataKoshitsuRoken, TextBoxNum txtTashoshitsu, RString shoninShinaiRiyu) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
         this.setOriginalData("shinseiRiyu", shinseiRiyu);
+        this.setOriginalData("haigushaKazeiKubun", haigushaKazeiKubun);
+        this.setOriginalData("shisanHoyuu", shisanHoyuu);
         this.setOriginalData("ketteiKubun", ketteiKubun);
         this.setOriginalData("txtKetteiYMD", txtKetteiYMD);
         this.setOriginalData("txtTekiyoYMD", txtTekiyoYMD);
@@ -109,6 +117,8 @@ public class dgShinseiList_Row extends DataRow {
         this.jotai = jotai;
         this.txtShinseiYMD = txtShinseiYMD;
         this.shinseiRiyu = shinseiRiyu;
+        this.haigushaKazeiKubun = haigushaKazeiKubun;
+        this.shisanHoyuu = shisanHoyuu;
         this.ketteiKubun = ketteiKubun;
         this.txtKetteiYMD = txtKetteiYMD;
         this.txtTekiyoYMD = txtTekiyoYMD;
@@ -137,6 +147,14 @@ public class dgShinseiList_Row extends DataRow {
 
     public RString getShinseiRiyu() {
         return shinseiRiyu;
+    }
+
+    public RString getHaigushaKazeiKubun() {
+        return haigushaKazeiKubun;
+    }
+
+    public Boolean getShisanHoyuu() {
+        return shisanHoyuu;
     }
 
     public RString getKetteiKubun() {
@@ -216,6 +234,16 @@ public class dgShinseiList_Row extends DataRow {
     public void setShinseiRiyu(RString shinseiRiyu) {
         this.setOriginalData("shinseiRiyu", shinseiRiyu);
         this.shinseiRiyu = shinseiRiyu;
+    }
+
+    public void setHaigushaKazeiKubun(RString haigushaKazeiKubun) {
+        this.setOriginalData("haigushaKazeiKubun", haigushaKazeiKubun);
+        this.haigushaKazeiKubun = haigushaKazeiKubun;
+    }
+
+    public void setShisanHoyuu(Boolean shisanHoyuu) {
+        this.setOriginalData("shisanHoyuu", shisanHoyuu);
+        this.shisanHoyuu = shisanHoyuu;
     }
 
     public void setKetteiKubun(RString ketteiKubun) {

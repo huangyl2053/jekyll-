@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+
 /**
  * {@link jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4036FutanGendogakuNinteiBatchTestResultsEntity}のマッパーIFです。
  *
@@ -12,4 +14,5 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic;
  */
 public interface IDbT4036FutanGendogakuNinteiBatchTestResultsMapper {
 
+    int deleteByHihokenshaNo(HihokenshaNo hihokenshaNo);
 }

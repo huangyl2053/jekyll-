@@ -108,6 +108,21 @@ public class GemmenGengakuShinseiManager {
     }
 
     /**
+     * 減免減額申請{@link GemmenGengakuShinsei}を保存します。
+     *
+     * @param 減免減額申請 {@link GemmenGengakuShinsei}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDeletePhysicalBy減免減額申請(GemmenGengakuShinsei 減免減額申請) {
+        requireNonNull(減免減額申請, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額申請"));
+        if (!減免減額申請.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDeletePhysicalBy(減免減額申請.toEntity());
+    }
+
+    /**
      * 減免減額申請{@link GemmenGengakuShinsei}を物理削除します。
      *
      * @param 減免減額申請 {@link GemmenGengakuShinsei}

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.IGemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.IShisetSunyushoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
@@ -59,6 +60,8 @@ public class FutangendogakuShinseiDiv extends Panel {
     private ShinseiListDiv ShinseiList;
     @JsonProperty("ShinseiDetail")
     private ShinseiDetailDiv ShinseiDetail;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdAtenaInfo")
@@ -69,6 +72,10 @@ public class FutangendogakuShinseiDiv extends Panel {
     private RString sampleBunshoGroupCode;
     @JsonProperty("hihokenshaNo")
     private RString hihokenshaNo;
+    @JsonProperty("lockKey")
+    private RString lockKey;
+    @JsonProperty("jotai")
+    private RString jotai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -167,6 +174,15 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
+    }
+
+    /*
      * getccdKaigoShikakuKihon
      * @return ccdKaigoShikakuKihon
      */
@@ -239,8 +255,44 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
+     * getlockKey
+     * @return lockKey
+     */
+    @JsonProperty("lockKey")
+    public RString getLockKey() {
+        return lockKey;
+    }
+
+    /*
+     * setlockKey
+     * @param lockKey lockKey
+     */
+    @JsonProperty("lockKey")
+    public void setLockKey(RString lockKey) {
+        this.lockKey = lockKey;
+    }
+    /*
+     * getjotai
+     * @return jotai
+     */
+
+    @JsonProperty("jotai")
+    public RString getJotai() {
+        return jotai;
+    }
+
+    /*
+     * setjotai
+     * @param jotai jotai
+     */
+    @JsonProperty("jotai")
+    public void setJotai(RString jotai) {
+        this.jotai = jotai;
+    }
+    /*
      * [ ショートカットの作成 ]
      */
+
     @JsonIgnore
     public TextBox getTxtRiyoshaFutanDankai() {
         return this.getShinseiSetai().getTxtRiyoshaFutanDankai();
@@ -714,11 +766,6 @@ public class FutangendogakuShinseiDiv extends Panel {
     @JsonIgnore
     public void setBtnBackToShinseiList(Button btnBackToShinseiList) {
         this.getShinseiDetail().setBtnBackToShinseiList(btnBackToShinseiList);
-    }
-
-    @JsonIgnore
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return this.getShinseiDetail().getCcdKanryoMessage();
     }
 
     @JsonIgnore

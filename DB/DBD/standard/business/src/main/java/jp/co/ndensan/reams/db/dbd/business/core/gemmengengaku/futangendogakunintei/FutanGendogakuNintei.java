@@ -106,6 +106,15 @@ public class FutanGendogakuNintei
     }
 
     /**
+     * エンティティのデータ状態を取得します。
+     *
+     * @return エンティティのデータ状態
+     */
+    public EntityDataState getState() {
+        return entity.getState();
+    }
+
+    /**
      * 証記載保険者番号を返します。
      *
      * @return 証記載保険者番号

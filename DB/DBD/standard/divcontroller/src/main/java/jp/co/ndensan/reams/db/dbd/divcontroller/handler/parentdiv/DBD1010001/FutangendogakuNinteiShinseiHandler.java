@@ -8,17 +8,55 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiBuilder;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KyoshitsuShubetsu;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.YochokinShinkokuKubun;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgShinseiList_Row;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.HaiguuJohoEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei.FutangendogakuNinteiShinseiManager;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -31,8 +69,18 @@ public class FutangendogakuNinteiShinseiHandler {
     private final FutangendogakuShinseiDiv div;
 
     private static final RString 申請メニューID = new RString("DBDMN21001");
-    private final RString 保存する = new RString("btnUpdate");
-    private final RString 申請情報を追加する = new RString("申請情報を追加する");
+    private static final RString 共通エリア_保存する = new RString("btnUpdate");
+    private static final RString 拡張情報NAME = new RString("被保険者番号");
+    private static final RString 配偶者の有無_有 = new RString("key0");
+    private static final RString 配偶者の有無_無 = new RString("key1");
+    private static final RString 課税区分_課税 = new RString("key0");
+    private static final RString 課税区分_非課税 = new RString("key1");
+    private static final RString 決定区分_承認する = new RString("key0");
+    private static final RString 決定区分_承認しない = new RString("key1");
+    private static final RString 追加状態 = new RString("Added");
+    private static final RString 修正状態 = new RString("Modified");
+    private static final RString 削除状態 = new RString("Deleted");
+    private static final RString BLANKLINE_KEY = new RString("isBlankLine");
 
     /**
      * コンストラクタです。
@@ -49,33 +97,553 @@ public class FutangendogakuNinteiShinseiHandler {
      * @return 受給共通_被保データなし
      */
     public boolean onLoad() {
-        ShikibetsuCode 識別コード = get識別コードFromViewState();
-        HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
-        div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
-        List<FutanGendogakuNintei> 申請一覧情報 = get申請一覧情報(被保険者番号);
-        ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, 申請一覧情報ArrayList);
-        RString メニューID = ResponseHolder.getMenuID();
-        if (申請メニューID.equals(メニューID)) {
-            if (被保険者番号.isEmpty()) {
+        //TEST
+        TaishoshaKey 資格対象者 = new TaishoshaKey(new HihokenshaNo("1000000001"), new ShikibetsuCode("900000000000001"), new SetaiCode("1234"));
+        //TEST
+        ViewStateHolder.put(ViewStateKeys.資格対象者, 資格対象者);
+        boolean is受給共通_被保データなし = false;
+        if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            if (ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号() == null) {
+                is受給共通_被保データなし = true;
                 div.getBtnDispGemmenJoho().setDisabled(true);
                 div.getBtnAddShinsei().setDisabled(true);
-                div.getDgShinseiList().setDisabled(true);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
-                return false;
-            } else {
-                div.getBtnAddShinsei().setText(申請情報を追加する);
-                List<dgShinseiList_Row> dataSourceList = getDataSource(申請一覧情報);
-                div.getDgShinseiList().setDataSource(dataSourceList);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, true);
             }
+            div.getShinseiDetail().setTitle(new RString("申請情報"));
+            CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(共通エリア_保存する, "申請情報を");
         } else {
+            div.getShinseiDetail().setTitle(new RString("承認情報"));
+            CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(共通エリア_保存する, "承認情報を");
         }
+        ShikibetsuCode 識別コード = get識別コードFromViewState();
+        HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
+        div.setLockKey(new RString("DB").concat(被保険者番号.value()).concat(new RString("FutanGendoGaku")));
+        RealInitialLocker.lock(new LockingKey(div.getLockKey()));
+        div.getCcdAtenaInfo().onLoad(識別コード);
+        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getCcdShisetsuNyushoInfo().onLoad(識別コード);
+        if (is受給共通_被保データなし) {
+            List<FutanGendogakuNintei> 申請一覧情報 = get申請一覧情報(被保険者番号);
+            ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
+            ArrayList<FutanGendogakuNinteiViewState> new負担限度額認定申請の情報 = new ArrayList<>();
+            for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
+                new負担限度額認定申請の情報.add(new FutanGendogakuNinteiViewState(futanGendogakuNintei,
+                        futanGendogakuNintei.getState(), futanGendogakuNintei.get履歴番号()));
+            }
+            ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, 申請一覧情報ArrayList);
+            ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new負担限度額認定申請の情報);
+            set申請一覧(new負担限度額認定申請の情報);
+        }
+        RString 利用者負担段階 = FutangendogakuNinteiService.createInstance().judge利用者負担段階(被保険者番号, 識別コード);
+        div.getCcdGemmenGengakuShinsei().initialize(識別コード);
+        AccessLogger.log(AccessLogType.照会,
+                PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"), 拡張情報NAME, 被保険者番号.value())));
+        return is受給共通_被保データなし;
+    }
+
+    /**
+     * 「申請情報を追加する」ボタンを押下
+     */
+    public void onClick_btnAddShinsei() {
+        div.setJotai(追加状態);
+        clear申請情報エリア();
+        set申請情報エリア表示制御();
+    }
+
+    /**
+     * 申請一覧の修正ボタンの処理
+     */
+    public void onSelectByModifyButton() {
+        div.getShinseiList().setDisabled(true);
+        div.setJotai(修正状態);
+        ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+        set申請情報エリア(申請一覧情報ArrayList.get(div.getDgShinseiList().getClickedRowId()).getFutanGendogakuNintei());
+        set申請情報エリア表示制御();
+    }
+
+    /**
+     * 申請一覧の削除ボタンの処理
+     *
+     * @return is削除可
+     */
+    public boolean onSelectByDeleteButton() {
+        ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+        FutanGendogakuNintei futanGendogakuNintei = 申請一覧情報ArrayList.get(div.getDgShinseiList().getClickedRowId()).getFutanGendogakuNintei();
+        if (申請メニューID.equals(ResponseHolder.getMenuID()) && !futanGendogakuNintei.get決定区分().isEmpty()) {
+            return false;
+        }
+        div.getShinseiDetail().setDisabled(true);
+        div.setJotai(削除状態);
+        set申請情報エリア(futanGendogakuNintei);
         return true;
     }
 
+    /**
+     * 決定区分ラジオボタンの処理
+     */
+    public void onChange_radKetteiKubun() {
+        if (決定区分_承認する.equals(div.getRadKetteiKubun().getSelectedKey())) {
+            div.getTxtTekiyoYMD().setDisabled(false);
+            div.getTxtYukoKigenYMD().setDisabled(false);
+            div.getDdlKyusochisha().setDisabled(false);
+            div.getDdlRiyoshaFutanDankai().setDisabled(false);
+            div.getDdlKyoshitsuShubetsu().setDisabled(false);
+            div.getChkKyokaiso().setDisabled(false);
+            div.getChkGekihenKanwa().setDisabled(false);
+            div.getDdlShokuhi().setDisabled(false);
+            div.getDdlUnitGataKoshitsu().setDisabled(false);
+            div.getDdlUnitGataJunKoshitsu().setDisabled(false);
+            div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(false);
+            div.getDdlJuraiGataKoshitsuRoken().setDisabled(false);
+            div.getDdlTashoshitsu().setDisabled(false);
+            div.getBtnHiShoninRiyu().setDisabled(true);
+            div.getTxtHiShoninRiyu().setDisabled(true);
+        } else {
+            div.getTxtTekiyoYMD().setDisabled(true);
+            div.getTxtYukoKigenYMD().setDisabled(true);
+            div.getDdlKyusochisha().setDisabled(true);
+            div.getDdlRiyoshaFutanDankai().setDisabled(true);
+            div.getDdlKyoshitsuShubetsu().setDisabled(true);
+            div.getChkKyokaiso().setDisabled(true);
+            div.getChkGekihenKanwa().setDisabled(true);
+            div.getDdlShokuhi().setDisabled(true);
+            div.getDdlUnitGataKoshitsu().setDisabled(true);
+            div.getDdlUnitGataJunKoshitsu().setDisabled(true);
+            div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
+            div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
+            div.getDdlTashoshitsu().setDisabled(true);
+            div.getBtnHiShoninRiyu().setDisabled(false);
+            div.getTxtHiShoninRiyu().setDisabled(false);
+        }
+    }
+
+    /**
+     * 「申請情報を確定する」ボタンの処理
+     */
+    public void onClick_btnShinseiKakutei() {
+        putEdited申請情報ToViewState(true);
+        div.setJotai(RString.EMPTY);
+    }
+
+    /**
+     * 「検索結果一覧へ」ボタンの処理
+     */
+    public void onClick_btnToSearchResult() {
+        putEdited申請情報ToViewState(false);
+        div.setJotai(RString.EMPTY);
+    }
+
+    /**
+     * 申請情報を保存する
+     */
+    @Transaction
+    public void 申請情報を保存する() {
+        HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
+        AccessLogger.log(
+                AccessLogType.更新,
+                PersonalData.of(
+                        get識別コードFromViewState(),
+                        new ExpandedInformation(new Code("003"), 拡張情報NAME, 被保険者番号.value())));
+        ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.負担限度額認定申請の情報, ArrayList.class);
+        for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
+            futanGendogakuNintei.deleted();
+            FutanGendogakuNinteiManager.createInstance().saveOrDeletePhysicalBy(futanGendogakuNintei);
+        }
+        ArrayList<FutanGendogakuNinteiViewState> new申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+        for (FutanGendogakuNinteiViewState ninteiViewState : new申請一覧情報ArrayList) {
+            if (EntityDataState.Deleted.equals(ninteiViewState.getState())) {
+                continue;
+            }
+            FutanGendogakuNinteiManager.createInstance().saveOrDeletePhysicalBy(ninteiViewState.getFutanGendogakuNintei());
+        }
+        FutangendogakuNinteiShinseiManager.createInstance().delete利用者負担額減額by被保険者番号(被保険者番号);
+        RealInitialLocker.release(new LockingKey(div.getLockKey()));
+    }
+
+    /**
+     * 「クリアする」ボタンの処理
+     */
+    public void onChange_ddlRiyoshaFutanDankai() {
+        if (RiyoshaFutanDankai.課税層第三段階.getコード().equals(div.getDdlRiyoshaFutanDankai().getSelectedKey())) {
+            div.getChkKyokaiso().setDisabled(true);
+        } else {
+            div.getChkKyokaiso().setDisabled(false);
+        }
+        init食費DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+        initユニット型個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+        initユニット型準個室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+        init従来型個室_特養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+        init従来型個室_老健療養等DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+        init多床室DDL(div.getDdlKyusochisha().getSelectedKey(), div.getDdlRiyoshaFutanDankai().getSelectedKey());
+    }
+
+    /**
+     * 「情報を設定する」ボタンの処理
+     *
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onClick_btnHaigushaJohoSet() {
+        HaiguuJohoEntity 配偶者Entity = FutangendogakuNinteiService.createInstance().find配偶者(
+                div.getCcdAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近());
+        if (配偶者Entity == null || !配偶者Entity.isExists()) {
+            div.getRadHaigushaUmu().setSelectedKey(配偶者の有無_無);
+            div.getTxtHaigushaShikibetsuCode().clearDomain();
+            div.getTxtHaigushaShimeiKana().clearDomain();
+            div.getTxtHaigushaShimei().clearDomain();
+            div.getTxtHaigushaUmareYMD().clearValue();
+            div.getTxtHaigushaRenrakusaki().clearDomain();
+            div.getTxtHaigushaJusho1().clearDomain();
+            div.getTxtHaigushaJusho2().clearDomain();
+            div.getRadHaigushaUmu().setDisabled(true);
+            div.getTxtHaigushaShikibetsuCode().setDisabled(true);
+            div.getTxtHaigushaShimeiKana().setDisabled(true);
+            div.getTxtHaigushaShimei().setDisabled(true);
+            div.getTxtHaigushaUmareYMD().setDisabled(true);
+            div.getTxtHaigushaRenrakusaki().setDisabled(true);
+            div.getTxtHaigushaJusho1().setDisabled(true);
+            div.getTxtHaigushaJusho2().setDisabled(true);
+            return ResponseData.of(div).addMessage(DbdInformationMessages.配偶者_取得失敗.getMessage()).respond();
+        } else if (HaigushaKazeiKubun.空白.getコード().equals(配偶者Entity.get課税区分())) {
+            div.getRadHaigushaUmu().setSelectedKey(配偶者の有無_有);
+            div.getTxtHaigushaShikibetsuCode().setDomain(配偶者Entity.get個人().get識別コード());
+            div.getTxtHaigushaShimeiKana().setDomain(配偶者Entity.get個人().get名称().getKana());
+            div.getTxtHaigushaShimei().setDomain(配偶者Entity.get個人().get名称().getName());
+            div.getTxtHaigushaUmareYMD().setValue(new RDate(配偶者Entity.get個人().get生年月日().toFlexibleDate().toString()));
+            div.getTxtHaigushaRenrakusaki().setDomain(配偶者Entity.get個人().get連絡先１());
+            div.getTxtHaigushaJusho1().setDomain(new AtenaJusho(配偶者Entity.get個人().get住所().get住所()));
+            div.getTxtHaigushaJusho2().setDomain(new AtenaJusho(配偶者Entity.get現住所と異なる本年1月1日住所()));
+            div.getRadHaigushaKazeiKubun().clearSelectedItem();
+            div.getRadHaigushaUmu().setDisabled(false);
+            div.getTxtHaigushaShikibetsuCode().setDisabled(false);
+            div.getTxtHaigushaShimeiKana().setDisabled(false);
+            div.getTxtHaigushaShimei().setDisabled(false);
+            div.getTxtHaigushaUmareYMD().setDisabled(false);
+            div.getTxtHaigushaRenrakusaki().setDisabled(false);
+            div.getTxtHaigushaJusho1().setDisabled(false);
+            div.getTxtHaigushaJusho2().setDisabled(false);
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(配偶者Entity.get個人().get識別コード()));
+            return ResponseData.of(div).addMessage(DbdInformationMessages.配偶者_取得失敗.getMessage()).respond();
+        } else {
+            div.getRadHaigushaUmu().setSelectedKey(配偶者の有無_有);
+            div.getTxtHaigushaShikibetsuCode().setDomain(配偶者Entity.get個人().get識別コード());
+            div.getTxtHaigushaShimeiKana().setDomain(配偶者Entity.get個人().get名称().getKana());
+            div.getTxtHaigushaShimei().setDomain(配偶者Entity.get個人().get名称().getName());
+            div.getTxtHaigushaUmareYMD().setValue(new RDate(配偶者Entity.get個人().get生年月日().toFlexibleDate().toString()));
+            div.getTxtHaigushaRenrakusaki().setDomain(配偶者Entity.get個人().get連絡先１());
+            div.getTxtHaigushaJusho1().setDomain(new AtenaJusho(配偶者Entity.get個人().get住所().get住所()));
+            div.getTxtHaigushaJusho2().setDomain(new AtenaJusho(配偶者Entity.get現住所と異なる本年1月1日住所()));
+            div.getRadHaigushaKazeiKubun().setSelectedKey(配偶者Entity.get課税区分());
+            div.getRadHaigushaUmu().setDisabled(false);
+            div.getTxtHaigushaShikibetsuCode().setDisabled(false);
+            div.getTxtHaigushaShimeiKana().setDisabled(false);
+            div.getTxtHaigushaShimei().setDisabled(false);
+            div.getTxtHaigushaUmareYMD().setDisabled(false);
+            div.getTxtHaigushaRenrakusaki().setDisabled(false);
+            div.getTxtHaigushaJusho1().setDisabled(false);
+            div.getTxtHaigushaJusho2().setDisabled(false);
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(配偶者Entity.get個人().get識別コード()));
+            return ResponseData.of(div).respond();
+        }
+    }
+
+    private void set申請情報エリア(FutanGendogakuNintei futanGendogakuNintei) {
+        div.getTxtShinseiYMD().setValue(futanGendogakuNintei.get申請年月日());
+        init申請理由DDL();
+        div.getDdlShinseiRiyu().setSelectedKey(futanGendogakuNintei.get申請理由区分());
+        div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState());
+        div.getRadHaigushaUmu().setSelectedKey(futanGendogakuNintei.is配偶者の有無() ? 配偶者の有無_有 : 配偶者の有無_無);
+        div.getTxtHaigushaShikibetsuCode().setDomain(futanGendogakuNintei.get配偶者識別コード());
+        div.getTxtHaigushaShimeiKana().setDomain(futanGendogakuNintei.get配偶者氏名カナ());
+        div.getTxtHaigushaShimei().setDomain(futanGendogakuNintei.get配偶者氏名());
+        div.getTxtHaigushaUmareYMD().setValue(new RDate(futanGendogakuNintei.get配偶者生年月日().toString()));
+        div.getTxtHaigushaRenrakusaki().setDomain(new TelNo(futanGendogakuNintei.get配偶者連絡先()));
+        div.getTxtHaigushaJusho1().setDomain(futanGendogakuNintei.get配偶者住所());
+        div.getTxtHaigushaJusho2().setDomain(futanGendogakuNintei.get配偶者住所２());
+        div.getRadHaigushaKazeiKubun().setSelectedKey(
+                HaigushaKazeiKubun.課税.getコード().equals(futanGendogakuNintei.get配偶者課税区分()) ? 課税区分_課税 : 課税区分_非課税);
+        List<RString> keys = new ArrayList<>();
+        if (YochokinShinkokuKubun.以下.getコード().equals(futanGendogakuNintei.get預貯金申告区分())) {
+            keys.add(new RString("key0"));
+        }
+        div.getChkYochokinKijunIka().setSelectedItemsByKey(keys);
+        div.getTxtYochokinGaku().setValue(futanGendogakuNintei.get預貯金額());
+        div.getTxtYukaShoken().setValue(futanGendogakuNintei.get有価証券評価概算額());
+        div.getTxtSonota().setValue(futanGendogakuNintei.getその他金額());
+        div.getRadKetteiKubun().setSelectedKey(
+                KetteiKubun.承認する.getコード().equals(futanGendogakuNintei.get決定区分()) ? 決定区分_承認する : 決定区分_承認しない);
+        div.getTxtKetteiYMD().setValue(futanGendogakuNintei.get決定年月日());
+        div.getTxtTekiyoYMD().setValue(futanGendogakuNintei.get適用開始年月日());
+        div.getTxtYukoKigenYMD().setValue(futanGendogakuNintei.get適用終了年月日());
+        init旧措置DDL();
+        div.getDdlKyusochisha().setSelectedKey(futanGendogakuNintei.get旧措置者区分());
+        init負担段階DDL();
+        div.getDdlRiyoshaFutanDankai().setSelectedKey(futanGendogakuNintei.get利用者負担段階());
+        init居室種別DDL();
+        div.getDdlKyoshitsuShubetsu().setSelectedKey(futanGendogakuNintei.get居室種別());
+        div.getChkKyokaiso().setDisabled(RiyoshaFutanDankai.課税層第三段階.getコード().equals(futanGendogakuNintei.get利用者負担段階()));
+        div.getChkGekihenKanwa().setDisabled(!is平成18年or平成19年(futanGendogakuNintei.get申請年月日()));
+        init食費DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
+        div.getDdlShokuhi().setSelectedValue(new RString(futanGendogakuNintei.get食費負担限度額().toString()));
+        initユニット型個室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
+        div.getDdlUnitGataKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型個室().toString()));
+        initユニット型準個室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
+        div.getDdlUnitGataJunKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型準個室().toString()));
+        init従来型個室_特養等DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
+        div.getDdlJuraiGataKoshitsuTokuyo().setSelectedValue(new RString(futanGendogakuNintei.get従来型個室_特養等().toString()));
+        init従来型個室_老健療養等DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
+        div.getDdlJuraiGataKoshitsuRoken().setSelectedValue(new RString(futanGendogakuNintei.get従来型個室_老健_療養等().toString()));
+        init多床室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
+        div.getDdlTashoshitsu().setSelectedValue(new RString(futanGendogakuNintei.get多床室().toString()));
+        div.getTxtHiShoninRiyu().setValue(futanGendogakuNintei.get非承認理由());
+
+    }
+
+    private ShoKisaiHokenshaNo get証記載保険者番号(FlexibleDate 申請日) {
+
+        HokenshaListLoader loader = HokenshaListLoader.createInstance();
+        HokenshaList hokenshaList = loader.getShichosonCodeNameList(GyomuBunrui.介護事務);
+
+        HihokenshaDaichoManager manager = new HihokenshaDaichoManager();
+        HihokenshaDaicho daicho = manager.find最新被保険者台帳(申請日);
+        if (daicho == null) {
+            return new ShoKisaiHokenshaNo(RString.EMPTY);
+        }
+        if (daicho.get広住特措置元市町村コード() != null && !daicho.get広住特措置元市町村コード().isEmpty()) {
+            return hokenshaList.get(daicho.get広住特措置元市町村コード()).get証記載保険者番号();
+        }
+        return hokenshaList.get(daicho.get市町村コード()).get証記載保険者番号();
+    }
+
+    private FutanGendogakuNintei 申請情報Builder(FutanGendogakuNintei futanGendogakuNintei) {
+        FutanGendogakuNinteiBuilder builder = futanGendogakuNintei.createBuilderForEdit();
+        builder.set申請年月日(div.getTxtShinseiYMD().getValue());
+        builder.set申請理由区分(div.getDdlShinseiRiyu().getSelectedKey());
+        builder.set配偶者の有無(配偶者の有無_有.equals(div.getRadHaigushaUmu().getSelectedKey()));
+        builder.set配偶者識別コード(div.getTxtHaigushaShikibetsuCode().getDomain());
+        builder.set配偶者氏名カナ(div.getTxtHaigushaShimeiKana().getDomain());
+        builder.set配偶者氏名(div.getTxtHaigushaShimei().getDomain());
+        builder.set配偶者生年月日(new FlexibleDate(div.getTxtHaigushaUmareYMD().getValue().toString()));
+        builder.set配偶者連絡先(div.getTxtHaigushaRenrakusaki().getDomain().getColumnValue());
+        builder.set配偶者住所(div.getTxtHaigushaJusho1().getDomain());
+        builder.set配偶者住所２(div.getTxtHaigushaJusho2().getDomain());
+        builder.set配偶者課税区分(
+                課税区分_課税.equals(div.getRadHaigushaKazeiKubun().getSelectedKey())
+                ? HaigushaKazeiKubun.課税.getコード() : HaigushaKazeiKubun.非課税.getコード());
+        if (div.getChkYochokinKijunIka().getSelectedKeys().isEmpty()) {
+            builder.set預貯金申告区分(YochokinShinkokuKubun.以下.getコード());
+        } else {
+            builder.set預貯金申告区分(YochokinShinkokuKubun.超過.getコード());
+        }
+        builder.set預貯金額(div.getTxtYochokinGaku().getValue());
+        builder.set有価証券評価概算額(div.getTxtYukaShoken().getValue());
+        builder.setその他金額(div.getTxtSonota().getValue());
+        if (決定区分_承認する.equals(div.getRadKetteiKubun().getSelectedKey())) {
+            builder.set決定区分(KetteiKubun.承認する.getコード());
+        } else {
+            builder.set決定区分(KetteiKubun.承認しない.getコード());
+        }
+        builder.set決定年月日(div.getTxtKetteiYMD().getValue());
+        builder.set適用開始年月日(div.getTxtTekiyoYMD().getValue());
+        builder.set適用終了年月日(div.getTxtYukoKigenYMD().getValue());
+        builder.set旧措置者区分(div.getDdlKyusochisha().getSelectedKey());
+        builder.set利用者負担段階(div.getDdlRiyoshaFutanDankai().getSelectedKey());
+        builder.set居室種別(div.getDdlKyoshitsuShubetsu().getSelectedKey());
+        builder.set食費負担限度額(new Decimal(div.getDdlShokuhi().getSelectedValue().toString()));
+        builder.setユニット型個室(new Decimal(div.getDdlUnitGataKoshitsu().getSelectedValue().toString()));
+        builder.setユニット型準個室(new Decimal(div.getDdlUnitGataJunKoshitsu().getSelectedValue().toString()));
+        builder.set従来型個室_特養等(new Decimal(div.getDdlJuraiGataKoshitsuTokuyo().getSelectedValue().toString()));
+        builder.set従来型個室_老健_療養等(new Decimal(div.getDdlJuraiGataKoshitsuRoken().getSelectedValue().toString()));
+        builder.set多床室(new Decimal(div.getDdlTashoshitsu().getSelectedValue().toString()));
+        builder.set非承認理由(div.getTxtHiShoninRiyu().getValue());
+        return builder.build();
+    }
+
+    private boolean is平成18年or平成19年(FlexibleDate 申請年月日) {
+        return 申請年月日.getYear().equals(new FlexibleDate("平成180101").getYear())
+                || 申請年月日.getYear().equals(new FlexibleDate("平成190101").getYear());
+    }
+
+    private void init多床室DDL(RString 旧措置者区分, RString 利用者負担段階) {
+        List<RString> list = FutangendogakuNinteiService.createInstance().load多床室負担限度額候補(
+                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+        div.getDdlUnitGataKoshitsu().setDataSource(createDataSourceList(list));
+        div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
+    }
+
+    private void init従来型個室_老健療養等DDL(RString 旧措置者区分, RString 利用者負担段階) {
+        List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室老健等負担限度額候補(
+                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+        div.getDdlUnitGataKoshitsu().setDataSource(createDataSourceList(list));
+        div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
+    }
+
+    private void init従来型個室_特養等DDL(RString 旧措置者区分, RString 利用者負担段階) {
+        List<RString> list = FutangendogakuNinteiService.createInstance().load従来型個室特養等負担限度額候補(
+                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+        div.getDdlUnitGataKoshitsu().setDataSource(createDataSourceList(list));
+        div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
+    }
+
+    private void initユニット型準個室DDL(RString 旧措置者区分, RString 利用者負担段階) {
+        List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型準個室負担限度額候補(
+                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+        div.getDdlUnitGataKoshitsu().setDataSource(createDataSourceList(list));
+        div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
+    }
+
+    private void initユニット型個室DDL(RString 旧措置者区分, RString 利用者負担段階) {
+        List<RString> list = FutangendogakuNinteiService.createInstance().loadユニット型個室負担限度額候補(
+                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+        div.getDdlUnitGataKoshitsu().setDataSource(createDataSourceList(list));
+        div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
+    }
+
+    private void init食費DDL(RString 旧措置者区分, RString 利用者負担段階) {
+        List<RString> list = FutangendogakuNinteiService.createInstance().load食費負担限度額候補(
+                旧措置者区分, FlexibleDate.getNowDate(), 利用者負担段階);
+        div.getDdlShokuhi().setDataSource(createDataSourceList(list));
+        div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
+    }
+
+    private List<KeyValueDataSource> createDataSourceList(List<RString> list) {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        int key = 0;
+        for (RString 金額 : list) {
+            KeyValueDataSource dataSource = new KeyValueDataSource(new RString("key" + key), 金額);
+            dataSources.add(dataSource);
+            key++;
+        }
+        return dataSources;
+    }
+
+    private void init居室種別DDL() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (KyoshitsuShubetsu shubetsu : KyoshitsuShubetsu.values()) {
+            KeyValueDataSource source = new KeyValueDataSource();
+            source.setKey(shubetsu.getコード());
+            source.setValue(shubetsu.get名称());
+            dataSource.add(source);
+        }
+        div.getDdlKyoshitsuShubetsu().setDataSource(dataSource);
+        div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
+    }
+
+    private void init旧措置DDL() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (KyuSochishaKubun kubun : KyuSochishaKubun.values()) {
+            KeyValueDataSource source = new KeyValueDataSource();
+            source.setKey(kubun.getコード());
+            source.setValue(kubun.get名称());
+            dataSource.add(source);
+        }
+        div.getDdlKyusochisha().setDataSource(dataSource);
+        div.getDdlKyusochisha().setIsBlankLine(true);
+    }
+
+    private void init負担段階DDL() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (RiyoshaFutanDankai dankai : RiyoshaFutanDankai.values()) {
+            KeyValueDataSource source = new KeyValueDataSource();
+            source.setKey(dankai.getコード());
+            source.setValue(dankai.get名称());
+            dataSource.add(source);
+        }
+        div.getDdlRiyoshaFutanDankai().setDataSource(dataSource);
+        div.getDdlRiyoshaFutanDankai().setIsBlankLine(true);
+    }
+
+    private void init申請理由DDL() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (ShinseiRiyuKubun riyuKubun : ShinseiRiyuKubun.values()) {
+            KeyValueDataSource source = new KeyValueDataSource();
+            source.setKey(riyuKubun.getコード());
+            source.setValue(riyuKubun.get名称());
+            dataSource.add(source);
+        }
+        div.getDdlShinseiRiyu().setDataSource(dataSource);
+        div.getDdlShinseiRiyu().setIsBlankLine(true);
+    }
+
+    private void set申請一覧(ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList) {
+        List<dgShinseiList_Row> list = new ArrayList<>();
+        dgShinseiList_Row row;
+        for (FutanGendogakuNinteiViewState ninteiViewState : 申請一覧情報ArrayList) {
+            FutanGendogakuNintei futanGendogakuNintei = ninteiViewState.getFutanGendogakuNintei();
+            TextBoxFlexibleDate 申請年月日 = new TextBoxFlexibleDate();
+            申請年月日.setValue(futanGendogakuNintei.get申請年月日());
+            if (EntityDataState.Added.equals(futanGendogakuNintei.getState())) {
+                申請年月日.setReadOnly(false);
+            } else {
+                申請年月日.setReadOnly(true);
+            }
+            TextBoxFlexibleDate 決定日 = new TextBoxFlexibleDate();
+            決定日.setValue(futanGendogakuNintei.get決定年月日());
+            TextBoxFlexibleDate 適用日 = new TextBoxFlexibleDate();
+            適用日.setValue(futanGendogakuNintei.get適用開始年月日());
+            TextBoxFlexibleDate 有効期限 = new TextBoxFlexibleDate();
+            有効期限.setValue(futanGendogakuNintei.get適用終了年月日());
+            TextBoxNum 食費負担限度額 = new TextBoxNum();
+            食費負担限度額.setValue(futanGendogakuNintei.get食費負担限度額());
+            TextBoxNum ユニット型準個室 = new TextBoxNum();
+            ユニット型準個室.setValue(futanGendogakuNintei.getユニット型準個室());
+            TextBoxNum ユニット型個室 = new TextBoxNum();
+            ユニット型個室.setValue(futanGendogakuNintei.getユニット型個室());
+            TextBoxNum 従来型個室_特養等 = new TextBoxNum();
+            従来型個室_特養等.setValue(futanGendogakuNintei.get従来型個室_特養等());
+            TextBoxNum 従来型個室_老健_療養等 = new TextBoxNum();
+            従来型個室_老健_療養等.setValue(futanGendogakuNintei.get従来型個室_老健_療養等());
+            TextBoxNum 多床室 = new TextBoxNum();
+            多床室.setValue(futanGendogakuNintei.get多床室());
+            row = new dgShinseiList_Row(
+                    get状態(ninteiViewState.getState()),
+                    申請年月日,
+                    futanGendogakuNintei.get申請理由区分(),
+                    get配偶者課税区分(futanGendogakuNintei),
+                    YochokinShinkokuKubun.超過.getコード().equals(futanGendogakuNintei.get預貯金申告区分()),
+                    futanGendogakuNintei.get決定区分(),
+                    決定日,
+                    適用日,
+                    有効期限,
+                    KyuSochishaKubun.旧措置.getコード().equals(futanGendogakuNintei.get旧措置者区分()),
+                    futanGendogakuNintei.get利用者負担段階(),
+                    futanGendogakuNintei.get居室種別(),
+                    futanGendogakuNintei.is境界層該当者区分(),
+                    futanGendogakuNintei.is激変緩和措置対象者区分(),
+                    食費負担限度額,
+                    ユニット型個室,
+                    ユニット型準個室,
+                    従来型個室_特養等,
+                    従来型個室_老健_療養等,
+                    多床室,
+                    futanGendogakuNintei.get非承認理由());
+            list.add(row);
+        }
+        div.getDgShinseiList().setDataSource(list);
+    }
+
+    private RString get状態(EntityDataState jotai) {
+        if (EntityDataState.Added.equals(jotai)) {
+            return new RString("追加");
+        } else if (EntityDataState.Deleted.equals(jotai)) {
+            return new RString("削除");
+        } else if (EntityDataState.Added.equals(jotai)) {
+            return new RString("修正");
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get配偶者課税区分(FutanGendogakuNintei futanGendogakuNintei) {
+        if (futanGendogakuNintei.is配偶者の有無()) {
+            return HaigushaKazeiKubun.toValue(futanGendogakuNintei.get配偶者課税区分()).get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
     private ShikibetsuCode get識別コードFromViewState() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
@@ -83,10 +651,12 @@ public class FutangendogakuNinteiShinseiHandler {
     }
 
     private HihokenshaNo get被保険者番号FromViewState() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         if (null == 被保険者番号) {
             被保険者番号 = HihokenshaNo.EMPTY;
         }
+        div.setHihokenshaNo(被保険者番号.getColumnValue());
         return 被保険者番号;
     }
 
@@ -94,18 +664,176 @@ public class FutangendogakuNinteiShinseiHandler {
         return FutangendogakuNinteiService.createInstance().load負担限度額認定申請All(被保険者番号);
     }
 
-    private List<dgShinseiList_Row> getDataSource(List<FutanGendogakuNintei> 申請一覧情報) {
-        List<dgShinseiList_Row> dataSourceList = new ArrayList<>();
-        if (申請一覧情報 != null && !申請一覧情報.isEmpty()) {
-            for (FutanGendogakuNintei 負担限度額認定申請情報 : 申請一覧情報) {
-                dgShinseiList_Row dataSource = new dgShinseiList_Row();
-                dataSource.setJotai(RString.EMPTY);
-                dataSource.getTxtShinseiYMD().setValue(負担限度額認定申請情報.get申請年月日());
-                dataSource.setShinseiRiyu(ShinseiRiyuKubun.toValue(負担限度額認定申請情報.get申請理由区分()).get名称());
-                //配偶者課税区分
+    private void set申請情報エリア表示制御() {
+        div.getTxtHaigushaShikibetsuCode().setDisabled(true);
+        div.getTxtHaigushaShimeiKana().setDisabled(true);
+        div.getTxtHaigushaShimei().setDisabled(true);
+        div.getTxtHaigushaUmareYMD().setDisabled(true);
+        div.getTxtHaigushaRenrakusaki().setDisabled(true);
+        div.getTxtHaigushaJusho1().setDisabled(true);
+        div.getTxtHaigushaJusho2().setDisabled(true);
+        div.getRadHaigushaKazeiKubun().setDisabled(true);
+        if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            div.getRadKetteiKubun().setDisabled(true);
+            div.getTxtKetteiYMD().setDisabled(true);
+            div.getTxtTekiyoYMD().setDisabled(true);
+            div.getTxtYukoKigenYMD().setDisabled(true);
+            div.getDdlKyusochisha().setDisabled(true);
+            div.getDdlRiyoshaFutanDankai().setDisabled(true);
+            div.getDdlKyoshitsuShubetsu().setDisabled(true);
+            div.getChkKyokaiso().setDisabled(true);
+            div.getChkGekihenKanwa().setDisabled(true);
+            div.getDdlShokuhi().setDisabled(true);
+            div.getDdlUnitGataKoshitsu().setDisabled(true);
+            div.getDdlUnitGataJunKoshitsu().setDisabled(true);
+            div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
+            div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
+            div.getDdlTashoshitsu().setDisabled(true);
+            div.getBtnHiShoninRiyu().setDisabled(true);
+            div.getTxtHiShoninRiyu().setDisabled(true);
+            div.getBtnShinseiKakutei().setDisplayNone(false);
+            div.getBtnShoninKakutei().setDisplayNone(true);
+        } else {
+            div.getRadKetteiKubun().setDisabled(false);
+            div.getTxtKetteiYMD().setDisabled(false);
+            onChange_radKetteiKubun();
+            div.getBtnShinseiKakutei().setDisplayNone(true);
+            div.getBtnShoninKakutei().setDisplayNone(false);
+        }
+    }
 
+    private void putEdited申請情報ToViewState(boolean is申請一覧表示) {
+        ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+        if (修正状態.equals(div.getJotai())) {
+            int index = div.getDgShinseiList().getClickedRowId();
+            FutanGendogakuNinteiViewState ninteiViewState = list.get(index);
+            FutanGendogakuNintei futanGendogakuNintei = ninteiViewState.getFutanGendogakuNintei();
+            FutanGendogakuNintei 申請情報 = 申請情報Builder(futanGendogakuNintei);
+            ninteiViewState.setFutanGendogakuNintei(申請情報);
+            ninteiViewState.setState(EntityDataState.Modified);
+            list.set(index, ninteiViewState);
+        } else if (削除状態.equals(div.getJotai())) {
+            int index = div.getDgShinseiList().getClickedRowId();
+            FutanGendogakuNinteiViewState ninteiViewState = list.get(index);
+            ninteiViewState.setState(EntityDataState.Deleted);
+            list.set(index, ninteiViewState);
+        } else {
+            FutanGendogakuNintei futanGendogakuNintei = new FutanGendogakuNintei(get証記載保険者番号(div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(), 0);
+            FutanGendogakuNintei 申請情報 = 申請情報Builder(futanGendogakuNintei);
+            list = sort申請情報ListBy申請日(list, 申請情報);
+        }
+        if (is申請一覧表示) {
+            set申請一覧(list);
+        }
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, list);
+    }
+
+    private ArrayList<FutanGendogakuNinteiViewState> sort申請情報ListBy申請日(ArrayList<FutanGendogakuNinteiViewState> list, FutanGendogakuNintei 申請情報) {
+        ArrayList<FutanGendogakuNinteiViewState> newList = new ArrayList<>();
+        boolean isBefore = false;
+        FutanGendogakuNintei fgn;
+        FutanGendogakuNintei fgn2;
+        for (FutanGendogakuNinteiViewState ninteiViewState : list) {
+            FutanGendogakuNintei futanGendogakuNintei = ninteiViewState.getFutanGendogakuNintei();
+            if (申請情報.get申請年月日().isBefore(futanGendogakuNintei.get申請年月日())) {
+                isBefore = true;
+                fgn = new FutanGendogakuNintei(
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), list.size() + 1);
+                fgn = copyFutanGendogakuNintei(futanGendogakuNintei, fgn);
+                ninteiViewState.setFutanGendogakuNintei(fgn);
+                newList.add(ninteiViewState);
+            } else if (isBefore && !申請情報.get申請年月日().isBefore(futanGendogakuNintei.get申請年月日())) {
+                isBefore = false;
+                fgn = new FutanGendogakuNintei(
+                        申請情報.get証記載保険者番号(), 申請情報.get被保険者番号(), list.size() - newList.size() + 1);
+                fgn = copyFutanGendogakuNintei(futanGendogakuNintei, fgn);
+                FutanGendogakuNinteiViewState newNinteiViewState = new FutanGendogakuNinteiViewState(fgn, EntityDataState.Added, fgn.get履歴番号());
+                newList.add(newNinteiViewState);
+                fgn2 = new FutanGendogakuNintei(
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), list.size() - newList.size());
+                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2);
+                ninteiViewState.setFutanGendogakuNintei(fgn2);
+                newList.add(ninteiViewState);
+            } else {
+                isBefore = false;
+                fgn2 = new FutanGendogakuNintei(
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), list.size() - newList.size());
+                fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2);
+                ninteiViewState.setFutanGendogakuNintei(fgn2);
+                newList.add(ninteiViewState);
             }
         }
-        return dataSourceList;
+        if (list.isEmpty()) {
+            FutanGendogakuNinteiViewState newNinteiViewState = new FutanGendogakuNinteiViewState(申請情報, EntityDataState.Added, 0);
+            newList.add(newNinteiViewState);
+        }
+        return newList;
+    }
+
+    private FutanGendogakuNintei copyFutanGendogakuNintei(FutanGendogakuNintei formFgn, FutanGendogakuNintei toFgn) {
+        FutanGendogakuNinteiBuilder builder = toFgn.createBuilderForEdit();
+        builder.set申請年月日(formFgn.get申請年月日());
+        builder.set申請理由区分(formFgn.get申請理由区分());
+        builder.set配偶者の有無(formFgn.is配偶者の有無());
+        builder.set配偶者識別コード(formFgn.get配偶者識別コード());
+        builder.set配偶者氏名カナ(formFgn.get配偶者氏名カナ());
+        builder.set配偶者氏名(formFgn.get配偶者氏名());
+        builder.set配偶者生年月日(formFgn.get配偶者生年月日());
+        builder.set配偶者連絡先(formFgn.get配偶者連絡先());
+        builder.set配偶者住所(formFgn.get配偶者住所());
+        builder.set配偶者住所２(formFgn.get配偶者住所２());
+        builder.set配偶者課税区分(formFgn.get配偶者課税区分());
+        builder.set預貯金申告区分(formFgn.get預貯金申告区分());
+
+        builder.set預貯金額(formFgn.get預貯金額());
+        builder.set有価証券評価概算額(formFgn.get有価証券評価概算額());
+        builder.setその他金額(formFgn.getその他金額());
+        builder.set決定区分(formFgn.get決定区分());
+        builder.set決定年月日(formFgn.get決定年月日());
+        builder.set適用開始年月日(formFgn.get適用開始年月日());
+        builder.set適用終了年月日(formFgn.get適用終了年月日());
+        builder.set旧措置者区分(formFgn.get旧措置者区分());
+        builder.set利用者負担段階(formFgn.get利用者負担段階());
+        builder.set居室種別(formFgn.get居室種別());
+        builder.set食費負担限度額(formFgn.get食費負担限度額());
+        builder.setユニット型個室(formFgn.getユニット型個室());
+        builder.setユニット型準個室(formFgn.getユニット型準個室());
+        builder.set従来型個室_特養等(formFgn.get従来型個室_特養等());
+        builder.set従来型個室_老健_療養等(formFgn.get従来型個室_老健_療養等());
+        builder.set多床室(formFgn.get多床室());
+        builder.set非承認理由(formFgn.get非承認理由());
+        return builder.build();
+    }
+
+    private void clear申請情報エリア() {
+        div.getTxtShinseiYMD().clearValue();
+        div.getDdlShinseiRiyu().setSelectedKey(BLANKLINE_KEY);
+        div.getRadHaigushaUmu().clearSelectedItem();
+        div.getTxtHaigushaShikibetsuCode().clearDomain();
+        div.getTxtHaigushaShimeiKana().clearDomain();
+        div.getTxtHaigushaShimei().clearDomain();
+        div.getTxtHaigushaUmareYMD().clearValue();
+        div.getTxtHaigushaRenrakusaki().clearDomain();
+        div.getTxtHaigushaJusho1().clearDomain();
+        div.getTxtHaigushaJusho2().clearDomain();
+        div.getRadHaigushaKazeiKubun().clearSelectedItem();
+        div.getChkYochokinKijunIka().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getTxtYochokinGaku().clearValue();
+        div.getTxtYukaShoken().clearValue();
+        div.getTxtSonota().clearValue();
+        div.getRadKetteiKubun().setSelectedKey(決定区分_承認する);
+        div.getTxtKetteiYMD().setValue(FlexibleDate.getNowDate());
+        div.getTxtTekiyoYMD().clearValue();
+        div.getTxtYukoKigenYMD().clearValue();
+        div.getDdlKyusochisha().setSelectedKey(BLANKLINE_KEY);
+        div.getDdlRiyoshaFutanDankai().setSelectedKey(BLANKLINE_KEY);
+        div.getDdlKyoshitsuShubetsu().setSelectedKey(BLANKLINE_KEY);
+        div.getDdlShokuhi().setSelectedValue(BLANKLINE_KEY);
+        div.getDdlUnitGataKoshitsu().setSelectedValue(BLANKLINE_KEY);
+        div.getDdlUnitGataJunKoshitsu().setSelectedValue(BLANKLINE_KEY);
+        div.getDdlJuraiGataKoshitsuTokuyo().setSelectedValue(BLANKLINE_KEY);
+        div.getDdlJuraiGataKoshitsuRoken().setSelectedValue(BLANKLINE_KEY);
+        div.getDdlTashoshitsu().setSelectedValue(BLANKLINE_KEY);
+        div.getTxtHiShoninRiyu().clearValue();
     }
 }

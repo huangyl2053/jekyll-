@@ -127,9 +127,34 @@ public class FutanGendogakuNinteiManager {
         return 1 == 介護保険負担限度額認定Dac.save(介護保険負担限度額認定.toEntity());
     }
 
+    /**
+     * 負担限度額認定{@link KaigoHokenFutanGendogakuNintei}を保存します。
+     *
+     * @param 介護保険負担限度額認定 介護保険負担限度額認定
+     * @return 更新あり:true、更新なし:false <br>
+     * いずれかのテーブルに更新があればtrueを返す、いずれのテーブルもunchangedで更新無しの場合falseを返す
+     */
+    @Transaction
+    public boolean saveOrDeletePhysicalBy(FutanGendogakuNintei 介護保険負担限度額認定) {
+        requireNonNull(介護保険負担限度額認定, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件));
+
+        if (!介護保険負担限度額認定.hasChanged()) {
+            return false;
+        }
+        介護保険負担限度額認定 = 介護保険負担限度額認定.modifiedModel();
+        saveOrDeletePhysicalBy減免減額申請リスト(介護保険負担限度額認定.getGemmenGengakuShinseiList());
+        return 1 == 介護保険負担限度額認定Dac.saveOrDeletePhysicalBy(介護保険負担限度額認定.toEntity());
+    }
+
     private void save減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
             減免減額申請Manager.save減免減額申請(減免減額申請);
+        }
+    }
+
+    private void saveOrDeletePhysicalBy減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
+            減免減額申請Manager.saveOrDeletePhysicalBy減免減額申請(減免減額申請);
         }
     }
 

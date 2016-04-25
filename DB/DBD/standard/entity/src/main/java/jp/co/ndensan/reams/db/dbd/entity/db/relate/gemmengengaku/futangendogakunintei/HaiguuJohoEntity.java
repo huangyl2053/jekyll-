@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei;
 
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HaiguuJohoEntity {
 
     private boolean exists;
-//    private IKojin 個人;
+    private IKojin 個人;
     private RString 課税区分;
     private RString 現住所と異なる本年1月1日住所;
 
