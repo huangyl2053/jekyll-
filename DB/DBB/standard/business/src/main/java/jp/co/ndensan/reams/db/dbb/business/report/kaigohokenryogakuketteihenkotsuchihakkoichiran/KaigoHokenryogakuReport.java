@@ -40,7 +40,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     private static final int SIZE = 18;
     private final List<KaigoHokenryogakuItem> targets;
     private final List<RString> 改頁項目リスト;
-    private static final RString eightRS = new RString("18");
+    private static final RString データ_8 = new RString("18");
 
     /**
      * コンストラクタです。
@@ -150,7 +150,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
         if ((i + 1) % SIZE != 0) {
             item1.setListUpper_1(new RString(Integer.valueOf((i + 1) % SIZE).toString()));
         } else {
-            item1.setListUpper_1(eightRS);
+            item1.setListUpper_1(データ_8);
         }
         if (編集後本算定通知書共通情報.get(i).get通知書番号() != null) {
             item1.setListUpper_2(new RString(編集後本算定通知書共通情報.get(i).get通知書番号().toString()));

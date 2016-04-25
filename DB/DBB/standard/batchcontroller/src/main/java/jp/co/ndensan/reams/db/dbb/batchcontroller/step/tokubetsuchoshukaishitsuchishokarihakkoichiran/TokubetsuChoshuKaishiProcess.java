@@ -39,9 +39,23 @@ public class TokubetsuChoshuKaishiProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        // TODO Checkstyle 対応。
         作成したdataを帳票に引き渡す(編集後本算定通知書共通情報.getValue(),
                 バッチパラメータ.getValue(), 帳票作成日時.getValue());
+    }
+
+    /**
+     * 変数初期化
+     *
+     * @param 編集後本算定通知書共通情報 InputParameter<List<EditedHonSanteiTsuchiShoKyotsu>>
+     * @param バッチパラメータ InputParameter<NonyuTsuchIchiranBatchParameter>
+     * @param 帳票作成日時 InputParameter<RString>
+     */
+    public TokubetsuChoshuKaishiProcess(InputParameter<List<EditedHonSanteiTsuchiShoKyotsu>> 編集後本算定通知書共通情報,
+            InputParameter<NonyuTsuchIchiranBatchParameter> バッチパラメータ,
+            InputParameter<RString> 帳票作成日時) {
+        this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
+        this.バッチパラメータ = バッチパラメータ;
+        this.帳票作成日時 = 帳票作成日時;
     }
 
     private void 作成したdataを帳票に引き渡す(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
