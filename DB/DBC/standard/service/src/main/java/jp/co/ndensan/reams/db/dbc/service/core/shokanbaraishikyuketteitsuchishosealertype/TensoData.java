@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.shokanbaraishikyuketteitsuchishosealertype;
+package jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyuketteitsuchishosealertype;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer;
