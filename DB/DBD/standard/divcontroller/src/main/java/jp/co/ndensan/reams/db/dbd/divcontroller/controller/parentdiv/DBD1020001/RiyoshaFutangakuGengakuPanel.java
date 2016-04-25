@@ -82,8 +82,7 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onLoad(RiyoshaFutangakuGengakuPanelDiv div) {
 
-        getHandler(div).initialize();
-        return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+        return getHandler(div).initialize();
     }
 
     /**
