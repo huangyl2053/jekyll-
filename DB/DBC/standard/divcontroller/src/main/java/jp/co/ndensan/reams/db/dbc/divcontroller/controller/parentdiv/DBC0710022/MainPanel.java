@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -46,6 +47,7 @@ public class MainPanel {
     private static final RString 業務区分 = new RString("01");
     private static final RString MSG_決定日 = new RString("決定日");
     private static final RString MSG_理由 = new RString("不支給理由等");
+    private static final RString 申請を保存する = new RString("btnAddShikyuShinsei");
 
     /**
      * 住宅改修費支給申請_償還払決定情報登録のonLoad
@@ -76,6 +78,7 @@ public class MainPanel {
         } else {
             div.getJutakuKaishuShinseiInfoPanel().getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho().
                     loadInitialize(被保険者番号, サービス年月, 整理番号, 業務区分, モード_照会);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
         }
 
         ShoukanFutsuKetteiJouhouTourokuParameter 画面データ = getHandler(div).set画面データ();
@@ -92,7 +95,7 @@ public class MainPanel {
     public ResponseData<MainPanelDiv> onClick_btnShinseiJyoho(MainPanelDiv div) {
         ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索情報キー,
                 ShokanharaKeteiJyohoParameter.class);
-        if (修正.equals(parameter.get画面モード()) || 照会.equals(parameter.get画面モード())) {
+        if (修正.equals(parameter.get画面モード())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -108,6 +111,13 @@ public class MainPanel {
                 ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
             }
+        } else {
+            ViewStateHolder.put(ViewStateKeys.識別コード, parameter.get識別コード());
+            ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月());
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, parameter.get被保険者番号());
+            ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
+            ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get画面モード());
+            return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -192,8 +202,15 @@ public class MainPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                boolean flags = getHandler(div).保存処理();
-                setMessages(div, flags);
+                try {
+                    boolean flags = getHandler(div).保存処理();
+                    setMessages(div, flags);
+                } catch (Exception e) {
+                    div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage().setMessage(UrErrorMessages.異常終了,
+                            ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class).value(),
+                            div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().get氏名漢字(), false);
+                    return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
+                }
                 return ResponseData.of(div).setState(DBC0710022StateName.KanryoMessage);
             }
         } else {
