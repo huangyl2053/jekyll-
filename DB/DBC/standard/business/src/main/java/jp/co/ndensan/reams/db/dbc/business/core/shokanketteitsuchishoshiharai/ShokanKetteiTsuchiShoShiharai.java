@@ -328,4 +328,13 @@ public class ShokanKetteiTsuchiShoShiharai {
     public RString get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
+
+    /**
+     * サービス種類コードを取得します。
+     *
+     * @return サービス種類コード
+     */
+    public RString getサービス種類コード() {
+        return entity.getServiceShuruiCode();
+    }
 }

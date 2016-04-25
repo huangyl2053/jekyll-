@@ -56,4 +56,5 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private RString shiharaiKaishiTime;
     private RString shiharaiShuryoTime;
     private RString shoKisaiHokenshaNo;
+    private RString serviceShuruiCode;
 }
