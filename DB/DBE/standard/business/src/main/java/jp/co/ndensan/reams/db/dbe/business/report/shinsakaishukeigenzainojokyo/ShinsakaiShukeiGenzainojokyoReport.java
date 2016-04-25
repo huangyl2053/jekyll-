@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeigenzainojokyo;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 介護認定審査会集計表（現在の状況別）のReportです。
@@ -18,33 +17,21 @@ import lombok.NonNull;
  */
 public class ShinsakaiShukeiGenzainojokyoReport extends Report<ShinsakaiShukeiGenzainojokyoReportSource> {
 
-    private final List<ShinsakaiShukeiGenzainojokyoItem> itemList;
+    private final ShinsakaiShukeiGenzainojokyoEntity target;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemlist 介護認定審査会集計表（現在の状況別）のitemlist
-     * @return 介護認定審査会集計表（現在の状況別）のReport
+     * @param target 介護認定審査会集計表（現在の状況別）target
      */
-    public static ShinsakaiShukeiGenzainojokyoReport createFrom(@NonNull List<ShinsakaiShukeiGenzainojokyoItem> itemlist) {
-        return new ShinsakaiShukeiGenzainojokyoReport(itemlist);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param itemlist 介護認定審査会集計表（現在の状況別）のitemlist
-     */
-    protected ShinsakaiShukeiGenzainojokyoReport(List<ShinsakaiShukeiGenzainojokyoItem> itemlist) {
-        this.itemList = itemlist;
+    public ShinsakaiShukeiGenzainojokyoReport(ShinsakaiShukeiGenzainojokyoEntity target) {
+        this.target = target;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaiShukeiGenzainojokyoReportSource> reportSourceWriter) {
-        for (ShinsakaiShukeiGenzainojokyoItem item : itemList) {
-            IShinsakaiShukeiGenzainojokyoEditor editor = new ShinsakaiShukeiGenzainojokyoEditor(item);
-            IShinsakaiShukeiGenzainojokyoBuilder builder = new ShinsakaiShukeiGenzainojokyoBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IShinsakaiShukeiGenzainojokyoEditor editor = new ShinsakaiShukeiGenzainojokyoEditor(target);
+        IShinsakaiShukeiGenzainojokyoBuilder builder = new ShinsakaiShukeiGenzainojokyoBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

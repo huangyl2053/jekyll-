@@ -5,11 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.report.shinsakaishukeigenzainojokyo;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoReport;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -24,17 +22,11 @@ public class ShinsakaiShukeiGenzainojokyoPrintService {
     /**
      * 介護認定審査会集計表（現在の状況別）を印刷します。
      *
-     * @param itemlist 介護認定審査会集計表（現在の状況別）_帳票クラスパラメータクラス
+     * @param target 介護認定審査会集計表（現在の状況別）_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(List<ShinsakaiShukeiGenzainojokyoItem> itemlist) {
+    public SourceDataCollection print(ShinsakaiShukeiGenzainojokyoEntity target) {
         ShinsakaiShukeiGenzainojokyoProperty property = new ShinsakaiShukeiGenzainojokyoProperty();
-        return new Printer<ShinsakaiShukeiGenzainojokyoReportSource>().spool(property, toReports(itemlist));
-    }
-
-    private static List<ShinsakaiShukeiGenzainojokyoReport> toReports(List<ShinsakaiShukeiGenzainojokyoItem> itemlist) {
-        List<ShinsakaiShukeiGenzainojokyoReport> list = new ArrayList<>();
-        list.add(ShinsakaiShukeiGenzainojokyoReport.createFrom(itemlist));
-        return list;
+        return new Printer<ShinsakaiShukeiGenzainojokyoReportSource>().spool(property, new ShinsakaiShukeiGenzainojokyoReport(target));
     }
 }
