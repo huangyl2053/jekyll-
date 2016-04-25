@@ -216,6 +216,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         抽出条件.add(抽出条件Builder.toRString());
         List<Decimal> ページ数 = new ArrayList<>();
         ページ数.add(Decimal.ONE);
+        // TODO 出力順関連
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().
                 get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
                         Long.parseLong(batchPram.getSyutujunId().toString()));
@@ -314,7 +315,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setKetteiYMD(business.get決定年月日() == null ? RString.EMPTY : business.get決定年月日().wareki().eraType(
                 EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                         Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        ketteiTsuchiShoSealer.setShiharaiGaku(new RString(business.get本人支払額().toString()));
         ketteiTsuchiShoSealer.setKekka(ShikyuFushikyuKubun.toValue(business.get支給不支給決定区分()).get名称());
         ketteiTsuchiShoSealer.set増減の理由(business.get増減理由等());
         ketteiTsuchiShoSealer.setShiharaiBasho(batchPram.getShiharaiBasho());
@@ -410,7 +410,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
     private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
         RString 設定値 = RString.EMPTY;
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
-                FlexibleDate.getNowDate().getYearMonth().getYear(), 項目名);
+                FlexibleDate.getNowDate().getYear(), 項目名);
         if (chohyoSeigyoHanyo != null) {
             設定値 = chohyoSeigyoHanyo.get設定値();
         }
