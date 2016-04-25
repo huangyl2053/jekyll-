@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KaigohokenShindanMeireishoReport extends Report<KaigohokenShindanMeireishoReportSource> {
 
-    private final KaigohokenShindanMeireishoHeaderItem headItem;
+    private final List<KaigohokenShindanMeireishoHeaderItem> headItem;
 
     /**
      * インスタンスを生成します。
@@ -25,7 +26,7 @@ public class KaigohokenShindanMeireishoReport extends Report<KaigohokenShindanMe
      * @return 介護保険診断命令書のReport
      */
     public static KaigohokenShindanMeireishoReport createFrom(
-            KaigohokenShindanMeireishoHeaderItem headItem) {
+            List<KaigohokenShindanMeireishoHeaderItem> headItem) {
 
         return new KaigohokenShindanMeireishoReport(headItem);
     }
@@ -36,14 +37,16 @@ public class KaigohokenShindanMeireishoReport extends Report<KaigohokenShindanMe
      * @param headItem 介護保険診断命令書ヘッダのITEM
      */
     protected KaigohokenShindanMeireishoReport(
-            KaigohokenShindanMeireishoHeaderItem headItem) {
+            List<KaigohokenShindanMeireishoHeaderItem> headItem) {
         this.headItem = headItem;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter) {
-        IKaigohokenShindanMeireishoEditor headerEditor = new KaigohokenShindanMeireishoHeaderEditor(headItem);
-        IKaigohokenShindanMeireishoBuider buider = new KaigohokenShindanMeireishoBuiderImpl(headerEditor);
-        reportSourceWriter.writeLine(buider);
+        for (KaigohokenShindanMeireishoHeaderItem item : headItem) {
+            IKaigohokenShindanMeireishoEditor headerEditor = new KaigohokenShindanMeireishoHeaderEditor(item);
+            IKaigohokenShindanMeireishoBuider buider = new KaigohokenShindanMeireishoBuiderImpl(headerEditor);
+            reportSourceWriter.writeLine(buider);
+        }
     }
 }
