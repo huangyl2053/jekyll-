@@ -124,10 +124,9 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                         .getTxtShinseiYMD().getValue().getYearMonth();
             }
             RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
-            if (給付実績連動_受託なし.equals(償還)) {
-                if ((申請日 == null) || (!画面提供着工年月.getYearMonth().equals(申請日年月))) {
-                    return false;
-                }
+            if (給付実績連動_受託なし.equals(償還) && ((申請日 == null)
+                    || (!画面提供着工年月.getYearMonth().equals(申請日年月)))) {
+                return false;
             }
             return true;
         }

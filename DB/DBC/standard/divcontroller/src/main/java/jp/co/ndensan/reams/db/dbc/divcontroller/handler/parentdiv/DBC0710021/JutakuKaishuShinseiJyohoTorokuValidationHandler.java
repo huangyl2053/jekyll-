@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
 
     private final JutakuKaishuShinseiJyohoTorokuDiv div;
-    private static RString 画面モード;
+    private final RString 画面モード;
     private static final RString 画面モード_取消 = new RString("取消モード");
 
     /**
@@ -39,7 +39,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     public JutakuKaishuShinseiJyohoTorokuValidationHandler(RString 画面モード,
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
-        JutakuKaishuShinseiJyohoTorokuValidationHandler.画面モード = 画面モード;
+        this.画面モード = 画面モード;
     }
 
     /**
@@ -49,6 +49,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      */
     public JutakuKaishuShinseiJyohoTorokuValidationHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
+        this.画面モード = null;
     }
 
     /**
@@ -57,7 +58,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      * @return バリデーション突合結果
      */
     public ValidationMessageControlPairs validate() {
-        IValidationMessages messages = new ControlValidator(div).validate();
+        IValidationMessages messages = new ControlValidator(this.div, this.画面モード).validate();
         return createDictionary().check(messages);
     }
 
@@ -67,7 +68,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      * @return バリデーション突合結果
      */
     public ValidationMessageControlPairs validate住宅改修内容() {
-        IValidationMessages messages = new ControlValidator(div).validate住宅改修内容();
+        IValidationMessages messages = new ControlValidator(div, this.画面モード).validate住宅改修内容();
         return create住宅改修内容Dictionary().check(messages);
     }
 
@@ -97,9 +98,11 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     private static class ControlValidator {
 
         private final JutakuKaishuShinseiJyohoTorokuDiv div;
+        private final RString 画面モード;
 
-        public ControlValidator(JutakuKaishuShinseiJyohoTorokuDiv div) {
+        public ControlValidator(JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード) {
             this.div = div;
+            this.画面モード = 画面モード;
         }
 
         /**

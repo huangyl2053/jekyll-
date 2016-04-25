@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710021.Jut
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.JutakuGaisuDataParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShikyuShiseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHanntei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
@@ -69,15 +68,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 画面モード_修正 = new RString("修正モード");
     private static final RString 画面モード_事前申請 = new RString("事前申請モード");
     private static final RString 画面モード_以外 = new RString("以外");
-    private static final Code 非該当 = new Code("01");
-    private static final Code 要支援1 = new Code("12");
-    private static final Code 要支援2 = new Code("13");
-    private static final Code 要支援_経過的要介護 = new Code("11");
-    private static final Code 要介護1 = new Code("21");
-    private static final Code 要介護2 = new Code("22");
-    private static final Code 要介護3 = new Code("23");
-    private static final Code 要介護4 = new Code("24");
-    private static final Code 要介護5 = new Code("25");
     private static final RString 要介護状態区分3段階変更による = new RString("threeUp");
     private static final RString 住宅住所変更による = new RString("changeAddress");
     private static final RString エラー_RPLC_MSG_1 = new RString("受給認定有効期間外の");
@@ -263,9 +253,9 @@ public class JutakuKaishuShinseiJyohoToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        if ((削除の確認 || 保存の確認) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (is確認結果(削除の確認, 保存の確認)) {
             getHandler(div).save(引き継ぎデータEntity);
-        } else {
+        } else if ((削除の確認 || 保存の確認) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
         if (is状態Check(画面モード)) {
@@ -303,6 +293,10 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean is確認結果(boolean 削除の確認, boolean 保存の確認) {
+        return (削除の確認 || 保存の確認) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes;
     }
 
     private boolean is状態CheckTow(RString 画面モード) {
@@ -494,7 +488,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_ryoshuYMDonFocus(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShikyuShiseiJyohoParameter 引き継ぎデータEntity = new ShikyuShiseiJyohoParameter();
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         if (領収日 != null) {
@@ -547,7 +541,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             div.getTxtKyufuritsu().setValue(給付率.value());
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 引き継ぎデータEntity.get画面モード());
+            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
         }
         return ResponseData.of(div).respond();
     }
@@ -580,8 +574,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             }
         } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード_修正);
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
+                    .respond();
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード);
+            return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
+                    .respond();
         }
         return ResponseData.of(div).respond();
     }
