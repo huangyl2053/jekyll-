@@ -298,7 +298,7 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(true);
         } else if (状態_訂正履歴.equals(画面状態)) {
             if (状態_修正.equals(div.getStauts())) {
-                if (RowState.Unchanged.equals(選択データ.getRowState())) {
+                if (!RowState.Added.equals(選択データ.getRowState())) {
                     選択データ.setRowState(RowState.Modified);
                 }
                 RDate 変更後適用日 = div.getPanelTekiyoInput().getTxtTekiyoDate().getValue();
