@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 汎用リスト_被保険者台帳バッチ処理パラメータークラスです。
+ *
+ * @reamsid_L DBA-1610-030 lishengli
  */
 @lombok.Getter
 @lombok.Setter
@@ -54,41 +56,10 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
     private final RString psmChiku2_To;
     private final RString psmChiku3_From;
     private final RString psmChiku3_To;
-
     private RString psmShikibetsuTaisho;
-    private boolean is直近;
-    private boolean is基準日;
-    private boolean is範囲;
-    private boolean is資格取得日;
-    private boolean is資格取得届出日;
-    private boolean is取得日;
-    private boolean is取得届出日;
-    private boolean is喪失日;
-    private boolean is喪失届出日;
-    private boolean is１号;
-    private boolean is２号;
-    private boolean is日本人;
-    private boolean is外国人;
-    private boolean is自特例者;
-    private boolean is広域住特;
-    private boolean is資格取得者のみ;
-    private boolean is資格喪失者のみ;
-    private boolean isEmpty;
-    private FlexibleDate 宛名抽出年齢開始;
-    private FlexibleDate 宛名抽出年齢終了;
-    private boolean is年齢;
-    private boolean is生年月日;
-    private boolean is全て以外;
-    private boolean is住所;
-    private boolean is行政区;
-    private boolean is地区;
-    private boolean has年齢開始;
-    private boolean has年齢終了;
-    private boolean has生年月日開始;
-    private boolean has生年月日終了;
 
     /**
-     * 非公開コンストラクタです。
+     * コンストラクタです。
      *
      * @param komukuFukaMeyi 項目名付加
      * @param rembanfuka 連番付加
@@ -205,7 +176,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
      * @return 汎用リスト_被保険者台帳バッチ処理パラメータークラス
      */
     public HanyoListHihokenshadaichoMyBatisParameter toMyBatisParameter() {
-        return new HanyoListHihokenshadaichoMyBatisParameter(
+        return HanyoListHihokenshadaichoMyBatisParameter.create_MybatisParameter(
                 komukuFukaMeyi,
                 rembanfuka,
                 hidukeHensyu,
@@ -220,10 +191,6 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
                 shikakuChushutsuKubun,
                 shutokujiyu,
                 soshitsujiyu,
-                RString.EMPTY,
-                pageShuturyokujun_Id,
-                shutsuryokuKomuku_Id,
-                chohyoId,
                 psmChushutsu_Kubun,
                 psmChushutsuAge_Start,
                 psmChushutsuAge_End,
@@ -242,35 +209,6 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
                 psmChiku2_To,
                 psmChiku3_From,
                 psmChiku3_To,
-                is直近,
-                is基準日,
-                is範囲,
-                is資格取得日,
-                is資格取得届出日,
-                is取得日,
-                is取得届出日,
-                is喪失日,
-                is喪失届出日,
-                is１号,
-                is２号,
-                is日本人,
-                is外国人,
-                is自特例者,
-                is広域住特,
-                is資格取得者のみ,
-                is資格喪失者のみ,
-                isEmpty,
-                宛名抽出年齢開始,
-                宛名抽出年齢終了,
-                is年齢,
-                is生年月日,
-                has年齢開始,
-                has年齢終了,
-                has生年月日開始,
-                has生年月日終了,
-                is住所,
-                is行政区,
-                is地区,
                 psmShikibetsuTaisho);
     }
 }
