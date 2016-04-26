@@ -28,6 +28,9 @@
             <if test="uses履歴番号">
                 and DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" = #{履歴番号}
             </if>
+            <if test="uses減免減額種類">
+                and DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
+            </if>
         </where>
     </sql>
 
