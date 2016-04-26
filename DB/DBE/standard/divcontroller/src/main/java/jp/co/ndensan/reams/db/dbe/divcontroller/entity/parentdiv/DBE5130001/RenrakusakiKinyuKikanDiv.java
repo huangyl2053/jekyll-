@@ -4,19 +4,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * RenrakusakiKinyuKikan のクラスファイル
- *
+ * RenrakusakiKinyuKikan のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class RenrakusakiKinyuKikanDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,18 +24,18 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
      */
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
-    @JsonProperty("ddlYusoKubun")
-    private DropDownList ddlYusoKubun;
     @JsonProperty("txtJusho")
     private TextBoxJusho txtJusho;
-    @JsonProperty("ddlHaishiFlag")
-    private DropDownList ddlHaishiFlag;
-    @JsonProperty("txtHaishiYMD")
-    private TextBoxDate txtHaishiYMD;
     @JsonProperty("txtTelNo1")
     private TextBoxTelNo txtTelNo1;
     @JsonProperty("txtFaxNo")
     private TextBoxTelNo txtFaxNo;
+    @JsonProperty("ddlYusoKubun")
+    private DropDownList ddlYusoKubun;
+    @JsonProperty("ddlHaishiFlag")
+    private DropDownList ddlHaishiFlag;
+    @JsonProperty("txtHaishiYMD")
+    private TextBoxDate txtHaishiYMD;
     @JsonProperty("btnKozaJohoToroku")
     private ButtonDialog btnKozaJohoToroku;
 
@@ -65,24 +64,6 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
     }
 
     /*
-     * getddlYusoKubun
-     * @return ddlYusoKubun
-     */
-    @JsonProperty("ddlYusoKubun")
-    public DropDownList getDdlYusoKubun() {
-        return ddlYusoKubun;
-    }
-
-    /*
-     * setddlYusoKubun
-     * @param ddlYusoKubun ddlYusoKubun
-     */
-    @JsonProperty("ddlYusoKubun")
-    public void setDdlYusoKubun(DropDownList ddlYusoKubun) {
-        this.ddlYusoKubun = ddlYusoKubun;
-    }
-
-    /*
      * gettxtJusho
      * @return txtJusho
      */
@@ -98,42 +79,6 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
     @JsonProperty("txtJusho")
     public void setTxtJusho(TextBoxJusho txtJusho) {
         this.txtJusho = txtJusho;
-    }
-
-    /*
-     * getddlHaishiFlag
-     * @return ddlHaishiFlag
-     */
-    @JsonProperty("ddlHaishiFlag")
-    public DropDownList getDdlHaishiFlag() {
-        return ddlHaishiFlag;
-    }
-
-    /*
-     * setddlHaishiFlag
-     * @param ddlHaishiFlag ddlHaishiFlag
-     */
-    @JsonProperty("ddlHaishiFlag")
-    public void setDdlHaishiFlag(DropDownList ddlHaishiFlag) {
-        this.ddlHaishiFlag = ddlHaishiFlag;
-    }
-
-    /*
-     * gettxtHaishiYMD
-     * @return txtHaishiYMD
-     */
-    @JsonProperty("txtHaishiYMD")
-    public TextBoxDate getTxtHaishiYMD() {
-        return txtHaishiYMD;
-    }
-
-    /*
-     * settxtHaishiYMD
-     * @param txtHaishiYMD txtHaishiYMD
-     */
-    @JsonProperty("txtHaishiYMD")
-    public void setTxtHaishiYMD(TextBoxDate txtHaishiYMD) {
-        this.txtHaishiYMD = txtHaishiYMD;
     }
 
     /*
@@ -170,6 +115,60 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
     @JsonProperty("txtFaxNo")
     public void setTxtFaxNo(TextBoxTelNo txtFaxNo) {
         this.txtFaxNo = txtFaxNo;
+    }
+
+    /*
+     * getddlYusoKubun
+     * @return ddlYusoKubun
+     */
+    @JsonProperty("ddlYusoKubun")
+    public DropDownList getDdlYusoKubun() {
+        return ddlYusoKubun;
+    }
+
+    /*
+     * setddlYusoKubun
+     * @param ddlYusoKubun ddlYusoKubun
+     */
+    @JsonProperty("ddlYusoKubun")
+    public void setDdlYusoKubun(DropDownList ddlYusoKubun) {
+        this.ddlYusoKubun = ddlYusoKubun;
+    }
+
+    /*
+     * getddlHaishiFlag
+     * @return ddlHaishiFlag
+     */
+    @JsonProperty("ddlHaishiFlag")
+    public DropDownList getDdlHaishiFlag() {
+        return ddlHaishiFlag;
+    }
+
+    /*
+     * setddlHaishiFlag
+     * @param ddlHaishiFlag ddlHaishiFlag
+     */
+    @JsonProperty("ddlHaishiFlag")
+    public void setDdlHaishiFlag(DropDownList ddlHaishiFlag) {
+        this.ddlHaishiFlag = ddlHaishiFlag;
+    }
+
+    /*
+     * gettxtHaishiYMD
+     * @return txtHaishiYMD
+     */
+    @JsonProperty("txtHaishiYMD")
+    public TextBoxDate getTxtHaishiYMD() {
+        return txtHaishiYMD;
+    }
+
+    /*
+     * settxtHaishiYMD
+     * @param txtHaishiYMD txtHaishiYMD
+     */
+    @JsonProperty("txtHaishiYMD")
+    public void setTxtHaishiYMD(TextBoxDate txtHaishiYMD) {
+        this.txtHaishiYMD = txtHaishiYMD;
     }
 
     /*
