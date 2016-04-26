@@ -118,10 +118,14 @@ public class SaishinsaInsertProcess extends BatchProcessBase<RString> {
     @Override
     protected void afterExecute() {
         Decimal 連番 = Decimal.ONE;
-        for (SaishinsaKetteiHokenshaInCSVMeisaiEntity 明細Entity : csvMeisaiList) {
-            meisaiTableWriter.insert(batchCreate.createMeisaiEntity(csvHeaderEntity, 明細Entity, 連番));
-            連番 = 連番.add(Decimal.ONE);
+        if (csvMeisaiList != null && !csvMeisaiList.isEmpty() && csvHeaderEntity != null) {
+            for (SaishinsaKetteiHokenshaInCSVMeisaiEntity 明細Entity : csvMeisaiList) {
+                meisaiTableWriter.insert(batchCreate.createMeisaiEntity(csvHeaderEntity, 明細Entity, 連番));
+                連番 = 連番.add(Decimal.ONE);
+            }
         }
-        gokeiTableWriter.insert(batchCreate.createGokeiEntity(csvHeaderEntity, csvGokeiEntity));
+        if (csvGokeiEntity != null) {
+            gokeiTableWriter.insert(batchCreate.createGokeiEntity(csvHeaderEntity, csvGokeiEntity));
+        }
     }
 }

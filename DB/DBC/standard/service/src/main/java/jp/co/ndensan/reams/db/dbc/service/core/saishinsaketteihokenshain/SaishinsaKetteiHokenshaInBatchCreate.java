@@ -48,7 +48,8 @@ public class SaishinsaKetteiHokenshaInBatchCreate {
             SaishinsaKetteiHokenshaInCSVHeadEntity csvHeadEntity,
             SaishinsaKetteiHokenshaInCSVMeisaiEntity csvMeisaiEntity, Decimal 連番) {
         DbT3064SaishinsaKetteiMeisaiDac 明細Dac = InstanceProvider.create(DbT3064SaishinsaKetteiMeisaiDac.class);
-        DbT3064SaishinsaKetteiMeisaiEntity 明細Entity = 明細Dac.selectByKey(new FlexibleYearMonth(csvHeadEntity.get取扱年月()), 保険者区分);
+        DbT3064SaishinsaKetteiMeisaiEntity 明細Entity = 明細Dac.selectByKey(new FlexibleYearMonth(
+                csvHeadEntity.get取扱年月()), 保険者区分);
         SaishinsaKetteiHokenshaInMeisaiEntity meisaiEntity = new SaishinsaKetteiHokenshaInMeisaiEntity();
         meisaiEntity.setToriatsukaiYM(new FlexibleYearMonth(trim囲み文字(csvHeadEntity.get取扱年月())));
         if (明細Entity == null) {
@@ -56,7 +57,6 @@ public class SaishinsaKetteiHokenshaInBatchCreate {
         } else {
             meisaiEntity.setRirekiNo(明細Entity.getRirekiNo().add(連番).intValue());
         }
-
         meisaiEntity.setJigyoshoNo(new JigyoshaNo(trim囲み文字(csvMeisaiEntity.get事業所番号())));
         meisaiEntity.setJigyoshoName(trim囲み文字(csvMeisaiEntity.get事業所名()));
         meisaiEntity.setHiHokenshaNo(new HihokenshaNo(trim囲み文字(csvMeisaiEntity.get被保険者番号())));
@@ -89,33 +89,53 @@ public class SaishinsaKetteiHokenshaInBatchCreate {
     public SaishinsaKetteiHokenshaInGokeiEntity createGokeiEntity(
             SaishinsaKetteiHokenshaInCSVHeadEntity csvHeadEntity,
             SaishinsaKetteiHokenshaInCSVGokeiEntity csvGokeiEntity) {
+
         SaishinsaKetteiHokenshaInGokeiEntity gokeiEntity = new SaishinsaKetteiHokenshaInGokeiEntity();
         gokeiEntity.setToriatsukaiYM(new FlexibleYearMonth(trim囲み文字(csvHeadEntity.get取扱年月())));
         DbT3063SaishinsaKetteiShukeiDac 集計Dac = InstanceProvider.create(DbT3063SaishinsaKetteiShukeiDac.class);
-        DbT3063SaishinsaKetteiShukeiEntity 集計Entity = 集計Dac.selectByKey(new FlexibleYearMonth(csvHeadEntity.get取扱年月()), 保険者区分);
+        DbT3063SaishinsaKetteiShukeiEntity 集計Entity = 集計Dac.selectByKey(new FlexibleYearMonth(
+                csvHeadEntity.get取扱年月()), 保険者区分);
         if (集計Entity == null) {
             gokeiEntity.setRirekiNo(INDEX);
         } else {
             gokeiEntity.setRirekiNo(集計Entity.getRirekiNo().add(Decimal.ONE).intValue());
         }
-        gokeiEntity.setKaigoKyufuhiSeikyuKensu(checkDecimal(csvGokeiEntity.get介護給付費_請求_件数()));
-        gokeiEntity.setKaigoKyufuhiSeikyuTanisu(checkDecimal(csvGokeiEntity.get介護給付費_請求_単位数()));
-        gokeiEntity.setKaigoKyufuhiSeikyuFutangaku(checkDecimal(csvGokeiEntity.get介護給付費_請求_保険者負担額()));
-        gokeiEntity.setKaigoKyufuhiKetteiKensu(checkDecimal(csvGokeiEntity.get介護給付費_決定_件数()));
-        gokeiEntity.setKaigoKyufuhiKetteiTanisu(checkDecimal(csvGokeiEntity.get介護給付費_決定_単位数()));
-        gokeiEntity.setKaigoKyufuhiKetteiFutangaku(checkDecimal(csvGokeiEntity.get介護給付費_決定_保険者負担額()));
-        gokeiEntity.setKaigoKyufuhiChoseiKensu(checkDecimal(csvGokeiEntity.get介護給付費_調整_件数()));
-        gokeiEntity.setKaigoKyufuhiChoseiTanisu(checkDecimal(csvGokeiEntity.get介護給付費_調整_単位数()));
-        gokeiEntity.setKaigoKyufuhiChoseiFutangaku(checkDecimal(csvGokeiEntity.get介護給付費_調整_保険者負担額()));
-        gokeiEntity.setKogakuKaigoServicehiSeikyuKensu(checkDecimal(csvGokeiEntity.get高額介護サービス費_請求_件数()));
-        gokeiEntity.setKogakuKaigoServicehiSeikyuTanisu(checkDecimal(csvGokeiEntity.get高額介護サービス費_請求_単位数()));
-        gokeiEntity.setKogakuKaigoServicehiSeikyuFutangaku(checkDecimal(csvGokeiEntity.get高額介護サービス費_請求_保険者負担額()));
-        gokeiEntity.setKogakuKaigoServicehiKetteiKensu(checkDecimal(csvGokeiEntity.get高額介護サービス費_決定_件数()));
-        gokeiEntity.setKogakuKaigoServicehiKetteiTanisu(checkDecimal(csvGokeiEntity.get高額介護サービス費_決定_単位数()));
-        gokeiEntity.setKogakuKaigoServicehiKetteiFutangaku(checkDecimal(csvGokeiEntity.get高額介護サービス費_決定_保険者負担額()));
-        gokeiEntity.setKogakuKaigoServicehiChoseiKensu(checkDecimal(csvGokeiEntity.get高額介護サービス費_調整_件数()));
-        gokeiEntity.setKogakuKaigoServicehiChoseiTanisu(checkDecimal(csvGokeiEntity.get高額介護サービス費_調整_単位数()));
-        gokeiEntity.setKogakuKaigoServicehiChoseiFutangaku(checkDecimal(csvGokeiEntity.get高額介護サービス費_調整_保険者負担額()));
+        gokeiEntity.setKaigoKyufuhiSeikyuKensu(
+                checkDecimal(csvGokeiEntity.get介護給付費_請求_件数()));
+        gokeiEntity.setKaigoKyufuhiSeikyuTanisu(
+                checkDecimal(csvGokeiEntity.get介護給付費_請求_単位数()));
+        gokeiEntity.setKaigoKyufuhiSeikyuFutangaku(
+                checkDecimal(csvGokeiEntity.get介護給付費_請求_保険者負担額()));
+        gokeiEntity.setKaigoKyufuhiKetteiKensu(
+                checkDecimal(csvGokeiEntity.get介護給付費_決定_件数()));
+        gokeiEntity.setKaigoKyufuhiKetteiTanisu(
+                checkDecimal(csvGokeiEntity.get介護給付費_決定_単位数()));
+        gokeiEntity.setKaigoKyufuhiKetteiFutangaku(
+                checkDecimal(csvGokeiEntity.get介護給付費_決定_保険者負担額()));
+        gokeiEntity.setKaigoKyufuhiChoseiKensu(
+                checkDecimal(csvGokeiEntity.get介護給付費_調整_件数()));
+        gokeiEntity.setKaigoKyufuhiChoseiTanisu(
+                checkDecimal(csvGokeiEntity.get介護給付費_調整_単位数()));
+        gokeiEntity.setKaigoKyufuhiChoseiFutangaku(
+                checkDecimal(csvGokeiEntity.get介護給付費_調整_保険者負担額()));
+        gokeiEntity.setKogakuKaigoServicehiSeikyuKensu(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_請求_件数()));
+        gokeiEntity.setKogakuKaigoServicehiSeikyuTanisu(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_請求_単位数()));
+        gokeiEntity.setKogakuKaigoServicehiSeikyuFutangaku(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_請求_保険者負担額()));
+        gokeiEntity.setKogakuKaigoServicehiKetteiKensu(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_決定_件数()));
+        gokeiEntity.setKogakuKaigoServicehiKetteiTanisu(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_決定_単位数()));
+        gokeiEntity.setKogakuKaigoServicehiKetteiFutangaku(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_決定_保険者負担額()));
+        gokeiEntity.setKogakuKaigoServicehiChoseiKensu(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_調整_件数()));
+        gokeiEntity.setKogakuKaigoServicehiChoseiTanisu(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_調整_単位数()));
+        gokeiEntity.setKogakuKaigoServicehiChoseiFutangaku(
+                checkDecimal(csvGokeiEntity.get高額介護サービス費_調整_保険者負担額()));
         gokeiEntity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(trim囲み文字(csvHeadEntity.get証記載保険者番号())));
         gokeiEntity.setShoKisaiHokenshaName(trim囲み文字(csvHeadEntity.get証記載保険者名()));
         gokeiEntity.setSakuseiYMD(new FlexibleDate(trim囲み文字(csvHeadEntity.get作成年月日())));
@@ -141,8 +161,8 @@ public class SaishinsaKetteiHokenshaInBatchCreate {
     }
 
     private Decimal checkDecimal(RString 金額) {
-        if (金額 == null) {
-            return Decimal.ONE;
+        if (金額.isNullOrEmpty()) {
+            return Decimal.ZERO;
         }
 
         return new Decimal(金額.toString());
