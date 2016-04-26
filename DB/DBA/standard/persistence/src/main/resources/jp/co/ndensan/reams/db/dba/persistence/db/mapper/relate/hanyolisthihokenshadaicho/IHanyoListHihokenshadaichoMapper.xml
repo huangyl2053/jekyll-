@@ -118,12 +118,6 @@
             <if test="is2号">
                 OR DbT1001."hihokennshaKubunCode" = '2'
             </if>
-            <if test="is日本人">
-                OR DbT1001.被保険者区分コード = "1"
-            </if>
-            <if test="is外国人">
-                OR DbT1001.被保険者区分コード = "1"
-            </if>
             <if test="is自特例者">
                 OR DbT1001."jushochiTokureiFlag" = TRUE
             </if>
@@ -158,7 +152,7 @@
             </foreach>
         )
         <if test="isEmpty">
-                AND DbT4001."hihokenshaNo" = ''
+                AND DbT4001."hihokenshaNo" = IS NULL
         </if>
     </select>
 </mapper>

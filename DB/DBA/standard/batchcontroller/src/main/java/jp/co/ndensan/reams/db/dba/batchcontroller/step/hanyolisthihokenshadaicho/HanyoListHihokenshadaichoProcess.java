@@ -87,8 +87,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolisthihokenshadaicho"
             + ".IHanyoListHihokenshadaichoMapper.get汎用リスト被保険者台帳データの取得");
-    private static final RString CHECK = new RString("1");
-    private static final int INT_3 = 3;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBA701001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -99,7 +97,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     private RString eucFilename;
     private RString spoolWorkPath;
     private FileSpoolManager manager;
-    private int 連番;
+    private int int_連番;
 
     @Override
     protected void initialize() {
@@ -149,7 +147,9 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
             list.add(JuminShubetsu.住登外個人_外国人);
             list.add(JuminShubetsu.外国人);
         }
-        key.set住民種別(list);
+        if (is日本人 || is外国人) {
+            key.set住民種別(list);
+        }
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         HanyoListHihokenshadaichoMyBatisParameter myBatisParameter = HanyoListHihokenshadaichoMyBatisParameter.create_MybatisParameter(
                 mybatisPrm.isKomukuFukaMeyi(), mybatisPrm.isRembanfuka(), mybatisPrm.isHidukeHensyu(), mybatisPrm.getHidukeTyuushutuKubun(),
@@ -167,8 +167,8 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void process(HanyoListHihokenshadaichoRelateEntity t) {
-        連番 = 連番 + 1;
-        HanyoListHihokenshadaichoCSVEntity entity = getCSVEntity(t, 連番);
+        int_連番 = int_連番 + 1;
+        HanyoListHihokenshadaichoCSVEntity entity = getCSVEntity(t, int_連番);
         eucCsvWriterJunitoJugo.writeLine(entity);
         ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), t.getHihokenshaNo());
         PersonalData personalData = PersonalData.of(t.getPsmEntity().getShikibetsuCode(), expandedInformations);
@@ -177,8 +177,8 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void afterExecute() {
-        eucCsvWriterJunitoJugo.close();
         outputJokenhyoFactory();
+        eucCsvWriterJunitoJugo.close();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
 //        manager.getEucOutputDirectry();
         manager.spool(eucFilename, id);
@@ -186,15 +186,16 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
 
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(new RString("汎用リスト_被保険者台帳"),
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                EUC_ENTITY_ID.toRString(),
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 RString.EMPTY,
+                new RString("汎用リスト 被保険者台帳CSV"),
                 new RString("HanyoList_Hihokenshadaicho.csv"),
-                new RString("HanyoListHihokenshadaichoCSVEntity"),
-                RString.EMPTY,
+                new RString(String.valueOf(eucCsvWriterJunitoJugo.getCount())),
                 contribute());
-        OutputJokenhyoFactory.createInstance(item);
+        OutputJokenhyoFactory.createInstance(item).print();
     }
 
     private List<RString> contribute() {
@@ -479,7 +480,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
             連番 = new RString(i);
         }
         RString 市町村名 = RString.EMPTY;
-        if (t.getShichosonCode() != null || !t.getShichosonCode().isEmpty()) {
+        if (t.getShichosonCode() != null && !t.getShichosonCode().isEmpty()) {
             市町村名 = AssociationFinderFactory.createInstance().getAssociation(t.getShichosonCode()).get市町村名();
         }
         if (mybatisPrm.isHidukeHensyu()) {
@@ -640,12 +641,12 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     }
 
     private Encode getEncode(RString sakiEncodeKeitai) {
-        Encode encode = Encode.UTF_8withBOM;
-        if (new RString("ReamsUnicode").equals(sakiEncodeKeitai)) {
+        Encode encode = Encode.SJIS;
+        if (new RString("1").equals(sakiEncodeKeitai)) {
             encode = Encode.UTF_8withBOM;
-        } else if (new RString("SJIS類字").equals(sakiEncodeKeitai)) {
+        } else if (new RString("2").equals(sakiEncodeKeitai)) {
             encode = Encode.SJIS;
-        } else if (new RString("SJIS").equals(sakiEncodeKeitai)) {
+        } else if (new RString("3").equals(sakiEncodeKeitai)) {
             encode = Encode.SJIS;
         } else {
             encode = Encode.UTF_8withBOM;
