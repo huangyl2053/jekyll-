@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -53,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -66,6 +68,8 @@ public class GenmenKetteiTsuchiShoPrintService {
     private static final RString 種別コード1 = new RString("DBB100077");
     private static final RString 賦課年度 = new RString("年度");
     private static final RString 定数 = new RString("0");
+    private static final CodeShubetsu A4コード種別 = new CodeShubetsu(種別コード);
+    private static final CodeShubetsu B5コード種別 = new CodeShubetsu(種別コード1);
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
@@ -102,8 +106,9 @@ public class GenmenKetteiTsuchiShoPrintService {
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
                         new RDate(発行日.toString())).buildSource();
+                int flag = INDEX_ONE;
                 List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
-                        介護問合せ先ソースビルダー, sourceBuilder);
+                        介護問合せ先ソースビルダー, sourceBuilder, flag);
                 ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoTateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 GenmenKetteiTsuchiShoTateReport.createForm(targets).writeBy(reportSourceWriter);
@@ -132,8 +137,9 @@ public class GenmenKetteiTsuchiShoPrintService {
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
                         new RDate(発行日.toString())).buildSource();
+                int flag = INDEX_TWO;
                 List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
-                        介護問合せ先ソースビルダー, sourceBuilder);
+                        介護問合せ先ソースビルダー, sourceBuilder, flag);
                 ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 GenmenKetteiTsuchiShoYokoReport.createForm(targets).writeBy(reportSourceWriter);
@@ -154,7 +160,7 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @return List<GenmenKetteiTsuchiShoItem>
      */
     private List<GenmenKetteiTsuchiShoItem> setItems(RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder) {
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder, int flag) {
         List<GenmenKetteiTsuchiShoItem> items = new ArrayList<>();
         List<KoseiZengoKiwariGaku> 更正前後期割額リスト = 更正前後期割額リストを生成(減免決定通知書情報);
         List<RString> 随時リスト = 随時リストを生成();
@@ -169,7 +175,7 @@ public class GenmenKetteiTsuchiShoPrintService {
             item.set期別7(更正前後期割額リスト.get(index).get普徴期別金額更正前());
             item.set期別8(更正前後期割額リスト.get(index).get普徴期別金額更正後());
             item.set随時List(随時リスト.get(index));
-            setBaseItem(item, 減免決定通知書情報, 文書番号, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder);
+            setBaseItem(item, 減免決定通知書情報, 文書番号, 通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder, flag);
             items.add(item);
         }
 
@@ -187,7 +193,7 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @param sourceBuilder NinshoshaSource
      */
     private void setBaseItem(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報, RString 文書番号,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder) {
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder, int flag) {
         item.set文書番号(文書番号);
         item.set調定年度(減免決定通知書情報.get減免の情報更正後().get調定年度().wareki().eraType(EraType.KANJI).toDateString());
         item.set賦課年度(減免決定通知書情報.get減免の情報更正後().get賦課年度().wareki().eraType(EraType.KANJI)
@@ -236,7 +242,11 @@ public class GenmenKetteiTsuchiShoPrintService {
                 .get減免の情報更正後().get減免前介護保険料(), 0));
         item.set保険料額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
                 .get減免の情報更正後().get確定介護保険料(), 0));
-        item.set減免理由1(減免決定通知書情報.get減免の情報更正後().get減免種類().value());
+        if (flag == INDEX_ONE) {
+            item.set減免理由1(CodeMaster.getCodeMeisho(A4コード種別, 減免決定通知書情報.get減免の情報更正後().get減免種類()));
+        } else if (flag == INDEX_TWO) {
+            item.set減免理由1(CodeMaster.getCodeMeisho(B5コード種別, 減免決定通知書情報.get減免の情報更正後().get減免種類()));
+        }
         item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get減免事由());
         item.set備考Title(通知書定型文);
         item.set備考(通知書定型文);

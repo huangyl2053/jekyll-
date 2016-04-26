@@ -118,8 +118,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
             item.setタイトル(タイトル);
             item.set年度(調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
                     .fillType(FillType.BLANK).toDateString().concat(NENDO));
-            // TODO 市町村コード
-            // TODO 市町村名称
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             item.set市町村コード(association.get地方公共団体コード().value());
             item.set市町村名称(association.get市町村名());
