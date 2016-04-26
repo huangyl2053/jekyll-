@@ -25,12 +25,12 @@ public class IssotaiUmuTest extends DbeTestBase {
 
     @Test
     public void 早退を指定した場合_getコードは_Trueを返す() {
-        assertThat(IssotaiUmu.早退.getコード(), is(true));
+        assertThat(IssotaiUmu.早退.is委員早退(), is(true));
     }
 
     @Test
     public void 早退なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(IssotaiUmu.早退なし.getコード(), is(false));
+        assertThat(IssotaiUmu.早退なし.is委員早退(), is(false));
     }
 
     @Test
