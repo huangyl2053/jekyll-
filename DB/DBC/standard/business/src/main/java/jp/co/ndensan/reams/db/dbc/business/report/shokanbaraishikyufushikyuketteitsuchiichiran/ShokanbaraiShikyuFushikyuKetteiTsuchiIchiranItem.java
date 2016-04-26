@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.shokanbaraishikyufushikyukett
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 償還払支給（不支給）決定通知一覧表覧表のITEMです。
@@ -15,42 +16,51 @@ import lombok.Getter;
  *
  */
 @Getter
+
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem {
 
-    private final RString printTimeStamp;
-    private final RString hokenshaNo;
-    private final RString hokenshaName;
-    private final RString shutsuryokujun1;
-    private final RString shutsuryokujun2;
-    private final RString shutsuryokujun3;
-    private final RString shutsuryokujun4;
-    private final RString shutsuryokujun5;
-    private final RString kaipage1;
-    private final RString kaipage2;
-    private final RString kaipage3;
-    private final RString kaipage4;
-    private final RString kaipage5;
-    private final RString renban;
-    private final RString seiriNo;
-    private final RString keteiTsuchiNo;
-    private final RString hihokenshaNo;
-    private final RString hihokenshaName;
-    private final RString jusho;
-    private final RString yubinBango;
-    private final RString teikyo;
-    private final RString yoKaigodo;
-    private final RString ninteiKaishibi;
-    private final RString ninteiShuryobi;
-    private final RString uketsukeYMD;
-    private final RString keteiYMD;
-    private final RString honjinShiharaigaku;
-    private final RString shikyugaku;
-    private final RString yoshikigotoKingaku;
-    private final RString tuika;
-    private final RString shurui;
-    private final RString keteiKubun;
-    private final RString shiharaiHoho;
+    private RString printTimeStamp;
+    private RString hokenshaNo;
+    private RString hokenshaName;
+    private RString shutsuryokujun1;
+    private RString shutsuryokujun2;
+    private RString shutsuryokujun3;
+    private RString shutsuryokujun4;
+    private RString shutsuryokujun5;
+    private RString kaipage1;
+    private RString kaipage2;
+    private RString kaipage3;
+    private RString kaipage4;
+    private RString kaipage5;
+    private RString renban;
+    private RString seiriNo;
+    private RString keteiTsuchiNo;
+    private RString hihokenshaNo;
+    private RString hihokenshaName;
+    private RString jusho;
+    private RString yubinBango;
+    private RString teikyo;
+    private RString yoKaigodo;
+    private RString ninteiKaishibi;
+    private RString ninteiShuryobi;
+    private RString uketsukeYMD;
+    private RString keteiYMD;
+    private RString honjinShiharaigaku;
+    private RString shikyugaku;
+    private RString yoshikigotoKingaku;
+    private RString tuika;
+    private RString shurui;
+    private RString keteiKubun;
+    private RString shiharaiHoho;
+
+    /**
+     * インスタンスを生成します。
+     *
+     */
+    public ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem() {
+    }
 
     /**
      * インスタンスを生成します。
