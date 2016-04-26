@@ -9,30 +9,41 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.HaiguuJohoEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.HaiguuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1006KyokaisoGaitoshaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.setai.ISetai;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.setai.ISetaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -639,35 +650,92 @@ public class FutangendogakuNinteiService {
      */
     public HaiguuJohoEntity find配偶者(IShikibetsuTaisho 識別対象) {
 
-        FlexibleDate 処理日時 = new FlexibleDate(RDate.getNowDate().toDateString());
+        FlexibleDate 処理日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        RDateTime 処理日時 = RDate.getNowDateTime();
+
         HaiguuJohoEntity haiguuJoho = new HaiguuJohoEntity();
         if (!識別対象.canBe個人()) {
             haiguuJoho.setExists(false);
-//            haiguuJoho.set個人(null);
-            haiguuJoho.set課税区分(RString.EMPTY);
+            haiguuJoho.set課税区分(HaigushaKazeiKubun.空白.getコード());
             haiguuJoho.set現住所と異なる本年1月1日住所(RString.EMPTY);
-
             return haiguuJoho;
         }
 
         IKojin 個人 = 識別対象.to個人();
-
         ISetaiFinder finder = ShikibetsuTaishoService.getSetaiFinder();
-        ISetai isetai = finder.find(GyomuCode.DB介護保険,
-                個人.get世帯コード(),
-                処理日時);
+        ISetai isetai = finder.find(GyomuCode.DB介護保険, 個人.get世帯コード(), 処理日);
 
         if (isetai == null) {
             haiguuJoho.setExists(false);
-//            haiguuJoho.set個人(null);
-            haiguuJoho.set課税区分(RString.EMPTY);
+            haiguuJoho.set課税区分(HaigushaKazeiKubun.空白.getコード());
             haiguuJoho.set現住所と異なる本年1月1日住所(RString.EMPTY);
-
             return haiguuJoho;
         }
 
-        //TODO QA204
+        IKojin 配偶者情報 = isetai.get配偶者(個人);
+        if (配偶者情報 == null) {
+            haiguuJoho.setExists(false);
+            haiguuJoho.set課税区分(HaigushaKazeiKubun.空白.getコード());
+            haiguuJoho.set現住所と異なる本年1月1日住所(RString.EMPTY);
+            return haiguuJoho;
+        }
+
+        IShikibetsuTaishoGyomuHanteiKey 業務判定キー
+                = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+        ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー);
+        builder.set基準日(new FlexibleDate(処理日.getYearValue(), 1, 1));
+        builder.set識別コード(配偶者情報.get識別コード());
+        IShikibetsuTaishoSearchKey 識別対象検索キー = builder.build();
+
+        List<IKojin> kojinList = ShikibetsuTaishoService.getKojinFinder().get個人s(識別対象検索キー);
+        RString 配偶者1月1日住所 = get配偶者1月1日住所(kojinList, 配偶者情報);
+
+        SetaiinShotokuJohoFinder fineder = SetaiinShotokuJohoFinder.createInstance();
+        List<SetaiinShotoku> 世帯員所得情報リスト = fineder.get世帯員所得情報(個人.get識別コード(), 処理日.getYear(), new YMDHMS(処理日時));
+        for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報リスト) {
+            return 世帯課税かどうかの判定(世帯員所得情報, 配偶者情報, 配偶者1月1日住所);
+        }
+        // TODO 処理が終了していない場合、以下の配偶者情報を生成して返却し、処理を終了する。
         return null;
+    }
+
+    private RString get配偶者1月1日住所(List<IKojin> kojinList, IKojin 配偶者情報) {
+        RString 配偶者1月1日住所 = RString.EMPTY;
+        if (kojinList.isEmpty()) {
+            配偶者1月1日住所 = RString.EMPTY;
+        } else {
+            RString _1月1日時点住所 = kojinList.get(0).get住所().get住所();
+            RString 現住所 = 配偶者情報.get住所().get住所();
+            if (_1月1日時点住所.isNullOrEmpty()) {
+                if (_1月1日時点住所.equals(現住所)) {
+                    配偶者1月1日住所 = _1月1日時点住所;
+                } else {
+                    配偶者1月1日住所 = RString.EMPTY;
+                }
+            }
+        }
+        return 配偶者1月1日住所;
+    }
+
+    private HaiguuJohoEntity 世帯課税かどうかの判定(SetaiinShotoku 世帯員所得情報, IKojin 配偶者情報, RString 配偶者1月1日住所) {
+        HaiguuJohoEntity haiguuJoho = new HaiguuJohoEntity();
+        if (世帯員所得情報.get課税区分_住民税減免後().isNullOrEmpty()) {
+            haiguuJoho.setExists(true);
+            haiguuJoho.set個人(配偶者情報);
+            haiguuJoho.set課税区分(HaigushaKazeiKubun.空白.getコード());
+            haiguuJoho.set現住所と異なる本年1月1日住所(配偶者1月1日住所);
+        } else if (HaigushaKazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免後())) {
+            haiguuJoho.setExists(true);
+            haiguuJoho.set個人(配偶者情報);
+            haiguuJoho.set課税区分(HaigushaKazeiKubun.課税.getコード());
+            haiguuJoho.set現住所と異なる本年1月1日住所(配偶者1月1日住所);
+        } else {
+            haiguuJoho.setExists(true);
+            haiguuJoho.set個人(配偶者情報);
+            haiguuJoho.set課税区分(HaigushaKazeiKubun.非課税.getコード());
+            haiguuJoho.set現住所と異なる本年1月1日住所(配偶者1月1日住所);
+        }
+        return haiguuJoho;
     }
 
     /**
@@ -678,24 +746,26 @@ public class FutangendogakuNinteiService {
      * @return 減免の利用者になれるかどうか
      */
     public boolean canBe利用者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
-        DbT4001JukyushaDaichoDac dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        DbT4001JukyushaDaichoDac dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class
+        );
         List<DbT4001JukyushaDaichoEntity> dbT4001EntityList = dac.selectfor受給者の判定(被保険者番号, 適用日, YukoMukoKubun.無効.getコード());
-        return dbT4001EntityList != null && !dbT4001EntityList.isEmpty();
+        return dbT4001EntityList
+                != null && !dbT4001EntityList.isEmpty();
     }
 
     /**
      * 旧措置者の判断します。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param 適用日 FlexibleDate
      * @return 減免の利用者になれるかどうか
      */
-    public boolean is旧措置者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
-        DbV4001JukyushaDaichoAliveDac dac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class);
-
+    public
+            boolean is旧措置者(HihokenshaNo 被保険者番号) {
+        DbV4001JukyushaDaichoAliveDac dac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class
+        );
         List<DbV4001JukyushaDaichoEntity> dbV4001EntityList = dac.selectBy被保険者番号(被保険者番号);
-
-        return dbV4001EntityList != null && !dbV4001EntityList.isEmpty();
+        return dbV4001EntityList
+                != null && !dbV4001EntityList.isEmpty();
     }
 
     /**
@@ -705,14 +775,14 @@ public class FutangendogakuNinteiService {
      * @param 適用日 FlexibleDate
      * @return 減免の利用者になれるかどうか
      */
-    public boolean is境界層該当者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
+    public
+            boolean is境界層該当者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
 
-        IFutanGendogakuNinteiShinseiMapper mapper = this.mapperProvider.create(IFutanGendogakuNinteiShinseiMapper.class);
-        FutanGendogakuNinteiShinseiMapperParameter param = FutanGendogakuNinteiShinseiMapperParameter.createParam(被保険者番号, 適用日);
-
-        List<DbT1006KyokaisoGaitoshaEntity> dbT1006EntityList = mapper.select境界層該当者(param);
-
-        return dbT1006EntityList != null && !dbT1006EntityList.isEmpty();
+        DbT1006KyokaisoGaitoshaDac DbT1006Dac = InstanceProvider.create(DbT1006KyokaisoGaitoshaDac.class
+        );
+        List<DbT1006KyokaisoGaitoshaEntity> dbT1006EntityList = DbT1006Dac.select境界層該当者(被保険者番号, 適用日);
+        return dbT1006EntityList
+                != null && !dbT1006EntityList.isEmpty();
     }
 
     private List<RString> 金額リスト作成(

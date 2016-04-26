@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.fu
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 
 /**
  * 負担限度額認定申請のマッパーインタフェースです。
@@ -16,14 +15,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
  * @reamsid_L DBD-9999-013 huangh
  */
 public interface IFutanGendogakuNinteiShinseiMapper {
-
-    /**
-     * 境界層該当者の情報を取得する。
-     *
-     * @param param FutanGendogakuNinteiShinseiMapperParameter
-     * @return DbT1006KyokaisoGaitoshaEntity{@code list}
-     */
-    List<DbT1006KyokaisoGaitoshaEntity> select境界層該当者(FutanGendogakuNinteiShinseiMapperParameter param);
 
     /**
      * 負担限度額認定申請の情報を取得する。
