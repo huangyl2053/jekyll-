@@ -1353,9 +1353,8 @@ public class DBD1030001Handler {
                 builder.set適用終了年月日(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
                 builder.set非承認理由(RString.EMPTY);
             } else {
-
+                builder.set非承認理由(社会福祉法人等利用者負担軽減情報.get非承認理由());
             }
-            builder.set非承認理由(社会福祉法人等利用者負担軽減情報.get非承認理由());
         }
     }
 
