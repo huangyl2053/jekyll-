@@ -77,19 +77,19 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         List<IkkatsuHakkoRelateEntity> データ抽出list = データ抽出();
-        if (データ抽出list == null && データ抽出list.isEmpty()) {
-            List<IchiranyoShohakkoshaEntity> ichiranyoShohakkoshaEntityList = new HihokenshashoHakkoIchiranHyoFinder().
-                    createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), データ抽出list, get出力順());
-            for (IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity : ichiranyoShohakkoshaEntityList) {
-                itemList.add(setItem(ichiranyoShohakkoshaEntity));
-            }
-        } else {
+        if (データ抽出list != null && !データ抽出list.isEmpty()) {
             for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : データ抽出list) {
                 ikkatsuHakkoRelateEntity.setShisetyuJotaiFlag(FALSE);
                 アクセスログ(ikkatsuHakkoRelateEntity);
                 iIkkatsuHakkoMapper.insertTmpHihokenshasho_Ichi(ikkatsuHakkoRelateEntity);
             }
             iIkkatsuHakkoMapper.updateShisetyuJotaiFlag();
+        } else {
+            List<IchiranyoShohakkoshaEntity> ichiranyoShohakkoshaEntityList = new HihokenshashoHakkoIchiranHyoFinder().
+                    createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), データ抽出list, get出力順());
+            for (IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity : ichiranyoShohakkoshaEntityList) {
+                itemList.add(setItem(ichiranyoShohakkoshaEntity));
+            }
         }
     }
 
@@ -136,7 +136,7 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
             shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
                     帳票ID,
                     reamsLoginID,
-                    new Long(processPrm.getShutsuryokujunId().toString()));
+                    Long.valueOf(processPrm.getShutsuryokujunId().toString()));
         }
         return shutsuryokujunId;
     }

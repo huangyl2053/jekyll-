@@ -20,22 +20,22 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class TatokuKanrenParameter {
+public final class TatokuKanrenParameter {
 
-    private YubinNo 郵便番号;
-    private RString 文書番号;
-    private RString 住所;
-    private FlexibleDate 発行日;
-    private RString 役所名;
-    private RString 役所名敬称;
-    private RString 担当課名;
-    private RString 担当課名敬称;
-    private ShikibetsuCode 識別コード;
-    private RString 措置被保険者番号;
-    private FlexibleDate 異動日;
-    private RString 枝番;
-    private FlexibleDate 入所年月日;
-    private boolean 住所出力不要フラグ;
+    private final YubinNo 郵便番号;
+    private final RString 文書番号;
+    private final RString 住所;
+    private final FlexibleDate 発行日;
+    private final RString 役所名;
+    private final RString 役所名敬称;
+    private final RString 担当課名;
+    private final RString 担当課名敬称;
+    private final ShikibetsuCode 識別コード;
+    private final RString 措置被保険者番号;
+    private final FlexibleDate 異動日;
+    private final RString 枝番;
+    private final FlexibleDate 入所年月日;
+    private final boolean 住所出力不要フラグ;
 
     /**
      * コンストラクタ
@@ -55,7 +55,7 @@ public class TatokuKanrenParameter {
      * @param 入所年月日 入所年月日
      * @param 住所出力不要フラグ 住所出力不要フラグ
      */
-    public TatokuKanrenParameter(
+    private TatokuKanrenParameter(
             YubinNo 郵便番号,
             RString 文書番号,
             RString 住所,

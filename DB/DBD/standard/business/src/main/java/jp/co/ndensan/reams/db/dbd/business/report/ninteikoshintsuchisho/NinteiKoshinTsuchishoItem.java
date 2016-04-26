@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -39,6 +40,7 @@ public class NinteiKoshinTsuchishoItem {
     private final ReportId 帳票分類ID;
     private final Ninshosha 認証者;
     private final RString イメージファイルパス;
+    private EditedAtesaki 編集後宛先;
 
     /**
      * インスタンスを生成します。
@@ -71,5 +73,14 @@ public class NinteiKoshinTsuchishoItem {
         this.帳票分類ID = 帳票分類ID;
         this.認証者 = 認証者;
         this.イメージファイルパス = イメージファイルパス;
+    }
+
+    /**
+     * 編集後宛先を設定
+     *
+     * @param 編集後宛先 編集後宛先
+     */
+    public void set編集後宛先(EditedAtesaki 編集後宛先) {
+        this.編集後宛先 = 編集後宛先;
     }
 }

@@ -174,8 +174,8 @@ public class TokubetsuchiikiKasanGemmenBuilder {
     }
 
     private boolean hasSameIdentifier(GemmenGengakuShinseiIdentifier 減免減額申請情報識別子) {
-        return (id.get証記載保険者番号().equals(減免減額申請情報識別子.get証記載保険者番号())
-                && id.get被保険者番号().equals(減免減額申請情報識別子.get被保険者番号()));
+        return (id.get被保険者番号().equals(減免減額申請情報識別子.get被保険者番号())
+                && id.get履歴番号() == 減免減額申請情報識別子.get履歴番号());
     }
 
     /**

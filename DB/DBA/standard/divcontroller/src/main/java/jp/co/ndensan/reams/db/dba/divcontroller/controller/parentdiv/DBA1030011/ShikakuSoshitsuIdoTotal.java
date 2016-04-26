@@ -163,11 +163,12 @@ public class ShikakuSoshitsuIdoTotal {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
         dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
         if (row != null) {
-            row.getShutokuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+            row.getSoshitsuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
                     .getTxtShutokuDate().getValue());
-            row.getShutokuTodokedeDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+            row.getSoshitsuTodokedeDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
                     .getTxtShutokuTodokedeDate().getValue());
-            row.setShutokuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+
+            row.setSoshitsuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
                     .getDdlShikakuShutokuJiyu().getSelectedValue());
             row.setShutokuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
                     .getDdlShikakuShutokuJiyu().getSelectedKey());

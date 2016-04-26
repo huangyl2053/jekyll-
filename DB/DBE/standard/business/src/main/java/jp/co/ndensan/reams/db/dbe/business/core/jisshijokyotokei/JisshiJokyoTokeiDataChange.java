@@ -25,7 +25,7 @@ public class JisshiJokyoTokeiDataChange {
     private final RString listJisshiTokei5;
 
     /**
-     * RString listJisshiTokei1
+     * コンストラクタです。
      *
      * @param listJisshiTokei1 帳票一覧1行目
      * @param listJisshiTokei2 帳票一覧2行目

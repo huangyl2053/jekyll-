@@ -31,7 +31,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBD-9999-013 huangh
  */
-public class TokubetsuchiikiKasanGemmen extends ParentModelBase<TokubetsuchiikiKasanGemmenIdentifier, DbT4020TokubetsuchiikiKasanGemmenEntity, TokubetsuchiikiKasanGemmen> implements Serializable {
+public class TokubetsuchiikiKasanGemmen extends
+        ParentModelBase<TokubetsuchiikiKasanGemmenIdentifier, DbT4020TokubetsuchiikiKasanGemmenEntity, TokubetsuchiikiKasanGemmen>
+        implements Serializable {
 
     private final DbT4020TokubetsuchiikiKasanGemmenEntity entity;
     private final TokubetsuchiikiKasanGemmenIdentifier id;
