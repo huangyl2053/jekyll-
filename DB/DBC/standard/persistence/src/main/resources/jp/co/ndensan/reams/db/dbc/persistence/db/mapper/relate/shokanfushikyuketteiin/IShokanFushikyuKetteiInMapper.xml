@@ -173,7 +173,9 @@
     <select id="select一時テーブル" resultMap="resultMap_yishiTable" fetchSize="500">
         SELECT TEMP.*
         FROM "DbTShokanFushikyuKetteiInTempTable" AS TEMP
-        ORDER BY TEMP."kokanShikibetsuNo"
+        ORDER BY TEMP."shokisaiHokenshaNo",
+                 TEMP."hiHokenshaNo",
+                 TEMP."jigyoshoNo"
         
     </select>
     

@@ -100,8 +100,8 @@ public class SharedFileCopyProcess extends SimpleBatchProcessBase {
         if (checkSharedName.substringReturnAsPossible(checkFilePath.length() - NUMBER3, checkFilePath.length()).equalsIgnoreCase(拡張子CSV)) {
             return checkFilePath.concat(checkSharedName);
         } else {
-            String[] fileNameList = new File(checkFilePath.toString()).list(getFileExtensionFilter(".csv"));
-            return checkFilePath.concat(fileNameList[0]);
+//            String[] fileNameList = new File(checkFilePath.toString()).list(getFileExtensionFilter(".csv"));
+            return checkFilePath.concat(new File(checkFilePath.toString()).list(getFileExtensionFilter(".csv"))[0]);
 //            return checkFilePath.concat(checkSharedName).concat("/").concat(checkSharedName).concat(".").concat(拡張子CSV);
         }
 

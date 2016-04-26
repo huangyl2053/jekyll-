@@ -154,10 +154,8 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (zogenriyu == null && 決定情報.getZougenRiyu() == null) {
             return false;
         }
-        if (zogenriyu != null && 決定情報.getZougenRiyu() != null) {
-            if (zogenriyu.equals(決定情報.getZougenRiyu())) {
-                return false;
-            }
+        if (zogenriyu != null && zogenriyu.equals(決定情報.getZougenRiyu())) {
+            return false;
         }
         return true;
     }
@@ -173,10 +171,8 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (fuSyikyuriyu1 == null && 決定情報.getZougenRiyu() == null) {
             return false;
         }
-        if (fuSyikyuriyu1 != null && 決定情報.getZougenRiyu() != null) {
-            if (fuSyikyuriyu1.equals(決定情報.getZougenRiyu())) {
-                return false;
-            }
+        if (fuSyikyuriyu1 != null && fuSyikyuriyu1.equals(決定情報.getZougenRiyu())) {
+            return false;
         }
         return true;
     }
@@ -192,10 +188,8 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (fushikyuriyu2 == null && 決定情報.getZougenRiyu() == null) {
             return false;
         }
-        if (fushikyuriyu2 != null && 決定情報.getZougenRiyu() != null) {
-            if (fushikyuriyu2.equals(決定情報.getZougenRiyu())) {
-                return false;
-            }
+        if (fushikyuriyu2 != null && fushikyuriyu2.equals(決定情報.getZougenRiyu())) {
+            return false;
         }
         return true;
     }

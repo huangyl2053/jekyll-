@@ -81,16 +81,14 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200022.getReportId(), shutsuryokujunID.getValue());
         List<RString> 改頁項目リスト = new ArrayList<>();
+        改頁項目リスト.add(KAI_PAGE_HOKENSHANO);
         if (並び順 != null) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
-                    改頁項目リスト.add(item.get項目名());
+                    改頁項目リスト.add(item.get項目ID());
                 }
             }
         }
-//        if (改頁項目リスト.isEmpty()) {
-//            改頁項目リスト.add(KAI_PAGE_HOKENSHANO);
-//        }
         PageBreaker<ShokanbaraiFushikyuKetteishaIchiranSource> breaker = new ShokanFushikyuKetteiInPageBreak(改頁項目リスト);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200022.getReportId().value(), SubGyomuCode.DBC介護給付)

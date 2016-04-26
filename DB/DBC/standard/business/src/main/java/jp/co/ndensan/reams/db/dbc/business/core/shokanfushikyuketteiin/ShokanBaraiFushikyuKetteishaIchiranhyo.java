@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInItem;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity;
@@ -30,6 +28,9 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
 
     private static final RString PAGECOUNT_1 = new RString("1");
     private static final RString DATA_1 = new RString("該当データがありません");
+    private static final RString COLON = new RString(":");
+    private static final RString ASTERISK = new RString("*");
+    private static final RString 保険者番号 = new RString("保険者番号");
 
     private RString 印刷日時;
 
@@ -57,8 +58,14 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
         印刷日時表示作成();
         if (償還払不支給決定者リスト == null || 償還払不支給決定者リスト.isEmpty()) {
             ShokanFushikyuKetteiInItem item = new ShokanFushikyuKetteiInItem(印刷日時, PAGECOUNT_1, RString.EMPTY,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, DATA_1,
+                    RString.EMPTY, RString.EMPTY,
+                    (並び順の１件目 == null) ? RString.EMPTY : 並び順の１件目,
+                    (並び順の２件目 == null) ? RString.EMPTY : 並び順の２件目,
+                    (並び順の３件目 == null) ? RString.EMPTY : 並び順の３件目,
+                    (並び順の４件目 == null) ? RString.EMPTY : 並び順の４件目,
+                    (並び順の５件目 == null) ? RString.EMPTY : 並び順の５件目,
+                    (改頁 == null || 改頁.isEmpty()) ? 保険者番号 : 改頁,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, DATA_1,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -69,13 +76,6 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
                         並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁));
             }
         }
-        Comparator<ShokanFushikyuKetteiInItem> comparator = new Comparator<ShokanFushikyuKetteiInItem>() {
-            @Override
-            public int compare(ShokanFushikyuKetteiInItem s1, ShokanFushikyuKetteiInItem s2) {
-                return s2.get保険者番号().compareTo(s1.get保険者番号());
-            }
-        };
-        Collections.sort(itemList, comparator);
         return itemList;
 
     }
@@ -89,13 +89,13 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK)
                 .toDateString());
-        builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+        builder.append(RString.FULL_SPACE).append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         印刷日時 = builder.toRString();
     }
 
     private RString サービス種類表示作成(ServiceShuruiCode サービス種類コード, RString サービス種類名) {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(サービス種類コード.value()).append(new RString(":")).append(サービス種類名);
+        builder.append(サービス種類コード.value()).append(COLON).append(サービス種類名);
         return builder.toRString();
     }
 
@@ -109,16 +109,15 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
             RString 改頁) {
         RString 喪失事由コード = entity.getSoshitsuJiyuCode();
         // TODO QA555 Redmine#80882
-        RString ページ数 = new RString("1");
         RString サービス種類 = サービス種類表示作成(entity.getServiceShuruiCode(), entity.getServiceShuruiName());
-        return new ShokanFushikyuKetteiInItem(印刷日時, ページ数, entity.getKokuhoRenkokaiName(),
+        return new ShokanFushikyuKetteiInItem(印刷日時, RString.EMPTY, entity.getKokuhoRenkokaiName(),
                 entity.getShokisaiHokenshaNo().value(), entity.getHokenshaName(),
-                null == 並び順の１件目 ? RString.EMPTY : 並び順の１件目,
-                null == 並び順の２件目 ? RString.EMPTY : 並び順の２件目,
-                null == 並び順の３件目 ? RString.EMPTY : 並び順の３件目,
-                null == 並び順の４件目 ? RString.EMPTY : 並び順の４件目,
-                null == 並び順の５件目 ? RString.EMPTY : 並び順の５件目,
-                null == 改頁 || 改頁.isEmpty() ? entity.getShokisaiHokenshaNo().value() : 改頁,
+                (並び順の１件目 == null) ? RString.EMPTY : 並び順の１件目,
+                (並び順の２件目 == null) ? RString.EMPTY : 並び順の２件目,
+                (並び順の３件目 == null) ? RString.EMPTY : 並び順の３件目,
+                (並び順の４件目 == null) ? RString.EMPTY : 並び順の４件目,
+                (並び順の５件目 == null) ? RString.EMPTY : 並び順の５件目,
+                (改頁 == null || 改頁.isEmpty()) ? entity.getShokisaiHokenshaNo().value() : 改頁,
                 RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, entity.getNo(),
                 entity.getHiHokenshaNo().value(), entity.getHiHokenshaName(), entity.getJigyoshoNo().value(),
@@ -129,7 +128,7 @@ public class ShokanBaraiFushikyuKetteishaIchiranhyo {
                 entity.getGyoseiku(), サービス種類, entity.getSoshitsuYMD().wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                 entity.getBikoTwo(),
-                entity.getIsUpdate() ? RString.EMPTY : new RString("*")
+                entity.getIsUpdate() ? RString.EMPTY : ASTERISK
         );
 
     }

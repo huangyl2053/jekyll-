@@ -16,13 +16,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShokanFushikyuKetteiInOutPutOrder implements IReportItems {
 
     /**
-     * 保険者番号
+     * 事業者番号
      */
-    保険者番号("hokenshaNo", "保険者番号", "hokenshaNo"),
+    事業者番号("00002", "事業者番号", "listUpper_4"),
     /**
      * 被保険者番号
      */
-    被保険者番号("listUpper_2", "被保険者番号", "hihokenshaNo");
+    被保険者番号("00001", "被保険者番号", "hihokenshaNo");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

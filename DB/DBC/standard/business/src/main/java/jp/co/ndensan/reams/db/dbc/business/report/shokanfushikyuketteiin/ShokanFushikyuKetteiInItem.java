@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払不支給決定者一覧表 償還払不支給決定者一覧表Entity
  *
- * @reamsid_L DBC-2590-020 xuhao
+ * @reamsid_L DBC-2590-040 xuhao
  */
 @lombok.Getter
 @lombok.Setter

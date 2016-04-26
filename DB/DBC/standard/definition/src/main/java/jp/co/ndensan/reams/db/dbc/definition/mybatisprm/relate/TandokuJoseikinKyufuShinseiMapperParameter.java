@@ -90,15 +90,6 @@ public final class TandokuJoseikinKyufuShinseiMapperParameter {
     }
 
     /**
-     * 主キー3を返します。
-     *
-     * @return 主キー3
-     */
-    public Decimal get主キー3() {
-        return 主キー3;
-    }
-
-    /**
      * uses主キー1を返します。
      *
      * @return uses主キー1

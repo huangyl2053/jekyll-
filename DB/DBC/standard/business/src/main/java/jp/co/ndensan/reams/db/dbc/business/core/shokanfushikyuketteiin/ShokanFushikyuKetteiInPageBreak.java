@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.ShokanbaraiFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,15 +20,13 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFushikyuKetteishaIchiranSource> {
 
     private final List<RString> breakKeysList;
-    private ReportLineRecord<ShokanbaraiFushikyuKetteishaIchiranSource> nowSource;
 
     /**
      *
      * @param breakKeys ページングキー
      */
     public ShokanFushikyuKetteiInPageBreak(List<RString> breakKeys) {
-        this.breakKeysList = new ArrayList<>();
-        this.breakKeysList.addAll(breakKeys);
+        this.breakKeysList = Collections.unmodifiableList(breakKeys);
     }
 
     @Override
@@ -39,7 +37,14 @@ public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFush
     @Override
     public boolean isBreak(ReportLineRecord<ShokanbaraiFushikyuKetteishaIchiranSource> currentSource,
             ReportLineRecord<ShokanbaraiFushikyuKetteishaIchiranSource> nextSource) {
-        return !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo);
+        boolean flag = !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo);
+        if (!flag && this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.被保険者番号.get項目ID())) {
+            flag = !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2);
+        }
+        if (!flag && this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.事業者番号.get項目ID())) {
+            flag = !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4);
+        }
+        return flag;
     }
 
 }
