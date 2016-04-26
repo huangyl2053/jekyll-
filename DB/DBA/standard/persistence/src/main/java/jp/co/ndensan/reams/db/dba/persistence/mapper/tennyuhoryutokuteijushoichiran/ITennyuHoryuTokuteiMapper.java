@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyuhoryutokuteijushoichiran;
+package jp.co.ndensan.reams.db.dba.persistence.mapper.tennyuhoryutokuteijushoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiJushoIchiranEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity;
 
 /**
@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoE
  *
  * @reamsid_L DBA-0480-020 zhangzhiming
  */
-public interface ITennyuHoryuTokuteiJushoIchiranMapper {
+public interface ITennyuHoryuTokuteiMapper {
 
     /**
      * 転入保留特定住所一覧のデータを取得します。
      *
-     * @return List<TennyuHoryuTokuteiJushoIchiranEntity>
+     * @return List<TennyuHoryuTokuteiEntity>
      */
-    List<TennyuHoryuTokuteiJushoIchiranEntity> getTennyuHoryuTokuteiJushoIchiran();
+    List<TennyuHoryuTokuteiEntity> getTennyuHoryuTokuteiJushoIchiran();
 
     /**
      * 転入保留特定住所一覧のデータを取得します。

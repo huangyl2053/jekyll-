@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -68,6 +70,22 @@ public class DbT7023RendoHoryuTokuteiJushoDac implements ISaveable<DbT7023RendoH
         return accessor.select().
                 table(DbT7023RendoHoryuTokuteiJusho.class).
                 toList(DbT7023RendoHoryuTokuteiJushoEntity.class);
+    }
+
+    /**
+     * 管理番号を全件返します。
+     *
+     * @return DbT7023RendoHoryuTokuteiJushoEntity
+     */
+    @Transaction
+    public DbT7023RendoHoryuTokuteiJushoEntity selectKanriNo() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7023RendoHoryuTokuteiJusho.class).
+                order(by(kanriNo, Order.DESC)).
+                limit(1).
+                toObject(DbT7023RendoHoryuTokuteiJushoEntity.class);
     }
 
     /**

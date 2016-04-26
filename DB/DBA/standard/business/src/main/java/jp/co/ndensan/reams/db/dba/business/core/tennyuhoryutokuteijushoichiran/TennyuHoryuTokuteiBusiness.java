@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.tennyuhoryutokuteijushoichiran;
 
-import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiJushoIchiranEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -18,17 +18,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBA-0480-020 zhangzhiming
  */
-public class TennyuHoryuTokuteiJushoIchiranModel {
+public class TennyuHoryuTokuteiBusiness {
 
-    private final TennyuHoryuTokuteiJushoIchiranEntity entity;
+    private final TennyuHoryuTokuteiEntity entity;
 
     /**
      * コンストラクタです。<br/>
      * 転入保留特定住所登録の新規作成時に使用します。
      *
-     * @param entity TennyuHoryuTokuteiJushoIchiranEntity
+     * @param entity TennyuHoryuTokuteiEntity
      */
-    public TennyuHoryuTokuteiJushoIchiranModel(TennyuHoryuTokuteiJushoIchiranEntity entity) {
+    public TennyuHoryuTokuteiBusiness(TennyuHoryuTokuteiEntity entity) {
         this.entity = entity;
     }
 
