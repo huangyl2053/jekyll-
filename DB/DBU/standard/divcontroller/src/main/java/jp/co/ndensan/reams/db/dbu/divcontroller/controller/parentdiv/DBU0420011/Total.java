@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.Hihok
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.TotalDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0420011.TotalHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho.HihokenshaShikakuShoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -30,7 +31,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -47,6 +50,7 @@ public class Total {
     private static final RString テスト = new RString("テスト");
     private static final RString 証表示タイプ_01 = new RString("01");
     private static final RString 証表示タイプ_21 = new RString("21");
+    private static final int 桁数_5 = 5;
 
     /**
      * 被保険者証・資格者証画面初期化を処理します。
@@ -55,6 +59,7 @@ public class Total {
      * @return ResponseData<TotalDiv>
      */
     public ResponseData<TotalDiv> onLoad(TotalDiv div) {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPublish"), false);
         createHandler(div).onLoad();
         if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).rootTitle(new RString("被保険者証発行")).respond();
@@ -64,6 +69,20 @@ public class Total {
         }
         if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).rootTitle(new RString("受給資格証明書発行")).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 入力チェック実行します。
+     *
+     * @param div 被保険者証・資格者証DIV
+     * @return ResponseData<TotalDiv>
+     */
+    public ResponseData<TotalDiv> onClick_btnCheck(TotalDiv div) {
+        ValidationMessageControlPairs validationMessageControlPairs = createHandler(div).detaCheck();
+        if (validationMessageControlPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -112,6 +131,10 @@ public class Total {
         parameter.setMenuId(ResponseHolder.getMenuID());
         parameter.setHihokenshaNo(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
         parameter.setShikibetsuCode(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        parameter.setShoKisaiHokenshaNo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().
+                getYukoKigenInfo().getTxtHokensha().getValue() == null ? ShoKisaiHokenshaNo.EMPTY
+                : new ShoKisaiHokenshaNo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().
+                        getYukoKigenInfo().getTxtHokensha().getValue().substring(0, 桁数_5)));
         parameter.setKofuYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue());
         parameter.setKofuJiyu(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey());
         parameter.setKofuRiyu(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());
