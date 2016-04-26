@@ -75,11 +75,11 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
             RString 改頁,
             List<KagoKetteiHokenshaInEntity> 過誤決定通知書情報取込一覧表リスト) {
         List<KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem> list = new ArrayList<>();
-        this.並び順の1件目 = 並び順1 == null ? RString.EMPTY : 並び順1;
-        this.並び順の2件目 = 並び順1 == null ? RString.EMPTY : 並び順2;
-        this.並び順の3件目 = 並び順1 == null ? RString.EMPTY : 並び順3;
-        this.並び順の4件目 = 並び順1 == null ? RString.EMPTY : 並び順4;
-        this.並び順の5件目 = 並び順1 == null ? RString.EMPTY : 並び順5;
+        this.並び順の1件目 = (並び順1 == null) ? RString.EMPTY : 並び順1;
+        this.並び順の2件目 = (並び順2 == null) ? RString.EMPTY : 並び順2;
+        this.並び順の3件目 = (並び順3 == null) ? RString.EMPTY : 並び順3;
+        this.並び順の4件目 = (並び順4 == null) ? RString.EMPTY : 並び順4;
+        this.並び順の5件目 = (並び順5 == null) ? RString.EMPTY : 並び順5;
         this.改頁 = 改頁;
         処理年月分表示作成(処理年月);
         if (null != 過誤決定通知書情報取込一覧表リスト && !過誤決定通知書情報取込一覧表リスト.isEmpty()) {
@@ -97,10 +97,10 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
             item.setShutsuryokujun4(並び順の4件目);
             item.setShutsuryokujun5(並び順の5件目);
             item.setKaipage1(改頁);
-            item.setKaipage2(RString.EMPTY);
-            item.setKaipage3(RString.EMPTY);
-            item.setKaipage4(RString.EMPTY);
-            item.setKaipage5(RString.EMPTY);
+            item.setKaipage2(改頁);
+            item.setKaipage3(改頁);
+            item.setKaipage4(改頁);
+            item.setKaipage5(改頁);
             item.setPrintTimeStamp(作成日時表示作成());
             item.setListUpper_5(DATA_NASHI);
             item.setPageCount(PAGECOUNT_1);
@@ -159,10 +159,10 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
         item.setShutsuryokujun4(並び順の4件目);
         item.setShutsuryokujun5(並び順の5件目);
         item.setKaipage1(改頁);
-        item.setKaipage2(RString.EMPTY);
-        item.setKaipage3(RString.EMPTY);
-        item.setKaipage4(RString.EMPTY);
-        item.setKaipage5(RString.EMPTY);
+        item.setKaipage2(改頁);
+        item.setKaipage3(改頁);
+        item.setKaipage4(改頁);
+        item.setKaipage5(改頁);
         item.setPrintTimeStamp(作成日時表示作成());
         item.setListUpper_2(entity.get取扱年月().wareki().separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString());
