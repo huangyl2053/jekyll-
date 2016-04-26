@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJ
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -180,8 +182,9 @@ public class PnlTotalSearchHandler {
      * グレードの初期化設定。
      *
      * @param shokanList List<ShokanJuryoininKeiyakusha>
+     * @param maxCount Decimal
      */
-    public void initializeGrid(List<ShokanJuryoininKeiyakushaResult> shokanList) {
+    public void initializeGrid(List<ShokanJuryoininKeiyakushaResult> shokanList, Decimal maxCount) {
         div.getPnlSearch().setDisplayNone(true);
         div.getPnlKeiyakusyaList().setDisplayNone(false);
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(false);
@@ -190,7 +193,6 @@ public class PnlTotalSearchHandler {
             div.getPnlKeiyakusyaList().getDgKeyakusya().setDataSource(rowList);
             return;
         }
-        int maxCount = div.getPnlSearch().getTxtMaxCount().getValue().intValue();
         int count = 0;
         for (ShokanJuryoininKeiyakushaResult list : shokanList) {
             dgKeyakusya_Row row = new dgKeyakusya_Row();
@@ -201,21 +203,23 @@ public class PnlTotalSearchHandler {
                         .toValue(list.getEntity().getDbt3078entity().getKeiyakuServiceShurui()).get名称());
             }
             row.setTxtHihoNo(list.getEntity().getDbt3078entity().getHihokenshaNo().getColumnValue());
-            if (list.getEntity().get氏名() != null) {
-                row.setTxtShimei(list.getEntity().get氏名().getName().getColumnValue());
+            IName 氏名 = list.getEntity().get氏名();
+            if (氏名 != null && 氏名.getName() != null) {
+                row.setTxtShimei(氏名.getName().getColumnValue());
             }
             row.getTxtKeiyakuShenseibi().setValue(new RDate(list.getEntity().getDbt3078entity().getShinseiYMD().toString()));
-            if (list.getEntity().getDbt3078entity().getKetteiYMD() != null
-                    && !list.getEntity().getDbt3078entity().getKetteiYMD().isEmpty()) {
-                row.getTxtKeiyakuKeteibi().setValue(new RDate(list.getEntity().getDbt3078entity().getKetteiYMD().toString()));
+            FlexibleDate 決定年月日 = list.getEntity().getDbt3078entity().getKetteiYMD();
+            if (決定年月日 != null && !決定年月日.isEmpty()) {
+                row.getTxtKeiyakuKeteibi().setValue(new RDate(決定年月日.toString()));
             }
             row.setTxtKeiyakuJigyoshaNo(list.getEntity().getDbt3078entity().getKeiyakuJigyoshaNo());
-            if (list.getEntity().getDbt3077entity().getKeiyakuJigyoshaName() != null) {
-                row.setTxtKeiyakuJigyoshamei(list.getEntity().getDbt3077entity().getKeiyakuJigyoshaName().getColumnValue());
+            AtenaMeisho 契約事業者名称 = list.getEntity().getDbt3077entity().getKeiyakuJigyoshaName();
+            if (契約事業者名称 != null) {
+                row.setTxtKeiyakuJigyoshamei(契約事業者名称.getColumnValue());
             }
             rowList.add(row);
             count = count + 1;
-            if (count >= maxCount) {
+            if (count >= maxCount.intValue()) {
                 break;
             }
         }

@@ -96,12 +96,17 @@ public class RiyoshaFutangakuGengakuHandler {
 
     /**
      * 初期化の処理です。
+     *
+     * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> initialize() {
 
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
 
+        div.getCcdAtenaInfo().onLoad(識別コード);
+        div.getCcdShinseiJoho().initialize(識別コード);
+        div.getCcdKaigoKihon().onLoad(被保険者番号);
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
             div.getBtnInputNew().setText(申請情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(申請情報);
@@ -117,9 +122,6 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getBtnShinseiKakutei().setDisplayNone(true);
         }
 
-        div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdShinseiJoho().initialize(識別コード);
-
         if (!ResponseHolder.isReRequest()
                 && (被保険者番号 == null || 被保険者番号.getColumnValue().isEmpty())) {
             div.getBtnShowGemmenJoho().setDisabled(true);
@@ -134,7 +136,6 @@ public class RiyoshaFutangakuGengakuHandler {
             return ResponseData.of(div).respond();
         }
 
-        div.getCcdKaigoKihon().onLoad(被保険者番号);
         RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
         List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = service.load利用者負担額減額申請All(被保険者番号);
         if (利用者負担額減額の情報List != null) {
@@ -142,7 +143,7 @@ public class RiyoshaFutangakuGengakuHandler {
             一覧エリアの設定(利用者負担額減額の情報List);
         }
 
-        PersonalData personalData = toPersonalData(識別コード, 被保険者番号);
+        PersonalData personalData = toPersonalData();
         AccessLogger.log(AccessLogType.照会, personalData);
         前排他の設定();
         ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 0);
@@ -280,7 +281,7 @@ public class RiyoshaFutangakuGengakuHandler {
             row.getTxtShinseiYMD().setValue(div.getTxtShinseiYmd().getValue());
             row.setShinseiRiyu(div.getTxtShinseiRiyu().getValue());
             row.setKetteiKubun(div.getRadKetteiKubun().getSelectedValue());
-            row.setTxtKetteiYMD(div.getTxtKettaiYmd());
+            row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
             row.getTxtTekiyoYMD().setValue(適用開始年月日);
             row.getTxtYukoKigen().setValue(適用終了年月日);
             row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
@@ -584,11 +585,12 @@ public class RiyoshaFutangakuGengakuHandler {
     /**
      * アクセスログのPersonalDataを取得する処理です。
      *
-     * @param 識別コード 識別コード
-     * @param 被保険者番号 被保険者番号
      * @return PersonalData
      */
-    public PersonalData toPersonalData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+    public PersonalData toPersonalData() {
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
         return PersonalData.of(識別コード, expandedInfo);
     }

@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -417,6 +418,24 @@ public class TotalHandler {
      */
     public List<JukyuShikakuShomeishoBodyItem> jukyuShikakuShomeisho() {
         List<JukyuShikakuShomeishoBodyItem> items = new ArrayList<>();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtKofubi().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtIdoYotebi().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtYokaigoJotaiKubun().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtShinsebi().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getFromValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getToValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getCblInji().isAllSelected();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmShinsakaiYikan().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmBiko().getValue();
         // TODO QA1050 パラメタ不明
         JukyuShikakuShomeishoFinder finder = new JukyuShikakuShomeishoFinder();
         JukyuShikakuShomeishoData business = finder.setJukyuShikakuShomeisho(null);
@@ -430,5 +449,18 @@ public class TotalHandler {
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         items.add(item);
         return items;
+    }
+
+    /**
+     * 入力チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs detaCheck() {
+        return createValidationHandler(div).validateCheck();
+    }
+
+    private TotalValidationHandler createValidationHandler(TotalDiv div) {
+        return new TotalValidationHandler(div);
     }
 }

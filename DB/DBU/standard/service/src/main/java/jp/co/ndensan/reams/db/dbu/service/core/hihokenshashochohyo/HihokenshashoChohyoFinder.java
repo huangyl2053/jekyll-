@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashochohyo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashochohyo.HihokenshashoChoBusiness;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.HihokenshashoChohyoParameter;
@@ -45,6 +44,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -74,6 +74,7 @@ public class HihokenshashoChohyoFinder {
     private static final RString 居宅支援事業者適用切れ_表示有無 = new RString("居宅支援事業者適用切れ_表示有無");
     private static final RString 居宅支援事業者履歴_表示方法 = new RString("居宅支援事業者履歴_表示方法");
     private static final RString 該当データはありません = new RString("該当データはありません");
+    private static final ReportId 帳票分類ID = new ReportId("DBA100001_Hihokenshasho");
     private static final RString 全角スペース = new RString("　");
     private static final RString 半角スペース = new RString(" ");
     private static final RString 枚目3の = new RString("3枚目の");
@@ -164,32 +165,33 @@ public class HihokenshashoChohyoFinder {
     }
 
     private SearchResult<HihokenshashoChoBusiness> setHihokenshashoChohyo(List<HihokenshashoChohyoParameter> hihoken) {
-        List<HihokenshashoChoBusiness> business = new ArrayList<>();
+        List<HihokenshashoChoBusiness> businessList = new ArrayList<>();
         if (hihoken == null || hihoken.isEmpty()) {
             HihokenshashoChoBusiness entity = new HihokenshashoChoBusiness();
             entity.set住所(該当データはありません);
-            business.add(entity);
-            return SearchResult.of(business, business.size(), true);
+            businessList.add(entity);
+            return SearchResult.of(businessList, businessList.size(), true);
         }
         for (int i = 0; i < hihoken.size(); i++) {
-            business.get(i).set有効期限1(RString.EMPTY);
-            business.get(i).set有効期限2(RString.EMPTY);
-            business.get(i).set被保険者番号(hihoken.get(i).get被保険者番号());
+            HihokenshashoChoBusiness business = new HihokenshashoChoBusiness();
+            business.set有効期限1(RString.EMPTY);
+            business.set有効期限2(RString.EMPTY);
+            business.set被保険者番号(hihoken.get(i).get被保険者番号());
             List<HonninJohoEntity> honni = get本人情報(hihoken.get(i).get識別コード());
             if (郵便番号表示有.equals(BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無))) {
-                business.get(i).set郵便番号(honni.get(0).getYubinNo().getEditedYubinNo());
+                business.set郵便番号(honni.get(0).getYubinNo().getEditedYubinNo());
             }
             RString gyoseiku = honni.get(0).getGyoseikuName();
             if (!gyoseiku.isNullOrEmpty()) {
-                business.get(i).set行政区1(gyoseiku.substring(桁数_0, 桁数_13));
+                business.set行政区1(gyoseiku.substring(桁数_0, 桁数_13));
                 if (gyoseiku.length() <= 桁数_13) {
-                    business.get(i).set行政区2(RString.EMPTY);
+                    business.set行政区2(RString.EMPTY);
                 } else {
-                    business.get(i).set行政区2(gyoseiku.substring(桁数_13));
+                    business.set行政区2(gyoseiku.substring(桁数_13));
                 }
             } else {
-                business.get(i).set行政区1(RString.EMPTY);
-                business.get(i).set行政区2(RString.EMPTY);
+                business.set行政区1(RString.EMPTY);
+                business.set行政区2(RString.EMPTY);
             }
             List<SofusakiJohoEntity> sofusa = get送付先情報(hihoken.get(i).get識別コード());
             if (管外.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
@@ -198,42 +200,43 @@ public class HihokenshashoChohyoFinder {
                 builder.append(sofusa.get(桁数_0).getBanchi());
                 builder.append(全角スペース);
                 builder.append(sofusa.get(桁数_0).getKatagaki());
-                business.get(i).set住所(builder.toRString());
+                business.set住所(builder.toRString());
             }
             if (管内.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
-                set住所(business.get(i), sofusa.get(桁数_0), honni.get(桁数_0));
+                set住所(business, sofusa.get(桁数_0), honni.get(桁数_0));
             }
             if (氏名カナ表示有.equals(BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_氏名カナ表示有無))) {
-                business.get(i).set氏名カナ(honni.get(0).getKanaMeisho());
+                business.set氏名カナ(honni.get(0).getKanaMeisho());
             }
-            business.get(i).set氏名(honni.get(0).getMeisho());
-            set生年月日(business.get(i), honni.get(0));
-            business.get(i).set交付年月日(new RString(hihoken.get(i).get交付日().toString()));
-            business.get(i).set保険者NO1(hihoken.get(i).get保険者().substring(桁数_0, 桁数_1));
-            business.get(i).set保険者NO2(hihoken.get(i).get保険者().substring(桁数_1, 桁数_2));
-            business.get(i).set保険者NO3(hihoken.get(i).get保険者().substring(桁数_2, 桁数_3));
-            business.get(i).set保険者NO4(hihoken.get(i).get保険者().substring(桁数_3, 桁数_4));
-            business.get(i).set保険者NO5(hihoken.get(i).get保険者().substring(桁数_4, 桁数_5));
-            business.get(i).set保険者NO6(hihoken.get(i).get保険者().substring(桁数_5));
-            business.get(i).set要介護認定区分(hihoken.get(i).get要介護認定状態区分コード());
-            business.get(i).set認定年月日(hihoken.get(i).get認定年月日().wareki().eraType(EraType.KANJI_RYAKU)
+            business.set氏名(honni.get(0).getMeisho());
+            set生年月日(business, honni.get(0));
+            business.set交付年月日(new RString(hihoken.get(i).get交付日().toString()));
+            business.set保険者NO1(hihoken.get(i).get保険者().substring(桁数_0, 桁数_1));
+            business.set保険者NO2(hihoken.get(i).get保険者().substring(桁数_1, 桁数_2));
+            business.set保険者NO3(hihoken.get(i).get保険者().substring(桁数_2, 桁数_3));
+            business.set保険者NO4(hihoken.get(i).get保険者().substring(桁数_3, 桁数_4));
+            business.set保険者NO5(hihoken.get(i).get保険者().substring(桁数_4, 桁数_5));
+            business.set保険者NO6(hihoken.get(i).get保険者().substring(桁数_5));
+            business.set要介護認定区分(hihoken.get(i).get要介護認定状態区分コード());
+            business.set認定年月日(hihoken.get(i).get認定年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.get(i).set認定有効期間開始年月日(hihoken.get(i).get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
+            business.set認定有効期間開始年月日(hihoken.get(i).get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.get(i).set認定有効期間終了年月日(hihoken.get(i).get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
+            business.set認定有効期間終了年月日(hihoken.get(i).get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.get(i).set訪問期間開始年月日(hihoken.get(i).get支給限度有効開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
+            business.set訪問期間開始年月日(hihoken.get(i).get支給限度有効開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.get(i).set訪問期間終了年月日(hihoken.get(i).get支給限度有効終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
+            business.set訪問期間終了年月日(hihoken.get(i).get支給限度有効終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.get(i).setサービス(new RString(hihoken.get(i).get支給限度単位数().toString()));
-            setサービス種類(business.get(i), hihoken.get(i));
-            set入退所(business.get(i), hihoken.get(i));
-            set帳票制御(business.get(i), hihoken.get(i));
-            business.get(i).set連番(new RString(String.valueOf(i + 1)).padLeft(文字_0, 桁数_6));
-            set入退所チェック(business.get(i), hihoken.get(i));
+            business.setサービス(new RString(hihoken.get(i).get支給限度単位数().toString()));
+            setサービス種類(business, hihoken.get(i));
+            set入退所(business, hihoken.get(i));
+            set帳票制御(business, hihoken.get(i));
+            business.set連番(new RString(String.valueOf(i + 1)).padLeft(文字_0, 桁数_6));
+            set入退所チェック(business, hihoken.get(i));
+            businessList.add(business);
         }
-        return SearchResult.of(business, business.size(), true);
+        return SearchResult.of(businessList, businessList.size(), true);
     }
 
     // TODO QA1088
@@ -241,7 +244,7 @@ public class HihokenshashoChohyoFinder {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         association.get都道府県名();
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通Entity = dbt7065dac.selectByKey(SubGyomuCode.DBA介護資格,
-                ReportIdDBA.DBA100001.getReportId());
+                帳票分類ID);
         if (文字_1.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
             RStringBuilder builder = new RStringBuilder();
             if (帳票制御共通Entity.getJushoHenshuTodoufukenMeiHyojiUmu()) {
@@ -365,9 +368,9 @@ public class HihokenshashoChohyoFinder {
 
     private void set帳票制御(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter parameter) {
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100001.getReportId(),
+        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 要介護認定期限切れ_表示有無);
-        ChohyoSeigyoHanyo chohyoSeigyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100001.getReportId(),
+        ChohyoSeigyoHanyo chohyoSeigyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 居宅支援事業者適用切れ_表示有無);
         if (文字_1.equals(chohyoSeigyoHanyo.get設定値()) && 文字_0.equals(chohyoSeigyo.get設定値())) {
             if (parameter.get届出年月日().get(桁数_0).get適用終了日().isBefore(parameter.get交付日())
@@ -432,7 +435,7 @@ public class HihokenshashoChohyoFinder {
                 FlexibleDate.EMPTY);
         business.set複合コントロール(new RString(ninshosha.toString()));
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100001.getReportId(),
+        ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 要介護認定期限切れ_表示有無);
         if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && (parameter.get認定有効期間終了年月日()
                 .isBefore(new RDate(parameter.get交付日().toString())) || parameter.get認定有効期間終了年月日() == null)) {
@@ -502,7 +505,7 @@ public class HihokenshashoChohyoFinder {
             business.set居宅介護事業者長星2(RString.EMPTY);
             business.set居宅介護事業者長星3(RString.EMPTY);
         }
-        ChohyoSeigyoHanyo chohyoSeigyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100001.getReportId(),
+        ChohyoSeigyoHanyo chohyoSeigyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 居宅支援事業者適用切れ_表示有無);
         if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && parameter.get交付日().isBeforeOrEquals(new FlexibleDate(parameter
                 .get認定有効期間終了年月日().toDateString())) && 文字_0.equals(chohyoSeigyo.get設定値())) {
@@ -541,7 +544,7 @@ public class HihokenshashoChohyoFinder {
 
     private void chohyoHensu(HihokenshashoChoBusiness business) {
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-        ChohyoSeigyoHanyo chohyoHensu = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100001.getReportId(),
+        ChohyoSeigyoHanyo chohyoHensu = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 居宅支援事業者履歴_表示方法);
         if (文字_0.equals(chohyoHensu.get設定値())) {
             business.set居宅介護事業者取消2(RString.EMPTY);

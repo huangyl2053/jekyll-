@@ -16,6 +16,8 @@ import lombok.Setter;
 
 /**
  * 汎用リスト_被保険者台帳_バッチ用のパラメータです。
+ *
+ * @reamsid_L DBA-1610-030 lishengli
  */
 @Getter
 @Setter
