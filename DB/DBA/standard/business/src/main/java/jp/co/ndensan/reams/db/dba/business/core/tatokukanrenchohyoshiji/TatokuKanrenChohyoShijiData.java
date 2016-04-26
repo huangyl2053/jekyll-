@@ -161,7 +161,7 @@ public class TatokuKanrenChohyoShijiData implements Serializable {
      *
      * @return 住所出力不要フラグ
      */
-    public boolean get住所出力不要フラグ() {
+    public boolean is住所出力不要フラグ() {
         return entity.is住所出力不要フラグ();
     }
 }

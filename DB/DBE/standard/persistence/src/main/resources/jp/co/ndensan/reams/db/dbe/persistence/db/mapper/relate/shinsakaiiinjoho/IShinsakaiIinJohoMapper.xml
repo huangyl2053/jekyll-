@@ -33,7 +33,9 @@
         ;
     </select>
 
-    <select id="get審査会委員情報By表示条件" parameterType="java.lang.Boolean" resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
+    <select id="get審査会委員情報By表示条件"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
+            resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
         SELECT
         dbT5594ShinsakaiIinJoho.*,
         dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.*
@@ -44,11 +46,12 @@
         FROM
         rgdb."DbT5594ShinsakaiIinJoho"
         <where>
-            <if test="!is全ての審査会委員">
+            <if test="!isSubeteHyoji">
                 "haishiFlag" = FALSE
             </if>
         </where>
-        ) AS dbT5594ShinsakaiIinJoho
+        ORDER BY "dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
+        LIMIT #{dispMax}) AS dbT5594ShinsakaiIinJoho
         LEFT JOIN
         (
         SELECT

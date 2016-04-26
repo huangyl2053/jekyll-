@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -152,31 +153,30 @@ public class ShoKaishuKirokuKanriHandler {
             ShoKofuKaishuBuilder builder = shoKofuKaishu.createBuilderForEdit();
 
             if (追加.equals(dgKoufuKaishu.getStatus())) {
-
-                builder.set交付年月日(new FlexibleDate(dgKoufuKaishu.getKoufuDate()));
-                builder.set有効期限(new FlexibleDate(dgKoufuKaishu.getYukoKigen()));
+                builder.set交付年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKoufuDate().toString()).toDateString()));
+                builder.set有効期限(new FlexibleDate(new RDate(dgKoufuKaishu.getYukoKigen().toString()).toDateString()));
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyu());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
-                builder.set回収年月日(new FlexibleDate(dgKoufuKaishu.getKaishuDate()));
+                builder.set回収年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKaishuDate().toString()).toDateString()));
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyu());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());
                 ShoKofuKaishuJohoManager.createInstance().証交付回収情報の追加(builder.build());
             }
             if (更新.equals(dgKoufuKaishu.getStatus())) {
-                builder.set交付年月日(new FlexibleDate(dgKoufuKaishu.getKoufuDate()));
-                builder.set有効期限(new FlexibleDate(dgKoufuKaishu.getYukoKigen()));
+                builder.set交付年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKoufuDate().toString()).toDateString()));
+                builder.set有効期限(new FlexibleDate(new RDate(dgKoufuKaishu.getYukoKigen().toString()).toDateString()));
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyu());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
-                builder.set回収年月日(new FlexibleDate(dgKoufuKaishu.getKaishuDate()));
+                builder.set回収年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKaishuDate().toString()).toDateString()));
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyu());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());
-                ShoKofuKaishuJohoManager.createInstance().証交付回収情報の追加(builder.build());
+                ShoKofuKaishuJohoManager.createInstance().証交付回収情報の更新(builder.build());
             }
             if (削除.equals(dgKoufuKaishu.getStatus())) {
                 builder.set論理削除フラグ(true);
-                ShoKofuKaishuJohoManager.createInstance().証交付回収情報の追加(builder.build());
+                ShoKofuKaishuJohoManager.createInstance().証交付回収情報の削除(builder.build());
             }
         }
     }

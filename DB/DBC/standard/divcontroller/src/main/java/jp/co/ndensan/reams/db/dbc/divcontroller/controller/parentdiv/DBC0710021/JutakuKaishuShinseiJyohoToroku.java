@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
@@ -32,7 +33,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -160,17 +160,17 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
-        if (valid2.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid2).respond();
-        }
+//        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+//                div, 画面モード, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
+//        if (valid2.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(valid2).respond();
+//        }
 
         boolean 内容変更 = new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
         boolean 判断基準 = new RString(DbzQuestionMessages.判断基準より前の日付.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
-        boolean 限度額 = new RString(DbzInformationMessages.不整合内容相違.getMessage().getCode()).equals(
+        boolean 限度額 = new RString(DbcInformationMessages.限度額チェック前.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
         boolean 削除の確認 = new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
@@ -209,8 +209,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         boolean is確認対象変更有 = handler.is確認対象変更有無チェック();
         if (is確認対象変更有) {
             if (isCheckFour(限度額, 削除の確認, 保存の確認, 確認_汎用)) {
-                // TODO 限度額チェック前存在しない。
-                return ResponseData.of(div).addMessage(DbzInformationMessages.不整合内容相違.getMessage()).respond();
+                return ResponseData.of(div).addMessage(DbcInformationMessages.限度額チェック前.getMessage()).respond();
             }
             if (限度額 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
@@ -595,12 +594,12 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnRireki(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
 
+        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null, null).validate住宅改修内容();
+                div, null, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         handler.過去の住宅改修費取得と支払結果の設定();
         return ResponseData.of(div).respond();
     }
@@ -614,11 +613,9 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnCheckGendogaku(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
-                div.getTxtTeikyoYM().getValue().getYearMonth().toDateString());
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null, null).validate住宅改修内容();
+                div, null, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
@@ -627,6 +624,8 @@ public class JutakuKaishuShinseiJyohoToroku {
                 .getTxtHiyoTotalNow().setValue(費用額合計);
         JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager manager
                 = JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager.createInstance();
+        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
+                div.getTxtTeikyoYM().getValue().getYearMonth().toDateString());
         boolean 要介護状態３段階変更の判定 = manager.checkYaokaigoJyotaiSandannkai(被保険者番号, 画面提供着工年月);
         List<RString> 要介護状態区分３段階変更チェック = div.getJutakuKaishuShinseiContents()
                 .getJutakuKaishuShinseiResetInfo().getChkResetInfo().getSelectedKeys();
@@ -774,7 +773,7 @@ public class JutakuKaishuShinseiJyohoToroku {
 
     private JutakuKaishuShinseiJyohoTorokuValidationHandler getJutakuKaishuShinseiJyohoTorokuValidationHandler(
             JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード, RString 住宅改修内容チェックエラーメッセージ) {
-        if (画面モード != null) {
+        if (画面モード != null || 住宅改修内容チェックエラーメッセージ != null) {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(
                     画面モード, div, 住宅改修内容チェックエラーメッセージ);
         } else {

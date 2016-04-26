@@ -91,13 +91,9 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtServiceYM().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtSyokanseriNo().setDisabled(true);
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-            if (識別コード != null || !識別コード.isEmpty()) {
-                div.getPnlCommon().getCcdAtena().onLoad(識別コード);
-            }
+            div.getPnlCommon().getCcdAtena().onLoad(識別コード);
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-            if (被保険者番号 != null || !被保険者番号.isEmpty()) {
-                div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
-            }
+            div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
             RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
             if (事業者検索.equals(表示モード)) {
                 PnlTotalPanelParameter param = ViewStateHolder

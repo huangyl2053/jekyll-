@@ -144,7 +144,7 @@ public class HihokenshaShikakuShoFinder {
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey()) || DonyuKeitaiCode.事務構成市町村.getCode().
                 equals(導入形態コード.getKey()) || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             DbT7051KoseiShichosonMasterEntity 市町村コード = dbT7051KoseiShichosonMasterDac.
-                    selectByKey(hihokenshaShikakuParameter.getShoKisaiHokenshaNo().value());
+                    shichosonCode(hihokenshaShikakuParameter.getShoKisaiHokenshaNo());
             hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
         } else if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード.getKey())) {

@@ -47,7 +47,7 @@ public enum ShinseiRiyuKubun {
     private final RString fullName;
     private final RString code;
 
-    private ShinseiRiyuKubun(String fullname, String code) {
+    private ShinseiRiyuKubun(String code, String fullname) {
         this.fullName = new RString(fullname);
         this.code = new RString(code);
     }

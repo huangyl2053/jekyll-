@@ -53,7 +53,9 @@ public class KagoKetteiHokenshaInUpdataTempTableProcess extends BatchProcessBase
             LasdecCode 市町村コード = 被保険者台帳管理.getShichosonCode();
             parameter = KagoKetteiHokenshaInParameter.createParameter(entity.getHiHokenshaNo(), 市町村コード);
             ShihihokenshabangoTempTableEntity ichijiEntity = mapper.get新被保険者番号(parameter);
-            mapper.insert新被保険者番号(ichijiEntity);
+            if (ichijiEntity != null) {
+                mapper.insert新被保険者番号(ichijiEntity);
+            }
         }
     }
 

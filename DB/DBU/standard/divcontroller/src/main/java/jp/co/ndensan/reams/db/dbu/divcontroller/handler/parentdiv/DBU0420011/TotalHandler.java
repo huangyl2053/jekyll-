@@ -28,11 +28,12 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.Tota
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashochohyo.HihokenshashoChohyoFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.jukyushikakushomeisho.JukyuShikakuShomeishoFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokenshikakushasho.KaigoHokenShikakushasho;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshashikakuhakko.HihokenshaShikakuHakko.dgShuruiShikyuGendoKijunGaku_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -62,24 +63,24 @@ public class TotalHandler {
      */
     public void onLoad() {
         if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
-            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
-            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class)
+            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号());
-            div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class)
+            div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号(), MENUID_DBUMN12001);
         }
         if (MENUID_DBUMN12002.equals(ResponseHolder.getMenuID())) {
-            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
-            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class)
+            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号());
-            div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class)
+            div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号(), MENUID_DBUMN12002);
         }
         if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID())) {
-            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
-            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class)
+            div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+            div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号());
-            div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko().initialize(ViewStateHolder.get(ViewStateKey.資格対象者,
+            div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者,
                     TaishoshaKey.class).get被保険者番号().getColumnValue());
         }
     }
@@ -127,8 +128,8 @@ public class TotalHandler {
 
     private HihokenshashoChohyoParameter paramter() {
         HihokenshashoChohyoParameter para = new HihokenshashoChohyoParameter();
-        para.set被保険者番号(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue());
-        para.set識別コード(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        para.set被保険者番号(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue());
+        para.set識別コード(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         para.set交付日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue());
         para.set保険者(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtHokensha().getValue());
         para.set要介護認定状態区分コード(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtYokaigodo().getValue());
@@ -302,7 +303,7 @@ public class TotalHandler {
         shikaku.set保険者名称(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtHokensha().getValue());
         shikaku.set有効期限(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo()
                 .getTxtYukoKigen().getValue().toDateString());
-        shikaku.set被保番号(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue());
+        shikaku.set被保番号(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue());
         shikaku.set介護状態(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtYokaigodo().getValue());
         shikaku.set認定日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo()
                 .getTxtNinteiYMD().getValue().toDateString());
@@ -406,7 +407,7 @@ public class TotalHandler {
         nyutaiList.add(nyutai2);
         nyutaiList.add(nyutai3);
         shikaku.set介護保険施設等の情報(nyutaiList);
-        shikaku.set識別コード(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード().getColumnValue());
+        shikaku.set識別コード(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード().getColumnValue());
         return shikaku;
     }
 
@@ -417,6 +418,24 @@ public class TotalHandler {
      */
     public List<JukyuShikakuShomeishoBodyItem> jukyuShikakuShomeisho() {
         List<JukyuShikakuShomeishoBodyItem> items = new ArrayList<>();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtKofubi().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtIdoYotebi().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtYokaigoJotaiKubun().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtShinsebi().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getFromValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getToValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getCblInji().isAllSelected();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmShinsakaiYikan().getValue();
+        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmBiko().getValue();
         // TODO QA1050 パラメタ不明
         JukyuShikakuShomeishoFinder finder = new JukyuShikakuShomeishoFinder();
         JukyuShikakuShomeishoData business = finder.setJukyuShikakuShomeisho(null);
@@ -430,5 +449,18 @@ public class TotalHandler {
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         items.add(item);
         return items;
+    }
+
+    /**
+     * 入力チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs detaCheck() {
+        return createValidationHandler(div).validateCheck();
+    }
+
+    private TotalValidationHandler createValidationHandler(TotalDiv div) {
+        return new TotalValidationHandler(div);
     }
 }

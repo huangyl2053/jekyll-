@@ -196,7 +196,8 @@ public class TekiyoJogaiRirekiValidationHandler {
 
     private void 期間重複チェック(List<datagridTekiyoJogai_Row> 適用情報リスト, ValidationMessageControlPairs validPairs) {
         for (datagridTekiyoJogai_Row row : 適用情報リスト) {
-            if (RowState.Deleted.equals(row.getRowState()) || row.getId() == div.getDatagridTekiyoJogai().getActiveRow().getId()) {
+            if (RowState.Deleted.equals(row.getRowState()) || (div.getDatagridTekiyoJogai().getActiveRow() != null
+                    && row.getId() == div.getDatagridTekiyoJogai().getActiveRow().getId())) {
                 continue;
             }
             if (row.getKayijoDate().getValue() == null) {

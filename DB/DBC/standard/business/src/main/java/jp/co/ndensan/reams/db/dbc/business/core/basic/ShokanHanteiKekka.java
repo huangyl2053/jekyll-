@@ -214,6 +214,18 @@ public class ShokanHanteiKekka
     }
 
     /**
+     * 保持する償還払支給判定結果を新規対象とします。<br/>
+     * {@link DbT3036ShokanHanteiKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば新規状態にします。
+     *
+     * @return 新規対象処理実施後の{@link ShokanHanteiKekka}
+     */
+    public ShokanHanteiKekka added() {
+        DbT3036ShokanHanteiKekkaEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanHanteiKekka(addedEntity, id);
+    }
+
+    /**
      * {@link ShokanHanteiKekka}のシリアライズ形式を提供します。
      *
      * @return {@link ShokanHanteiKekka}のシリアライズ形式
