@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taisyosyajidowaritsuke.ITaisyosyaJidoWaritsukeRelateMapper">
 
-    <select id="selectTaisyosya" resultMap="resultMap_Dbe510001Entity" fetchSize="500">
+    <select id="selectTaisyosya" resultMap="resultMap_Dbe510001Entity" parameterType="java.lang.Boolean" fetchSize="500">
         SELECT
         DbT5101."shinsakaiYusenWaritsukeKubunCode"
         , DbT5101."hihokenshaNo"

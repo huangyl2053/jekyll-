@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.taisyosyajidowaritsuke.Taisyo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 対象者自動割付のマッパーインタフェースです。
@@ -21,7 +22,7 @@ public interface ITaisyosyaJidoWaritsukeRelateMapper {
      * @param isIchijiHanteiGo 一次判定後
      * @return List<TaisyosyaJidoWaritsukeEntity>
      */
-    List<TaisyosyaJidoWaritsukeEntity> selectTaisyosya(boolean isIchijiHanteiGo);
+    List<TaisyosyaJidoWaritsukeEntity> selectTaisyosya(@Param(value = "isIchijiHanteiGo") boolean isIchijiHanteiGo);
 
     /**
      * 介護認定審査会開催予定情報を取得します。
