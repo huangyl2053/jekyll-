@@ -18,12 +18,13 @@ import jp.co.ndensan.reams.db.dba.service.report.hihokenshashob4.HihokenshashoB4
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeisho.JukyuShikakuShomeishoPrintService;
 import jp.co.ndensan.reams.db.dba.service.report.shikakushasho.ShikakushashoPrintService;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.HihokenshaShikakuShoDataParameter;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.DBU0420011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.TotalDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0420011.TotalHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho.HihokenshaShikakuShoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -88,6 +89,16 @@ public class Total {
     }
 
     /**
+     * 「再検索する」ボタン実行します。
+     *
+     * @param div 被保険者証・資格者証DIV
+     * @return ResponseData<TotalDiv>
+     */
+    public ResponseData<TotalDiv> btn_ReSearch(TotalDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBU0420011TransitionEventName.対象者検索に戻る).respond();
+    }
+
+    /**
      * 被保険者証・資格者証画面「発行する」ボタンを処理します。
      *
      * @param div 被保険者証・資格者証DIV
@@ -129,8 +140,8 @@ public class Total {
     private void insertShoKofuKaishu(TotalDiv div) {
         HihokenshaShikakuShoDataParameter parameter = new HihokenshaShikakuShoDataParameter();
         parameter.setMenuId(ResponseHolder.getMenuID());
-        parameter.setHihokenshaNo(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
-        parameter.setShikibetsuCode(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        parameter.setHihokenshaNo(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号());
+        parameter.setShikibetsuCode(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         parameter.setShoKisaiHokenshaNo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().
                 getYukoKigenInfo().getTxtHokensha().getValue() == null ? ShoKisaiHokenshaNo.EMPTY
                 : new ShoKisaiHokenshaNo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().

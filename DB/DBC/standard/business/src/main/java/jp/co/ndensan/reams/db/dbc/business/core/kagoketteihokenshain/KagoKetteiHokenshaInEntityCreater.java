@@ -89,7 +89,7 @@ public class KagoKetteiHokenshaInEntityCreater {
         entity.setKaigoKyufuhiFutangaku(new Decimal(trim囲み文字(csvShukei.getKaigoKyufuhiFutangaku()).toString()));
         entity.setKogakuServicehiKensu(Integer.parseInt(trim囲み文字(csvShukei.getKogakuServicehiKensu()).toString()));
         entity.setKogakuServicehiTanisu(new Decimal(trim囲み文字(csvShukei.getKogakuServicehiTanisu()).toString()));
-        entity.setKogakuServicehiFutangaku(new Decimal(trim囲み文字(csvShukei.getKaigoKyufuhiTanisu()).toString()));
+        entity.setKogakuServicehiFutangaku(new Decimal(trim囲み文字(csvShukei.getKogakuServicehiFutangaku()).toString()));
         entity.setTokuteiNyushoshaServicehiKensu(Integer.parseInt(trim囲み文字(csvShukei.
                 getTokuteiNyushoshaServicehiKensu()).toString()));
         entity.setTokuteiNyushoshaServicehiTanisu(new Decimal(trim囲み文字(csvShukei.getTokuteiNyushoshaServicehiTanisu()).toString()));
