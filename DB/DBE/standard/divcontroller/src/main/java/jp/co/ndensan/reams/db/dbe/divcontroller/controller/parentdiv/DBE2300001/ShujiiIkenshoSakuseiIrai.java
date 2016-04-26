@@ -517,7 +517,9 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setYubinNo1(getEditedYubinNo(row.getYubinNo()));
         item.setJushoText(row.getJusho());
         item.setKikanNameText(row.getShujiiIryoKikan());
+        // TODO QA1096 帳票設計書と画面設計書不一致
         item.setShimeiText(new RString("TODO氏名"));
+        item.setShimeiText(div.getSelectControlID());
         item.setMeishoFuyo(new RString("TODO名称付与"));
         RStringBuilder systemDateTime = new RStringBuilder();
         RDateTime datetime = RDate.getNowDateTime();
