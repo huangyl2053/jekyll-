@@ -52,11 +52,11 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     private static final RString PARAMETER = new RString("対象者検索");
     private static final RString SHINKI = new RString("新規");
     private static final RString SYUSEI = new RString("修正");
+    private static final RString 新規 = new RString("Added");
+    private static final RString 修正 = new RString("Modified");
     private static final LockingKey LOCKINGKEY = new LockingKey(new RString("TatokuIdoKanri"));
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
             UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-    private static RString menuId;
-    private static List<dgJushochiTokureiRireki_Row> koshinzen = new ArrayList<>();
 
     /**
      * 他市町村住所地特例者管理の初期化です。
@@ -65,7 +65,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
      * @return HokaShichosonJyusyochiTokureisyaKanriDiv
      */
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onLoad(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
-        menuId = ResponseHolder.getMenuID();
+        RString menuId = ResponseHolder.getMenuID();
         div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().set状態(getMode().get(menuId));
         getHandler(div).onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
@@ -74,7 +74,6 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        koshinzen = div.getCddTaJushochiTokureishaKanri().get適用情報一覧();
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)) {
             return ResponseData.of(div).setState(DBA2040011StateName.追加適用);
         } else if (メニューID_施設退所により解除.equals(menuId)) {
@@ -168,6 +167,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
                     new RString(row.getRowState().toString()));
             paramaterList.add(parameter);
         }
+        RString menuId = ResponseHolder.getMenuID();
         if (メニューID_施設入所により適用.equals(menuId)) {
             set適用(paramaterList);
             manager.checkTekiyouJotai(paramaterList);
@@ -179,13 +179,13 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
-        if (メニューID_施設変更により変更.equals(ResponseHolder.getMenuID())) {
+        if (メニューID_施設変更により変更.equals(menuId)) {
             div.getCddShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
         }
     }
 
     private void set適用(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (paramaterList.size() > koshinzen.size()) {
+        if (!paramaterList.isEmpty() && 新規.equals(paramaterList.get(0).get状態())) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SHINKI
@@ -195,8 +195,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     }
 
     private void set解除(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (koshinzen.get(0).getKaijoYMD().getValue() == null
-                && paramaterList.get(0).getKaijoYMD() != null && !paramaterList.get(0).getKaijoYMD().isEmpty()) {
+        if (!paramaterList.isEmpty() && 修正.equals(paramaterList.get(0).get状態())) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SYUSEI
