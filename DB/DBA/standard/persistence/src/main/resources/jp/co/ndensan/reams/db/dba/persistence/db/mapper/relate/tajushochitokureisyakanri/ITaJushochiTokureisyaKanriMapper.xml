@@ -103,15 +103,15 @@
         dbT1004."shikibetsuCode" = dbT1003."shikibetsuCode"
         AND 
         dbT1004."daichoShubetsu" = #{psmShikibetsuTaisho}
-        LEFT JOIN rgur."UrT0507Hokenja" AS urT0507
-        ON
-        urT0507."hokenjaNo" = dbT1003."sochiHokenshaNo"
-        AND urT0507."hokenjaShubetsu" = '08'
-        WHERE
+        AND
         ((dbT1003."kaijoYMD" IS NULL AND (dbT1004."taishoYMD" IS NULL OR dbT1003."tekiyoYMD" <![CDATA[<=]]> dbT1004."taishoYMD"))
         OR ((dbT1003."kaijoYMD" IS NOT NULL
         AND ((dbT1004."taishoYMD" IS NULL AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD")
         OR (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
+        LEFT JOIN rgur."UrT0507Hokenja" AS urT0507
+        ON
+        urT0507."hokenjaNo" = dbT1003."sochiHokenshaNo"
+        AND urT0507."hokenjaShubetsu" = '08'
         ORDER BY
         dbT1003."tekiyoYMD" DESC, dbT1003."idoYMD" DESC,dbT1003."edaNo" DESC, dbT1004."nyushoYMD" DESC, dbT1004."taishoYMD" DESC
     </select>
@@ -216,15 +216,15 @@
         ON
         "DbT1004ShisetsuNyutaisho"."shikibetsuCode" = "DbT1003TashichosonJushochiTokurei"."shikibetsuCode"
          AND         "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = #{psmShikibetsuTaisho}
+           AND
+           (("DbT1003TashichosonJushochiTokurei"."kaijoYMD" IS NULL AND ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL OR "DbT1003TashichosonJushochiTokurei"."tekiyoYMD" <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD"))
+        OR (("DbT1003TashichosonJushochiTokurei"."kaijoYMD" IS NOT NULL
+        AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD")
+        OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1003TashichosonJushochiTokurei"."tekiyoYMD")))))
         LEFT JOIN rgur."UrT0507Hokenja" AS urT0507
         ON
         urT0507."hokenjaNo" = "DbT1003TashichosonJushochiTokurei"."sochiHokenshaNo"
                    AND urT0507."hokenjaShubetsu" = '08'
-        WHERE
-        (("DbT1003TashichosonJushochiTokurei"."kaijoYMD" IS NULL AND ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL OR "DbT1003TashichosonJushochiTokurei"."tekiyoYMD" <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD"))
-        OR (("DbT1003TashichosonJushochiTokurei"."kaijoYMD" IS NOT NULL
-        AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD")
-        OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1003TashichosonJushochiTokurei"."tekiyoYMD")))))
         ORDER BY
         "DbT1003TashichosonJushochiTokurei"."tekiyoYMD" DESC
         , "DbT1003TashichosonJushochiTokurei"."idoYMD" DESC,
