@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.fut
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -27,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class FutanGendogakuNinteiManager {
 
-    private static final String TXT負担限度額認定検索条件 = "負担限度額認定検索条件";
+    private static final RString TXT負担限度額認定検索条件 = new RString("負担限度額認定検索条件");
     private final MapperProvider mapperProvider;
     private final DbT4018FutanGendogakuNinteiDac 介護保険負担限度額認定Dac;
     private final GemmenGengakuShinseiManager 減免減額申請Manager;
@@ -75,7 +76,7 @@ public class FutanGendogakuNinteiManager {
      */
     @Transaction
     public FutanGendogakuNintei get負担限度額認定(FutanGendogakuNinteiMapperParameter 負担限度額認定検索条件) {
-        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件));
+        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件.toString()));
         IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
 
         FutanGendogakuNinteiEntity relateEntity = mapper.select負担限度額認定ByKey(負担限度額認定検索条件);
@@ -94,7 +95,7 @@ public class FutanGendogakuNinteiManager {
      */
     @Transaction
     public List<FutanGendogakuNintei> get負担限度額認定リストBy主キー1(FutanGendogakuNinteiMapperParameter 負担限度額認定検索条件) {
-        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件));
+        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件.toString()));
         IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
 
         List<FutanGendogakuNinteiEntity> relateEntityList = mapper.select負担限度額認定リストBy主キー1(負担限度額認定検索条件);
@@ -117,7 +118,7 @@ public class FutanGendogakuNinteiManager {
      */
     @Transaction
     public boolean save(FutanGendogakuNintei 介護保険負担限度額認定) {
-        requireNonNull(介護保険負担限度額認定, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件));
+        requireNonNull(介護保険負担限度額認定, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件.toString()));
 
         if (!介護保険負担限度額認定.hasChanged()) {
             return false;
@@ -136,7 +137,7 @@ public class FutanGendogakuNinteiManager {
      */
     @Transaction
     public boolean saveOrDeletePhysicalBy(FutanGendogakuNintei 介護保険負担限度額認定) {
-        requireNonNull(介護保険負担限度額認定, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件));
+        requireNonNull(介護保険負担限度額認定, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件.toString()));
 
         if (!介護保険負担限度額認定.hasChanged()) {
             return false;
@@ -166,7 +167,7 @@ public class FutanGendogakuNinteiManager {
      */
     @Transaction
     public ArrayList<FutanGendogakuNintei> get負担限度額認定画面用リスト(FutanGendogakuNinteiParameter 負担限度額認定検索条件) {
-        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件));
+        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件.toString()));
         IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
 
         List<FutanGendogakuNinteiEntity> relateEntityList = mapper.select負担限度額認定画面用リスト(負担限度額認定検索条件);
@@ -187,7 +188,7 @@ public class FutanGendogakuNinteiManager {
      */
     @Transaction
     public FutanGendogakuNintei get負担限度額認定帳票用(FutanGendogakuNinteiParameter 負担限度額認定検索条件) {
-        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件));
+        requireNonNull(負担限度額認定検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(TXT負担限度額認定検索条件.toString()));
         IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
 
         FutanGendogakuNinteiEntity relateEntity = mapper.select負担限度額認定帳票用(負担限度額認定検索条件);
