@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class RoreiFukushiJoho implements Serializable {
 
     private ShikibetsuCode 識別コード;
+    private RString 状態;
     private FlexibleDate 受給開始年月日;
     private FlexibleDate 受給廃止年月日;
 
@@ -33,6 +34,7 @@ public class RoreiFukushiJoho implements Serializable {
     public RString toRString() {
         StringBuilder builder = new StringBuilder();
         builder.append(識別コード.toString());
+        builder.append(状態);
         builder.append(受給開始年月日.toString());
         builder.append(受給廃止年月日.toString());
         return new RString(builder.toString());

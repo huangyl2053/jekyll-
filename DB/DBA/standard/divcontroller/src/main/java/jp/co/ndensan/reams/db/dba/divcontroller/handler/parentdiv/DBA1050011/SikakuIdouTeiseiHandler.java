@@ -120,6 +120,7 @@ public class SikakuIdouTeiseiHandler {
                 .getTplRofukuNenkin().getRohukuNenkin().getCcdRohukuNenkin().getDataGridList()) {
             RoreiFukushiJoho joho = new RoreiFukushiJoho();
             joho.set識別コード(識別コード);
+            joho.set状態(row.getJotai());
             joho.set受給開始年月日(stringToFlexibleDate(row.getStartDate().getValue().toDateString()));
             joho.set受給廃止年月日(stringToFlexibleDate(row.getEndDate().getValue().toDateString()));
             roreiFukushiJohoList.add(joho);
