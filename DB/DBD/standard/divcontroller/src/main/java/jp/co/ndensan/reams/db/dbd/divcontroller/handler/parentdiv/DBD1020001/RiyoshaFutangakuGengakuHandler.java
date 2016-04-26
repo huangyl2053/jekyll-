@@ -164,7 +164,7 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        ShoKisaiHokenshaNo 証記載保険者番号 = null;
+        ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
         EntityDataState state;
         GemmenGengakuShinsei gemmenGengakuShinsei;
@@ -431,25 +431,14 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getDdlShinseiIchiran().setDisabled(true);
 
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
-        List<RiyoshaFutangakuGengaku> dbDatalist = ViewStateHolder.get(Dbd1020001Keys.DB利用者負担額減額情報List, ArrayList.class);
-        List<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, List.class);
-        if (existsViewStateList == null) {
-            existsViewStateList = new ArrayList<>();
-        }
 
-        if (dbDatalist != null) {
-            for (RiyoshaFutangakuGengaku joho : dbDatalist) {
-                if (joho.get証記載保険者番号().getColumnValue().equals(row.getHiddenShoKisaiHokenshaNo())
-                        && new RString(joho.get履歴番号()).equals(row.getHiddenShinseiRirekiNo())) {
-                    ViewStateHolder.put(Dbd1020001Keys.該当DB申請, joho);
-                }
-            }
+        RiyoshaFutangakuGengaku 該当DB申請 = get該当DB申請(row);
+        if (該当DB申請 != null) {
+            ViewStateHolder.put(Dbd1020001Keys.該当DB申請, 該当DB申請);
         }
-        for (RiyoshaFutangakuGengakuViewState joho : existsViewStateList) {
-            if (joho.getRiyoshaFutangakuGengaku().get証記載保険者番号().getColumnValue().equals(row.getHiddenShoKisaiHokenshaNo())
-                    && new RString(joho.getRiyoshaFutangakuGengaku().get履歴番号()).equals(row.getHiddenShinseiRirekiNo())) {
-                ViewStateHolder.put(Dbd1020001Keys.該当申請のViewState, joho);
-            }
+        RiyoshaFutangakuGengakuViewState 該当申請のViewState = get該当申請のViewState(row);
+        if (該当申請のViewState != null) {
+            ViewStateHolder.put(Dbd1020001Keys.該当申請のViewState, 該当申請のViewState);
         }
 
         FlexibleDate 申請日 = row.getTxtShinseiYMD().getValue();
@@ -805,6 +794,38 @@ public class RiyoshaFutangakuGengakuHandler {
                 && is承認情報等しい(該当DB申請));
     }
 
+    /**
+     * 該当選択行のDB情報を取得します。
+     *
+     * @param row 該当選択行
+     * @return DB情報
+     */
+    public RiyoshaFutangakuGengaku get該当DB申請(ddlShinseiIchiran_Row row) {
+        List<RiyoshaFutangakuGengaku> dbDatalist = ViewStateHolder.get(Dbd1020001Keys.DB利用者負担額減額情報List, ArrayList.class);
+        if (dbDatalist != null) {
+            for (RiyoshaFutangakuGengaku joho : dbDatalist) {
+                if (joho.get証記載保険者番号().getColumnValue().equals(row.getHiddenShoKisaiHokenshaNo())
+                        && new RString(joho.get履歴番号()).equals(row.getHiddenShinseiRirekiNo())) {
+                    return joho;
+                }
+            }
+        }
+        return null;
+    }
+
+    private RiyoshaFutangakuGengakuViewState get該当申請のViewState(ddlShinseiIchiran_Row row) {
+        List<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, List.class);
+        if (existsViewStateList != null) {
+            for (RiyoshaFutangakuGengakuViewState joho : existsViewStateList) {
+                if (joho.getRiyoshaFutangakuGengaku().get証記載保険者番号().getColumnValue().equals(row.getHiddenShoKisaiHokenshaNo())
+                        && new RString(joho.getRiyoshaFutangakuGengaku().get履歴番号()).equals(row.getHiddenShinseiRirekiNo())) {
+                    return joho;
+                }
+            }
+        }
+        return null;
+    }
+
     private boolean is承認情報等しい(RiyoshaFutangakuGengaku 該当DB申請) {
 
         RString 決定区分 = div.getRadKetteiKubun().getSelectedKey();
@@ -879,8 +900,8 @@ public class RiyoshaFutangakuGengakuHandler {
     }
 
     private RString get申請届出者氏名data(GemmenGengakuShinsei gemmenGengakuShinsei) {
-        RString 申請届出者氏名カナdata = gemmenGengakuShinsei.get申請届出者氏名() == null ? RString.EMPTY : gemmenGengakuShinsei.get申請届出者氏名().getColumnValue();
-        return 申請届出者氏名カナdata;
+        RString 申請届出者氏名data = gemmenGengakuShinsei.get申請届出者氏名() == null ? RString.EMPTY : gemmenGengakuShinsei.get申請届出者氏名().getColumnValue();
+        return 申請届出者氏名data;
     }
 
     private RString get申請届出者氏名page() {

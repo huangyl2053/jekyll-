@@ -73,6 +73,7 @@ public class RiyoshaFutangakuGengakuPanel {
     private static final Decimal 給付率_81 = new Decimal(81);
     private static final Decimal 給付率_91 = new Decimal(91);
     private static final Decimal 給付率_100 = new Decimal(100);
+    private static final RString 追加 = new RString("追加");
 
     /**
      * 利用者負担額減額申請の初期化。(オンロード)
@@ -128,8 +129,14 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnDelete(RiyoshaFutangakuGengakuPanelDiv div) {
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
-        RString 決定区分 = row.getKetteiKubun();
-        if (!ResponseHolder.isReRequest() && 決定区分 != null && !決定区分.isEmpty()) {
+
+        RString 元の決定区分 = RString.EMPTY;
+        RiyoshaFutangakuGengaku 該当DB申請 = getHandler(div).get該当DB申請(row);
+        if (該当DB申請 != null && 該当DB申請.get決定区分() != null) {
+            元の決定区分 = 該当DB申請.get決定区分();
+        }
+
+        if (!ResponseHolder.isReRequest() && !追加.equals(row.getJotai()) && !元の決定区分.isEmpty()) {
             InformationMessage message = new InformationMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode(),
                     DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
