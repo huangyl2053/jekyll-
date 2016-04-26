@@ -198,8 +198,12 @@ public class RoreiFukushiNenkinShokaiHandler {
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
             div.getDatagridRireki().getDataSource().add(row);
-        } else if (状態_削除.equals(eventJotai)) {
+        } else if (状態_削除.equals(eventJotai)
+                && !状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
             row.setJotai(eventJotai);
+        } else if (状態_削除.equals(eventJotai)
+                && 状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
+            div.getDatagridRireki().getDataSource().remove(index);
         } else {
             row.setJotai(eventJotai);
             div.getDatagridRireki().getDataSource().set(index, row);
