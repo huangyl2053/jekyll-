@@ -9,10 +9,6 @@ import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKosh
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyoseikuInjiKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKangaiEditPattern;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoKannaiEditPattern;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.JushoPrefix;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 
@@ -77,8 +73,6 @@ public class NinteiKoshinTsuchishoCompSofubutsuAtesakiEditor implements INinteiK
     }
 
     private static EditedAtesaki getEditedAtesaki(IAtesaki atesaki, Association 地方公共団体, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedAtesaki(
-                atesaki, 地方公共団体, 帳票制御共通, null, null, true, JushoKangaiEditPattern.space方書,
-                JushoPrefix.市町村名付加, JushoKannaiEditPattern.町域番地, GyoseikuInjiKubun.印字しない);
+        return new EditedAtesaki(atesaki, 地方公共団体, 帳票制御共通);
     }
 }
