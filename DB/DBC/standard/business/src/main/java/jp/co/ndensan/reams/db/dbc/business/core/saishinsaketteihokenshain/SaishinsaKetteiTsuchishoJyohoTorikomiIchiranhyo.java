@@ -44,14 +44,14 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
     private static final RString STRING_SAKUSEI = new RString("作成");
     private static final RString 被保険者名 = new RString("該当データがありません");
     private static final RString ページ数 = new RString("1");
-    private static final RString 再審査申立 = new RString("< 再 審 査 申 立 >");
+    private static final RString 再審査申立 = new RString("再審査申立");
     private static final RString 件数 = new RString("件数");
     private static final RString 単位数 = new RString("単位数");
     private static final RString 保険者負担額 = new RString("保険者負担額");
     private static final RString 介護給付費 = new RString("介護給付費");
     private static final RString 高額介護サービス費 = new RString("高額介護サービス費");
-    private static final RString 再審査決定 = new RString("< 再 審 査 決 定 >");
-    private static final RString 調整 = new RString("< 調 整 >");
+    private static final RString 再審査決定 = new RString("再審査決定");
+    private static final RString 調整 = new RString("調整");
     private static final RString 証記載保険者名 = new RString("証記載保険者名");
     private static final RString 証記載保険者番号 = new RString("証記載保険者番号");
     private static final RString INDEX_1 = new RString("1");
@@ -81,7 +81,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
         RDateTime now = RDateTime.now();
         builder.append(now.getDate().wareki()
                 .eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN)
+                .firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK)
                 .toDateString());
@@ -90,11 +90,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
         RString 作成日時 = builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
         if (明細情報List == null || 明細情報List.isEmpty()) {
             SaishinsaKetteiHokenshaInItem item = new SaishinsaKetteiHokenshaInItem();
-            item.set処理年月(処理年月.wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK)
-                    .toDateString());
+            item.set処理年月(処理年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             item.set証記載保険者番号(集計情報Entity.getShoKisaiHokenshaNo().value());
             item.set証記載保険者名(集計情報Entity.getShoKisaiHokenshaName());
             item.set並び順1(並び順の1件目);
@@ -118,11 +114,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
             for (int i = 0; i < 明細情報List.size(); i++) {
                 SaishinsaMeisaiPsmEntity 明細Entity = 明細情報List.get(i);
                 SaishinsaKetteiHokenshaInItem item = new SaishinsaKetteiHokenshaInItem();
-                item.set処理年月(処理年月.wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE)
-                        .fillType(FillType.BLANK)
-                        .toDateString());
+                item.set処理年月(処理年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
                 item.set証記載保険者番号(集計情報Entity.getShoKisaiHokenshaNo().value());
                 item.set証記載保険者名(集計情報Entity.getShoKisaiHokenshaName());
                 item.set並び順1(並び順の1件目);
@@ -139,7 +131,8 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
                 item.set審査委員会名(集計情報Entity.getSinsaiinkaiName());
                 item.set作成日時(作成日時);
                 item.setNo(new RString(連番.toString()));
-                item.set取扱年月(明細Entity.getToriatsukaiYM().toDateString());
+                item.set取扱年月(明細Entity.getToriatsukaiYM().
+                        wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
                 item.set事業所番号(明細Entity.getJigyoshoNo().value());
                 item.set事業所名(明細Entity.getJigyoshoName());
                 item.set被保険者番号(明細Entity.getHiHokenshaNo().value());
@@ -197,11 +190,8 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
                         toコンマ区切りRString(集計情報Entity.getKogakuKaigoServicehiKetteiTanisu(), 0));
                 item.set高額介護サービス費調整単位数(DecimalFormatter.
                         toコンマ区切りRString(集計情報Entity.getKogakuKaigoServicehiChoseiTanisu(), 0));
-                item.set取込年月(集計情報Entity.getToriatsukaiYM().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE)
-                        .fillType(FillType.BLANK)
-                        .toDateString());
+                item.set取込年月(集計情報Entity.getToriatsukaiYM().
+                        wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
                 item.set介護給付費タイトル(介護給付費);
                 item.set再審査決定タイトル(再審査決定);
                 item.set再審査申立タイトル(再審査申立);
