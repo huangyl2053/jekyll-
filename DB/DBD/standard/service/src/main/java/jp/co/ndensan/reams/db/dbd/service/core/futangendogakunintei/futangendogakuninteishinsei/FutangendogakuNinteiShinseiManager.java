@@ -5,9 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei;
 
+import java.util.ArrayList;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4036FutanGendogakuNinteiBatchTestResultsMapper;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,5 +50,31 @@ public class FutangendogakuNinteiShinseiManager {
     public int delete利用者負担額減額by被保険者番号(HihokenshaNo hihokenshaNo) {
         dbt4036mapper = mapperProvider.create(IDbT4036FutanGendogakuNinteiBatchTestResultsMapper.class);
         return dbt4036mapper.deleteByHihokenshaNo(hihokenshaNo);
+    }
+
+    /**
+     * 負担限度額認定申請の更新処理
+     *
+     * @param 申請一覧情報ArrayList 申請一覧情報ArrayList
+     * @param new申請情報List new申請情報List
+     * @param 被保険者番号 被保険者番号
+     */
+    @Transaction
+    public void save(ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList,
+            ArrayList<FutanGendogakuNinteiViewState> new申請情報List,
+            HihokenshaNo 被保険者番号) {
+        FutanGendogakuNinteiManager ninteiManager = FutanGendogakuNinteiManager.createInstance();
+        for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
+            futanGendogakuNintei.deleted();
+            ninteiManager.saveOrDeletePhysicalBy(futanGendogakuNintei);
+        }
+        ArrayList<FutanGendogakuNinteiViewState> new申請一覧情報ArrayList = new申請情報List;
+        for (FutanGendogakuNinteiViewState ninteiViewState : new申請一覧情報ArrayList) {
+            if (EntityDataState.Deleted.equals(ninteiViewState.getState())) {
+                continue;
+            }
+            ninteiManager.saveOrDeletePhysicalBy(ninteiViewState.getFutanGendogakuNintei());
+        }
+        this.delete利用者負担額減額by被保険者番号(被保険者番号);
     }
 }

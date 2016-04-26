@@ -5,14 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1010001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.DBD1010001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.DBD1010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgShinseiList_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001.FutangendogakuNinteiShinseiHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001.NinteiShinseiValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -33,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class FutangendogakuShinsei {
 
     private static final RString 配偶者の有無_無 = new RString("key1");
+    private static final RString 承認メニューID = new RString("DBDMN22001");
 
     /**
      * 画面初期化
@@ -41,9 +45,24 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onLoad(FutangendogakuShinseiDiv div) {
-        if (!getHandler(div).onLoad()) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
+
+        getHandler(div).onLoad();
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs = getValidationHandler().受給共通_被保データなしチェック(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「減免情報を表示する」ボタンをクリック
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onBeforeOpenDialog_btnDispGemmenJoho(FutangendogakuShinseiDiv div) {
+        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho();
         return ResponseData.of(div).respond();
     }
 
@@ -143,7 +162,10 @@ public class FutangendogakuShinsei {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().受給共通_受給者登録なしチェック(pairs, div);
+        NinteiShinseiValidationHandler validationHandler = getValidationHandler();
+        pairs = validationHandler.負担限度額認定_適用開始日が法施行以前チェック(pairs, div);
+        pairs = validationHandler.負担限度額認定_適用終了日が年度外チェック(pairs, div);
+        pairs = validationHandler.負担限度額認定_適用終了日が開始日以前チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -181,10 +203,24 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnUpdate(FutangendogakuShinseiDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().変更有無チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (承認メニューID.equals(ResponseHolder.getMenuID())) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            NinteiShinseiValidationHandler validationHandler = getValidationHandler();
+            pairs = validationHandler.減免減額_適用期間重複チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
+        boolean is変更あり = false;
+        List<dgShinseiList_Row> list = div.getDgShinseiList().getDataSource();
+        for (dgShinseiList_Row row : list) {
+            if (!row.getJotai().isEmpty()) {
+                is変更あり = true;
+                break;
+            }
+        }
+        if (!is変更あり) {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
