@@ -77,16 +77,10 @@ public class PnlTotalSearch {
             ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
                     .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
             List<ShokanJuryoininKeiyakushaResult> shokanResultList = getHandler(div).get契約者一覧(parameter);
-            if (shokanResultList == null || shokanResultList.isEmpty()) {
-                div.getPnlSearch().setDisplayNone(false);
-                div.getPnlKeiyakusyaList().setDisplayNone(true);
-                div.getBtnSearchAgain().setDisabled(true);
-                return ResponseData.of(div).respond();
-            }
             Decimal 最大取得件数 = ViewStateHolder
                     .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
             div.getPnlSearch().getTxtMaxCount().setValue(最大取得件数);
-            return set契約者一覧(div, shokanResultList);
+            return set契約者一覧(div, shokanResultList, 最大取得件数);
         }
         return ResponseData.of(div).respond();
     }
@@ -208,12 +202,13 @@ public class PnlTotalSearch {
             return ResponseData.of(div).respond();
         }
         ShokanJuryoininKeiyakushaParameter parameter = getHandler(div).createParameter();
+        Decimal 最大取得件数 = div.getPnlSearch().getTxtMaxCount().getValue();
         ViewStateHolder.put(ViewStateKeys.契約者一覧検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
+        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, 最大取得件数);
         List<ShokanJuryoininKeiyakushaResult> shokanResultList = getHandler(div).get契約者一覧(parameter);
-        return set契約者一覧(div, shokanResultList);
+        return set契約者一覧(div, shokanResultList, 最大取得件数);
     }
 
     /**
@@ -277,10 +272,9 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     private ResponseData<PnlTotalSearchDiv> set契約者一覧(PnlTotalSearchDiv div,
-            List<ShokanJuryoininKeiyakushaResult> shokanResultList) {
+            List<ShokanJuryoininKeiyakushaResult> shokanResultList, Decimal maxCount) {
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(getHandler(div).createDropDownList());
-        int maxCount = div.getPnlSearch().getTxtMaxCount().getValue().intValue();
-        if (shokanResultList != null && shokanResultList.size() > maxCount) {
+        if (shokanResultList != null && shokanResultList.size() > maxCount.intValue()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
                         DbzQuestionMessages.最大表示件数超過確認.getMessage().getCode(),
@@ -290,10 +284,10 @@ public class PnlTotalSearch {
             if (new RString(DbzQuestionMessages.最大表示件数超過確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).initializeGrid(shokanResultList);
+                getHandler(div).initializeGrid(shokanResultList, maxCount);
             }
         } else {
-            getHandler(div).initializeGrid(shokanResultList);
+            getHandler(div).initializeGrid(shokanResultList, maxCount);
         }
         return ResponseData.of(div).respond();
     }
