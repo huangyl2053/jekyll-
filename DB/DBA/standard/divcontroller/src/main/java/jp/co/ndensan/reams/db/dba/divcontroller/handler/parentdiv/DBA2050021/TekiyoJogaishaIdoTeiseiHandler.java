@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050021;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050021.TekiyoJogaishaIdoTeiseiDiv;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -53,7 +54,7 @@ public class TekiyoJogaishaIdoTeiseiHandler {
         div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().set表示widthサイズ(WIDTHサイズモード);
         div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().set明細表示モード(明細表示モード);
         div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().set利用モード(利用モード);
-        div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード);
+        div.getTekiyoJogaiJohoIchiran().getShisetsuHenkoJohoInput().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード, DaichoType.適用除外者.get名称());
     }
 
 }
