@@ -224,6 +224,8 @@ public class TekiyoJogaiRirekiHandler {
         div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
         div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
         div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);
+        div.getBtnInputClear().setDisabled(false);
+        div.getBtnKakutei().setDisabled(false);
     }
 
     /**
@@ -315,27 +317,21 @@ public class TekiyoJogaiRirekiHandler {
                 選択データ.setKaijoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
                 選択データ.setIdoJiyuCode(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey());
                 選択データ.setKaijoJiyu(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedValue());
-                選択データ.setHenkoumaeTekiyoDate(選択データ.getTekiyoDate().getValue().toDateString());
-                選択データ.setHenkoumaeIdoYMD(選択データ.getIdoYMD());
-                選択データ.setHenkoumaeEdaNo(選択データ.getEdaNo());
-                選択データ.setHenkougoTekiyoDate(変更後適用日.toDateString());
-                選択データ.setHenkougoIdoYMD(変更後解除日.toDateString());
-
                 boolean is異動日変更 = false;
-                if (!選択データ.getHenkougoIdoYMD().equals(選択データ.getHenkoumaeIdoYMD())) {
+                if (!変更後解除日.toDateString().equals(選択データ.getHenkoumaeIdoYMD())) {
                     is異動日変更 = true;
                 }
                 for (datagridTekiyoJogai_Row row : rowList) {
                     if (is異動日変更) {
-                        if (選択データ.getHenkougoIdoYMD().equals(row.getHenkougoIdoYMD())
-                                && 選択データ.getHenkougoTekiyoDate().equals(row.getHenkougoTekiyoDate())) {
+                        if (変更後解除日.toDateString().equals(row.getHenkougoIdoYMD())
+                                && 変更後適用日.toDateString().equals(row.getHenkougoTekiyoDate())) {
                             枝番 = new RString(Integer.parseInt(row.getHenkougoEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
                             break;
                         } else {
                             枝番 = 開始枝番;
                         }
                     } else {
-                        if (選択データ.getHenkougoTekiyoDate().equals(row.getHenkougoTekiyoDate())) {
+                        if (変更後適用日.toDateString().equals(row.getHenkougoTekiyoDate())) {
                             枝番 = new RString(Integer.parseInt(row.getHenkougoEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
                             break;
                         } else {
@@ -343,6 +339,12 @@ public class TekiyoJogaiRirekiHandler {
                         }
                     }
                 }
+
+                選択データ.setHenkoumaeTekiyoDate(選択データ.getTekiyoDate().getValue().toDateString());
+                選択データ.setHenkoumaeIdoYMD(選択データ.getIdoYMD());
+                選択データ.setHenkoumaeEdaNo(選択データ.getEdaNo());
+                選択データ.setHenkougoTekiyoDate(変更後適用日.toDateString());
+                選択データ.setHenkougoIdoYMD(変更後解除日.toDateString());
                 選択データ.setHenkougoEdaNo(枝番);
                 TekiyoJogaisha 適用除外者の識別子 = new TekiyoJogaisha(識別コード, new FlexibleDate(選択データ.getHenkougoIdoYMD()), 枝番);
                 適用除外者Model.add(適用除外者の識別子);
@@ -842,9 +844,9 @@ public class TekiyoJogaiRirekiHandler {
             datagridTekiyoJogai_Row row) {
         RString 異動事由コード;
         if (row.getKayijoDate().getValue() == null) {
-            異動事由コード = row.getTekiyoJiyu();
+            異動事由コード = row.getTekiyoJiyuCode();
         } else {
-            異動事由コード = row.getKaijoJiyu();
+            異動事由コード = row.getKaijoJiyuCode();
         }
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
         FlexibleDate 適用日 = FlexibleDate.EMPTY;
