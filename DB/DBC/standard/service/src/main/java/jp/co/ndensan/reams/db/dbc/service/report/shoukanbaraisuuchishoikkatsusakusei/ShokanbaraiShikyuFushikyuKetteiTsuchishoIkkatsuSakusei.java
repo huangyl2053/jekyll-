@@ -44,7 +44,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei {
         shoukanParamter.set支払期間From(paramter.get支払期間From());
         shoukanParamter.set支払期間To(paramter.get支払期間To());
         shoukanParamter.set開始時間(paramter.get開始時間());
-        shoukanParamter.set開始時間(paramter.get終了時間());
+        shoukanParamter.set終了時間(paramter.get終了時間());
         shoukanParamter.set出力順ID(paramter.get出力順ID());
         return shoukanParamter;
     }
