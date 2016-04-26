@@ -53,34 +53,34 @@ public class DvKogakuServiceJohoProcessParamter implements IBatchProcessParamete
     /**
      * コンストラクタです。
      *
-     * @param kouseiShichosonCode
-     * @param serviceYmFrom
-     * @param serviceYmTo
-     * @param shoriJokyo
-     * @param shinsaHoho
-     * @param santeiKijun
-     * @param kokuhorenFuicchi
-     * @param taishosha
-     * @param shinseiKubun
-     * @param shiharaiSaki
-     * @param kiyuKikanCode
-     * @param shisehiFrom
-     * @param shisehiTo
-     * @param hokemonoKeteihiFrom
-     * @param hokemonoKeteihiTo
-     * @param kokuhoreKeteiymFrom
-     * @param kokuhoreKeteiymTo
-     * @param taishoshaUketoriymFrom
-     * @param taishoshaUketoriymTo
-     * @param kokuhoreSofuYMFrom
-     * @param kokuhoreSofuYMTo
-     * @param keteijohoUketoriymFrom
-     * @param keteijohoUketoriymTo
-     * @param shutsuryokuju
-     * @param shutsuryokuTomoku
-     * @param tomokumeFuka
-     * @param rebanFuka
-     * @param hizukeHeshu
+     * @param kouseiShichosonCode 構成市町村コード
+     * @param serviceYmFrom サービス提供年月From
+     * @param serviceYmTo サービス提供年月To
+     * @param shoriJokyo 処理状況
+     * @param shinsaHoho 審査方法
+     * @param santeiKijun 算定基準
+     * @param kokuhorenFuicchi 国保連不一致
+     * @param taishosha 対象者
+     * @param shinseiKubun 申請区分
+     * @param shiharaiSaki 支払先
+     * @param kiyuKikanCode 金融機関コード
+     * @param shisehiFrom 申請日From
+     * @param shisehiTo 申請日To
+     * @param hokemonoKeteihiFrom 保険者決定日From
+     * @param hokemonoKeteihiTo 保険者決定日To
+     * @param kokuhoreKeteiymFrom 国保連決定年月From
+     * @param kokuhoreKeteiymTo 国保連決定年月To
+     * @param taishoshaUketoriymFrom 対象者受取年月From
+     * @param taishoshaUketoriymTo 対象者受取年月To
+     * @param kokuhoreSofuYMFrom 国保連送付年月From
+     * @param kokuhoreSofuYMTo 国保連送付年月To
+     * @param keteijohoUketoriymFrom 決定情報受取年月From
+     * @param keteijohoUketoriymTo 決定情報受取年月To
+     * @param shutsuryokuju 出力順
+     * @param shutsuryokuTomoku 出力項目
+     * @param tomokumeFuka 項目名付加
+     * @param rebanFuka 連番付加
+     * @param hizukeHeshu 日付'/'編集
      */
     public DvKogakuServiceJohoProcessParamter(RString kouseiShichosonCode,
             RString serviceYmFrom,
