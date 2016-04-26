@@ -22,12 +22,12 @@
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."rirekiNo" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."insertDantaiCd" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertDantaiCd",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."insertTimestamp" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertTimestamp",
-         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."insertReamsLoginId" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertReamsLoginId",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."insertReamsLoginId" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertLoginId",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."insertContextId" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertContextId",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."isDeleted" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_isDeleted",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."updateCount" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_updateCount",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."lastUpdateTimestamp" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_lastUpdateTimestamp",
-         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."lastUpdateReamsLoginId" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_lastUpdateReamsLoginId",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."lastUpdateReamsLoginId" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_lastUpdateLoginId",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiYMD" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shinseiYMD",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."ketteiYMD" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_ketteiYMD",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."tekiyoKaishiYMD" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_tekiyoKaishiYMD",
@@ -36,13 +36,13 @@
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."hiShoninRiyu" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hiShoninRiyu",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."shinseiJiyu" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shinseiJiyu",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."seihoJukyuUmu" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_seihoJukyuUmu",
-         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."roreiFukushiNenkinJukyuUmu" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_roreiFukushiNenkinJukyuUmu",
-         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."seihoFujoMinaoshiTokureiUmu" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_seihoFujoMinaoshiTokureiUmu",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."roreiFukushiNenkinJukyuUmu" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_roreiFukushiUmu",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."seihoFujoMinaoshiTokureiUmu" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_seihoFujoUmu",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bunshi" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_keigenritsu_Bunshi",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."keigenritsu_Bumbo" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_keigenritsu_Bumbo",
-         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyotakuServiceGentei" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyotakuServiceGentei",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyotakuServiceGentei" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyotakuGentei",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyojuhiShokuhiNomi" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyojuhiShokuhiNomi",
-         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyusochishaUnitTypeKoshitsuNomi" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyusochishaUnitTypeKoshitsuNomi",
+         "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kyusochishaUnitTypeKoshitsuNomi" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyusochishaNomi",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."kakuninNo" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kakuninNo",
          "DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"."gemmenKubun" as "dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_gemmenKubun"
     </sql>
@@ -55,12 +55,12 @@
         <id property="rirekiNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" />
         <result property="insertDantaiCd" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="insertReamsLoginId" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertContextId" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
         <result property="isDeleted" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_isDeleted" />
         <result property="updateCount" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="lastUpdateReamsLoginId" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_lastUpdateLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiYMD" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ketteiYMD" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tekiyoKaishiYMD" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -69,13 +69,13 @@
         <result property="hiShoninRiyu" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiJiyu" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seihoJukyuUmu" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_seihoJukyuUmu" />
-        <result property="roreiFukushiNenkinJukyuUmu" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_roreiFukushiNenkinJukyuUmu" />
-        <result property="seihoFujoMinaoshiTokureiUmu" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_seihoFujoMinaoshiTokureiUmu" />
+        <result property="roreiFukushiNenkinJukyuUmu" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_roreiFukushiUmu" />
+        <result property="seihoFujoMinaoshiTokureiUmu" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_seihoFujoUmu" />
         <result property="keigenritsu_Bunshi" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_keigenritsu_Bunshi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="keigenritsu_Bumbo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_keigenritsu_Bumbo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kyotakuServiceGentei" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyotakuServiceGentei" />
+        <result property="kyotakuServiceGentei" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyotakuGentei" />
         <result property="kyojuhiShokuhiNomi" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyojuhiShokuhiNomi" />
-        <result property="kyusochishaUnitTypeKoshitsuNomi" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyusochishaUnitTypeKoshitsuNomi" />
+        <result property="kyusochishaUnitTypeKoshitsuNomi" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kyusochishaNomi" />
         <result property="kakuninNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_kakuninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gemmenKubun" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_gemmenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>

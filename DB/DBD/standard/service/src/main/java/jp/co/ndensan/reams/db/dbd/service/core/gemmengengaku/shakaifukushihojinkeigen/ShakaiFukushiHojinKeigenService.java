@@ -71,7 +71,6 @@ public class ShakaiFukushiHojinKeigenService {
     @Transaction
     public List<ShakaifukuRiyoshaFutanKeigen> load社会福祉法人等利用者負担軽減申請All(HihokenshaNo 被保険者番号) {
         List<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = new ArrayList<>();
-        //TODO DBDEnum.減免減額種類.社会福祉法人等利用者負担軽減.コード
         ShakaiFukushiHojinKeigenParameter 検索条件 = new ShakaiFukushiHojinKeigenParameter(
                 被保険者番号, GemmenGengakuShurui.社会福祉法人等軽減.getコード());
         IShakaiFukushiHojinKeigenMapper mapper = mapperProvider.create(IShakaiFukushiHojinKeigenMapper.class);
