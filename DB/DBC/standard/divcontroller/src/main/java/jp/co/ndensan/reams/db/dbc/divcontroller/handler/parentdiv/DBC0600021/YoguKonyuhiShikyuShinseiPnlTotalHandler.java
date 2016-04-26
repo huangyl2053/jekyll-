@@ -516,7 +516,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                         事業者番号,
                         様式番号,
                         NUM1,
-                        new RString(String.format("%02d", String.valueOf(row.getId() + NUM_1)))).
+                        new RString(String.valueOf(row.getId() + NUM_1))).
                         createBuilderForEdit().build();
                 entityAdded = buildshokanFukushi(entityAdded, row);
                 entityList.add(entityAdded.added());
@@ -545,7 +545,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                             事業者番号,
                             様式番号,
                             NUM1,
-                            new RString(String.format("%02d", max連番))).createBuilderForEdit().build();
+                            new RString(String.valueOf(max連番))).createBuilderForEdit().build();
                     entityAdded = buildshokanFukushi(entityAdded, row);
                     entityList.add(entityAdded.added());
                 }
@@ -874,7 +874,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private ShokanShinsei clearsShokanShinsei(ShokanShinsei entity) {
         entity = entity.createBuilderForEdit()
                 .set国保連再送付フラグ(false)
-                .set審査結果(NUMB1)
                 .set申請年月日(null)
                 .set申請理由(null)
                 .set申請事業者コード(null)
@@ -1024,6 +1023,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             // TODO
             WarningMessage message = new WarningMessage("DBCW00001", "DBC.WarningMessage.DBCW00001");
             throw new ApplicationException(message);
+        }
+        if (null != div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getTxtTeikyoYM().getValue() && div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue() != null && !div.
+                getYoguKonyuhiShikyuShinseiContentsPanel()
+                .getTxtTeikyoYM().getValue().getYearMonth().equals(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                        getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue().getYearMonth())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.入力値が不正_追加メッセージあり, 購入年月日.toString())));
         }
         return validPairs;
     }
