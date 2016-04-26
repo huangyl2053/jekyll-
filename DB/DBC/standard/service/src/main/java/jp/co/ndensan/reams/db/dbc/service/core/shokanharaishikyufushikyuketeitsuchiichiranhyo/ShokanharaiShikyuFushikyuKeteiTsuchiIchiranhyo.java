@@ -47,7 +47,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(List<ShokanKetteiTsuchiShoShiharai> businessList,
                     ShokanKetteiTsuchiShoSealerBatchParameter batchPram) {
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> tsuchiIchiranItemsList = new ArrayList<>();
-        if (businessList == null) {
+        if (businessList == null || businessList.isEmpty()) {
             ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
             IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
             ichiranItem.setHokenshaNo(association.get地方公共団体コード().getColumnValue());
@@ -63,80 +63,64 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             ichiranItem.setKaipage3(null);
             ichiranItem.setKaipage4(null);
             ichiranItem.setKaipage5(null);
-            ichiranItem.setPrintTimeStamp(get作成日時());
+            ichiranItem.setPrintTimeStamp(get作成日時分秒());
             ichiranItem.setHihokenshaName(new RString("該当データがありません"));
             tsuchiIchiranItemsList.add(ichiranItem);
+            return tsuchiIchiranItemsList;
         }
         int renban = 0;
         RString hihokenshaNo = RString.EMPTY;
-        if (businessList != null) {
-            for (ShokanKetteiTsuchiShoShiharai shoShiharaiList : businessList) {
-                ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
-                IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
-                ichiranItem.setHokenshaNo(association.get地方公共団体コード().getColumnValue());
-                ichiranItem.setHokenshaName(association.get市町村名());
-                // TODO QA#73393 改頁 ,並び順取得。
-                ichiranItem.setShutsuryokujun1(null);
-                ichiranItem.setShutsuryokujun2(null);
-                ichiranItem.setShutsuryokujun3(null);
-                ichiranItem.setShutsuryokujun4(null);
-                ichiranItem.setShutsuryokujun5(null);
-                ichiranItem.setKaipage1(null);
-                ichiranItem.setKaipage2(null);
-                ichiranItem.setKaipage3(null);
-                ichiranItem.setKaipage4(null);
-                ichiranItem.setKaipage5(null);
-                if (!hihokenshaNo.equals(shoShiharaiList.get被保険者番号().value())) {
-                    ichiranItem.setRenban(new RString(String.valueOf(++renban)));
-                }
-                hihokenshaNo = shoShiharaiList.get被保険者番号().value();
-                ichiranItem.setPrintTimeStamp(get作成日時分秒());
-                ichiranItem.setSeiriNo(shoShiharaiList.get整理番号());
-                ichiranItem.setKeteiTsuchiNo(shoShiharaiList.get決定通知No());
-                ichiranItem.setHihokenshaNo(new RString(shoShiharaiList.get被保険者番号().toString()));
-                ichiranItem.setHihokenshaName(shoShiharaiList.get被保険者氏名());
-                ichiranItem.setJusho(shoShiharaiList.get住所());
-                ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
-                ichiranItem.setTeikyo(shoShiharaiList.get提供年月().wareki().
-                        eraType(EraType.KANJI_RYAKU).
-                        firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.PERIOD).
-                        fillType(FillType.BLANK).toDateString());
-                // TODO 要介護度 QA1106
-                ichiranItem.setNinteiKaishibi(共通ポリシfomart(shoShiharaiList.get認定開始日()));
-                ichiranItem.setNinteiShuryobi(共通ポリシfomart(shoShiharaiList.get認定終了日()));
-                ichiranItem.setUketsukeYMD(共通ポリシfomart(shoShiharaiList.get受付年月日()));
-                ichiranItem.setKeteiYMD(共通ポリシfomart(shoShiharaiList.get決定年月日()));
-                ichiranItem.setHonjinShiharaigaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
-                ichiranItem.setShikyugaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
-                ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
-                RStringBuilder nituliki = new RStringBuilder();
-                nituliki.append(new RString("("));
-                nituliki.append(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get金額(), 1));
-                nituliki.append(new RString(")"));
-                ichiranItem.setTuika(RString.EMPTY);
-                ichiranItem.setShurui(shoShiharaiList.get種類());
-                ichiranItem.setKeteiKubun(new RString(ShikyuFushikyuKubun.toValue(shoShiharaiList.get支給不支給決定区分()).get名称().toString()));
-                ichiranItem.setShiharaiHoho(new RString(ShiharaiHohoKubun.toValue(shoShiharaiList.get支払方法区分コード()).get名称().toString()));
-                tsuchiIchiranItemsList.add(ichiranItem);
+        for (ShokanKetteiTsuchiShoShiharai shoShiharaiList : businessList) {
+            ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem ichiranItem = new ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem();
+            IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
+            ichiranItem.setHokenshaNo(association.get地方公共団体コード().getColumnValue());
+            ichiranItem.setHokenshaName(association.get市町村名());
+            // TODO QA#73393 改頁 ,並び順取得。
+            ichiranItem.setShutsuryokujun1(null);
+            ichiranItem.setShutsuryokujun2(null);
+            ichiranItem.setShutsuryokujun3(null);
+            ichiranItem.setShutsuryokujun4(null);
+            ichiranItem.setShutsuryokujun5(null);
+            ichiranItem.setKaipage1(null);
+            ichiranItem.setKaipage2(null);
+            ichiranItem.setKaipage3(null);
+            ichiranItem.setKaipage4(null);
+            ichiranItem.setKaipage5(null);
+            if (!hihokenshaNo.equals(shoShiharaiList.get被保険者番号().value())) {
+                ichiranItem.setRenban(new RString(String.valueOf(++renban)));
             }
+            hihokenshaNo = shoShiharaiList.get被保険者番号().value();
+            ichiranItem.setPrintTimeStamp(get作成日時分秒());
+            ichiranItem.setSeiriNo(shoShiharaiList.get整理番号());
+            ichiranItem.setKeteiTsuchiNo(shoShiharaiList.get決定通知No());
+            ichiranItem.setHihokenshaNo(new RString(shoShiharaiList.get被保険者番号().toString()));
+            ichiranItem.setHihokenshaName(shoShiharaiList.get被保険者氏名());
+            ichiranItem.setJusho(shoShiharaiList.get住所());
+            ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
+            ichiranItem.setTeikyo(shoShiharaiList.get提供年月().wareki().
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).
+                    fillType(FillType.BLANK).toDateString());
+            // TODO 要介護度 QA1106
+            ichiranItem.setNinteiKaishibi(共通ポリシfomart(shoShiharaiList.get認定開始日()));
+            ichiranItem.setNinteiShuryobi(共通ポリシfomart(shoShiharaiList.get認定終了日()));
+            ichiranItem.setUketsukeYMD(共通ポリシfomart(shoShiharaiList.get受付年月日()));
+            ichiranItem.setKeteiYMD(共通ポリシfomart(shoShiharaiList.get決定年月日()));
+            ichiranItem.setHonjinShiharaigaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
+            ichiranItem.setShikyugaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
+            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
+            RStringBuilder nituliki = new RStringBuilder();
+            nituliki.append(new RString("("));
+            nituliki.append(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get金額(), 1));
+            nituliki.append(new RString(")"));
+            ichiranItem.setYoshikigotoKingaku(nituliki.toRString());
+            ichiranItem.setTuika(RString.EMPTY);
+            ichiranItem.setShurui(shoShiharaiList.get種類());
+            ichiranItem.setKeteiKubun(new RString(ShikyuFushikyuKubun.toValue(shoShiharaiList.get支給不支給決定区分()).get名称().toString()));
+            ichiranItem.setShiharaiHoho(new RString(ShiharaiHohoKubun.toValue(shoShiharaiList.get支払方法区分コード()).get名称().toString()));
+            tsuchiIchiranItemsList.add(ichiranItem);
         }
         return tsuchiIchiranItemsList;
-    }
-
-    /**
-     *
-     * 作成日時取得です。
-     *
-     */
-    private static RString get作成日時() {
-        RStringBuilder systemDateTime = new RStringBuilder();
-        RDateTime datetime = RDate.getNowDateTime();
-        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        return systemDateTime.toRString();
     }
 
     /**
