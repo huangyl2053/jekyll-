@@ -150,20 +150,19 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
             市町村コード = entity.get市町村ID().value();
             市町村名 = entity.get市町村名称();
             HihokenshaDaichoHakkoIchiranhyoBodyItem bodyItem = new HihokenshaDaichoHakkoIchiranhyoBodyItem(
+                    entity.get被保険者番号().value(),
                     entity.get氏名カナ() != null && !entity.get氏名カナ().isEmpty() ? entity.get氏名カナ().value() : RString.EMPTY,
                     entity.get性別(),
                     entity.get年齢(),
                     entity.get行政区() != null && !entity.get行政区().isEmpty() ? entity.get行政区().value() : RString.EMPTY,
+                    entity.get郵便番号() != null && !entity.get郵便番号().isEmpty() ? entity.get郵便番号().value() : RString.EMPTY,
                     entity.get識別コード() != null && !entity.get識別コード().isEmpty() ? entity.get識別コード().value() : RString.EMPTY,
                     entity.get状態区分(),
                     entity.get生保(),
                     entity.get備考(),
-                    new RString(String.valueOf(entity.getリストNO())),
-                    entity.get被保険者番号().value(),
                     entity.get氏名() != null && !entity.get氏名().isEmpty() ? entity.get氏名().value() : RString.EMPTY,
                     entity.get生年月日(),
                     entity.get住所(),
-                    entity.get郵便番号() != null && !entity.get郵便番号().isEmpty() ? entity.get郵便番号().value() : RString.EMPTY,
                     entity.get世帯コード() != null && !entity.get世帯コード().isEmpty() ? entity.get世帯コード().value() : RString.EMPTY,
                     entity.get資格区分(),
                     entity.get老福());
