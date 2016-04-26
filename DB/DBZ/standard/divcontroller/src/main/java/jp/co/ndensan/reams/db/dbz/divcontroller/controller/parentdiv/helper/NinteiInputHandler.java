@@ -7,13 +7,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-// TODO n8187久保田 dbxのJukyushaDaichoに置換すること。
-import jp.co.ndensan.reams.db.dbz.business.core.JukyushaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-// TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
+import jp.co.ndensan.reams.db.dbz.business.core.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -32,8 +30,12 @@ public class NinteiInputHandler {
 
     private final NinteiInputDiv div;
 
-    private final RString DEFAULT_NINTEIKUBUN_KEY = new RString("0");
-    private final CodeShubetsu SERVICESHITEI_CODE_SHUBETSU = new CodeShubetsu("0002");
+    private final RString default_ninteikubun_key = new RString("0");
+    private final CodeShubetsu serviceshitei_code_shubetsu = new CodeShubetsu("0002");
+    private static final int 数字_6 = 6;
+    private static final int 数字_12 = 12;
+    private static final int 数字_18 = 18;
+    private static final int 数字_24 = 24;
 
     /**
      * コンストラクタです。
@@ -44,6 +46,10 @@ public class NinteiInputHandler {
         this.div = div;
     }
 
+    /**
+     * 初期化メソッド
+     *
+     */
     public void intialize() {
 
         switch (div.getMode_ShoriType()) {
@@ -73,7 +79,7 @@ public class NinteiInputHandler {
 
     private void setReadOnly() {
 
-        if (div.getRadNinteiKubun().getSelectedKey().equals(DEFAULT_NINTEIKUBUN_KEY)) {
+        if (div.getRadNinteiKubun().getSelectedKey().equals(default_ninteikubun_key)) {
             div.getTxtYokaigodoCode().setReadOnly(false);
             div.getTxtYukoKaishiYMD().setReadOnly(false);
             div.getTxtYukoShuryoYMD().setReadOnly(false);
@@ -89,29 +95,44 @@ public class NinteiInputHandler {
         }
     }
 
+    /**
+     * クリックアクション_onClickSixMonthLater
+     */
     public void onClickSixMonthLater() {
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(6));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(数字_6));
 
     }
 
+    /**
+     * クリックアクション_onClickTwelveMonthLater
+     */
     public void onClickTwelveMonthLater() {
 
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(12));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(数字_12));
 
     }
 
+    /**
+     * クリックアクション_onClickEighteenMonthLater
+     */
     public void onClickEighteenMonthLater() {
 
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(18));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(数字_18));
 
     }
 
+    /**
+     * クリックアクション_onClickTwentyfourMonthLater
+     */
     public void onClickTwentyfourMonthLater() {
 
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(24));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(数字_24));
 
     }
 
+    /**
+     * クリア
+     */
     public void clear() {
         div.getTxtNinteiYMD().clearValue();
         div.getTxtShinsakaiIken().clearValue();
@@ -120,7 +141,7 @@ public class NinteiInputHandler {
         div.getTxtYukoKaishiYMD().clearValue();
         div.getTxtYukoShuryoYMD().clearValue();
 
-        div.getRadNinteiKubun().setSelectedKey(DEFAULT_NINTEIKUBUN_KEY);
+        div.getRadNinteiKubun().setSelectedKey(default_ninteikubun_key);
         div.getChkMinashiKoshinNintei().setSelectedItemsByKey(new ArrayList<RString>());
         div.getDgServiceIchiran().setSelectedItems(new ArrayList<dgServiceIchiran_Row>());
     }
@@ -179,7 +200,7 @@ public class NinteiInputHandler {
 
         List<dgServiceIchiran_Row> serviceIchiranList = new ArrayList<>();
 
-        List<UzT0007CodeEntity> codeMaster = CodeMaster.getCode(SubGyomuCode.DBD介護受給, SERVICESHITEI_CODE_SHUBETSU);
+        List<UzT0007CodeEntity> codeMaster = CodeMaster.getCode(SubGyomuCode.DBD介護受給, serviceshitei_code_shubetsu);
 
         for (UDT022CodeTable siteiService : codeMaster) {
             dgServiceIchiran_Row dgServiceIchiran_Row = new dgServiceIchiran_Row(siteiService.getコード().value(), siteiService.getコード名称());
@@ -196,7 +217,7 @@ public class NinteiInputHandler {
     }
 
     private void setShiteiService() {
-        List<UzT0007CodeEntity> code = CodeMaster.getCode(SubGyomuCode.DBD介護受給, SERVICESHITEI_CODE_SHUBETSU);
+        List<UzT0007CodeEntity> code = CodeMaster.getCode(SubGyomuCode.DBD介護受給, serviceshitei_code_shubetsu);
         List<dgServiceIchiran_Row> serviceIchiranList = new ArrayList<>();
         for (UDT022CodeTable siteiService : code) {
             serviceIchiranList.add(new dgServiceIchiran_Row(siteiService.getコード().value(), siteiService.getコード名称()));
