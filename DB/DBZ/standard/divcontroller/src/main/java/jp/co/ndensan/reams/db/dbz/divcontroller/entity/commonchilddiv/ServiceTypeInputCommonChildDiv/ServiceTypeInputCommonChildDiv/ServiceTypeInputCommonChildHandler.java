@@ -63,6 +63,7 @@ public class ServiceTypeInputCommonChildHandler {
         } else {
             div.getTxtServiceTypeName().setValue(focusServiceTypeList.records().get(0).getサービス種類名称());
         }
+        div.getTxtServiceType().setValue(serviceTypeCode);
         div.getTxtServiceTypeName().setDisabled(true);
     }
 
