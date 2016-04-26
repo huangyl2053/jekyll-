@@ -62,6 +62,9 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
             int 割付人数 = 0;
             boolean isExeNext = false;
             DbT5501ShinsakaiKaisaiYoteiJohoEntity 開催予定情報 = mapper.selectYoteiJohoForUpdate(shinsakaiKaisaiNo.get(i));
+            if (開催予定情報 == null) {
+                continue;
+            }
             for (int j = 0; j < taisyosya.size(); j++) {
                 if (!(shinsakaiWaritsukeNinsu.get(i) < shinsakaiJidoWariateTeiin.get(i))) {
                     isExeNext = true;
