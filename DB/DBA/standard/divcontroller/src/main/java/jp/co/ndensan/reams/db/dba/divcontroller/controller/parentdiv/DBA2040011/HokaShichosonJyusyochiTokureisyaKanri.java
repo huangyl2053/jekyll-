@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.HokaShichosonJyusyochiTokureisyaKanriDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040011.HokaShichosonJyusyochiTokureisyaKanriHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriManager;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -67,7 +67,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onLoad(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
         menuId = ResponseHolder.getMenuID();
         div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().set状態(getMode().get(menuId));
-        getHandler(div).onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        getHandler(div).onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -80,7 +80,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         } else if (メニューID_施設退所により解除.equals(menuId)) {
             return ResponseData.of(div).setState(DBA2040011StateName.追加解除);
         } else if (メニューID_施設変更により変更.equals(menuId)) {
-            div.getCddShisetsuNyutaishoRirekiKanri().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+            div.getCddShisetsuNyutaishoRirekiKanri().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
             return ResponseData.of(div).setState(DBA2040011StateName.追加変更);
         }
         return ResponseData.of(div).respond();
@@ -178,7 +178,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             manager.checkHenkoJotai(paramaterList);
         }
         div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
-                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         if (メニューID_施設変更により変更.equals(ResponseHolder.getMenuID())) {
             div.getCddShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
         }
