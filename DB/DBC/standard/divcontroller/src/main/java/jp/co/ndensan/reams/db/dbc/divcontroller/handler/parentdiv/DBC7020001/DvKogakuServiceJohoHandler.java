@@ -131,7 +131,6 @@ public class DvKogakuServiceJohoHandler {
      * 金融機関共有子Divの制御のメソッドます
      */
     public void getKinyuKikanSeigyo() {
-        // 「すべて」「口座払い」が選択された場合、金融機関共有子Divを活性にする
         if (すべて.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())
                 || 口座払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())) {
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setVisible(true);
@@ -336,11 +335,6 @@ public class DvKogakuServiceJohoHandler {
         return batchparam;
     }
 
-    /**
-     * 処理状況リストの取得
-     *
-     * @return List<KeyValueDataSource>
-     */
     private List<KeyValueDataSource> get処理状況リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShoriJokyo 処理状況 : ShoriJokyo.values()) {
@@ -350,11 +344,6 @@ public class DvKogakuServiceJohoHandler {
         return dataSourceList;
     }
 
-    /**
-     * 審査方法リストの取得
-     *
-     * @return List<KeyValueDataSource>
-     */
     private List<KeyValueDataSource> get審査方法リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShinsaHoho 審査方法 : ShinsaHoho.values()) {
@@ -364,11 +353,6 @@ public class DvKogakuServiceJohoHandler {
         return dataSourceList;
     }
 
-    /**
-     * 算定基準リストの取得
-     *
-     * @return　List<KeyValueDataSource>
-     */
     private List<KeyValueDataSource> get算定基準リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (SanteiKijun 算定基準 : SanteiKijun.values()) {
@@ -378,11 +362,6 @@ public class DvKogakuServiceJohoHandler {
         return dataSourceList;
     }
 
-    /**
-     * 国保連不一致リストの取得
-     *
-     * @return　List<KeyValueDataSource>
-     */
     private List<KeyValueDataSource> get国保連不一致リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (KokuhorenFuicchi 国保連不一致 : KokuhorenFuicchi.values()) {
@@ -392,11 +371,6 @@ public class DvKogakuServiceJohoHandler {
         return dataSourceList;
     }
 
-    /**
-     * 対象者リストの取得
-     *
-     * @return　List<KeyValueDataSource>
-     */
     private List<KeyValueDataSource> get対象者リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (Taishosha 対象者 : Taishosha.values()) {
@@ -406,11 +380,6 @@ public class DvKogakuServiceJohoHandler {
         return dataSourceList;
     }
 
-    /**
-     * 申請区分リストの取得
-     *
-     * @return　List<KeyValueDataSource>
-     */
     private List<KeyValueDataSource> get申請区分リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShinseiKubun 申請区分 : ShinseiKubun.values()) {
@@ -420,11 +389,6 @@ public class DvKogakuServiceJohoHandler {
         return dataSourceList;
     }
 
-    /**
-     * 支払先リストの取得
-     *
-     * @return　List<KeyValueDataSource>
-     */
     private List<KeyValueDataSource> get支払先リスト() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShiharaiSaki 支払先 : ShiharaiSaki.values()) {
@@ -434,9 +398,6 @@ public class DvKogakuServiceJohoHandler {
         return dataSourceList;
     }
 
-    /**
-     * 静的な内部クラス
-     */
     private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;

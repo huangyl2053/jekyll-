@@ -242,23 +242,28 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
     }
 
-    private LasdecCode get市町村コード() {
+    private LasdecCode get導入形態チェック() {
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村情報セキュリティ情報 != null && 市町村情報セキュリティ情報.get導入形態コード() != null) {
-            if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-                    || new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-                    || new RString("211").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
-                IHistoryIterator<IShikibetsuTaisho> ite = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
-                        .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().getAll();
-                if (ite.hasPrevious()) {
-                    return ite.previous().get現全国地方公共団体コード();
-                }
-            } else if (new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value())
-                    || new RString("220").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
-                KoikiShichosonJohoFinder johoFinder = KoikiShichosonJohoFinder.createInstance();
-                List<KoikiZenShichosonJoho> johoList = johoFinder.koseiShichosonJoho().records();
-                return johoList.get(0).get市町村コード();
+            get市町村コード(市町村情報セキュリティ情報);
+        }
+        return LasdecCode.EMPTY;
+    }
+
+    private LasdecCode get市町村コード(ShichosonSecurityJoho 市町村情報セキュリティ情報) {
+        if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                || new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                || new RString("211").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+            IHistoryIterator<IShikibetsuTaisho> ite = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                    .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().getAll();
+            if (ite.hasPrevious()) {
+                return ite.previous().get現全国地方公共団体コード();
             }
+        } else if (new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                || new RString("220").equals(市町村情報セキュリティ情報.get導入形態コード().value())) {
+            KoikiShichosonJohoFinder johoFinder = KoikiShichosonJohoFinder.createInstance();
+            List<KoikiZenShichosonJoho> johoList = johoFinder.koseiShichosonJoho().records();
+            return johoList.get(0).get市町村コード();
         }
         return LasdecCode.EMPTY;
     }
@@ -275,7 +280,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
                 build.set資格取得届出年月日(row.getShutokuTodokedeDate().getValue());
                 build.set資格取得事由コード(row.getShutokuJiyuKey());
                 build.set資格取得年月日(row.getShutokuDate().getValue());
-                build.set市町村コード(get市町村コード());
+                build.set市町村コード(get導入形態チェック());
                 build.set被保険者区分コード(RString.EMPTY);
                 if (合併あり.equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
                     IHistoryIterator<IShikibetsuTaisho> ite = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()

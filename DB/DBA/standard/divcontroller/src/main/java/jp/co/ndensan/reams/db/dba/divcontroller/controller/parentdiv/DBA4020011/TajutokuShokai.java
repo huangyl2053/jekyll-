@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA4020011.Taj
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureidaicho.TashichosonJushochiTokureiDaichoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochi.TashichosonJushochitokureishaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -57,7 +57,7 @@ public class TajutokuShokai {
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(key.get識別コード());
         div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(key.get識別コード());
         div.getTajutokuTekiyoJohoIchiran().getCcdTaJushochiTokureishaKanri().initialize(key.get識別コード());
-        div.getJutokuJohoTeiseiIchiran().getCcdShisetsuNyushRirekiKanri().initialize(key.get識別コード(), DaichoType.他市町村住所地特例者.getCode());
+        div.getJutokuJohoTeiseiIchiran().getCcdShisetsuNyushRirekiKanri().initialize(key.get識別コード(), DaichoType.他市町村住所地特例者.getコード());
         return ResponseData.of(div).setState(DBA4020011StateName.他市町村住所特例者照会);
     }
 

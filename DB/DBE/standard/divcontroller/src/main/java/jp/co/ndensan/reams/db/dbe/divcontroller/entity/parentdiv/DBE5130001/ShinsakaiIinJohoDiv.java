@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
@@ -12,12 +11,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinsakaiIinJoho のクラスファイル
- *
+ * ShinsakaiIinJoho のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShinsakaiIinJohoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,10 +33,10 @@ public class ShinsakaiIinJohoDiv extends Panel {
     private TextBox txtShimei;
     @JsonProperty("txtKanaShimei")
     private TextBox txtKanaShimei;
-    @JsonProperty("txtBirthYMD")
-    private TextBoxFlexibleDate txtBirthYMD;
     @JsonProperty("radSeibetsu")
     private RadioButton radSeibetsu;
+    @JsonProperty("txtBirthYMD")
+    private TextBoxFlexibleDate txtBirthYMD;
     @JsonProperty("ddlShikakuCode")
     private DropDownList ddlShikakuCode;
     @JsonProperty("txtBiko")
@@ -142,24 +141,6 @@ public class ShinsakaiIinJohoDiv extends Panel {
     }
 
     /*
-     * gettxtBirthYMD
-     * @return txtBirthYMD
-     */
-    @JsonProperty("txtBirthYMD")
-    public TextBoxFlexibleDate getTxtBirthYMD() {
-        return txtBirthYMD;
-    }
-
-    /*
-     * settxtBirthYMD
-     * @param txtBirthYMD txtBirthYMD
-     */
-    @JsonProperty("txtBirthYMD")
-    public void setTxtBirthYMD(TextBoxFlexibleDate txtBirthYMD) {
-        this.txtBirthYMD = txtBirthYMD;
-    }
-
-    /*
      * getradSeibetsu
      * @return radSeibetsu
      */
@@ -175,6 +156,24 @@ public class ShinsakaiIinJohoDiv extends Panel {
     @JsonProperty("radSeibetsu")
     public void setRadSeibetsu(RadioButton radSeibetsu) {
         this.radSeibetsu = radSeibetsu;
+    }
+
+    /*
+     * gettxtBirthYMD
+     * @return txtBirthYMD
+     */
+    @JsonProperty("txtBirthYMD")
+    public TextBoxFlexibleDate getTxtBirthYMD() {
+        return txtBirthYMD;
+    }
+
+    /*
+     * settxtBirthYMD
+     * @param txtBirthYMD txtBirthYMD
+     */
+    @JsonProperty("txtBirthYMD")
+    public void setTxtBirthYMD(TextBoxFlexibleDate txtBirthYMD) {
+        this.txtBirthYMD = txtBirthYMD;
     }
 
     /*

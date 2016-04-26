@@ -8,12 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA7010001
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHikokenshaDaichoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001.DvHikokenshaDaichoDivHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001.DvHikokenshaDaichoDivValidationHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -104,16 +99,7 @@ public class DvHikokenshaDaicho {
      * @return ResponseData<DvHikokenshaDaichoDiv>
      */
     public ResponseData<DvHikokenshaDaichoDiv> onClick_btnExecute(DvHikokenshaDaichoDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).onClick_btnKogakuParamSave();
-        }
+        getHandler(div).onClick_btnKogakuParamSave();
         return ResponseData.of(div).respond();
     }
 

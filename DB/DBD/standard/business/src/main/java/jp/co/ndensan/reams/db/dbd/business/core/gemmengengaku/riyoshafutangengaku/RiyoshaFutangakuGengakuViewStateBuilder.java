@@ -25,11 +25,23 @@ public class RiyoshaFutangakuGengakuViewStateBuilder {
         this.shorigoRirekiNo = shorigoRirekiNo;
     }
 
+    /**
+     * EntityDataStateを設定します。
+     *
+     * @param state EntityDataState
+     * @return {@link RiyoshaFutangakuGengakuViewState}のインスタンス
+     */
     public RiyoshaFutangakuGengakuViewStateBuilder setState(EntityDataState state) {
         this.state = state;
         return this;
     }
 
+    /**
+     * 処理後履歴番号を設定します。
+     *
+     * @param shinseiRirekiNo 処理後履歴番号
+     * @return {@link RiyoshaFutangakuGengakuViewState}のインスタンス
+     */
     public RiyoshaFutangakuGengakuViewStateBuilder setShorigoRirekiNo(int shinseiRirekiNo) {
         this.shorigoRirekiNo = shinseiRirekiNo;
         return this;

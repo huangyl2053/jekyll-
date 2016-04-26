@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyufushikyu
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 償還払支給（不支給）決定通知一覧表覧表のEditorです。
+ * 償還払支給（不支給）決定通知一覧表のEditorです。
  *
  * @reamsid_L DBC-1000-150 hezhenzhen
  *
@@ -21,6 +21,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
     private final ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem item;
     private static final int MAX = 24;
     private static final int MIN = 0;
+    private static final RString UTF = new RString("utf-8");
 
     /**
      * インスタンスを生成します。
@@ -55,16 +56,16 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         source.listUpper_3 = item.getKeteiTsuchiNo();
         source.listUpper_4 = item.getHihokenshaNo();
         RString hihokenshanamelenthMax = item.getHihokenshaName();
-        byte[] hihokenshaname = hihokenshanamelenthMax.toString().getBytes(Charset.forName("utf-8"));
+        byte[] hihokenshaname = hihokenshanamelenthMax.toString().getBytes(Charset.forName(UTF.toString()));
         byte[] getHihokenshaName = new byte[hihokenshaname.length <= MAX ? hihokenshaname.length : MAX];
         System.arraycopy(hihokenshaname, MIN, getHihokenshaName, MIN, hihokenshaname.length <= MAX ? hihokenshaname.length : MAX);
-        source.listUpper_5 = new RString(new String(getHihokenshaName, Charset.forName("utf-8")));
+        source.listUpper_5 = new RString(new String(getHihokenshaName, Charset.forName(UTF.toString())));
 
         RString jusholenthMax = item.getJusho();
-        byte[] jusho = jusholenthMax.toString().getBytes(Charset.forName("utf-8"));
+        byte[] jusho = jusholenthMax.toString().getBytes(Charset.forName(UTF.toString()));
         byte[] getJusho = new byte[jusho.length <= MAX ? jusho.length : MAX];
         System.arraycopy(jusho, MIN, getJusho, MIN, jusho.length <= MAX ? jusho.length : MAX);
-        source.listLower_1 = new RString(new String(getJusho, Charset.forName("utf-8")));
+        source.listLower_1 = new RString(new String(getJusho, Charset.forName(UTF.toString())));
 
         source.listUpper_6 = item.getYubinBango();
         source.listUpper_7 = item.getTeikyo();

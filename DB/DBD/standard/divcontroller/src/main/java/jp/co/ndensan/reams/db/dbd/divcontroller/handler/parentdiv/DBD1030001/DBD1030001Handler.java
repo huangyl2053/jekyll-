@@ -18,10 +18,9 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShu
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001Div;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.dgShinseiList_Row;
-import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenManager;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -60,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -107,9 +105,11 @@ public class DBD1030001Handler {
      *
      */
     public void onLoad() {
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123"));
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("123456"));
         ShikibetsuCode 識別コード = get識別コードFromViewState();
         HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
-        div.getCcdAtenaInfo().onLoad(識別コード);
+        //div.getCcdAtenaInfo().onLoad(識別コード);
         div.getCcdShikakuKihon().onLoad(被保険者番号);
         div.getShafukuRiyoshaKeigen().setHihokenshaNo(被保険者番号.getColumnValue());
         RString メニューID = ResponseHolder.getMenuID();
@@ -389,6 +389,7 @@ public class DBD1030001Handler {
                         return new ShakaifukuRiyoshaFutanKeigenToJotai(最初情報, RString.EMPTY, 情報と状態.get新履歴番号());
                     }
                 }
+                return 情報と状態;
             }
         }
         return null;
@@ -1244,165 +1245,9 @@ public class DBD1030001Handler {
      */
     public void onClick_btnUpdate() {
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
-        更新処理(情報と状態ArrayList);
+        ShakaiFukushiHojinKeigenManager.createIntance().更新処理(情報と状態ArrayList, ResponseHolder.getMenuID());
         前排他の解除();
         div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-    }
-
-    @Transaction
-    private void 更新処理(ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList) {
-        for (ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 : 情報と状態ArrayList) {
-            RString 状態 = 情報と状態.get状態();
-            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
-            int 履歴番号 = 情報と状態.get新履歴番号();
-            if (状態_削除.equals(状態)) {
-                削除処理(社会福祉法人等利用者負担軽減情報);
-            } else if (状態_修正.equals(状態)) {
-                if (履歴番号 == 社会福祉法人等利用者負担軽減情報.get履歴番号()) {
-                    修正処理(社会福祉法人等利用者負担軽減情報);
-                } else {
-                    削除処理(社会福祉法人等利用者負担軽減情報);
-                    追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号));
-                }
-            } else if (状態_追加.equals(状態)) {
-                追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号));
-            } else if (履歴番号 != 社会福祉法人等利用者負担軽減情報.get履歴番号()) {
-                削除処理(社会福祉法人等利用者負担軽減情報);
-                追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号));
-            }
-        }
-    }
-
-    private ShakaifukuRiyoshaFutanKeigen get社会福祉法人等利用者負担軽減情報ByChange履歴番号(
-            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報, int 履歴番号) {
-        ShakaifukuRiyoshaFutanKeigen new社会福祉法人等利用者負担軽減情報 = new ShakaifukuRiyoshaFutanKeigen(
-                社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
-                社会福祉法人等利用者負担軽減情報.get被保険者番号(),
-                履歴番号);
-        ShakaifukuRiyoshaFutanKeigenBuilder builder = new社会福祉法人等利用者負担軽減情報.createBuilderForEdit();
-        builder.set申請年月日(社会福祉法人等利用者負担軽減情報.get申請年月日());
-        builder.set申請事由(社会福祉法人等利用者負担軽減情報.get申請事由());
-        if (社会福祉法人等利用者負担軽減情報.get決定区分() != null) {
-            builder.set決定区分(社会福祉法人等利用者負担軽減情報.get決定区分());
-        }
-        builder.set決定年月日(社会福祉法人等利用者負担軽減情報.get決定年月日());
-        builder.set適用開始年月日(社会福祉法人等利用者負担軽減情報.get適用開始年月日());
-        builder.set適用終了年月日(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
-        builder.set減免区分(社会福祉法人等利用者負担軽減情報.get減免区分());
-        if (社会福祉法人等利用者負担軽減情報.get軽減率_分子() != null) {
-            builder.set軽減率_分子(社会福祉法人等利用者負担軽減情報.get軽減率_分子());
-        }
-        if (社会福祉法人等利用者負担軽減情報.get軽減率_分母() != null) {
-            builder.set軽減率_分母(社会福祉法人等利用者負担軽減情報.get軽減率_分母());
-        }
-        builder.set生保扶助見直し特例有無(社会福祉法人等利用者負担軽減情報.is生保扶助見直し特例有無());
-        builder.set居宅サービス限定(社会福祉法人等利用者負担軽減情報.is居宅サービス限定());
-        builder.set居住費_食費のみ(社会福祉法人等利用者負担軽減情報.is居住費_食費のみ());
-        builder.set旧措置者ユニット型個室のみ(社会福祉法人等利用者負担軽減情報.is旧措置者ユニット型個室のみ());
-        builder.set確認番号(社会福祉法人等利用者負担軽減情報.get確認番号());
-        builder.set非承認理由(社会福祉法人等利用者負担軽減情報.get非承認理由());
-        builder.set生活保護受給有無(社会福祉法人等利用者負担軽減情報.is生活保護受給有無());
-        builder.set老齢福祉年金受給有無(社会福祉法人等利用者負担軽減情報.is老齢福祉年金受給有無());
-        List<GemmenGengakuShinsei> gemmenGengakuShinseiList = 社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList();
-        for (GemmenGengakuShinsei gemmenGengakuShinsei : gemmenGengakuShinseiList) {
-            builder.setGemmenGengakuShinsei(get減免減額申請ByChange履歴番号(gemmenGengakuShinsei, 履歴番号));
-        }
-        return builder.build();
-    }
-
-    private void 修正処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報) {
-        ShafukuRiyoshaFutanKeigenManager manager = ShafukuRiyoshaFutanKeigenManager.createInstance();
-        ShakaifukuRiyoshaFutanKeigen 修正社会福祉法人等利用者負担軽減情報
-                = manager.get社会福祉法人等利用者負担軽減(ShafukuRiyoshaFutanKeigenMapperParameter.createSelectByKeyParam(
-                                社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
-                                社会福祉法人等利用者負担軽減情報.get被保険者番号(),
-                                社会福祉法人等利用者負担軽減情報.get履歴番号()));
-        ShakaifukuRiyoshaFutanKeigenBuilder builder = 修正社会福祉法人等利用者負担軽減情報.createBuilderForEdit();
-        edit修正社会福祉法人等利用者負担軽減情報(社会福祉法人等利用者負担軽減情報, builder);
-        List<GemmenGengakuShinsei> 減免減額申請リスト = 修正社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList();
-        builder.setGemmenGengakuShinsei(get修正減免減額申請(
-                社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList().get(0),
-                減免減額申請リスト.get(0)));
-        manager.save(builder.build());
-    }
-
-    private void edit修正社会福祉法人等利用者負担軽減情報(
-            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報,
-            ShakaifukuRiyoshaFutanKeigenBuilder builder) {
-        RString メニューID = ResponseHolder.getMenuID();
-        if (申請メニューID.equals(メニューID)) {
-            builder.set申請年月日(社会福祉法人等利用者負担軽減情報.get申請年月日());
-            if (社会福祉法人等利用者負担軽減情報.get申請事由() != null) {
-                builder.set申請事由(社会福祉法人等利用者負担軽減情報.get申請事由());
-            }
-        } else {
-            builder.set申請事由(社会福祉法人等利用者負担軽減情報.get申請事由());
-            RString 決定区分 = 社会福祉法人等利用者負担軽減情報.get決定区分();
-            builder.set決定区分(決定区分);
-            builder.set軽減率_分子(社会福祉法人等利用者負担軽減情報.get軽減率_分子());
-            builder.set軽減率_分母(社会福祉法人等利用者負担軽減情報.get軽減率_分母());
-            builder.set居宅サービス限定(社会福祉法人等利用者負担軽減情報.is居宅サービス限定());
-            builder.set居住費_食費のみ(社会福祉法人等利用者負担軽減情報.is居住費_食費のみ());
-            builder.set旧措置者ユニット型個室のみ(社会福祉法人等利用者負担軽減情報.is旧措置者ユニット型個室のみ());
-            builder.set確認番号(社会福祉法人等利用者負担軽減情報.get確認番号());
-            builder.set決定年月日(社会福祉法人等利用者負担軽減情報.get決定年月日());
-            if (承認する.equals(決定区分)) {
-                builder.set生保扶助見直し特例有無(社会福祉法人等利用者負担軽減情報.is生保扶助見直し特例有無());
-                builder.set減免区分(社会福祉法人等利用者負担軽減情報.get減免区分());
-                builder.set適用開始年月日(社会福祉法人等利用者負担軽減情報.get適用開始年月日());
-                builder.set適用終了年月日(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
-                builder.set非承認理由(RString.EMPTY);
-            } else {
-                builder.set非承認理由(社会福祉法人等利用者負担軽減情報.get非承認理由());
-            }
-        }
-    }
-
-    private GemmenGengakuShinsei get修正減免減額申請(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 減免減額申請FromDb) {
-        GemmenGengakuShinseiBuilder builder = 減免減額申請FromDb.createBuilderForEdit();
-        if (減免減額申請.get事業者区分() != null) {
-            builder.set事業者区分(減免減額申請.get事業者区分());
-        }
-        if (減免減額申請.get申請届出代行事業者番号() != null) {
-            builder.set申請届出代行事業者番号(減免減額申請.get申請届出代行事業者番号());
-        }
-        if (減免減額申請.get申請届出代行区分() != null) {
-            builder.set申請届出代行区分(減免減額申請.get申請届出代行区分());
-        }
-        if (減免減額申請.get申請届出者住所() != null) {
-            builder.set申請届出者住所(減免減額申請.get申請届出者住所());
-        }
-        if (減免減額申請.get申請届出者氏名() != null) {
-            builder.set申請届出者氏名(減免減額申請.get申請届出者氏名());
-        }
-        if (減免減額申請.get申請届出者氏名カナ() != null) {
-            builder.set申請届出者氏名カナ(減免減額申請.get申請届出者氏名カナ());
-        }
-        if (減免減額申請.get申請届出者続柄() != null) {
-            builder.set申請届出者続柄(減免減額申請.get申請届出者続柄());
-        }
-        if (減免減額申請.get申請届出者郵便番号() != null) {
-            builder.set申請届出者郵便番号(減免減額申請.get申請届出者郵便番号());
-        }
-        if (減免減額申請.get申請届出者電話番号() != null) {
-            builder.set申請届出者電話番号(減免減額申請.get申請届出者電話番号());
-        }
-        return builder.build();
-    }
-
-    private void 削除処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報) {
-        ShafukuRiyoshaFutanKeigenManager manager = ShafukuRiyoshaFutanKeigenManager.createInstance();
-        ShakaifukuRiyoshaFutanKeigen 削除社会福祉法人等利用者負担軽減情報
-                = manager.get社会福祉法人等利用者負担軽減(ShafukuRiyoshaFutanKeigenMapperParameter.createSelectByKeyParam(
-                                社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
-                                社会福祉法人等利用者負担軽減情報.get被保険者番号(),
-                                社会福祉法人等利用者負担軽減情報.get履歴番号()));
-        manager.delete社会福祉法人等利用者負担軽減(削除社会福祉法人等利用者負担軽減情報);
-    }
-
-    private void 追加処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報) {
-        ShafukuRiyoshaFutanKeigenManager manager = ShafukuRiyoshaFutanKeigenManager.createInstance();
-        manager.save(社会福祉法人等利用者負担軽減情報);
     }
 
     /**

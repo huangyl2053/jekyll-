@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei;
+package jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei;
 
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
