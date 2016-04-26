@@ -79,16 +79,7 @@ public class TekiyoJogaiRireki {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         } else {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-                return ResponseData.of(requestDiv).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDatagridTekiyoJogai().getActiveRow(), 画面状態);
-            }
+            getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDatagridTekiyoJogai().getActiveRow(), 画面状態);
         }
         return ResponseData.of(requestDiv).respond();
     }

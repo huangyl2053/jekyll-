@@ -68,7 +68,8 @@ public class TekiyoJogaiRirekiValidationHandler {
                             div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
                 } else {
                     if (最新の適用情報.getTekiyoDate() != null
-                            && (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().isBeforeOrEquals(
+                            && (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue() != null
+                            && div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().isBeforeOrEquals(
                                     最新の適用情報.getTekiyoDate().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
@@ -78,7 +79,7 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由,
                             div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput()));
                 }
-            } else if (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態)) {
+            } else if (状態_訂正履歴.equals(画面状態) && (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()))) {
                 if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日,
                             div.getPanelTekiyoInput().getTxtTekiyoDate()));
@@ -97,7 +98,7 @@ public class TekiyoJogaiRirekiValidationHandler {
                             div.getPanelTekiyoInput().getDdlTekiyoJiyu()));
                 }
             }
-            if (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態)) {
+            if (状態_訂正履歴.equals(画面状態) && (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()))) {
                 if (div.getPanelTekiyoInput().getTxtKayijoDate().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(
                             RRVMessages.解除日, div.getPanelTekiyoInput().getTxtKayijoDate()));
@@ -124,7 +125,7 @@ public class TekiyoJogaiRirekiValidationHandler {
                             RRVMessages.解除事由, div.getPanelTekiyoJokaiKaiJyoInput().getDdlKaijoJiyuInput()));
                 }
             }
-            if ((状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()) || 状態_訂正履歴.equals(画面状態))) {
+            if (状態_訂正履歴.equals(画面状態) && (状態_追加.equals(div.getStauts()) || 状態_修正.equals(div.getStauts()))) {
                 if (div.getPanelTekiyoInput().getTxtTekiyoDate().getValue() != null
                         && div.getPanelTekiyoInput().getTxtKayijoDate().getValue() != null
                         && div.getPanelTekiyoInput().getTxtKayijoDate().getValue().isBefore(
@@ -187,16 +188,15 @@ public class TekiyoJogaiRirekiValidationHandler {
                 }
             }
             if (状態_訂正履歴.equals(画面状態)) {
-                期間重複チェック(div.getDatagridTekiyoJogai().getDataSource(), 最新の適用情報, validPairs);
+                期間重複チェック(div.getDatagridTekiyoJogai().getDataSource(), validPairs);
             }
         }
         return validPairs;
     }
 
-    private void 期間重複チェック(List<datagridTekiyoJogai_Row> 適用情報リスト,
-            datagridTekiyoJogai_Row 最新の適用情報, ValidationMessageControlPairs validPairs) {
+    private void 期間重複チェック(List<datagridTekiyoJogai_Row> 適用情報リスト, ValidationMessageControlPairs validPairs) {
         for (datagridTekiyoJogai_Row row : 適用情報リスト) {
-            if (RowState.Deleted.equals(row.getRowState()) || row.getId() == 最新の適用情報.getId()) {
+            if (RowState.Deleted.equals(row.getRowState()) || row.getId() == div.getDatagridTekiyoJogai().getActiveRow().getId()) {
                 continue;
             }
             if (row.getKayijoDate().getValue() == null) {
@@ -246,8 +246,8 @@ public class TekiyoJogaiRirekiValidationHandler {
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "解除日"),
         適用日と適用届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用届出日", メッセージ適用日.toString()),
         解除日と解除届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除届出日", "解除日"),
-        入所日の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所日", "入所施設"),
-        入所施設の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所施設", "入所日"),
+        入所施設の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所日", "入所施設"),
+        入所日の必須チェック(DbzErrorMessages.複数必須項目相関チェックエラー, "入所施設", "入所日"),
         適用日と直近データの適用日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ適用日.toString(), "直近データ．適用日"),
         期間が重複(UrErrorMessages.期間が重複);
         private final Message message;
