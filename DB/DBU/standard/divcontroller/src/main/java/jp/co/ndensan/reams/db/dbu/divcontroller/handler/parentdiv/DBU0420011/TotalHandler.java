@@ -426,7 +426,8 @@ public class TotalHandler {
                 business.get被保険者住所_転出先予定(), business.get被保険者異動予定日(), business.get保険者番号(), business.get発行日(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, business.get申請状況(), business.get申請年月日(),
                 business.get要介護状態区分(), business.get認定年月日(), business.get認定の有効期間の開始年月日(),
-                business.get認定の有効期間の終了年月日(), business.get認定審査会の意見等(), business.get備考(), business.get連番());
+                business.get認定の有効期間の終了年月日(), business.get認定審査会の意見等(), business.get備考(), business.get連番(),
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         items.add(item);
         return items;
     }
