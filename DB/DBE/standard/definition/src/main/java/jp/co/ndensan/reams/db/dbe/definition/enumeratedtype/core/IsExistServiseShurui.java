@@ -32,7 +32,7 @@ public enum IsExistServiseShurui {
      *
      * @return サービス種類の有無のコード
      */
-    public boolean getコード() {
+    public boolean isサービス種類の有無() {
         return code;
     }
 
