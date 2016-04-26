@@ -34,7 +34,7 @@ public class HanyoListAtenaSelect {
      * @return ResponseData<HanyoListAtenaSelectDiv>
      */
     public ResponseData<HanyoListAtenaSelectDiv> onChange_SelectChiku(HanyoListAtenaSelectDiv div) {
-        getHandler(div).onChange_ChikuSelect();
+        getHandler(div).onChange_SelectChiku();
         return ResponseData.of(div).respond();
     }
 

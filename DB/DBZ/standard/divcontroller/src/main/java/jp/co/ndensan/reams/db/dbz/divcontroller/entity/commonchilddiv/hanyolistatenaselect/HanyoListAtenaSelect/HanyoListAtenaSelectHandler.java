@@ -51,7 +51,6 @@ public class HanyoListAtenaSelectHandler {
             div.getDvChiku().setVisible(true);
         } else if (HokenshaKosei.広域市町村.code().equals(保険者構成.code())) {
             div.getCcdHokenshaList().setVisible(true);
-            div.getCcdHokenshaList().loadHokenshaList();
             div.getDvChiku().setVisible(false);
         }
         set初期項目状態();
@@ -65,7 +64,6 @@ public class HanyoListAtenaSelectHandler {
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村情報 != null && 市町村情報.get導入形態コード() != null && 市町村情報.get導入形態コード().is広域()) {
             div.getCcdHokenshaList().setVisible(true);
-            div.getCcdHokenshaList().loadHokenshaList();
             div.getDvChiku().setVisible(false);
         } else {
             div.getCcdHokenshaList().setVisible(false);
@@ -106,16 +104,18 @@ public class HanyoListAtenaSelectHandler {
     /**
      * 「地区」DDL連動処理をします。
      */
-    public void onChange_ChikuSelect() {
+    public void onChange_SelectChiku() {
         RString 地区 = div.getDdlChikuSelect().getSelectedKey();
         div.getDdlChikuSelect().setDisabled(false);
         if (Chiku.全て.getコード().equals(地区)) {
+            div.getCcdJushoFrom().setVisible(true);
             div.getCcdJushoFrom().setDisabled(true);
             div.getCcdJushoFrom().clear();
             div.getCcdGyoseikuFrom().setVisible(false);
             div.getCcdChiku1From().setVisible(false);
             div.getCcdChiku2From().setVisible(false);
             div.getCcdChiku3From().setVisible(false);
+            div.getCcdJushoTo().setVisible(true);
             div.getCcdJushoTo().setDisabled(true);
             div.getCcdJushoTo().clear();
             div.getCcdGyoseikuTo().setVisible(false);
@@ -123,12 +123,14 @@ public class HanyoListAtenaSelectHandler {
             div.getCcdChiku2To().setVisible(false);
             div.getCcdChiku3To().setVisible(false);
         } else if (Chiku.住所.getコード().equals(地区)) {
+            div.getCcdJushoFrom().setVisible(true);
             div.getCcdJushoFrom().setDisabled(false);
             div.getCcdJushoFrom().clear();
             div.getCcdGyoseikuFrom().setVisible(false);
             div.getCcdChiku1From().setVisible(false);
             div.getCcdChiku2From().setVisible(false);
             div.getCcdChiku3From().setVisible(false);
+            div.getCcdJushoTo().setVisible(true);
             div.getCcdJushoTo().setDisabled(false);
             div.getCcdJushoTo().clear();
             div.getCcdGyoseikuTo().setVisible(false);
@@ -137,12 +139,14 @@ public class HanyoListAtenaSelectHandler {
             div.getCcdChiku3To().setVisible(false);
         } else if (Chiku.行政区.getコード().equals(地区)) {
             div.getCcdJushoFrom().setVisible(false);
+            div.getCcdGyoseikuFrom().setVisible(true);
             div.getCcdGyoseikuFrom().setDisabled(false);
             div.getCcdGyoseikuFrom().clear();
             div.getCcdChiku1From().setVisible(false);
             div.getCcdChiku2From().setVisible(false);
             div.getCcdChiku3From().setVisible(false);
             div.getCcdJushoTo().setVisible(false);
+            div.getCcdGyoseikuTo().setVisible(true);
             div.getCcdGyoseikuTo().setDisabled(false);
             div.getCcdGyoseikuTo().clear();
             div.getCcdChiku1To().setVisible(false);
@@ -151,18 +155,24 @@ public class HanyoListAtenaSelectHandler {
         } else if (Chiku.地区.getコード().equals(地区)) {
             div.getCcdJushoFrom().setVisible(false);
             div.getCcdGyoseikuFrom().setVisible(false);
+            div.getCcdChiku1From().setVisible(true);
             div.getCcdChiku1From().setDisabled(false);
             div.getCcdChiku1From().clear();
+            div.getCcdChiku2From().setVisible(true);
             div.getCcdChiku2From().setDisabled(false);
             div.getCcdChiku2From().clear();
+            div.getCcdChiku3From().setVisible(true);
             div.getCcdChiku3From().setDisabled(false);
             div.getCcdChiku3From().clear();
             div.getCcdJushoTo().setVisible(false);
             div.getCcdGyoseikuTo().setVisible(false);
+            div.getCcdChiku1To().setVisible(true);
             div.getCcdChiku1To().setDisabled(false);
             div.getCcdChiku1To().clear();
+            div.getCcdChiku2To().setVisible(true);
             div.getCcdChiku2To().setDisabled(false);
             div.getCcdChiku2To().clear();
+            div.getCcdChiku3To().setVisible(true);
             div.getCcdChiku3To().setDisabled(false);
             div.getCcdChiku3To().clear();
         }
@@ -492,6 +502,18 @@ public class HanyoListAtenaSelectHandler {
     }
 
     private void set初期項目状態() {
+        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdJushoFrom().initialize();
+        div.getCcdGyoseikuFrom().initialize();
+        div.getCcdChiku1From().initialize();
+        div.getCcdChiku2From().initialize();
+        div.getCcdChiku3From().initialize();
+        div.getCcdJushoTo().initialize();
+        div.getCcdGyoseikuTo().initialize();
+        div.getCcdChiku1To().initialize();
+        div.getCcdChiku2To().initialize();
+        div.getCcdChiku3To().initialize();
+
         div.getRadSelectKijun().setDisabled(false);
         div.getTxtNenrei().setDisabled(false);
         div.getTxtSeinengappi().setDisabled(true);
