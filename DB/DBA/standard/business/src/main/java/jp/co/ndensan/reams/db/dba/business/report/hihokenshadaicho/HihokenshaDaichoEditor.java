@@ -114,7 +114,7 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
      * @return リスト項目の指定Index項
      */
     public static RString getIndexValue(List<RString> list, int index) {
-        if (list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             return RString.EMPTY;
         }
         return list.get(index);
