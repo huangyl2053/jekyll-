@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class HanyorisutoPanelHandler {
 
     private final HanyorisutoPanelDiv div;
-    private static final RString 事務広域 = new RString("111");
+    private static final RString 帳票ID = new RString("DBC701001_HanyoListKyotakuServiceKeikaku");
 
     /**
      * HanyorisutoPanelDiv取得します。
@@ -69,7 +69,7 @@ public class HanyorisutoPanelHandler {
             div.getRadSakuseiKubun().getSelectedKey();
             div.getRadChusyutuKubun().setSelectedKey(ChushutsuKubun.直近有効データ.getコード());
             div.getRadChusyutuKubun().getSelectedKey();
-            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId("DBC701001_HanyoListKyotakuServiceKeikaku"));
+            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(帳票ID));
             div.getTxtKijunYMD().setDisabled(true);
         }
     }
