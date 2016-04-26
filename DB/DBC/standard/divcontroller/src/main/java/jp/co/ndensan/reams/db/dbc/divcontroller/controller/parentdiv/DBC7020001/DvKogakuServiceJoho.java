@@ -53,30 +53,6 @@ public class DvKogakuServiceJoho {
     }
 
     /**
-     * onClick事件 条件の保存 画面条件の保存 処理詳細シート「2．条件の保存・復元」 のとおり、画面項目の設定値をバッチパラメータに設定、更新する。
-     *
-     * @param div DvKogakuServiceJohoDiv
-     * @return ResponseData
-     */
-    public ResponseData<DvKogakuServiceJohoDiv> onClick_btnKogakuParamSave(DvKogakuServiceJohoDiv div) {
-        DvKogakuServiceJohoHandler handler = getHandler(div);
-        handler.getCheckMessage();
-        // TODO
-        return createResponse(div);
-    }
-
-    /**
-     * onClick事件 条件の復元 画面条件の復元 処理詳細シート「2．条件の保存・復元」 のとおり、バッチパラメータより画面設定値を取得し画面項目にセットする。
-     *
-     * @param div DvKogakuServiceJohoDiv
-     * @return ResponseData
-     */
-    public ResponseData<DvKogakuServiceJohoDiv> onClick_btnKogakuParamRestore(DvKogakuServiceJohoDiv div) {
-        // TODO
-        return createResponse(div);
-    }
-
-    /**
      * onChange事件 支払先RDBボタンの制御事件
      *
      * @param div DvKogakuServiceJohoDiv
