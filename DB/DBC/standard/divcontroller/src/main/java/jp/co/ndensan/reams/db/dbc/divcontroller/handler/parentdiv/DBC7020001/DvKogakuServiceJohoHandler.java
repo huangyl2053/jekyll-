@@ -88,6 +88,7 @@ public class DvKogakuServiceJohoHandler {
      * 入力チェックのメソッドます。
      *
      * @return ValidationMessageControlPairs
+     *
      */
     public ValidationMessageControlPairs getCheckMessage() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
@@ -124,6 +125,70 @@ public class DvKogakuServiceJohoHandler {
 
         checkMessage();
         return pairs;
+    }
+
+    /**
+     * 金融機関共有子Divの制御のメソッドます
+     */
+    public void getKinyuKikanSeigyo() {
+        // 「すべて」「口座払い」が選択された場合、金融機関共有子Divを活性にする
+        if (すべて.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())
+                || 口座払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setVisible(true);
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().setDisabled(false);
+        }
+        if (窓口払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())
+                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode() == null || div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().isEmpty())
+                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関() == null)) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setVisible(true);
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().setDisabled(true);
+        }
+    }
+
+    /**
+     * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
+     *
+     * @return DvKogakuServiceJohoBatchParamter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     */
+    public DvKogakuServiceJohoBatchParamter getBatchParamter() {
+        DvKogakuServiceJohoBatchParamter batchparam = new DvKogakuServiceJohoBatchParamter();
+        if (事務広域.equals(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem().get市町村名称()) || 事務単一.equals(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
+            div.getDvKogakuChushutsuJoken().getCcdHokenshaList().isDisabled();
+        } else {
+            batchparam.setKouseiShichosonCode(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem().get市町村名称());
+        }
+        if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue() == null) {
+            batchparam.setServiceYmFrom(null);
+        } else {
+            batchparam.setServiceYmFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
+                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue().toDateString());
+        }
+        if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue() == null) {
+            batchparam.setServiceYmTo(null);
+        } else {
+            batchparam.setServiceYmTo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue().toDateString().isEmpty() ? RString.EMPTY : div
+                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue().toDateString());
+        }
+        batchparam.setShoriJokyo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedValue().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedValue());
+        batchparam.setShinsaHoho(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedValue().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedValue());
+        batchparam.setSanteiKijun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedValue().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedValue());
+        batchparam.setKokuhorenFuicchi(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedValue().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedValue());
+        batchparam.setTaishosha(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedValue().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedValue());
+        batchparam.setShinseiKubun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedValue().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedValue());
+        batchparam.setShiharaiSaki(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue());
+        batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().isEmpty() ? RString.EMPTY : div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
+
+        batchParamterHandleOne();
+        batchParamterHandleTwo();
+        return batchparam;
     }
 
     /**
@@ -174,68 +239,6 @@ public class DvKogakuServiceJohoHandler {
                     div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM()));
         }
         return pairs;
-    }
-
-    /**
-     * 金融機関共有子Divの制御のメソッドます
-     */
-    public void getKinyuKikanSeigyo() {
-        // 「すべて」「口座払い」が選択された場合、金融機関共有子Divを活性にする
-        if (すべて.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())
-                || 口座払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().isVisible();
-        }
-        if (窓口払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue())
-                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode() == null || div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().isEmpty())
-                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関() == null)) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().isDisabled();
-        }
-    }
-
-    /**
-     * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
-     *
-     * @return DvKogakuServiceJohoBatchParamter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
-     */
-    public DvKogakuServiceJohoBatchParamter getBatchParamter() {
-        DvKogakuServiceJohoBatchParamter batchparam = new DvKogakuServiceJohoBatchParamter();
-        if (事務広域.equals(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem().get市町村名称()) || 事務単一.equals(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem().get市町村名称())) {
-            div.getDvKogakuChushutsuJoken().getCcdHokenshaList().isDisabled();
-        } else {
-            batchparam.setKouseiShichosonCode(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem().get市町村名称());
-        }
-        if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue() == null) {
-            batchparam.setServiceYmFrom(null);
-        } else {
-            batchparam.setServiceYmFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue().toDateString());
-        }
-        if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue() == null) {
-            batchparam.setServiceYmTo(null);
-        } else {
-            batchparam.setServiceYmTo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue().toDateString());
-        }
-        batchparam.setShoriJokyo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedValue());
-        batchparam.setShinsaHoho(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedValue());
-        batchparam.setSanteiKijun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedValue());
-        batchparam.setKokuhorenFuicchi(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedValue());
-        batchparam.setTaishosha(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedValue());
-        batchparam.setShinseiKubun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedValue());
-        batchparam.setShiharaiSaki(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue());
-        batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
-
-        batchParamterHandleOne();
-        batchParamterHandleTwo();
-        return batchparam;
     }
 
     /**

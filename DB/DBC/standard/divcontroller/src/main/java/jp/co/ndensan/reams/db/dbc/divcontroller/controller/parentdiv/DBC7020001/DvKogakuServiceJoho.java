@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001.DvK
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class DvKogakuServiceJoho {
 
     private static final Code CODE_111 = new Code("111");
+    private static final ReportId 帳票ID = new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo");
 
     /**
      * 画面初期化のonLoadメソッドます。
@@ -43,6 +46,9 @@ public class DvKogakuServiceJoho {
             panel.getCcdHokenshaList().setDisabled(true);
             panel.getCcdHokenshaList().setVisible(false);
         }
+        div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
+        div.getDvCsvHenshuHoho().setVisible(true);
         return createResponse(div);
     }
 

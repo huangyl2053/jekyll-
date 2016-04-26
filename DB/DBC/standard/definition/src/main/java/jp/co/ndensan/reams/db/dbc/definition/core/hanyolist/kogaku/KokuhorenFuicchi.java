@@ -22,11 +22,11 @@ public enum KokuhorenFuicchi {
     /**
      * コード:1 名称:支給額不一致
      */
-    支給額不一致("1", "支給額不一致"),
+    支給額不一致("1", "支給額不一致(※1)"),
     /**
      * コード:2 名称:決定額不一致
      */
-    決定額不一致("2", "決定額不一致");
+    決定額不一致("2", "決定額不一致(※2)");
 
     private final RString code;
     private final RString fullName;
