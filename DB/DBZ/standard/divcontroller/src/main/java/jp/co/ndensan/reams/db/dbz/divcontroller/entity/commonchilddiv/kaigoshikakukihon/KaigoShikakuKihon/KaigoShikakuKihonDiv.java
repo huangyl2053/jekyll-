@@ -470,9 +470,17 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     private void initialization(KaigoAtenaKihonBusiness result) {
         this.txtHihokenshaNo.setValue(result.get被保険者番号().getColumnValue());
         this.txtShutokuYmd.setValue(result.get資格取得年月日());
-        this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).get名称());
+        if (!RString.isNullOrEmpty(result.get資格取得事由コード())) {
+            this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).get名称());
+        } else {
+            this.txtShutokuJiyu.setValue(RString.EMPTY);
+        }
         this.txtSoshitsuYmd.setValue(result.get資格喪失年月日());
-        this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).get名称());
+        if (!RString.isNullOrEmpty(result.get資格喪失事由コード())) {
+            this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).get名称());
+        } else {
+            this.txtSoshitsuJiyu.setValue(RString.EMPTY);
+        }
         this.txtJutokuKubun.setValue(new RString("1").equals(result.get住所地特例フラグ()) ? new RString("住特") : RString.EMPTY);
         RDate 認定有効期間開始年月日 = result.get認定有効期間開始年月日() == null ? null : new RDate(result.get認定有効期間開始年月日().toString());
         RDate 認定有効期間終了年月日 = result.get認定有効期間終了年月日() == null ? null : new RDate(result.get認定有効期間終了年月日().toString());
