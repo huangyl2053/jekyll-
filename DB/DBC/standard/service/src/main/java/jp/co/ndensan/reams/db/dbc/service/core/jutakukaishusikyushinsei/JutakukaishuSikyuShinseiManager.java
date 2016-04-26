@@ -399,27 +399,16 @@ public class JutakukaishuSikyuShinseiManager {
             ShokanShinsei dbt3034, ShokanKihon dbt3038, ShokanHanteiKekka dbt3036) {
 
         List<DbT3049ShokanJutakuKaishuEntity> dbt3049tmpList = new ArrayList<>();
-        DbT3049ShokanJutakuKaishuEntity dbt3049entity;
         if (dbt3049List != null && !dbt3049List.isEmpty()) {
             for (ShokanJutakuKaishu dbt3049 : dbt3049List) {
                 償還払請求住宅改修Dac.delete(dbt3049.toEntity());
-                dbt3049entity = 償還払請求住宅改修Dac.selectByKey(dbt3049.toEntity().getHiHokenshaNo(),
-                        dbt3049.toEntity().getServiceTeikyoYM(),
-                        dbt3049.toEntity().getSeiriNo(),
-                        dbt3049.toEntity().getJigyoshaNo(),
-                        dbt3049.toEntity().getYoshikiNo(),
-                        dbt3049.toEntity().getMeisaiNo(),
-                        dbt3049.toEntity().getRenban());
-                dbt3049tmpList.add(dbt3049entity);
+                dbt3049tmpList.add(dbt3049.toEntity());
             }
         }
         DbT3053ShokanShukeiEntity dbt3053entity = new DbT3053ShokanShukeiEntity();
         if (dbt3053 != null) {
             償還払請求集計Dac.delete(dbt3053.toEntity());
-            dbt3053entity = 償還払請求集計Dac.selectByKey(dbt3053.toEntity().getHiHokenshaNo(),
-                    dbt3053.toEntity().getServiceTeikyoYM(), dbt3053.toEntity().getSeiriNo(),
-                    dbt3053.toEntity().getJigyoshaNo(), dbt3053.toEntity().getYoshikiNo(),
-                    dbt3053.toEntity().getMeisaiNo(), dbt3053.toEntity().getRenban());
+            dbt3053entity = dbt3053.toEntity();
         }
         if (dbt3038 != null) {
             償還払請求基本Dac.delete(dbt3038.toEntity());
