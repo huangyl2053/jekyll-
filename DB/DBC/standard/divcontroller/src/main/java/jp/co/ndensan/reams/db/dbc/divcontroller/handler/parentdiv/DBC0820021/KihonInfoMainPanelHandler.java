@@ -834,12 +834,11 @@ public class KihonInfoMainPanelHandler {
         list.add(STR_2164);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        if (サービス年月.isBeforeOrEquals(平成14年１月) && list.contains(様式番号)) {
-            if (div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue() == null) {
-                pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
-                        UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
-                        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD()));
-            }
+        if (サービス年月.isBeforeOrEquals(平成14年１月) && list.contains(様式番号)
+                && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue() == null) {
+            pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
+                    UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
+                    div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD()));
         }
         RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
         RDate 退所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue();
