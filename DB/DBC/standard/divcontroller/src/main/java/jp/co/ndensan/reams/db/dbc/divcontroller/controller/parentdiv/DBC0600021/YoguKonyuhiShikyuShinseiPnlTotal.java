@@ -680,7 +680,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         for (KyufujissekiKihon kylist : kyufulist) {
             int t = i;
             i = (max審査年月 == kylist.get審査年月()) ? t + 1 : t;
-            後保険請求額 = (max審査年月 == kylist.get審査年月()) ? kylist.get後_保険_特定診療費請求額().intValue() : 0;
+            if (kylist.get後_保険_特定診療費請求額() != null) {
+                後保険請求額 = (max審査年月 == kylist.get審査年月()) ? kylist.get後_保険_特定診療費請求額().intValue() : 0;
+            }
         }
         if (i > 1) {
             throw new ApplicationException(DbcErrorMessages.給付実績複数件取得.getMessage());
@@ -815,7 +817,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         FukushiYoguKounyuhiDouituHinmokuChofukuHantei entity = new FukushiYoguKounyuhiDouituHinmokuChofukuHantei();
         flag = entity.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, list, 整理番号);
         boolean flag3 = getHandler(div).check品目コード();
-        if (!flag || !flag3) {
+        if (flag || !flag3) {
             throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("品目コード"));
         }
         return ResponseData.of(div).respond();
