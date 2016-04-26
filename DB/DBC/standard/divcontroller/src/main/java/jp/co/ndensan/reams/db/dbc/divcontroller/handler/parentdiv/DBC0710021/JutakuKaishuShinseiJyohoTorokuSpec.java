@@ -149,9 +149,11 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
             List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
             JyutakuGaisyunaiyoListParameter param;
             for (dgGaisyuList_Row row : gridList) {
+                RowState 状態 = RString.EMPTY.equals(row.getTxtJyotai())
+                        ? RowState.Unchanged : RowState.valueOf(row.getTxtJyotai().toString());
                 param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
-                        RowState.valueOf(row.getTxtJyotai().toString()),
-                        row.getTxtJutakuAddress(), new FlexibleDate(row.getTxtChakkoYoteibi()));
+                        状態, row.getTxtJutakuAddress(),
+                        new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));
                 paramList.add(param);
             }
             RString 住宅改修内容一覧チェック = JutakukaishuSikyuShinseiManager.createInstance()

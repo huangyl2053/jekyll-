@@ -54,7 +54,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
@@ -235,8 +234,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             FlexibleYearMonth サービス提供年月, RString 整理番号, RString 画面モード,
             JutakuKaishuJizenShinsei 住宅改修費事前申請, ShikibetsuCode 識別コード, RString 償還) {
         if (画面モード_照会.equals(画面モード)) {
-            サービス提供年月 = new FlexibleYearMonth(ViewStateHolder.get(
-                    ViewStateKeys.償還払申請一覧_サービス年月, RDate.class).getYearMonth().toDateString());
+            RString date = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class);
+            サービス提供年月 = new FlexibleYearMonth(new RDate(date.toString()).getYearMonth().toDateString());
             被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
             整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         }
@@ -578,6 +577,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
+        div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
@@ -1318,28 +1318,33 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
                         .toDateString()));
         ShokanShukeiBuilder dbt3053Builder = dbt3053.createBuilderForEdit().setサービス種類コード(サービス種類コード);
-        ShokanKihon 償還払請求基本 = 住宅改修費支給申請.getShokanKihon(引き継ぎ被保険者番号,
-                引き継ぎサービス提供年月, 引き継ぎ整理番号);
+//        ShokanKihon 償還払請求基本 = 住宅改修費支給申請.getShokanKihon(引き継ぎ被保険者番号,
+//                引き継ぎサービス提供年月, 引き継ぎ整理番号);
+//        ShokanKihon 償還払請求基本 = ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class);
         // TODO 住宅改修内容リストを子DIVから取得が不明
         List<dgGaisyuList_Row> 画面住宅住所 = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
         List<ShokanJutakuKaishu> dbt3049List = new ArrayList<>();
         RString 連番 = 連番から;
-        for (dgGaisyuList_Row row : 画面住宅住所) {
-            ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(償還払請求基本.get被保険者番号(),
-                    償還払請求基本.getサービス提供年月(), 償還払請求基本.get整理番号(), 償還払請求基本.get事業者番号(),
-                    償還払請求基本.get様式番号(), 償還払請求基本.get明細番号(), 連番);
-            連番 = new RString(Integer.parseInt(連番.toString()) + 1);
-            ShokanJutakuKaishuBuilder dbt3049Builder = dbt3049.createBuilderForEdit();
-            if (サービス種類コード != null) {
-                dbt3049Builder.setサービスコード(
-                        new ServiceCode(サービス種類コード.value().concat(サービス種類コード固定.toString())));
-            }
-            set償還払請求住宅改修(row, dbt3049Builder);
-            dbt3049Builder.set事前申請サービス提供年月(new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
-                    .toDateString())).set事前申請整理番号(div.getTxtSeiriNo().getValue()).build();
-            dbt3049List.add(dbt3049);
-        }
+        ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(dbt3038.get被保険者番号(),
+                dbt3038.getサービス提供年月(), dbt3038.get整理番号(), dbt3038.get事業者番号(),
+                dbt3038.get様式番号(), dbt3038.get明細番号(), 連番);
+        dbt3049List.add(dbt3049);
+//        for (dgGaisyuList_Row row : 画面住宅住所) {
+//            ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(償還払請求基本.get被保険者番号(),
+//                    償還払請求基本.getサービス提供年月(), 償還払請求基本.get整理番号(), 償還払請求基本.get事業者番号(),
+//                    償還払請求基本.get様式番号(), 償還払請求基本.get明細番号(), 連番);
+//            連番 = new RString(Integer.parseInt(連番.toString()) + 1);
+//            ShokanJutakuKaishuBuilder dbt3049Builder = dbt3049.createBuilderForEdit();
+//            if (サービス種類コード != null) {
+//                dbt3049Builder.setサービスコード(
+//                        new ServiceCode(サービス種類コード.value().concat(サービス種類コード固定.toString())));
+//            }
+//            set償還払請求住宅改修(row, dbt3049Builder);
+//            dbt3049Builder.set事前申請サービス提供年月(new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
+//                    .toDateString())).set事前申請整理番号(div.getTxtSeiriNo().getValue()).build();
+//            dbt3049List.add(dbt3049);
+//        }
         Decimal 保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHokenKyufuAmountNow().getValue();
         if (保険給付額 != null) {

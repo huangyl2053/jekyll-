@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class ShinseiSearch {
 
     private static final RString 照会 = new RString("照会");
+    private static final RString 照会_モード = new RString("照会モード");
     private static final RString 判定_21C = new RString("21C");
     private static final RString 判定_21D = new RString("21D");
 
@@ -41,6 +42,7 @@ public class ShinseiSearch {
         div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         div.getPanelShokan().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
         return ResponseData.of(div).respond();
@@ -57,6 +59,7 @@ public class ShinseiSearch {
         if (yoshikiNo.startsWith(判定_21C)) {
             return ResponseData.of(div).forwardWithEventName(福祉用具購入費支給).respond();
         } else if (yoshikiNo.startsWith(判定_21D)) {
+            ViewStateHolder.put(ViewStateKeys.表示モード, 照会_モード);
             return ResponseData.of(div).forwardWithEventName(住宅改修費支給申請).respond();
         } else {
             return ResponseData.of(div).forwardWithEventName(償還払い費支給申請).respond();
