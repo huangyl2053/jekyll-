@@ -442,8 +442,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 new RDate(shokanshinsei.get受付年月日().toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtRyosyuYMD().setValue(
                 new RDate(shokanshinsei.get領収年月日().toString()));
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getDdlShinseisyakubun().setSelectedKey(
-                shokanshinsei.get申請者区分());
+        if (shokanshinsei.get申請者区分() != null && !shokanshinsei.get申請者区分().isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getDdlShinseisyakubun().setSelectedKey(
+                    shokanshinsei.get申請者区分());
+        }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseiriyu().setValue(
                 shokanshinsei.get申請理由());
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtJigyosya().setValue(
@@ -454,8 +456,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 shokanshinsei.get申請者氏名カナ());
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaTel().setDomain(
                 shokanshinsei.get申請者電話番号());
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsakekka().
-                getRadShinsakekka().setSelectedKey(shokanshinsei.get審査結果());
+        if (shokanshinsei.get審査結果() != null && !shokanshinsei.get審査結果().isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsakekka().
+                    getRadShinsakekka().setSelectedKey(shokanshinsei.get審査結果());
+        }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtShinseisyaYubin().setValue(
                 shokanshinsei.get申請者郵便番号());
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
@@ -1002,8 +1006,18 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             if (ryosyuYMD != null && (ryosyuYMD.compareTo(teikyoYM) < 0)) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrWarningMessages.保存の確認, 領収年月日.toString())));
+//                return validPairs;
             }
         }
+//        RString ddlShumoku = div.getYoguKonyuhiShikyuShinseiContentsPanel().
+//                getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey();
+//        for (dgSeikyuDetail_Row row : rowList) {
+//            if (ddlShumoku.equals(row.getTxtShumoku().getValue()) && !RowState.Deleted.equals(row.getRowState())) {
+//                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+//                        UrWarningMessages.重複, 種目コード.toString())));
+////                return validPairs;
+//            }
+//        }
         if (!check品目コード()) {
             throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("品目コード"));
         }
@@ -1032,6 +1046,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                         getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue().getYearMonth())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.入力値が不正_追加メッセージあり, 購入年月日.toString())));
+            return validPairs;
         }
         return validPairs;
     }
@@ -1405,7 +1420,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtKonkaiHokenkyufugakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiRiyoshaFutangakuGokei().setDisabled(true);
-        div.getPnlKeteiJohoMsg().getCcdMessage().setVisible(false);
     }
 
     /**
@@ -1447,7 +1461,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtZenkaiRiyoshaFutangakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiHiyogakuGokei().setDisabled(true);
-        div.getPnlKeteiJohoMsg().getCcdMessage().setVisible(false);
     }
 
     /**
@@ -1517,7 +1530,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtKonkaiHokenkyufugakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiRiyoshaFutangakuGokei().setDisabled(true);
-        div.getPnlKeteiJohoMsg().getCcdMessage().setVisible(false);
     }
 
     /**
@@ -1586,7 +1598,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtKonkaiHokenkyufugakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiRiyoshaFutangakuGokei().setDisabled(true);
-        div.getPnlKeteiJohoMsg().getCcdMessage().setVisible(false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存する, false);
     }
 
@@ -1629,7 +1640,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 getTxtZenkaiRiyoshaFutangakuGokei().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
                 getTxtKonkaiHiyogakuGokei().setDisabled(true);
-        div.getPnlKeteiJohoMsg().getCcdMessage().setVisible(false);
     }
 
     private static class IdocheckMessages implements IValidationMessage {
