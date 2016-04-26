@@ -103,7 +103,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
             item.set改頁3(改頁);
             item.set改頁4(改頁);
             item.set改頁5(改頁);
-            item.set国保連合会名(集計情報Entity.getShoKisaiHokenshaName());
+            item.set国保連合会名(集計情報Entity.getKokukoRengoukaiNa());
             item.set審査委員会名(集計情報Entity.getSinsaiinkaiName());
             item.set作成日時(作成日時);
             item.set被保険者名(被保険者名);
@@ -127,7 +127,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
                 item.set改頁3(改頁);
                 item.set改頁4(改頁);
                 item.set改頁5(改頁);
-                item.set国保連合会名(集計情報Entity.getShoKisaiHokenshaName());
+                item.set国保連合会名(集計情報Entity.getKokukoRengoukaiNa());
                 item.set審査委員会名(集計情報Entity.getSinsaiinkaiName());
                 item.set作成日時(作成日時);
                 item.setNo(new RString(連番.toString()));
