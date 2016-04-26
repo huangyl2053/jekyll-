@@ -64,7 +64,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper.get転入転出異動情報");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBA200011_KoikinaiTenkyoKekkaIchiranhyo"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo.csv");
     private static final ReportId DBA200011 = new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo");
     private static final RString INDEX = new RString("000000");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -132,18 +132,24 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
             entity.set氏名(new AtenaMeisho(UrErrorMessages.該当データなし.toString()));
             flag = true;
         } else {
-            if (転入転出異動情報Entity.get転入PSM_住登内住所() != null
-                    && 転入転出異動情報Entity.get転入PSM_住登内番地() != null
-                    && 転入転出異動情報Entity.get転入PSM_住登内方書() != null) {
+            if (転入転出異動情報Entity.get転出PSM_住登内住所() != null
+                    && 転入転出異動情報Entity.get転出PSM_住登内番地() != null
+                    && 転入転出異動情報Entity.get転出PSM_住登内方書() != null) {
                 RString 前住所 = 転入転出異動情報Entity.get転出PSM_住登内住所().concat(DELIMITER).
                         concat(転入転出異動情報Entity.get転出PSM_住登内番地()).
                         concat(転入転出異動情報Entity.get転出PSM_住登内方書());
+                entity.set前住所(前住所);
+            }
+            if (転入転出異動情報Entity.get転入PSM_住登内住所() != null
+                    && 転入転出異動情報Entity.get転入PSM_住登内番地() != null
+                    && 転入転出異動情報Entity.get転入PSM_住登内方書() != null) {
+
                 RString 現住所 = 転入転出異動情報Entity.get転入PSM_住登内住所().concat(DELIMITER).
                         concat(転入転出異動情報Entity.get転入PSM_住登内番地()).
                         concat(転入転出異動情報Entity.get転入PSM_住登内方書());
-                entity.set前住所(前住所);
                 entity.set現住所(現住所);
             }
+
             entity.set被保険者番号(転入転出異動情報Entity.get転入_被保険者番号());
             entity.set氏名カナ(転入転出異動情報Entity.get転入PSM_カナ名称());
             entity.set氏名(転入転出異動情報Entity.get転入PSM_名称());
@@ -181,7 +187,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         report.writeBy(reportSourceWriter);
         List<KoikinaiTenkyoCSVDataEntity> 広域内転居結果CSV = get広域内転居結果CSV(list);
         get広域内転居結果のCSV出力(広域内転居結果CSV);
-        eucCsvWriter.close();
+
     }
 
     /**
@@ -253,6 +259,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
                 ));
             }
         }
+        eucCsvWriter.close();
     }
 
     /**
