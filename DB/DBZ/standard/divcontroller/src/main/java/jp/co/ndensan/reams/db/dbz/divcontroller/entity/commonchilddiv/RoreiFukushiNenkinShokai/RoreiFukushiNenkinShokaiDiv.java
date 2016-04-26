@@ -300,9 +300,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     public void click_Save() {
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
                 = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, Models.class);
-        Iterator<RoreiFukushiNenkinJukyusha> iterater = roreiFukushiNenkinJukyusha.iterator();
-        while (iterater.hasNext()) {
-            getService().save老齢福祉年金受給者(iterater.next());
+        if (roreiFukushiNenkinJukyusha != null) {
+            Iterator<RoreiFukushiNenkinJukyusha> iterater = roreiFukushiNenkinJukyusha.iterator();
+            while (iterater.hasNext()) {
+                getService().save老齢福祉年金受給者(iterater.next());
+            }
         }
     }
 

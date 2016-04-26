@@ -187,12 +187,12 @@ public class TekiyoJogaiRirekiHandler {
         div.setStauts(状態_追加);
         RString 親画面状態 = new RString(div.getMode_DisplayMode().toString());
         if (状態_適用登録.equals(親画面状態)) {
-            div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().setDisabled(false);
-            div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().setDisabled(false);
-            div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().setDisabled(false);
-            div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().setDisabled(false);
-            div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().setDisabled(false);
+            div.getPanelTekiyoJokaiTekiInput().setDisabled(false);
             clear適用除外情報入力エリア();
+            div.getBtnInputClear().setVisible(true);
+            div.getBtnInputClear().setDisabled(false);
+            div.getBtnKakutei().setVisible(true);
+            div.getBtnKakutei().setDisabled(false);
         } else {
             set適用除外者明細エリア(null, 親画面状態);
             set適用除外者明細エリア状態();
@@ -402,7 +402,22 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void onClick_Torikeshi() {
         clear適用除外情報入力エリア();
-        div.getBtnAdd().setDisabled(false);
+        RString 画面状態 = new RString(div.getMode_DisplayMode().toString());
+        if (状態_適用登録.equals(画面状態)) {
+            div.getPanelTekiyoJokaiTekiInput().setDisabled(true);
+            div.getBtnAdd().setDisabled(false);
+            div.getBtnInputClear().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
+        } else if (状態_解除.equals(画面状態)) {
+            div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(false);
+            div.getBtnInputClear().setDisabled(false);
+        } else if (状態_訂正履歴.equals(画面状態)) {
+            div.getBtnAdd().setDisabled(false);
+            div.getPanelTekiyoInput().setDisabled(true);
+            div.getBtnInputClear().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
+        }
+
     }
 
     /**
@@ -793,6 +808,7 @@ public class TekiyoJogaiRirekiHandler {
     }
 
     private void set適用除外者明細エリア状態() {
+        div.getPanelTekiyoInput().setDisabled(false);
         div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(false);
         div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(false);
         div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(false);

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -124,7 +125,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter) {
 
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
-                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD(), reportSourceWriter);
+                SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD(),
+                NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
         RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD());
 
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
@@ -136,7 +138,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         SofubutsuAtesakiSource atesakiSource
                 = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5);
+                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5, FlexibleDate.getNowDate());
         RString タイトル = 通知文Map.get(ONE);
         RString 通知文 = 通知文Map.get(TWO);
         RString 情報文 = 通知文Map.get(THREE);
@@ -252,6 +254,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
     private ShokanKetteiTsuchiShoSealer create帳票ソースデータ(ShokanKetteiTsuchiShoSealer ketteiTsuchiShoSealer, int count,
             NinshoshaSource ninshoshaSource, ShokanKetteiTsuchiShoShiharai business, ShokanKetteiTsuchiShoSealerBatchParameter batchPram,
             RString 文書番号, RString 通知文, RString 情報文, RString タイトル, SofubutsuAtesakiSource atesaki, int pageCount) {
+
         ketteiTsuchiShoSealer = setJuhuku(ketteiTsuchiShoSealer, count, business);
         if (ZERO < count) {
             Decimal 支給額 = new Decimal(ketteiTsuchiShoSealer.getShikyuGaku().toString()).add(business.get支給額() == null

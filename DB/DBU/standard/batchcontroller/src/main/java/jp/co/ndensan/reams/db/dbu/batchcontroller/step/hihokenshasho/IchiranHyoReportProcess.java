@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo.H
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoReport;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranhyoReportSource;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
@@ -44,7 +43,6 @@ public class IchiranHyoReportProcess extends BatchProcessBase<IkkatsuHakkoRelate
     private static final ReportId 帳票ID = ReportIdDBA.DBA200003.getReportId();
     private List<IkkatsuHakkoRelateEntity> 帳票用Entityリスト;
     private IkkatsuHakkoProcessParameter processPrm;
-    private IkkatsuHakkoMybatisParameter mybatisPrm;
     private List<HihokenshashoHakkoIchiranHyoItem> itemList;
     @BatchWriter
     private BatchReportWriter<HihokenshashoHakkoIchiranhyoReportSource> batchReportWriter;
@@ -52,14 +50,13 @@ public class IchiranHyoReportProcess extends BatchProcessBase<IkkatsuHakkoRelate
 
     @Override
     protected void initialize() {
-        mybatisPrm = processPrm.toIkkatsuHakkoMybatisParameter();
         帳票用Entityリスト = new ArrayList<>();
         itemList = new ArrayList<>();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisPrm);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processPrm.toIkkatsuHakkoMybatisParameter());
 
     }
 
@@ -122,7 +119,7 @@ public class IchiranHyoReportProcess extends BatchProcessBase<IkkatsuHakkoRelate
             shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
                     帳票ID,
                     reamsLoginID,
-                    new Long(processPrm.getShutsuryokujunId().toString()));
+                    Long.valueOf(processPrm.getShutsuryokujunId().toString()));
         }
         return shutsuryokujunId;
     }

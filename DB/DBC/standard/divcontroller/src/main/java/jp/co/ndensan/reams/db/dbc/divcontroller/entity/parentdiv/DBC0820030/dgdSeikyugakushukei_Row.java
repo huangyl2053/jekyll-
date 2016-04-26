@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Mar 15 18:28:56 CST 2016
+ * Tue Apr 26 11:26:43 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-1030-100 quxiaodong
  */
 public class dgdSeikyugakushukei_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString defaultDataName1;
     private TextBoxNum defaultDataName2;

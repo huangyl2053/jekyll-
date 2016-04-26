@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -92,6 +93,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiHenshu {
      * @param 処理年月 処理年月
      * @param fileNameList fileNameList
      */
+    @Transaction
     public void createSaishinsaKetteiTsuchishoJyohoData(FlexibleYearMonth 処理年月, List<RString> fileNameList) {
         ISaishinsaKetteiHokenshaInMapper mapper = mapperProvider.create(ISaishinsaKetteiHokenshaInMapper.class);
         List<SaishinsaKetteiHokenshaInMeisaiEntity> 明細List = mapper.selectAllMeisai();

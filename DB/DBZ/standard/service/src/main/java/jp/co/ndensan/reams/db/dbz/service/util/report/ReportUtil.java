@@ -58,7 +58,7 @@ public final class ReportUtil {
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
 
     /**
-     * 雛形部品_認証者を取得します。
+     * 種別コードが認定用印の場合、雛形部品_認証者を取得します。
      *
      * @param subGyomuCode サブ業務コード
      * @param reportId 帳票分類ID
@@ -148,5 +148,63 @@ public final class ReportUtil {
         CustomerBarCode barcode = new CustomerBarCode();
         CustomerBarCodeResult result = barcode.convertCustomerBarCode(yubinNo, jusho);
         return result.getCustomerBarCode();
+    }
+
+    /**
+     * 雛形部品_認証者を取得します。
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     * @param kaisiYMD 開始年月日
+     * @param shubetsuCode 種別コード
+     * @param reportSourceWriter ReportSourceWriter
+     * @return 認証者情報
+     */
+    public static NinshoshaSource get認証者情報(SubGyomuCode subGyomuCode,
+            ReportId reportId,
+            FlexibleDate kaisiYMD,
+            NinshoshaDenshikoinshubetsuCode shubetsuCode,
+            ReportSourceWriter reportSourceWriter) {
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(subGyomuCode, reportId);
+        INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
+        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, shubetsuCode.getコード(), kaisiYMD);
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        boolean is公印に掛ける = false;
+        boolean is公印を省略 = false;
+        if (chohyoSeigyoKyotsu != null) {
+            is公印に掛ける = 首長名印字位置.equals(chohyoSeigyoKyotsu.get首長名印字位置());
+            is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
+        }
+        return NinshoshaSourceBuilderFactory.createInstance(ninshosha, 導入団体クラス,
+                reportSourceWriter.getImageFolderPath(),
+                new RDate(kaisiYMD.toString()),
+                is公印に掛ける,
+                is公印を省略,
+                KenmeiFuyoKubunType.付与なし).buildSource();
+    }
+
+    /**
+     * 基準日により、通知文を取得します。
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票ID
+     * @param kamokuCode 科目コード
+     * @param patternNo パターン番号
+     * @param kijunDate 基準年月日
+     * @return 通知文
+     */
+    public static Map<Integer, RString> get通知文(SubGyomuCode subGyomuCode, ReportId reportId,
+            KamokuCode kamokuCode, int patternNo, FlexibleDate kijunDate) {
+        TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId, kamokuCode, patternNo, kijunDate);
+        ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
+        List<TsuchishoTeikeibunEntity> tsuchishoTeikeibunList = info.get通知書定型文List();
+        Map<Integer, RString> 通知文 = new HashMap<>();
+        for (TsuchishoTeikeibunEntity tsuchishoTeikeibun : tsuchishoTeikeibunList) {
+            int sentenceNo = tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentenceNo();
+            通知文.put(sentenceNo, textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence()));
+        }
+        return 通知文;
     }
 }

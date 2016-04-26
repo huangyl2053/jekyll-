@@ -525,8 +525,8 @@ public class HanyoListAtenaSelectHandler {
 
     private void set宛名抽出条件ラジオボタン() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        KeyValueDataSource keyValue = new KeyValueDataSource();
         for (NenreiSoChushutsuHoho 宛名抽出条件 : NenreiSoChushutsuHoho.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(宛名抽出条件.getコード());
             keyValue.setValue(宛名抽出条件.get名称());
             dataSource.add(keyValue);
@@ -536,8 +536,8 @@ public class HanyoListAtenaSelectHandler {
 
     private void set地区DDL() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        KeyValueDataSource keyValue = new KeyValueDataSource();
         for (Chiku 地区 : Chiku.values()) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(地区.getコード());
             keyValue.setValue(地区.get名称());
             dataSource.add(keyValue);

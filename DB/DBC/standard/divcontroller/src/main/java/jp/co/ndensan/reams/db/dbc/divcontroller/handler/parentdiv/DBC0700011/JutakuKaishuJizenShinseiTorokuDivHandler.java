@@ -118,7 +118,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 申請一覧へ戻る = new RString("btnBackToResult");
     private static final RString 申請を保存する = new RString("btnSave");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
-    private static final RString 行状態_登録 = new RString("登録");
     private static final RString 行状態_削除 = new RString("削除");
     private static final RString 行状態_更新 = new RString("更新");
 

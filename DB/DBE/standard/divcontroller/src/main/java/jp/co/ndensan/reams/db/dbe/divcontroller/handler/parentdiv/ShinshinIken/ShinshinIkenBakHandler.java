@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItemIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
@@ -332,14 +330,6 @@ public class ShinshinIkenBakHandler {
 
     private ShujiiIkenshoKinyuItemIdentifier create記入項目の識別子(int 連番) {
         return new ShujiiIkenshoKinyuItemIdentifier(new ShinseishoKanriNo(管理番号), Integer.parseInt(履歴番号.toString()), 連番);
-    }
-
-    private List<RString> setCheckBox(ShujiiIkenshoIkenItem item, RString key) {
-        List<RString> selectKey = new ArrayList<>();
-        if (IkenKomoku01.有.getコード().equals(item.get意見項目())) {
-            selectKey.add(key);
-        }
-        return selectKey;
     }
 
     private RString keyToItem(RString key) {
