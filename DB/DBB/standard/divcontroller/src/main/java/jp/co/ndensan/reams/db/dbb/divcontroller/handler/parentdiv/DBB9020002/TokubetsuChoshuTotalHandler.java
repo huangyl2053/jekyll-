@@ -84,6 +84,8 @@ public final class TokubetsuChoshuTotalHandler {
     private static final RString 納期限 = new RString("txtNokigen");
     private static final RString 保険者構成エラーメッセージ
             = new RString("保険者が単一市町村または広域市町村ではないため処理の継続");
+    private static final RString 業務コンフィグ不整合エラー
+            = new RString("業務Configが不整合です。期割計算_普徴切替方法の期に該当する期が存在しません。");
     private static final RString FORMAT = new RString("%02d");
     private static final RString 一月 = new RString("01");
     private static final RString 二月 = new RString("02");
@@ -496,9 +498,11 @@ public final class TokubetsuChoshuTotalHandler {
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                     .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho()
                     .setSelectedKey(FutsuChoshuKirikaeKeisanHoho.指定期以降重複させる.getコード());
-            // TODO QA No.587(Redmine#81414)
+            if (!kiList.contains(計算方法)) {
+                throw new ApplicationException(業務コンフィグ不整合エラー.toString());
+            }
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
-                    .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeJufukuStKi().setSelectedKey(kiList.get(0).getKey());
+                    .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeJufukuStKi().setSelectedKey(計算方法);
         } else {
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                     .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho().setSelectedKey(計算方法);
