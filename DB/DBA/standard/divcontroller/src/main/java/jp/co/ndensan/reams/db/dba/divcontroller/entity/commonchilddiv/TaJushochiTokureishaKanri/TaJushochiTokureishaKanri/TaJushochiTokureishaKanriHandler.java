@@ -310,9 +310,6 @@ public class TaJushochiTokureishaKanriHandler {
             if (状態_削除.equals(div.getStrate())) {
                 if (RowState.Unchanged.equals(rireki_Row.getRowState())) {
                     rireki_Row.setRowState(RowState.Deleted);
-                    TashichosonJushochiTokurei 住所地特例の識別子
-                            = new TashichosonJushochiTokurei(識別コード, 異動日, rireki_Row.getEdaNo());
-                    他住所地特例Model.add(住所地特例の識別子);
                 } else {
                     rowList.remove(rireki_Row);
                 }
@@ -382,12 +379,12 @@ public class TaJushochiTokureishaKanriHandler {
             }
             row.setNyushoShisetsuShurui(div.getCcdShisetsuJoho().get施設種類());
             row.setRowState(RowState.Added);
+            rowList.add(row);
             RString 履歴番号 = rowList.get(0).getRirekiNo();
             if (RString.isNullOrEmpty(履歴番号)) {
                 履歴番号 = new RString("0");
             }
             int 最新履歴番号 = Integer.parseInt(履歴番号.toString()) + 1;
-            rowList.add(row);
             ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最新履歴番号);
             TashichosonJushochiTokurei 住所地特例の識別子
                     = new TashichosonJushochiTokurei(識別コード, new FlexibleDate(div.getTxtTekiyobi().getValue().toString()), 変更後枝番);
