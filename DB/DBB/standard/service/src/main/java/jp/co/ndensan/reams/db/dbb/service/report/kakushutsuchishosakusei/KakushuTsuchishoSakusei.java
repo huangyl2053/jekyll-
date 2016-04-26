@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoCommonInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KariSanteiCommonInfo;
 import jp.co.ndensan.reams.db.dbb.business.report.KarisanteiNonyuTsuchishoCVSKigoto.KarisanteiNonyuTsuchishoCVSKigotoItem;
 import jp.co.ndensan.reams.db.dbb.business.report.KarisanteiNonyuTsuchishoCVSKigoto.KarisanteiNonyuTsuchishoCVSKigotoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100010.KarisanteiHenkoTsuchishoB5YokoItem;
@@ -45,6 +44,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuch
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoSeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
@@ -511,7 +511,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         if (帳票ID == null) {
             return null;
         }
-        KariSanteiCommonInfo 仮算定通知書情報 = new KariSanteiCommonInfo();
+        KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
         仮算定通知書情報.set発行日(parameter.get特徴開始通知書_発行日());
         仮算定通知書情報.set帳票分類ID(特別徴収開始通知書仮算定_帳票分類ID);
         仮算定通知書情報.set帳票ID(帳票ID);
@@ -520,22 +520,23 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         仮算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
         仮算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         仮算定通知書情報.set納組情報(通知書共通情報.get納組情報());
-        仮算定通知書情報.set普徴納期情報List(通知書共通情報.get普徴納期情報List());
-        仮算定通知書情報.set特徴収入情報List(通知書共通情報.get特徴収入情報List());
+        仮算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
+        仮算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
         仮算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         仮算定通知書情報.set前年度賦課情報(find前年度賦課(通知書共通情報.get賦課の情報_更正後().get賦課情報()));
         仮算定通知書情報.set口座情報(通知書共通情報.get口座情報());
         仮算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
         仮算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
-        仮算定通知書情報.set対象者_追加含む_の情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
-        仮算定通知書情報.set対象者_追加含む_の情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-        仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
-        仮算定通知書情報.set帳票制御共通(load帳票制御共通(特別徴収開始通知書仮算定_帳票分類ID));
+        仮算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
+        仮算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
+        //仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
+        DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(仮算定額変更通知書_帳票分類ID);
+        if (entity != null) {
+            仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(load帳票制御共通(特別徴収開始通知書仮算定_帳票分類ID)));
+        }
 
-        //TODO QA.620 ビジネス設計_DBBBZ00007_1_賦課帳票共通項目編集（仮算定）.xlsx の「仮算定通知書共通情報作成」を使用する。
-        //KariSanteiTsuchiShoKyotsuKomokuHenshu create仮算定通知書共通情報
-        //戻り値：編集後仮算定通知書共通情報
-        EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = null;
+        KariSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
+        EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 賦課帳票共通項目編集.create仮算定通知書共通情報(仮算定通知書情報);
 
         KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報 = new KariTokuchoKaishiTsuchisyoJoho();
         仮算定特徴開始通知書情報.set発行日(parameter.get特徴開始通知書_発行日());
@@ -550,8 +551,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         RString 通知文2 = RString.EMPTY;
         FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
         if (仮算定通知書情報.get帳票制御共通() != null
-                && !nullTOEmpty(仮算定通知書情報.get帳票制御共通().getTeikeibunMojiSize()).isEmpty()) {
-            int パターン番号 = Integer.parseInt(nullTOEmpty(仮算定通知書情報.get帳票制御共通().getTeikeibunMojiSize()).toString());
+                && !nullTOEmpty(仮算定通知書情報.get帳票制御共通().get定型文文字サイズ()).isEmpty()) {
+            int パターン番号 = Integer.parseInt(nullTOEmpty(仮算定通知書情報.get帳票制御共通().get定型文文字サイズ()).toString());
             TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
             TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo
                     = manager.get通知書定形文検索(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書仮算定_帳票分類ID,
@@ -611,7 +612,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         if (帳票ID == null) {
             return null;
         }
-        KariSanteiCommonInfo 仮算定通知書情報 = new KariSanteiCommonInfo();
+        KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
         仮算定通知書情報.set発行日(parameter.get変更通知書_発行日());
         仮算定通知書情報.set帳票分類ID(仮算定額変更通知書_帳票分類ID);
         仮算定通知書情報.set帳票ID(帳票ID);
@@ -620,22 +621,23 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         仮算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
         仮算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         仮算定通知書情報.set納組情報(通知書共通情報.get納組情報());
-        仮算定通知書情報.set普徴納期情報List(通知書共通情報.get普徴納期情報List());
-        仮算定通知書情報.set特徴収入情報List(通知書共通情報.get特徴収入情報List());
+        仮算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
+        仮算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
         仮算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         仮算定通知書情報.set前年度賦課情報(find前年度賦課(通知書共通情報.get賦課の情報_更正後().get賦課情報()));
         仮算定通知書情報.set口座情報(通知書共通情報.get口座情報());
         仮算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
         仮算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
-        仮算定通知書情報.set対象者_追加含む_の情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
-        仮算定通知書情報.set対象者_追加含む_の情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-        仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
-        仮算定通知書情報.set帳票制御共通(load帳票制御共通(仮算定額変更通知書_帳票分類ID));
+        仮算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
+        仮算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
+        //仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
+        DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(仮算定額変更通知書_帳票分類ID);
+        if (entity != null) {
+            仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(load帳票制御共通(仮算定額変更通知書_帳票分類ID)));
+        }
 
-        //ビジネス設計_DBBBZ00007_1_賦課帳票共通項目編集（仮算定）.xlsx の「仮算定通知書共通情報作成」を使用する。
-        //KariSanteiTsuchiShoKyotsuKomokuHenshu create仮算定通知書共通情報
-        //戻り値：編集後仮算定通知書共通情報
-        EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = null;
+        KariSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
+        EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 賦課帳票共通項目編集.create仮算定通知書共通情報(仮算定通知書情報);
 
         KariTokuchoKaishiTsuchisyoJoho 仮算定額変更通知書情報 = new KariTokuchoKaishiTsuchisyoJoho();
         仮算定額変更通知書情報.set発行日(parameter.get変更通知書_発行日());
