@@ -273,7 +273,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 || 削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
                     para, new KamokuCode(償還払給付費), 照会);
-        } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
+                || 審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
                     para, new KamokuCode(償還払給付費), 修正);
         } else if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -768,10 +769,16 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnCheckGendogaku(
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        JigyoshaNo 事業者番号 = null;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
-        JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
+        RString 整理番号 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().getValue();
+        if (整理番号.isEmpty()) {
+            整理番号 = null;
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue() != null) {
+            事業者番号 = new JigyoshaNo(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());
+        }
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         RString 明細番号 = null;
         boolean flag = FukushiyoguKonyuhiShikyuGendogaku.createInstance().chkKonyuhiShikyuGendogaku(被保険者番号,
@@ -783,10 +790,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenTaishoHiyogakuGokei()
                 .getValue());
         Decimal 前回までの保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
-                .getTxtZenkaiHokenTaishoHiyogakuGokei().getValue();
+                .getTxtZenkaiHokenkyufugakuGokei().getValue();
         前回までの保険給付額 = 前回までの保険給付額 == null ? Decimal.ZERO : 前回までの保険給付額;
         Decimal 今回の保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
-                .getTxtKonkaiHokenTaishoHiyogakuGokei().getValue();
+                .getTxtKonkaiHokenkyufugakuGokei().getValue();
         今回の保険給付額 = 今回の保険給付額 == null ? Decimal.ZERO : 今回の保険給付額;
         Decimal 限度額 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShikyuGendogaku(
                 被保険者番号, サービス提供年月);
