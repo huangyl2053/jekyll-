@@ -4,27 +4,25 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6020011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChohyoShutsuryokujunOya のクラスファイル
- *
+ * HihokenshaDaichoHakkoChushutsuJokenPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
-public class ChohyoShutsuryokujunOyaDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+public class HihokenshaDaichoHakkoChushutsuJokenPanelDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    @JsonProperty("radChushutsuSoshitsusha")
+    private RadioButton radChushutsuSoshitsusha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,12 +31,21 @@ public class ChohyoShutsuryokujunOyaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
+     * getradChushutsuSoshitsusha
+     * @return radChushutsuSoshitsusha
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
+    @JsonProperty("radChushutsuSoshitsusha")
+    public RadioButton getRadChushutsuSoshitsusha() {
+        return radChushutsuSoshitsusha;
+    }
+
+    /*
+     * setradChushutsuSoshitsusha
+     * @param radChushutsuSoshitsusha radChushutsuSoshitsusha
+     */
+    @JsonProperty("radChushutsuSoshitsusha")
+    public void setRadChushutsuSoshitsusha(RadioButton radChushutsuSoshitsusha) {
+        this.radChushutsuSoshitsusha = radChushutsuSoshitsusha;
     }
 
     // </editor-fold>
