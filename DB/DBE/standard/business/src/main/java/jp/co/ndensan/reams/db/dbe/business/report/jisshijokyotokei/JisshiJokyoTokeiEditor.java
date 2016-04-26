@@ -55,7 +55,7 @@ public class JisshiJokyoTokeiEditor implements IJisshiJokyoTokeiEditor {
         RStringBuilder printTimeStampSb = new RStringBuilder();
         printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(String.format("%02d", printdate.getHour()));
         printTimeStampSb.append(DATE_時);
@@ -71,6 +71,6 @@ public class JisshiJokyoTokeiEditor implements IJisshiJokyoTokeiEditor {
 
     private RString dateFormat(RString date) {
         return RString.isNullOrEmpty(date) ? RString.EMPTY : new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 }
