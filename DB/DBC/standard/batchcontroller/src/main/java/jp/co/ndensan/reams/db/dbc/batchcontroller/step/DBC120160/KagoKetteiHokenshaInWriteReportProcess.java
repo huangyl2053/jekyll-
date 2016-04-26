@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -102,8 +103,20 @@ public class KagoKetteiHokenshaInWriteReportProcess extends BatchKeyBreakBase<Ka
 
     @Override
     protected void createWriter() {
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200050.getReportId(), shutsuryokujunID.getValue());
+        List<RString> 改頁項目リスト = new ArrayList<>();
+        if (並び順 != null) {
+            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                if (item.is改頁項目()) {
+                    改頁項目リスト.add(item.get項目名());
+                }
+            }
+        }
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBC.DBC200050.getReportId().value(), SubGyomuCode.DBC介護給付).create();
+                ReportIdDBC.DBC200050.getReportId().value(), SubGyomuCode.DBC介護給付).
+                addBreak(new BreakerCatalog<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource>()
+                        .simplePageBreaker(改頁項目リスト)).create();
         this.reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 

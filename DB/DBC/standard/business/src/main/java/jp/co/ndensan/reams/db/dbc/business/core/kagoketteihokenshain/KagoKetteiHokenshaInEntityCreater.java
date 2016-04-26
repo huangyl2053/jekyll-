@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class KagoKetteiHokenshaInEntityCreater {
 
+    private static final char TRIM_MOJI = '"';
+
     /**
      * CSVデータより、明細一時テーブルエンティティを作成する。
      *
@@ -98,14 +100,10 @@ public class KagoKetteiHokenshaInEntityCreater {
 
     private RString trim囲み文字(RString 対象文字列) {
 
-        final char trim文字 = '"';
-
-        try {
-
-            対象文字列 = 対象文字列.trim(trim文字);
-        } catch (NullPointerException e) {
-            対象文字列 = RString.EMPTY;
+        if (null != 対象文字列 && !RString.EMPTY.equals(対象文字列)) {
+            return 対象文字列.trim(TRIM_MOJI);
         }
-        return 対象文字列;
+
+        return RString.EMPTY;
     }
 }
