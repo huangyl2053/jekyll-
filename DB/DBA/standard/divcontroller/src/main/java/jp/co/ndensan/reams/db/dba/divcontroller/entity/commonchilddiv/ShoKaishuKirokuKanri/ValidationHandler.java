@@ -70,7 +70,9 @@ public class ValidationHandler {
                 && shoDiv.getPanelInput().getTxtKaisyuDate().getValue() != null
                 && shoDiv.getPanelInput().getTxtKaisyuDate().getValue().
                 isBefore(shoDiv.getPanelInput().getTxtKoufuDate().getValue())) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate順番, shoDiv.getPanelInput().getTxtKoufuDate()));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate順番,
+                    shoDiv.getPanelInput().getTxtKoufuDate(),
+                    shoDiv.getPanelInput().getTxtKaisyuDate()));
         }
     }
 
