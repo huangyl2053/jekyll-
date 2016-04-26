@@ -18,9 +18,9 @@ public class HihokenshaDaichoHakkoIchiranhyoHeaderItem {
     private final RString shichosonName;
     private final RString shutsuryokujun1;
     private final RString shutsuryokujun2;
+    private final RString shutsuryokujun3;
     private final RString shutsuryokujun4;
     private final RString shutsuryokujun5;
-    private final RString shutsuryokujun3;
     private final RString kaipage1;
     private final RString kaipage2;
     private final RString kaipage3;

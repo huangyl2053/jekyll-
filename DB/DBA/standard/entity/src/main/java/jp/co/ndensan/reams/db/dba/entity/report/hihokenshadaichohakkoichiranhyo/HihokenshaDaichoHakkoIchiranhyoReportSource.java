@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaichohakkoichiranhyo;
 
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -44,34 +44,32 @@ public class HihokenshaDaichoHakkoIchiranhyoReportSource implements IReportSourc
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 3, order = 16)
     public RString listUpper_3;
-    @ReportItem(name = "listUpper_4", length = 50, order = 17)
+    @ReportItem(name = "listUpper_4", length = 25, order = 17)
     public RString listUpper_4;
     @ReportItem(name = "listUpper_5", length = 8, order = 18)
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 15, order = 19)
     public RString listUpper_6;
-    @ReportItem(name = "listUpper_7", length = 10, order = 20)
+    @ReportItem(name = "listUpper_7", length = 5, order = 20)
     public RString listUpper_7;
-    @ReportItem(name = "listUpper_8", length = 2, order = 21)
+    @ReportItem(name = "listUpper_8", length = 1, order = 21)
     public RString listUpper_8;
-    @ReportItem(name = "listUpper_9", length = 18, order = 22)
-    public RString listUpper_9;
+    @ReportItem(name = "listBiko_1", length = 20, order = 22)
+    public RString listBiko_1;
     @ReportItem(name = "listNo_1", length = 10, order = 23)
     public RString listNo_1;
-    @ReportItem(name = "listLower_1", length = 40, order = 24)
+    @ReportItem(name = "listLower_1", length = 20, order = 24)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 10, order = 25)
     public RString listLower_2;
-    @ReportItem(name = "listLower_3", length = 60, order = 26)
+    @ReportItem(name = "listLower_3", length = 30, order = 26)
     public RString listLower_3;
     @ReportItem(name = "listLower_4", length = 15, order = 27)
     public RString listLower_4;
-    @ReportItem(name = "listLower_5", length = 10, order = 28)
+    @ReportItem(name = "listLower_5", length = 5, order = 28)
     public RString listLower_5;
-    @ReportItem(name = "listLower_6", length = 2, order = 29)
+    @ReportItem(name = "listLower_6", length = 1, order = 29)
     public RString listLower_6;
-    @ReportItem(name = "listLower_7", length = 18, order = 30)
-    public RString listLower_7;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
