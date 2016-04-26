@@ -33,7 +33,7 @@ public class HanyoListAtenaSelect {
      * @param div 汎用リスト宛名抽出条件Div
      * @return ResponseData<HanyoListAtenaSelectDiv>
      */
-    public ResponseData<HanyoListAtenaSelectDiv> onChange_ChikuSelect(HanyoListAtenaSelectDiv div) {
+    public ResponseData<HanyoListAtenaSelectDiv> onChange_SelectChiku(HanyoListAtenaSelectDiv div) {
         getHandler(div).onChange_ChikuSelect();
         return ResponseData.of(div).respond();
     }

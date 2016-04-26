@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 汎用リスト宛名抽出条件のHandlerクラスです。
@@ -80,21 +83,21 @@ public class HanyoListAtenaSelectHandler {
         if (NenreiSoChushutsuHoho.年齢範囲.getコード().equals(年齢層抽出方法)) {
             div.getRadSelectKijun().setDisabled(false);
             div.getTxtNenrei().setDisabled(false);
-            div.getTxtNenrei().setFromPlaceHolder(RString.EMPTY);
-            div.getTxtNenrei().setToPlaceHolder(RString.EMPTY);
+            div.getTxtNenrei().clearFromValue();
+            div.getTxtNenrei().clearFromValue();
             div.getTxtSeinengappi().setDisabled(true);
-            div.getTxtSeinengappi().setFromPlaceHolder(RString.EMPTY);
-            div.getTxtSeinengappi().setToPlaceHolder(RString.EMPTY);
+            div.getTxtSeinengappi().clearFromValue();
+            div.getTxtSeinengappi().clearToValue();
             div.getTxtNenreiKijunbi().setDisabled(false);
             div.getTxtNenreiKijunbi().clearValue();
         } else if (NenreiSoChushutsuHoho.生年月日範囲.getコード().equals(年齢層抽出方法)) {
             div.getRadSelectKijun().setDisabled(false);
             div.getTxtNenrei().setDisabled(true);
-            div.getTxtNenrei().setFromPlaceHolder(RString.EMPTY);
-            div.getTxtNenrei().setToPlaceHolder(RString.EMPTY);
+            div.getTxtNenrei().clearFromValue();
+            div.getTxtNenrei().clearToValue();
             div.getTxtSeinengappi().setDisabled(false);
-            div.getTxtSeinengappi().setFromPlaceHolder(RString.EMPTY);
-            div.getTxtSeinengappi().setToPlaceHolder(RString.EMPTY);
+            div.getTxtSeinengappi().clearFromValue();
+            div.getTxtSeinengappi().clearToValue();
             div.getTxtNenreiKijunbi().setDisabled(false);
             div.getTxtNenreiKijunbi().clearValue();
         }
@@ -190,7 +193,7 @@ public class HanyoListAtenaSelectHandler {
      * @return 年齢開始の設定値
      */
     public Decimal get年齢開始() {
-        return Decimal.valueOf(Integer.valueOf(div.getTxtNenrei().getFromPlaceHolder().toString()).longValue());
+        return div.getTxtNenrei().getFromValue();
     }
 
     /**
@@ -199,7 +202,7 @@ public class HanyoListAtenaSelectHandler {
      * @param 年齢開始
      */
     public void set年齢開始(Decimal 年齢開始) {
-        div.getTxtNenrei().setFromPlaceHolder(new RString(年齢開始.toString()));
+        div.getTxtNenrei().setFromValue(年齢開始);
     }
 
     /**
@@ -208,7 +211,7 @@ public class HanyoListAtenaSelectHandler {
      * @return 年齢終了の設定値
      */
     public Decimal get年齢終了() {
-        return Decimal.valueOf(Integer.valueOf(div.getTxtNenrei().getToPlaceHolder().toString()).longValue());
+        return div.getTxtNenrei().getToValue();
     }
 
     /**
@@ -217,7 +220,7 @@ public class HanyoListAtenaSelectHandler {
      * @param 年齢終了
      */
     public void set年齢終了(Decimal 年齢終了) {
-        div.getTxtNenrei().setToPlaceHolder(new RString(年齢終了.toString()));
+        div.getTxtNenrei().setToValue(年齢終了);
     }
 
     /**
@@ -509,10 +512,10 @@ public class HanyoListAtenaSelectHandler {
     private void set初期項目内容() {
         set宛名抽出条件ラジオボタン();
         div.getRadSelectKijun().setSelectedKey(NenreiSoChushutsuHoho.年齢範囲.getコード());
-        div.getTxtNenrei().setFromPlaceHolder(RString.EMPTY);
-        div.getTxtNenrei().setToPlaceHolder(RString.EMPTY);
-        div.getTxtSeinengappi().setFromPlaceHolder(RString.EMPTY);
-        div.getTxtSeinengappi().setToPlaceHolder(RString.EMPTY);
+        div.getTxtNenrei().clearFromValue();
+        div.getTxtNenrei().clearToValue();
+        div.getTxtSeinengappi().clearFromValue();
+        div.getTxtSeinengappi().clearToValue();
         div.getTxtNenreiKijunbi().clearValue();
         set地区DDL();
         div.getDdlChikuSelect().setSelectedKey(Chiku.全て.getコード());
@@ -521,11 +524,25 @@ public class HanyoListAtenaSelectHandler {
     }
 
     private void set宛名抽出条件ラジオボタン() {
-
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        KeyValueDataSource keyValue = new KeyValueDataSource();
+        for (NenreiSoChushutsuHoho 宛名抽出条件 : NenreiSoChushutsuHoho.values()) {
+            keyValue.setKey(宛名抽出条件.getコード());
+            keyValue.setValue(宛名抽出条件.get名称());
+            dataSource.add(keyValue);
+        }
+        div.getRadSelectKijun().setDataSource(dataSource);
     }
 
     private void set地区DDL() {
-
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        KeyValueDataSource keyValue = new KeyValueDataSource();
+        for (Chiku 地区 : Chiku.values()) {
+            keyValue.setKey(地区.getコード());
+            keyValue.setValue(地区.get名称());
+            dataSource.add(keyValue);
+        }
+        div.getDdlChikuSelect().setDataSource(dataSource);
     }
 
 }
