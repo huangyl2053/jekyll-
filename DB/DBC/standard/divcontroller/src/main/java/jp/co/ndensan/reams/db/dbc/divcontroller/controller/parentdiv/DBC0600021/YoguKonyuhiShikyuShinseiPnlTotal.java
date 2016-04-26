@@ -199,6 +199,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             }
             onLoad国保連再送付(div);
             償還払支給判定結果を取得する(div);
+            ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(
+                    div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue()));
         }
         if (shshResult != null) {
             getHandler(div).償還払支給申請情報(shshResult);
