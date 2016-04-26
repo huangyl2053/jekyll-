@@ -104,11 +104,21 @@ public class GemmenGengakuShinseiHandler {
         if (減免減額申請情報.get申請届出者氏名カナ() != null) {
             div.getTxtShinseishaShimeiKana().setValue(減免減額申請情報.get申請届出者氏名カナ().getColumnValue());
         }
-        div.getTxtShinseishaShimei().setDomain(減免減額申請情報.get申請届出者氏名());
-        div.getTxtShinseishaTsuzukigara().setValue(減免減額申請情報.get申請届出者続柄());
-        div.getTxtShinseishaYubinNo().setValue(減免減額申請情報.get申請届出者郵便番号());
-        div.getTxtShinseishaTelNo().setDomain(減免減額申請情報.get申請届出者電話番号());
-        div.getTxtShinseishaJusho().setDomain(減免減額申請情報.get申請届出者住所());
+        if (減免減額申請情報.get申請届出者氏名() != null) {
+            div.getTxtShinseishaShimei().setDomain(減免減額申請情報.get申請届出者氏名());
+        }
+        if (減免減額申請情報.get申請届出者続柄() != null) {
+            div.getTxtShinseishaTsuzukigara().setValue(減免減額申請情報.get申請届出者続柄());
+        }
+        if (減免減額申請情報.get申請届出者郵便番号() != null) {
+            div.getTxtShinseishaYubinNo().setValue(減免減額申請情報.get申請届出者郵便番号());
+        }
+        if (減免減額申請情報.get申請届出者電話番号() != null) {
+            div.getTxtShinseishaTelNo().setDomain(減免減額申請情報.get申請届出者電話番号());
+        }
+        if (減免減額申請情報.get申請届出者住所() != null) {
+            div.getTxtShinseishaJusho().setDomain(減免減額申請情報.get申請届出者住所());
+        }
     }
 
     /**
