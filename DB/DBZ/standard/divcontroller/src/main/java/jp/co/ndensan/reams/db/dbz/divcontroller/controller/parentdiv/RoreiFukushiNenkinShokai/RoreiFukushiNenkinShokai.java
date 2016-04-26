@@ -143,6 +143,12 @@ public class RoreiFukushiNenkinShokai {
                     = getHandler(div).set老齢福祉年金確定ボタン押下の削除処理(models.get(key).deleted());
             models.deleteOrRemove(key);
             models.add(roreifukushinenkinjukyusha);
+        } else if (状態_削除.equals(イベント状態)
+                && 状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
+            RoreiFukushiNenkinJukyushaIdentifier key = new RoreiFukushiNenkinJukyushaIdentifier(
+                    new ShikibetsuCode(div.getShikibetsuCode()),
+                    new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toString()));
+            models.deleteOrRemove(key);
         }
         ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, models);
         getHandler(div).setDatagridRirekichiran(イベント状態);
