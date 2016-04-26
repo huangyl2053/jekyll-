@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.Taju
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA4020011.TajutokuShokaiHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureidaicho.TashichosonJushochiTokureiDaichoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochi.TashichosonJushochitokureishaDaichoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -42,7 +42,7 @@ public class TajutokuShokai {
      * コンストラクタです。
      */
     public TajutokuShokai() {
-        key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         service = new TashichosonJushochitokureishaDaichoPrintService();
         finder = InstanceProvider.create(TashichosonJushochiTokureiDaichoFinder.class);
     }
