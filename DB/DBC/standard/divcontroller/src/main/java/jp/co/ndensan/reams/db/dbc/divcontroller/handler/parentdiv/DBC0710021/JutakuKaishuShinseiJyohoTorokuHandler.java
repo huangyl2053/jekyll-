@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710021;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihonBuilder;
@@ -62,6 +64,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.definition.core.jusho.KannaiKangaiKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -82,6 +85,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
@@ -100,8 +104,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString 画面モード_照会 = new RString("照会モード");
     private static final RString 画面モード_削除 = new RString("削除モード");
     private static final RString 画面モード_取消 = new RString("取消モード");
-    private static final RString 状態_修正 = new RString("修正");
-    private static final RString 状態_登録 = new RString("登録");
+    private static final RString 支払方法状態_修正 = new RString("修正");
+    private static final RString 支払方法状態_登録 = new RString("登録");
+    private static final RString 支払方法状態_照会 = new RString("照会");
     private static final RString 給付実績連動_受託なし = new RString("1");
     private static final RString 給付実績緋連動_受託あり = new RString("2");
     private static final RString 要介護状態区分3段階変更による = new RString("threeUp");
@@ -169,6 +174,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString サービス種類コード固定 = new RString("0000");
     private static final RString 連番から = new RString("01");
     private static final RString 国保連再送付_チェック = new RString("0");
+    private static final RString 行状態_削除 = new RString("削除");
+    private static final RString 行状態_更新 = new RString("更新");
+    private static final RString FORMAT = new RString("%02d");
 
     private JutakuKaishuShinseiJyohoTorokuHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
@@ -226,17 +234,25 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号, RString 画面モード,
             JutakuKaishuJizenShinsei 住宅改修費事前申請, ShikibetsuCode 識別コード, RString 償還) {
+        if (画面モード_照会.equals(画面モード)) {
+            サービス提供年月 = new FlexibleYearMonth(ViewStateHolder.get(
+                    ViewStateKeys.償還払申請一覧_サービス年月, RDate.class).getYearMonth().toDateString());
+            被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
+            整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        }
         div.getTxtTeikyoYM().setDisabled(true);
         ShokanShinsei 償還払支給申請情報 = 住宅改修費支給申請.getShokanKihonShinsei(
                 被保険者番号, サービス提供年月, 整理番号);
         if (償還払支給申請情報 == null) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        ViewStateHolder.put(ViewStateKeys.償還払支給申請情報, 償還払支給申請情報);
         支給申請内容エリアを初期(償還払支給申請情報);
         ShokanKihon 償還払請求基本 = 住宅改修費支給申請.getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
         if (償還払請求基本 == null) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        ViewStateHolder.put(ViewStateKeys.償還払請求基本データ, 償還払請求基本);
         if (償還払請求基本.get保険給付率() != null) {
             div.getTxtKyufuritsu().setValue(償還払請求基本.get保険給付率().value());
         }
@@ -249,6 +265,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (償還払請求集計 == null) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        ViewStateHolder.put(ViewStateKeys.償還払請求集計, 償還払請求集計);
         JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
         model.set被保険者番号(被保険者番号);
         model.setサービス提供年月(サービス提供年月);
@@ -264,8 +281,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         前回まで支払結果の初期化(過去住宅改修費支払結果);
         SikyuSinseiJyohoParameter 支給申請情報 = new SikyuSinseiJyohoParameter();
         set支給申請情報(支給申請情報, 償還払支給申請情報, 識別コード);
-        div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
-                支給申請情報, new KamokuCode(償還払給付費), 状態_修正);
         ShokanHanteiKekka 償還払支給判定結果 = 住宅改修費支給申請.getShokanHanteiKekka(償還払請求基本.get被保険者番号(),
                 償還払請求基本.getサービス提供年月(), 償還払請求基本.get整理番号());
         ViewStateHolder.put(ViewStateKeys.償還払支給判定結果, 償還払支給判定結果);
@@ -273,6 +288,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (画面モード_審査.equals(画面モード)) {
             div.getBtnShokanKetteiJyoho().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(false);
+            div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
+                    支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_修正);
         } else if (画面モード_照会.equals(画面モード)) {
             set画面照会モードに変更();
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getBtnRireki().setDisabled(true);
@@ -280,11 +297,15 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             if (償還払支給判定結果 != null) {
                 div.getBtnShokanKetteiJyoho().setDisabled(false);
             }
+            div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
+                    支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_照会);
         } else if (画面モード_修正.equals(画面モード)) {
             div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setVisible(false);
             設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報,
                     住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号);
+            div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
+                    支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_修正);
         } else {
             設定償還払決定情報ボタンの表示(償還, 償還払支給判定結果, 償還払支給申請情報,
                     住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号);
@@ -292,6 +313,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (画面モード_削除.equals(画面モード)) {
             div.getBtnShokanKetteiJyoho().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getBtnRireki().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
+                    支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_照会);
         }
         if (画面モード_削除.equals(画面モード) && 給付実績緋連動_受託あり.equals(償還)) {
             set画面照会モードに変更();
@@ -315,6 +338,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtAddress().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
+                    支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_照会);
         }
         if (画面モード_修正.equals(画面モード) || 画面モード_削除.equals(画面モード) || 画面モード_審査.equals(画面モード)) {
             ShokanJutakuKaishuJizenShinsei 事前申請情報 = JutakuKaishuJizenShinsei.createInstance()
@@ -395,7 +420,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         SikyuSinseiJyohoParameter 支給申請情報 = new SikyuSinseiJyohoParameter();
         set事前支給申請情報(支給申請情報, 申請情報, 識別コード);
         div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
-                支給申請情報, new KamokuCode(償還払給付費), 状態_修正);
+                支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_修正);
         ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
         set住宅改修内容更新前データ();
         証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
@@ -409,6 +434,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getCommHeadPanel().getTxtSeiriNo().setValue(Saiban.get(
                 SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString());
         JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
+        model.set被保険者番号(被保険者番号);
         model.set状態(改修状態_登録);
         // TODO QAのNo.664 項目「住所クラス」の設定値は確認中
         model.set住所クラス(new _Jusho());
@@ -416,7 +442,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         SikyuSinseiJyohoParameter 支給申請情報 = new SikyuSinseiJyohoParameter();
         支給申請情報.setShikibetsuCode(識別コード);
         div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(支給申請情報,
-                new KamokuCode(償還払給付費), 状態_登録);
+                new KamokuCode(償還払給付費), 支払方法状態_登録);
         ShiharaiKekkaResult 最新住宅改修費支払結果 = 住宅改修費事前申請.getNewJutakuKaishuHi(被保険者番号);
         ViewStateHolder.put(ViewStateKeys.前回までの支払結果, 最新住宅改修費支払結果);
         前回まで支払結果の初期化(最新住宅改修費支払結果);
@@ -659,8 +685,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateYMD().setValue(
                     new RDate(償還事前申請情報.get理由書作成日().toString()));
         }
-        div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setPlaceHolder(
-                償還事前申請情報.get理由書作成者カナ());
+        div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setDomain(
+                new AtenaKanaMeisho(償還事前申請情報.get理由書作成者カナ()));
         if (償還事前申請情報.get理由書作成者() != null) {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorName().setDomain(
                     new AtenaMeisho(償還事前申請情報.get理由書作成者()));
@@ -777,8 +803,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateYMD().setValue(
                     new RDate(償還払支給申請情報.get理由書作成日().toString()));
         }
-        div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setPlaceHolder(
-                償還払支給申請情報.get理由書作成者カナ());
+        div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setDomain(
+                new AtenaKanaMeisho(償還払支給申請情報.get理由書作成者カナ()));
         if (償還払支給申請情報.get理由書作成者() != null) {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorName().setDomain(
                     new AtenaMeisho(償還払支給申請情報.get理由書作成者()));
@@ -828,7 +854,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private void 証明書表示設定(HihokenshaNo 被保険者番号, FlexibleYearMonth 提供着工年月, RString 画面モード) {
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
         YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(被保険者番号, 提供着工年月);
-        if (要支援1.equals(要介護認定情報.get要介護認定状態区分コード())
+        if (要介護認定情報 == null) {
+            set証明書値(証明書1);
+        } else if (要支援1.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要支援2.equals(要介護認定情報.get要介護認定状態区分コード())) {
             set証明書値(証明書2);
         } else if (要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
@@ -939,6 +967,15 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
         ShokanHanteiKekka 償還払支給判定結果 = ViewStateHolder.get(ViewStateKeys.償還払支給判定結果,
                 ShokanHanteiKekka.class);
+        ShokanKihon 償還払請求基本 = ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class);
+        ShokanShukei 償還払請求集計 = ViewStateHolder.get(ViewStateKeys.償還払請求集計, ShokanShukei.class);
+        ShokanShinsei dbt3034 = ViewStateHolder.get(ViewStateKeys.償還払支給申請情報, ShokanShinsei.class);
+        List<ShokanJutakuKaishu> dbt3049List = new ArrayList<>();
+        Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> jyutakugaisyu
+                = ViewStateHolder.get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class);
+        for (Iterator i = jyutakugaisyu.iterator(); i.hasNext();) {
+            dbt3049List.add((ShokanJutakuKaishu) i.next());
+        }
         if (画面モード_登録.equals(画面モード)
                 || 画面モード_事前申請.equals(画面モード)) {
             set登録モードDB保存(引き継ぎ被保険者番号, 送付区分, 送付年月, 国保連再送付フラグ, 要介護状態区分3段階変更,
@@ -946,13 +983,12 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     支払期間終了年月日save, 支払窓口開始時間save, 支払窓口終了時間save, 口座IDsave, 受領委任契約番号,
                     引き継ぎサービス提供年月, 引き継ぎ整理番号);
         } else if (画面モード_削除.equals(画面モード)) {
-            List<ShokanJutakuKaishu> dbt3049List = new ArrayList<>();
-            ShokanShinsei dbt3034 = new ShokanShinsei(引き継ぎ被保険者番号, 引き継ぎサービス提供年月, 引き継ぎ整理番号);
             住宅改修費支給申請.delDBDate(引き継ぎ被保険者番号, 引き継ぎサービス提供年月,
-                    引き継ぎ整理番号, new FlexibleDate(div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtShinseiYMD().getValue().toString()),
+                    引き継ぎ整理番号, new FlexibleDate(div.getJutakuKaishuShinseiContents().getShinseishaInfo()
+                            .getTxtShinseiYMD().getValue().toString()),
                     引き継ぎデータEntity.get識別コード(), new HokenshaNo(
                             div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()), dbt3049List,
-                    null, dbt3034, null, 償還払支給判定結果);
+                    償還払請求集計, dbt3034, 償還払請求基本, 償還払支給判定結果);
         } else if (画面モード_修正.equals(画面モード)
                 || 画面モード_審査.equals(画面モード)
                 || 画面モード_取消.equals(画面モード)) {
@@ -960,7 +996,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     国保連再送付フラグ, 要介護状態区分3段階変更, 住宅住所変更, 審査結果, 支給不支給決定区分,
                     償還払支給判定結果, 住宅改修費支給申請, 引き継ぎデータEntity, 支払方法区分コード,
                     支払場所, 支払期間開始年月日save, 支払期間終了年月日save, 支払窓口開始時間save, 支払窓口終了時間save,
-                    口座IDsave, 受領委任契約番号);
+                    口座IDsave, 受領委任契約番号, 償還払請求基本, dbt3034, 償還払請求集計, dbt3049List);
         }
     }
 
@@ -996,12 +1032,10 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             RString 審査結果, RString 支給不支給決定区分, ShokanHanteiKekka 償還払支給判定結果,
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請, ShokanharaKeteiJyohoParameter 引き継ぎデータEntity,
             RString 支払方法区分コード, RString 支払場所, FlexibleDate 支払期間開始年月日, FlexibleDate 支払期間終了年月日,
-            RString 支払窓口開始時間, RString 支払窓口終了時間, long 口座ID, RString 受領委任契約番号) {
-        ShokanShinsei dbt3034 = 住宅改修費支給申請.getShokanKihonShinsei(
-                引き継ぎ被保険者番号, 引き継ぎサービス提供年月, 引き継ぎ整理番号);
-        ShokanShukei dbt3053 = null;
-        ShokanKihon dbt3038 = 住宅改修費支給申請.getShokanKihon(引き継ぎ被保険者番号,
-                引き継ぎサービス提供年月, 引き継ぎ整理番号);
+            RString 支払窓口開始時間, RString 支払窓口終了時間, long 口座ID, RString 受領委任契約番号, ShokanKihon 償還払請求基本,
+            ShokanShinsei dbt3034, ShokanShukei 償還払請求集計, List<ShokanJutakuKaishu> dbt3049List) {
+        ShokanShukei dbt3053 = 償還払請求集計.createBuilderForEdit().build();
+        ShokanKihon dbt3038 = 償還払請求基本.createBuilderForEdit().build();
         ShokanKihonBuilder dbt3038Builder = dbt3038.createBuilderForEdit().set保険給付率(
                 new HokenKyufuRitsu(div.getTxtKyufuritsu().getValue()))
                 .set保険請求額(div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
@@ -1026,6 +1060,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     .set支給_不支給決定区分(支給不支給決定区分).set支払金額(
                             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                             .getTxtHokenKyufuAmountNow().getValue()).build();
+            償還払支給判定結果 = 償還払支給判定結果.added();
         }
         AtenaMeisho 画面理由書作成者 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                 .getTxtCreatorName().getDomain();
@@ -1033,6 +1068,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         RDate 理由書作成日 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateYMD()
                 .getValue();
         FlexibleDate 理由書作成日Save = 理由書作成日 == null ? null : new FlexibleDate(理由書作成日.toDateString());
+        List<ShokanJutakuKaishu> 住宅改修内容一覧 = new ArrayList<>();
         if (画面モード_修正.equals(画面モード)) {
             ShokanShinseiBuilder dbt3034Builder = dbt3034.createBuilderForEdit().set証記載保険者番号(
                     new ShoKisaiHokenshaNo(div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()))
@@ -1049,7 +1085,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                             .value()).set理由書作成日(理由書作成日Save)
                     .set理由書作成者(理由書作成者).set理由書作成者カナ(
                             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
-                            .getTxtCreatorKanaName().getPlaceHolder()).set支払金額合計(支払金額合計)
+                            .getTxtCreatorKanaName().getDomain().value()).set支払金額合計(支払金額合計)
                     .set保険対象費用額(div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                             .getTxtHokenTaishoHiyoNow().getValue()).set保険給付額(div.getJutakuKaishuShinseiContents()
                             .getJutakuKaishuShinseiResetInfo()
@@ -1064,10 +1100,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     .set支払場所(支払場所).set支払期間開始年月日(支払期間開始年月日)
                     .set支払期間終了年月日(支払期間終了年月日).set支払窓口開始時間(支払窓口開始時間)
                     .set支払窓口終了時間(支払窓口終了時間).set口座ID(口座ID).set受領委任契約番号(受領委任契約番号);
-            dbt3053 = 住宅改修費支給申請.getShokanSyukei(
-                    引き継ぎ被保険者番号, new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
-                            .toDateString()), div.getTxtSeiriNo().getValue(), dbt3038.get事業者番号(),
-                    dbt3038.get様式番号(), dbt3038.get明細番号());
             ShokanShukeiBuilder dbt3053Builder = dbt3053.createBuilderForEdit().set請求額(
                     div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                     .getTxtHokenKyufuAmountNow().getValue());
@@ -1082,6 +1114,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             dbt3034 = dbt3034Builder.build().modifiedModel();
             dbt3038 = dbt3038Builder.build().modified();
             dbt3053 = dbt3053Builder.build().modified();
+            住宅改修内容一覧 = get住宅改修内容一覧(償還払請求基本);
         } else if (画面モード_審査.equals(画面モード)) {
             ShokanShinseiBuilder dbt3034Builder = dbt3034.createBuilderForEdit().set証記載保険者番号(
                     new ShoKisaiHokenshaNo(div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()))
@@ -1099,7 +1132,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                             .getTxtTelNo().getDomain())
                     .set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード()).set理由書作成日(理由書作成日Save)
                     .set理由書作成者(理由書作成者).set理由書作成者カナ(div.getJutakuKaishuShinseiContents()
-                            .getJutakuKaishuShinseiReason().getTxtCreatorKanaName().getPlaceHolder())
+                            .getJutakuKaishuShinseiReason().getTxtCreatorKanaName().getDomain().value())
                     .set送付年月(送付年月).set国保連再送付フラグ(国保連再送付フラグ).set住宅所有者(
                             div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().getValue())
                     .set被保険者の関係(div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().getValue())
@@ -1109,10 +1142,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     .set支払期間終了年月日(支払期間終了年月日).set支払窓口開始時間(支払窓口開始時間)
                     .set支払窓口終了時間(支払窓口終了時間).set口座ID(口座ID).set受領委任契約番号(受領委任契約番号);
             dbt3038 = dbt3038Builder.build().modified();
-            dbt3053 = 住宅改修費支給申請.getShokanSyukei(
-                    引き継ぎ被保険者番号, new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
-                            .toDateString()), div.getTxtSeiriNo().getValue(), dbt3038.get事業者番号(),
-                    dbt3038.get様式番号(), dbt3038.get明細番号());
             ShokanShukeiBuilder dbt3053Builder = dbt3053.createBuilderForEdit().set請求額(
                     div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                     .getTxtHokenKyufuAmountNow().getValue())
@@ -1128,6 +1157,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             dbt3053 = dbt3053Builder.build().modified();
             申請事業者理由書作成事業者番号設定(dbt3034Builder);
             dbt3034 = dbt3034Builder.build().modifiedModel();
+            住宅改修内容一覧 = get住宅改修内容一覧(償還払請求基本);
         } else if (画面モード_取消.equals(画面モード)) {
             dbt3034 = dbt3034.createBuilderForEdit().set住宅改修申請区分(JutakukaishuShinseiKubun.取消.getCode())
                     .set住宅改修申請取消事由コード(
@@ -1137,7 +1167,73 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         住宅改修費支給申請.updDBDate(引き継ぎ被保険者番号, 引き継ぎサービス提供年月,
                 引き継ぎ整理番号, 画面モード, 引き継ぎデータEntity.get識別コード(),
                 new HokenshaNo(div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()),
-                dbt3034, dbt3038, null, dbt3053, 償還払支給判定結果);
+                dbt3034, dbt3038, 住宅改修内容一覧, dbt3053, 償還払支給判定結果);
+    }
+
+    private List<ShokanJutakuKaishu> get住宅改修内容一覧(ShokanKihon 償還払請求基本) {
+        List<ShokanJutakuKaishu> kaishuList = new ArrayList<>();
+        List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
+                .get住宅改修内容一覧();
+        int index = 0;
+        Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> oldDataList = ViewStateHolder
+                .get(ViewStateKeys.住宅改修内容一覧_検索結果, Models.class);
+        for (ShokanJutakuKaishu tmp : oldDataList.aliveValues()) {
+            if (index < Integer.valueOf(tmp.get連番().toString())) {
+                index = Integer.valueOf(tmp.get連番().toString());
+            }
+        }
+        for (dgGaisyuList_Row tmpRow : gridList) {
+            if (行状態_更新.equals(tmpRow.getTxtJyotai()) || 行状態_削除.equals(tmpRow.getTxtJyotai())) {
+                ShokanJutakuKaishu oldData = 住宅改修レコードの取得(tmpRow, oldDataList);
+                ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = oldData.createBuilderForEdit();
+//                shokanJutakuKaishuBuilder.set住宅改修内容(tmpRow.getTxtKaishuNaiyo());
+//                shokanJutakuKaishuBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
+//                shokanJutakuKaishuBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
+//                shokanJutakuKaishuBuilder.set住宅改修着工年月日(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()));
+//                shokanJutakuKaishuBuilder.set住宅改修完成年月日(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()));
+//                shokanJutakuKaishuBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty()
+//                        ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
+//                EntityDataState state = 行状態_更新.equals(tmpRow.getTxtJyotai())
+//                        ? EntityDataState.Modified : EntityDataState.Deleted;
+//                shokanJutakuKaishuBuilder.setステータス(state);
+                oldData = shokanJutakuKaishuBuilder.build();
+                kaishuList.add(oldData);
+            } else {
+                index = index + 1;
+                ShokanJutakuKaishu addData = new ShokanJutakuKaishu(
+                        償還払請求基本.get被保険者番号(),
+                        償還払請求基本.getサービス提供年月(),
+                        償還払請求基本.get整理番号(),
+                        償還払請求基本.get事業者番号(),
+                        償還払請求基本.get様式番号(),
+                        償還払請求基本.get明細番号(),
+                        new RString(String.format(FORMAT.toString(), index)));
+                ShokanJutakuKaishuBuilder addDataBuilder = addData.createBuilderForEdit();
+//                addDataBuilder.set住宅改修内容(tmpRow.getTxtKaishuNaiyo());
+//                addDataBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
+//                addDataBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
+//                addDataBuilder.set住宅改修着工年月日(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()));
+//                addDataBuilder.set住宅改修完成年月日(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()));
+//                addDataBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty()
+//                        ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
+//                addDataBuilder.setステータス(EntityDataState.Added);
+                addData = addDataBuilder.build();
+                kaishuList.add(addData);
+            }
+        }
+        return kaishuList;
+    }
+
+    private ShokanJutakuKaishu 住宅改修レコードの取得(dgGaisyuList_Row data,
+            Models<ShokanJutakuKaishuIdentifier, ShokanJutakuKaishu> oldDataList) {
+        for (ShokanJutakuKaishu tmp : oldDataList.aliveValues()) {
+            if (data.getTxtJigyoshaNo().equals(tmp.get事業者番号().value())
+                    && data.getTxtMeseiNo().equals(tmp.get明細番号())
+                    && data.getTxtRenban().equals(tmp.get連番())) {
+                return tmp;
+            }
+        }
+        return null;
     }
 
     private void 申請事業者理由書作成事業者番号設定(ShokanShinseiBuilder dbt3034Builder) {
@@ -1190,7 +1286,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                         .getTxtTelNo().getDomain()).set理由書作成日(理由書作成日Save)
                 .set理由書作成者(理由書作成者).set理由書作成者カナ(div.getJutakuKaishuShinseiContents()
                         .getJutakuKaishuShinseiReason()
-                        .getTxtCreatorKanaName().getPlaceHolder()).set支払金額合計(
+                        .getTxtCreatorKanaName().getDomain().value()).set支払金額合計(
                         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHiyoTotalNow().getValue())
                 .set保険対象費用額(div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
@@ -1373,7 +1469,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         画面データ.put(作成日_キー,
                 作成日 == null ? null : 作成日.toDateString());
         画面データ.put(作成者氏名から_キー, div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
-                .getTxtCreatorKanaName().getPlaceHolder());
+                .getTxtCreatorKanaName().getDomain().value());
         画面データ.put(作成者氏名_キー, div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                 .getTxtCreatorName().getDomain().value());
         画面データ.put(作成事業者_キー, div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
@@ -1715,19 +1811,21 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     public RString 住宅改修内容一覧チェック() {
         List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
-        if (!gridList.isEmpty()) {
-            List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
-            JyutakuGaisyunaiyoListParameter param;
-            for (dgGaisyuList_Row row : gridList) {
-                param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
-                        RowState.valueOf(row.getTxtJyotai().toString()),
-                        row.getTxtJutakuAddress(), new FlexibleDate(row.getTxtChakkoYoteibi()));
-                paramList.add(param);
-            }
-            return JutakukaishuSikyuShinseiManager.createInstance().checkJyutakuGaisyunaiyoList(paramList,
-                    new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
+//        if (!gridList.isEmpty()) {
+        List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
+        JyutakuGaisyunaiyoListParameter param;
+        for (dgGaisyuList_Row row : gridList) {
+            RowState 状態 = RString.EMPTY.equals(row.getTxtJyotai())
+                    ? RowState.Unchanged : RowState.valueOf(row.getTxtJyotai().toString());
+            param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
+                    状態, row.getTxtJutakuAddress(),
+                    new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));
+            paramList.add(param);
         }
-        return RString.EMPTY;
+        return JutakukaishuSikyuShinseiManager.createInstance().checkJyutakuGaisyunaiyoList(paramList,
+                new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
+//        }
+//        return RString.EMPTY;
     }
 }
 

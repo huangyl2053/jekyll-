@@ -12,22 +12,6 @@
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
 
-
-    <select id="select境界層該当者" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity" fetchSize="500">
-        SELECT
-        *
-        FROM
-        rgdb."DbT1006KyokaisoGaitosha" AS A
-        WHERE
-        A."hihokenshaNo" = #{被保険者番号}
-        AND A."tekiyoKaishiYMD" <![CDATA[<=]]> #{適用日}
-        AND
-        CASE WHEN A."tekiyoShuryoYMD" = NULL THEN #{適用日} <![CDATA[<=]]> '99999999'
-        ELSE #{適用日} <![CDATA[<=]]> A."tekiyoShuryoYMD"
-        AND A."logicalDeletedFlag" = false
-    </select>
-
     <select id="get負担限度額認定申請の情報List"
             resultMap="resultMap_FutanGendogakuNinteiEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter"

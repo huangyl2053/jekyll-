@@ -57,7 +57,7 @@ public class GokeiBubunEntity implements IDbAccessable {
      * @param 調定額の小計 調定額の小計
      */
     public void add月の調定額の小計By月別(Tsuki 月別, Decimal 調定額の小計) {
-        調定額の小計 = (null == 調定額の小計) ? Decimal.ZERO : 調定額の小計;
+        調定額の小計 = (調定額の小計 == null) ? Decimal.ZERO : 調定額の小計;
         if (Tsuki._1月.equals(月別)) {
             choteigaku1GatsuCount = add(choteigaku1GatsuCount, 調定額の小計);
         } else if (Tsuki._2月.equals(月別)) {
@@ -90,8 +90,8 @@ public class GokeiBubunEntity implements IDbAccessable {
     }
 
     private Decimal add(Decimal val1, Decimal val2) {
-        val1 = (null == val1) ? Decimal.ZERO : val1;
-        val2 = (null == val2) ? Decimal.ZERO : val2;
+        val1 = (val1 == null) ? Decimal.ZERO : val1;
+        val2 = (val2 == null) ? Decimal.ZERO : val2;
         return val1.add(val2);
     }
 }

@@ -9,16 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuViewState;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuMapperParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.DBD1020001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.DBD1020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
@@ -26,31 +19,20 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.ddlS
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler.RiyoshaFutangakuGengakuComparator;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuValidationHandler;
-import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -58,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 利用者負担額減額申請のクラスです。
@@ -68,11 +49,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class RiyoshaFutangakuGengakuPanel {
 
     private final RString 承認メニュー = new RString("DBDMN22002");
-    private static final RString 空白KEY = new RString("-1");
     private static final RString 承認する_KEY = new RString("key0");
-    private static final Decimal 給付率_81 = new Decimal(81);
-    private static final Decimal 給付率_91 = new Decimal(91);
-    private static final Decimal 給付率_100 = new Decimal(100);
     private static final RString 追加 = new RString("追加");
 
     /**
@@ -190,41 +167,15 @@ public class RiyoshaFutangakuGengakuPanel {
             return ResponseData.of(div).setState(DBD1020001StateName.一覧);
         }
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
-
-        FutanwariaiKubun 負担割合区分 = service.get利用者負担割合(被保険者番号, div.getTxtShinseiYmd().getValue());
-        Decimal 給付率 = Decimal.ZERO;
-        if (div.getTxtKyufuRitsu() != null && div.getTxtKyufuRitsu().getValue() != null) {
-            給付率 = div.getTxtKyufuRitsu().getValue();
-        }
-        if ((FutanwariaiKubun._２割.getコード().equals(負担割合区分.getコード())
-                && (給付率.compareTo(給付率_81) < 0 || 給付率.compareTo(給付率_100) > 0))
-                || (FutanwariaiKubun._１割.getコード().equals(負担割合区分.getコード())
-                && (給付率.compareTo(給付率_91) < 0 || 給付率.compareTo(給付率_100) > 0))) {
-            throw new ApplicationException(DbdErrorMessages.利用者負担額減額_給付率範囲外.getMessage());
+        getValidationHandler().validateFor利用者負担額減額_給付率範囲外(pairs, div);
+        getValidationHandler().validateFor利用者負担額減額_適用開始日が法施行以前(pairs, div);
+        getValidationHandler().validateFor利用者負担額減額_適用終了日が年度外(pairs, div);
+        getValidationHandler().validateFor利用者負担額減額_適用終了日が開始日以前(pairs, div);
+        getValidationHandler().validateFor受給共通_受給者登録なし(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        FlexibleDate 適用日 = div.getTxtTekiyoYmd().getValue();
-        RString 法施行日 = DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (!new FlexibleDate(法施行日).isBeforeOrEquals(適用日)) {
-            throw new ApplicationException(DbdErrorMessages.減免減額_適用日が法施行前.getMessage());
-        }
-
-        FlexibleDate 標準有効期限 = service.estimate有効期限(適用日);
-        FlexibleDate 有効期限 = div.getTxtYukoKigenYmd().getValue();
-        if (!有効期限.isBefore(標準有効期限)) {
-            throw new ApplicationException(DbdErrorMessages.減免減額_有効期限が年度外.getMessage());
-        }
-
-        if (!適用日.isBeforeOrEquals(有効期限)) {
-            throw new ApplicationException(DbdErrorMessages.減免減額_有効期限が適用日以前.getMessage());
-        }
-
-        boolean 利用者 = service.canBe利用者(被保険者番号, 適用日);
-        if (!利用者) {
-            throw new ApplicationException(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage());
-        }
         getHandler(div).承認情報を確定するボタン押下();
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
@@ -318,7 +269,6 @@ public class RiyoshaFutangakuGengakuPanel {
      * @param div RiyoshaFutangakuGengakuPanelPanelDiv
      * @return レスポンスデータ
      */
-    @Transaction
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnUpdate(RiyoshaFutangakuGengakuPanelDiv div) {
 
         if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode())
@@ -332,13 +282,13 @@ public class RiyoshaFutangakuGengakuPanel {
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        if (!ResponseHolder.getMenuID().equals(承認メニュー)
-                && getHandler(div).適用期間重複あり()) {
-            throw new ApplicationException(DbdErrorMessages.減免減額_適用期間重複.getMessage());
+        if (!ResponseHolder.getMenuID().equals(承認メニュー)) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            getValidationHandler().validateFor適用期間重複なし(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
-
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
 
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -349,7 +299,7 @@ public class RiyoshaFutangakuGengakuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            PersonalData personalData = getHandler(div).toPersonalData(識別コード, 被保険者番号);
+            PersonalData personalData = getHandler(div).toPersonalData();
             AccessLogger.log(AccessLogType.更新, personalData);
 
             保存処理();
@@ -387,7 +337,6 @@ public class RiyoshaFutangakuGengakuPanel {
         return ResponseData.of(div).forwardWithEventName(DBD1020001TransitionEventName.検索結果一覧へ).respond();
     }
 
-    @Transaction
     private void 保存処理() {
 
         List<RiyoshaFutangakuGengakuViewState> orderViewStateList = new ArrayList<>();
@@ -408,19 +357,8 @@ public class RiyoshaFutangakuGengakuPanel {
             }
         }
 
-        if (削除List.size() > 0) {
-            delete(削除List);
-        }
-        if (修正List.size() > 0) {
-            更新or登録(修正List);
-        }
-        if (履歴修正ありList.size() > 0) {
-            delete(履歴修正ありList);
-            更新or登録(履歴修正ありList);
-        }
-        if (追加List.size() > 0) {
-            更新or登録(追加List);
-        }
+        RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
+        service.保存処理(削除List, 追加List, 修正List, 履歴修正ありList);
     }
 
     private void 履歴番号の修正(List<RiyoshaFutangakuGengakuViewState> orderViewStateList, List<RiyoshaFutangakuGengakuViewState> 削除List) {
@@ -481,146 +419,6 @@ public class RiyoshaFutangakuGengakuPanel {
                 }
             }
             orderViewStateList.add(joho１);
-        }
-    }
-
-    private void delete(List<RiyoshaFutangakuGengakuViewState> 削除List) {
-        RiyoshaFutangakuGengakuManager manager = RiyoshaFutangakuGengakuManager.createInstance();
-
-        RiyoshaFutangakuGengaku joho;
-        RiyoshaFutangakuGengaku object;
-        for (RiyoshaFutangakuGengakuViewState viewState : 削除List) {
-            joho = viewState.getRiyoshaFutangakuGengaku();
-            object = manager.get利用者負担額減額(RiyoshaFutangakuGengakuMapperParameter.createSelectByKeyParam(joho.get証記載保険者番号(), joho.get被保険者番号(), joho.get履歴番号()));
-            if (object != null) {
-                manager.delete利用者負担額減額(object);
-            }
-        }
-    }
-
-    private void 更新or登録(List<RiyoshaFutangakuGengakuViewState> 保存List) {
-        RiyoshaFutangakuGengakuManager manager = RiyoshaFutangakuGengakuManager.createInstance();
-
-        RiyoshaFutangakuGengaku joho;
-        RiyoshaFutangakuGengaku dbObject;
-        for (RiyoshaFutangakuGengakuViewState viewState : 保存List) {
-            int 履歴番号 = viewState.getShorigoRirekiNo();
-            joho = viewState.getRiyoshaFutangakuGengaku();
-            joho = joho.createBuilderForEdit().set履歴番号(履歴番号).build();
-
-            dbObject = manager.get利用者負担額減額(RiyoshaFutangakuGengakuMapperParameter.createSelectByKeyParam(joho.get証記載保険者番号(), joho.get被保険者番号(), joho.get履歴番号()));
-            if (dbObject != null) {
-                update(joho, dbObject, manager);
-            } else {
-                insert(joho, manager);
-            }
-        }
-    }
-
-    private void update(RiyoshaFutangakuGengaku joho, RiyoshaFutangakuGengaku dbObject,
-            RiyoshaFutangakuGengakuManager manager) {
-
-        RiyoshaFutangakuGengakuBuilder builder = dbObject.createBuilderForEdit();
-        builder.set旧措置者有無(joho.is旧措置者有無());
-        if (joho.get申請事由() != null) {
-            builder.set申請事由(joho.get申請事由());
-        }
-        builder.set申請年月日(joho.get申請年月日());
-        if (joho.get決定区分() != null && KetteiKubun.承認する.getコード().equals(joho.get決定区分())) {
-            builder.set決定区分(joho.get決定区分());
-            builder.set決定年月日(joho.get決定年月日());
-            builder.set適用開始年月日(joho.get適用開始年月日());
-            builder.set適用終了年月日(joho.get適用終了年月日());
-            builder.set給付率(joho.get給付率());
-            builder.set非承認理由(RString.EMPTY);
-
-        } else if (joho.get決定区分() != null && KetteiKubun.承認しない.getコード().equals(joho.get決定区分())) {
-            builder.set決定区分(joho.get決定区分());
-            builder.set決定年月日(joho.get決定年月日());
-            builder.set非承認理由(joho.get非承認理由());
-            builder.set給付率(HokenKyufuRitsu.ZERO);
-            builder.set適用開始年月日(FlexibleDate.EMPTY);
-            builder.set適用終了年月日(FlexibleDate.EMPTY);
-        }
-
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = new GemmenGengakuShinsei(joho.get証記載保険者番号(), joho.get被保険者番号(),
-                GemmenGengakuShurui.利用者負担額減額.getコード(), joho.get履歴番号()).createBuilderForEdit();
-
-        if (dbObject.getGemmenGengakuShinseiList() != null && dbObject.getGemmenGengakuShinseiList().size() > 0) {
-            for (GemmenGengakuShinsei gemmenGengakuShinsei : dbObject.getGemmenGengakuShinseiList()) {
-                if (GemmenGengakuShurui.利用者負担額減額.getコード().equals(gemmenGengakuShinsei.get減免減額種類())) {
-                    gemmenGengakuShinseiBuilder = gemmenGengakuShinsei.createBuilderForEdit();
-                    break;
-                }
-            }
-        }
-        GemmenGengakuShinsei pageGemmenGengakuShinsei = joho.getGemmenGengakuShinseiList().get(0);
-        setGemmenGengakuShinseiBuilder(gemmenGengakuShinseiBuilder, pageGemmenGengakuShinsei);
-        builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
-
-        dbObject = builder.build();
-        manager.save利用者負担額減額(dbObject);
-    }
-
-    private void insert(RiyoshaFutangakuGengaku joho, RiyoshaFutangakuGengakuManager manager) {
-
-        RiyoshaFutangakuGengaku object = new RiyoshaFutangakuGengaku(joho.get証記載保険者番号(), joho.get被保険者番号(), joho.get履歴番号());
-
-        RiyoshaFutangakuGengakuBuilder builder = object.createBuilderForEdit();
-        builder.set旧措置者有無(joho.is旧措置者有無());
-        if (joho.get申請事由() != null) {
-            builder.set申請事由(joho.get申請事由());
-        }
-        builder.set申請年月日(joho.get申請年月日());
-        if (joho.get決定区分() != null && KetteiKubun.承認する.getコード().equals(joho.get決定区分())) {
-            builder.set決定区分(joho.get決定区分());
-            builder.set決定年月日(joho.get決定年月日());
-            builder.set適用開始年月日(joho.get適用開始年月日());
-            builder.set適用終了年月日(joho.get適用終了年月日());
-            builder.set給付率(joho.get給付率());
-        } else if (joho.get決定区分() != null && KetteiKubun.承認しない.getコード().equals(joho.get決定区分())) {
-            builder.set決定区分(joho.get決定区分());
-            builder.set決定年月日(joho.get決定年月日());
-            builder.set非承認理由(joho.get非承認理由());
-        }
-
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = new GemmenGengakuShinsei(joho.get証記載保険者番号(),
-                joho.get被保険者番号(), GemmenGengakuShurui.利用者負担額減額.getコード(), joho.get履歴番号()).createBuilderForEdit();
-        GemmenGengakuShinsei pageGemmenGengakuShinsei = joho.getGemmenGengakuShinseiList().get(0);
-        setGemmenGengakuShinseiBuilder(gemmenGengakuShinseiBuilder, pageGemmenGengakuShinsei);
-        builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
-
-        object = builder.build();
-        manager.save利用者負担額減額(object);
-    }
-
-    private void setGemmenGengakuShinseiBuilder(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder, GemmenGengakuShinsei pageGemmenGengakuShinsei) {
-        if (pageGemmenGengakuShinsei.get事業者区分() != null && !空白KEY.equals(pageGemmenGengakuShinsei.get事業者区分())) {
-            gemmenGengakuShinseiBuilder.set事業者区分(pageGemmenGengakuShinsei.get事業者区分());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出代行事業者番号() != null && !pageGemmenGengakuShinsei.get申請届出代行事業者番号().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(pageGemmenGengakuShinsei.get申請届出代行事業者番号());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出代行区分() != null && !空白KEY.equals(pageGemmenGengakuShinsei.get申請届出代行区分())) {
-            gemmenGengakuShinseiBuilder.set申請届出代行区分(pageGemmenGengakuShinsei.get申請届出代行区分());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出者住所() != null && !pageGemmenGengakuShinsei.get申請届出者住所().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者住所(pageGemmenGengakuShinsei.get申請届出者住所());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出者氏名() != null && !pageGemmenGengakuShinsei.get申請届出者氏名().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者氏名(pageGemmenGengakuShinsei.get申請届出者氏名());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出者氏名カナ() != null && !pageGemmenGengakuShinsei.get申請届出者氏名カナ().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(pageGemmenGengakuShinsei.get申請届出者氏名カナ());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出者続柄() != null && !pageGemmenGengakuShinsei.get申請届出者続柄().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者続柄(pageGemmenGengakuShinsei.get申請届出者続柄());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出者郵便番号() != null && !pageGemmenGengakuShinsei.get申請届出者郵便番号().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者郵便番号(pageGemmenGengakuShinsei.get申請届出者郵便番号());
-        }
-        if (pageGemmenGengakuShinsei.get申請届出者電話番号() != null && !pageGemmenGengakuShinsei.get申請届出者電話番号().isEmpty()) {
-            gemmenGengakuShinseiBuilder.set申請届出者電話番号(pageGemmenGengakuShinsei.get申請届出者電話番号());
         }
     }
 

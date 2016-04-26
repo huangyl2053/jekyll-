@@ -35,7 +35,7 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
-                    return div.getRadKetteiKubun().getSelectedKey() != null;
+                    return div.getRadKetteiKubun().getSelectedKey() != null && !div.getRadKetteiKubun().getSelectedKey().isEmpty();
                 }
             },
     決定日の非空チェック {

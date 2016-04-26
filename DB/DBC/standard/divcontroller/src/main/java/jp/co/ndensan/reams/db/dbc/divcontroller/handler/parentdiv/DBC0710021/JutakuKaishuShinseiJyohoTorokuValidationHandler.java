@@ -83,7 +83,9 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
 
     private ValidationDictionary create住宅改修内容Dictionary() {
         ValidationDictionaryBuilder builder = new ValidationDictionaryBuilder()
-                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM());
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM())
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力,
+                        div.getCommHeadPanel().getTxtKyufuritsu());
         if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
             if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                 builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.メッセージ_1);
@@ -165,6 +167,10 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                     .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が入力)
                     .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力)
                     .messages());
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.給付率が入力)
+                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力)
+                    .messages());
             if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
                 if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                     messages.add(ValidateChain.validateStart(div)
@@ -194,6 +200,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     private static enum JutakuKaishuShinseiJyohoTorokuValidationMessages implements IValidationMessage {
 
         提供着工年月が未入力(UrErrorMessages.必須, "提供（着工）年月"),
+        給付率が未入力(UrErrorMessages.必須, "給付率"),
         住宅所有者が未入力(UrErrorMessages.必須, "住宅所有者"),
         申請日が未入力(UrErrorMessages.必須, "申請日"),
         申請取消事由が未入力(UrErrorMessages.必須, "申請取消事由"),

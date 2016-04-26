@@ -94,6 +94,15 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 }
             },
     /**
+     * 給付率入力必須チェック
+     */
+    給付率が入力 {
+                @Override
+                public boolean apply(JutakuKaishuShinseiJyohoTorokuDiv div) {
+                    return SpecHelper.is給付率が入力(div);
+                }
+            },
+    /**
      * 住宅所有者入力必須チェック
      */
     提供着工年月が申請日の年月と一致しない {
@@ -130,31 +139,33 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                     .getSelectedKey().isNullOrEmpty();
         }
 
+        public static boolean is給付率が入力(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            return div.getCommHeadPanel().getTxtKyufuritsu().getValue() != null;
+        }
+
         public static boolean is住宅改修内容一覧妥当(JutakuKaishuShinseiJyohoTorokuDiv div) {
             List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                     .get住宅改修内容一覧();
-            if (!gridList.isEmpty()) {
-                List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
-                JyutakuGaisyunaiyoListParameter param;
-                for (dgGaisyuList_Row row : gridList) {
-                    param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
-                            RowState.valueOf(row.getTxtJyotai().toString()),
-                            row.getTxtJutakuAddress(), new FlexibleDate(row.getTxtChakkoYoteibi()));
-                    paramList.add(param);
-                }
-                RString 住宅改修内容一覧チェック = JutakukaishuSikyuShinseiManager.createInstance()
-                        .checkJyutakuGaisyunaiyoList(paramList,
-                                new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
-                if (!住宅改修内容一覧チェック.isNullOrEmpty()) {
-                    return false;
-                }
+            List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
+            JyutakuGaisyunaiyoListParameter param;
+            for (dgGaisyuList_Row row : gridList) {
+                param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
+                        RowState.valueOf(row.getTxtJyotai().toString()),
+                        row.getTxtJutakuAddress(), new FlexibleDate(row.getTxtChakkoYoteibi()));
+                paramList.add(param);
             }
-            return true;
+            RString 住宅改修内容一覧チェック = JutakukaishuSikyuShinseiManager.createInstance()
+                    .checkJyutakuGaisyunaiyoList(paramList,
+                            new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
+            return 住宅改修内容一覧チェック.isNullOrEmpty();
         }
 
         public static boolean is提供着工年月が申請日の年月と一致しない(JutakuKaishuShinseiJyohoTorokuDiv div) {
             RString 給付実績連動_受託なし = new RString("1");
             RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
+            if (画面提供着工年月 == null) {
+                return true;
+            }
             RDate 申請日 = div.getJutakuKaishuShinseiContents().getShinseishaInfo()
                     .getTxtShinseiYMD().getValue();
             RYearMonth 申請日年月 = null;
