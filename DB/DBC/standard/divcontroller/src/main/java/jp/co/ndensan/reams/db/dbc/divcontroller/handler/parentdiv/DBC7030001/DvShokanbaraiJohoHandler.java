@@ -87,7 +87,7 @@ public class DvShokanbaraiJohoHandler {
         ViewStateHolder.put(ViewStateKeys.様式名称_様式コード, (Serializable) 様式番号一覧);
         List<ShikibetsuNoKanri> 様式番号一覧onLoad = get様式番号一覧(介護);
         set様式番号一覧(様式番号一覧onLoad);
-        // TODO すべての明細をチェックOnとする
+        // TODO QARedmine#83481 すべての明細をチェックOnとする
         div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().setIsTriggerEventOnMultiRow(true);
         panel.getDdlShokanShoriJokyo().setDataSource(get処理状況リスト());
         panel.getDdlShokanKetteiJoho().setDataSource(get決定状況リスト());
@@ -208,7 +208,7 @@ public class DvShokanbaraiJohoHandler {
         List<dgYoshikiNo_Row> rowList = new ArrayList<>();
         for (ShikibetsuNoKanri 様式番号 : 様式番号一覧) {
             dgYoshikiNo_Row row = new dgYoshikiNo_Row();
-            // TODO QA673 給付分類区分.識別番号、略称
+            // TODO QARedmine#83481 給付分類区分.識別番号、略称
             row.setYoshikiName(様式番号.get名称());
 //           row.setYoshikiName(様式番号.get);
             rowList.add(row);

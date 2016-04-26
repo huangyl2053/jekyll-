@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class DvShokanbaraiJoho {
 
+    private static final ReportId 帳票ID = new ReportId("DBC701002_HanyoListShokanbaraiJokyo");
+
     /**
      * 画面の初期化メソッドです。
      *
@@ -29,7 +31,7 @@ public class DvShokanbaraiJoho {
      */
     public ResponseData<DvShokanbaraiJohoDiv> onLoad(DvShokanbaraiJohoDiv div) {
         getHandler(div).initialize抽出条件パネル();
-        div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportId.EMPTY);
+        div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         return createResponse(div);
     }
 
