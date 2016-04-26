@@ -222,7 +222,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         csvEntity.setTorokuTodokedeYMD(登録届出日);
         bodyItem.set登録届出日(登録届出日);
         RString 住所地特例 = entity.get住所地特例フラグ();
-        if (RString.isNullOrEmpty(住所地特例) && フラグ1.equals(住所地特例)) {
+        if (!RString.isNullOrEmpty(住所地特例) && フラグ1.equals(住所地特例)) {
             住所地特例 = 住所地特例フラグ1;
         } else {
             住所地特例 = RString.EMPTY;
@@ -304,7 +304,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         csvEntity.setTorokuTodokedeYMD(登録届出日);
         bodyItem.set登録届出日(登録届出日);
         RString 住所地特例 = entity.get住所地特例フラグ();
-        if (RString.isNullOrEmpty(住所地特例) && フラグ1.equals(住所地特例)) {
+        if (!RString.isNullOrEmpty(住所地特例) && フラグ1.equals(住所地特例)) {
             住所地特例 = 住所地特例フラグ1;
         } else {
             住所地特例 = RString.EMPTY;
