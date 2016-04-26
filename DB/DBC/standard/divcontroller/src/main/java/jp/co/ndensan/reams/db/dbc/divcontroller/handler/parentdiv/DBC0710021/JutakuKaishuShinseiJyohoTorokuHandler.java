@@ -1078,16 +1078,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 dbt3053Builder.set利用者負担額(利用者負担額.intValue());
                 dbt3034Builder.set利用者負担額(利用者負担額.intValue());
             }
-            RString 申請事業者番号 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo()
-                    .getValue();
-            if (!申請事業者番号.isNullOrEmpty()) {
-                dbt3034Builder.set申請事業者番号(new JigyoshaNo(申請事業者番号));
-            }
-            RString 理由書作成事業者番号 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
-                    .getTxtCreationJigyoshaNo().getValue();
-            if (!理由書作成事業者番号.isNullOrEmpty()) {
-                dbt3034Builder.set理由書作成事業者番号(new JigyoshaNo(理由書作成事業者番号));
-            }
+            申請事業者理由書作成事業者番号設定(dbt3034Builder);
             dbt3034 = dbt3034Builder.build().modifiedModel();
             dbt3038 = dbt3038Builder.build().modified();
             dbt3053 = dbt3053Builder.build().modified();
@@ -1135,16 +1126,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 dbt3034Builder.set利用者負担額(利用者負担額.intValue());
             }
             dbt3053 = dbt3053Builder.build().modified();
-            RString 申請事業者番号 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo()
-                    .getValue();
-            if (!申請事業者番号.isNullOrEmpty()) {
-                dbt3034Builder.set申請事業者番号(new JigyoshaNo(申請事業者番号));
-            }
-            RString 理由書作成事業者番号 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
-                    .getTxtCreationJigyoshaNo().getValue();
-            if (!理由書作成事業者番号.isNullOrEmpty()) {
-                dbt3034Builder.set理由書作成事業者番号(new JigyoshaNo(理由書作成事業者番号));
-            }
+            申請事業者理由書作成事業者番号設定(dbt3034Builder);
             dbt3034 = dbt3034Builder.build().modifiedModel();
         } else if (画面モード_取消.equals(画面モード)) {
             dbt3034 = dbt3034.createBuilderForEdit().set住宅改修申請区分(JutakukaishuShinseiKubun.取消.getCode())
@@ -1156,6 +1138,19 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 引き継ぎ整理番号, 画面モード, 引き継ぎデータEntity.get識別コード(),
                 new HokenshaNo(div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()),
                 dbt3034, dbt3038, null, dbt3053, 償還払支給判定結果);
+    }
+
+    private void 申請事業者理由書作成事業者番号設定(ShokanShinseiBuilder dbt3034Builder) {
+        RString 申請事業者番号 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo()
+                .getValue();
+        if (!申請事業者番号.isNullOrEmpty()) {
+            dbt3034Builder.set申請事業者番号(new JigyoshaNo(申請事業者番号));
+        }
+        RString 理由書作成事業者番号 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
+                .getTxtCreationJigyoshaNo().getValue();
+        if (!理由書作成事業者番号.isNullOrEmpty()) {
+            dbt3034Builder.set理由書作成事業者番号(new JigyoshaNo(理由書作成事業者番号));
+        }
     }
 
     private void set登録モードDB保存(HihokenshaNo 引き継ぎ被保険者番号,
@@ -1268,16 +1263,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (支払金額合計 != null) {
             dbt3038Builder.setサービス単位数(支払金額合計.intValue());
         }
-        RString 申請事業者番号 = div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtJigyoshaNo()
-                .getValue();
-        if (!申請事業者番号.isNullOrEmpty()) {
-            dbt3034Builder.set申請事業者番号(new JigyoshaNo(申請事業者番号));
-        }
-        RString 理由書作成事業者番号 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
-                .getTxtCreationJigyoshaNo().getValue();
-        if (!理由書作成事業者番号.isNullOrEmpty()) {
-            dbt3034Builder.set理由書作成事業者番号(new JigyoshaNo(理由書作成事業者番号));
-        }
+        申請事業者理由書作成事業者番号設定(dbt3034Builder);
         if (画面モード_事前申請.equals(画面モード)) {
             dbt3034Builder.set事前申請サービス提供年月(new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
                     .toDateString())).set事前申請整理番号(div.getTxtSeiriNo().getValue());

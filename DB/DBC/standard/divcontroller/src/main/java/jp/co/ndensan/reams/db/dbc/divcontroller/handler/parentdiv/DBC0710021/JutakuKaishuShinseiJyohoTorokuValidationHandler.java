@@ -94,8 +94,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
             }
         }
         builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が申請日の年月と一致しない);
-        ValidationDictionary validation = builder.build();
-        return validation;
+        return builder.build();
     }
 
     private ValidationDictionary createDictionary() {
