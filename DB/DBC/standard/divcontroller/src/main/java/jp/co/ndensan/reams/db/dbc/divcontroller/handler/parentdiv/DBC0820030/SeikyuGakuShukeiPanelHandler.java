@@ -282,6 +282,10 @@ public class SeikyuGakuShukeiPanelHandler {
                 getTxtKeikakuTanyi().getValue())) {
             return true;
         }
+        if (!ddgRow.getDefaultDataName19().equals(div.
+                getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード())) {
+            return true;
+        }
         return (!ddgRow.getDefaultDataName17().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                 getTxtJitsuNissu().getValue()));
 
@@ -354,7 +358,9 @@ public class SeikyuGakuShukeiPanelHandler {
             ddgRow.setDefaultDataName18(div.getPanelSeikyugakuShukei().
                     getPanelSeikyuShokai().getRdoShinsahouhou().getSelectedKey());
         }
-        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード() != null) {
+        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード()
+                != null && !div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
+                getCcdServiceTypeInput().getサービス種類コード().isEmpty()) {
             ddgRow.setDefaultDataName19(div.getPanelSeikyugakuShukei().
                     getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード());
         }
@@ -362,7 +368,6 @@ public class SeikyuGakuShukeiPanelHandler {
             List<dgdSeikyugakushukei_Row> list = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
             list.add(ddgRow);
         }
-
         clear請求額集計登録();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
 
@@ -552,7 +557,7 @@ public class SeikyuGakuShukeiPanelHandler {
 
     private ShokanShukei buildshokanShukei(ShokanShukei entity, dgdSeikyugakushukei_Row row) {
         entity = clearshokanShukei(entity);
-        if (row.getDefaultDataName19() != null) {
+        if (row.getDefaultDataName19() != null && !row.getDefaultDataName19().isEmpty()) {
             entity = entity.createBuilderForEdit().setサービス種類コード(
                     new ServiceShuruiCode(row.getDefaultDataName19())).build();
         }
