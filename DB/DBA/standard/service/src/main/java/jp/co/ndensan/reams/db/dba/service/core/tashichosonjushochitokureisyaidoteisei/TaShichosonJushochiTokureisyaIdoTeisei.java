@@ -51,21 +51,19 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
      * @param paramter 他市町村住所地特例者異動の訂正のパラメータ
      */
     public void is適用状態のチェック(TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter) {
-        List<DbT1004ShisetsuNyutaishoEntity> dbT1004List = dac.get入退所日(paramter.get識別コード(), new RString("2"), new RString("12"));
+        List<DbT1004ShisetsuNyutaishoEntity> dbT1004List = dac.get入退所日(paramter.get識別コード(), new RString("2"));
         for (DbT1004ShisetsuNyutaishoEntity dbT1004 : dbT1004List) {
             int count = 0;
             if (isNullOrEmpty(dbT1004.getTaishoYMD())) {
                 continue;
             }
             for (TekiyouJouhou tekiyou : paramter.get適用情報グリッド()) {
-                if ((!new FlexibleDate(tekiyou.get適用日()).isBefore(dbT1004.getNyushoYMD())
-                        || !new FlexibleDate(tekiyou.get解除日()).isBeforeOrEquals(dbT1004.getNyushoYMD()))
-                        && (!適用日_判断(dbT1004.getTaishoYMD(), new FlexibleDate(tekiyou.get適用日()))
-                        || !解除日_判断(dbT1004.getTaishoYMD(), new FlexibleDate(tekiyou.get解除日())))) {
+                if (解除日_判断(dbT1004.getNyushoYMD(), new FlexibleDate(tekiyou.get解除日()))
+                        && 適用日_判断(dbT1004.getTaishoYMD(), new FlexibleDate(tekiyou.get適用日()))) {
                     count++;
                 }
             }
-            if (count > 1) {
+            if (count == 0) {
                 throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
             }
         }
@@ -76,10 +74,10 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
     }
 
     private boolean 適用日_判断(FlexibleDate taishoYMD, FlexibleDate 適用日) {
-        return taishoYMD.isBeforeOrEquals(適用日);
+        return 適用日.isBeforeOrEquals(taishoYMD);
     }
 
-    private boolean 解除日_判断(FlexibleDate taishoYMD, FlexibleDate 解除日) {
-        return taishoYMD.isBefore(解除日);
+    private boolean 解除日_判断(FlexibleDate nyushoYMD, FlexibleDate 解除日) {
+        return nyushoYMD.isBeforeOrEquals(解除日);
     }
 }
