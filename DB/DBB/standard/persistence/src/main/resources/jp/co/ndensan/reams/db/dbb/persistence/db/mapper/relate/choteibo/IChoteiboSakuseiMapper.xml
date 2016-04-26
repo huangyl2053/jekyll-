@@ -1325,8 +1325,8 @@
         AND A."dogetsuFlag" = #{dogetsuFlag}
         AND A."karisanFlag" = #{karisanFlag}
         GROUP BY
-        A."choshuHouhou",
         A."dankai",
+        A."choshuHouhou",
         A."dogetsuFlag",
         A."karisanFlag"
     </select>
@@ -1379,8 +1379,8 @@
         AND A."dogetsuFlag" = #{dogetsuFlag}
         AND A."karisanFlag" = #{karisanFlag}
         GROUP BY
-        A."choshuHouhou",
         A."dankai",
+        A."choshuHouhou",
         A."dogetsuFlag",
         A."karisanFlag"
     </select>
