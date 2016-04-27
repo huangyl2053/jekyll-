@@ -10,11 +10,11 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -42,6 +42,7 @@ public class HihokenshaShikakuShutokuManager {
     private static final int AGE_65 = 65;
     private static final int AGE_64 = 64;
     private static final int AGE_40 = 40;
+    private static final int INT_4 = 4;
     private static final FlexibleDate ICHIGOSHIKAKUSHUTOKUYMD = new FlexibleDate("");
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
@@ -149,7 +150,7 @@ public class HihokenshaShikakuShutokuManager {
         if (entity == null || entity.getEdaNo().isEmpty()) {
             return 枝番;
         } else {
-            return new RString(String.valueOf(Integer.valueOf(entity.getEdaNo().toString().trim()) + 1));
+            return new RString(String.valueOf(Integer.valueOf(entity.getEdaNo().toString().trim()) + 1)).padZeroToLeft(INT_4);
         }
     }
 
