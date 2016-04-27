@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dba.service.report.hihokenshashob4.HihokenshashoB4
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeisho.JukyuShikakuShomeishoPrintService;
 import jp.co.ndensan.reams.db.dba.service.report.shikakushasho.ShikakushashoPrintService;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.HihokenshaShikakuShoDataParameter;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.DBU0420011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.DBU0420011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.TotalDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0420011.TotalHandler;
@@ -32,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -61,16 +61,15 @@ public class Total {
      * @return ResponseData<TotalDiv>
      */
     public ResponseData<TotalDiv> onLoad(TotalDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPublish"), false);
         createHandler(div).onLoad();
         if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).rootTitle(new RString("被保険者証発行")).respond();
+            return ResponseData.of(div).setState(DBU0420011StateName.被保険者証);
         }
         if (MENUID_DBUMN12002.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).rootTitle(new RString("資格者証発行")).respond();
+            return ResponseData.of(div).setState(DBU0420011StateName.資格者証);
         }
         if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).rootTitle(new RString("受給資格証明書発行")).respond();
+            return ResponseData.of(div).setState(DBU0420011StateName.受給資格証明書);
         }
         return ResponseData.of(div).respond();
     }
