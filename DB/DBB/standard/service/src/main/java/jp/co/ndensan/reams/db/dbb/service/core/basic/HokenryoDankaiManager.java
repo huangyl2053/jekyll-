@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 保険料段階を管理するクラスです。
  *
- * @reamsid_L DBB-9999-022 zhangrui
+ * @reamsid_L DBB-1770-010 zhangrui
  */
 public class HokenryoDankaiManager {
 
