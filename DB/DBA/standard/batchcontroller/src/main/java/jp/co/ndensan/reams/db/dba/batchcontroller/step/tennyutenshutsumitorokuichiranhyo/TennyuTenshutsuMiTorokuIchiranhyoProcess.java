@@ -154,8 +154,9 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
             eucCsvWriter.writeLine(eucCsvEntity);
             i++;
         }
-        eucCsvWriter.close();
-
+        if (!eucCsvList.isEmpty()) {
+            eucCsvWriter.close();
+        }
         TennyuTenshutsuMiTorokuIchiranhyoReport report = TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
 
@@ -185,7 +186,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         RString 市町村コード = entity.get市町村コード();
         csvEntity.setShichosonCode(市町村コード);
         bodyItem.set市町村コード(市町村コード);
-        RString 市町村名 = 市町村コード.isEmpty() ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
+        RString 市町村名 = RString.isNullOrEmpty(市町村コード) ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
                 new LasdecCode(市町村コード)) == null ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
                         new LasdecCode(市町村コード)).get市町村名();
         csvEntity.setShichosonName(市町村名);
@@ -195,30 +196,30 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         csvEntity.setShimei(entity.get宛名氏名());
         bodyItem.set氏名(entity.get宛名氏名());
         RString 住民状態コード = entity.get住民状態コード();
-        RString 住民状態 = 住民状態コード.isEmpty() ? RString.EMPTY : JuminJotai.toValue(住民状態コード).住民状態略称();
+        RString 住民状態 = RString.isNullOrEmpty(住民状態コード) ? RString.EMPTY : JuminJotai.toValue(住民状態コード).住民状態略称();
         csvEntity.setJuminJotai(住民状態);
         bodyItem.set住民状態(住民状態);
         RString 年月日 = entity.get生年月日();
-        RString 生年月日 = 年月日.isEmpty() ? RString.EMPTY : format(年月日);
+        RString 生年月日 = RString.isNullOrEmpty(年月日) ? RString.EMPTY : format(年月日);
         csvEntity.setSeinengappiYMD(生年月日);
         bodyItem.set生年月日(生年月日);
         RString 性別コード = entity.get性別コード();
-        RString 性別 = 性別コード.isEmpty() ? RString.EMPTY : Gender.toValue(性別コード).getCommonName();
+        RString 性別 = RString.isNullOrEmpty(性別コード) ? RString.EMPTY : Gender.toValue(性別コード).getCommonName();
         csvEntity.setSeibetsu(性別);
         bodyItem.set性別(性別);
         RString 異動事由コード = entity.get異動事由コード();
         csvEntity.setIdoJiyuCode(異動事由コード);
         bodyItem.set異動事由コード(異動事由コード);
         // TODO QA1013  Redmine：   (異動事由の取得用方法)
-        RString 異動事由 = 異動事由コード.isEmpty() ? RString.EMPTY : JukiIdoJiyu.toValue(異動事由コード).get異動事由略称();
+        RString 異動事由 = RString.isNullOrEmpty(異動事由コード) ? RString.EMPTY : JukiIdoJiyu.toValue(異動事由コード).get異動事由略称();
         csvEntity.setIdoJiyu(異動事由);
         bodyItem.set異動事由(異動事由);
         RString 登録異動年月日 = entity.get登録異動年月日();
-        RString 登録異動日 = 登録異動年月日.isEmpty() ? RString.EMPTY : format(登録異動年月日);
+        RString 登録異動日 = RString.isNullOrEmpty(登録異動年月日) ? RString.EMPTY : format(登録異動年月日);
         csvEntity.setTorokuIdoYMD(登録異動日);
         bodyItem.set登録異動日(登録異動日);
         RString 登録届出年月日 = entity.get登録異動届出年月日();
-        RString 登録届出日 = 登録届出年月日.isEmpty() ? RString.EMPTY : format(登録届出年月日);
+        RString 登録届出日 = RString.isNullOrEmpty(登録届出年月日) ? RString.EMPTY : format(登録届出年月日);
         csvEntity.setTorokuTodokedeYMD(登録届出日);
         bodyItem.set登録届出日(登録届出日);
         RString 住所地特例 = entity.get住所地特例フラグ();
@@ -230,15 +231,15 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         csvEntity.setJushochiTokurei(住所地特例);
         bodyItem.set住所地特例(住所地特例);
         RString 消除異動年月日 = entity.get消除異動年月日();
-        RString 消除異動日 = 消除異動年月日.isEmpty() ? RString.EMPTY : format(消除異動年月日);
-        csvEntity.setShojoIdoYMD(FILENAME);
+        RString 消除異動日 = RString.isNullOrEmpty(消除異動年月日) ? RString.EMPTY : format(消除異動年月日);
+        csvEntity.setShojoIdoYMD(消除異動日);
         bodyItem.set消除異動日(消除異動日);
         RString 消除届出年月日 = entity.get消除異動届出年月日();
-        RString 消除届出日 = 消除届出年月日.isEmpty() ? RString.EMPTY : format(消除届出年月日);
+        RString 消除届出日 = RString.isNullOrEmpty(消除届出年月日) ? RString.EMPTY : format(消除届出年月日);
         csvEntity.setShojoTodokedeYMD(消除届出日);
         bodyItem.set消除届出日(消除届出日);
         RString 転出予定異動年月日 = entity.get転出予定異動年月日();
-        RString 転出予定異動日 = 転出予定異動年月日.isEmpty() ? RString.EMPTY : format(転出予定異動年月日);
+        RString 転出予定異動日 = RString.isNullOrEmpty(転出予定異動年月日) ? RString.EMPTY : format(転出予定異動年月日);
         csvEntity.setTenshutsuYoteiIdoYMD(転出予定異動日);
         bodyItem.set転出予定異動日(転出予定異動日);
         RStringBuilder 住所 = new RStringBuilder();
@@ -252,7 +253,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         RString 作成事由コード = entity.get作成事由コード();
         csvEntity.setSakuseiJiyuCode(作成事由コード);
         bodyItem.set作成事由コードMiddle(作成事由コード);
-        RString 作成事由 = 作成事由コード.isEmpty() ? RString.EMPTY : TenshutsuSakuseiJiyu.toValue(作成事由コード).get名称();
+        RString 作成事由 = RString.isNullOrEmpty(作成事由コード) ? RString.EMPTY : TennyuSakuseiJiyu.toValue(作成事由コード).get名称();
         csvEntity.setSakuseiJiyu(作成事由);
         bodyItem.set作成事由Middle(作成事由);
     }
@@ -268,7 +269,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         RString 市町村コード = entity.get市町村コード();
         csvEntity.setShichosonCode(市町村コード);
         bodyItem.set市町村コード(市町村コード);
-        RString 市町村名 = 市町村コード.isEmpty() ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
+        RString 市町村名 = RString.isNullOrEmpty(市町村コード) ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
                 new LasdecCode(市町村コード)).get市町村名();
         csvEntity.setShichosonName(市町村名);
         bodyItem.set市町村名(市町村名);
@@ -277,30 +278,30 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         csvEntity.setShimei(entity.get宛名氏名());
         bodyItem.set氏名(entity.get宛名氏名());
         RString 住民状態コード = entity.get住民状態コード();
-        RString 住民状態 = 住民状態コード.isEmpty() ? RString.EMPTY : JuminJotai.toValue(住民状態コード).住民状態略称();
+        RString 住民状態 = RString.isNullOrEmpty(住民状態コード) ? RString.EMPTY : JuminJotai.toValue(住民状態コード).住民状態略称();
         csvEntity.setJuminJotai(住民状態);
         bodyItem.set住民状態(住民状態);
         RString 年月日 = entity.get生年月日();
-        RString 生年月日 = 年月日.isEmpty() ? RString.EMPTY : format(年月日);
+        RString 生年月日 = RString.isNullOrEmpty(年月日) ? RString.EMPTY : format(年月日);
         csvEntity.setSeinengappiYMD(生年月日);
         bodyItem.set生年月日(生年月日);
         RString 性別コード = entity.get性別コード();
-        RString 性別 = 性別コード.isEmpty() ? RString.EMPTY : Gender.toValue(性別コード).getCommonName();
+        RString 性別 = RString.isNullOrEmpty(性別コード) ? RString.EMPTY : Gender.toValue(性別コード).getCommonName();
         csvEntity.setSeibetsu(性別);
         bodyItem.set性別(性別);
         RString 異動事由コード = entity.get異動事由コード();
         csvEntity.setIdoJiyuCode(異動事由コード);
         bodyItem.set異動事由コード(異動事由コード);
         // TODO QA1013  Redmine：   (異動事由の取得用方法)
-        RString 異動事由 = 異動事由コード.isEmpty() ? RString.EMPTY : JukiIdoJiyu.toValue(異動事由コード).get異動事由略称();
+        RString 異動事由 = RString.isNullOrEmpty(異動事由コード) ? RString.EMPTY : JukiIdoJiyu.toValue(異動事由コード).get異動事由略称();
         csvEntity.setIdoJiyu(異動事由);
         bodyItem.set異動事由(異動事由);
         RString 登録異動年月日 = entity.get登録異動年月日();
-        RString 登録異動日 = 登録異動年月日.isEmpty() ? RString.EMPTY : format(登録異動年月日);
+        RString 登録異動日 = RString.isNullOrEmpty(登録異動年月日) ? RString.EMPTY : format(登録異動年月日);
         csvEntity.setTorokuIdoYMD(登録異動日);
         bodyItem.set登録異動日(登録異動日);
         RString 登録届出年月日 = entity.get登録異動届出年月日();
-        RString 登録届出日 = 登録届出年月日.isEmpty() ? RString.EMPTY : format(登録届出年月日);
+        RString 登録届出日 = RString.isNullOrEmpty(登録届出年月日) ? RString.EMPTY : format(登録届出年月日);
         csvEntity.setTorokuTodokedeYMD(登録届出日);
         bodyItem.set登録届出日(登録届出日);
         RString 住所地特例 = entity.get住所地特例フラグ();
@@ -312,15 +313,15 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         csvEntity.setJushochiTokurei(住所地特例);
         bodyItem.set住所地特例(住所地特例);
         RString 消除異動年月日 = entity.get消除異動年月日();
-        RString 消除異動日 = 消除異動年月日.isEmpty() ? RString.EMPTY : format(消除異動年月日);
-        csvEntity.setShojoIdoYMD(FILENAME);
+        RString 消除異動日 = RString.isNullOrEmpty(消除異動年月日) ? RString.EMPTY : format(消除異動年月日);
+        csvEntity.setShojoIdoYMD(消除異動日);
         bodyItem.set消除異動日(消除異動日);
         RString 消除届出年月日 = entity.get消除異動届出年月日();
-        RString 消除届出日 = 消除届出年月日.isEmpty() ? RString.EMPTY : format(消除届出年月日);
+        RString 消除届出日 = RString.isNullOrEmpty(消除届出年月日) ? RString.EMPTY : format(消除届出年月日);
         csvEntity.setShojoTodokedeYMD(消除届出日);
         bodyItem.set消除届出日(消除届出日);
         RString 転出予定異動年月日 = entity.get転出予定異動年月日();
-        RString 転出予定異動日 = 転出予定異動年月日.isEmpty() ? RString.EMPTY : format(転出予定異動年月日);
+        RString 転出予定異動日 = RString.isNullOrEmpty(転出予定異動年月日) ? RString.EMPTY : format(転出予定異動年月日);
         csvEntity.setTenshutsuYoteiIdoYMD(転出予定異動日);
         bodyItem.set転出予定異動日(転出予定異動日);
         RStringBuilder 住所 = new RStringBuilder();
@@ -334,7 +335,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         RString 作成事由コード = entity.get作成事由コード();
         csvEntity.setSakuseiJiyuCode(作成事由コード);
         bodyItem.set作成事由コードMiddle(作成事由コード);
-        RString 作成事由 = 作成事由コード.isEmpty() ? RString.EMPTY : TennyuSakuseiJiyu.toValue(作成事由コード).get名称();
+        RString 作成事由 = RString.isNullOrEmpty(作成事由コード) ? RString.EMPTY : TenshutsuSakuseiJiyu.toValue(作成事由コード).get名称();
         csvEntity.setSakuseiJiyu(作成事由);
         bodyItem.set作成事由Middle(作成事由);
     }
@@ -388,6 +389,6 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
 //    }
     private RString format(RString 年月日) {
         return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 }
