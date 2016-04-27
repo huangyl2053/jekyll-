@@ -22,17 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
 
-    private static final int 一回目 = 1;
-    private static final int 二回目 = 2;
-    private static final int 三回目 = 3;
-    private static final int 四回目 = 4;
-    private static final int 五回目 = 5;
-    private static final int 六回目 = 6;
-    private static final int 七回目 = 7;
-    private static final int 八回目 = 8;
-    private static final int 九回目 = 9;
-    private static final int 十回目 = 10;
-    private static final int 十一回目 = 11;
     private final ShinsaHanteiJokyoItem item;
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
