@@ -318,6 +318,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             dataSourceList.add(dataSource);
         }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDataSource(dataSourceList);
+        if (!dataSourceList.isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().
+                    setSelectedKey(dataSourceList.get(0).getKey());
+        }
         RString 証明書 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().getValue();
         ViewStateHolder.put(ViewStateKeys.証明書, 証明書);
         return createResponse(div);
