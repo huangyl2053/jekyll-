@@ -10,6 +10,11 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenjokyo.GemmenJokyoP
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
@@ -23,7 +28,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyu
 public interface IGemmenJokyoMapper {
 
     /**
-     * get要介護認定情報
+     * 要介護認定情報を取得します。
      *
      * @param parameter パラメータク
      * @return List<NursingCareInformationCodeEntity>
@@ -31,7 +36,7 @@ public interface IGemmenJokyoMapper {
     List<NursingCareInformationCodeEntity> get要介護認定情報(GemmenJokyoParameter parameter);
 
     /**
-     * get申請中情報
+     * 申請中情報を取得します。
      *
      * @param parameter パラメータク
      * @return DbT4001JukyushaDaichoEntity
@@ -39,7 +44,7 @@ public interface IGemmenJokyoMapper {
     DbT4001JukyushaDaichoEntity get申請中情報(GemmenJokyoParameter parameter);
 
     /**
-     * get老齢年金情報
+     * 老齢年金情報を取得します。
      *
      * @param parameter パラメータク
      * @return DbT7006RoreiFukushiNenkinJukyushaEntity
@@ -47,7 +52,7 @@ public interface IGemmenJokyoMapper {
     DbT7006RoreiFukushiNenkinJukyushaEntity get老齢年金情報(GemmenJokyoParameter parameter);
 
     /**
-     * get支払方法変更情報
+     * 支払方法変更情報を取得します。
      *
      * @param parameter パラメータク
      * @return List<DbT4021ShiharaiHohoHenkoEntity>
@@ -55,7 +60,7 @@ public interface IGemmenJokyoMapper {
     List<DbT4021ShiharaiHohoHenkoEntity> get支払方法変更情報(GemmenJokyoParameter parameter);
 
     /**
-     * get支払方法変更情報
+     * 支払方法変更情報を取得します。
      *
      * @param parameter パラメータク
      * @return List<DbV1001HihokenshaDaichoEntity>
@@ -63,11 +68,51 @@ public interface IGemmenJokyoMapper {
     List<DbV1001HihokenshaDaichoEntity> get識別コード(GemmenJokyoParameter parameter);
 
     /**
-     * get利用者負担割合明細
+     * 利用者負担割合明細を取得します。
      *
      * @param parameter パラメータク
      * @return List<DbT3114RiyoshaFutanWariaiMeisaiEntity>
      */
     List<DbT3114RiyoshaFutanWariaiMeisaiEntity> get利用者負担割合明細(GemmenJokyoParameter parameter);
+
+    /**
+     * 介護保険負担限度額認定の情報を取得します。
+     *
+     * @param parameter パラメータク
+     * @return FutanGendogakuNinteiEntity
+     */
+    FutanGendogakuNinteiEntity get介護保険負担限度額認定の情報(GemmenJokyoParameter parameter);
+
+    /**
+     * 利用者負担額減額の情報を取得します。
+     *
+     * @param parameter パラメータク
+     * @return RiyoshaFutangakuGengakuEntity
+     */
+    RiyoshaFutangakuGengakuEntity get利用者負担額減額の情報(GemmenJokyoParameter parameter);
+
+    /**
+     * 社会福祉法人等利用者負担軽減の情報を取得します。
+     *
+     * @param parameter パラメータク
+     * @return ShafukuRiyoshaFutanKeigenEntity
+     */
+    ShafukuRiyoshaFutanKeigenEntity get社会福祉法人等利用者負担軽減の情報(GemmenJokyoParameter parameter);
+
+    /**
+     * 訪問介護利用者負担額減額の情報を取得します。
+     *
+     * @param parameter パラメータク
+     * @return HomonKaigoRiyoshaFutangakuGengakuEntity
+     */
+    HomonKaigoRiyoshaFutangakuGengakuEntity get訪問介護利用者負担額減額の情報(GemmenJokyoParameter parameter);
+
+    /**
+     * 特別地域加算減免の情報を取得します。
+     *
+     * @param parameter パラメータク
+     * @return HomonKaigoRiyoshaFutangakuGengakuEntity
+     */
+    TokubetsuchiikiKasanGemmenEntity get特別地域加算減免の情報(GemmenJokyoParameter parameter);
 
 }
