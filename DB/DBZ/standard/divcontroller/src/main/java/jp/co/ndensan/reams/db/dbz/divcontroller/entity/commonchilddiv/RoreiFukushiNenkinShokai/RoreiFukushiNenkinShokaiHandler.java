@@ -63,10 +63,18 @@ public class RoreiFukushiNenkinShokaiHandler {
         Collections.sort(rowList, new ComparatorByStartDateSort());
         div.getDatagridRireki().setDataSource(rowList);
         div.getPanelRireki().setDisplayNone(false);
-        div.getPanelInput().getTxtStartDate().setReadOnly(true);
-        div.getPanelInput().getTxtEndDate().setReadOnly(true);
+        div.getPanelInput().getTxtStartDate().setDisabled(true);
+        div.getPanelInput().getTxtEndDate().setDisabled(true);
         div.getPanelInput().getBtnCancel().setDisabled(true);
         div.getPanelInput().getBtnSave().setDisabled(true);
+        if (RoreiFukushiNenkinShokaiDiv.ModeA.init.equals(div.getMode_ModeA())) {
+            div.getPanelRireki().setDisabled(true);
+            div.getPanelInput().setDisplayNone(true);
+            div.getDatagridRireki().getGridSetting().getColumn(new RString("jotai")).setVisible(true);
+            div.getDatagridRireki().getGridSetting().getColumn(new RString("jotai")).setVisible(true);
+            div.getDatagridRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getDatagridRireki().getGridSetting().setIsShowModifyButtonColumn(false);
+        }
     }
 
     /**
@@ -76,8 +84,8 @@ public class RoreiFukushiNenkinShokaiHandler {
     public void set老齢福祉年金追加ボタン画面表示() {
         div.getPanelInput().getBtnCancel().setDisabled(false);
         div.getPanelInput().getBtnSave().setDisabled(false);
-        div.getPanelInput().getTxtStartDate().setReadOnly(false);
-        div.getPanelInput().getTxtEndDate().setReadOnly(false);
+        div.getPanelInput().getTxtStartDate().setDisabled(false);
+        div.getPanelInput().getTxtEndDate().setDisabled(false);
         div.getPanelInput().setDisplayNone(false);
         div.getPanelInput().getTxtStartDate().clearValue();
         div.getPanelInput().getTxtEndDate().clearValue();
@@ -89,8 +97,8 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金修正ボタン画面表示() {
-        div.getPanelInput().getTxtEndDate().setReadOnly(false);
-        div.getPanelInput().getTxtStartDate().setReadOnly(true);
+        div.getPanelInput().getTxtEndDate().setDisabled(false);
+        div.getPanelInput().getTxtStartDate().setDisabled(true);
         div.getPanelInput().getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
         div.getPanelInput().getTxtEndDate().setValue(div.getDatagridRireki().getClickedItem().getEndDate().getValue());
         div.getPanelInput().setDisplayNone(false);
@@ -107,8 +115,8 @@ public class RoreiFukushiNenkinShokaiHandler {
         div.getPanelInput().getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
         div.getPanelInput().getTxtEndDate().setValue(div.getDatagridRireki().getClickedItem().getEndDate().getValue());
         div.getPanelInput().setDisplayNone(false);
-        div.getPanelInput().getTxtStartDate().setReadOnly(true);
-        div.getPanelInput().getTxtEndDate().setReadOnly(true);
+        div.getPanelInput().getTxtStartDate().setDisabled(true);
+        div.getPanelInput().getTxtEndDate().setDisabled(true);
         div.getPanelInput().getBtnCancel().setDisabled(false);
         div.getPanelInput().getBtnSave().setDisabled(false);
         div.getPanelRireki().setDisabled(true);
@@ -120,9 +128,9 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public void set老齢福祉年金取消ボタン画面表示() {
         div.getPanelRireki().setDisabled(false);
-        div.getPanelInput().setDisplayNone(true);
         div.getPanelInput().getTxtStartDate().clearValue();
         div.getPanelInput().getTxtEndDate().clearValue();
+        div.getPanelInput().setDisabled(true);
     }
 
     /**
@@ -135,6 +143,9 @@ public class RoreiFukushiNenkinShokaiHandler {
         div.getPanelInput().getBtnSave().setDisabled(true);
         div.getPanelInput().getTxtStartDate().clearValue();
         div.getPanelInput().getTxtEndDate().clearValue();
+        div.getPanelInput().getTxtStartDate().setDisabled(true);
+        div.getPanelInput().getTxtEndDate().setDisabled(true);
+
     }
 
     /**
