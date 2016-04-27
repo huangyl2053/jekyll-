@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.viewbox;
 
 /**
+ * ViewStateKeys
  *
- *
+ * @reamsid_L DBU-9999-022 wangkanglei
  */
 public enum ViewStateKeys {
 
