@@ -138,7 +138,7 @@ public class NinteiChosaSchedule3Main {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, 編集モード);
         }
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, div.getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_市町村コード, div.getDgResultList().getSelectedItems().get(0).getShoKisaiHokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_市町村コード, div.getDgResultList().getSelectedItems().get(0).getShichosonCode());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaYmd().getValue());

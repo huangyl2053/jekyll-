@@ -33,5 +33,6 @@ public class INinteichosaScheduleRelateEntity {
     private RString ninteiChosainCode;
     private RString ninteiChosaJikanWaku;
     private RString yoyakuKaoFlag;
+    private RString shichosonCode;
     private RString shoKisaiHokenshaNo;
 }

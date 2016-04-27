@@ -173,6 +173,15 @@ public class NinteichosaSchedulBusiness {
     }
 
     /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
      * 証記載保険者番号を返します。
      *
      * @return 証記載保険者番号
