@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.fu
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiMapperParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 
@@ -47,4 +48,12 @@ public interface IFutanGendogakuNinteiMapper {
      * @return FutanGendogakuNinteiEntityの{@code}
      */
     FutanGendogakuNinteiEntity select負担限度額認定帳票用(FutanGendogakuNinteiParameter 負担限度額認定検索条件);
+
+    /**
+     * 負担限度額認定申請の情報を取得する。
+     *
+     * @param param FutanGendogakuNinteiShinseiMapperParameter
+     * @return FutanGendogakuNinteiEntity{@code list}
+     */
+    List<FutanGendogakuNinteiEntity> get負担限度額認定申請の情報List(FutanGendogakuNinteiShinseiMapperParameter param);
 }

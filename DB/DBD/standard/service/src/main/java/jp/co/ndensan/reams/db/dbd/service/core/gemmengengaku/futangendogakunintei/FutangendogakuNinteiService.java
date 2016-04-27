@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.HaiguuJohoEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiShinseiMapper;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
@@ -98,7 +98,7 @@ public class FutangendogakuNinteiService {
         List<FutanGendogakuNintei> 負担限度額認定申請の情報List = new ArrayList<>();
         FutanGendogakuNinteiShinseiMapperParameter 検索条件 = FutanGendogakuNinteiShinseiMapperParameter.createParam(
                 被保険者番号, FlexibleDate.EMPTY);
-        IFutanGendogakuNinteiShinseiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiShinseiMapper.class);
+        IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
         List<FutanGendogakuNinteiEntity> entityList = mapper.get負担限度額認定申請の情報List(検索条件);
         if (entityList != null && !entityList.isEmpty()) {
             for (FutanGendogakuNinteiEntity entity : entityList) {
