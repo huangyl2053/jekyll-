@@ -116,6 +116,8 @@ public class PnlTotalSearch {
             } else {
                 div.getPnlSearch().getTxtName().clearValue();
             }
+        } else {
+            div.getPnlSearch().getTxtName().clearValue();
         }
         return ResponseData.of(div).respond();
     }

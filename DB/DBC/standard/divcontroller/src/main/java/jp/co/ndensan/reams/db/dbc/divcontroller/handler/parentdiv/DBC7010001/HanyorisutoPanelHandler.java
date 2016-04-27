@@ -43,8 +43,10 @@ public class HanyorisutoPanelHandler {
      * @param div HanyorisutoPanelDiv
      */
     public void initialize(HanyorisutoPanelDiv div) {
-        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonsecurityjoho != null && shichosonsecurityjoho.get導入形態コード() != null && shichosonsecurityjoho.get導入形態コード().is広域()) {
+        ShichosonSecurityJoho shichosonsecurityjoho
+                = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (shichosonsecurityjoho != null && shichosonsecurityjoho.get導入形態コード() != null
+                && shichosonsecurityjoho.get導入形態コード().is広域()) {
             div.getCcdHokensya().setVisible(true);
             div.getCcdHokensya().setDisabled(false);
             div.getCcdHokensya().loadHokenshaList();

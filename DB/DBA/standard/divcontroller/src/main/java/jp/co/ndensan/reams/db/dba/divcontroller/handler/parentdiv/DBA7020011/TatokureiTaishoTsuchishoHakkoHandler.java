@@ -85,7 +85,9 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
         row.getKaijoDate().setValue(master.getKaijoYMD() == null ? FlexibleDate.EMPTY : master.getKaijoYMD());
         row.getKaijoTodokedeDate().setValue(master.getKaijoTodokedeYMD() == null ? FlexibleDate.EMPTY : master.getKaijoTodokedeYMD());
         row.setSochiHokenshaNo(master.getSochiHokenshaNo() == null ? RString.EMPTY : master.getSochiHokenshaNo().value());
-        row.setSochiHokenshaMeisho(hokenja.get保険者名() == null ? RString.EMPTY : hokenja.get保険者名());
+        if (hokenja != null) {
+            row.setSochiHokenshaMeisho(hokenja.get保険者名() == null ? RString.EMPTY : hokenja.get保険者名());
+        }
         row.setSochiHihokenshaNo(master.getSochiHihokenshaNo() == null ? RString.EMPTY : master.getSochiHihokenshaNo().value());
         row.getNyushoDate().setValue(master.getNyushoYMD() == null ? FlexibleDate.EMPTY : master.getNyushoYMD());
         row.getTaishoDate().setValue(master.getTaishoYMD() == null ? FlexibleDate.EMPTY : master.getTaishoYMD());
@@ -99,7 +101,7 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
         row.getShisetsuHenkoTuchiHakkoDate().setValue(master.getShisetsuHenkoTsuchiHakkoYMD() == null
                 ? FlexibleDate.EMPTY : master.getShisetsuHenkoTsuchiHakkoYMD());
         row.getIdoYMD().setValue(master.getIdoYMD());
-        row.setEdaNo(master.getEdaNo() == null ? RString.EMPTY : master.getEdaNo());
+        row.setEdaNo(master.getEdaNo());
     }
 
     /**

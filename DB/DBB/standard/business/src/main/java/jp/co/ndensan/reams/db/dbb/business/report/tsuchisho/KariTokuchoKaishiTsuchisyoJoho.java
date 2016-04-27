@@ -6,16 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 仮算定特徴開始通知書情報
  *
- * @reamsid_L DBB-0790-060 surun
+ * @reamsid_L DBB-0790-060 lijunjun
  */
 @lombok.Getter
 @lombok.Setter
@@ -27,6 +25,4 @@ public class KariTokuchoKaishiTsuchisyoJoho {
     private ReportId 帳票ID;
     private EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
     private IAtesaki 宛先情報;
-    private Association 地方公共団体;
-    private ChohyoSeigyoKyotsu 帳票制御共通;
 }
