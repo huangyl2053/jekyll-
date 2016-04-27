@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunint
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.HaiguuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.HaiguuJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class FutangendogakuNinteiService {
 
     private static final int INT_4 = 4;
+    private static final long LONG_80000 = 800000L;
     private static final FlexibleDate 基準日_2015年4月1日 = new FlexibleDate("20150401");
     private static final FlexibleDate 基準日_2012年4月1日 = new FlexibleDate("20120401");
     private final MapperProvider mapperProvider;
@@ -164,7 +165,7 @@ public class FutangendogakuNinteiService {
             return RiyoshaFutanDankai.第一段階;
         }
         if (識別コード.equals(世帯員所得情報.get識別コード())) {
-            int result = 世帯員所得情報.get合計所得金額().add(世帯員所得情報.get年金収入額()).compareTo(Decimal.valueOf(800000L));
+            int result = 世帯員所得情報.get合計所得金額().add(世帯員所得情報.get年金収入額()).compareTo(Decimal.valueOf(LONG_80000));
             if (result == 0 || result < 0) {
                 return RiyoshaFutanDankai.第二段階;
             } else {
@@ -733,14 +734,13 @@ public class FutangendogakuNinteiService {
         if (kojinList.isEmpty()) {
             配偶者1月1日住所 = RString.EMPTY;
         } else {
-            RString _1月1日時点住所 = kojinList.get(0).get住所().get住所();
+            RString is1月1日時点住所 = kojinList.get(0).get住所().get住所();
             RString 現住所 = 配偶者情報.get住所().get住所();
-            if (_1月1日時点住所.isNullOrEmpty()) {
-                if (_1月1日時点住所.equals(現住所)) {
-                    配偶者1月1日住所 = _1月1日時点住所;
-                } else {
-                    配偶者1月1日住所 = RString.EMPTY;
-                }
+            if (!is1月1日時点住所.isNullOrEmpty()
+                    && is1月1日時点住所.equals(現住所)) {
+                配偶者1月1日住所 = is1月1日時点住所;
+            } else {
+                配偶者1月1日住所 = RString.EMPTY;
             }
         }
         return 配偶者1月1日住所;
@@ -801,8 +801,8 @@ public class FutangendogakuNinteiService {
      */
     public boolean is境界層該当者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
 
-        DbT1006KyokaisoGaitoshaDac DbT1006Dac = InstanceProvider.create(DbT1006KyokaisoGaitoshaDac.class);
-        List<DbT1006KyokaisoGaitoshaEntity> dbT1006EntityList = DbT1006Dac.select境界層該当者(被保険者番号, 適用日);
+        DbT1006KyokaisoGaitoshaDac dbT1006Dac = InstanceProvider.create(DbT1006KyokaisoGaitoshaDac.class);
+        List<DbT1006KyokaisoGaitoshaEntity> dbT1006EntityList = dbT1006Dac.select境界層該当者(被保険者番号, 適用日);
         return dbT1006EntityList != null && !dbT1006EntityList.isEmpty();
     }
 
