@@ -73,6 +73,8 @@ public class HonsanteiIdoGennendo {
             = new RString("DBB100005_TokubetsuChoshuKaishiTsuchishoKariSealer");
     private final RString tokubetsuTsuchishoB5YokoRS
             = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoB5Yoko");
+    private final RString hokenryoYokoRS
+            = new RString("DBB100042_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoB5Yoko");
     private final RString tokubetsuTsuTsuchishoA4TateRS
             = new RString("DBB100043_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4Tate");
     private final RString kaigoHokenTsuchishoA4TateRS
@@ -476,7 +478,7 @@ public class HonsanteiIdoGennendo {
         switch (帳票タイプを.get設定値().toString()) {
             case "001":
                 return new ChohyoResult(帳票分類ID,
-                        tokubetsuTsuchishoB5YokoRS, 出力順ID);
+                        hokenryoYokoRS, 出力順ID);
             case "002":
                 return new ChohyoResult(帳票分類ID,
                         tokubetsuTsuTsuchishoA4TateRS, 出力順ID);

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 12 11:59:51 CST 2016 
+ * Mon Apr 25 19:07:00 CST 2016 
  */
 
 
@@ -39,6 +39,7 @@ public class dgResultList_Row extends DataRow {
     private RString ninteiChosaJikanWaku;
     private RString yoyakuKaoFlag;
     private RString shoKisaiHokenshaNo;
+    private RString shichosonCode;
 
     public dgResultList_Row() {
         super();
@@ -59,6 +60,7 @@ public class dgResultList_Row extends DataRow {
         this.ninteiChosaJikanWaku = RString.EMPTY;
         this.yoyakuKaoFlag = RString.EMPTY;
         this.shoKisaiHokenshaNo = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("name", name);
@@ -76,9 +78,10 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("ninteiChosaJikanWaku", ninteiChosaJikanWaku);
         this.setOriginalData("yoyakuKaoFlag", yoyakuKaoFlag);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgResultList_Row(RString hokensha, RString hihokenshaNo, RString name, RString kanaName, RString seibetsu, TextBoxFlexibleDate birthDay, TextBoxFlexibleDate ninteiChosaYmd, RString jokyo, TextBoxFlexibleDate ninteiShinseiYmd, RString shinseiKubun, RString taishoshaMemo, RString shinseishoKanriNo, RString ninteiChosaItakusakiCode, RString ninteiChosainCode, RString ninteiChosaJikanWaku, RString yoyakuKaoFlag, RString shoKisaiHokenshaNo) {
+    public dgResultList_Row(RString hokensha, RString hihokenshaNo, RString name, RString kanaName, RString seibetsu, TextBoxFlexibleDate birthDay, TextBoxFlexibleDate ninteiChosaYmd, RString jokyo, TextBoxFlexibleDate ninteiShinseiYmd, RString shinseiKubun, RString taishoshaMemo, RString shinseishoKanriNo, RString ninteiChosaItakusakiCode, RString ninteiChosainCode, RString ninteiChosaJikanWaku, RString yoyakuKaoFlag, RString shoKisaiHokenshaNo, RString shichosonCode) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -97,6 +100,7 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("ninteiChosaJikanWaku", ninteiChosaJikanWaku);
         this.setOriginalData("yoyakuKaoFlag", yoyakuKaoFlag);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.hokensha = hokensha;
         this.hihokenshaNo = hihokenshaNo;
         this.name = name;
@@ -114,6 +118,7 @@ public class dgResultList_Row extends DataRow {
         this.ninteiChosaJikanWaku = ninteiChosaJikanWaku;
         this.yoyakuKaoFlag = yoyakuKaoFlag;
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.shichosonCode = shichosonCode;
     }
 
     public RString getHokensha() {
@@ -182,6 +187,10 @@ public class dgResultList_Row extends DataRow {
 
     public RString getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
     public void setHokensha(RString hokensha) {
@@ -267,6 +276,11 @@ public class dgResultList_Row extends DataRow {
     public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>
