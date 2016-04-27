@@ -30,6 +30,7 @@ public class FubanHohoMainHandler {
     private static final RString カスタマイズ付番 = new RString("4");
     private static final RString 自動連番付番 = new RString("2");
     private static final RString 自動連番_MCD10付番 = new RString("5");
+    private static final RString 任意手入力付番 = new RString("3");
     private static final RString 未設定 = new RString("0");
     private static final RString 住民コード = new RString("1");
     private static final RString 被保険者番号自動採番 = new RString("被保険者番号自動採番");
@@ -141,8 +142,11 @@ public class FubanHohoMainHandler {
             div.getFubanHoho().getJidoFubanKaishiNo().getTxtJidoFubanKaishiNo().setDisabled(true);
         } else if (カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
             setDisabledFlaseToFubanHoho();
-            div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setDisabled(true);
+            div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setDisabled(false);
         } else if (自動連番_MCD10付番.equals(被保険者番号付番方法)) {
+            setDisabledTrueToFubanHoho();
+            div.getFubanHoho().getJidoFubanKaishiNo().getTxtJidoFubanKaishiNo().setDisabled(false);
+        } else if (任意手入力付番.equals(被保険者番号付番方法)) {
             setDisabledTrueToFubanHoho();
             div.getFubanHoho().getJidoFubanKaishiNo().getTxtJidoFubanKaishiNo().setDisabled(false);
         } else {

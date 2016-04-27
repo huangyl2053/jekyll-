@@ -74,6 +74,7 @@ public class FubanHohoMain {
      * @return ResponseData<FubanHohoMainDiv>
      */
     public ResponseData<FubanHohoMainDiv> onChangeDdlFubanmotoJoho(FubanHohoMainDiv div) {
+        getHandler(div).setJidoFubanKaishiNo();
         getHandler(div).setDisableToFubanHoho();
         return ResponseData.of(div).respond();
     }
