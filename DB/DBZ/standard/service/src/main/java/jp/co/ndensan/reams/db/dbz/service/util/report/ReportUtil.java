@@ -191,20 +191,16 @@ public final class ReportUtil {
      * @param reportId 帳票ID
      * @param kamokuCode 科目コード
      * @param patternNo パターン番号
+     * @param sentenceNo 項目番号
      * @param kijunDate 基準年月日
      * @return 通知文
      */
-    public static Map<Integer, RString> get通知文(SubGyomuCode subGyomuCode, ReportId reportId,
-            KamokuCode kamokuCode, int patternNo, FlexibleDate kijunDate) {
+    public static RString get通知文(SubGyomuCode subGyomuCode, ReportId reportId,
+            KamokuCode kamokuCode, int patternNo, int sentenceNo, FlexibleDate kijunDate) {
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId, kamokuCode, patternNo, kijunDate);
+        TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定形文検索(subGyomuCode, reportId,
+                kamokuCode, patternNo, sentenceNo, kijunDate);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
-        List<TsuchishoTeikeibunEntity> tsuchishoTeikeibunList = info.get通知書定型文List();
-        Map<Integer, RString> 通知文 = new HashMap<>();
-        for (TsuchishoTeikeibunEntity tsuchishoTeikeibun : tsuchishoTeikeibunList) {
-            int sentenceNo = tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentenceNo();
-            通知文.put(sentenceNo, textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence()));
-        }
-        return 通知文;
+        return textHenkanRule.editText(info.get文章());
     }
 }
