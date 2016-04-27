@@ -5,18 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001;
 
-import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -98,34 +96,36 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                  */
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
-                    ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+                    RString 削除 = new RString("削除");
+
+                    List<dgShinseiList_Row> list = div.getDgShinseiList().getDataSource();
                     if (list == null || list.isEmpty()) {
-                        return true;
+                        return false;
                     }
                     FlexibleDate 適用日１;
                     FlexibleDate 適用日２;
                     FlexibleDate 有効期限１;
                     FlexibleDate 有効期限２;
-                    FutanGendogakuNinteiViewState joho１;
-                    FutanGendogakuNinteiViewState joho２;
+                    dgShinseiList_Row row1;
+                    dgShinseiList_Row row2;
                     for (int i = 0, size = list.size(); i < size - 1; i++) {
-                        joho１ = list.get(i);
-                        適用日１ = joho１.getFutanGendogakuNintei().get適用開始年月日();
-                        有効期限１ = joho１.getFutanGendogakuNintei().get適用終了年月日();
-                        if (適用日１ == null || 適用日１.isEmpty() || 有効期限１ == null || 有効期限１.isEmpty()) {
+                        row1 = list.get(i);
+                        適用日１ = row1.getTxtTekiyoYMD().getValue();
+                        有効期限１ = row1.getTxtYukoKigenYMD().getValue();
+                        if (削除.equals(row1.getJotai()) || 適用日１ == null || 適用日１.isEmpty() || 有効期限１ == null || 有効期限１.isEmpty()) {
                             continue;
                         }
                         for (int j = i + 1; j < size; j++) {
-                            joho２ = list.get(j);
-                            適用日２ = joho２.getFutanGendogakuNintei().get適用開始年月日();
-                            有効期限２ = joho２.getFutanGendogakuNintei().get適用終了年月日();
-                            if (適用日２ == null || 適用日２.isEmpty() || 有効期限２ == null || 有効期限２.isEmpty()) {
+                            row2 = list.get(j);
+                            適用日２ = row2.getTxtTekiyoYMD().getValue();
+                            有効期限２ = row2.getTxtYukoKigenYMD().getValue();
+                            if (削除.equals(row2.getJotai()) || 適用日２ == null || 適用日２.isEmpty() || 有効期限２ == null || 有効期限２.isEmpty()) {
                                 continue;
                             }
                             if (適用日２.isBeforeOrEquals(適用日１) && 有効期限１.isBeforeOrEquals(有効期限２)
                             || 適用日１.isBeforeOrEquals(適用日２) && 有効期限２.isBeforeOrEquals(有効期限１)
-                            || 適用日１.isBeforeOrEquals(有効期限２)
-                            || 有効期限１.isBeforeOrEquals(適用日２)) {
+                            || (適用日２.isBeforeOrEquals(適用日１) && 適用日１.isBeforeOrEquals(有効期限２))
+                            || (適用日２.isBeforeOrEquals(有効期限１) && 有効期限１.isBeforeOrEquals(有効期限２))) {
                                 return false;
                             }
                         }

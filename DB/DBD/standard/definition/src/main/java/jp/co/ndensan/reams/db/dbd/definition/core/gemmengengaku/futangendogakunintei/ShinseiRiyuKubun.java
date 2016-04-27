@@ -73,12 +73,12 @@ public enum ShinseiRiyuKubun {
     /**
      * 申請理由区分のコードと一致する内容を探します。
      *
-     * @param fullName 申請理由区分の名称
+     * @param code 申請理由区分のコード
      * @return {@code code} に対応する申請理由区分
      */
-    public static ShinseiRiyuKubun toValue(RString fullName) {
+    public static ShinseiRiyuKubun toValue(RString code) {
         for (ShinseiRiyuKubun shinseiRiyuKubun : ShinseiRiyuKubun.values()) {
-            if (shinseiRiyuKubun.fullName.equals(fullName)) {
+            if (shinseiRiyuKubun.code.equals(code)) {
                 return shinseiRiyuKubun;
             }
         }
