@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * YoguKonyuhiShikyuShinseiMishinsaSearchPanel のクラスファイル
  *
- * @reamsid_L DBC-1021-090 gongliang
+ * @reamsid_L DBC-1020-040 gongliang
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv extends Panel {
 
