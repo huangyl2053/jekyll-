@@ -67,9 +67,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.hihokenshaName = item.getHihokenshaName();
         source.birthYMD = item.getBirthYMD();
         source.seibetsu = item.getSeibetsu();
-// TODO QA629 #75594 「意見書作成料種別_在宅・施設」と「意見書作成料種別_新規・継続」はフィールドではないため、ReportSourceに項目名は生成できない
-//        source.ikenshosyubetu1 = item.getIkenshosyubetu1();
-//        source.ikenshosyubetu2 = item.getIkenshosyubetu2();
+        source.shubetsuZaitaku = item.getShubetsuZaitaku();
+        source.shubetsuShisetsu = item.getShubetsuShisetsu();
+        source.shubetsuShinki = item.getShubetsuShinki();
+        source.shubetsuKeizoku = item.getShubetsuKeizoku();
         source.ikenshoSakuseiRyo1 = item.getIkenshoSakuseiRyo1();
         source.ikenshoSakuseiRyo2 = item.getIkenshoSakuseiRyo2();
         source.ikenshoSakuseiRyo3 = item.getIkenshoSakuseiRyo3();
@@ -83,7 +84,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.yubinNo = item.getSeikyuIryokikanYubinNo();
         source.iryokikanJusho = item.getSeikyuIryokikanJusho();
         source.iryokikanTel = item.getSeikyuIryokikanTel();
-        source.ikenshoSakuseiYMD = RString.EMPTY;
         return source;
     }
 }
