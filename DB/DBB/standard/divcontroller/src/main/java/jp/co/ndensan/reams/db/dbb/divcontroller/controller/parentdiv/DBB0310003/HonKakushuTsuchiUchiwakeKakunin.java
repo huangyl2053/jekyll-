@@ -78,6 +78,9 @@ public class HonKakushuTsuchiUchiwakeKakunin {
         RString 打ち分け条件 = div.getHonKakushuTsuchiUchiwakeSentaku()
                 .getDgKakushuTsuchiUchiwakeSentaku().getClickedItem().getTxtJokenMeisho();
         List<TsuchishoUchiwakeJoken> 方法情報一覧 = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件);
+        if (方法情報一覧 == null) {
+            return createResponse(div);
+        }
         handler.show打分け方法情報(方法情報一覧.get(0));
         div.getTxtTsuchishoSetteiHozonMeisho().setValue(打ち分け条件);
         ViewStateHolder.put(ViewStateKeys.打分け方法情報キー, 打ち分け条件);
@@ -106,6 +109,16 @@ public class HonKakushuTsuchiUchiwakeKakunin {
             }
         } else {
             handler.設定時保存処理_変更区分_0();
+        }
+        Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
+        List<TsuchishoUchiwakeJoken> 打分け方法List = 本算定賦課計算.getutiwakehouhoujyoho1();
+        if (打分け方法List != null) {
+            getHandler(div).show打分け方法(打分け方法List);
+            RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
+            List<TsuchishoUchiwakeJoken> 方法情報一覧 = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件);
+            if (方法情報一覧 != null) {
+                getHandler(div).show打分け方法情報(方法情報一覧.get(0));
+            }
         }
         return createResponse(div);
     }
@@ -137,9 +150,6 @@ public class HonKakushuTsuchiUchiwakeKakunin {
             }
         }
 
-        RString 打ち分け条件 = div.getTxtTsuchishoSetteiHozonMeisho().getValue();
-        // TODO QA482 ViewStateの設定
-        ViewStateHolder.put(ViewStateKeys.打分け方法情報キー, 打ち分け条件);
         return ResponseData.of(div).forwardWithEventName(DBB0310003TransitionEventName.完了).respond();
     }
 

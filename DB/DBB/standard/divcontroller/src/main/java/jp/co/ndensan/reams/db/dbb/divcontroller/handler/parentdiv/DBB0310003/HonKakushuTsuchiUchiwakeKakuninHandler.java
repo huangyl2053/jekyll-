@@ -44,8 +44,6 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
     private static final int 変更区分_0 = 0;
     private static final int 変更区分_1 = 1;
     private static final RString EMPTY = RString.EMPTY;
-    private static final RString SELECTED_FLAG = new RString("1");
-    private static final RString NOTSELECTED_FLAG = new RString("0");
     private static final RString 徴収なし = new RString("徴収なし");
     private static final RString 特別徴収 = new RString("特別徴収");
     private static final RString 普通徴収 = new RString("普通徴収");
@@ -82,10 +80,8 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         for (TsuchishoUchiwakeJoken 打分け方法 : 打分け方法List) {
             dgKakushuTsuchiUchiwakeSentaku_Row row = new dgKakushuTsuchiUchiwakeSentaku_Row();
             row.setTxtJokenMeisho(打分け方法.get打ち分け条件());
-            row.setTxtUchiwake(NOTSELECTED_FLAG);
             dataSources.add(row);
         }
-        dataSources.get(0).setTxtUchiwake(SELECTED_FLAG);
         div.getHonKakushuTsuchiUchiwakeSentaku().getDgKakushuTsuchiUchiwakeSentaku().setDataSource(dataSources);
     }
 
@@ -233,21 +229,6 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
     }
 
     /**
-     * Selected打ち分け条件の取得
-     *
-     * @param 打ち分け条件List 打分け方法一覧
-     * @return 打分け方法
-     */
-    public RString getSelected打ち分け条件(List<dgKakushuTsuchiUchiwakeSentaku_Row> 打ち分け条件List) {
-        for (dgKakushuTsuchiUchiwakeSentaku_Row 打ち分け条件 : 打ち分け条件List) {
-            if (SELECTED_FLAG.equals(打ち分け条件.getTxtUchiwake())) {
-                return 打ち分け条件.getTxtJokenMeisho();
-            }
-        }
-        return null;
-    }
-
-    /**
      * 現データは変更有無
      *
      * @param 打分け方法 打分け方法
@@ -337,7 +318,6 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true);
         RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
         変更打分け方法 = 変更打分け方法.createBuilderForEdit().set打ち分け条件(打ち分け条件).build();
-        // TODO QA482 どの方法ですが？
         本算定賦課計算.regutiwakehouhoujyoho2(変更打分け方法, new RString(String.valueOf(変更区分_0)));
     }
 
@@ -415,9 +395,20 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
      * @return 変更区分
      */
     public int 変更区分() {
-        RString 打ち分け条件view = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
         RString 打ち分け条件 = div.getTxtTsuchishoSetteiHozonMeisho().getValue();
-        return 打ち分け条件view.equals(打ち分け条件) ? 変更区分_0 : 変更区分_1;
+        Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
+        List<TsuchishoUchiwakeJoken> 打分け方法List = 本算定賦課計算.getutiwakehouhoujyoho1();
+        if (打分け方法List == null) {
+            return 変更区分_0;
+        }
+        for (TsuchishoUchiwakeJoken 方法情報一覧 : 打分け方法List) {
+            if (打ち分け条件 == null && 方法情報一覧.get打ち分け条件() == null) {
+                return 変更区分_1;
+            } else if (打ち分け条件 != null && 打ち分け条件.equals(方法情報一覧.get打ち分け条件())) {
+                return 変更区分_1;
+            }
+        }
+        return 変更区分_0;
     }
 
     private List<KeyValueDataSource> get通知書List() {
