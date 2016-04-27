@@ -704,10 +704,15 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
 
     private void 前回まで支払結果の初期化(ShiharaiKekkaResult 住宅改修費支払結果) {
         if (住宅改修費支払結果 != null) {
+            Decimal 支給限度額 = 支給限度額の取得();
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtHiyoTotalMae().setValue(
                     住宅改修費支払結果.get費用額合計());
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtHokenTaishoHiyoMae().setValue(
-                    住宅改修費支払結果.get保険対象費用額());
+                    住宅改修費支払結果.get費用額合計());
+            if (住宅改修費支払結果.get費用額合計().compareTo(支給限度額) > 0) {
+                div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtHokenTaishoHiyoMae()
+                        .setValue(支給限度額);
+            }
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtHokenKyufuAmountMae().setValue(
                     住宅改修費支払結果.get保険給付額());
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountMae()
@@ -1567,11 +1572,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
      * 限度額リセット有効性チェックするメソッドです。
      */
     public void 支払結果の設定() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
-                div.getTxtTeikyoYM().getValue().getYearMonth().toString());
-        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
-        Decimal 支給限度額 = 住宅改修費事前申請.getShikyuGendoGaku(被保険者番号, 画面提供着工年月);
+        Decimal 支給限度額 = 支給限度額の取得();
         Decimal 費用額合計 = this.費用額合計の取得();
         Decimal 画面前回までの費用額合計 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHiyoTotalMae().getValue();
@@ -1597,7 +1598,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 Decimal 今回の保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().getValue();
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                        .setValue(費用額合計.subtract(今回の保険給付額));
+                        .setValue(費用額合計.subtract(今回の保険給付額).compareTo(Decimal.ZERO) < 0
+                                ? Decimal.ZERO : 費用額合計.subtract(今回の保険給付額));
             } else if (費用額合計.add(前回までの費用額合計).compareTo(支給限度額) <= 0) {
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenTaishoHiyoNow().setValue(費用額合計);
@@ -1607,7 +1609,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 Decimal 今回保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().getValue();
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                        .setValue(費用額合計.subtract(今回保険給付額));
+                        .setValue(費用額合計.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
+                                ? Decimal.ZERO : 費用額合計.subtract(今回保険給付額));
             }
         } else {
             if (費用額合計.compareTo(支給限度額) > 0) {
@@ -1619,7 +1622,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 Decimal 今回保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().getValue();
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                        .setValue(費用額合計.subtract(今回保険給付額));
+                        .setValue(費用額合計.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
+                                ? Decimal.ZERO : 費用額合計.subtract(今回保険給付額));
             } else if (費用額合計.compareTo(支給限度額) <= 0) {
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenTaishoHiyoNow().setValue(費用額合計);
@@ -1629,9 +1633,19 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 Decimal 今回保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().getValue();
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtRiyoshaFutanAmountNow()
-                        .setValue(費用額合計.subtract(今回保険給付額));
+                        .setValue(費用額合計.subtract(今回保険給付額).compareTo(Decimal.ZERO) < 0
+                                ? Decimal.ZERO : 費用額合計.subtract(今回保険給付額));
             }
         }
+    }
+
+    private Decimal 支給限度額の取得() {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth 画面提供着工年月 = new FlexibleYearMonth(
+                div.getTxtTeikyoYM().getValue().getYearMonth().toString());
+        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
+        Decimal 支給限度額 = 住宅改修費事前申請.getShikyuGendoGaku(被保険者番号, 画面提供着工年月);
+        return 支給限度額;
     }
 
     private void 今回の被保険対象額設定(Decimal 今回被保険対象額, Decimal 支給限度額, Decimal 給付率,
@@ -1816,7 +1830,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     public RString 住宅改修内容一覧チェック() {
         List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
-//        if (!gridList.isEmpty()) {
         List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
         JyutakuGaisyunaiyoListParameter param;
         for (dgGaisyuList_Row row : gridList) {
@@ -1829,8 +1842,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         }
         return JutakukaishuSikyuShinseiManager.createInstance().checkJyutakuGaisyunaiyoList(paramList,
                 new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
-//        }
-//        return RString.EMPTY;
     }
 }
 
