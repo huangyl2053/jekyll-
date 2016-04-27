@@ -151,7 +151,8 @@ public class MainPanelHandler {
                     ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
             row.setNinteiShinseiYmd(認定申請年月日);
             TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-            認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+            認定調査予定年月日.setValue(entity.get認定調査予定年月日() == null
+                    ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定調査予定年月日()));
             row.setNinteiChosaYmd(認定調査予定年月日);
             row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
             row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
@@ -163,7 +164,7 @@ public class MainPanelHandler {
             row.setNinteiChosainCode(entity.get認定調査員コード());
             row.setYoyakuKaoFlag(entity.get予約可能フラグ());
             row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
-            row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
+            row.setShichosonCode(entity.get市町村コード());
             rowList.add(row);
         }
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -318,7 +319,8 @@ public class MainPanelHandler {
                         ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
                 row.setNinteiShinseiYmd(認定申請年月日);
                 TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                認定調査予定年月日.setValue(entity.get認定調査予定年月日() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
                 row.setNinteiChosaYmd(認定調査予定年月日);
                 row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
@@ -330,7 +332,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
-                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
+                row.setShichosonCode(entity.get市町村コード());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -378,7 +380,8 @@ public class MainPanelHandler {
                         ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
                 row.setNinteiShinseiYmd(認定申請年月日);
                 TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                認定調査予定年月日.setValue(entity.get認定調査予定年月日() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定調査予定年月日()));
                 row.setNinteiChosaYmd(認定調査予定年月日);
                 row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
@@ -439,7 +442,8 @@ public class MainPanelHandler {
                         ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
                 row.setNinteiShinseiYmd(認定申請年月日);
                 TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                認定調査予定年月日.setValue(entity.get認定調査予定年月日() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定調査予定年月日()));
                 row.setNinteiChosaYmd(認定調査予定年月日);
                 row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
@@ -451,7 +455,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
-                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
+                row.setShoKisaiHokenshaNo(entity.get市町村コード());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -500,7 +504,8 @@ public class MainPanelHandler {
                         ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
                 row.setNinteiShinseiYmd(認定申請年月日);
                 TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                認定調査予定年月日.setValue(entity.get認定調査予定年月日() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定調査予定年月日()));
                 row.setNinteiChosaYmd(認定調査予定年月日);
                 row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
@@ -512,7 +517,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
-                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
+                row.setShichosonCode(entity.get市町村コード());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -563,7 +568,8 @@ public class MainPanelHandler {
                         ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
                 row.setNinteiShinseiYmd(認定申請年月日);
                 TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                認定調査予定年月日.setValue(entity.get認定調査予定年月日() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定調査予定年月日()));
                 row.setNinteiChosaYmd(認定調査予定年月日);
                 row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
                 row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
@@ -575,7 +581,7 @@ public class MainPanelHandler {
                 row.setNinteiChosainCode(entity.get認定調査員コード());
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
-                row.setShoKisaiHokenshaNo(entity.get証記載保険者番号());
+                row.setShichosonCode(entity.get市町村コード());
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
