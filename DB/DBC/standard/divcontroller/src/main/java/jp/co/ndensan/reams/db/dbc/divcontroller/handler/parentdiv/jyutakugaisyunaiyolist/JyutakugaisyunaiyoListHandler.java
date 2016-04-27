@@ -118,6 +118,9 @@ public class JyutakugaisyunaiyoListHandler {
         if (状態_登録.equals(状態)) {
             div.setMode_State(JyutakugaisyunaiyoListDiv.State.touroku);
             div.getBtnDetailAdd().setVisible(true);
+            div.getBtnHonnijyusyoCopy().setDisabled(true);
+            div.getBtnClear().setDisabled(true);
+            div.getBtnDetailConfirm().setDisabled(true);
             div.getDgGaisyuList().getGridSetting().setIsShowModifyButtonColumn(true);
             div.getDgGaisyuList().getGridSetting().setIsShowDeleteButtonColumn(true);
             div.getDgGaisyuList().getGridSetting().setIsShowSelectButtonColumn(false);
