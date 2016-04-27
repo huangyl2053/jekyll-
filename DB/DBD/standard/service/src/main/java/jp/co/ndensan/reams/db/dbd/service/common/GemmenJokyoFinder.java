@@ -11,7 +11,13 @@ import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness
 import jp.co.ndensan.reams.db.dbd.business.common.VariousReductionInformation;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoSummary;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
@@ -21,6 +27,11 @@ import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo.IGemmenJokyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
@@ -117,9 +128,80 @@ public class GemmenJokyoFinder {
      * @param 被保険者番号 被保険者番号
      * @return 各種減免情報
      */
+    @Transaction
     public VariousReductionInformation find減免情報(HihokenshaNo 被保険者番号) {
-        //TODO QA #79662
-        return null;
+        List<FutanGendogakuNintei> 介護保険負担限度額認定の情報List = get介護保険負担限度額認定の情報(被保険者番号);
+        List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = get利用者負担額減額の情報(被保険者番号);
+        List<HomonKaigoRiyoshaFutangakuGengaku> 訪問介護利用者負担額減額の情報List = get訪問介護利用者負担額減額の情報(被保険者番号);
+        List<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = get社会福祉法人等利用者負担軽減の情報(被保険者番号);
+        List<TokubetsuchiikiKasanGemmen> 特別地域加算減免の情報List = get特別地域加算減免の情報(被保険者番号);
+        return new VariousReductionInformation(介護保険負担限度額認定の情報List, 利用者負担額減額の情報List,
+                訪問介護利用者負担額減額の情報List, 社会福祉法人等利用者負担軽減の情報List, 特別地域加算減免の情報List);
+    }
+
+    private List<TokubetsuchiikiKasanGemmen> get特別地域加算減免の情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
+        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
+        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        parameter.set被保険者番号(被保険者番号);
+        List<TokubetsuchiikiKasanGemmen> 特別地域加算減免の情報List = new ArrayList<>();
+        TokubetsuchiikiKasanGemmenEntity entity = mapper.get特別地域加算減免の情報(parameter);
+        if (entity != null) {
+            特別地域加算減免の情報List.add(new TokubetsuchiikiKasanGemmen(entity));
+        }
+        return 特別地域加算減免の情報List;
+    }
+
+    private List<HomonKaigoRiyoshaFutangakuGengaku> get訪問介護利用者負担額減額の情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
+        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
+        parameter.set減免減額種類コード(GemmenGengakuShurui.訪問介護利用者負担額減額.getコード());
+        parameter.set被保険者番号(被保険者番号);
+        List<HomonKaigoRiyoshaFutangakuGengaku> 訪問介護利用者負担額減額の情報List = new ArrayList<>();
+        HomonKaigoRiyoshaFutangakuGengakuEntity entity = mapper.get訪問介護利用者負担額減額の情報(parameter);
+        if (entity != null) {
+            訪問介護利用者負担額減額の情報List.add(new HomonKaigoRiyoshaFutangakuGengaku(entity));
+        }
+        return 訪問介護利用者負担額減額の情報List;
+    }
+
+    private List<ShakaifukuRiyoshaFutanKeigen> get社会福祉法人等利用者負担軽減の情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
+        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
+        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        parameter.set被保険者番号(被保険者番号);
+        ShafukuRiyoshaFutanKeigenEntity entity = mapper.get社会福祉法人等利用者負担軽減の情報(parameter);
+        List<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = new ArrayList<>();
+        if (entity != null) {
+            社会福祉法人等利用者負担軽減の情報List.add(new ShakaifukuRiyoshaFutanKeigen(entity));
+        }
+        return 社会福祉法人等利用者負担軽減の情報List;
+    }
+
+    private List<FutanGendogakuNintei> get介護保険負担限度額認定の情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
+        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
+        parameter.set減免減額種類コード(GemmenGengakuShurui.負担限度額認定.getコード());
+        parameter.set被保険者番号(被保険者番号);
+        FutanGendogakuNinteiEntity entity = mapper.get介護保険負担限度額認定の情報(parameter);
+        List<FutanGendogakuNintei> 介護保険負担限度額認定の情報List = new ArrayList<>();
+        if (entity != null) {
+            介護保険負担限度額認定の情報List.add(new FutanGendogakuNintei(entity));
+        }
+        return 介護保険負担限度額認定の情報List;
+    }
+
+    private List<RiyoshaFutangakuGengaku> get利用者負担額減額の情報(HihokenshaNo 被保険者番号) {
+        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
+        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
+        parameter.set減免減額種類コード(GemmenGengakuShurui.利用者負担額減額.getコード());
+        parameter.set被保険者番号(被保険者番号);
+        RiyoshaFutangakuGengakuEntity entity = mapper.get利用者負担額減額の情報(parameter);
+        List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = new ArrayList<>();
+        if (entity != null) {
+            利用者負担額減額の情報List.add(new RiyoshaFutangakuGengaku(entity));
+        }
+        return 利用者負担額減額の情報List;
     }
 
     /**
