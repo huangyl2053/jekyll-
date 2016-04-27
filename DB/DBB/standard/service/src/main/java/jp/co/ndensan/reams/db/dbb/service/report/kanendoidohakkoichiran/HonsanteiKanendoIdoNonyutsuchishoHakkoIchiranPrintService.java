@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.report.honsanteikanendoidononyutsuchishohakkoichiran;
+package jp.co.ndensan.reams.db.dbb.service.report.kanendoidohakkoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.honsanteikanendoidononyutsuchishohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.honsanteikanendoidononyutsuchishohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendoikkatsuhakko.HonSanteiIdoKanendoIkkatsuHakkoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
