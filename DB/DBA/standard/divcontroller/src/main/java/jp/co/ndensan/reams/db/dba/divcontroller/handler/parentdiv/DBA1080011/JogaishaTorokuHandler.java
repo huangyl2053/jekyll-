@@ -14,11 +14,15 @@ import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.Config
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.JogaishaTorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.dgNenreiTotatshusha_Row;
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -45,6 +49,7 @@ public class JogaishaTorokuHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString 排他 = new RString("ShikakuShutokuJogaishaToroku");
     private final JogaishaTorokuDiv div;
 
     /**
@@ -83,15 +88,15 @@ public class JogaishaTorokuHandler {
                 row.getJogaiKaijyoDate().setValue(new RDate(資格取得除外者.getShikakuShutokuJogaiKaijoYMD().toString()));
             }
             rowList.add(row);
+            アクセスログ();
         }
         div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(rowList);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().setDisabled(true);
-        LockingKey lockingKey = new LockingKey(new RString("ShikakuShutokuJogaishaToroku"));
+        LockingKey lockingKey = new LockingKey(排他);
         if (!RealInitialLocker.tryGetLock(lockingKey)) {
             div.setReadOnly(true);
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
-        アクセスログ();
     }
 
     /**
@@ -279,12 +284,24 @@ public class JogaishaTorokuHandler {
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("01"), new RString("有り"), new RString("無し"));
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("003"), new RString("識別コード"), 識別コード.value());
         return PersonalData.of(識別コード, expandedInfo);
     }
 
-    private void アクセスログ() {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(ShikibetsuCode.EMPTY));
+    private PersonalData withPersonalData(ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("003"), new RString("識別コード"), 識別コード.value());
+        return PersonalData.withHojinNo(ShikibetsuCode.EMPTY, expandedInfo);
+    }
+
+    /**
+     * アクセスログを出力します。
+     *
+     */
+    public void アクセスログ() {
+        TaishoshaKey key2 = new TaishoshaKey(new HihokenshaNo(""), new ShikibetsuCode("000000000000010"), SetaiCode.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.資格対象者, key2);
+        AccessLogger.log(AccessLogType.照会, toPersonalData(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード()));
+        AccessLogger.log(AccessLogType.照会, withPersonalData(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード()));
     }
 
     private void set除外対象者エリア(dgNenreiTotatshusha_Row row) {
