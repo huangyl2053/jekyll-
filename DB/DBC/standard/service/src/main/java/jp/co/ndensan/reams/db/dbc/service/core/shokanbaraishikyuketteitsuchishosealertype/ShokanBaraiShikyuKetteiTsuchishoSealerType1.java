@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
@@ -137,11 +136,12 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
         SofubutsuAtesakiSource atesakiSource
                 = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
-        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5, FlexibleDate.getNowDate());
-        RString タイトル = 通知文Map.get(ONE);
-        RString 通知文 = 通知文Map.get(TWO);
-        RString 情報文 = 通知文Map.get(THREE);
+        RString タイトル = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5, ONE, FlexibleDate.getNowDate());
+        RString 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5, TWO, FlexibleDate.getNowDate());
+        RString 情報文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_5, THREE, FlexibleDate.getNowDate());
         List<ShokanKetteiTsuchiShoSealer> 帳票ソースデータ = new ArrayList<>();
         RString hiHokenshaNo = RString.EMPTY;
         RString key = RString.EMPTY;
