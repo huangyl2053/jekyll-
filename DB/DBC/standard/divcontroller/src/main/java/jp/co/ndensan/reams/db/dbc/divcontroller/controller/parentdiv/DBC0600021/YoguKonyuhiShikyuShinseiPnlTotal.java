@@ -80,6 +80,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString NUM44 = new RString("44");
     private static final RString 証明書コード1 = new RString("21C1");
     private static final RString 証明書コード2 = new RString("21C2");
+    private static final RString 保存確認 = new RString("保存確認");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
@@ -91,7 +92,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 照会 = new RString("照会");
     private static final RString 審査 = new RString("審査");
     private static final RString 償還払給付費 = new RString("001");
-    private static final RString 一覧に戻る = new RString("一覧に戻る");
     private static final RString 国保連合 = new RString("国保連合会より送付されてくる決定情報がまだ取り込まなかった");
     private static final RString 決定情報 = new RString("決定情報の登録を続きます");
 
@@ -439,7 +439,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             flag = getHandler(div).is内容変更状態();
         }
         if (審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            審査場合(div);
+            flag = getHandler(div).is内容変更状態();
 
         }
         if (flag) {
@@ -479,30 +479,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         return createResponse(div);
     }
 
-    private ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> 審査場合(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
-        boolean flag = getHandler(div).is内容変更状態();
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る)
-                        .parameter(一覧に戻る);
-            } else {
-                ResponseData.of(div).respond();
-            }
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0600021TransitionEventName.一覧に戻る)
-                    .parameter(一覧に戻る);
-        }
-
-        return createResponse(div);
-    }
-
     /**
      * 「本人情報をコピーする」ボタン
      *
@@ -524,15 +500,22 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnSave(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return 保存処理(div);
-        } else if (getHandler(div).is内容変更状態()) {
-            ValidationMessageControlPairs validPairs = getHandler(div).保存チェック();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-            return 保存処理(div);
-        } else {
+        }
+        if (!getHandler(div).is内容変更状態()) {
             return notChanges(div);
         }
+        ValidationMessageControlPairs validPairs;
+        if (!ResponseHolder.isWarningIgnoredRequest() && !保存確認.equals(div.getCheckflag())) {
+            validPairs = getHandler(div).保存チェック(true);
+        } else {
+            validPairs = getHandler(div).保存チェック(false);
+        }
+
+        if (validPairs != null && validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return 保存処理(div);
+
     }
 
     /**
@@ -566,9 +549,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
 
     private ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> 保存処理(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         try {
-            if (!ResponseHolder.isReRequest()) {
+            if (!保存確認.equals(div.getCheckflag())) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                         UrQuestionMessages.保存の確認.getMessage().evaluate());
+                div.setCheckflag(保存確認);
                 return ResponseData.of(div).addMessage(message).respond();
             }
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -587,6 +571,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                             true);
                     return ResponseData.of(div).setState(DBC0600021StateName.successSaved);
                 }
+            } else {
+                div.setCheckflag(RString.EMPTY);
             }
             if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
