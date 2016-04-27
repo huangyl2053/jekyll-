@@ -180,7 +180,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         outputJokenhyoFactory();
         eucCsvWriterJunitoJugo.close();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-//        manager.getEucOutputDirectry();
         manager.spool(eucFilename, id);
     }
 
@@ -226,7 +225,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                 条件.append("、");
             }
             if (HihokenshaJoho._２号.getコード().equals(code)) {
-                条件.append(HihokenshaJoho._１号.get略称());
+                条件.append(HihokenshaJoho._２号.get略称());
                 条件.append("、");
             }
             if (HihokenshaJoho.日本人.getコード().equals(code)) {
@@ -246,7 +245,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                 条件.append("、");
             }
         }
-        出力条件.add(条件.substring(条件.length() - 1));
+        出力条件.add(条件.substring(0, 条件.length() - 1));
         出力条件.add(RString.EMPTY);
         出力条件.add(get条件(new RString("資格抽出区分"), ShikakuChushutsuKubun.toValue(mybatisPrm.getShikakuChushutsuKubun()).get名称()));
         出力条件.add(get取得事由(mybatisPrm.getShutokujiyu()));
@@ -265,8 +264,9 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
             年齢.append(new RString("）"));
             出力条件.add(年齢.toRString());
         } else if (NenreiSoChushutsuHoho.生年月日範囲.getコード().equals(mybatisPrm.getPsmChushutsu_Kubun())) {
-            出力条件.add(get条件(new RString("生年月日"), getFrom_To(mybatisPrm.getPsmSeinengappiYMD_Start(),
-                    mybatisPrm.getPsmSeinengappiYMD_End())));
+            出力条件.add(get条件(new RString("生年月日"), getFrom_To(
+                    getパターン9(new FlexibleDate(mybatisPrm.getPsmSeinengappiYMD_Start())),
+                    getパターン9(new FlexibleDate(mybatisPrm.getPsmSeinengappiYMD_End())))));
         }
         if (!Chiku.全て.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
             if (Chiku.住所.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
@@ -319,7 +319,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
             }
             条件 = get取得事由(条件, code);
         }
-        return 条件.substring(条件.length() - 1);
+        return 条件.substring(0, 条件.length() - 1);
     }
 
     private RStringBuilder get取得事由(RStringBuilder 条件, RString 取得事由) {
@@ -448,7 +448,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                 条件.append("、");
             }
         }
-        return 条件.substring(条件.length() - 1);
+        return 条件.substring(0, 条件.length() - 1);
     }
 
     private RString getFrom_To(RString from, RString to) {
