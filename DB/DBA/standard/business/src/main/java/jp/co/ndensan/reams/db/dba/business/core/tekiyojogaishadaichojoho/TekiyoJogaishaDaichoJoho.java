@@ -49,6 +49,15 @@ public class TekiyoJogaishaDaichoJoho {
     }
 
     /**
+     * タイトルを取得します。
+     *
+     * @return タイトル
+     */
+    public RString getタイトル() {
+        return entity.getタイトル();
+    }
+
+    /**
      * 市町村コードを取得します。
      *
      * @return 市町村コード
