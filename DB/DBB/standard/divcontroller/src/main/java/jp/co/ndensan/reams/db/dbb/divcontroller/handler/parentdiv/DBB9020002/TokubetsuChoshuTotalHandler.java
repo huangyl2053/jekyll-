@@ -498,7 +498,7 @@ public final class TokubetsuChoshuTotalHandler {
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                     .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho()
                     .setSelectedKey(FutsuChoshuKirikaeKeisanHoho.指定期以降重複させる.getコード());
-            if (!kiList.contains(計算方法)) {
+            if (!kiList.contains(new KeyValueDataSource(計算方法, 計算方法))) {
                 throw new ApplicationException(業務コンフィグ不整合エラー.toString());
             }
             div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
