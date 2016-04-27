@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -64,10 +65,12 @@ public class TajutokuIdoTeisei {
                 getCcdTaJushochiTokureishaKanri().get適用情報一覧();
         List<TekiyouJouhou> 適用情報グリッド = new ArrayList<>();
         for (dgJushochiTokureiRireki_Row dg : dgJushochiTokureiRireki) {
-            TekiyouJouhou tekiyouJouhou = new TekiyouJouhou();
-            tekiyouJouhou.set適用日(dg.getTekiyoYMD().getText());
-            tekiyouJouhou.set解除日(dg.getKaijoYMD().getText());
-            適用情報グリッド.add(tekiyouJouhou);
+            if (!dg.getRowState().equals(RowState.Unchanged)) {
+                TekiyouJouhou tekiyouJouhou = new TekiyouJouhou();
+                tekiyouJouhou.set適用日(dg.getTekiyoYMD().getText());
+                tekiyouJouhou.set解除日(dg.getKaijoYMD().getText());
+                適用情報グリッド.add(tekiyouJouhou);
+            }
         }
         TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(),
