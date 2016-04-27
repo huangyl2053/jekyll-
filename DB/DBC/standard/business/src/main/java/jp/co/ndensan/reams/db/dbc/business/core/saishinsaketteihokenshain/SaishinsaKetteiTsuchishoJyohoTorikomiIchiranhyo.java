@@ -91,7 +91,10 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
         if ((明細情報List == null || 明細情報List.isEmpty()) && 集計情報Entity != null) {
             SaishinsaKetteiHokenshaInItem item = new SaishinsaKetteiHokenshaInItem();
             item.set処理年月(処理年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            item.set証記載保険者番号(集計情報Entity.getShoKisaiHokenshaNo().value());
+
+            item.set証記載保険者番号(集計情報Entity.getShoKisaiHokenshaNo() == null
+                    || 集計情報Entity.getShoKisaiHokenshaNo().isEmpty()
+                    ? RString.EMPTY : 集計情報Entity.getShoKisaiHokenshaNo().value());
             item.set証記載保険者名(集計情報Entity.getShoKisaiHokenshaName());
             item.set並び順1(並び順の1件目);
             item.set並び順2(並び順の2件目);
