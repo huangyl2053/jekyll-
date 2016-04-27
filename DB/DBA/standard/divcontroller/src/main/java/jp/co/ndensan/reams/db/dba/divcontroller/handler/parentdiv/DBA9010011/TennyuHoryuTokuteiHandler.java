@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 連動保留特定住所登録の取得するクラスです。
@@ -90,12 +89,12 @@ public class TennyuHoryuTokuteiHandler {
                     div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村コード).setVisible(false);
                     div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村名称).setVisible(false);
                 }
-                dgJigyoshaItiran.setTxtJushoCode(new RString(tennyuhoryu.get住所コード().toString()));
-                dgJigyoshaItiran.setTxtJusho(new RString(tennyuhoryu.get住所().toString()));
-                dgJigyoshaItiran.setTxtBanchiCode1(new RString(tennyuhoryu.get番地コード1().toString()));
-                dgJigyoshaItiran.setTxtBanchiCode2(new RString(tennyuhoryu.get番地コード2().toString()));
-                dgJigyoshaItiran.setTxtBanchiCode3(new RString(tennyuhoryu.get番地コード3().toString()));
-                dgJigyoshaItiran.setTxtBanchi(new RString(tennyuhoryu.get番地().toString()));
+                dgJigyoshaItiran.setTxtJushoCode(tennyuhoryu.get住所コード());
+                dgJigyoshaItiran.setTxtJusho(tennyuhoryu.get住所().value());
+                dgJigyoshaItiran.setTxtBanchiCode1(tennyuhoryu.get番地コード1().value());
+                dgJigyoshaItiran.setTxtBanchiCode2(tennyuhoryu.get番地コード2().value());
+                dgJigyoshaItiran.setTxtBanchiCode3(tennyuhoryu.get番地コード3().value());
+                dgJigyoshaItiran.setTxtBanchi(tennyuhoryu.get番地().value());
                 dgJigyoshaItiran.setTxtShisetsuShurui(tennyuhoryu.get施設種類());
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(tennyuhoryu.get施設コード());
@@ -299,8 +298,6 @@ public class TennyuHoryuTokuteiHandler {
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
                 builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
-                rendoHoryu.toEntity().setIsDeleted(false);
-                rendoHoryu.toEntity().setState(EntityDataState.Added);
                 manager.insertOrUpdateOrDel(builder.build());
             }
             if (RowState.Modified.equals(list.getRowState())) {
@@ -317,16 +314,14 @@ public class TennyuHoryuTokuteiHandler {
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
                 builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
-                rendoHoryu.toEntity().setIsDeleted(false);
-                rendoHoryu.modifiedModel();
-                manager.insertOrUpdateOrDel(builder.build());
+                rendoHoryu = builder.build().modifiedModel();
+                manager.insertOrUpdateOrDel(rendoHoryu);
             }
             if (RowState.Deleted.equals(list.getRowState())) {
                 RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(list.getTxtKanriNo(), new LasdecCode(list.getTxtShichosonCode()));
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
-                rendoHoryu.toEntity().setIsDeleted(true);
-                rendoHoryu.deleted();
-                manager.insertOrUpdateOrDel(builder.build());
+                rendoHoryu = builder.build().deleted();
+                manager.insertOrUpdateOrDel(rendoHoryu);
             }
         }
     }
