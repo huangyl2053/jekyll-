@@ -105,7 +105,7 @@ public class TeikiyoJogaishaShokai {
                 FlexibleDate 生年月日 = new FlexibleDate(list.get(0).get生年月日());
                 TekiyojogaishaDaichoItem item = new TekiyojogaishaDaichoItem(
                         chickNull(list.get(0).get印刷日時()),
-                        new RString("適用除外者台帳"),
+                        list.get(0).getタイトル(),
                         chickNull(list.get(0).get市町村コード()),
                         chickNull(list.get(0).get市町村名称()),
                         生年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
