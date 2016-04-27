@@ -27,7 +27,7 @@ public class DvKogakuServiceJoho {
     private static final ReportId 帳票ID = new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo");
 
     /**
-     * 画面初期化のonLoadメソッドます。
+     * 画面初期化のonLoadメソッドです。
      *
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
@@ -55,7 +55,7 @@ public class DvKogakuServiceJoho {
     }
 
     /**
-     * onChange事件 支払先RDBボタンの制御事件
+     * onChange事件 支払先RDBボタンの制御事件です
      *
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
@@ -72,7 +72,7 @@ public class DvKogakuServiceJoho {
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
-    public ResponseData<DvKogakuServiceJohoDiv> check_methodCheck(DvKogakuServiceJohoDiv div) {
+    public ResponseData<DvKogakuServiceJohoDiv> nyuryokuCheck(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
         ValidationMessageControlPairs pairs = handler.getCheckMessage();
         if (pairs.iterator().hasNext()) {

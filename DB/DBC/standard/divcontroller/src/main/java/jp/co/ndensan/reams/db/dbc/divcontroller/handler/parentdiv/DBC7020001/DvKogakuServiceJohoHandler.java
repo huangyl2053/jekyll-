@@ -52,7 +52,7 @@ public class DvKogakuServiceJohoHandler {
     }
 
     /**
-     * 初期化メソッド
+     * 初期化メソッドです
      *
      * @param div DvKogakuServiceJohoDiv
      * @return DvKogakuServiceJohoHandler
@@ -62,7 +62,7 @@ public class DvKogakuServiceJohoHandler {
     }
 
     /**
-     * 初期化設定のinitializeメソッド
+     * 初期化設定のinitializeメソッドです
      *
      */
     public void initialize() {
@@ -85,7 +85,7 @@ public class DvKogakuServiceJohoHandler {
     }
 
     /**
-     * 入力チェックのメソッドます。
+     * 入力チェックのメソッドです。
      *
      * @return ValidationMessageControlPairs
      *
@@ -132,7 +132,7 @@ public class DvKogakuServiceJohoHandler {
     }
 
     /**
-     * 金融機関共有子Divの制御のメソッドます
+     * 金融機関共有子Divの制御のメソッドです
      */
     public void getKinyuKikanSeigyo() {
         if (すべて.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki()
