@@ -44,7 +44,6 @@ public class TennyuHoryuTokuteiHandler {
 
     private final TennyuHoryuTokuteiJushoDiv div;
     private static final RString SHICHOSONCODE_VALUE = new RString("11");
-    private static final RString 半角スペース = new RString(" ");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -72,12 +71,12 @@ public class TennyuHoryuTokuteiHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
         div.getBtnTennyuHoryuTokuteiJushoHozon().setDisabled(false);
         div.getBtnKakutei().setDisabled(true);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().load(RString.EMPTY);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().initialize();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().initialize();
+        div.setDisabled(true);
+        div.getCcdShichousonInputGuide().load(RString.EMPTY);
+        div.getCcdJushoInputGuide().initialize();
+        div.getCcdBunchiInput().initialize();
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().initialize();
+        div.getCcdSisetuInputGuide().initialize();
         List<ddlTennyuHoryuTokuteiJushoIchiran_Row> dgKoufuKaishuList = new ArrayList<>();
         if (businessList != null && !businessList.isEmpty()) {
             for (TennyuHoryuTokuteiBusiness tennyuhoryu : businessList) {
@@ -85,7 +84,7 @@ public class TennyuHoryuTokuteiHandler {
                 dgJigyoshaItiran.setTxtKanriNo(tennyuhoryu.get管理番号());
                 ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
                 Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
-                dgJigyoshaItiran.setTxtShichosonCode(new RString(tennyuhoryu.get市町村コード().toString()));
+                dgJigyoshaItiran.setTxtShichosonCode(tennyuhoryu.get市町村コード().value());
                 dgJigyoshaItiran.setTxtShichosonName(tennyuhoryu.get市町村名称());
                 if (!SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
                     div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村コード).setVisible(false);
@@ -100,7 +99,7 @@ public class TennyuHoryuTokuteiHandler {
                 dgJigyoshaItiran.setTxtShisetsuShurui(tennyuhoryu.get施設種類());
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(tennyuhoryu.get施設コード());
-                builder.append(半角スペース);
+                builder.append(RString.HALF_SPACE);
                 builder.append(tennyuhoryu.get施設名称() == null ? RString.EMPTY : tennyuhoryu.get施設名称());
                 dgJigyoshaItiran.setTxtShisetsuJoho(builder.toRString());
                 dgKoufuKaishuList.add(dgJigyoshaItiran);
@@ -115,12 +114,12 @@ public class TennyuHoryuTokuteiHandler {
      */
     public void onClick_btnAdd() {
         div.getBtnKakutei().setDisabled(false);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(false);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().clear();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().clear();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().clear();
+        div.setDisabled(false);
+        div.getCcdShichousonInputGuide().clear();
+        div.getCcdJushoInputGuide().clear();
+        div.getCcdBunchiInput().clear();
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().clear();
+        div.getCcdSisetuInputGuide().clear();
         div.getTennyuHoryuTokuteiJushoNyuryoku().setTxtJotai(追加);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
     }
@@ -145,21 +144,21 @@ public class TennyuHoryuTokuteiHandler {
     public void onClick_btnKakutei() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, false);
         List<ddlTennyuHoryuTokuteiJushoIchiran_Row> dgKoufuKaishuList = div.getDdlTennyuHoryuTokuteiJushoIchiran().getDataSource();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().get市町村コード();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地().getColumnValue();
+        div.getCcdShichousonInputGuide().get市町村コード();
+        div.getCcdBunchiInput().get番地().getColumnValue();
         int rowcount = 0;
         if (!追加.equals(div.getTennyuHoryuTokuteiJushoNyuryoku().getTxtJotai())) {
             rowcount = div.getDdlTennyuHoryuTokuteiJushoIchiran().getClickedItem().getId();
         }
         ddlTennyuHoryuTokuteiJushoIchiran_Row row;
-        RString 市町村 = div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().get市町村コード();
+        RString 市町村 = div.getCcdShichousonInputGuide().get市町村コード();
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
         市町村セキュリティ情報.get市町村情報().get市町村コード();
         if (SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
             List<KoseiShichoson> koseiShichosonList = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
             for (KoseiShichoson koseiList : koseiShichosonList) {
-                if (div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().get市町村コード()
+                if (div.getCcdShichousonInputGuide().get市町村コード()
                         .equals(koseiList.get市町村コード().value().substring(0, 桁数_5))) {
                     市町村 = koseiList.get市町村コード().value();
                 }
@@ -171,37 +170,36 @@ public class TennyuHoryuTokuteiHandler {
             row = new ddlTennyuHoryuTokuteiJushoIchiran_Row();
             row.setRowState(RowState.Added);
             row.setTxtShichosonCode(市町村);
-            row.setTxtShichosonName(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().get市町村名称());
-            row.setTxtJushoCode(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().get町域コード().getColumnValue());
-            row.setTxtJusho(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().get町域名称());
-            row.setTxtBanchiCode1(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地コード1().getColumnValue());
-            row.setTxtBanchiCode2(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地コード2().getColumnValue());
-            row.setTxtBanchiCode3(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地コード3().getColumnValue());
-            row.setTxtBanchi(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地().getColumnValue());
-            row.setTxtShisetsuShurui(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().get施設種類());
+            row.setTxtShichosonName(div.getCcdShichousonInputGuide().get市町村名称());
+            row.setTxtJushoCode(div.getCcdJushoInputGuide().get町域コード().getColumnValue());
+            row.setTxtJusho(div.getCcdJushoInputGuide().get町域名称());
+            row.setTxtBanchiCode1(div.getCcdBunchiInput().get番地コード1().getColumnValue());
+            row.setTxtBanchiCode2(div.getCcdBunchiInput().get番地コード2().getColumnValue());
+            row.setTxtBanchiCode3(div.getCcdBunchiInput().get番地コード3().getColumnValue());
+            row.setTxtBanchi(div.getCcdBunchiInput().get番地().getColumnValue());
+            row.setTxtShisetsuShurui(div.getCcdSisetuInputGuide().get施設種類());
             RStringBuilder builder = new RStringBuilder();
-            builder.append(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().getNyuryokuShisetsuKodo());
-            builder.append(半角スペース);
-            builder.append(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().getNyuryokuShisetsuMeisho());
+            builder.append(div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo());
+            builder.append(RString.HALF_SPACE);
+            builder.append(div.getCcdSisetuInputGuide().getNyuryokuShisetsuMeisho());
             row.setTxtShisetsuJoho(builder.toRString());
             dgKoufuKaishuList.add(row);
         }
         if (修正.equals(div.getTennyuHoryuTokuteiJushoNyuryoku().getTxtJotai())) {
             row = dgKoufuKaishuList.get(rowcount);
-            row.setRowState(RowState.Modified);
             row.setTxtShichosonCode(市町村);
-            row.setTxtShichosonName(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().get市町村名称());
-            row.setTxtJushoCode(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().get町域コード().getColumnValue());
-            row.setTxtJusho(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().get町域名称());
-            row.setTxtBanchiCode1(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地コード1().getColumnValue());
-            row.setTxtBanchiCode2(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地コード2().getColumnValue());
-            row.setTxtBanchiCode3(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地コード3().getColumnValue());
-            row.setTxtBanchi(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().get番地().getColumnValue());
-            row.setTxtShisetsuShurui(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().get施設種類());
+            row.setTxtShichosonName(div.getCcdShichousonInputGuide().get市町村名称());
+            row.setTxtJushoCode(div.getCcdJushoInputGuide().get町域コード().getColumnValue());
+            row.setTxtJusho(div.getCcdJushoInputGuide().get町域名称());
+            row.setTxtBanchiCode1(div.getCcdBunchiInput().get番地コード1().getColumnValue());
+            row.setTxtBanchiCode2(div.getCcdBunchiInput().get番地コード2().getColumnValue());
+            row.setTxtBanchiCode3(div.getCcdBunchiInput().get番地コード3().getColumnValue());
+            row.setTxtBanchi(div.getCcdBunchiInput().get番地().getColumnValue());
+            row.setTxtShisetsuShurui(div.getCcdSisetuInputGuide().get施設種類());
             RStringBuilder builder = new RStringBuilder();
-            builder.append(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().getNyuryokuShisetsuKodo());
-            builder.append(半角スペース);
-            builder.append(div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().getNyuryokuShisetsuMeisho());
+            builder.append(div.getCcdSisetuInputGuide().getNyuryokuShisetsuKodo());
+            builder.append(RString.HALF_SPACE);
+            builder.append(div.getCcdSisetuInputGuide().getNyuryokuShisetsuMeisho());
             row.setTxtShisetsuJoho(builder.toRString());
             if (RowState.Added.equals(row.getRowState())) {
                 row.setRowState(RowState.Added);
@@ -230,25 +228,25 @@ public class TennyuHoryuTokuteiHandler {
     public void onClick_btnModify() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
         div.getBtnKakutei().setDisabled(false);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(false);
+        div.setDisabled(false);
         div.getTennyuHoryuTokuteiJushoNyuryoku().setTxtJotai(修正);
         ddlTennyuHoryuTokuteiJushoIchiran_Row dgRow = div.getDdlTennyuHoryuTokuteiJushoIchiran().getSelectedItems().get(0);
         //TODO QA918 共通部品SET方法のインターフェイスを存在しません
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().load(dgRow.getTxtShichosonCode(), dgRow.getTxtShichosonName());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().initialize(dgRow.getTxtJushoCode(), dgRow.getTxtJusho());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().initialize(new LasdecCode(dgRow.getTxtShichosonCode()), 4);
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().set市町村コード非活性();
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().set市町村名称(dgRow.getTxtShichosonName());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().set市町村名称(dgRow.getTxtShichosonName());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchi());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode1());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchiCode2());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode3());
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().set施設種類(dgRow.getTxtShisetsuShurui());
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().setNyuryokuShisetsuKodo(dgRow.getTxtShisetsuJoho());
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().setShisetsuMeisho(dgRow.getTxtShisetsuJoho());
+//        div.getCcdShichousonInputGuide().load(dgRow.getTxtShichosonCode(), dgRow.getTxtShichosonName());
+//        div.getCcdJushoInputGuide().initialize(dgRow.getTxtJushoCode(), dgRow.getTxtJusho());
+//        div.getCcdBunchiInput().initialize(new LasdecCode(dgRow.getTxtShichosonCode()), 4);
+//        div.getCcdShichousonInputGuide().set市町村コード非活性();
+//        div.getCcdShichousonInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
+//        div.getCcdShichousonInputGuide().set市町村名称(dgRow.getTxtShichosonName());
+//        div.getCcdJushoInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
+//        div.getCcdJushoInputGuide().set市町村名称(dgRow.getTxtShichosonName());
+//        div.getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchi());
+//        div.getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode1());
+//        div.getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchiCode2());
+//        div.getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode3());
+        div.getCcdSisetuInputGuide().set施設種類(dgRow.getTxtShisetsuShurui());
+        div.getCcdSisetuInputGuide().setNyuryokuShisetsuKodo(dgRow.getTxtShisetsuJoho());
+        div.getCcdSisetuInputGuide().setShisetsuMeisho(dgRow.getTxtShisetsuJoho());
     }
 
     /**
@@ -258,23 +256,23 @@ public class TennyuHoryuTokuteiHandler {
     public void onClick_btnDelete() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
         div.getBtnKakutei().setDisabled(false);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
+        div.setDisabled(true);
         div.getTennyuHoryuTokuteiJushoNyuryoku().setTxtJotai(削除);
         ddlTennyuHoryuTokuteiJushoIchiran_Row dgRow = div.getDdlTennyuHoryuTokuteiJushoIchiran().getSelectedItems().get(0);
         //TODO QA918 共通部品SET方法のインターフェイスを存在しません
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().set市町村名称(dgRow.getTxtShichosonName());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().set市町村名称(dgRow.getTxtShichosonName());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchi());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode1());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchiCode2());
-//        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode3());
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().set施設種類(dgRow.getTxtShisetsuShurui());
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().setNyuryokuShisetsuKodo(dgRow.getTxtShisetsuJoho()
-                .split(半角スペース.toString()).get(0));
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().setShisetsuMeisho(dgRow.getTxtShisetsuJoho()
-                .split(半角スペース.toString()).get(1));
+//        div.getCcdShichousonInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
+//        div.getCcdShichousonInputGuide().set市町村名称(dgRow.getTxtShichosonName());
+//        div.getCcdJushoInputGuide().set市町村コード(dgRow.getTxtShichosonCode());
+//        div.getCcdJushoInputGuide().set市町村名称(dgRow.getTxtShichosonName());
+//        div.getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchi());
+//        div.getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode1());
+//        div.getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchiCode2());
+//        div.getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode3());
+        div.getCcdSisetuInputGuide().set施設種類(dgRow.getTxtShisetsuShurui());
+        div.getCcdSisetuInputGuide().setNyuryokuShisetsuKodo(dgRow.getTxtShisetsuJoho()
+                .split(RString.HALF_SPACE.toString()).get(0));
+        div.getCcdSisetuInputGuide().setShisetsuMeisho(dgRow.getTxtShisetsuJoho()
+                .split(RString.HALF_SPACE.toString()).get(1));
     }
 
     /**
@@ -294,13 +292,13 @@ public class TennyuHoryuTokuteiHandler {
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 builder.set住所(new AtenaJusho(list.getTxtJusho()));
                 builder.set住所コード(new ChoikiCode(list.getTxtJushoCode()));
-                builder.set施設コード(list.getTxtShichosonCode().split(半角スペース.toString()).get(0));
+                builder.set施設コード(list.getTxtShichosonCode().split(RString.HALF_SPACE.toString()).get(0));
                 builder.set施設種類(list.getTxtShisetsuShurui());
                 builder.set番地(new AtenaBanchi(list.getTxtBanchi()));
                 builder.set番地コード１(new BanchiCode(list.getTxtBanchiCode1()));
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
-                builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(半角スペース.toString()).get(1)));
+                builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
                 rendoHoryu.toEntity().setIsDeleted(false);
                 rendoHoryu.toEntity().setState(EntityDataState.Added);
                 manager.insertOrUpdateOrDel(builder.build());
@@ -312,33 +310,33 @@ public class TennyuHoryuTokuteiHandler {
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 builder.set住所(new AtenaJusho(list.getTxtJusho()));
                 builder.set住所コード(new ChoikiCode(list.getTxtJushoCode()));
-                builder.set施設コード(list.getTxtShichosonCode().split(半角スペース.toString()).get(0));
+                builder.set施設コード(list.getTxtShichosonCode().split(RString.HALF_SPACE.toString()).get(0));
                 builder.set施設種類(list.getTxtShisetsuShurui());
                 builder.set番地(new AtenaBanchi(list.getTxtBanchi()));
                 builder.set番地コード１(new BanchiCode(list.getTxtBanchiCode1()));
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
-                builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(半角スペース.toString()).get(1)));
+                builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
                 rendoHoryu.toEntity().setIsDeleted(false);
-                rendoHoryu.toEntity().setState(EntityDataState.Modified);
+                rendoHoryu.modifiedModel();
                 manager.insertOrUpdateOrDel(builder.build());
             }
             if (RowState.Deleted.equals(list.getRowState())) {
                 RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(list.getTxtKanriNo(), new LasdecCode(list.getTxtShichosonCode()));
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 rendoHoryu.toEntity().setIsDeleted(true);
-                rendoHoryu.toEntity().setState(EntityDataState.Deleted);
+                rendoHoryu.deleted();
                 manager.insertOrUpdateOrDel(builder.build());
             }
         }
     }
 
     private void clearValue() {
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide().clear();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdJushoInputGuide().clear();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdBunchiInput().clear();
+        div.getCcdShichousonInputGuide().clear();
+        div.getCcdJushoInputGuide().clear();
+        div.getCcdBunchiInput().clear();
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
-        div.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide().clear();
-        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
+        div.getCcdSisetuInputGuide().clear();
+        div.setDisabled(true);
     }
 }
