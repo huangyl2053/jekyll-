@@ -21,26 +21,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JisshiJokyoTokeiReport extends Report<JisshiJokyoTokeiReportSource> {
 
-    private final List<JisshiJokyoTokei> dataList;
+    private final JisshiJokyoTokei data;
 
     /**
      * インスタンスを生成します。
      *
-     * @param dataList 要介護認定実施状況統計のdataList
+     * @param data 要介護認定実施状況統計のdataList
      */
-    public JisshiJokyoTokeiReport(List<JisshiJokyoTokei> dataList) {
-        this.dataList = dataList;
+    public JisshiJokyoTokeiReport(JisshiJokyoTokei data) {
+        this.data = data;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JisshiJokyoTokeiReportSource> reportSourceWriter) {
-        for (JisshiJokyoTokei data : dataList) {
-            for (JisshiJokyoTokeiDataChange dataBody : getBodyData(data)) {
-                IJisshiJokyoTokeiEditor editor = new JisshiJokyoTokeiEditor(data);
-                IJisshiJokyoTokeiBodyEditor bodyEditor = new JisshiJokyoTokeiBodyEditor(dataBody);
-                IJisshiJokyoTokeiBuilder builder = new JisshiJokyoTokeiBuilder(editor, bodyEditor);
-                reportSourceWriter.writeLine(builder);
-            }
+        for (JisshiJokyoTokeiDataChange dataBody : getBodyData(data)) {
+            IJisshiJokyoTokeiEditor editor = new JisshiJokyoTokeiEditor(data);
+            IJisshiJokyoTokeiBodyEditor bodyEditor = new JisshiJokyoTokeiBodyEditor(dataBody);
+            IJisshiJokyoTokeiBuilder builder = new JisshiJokyoTokeiBuilder(editor, bodyEditor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 

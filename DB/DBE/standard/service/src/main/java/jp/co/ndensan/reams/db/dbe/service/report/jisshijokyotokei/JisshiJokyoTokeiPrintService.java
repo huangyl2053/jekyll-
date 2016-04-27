@@ -27,12 +27,12 @@ public class JisshiJokyoTokeiPrintService {
      * @param reportJoho 要介護認定実施状況統計作成_帳票クラスパラメータ
      * @return 要介護認定実施状況統計作成_帳票
      */
-    public SourceDataCollection print(List<JisshiJokyoTokei> reportJoho) {
+    public SourceDataCollection print(JisshiJokyoTokei reportJoho) {
         JisshiJokyoTokeiProperty property = new JisshiJokyoTokeiProperty();
         return new Printer<JisshiJokyoTokeiReportSource>().spool(property, toReports(reportJoho));
     }
 
-    private static List<JisshiJokyoTokeiReport> toReports(List<JisshiJokyoTokei> reportJoho) {
+    private static List<JisshiJokyoTokeiReport> toReports(JisshiJokyoTokei reportJoho) {
         List<JisshiJokyoTokeiReport> list = new ArrayList<>();
         list.add(new JisshiJokyoTokeiReport(reportJoho));
         return list;
