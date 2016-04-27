@@ -47,7 +47,7 @@ public interface IFutanGendogakuNinteiMapper {
      * @param 負担限度額認定検索条件 負担限度額認定検索条件
      * @return FutanGendogakuNinteiEntityの{@code}
      */
-    FutanGendogakuNinteiEntity select負担限度額認定帳票用(FutanGendogakuNinteiParameter 負担限度額認定検索条件);
+    FutanGendogakuNinteiEntity get負担限度額認定帳票用リスト(FutanGendogakuNinteiParameter 負担限度額認定検索条件);
 
     /**
      * 負担限度額認定申請の情報を取得する。

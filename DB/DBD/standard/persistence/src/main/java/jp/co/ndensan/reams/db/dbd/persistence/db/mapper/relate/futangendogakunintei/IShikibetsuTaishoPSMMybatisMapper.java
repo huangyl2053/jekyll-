@@ -21,5 +21,5 @@ public interface IShikibetsuTaishoPSMMybatisMapper {
      * @param shikibetsuTaishoPSMParameter shikibetsuTaishoPSMParameter
      * @return 宛名情報
      */
-    UaFt200FindShikibetsuTaishoEntity selectShikibetsuTaishoPSMMybatis(ShikibetsuTaishoPSMMybatisParameter shikibetsuTaishoPSMParameter);
+    UaFt200FindShikibetsuTaishoEntity selectAtesakiPSMMybatis(ShikibetsuTaishoPSMMybatisParameter shikibetsuTaishoPSMParameter);
 }

@@ -87,7 +87,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      * @return {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiKanshoTsuchisho}のインスタンス
      */
     public static FutanGendogakuNinteiKanshoTsuchisho createInstance() {
-        return new FutanGendogakuNinteiKanshoTsuchisho();
+        return InstanceProvider.create(FutanGendogakuNinteiKanshoTsuchisho.class);
     }
 
     /**
@@ -191,7 +191,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         ShikibetsuTaishoPSMMybatisParameter shikibetsuTaishoPSMParameter = new ShikibetsuTaishoPSMMybatisParameter(shikibetsuTaishoPSMSearchKey);
         shikibetsuTaishoPSMParameter.setPsmShikibetsuTaisho(new RString(shikibetsuTaishoPSMParameter.toString()));
         IShikibetsuTaishoPSMMybatisMapper shikibetsuTaishoPSMMapper = this.mapperProvider.create(IShikibetsuTaishoPSMMybatisMapper.class);
-        return shikibetsuTaishoPSMMapper.selectShikibetsuTaishoPSMMybatis(shikibetsuTaishoPSMParameter);
+        return shikibetsuTaishoPSMMapper.selectAtesakiPSMMybatis(shikibetsuTaishoPSMParameter);
     }
 
     private UaFt250FindAtesakiEntity get宛先情報(ShikibetsuCode 識別コード) {
