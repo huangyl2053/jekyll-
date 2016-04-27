@@ -37,7 +37,7 @@
             DbT1001."koikinaiTokureiSochimotoShichosonCode" AS "DbT1001_koikinaiTokureiSochimotoShichosonCode",
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM rgdb."DbT1001HihokenshaDaicho" As DbT1001
-        <if test="has受給者台帳">
+        <if test="isEmpty">
         LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
             ON DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
             AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{kijunni}
