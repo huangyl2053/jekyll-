@@ -69,11 +69,11 @@ public class HanyoListHihokenshadaichoCSVEntity {
     private final GyoseikuCode 行政区コード;
     @CsvField(order = 180, name = "行政区名")
     private final RString 行政区名;
-    @CsvField(order = 190, name = "地区１	")
+    @CsvField(order = 190, name = "地区１")
     private final ChikuCode 地区１;
-    @CsvField(order = 200, name = "地区２	")
+    @CsvField(order = 200, name = "地区２")
     private final ChikuCode 地区２;
-    @CsvField(order = 210, name = "地区３	")
+    @CsvField(order = 210, name = "地区３")
     private final ChikuCode 地区３;
     @CsvField(order = 220, name = "連絡先１")
     private final TelNo 連絡先１;
@@ -98,7 +98,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
     @CsvField(order = 320, name = "消除届出日")
     private final RString 消除届出日;
     @CsvField(order = 330, name = "転出入理由")
-    private final AtenaMeisho 転出入理由;
+    private final RString 転出入理由;
     @CsvField(order = 340, name = "前住所郵便番号")
     private final YubinNo 前住所郵便番号;
     @CsvField(order = 350, name = "前住所_番地_方書")
@@ -262,7 +262,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
             RString 消除異動日,
             RString 消除事由,
             RString 消除届出日,
-            AtenaMeisho 転出入理由,
+            RString 転出入理由,
             YubinNo 前住所郵便番号,
             RString 前住所_番地_方書,
             AtenaJusho 前住所,
