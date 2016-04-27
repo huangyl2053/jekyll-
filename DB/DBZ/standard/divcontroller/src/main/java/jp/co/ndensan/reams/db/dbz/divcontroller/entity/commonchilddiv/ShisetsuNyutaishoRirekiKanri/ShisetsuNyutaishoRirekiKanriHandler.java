@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
@@ -256,6 +259,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
         ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(施設入退所情報Model));
         div.setInputMode(RString.EMPTY);
+        Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(listRow);
         onClick_btnShisetsuNyutaishoTorikeshi();
     }
@@ -315,6 +319,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             rowList.add(row);
 
         }
+        Collections.sort(rowList, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(rowList);
     }
 
@@ -533,6 +538,18 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         } else if (全施設対象機能.equals(new RString(div.getMode_利用().toString()))) {
             newRow.setShisetsuShurui(get施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
+        }
+    }
+
+    private static class RirekiNoDateComparator implements Comparator<dgShisetsuNyutaishoRireki_Row>, Serializable {
+
+        @Override
+        public int compare(dgShisetsuNyutaishoRireki_Row o1, dgShisetsuNyutaishoRireki_Row o2) {
+            int flg = o1.getRirekiNo().compareTo(o2.getRirekiNo());
+            if (flg == 0) {
+                return o1.getNyushoDate().getValue().compareTo(o2.getNyushoDate().getValue());
+            }
+            return flg;
         }
     }
 }
