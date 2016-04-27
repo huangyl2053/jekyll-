@@ -70,6 +70,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
             + "hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper.getCSVData");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701002");
     private static final RString CSV出力有無 = new RString("");
+    private static final RString ITEM = new RString("～");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　償還払い状況CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_ShokanbaraiJokyo.csv");
@@ -308,13 +309,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RString serviceTeikyoYM = RString.EMPTY;
         if (parameter.getサービス提供年月From() != null && parameter.getサービス提供年月To() != null) {
             serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
-                    .concat(new RString("～"))
+                    .concat(ITEM)
                     .concat(monthToRString(parameter.getサービス提供年月To()));
         } else if (parameter.getサービス提供年月From() == null && parameter.getサービス提供年月To() != null) {
-            serviceTeikyoYM = new RString("～").concat(monthToRString(parameter.getサービス提供年月To()));
+            serviceTeikyoYM = ITEM.concat(monthToRString(parameter.getサービス提供年月To()));
         } else if (parameter.getサービス提供年月From() != null && parameter.getサービス提供年月To() == null) {
             serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
-                    .concat(new RString("～"));
+                    .concat(ITEM);
         }
         builder.append(serviceTeikyoYM);
         return builder;
@@ -326,13 +327,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RString shinseiYMD = RString.EMPTY;
         if (parameter.get申請日From() != null && parameter.get申請日To() != null) {
             shinseiYMD = dataToRString(parameter.get申請日From())
-                    .concat(new RString("～"))
+                    .concat(ITEM)
                     .concat(dataToRString(parameter.get申請日To()));
         } else if (parameter.get申請日From() == null && parameter.get申請日To() != null) {
-            shinseiYMD = new RString("～").concat(dataToRString(parameter.get申請日To()));
+            shinseiYMD = ITEM.concat(dataToRString(parameter.get申請日To()));
         } else if (parameter.get申請日From() != null && parameter.get申請日To() == null) {
             shinseiYMD = dataToRString(parameter.get申請日From())
-                    .concat(new RString("～"));
+                    .concat(ITEM);
         }
         builder.append(shinseiYMD);
         return builder;
@@ -344,13 +345,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RString kaishuYM = RString.EMPTY;
         if (parameter.get住宅改修支給届出日From() != null && parameter.get住宅改修支給届出日To() != null) {
             kaishuYM = dataToRString(parameter.get住宅改修支給届出日From())
-                    .concat(new RString("～"))
+                    .concat(ITEM)
                     .concat(dataToRString(parameter.get住宅改修支給届出日To()));
         } else if (parameter.get住宅改修支給届出日From() == null && parameter.get住宅改修支給届出日To() != null) {
-            kaishuYM = new RString("～").concat(dataToRString(parameter.get住宅改修支給届出日To()));
+            kaishuYM = ITEM.concat(dataToRString(parameter.get住宅改修支給届出日To()));
         } else if (parameter.get住宅改修支給届出日From() != null && parameter.get住宅改修支給届出日To() == null) {
             kaishuYM = dataToRString(parameter.get住宅改修支給届出日From())
-                    .concat(new RString("～"));
+                    .concat(ITEM);
         }
         builder.append(kaishuYM);
         return builder;
@@ -362,13 +363,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RString ketteiYMD = RString.EMPTY;
         if (parameter.get決定日From() != null && parameter.get決定日To() != null) {
             ketteiYMD = dataToRString(parameter.get決定日From())
-                    .concat(new RString("～"))
+                    .concat(ITEM)
                     .concat(dataToRString(parameter.get決定日To()));
         } else if (parameter.get決定日From() == null && parameter.get決定日To() != null) {
-            ketteiYMD = new RString("～").concat(dataToRString(parameter.get決定日To()));
+            ketteiYMD = ITEM.concat(dataToRString(parameter.get決定日To()));
         } else if (parameter.get決定日From() != null && parameter.get決定日To() == null) {
             ketteiYMD = dataToRString(parameter.get決定日From())
-                    .concat(new RString("～"));
+                    .concat(ITEM);
         }
         builder.append(ketteiYMD);
         return builder;
@@ -380,13 +381,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RString kokuhorenYM = RString.EMPTY;
         if (parameter.get国保連送付年月From() != null && parameter.get国保連送付年月To() != null) {
             kokuhorenYM = monthToRString(parameter.get国保連送付年月From())
-                    .concat(new RString("～"))
+                    .concat(ITEM)
                     .concat(monthToRString(parameter.get国保連送付年月To()));
         } else if (parameter.get国保連送付年月From() == null && parameter.get国保連送付年月To() != null) {
-            kokuhorenYM = new RString("～").concat(monthToRString(parameter.get国保連送付年月To()));
+            kokuhorenYM = ITEM.concat(monthToRString(parameter.get国保連送付年月To()));
         } else if (parameter.get国保連送付年月From() != null && parameter.get国保連送付年月To() == null) {
             kokuhorenYM = monthToRString(parameter.get国保連送付年月From())
-                    .concat(new RString("～"));
+                    .concat(ITEM);
         }
         builder.append(kokuhorenYM);
         return builder;

@@ -9,11 +9,13 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * バッチ設計_DBCBT23002_汎用リスト出力(償還払い状況)CSVEntity
  *
  * @reamsid_L DBC-3093-020 chenaoqi
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListShokanbaraiJokyoCSVEntity {
 
     @CsvField(order = 10, name = "連番")

@@ -37,6 +37,7 @@ public class HanyoListCsvDataCreate {
     private static final RString 入所施設種類_21 = new RString("21");
     private static final CodeShubetsu 申請取消事由コード種別 = new CodeShubetsu("0028");
     private static final CodeShubetsu 資格取得事由コード種別 = new CodeShubetsu("0007");
+    private static final RString 住特 = new RString("住特");
 
     /**
      * createCsvData
@@ -412,7 +413,7 @@ public class HanyoListCsvDataCreate {
         csvEntity.set資格喪失日(dataToRString(entity.get資格喪失年月日()));
         csvEntity.set資格喪失届出日(dataToRString(entity.get資格喪失届出年月日()));
         csvEntity.set資格区分(entity.get被保険者区分コード());
-        csvEntity.set住所地特例状態(entity.is住所地特例フラグ() ? new RString("住特") : RString.EMPTY);
+        csvEntity.set住所地特例状態(entity.is住所地特例フラグ() ? 住特 : RString.EMPTY);
         csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity, 保険者リスト));
         csvEntity.set受給申請事由(codeToRString(entity.get受給申請事由()));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日()));

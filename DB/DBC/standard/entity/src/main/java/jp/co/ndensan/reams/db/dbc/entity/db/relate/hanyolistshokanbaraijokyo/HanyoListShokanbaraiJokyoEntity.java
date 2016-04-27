@@ -28,11 +28,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * バッチ設計_DBCBT23002_汎用リスト出力(償還払い状況)Entity
  *
  * @reamsid_L DBC-3093-020 chenaoqi
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListShokanbaraiJokyoEntity {
 
     private HihokenshaNo 被保険者番号;
