@@ -568,15 +568,19 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         SourceDataCollection sourceDataCollection;
         if (ReportIdDBB.DBB100003.getReportId().equals(帳票ID)) {
-            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printB5横タイプ(仮算定特徴開始通知書情報, null);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printB5横タイプ(仮算定特徴開始通知書情報, 仮算定通知書情報, null);
         } else if (ReportIdDBB.DBB100005.getReportId().equals(帳票ID)) {
-            sourceDataCollection = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printシーラタイプ(仮算定特徴開始通知書情報);
+            sourceDataCollection
+                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printシーラタイプ(仮算定特徴開始通知書情報, 仮算定通知書情報);
         } else if (ReportIdDBB.DBB100008.getReportId().equals(帳票ID)) {
             sourceDataCollection
-                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printA4縦オーバーレイタイプ(仮算定特徴開始通知書情報, 通知文1);
+                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService()
+                    .printA4縦オーバーレイタイプ(仮算定特徴開始通知書情報, 仮算定通知書情報, 通知文1);
         } else {
             sourceDataCollection
-                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService().printB5横オーバレイタイプ(仮算定特徴開始通知書情報, 通知文1, 通知文2);
+                    = new TokubetsuChoshuKaishiTsuchishoKariPrintService()
+                    .printB5横オーバレイタイプ(仮算定特徴開始通知書情報, 仮算定通知書情報, 通知文1, 通知文2);
         }
 
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
