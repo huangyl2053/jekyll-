@@ -270,7 +270,8 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         csvEntity.setShichosonCode(市町村コード);
         bodyItem.set市町村コード(市町村コード);
         RString 市町村名 = RString.isNullOrEmpty(市町村コード) ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
-                new LasdecCode(市町村コード)).get市町村名();
+                new LasdecCode(市町村コード)) == null ? RString.EMPTY : ZenkokuJushoFinderFactory.createInstance().get全国住所By地方公共団体コード(
+                        new LasdecCode(市町村コード)).get市町村名();
         csvEntity.setShichosonName(市町村名);
         bodyItem.set市町村名(市町村名);
         csvEntity.setKanaShimei(entity.get宛名カナ氏名());
