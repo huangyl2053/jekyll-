@@ -72,6 +72,10 @@ public final class PnlTotalRegisterHandler {
      */
     public void set初期データ() {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (states == null) {
+            states = 登録;
+            ViewStateHolder.put(ViewStateKeys.処理モード, states);
+        }
         if (登録.equals(states)) {
             set登録初期データ();
             return;
