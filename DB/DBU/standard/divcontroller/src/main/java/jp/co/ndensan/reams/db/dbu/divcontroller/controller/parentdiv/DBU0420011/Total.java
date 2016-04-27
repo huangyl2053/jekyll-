@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4.HihokenshashoB
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushasho.ShikakushashoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushasho.ShikakushashoJoho;
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.service.report.hihokenshashoa4.HihokenshashoA4PrintService;
 import jp.co.ndensan.reams.db.dba.service.report.hihokenshashob4.HihokenshashoB4PrintService;
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeisho.JukyuShikakuShomeishoPrintService;
@@ -27,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -48,6 +48,7 @@ public class Total {
     private static final RString MENUID_DBUMN12002 = new RString("DBUMN12002");
     private static final RString MENUID_DBUMN12003 = new RString("DBUMN12003");
     private static final RString 帳票制御汎用_証表示タイプ = new RString("証表示タイプ");
+    private static final ReportId 帳票分類ID = new ReportId("DBA100001_Hihokenshasho");
     private static final RString テスト = new RString("テスト");
     private static final RString 証表示タイプ_01 = new RString("01");
     private static final RString 証表示タイプ_21 = new RString("21");
@@ -110,8 +111,8 @@ public class Total {
                 insertShoKofuKaishu(div);
             }
             ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-            ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100001.getReportId(),
-                    FlexibleDate.getNowDate().getYearMonth().getYear(), 帳票制御汎用_証表示タイプ);
+            ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
+                    FlexibleDate.getNowDate().getYear(), 帳票制御汎用_証表示タイプ);
             if (証表示タイプ_01.equals(chohyoSeigyoHanyo.get設定値())) {
                 List<HihokenshashoA4BodyItem> bodyItemlist = createHandler(div).hihokenshashoA4();
                 HihokenshashoA4Joho hihokenshashoA4 = new HihokenshashoA4Joho(bodyItemlist);

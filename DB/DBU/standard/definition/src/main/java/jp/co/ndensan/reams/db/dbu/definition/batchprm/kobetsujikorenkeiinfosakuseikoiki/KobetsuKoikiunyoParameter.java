@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,5 +20,5 @@ public class KobetsuKoikiunyoParameter {
 
     private RString shichosonCode;
     private RString dateFrom;
-    private RString dateTo;
+    private RDateTime dateTo;
 }

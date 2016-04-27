@@ -85,7 +85,7 @@ public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
         List<KobetsuKoikiunyoParameter> batchParameterList = new ArrayList<>();
         for (KaigoJuminhyoKobetsuParameter list : kobetsuLsit) {
             KobetsuKoikiunyoParameter batchParameter = new KobetsuKoikiunyoParameter();
-            batchParameter.setDateTo(RDate.getNowDate().toDateString());
+            batchParameter.setDateTo(RDate.getNowDateTime());
             RStringBuilder taishoShuryo = new RStringBuilder();
             taishoShuryo.append(list.getKonkaiStSakuseiYMD());
             taishoShuryo.append(list.getKonkaiStSakuseiTime());
