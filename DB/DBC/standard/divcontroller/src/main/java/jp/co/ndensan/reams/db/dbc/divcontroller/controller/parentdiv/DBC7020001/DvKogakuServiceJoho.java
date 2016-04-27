@@ -39,14 +39,13 @@ public class DvKogakuServiceJoho {
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
         panel.getCcdHokenshaList().loadHokenshaList();
-        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
-            if (市町村セキュリティ情報.get導入形態コード().is広域()) {
-                panel.getCcdHokenshaList().setDisabled(false);
-                panel.getCcdHokenshaList().setVisible(true);
-            } else {
-                panel.getCcdHokenshaList().setDisabled(true);
-                panel.getCcdHokenshaList().setVisible(false);
-            }
+        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null
+                && 市町村セキュリティ情報.get導入形態コード().is広域()) {
+            panel.getCcdHokenshaList().setDisabled(false);
+            panel.getCcdHokenshaList().setVisible(true);
+        } else {
+            panel.getCcdHokenshaList().setDisabled(true);
+            panel.getCcdHokenshaList().setVisible(false);
         }
         div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
