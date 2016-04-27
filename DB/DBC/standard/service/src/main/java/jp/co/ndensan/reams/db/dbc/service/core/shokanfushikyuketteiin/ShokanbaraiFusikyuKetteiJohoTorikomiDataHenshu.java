@@ -122,6 +122,15 @@ public class ShokanbaraiFusikyuKetteiJohoTorikomiDataHenshu {
     private void update償還払請求集計(IShokanFushikyuKetteiInMapper mapper) {
         mapper.create償還払請求集計一時テーブル();
         List<ShokanFushikyuKetteiInEntity> 償還払請求集計EntityList = mapper.select償還払不支給決定情報一時();
+        for (ShokanFushikyuKetteiInEntity entity : 償還払請求集計EntityList) {
+            ShokanFushikyuKetteiInEntity 備考Entity = mapper.select備考(entity);
+            if (備考Entity.getBikoOne() != null) {
+                entity.setBikoOne(備考Entity.getBikoOne());
+            }
+            if (備考Entity.getBikoTwo() != null) {
+                entity.setBikoTwo(備考Entity.getBikoTwo());
+            }
+        }
         for (ShokanFushikyuKetteiInEntity 償還払請求集計 : 償還払請求集計EntityList) {
             ShokanShukeiKetteiInEntity entity = new ShokanShukeiKetteiInEntity();
             entity.set被保険者番号(償還払請求集計.getHiHokenshaNo());

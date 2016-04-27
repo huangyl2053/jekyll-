@@ -45,9 +45,6 @@ module DBC
 			    this.controls.txtTyakkoyotebi().readOnly = false;
 			    this.controls.txtKanseyotebi().readOnly = false;
 			    this.controls.txtKaisyukingaku().readOnly = false; 
-		            this.controls.btnHonnijyusyoCopy().disabled = true;
-			    this.controls.btnClear().disabled = true;
-                            this.controls.btnDetailConfirm().disabled = true;
 	                }
 	                public teisei(): void {
 	                    this.controls.txtKaisyunaiyo().readOnly = false;

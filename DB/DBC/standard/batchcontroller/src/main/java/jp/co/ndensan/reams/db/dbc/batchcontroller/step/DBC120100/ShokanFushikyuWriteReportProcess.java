@@ -8,14 +8,17 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanBaraiFushikyuKetteishaIchiranhyo;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanFushikyuKetteiInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanfushikyuketteiin.ShokanFushikyuKetteiInPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInItem;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanfushikyuketteiin.ShokanFushikyuKetteiInReport;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.ShokanbaraiFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -41,11 +44,7 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
      */
     public static final RString PARAMETER_IN_SHUTSURYOKUJUNID;
 
-    private static final int INDEX_0 = 0;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
+    private static final RString ORDER_BY = new RString("order by");
 
     static {
         PARAMETER_IN_SHUTSURYOKUJUNID = new RString("shutsuryokujunID");
@@ -62,6 +61,7 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
     private ReportSourceWriter<ShokanbaraiFushikyuKetteishaIchiranSource> reportSourceWriter;
 
     List<ShokanFushikyuKetteiInEntity> entityList;
+    private ShokanFushikyuKetteiInMybatisParameter paramter;
 
     InputParameter<Long> shutsuryokujunID;
 
@@ -69,6 +69,7 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
     protected void initialize() {
         super.initialize();
         entityList = new ArrayList<>();
+        paramter = new ShokanFushikyuKetteiInMybatisParameter();
     }
 
     @Override
@@ -81,6 +82,12 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200022.getReportId(), shutsuryokujunID.getValue());
         List<RString> 改頁項目リスト = new ArrayList<>();
+        if (並び順 != null) {
+            paramter.setOutputOrderBy(MyBatisOrderByClauseCreator.create(
+                    ShokanFushikyuKetteiInOutPutOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY));
+        } else {
+            paramter.setOutputOrderBy(null);
+        }
         改頁項目リスト.add(KAI_PAGE_HOKENSHANO);
         if (並び順 != null) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
@@ -98,7 +105,7 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(READ_DATA_ID);
+        return new BatchDbReader(READ_DATA_ID, paramter);
     }
 
     @Override
@@ -115,20 +122,33 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
         ShokanBaraiFushikyuKetteishaIchiranhyo business = new ShokanBaraiFushikyuKetteishaIchiranhyo();
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200022.getReportId(), shutsuryokujunID.getValue());
-        List<RString> 改頁項目リスト = new ArrayList<>();
+        int i = 0;
+        RString 並び順の１件目 = RString.EMPTY;
+        RString 並び順の２件目 = RString.EMPTY;
+        RString 並び順の３件目 = RString.EMPTY;
+        RString 並び順の４件目 = RString.EMPTY;
+        RString 並び順の５件目 = RString.EMPTY;
+        RString 改頁 = RString.EMPTY;
         if (並び順 != null) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
-                    改頁項目リスト.add(item.get項目名());
+                    改頁 = item.get項目名();
                 }
+                if (i == 0) {
+                    並び順の１件目 = item.get項目名();
+                } else if (i == 1) {
+                    並び順の２件目 = item.get項目名();
+                } else if (i == 2) {
+                    並び順の３件目 = item.get項目名();
+                } else if (i == 3) {
+                    並び順の４件目 = item.get項目名();
+                } else if (i == 4) {
+                    並び順の５件目 = item.get項目名();
+                }
+                i = i + 1;
             }
         }
-        RString 改頁 = null == 並び順 ? RString.EMPTY : 並び順.getFormated改頁項目();
-        RString 並び順の１件目 = 改頁項目リスト.size() <= INDEX_0 ? RString.EMPTY : 改頁項目リスト.get(INDEX_0);
-        RString 並び順の２件目 = 改頁項目リスト.size() <= INDEX_1 ? RString.EMPTY : 改頁項目リスト.get(INDEX_1);
-        RString 並び順の３件目 = 改頁項目リスト.size() <= INDEX_2 ? RString.EMPTY : 改頁項目リスト.get(INDEX_2);
-        RString 並び順の４件目 = 改頁項目リスト.size() <= INDEX_3 ? RString.EMPTY : 改頁項目リスト.get(INDEX_3);
-        RString 並び順の５件目 = 改頁項目リスト.size() <= INDEX_4 ? RString.EMPTY : 改頁項目リスト.get(INDEX_4);
+
         List<ShokanFushikyuKetteiInItem> targetList = business.getShokanBaraiFushikyuKetteishaIchiranhyo(並び順の１件目, 並び順の２件目,
                 並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁, entityList);
         ShokanFushikyuKetteiInReport report

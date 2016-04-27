@@ -18,11 +18,11 @@ public enum ShokanFushikyuKetteiInOutPutOrder implements IReportItems {
     /**
      * 事業者番号
      */
-    事業者番号("00002", "事業者番号", "listUpper_4"),
+    事業者番号("00002", "", "TEMP.\"jigyoshoNo\""),
     /**
      * 被保険者番号
      */
-    被保険者番号("00001", "被保険者番号", "hihokenshaNo");
+    被保険者番号("00001", "", "TEMP.\"hiHokenshaNo\"");
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

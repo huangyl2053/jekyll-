@@ -24,6 +24,6 @@ public class NinteiKoshinTsuchishoProperty extends ReportPropertyBase<NinteiKosh
      * インスタンスを生成します。
      */
     public NinteiKoshinTsuchishoProperty() {
-        super(SubGyomuCode.DBZ介護共通, ID);
+        super(SubGyomuCode.DBD介護受給, ID);
     }
 }

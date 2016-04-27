@@ -383,7 +383,6 @@ public class SeikyuGakuShukeiPanelHandler {
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.
                 get(ViewStateKeys.償還払費申請検索キー,
                         ShoukanharaihishinseikensakuParameter.class);
-        List<ShokanShukeiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.請求額集計一覧情報, List.class);
         RString 様式番号 = parameter.getYoshikiNo();
         Decimal 限度額対象単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().getValue();
         Decimal 限度額対象外単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().getValue();

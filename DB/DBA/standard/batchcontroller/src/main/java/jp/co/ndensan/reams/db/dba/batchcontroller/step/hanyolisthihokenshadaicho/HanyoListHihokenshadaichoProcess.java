@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -43,7 +41,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -525,7 +522,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
             return new HanyoListHihokenshadaichoCSVEntity(
                     連番, entity.getShikibetsuCode(), entity.getJuminShubetsuCode(),
                     entity.getMeisho(), entity.getKanaMeisho(), getパターン32(entity.getSeinengappiYMD()),
-                    get年齢(iKojin.get生年月日()), entity.getSeibetsuCode(),
+                    iKojin.get年齢算出().get年齢(), entity.getSeibetsuCode(),
                     entity.getTsuzukigaraCode(), entity.getSetaiCode(),
                     entity.getSetainushiMei(),
                     //住所コード
@@ -575,7 +572,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
             return new HanyoListHihokenshadaichoCSVEntity(
                     連番, entity.getShikibetsuCode(), entity.getJuminShubetsuCode(),
                     entity.getMeisho(), entity.getKanaMeisho(), getYYYYMMDD(entity.getSeinengappiYMD()),
-                    get年齢(iKojin.get生年月日()), entity.getSeibetsuCode(), entity.getTsuzukigaraCode(),
+                    iKojin.get年齢算出().get年齢(), entity.getSeibetsuCode(), entity.getTsuzukigaraCode(),
                     entity.getSetaiCode(), entity.getSetainushiMei(),
                     //住所コード
                     entity.getZenkokuJushoCode(),
@@ -674,11 +671,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         住所_番地_方書.append("　");
         住所_番地_方書.append(方書);
         return 住所_番地_方書.toRString();
-    }
-
-    private RString get年齢(IDateOfBirth 生年月日) {
-        AgeCalculator ageCalculator = new AgeCalculator(生年月日, JuminJotai.住民, FlexibleDate.MAX);
-        return ageCalculator.get年齢();
     }
 
     private Encode getEncode(RString sakiEncodeKeitai) {
