@@ -38,17 +38,14 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
     private static final RString DATE_作成 = new RString("作成");
-    private final int i;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link ShinsaschedulekagamiItem}
-     * @param i int
      */
-    protected ShinsaHanteiJokyoEditorImpl(ShinsaHanteiJokyoItem item, int i) {
+    protected ShinsaHanteiJokyoEditorImpl(ShinsaHanteiJokyoItem item) {
         this.item = item;
-        this.i = i;
     }
 
     /**
@@ -59,10 +56,10 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
      */
     @Override
     public ShinsaHanteiJokyoReportSource edit(ShinsaHanteiJokyoReportSource source) {
-        return editSource(source, i);
+        return editSource(source);
     }
 
-    private ShinsaHanteiJokyoReportSource editSource(ShinsaHanteiJokyoReportSource source, int i) {
+    private ShinsaHanteiJokyoReportSource editSource(ShinsaHanteiJokyoReportSource source) {
         source.title = item.getTitle();
         source.gogitaiName = item.getGogitaiName();
         source.kaisaiKaishiYMD = item.getKaisaiKaishiYMD() == null
@@ -73,59 +70,15 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
         source.hokenshaNo = item.getHokenshaNo();
         source.printTimeStamp = getNowDate();
         source.hokenshaName = item.getHokenshaName();
-        switch (i) {
-            case 一回目:
-                hanteiJokyoSource(source);
-                reportSource(source);
-                source.listHanteiKensu_1 = item.getListHanteiKensu_1();
-                source.listHanteiKensu_2 = item.getListHanteiKensu_2();
-                source.listHanteiKensu_3 = item.getListHanteiKensu_3();
-                break;
-            case 二回目:
-                reportSource(source);
-                break;
-            case 三回目:
-                reportSource(source);
-                break;
-            case 四回目:
-                reportSource(source);
-                break;
-            case 五回目:
-                reportSource(source);
-                break;
-            default:
-                editOtherSource(source, i);
-        }
-        return source;
-    }
-
-    private ShinsaHanteiJokyoReportSource editOtherSource(ShinsaHanteiJokyoReportSource source, int i) {
-        switch (i) {
-            case 六回目:
-                reportSource(source);
-                break;
-            case 七回目:
-                reportSource(source);
-                break;
-            case 八回目:
-                reportSource(source);
-                break;
-            case 九回目:
-                reportSource(source);
-                break;
-            case 十回目:
-                reportSource(source);
-                break;
-            case 十一回目:
-                reportSource(source);
-                break;
-            default:
-                break;
-        }
-        return source;
-    }
-
-    private ShinsaHanteiJokyoReportSource reportSource(ShinsaHanteiJokyoReportSource source) {
+        source.listHanteiHeader_1 = item.getListHanteiHeader_1();
+        source.listHanteiHeader_2 = item.getListHanteiHeader_2();
+        source.listHanteiHeader_3 = item.getListHanteiHeader_3();
+        source.listHanteiHeader_4 = item.getListHanteiHeader_4();
+        source.listHanteiHeader_5 = item.getListHanteiHeader_5();
+        source.listHanteiHeader_6 = item.getListHanteiHeader_6();
+        source.listHanteiHeader_7 = item.getListHanteiHeader_7();
+        source.listHanteiHeader_8 = item.getListHanteiHeader_8();
+        source.listHanteiHeader_9 = item.getListHanteiHeader_9();
         source.listHantei_1 = item.getListHantei_1();
         source.listHantei_2 = item.getListHantei_2();
         source.listHantei_3 = item.getListHantei_3();
@@ -141,22 +94,10 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
         source.listHantei_13 = item.getListHantei_13();
         source.listHantei_14 = item.getListHantei_14();
         source.listHantei_15 = item.getListHantei_15();
+        source.listHanteiKensu_1 = item.getListHanteiKensu_1();
+        source.listHanteiKensu_2 = item.getListHanteiKensu_2();
+        source.listHanteiKensu_3 = item.getListHanteiKensu_3();
         return source;
-
-    }
-
-    private ShinsaHanteiJokyoReportSource hanteiJokyoSource(ShinsaHanteiJokyoReportSource source) {
-        source.listHanteiHeader_1 = item.getListHanteiHeader_1();
-        source.listHanteiHeader_2 = item.getListHanteiHeader_2();
-        source.listHanteiHeader_3 = item.getListHanteiHeader_3();
-        source.listHanteiHeader_4 = item.getListHanteiHeader_4();
-        source.listHanteiHeader_5 = item.getListHanteiHeader_5();
-        source.listHanteiHeader_6 = item.getListHanteiHeader_6();
-        source.listHanteiHeader_7 = item.getListHanteiHeader_7();
-        source.listHanteiHeader_8 = item.getListHanteiHeader_8();
-        source.listHanteiHeader_9 = item.getListHanteiHeader_9();
-        return source;
-
     }
 
     private RString 和暦年月日Fomart(FlexibleDate date) {
@@ -170,7 +111,7 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
         printTimeStamp.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
-        printTimeStamp.append(RString.FULL_SPACE);
+        printTimeStamp.append(RString.HALF_SPACE);
         printTimeStamp.append(String.format("%02d", printdate.getHour()));
         printTimeStamp.append(DATE_時);
         printTimeStamp.append(String.format("%02d", printdate.getMinute()));
