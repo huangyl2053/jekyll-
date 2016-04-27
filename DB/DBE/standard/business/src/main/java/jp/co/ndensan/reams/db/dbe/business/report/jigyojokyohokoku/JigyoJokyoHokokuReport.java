@@ -20,26 +20,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JigyoJokyoHokokuReport extends Report<JigyoJokyoHokokuReportSource> {
 
-    private final List<JigyoJokyoHokoku> dataList;
+    private final JigyoJokyoHokoku data;
 
     /**
      * インスタンスを生成します。
      *
-     * @param dataList 要介護認定事業状況報告のdataList
+     * @param data 要介護認定事業状況報告のdataList
      */
-    public JigyoJokyoHokokuReport(List<JigyoJokyoHokoku> dataList) {
-        this.dataList = dataList;
+    public JigyoJokyoHokokuReport(JigyoJokyoHokoku data) {
+        this.data = data;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JigyoJokyoHokokuReportSource> reportSourceWriter) {
-        for (JigyoJokyoHokoku data : dataList) {
-            for (JigyoJokyoHokokuDataChange dataBody : getBodyData(data)) {
-                IJigyoJokyoHokokuEditor editor = new JigyoJokyoHokokuEditor(data);
-                IJigyoJokyoHokokuBodyEditor bodyEditor = new JigyoJokyoHokokuBodyEditor(dataBody);
-                IJigyoJokyoHokokuBuilder builder = new JigyoJokyoHokokuBuilder(editor, bodyEditor);
-                reportSourceWriter.writeLine(builder);
-            }
+        for (JigyoJokyoHokokuDataChange dataBody : getBodyData(data)) {
+            IJigyoJokyoHokokuEditor editor = new JigyoJokyoHokokuEditor(data);
+            IJigyoJokyoHokokuBodyEditor bodyEditor = new JigyoJokyoHokokuBodyEditor(dataBody);
+            IJigyoJokyoHokokuBuilder builder = new JigyoJokyoHokokuBuilder(editor, bodyEditor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 
