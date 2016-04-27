@@ -608,7 +608,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
      *
      * @return 普徴期リスト
      */
-    public List<RString> create普徴月リスト() {
+    public List<RString> create普徴期リスト() {
         List<RString> 普徴期リスト = new ArrayList<>();
         List<Kitsuki> kitsukiList = new FuchoKiUtil().get期月リスト().toList();
         for (Kitsuki kitsuki : kitsukiList) {

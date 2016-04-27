@@ -22,10 +22,10 @@ public class ShikakuTokusoRirekiMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShikakuShutokuInput")
-    private ShikakuShutokuInputDiv ShikakuShutokuInput;
     @JsonProperty("ccdShikakuTokusoRireki")
     private ShikakuTokusoRirekiDiv ccdShikakuTokusoRireki;
+    @JsonProperty("ShikakuShutokuInput")
+    private ShikakuShutokuInputDiv ShikakuShutokuInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,6 +33,15 @@ public class ShikakuTokusoRirekiMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdShikakuTokusoRireki
+     * @return ccdShikakuTokusoRireki
+     */
+    @JsonProperty("ccdShikakuTokusoRireki")
+    public IShikakuTokusoRirekiDiv getCcdShikakuTokusoRireki() {
+        return ccdShikakuTokusoRireki;
+    }
+
     /*
      * getShikakuShutokuInput
      * @return ShikakuShutokuInput
@@ -49,15 +58,6 @@ public class ShikakuTokusoRirekiMainDiv extends Panel {
     @JsonProperty("ShikakuShutokuInput")
     public void setShikakuShutokuInput(ShikakuShutokuInputDiv ShikakuShutokuInput) {
         this.ShikakuShutokuInput = ShikakuShutokuInput;
-    }
-
-    /*
-     * getccdShikakuTokusoRireki
-     * @return ccdShikakuTokusoRireki
-     */
-    @JsonProperty("ccdShikakuTokusoRireki")
-    public IShikakuTokusoRirekiDiv getCcdShikakuTokusoRireki() {
-        return ccdShikakuTokusoRireki;
     }
 
     // </editor-fold>

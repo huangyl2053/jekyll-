@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.kyotaku.ChushutsuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.kyotaku.SakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -43,35 +43,31 @@ public class HanyorisutoPanelHandler {
      * @param div HanyorisutoPanelDiv
      */
     public void initialize(HanyorisutoPanelDiv div) {
-        ShichosonSecurityJoho ssj = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (ssj != null && ssj.get導入形態コード() != null) {
-            if (ssj.get導入形態コード().is広域()) {
-                div.getCcdHokensya().setVisible(true);
-                div.getCcdHokensya().setDisabled(false);
-                div.getCcdHokensya().loadHokenshaList();
-            } else {
-                div.getCcdHokensya().setVisible(false);
-                div.getCcdHokensya().setDisabled(true);
-            }
-            List<KeyValueDataSource> sakuseikubunlist = new ArrayList();
-            for (SakuseiKubun sakuseikubun : SakuseiKubun.values()) {
-                KeyValueDataSource source = new KeyValueDataSource(sakuseikubun.getコード(), sakuseikubun.get名称());
-                sakuseikubunlist.add(source);
-            }
-            div.getRadSakuseiKubun().setDataSource(sakuseikubunlist);
-            List<KeyValueDataSource> chushutsukubunlist = new ArrayList();
-            for (ChushutsuKubun chushutsukubun : ChushutsuKubun.values()) {
-                KeyValueDataSource source = new KeyValueDataSource(chushutsukubun.getコード(), chushutsukubun.get名称());
-                chushutsukubunlist.add(source);
-            }
-            div.getRadChusyutuKubun().setDataSource(chushutsukubunlist);
-            div.getRadSakuseiKubun().setSelectedKey(SakuseiKubun.すべて.getコード());
-            div.getRadSakuseiKubun().getSelectedKey();
-            div.getRadChusyutuKubun().setSelectedKey(ChushutsuKubun.直近有効データ.getコード());
-            div.getRadChusyutuKubun().getSelectedKey();
-            div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(帳票ID));
-            div.getTxtKijunYMD().setDisabled(true);
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (shichosonsecurityjoho != null && shichosonsecurityjoho.get導入形態コード() != null && shichosonsecurityjoho.get導入形態コード().is広域()) {
+            div.getCcdHokensya().setVisible(true);
+            div.getCcdHokensya().setDisabled(false);
+            div.getCcdHokensya().loadHokenshaList();
+        } else {
+            div.getCcdHokensya().setVisible(false);
+            div.getCcdHokensya().setDisabled(true);
         }
+        List<KeyValueDataSource> sakuseikubunlist = new ArrayList();
+        for (SakuseiKubun sakuseikubun : SakuseiKubun.values()) {
+            KeyValueDataSource source = new KeyValueDataSource(sakuseikubun.getコード(), sakuseikubun.get名称());
+            sakuseikubunlist.add(source);
+        }
+        div.getRadSakuseiKubun().setDataSource(sakuseikubunlist);
+        List<KeyValueDataSource> chushutsukubunlist = new ArrayList();
+        for (ChushutsuKubun chushutsukubun : ChushutsuKubun.values()) {
+            KeyValueDataSource source = new KeyValueDataSource(chushutsukubun.getコード(), chushutsukubun.get名称());
+            chushutsukubunlist.add(source);
+        }
+        div.getRadChusyutuKubun().setDataSource(chushutsukubunlist);
+        div.getRadSakuseiKubun().setSelectedKey(SakuseiKubun.すべて.getコード());
+        div.getRadChusyutuKubun().setSelectedKey(ChushutsuKubun.直近有効データ.getコード());
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, new ReportId(帳票ID));
+        div.getTxtKijunYMD().setDisabled(true);
     }
 
     /**
