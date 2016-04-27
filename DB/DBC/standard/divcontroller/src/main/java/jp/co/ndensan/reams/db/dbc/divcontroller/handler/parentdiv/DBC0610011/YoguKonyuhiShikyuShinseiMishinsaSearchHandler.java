@@ -88,10 +88,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
                 .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getDataSource();
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
             if (限度額チェック(row) && !品目チェック(row)) {
-                row.getTxtShinsaNo().setValue(ShinsaNaiyoKubun.承認する.getコード());
+                row.setTxtShinsaNo(ShinsaNaiyoKubun.承認する.getコード());
                 row.getTxtShinsaResult().setValue(承認する);
             } else {
-                row.getTxtShinsaNo().setValue(ShinsaNaiyoKubun.却下する.getコード());
+                row.setTxtShinsaNo(ShinsaNaiyoKubun.却下する.getコード());
                 row.getTxtShinsaResult().setValue(却下する);
             }
         }
@@ -106,10 +106,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihoNo().getValue());
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString());
         RString 整理番号 = row.getTxtSeiriNo().getValue();
-        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
-        RString 様式番号 = row.getTxtYoshikiNo().getValue();
-        RString 明細番号 = row.getTxtMeisaiNo().getValue();
-        ShikibetsuCode 識別コード = new ShikibetsuCode(row.getShikibetsuCode().getValue());
+        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo());
+        RString 様式番号 = row.getTxtYoshikiNo();
+        RString 明細番号 = row.getTxtMeisaiNo();
+        ShikibetsuCode 識別コード = new ShikibetsuCode(row.getShikibetsuCode());
         RDate 決定日 = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().getValue();
         ViewStateHolder.put(ViewStateKeys.状態, 審査);
         ViewStateHolder.put(ViewStateKeys.決定日, 決定日);
@@ -158,17 +158,17 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().get償還払請求基本Entity().setServiceTeikyoYM(
                     new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString()));
             entity.getEntity().get償還払請求基本Entity().setSeiriNo(row.getTxtSeiriNo().getValue());
-            entity.getEntity().get償還払請求基本Entity().setJigyoshaNo(new JigyoshaNo(row.getTxtJigyoshaNo().getValue()));
-            entity.getEntity().get償還払請求基本Entity().setYoshikiNo(row.getTxtYoshikiNo().getValue());
-            entity.getEntity().get償還払請求基本Entity().setMeisaiNo(row.getTxtMeisaiNo().getValue());
+            entity.getEntity().get償還払請求基本Entity().setJigyoshaNo(new JigyoshaNo(row.getTxtJigyoshaNo()));
+            entity.getEntity().get償還払請求基本Entity().setYoshikiNo(row.getTxtYoshikiNo());
+            entity.getEntity().get償還払請求基本Entity().setMeisaiNo(row.getTxtMeisaiNo());
             entity.getEntity().set氏名(new AtenaMeisho(row.getTxtHihoName().getValue()));
             entity.getEntity().get償還払支給申請Entity().setShinseiYMD(new FlexibleDate(row.getTxtShikyuShinseiDate().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setHokenTaishoHiyogaku(row.getTxtHiyoTotal().getValue());
             entity.getEntity().get償還払支給申請Entity().setRiyoshaFutangaku(
                     Integer.parseInt(row.getTxtRiyoshaFutanAmount().getValue().toString()));
             entity.getEntity().get償還払支給申請Entity().setShiharaiKingakuTotal(row.getTxtHokenKyufuAmount().getValue());
-            entity.getEntity().get償還払支給申請Entity().setShinsaKekka(row.getTxtShinsaNo().getValue());
-            entity.getEntity().set識別コード(new ShikibetsuCode(row.getShikibetsuCode().getValue()));
+            entity.getEntity().get償還払支給申請Entity().setShinsaKekka(row.getTxtShinsaNo());
+            entity.getEntity().set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
             updList.add(entity);
         }
         FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
@@ -202,18 +202,18 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
                 row.getTxtShinsaResult().setValue(ShinsaNaiyoKubun.toValue(審査結果).get名称());
             }
             if (事業者番号 != null) {
-                row.getTxtJigyoshaNo().setValue(事業者番号.getColumnValue());
+                row.setTxtJigyoshaNo(事業者番号.getColumnValue());
             }
             if (識別コード != null) {
-                row.getShikibetsuCode().setValue(識別コード.getColumnValue());
+                row.setShikibetsuCode(識別コード.getColumnValue());
             }
             row.getTxtHokenKyufuAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getHokenKyufugaku()));
             row.getTxtRiyoshaFutanAmount().setValue(new Decimal(entity.getEntity().get償還払支給申請Entity().getRiyoshaFutangaku()));
             row.getTxtHiyoTotal().setValue(entity.getEntity().get償還払支給申請Entity().getShiharaiKingakuTotal());
             row.getTxtSeiriNo().setValue(entity.getEntity().get償還払請求基本Entity().getSeiriNo());
-            row.getTxtYoshikiNo().setValue(entity.getEntity().get償還払請求基本Entity().getYoshikiNo());
-            row.getTxtMeisaiNo().setValue(entity.getEntity().get償還払請求基本Entity().getMeisaiNo());
-            row.getTxtShinsaNo().setValue(entity.getEntity().get償還払支給申請Entity().getShinsaKekka());
+            row.setTxtYoshikiNo(entity.getEntity().get償還払請求基本Entity().getYoshikiNo());
+            row.setTxtMeisaiNo(entity.getEntity().get償還払請求基本Entity().getMeisaiNo());
+            row.setTxtShinsaNo(entity.getEntity().get償還払支給申請Entity().getShinsaKekka());
             row.getRowNum().setValue(new Decimal(i));
             i = i + 1;
             rowList.add(row);
@@ -229,9 +229,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             サービス提供年月 = new FlexibleYearMonth(サービス提供年月Row.toString());
         }
         RString 整理番号 = row.getTxtSeiriNo().getValue();
-        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
-        RString 様式番号 = row.getTxtYoshikiNo().getValue();
-        RString 明細番号 = row.getTxtMeisaiNo().getValue();
+        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo());
+        RString 様式番号 = row.getTxtYoshikiNo();
+        RString 明細番号 = row.getTxtMeisaiNo();
         Decimal 今回の保険対象費用額 = row.getTxtHiyoTotal().getValue();
         return FukushiyoguKonyuhiShikyuGendogaku.createInstance().chkKonyuhiShikyuGendogaku(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
@@ -245,9 +245,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             サービス提供年月 = new FlexibleYearMonth(サービス提供年月Row.toString());
         }
         RString 整理番号 = row.getTxtSeiriNo().getValue();
-        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
-        RString 様式番号 = row.getTxtYoshikiNo().getValue();
-        RString 明細番号 = row.getTxtMeisaiNo().getValue();
+        JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo());
+        RString 様式番号 = row.getTxtYoshikiNo();
+        RString 明細番号 = row.getTxtMeisaiNo();
         List<ShokanFukushiYoguHanbaihi> 福祉用具購入販売費リスト = FukushiyoguKonyuhiShikyuShinsei.createInstance()
                 .getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         return new FukushiYoguKounyuhiDouituHinmokuChofukuHantei().chkHinmokuCodePerYear(被保険者番号,

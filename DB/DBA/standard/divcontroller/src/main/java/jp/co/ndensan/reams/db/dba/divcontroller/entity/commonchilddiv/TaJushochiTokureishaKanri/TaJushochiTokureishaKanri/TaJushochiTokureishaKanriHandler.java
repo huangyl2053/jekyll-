@@ -257,7 +257,6 @@ public class TaJushochiTokureishaKanriHandler {
 
         List<dgJushochiTokureiRireki_Row> rowList = div.getDgJushochiTokureiRireki().getDataSource();
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getTajushochiTokureiInput().getHiddenInputShikibetsuCode());
-        FlexibleDate 異動日 = new FlexibleDate(div.getTajushochiTokureiInput().getHiddenInputIdoYMD());
         if (rowList == null || rowList.isEmpty()) {
             rowList = new ArrayList();
         }

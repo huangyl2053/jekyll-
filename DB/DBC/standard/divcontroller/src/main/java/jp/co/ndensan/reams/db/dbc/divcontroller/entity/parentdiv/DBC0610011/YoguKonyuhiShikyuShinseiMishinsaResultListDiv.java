@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * YoguKonyuhiShikyuShinseiMishinsaResultList のクラスファイル
  *
- * @reamsid_L DBC-1021-090 gongliang
+ * @reamsid_L DBC-1020-040 gongliang
  */
 public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
 
