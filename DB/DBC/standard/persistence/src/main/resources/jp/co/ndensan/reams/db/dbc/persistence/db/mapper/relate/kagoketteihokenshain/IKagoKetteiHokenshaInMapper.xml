@@ -279,10 +279,9 @@
     </select>
     
     <update id="update保険者分情報_明細">
-        UPDATE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai"
+        UPDATE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" AS A
         SET "hiHokenshaNo"=B."shinNo" 
         FROM "TEMP_TABLE_Shihihokenshabango" AS B,
-        "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" AS A
         WHERE A."hiHokenshaNo"=B."kyuNo"
     </update>
     
