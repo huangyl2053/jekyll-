@@ -88,7 +88,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
         builder.append(RString.HALF_SPACE);
         builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RString 作成日時 = builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
-        if (明細情報List == null || 明細情報List.isEmpty()) {
+        if ((明細情報List == null || 明細情報List.isEmpty()) && 集計情報Entity != null) {
             SaishinsaKetteiHokenshaInItem item = new SaishinsaKetteiHokenshaInItem();
             item.set処理年月(処理年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             item.set証記載保険者番号(集計情報Entity.getShoKisaiHokenshaNo().value());

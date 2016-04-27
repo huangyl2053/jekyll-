@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShinsaHanteiJokyoReport extends Report<ShinsaHanteiJokyoReportSource> {
 
-    private static final int 第１群_COUNT = 11;
     private final List<ShinsaHanteiJokyoItem> itemList;
 
     /**
@@ -47,11 +46,9 @@ public class ShinsaHanteiJokyoReport extends Report<ShinsaHanteiJokyoReportSourc
     @Override
     public void writeBy(ReportSourceWriter<ShinsaHanteiJokyoReportSource> reportSourceWriter) {
         for (ShinsaHanteiJokyoItem item : itemList) {
-            for (int i = 1; i <= 第１群_COUNT; i++) {
-                IShinsaHanteiJokyoEditor editor = new ShinsaHanteiJokyoEditorImpl(item, i);
-                IShinsaHanteiJokyoBuilder builder = new ShinsaHanteiJokyoBuilderImpl(editor);
-                reportSourceWriter.writeLine(builder);
-            }
+            IShinsaHanteiJokyoEditor editor = new ShinsaHanteiJokyoEditorImpl(item);
+            IShinsaHanteiJokyoBuilder builder = new ShinsaHanteiJokyoBuilderImpl(editor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 }
