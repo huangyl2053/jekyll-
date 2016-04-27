@@ -41,9 +41,6 @@ public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFush
         if (!flag && this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.被保険者番号.get項目ID())) {
             flag = !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2);
         }
-        if (!flag && this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.事業者番号.get項目ID())) {
-            flag = !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4);
-        }
         return flag;
     }
 

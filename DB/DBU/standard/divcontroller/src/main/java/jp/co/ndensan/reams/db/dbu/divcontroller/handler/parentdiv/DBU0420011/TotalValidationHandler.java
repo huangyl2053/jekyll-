@@ -43,12 +43,11 @@ public class TotalValidationHandler {
      */
     public ValidationMessageControlPairs validateCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
-            if (div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue().isEmpty()
-                    || div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue() == null) {
-                validationMessages.add(new ValidationMessageControlPair(new TotalValidationHandler.RRVMessages(
-                        UrErrorMessages.必須, "交付日")));
-            }
+        if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID()) && (div.getShikakuShaShoHakko()
+                .getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue().isEmpty()
+                || div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue() == null)) {
+            validationMessages.add(new ValidationMessageControlPair(new TotalValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "交付日")));
         }
         if (MENUID_DBUMN12002.equals(ResponseHolder.getMenuID())) {
             if (div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtYukoKigen().getValue() == null) {
@@ -61,12 +60,11 @@ public class TotalValidationHandler {
                         UrErrorMessages.必須, "交付日")));
             }
         }
-        if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID())) {
-            if (RString.isNullOrEmpty(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                    .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtKofubi().getValue())) {
-                validationMessages.add(new ValidationMessageControlPair(new TotalValidationHandler.RRVMessages(
-                        UrErrorMessages.必須, "交付日")));
-            }
+        if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID()) && (RString.isNullOrEmpty(div
+                .getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtKofubi().getValue()))) {
+            validationMessages.add(new ValidationMessageControlPair(new TotalValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "交付日")));
         }
         return validationMessages;
     }

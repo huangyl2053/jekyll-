@@ -545,11 +545,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
 
         @Override
         public int compare(dgShisetsuNyutaishoRireki_Row o1, dgShisetsuNyutaishoRireki_Row o2) {
-            int flg = o1.getRirekiNo().compareTo(o2.getRirekiNo());
-            if (flg == 0) {
-                return o1.getNyushoDate().getValue().compareTo(o2.getNyushoDate().getValue());
-            }
-            return flg;
+            return o1.getRirekiNo().compareTo(o2.getRirekiNo());
         }
     }
 }
