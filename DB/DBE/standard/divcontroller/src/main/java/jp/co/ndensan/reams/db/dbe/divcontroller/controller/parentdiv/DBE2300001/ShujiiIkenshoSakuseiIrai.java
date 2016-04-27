@@ -102,7 +102,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final int 数字_16 = 16;
     private static final int 数字_17 = 17;
     private static final RString 帳票発行 = new RString("btnHakkou");
-    private static final RString 意見書作成料_種別 = new RString("レ");
+    private static final RString 意見書作成料_種別 = new RString("✔");
     private static final RString 再依頼申請者削除 = new RString("再依頼申請者を削除します。");
     private static final RString 依頼書印刷処理 = new RString("依頼書印刷処理");
     private List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList;
