@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChos
 import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -69,13 +71,14 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
                         徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
+                EditedAtesaki 編集後宛先 = get編集後宛先(徴収猶予決定通知書情報);
 
                 for (int index = START_NUMBER; index < END_NUMBER; index++) {
                     HyojiCodes 表示コード = get表示コード(徴収猶予決定通知書情報);
 
                     KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport report
                             = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoReport(文書番号, 徴収猶予決定通知書情報,
-                                    通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder, 表示コード, index);
+                                    通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder, 表示コード, index, 編集後宛先);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -107,13 +110,14 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
                         徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
+                EditedAtesaki 編集後宛先 = get編集後宛先(徴収猶予決定通知書情報);
 
                 for (int index = START_NUMBER; index < END_NUMBER; index++) {
                     HyojiCodes 表示コード = get表示コード(徴収猶予決定通知書情報);
 
                     KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport report
                             = new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateReport(文書番号, 徴収猶予決定通知書情報,
-                                    通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder, 表示コード, index);
+                                    通知書定型文, 介護問合せ先ソースビルダー, sourceBuilder, 表示コード, index, 編集後宛先);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -138,6 +142,19 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
         } else {
             return null;
         }
+    }
+
+    private EditedAtesaki get編集後宛先(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報) {
+
+        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
+        EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
+                徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通());
+        if (isNotNull(徴収猶予決定通知書情報.get宛先()) && isNotNull(徴収猶予決定通知書情報.get地方公共団体())
+                && isNotNull(徴収猶予決定通知書情報.get帳票制御共通())) {
+            編集後宛先 = jushoHenshu.create編集後宛先(徴収猶予決定通知書情報.get宛先(),
+                    徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通());
+        }
+        return 編集後宛先;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
