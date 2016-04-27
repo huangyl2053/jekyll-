@@ -126,7 +126,6 @@ public class SaishinsaWriteReportProcess extends BatchKeyBreakBase<SaishinsaKett
             }
         }
         RString 改頁 = (並び順 == null ? RString.EMPTY : 並び順.getFormated改頁項目());
-        List<RString> list = 並び順.getFormated改頁項目().toRStringList();
         RString 並び順の1件目 = 改頁項目リスト.size() <= INDEX_0 ? RString.EMPTY : 改頁項目リスト.get(INDEX_0);
         RString 並び順の2件目 = 改頁項目リスト.size() <= INDEX_1 ? RString.EMPTY : 改頁項目リスト.get(INDEX_1);
         RString 並び順の3件目 = 改頁項目リスト.size() <= INDEX_2 ? RString.EMPTY : 改頁項目リスト.get(INDEX_2);
