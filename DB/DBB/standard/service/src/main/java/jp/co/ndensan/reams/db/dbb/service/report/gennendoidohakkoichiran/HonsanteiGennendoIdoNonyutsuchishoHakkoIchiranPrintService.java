@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.report.honsanteigennendoidononyutsuchishohakkoichiran;
+package jp.co.ndensan.reams.db.dbb.service.report.gennendoidohakkoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.honsanteigennendoidononyutsuchishohakkoichiran.HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.honsanteigennendoidononyutsuchishohakkoichiran.HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran.HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran.HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
@@ -33,12 +33,14 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranPrintService {
      * @param 市町村コード RString
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, NonyuTsuchIchiranBatchParameter バッチパラメータ,
+    public SourceDataCollection print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+            NonyuTsuchIchiranBatchParameter バッチパラメータ,
             RString 帳票作成日時, RString 市町村コード, RString 市町村名) {
         HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranProperty property
                 = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranProperty();
         return new Printer<NonyuTsuchIchiranSource>().spool(property,
-                new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport(編集後本算定通知書共通情報, バッチパラメータ, 帳票作成日時, 市町村コード, 市町村名));
+                new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport(編集後本算定通知書共通情報, バッチパラメータ,
+                        帳票作成日時, 市町村コード, 市町村名));
     }
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.honsanteikanendoidononyutsuchishohakkoichiran;
+package jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;

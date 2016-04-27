@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.honsanteigennendoidononyutsuchishohakkoichiran;
+package jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendoikkatsuhakko.HonSanteiIdoKanendoIkkatsuHakkoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
@@ -19,19 +19,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * 帳票設計_DBBRP44002_1_保険料納入通知書（本算定現年度異動）発行一覧表 BodyEditorです。
+ * 帳票設計_DBBPR45002_保険料納入通知書（本算定過年度異動）発行一覧表 BodyEditorです。
  *
- * 帳票項目定義は帳票設計_DBBRP43002_2_保険料納入通知書（本算定）発行一覧表と同じです。
+ * Sourceは帳票設計_DBBRP43002_2_保険料納入通知書（本算定）発行一覧表と同じです。
  *
- * @reamsid_L DBB-0880-050 zhangrui
+ * @reamsid_L DBB-0920-050 zhangrui
  */
-public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor {
+public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor {
 
     private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
-    private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
-    private final RString 帳票作成日時;
-    private final RString 市町村コード;
-    private final RString 市町村名;
+    private final HonSanteiIdoKanendoIkkatsuHakkoBatchParameter バッチパラメータ;
+//    private final YMDHMS 調定日時;
 
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
@@ -49,24 +47,25 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
     /**
      * コンストラクタです。
      *
-     * @param inputEntity HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity
+     * @param inputEntity HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity
      */
-    public BodyEditor(HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
+    public BodyEditor(HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
         this.編集後本算定通知書共通情報 = inputEntity.get編集後本算定通知書共通情報();
         this.バッチパラメータ = inputEntity.getバッチパラメータ();
-        this.帳票作成日時 = inputEntity.get帳票作成日時();
-        this.市町村コード = inputEntity.get市町村コード();
-        this.市町村名 = inputEntity.get市町村名();
+//        this.調定日時 = inputEntity.get調定日時();
     }
 
     @Override
     public NonyuTsuchIchiranSource edit(NonyuTsuchIchiranSource source) {
         for (int i = 0; i < 編集後本算定通知書共通情報.size(); i++) {
             EditedHonSanteiTsuchiShoKyotsu 共通情報 = 編集後本算定通知書共通情報.get(i);
-            source.printTimeStamp = this.帳票作成日時;
-            source.nendo = this.バッチパラメータ.get賦課年度();
-            source.hokenshaNo = this.市町村コード;
-            source.hokenshaName = this.市町村名;
+            if (null != バッチパラメータ.get調定年度()) {
+                source.nendo = バッチパラメータ.get調定年度().toDateString();
+            }
+            if (null != バッチパラメータ.get納入_対象賦課年度()) {
+                source.nendoBun1 = バッチパラメータ.get納入_対象賦課年度().get(0);
+                source.nendoBun2 = バッチパラメータ.get納入_対象賦課年度().get(1);
+            }
             set出力帳票entities(source);
             if (共通情報.get表示コード() != null) {
                 source.hyojicodeName1 = 共通情報.get表示コード().get表示コード名１();
@@ -74,12 +73,8 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
                 source.hyojicodeName3 = 共通情報.get表示コード().get表示コード名３();
             }
             source.shotokuDankaiTitle = new RString("所得段階");
-            if ((i + 1) % SIZE != 0) {
-                source.listUpper_1 = new RString(Integer.valueOf((i + 1) % SIZE).toString());
-            } else {
-                source.listUpper_1 = new RString("18");
-            }
-
+            Integer 連番 = (i - 1) % SIZE + 1;
+            source.listUpper_1 = new RString(連番.toString());
             if (共通情報.get通知書番号() != null) {
                 source.listUpper_2 = new RString(共通情報.get通知書番号().toString());
             }
@@ -113,7 +108,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
 
             RString 生活保護扶助名称 = null;
             if (共通情報.get更正後() != null
-                    && 共通情報.get更正後().get生活保護扶助種類() != null) {
+                    && 共通情報.get更正後().get生活保護扶助種類().toString() != null) {
                 生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                         URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
                         new Code(共通情報.get更正後().get生活保護扶助種類().toString())).getコード名称();
@@ -122,25 +117,26 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
             setListLowers(source, 共通情報);
 
         }
+
         return source;
     }
 
     private void set出力帳票entities(NonyuTsuchIchiranSource source) {
-        if (バッチパラメータ.get出力帳票entity() != null) {
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_0) {
-                source.shutsuryokujun1 = バッチパラメータ.get出力帳票entity().get(NUM_0).get出力順ID();
+        if (バッチパラメータ.get出力帳票List() != null) {
+            if (バッチパラメータ.get出力帳票List().size() > NUM_0) {
+                source.shutsuryokujun1 = バッチパラメータ.get出力帳票List().get(NUM_0).get出力順ID();
             }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_1) {
-                source.shutsuryokujun2 = バッチパラメータ.get出力帳票entity().get(NUM_1).get出力順ID();
+            if (バッチパラメータ.get出力帳票List().size() > NUM_1) {
+                source.shutsuryokujun2 = バッチパラメータ.get出力帳票List().get(NUM_1).get出力順ID();
             }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_2) {
-                source.shutsuryokujun3 = バッチパラメータ.get出力帳票entity().get(NUM_2).get出力順ID();
+            if (バッチパラメータ.get出力帳票List().size() > NUM_2) {
+                source.shutsuryokujun3 = バッチパラメータ.get出力帳票List().get(NUM_2).get出力順ID();
             }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_3) {
-                source.shutsuryokujun4 = バッチパラメータ.get出力帳票entity().get(NUM_3).get出力順ID();
+            if (バッチパラメータ.get出力帳票List().size() > NUM_3) {
+                source.shutsuryokujun4 = バッチパラメータ.get出力帳票List().get(NUM_3).get出力順ID();
             }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_4) {
-                source.shutsuryokujun5 = バッチパラメータ.get出力帳票entity().get(NUM_4).get出力順ID();
+            if (バッチパラメータ.get出力帳票List().size() > NUM_4) {
+                source.shutsuryokujun5 = バッチパラメータ.get出力帳票List().get(NUM_4).get出力順ID();
             }
         }
     }
@@ -151,11 +147,12 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
      * @param 編集後本算定通知書共通情報
      * @param item
      */
-    private void setOtherValue(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報, NonyuTsuchIchiranSource source) {
+    private void setOtherValue(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            NonyuTsuchIchiranSource source) {
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
-                if (entity.get期() == Integer.valueOf(バッチパラメータ.get出力期().toString())) {
+                if (entity.get期() == Integer.valueOf(バッチパラメータ.get納入_出力期().toString())) {
                     source.listUpper_10 = new RString(entity.get金額().toString());
                 }
             }
@@ -179,14 +176,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
         if (共通情報.get今後納付すべき額() != null) {
             source.listLower_5 = new RString(共通情報.get今後納付すべき額().toString());
         }
-        if (共通情報.get更正後() != null
-                && 共通情報.get更正後().get普徴期別金額リスト() != null) {
-            for (UniversalPhase entity : 共通情報.get更正後().get普徴期別金額リスト()) {
-                if (entity.get期() == (Integer.valueOf(バッチパラメータ.get出力期().toString()) + 1)) {
-                    source.listLower_6 = new RString(entity.get金額().toString());
-                }
-            }
-        }
+        source.listLower_6 = new RString(NUM_0);
         RStringBuilder builder = new RStringBuilder();
         EditedKoza 編集後口座 = 共通情報.get編集後口座();
         if (null != 編集後口座 && 編集後口座.isゆうちょ銀行()) {
