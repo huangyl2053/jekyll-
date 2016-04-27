@@ -188,7 +188,9 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiHenshu {
         dbt3104entity.setChushutsuKaishiTimestamp(null);
         dbt3104entity.setChushutsuShuryoTimestamp(null);
         dbt3104entity.setSaiShoriKanoKubun(false);
-        dbt3104entity.setShoriJikkoKaisu(dbt3104entity.getShoriJikkoKaisu().add(Decimal.ZERO));
+        if (dbt3104entity.getShoriJikkoKaisu() != null) {
+            dbt3104entity.setShoriJikkoKaisu(dbt3104entity.getShoriJikkoKaisu().add(Decimal.ZERO));
+        }
         dbt3104entity.setSaiShoriFukaKubun(false);
         dbt3104entity.setFileName1(fileNameList == null || fileNameList.isEmpty()
                 || fileNameList.get(0) == null ? RString.EMPTY : fileNameList.get(0));
