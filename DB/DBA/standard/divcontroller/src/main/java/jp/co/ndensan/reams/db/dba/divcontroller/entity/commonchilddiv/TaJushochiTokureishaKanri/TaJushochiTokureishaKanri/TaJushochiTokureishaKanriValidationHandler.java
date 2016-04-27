@@ -108,10 +108,9 @@ public class TaJushochiTokureishaKanriValidationHandler {
                                 }
                             } else {
                                 if (div.getTxtTekiyobi().getValue() != null && div.getTxtKaijyobi().getValue() != null
-                                        && ((div.getTxtTekiyobi().getValue().isBefore(row.getTekiyoYMD().getValue())
-                                        && div.getTxtKaijyobi().getValue().isBeforeOrEquals(row.getTekiyoYMD().getValue()))
-                                        || (row.getKaijoYMD().getValue().isBeforeOrEquals(div.getTxtTekiyobi().getValue())
-                                        && row.getKaijoYMD().getValue().isBefore(div.getTxtKaijyobi().getValue())))) {
+                                        && row.getTekiyoYMD().getValue() != null && row.getKaijoYMD().getValue() != null
+                                        && row.getTekiyoYMD().getValue().isBeforeOrEquals(div.getTxtKaijyobi().getValue())
+                                        && div.getTxtTekiyobi().getValue().isBeforeOrEquals(row.getKaijoYMD().getValue())) {
                                     validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                                 }
                             }

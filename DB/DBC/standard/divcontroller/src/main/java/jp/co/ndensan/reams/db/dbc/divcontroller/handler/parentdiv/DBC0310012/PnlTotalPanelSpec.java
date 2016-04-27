@@ -208,7 +208,7 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
             if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
                     && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
                             .getRdoKettekubun().getSelectedKey())) {
-                RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+                RString 状態 = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
                 ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
                 ChkKeiyakuNoParameter parameter = new ChkKeiyakuNoParameter(
                         new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
@@ -227,7 +227,7 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
         }
 
         public static boolean is存在(PnlTotalPanelDiv div) {
-            RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+            RString 状態 = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
             ChkTorokuzumiParameter parameter;
             if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() == null) {
                 return true;
