@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShukei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 yebangqiang
  */
 public class ShokanShukeiBuilder {
 
