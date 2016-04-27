@@ -44,12 +44,21 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
     private static final RString STRING_BUN = new RString("分");
     private static final RString STRING_SAKUSEI = new RString("　作成");
     private static final int ZERO = 0;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
     private RString 並び順の1件目;
     private RString 並び順の2件目;
     private RString 並び順の3件目;
     private RString 並び順の4件目;
     private RString 並び順の5件目;
-    private RString 改頁;
+    private RString 改頁の1件目;
+    private RString 改頁の2件目;
+    private RString 改頁の3件目;
+    private RString 改頁の4件目;
+    private RString 改頁の5件目;
     private RString 処理年月分;
 
     /**
@@ -72,15 +81,19 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
             RString 並び順3,
             RString 並び順4,
             RString 並び順5,
-            RString 改頁,
+            List<RString> 改頁,
             List<KagoKetteiHokenshaInEntity> 過誤決定通知書情報取込一覧表リスト) {
         List<KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem> list = new ArrayList<>();
-        this.並び順の1件目 = (並び順1 == null) ? RString.EMPTY : 並び順1;
-        this.並び順の2件目 = (並び順2 == null) ? RString.EMPTY : 並び順2;
-        this.並び順の3件目 = (並び順3 == null) ? RString.EMPTY : 並び順3;
-        this.並び順の4件目 = (並び順4 == null) ? RString.EMPTY : 並び順4;
-        this.並び順の5件目 = (並び順5 == null) ? RString.EMPTY : 並び順5;
-        this.改頁 = 改頁;
+        this.並び順の1件目 = 並び順1;
+        this.並び順の2件目 = 並び順2;
+        this.並び順の3件目 = 並び順3;
+        this.並び順の4件目 = 並び順4;
+        this.並び順の5件目 = 並び順5;
+        this.改頁の1件目 = 改頁.size() <= INDEX_0 ? RString.EMPTY : 改頁.get(INDEX_0);
+        this.改頁の2件目 = 改頁.size() <= INDEX_1 ? RString.EMPTY : 改頁.get(INDEX_1);
+        this.改頁の3件目 = 改頁.size() <= INDEX_2 ? RString.EMPTY : 改頁.get(INDEX_2);
+        this.改頁の4件目 = 改頁.size() <= INDEX_3 ? RString.EMPTY : 改頁.get(INDEX_3);
+        this.改頁の5件目 = 改頁.size() <= INDEX_4 ? RString.EMPTY : 改頁.get(INDEX_4);
         処理年月分表示作成(処理年月);
         if (null != 過誤決定通知書情報取込一覧表リスト && !過誤決定通知書情報取込一覧表リスト.isEmpty()) {
             int no = 1;
@@ -96,11 +109,11 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
             item.setShutsuryokujun3(並び順の3件目);
             item.setShutsuryokujun4(並び順の4件目);
             item.setShutsuryokujun5(並び順の5件目);
-            item.setKaipage1(改頁);
-            item.setKaipage2(改頁);
-            item.setKaipage3(改頁);
-            item.setKaipage4(改頁);
-            item.setKaipage5(改頁);
+            item.setKaipage1(改頁の1件目);
+            item.setKaipage2(改頁の2件目);
+            item.setKaipage3(改頁の3件目);
+            item.setKaipage4(改頁の4件目);
+            item.setKaipage5(改頁の5件目);
             item.setPrintTimeStamp(作成日時表示作成());
             item.setListUpper_5(DATA_NASHI);
             item.setPageCount(PAGECOUNT_1);
@@ -158,11 +171,11 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoHokenshabun {
         item.setShutsuryokujun3(並び順の3件目);
         item.setShutsuryokujun4(並び順の4件目);
         item.setShutsuryokujun5(並び順の5件目);
-        item.setKaipage1(改頁);
-        item.setKaipage2(改頁);
-        item.setKaipage3(改頁);
-        item.setKaipage4(改頁);
-        item.setKaipage5(改頁);
+        item.setKaipage1(改頁の1件目);
+        item.setKaipage2(改頁の2件目);
+        item.setKaipage3(改頁の3件目);
+        item.setKaipage4(改頁の4件目);
+        item.setKaipage5(改頁の5件目);
         item.setPrintTimeStamp(作成日時表示作成());
         item.setListUpper_2(entity.get取扱年月().wareki().separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString());
