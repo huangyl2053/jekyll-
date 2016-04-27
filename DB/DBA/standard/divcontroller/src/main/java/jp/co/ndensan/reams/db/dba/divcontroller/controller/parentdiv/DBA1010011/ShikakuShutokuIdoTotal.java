@@ -152,8 +152,9 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnAdd(ShikakuShutokuIdoTotalDiv div) {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
+        createHandler(div).資格取得情報パネルの初期化();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setReadOnly(false);
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(false);
         createHandler(div).get被保番号表示有無制御();
         response.data = div;
         return response;
@@ -168,9 +169,10 @@ public class ShikakuShutokuIdoTotal {
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_ModifyButton(ShikakuShutokuIdoTotalDiv div) {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
 
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(false);
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
+        createHandler(div).資格取得情報パネルの初期化();
         createHandler(div).get被保番号表示有無制御();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setReadOnly(false);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(true);
 
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                 .getCcdShikakuTokusoRireki().getDataGridSelectItem();
@@ -230,7 +232,8 @@ public class ShikakuShutokuIdoTotal {
         }
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
         createHandler(div).資格取得情報パネルの初期化();
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setDisabled(true);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setReadOnly(true);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
         response.data = div;
         return response;
     }
@@ -244,6 +247,8 @@ public class ShikakuShutokuIdoTotal {
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnTorikeshi(ShikakuShutokuIdoTotalDiv div) {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
         createHandler(div).資格取得情報パネルの初期化();
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setReadOnly(true);
         response.data = div;
         return response;
     }
@@ -256,6 +261,13 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnDelete(ShikakuShutokuIdoTotalDiv div) {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
+        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridDataSource();
+        dgShikakuShutokuRireki_Row item = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridSelectItem();
+        rowList.remove(item);
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().setDataGridDataSource(rowList);
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
         response.data = div;
         return response;
