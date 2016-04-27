@@ -56,7 +56,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
     @CsvField(order = 110, name = "住所コード")
     private final ZenkokuJushoCode 住所コード;
     @CsvField(order = 120, name = "郵便番号")
-    private final YubinNo 郵便番号;
+    private final RString 郵便番号;
     @CsvField(order = 130, name = "住所_番地_方書")
     private final RString 住所_番地_方書;
     @CsvField(order = 140, name = "住所")
@@ -126,7 +126,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
     @CsvField(order = 460, name = "送付先住所コード")
     private final ZenkokuJushoCode 送付先住所コード;
     @CsvField(order = 470, name = "送付先郵便番号")
-    private final YubinNo 送付先郵便番号;
+    private final RString 送付先郵便番号;
     @CsvField(order = 480, name = "送付先住所_番地_方書")
     private final RString 送付先住所_番地_方書;
     @CsvField(order = 490, name = "送付先住所")
@@ -241,7 +241,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
             SetaiCode 世帯コード,
             AtenaMeisho 世帯主名,
             ZenkokuJushoCode 住所コード,
-            YubinNo 郵便番号,
+            RString 郵便番号,
             RString 住所_番地_方書,
             AtenaJusho 住所,
             AtenaBanchi 番地,
@@ -276,7 +276,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
             AtenaMeisho 送付先氏名,
             AtenaKanaMeisho 送付先氏名カナ,
             ZenkokuJushoCode 送付先住所コード,
-            YubinNo 送付先郵便番号,
+            RString 送付先郵便番号,
             RString 送付先住所_番地_方書,
             AtenaJusho 送付先住所,
             AtenaBanchi 送付先番地,

@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaichohakkoichiranhyo;
 
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -13,7 +12,6 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaDaichoHakkoIchiranhyoHeaderItem {
 
-    private final RString printTimeStamp;
     private final RString shichosonCode;
     private final RString shichosonName;
     private final RString shutsuryokujun1;
@@ -57,7 +55,6 @@ public class HihokenshaDaichoHakkoIchiranhyoHeaderItem {
             RString kaipage4,
             RString kaipage5
     ) {
-        this.printTimeStamp = RDate.getNowDate().toDateString();
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;
         this.shutsuryokujun1 = shutsuryokujun1;

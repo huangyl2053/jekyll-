@@ -7,8 +7,9 @@
 
     <select id="selectAll" resultMap="resultMap_DbT2002FukaJohoTemp" fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.allColumns_DbT2002FukaJohoTemp" />
-        FROM rgdb."DbT2002FukaJohoTemp" dbT2002
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.allColumns_DbT2002FukaJohoTemp" />
+        FROM 
+            "DbT2002FukaJohoTemp" AS dbT2002
     </select>
 
     <resultMap id="resultMap_DbT2002FukaJohoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity" autoMapping="true">
@@ -154,4 +155,39 @@
         dbT2002."fuKibetsuGaku13",
         dbT2002."fuKibetsuGaku14"
     </sql>
+    
+    <resultMap id="resultMap_FukaJohoToroku" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.FukaJohoTorokuRelateEntity" autoMapping="true">
+       <result property="調定ID" column="choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+       <result property="期" column="kibetsu"/>
+       <result property="科目コード" column="kamokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler"/>
+       <association property="賦課情報一時Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.resultMap_DbT2002FukaJohoTemp"/> 
+    </resultMap>
+    
+    <select id="get登録情報" resultMap="resultMap_FukaJohoToroku" fetchSize="500">
+        SELECT
+            <include refid="allColumns_DbT2002FukaJohoTemp" />,
+            choteiIdToroku."choteiId",
+            choteiIdToroku."kibetsu",
+            choteiIdToroku."kamokuCode"
+        FROM 
+            "DbT2002FukaJohoTemp" dbT2002
+        LEFT JOIN
+            (SELECT
+                DbT0705."choteiId",
+                DbT0700."kibetsu",
+                DbT0700."kamokuCode",
+                DbT0700."choteiNendo",
+                DbT0700."kazeiNendo",
+                DbT0700."tsuchishoNo"
+            FROM
+                "DbT0700ShunoKanriTemp" DbT0700,
+                "DbT0705ChoteiKyotsuTemp" DbT0705
+            WHERE
+                DbT0700."choteiId" = DbT0705."choteiId"
+            )choteiIdToroku
+        ON
+            choteiIdToroku."choteiNendo" = dbT2002."choteiNendo"
+        AND choteiIdToroku."kazeiNendo" = dbT2002."fukaNendo"
+        AND choteiIdToroku."tsuchishoNo" = dbT2002."tsuchishoNo"
+    </select>
 </mapper>

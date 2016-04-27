@@ -45,6 +45,9 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
 
     private static final int SHIKIBETSUNO_START = 1;
     private static final int SHIKIBETSUNO_END = 3;
+    private static final RString 定数_1 = new RString("1");
+    private static final RString 定数_2 = new RString("2");
+    private static final RString 定数_3 = new RString("3");
     private static final RString MSG_NAME_SHIKIBETSUNO = new RString("識別番号");
     private static final RString MSG_NAME_SERVICETEIKYOYM = new RString("サービス提供年月");
 
@@ -247,12 +250,12 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
                 where(and(
                                 leq(tekiyoKaishiYM, サービス提供年月),
                                 leq(サービス提供年月, tekiyoShuryoYM),
-                                eq(shikibetsuNoKubon, new RString("2")),
-                                eq(kyufujissekiKubun, new RString("2")),
+                                eq(shikibetsuNoKubon, 定数_2),
+                                eq(kyufujissekiKubun, 定数_2),
                                 or(
-                                        eq(kyufuBunruiKubun, new RString("1")),
-                                        eq(kyufuBunruiKubun, new RString("2")),
-                                        eq(kyufuBunruiKubun, new RString("3"))))).
+                                        eq(kyufuBunruiKubun, 定数_1),
+                                        eq(kyufuBunruiKubun, 定数_2),
+                                        eq(kyufuBunruiKubun, 定数_3)))).
                 toList(DbT3118ShikibetsuNoKanriEntity.class);
     }
 }
