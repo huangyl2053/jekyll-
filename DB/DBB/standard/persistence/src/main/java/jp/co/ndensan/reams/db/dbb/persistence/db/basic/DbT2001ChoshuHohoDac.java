@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護徴収方法のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 public class DbT2001ChoshuHohoDac implements ISaveable<DbT2001ChoshuHohoEntity> {
 

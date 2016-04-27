@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護徴収方法を管理するクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 public class ChoshuHohoManager {
 

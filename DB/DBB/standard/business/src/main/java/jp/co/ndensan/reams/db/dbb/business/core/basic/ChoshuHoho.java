@@ -425,6 +425,17 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
     }
 
     /**
+     * 保持する介護徴収方法を登録対象とします。<br/> {@link DbT2001ChoshuHohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ChoshuHoho}
+     */
+    public ChoshuHoho added() {
+        DbT2001ChoshuHohoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ChoshuHoho(addedEntity, id);
+    }
+
+    /**
      * {@link ChoshuHoho}のシリアライズ形式を提供します。
      *
      * @return {@link ChoshuHoho}のシリアライズ形式
