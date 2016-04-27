@@ -38,9 +38,6 @@ var DBC;
                     this.controls.txtTyakkoyotebi().readOnly = false;
                     this.controls.txtKanseyotebi().readOnly = false;
                     this.controls.txtKaisyukingaku().readOnly = false;
-                    this.controls.btnHonnijyusyoCopy().disabled = true;
-                    this.controls.btnClear().disabled = true;
-                    this.controls.btnDetailConfirm().disabled = true;
                 };
                 State.prototype.teisei = function () {
                     this.controls.txtKaisyunaiyo().readOnly = false;
