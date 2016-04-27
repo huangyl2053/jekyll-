@@ -64,6 +64,7 @@ public class HanyorisutoPanel {
      * @return ResponseData
      */
     public ResponseData<HanyorisutoPanelDiv> onClick_btnBatchRegister(HanyorisutoPanelDiv div) {
+        //TODO  batchが完成した継続します。
 //        HanyoList_KyotakuServiceKeikakuBatchParameter bparam = new HanyoList_KyotakuServiceKeikakuBatchParameter();
 //        bparam.set構成市町村コード(div.getCcdHokensya().getSelectedItem().get市町村コード());
 //        bparam.set作成区分(SakuseiKubun.toValue(div.getRadSakuseiKubun().getSelectedKey()));
