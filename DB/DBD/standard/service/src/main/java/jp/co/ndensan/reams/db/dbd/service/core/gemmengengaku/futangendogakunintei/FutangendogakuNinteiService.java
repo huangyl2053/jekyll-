@@ -151,13 +151,13 @@ public class FutangendogakuNinteiService {
             if (HaigushaKazeiKubun.課税.getコード().contains(世帯員所得情報.get課税区分_住民税減免後())) {
                 return RiyoshaFutanDankai.第四段階;
             } else {
-                judge利用者負担段階の再判定(識別コード, 世帯員所得情報, 処理日);
+                return 利用者負担段階の再判定(識別コード, 世帯員所得情報, 処理日);
             }
         }
         return null;
     }
 
-    private RiyoshaFutanDankai judge利用者負担段階の再判定(ShikibetsuCode 識別コード, SetaiinShotoku 世帯員所得情報, FlexibleDate 処理日) {
+    private RiyoshaFutanDankai 利用者負担段階の再判定(ShikibetsuCode 識別コード, SetaiinShotoku 世帯員所得情報, FlexibleDate 処理日) {
         DbT7006RoreiFukushiNenkinJukyushaDac dbT7006Dac = InstanceProvider.create(DbT7006RoreiFukushiNenkinJukyushaDac.class);
         List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006Entity = dbT7006Dac.selectfor老齢福祉年金受給者の判定(識別コード, 処理日);
         if (dbT7006Entity != null && !dbT7006Entity.isEmpty()) {
