@@ -102,9 +102,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final int 数字_16 = 16;
     private static final int 数字_17 = 17;
     private static final RString 帳票発行 = new RString("btnHakkou");
-    private static final RString 継続 = new RString("継続");
-    private static final RString 在宅 = new RString("在宅");
-    private static final RString 施設 = new RString("施設");
+    private static final RString 意見書作成料_種別 = new RString("レ");
     private static final RString 再依頼申請者削除 = new RString("再依頼申請者を削除します。");
     private static final RString 依頼書印刷処理 = new RString("依頼書印刷処理");
     private List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList;
@@ -577,14 +575,14 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         item.setSeibetsu(row.getSeibetsu());
         if (!row.getShisetsuNyushoFlag()) {
-            item.setIkenshosyubetu1(在宅);
+            item.setShubetsuZaitaku(意見書作成料_種別);
         } else {
-            item.setIkenshosyubetu1(施設);
+            item.setShubetsuShisetsu(意見書作成料_種別);
         }
         if (RString.isNullOrEmpty(row.getIraiKubun())) {
-            item.setIkenshosyubetu2(新規);
+            item.setShubetsuShinki(意見書作成料_種別);
         } else {
-            item.setIkenshosyubetu2(継続);
+            item.setShubetsuKeizoku(意見書作成料_種別);
         }
         if (!row.getShisetsuNyushoFlag()) {
             if (ShujiiIkenshoIraiKubun.初回.getCode().equals(row.getIraiKubun())) {
