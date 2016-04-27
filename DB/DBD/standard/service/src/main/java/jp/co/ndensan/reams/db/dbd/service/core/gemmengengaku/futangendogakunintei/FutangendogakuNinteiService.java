@@ -21,9 +21,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1006KyokaisoGaitoshaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkinJukyushaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
@@ -45,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -103,11 +106,10 @@ public class FutangendogakuNinteiService {
             }
         }
         return 負担限度額認定申請の情報List;
-
     }
 
     /**
-     * 負担限度額認定申請の情報を取得します。
+     * 標準有効期限判定します。
      *
      * @param 適用日 FlexibleDate
      * @return FlexibleDate
@@ -140,8 +142,35 @@ public class FutangendogakuNinteiService {
      * @param 識別コード ShikibetsuCode
      * @return RString
      */
-    public RString judge利用者負担段階(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
-        //TODO QA82160
+    public RiyoshaFutanDankai judge利用者負担段階(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+        FlexibleDate 処理日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        RDateTime 処理日時 = RDate.getNowDateTime();
+        SetaiinShotokuJohoFinder fineder = SetaiinShotokuJohoFinder.createInstance();
+        List<SetaiinShotoku> 世帯員所得情報リスト = fineder.get世帯員所得情報(識別コード, 処理日.getYear(), new YMDHMS(処理日時));
+        for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報リスト) {
+            if (HaigushaKazeiKubun.課税.getコード().contains(世帯員所得情報.get課税区分_住民税減免後())) {
+                return RiyoshaFutanDankai.第四段階;
+            } else {
+                judge利用者負担段階の再判定(識別コード, 世帯員所得情報, 処理日);
+            }
+        }
+        return null;
+    }
+
+    private RiyoshaFutanDankai judge利用者負担段階の再判定(ShikibetsuCode 識別コード, SetaiinShotoku 世帯員所得情報, FlexibleDate 処理日) {
+        DbT7006RoreiFukushiNenkinJukyushaDac dbT7006Dac = InstanceProvider.create(DbT7006RoreiFukushiNenkinJukyushaDac.class);
+        List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006Entity = dbT7006Dac.selectfor老齢福祉年金受給者の判定(識別コード, 処理日);
+        if (dbT7006Entity != null && !dbT7006Entity.isEmpty()) {
+            return RiyoshaFutanDankai.第一段階;
+        }
+        if (識別コード.equals(世帯員所得情報.get識別コード())) {
+            int result = 世帯員所得情報.get合計所得金額().add(世帯員所得情報.get年金収入額()).compareTo(Decimal.valueOf(800000L));
+            if (result == 0 || result < 0) {
+                return RiyoshaFutanDankai.第二段階;
+            } else {
+                return RiyoshaFutanDankai.第三段階;
+            }
+        }
         return null;
     }
 
@@ -746,11 +775,9 @@ public class FutangendogakuNinteiService {
      * @return 減免の利用者になれるかどうか
      */
     public boolean canBe利用者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
-        DbT4001JukyushaDaichoDac dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class
-        );
+        DbT4001JukyushaDaichoDac dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         List<DbT4001JukyushaDaichoEntity> dbT4001EntityList = dac.selectfor受給者の判定(被保険者番号, 適用日, YukoMukoKubun.無効.getコード());
-        return dbT4001EntityList
-                != null && !dbT4001EntityList.isEmpty();
+        return dbT4001EntityList != null && !dbT4001EntityList.isEmpty();
     }
 
     /**
@@ -759,13 +786,10 @@ public class FutangendogakuNinteiService {
      * @param 被保険者番号 HihokenshaNo
      * @return 減免の利用者になれるかどうか
      */
-    public
-            boolean is旧措置者(HihokenshaNo 被保険者番号) {
-        DbV4001JukyushaDaichoAliveDac dac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class
-        );
+    public boolean is旧措置者(HihokenshaNo 被保険者番号) {
+        DbV4001JukyushaDaichoAliveDac dac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class);
         List<DbV4001JukyushaDaichoEntity> dbV4001EntityList = dac.selectBy被保険者番号(被保険者番号);
-        return dbV4001EntityList
-                != null && !dbV4001EntityList.isEmpty();
+        return dbV4001EntityList != null && !dbV4001EntityList.isEmpty();
     }
 
     /**
@@ -775,23 +799,14 @@ public class FutangendogakuNinteiService {
      * @param 適用日 FlexibleDate
      * @return 減免の利用者になれるかどうか
      */
-    public
-            boolean is境界層該当者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
+    public boolean is境界層該当者(HihokenshaNo 被保険者番号, FlexibleDate 適用日) {
 
-        DbT1006KyokaisoGaitoshaDac DbT1006Dac = InstanceProvider.create(DbT1006KyokaisoGaitoshaDac.class
-        );
+        DbT1006KyokaisoGaitoshaDac DbT1006Dac = InstanceProvider.create(DbT1006KyokaisoGaitoshaDac.class);
         List<DbT1006KyokaisoGaitoshaEntity> dbT1006EntityList = DbT1006Dac.select境界層該当者(被保険者番号, 適用日);
-        return dbT1006EntityList
-                != null && !dbT1006EntityList.isEmpty();
+        return dbT1006EntityList != null && !dbT1006EntityList.isEmpty();
     }
 
-    private List<RString> 金額リスト作成(
-            RString 利用者負担段階,
-            RString 金額1,
-            RString 金額21,
-            RString 金額22,
-            RString 金額23,
-            RString 金額3) {
+    private List<RString> 金額リスト作成(RString 利用者負担段階, RString 金額1, RString 金額21, RString 金額22, RString 金額23, RString 金額3) {
 
         List<RString> 金額リスト = new ArrayList<>();
 
