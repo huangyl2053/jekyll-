@@ -67,10 +67,9 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日,
                             div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput()));
                 } else {
-                    if (最新の適用情報.getTekiyoDate() != null
-                            && (div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue() != null
+                    if (最新の適用情報.getTekiyoDate().getValue() != null
                             && div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().getValue().isBeforeOrEquals(
-                                    最新の適用情報.getTekiyoDate().getValue()))) {
+                                    最新の適用情報.getTekiyoDate().getValue())) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
                 }
@@ -84,9 +83,9 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日,
                             div.getPanelTekiyoInput().getTxtTekiyoDate()));
                 } else {
-                    if (最新の適用情報.getTekiyoDate() != null
-                            && (最新の適用情報.getTekiyoDate().getValue().isBeforeOrEquals(
-                                    div.getPanelTekiyoInput().getTxtTekiyoDate().getValue()))) {
+                    if (最新の適用情報.getTekiyoDate().getValue() != null
+                            && 最新の適用情報.getTekiyoDate().getValue().isBeforeOrEquals(
+                                    div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())) {
                         validPairs.add(new ValidationMessageControlPair(
                                 RRVMessages.適用日と直近データの適用日の整合性チェック,
                                 div.getPanelTekiyoInput().getTxtTekiyoDate()));
@@ -113,9 +112,9 @@ public class TekiyoJogaiRirekiValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(
                             RRVMessages.解除日, div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput()));
                 } else {
-                    if (最新の適用情報.getTekiyoDate() != null
-                            && (div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().isBeforeOrEquals(
-                                    最新の適用情報.getTekiyoDate().getValue()))) {
+                    if (最新の適用情報.getTekiyoDate().getValue() != null
+                            && div.getPanelTekiyoJokaiKaiJyoInput().getTxtKaijoDateInput().getValue().isBeforeOrEquals(
+                                    最新の適用情報.getTekiyoDate().getValue())) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
                 }

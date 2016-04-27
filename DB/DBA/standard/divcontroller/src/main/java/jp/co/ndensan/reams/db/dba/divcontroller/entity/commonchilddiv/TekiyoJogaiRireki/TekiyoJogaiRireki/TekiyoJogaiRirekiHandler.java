@@ -246,7 +246,7 @@ public class TekiyoJogaiRirekiHandler {
         if (状態_適用登録.equals(画面状態)) {
             int 最新履歴番号 = 0;
             Collections.sort(rowList, new DateComparatoRrirekiNo());
-            if (!RString.isNullOrEmpty(rowList.get(0).getRirekiNo())) {
+            if (rowList.size() > 0 && !RString.isNullOrEmpty(rowList.get(0).getRirekiNo())) {
                 最新履歴番号 = Integer.parseInt(rowList.get(0).getRirekiNo().toString());
             }
             RString 履歴番号 = new RString(最新履歴番号 + 1);
