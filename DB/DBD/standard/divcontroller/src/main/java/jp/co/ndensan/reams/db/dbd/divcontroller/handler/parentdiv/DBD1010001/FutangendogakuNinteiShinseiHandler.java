@@ -119,8 +119,8 @@ public class FutangendogakuNinteiShinseiHandler {
             ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new負担限度額認定申請の情報);
             set申請一覧(new負担限度額認定申請の情報);
         }
-        RString 利用者負担段階 = FutangendogakuNinteiService.createInstance().judge利用者負担段階(被保険者番号, 識別コード);
-        div.getTxtRiyoshaFutanDankai().setValue(利用者負担段階);
+        RiyoshaFutanDankai 利用者負担段階 = FutangendogakuNinteiService.createInstance().judge利用者負担段階(被保険者番号, 識別コード);
+        div.getTxtRiyoshaFutanDankai().setValue(利用者負担段階.get名称());
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         AccessLogger.log(AccessLogType.照会,
                 PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"), 拡張情報NAME, 被保険者番号.value())));
