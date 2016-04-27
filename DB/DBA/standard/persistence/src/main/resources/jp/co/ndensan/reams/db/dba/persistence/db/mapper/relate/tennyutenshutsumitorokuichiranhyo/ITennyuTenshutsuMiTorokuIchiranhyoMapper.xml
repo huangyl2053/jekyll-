@@ -205,7 +205,7 @@
             #{item}  
         </foreach>
         </if>
-        AND   #{kaishinichi} <![CDATA[>=]]> DbT1011."torokuIdoYMD" 
+        AND   #{kaishinichi} <![CDATA[<=]]> DbT1011."torokuIdoYMD" 
         AND  DbT1011."torokuIdoYMD" <![CDATA[<=]]> #{syuryonichi}
         ORDER BY
             市町村コード asc
