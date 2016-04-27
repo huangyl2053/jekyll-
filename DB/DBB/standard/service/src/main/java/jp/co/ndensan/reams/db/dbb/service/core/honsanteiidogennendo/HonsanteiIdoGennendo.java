@@ -47,8 +47,11 @@ public class HonsanteiIdoGennendo {
     private final RString twoRS = new RString("2");
     private final RString threeRS = new RString("3");
     private final RString fourRS = new RString("4");
+    private final RString zfourRS = new RString("04");
     private final RString tenRS = new RString("10");
     private final RString twlRS = new RString("12");
+    private final RString twlZRS = new RString("301");
+    private final RString twlTRS = new RString("302");
     private final RString zOneRS = new RString("001");
     private final RString zThrRS = new RString("0003");
     private final RString zFourRS = new RString("0004");
@@ -183,8 +186,9 @@ public class HonsanteiIdoGennendo {
     public List<ShoriDateKanri> getShoriDateKanriList(RString 算定月, FlexibleYear 調定年度,
             RString 遷移元区分) {
         List<DbT7022ShoriDateKanriEntity> entityList = new ArrayList<>();
+        RString 特徴開始月 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         if (zeroRS.equals(遷移元区分)) {
-            if (tenRS.equals(算定月)) {
+            if (tenRS.equals(算定月) && !zfourRS.equals(特徴開始月)) {
                 entityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課,
                         ShoriName.特徴対象者同定.get名称(),
                         処理_枝番, 調定年度, zThrRS);
@@ -226,7 +230,6 @@ public class HonsanteiIdoGennendo {
         kanriEntity = 処理日付管理Dac.selectByFourKeys(SubGyomuCode.DBB介護賦課,
                 ShoriName.異動賦課.get名称(), 処理_枝番, 調定年度);
         if (kanriEntity == null) {
-            //TODO QAのNo.443(Readmine#79693)
             kanriEntity = 処理日付管理Dac.selectBySomeKeysLimits(SubGyomuCode.DBB介護賦課,
                     ShoriName.本算定賦課.get名称(), 処理_枝番,
                     調定年度, 処理_枝番);
@@ -693,13 +696,13 @@ public class HonsanteiIdoGennendo {
     public ChohyoResult getコンビニ期毎出力(ChohyoSeigyoHanyo 帳票タイプを, ChohyoSeigyoHanyo 帳票_コンビニ期毎出力, ReportId 帳票分類ID,
             RString 出力順ID, RString 型N) {
         RString 設定値 = this.get納通連帳区分(型N);
-        if ("301".equals(帳票タイプを.get設定値().toString())) {
+        if (twlZRS.equals(帳票タイプを.get設定値())) {
             if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && zeroRS.equals(設定値)) {
                 return new ChohyoResult(帳票分類ID, hokenryoNonyuMulti, 出力順ID);
             } else if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && oneRS.equals(設定値)) {
                 return new ChohyoResult(帳票分類ID, hokenryoNonyuMultiRencho, 出力順ID);
             }
-        } else if ("302".equals(帳票タイプを.get設定値().toString())) {
+        } else if (twlTRS.equals(帳票タイプを.get設定値())) {
             if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && zeroRS.equals(設定値)) {
                 return new ChohyoResult(帳票分類ID, hokenryoNonyuKakuko, 出力順ID);
             } else if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値()) && oneRS.equals(設定値)) {
