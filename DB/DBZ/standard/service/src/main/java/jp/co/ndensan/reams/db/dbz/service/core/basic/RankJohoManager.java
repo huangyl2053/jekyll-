@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * ランク情報を管理するクラスです。
  *
- * @reamsid_L DBZ-9999-012 zhangrui
+ * @reamsid_L DBZ-9999-022 zhangrui
  */
 public class RankJohoManager {
 
