@@ -15,7 +15,7 @@ import lombok.Setter;
 /**
  * 汎用リスト_高額介護サービス費状況のバッチパラメータクラスです。
  *
- * @reamsid_L DBC-3092-010 zhuliangwei
+ * @reamsid_L DBC-3092-010 sunhui
  */
 @Getter
 @Setter

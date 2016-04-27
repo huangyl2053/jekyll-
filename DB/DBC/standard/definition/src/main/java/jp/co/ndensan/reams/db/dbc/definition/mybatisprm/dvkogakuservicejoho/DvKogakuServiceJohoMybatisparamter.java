@@ -12,7 +12,7 @@ import lombok.Getter;
 /**
  * 汎用リスト_高額介護サービス費状況のMyBatisパラメータクラスです。
  *
- * @reamsid_L DBC-3092-010 zhuliangwei
+ * @reamsid_L DBC-3092-010 sunhui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

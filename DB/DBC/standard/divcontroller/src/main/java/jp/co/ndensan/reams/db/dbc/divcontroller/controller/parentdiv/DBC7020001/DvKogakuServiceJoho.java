@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.dvkogakuservicejoho.DvKoga
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001.DvKogakuServiceJohoHandler;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -20,11 +20,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 汎用リスト_高額介護サービス費状況
  *
- * @reamsid_L DBC-3092-010 zhuliangwei
+ * @reamsid_L DBC-3092-010 sunhui
  */
 public class DvKogakuServiceJoho {
 
-    private static final Code CODE_111 = new Code("111");
     private static final ReportId 帳票ID = new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo");
 
     /**
@@ -36,15 +35,18 @@ public class DvKogakuServiceJoho {
     public ResponseData<DvKogakuServiceJohoDiv> onLoad(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
         handler.initialize();
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance()
+                .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
         panel.getCcdHokenshaList().loadHokenshaList();
-        if (CODE_111.equals(市町村セキュリティ情報.get導入形態コード())) {
-            panel.getCcdHokenshaList().setDisabled(false);
-            panel.getCcdHokenshaList().setVisible(true);
-        } else {
-            panel.getCcdHokenshaList().setDisabled(true);
-            panel.getCcdHokenshaList().setVisible(false);
+        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
+            if (市町村セキュリティ情報.get導入形態コード().is広域()) {
+                panel.getCcdHokenshaList().setDisabled(false);
+                panel.getCcdHokenshaList().setVisible(true);
+            } else {
+                panel.getCcdHokenshaList().setDisabled(true);
+                panel.getCcdHokenshaList().setVisible(false);
+            }
         }
         div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
@@ -65,12 +67,12 @@ public class DvKogakuServiceJoho {
     }
 
     /**
-     * click事件「実行する」ボタン(画面用)
+     * 入力項目チェックです。
      *
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
-    public ResponseData<DvKogakuServiceJohoDiv> click_ExecuteCheck(DvKogakuServiceJohoDiv div) {
+    public ResponseData<DvKogakuServiceJohoDiv> check_methodCheck(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
         ValidationMessageControlPairs pairs = handler.getCheckMessage();
         if (pairs.iterator().hasNext()) {
@@ -80,33 +82,21 @@ public class DvKogakuServiceJoho {
     }
 
     /**
-     * click事件「実行する」ボタン（batch用）
+     * click事件「実行する」ボタンです。
      *
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
-    public ResponseData<DvKogakuServiceJohoBatchParamter> check_batchRegister(DvKogakuServiceJohoDiv div) {
+    public ResponseData<DvKogakuServiceJohoBatchParamter> click_batchRegister(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
         DvKogakuServiceJohoBatchParamter parameter = handler.getBatchParamter();
         return ResponseData.of(parameter).respond();
     }
 
-    /**
-     * createResponseメソッドの設定
-     *
-     * @param div DvKogakuServiceJohoDiv
-     * @return ResponseData
-     */
     private ResponseData<DvKogakuServiceJohoDiv> createResponse(DvKogakuServiceJohoDiv div) {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * Handlerクラスの取得
-     *
-     * @param div DvKogakuServiceJohoDiv
-     * @return DvKogakuServiceJohoHandler
-     */
     private DvKogakuServiceJohoHandler getHandler(DvKogakuServiceJohoDiv div) {
         return DvKogakuServiceJohoHandler.of(div);
     }
