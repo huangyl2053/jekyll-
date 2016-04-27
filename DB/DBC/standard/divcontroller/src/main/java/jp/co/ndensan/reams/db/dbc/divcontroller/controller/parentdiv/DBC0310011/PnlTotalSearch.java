@@ -112,9 +112,9 @@ public class PnlTotalSearch {
             ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
             IName 被保険者名 = finder.get氏名(new HihokenshaNo(被保険者番号));
             if (被保険者名 != null) {
-                div.getPnlSearch().getTxtJigyoshakeiyakuName().setValue(被保険者名.getName().getColumnValue());
+                div.getPnlSearch().getTxtName().setValue(被保険者名.getName().getColumnValue());
             } else {
-                div.getPnlSearch().getTxtJigyoshakeiyakuName().clearValue();
+                div.getPnlSearch().getTxtName().clearValue();
             }
         }
         return ResponseData.of(div).respond();

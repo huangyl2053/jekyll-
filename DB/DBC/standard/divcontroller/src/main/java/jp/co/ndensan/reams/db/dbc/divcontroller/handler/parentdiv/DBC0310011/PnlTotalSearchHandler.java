@@ -185,6 +185,7 @@ public class PnlTotalSearchHandler {
      * @param maxCount Decimal
      */
     public void initializeGrid(List<ShokanJuryoininKeiyakushaResult> shokanList, Decimal maxCount) {
+        div.getPnlKeiyakusyaList().setIsOpen(true);
         div.getPnlSearch().setDisplayNone(true);
         div.getPnlKeiyakusyaList().setDisplayNone(false);
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(false);
