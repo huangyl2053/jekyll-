@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 他特例施設変更通知書発行のバリデーションチェッククラスです。
@@ -41,6 +44,8 @@ public class TatokureiHenkoTsuchishoHakkoHandler {
     private final RString 役場_役所名敬称 = new RString("役場・役所名敬称");
     private final RString 担当課名 = new RString("担当課名");
     private final RString 担当課名敬称 = new RString("担当課名敬称");
+    private static final CodeShubetsu 介護他特適用理由 = new CodeShubetsu("0008");
+    private static final CodeShubetsu 介護他特解除理由 = new CodeShubetsu("0011");
 
     /**
      * コンストラクタです。
@@ -73,10 +78,10 @@ public class TatokureiHenkoTsuchishoHakkoHandler {
 
         Hokenja hokenja = 保険者情報取得(master.getSochiHokenshaNo() == null
                 ? new HokenjaNo(RString.EMPTY) : new HokenjaNo(master.getSochiHokenshaNo().value()));
-        row.setTekiyoJiyu(master.getTekiyoJiyuCode() == null ? RString.EMPTY : master.getTekiyoJiyuCode());
+        row.setTekiyoJiyu(get適用事由(master.getTekiyoJiyuCode()));
         row.getTekiyoDate().setValue(master.getTekiyoYMD() == null ? FlexibleDate.EMPTY : master.getTekiyoYMD());
         row.getTekiyoTodokedeDate().setValue(master.getTekiyoTodokedeYMD() == null ? FlexibleDate.EMPTY : master.getTekiyoTodokedeYMD());
-        row.setKaijoJiyu(master.getKaijoJiyuCode() == null ? RString.EMPTY : master.getKaijoJiyuCode());
+        row.setKaijoJiyu(get解除事由(master.getKaijoJiyuCode()));
         row.getKaijoDate().setValue(master.getKaijoYMD() == null ? FlexibleDate.EMPTY : master.getKaijoYMD());
         row.getKaijoTodokedeDate().setValue(master.getKaijoTodokedeYMD() == null ? FlexibleDate.EMPTY : master.getKaijoTodokedeYMD());
         row.setSochiHokenshaNo(master.getSochiHokenshaNo() == null ? RString.EMPTY : master.getSochiHokenshaNo().value());
@@ -144,13 +149,13 @@ public class TatokureiHenkoTsuchishoHakkoHandler {
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
                 set異動日(new RString(row.getIdoYMD().getValue().toString()));
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().set入所日(new RString(row.getNyushoDate().getValue().toString()));
-        if (row.getRenrakuhyoHakkoDate().getValue().isEmpty()) {
+        if (row.getShisetsuHenkoTuchiHakkoDate().getValue().isEmpty()) {
             div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
                     getCcdPrintContentsSetting().initialize(true, RDate.getNowDate(), true, false, RDate.MAX, false);
         } else {
             div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
                     getCcdPrintContentsSetting().initialize(true, new RDate(row.
-                                    getRenrakuhyoHakkoDate().getValue().toString()), true, false, RDate.MAX, false);
+                                    getShisetsuHenkoTuchiHakkoDate().getValue().toString()), true, false, RDate.MAX, false);
         }
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().setDisabled(false);
     }
@@ -184,5 +189,21 @@ public class TatokureiHenkoTsuchishoHakkoHandler {
 
         ChohyoSeigyoHanyoManager 帳票制御汎用 = new ChohyoSeigyoHanyoManager();
         return 帳票制御汎用.get帳票制御汎用(SubGyomuCode.DBA介護資格, reportId, new FlexibleYear("0000"), 項目名);
+    }
+
+    private RString get適用事由(RString 適用事由コード) {
+        if (適用事由コード == null || 適用事由コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return CodeMaster.getCodeMeisho(介護他特適用理由, new Code(適用事由コード)) == null
+                ? RString.EMPTY : CodeMaster.getCodeMeisho(介護他特適用理由, new Code(適用事由コード));
+    }
+
+    private RString get解除事由(RString 解除事由コード) {
+        if (解除事由コード == null || 解除事由コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return CodeMaster.getCodeMeisho(介護他特解除理由, new Code(解除事由コード)) == null
+                ? RString.EMPTY : CodeMaster.getCodeMeisho(介護他特解除理由, new Code(解除事由コード));
     }
 }
