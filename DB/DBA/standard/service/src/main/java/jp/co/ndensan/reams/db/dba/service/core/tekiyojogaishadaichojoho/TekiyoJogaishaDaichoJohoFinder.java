@@ -206,8 +206,8 @@ public class TekiyoJogaishaDaichoJohoFinder {
         for (int i = 0; i < shisetuJyohoList.size(); i++) {
             TekiyoJogaiShisetuJyohoRelateEntity entity = shisetuJyohoList.get(i);
             entity.set連番(i + 1);
-            RString 適用除外適用事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0119"), new Code(entity.get適用除外適用事由コード()));
-            RString 適用除外解除事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0123"), new Code(entity.get適用除外解除事由コード()));
+            RString 適用除外適用事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0009"), new Code(entity.get適用除外適用事由コード()));
+            RString 適用除外解除事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0012"), new Code(entity.get適用除外解除事由コード()));
             entity.set適用除外適用事由名称(RString.EMPTY);
             entity.set適用除外解除事由名称(RString.EMPTY);
             if (適用除外適用事由名称 != null && !適用除外適用事由名称.isEmpty()) {
@@ -225,6 +225,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
             UaFt200FindShikibetsuTaishoEntity 宛名情報PSM) {
         List<TekiyoJogaishaDaichoJoho> daichoJohoList = new ArrayList<>();
         適用除外者台帳情報Entity.set印刷日時(get印刷日時());
+        適用除外者台帳情報Entity.setタイトル(new RString("介護保険　適用除外者台帳"));
         適用除外者台帳情報Entity.set状態(状態);
         適用除外者台帳情報Entity.set生年月日(nullToEmpty(宛名情報PSM.getSeinengappiYMD()));
         if (性別_男.equals(宛名情報PSM.getSeibetsuCode())) {
