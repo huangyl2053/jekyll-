@@ -41,12 +41,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBA-1120-030 houtianpeng
  */
 public class RoUReiFuKuShiNenKin {
+
     private static final LockingKey LOCKINGKEY = new LockingKey(new RString("RoreiFukushiNenkin"));
     private static final QuestionMessage HOZONMESSAGE = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
             UrQuestionMessages.保存の確認.getMessage().evaluate());
 
     /**
-     * 老齢福祉年金受給者管理を画面初期化処理しました。
+     * 画面の初期化処理。
      *
      * @param div RoUReiFuKuShiNenKinDiv
      * @return ResponseData<RoUReiFuKuShiNenKinDiv>
