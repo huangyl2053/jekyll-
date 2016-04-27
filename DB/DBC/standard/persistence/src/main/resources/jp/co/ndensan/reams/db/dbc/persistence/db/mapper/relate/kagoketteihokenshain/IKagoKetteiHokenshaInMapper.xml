@@ -281,7 +281,7 @@
     <update id="update保険者分情報_明細">
         UPDATE "TEMP_TABLE_KagoKetteiTsuchishoJyohoHokenshabunMeisai" AS A
         SET "hiHokenshaNo"=B."shinNo" 
-        FROM "TEMP_TABLE_Shihihokenshabango" AS B,
+        FROM "TEMP_TABLE_Shihihokenshabango" AS B
         WHERE A."hiHokenshaNo"=B."kyuNo"
     </update>
     
@@ -332,7 +332,8 @@
         <result property="特定入所者介護サービス費等の保険者負担額" column="tokuteiNyushoshaServicehiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
-    <select id="select一時テーブル" resultMap="resultMap_KagoKetteiHokenshaInEntity" fetchSize="500">
+    <select id="select一時テーブル" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteihokenshain.KagoKetteiHokenshaInMybatisParameter"
+            resultMap="resultMap_KagoKetteiHokenshaInEntity" fetchSize="500">
         SELECT Meisai."toriatsukaiYM",
                Meisai."shokisaiHokenshaNo",
                Meisai."shokisaiHokenshaNa",
@@ -364,7 +365,9 @@
         AND Meisai."shokisaiHokenshaNa" = Shukei."shokisaiHokenshaNa"
         AND Meisai."sakuseiYMD" = Shukei."sakuseiYMD"
         AND Meisai."kokukoRengoukaiNa" = Shukei."kokukoRengoukaiNa"
-        ORDER BY Meisai."kokanShikibetsuNo"
+        <if test="outputOrderBy != null">
+        ORDER BY ${outputOrderBy}
+        </if>
         
     </select>
 </mapper>
