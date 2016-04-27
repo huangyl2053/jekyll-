@@ -22,9 +22,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 public class ShinsaHanteiJokyo {
 
     /**
-     * 要介護認定調査票差異チェック票を印刷します。
+     * 介護認定審査会判定状況表票を印刷します。
      *
-     * @param itemList 要介護認定調査票差異チェック票作成_帳票クラスパラメータクラス
+     * @param itemList 介護認定審査会判定状況表票作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection print(List<ShinsaHanteiJokyoItem> itemList) {
