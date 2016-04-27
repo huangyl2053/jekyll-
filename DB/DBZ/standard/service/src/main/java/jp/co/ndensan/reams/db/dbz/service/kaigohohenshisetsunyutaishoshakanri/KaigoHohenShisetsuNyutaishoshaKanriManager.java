@@ -119,7 +119,7 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
     public SearchResult<ShisetsuNyutaisho> get介護保険施設入退所一覧By識別コードと台帳種別(ShikibetsuCode 識別コード, RString 台帳種別) {
         IKaigoHohenShisetsuMapper mapper = mapperProvider.create(IKaigoHohenShisetsuMapper.class);
         List<ShisetsuNyutaisho> businessList = new ArrayList<>();
-        List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper.getShiSeTsuJyoHon_A(new KaigoHohenShisetsuMybatisParameter(識別コード, 台帳種別));
+        List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper.getShiSeTsuJyoHon_I(new KaigoHohenShisetsuMybatisParameter(識別コード, 台帳種別));
         for (DbT1004ShisetsuNyutaishoEntity entity : entityList) {
             entity.initializeMd5();
             businessList.add(new ShisetsuNyutaisho(entity));
