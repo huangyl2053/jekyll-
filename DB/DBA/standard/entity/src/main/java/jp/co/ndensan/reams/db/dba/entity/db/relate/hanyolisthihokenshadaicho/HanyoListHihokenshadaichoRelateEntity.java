@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisthihokenshadaicho;
 
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,4 +35,5 @@ public class HanyoListHihokenshadaichoRelateEntity {
     private boolean koikinaiJushochiTokureiFlag;
     private LasdecCode koikinaiTokureiSochimotoShichosonCode;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
+    private UaFt250FindAtesakiEntity atesakiEntity;
 }

@@ -19,6 +19,7 @@
         <result property="koikinaiJushochiTokureiFlag" column="DbT1001_koikinaiJushochiTokureiFlag"/>
         <result property="koikinaiTokureiSochimotoShichosonCode" column="DbT1001_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     <select id="get汎用リスト被保険者台帳データの取得" resultMap="resultMap_HanyoListHihokenshadaichoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoMyBatisParameter" fetchSize="500">
@@ -36,6 +37,7 @@
             DbT1001."koikinaiJushochiTokureiFlag" AS "DbT1001_koikinaiJushochiTokureiFlag",
             DbT1001."koikinaiTokureiSochimotoShichosonCode" AS "DbT1001_koikinaiTokureiSochimotoShichosonCode",
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+           , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
         FROM rgdb."DbT1001HihokenshaDaicho" As DbT1001
         <if test="isEmpty">
         LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
@@ -76,6 +78,8 @@
             AND "ShikibetsuTaisho"."chikuCode1"  <![CDATA[>=]]> #{psmChiku1_From}
             AND "ShikibetsuTaisho"."chikuCode1"  <![CDATA[<=]]> #{psmChiku1_To}
         </if>
+        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode" = DbT1001."shikibetsuCode"
         WHERE 1 = 1
         <if test="is直近">
             AND DbT1001."hihokenshaNo" IN ( SELECT dbT1001."hihokenshaNo"
