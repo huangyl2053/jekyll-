@@ -14,7 +14,6 @@ import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.Config
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.JogaishaTorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.dgNenreiTotatshusha_Row;
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShi
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -298,8 +296,6 @@ public class JogaishaTorokuHandler {
      *
      */
     public void アクセスログ() {
-        TaishoshaKey key2 = new TaishoshaKey(new HihokenshaNo(""), new ShikibetsuCode("000000000000010"), SetaiCode.EMPTY);
-        ViewStateHolder.put(ViewStateKeys.資格対象者, key2);
         AccessLogger.log(AccessLogType.照会, toPersonalData(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード()));
         AccessLogger.log(AccessLogType.照会, withPersonalData(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード()));
     }
