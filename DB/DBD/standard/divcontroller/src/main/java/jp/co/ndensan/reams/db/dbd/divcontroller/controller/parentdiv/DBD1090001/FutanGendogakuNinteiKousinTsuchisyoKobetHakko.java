@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.definition.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.DBD1090001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoValidationHandler;
@@ -42,7 +43,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      */
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onLoad(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
         // TODO テストデータ準備
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, new HihokenshaNo("L000000016"));
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, new HihokenshaNo("1000000001"));
         ViewStateHolder.put(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, new ShikibetsuCode("210000000000011"));
 
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, HihokenshaNo.class);
@@ -75,6 +76,10 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
             if (1 == futanGendogakuNinteiList.size()) {
                 div.getBtnGoRireki().setDisabled(true);
             }
+        } else {
+            div.setListIndex(new RString("0"));
+            div.getBtnZenRireki().setDisabled(true);
+            div.getBtnGoRireki().setDisabled(true);
         }
         getHandler(div).setアクセスログ(被保険者番号, 識別コード);
 
@@ -193,6 +198,16 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
                 被保険者番号, 識別コード, Integer.valueOf(div.getRirekiNo().toString()), 発行日, 文書番号, お知らせ通知書, 申請書);
 
         return ResponseData.of(sourceDataCollection).respond();
+    }
+
+    /**
+     * 「発行」ボタンをクリックする
+     *
+     * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnReturn(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBD1090001TransitionEventName.検索に戻る).respond();
     }
 
     /**
