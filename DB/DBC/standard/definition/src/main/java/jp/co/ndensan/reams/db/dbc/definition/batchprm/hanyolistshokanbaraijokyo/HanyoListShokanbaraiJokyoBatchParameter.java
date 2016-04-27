@@ -77,9 +77,9 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
     @BatchParameter(key = KETTEIDATETO, name = "決定日To")
     private FlexibleDate 決定日To;
     @BatchParameter(key = SOFUYMFROM, name = "国保連送付年月From")
-    private FlexibleDate 国保連送付年月From;
+    private FlexibleYearMonth 国保連送付年月From;
     @BatchParameter(key = SOFUYMTO, name = "国保連送付年月To")
-    private FlexibleDate 国保連送付年月To;
+    private FlexibleYearMonth 国保連送付年月To;
     @BatchParameter(key = YOSHIKINOCH, name = "様式番号選択")
     private RString 様式番号選択;
     @BatchParameter(key = YOSHIKINO, name = "様式番号")

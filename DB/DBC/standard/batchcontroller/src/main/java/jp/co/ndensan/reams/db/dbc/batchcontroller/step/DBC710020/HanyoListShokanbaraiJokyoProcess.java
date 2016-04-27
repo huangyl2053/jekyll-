@@ -130,8 +130,6 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void createWriter() {
-        連番 = Decimal.ONE;
-        dataCreate = new HanyoListCsvDataCreate();
         RDate システム日時 = RDate.getNowDate();
         文字コード = DbBusinessConifg.get(ConfigNameDBU.EUC共通_文字コード, システム日時, SubGyomuCode.DBU介護統計報告);
         if (CODE_1.equals(文字コード)) {
