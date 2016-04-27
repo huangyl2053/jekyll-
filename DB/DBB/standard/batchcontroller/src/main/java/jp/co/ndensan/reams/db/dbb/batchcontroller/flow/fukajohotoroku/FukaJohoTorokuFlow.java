@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.fukajohotoroku;
 
+import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.fukajohotoroku.FukaJohoHenshuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.fukajohotoroku.FukaJohoInsertProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -18,9 +20,14 @@ public class FukaJohoTorokuFlow extends BatchFlowBase<FukaJohoTorokuBatchParamet
     @Override
     protected void defineFlow() {
         executeStep(HENSHU_PROCESS);
-        executeStep(CALL_CHOTEITOROKU_FLOW);
+        //TODO 内部QA1119　DBでrgdb.UrT0772KamokubetsuKoyuJohoがない
+        //executeStep(CALL_CHOTEITOROKU_FLOW);
+        //TODO　QA1123　DB登録する場合、エラーが発生
+        executeStep(FUKAJOHOINSERTPROCESS);
     }
+
     private static final String HENSHU_PROCESS = "fukaJohoHenshuProcess";
+    private static final String FUKAJOHOINSERTPROCESS = "fukaJohoInsertProcess";
 
     /**
      * 賦課の情報を一括登録事前データを編集します。
@@ -32,7 +39,6 @@ public class FukaJohoTorokuFlow extends BatchFlowBase<FukaJohoTorokuBatchParamet
         return loopBatch(FukaJohoHenshuProcess.class).arguments(getParameter()
                 .toFukaJohoHenshuProcessParameter()).define();
     }
-//  TODO QA954-#79926 URで提供される調定登録(バッチ)不明 王暁冬 2013/03/24
     private static final String CALL_CHOTEITOROKU_FLOW = "ChoteiTorokuFlow";
     private static final RString BATCH_ID = new RString("ChoteiTorokuFlow");
 
@@ -43,6 +49,19 @@ public class FukaJohoTorokuFlow extends BatchFlowBase<FukaJohoTorokuBatchParamet
      */
     @Step(CALL_CHOTEITOROKU_FLOW)
     protected IBatchFlowCommand callChoteiTorokuFlow() {
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, null).define();
+        ChoteiTorokuParameter choteiTorokuParameter = new ChoteiTorokuParameter();
+        choteiTorokuParameter.setSchema(new RString("rgdb"));
+        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, choteiTorokuParameter).define();
+    }
+
+    /**
+     * 賦課の情報を一括登録します。
+     *
+     * @return FukaJohoInsertProcess
+     */
+    @Step(FUKAJOHOINSERTPROCESS)
+    protected IBatchFlowCommand callFukaJohoInsertProcess() {
+        return loopBatch(FukaJohoInsertProcess.class).arguments(getParameter()
+                .toFukaJohoHenshuProcessParameter()).define();
     }
 }

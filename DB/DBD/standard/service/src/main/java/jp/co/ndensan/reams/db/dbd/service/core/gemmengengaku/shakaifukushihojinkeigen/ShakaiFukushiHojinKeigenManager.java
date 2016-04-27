@@ -15,6 +15,11 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGeng
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenManager;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -163,6 +168,13 @@ public class ShakaiFukushiHojinKeigenManager {
         ShakaifukuRiyoshaFutanKeigenBuilder builder = 修正社会福祉法人等利用者負担軽減情報.createBuilderForEdit();
         edit修正社会福祉法人等利用者負担軽減情報(社会福祉法人等利用者負担軽減情報, builder, メニューID);
         List<GemmenGengakuShinsei> 減免減額申請リスト = 修正社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList();
+        if (減免減額申請リスト.isEmpty()) {
+            減免減額申請リスト.add(new GemmenGengakuShinsei(
+                    修正社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
+                    修正社会福祉法人等利用者負担軽減情報.get被保険者番号(),
+                    GemmenGengakuShurui.社会福祉法人等軽減.getコード(),
+                    修正社会福祉法人等利用者負担軽減情報.get履歴番号()));
+        }
         builder.setGemmenGengakuShinsei(get修正減免減額申請(
                 社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList().get(0),
                 減免減額申請リスト.get(0)));
@@ -200,34 +212,51 @@ public class ShakaiFukushiHojinKeigenManager {
         }
     }
 
-    private GemmenGengakuShinsei get修正減免減額申請(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 減免減額申請FromDb) {
+    private GemmenGengakuShinsei get修正減免減額申請(
+            GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 減免減額申請FromDb) {
         GemmenGengakuShinseiBuilder builder = 減免減額申請FromDb.createBuilderForEdit();
         if (減免減額申請.get事業者区分() != null) {
             builder.set事業者区分(減免減額申請.get事業者区分());
+        } else {
+            builder.set事業者区分(RString.EMPTY);
         }
-        if (減免減額申請.get申請届出代行事業者番号() != null) {
+        if (減免減額申請.get申請届出代行事業者番号() != null && !減免減額申請.get申請届出代行事業者番号().isEmpty()) {
             builder.set申請届出代行事業者番号(減免減額申請.get申請届出代行事業者番号());
         }
         if (減免減額申請.get申請届出代行区分() != null) {
             builder.set申請届出代行区分(減免減額申請.get申請届出代行区分());
+        } else {
+            builder.set申請届出代行区分(RString.EMPTY);
         }
         if (減免減額申請.get申請届出者住所() != null) {
             builder.set申請届出者住所(減免減額申請.get申請届出者住所());
+        } else {
+            builder.set申請届出者住所(AtenaJusho.EMPTY);
         }
         if (減免減額申請.get申請届出者氏名() != null) {
             builder.set申請届出者氏名(減免減額申請.get申請届出者氏名());
+        } else {
+            builder.set申請届出者氏名(AtenaMeisho.EMPTY);
         }
         if (減免減額申請.get申請届出者氏名カナ() != null) {
             builder.set申請届出者氏名カナ(減免減額申請.get申請届出者氏名カナ());
+        } else {
+            builder.set申請届出者氏名カナ(AtenaKanaMeisho.EMPTY);
         }
         if (減免減額申請.get申請届出者続柄() != null) {
             builder.set申請届出者続柄(減免減額申請.get申請届出者続柄());
+        } else {
+            builder.set申請届出者続柄(RString.EMPTY);
         }
         if (減免減額申請.get申請届出者郵便番号() != null) {
             builder.set申請届出者郵便番号(減免減額申請.get申請届出者郵便番号());
+        } else {
+            builder.set申請届出者郵便番号(YubinNo.EMPTY);
         }
         if (減免減額申請.get申請届出者電話番号() != null) {
             builder.set申請届出者電話番号(減免減額申請.get申請届出者電話番号());
+        } else {
+            builder.set申請届出者電話番号(TelNo.EMPTY);
         }
         return builder.build();
     }

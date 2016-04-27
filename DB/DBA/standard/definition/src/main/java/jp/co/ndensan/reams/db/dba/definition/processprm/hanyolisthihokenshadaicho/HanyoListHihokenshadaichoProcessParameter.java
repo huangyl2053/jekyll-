@@ -57,6 +57,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
     private final RString psmChiku3_From;
     private final RString psmChiku3_To;
     private RString psmShikibetsuTaisho;
+    private RString psmAtesaki;
 
     /**
      * コンストラクタです。
@@ -209,6 +210,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
                 psmChiku2_To,
                 psmChiku3_From,
                 psmChiku3_To,
-                psmShikibetsuTaisho);
+                psmShikibetsuTaisho,
+                psmAtesaki);
     }
 }

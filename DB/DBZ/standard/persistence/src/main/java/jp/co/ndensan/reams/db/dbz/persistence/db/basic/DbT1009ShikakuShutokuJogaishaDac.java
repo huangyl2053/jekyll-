@@ -73,6 +73,25 @@ public class DbT1009ShikakuShutokuJogaishaDac implements ISaveable<DbT1009Shikak
     }
 
     /**
+     * 履歴番号を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1009ShikakuShutokuJogaishaEntity
+     */
+    @Transaction
+    public DbT1009ShikakuShutokuJogaishaEntity select履歴番号(ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1009ShikakuShutokuJogaisha.class).
+                where(
+                        eq(shikibetsuCode, 識別コード)).
+                order(by(rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1009ShikakuShutokuJogaishaEntity.class);
+    }
+
+    /**
      * DbT1009ShikakuShutokuJogaishaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

@@ -41,7 +41,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
      *
      * @param businessList 償還払支給（不支給）決定通知一覧表Entityリスト
      * @param batchPram バッチパラメータ
-     * @return 伝送データEntity
+     * @return List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
      */
     public List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem>
             getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(List<ShokanKetteiTsuchiShoShiharai> businessList,
@@ -93,7 +93,7 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
             ichiranItem.setPrintTimeStamp(get作成日時分秒());
             ichiranItem.setSeiriNo(shoShiharaiList.get整理番号());
             ichiranItem.setKeteiTsuchiNo(shoShiharaiList.get決定通知No());
-            ichiranItem.setHihokenshaNo(new RString(shoShiharaiList.get被保険者番号().toString()));
+            ichiranItem.setHihokenshaNo(shoShiharaiList.get被保険者番号().value());
             ichiranItem.setHihokenshaName(shoShiharaiList.get被保険者氏名());
             ichiranItem.setJusho(shoShiharaiList.get住所());
             ichiranItem.setYubinBango(getEditedYubinNo(shoShiharaiList.get郵便番号()));
@@ -101,23 +101,27 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
-            // TODO 要介護度 QA1106
+            // QA1106 要介護度取得。
             ichiranItem.setNinteiKaishibi(共通ポリシfomart(shoShiharaiList.get認定開始日()));
             ichiranItem.setNinteiShuryobi(共通ポリシfomart(shoShiharaiList.get認定終了日()));
             ichiranItem.setUketsukeYMD(共通ポリシfomart(shoShiharaiList.get受付年月日()));
             ichiranItem.setKeteiYMD(共通ポリシfomart(shoShiharaiList.get決定年月日()));
             ichiranItem.setHonjinShiharaigaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
             ichiranItem.setShikyugaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
-            ichiranItem.setYoshikigotoKingaku(shoShiharaiList.get様式名称());
             RStringBuilder nituliki = new RStringBuilder();
+            nituliki.append(shoShiharaiList.get様式名称());
             nituliki.append(new RString("("));
             nituliki.append(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get金額(), 1));
             nituliki.append(new RString(")"));
             ichiranItem.setYoshikigotoKingaku(nituliki.toRString());
             ichiranItem.setTuika(RString.EMPTY);
             ichiranItem.setShurui(shoShiharaiList.get種類());
-            ichiranItem.setKeteiKubun(new RString(ShikyuFushikyuKubun.toValue(shoShiharaiList.get支給不支給決定区分()).get名称().toString()));
-            ichiranItem.setShiharaiHoho(new RString(ShiharaiHohoKubun.toValue(shoShiharaiList.get支払方法区分コード()).get名称().toString()));
+            if (!RString.isNullOrEmpty(shoShiharaiList.get支給不支給決定区分())) {
+                ichiranItem.setKeteiKubun(new RString(ShikyuFushikyuKubun.toValue(shoShiharaiList.get支給不支給決定区分()).get名称().toString()));
+            }
+            if (!RString.isNullOrEmpty(shoShiharaiList.get支払方法区分コード())) {
+                ichiranItem.setShiharaiHoho(new RString(ShiharaiHohoKubun.toValue(shoShiharaiList.get支払方法区分コード()).get名称().toString()));
+            }
             tsuchiIchiranItemsList.add(ichiranItem);
         }
         return tsuchiIchiranItemsList;
