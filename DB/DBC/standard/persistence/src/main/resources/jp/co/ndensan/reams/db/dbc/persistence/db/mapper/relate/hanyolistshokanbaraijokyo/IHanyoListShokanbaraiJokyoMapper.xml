@@ -121,7 +121,7 @@
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
         Where 1 = 1
-<!--        <if test="サービス提供年月From != null">
+        <if test="サービス提供年月From != null">
             AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM"<![CDATA[>=]]>#{サービス提供年月From}
         </if>
         <if test="サービス提供年月To != null">
@@ -182,7 +182,7 @@
         </if>
         <if test="処理状況 == 7">
             AND UaT0310."kinyuKikanCode"<![CDATA[=]]>#{金融機関コード}
-        </if>-->
+        </if>
         <!--様式番号-->
     </sql>
         

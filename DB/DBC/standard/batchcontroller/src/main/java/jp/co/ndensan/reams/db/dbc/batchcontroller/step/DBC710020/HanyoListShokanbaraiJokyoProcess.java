@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710020;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.hanyolistsyokanbaraijyokyo.HanyoListCsvDataCreate;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvDataCreate;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -158,7 +158,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 連番, 地方公共団体, 保険者リスト));
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 連番, 保険者リスト));
         連番 = 連番.add(Decimal.ONE);
         personalDataList.add(toPersonalData(entity));
     }

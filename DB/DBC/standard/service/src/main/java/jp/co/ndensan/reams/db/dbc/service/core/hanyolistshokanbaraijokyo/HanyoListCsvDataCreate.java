@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.hanyolistsyokanbaraijyokyo;
+package jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
@@ -44,13 +44,12 @@ public class HanyoListCsvDataCreate {
      * @param entity HanyoListShokanbaraiJokyoEntity
      * @param parameter HanyoListShokanbaraiJokyoProcessParameter
      * @param 連番 Decimal
-     * @param 地方公共団体 Association
      * @param 保険者リスト HokenshaList
      * @return HanyoListShokanbaraiJokyoCSVEntity
      */
     public HanyoListShokanbaraiJokyoCSVEntity createCsvData(HanyoListShokanbaraiJokyoEntity entity,
             HanyoListShokanbaraiJokyoProcessParameter parameter, Decimal 連番,
-            Association 地方公共団体, HokenshaList 保険者リスト) {
+            HokenshaList 保険者リスト) {
         HanyoListShokanbaraiJokyoCSVEntity csvEntity = new HanyoListShokanbaraiJokyoCSVEntity();
         if (parameter.is連番付加()) {
             csvEntity.set連番(numToRString(連番));
@@ -355,8 +354,8 @@ public class HanyoListCsvDataCreate {
                     ? RString.EMPTY : entity.get支給申請Entity().getSofuYM().toDateString());
             csvEntity.set申請状態(entity.get支給申請Entity().getKaishuShinseiKubun());
             csvEntity.set施行完了予定日(dataToRString(entity.get支給住宅Entity().getSekoKanryoYoteiYMD()));
-//            RString 申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
-//                    new Code(entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode()), FlexibleDate.getNowDate());
+            RString 申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
+                    new Code(entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode()), FlexibleDate.getNowDate());
             csvEntity.set申請取消事由(RString.EMPTY);
             csvEntity.set支給届出年月日(dataToRString(entity.get支給申請Entity().getShinseiYMD()));
             csvEntity.set支給受付年月日(dataToRString(entity.get支給申請Entity().getUketsukeYMD()));
@@ -397,9 +396,7 @@ public class HanyoListCsvDataCreate {
                 || entity.get市町村コード().isEmpty()
                 ? RString.EMPTY : entity.get市町村コード().getColumnValue());
         Association association = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
-        if (association != null) {
-            csvEntity.set市町村名(association.get市町村名());
-        }
+        csvEntity.set市町村名(association.get市町村名());
         //TODO
         csvEntity.set保険者コード(RString.EMPTY);
         csvEntity.set保険者名(RString.EMPTY);
@@ -416,9 +413,7 @@ public class HanyoListCsvDataCreate {
         csvEntity.set資格喪失届出日(dataToRString(entity.get資格喪失届出年月日()));
         csvEntity.set資格区分(entity.get被保険者区分コード());
         csvEntity.set住所地特例状態(entity.is住所地特例フラグ() ? new RString("住特") : RString.EMPTY);
-        //TODO
-        //csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity, 保険者リスト));
-        csvEntity.set資格証記載保険者番号(RString.EMPTY);
+        csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity, 保険者リスト));
         csvEntity.set受給申請事由(codeToRString(entity.get受給申請事由()));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日()));
         csvEntity.set受給要介護度(codeToRString(entity.get要介護認定状態区分コード()));
