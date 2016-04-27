@@ -115,7 +115,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         Collections.sort(businessList, new Comparator<ShokanKetteiTsuchiShoShiharai>() {
             @Override
             public int compare(ShokanKetteiTsuchiShoShiharai o1, ShokanKetteiTsuchiShoShiharai o2) {
-                return o1.get被保険者番号().compareTo(o2.get被保険者番号());
+                return getJufukuKey(o1).compareTo(getJufukuKey(o2));
             }
         });
         return 伝送データ作成(businessList, batchPram, reportSourceWriter);
@@ -245,10 +245,10 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
 
     private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
         RStringBuilder key = new RStringBuilder();
-        key.append(shiharai.get提供年月().wareki().toDateString());
-        key.append(shiharai.get整理番号());
         key.append(shiharai.get被保険者番号().value());
+        key.append(shiharai.get提供年月().wareki().toDateString());
         key.append(shiharai.getサービス種類コード());
+        key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
         return key.toRString();
     }
 
