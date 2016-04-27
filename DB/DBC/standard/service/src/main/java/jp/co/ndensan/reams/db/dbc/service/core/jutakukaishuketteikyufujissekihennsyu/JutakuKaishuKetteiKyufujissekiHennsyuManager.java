@@ -66,6 +66,21 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final FlexibleYearMonth 平成２７年４月 = new FlexibleYearMonth("201504");
+    private static final RString 宛名識別対象 = new RString("宛名識別対象");
+    private static final RString 認定有効期間 = new RString("認定有効期間");
+    private static final RString DATA_01 = new RString("01");
+    private static final RString DATA_2 = new RString("2");
+    private static final RString DATA_08 = new RString("08");
+    private static final RString DATA_10 = new RString("10");
+    private static final RString フォーマット = new RString("%04d");
+    private static final RString DATA_1131 = new RString("1131");
+    private static final RString DATA_1132 = new RString("1132");
+    private static final RString DATA_1133 = new RString("1133");
+    private static final RString DATA_1134 = new RString("1134");
+    private static final RString DATA_1135 = new RString("1135");
+    private static final RString DATA_1136 = new RString("1136");
+    private static final RString DATA_1137 = new RString("1137");
+    private static final RString DATA_1138 = new RString("1138");
 
     JutakuKaishuKetteiKyufujissekiHennsyuManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
@@ -110,15 +125,16 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         DealKyufujissekiEntity 宛名 = mapper.get宛名(parameter);
         if (宛名 == null) {
             throw new ApplicationException(UrErrorMessages.存在しない
-                    .getMessage().replace("宛名識別対象").evaluate());
+                    .getMessage().replace(宛名識別対象.toString()).evaluate());
         }
+
         HihokenshaNo 被保険者番号 = 償還払請求集計Entity.getHiHokenshaNo();
         FlexibleYearMonth サービス提供年月 = 償還払請求集計Entity.getServiceTeikyoYM();
         DbT4001JukyushaDaichoEntity 受給者台帳entity = 受給者台帳Dac
                 .select受給者台帳情報(被保険者番号, サービス提供年月);
         if (受給者台帳entity == null) {
             throw new ApplicationException(UrErrorMessages.存在しない
-                    .getMessage().replace("認定有効期間").evaluate());
+                    .getMessage().replace(認定有効期間.toString()).evaluate());
         }
         KokanShikibetsuNo 交換情報識別番号 = null;
         交換情報識別番号 = getKokanShikibetsuNo(サービス提供年月, 交換情報識別番号);
@@ -126,14 +142,21 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         給付実績基本entity.setKokanShikibetsuNo(交換情報識別番号);
-        給付実績基本entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本Entity.getYoshikiNo()));
-        給付実績基本entity.setRecodeShubetsuCode(new RString("01"));
+        if (償還払請求基本Entity != null) {
+            給付実績基本entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本Entity.getYoshikiNo()));
+            給付実績基本entity.setJigyoshoNo(償還払請求基本Entity.getJigyoshaNo());
+            給付実績基本entity.setHiHokenshaNo(償還払請求基本Entity.getHiHokenshaNo());
+            給付実績基本entity.setServiceTeikyoYM(償還払請求基本Entity.getServiceTeikyoYM());
+            給付実績基本entity.setHokenKyufuritsu(償還払請求基本Entity.getHokenKyufuritsu());
+            給付実績基本entity.setMaeHokenServiceTanisu(償還払請求基本Entity.getServiceTanisu());
+            給付実績基本entity.setMaeHokenSeikyugaku(償還払請求基本Entity.getHokenSeikyugaku());
+            給付実績基本entity.setMaeHokenRiyoshaFutangaku(償還払請求基本Entity.getRiyoshaFutangaku());
+            給付実績基本entity.setSeiriNo(償還払請求基本Entity.getSeiriNo());
+        }
+        給付実績基本entity.setRecodeShubetsuCode(DATA_01);
         給付実績基本entity.setKyufuSakuseiKubunCode(給付実績編集汎用Entity.getKyufuSakuseiKubunCode());
         給付実績基本entity.setShokisaiHokenshaNo(給付実績編集汎用Entity.getShoKisaiHokenshaNo());
-        給付実績基本entity.setHiHokenshaNo(償還払請求基本Entity.getHiHokenshaNo());
-        給付実績基本entity.setServiceTeikyoYM(償還払請求基本Entity.getServiceTeikyoYM());
-        給付実績基本entity.setKyufuJissekiKubunCode(new RString("2"));
-        給付実績基本entity.setJigyoshoNo(償還払請求基本Entity.getJigyoshaNo());
+        給付実績基本entity.setKyufuJissekiKubunCode(DATA_2);
         給付実績基本entity.setToshiNo(通し番号);
         給付実績基本entity.setUmareYMD(宛名.get生年月日());
         給付実績基本entity.setSeibetsuCode(宛名.get性別コード());
@@ -143,12 +166,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         }
         給付実績基本entity.setNinteiYukoKaishiYMD(受給者台帳entity.getNinteiYukoKikanKaishiYMD());
         給付実績基本entity.setNinteiYukoShuryoYMD(受給者台帳entity.getNinteiYukoKikanShuryoYMD());
-        給付実績基本entity.setHokenKyufuritsu(償還払請求基本Entity.getHokenKyufuritsu());
-        給付実績基本entity.setMaeHokenServiceTanisu(償還払請求基本Entity.getServiceTanisu());
-        給付実績基本entity.setMaeHokenSeikyugaku(償還払請求基本Entity.getHokenSeikyugaku());
-        給付実績基本entity.setMaeHokenRiyoshaFutangaku(償還払請求基本Entity.getRiyoshaFutangaku());
         給付実績基本entity.setShinsaYM(給付実績編集汎用Entity.getShinsaYM());
-        給付実績基本entity.setSeiriNo(償還払請求基本Entity.getSeiriNo());
         給付実績基本entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);
         給付実績基本entity.setState(EntityDataState.Added);
         給付実績基本Dac.save(給付実績基本entity);
@@ -158,32 +176,32 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         for (int i = 0; i < 償還払請求住宅改修リスト.size(); i++) {
             給付実績住宅改修費entity.setKokanJohoShikibetsuNo(給付実績基本entity.getKokanShikibetsuNo());
             給付実績住宅改修費entity.setInputShikibetsuNo(給付実績基本entity.getInputShikibetsuNo());
-            給付実績住宅改修費entity.setRecodeShubetsuCode(new RString("08"));
+            給付実績住宅改修費entity.setRecodeShubetsuCode(DATA_08);
             給付実績住宅改修費entity.setShokisaiHokenshaNo(給付実績基本entity.getShokisaiHokenshaNo());
             給付実績住宅改修費entity.setHiHokenshaNo(給付実績基本entity.getHiHokenshaNo());
             給付実績住宅改修費entity.setServiceTeikyoYM(給付実績基本entity.getServiceTeikyoYM());
             給付実績住宅改修費entity.setJigyoshoNo(給付実績基本entity.getJigyoshoNo());
             給付実績住宅改修費entity.setToshiNo(給付実績基本entity.getToshiNo());
-            RString meisaiNo = new RString(String.format("%04d", i + 1));
+            RString meisaiNo = new RString(String.format(フォーマット.toString(), i + 1));
             給付実績住宅改修費entity.setMeisaiNo(meisaiNo);
-            ServiceCode サービスコード = 償還払請求住宅改修リスト.get(i).getServiceCode();
-            if (サービスコード != null) {
-                給付実績住宅改修費entity.setServiceCode(サービスコード);
+            if (!償還払請求住宅改修リスト.isEmpty()) {
+                ServiceCode サービスコード = 償還払請求住宅改修リスト.get(i).getServiceCode();
+                if (サービスコード != null) {
+                    給付実績住宅改修費entity.setServiceCode(サービスコード);
+                }
+                FlexibleDate 住宅改修着工年月日 = 償還払請求住宅改修リスト.get(i).getJutakuKaishuChakkoYMD();
+                if (住宅改修着工年月日 != null) {
+                    給付実績住宅改修費entity.setJutakuKaishuchakkoYMD(住宅改修着工年月日);
+                }
+                RString 住宅改修事業者名 = 償還払請求住宅改修リスト.get(i).getJutakuKaishuJigyoshaName();
+                if (住宅改修事業者名 != null) {
+                    給付実績住宅改修費entity.setJutakuKaishuJigyoshaName(住宅改修事業者名);
+                }
+                給付実績住宅改修費entity.setJuutakukaishuJyutakuAdress(償還払請求住宅改修リスト
+                        .get(i).getJutakuKaishuJutakuAddress());
+                給付実績住宅改修費entity.setKaishuKingaku(new Decimal(償還払請求住宅改修リスト
+                        .get(i).getKaishuKingaku()));
             }
-            FlexibleDate 住宅改修着工年月日 = 償還払請求住宅改修リスト.get(i).getJutakuKaishuChakkoYMD();
-            if (住宅改修着工年月日 != null) {
-                給付実績住宅改修費entity.setJutakuKaishuchakkoYMD(住宅改修着工年月日);
-
-            }
-            RString 住宅改修事業者名 = 償還払請求住宅改修リスト.get(i).getJutakuKaishuJigyoshaName();
-            if (住宅改修事業者名 != null) {
-                給付実績住宅改修費entity.setJutakuKaishuJigyoshaName(住宅改修事業者名);
-            }
-
-            給付実績住宅改修費entity.setJuutakukaishuJyutakuAdress(償還払請求住宅改修リスト
-                    .get(i).getJutakuKaishuJutakuAddress());
-            給付実績住宅改修費entity.setKaishuKingaku(new Decimal(償還払請求住宅改修リスト
-                    .get(i).getKaishuKingaku()));
             給付実績住宅改修費entity.setShinsaYM(給付実績基本entity.getShinsaYM());
             給付実績住宅改修費entity.setSeiriNo(給付実績基本entity.getSeiriNo());
             給付実績住宅改修費entity.setState(EntityDataState.Added);
@@ -193,7 +211,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         DbT3033KyufujissekiShukeiEntity 給付実績集計entity = new DbT3033KyufujissekiShukeiEntity();
         給付実績集計entity.setKokanJohoShikibetsuNo(給付実績基本entity.getKokanShikibetsuNo());
         給付実績集計entity.setInputShikibetsuNo(給付実績基本entity.getInputShikibetsuNo());
-        給付実績集計entity.setRecodeShubetsuCode(new RString("10"));
+        給付実績集計entity.setRecodeShubetsuCode(DATA_10);
         給付実績集計entity.setShokisaiHokenshaNo(給付実績基本entity.getShokisaiHokenshaNo());
         給付実績集計entity.setHiHokenshaNo(給付実績基本entity.getHiHokenshaNo());
         給付実績集計entity.setServiceTeikyoYM(給付実績基本entity.getServiceTeikyoYM());
@@ -224,27 +242,27 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
             FlexibleYearMonth サービス提供年月,
             KokanShikibetsuNo 交換情報識別番号) {
         if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1131"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1131);
         } else if (平成１５年４月.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBefore(平成１７年１０月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1132"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1132);
         } else if (平成１７年１０月.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBefore(平成１８年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1133"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1133);
         } else if (平成１８年４月.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBefore(平成２０年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1134"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1134);
         } else if (平成２０年４月.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBefore(平成２１年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1135"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1135);
         } else if (平成２１年４月.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBefore(平成２４年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1136"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1136);
         } else if (平成２４年４月.isBeforeOrEquals(サービス提供年月)
                 && サービス提供年月.isBefore(平成２７年４月)) {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1137"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1137);
         } else {
-            交換情報識別番号 = new KokanShikibetsuNo(new RString("1138"));
+            交換情報識別番号 = new KokanShikibetsuNo(DATA_1138);
         }
         return 交換情報識別番号;
     }
