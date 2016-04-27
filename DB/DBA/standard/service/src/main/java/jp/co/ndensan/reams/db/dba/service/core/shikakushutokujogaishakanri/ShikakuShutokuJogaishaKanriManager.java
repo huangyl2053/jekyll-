@@ -144,10 +144,8 @@ public class ShikakuShutokuJogaishaKanriManager {
     @Transaction
     public int insertShikakuShutokuJogaisha(List<ShikakuShutokuJogaisha> insertKuJogaishaList) {
         int insertCount = 0;
-        IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
         for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : insertKuJogaishaList) {
             DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
-            shikakuentity.setRirekiNo(mapper.get履歴番号(shikakuShutokuJogaisha.get識別コード()) + 1);
             shikakuentity.setIsDeleted(false);
             insertCount = insertCount + dac.save(shikakuentity);
         }
@@ -198,5 +196,16 @@ public class ShikakuShutokuJogaishaKanriManager {
             }
         }
         return false;
+    }
+
+    /**
+     * 履歴番号を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return 履歴番号
+     */
+    @Transaction
+    public int select履歴番号(ShikibetsuCode 識別コード) {
+        return dac.select履歴番号(識別コード) == null ? 1 : dac.select履歴番号(識別コード).getRirekiNo();
     }
 }

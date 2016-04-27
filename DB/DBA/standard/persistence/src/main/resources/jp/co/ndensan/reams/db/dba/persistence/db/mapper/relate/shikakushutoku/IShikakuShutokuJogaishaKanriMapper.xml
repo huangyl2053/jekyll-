@@ -65,10 +65,4 @@
         )
         )
     </select>
-
-    <select id="get履歴番号" resultType="int"  fetchSize="500">
-        SELECT MAX(DbT1009ShikakuShutokuJogaisha."rirekiNo") as "rirekiNo"
-        FROM rgdb."DbT1009ShikakuShutokuJogaisha" DbT1009ShikakuShutokuJogaisha
-        WHERE DbT1009ShikakuShutokuJogaisha."shikibetsuCode" = #{shikibetsuCode}
-    </select>
 </mapper>

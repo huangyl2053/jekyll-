@@ -151,23 +151,24 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         for (ShokanKetteiTsuchiShoShiharai shiharai : businessList) {
             if (!hiHokenshaNo.equals(shiharai.get被保険者番号().value())) {
                 sealer = new ShokanKetteiTsuchiShoSealer();
+                帳票ソースデータ.add(sealer);
                 pageCount++;
             } else {
                 if (key.equals(getJufukuKey(shiharai))) {
                     continue;
                 }
-                if (count % FOUR == 0) {
+                if (count == FOUR) {
                     sealer = new ShokanKetteiTsuchiShoSealer();
+                    帳票ソースデータ.add(sealer);
                     count = ZERO;
                     pageCount++;
-                } else {
-                    count++;
                 }
             }
+            sealer = create帳票ソースデータ(sealer, count, ninshoshaSource, shiharai, batchPram, 文書番号, 通知文,
+                    情報文, タイトル, atesakiSource, pageCount);
+            count++;
             key = getJufukuKey(shiharai);
             hiHokenshaNo = shiharai.get被保険者番号().value();
-            帳票ソースデータ.add(create帳票ソースデータ(sealer, count, ninshoshaSource, shiharai, batchPram, 文書番号, 通知文,
-                    情報文, タイトル, atesakiSource, pageCount));
         }
         List<RString> 帳票名 = new ArrayList<>();
         帳票名.add(ReportIdDBC.DBC100004.getReportName());
@@ -256,6 +257,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             RString 文書番号, RString 通知文, RString 情報文, RString タイトル, SofubutsuAtesakiSource atesaki, int pageCount) {
 
         ketteiTsuchiShoSealer = setJuhuku(ketteiTsuchiShoSealer, count, business);
+        ketteiTsuchiShoSealer.setPage(new RString(String.valueOf(pageCount)));
         if (ZERO < count) {
             Decimal 支給額 = new Decimal(ketteiTsuchiShoSealer.getShikyuGaku().toString()).add(business.get支給額() == null
                     ? Decimal.ZERO : business.get支給額());
@@ -365,7 +367,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.set整理番号(business.get整理番号());
         ketteiTsuchiShoSealer.set決定通知書番号(business.get決定通知No());
         ketteiTsuchiShoSealer.setTsuban(RString.EMPTY);
-        ketteiTsuchiShoSealer.setPage(new RString(String.valueOf(pageCount)));
         ketteiTsuchiShoSealer.setHihokenshaName2(business.get被保険者氏名());
         ketteiTsuchiShoSealer.setTsuchibun1(通知文);
         ketteiTsuchiShoSealer.setInfo(情報文);
