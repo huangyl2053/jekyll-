@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanfushikyuketteiin;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInPSMParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShikibetsuTaishoPSMEntity;
@@ -110,6 +111,14 @@ public interface IShokanFushikyuKetteiInMapper {
     List<ShokanFushikyuKetteiInEntity> select償還払不支給決定情報一時();
 
     /**
+     * 備考を取得する
+     *
+     * @param entity 償還払不支給決定情報
+     * @return ShokanFushikyuKetteiInEntity
+     */
+    ShokanFushikyuKetteiInEntity select備考(ShokanFushikyuKetteiInEntity entity);
+
+    /**
      * 償還払請求集計一時テーブルを作成する。
      *
      * @param entity ShokanShukeiKetteiInEntity
@@ -149,8 +158,9 @@ public interface IShokanFushikyuKetteiInMapper {
     /**
      * 一時テーブル取得する。
      *
+     * @param paramter ShokanFushikyuKetteiInMybatisParameter
      * @return List<ShokanFushikyuKetteiInEntity>
      */
-    List<ShokanFushikyuKetteiInEntity> select一時テーブル();
+    List<ShokanFushikyuKetteiInEntity> select一時テーブル(ShokanFushikyuKetteiInMybatisParameter paramter);
 
 }

@@ -170,12 +170,15 @@
         <result property="isUpdate" column="isUpdate" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="shikyuKubunCode" column="shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="select一時テーブル" resultMap="resultMap_yishiTable" fetchSize="500">
+    <select id="select一時テーブル" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanfushikyuketteiin.ShokanFushikyuKetteiInMybatisParameter"
+            resultMap="resultMap_yishiTable" fetchSize="500">
         SELECT TEMP.*
         FROM "DbTShokanFushikyuKetteiInTempTable" AS TEMP
         ORDER BY TEMP."shokisaiHokenshaNo",
-                 TEMP."hiHokenshaNo",
-                 TEMP."jigyoshoNo"
+                <if test="outputOrderBy != null">
+                ${outputOrderBy}
+                </if>
         
     </select>
     
@@ -226,8 +229,6 @@
         <result property="serviceShuruiCode" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="shikyuKubunCode" column="shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tensuKingaku" column="tensuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="bikoOne" column="bikoOne" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="bikoTwo" column="bikoTwo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="select償還払不支給決定情報一時" resultMap="resultMap_ShokanFushikyuKetteiIn" fetchSize="500">
         SELECT TEMP."hiHokenshaNo",
@@ -236,9 +237,7 @@
                TEMP."jigyoshoNo",
                TEMP."serviceShuruiCode",
                TEMP."shikyuKubunCode",
-               SUM(TEMP."tensuKingaku") AS tensuKingaku,
-               MAX(TEMP."bikoOne") AS bikoOne,
-               MAX(TEMP."bikoTwo") AS bikoTwo
+               SUM(TEMP."tensuKingaku") AS tensuKingaku
         FROM "DbTShokanFushikyuKetteiInTempTable" AS TEMP
         GROUP BY
                TEMP."hiHokenshaNo",
@@ -251,6 +250,25 @@
                TEMP."hiHokenshaNo" DESC,
                TEMP."serviceTeikyoYM" DESC
         
+    </select>
+    
+    <resultMap id="resultMap_FushikyuKetteiInEntityn" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity">
+        <result property="bikoOne" column="bikoOne" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="bikoTwo" column="bikoTwo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="select備考" 
+            resultMap="resultMap_FushikyuKetteiInEntityn" fetchSize="500"
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.ShokanFushikyuKetteiInEntity">
+        SELECT TEMP."bikoOne" AS bikoOne,
+               TEMP."bikoTwo" AS bikoTwo
+        FROM "DbTShokanFushikyuKetteiInTempTable" AS TEMP
+        WHERE TEMP."hiHokenshaNo" = #{hiHokenshaNo}
+        AND   TEMP."serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND   TEMP."seiriNo" = #{seiriNo}
+        AND   TEMP."jigyoshoNo" = #{jigyoshoNo}
+        AND   TEMP."serviceShuruiCode" = #{serviceShuruiCode}
+        AND   TEMP."shikyuKubunCode" = #{shikyuKubunCode}
+        LIMIT(1)
     </select>
     
     <!-- 償還払請求集計一時テーブルに登録する。 -->
