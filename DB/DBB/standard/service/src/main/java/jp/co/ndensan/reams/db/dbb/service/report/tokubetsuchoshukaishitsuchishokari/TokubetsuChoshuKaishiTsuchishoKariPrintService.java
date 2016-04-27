@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerRenchoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerReport;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Source;
@@ -56,28 +57,29 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
-    private final RString 帳票分類ID = new RString("0001");
+    private final RString 帳票分類ID = new RString("DBB100004");
 
     /**
      * 帳票項目定義【B5横タイプ】printメソッドです。
      *
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 宛名連番 RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printB5横タイプ(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             RString 宛名連番) {
 
         TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
         // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定特徴開始通知書情報.get宛先情報(),
-                仮算定特徴開始通知書情報.get地方公共団体(), 仮算定特徴開始通知書情報.get帳票制御共通());
+        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5Source> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-//                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
@@ -97,22 +99,23 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
      * 帳票項目定義【B5横タイプ（連帳）】printメソッドです。
      *
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 宛名連番 RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printB5横タイプ連帳(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             RString 宛名連番) {
         TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty();
 
         // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定特徴開始通知書情報.get宛先情報(),
-                仮算定特徴開始通知書情報.get地方公共団体(), 仮算定特徴開始通知書情報.get帳票制御共通());
+        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-//                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
@@ -133,21 +136,22 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
      * 帳票項目定義【シーラタイプ】printメソッドです。
      *
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @return SourceDataCollection
      */
-    public SourceDataCollection printシーラタイプ(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報) {
+    public SourceDataCollection printシーラタイプ(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerProperty();
 
         // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定特徴開始通知書情報.get宛先情報(),
-                仮算定特徴開始通知書情報.get地方公共団体(), 仮算定特徴開始通知書情報.get帳票制御共通());
+        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-//                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
@@ -167,21 +171,22 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
      * 帳票項目定義【シーラタイプ（連帳）】printメソッドです。
      *
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @return SourceDataCollection
      */
-    public SourceDataCollection printシーラタイプ連帳(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報) {
+    public SourceDataCollection printシーラタイプ連帳(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty();
 
         // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定特徴開始通知書情報.get宛先情報(),
-                仮算定特徴開始通知書情報.get地方公共団体(), 仮算定特徴開始通知書情報.get帳票制御共通());
+        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-//                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
@@ -201,18 +206,20 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
      * 帳票項目定義【A4縦・オーバーレイタイプ】printメソッドです。
      *
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 通知書定型文１ RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printA4縦オーバーレイタイプ(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             RString 通知書定型文１) {
 
         TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty();
 
         // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定特徴開始通知書情報.get宛先情報(),
-                仮算定特徴開始通知書情報.get地方公共団体(), 仮算定特徴開始通知書情報.get帳票制御共通());
+        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
                 SubGyomuCode.DBB介護賦課, 仮算定特徴開始通知書情報.get帳票分類ID());
@@ -221,7 +228,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-//                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
@@ -241,11 +247,13 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
      * 帳票項目定義【B5横・オーバレイタイプ】printメソッドです。
      *
      * @param 仮算定特徴開始通知書情報 KariTokuchoKaishiTsuchisyoJoho
+     * @param 仮算定通知書情報 KariSanteiTsuchiShoKyotsu
      * @param 通知書定型文１ RString
      * @param 通知書定型文２ RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printB5横オーバレイタイプ(KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             RString 通知書定型文１,
             RString 通知書定型文２) {
 
@@ -253,8 +261,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定特徴開始通知書情報.get宛先情報(),
-                仮算定特徴開始通知書情報.get地方公共団体(), 仮算定特徴開始通知書情報.get帳票制御共通());
+        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+                仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
                 SubGyomuCode.DBB介護賦課, 仮算定特徴開始通知書情報.get帳票分類ID());
@@ -263,7 +271,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> assembler = createAssembler(property, reportManager);) {
                 INinshoshaManager manager = new _NinshoshaManager();
-//                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 仮算定特徴開始通知書情報.get帳票分類ID().value());
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
 
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
