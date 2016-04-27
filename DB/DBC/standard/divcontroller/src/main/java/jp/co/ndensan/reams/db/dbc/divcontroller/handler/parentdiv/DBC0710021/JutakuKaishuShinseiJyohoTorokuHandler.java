@@ -1580,12 +1580,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         Decimal 画面前回までの被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHokenTaishoHiyoMae().getValue();
         Decimal 前回までの被保険対象額 = 画面前回までの被保険対象額 == null ? Decimal.ZERO : 画面前回までの被保険対象額;
-        Decimal 画面前回までの保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                .getTxtHokenKyufuAmountMae().getValue();
-        Decimal 前回までの保険給付額 = 画面前回までの保険給付額 == null ? Decimal.ZERO : 画面前回までの保険給付額;
-        Decimal 画面今回の被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
-                .getTxtHokenTaishoHiyoNow().getValue();
-        Decimal 今回の被保険対象額 = 画面今回の被保険対象額 == null ? Decimal.ZERO : 画面今回の被保険対象額;
         Decimal 給付率 = div.getTxtKyufuritsu().getValue();
         if (div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getChkResetInfo().getSelectedKeys().isEmpty()) {
@@ -1594,6 +1588,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                         ? Decimal.ZERO : 支給限度額.subtract(前回までの被保険対象額);
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenTaishoHiyoNow().setValue(今回被保険対象額);
+                Decimal 画面前回までの保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenKyufuAmountMae().getValue();
+                Decimal 前回までの保険給付額 = 画面前回までの保険給付額 == null ? Decimal.ZERO : 画面前回までの保険給付額;
                 今回の被保険対象額設定(今回被保険対象額, 支給限度額, 給付率, 前回までの保険給付額);
                 Decimal 今回の保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().getValue();
@@ -1627,7 +1624,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             } else if (費用額合計.compareTo(支給限度額) <= 0) {
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenTaishoHiyoNow().setValue(費用額合計);
-                Decimal 今回の保険給付額 = 今回の被保険対象額.multiply(給付率).divide(被除数).roundDownTo(0);
+                Decimal 画面今回の被保険対象額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                        .getTxtHokenTaishoHiyoNow().getValue();
+                Decimal 今回の保険給付額 = 画面今回の被保険対象額.multiply(給付率).divide(被除数).roundDownTo(0);
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                         .getTxtHokenKyufuAmountNow().setValue(今回の保険給付額);
                 Decimal 今回保険給付額 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
