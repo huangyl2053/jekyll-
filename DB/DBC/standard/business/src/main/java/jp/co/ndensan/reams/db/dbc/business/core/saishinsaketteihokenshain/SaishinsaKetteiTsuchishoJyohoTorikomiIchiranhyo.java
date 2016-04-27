@@ -56,6 +56,11 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
     private static final RString 証記載保険者番号 = new RString("証記載保険者番号");
     private static final RString INDEX_1 = new RString("1");
     private static final RString INDEX_2 = new RString("2");
+    private static final int NUM_0 = 0;
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
     private static final CodeShubetsu コード種別 = new CodeShubetsu("0020");
 
     /**
@@ -69,13 +74,13 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
      * @param 並び順の3件目 並び順の3件目
      * @param 並び順の4件目 並び順の4件目
      * @param 並び順の5件目 並び順の5件目
-     * @param 改頁 改頁
+     * @param 改頁項目リスト List<RString>
      * @return List<SaishinsaKetteiHokenshaInItem>
      */
     public List<SaishinsaKetteiHokenshaInItem> createSaishinsaKetteiTsuchishoJyohoTorikomiIchiranData(
             List<SaishinsaMeisaiPsmEntity> 明細情報List, SaishinsaKetteiHokenshaInGokeiEntity 集計情報Entity,
             FlexibleYearMonth 処理年月, RString 並び順の1件目, RString 並び順の2件目, RString 並び順の3件目,
-            RString 並び順の4件目, RString 並び順の5件目, RString 改頁) {
+            RString 並び順の4件目, RString 並び順の5件目, List<RString> 改頁項目リスト) {
         List<SaishinsaKetteiHokenshaInItem> itemList = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         RDateTime now = RDateTime.now();
@@ -101,11 +106,11 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
             item.set並び順3(並び順の3件目);
             item.set並び順4(並び順の4件目);
             item.set並び順5(並び順の5件目);
-            item.set改頁1(改頁);
-            item.set改頁2(改頁);
-            item.set改頁3(改頁);
-            item.set改頁4(改頁);
-            item.set改頁5(改頁);
+            item.set改頁1(改頁項目リスト.size() <= NUM_0 ? RString.EMPTY : 改頁項目リスト.get(NUM_0));
+            item.set改頁2(改頁項目リスト.size() <= NUM_1 ? RString.EMPTY : 改頁項目リスト.get(NUM_1));
+            item.set改頁3(改頁項目リスト.size() <= NUM_2 ? RString.EMPTY : 改頁項目リスト.get(NUM_2));
+            item.set改頁4(改頁項目リスト.size() <= NUM_3 ? RString.EMPTY : 改頁項目リスト.get(NUM_3));
+            item.set改頁5(改頁項目リスト.size() <= NUM_4 ? RString.EMPTY : 改頁項目リスト.get(NUM_4));
             item.set国保連合会名(集計情報Entity.getKokukoRengoukaiNa());
             item.set審査委員会名(集計情報Entity.getSinsaiinkaiName());
             item.set作成日時(作成日時);
@@ -125,11 +130,11 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
                 item.set並び順3(並び順の3件目);
                 item.set並び順4(並び順の4件目);
                 item.set並び順5(並び順の5件目);
-                item.set改頁1(改頁);
-                item.set改頁2(改頁);
-                item.set改頁3(改頁);
-                item.set改頁4(改頁);
-                item.set改頁5(改頁);
+                item.set改頁1(改頁項目リスト.size() <= NUM_0 ? RString.EMPTY : 改頁項目リスト.get(NUM_0));
+                item.set改頁2(改頁項目リスト.size() <= NUM_1 ? RString.EMPTY : 改頁項目リスト.get(NUM_1));
+                item.set改頁3(改頁項目リスト.size() <= NUM_2 ? RString.EMPTY : 改頁項目リスト.get(NUM_2));
+                item.set改頁4(改頁項目リスト.size() <= NUM_3 ? RString.EMPTY : 改頁項目リスト.get(NUM_3));
+                item.set改頁5(改頁項目リスト.size() <= NUM_4 ? RString.EMPTY : 改頁項目リスト.get(NUM_4));
                 item.set国保連合会名(集計情報Entity.getKokukoRengoukaiNa());
                 item.set審査委員会名(集計情報Entity.getSinsaiinkaiName());
                 item.set作成日時(作成日時);

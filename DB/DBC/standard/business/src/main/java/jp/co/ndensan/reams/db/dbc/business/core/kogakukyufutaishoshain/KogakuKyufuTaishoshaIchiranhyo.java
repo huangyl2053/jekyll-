@@ -71,10 +71,10 @@ public class KogakuKyufuTaishoshaIchiranhyo {
         builder.append(DATE_作成);
         作成日時 = builder.toRString();
         this.並び順の1件目 = 並び順1 == null ? RString.EMPTY : 並び順1;
-        this.並び順の2件目 = 並び順1 == null ? RString.EMPTY : 並び順2;
-        this.並び順の3件目 = 並び順1 == null ? RString.EMPTY : 並び順3;
-        this.並び順の4件目 = 並び順1 == null ? RString.EMPTY : 並び順4;
-        this.並び順の5件目 = 並び順1 == null ? RString.EMPTY : 並び順5;
+        this.並び順の2件目 = 並び順2 == null ? RString.EMPTY : 並び順2;
+        this.並び順の3件目 = 並び順3 == null ? RString.EMPTY : 並び順3;
+        this.並び順の4件目 = 並び順4 == null ? RString.EMPTY : 並び順4;
+        this.並び順の5件目 = 並び順5 == null ? RString.EMPTY : 並び順5;
         this.改頁 = 改頁;
 
         if (高額介護サービス費給付対象者一覧List == null || 高額介護サービス費給付対象者一覧List.isEmpty()) {

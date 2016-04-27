@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120190;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteihokenshain.SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo;
 import jp.co.ndensan.reams.db.dbc.business.report.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInItem;
 import jp.co.ndensan.reams.db.dbc.business.report.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInReport;
@@ -29,8 +30,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
  * 帳票用Entityリスト作成と作成したdataを帳票に出力する。
@@ -91,10 +92,10 @@ public class SaishinsaWriteReportProcess extends BatchKeyBreakBase<SaishinsaKett
                 }
             }
         }
+        PageBreaker<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource> breaker = new SaishinsaKetteiHokenshaInPageBreak(改頁項目リスト);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200048.getReportId().value(), SubGyomuCode.DBC介護給付).
-                addBreak(new BreakerCatalog<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource>()
-                        .simplePageBreaker(改頁項目リスト)).create();
+                addBreak(breaker).create();
         this.reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
@@ -118,31 +119,43 @@ public class SaishinsaWriteReportProcess extends BatchKeyBreakBase<SaishinsaKett
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200048.getReportId(), shutsuryokujunID.getValue());
         List<RString> 改頁項目リスト = new ArrayList<>();
+        int i = 0;
+        RString 並び順の１件目 = RString.EMPTY;
+        RString 並び順の２件目 = RString.EMPTY;
+        RString 並び順の３件目 = RString.EMPTY;
+        RString 並び順の４件目 = RString.EMPTY;
+        RString 並び順の５件目 = RString.EMPTY;
         if (並び順 != null) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     改頁項目リスト.add(item.get項目名());
                 }
+                if (i == INDEX_0) {
+                    並び順の１件目 = item.get項目名();
+                } else if (i == INDEX_1) {
+                    並び順の２件目 = item.get項目名();
+                } else if (i == INDEX_2) {
+                    並び順の３件目 = item.get項目名();
+                } else if (i == INDEX_3) {
+                    並び順の４件目 = item.get項目名();
+                } else if (i == INDEX_4) {
+                    並び順の５件目 = item.get項目名();
+                }
+                i = i + 1;
             }
         }
-        RString 改頁 = (並び順 == null ? RString.EMPTY : 並び順.getFormated改頁項目());
-        RString 並び順の1件目 = 改頁項目リスト.size() <= INDEX_0 ? RString.EMPTY : 改頁項目リスト.get(INDEX_0);
-        RString 並び順の2件目 = 改頁項目リスト.size() <= INDEX_1 ? RString.EMPTY : 改頁項目リスト.get(INDEX_1);
-        RString 並び順の3件目 = 改頁項目リスト.size() <= INDEX_2 ? RString.EMPTY : 改頁項目リスト.get(INDEX_2);
-        RString 並び順の4件目 = 改頁項目リスト.size() <= INDEX_3 ? RString.EMPTY : 改頁項目リスト.get(INDEX_3);
-        RString 並び順の5件目 = 改頁項目リスト.size() <= INDEX_4 ? RString.EMPTY : 改頁項目リスト.get(INDEX_4);
         集計情報Entity = manager.getSaishinsaKetteiTsuchishoSyukeiJyoho();
         明細情報List = manager.getSaishinsaKetteiTsuchishoMeisaiJyoho();
         SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo business = new SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo();
         List<SaishinsaKetteiHokenshaInItem> targets = business.createSaishinsaKetteiTsuchishoJyohoTorikomiIchiranData(明細情報List,
                 集計情報Entity,
                 shoriYM.getValue(),
-                改頁,
-                並び順の1件目,
-                並び順の2件目,
-                並び順の3件目,
-                並び順の4件目,
-                並び順の5件目);
+                並び順の１件目,
+                並び順の２件目,
+                並び順の３件目,
+                並び順の４件目,
+                並び順の５件目,
+                改頁項目リスト);
         SaishinsaKetteiHokenshaInReport report
                 = SaishinsaKetteiHokenshaInReport.createFrom(targets);
         report.writeBy(reportSourceWriter);

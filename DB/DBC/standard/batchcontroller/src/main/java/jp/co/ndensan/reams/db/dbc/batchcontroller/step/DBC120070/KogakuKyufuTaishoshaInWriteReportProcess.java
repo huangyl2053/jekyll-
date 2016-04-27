@@ -194,24 +194,36 @@ public class KogakuKyufuTaishoshaInWriteReportProcess extends BatchKeyBreakBase<
 
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200014.getReportId(), 出力順ID.getValue());
-        List<RString> 改頁項目リスト = new ArrayList<>();
+        RString 改頁 = RString.EMPTY;
+        int i = 0;
+        RString 並び順の１件目 = RString.EMPTY;
+        RString 並び順の２件目 = RString.EMPTY;
+        RString 並び順の３件目 = RString.EMPTY;
+        RString 並び順の４件目 = RString.EMPTY;
+        RString 並び順の５件目 = RString.EMPTY;
         if (並び順 != null) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
-                    改頁項目リスト.add(item.get項目名());
+                    改頁 = item.get項目名();
                 }
+                if (i == INDEX_0) {
+                    並び順の１件目 = item.get項目名();
+                } else if (i == INDEX_1) {
+                    並び順の２件目 = item.get項目名();
+                } else if (i == INDEX_2) {
+                    並び順の３件目 = item.get項目名();
+                } else if (i == INDEX_3) {
+                    並び順の４件目 = item.get項目名();
+                } else if (i == INDEX_4) {
+                    並び順の５件目 = item.get項目名();
+                }
+                i = i + 1;
             }
         }
-        RString 改頁 = (並び順 == null ? RString.EMPTY : 並び順.getFormated改頁項目());
-        RString 並び順の1件目 = 改頁項目リスト.size() <= INDEX_0 ? RString.EMPTY : 改頁項目リスト.get(INDEX_0);
-        RString 並び順の2件目 = 改頁項目リスト.size() <= INDEX_1 ? RString.EMPTY : 改頁項目リスト.get(INDEX_1);
-        RString 並び順の3件目 = 改頁項目リスト.size() <= INDEX_2 ? RString.EMPTY : 改頁項目リスト.get(INDEX_2);
-        RString 並び順の4件目 = 改頁項目リスト.size() <= INDEX_3 ? RString.EMPTY : 改頁項目リスト.get(INDEX_3);
-        RString 並び順の5件目 = 改頁項目リスト.size() <= INDEX_4 ? RString.EMPTY : 改頁項目リスト.get(INDEX_4);
         List<KogakuKyufuTaishoshaIchiranItem> targetList
-                = business.getKogakuKyufuTaishoshaIchiranhyoData(並び順の1件目, 並び順の2件目,
-                        並び順の3件目, 並び順の4件目,
-                        並び順の5件目, 改頁, resultList);
+                = business.getKogakuKyufuTaishoshaIchiranhyoData(並び順の１件目, 並び順の２件目,
+                        並び順の３件目, 並び順の４件目,
+                        並び順の５件目, 改頁, resultList);
         KogakuKyufuTaishoshaIchiranReport report
                 = KogakuKyufuTaishoshaIchiranReport.createForm(targetList);
         report.writeBy(reportSourceWriter);
