@@ -401,23 +401,33 @@ public class JutakukaishuSikyuShinseiManager {
         List<DbT3049ShokanJutakuKaishuEntity> dbt3049tmpList = new ArrayList<>();
         if (dbt3049List != null && !dbt3049List.isEmpty()) {
             for (ShokanJutakuKaishu dbt3049 : dbt3049List) {
-                償還払請求住宅改修Dac.delete(dbt3049.toEntity());
+                DbT3049ShokanJutakuKaishuEntity entity = dbt3049.toEntity();
+                entity.setState(EntityDataState.Deleted);
+                償還払請求住宅改修Dac.delete(entity);
                 dbt3049tmpList.add(dbt3049.toEntity());
             }
         }
         DbT3053ShokanShukeiEntity dbt3053entity = new DbT3053ShokanShukeiEntity();
         if (dbt3053 != null) {
-            償還払請求集計Dac.delete(dbt3053.toEntity());
+            DbT3053ShokanShukeiEntity entity = dbt3053.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払請求集計Dac.delete(entity);
             dbt3053entity = dbt3053.toEntity();
         }
         if (dbt3038 != null) {
-            償還払請求基本Dac.delete(dbt3038.toEntity());
+            DbT3038ShokanKihonEntity entity = dbt3038.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払請求基本Dac.delete(entity);
         }
         if (dbt3036 != null) {
-            償還払支給判定結果Dac.delete(dbt3036.toEntity());
+            DbT3036ShokanHanteiKekkaEntity entity = dbt3036.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払支給判定結果Dac.delete(entity);
         }
         if (dbt3034 != null) {
-            償還払支給申請Dac.delete(dbt3034.toEntity());
+            DbT3034ShokanShinseiEntity entity = dbt3034.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払支給申請Dac.delete(entity);
         }
         GeifuEntity kyufuentity = new GeifuEntity();
         kyufuentity.setShikibetsuCode(識別コード);
@@ -629,10 +639,10 @@ public class JutakukaishuSikyuShinseiManager {
         }
         RString wk対象住宅住所 = tmpList.get(0).get対象住宅住所();
         for (JyutakuGaisyunaiyoListParameter tmp : tmpList) {
-            if (提供着工年月 != null && 提供着工年月.equals(tmp.get着工年月日().getYearMonth())) {
+            if (提供着工年月 != null && !提供着工年月.equals(tmp.get着工年月日().getYearMonth())) {
                 return メッセージ_2;
             }
-            if (wk対象住宅住所 != null && wk対象住宅住所.equals(tmp.get対象住宅住所())) {
+            if (wk対象住宅住所 != null && !wk対象住宅住所.equals(tmp.get対象住宅住所())) {
                 return メッセージ_3;
             }
         }
