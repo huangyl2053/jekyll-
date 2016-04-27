@@ -92,8 +92,16 @@ public class TaJushochiTokureishaKanriHandler {
                 = TaJushochiTokureisyaKanriManager.createInstance().getTaJushochiTokureiTekiyoJyoho(識別コード).records();
         if (適用情報 != null && !適用情報.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(住所地特例Model.get施設入退所Lsit()));
+            if (住所地特例Model.get住所地特例List() != null && !住所地特例Model.get住所地特例List().isEmpty()) {
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
+            } else {
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
+            }
+            if (住所地特例Model.get施設入退所Lsit() != null && !住所地特例Model.get施設入退所Lsit().isEmpty()) {
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(住所地特例Model.get施設入退所Lsit()));
+            } else {
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(new ArrayList()));
+            }
             set一覧の設定(適用情報);
             最新適用情報 = 適用情報.get(0);
         } else {

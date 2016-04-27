@@ -44,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- *
  * 帳票「主治医意見書作成料請求書」の出力バッチフ処理クラスです。
  *
  * @reamsid_L DBE-0080-130 duanzhanli
@@ -131,7 +130,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
         item.setGengo(RDate.getNowDate().toDateString());
         item.setAtesakiHokenshaName(entity.get保険者名());
-        // TODO 内部QA894　Redmine#79148　意見書作成料の表示名がない
         item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_11).get名称());
         item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_12).get名称());
         item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_21).get名称());
@@ -154,26 +152,24 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
         item.setBirthYMD(entity.get生年月日());
         item.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
         if (ZaitakuShisetsuKubun.在宅.getコード().equals(entity.get在宅施設区分())) {
-            item.setIkenshosyubetu1(記号);
+            item.setShubetsuZaitaku(記号);
         } else {
-            item.setIkenshosyubetu1(RString.EMPTY);
+            item.setShubetsuZaitaku(RString.EMPTY);
         }
-        // TODO 内部QA913　設定項目は帳票Itemと違う
         if (ZaitakuShisetsuKubun.施設.getコード().equals(entity.get在宅施設区分())) {
-            item.setIkenshosyubetu1(記号);
+            item.setShubetsuShisetsu(記号);
         } else {
-            item.setIkenshosyubetu1(RString.EMPTY);
+            item.setShubetsuShisetsu(RString.EMPTY);
         }
         if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.get意見書作成回数区分())) {
-            item.setIkenshosyubetu2(記号);
+            item.setShubetsuShinki(記号);
         } else {
-            item.setIkenshosyubetu2(RString.EMPTY);
+            item.setShubetsuShinki(RString.EMPTY);
         }
-        // TODO 内部QA913　設定項目は帳票Itemと違う
         if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.get意見書作成回数区分())) {
-            item.setIkenshosyubetu2(記号);
+            item.setShubetsuKeizoku(記号);
         } else {
-            item.setIkenshosyubetu2(RString.EMPTY);
+            item.setShubetsuKeizoku(RString.EMPTY);
         }
         item.setSeikyuIryokikanName(entity.get医療機関名称());
         item.setSeikyuIryokikanDaihyoName(entity.get代表者名());
