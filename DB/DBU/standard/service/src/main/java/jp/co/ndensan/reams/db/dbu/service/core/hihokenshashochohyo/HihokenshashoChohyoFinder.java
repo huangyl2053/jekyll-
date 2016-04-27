@@ -117,6 +117,7 @@ public class HihokenshashoChohyoFinder {
     private static final int 文字数_8 = 8;
     private static final int 文字数_40 = 40;
     private static final RString PSMYO = new RString("psmShikibetsuTaisho");
+    private static final RString PSMWM = new RString("psmAtesaki");
 
     /**
      * コンストラクタ。
@@ -183,10 +184,11 @@ public class HihokenshashoChohyoFinder {
             }
             RString gyoseiku = honni.get(0).getGyoseikuName();
             if (!gyoseiku.isNullOrEmpty()) {
-                business.set行政区1(gyoseiku.substring(桁数_0, 桁数_13));
                 if (gyoseiku.length() <= 桁数_13) {
+                    business.set行政区1(gyoseiku);
                     business.set行政区2(RString.EMPTY);
                 } else {
+                    business.set行政区1(gyoseiku.substring(桁数_0, 桁数_13));
                     business.set行政区2(gyoseiku.substring(桁数_13));
                 }
             } else {
@@ -216,7 +218,7 @@ public class HihokenshashoChohyoFinder {
             business.set保険者NO3(hihoken.get(i).get保険者().substring(桁数_2, 桁数_3));
             business.set保険者NO4(hihoken.get(i).get保険者().substring(桁数_3, 桁数_4));
             business.set保険者NO5(hihoken.get(i).get保険者().substring(桁数_4, 桁数_5));
-            business.set保険者NO6(hihoken.get(i).get保険者().substring(桁数_5));
+            business.set保険者NO6(hihoken.get(i).get保険者().substring(桁数_5, 桁数_6));
             business.set要介護認定区分(hihoken.get(i).get要介護認定状態区分コード());
             business.set認定年月日(hihoken.get(i).get認定年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
@@ -229,7 +231,9 @@ public class HihokenshashoChohyoFinder {
             business.set訪問期間終了年月日(hihoken.get(i).get支給限度有効終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             business.setサービス(new RString(hihoken.get(i).get支給限度単位数().toString()));
-            setサービス種類(business, hihoken.get(i));
+            if (hihoken.get(i).get指定サービス種類() != null && !hihoken.get(i).get指定サービス種類().isEmpty()) {
+                setサービス種類(business, hihoken.get(i));
+            }
             set入退所(business, hihoken.get(i));
             set帳票制御(business, hihoken.get(i));
             business.set連番(new RString(String.valueOf(i + 1)).padLeft(文字_0, 桁数_6));
@@ -776,7 +780,7 @@ public class HihokenshashoChohyoFinder {
         atenaSearchKeyBuilder.set代納人利用区分(DainoRiyoKubun.利用しない);
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         AtenaMybatisParameter parameter = new AtenaMybatisParameter(RString.EMPTY, new RString(uaFt250Psm.getParameterMap()
-                .get("psmAtesaki").toString()));
+                .get(PSMWM.toString()).toString()));
         IHihokenshashoChohyoMapper mapper = mapperProvider.create(IHihokenshashoChohyoMapper.class);
         List<SofusakiJohoEntity> entity = mapper.get送付先情報取得(parameter);
         List<SofusakiJohoEntity> list = new ArrayList<>();
