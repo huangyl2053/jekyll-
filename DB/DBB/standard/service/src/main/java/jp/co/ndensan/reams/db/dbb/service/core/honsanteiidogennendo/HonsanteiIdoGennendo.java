@@ -712,7 +712,7 @@ public class HonsanteiIdoGennendo {
             }
         } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値()) && zeroRS.equals(設定値)) {
             return new ChohyoResult(帳票分類ID, hokenryoNonyuKigoto, 出力順ID);
-        } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値()) && zeroRS.equals(設定値)) {
+        } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値()) && oneRS.equals(設定値)) {
             return new ChohyoResult(帳票分類ID, hokenryoNonyuKigotoRencho, 出力順ID);
         }
         return null;
