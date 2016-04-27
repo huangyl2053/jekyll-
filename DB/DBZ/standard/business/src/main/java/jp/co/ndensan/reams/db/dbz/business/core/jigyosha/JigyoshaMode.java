@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.jigyosha;
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.ur.urz.business.core.gunshiku.Gunshiku;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,5 +27,5 @@ public class JigyoshaMode implements Serializable {
     private AtenaMeisho jigyoshaName;
     private RString jigyoshaShubetsu;
     private RString yukoKaishiYMD;
-    private List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide;
+    private List<Gunshiku> gunshiCodeJigyoshaInputGuide;
 }

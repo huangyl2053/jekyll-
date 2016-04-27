@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
-import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
@@ -16,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParamete
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.gunshiku.Gunshiku;
+import jp.co.ndensan.reams.ur.urz.business.core.zenkokujusho.ZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -64,11 +64,11 @@ public class JiGyoSyaHandler {
      */
     public void search_GunshiCode(JigyoshaMode mode) {
 
-        List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide = mode.getGunshiCodeJigyoshaInputGuide();
+        List<Gunshiku> gunshiCodeJigyoshaInputGuide = mode.getGunshiCodeJigyoshaInputGuide();
         List<KeyValueDataSource> dataSource = new ArrayList();
         if (gunshiCodeJigyoshaInputGuide != null) {
 
-            for (GunshiCodeJigyoshaInputGuide entity : gunshiCodeJigyoshaInputGuide) {
+            for (Gunshiku entity : gunshiCodeJigyoshaInputGuide) {
 
                 if (entity.get都道府県コード().equals(div.getTaishoJigyoshaKensaku().getDdlKennCode().getSelectedKey())) {
 
@@ -404,20 +404,20 @@ public class JiGyoSyaHandler {
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> list = new ArrayList<>();
-        SearchResult<KenCodeJigyoshaInputGuide> kenCodeJigyoshaInputGuide = jigyosha.getKenCodeJigyoshaInputGuide();
+        SearchResult<ZenkokuJushoItem> kenCodeJigyoshaInputGuide = jigyosha.getKenCodeJigyoshaInputGuide();
 
         if (!kenCodeJigyoshaInputGuide.records().isEmpty()) {
 
-            for (KenCodeJigyoshaInputGuide entity : kenCodeJigyoshaInputGuide.records()) {
+            for (ZenkokuJushoItem entity : kenCodeJigyoshaInputGuide.records()) {
 
                 KeyValueDataSource KeyValue = new KeyValueDataSource();
-                KeyValue.setKey(entity.get都道府県住所コード());
-                KeyValue.setValue(entity.get都道府県住所コード().concat(new RString(":")).concat(entity.get都道府県名()));
+                KeyValue.setKey(entity.get都道府県コード());
+                KeyValue.setValue(entity.get都道府県コード().concat(new RString(":")).concat(entity.get都道府県名()));
 
-                if (!list.contains(entity.get都道府県住所コード())) {
+                if (!list.contains(entity.get都道府県コード())) {
                     dataSource.add(KeyValue);
                 }
-                list.add(entity.get都道府県住所コード());
+                list.add(entity.get都道府県コード());
             }
         }
         return dataSource;
@@ -457,14 +457,14 @@ public class JiGyoSyaHandler {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
-        SearchResult<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide = jigyosha.getGunshiCodeJigyoshaInputGuide();
+        SearchResult<Gunshiku> gunshiCodeJigyoshaInputGuide = jigyosha.getGunshiCodeJigyoshaInputGuide();
 
         mode.setGunshiCodeJigyoshaInputGuide(gunshiCodeJigyoshaInputGuide.records());
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
 
         if (!gunshiCodeJigyoshaInputGuide.records().isEmpty()) {
 
-            for (GunshiCodeJigyoshaInputGuide entity : gunshiCodeJigyoshaInputGuide.records()) {
+            for (Gunshiku entity : gunshiCodeJigyoshaInputGuide.records()) {
 
                 KeyValueDataSource KeyValue = new KeyValueDataSource();
                 KeyValue.setKey(entity.get郡市区コード());
