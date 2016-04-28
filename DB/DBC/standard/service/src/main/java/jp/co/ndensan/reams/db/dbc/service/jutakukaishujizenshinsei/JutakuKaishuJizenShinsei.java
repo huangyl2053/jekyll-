@@ -542,8 +542,12 @@ public class JutakuKaishuJizenShinsei {
      */
     public HokenKyufuRitsu getKyufuritsu(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
 
-        HokenKyufuRitsu 給付率 = new HokenKyufuRitsu(new Decimal(Integer.valueOf(
-                DbBusinessConifg.get(ConfigNameDBC.初期表示_給付率, RDate.getNowDate(), SubGyomuCode.DBC介護給付).toString())));
+        RString 初期表示_給付率 = DbBusinessConifg.get(ConfigNameDBC.初期表示_給付率, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        HokenKyufuRitsu 給付率 = null;
+        if (!初期表示_給付率.isNullOrEmpty()) {
+            給付率 = new HokenKyufuRitsu(new Decimal(Integer.valueOf(初期表示_給付率.toString())));
+        }
+
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         JutakuKaishuHiParameter parameter
                 = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月, null, null);

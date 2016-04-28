@@ -74,6 +74,7 @@ public class NinteiChosaSchedule3Main {
      */
     public ResponseData<NinteiChosaSchedule3MainDiv> onChange_District(NinteiChosaSchedule3MainDiv div) {
         getHandler(div).set保険者DDL();
+        getHandler(div).set認定調査委託先コード();
         return ResponseData.of(div).respond();
     }
 

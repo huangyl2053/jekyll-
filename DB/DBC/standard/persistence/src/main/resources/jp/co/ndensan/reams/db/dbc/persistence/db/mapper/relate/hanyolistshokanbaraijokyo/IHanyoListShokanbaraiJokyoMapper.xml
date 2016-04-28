@@ -154,9 +154,6 @@
         <if test="国保連送付年月To != null">
             AND DbT3034."dbT3034ShokanShinsei_sofuYM"<![CDATA[<=]]>#{国保連送付年月To}
         </if>
-        <if test="金融機関コード != null">
-            AND UaT0310."kinyuKikanCode"<![CDATA[=]]>#{金融機関コード}
-        </if>
         <if test="支払方法 == 1">
             AND DbT3034."dbT3034ShokanShinsei_shiharaiHohoKubunCode" = '1'
         </if>
@@ -164,26 +161,31 @@
             AND DbT3034."dbT3034ShokanShinsei_shiharaiHohoKubunCode" = '2'
         </if>
         <if test="処理状況 == 2">
-            AND DbT3034."dbT3034ShokanShinsei_shinseiYMD" != ''
+            AND DbT3034."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[<>]]> ''
             AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD" = ''
             AND DbT3034."dbT3034ShokanShinsei_sofuYM" = ''
         </if>
         <if test="処理状況 == 4">
             AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD" = ''
-            AND DbT3034."dbT3034ShokanShinsei_sofuYM" != ''
+            AND DbT3034."dbT3034ShokanShinsei_sofuYM" <![CDATA[<>]]> ''
         </if>
         <if test="処理状況 == 3">
-            AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD" != ''
+            AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD" <![CDATA[<>]]> ''
             AND DbT3036."dbT3036ShokanHanteiKekka_ketteiTsuchishoSakuseiYMD" = ''
         </if>
         <if test="処理状況 == 6">
-            AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD" != ''
+            AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD" <![CDATA[<>]]> ''
             AND DbT3036."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" = ''
         </if>
         <if test="処理状況 == 7">
-            AND UaT0310."kinyuKikanCode"<![CDATA[=]]>#{金融機関コード}
+            AND DbT3036."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]> ''
         </if>
-        <!--様式番号-->
+        <if test="様式番号!=null">
+            AND DbT3038."dbT3038ShokanKihon_yoshikiNo" IN
+            <foreach item="様式番号" index="index" collection="様式番号" open="(" separator="," close=")">
+                #{様式番号}
+            </foreach>
+        </if>
     </sql>
         
     <resultMap id="resultMap_HanyoListShokanbaraiJokyoEntity" autoMapping="true"

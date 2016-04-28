@@ -84,4 +84,19 @@ public enum ShinseiRiyuKubun {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請理由区分"));
     }
+
+    /**
+     * 申請理由区分のコードと一致する内容を探します。
+     *
+     * @param code 申請理由区分のコード
+     * @return {@code code} に対応する申請理由区分
+     */
+    public static ShinseiRiyuKubun toValueByCode(RString code) {
+        for (ShinseiRiyuKubun shinseiRiyuKubun : ShinseiRiyuKubun.values()) {
+            if (shinseiRiyuKubun.code.equals(code)) {
+                return shinseiRiyuKubun;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請理由区分"));
+    }
 }

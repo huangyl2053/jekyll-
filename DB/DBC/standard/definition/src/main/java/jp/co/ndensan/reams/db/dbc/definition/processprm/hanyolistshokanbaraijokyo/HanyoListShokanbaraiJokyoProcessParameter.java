@@ -25,6 +25,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessParameter {
 
+    private static final RString 区切り文字 = new RString(",");
     private RString 保険者コード;
     private RString 保険者名;
     private FlexibleYearMonth サービス提供年月From;
@@ -170,7 +171,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
                 国保連送付年月From,
                 国保連送付年月To,
                 様式番号選択,
-                様式番号,
+                様式番号 != null ? 様式番号.split(区切り文字.toString()) : null,
                 項目名付加,
                 連番付加,
                 日付スラッシュ付加,

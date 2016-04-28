@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBA-0540-714 yaodongsheng -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.tokuteifutangendogakushinseisho">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoMapper">
     <select id="get最新異動日データ" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseishoMybatisParameter"   fetchSize="500">
         SELECT
