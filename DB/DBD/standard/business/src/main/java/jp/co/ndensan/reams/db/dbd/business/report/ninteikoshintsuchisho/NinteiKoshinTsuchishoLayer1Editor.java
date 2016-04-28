@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
 
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.ChohyoSeigyoHanyoKeysDBD100008;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -34,11 +35,9 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
     public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
         source.bunshoNo = item.get文書番号();
         if (KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
-            //TODO DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル
-            source.title = RString.EMPTY;
+            source.title = new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル.name());
         } else {
-            //TODO DBDEnum.帳票制御汎用キーDBD100008.帳票タイトル_旧措置者
-            source.title = RString.HALF_SPACE;
+            source.title = new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル_旧措置者用.name());
         }
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
         source.hihokenshaNameKana = 編集後個人.get名称().getKana().getColumnValue();
