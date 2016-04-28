@@ -4,7 +4,7 @@
 
 module DBD {
 
-     export module AtokureishisetsuNyutaishoJoho {
+     export module TokureishisetsuNyutaishoJoho {
 
         export class Events {
 
@@ -18,7 +18,7 @@ module DBD {
             private _myName: string;
 
             public static myType(): string {
-                return "AtokureishisetsuNyutaishoJoho";
+                return "TokureishisetsuNyutaishoJoho";
             }
 
             constructor(fieldName: string) {
@@ -26,14 +26,14 @@ module DBD {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBD.AtokureishisetsuNyutaishoJoho.Controls.myType();
+                return this._myName + "_" + DBD.TokureishisetsuNyutaishoJoho.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBD.AtokureishisetsuNyutaishoJoho.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.TokureishisetsuNyutaishoJoho.Controls.myType() + "_" + fieldName;
             }
 
-            public AtokureishisetsuNyutaishoJoho(): UZA.Panel {
+            public TokureishisetsuNyutaishoJoho(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 

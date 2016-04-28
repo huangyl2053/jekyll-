@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShotokuJo
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 27 21:30:25 JST 2016 
+ * Thu Apr 28 18:41:10 JST 2016 
  */
 
 
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 public class dgSetaiShotoku_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
-    private RString juminShubetsuHihokenshaNo;
+    private RString shikibetsuCodeHihokenshaNo;
     private RString shimei;
     private RString seinengappiSeibetsuZokugara;
     private RString shubetsu;
@@ -39,7 +39,7 @@ public class dgSetaiShotoku_Row extends DataRow {
 
     public dgSetaiShotoku_Row() {
         super();
-        this.juminShubetsuHihokenshaNo = RString.EMPTY;
+        this.shikibetsuCodeHihokenshaNo = RString.EMPTY;
         this.shimei = RString.EMPTY;
         this.seinengappiSeibetsuZokugara = RString.EMPTY;
         this.shubetsu = RString.EMPTY;
@@ -53,7 +53,7 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.nenkinShunyu = RString.EMPTY;
         this.nenkinShotoku = RString.EMPTY;
         this.koseiDate = RString.EMPTY;
-        this.setOriginalData("juminShubetsuHihokenshaNo", juminShubetsuHihokenshaNo);
+        this.setOriginalData("shikibetsuCodeHihokenshaNo", shikibetsuCodeHihokenshaNo);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("seinengappiSeibetsuZokugara", seinengappiSeibetsuZokugara);
         this.setOriginalData("shubetsu", shubetsu);
@@ -69,9 +69,9 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("koseiDate", koseiDate);
     }
 
-    public dgSetaiShotoku_Row(RString juminShubetsuHihokenshaNo, RString shimei, RString seinengappiSeibetsuZokugara, RString shubetsu, RString idoDate, RString riyoshaFutandankai, RString seihoRorei, Button memo, RString haaku, RString juminzei, RString gokeiShotokuKingaku, RString nenkinShunyu, RString nenkinShotoku, RString koseiDate) {
+    public dgSetaiShotoku_Row(RString shikibetsuCodeHihokenshaNo, RString shimei, RString seinengappiSeibetsuZokugara, RString shubetsu, RString idoDate, RString riyoshaFutandankai, RString seihoRorei, Button memo, RString haaku, RString juminzei, RString gokeiShotokuKingaku, RString nenkinShunyu, RString nenkinShotoku, RString koseiDate) {
         super();
-        this.setOriginalData("juminShubetsuHihokenshaNo", juminShubetsuHihokenshaNo);
+        this.setOriginalData("shikibetsuCodeHihokenshaNo", shikibetsuCodeHihokenshaNo);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("seinengappiSeibetsuZokugara", seinengappiSeibetsuZokugara);
         this.setOriginalData("shubetsu", shubetsu);
@@ -85,7 +85,7 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("nenkinShunyu", nenkinShunyu);
         this.setOriginalData("nenkinShotoku", nenkinShotoku);
         this.setOriginalData("koseiDate", koseiDate);
-        this.juminShubetsuHihokenshaNo = juminShubetsuHihokenshaNo;
+        this.shikibetsuCodeHihokenshaNo = shikibetsuCodeHihokenshaNo;
         this.shimei = shimei;
         this.seinengappiSeibetsuZokugara = seinengappiSeibetsuZokugara;
         this.shubetsu = shubetsu;
@@ -101,8 +101,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.koseiDate = koseiDate;
     }
 
-    public RString getJuminShubetsuHihokenshaNo() {
-        return juminShubetsuHihokenshaNo;
+    public RString getShikibetsuCodeHihokenshaNo() {
+        return shikibetsuCodeHihokenshaNo;
     }
 
     public RString getShimei() {
@@ -157,9 +157,9 @@ public class dgSetaiShotoku_Row extends DataRow {
         return koseiDate;
     }
 
-    public void setJuminShubetsuHihokenshaNo(RString juminShubetsuHihokenshaNo) {
-        this.setOriginalData("juminShubetsuHihokenshaNo", juminShubetsuHihokenshaNo);
-        this.juminShubetsuHihokenshaNo = juminShubetsuHihokenshaNo;
+    public void setShikibetsuCodeHihokenshaNo(RString shikibetsuCodeHihokenshaNo) {
+        this.setOriginalData("shikibetsuCodeHihokenshaNo", shikibetsuCodeHihokenshaNo);
+        this.shikibetsuCodeHihokenshaNo = shikibetsuCodeHihokenshaNo;
     }
 
     public void setShimei(RString shimei) {

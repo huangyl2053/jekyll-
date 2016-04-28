@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBD {
 
@@ -131,6 +131,86 @@ module DBD {
 
             public txtFushoninRiyu(): UZA.TextBoxMultiLine {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            }
+
+            public haigushaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("haigushaJoho"));
+            }
+
+            public radHaigushaUmu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHaigushaUmu"));
+            }
+
+            public txtShikibetsuCode(): UZA.TextBoxShikibetsuCode {
+                return new UZA.TextBoxShikibetsuCode(this.convFiledName("txtShikibetsuCode"));
+            }
+
+            public txtShimeiKana(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShimeiKana"));
+            }
+
+            public txtShimei(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            }
+
+            public TextBoxFlexibleDate1(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("TextBoxFlexibleDate1"));
+            }
+
+            public txtBirthday(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBirthday"));
+            }
+
+            public txtTelNo(): UZA.TextBoxTelNo {
+                return new UZA.TextBoxTelNo(this.convFiledName("txtTelNo"));
+            }
+
+            public txtRenrakusaki(): UZA.TextBoxTelNo {
+                return new UZA.TextBoxTelNo(this.convFiledName("txtRenrakusaki"));
+            }
+
+            public txtJusho(): UZA.TextBoxJusho {
+                return new UZA.TextBoxJusho(this.convFiledName("txtJusho"));
+            }
+
+            public txtJusho1(): UZA.TextBoxJusho {
+                return new UZA.TextBoxJusho(this.convFiledName("txtJusho1"));
+            }
+
+            public lblGenjusho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblGenjusho"));
+            }
+
+            public lblGenjusho1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblGenjusho1"));
+            }
+
+            public txtGenjusho(): UZA.TextBoxJusho {
+                return new UZA.TextBoxJusho(this.convFiledName("txtGenjusho"));
+            }
+
+            public radKazeiKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKazeiKubun"));
+            }
+
+            public yochokinjoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("yochokinjoho"));
+            }
+
+            public chkYochokin(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkYochokin"));
+            }
+
+            public txtYochokin(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtYochokin"));
+            }
+
+            public txtYukaShoken(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtYukaShoken"));
+            }
+
+            public txtSonota(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtSonota"));
             }
 
             public btnClose(): UZA.Button {

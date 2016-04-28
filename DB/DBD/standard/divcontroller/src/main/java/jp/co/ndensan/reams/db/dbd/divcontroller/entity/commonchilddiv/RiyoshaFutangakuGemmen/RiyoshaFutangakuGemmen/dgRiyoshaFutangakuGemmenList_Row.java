@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.RiyoshaFu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 27 23:03:11 JST 2016 
+ * Thu Apr 28 23:05:32 JST 2016 
  */
 
 

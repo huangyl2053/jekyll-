@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.RiyoshaFutangakuGemmen.RiyoshaFutangakuGemmen;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.FutanGendogakuNintei;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -7,15 +7,13 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.RiyoshaFu
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * RiyoshaFutangakuGemmen のクラスファイル 
+ * FutanGendogakuNintei のクラスファイル 
  * 
  * @author 自動生成
  */
-public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangakuGemmenDiv {
+public class FutanGendogakuNinteiDiv extends Panel implements IFutanGendogakuNinteiDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -25,10 +23,10 @@ public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangak
      */
     @JsonProperty("txtHiddenHihokenshaNo")
     private TextBox txtHiddenHihokenshaNo;
-    @JsonProperty("dgRiyoshaFutangakuGemmenList")
-    private DataGrid<dgRiyoshaFutangakuGemmenList_Row> dgRiyoshaFutangakuGemmenList;
-    @JsonProperty("RiyoshaFutangakuGemmenDetail")
-    private RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail;
+    @JsonProperty("dgFutanGendogakuNinteiList")
+    private DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList;
+    @JsonProperty("FutanGendogakuNinteiDetail")
+    private FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail;
     @JsonProperty("btnClose")
     private Button btnClose;
 
@@ -57,39 +55,39 @@ public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangak
     }
 
     /*
-     * getdgRiyoshaFutangakuGemmenList
-     * @return dgRiyoshaFutangakuGemmenList
+     * getdgFutanGendogakuNinteiList
+     * @return dgFutanGendogakuNinteiList
      */
-    @JsonProperty("dgRiyoshaFutangakuGemmenList")
-    public DataGrid<dgRiyoshaFutangakuGemmenList_Row> getDgRiyoshaFutangakuGemmenList() {
-        return dgRiyoshaFutangakuGemmenList;
+    @JsonProperty("dgFutanGendogakuNinteiList")
+    public DataGrid<dgFutanGendogakuNinteiList_Row> getDgFutanGendogakuNinteiList() {
+        return dgFutanGendogakuNinteiList;
     }
 
     /*
-     * setdgRiyoshaFutangakuGemmenList
-     * @param dgRiyoshaFutangakuGemmenList dgRiyoshaFutangakuGemmenList
+     * setdgFutanGendogakuNinteiList
+     * @param dgFutanGendogakuNinteiList dgFutanGendogakuNinteiList
      */
-    @JsonProperty("dgRiyoshaFutangakuGemmenList")
-    public void setDgRiyoshaFutangakuGemmenList(DataGrid<dgRiyoshaFutangakuGemmenList_Row> dgRiyoshaFutangakuGemmenList) {
-        this.dgRiyoshaFutangakuGemmenList = dgRiyoshaFutangakuGemmenList;
+    @JsonProperty("dgFutanGendogakuNinteiList")
+    public void setDgFutanGendogakuNinteiList(DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList) {
+        this.dgFutanGendogakuNinteiList = dgFutanGendogakuNinteiList;
     }
 
     /*
-     * getRiyoshaFutangakuGemmenDetail
-     * @return RiyoshaFutangakuGemmenDetail
+     * getFutanGendogakuNinteiDetail
+     * @return FutanGendogakuNinteiDetail
      */
-    @JsonProperty("RiyoshaFutangakuGemmenDetail")
-    public RiyoshaFutangakuGemmenDetailDiv getRiyoshaFutangakuGemmenDetail() {
-        return RiyoshaFutangakuGemmenDetail;
+    @JsonProperty("FutanGendogakuNinteiDetail")
+    public FutanGendogakuNinteiDetailDiv getFutanGendogakuNinteiDetail() {
+        return FutanGendogakuNinteiDetail;
     }
 
     /*
-     * setRiyoshaFutangakuGemmenDetail
-     * @param RiyoshaFutangakuGemmenDetail RiyoshaFutangakuGemmenDetail
+     * setFutanGendogakuNinteiDetail
+     * @param FutanGendogakuNinteiDetail FutanGendogakuNinteiDetail
      */
-    @JsonProperty("RiyoshaFutangakuGemmenDetail")
-    public void setRiyoshaFutangakuGemmenDetail(RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail) {
-        this.RiyoshaFutangakuGemmenDetail = RiyoshaFutangakuGemmenDetail;
+    @JsonProperty("FutanGendogakuNinteiDetail")
+    public void setFutanGendogakuNinteiDetail(FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail) {
+        this.FutanGendogakuNinteiDetail = FutanGendogakuNinteiDetail;
     }
 
     /*

@@ -1,7 +1,7 @@
-/// <reference path='AtokureishisetsuNyutaishoJoho_Design.ts' />
+/// <reference path='FutanGendogakuNintei_Design.ts' />
 module DBD
 {
-    export module AtokureishisetsuNyutaishoJoho
+    export module FutanGendogakuNintei
     {
         export class ModeController {
             private controls: Controls;
@@ -28,7 +28,7 @@ module DBD
 
 module DBD
 {
-    export module AtokureishisetsuNyutaishoJoho
+    export module FutanGendogakuNintei
     {
         export class PublicProperties {
             private controls: Controls;

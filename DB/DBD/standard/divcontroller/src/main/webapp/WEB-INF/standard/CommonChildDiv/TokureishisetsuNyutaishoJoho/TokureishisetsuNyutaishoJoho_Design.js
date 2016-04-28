@@ -1,6 +1,6 @@
 var DBD;
 (function (DBD) {
-    (function (AtokureishisetsuNyutaishoJoho) {
+    (function (TokureishisetsuNyutaishoJoho) {
         var Events = (function () {
             function Events() {
             }
@@ -9,25 +9,25 @@ var DBD;
             };
             return Events;
         })();
-        AtokureishisetsuNyutaishoJoho.Events = Events;
+        TokureishisetsuNyutaishoJoho.Events = Events;
 
         var Controls = (function () {
             function Controls(fieldName) {
                 this._myName = fieldName;
             }
             Controls.myType = function () {
-                return "AtokureishisetsuNyutaishoJoho";
+                return "TokureishisetsuNyutaishoJoho";
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBD.AtokureishisetsuNyutaishoJoho.Controls.myType();
+                return this._myName + "_" + DBD.TokureishisetsuNyutaishoJoho.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBD.AtokureishisetsuNyutaishoJoho.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.TokureishisetsuNyutaishoJoho.Controls.myType() + "_" + fieldName;
             };
 
-            Controls.prototype.AtokureishisetsuNyutaishoJoho = function () {
+            Controls.prototype.TokureishisetsuNyutaishoJoho = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
@@ -40,7 +40,7 @@ var DBD;
             };
             return Controls;
         })();
-        AtokureishisetsuNyutaishoJoho.Controls = Controls;
-    })(DBD.AtokureishisetsuNyutaishoJoho || (DBD.AtokureishisetsuNyutaishoJoho = {}));
-    var AtokureishisetsuNyutaishoJoho = DBD.AtokureishisetsuNyutaishoJoho;
+        TokureishisetsuNyutaishoJoho.Controls = Controls;
+    })(DBD.TokureishisetsuNyutaishoJoho || (DBD.TokureishisetsuNyutaishoJoho = {}));
+    var TokureishisetsuNyutaishoJoho = DBD.TokureishisetsuNyutaishoJoho;
 })(DBD || (DBD = {}));

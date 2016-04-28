@@ -3,16 +3,16 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.HikazeiNe
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Apr 28 10:26:43 JST 2016 
+ * Thu Apr 28 16:44:24 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -25,7 +25,8 @@ public class dgHikazeiNenkinShokai_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString shimei;
-    private RString seinengappiSeibetsu;
+    private TextBoxFlexibleDate seinengappi;
+    private RString seibetsu;
     private RString nenkinHokenshaCode;
     private TextBoxCode kisoNenkinNo;
     private TextBoxCode genKisoNenkinNo;
@@ -42,7 +43,8 @@ public class dgHikazeiNenkinShokai_Row extends DataRow {
     public dgHikazeiNenkinShokai_Row() {
         super();
         this.shimei = RString.EMPTY;
-        this.seinengappiSeibetsu = RString.EMPTY;
+        this.seinengappi = new TextBoxFlexibleDate();
+        this.seibetsu = RString.EMPTY;
         this.nenkinHokenshaCode = RString.EMPTY;
         this.kisoNenkinNo = new TextBoxCode();
         this.genKisoNenkinNo = new TextBoxCode();
@@ -56,7 +58,8 @@ public class dgHikazeiNenkinShokai_Row extends DataRow {
         this.jusho = RString.EMPTY;
         this.torokuKubun = RString.EMPTY;
         this.setOriginalData("shimei", shimei);
-        this.setOriginalData("seinengappiSeibetsu", seinengappiSeibetsu);
+        this.setOriginalData("seinengappi", seinengappi);
+        this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("nenkinHokenshaCode", nenkinHokenshaCode);
         this.setOriginalData("kisoNenkinNo", kisoNenkinNo);
         this.setOriginalData("genKisoNenkinNo", genKisoNenkinNo);
@@ -71,10 +74,11 @@ public class dgHikazeiNenkinShokai_Row extends DataRow {
         this.setOriginalData("torokuKubun", torokuKubun);
     }
 
-    public dgHikazeiNenkinShokai_Row(RString shimei, RString seinengappiSeibetsu, RString nenkinHokenshaCode, TextBoxCode kisoNenkinNo, TextBoxCode genKisoNenkinNo, TextBoxCode nenkinCode, TextBoxNum kingaku, RString tsuchiNaiyo, TextBoxFlexibleDate sakuseiDate, RString teiseiHyoji, RString kakushuKubun, RString shoriKekka, RString jusho, RString torokuKubun) {
+    public dgHikazeiNenkinShokai_Row(RString shimei, TextBoxFlexibleDate seinengappi, RString seibetsu, RString nenkinHokenshaCode, TextBoxCode kisoNenkinNo, TextBoxCode genKisoNenkinNo, TextBoxCode nenkinCode, TextBoxNum kingaku, RString tsuchiNaiyo, TextBoxFlexibleDate sakuseiDate, RString teiseiHyoji, RString kakushuKubun, RString shoriKekka, RString jusho, RString torokuKubun) {
         super();
         this.setOriginalData("shimei", shimei);
-        this.setOriginalData("seinengappiSeibetsu", seinengappiSeibetsu);
+        this.setOriginalData("seinengappi", seinengappi);
+        this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("nenkinHokenshaCode", nenkinHokenshaCode);
         this.setOriginalData("kisoNenkinNo", kisoNenkinNo);
         this.setOriginalData("genKisoNenkinNo", genKisoNenkinNo);
@@ -88,7 +92,8 @@ public class dgHikazeiNenkinShokai_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("torokuKubun", torokuKubun);
         this.shimei = shimei;
-        this.seinengappiSeibetsu = seinengappiSeibetsu;
+        this.seinengappi = seinengappi;
+        this.seibetsu = seibetsu;
         this.nenkinHokenshaCode = nenkinHokenshaCode;
         this.kisoNenkinNo = kisoNenkinNo;
         this.genKisoNenkinNo = genKisoNenkinNo;
@@ -107,8 +112,12 @@ public class dgHikazeiNenkinShokai_Row extends DataRow {
         return shimei;
     }
 
-    public RString getSeinengappiSeibetsu() {
-        return seinengappiSeibetsu;
+    public TextBoxFlexibleDate getSeinengappi() {
+        return seinengappi;
+    }
+
+    public RString getSeibetsu() {
+        return seibetsu;
     }
 
     public RString getNenkinHokenshaCode() {
@@ -164,9 +173,14 @@ public class dgHikazeiNenkinShokai_Row extends DataRow {
         this.shimei = shimei;
     }
 
-    public void setSeinengappiSeibetsu(RString seinengappiSeibetsu) {
-        this.setOriginalData("seinengappiSeibetsu", seinengappiSeibetsu);
-        this.seinengappiSeibetsu = seinengappiSeibetsu;
+    public void setSeinengappi(TextBoxFlexibleDate seinengappi) {
+        this.setOriginalData("seinengappi", seinengappi);
+        this.seinengappi = seinengappi;
+    }
+
+    public void setSeibetsu(RString seibetsu) {
+        this.setOriginalData("seibetsu", seibetsu);
+        this.seibetsu = seibetsu;
     }
 
     public void setNenkinHokenshaCode(RString nenkinHokenshaCode) {
