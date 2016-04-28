@@ -57,7 +57,7 @@ public class HokenryoRank {
         RDate 年度期間開始日 = NendoUtil.toNendoStartDate(賦課年度);
         RDate 年度期間終了日 = new RDate(賦課年度.plusYear(1).getYearValue(), Month.MARCH.getValue(), DAY);
         Collections.sort(資格の情報のリスト, new DateComparator());
-        FlexibleDate 市町村コード取得用基準日 = FlexibleDate.EMPTY;
+        FlexibleDate 市町村コード取得用基準日 = null;
         LasdecCode 市町村コード = LasdecCode.EMPTY;
         if (!資格の情報のリスト.isEmpty()) {
             HihokenshaDaicho hihokenshaDaicho = 資格の情報のリスト.get(0);
@@ -70,6 +70,9 @@ public class HokenryoRank {
         }
 
         Map<Integer, MonthShichoson> monthShichosonSet = createMonthShichosonMap();
+        if (市町村コード取得用基準日 == null) {
+            return toList(monthShichosonSet);
+        }
         setMonthShichosonMap(monthShichosonSet, 市町村コード取得用基準日, 市町村コード);
         for (HihokenshaDaicho hihokenshaDaicho : 資格の情報のリスト) {
             FlexibleDate 異動日 = hihokenshaDaicho.get異動日();
@@ -86,6 +89,7 @@ public class HokenryoRank {
                 edit第1号資格取得年月日(hihokenshaDaicho, 資格喪失年月日, monthShichosonSet);
             }
         }
+
         return toList(monthShichosonSet);
     }
 
@@ -179,39 +183,51 @@ public class HokenryoRank {
         Map<Integer, MonthShichoson> monthShichosonSet = new HashMap<>();
         MonthShichoson monthShichoson4 = new MonthShichoson();
         monthShichoson4.set月(Tsuki._4月);
+        monthShichoson4.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(1, monthShichoson4);
         MonthShichoson monthShichoson5 = new MonthShichoson();
         monthShichoson5.set月(Tsuki._5月);
+        monthShichoson5.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_2, monthShichoson5);
         MonthShichoson monthShichoson6 = new MonthShichoson();
         monthShichoson6.set月(Tsuki._6月);
+        monthShichoson6.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_3, monthShichoson6);
         MonthShichoson monthShichoson7 = new MonthShichoson();
         monthShichoson7.set月(Tsuki._7月);
+        monthShichoson7.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_4, monthShichoson7);
         MonthShichoson monthShichoson8 = new MonthShichoson();
         monthShichoson8.set月(Tsuki._8月);
+        monthShichoson8.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_5, monthShichoson8);
         MonthShichoson monthShichoson9 = new MonthShichoson();
         monthShichoson9.set月(Tsuki._9月);
+        monthShichoson9.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_6, monthShichoson9);
         MonthShichoson monthShichoson10 = new MonthShichoson();
         monthShichoson10.set月(Tsuki._10月);
+        monthShichoson10.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_7, monthShichoson10);
         MonthShichoson monthShichoson11 = new MonthShichoson();
         monthShichoson11.set月(Tsuki._11月);
+        monthShichoson11.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_8, monthShichoson11);
         MonthShichoson monthShichoson12 = new MonthShichoson();
         monthShichoson12.set月(Tsuki._12月);
+        monthShichoson12.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_9, monthShichoson12);
         MonthShichoson monthShichoson1 = new MonthShichoson();
         monthShichoson1.set月(Tsuki._1月);
+        monthShichoson1.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_10, monthShichoson1);
         MonthShichoson monthShichoson2 = new MonthShichoson();
         monthShichoson2.set月(Tsuki._2月);
+        monthShichoson2.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_11, monthShichoson2);
         MonthShichoson monthShichoson3 = new MonthShichoson();
         monthShichoson3.set月(Tsuki._3月);
+        monthShichoson3.set市町村コード(LasdecCode.EMPTY);
         monthShichosonSet.put(INDEX_12, monthShichoson3);
         return monthShichosonSet;
     }
