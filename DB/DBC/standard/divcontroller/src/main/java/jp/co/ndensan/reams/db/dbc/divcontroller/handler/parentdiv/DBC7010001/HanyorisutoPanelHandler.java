@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -27,6 +29,9 @@ public class HanyorisutoPanelHandler {
 
     private final HanyorisutoPanelDiv div;
     private static final RString 帳票ID = new RString("DBC701001_HanyoListKyotakuServiceKeikaku");
+    private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
+    private static final RString THREE = new RString("3");
 
     /**
      * HanyorisutoPanelDiv取得します。
@@ -84,4 +89,34 @@ public class HanyorisutoPanelHandler {
             div.getTxtKijunYMD().setDisabled(false);
         }
     }
+
+    /**
+     * setBatchParameterのメソッドです。
+     *
+     * @param div HanyorisutoPanelDiv
+     * @return HanyoListKyotakuServiceKeikakuBatchParameter
+     */
+    public HanyoListKyotakuServiceKeikakuBatchParameter setBatchParameter(HanyorisutoPanelDiv div) {
+        HanyoListKyotakuServiceKeikakuBatchParameter bparam = new HanyoListKyotakuServiceKeikakuBatchParameter();
+        if (div.getCcdHokensya().isVisible()) {
+            bparam.set構成市町村コード(div.getCcdHokensya().getSelectedItem().get市町村コード());
+        }
+        bparam.set作成区分(div.getRadSakuseiKubun().getSelectedKey());
+        RString radchusyutukubunkey = div.getRadChusyutuKubun().getSelectedKey();
+        bparam.set抽出区分(radchusyutukubunkey);
+        if (ChushutsuKubun.全有効データ.getコード().equals(radchusyutukubunkey)) {
+            bparam.set基準年月日(new FlexibleDate(div.getTxtKijunYMD().getValue().toString()));
+        } else {
+            bparam.set基準年月日(null);
+        }
+        bparam.set支援事業者番号(div.getTxtSienJigyosyano().getValue());
+        bparam.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
+        bparam.set出力項目ID(div.getCcdChohyoShutsuryokukoumoku().get出力項目ID());
+        List<RString> list = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
+        bparam.setCsv項目名付加(list.contains(ONE));
+        bparam.setCsv連番付加(list.contains(TWO));
+        bparam.setCsv日付スラッシュ編集(list.contains(THREE));
+        return bparam;
+    }
+
 }
