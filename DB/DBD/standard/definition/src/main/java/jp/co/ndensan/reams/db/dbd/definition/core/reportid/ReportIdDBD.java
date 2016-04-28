@@ -22,7 +22,11 @@ public enum ReportIdDBD {
     /**
      * 負担限度額認定更新のお知らせ通知書旧措置の帳票ID。
      */
-    DBDPR12002_1_2(new ReportId("DBD100008_FutanGendogakuNinteiKoshinTsuchishoKyusochi"), new RString("負担限度額認定更新のお知らせ通知書旧措置"));
+    DBDPR12002_1_2(new ReportId("DBD100008_FutanGendogakuNinteiKoshinTsuchishoKyusochi"), new RString("負担限度額認定更新のお知らせ通知書旧措置")),
+    /**
+     * 負担限度額認定更新のお知らせ通知書旧措置の帳票ID。
+     */
+    DBD800001(new ReportId("DBD800001_FutangendogakuNinteiShinseisho"), new RString("負担限度額認定更新のお知らせ通知書旧措置"));
 
     private final ReportId reportId;
     private final RString reportName;

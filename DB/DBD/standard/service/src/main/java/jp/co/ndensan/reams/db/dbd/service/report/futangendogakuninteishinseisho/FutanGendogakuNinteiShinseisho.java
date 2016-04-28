@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.futangendogakuninteishinseisho;
+package jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoBodyItem;
-import jp.co.ndensan.reams.db.dba.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoProerty;
-import jp.co.ndensan.reams.db.dba.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReportSource;
-import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbd.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoBodyItem;
+import jp.co.ndensan.reams.db.dbd.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -51,8 +51,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護保険負担限度額認定申請書Printerです。
- * 
- * @reamsid_L DBA-0540-200  suguangjun
+ *
+ * @reamsid_L DBA-0540-200 suguangjun
  */
 public class FutanGendogakuNinteiShinseisho {
 
