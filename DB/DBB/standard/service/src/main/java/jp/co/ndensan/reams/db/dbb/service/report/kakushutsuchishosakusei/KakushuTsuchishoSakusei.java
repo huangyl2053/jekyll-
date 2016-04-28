@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoCommonInfo;
@@ -267,8 +266,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         RString 年度区分;
         RString 徴収方法 = null;
         HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        Fuka 賦課 = new Fuka(賦課の情報.toEntity());
-        if (honsanteiIkoHantei.is本算定後(賦課)) {
+        if (honsanteiIkoHantei.is本算定後(賦課の情報)) {
             算定区分 = 算定区分_本算定;
             if (賦課の情報.get賦課年度().isBefore(賦課の情報.get調定年度())) {
                 年度区分 = 年度区分_過年度;
@@ -1528,6 +1526,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                         賦課の情報_更正前.get履歴番号(), 賦課の情報_更正前.get調定日時(),
                         賦課の情報_更正前.get調定日時().getDate().toDateString());
         KakushuTsuchishoEntity 更正前entity = mapper.get更正前後賦課の情報(更正前);
+        FukaAtena 賦課の情報更正後 = get賦課の情報_宛名(更正後entity);
+        FukaAtena 賦課の情報更正前 = get賦課の情報_宛名(更正前entity);
 
         KakushuTsuchishoFindEntity 宛名納組宛先口座entity = mapper.get宛名納組宛先口座(更正後);
 
@@ -1569,11 +1569,11 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
 
         HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        //TODO QA.698:賦課の情報-宛名（更正後)?
-        boolean 本算定区分 = honsanteiIkoHantei.is本算定後(new Fuka(更正後entity.get介護賦課()));
+        boolean 本算定区分_更正後 = honsanteiIkoHantei.is本算定後(賦課の情報更正後 == null ? null : 賦課の情報更正後.get賦課情報());
+        boolean 本算定区分_更正前 = honsanteiIkoHantei.is本算定後(賦課の情報更正前 == null ? null : 賦課の情報更正前.get賦課情報());
         //TODO QA.652:対象者（追加含む）の情報の取得
-        NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正後 = get対象者_追加含む_の情報(本算定区分, 更正後entity);
-        NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正前 = get対象者_追加含む_の情報(本算定区分, 更正前entity);
+        NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正後 = get対象者_追加含む_の情報(本算定区分_更正後, 更正後entity);
+        NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正前 = get対象者_追加含む_の情報(本算定区分_更正前, 更正前entity);
 
         IKozaManager iKozaManager = KozaService.createKozaManager();
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder().setサブ業務コード(SubGyomuCode.DBB介護賦課)
@@ -1586,8 +1586,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
         KakushuTsuchishoCommonInfo 通知書共通情報 = new KakushuTsuchishoCommonInfo();
         通知書共通情報.set地方公共団体(地方公共団体);
-        通知書共通情報.set賦課の情報_更正後(get賦課の情報_宛名(更正後entity));
-        通知書共通情報.set賦課の情報_更正前(get賦課の情報_宛名(更正前entity));
+        通知書共通情報.set賦課の情報_更正後(賦課の情報更正後);
+        通知書共通情報.set賦課の情報_更正前(賦課の情報更正前);
         通知書共通情報.set普徴納期情報List(普徴納期情報List);
         通知書共通情報.set特徴収入情報List(特徴収入情報List);
         if (宛名納組宛先口座entity != null) {
