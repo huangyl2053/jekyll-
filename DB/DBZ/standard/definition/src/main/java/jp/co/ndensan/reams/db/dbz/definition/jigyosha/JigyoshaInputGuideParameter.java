@@ -191,18 +191,10 @@ public final class JigyoshaInputGuideParameter {
         if (!RString.isNullOrEmpty(jigyoshaKbn)) {
             isJigyoshaKbn = true;
         }
-        if (!RString.isNullOrEmpty(gunshiCode)) {
-            isGunshiCode = true;
-        }
-        if (!RString.isNullOrEmpty(kannaiKangaiKubun1) && RString.isNullOrEmpty(kannaiKangaiKubun2)) {
-            isKannaiKangaiKubun1Flg = true;
-        }
-        if (RString.isNullOrEmpty(kannaiKangaiKubun1) && !RString.isNullOrEmpty(kannaiKangaiKubun2)) {
-            isKannaiKangaiKubun2Flg = true;
-        }
-        if (!RString.isNullOrEmpty(kannaiKangaiKubun1) && !RString.isNullOrEmpty(kannaiKangaiKubun2)) {
-            isKannaiKangaiKubunFlg = true;
-        }
+        isGunshiCode = gunshiCodeの判定(isGunshiCode, gunshiCode);
+        isKannaiKangaiKubun1Flg = kannaiKangaiKubun1の判定(isKannaiKangaiKubun1Flg, kannaiKangaiKubun1, kannaiKangaiKubun2);
+        isKannaiKangaiKubun2Flg = kannaiKangaiKubun2の判定(isKannaiKangaiKubun2Flg, kannaiKangaiKubun1, kannaiKangaiKubun2);
+        isKannaiKangaiKubunFlg = kannaiKangaiKubunの判定(isKannaiKangaiKubunFlg, kannaiKangaiKubun1, kannaiKangaiKubun2);
 
         return new JigyoshaInputGuideParameter(
                 jigyoshaNo,
@@ -234,6 +226,38 @@ public final class JigyoshaInputGuideParameter {
                 isKannaiKangaiKubun2Flg,
                 isKannaiKangaiKubunFlg,
                 limitCount);
+    }
+
+    private static boolean gunshiCodeの判定(boolean isGunshiCode, RString gunshiCode) {
+
+        if (!RString.isNullOrEmpty(gunshiCode)) {
+            isGunshiCode = true;
+        }
+        return isGunshiCode;
+    }
+
+    private static boolean kannaiKangaiKubun1の判定(boolean isKannaiKangaiKubun1Flg, RString kannaiKangaiKubun1, RString kannaiKangaiKubun2) {
+
+        if (!RString.isNullOrEmpty(kannaiKangaiKubun1) && RString.isNullOrEmpty(kannaiKangaiKubun2)) {
+            isKannaiKangaiKubun1Flg = true;
+        }
+        return isKannaiKangaiKubun1Flg;
+    }
+
+    private static boolean kannaiKangaiKubun2の判定(boolean isKannaiKangaiKubun2Flg, RString kannaiKangaiKubun1, RString kannaiKangaiKubun2) {
+
+        if (RString.isNullOrEmpty(kannaiKangaiKubun1) && !RString.isNullOrEmpty(kannaiKangaiKubun2)) {
+            isKannaiKangaiKubun2Flg = true;
+        }
+        return isKannaiKangaiKubun2Flg;
+    }
+
+    private static boolean kannaiKangaiKubunの判定(boolean isKannaiKangaiKubunFlg, RString kannaiKangaiKubun1, RString kannaiKangaiKubun2) {
+
+        if (!RString.isNullOrEmpty(kannaiKangaiKubun1) && !RString.isNullOrEmpty(kannaiKangaiKubun2)) {
+            isKannaiKangaiKubunFlg = true;
+        }
+        return isKannaiKangaiKubunFlg;
     }
 
     /**
