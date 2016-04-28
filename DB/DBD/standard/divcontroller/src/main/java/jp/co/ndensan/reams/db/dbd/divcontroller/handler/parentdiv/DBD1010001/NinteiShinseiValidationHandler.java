@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 負担限度額認定申請画面ハンドラクラスです。
  *
- * @author liangbc
+ * @reamsid_L DBD-3590-010 liangbc
  */
 public class NinteiShinseiValidationHandler {
 
