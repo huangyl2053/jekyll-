@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
+ * 再審査決定通知書情報取込PageBreak
  *
- * @author chenaoqi
+ * @reamsid_L DBC-2520-030 chenaoqi
  */
 public class SaishinsaKetteiHokenshaInPageBreak extends PageBreaker<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource> {
 

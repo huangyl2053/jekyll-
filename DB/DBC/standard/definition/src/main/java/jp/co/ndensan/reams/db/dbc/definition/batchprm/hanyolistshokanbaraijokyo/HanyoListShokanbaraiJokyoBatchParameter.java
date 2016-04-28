@@ -38,6 +38,7 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
     private static final String KETTEIDATETO = "決定日To";
     private static final String REPORTID = "帳票ID";
     private static final String INTPUT = "出力項目";
+    private static final String OUTPUT = "出力順";
     private static final String DATE = "日付スラッシュ付加";
     private static final String SERINO = "連番付加";
     private static final String PROGRAMNAME = "項目名付加";
@@ -90,6 +91,8 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
     private boolean 連番付加;
     @BatchParameter(key = DATE, name = "日付スラッシュ付加")
     private boolean 日付スラッシュ付加;
+    @BatchParameter(key = OUTPUT, name = "出力順")
+    private Long 出力順;
     @BatchParameter(key = INTPUT, name = "出力項目")
     private RString 出力項目;
     @BatchParameter(key = REPORTID, name = "帳票ID")
