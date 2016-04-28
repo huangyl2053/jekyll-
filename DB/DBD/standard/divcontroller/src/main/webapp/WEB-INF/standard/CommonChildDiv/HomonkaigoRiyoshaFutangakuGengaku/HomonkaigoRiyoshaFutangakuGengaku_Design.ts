@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBD {
 
@@ -54,7 +54,7 @@ module DBD {
             }
 
             public HomonkaigoRiyoshaFutangakuGengakuShinsei(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuDetail_HomonkaigoRiyoshaFutangakuGengakuShinsei"));
+                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuShinsei"));
             }
 
             public txtShinseiDate(): UZA.TextBoxFlexibleDate {
@@ -70,7 +70,7 @@ module DBD {
             }
 
             public ShogaishaTecho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuDetail_ShogaishaTecho"));
+                return new UZA.Panel(this.convFiledName("ShogaishaTecho"));
             }
 
             public txtHasShogaishaTecho(): UZA.TextBox {
@@ -86,7 +86,7 @@ module DBD {
             }
 
             public HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuDetail_HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan"));
+                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan"));
             }
 
             public txtKetteiDate(): UZA.TextBoxFlexibleDate {

@@ -6,12 +6,12 @@ var DBD;
                 this.fieldName = fieldName;
                 this.controls = new HomonkaigoRiyoshaFutangakuGengaku.Controls(fieldName);
             }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
-
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new HomonkaigoRiyoshaFutangakuGengaku.PublicProperties(this.fieldName);
             };
             return ModeController;
         })();
@@ -25,6 +25,7 @@ var DBD;
     (function (HomonkaigoRiyoshaFutangakuGengaku) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
                 this.controls = new HomonkaigoRiyoshaFutangakuGengaku.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {

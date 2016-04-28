@@ -48,7 +48,7 @@ var DBD;
             };
 
             Controls.prototype.HomonkaigoRiyoshaFutangakuGengakuShinsei = function () {
-                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuDetail_HomonkaigoRiyoshaFutangakuGengakuShinsei"));
+                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuShinsei"));
             };
 
             Controls.prototype.txtShinseiDate = function () {
@@ -64,7 +64,7 @@ var DBD;
             };
 
             Controls.prototype.ShogaishaTecho = function () {
-                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuDetail_ShogaishaTecho"));
+                return new UZA.Panel(this.convFiledName("ShogaishaTecho"));
             };
 
             Controls.prototype.txtHasShogaishaTecho = function () {
@@ -80,7 +80,7 @@ var DBD;
             };
 
             Controls.prototype.HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan = function () {
-                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuDetail_HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan"));
+                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan"));
             };
 
             Controls.prototype.txtKetteiDate = function () {

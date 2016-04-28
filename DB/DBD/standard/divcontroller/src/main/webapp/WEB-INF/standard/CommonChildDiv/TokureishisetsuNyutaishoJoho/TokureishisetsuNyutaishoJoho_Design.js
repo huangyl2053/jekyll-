@@ -31,8 +31,8 @@ var DBD;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.dgtokureishisetsuNyutaishoJoho = function () {
-                return new UZA.DataGrid(this.convFiledName("dgtokureishisetsuNyutaishoJoho"));
+            Controls.prototype.dgTokureishisetsuNyutaishoJoho = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTokureishisetsuNyutaishoJoho"));
             };
 
             Controls.prototype.btnClose = function () {

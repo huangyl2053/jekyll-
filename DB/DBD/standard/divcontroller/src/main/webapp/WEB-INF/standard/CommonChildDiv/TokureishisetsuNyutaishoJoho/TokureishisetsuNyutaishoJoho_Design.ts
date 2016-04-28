@@ -37,8 +37,8 @@ module DBD {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public dgtokureishisetsuNyutaishoJoho(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgtokureishisetsuNyutaishoJoho"));
+            public dgTokureishisetsuNyutaishoJoho(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgTokureishisetsuNyutaishoJoho"));
             }
 
             public btnClose(): UZA.Button {
