@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 市町村単独助成金給付申請を特定するためのMyBatis用パラメータクラスです。
@@ -18,7 +17,7 @@ public final class TandokuJoseikinKyufuShinseiMapperParameter {
 // TODO 主キーの数が足りない場合、処理を追加してください。
     private final HihokenshaNo 主キー1;
     private final FlexibleDate 主キー2;
-    private Decimal 主キー3;
+//    private Decimal 主キー3;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
