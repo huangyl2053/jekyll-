@@ -392,10 +392,10 @@ public class JushochiTokureiRirekiListHandler {
 
             builder.set適用年月日(row.getTekiyoDate().getValue());
             builder.set適用届出年月日(row.getTekiyoTodokedeDate().getValue());
-            builder.set住所地特例適用事由コード(row.getTekiyoJiyuKey());
+            builder.set住所地特例適用事由コード(row.getTekiyoJiyuKey() == null ? RString.EMPTY : row.getTekiyoJiyuKey());
             builder.set解除年月日(row.getKaijoDate().getValue());
             builder.set解除届出年月日(row.getKaijoTodokedeDate().getValue());
-            builder.set住所地特例解除事由コード(row.getKaijoJiyuKey());
+            builder.set住所地特例解除事由コード(row.getKaijoJiyuKey() == null ? RString.EMPTY : row.getKaijoJiyuKey());
 
             returnList.add(builder.build());
 
