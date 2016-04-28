@@ -55,7 +55,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -71,6 +70,7 @@ public class JutakukaishuSikyuShinseiManager {
     private static final RString キー = new RString("hiHokenshaNo");
     private static final RString モード_審査 = new RString("審査モード");
     private static final RString モード_取消 = new RString("取消モード");
+    private static final RString 住宅改修_削除 = new RString("削除");
     private static final RString 区分_コード1 = new RString("1");
     private static final RString 区分_コード2 = new RString("2");
     private static final RString 区分_コード3 = new RString("3");
@@ -630,7 +630,7 @@ public class JutakukaishuSikyuShinseiManager {
         }
         List<JyutakuGaisyunaiyoListParameter> tmpList = new ArrayList<>();
         for (JyutakuGaisyunaiyoListParameter parameter : parameterList) {
-            if (!RowState.Deleted.equals(parameter.get状態())) {
+            if (!住宅改修_削除.equals(parameter.get状態())) {
                 tmpList.add(parameter);
             }
         }

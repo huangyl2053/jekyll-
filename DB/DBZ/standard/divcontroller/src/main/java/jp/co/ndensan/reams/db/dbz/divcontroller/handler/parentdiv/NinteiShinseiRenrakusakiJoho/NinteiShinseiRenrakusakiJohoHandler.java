@@ -74,15 +74,16 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     }
 
     private void set支所ドロップダウンリスト() {
-        if (ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get支所管理有無フラグ()) {
+        List<KeyValueDataSource> dataSrouceList = new ArrayList<>();
+        if (ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定).get支所管理有無フラグ()) {
             div.getDdlShisho().setDisplayNone(false);
-            List<KeyValueDataSource> dataSrouceList = new ArrayList<>();
             KeyValueDataSource dataSource = new KeyValueDataSource(new RString("key0"),
                     ShishoSecurityJoho.createInstance().getShishoCode(UrControlDataFactory.
                             createInstance().getLoginInfo().getUserId()));
             dataSrouceList.add(dataSource);
-            div.getDdlShisho().setDataSource(dataSrouceList);
         }
+        div.getDdlShisho().setDataSource(dataSrouceList);
+        div.getDdlShisho().setSelectedIndex(0);
     }
 
     private void set連絡先区分DDL() {
@@ -93,6 +94,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
             dataSourceList.add(dataSoruce);
         }
         div.getDdlRenrakusakiKubun().setDataSource(dataSourceList);
+        div.getDdlRenrakusakiKubun().setSelectedIndex(0);
     }
 
     private void set本人との関係DDL() {
@@ -102,6 +104,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
             dataSourceList.add(dataSource);
         }
         div.getDdlTsuzukigara().setDataSource(dataSourceList);
+        div.getDdlTsuzukigara().setSelectedIndex(0);
     }
 
     /**
@@ -109,7 +112,10 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void set画面ReadOnly() {
         if (new RString("1").equals(div.getHdnReadOnly())) {
-            div.setReadOnly(true);
+            div.getRenrakusakiIchiran().setReadOnly(true);
+            div.getRenrakusakiNyuryoku().setReadOnly(true);
+            div.getBtnKakutei().setDisabled(true);
+            div.getBtnModoru().setDisabled(false);
         } else {
             div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.ShokaiMode);
         }
@@ -164,8 +170,10 @@ public class NinteiShinseiRenrakusakiJohoHandler {
         div.getTxtTelNo().clearDomain();
         div.getTxtMobileNo().clearDomain();
         div.getTxtYusenJuni().clearValue();
-        div.getBtnShinkiTsuika().setDisabled(true);
-        div.getRenrakusakiIchiran().setReadOnly(true);
+        div.getDdlRenrakusakiKubun().setSelectedIndex(0);
+        div.getDdlShisho().setSelectedIndex(0);
+        div.getDdlTsuzukigara().setSelectedIndex(0);
+
     }
 
     /**
@@ -181,6 +189,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
         div.getTxtTelNo().setDomain(RString.isNullOrEmpty(row.getTelNo()) ? TelNo.EMPTY : new TelNo(row.getTelNo()));
         div.getTxtMobileNo().setDomain(RString.isNullOrEmpty(row.getMobileNo()) ? TelNo.EMPTY : new TelNo(row.getMobileNo()));
         div.getTxtYusenJuni().setValue(row.getYusenJuni());
+        div.getDdlRenrakusakiKubun().setSelectedKey(row.getRenrakusakiKuBun());
+        div.getDdlShisho().setSelectedValue(row.getSisyo());
     }
 
     /**
@@ -194,6 +204,14 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      * DataSourceを一覧へセットします。
      */
     public void setDataSourceを一覧() {
+        if (NinteiShinseiRenrakusakiJohoDiv.ShoriType.InputMode.equals(div.getMode_ShoriType())) {
+            set追加の一覧();
+        } else if (NinteiShinseiRenrakusakiJohoDiv.ShoriType.KoshinMode.equals(div.getMode_ShoriType())) {
+            set修正の一覧();
+        }
+    }
+
+    private void set追加の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
         dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban().getValue(),
                 nullTOEmpty(div.getTxtShimei().getValue()),
@@ -207,6 +225,23 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
                 div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue());
         dateSoruce.add(row);
+        div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
+    }
+
+    private void set修正の一覧() {
+        List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
+        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban().getValue(),
+                nullTOEmpty(div.getTxtShimei().getValue()),
+                nullTOEmpty(RString.EMPTY),
+                nullTOEmpty(div.getTxtJusho().getValue()),
+                nullTOEmpty(div.getTxtTelNo().getDomain().getColumnValue()),
+                nullTOEmpty(div.getTxtMobileNo().getDomain().getColumnValue()),
+                nullTOEmpty(div.getTxtYusenJuni().getValue()),
+                div.getDdlRenrakusakiKubun().getSelectedKey(),
+                div.getDdlShisho().getSelectedKey(),
+                nullTOEmpty(div.getTxtKanaShimei().getValue()),
+                div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue());
+        dateSoruce.set(div.getDdlRenrakusakiKubun().getSelectedIndex(), row);
         div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
     }
 

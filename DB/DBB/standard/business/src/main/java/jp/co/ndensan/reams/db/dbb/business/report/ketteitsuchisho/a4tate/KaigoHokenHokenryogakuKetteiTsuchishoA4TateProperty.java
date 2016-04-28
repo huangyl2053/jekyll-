@@ -28,7 +28,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateProperty extends ReportP
     }
 
     @Override
-    protected Breakers<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> defineBreakers(Breakers<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> breakers,
+    protected Breakers<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> defineBreakers(
+            Breakers<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> breakers,
             BreakerCatalog<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> catalog) {
         return super.defineBreakers(breakers, catalog);
     }

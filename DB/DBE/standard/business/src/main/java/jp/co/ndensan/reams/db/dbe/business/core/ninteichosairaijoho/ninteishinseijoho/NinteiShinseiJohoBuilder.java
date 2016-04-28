@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishins
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -977,7 +976,7 @@ public class NinteiShinseiJohoBuilder {
      * キーが一致しない場合、新たに追加します。<br>
      *
      * @param 認定調査依頼情報 {@link NinteichosaIraiJoho}
-     * @return {@link NinteichosaIraiJohoBuilder}
+     * @return {@link NinteiShinseiJohoBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
     public NinteiShinseiJohoBuilder setNinteichosaIraiJoho(NinteichosaIraiJoho 認定調査依頼情報) {

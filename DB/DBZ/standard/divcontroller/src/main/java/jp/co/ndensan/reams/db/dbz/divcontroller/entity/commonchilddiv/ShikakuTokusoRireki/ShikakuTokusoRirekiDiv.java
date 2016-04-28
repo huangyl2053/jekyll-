@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併あり;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併なし;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
@@ -388,8 +388,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             資格取得届出日.setValue(shikakuTokuso.get資格取得届出年月日());
             row.setShutokuTodokedeDate(資格取得届出日);
             if (!RString.isNullOrEmpty(shikakuTokuso.get取得事由コード())) {
-                row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getName());
-                row.setShutokuJiyuKey(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getCode());
+                row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).get名称());
+                row.setShutokuJiyuKey(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getコード());
             } else {
                 row.setShutokuJiyu(RString.EMPTY);
                 row.setShutokuJiyuKey(RString.EMPTY);

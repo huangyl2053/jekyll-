@@ -58,7 +58,6 @@ public class TennyuHoryuValidationHandler {
         }
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
-        市町村セキュリティ情報.get市町村情報().get市町村コード();
         if (SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
             List<KoseiShichoson> koseiShichosonList = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
             List list = new ArrayList();

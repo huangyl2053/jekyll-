@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  * {@link JutakuKaishuShinseiJyohoTorokuDiv}の仕様クラスです。
@@ -144,13 +143,13 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
         }
 
         public static boolean is住宅改修内容一覧妥当(JutakuKaishuShinseiJyohoTorokuDiv div) {
+            RString 住宅改修_状態 = new RString("Unchanged");
             List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                     .get住宅改修内容一覧();
             List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
             JyutakuGaisyunaiyoListParameter param;
             for (dgGaisyuList_Row row : gridList) {
-                RowState 状態 = RString.EMPTY.equals(row.getTxtJyotai())
-                        ? RowState.Unchanged : RowState.valueOf(row.getTxtJyotai().toString());
+                RString 状態 = RString.EMPTY.equals(row.getTxtJyotai()) ? 住宅改修_状態 : row.getTxtJyotai();
                 param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
                         状態, row.getTxtJutakuAddress(),
                         new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));

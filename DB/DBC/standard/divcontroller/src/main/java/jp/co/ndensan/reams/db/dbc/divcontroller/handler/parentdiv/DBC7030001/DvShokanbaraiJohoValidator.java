@@ -125,4 +125,18 @@ public class DvShokanbaraiJohoValidator {
                 .messages());
         return messages;
     }
+
+    /**
+     * 対象のデータがありませんcheckです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validateCommonButton() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(DvShokanbaraiJohoSpec.isCommonButtonVisible)
+                .thenAdd(DvShokanbaraiJohoValidationMessage.対象のデータがありません)
+                .messages());
+        return messages;
+    }
 }

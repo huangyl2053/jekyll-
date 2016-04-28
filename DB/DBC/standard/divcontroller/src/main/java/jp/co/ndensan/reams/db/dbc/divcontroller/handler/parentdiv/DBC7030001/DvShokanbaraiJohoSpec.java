@@ -128,5 +128,14 @@ public enum DvShokanbaraiJohoSpec implements IPredicate<DvShokanbaraiJohoDiv> {
                     }
                     return true;
                 }
+            },
+    /**
+     * isCommonButtonVisible
+     */
+    isCommonButtonVisible {
+                @Override
+                public boolean apply(DvShokanbaraiJohoDiv div) {
+                    return false;
+                }
             };
 }

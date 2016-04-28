@@ -49,6 +49,9 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
     }
 
     private ShinsaHanteiJokyoReportSource editSource(ShinsaHanteiJokyoReportSource source) {
+        //TODO QA1127 アクセスログの出力
+//        source.shikibetuCode = ShikibetsuCode.EMPTY;
+//        source.shokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.getHokenshaNo());
         source.title = item.getTitle();
         source.gogitaiName = item.getGogitaiName();
         source.kaisaiKaishiYMD = item.getKaisaiKaishiYMD() == null
@@ -91,7 +94,7 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
 
     private RString 和暦年月日Fomart(FlexibleDate date) {
         return (date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.ZERO).toDateString());
+                .fillType(FillType.BLANK).toDateString());
     }
 
     private RString getNowDate() {
@@ -99,7 +102,7 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         printTimeStamp.append(RString.HALF_SPACE);
         printTimeStamp.append(String.format("%02d", printdate.getHour()));
         printTimeStamp.append(DATE_時);
