@@ -135,25 +135,29 @@
         <if test="is資格喪失者のみ">
                 AND DbT1001."shikakuSoshitsuYMD" IS NOT NULL
         </if>
-        AND (
-            DbT1001."shikakuShutokuJiyuCode" IN 
-            <foreach  
-                collection="shutokujiyu"  
-                item="code"  
-                open="("  
-                separator=","  
-                close=")">  
-                 #{code} 
-            </foreach>
-            OR DbT1001."shikakuSoshitsuJiyuCode" IN 
-            <foreach  
-                collection="soshitsujiyu"  
-                item="code"  
-                open="("  
-                separator=","  
-                close=")">  
-                 #{code} 
-            </foreach>
+        AND ( 1 = 1
+            <if test="has取得事由">
+                AND DbT1001."shikakuShutokuJiyuCode" IN 
+                <foreach  
+                    collection="shutokujiyu"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
+            <if test="has喪失事由">
+                OR DbT1001."shikakuSoshitsuJiyuCode" IN 
+                <foreach  
+                    collection="soshitsujiyu"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
         )
         <if test="isEmpty">
                 AND DbT4001."hihokenshaNo" = IS NULL

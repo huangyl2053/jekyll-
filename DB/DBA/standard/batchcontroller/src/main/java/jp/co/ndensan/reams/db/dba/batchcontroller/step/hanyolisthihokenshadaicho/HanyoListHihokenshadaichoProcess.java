@@ -629,9 +629,17 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         HokenshaListLoader loader = HokenshaListLoader.createInstance();
         HokenshaList hokenshaList = loader.getShichosonCodeNameList(GyomuBunrui.介護事務);
         if (is広域) {
-            return hokenshaList.get(広住特措置元市町村コード).get証記載保険者番号();
+            if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
+                return hokenshaList.get(広住特措置元市町村コード).get証記載保険者番号();
+            } else {
+                return ShoKisaiHokenshaNo.EMPTY;
+            }
         } else {
-            return hokenshaList.get(市町村コード).get証記載保険者番号();
+            if (市町村コード != null && !市町村コード.isEmpty()) {
+                return hokenshaList.get(市町村コード).get証記載保険者番号();
+            } else {
+                return ShoKisaiHokenshaNo.EMPTY;
+            }
         }
     }
 
