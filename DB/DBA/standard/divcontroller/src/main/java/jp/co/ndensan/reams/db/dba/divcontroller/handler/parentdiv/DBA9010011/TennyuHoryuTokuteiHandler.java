@@ -70,7 +70,7 @@ public class TennyuHoryuTokuteiHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
         div.getBtnTennyuHoryuTokuteiJushoHozon().setDisabled(false);
         div.getBtnKakutei().setDisabled(true);
-        div.setDisabled(true);
+        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
         div.getCcdShichousonInputGuide().load(RString.EMPTY);
         div.getCcdJushoInputGuide().initialize();
         div.getCcdBunchiInput().initialize();
@@ -113,7 +113,7 @@ public class TennyuHoryuTokuteiHandler {
      */
     public void onClick_btnAdd() {
         div.getBtnKakutei().setDisabled(false);
-        div.setDisabled(false);
+        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(false);
         div.getCcdShichousonInputGuide().clear();
         div.getCcdJushoInputGuide().clear();
         div.getCcdBunchiInput().clear();
@@ -227,7 +227,7 @@ public class TennyuHoryuTokuteiHandler {
     public void onClick_btnModify() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
         div.getBtnKakutei().setDisabled(false);
-        div.setDisabled(false);
+        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(false);
         div.getTennyuHoryuTokuteiJushoNyuryoku().setTxtJotai(修正);
         ddlTennyuHoryuTokuteiJushoIchiran_Row dgRow = div.getDdlTennyuHoryuTokuteiJushoIchiran().getSelectedItems().get(0);
         //TODO QA918 共通部品SET方法のインターフェイスを存在しません
@@ -257,7 +257,7 @@ public class TennyuHoryuTokuteiHandler {
     public void onClick_btnDelete() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, true);
         div.getBtnKakutei().setDisabled(false);
-        div.setDisabled(true);
+        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
         div.getTennyuHoryuTokuteiJushoNyuryoku().setTxtJotai(削除);
         ddlTennyuHoryuTokuteiJushoIchiran_Row dgRow = div.getDdlTennyuHoryuTokuteiJushoIchiran().getSelectedItems().get(0);
         //TODO QA918 共通部品SET方法のインターフェイスを存在しません
@@ -293,7 +293,7 @@ public class TennyuHoryuTokuteiHandler {
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 builder.set住所(new AtenaJusho(list.getTxtJusho()));
                 builder.set住所コード(new ChoikiCode(list.getTxtJushoCode()));
-                builder.set施設コード(list.getTxtShichosonCode().split(RString.HALF_SPACE.toString()).get(0));
+                builder.set施設コード(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(0));
                 builder.set施設種類(list.getTxtShisetsuShurui());
                 builder.set番地(new AtenaBanchi(list.getTxtBanchi()));
                 builder.set番地コード１(new BanchiCode(list.getTxtBanchiCode1()));
@@ -309,7 +309,7 @@ public class TennyuHoryuTokuteiHandler {
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 builder.set住所(new AtenaJusho(list.getTxtJusho()));
                 builder.set住所コード(new ChoikiCode(list.getTxtJushoCode()));
-                builder.set施設コード(list.getTxtShichosonCode().split(RString.HALF_SPACE.toString()).get(0));
+                builder.set施設コード(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(0));
                 builder.set施設種類(list.getTxtShisetsuShurui());
                 builder.set番地(new AtenaBanchi(list.getTxtBanchi()));
                 builder.set番地コード１(new BanchiCode(list.getTxtBanchiCode1()));
@@ -334,6 +334,6 @@ public class TennyuHoryuTokuteiHandler {
         div.getCcdBunchiInput().clear();
         ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         div.getCcdSisetuInputGuide().clear();
-        div.setDisabled(true);
+        div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
     }
 }
