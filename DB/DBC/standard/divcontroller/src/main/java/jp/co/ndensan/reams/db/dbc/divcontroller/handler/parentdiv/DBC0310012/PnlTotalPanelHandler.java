@@ -79,14 +79,18 @@ public class PnlTotalPanelHandler {
         if (修正.equals(画面モード)) {
             div.getPnlCommon().getCcdAtena().setDisabled(true);
             div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(true);
-            if (shokanData.get受付年月日() == null || shokanData.get受付年月日().isEmpty()) {
+            if (shokanData.get決定年月日() == null || shokanData.get決定年月日().isEmpty()) {
                 div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
-                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
             } else if (shokanData.get承認結果区分() == null || shokanData.get承認結果区分().isEmpty()
                     || ShoninKubun.承認しない.getコード().equals(shokanData.get承認結果区分())) {
                 div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
