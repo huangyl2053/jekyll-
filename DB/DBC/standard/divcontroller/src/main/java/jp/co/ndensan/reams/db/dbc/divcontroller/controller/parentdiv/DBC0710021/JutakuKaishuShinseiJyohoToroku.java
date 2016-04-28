@@ -155,13 +155,13 @@ public class JutakuKaishuShinseiJyohoToroku {
         引き継ぎデータEntity.set整理番号(整理番号);
 
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード, null).validate();
+                div, 画面モード, null, false).validate();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, 画面モード, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
+                div, 画面モード, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
         if (valid2.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid2).respond();
         }
@@ -599,7 +599,7 @@ public class JutakuKaishuShinseiJyohoToroku {
 
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
+                div, null, handler.住宅改修内容一覧チェック(), false).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
@@ -618,15 +618,15 @@ public class JutakuKaishuShinseiJyohoToroku {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
+                div, null, handler.住宅改修内容一覧チェック(), true).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-                div, null, null).validate給付率();
-        if (valid2.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(valid2).respond();
-        }
+//        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+//                div, null, null).validate給付率();
+//        if (valid2.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(valid2).respond();
+//        }
         Decimal 費用額合計 = handler.費用額合計の取得();
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHiyoTotalNow().setValue(費用額合計);
@@ -780,10 +780,11 @@ public class JutakuKaishuShinseiJyohoToroku {
     }
 
     private JutakuKaishuShinseiJyohoTorokuValidationHandler getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-            JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード, RString 住宅改修内容チェックエラーメッセージ) {
+            JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード, RString 住宅改修内容チェックエラーメッセージ,
+            boolean is給付率) {
         if (画面モード != null || 住宅改修内容チェックエラーメッセージ != null) {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(
-                    画面モード, div, 住宅改修内容チェックエラーメッセージ);
+                    画面モード, div, 住宅改修内容チェックエラーメッセージ, is給付率);
         } else {
             return new JutakuKaishuShinseiJyohoTorokuValidationHandler(div);
         }

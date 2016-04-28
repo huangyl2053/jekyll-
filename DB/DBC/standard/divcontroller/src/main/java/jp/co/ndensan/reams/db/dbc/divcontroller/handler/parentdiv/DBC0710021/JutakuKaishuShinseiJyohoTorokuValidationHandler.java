@@ -29,6 +29,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
     private final JutakuKaishuShinseiJyohoTorokuDiv div;
     private final RString 画面モード;
     private final RString 住宅改修内容チェックエラーメッセージ;
+    private final boolean is給付率;
     private static final RString 画面モード_取消 = new RString("取消モード");
     private static final RString メッセージ_1 = new RString("住宅改修データがありません。");
     private static final RString メッセージ_2 = new RString("着工日が同一年月を設定してください。");
@@ -40,12 +41,15 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      * @param 画面モード 画面モード
      * @param div 住宅改修費支給申請_申請情報登録div
      * @param 住宅改修内容チェックエラーメッセージ errMsg
+     * @param is給付率 給付率
      */
     public JutakuKaishuShinseiJyohoTorokuValidationHandler(RString 画面モード,
-            JutakuKaishuShinseiJyohoTorokuDiv div, RString 住宅改修内容チェックエラーメッセージ) {
+            JutakuKaishuShinseiJyohoTorokuDiv div, RString 住宅改修内容チェックエラーメッセージ,
+            boolean is給付率) {
         this.div = div;
         this.画面モード = 画面モード;
         this.住宅改修内容チェックエラーメッセージ = 住宅改修内容チェックエラーメッセージ;
+        this.is給付率 = is給付率;
     }
 
     /**
@@ -57,6 +61,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         this.div = div;
         this.画面モード = null;
         this.住宅改修内容チェックエラーメッセージ = null;
+        this.is給付率 = false;
     }
 
     /**
@@ -65,7 +70,7 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      * @return バリデーション突合結果
      */
     public ValidationMessageControlPairs validate() {
-        IValidationMessages messages = new ControlValidator(div, 画面モード, 住宅改修内容チェックエラーメッセージ)
+        IValidationMessages messages = new ControlValidator(div, 画面モード, 住宅改修内容チェックエラーメッセージ, is給付率)
                 .validate();
         return createDictionary().check(messages);
     }
@@ -76,30 +81,18 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
      * @return バリデーション突合結果
      */
     public ValidationMessageControlPairs validate住宅改修内容() {
-        IValidationMessages messages = new ControlValidator(div, 画面モード, 住宅改修内容チェックエラーメッセージ)
+        IValidationMessages messages = new ControlValidator(div, 画面モード, 住宅改修内容チェックエラーメッセージ, is給付率)
                 .validate住宅改修内容();
         return create住宅改修内容Dictionary().check(messages);
-    }
-
-    /**
-     * 「限度額をチェックする」ボタンクリック時の給付率バリデーションチェックです。
-     *
-     * @return バリデーション突合結果
-     */
-    public ValidationMessageControlPairs validate給付率() {
-        IValidationMessages messages = new ControlValidator(div, 画面モード, null).validate給付率();
-        return create給付率Dictionary().check(messages);
-    }
-
-    private ValidationDictionary create給付率Dictionary() {
-        return new ValidationDictionaryBuilder()
-                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力,
-                        div.getCommHeadPanel().getTxtKyufuritsu()).build();
     }
 
     private ValidationDictionary create住宅改修内容Dictionary() {
         ValidationDictionaryBuilder builder = new ValidationDictionaryBuilder()
                 .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM());
+        if (is給付率) {
+            builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力,
+                    div.getCommHeadPanel().getTxtKyufuritsu());
+        }
         if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
             if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                 builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.メッセージ_1);
@@ -134,12 +127,14 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         private final JutakuKaishuShinseiJyohoTorokuDiv div;
         private final RString 画面モード;
         private final RString 住宅改修内容チェックエラーメッセージ;
+        private final boolean is給付率;
 
         public ControlValidator(JutakuKaishuShinseiJyohoTorokuDiv div, RString 画面モード,
-                RString 住宅改修内容チェックエラーメッセージ) {
+                RString 住宅改修内容チェックエラーメッセージ, boolean is給付率) {
             this.div = div;
             this.画面モード = 画面モード;
             this.住宅改修内容チェックエラーメッセージ = 住宅改修内容チェックエラーメッセージ;
+            this.is給付率 = is給付率;
         }
 
         /**
@@ -171,20 +166,6 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         }
 
         /**
-         * 「限度額をチェックする」ボタンクリック時のバリデーションチェック。
-         *
-         * @return バリデーション突合結果
-         */
-        public IValidationMessages validate給付率() {
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.給付率が入力)
-                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力)
-                    .messages());
-            return messages;
-        }
-
-        /**
          * 保存ボタンクリック時のバリデーションチェック。
          *
          * @return バリデーション突合結果
@@ -195,10 +176,12 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                     .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.提供着工年月が入力)
                     .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力)
                     .messages());
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.給付率が入力)
-                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力)
-                    .messages());
+            if (is給付率) {
+                messages.add(ValidateChain.validateStart(div)
+                        .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.給付率が入力)
+                        .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力)
+                        .messages());
+            }
             if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
                 if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                     messages.add(ValidateChain.validateStart(div)
