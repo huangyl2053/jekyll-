@@ -203,7 +203,8 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onChange_radKetteiKubun(RiyoshaFutangakuGengakuPanelDiv div) {
-        getHandler(div).承認情報エリア状態(div.getRadKetteiKubun().getSelectedKey(), false);
+        boolean is申請日非活性 = div.getTxtShinseiYmd().isDisabled();
+        getHandler(div).承認情報エリア状態(div.getRadKetteiKubun().getSelectedKey(), false, is申請日非活性);
         return ResponseData.of(div).respond();
     }
 
@@ -282,7 +283,7 @@ public class RiyoshaFutangakuGengakuPanel {
             return ResponseData.of(div).addMessage(message).respond();
         }
 
-        if (!ResponseHolder.getMenuID().equals(承認メニュー)) {
+        if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             getValidationHandler().validateFor適用期間重複なし(pairs, div);
             if (pairs.iterator().hasNext()) {
