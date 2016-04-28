@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dvkogakuservicejoho.DvKogakuServiceJohoBatchParamter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.KokuhorenFuicchi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShiharaiSaki;
@@ -15,9 +14,14 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinsaHoh
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.Taishosha;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -26,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 汎用リスト_高額介護サービス費状況
@@ -38,9 +43,13 @@ public class DvKogakuServiceJohoHandler {
     private static final RString すべて_0 = new RString("0");
     private static final RString 事務広域 = new RString("事務広域");
     private static final RString 事務単一 = new RString("事務単一");
+    private static final RString 全市町村 = new RString("全市町村");
     private static final RString すべて = new RString("すべて");
     private static final RString 口座払い = new RString("口座払い");
     private static final RString 窓口払い = new RString("窓口払い");
+    private static final RString 項目名 = new RString("項目名付加");
+    private static final RString 連番 = new RString("連番付加");
+    private static final RString 日付スラッシュ = new RString("日付'/'編集");
 
     /**
      * コンストラクタです。
@@ -157,33 +166,34 @@ public class DvKogakuServiceJohoHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
-     * @return DvKogakuServiceJohoBatchParamter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
-    public DvKogakuServiceJohoBatchParamter getBatchParamter() {
-        DvKogakuServiceJohoBatchParamter batchparam = new DvKogakuServiceJohoBatchParamter();
-        if (事務広域.equals(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem().get市町村名称())
-                || 事務単一.equals(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem()
-                        .get市町村名称())) {
+    public HanyoListKogakuKaigoBatchParameter getBatchParamter() {
+        HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        if (事務広域.equals(市町村判定)) {
+            HokenshaSummary 保険者DDLSelected = div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem();
+            if (!全市町村.equals(保険者DDLSelected.get市町村名称())) {
+                batchparam.setKouseiShichosonCode(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem()
+                        .get市町村コード());
+            } else {
+                div.getDvKogakuChushutsuJoken().getCcdHokenshaList().isDisabled();
+            }
+        }
+        if (事務単一.equals(市町村判定)) {
             div.getDvKogakuChushutsuJoken().getCcdHokenshaList().isDisabled();
-        } else {
-            batchparam.setKouseiShichosonCode(div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem()
-                    .get市町村名称());
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue() == null) {
             batchparam.setServiceYmFrom(null);
         } else {
-            batchparam.setServiceYmFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuServiceTeikyoYM().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getFromValue()
-                    .toDateString());
+            batchparam.setServiceYmFrom(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuServiceTeikyoYM().getFromValue().getYearMonth().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue() == null) {
             batchparam.setServiceYmTo(null);
         } else {
-            batchparam.setServiceYmTo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM()
-                    .getToValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuServiceTeikyoYM().getToValue()
-                    .toDateString());
+            batchparam.setServiceYmTo(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuServiceTeikyoYM().getToValue().getYearMonth().toString()));
         }
         batchparam.setShoriJokyo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo()
                 .getSelectedValue().isEmpty() ? RString.EMPTY : div
@@ -271,111 +281,84 @@ public class DvKogakuServiceJohoHandler {
         return pairs;
     }
 
-    private void batchParamterHandleParentAdd(DvKogakuServiceJohoBatchParamter batchparam) {
+    private void batchParamterHandleParentAdd(HanyoListKogakuKaigoBatchParameter batchparam) {
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate().getFromValue() == null) {
             batchparam.setShisehiFrom(null);
         } else {
-            batchparam.setShisehiFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate()
-                    .getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate().getFromValue()
-                    .toDateString());
+            batchparam.setShisehiFrom(new FlexibleDate(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuShinseiDate().getFromValue().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate().getToValue() == null) {
             batchparam.setShisehiTo(null);
         } else {
-            batchparam.setShisehiTo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate()
-                    .getToValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuShinseiDate().getToValue()
-                    .toDateString());
+            batchparam.setShisehiTo(new FlexibleDate(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuShinseiDate().getToValue().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuHokenshaKetteiDate().getFromValue() == null) {
             batchparam.setHokemonoKeteihiFrom(null);
         } else {
-            batchparam.setHokemonoKeteihiFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuHokenshaKetteiDate().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuHokenshaKetteiDate().getFromValue()
-                    .toDateString());
+            batchparam.setHokemonoKeteihiFrom(new FlexibleDate(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuHokenshaKetteiDate().getFromValue().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuHokenshaKetteiDate().getToValue() == null) {
             batchparam.setHokemonoKeteihiTo(null);
         } else {
-            batchparam.setHokemonoKeteihiTo(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuHokenshaKetteiDate().getToValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuHokenshaKetteiDate().getToValue()
-                    .toDateString());
+            batchparam.setHokemonoKeteihiTo(new FlexibleDate(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuHokenshaKetteiDate().getToValue().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenKetteiYM().getFromValue() == null) {
             batchparam.setKokuhoreKeteiymFrom(null);
         } else {
-            batchparam.setKokuhoreKeteiymFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuKokuhorenKetteiYM().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenKetteiYM().getFromValue()
-                    .toDateString());
+            batchparam.setKokuhoreKeteiymFrom(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuKokuhorenKetteiYM().getFromValue().getYearMonth().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenKetteiYM().getToValue() == null) {
             batchparam.setKokuhoreKeteiymTo(null);
         } else {
-            batchparam.setKokuhoreKeteiymTo(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuKokuhorenKetteiYM().getToValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenKetteiYM().getToValue()
-                    .toDateString());
+            batchparam.setKokuhoreKeteiymTo(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuKokuhorenKetteiYM().getToValue().getYearMonth().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuTaishoshaUketoriYM().getFromValue() == null) {
             batchparam.setTaishoshaUketoriymFrom(null);
         } else {
-            batchparam.setTaishoshaUketoriymFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuTaishoshaUketoriYM().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuTaishoshaUketoriYM().getFromValue()
-                    .toDateString());
+            batchparam.setTaishoshaUketoriymFrom(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuTaishoshaUketoriYM().getFromValue().getYearMonth().toString()));
         }
 
     }
 
-    private void batchParamterHandleSubAdd(DvKogakuServiceJohoBatchParamter batchparam) {
+    private void batchParamterHandleSubAdd(HanyoListKogakuKaigoBatchParameter batchparam) {
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenSofuYM().getFromValue() == null) {
             batchparam.setKokuhoreSofuYMFrom(null);
         } else {
-            batchparam.setKokuhoreSofuYMFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuKokuhorenSofuYM().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenSofuYM().getFromValue()
-                    .toDateString());
+            batchparam.setKokuhoreSofuYMFrom(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuKokuhorenSofuYM().getFromValue().getYearMonth().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenSofuYM().getToValue() == null) {
             batchparam.setKokuhoreSofuYMTo(null);
         } else {
-            batchparam.setKokuhoreSofuYMTo(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuKokuhorenSofuYM().getToValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKokuhorenSofuYM().getToValue()
-                    .toDateString());
+            batchparam.setKokuhoreSofuYMTo(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuKokuhorenSofuYM().getToValue().getYearMonth().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM().getFromValue() == null) {
             batchparam.setKeteijohoUketoriymFrom(null);
         } else {
-            batchparam.setKeteijohoUketoriymFrom(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuKetteiJohoUketoriYM().getFromValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM().getFromValue()
-                    .toDateString());
+            batchparam.setKeteijohoUketoriymFrom(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuKetteiJohoUketoriYM().getFromValue().getYearMonth().toString()));
         }
         if (div.getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM().getToValue() == null) {
             batchparam.setKeteijohoUketoriymTo(null);
         } else {
-            batchparam.setKeteijohoUketoriymTo(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                    .getTxtKogakuKetteiJohoUketoriYM().getToValue().toDateString().isEmpty() ? RString.EMPTY : div
-                    .getDvKogakuChushutsuJoken().getDvKogakuService().getTxtKogakuKetteiJohoUketoriYM().getFromValue()
-                    .toDateString());
+            batchparam.setKeteijohoUketoriymTo(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
+                    .getTxtKogakuKetteiJohoUketoriYM().getToValue().getYearMonth().toString()));
         }
-        batchparam.setShutsuryokuju(div.getCcdKogakuShutsuryokujun().getサブ業務コード().value()
+        batchparam.setShutsuryokuju(div.getCcdKogakuShutsuryokujun().get出力順ID());
+        batchparam.setShutsuryokuTomoku(div.getCcdKogakuShutsuryokuKomoku().get出力項目ID()
                 .isEmpty() ? RString.EMPTY : div
-                .getCcdKogakuShutsuryokujun().getサブ業務コード().value());
-        batchparam.setTomokumeFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getLabelLText()
-                .isEmpty() ? RString.EMPTY : div
-                .getDvCsvHenshuHoho().getChkCsvHenshuHoho().getLabelLText());
-        batchparam.setRebanFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getLabelLText()
-                .isEmpty() ? RString.EMPTY : div
-                .getDvCsvHenshuHoho().getChkCsvHenshuHoho().getLabelLText());
-        batchparam.setHizukeHeshu(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getLabelLText()
-                .isEmpty() ? RString.EMPTY : div
-                .getDvCsvHenshuHoho().getChkCsvHenshuHoho().getLabelLText());
+                .getCcdKogakuShutsuryokuKomoku().get出力項目ID());
+        batchparam.setTomokumeFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(項目名));
+        batchparam.setRebanFuka(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(連番));
+        batchparam.setHizukeHeshu(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ));
     }
 
     private List<KeyValueDataSource> get処理状況リスト() {

@@ -5,17 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7020001;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dvkogakuservicejoho.DvKogakuServiceJohoBatchParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001.DvKogakuServiceJohoHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 汎用リスト_高額介護サービス費状況
@@ -25,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class DvKogakuServiceJoho {
 
     private static final ReportId 帳票ID = new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo");
+    private static final RString 事務広域 = new RString("事務広域");
+    private static final RString 事務単一 = new RString("事務単一");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -41,9 +46,11 @@ public class DvKogakuServiceJoho {
         panel.getCcdHokenshaList().loadHokenshaList();
         if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null
                 && 市町村セキュリティ情報.get導入形態コード().is広域()) {
+            ViewStateHolder.put(ViewStateKeys.市町村判定, 事務広域);
             panel.getCcdHokenshaList().setDisabled(false);
             panel.getCcdHokenshaList().setVisible(true);
         } else {
+            ViewStateHolder.put(ViewStateKeys.市町村判定, 事務単一);
             panel.getCcdHokenshaList().setDisabled(true);
             panel.getCcdHokenshaList().setVisible(false);
         }
@@ -86,9 +93,9 @@ public class DvKogakuServiceJoho {
      * @param div DvKogakuServiceJohoDiv
      * @return ResponseData
      */
-    public ResponseData<DvKogakuServiceJohoBatchParamter> click_batchRegister(DvKogakuServiceJohoDiv div) {
+    public ResponseData<HanyoListKogakuKaigoBatchParameter> click_batchRegister(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
-        DvKogakuServiceJohoBatchParamter parameter = handler.getBatchParamter();
+        HanyoListKogakuKaigoBatchParameter parameter = handler.getBatchParamter();
         return ResponseData.of(parameter).respond();
     }
 
