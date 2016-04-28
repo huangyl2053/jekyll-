@@ -1013,14 +1013,14 @@ public class DBD1030001Handler {
                 || (画面減免減額申請.get申請届出代行区分() != null && !画面減免減額申請.get申請届出代行区分().equals(減免減額申請.get申請届出代行区分()))) {
             return true;
         }
-        if (null == 画面減免減額申請.get申請届出者住所() && 減免減額申請.get申請届出者住所() != null && !減免減額申請.get申請届出者住所().isEmpty()
-                || (画面減免減額申請.get申請届出者住所() != null && !画面減免減額申請.get申請届出者住所().equals(減免減額申請.get申請届出者住所()))) {
-            return true;
-        }
         return 減免減額申請変更2(減免減額申請, 画面減免減額申請);
     }
 
     private boolean 減免減額申請変更2(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 画面減免減額申請) {
+        if (null == 画面減免減額申請.get申請届出者住所() && 減免減額申請.get申請届出者住所() != null && !減免減額申請.get申請届出者住所().isEmpty()
+                || (画面減免減額申請.get申請届出者住所() != null && !画面減免減額申請.get申請届出者住所().equals(減免減額申請.get申請届出者住所()))) {
+            return true;
+        }
         if (null == 画面減免減額申請.get申請届出者氏名() && 減免減額申請.get申請届出者氏名() != null && !減免減額申請.get申請届出者氏名().isEmpty()
                 || !画面減免減額申請.get申請届出者氏名().equals(減免減額申請.get申請届出者氏名())) {
             return true;
@@ -1031,6 +1031,10 @@ public class DBD1030001Handler {
                 && !画面減免減額申請.get申請届出者氏名カナ().equals(減免減額申請.get申請届出者氏名カナ()))) {
             return true;
         }
+        return 減免減額申請変更3(減免減額申請, 画面減免減額申請);
+    }
+
+    private boolean 減免減額申請変更3(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 画面減免減額申請) {
         if (null == 画面減免減額申請.get申請届出者続柄() && 減免減額申請.get申請届出者続柄() != null && !減免減額申請.get申請届出者続柄().isEmpty()
                 || (画面減免減額申請.get申請届出者続柄() != null && !画面減免減額申請.get申請届出者続柄().equals(減免減額申請.get申請届出者続柄()))) {
             return true;
