@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.sha
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -140,12 +141,20 @@ public class ShafukuRiyoshaFutanKeigenManager {
      * 利用者負担額減額{@link ShakaifukuRiyoshaFutanKeigen}を保存します。
      *
      * @param 社会福祉法人等利用者負担軽減 {@link ShakaifukuRiyoshaFutanKeigen}
+     * @param 減免減額種類 減免減額種類
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean delete社会福祉法人等利用者負担軽減(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減) {
+    public boolean delete社会福祉法人等利用者負担軽減By減免減額種類(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減, RString 減免減額種類) {
         requireNonNull(社会福祉法人等利用者負担軽減, UrSystemErrorMessages.値がnull.getReplacedMessage("社会福祉法人等利用者負担軽減"));
-        delete減免減額申請リスト(社会福祉法人等利用者負担軽減.getGemmenGengakuShinseiList());
+        requireNonNull(減免減額種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額種類"));
+        List<GemmenGengakuShinsei> 減免減額申請リスト = 社会福祉法人等利用者負担軽減.getGemmenGengakuShinseiList();
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請リスト) {
+            if (!減免減額種類.equals(減免減額申請.get減免減額種類())) {
+                減免減額申請リスト.remove(減免減額申請);
+            }
+        }
+        delete減免減額申請リスト(減免減額申請リスト);
         return 1 == 社会福祉法人等利用者負担軽減Dac.delete(社会福祉法人等利用者負担軽減.toEntity());
     }
 
