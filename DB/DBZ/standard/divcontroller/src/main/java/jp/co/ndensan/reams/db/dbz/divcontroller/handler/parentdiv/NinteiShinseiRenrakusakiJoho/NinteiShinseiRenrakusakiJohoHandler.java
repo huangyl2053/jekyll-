@@ -204,6 +204,14 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      * DataSourceを一覧へセットします。
      */
     public void setDataSourceを一覧() {
+        if (NinteiShinseiRenrakusakiJohoDiv.ShoriType.InputMode.equals(div.getMode_ShoriType())) {
+            set追加の一覧();
+        } else if (NinteiShinseiRenrakusakiJohoDiv.ShoriType.KoshinMode.equals(div.getMode_ShoriType())) {
+            set修正の一覧();
+        }
+    }
+
+    private void set追加の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
         dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban().getValue(),
                 nullTOEmpty(div.getTxtShimei().getValue()),
@@ -217,6 +225,23 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
                 div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue());
         dateSoruce.add(row);
+        div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
+    }
+
+    private void set修正の一覧() {
+        List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
+        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban().getValue(),
+                nullTOEmpty(div.getTxtShimei().getValue()),
+                nullTOEmpty(RString.EMPTY),
+                nullTOEmpty(div.getTxtJusho().getValue()),
+                nullTOEmpty(div.getTxtTelNo().getDomain().getColumnValue()),
+                nullTOEmpty(div.getTxtMobileNo().getDomain().getColumnValue()),
+                nullTOEmpty(div.getTxtYusenJuni().getValue()),
+                div.getDdlRenrakusakiKubun().getSelectedKey(),
+                div.getDdlShisho().getSelectedKey(),
+                nullTOEmpty(div.getTxtKanaShimei().getValue()),
+                div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue());
+        dateSoruce.set(div.getDdlRenrakusakiKubun().getSelectedIndex(), row);
         div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
     }
 

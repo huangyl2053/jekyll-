@@ -46,10 +46,12 @@ public class NinteiShinseiValidationHandler {
                     "自宅電話番号　または　携帯電話番号"),
                     div.getRenrakusakiNyuryoku().getTxtTelNo(), div.getRenrakusakiNyuryoku().getTxtMobileNo()));
         }
-        for (dgRenrakusakiIchiran_Row row : div.getDgRenrakusakiIchiran().getDataSource()) {
-            if (row.getRenban().equals(div.getRenrakusakiNyuryoku().getTxtRenban().getValue())) {
-                validationMessages.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.既に登録済,
-                        div.getTxtRenban().getValue().toString()), div.getTxtRenban()));
+        if (!NinteiShinseiRenrakusakiJohoDiv.ShoriType.KoshinMode.equals(div.getMode_ShoriType())) {
+            for (dgRenrakusakiIchiran_Row row : div.getDgRenrakusakiIchiran().getDataSource()) {
+                if (row.getRenban().equals(div.getRenrakusakiNyuryoku().getTxtRenban().getValue())) {
+                    validationMessages.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.既に登録済,
+                            div.getTxtRenban().getValue().toString()), div.getTxtRenban()));
+                }
             }
         }
         return validationMessages;

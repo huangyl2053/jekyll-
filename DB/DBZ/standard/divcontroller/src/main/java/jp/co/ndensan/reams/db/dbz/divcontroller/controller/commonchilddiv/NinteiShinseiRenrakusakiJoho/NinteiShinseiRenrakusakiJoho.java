@@ -53,6 +53,9 @@ public class NinteiShinseiRenrakusakiJoho {
     public ResponseData<NinteiShinseiRenrakusakiJohoDiv> onClilck_btnShinkiTsuika(NinteiShinseiRenrakusakiJohoDiv div) {
         div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.InputMode);
         getHandler(div).set連絡先入力の各項目をクリア();
+        div.getBtnShinkiTsuika().setDisabled(true);
+        div.getDgRenrakusakiIchiran().setReadOnly(true);
+        div.getBtnFukushaTsuika().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -69,6 +72,9 @@ public class NinteiShinseiRenrakusakiJoho {
         div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.InputMode);
         getHandler(div).set連絡先入力();
         getHandler(div).set画面項目の使用可();
+        div.getBtnShinkiTsuika().setDisabled(false);
+        div.getDgRenrakusakiIchiran().setReadOnly(true);
+        div.getBtnFukushaTsuika().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -148,9 +154,11 @@ public class NinteiShinseiRenrakusakiJoho {
      * @return ResponseData<NinteiShinseiRenrakusakiJohoDiv>
      */
     public ResponseData<NinteiShinseiRenrakusakiJohoDiv> onClick_btnToroku(NinteiShinseiRenrakusakiJohoDiv div) {
+        div.getBtnShinkiTsuika().setDisabled(false);
+        div.getDgRenrakusakiIchiran().setReadOnly(false);
+        div.getBtnFukushaTsuika().setDisabled(false);
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(getMessage().check_登録する(div));
-
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
