@@ -193,7 +193,7 @@ public class DvShokanbaraiJohoHandler {
         boolean 連番付加 = div.getDvShokanbaraiParam().getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(連番);
         boolean 日付スラッシュ付加 = div.getDvShokanbaraiParam()
                 .getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ);
-        long 出力項目 = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID();
+        long 出力順 = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID();
         ReportId 帳票ID = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get帳票ID();
         parameter.setサービス提供年月From(サービス提供年月From);
         parameter.setサービス提供年月To(サービス提供年月To);
@@ -202,7 +202,7 @@ public class DvShokanbaraiJohoHandler {
         parameter.set保険者コード(保険者コード);
         parameter.set保険者名(保険者名);
         parameter.set処理状況(処理状況);
-        parameter.set出力項目(出力項目);
+        parameter.set出力順(出力順);
         parameter.set国保連送付年月From(国保連送付年月From);
         parameter.set国保連送付年月To(国保連送付年月To);
         parameter.set帳票ID(帳票ID);
