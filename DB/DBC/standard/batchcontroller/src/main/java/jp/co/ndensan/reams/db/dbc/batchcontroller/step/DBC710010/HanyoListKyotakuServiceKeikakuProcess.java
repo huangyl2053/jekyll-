@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -170,10 +171,10 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(構成市町村);
-        RString 構成市町村コード = 左記号.concat(parameter.get構成市町村コード().getColumnValue()).concat(右記号);
+        LasdecCode lasdecCode = parameter.get構成市町村コード();
+        RString 構成市町村コード = 左記号.concat(lasdecCode == null ? RString.EMPTY : lasdecCode.getColumnValue()).concat(右記号);
         //TODOのNo.716 構成市町村名 ?
-        builder.append(parameter.get構成市町村コード().isEmpty()
-                ? RString.EMPTY : 構成市町村コード);
+        builder.append(構成市町村コード);
         出力条件.add(builder.toRString());
         builder = get作成区分();
         出力条件.add(builder.toRString());
