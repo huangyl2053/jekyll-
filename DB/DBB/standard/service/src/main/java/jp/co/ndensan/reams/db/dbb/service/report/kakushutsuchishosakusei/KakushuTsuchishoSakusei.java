@@ -1569,8 +1569,12 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
 
         HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        boolean 本算定区分_更正後 = honsanteiIkoHantei.is本算定後(賦課の情報更正後 == null ? null : 賦課の情報更正後.get賦課情報());
-        boolean 本算定区分_更正前 = honsanteiIkoHantei.is本算定後(賦課の情報更正前 == null ? null : 賦課の情報更正前.get賦課情報());
+        boolean 本算定区分_更正後 = false;
+        boolean 本算定区分_更正前 = false;
+        if (賦課の情報更正後 != null && 賦課の情報更正前 != null) {
+            本算定区分_更正後 = honsanteiIkoHantei.is本算定後(賦課の情報更正後.get賦課情報());
+            本算定区分_更正前 = honsanteiIkoHantei.is本算定後(賦課の情報更正前.get賦課情報());
+        }
         //TODO QA.652:対象者（追加含む）の情報の取得
         NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正後 = get対象者_追加含む_の情報(本算定区分_更正後, 更正後entity);
         NenkinTokuchoKaifuJoho 対象者_追加含む_の情報_更正前 = get対象者_追加含む_の情報(本算定区分_更正前, 更正前entity);
