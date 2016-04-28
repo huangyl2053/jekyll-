@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistshokanbaraijokyo;
 
+import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
@@ -44,7 +45,7 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends UaFt200FindShikib
     private final FlexibleYearMonth 国保連送付年月From;
     private final FlexibleYearMonth 国保連送付年月To;
     private final RString 様式番号選択;
-    private final RString 様式番号;
+    private final List<RString> 様式番号;
     private final boolean 項目名付加;
     private final boolean 連番付加;
     private final boolean 日付スラッシュ付加;
@@ -102,7 +103,7 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends UaFt200FindShikib
             FlexibleYearMonth 国保連送付年月From,
             FlexibleYearMonth 国保連送付年月To,
             RString 様式番号選択,
-            RString 様式番号,
+            List<RString> 様式番号,
             boolean 項目名付加,
             boolean 連番付加,
             boolean 日付スラッシュ付加,
