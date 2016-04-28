@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.TekiyoJogaiRirekiDiv.DisplayMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTotalDiv;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -47,7 +48,7 @@ public class TekiyoJogaiTotalHandler {
             div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.照会モード.toString()));
         }
         div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().initialize(識別コード);
-        div.getTekiyoJogaiJohoIchiran().getCddShisetsuNyutaishoRirekiKanri().initialize(識別コード);
+        div.getTekiyoJogaiJohoIchiran().getCddShisetsuNyutaishoRirekiKanri().initialize(識別コード, DaichoType.適用除外者.getコード());
     }
 
 }
