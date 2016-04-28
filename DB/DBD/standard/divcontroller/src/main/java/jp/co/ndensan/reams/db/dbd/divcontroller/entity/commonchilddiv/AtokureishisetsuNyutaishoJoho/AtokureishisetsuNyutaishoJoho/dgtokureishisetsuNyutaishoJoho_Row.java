@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShisetsuIdoJoho.ShisetsuIdoJoho;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.AtokureishisetsuNyutaishoJoho.AtokureishisetsuNyutaishoJoho;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 27 22:13:01 JST 2016 
+ * Thu Apr 28 10:48:19 JST 2016 
  */
 
 
@@ -14,45 +14,45 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * dgShisetsuIdoJoho_Row のクラスファイル 
+ * dgtokureishisetsuNyutaishoJoho_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgShisetsuIdoJoho_Row extends DataRow {
+public class dgtokureishisetsuNyutaishoJoho_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private TextBoxFlexibleDate nyushoDate;
     private TextBoxFlexibleDate taishoDate;
-    private RString jigyoshaName;
-    private RString jigyoshaCode;
+    private RString nyushoShisetsuName;
+    private RString nyushoShisetsuCode;
     private RString tenshutsusakiHokenshaNo;
 
-    public dgShisetsuIdoJoho_Row() {
+    public dgtokureishisetsuNyutaishoJoho_Row() {
         super();
         this.nyushoDate = new TextBoxFlexibleDate();
         this.taishoDate = new TextBoxFlexibleDate();
-        this.jigyoshaName = RString.EMPTY;
-        this.jigyoshaCode = RString.EMPTY;
+        this.nyushoShisetsuName = RString.EMPTY;
+        this.nyushoShisetsuCode = RString.EMPTY;
         this.tenshutsusakiHokenshaNo = RString.EMPTY;
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
-        this.setOriginalData("jigyoshaName", jigyoshaName);
-        this.setOriginalData("jigyoshaCode", jigyoshaCode);
+        this.setOriginalData("nyushoShisetsuName", nyushoShisetsuName);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("tenshutsusakiHokenshaNo", tenshutsusakiHokenshaNo);
     }
 
-    public dgShisetsuIdoJoho_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString jigyoshaName, RString jigyoshaCode, RString tenshutsusakiHokenshaNo) {
+    public dgtokureishisetsuNyutaishoJoho_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString nyushoShisetsuName, RString nyushoShisetsuCode, RString tenshutsusakiHokenshaNo) {
         super();
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
-        this.setOriginalData("jigyoshaName", jigyoshaName);
-        this.setOriginalData("jigyoshaCode", jigyoshaCode);
+        this.setOriginalData("nyushoShisetsuName", nyushoShisetsuName);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.setOriginalData("tenshutsusakiHokenshaNo", tenshutsusakiHokenshaNo);
         this.nyushoDate = nyushoDate;
         this.taishoDate = taishoDate;
-        this.jigyoshaName = jigyoshaName;
-        this.jigyoshaCode = jigyoshaCode;
+        this.nyushoShisetsuName = nyushoShisetsuName;
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
         this.tenshutsusakiHokenshaNo = tenshutsusakiHokenshaNo;
     }
 
@@ -64,12 +64,12 @@ public class dgShisetsuIdoJoho_Row extends DataRow {
         return taishoDate;
     }
 
-    public RString getJigyoshaName() {
-        return jigyoshaName;
+    public RString getNyushoShisetsuName() {
+        return nyushoShisetsuName;
     }
 
-    public RString getJigyoshaCode() {
-        return jigyoshaCode;
+    public RString getNyushoShisetsuCode() {
+        return nyushoShisetsuCode;
     }
 
     public RString getTenshutsusakiHokenshaNo() {
@@ -86,14 +86,14 @@ public class dgShisetsuIdoJoho_Row extends DataRow {
         this.taishoDate = taishoDate;
     }
 
-    public void setJigyoshaName(RString jigyoshaName) {
-        this.setOriginalData("jigyoshaName", jigyoshaName);
-        this.jigyoshaName = jigyoshaName;
+    public void setNyushoShisetsuName(RString nyushoShisetsuName) {
+        this.setOriginalData("nyushoShisetsuName", nyushoShisetsuName);
+        this.nyushoShisetsuName = nyushoShisetsuName;
     }
 
-    public void setJigyoshaCode(RString jigyoshaCode) {
-        this.setOriginalData("jigyoshaCode", jigyoshaCode);
-        this.jigyoshaCode = jigyoshaCode;
+    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
     public void setTenshutsusakiHokenshaNo(RString tenshutsusakiHokenshaNo) {
