@@ -9,15 +9,18 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.rirekino;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shoriTimeStamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shotokuNendo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -56,6 +59,34 @@ public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotok
                                 eq(shotokuNendo, 所得年度),
                                 eq(shikibetsuCode, 識別コード),
                                 eq(rirekino, 履歴番号))).
+                toObject(DbV2502KaigoShotokuEntity.class);
+    }
+
+    /**
+     * キーで介護所得Aliveを取得します。
+     *
+     * @param 識別コード 識別コード
+     * @param 所得年度 所得年度
+     * @param 所得基準年月日 所得基準年月日
+     * @return DbV2502KaigoShotokuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV2502KaigoShotokuEntity selectByshoriTimeStamp(
+            ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+        requireNonNull(所得基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("所得基準年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV2502KaigoShotoku.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(shotokuNendo, 所得年度),
+                                leq(shoriTimeStamp, 所得基準年月日))).
+                limit(1).
                 toObject(DbV2502KaigoShotokuEntity.class);
     }
 
