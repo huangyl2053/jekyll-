@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 給付実績特定入所者介護サービス費用を管理するクラスです。
  */
 public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo
-        extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier, DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity, KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> implements Serializable {
+        extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier,
+        DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity,
+        KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity;
     private final KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id;

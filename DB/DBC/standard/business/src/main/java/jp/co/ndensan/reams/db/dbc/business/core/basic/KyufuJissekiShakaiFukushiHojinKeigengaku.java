@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 給付実績社会福祉法人軽減額を管理するクラスです。
  */
 public class KyufuJissekiShakaiFukushiHojinKeigengaku
-        extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity, KyufuJissekiShakaiFukushiHojinKeigengaku> implements Serializable {
+        extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
+        DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity,
+        KyufuJissekiShakaiFukushiHojinKeigengaku> implements Serializable {
 
     private final DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity;
     private final KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id;
