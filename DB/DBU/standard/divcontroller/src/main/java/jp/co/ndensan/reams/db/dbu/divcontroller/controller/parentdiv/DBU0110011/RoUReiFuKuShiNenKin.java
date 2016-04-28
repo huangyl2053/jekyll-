@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -36,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 老齢福祉年金受給者管理のクラスです。。
+ * 老齢福祉年金受給者管理のクラスです。
  *
  * @reamsid_L DBA-1120-030 houtianpeng
  */
@@ -76,9 +75,6 @@ public class RoUReiFuKuShiNenKin {
      */
     public ResponseData<RoUReiFuKuShiNenKinDiv> onClick_Save(RoUReiFuKuShiNenKinDiv div) {
 
-        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
         }
