@@ -15,8 +15,10 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangen
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4014RiyoshaFutangakuGengakuDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.riyoshafutangengaku.IRiyoshaFutangakuGengakuMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -128,7 +130,7 @@ public class RiyoshaFutangakuGengakuManager {
     @Transaction
     public boolean delete利用者負担額減額(RiyoshaFutangakuGengaku 利用者負担額減額) {
         requireNonNull(利用者負担額減額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額減額"));
-        delete減免減額申請リスト(利用者負担額減額.getGemmenGengakuShinseiList());
+        delete減免減額申請リストBy減免減額種類(利用者負担額減額.getGemmenGengakuShinseiList(), GemmenGengakuShurui.利用者負担額減額.code());
         return 1 == dac.delete(利用者負担額減額.toEntity());
     }
 
@@ -138,9 +140,11 @@ public class RiyoshaFutangakuGengakuManager {
         }
     }
 
-    private void delete減免減額申請リスト(List<GemmenGengakuShinsei> 減免減額申請List) {
+    private void delete減免減額申請リストBy減免減額種類(List<GemmenGengakuShinsei> 減免減額申請List, RString 減免減額種類) {
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
-            gemmenGengakuShinseiManager.delete減免減額申請(減免減額申請);
+            if (減免減額種類.equals(減免減額申請.get減免減額種類())) {
+                gemmenGengakuShinseiManager.delete減免減額申請(減免減額申請);
+            }
         }
     }
 }
