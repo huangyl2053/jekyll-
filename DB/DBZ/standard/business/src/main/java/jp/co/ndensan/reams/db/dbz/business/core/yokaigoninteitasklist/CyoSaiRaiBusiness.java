@@ -284,4 +284,13 @@ public class CyoSaiRaiBusiness {
     public RString get地区コード() {
         return entity.getChikuCode();
     }
+
+    /**
+     * 認定調査依頼履歴番号を返します。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int get認定調査依頼履歴番号() {
+        return entity.getNinteichosaIraiRirekiNo();
+    }
 }

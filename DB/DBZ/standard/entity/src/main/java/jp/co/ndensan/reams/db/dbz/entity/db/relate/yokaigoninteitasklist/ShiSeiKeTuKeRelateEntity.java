@@ -35,4 +35,5 @@ public class ShiSeiKeTuKeRelateEntity {
     private FlexibleDate johoTorokuKanryoYMD;
     private FlexibleDate iraishoShutsuryokuYMD;
     private FlexibleDate chosahyoTouShutsuryokuYMD;
+    private int ninteichosaIraiRirekiNo;
 }

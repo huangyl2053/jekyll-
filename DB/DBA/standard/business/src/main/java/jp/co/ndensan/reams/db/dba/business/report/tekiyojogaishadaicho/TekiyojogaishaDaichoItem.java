@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 適用除外者台帳のITEMクラスです。
  *
- * @reamsid_L DBE-3000-140 lishengli
+ * @reamsid_L DBA-0412-040 lishengli
  */
 @Getter
 @Setter

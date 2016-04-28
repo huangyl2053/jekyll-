@@ -260,9 +260,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         ViewStateHolder.put(ViewStateKeys.償還払請求基本データ, 償還払請求基本);
-        if (償還払請求基本.get保険給付率() != null) {
-            div.getTxtKyufuritsu().setValue(償還払請求基本.get保険給付率().value());
-        }
+        修正モードなど給付率初期化(償還払請求基本);
 
         証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
         div.getDdlSyomeisyo().setSelectedKey(償還払請求基本.get様式番号());
@@ -366,6 +364,12 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
         ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
         set住宅改修内容更新前データ();
+    }
+
+    private void 修正モードなど給付率初期化(ShokanKihon 償還払請求基本) {
+        if (償還払請求基本.get保険給付率() != null) {
+            div.getTxtKyufuritsu().setValue(償還払請求基本.get保険給付率().value());
+        }
     }
 
     private void set住宅改修内容更新前データ() {

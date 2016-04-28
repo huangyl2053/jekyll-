@@ -41,4 +41,6 @@ public class GeTuReiSyoRiRelateEntity {
     private RString shinsakaiKaishiYoteiTime;
     private RString shinsakaiKaisaiNo;
     private int gogitaiNo;
+    private FlexibleDate centerSoshinYMD;
+    private FlexibleDate ifSofuYMD;
 }

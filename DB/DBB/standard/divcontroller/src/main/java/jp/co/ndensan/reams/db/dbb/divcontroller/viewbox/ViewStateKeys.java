@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.viewbox;
 
 /**
  * 通知書発行後異動把握のViewStateKeys
+ *
+ * @reamsid_L DBB-9999-022 cuilin
  */
 public enum ViewStateKeys {
 

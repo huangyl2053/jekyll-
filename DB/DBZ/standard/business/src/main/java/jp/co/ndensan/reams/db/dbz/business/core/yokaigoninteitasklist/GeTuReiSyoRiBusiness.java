@@ -191,4 +191,22 @@ public class GeTuReiSyoRiBusiness {
     public int get合議体番号() {
         return entity.getGogitaiNo();
     }
+
+    /**
+     * センター送信年月日を返します。
+     *
+     * @return センター送信年月日
+     */
+    public FlexibleDate getセンター送信年月日() {
+        return entity.getCenterSoshinYMD();
+    }
+
+    /**
+     * ＩＦ送付年月日を返します。
+     *
+     * @return ＩＦ送付年月日
+     */
+    public FlexibleDate getＩＦ送付年月日() {
+        return entity.getIfSofuYMD();
+    }
 }

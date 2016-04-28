@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.futangendogakuninteishinseisho;
+package jp.co.ndensan.reams.db.dbd.business.report.futangendogakuninteishinseisho;
 
-import jp.co.ndensan.reams.db.dba.entity.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護保険負担限度額認定申請書ボディEditorです。
- * 
- * @reamsid_L DBA-0540-690  suguangjun
+ *
+ * @reamsid_L DBA-0540-690 suguangjun
  */
 public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogakuNinteiShinseishoEditor {
 
@@ -40,7 +40,6 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
     private FutangendogakuNinteiShinseishoReportSource bodyEdit(FutangendogakuNinteiShinseishoReportSource source) {
         source.shiseibun = item.getShiseibun();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
-        source.hihokenshaNo = item.getHihokenshaNo();
         source.hihokenshaName = item.getHihokenshaName();
         source.seibetsu = item.getSeibetsu();
         source.birthYMD = item.getBirthYMD();

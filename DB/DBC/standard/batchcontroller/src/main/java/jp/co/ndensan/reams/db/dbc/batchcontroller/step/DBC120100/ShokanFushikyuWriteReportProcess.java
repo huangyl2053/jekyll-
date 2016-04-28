@@ -43,6 +43,11 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
      * 出力順ID
      */
     public static final RString PARAMETER_IN_SHUTSURYOKUJUNID;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
 
     private static final RString ORDER_BY = new RString("order by");
 
@@ -134,15 +139,15 @@ public class ShokanFushikyuWriteReportProcess extends BatchKeyBreakBase<ShokanFu
                 if (item.is改頁項目()) {
                     改頁 = item.get項目名();
                 }
-                if (i == 0) {
+                if (i == INDEX_0) {
                     並び順の１件目 = item.get項目名();
-                } else if (i == 1) {
+                } else if (i == INDEX_1) {
                     並び順の２件目 = item.get項目名();
-                } else if (i == 2) {
+                } else if (i == INDEX_2) {
                     並び順の３件目 = item.get項目名();
-                } else if (i == 3) {
+                } else if (i == INDEX_3) {
                     並び順の４件目 = item.get項目名();
-                } else if (i == 4) {
+                } else if (i == INDEX_4) {
                     並び順の５件目 = item.get項目名();
                 }
                 i = i + 1;
