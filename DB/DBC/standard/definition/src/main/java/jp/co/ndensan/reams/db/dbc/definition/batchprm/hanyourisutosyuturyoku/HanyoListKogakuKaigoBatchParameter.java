@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 汎用リスト出力(高額介護サービス費状況)のバッチパラメータです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 @lombok.Getter
 @lombok.Setter
@@ -103,7 +103,7 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_KETEIJOHO_UKETORIYM_TO, name = "決定情報受取年月To")
     private FlexibleYearMonth keteijohoUketoriymTo;
     @BatchParameter(key = KEY_SHUTSURYOKUJU, name = "出力順")
-    private RString shutsuryokuju;
+    private Long shutsuryokuju;
     @BatchParameter(key = KEY_SHUTSURYOKU_TOMOKU, name = "出力項目")
     private RString shutsuryokuTomoku;
     @BatchParameter(key = KEY_TOMOKUME_FUKA, name = "項目名付加")

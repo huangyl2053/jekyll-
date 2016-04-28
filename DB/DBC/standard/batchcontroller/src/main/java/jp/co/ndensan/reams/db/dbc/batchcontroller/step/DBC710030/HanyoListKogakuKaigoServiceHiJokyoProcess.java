@@ -64,7 +64,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 /**
  * 汎用リスト出力(高額介護サービス費状況)CSV出力の処理クラスです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<HanyouRisutoSyuturyokuEntity> {
 
@@ -99,7 +99,6 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private static final RString 括弧_L = new RString("(");
     private static final RString 括弧_R = new RString(")");
     private static final RString 波線 = new RString("　～　");
-    private static final RString 振込 = new RString("振込");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
     private HanyoListKogakuKaigoProcessParameter parameter;
     private HanyoListKogakuKaigoEucCsvEntityEditor dataCreate;
@@ -204,7 +203,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(構成市町村);
-        // TODO : 構成市町村名
+        // TODO QA:710 : 構成市町村名
         builder.append(parameter.getKouseiShichosonCode() == null
                 || parameter.getKouseiShichosonCode().isEmpty()
                 ? RString.EMPTY : 括弧_L.concat(new RString(parameter.getKouseiShichosonCode().toString())
@@ -282,7 +281,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
 
         builder = new RStringBuilder();
         builder.append(金融機関);
-        // TODO : 金融機関名称
+        // TODO QA:710 : 金融機関名称
         builder.append(null == parameter.getKiyuKikanCode()
                 || parameter.getKiyuKikanCode().isEmpty()
                 ? RString.EMPTY : 括弧_L.concat(new RString(parameter.getKiyuKikanCode().toString())

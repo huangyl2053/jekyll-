@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.Hanyou
 /**
  * 汎用リスト出力(高額介護サービス費状況)のマッパーインタフェースです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 public interface IHanyouRisutoSyuturyokuMapper {
 
