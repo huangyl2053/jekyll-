@@ -46,10 +46,7 @@ public enum DvShokanbaraiJohoSpec implements IPredicate<DvShokanbaraiJohoDiv> {
                     KinyuKikanShitenCode kinyuKikanShitenCode = div.getDvShokanbaraiParam()
                     .getDvShokanChushutsuJoken().getDvKensakuJoken().getCcdKogakuKinyuKikan().getKinyuKikanShitenCode();
                     flag = flag || (kinyuKikanShitenCode != null && !kinyuKikanShitenCode.isEmpty());
-                    if (new RString("窓口払い").equals(支払方法) && flag) {
-                        return false;
-                    }
-                    return true;
+                    return !(new RString("窓口払い").equals(支払方法) && flag);
                 }
             },
     /**

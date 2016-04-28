@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7030001;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteihokenshain.KagoKetteiHokenshaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanbaraiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoValidationHandler;
@@ -74,8 +74,8 @@ public class DvShokanbaraiJoho {
      * @param div 汎用リスト出力(償還払い状況)画面のdiv
      * @return バッチを起動する
      */
-    public ResponseData<KagoKetteiHokenshaInBatchParameter> onClick_btnBatchRegister(DvShokanbaraiJohoDiv div) {
-        KagoKetteiHokenshaInBatchParameter parameter = getHandler(div).setBatchParamter();
+    public ResponseData<HanyoListShokanbaraiJokyoBatchParameter> onClick_btnBatchRegister(DvShokanbaraiJohoDiv div) {
+        HanyoListShokanbaraiJokyoBatchParameter parameter = getHandler(div).setBatchParamter();
         return ResponseData.of(parameter).respond();
     }
 
