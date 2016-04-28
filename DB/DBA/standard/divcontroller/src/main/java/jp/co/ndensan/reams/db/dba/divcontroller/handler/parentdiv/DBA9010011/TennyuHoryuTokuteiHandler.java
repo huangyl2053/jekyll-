@@ -244,8 +244,10 @@ public class TennyuHoryuTokuteiHandler {
 //        div.getCcdBunchiInput().set市町村コード(dgRow.getTxtBanchiCode2());
 //        div.getCcdBunchiInput().set市町村名称(dgRow.getTxtBanchiCode3());
         div.getCcdSisetuInputGuide().set施設種類(dgRow.getTxtShisetsuShurui());
-        div.getCcdSisetuInputGuide().setNyuryokuShisetsuKodo(dgRow.getTxtShisetsuJoho());
-        div.getCcdSisetuInputGuide().setShisetsuMeisho(dgRow.getTxtShisetsuJoho());
+        div.getCcdSisetuInputGuide().setNyuryokuShisetsuKodo(dgRow.getTxtShisetsuJoho()
+                .split(RString.HALF_SPACE.toString()).get(0));
+        div.getCcdSisetuInputGuide().setShisetsuMeisho(dgRow.getTxtShisetsuJoho()
+                .split(RString.HALF_SPACE.toString()).get(1));
     }
 
     /**
