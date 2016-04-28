@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.valueobject.inputshikibetsunocode;
 
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -18,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum InputShikibetsuNoCodeValidationMessage implements IValidationMessage {
 
-    ;
+    // TODO 一つ目の要素が定義されたらこの要素は削除する。
+    ダミーメッセージ(UrInformationMessages.該当データなし);
     private final Message message;
 
     private InputShikibetsuNoCodeValidationMessage(IMessageGettable message, String... replacements) {

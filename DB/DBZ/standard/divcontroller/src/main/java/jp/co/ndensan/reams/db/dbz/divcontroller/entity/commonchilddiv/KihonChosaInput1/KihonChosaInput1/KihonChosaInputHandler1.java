@@ -224,7 +224,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数19) {
-            div.getBtnShiryoku().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnShiryoku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(視力Keys, 調査項目, true, true);
             div.getShiryoku().setShiryokuShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -255,7 +255,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数20) {
-            div.getBtnChoryoku().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnChoryoku().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(聴力Keys, 調査項目, true, true);
             div.getChoryoku().setChoryokuShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -286,7 +286,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数18) {
-            div.getBtnTumeKiri().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnTumeKiri().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(つめ切りKeys, 調査項目, false, false);
             div.getTumeKiri().setTumeKiriShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -317,7 +317,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数17) {
-            div.getBtnSenshin().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnSenshin().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(洗身Keys, 調査項目, true, false);
             div.getSenshin().setSenshinShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -348,7 +348,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数16) {
-            div.getBtnKataAshi().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnKataAshi().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(片足での立位Keys, 調査項目, false, false);
             div.getKataAshi().setKataAshiShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -379,7 +379,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数15) {
-            div.getBtnTachiAgari().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnTachiAgari().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(立ち上がりKeys, 調査項目, false, false);
             div.getTachiAgari().setTachiAgariShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -410,7 +410,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数14) {
-            div.getBtnBuko().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnBuko().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(歩行Keys, 調査項目, false, false);
             div.getBuko().setBukoShinseishoKanriNo(DataPassingConverter.serialize(
                     get認定調査特記事項番号List(認定調査基本情報)));
@@ -441,7 +441,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数13) {
-            div.getBtnRyoAshi().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnRyoAshi().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(両足での立位保持Keys, 調査項目, false, false);
             div.getRyoAshi().setRyoAshiShinseishoKanriNo(DataPassingConverter.serialize(
                     get認定調査特記事項番号List(認定調査基本情報)));
@@ -472,7 +472,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数12) {
-            div.getBtnZai().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnZai().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(座位保持Keys, 調査項目, true, false);
             div.getZai().setZaiShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -503,7 +503,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数10) {
-            div.getBtnNeKaeri().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnNeKaeri().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(寝返りKeys, 調査項目, false, false);
             div.getNeKaeri().setNeKaeriShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -527,7 +527,7 @@ public class KihonChosaInputHandler1 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数11) {
-            div.getBtnOkiAgari().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnOkiAgari().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(起き上がりKeys, 調査項目, false, false);
             div.getOkiAgari().setOkiAgariShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -591,7 +591,7 @@ public class KihonChosaInputHandler1 {
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
         if (連番 >= 整数6 && 連番 <= 整数9) {
-            div.getBtnKoshuku().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnKoshuku().setDisabled(!認定調査基本情報.is特記事項有無());
         }
         if (調査項目ある.equals(調査項目)) {
             if (連番 == 整数6) {
@@ -629,7 +629,7 @@ public class KihonChosaInputHandler1 {
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         RString 特記事項番号 = 認定調査基本情報.get認定調査特記事項番号();
         if (連番 >= 1 && 連番 <= 整数5) {
-            div.getBtnMahi().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnMahi().setDisabled(!認定調査基本情報.is特記事項有無());
         }
         if (調査項目ある.equals(調査項目)) {
             if (連番 == 1) {
@@ -808,7 +808,7 @@ public class KihonChosaInputHandler1 {
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), 調査項目ない,
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                             認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.is特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 } else if (is認定調査基本情報_連番が連番Listに存在(連番List, 認定調査基本情報_連番)
@@ -817,7 +817,7 @@ public class KihonChosaInputHandler1 {
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), 調査項目ある,
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                             認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.is特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
@@ -852,7 +852,7 @@ public class KihonChosaInputHandler1 {
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), get調査項目By単項Key(単項Key),
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                             認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.is特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
