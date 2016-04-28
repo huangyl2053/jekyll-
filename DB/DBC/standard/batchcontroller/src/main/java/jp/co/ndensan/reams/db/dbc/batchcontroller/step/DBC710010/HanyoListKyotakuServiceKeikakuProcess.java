@@ -67,6 +67,9 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private static final RString CODE_1 = new RString("1");
     private static final RString CODE_2 = new RString("2");
     private static final RString CODE_3 = new RString("3");
+    private static final RString CODE = new RString("0003");
+    private static final RString 左記号 = new RString("(");
+    private static final RString 右記号 = new RString(")");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC701001"));
     private static final ReportId EUC_ID = new ReportId("DBC701001");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
@@ -148,7 +151,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     }
 
     private PersonalData toPersonalData(HanyoListKyotakuServiceKeikakuEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), new RString("被保険者番号"),
                 entity.getDbT3005被保険者番号().value());
         return PersonalData.of(entity.get宛名Entity().getShikibetsuCode(), expandedInfo);
     }
@@ -167,8 +170,8 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(構成市町村);
-        RString 構成市町村コード = new RString("(").concat(parameter.get構成市町村コード().getColumnValue()).concat(new RString(")"));
-        //TODO 構成市町村名 ?
+        RString 構成市町村コード = 左記号.concat(parameter.get構成市町村コード().getColumnValue()).concat(右記号);
+        //TODOのNo.716 構成市町村名 ?
         builder.append(parameter.get構成市町村コード().isEmpty()
                 ? RString.EMPTY : 構成市町村コード);
         出力条件.add(builder.toRString());

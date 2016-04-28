@@ -131,19 +131,77 @@
         WHERE
          1=1
         <if test="抽出区分 == 1">
-	AND (DbT3005."taishoYM" || DbT3005."rirekiNo") = (SELECT MAX("taishoYM" || "rirekiNo") 
-								FROM rgdb."DbT3005KyotakuKeikakuTodokede")
+         AND  (DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
+                     (SELECT
+                            B. "hihokenshaNo",
+                            B. "taishoYM",
+                            B. "rirekiNo"
+                        FROM
+                            rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+                                INNER JOIN (
+                                SELECT
+                                    "hihokenshaNo"
+                                    ,MAX (
+                                        "taishoYM" || "rirekiNo"
+                                    ) AS "max1"
+                                FROM
+                                    rgdb. "DbT3005KyotakuKeikakuTodokede"
+                                GROUP BY
+                                    "hihokenshaNo"
+                            ) AS A
+                                    ON A. "hihokenshaNo" = B. "hihokenshaNo"
+                            AND A. "max1" = (
+                                B. "taishoYM" || B. "rirekiNo") )
+
 	</if>
         <if test="抽出区分 == 2">
             <if test="基準年月日 == null">
-                AND (DbT3005."taishoYM" || DbT3005."rirekiNo") = (SELECT MAX("taishoYM" || "rirekiNo") 
-								FROM rgdb."DbT3005KyotakuKeikakuTodokede")
+                AND  (DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
+                     (SELECT
+                            B. "hihokenshaNo",
+                            B. "taishoYM",
+                            B. "rirekiNo"
+                        FROM
+                            rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+                                INNER JOIN (
+                                SELECT
+                                    "hihokenshaNo"
+                                    ,MAX (
+                                        "taishoYM" || "rirekiNo"
+                                    ) AS "max1"
+                                FROM
+                                    rgdb. "DbT3005KyotakuKeikakuTodokede"
+                                GROUP BY
+                                    "hihokenshaNo"
+                            ) AS A
+                                    ON A. "hihokenshaNo" = B. "hihokenshaNo"
+                            AND A. "max1" = (
+                                B. "taishoYM" || B. "rirekiNo") )
             </if>
             <if test="基準年月日 != null">
-                AND (DbT3005."taishoYM" || DbT3005."rirekiNo") = (SELECT MAX("taishoYM" || "rirekiNo") 
-								FROM rgdb."DbT3005KyotakuKeikakuTodokede")
-                AND DbT3006."tekiyoKaishiYMD" &lt;= #{基準年月日}
-                AND (DbT3006."tekiyoShuryoYMD" &gt;= #{基準年月日} OR DbT3006."tekiyoShuryoYMD" is null)
+                AND  (DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
+                     (SELECT
+                            B. "hihokenshaNo",
+                            B. "taishoYM",
+                            B. "rirekiNo"
+                        FROM
+                            rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+                                INNER JOIN (
+                                SELECT
+                                    "hihokenshaNo"
+                                    ,MAX (
+                                        "taishoYM" || "rirekiNo"
+                                    ) AS "max1"
+                                FROM
+                                    rgdb. "DbT3005KyotakuKeikakuTodokede"
+                                GROUP BY
+                                    "hihokenshaNo"
+                            ) AS A
+                                    ON A. "hihokenshaNo" = B. "hihokenshaNo"
+                            AND A. "max1" = (
+                                B. "taishoYM" || B. "rirekiNo") )
+                AND DbT3006."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
+                AND (DbT3006."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} OR DbT3006."tekiyoShuryoYMD" is null)
             </if>
         </if>
      

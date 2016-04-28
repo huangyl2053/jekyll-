@@ -188,7 +188,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
             stringBuilder.append(atenaBanchi.toString());
         }
         if (stringBuilder.length() > 0) {
-            stringBuilder.append("　");
+            stringBuilder.append(RString.FULL_SPACE);
         }
         Katagaki katagaki = entity.get宛名Entity().getKatagaki();
         if (katagaki != null) {
@@ -270,7 +270,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set消除事由(isNull(entity.get宛名Entity().getShojoJiyuCode())
                 ? RString.EMPTY : entity.get宛名Entity().getShojoJiyuCode());
         csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD()));
-        //TODO 宛名・本人・
+        //TODOのNo.714  宛名・本人・
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo yubinNo1 = entity.get宛名Entity().getTennyumaeYubinNo();
         if (yubinNo1 != null) {
@@ -289,7 +289,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
             stringBuilder1.append(atenaBanchi1.value());
         }
         if (stringBuilder1.length() > 0) {
-            stringBuilder1.append("　");
+            stringBuilder1.append(RString.FULL_SPACE);
         }
         if (katagaki1 != null) {
             stringBuilder1.append(katagaki1.value());
@@ -325,9 +325,9 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(entity.getDbV1001市町村コード(),
                 FlexibleDate.getNowDate());
         csvEntity.set市町村名(地方公共団体.get市町村名());
-        //TODO URZ.Association
+        //TODOのNo.714 URZ.Association
         csvEntity.set保険者コード(RString.EMPTY);
-        //TODO URZ.Association
+        //TODOのNo.714 URZ.Association
         csvEntity.set保険者名(RString.EMPTY);
         csvEntity.set空白(RString.EMPTY);
         AtenaMeisho atenaMeisho2 = entity.get宛先Entity().getKanjiShimei();
@@ -366,7 +366,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
             stringBuilder2.append(atenaBanchi2.getColumnValue());
         }
         if (stringBuilder2.length() > 0) {
-            stringBuilder2.append("　");
+            stringBuilder2.append(RString.FULL_SPACE);
         }
         if (katagaki2 != null) {
             stringBuilder2.append(katagaki2.getColumnValue());
@@ -554,7 +554,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日()));
         csvEntity.set受給認定日(dataToRString(entity.getDbV4001受給認定日()));
         csvEntity.set受給旧措置(entity.isDbV4001旧措置フラグ());
-        //TODO(QA) DBD：みなし要介護区分コード
+        //TODOのNo.715 DBD：みなし要介護区分コード
         csvEntity.set受給みなし更新認定(isNull(entity.getDbV4001みなし要介護区分コード())
                 ? RString.EMPTY : entity.getDbV4001みなし要介護区分コード().value());
         csvEntity.set受給直近事由(isNull(entity.getDbV4001直近異動事由コード())
