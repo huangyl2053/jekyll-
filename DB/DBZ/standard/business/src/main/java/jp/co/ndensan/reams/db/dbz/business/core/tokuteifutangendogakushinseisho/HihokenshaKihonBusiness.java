@@ -36,8 +36,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString getフリガナ() {
-        return new RString("11");
-//        return entity.getフリガナ();
+        return entity.getフリガナ();
     }
 
     /**
@@ -46,8 +45,7 @@ public class HihokenshaKihonBusiness {
      * @return 被保険者氏名
      */
     public RString get被保険者氏名() {
-//        return entity.get被保険者氏名();
-        return new RString("11");
+        return entity.get被保険者氏名();
     }
 
     /**
@@ -56,8 +54,7 @@ public class HihokenshaKihonBusiness {
      * @return 保険者番号
      */
     public HokenshaNo get保険者番号() {
-//        return entity.get保険者番号();
-        return new HokenshaNo("11");
+        return entity.get保険者番号();
     }
 
     /**
@@ -66,8 +63,7 @@ public class HihokenshaKihonBusiness {
      * @return 保険者名称
      */
     public RString get保険者名称() {
-//        return entity.get保険者名称();
-        return new RString("11");
+        return entity.get保険者名称();
     }
 
     /**
@@ -76,8 +72,7 @@ public class HihokenshaKihonBusiness {
      * @return 被保険者番号
      */
     public HihokenshaNo get被保険者番号() {
-//        return entity.get被保険者番号();
-        return new HihokenshaNo("11");
+        return entity.get被保険者番号();
     }
 
     /**
@@ -86,8 +81,7 @@ public class HihokenshaKihonBusiness {
      * @return 生年月日
      */
     public FlexibleDate get生年月日() {
-//        return entity.get生年月日();
-        return new FlexibleDate("20160101");
+        return entity.get生年月日();
     }
 
     /**
@@ -96,8 +90,7 @@ public class HihokenshaKihonBusiness {
      * @return 性別
      */
     public RString get性別() {
-//        return entity.get性別();
-        return new RString("11");
+        return entity.get性別();
     }
 
     /**
@@ -106,8 +99,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString get続柄() {
-//        return entity.get続柄();
-        return new RString("11");
+        return entity.get続柄();
     }
 
     /**
@@ -116,8 +108,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString get郵便番号() {
-//        return entity.get郵便番号();
-        return new RString("11");
+        return entity.get郵便番号();
 
     }
 
@@ -127,8 +118,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString get電話番号() {
-//        return entity.get電話番号();
-        return new RString("11");
+        return entity.get電話番号();
 
     }
 
@@ -138,8 +128,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString get住所() {
-//        return entity.get住所();
-        return new RString("11");
+        return entity.get住所();
     }
 
     /**
@@ -148,8 +137,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString get住民種別コード() {
-//        return entity.get住民種別コード();
-        return new RString("11");
+        return entity.get住民種別コード();
     }
 
     /**
@@ -158,8 +146,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString get世帯主氏名() {
-//        return entity.get世帯主氏名();
-        return new RString("11");
+        return entity.get世帯主氏名();
     }
 
     /**
@@ -168,8 +155,7 @@ public class HihokenshaKihonBusiness {
      * @return フリガナ
      */
     public RString get生年月日不詳区分() {
-//        return entity.get生年月日不詳区分();
-        return new RString("11");
+        return entity.get生年月日不詳区分();
     }
 
     /**
@@ -178,7 +164,6 @@ public class HihokenshaKihonBusiness {
      * @return 方書
      */
     public RString get方書() {
-//        return entity.get方書();
-        return new RString("11");
+        return entity.get方書();
     }
 }

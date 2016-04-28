@@ -89,7 +89,7 @@ public class TokuteifutanGendogakuShinseisho {
         RString 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().value();
         HokenshaNo 証記載保険者番号 = get証記載保険者番号(導入形態コード, dbt1001Entity);
         RString 保険者名称 = mapper.get保険者名称(証記載保険者番号);
-        return new HihokenshaKihonBusiness(null);
+        return ge被保険者基本情報(uaft200Entity, 証記載保険者番号, 保険者名称, dbt1001Entity);
     }
 
     private DbT1001HihokenshaDaichoEntity get最新異動日データ(HihokenshaNo hihokenshaNo, ShikibetsuCode shikibetsuCode,
