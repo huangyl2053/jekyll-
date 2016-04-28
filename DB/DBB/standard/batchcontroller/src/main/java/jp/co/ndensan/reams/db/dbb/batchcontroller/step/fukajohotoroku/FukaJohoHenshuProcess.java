@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -191,7 +192,7 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
 
     private void saveTemp(DbT2002FukaJohoTempTableEntity 賦課情報, IShunoKamoku 科目, int 期別, RDate 納期限, Decimal 調定額) {
         dbT0700ShunoKanriTemp.insert(get収納管理(科目, 賦課情報, 期別));
-        dbT0705ChoteiKyotsuTemp.insert(get調定共通(納期限, 調定額));
+        dbT0705ChoteiKyotsuTemp.insert(get調定共通(賦課情報.getChoteiNendo(), 納期限, 調定額));
         収納ID++;
         調定ID++;
     }
@@ -209,10 +210,11 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         return entity;
     }
 
-    private DbT0705ChoteiKyotsuTempTableEntity get調定共通(RDate 納期限, Decimal 調定額) {
+    private DbT0705ChoteiKyotsuTempTableEntity get調定共通(FlexibleYear 会計年度, RDate 納期限, Decimal 調定額) {
         DbT0705ChoteiKyotsuTempTableEntity entity = new DbT0705ChoteiKyotsuTempTableEntity();
         entity.setChoteiId(調定ID);
         entity.setShunoId(収納ID);
+        entity.setKaikeiNendo(会計年度);
         entity.setChoteiJiyuCode(parameter.is当初処理() ? 当初処理 : 非当初処理);
         entity.setChoteigaku(調定額);
         entity.setShohizei(初期金額);
