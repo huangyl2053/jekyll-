@@ -45,13 +45,13 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
-import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiSearchDefault;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.HakkoRirekiManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.IHakkoRirekiManager;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -135,12 +135,10 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
             Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, 帳票分類ID, KamokuCode.EMPTY, パターン番号);
             List<RString> 通知書定型文List = new ArrayList<>();
-            while (通知文Map.keySet().iterator().hasNext()) {
-                RString 通知文 = 通知文Map.get(通知文Map.keySet().iterator().next());
-                通知書定型文List.add(通知文);
+            for (Map.Entry<Integer, RString> entry : 通知文Map.entrySet()) {
+                通知書定型文List.add(entry.getValue());
             }
 
-            RString イメージファイルパス = null;
             List<NinteiKoshinTsuchishoItem> itemList = new ArrayList<>();
             NinteiKoshinTsuchishoItem item = new NinteiKoshinTsuchishoItem(
                     介護保険負担限度額認定,
@@ -153,8 +151,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
                     文書番号,
                     通知書定型文List,
                     帳票分類ID,
-                    ninshosha,
-                    イメージファイルパス);
+                    ninshosha);
 
             itemList.add(item);
             NinteiKoshinTsuchishoService service = new NinteiKoshinTsuchishoService();
@@ -217,8 +214,8 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
         shikibetsuCodeList.add(識別コード);
         boolean is正常終了 = false;
-        HashMap hashMap = new HashMap();
-        hashMap.put(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode(), 帳票ID);
+        HashMap<Code, RString> hashMap = new HashMap();
+        //hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), 帳票ID.getColumnValue());
 
         while (sourceDataList.hasNext()) {
 
