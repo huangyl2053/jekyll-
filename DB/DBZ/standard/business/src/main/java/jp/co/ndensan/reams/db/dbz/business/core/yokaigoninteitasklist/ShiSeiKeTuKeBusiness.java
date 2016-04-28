@@ -137,4 +137,13 @@ public class ShiSeiKeTuKeBusiness {
     public FlexibleDate get調査票等出力年月日() {
         return entity.getChosahyoTouShutsuryokuYMD();
     }
+
+    /**
+     * 認定調査依頼履歴番号を返します。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int get認定調査依頼履歴番号() {
+        return entity.getNinteichosaIraiRirekiNo();
+    }
 }
