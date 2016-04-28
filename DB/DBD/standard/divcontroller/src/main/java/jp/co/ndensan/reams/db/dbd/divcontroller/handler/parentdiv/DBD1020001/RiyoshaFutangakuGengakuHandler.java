@@ -268,7 +268,11 @@ public class RiyoshaFutangakuGengakuHandler {
                 row.getTxtTekiyoYMD().setValue(適用開始年月日);
                 row.getTxtYukoKigen().setValue(適用終了年月日);
                 row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
-                row.getTxtKyufuritsu().setValue(給付率.getColumnValue());
+                if (給付率 == HokenKyufuRitsu.ZERO) {
+                    row.getTxtKyufuritsu().clearValue();
+                } else {
+                    row.getTxtKyufuritsu().setValue(給付率.getColumnValue());
+                }
                 row.setShoninShinaiRiyu(非承認理由);
                 is新規 = false;
             }
@@ -284,7 +288,11 @@ public class RiyoshaFutangakuGengakuHandler {
             row.getTxtTekiyoYMD().setValue(適用開始年月日);
             row.getTxtYukoKigen().setValue(適用終了年月日);
             row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
-            row.getTxtKyufuritsu().setValue(給付率.getColumnValue());
+            if (給付率 == HokenKyufuRitsu.ZERO) {
+                row.getTxtKyufuritsu().clearValue();
+            } else {
+                row.getTxtKyufuritsu().setValue(給付率.getColumnValue());
+            }
             row.setShoninShinaiRiyu(非承認理由);
             row.setHiddenShoKisaiHokenshaNo(証記載保険者番号.getColumnValue());
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
@@ -447,6 +455,9 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分RadInx = 承認しない_KEY;
         }
         FlexibleDate 決定日 = row.getTxtKetteiYMD().getValue();
+        if (ResponseHolder.getMenuID().equals(承認メニュー) && 決定日.isEmpty()) {
+            決定日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        }
         FlexibleDate 適用日 = row.getTxtTekiyoYMD().getValue();
         FlexibleDate 有効期限 = row.getTxtYukoKigen().getValue();
         boolean 旧措置有無 = row.getKyusochishaUmu();
@@ -853,12 +864,19 @@ public class RiyoshaFutangakuGengakuHandler {
         }
 
         Decimal 給付率data = 該当DB申請.get給付率() == null ? HokenKyufuRitsu.ZERO.getColumnValue() : 該当DB申請.get給付率().getColumnValue();
+        if (承認する_KEY.equals(決定区分)) {
+            return is等しい(該当DB申請.get決定区分(), 決定区分コード)
+                    && 該当DB申請.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
+                    && (div.getTxtTekiyoYmd().getValue().equals(該当DB申請.get適用開始年月日())
+                    || div.getTxtTekiyoYmd().getValue().isEmpty() && 該当DB申請.get適用開始年月日() == null)
+                    && (div.getTxtYukoKigenYmd().getValue().equals(該当DB申請.get適用終了年月日())
+                    || div.getTxtYukoKigenYmd().getValue().isEmpty() && 該当DB申請.get適用終了年月日() == null)
+                    && 該当DB申請.is旧措置者有無() == is旧措置者有無
+                    && 給付率data.compareTo(div.getTxtKyufuRitsu().getValue()) == 0
+                    && is等しい(該当DB申請.get非承認理由(), div.getTxtHiShoninRiyu().getValue());
+        }
         return is等しい(該当DB申請.get決定区分(), 決定区分コード)
                 && 該当DB申請.get決定年月日().equals(div.getTxtKettaiYmd().getValue())
-                && 該当DB申請.get適用開始年月日().equals(div.getTxtTekiyoYmd().getValue())
-                && 該当DB申請.get適用終了年月日().equals(div.getTxtYukoKigenYmd().getValue())
-                && 該当DB申請.is旧措置者有無() == is旧措置者有無
-                && 給付率data.compareTo(div.getTxtKyufuRitsu().getValue()) == 0
                 && is等しい(該当DB申請.get非承認理由(), div.getTxtHiShoninRiyu().getValue());
     }
 

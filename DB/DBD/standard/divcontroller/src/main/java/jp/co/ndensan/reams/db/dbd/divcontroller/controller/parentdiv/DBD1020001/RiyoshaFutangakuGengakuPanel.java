@@ -369,8 +369,7 @@ public class RiyoshaFutangakuGengakuPanel {
         Collections.sort(viewStateList, new RiyoshaFutangakuGengakuComparator());
 
         int size = viewStateList.size();
-        int minRirekiNo = 0;
-        boolean isRirekiNoSet = false;
+        int minRirekiNo = Integer.MAX_VALUE;
 
         List<RiyoshaFutangakuGengakuViewState> not削除List = new ArrayList<>();
         RiyoshaFutangakuGengakuViewState joho;
@@ -379,8 +378,7 @@ public class RiyoshaFutangakuGengakuPanel {
         for (int i = 0; i < size; i++) {
             joho = viewStateList.get(i);
             状態 = joho.getState();
-            if (!isRirekiNoSet && (EntityDataState.Unchanged == 状態 || EntityDataState.Modified == 状態)) {
-                isRirekiNoSet = true;
+            if (minRirekiNo > joho.getShorigoRirekiNo() && joho.getShorigoRirekiNo() >= 0) {
                 minRirekiNo = joho.getShorigoRirekiNo();
                 始まり承認データ状態 = 状態;
             }
@@ -390,8 +388,13 @@ public class RiyoshaFutangakuGengakuPanel {
                 not削除List.add(joho);
             }
         }
-        if (ResponseHolder.getMenuID().equals(承認メニュー) && EntityDataState.Modified == 始まり承認データ状態
-                && minRirekiNo == 0) {
+        if (minRirekiNo == Integer.MAX_VALUE && ResponseHolder.getMenuID().equals(承認メニュー)) {
+            minRirekiNo = 1;
+        } else if (minRirekiNo == Integer.MAX_VALUE) {
+            minRirekiNo = 0;
+        }
+        if (ResponseHolder.getMenuID().equals(承認メニュー)
+                && EntityDataState.Modified == 始まり承認データ状態 && minRirekiNo == 0) {
             minRirekiNo = 1;
         }
 
