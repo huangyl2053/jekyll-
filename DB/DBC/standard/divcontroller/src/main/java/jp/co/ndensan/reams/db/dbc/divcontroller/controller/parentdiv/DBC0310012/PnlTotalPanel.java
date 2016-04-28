@@ -294,9 +294,9 @@ public class PnlTotalPanel {
         Decimal 保険給付費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue();
         if (利用者自己負担額 == null && 保険給付費用額 == null) {
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku()
-                    .setValue(保険対象費用額.multiply(一割));
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(一割)));
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
-                    .setValue(保険対象費用額.multiply(九割));
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(九割)));
             if (少数点以下は切れ(保険対象費用額.multiply(一割)).add(少数点以下は切れ(保険対象費用額.multiply(九割)))
                     .compareTo(保険対象費用額) < 0) {
                 div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
@@ -304,10 +304,10 @@ public class PnlTotalPanel {
             }
         } else if (利用者自己負担額 == null && 保険給付費用額 != null) {
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku()
-                    .setValue(保険対象費用額.multiply(一割));
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(一割)));
         } else if (利用者自己負担額 != null && 保険給付費用額 == null) {
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
-                    .setValue(保険対象費用額.multiply(九割));
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(九割)));
             if (利用者自己負担額.add(少数点以下は切れ(保険対象費用額.multiply(九割))).compareTo(保険対象費用額) < 0) {
                 div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
                         .setValue(保険対象費用額.subtract(少数点以下は切れ(保険対象費用額.multiply(一割))));
