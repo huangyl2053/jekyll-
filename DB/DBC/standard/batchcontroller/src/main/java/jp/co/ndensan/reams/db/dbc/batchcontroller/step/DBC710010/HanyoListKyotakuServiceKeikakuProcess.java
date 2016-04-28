@@ -182,13 +182,14 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(基準年月日);
-        builder.append(parameter.get基準年月日().isEmpty()
-                ? RString.EMPTY : dataToRString(parameter.get基準年月日()));
+        FlexibleDate flexibleDate = parameter.get基準年月日();
+        builder.append(flexibleDate == null || flexibleDate.isEmpty()
+                ? null : dataToRString(flexibleDate));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(支援事業者番号);
-        builder.append(parameter.get支援事業者番号().isEmpty()
-                ? RString.EMPTY : parameter.get支援事業者番号());
+        builder.append(parameter.get支援事業者番号() == null || parameter.get支援事業者番号().isEmpty()
+                ? null : parameter.get支援事業者番号());
         出力条件.add(builder.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ID.value(),
