@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.saishinsaketteihokenshain.Sais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaMeisaiPsmEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -93,13 +94,14 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
         builder.append(RString.HALF_SPACE);
         builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RString 作成日時 = builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
-        if ((明細情報List == null || 明細情報List.isEmpty()) && 集計情報Entity != null) {
+
+        if (明細情報List == null || 明細情報List.isEmpty()) {
+            ShoKisaiHokenshaNo 証記載番号 = 集計情報Entity.getShoKisaiHokenshaNo();
             SaishinsaKetteiHokenshaInItem item = new SaishinsaKetteiHokenshaInItem();
             item.set処理年月(処理年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
 
-            item.set証記載保険者番号(集計情報Entity.getShoKisaiHokenshaNo() == null
-                    || 集計情報Entity.getShoKisaiHokenshaNo().isEmpty()
-                    ? RString.EMPTY : 集計情報Entity.getShoKisaiHokenshaNo().value());
+            item.set証記載保険者番号(証記載番号 == null
+                    ? RString.EMPTY : 証記載番号.value());
             item.set証記載保険者名(集計情報Entity.getShoKisaiHokenshaName());
             item.set並び順1(並び順の1件目);
             item.set並び順2(並び順の2件目);
@@ -122,8 +124,9 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
             for (int i = 0; i < 明細情報List.size(); i++) {
                 SaishinsaMeisaiPsmEntity 明細Entity = 明細情報List.get(i);
                 SaishinsaKetteiHokenshaInItem item = new SaishinsaKetteiHokenshaInItem();
+                ShoKisaiHokenshaNo 証記載番号 = 集計情報Entity.getShoKisaiHokenshaNo();
                 item.set処理年月(処理年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-                item.set証記載保険者番号(集計情報Entity.getShoKisaiHokenshaNo().value());
+                item.set証記載保険者番号(証記載番号 != null ? 証記載番号.value() : RString.EMPTY);
                 item.set証記載保険者名(集計情報Entity.getShoKisaiHokenshaName());
                 item.set並び順1(並び順の1件目);
                 item.set並び順2(並び順の2件目);

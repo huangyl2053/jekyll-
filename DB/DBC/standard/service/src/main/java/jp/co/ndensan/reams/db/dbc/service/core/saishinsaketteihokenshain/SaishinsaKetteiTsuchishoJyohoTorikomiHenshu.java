@@ -188,8 +188,9 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiHenshu {
         dbt3104entity.setChushutsuKaishiTimestamp(null);
         dbt3104entity.setChushutsuShuryoTimestamp(null);
         dbt3104entity.setSaiShoriKanoKubun(false);
-        if (dbt3104entity.getShoriJikkoKaisu() != null) {
-            dbt3104entity.setShoriJikkoKaisu(dbt3104entity.getShoriJikkoKaisu().add(Decimal.ZERO));
+        Decimal 処理実行回数 = dbt3104entity.getShoriJikkoKaisu();
+        if (処理実行回数 != null) {
+            dbt3104entity.setShoriJikkoKaisu(処理実行回数.add(Decimal.ONE));
         }
         dbt3104entity.setSaiShoriFukaKubun(false);
         dbt3104entity.setFileName1(fileNameList == null || fileNameList.isEmpty()
