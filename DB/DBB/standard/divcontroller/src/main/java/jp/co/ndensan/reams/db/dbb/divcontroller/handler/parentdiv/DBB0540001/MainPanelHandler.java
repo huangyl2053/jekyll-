@@ -135,7 +135,7 @@ public class MainPanelHandler {
         div.getChoshuInfo().getTxtFukaNendo().setValue(fukaNendo);
         if (null != serviceResult.getHoho().get本徴収_年金コード()) {
             RString nenkinCode = createNenkinCode(serviceResult.getHoho().get本徴収_年金コード());
-            RString nenkinCodeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+            RString nenkinCodeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     new CodeShubetsu(コード種別),
                     new Code(nenkinCode), FlexibleDate.getNowDate());
             div.getChoshuInfo().getTxtHokensha().setValue(nenkinCodeMeisho);
