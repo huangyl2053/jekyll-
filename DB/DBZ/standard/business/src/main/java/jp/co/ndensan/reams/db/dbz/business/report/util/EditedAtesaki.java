@@ -140,8 +140,8 @@ public class EditedAtesaki {
                 && 入力郵便番号をセット.equals(帳票制御共通.getカスタマバーコード変換エラー編集方法())) {
             atesakiSource.customerBarCode = new CustomerBarCode().convertCustomerBarCode(
                     宛先.get宛先住所().get郵便番号().getYubinNo(), RString.EMPTY).getCustomerBarCode();
-            送付物宛先ソース = atesakiSource;
         }
+        送付物宛先ソース = atesakiSource;
         return new KaigoSofubutsuAtesakiSource(送付物宛先ソース, new SetainusiHyojiJoho(
                 帳票制御共通.is世帯主表示有無() ? builder世帯主.append(様方).toRString() : RString.EMPTY));
     }
