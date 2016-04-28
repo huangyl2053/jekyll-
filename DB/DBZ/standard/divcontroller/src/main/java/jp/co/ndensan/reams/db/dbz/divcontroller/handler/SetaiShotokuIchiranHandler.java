@@ -11,14 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
-import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuChecker;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiShotokuIchiranComparators;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShotokuRirekiIchiranComparators;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotoku
 import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -477,11 +479,12 @@ public class SetaiShotokuIchiranHandler {
 
     private void 日付関連_所得年度コンフィグによる制御(FlexibleYear 所得年度) {
         List<KeyValueDataSource> kazeiNendoList = new ArrayList();
-        HizukeConfig hizukeConfig = new HizukeConfig();
         FlexibleYear 基準年度 = new FlexibleYear("2000");
         int index = 0;
         RString selectedIndex = new RString("key0");
-        for (FlexibleYear 年度 = hizukeConfig.get所得年度(); 基準年度.isBefore(年度); 年度 = 年度.minusYear(1)) {
+        FlexibleYear 日付関連_所得年度
+                = new FlexibleYear(DbBusinessConifg.get(ConfigKeysHizuke.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+        for (FlexibleYear 年度 = 日付関連_所得年度; 基準年度.isBefore(年度); 年度 = 年度.minusYear(1)) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(new RString("key" + index));
             keyValue.setValue(new RString(年度.wareki().getYear().toString()));
