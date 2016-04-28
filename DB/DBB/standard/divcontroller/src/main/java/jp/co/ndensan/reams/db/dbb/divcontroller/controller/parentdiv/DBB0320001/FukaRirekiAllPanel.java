@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320001;
 
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.FukaShokaiDisplayMode;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -47,8 +48,6 @@ public class FukaRirekiAllPanel {
 
         div.getLblMode().setText(FukaShokaiDisplayMode.初回.getCode());
 
-        // TODO n8187久保田 画面遷移のかくにんのためにダミーデータをセット
-        div.getCcdFukaRirekiAll().reload(new TsuchishoNo("12345"));
 //        int rirekiSize;
 //
 //        // 初回はdatagridロード処理いらない
@@ -77,14 +76,10 @@ public class FukaRirekiAllPanel {
 
             div.getLblMode().setText(FukaShokaiDisplayMode.二回目以降.getCode());
 
-            // TODO n8187久保田 画面遷移のかくにんのためにダミーデータをセット
-            // ここから
-            div.getCcdFukaRirekiAll().reload(new TsuchishoNo("12345"));
-//            FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-//
-////        div.getCcdFukaRirekiAll().reload(key.get被保険者番号(), key.get調定年度(), key.get賦課年度(), key.get通知書番号());
-//            div.getCcdFukaRirekiAll().reload(key.get通知書番号());
-            // ここまで
+            FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
+
+//        div.getCcdFukaRirekiAll().reload(key.get被保険者番号(), key.get調定年度(), key.get賦課年度(), key.get通知書番号());
+            div.getCcdFukaRirekiAll().reload(key.get通知書番号());
 
         }
         return createResponseData(div);

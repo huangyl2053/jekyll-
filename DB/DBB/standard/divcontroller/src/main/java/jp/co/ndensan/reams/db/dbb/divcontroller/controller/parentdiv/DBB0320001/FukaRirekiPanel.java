@@ -3,18 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320001;
 
-import java.util.ArrayList;
-import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.HokenryoDankaiUtil;
+import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaComparators;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.input.FukaHikakuInput;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001StateName.賦課根拠期割;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.dgFukaRirekiFukaRireki_Row;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
+import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 賦課照会の賦課履歴Divのコントローラです。
@@ -58,8 +79,6 @@ public class FukaRirekiPanel {
      */
     public ResponseData<FukaRirekiPanelDiv> load(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
-        // TODO n8187久保田 画面遷移の確認のために空行を設定。
-        setDgFukaRireki(rirekiDiv, null, null);
 //        rirekiDiv.setDisplayNone(true);
         return ResponseData.of(rirekiDiv).setState(賦課根拠期割);
     }
@@ -97,180 +116,169 @@ public class FukaRirekiPanel {
     public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(
             FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
-        // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト。
-        // ここから
-//        IItemList<Fuka> selectItemList = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
-//        Fuka selectRow = selectItemList.findFirst().get();
-//
-//        final FukaManager fukaFinder = new FukaManager();
-//        IItemList<Fuka> descList = fukaFinder.get介護賦課一覧(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号());
-//
-//        if (rirekiAllDiv.getLblMode().getText().equals(FukaShokaiDisplayMode.二回目以降.getCode())) {
-//            setDgFukaRireki(rirekiDiv, descList, selectRow.get賦課年度());
-//        } else {
-//            Fuka model = descList.findFirst().get();
-//            FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().getName());
-//            ViewStates.access().valueAssignedToA(FukaShokaiKey.class).put(key);
-//        }
-        // ここまで
-        // TODO n8187久保田 画面遷移の確認のために空行を設定。
-        setDgFukaRireki(rirekiDiv, null, null);
+        IItemList<Fuka> selectItemList = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
+        Fuka selectRow = selectItemList.findFirst().get();
+
+        final FukaManager manager = new FukaManager();
+//        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課一覧(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号()));
+        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課一覧());
+        if (rirekiAllDiv.getLblMode().getText().equals(FukaShokaiDisplayMode.二回目以降.getCode())) {
+            setDgFukaRireki(rirekiDiv, descList, selectRow.get賦課年度());
+        } else {
+            Fuka model = descList.findFirst().get();
+            FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
+            ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        }
 
         return createResponseData(rirekiDiv);
     }
 
-    private void setDgFukaRireki(FukaRirekiPanelDiv fukaRirekiDiv, IItemList rireki, FukaNendo 賦課年度) {
-        // TODO n8187久保田 画面遷移の確認のためにダミーデータを設定。
-        // ここから
-        // TODO 未使用のメソッド引数があります。rirekiと賦課年度のCheckstyle対応。
-        if (rireki == null && 賦課年度 != null) {
-            賦課年度.hashCode();
-        }
-        List<dgFukaRirekiFukaRireki_Row> list = new ArrayList<>();
-        list.add(new dgFukaRirekiFukaRireki_Row());
-        fukaRirekiDiv.getDgFukaRirekiFukaRireki().setDataSource(list);
-//        fukaRirekiDiv.getTxtFukaNendoFukaRireki().setDomain(賦課年度.value());
-//        fukaRirekiDiv.getDgFukaRirekiFukaRireki().setDataSource(rireki.map(to_dgFukaRireki_Row()).toList());
-        // ここまで
+    private void setDgFukaRireki(FukaRirekiPanelDiv fukaRirekiDiv, IItemList rireki, FlexibleYear 賦課年度) {
+        fukaRirekiDiv.getTxtFukaNendoFukaRireki().setDomain(賦課年度);
+        fukaRirekiDiv.getDgFukaRirekiFukaRireki().setDataSource(rireki.sorted(FukaComparators.orderBy履歴番号.desc()).map(to_dgFukaRireki_Row()).toList());
     }
 
-//    private IFunction<Fuka, dgFukaRirekiFukaRireki_Row> to_dgFukaRireki_Row() {
+    private IFunction<Fuka, dgFukaRirekiFukaRireki_Row> to_dgFukaRireki_Row() {
+
+        return new IFunction<Fuka, dgFukaRirekiFukaRireki_Row>() {
+            @Override
+            public dgFukaRirekiFukaRireki_Row apply(Fuka fuka) {
+
+                RString hokernyoDankai;
+                if (fuka.get保険料段階().isEmpty()) {
+                    hokernyoDankai = new RString("-");
+                } else {
+                    hokernyoDankai = HokenryoDankaiUtil.edit表示用保険料段階(FukaShokaiController.findHokenryoDankai(
+                            fuka.get賦課年度(), fuka.get保険料段階()));
+                }
+
+                Kiwarigaku kiwarigaku = findKiwarigaku(fuka);
+
+                return new dgFukaRirekiFukaRireki_Row(
+                        new Button(),
+                        fuka.get通知書番号().value(),
+                        fuka.get調定年度().wareki().toDateString(),
+                        fuka.get調定年度().seireki().getYear(),
+                        FukaMapper.toDisplayForm(fuka.get調定日時().getRDateTime()),
+                        fuka.get更正月(),
+                        hokernyoDankai,
+                        FukaMapper.addComma(fuka.get確定介護保険料_年額()),
+                        FukaMapper.addComma(kiwarigaku.get特徴期別額合計()),
+                        FukaMapper.addComma(kiwarigaku.get普徴期別額合計()),
+                        new RString(Integer.toString(fuka.get履歴番号())));
+            }
+        };
+    }
+
+    private Kiwarigaku findKiwarigaku(Fuka model) {
+        Optional<Kiwarigaku> amountoid = new KiwarigakuManager().load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号());
+
+        return amountoid.orElseThrow(
+                ExceptionSuppliers.systemException(UrErrorMessages.対象データなし.getMessage().evaluate()));
+    }
+
+    /**
+     * 履歴一覧の選択ボタンクリック、またはダブルクリック時にキー情報をviewStateに渡します。
+     *
+     * @param rirekiDiv 賦課履歴Div
+     * @param rirekiAllDiv 全賦課履歴Div
+     * @param kihonDiv 宛名・介護基本Div
+     * @return レスポンスデータ
+     */
+    public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+
+//        Fuka model = findTargetModel(
+//                rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All(),
+//                rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem());
+        // TODO FukaManagerを１つにしたい
+        final FukaManager manager = new FukaManager();
+
+        dgFukaRirekiFukaRireki_Row selectRow = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
+        FlexibleYear choteiNendo = new FlexibleYear(selectRow.getTxtChoteiNendoHidden().toString());
+
+        Fuka fuka = manager.get介護賦課(
+                choteiNendo,
+                rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
+                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
+                Integer.valueOf(selectRow.getRirekiNo().toString()));
+        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(fuka, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
+        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+
+        return createResponseData(rirekiDiv);
+    }
+
+    /**
+     * 前履歴と比較するボタンクリック時の処理です。
+     *
+     * @param rirekiDiv 賦課履歴Div
+     * @param rirekiAllDiv 全賦課履歴Div
+     * @param kihonDiv 宛名・介護基本Div
+     * @return レスポンスデータ
+     */
+    public ResponseData<FukaRirekiPanelDiv> onClick_MaeHikaku(
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+
+        // TODO FukaManagerを１つにしたい
+        final FukaManager manager = new FukaManager();
+
+        dgFukaRirekiFukaRireki_Row selectRow = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
+        FlexibleYear choteiNendo = new FlexibleYear(selectRow.getTxtChoteiNendoHidden().toString());
+        int 履歴番号 = Integer.valueOf(selectRow.getRirekiNo().toString());
+
+        Fuka atoFuka = manager.get介護賦課(
+                choteiNendo,
+                rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
+                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
+                履歴番号);
+
+        FukaShokaiKey atoRireki = ViewStateKeyCreator.createFukaShokaiKey(atoFuka, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
+        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, atoRireki);
+
+        if (履歴番号 == 0) {
+            ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前年度最終との比較(atoRireki));
+        } else {
+            Fuka maeFuka = manager.get介護賦課(
+                    choteiNendo,
+                    rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
+                    new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
+                    履歴番号 - 1);
+            FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(maeFuka, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
+            ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
+        }
+
+//        Optional<Fuka> value = fukaFinder.find賦課直近(
+//                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
+//                RDateTime.parse(selectRow.getShoriTimestamp().toString()));
 //
-//        return new IFunction<Fuka, dgFukaRirekiFukaRireki_Row>() {
-//            @Override
-//            public dgFukaRirekiFukaRireki_Row apply(Fuka model) {
+//        IViewStateValue<MaeRirekiKey> maeRireki = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
+//        if (value.isPresent()) {
+//            Fuka maeModel = value.get();
+//            maeRireki.put(ViewStateKeyCreator.createMaeRirekiKey(maeModel, kihonDiv.getCcdKaigoAtenaInfo().getName()));
+//        } else {
+//            maeRireki.remove();
+//        }
+//        for (ListIterator<Fuka> listIterator = list.toList().listIterator(); listIterator.hasNext();) {
+//            targetModel = listIterator.next();
+//            if (targetModel.get処理日時().toString().equals(row.getShoriTimestamp().toString())) {
+//                FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(targetModel, kihonDiv.getCcdKaigoAtenaInfo().getName());
+//                value.put(key);
 //
-//                RString hokernyoDankai;
-//                if (model.get保険料段階().isEmpty()) {
-//                    hokernyoDankai = new RString("-");
+//                if (listIterator.hasPrevious()) {
+//                    MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(listIterator.previous(), kihonDiv.getCcdKaigoAtenaInfo().getName());
+//                    maeRirekiValue.put(maeKey);
 //                } else {
-//                    hokernyoDankai = RString.EMPTY;
-////                    hokernyoDankai = FukaShokaiController.findHokenryoDankai(
-////                            model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階()).edit表示用保険料段階();
+//                    maeRirekiValue.remove();
 //                }
-//
-//                Kiwarigaku kiwarigaku = findKiwarigaku(model);
-//
-//                return new dgFukaRirekiFukaRireki_Row(
-//                        new Button(),
-//                        model.get通知書番号().value(),
-//                        model.get調定年度().wareki().toDateString(),
-//                        FukaMapper.toDisplayForm(model.get調定日時()),
-//                        model.get更正月(),
-//                        hokernyoDankai,
-//                        FukaMapper.addComma(model.get確定介護保険料_年額()),
-//                        FukaMapper.addComma(kiwarigaku.get特徴期別額合計()),
-//                        FukaMapper.addComma(kiwarigaku.get普徴期別額合計()),
-//                        new RString(model.get履歴番号().toString()));
 //            }
-//        };
-//    }
-//
-//    private Kiwarigaku findKiwarigaku(Fuka model) {
-////        Optional<Kiwarigaku> amountoid = new KiwarigakuFinder().load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
-//        Optional<Kiwarigaku> amountoid = Optional.ofNullable(null);
-//
-//        return amountoid.orElseThrow(
-//                ExceptionSuppliers.systemException(UrErrorMessages.対象データなし.getMessage().evaluate()));
-//    }
-//
-//    /**
-//     * 履歴一覧の選択ボタンクリック、またはダブルクリック時にキー情報をviewStateに渡します。
-//     *
-//     * @param rirekiDiv 賦課履歴Div
-//     * @param rirekiAllDiv 全賦課履歴Div
-//     * @param kihonDiv 宛名・介護基本Div
-//     * @return レスポンスデータ
-//     */
-//    public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(
-//            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
-//
-////        Fuka model = findTargetModel(
-////                rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All(),
-////                rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem());
-//        // TODO FukaManagerを１つにしたい
-//        // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト。
-//        // ここから
-////        final FukaManager fukaFinder = new FukaManager();
-////
-////        dgFukaRirekiFukaRireki_Row selectRow = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
-////        RDate choteiNendo = new RDate(selectRow.getTxtChoteiNendo().toString());
-////
-////        Fuka model = fukaFinder.find賦課(
-////                new ChoteiNendo(choteiNendo.getYear().seireki().toDateString().toString()),
-////                new FukaNendo(rirekiDiv.getTxtFukaNendoFukaRireki().getDomain()),
-////                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-////                RDateTime.parse(selectRow.getShoriTimestamp().toString()))
-////                .get();
-////        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().getName());
-////        ViewStates.access().valueAssignedToA(FukaShokaiKey.class).put(key);
-//        // ここまで
-//        return createResponseData(rirekiDiv);
-//    }
-//
-//    /**
-//     * 前履歴と比較するボタンクリック時の処理です。
-//     *
-//     * @param rirekiDiv 賦課履歴Div
-//     * @param rirekiAllDiv 全賦課履歴Div
-//     * @param kihonDiv 宛名・介護基本Div
-//     * @return レスポンスデータ
-//     */
-//    public ResponseData<FukaRirekiPanelDiv> onClick_MaeHikaku(
-//            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
-//
-//        // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト。
-//        // ここから
-////        // TODO FukaManagerを１つにしたい
-////        final FukaManager fukaFinder = new FukaManager();
-////
-////        dgFukaRirekiFukaRireki_Row selectRow = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
-////        RDate choteiNendo = new RDate(selectRow.getTxtChoteiNendo().toString());
-////
-////        IItemList list = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All();
-////        Fuka atoModel = fukaFinder.find賦課(
-////                new ChoteiNendo(choteiNendo.getYear().seireki().toDateString().toString()),
-////                new FukaNendo(rirekiDiv.getTxtFukaNendoFukaRireki().getDomain()),
-////                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-////                RDateTime.parse(selectRow.getShoriTimestamp().toString()))
-////                .get();
-////
-////        IViewStateValue<FukaShokaiKey> atoRireki = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
-////        atoRireki.remove();
-////        atoRireki.put(ViewStateKeyCreator.createFukaShokaiKey(atoModel, kihonDiv.getCcdKaigoAtenaInfo().getName()));
-//        // ここまで
-////        Optional<Fuka> value = fukaFinder.find賦課直近(
-////                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-////                RDateTime.parse(selectRow.getShoriTimestamp().toString()));
-////
-////        IViewStateValue<MaeRirekiKey> maeRireki = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
-////        if (value.isPresent()) {
-////            Fuka maeModel = value.get();
-////            maeRireki.put(ViewStateKeyCreator.createMaeRirekiKey(maeModel, kihonDiv.getCcdKaigoAtenaInfo().getName()));
-////        } else {
-////            maeRireki.remove();
-////        }
-////        for (ListIterator<Fuka> listIterator = list.toList().listIterator(); listIterator.hasNext();) {
-////            targetModel = listIterator.next();
-////            if (targetModel.get処理日時().toString().equals(row.getShoriTimestamp().toString())) {
-////                FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(targetModel, kihonDiv.getCcdKaigoAtenaInfo().getName());
-////                value.put(key);
-////
-////                if (listIterator.hasPrevious()) {
-////                    MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(listIterator.previous(), kihonDiv.getCcdKaigoAtenaInfo().getName());
-////                    maeRirekiValue.put(maeKey);
-////                } else {
-////                    maeRirekiValue.remove();
-////                }
-////            }
-////        }
-//        return createResponseData(rirekiDiv);
-//    }
-//
-//    private Fuka findTargetModel(IItemList list, dgFukaRirekiFukaRireki_Row row) {
+//        }
+        return createResponseData(rirekiDiv);
+    }
+
+//    private Fuka findTargetModel(IItemList<Fuka> list, dgFukaRirekiFukaRireki_Row row) {
 //        for (Iterator<Fuka> iterator = list.iterator(); iterator.hasNext();) {
 //            Fuka target = iterator.next();
-//            if (target.get履歴番号().toString().equals(row.getShoriTimestamp().toString())) {
+//            if (String.valueOf(target.get履歴番号()).equals(row.getRirekiNo().toString())) {
 //                return target;
 //            }
 //        }
