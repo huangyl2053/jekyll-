@@ -16,14 +16,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 class ShinsakaiShukeiGenzainojokyoBuilder implements IShinsakaiShukeiGenzainojokyoBuilder {
 
     private final IShinsakaiShukeiGenzainojokyoEditor editor;
+    private final IShinsakaiShukeiGenzainojokyoHeadEditor headEditor;
 
     /**
      * インスタンスを生成します。
      *
+     * @param headEditor {@link IShinsakaiShukeiGenzainojokyoHeadEditor}
      * @param editor {@link IShinsakaiShukeiGenzainojokyoEditor}
      */
-    public ShinsakaiShukeiGenzainojokyoBuilder(IShinsakaiShukeiGenzainojokyoEditor editor) {
+    public ShinsakaiShukeiGenzainojokyoBuilder(IShinsakaiShukeiGenzainojokyoHeadEditor headEditor,
+            IShinsakaiShukeiGenzainojokyoEditor editor) {
+        this.headEditor = headEditor;
         this.editor = editor;
+
     }
 
     /**
@@ -33,6 +38,6 @@ class ShinsakaiShukeiGenzainojokyoBuilder implements IShinsakaiShukeiGenzainojok
      */
     @Override
     public ShinsakaiShukeiGenzainojokyoReportSource build() {
-        return ReportEditorJoiner.from(new ShinsakaiShukeiGenzainojokyoReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new ShinsakaiShukeiGenzainojokyoReportSource()).join(headEditor).join(editor).buildSource();
     }
 }

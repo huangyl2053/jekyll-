@@ -35,8 +35,9 @@ public class ShinsakaiShukeiGenzainojokyoReport extends Report<ShinsakaiShukeiGe
         List<ShinsakaiShukeiGenzainojokyo> itemList = itemList();
         int count = 0;
         for (ShinsakaiShukeiGenzainojokyo item : itemList) {
+            IShinsakaiShukeiGenzainojokyoHeadEditor headEditor = new ShinsakaiShukeiGenzainojokyoHeadEditor(target);
             IShinsakaiShukeiGenzainojokyoEditor editor = new ShinsakaiShukeiGenzainojokyoEditor(item, count++);
-            IShinsakaiShukeiGenzainojokyoBuilder builder = new ShinsakaiShukeiGenzainojokyoBuilder(editor);
+            IShinsakaiShukeiGenzainojokyoBuilder builder = new ShinsakaiShukeiGenzainojokyoBuilder(headEditor, editor);
             reportSourceWriter.writeLine(builder);
         }
     }
@@ -58,6 +59,9 @@ public class ShinsakaiShukeiGenzainojokyoReport extends Report<ShinsakaiShukeiGe
 
     private ShinsakaiShukeiGenzainojokyo set上段合計(ShinsakaiShukeiGenzainojokyoEntity entity) {
         ShinsakaiShukeiGenzainojokyo item = new ShinsakaiShukeiGenzainojokyo();
+        item.setTitle(entity.getタイトル());
+        item.setShichosonName(entity.get市町村名());
+        item.setShichosonName(entity.get有効基準年月日());
         item.setListShukei1_1(entity.get全体合計_要支援1_上段());
         item.setListShukei1_2(entity.get全体合計_要支援2_上段());
         item.setListShukei1_3(entity.get全体合計_要介護1_上段());
