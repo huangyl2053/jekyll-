@@ -69,7 +69,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiReport extends Report<Hokenry
         // TODO 帳票制御情報を取得する
         // 帳票制御共通（DbT7065ChohyoSeigyoKyotsu）
         // パラメータ：　サブ業務コード　＝　DBB
-        //	　　　   帳票分類ID　＝　"DBB100045_HokenryoNonyuTsuchishoDaihyo"
+        // 帳票分類ID　＝　"DBB100045_HokenryoNonyuTsuchishoDaihyo"
         Ninshosha 帳票認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()));
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
