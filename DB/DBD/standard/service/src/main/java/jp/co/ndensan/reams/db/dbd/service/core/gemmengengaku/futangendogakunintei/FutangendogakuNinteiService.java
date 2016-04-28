@@ -103,6 +103,7 @@ public class FutangendogakuNinteiService {
         List<FutanGendogakuNinteiEntity> entityList = mapper.get負担限度額認定申請の情報List(検索条件);
         if (entityList != null && !entityList.isEmpty()) {
             for (FutanGendogakuNinteiEntity entity : entityList) {
+                entity.initializeMd5ToEntities();
                 負担限度額認定申請の情報List.add(new FutanGendogakuNintei(entity));
             }
         }

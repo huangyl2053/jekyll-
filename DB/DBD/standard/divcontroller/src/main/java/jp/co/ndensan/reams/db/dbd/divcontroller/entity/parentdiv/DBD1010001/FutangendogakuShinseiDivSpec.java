@@ -57,7 +57,8 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                  */
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
-                    FlexibleDate 法施行日 = new FlexibleDate(DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
+                    FlexibleDate 法施行日 = new FlexibleDate(
+                            DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
                     return 法施行日.isBefore(適用開始日);
                 }

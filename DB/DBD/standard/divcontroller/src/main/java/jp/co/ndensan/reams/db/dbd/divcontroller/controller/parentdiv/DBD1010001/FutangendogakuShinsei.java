@@ -45,7 +45,6 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onLoad(FutangendogakuShinseiDiv div) {
-
         getHandler(div).onLoad();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         pairs = getValidationHandler().受給共通_被保データなしチェック(pairs, div);
@@ -98,10 +97,14 @@ public class FutangendogakuShinsei {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+            return ResponseData.of(div).respond();
+        }
         if (!getHandler(div).onSelectByDeleteButton()) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
         }
-        return ResponseData.of(div).setState(DBD1010001StateName.詳細);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -147,6 +150,10 @@ public class FutangendogakuShinsei {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }
+        if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+            return ResponseData.of(div).respond();
+        }
         getHandler(div).onClick_btnShinseiKakutei();
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
@@ -160,6 +167,10 @@ public class FutangendogakuShinsei {
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnShoninKakutei(FutangendogakuShinseiDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+            return ResponseData.of(div).respond();
         }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         NinteiShinseiValidationHandler validationHandler = getValidationHandler();
