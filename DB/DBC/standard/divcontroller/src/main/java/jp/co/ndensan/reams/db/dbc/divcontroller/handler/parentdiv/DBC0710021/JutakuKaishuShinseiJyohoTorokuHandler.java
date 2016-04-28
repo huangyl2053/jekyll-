@@ -84,6 +84,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -178,6 +179,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString 行状態_削除 = new RString("削除");
     private static final RString 行状態_更新 = new RString("更新");
     private static final RString FORMAT = new RString("%02d");
+    private static final RString 住宅改修_状態 = new RString("Unchanged");
+    private static final RString 申請を保存ボタン = new RString("btnAddShikyuShinsei");
 
     private JutakuKaishuShinseiJyohoTorokuHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
@@ -274,6 +277,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         model.set被保険者番号(被保険者番号);
         model.setサービス提供年月(サービス提供年月);
         model.set状態(改修状態_参照);
+        if (画面モード_審査.equals(画面モード) || 画面モード_修正.equals(画面モード)) {
+            model.set状態(改修状態_登録);
+        }
         // TODO QAのNo.664 項目「住所クラス」の設定値は確認中
         model.set住所クラス(new _Jusho());
         model.set様式番号(償還払請求基本.get様式番号());
@@ -296,13 +302,16 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_修正);
         } else if (画面モード_照会.equals(画面モード)) {
             set画面照会モードに変更();
+            div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getBtnRireki().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisabled(true);
+            div.getBtnShokanKetteiJyoho().setDisabled(true);
             if (償還払支給判定結果 != null) {
                 div.getBtnShokanKetteiJyoho().setDisabled(false);
             }
             div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
                     支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_照会);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存ボタン, true);
         } else if (画面モード_修正.equals(画面モード)) {
             div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setVisible(false);
@@ -315,7 +324,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     住宅改修費支給申請, 償還払請求基本, 被保険者番号, サービス提供年月, 整理番号);
         }
         if (画面モード_削除.equals(画面モード)) {
-//            div.getBtnShokanKetteiJyoho().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getBtnRireki().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
                     支給申請情報, new KamokuCode(償還払給付費), 支払方法状態_照会);
@@ -719,7 +727,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                     住宅改修費支払結果.get費用額合計());
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtHokenTaishoHiyoMae().setValue(
                     住宅改修費支払結果.get費用額合計());
-            if (住宅改修費支払結果.get費用額合計().compareTo(支給限度額) > 0) {
+            if (住宅改修費支払結果.get費用額合計() != null && 住宅改修費支払結果.get費用額合計().compareTo(支給限度額) > 0) {
                 div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getTxtHokenTaishoHiyoMae()
                         .setValue(支給限度額);
             }
@@ -978,10 +986,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         for (KeyValueDataSource 限度額 : 限度額リセット) {
             if (要介護状態区分3段階変更による.equals(限度額.getKey())) {
                 要介護状態区分3段階変更 = true;
-                break;
             } else if (住宅住所変更による.equals(限度額.getKey())) {
                 住宅住所変更 = true;
-                break;
             }
         }
         RString 審査結果 = div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().getRadShinseiNaiyoyo()
@@ -1360,20 +1366,17 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
 //                        .toDateString())).set事前申請整理番号(div.getTxtSeiriNo().getValue()).build();
 //        dbt3049List.add(dbt3049);
         for (dgGaisyuList_Row row : 画面住宅住所) {
-            ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(
-                    償還払請求基本.get被保険者番号(),
-                    償還払請求基本.getサービス提供年月(),
-                    償還払請求基本.get整理番号(), 償還払請求基本.get事業者番号(),
-                    償還払請求基本.get様式番号(), 償還払請求基本.get明細番号(),
-                    連番);
-            連番 = new RString(Integer.parseInt(連番.toString()) + 1);
+            ShokanJutakuKaishu dbt3049 = new ShokanJutakuKaishu(dbt3038.get被保険者番号(),
+                    dbt3038.getサービス提供年月(), dbt3038.get整理番号(), dbt3038.get事業者番号(),
+                    dbt3038.get様式番号(), dbt3038.get明細番号(), 連番);
+            連番 = new RString(String.format(FORMAT.toString(), (Integer.parseInt(連番.toString()) + 1)));
             ShokanJutakuKaishuBuilder dbt3049Builder = dbt3049.createBuilderForEdit();
             if (サービス種類コード != null) {
                 dbt3049Builder.setサービスコード(
                         new ServiceCode(サービス種類コード.value().concat(サービス種類コード固定.toString())));
             }
             set償還払請求住宅改修(row, dbt3049Builder);
-            dbt3049Builder.set事前申請サービス提供年月(new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
+            dbt3049 = dbt3049Builder.set事前申請サービス提供年月(new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth()
                     .toDateString())).set事前申請整理番号(div.getTxtSeiriNo().getValue()).build();
             dbt3049List.add(dbt3049);
         }
@@ -1863,8 +1866,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         List<JyutakuGaisyunaiyoListParameter> paramList = new ArrayList<>();
         JyutakuGaisyunaiyoListParameter param;
         for (dgGaisyuList_Row row : gridList) {
-            RowState 状態 = RString.EMPTY.equals(row.getTxtJyotai())
-                    ? RowState.Unchanged : RowState.valueOf(row.getTxtJyotai().toString());
+            RString 状態 = RString.EMPTY.equals(row.getTxtJyotai()) ? 住宅改修_状態 : row.getTxtJyotai();
             param = JyutakuGaisyunaiyoListParameter.createSelectByKeyParam(
                     状態, row.getTxtJutakuAddress(),
                     new FlexibleDate(new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));

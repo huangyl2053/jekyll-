@@ -622,6 +622,11 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
+        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                div, null, null).validate給付率();
+        if (valid2.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid2).respond();
+        }
         Decimal 費用額合計 = handler.費用額合計の取得();
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
                 .getTxtHiyoTotalNow().setValue(費用額合計);
