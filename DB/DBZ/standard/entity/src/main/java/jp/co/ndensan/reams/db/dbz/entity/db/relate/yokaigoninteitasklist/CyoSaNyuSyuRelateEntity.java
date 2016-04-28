@@ -43,4 +43,5 @@ public class CyoSaNyuSyuRelateEntity {
     private RString jigyoshaMeisho;
     private RString chosainShimei;
     private RString chikuCode;
+    private int ninteichosaIraiRirekiNo;
 }
