@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.FukaJohoTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.shunokamoku.ShunoKamokuManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,6 +25,10 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
 
     private static final RString 賦課情報 = new RString("jp.co.ndensan.reams.db.dbb.persistence."
             + "db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.get登録情報");
+    private FlexibleYear fukaNendo = FlexibleYear.EMPTY;
+    private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
+    private FlexibleYear choteiNendo = FlexibleYear.EMPTY;
+
     @BatchWriter
     BatchPermanentTableWriter<DbT2002FukaEntity> dbT2002Writer;
     @BatchWriter
@@ -74,6 +80,13 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
     }
 
     private void insert介護賦課(DbT2002FukaJohoTempTableEntity entity) {
+        if (fukaNendo.equals(entity.getFukaNendo()) && tsuchishoNo.equals(entity.getTsuchishoNo())
+                && choteiNendo.equals(entity.getChoteiNendo())) {
+            return;
+        }
+        fukaNendo = entity.getFukaNendo();
+        tsuchishoNo = entity.getTsuchishoNo();
+        choteiNendo = entity.getChoteiNendo();
         DbT2002FukaEntity dbT2002 = new DbT2002FukaEntity();
         dbT2002.setChoteiNendo(entity.getChoteiNendo());
         dbT2002.setFukaNendo(entity.getFukaNendo());

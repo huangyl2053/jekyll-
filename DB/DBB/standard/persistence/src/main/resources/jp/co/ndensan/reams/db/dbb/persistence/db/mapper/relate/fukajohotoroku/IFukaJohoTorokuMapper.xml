@@ -183,11 +183,15 @@
                 "DbT0700ShunoKanriTemp" DbT0700,
                 "DbT0705ChoteiKyotsuTemp" DbT0705
             WHERE
-                DbT0700."choteiId" = DbT0705."choteiId"
+                DbT0700."shunoId" = DbT0705."shunoId"
             )choteiIdToroku
         ON
             choteiIdToroku."choteiNendo" = dbT2002."choteiNendo"
         AND choteiIdToroku."kazeiNendo" = dbT2002."fukaNendo"
         AND choteiIdToroku."tsuchishoNo" = dbT2002."tsuchishoNo"
+        ORDER BY
+            dbT2002."choteiNendo",
+            dbT2002."fukaNendo",
+            dbT2002."tsuchishoNo"
     </select>
 </mapper>
