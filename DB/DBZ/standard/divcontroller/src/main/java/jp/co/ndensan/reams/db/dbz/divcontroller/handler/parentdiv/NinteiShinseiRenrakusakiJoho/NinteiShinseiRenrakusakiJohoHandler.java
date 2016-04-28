@@ -74,15 +74,16 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     }
 
     private void set支所ドロップダウンリスト() {
-        if (ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get支所管理有無フラグ()) {
+        List<KeyValueDataSource> dataSrouceList = new ArrayList<>();
+        if (ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定).get支所管理有無フラグ()) {
             div.getDdlShisho().setDisplayNone(false);
-            List<KeyValueDataSource> dataSrouceList = new ArrayList<>();
             KeyValueDataSource dataSource = new KeyValueDataSource(new RString("key0"),
                     ShishoSecurityJoho.createInstance().getShishoCode(UrControlDataFactory.
                             createInstance().getLoginInfo().getUserId()));
             dataSrouceList.add(dataSource);
-            div.getDdlShisho().setDataSource(dataSrouceList);
         }
+        div.getDdlShisho().setDataSource(dataSrouceList);
+        div.getDdlShisho().setSelectedIndex(0);
     }
 
     private void set連絡先区分DDL() {
@@ -93,6 +94,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
             dataSourceList.add(dataSoruce);
         }
         div.getDdlRenrakusakiKubun().setDataSource(dataSourceList);
+        div.getDdlRenrakusakiKubun().setSelectedIndex(0);
     }
 
     private void set本人との関係DDL() {
@@ -102,6 +104,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
             dataSourceList.add(dataSource);
         }
         div.getDdlTsuzukigara().setDataSource(dataSourceList);
+        div.getDdlTsuzukigara().setSelectedIndex(0);
     }
 
     /**
@@ -109,7 +112,10 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void set画面ReadOnly() {
         if (new RString("1").equals(div.getHdnReadOnly())) {
-            div.setReadOnly(true);
+            div.getRenrakusakiIchiran().setReadOnly(true);
+            div.getRenrakusakiNyuryoku().setReadOnly(true);
+            div.getBtnKakutei().setDisabled(true);
+            div.getBtnModoru().setDisabled(false);
         } else {
             div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.ShokaiMode);
         }
@@ -164,8 +170,10 @@ public class NinteiShinseiRenrakusakiJohoHandler {
         div.getTxtTelNo().clearDomain();
         div.getTxtMobileNo().clearDomain();
         div.getTxtYusenJuni().clearValue();
-        div.getBtnShinkiTsuika().setDisabled(true);
-        div.getRenrakusakiIchiran().setReadOnly(true);
+        div.getDdlRenrakusakiKubun().setSelectedIndex(0);
+        div.getDdlShisho().setSelectedIndex(0);
+        div.getDdlTsuzukigara().setSelectedIndex(0);
+
     }
 
     /**
@@ -181,6 +189,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
         div.getTxtTelNo().setDomain(RString.isNullOrEmpty(row.getTelNo()) ? TelNo.EMPTY : new TelNo(row.getTelNo()));
         div.getTxtMobileNo().setDomain(RString.isNullOrEmpty(row.getMobileNo()) ? TelNo.EMPTY : new TelNo(row.getMobileNo()));
         div.getTxtYusenJuni().setValue(row.getYusenJuni());
+        div.getDdlRenrakusakiKubun().setSelectedKey(row.getRenrakusakiKuBun());
+        div.getDdlShisho().setSelectedValue(row.getSisyo());
     }
 
     /**
