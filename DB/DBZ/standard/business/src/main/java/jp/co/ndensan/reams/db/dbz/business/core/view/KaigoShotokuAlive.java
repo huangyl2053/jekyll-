@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.view;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -137,7 +137,7 @@ public class KaigoShotokuAlive
      * @return 登録業務
      */
     public RString get登録業務() {
-        return entity.getTorokuGyomu();
+        return new RString(String.valueOf(entity.getTorokuGyomu()));
     }
 
     /**
@@ -146,7 +146,7 @@ public class KaigoShotokuAlive
      * @return 更正日
      */
     public YMDHMS get更正日() {
-        return entity.getShoriYMD();
+        return entity.getShoriTimeStamp();
     }
 
     /**
@@ -155,7 +155,7 @@ public class KaigoShotokuAlive
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return entity.getRirekino();
+        return new Decimal(entity.getRirekino());
     }
 
     /**
