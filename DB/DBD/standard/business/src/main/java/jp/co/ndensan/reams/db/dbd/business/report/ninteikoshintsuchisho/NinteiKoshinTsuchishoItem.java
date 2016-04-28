@@ -39,7 +39,7 @@ public class NinteiKoshinTsuchishoItem {
     private final List<RString> 通知書定型文List;
     private final ReportId 帳票分類ID;
     private final Ninshosha 認証者;
-    private final RString イメージファイルパス;
+    private RString イメージファイルパス;
     private EditedAtesaki 編集後宛先;
 
     /**
@@ -56,11 +56,10 @@ public class NinteiKoshinTsuchishoItem {
      * @param 通知書定型文List 通知書定型文List
      * @param 帳票分類ID 帳票分類ID
      * @param 認証者 認証者
-     * @param イメージファイルパス イメージファイルパス
      */
     public NinteiKoshinTsuchishoItem(FutanGendogakuNintei 帳票情報, IKojin iKojin, IAtesaki iAtesaki, ChohyoSeigyoKyotsu 帳票制御共通,
             List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用List, Association 地方公共団体, RDate 発行日, RString 文書番号,
-            List<RString> 通知書定型文List, ReportId 帳票分類ID, Ninshosha 認証者, RString イメージファイルパス) {
+            List<RString> 通知書定型文List, ReportId 帳票分類ID, Ninshosha 認証者) {
         this.帳票情報 = 帳票情報;
         this.iKojin = iKojin;
         this.iAtesaki = iAtesaki;
@@ -72,7 +71,6 @@ public class NinteiKoshinTsuchishoItem {
         this.通知書定型文List = 通知書定型文List;
         this.帳票分類ID = 帳票分類ID;
         this.認証者 = 認証者;
-        this.イメージファイルパス = イメージファイルパス;
     }
 
     /**
@@ -82,5 +80,14 @@ public class NinteiKoshinTsuchishoItem {
      */
     public void set編集後宛先(EditedAtesaki 編集後宛先) {
         this.編集後宛先 = 編集後宛先;
+    }
+
+    /**
+     * イメージファイルパスを設定
+     *
+     * @param イメージファイルパス イメージファイルパス
+     */
+    public void setイメージファイルパス(RString イメージファイルパス) {
+        this.イメージファイルパス = イメージファイルパス;
     }
 }
