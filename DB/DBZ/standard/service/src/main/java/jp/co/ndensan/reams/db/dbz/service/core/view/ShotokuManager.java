@@ -42,6 +42,15 @@ public class ShotokuManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンス
+     */
+    public static ShotokuManager createInstance() {
+        return InstanceProvider.create(ShotokuManager.class);
+    }
+
+    /**
      * 主キーに合致する賦課Aliveを返します。
      *
      * @param 識別コード 識別コード

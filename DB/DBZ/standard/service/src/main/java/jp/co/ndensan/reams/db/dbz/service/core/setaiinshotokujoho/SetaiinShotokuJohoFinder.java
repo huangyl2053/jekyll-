@@ -40,9 +40,9 @@ public class SetaiinShotokuJohoFinder {
      */
     public SetaiinShotokuJohoFinder() {
         // this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.世帯員Finder = new SetaiinFinder();
-        this.被保険者台帳Manager = new HihokenshaDaichoManager();
-        this.介護所得Manager = new ShotokuManager();
+        this.世帯員Finder = SetaiinFinder.createInstance();
+        this.被保険者台帳Manager = HihokenshaDaichoManager.createInstance();
+        this.介護所得Manager = ShotokuManager.createInstance();
     }
 
     /**
