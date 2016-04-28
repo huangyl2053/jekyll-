@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 適用除外者台帳Builderのインターフェースクラスです。
  *
- * @reamsid_L DBE-3000-140 lishengli
+ * @reamsid_L DBA-0412-040 lishengli
  */
 interface ITekiyojogaishaDaichoBuilder extends IReportBuilder<TekiyojogaishaDaichoReportSource> {
 
