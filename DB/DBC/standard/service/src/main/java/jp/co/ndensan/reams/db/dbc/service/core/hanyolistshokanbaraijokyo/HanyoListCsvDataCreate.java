@@ -10,16 +10,35 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijoky
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.TsuzukigaraCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
+import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -68,8 +87,9 @@ public class HanyoListCsvDataCreate {
     }
 
     private void set介護保険(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-        csvEntity.set指定事業者コード(entity.get入所施設コード() == null || entity.get入所施設コード().isEmpty()
-                ? RString.EMPTY : entity.get入所施設コード().value());
+        JigyoshaNo 指定事業者コード = entity.get入所施設コード();
+        csvEntity.set指定事業者コード(指定事業者コード != null
+                ? 指定事業者コード.getColumnValue() : RString.EMPTY);
         csvEntity.set施設入所日(dataToRString(entity.get入所年月日()));
         csvEntity.set施設退所日(dataToRString(entity.get退所年月日()));
         if (入所施設種類_11.equals(entity.get入所施設種類())) {
@@ -80,23 +100,25 @@ public class HanyoListCsvDataCreate {
     }
 
     private void set介護事業者(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-        csvEntity.set指定事業者名(entity.get事業者名称_60() == null || entity.get事業者名称_60().isEmpty()
-                ? RString.EMPTY : entity.get事業者名称_60().value());
-        csvEntity.set指定事業者名カナ(entity.get事業者名称カナ_60() == null || entity.get事業者名称カナ_60().isEmpty()
-                ? RString.EMPTY : entity.get事業者名称カナ_60().value());
-        csvEntity.set指定事業者郵便番号(entity.get郵便番号_60() == null || entity.get郵便番号_60().isEmpty()
-                ? RString.EMPTY : entity.get郵便番号_60().value());
-        csvEntity.set指定事業者住所(entity.get事業者住所_60() == null || entity.get事業者住所_60().isEmpty()
-                ? RString.EMPTY : entity.get事業者住所_60().value());
-        csvEntity.set指定事業者代表者名(entity.get代表者名_62() == null || entity.get代表者名_62().isEmpty()
-                ? RString.EMPTY : entity.get代表者名_62().value());
-        csvEntity.set指定事業者代表者名カナ(entity.get代表者名カナ_62() == null || entity.get代表者名カナ_62().isEmpty()
-                ? RString.EMPTY : entity.get代表者名カナ_62().value());
+        AtenaMeisho 指定事業者名 = entity.get事業者名称_60();
+        AtenaKanaMeisho 指定事業者名カナ = entity.get事業者名称カナ_60();
+        csvEntity.set指定事業者名(指定事業者名 != null
+                ? 指定事業者名.getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者名カナ(指定事業者名カナ != null
+                ? 指定事業者名カナ.getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者郵便番号(entity.get郵便番号_60() != null
+                ? entity.get郵便番号_60().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者住所(entity.get事業者住所_60() != null
+                ? entity.get事業者住所_60().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者代表者名(entity.get代表者名_62() != null
+                ? entity.get代表者名_62().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者代表者名カナ(entity.get代表者名カナ_62() != null
+                ? entity.get代表者名カナ_62().getColumnValue() : RString.EMPTY);
         csvEntity.set指定事業者代表者役職(entity.get代表者役職名_62());
-        csvEntity.set指定事業者電話番号(entity.get電話番号_60() == null || entity.get電話番号_60().isEmpty()
-                ? RString.EMPTY : entity.get電話番号_60().value());
-        csvEntity.set指定事業者ＦＡＸ番号(entity.getFax番号_60() == null || entity.getFax番号_60().isEmpty()
-                ? RString.EMPTY : entity.getFax番号_60().value());
+        csvEntity.set指定事業者電話番号(entity.get電話番号_60() != null
+                ? entity.get電話番号_60().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者ＦＡＸ番号(entity.getFax番号_60() != null
+                ? entity.getFax番号_60().getColumnValue() : RString.EMPTY);
         csvEntity.set指定事業者ケアマネ数(numToRString(entity.get所属人数()));
         csvEntity.set指定事業者利用者数(numToRString(entity.get利用者数()));
         csvEntity.set指定事業者認定日(dataToRString(entity.get有効開始日_60()));
@@ -106,25 +128,23 @@ public class HanyoListCsvDataCreate {
     }
 
     private void set介護対象施設(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-        csvEntity.set指定事業者名(entity.get事業者名称_05() == null
-                || entity.get事業者名称_05().isEmpty()
-                ? RString.EMPTY : entity.get事業者名称_05().value());
-        csvEntity.set指定事業者名カナ(entity.get事業者名称カナ_05() == null
-                || entity.get事業者名称カナ_05().isEmpty()
-                ? RString.EMPTY : entity.get事業者名称カナ_05().value());
-        csvEntity.set指定事業者郵便番号(entity.get郵便番号_05() == null || entity.get郵便番号_05().isEmpty()
-                ? RString.EMPTY : entity.get郵便番号_05().value());
-        csvEntity.set指定事業者住所(entity.get事業者住所_05() == null || entity.get事業者住所_05().isEmpty()
-                ? RString.EMPTY : entity.get事業者住所_05().value());
-        csvEntity.set指定事業者代表者名(entity.get代表者名_05() == null || entity.get代表者名_05().isEmpty()
-                ? RString.EMPTY : entity.get代表者名_05().value());
-        csvEntity.set指定事業者代表者名カナ(entity.get代表者名カナ_05() == null || entity.get代表者名カナ_05().isEmpty()
-                ? RString.EMPTY : entity.get代表者名カナ_05().value());
+        csvEntity.set指定事業者名(entity.get事業者名称_05() != null
+                ? entity.get事業者名称_05().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者名カナ(entity.get事業者名称カナ_05() != null
+                ? entity.get事業者名称カナ_05().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者郵便番号(entity.get郵便番号_05() != null
+                ? entity.get郵便番号_05().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者住所(entity.get事業者住所_05() != null
+                ? entity.get事業者住所_05().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者代表者名(entity.get代表者名_05() != null
+                ? entity.get代表者名_05().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者代表者名カナ(entity.get代表者名カナ_05() != null
+                ? entity.get代表者名カナ_05().getColumnValue() : RString.EMPTY);
         csvEntity.set指定事業者代表者役職(entity.get役職_05());
-        csvEntity.set指定事業者電話番号(entity.get電話番号_05() == null || entity.get電話番号_05().isEmpty()
-                ? RString.EMPTY : entity.get電話番号_05().value());
-        csvEntity.set指定事業者ＦＡＸ番号(entity.getFax番号_05() == null || entity.getFax番号_05().isEmpty()
-                ? RString.EMPTY : entity.getFax番号_05().value());
+        csvEntity.set指定事業者電話番号(entity.get電話番号_05() != null
+                ? entity.get電話番号_05().getColumnValue() : RString.EMPTY);
+        csvEntity.set指定事業者ＦＡＸ番号(entity.getFax番号_05() == null
+                ? RString.EMPTY : entity.getFax番号_05().getColumnValue());
         csvEntity.set指定事業者ケアマネ数(RString.EMPTY);
         csvEntity.set指定事業者利用者数(RString.EMPTY);
         csvEntity.set指定事業者認定日(dataToRString(entity.get有効開始日_05()));
@@ -134,144 +154,140 @@ public class HanyoListCsvDataCreate {
 
     private void set宛名(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
         if (entity.get宛名Entity() != null) {
-            csvEntity.set識別コード(entity.get宛名Entity().getShikibetsuCode() == null
-                    || entity.get宛名Entity().getShikibetsuCode().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getShikibetsuCode().getColumnValue());
+            ShikibetsuCode 識別コード = entity.get宛名Entity().getShikibetsuCode();
+            csvEntity.set識別コード(識別コード != null
+                    ? 識別コード.getColumnValue() : RString.EMPTY);
             csvEntity.set住民種別(entity.get宛名Entity().getJuminShubetsuCode());
-            csvEntity.set氏名(entity.get宛名Entity().getKanjiShimei() == null
-                    || entity.get宛名Entity().getKanjiShimei().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getKanjiShimei().getColumnValue());
-            csvEntity.set氏名カナ(entity.get宛名Entity().getKanaShimei() == null
-                    || entity.get宛名Entity().getKanaShimei().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getKanaShimei().getColumnValue());
+            AtenaMeisho 氏名 = entity.get宛名Entity().getKanjiShimei();
+            csvEntity.set氏名(氏名 != null
+                    ? 氏名.getColumnValue() : RString.EMPTY);
+            AtenaKanaMeisho 氏名カナ = entity.get宛名Entity().getKanaShimei();
+            csvEntity.set氏名カナ(氏名カナ != null
+                    ? 氏名カナ.getColumnValue() : RString.EMPTY);
             csvEntity.set生年月日(dataToRString(entity.get宛名Entity().getSeinengappiYMD()));
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(), 宛名.get消除異動年月日());
             csvEntity.set年齢(ageCalculator.get年齢());
             csvEntity.set性別(entity.get宛名Entity().getSeibetsuCode());
-            csvEntity.set続柄コード(entity.get宛名Entity().getTsuzukigaraCode() == null
-                    || entity.get宛名Entity().getTsuzukigaraCode().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getTsuzukigaraCode().getColumnValue());
-            csvEntity.set世帯コード(entity.get宛名Entity().getSetaiCode() == null
-                    || entity.get宛名Entity().getSetaiCode().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getSetaiCode().getColumnValue());
-            csvEntity.set世帯主名(entity.get宛名Entity().getSetainushiMei() == null
-                    || entity.get宛名Entity().getSetainushiMei().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getSetainushiMei().getColumnValue());
-            csvEntity.set住所コード(entity.get宛名Entity().getZenkokuJushoCode() == null
-                    || entity.get宛名Entity().getZenkokuJushoCode().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getZenkokuJushoCode().getColumnValue());
-            csvEntity.set郵便番号(entity.get宛名Entity().getYubinNo() == null
-                    || entity.get宛名Entity().getYubinNo().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getYubinNo().isEmpty()
-                    ? RString.EMPTY : entity.get宛名Entity().getYubinNo().getColumnValue());
+            TsuzukigaraCode 続柄コード = entity.get宛名Entity().getTsuzukigaraCode();
+            csvEntity.set続柄コード(続柄コード != null
+                    ? 続柄コード.getColumnValue() : RString.EMPTY);
+            SetaiCode 世帯コード = entity.get宛名Entity().getSetaiCode();
+            csvEntity.set世帯コード(世帯コード != null
+                    ? 世帯コード.getColumnValue() : RString.EMPTY);
+            AtenaMeisho 世帯主名 = entity.get宛名Entity().getSetainushiMei();
+            csvEntity.set世帯主名(世帯主名 != null
+                    ? 世帯主名.getColumnValue() : RString.EMPTY);
+            ZenkokuJushoCode 住所コード = entity.get宛名Entity().getZenkokuJushoCode();
+            csvEntity.set住所コード(住所コード != null
+                    ? 住所コード.getColumnValue() : RString.EMPTY);
+            YubinNo 郵便番号 = entity.get宛名Entity().getYubinNo();
+            csvEntity.set郵便番号(郵便番号 != null
+                    ? 郵便番号.getColumnValue() : RString.EMPTY);
             set住所番地方書(entity, csvEntity);
             set宛名本人(entity, csvEntity);
         }
     }
 
     private void set住所番地方書(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-        if (entity.get宛名Entity().getBanchi() != null
-                && entity.get宛名Entity().getBanchi() != null
-                && entity.get宛名Entity().getKatagaki() != null
-                && !entity.get宛名Entity().getJusho().isEmpty()
-                && !entity.get宛名Entity().getBanchi().isEmpty()
-                && !entity.get宛名Entity().getKatagaki().isEmpty()) {
-            csvEntity.set住所番地方書(entity.get宛名Entity().getJusho().getColumnValue()
-                    .concat(entity.get宛名Entity().getBanchi().getColumnValue()).concat(new RString("　"))
-                    .concat(entity.get宛名Entity().getKatagaki().getColumnValue()));
+        if (entity.get宛名Entity() != null) {
+            AtenaBanchi 番地 = entity.get宛名Entity().getBanchi();
+            Katagaki 方書 = entity.get宛名Entity().getKatagaki();
+            AtenaJusho 住所 = entity.get宛名Entity().getJusho();
+            if (番地 != null && 方書 != null && 住所 != null) {
+                csvEntity.set住所番地方書(住所.getColumnValue()
+                        .concat(番地.getColumnValue()).concat(RString.FULL_SPACE)
+                        .concat(方書.getColumnValue()));
+            }
+            csvEntity.set住所(住所 != null
+                    ? 住所.getColumnValue() : RString.EMPTY);
+            csvEntity.set番地(番地 != null
+                    ? 番地.getColumnValue() : RString.EMPTY);
+            csvEntity.set方書(方書 != null
+                    ? 方書.getColumnValue() : RString.EMPTY);
         }
-        csvEntity.set住所(entity.get宛名Entity().getJusho() == null
-                || entity.get宛名Entity().getJusho().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getJusho().getColumnValue());
-        csvEntity.set番地(entity.get宛名Entity().getBanchi() == null
-                || entity.get宛名Entity().getBanchi().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getBanchi().getColumnValue());
-        csvEntity.set方書(entity.get宛名Entity().getKatagaki() == null
-                || entity.get宛名Entity().getKatagaki().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getKatagaki().getColumnValue());
 
     }
 
     private void set宛名本人(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-
-        csvEntity.set行政区コード(entity.get宛名Entity().getGyoseikuCode() == null
-                || entity.get宛名Entity().getGyoseikuCode().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getGyoseikuCode().getColumnValue());
-        csvEntity.set行政区名(entity.get宛名Entity().getGyoseikuName());
-        csvEntity.set地区１(entity.get宛名Entity().getChikuCode1() == null
-                || entity.get宛名Entity().getChikuCode1().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getChikuCode1().getColumnValue());
-        csvEntity.set地区２(entity.get宛名Entity().getChikuCode2() == null
-                || entity.get宛名Entity().getChikuCode2().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getChikuCode2().getColumnValue());
-        csvEntity.set地区３(entity.get宛名Entity().getChikuCode3() == null
-                || entity.get宛名Entity().getChikuCode3().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getChikuCode3().getColumnValue());
-        csvEntity.set連絡先１(entity.get宛名Entity().getRenrakusaki1().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getRenrakusaki1().getColumnValue());
-        csvEntity.set連絡先２(entity.get宛名Entity().getRenrakusaki2() == null
-                || entity.get宛名Entity().getRenrakusaki2().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getRenrakusaki2().getColumnValue());
-        csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD()));
-        csvEntity.set登録事由(entity.get宛名Entity().getTorokuJiyuCode());
-        csvEntity.set登録届出日(dataToRString(entity.get宛名Entity().getTorokuTodokedeYMD()));
-        csvEntity.set住定異動日(dataToRString(entity.get宛名Entity().getJuteiIdoYMD()));
-        csvEntity.set住定事由(entity.get宛名Entity().getJuteiJiyuCode());
-        csvEntity.set住定届出日(dataToRString(entity.get宛名Entity().getJuteiTodokedeYMD()));
-        csvEntity.set消除異動日(dataToRString(entity.get宛名Entity().getShojoIdoYMD()));
-        csvEntity.set消除事由(entity.get宛名Entity().getShojoJiyuCode());
-        csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD()));
-        //TODO
-        csvEntity.set転出入理由(RString.EMPTY);
-        csvEntity.set前住所郵便番号(entity.get宛名Entity().getTennyumaeYubinNo() == null
-                || entity.get宛名Entity().getTennyumaeYubinNo().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getTennyumaeYubinNo().getColumnValue());
+        if (entity.get宛名Entity() != null) {
+            GyoseikuCode 行政区コード = entity.get宛名Entity().getGyoseikuCode();
+            ChikuCode 地区1 = entity.get宛名Entity().getChikuCode1();
+            ChikuCode 地区2 = entity.get宛名Entity().getChikuCode2();
+            ChikuCode 地区3 = entity.get宛名Entity().getChikuCode3();
+            TelNo 連絡先1 = entity.get宛名Entity().getRenrakusaki1();
+            TelNo 連絡先2 = entity.get宛名Entity().getRenrakusaki2();
+            YubinNo 前住所郵便番号 = entity.get宛名Entity().getTennyumaeYubinNo();
+            csvEntity.set行政区コード(行政区コード != null
+                    ? 行政区コード.getColumnValue() : RString.EMPTY);
+            csvEntity.set行政区名(entity.get宛名Entity().getGyoseikuName());
+            csvEntity.set地区１(地区1 != null
+                    ? 地区1.getColumnValue() : RString.EMPTY);
+            csvEntity.set地区２(地区2 != null
+                    ? 地区2.getColumnValue() : RString.EMPTY);
+            csvEntity.set地区３(地区3 != null
+                    ? 地区3.getColumnValue() : RString.EMPTY);
+            csvEntity.set連絡先１(連絡先1 != null
+                    ? 連絡先1.getColumnValue() : RString.EMPTY);
+            csvEntity.set連絡先２(連絡先2 != null
+                    ? 連絡先2.getColumnValue() : RString.EMPTY);
+            csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD()));
+            csvEntity.set登録事由(entity.get宛名Entity().getTorokuJiyuCode());
+            csvEntity.set登録届出日(dataToRString(entity.get宛名Entity().getTorokuTodokedeYMD()));
+            csvEntity.set住定異動日(dataToRString(entity.get宛名Entity().getJuteiIdoYMD()));
+            csvEntity.set住定事由(entity.get宛名Entity().getJuteiJiyuCode());
+            csvEntity.set住定届出日(dataToRString(entity.get宛名Entity().getJuteiTodokedeYMD()));
+            csvEntity.set消除異動日(dataToRString(entity.get宛名Entity().getShojoIdoYMD()));
+            csvEntity.set消除事由(entity.get宛名Entity().getShojoJiyuCode());
+            csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD()));
+            //TODO
+            csvEntity.set転出入理由(RString.EMPTY);
+            csvEntity.set前住所郵便番号(前住所郵便番号 != null
+                    ? 前住所郵便番号.getColumnValue() : RString.EMPTY);
+        }
         set前住所番地方書(entity, csvEntity);
     }
 
     private void set前住所番地方書(HanyoListShokanbaraiJokyoEntity entity,
             HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-        if (entity.get宛名Entity().getTennyumaeJusho() != null
-                && entity.get宛名Entity().getTennyumaeBanchi() != null
-                && entity.get宛名Entity().getTennyumaeKatagaki() != null
-                && !entity.get宛名Entity().getTennyumaeJusho().isEmpty()
-                && !entity.get宛名Entity().getTennyumaeBanchi().isEmpty()
-                && !entity.get宛名Entity().getTennyumaeKatagaki().isEmpty()) {
-            csvEntity.set前住所番地方書(entity.get宛名Entity().getTennyumaeJusho().getColumnValue()
-                    .concat(entity.get宛名Entity().getTennyumaeBanchi().getColumnValue()).concat(new RString("　"))
-                    .concat(entity.get宛名Entity().getTennyumaeKatagaki().getColumnValue()));
+        if (entity.get宛名Entity() != null) {
+            AtenaJusho 前住所 = entity.get宛名Entity().getTennyumaeJusho();
+            AtenaBanchi 前住所番地 = entity.get宛名Entity().getTennyumaeBanchi();
+            Katagaki 前住所方書 = entity.get宛名Entity().getTennyumaeKatagaki();
+
+            if (前住所 != null && 前住所番地 != null && 前住所方書 != null) {
+                csvEntity.set前住所番地方書(前住所.getColumnValue()
+                        .concat(前住所番地.getColumnValue()).concat(RString.FULL_SPACE)
+                        .concat(前住所方書.getColumnValue()));
+            }
+            csvEntity.set前住所(前住所 != null
+                    ? 前住所.getColumnValue() : RString.EMPTY);
+            csvEntity.set前住所番地(前住所番地 != null
+                    ? 前住所番地.getColumnValue() : RString.EMPTY);
+            csvEntity.set前住所方書(前住所方書 != null
+                    ? 前住所方書.getColumnValue() : RString.EMPTY);
         }
-        csvEntity.set前住所(entity.get宛名Entity().getTennyumaeJusho() == null
-                || entity.get宛名Entity().getTennyumaeJusho().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getTennyumaeJusho().getColumnValue());
-        csvEntity.set前住所番地(entity.get宛名Entity().getTennyumaeBanchi() == null
-                || entity.get宛名Entity().getTennyumaeBanchi().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getTennyumaeBanchi().getColumnValue());
-        csvEntity.set前住所方書(entity.get宛名Entity().getTennyumaeKatagaki() == null
-                || entity.get宛名Entity().getTennyumaeKatagaki().isEmpty()
-                ? RString.EMPTY : entity.get宛名Entity().getTennyumaeKatagaki().getColumnValue());
 
     }
 
     private void set宛先(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
         if (entity.get宛先Entity() != null) {
-            csvEntity.set送付先氏名(entity.get宛先Entity().getKanjiShimei() == null
-                    || entity.get宛先Entity().getKanjiShimei().isEmpty()
-                    ? RString.EMPTY : entity.get宛先Entity().getKanjiShimei().getColumnValue());
-            csvEntity.set送付先氏名カナ(entity.get宛先Entity().getKanaShimei() == null
-                    || entity.get宛先Entity().getKanaShimei().isEmpty()
-                    ? RString.EMPTY : entity.get宛先Entity().getKanjiShimei().getColumnValue());
-            csvEntity.set送付先住所コード(entity.get宛先Entity().getZenkokuJushoCode() == null
-                    || entity.get宛先Entity().getZenkokuJushoCode().isEmpty()
-                    ? RString.EMPTY : entity.get宛先Entity().getKanjiShimei().getColumnValue());
-            csvEntity.set送付先郵便番号(entity.get宛先Entity().getYubinNo() == null
-                    || entity.get宛先Entity().getYubinNo().isEmpty()
-                    ? RString.EMPTY : entity.get宛先Entity().getKanjiShimei().getColumnValue());
+            AtenaMeisho 送付先氏名 = entity.get宛先Entity().getKanjiShimei();
+            AtenaKanaMeisho 送付先氏名カナ = entity.get宛先Entity().getKanaShimei();
+            ZenkokuJushoCode 送付先住所コード = entity.get宛先Entity().getZenkokuJushoCode();
+            YubinNo 送付先郵便番号 = entity.get宛先Entity().getYubinNo();
+            GyoseikuCode 送付先行政区コード = entity.get宛先Entity().getGyoseikuCode();
+            csvEntity.set送付先氏名(送付先氏名 != null
+                    ? 送付先氏名.getColumnValue() : RString.EMPTY);
+            csvEntity.set送付先氏名カナ(送付先氏名カナ != null
+                    ? 送付先氏名カナ.getColumnValue() : RString.EMPTY);
+            csvEntity.set送付先住所コード(送付先住所コード != null
+                    ? 送付先住所コード.getColumnValue() : RString.EMPTY);
+            csvEntity.set送付先郵便番号(送付先郵便番号 != null
+                    ? 送付先郵便番号.getColumnValue() : RString.EMPTY);
 
-            csvEntity.set送付先行政区コード(entity.get宛先Entity().getGyoseikuCode() == null
-                    || entity.get宛先Entity().getGyoseikuCode().isEmpty()
-                    ? RString.EMPTY : entity.get宛先Entity().getGyoseikuCode().getColumnValue());
+            csvEntity.set送付先行政区コード(送付先行政区コード != null
+                    ? 送付先行政区コード.getColumnValue() : RString.EMPTY);
             csvEntity.set送付先行政区名(entity.get宛先Entity().getGyoseiku());
             set送付先住所番地方書(entity, csvEntity);
         }
@@ -279,25 +295,22 @@ public class HanyoListCsvDataCreate {
 
     private void set送付先住所番地方書(HanyoListShokanbaraiJokyoEntity entity,
             HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-        if (entity.get宛先Entity().getJusho() != null
-                && entity.get宛先Entity().getBanchi() != null
-                && entity.get宛先Entity().getKatagaki() != null
-                && !entity.get宛先Entity().getJusho().isEmpty()
-                && !entity.get宛先Entity().getBanchi().isEmpty()
-                && !entity.get宛先Entity().getKatagaki().isEmpty()) {
-            csvEntity.set送付先住所番地方書(entity.get宛先Entity().getJusho().getColumnValue()
-                    .concat(entity.get宛先Entity().getBanchi().getColumnValue()).concat(new RString("　"))
-                    .concat(entity.get宛先Entity().getKatagaki().getColumnValue()));
+        if (entity.get宛先Entity() != null) {
+            AtenaJusho 送付先住所 = entity.get宛先Entity().getJusho();
+            AtenaBanchi 送付先番地 = entity.get宛先Entity().getBanchi();
+            Katagaki 送付先方書 = entity.get宛先Entity().getKatagaki();
+            if (送付先住所 != null && 送付先番地 != null && 送付先方書 != null) {
+                csvEntity.set送付先住所番地方書(送付先住所.getColumnValue()
+                        .concat(送付先番地.getColumnValue()).concat(RString.FULL_SPACE)
+                        .concat(送付先方書.getColumnValue()));
+            }
+            csvEntity.set送付先住所(送付先住所 != null
+                    ? 送付先住所.getColumnValue() : RString.EMPTY);
+            csvEntity.set送付先番地(送付先番地 != null
+                    ? 送付先番地.getColumnValue() : RString.EMPTY);
+            csvEntity.set送付先方書(送付先方書 != null
+                    ? 送付先方書.getColumnValue() : RString.EMPTY);
         }
-        csvEntity.set送付先住所(entity.get宛先Entity().getJusho() == null
-                || entity.get宛先Entity().getJusho().isEmpty()
-                ? RString.EMPTY : entity.get宛先Entity().getJusho().getColumnValue());
-        csvEntity.set送付先番地(entity.get宛先Entity().getBanchi() == null
-                || entity.get宛先Entity().getBanchi().isEmpty()
-                ? RString.EMPTY : entity.get宛先Entity().getBanchi().getColumnValue());
-        csvEntity.set送付先方書(entity.get宛先Entity().getKatagaki() == null
-                || entity.get宛先Entity().getKatagaki().isEmpty()
-                ? RString.EMPTY : entity.get宛先Entity().getKatagaki().getColumnValue());
 
     }
 
@@ -326,53 +339,52 @@ public class HanyoListCsvDataCreate {
 
     private void set支給申請(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
         if (entity.get支給申請Entity() != null) {
-            csvEntity.setサービス提供年月(entity.get支給申請Entity().getServiceTeikyoYM() == null
-                    || entity.get支給申請Entity().getServiceTeikyoYM().isEmpty()
-                    || entity.get支給申請Entity().getServiceTeikyoYM() == null
-                    ? RString.EMPTY : entity.get支給申請Entity().getServiceTeikyoYM().toDateString());
+            FlexibleYearMonth サービス提供年月 = entity.get支給申請Entity().getServiceTeikyoYM();
+            ShoKisaiHokenshaNo 給付証記載保険者番号 = entity.get支給申請Entity().getShoKisaiHokenshaNo();
+            TelNo 申請電話番号 = entity.get支給申請Entity().getShinseishaTelNo();
+            FlexibleYearMonth 国保連送付年月 = entity.get支給申請Entity().getSofuYM();
+            csvEntity.setサービス提供年月(サービス提供年月 != null
+                    ? サービス提供年月.toDateString() : RString.EMPTY);
             csvEntity.set整理番号(entity.get支給申請Entity().getSeiriNo());
             if (entity.get請求基本Entity() != null) {
                 csvEntity.set整理番号(entity.get請求基本Entity().getYoshikiNo());
             }
-            csvEntity.set給付証記載保険者番号(entity.get支給申請Entity().getShoKisaiHokenshaNo() == null
-                    || entity.get支給申請Entity().getShoKisaiHokenshaNo().isEmpty()
-                    ? RString.EMPTY : entity.get支給申請Entity().getShoKisaiHokenshaNo().value());
+            csvEntity.set給付証記載保険者番号(給付証記載保険者番号 != null
+                    ? 給付証記載保険者番号.getColumnValue() : RString.EMPTY);
             csvEntity.set申請日(dataToRString(entity.get支給申請Entity().getShinseiYMD()));
             csvEntity.set申請理由(entity.get支給申請Entity().getShinseiRiyu());
             csvEntity.set申請区分(get申請区分(entity));
             csvEntity.set申請氏名(entity.get支給申請Entity().getShinseishaNameKanji());
             csvEntity.set申請氏名カナ(entity.get支給申請Entity().getShinseishaNameKana());
-            csvEntity.set申請電話番号(entity.get支給申請Entity().getShinseishaTelNo() == null
-                    || entity.get支給申請Entity().getShinseishaTelNo().isEmpty()
-                    ? RString.EMPTY : entity.get支給申請Entity().getShinseishaTelNo().value());
+            csvEntity.set申請電話番号(申請電話番号 != null
+                    ? 申請電話番号.getColumnValue() : RString.EMPTY);
             csvEntity.set申請支払金額(numToRString(entity.get支給申請Entity().getShiharaiKingakuTotal()));
             csvEntity.set受付日(dataToRString(entity.get支給申請Entity().getUketsukeYMD()));
             csvEntity.set保険請求額(new RString(String.valueOf(entity.get支給申請Entity().getHokenKyufugaku())));
             csvEntity.set自己負担額(new RString(String.valueOf(entity.get支給申請Entity().getRiyoshaFutangaku())));
             csvEntity.set支払方法(entity.get支給申請Entity().getShiharaiHohoKubunCode());
-            csvEntity.set国保連送付年月(entity.get支給申請Entity().getSofuYM() == null
-                    || entity.get支給申請Entity().getSofuYM().isEmpty()
-                    ? RString.EMPTY : entity.get支給申請Entity().getSofuYM().toDateString());
+            csvEntity.set国保連送付年月(国保連送付年月 != null
+                    ? 国保連送付年月.toDateString() : RString.EMPTY);
             csvEntity.set申請状態(entity.get支給申請Entity().getKaishuShinseiKubun());
             csvEntity.set施行完了予定日(dataToRString(entity.get支給住宅Entity().getSekoKanryoYoteiYMD()));
             RString 申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
                     new Code(entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode()), FlexibleDate.getNowDate());
-            csvEntity.set申請取消事由(RString.EMPTY);
+            csvEntity.set申請取消事由(申請取消事由);
             csvEntity.set支給届出年月日(dataToRString(entity.get支給申請Entity().getShinseiYMD()));
             csvEntity.set支給受付年月日(dataToRString(entity.get支給申請Entity().getUketsukeYMD()));
             csvEntity.set領収年月日(dataToRString(entity.get支給申請Entity().getRyoshuYMD()));
             csvEntity.set支払場所(entity.get支給申請Entity().getShiharaiBasho());
             csvEntity.set支払開始日(dataToRString(entity.get支給申請Entity().getShiharaiKaishiYMD()));
             csvEntity.set支払終了日(dataToRString(entity.get支給申請Entity().getShiharaiShuryoYMD()));
-            if (entity.get支給申請Entity().getShiharaiKaishiYMD() != null
-                    && !entity.get支給申請Entity().getShiharaiKaishiYMD().isEmpty()) {
-                csvEntity.set支払開始曜日(new RString(entity.get支給申請Entity().getShiharaiKaishiYMD()
-                        .getDayOfWeek().toString()));
+            FlexibleDate 支払開始日 = entity.get支給申請Entity().getShiharaiKaishiYMD();
+            FlexibleDate 支払終了日 = entity.get支給申請Entity().getShiharaiKaishiYMD();
+            if (支払開始日 != null) {
+                DayOfWeek 支払開始曜日 = 支払開始日.getDayOfWeek();
+                csvEntity.set支払開始曜日(支払開始曜日 != null ? new RString(支払開始曜日.toString()) : RString.EMPTY);
             }
-            if (entity.get支給申請Entity().getShiharaiShuryoYMD() != null
-                    && !entity.get支給申請Entity().getShiharaiShuryoYMD().isEmpty()) {
-                csvEntity.set支払終了曜日(new RString(entity.get支給申請Entity().getShiharaiShuryoYMD()
-                        .getDayOfWeek().toString()));
+            if (entity.get支給申請Entity().getShiharaiShuryoYMD() != null) {
+                DayOfWeek 支払終了曜日 = 支払終了日.getDayOfWeek();
+                csvEntity.set支払終了曜日(支払終了曜日 != null ? new RString(支払終了曜日.toString()) : RString.EMPTY);
             }
             csvEntity.set支払開始時間(entity.get支給申請Entity().getShiharaiKaishiTime());
             csvEntity.set支払終了時間(entity.get支給申請Entity().getShiharaiShuryoTime());
@@ -393,17 +405,16 @@ public class HanyoListCsvDataCreate {
 
     private void set被保険者台帳管理(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
             HokenshaList 保険者リスト) {
-        csvEntity.set市町村コード(entity.get市町村コード() == null
-                || entity.get市町村コード().isEmpty()
-                ? RString.EMPTY : entity.get市町村コード().getColumnValue());
+        csvEntity.set市町村コード(entity.get市町村コード() != null
+                ? entity.get市町村コード().getColumnValue() : RString.EMPTY);
         Association association = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
         csvEntity.set市町村名(association.get市町村名());
         //TODO
         csvEntity.set保険者コード(RString.EMPTY);
         csvEntity.set保険者名(RString.EMPTY);
         csvEntity.set空白(RString.EMPTY);
-        csvEntity.set被保険者番号(entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty()
-                ? RString.EMPTY : entity.get被保険者番号().getColumnValue());
+        csvEntity.set被保険者番号(entity.get被保険者番号() != null
+                ? entity.get被保険者番号().getColumnValue() : RString.EMPTY);
         RString 資格取得事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 資格取得事由コード種別,
                 new Code(entity.get資格取得事由コード()), FlexibleDate.getNowDate());
         csvEntity.set資格取得事由(資格取得事由);
@@ -428,27 +439,30 @@ public class HanyoListCsvDataCreate {
 
     private void set口座情報(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
         if (entity.get口座情報Entity() != null) {
-            csvEntity.set銀行コード(entity.get口座情報Entity().getKinyuKikanCode() == null
-                    || entity.get口座情報Entity().getKinyuKikanCode().isEmpty()
-                    ? RString.EMPTY : entity.get口座情報Entity().getKinyuKikanCode().getColumnValue());
+            KinyuKikanCode 銀行コード = entity.get口座情報Entity().getKinyuKikanCode();
+            csvEntity.set銀行コード(銀行コード != null
+                    ? 銀行コード.getColumnValue() : RString.EMPTY);
         }
 
     }
 
     private RString get証記載保険者番号(HanyoListShokanbaraiJokyoEntity entity, HokenshaList 保険者リスト) {
-        RString 証記載保険者番号 = RString.EMPTY;
+        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        HokenshaSummary 保険者 = HokenshaSummary.EMPTY;
         if (entity.is広域内住所地特例フラグ()) {
             if (entity.get広住特措置元市町村コード() == null) {
                 return RString.EMPTY;
             }
-            証記載保険者番号 = 保険者リスト.get(entity.get広住特措置元市町村コード()).get証記載保険者番号().getColumnValue();
+            保険者 = 保険者リスト.get(entity.get広住特措置元市町村コード());
+
         } else {
             if (entity.get市町村コード() == null) {
                 return RString.EMPTY;
             }
-            証記載保険者番号 = 保険者リスト.get(entity.get市町村コード()).get証記載保険者番号().getColumnValue();
+            保険者 = 保険者リスト.get(entity.get市町村コード());
         }
-        return 証記載保険者番号;
+        証記載保険者番号 = 保険者 != null ? 保険者.get証記載保険者番号() : ShoKisaiHokenshaNo.EMPTY;
+        return 証記載保険者番号 != null ? 証記載保険者番号.getColumnValue() : RString.EMPTY;
     }
 
     private RString get申請区分(HanyoListShokanbaraiJokyoEntity entity) {

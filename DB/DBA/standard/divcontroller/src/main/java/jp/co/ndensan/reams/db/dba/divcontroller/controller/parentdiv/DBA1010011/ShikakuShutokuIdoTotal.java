@@ -205,7 +205,7 @@ public class ShikakuShutokuIdoTotal {
         if (!rowList.isEmpty()) {
             daNo = new RString(Integer.parseInt(rowList.get(rowList.size() - 1).getDaNo().trim().toString()) + 1);
         }
-        if (row != null) {
+        if (row != null && !RString.isNullOrEmpty(row.getState())) {
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getTxtShutokuDate().getValue());
             row.getShutokuTodokedeDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput()

@@ -603,13 +603,15 @@ public class MainPanelHandler {
         } else {
             現在の月 = システム日付.getMonthValue();
         }
-//
         boolean flag = is四月To八月の徴収方法を比較(現在の月);
+        //TODO QA 内部番号711
 //        boolean flg = is四月To八月の徴収方法は変更無しの場合(現在の月, 徴収方法データ);
+        is四月To八月の徴収方法は変更無しの場合(現在の月, 徴収方法データ);
         if (!flag) {
             特別徴収停止日時 = YMDHMS.now();
             特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
         }
+        //TODO QA 内部番号711
 //        if (!flg) {
 //            特別徴収停止日時 = 徴収方法データ.get特別徴収停止日時();
 //            特別徴収停止事由コード = 徴収方法データ.get特別徴収停止事由コード();

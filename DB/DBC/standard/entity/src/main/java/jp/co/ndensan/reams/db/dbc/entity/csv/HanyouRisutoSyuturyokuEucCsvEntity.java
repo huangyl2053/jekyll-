@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * 汎用リスト出力(高額介護サービス費状況)のCSVEntityです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 @Getter
 @Setter

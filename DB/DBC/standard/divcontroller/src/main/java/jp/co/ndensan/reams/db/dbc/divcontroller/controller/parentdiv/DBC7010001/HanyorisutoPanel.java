@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7010001;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001.HanyorisutoPanelHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
@@ -41,7 +42,7 @@ public class HanyorisutoPanel {
         JigyoshaMode mode = new JigyoshaMode();
         mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
         div.getChushutsuJokenPanel().setHiddenJigyoshaMode(DataPassingConverter.serialize(mode));
-        return ResponseData.of(div).respond();
+        return createResponse(div);
     }
 
     /**
@@ -54,7 +55,7 @@ public class HanyorisutoPanel {
         JigyoshaMode mode = DataPassingConverter.deserialize(div.getChushutsuJokenPanel().getHiddenJigyoshaMode(), JigyoshaMode.class);
         div.getTxtSienJigyosya().setValue(new RString(mode.getJigyoshaName().toString()));
         div.getTxtSienJigyosyano().setValue(new RString(mode.getJigyoshaNo().toString()));
-        return ResponseData.of(div).respond();
+        return createResponse(div);
     }
 
     /**
@@ -63,22 +64,9 @@ public class HanyorisutoPanel {
      * @param div HanyorisutoPanelDiv
      * @return ResponseData
      */
-    public ResponseData<HanyorisutoPanelDiv> onClick_btnBatchRegister(HanyorisutoPanelDiv div) {
-        //TODO  batchが完成した継続します。
-//        HanyoList_KyotakuServiceKeikakuBatchParameter bparam = new HanyoList_KyotakuServiceKeikakuBatchParameter();
-//        bparam.set構成市町村コード(div.getCcdHokensya().getSelectedItem().get市町村コード());
-//        bparam.set作成区分(SakuseiKubun.toValue(div.getRadSakuseiKubun().getSelectedKey()));
-//        RString radchusyutukubunkey = div.getRadChusyutuKubun().getSelectedKey();
-//        bparam.set抽出区分(ChushutsuKubun.toValue(radchusyutukubunkey));
-//        if (ChushutsuKubun.全有効データ.getコード().equals(radchusyutukubunkey)) {
-//            bparam.set基準年月日(new FlexibleDate(div.getTxtKijunYMD().getValue().toString()));
-//        } else {
-//            bparam.set基準年月日(null);
-//        }
-//        bparam.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
-//        bparam.set出力項目ID(div.getCcdChohyoShutsuryokukoumoku().get出力項目ID());
-//        div.getCcdChohyoShutsuryokukoumoku().get選択項目ID();
-        return ResponseData.of(div).respond();
+    public ResponseData<HanyoListKyotakuServiceKeikakuBatchParameter> onClick_btnBatchRegister(HanyorisutoPanelDiv div) {
+        HanyoListKyotakuServiceKeikakuBatchParameter bparam = getHandler(div).setBatchParameter(div);
+        return ResponseData.of(bparam).respond();
     }
 
     /**

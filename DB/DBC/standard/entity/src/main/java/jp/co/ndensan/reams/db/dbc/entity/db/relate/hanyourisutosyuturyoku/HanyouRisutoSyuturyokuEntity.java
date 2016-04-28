@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 汎用リスト出力(高額介護サービス費状況)Entityクラスです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 @lombok.Getter
 @lombok.Setter

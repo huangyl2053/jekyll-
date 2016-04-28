@@ -109,7 +109,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
         ShinsaHanteiJokyoItem 変更者 = get変更者(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
                 一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
-        ShinsaHanteiJokyoItem 割合 = get割合(current, 合計);
+        ShinsaHanteiJokyoItem 割合計 = get割合(current, 合計);
 
         itemList.add(一次判定非該当);
         itemList.add(一次判定要支援1);
@@ -121,7 +121,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         itemList.add(一次判定要介護5);
         itemList.add(合計);
         itemList.add(変更者);
-        itemList.add(割合);
+        itemList.add(割合計);
 
     }
 
@@ -137,7 +137,6 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
     }
 
     private List<SinsakaiHanteiJyokyoEntity> get審査判定状況(SinsakaiHanteiJyokyoHeaderEntity current) {
-
         SinsakaiHanteiJyokyoMyBatisParameter batisParameter = paramter.toSinsakaiHanteiJyokyoMyBatisParameter();
         batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
@@ -773,5 +772,4 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         }
         return 0;
     }
-
 }

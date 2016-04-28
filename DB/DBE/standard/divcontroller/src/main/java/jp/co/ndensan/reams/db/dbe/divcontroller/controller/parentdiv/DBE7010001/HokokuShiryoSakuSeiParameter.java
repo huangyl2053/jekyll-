@@ -41,20 +41,18 @@ public class HokokuShiryoSakuSeiParameter {
      * @return ResponseData<HokokuShiryoSakuSeiParameterDiv>
      */
     public ResponseData<HokokuShiryoSakuSeiParameterDiv> onload(HokokuShiryoSakuSeiParameterDiv div) {
-
         getHandler(div).inint_Clear();
         set合議体番号DLL(div, finder.getGogitaiNo().records());
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 画面初期化処理です。
+     * 出力帳票選択条件を変更する処理です。
      *
      * @param div 報告資料発行画面
      * @return ResponseData<HokokuShiryoSakuSeiParameterDiv>
      */
     public ResponseData<HokokuShiryoSakuSeiParameterDiv> onChange_chkShutsuryokuChohyo(HokokuShiryoSakuSeiParameterDiv div) {
-
         List<RString> disabledItems = new ArrayList<>();
         for (RString selectedKey : div.getChkShutsuryokuChohyo().getSelectedKeys()) {
             if (SELECTKEY_KEY0.equals(selectedKey)) {
@@ -153,7 +151,6 @@ public class HokokuShiryoSakuSeiParameter {
      * @return ResponseData<HokokuShiryoSakuSeiParameterDiv>
      */
     public ResponseData<HokokuShiryoSakuSeiBatchParameter> onClick_btnBatchRegisterHokokuShiryo(HokokuShiryoSakuSeiParameterDiv div) {
-
         return ResponseData.of(getBatchParameter(div)).respond();
     }
 
@@ -192,7 +189,6 @@ public class HokokuShiryoSakuSeiParameter {
     }
 
     private HihokenshaKubun getHiHokensyaKubun(HokokuShiryoSakuSeiParameterDiv div) {
-
         if (div.getChkHihokenshaKubun().isAllSelected()) {
             return HihokenshaKubun.すべて選択;
         }

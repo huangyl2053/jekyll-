@@ -54,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -145,7 +144,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().
                     setValue(shokankihon.get事業者番号().value());
         }
-        if (shokanshinsei != null) {
+        if (shokanshinsei != null && shokanshinsei.get証記載保険者番号() != null) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().
                     setSelectedKey(shokanshinsei.get証記載保険者番号().value());
         }
@@ -1057,13 +1056,13 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     public boolean check領収年月日() {
         boolean flag = true;
         List<dgSeikyuDetail_Row> dgrow = div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getDataSource();
-        RYearMonth ryosyuYMD = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
-                getTxtRyosyuYMD().getValue().getYearMonth();
+        RDate ryosyuYMD = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
+                getTxtRyosyuYMD().getValue();
         for (dgSeikyuDetail_Row row : dgrow) {
             if (RowState.Deleted.equals(row.getRowState())) {
                 continue;
             }
-            if (row.getTxtBuyYMD().getValue() != null && (ryosyuYMD.compareTo(
+            if (row.getTxtBuyYMD().getValue() != null && ryosyuYMD != null && (ryosyuYMD.getYearMonth().compareTo(
                     row.getTxtBuyYMD().getValue().getYearMonth()) < 0)) {
                 flag = false;
                 break;
@@ -1192,8 +1191,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 ViewStateKeys.福祉用具購入費支給申請_明細登録画面データ, YoguKonyuhiShikyuShinseiPnlTotalParameter.class);
         if (is比較変更(new RString(parameter.getサービス提供年月().toString()), new RString(
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue().toString()))
-                || is比較変更(parameter.get整理番号(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getTxtSeiriNo().getValue())
                 || is比較変更(parameter.get事業者(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
                         getTxtJigyoshaNo().getValue())
                 || is比較変更(parameter.get証明書(), div.getYoguKonyuhiShikyuShinseiContentsPanel().
@@ -1298,7 +1295,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     public YoguKonyuhiShikyuShinseiPnlTotalParameter set画面データ() {
         YoguKonyuhiShikyuShinseiPnlTotalParameter parameter = new YoguKonyuhiShikyuShinseiPnlTotalParameter();
         parameter.setサービス提供年月(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue());
-        parameter.set整理番号(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().getValue());
         parameter.set保険者(div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().getSelectedKey());
         parameter.set国保連再送付(div.getYoguKonyuhiShikyuShinseiContentsPanel().getChkKokuhorenSend().isAllSelected());
         parameter.set事業者(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());

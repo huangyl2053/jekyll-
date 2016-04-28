@@ -52,11 +52,10 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 /**
  * 汎用リスト出力(高額介護サービス費状況)のCSVEntityEditorです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 public class HanyoListKogakuKaigoEucCsvEntityEditor {
 
-    private final RString 全角空白 = new RString("　");
     private final RString 住所地特例状態_住特 = new RString("住特");
 
     private static final RString 入所施設種類_11 = new RString("11");
@@ -120,7 +119,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
 
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         csvEntity.set市町村名(association.get市町村名());
-        // TODO 保険者コードと保険者名
+        // TODO 保険者コードと保険者名取りに来ない
         csvEntity.set保険者コード(RString.EMPTY);
         csvEntity.set保険者名(RString.EMPTY);
 
@@ -243,7 +242,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set方書(方書 != null ? 方書.getColumnValue() : RString.EMPTY);
             csvEntity.set住所と番地と方書((住所 != null ? 住所.getColumnValue() : RString.EMPTY)
                     .concat(番地 != null ? 番地.getColumnValue() : RString.EMPTY)
-                    .concat(全角空白)
+                    .concat(RString.FULL_SPACE)
                     .concat(方書 != null ? 方書.getColumnValue() : RString.EMPTY));
             set宛名(entity, csvEntity);
         }
@@ -275,7 +274,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set消除事由(entity.get宛名().getShojoJiyuCode());
         FlexibleDate 消除届出日 = entity.get宛名().getShojoTodokedeYMD();
         csvEntity.set消除届出日(消除届出日 != null ? new RString(消除届出日.toString()) : RString.EMPTY);
-        //  TODO 宛名・本人・
+        //  TODO 宛名・本人・は不明です
         RString 転出入理由 = entity.get宛名().getAimaiShojobiMongon();
         csvEntity.set転出入理由(転出入理由);
         YubinNo 前住所郵便番号 = entity.get宛名().getTennyumaeYubinNo();
@@ -288,7 +287,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set前住所方書(前住所方書 != null ? 前住所方書.getColumnValue() : RString.EMPTY);
         csvEntity.set前住所と番地と方書((前住所 != null ? 前住所.getColumnValue() : RString.EMPTY)
                 .concat(前住所番地 != null ? 前住所番地.getColumnValue() : RString.EMPTY)
-                .concat(全角空白)
+                .concat(RString.FULL_SPACE)
                 .concat(前住所方書 != null ? 前住所方書.getColumnValue() : RString.EMPTY));
     }
 
@@ -314,7 +313,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set送付先方書(送付先方書 != null ? 送付先方書.getColumnValue() : RString.EMPTY);
             csvEntity.set送付先住所と番地と方書((送付先住所 != null ? 送付先住所.getColumnValue() : RString.EMPTY)
                     .concat(送付先番地 != null ? 送付先番地.getColumnValue() : RString.EMPTY)
-                    .concat(全角空白)
+                    .concat(RString.FULL_SPACE)
                     .concat(送付先方書 != null ? 送付先方書.getColumnValue() : RString.EMPTY));
             GyoseikuCode 送付先行政区コード = 宛先.getGyoseikuCode();
             csvEntity.set送付先行政区コード(送付先行政区コード != null ? 送付先行政区コード.getColumnValue() : RString.EMPTY);

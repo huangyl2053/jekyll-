@@ -5,13 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7030001;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteihokenshain.KagoKetteiHokenshaInBatchParameter;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanbaraiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoValidationHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -22,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class DvShokanbaraiJoho {
 
     private static final ReportId 帳票ID = new ReportId("DBC701002_HanyoListShokanbaraiJokyo");
+    private static final RString 実行する = new RString("btnExecute");
 
     /**
      * 画面の初期化メソッドです。
@@ -30,6 +36,15 @@ public class DvShokanbaraiJoho {
      * @return 初期化画面
      */
     public ResponseData<DvShokanbaraiJohoDiv> onLoad(DvShokanbaraiJohoDiv div) {
+        List<ShikibetsuNoKanri> 様式番号一覧 = DvShokanbaraiJohoManager.createInstance().select様式名称とコード();
+        if (様式番号一覧 == null || 様式番号一覧.isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
+            DvShokanbaraiJohoValidationHandler validationHandler = new DvShokanbaraiJohoValidationHandler(div);
+            ValidationMessageControlPairs pairs = validationHandler.validateCommonButton();
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+        }
         getHandler(div).initialize抽出条件パネル();
         div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         return createResponse(div);
@@ -74,8 +89,8 @@ public class DvShokanbaraiJoho {
      * @param div 汎用リスト出力(償還払い状況)画面のdiv
      * @return バッチを起動する
      */
-    public ResponseData<KagoKetteiHokenshaInBatchParameter> onClick_btnBatchRegister(DvShokanbaraiJohoDiv div) {
-        KagoKetteiHokenshaInBatchParameter parameter = getHandler(div).setBatchParamter();
+    public ResponseData<HanyoListShokanbaraiJokyoBatchParameter> onClick_btnBatchRegister(DvShokanbaraiJohoDiv div) {
+        HanyoListShokanbaraiJokyoBatchParameter parameter = getHandler(div).setBatchParamter();
         return ResponseData.of(parameter).respond();
     }
 

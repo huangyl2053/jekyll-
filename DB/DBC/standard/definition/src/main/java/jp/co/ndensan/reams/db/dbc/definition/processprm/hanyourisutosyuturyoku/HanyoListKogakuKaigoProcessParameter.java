@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 汎用リスト出力(高額介護サービス費状況)のProcessパラメータです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 @lombok.Getter
 @lombok.Setter
@@ -46,7 +46,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private FlexibleYearMonth kokuhoreSofuYMTo;
     private FlexibleYearMonth keteijohoUketoriymFrom;
     private FlexibleYearMonth keteijohoUketoriymTo;
-    private RString shutsuryokuju;
+    private Long shutsuryokuju;
     private RString shutsuryokuTomoku;
     private boolean tomokumeFuka;
     private boolean rebanFuka;
@@ -110,7 +110,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             FlexibleYearMonth kokuhoreSofuYMTo,
             FlexibleYearMonth keteijohoUketoriymFrom,
             FlexibleYearMonth keteijohoUketoriymTo,
-            RString shutsuryokuju,
+            Long shutsuryokuju,
             RString shutsuryokuTomoku,
             boolean tomokumeFuka,
             boolean rebanFuka,

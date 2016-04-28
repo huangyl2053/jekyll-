@@ -44,7 +44,11 @@ public enum DvShokanbaraiJohoValidationMessage implements IValidationMessage {
     /**
      * 国保連送付年月期間が不正
      */
-    国保連送付年月期間が不正(UrErrorMessages.期間が不正_追加メッセージあり１, "国保連送付年月To", "国保連送付年月From");
+    国保連送付年月期間が不正(UrErrorMessages.期間が不正_追加メッセージあり１, "国保連送付年月To", "国保連送付年月From"),
+    /**
+     * 対象のデータがありません
+     */
+    対象のデータがありません(UrErrorMessages.対象ファイルが存在しない, "識別番号管理");
 
     private final Message message;
 

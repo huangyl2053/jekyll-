@@ -81,11 +81,25 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
         return create住宅改修内容Dictionary().check(messages);
     }
 
+    /**
+     * 「限度額をチェックする」ボタンクリック時の給付率バリデーションチェックです。
+     *
+     * @return バリデーション突合結果
+     */
+    public ValidationMessageControlPairs validate給付率() {
+        IValidationMessages messages = new ControlValidator(div, 画面モード, null).validate給付率();
+        return create給付率Dictionary().check(messages);
+    }
+
+    private ValidationDictionary create給付率Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力,
+                        div.getCommHeadPanel().getTxtKyufuritsu()).build();
+    }
+
     private ValidationDictionary create住宅改修内容Dictionary() {
         ValidationDictionaryBuilder builder = new ValidationDictionaryBuilder()
-                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM())
-                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力,
-                        div.getCommHeadPanel().getTxtKyufuritsu());
+                .add(JutakuKaishuShinseiJyohoTorokuValidationMessages.提供着工年月が未入力, div.getTxtTeikyoYM());
         if (住宅改修内容チェックエラーメッセージ != null && !住宅改修内容チェックエラーメッセージ.isNullOrEmpty()) {
             if (メッセージ_1.equals(住宅改修内容チェックエラーメッセージ)) {
                 builder = builder.add(JutakuKaishuShinseiJyohoTorokuValidationMessages.メッセージ_1);
@@ -153,6 +167,20 @@ public class JutakuKaishuShinseiJyohoTorokuValidationHandler {
                         .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.申請取消事由が未入力)
                         .messages());
             }
+            return messages;
+        }
+
+        /**
+         * 「限度額をチェックする」ボタンクリック時のバリデーションチェック。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages validate給付率() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(JutakuKaishuShinseiJyohoTorokuSpec.給付率が入力)
+                    .thenAdd(JutakuKaishuShinseiJyohoTorokuValidationMessages.給付率が未入力)
+                    .messages());
             return messages;
         }
 

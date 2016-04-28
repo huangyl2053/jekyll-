@@ -36,8 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 構成市町村マスタのデータアクセスクラスです。
- * 
- * @reamsid_L DBX-9999-020  suguangjun 
+ *
+ * @reamsid_L DBX-9999-020 suguangjun
  */
 public class DbT7051KoseiShichosonMasterDac {
 
@@ -93,6 +93,9 @@ public class DbT7051KoseiShichosonMasterDac {
 
         return accessor.select().
                 table(DbT7051KoseiShichosonMaster.class).
+                where(
+                        eq(gappeiKyuShichosonKubun, '0') //TODO enumを使用する。
+                ).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 

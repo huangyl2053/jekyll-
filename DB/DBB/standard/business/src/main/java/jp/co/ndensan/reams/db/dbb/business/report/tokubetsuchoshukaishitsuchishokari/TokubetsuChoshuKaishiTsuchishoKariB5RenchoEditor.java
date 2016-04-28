@@ -88,7 +88,8 @@ public class TokubetsuChoshuKaishiTsuchishoKariB5RenchoEditor implements
             source.hokenryoGaku4Gatsu2 = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get更正後().get更正後特徴期別金額01(), 0);
         }
-        source.tsuchibunNendo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().toDateString();
+        source.tsuchibunNendo = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get前年度情報() != null) {
             source.hokenryoGakuZen12Gatsu = DecimalFormatter.toコンマ区切りRString(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報()
                     .get前年度情報().get前年度特徴期別金額05(), 0);

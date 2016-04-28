@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJy
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.IsKyuSoti;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
@@ -41,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -160,11 +160,11 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-//        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
-//                div, 画面モード, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
-//        if (valid2.iterator().hasNext()) {
-//            return ResponseData.of(div).addValidationMessages(valid2).respond();
-//        }
+        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                div, 画面モード, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
+        if (valid2.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid2).respond();
+        }
 
         boolean 内容変更 = new RString(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
@@ -193,7 +193,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         RDate 領収日 = div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().getValue();
         if (画面モード_修正.equals(画面モード)
-                && 領収日.getYearMonth().isBeforeOrEquals(画面提供着工年月.getYearMonth())) {
+                && 領収日.getYearMonth().isBefore(画面提供着工年月.getYearMonth())) {
             if (isCheckFive(判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
                 QuestionMessage message = new QuestionMessage(
                         DbzQuestionMessages.判断基準より前の日付.getMessage().getCode(),
@@ -516,16 +516,19 @@ public class JutakuKaishuShinseiJyohoToroku {
                 throw new ApplicationException(DbcErrorMessages.実行不可.getMessage().replace(
                         エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
             }
-            if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード.getKey())) {
-                要介護認定情報.set旧措置者フラグ(IsKyuSoti.旧措置適用.is適用());
+            if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード.getKey())
+                    && !要介護認定情報.is旧措置者フラグ()) {
+                throw new ApplicationException(DbcErrorMessages.実行不可.getMessage().replace(
+                        エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
             }
             if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {
                 return ResponseData.of(div).respond();
             } else if (!ResponseHolder.isReRequest()) {
+                FlexibleYearMonth 年月 = new FlexibleYearMonth(領収日.getYearMonth().toString());
                 QuestionMessage message = new QuestionMessage(
                         DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode(),
                         DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().replace(
-                                領収日.getYearMonth().toString()).evaluate());
+                                年月.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
             if (new RString(DbcQuestionMessages.領収日不一致_提供年月変更確認.getMessage().getCode()).equals(
@@ -618,6 +621,11 @@ public class JutakuKaishuShinseiJyohoToroku {
                 div, null, handler.住宅改修内容一覧チェック()).validate住宅改修内容();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
+        ValidationMessageControlPairs valid2 = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
+                div, null, null).validate給付率();
+        if (valid2.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid2).respond();
         }
         Decimal 費用額合計 = handler.費用額合計の取得();
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()

@@ -47,6 +47,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
     private boolean 項目名付加;
     private boolean 連番付加;
     private boolean 日付スラッシュ付加;
+    private Long 出力順;
     private RString 出力項目;
     private ReportId 帳票ID;
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
@@ -83,6 +84,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
      * @param 項目名付加 boolean
      * @param 連番付加 boolean
      * @param 日付スラッシュ付加 boolean
+     * @param 出力順 Long
      * @param 出力項目 RString
      * @param 帳票ID ReportId
      */
@@ -110,6 +112,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
             boolean 項目名付加,
             boolean 連番付加,
             boolean 日付スラッシュ付加,
+            Long 出力順,
             RString 出力項目,
             ReportId 帳票ID
     ) {
@@ -136,6 +139,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
         this.項目名付加 = 項目名付加;
         this.連番付加 = 連番付加;
         this.日付スラッシュ付加 = 日付スラッシュ付加;
+        this.出力順 = 出力順;
         this.出力項目 = 出力項目;
         this.帳票ID = 帳票ID;
     }
@@ -170,6 +174,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
                 項目名付加,
                 連番付加,
                 日付スラッシュ付加,
+                出力順,
                 出力項目,
                 帳票ID);
     }

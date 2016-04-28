@@ -674,15 +674,13 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     }
 
     private Encode getEncode(RString sakiEncodeKeitai) {
-        Encode encode = Encode.SJIS;
+        Encode encode = Encode.UTF_8withBOM;
         if (new RString("1").equals(sakiEncodeKeitai)) {
             encode = Encode.UTF_8withBOM;
         } else if (new RString("2").equals(sakiEncodeKeitai)) {
             encode = Encode.SJIS;
         } else if (new RString("3").equals(sakiEncodeKeitai)) {
             encode = Encode.SJIS;
-        } else {
-            encode = Encode.UTF_8withBOM;
         }
         return encode;
     }

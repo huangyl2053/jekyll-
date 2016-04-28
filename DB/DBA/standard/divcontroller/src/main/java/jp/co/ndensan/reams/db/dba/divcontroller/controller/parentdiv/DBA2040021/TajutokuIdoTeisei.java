@@ -17,13 +17,18 @@ import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisyaidot
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -36,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TajutokuIdoTeisei {
 
     private static final LockingKey LOCKINGKEY = new LockingKey("TatokuIdoTeisei");
+    private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+            UrQuestionMessages.処理実行の確認.getMessage().evaluate());
 
     /**
      * 他市町村住所地特例者異動の訂正初期化の設定します。
@@ -61,11 +68,25 @@ public class TajutokuIdoTeisei {
      * @return ResponseData<TajutokuIdoTeiseiDiv>
      */
     public ResponseData<TajutokuIdoTeiseiDiv> onClick_btnUpdate(TajutokuIdoTeiseiDiv requestDiv) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(requestDiv).addMessage(SYORIMESSAGE).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            set登録処理(requestDiv);
+            RealInitialLocker.release(LOCKINGKEY);
+            return ResponseData.of(requestDiv).setState(DBA2040021StateName.完了状態);
+        }
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    private ResponseData<TajutokuIdoTeiseiDiv> set登録処理(TajutokuIdoTeiseiDiv requestDiv) {
         List<dgJushochiTokureiRireki_Row> dgJushochiTokureiRireki = requestDiv.getTajutokuIdoTeiseiIdoJoho().
                 getCcdTaJushochiTokureishaKanri().get適用情報一覧();
         List<TekiyouJouhou> 適用情報グリッド = new ArrayList<>();
         for (dgJushochiTokureiRireki_Row dg : dgJushochiTokureiRireki) {
-            if (!dg.getRowState().equals(RowState.Unchanged)) {
+            if (!dg.getRowState().equals(RowState.Unchanged) && !dg.getRowState().equals(RowState.Deleted)) {
                 TekiyouJouhou tekiyouJouhou = new TekiyouJouhou();
                 tekiyouJouhou.set適用日(dg.getTekiyoYMD().getText());
                 tekiyouJouhou.set解除日(dg.getKaijoYMD().getText());
@@ -75,7 +96,9 @@ public class TajutokuIdoTeisei {
         TaShichosonJushochiTokureisyaIdoTeiseiParamter paramter = new TaShichosonJushochiTokureisyaIdoTeiseiParamter(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(),
                 適用情報グリッド);
-        TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
+        if (適用情報グリッド != null && !適用情報グリッド.isEmpty()) {
+            TaShichosonJushochiTokureisyaIdoTeisei.createInstance().is適用状態のチェック(paramter);
+        }
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                 ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         requestDiv.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();

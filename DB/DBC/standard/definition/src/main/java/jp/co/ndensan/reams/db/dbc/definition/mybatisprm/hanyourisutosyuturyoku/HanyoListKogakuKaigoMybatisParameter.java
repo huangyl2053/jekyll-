@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 汎用リスト出力(高額介護サービス費状況)のMybatisパラメータです。
  *
- * @reamsid_L DBC-2820-010 sunhui
+ * @reamsid_L DBC-3092-020 sunhui
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -46,7 +46,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
     private final FlexibleYearMonth kokuhoreSofuYMTo;
     private final FlexibleYearMonth keteijohoUketoriymFrom;
     private final FlexibleYearMonth keteijohoUketoriymTo;
-    private final RString shutsuryokuju;
+    private final Long shutsuryokuju;
     private final RString shutsuryokuTomoku;
     private final boolean tomokumeFuka;
     private final boolean rebanFuka;
@@ -110,7 +110,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
             FlexibleYearMonth kokuhoreSofuYMTo,
             FlexibleYearMonth keteijohoUketoriymFrom,
             FlexibleYearMonth keteijohoUketoriymTo,
-            RString shutsuryokuju,
+            Long shutsuryokuju,
             RString shutsuryokuTomoku,
             boolean tomokumeFuka,
             boolean rebanFuka,

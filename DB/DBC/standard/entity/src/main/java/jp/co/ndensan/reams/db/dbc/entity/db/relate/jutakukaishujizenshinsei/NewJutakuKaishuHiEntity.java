@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 最新住宅改修の住宅住所Entityクラスです。
  *
- * NewJutakuKaishuHiEntity
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
