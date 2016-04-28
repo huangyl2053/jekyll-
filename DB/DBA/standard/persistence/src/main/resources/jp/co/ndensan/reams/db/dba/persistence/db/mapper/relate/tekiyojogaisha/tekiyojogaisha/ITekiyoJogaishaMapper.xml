@@ -89,44 +89,50 @@
             ShisetsuNyutaisho."shikibetsuCode" = #{識別コード}
     </select>
     
-    <select id="get適用除外者と施設入退所情報" resultMap="ResultMap_TekiyoJogaishaKanriRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" fetchSize="500">
-       SELECT
-           <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.allColumns_DbT1002TekiyoJogaisha" />,
-           <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho"/> 
+    <select id="get適用除外者更新用" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.ResultMap_DbT1002TekiyoJogaishaEntity" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.allColumns_DbT1002TekiyoJogaisha" />
         FROM
             (SELECT
-                TekiyoJogaisha.*
-            FROM
-                (SELECT
-                        *,
-                        ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
-                        T1."shikibetsuCode" ASC,
-                        T1."tekiyoYMD" ASC,
-                        T1."idoYMD" DESC,
-                        T1."edaNo" DESC) AS rrkno
-                 FROM
-                        rgdb."DbT1002TekiyoJogaisha" AS T1
-                 WHERE
-                        T1."shikibetsuCode" = #{識別コード}
-                        AND T1."logicalDeletedFlag" = #{論理削除フラグ}) AS TekiyoJogaisha
-            WHERE
-                TekiyoJogaisha."rrkno" = 1) AS "DbT1002TekiyoJogaisha"
-        LEFT JOIN
-            rgdb."DbT1004ShisetsuNyutaisho" AS "DbT1004ShisetsuNyutaisho"
-        ON
-            "DbT1002TekiyoJogaisha"."shikibetsuCode" = "DbT1004ShisetsuNyutaisho"."shikibetsuCode"
+                    *,
+                    ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
+                    T1."shikibetsuCode" ASC,
+                    T1."tekiyoYMD" ASC,
+                    T1."idoYMD" DESC,
+                    T1."edaNo" DESC) AS rrkno
+             FROM
+                    rgdb."DbT1002TekiyoJogaisha" AS T1
+             WHERE
+                    T1."shikibetsuCode" = #{識別コード}
+                    AND T1."logicalDeletedFlag" = #{論理削除フラグ}) AS "DbT1002TekiyoJogaisha"
         WHERE
-            "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = '3'
-            AND "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" = '21'
-            AND (("DbT1002TekiyoJogaisha"."kaijoYMD" IS NULL AND ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL OR "DbT1002TekiyoJogaisha"."tekiyoYMD" <![CDATA[<]]> "DbT1004ShisetsuNyutaisho"."taishoYMD"))
-                 OR (("DbT1002TekiyoJogaisha"."kaijoYMD" IS NOT NULL AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1002TekiyoJogaisha"."kaijoYMD")
-                 OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1002TekiyoJogaisha"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1002TekiyoJogaisha"."tekiyoYMD")))))
+            "DbT1002TekiyoJogaisha"."rrkno" = 1
         ORDER BY
-            "DbT1002TekiyoJogaisha"."tekiyoYMD" DESC, "DbT1002TekiyoJogaisha"."idoYMD" DESC, "DbT1002TekiyoJogaisha"."edaNo" DESC,
+            "DbT1002TekiyoJogaisha"."tekiyoYMD" DESC, "DbT1002TekiyoJogaisha"."idoYMD" DESC, "DbT1002TekiyoJogaisha"."edaNo" DESC
+    </select>
+    
+    <select id="get施設情報更新用" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.ResultMap_DbT1004ShisetsuNyutaishoEntity" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho"/> 
+        FROM
+            rgdb."DbT1004ShisetsuNyutaisho" AS "DbT1004ShisetsuNyutaisho"
+        WHERE
+            "DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{識別コード}
+            AND "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = '3'
+            AND "DbT1004ShisetsuNyutaisho"."nyushoShisetsuShurui" = '21'
+        <if test="解除日なし">
+            AND ("DbT1004ShisetsuNyutaisho"."taishoYMD" is null OR "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> #{tekiyoYMD})
+        </if>
+        <if test="解除日あり">
+            AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" is null AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> #{kaijoYMD}) 
+            OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> #{kaijoYMD} AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> #{tekiyoYMD}))
+        </if>
+        ORDER BY
             "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC, "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
     </select>
-     
+    
     <select id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter" fetchSize="500">
         SELECT 
@@ -166,10 +172,4 @@
     <resultMap id="ResultMap_get最大の枝番" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity" autoMapping="true">
         <id property="edaNo" column="TekiyoJogaisha_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
-    <resultMap id="ResultMap_TekiyoJogaishaKanriRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaKanriRelateEntity" autoMapping="true">
-        <association property="適用除外者Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1002TekiyoJogaishaMapper.ResultMap_DbT1002TekiyoJogaishaEntity"/>
-        <association property="施設入退所Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.ResultMap_DbT1004ShisetsuNyutaishoEntity"/>
-    </resultMap>
-
 </mapper>

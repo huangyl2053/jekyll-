@@ -330,7 +330,7 @@ public class TekiyoJogaiRirekiHandler {
                             枝番 = new RString(Integer.parseInt(row.getHenkougoEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
                             break;
                         } else {
-                            枝番 = 開始枝番;
+                            枝番 = new RString(Integer.parseInt(row.getHenkoumaeEdaNo().toString()) + 1).padZeroToLeft(PADZERO);;
                         }
                     }
                 }
@@ -378,6 +378,12 @@ public class TekiyoJogaiRirekiHandler {
                 }
             }
             div.getPanelTekiyoInput().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(true);
+            div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
+            div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);
         }
         div.getDatagridTekiyoJogai().setDataSource(rowList);
         div.setStauts(RString.EMPTY);
