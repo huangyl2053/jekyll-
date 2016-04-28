@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class RiyoshaFutangakuGengakuPanel {
 
-    private final RString 承認メニュー = new RString("DBDMN22002");
+    private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 追加 = new RString("追加");
 

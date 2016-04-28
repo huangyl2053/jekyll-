@@ -184,8 +184,6 @@ public class RiyoshaFutangakuGengakuHandler {
             if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
                 gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
             } else {
-                Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
-                履歴番号 = 新規申請の履歴番号 - 1;
                 ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
                 gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
             }
@@ -333,8 +331,6 @@ public class RiyoshaFutangakuGengakuHandler {
             if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
                 gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
             } else {
-                Integer 新規申請の履歴番号 = ViewStateHolder.get(Dbd1020001Keys.新規申請の履歴番号, Integer.class);
-                履歴番号 = 新規申請の履歴番号 - 1;
                 ViewStateHolder.put(Dbd1020001Keys.新規申請の履歴番号, 履歴番号);
                 gemmenGengakuShinsei = new GemmenGengakuShinsei(証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.code(), 履歴番号);
             }
