@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * GemmenShokai のクラスファイル
  *
- * @reamsid_L DBD-3660-010 wangjie2
+ * @reamsid_L DBD-4342-010 wangjie2
  */
 public class GemmenShokaiDiv extends Panel implements IGemmenShokaiDiv {
 
