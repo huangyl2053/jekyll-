@@ -141,4 +141,20 @@ public class DvShokanbaraiJohoValidationHandler {
                         div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDvKensakuJoken().getTxtShokanKokuhorenSofuYM()).build();
     }
 
+    /**
+     * validateCommonButton check
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validateCommonButton() {
+        IValidationMessages message = new DvShokanbaraiJohoValidator(div).validateCommonButton();
+        return createCommonButton().check(message);
+    }
+
+    private ValidationDictionary createCommonButton() {
+        return new ValidationDictionaryBuilder()
+                .add(DvShokanbaraiJohoValidationMessage.対象のデータがありません,
+                        div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo()).build();
+    }
+
 }

@@ -24,17 +24,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -61,8 +58,6 @@ public class DvShokanbaraiJohoHandler {
     private static final RString 部分_2 = new RString("2");
     private static final RString 全市町村 = new RString("全市町村");
     private static final RString 窓口払い = new RString("窓口払い");
-    private static final RString 実行する = new RString("btnExecute");
-    private static final RString 識別番号管理 = new RString("識別番号管理");
 
     /**
      * コンストラクタです。
@@ -89,10 +84,6 @@ public class DvShokanbaraiJohoHandler {
         }
         ViewStateHolder.put(ViewStateKeys.市町村判定, 市町村判定);
         List<ShikibetsuNoKanri> 様式番号一覧 = DvShokanbaraiJohoManager.createInstance().select様式名称とコード();
-        if (様式番号一覧 == null || 様式番号一覧.isEmpty()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(識別番号管理.toString()));
-        }
         ViewStateHolder.put(ViewStateKeys.様式名称_様式コード, (Serializable) 様式番号一覧);
         List<ShikibetsuNoKanri> 様式番号一覧onLoad = get様式番号一覧(介護);
         set様式番号一覧(様式番号一覧onLoad, true);
