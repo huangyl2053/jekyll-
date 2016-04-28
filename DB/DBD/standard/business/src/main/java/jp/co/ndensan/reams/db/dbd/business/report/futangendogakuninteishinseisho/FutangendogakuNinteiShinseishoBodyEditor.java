@@ -40,7 +40,6 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
     private FutangendogakuNinteiShinseishoReportSource bodyEdit(FutangendogakuNinteiShinseishoReportSource source) {
         source.shiseibun = item.getShiseibun();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
-        source.hihokenshaNo = item.getHihokenshaNo();
         source.hihokenshaName = item.getHihokenshaName();
         source.seibetsu = item.getSeibetsu();
         source.birthYMD = item.getBirthYMD();
