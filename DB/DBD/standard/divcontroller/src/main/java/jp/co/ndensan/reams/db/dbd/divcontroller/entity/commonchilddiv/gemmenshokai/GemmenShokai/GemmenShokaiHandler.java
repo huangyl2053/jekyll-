@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 【共有子Div】 減免照会ハンドラクラスです。
  *
- * @reamsid_L DBD-3660-010 wangjie2
+ * @reamsid_L DBD-4342-010 wangjie2
  */
 public class GemmenShokaiHandler {
 
