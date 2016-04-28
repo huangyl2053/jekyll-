@@ -149,9 +149,9 @@ public class DvShokanbaraiJohoHandler {
                 ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(サービス提供年月F.getYearMonth().toString());
         FlexibleYearMonth サービス提供年月To = サービス提供年月T == null
                 ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(サービス提供年月T.getYearMonth().toString());
-        RString 処理状況 = panel.getDdlShokanShoriJokyo().getSelectedValue();
-        RString 決定情報 = panel.getDdlShokanKetteiJoho().getSelectedValue();
-        RString 支払方法 = panel.getRadKogakuShiharaisaki().getSelectedValue();
+        RString 処理状況 = panel.getDdlShokanShoriJokyo().getSelectedKey();
+        RString 決定情報 = panel.getDdlShokanKetteiJoho().getSelectedKey();
+        RString 支払方法 = panel.getRadKogakuShiharaisaki().getSelectedKey();
         RString 金融機関コード = panel.getCcdKogakuKinyuKikan().getKinyuKikanCode()
                 == null ? RString.EMPTY : panel.getCcdKogakuKinyuKikan().getKinyuKikanCode().getColumnValue();
         RString 金融機関名称 = panel.getCcdKogakuKinyuKikan().get金融機関()
