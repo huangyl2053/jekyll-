@@ -406,6 +406,12 @@ public class TekiyoJogaiRirekiHandler {
         } else if (状態_訂正履歴.equals(画面状態)) {
             div.getBtnAdd().setDisabled(false);
             div.getPanelTekiyoInput().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(true);
+            div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
+            div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);
             div.getBtnInputClear().setDisabled(true);
             div.getBtnKakutei().setDisabled(true);
         }
@@ -461,8 +467,6 @@ public class TekiyoJogaiRirekiHandler {
             } else if (RowState.Added.equals(row.getRowState())) {
                 TekiyoJogaishaIdentifier 適用除外者の識別子
                         = new TekiyoJogaishaIdentifier(識別コード, 変更後異動日, 変更後枝番);
-                TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(set適用除外者情報(
-                        適用除外者Model.get(適用除外者の識別子), row).toEntity());
                 TekiyoJogaishaManager.createInstance().saveTekiyoJogaisha(
                         null,
                         set適用除外者情報(適用除外者Model.get(適用除外者の識別子), row).toEntity(),
