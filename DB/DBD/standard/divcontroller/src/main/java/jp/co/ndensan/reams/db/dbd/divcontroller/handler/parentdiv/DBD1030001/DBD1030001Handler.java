@@ -1264,43 +1264,6 @@ public class DBD1030001Handler {
         div.getDgShinseiList().setDataSource(newDataSouceList);
     }
 
-    private GemmenGengakuShinsei get減免減額申請ByChange履歴番号(GemmenGengakuShinsei gemmenGengakuShinsei, int 履歴番号) {
-        GemmenGengakuShinsei newGemmenGengakuShinsei = new GemmenGengakuShinsei(
-                gemmenGengakuShinsei.get証記載保険者番号(),
-                gemmenGengakuShinsei.get被保険者番号(),
-                GemmenGengakuShurui.社会福祉法人等軽減.getコード(),
-                履歴番号);
-        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder = newGemmenGengakuShinsei.createBuilderForEdit();
-        if (gemmenGengakuShinsei.get申請届出代行区分() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出代行区分(gemmenGengakuShinsei.get申請届出代行区分());
-        }
-        if (gemmenGengakuShinsei.get申請届出者氏名() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出者氏名(gemmenGengakuShinsei.get申請届出者氏名());
-        }
-        if (gemmenGengakuShinsei.get申請届出者氏名カナ() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(gemmenGengakuShinsei.get申請届出者氏名カナ());
-        }
-        if (gemmenGengakuShinsei.get申請届出者続柄() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出者続柄(gemmenGengakuShinsei.get申請届出者続柄());
-        }
-        if (gemmenGengakuShinsei.get申請届出代行事業者番号() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(gemmenGengakuShinsei.get申請届出代行事業者番号());
-        }
-        if (gemmenGengakuShinsei.get事業者区分() != null) {
-            gemmenGengakuShinseiBuilder.set事業者区分(gemmenGengakuShinsei.get事業者区分());
-        }
-        if (gemmenGengakuShinsei.get申請届出者郵便番号() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出者郵便番号(gemmenGengakuShinsei.get申請届出者郵便番号());
-        }
-        if (gemmenGengakuShinsei.get申請届出者住所() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出者住所(gemmenGengakuShinsei.get申請届出者住所());
-        }
-        if (gemmenGengakuShinsei.get申請届出者電話番号() != null) {
-            gemmenGengakuShinseiBuilder.set申請届出者電話番号(gemmenGengakuShinsei.get申請届出者電話番号());
-        }
-        return gemmenGengakuShinseiBuilder.build();
-    }
-
     /**
      * 前排他を解除する。
      *
