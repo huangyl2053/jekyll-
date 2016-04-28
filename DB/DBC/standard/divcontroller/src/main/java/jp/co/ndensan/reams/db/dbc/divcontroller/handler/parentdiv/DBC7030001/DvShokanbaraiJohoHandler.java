@@ -20,17 +20,19 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.dgYo
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJohoManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -42,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class DvShokanbaraiJohoHandler {
 
     private final DvShokanbaraiJohoDiv div;
-    private static final Code CODE_111 = new Code("111");
     private static final RString カンマ = new RString(",");
     private static final RString すべて = new RString("すべて");
     private static final RString 介護_1 = new RString("1");
@@ -72,10 +73,15 @@ public class DvShokanbaraiJohoHandler {
      * 抽出条件パネルの初期化メソッドです。
      */
     public void initialize抽出条件パネル() {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho 市町村セキュリティ情報
+                = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvShokanChushutsuJokenDiv panel = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken();
         RString 市町村判定 = 単一;
-        if (CODE_111.equals(市町村セキュリティ情報.get導入形態コード())) {
+        if (市町村セキュリティ情報 == null) {
+            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
+        if (市町村セキュリティ情報.get導入形態コード() != null
+                && 市町村セキュリティ情報.get導入形態コード().is広域()) {
             市町村判定 = 広域;
             panel.getCcdShokanHokenshaList().loadHokenshaList();
         } else {
