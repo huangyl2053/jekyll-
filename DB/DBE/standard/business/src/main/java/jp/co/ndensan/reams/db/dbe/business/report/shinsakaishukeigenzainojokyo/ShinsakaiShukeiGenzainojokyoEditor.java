@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeigenzainojokyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会集計表（現在の状況別）のEditorです。
@@ -15,9 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinsakaiShukeiGenzainojokyoEditor implements IShinsakaiShukeiGenzainojokyoEditor {
 
-    private static final RString DATE_時 = new RString("時");
-    private static final RString DATE_分 = new RString("分");
-    private static final RString DATE_秒 = new RString("秒");
     private static final int 数字6 = 6;
     private final ShinsakaiShukeiGenzainojokyo item;
     private final int count;
