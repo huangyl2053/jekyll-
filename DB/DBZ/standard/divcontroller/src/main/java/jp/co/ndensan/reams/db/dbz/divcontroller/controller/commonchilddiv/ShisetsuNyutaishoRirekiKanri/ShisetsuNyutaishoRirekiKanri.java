@@ -9,12 +9,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNy
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -90,17 +85,8 @@ public class ShisetsuNyutaishoRirekiKanri {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         } else {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-                return ResponseData.of(requestDiv).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
-                getHandler(requestDiv).onClick_btnShisetsuNyutaishoKakutei(row);
-            }
+            dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
+            getHandler(requestDiv).onClick_btnShisetsuNyutaishoKakutei(row);
         }
         return ResponseData.of(requestDiv).respond();
     }
