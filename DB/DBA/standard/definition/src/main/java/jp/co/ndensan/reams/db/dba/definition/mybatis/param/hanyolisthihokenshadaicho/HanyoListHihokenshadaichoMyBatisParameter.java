@@ -89,6 +89,8 @@ public final class HanyoListHihokenshadaichoMyBatisParameter implements IMyBatis
     private final boolean has年齢終了;
     private final boolean has生年月日開始;
     private final boolean has生年月日終了;
+    private final boolean has取得事由;
+    private final boolean has喪失事由;
 
     /**
      * コンストラクタです。
@@ -155,6 +157,8 @@ public final class HanyoListHihokenshadaichoMyBatisParameter implements IMyBatis
      * @param has生年月日開始 has生年月日開始
      * @param has生年月日終了 has生年月日終了
      * @param has受給者台帳 has受給者台帳
+     * @param has取得事由 has取得事由
+     * @param has喪失事由 has喪失事由
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
      * @param psmAtesaki psmAtesaki
      */
@@ -172,7 +176,8 @@ public final class HanyoListHihokenshadaichoMyBatisParameter implements IMyBatis
             boolean is喪失届出日, boolean is1号, boolean is2号, boolean is日本人, boolean is外国人, boolean is自特例者, boolean is広域住特,
             boolean is資格取得者のみ, boolean is資格喪失者のみ, boolean isEmpty, FlexibleDate 宛名抽出年齢開始, FlexibleDate 宛名抽出年齢終了,
             boolean is年齢, boolean is生年月日, boolean is住所, boolean is行政区, boolean is地区, boolean has年齢開始,
-            boolean has年齢終了, boolean has生年月日開始, boolean has生年月日終了, RString psmShikibetsuTaisho, RString psmAtesaki) {
+            boolean has年齢終了, boolean has生年月日開始, boolean has生年月日終了, boolean has取得事由,
+            boolean has喪失事由, RString psmShikibetsuTaisho, RString psmAtesaki) {
         this.komukuFukaMeyi = komukuFukaMeyi;
         this.rembanfuka = rembanfuka;
         this.hidukeHensyu = hidukeHensyu;
@@ -234,6 +239,8 @@ public final class HanyoListHihokenshadaichoMyBatisParameter implements IMyBatis
         this.has年齢終了 = has年齢終了;
         this.has生年月日開始 = has生年月日開始;
         this.has生年月日終了 = has生年月日終了;
+        this.has取得事由 = has取得事由;
+        this.has喪失事由 = has喪失事由;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
     }
@@ -342,6 +349,8 @@ public final class HanyoListHihokenshadaichoMyBatisParameter implements IMyBatis
         boolean is住所 = Chiku.住所.getコード().equals(psmChiku_Kubun);
         boolean is行政区 = Chiku.行政区.getコード().equals(psmChiku_Kubun);
         boolean is地区 = Chiku.地区.getコード().equals(psmChiku_Kubun);
+        boolean has取得事由 = shutokujiyu != null && !shutokujiyu.isEmpty() && shutokujiyu.size() > 0;
+        boolean has喪失事由 = soshitsujiyu != null && !soshitsujiyu.isEmpty() && soshitsujiyu.size() > 0;
         return new HanyoListHihokenshadaichoMyBatisParameter(
                 komukuFukaMeyi, rembanfuka, hidukeHensyu, hidukeTyuushutuKubun, kijunniKubun, kijunni, kijunNichijiJukyusha, rangeChushutsuhiKubun,
                 rangeChushutsuhiFrom, rangeChushutsuhiTo, hiHokenshaJyoho, shikakuChushutsuKubun, shutokujiyu, soshitsujiyu, psmChushutsu_Kubun,
@@ -354,7 +363,7 @@ public final class HanyoListHihokenshadaichoMyBatisParameter implements IMyBatis
                 psmChiku3_To, is直近, is基準日, is範囲, is資格取得日, is資格取得届出日, is取得日, is取得届出日,
                 is喪失日, is喪失届出日, is1号, is2号, is日本人, is外国人, is自特例者, is広域住特,
                 is資格取得者のみ, is資格喪失者のみ, isEmpty, 宛名抽出年齢開始, 宛名抽出年齢終了, is年齢, is生年月日, is住所, is行政区, is地区,
-                has年齢開始, has年齢終了, has生年月日開始, has生年月日終了, psmShikibetsuTaisho, psmAtesaki);
+                has年齢開始, has年齢終了, has生年月日開始, has生年月日終了, has取得事由, has喪失事由, psmShikibetsuTaisho, psmAtesaki);
     }
 
     private static FlexibleDate get宛名抽出年齢開始(FlexibleDate psmAgeKijunni, RString psmChushutsuAge_Start) {
