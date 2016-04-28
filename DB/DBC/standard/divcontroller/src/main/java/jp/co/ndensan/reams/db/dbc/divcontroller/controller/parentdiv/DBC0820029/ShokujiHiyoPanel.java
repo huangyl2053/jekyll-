@@ -171,7 +171,6 @@ public class ShokujiHiyoPanel {
             getHandler(div).getボタンを制御(shikibetsuNoKanri);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.状態, new RString(""));
             if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
                 div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
                 div.getPanelShokuji().getPanelDetailGokei().setVisible(false);
@@ -202,7 +201,7 @@ public class ShokujiHiyoPanel {
     }
 
     /**
-     * getデータ
+     * getデータのメソッド
      *
      * @param div ShokujiHiyoPanelDiv
      * @param 被保険者番号 HihokenshaNo
@@ -250,7 +249,7 @@ public class ShokujiHiyoPanel {
     }
 
     /**
-     * 取消処理
+     * 取消処理のメソッド
      *
      * @param div ShokujiHiyoPanelDiv
      * @return ResponseData<ShokujiHiyoPanelDiv>
@@ -284,7 +283,7 @@ public class ShokujiHiyoPanel {
     }
 
     /**
-     * 保存処理
+     * 保存処理のメソッド
      *
      * @param div ShokujiHiyoPanelDiv
      * @return ResponseData<ShokujiHiyoPanelDiv>
@@ -311,6 +310,8 @@ public class ShokujiHiyoPanel {
                 }
             }
         } catch (Exception e) {
+            // QA 内部番号712
+            e.toString();
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
         return ResponseData.of(div).respond();
