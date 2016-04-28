@@ -111,13 +111,14 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getBtnInputNew().setText(申請情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(申請情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 申請情報を.toString());
-            申請情報エリ状態(false);
+            申請情報エリ状態(false, false);
+            div.getRadKetteiKubun().setSelectedKey(承認する_KEY);
 
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             div.getBtnInputNew().setText(承認情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(承認情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString());
-            承認情報エリア状態(承認する_KEY, true);
+            承認情報エリア状態(承認する_KEY, true, false);
             div.getBtnConfirm().setDisplayNone(true);
             div.getBtnShinseiKakutei().setDisplayNone(true);
         }
@@ -295,7 +296,7 @@ public class RiyoshaFutangakuGengakuHandler {
         Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
         div.getDdlShinseiIchiran().setDataSource(newRowList);
         入力情報をクリア();
-        承認情報エリア状態(承認する_KEY, true);
+        承認情報エリア状態(承認する_KEY, true, false);
         div.getBtnConfirm().setDisplayNone(true);
     }
 
@@ -402,7 +403,7 @@ public class RiyoshaFutangakuGengakuHandler {
         Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
         div.getDdlShinseiIchiran().setDataSource(newRowList);
         入力情報をクリア();
-        申請情報エリ状態(false);
+        申請情報エリ状態(false, false);
     }
 
     /**
@@ -412,12 +413,12 @@ public class RiyoshaFutangakuGengakuHandler {
         該当情報ViewStateのクリア();
         入力情報をクリア();
 
+        div.getRadKetteiKubun().setSelectedKey(承認する_KEY);
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
-            申請情報エリ状態(true);
+            申請情報エリ状態(true, false);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
-            div.getRadKetteiKubun().setSelectedKey(承認する_KEY);
             div.getTxtKettaiYmd().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-            承認情報エリア状態(承認する_KEY, true);
+            承認情報エリア状態(承認する_KEY, true, false);
             div.getBtnConfirm().setDisplayNone(false);
         }
     }
@@ -445,10 +446,8 @@ public class RiyoshaFutangakuGengakuHandler {
         FlexibleDate 申請日 = row.getTxtShinseiYMD().getValue();
         RString 申請理由 = row.getShinseiRiyu();
         RString 決定区分 = row.getKetteiKubun();
-        RString 決定区分RadInx;
-        if (KetteiKubun.承認する.get名称().equals(決定区分) || 決定区分.isEmpty()) {
-            決定区分RadInx = 承認する_KEY;
-        } else {
+        RString 決定区分RadInx = 承認する_KEY;
+        if (KetteiKubun.承認しない.get名称().equals(決定区分)) {
             決定区分RadInx = 承認しない_KEY;
         }
         FlexibleDate 決定日 = row.getTxtKetteiYMD().getValue();
@@ -475,11 +474,12 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtKyufuRitsu().setValue(給付率);
         div.getTxtHiShoninRiyu().setValue(承認しない理由);
 
+        boolean is申請日非活性 = !追加.equals(row.getJotai());
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
-            申請情報エリ状態(true);
+            申請情報エリ状態(true, is申請日非活性);
             div.getBtnShinseiKakutei().setDisplayNone(false);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
-            承認情報エリア状態(決定区分RadInx, false);
+            承認情報エリア状態(決定区分RadInx, false, is申請日非活性);
             div.getBtnConfirm().setDisplayNone(false);
         }
     }
@@ -536,8 +536,14 @@ public class RiyoshaFutangakuGengakuHandler {
      * 申請情報エリ状態の設定です。
      *
      * @param is確定ボタン表示 true:表示 false:非表示
+     * @param is申請日非活性 true:「申請日」が非活性 false:「申請日」が活性
      */
-    public void 申請情報エリ状態(boolean is確定ボタン表示) {
+    public void 申請情報エリ状態(boolean is確定ボタン表示, boolean is申請日非活性) {
+        if (is申請日非活性) {
+            div.getTxtShinseiYmd().setDisabled(true);
+        } else {
+            div.getTxtShinseiYmd().setDisabled(false);
+        }
         div.getRadKetteiKubun().setDisabled(true);
         div.getTxtKettaiYmd().setDisabled(true);
         div.getTxtTekiyoYmd().setDisabled(true);
@@ -554,11 +560,18 @@ public class RiyoshaFutangakuGengakuHandler {
      * 承認情報エリ状態の設定です。
      *
      * @param 決定区分 承認する:key0, 承認しない:key1
+     * @param is申請日非活性 true:「申請日」が非活性 false:「申請日」が活性
      * @param is初期 true:初期
      */
-    public void 承認情報エリア状態(RString 決定区分, boolean is初期) {
+    public void 承認情報エリア状態(RString 決定区分, boolean is初期, boolean is申請日非活性) {
         div.getRadKetteiKubun().setDisabled(false);
         div.getTxtKettaiYmd().setDisabled(false);
+
+        if (is申請日非活性) {
+            div.getTxtShinseiYmd().setDisabled(true);
+        } else {
+            div.getTxtShinseiYmd().setDisabled(false);
+        }
 
         if (承認する_KEY.equals(決定区分)) {
             div.getTxtTekiyoYmd().setDisabled(false);
