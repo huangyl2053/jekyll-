@@ -68,12 +68,11 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
     private RString get徴収方法(FukaJohoTorokuRelateEntity entity) {
         ShunoKamokuManager manager = new ShunoKamokuManager();
         RString 徴収方法 = RString.EMPTY;
-        if (manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収) != null
-                && manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収).getコード().value().contains(entity.get科目コード())) {
+        //TODO 内部QA1133　科目コードが取得できない
+        if (manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収).getコード().value().contains(entity.get科目コード())) {
             徴収方法 = ChoshuHohoKibetsu.特別徴収.getコード();
         }
-        if (manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収) != null
-                && manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収).getコード().value().contains(entity.get科目コード())) {
+        if (manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収).getコード().value().contains(entity.get科目コード())) {
             徴収方法 = ChoshuHohoKibetsu.普通徴収.getコード();
         }
         return 徴収方法;
