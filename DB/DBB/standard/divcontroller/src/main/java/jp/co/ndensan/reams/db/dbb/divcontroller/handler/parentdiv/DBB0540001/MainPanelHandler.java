@@ -17,11 +17,13 @@ import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.ChosyuHohoHenko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.CodeShubetsus;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterNoOption;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 徴収方法変更_のハンドラクラスです。
@@ -94,6 +96,7 @@ public class MainPanelHandler {
     private static final RString 名称_1 = new RString("特");
     private static final RString 名称_2 = new RString("特");
     private static final RString 名称_3 = new RString("普");
+    private static final RString コード種別 = new RString("0046");
 
     /**
      * MainPanelHandler
@@ -128,16 +131,19 @@ public class MainPanelHandler {
         ChoshuHohoResult serviceResult = ChosyuHohoHenko.createInstance()
                 .getChosyuHoho(賦課年度, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.徴収方法データ, serviceResult.getHoho());
-
         RDate fukaNendo = new RDate(賦課年度.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString());
         div.getChoshuInfo().getTxtFukaNendo().setValue(fukaNendo);
         if (null != serviceResult.getHoho().get本徴収_年金コード()) {
             RString nenkinCode = createNenkinCode(serviceResult.getHoho().get本徴収_年金コード());
-            RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(CodeShubetsus.年金コード, new Code(nenkinCode));
+            RString nenkinCodeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
+                    new CodeShubetsu(コード種別),
+                    new Code(nenkinCode), FlexibleDate.getNowDate());
             div.getChoshuInfo().getTxtHokensha().setValue(nenkinCodeMeisho);
         } else if (null != serviceResult.getHoho().get仮徴収_年金コード()) {
             RString nenkinCode = createNenkinCode(serviceResult.getHoho().get仮徴収_年金コード());
-            RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(CodeShubetsus.年金コード, new Code(nenkinCode));
+            RString nenkinCodeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    new CodeShubetsu(コード種別),
+                    new Code(nenkinCode), FlexibleDate.getNowDate());
             div.getChoshuInfo().getTxtHokensha().setValue(nenkinCodeMeisho);
         } else {
             div.getChoshuInfo().getTxtHokensha().setValue(null);
