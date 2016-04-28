@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 汎用リスト出力(高額介護サービス費状況)のMybatisパラメータです。
@@ -29,6 +30,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
     private final RString shoriJokyo;
     private final RString shinsaHoho;
     private final RString santeiKijun;
+    private final Decimal santeiKijunParameter;
     private final RString kokuhorenFuicchi;
     private final RString taishosha;
     private final RString shinseiKubun;
@@ -62,6 +64,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
      * @param shoriJokyo shoriJokyo
      * @param shinsaHoho shinsaHoho
      * @param santeiKijun santeiKijun
+     * @param santeiKijunParameter santeiKijunParameter
      * @param kokuhorenFuicchi kokuhorenFuicchi
      * @param taishosha taishosha
      * @param shinseiKubun shinseiKubun
@@ -93,6 +96,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
             RString shoriJokyo,
             RString shinsaHoho,
             RString santeiKijun,
+            Decimal santeiKijunParameter,
             RString kokuhorenFuicchi,
             RString taishosha,
             RString shinseiKubun,
@@ -122,6 +126,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
         this.shoriJokyo = shoriJokyo;
         this.shinsaHoho = shinsaHoho;
         this.santeiKijun = santeiKijun;
+        this.santeiKijunParameter = santeiKijunParameter;
         this.kokuhorenFuicchi = kokuhorenFuicchi;
         this.taishosha = taishosha;
         this.shinseiKubun = shinseiKubun;
