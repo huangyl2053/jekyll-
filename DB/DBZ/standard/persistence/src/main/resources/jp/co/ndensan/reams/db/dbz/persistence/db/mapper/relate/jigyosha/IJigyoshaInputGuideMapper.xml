@@ -19,6 +19,7 @@
         <id property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
         <id property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="yukoShuryoYMD" column="dbT1005Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jigyoshaMeisho" column="dbT1005Kaigo_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"  />
         <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="telNo" column="dbT1005Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
@@ -28,6 +29,7 @@
         <id property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
         <id property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="yukoShuryoYMD" column="dbT1005Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jigyoshaMeisho" column="dbT1005Kaigo_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"  />
         <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="telNo" column="dbT1005Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
@@ -151,6 +153,7 @@
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
         dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",
         dbT1005Kaigo."yukoShuryoYMD" AS "dbT1005Kaigo_yukoShuryoYMD",
+        dbT1005Kaigo."jigyoshaMeisho" AS "dbT1005Kaigo_jigyoshaMeisho",
         dbT1005Kaigo."jigyoshaKanaMeisho" AS "dbT1005Kaigo_jigyoshaKanaMeisho",
         dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
         dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo"
@@ -222,6 +225,7 @@
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
         dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",
         dbT1005Kaigo."yukoShuryoYMD" AS "dbT1005Kaigo_yukoShuryoYMD",
+        dbT1005Kaigo."jigyoshaMeisho" AS "dbT1005Kaigo_jigyoshaMeisho",
         dbT1005Kaigo."jigyoshaKanaMeisho" AS "dbT1005Kaigo_jigyoshaKanaMeisho",
         dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
         dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo"
@@ -230,7 +234,15 @@
         WHERE
         dbT1005Kaigo."isDeleted" <![CDATA[<>]]> TRUE
         AND
-        dbT1005Kaigo."kannaiKangaiKubun"= #{kannaiKangaiKubun}
+        <if test = "isKannaiKangaiKubun1Flg">
+        dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun1}
+        </if>
+        <if test = "isKannaiKangaiKubun2Flg">
+        dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun2}
+        </if>
+        <if test = "isKannaiKangaiKubunFlg">
+        dbT1005Kaigo."kannaiKangaiKubun" in (#{kannaiKangaiKubun1},#{kannaiKangaiKubun2})
+        </if>
         AND
         dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
         <if test="isJigyoshaNoFlag" >

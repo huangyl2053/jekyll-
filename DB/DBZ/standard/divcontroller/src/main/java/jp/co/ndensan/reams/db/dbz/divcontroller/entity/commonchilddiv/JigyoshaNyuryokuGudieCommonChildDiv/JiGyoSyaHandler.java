@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParamete
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.gunshiku.Gunshiku;
 import jp.co.ndensan.reams.ur.urz.business.core.zenkokujusho.ZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
@@ -45,6 +45,8 @@ public class JiGyoSyaHandler {
     private final RString 前方一致_コード = new RString("key0");
     private final RString 完全一致_コード = new RString("key1");
     private final RString 管内管外区分_全て = new RString("0");
+    private final RString 管内管外区分_管内 = new RString("1");
+    private final RString 管内管外区分_管外 = new RString("2");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
 
@@ -64,11 +66,11 @@ public class JiGyoSyaHandler {
      */
     public void search_GunshiCode(JigyoshaMode mode) {
 
-        List<Gunshiku> gunshiCodeJigyoshaInputGuide = mode.getGunshiCodeJigyoshaInputGuide();
+        List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide = mode.getGunshiCodeJigyoshaInputGuide();
         List<KeyValueDataSource> dataSource = new ArrayList();
         if (gunshiCodeJigyoshaInputGuide != null) {
 
-            for (Gunshiku entity : gunshiCodeJigyoshaInputGuide) {
+            for (GunshiCodeJigyoshaInputGuide entity : gunshiCodeJigyoshaInputGuide) {
 
                 if (entity.get都道府県コード().equals(div.getTaishoJigyoshaKensaku().getDdlKennCode().getSelectedKey())) {
 
@@ -150,6 +152,19 @@ public class JiGyoSyaHandler {
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
 
+            RString 管内 = RString.EMPTY;
+            RString 管外 = RString.EMPTY;
+            if (管内管外区分_管内.equals(div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().getSelectedKey())) {
+
+                管内 = 管内管外区分_管内;
+            } else if (管内管外区分_管外.equals(div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().getSelectedKey())) {
+
+                管外 = 管内管外区分_管外;
+            } else if (管内管外区分_全て.equals(div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().getSelectedKey())) {
+
+                管内 = 管内管外区分_管内;
+                管外 = 管内管外区分_管外;
+            }
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getOtherTokureiInputGuide(
                     JigyoshaInputGuideParameter.createParam_OtherTokureiInputGuide(new KaigoJigyoshaNo(
                                     div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
@@ -162,7 +177,8 @@ public class JiGyoSyaHandler {
                             div.getKennsakuJyokenn().getTxtJusho().getDomain().value(),
                             div.getKennsakuJyokenn().getDdlKennsakuKubun().getSelectedKey(),
                             FlexibleDate.getNowDate(),
-                            div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().getSelectedKey(),
+                            管内,
+                            管外,
                             JigyosyaType.住所地特例対象施設.getコード(),
                             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
                             : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
@@ -457,14 +473,14 @@ public class JiGyoSyaHandler {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
-        SearchResult<Gunshiku> gunshiCodeJigyoshaInputGuide = jigyosha.getGunshiCodeJigyoshaInputGuide();
+        SearchResult<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide = jigyosha.getGunshiCodeJigyoshaInputGuide();
 
         mode.setGunshiCodeJigyoshaInputGuide(gunshiCodeJigyoshaInputGuide.records());
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
 
         if (!gunshiCodeJigyoshaInputGuide.records().isEmpty()) {
 
-            for (Gunshiku entity : gunshiCodeJigyoshaInputGuide.records()) {
+            for (GunshiCodeJigyoshaInputGuide entity : gunshiCodeJigyoshaInputGuide.records()) {
 
                 KeyValueDataSource KeyValue = new KeyValueDataSource();
                 KeyValue.setKey(entity.get郡市区コード());

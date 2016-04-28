@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
@@ -86,12 +87,17 @@ public class JigyoshaInputGuideFinder {
      *
      * @return 郡市コード取得リスト
      */
-    public SearchResult<Gunshiku> getGunshiCodeJigyoshaInputGuide() {
+    public SearchResult<GunshiCodeJigyoshaInputGuide> getGunshiCodeJigyoshaInputGuide() {
         List<Gunshiku> gunshiCodeList = GunshikuFinderFactory.createInstance().get郡市区全件();
+        List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaList = new ArrayList<>();
         if (gunshiCodeList == null || gunshiCodeList.isEmpty()) {
-            return SearchResult.of(Collections.<Gunshiku>emptyList(), 0, false);
+            return SearchResult.of(Collections.<GunshiCodeJigyoshaInputGuide>emptyList(), 0, false);
         }
-        return SearchResult.of(gunshiCodeList, 0, false);
+        for (Gunshiku gunshiku : gunshiCodeList) {
+
+            gunshiCodeJigyoshaList.add(new GunshiCodeJigyoshaInputGuide(gunshiku.toEntity()));
+        }
+        return SearchResult.of(gunshiCodeJigyoshaList, 0, false);
     }
 
     /**
