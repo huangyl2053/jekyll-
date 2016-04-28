@@ -15,13 +15,13 @@ import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMe
 import jp.co.ndensan.reams.db.dbd.business.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.definition.common.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.common.NursingCareInformationEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.common.IGemmenJokyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
