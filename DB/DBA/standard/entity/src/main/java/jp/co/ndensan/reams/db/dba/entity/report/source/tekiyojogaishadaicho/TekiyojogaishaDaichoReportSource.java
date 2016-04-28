@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 適用除外者台帳の帳票データのクラスです。
  *
- * @reamsid_L DBE-3000-140 lishengli
+ * @reamsid_L DBA-0412-040 lishengli
  */
 public class TekiyojogaishaDaichoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

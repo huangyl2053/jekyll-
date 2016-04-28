@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.tekiyojogaishadaicho.Teki
 /**
  * 適用除外者台帳Editorです。
  *
- * @reamsid_L DBE-3000-140 lishengli
+ * @reamsid_L DBA-0412-040 lishengli
  */
 class TekiyojogaishaDaichoEditor implements ITekiyojogaishaDaichoEditor {
 
