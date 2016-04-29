@@ -18,7 +18,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class FutanGendogakuNinteiParameter {
+public final class FutanGendogakuNinteiParameter {
 
     private RString 減免減額種類;
     private HihokenshaNo 被保険者番号;

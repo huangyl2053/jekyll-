@@ -25,10 +25,8 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
 
     /**
      * コンストラクタです。
-     *
-     * @param div 負担限度額認定更新のお知らせ通知書個別発行のコントロールdiv
      */
-    public FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+    public FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler() {
     }
 
     /**

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBD-9999-013 huangh
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class TokubetsuchiikiKasanGemmenMapperParameter {
 
     private final HihokenshaNo 被保険者番号;

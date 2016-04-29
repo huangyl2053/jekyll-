@@ -72,6 +72,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class FutanGendogakuNinteiKanshoTsuchisho {
 
+    private static final int パターン番号_21 = 21;
     private final MapperProvider mapperProvider;
 
     /**
@@ -123,14 +124,14 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         Ninshosha ninshosha = get認証者情報(new FlexibleDate(発行日.toDateString()));
 
         if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
-            ReportId 帳票ID;
+            //  ReportId 帳票ID;
             int パターン番号;
             if (介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
-                帳票ID = ReportIdDBD.DBDPR12002_1_1.getReportId();
+                //     帳票ID = ReportIdDBD.DBDPR12002_1_1.getReportId();
                 パターン番号 = 1;
             } else {
-                帳票ID = ReportIdDBD.DBDPR12002_1_2.getReportId();
-                パターン番号 = 21;
+                //     帳票ID = ReportIdDBD.DBDPR12002_1_2.getReportId();
+                パターン番号 = パターン番号_21;
             }
 
             Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, 帳票分類ID, KamokuCode.EMPTY, パターン番号);
@@ -156,7 +157,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             itemList.add(item);
             NinteiKoshinTsuchishoService service = new NinteiKoshinTsuchishoService();
             sourceDataCollection = service.print(itemList);
-            insert発行履歴(sourceDataCollection, 発行日, 帳票ID, 識別コード);
+            insert発行履歴(sourceDataCollection, 発行日, 識別コード);
         }
 
         // 4.  負担限度額認定申請書の発行TODO
@@ -208,7 +209,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         return dbT7068Entity.getChohyoBunruiID();
     }
 
-    private boolean insert発行履歴(SourceDataCollection sourceDataCollection, RDate 発行日, ReportId 帳票ID, ShikibetsuCode 識別コード) {
+    private boolean insert発行履歴(SourceDataCollection sourceDataCollection, RDate 発行日, ShikibetsuCode 識別コード) {
         IHakkoRirekiManager manager = HakkoRirekiManagerFactory.createInstance();
         Iterator<SourceData> sourceDataList = sourceDataCollection.iterator();
         List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();

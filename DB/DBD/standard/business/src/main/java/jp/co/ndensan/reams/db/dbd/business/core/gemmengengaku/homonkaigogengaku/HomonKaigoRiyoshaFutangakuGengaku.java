@@ -144,7 +144,7 @@ public class HomonKaigoRiyoshaFutangakuGengaku extends ParentModelBase<
      *
      * @return 障害者手帳有無
      */
-    public boolean get障害者手帳有無() {
+    public boolean is障害者手帳有無() {
         return entity.getShogaishaTechoUmu();
     }
 
