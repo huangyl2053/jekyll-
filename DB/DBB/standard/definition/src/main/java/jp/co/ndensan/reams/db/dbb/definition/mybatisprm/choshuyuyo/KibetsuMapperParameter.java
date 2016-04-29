@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBB-9999-013 huangh
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class KibetsuMapperParameter {
 
     private final Decimal 調定ID;

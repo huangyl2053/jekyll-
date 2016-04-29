@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBB-9999-013 huangh
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class HokenryoDankaiJohoRelateMapperParameter {
 
     private final FlexibleYear 賦課年度;
