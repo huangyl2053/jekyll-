@@ -42,13 +42,12 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     private static final RString 星12 = new RString("************");
     private static final RString 星16 = new RString("****************");
     private static final RString 星17 = new RString("*****************");
+    private final KarisanteiHokenryoNonyuTsuchishoGinfuriItem item;
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final int 連番;
-    private final NinshoshaSource ninshoshaSource;
     private final NofuShoKyotsu 納付書共通;
-    private final ShoriKubun 処理区分;
 
     /**
      * インスタンスを生成します。
@@ -61,21 +60,20 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
             KarisanteiHokenryoNonyuTsuchishoGinfuriItem item,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 連番) {
-        this.仮算定納入通知書情報 = item.get仮算定納入通知書情報();
+        this.item = item;
+        this.仮算定納入通知書情報 = null == item ? new KariSanteiNonyuTsuchiShoJoho() : item.get仮算定納入通知書情報();
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
         this.連番 = 連番;
-        this.ninshoshaSource = item.getNinshoshaSource();
         this.納付書共通 = null == 仮算定納入通知書情報
                 ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
-        this.処理区分 = 仮算定納入通知書情報.get処理区分();
     }
 
     @Override
     public KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource edit(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        EditedKojin 編集後個人 = 編集後仮算定通知書共通情報.get編集後個人();
-        EditedKoza 編集後口座 = 編集後仮算定通知書共通情報.get編集後口座();
+        EditedKojin 編集後個人 = null == 編集後仮算定通知書共通情報 ? null : 編集後仮算定通知書共通情報.get編集後個人();
+        EditedKoza 編集後口座 = null == 編集後仮算定通知書共通情報 ? null : 編集後仮算定通知書共通情報.get編集後口座();
         KaigoSofubutsuAtesakiSource kaigoSofubutsuAtesakiSource = null;
         EditedAtesaki 編集後宛先 = null == 編集後仮算定通知書共通情報 ? null : 編集後仮算定通知書共通情報.get編集後宛先();
         if (編集後宛先 != null) {
@@ -294,6 +292,10 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     }
 
     private void editCompNinshosha(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
+        NinshoshaSource ninshoshaSource = null;
+        if (item != null) {
+            ninshoshaSource = item.getNinshoshaSource();
+        }
         if (ninshoshaSource != null) {
             source.denshiKoin = ninshoshaSource.denshiKoin;
             source.hakkoYMD = ninshoshaSource.hakkoYMD;
@@ -655,7 +657,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
 
     private void editMRenban(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
-        if (ShoriKubun.バッチ.equals(処理区分)) {
+        if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
             連番.padLeft(連番, INT6);
         }
         source.mRenban1 = 連番;

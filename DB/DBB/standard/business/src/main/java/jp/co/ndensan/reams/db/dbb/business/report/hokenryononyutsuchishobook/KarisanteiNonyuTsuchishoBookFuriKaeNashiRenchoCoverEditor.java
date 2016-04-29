@@ -38,12 +38,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         implements IKarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor {
 
+    private final HokenryoNonyuTsuchishoBookItem item;
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
     private final List<Kitsuki> 出力期リスト;
     private final int 連番;
-    private final NinshoshaSource ninshoshaSource;
     private final NofuShoKyotsu 納付書共通;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
@@ -61,13 +61,13 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
             HokenryoNonyuTsuchishoBookItem item,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 連番) {
+        this.item = item;
         this.仮算定納入通知書情報 = null == item ? new KariSanteiNonyuTsuchiShoJoho() : item.get仮算定納入通知書情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
-        this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
+        this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
-        this.出力期リスト = 仮算定納入通知書情報.get出力期リスト().isEmpty() ? new ArrayList<Kitsuki>() : 仮算定納入通知書情報.get出力期リスト();
+        this.出力期リスト = null == 仮算定納入通知書情報 ? new ArrayList<Kitsuki>() : 仮算定納入通知書情報.get出力期リスト();
         this.連番 = 連番;
-        this.ninshoshaSource = item.getNinshoshaSource();
         this.納付書共通 = null == 仮算定納入通知書情報 ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
     }
 
@@ -81,6 +81,10 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
     }
 
     private void editCompNinshosha(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source) {
+        NinshoshaSource ninshoshaSource = null;
+        if (item != null) {
+            ninshoshaSource = item.getNinshoshaSource();
+        }
         if (ninshoshaSource != null) {
             source.denshiKoin = ninshoshaSource.denshiKoin;
             source.hakkoYMD = ninshoshaSource.hakkoYMD;
