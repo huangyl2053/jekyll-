@@ -369,7 +369,7 @@ public class HanyoListCsvDataCreate {
             csvEntity.set施行完了予定日(dataToRString(entity.get支給住宅Entity().getSekoKanryoYoteiYMD()));
             RString 申請取消事由 = RString.EMPTY;
             RString 申請取消事由Code = entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode();
-            if (!申請取消事由Code.isNullOrEmpty()) {
+            if (申請取消事由Code != null && !申請取消事由Code.isEmpty()) {
                 申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
                         new Code(申請取消事由Code), FlexibleDate.getNowDate());
             }
@@ -454,8 +454,7 @@ public class HanyoListCsvDataCreate {
     }
 
     private RString get証記載保険者番号(HanyoListShokanbaraiJokyoEntity entity, HokenshaList 保険者リスト) {
-        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
-        HokenshaSummary 保険者 = HokenshaSummary.EMPTY;
+        HokenshaSummary 保険者;
         if (entity.is広域内住所地特例フラグ()) {
             if (entity.get広住特措置元市町村コード() == null) {
                 return RString.EMPTY;
@@ -468,7 +467,7 @@ public class HanyoListCsvDataCreate {
             }
             保険者 = 保険者リスト.get(entity.get市町村コード());
         }
-        証記載保険者番号 = 保険者 != null ? 保険者.get証記載保険者番号() : ShoKisaiHokenshaNo.EMPTY;
+        ShoKisaiHokenshaNo 証記載保険者番号 = 保険者 != null ? 保険者.get証記載保険者番号() : ShoKisaiHokenshaNo.EMPTY;
         return 証記載保険者番号 != null ? 証記載保険者番号.getColumnValue() : RString.EMPTY;
     }
 
