@@ -157,10 +157,10 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             if (銀振印字位置 == 1) {
                 source.nofushoKi1 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki1 = 納入通知書期情報.get月表記();
-                source.nofushoOcr11 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr21 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr31 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr41 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr11 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr21 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr31 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr41 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku1 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen1 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin1 = 納入通知書期情報.get領収日付欄();
@@ -170,10 +170,10 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             } else if (銀振印字位置 == 2) {
                 source.nofushoKi2 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki2 = 納入通知書期情報.get月表記();
-                source.nofushoOcr12 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr22 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr32 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr42 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr12 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr22 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr32 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr42 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku2 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen2 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin2 = 納入通知書期情報.get領収日付欄();
@@ -183,10 +183,10 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             } else if (銀振印字位置 == INT3) {
                 source.nofushoKi3 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki3 = 納入通知書期情報.get月表記();
-                source.nofushoOcr13 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr23 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr33 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr43 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr13 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr23 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr33 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr43 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku3 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen3 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin3 = 納入通知書期情報.get領収日付欄();
@@ -196,10 +196,10 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             } else if (銀振印字位置 == INT4) {
                 source.nofushoKi4 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki4 = 納入通知書期情報.get月表記();
-                source.nofushoOcr14 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr24 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr34 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr44 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr14 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr24 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr34 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr44 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku4 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen4 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin4 = 納入通知書期情報.get領収日付欄();

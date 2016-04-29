@@ -312,27 +312,27 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     }
 
     private void editHyojicodeName1(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        source.HyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
+        source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
     }
 
     private void editHyojicodeName2(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        source.HyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
+        source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
     }
 
     private void editHyojicodeName3(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        source.HyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
+        source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
     }
 
     private void editHyojicode1(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        source.Hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
+        source.hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
     }
 
     private void editHyojicode2(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        source.Hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
+        source.hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
     }
 
     private void editHyojicode13(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        source.Hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
+        source.hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
     }
 
     private void editTsuchishoNo(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
@@ -682,10 +682,10 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
             if (銀振印字位置 == 1) {
                 source.nofushoKi1 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki1 = 納入通知書期情報.get月表記();
-                source.nofushoOcr11 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr21 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr31 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr41 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr11 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr21 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr31 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr41 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku1 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen1 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin1 = 納入通知書期情報.get領収日付欄();
@@ -695,10 +695,10 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
             } else if (銀振印字位置 == 2) {
                 source.nofushoKi2 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki2 = 納入通知書期情報.get月表記();
-                source.nofushoOcr12 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr22 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr32 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr42 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr12 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr22 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr32 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr42 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku2 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen2 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin2 = 納入通知書期情報.get領収日付欄();
@@ -708,10 +708,10 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
             } else if (銀振印字位置 == INT3) {
                 source.nofushoKi3 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki3 = 納入通知書期情報.get月表記();
-                source.nofushoOcr13 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr23 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr33 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr43 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr13 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr23 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr33 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr43 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku3 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen3 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin3 = 納入通知書期情報.get領収日付欄();
@@ -721,10 +721,10 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
             } else if (銀振印字位置 == INT4) {
                 source.nofushoKi4 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki4 = 納入通知書期情報.get月表記();
-                source.nofushoOcr14 = 納入通知書期情報.getOCR().get(1);
-                source.nofushoOcr24 = 納入通知書期情報.getOCR().get(2);
-                source.nofushoOcr34 = 納入通知書期情報.getOCR().get(INT3);
-                source.nofushoOcr44 = 納入通知書期情報.getOCR().get(INT4);
+                source.nofushoOcr14 = 納入通知書期情報.getOcr().get(1);
+                source.nofushoOcr24 = 納入通知書期情報.getOcr().get(2);
+                source.nofushoOcr34 = 納入通知書期情報.getOcr().get(INT3);
+                source.nofushoOcr44 = 納入通知書期情報.getOcr().get(INT4);
                 source.nofushoNofugaku4 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen4 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin4 = 納入通知書期情報.get領収日付欄();

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005;
 
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.FukaJohoHikakuPresenter.IFukaHikakuPresenter;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.input.FukaHikakuTargets;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.FukaJohoHikakuPresenter.IFukaHikakuPresenter;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuTargets;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.FukaJohoHikakuDiv;
 
 /**

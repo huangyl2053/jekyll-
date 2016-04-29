@@ -15,24 +15,24 @@ public class KarisanteiNonyuTsuchishoCVSKigotoSource implements IReportSource {
 
     @ReportItem(name = "listList1_1", length = 2, order = 1)
     public RString listList1_1;
-    @ReportItem(name = "HyojicodeName1", order = 2)
-    public RString HyojicodeName1;
-    @ReportItem(name = "HyojicodeName2", order = 3)
-    public RString HyojicodeName2;
-    @ReportItem(name = "HyojicodeName3", order = 4)
-    public RString HyojicodeName3;
+    @ReportItem(name = "hyojicodeName1", order = 2)
+    public RString hyojicodeName1;
+    @ReportItem(name = "hyojicodeName2", order = 3)
+    public RString hyojicodeName2;
+    @ReportItem(name = "hyojicodeName3", order = 4)
+    public RString hyojicodeName3;
     @ReportItem(name = "titleNendo", length = 4, order = 5)
     public RString titleNendo;
-    @ReportItem(name = "Hyojicode1", length = 12, order = 6)
-    public RString Hyojicode1;
-    @ReportItem(name = "Hyojicode2", length = 12, order = 7)
-    public RString Hyojicode2;
-    @ReportItem(name = "Hyojicode3", length = 12, order = 8)
-    public RString Hyojicode3;
-    @ReportItem(name = "SetaiCode", length = 15, order = 9)
-    public RString SetaiCode;
-    @ReportItem(name = "TsuchishoNo", order = 10)
-    public RString TsuchishoNo;
+    @ReportItem(name = "hyojicode1", length = 12, order = 6)
+    public RString hyojicode1;
+    @ReportItem(name = "hyojicode2", length = 12, order = 7)
+    public RString hyojicode2;
+    @ReportItem(name = "hyojicode3", length = 12, order = 8)
+    public RString hyojicode3;
+    @ReportItem(name = "setaiCode", length = 15, order = 9)
+    public RString setaiCode;
+    @ReportItem(name = "tsuchishoNoLay1", order = 10)
+    public RString tsuchishoNoLay1;
     @ReportItem(name = "bankCodeTitle", length = 7, order = 11)
     public RString bankCodeTitle;
     @ReportItem(name = "kozaShuruiTitle", length = 2, order = 12)
@@ -59,9 +59,9 @@ public class KarisanteiNonyuTsuchishoCVSKigotoSource implements IReportSource {
     public RString tsuki1;
     @ReportItem(name = "nofuGaku1", length = 13, order = 23)
     public RString nofuGaku1;
-    @ReportItem(name = "Nokigen1", length = 11, order = 24)
-    public RString Nokigen1;
-    @ReportItem(name = "noutsu-renban", length = 8, order = 25)
+    @ReportItem(name = "nokigen1", length = 11, order = 24)
+    public RString nokigen1;
+    @ReportItem(name = "noutsu_renban", length = 8, order = 25)
     public RString noutsu_renban;
     @ReportItem(name = "notsuRenban1", length = 10, order = 26)
     public RString notsuRenban1;

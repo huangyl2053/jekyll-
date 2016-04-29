@@ -157,7 +157,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
         source.nokibetsuMeisaishoTokuchoNofuGaku4 = 金額_0;
         source.nokibetsuMeisaishoTokuchoNofuZumiGaku4 = 金額_0;
         source.nokibetsuMeisaishoTokuchoSaGaku4 = new RString(Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku1.toString())
-                + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku2.toString()) + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku3.toString()));
+                + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku2.toString())
+                + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku3.toString()));
         // TODO 分割前の納入通知書期情報リスト、全部期月の情報を出力
         source.nokibetsuMeisaishoKi1 = new RString("第").concat(納入通知書期情報リスト.get(0).get期表記()).concat(new RString("期"));
         source.nokibetsuMeisaishoFuchoNofuGaku1 = 納入通知書期情報リスト.get(0).get調定額表記();
@@ -191,11 +192,11 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.nofushoTitleKi1 = 納入通知書期情報リスト.get(0).get期表記();
             source.nofushoTitleTsuki1 = 納入通知書期情報リスト.get(0).get月表記();
             // TODO 納入通知書期情報.OCRの一行目の印字文字列
-            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの二行目の印字文字列
-            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの三行目の印字文字列
-            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOcrid();
             source.nofuzumishoNokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
             source.ryoshushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get領収証書納付額欄();
             source.nofushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get納付書納付額欄();

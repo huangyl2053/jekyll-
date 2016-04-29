@@ -222,8 +222,8 @@ public class NonyuTsuchishoBookFuriKaeAriRenchoCoverSource implements IReportSou
     public RString nokibetsuMeisaishoTokuchoSaGaku2;
     @ReportItem(name = "nokibetsuMeisaishoHohokenshaName", order = 105)
     public RString nokibetsuMeisaishoHohokenshaName;
-    @ReportItem(name = "Text2", order = 106)
-    public RString Text2;
+    @ReportItem(name = "text2", order = 106)
+    public RString text2;
     @ReportItem(name = "kozaIraishoLeftHihokenshaName", order = 107)
     public RString kozaIraishoLeftHihokenshaName;
     @ReportItem(name = "kozaIraishoRightHihokenshaName", order = 108)

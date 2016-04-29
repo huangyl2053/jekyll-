@@ -179,9 +179,9 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverEditor
         source.nofuzumishoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofuzumishoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
         source.nofozumishoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : new RString("******");
-        source.nofuzumishoOCR11 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(1) : new RString("*******************");
-        source.nofuzumishoOCR21 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(2) : new RString("********************");
-        source.nofuzumishoOCR31 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(INT3) : new RString("************");
+        source.nofuzumishoOCR11 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(1) : new RString("*******************");
+        source.nofuzumishoOCR21 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(2) : new RString("********************");
+        source.nofuzumishoOCR31 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(INT3) : new RString("************");
         source.nofuzumishoNofuGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : new RString("**********");
         source.nofuzumishoJusho1 = 納付書共通.get住所();
         source.nofuzumishoKatagaki1 = 納付書共通.get方書();

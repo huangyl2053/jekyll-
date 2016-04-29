@@ -162,12 +162,12 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverEditor
 
         SanteiNoKiso 算定の基礎 = null == 仮算定納入通知書情報.get算定の基礎() ? new SanteiNoKiso() : 仮算定納入通知書情報.get算定の基礎();
         source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
-        source.Hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
-        source.Hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
-        source.Hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
-        source.HyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
-        source.HyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
-        source.HyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
+        source.hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
+        source.hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
+        source.hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
+        source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
+        source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
+        source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
         edit編集後個人And編集後口座(source);
         source.tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
         source.keisanMeisaishoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());

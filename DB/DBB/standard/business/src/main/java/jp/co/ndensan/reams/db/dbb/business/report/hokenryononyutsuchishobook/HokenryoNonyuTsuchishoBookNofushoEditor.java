@@ -100,9 +100,9 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IHokenryoNonyuTs
         source.nofuzumishoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofuzumishoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
         source.nofozumishoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
-        source.nofuzumishoOCR11 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(1) : 星19;
-        source.nofuzumishoOCR21 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(2) : 星20;
-        source.nofuzumishoOCR31 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(INT3) : 星12;
+        source.nofuzumishoOCR11 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(1) : 星19;
+        source.nofuzumishoOCR21 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(2) : 星20;
+        source.nofuzumishoOCR31 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(INT3) : 星12;
         source.nofuzumishoNofuGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofuzumishoJusho1 = 納付書共通.get住所();
         source.nofuzumishoKatagaki1 = 納付書共通.get方書();
@@ -150,9 +150,9 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IHokenryoNonyuTs
 
     private void edit印字位置3_1(HokenryoNonyuTsuchishoBookNofushoSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
-        source.nofuzumishoOCR12 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(1) : 星19;
-        source.nofuzumishoOCR22 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(2) : 星20;
-        source.nofuzumishoOCR32 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(INT3) : 星12;
+        source.nofuzumishoOCR12 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(1) : 星19;
+        source.nofuzumishoOCR22 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(2) : 星20;
+        source.nofuzumishoOCR32 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(INT3) : 星12;
         source.nofuzumishoNofuGaku2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofuzumishoJusho2 = 納付書共通.get住所();
         source.nofuzumishoKatagaki2 = 納付書共通.get方書();
@@ -200,9 +200,9 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IHokenryoNonyuTs
         source.nofuzumishoTitleNendoBun3 = RString.EMPTY;
         source.nofuzumishoTitleKi3 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofuzumishoTitleTsuki3 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofuzumishoOCR13 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(1) : 星19;
-        source.nofuzumishoOCR23 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(2) : 星20;
-        source.nofuzumishoOCR33 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(INT3) : 星12;
+        source.nofuzumishoOCR13 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(1) : 星19;
+        source.nofuzumishoOCR23 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(2) : 星20;
+        source.nofuzumishoOCR33 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(INT3) : 星12;
         source.nofuzumishoNofuGaku3 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofuzumishoJusho3 = 納付書共通.get住所();
         source.nofuzumishoKatagaki3 = 納付書共通.get方書();
@@ -250,9 +250,9 @@ public class HokenryoNonyuTsuchishoBookNofushoEditor implements IHokenryoNonyuTs
     private void edit印字位置5_1(HokenryoNonyuTsuchishoBookNofushoSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofuzumishoTitleTsuki4 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofuzumishoOCR14 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(1) : 星19;
-        source.nofuzumishoOCR24 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(2) : 星20;
-        source.nofuzumishoOCR34 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(INT3) : 星12;
+        source.nofuzumishoOCR14 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(1) : 星19;
+        source.nofuzumishoOCR24 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(2) : 星20;
+        source.nofuzumishoOCR34 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(INT3) : 星12;
         source.nofuzumishoNofuGaku4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofuzumishoJusho4 = 納付書共通.get住所();
         source.nofuzumishoKatagaki4 = 納付書共通.get方書();

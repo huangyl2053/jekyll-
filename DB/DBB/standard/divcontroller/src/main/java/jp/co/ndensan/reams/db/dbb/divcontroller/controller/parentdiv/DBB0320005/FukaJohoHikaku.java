@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005;
 
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.input.FukaHikakuInput;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.input.FukaHikakuTargets;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuTargets;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.DBB0320005TransitionEventName.選択画面に戻る;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.FukaJohoHikakuDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

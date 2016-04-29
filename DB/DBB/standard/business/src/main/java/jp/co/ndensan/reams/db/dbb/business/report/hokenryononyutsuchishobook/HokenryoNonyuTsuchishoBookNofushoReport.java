@@ -67,6 +67,11 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
         if (null == 帳票ID) {
             return;
         }
+        edit納入通知書期情報(帳票ID, 納入通知書期情報リスト, writer);
+    }
+
+    private void edit納入通知書期情報(RString 帳票ID, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
+            ReportSourceWriter<HokenryoNonyuTsuchishoBookNofushoSource> writer) {
         RString 帳票IDの先頭 = 帳票ID.substring(0, 帳票ID.indexOf("-"));
         boolean is口振あり = new RString("DBB100020").equals(帳票IDの先頭) || new RString("DBB100022").equals(帳票IDの先頭);
         int 通知書の連番 = INT1;

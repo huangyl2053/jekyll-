@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320002;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320002;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.input.FukaHikakuInput;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.DBB0320002TransitionEventName.比較;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.SetaiinShotokuDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;

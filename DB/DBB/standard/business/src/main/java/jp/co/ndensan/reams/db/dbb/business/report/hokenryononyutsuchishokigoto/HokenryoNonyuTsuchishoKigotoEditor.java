@@ -157,7 +157,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     }
 
     private void editCompNofushoItem(HokenryoNonyuTsuchishoKigotoSource source) {
-        Map<Integer, RString> ocr = 納入通知書期情報.getOCR();
+        Map<Integer, RString> ocr = 納入通知書期情報.getOcr();
         if (ocr == null || ocr.isEmpty()) {
             ocr = new HashMap<>();
         }

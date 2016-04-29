@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.DecorationUtil.decorateBothIfDifferentNum;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.DecorationUtil.decorateBothIfDifferentRDate;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.DecorationUtil.decorateBothIfDifferentString;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.input.FukaHikakuTargets;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
+import static jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.DecorationUtil.decorateBothIfDifferentNum;
+import static jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.DecorationUtil.decorateBothIfDifferentRDate;
+import static jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.DecorationUtil.decorateBothIfDifferentString;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuTargets;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.FukaJohoHikakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonSantei1Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonSantei2Div;

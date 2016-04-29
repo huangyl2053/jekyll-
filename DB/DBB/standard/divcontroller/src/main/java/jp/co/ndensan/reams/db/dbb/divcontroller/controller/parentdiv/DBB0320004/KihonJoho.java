@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320004;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320004;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.KihonJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

@@ -339,15 +339,15 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.set確認番号(請求情報.getMpn().get確認番号());
             納入通知書期情報.set納付区分(請求情報.getMpn().get納付区分());
             if (is口座振替) {
-                納入通知書期情報.setOCRID(請求情報.getOcr().getOCRID());
+                納入通知書期情報.setOcrid(請求情報.getOcr().getOCRID());
                 OCRShutsuryokuHoho 口座振替のOCR出力方法 = 納入通知書制御情報.get口座振替のOCR出力方法();
-                納入通知書期情報.setOCR(getOCRBy口座振替のOCR出力方法(請求情報, 口座振替のOCR出力方法));
+                納入通知書期情報.setOcr(getOCRBy口座振替のOCR出力方法(請求情報, 口座振替のOCR出力方法));
             } else if (is現金納付) {
-                納入通知書期情報.setOCRID(空白);
-                納入通知書期情報.setOCR(getNewOCR(請求情報, 空白));
+                納入通知書期情報.setOcrid(空白);
+                納入通知書期情報.setOcr(getNewOCR(請求情報, 空白));
             }
-            納入通知書期情報.setOCRID(請求情報.getOcr().getOCRID());
-            納入通知書期情報.setOCR(null);
+            納入通知書期情報.setOcrid(請求情報.getOcr().getOCRID());
+            納入通知書期情報.setOcr(null);
             納入通知書期情報.setバーコード情報((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニバーコード表示())
                     ? 請求情報.getCvs().getバーコード情報() : 空白));
             納入通知書期情報.setバーコード情報上段((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニバーコード表示())
@@ -361,8 +361,8 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.set納付番号(空白);
             納入通知書期情報.set確認番号(空白);
             納入通知書期情報.set納付区分(空白);
-            納入通知書期情報.setOCRID(空白);
-            納入通知書期情報.setOCR(null);
+            納入通知書期情報.setOcrid(空白);
+            納入通知書期情報.setOcr(null);
             納入通知書期情報.setバーコード情報(空白);
             納入通知書期情報.setバーコード情報上段(空白);
             納入通知書期情報.setバーコード情報下段(空白);

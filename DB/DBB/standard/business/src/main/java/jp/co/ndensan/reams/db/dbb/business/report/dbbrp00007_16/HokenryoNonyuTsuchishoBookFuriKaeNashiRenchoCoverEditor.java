@@ -188,11 +188,11 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor implements 
             source.nofushoTitleKi1 = 納入通知書期情報リスト.get(0).get期表記();
             source.nofushoTitleTsuki1 = 納入通知書期情報リスト.get(0).get月表記();
             // TODO 納入通知書期情報.OCRの一行目の印字文字列
-            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの二行目の印字文字列
-            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの三行目の印字文字列
-            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOcrid();
             source.nofuzumishoNokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
             source.ryoshushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get領収証書納付額欄();
             source.nofushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get納付書納付額欄();

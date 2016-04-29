@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

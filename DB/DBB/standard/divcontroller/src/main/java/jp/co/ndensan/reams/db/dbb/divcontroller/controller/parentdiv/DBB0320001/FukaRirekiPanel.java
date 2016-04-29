@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
 
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaComparators;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.DBB0320005.input.FukaHikakuInput;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001StateName.賦課根拠期割;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiPanelDiv;
