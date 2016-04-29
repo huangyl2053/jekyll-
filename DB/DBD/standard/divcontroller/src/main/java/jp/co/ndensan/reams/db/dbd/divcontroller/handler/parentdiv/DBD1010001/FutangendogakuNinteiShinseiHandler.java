@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -92,10 +91,6 @@ public class FutangendogakuNinteiShinseiHandler {
      */
     public void onLoad() {
 
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo("416765266"), new ShikibetsuCode("000000001011041"), new SetaiCode("1"));
-
-        ViewStateHolder.put(ViewStateKeys.資格対象者, 資格対象者);
         boolean is受給共通_被保データなし = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号() == null;
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
             if (is受給共通_被保データなし) {
