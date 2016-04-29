@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.futangendogakunintei;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,5 +21,5 @@ public class JukyushaDaichoEntity {
     private ShikibetsuCode 識別コード;
     private Code コード;
     private RString name;
-    private HihokenshaNo value;
+    private RString value;
 }

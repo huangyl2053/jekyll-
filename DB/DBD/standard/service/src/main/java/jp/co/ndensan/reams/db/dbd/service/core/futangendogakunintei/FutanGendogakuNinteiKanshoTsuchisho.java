@@ -53,7 +53,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         JukyushaDaichoEntity jukyushaDaicho = new JukyushaDaichoEntity();
         jukyushaDaicho.setコード(new Code(コード));
         jukyushaDaicho.setName(TXT被保険者番号);
-        jukyushaDaicho.setValue(被保険者番号);
+        jukyushaDaicho.setValue(被保険者番号.value());
         jukyushaDaicho.set識別コード(識別コード);
         PersonalData personalData = toPersonalData(jukyushaDaicho);
         AccessLogger.log(AccessLogType.照会, personalData);
