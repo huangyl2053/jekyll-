@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票　保険料納入通知書（本算定）【コンビニマルチ収納タイプ】Coverの項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-9110-110 huangh
  */
 public class NonyuTsuchishoCVSMultiCoverSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -252,8 +254,6 @@ public class NonyuTsuchishoCVSMultiCoverSource implements IReportSource {
     public RString nokigenTitle;
     @ReportItem(name = "ocrId1", length = 3, order = 121)
     public RString ocrId1;
-//    @ReportItem(name = "tsuchishoNo", length = 20, order = 122)
-//    public RString tsuchishoNo;
     @ReportItem(name = "nokigenYmd", length = 16, order = 123)
     public RString nokigenYmd;
     @ReportItem(name = "hakkoYmd", length = 16, order = 124)

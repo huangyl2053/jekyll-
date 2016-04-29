@@ -4,19 +4,22 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1130011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * Idochekkurisuto のクラスファイル 
- * 
- * @author 自動生成
+ * Idochekkurisuto のクラスファイル
+ *
  */
 public class IdochekkurisutoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -60,7 +63,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChktaishodaicho(CheckBoxList chktaishodaicho) {
+    public void setChktaishodaicho(CheckBoxList chktaishodaicho) {
         this.getBatchParamterInfo().setChktaishodaicho(chktaishodaicho);
     }
 
@@ -70,7 +73,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setHLine1(HorizontalLine HLine1) {
+    public void setHLine1(HorizontalLine HLine1) {
         this.getBatchParamterInfo().setHLine1(HLine1);
     }
 
@@ -80,7 +83,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblidotasyo(Label lblidotasyo) {
+    public void setLblidotasyo(Label lblidotasyo) {
         this.getBatchParamterInfo().setLblidotasyo(lblidotasyo);
     }
 
@@ -90,7 +93,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaishiDate(Label lblKaishiDate) {
+    public void setLblKaishiDate(Label lblKaishiDate) {
         this.getBatchParamterInfo().setLblKaishiDate(lblKaishiDate);
     }
 
@@ -100,7 +103,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShuryoDate(Label lblShuryoDate) {
+    public void setLblShuryoDate(Label lblShuryoDate) {
         this.getBatchParamterInfo().setLblShuryoDate(lblShuryoDate);
     }
 
@@ -110,7 +113,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblZenkai(Label lblZenkai) {
+    public void setLblZenkai(Label lblZenkai) {
         this.getBatchParamterInfo().setLblZenkai(lblZenkai);
     }
 
@@ -120,7 +123,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtzenkaikaishi(TextBoxFlexibleDate txtzenkaikaishi) {
+    public void setTxtzenkaikaishi(TextBoxFlexibleDate txtzenkaikaishi) {
         this.getBatchParamterInfo().setTxtzenkaikaishi(txtzenkaikaishi);
     }
 
@@ -130,7 +133,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblZenkaiKara(Label lblZenkaiKara) {
+    public void setLblZenkaiKara(Label lblZenkaiKara) {
         this.getBatchParamterInfo().setLblZenkaiKara(lblZenkaiKara);
     }
 
@@ -140,7 +143,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtzenkaishuryo(TextBoxFlexibleDate txtzenkaishuryo) {
+    public void setTxtzenkaishuryo(TextBoxFlexibleDate txtzenkaishuryo) {
         this.getBatchParamterInfo().setTxtzenkaishuryo(txtzenkaishuryo);
     }
 
@@ -150,7 +153,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKonkai(Label lblKonkai) {
+    public void setLblKonkai(Label lblKonkai) {
         this.getBatchParamterInfo().setLblKonkai(lblKonkai);
     }
 
@@ -160,7 +163,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtkonkaikaishi(TextBoxFlexibleDate txtkonkaikaishi) {
+    public void setTxtkonkaikaishi(TextBoxFlexibleDate txtkonkaikaishi) {
         this.getBatchParamterInfo().setTxtkonkaikaishi(txtkonkaikaishi);
     }
 
@@ -170,7 +173,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKonkaiKara(Label lblKonkaiKara) {
+    public void setLblKonkaiKara(Label lblKonkaiKara) {
         this.getBatchParamterInfo().setLblKonkaiKara(lblKonkaiKara);
     }
 
@@ -180,7 +183,7 @@ public class IdochekkurisutoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtkonkaishuryo(TextBoxFlexibleDate txtkonkaishuryo) {
+    public void setTxtkonkaishuryo(TextBoxFlexibleDate txtkonkaishuryo) {
         this.getBatchParamterInfo().setTxtkonkaishuryo(txtkonkaishuryo);
     }
 

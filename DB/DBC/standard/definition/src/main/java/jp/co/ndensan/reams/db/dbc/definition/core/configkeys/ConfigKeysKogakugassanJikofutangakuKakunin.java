@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 高額合算自己負担額確認情報コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ConfigKeysKogakugassanJikofutangakuKakunin {
 

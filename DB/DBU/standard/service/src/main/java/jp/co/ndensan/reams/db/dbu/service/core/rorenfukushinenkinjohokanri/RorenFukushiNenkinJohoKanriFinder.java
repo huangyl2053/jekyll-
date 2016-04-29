@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.rorenfukushinenkinjohokanri;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriParameter;
-import jp.co.ndensan.reams.db.dbu.persistence.mapper.basic.rorenfukushinenkinjohokanri.IRorenFukushiNenkinJohoKanriMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.rorenfukushinenkinjohokanri.IRorenFukushiNenkinJohoKanriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 老齢福祉年金受給者台帳管理するクラスです。
- *
+ * @reamsid_L DBA-1120-010 zhangyajing
  */
 public class RorenFukushiNenkinJohoKanriFinder {
 

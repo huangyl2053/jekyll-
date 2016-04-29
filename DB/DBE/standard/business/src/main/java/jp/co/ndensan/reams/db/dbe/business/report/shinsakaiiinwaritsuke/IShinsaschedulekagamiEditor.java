@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 介護認定審査会スケジュール表かがみエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0130-080 xuyannan
  */
 public interface IShinsaschedulekagamiEditor extends IReportEditor<ShinsaschedulekagamiReportSource> {
 

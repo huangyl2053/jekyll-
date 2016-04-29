@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dba.batchcontroller.step.hihokenshadaicho.IkkatsuSakuseiProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.hihokenshadaicho.HihokenshaDaichoHakkoIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.hihokenshadaicho.HihokenshaDaichoProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshadaicho.IkkatsuSakuseiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -14,24 +15,42 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 被保険者台帳一括作成_バッチフロークラスです。
+ *
+ * @reamsid_L DBA-0510-010 duanzhanli
+ *
  */
 public class IkkatsuSakuseiFlow extends BatchFlowBase<IkkatsuSakuseiBatchParameter> {
 
+    private static final String HIHOKENSHADAICHOPROCESS = "hihokenshaDaichoProcess";
+    private static final String HAKKOICHIRANHYOPROCESS = "hakkoIchiranhyoProcess";
+
     @Override
     protected void defineFlow() {
-        executeStep(REPORT_PROCESS);
+        executeStep(HIHOKENSHADAICHOPROCESS);
+        if (getParameter().isShutsuryokuFlag()) {
+            executeStep(HAKKOICHIRANHYOPROCESS);
+        }
     }
 
-    private static final String REPORT_PROCESS = "reportProcess";
+    /**
+     * 帳票「被保険者台帳」の出力Processです。
+     *
+     * @return hihokenshaDaichoProcess
+     */
+    @Step(HIHOKENSHADAICHOPROCESS)
+    protected IBatchFlowCommand hihokenshaDaichoReportProcess() {
+        return loopBatch(HihokenshaDaichoProcess.class)
+                .arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
+    }
 
     /**
-     * 帳票データ作成のProcessです。
+     * 帳票「保険者台帳発行一覧表」の出力Processです。
      *
-     * @return IkkatsuSakuseiProcess
+     * @return HihokenshaDaichoHakkoIchiranhyoProcess
      */
-    @Step(REPORT_PROCESS)
-    protected IBatchFlowCommand reportProcess() {
-        return loopBatch(IkkatsuSakuseiProcess.class)
+    @Step(HAKKOICHIRANHYOPROCESS)
+    protected IBatchFlowCommand hakkoIchiranhyoReportProcess() {
+        return loopBatch(HihokenshaDaichoHakkoIchiranhyoProcess.class)
                 .arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 }

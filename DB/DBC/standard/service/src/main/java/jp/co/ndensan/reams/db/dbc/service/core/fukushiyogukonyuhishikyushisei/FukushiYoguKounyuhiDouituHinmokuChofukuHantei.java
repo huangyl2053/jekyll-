@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanFukushiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3048ShokanFukushiYoguHanbaihiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費同一品目重複判定
  *
- * @author 陳奥奇
+ * @reamsid_L DBC-1020-070 chenaoqi
  */
 public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
 
@@ -74,22 +75,22 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
      * @return flag
      */
     public boolean chkHinmokuCodePerYear(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
-            List<DbT3048ShokanFukushiYoguHanbaihiEntity> list, RString 整理番号) {
+            List<ShokanFukushiYoguHanbaihi> list, RString 整理番号) {
         boolean flag = false;
 
         if (list == null || list.isEmpty() || 被保険者番号 == null || サービス提供年月 == null) {
             return flag;
         }
         Set<RString> sets = new HashSet<>();
-        for (DbT3048ShokanFukushiYoguHanbaihiEntity entity : list) {
-            if (EntityDataState.Deleted.equals(entity.getState())) {
+        for (ShokanFukushiYoguHanbaihi entity : list) {
+            if (EntityDataState.Deleted.equals(entity.toEntity().getState())) {
                 continue;
             }
-            if (sets.contains(entity.getHinmokuCode())) {
+            if (sets.contains(entity.toEntity().getHinmokuCode())) {
                 flag = true;
                 break;
             } else {
-                sets.add(entity.getHinmokuCode());
+                sets.add(entity.toEntity().getHinmokuCode());
             }
         }
         if (!sets.isEmpty()) {

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査特記事項マッピングクラスです。
+ *
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum NinteiChosaTokkiJikou {
 

@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
+ * 単一合併市町村情報の取得のEntityです。
  *
- * 単一合併市町村情報の取得のEntity
- *
+ * @reamsid_L DBU-0250-010 wangxiaodong
  */
 public class GappeiShichosonEntity implements IDbAccessable {
 

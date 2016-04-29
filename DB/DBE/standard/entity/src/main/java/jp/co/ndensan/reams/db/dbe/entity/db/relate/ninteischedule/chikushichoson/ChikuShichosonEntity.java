@@ -13,32 +13,28 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
 
 /**
  * 地区市町村RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class ChikuShichosonEntity implements Cloneable, Serializable {
-    
+@SuppressWarnings("PMD.UnusedPrivateField")
+public class ChikuShichosonEntity implements Serializable {
+
     private static final long serialVersionUID = 3266209005122297444L;
 
-
     /**
-     * -- GETTER --
-     * 地区市町村Entityを返します。
+     * -- GETTER -- 地区市町村Entityを返します。
      *
-     * @return 地区市町村Entity
-     * -- SETTER --
-     * 地区市町村Entityを設定します。
+     * @return 地区市町村Entity -- SETTER -- 地区市町村Entityを設定します。
      *
      * @param 地区市町村Entity 地区市町村Entity
      */
     private DbT5224ChikuShichosonEntity 地区市町村Entity;
     /**
-     * -- GETTER --
-     * 調査地区グループマスタEntityListを返します。
+     * -- GETTER -- 調査地区グループマスタEntityListを返します。
      *
-     * @return 調査地区グループマスタEntityList
-     * -- SETTER --
-     * 調査地区グループマスタEntityListを設定します。
+     * @return 調査地区グループマスタEntityList -- SETTER -- 調査地区グループマスタEntityListを設定します。
      *
      * @param 調査地区グループマスタEntityList 調査地区グループマスタEntityList
      */
@@ -55,8 +51,7 @@ public class ChikuShichosonEntity implements Cloneable, Serializable {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * ChikuShichosonEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/>
-     * {@link xxxxxxEntity}のMD5値を計算し、設定します。
+     * ChikuShichosonEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/> {@link xxxxxxEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.地区市町村Entity.initializeMd5();

@@ -5,14 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710011;
 
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.DBC0710011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.DBC0710011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.JutakuKaishuShinseiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0710011.JutakuKaishuShinseiHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710011.JutakuKaishuShinseiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -20,13 +25,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 住宅改修費支給申請クラスです
+ *
+ * @reamsid_L DBC-0992-100 yebangqiang
  */
 public class JutakuKaishuShinsei {
 
-    private static final RString 画面モード_支給申請 = new RString("支給申請モード");
-    private static final RString 画面モード_事前申請 = new RString("事前申請モード");
     private static final RString 申請区分事前申請 = new RString("1");
-    private static final RString 申請区分取消 = new RString("9");
+    private final RString 申請区分取消 = new RString("9");
 
     /**
      * 画面ロードメソッド
@@ -35,20 +40,16 @@ public class JutakuKaishuShinsei {
      * @return 画面初期化
      */
     public ResponseData<JutakuKaishuShinseiDiv> onLoad(JutakuKaishuShinseiDiv div) {
-        // TODO ViewStateHolderから引き継ぎデータEntityを取得する
-//        ViewStateHolder 引き継ぎデータEntity = ViewStateHolder.get(ViewStateKeys.パラメータ, XXX.class);
-        //TODO 引き継ぎデータEntity.識別コード
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = key.get識別コード();
+        HihokenshaNo 被保険者番号 = key.get被保険者番号();
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().onLoad(識別コード);
-        //TODO 引き継ぎデータEntity.被保険者番号
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("000000003");
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().onLoad(識別コード);
+        JutakuKaishuShinseiHandler handler = getHandler(div);
+        RString 画面モード = ResponseHolder.getState();
+        handler.onLoad(被保険者番号, 画面モード);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        JutakuKaishuShinseiHandler handler = getHandler(div);
-        //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("事前申請モード");
-        handler.onLoad(被保険者番号, 画面モード);
         return ResponseData.of(div).respond();
     }
 
@@ -61,16 +62,8 @@ public class JutakuKaishuShinsei {
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnAddShinsei(JutakuKaishuShinseiDiv div) {
         JutakuKaishuShinseiHandler handler = getHandler(div);
         handler.setAddMode();
-        //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
-        if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
-            // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        } else if (画面モード_事前申請.equalsIgnoreCase(画面モード)) {
-            // TODO QA 466 住宅改修費事前申請登録画面へ遷移する
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.to申請登録)
+                .parameter(ResponseHolder.getState());
     }
 
     /**
@@ -81,17 +74,10 @@ public class JutakuKaishuShinsei {
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnModify(JutakuKaishuShinseiDiv div) {
         JutakuKaishuShinseiHandler handler = getHandler(div);
-        //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
+        RString 画面モード = ResponseHolder.getState();
         handler.setModifyMode(画面モード);
-        if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
-            // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        } else if (画面モード_事前申請.equalsIgnoreCase(画面モード)) {
-            // TODO QA 466 住宅改修費事前申請登録画面へ遷移する
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.to申請登録)
+                .parameter(ResponseHolder.getState());
     }
 
     /**
@@ -102,18 +88,17 @@ public class JutakuKaishuShinsei {
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnDelete(JutakuKaishuShinseiDiv div) {
         JutakuKaishuShinseiHandler handler = getHandler(div);
-        //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
+        RString 画面モード = ResponseHolder.getState();
         handler.setDeleteMode();
         RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
                 .getTxtShinseiKubun();
-        if (画面モード_支給申請.equalsIgnoreCase(画面モード) && !申請区分事前申請.equals(申請区分)) {
-            // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        } else if (画面モード_事前申請.equalsIgnoreCase(画面モード)
-                || (画面モード_支給申請.equalsIgnoreCase(画面モード) && 申請区分事前申請.equals(申請区分))) {
-            // TODO QA 466 住宅改修費事前申請登録画面へ遷移する
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
+        if (画面モード.equals(DBC0710011StateName.支給申請モード.getName()) && !申請区分事前申請.equals(申請区分)) {
+            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.to申請登録)
+                    .parameter(DBC0710011StateName.支給申請モード.getName());
+        } else if ((画面モード.equals(DBC0710011StateName.事前申請モード.getName())
+                || 画面モード.equals(DBC0710011StateName.支給申請モード.getName()) && 申請区分事前申請.equals(申請区分))) {
+            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.to申請登録)
+                    .parameter(DBC0710011StateName.事前申請モード.getName());
         }
         return ResponseData.of(div).respond();
     }
@@ -128,21 +113,12 @@ public class JutakuKaishuShinsei {
         RString 申請区分 = div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList().getClickedItem()
                 .getTxtShinseiKubun();
         if (申請区分取消.equals(申請区分)) {
-            // TODO QA番号：468
-//            throw new ApplicationException(DbcErrorMessages.該当データが既に取消.getMessage());
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("該当データが既に取消されている", "取消").evaluate());
         }
         JutakuKaishuShinseiHandler handler = getHandler(div);
         handler.setCancelMode();
-        //TODO 引き継ぎデータEntity.画面モード
-        RString 画面モード = new RString("支給申請モード");
-        if (画面モード_支給申請.equalsIgnoreCase(画面モード)) {
-            // TODO QA 466 住宅改修費支給申請登録画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        } else if (画面モード_事前申請.equalsIgnoreCase(画面モード)) {
-            // TODO QA 466 住宅改修費事前申請登録画面へ遷移する
-            return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.検索条件).respond();
-        }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.to申請登録)
+                .parameter(ResponseHolder.getState());
     }
 
     /**

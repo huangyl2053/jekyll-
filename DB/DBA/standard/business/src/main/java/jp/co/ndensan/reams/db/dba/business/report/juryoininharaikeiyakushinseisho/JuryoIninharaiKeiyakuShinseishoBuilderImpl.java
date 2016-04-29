@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 介護保険受領委任払い契約申請書Builderクラスです
+ * @reamsid_L DBA-0540-683 dongyabin
  */
 public final class JuryoIninharaiKeiyakuShinseishoBuilderImpl implements IJuryoIninharaiKeiyakuShinseishoBuilder {
     

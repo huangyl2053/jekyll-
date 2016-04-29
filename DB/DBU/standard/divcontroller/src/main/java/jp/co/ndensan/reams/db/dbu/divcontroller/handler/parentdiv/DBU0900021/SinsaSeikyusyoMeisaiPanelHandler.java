@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 審査請求書登録_登録DivのHandlerクラスです。
+ *
+ * @reamsid_L DBU-1080-060 houtianpeng
  */
 public class SinsaSeikyusyoMeisaiPanelHandler {
 

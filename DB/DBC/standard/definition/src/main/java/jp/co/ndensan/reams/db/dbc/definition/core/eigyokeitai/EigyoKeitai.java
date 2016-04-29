@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 営業形態を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum EigyoKeitai {
 

@@ -1,11 +1,11 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.ShiharaiHohoJyoho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.KozaJohoPSM.KozaJohoPSM;
+import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.handler.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyohoHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.commonchilddiv.shiharaihohojyoho.ShiharaiHohoJyohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 支払方法情報のコントローラです。
  *
+ * @reamsid_L DBC-0300-010 houtianpeng
  */
 public class ShiharaiHohoJyoho {
 
@@ -128,7 +129,7 @@ public class ShiharaiHohoJyoho {
         ShiharaiHohoJyohoHandler handler = getHandler(div);
         getHandler(div).clear口座払い();
         KozaJohoPSM kozaJohoPSM = ShiharaiHohoJyohoFinder.createInstance().
-                getKozaJyoho(new KozaParameter(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
+                getKozaJyoho(KozaParameter.createParam(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
         handler.口座払いエリアの初期化(kozaJohoPSM, Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
         response.data = div;
         return response;
@@ -171,7 +172,7 @@ public class ShiharaiHohoJyoho {
         getHandler(div).clear受領委任払い();
         SikyuSinseiJyohoParameter 支給申請情報 = ViewStateHolder.get(ViewStateKeys.支給申請情報パラメータ, SikyuSinseiJyohoParameter.class);
         JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
-                getKeiyakuJigyosya(KeiyakushaParameter.
+                getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
                         createParam(new HihokenshaNo(div.getTxtKeiyakuNo().getValue()),
                                 支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
                                 支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),

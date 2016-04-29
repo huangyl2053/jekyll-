@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 新旧被保険者番号変換するクラスです。
- *
+ * @reamsid_L DBU-0310-010 zhangyajing
  */
 public class NewOldHihokenshabangoFinder {
 

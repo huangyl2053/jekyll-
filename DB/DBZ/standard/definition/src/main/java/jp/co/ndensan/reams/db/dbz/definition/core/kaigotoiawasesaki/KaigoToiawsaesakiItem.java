@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護問合せ先項目を表す列挙型です。
+ *
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum KaigoToiawsaesakiItem {
 

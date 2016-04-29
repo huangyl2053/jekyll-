@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgShichoson_Row のクラスファイル
  *
- * @author 自動生成
  */
 public class dgShichoson_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

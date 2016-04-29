@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * DBZのエラーメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
 
@@ -58,7 +58,7 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     保険者番号取得不可(44, "保険者番号が取得できません。"),
     処理日付管理マスタなし(45, "処理日付管理マスタがありません。：?");
 
-    private final Message message;
+    private final transient Message message;
 
     /**
      * コンストラクタです。

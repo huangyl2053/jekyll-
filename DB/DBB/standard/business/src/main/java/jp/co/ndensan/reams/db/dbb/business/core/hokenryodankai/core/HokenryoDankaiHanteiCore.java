@@ -94,10 +94,9 @@ public class HokenryoDankaiHanteiCore {
 
     private void 特例対象設定(TsukibetsuHokenryoDankai tsukibetsuHokenryoDankai) {
         Map<RString, HokenryoDankai> hokenryoDankaiMap = tsukibetsuHokenryoDankai.createHokenryoDankaiMap();
-        for (RString hokenryoDankai : hokenryoDankaiMap.keySet()) {
+        for (HokenryoDankai hokenryoDankai : hokenryoDankaiMap.values()) {
             //取得した段階の判定方法を取得
-            HokenryoDankai hanteihohoList = hokenryoDankaiMap.get(hokenryoDankai);
-            hanteihohoList.setTokureiTaisho(true);
+            hokenryoDankai.setTokureiTaisho(true);
         }
     }
 

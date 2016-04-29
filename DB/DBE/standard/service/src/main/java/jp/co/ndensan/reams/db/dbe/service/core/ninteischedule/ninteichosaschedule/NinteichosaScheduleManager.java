@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosaScheduleManager {
 

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  * 主治医意見書提出督促状Printerです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 public class ShujiiIkenshoSakuseiTokusokujoService {
 

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 月処理区分のデフォルト値を表す列挙型です。
+ *
+ * @reamsid_L DBB-9020-080 sunhaidi
  */
 public enum TsukiShorkiKubun implements ITsukiShorkiKubun {
 

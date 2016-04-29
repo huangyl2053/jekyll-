@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbz.service.shikakutokuso;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.shikakutokuso.IShikakuTokusoMapper;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShutokuJiyuDDL;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakutokuso.IShikakuTokusoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -26,8 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 資格得喪履歴クラスです。
+ *
+ * @reamsid_L DBA-0130-010 wanghui
  */
 public class ShikakuTokusoFinder {
 

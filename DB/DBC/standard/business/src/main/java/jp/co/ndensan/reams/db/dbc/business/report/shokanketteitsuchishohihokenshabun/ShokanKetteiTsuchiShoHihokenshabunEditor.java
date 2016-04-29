@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshih
 
 /**
  * 償還払支給（不支給）決定通知書（受領委任払い・被保険者用）Editorです。
+ *
+ * @reamsid_L DBC-1000-120 zuotao
  */
 public class ShokanKetteiTsuchiShoHihokenshabunEditor implements IShokanKetteiTsuchiShoHihokenshabunEditor {
 

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ChosaChikuGroupList のクラスファイル 
  * 
- * @author 自動生成
  */
 public class ChosaChikuGroupListDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">

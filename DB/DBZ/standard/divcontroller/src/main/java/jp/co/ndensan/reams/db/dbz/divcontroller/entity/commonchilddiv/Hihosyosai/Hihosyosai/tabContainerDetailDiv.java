@@ -4,20 +4,22 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Hihosyosa
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.IJushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.IShikakuHenkoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
- * tabContainerDetail のクラスファイル 
- * 
- * @author 自動生成
+ * tabContainerDetail のクラスファイル
+ *
+ * @reamsid_L DBA-0170-010 linghuhang
  */
 public class tabContainerDetailDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -30,8 +30,8 @@ public class KogakuServicehiInfoPanel {
      * 高額介護サービス費照会 高額介護サービス費情報 勧奨通知発行を設定する。
      *
      * @author n8223
-     * @param panel
-     * @return
+     * @param panel KogakuServicehiInfoPanelDiv
+     * @return ResponseData
      */
     public ResponseData<KogakuServicehiInfoPanelDiv> onLoad(KogakuServicehiInfoPanelDiv panel) {
         ResponseData<KogakuServicehiInfoPanelDiv> response = new ResponseData<>();
@@ -145,16 +145,15 @@ public class KogakuServicehiInfoPanel {
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         //申請日～申請理由
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtShinseiDate().setValue(
-                        ymlDt.getAsRDate("shinseiDate"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtShinseishaName().setValue(
-                        ymlDt.getAsRString("shinseishaName"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtJigyoshaNo().setValue(
-                        ymlDt.getAsRString("jigyoshaNo"));
-
+        // panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //         getTplShinseisha().getShinseisha().getTxtShinseiDate().setValue(
+        //                 ymlDt.getAsRDate("shinseiDate"));
+        // panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //        getTplShinseisha().getShinseisha().getTxtShinseishaName().setValue(
+        //                ymlDt.getAsRString("shinseishaName"));
+        // panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //        getTplShinseisha().getShinseisha().getTxtJigyoshaNo().setValue(
+        //                ymlDt.getAsRString("jigyoshaNo"));
         //2014.07.01 追加
 /*        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
          getTplShinseisha().getShinseisha().getTxtShinseiDate().setValue(
@@ -167,19 +166,18 @@ public class KogakuServicehiInfoPanel {
          panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
          getTplShinseisha().getShinseisha().getTxtShinseishaName().setValue(
          servicehiListpanel.getDgKogakuServicehiRireki().getClickedItem().getTxtHihoName()); */
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtTelNo().setValue(
-                        ymlDt.getAsRString("telNo"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtShinseishaNameKana().setValue(
-                        ymlDt.getAsRString("shinseishaNameKana"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtYubinNo().setValue(
-                        ymlDt.getAsYubinNo("yubinNo"));
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplShinseisha().getShinseisha().getTxtAddress().setValue(
-                        ymlDt.getAsRString("addres"));
-
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtTelNo().setValue(
+        //                  ymlDt.getAsRString("telNo"));
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtShinseishaNameKana().setValue(
+        //                  ymlDt.getAsRString("shinseishaNameKana"));
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtYubinNo().setValue(
+        //                  ymlDt.getAsYubinNo("yubinNo"));
+        //  panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+        //          getTplShinseisha().getShinseisha().getTxtAddress().setValue(
+        //                  ymlDt.getAsRString("addres"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                 getTplShinseisha().getTxtShiharaiTotalAmount().setValue(
                         ymlDt.getAsDecimal("shiharaiTotalAmount"));
@@ -285,6 +283,8 @@ public class KogakuServicehiInfoPanel {
 
     //高額決定情報 TAB
     private void kogakuServiceDetaildgJudgementinfo(KogakuServicehiInfoPanelDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.hashCode();
 //        List<HashMap> ymlData = ymlData("dbc0030011/KogakuServiceDetaildgJudgementinfo.yml");
 //
 //        HashMap hashMap = ymlData.get(0);
@@ -335,6 +335,8 @@ public class KogakuServicehiInfoPanel {
 
     //高額決定情報 TAB     高額介護サービス費一覧 dgJudgementResult
     private void kogakuServiceDetaildgJudgementResult(KogakuServicehiInfoPanelDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.hashCode();
 //        List<HashMap> ymlData = ymlData("dbc0030011/KogakuServiceDetaildgJudgementResult.yml");
 //
 //        List<dgJudgementResult_Row> arraydata = createRowKogakuServiceDetaildgJudgementResultTestData(ymlData);
@@ -421,8 +423,8 @@ public class KogakuServicehiInfoPanel {
      *
      * @author n8223
      * @autnor n8223 KogakuServicehiListPanel 追加　20140.07.01
-     * @param panel
-     * @return
+     * @param panel KogakuServicehiInfoPanelDiv
+     * @return ResponseData
      */
     public ResponseData<KogakuServicehiInfoPanelDiv> onClick_ShowDetail(KogakuServicehiInfoPanelDiv panel) {
         ResponseData<KogakuServicehiInfoPanelDiv> response = new ResponseData<>();
@@ -449,8 +451,8 @@ public class KogakuServicehiInfoPanel {
      * 高額介護サービス費照会 口座情報で。①口座払い　②受領委任払い　③窓口払いの選択によって非表示する。
      *
      * @author n8223
-     * @param panel
-     * @return
+     * @param panel KogakuServicehiInfoPanelDiv
+     * @return ResponseData
      */
     public ResponseData<KogakuServicehiInfoPanelDiv> onClick_radPayMethod(KogakuServicehiInfoPanelDiv panel) {
         ResponseData<KogakuServicehiInfoPanelDiv> response = new ResponseData<>();
@@ -520,6 +522,8 @@ public class KogakuServicehiInfoPanel {
                         getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(false);
+                break;
+            default:
                 break;
         }
     }

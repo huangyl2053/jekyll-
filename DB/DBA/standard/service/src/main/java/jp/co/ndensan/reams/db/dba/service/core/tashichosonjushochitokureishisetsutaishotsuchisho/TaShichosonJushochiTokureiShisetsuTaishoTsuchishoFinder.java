@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsutaishotsuchisho;
 
+import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoTaishoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -39,13 +41,18 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険住所地特例施設退所通知書のビジネスクラスです。
+ *
+ * @reamsid_L DBA-0380-010 huangh
  */
 public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
 
@@ -61,7 +68,6 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
     private static final int INT8 = 8;
     private static final int INT9 = 9;
     private static final int INT10 = 10;
-    private static final int INT100 = 100;
 
     /**
      * コンストラクタです。
@@ -72,28 +78,38 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder}のインスタンス
+     */
+    public static TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder createInstance() {
+        return InstanceProvider.create(TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder.class);
+    }
+
+    /**
      * 他住特施設退所通知書データ作成
      *
-     * @param inEntity 他市町村住所地特例者関連帳票発行指示データEntity
-     * @return 他住特施設退所通知書データEntity
+     * @param inBusiness TatokuKanrenChohyoShijiData
+     * @return 他住特施設退所通知書データBusiness
      */
-    public TatokuKanrenChohyoTaishoTsuchishoEntity setTatokuKanrenChohyoTaishoTsuchisho(TatokuKanrenChohyoShijiDataEntity inEntity) {
+    @Transaction
+    public TatokuKanrenChohyoTaishoTsuchishoBusiness setTatokuKanrenChohyoTaishoTsuchisho(TatokuKanrenChohyoShijiData inBusiness) {
         TatokuKanrenChohyoTaishoTsuchishoEntity outEntity = new TatokuKanrenChohyoTaishoTsuchishoEntity();
-        outEntity.set保険者郵便番号(inEntity.get保険者郵便番号().getEditedYubinNo());
-        outEntity.set文書番号(inEntity.get文書番号());
-        outEntity.set保険者住所(inEntity.get保険者住所());
-        outEntity.set発行年月日(inEntity.get発行年月日().
+        outEntity.set保険者郵便番号(inBusiness.get保険者郵便番号().getEditedYubinNo());
+        outEntity.set文書番号(inBusiness.get文書番号());
+        outEntity.set保険者住所(inBusiness.get保険者住所());
+        outEntity.set発行年月日(inBusiness.get発行年月日().
                 wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        outEntity.set保険者名(inEntity.get保険者名());
-        outEntity.set保険者名敬称(inEntity.get保険者名敬称());
-        outEntity.set担当部署名(inEntity.get担当部署名());
-        outEntity.set担当部署名敬称(inEntity.get担当部署名敬称());
+        outEntity.set保険者名(inBusiness.get保険者名());
+        outEntity.set保険者名敬称(inBusiness.get保険者名敬称());
+        outEntity.set担当部署名(inBusiness.get担当部署名());
+        outEntity.set担当部署名敬称(inBusiness.get担当部署名敬称());
 
         CustomerBarCode barCode = new CustomerBarCode();
-        if (inEntity.get保険者郵便番号() != null && inEntity.get保険者住所() != null) {
+        if (inBusiness.get保険者郵便番号() != null && inBusiness.get保険者住所() != null) {
             CustomerBarCodeResult result
-                    = barCode.convertCustomerBarCode(new RString(inEntity.get保険者郵便番号().toString()), inEntity.get保険者住所());
+                    = barCode.convertCustomerBarCode(new RString(inBusiness.get保険者郵便番号().toString()), inBusiness.get保険者住所());
 
             if (result != null) {
                 outEntity.setバーコード情報(result.getCustomerBarCode());
@@ -108,10 +124,11 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+        if (tsuchishoTeikeibunInfo != null
+                && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
         }
-        RString 被保険者番号 = inEntity.get被保険者番号();
+        RString 被保険者番号 = inBusiness.get被保険者番号();
         if (被保険者番号 != null && INT10 <= 被保険者番号.length()) {
             outEntity.set被保険者番号１(被保険者番号.substring(0, INT1));
             outEntity.set被保険者番号２(被保険者番号.substring(INT1, INT2));
@@ -127,7 +144,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
 
         ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper mapper
                 = mapperProvider.create(ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper.class);
-        getEntity = mapper.getTaShichosonJushochiTokureiShisetsuTaishoTsuchisho(inEntity);
+        getEntity = mapper.getTaShichosonJushochiTokureiShisetsuTaishoTsuchisho(inBusiness.getEntity());
         if (getEntity != null) {
             outEntity.set退所年月日(getEntity.get退所年月日().
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
@@ -147,7 +164,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         if (getEntity != null) {
             key.set基準日(getEntity.get退所年月日());
         }
-        key.set識別コード(inEntity.get識別コード());
+        key.set識別コード(inBusiness.get識別コード());
 
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
         TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter params
@@ -165,16 +182,24 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set誕生日(getEntity.get生年月日().
                     wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            outEntity.set性別(getEntity.get性別コード());
 
+            if (Seibetsu.男.getコード().equals(getEntity.get性別コード())) {
+                outEntity.set性別(Seibetsu.男.get名称());
+            } else if (Seibetsu.女.getコード().equals(getEntity.get性別コード())) {
+                outEntity.set性別(Seibetsu.女.get名称());
+            }
         }
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+        ReportAssembler assembler = new ReportManager().
+                reportAssembler(new RString("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), SubGyomuCode.DBA介護資格).create();
+        RString imageFilePath = assembler.getImageFolderPath();
+
         INinshoshaSourceBuilder builder
-                = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, null, RDate.getNowDate(), INT100);
+                = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, imageFilePath, RDate.getNowDate());
         outEntity.set電子公印(builder.buildSource().denshiKoin);
         if (builder.buildSource().ninshoshaShimeiKakenai.isEmpty()) {
             outEntity.set首長名(builder.buildSource().ninshoshaShimeiKakeru);
@@ -183,7 +208,8 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         }
         outEntity.set市町村名(association.get市町村名());
         outEntity.set公印省略(builder.buildSource().koinShoryaku);
-        return outEntity;
+
+        return new TatokuKanrenChohyoTaishoTsuchishoBusiness(outEntity);
     }
 
     /**

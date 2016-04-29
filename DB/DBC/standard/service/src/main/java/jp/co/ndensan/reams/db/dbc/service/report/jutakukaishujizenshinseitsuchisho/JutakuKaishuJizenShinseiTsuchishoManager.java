@@ -51,6 +51,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 住宅改修事前申請承認結果通知書
+ *
+ * @reamsid_L DBC-0990-070 xicongwang
  */
 public class JutakuKaishuJizenShinseiTsuchishoManager {
 

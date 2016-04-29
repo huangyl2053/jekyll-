@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensha
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
+ * 被保険者証・資格者証発行のDivControllerです。
  *
- * @author 自動生成
+ * @reamsid_L DBA-1090-011 huangh
  */
 public class HihokenshoShikakushoHakko {
 

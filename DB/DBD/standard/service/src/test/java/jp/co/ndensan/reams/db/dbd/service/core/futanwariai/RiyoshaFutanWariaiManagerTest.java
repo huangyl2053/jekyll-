@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3113RiyoshaFutanWariaiEntit
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT3113RiyoshaFutanWariaiDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.IRiyoshaFutanWariaiMapper;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoshafutanwariai.IRiyoshaFutanWariaiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

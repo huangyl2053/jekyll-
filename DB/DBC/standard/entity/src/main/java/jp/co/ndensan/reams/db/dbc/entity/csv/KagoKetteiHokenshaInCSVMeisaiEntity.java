@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * KagoKetteiTsuchishoJyohoHokenshabunCSVMeisaiEntityのcsv項目定義クラスです
+ *
+ * @reamsid_L DBC-0980-300 xupeng
  */
 public class KagoKetteiHokenshaInCSVMeisaiEntity {
 

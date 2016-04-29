@@ -44,6 +44,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 通知書発行後異動把握
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 public class TsuchiShoHakkogoIdoHaaku {
 
@@ -247,10 +249,13 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get住所変更(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果) {
         boolean flag = false;
-        flag = get郵便番号(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get住所(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get番地(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get方書(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 郵便番号flag = get郵便番号(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 住所flag = get住所(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 番地flag = get番地(異動前PSM結果, 異動後PSM結果, flag);
+        boolean 方書flag = get方書(異動前PSM結果, 異動後PSM結果, flag);
+        if (郵便番号flag || 住所flag || 番地flag || 方書flag) {
+            flag = true;
+        }
         return flag;
     }
 
@@ -280,7 +285,7 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get住所(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果, boolean flag) {
         if ((異動前PSM結果.get住所() == null && 異動後PSM結果.get住所() != null)
-                || (異動前PSM結果.get郵便番号() != null && 異動後PSM結果.get郵便番号() == null)) {
+                || (異動前PSM結果.get住所() != null && 異動後PSM結果.get住所() == null)) {
             flag = true;
         }
         if ((異動前PSM結果.get住所() != null && 異動後PSM結果.get住所() != null)
@@ -304,23 +309,26 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get氏名変更(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果) {
         boolean flag = false;
-        flag = get漢字氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = getカナ氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get外国人氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get外国人併記名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get外国人カナ氏名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = get通称名(異動前PSM結果, 異動後PSM結果, flag);
-        flag = getカナ通称名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagOne = get漢字氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagTwo = getカナ氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagThree = get外国人氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagFour = get外国人併記名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagFive = get外国人カナ氏名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagSix = get通称名(異動前PSM結果, 異動後PSM結果, flag);
+        boolean flagSeven = getカナ通称名(異動前PSM結果, 異動後PSM結果, flag);
+        if (flagOne || flagTwo || flagThree || flagFour || flagFive || flagSix || flagSeven) {
+            flag = true;
+        }
         return flag;
     }
 
     private boolean getカナ通称名(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果, boolean flag) {
         if ((異動前PSM結果.getカナ通称名() == null && 異動後PSM結果.getカナ通称名() != null)
-                || (異動前PSM結果.get郵便番号() != null && 異動後PSM結果.get郵便番号() == null)) {
+                || (異動前PSM結果.getカナ通称名() != null && 異動後PSM結果.getカナ通称名() == null)) {
             flag = true;
         }
         if ((異動前PSM結果.getカナ通称名() != null && 異動後PSM結果.getカナ通称名() != null)
-                && (!異動前PSM結果.get郵便番号().equals(異動後PSM結果.get郵便番号()))) {
+                && (!異動前PSM結果.getカナ通称名().equals(異動後PSM結果.getカナ通称名()))) {
             flag = true;
         }
         return flag;
@@ -328,11 +336,11 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private boolean get通称名(ShikibetsuTaishoIdoJoho 異動前PSM結果, ShikibetsuTaishoIdoJoho 異動後PSM結果, boolean flag) {
         if ((異動前PSM結果.get通称名() == null && 異動後PSM結果.get通称名() != null)
-                || (異動前PSM結果.get郵便番号() != null && 異動後PSM結果.get郵便番号() == null)) {
+                || (異動前PSM結果.get通称名() != null && 異動後PSM結果.get通称名() == null)) {
             flag = true;
         }
         if ((異動前PSM結果.get通称名() != null && 異動後PSM結果.get通称名() != null)
-                && (!異動前PSM結果.get郵便番号().equals(異動後PSM結果.get郵便番号()))) {
+                && (!異動前PSM結果.get通称名().equals(異動後PSM結果.get通称名()))) {
             flag = true;
         }
         return flag;
@@ -414,7 +422,7 @@ public class TsuchiShoHakkogoIdoHaaku {
 
     private DbT2017TsuchishoHakkogoIdoshaEntity set資格異動(
             DbT2017TsuchishoHakkogoIdoshaEntity dbt2017Entity, DbV2001ChoshuHohoEntity dbv2001Entity) {
-        // TODO QA340(Redmine#78346)
+        dbt2017Entity.setIdoYMD(new FlexibleDate(dbv2001Entity.getLastUpdateTimestamp().getDate().toString()));
         dbt2017Entity.setIdoNaiyo(IdoNaiyo.資格の異動.getコード());
         dbt2017Entity.setIdoAriFlag(true);
         dbt2017Entity.setState(EntityDataState.Modified);

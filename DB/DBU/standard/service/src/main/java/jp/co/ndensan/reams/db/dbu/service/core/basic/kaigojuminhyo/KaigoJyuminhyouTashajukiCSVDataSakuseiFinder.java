@@ -32,8 +32,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護住民票個別事項連携情報作成【他社住基】_CSVデータ作成を管理するクラスです。
+ *
+ * @reamsid_L DBU-0350-030 zhengshukai
+ *
  */
 public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
 
@@ -85,7 +87,8 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJyuminhyouTashajukiCSVDataSakuseiFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KaigoJyuminhyouTashajukiCSVDataSakuseiFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KaigoJyuminhyouTashajukiCSVDataSakuseiFinder}のインスタンス
      */
     public static KaigoJyuminhyouTashajukiCSVDataSakuseiFinder createInstance() {
         return new KaigoJyuminhyouTashajukiCSVDataSakuseiFinder();
@@ -97,6 +100,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
      * @param tashajyukiList 介護住民票個別事項連携情報作成【他社住基】情報Entityリスト
      * @param codeHenkanKubun コード変換区分
      * @return 介護住民票個別事項連携情報作成【他社住基】8桁CSV用データリスト
+     * @throws NullPointerException 空値
      */
     public SearchResult<TashajukiHachiCSVDataEntity> getKaigoJyuminhyouTashajukiHachiCSVData(
             List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) throws NullPointerException {
@@ -138,109 +142,11 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             件数 = 件数 + 1;
             RString 連番new = this.get連番(件数);
             hachientity.set連番(連番new);
-            if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
-                    && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
-                hachientity.set被保険者番号(entity.get被保険者番号());
-                hachientity.set市町村コード(entity.get市町村コード());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_8) {
-                        hachientity.set識別コード(識別コード);
-                    } else {
-                        hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_8) {
-                        hachientity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        hachientity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_8));
-                    }
-                    hachientity.set資格取得日(entity.get資格取得年月日());
-                    hachientity.set資格喪失日(entity.get資格喪失年月日());
-                    hachientity.set資格区分(entity.get被保険者区分コード());
-                    hachientity.set更新日時(entity.get更新日時());
-                }
-            }
-            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null && entity.get資格取得年月日() != null
-                    && entity.get受給者認定有効期間開始年月日() != null) && (!entity.get被保険者番号().isEmpty()
-                    && !entity.get受給者被保険者番号().isEmpty()
-                    && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
-                hachientity.set被保険者番号(entity.get被保険者番号());
-                hachientity.set市町村コード(entity.get市町村コード());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_8) {
-                        hachientity.set識別コード(識別コード);
-                    } else {
-                        hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_8) {
-                        hachientity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        hachientity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_8));
-                    }
-                    hachientity.set資格取得日(entity.get資格取得年月日());
-                    hachientity.set資格喪失日(entity.get資格喪失年月日());
-                    hachientity.set受給認定年月日(entity.get受給者認定年月日());
-                    hachientity.set資格区分(entity.get被保険者区分コード());
-                    hachientity.set受給者区分(区分_1);
-                }
-                if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
-                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
-                        hachientity.set更新日時(entity.get更新日時());
-                    } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
-                        hachientity.set更新日時(entity.get受給者更新日時());
-                    }
-                }
-            }
-            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                    && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
-                    && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                    && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
-                hachientity.set被保険者番号(entity.get被保険者番号());
-                hachientity.set市町村コード(entity.get市町村コード());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_8) {
-                        hachientity.set識別コード(識別コード);
-                    } else {
-                        hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_8) {
-                        hachientity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        hachientity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_8));
-                    }
-                    hachientity.set資格取得日(entity.get資格取得年月日());
-                    hachientity.set資格喪失日(entity.get資格喪失年月日());
-                    hachientity.set資格区分(entity.get被保険者区分コード());
-                    hachientity.set更新日時(entity.get更新日時());
-                }
-            }
+            被保険者番号NULL以外の判定8桁(codeHenkanKubun, entity, hachientity);
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty()) && (entity.get受給者被保険者番号() != null
                     && !entity.get受給者被保険者番号().isEmpty())) {
                 hachientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
-                    if (受給者識別コード.length() <= 桁目_8) {
-                        hachientity.set識別コード(受給者識別コード);
-                    } else {
-                        hachientity.set識別コード(受給者識別コード.substring(受給者識別コード.length() - 桁目_8));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get受給者識別コード().value().length() <= 桁目_8) {
-                        hachientity.set識別コード(new RString(entity.get受給者識別コード().toString()));
-                    } else {
-                        hachientity.set識別コード(new RString(entity.get受給者識別コード().toString()).
-                                substring(entity.get受給者識別コード().value().length() - 桁目_8));
-                    }
-                    hachientity.set更新日時(new RString(YMDHMS.now().toString()));
-                }
+                コード変換区分の判定8桁2(codeHenkanKubun, entity, hachientity);
             }
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
@@ -249,6 +155,106 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             hachilist.add(hachientity);
         }
         return hachilist;
+    }
+
+    private void 被保険者番号NULL以外の判定8桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiHachiCSVDataEntity hachientity) {
+        if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
+                && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
+            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set市町村コード(entity.get市町村コード());
+            コード変換区分の判定8桁(codeHenkanKubun, entity, hachientity);
+        }
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null && entity.get資格取得年月日() != null
+                && entity.get受給者認定有効期間開始年月日() != null) && (!entity.get被保険者番号().isEmpty()
+                && !entity.get受給者被保険者番号().isEmpty()
+                && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
+            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set市町村コード(entity.get市町村コード());
+            コード変換区分と更新日時の判定8桁(codeHenkanKubun, entity, hachientity);
+        }
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+                && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
+                && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
+            hachientity.set被保険者番号(entity.get被保険者番号());
+            hachientity.set市町村コード(entity.get市町村コード());
+            コード変換区分の判定8桁(codeHenkanKubun, entity, hachientity);
+        }
+    }
+
+    private void コード変換区分の判定8桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiHachiCSVDataEntity hachientity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
+            if (識別コード.length() <= 桁目_8) {
+                hachientity.set識別コード(識別コード);
+            } else {
+                hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get識別コード().value().length() <= 桁目_8) {
+                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+            } else {
+                hachientity.set識別コード(new RString(entity.get識別コード().toString()).
+                        substring(entity.get識別コード().value().length() - 桁目_8));
+            }
+            hachientity.set資格取得日(entity.get資格取得年月日());
+            hachientity.set資格喪失日(entity.get資格喪失年月日());
+            hachientity.set資格区分(entity.get被保険者区分コード());
+            hachientity.set更新日時(entity.get更新日時());
+        }
+    }
+
+    private void コード変換区分と更新日時の判定8桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiHachiCSVDataEntity hachientity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
+            if (識別コード.length() <= 桁目_8) {
+                hachientity.set識別コード(識別コード);
+            } else {
+                hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get識別コード().value().length() <= 桁目_8) {
+                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+            } else {
+                hachientity.set識別コード(new RString(entity.get識別コード().toString()).
+                        substring(entity.get識別コード().value().length() - 桁目_8));
+            }
+            hachientity.set資格取得日(entity.get資格取得年月日());
+            hachientity.set資格喪失日(entity.get資格喪失年月日());
+            hachientity.set受給認定年月日(entity.get受給者認定年月日());
+            hachientity.set資格区分(entity.get被保険者区分コード());
+            hachientity.set受給者区分(区分_1);
+        }
+        if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
+            if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
+                hachientity.set更新日時(entity.get更新日時());
+            } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
+                hachientity.set更新日時(entity.get受給者更新日時());
+            }
+        }
+    }
+
+    private void コード変換区分の判定8桁2(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiHachiCSVDataEntity hachientity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
+            if (受給者識別コード.length() <= 桁目_8) {
+                hachientity.set識別コード(受給者識別コード);
+            } else {
+                hachientity.set識別コード(受給者識別コード.substring(受給者識別コード.length() - 桁目_8));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get受給者識別コード().value().length() <= 桁目_8) {
+                hachientity.set識別コード(new RString(entity.get受給者識別コード().toString()));
+            } else {
+                hachientity.set識別コード(new RString(entity.get受給者識別コード().toString()).
+                        substring(entity.get受給者識別コード().value().length() - 桁目_8));
+            }
+            hachientity.set更新日時(new RString(YMDHMS.now().toString()));
+        }
     }
 
     private TashajukiHachiCSVDataEntity get8桁市町村コード(List<TashajukiHachiCSVDataEntity> hachilist,
@@ -273,6 +279,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
      * @param tashajyukiList 介護住民票個別事項連携情報作成【他社住基】情報Entityリスト
      * @param codeHenkanKubun コード変換区分
      * @return junilist 介護住民票個別事項連携情報作成【他社住基】12桁CSV用データリスト
+     * @throws NullPointerException 空値
      */
     public SearchResult<TashajukiJunitoJugoCSVDataEntity> getKaigoJyuminhyouTashajukiJuniCSVData(
             List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) throws NullPointerException {
@@ -316,125 +323,11 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             件数 = 件数 + 1;
             RString 連番new = this.get連番(件数);
             junientity.set連番(連番new);
-            if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
-                    && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
-                junientity.set市町村コード(entity.get市町村コード());
-                junientity.set被保険者番号(entity.get被保険者番号());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_12) {
-                        junientity.set識別コード(識別コード);
-                    } else {
-                        junientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_12) {
-                        junientity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        junientity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_12));
-                    }
-                    junientity.set資格取得日(entity.get資格取得年月日());
-                    junientity.set資格喪失日(entity.get資格喪失年月日());
-                    junientity.set資格被保険者区分(entity.get被保険者区分コード());
-                    junientity.set住所地特例者区分(entity.get住所地特例フラグ());
-                    junientity.set作成日時(entity.get挿入日時());
-                    junientity.set更新日時(entity.get更新日時());
-                }
-            }
-            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                    && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
-                    && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                    && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
-                junientity.set市町村コード(entity.get市町村コード());
-                junientity.set被保険者番号(entity.get被保険者番号());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_12) {
-                        junientity.set識別コード(識別コード);
-                    } else {
-                        junientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_12) {
-                        junientity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        junientity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_12));
-                    }
-                    junientity.set資格取得日(entity.get資格取得年月日());
-                    junientity.set資格喪失日(entity.get資格喪失年月日());
-                    junientity.set資格被保険者区分(entity.get被保険者区分コード());
-                    junientity.set住所地特例者区分(entity.get住所地特例フラグ());
-                    junientity.set受給者区分(区分_1);
-                    junientity.set要介護状態区分コード(entity.get受給者要介護認定状態区分コード());
-                    junientity.set認定有効開始日(entity.get受給者認定有効期間開始年月日());
-                    junientity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
-                    junientity.set受給認定年月日(entity.get受給者認定年月日());
-                }
-                if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
-                    if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
-                        junientity.set作成日時(entity.get挿入日時());
-                    } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
-                        junientity.set作成日時(entity.get受給者挿入日時());
-                    }
-                }
-                if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
-                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
-                        junientity.set更新日時(entity.get更新日時());
-                    } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
-                        junientity.set更新日時(entity.get受給者更新日時());
-                    }
-                }
-            }
-            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                    && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
-                    && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                    && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
-                junientity.set市町村コード(entity.get市町村コード());
-                junientity.set被保険者番号(entity.get被保険者番号());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_12) {
-                        junientity.set識別コード(識別コード);
-                    } else {
-                        junientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_12) {
-                        junientity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        junientity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_12));
-                    }
-                    junientity.set資格取得日(entity.get資格取得年月日());
-                    junientity.set資格喪失日(entity.get資格喪失年月日());
-                    junientity.set資格被保険者区分(entity.get被保険者区分コード());
-                    junientity.set住所地特例者区分(entity.get住所地特例フラグ());
-                    junientity.set作成日時(entity.get挿入日時());
-                    junientity.set更新日時(entity.get更新日時());
-                }
-            }
+            被保険者番号NULL以外の判定12桁(codeHenkanKubun, entity, junientity);
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty())) {
                 junientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
-                    if (受給者識別コード.length() <= 桁目_12) {
-                        junientity.set識別コード(受給者識別コード);
-                    } else {
-                        junientity.set識別コード(受給者識別コード.substring(受給者識別コード.length() - 桁目_12));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get受給者識別コード().value().length() <= 桁目_12) {
-                        junientity.set識別コード(new RString(entity.get受給者識別コード().toString()));
-                    } else {
-                        junientity.set識別コード(new RString(entity.get受給者識別コード().toString()).
-                                substring(entity.get受給者識別コード().value().length() - 桁目_12));
-                    }
-                    junientity.set作成日時(new RString(YMDHMS.now().toString()));
-                    junientity.set更新日時(new RString(YMDHMS.now().toString()));
-                }
+                コード変換区分の判定12桁2(codeHenkanKubun, entity, junientity);
             }
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
@@ -443,6 +336,120 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             junilist.add(junientity);
         }
         return junilist;
+    }
+
+    private void 被保険者番号NULL以外の判定12桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity junientity) {
+        if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
+                && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
+            junientity.set市町村コード(entity.get市町村コード());
+            junientity.set被保険者番号(entity.get被保険者番号());
+            コード変換区分の判定12桁(codeHenkanKubun, entity, junientity);
+        }
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+                && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
+                && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
+            junientity.set市町村コード(entity.get市町村コード());
+            junientity.set被保険者番号(entity.get被保険者番号());
+            コード変換区分と更新日時の判定12桁(codeHenkanKubun, entity, junientity);
+        }
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+                && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
+                && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
+            junientity.set市町村コード(entity.get市町村コード());
+            junientity.set被保険者番号(entity.get被保険者番号());
+            コード変換区分の判定12桁(codeHenkanKubun, entity, junientity);
+        }
+    }
+
+    private void コード変換区分の判定12桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity junientity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
+            if (識別コード.length() <= 桁目_12) {
+                junientity.set識別コード(識別コード);
+            } else {
+                junientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get識別コード().value().length() <= 桁目_12) {
+                junientity.set識別コード(new RString(entity.get識別コード().toString()));
+            } else {
+                junientity.set識別コード(new RString(entity.get識別コード().toString()).
+                        substring(entity.get識別コード().value().length() - 桁目_12));
+            }
+            junientity.set資格取得日(entity.get資格取得年月日());
+            junientity.set資格喪失日(entity.get資格喪失年月日());
+            junientity.set資格被保険者区分(entity.get被保険者区分コード());
+            junientity.set住所地特例者区分(entity.get住所地特例フラグ());
+            junientity.set作成日時(entity.get挿入日時());
+            junientity.set更新日時(entity.get更新日時());
+        }
+    }
+
+    private void コード変換区分と更新日時の判定12桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity junientity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
+            if (識別コード.length() <= 桁目_12) {
+                junientity.set識別コード(識別コード);
+            } else {
+                junientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get識別コード().value().length() <= 桁目_12) {
+                junientity.set識別コード(new RString(entity.get識別コード().toString()));
+            } else {
+                junientity.set識別コード(new RString(entity.get識別コード().toString()).
+                        substring(entity.get識別コード().value().length() - 桁目_12));
+            }
+            junientity.set資格取得日(entity.get資格取得年月日());
+            junientity.set資格喪失日(entity.get資格喪失年月日());
+            junientity.set資格被保険者区分(entity.get被保険者区分コード());
+            junientity.set住所地特例者区分(entity.get住所地特例フラグ());
+            junientity.set受給者区分(区分_1);
+            junientity.set要介護状態区分コード(entity.get受給者要介護認定状態区分コード());
+            junientity.set認定有効開始日(entity.get受給者認定有効期間開始年月日());
+            junientity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
+            junientity.set受給認定年月日(entity.get受給者認定年月日());
+        }
+        if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
+            if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
+                junientity.set作成日時(entity.get挿入日時());
+            } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
+                junientity.set作成日時(entity.get受給者挿入日時());
+            }
+        }
+        if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
+            if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
+                junientity.set更新日時(entity.get更新日時());
+            } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
+                junientity.set更新日時(entity.get受給者更新日時());
+            }
+        }
+    }
+
+    private void コード変換区分の判定12桁2(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity junientity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
+            if (受給者識別コード.length() <= 桁目_12) {
+                junientity.set識別コード(受給者識別コード);
+            } else {
+                junientity.set識別コード(受給者識別コード.substring(受給者識別コード.length() - 桁目_12));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get受給者識別コード().value().length() <= 桁目_12) {
+                junientity.set識別コード(new RString(entity.get受給者識別コード().toString()));
+            } else {
+                junientity.set識別コード(new RString(entity.get受給者識別コード().toString()).
+                        substring(entity.get受給者識別コード().value().length() - 桁目_12));
+            }
+            junientity.set作成日時(new RString(YMDHMS.now().toString()));
+            junientity.set更新日時(new RString(YMDHMS.now().toString()));
+        }
     }
 
     private TashajukiJunitoJugoCSVDataEntity get12桁市町村コード(List<TashajukiJunitoJugoCSVDataEntity> junilist,
@@ -467,6 +474,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
      * @param tashajyukiList 介護住民票個別事項連携情報作成【他社住基】情報Entityリスト
      * @param codeHenkanKubun コード変換区分
      * @return jugolist 介護住民票個別事項連携情報作成【他社住基】15桁CSV用データリスト
+     * @throws NullPointerException 空値
      */
     public SearchResult<TashajukiJunitoJugoCSVDataEntity> getKaigoJyuminhyouTashajukiJugoCSVData(
             List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) throws NullPointerException {
@@ -513,125 +521,11 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             件数 = 件数 + 1;
             RString 連番new = this.get連番(件数);
             jugoentity.set連番(連番new);
-            if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
-                    && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
-                jugoentity.set市町村コード(entity.get市町村コード());
-                jugoentity.set被保険者番号(entity.get被保険者番号());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_15) {
-                        jugoentity.set識別コード(識別コード);
-                    } else {
-                        jugoentity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_15) {
-                        jugoentity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        jugoentity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_15));
-                    }
-                    jugoentity.set資格取得日(entity.get資格取得年月日());
-                    jugoentity.set資格喪失日(entity.get資格喪失年月日());
-                    jugoentity.set資格被保険者区分(entity.get被保険者区分コード());
-                    jugoentity.set住所地特例者区分(entity.get住所地特例フラグ());
-                    jugoentity.set作成日時(entity.get挿入日時());
-                    jugoentity.set更新日時(entity.get更新日時());
-                }
-            }
-            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                    && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
-                    && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                    && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
-                jugoentity.set市町村コード(entity.get市町村コード());
-                jugoentity.set被保険者番号(entity.get被保険者番号());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_15) {
-                        jugoentity.set識別コード(識別コード);
-                    } else {
-                        jugoentity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_15) {
-                        jugoentity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        jugoentity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_15));
-                    }
-                    jugoentity.set資格取得日(entity.get資格取得年月日());
-                    jugoentity.set資格喪失日(entity.get資格喪失年月日());
-                    jugoentity.set資格被保険者区分(entity.get被保険者区分コード());
-                    jugoentity.set住所地特例者区分(entity.get住所地特例フラグ());
-                    jugoentity.set受給者区分(区分_1);
-                    jugoentity.set要介護状態区分コード(entity.get受給者要介護認定状態区分コード());
-                    jugoentity.set認定有効開始日(entity.get受給者認定有効期間開始年月日());
-                    jugoentity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
-                    jugoentity.set受給認定年月日(entity.get受給者認定年月日());
-                }
-                if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
-                    if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
-                        jugoentity.set作成日時(entity.get挿入日時());
-                    } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
-                        jugoentity.set作成日時(entity.get受給者挿入日時());
-                    }
-                }
-                if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
-                    if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
-                        jugoentity.set更新日時(entity.get更新日時());
-                    } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
-                        jugoentity.set更新日時(entity.get受給者更新日時());
-                    }
-                }
-            }
-            if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
-                    && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
-                    && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
-                    && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
-                jugoentity.set市町村コード(entity.get市町村コード());
-                jugoentity.set被保険者番号(entity.get被保険者番号());
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
-                    if (識別コード.length() <= 桁目_15) {
-                        jugoentity.set識別コード(識別コード);
-                    } else {
-                        jugoentity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get識別コード().value().length() <= 桁目_15) {
-                        jugoentity.set識別コード(new RString(entity.get識別コード().toString()));
-                    } else {
-                        jugoentity.set識別コード(new RString(entity.get識別コード().toString()).
-                                substring(entity.get識別コード().value().length() - 桁目_15));
-                    }
-                    jugoentity.set資格取得日(entity.get資格取得年月日());
-                    jugoentity.set資格喪失日(entity.get資格喪失年月日());
-                    jugoentity.set資格被保険者区分(entity.get被保険者区分コード());
-                    jugoentity.set住所地特例者区分(entity.get住所地特例フラグ());
-                    jugoentity.set作成日時(entity.get挿入日時());
-                    jugoentity.set更新日時(entity.get更新日時());
-                }
-            }
+            被保険者番号NULL以外の判定15桁(codeHenkanKubun, entity, jugoentity);
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty())) {
                 jugoentity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
-                if (codeHenkanKubun.equals(区分_1)) {
-                    RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
-                    if (受給者識別コード.length() <= 桁目_15) {
-                        jugoentity.set識別コード(受給者識別コード);
-                    } else {
-                        jugoentity.set識別コード(受給者識別コード.substring(受給者識別コード.length() - 桁目_15));
-                    }
-                } else if (codeHenkanKubun.equals(区分_0)) {
-                    if (entity.get受給者識別コード().value().length() <= 桁目_15) {
-                        jugoentity.set識別コード(new RString(entity.get受給者識別コード().toString()));
-                    } else {
-                        jugoentity.set識別コード(new RString(entity.get受給者識別コード().toString()).
-                                substring(entity.get受給者識別コード().value().length() - 桁目_15));
-                    }
-                    jugoentity.set作成日時(new RString(YMDHMS.now().toString()));
-                    jugoentity.set更新日時(new RString(YMDHMS.now().toString()));
-                }
+                コード変換区分の判定15桁2(codeHenkanKubun, entity, jugoentity);
             }
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
@@ -640,6 +534,120 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             jugolist.add(jugoentity);
         }
         return jugolist;
+    }
+
+    private void 被保険者番号NULL以外の判定15桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity jugoentity) {
+        if ((entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty())
+                && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
+            jugoentity.set市町村コード(entity.get市町村コード());
+            jugoentity.set被保険者番号(entity.get被保険者番号());
+            コード変換区分の判定15桁(codeHenkanKubun, entity, jugoentity);
+        }
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+                && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
+                && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
+            jugoentity.set市町村コード(entity.get市町村コード());
+            jugoentity.set被保険者番号(entity.get被保険者番号());
+            コード変換区分と更新日時の判定15桁(codeHenkanKubun, entity, jugoentity);
+        }
+        if ((entity.get被保険者番号() != null && entity.get受給者被保険者番号() != null
+                && entity.get資格取得年月日() != null && entity.get受給者認定有効期間開始年月日() != null)
+                && (!entity.get被保険者番号().isEmpty() && !entity.get受給者被保険者番号().isEmpty()
+                && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
+            jugoentity.set市町村コード(entity.get市町村コード());
+            jugoentity.set被保険者番号(entity.get被保険者番号());
+            コード変換区分の判定15桁(codeHenkanKubun, entity, jugoentity);
+        }
+    }
+
+    private void コード変換区分の判定15桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity jugoentity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
+            if (識別コード.length() <= 桁目_15) {
+                jugoentity.set識別コード(識別コード);
+            } else {
+                jugoentity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get識別コード().value().length() <= 桁目_15) {
+                jugoentity.set識別コード(new RString(entity.get識別コード().toString()));
+            } else {
+                jugoentity.set識別コード(new RString(entity.get識別コード().toString()).
+                        substring(entity.get識別コード().value().length() - 桁目_15));
+            }
+            jugoentity.set資格取得日(entity.get資格取得年月日());
+            jugoentity.set資格喪失日(entity.get資格喪失年月日());
+            jugoentity.set資格被保険者区分(entity.get被保険者区分コード());
+            jugoentity.set住所地特例者区分(entity.get住所地特例フラグ());
+            jugoentity.set作成日時(entity.get挿入日時());
+            jugoentity.set更新日時(entity.get更新日時());
+        }
+    }
+
+    private void コード変換区分と更新日時の判定15桁(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity jugoentity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
+            if (識別コード.length() <= 桁目_15) {
+                jugoentity.set識別コード(識別コード);
+            } else {
+                jugoentity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get識別コード().value().length() <= 桁目_15) {
+                jugoentity.set識別コード(new RString(entity.get識別コード().toString()));
+            } else {
+                jugoentity.set識別コード(new RString(entity.get識別コード().toString()).
+                        substring(entity.get識別コード().value().length() - 桁目_15));
+            }
+            jugoentity.set資格取得日(entity.get資格取得年月日());
+            jugoentity.set資格喪失日(entity.get資格喪失年月日());
+            jugoentity.set資格被保険者区分(entity.get被保険者区分コード());
+            jugoentity.set住所地特例者区分(entity.get住所地特例フラグ());
+            jugoentity.set受給者区分(区分_1);
+            jugoentity.set要介護状態区分コード(entity.get受給者要介護認定状態区分コード());
+            jugoentity.set認定有効開始日(entity.get受給者認定有効期間開始年月日());
+            jugoentity.set認定有効終了日(entity.get受給者認定有効期間終了年月日());
+            jugoentity.set受給認定年月日(entity.get受給者認定年月日());
+        }
+        if (entity.get受給者挿入日時() != null && entity.get挿入日時() != null) {
+            if (entity.get受給者挿入日時().compareTo(entity.get挿入日時()) <= 0) {
+                jugoentity.set作成日時(entity.get挿入日時());
+            } else if (entity.get挿入日時().compareTo(entity.get受給者挿入日時()) < 0) {
+                jugoentity.set作成日時(entity.get受給者挿入日時());
+            }
+        }
+        if (entity.get受給者更新日時() != null && entity.get更新日時() != null) {
+            if (entity.get受給者更新日時().compareTo(entity.get更新日時()) <= 0) {
+                jugoentity.set更新日時(entity.get更新日時());
+            } else if (entity.get更新日時().compareTo(entity.get受給者更新日時()) < 0) {
+                jugoentity.set更新日時(entity.get受給者更新日時());
+            }
+        }
+    }
+
+    private void コード変換区分の判定15桁2(RString codeHenkanKubun,
+            KaigoJuminhyoTashaJukiDataEntity entity, TashajukiJunitoJugoCSVDataEntity jugoentity) {
+        if (codeHenkanKubun.equals(区分_1)) {
+            RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
+            if (受給者識別コード.length() <= 桁目_15) {
+                jugoentity.set識別コード(受給者識別コード);
+            } else {
+                jugoentity.set識別コード(受給者識別コード.substring(受給者識別コード.length() - 桁目_15));
+            }
+        } else if (codeHenkanKubun.equals(区分_0)) {
+            if (entity.get受給者識別コード().value().length() <= 桁目_15) {
+                jugoentity.set識別コード(new RString(entity.get受給者識別コード().toString()));
+            } else {
+                jugoentity.set識別コード(new RString(entity.get受給者識別コード().toString()).
+                        substring(entity.get受給者識別コード().value().length() - 桁目_15));
+            }
+            jugoentity.set作成日時(new RString(YMDHMS.now().toString()));
+            jugoentity.set更新日時(new RString(YMDHMS.now().toString()));
+        }
     }
 
     private TashajukiJunitoJugoCSVDataEntity get15桁市町村コード(List<TashajukiJunitoJugoCSVDataEntity> jugolist,

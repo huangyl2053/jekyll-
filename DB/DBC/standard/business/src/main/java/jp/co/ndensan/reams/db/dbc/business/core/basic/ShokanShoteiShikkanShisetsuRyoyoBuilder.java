@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShokanShoteiShikkanShisetsuRyoyo}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
 
@@ -131,7 +133,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時傷病名１(RString 緊急時傷病名１) {
-        requireNonNull(緊急時傷病名１, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時傷病名１"));
         entity.setKinkyuShobyoName1(緊急時傷病名１);
         return this;
     }
@@ -143,7 +144,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時傷病名２(RString 緊急時傷病名２) {
-        requireNonNull(緊急時傷病名２, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時傷病名２"));
         entity.setKinkyuShobyoName2(緊急時傷病名２);
         return this;
     }
@@ -155,7 +155,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時傷病名３(RString 緊急時傷病名３) {
-        requireNonNull(緊急時傷病名３, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時傷病名３"));
         entity.setKinkyuShobyoName3(緊急時傷病名３);
         return this;
     }
@@ -167,7 +166,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時治療開始年月日１(FlexibleDate 緊急時治療開始年月日１) {
-        requireNonNull(緊急時治療開始年月日１, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時治療開始年月日１"));
         entity.setKinkyuChiryoKaishiYMD1(緊急時治療開始年月日１);
         return this;
     }
@@ -179,7 +177,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時治療開始年月日２(FlexibleDate 緊急時治療開始年月日２) {
-        requireNonNull(緊急時治療開始年月日２, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時治療開始年月日２"));
         entity.setKinkyuChiryoKaishiYMD2(緊急時治療開始年月日２);
         return this;
     }
@@ -191,7 +188,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set緊急時治療開始年月日３(FlexibleDate 緊急時治療開始年月日３) {
-        requireNonNull(緊急時治療開始年月日３, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時治療開始年月日３"));
         entity.setKinkyuChiryoKaishiYMD3(緊急時治療開始年月日３);
         return this;
     }
@@ -215,7 +211,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set往診医療機関名(RString 往診医療機関名) {
-        requireNonNull(往診医療機関名, UrSystemErrorMessages.値がnull.getReplacedMessage("往診医療機関名"));
         entity.setOshinIryoKikanName(往診医療機関名);
         return this;
     }
@@ -239,7 +234,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set通院医療機関名(RString 通院医療機関名) {
-        requireNonNull(通院医療機関名, UrSystemErrorMessages.値がnull.getReplacedMessage("通院医療機関名"));
         entity.setTsuinKikanName(通院医療機関名);
         return this;
     }
@@ -347,7 +341,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１(RString 摘要１) {
-        requireNonNull(摘要１, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１"));
         entity.setTekiyo1(摘要１);
         return this;
     }
@@ -359,7 +352,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要２(RString 摘要２) {
-        requireNonNull(摘要２, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要２"));
         entity.setTekiyo2(摘要２);
         return this;
     }
@@ -371,7 +363,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要３(RString 摘要３) {
-        requireNonNull(摘要３, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要３"));
         entity.setTekiyo3(摘要３);
         return this;
     }
@@ -383,7 +374,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要４(RString 摘要４) {
-        requireNonNull(摘要４, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要４"));
         entity.setTekiyo4(摘要４);
         return this;
     }
@@ -395,7 +385,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要５(RString 摘要５) {
-        requireNonNull(摘要５, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要５"));
         entity.setTekiyo5(摘要５);
         return this;
     }
@@ -407,7 +396,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要６(RString 摘要６) {
-        requireNonNull(摘要６, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要６"));
         entity.setTekiyo6(摘要６);
         return this;
     }
@@ -419,7 +407,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要７(RString 摘要７) {
-        requireNonNull(摘要７, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要７"));
         entity.setTekiyo7(摘要７);
         return this;
     }
@@ -431,7 +418,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要８(RString 摘要８) {
-        requireNonNull(摘要８, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要８"));
         entity.setTekiyo8(摘要８);
         return this;
     }
@@ -443,7 +429,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要９(RString 摘要９) {
-        requireNonNull(摘要９, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要９"));
         entity.setTekiyo9(摘要９);
         return this;
     }
@@ -455,7 +440,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１０(RString 摘要１０) {
-        requireNonNull(摘要１０, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１０"));
         entity.setTekiyo10(摘要１０);
         return this;
     }
@@ -467,7 +451,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１１(RString 摘要１１) {
-        requireNonNull(摘要１１, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１１"));
         entity.setTekiyo11(摘要１１);
         return this;
     }
@@ -479,7 +462,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１２(RString 摘要１２) {
-        requireNonNull(摘要１２, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１２"));
         entity.setTekiyo12(摘要１２);
         return this;
     }
@@ -491,7 +473,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１３(RString 摘要１３) {
-        requireNonNull(摘要１３, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１３"));
         entity.setTekiyo13(摘要１３);
         return this;
     }
@@ -503,7 +484,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１４(RString 摘要１４) {
-        requireNonNull(摘要１４, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１４"));
         entity.setTekiyo14(摘要１４);
         return this;
     }
@@ -515,7 +495,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１５(RString 摘要１５) {
-        requireNonNull(摘要１５, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１５"));
         entity.setTekiyo15(摘要１５);
         return this;
     }
@@ -527,7 +506,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１６(RString 摘要１６) {
-        requireNonNull(摘要１６, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１６"));
         entity.setTekiyo16(摘要１６);
         return this;
     }
@@ -539,7 +517,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１７(RString 摘要１７) {
-        requireNonNull(摘要１７, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１７"));
         entity.setTekiyo17(摘要１７);
         return this;
     }
@@ -551,7 +528,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１８(RString 摘要１８) {
-        requireNonNull(摘要１８, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１８"));
         entity.setTekiyo18(摘要１８);
         return this;
     }
@@ -563,7 +539,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要１９(RString 摘要１９) {
-        requireNonNull(摘要１９, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１９"));
         entity.setTekiyo19(摘要１９);
         return this;
     }
@@ -575,7 +550,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set摘要２０(RString 摘要２０) {
-        requireNonNull(摘要２０, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要２０"));
         entity.setTekiyo20(摘要２０);
         return this;
     }
@@ -599,7 +573,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費傷病名１(RString 所定疾患施設療養費傷病名１) {
-        requireNonNull(所定疾患施設療養費傷病名１, UrSystemErrorMessages.値がnull.getReplacedMessage("所定疾患施設療養費傷病名１"));
         entity.setShoteiShikkanShobyoName1(所定疾患施設療養費傷病名１);
         return this;
     }
@@ -611,7 +584,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費傷病名２(RString 所定疾患施設療養費傷病名２) {
-        requireNonNull(所定疾患施設療養費傷病名２, UrSystemErrorMessages.値がnull.getReplacedMessage("所定疾患施設療養費傷病名２"));
         entity.setShoteiShikkanShobyoName2(所定疾患施設療養費傷病名２);
         return this;
     }
@@ -623,7 +595,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費傷病名３(RString 所定疾患施設療養費傷病名３) {
-        requireNonNull(所定疾患施設療養費傷病名３, UrSystemErrorMessages.値がnull.getReplacedMessage("所定疾患施設療養費傷病名３"));
         entity.setShoteiShikkanShobyoName3(所定疾患施設療養費傷病名３);
         return this;
     }
@@ -635,7 +606,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費開始年月日１(FlexibleDate 所定疾患施設療養費開始年月日１) {
-        requireNonNull(所定疾患施設療養費開始年月日１, UrSystemErrorMessages.値がnull.getReplacedMessage("所定疾患施設療養費開始年月日１"));
         entity.setShoteiShikkanShobyoKaishiYMD1(所定疾患施設療養費開始年月日１);
         return this;
     }
@@ -647,7 +617,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費開始年月日２(FlexibleDate 所定疾患施設療養費開始年月日２) {
-        requireNonNull(所定疾患施設療養費開始年月日２, UrSystemErrorMessages.値がnull.getReplacedMessage("所定疾患施設療養費開始年月日２"));
         entity.setShoteiShikkanShobyoKaishiYMD2(所定疾患施設療養費開始年月日２);
         return this;
     }
@@ -659,7 +628,6 @@ public class ShokanShoteiShikkanShisetsuRyoyoBuilder {
      * @return {@link ShokanShoteiShikkanShisetsuRyoyoBuilder}
      */
     public ShokanShoteiShikkanShisetsuRyoyoBuilder set所定疾患施設療養費開始年月日３(FlexibleDate 所定疾患施設療養費開始年月日３) {
-        requireNonNull(所定疾患施設療養費開始年月日３, UrSystemErrorMessages.値がnull.getReplacedMessage("所定疾患施設療養費開始年月日３"));
         entity.setShoteiShikkanShobyoKaishiYMD3(所定疾患施設療養費開始年月日３);
         return this;
     }

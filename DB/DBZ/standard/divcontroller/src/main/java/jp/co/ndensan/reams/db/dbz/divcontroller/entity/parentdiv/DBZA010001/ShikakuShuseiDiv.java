@@ -1,19 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShutokuKeiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.SoushitsuKeiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShikakuShusei のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+
+/**
+ * ShikakuShusei のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShikakuShuseiDiv extends Panel {
@@ -23,6 +24,7 @@ public class ShikakuShuseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("chkMushi")
     private CheckBoxList chkMushi;
     @JsonProperty("txtFusugoNaiyo")
@@ -65,7 +67,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("chkMushi")
     public void setChkMushi(CheckBoxList chkMushi) {
-        this.chkMushi=chkMushi;
+        this.chkMushi = chkMushi;
     }
 
     @JsonProperty("txtFusugoNaiyo")
@@ -75,7 +77,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtFusugoNaiyo")
     public void setTxtFusugoNaiyo(TextBox txtFusugoNaiyo) {
-        this.txtFusugoNaiyo=txtFusugoNaiyo;
+        this.txtFusugoNaiyo = txtFusugoNaiyo;
     }
 
     @JsonProperty("txtHihoNo")
@@ -85,7 +87,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtHihoNo")
     public void setTxtHihoNo(TextBoxCode txtHihoNo) {
-        this.txtHihoNo=txtHihoNo;
+        this.txtHihoNo = txtHihoNo;
     }
 
     @JsonProperty("txtShikibetsuCode")
@@ -95,7 +97,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtShikibetsuCode")
     public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
-        this.txtShikibetsuCode=txtShikibetsuCode;
+        this.txtShikibetsuCode = txtShikibetsuCode;
     }
 
     @JsonProperty("txtJuminShubetsu")
@@ -105,7 +107,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtJuminShubetsu")
     public void setTxtJuminShubetsu(TextBox txtJuminShubetsu) {
-        this.txtJuminShubetsu=txtJuminShubetsu;
+        this.txtJuminShubetsu = txtJuminShubetsu;
     }
 
     @JsonProperty("txtSeibetsu")
@@ -115,7 +117,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtSeibetsu")
     public void setTxtSeibetsu(TextBox txtSeibetsu) {
-        this.txtSeibetsu=txtSeibetsu;
+        this.txtSeibetsu = txtSeibetsu;
     }
 
     @JsonProperty("txtUmareYmd")
@@ -125,7 +127,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtUmareYmd")
     public void setTxtUmareYmd(TextBoxFlexibleDate txtUmareYmd) {
-        this.txtUmareYmd=txtUmareYmd;
+        this.txtUmareYmd = txtUmareYmd;
     }
 
     @JsonProperty("txtNenrei")
@@ -135,7 +137,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtNenrei")
     public void setTxtNenrei(TextBox txtNenrei) {
-        this.txtNenrei=txtNenrei;
+        this.txtNenrei = txtNenrei;
     }
 
     @JsonProperty("txtSelectedRow")
@@ -145,7 +147,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtSelectedRow")
     public void setTxtSelectedRow(TextBox txtSelectedRow) {
-        this.txtSelectedRow=txtSelectedRow;
+        this.txtSelectedRow = txtSelectedRow;
     }
 
     @JsonProperty("txtShimei")
@@ -155,7 +157,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("txtShimei")
     public void setTxtShimei(TextBox txtShimei) {
-        this.txtShimei=txtShimei;
+        this.txtShimei = txtShimei;
     }
 
     @JsonProperty("ShutokuKei")
@@ -165,7 +167,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("ShutokuKei")
     public void setShutokuKei(ShutokuKeiDiv ShutokuKei) {
-        this.ShutokuKei=ShutokuKei;
+        this.ShutokuKei = ShutokuKei;
     }
 
     @JsonProperty("SoushitsuKei")
@@ -175,7 +177,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("SoushitsuKei")
     public void setSoushitsuKei(SoushitsuKeiDiv SoushitsuKei) {
-        this.SoushitsuKei=SoushitsuKei;
+        this.SoushitsuKei = SoushitsuKei;
     }
 
     @JsonProperty("btnCancel")
@@ -185,7 +187,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
-        this.btnCancel=btnCancel;
+        this.btnCancel = btnCancel;
     }
 
     @JsonProperty("btnCommitDialog")
@@ -195,7 +197,7 @@ public class ShikakuShuseiDiv extends Panel {
 
     @JsonProperty("btnCommitDialog")
     public void setBtnCommitDialog(ButtonDialog btnCommitDialog) {
-        this.btnCommitDialog=btnCommitDialog;
+        this.btnCommitDialog = btnCommitDialog;
     }
 
 }

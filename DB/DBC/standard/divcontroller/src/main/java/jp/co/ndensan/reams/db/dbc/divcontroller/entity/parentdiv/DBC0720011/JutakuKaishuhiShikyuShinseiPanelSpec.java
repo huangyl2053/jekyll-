@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.dbc0720011.MishinsaShikyuShinseiListHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0720011.MishinsaShikyuShinseiListHandler;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
  * 住宅改修費支給申請一括審査・決定画面JutakuKaishuhiShikyuShinseiPanelSpec
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public enum JutakuKaishuhiShikyuShinseiPanelSpec implements IPredicate<JutakuKaishuhiShikyuShinseiPanelDiv> {
 
@@ -38,6 +40,13 @@ public enum JutakuKaishuhiShikyuShinseiPanelSpec implements IPredicate<JutakuKai
                 @Override
                 public boolean apply(JutakuKaishuhiShikyuShinseiPanelDiv div) {
                     return MishinsaShikyuShinseiListHandler.is未審査(div);
+                }
+
+            },
+    決定日のチェック {
+                @Override
+                public boolean apply(JutakuKaishuhiShikyuShinseiPanelDiv div) {
+                    return MishinsaShikyuShinseiListHandler.is決定日入力(div);
                 }
 
             }

@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokusokutaisho
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 主治医意見書督促対象者一覧表ヘッダエディターのインターフェースクラスです
+ * 主治医意見書督促対象者一覧表ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0060-030 hezhenzhen
  *
  */
 public interface INinteiChosaTokusokuTaishoshaIchiranhyoEditor extends IReportEditor<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {

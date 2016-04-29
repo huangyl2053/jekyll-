@@ -4,6 +4,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 地区市町村テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 public enum DbT5224ChikuShichoson implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">

@@ -10,7 +10,6 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJoho;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.ShikibetsuTaishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaishadaichojoho.ITekiyoJogaiShisetuJyohoMapper;
@@ -20,18 +19,30 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.jushoedit.KaigoJushoEditor;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -48,6 +59,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 適用除外者台帳するクラスです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 public class TekiyoJogaishaDaichoJohoFinder {
 
@@ -67,6 +80,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
     private static final RString 行政区 = new RString("行政区");
     private static final RString 転入前住所 = new RString("転入前住所");
     private static final RString 連絡先 = new RString("連絡先");
+    private final RString 帳票分類ID = new RString("DBA100010_TekiyojogaishaDaicho");
     private final MapperProvider mapperProvider;
 
     /**
@@ -113,7 +127,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
         TekiyoJogaiShisetuJyohoParameter parameter = TekiyoJogaiShisetuJyohoParameter.createParamFor識別コード(
                 ShikibetsuCode.EMPTY, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         ITekiyoJogaiShisetuJyohoMapper daichoJohoMapper = mapperProvider.create(ITekiyoJogaiShisetuJyohoMapper.class);
-        ShikibetsuTaishoRelateEntity 宛名情報PSM = daichoJohoMapper.select宛名情報(parameter);
+        UaFt200FindShikibetsuTaishoEntity 宛名情報PSM = daichoJohoMapper.select宛名情報(parameter);
         if (宛名情報PSM == null) {
             TekiyoJogaishaDaichoJohoRelateEntity 適用除外者台帳情報Entity = new TekiyoJogaishaDaichoJohoRelateEntity();
             適用除外者台帳情報Entity.set印刷日時(get印刷日時());
@@ -133,10 +147,10 @@ public class TekiyoJogaishaDaichoJohoFinder {
 
         for (TekiyoJogaiShisetuJyohoRelateEntity entity : 適用除外施設情報List) {
             TekiyoJogaishaDaichoJohoRelateEntity 適用除外者台帳情報Entity = new TekiyoJogaishaDaichoJohoRelateEntity();
-            適用除外者台帳情報Entity.set市町村コード(宛名情報PSM.get現全国地方公共団体コード().getColumnValue());
+            適用除外者台帳情報Entity.set市町村コード(nullToEmpty(宛名情報PSM.getGenLasdecCode()));
             適用除外者台帳情報Entity.set市町村名称(市町村名称);
             適用除外者台帳情報Entity.set電話番号タイトル(連絡先);
-            適用除外者台帳情報Entity.set電話番号１(宛名情報PSM.get連絡先1().getColumnValue());
+            適用除外者台帳情報Entity.set電話番号１(nullToEmpty(宛名情報PSM.getRenrakusaki1()));
             適用除外者台帳情報Entity.set電話番号２(RString.EMPTY);
             適用除外者台帳情報Entity.set連番(entity.get連番());
             適用除外者台帳情報Entity.set適用年月日(日付フォーマット(entity.get適用年月日()));
@@ -192,8 +206,8 @@ public class TekiyoJogaishaDaichoJohoFinder {
         for (int i = 0; i < shisetuJyohoList.size(); i++) {
             TekiyoJogaiShisetuJyohoRelateEntity entity = shisetuJyohoList.get(i);
             entity.set連番(i + 1);
-            RString 適用除外適用事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0119"), new Code(entity.get適用除外適用事由コード()));
-            RString 適用除外解除事由名称 = CodeMaster.getCodeMeisho(new CodeShubetsu("0123"), new Code(entity.get適用除外解除事由コード()));
+            RString 適用除外適用事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0009"), new Code(entity.get適用除外適用事由コード()));
+            RString 適用除外解除事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0012"), new Code(entity.get適用除外解除事由コード()));
             entity.set適用除外適用事由名称(RString.EMPTY);
             entity.set適用除外解除事由名称(RString.EMPTY);
             if (適用除外適用事由名称 != null && !適用除外適用事由名称.isEmpty()) {
@@ -208,34 +222,35 @@ public class TekiyoJogaishaDaichoJohoFinder {
 
     private SearchResult<TekiyoJogaishaDaichoJoho> set適用除外者台帳情報(
             TekiyoJogaishaDaichoJohoRelateEntity 適用除外者台帳情報Entity,
-            ShikibetsuTaishoRelateEntity 宛名情報PSM) {
+            UaFt200FindShikibetsuTaishoEntity 宛名情報PSM) {
         List<TekiyoJogaishaDaichoJoho> daichoJohoList = new ArrayList<>();
         適用除外者台帳情報Entity.set印刷日時(get印刷日時());
+        適用除外者台帳情報Entity.setタイトル(new RString("介護保険　適用除外者台帳"));
         適用除外者台帳情報Entity.set状態(状態);
-        適用除外者台帳情報Entity.set生年月日(new RString(宛名情報PSM.get生年月日().toString()));
-        if (性別_男.equals(宛名情報PSM.get性別コード())) {
+        適用除外者台帳情報Entity.set生年月日(nullToEmpty(宛名情報PSM.getSeinengappiYMD()));
+        if (性別_男.equals(宛名情報PSM.getSeibetsuCode())) {
             適用除外者台帳情報Entity.set性別(男);
         } else {
             適用除外者台帳情報Entity.set性別(女);
         }
-        適用除外者台帳情報Entity.set世帯コード(宛名情報PSM.get世帯コード().getColumnValue());
-        適用除外者台帳情報Entity.set識別コード(宛名情報PSM.get識別コード().getColumnValue());
-        適用除外者台帳情報Entity.set氏名カナ(宛名情報PSM.getカナ名称().getColumnValue());
-        適用除外者台帳情報Entity.set氏名(宛名情報PSM.get名称().getColumnValue());
-        適用除外者台帳情報Entity.set地区コード1(宛名情報PSM.get地区コード1().getColumnValue());
-        適用除外者台帳情報Entity.set地区タイトル1(宛名情報PSM.get地区名1());
-        適用除外者台帳情報Entity.set地区コード2(宛名情報PSM.get地区コード2().getColumnValue());
-        適用除外者台帳情報Entity.set地区タイトル2(宛名情報PSM.get地区名2());
-        適用除外者台帳情報Entity.set地区コード3(宛名情報PSM.get地区コード3().getColumnValue());
-        適用除外者台帳情報Entity.set地区タイトル3(宛名情報PSM.get地区名3());
-        適用除外者台帳情報Entity.set住所1(get住所の編集(宛名情報PSM.get住所().getColumnValue(), 宛名情報PSM.get住所().getColumnValue().length()));
+        適用除外者台帳情報Entity.set世帯コード(nullToEmpty(宛名情報PSM.getSetaiCode()));
+        適用除外者台帳情報Entity.set識別コード(nullToEmpty(宛名情報PSM.getShikibetsuCode()));
+        適用除外者台帳情報Entity.set氏名カナ(nullToEmpty(宛名情報PSM.getKanaMeisho()));
+        適用除外者台帳情報Entity.set氏名(nullToEmpty(宛名情報PSM.getMeisho()));
+        適用除外者台帳情報Entity.set地区コード1(nullToEmpty(宛名情報PSM.getChikuCode1()));
+        適用除外者台帳情報Entity.set地区タイトル1(宛名情報PSM.getChikuName1());
+        適用除外者台帳情報Entity.set地区コード2(nullToEmpty(宛名情報PSM.getChikuCode2()));
+        適用除外者台帳情報Entity.set地区タイトル2(宛名情報PSM.getChikuName2());
+        適用除外者台帳情報Entity.set地区コード3(nullToEmpty(宛名情報PSM.getChikuCode3()));
+        適用除外者台帳情報Entity.set地区タイトル3(宛名情報PSM.getChikuName3());
+        適用除外者台帳情報Entity.set住所1(get住所の編集(ShikibetsuTaishoFactory.createKojin(宛名情報PSM).get住所()));
         適用除外者台帳情報Entity.set住所タイトル1(住所);
-        適用除外者台帳情報Entity.set住所コード(宛名情報PSM.get全国住所コード().getColumnValue());
+        適用除外者台帳情報Entity.set住所コード(nullToEmpty(宛名情報PSM.getZenkokuJushoCode()));
         適用除外者台帳情報Entity.set行政区タイトル(行政区);
-        適用除外者台帳情報Entity.set行政区コード(宛名情報PSM.get行政区コード().getColumnValue());
-        適用除外者台帳情報Entity.set住所2(get住所の編集(宛名情報PSM.get転入前住所().getColumnValue(), 宛名情報PSM.get転入前住所().getColumnValue().length()));
+        適用除外者台帳情報Entity.set行政区コード(nullToEmpty(宛名情報PSM.getGyoseikuCode()));
+        適用除外者台帳情報Entity.set住所2(get住所の編集(ShikibetsuTaishoFactory.createKojin(宛名情報PSM).get転入前()));
         適用除外者台帳情報Entity.set住所タイトル2(転入前住所);
-        適用除外者台帳情報Entity.set住所コード2(宛名情報PSM.get転入前全国住所コード().getColumnValue());
+        適用除外者台帳情報Entity.set住所コード2(nullToEmpty(宛名情報PSM.getTennyumaeZenkokuJushoCode()));
         daichoJohoList.add(new TekiyoJogaishaDaichoJoho(適用除外者台帳情報Entity));
         return SearchResult.of(daichoJohoList, 0, false);
     }
@@ -273,33 +288,38 @@ public class TekiyoJogaishaDaichoJohoFinder {
         return 市町村名称;
     }
 
-    private RString get住所の編集(RString 住所, int 住所_LENGTH) {
+    private RString get住所の編集(IJusho 住所クラス) {
+        RString 編集後住所 = new KaigoJushoEditor().create編集後住所(住所クラス, SubGyomuCode.DBA介護資格, 帳票分類ID);
+        if (RString.isNullOrEmpty(編集後住所)) {
+            return RString.EMPTY;
+        }
+        int 住所_LENGTH = 編集後住所.length();
         if (住所_LENGTH_40 < 住所_LENGTH && 住所_LENGTH <= 住所_LENGTH_80) {
             RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_40))
+            stringBuffer.append(編集後住所.substringEmptyOnError(0, 住所_LENGTH_40))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH));
+                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH));
             return stringBuffer.toRString();
         }
         if (住所_LENGTH_80 < 住所_LENGTH && 住所_LENGTH <= 住所_LENGTH_120) {
             RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_40))
+            stringBuffer.append(編集後住所.substringEmptyOnError(0, 住所_LENGTH_40))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
+                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH));
+                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH));
             return stringBuffer.toRString();
         }
         if (住所_LENGTH_120 < 住所_LENGTH) {
             RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(住所.substringEmptyOnError(0, 住所_LENGTH_40))
+            stringBuffer.append(編集後住所.substringEmptyOnError(0, 住所_LENGTH_40))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
+                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
                     .append(改行)
-                    .append(住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH_120));
+                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH_120));
             return stringBuffer.toRString();
         }
-        return 住所;
+        return 編集後住所;
     }
 
     private RString get印刷日時() {
@@ -334,5 +354,75 @@ public class TekiyoJogaishaDaichoJohoFinder {
             return RString.EMPTY;
         }
         return 郵便.getEditedYubinNo();
+    }
+
+    private RString nullToEmpty(TelNo 電話番号) {
+        if (電話番号 == null || 電話番号.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 電話番号.getColumnValue();
+    }
+
+    private RString nullToEmpty(LasdecCode 市町村コード) {
+        if (市町村コード == null || 市町村コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 市町村コード.getColumnValue();
+    }
+
+    private RString nullToEmpty(SetaiCode 世帯コード) {
+        if (世帯コード == null || 世帯コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 世帯コード.getColumnValue();
+    }
+
+    private RString nullToEmpty(FlexibleDate 生年月日) {
+        if (生年月日 == null || 生年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return new RString(生年月日.toString());
+    }
+
+    private RString nullToEmpty(ShikibetsuCode 識別コード) {
+        if (識別コード == null || 識別コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 識別コード.getColumnValue();
+    }
+
+    private RString nullToEmpty(AtenaKanaMeisho 氏名カナ) {
+        if (氏名カナ == null || 氏名カナ.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 氏名カナ.getColumnValue();
+    }
+
+    private RString nullToEmpty(AtenaMeisho 氏名) {
+        if (氏名 == null || 氏名.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 氏名.getColumnValue();
+    }
+
+    private RString nullToEmpty(ChikuCode 地区コード) {
+        if (地区コード == null || 地区コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 地区コード.getColumnValue();
+    }
+
+    private RString nullToEmpty(ZenkokuJushoCode 住所コード) {
+        if (住所コード == null || 住所コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 住所コード.getColumnValue();
+    }
+
+    private RString nullToEmpty(GyoseikuCode 行政区コード) {
+        if (行政区コード == null || 行政区コード.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 行政区コード.getColumnValue();
     }
 }

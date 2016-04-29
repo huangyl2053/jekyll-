@@ -8,15 +8,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001;
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
  * dgShinseiJoho_Row のクラスファイル 
- * 
  * @author 自動生成
  */
 

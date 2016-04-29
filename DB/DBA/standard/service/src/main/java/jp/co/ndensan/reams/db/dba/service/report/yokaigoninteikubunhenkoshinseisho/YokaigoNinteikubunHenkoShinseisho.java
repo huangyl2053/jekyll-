@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dba.entity.report.yokaigoninteikbnhenkoshinseisho.YokaigoNinteikbnHenkoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.yokaigoninteikubunhenkoshinseisho.IYokaigoNinteikubunHenkoShinseishoMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -62,8 +62,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 要介護認定区分変更申請書のPrintServiceです。
+ *
+ * @reamsid_L DBA-0540-640 lishengli
  */
 public class YokaigoNinteikubunHenkoShinseisho {
 
@@ -153,11 +154,12 @@ public class YokaigoNinteikubunHenkoShinseisho {
         RString 認定有効期間開始 = RString.EMPTY;
         RString 認定有効期間終了 = RString.EMPTY;
         if (entity != null) {
-            if (entity.getYokaigoJotaiKubunCode() != null && 認定支援申請以外.equals(entity.getShinseishoKubun())) {
-                要介護状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(entity.getShinseishoKubun())).getName();
+            Code 要介護認定状態区分コード = entity.getYokaigoJotaiKubunCode();
+            if (要介護認定状態区分コード != null && 認定支援申請以外.equals(entity.getShinseishoKubun())) {
+                要介護状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(要介護認定状態区分コード)).getName();
             }
-            if (entity.getYokaigoJotaiKubunCode() != null && 認定支援申請.equals(entity.getShinseishoKubun())) {
-                要支援状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(entity.getShinseishoKubun())).getName();
+            if (要介護認定状態区分コード != null && 認定支援申請.equals(entity.getShinseishoKubun())) {
+                要支援状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(要介護認定状態区分コード)).getName();
             }
             if (entity.getNinteiYukoKikanKaishiYMD() != null) {
                 認定有効期間開始 = パターン12(entity.getNinteiYukoKikanKaishiYMD());

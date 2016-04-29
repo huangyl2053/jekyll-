@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteifuka.BatchTyouhyouEn
 
 /**
  * バッチ出力帳票一覧のクラスです。
+ *
+ * @reamsid_L DBB-0780-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
@@ -21,9 +23,9 @@ public class BatchTyouhyouResult implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param entity entity
+     * @param batchTyouhyouEntity batchTyouhyouEntity
      */
-    public BatchTyouhyouResult(BatchTyouhyouEntity entity) {
-        this.entity = entity;
+    public BatchTyouhyouResult(BatchTyouhyouEntity batchTyouhyouEntity) {
+        this.entity = batchTyouhyouEntity;
     }
 }

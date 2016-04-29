@@ -10,19 +10,21 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5591GogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho.IGogitaiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5591GogitaiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合議体情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public class GogitaiJohoManager {
 

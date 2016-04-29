@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.hihokenshasho;
 
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTableCreateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTableUpdateProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchiranHyoReportProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IkkatsuHakkoDBInsertProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IkkatsuHakkoReportProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.TaishoShutokuProcess;
@@ -17,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 被保険者証一括発行_バッチフロークラスです
+ *
+ * @reamsid_L DBU-0420-020 duanzhanli
+ *
  */
 public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> {
 
@@ -26,6 +30,7 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
         executeStep(TAISHOSHUTOKU_PROCESS);
         executeStep(ICHIJITABLEUPDATE_PROCESS);
         executeStep(IKKATSUHAKKOREPORT_PROCESS);
+        executeStep(ICHIRANHYOREPORTPROCESS);
         executeStep(IKKATSUHAKKODBINSERT_PROCESS);
     }
 
@@ -33,6 +38,7 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
     private static final String TAISHOSHUTOKU_PROCESS = "taishoShutokuProcess";
     private static final String ICHIJITABLEUPDATE_PROCESS = "ichijiTableUpdateProcess";
     private static final String IKKATSUHAKKOREPORT_PROCESS = "ikkatsuHakkoReportProcess";
+    private static final String ICHIRANHYOREPORTPROCESS = "IchiranHyoReportProcess";
     private static final String IKKATSUHAKKODBINSERT_PROCESS = "ikkatsuHakkoDBInsertProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
 
     /**
@@ -73,6 +79,16 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
     @Step(IKKATSUHAKKOREPORT_PROCESS)
     protected IBatchFlowCommand ikkatsuHakkoReportProcess() {
         return simpleBatch(IkkatsuHakkoReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
+    }
+
+    /**
+     * 帳票「被保険者証発行一覧表」の出力処理クラスです。
+     *
+     * @return IchiranHyoReportProcess
+     */
+    @Step(ICHIRANHYOREPORTPROCESS)
+    protected IBatchFlowCommand callIchiranHyoReportProcess() {
+        return loopBatch(IchiranHyoReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 
     /**

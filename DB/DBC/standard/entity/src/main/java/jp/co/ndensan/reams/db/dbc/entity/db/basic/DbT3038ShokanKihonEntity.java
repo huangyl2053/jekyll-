@@ -1,21 +1,21 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 償還払請求基本テーブルのエンティティクラスです。
@@ -39,7 +39,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private RString seiriNp;
+    private RString seiriNo;
     @PrimaryKey
     private JigyoshaNo jigyoshaNo;
     @PrimaryKey
@@ -151,17 +151,17 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      *
      * @return 整理番号
      */
-    public RString getSeiriNp() {
-        return seiriNp;
+    public RString getSeiriNo() {
+        return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
      *
-     * @param seiriNp 整理番号
+     * @param seiriNo 整理番号
      */
-    public void setSeiriNp(@Nonnull RString seiriNp) {
-        this.seiriNp = seiriNp;
+    public void setSeiriNo(@Nonnull RString seiriNo) {
+        this.seiriNo = seiriNo;
     }
 
     /**
@@ -564,8 +564,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * このエンティティの主キーが他の{@literal DbT3038ShokanKihonEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3038ShokanKihonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3038ShokanKihonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3038ShokanKihonEntity other) {
@@ -578,7 +577,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
         if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
             return false;
         }
-        if (!Objects.equals(this.seiriNp, other.seiriNp)) {
+        if (!Objects.equals(this.seiriNo, other.seiriNo)) {
             return false;
         }
         if (!Objects.equals(this.jigyoshaNo, other.jigyoshaNo)) {
@@ -600,7 +599,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     public void shallowCopy(DbT3038ShokanKihonEntity entity) {
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
-        this.seiriNp = entity.seiriNp;
+        this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
         this.meisaiNo = entity.meisaiNo;
@@ -631,7 +630,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNp, jigyoshaNo, yoshikiNo, meisaiNo, kyuSochiNyushoshaTokureiCode, kyotakuServiceSakuseiKubunCode, kyotakuserviceJigyoshaNo, kaishiYMD, chushiYMD, chushiRiyuNyushomaeJyokyoCode, nyushoYMD, taishoYMD, nyushoJitsuNissu, gaihakuNissu, taishogoJotaiCode, hokenKyufuritsu, serviceTanisu, hokenSeikyugaku, riyoshaFutangaku, kinkyuShisetsuRyoyoSeikyugaku, tokuteiShinryoSeikyugaku, tokuteiNyushoshaKaigoServiceSeikyugaku);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, kyuSochiNyushoshaTokureiCode, kyotakuServiceSakuseiKubunCode, kyotakuserviceJigyoshaNo, kaishiYMD, chushiYMD, chushiRiyuNyushomaeJyokyoCode, nyushoYMD, taishoYMD, nyushoJitsuNissu, gaihakuNissu, taishogoJotaiCode, hokenKyufuritsu, serviceTanisu, hokenSeikyugaku, riyoshaFutangaku, kinkyuShisetsuRyoyoSeikyugaku, tokuteiShinryoSeikyugaku, tokuteiNyushoshaKaigoServiceSeikyugaku);
     }
 
 // </editor-fold>

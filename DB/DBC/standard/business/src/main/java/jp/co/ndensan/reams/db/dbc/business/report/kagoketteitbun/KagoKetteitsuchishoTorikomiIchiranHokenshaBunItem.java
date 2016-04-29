@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 過誤決定通知書情報取込一覧表（保険者分）
  *
- * @author admin
+ * @reamsid_L DBC-0980-470 lijunjun
  */
 @Getter
 @Setter
@@ -47,6 +48,7 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunItem {
     private RString listUpper_7;
     private RString listUpper_8;
     private RString listUpper_9;
+    private RString pageCount;
     private RString printTimeStamp;
     private RString servicehiTitle;
     private RString shoHokenshaName;

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 
 /**
  * 帳票　保険料納入通知書（本算定）【コンビニ期毎タイプ】連帳の項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-9110-130 huangh
  */
 public class NonyuTsuchishoCVSKigotoRenchoSource implements IReportSource {
 

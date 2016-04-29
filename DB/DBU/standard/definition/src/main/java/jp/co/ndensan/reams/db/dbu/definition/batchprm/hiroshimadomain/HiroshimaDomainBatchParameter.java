@@ -18,7 +18,7 @@ import lombok.Setter;
 /**
  * 広域内転居結果一覧表のバッチのパラメータです
  *
- *
+ * @reamsid_L DBU-1150-020 chenaoqi
  */
 @Getter
 @Setter
@@ -34,7 +34,6 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
     private FlexibleDate 日付From;
     @BatchParameter(key = "日付To", name = "日付To")
     private FlexibleDate 日付To;
-
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
 
     /**
@@ -42,11 +41,7 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
      *
      */
     public HiroshimaDomainBatchParameter() {
-//        this.市町村コード = 市町村コード;
-//        this.市町村名称 = 市町村名称;
-//        this.日付From = 日付From;
-//        this.日付To = 日付To;
-//        this.宛名検索条件 = 宛名検索条件;
+
     }
 
     /**
@@ -56,7 +51,7 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
      * @param 市町村名称 市町村名称
      * @param 日付From 日付From
      * @param 日付To 日付To
-     * @param 宛名検索条件 宛名検索条件
+     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
      */
     public HiroshimaDomainBatchParameter(LasdecCode 市町村コード,
             RString 市町村名称,

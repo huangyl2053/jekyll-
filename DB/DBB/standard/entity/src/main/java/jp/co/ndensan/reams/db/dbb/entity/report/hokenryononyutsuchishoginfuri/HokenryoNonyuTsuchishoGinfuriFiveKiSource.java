@@ -1,29 +1,33 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishoginfuri;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 保険料納入通知書（本算定）【銀振タイプ】帳票項目定義_5期_連帳 HokenryoNonyuTsuchishoGinfuriFiveKiSource
+ *
+ * @reamsid_L DBB-9110-090 liangbc
+ */
 public class HokenryoNonyuTsuchishoGinfuriFiveKiSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "titleNendo", length = 4, order = 1)
     public RString titleNendo;
-    @ReportItem(name = "HyojicodeName1", order = 2)
-    public RString HyojicodeName1;
-    @ReportItem(name = "HyojicodeName2", order = 3)
-    public RString HyojicodeName2;
-    @ReportItem(name = "HyojicodeName3", order = 4)
-    public RString HyojicodeName3;
+    @ReportItem(name = "hyojicodeName1", order = 2)
+    public RString hyojicodeName1;
+    @ReportItem(name = "hyojicodeName2", order = 3)
+    public RString hyojicodeName2;
+    @ReportItem(name = "hyojicodeName3", order = 4)
+    public RString hyojicodeName3;
     @ReportItem(name = "santeiKisoKikanKaishi", length = 12, order = 5)
     public RString santeiKisoKikanKaishi;
-    @ReportItem(name = "Hyojicode1", length = 12, order = 6)
-    public RString Hyojicode1;
-    @ReportItem(name = "Hyojicode2", length = 12, order = 7)
-    public RString Hyojicode2;
-    @ReportItem(name = "Hyojicode3", length = 12, order = 8)
-    public RString Hyojicode3;
+    @ReportItem(name = "hyojicode1", length = 12, order = 6)
+    public RString hyojicode1;
+    @ReportItem(name = "hyojicode2", length = 12, order = 7)
+    public RString hyojicode2;
+    @ReportItem(name = "hyojicode3", length = 12, order = 8)
+    public RString hyojicode3;
     @ReportItem(name = "santeiKisoKikanshoryo", length = 12, order = 9)
     public RString santeiKisoKikanshoryo;
     @ReportItem(name = "tsuchishoNo", order = 10)

@@ -8,16 +8,15 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisai;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -195,8 +194,7 @@ public class KyotakuKeikakuJikoSakusei extends
     }
 
     /**
-     * 保持する居宅給付計画自己作成を削除対象とします。<br/>
-     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する居宅給付計画自己作成を削除対象とします。<br/> {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
      */

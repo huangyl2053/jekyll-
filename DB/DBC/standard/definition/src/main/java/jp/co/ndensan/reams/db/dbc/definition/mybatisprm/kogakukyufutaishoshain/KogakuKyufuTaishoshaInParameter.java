@@ -10,10 +10,12 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 新被保険者番号テーブルに対するMapperパラメータ
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuKyufuTaishoshaInParameter {
+public final class KogakuKyufuTaishoshaInParameter {
 
     private final LasdecCode 市町村コード;
     private final HihokenshaNo 被保険者番号;

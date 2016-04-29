@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
+ * 資格期間情報クラスです。
  *
- * 資格期間情報クラス
+ * @reamsid_L DBB-9040-040 wangxiaodong
  */
 @lombok.Setter
 @lombok.Getter

@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosaChikuGroupCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosachikucode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosachikugroupname;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.distinct;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -99,7 +101,7 @@ public class DbT5225ChosaChikuGroupDac implements ISaveable<DbT5225ChosaChikuGro
     public List<DbT5225ChosaChikuGroupEntity> select調査地区グループ情報() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
+        return accessor.selectSpecific(distinct(chosaChikuGroupCode), chosachikugroupname).
                 table(DbT5225ChosaChikuGroup.class).
                 order(by(chosaChikuGroupCode, Order.ASC)).
                 toList(DbT5225ChosaChikuGroupEntity.class);

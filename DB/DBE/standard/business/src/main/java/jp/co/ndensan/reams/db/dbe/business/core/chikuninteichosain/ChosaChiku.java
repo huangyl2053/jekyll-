@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査地区情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 public class ChosaChiku {
 
@@ -23,6 +25,15 @@ public class ChosaChiku {
      */
     public ChosaChiku(ChosaChikuEntity chosaChikuEntity) {
         this.chosaChikuEntity = chosaChikuEntity;
+    }
+
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ChosaChikuEntity}より{@link ChosaChiku}を生成します。
+     *
+     */
+    public ChosaChiku() {
+        this.chosaChikuEntity = new ChosaChikuEntity();
     }
 
     /**
@@ -46,18 +57,18 @@ public class ChosaChiku {
     /**
      * 調査地区コード設定する。
      *
-     * @param ChosaChikuCode 調査地区コード
+     * @param chosaChikuCode 調査地区コード
      */
-    public void set調査地区コード(RString ChosaChikuCode) {
-        chosaChikuEntity.setChosaChikuCode(ChosaChikuCode);
+    public void set調査地区コード(RString chosaChikuCode) {
+        chosaChikuEntity.setChosaChikuCode(chosaChikuCode);
     }
 
     /**
      * 調査地区名称設定する。
      *
-     * @param ChosaChikuName 調査地区名称
+     * @param chosaChikuName 調査地区名称
      */
-    public void set調査地区名称(RString ChosaChikuName) {
-        chosaChikuEntity.setChosaChikuName(ChosaChikuName);
+    public void set調査地区名称(RString chosaChikuName) {
+        chosaChikuEntity.setChosaChikuName(chosaChikuName);
     }
 }

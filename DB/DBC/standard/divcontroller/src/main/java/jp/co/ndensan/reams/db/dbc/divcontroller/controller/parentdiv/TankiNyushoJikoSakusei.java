@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.tblTankiNyushoJ
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -47,8 +45,8 @@ public class TankiNyushoJikoSakusei {
 
     private List<dgTankiNyushoJikoSakusei_Row> create短期入所一覧() {
         List<dgTankiNyushoJikoSakusei_Row> arrayData = new ArrayList<>();
-        dgTankiNyushoJikoSakusei_Row item;
-        Button btn = new Button();
+//        dgTankiNyushoJikoSakusei_Row item;
+//        Button btn = new Button();
 
         /* ボタン, 事業者No, ｻｰﾋﾞｽｺｰﾄﾞ, 単位, 日数, 給付対象日数, 対象外日数, 単位単価, 給付率, 区分限度内単位, 費用総額, 保険給付額, 保険対象利用者負担分額, 給付対象外単位, 全額利用者負担額 */
 //        item = createRow(btn, "1234567890", "111111:身体介護１２３４５６７８９", "1000", "50", "40", "10", "20.00", "60", "40000", "800000", "480000", "320000", "10000", "200000");
@@ -71,57 +69,55 @@ public class TankiNyushoJikoSakusei {
 //        arrayData.add(item);
 //        item = createRow(null, "", "             合計", "", "", "", "", "", "", "190000", "3800000", "2280000", "1920000", "", "200000");
 //        arrayData.add(item);
-
         return arrayData;
     }
 
-    private dgTankiNyushoJikoSakusei_Row createRow(
-            Button btn,
-            String jigyoshaNo,
-            String serviceCode,
-            String unit,
-            String dateNum,
-            String kyufuDateNum,
-            String kyufugaiDateNum,
-            String unitTanka,
-            String kyufuRitsu,
-            String kubunLimitNaiUnit,
-            String hiyoTotal,
-            String hokenKyufuGaku,
-            String hokenFutan,
-            String kyufuTaishogaiUnit,
-            String futanTotal) {
-        dgTankiNyushoJikoSakusei_Row item = new dgTankiNyushoJikoSakusei_Row(
-                btn, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        item.setTankiNyushoJigyoshaNo(new RString(jigyoshaNo));
-        item.setTankiNyushoServiceCode(new RString(serviceCode));
-        item.setTankiNyushoUnit(new RString(stringToKingakuFormat(unit)));
-        item.setTankiNyushoDateNum(new RString(dateNum));
-        item.setTankiNyushoKyufuDateNum(new RString(kyufuDateNum));
-        item.setTankiNyushoKyufugaiDateNum(new RString(kyufugaiDateNum));
-        item.setTankiNyushoUnitTanka(new RString(stringToKingakuFormat(unitTanka)));
-        item.setTankiNyushoKyufuRitsu(new RString(kyufuRitsu));
-        item.setTankiNyushoKubunLimitNaiUnit(new RString(stringToKingakuFormat(kubunLimitNaiUnit)));
-        item.setTankiNyushoHiyoTotal(new RString(stringToKingakuFormat(hiyoTotal)));
-        item.setTankiNyushoHokenKyufuGaku(new RString(stringToKingakuFormat(hokenKyufuGaku)));
-        item.setTankiNyushoHokenFutan(new RString(stringToKingakuFormat(hokenFutan)));
-        item.setTankiNyushoKyufuTaishogaiUnit(new RString(stringToKingakuFormat(kyufuTaishogaiUnit)));
-        item.setTankiNyushoFutanTotal(new RString(stringToKingakuFormat(futanTotal)));
-
-        return item;
-    }
+//    private dgTankiNyushoJikoSakusei_Row createRow(
+//            Button btn,
+//            String jigyoshaNo,
+//            String serviceCode,
+//            String unit,
+//            String dateNum,
+//            String kyufuDateNum,
+//            String kyufugaiDateNum,
+//            String unitTanka,
+//            String kyufuRitsu,
+//            String kubunLimitNaiUnit,
+//            String hiyoTotal,
+//            String hokenKyufuGaku,
+//            String hokenFutan,
+//            String kyufuTaishogaiUnit,
+//            String futanTotal) {
+//        dgTankiNyushoJikoSakusei_Row item = new dgTankiNyushoJikoSakusei_Row(
+//                btn, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+//                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//        item.setTankiNyushoJigyoshaNo(new RString(jigyoshaNo));
+//        item.setTankiNyushoServiceCode(new RString(serviceCode));
+//        item.setTankiNyushoUnit(new RString(stringToKingakuFormat(unit)));
+//        item.setTankiNyushoDateNum(new RString(dateNum));
+//        item.setTankiNyushoKyufuDateNum(new RString(kyufuDateNum));
+//        item.setTankiNyushoKyufugaiDateNum(new RString(kyufugaiDateNum));
+//        item.setTankiNyushoUnitTanka(new RString(stringToKingakuFormat(unitTanka)));
+//        item.setTankiNyushoKyufuRitsu(new RString(kyufuRitsu));
+//        item.setTankiNyushoKubunLimitNaiUnit(new RString(stringToKingakuFormat(kubunLimitNaiUnit)));
+//        item.setTankiNyushoHiyoTotal(new RString(stringToKingakuFormat(hiyoTotal)));
+//        item.setTankiNyushoHokenKyufuGaku(new RString(stringToKingakuFormat(hokenKyufuGaku)));
+//        item.setTankiNyushoHokenFutan(new RString(stringToKingakuFormat(hokenFutan)));
+//        item.setTankiNyushoKyufuTaishogaiUnit(new RString(stringToKingakuFormat(kyufuTaishogaiUnit)));
+//        item.setTankiNyushoFutanTotal(new RString(stringToKingakuFormat(futanTotal)));
+//
+//        return item;
+//    }
 
     /*
      文字列(数字)を金額フォーマットに変更する。
      */
-    private String stringToKingakuFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
-        }
-        return new Decimal(str).toString("##,###,###");
-    }
-
+//    private String stringToKingakuFormat(String str) {
+//        if (str.isEmpty()) {
+//            return str;
+//        }
+//        return new Decimal(str).toString("##,###,###");
+//    }
     /**
      * 短期入所（自己作成）のデータグリッドで選択した計画を表示する際の処理。
      *

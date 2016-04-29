@@ -30,8 +30,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 構成市町村マスタを管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterIdentifier, DbT5051KoseiShichosonMasterEntity, KoseiShichosonMaster> implements Serializable {
+public class KoseiShichosonMaster
+        extends ParentModelBase<KoseiShichosonMasterIdentifier, DbT5051KoseiShichosonMasterEntity, KoseiShichosonMaster>
+        implements Serializable {
 
     private static final long serialVersionUID = -2447965927672568960L;
 
@@ -379,14 +383,11 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
     }
 
     /**
-     * 構成市町村マスタ配下の要素を削除対象とします。<br/>
-     * {@link DbT5051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 構成市町村マスタ配下の要素である認定調査委託先情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link KoseiShichosonMaster}を返します。
+     * 構成市町村マスタ配下の要素を削除対象とします。<br/> {@link DbT5051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 構成市町村マスタ配下の要素である認定調査委託先情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KoseiShichosonMaster}を返します。
      *
      * @return 削除対象処理実施後の{@link KoseiShichosonMaster}
-     * @throws IllegalStateException
-     * DbT5051KoseiShichosonMasterEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5051KoseiShichosonMasterEntityのデータ状態が変更の場合
      */
     @Override
     public KoseiShichosonMaster deleted() {
@@ -406,8 +407,7 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
     }
 
     /**
-     * 構成市町村マスタのみを変更対象とします。<br/>
-     * {@link DbT5051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 構成市町村マスタのみを変更対象とします。<br/> {@link DbT5051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KoseiShichosonMaster}
      */

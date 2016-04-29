@@ -9,11 +9,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import org.dom4j.Text;
 
 /**
  *
  * 編集後仮算定通知書共通情報の更正後情報です。
+ *
+ * @reamsid_L DBB-9110-070 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
@@ -48,6 +49,6 @@ public class EditedKariSanteiTsuchiShoKyotsuAfterCorrection {
     private RString 生保開始日;
     private RString 生保開始日_西暦;
     private RString 生活保護扶助種類;
-    private Text 更正後徴収方法;
+    private RString 更正後徴収方法;
 
 }

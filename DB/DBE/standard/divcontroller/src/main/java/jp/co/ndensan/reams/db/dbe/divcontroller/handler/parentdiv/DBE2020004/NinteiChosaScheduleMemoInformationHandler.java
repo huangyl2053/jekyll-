@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  *
  * 認定調査スケジュール登録4のクラス。
+ *
+ * @reamsid_L DBE-0020-040 houtianpeng
  */
 public class NinteiChosaScheduleMemoInformationHandler {
 
@@ -381,7 +383,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
 
     private void 共通の場合にメンテナンスの設定(dgListOfCommonMemo_Row dgListOfCommonMemo_Row) {
 
-        Code 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, Code.class);
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         div.getMaintenanceForMemo().getTxtMemoNumber().setValue(dgListOfCommonMemo_Row.getMemono());
         div.getMaintenanceForMemo().getDdlMemoType().setSelectedKey(共通);
         div.getDdlShiteiChosaChiku().setSelectedKey(地区コード.value());
@@ -392,7 +394,7 @@ public class NinteiChosaScheduleMemoInformationHandler {
 
     private void 自地区の場合にメンテナンスの設定(dgListOfJichikuMemo_Row dgListOfJichikuMemo_Row) {
 
-        Code 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, Code.class);
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         div.getMaintenanceForMemo().getTxtMemoNumber().setValue(dgListOfJichikuMemo_Row.getMemono());
         div.getMaintenanceForMemo().getDdlMemoType().setSelectedKey(地区のみ);
         div.getDdlShiteiChosaChiku().setSelectedKey(地区コード.value());

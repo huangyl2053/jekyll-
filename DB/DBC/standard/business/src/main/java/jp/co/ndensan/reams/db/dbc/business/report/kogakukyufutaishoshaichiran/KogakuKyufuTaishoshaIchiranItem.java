@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票Item
+ *
+ * @reamsid_L DBC-0980-370 chenaoqi
  */
 @Getter
 @Setter

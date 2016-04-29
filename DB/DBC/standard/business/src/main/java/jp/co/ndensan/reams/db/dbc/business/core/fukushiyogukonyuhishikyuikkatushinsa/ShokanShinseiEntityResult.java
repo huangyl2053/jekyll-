@@ -11,10 +11,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkat
 /**
  * 福祉用具購入費支給申請一括審査・決定Entityクラスです。
  *
- * @author 陳奥奇
+ * @reamsid_L DBC-1021-100 chenaoqi
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShinseiEntityResult implements Serializable {
 
     private final ShokanShinseiEntity entity;

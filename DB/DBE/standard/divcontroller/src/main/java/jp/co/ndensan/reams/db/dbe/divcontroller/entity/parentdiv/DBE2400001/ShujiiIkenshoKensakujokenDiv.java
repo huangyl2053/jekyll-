@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoKensakujokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,6 +31,10 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
     private CheckBoxList chkShujiiikenshoSakuseiIrai;
     @JsonProperty("chkShujiiIkensho")
     private CheckBoxList chkShujiiIkensho;
+    @JsonProperty("txtIkenshoDispMax")
+    private TextBoxNum txtIkenshoDispMax;
+    @JsonProperty("btnIkenshoClear")
+    private Button btnIkenshoClear;
     @JsonProperty("btnShujiiIkenshoKensaku")
     private Button btnShujiiIkenshoKensaku;
     @JsonProperty("ccdShujiiIkenshoHokensha")
@@ -112,6 +116,42 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
     @JsonProperty("chkShujiiIkensho")
     public void setChkShujiiIkensho(CheckBoxList chkShujiiIkensho) {
         this.chkShujiiIkensho = chkShujiiIkensho;
+    }
+
+    /*
+     * gettxtIkenshoDispMax
+     * @return txtIkenshoDispMax
+     */
+    @JsonProperty("txtIkenshoDispMax")
+    public TextBoxNum getTxtIkenshoDispMax() {
+        return txtIkenshoDispMax;
+    }
+
+    /*
+     * settxtIkenshoDispMax
+     * @param txtIkenshoDispMax txtIkenshoDispMax
+     */
+    @JsonProperty("txtIkenshoDispMax")
+    public void setTxtIkenshoDispMax(TextBoxNum txtIkenshoDispMax) {
+        this.txtIkenshoDispMax = txtIkenshoDispMax;
+    }
+
+    /*
+     * getbtnIkenshoClear
+     * @return btnIkenshoClear
+     */
+    @JsonProperty("btnIkenshoClear")
+    public Button getBtnIkenshoClear() {
+        return btnIkenshoClear;
+    }
+
+    /*
+     * setbtnIkenshoClear
+     * @param btnIkenshoClear btnIkenshoClear
+     */
+    @JsonProperty("btnIkenshoClear")
+    public void setBtnIkenshoClear(Button btnIkenshoClear) {
+        this.btnIkenshoClear = btnIkenshoClear;
     }
 
     /*

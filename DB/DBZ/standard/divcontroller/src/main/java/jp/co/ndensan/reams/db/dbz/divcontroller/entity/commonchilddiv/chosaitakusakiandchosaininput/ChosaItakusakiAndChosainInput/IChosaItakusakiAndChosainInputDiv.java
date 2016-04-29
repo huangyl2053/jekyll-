@@ -5,6 +5,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBE-1300-030 zhangguopeng
  */
 public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBaseProperties {
 
@@ -28,19 +30,4 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      * @param HdnShinseishoKanriNo 申請管理番号
      */
     void setHdnShinseishoKanriNo(RString HdnShinseishoKanriNo);
-
-    /**
-     * 認定調査委託先情報の認定調査委託先コード
-     *
-     * @return 認定調査委託先コード
-     */
-    RString getChosaItakusakiCode();
-
-    /**
-     * 認定調査委託先情報の認定調査員コード
-     *
-     * @return 認定調査員コード
-     */
-    RString getChosainCode();
-
 }

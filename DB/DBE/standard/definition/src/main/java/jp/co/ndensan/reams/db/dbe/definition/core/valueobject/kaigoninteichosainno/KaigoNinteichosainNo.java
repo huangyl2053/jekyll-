@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class KaigoNinteichosainNo implements Comparable<KaigoNinteichosainNo>, IDbColumnMappable, IValidatable, IValueObject<RString> {
 
     private final RString 介護調査員番号;
-
+    /**
+     * KaigoNinteichosainNoのEMPTYです。
+     */
     public static final KaigoNinteichosainNo EMPTY;
 
     /**
@@ -43,8 +45,7 @@ public class KaigoNinteichosainNo implements Comparable<KaigoNinteichosainNo>, I
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link KaigoNinteichosainNo}が持つ介護調査員番号についてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link KaigoNinteichosainNo}が持つ介護調査員番号についてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -60,8 +61,7 @@ public class KaigoNinteichosainNo implements Comparable<KaigoNinteichosainNo>, I
      *
      * @param 介護調査員番号 {@link KaigoNinteichosainNo}となる文字列{@link RString}
      * @return {@link KaigoNinteichosainNo}
-     * @throws IllegalArgumentException
-     * {@link KaigoNinteichosainNoSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link KaigoNinteichosainNoSpec}の仕様を満たさない場合
      */
     public static KaigoNinteichosainNo createCheckInstance(RString 介護調査員番号) throws IllegalArgumentException {
         List<IValidationMessage> validResult

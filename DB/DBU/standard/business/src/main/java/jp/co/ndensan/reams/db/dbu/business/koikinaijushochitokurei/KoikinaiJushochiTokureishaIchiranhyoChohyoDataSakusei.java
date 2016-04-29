@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.business.koikinaijushochitokurei;
 
 import java.util.ArrayList;
@@ -26,8 +25,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 域内住所地特例者一覧表バッチから取った入力パラメータにより、帳票用データを作成します。
+ *
+ * @reamsid_L DBU-1140-040 dongyabin
  */
 @Getter
 @Setter
@@ -140,8 +140,6 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                         = new KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei();
                 KoikinaiJushochiTokureiEntity 該当データ = entity.get広域内住所地特例者List().get(i);
                 データ.set印刷日時(印刷日時);
-                // TODO 内部QA:701 （ページ数の設定不明です。）
-                // データ.setページ数(new RString(String.valueOf(i)));
                 データ.set市町村コード(市町村コード);
                 データ.set市町村名(市町村名);
                 データ.set並び順１(並び順1);
@@ -157,7 +155,6 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 データ.set氏名(氏名_データなし);
                 データ.set被保険者番号(該当データ.get被保険者番号());
                 データ.set氏名カナ(該当データ.get氏名カナ());
-                // TODO QA 
                 データ.set生年月日(get生年月日(該当データ));
                 データ.set住所コード(該当データ.get住所コード());
                 データ.set行政区CD(該当データ.get行政区CD());

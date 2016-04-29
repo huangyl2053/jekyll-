@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.kanri;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 本算定以降判定のクラスです。
+ *
+ * @reamsid_L DBB-9020-040 sunhaidi
  */
 public class HonsanteiIkoHantei {
 
@@ -58,7 +60,7 @@ public class HonsanteiIkoHantei {
      * @param 賦課 賦課の情報
      * @return 判定結果(TRUE:本算定以降、FALSE:仮算定)
      */
-    public boolean is本算定後(Fuka 賦課) {
+    public boolean is本算定後(FukaJoho 賦課) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         DbT7022ShoriDateKanriEntity shoriDateKanriEntity
                 = dbT7022ShoriDateKanriDac.selectByKey(SubGyomuCode.DBB介護賦課,

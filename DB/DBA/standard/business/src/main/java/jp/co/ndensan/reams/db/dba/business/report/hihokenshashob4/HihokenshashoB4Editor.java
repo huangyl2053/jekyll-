@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4;
 
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashob4.HihokenshashoB4ReportSource;
@@ -15,17 +14,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 介護保険被保険者証（B4版）Editorです。
+ *
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
-    
+
     private static final int 年月日の年_和暦_STR = 2;
     private static final int 年月日の年_和暦_END = 4;
     private final HihokenshashoB4BodyItem joho;
-    
+
     /**
      * コンストラクタです。
+     *
      * @param joho 一覧表証発行者Entityリストです
      */
     public HihokenshashoB4Editor(HihokenshashoB4BodyItem joho) {
@@ -34,6 +35,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
 
     /**
      * 要介護認定業務進捗状況一覧表editです。
+     *
      * @param source 被保険者証発行一覧表Source
      * @return 要介護認定業務進捗状況一覧表
      */
@@ -41,7 +43,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
     public HihokenshashoB4ReportSource edit(HihokenshashoB4ReportSource source) {
         return editBody(source);
     }
-    
+
     private HihokenshashoB4ReportSource editBody(HihokenshashoB4ReportSource source) {
         source = editBody2(source);
         source.kaigokbn1 = joho.getKaigokbn();
@@ -84,8 +86,8 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.shurui11 = joho.getShurui1();
         source.ten11 = joho.getTen1();
         source.gyosha2 = joho.getGyosha2();
-        source.gyosha2Asa = joho.getGyosha2() == null ? RString.EMPTY : new RString("*");
-        source.gyosha2Massho = joho.getGyosha2();
+        source.gyosha2Asa = joho.getGyosha2Asa();
+        source.gyosha2Massho = joho.getGyosha2Massho();
         source.shuruigendo21 = joho.getShuruigendo2();
         source.ten21 = joho.getTen2();
         source.shurui21 = joho.getShurui2();
@@ -94,15 +96,15 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.shurui31 = joho.getShurui3();
         source.hihokana1 = joho.getHihokana();
         source.todokeYmd21 = joho.getTodokeYmd2();
-        source.todokeYmd2Massho1 = joho.getTodokeYmd2();
-        source.todokeYmd2Asa1 = joho.getTodokeYmd2() == null ? RString.EMPTY : new RString("*");
+        source.todokeYmd2Massho1 = joho.getTodokeYmd2Massho1();
+        source.todokeYmd2Asa1 = joho.getTodokeYmd2Asa1();
         source.shuruigendo41 = joho.getShuruigendo4();
         source.ten41 = joho.getTen4();
         source.shurui41 = joho.getShurui4();
         source.hihoname1 = joho.getHihoname();
         source.gyosha3 = joho.getGyosha3();
-        source.gyosha3Asa = joho.getGyosha3() == null ? RString.EMPTY : new RString("*");
-        source.gyosha3Massho = joho.getGyosha3();
+        source.gyosha3Asa = joho.getGyosha3Asa();
+        source.gyosha3Massho = joho.getGyosha3Massho();
         source.shuruigendo51 = joho.getShuruigendo5();
         source.ten51 = joho.getTen5();
         source.shurui51 = joho.getShurui5();
@@ -110,8 +112,8 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.ten61 = joho.getTen6();
         source.shuruigendo61 = joho.getShuruigendo6();
         source.todokeYmd31 = joho.getTodokeYmd3();
-        source.todokeYmd3Asa1 = new RString("*");
-        source.todokeYmd3Massho1 = joho.getTodokeYmd3();
+        source.todokeYmd3Asa1 = joho.getTodokeYmd3Asa1();
+        source.todokeYmd3Massho1 = joho.getTodokeYmd3Massho1();
         source.ryui1 = joho.getRyui();
         source.shisetsuSyu11 = joho.getShisetsuSyu1();
         source.seibetsuMan1 = joho.getSeibetsuMan();
@@ -159,7 +161,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.seigenSt12 = joho.getSeigenSt12();
         return source;
     }
-    
+
     private HihokenshashoB4ReportSource editBody2(HihokenshashoB4ReportSource source) {
         source.seigen22 = joho.getSeigen22();
         source.seigenLong22 = joho.getSeigenLong22();
@@ -197,8 +199,8 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.ten12 = joho.getTen12();
         source.shurui12 = joho.getShurui12();
         source.gyosha5 = joho.getGyosha22();
-        source.gyosha5Asa = joho.getGyosha22() == null ? RString.EMPTY : new RString("*");
-        source.gyosha5Massho = joho.getGyosha22();
+        source.gyosha5Asa = joho.getGyosha5Asa();
+        source.gyosha5Massho = joho.getGyosha5Massho();
         source.shuruigendo22 = joho.getShuruigendo22();
         source.ten22 = joho.getTen22();
         source.shurui22 = joho.getShurui22();
@@ -207,15 +209,15 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.shurui32 = joho.getShurui32();
         source.hihokana2 = joho.getHihokana2();
         source.todokeYmd22 = joho.getTodokeYmd22();
-        source.todokeYmd2Asa2 = joho.getTodokeYmd22() == null ? RString.EMPTY : new RString("*");
-        source.todokeYmd2Massho2 = joho.getTodokeYmd22();
+        source.todokeYmd2Asa2 = joho.getTodokeYmd2Asa2();
+        source.todokeYmd2Massho2 = joho.getTodokeYmd2Massho2();
         source.shuruigendo42 = joho.getShuruigendo42();
         source.ten42 = joho.getTen42();
         source.shurui42 = joho.getShurui42();
         source.hihoname2 = joho.getHihoname2();
         source.gyosha6 = joho.getGyosha32();
-        source.gyosha6Asa = joho.getGyosha32() == null ? RString.EMPTY : new RString("*");
-        source.gyosha6Massho = joho.getGyosha32();
+        source.gyosha6Asa = joho.getGyosha6Asa();
+        source.gyosha6Massho = joho.getGyosha6Massho();
         source.shuruigendo52 = joho.getShuruigendo52();
         source.ten52 = joho.getTen52();
         source.shurui52 = joho.getShurui52();
@@ -224,8 +226,8 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.shurui62 = joho.getShurui62();
         source.ryui2 = joho.getRyui2();
         source.todokeYmd32 = joho.getTodokeYmd32();
-        source.todokeYmd3Asa2 = joho.getTodokeYmd32() == null ? RString.EMPTY : new RString("*");
-        source.todokeYmd3Massho2 = joho.getTodokeYmd32();
+        source.todokeYmd3Asa2 = joho.getTodokeYmd3Asa2();
+        source.todokeYmd3Massho2 = joho.getTodokeYmd3Massho2();
         source.shisetsuSyu12 = joho.getShisetsuSyu12();
         source.seibetsuWoman2 = joho.getSeibetsuWoman2();
         source.seibetsuMan2 = joho.getSeibetsuMan2();
@@ -268,29 +270,29 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.taiinchk22 = joho.getTaiinchk22();
         source.itakuGyosha1 = joho.getItakuGyosha1();
         source.itakuGyosha2 = joho.getItakuGyosha2();
-        source.itakuGyosha2Asa = joho.getItakuGyosha2() == null ? RString.EMPTY : new RString("*");
-        source.itakuGyosha2Massho = joho.getItakuGyosha2();
+        source.itakuGyosha2Asa = joho.getItakuGyosha2Asa();
+        source.itakuGyosha2Massho = joho.getItakuGyosha2Massho();
         source.itakuGyosha3 = joho.getItakuGyosha3();
-        source.itakuGyosha3Asa = joho.getItakuGyosha3() == null ? RString.EMPTY : new RString("*");
-        source.itakuGyosha3Massho = joho.getItakuGyosha3();
+        source.itakuGyosha3Asa = joho.getItakuGyosha3Asa();
+        source.itakuGyosha3Massho = joho.getItakuGyosha3Massho();
         source.seiShogai11 = joho.getSeiShogai12();
         source.seiShogai21 = joho.getSeiShogai22();
         source.kosekiSeibetsu11 = joho.getKosekiSeibetsu1();
         source.kosekiSeibetsu21 = joho.getKosekiSeibetsu2();
         source.itakuGyosha4 = joho.getItakuGyosha12();
         source.itakuGyosha5 = joho.getItakuGyosha22();
-        source.itakuGyosha5Asa = joho.getItakuGyosha22() == null ? RString.EMPTY : new RString("*");
-        source.itakuGyosha5Massho = joho.getItakuGyosha22();
+        source.itakuGyosha5Asa = joho.getItakuGyosha5Asa();
+        source.itakuGyosha5Massho = joho.getItakuGyosha5Massho();
         source.itakuGyosha6 = joho.getItakuGyosha32();
-        source.itakuGyosha6Asa = joho.getItakuGyosha32() == null ? RString.EMPTY : new RString("*");
-        source.itakuGyosha6Massho = joho.getItakuGyosha32();
+        source.itakuGyosha6Asa = joho.getItakuGyosha6Asa();
+        source.itakuGyosha6Massho = joho.getItakuGyosha6Massho();
         source.seiShogai12 = joho.getSeiShogai12();
         source.seiShogai22 = joho.getSeiShogai22();
         source.kosekiSeibetsu12 = joho.getKosekiSeibetsu12();
         source.kosekiSeibetsu22 = joho.getKosekiSeibetsu22();
         return source;
     }
-    
+
     private RString get年月日の年_和暦(RString date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
@@ -299,7 +301,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).getYear().substring(年月日の年_和暦_STR, 年月日の年_和暦_END);
     }
-    
+
     private RString get年月日の月_和暦(RString date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
@@ -308,7 +310,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).getMonth();
     }
-    
+
     private RString get年月日の日_和暦(RString date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
@@ -317,7 +319,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).getDay();
     }
-    
+
     private RString get年月日の年号(RString date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
@@ -326,21 +328,21 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).getEra();
     }
-    
+
     private RString get年月日の年_西歴(RString date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
         return new RDate(date.toString()).seireki().getYear();
     }
-    
+
     private RString get年月日の月_西歴(RString date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
         return new RDate(date.toString()).seireki().getMonth();
     }
-    
+
     private RString get年月日の日_西歴(RString date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;

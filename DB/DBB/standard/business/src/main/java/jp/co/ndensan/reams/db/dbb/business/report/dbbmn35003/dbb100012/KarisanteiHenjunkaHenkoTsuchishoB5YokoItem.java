@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 仮算定額変更【B5横タイプ】の情報です。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 @Setter
 @Getter

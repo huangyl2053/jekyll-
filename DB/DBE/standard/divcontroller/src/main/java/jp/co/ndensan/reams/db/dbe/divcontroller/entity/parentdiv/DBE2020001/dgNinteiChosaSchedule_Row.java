@@ -3,25 +3,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jan 30 17:01:19 CST 2016 
+ * Tue Mar 29 20:26:15 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * dgNinteiChosaSchedule_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgNinteiChosaSchedule_Row のクラスファイル
+ *
  */
-
 public class dgNinteiChosaSchedule_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
-    private RString date;
+    private TextBoxDate date;
     private RString day;
     private RString akiAM;
     private RString akiAMCount;
@@ -42,7 +38,7 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
 
     public dgNinteiChosaSchedule_Row() {
         super();
-        this.date = RString.EMPTY;
+        this.date = new TextBoxDate();
         this.day = RString.EMPTY;
         this.akiAM = RString.EMPTY;
         this.akiAMCount = RString.EMPTY;
@@ -80,7 +76,7 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         this.setOriginalData("memoImportantCount", memoImportantCount);
     }
 
-    public dgNinteiChosaSchedule_Row(RString date, RString day, RString akiAM, RString akiAMCount, RString akiPM, RString akiPMCount, RString kariYoyakuAM, RString kariYoyakuAMCount, RString kariYoyakuPM, RString kariYoyakuPMCount, RString kakuteiAM, RString kakuteiAMCount, RString kakuteiPM, RString kakuteiPMCount, RString memoNormal, RString memoNormalCount, RString memoImportant, RString memoImportantCount) {
+    public dgNinteiChosaSchedule_Row(TextBoxDate date, RString day, RString akiAM, RString akiAMCount, RString akiPM, RString akiPMCount, RString kariYoyakuAM, RString kariYoyakuAMCount, RString kariYoyakuPM, RString kariYoyakuPMCount, RString kakuteiAM, RString kakuteiAMCount, RString kakuteiPM, RString kakuteiPMCount, RString memoNormal, RString memoNormalCount, RString memoImportant, RString memoImportantCount) {
         super();
         this.setOriginalData("date", date);
         this.setOriginalData("day", day);
@@ -120,7 +116,7 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         this.memoImportantCount = memoImportantCount;
     }
 
-    public RString getDate() {
+    public TextBoxDate getDate() {
         return date;
     }
 
@@ -192,7 +188,7 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         return memoImportantCount;
     }
 
-    public void setDate(RString date) {
+    public void setDate(TextBoxDate date) {
         this.setOriginalData("date", date);
         this.date = date;
     }

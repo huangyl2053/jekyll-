@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護事業者施設オブジェクトパラメータクラス。
+ *
+ * @reamsid_L DBA-0140-010 houtianpeng
  */
 public final class JigyoshaInputGuideParameter {
 
@@ -39,7 +41,11 @@ public final class JigyoshaInputGuideParameter {
     private final FlexibleDate systemdate;
     private final RString kenCode;
     private final RString jigyoshaShubetsu;
-    private final RString kannaiKangaiKubun;
+    private final RString kannaiKangaiKubun1;
+    private final RString kannaiKangaiKubun2;
+    private final boolean isKannaiKangaiKubun1Flg;
+    private final boolean isKannaiKangaiKubun2Flg;
+    private final boolean isKannaiKangaiKubunFlg;
     private final int limitCount;
 
     private JigyoshaInputGuideParameter(
@@ -66,7 +72,11 @@ public final class JigyoshaInputGuideParameter {
             FlexibleDate systemdate,
             RString kenCode,
             RString jigyoshaShubetsu,
-            RString kannaiKangaiKubun,
+            RString kannaiKangaiKubun1,
+            RString kannaiKangaiKubun2,
+            boolean isKannaiKangaiKubun1Flg,
+            boolean isKannaiKangaiKubun2Flg,
+            boolean isKannaiKangaiKubunFlg,
             int limitCount) {
         this.jigyoshaNo = jigyoshaNo;
         this.isJigyoshaNoFlag = isJigyoshaNoFlag;
@@ -91,7 +101,11 @@ public final class JigyoshaInputGuideParameter {
         this.systemdate = systemdate;
         this.kenCode = kenCode;
         this.jigyoshaShubetsu = jigyoshaShubetsu;
-        this.kannaiKangaiKubun = kannaiKangaiKubun;
+        this.kannaiKangaiKubun1 = kannaiKangaiKubun1;
+        this.kannaiKangaiKubun2 = kannaiKangaiKubun2;
+        this.isKannaiKangaiKubun1Flg = isKannaiKangaiKubun1Flg;
+        this.isKannaiKangaiKubun2Flg = isKannaiKangaiKubun2Flg;
+        this.isKannaiKangaiKubunFlg = isKannaiKangaiKubunFlg;
         this.limitCount = limitCount;
     }
 
@@ -111,7 +125,8 @@ public final class JigyoshaInputGuideParameter {
      * @param systemdate システム日付
      * @param kenCode 県コード
      * @param jigyoshaShubetsu 事業者種別
-     * @param kannaiKangaiKubun 管内・管外区分
+     * @param kannaiKangaiKubun1 管内区分
+     * @param kannaiKangaiKubun2 管外区分
      * @param limitCount 表示件数
      * @return JigyoshaInputGuideParameter
      */
@@ -129,7 +144,8 @@ public final class JigyoshaInputGuideParameter {
             FlexibleDate systemdate,
             RString kenCode,
             RString jigyoshaShubetsu,
-            RString kannaiKangaiKubun,
+            RString kannaiKangaiKubun1,
+            RString kannaiKangaiKubun2,
             int limitCount) {
         boolean isJigyoshaNoFlag = false;
         boolean isYukoKaishiYMDFromFlag = false;
@@ -141,6 +157,9 @@ public final class JigyoshaInputGuideParameter {
         boolean isJigyoshaKbn = false;
         boolean isZennpouitti = false;
         boolean isGunshiCode = false;
+        boolean isKannaiKangaiKubun1Flg = false;
+        boolean isKannaiKangaiKubun2Flg = false;
+        boolean isKannaiKangaiKubunFlg = false;
 
         if (jigyoshaNo != null && !jigyoshaNo.value().isEmpty()) {
             isJigyoshaNoFlag = true;
@@ -172,9 +191,10 @@ public final class JigyoshaInputGuideParameter {
         if (!RString.isNullOrEmpty(jigyoshaKbn)) {
             isJigyoshaKbn = true;
         }
-        if (!RString.isNullOrEmpty(gunshiCode)) {
-            isGunshiCode = true;
-        }
+        isGunshiCode = gunshiCodeの判定(isGunshiCode, gunshiCode);
+        isKannaiKangaiKubun1Flg = kannaiKangaiKubun1の判定(isKannaiKangaiKubun1Flg, kannaiKangaiKubun1, kannaiKangaiKubun2);
+        isKannaiKangaiKubun2Flg = kannaiKangaiKubun2の判定(isKannaiKangaiKubun2Flg, kannaiKangaiKubun1, kannaiKangaiKubun2);
+        isKannaiKangaiKubunFlg = kannaiKangaiKubunの判定(isKannaiKangaiKubunFlg, kannaiKangaiKubun1, kannaiKangaiKubun2);
 
         return new JigyoshaInputGuideParameter(
                 jigyoshaNo,
@@ -200,8 +220,44 @@ public final class JigyoshaInputGuideParameter {
                 systemdate,
                 kenCode,
                 jigyoshaShubetsu,
-                kannaiKangaiKubun,
+                kannaiKangaiKubun1,
+                kannaiKangaiKubun2,
+                isKannaiKangaiKubun1Flg,
+                isKannaiKangaiKubun2Flg,
+                isKannaiKangaiKubunFlg,
                 limitCount);
+    }
+
+    private static boolean gunshiCodeの判定(boolean isGunshiCode, RString gunshiCode) {
+
+        if (!RString.isNullOrEmpty(gunshiCode)) {
+            isGunshiCode = true;
+        }
+        return isGunshiCode;
+    }
+
+    private static boolean kannaiKangaiKubun1の判定(boolean isKannaiKangaiKubun1Flg, RString kannaiKangaiKubun1, RString kannaiKangaiKubun2) {
+
+        if (!RString.isNullOrEmpty(kannaiKangaiKubun1) && RString.isNullOrEmpty(kannaiKangaiKubun2)) {
+            isKannaiKangaiKubun1Flg = true;
+        }
+        return isKannaiKangaiKubun1Flg;
+    }
+
+    private static boolean kannaiKangaiKubun2の判定(boolean isKannaiKangaiKubun2Flg, RString kannaiKangaiKubun1, RString kannaiKangaiKubun2) {
+
+        if (RString.isNullOrEmpty(kannaiKangaiKubun1) && !RString.isNullOrEmpty(kannaiKangaiKubun2)) {
+            isKannaiKangaiKubun2Flg = true;
+        }
+        return isKannaiKangaiKubun2Flg;
+    }
+
+    private static boolean kannaiKangaiKubunの判定(boolean isKannaiKangaiKubunFlg, RString kannaiKangaiKubun1, RString kannaiKangaiKubun2) {
+
+        if (!RString.isNullOrEmpty(kannaiKangaiKubun1) && !RString.isNullOrEmpty(kannaiKangaiKubun2)) {
+            isKannaiKangaiKubunFlg = true;
+        }
+        return isKannaiKangaiKubunFlg;
     }
 
     /**
@@ -251,6 +307,7 @@ public final class JigyoshaInputGuideParameter {
                 kenCode,
                 RString.EMPTY,
                 RString.EMPTY,
+                RString.EMPTY,
                 limitCount);
 
     }
@@ -296,6 +353,7 @@ public final class JigyoshaInputGuideParameter {
                 RString.EMPTY,
                 jigyoshaShubetsu,
                 RString.EMPTY,
+                RString.EMPTY,
                 limitCount);
     }
 
@@ -310,7 +368,8 @@ public final class JigyoshaInputGuideParameter {
      * @param address 住所
      * @param zennpouitti 検索条件区分
      * @param systemdate システム日付
-     * @param kannaiKangaiKubun 管内・管外区分
+     * @param kannaiKangaiKubun1 管内区分
+     * @param kannaiKangaiKubun2 管外区分
      * @param jigyoshaShubetsu 事業者種別
      * @param limitCount 表示件数
      * @return createParam_common
@@ -324,7 +383,8 @@ public final class JigyoshaInputGuideParameter {
             RString address,
             RString zennpouitti,
             FlexibleDate systemdate,
-            RString kannaiKangaiKubun,
+            RString kannaiKangaiKubun1,
+            RString kannaiKangaiKubun2,
             RString jigyoshaShubetsu,
             int limitCount) {
         return createParam_common(
@@ -341,7 +401,8 @@ public final class JigyoshaInputGuideParameter {
                 systemdate,
                 RString.EMPTY,
                 jigyoshaShubetsu,
-                kannaiKangaiKubun,
+                kannaiKangaiKubun1,
+                kannaiKangaiKubun2,
                 limitCount);
     }
 
@@ -553,12 +614,48 @@ public final class JigyoshaInputGuideParameter {
     }
 
     /**
-     * 管内・管外区分を返します。
+     * 管内区分を返します。
      *
      * @return 管内・管外区分
      */
-    public RString getKannaiKangaiKubun() {
-        return kannaiKangaiKubun;
+    public RString getKannaiKangaiKubun1() {
+        return kannaiKangaiKubun1;
+    }
+
+    /**
+     * 管外区分を返します。
+     *
+     * @return 管内・管外区分
+     */
+    public RString getKannaiKangaiKubun2() {
+        return kannaiKangaiKubun2;
+    }
+
+    /**
+     * 管内区分フラグを返します。
+     *
+     * @return 管内区分フラグ
+     */
+    public boolean isIsKannaiKangaiKubun1Flg() {
+        return isKannaiKangaiKubun1Flg;
+    }
+
+    /**
+     * 管外区分フラグを返します。
+     *
+     * @return 管外区分フラグ
+     */
+    public boolean isIsKannaiKangaiKubun2Flg() {
+        return isKannaiKangaiKubun2Flg;
+    }
+
+    /**
+     * 全てフラグを返します。
+     *
+     * @return 全てフラグ
+     */
+    public boolean isIsKannaiKangaiKubunFlg() {
+        return isKannaiKangaiKubunFlg;
     }
 
     /**

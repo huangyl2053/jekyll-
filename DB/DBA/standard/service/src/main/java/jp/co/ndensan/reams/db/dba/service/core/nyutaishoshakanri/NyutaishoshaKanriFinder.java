@@ -15,6 +15,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険施設入退所者管理の履歴期間重複チェックです。
+ *
+ * @reamsid_L DBA-0360-010 duanzhanli
+ *
  */
 public class NyutaishoshaKanriFinder {
 

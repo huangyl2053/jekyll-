@@ -4,24 +4,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun.IKaigoChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * BatchParamterInfo のクラスファイル
- *
+ * BatchParamterInfo のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class BatchParamterInfoDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,24 +29,16 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     private HorizontalLine HLine1;
     @JsonProperty("lblido")
     private Label lblido;
-    @JsonProperty("lblzenkaikaishi")
-    private Label lblzenkaikaishi;
     @JsonProperty("txtzenkaikaishi")
     private TextBoxFlexibleDate txtzenkaikaishi;
-    @JsonProperty("lblzenkaikara")
-    private Label lblzenkaikara;
     @JsonProperty("txtzenkaishuryo")
     private TextBoxFlexibleDate txtzenkaishuryo;
-    @JsonProperty("lblkonkaikaishi")
-    private Label lblkonkaikaishi;
     @JsonProperty("txtkonkaikaishi")
     private TextBoxFlexibleDate txtkonkaikaishi;
-    @JsonProperty("lblkonkaishuryo")
-    private Label lblkonkaishuryo;
     @JsonProperty("txtkonkaishuryo")
     private TextBoxFlexibleDate txtkonkaishuryo;
-    @JsonProperty("ccdChohyoShutsurykujun")
-    private KaigoChohyoShutsuryokujunDiv ccdChohyoShutsurykujun;
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -114,24 +101,6 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     }
 
     /*
-     * getlblzenkaikaishi
-     * @return lblzenkaikaishi
-     */
-    @JsonProperty("lblzenkaikaishi")
-    public Label getLblzenkaikaishi() {
-        return lblzenkaikaishi;
-    }
-
-    /*
-     * setlblzenkaikaishi
-     * @param lblzenkaikaishi lblzenkaikaishi
-     */
-    @JsonProperty("lblzenkaikaishi")
-    public void setLblzenkaikaishi(Label lblzenkaikaishi) {
-        this.lblzenkaikaishi = lblzenkaikaishi;
-    }
-
-    /*
      * gettxtzenkaikaishi
      * @return txtzenkaikaishi
      */
@@ -147,24 +116,6 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     @JsonProperty("txtzenkaikaishi")
     public void setTxtzenkaikaishi(TextBoxFlexibleDate txtzenkaikaishi) {
         this.txtzenkaikaishi = txtzenkaikaishi;
-    }
-
-    /*
-     * getlblzenkaikara
-     * @return lblzenkaikara
-     */
-    @JsonProperty("lblzenkaikara")
-    public Label getLblzenkaikara() {
-        return lblzenkaikara;
-    }
-
-    /*
-     * setlblzenkaikara
-     * @param lblzenkaikara lblzenkaikara
-     */
-    @JsonProperty("lblzenkaikara")
-    public void setLblzenkaikara(Label lblzenkaikara) {
-        this.lblzenkaikara = lblzenkaikara;
     }
 
     /*
@@ -186,24 +137,6 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     }
 
     /*
-     * getlblkonkaikaishi
-     * @return lblkonkaikaishi
-     */
-    @JsonProperty("lblkonkaikaishi")
-    public Label getLblkonkaikaishi() {
-        return lblkonkaikaishi;
-    }
-
-    /*
-     * setlblkonkaikaishi
-     * @param lblkonkaikaishi lblkonkaikaishi
-     */
-    @JsonProperty("lblkonkaikaishi")
-    public void setLblkonkaikaishi(Label lblkonkaikaishi) {
-        this.lblkonkaikaishi = lblkonkaikaishi;
-    }
-
-    /*
      * gettxtkonkaikaishi
      * @return txtkonkaikaishi
      */
@@ -219,24 +152,6 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     @JsonProperty("txtkonkaikaishi")
     public void setTxtkonkaikaishi(TextBoxFlexibleDate txtkonkaikaishi) {
         this.txtkonkaikaishi = txtkonkaikaishi;
-    }
-
-    /*
-     * getlblkonkaishuryo
-     * @return lblkonkaishuryo
-     */
-    @JsonProperty("lblkonkaishuryo")
-    public Label getLblkonkaishuryo() {
-        return lblkonkaishuryo;
-    }
-
-    /*
-     * setlblkonkaishuryo
-     * @param lblkonkaishuryo lblkonkaishuryo
-     */
-    @JsonProperty("lblkonkaishuryo")
-    public void setLblkonkaishuryo(Label lblkonkaishuryo) {
-        this.lblkonkaishuryo = lblkonkaishuryo;
     }
 
     /*
@@ -258,12 +173,12 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     }
 
     /*
-     * getccdChohyoShutsurykujun
-     * @return ccdChohyoShutsurykujun
+     * getccdChohyoShutsuryokujun
+     * @return ccdChohyoShutsuryokujun
      */
-    @JsonProperty("ccdChohyoShutsurykujun")
-    public IKaigoChohyoShutsuryokujunDiv getCcdChohyoShutsurykujun() {
-        return ccdChohyoShutsurykujun;
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+        return ccdChohyoShutsuryokujun;
     }
 
     // </editor-fold>

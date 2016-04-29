@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 /**
  *
  * 居宅給付計画届出Entityです。
+ *
+ * @reamsid_L DBA-1090-021 huangh
  */
 @lombok.Getter
 @lombok.Setter

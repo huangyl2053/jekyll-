@@ -5,8 +5,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 施設利用-3-09Aを表す列挙型です。
- * 
- * @author LDNS 
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public enum GaikyochosaKomoku09A_26 {
 
@@ -25,7 +25,7 @@ public enum GaikyochosaKomoku09A_26 {
 
     /**
      * 施設利用-3-09Aのコードを返します。
-     * 
+     *
      * @return 施設利用-3-09Aのコード
      */
     public RString getコード() {
@@ -34,7 +34,7 @@ public enum GaikyochosaKomoku09A_26 {
 
     /**
      * 施設利用-3-09Aの名称を返します。
-     * 
+     *
      * @return 施設利用-3-09Aの名称
      */
     public RString get名称() {
@@ -43,7 +43,7 @@ public enum GaikyochosaKomoku09A_26 {
 
     /**
      * 施設利用-3-09Aのコードと一致する内容を探します。
-     * 
+     *
      * @param code 施設利用-3-09Aのコード
      * @return {@code code} に対応する施設利用-3-09A
      */

@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.jutakukaishuhishikyushinsei.JutakuKaishuhiShikyuShinseiErrorMessages;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0720011.MishinsaShikyuShinseiListPanelValidator;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0720011.SearchConditionToMishinsaShikyuShinseiPanelValidator;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0720011.ShinsaButtonDivValidator;
+import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.MishinsaShikyuShinseiListPanelValidator;
+import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.SearchConditionToMishinsaShikyuShinseiPanelValidator;
+import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.ShinsaButtonDivValidator;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionary;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 住宅改修費支給申請一括審査・決定画面 チェッククラスです
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
 public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
 
@@ -45,7 +47,7 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs volidateデータ選択() {
+    public ValidationMessageControlPairs volidateデータ選択と決定日() {
         IValidationMessages messages = new MishinsaShikyuShinseiListPanelValidator(div).validate();
         return createMishinsaShikyuShinseiListPanelValidatorDictionary().check(messages);
     }
@@ -55,7 +57,7 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs volidateデータ選択と未審査() {
+    public ValidationMessageControlPairs volidateデータ選択と未審査と決定日() {
         IValidationMessages messages = new ShinsaButtonDivValidator(div).validate();
         return createMishinsaShinsaButtonDivValidatorDictionary().check(messages);
     }
@@ -81,7 +83,9 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
     private ValidationDictionary createMishinsaShikyuShinseiListPanelValidatorDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック,
-                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei()).build();
+                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
+                .add(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック,
+                        div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD()).build();
     }
 
     /**
@@ -94,6 +98,8 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.データ選択のチェック,
                         div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.未審査のチェック,
-                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei()).build();
+                        div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
+                .add(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック,
+                        div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD()).build();
     }
 }

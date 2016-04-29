@@ -4,16 +4,18 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * Zenken のクラスファイル 
- * 
- * @author 自動生成
+ * Zenken のクラスファイル
+ *
+ * @reamsid_L DBU-0350-010 zhangguopeng
  */
 public class ZenkenDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]

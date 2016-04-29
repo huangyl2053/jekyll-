@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.Nenreit
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
+ * 年齢到達者登録リストBuilderクラスです。
  *
- * 年齢到達者登録リストBuilderクラスです
+ * @reamsid_L DBA-0570-060 xuyue
  */
 class NenreitotatsuKakuninListBuilderImpl implements INenreitotatsuKakuninListBuilder {
 
@@ -33,7 +34,6 @@ class NenreitotatsuKakuninListBuilderImpl implements INenreitotatsuKakuninListBu
      *
      * @return {@link NenreitotatsuKakuninListReportSource}
      */
-
     @Override
     public NenreitotatsuKakuninListReportSource build() {
         return ReportEditorJoiner.from(new NenreitotatsuKakuninListReportSource()).join(headerEditor).join(hyojiBodyEditor).buildSource();

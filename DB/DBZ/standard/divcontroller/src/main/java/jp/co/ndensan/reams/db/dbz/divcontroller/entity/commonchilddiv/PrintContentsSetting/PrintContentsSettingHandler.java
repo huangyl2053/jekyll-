@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 共有子Div「印刷設定」のhandlerクラスです
+ *
+ * @reamsid_L DBZ-4500-010 chengsanyuan
  */
 public class PrintContentsSettingHandler {
 

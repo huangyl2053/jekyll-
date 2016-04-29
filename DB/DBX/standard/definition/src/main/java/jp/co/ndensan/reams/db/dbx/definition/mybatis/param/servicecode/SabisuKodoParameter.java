@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * サービスコード入力検索条件クラスです。
+ * @reamsid_L DBA-0340-060 dongyabin
  */
 public final class SabisuKodoParameter {
 

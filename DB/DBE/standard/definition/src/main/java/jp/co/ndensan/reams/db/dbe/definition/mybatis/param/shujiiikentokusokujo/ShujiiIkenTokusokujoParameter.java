@@ -6,11 +6,14 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医意見書を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
@@ -30,6 +33,8 @@ public final class ShujiiIkenTokusokujoParameter {
     private final boolean uses印刷期間;
     private final boolean uses印刷期間From;
     private final boolean uses印刷期間To;
+    private final RString 取下 = ShoriJotaiKubun.取下.getコード();
+    private final RString 却下 = ShoriJotaiKubun.却下.getコード();
 
     private ShujiiIkenTokusokujoParameter(
             FlexibleDate 基準日,
@@ -103,8 +108,6 @@ public final class ShujiiIkenTokusokujoParameter {
         boolean uses印刷期間From = false;
         boolean uses印刷期間To = false;
         boolean uses保険者コード = false;
-        boolean uses主治医医療機関コード = false;
-        boolean uses主治医コード = false;
         if (tempData.getTemp_印刷期間開始日() != null && tempData.getTemp_印刷期間終了日() != null) {
             uses印刷期間 = true;
         }
@@ -117,16 +120,10 @@ public final class ShujiiIkenTokusokujoParameter {
         if (tempData.getTemp_保険者コード() != null && !tempData.getTemp_保険者コード().isEmpty()) {
             uses保険者コード = true;
         }
-        if (tempData.getTemp_主治医医療機関コード() != null && !tempData.getTemp_主治医医療機関コード().isEmpty()) {
-            uses主治医医療機関コード = true;
-        }
-        if (tempData.getTemp_主治医コード() != null && !tempData.getTemp_主治医コード().isEmpty()) {
-            uses主治医コード = true;
-        }
         return new ShujiiIkenTokusokujoParameter(
                 FlexibleDate.EMPTY, RString.EMPTY, tempData.getTemp_保険者コード(), tempData.getTemp_主治医医療機関コード(),
                 tempData.getTemp_主治医コード(), tempData.getTemp_印刷期間開始日() == null ? RString.EMPTY : tempData.getTemp_印刷期間開始日()
                 .toDateString(), tempData.getTemp_印刷期間終了日() == null ? RString.EMPTY : tempData.getTemp_印刷期間終了日().toDateString(),
-                false, uses保険者コード, uses主治医医療機関コード, uses主治医コード, uses印刷期間, uses印刷期間From, uses印刷期間To);
+                false, uses保険者コード, false, false, uses印刷期間, uses印刷期間From, uses印刷期間To);
     }
 }

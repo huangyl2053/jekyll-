@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 依頼書一括発行の抽象ValidationHandlerクラスです。
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 public class IraishoIkkatsuHakkoValidationHandler {
 

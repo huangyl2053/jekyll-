@@ -13,30 +13,25 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity
 
 /**
  * 他市町村住所地特例RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class TashichosonJushochiTokureiEntity implements Cloneable, Serializable {
-
+public class TashichosonJushochiTokureiEntity implements Serializable {
 
     /**
-     * -- GETTER --
-     * 他市町村住所地特例Entityを返します。
+     * -- GETTER -- 他市町村住所地特例Entityを返します。
      *
-     * @return 他市町村住所地特例Entity
-     * -- SETTER --
-     * 他市町村住所地特例Entityを設定します。
+     * @return 他市町村住所地特例Entity -- SETTER -- 他市町村住所地特例Entityを設定します。
      *
      * @param 他市町村住所地特例Entity 他市町村住所地特例Entity
      */
     private DbT1003TashichosonJushochiTokureiEntity 他市町村住所地特例Entity;
     /**
-     * -- GETTER --
-     * 介護保険施設入退所EntityListを返します。
+     * -- GETTER -- 介護保険施設入退所EntityListを返します。
      *
-     * @return 介護保険施設入退所EntityList
-     * -- SETTER --
-     * 介護保険施設入退所EntityListを設定します。
+     * @return 介護保険施設入退所EntityList -- SETTER -- 介護保険施設入退所EntityListを設定します。
      *
      * @param 介護保険施設入退所EntityList 介護保険施設入退所EntityList
      */
@@ -62,4 +57,5 @@ public class TashichosonJushochiTokureiEntity implements Cloneable, Serializable
             entity.initializeMd5();
         }
     }
+
 }

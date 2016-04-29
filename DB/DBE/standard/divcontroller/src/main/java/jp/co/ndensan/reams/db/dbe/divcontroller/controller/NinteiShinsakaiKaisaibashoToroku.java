@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -33,9 +32,10 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * 介護認定審査会開催場所登録Divを制御クラスです。
  *
+ * @reamsid_L DBE-0100-010  wangkun
  */
 public class NinteiShinsakaiKaisaibashoToroku {
-    
+
     private static final RString 更新モード = new RString("修正");
     private static final RString 追加モード = new RString("追加");
     private static final RString 通常 = new RString("通常");
@@ -43,7 +43,6 @@ public class NinteiShinsakaiKaisaibashoToroku {
     private static final CodeShubetsu コード種別 = new CodeShubetsu("5001");
     private static final boolean 有効 = true;
     private static final boolean 全て = false;
-    private static final Decimal DUMMY_DISP_MAX = new Decimal(100);
 
     /**
      * 介護認定審査会開催場所登録の初期処理を表示します。
@@ -54,7 +53,6 @@ public class NinteiShinsakaiKaisaibashoToroku {
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onLoad(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
         div.getBtnTsuika().setDisabled(false);
-        div.getTxtDispMax().setValue(DUMMY_DISP_MAX);
         return ResponseData.of(div).respond();
     }
 
@@ -217,7 +215,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     private List<ShinsakaiKaisaiBashoJoho> get開催場所一覧(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         List<ShinsakaiKaisaiBashoJoho> businessList;
         ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
@@ -235,7 +233,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         ViewStateHolder.put(ViewStateKeys.開催場所情報一覧, shinsakaiKaisaiBashoJohoList);
         return businessList;
     }
-    
+
     private void 開催場所コードの重複チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         RString kaisaibashoCode = div.getTxtKaisaibashoCode().getValue();
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
@@ -265,7 +263,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             }
         }
     }
-    
+
     private boolean isUpdateHasChange(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         RStringBuilder stringBuilder = new RStringBuilder(div.getTxtKaisaibashoCode().getValue());
         stringBuilder.append(div.getTxtKaisaibashoMeisho().getValue())
@@ -275,7 +273,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
                 .append(div.getCcdKaisaiChikuCode().getCode().value());
         return !div.getShinakaiKaisaIbashoShosai().getSelectItem().equals(stringBuilder.toRString());
     }
-    
+
     private boolean isAddHasChange(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         return !div.getTxtKaisaibashoCode().getValue().isEmpty()
                 || !div.getTxtKaisaibashoMeisho().getValue().isEmpty()
@@ -285,7 +283,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
                 || !div.getCcdKaisaiChikuCode().getCode().isEmpty()
                 || !div.getCcdKaisaiChikuCode().getCodeMeisho().isEmpty();
     }
-    
+
     private void 開催地区コードの存在チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         // CodeMaster.getCode(コード種別,div.getCcdKaisaiChikuCode().getCode());
         // QA292は同様の問題があります、暫定以下の方式を実現。
@@ -307,7 +305,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             }
         }
     }
-    
+
     private NinteiShinsakaiKaisaibashoTorokuHandler getHandler(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         return new NinteiShinsakaiKaisaibashoTorokuHandler(div);
     }

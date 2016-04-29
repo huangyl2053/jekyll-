@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35003;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 
 /**
- *
  * 賦課情報の取得_バッチ処理クラスパラメータクラスです。
+ *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 @lombok.Getter
 @lombok.Setter

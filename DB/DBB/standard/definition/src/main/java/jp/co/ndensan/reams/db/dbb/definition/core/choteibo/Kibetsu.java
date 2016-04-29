@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 期別用パラメータクラスです。
+ *
+ * @reamsid_L DBB-0770-040 yebangqiang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険住所地特例施設変更通知書の帳票データのクラスです。
+ *
+ * @reamsid_L DBA-0380-070 duanzhanli
  */
 public class ShisetsuHenkoTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -78,13 +80,21 @@ public class ShisetsuHenkoTsuchishoReportSource implements IReportSource {
     public RString henkogoShisetsuJusho;
     @ReportItem(name = "denshiKoin", order = 34)
     public RString denshiKoin;
-    @ReportItem(name = "shomeiHakkoYMD", length = 22, order = 35)
-    public RString shomeiHakkoYMD;
-    @ReportItem(name = "shuchoMei", length = 14, order = 36)
-    public RString shuchoMei;
-    @ReportItem(name = "shichosonMei", length = 40, order = 37)
-    public RString shichosonMei;
-    @ReportItem(name = "koinShoryaku", length = 15, order = 38)
+    @ReportItem(name = "hakkoYMD1", length = 12, order = 35)
+    public RString hakkoYMD1;
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 36)
+    public RString ninshoshaYakushokuMei;
+    @ReportItem(name = "ninshoshaYakushokuMei1", order = 37)
+    public RString ninshoshaYakushokuMei1;
+    @ReportItem(name = "koinMojiretsu", length = 4, order = 38)
+    public RString koinMojiretsu;
+    @ReportItem(name = "ninshoshaShimeiKakenai", order = 39)
+    public RString ninshoshaShimeiKakenai;
+    @ReportItem(name = "ninshoshaShimeiKakeru", order = 40)
+    public RString ninshoshaShimeiKakeru;
+    @ReportItem(name = "ninshoshaYakushokuMei2", order = 41)
+    public RString ninshoshaYakushokuMei2;
+    @ReportItem(name = "koinShoryaku", length = 15, order = 42)
     public RString koinShoryaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

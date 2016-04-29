@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 認定調査情報を取得するのクラスです。
+ *
+ * @reamsid_L DBE-0200-020 zhangguopeng
  */
 public class NinteiChosaIraiShokaiFinder {
 

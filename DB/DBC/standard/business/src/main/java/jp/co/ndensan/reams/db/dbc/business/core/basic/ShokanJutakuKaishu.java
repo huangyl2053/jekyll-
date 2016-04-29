@@ -11,19 +11,19 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntit
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求住宅改修を管理するクラスです。
  */
 public class ShokanJutakuKaishu
-        extends ModelBase<ShokanJutakuKaishuIdentifier, DbT3049ShokanJutakuKaishuEntity, ShokanJutakuKaishu> implements Serializable {
+        extends ParentModelBase<ShokanJutakuKaishuIdentifier, DbT3049ShokanJutakuKaishuEntity, ShokanJutakuKaishu> implements Serializable {
 
     private final DbT3049ShokanJutakuKaishuEntity entity;
     private final ShokanJutakuKaishuIdentifier id;
@@ -39,6 +39,7 @@ public class ShokanJutakuKaishu
      * @param 様式番号 様式番号
      * @param 明細番号 明細番号
      * @param 連番 連番
+     *
      */
     public ShokanJutakuKaishu(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -242,6 +243,15 @@ public class ShokanJutakuKaishu
     }
 
     /**
+     * 住宅改修住宅内容を返します。
+     *
+     * @return 住宅改修住宅内容
+     */
+    public RString get住宅改修住宅内容() {
+        return entity.getJutakuKaishuNaiyo();
+    }
+
+    /**
      * {@link DbT3049ShokanJutakuKaishuEntity}のクローンを返します。
      *
      * @return {@link DbT3049ShokanJutakuKaishuEntity}のクローン
@@ -262,8 +272,7 @@ public class ShokanJutakuKaishu
     }
 
     /**
-     * 保持する償還払請求住宅改修を削除対象とします。<br/>
-     * {@link DbT3049ShokanJutakuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求住宅改修を削除対象とします。<br/> {@link DbT3049ShokanJutakuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanJutakuKaishu}
      */
@@ -291,6 +300,11 @@ public class ShokanJutakuKaishu
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ShokanJutakuKaishu modifiedModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

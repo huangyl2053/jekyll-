@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 /**
  * 被保険者台帳管理テーブルのエンティティクラスです。
  * <br/> 介護保険被保険者の資格を管理する
+ *
+ * @reamsid_L DBU-0320-010 linghuhang
  */
 public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001HihokenshaDaichoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">

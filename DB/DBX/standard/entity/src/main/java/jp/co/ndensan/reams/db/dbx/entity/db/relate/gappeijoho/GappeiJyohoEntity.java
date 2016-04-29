@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 合併市町村情報取得用_返却Enitity
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter

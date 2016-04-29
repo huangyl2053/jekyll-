@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 納期限出力方法を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum NokigenShutsuryokuHoho {
 

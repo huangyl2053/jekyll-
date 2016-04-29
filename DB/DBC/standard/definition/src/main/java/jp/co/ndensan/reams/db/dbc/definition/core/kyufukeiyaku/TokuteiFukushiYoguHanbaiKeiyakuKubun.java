@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 特定福祉用具販売契約の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum TokuteiFukushiYoguHanbaiKeiyakuKubun {
 

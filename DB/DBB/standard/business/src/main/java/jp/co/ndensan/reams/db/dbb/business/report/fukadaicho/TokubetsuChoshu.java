@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,13 +10,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *  特別徴収
+ * 特別徴収
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChoshu {
-    
+
     private RString 特徴調定月;
     private RString 特徴調定月の期;
     private RString 特徴仮算定保険料;
@@ -39,5 +40,5 @@ public class TokubetsuChoshu {
     private RString 特徴金額１４;
     private RString 特徴確定年額保険料;
     private RString 調整額歳出還付;
-    
+
 }

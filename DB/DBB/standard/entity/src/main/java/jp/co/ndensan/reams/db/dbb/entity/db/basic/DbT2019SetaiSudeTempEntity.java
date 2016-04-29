@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 世帯員所得情報一時テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBB-0640-020 chenaoqi
  */
 public class DbT2019SetaiSudeTempEntity extends DbTableEntityBase<DbT2019SetaiSudeTempEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">

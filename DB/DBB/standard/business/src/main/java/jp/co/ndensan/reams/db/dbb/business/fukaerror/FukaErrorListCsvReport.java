@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 賦課エラー一覧のReportクラスです。
+ *
+ * @reamsid_L DBB-0720-010 zuotao
  */
 public class FukaErrorListCsvReport implements IInternalReport {
 

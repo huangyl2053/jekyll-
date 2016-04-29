@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 時間管理の場合で認定調査スケジュール情報パラメータクラス。
+ *
+ * @reamsid_L DBE-0020-050 houtianpeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

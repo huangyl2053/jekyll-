@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
-import jp.co.ndensan.reams.db.dbb.persistence.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * 特別徴収対象者登録。
  *
+ * @reamsid_L DBB-0670-020 wangjie2
  */
 public class TokubetuChosyutaisyosyaTorokuManager {
 

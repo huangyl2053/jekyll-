@@ -13,6 +13,8 @@ import lombok.Getter;
 
 /**
  * 介護認定審査会スケジュール表ですためのProcess用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0130-090 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -20,6 +22,7 @@ public class KaigoNinteiShinsakaiScheduleProcessParamter implements IBatchProces
 
     private final RString shinsakaiKaisaiKikanFrom;
     private final RString shinsakaiKaisaiKikanTo;
+    private final RString nendo;
     private final List<RString> shinsakaiIinCodeList;
 
     /**
@@ -27,15 +30,18 @@ public class KaigoNinteiShinsakaiScheduleProcessParamter implements IBatchProces
      *
      * @param 介護認定審査会開催予定期間From 介護認定審査会開催予定期間From
      * @param 介護認定審査会開催予定期間To 介護認定審査会開催予定期間To
+     * @param 年度 年度
      * @param 審査会委員コードリスト 審査会委員コードリスト
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public KaigoNinteiShinsakaiScheduleProcessParamter(
             RString 介護認定審査会開催予定期間From,
             RString 介護認定審査会開催予定期間To,
+            RString 年度,
             List<RString> 審査会委員コードリスト) {
         this.shinsakaiKaisaiKikanFrom = 介護認定審査会開催予定期間From;
         this.shinsakaiKaisaiKikanTo = 介護認定審査会開催予定期間To;
+        this.nendo = 年度;
         this.shinsakaiIinCodeList = 審査会委員コードリスト;
     }
 
@@ -45,9 +51,9 @@ public class KaigoNinteiShinsakaiScheduleProcessParamter implements IBatchProces
      * @return KaigoNinteiShinsakaiScheduleMybitisParamter
      */
     public KaigoNinteiShinsakaiScheduleMybitisParamter toKaigoNinteiShinsakaiScheduleMybitisParamter() {
-        return new KaigoNinteiShinsakaiScheduleMybitisParamter(
-                shinsakaiKaisaiKikanFrom,
+        return new KaigoNinteiShinsakaiScheduleMybitisParamter(shinsakaiKaisaiKikanFrom,
                 shinsakaiKaisaiKikanTo,
+                nendo,
                 shinsakaiIinCodeList);
     }
 }

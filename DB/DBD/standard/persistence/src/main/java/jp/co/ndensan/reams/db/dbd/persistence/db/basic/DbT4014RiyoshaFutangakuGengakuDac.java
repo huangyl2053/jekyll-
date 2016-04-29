@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengaku.ketteiKubun;
@@ -20,7 +21,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -32,8 +35,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 利用者負担額減額のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT4014RiyoshaFutangakuGengakuDac {
+
+    private static final RString 定数_いち = new RString("01");
 
     @InjectSession
     private SqlSession session;
@@ -96,6 +103,19 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
     }
 
     /**
+     * DbT4014RiyoshaFutangakuGengakuEntityを物理削除します。
+     *
+     * @param entity entity
+     * @return 物理削除件数
+     */
+    @Transaction
+    public int delete(DbT4014RiyoshaFutangakuGengakuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額減額エンティティ"));
+        entity.setState(EntityDataState.Deleted);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 減額給付率の取得
      *
      * @param 被保険者番号 HihokenshaNo
@@ -111,8 +131,8 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
                 table(DbT4014RiyoshaFutangakuGengaku.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(ketteiKubun, 1),
-                                leq(tekiyoKaishiYMD, サービス提供年月.plusMonth(1)),
+                                eq(ketteiKubun, KetteiKubun.承認する.getコード()),
+                                leq(tekiyoKaishiYMD, new FlexibleDate(サービス提供年月.toDateString().toString() + 定数_いち)),
                                 leq(new FlexibleDate(サービス提供年月.toDateString().toString()
                                                 + サービス提供年月.getLastDay()), tekiyoShuryoYMD))).
                 order(by(rirekiNo, DESC)).

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Minashi2Gosha.Minashi2GoshaList;
-import jp.co.ndensan.reams.db.dbe.business.core.Minashi2Gosha.Minashi2Gosha;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiTaishoshaList;
+import jp.co.ndensan.reams.db.dbe.business.core.minashi2gosha.Minashi2GoshaList;
+import jp.co.ndensan.reams.db.dbe.business.core.minashi2gosha.Minashi2Gosha;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiTaishoshaList;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.Hihokensha;

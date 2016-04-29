@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 保険者入力補助のダイアログのDivControllerです
+ *
+ * @reamsid_L DBA-0180-010 lishengli
  */
 public class HokenshaInputGuide {
 

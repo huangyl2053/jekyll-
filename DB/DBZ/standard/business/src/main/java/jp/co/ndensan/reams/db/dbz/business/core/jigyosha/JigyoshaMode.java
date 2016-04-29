@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 介護事業者施設オブジェクトの項目定義クラスです。
+ *
+ * @reamsid_L DBA-0190-010 houtianpeng
  */
 @lombok.Getter
 @lombok.Setter
@@ -23,5 +25,6 @@ public class JigyoshaMode implements Serializable {
     private KaigoJigyoshaNo jigyoshaNo;
     private AtenaMeisho jigyoshaName;
     private RString jigyoshaShubetsu;
+    private RString yukoKaishiYMD;
     private List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide;
 }

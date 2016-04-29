@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求特定診療費のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3041ShokanTokuteiShinryohiDac implements ISaveable<DbT3041ShokanTokuteiShinryohiEntity> {
 

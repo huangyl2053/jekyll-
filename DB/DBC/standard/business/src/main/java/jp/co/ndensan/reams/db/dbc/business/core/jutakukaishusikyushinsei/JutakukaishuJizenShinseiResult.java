@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.Juta
 
 /**
  * 住宅改修費事前申請情報クラスです。
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.Jyuk
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.JyukiRendoTorokushaListBatchEntity;
 import jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity.TaJushochiTokureiShayouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.jukirendotorokulist.JukiRendoTorokuListReportSource;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.jyukirendojouhou.IJyukiRendoJouhouMapper;
-import jp.co.ndensan.reams.db.dba.service.jukirendotorokushalist.JyukiRendoTorokushaListBatch;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.jyukirendojouhou.IJyukiRendoJouhouMapper;
+import jp.co.ndensan.reams.db.dba.service.core.jukirendotorokushalist.JyukiRendoTorokushaListBatch;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -49,6 +49,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 住基連動登録者リストを作成します。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
 

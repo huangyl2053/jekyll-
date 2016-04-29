@@ -3,25 +3,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 24 18:32:36 CST 2016 
+ * Wed Apr 13 19:31:57 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * dgdYichiran_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgdYichiran_Row のクラスファイル
+ *
+ * @reamsid_L DBC-1030-010 gongliang
  */
-
 public class dgdYichiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString defaultDataName1;
     private RString defaultDataName6;

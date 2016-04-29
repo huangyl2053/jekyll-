@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,6 +13,8 @@ import lombok.Getter;
 
 /**
  * 主治医意見書督促状発行を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -26,6 +29,8 @@ public final class ShujiiIkenTokusokujoMybitisParamter implements IMyBatisParame
     private final boolean uses保険者コード;
     private final boolean uses主治医医療機関コード;
     private final boolean uses主治医コード;
+    private final RString 取下 = ShoriJotaiKubun.取下.getコード();
+    private final RString 却下 = ShoriJotaiKubun.却下.getコード();
 
     private ShujiiIkenTokusokujoMybitisParamter(FlexibleDate temp_基準日, RString temp_印刷済対象者, RString temp_保険者コード,
             RString temp_主治医医療機関コード, RString temp_主治医コード, boolean uses印刷済対象者, boolean uses保険者コード,

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
  * 賦課情報の取得クラスです。
+ *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 public class FukaJohoShutokuProcess extends SimpleBatchProcessBase {
 
@@ -17,7 +19,7 @@ public class FukaJohoShutokuProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        
+
         // TODO DBBBZ35003_特徴平準化（特徴6月分）通知書一括発行の「賦課情報取得」メソッドを呼び出す。
     }
 

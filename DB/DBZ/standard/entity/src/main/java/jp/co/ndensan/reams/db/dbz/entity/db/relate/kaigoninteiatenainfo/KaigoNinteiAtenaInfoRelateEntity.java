@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護認定宛名情報のRelateEntityクラスです。
+ *
+ * @reamsid_L DBE-1300-050 lizhuoxuan
  */
 @lombok.Getter
 @lombok.Setter

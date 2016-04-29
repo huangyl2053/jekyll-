@@ -4,20 +4,21 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import java.util.Arrays;
 import java.util.EnumMap;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.Test;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 要介護認定調査の調査票を編集するクラスです。
@@ -123,7 +124,7 @@ public class NinteichosahyoEditorTest extends DbeTestBase {
     }
 
     private static Ninteichosahyo createNewChosahyo() {
-        return new Ninteichosahyo(new EnumMap<>(NinteichosaItemKubunOfKihon.class), NinteichosaItemGroupOf2009.values());
+        return new Ninteichosahyo(new EnumMap<>(NinteichosaItemKubunOfKihon.class), Arrays.asList(NinteichosaItemGroupOf2009.values()));
     }
 
     private static Ninteichosahyo createChosahyo() {

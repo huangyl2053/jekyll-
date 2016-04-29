@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku.SikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
-import jp.co.ndensan.reams.db.dbz.persistence.mapper.basic.sikakukanrenido.ISikakuKanrenIdoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.sikakukanrenido.ISikakuKanrenIdoMapper;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 資格関連異動クラスです。
+ *
+ * @reamsid_L DBA-0120-010 wanghui
  */
 public class SikakuKanrenIdoFinder {
 
@@ -75,8 +77,7 @@ public class SikakuKanrenIdoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link SikakuKanrenIdoFinder}のインスタンス
      */
     public static SikakuKanrenIdoFinder createInstance() {
         return InstanceProvider.create(SikakuKanrenIdoFinder.class);

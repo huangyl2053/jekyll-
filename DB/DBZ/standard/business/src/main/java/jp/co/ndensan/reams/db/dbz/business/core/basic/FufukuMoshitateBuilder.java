@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link FufukuMoshitate}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-011 lizhuoxuan
  */
 public class FufukuMoshitateBuilder {
 

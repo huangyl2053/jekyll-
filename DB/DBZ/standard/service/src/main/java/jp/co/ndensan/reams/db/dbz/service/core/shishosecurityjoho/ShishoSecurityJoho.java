@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 支所情報セキュリティ
+ *
+ * @reamsid_L DBE-1340-010 qiaohongyu
  */
 public class ShishoSecurityJoho {
 

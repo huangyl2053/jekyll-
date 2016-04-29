@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 主治医への結果通知書発行のバッチフロークラスです。
+ * 
+ * @reamsid_L DBE-0220-030 wangkun
  */
 public class YouKaiGoNinTeiKekTesuChiFlow extends BatchFlowBase<YouKaiGoNinTeiKekTesuChiFlowParameter> {
 

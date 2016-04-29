@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.definition.core;
 
 /**
  * ViewStateKeys
+ *
+ * @reamsid_L DBC-0970-010 lizhuoxuan
  */
 public enum ViewStateKeys {
 
@@ -70,6 +72,10 @@ public enum ViewStateKeys {
      * 識別コード
      */
     識別コード,
+    /**
+     * 該当者検索_識別コード
+     */
+    該当者検索_識別コード,
     /**
      * 審査請求届出日
      */
@@ -142,6 +148,14 @@ public enum ViewStateKeys {
      * 償還払申請一覧_整理番号
      */
     償還払申請一覧_整理番号,
+    /**
+     * 償還払申請一覧_決定日
+     */
+    償還払申請一覧_決定日,
+    /**
+     * 償還払申請一覧_申請日
+     */
+    償還払申請一覧_申請日,
     /**
      * 償還払申請一覧_様式番号
      */
@@ -285,5 +299,13 @@ public enum ViewStateKeys {
     /**
      * 審査会委員名称
      */
-    その他機関選択ガイド_モード
+    その他機関選択ガイド_モード,
+    /**
+     * 償還払決定一覧情報
+     */
+    償還払決定一覧情報,
+    /**
+     * 負担限度額認定申請の情報
+     */
+    負担限度額認定申請の情報;
 }

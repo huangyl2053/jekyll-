@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SearchToKyufujissekiPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1400011.SearchToKyufujissekiPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -21,12 +21,12 @@ public class SearchToKyufujissekiPanel {
      * @return ResponseData
      */
     public ResponseData onLoad(SearchToKyufujissekiPanelDiv panel) {
-        setSearchData(panel);
+        setSearchData();
 
         return ResponseData.of(panel).respond();
     }
 
-    private void setSearchData(SearchToKyufujissekiPanelDiv panel) {
+    private void setSearchData() {
 
 //        //事業者NO
 //        panel.getTxtJigyoshaNo().setValue(new RString(

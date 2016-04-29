@@ -29,16 +29,19 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
- *
  * 認定調査スケジュール登録2クラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 public class NinteiChosaScheduleShosai {
 
@@ -53,13 +56,11 @@ public class NinteiChosaScheduleShosai {
     private static final Code 選択された時間枠_9 = new Code("9");
     private static final Code 選択された時間枠_10 = new Code("10");
     private static final RString モード_1 = new RString("1");
-    private static final RString MESSAGE_保険者 = new RString("保険者");
-    private static final RString MESSAGE_認定調査委託先 = new RString("認定調査委託先");
     private static final RString 遷移元画面番号_2 = new RString("2");
     private static final RString 遷移元画面番号_10 = new RString("10");
     private static final int INT_0 = 0;
-    private static final int INT_4 = 4;
     private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
     private FlexibleDate 設定日;
     private Code 地区コード;
     private LasdecCode 保険者;
@@ -152,6 +153,10 @@ public class NinteiChosaScheduleShosai {
                 || 市町村コード.isEmpty()) {
             return ResponseData.of(div).respond();
         }
+        RString temp_保険者 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_保険者, RString.class);
+        if (!RString.isNullOrEmpty(temp_保険者)) {
+            保険者 = new LasdecCode(temp_保険者.toString());
+        }
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査委託先名称(地区コード, 市町村コード);
         List<ChikuNinteiNinteichosa> 認定調査委託先名List = ChosainJohoFander.createInstance().get認定調査委託先名称(parameter).records();
         List<ChosaChiku> 対象地区List = get対象地区List(保険者);
@@ -168,11 +173,11 @@ public class NinteiChosaScheduleShosai {
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_BtnKensaku(NinteiChosaScheduleShosaiDiv div) {
         保険者 = new LasdecCode(div.getDdlHokensha().getSelectedKey());
         認定調査委託先コード = div.getDdlninteiChosaItakusaki().getSelectedKey();
-        if (保険者 == null || 保険者.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(MESSAGE_保険者.toString()));
-        }
-        if (認定調査委託先コード == null || 認定調査委託先コード.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(MESSAGE_認定調査委託先.toString()));
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (保険者 == null || 保険者.isEmpty() || 認定調査委託先コード == null || 認定調査委託先コード.isEmpty()) {
+            getHandler(div).保険者選択されていないのチェック(validationMessages);
+            getHandler(div).認定調査委託先選択されていないのチェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         設定日 = div.getSearchNinteiChosaSchedule().getTxtSetteiDate().getValue();
         調査員状況 = div.getRadChosainJokyo().getSelectedValue();
@@ -239,11 +244,24 @@ public class NinteiChosaScheduleShosai {
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
      */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_BtnMemoHyouji(NinteiChosaScheduleShosaiDiv div) {
-        地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         設定日 = div.getTxtSetteiDate().getValue();
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, div.getDdlTaishoChiku().getSelectedKey());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
         return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.メモ入力).respond();
+    }
+
+    /**
+     * 認定調査スケジュール登録2の戻るボタンの処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
+    public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_BtnModoRu(NinteiChosaScheduleShosaiDiv div) {
+        モード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
+        if (モード_1.equals(モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
+        }
+        return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_該当者一覧に戻る).respond();
     }
 
     /**
@@ -446,6 +464,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    private RString 時間の処理(RString 時間) {
+        RStringBuilder builder = new RStringBuilder();
+        return builder.append(時間.split(":").get(0))
+                .append(時間.split(":").get(1)).toRString();
+    }
+
     private void onClick_selectHansyou(NinteiChosaScheduleShosaiDiv div,
             RString 認定調査予定時間,
             RString 認定調査員コード,
@@ -459,8 +483,8 @@ public class NinteiChosaScheduleShosai {
         RString 認定調査予定開始時間 = new RString("");
         RString 認定調査予定終了時間 = new RString("");
         if (認定調査予定時間 != null && !認定調査予定時間.isEmpty()) {
-            認定調査予定開始時間 = 認定調査予定時間.substring(INT_0, INT_4);
-            認定調査予定終了時間 = 認定調査予定時間.substring(INT_5);
+            認定調査予定開始時間 = 時間の処理(認定調査予定時間.substring(INT_0, INT_5));
+            認定調査予定終了時間 = 時間の処理(認定調査予定時間.substring(INT_6));
         }
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_申請書管理番号(
                 設定日,
@@ -480,7 +504,7 @@ public class NinteiChosaScheduleShosai {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード.value());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, 保険者.value());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getRadChosainJokyo().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, row.getYoyakuJokyo());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, 認定調査委託先コード);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_時間枠, 選択された時間枠.value());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, 認定調査員コード);
@@ -491,7 +515,7 @@ public class NinteiChosaScheduleShosai {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号, 遷移元画面番号_2);
 
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_対象者区分, RString.class));
-        RString 申請書管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録3_申請書管理番号3, RString.class);
+        RString 申請書管理番号3 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, RString.class);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, 申請書管理番号3);
     }
 

@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 新番号の取得対するテーブルのエンティティ
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 @Getter
 @Setter

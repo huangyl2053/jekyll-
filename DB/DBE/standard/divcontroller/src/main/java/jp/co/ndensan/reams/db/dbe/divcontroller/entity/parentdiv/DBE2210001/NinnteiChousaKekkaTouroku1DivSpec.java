@@ -5,10 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
+import java.util.ArrayList;
+import jp.co.ndensan.reams.db.dbz.business.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.KihonChosaInputHandler1;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput2.KihonChosaInput2.KihonChosaInputHandler2;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput3.KihonChosaInput3.KihonChosaInputHandler3;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput4.KihonChosaInput4.KihonChosaInputHandler4;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput5.KihonChosaInput5.KihonChosaInputHandler5;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput7.KihonChosaInput7.KihonChosaInputHandler7;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査結果登録1バリデーションクラスです。
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChousaKekkaTouroku1Div> {
 
@@ -69,20 +80,22 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    return true;
-//                    return !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkMahi().getSelectedKeys().isEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getChkKoshuku().getSelectedKeys().isEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadNeKaeri().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadOkiAgari().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadZai().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadRyoAshi().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadBuko().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTachiAgari().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadKataAshi().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadSenshin().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadTumeKiri().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadShiryoku().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdIchigunKihonChosa().getDaiichigunShintaiKino().getRadChoryoku().getSelectedKey().isNullOrEmpty();
+                    ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.
+                    get(KihonChosaInputHandler1.ViewStateKey.第一群認定調査基本情報リスト, ArrayList.class);
+                    if (第1群List == null) {
+                        return false;
+                    }
+                    int size = 0;
+                    int 連番;
+                    for (KihonChosaInput joho : 第1群List) {
+                        連番 = joho.get調査連番();
+                        if (連番 != 1 && 連番 != 2 && 連番 != 3 && 連番 != 4 && 連番 != 5
+                        && 連番 != 6 && 連番 != 7 && 連番 != 8 && 連番 != 9) {
+                            size++;
+                        }
+
+                    }
+                    return size == 11;
                 }
             },
     第2群の非空チェック {
@@ -94,19 +107,12 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
+                    ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.
+                    get(KihonChosaInputHandler2.ViewStateKey.第二群認定調査基本情報リスト, ArrayList.class);
+                    if (第2群List == null || 第2群List.size() != 12) {
+                        return false;
+                    }
                     return true;
-//                    return !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIjyo().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadIdou().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadEnka().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadShokuji().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHainyo().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHaiben().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadKokou().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSengan().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadSeihatsu().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadUwagi().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadZubon().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdNigunKihonChosa().getSeikatsuKinou().getRadHindo().getSelectedKey().isNullOrEmpty();
                 }
             },
     第3群の非空チェック {
@@ -118,16 +124,12 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
+                    ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.
+                    get(KihonChosaInputHandler3.ViewStateKey.第三群認定調査基本情報リスト, ArrayList.class);
+                    if (第3群List == null || 第3群List.size() != 9) {
+                        return false;
+                    }
                     return true;
-//                    return !div.getCcdSangunKihonChosa().getNinchiKinou().getRadIshiDentatsu().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadNikka().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadInfo().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadDankiKioku().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadNameInfo().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadKisetsu().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadBasho().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadHaikai().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSangunKihonChosa().getNinchiKinou().getRadModoru().getSelectedKey().isNullOrEmpty();
                 }
             },
     第4群の非空チェック {
@@ -139,22 +141,12 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
+                    ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.
+                    get(KihonChosaInputHandler4.ViewStateKey.第四群認定調査基本情報リスト, ArrayList.class);
+                    if (第4群List == null || 第4群List.size() != 15) {
+                        return false;
+                    }
                     return true;
-//                    return !div.getCcdYongunKihonChosa().getKoudoShogai().getRadbtnHiryaku().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadTukuriHanashi().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadKanjyo().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadChuyaku().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadOnajiHanashi().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadBigVoice().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadTeikou().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadOchituki().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadOutLonly().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadShushu().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadKowasu().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadMonoWasure().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadHitoriWarai().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadKateKodo().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdYongunKihonChosa().getKoudoShogai().getRadMatomeNai().getSelectedKey().isNullOrEmpty();
                 }
             },
     第5群の非空チェック {
@@ -166,13 +158,12 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
+                    ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.
+                    get(KihonChosaInputHandler5.ViewStateKey.第五群認定調査基本情報リスト, ArrayList.class);
+                    if (第5群List == null || 第5群List.size() != 6) {
+                        return false;
+                    }
                     return true;
-//                    return !div.getCcdGogun().getShakaiSekatsu().getRadKusuri().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdGogun().getShakaiSekatsu().getRadKingakuKanri().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdGogun().getShakaiSekatsu().getRadIshiKetei().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdGogun().getShakaiSekatsu().getRadShudan().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdGogun().getShakaiSekatsu().getRadKaiMono().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdGogun().getShakaiSekatsu().getRadKantanChori().getSelectedKey().isNullOrEmpty();
                 }
             },
     生活自立度の非空チェック {
@@ -184,9 +175,23 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    return true;
-//                    return !div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadShogaiKoreisha().getSelectedKey().isNullOrEmpty()
-//                    && !div.getCcdSeikatsuJiritsudoKihonchosa().getJiritsudo().getRadNinchishaJiritsudo().getSelectedKey().isNullOrEmpty();
+                    ArrayList<KihonChosaInput> 生活自立度List = ViewStateHolder.
+                    get(KihonChosaInputHandler7.ViewStateKey.第七群認定調査基本情報リスト, ArrayList.class);
+
+                    boolean 障害高齢者の日常生活自立度_選択 = false;
+                    boolean 認知症高齢者の日常生活自立度_選択 = false;
+                    if (生活自立度List == null) {
+                        return false;
+                    }
+                    for (KihonChosaInput joho : 生活自立度List) {
+                        if (!joho.get認知症高齢者自立度().isEmpty()) {
+                            障害高齢者の日常生活自立度_選択 = true;
+                        }
+                        if (!joho.get障害高齢者自立度().isEmpty()) {
+                            認知症高齢者の日常生活自立度_選択 = true;
+                        }
+                    }
+                    return 障害高齢者の日常生活自立度_選択 && 認知症高齢者の日常生活自立度_選択;
                 }
             }
 

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * KyotakuKaigoJutakuKaishuhiJizenShinseishoProertyのプロパティです。
  *
+ * @reamsid_L DBA-0540-703  lijia
+ * 
  */
 public class KyotakuKaigoJutakuKaishuhiJizenShinseishoProerty extends ReportPropertyBase<JutakuKaishuhiJizenShinseishoJuryoIninHaraiReportSource> {
 

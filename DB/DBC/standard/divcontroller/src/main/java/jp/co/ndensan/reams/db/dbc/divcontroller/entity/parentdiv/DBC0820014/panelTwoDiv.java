@@ -4,18 +4,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * panelTwo のクラスファイル 
- * 
- * @author 自動生成
+ * panelTwo のクラスファイル
+ *
+ * @reamsid_L DBC-1030-130 gongliang
  */
 public class panelTwoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,7 +40,7 @@ public class panelTwoDiv extends Panel {
     @JsonProperty("hlDown")
     private HorizontalLine hlDown;
     @JsonProperty("txtServiceTeikyoYM")
-    private TextBoxYearMonth txtServiceTeikyoYM;
+    private TextBoxDate txtServiceTeikyoYM;
     @JsonProperty("txtSeiriBango")
     private TextBoxCode txtSeiriBango;
     @JsonProperty("txtShoriMode")
@@ -160,7 +165,7 @@ public class panelTwoDiv extends Panel {
      * @return txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public TextBoxYearMonth getTxtServiceTeikyoYM() {
+    public TextBoxDate getTxtServiceTeikyoYM() {
         return txtServiceTeikyoYM;
     }
 
@@ -169,7 +174,7 @@ public class panelTwoDiv extends Panel {
      * @param txtServiceTeikyoYM txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public void setTxtServiceTeikyoYM(TextBoxYearMonth txtServiceTeikyoYM) {
+    public void setTxtServiceTeikyoYM(TextBoxDate txtServiceTeikyoYM) {
         this.txtServiceTeikyoYM = txtServiceTeikyoYM;
     }
 

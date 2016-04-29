@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikokuHairetsuCode;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikokuList;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuHairetsuCode;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +27,7 @@ public final class IchijiHanteiKeikokuMapper {
     /**
      * 一次判定結果Entityが持つ警告配列コードと一次判定年月日の情報を元に、一次判定警告Listを生成して返します。
      *
-     * @param entity 一次判定結果Entity
+     * @param 警告配列コード IchijiHanteiKeikokuHairetsuCode
      * @return 一次判定警告List
      */
     public static IchijiHanteiKeikokuList to一次判定警告List(IchijiHanteiKeikokuHairetsuCode 警告配列コード) {

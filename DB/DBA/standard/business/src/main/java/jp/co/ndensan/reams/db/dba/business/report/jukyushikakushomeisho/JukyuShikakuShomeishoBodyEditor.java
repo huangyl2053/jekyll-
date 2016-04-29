@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShika
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 受給資格証明書ボディEditorです。
+ *
+ * @reamsid_L DBU-0490-090 suguangjun
  */
 public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEditor {
 
@@ -99,7 +100,7 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
         bodyEdit2(source);
         return source;
     }
-    
+
     private JukyuShikakuShomeishoReportSource bodyEdit2(JukyuShikakuShomeishoReportSource source) {
         if (item.getHokenshaNo() != null) {
             for (int i = 1; i <= item.getHokenshaNo().length(); i++) {
@@ -135,10 +136,14 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
         source.biko = item.getBiko();
         source.remban = item.getRemban();
         source.denshiKoin = item.getDenshiKoin();
-        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.shichosonMei = item.getShichosonMei();
-        source.shuchoMei = item.getShuchoMei();
+        source.hakkoYMD = item.getHakkoYMD();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         source.koinShoryaku = item.getKoinShoryaku();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
         return source;
     }
 }

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 事業報告集計一覧データのエンティティです。
+ *
+ * @reamsid_L DBU-1130-050 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

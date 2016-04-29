@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.KozaJohoPSM.KozaJohoPSM;
+import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;

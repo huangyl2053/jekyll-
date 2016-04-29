@@ -14,9 +14,12 @@ import lombok.Setter;
 
 /**
  * 償還払支給（不支給）決定通知書のバッチ用パラメータクラスです。
+ *
+ * @reamsid_L DBC-1000-030 zuotao
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanKetteiTsuchiShoSealerBatchParameter {
 
     private FlexibleDate hakkoYMD;

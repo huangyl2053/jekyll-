@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付率取得用Entityクラスです。
+ *
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

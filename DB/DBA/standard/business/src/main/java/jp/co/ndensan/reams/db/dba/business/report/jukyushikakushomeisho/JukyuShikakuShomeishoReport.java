@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 受給資格証明書のReportです。
+ * 
+ * @reamsid_L DBU-0490-090  suguangjun 
  */
 public final class JukyuShikakuShomeishoReport extends Report<JukyuShikakuShomeishoReportSource> {
     

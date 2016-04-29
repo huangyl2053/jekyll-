@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 主治医意見書作成依頼インターフェースです。
+ * 主治医意見書作成依頼Businessです。
+ *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 public class Shujiiikenshosakuseiirai {
 
@@ -310,5 +312,14 @@ public class Shujiiikenshosakuseiirai {
      */
     public boolean isTemp_施設利用フラグ() {
         return entity.isShisetsuNyushoFlag();
+    }
+
+    /**
+     * 被保険者番号を取得します。
+     *
+     * @return 被保険者番号
+     */
+    public RString get被保険者番号() {
+        return entity.getHihokenshaNo();
     }
 }

@@ -1,19 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.NinteiResultIdoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.NinteiTorikeshiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteiResultEtcetera のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * NinteiResultEtcetera のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiResultEtceteraDiv extends Panel {
@@ -23,6 +19,7 @@ public class NinteiResultEtceteraDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShinsakaiIken")
     private TextBoxMultiLine txtShinsakaiIken;
     @JsonProperty("NinteiResultIdo")
@@ -47,7 +44,7 @@ public class NinteiResultEtceteraDiv extends Panel {
 
     @JsonProperty("txtShinsakaiIken")
     public void setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
-        this.txtShinsakaiIken=txtShinsakaiIken;
+        this.txtShinsakaiIken = txtShinsakaiIken;
     }
 
     @JsonProperty("NinteiResultIdo")
@@ -57,7 +54,7 @@ public class NinteiResultEtceteraDiv extends Panel {
 
     @JsonProperty("NinteiResultIdo")
     public void setNinteiResultIdo(NinteiResultIdoDiv NinteiResultIdo) {
-        this.NinteiResultIdo=NinteiResultIdo;
+        this.NinteiResultIdo = NinteiResultIdo;
     }
 
     @JsonProperty("NinteiTorikeshi")
@@ -67,7 +64,7 @@ public class NinteiResultEtceteraDiv extends Panel {
 
     @JsonProperty("NinteiTorikeshi")
     public void setNinteiTorikeshi(NinteiTorikeshiDiv NinteiTorikeshi) {
-        this.NinteiTorikeshi=NinteiTorikeshi;
+        this.NinteiTorikeshi = NinteiTorikeshi;
     }
 
     @JsonProperty("linTokuteiShippei")
@@ -77,7 +74,7 @@ public class NinteiResultEtceteraDiv extends Panel {
 
     @JsonProperty("linTokuteiShippei")
     public void setLinTokuteiShippei(HorizontalLine linTokuteiShippei) {
-        this.linTokuteiShippei=linTokuteiShippei;
+        this.linTokuteiShippei = linTokuteiShippei;
     }
 
     @JsonProperty("txtTokuteiShippei")
@@ -87,7 +84,7 @@ public class NinteiResultEtceteraDiv extends Panel {
 
     @JsonProperty("txtTokuteiShippei")
     public void setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
-        this.txtTokuteiShippei=txtTokuteiShippei;
+        this.txtTokuteiShippei = txtTokuteiShippei;
     }
 
 }

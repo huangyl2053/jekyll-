@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 異動チェックリストのバッチフロークラスです
+ *
+ * @reamsid_L DBA-0530-020 chengsanyuan
  */
 public class IdoCheckListFlow extends BatchFlowBase<IdoCheckListBatchParameter> {
 

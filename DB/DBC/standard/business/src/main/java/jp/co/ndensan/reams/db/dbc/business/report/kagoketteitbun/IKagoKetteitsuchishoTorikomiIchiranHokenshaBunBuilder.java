@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitbun.KagoKettei
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
+ * 過誤決定通知書情報取込一覧表（保険者分）
  *
- * @author admin
+ * @reamsid_L DBC-0980-470 lijunjun
  */
 interface IKagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder extends IReportBuilder<KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource> {
 

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 住宅改修契約を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum JutakuKaishuKeiyakuKubun {
 
@@ -32,7 +32,7 @@ public enum JutakuKaishuKeiyakuKubun {
      *
      * @return 住宅改修契約のコード
      */
-    public boolean getコード() {
+    public boolean is契約有り() {
         return code;
     }
 

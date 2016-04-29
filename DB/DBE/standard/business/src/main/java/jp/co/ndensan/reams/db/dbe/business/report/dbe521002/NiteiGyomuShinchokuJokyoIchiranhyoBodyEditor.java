@@ -3,26 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.business.report.dbe521002;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- *
  * 要介護認定業務進捗状況一覧表ボディEditorです。
+ *
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomuShinchokuJokyoIchiranhyoEditor {
 
     private final NiteiGyomuShinchokuJokyoIchiranhyoBodyItem item;
     private final int no;
-    
+
     /**
      * インスタンスを生成します。
+     *
      * @param item 要介護認定業務進捗状況一覧表リスト一覧表情報
      * @param no NO
      */
@@ -30,9 +34,10 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
         this.item = item;
         this.no = no + 1;
     }
-    
+
     /**
      * 要介護認定業務進捗状況一覧表ボディEditorです。
+     *
      * @param source 要介護認定業務進捗状況一覧表Source
      * @return 要介護認定業務進捗状況一覧表Source
      */
@@ -40,9 +45,10 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
     public NiteiGyomuShinchokuJokyoIchiranhyoReportSource edit(NiteiGyomuShinchokuJokyoIchiranhyoReportSource source) {
         return bodyEdit(source);
     }
-    
+
     private NiteiGyomuShinchokuJokyoIchiranhyoReportSource bodyEdit(NiteiGyomuShinchokuJokyoIchiranhyoReportSource source) {
-        
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hishokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.getListIchiranhyo2_3());
         source.listIchiranhyo1_1 = new RString(String.valueOf(no));
         source.listIchiranhyo1_2 = item.getListIchiranhyo1_2();
         source.listIchiranhyo1_3 = item.getListIchiranhyo1_3();
@@ -71,6 +77,5 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
                 fillType(FillType.BLANK).toDateString();
         return source;
     }
-    
-    
+
 }

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 開催番号一覧のパラメータです。
+ *
+ * @reamsid_L DBE-1350-010 zuotao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoShikaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushochitokureishaKubun;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -163,8 +161,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     /**
      * 資格異動区分を判定します。<br />
-     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。
-     * 資格変更よりも資格喪失を優先して判定します。
+     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。 資格変更よりも資格喪失を優先して判定します。
      *
      * @return 資格異動区分
      */
@@ -291,8 +288,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          * 生成したHihokenshaShikakuの{@link HihokenshaShikaku#toKaigoShikaku() toKaigoShikaku()}で得られるオブジェクトは、
          * もしBuilderの生成にIKaigoShikakuオブジェクトを渡していたとしても、そのオブジェクトと異なる結果を持つことがあります。
          * それは、Builderによる生成過程で{@link HihokenshaShikaku.Builder#soshitsu shikakuSoshitsu}等のメソッドにより、
-         * コンストラクタが受け取ったIKaigoShikakuが保持する物と異なる値が設定される可能性があるからです。
-         * 生整過程での設定内容と生成後のオブジェクトとの整合性をとるために、このメソッドで、IKaigoShikakuは再計算されます。
+         * コンストラクタが受け取ったIKaigoShikakuが保持する物と異なる値が設定される可能性があるからです。 生整過程での設定内容と生成後のオブジェクトとの整合性をとるために、このメソッドで、IKaigoShikakuは再計算されます。
          *
          * @return {@link HihokenshaShikaku HihokenshaShikaku}
          */
@@ -539,7 +535,6 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 //        private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(HihokenshaKubun hihokenshaKubun) {
 //            return ShikakuHihokenshaKubun.第１号被保険者;
 //        }
-
         private boolean isNull(Object target) {
             return target == null;
         }

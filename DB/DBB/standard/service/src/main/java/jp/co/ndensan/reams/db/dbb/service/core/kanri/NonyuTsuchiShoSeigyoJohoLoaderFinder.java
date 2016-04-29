@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SokuhoTorikomi
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SonotaTsuchishoType;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ToshoShutsuryokuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsuchiShoSeigyoJohoParameter;
-import jp.co.ndensan.reams.db.dbb.persistence.core.kanri.INonyuTsuchiShoSeigyoJohoLoaderMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri.INonyuTsuchiShoSeigyoJohoLoaderMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
@@ -41,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 納入通知書制御情報取得クラス。
+ *
+ * @reamsid_L DBB-9110-011 wangjie2
  */
 public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
 

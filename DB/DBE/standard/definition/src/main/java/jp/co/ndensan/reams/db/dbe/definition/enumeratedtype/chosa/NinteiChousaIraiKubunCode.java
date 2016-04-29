@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定調査依頼区分コードを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum NinteiChousaIraiKubunCode {
 

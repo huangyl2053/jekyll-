@@ -78,13 +78,37 @@ public class YokaigoninteiShinseishaData {
      */
     public enum YokaigoJotaiKubun {
 
+        /**
+         * 非該当
+         */
         非該当(false),
+        /**
+         * 要支援1
+         */
         要支援1(false),
+        /**
+         * 要支援2
+         */
         要支援2(false),
+        /**
+         * 要介護1
+         */
         要介護1(true),
+        /**
+         * 要介護2
+         */
         要介護2(true),
+        /**
+         * 要介護3
+         */
         要介護3(true),
+        /**
+         * 要介護4
+         */
         要介護4(true),
+        /**
+         * 要介護5
+         */
         要介護5(true);
 
         private final RString theName;
@@ -113,6 +137,12 @@ public class YokaigoninteiShinseishaData {
             return isYokaigo;
         }
 
+        /**
+         * toValue
+         *
+         * @param rstr RString
+         * @return YokaigoJotaiKubun
+         */
         public static YokaigoJotaiKubun toValue(RString rstr) {
             for (YokaigoJotaiKubun item : values()) {
                 if (item.toRString().equals(rstr)) {
@@ -128,6 +158,9 @@ public class YokaigoninteiShinseishaData {
      */
     public static class LatestNinteiResult {
 
+        /**
+         * LatestNinteiResult
+         */
         public static final LatestNinteiResult NOTHING;
 
         static {
@@ -163,14 +196,29 @@ public class YokaigoninteiShinseishaData {
             return new FlexibleDate(date.getYearMonth().toDateString() + String.valueOf(date.getLastDay()));
         }
 
+        /**
+         * yokaigodoを返します。
+         *
+         * @return yokaigodo
+         */
         public YokaigoJotaiKubun yokaigodo() {
             return this.theYokaigodo;
         }
 
+        /**
+         * ninteiDateを返します。
+         *
+         * @return ninteiDate
+         */
         public FlexibleDate ninteiDate() {
             return this.theNinteiDate;
         }
 
+        /**
+         * yukoKikanを返します。
+         *
+         * @return yukoKikan
+         */
         public Range<FlexibleDate> yukoKikan() {
             return this.theYukoKikan;
         }

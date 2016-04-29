@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
@@ -21,10 +20,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査委託先情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0270-010 liangbc
  */
 public class NinteichosaItakusakiJohoManager {
 
-    private final MapperProvider mapperProvider;
+//    private final MapperProvider mapperProvider;
     private final DbT5910NinteichosaItakusakiJohoDac 認定調査委託先情報Dac;
     private final ChosainJohoManager 調査員情報Manager;
 
@@ -32,7 +33,7 @@ public class NinteichosaItakusakiJohoManager {
      * コンストラクタです。
      */
     NinteichosaItakusakiJohoManager() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+//        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.認定調査委託先情報Dac = InstanceProvider.create(DbT5910NinteichosaItakusakiJohoDac.class);
         this.調査員情報Manager = new ChosainJohoManager();
     }
@@ -40,16 +41,17 @@ public class NinteichosaItakusakiJohoManager {
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider mapperProvider
+     * // * @param mapperProvider mapperProvider
+     *
      * @param 認定調査委託先情報Dac 認定調査委託先情報Dac
      * @param 調査員情報Manager 調査員情報Manager
      */
     NinteichosaItakusakiJohoManager(
-            MapperProvider mapperProvider,
+            //            MapperProvider mapperProvider,
             DbT5910NinteichosaItakusakiJohoDac 認定調査委託先情報Dac,
             ChosainJohoManager 調査員情報Manager
     ) {
-        this.mapperProvider = mapperProvider;
+//        this.mapperProvider = mapperProvider;
         this.認定調査委託先情報Dac = 認定調査委託先情報Dac;
         this.調査員情報Manager = 調査員情報Manager;
     }

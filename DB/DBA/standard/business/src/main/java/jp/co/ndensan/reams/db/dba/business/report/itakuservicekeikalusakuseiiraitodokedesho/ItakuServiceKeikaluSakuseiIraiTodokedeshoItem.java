@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  *
  * 居宅（介護予防）サービス計画作成依頼（変更）届出書Itemです。
+ *
+ * @reamsid_L DBA-0540-696 yaodongsheng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

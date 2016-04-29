@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 市町村EntiyのBusinessクラスです。
  *
+ * @reamsid_L DBU-1060-050 zhengshukai
+ *
  */
 public class ShichosonCodeNameResult {
 

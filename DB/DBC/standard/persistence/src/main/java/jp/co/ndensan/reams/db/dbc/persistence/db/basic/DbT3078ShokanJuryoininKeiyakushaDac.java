@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還受領委任契約者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3078ShokanJuryoininKeiyakushaDac implements ISaveable<DbT3078ShokanJuryoininKeiyakushaEntity> {
 

@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護サービス種類のデータアクセスクラスです。
+ *
+ * @reamsid_L DBX-9999-021 chengsanyuan
  */
 public class DbT7130KaigoServiceShuruiDac {
 
@@ -169,5 +171,31 @@ public class DbT7130KaigoServiceShuruiDac {
                 where(and(eq(serviceShuruiCd, サービス種類),
                                 leq(teikyoKaishiYM, RDate.getNowDate()),
                                 or(leq(RDate.getNowDate(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).toObject(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
+     * 給付種類を取得します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス提供年月 サービス提供年月
+     * @return DbT7130KaigoServiceShuruiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7130KaigoServiceShuruiEntity select給付種類(
+            ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(eq(DbT7130KaigoServiceShurui.serviceShuruiCd, サービス種類コード),
+                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, サービス提供年月),
+                                or(leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM),
+                                        isNULL(DbT7130KaigoServiceShurui.teikyoshuryoYM))))
+                .order(by(DbT7130KaigoServiceShurui.teikyoKaishiYM, Order.DESC))
+                .limit(1)
+                .toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 }

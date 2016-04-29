@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 支給申請情報検索キー
+ *
+ * @reamsid_L DBC-1021-090 gongliang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

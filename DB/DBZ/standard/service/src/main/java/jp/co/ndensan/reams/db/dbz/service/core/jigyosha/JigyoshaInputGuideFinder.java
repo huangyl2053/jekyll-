@@ -11,36 +11,31 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.mapper.jigyosha.IJigyoshaInputGuideMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jigyosha.IJigyoshaInputGuideMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.business.core.gunshiku.Gunshiku;
+import jp.co.ndensan.reams.ur.urz.business.core.zenkokujusho.ZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.zenkokujusho.ZenkokuJushoSearchShurui;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.gunshiku.UrT0529GunshikuEntity;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.zenkokujusho.UrT0101ZenkokuJusho;
-import jp.co.ndensan.reams.ur.urz.entity.db.basic.zenkokujusho.UrT0101ZenkokuJushoEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.db.basic.gunshiku.UrT0529GunshikuDac;
-import jp.co.ndensan.reams.ur.urz.persistence.db.basic.zenkokujusho.UrT0101ZenkokuJushoDac;
+import jp.co.ndensan.reams.ur.urz.service.core.gunshiku.GunshikuFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.zenkokujusho.ZenkokuJushoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
  * 事業者・施設選択入力ガイドするクラスです。
+ *
+ * @reamsid_L DBA-0140-030 houtianpeng
  */
 public class JigyoshaInputGuideFinder {
 
     private final MapperProvider mapperProvider;
-    private final UrT0101ZenkokuJushoDac urT0101Dac;
     private final DbT7130KaigoServiceShuruiDac dbT7130Dac;
-    private final UrT0529GunshikuDac urT0529Dac;
 
     /**
      * コンストラクタ。
@@ -49,9 +44,7 @@ public class JigyoshaInputGuideFinder {
     public JigyoshaInputGuideFinder() {
 
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.urT0101Dac = InstanceProvider.create(UrT0101ZenkokuJushoDac.class);
         this.dbT7130Dac = InstanceProvider.create(DbT7130KaigoServiceShuruiDac.class);
-        this.urT0529Dac = InstanceProvider.create(UrT0529GunshikuDac.class);
     }
 
     /**
@@ -69,13 +62,9 @@ public class JigyoshaInputGuideFinder {
      * @param mapperProvider mapper取得
      */
     JigyoshaInputGuideFinder(MapperProvider mapperProvider,
-            UrT0101ZenkokuJushoDac urT0101Dac,
-            DbT7130KaigoServiceShuruiDac dbT7130Dac,
-            UrT0529GunshikuDac urT0529Dac) {
+            DbT7130KaigoServiceShuruiDac dbT7130Dac) {
         this.mapperProvider = mapperProvider;
-        this.urT0101Dac = urT0101Dac;
         this.dbT7130Dac = dbT7130Dac;
-        this.urT0529Dac = urT0529Dac;
     }
 
     /**
@@ -83,17 +72,14 @@ public class JigyoshaInputGuideFinder {
      *
      * @return 県コード取得リスト
      */
-    public SearchResult<KenCodeJigyoshaInputGuide> getKenCodeJigyoshaInputGuide() {
-        List<KenCodeJigyoshaInputGuide> kenCodeList = new ArrayList<>();
-        List<UrT0101ZenkokuJushoEntity> urT0101List = urT0101Dac.select(
-                and(not(eq(UrT0101ZenkokuJusho.isDeleted, true)), eq(UrT0101ZenkokuJusho.dataKubun, ZenkokuJushoSearchShurui.都道府県.getDataKubun())));
-        if (urT0101List == null || urT0101List.isEmpty()) {
-            return SearchResult.of(Collections.<KenCodeJigyoshaInputGuide>emptyList(), 0, false);
+    public SearchResult<ZenkokuJushoItem> getKenCodeJigyoshaInputGuide() {
+        List<ZenkokuJushoItem> 県コードList = ZenkokuJushoFinderFactory.
+                createInstance().get全国住所Byデータ区分(ZenkokuJushoSearchShurui.都道府県.getDataKubun());
+
+        if (県コードList == null || 県コードList.isEmpty()) {
+            return SearchResult.of(Collections.<ZenkokuJushoItem>emptyList(), 0, false);
         }
-        for (UrT0101ZenkokuJushoEntity entity : urT0101List) {
-            kenCodeList.add(new KenCodeJigyoshaInputGuide(entity));
-        }
-        return SearchResult.of(kenCodeList, 0, false);
+        return SearchResult.of(県コードList, 0, false);
     }
 
     /**
@@ -102,15 +88,16 @@ public class JigyoshaInputGuideFinder {
      * @return 郡市コード取得リスト
      */
     public SearchResult<GunshiCodeJigyoshaInputGuide> getGunshiCodeJigyoshaInputGuide() {
-        List<GunshiCodeJigyoshaInputGuide> gunshiCodeList = new ArrayList<>();
-        List<UrT0529GunshikuEntity> urt0529List = urT0529Dac.selectAll();
-        if (urt0529List == null || urt0529List.isEmpty()) {
-            return SearchResult.of(Collections.<KenCodeJigyoshaInputGuide>emptyList(), 0, false);
+        List<Gunshiku> gunshiCodeList = GunshikuFinderFactory.createInstance().get郡市区全件();
+        List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaList = new ArrayList<>();
+        if (gunshiCodeList == null || gunshiCodeList.isEmpty()) {
+            return SearchResult.of(Collections.<GunshiCodeJigyoshaInputGuide>emptyList(), 0, false);
         }
-        for (UrT0529GunshikuEntity entity : urt0529List) {
-            gunshiCodeList.add(new GunshiCodeJigyoshaInputGuide(entity));
+        for (Gunshiku gunshiku : gunshiCodeList) {
+
+            gunshiCodeJigyoshaList.add(new GunshiCodeJigyoshaInputGuide(gunshiku.toEntity()));
         }
-        return SearchResult.of(gunshiCodeList, 0, false);
+        return SearchResult.of(gunshiCodeJigyoshaList, 0, false);
     }
 
     /**

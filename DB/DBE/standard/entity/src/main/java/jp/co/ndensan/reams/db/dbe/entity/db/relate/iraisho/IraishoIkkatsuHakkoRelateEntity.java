@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 依頼書一括発行RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0080-010 duanzhanli
  */
 @lombok.Getter
 @lombok.Setter

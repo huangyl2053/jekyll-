@@ -11,13 +11,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshotoroku.ShujiiIkenshoTorokuResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshotoroku.ShujiiIkenshoTorokuRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshotoroku.IShujiiIkenshoTorokuMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医意見書登録のサービスクラスです。
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 public class ShujiiIkenshoTorokuManager {
 

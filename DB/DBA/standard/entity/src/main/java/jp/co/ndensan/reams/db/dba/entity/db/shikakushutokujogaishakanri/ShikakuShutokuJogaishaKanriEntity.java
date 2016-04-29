@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 資格取得除外者一覧取得
+ * 資格取得除外者一覧取得Entityです。
+ *
+ * @reamsid_L DBA-0440-010 wangxiaodong
  */
 @lombok.Getter
 @lombok.Setter

@@ -14,6 +14,8 @@ import lombok.Value;
 
 /**
  * 償還払請求特定入所者介護サービス費用の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")

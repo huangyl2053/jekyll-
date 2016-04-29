@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 /**
  *
  * 主治医意見書登録のビジネスクラスです
+ *
+ * @reamsid_L DBE-0070-010 chengsanyuan
  */
 @lombok.Getter
 @lombok.Setter

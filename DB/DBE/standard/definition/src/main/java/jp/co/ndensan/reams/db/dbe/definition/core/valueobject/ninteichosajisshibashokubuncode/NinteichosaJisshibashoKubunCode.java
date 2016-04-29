@@ -21,13 +21,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 要介護認定調査の実施場所区分コードを扱うクラスです。
  *
  */
-public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, 
+public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>,
         IDbColumnMappable, IValidatable, ICodeWrapValueObject {
-//public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, 
+//public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>,
 //    IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
-
+    /**
+     * NinteichosaJisshibashoKubunCodeです。
+     *
+     */
     public static final NinteichosaJisshibashoKubunCode EMPTY;
 
     /**
@@ -41,6 +44,7 @@ public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJi
      * コンストラクタです。<br/>
      *
      * @param code コード
+     * @throws NullPointerException Error
      */
     public NinteichosaJisshibashoKubunCode(Code code) throws NullPointerException {
         this.code = requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査の実施場所区分コード"));
@@ -74,6 +78,10 @@ public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJi
         return new NinteichosaJisshibashoKubunCode(code);
     }
 
+    /**
+     * @return code
+     */
+    @Override
     public Code asCode() {
         return this.code;
     }

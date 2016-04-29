@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 調査員情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

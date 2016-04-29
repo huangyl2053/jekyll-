@@ -16,8 +16,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 認定調査督促対象者一覧表の取得のEntityクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @Getter
 @Setter

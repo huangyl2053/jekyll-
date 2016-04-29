@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額サービス費決定情報一時TBL
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @lombok.Getter
 @lombok.Setter
@@ -36,7 +38,7 @@ public class KogakuKyufuKetteiInTempTableEntity implements Serializable {
     private FlexibleDate 作成年月日;
     private RString 国保連合会名;
     private RString 帳票レコード種別;
-    private int no;
+    private RString no;
     private HihokenshaNo 被保険者番号;
     private AtenaMeisho 被保険者氏名漢字;
     private FlexibleYearMonth サービス提供年月;

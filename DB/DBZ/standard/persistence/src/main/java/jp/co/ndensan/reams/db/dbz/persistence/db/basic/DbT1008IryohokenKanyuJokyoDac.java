@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護保険医療保険加入状況のデータアクセスクラスです。
+ * 
+ * @reamsid_L DBZ-9999-020  suguangjun 
  */
 public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008IryohokenKanyuJokyoEntity> {
 

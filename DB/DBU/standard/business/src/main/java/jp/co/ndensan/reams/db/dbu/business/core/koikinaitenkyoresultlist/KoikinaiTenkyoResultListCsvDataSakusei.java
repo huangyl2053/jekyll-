@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 広域内転居結果一覧表CSVデータ作成
  *
+ * @reamsid_L DBU-1150-030 xuhao
  */
 public class KoikinaiTenkyoResultListCsvDataSakusei {
 

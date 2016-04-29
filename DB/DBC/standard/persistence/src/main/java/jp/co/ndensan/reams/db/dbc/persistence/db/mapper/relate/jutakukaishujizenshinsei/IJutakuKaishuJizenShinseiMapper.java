@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.Shih
 
 /**
  * 住宅改修事前申請マッパーインタフェースです。
+ *
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 public interface IJutakuKaishuJizenShinseiMapper {
 

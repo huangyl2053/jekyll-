@@ -25,12 +25,12 @@ public class IsExistShinsakaiMemoTest extends DbeTestBase {
 
     @Test
     public void であるを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistShinsakaiMemo.である.getコード(), is(true));
+        assertThat(IsExistShinsakaiMemo.である.has審査会メモ(), is(true));
     }
 
     @Test
     public void でないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistShinsakaiMemo.でない.getコード(), is(false));
+        assertThat(IsExistShinsakaiMemo.でない.has審査会メモ(), is(false));
     }
 
     @Test

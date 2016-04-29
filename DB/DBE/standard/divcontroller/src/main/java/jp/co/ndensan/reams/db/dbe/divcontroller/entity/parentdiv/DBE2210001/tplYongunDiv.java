@@ -4,17 +4,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.IKihonChosaInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.KihonChosaInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput4.KihonChosaInput4.IKihonChosaInput4Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput4.KihonChosaInput4.KihonChosaInput4Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplYongun のクラスファイル 
- * 
+ * tplYongun のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplYongunDiv extends TabPanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -23,7 +25,7 @@ public class tplYongunDiv extends TabPanel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("ccdYongunKihonChosa")
-    private KihonChosaInputDiv ccdYongunKihonChosa;
+    private KihonChosaInput4Div ccdYongunKihonChosa;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,7 +38,7 @@ public class tplYongunDiv extends TabPanel {
      * @return ccdYongunKihonChosa
      */
     @JsonProperty("ccdYongunKihonChosa")
-    public IKihonChosaInputDiv getCcdYongunKihonChosa() {
+    public IKihonChosaInput4Div getCcdYongunKihonChosa() {
         return ccdYongunKihonChosa;
     }
 

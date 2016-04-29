@@ -11,14 +11,16 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajouhoushuturyoku.IHanteiKekkaJouhouShuturyokuMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 判定結果情報出力（保険者）クラスです。
+ *
+ * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class HanteiKekkaJouhouShuturyokuFinder {
 

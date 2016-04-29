@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 特別徴収平準化【B5横タイプ】Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 interface IKarisanteiHenjunkaHenkoTsuchishoB5YokoBuilder extends IReportBuilder<KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource> {
 

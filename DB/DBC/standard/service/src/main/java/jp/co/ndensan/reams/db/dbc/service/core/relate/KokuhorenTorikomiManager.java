@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.service.core.relate;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.KokuhorenTorikomiConfigKeysFactory;
+import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiConfigKeysFactory;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenTorikomiJohoModel;
 import jp.co.ndensan.reams.db.dbc.business.core.view.KokuhorenTorikomiJoho;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKokuhorenTorikomi;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.IConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.KokuhorenInterfaceKanriManager;
@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 国保連取込情報を管理するクラスです。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KokuhorenTorikomiManager {
 
     private final MapperProvider mapperProvider;
@@ -58,8 +59,7 @@ public class KokuhorenTorikomiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KokuhorenTorikomiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KokuhorenTorikomiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KokuhorenTorikomiManager}のインスタンス
      */
     public static KokuhorenTorikomiManager createInstance() {
         return InstanceProvider.create(KokuhorenTorikomiManager.class);
@@ -128,11 +128,11 @@ public class KokuhorenTorikomiManager {
     /**
      * * 指定した処理年月の国保連IF管理をリストで取得します。
      *
-     * @param 処理年月 RString
+     * @param 処理年月 処理年月
+     * @param 交換識別番号 交換識別番号
      * @return List<KokuhorenTorikomiJohoModel>
      */
     private KokuhorenTorikomiJoho find国保連IF管理(RYearMonth 処理年月, RString 交換識別番号) {
-        KokuhorenTorikomiJoho entity = 国保連取込情報Manager.get国保連取り込み情報(new FlexibleYearMonth(処理年月.toDateString()), 交換識別番号);
-        return entity;
+        return 国保連取込情報Manager.get国保連取り込み情報(new FlexibleYearMonth(処理年月.toDateString()), 交換識別番号);
     }
 }

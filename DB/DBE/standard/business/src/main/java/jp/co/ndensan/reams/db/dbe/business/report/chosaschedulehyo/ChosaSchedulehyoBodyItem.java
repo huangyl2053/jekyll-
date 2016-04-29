@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 認定調査スケジュール表(事務所)ボディのITEMです。
+ *
+ * @reamsid_L DBE-0020-090 linghuhang
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

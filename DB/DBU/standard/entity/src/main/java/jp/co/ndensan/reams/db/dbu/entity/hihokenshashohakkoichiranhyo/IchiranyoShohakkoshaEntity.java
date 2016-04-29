@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.hihokenshashohakkoichiranhyo;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 一覧表証発行者Entity
+ *
+ * @reamsid_L DBU-0420-050 wangchao
  */
 @lombok.Getter
 @lombok.Setter
@@ -32,14 +34,14 @@ public class IchiranyoShohakkoshaEntity {
     private RString 改頁４;
     private RString 改頁５;
     private RString 帳票連番;
-    private RString 被保険者番号;
+    private HihokenshaNo 被保険者番号;
     private RString 氏名;
     private RString 生年月日_年齢;
     private RString 送付先住所;
-    private RString 要介護_認定開始日_認定終了日;
+    private RString 要介護;
+    private RString 認定開始日_認定終了日;
     private RString 施設名;
     private RString 計画事業所名;
     private RString 交付事由_非交付理由タイトル;
-    private RString 交付事由;
-    private RString 非交付事由;
+    private RString 交付_非交付事由;
 }

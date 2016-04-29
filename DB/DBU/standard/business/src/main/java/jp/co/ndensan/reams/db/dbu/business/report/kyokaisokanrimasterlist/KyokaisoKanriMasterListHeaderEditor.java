@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.Kyokaiso
 
 /**
  * 境界層管理マスタリストヘッダEditorです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEditor {
 

@@ -1,6 +1,6 @@
 ﻿hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
-seiriNp,varchar,RString,,,,,整理番号,A
+seiriNo,varchar,RString,,,,,整理番号,A
 jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
 yoshikiNo,varchar,RString,,,,,様式番号,A
 meisaiNo,varchar,RString,,,,,明細番号,A

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 得喪履歴のデータアクセスクラスです。
  *
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 @lombok.Getter
 @lombok.Setter

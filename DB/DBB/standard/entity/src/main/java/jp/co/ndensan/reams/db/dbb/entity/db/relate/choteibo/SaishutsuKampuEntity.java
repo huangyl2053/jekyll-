@@ -11,33 +11,18 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 歳出還付Entityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SaishutsuKampuEntity {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 特徴歳出還付の件数
-     */
     private Decimal tkSaishutsuKampuCount;
-    /**
-     * 特徴歳出還付の調定額
-     */
     private Decimal tkSaishutsuKampuChoteiGaku;
-    /**
-     * 普徴歳出還付の件数
-     */
     private Decimal fuSaishutsuKampuCount;
-    /**
-     * 普徴歳出還付の調定額
-     */
     private Decimal fuSaishutsuKampuChoteiGaku;
 }

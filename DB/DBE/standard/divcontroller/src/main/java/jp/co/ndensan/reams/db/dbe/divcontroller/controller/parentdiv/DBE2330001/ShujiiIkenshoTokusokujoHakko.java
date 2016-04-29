@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.Dbe233001FlowPar
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenshoTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001.ShujiiIkenTokusokujoHakkoHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 主治医意見書督促状発行のコントローラです。
  *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public class ShujiiIkenshoTokusokujoHakko {
 
@@ -42,6 +45,18 @@ public class ShujiiIkenshoTokusokujoHakko {
      */
     public ResponseData<ShujiiIkenshoTokusokujoHakkoDiv> onChange_radChohyo(ShujiiIkenshoTokusokujoHakkoDiv div) {
         getHandler(div).onChange_radChohyo();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険者onChangeの設定します。
+     *
+     * @param div ShujiiIkenshoTokusokujoHakkoDiv
+     * @return ResponseData<ShujiiIkenTokusokujoHakkoDiv>
+     */
+    public ResponseData<ShujiiIkenshoTokusokujoHakkoDiv> onChange_ccdHokenshaList(ShujiiIkenshoTokusokujoHakkoDiv div) {
+        div.getCcdIryokikanShujii().initialize(div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         return ResponseData.of(div).respond();
     }
 

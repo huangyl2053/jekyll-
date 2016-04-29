@@ -3,21 +3,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Yokaigodo
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Mar 22 20:11:04 CST 2016 
+ * Tue Mar 22 20:11:04 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgYokaigodoGuide_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgYokaigodoGuide_Row のクラスファイル
+ *
  */
-
 public class dgYokaigodoGuide_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 

@@ -1,19 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.riyoshaFutangakuGemmen;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.riyoshaFutangakuGemmen.RiyoshaFutangakuGemmenDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.riyoshaFutangakuGemmen.dgRiyoshaFutangakuGemmenList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * RiyoshaFutangakuGemmen のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * RiyoshaFutangakuGemmen のクラスファイル
+ *
  * @author 自動生成
  */
 public class RiyoshaFutangakuGemmenDiv extends Panel {
@@ -23,6 +19,7 @@ public class RiyoshaFutangakuGemmenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHiddenHihokenshaNo")
     private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgRiyoshaFutangakuGemmenList")
@@ -45,7 +42,7 @@ public class RiyoshaFutangakuGemmenDiv extends Panel {
 
     @JsonProperty("txtHiddenHihokenshaNo")
     public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
     }
 
     @JsonProperty("dgRiyoshaFutangakuGemmenList")
@@ -55,7 +52,7 @@ public class RiyoshaFutangakuGemmenDiv extends Panel {
 
     @JsonProperty("dgRiyoshaFutangakuGemmenList")
     public void setDgRiyoshaFutangakuGemmenList(DataGrid<dgRiyoshaFutangakuGemmenList_Row> dgRiyoshaFutangakuGemmenList) {
-        this.dgRiyoshaFutangakuGemmenList=dgRiyoshaFutangakuGemmenList;
+        this.dgRiyoshaFutangakuGemmenList = dgRiyoshaFutangakuGemmenList;
     }
 
     @JsonProperty("RiyoshaFutangakuGemmenDetail")
@@ -65,7 +62,7 @@ public class RiyoshaFutangakuGemmenDiv extends Panel {
 
     @JsonProperty("RiyoshaFutangakuGemmenDetail")
     public void setRiyoshaFutangakuGemmenDetail(RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail) {
-        this.RiyoshaFutangakuGemmenDetail=RiyoshaFutangakuGemmenDetail;
+        this.RiyoshaFutangakuGemmenDetail = RiyoshaFutangakuGemmenDetail;
     }
 
     @JsonProperty("btnClose")
@@ -75,7 +72,7 @@ public class RiyoshaFutangakuGemmenDiv extends Panel {
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
 }

@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 判定結果情報出力(保険者)_バッチフ処理クラスです
+ *
+ * @reamsid_L DBE-0190-030 duanzhanli
  */
 public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKekkaJohoShutsuryokuRelateEntity> {
 

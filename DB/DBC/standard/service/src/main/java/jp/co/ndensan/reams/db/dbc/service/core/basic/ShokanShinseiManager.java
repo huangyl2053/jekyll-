@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払支給申請を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanShinseiManager {
 

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishins
 
 /**
  * 要介護認定結果情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public interface INinteiKekkaJohoMapper {
 

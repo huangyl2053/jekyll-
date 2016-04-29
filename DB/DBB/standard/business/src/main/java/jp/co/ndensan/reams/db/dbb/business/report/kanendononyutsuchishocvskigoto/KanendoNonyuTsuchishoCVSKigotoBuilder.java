@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 保険料納入通知書（本算定過年度）【コンビニ期毎タイプ】のBuilder
  *
+ * @reamsid_L DBB-9110-190 huangh
  */
 public class KanendoNonyuTsuchishoCVSKigotoBuilder implements IKanendoNonyuTsuchishoCVSKigotoBuilder {
 

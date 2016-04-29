@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudoKomoku;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
+import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

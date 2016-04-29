@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * DBC0600011の状態名定義クラスです
  *
  * @author 自動生成
+ * @reamsid_L DBC-1020-020 yangchenbing
  */
 public enum DBC0600011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

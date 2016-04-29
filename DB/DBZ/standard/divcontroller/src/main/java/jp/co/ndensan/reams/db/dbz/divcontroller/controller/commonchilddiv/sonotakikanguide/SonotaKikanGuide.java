@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * その他機関選択ガイドのクラスです。
+ * 
+ * @reamsid_L DBE-3000-050 wangkun
  */
 public class SonotaKikanGuide {
 

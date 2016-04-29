@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.AtenaJohoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.kaigofukakihon.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -25,6 +25,12 @@ public class AtenaJoho {
 
     private static final RString FUKAKIHON = new RString("FukaKihon.yml");
 
+    /**
+     * 画面のonLoadメソッドです。
+     *
+     * @param div AtenaJohoDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<AtenaJohoDiv> onLoad(AtenaJohoDiv div) {
         AtenaJohoDiv atenajoho = (AtenaJohoDiv) ViewStateHolder.get("宛名情報", AtenaJohoDiv.class);
         ResponseData<AtenaJohoDiv> response = new ResponseData<>();

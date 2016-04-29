@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * {@link KoikinaiJushochitokureishaIchiranhyoReport}のプロパティです。
+ *
+ * @reamsid_L DBU-1140-060 linghuhang
  */
 public class KoikinaiJushochitokureishaIchiranhyoProperty extends ReportPropertyBase<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 
@@ -39,6 +41,7 @@ public class KoikinaiJushochitokureishaIchiranhyoProperty extends ReportProperty
             Breakers<KoikinaiJushochitokureishaIchiranhyoReportSource> breakers,
             BreakerCatalog<KoikinaiJushochitokureishaIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             PAGE_BREAK_KEYS) {
             @Override

@@ -1,24 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.Panel3Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaiItaku1Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaiShokuhiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaiTakaDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaikyuheruDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TablePanel1 のクラスファイル 
- * 
+ * TablePanel1 のクラスファイル
+ *
  * @author 自動生成
  */
 public class TablePanel1Div extends TablePanel {
@@ -28,6 +20,7 @@ public class TablePanel1Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("TableCell25")
     private TableCell25AtTablePanel1 TableCell25;
     @JsonProperty("TableCell26")
@@ -77,7 +70,7 @@ public class TablePanel1Div extends TablePanel {
 
     @JsonProperty("TableCell25")
     private void setTableCell25(TableCell25AtTablePanel1 TableCell25) {
-        this.TableCell25=TableCell25;
+        this.TableCell25 = TableCell25;
     }
 
     @JsonProperty("TableCell26")
@@ -87,7 +80,7 @@ public class TablePanel1Div extends TablePanel {
 
     @JsonProperty("TableCell26")
     private void setTableCell26(TableCell26AtTablePanel1 TableCell26) {
-        this.TableCell26=TableCell26;
+        this.TableCell26 = TableCell26;
     }
 
     @JsonProperty("TableCell1")
@@ -97,16 +90,18 @@ public class TablePanel1Div extends TablePanel {
 
     @JsonProperty("TableCell1")
     private void setTableCell1(TableCell1AtTablePanel1 TableCell1) {
-        this.TableCell1=TableCell1;
+        this.TableCell1 = TableCell1;
     }
 
 }
+
 /**
- * TableCell25 のクラスファイル 
- * 
+ * TableCell25 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell25AtTablePanel1 extends TableCell {
+
     @JsonProperty("kaikyuheru")
     private kaikyuheruDiv kaikyuheru;
     @JsonProperty("kaiItaku1")
@@ -119,7 +114,7 @@ class TableCell25AtTablePanel1 extends TableCell {
 
     @JsonProperty("kaikyuheru")
     public void setKaikyuheru(kaikyuheruDiv kaikyuheru) {
-        this.kaikyuheru=kaikyuheru;
+        this.kaikyuheru = kaikyuheru;
     }
 
     @JsonProperty("kaiItaku1")
@@ -129,16 +124,18 @@ class TableCell25AtTablePanel1 extends TableCell {
 
     @JsonProperty("kaiItaku1")
     public void setKaiItaku1(kaiItaku1Div kaiItaku1) {
-        this.kaiItaku1=kaiItaku1;
+        this.kaiItaku1 = kaiItaku1;
     }
 
 }
+
 /**
- * TableCell26 のクラスファイル 
- * 
+ * TableCell26 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell26AtTablePanel1 extends TableCell {
+
     @JsonProperty("Panel3")
     private Panel3Div Panel3;
 
@@ -149,16 +146,18 @@ class TableCell26AtTablePanel1 extends TableCell {
 
     @JsonProperty("Panel3")
     public void setPanel3(Panel3Div Panel3) {
-        this.Panel3=Panel3;
+        this.Panel3 = Panel3;
     }
 
 }
+
 /**
- * TableCell1 のクラスファイル 
- * 
+ * TableCell1 のクラスファイル
+ *
  * @author 自動生成
  */
 class TableCell1AtTablePanel1 extends TableCell {
+
     @JsonProperty("kaiShokuhi")
     private kaiShokuhiDiv kaiShokuhi;
     @JsonProperty("kaiTaka")
@@ -171,7 +170,7 @@ class TableCell1AtTablePanel1 extends TableCell {
 
     @JsonProperty("kaiShokuhi")
     public void setKaiShokuhi(kaiShokuhiDiv kaiShokuhi) {
-        this.kaiShokuhi=kaiShokuhi;
+        this.kaiShokuhi = kaiShokuhi;
     }
 
     @JsonProperty("kaiTaka")
@@ -181,7 +180,7 @@ class TableCell1AtTablePanel1 extends TableCell {
 
     @JsonProperty("kaiTaka")
     public void setKaiTaka(kaiTakaDiv kaiTaka) {
-        this.kaiTaka=kaiTaka;
+        this.kaiTaka = kaiTaka;
     }
 
 }

@@ -10,25 +10,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 減免Entityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GenmenEntity {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 減免の件数
-     */
     private Decimal genmenCount;
-    /**
-     * 減免の調定額
-     */
     private Decimal genmenChoteigaku;
 }

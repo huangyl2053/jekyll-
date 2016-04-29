@@ -9,11 +9,12 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link NinteichosahyoTokkijiko}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosahyoTokkijikoBuilder {
 

@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 
 /**
  * 主治医医療機関情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class ShujiiIryoKikanJohoRelateEntity implements Cloneable, Serializable {
+public class ShujiiIryoKikanJohoRelateEntity implements Serializable {
 
     /**
      * -- GETTER -- 主治医医療機関情報Entityを返します。

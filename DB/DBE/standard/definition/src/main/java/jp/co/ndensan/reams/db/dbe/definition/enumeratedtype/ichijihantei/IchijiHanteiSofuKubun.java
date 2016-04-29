@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 一次判定結果送付区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IchijiHanteiSofuKubun {
 

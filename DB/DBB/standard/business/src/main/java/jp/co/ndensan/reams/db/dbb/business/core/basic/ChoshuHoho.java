@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護徴収方法を管理するクラスです。
+ *
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHohoEntity, ChoshuHoho> implements Serializable {
 
@@ -420,6 +422,17 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ChoshuHoho(deletedEntity, id);
+    }
+
+    /**
+     * 保持する介護徴収方法を登録対象とします。<br/> {@link DbT2001ChoshuHohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ChoshuHoho}
+     */
+    public ChoshuHoho added() {
+        DbT2001ChoshuHohoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ChoshuHoho(addedEntity, id);
     }
 
     /**

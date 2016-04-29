@@ -8,12 +8,14 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu13Parameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteitiyousaiirai.INinteiShinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定調査督促状発行を管理するクラスです。
+ *
+ * @reamsid_L DBE-0030-010 liangbc
  */
 public class NinteiChosaTokusokujoHakkoManager {
 

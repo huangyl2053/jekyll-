@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link 社会福祉法人等利用者負担軽減対象確認申請書}のプロパティです。
+ *
+ * @reamsid_L DBA-0540-698 zhangguopeng
  */
 public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoProperty extends
         ReportPropertyBase<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource> {

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 二次判定結果入力方法を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum NijiHanteiKekkaInputHoho {
 

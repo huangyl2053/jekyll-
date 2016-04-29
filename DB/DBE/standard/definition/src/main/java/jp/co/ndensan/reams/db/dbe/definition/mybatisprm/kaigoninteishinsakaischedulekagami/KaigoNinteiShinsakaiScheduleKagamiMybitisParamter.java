@@ -13,6 +13,8 @@ import lombok.Getter;
 /**
  *
  * 介護認定審査会スケジュール表かがみですためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0130-100 yaodongsheng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

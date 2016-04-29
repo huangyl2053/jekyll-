@@ -11,6 +11,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * YokaigoNinteiTaskList のクラスファイル 
@@ -18,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTaskListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -146,5 +150,17 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private YokaigoNinteiTaskListHandler getHandler() {
+        return new YokaigoNinteiTaskListHandler(this);
+    }
 
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     * @param モード
+     */
+    @Override
+    public void initialize(RString モード) {
+        getHandler().initialize(モード);
+    }
 }

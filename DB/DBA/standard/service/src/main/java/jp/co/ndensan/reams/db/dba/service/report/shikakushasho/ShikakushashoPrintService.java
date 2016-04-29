@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.service.report.shikakushasho;
 
 import java.util.ArrayList;
@@ -16,13 +15,15 @@ import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
- *
  * 介護保険資格者証Printクラスです。
+ * 
+ * @reamsid_L DBU-0490-080  suguangjun
  */
 public class ShikakushashoPrintService {
-    
+
     /**
      * 介護保険資格者証Printします。
+     *
      * @param reportJoho 介護保険資格者証作成_帳票クラスパラメータ
      * @return 介護保険資格者証作成_帳票
      */
@@ -30,7 +31,7 @@ public class ShikakushashoPrintService {
         ShikakushashoProerty property = new ShikakushashoProerty();
         return new Printer<ShikakushashoReportSource>().spool(property, toReports(reportJoho));
     }
-    
+
     private static List<ShikakushashoReport> toReports(ShikakushashoJoho joho) {
         List<ShikakushashoReport> list = new ArrayList<>();
         list.add(ShikakushashoReport.createReport(joho.getBodyItem()));

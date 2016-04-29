@@ -16,6 +16,7 @@ import lombok.Value;
  * 償還払請求サービス計画200604の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanServicePlan200604Identifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;
@@ -41,8 +42,8 @@ public class ShokanServicePlan200604Identifier implements Serializable {
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号,                RString 明細番号,
-                RString 連番
+            RString 様式番号, RString 明細番号,
+            RString 連番
     ) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;

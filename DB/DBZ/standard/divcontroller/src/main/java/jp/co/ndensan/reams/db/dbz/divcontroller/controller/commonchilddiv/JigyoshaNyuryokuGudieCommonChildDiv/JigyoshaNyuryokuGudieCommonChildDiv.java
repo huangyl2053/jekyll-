@@ -99,7 +99,46 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
         mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         mode.setJigyoshaNo(new KaigoJigyoshaNo(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtJigyoshaNo()));
         mode.setJigyoshaName(new AtenaMeisho(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtMeisho()));
+        mode.setYukoKaishiYMD(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran()
+                .getSelectedItems().get(0).getTxtYukoKaishibiYMD().getValue().toDateString());
         requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
+
+        return createResponseData(requestDiv);
+    }
+
+    /**
+     * 修正ボタン。<br/>
+     *
+     * @param requestDiv JigyoshaNyuryokuGudieCommonChildDivDiv
+     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     */
+    public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> select_BtnSilyuuseyi(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
+
+        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        mode.setJigyoshaNo(new KaigoJigyoshaNo(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtJigyoshaNo()));
+        mode.setJigyoshaName(new AtenaMeisho(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtMeisho()));
+        mode.setYukoKaishiYMD(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran()
+                .getSelectedItems().get(0).getTxtYukoKaishibiYMD().getValue().toDateString());
+        requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
+
+        return createResponseData(requestDiv);
+    }
+
+    /**
+     * 削除ボタン。<br/>
+     *
+     * @param requestDiv JigyoshaNyuryokuGudieCommonChildDivDiv
+     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     */
+    public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> select_BtnSakujo(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
+
+        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        mode.setJigyoshaNo(new KaigoJigyoshaNo(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtJigyoshaNo()));
+        mode.setJigyoshaName(new AtenaMeisho(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtMeisho()));
+        mode.setYukoKaishiYMD(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran()
+                .getSelectedItems().get(0).getTxtYukoKaishibiYMD().getValue().toDateString());
+        requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
+
         return createResponseData(requestDiv);
     }
 

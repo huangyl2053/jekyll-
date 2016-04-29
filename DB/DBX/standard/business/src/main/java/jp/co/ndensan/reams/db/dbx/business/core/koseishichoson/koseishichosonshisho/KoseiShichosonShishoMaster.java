@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 構成市町村支所マスタを管理するクラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 public class KoseiShichosonShishoMaster
         extends ModelBase<KoseiShichosonShishoMasterIdentifier, DbT7052KoseiShichosonShishoMasterEntity, KoseiShichosonShishoMaster>

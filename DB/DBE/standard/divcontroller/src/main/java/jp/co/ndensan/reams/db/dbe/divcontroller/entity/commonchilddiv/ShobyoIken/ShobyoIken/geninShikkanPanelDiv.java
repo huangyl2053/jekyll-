@@ -4,17 +4,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
- * geninShikkanPanel のクラスファイル 
- * 
- * @author 自動生成
+ * geninShikkanPanel のクラスファイル
+ *
  */
 public class geninShikkanPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -23,7 +27,7 @@ public class geninShikkanPanelDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnAdd")
-    private ButtonDialog btnAdd;
+    private Button btnAdd;
     @JsonProperty("dgGenyin")
     private DataGrid<dgGenyin_Row> dgGenyin;
     @JsonProperty("geninShikkanShosai")
@@ -40,7 +44,7 @@ public class geninShikkanPanelDiv extends Panel {
      * @return btnAdd
      */
     @JsonProperty("btnAdd")
-    public ButtonDialog getBtnAdd() {
+    public Button getBtnAdd() {
         return btnAdd;
     }
 
@@ -49,7 +53,7 @@ public class geninShikkanPanelDiv extends Panel {
      * @param btnAdd btnAdd
      */
     @JsonProperty("btnAdd")
-    public void setBtnAdd(ButtonDialog btnAdd) {
+    public void setBtnAdd(Button btnAdd) {
         this.btnAdd = btnAdd;
     }
 
@@ -93,33 +97,8 @@ public class geninShikkanPanelDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return this.getGeninShikkanShosai().getTxtGeninShikkanCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.getGeninShikkanShosai().setTxtGeninShikkanCode(txtGeninShikkanCode);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnToSearch() {
-        return this.getGeninShikkanShosai().getBtnToSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnToSearch(ButtonDialog btnToSearch) {
-        this.getGeninShikkanShosai().setBtnToSearch(btnToSearch);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtMeisho() {
-        return this.getGeninShikkanShosai().getTxtMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtMeisho(TextBox txtMeisho) {
-        this.getGeninShikkanShosai().setTxtMeisho(txtMeisho);
+    public ICodeInputDiv getCcdCodeInputGeninShikkan() {
+        return this.getGeninShikkanShosai().getCcdCodeInputGeninShikkan();
     }
 
     @JsonIgnore
@@ -128,7 +107,7 @@ public class geninShikkanPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadIsShutaruGeninShikkan(RadioButton radIsShutaruGeninShikkan) {
+    public void setRadIsShutaruGeninShikkan(RadioButton radIsShutaruGeninShikkan) {
         this.getGeninShikkanShosai().setRadIsShutaruGeninShikkan(radIsShutaruGeninShikkan);
     }
 
@@ -138,7 +117,7 @@ public class geninShikkanPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnNo(Button btnNo) {
+    public void setBtnNo(Button btnNo) {
         this.getGeninShikkanShosai().setBtnNo(btnNo);
     }
 
@@ -148,7 +127,7 @@ public class geninShikkanPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnOK(Button btnOK) {
+    public void setBtnOK(Button btnOK) {
         this.getGeninShikkanShosai().setBtnOK(btnOK);
     }
 

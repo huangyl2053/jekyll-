@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 減免減額種類を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBD-9999-023 wangchao
  */
 public enum GemmenGengakuShurui {
 

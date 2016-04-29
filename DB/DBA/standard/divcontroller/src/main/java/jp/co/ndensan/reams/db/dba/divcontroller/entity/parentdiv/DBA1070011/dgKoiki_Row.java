@@ -1,27 +1,20 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。
- * Thu Nov 27 19:09:45 JST 2014 
+ * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、 コードが再生成されるときに損失したりします。 Thu Nov 27 19:09:45 JST 2014
  */
-
-
-
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgKoiki_Row のクラスファイル 
- * 
+ * dgKoiki_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgKoiki_Row extends DataRow {
 
     private DropDownList nextWork;

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払支給申請リストを取得するクラスです。
  *
+ * @reamsid_L DBC-0960-020 hezhenzhen
+ *
  */
 public class ShokanShinseiIchiran {
 
@@ -91,21 +93,4 @@ public class ShokanShinseiIchiran {
         return relateEntity.getKetteiYMD();
     }
 
-    /**
-     * サービス提供年月Fromを取得します。
-     *
-     * @return サービス提供年月From
-     */
-    public FlexibleYearMonth サービス提供年月From() {
-        return relateEntity.getサービス提供年月From();
-    }
-
-    /**
-     * サービス提供年月Toを取得します。
-     *
-     * @return サービス提供年月To
-     */
-    public FlexibleYearMonth サービス提供年月To() {
-        return relateEntity.getサービス提供年月To();
-    }
 }

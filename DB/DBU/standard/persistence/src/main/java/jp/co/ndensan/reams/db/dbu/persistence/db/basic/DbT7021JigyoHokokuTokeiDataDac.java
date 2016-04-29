@@ -42,9 +42,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 事業報告統計データのデータアクセスクラスです。
+ *
+ * @reamsid_L DBU-9999-012 cuilin
  */
 public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHokokuTokeiDataEntity> {
 
+    private static final RString MONTH_00 = new RString("00");
+    private static final RString HYONO_09 = new RString("09");
     @InjectSession
     private SqlSession session;
 
@@ -189,55 +193,55 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
         ITrueFalseCriteria iTrueFalseCriteria;
         if (is条件1(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
-                    eq(hokokuM, new RString("00")),
+                    eq(hokokuM, MONTH_00),
                     eq(toukeiTaishoKubun, 保険者区分.getコード()),
-                    eq(hyoNo, new RString("09")),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList),
                     eq(shichosonCode, 市町村コード));
         } else if (is条件2(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
                     eq(hokokuYSeireki, 年度),
-                    eq(hokokuM, new RString("00")),
-                    eq(hyoNo, new RString("09")),
+                    eq(hokokuM, MONTH_00),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList),
                     eq(shichosonCode, 市町村コード));
         } else if (is条件3(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
                     eq(hokokuYSeireki, 年度),
-                    eq(hokokuM, new RString("00")),
+                    eq(hokokuM, MONTH_00),
                     eq(toukeiTaishoKubun, 保険者区分.getコード()),
-                    eq(hyoNo, new RString("09")),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList));
         } else if (is条件4(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
                     eq(hokokuYSeireki, 年度),
-                    eq(hokokuM, new RString("00")),
+                    eq(hokokuM, MONTH_00),
                     eq(toukeiTaishoKubun, 保険者区分.getコード()),
-                    eq(hyoNo, new RString("09")),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList),
                     eq(shichosonCode, 市町村コード));
         } else if (is条件5(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
                     eq(hokokuYSeireki, 年度),
-                    eq(hokokuM, new RString("00")),
-                    eq(hyoNo, new RString("09")),
+                    eq(hokokuM, MONTH_00),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList));
         } else if (is条件6(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
-                    eq(hokokuM, new RString("00")),
-                    eq(hyoNo, new RString("09")),
+                    eq(hokokuM, MONTH_00),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList));
         } else if (is条件7(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
-                    eq(hokokuM, new RString("00")),
-                    eq(hyoNo, new RString("09")),
+                    eq(hokokuM, MONTH_00),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList),
                     eq(shichosonCode, 市町村コード));
         } else {
             iTrueFalseCriteria = and(
-                    eq(hokokuM, new RString("00")),
+                    eq(hokokuM, MONTH_00),
                     eq(toukeiTaishoKubun, 保険者区分.getコード()),
-                    eq(hyoNo, new RString("09")),
+                    eq(hyoNo, HYONO_09),
                     in(shukeiNo, shukeiNoList));
         }
         return iTrueFalseCriteria;
@@ -305,12 +309,12 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                 table(DbT7021JigyoHokokuTokeiData.class).
                 where(and(
                                 eq(hokokuYSeireki, 報告年),
-                                eq(hokokuM, new RString("00")),
+                                eq(hokokuM, MONTH_00),
                                 eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoYSeireki, 集計対象年),
-                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, new RString("00")),
+                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, MONTH_00),
                                 eq(toukeiTaishoKubun, 統計対象区分),
                                 eq(shichosonCode, 市町村コード),
-                                eq(hyoNo, new RString("09")),
+                                eq(hyoNo, HYONO_09),
                                 eq(DbT7021JigyoHokokuTokeiData.shukeiNo, 集計番号)
                         )).
                 order(by(DbT7021JigyoHokokuTokeiData.hokokuYSeireki, Order.ASC),
@@ -348,9 +352,9 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                 table(DbT7021JigyoHokokuTokeiData.class).
                 where(and(
                                 eq(hokokuYSeireki, 報告年),
-                                eq(hokokuM, new RString("00")),
+                                eq(hokokuM, MONTH_00),
                                 eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoYSeireki, 集計対象年),
-                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, new RString("00")),
+                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, MONTH_00),
                                 eq(toukeiTaishoKubun, 統計対象区分),
                                 eq(shichosonCode, 市町村コード),
                                 eq(hyoNo, 表番号),

@@ -13,6 +13,7 @@ import lombok.Getter;
 /**
  *
  * 構成市町村の検索のパラメータクラスです。
+ * @reamsid_L DBE-3000-060 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

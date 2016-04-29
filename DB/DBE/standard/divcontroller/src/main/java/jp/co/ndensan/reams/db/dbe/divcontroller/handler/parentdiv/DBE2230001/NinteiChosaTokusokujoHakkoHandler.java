@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 認定調査督促状発行のHandlerクラスです。
  *
+ * @reamsid_L DBE-0030-010 liangbc
  */
 public class NinteiChosaTokusokujoHakkoHandler {
 
@@ -72,10 +73,10 @@ public class NinteiChosaTokusokujoHakkoHandler {
     public NinteiChosaTokusokujoHakkoTempData getTempData() {
         NinteiChosaTokusokujoHakkoTempData tempData = new NinteiChosaTokusokujoHakkoTempData();
         tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
-        tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get保険者区分().get名称());
+        tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get市町村名称());
         tempData.setTemp_認定調査委託先コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosaItakusakiCode());
-        tempData.setTemp_認定調査員コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosainCode());
-        tempData.setTemp_基準日(div.getTxtKijunDay().getValue());
+        tempData.setTemp_認定調査員コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosain());
+        tempData.setTemp_基準日(div.getHakkoJoken().getTxtKijunDay().getValue());
         tempData.setTemp_認定調査督促期限日数(div.getYokaigoNinteiChosaTokusokujo().getTxtOverChosaIraiDay().getValue());
         tempData.setTemp_要介護認定調査督促状(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
                 ? 選択された : 未選択);
@@ -114,7 +115,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
     }
 
     private void initializtion() {
-        div.getTxtKijunDay().setValue(FlexibleDate.getNowDate());
+        div.getHakkoJoken().getTxtKijunDay().setValue(FlexibleDate.getNowDate());
         RString 認定調査督促期限日数 = BusinessConfig.get(DbeBusinessConfigKey.認定調査督促期限日数, SubGyomuCode.DBE認定支援);
         if (Decimal.canConvert(認定調査督促期限日数)) {
             div.getYokaigoNinteiChosaTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(認定調査督促期限日数.toString()));

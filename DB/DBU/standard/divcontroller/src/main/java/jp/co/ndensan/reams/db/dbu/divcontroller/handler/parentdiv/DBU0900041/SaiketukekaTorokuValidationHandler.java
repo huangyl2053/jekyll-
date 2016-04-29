@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査請求書登録_登録画面のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBU-1080-110 xuyue
  */
 public class SaiketukekaTorokuValidationHandler {
 

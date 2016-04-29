@@ -1,17 +1,14 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IryoKikanListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IshiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * IryoKikan のクラスファイル 
- * 
+ * IryoKikan のクラスファイル
+ *
  * @author 自動生成
  */
 public class IryoKikanDiv extends Panel {
@@ -21,6 +18,7 @@ public class IryoKikanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("IryoKikanList")
     private IryoKikanListDiv IryoKikanList;
     @JsonProperty("Ishi")
@@ -39,7 +37,7 @@ public class IryoKikanDiv extends Panel {
 
     @JsonProperty("IryoKikanList")
     public void setIryoKikanList(IryoKikanListDiv IryoKikanList) {
-        this.IryoKikanList=IryoKikanList;
+        this.IryoKikanList = IryoKikanList;
     }
 
     @JsonProperty("Ishi")
@@ -49,7 +47,7 @@ public class IryoKikanDiv extends Panel {
 
     @JsonProperty("Ishi")
     public void setIshi(IshiDiv Ishi) {
-        this.Ishi=Ishi;
+        this.Ishi = Ishi;
     }
 
 }

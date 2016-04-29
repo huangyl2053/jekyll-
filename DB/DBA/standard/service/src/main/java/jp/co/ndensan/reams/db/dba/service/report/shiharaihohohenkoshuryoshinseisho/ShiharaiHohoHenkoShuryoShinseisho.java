@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.shiharaihohohenkoshuryoshinsei
 import jp.co.ndensan.reams.db.dba.business.report.shiharaihohohenkoshuryoshinseisho.ShiharaiHenkoShokanbaraikaShoryoShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.shiharaihohohenkoshuryoshinseisho.ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -51,6 +51,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 支払方法変更（償還払い化）終了申請書クラスです。
+ *
+ * @reamsid_L DBA-0540-340 zhangguopeng
  */
 public class ShiharaiHohoHenkoShuryoShinseisho {
 

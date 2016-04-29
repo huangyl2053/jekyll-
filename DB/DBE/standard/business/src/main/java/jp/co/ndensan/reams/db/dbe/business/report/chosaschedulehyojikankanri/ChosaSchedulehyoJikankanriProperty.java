@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * {@link 認定調査スケジュール表(時間管理)のReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0020-100 lishengli
  */
 public class ChosaSchedulehyoJikankanriProperty extends ReportPropertyBase<ChosaSchedulehyoJikankanriReportSource> {
 

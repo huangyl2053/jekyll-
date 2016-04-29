@@ -56,6 +56,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return YukoKigenInfo
      */
     @JsonProperty("YukoKigenInfo")
+    @Override
     public YukoKigenInfoDiv getYukoKigenInfo() {
         return YukoKigenInfo;
     }
@@ -74,6 +75,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return NinteiInfo
      */
     @JsonProperty("NinteiInfo")
+    @Override
     public NinteiInfoDiv getNinteiInfo() {
         return NinteiInfo;
     }
@@ -92,6 +94,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return tabHihokenshaShikakuShosai
      */
     @JsonProperty("tabHihokenshaShikakuShosai")
+    @Override
     public tabHihokenshaShikakuShosaiDiv getTabHihokenshaShikakuShosai() {
         return tabHihokenshaShikakuShosai;
     }

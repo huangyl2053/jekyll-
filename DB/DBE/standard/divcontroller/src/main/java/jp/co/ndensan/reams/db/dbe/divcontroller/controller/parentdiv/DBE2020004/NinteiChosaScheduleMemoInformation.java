@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020004
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.importance.Importance;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfCommonMemo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfJichikuMemo_Row;
@@ -31,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 認定調査スケジュール登録4のコントローラです。
+ *
+ * @reamsid_L DBE-0020-040 houtp
  */
 public class NinteiChosaScheduleMemoInformation {
 
@@ -55,7 +58,7 @@ public class NinteiChosaScheduleMemoInformation {
     public ResponseData<NinteiChosaScheduleMemoInformationDiv> onLoad(NinteiChosaScheduleMemoInformationDiv div) {
 
         FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-        Code 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, Code.class);
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         List<NinteiChosaScheduleMemo> ninteiChosaScheduleMemo = ninteiChosaScheduleMemoManager.
                 get認定調査スケジュールメモ文本情報(メモ年月日, 地区コード).records();
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査スケジュールメモ情報,
@@ -161,6 +164,28 @@ public class NinteiChosaScheduleMemoInformation {
     }
 
     /**
+     * 戻るを押下時の処理。
+     *
+     * @param div 認定調査スケジュール情報Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_MoDoRu(NinteiChosaScheduleMemoInformationDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBE2020004TransitionEventName.戻る).parameter(new RString("未定へ遷移"));
+    }
+
+    /**
+     * 完了を押下時の処理。
+     *
+     * @param div 認定調査スケジュール情報Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_kanrRou(NinteiChosaScheduleMemoInformationDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBE2020004TransitionEventName.戻る).parameter(new RString("更新へ遷移"));
+    }
+
+    /**
      * 保存するボタンを押下時の処理。
      *
      * @param div 認定調査スケジュール情報Div
@@ -183,7 +208,7 @@ public class NinteiChosaScheduleMemoInformation {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-            Code 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, Code.class);
+            Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
 
             Models<NinteiChosaScheduleMemoIdentifier, NinteiChosaScheduleMemo> models = ViewStateHolder
                     .get(ViewStateKeys.認定調査スケジュール登録_認定調査スケジュールメモ情報, Models.class);
@@ -252,6 +277,11 @@ public class NinteiChosaScheduleMemoInformation {
                     ninteiChosaScheduleMemoManager.delete認定調査スケジュールメモ情報(modelsNinteiChosaScheduleMemo.deleted());
                 }
             }
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
         }
         // TODO 画面の戻るボタンを実装しない、前排他を実装しない、遷移を実装しない。内部番号：612
         getHandler(div).完了状態();

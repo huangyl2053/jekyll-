@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 /**
  *
  * 共有子Div　一次判定結果情報　のイベントを定義したDivControllerです。
+ *
+ * @reamsid_L DBE-3000-220 huangh
  */
 public class IchijiHanteiKekkaJoho {
 

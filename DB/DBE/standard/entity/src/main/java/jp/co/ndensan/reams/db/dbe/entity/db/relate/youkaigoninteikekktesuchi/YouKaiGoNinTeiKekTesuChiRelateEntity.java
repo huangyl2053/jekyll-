@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定結果情報RelateEntityクラスです。
+ * 
+ * @reamsid_L DBE-0220-010 wangkun
  */
 @lombok.Getter
 @lombok.Setter

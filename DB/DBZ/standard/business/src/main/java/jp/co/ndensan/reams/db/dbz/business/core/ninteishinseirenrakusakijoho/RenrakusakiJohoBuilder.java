@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -18,21 +18,23 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link RenrakusakiJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-1300-100 dongyabin
  */
 public class RenrakusakiJohoBuilder {
 
-    private final DbT4150RenrakusakiJohoEntity entity;
+    private final DbT5150RenrakusakiJohoEntity entity;
     private final RenrakusakiJohoIdentifier id;
 
     /**
-     * {@link DbT4150RenrakusakiJohoEntity}より{@link RenrakusakiJoho}の編集用Builderクラスを生成します。
+     * {@link DbT5150RenrakusakiJohoEntity}より{@link RenrakusakiJoho}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT4150RenrakusakiJohoEntity}
+     * @param entity {@link DbT5150RenrakusakiJohoEntity}
      * @param id {@link RenrakusakiJohoIdentifier}
      *
      */
     RenrakusakiJohoBuilder(
-            DbT4150RenrakusakiJohoEntity entity,
+            DbT5150RenrakusakiJohoEntity entity,
             RenrakusakiJohoIdentifier id
     ) {
         this.entity = entity.clone();

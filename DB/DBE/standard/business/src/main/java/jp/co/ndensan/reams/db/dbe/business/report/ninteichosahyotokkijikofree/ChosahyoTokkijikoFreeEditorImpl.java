@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.C
 
 /**
  * 要介護認定調査票（特記事項）フリー様式のEditorです。
+ *
+ * @reamsid_L DBE-0080-050 xuyannan
  */
 public class ChosahyoTokkijikoFreeEditorImpl implements IChosahyoTokkijikoFreeEditor {
 

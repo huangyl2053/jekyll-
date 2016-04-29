@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 介護保険資格取得・異動・喪失届Entityリストです。
+ * @reamsid_L DBA-0540-681 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

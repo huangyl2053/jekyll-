@@ -6,15 +6,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShisetsuJohoCommonChildDiv;
 
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
  * 介護保険施設（介護事業者）、その他特例施設、適用除外施設の事業者・施設入力ガイドを呼び出す元共有子Divです。
+ *
+ * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoCommonChildDiv {
 

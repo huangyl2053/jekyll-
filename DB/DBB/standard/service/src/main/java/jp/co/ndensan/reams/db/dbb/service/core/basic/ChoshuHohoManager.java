@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護徴収方法を管理するクラスです。
+ *
+ * @reamsid_L DBB-1760-010 sunhui
  */
 public class ChoshuHohoManager {
 
@@ -107,30 +109,6 @@ public class ChoshuHohoManager {
         }
 
         return businessList;
-    }
-
-    /**
-     * 引数の条件に一致する介護徴収方法の直近データを取得します。
-     *
-     * @param 賦課年度 FukaNendo
-     * @param 被保険者番号 HihokenshaNo
-     * @return ChoshuHoho
-     */
-    @Transaction
-    public ChoshuHoho get介護徴収方法の直近データ(
-            FlexibleYear 賦課年度,
-            HihokenshaNo 被保険者番号) {
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-
-        DbT2001ChoshuHohoEntity entity = dac.selectMaxRirekiNo(
-                賦課年度,
-                被保険者番号);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new ChoshuHoho(entity);
     }
 
     /**

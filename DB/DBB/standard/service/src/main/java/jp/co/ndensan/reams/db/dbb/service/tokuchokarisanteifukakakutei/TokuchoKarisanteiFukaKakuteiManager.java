@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei;
 
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.tokuchokarisanteifukakakutei.ItokuchokarisanteiMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 特徴仮算定賦課確定のクラスです
+ * 特徴仮算定賦課確定のクラスです。
+ *
+ * @reamsid_L DBB-0800-020 wanghui
  */
 public class TokuchoKarisanteiFukaKakuteiManager {
 
@@ -143,7 +145,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     @Transaction
     // TODO  内部QA：540 (賦課処理状況を更新)
     public boolean updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakuteiMapperParameter params) {
-        ItokuchokarisanteiMapper itokuchokarisanteiMapper = mapperProvider.create(ItokuchokarisanteiMapper.class);
+        ITokuchokarisanteiMapper itokuchokarisanteiMapper = mapperProvider.create(ITokuchokarisanteiMapper.class);
         return itokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
     }
 }

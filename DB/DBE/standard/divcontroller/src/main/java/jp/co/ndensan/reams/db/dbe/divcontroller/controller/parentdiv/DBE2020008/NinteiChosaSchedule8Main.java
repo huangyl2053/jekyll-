@@ -35,8 +35,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
- *
  * 認定調査スケジュール登録8のコントローラです。
+ * 
+ * @reamsid_L DBE-0024-010  suguangjun 
  */
 public class NinteiChosaSchedule8Main {
 

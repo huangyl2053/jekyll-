@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 調査地区市町村情報のバリデーションチェッククラスです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public class MainPanelValidationHandler {
 

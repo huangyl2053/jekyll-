@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaKensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,6 +31,10 @@ public class NinteichosaKensakuJokenDiv extends Panel {
     private CheckBoxList chkNinteioChosaIraisho;
     @JsonProperty("chkNinteiChosahyo")
     private CheckBoxList chkNinteiChosahyo;
+    @JsonProperty("txtChosaDispMax")
+    private TextBoxNum txtChosaDispMax;
+    @JsonProperty("btnChosaClear")
+    private Button btnChosaClear;
     @JsonProperty("btnNinteichosaKensaku")
     private Button btnNinteichosaKensaku;
     @JsonProperty("ccdNinteiChosaHokensha")
@@ -112,6 +116,42 @@ public class NinteichosaKensakuJokenDiv extends Panel {
     @JsonProperty("chkNinteiChosahyo")
     public void setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
         this.chkNinteiChosahyo = chkNinteiChosahyo;
+    }
+
+    /*
+     * gettxtChosaDispMax
+     * @return txtChosaDispMax
+     */
+    @JsonProperty("txtChosaDispMax")
+    public TextBoxNum getTxtChosaDispMax() {
+        return txtChosaDispMax;
+    }
+
+    /*
+     * settxtChosaDispMax
+     * @param txtChosaDispMax txtChosaDispMax
+     */
+    @JsonProperty("txtChosaDispMax")
+    public void setTxtChosaDispMax(TextBoxNum txtChosaDispMax) {
+        this.txtChosaDispMax = txtChosaDispMax;
+    }
+
+    /*
+     * getbtnChosaClear
+     * @return btnChosaClear
+     */
+    @JsonProperty("btnChosaClear")
+    public Button getBtnChosaClear() {
+        return btnChosaClear;
+    }
+
+    /*
+     * setbtnChosaClear
+     * @param btnChosaClear btnChosaClear
+     */
+    @JsonProperty("btnChosaClear")
+    public void setBtnChosaClear(Button btnChosaClear) {
+        this.btnChosaClear = btnChosaClear;
     }
 
     /*

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 住宅改修費支払結果取得パラメータ
  *
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

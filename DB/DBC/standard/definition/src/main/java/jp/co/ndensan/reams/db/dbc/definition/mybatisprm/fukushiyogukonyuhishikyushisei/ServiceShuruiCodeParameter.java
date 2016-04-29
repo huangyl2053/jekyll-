@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * サービス種類取得パラメータ
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

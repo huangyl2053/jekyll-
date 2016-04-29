@@ -404,14 +404,29 @@ public class NijiYoboKihonCheckList
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 二次予防基本チェックリストを管理するクラスを返します。
+     *
+     * @return 二次予防基本チェックリストを管理するクラス
+     */
     public NijiYoboKihonCheckList modifiedModel() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 二次予防基本チェックリストを管理するクラスListを返します。
+     *
+     * @return 二次予防基本チェックリストを管理するクラスList
+     */
     public List<NijiYoboNiniCheckList> getNijiYoboNiniCheckListList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 二次予防チェックリスト判定結果を管理するクラスListを返します。
+     *
+     * @return 二次予防チェックリスト判定結果を管理するクラスList
+     */
     public List<NijiYoboCheckListHanteiKekka> getNijiYoboCheckListHanteiKekkaList() {
         throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }

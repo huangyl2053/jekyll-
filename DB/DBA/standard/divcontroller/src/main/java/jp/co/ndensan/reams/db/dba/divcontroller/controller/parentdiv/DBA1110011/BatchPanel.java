@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSy
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.dba1110011.BatchPanelHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1110011.BatchPanelHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboFinder;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 被保険者証発行管理簿Divを制御します。
+ *
+ * @reamsid_L DBA-0600-010 zhangguopeng
  */
 public class BatchPanel {
 
@@ -69,7 +71,6 @@ public class BatchPanel {
         RDate kaishubiTo = div.getTxtKaishubiRange().getToValue();
         boolean flg = HihokenshashoHakkoKanriboFinder.createInstance().checkInput(
                 koufubiFrom, koufubiTo, kaishubiFrom, kaishubiTo);
-        // TODO  内部QA:924 Redmine： (必須チェックの処理は回答待ち)
         if (flg) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(

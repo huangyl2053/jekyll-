@@ -1,33 +1,38 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishokigoto;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】連帳 KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
+ */
 public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "titleNendo", length = 4, order = 1)
     public RString titleNendo;
-    @ReportItem(name = "HyojicodeName1", length = 6, order = 2)
-    public RString HyojicodeName1;
-    @ReportItem(name = "hyojiKomoku11", length = 8, order = 3)
+    @ReportItem(name = "hyojiKomoku11", length = 8, order = 2)
     public RString hyojiKomoku11;
-    @ReportItem(name = "HyojicodeName2", length = 6, order = 4)
-    public RString HyojicodeName2;
-    @ReportItem(name = "hyojiKomoku21", length = 8, order = 5)
+    @ReportItem(name = "hyojicodeName1", length = 6, order = 3)
+    public RString hyojicodeName1;
+    @ReportItem(name = "hyojiKomoku21", length = 8, order = 4)
     public RString hyojiKomoku21;
-    @ReportItem(name = "HyojicodeName3", length = 6, order = 6)
-    public RString HyojicodeName3;
-    @ReportItem(name = "hyojiKomoku31", length = 8, order = 7)
+    @ReportItem(name = "hyojicodeName2", length = 6, order = 5)
+    public RString hyojicodeName2;
+    @ReportItem(name = "hyojiKomoku31", length = 8, order = 6)
     public RString hyojiKomoku31;
-    @ReportItem(name = "Hyojicode1", length = 15, order = 8)
-    public RString Hyojicode1;
-    @ReportItem(name = "Hyojicode2", length = 15, order = 9)
-    public RString Hyojicode2;
-    @ReportItem(name = "Hyojicode3", length = 15, order = 10)
-    public RString Hyojicode3;
+    @ReportItem(name = "hyojicodeName3", length = 6, order = 7)
+    public RString hyojicodeName3;
+    @ReportItem(name = "hyojicode1", length = 15, order = 8)
+    public RString hyojicode1;
+    @ReportItem(name = "hyojicode2", length = 15, order = 9)
+    public RString hyojicode2;
+    @ReportItem(name = "hyojicode3", length = 15, order = 10)
+    public RString hyojicode3;
     @ReportItem(name = "tsuchishoNo", order = 11)
     public RString tsuchishoNo;
     @ReportItem(name = "setaiCode", length = 15, order = 12)

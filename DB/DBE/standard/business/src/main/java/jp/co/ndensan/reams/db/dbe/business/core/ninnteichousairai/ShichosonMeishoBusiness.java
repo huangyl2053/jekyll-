@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 市町村名称を管理するクラスです。
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class ShichosonMeishoBusiness {
 

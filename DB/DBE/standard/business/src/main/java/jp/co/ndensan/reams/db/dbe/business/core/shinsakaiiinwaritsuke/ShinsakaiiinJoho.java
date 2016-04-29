@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会委員ビジネスクラスです。
+ *
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public class ShinsakaiiinJoho {
 

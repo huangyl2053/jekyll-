@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 現在の状況コードを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum GenzainoJokyoCode {
 

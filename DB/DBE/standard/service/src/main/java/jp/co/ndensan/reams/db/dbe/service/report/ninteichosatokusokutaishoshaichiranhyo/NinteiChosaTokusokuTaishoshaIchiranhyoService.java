@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 /**
  * 主治医意見書督促対象者一覧表Printerです。
  *
+ * @reamsid_L DBE-0060-030 hezhenzhen
+ *
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoService {
 

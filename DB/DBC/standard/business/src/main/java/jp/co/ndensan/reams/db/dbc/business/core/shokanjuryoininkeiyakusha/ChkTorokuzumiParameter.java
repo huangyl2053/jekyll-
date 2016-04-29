@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 登録済みチェック用画面検索DIVのクラスです。
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

@@ -4,19 +4,21 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.InternalReportKihonDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * FukaErrorReportView のクラスファイル 
- * 
- * @author 自動生成
+ * FukaErrorReportView のクラスファイル
+ *
  */
 public class FukaErrorReportViewDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -91,7 +93,7 @@ public class FukaErrorReportViewDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMishori(Button btnMishori) {
+    public void setBtnMishori(Button btnMishori) {
         this.getFukaErrorShoriButton().setBtnMishori(btnMishori);
     }
 
@@ -101,7 +103,7 @@ public class FukaErrorReportViewDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnFukaKosei(Button btnFukaKosei) {
+    public void setBtnFukaKosei(Button btnFukaKosei) {
         this.getFukaErrorShoriButton().setBtnFukaKosei(btnFukaKosei);
     }
 
@@ -111,7 +113,7 @@ public class FukaErrorReportViewDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShikakuFuseigo(Button btnShikakuFuseigo) {
+    public void setBtnShikakuFuseigo(Button btnShikakuFuseigo) {
         this.getFukaErrorShoriButton().setBtnShikakuFuseigo(btnShikakuFuseigo);
     }
 

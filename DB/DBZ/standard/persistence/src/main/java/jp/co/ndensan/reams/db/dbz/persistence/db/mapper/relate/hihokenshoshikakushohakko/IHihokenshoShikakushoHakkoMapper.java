@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHo
 /**
  * 被保険者証資格証発行情報取得。
  *
+ * @reamsid_L DBA-1090-021 huangh
  */
 public interface IHihokenshoShikakushoHakkoMapper {
 

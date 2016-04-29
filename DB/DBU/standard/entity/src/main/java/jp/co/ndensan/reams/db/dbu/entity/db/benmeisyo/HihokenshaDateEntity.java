@@ -10,8 +10,10 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 被保険者情報Entityです。
+ *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 @lombok.Getter
 @lombok.Setter

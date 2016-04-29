@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 要介護認定調査票（特記事項）のプロパティです。
+ *
+ * @reamsid_L DBE-0080-040 xuyannan
  */
 public class ChosahyoTokkijikoProperty extends ReportPropertyBase<ChosahyoTokkijikoReportSource> {
 

@@ -10,8 +10,9 @@ import java.util.List;
 import lombok.Getter;
 
 /**
- *
  * 介護保険資格者証作成_帳票クラスパラメータクラスです。
+ * 
+ * @reamsid_L DBU-0490-080  suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

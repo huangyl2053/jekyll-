@@ -10,8 +10,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.SogoJigyohiRiyohyoRirekiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.dgServiceRiyohyoRirekiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.SogoJigyohiRiyohyoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -86,6 +86,9 @@ public class SogoJigyohiRiyohyoRireki {
 
     private dgServiceRiyohyoRirekiList_Row create履歴(Button btn, String txtJotai, String txtTodokedeYMDInvisible, String txtTodokedeYMD,
             String txtTodokedeKubun, String txtTekiyoKaishiYMD, String txtTekiyoShuryoYMD, String txtIraiJigyosha) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        btn.hashCode();
+        txtTodokedeYMDInvisible.length();
 
 //        TextBoxDate txtBoxTodokedeYMDInvisible = new TextBoxDate();
 //        txtBoxTodokedeYMDInvisible.setValue(new RDate(txtTodokedeYMDInvisible));

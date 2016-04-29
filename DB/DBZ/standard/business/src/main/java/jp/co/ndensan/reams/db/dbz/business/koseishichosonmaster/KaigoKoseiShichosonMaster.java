@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
@@ -49,7 +48,6 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
 //    public DbT7051KoseiShichosonMasterEntity getEntity() {
 //        return entity;
 //    }
-
     /**
      * 市町村識別IDを返します。
      *
@@ -416,18 +414,30 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
         return new Builder();
     }
 
+    /**
+     * 構成市町村マスタのみを変更対象とします。<br/> {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KaigoKoseiShichosonMaster}
+     */
     public KaigoKoseiShichosonMaster modifiedModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<KaigoKoseiShichosonMaster> getKoseiShichosonShishoMasterList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+//    /**
+//     *
+//     * @return
+//     */
+//    public List<KaigoKoseiShichosonMaster> getKoseiShichosonShishoMasterList() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    /**
+//     *
+//     * @return
+//     */
+//    public boolean hasChanged() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     @Override
     public IKoseiShichosonMasterEntity getEntity() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

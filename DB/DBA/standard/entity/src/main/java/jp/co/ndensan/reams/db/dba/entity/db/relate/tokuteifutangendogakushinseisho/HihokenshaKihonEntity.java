@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 被保険者基本情報Entityクラスです。
+ *
+ * @reamsid_L DBA-0540-714 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter

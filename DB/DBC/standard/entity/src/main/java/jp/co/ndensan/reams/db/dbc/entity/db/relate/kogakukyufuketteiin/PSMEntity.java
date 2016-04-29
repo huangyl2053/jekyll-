@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * PSMEntityのクラス
  *
- * @author 李俊俊
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @lombok.Getter
 @lombok.Setter

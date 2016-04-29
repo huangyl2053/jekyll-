@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
  * このコードはツールによって生成されました。
+ * @reamsid_L DBE-3000-020 dongyabin
  */
 public interface IZenkaiNinteiKekkaJohoDiv extends ICommonChildDivBaseProperties {
     

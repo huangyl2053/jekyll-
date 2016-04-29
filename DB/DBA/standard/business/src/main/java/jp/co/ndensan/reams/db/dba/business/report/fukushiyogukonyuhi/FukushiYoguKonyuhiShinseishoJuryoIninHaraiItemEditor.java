@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dba.business.report.fukushiyogukonyuhi;
 import jp.co.ndensan.reams.db.dba.entity.report.fukushiyogukonyuhi.FukushiYoguKonyuhiShinseishoJuryoIninHaraiReportSource;
 
 /**
- *
  * 介護保険居宅介護（予防）福祉用具購入費支給（受領委任払）申請書のEditorです。
+ *
+ * @reamsid_L DBA-0540-710 lishengli
  */
 public class FukushiYoguKonyuhiShinseishoJuryoIninHaraiItemEditor implements IFukushiYoguKonyuhiShinseishoJuryoIninHaraiEditor {
 

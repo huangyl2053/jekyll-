@@ -1,24 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010011.KaigohokenryoIchiranDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010011.KogakuDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010011.KyojuhiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010011.KyufugakugengakuDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010011.kaiShokuhiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tblKyufugakugengaku のクラスファイル 
- * 
+ * tblKyufugakugengaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class tblKyufugakugengakuDiv extends TablePanel {
@@ -28,6 +20,7 @@ public class tblKyufugakugengakuDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("celKyufugaku")
     private celKyufugakuAttblKyufugakugengaku celKyufugaku;
     @JsonProperty("cellKaigohoken")
@@ -77,7 +70,7 @@ public class tblKyufugakugengakuDiv extends TablePanel {
 
     @JsonProperty("celKyufugaku")
     private void setCelKyufugaku(celKyufugakuAttblKyufugakugengaku celKyufugaku) {
-        this.celKyufugaku=celKyufugaku;
+        this.celKyufugaku = celKyufugaku;
     }
 
     @JsonProperty("cellKaigohoken")
@@ -87,7 +80,7 @@ public class tblKyufugakugengakuDiv extends TablePanel {
 
     @JsonProperty("cellKaigohoken")
     private void setCellKaigohoken(cellKaigohokenAttblKyufugakugengaku cellKaigohoken) {
-        this.cellKaigohoken=cellKaigohoken;
+        this.cellKaigohoken = cellKaigohoken;
     }
 
     @JsonProperty("celShokuhiKogaku")
@@ -97,16 +90,18 @@ public class tblKyufugakugengakuDiv extends TablePanel {
 
     @JsonProperty("celShokuhiKogaku")
     private void setCelShokuhiKogaku(celShokuhiKogakuAttblKyufugakugengaku celShokuhiKogaku) {
-        this.celShokuhiKogaku=celShokuhiKogaku;
+        this.celShokuhiKogaku = celShokuhiKogaku;
     }
 
 }
+
 /**
- * celKyufugaku のクラスファイル 
- * 
+ * celKyufugaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celKyufugakuAttblKyufugakugengaku extends TableCell {
+
     @JsonProperty("Kyufugakugengaku")
     private KyufugakugengakuDiv Kyufugakugengaku;
     @JsonProperty("Kyojuhi")
@@ -119,7 +114,7 @@ class celKyufugakuAttblKyufugakugengaku extends TableCell {
 
     @JsonProperty("Kyufugakugengaku")
     public void setKyufugakugengaku(KyufugakugengakuDiv Kyufugakugengaku) {
-        this.Kyufugakugengaku=Kyufugakugengaku;
+        this.Kyufugakugengaku = Kyufugakugengaku;
     }
 
     @JsonProperty("Kyojuhi")
@@ -129,16 +124,18 @@ class celKyufugakuAttblKyufugakugengaku extends TableCell {
 
     @JsonProperty("Kyojuhi")
     public void setKyojuhi(KyojuhiDiv Kyojuhi) {
-        this.Kyojuhi=Kyojuhi;
+        this.Kyojuhi = Kyojuhi;
     }
 
 }
+
 /**
- * cellKaigohoken のクラスファイル 
- * 
+ * cellKaigohoken のクラスファイル
+ *
  * @author 自動生成
  */
 class cellKaigohokenAttblKyufugakugengaku extends TableCell {
+
     @JsonProperty("KaigohokenryoIchiran")
     private KaigohokenryoIchiranDiv KaigohokenryoIchiran;
 
@@ -149,16 +146,18 @@ class cellKaigohokenAttblKyufugakugengaku extends TableCell {
 
     @JsonProperty("KaigohokenryoIchiran")
     public void setKaigohokenryoIchiran(KaigohokenryoIchiranDiv KaigohokenryoIchiran) {
-        this.KaigohokenryoIchiran=KaigohokenryoIchiran;
+        this.KaigohokenryoIchiran = KaigohokenryoIchiran;
     }
 
 }
+
 /**
- * celShokuhiKogaku のクラスファイル 
- * 
+ * celShokuhiKogaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celShokuhiKogakuAttblKyufugakugengaku extends TableCell {
+
     @JsonProperty("kaiShokuhi")
     private kaiShokuhiDiv kaiShokuhi;
     @JsonProperty("Kogaku")
@@ -171,7 +170,7 @@ class celShokuhiKogakuAttblKyufugakugengaku extends TableCell {
 
     @JsonProperty("kaiShokuhi")
     public void setKaiShokuhi(kaiShokuhiDiv kaiShokuhi) {
-        this.kaiShokuhi=kaiShokuhi;
+        this.kaiShokuhi = kaiShokuhi;
     }
 
     @JsonProperty("Kogaku")
@@ -181,7 +180,7 @@ class celShokuhiKogakuAttblKyufugakugengaku extends TableCell {
 
     @JsonProperty("Kogaku")
     public void setKogaku(KogakuDiv Kogaku) {
-        this.Kogaku=Kogaku;
+        this.Kogaku = Kogaku;
     }
 
 }

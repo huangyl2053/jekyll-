@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払支給申請を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034ShokanShinseiEntity, ShokanShinsei> implements Serializable {
 
@@ -133,6 +136,15 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public RString get整理番号() {
         return entity.getSeiriNo();
+    }
+
+    /**
+     * 審査年月日を返します。
+     *
+     * @return 審査年月日
+     */
+    public FlexibleDate get審査年月日() {
+        return entity.getShinsaYMD();
     }
 
     /**
@@ -484,4 +496,104 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 
+    /**
+     * 住宅所有者を返します。
+     *
+     * @return 住宅所有者
+     */
+    public RString get住宅所有者() {
+        return entity.getJutakuShoyusha();
+    }
+
+    /**
+     * 被保険者との関係を返します。
+     *
+     * @return 被保険者との関係
+     */
+    public RString get被保険者との関係() {
+        return entity.getHihokenshaKankei();
+    }
+
+    /**
+     * 住宅改修申請取消事由コードを返します。
+     *
+     * @return 住宅改修申請取消事由コード
+     */
+    public RString get住宅改修申請取消事由コード() {
+        return entity.getKaishuShinseiTorikeshijiyuCode();
+    }
+
+    /**
+     * 申請者郵便番号を返します。
+     *
+     * @return 申請者郵便番号
+     */
+    public YubinNo get申請者郵便番号() {
+        return entity.getShinseishaYubinNo();
+    }
+
+    /**
+     * 理由書作成日を返します。
+     *
+     * @return 理由書作成日
+     */
+    public FlexibleDate get理由書作成日() {
+        return entity.getRiyushoSakuseiYMD();
+    }
+
+    /**
+     * 理由書作成者カナを返します。
+     *
+     * @return 理由書作成者カナ
+     */
+    public RString get理由書作成者カナ() {
+        return entity.getRiyushoSakuseishaKanaName();
+    }
+
+    /**
+     * 理由書作成者を返します。
+     *
+     * @return 理由書作成者
+     */
+    public RString get理由書作成者() {
+        return entity.getRiyushoSakuseishaName();
+    }
+
+    /**
+     * 理由書作成事業者番号を返します。
+     *
+     * @return 理由書作成事業者番号
+     */
+    public JigyoshaNo get理由書作成事業者番号() {
+        return entity.getRiyushoSakuseiJigyoshaNo();
+    }
+
+    /**
+     * 事前申請サービス提供年月を返します。
+     *
+     * @return 事前申請サービス提供年月
+     */
+    public FlexibleYearMonth get事前申請サービス提供年月() {
+        return entity.getJizenServiceTeikyoYM();
+    }
+
+    /**
+     * 事前申請整理番号を返します。
+     *
+     * @return 事前申請整理番号
+     */
+    public RString get事前申請整理番号() {
+        return entity.getJizenSeiriNo();
+    }
+
+    /**
+     * 償還払支給申請のみを変更対象とします。<br/> {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link ShokanShinsei}
+     */
+    public ShokanShinsei modifiedModel() {
+        DbT3034ShokanShinseiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanShinsei(modifiedEntity, id);
+    }
 }

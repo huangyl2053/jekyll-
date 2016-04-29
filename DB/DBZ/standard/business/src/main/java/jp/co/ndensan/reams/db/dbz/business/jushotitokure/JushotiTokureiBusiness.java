@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.jushotitokure;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 住所地特例の一覧データを扱います。
  *
+ * @reamsid_L DBA-0150-010 zhangzhiming
  */
 public class JushotiTokureiBusiness implements Serializable {
 
@@ -128,4 +130,21 @@ public class JushotiTokureiBusiness implements Serializable {
         return entity.getJushochiTokureiFlag();
     }
 
+    /**
+     * 措置元保険者を取得します。
+     *
+     * @return 措置元保険者
+     */
+    public LasdecCode get措置元保険者() {
+        return entity.getKoikinaiTokureiSochimotoShichosonCode();
+    }
+
+    /**
+     * 旧保険者を取得します。
+     *
+     * @return 旧保険者
+     */
+    public LasdecCode get旧保険者() {
+        return entity.getKyuShichosonCode();
+    }
 }

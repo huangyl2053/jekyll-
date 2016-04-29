@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * {@link NinteichosahyoServiceJokyoFlag}の編集を行うビルダークラスです。
@@ -81,6 +82,18 @@ public class NinteichosahyoServiceJokyoFlagBuilder {
     public NinteichosahyoServiceJokyoFlagBuilder setサービスの状況フラグ(boolean サービスの状況フラグ) {
         requireNonNull(サービスの状況フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスの状況フラグ"));
         entity.setServiceJokyoFlag(サービスの状況フラグ);
+        return this;
+    }
+
+    /**
+     * サービスの状況フラグを設定します。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return {@link NinteichosahyoServiceJokyoFlagBuilder}
+     */
+    public NinteichosahyoServiceJokyoFlagBuilder set厚労省IF識別コード(Code 厚労省IF識別コード) {
+        requireNonNull(厚労省IF識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("厚労省IF識別コード"));
+        entity.setKoroshoIfShikibetsuCode(厚労省IF識別コード);
         return this;
     }
 

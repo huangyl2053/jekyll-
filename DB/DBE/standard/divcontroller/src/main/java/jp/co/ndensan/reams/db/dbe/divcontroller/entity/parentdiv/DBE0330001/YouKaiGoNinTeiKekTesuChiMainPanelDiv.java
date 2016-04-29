@@ -7,14 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * YouKaiGoNinTeiKekTesuChiMainPanel のクラスファイル 
  * 
- * @author 自動生成
  */
 public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
@@ -125,6 +123,16 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public RadioButton getRadPrintCondition() {
+        return this.getSearchConditionPanel().getRadPrintCondition();
+    }
+
+    @JsonIgnore
+    public void  setRadPrintCondition(RadioButton radPrintCondition) {
+        this.getSearchConditionPanel().setRadPrintCondition(radPrintCondition);
+    }
+
+    @JsonIgnore
     public RadioButton getRadKekkaTsuchiOutputTaisho() {
         return this.getSearchConditionPanel().getRadKekkaTsuchiOutputTaisho();
     }
@@ -132,26 +140,6 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     @JsonIgnore
     public void  setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
         this.getSearchConditionPanel().setRadKekkaTsuchiOutputTaisho(radKekkaTsuchiOutputTaisho);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtDispMax() {
-        return this.getSearchConditionPanel().getTxtDispMax();
-    }
-
-    @JsonIgnore
-    public void  setTxtDispMax(TextBoxNum txtDispMax) {
-        this.getSearchConditionPanel().setTxtDispMax(txtDispMax);
-    }
-
-    @JsonIgnore
-    public Button getBtnClear() {
-        return this.getSearchConditionPanel().getBtnClear();
-    }
-
-    @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
-        this.getSearchConditionPanel().setBtnClear(btnClear);
     }
 
     @JsonIgnore
@@ -197,16 +185,6 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     @JsonIgnore
     public void  setTxtNinteiJokyoTeikyoYMD(TextBoxDate txtNinteiJokyoTeikyoYMD) {
         this.getPrintPanel().setTxtNinteiJokyoTeikyoYMD(txtNinteiJokyoTeikyoYMD);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadPrintCondition() {
-        return this.getPrintPanel().getRadPrintCondition();
-    }
-
-    @JsonIgnore
-    public void  setRadPrintCondition(RadioButton radPrintCondition) {
-        this.getPrintPanel().setRadPrintCondition(radPrintCondition);
     }
 
     // </editor-fold>

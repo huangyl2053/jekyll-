@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaS
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.HihokenshaFinderDiv;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001StateName.検索条件;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001StateName.該当者一覧;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.FukaTaishoshaSearchDiv;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001TransitionEventName.対象者特定;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.FukaTaishoshaSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
@@ -68,7 +68,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
  */
 public class FukaTaishoshaSearch {
 
-private static final ISearchCondition 条件無 = null;
+    private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
 
@@ -145,8 +145,7 @@ private static final ISearchCondition 条件無 = null;
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
                 && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
                 && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty() //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
-                ;
+                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
         if (検索条件Flag) {
             pairs.add(FukaTaishoshaSearchValidationHelper.validate検索条件(検索条件Flag, div.getSearchCondition()));
             responseData = ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -161,32 +160,7 @@ private static final ISearchCondition 条件無 = null;
         boolean is全年度 = div.getSearchCondition().getCcdSearchCondition().get賦課年度().isMaxOrMin();
         IItemList<FukaTaishoshaRelateEntity> list = ItemList.empty();
         if (!result.records().isEmpty()) {
-            if (is全年度) {
-                RString 被保険者番号 = RString.EMPTY;
-                for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                    RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
-                    if (!被保険者番号.equals(被保険者番号_絞り込み前)) {
-                        list = list.added(entity);
-                        被保険者番号 = 被保険者番号_絞り込み前;
-                    }
-                }
-            } else {
-                RString 被保険者番号 = RString.EMPTY;
-                RString 賦課年度 = RString.EMPTY;
-                RString 通知書番号 = RString.EMPTY;
-                for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                    RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
-                    RString 賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
-                    RString 通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
-                    if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
-                            && 通知書番号.equals(通知書番号_絞り込み前))) {
-                        list = list.added(entity);
-                        被保険者番号 = 被保険者番号_絞り込み前;
-                        賦課年度 = 賦課年度_絞り込み前;
-                        通知書番号 = 通知書番号_絞り込み前;
-                    }
-                }
-            }
+            list = editList(result, is全年度);
         }
         SearchResult<FukaTaishoshaRelateEntity> newResult = SearchResult.of(list);
 
@@ -228,6 +202,39 @@ private static final ISearchCondition 条件無 = null;
             // 画面状態遷移
             return ResponseData.of(div).setState(該当者一覧);
         }
+    }
+
+    private IItemList<FukaTaishoshaRelateEntity> editList(
+            SearchResult<FukaTaishoshaRelateEntity> result,
+            boolean is全年度) {
+        IItemList<FukaTaishoshaRelateEntity> list = ItemList.empty();
+        if (is全年度) {
+            RString 被保険者番号 = RString.EMPTY;
+            for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
+                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                if (!被保険者番号.equals(被保険者番号_絞り込み前)) {
+                    list = list.added(entity);
+                    被保険者番号 = 被保険者番号_絞り込み前;
+                }
+            }
+        } else {
+            RString 被保険者番号 = RString.EMPTY;
+            RString 賦課年度 = RString.EMPTY;
+            RString 通知書番号 = RString.EMPTY;
+            for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
+                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                RString 賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
+                RString 通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
+                if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
+                        && 通知書番号.equals(通知書番号_絞り込み前))) {
+                    list = list.added(entity);
+                    被保険者番号 = 被保険者番号_絞り込み前;
+                    賦課年度 = 賦課年度_絞り込み前;
+                    通知書番号 = 通知書番号_絞り込み前;
+                }
+            }
+        }
+        return list;
     }
 
     /**

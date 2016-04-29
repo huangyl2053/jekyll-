@@ -21,8 +21,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護保険施設入退所を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
-public class ShisetsuNyutaisho extends ModelBase<ShisetsuNyutaishoIdentifier, DbT1004ShisetsuNyutaishoEntity, ShisetsuNyutaisho> implements Serializable {
+public class ShisetsuNyutaisho
+        extends ModelBase<ShisetsuNyutaishoIdentifier, DbT1004ShisetsuNyutaishoEntity, ShisetsuNyutaisho>
+        implements Serializable {
 
     private final DbT1004ShisetsuNyutaishoEntity entity;
     private final ShisetsuNyutaishoIdentifier id;
@@ -194,7 +198,8 @@ public class ShisetsuNyutaisho extends ModelBase<ShisetsuNyutaishoIdentifier, Db
     }
 
     /**
-     * 介護保険施設入退所のみを変更対象とします。<br/> {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護保険施設入退所のみを変更対象とします。<br/>
+     * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShisetsuNyutaisho}
      */
@@ -208,7 +213,8 @@ public class ShisetsuNyutaisho extends ModelBase<ShisetsuNyutaishoIdentifier, Db
     }
 
     /**
-     * 保持する介護保険施設入退所を削除対象とします。<br/> {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護保険施設入退所を削除対象とします。<br/>
+     * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShisetsuNyutaisho}
      */

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 原因疾患を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class GeninShikkan extends ModelBase<GeninShikkanIdentifier, DbT5300GeninShikkanEntity, GeninShikkan> implements Serializable {
 
@@ -78,7 +80,7 @@ public class GeninShikkan extends ModelBase<GeninShikkanIdentifier, DbT5300Genin
      *
      * @return 主たる原因疾患フラグ
      */
-    public boolean get主たる原因疾患フラグ() {
+    public boolean is主たる原因疾患フラグ() {
         return entity.getIsShutaruGeninShikkan();
     }
 
@@ -112,8 +114,7 @@ public class GeninShikkan extends ModelBase<GeninShikkanIdentifier, DbT5300Genin
     }
 
     /**
-     * 原因疾患のみを変更対象とします。<br/>
-     * {@link DbT5300GeninShikkanEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 原因疾患のみを変更対象とします。<br/> {@link DbT5300GeninShikkanEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GeninShikkan}
      */
@@ -127,8 +128,7 @@ public class GeninShikkan extends ModelBase<GeninShikkanIdentifier, DbT5300Genin
     }
 
     /**
-     * 保持する原因疾患を削除対象とします。<br/>
-     * {@link DbT5300GeninShikkanEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する原因疾患を削除対象とします。<br/> {@link DbT5300GeninShikkanEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link GeninShikkan}
      */

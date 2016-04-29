@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KaigoKyufuKokuhorenJohoTorikomi のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-0980-290 wangkanglei
  */
 public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoKyufuKokuhorenJohoTorikomiDiv {
 

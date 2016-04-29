@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1020011;
 
 import jp.co.ndensan.reams.db.dba.business.nenreitotatsushikakuido.NenreitotatsuJoken;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1020011.NenReiTotatsuSearchConditionDiv;
+import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido.NenreitotatsuShikakuIdo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.neiReiTotatsuSrchConInfo.NenReiTotatsuSrchConInfoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -19,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 年齢到達取得のHandlerクラスです。
+ *
+ * @reamsid_L DBA-0330-050 wangkun
  */
 public class NenReiTotatsuSearchConditionHandler {
 
@@ -56,38 +59,49 @@ public class NenReiTotatsuSearchConditionHandler {
      * @return ValidationMessageControlPairs バリデーション結果
      */
     public ValidationMessageControlPairs 必須チェック() {
-       ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-       if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue().isEmpty()) {
-           validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間開始日"),
-            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom()));
-       }
-       if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue().isEmpty()) {
-           validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間終了日"),
-            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo()));
-       }
-       if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue().isEmpty()
-               && !div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue().isEmpty()) {
-           if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue()
-                   .isBeforeOrEquals(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２
-                        , "年齢到達期間開始日", "年齢到達期間終了日")));
-           }
-           if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue()
-                   .isBeforeOrEquals(FlexibleDate.getNowDate())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２
-                        , "年齢到達期間終了日", "システム日付")));
-           }
-       }
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間開始日"),
+                    div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom()));
+            return validPairs;
+        }
+        if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間終了日"),
+                    div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo()));
+            return validPairs;
+        }
+        boolean checkFlag = new NenreitotatsuShikakuIdo()
+                .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
+                        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
+        if (!checkFlag) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２,
+                    "年齢到達期間開始日", "年齢到達期間終了日")));
+        }
+        if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue()
+                .isBeforeOrEquals(FlexibleDate.getNowDate())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２,
+                    "年齢到達期間終了日", "システム日付")));
+        }
+        boolean checkFlag2 = new NenreitotatsuShikakuIdo()
+                .checkKaishibiShuryobiKikanJufuku(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
+                        div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue(),
+                        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
+                        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
+        if (!checkFlag2) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２,
+                    "前回処理期間終了日", "年齢到達期間開始日")));
+        }
+
         return validPairs;
     }
-    
+
     private void set非活性() {
         div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().setDisabled(true);
         div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().setDisabled(true);
         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().setDisabled(true);
         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().setDisabled(true);
     }
-    
+
     private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;

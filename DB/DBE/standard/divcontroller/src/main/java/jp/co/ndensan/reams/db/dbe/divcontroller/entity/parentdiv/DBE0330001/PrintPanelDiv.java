@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * PrintPanel のクラスファイル 
  * 
- * @author 自動生成
  */
 public class PrintPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
@@ -23,8 +22,6 @@ public class PrintPanelDiv extends Panel {
      */
     @JsonProperty("txtNinteiJokyoTeikyoYMD")
     private TextBoxDate txtNinteiJokyoTeikyoYMD;
-    @JsonProperty("radPrintCondition")
-    private RadioButton radPrintCondition;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,24 +45,6 @@ public class PrintPanelDiv extends Panel {
     @JsonProperty("txtNinteiJokyoTeikyoYMD")
     public void setTxtNinteiJokyoTeikyoYMD(TextBoxDate txtNinteiJokyoTeikyoYMD) {
         this.txtNinteiJokyoTeikyoYMD = txtNinteiJokyoTeikyoYMD;
-    }
-
-    /*
-     * getradPrintCondition
-     * @return radPrintCondition
-     */
-    @JsonProperty("radPrintCondition")
-    public RadioButton getRadPrintCondition() {
-        return radPrintCondition;
-    }
-
-    /*
-     * setradPrintCondition
-     * @param radPrintCondition radPrintCondition
-     */
-    @JsonProperty("radPrintCondition")
-    public void setRadPrintCondition(RadioButton radPrintCondition) {
-        this.radPrintCondition = radPrintCondition;
     }
 
     // </editor-fold>

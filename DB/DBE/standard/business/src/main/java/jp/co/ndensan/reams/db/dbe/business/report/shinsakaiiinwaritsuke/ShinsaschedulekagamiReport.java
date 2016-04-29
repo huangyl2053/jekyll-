@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護認定審査会スケジュール表かがみのReportです。
+ *
+ * @reamsid_L DBE-0130-080 xuyannan
  */
 public class ShinsaschedulekagamiReport extends Report<ShinsaschedulekagamiReportSource> {
 

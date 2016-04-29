@@ -4,17 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShafukuKeigenGakuPanel のクラスファイル 
- * 
- * @author 自動生成
+ * ShafukuKeigenGakuPanel のクラスファイル
+ *
+ * @reamsid_L DBC-1030-080 xuhao
  */
 public class ShafukuKeigenGakuPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -98,7 +103,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
+    public void setDdlServiceShurui(DropDownList ddlServiceShurui) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDdlServiceShurui(ddlServiceShurui);
     }
 
@@ -108,7 +113,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKengenritsu(DropDownList ddlKengenritsu) {
+    public void setDdlKengenritsu(DropDownList ddlKengenritsu) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setDdlKengenritsu(ddlKengenritsu);
     }
 
@@ -118,7 +123,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCal(Button btnCal) {
+    public void setBtnCal(Button btnCal) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setBtnCal(btnCal);
     }
 
@@ -128,7 +133,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtRiyoshaFutangakuTotal(TextBoxNum txtRiyoshaFutangakuTotal) {
+    public void setTxtRiyoshaFutangakuTotal(TextBoxNum txtRiyoshaFutangakuTotal) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtRiyoshaFutangakuTotal(txtRiyoshaFutangakuTotal);
     }
 
@@ -138,7 +143,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKengengaku(TextBoxNum txtKengengaku) {
+    public void setTxtKengengaku(TextBoxNum txtKengengaku) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtKengengaku(txtKengengaku);
     }
 
@@ -148,7 +153,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKeigengoRiyoshaFutangaku(TextBoxNum txtKeigengoRiyoshaFutangaku) {
+    public void setTxtKeigengoRiyoshaFutangaku(TextBoxNum txtKeigengoRiyoshaFutangaku) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtKeigengoRiyoshaFutangaku(txtKeigengoRiyoshaFutangaku);
     }
 
@@ -158,7 +163,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtBikou(TextBox txtBikou) {
+    public void setTxtBikou(TextBox txtBikou) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setTxtBikou(txtBikou);
     }
 
@@ -168,7 +173,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnConfirm(Button btnConfirm) {
+    public void setBtnConfirm(Button btnConfirm) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setBtnConfirm(btnConfirm);
     }
 
@@ -178,7 +183,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setBtnCancel(btnCancel);
     }
 
@@ -188,7 +193,7 @@ public class ShafukuKeigenGakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setBtnClear(btnClear);
     }
 

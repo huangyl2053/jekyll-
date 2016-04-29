@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishoshaichiran.DbTKoga
 
 /**
  * 高額介護サービス費給付対象者一覧表のEntity
+ *
+ * @reamsid_L DBC-0980-370 chenaoqi
  */
 @lombok.Setter
 @lombok.Getter

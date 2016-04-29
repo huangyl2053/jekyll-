@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 特別徴収平準化【B5横タイプ】Builderクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl implements IKarisanteiHenjunkaHenkoTsuchishoB5YokoBuilder {
 

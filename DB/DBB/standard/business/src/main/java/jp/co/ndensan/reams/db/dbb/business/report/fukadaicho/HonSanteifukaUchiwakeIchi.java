@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,12 +10,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *  本算定賦課内訳１
+ * 本算定賦課内訳１
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HonSanteifukaUchiwakeIchi {
+
     private RString 本人合計所得金額;
     private RString 本人公的年金収入額;
     private RString 本人課税区分;

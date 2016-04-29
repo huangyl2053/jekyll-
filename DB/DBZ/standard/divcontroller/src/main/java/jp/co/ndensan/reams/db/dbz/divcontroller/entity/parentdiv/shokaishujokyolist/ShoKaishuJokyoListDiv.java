@@ -3,14 +3,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyo
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.IShoKaishuJokyoListDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.dgShoKaishuJokyo_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 

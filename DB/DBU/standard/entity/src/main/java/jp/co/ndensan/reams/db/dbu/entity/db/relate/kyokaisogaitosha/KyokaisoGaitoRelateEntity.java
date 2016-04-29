@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEnt
 
 /**
  * 境界層該当者情報のエンティティクラスです。
+ *
+ * @reamsid_L DBU-0430-020 linghuhang
  */
 @lombok.Setter
 @lombok.Getter

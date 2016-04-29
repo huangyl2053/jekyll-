@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * 広域内転居結果一覧表作成_帳票クラスパラメータクラスです。
+ *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

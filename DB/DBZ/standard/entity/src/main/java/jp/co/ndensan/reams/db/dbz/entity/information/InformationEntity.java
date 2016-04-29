@@ -12,6 +12,8 @@ import lombok.Setter;
 
 /**
  * 適用除外情報のエンティティクラスです。
+ *
+ * @reamsid_L DBD-3660-030 wangjie2
  */
 @Getter
 @Setter

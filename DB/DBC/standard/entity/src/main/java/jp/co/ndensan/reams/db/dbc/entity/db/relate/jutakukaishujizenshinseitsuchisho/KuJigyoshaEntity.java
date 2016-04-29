@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 事業者情報entity
  *
+ * @reamsid_L DBC-0990-070 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

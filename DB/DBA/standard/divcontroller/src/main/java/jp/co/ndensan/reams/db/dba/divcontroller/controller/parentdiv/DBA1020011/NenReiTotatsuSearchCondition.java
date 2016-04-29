@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.nenreitotatsushikakuido.Nenreitotatsu
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1020011.NenReiTotatsuSearchConditionDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1020011.NenReiTotatsuSearchConditionHandler;
-import jp.co.ndensan.reams.db.dba.service.dbamn71001.NenreitotatsuShikakuIdo;
+import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido.NenreitotatsuShikakuIdo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 年齢到達取得のクラスです。
+ *
+ * @reamsid_L DBA-0330-050 wangkun
  */
 public class NenReiTotatsuSearchCondition {
 
@@ -74,20 +76,6 @@ public class NenReiTotatsuSearchCondition {
      */
     public ResponseData<Dbamn71001BatchFlowParameter> batchRegister(NenReiTotatsuSearchConditionDiv div) {
         ResponseData<Dbamn71001BatchFlowParameter> response = new ResponseData<>();
-        new NenreitotatsuShikakuIdo()
-                .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
-                        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-        if (!div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue().isEmpty()
-                && !div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue().isEmpty()) {
-            new NenreitotatsuShikakuIdo()
-                    .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue());
-            new NenreitotatsuShikakuIdo()
-                    .checkKaishibiShuryobiKikanJufuku(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-        }
         Dbamn71001BatchFlowParameter param = new NenreitotatsuShikakuIdo()
                 .getNenreitotatsuJokenBatchParameter(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());

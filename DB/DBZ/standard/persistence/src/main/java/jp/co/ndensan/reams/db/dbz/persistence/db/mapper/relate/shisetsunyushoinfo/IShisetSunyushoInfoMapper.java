@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ShisetSuny
 /**
  * 施設入所情報を取得するのマッパーインタフェースです。
  *
+ * @reamsid_L DBE-3000-180 hezhenzhen
+ *
  */
 public interface IShisetSunyushoInfoMapper {
 

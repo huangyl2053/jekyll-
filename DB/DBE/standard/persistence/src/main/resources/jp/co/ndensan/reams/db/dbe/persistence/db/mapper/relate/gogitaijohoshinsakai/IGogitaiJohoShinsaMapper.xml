@@ -3,6 +3,7 @@
 <!-- 概要： 合議体情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBE-0130-040 yaodongsheng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohoshinsakai.IGogitaiJohoShinsaMapper">
 
     <resultMap id="resultMap_GogitaiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity" autoMapping="true">

@@ -2,10 +2,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBA-0030-012 liangbc
  */
 public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
 
@@ -36,4 +39,11 @@ public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
      * @param isdisabled boolean
      */
     void set被保履歴ボタンDisable(boolean isdisabled);
+
+    /**
+     * 被保険者番号を取得
+     *
+     * @return 被保険者番号
+     */
+    RString get被保険者番号();
 }

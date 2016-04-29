@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.kaigohokenshindanmeireish
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- *
  * 介護保険診断命令書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 interface IKaigohokenShindanMeireishoBuider extends IReportBuilder<KaigohokenShindanMeireishoReportSource> {
 

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護認定結果通知書対象者一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 class KaigoKekkaTaishouIchiranHeaderEditor implements IKaigoKekkaTaishouIchiranEditor {
 
@@ -59,9 +61,13 @@ class KaigoKekkaTaishouIchiranHeaderEditor implements IKaigoKekkaTaishouIchiranE
 
         source.title = new RString("要介護認定結果通知書対象者一覧表");
         RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
-        iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanFrom().toString()).wareki().toDateString());
+        if (!RString.isNullOrEmpty(item.getChushutsuKikanFrom())) {
+            iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanFrom().toString()).wareki().toDateString());
+        }
         iryoKikanCodeBulider.append(KARA);
-        iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanTo().toString()).wareki().toDateString());
+        if (!RString.isNullOrEmpty(item.getChushutsuKikanTo())) {
+            iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanTo().toString()).wareki().toDateString());
+        }
         source.chushutsuKikan = iryoKikanCodeBulider.toRString();
         if (item.getGokei() != null) {
             RStringBuilder rsbGokeiLabel = new RStringBuilder();

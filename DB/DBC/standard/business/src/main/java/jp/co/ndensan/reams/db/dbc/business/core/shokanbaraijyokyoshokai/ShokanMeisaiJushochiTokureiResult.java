@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払請求明細住特一覧取得の返却結果
+ *
+ * @reamsid_L DBC-1010-180 panhe
  */
 @lombok.Getter
 @lombok.Setter

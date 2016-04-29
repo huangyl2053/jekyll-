@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  *
- * @author chenaoqi
+ * @reamsid_L DBU-1150-020 chenaoqi
  */
 @lombok.Getter
 @lombok.Setter

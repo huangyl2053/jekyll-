@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  *
  * 介護保険住所地特例施設変更通知書エディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0380-070 duanzhanli
+ *
  */
 interface IShisetsuHenkoTsuchishoEditor extends IReportEditor<ShisetsuHenkoTsuchishoReportSource> {
 

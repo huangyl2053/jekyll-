@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 国保連から来たファイルのデータの取得処理
+ *
+ * @reamsid_L DBC-0980-300 xupeng
  */
 public class KagoKetteiHokenshaInSharedFileCopy extends SimpleBatchProcessBase {
 
@@ -52,6 +54,8 @@ public class KagoKetteiHokenshaInSharedFileCopy extends SimpleBatchProcessBase {
     private OutputParameter<HashMap<RString, RString>> filePathList;
 
     private final RString 拡張子CSV = new RString("csv");
+    private final RString 拡張CSV = new RString(".csv");
+    private final RString 記号 = new RString("%");
 
     /**
      * process
@@ -84,7 +88,7 @@ public class KagoKetteiHokenshaInSharedFileCopy extends SimpleBatchProcessBase {
             return checkFilePath.concat(checkSharedName);
         } else {
             return checkFilePath.concat(new File(checkFilePath.toString()).
-                    list(getFileExtensionFilter(new RString(".csv")))[0]);
+                    list(getFileExtensionFilter(new RString(拡張CSV.toString())))[0]);
         }
 
     }
@@ -107,7 +111,7 @@ public class KagoKetteiHokenshaInSharedFileCopy extends SimpleBatchProcessBase {
 
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(sharedFileName);
-        rsb.append("%");
+        rsb.append(記号.toString());
         return rsb.toRString();
     }
 }

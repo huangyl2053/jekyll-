@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 /**
  *
  * 境界層管理マスタリスト情報のRelateEntityクラスです。
+ *
+ * @reamsid_L DBU-1050-040 wanghui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

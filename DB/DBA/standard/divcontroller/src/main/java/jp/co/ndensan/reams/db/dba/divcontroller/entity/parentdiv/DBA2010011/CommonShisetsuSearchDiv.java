@@ -1,18 +1,19 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * CommonShisetsuSearch のクラスファイル 
- * 
- * @author 自動生成
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+
+/**
+ * CommonShisetsuSearch のクラスファイル
+ *
  */
 public class CommonShisetsuSearchDiv extends Panel {
     /*
@@ -21,6 +22,7 @@ public class CommonShisetsuSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtSearchJigyoshaNo")
     private TextBoxCode txtSearchJigyoshaNo;
     @JsonProperty("txtSearchJigyoshaKaishiDate")
@@ -49,7 +51,7 @@ public class CommonShisetsuSearchDiv extends Panel {
 
     @JsonProperty("txtSearchJigyoshaNo")
     public void setTxtSearchJigyoshaNo(TextBoxCode txtSearchJigyoshaNo) {
-        this.txtSearchJigyoshaNo=txtSearchJigyoshaNo;
+        this.txtSearchJigyoshaNo = txtSearchJigyoshaNo;
     }
 
     @JsonProperty("txtSearchJigyoshaKaishiDate")
@@ -59,7 +61,7 @@ public class CommonShisetsuSearchDiv extends Panel {
 
     @JsonProperty("txtSearchJigyoshaKaishiDate")
     public void setTxtSearchJigyoshaKaishiDate(TextBoxFlexibleDate txtSearchJigyoshaKaishiDate) {
-        this.txtSearchJigyoshaKaishiDate=txtSearchJigyoshaKaishiDate;
+        this.txtSearchJigyoshaKaishiDate = txtSearchJigyoshaKaishiDate;
     }
 
     @JsonProperty("txtSearchJigyoshaHaishiDate")
@@ -69,7 +71,7 @@ public class CommonShisetsuSearchDiv extends Panel {
 
     @JsonProperty("txtSearchJigyoshaHaishiDate")
     public void setTxtSearchJigyoshaHaishiDate(TextBoxFlexibleDate txtSearchJigyoshaHaishiDate) {
-        this.txtSearchJigyoshaHaishiDate=txtSearchJigyoshaHaishiDate;
+        this.txtSearchJigyoshaHaishiDate = txtSearchJigyoshaHaishiDate;
     }
 
     @JsonProperty("txtSearchJigyoshaMeiOrKanaMeisho")
@@ -79,7 +81,7 @@ public class CommonShisetsuSearchDiv extends Panel {
 
     @JsonProperty("txtSearchJigyoshaMeiOrKanaMeisho")
     public void setTxtSearchJigyoshaMeiOrKanaMeisho(TextBox txtSearchJigyoshaMeiOrKanaMeisho) {
-        this.txtSearchJigyoshaMeiOrKanaMeisho=txtSearchJigyoshaMeiOrKanaMeisho;
+        this.txtSearchJigyoshaMeiOrKanaMeisho = txtSearchJigyoshaMeiOrKanaMeisho;
     }
 
     @JsonProperty("ddlSearchMeishoMatchCondition")
@@ -89,7 +91,7 @@ public class CommonShisetsuSearchDiv extends Panel {
 
     @JsonProperty("ddlSearchMeishoMatchCondition")
     public void setDdlSearchMeishoMatchCondition(DropDownList ddlSearchMeishoMatchCondition) {
-        this.ddlSearchMeishoMatchCondition=ddlSearchMeishoMatchCondition;
+        this.ddlSearchMeishoMatchCondition = ddlSearchMeishoMatchCondition;
     }
 
     @JsonProperty("txtSearchYubinNo")
@@ -99,7 +101,7 @@ public class CommonShisetsuSearchDiv extends Panel {
 
     @JsonProperty("txtSearchYubinNo")
     public void setTxtSearchYubinNo(TextBoxYubinNo txtSearchYubinNo) {
-        this.txtSearchYubinNo=txtSearchYubinNo;
+        this.txtSearchYubinNo = txtSearchYubinNo;
     }
 
     @JsonProperty("txtSearchJusho")
@@ -109,7 +111,7 @@ public class CommonShisetsuSearchDiv extends Panel {
 
     @JsonProperty("txtSearchJusho")
     public void setTxtSearchJusho(TextBox txtSearchJusho) {
-        this.txtSearchJusho=txtSearchJusho;
+        this.txtSearchJusho = txtSearchJusho;
     }
 
 }

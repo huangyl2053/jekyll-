@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,11 +14,13 @@ import lombok.Setter;
 
 /**
  * 高額サービス費決定情報取込データ編集
+ *
+ * @reamsid_L DBC-0980-400 lijunjun
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DbShoriDataParameter {
+public class DbShoriDataParameter implements Serializable {
 
     private final FlexibleYearMonth 処理年月;
     private final List<RString> ファイル名リスト;

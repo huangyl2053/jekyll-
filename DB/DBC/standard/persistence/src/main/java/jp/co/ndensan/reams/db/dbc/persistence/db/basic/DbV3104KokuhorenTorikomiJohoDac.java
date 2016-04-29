@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 国保連取り込み情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-0980-520 quxiaodong
  */
 public class DbV3104KokuhorenTorikomiJohoDac implements ISaveable<DbV3104KokuhorenTorikomiJohoEntity> {
 

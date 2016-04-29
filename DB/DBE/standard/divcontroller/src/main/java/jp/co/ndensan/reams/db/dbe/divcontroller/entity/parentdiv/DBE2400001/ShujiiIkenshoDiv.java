@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -132,6 +132,26 @@ public class ShujiiIkenshoDiv extends Panel {
     @JsonIgnore
     public void  setChkShujiiIkensho(CheckBoxList chkShujiiIkensho) {
         this.getShujiiIkenshoKensakujoken().setChkShujiiIkensho(chkShujiiIkensho);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtIkenshoDispMax() {
+        return this.getShujiiIkenshoKensakujoken().getTxtIkenshoDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtIkenshoDispMax(TextBoxNum txtIkenshoDispMax) {
+        this.getShujiiIkenshoKensakujoken().setTxtIkenshoDispMax(txtIkenshoDispMax);
+    }
+
+    @JsonIgnore
+    public Button getBtnIkenshoClear() {
+        return this.getShujiiIkenshoKensakujoken().getBtnIkenshoClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnIkenshoClear(Button btnIkenshoClear) {
+        this.getShujiiIkenshoKensakujoken().setBtnIkenshoClear(btnIkenshoClear);
     }
 
     @JsonIgnore

@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubu
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
- *
  * 本算定納入通知書情報です。
+ *
+ * @reamsid_L DBB-9110-090 liangbc
  */
 @lombok.Getter
 @lombok.Setter
@@ -35,5 +37,7 @@ public class HonSanteiNonyuTsuchiShoJoho {
     private List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private List<Kitsuki> 出力期リスト;
     private HenshuHaniKubun 編集範囲区分;
+    private NinshoshaSource ninshoshaSource;
+    private SofubutsuAtesakiSource sofubutsuAtesakiSource;
 
 }

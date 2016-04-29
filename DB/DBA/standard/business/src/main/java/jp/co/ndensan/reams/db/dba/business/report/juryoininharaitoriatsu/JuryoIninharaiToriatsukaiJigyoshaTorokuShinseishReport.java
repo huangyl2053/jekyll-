@@ -14,6 +14,7 @@ import lombok.NonNull;
 /**
  *
  * 介護保険受領委任払い取扱事業者登録申請書の帳票を作成します。
+ * @reamsid_L DBA-0540-684 dongyabin
  */
 public final class JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport extends 
         Report<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> {

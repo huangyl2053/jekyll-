@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査票（基本調査）のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-013 huangh
  */
 public class DbT5203NinteichosahyoKihonChosaDac implements ISaveable<DbT5203NinteichosahyoKihonChosaEntity> {
 

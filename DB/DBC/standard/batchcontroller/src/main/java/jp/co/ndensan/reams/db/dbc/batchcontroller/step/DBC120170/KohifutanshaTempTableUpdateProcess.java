@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時テーブルにデータの編集です。
+ *
+ * @reamsid_L DBC-0980-420 zhangrui
  */
 public class KohifutanshaTempTableUpdateProcess extends BatchProcessBase<KagoketteiMesaiIchijiEntity> {
 

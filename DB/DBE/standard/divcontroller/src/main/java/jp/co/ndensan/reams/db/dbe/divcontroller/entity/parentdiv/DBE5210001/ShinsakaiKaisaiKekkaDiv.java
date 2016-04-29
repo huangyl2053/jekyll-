@@ -4,19 +4,27 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
- * ShinsakaiKaisaiKekka のクラスファイル 
- * 
- * @author 自動生成
+ * ShinsakaiKaisaiKekka のクラスファイル
+ *
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -159,7 +167,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiMeisho(TextBox txtShinsakaiMeisho) {
+    public void setTxtShinsakaiMeisho(TextBox txtShinsakaiMeisho) {
         this.getShinsakaiYoteiInfo().setTxtShinsakaiMeisho(txtShinsakaiMeisho);
     }
 
@@ -169,7 +177,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGogitai(TextBox txtGogitai) {
+    public void setTxtGogitai(TextBox txtGogitai) {
         this.getShinsakaiYoteiInfo().setTxtGogitai(txtGogitai);
     }
 
@@ -179,7 +187,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaisaiYoteibi(TextBoxFlexibleDate txtKaisaiYoteibi) {
+    public void setTxtKaisaiYoteibi(TextBoxFlexibleDate txtKaisaiYoteibi) {
         this.getShinsakaiYoteiInfo().setTxtKaisaiYoteibi(txtKaisaiYoteibi);
     }
 
@@ -189,7 +197,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtYoteiStartTime(TextBoxTime txtYoteiStartTime) {
+    public void setTxtYoteiStartTime(TextBoxTime txtYoteiStartTime) {
         this.getShinsakaiYoteiInfo().setTxtYoteiStartTime(txtYoteiStartTime);
     }
 
@@ -199,7 +207,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtYoteiEndTime(TextBoxTime txtYoteiEndTime) {
+    public void setTxtYoteiEndTime(TextBoxTime txtYoteiEndTime) {
         this.getShinsakaiYoteiInfo().setTxtYoteiEndTime(txtYoteiEndTime);
     }
 
@@ -209,7 +217,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
         this.getShinsakaiYoteiInfo().setTxtYoteiTeiin(txtYoteiTeiin);
     }
 
@@ -219,7 +227,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
+    public void setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
         this.getShinsakaiYoteiInfo().setTxtYoteiKaijo(txtYoteiKaijo);
     }
 
@@ -229,7 +237,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaisaiBi(TextBoxFlexibleDate txtKaisaiBi) {
+    public void setTxtKaisaiBi(TextBoxFlexibleDate txtKaisaiBi) {
         this.getShinsakaiKaisaiInfo().setTxtKaisaiBi(txtKaisaiBi);
     }
 
@@ -239,7 +247,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaisaiStartTime(TextBoxTime txtKaisaiStartTime) {
+    public void setTxtKaisaiStartTime(TextBoxTime txtKaisaiStartTime) {
         this.getShinsakaiKaisaiInfo().setTxtKaisaiStartTime(txtKaisaiStartTime);
     }
 
@@ -249,7 +257,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaisaiEndTime(TextBoxTime txtKaisaiEndTime) {
+    public void setTxtKaisaiEndTime(TextBoxTime txtKaisaiEndTime) {
         this.getShinsakaiKaisaiInfo().setTxtKaisaiEndTime(txtKaisaiEndTime);
     }
 
@@ -259,7 +267,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoyoTime(TextBox txtShoyoTime) {
+    public void setTxtShoyoTime(TextBox txtShoyoTime) {
         this.getShinsakaiKaisaiInfo().setTxtShoyoTime(txtShoyoTime);
     }
 
@@ -269,7 +277,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJissiSu(TextBoxNum txtJissiSu) {
+    public void setTxtJissiSu(TextBoxNum txtJissiSu) {
         this.getShinsakaiKaisaiInfo().setTxtJissiSu(txtJissiSu);
     }
 
@@ -279,7 +287,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaisaiBasho(DropDownList ddlKaisaiBasho) {
+    public void setDdlKaisaiBasho(DropDownList ddlKaisaiBasho) {
         this.getShinsakaiKaisaiInfo().setDdlKaisaiBasho(ddlKaisaiBasho);
     }
 
@@ -289,7 +297,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
+    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
         this.getShinsakaiIinToroku().setDgShinsakaiIinIchiran(dgShinsakaiIinIchiran);
     }
 
@@ -299,7 +307,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setUplUploadPanel(UploadPanel uplUploadPanel) {
+    public void setUplUploadPanel(UploadPanel uplUploadPanel) {
         this.getOnseiFile().setUplUploadPanel(uplUploadPanel);
     }
 
@@ -309,7 +317,7 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAddOnseiFile(Button btnAddOnseiFile) {
+    public void setBtnAddOnseiFile(Button btnAddOnseiFile) {
         this.getOnseiFile().setBtnAddOnseiFile(btnAddOnseiFile);
     }
 

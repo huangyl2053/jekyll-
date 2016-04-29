@@ -5,8 +5,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 在宅利用-8-99Aを表す列挙型です。
- * 
- * @author LDNS 
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public enum GaikyochosaKomoku99A_8 {
 
@@ -25,7 +25,7 @@ public enum GaikyochosaKomoku99A_8 {
 
     /**
      * 在宅利用-8-99Aのコードを返します。
-     * 
+     *
      * @return 在宅利用-8-99Aのコード
      */
     public RString getコード() {
@@ -34,7 +34,7 @@ public enum GaikyochosaKomoku99A_8 {
 
     /**
      * 在宅利用-8-99Aの名称を返します。
-     * 
+     *
      * @return 在宅利用-8-99Aの名称
      */
     public RString get名称() {
@@ -43,7 +43,7 @@ public enum GaikyochosaKomoku99A_8 {
 
     /**
      * 在宅利用-8-99Aのコードと一致する内容を探します。
-     * 
+     *
      * @param code 在宅利用-8-99Aのコード
      * @return {@code code} に対応する在宅利用-8-99A
      */

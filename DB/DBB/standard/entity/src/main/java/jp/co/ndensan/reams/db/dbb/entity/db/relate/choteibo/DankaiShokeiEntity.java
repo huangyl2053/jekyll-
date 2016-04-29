@@ -12,73 +12,29 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 段階小計一時Entityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DankaiShokeiEntity implements IDbAccessable {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 段階
-     */
     private RString dankai;
-    /**
-     * 当月フラグ
-     */
     private int dogetsuFlag;
-    /**
-     * 該当する段階の前月末の件数
-     */
+    private RString karisanFlag;
     private Decimal zengetsusueKensu;
-    /**
-     * 該当する段階の前月末の調定額の小計
-     */
     private Decimal zengetsusueChoteigakuCount;
-    /**
-     * 該当する段階の増の件数
-     */
     private Decimal fueKensu;
-    /**
-     * 該当する段階の増の調定額の小計
-     */
     private Decimal fueChoteigakuCount;
-    /**
-     * 該当する段階の減の件数
-     */
     private Decimal genKensu;
-    /**
-     * 該当する段階の減の調定額の小計
-     */
     private Decimal genChoteigakuCount;
-    /**
-     * 該当する段階の当月末の件数
-     */
     private Decimal dogetsusueKensu;
-    /**
-     * 該当する段階の当月末の調定額の小計
-     */
     private Decimal dogetsusueChoteigakuCount;
-    /**
-     * 該当する段階の特徴者数の件数
-     */
     private Decimal tokuchosyaKensu;
-    /**
-     * 該当する段階の普徴者数の件数
-     */
     private Decimal fuchosyaKensu;
-    /**
-     * 該当する段階の内併徴者数の件数
-     */
     private Decimal naiheisyaKensu;
 }

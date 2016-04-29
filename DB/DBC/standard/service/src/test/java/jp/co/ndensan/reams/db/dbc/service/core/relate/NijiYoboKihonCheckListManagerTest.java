@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEn
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3101NijiYoboKihonCheckListDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.INijiYoboKihonCheckListMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.nijiyobokihonchecklist.INijiYoboKihonCheckListMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboCheckListHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboNiniCheckListManager;

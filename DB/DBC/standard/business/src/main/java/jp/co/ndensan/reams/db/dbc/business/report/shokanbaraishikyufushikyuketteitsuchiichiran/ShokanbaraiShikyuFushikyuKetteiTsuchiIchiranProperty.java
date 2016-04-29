@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 償還払支給（不支給）決定通知一覧表覧表のプロパティです。
+ *
+ * @reamsid_L DBC-1000-150 hezhenzhen
+ *
  */
 public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
         extends ReportPropertyBase<ShokanbaraiShikyuFushikyuReportSource> {
@@ -44,12 +47,6 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranProperty
             Breakers<ShokanbaraiShikyuFushikyuReportSource> breakers,
             BreakerCatalog<ShokanbaraiShikyuFushikyuReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<ShokanbaraiShikyuFushikyuReportSource> occuredBreak(

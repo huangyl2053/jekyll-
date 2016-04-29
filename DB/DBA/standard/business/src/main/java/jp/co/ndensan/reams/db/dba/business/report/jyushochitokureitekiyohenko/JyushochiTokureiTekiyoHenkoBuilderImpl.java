@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 介護保険住所地特例適用・変更・終了届Builderクラスです
+ * @reamsid_L DBA-0540-685 dongyabin
  */
 public final class JyushochiTokureiTekiyoHenkoBuilderImpl implements IJyushochiTokureiTekiyoHenkoBuilder {
     

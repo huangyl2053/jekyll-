@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.Ka
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KaigoJuminhyoKobetsuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.mapper.relate.kaigojuminhyokobetsu.IKaigoJuminhyoKobetsuMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyokobetsu.IKaigoJuminhyoKobetsuMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -21,13 +21,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 広域運用抽出期間情報リスト取得するクラスです。
+ *
+ * @reamsid_L DBU-0550-040 zhangzhiming
  */
 public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
 
     private final MapperProvider mapperProvider;
-    private static final int 位置_結束 = 6;
 
     /**
      * コンストラクタ。
@@ -85,8 +85,7 @@ public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
         List<KobetsuKoikiunyoParameter> batchParameterList = new ArrayList<>();
         for (KaigoJuminhyoKobetsuParameter list : kobetsuLsit) {
             KobetsuKoikiunyoParameter batchParameter = new KobetsuKoikiunyoParameter();
-            batchParameter.setShichosonCode(list.getSakiShichoson().substring(0, 位置_結束));
-            batchParameter.setDateTo(RDate.getNowDate().toDateString());
+            batchParameter.setDateTo(RDate.getNowDateTime());
             RStringBuilder taishoShuryo = new RStringBuilder();
             taishoShuryo.append(list.getKonkaiStSakuseiYMD());
             taishoShuryo.append(list.getKonkaiStSakuseiTime());

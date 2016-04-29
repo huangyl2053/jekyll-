@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHoken
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInTempSaveProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInUpdataDBProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInUpdataTempTableProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaInWriteReportProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteihokenshain.KagoKetteiHokenshaInBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -21,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 過誤決定通知書情報取込（保険者分）バッチ
+ *
+ * @reamsid_L DBC-0980-300 xupeng
  */
 public class DBC120160_KagoKetteiHokenshaIn
         extends BatchFlowBase<KagoKetteiHokenshaInBatchParameter> {
@@ -31,6 +35,7 @@ public class DBC120160_KagoKetteiHokenshaIn
     private static final String UPDATA_DB_PROCESS = "KagoKetteiHokenshaInUpdataTempTableProcess";
     private static final String WRITE_REPORT = "KagoKetteiHokenshaInWriteReportProcess";
 
+    private final RString filePath = new RString("/home/D209007/shared/sharedFiles");
     private final RString sharedFileKey = new RString("171");
     private RString runFilePath;
     private List<RString> csvFileName;
@@ -58,8 +63,7 @@ public class DBC120160_KagoKetteiHokenshaIn
     @Step(SHAREDFILE_COPY)
     IBatchFlowCommand csvFileCheckProcess() {
         Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(KagoKetteiHokenshaInSharedFileCopy.PARAMETER_IN_FILEPATH,
-                new RString("/home/D209007/shared/HokenshabunKagoKeteiTsuchishoJyohoTorikomi"));
+        processParameter.put(KagoKetteiHokenshaInSharedFileCopy.PARAMETER_IN_FILEPATH, filePath);
         processParameter.put(KagoKetteiHokenshaInSharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
         return simpleBatch(KagoKetteiHokenshaInSharedFileCopy.class).arguments(processParameter).define();
     }
@@ -73,15 +77,23 @@ public class DBC120160_KagoKetteiHokenshaIn
 
     @Step(UPDATA_TEMPTABLE_PROCESS)
     IBatchFlowCommand updataTempTableProcess() {
-        return simpleBatch(KagoKetteiHokenshaInUpdataTempTableProcess.class).define();
+        return loopBatch(KagoKetteiHokenshaInUpdataTempTableProcess.class).define();
     }
 
     @Step(UPDATA_DB_PROCESS)
     IBatchFlowCommand updataDBProcess() {
         Map<RString, Object> processParameter = new HashMap<>();
         processParameter.put(KagoKetteiHokenshaInUpdataDBProcess.PARAMETER_SHORIYM, getParameter().getShoriYM());
-//        processParameter.put(KagoKetteiHokenshaInUpdataDBProcess.PARAMETER_CSVFILENAME, csvFileName);
+        processParameter.put(KagoKetteiHokenshaInUpdataDBProcess.PARAMETER_CSVFILENAME, csvFileName);
         return simpleBatch(KagoKetteiHokenshaInUpdataDBProcess.class).arguments(processParameter).define();
     }
 
+    @Step(WRITE_REPORT)
+    IBatchFlowCommand writeReportProcess() {
+        Map<RString, Object> parameter = new HashMap<>();
+        parameter.put(KagoKetteiHokenshaInWriteReportProcess.PARAMETER_IN_SHORIYM, getParameter().getShoriYM());
+        parameter.put(KagoKetteiHokenshaInWriteReportProcess.PARAMETER_IN_SHUTSURYOKUJUNID,
+                getParameter().getShuturyokuJunn());
+        return loopBatch(KohifutanshaWriteReportProcess.class).arguments(parameter).define();
+    }
 }

@@ -8,15 +8,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KanryoDia
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.StaticImage;
 
 /**
- * KanryoDialog のクラスファイル 
- * 
- * @author 自動生成
+ * KanryoDialog のクラスファイル
+ *
+ * @reamsid_L DBZ-4490-010 chengsanyuan
  */
 public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -100,7 +103,7 @@ public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
     }
 
     @JsonIgnore
-    public void  setImgSuccess(StaticImage imgSuccess) {
+    public void setImgSuccess(StaticImage imgSuccess) {
         this.getSuccessInfo().setImgSuccess(imgSuccess);
     }
 
@@ -110,7 +113,7 @@ public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
     }
 
     @JsonIgnore
-    public void  setWrapMessageMain(WrapMessageMainDiv WrapMessageMain) {
+    public void setWrapMessageMain(WrapMessageMainDiv WrapMessageMain) {
         this.getSuccessInfo().setWrapMessageMain(WrapMessageMain);
     }
 
@@ -120,11 +123,10 @@ public class KanryoDialogDiv extends Panel implements IKanryoDialogDiv {
     }
 
     @JsonIgnore
-    public void  setLblMessageMain(Label lblMessageMain) {
+    public void setLblMessageMain(Label lblMessageMain) {
         this.getSuccessInfo().getWrapMessageMain().setLblMessageMain(lblMessageMain);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

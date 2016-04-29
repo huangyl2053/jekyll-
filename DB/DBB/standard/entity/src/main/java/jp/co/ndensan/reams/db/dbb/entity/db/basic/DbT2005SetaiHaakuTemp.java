@@ -4,9 +4,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 世帯員把握テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBB-0640-020 chenaoqi
  */
 public enum DbT2005SetaiHaakuTemp implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * hihokenshaNo
      */
@@ -38,7 +41,7 @@ public enum DbT2005SetaiHaakuTemp implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -47,7 +50,7 @@ public enum DbT2005SetaiHaakuTemp implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

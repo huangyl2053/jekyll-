@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 保険者名情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 @lombok.Getter
 @lombok.Setter

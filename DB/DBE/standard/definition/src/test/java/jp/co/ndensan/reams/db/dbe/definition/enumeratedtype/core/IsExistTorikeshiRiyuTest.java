@@ -25,12 +25,12 @@ public class IsExistTorikeshiRiyuTest extends DbeTestBase {
 
     @Test
     public void であるを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsExistTorikeshiRiyu.である.getコード(), is(true));
+        assertThat(IsExistTorikeshiRiyu.である.has取消理由(), is(true));
     }
 
     @Test
     public void でないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsExistTorikeshiRiyu.でない.getコード(), is(false));
+        assertThat(IsExistTorikeshiRiyu.でない.has取消理由(), is(false));
     }
 
     @Test

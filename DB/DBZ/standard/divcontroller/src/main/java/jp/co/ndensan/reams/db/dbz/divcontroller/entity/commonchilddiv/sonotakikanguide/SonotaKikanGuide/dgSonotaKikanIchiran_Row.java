@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgSonotaKikanIchiran_Row のクラスファイル 
  * 
- * @author 自動生成
  */
 
 public class dgSonotaKikanIchiran_Row extends DataRow {

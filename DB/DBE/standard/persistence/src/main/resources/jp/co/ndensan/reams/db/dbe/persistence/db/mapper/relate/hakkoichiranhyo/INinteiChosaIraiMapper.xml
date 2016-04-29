@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-0080-160 duanzhanli -->
 <!--SelectMethod : getHihokenshaShutokuJyoho-->
 <!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.INinteiChosaIraiMapper">
@@ -71,7 +72,7 @@
             WHERE
 		"shinseishoKanriNo" = dbT5201."shinseishoKanriNo"
             AND "logicalDeletedFlag" = false)
-        AND dbT5101."shoriJotaiKubun" IN ('0','3')
+        AND dbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND dbT5101."logicalDeletedFlag" = false
         AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL

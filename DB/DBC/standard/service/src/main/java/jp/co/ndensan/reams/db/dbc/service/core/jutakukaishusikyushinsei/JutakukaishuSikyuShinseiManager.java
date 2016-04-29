@@ -20,10 +20,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuJizenShinseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JyutakuGaisyunaiyoListParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.UpdSyokanbaraiketeJoho;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiKey;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
@@ -48,6 +49,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.jyutakukaisyuyichiran.Jyutakukais
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -60,9 +62,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 住宅改修費支給申請
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 public class JutakukaishuSikyuShinseiManager {
 
+    private static final RString キー = new RString("hiHokenshaNo");
+    private static final RString モード_審査 = new RString("審査モード");
+    private static final RString モード_取消 = new RString("取消モード");
+    private static final RString 住宅改修_削除 = new RString("削除");
+    private static final RString 区分_コード1 = new RString("1");
+    private static final RString 区分_コード2 = new RString("2");
+    private static final RString 区分_コード3 = new RString("3");
+    private static final RString メッセージ_1 = new RString("住宅改修データがありません。");
+    private static final RString メッセージ_2 = new RString("着工日が同一年月を設定してください。");
+    private static final RString メッセージ_3 = new RString("対象住宅住所が同じ住所を設定してください。");
     private final MapperProvider mapperProvider;
     private final DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac;
     private final DbT3038ShokanKihonDac 償還払請求基本Dac;
@@ -106,7 +120,7 @@ public class JutakukaishuSikyuShinseiManager {
     public List<JutakukaishuSikyuShinseiResult> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("hiHokenshaNo", 被保険者番号);
+        parameter.put(キー.toString(), 被保険者番号);
         IJutakukaishuSikyuShinseiMapper mapper = mapperProvider.create(IJutakukaishuSikyuShinseiMapper.class);
         List<JutakukaishuSikyuShinseiEntity> 住宅改修費支給申請情報List = mapper.get住宅改修費支給申請情報(parameter);
         List<JutakukaishuSikyuShinseiEntity> 住宅改修費事前申請情報List = mapper.get住宅改修費事前申請情報(parameter);
@@ -157,7 +171,7 @@ public class JutakukaishuSikyuShinseiManager {
     public List<JutakukaishuJizenShinseiResult> getShokanJizenShinseiList(HihokenshaNo 被保険者番号) {
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("hiHokenshaNo", 被保険者番号);
+        parameter.put(キー.toString(), 被保険者番号);
         IJutakukaishuSikyuShinseiMapper mapper = mapperProvider.create(IJutakukaishuSikyuShinseiMapper.class);
         List<JutakukaishuJizenShinseiEntity> 事前申請一覧List = mapper.get事前申請一覧(parameter);
         if (事前申請一覧List == null || 事前申請一覧List.isEmpty()) {
@@ -311,8 +325,7 @@ public class JutakukaishuSikyuShinseiManager {
             RString 画面モード, ShikibetsuCode 識別コード, HokenshaNo 証記載保険者番号,
             ShokanShinsei dbt3034, ShokanKihon dbt3038, List<ShokanJutakuKaishu> dbt3049List,
             ShokanShukei dbt3053, ShokanHanteiKekka dbt3036) {
-        RString モード_審査 = new RString("審査");
-        RString モード_取消 = new RString("取消");
+
         償還払支給申請Dac.save(dbt3034.toEntity());
 
         if (モード_取消.equals(画面モード)) {
@@ -350,7 +363,7 @@ public class JutakukaishuSikyuShinseiManager {
             kyufuentity.setShikibetsuCode(識別コード);
             kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
             kyufuentity.setShinsaYM(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
-            kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
+            kyufuentity.setKyufuSakuseiKubunCode(区分_コード1);
             ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
             DbT3038ShokanKihonEntity entity = null;
             if (kihon != null) {
@@ -385,54 +398,53 @@ public class JutakukaishuSikyuShinseiManager {
             List<ShokanJutakuKaishu> dbt3049List, ShokanShukei dbt3053,
             ShokanShinsei dbt3034, ShokanKihon dbt3038, ShokanHanteiKekka dbt3036) {
 
-        List<DbT3049ShokanJutakuKaishuEntity> dbt3049tmpList = new ArrayList<>();
-        DbT3049ShokanJutakuKaishuEntity dbt3049entity;
+//        List<DbT3049ShokanJutakuKaishuEntity> dbt3049tmpList = new ArrayList<>();
         if (dbt3049List != null && !dbt3049List.isEmpty()) {
             for (ShokanJutakuKaishu dbt3049 : dbt3049List) {
-                償還払請求住宅改修Dac.delete(dbt3049.toEntity());
-                dbt3049entity = 償還払請求住宅改修Dac.selectByKey(dbt3049.toEntity().getHiHokenshaNo(),
-                        dbt3049.toEntity().getServiceTeikyoYM(),
-                        dbt3049.toEntity().getSeiriNo(),
-                        dbt3049.toEntity().getJigyoshaNo(),
-                        dbt3049.toEntity().getYoshikiNo(),
-                        dbt3049.toEntity().getMeisaiNo(),
-                        dbt3049.toEntity().getRenban());
-                dbt3049tmpList.add(dbt3049entity);
+                DbT3049ShokanJutakuKaishuEntity entity = dbt3049.toEntity();
+                entity.setState(EntityDataState.Deleted);
+                償還払請求住宅改修Dac.delete(entity);
+//                dbt3049tmpList.add(dbt3049.toEntity());
             }
         }
-        DbT3053ShokanShukeiEntity dbt3053entity = new DbT3053ShokanShukeiEntity();
+//        DbT3053ShokanShukeiEntity dbt3053entity = new DbT3053ShokanShukeiEntity();
         if (dbt3053 != null) {
-            償還払請求集計Dac.delete(dbt3053.toEntity());
-            dbt3053entity = 償還払請求集計Dac.selectByKey(dbt3053.toEntity().getHiHokenshaNo(),
-                    dbt3053.toEntity().getServiceTeikyoYM(), dbt3053.toEntity().getSeiriNo(),
-                    dbt3053.toEntity().getJigyoshaNo(), dbt3053.toEntity().getYoshikiNo(),
-                    dbt3053.toEntity().getMeisaiNo(), dbt3053.toEntity().getRenban());
+            DbT3053ShokanShukeiEntity entity = dbt3053.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払請求集計Dac.delete(entity);
+//            dbt3053entity = dbt3053.toEntity();
         }
         if (dbt3038 != null) {
-            償還払請求基本Dac.delete(dbt3038.toEntity());
+            DbT3038ShokanKihonEntity entity = dbt3038.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払請求基本Dac.delete(entity);
         }
         if (dbt3036 != null) {
-            償還払支給判定結果Dac.delete(dbt3036.toEntity());
+            DbT3036ShokanHanteiKekkaEntity entity = dbt3036.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払支給判定結果Dac.delete(entity);
         }
         if (dbt3034 != null) {
-            償還払支給申請Dac.delete(dbt3034.toEntity());
+            DbT3034ShokanShinseiEntity entity = dbt3034.toEntity();
+            entity.setState(EntityDataState.Deleted);
+            償還払支給申請Dac.delete(entity);
         }
-        GeifuEntity kyufuentity = new GeifuEntity();
-        kyufuentity.setShikibetsuCode(識別コード);
-        kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
-        kyufuentity.setShinsaYM(決定日.getYearMonth());
-        kyufuentity.setKyufuSakuseiKubunCode(new RString("3"));
-        ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
-        DbT3038ShokanKihonEntity entity = null;
-        if (kihon != null) {
-            entity = kihon.toEntity();
-        }
-        if (dbt3036 != null
-                && ShikyuFushikyuKubun.支給.getコード().equals(dbt3036.toEntity().getShikyuHushikyuKetteiKubun())) {
-            JutakuKaishuKetteiKyufujissekiHennsyuManager manager
-                    = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
-            manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049tmpList, dbt3053entity, entity);
-        }
+//        GeifuEntity kyufuentity = new GeifuEntity();
+//        kyufuentity.setShikibetsuCode(識別コード);
+//        kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
+//        kyufuentity.setShinsaYM(決定日.getYearMonth());
+//        kyufuentity.setKyufuSakuseiKubunCode(区分_コード3);
+//        ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
+//        DbT3038ShokanKihonEntity entity = null;
+//        if (kihon != null) {
+//            entity = kihon.toEntity();
+//        }
+//        if (dbt3036 != null
+//                && ShikyuFushikyuKubun.支給.getコード().equals(dbt3036.toEntity().getShikyuHushikyuKetteiKubun())) {
+//            JutakuKaishuKetteiKyufujissekiHennsyuManager manager
+//                    = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
+//            manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049tmpList, dbt3053entity, entity);
+//        }
         return true;
     }
 
@@ -447,8 +459,17 @@ public class JutakukaishuSikyuShinseiManager {
     @Transaction
     public boolean updSyokanbaraiketeJoho(UpdSyokanbaraiketeJoho parameter,
             ShokanShinsei dbt3034, ShokanShukei dbt3053) {
+        HokenshaNo 証記載保険者番号 = null;
         if (dbt3034 != null) {
-            償還払支給申請Dac.save(dbt3034.toEntity());
+            DbT3034ShokanShinseiEntity dbt3034Entity = 償還払支給申請Dac.selectByKey(
+                    dbt3034.get被保険者番号(), dbt3034.getサービス提供年月(), dbt3034.get整理番号());
+            dbt3034Entity.setShikyuShinseiShinsaKubun(dbt3034.get支給申請審査区分());
+            dbt3034Entity.setShinsaHohoKubun(dbt3034.get審査方法区分());
+            dbt3034Entity.setShinsaYMD(dbt3034.get審査年月日());
+            dbt3034Entity.setShinsaKekka(dbt3034.get審査結果());
+            dbt3034Entity.setState(EntityDataState.Modified);
+            証記載保険者番号 = new HokenshaNo(dbt3034Entity.getShoKisaiHokenshaNo().value());
+            償還払支給申請Dac.save(dbt3034Entity);
         }
 
         ShokanHanteiKekka kekka = getShokanHanteiKekka(parameter.get被保険者番号(),
@@ -458,6 +479,8 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3036entity.setHiHokenshaNo(parameter.get被保険者番号());
             dbt3036entity.setServiceTeikyoYM(parameter.getサービス提供年月());
             dbt3036entity.setSeiriNo(parameter.get整理番号());
+            //TODO QA内部番号685
+            dbt3036entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("123456"));
             dbt3036entity.setKetteiYMD(parameter.get決定年月日());
             dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給決定区分());
             dbt3036entity.setShiharaiKingaku(parameter.get支払金額());
@@ -474,47 +497,66 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3036entity.setState(EntityDataState.Modified);
             償還払支給判定結果Dac.save(dbt3036entity);
         }
-        DbT3053ShokanShukeiEntity dbt3053entity = null;
+
+        DbT3053ShokanShukeiEntity dbT3053Entity = null;
         if (dbt3053 != null) {
-            償還払請求集計Dac.save(dbt3053.toEntity());
-            dbt3053entity = 償還払請求集計Dac.selectByKey(dbt3053.toEntity().getHiHokenshaNo(),
-                    dbt3053.toEntity().getServiceTeikyoYM(), dbt3053.toEntity().getSeiriNo(),
-                    dbt3053.toEntity().getJigyoshaNo(), dbt3053.toEntity().getYoshikiNo(),
-                    dbt3053.toEntity().getMeisaiNo(), dbt3053.toEntity().getRenban());
+            SyokanbaraiketteJohoParameter mybatisParameter = SyokanbaraiketteJohoParameter.createMybatisParam(parameter.get被保険者番号(),
+                    parameter.getサービス提供年月(), parameter.get整理番号());
+            DbT3053ShokanShukeiEntity entity = 償還払請求集計Dac.select償還払請求集計(mybatisParameter);
+            entity.setShinsaHohoKubunCode(dbt3053.get審査方法区分コード());
+            entity.setShinsaYM(dbt3053.get審査年月());
+            entity.setShikyuKubunCode(dbt3053.get支給区分コード());
+            entity.setShikyuKingaku(dbt3053.get支払金額());
+            entity.setZougenten(dbt3053.get増減点());
+            entity.setSeikyugakuSagakuKingaku(dbt3053.get請求額差額金額());
+            entity.setZougenRiyu(dbt3053.get増減理由等());
+            entity.setHushikyuRiyu(dbt3053.get不支給理由等());
+            entity.setKounyuKaishuRireki(dbt3053.get購入_改修履歴等());
+            entity.setState(EntityDataState.Modified);
+            償還払請求集計Dac.save(entity);
+
+            dbT3053Entity = 償還払請求集計Dac.selectByKey(entity.getHiHokenshaNo(),
+                    entity.getServiceTeikyoYM(), entity.getSeiriNo(),
+                    entity.getJigyoshaNo(), entity.getYoshikiNo(),
+                    entity.getMeisaiNo(), entity.getRenban());
         }
         GeifuEntity kyufuentity = new GeifuEntity();
         kyufuentity.setShikibetsuCode(parameter.get識別コード());
-        kyufuentity.setShoKisaiHokenshaNo(parameter.get証記載保険者番号());
+        kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
         RString 不支給 = ShikyuFushikyuKubun.不支給.getコード();
         RString 支給 = ShikyuFushikyuKubun.支給.getコード();
         if (kekka == null) {
             if (支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード1);
+            } else if (不支給.equals(parameter.get支給区分())) {
+                return true;
             }
         } else {
-            if (不支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun()) && 支給.equals(parameter.get支給区分())) {
+            if (不支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun()) && 不支給.equals(parameter.get支給区分())) {
+                return true;
+            } else if (不支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun()) && 支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
-            } else if (支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun())
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード1);
+            } else if (支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun())
                     && 不支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("3"));
-            } else if (支給.equals(dbt3036entity.getShikyuHushikyuKetteiKubun())
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード3);
+            } else if (支給.equals(kekka.toEntity().getShikyuHushikyuKetteiKubun())
                     && 支給.equals(parameter.get支給区分())) {
                 kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
-                kyufuentity.setKyufuSakuseiKubunCode(new RString("2"));
+                kyufuentity.setKyufuSakuseiKubunCode(区分_コード2);
             }
         }
 
         List<DbT3049ShokanJutakuKaishuEntity> dbt3049List = new ArrayList<>();
         JyutakukaisyuyichiranFinder finder = JyutakukaisyuyichiranFinder.createInstance();
-        SearchResult<ShokanJutakuKaishuBusiness> tmpList
+        SearchResult<ShokanJutakuKaishu> tmpList
                 = finder.selectJyutakukaisyuList(parameter.get被保険者番号(), parameter.getサービス提供年月(),
                         parameter.get整理番号(), parameter.get証明書());
         if (!tmpList.records().isEmpty()) {
-            for (ShokanJutakuKaishuBusiness tmp : tmpList.records()) {
-                dbt3049List.add(tmp.get住宅改修());
+            for (ShokanJutakuKaishu tmp : tmpList.records()) {
+                dbt3049List.add(tmp.toEntity());
             }
         }
         ShokanKihon kihon
@@ -525,7 +567,7 @@ public class JutakukaishuSikyuShinseiManager {
         }
         JutakuKaishuKetteiKyufujissekiHennsyuManager manager
                 = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
-        manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbt3053entity, entity);
+        manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbT3053Entity, entity);
         return true;
     }
 
@@ -571,5 +613,39 @@ public class JutakukaishuSikyuShinseiManager {
             給付実績基本情報List.add(new KyufujissekiKihon(entity));
         }
         return 給付実績基本情報List;
+    }
+
+    /**
+     * 住宅改修内容のチェックメソッドです。
+     *
+     * @param parameterList 住宅改修内容一覧
+     * @param 提供着工年月 FlexibleYearMonth
+     * @return 住宅改修内容チェックエラーメッセージ
+     */
+    public RString checkJyutakuGaisyunaiyoList(List<JyutakuGaisyunaiyoListParameter> parameterList,
+            FlexibleYearMonth 提供着工年月) {
+
+        if (parameterList == null || parameterList.isEmpty()) {
+            return メッセージ_1;
+        }
+        List<JyutakuGaisyunaiyoListParameter> tmpList = new ArrayList<>();
+        for (JyutakuGaisyunaiyoListParameter parameter : parameterList) {
+            if (!住宅改修_削除.equals(parameter.get状態())) {
+                tmpList.add(parameter);
+            }
+        }
+        if (tmpList.isEmpty()) {
+            return メッセージ_1;
+        }
+        RString wk対象住宅住所 = tmpList.get(0).get対象住宅住所();
+        for (JyutakuGaisyunaiyoListParameter tmp : tmpList) {
+            if (提供着工年月 != null && !提供着工年月.equals(tmp.get着工年月日().getYearMonth())) {
+                return メッセージ_2;
+            }
+            if (wk対象住宅住所 != null && !wk対象住宅住所.equals(tmp.get対象住宅住所())) {
+                return メッセージ_3;
+            }
+        }
+        return RString.EMPTY;
     }
 }

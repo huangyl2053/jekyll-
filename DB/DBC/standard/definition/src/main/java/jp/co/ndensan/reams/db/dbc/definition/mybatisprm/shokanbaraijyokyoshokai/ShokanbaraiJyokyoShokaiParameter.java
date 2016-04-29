@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払決定一覧検索用MyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBC-1010-180 panhe
  */
 @lombok.Getter
 @lombok.Setter

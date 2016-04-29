@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5300GeninShikkanEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -22,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 原因疾患のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhengshukai
  */
 public class DbT5300GeninShikkanDac implements ISaveable<DbT5300GeninShikkanEntity> {
 
@@ -80,5 +85,27 @@ public class DbT5300GeninShikkanDac implements ISaveable<DbT5300GeninShikkanEnti
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 最大連番を取得します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @return RenbanMax　連番
+     */
+    @Transaction
+    public int renbanmax(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT5300GeninShikkanEntity> entitylist = accessor.select().
+                table(DbT5300GeninShikkan.class).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                order(new OrderBy(remban, Order.ASC, NullsOrder.LAST)).
+                toList(DbT5300GeninShikkanEntity.class);
+        int renbanmax = 0;
+        for (DbT5300GeninShikkanEntity entity : entitylist) {
+            renbanmax = entity.getRemban();
+        }
+        return renbanmax;
     }
 }

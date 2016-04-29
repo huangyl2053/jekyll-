@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  *
  * 保険料納入通知書（仮算定）【ブックタイプ】納付書連帳
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
  */
 public class HokenryoNonyuTsuchishoBookRenchoNofushoReport extends Report<HokenryoNonyuTsuchishoBookRenchoNofushoSource> {
 
@@ -28,7 +30,7 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoReport extends Report<Hokenr
 
     /**
      *
-     * @param item
+     * @param item HokenryoNonyuTsuchishoBookItem
      * @return HokenryoNonyuTsuchishoBookNofushoReport
      * @throws NullPointerException 引数が{@code null}の時
      */

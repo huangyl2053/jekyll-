@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.message;
 
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * DBCのインフォメーションメッセージ定義列挙型です。
@@ -18,7 +18,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 public enum DbcInformationMessages implements IMessageGettable {
 
     // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    ダミーメッセージ(0, ""),
+    限度額チェック前(1, "画面のデータを変更するため、限度額をチェックしてください。");
 
     private final Message message;
 

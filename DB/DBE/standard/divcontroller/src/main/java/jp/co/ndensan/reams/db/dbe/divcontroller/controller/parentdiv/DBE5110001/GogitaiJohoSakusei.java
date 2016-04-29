@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -56,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * 合議体情報作成のコントローラです。
  *
+ * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiJohoSakusei {
 
@@ -89,8 +91,21 @@ public class GogitaiJohoSakusei {
     public ResponseData<GogitaiJohoSakuseiDiv> onLoad(GogitaiJohoSakuseiDiv div) {
         SearchResult<KeyValueDataSource> resultList = service.getKaisaiBashoList();
         getHandler(div).load(resultList.records());
+        div.getTxtDispMax().setValue(Decimal.TEN);
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.合議体情報, Models.create(new ArrayList<GogitaiJoho>()));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 合議体情報作成条件をクリアの設定します。
+     *
+     * @param div 合議体情報作成Div
+     * @return ResponseData<GogitaiJohoSakuseiDiv>
+     */
+    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnClear(GogitaiJohoSakuseiDiv div) {
+        div.getTxtDispMax().clearValue();
+        div.getRadHyojiJoken().setSelectedKey(RAD_HYOJIJOKEN_ISNOW);
         return ResponseData.of(div).respond();
     }
 
@@ -105,9 +120,10 @@ public class GogitaiJohoSakusei {
         if (RAD_HYOJIJOKEN_ISNOW.equals(div.getRadHyojiJoken().getSelectedKey())) {
             is現在有効な合議体のみ = true;
         }
+        int 最大表示件数 = div.getTxtDispMax().getValue().intValue();
         SearchResult<GogitaiJohoSakuseiRsult> resultList = service.getDateGridList(
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
-                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY));
+                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY, 最大表示件数));
         SearchResult<GogitaiJoho> gogitaiJohoList = service.getGogitaiJohoSakusei(is現在有効な合議体のみ);
         Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJoho = Models.create(gogitaiJohoList.records());
         ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJoho);
@@ -130,7 +146,8 @@ public class GogitaiJohoSakusei {
                             FlexibleDate.EMPTY, false,
                             Integer.parseInt(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().toString()),
                             new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString().toString()),
-                            RString.EMPTY));
+                            RString.EMPTY,
+                            0));
             getHandler(div).setGogitaiShosai(div.getDgGogitaiIchiran().getClickedItem(), resultList.records());
         }
         return ResponseData.of(div).respond();
@@ -466,15 +483,9 @@ public class GogitaiJohoSakusei {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnRegistUploadFile(GogitaiJohoSakuseiDiv div, FileData[] files) {
-        // TODO 内部調査中
-//        if (!ResponseHolder.isReRequest()) {
-//            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-//        }
-//        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
         for (FileData file : files) {
             copyFile(file, div);
         }
-//        }
         return ResponseData.of(div).respond();
     }
 
@@ -540,7 +551,8 @@ public class GogitaiJohoSakusei {
                         FlexibleDate.EMPTY, false,
                         Integer.parseInt(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().toString()),
                         new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString().toString()),
-                        RString.EMPTY));
+                        RString.EMPTY,
+                        0));
         getHandler(div).setGogitaiShosai(div.getDgGogitaiIchiran().getClickedItem(), resultList.records());
         getHandler(div).setDisableByUpd();
     }
@@ -645,7 +657,7 @@ public class GogitaiJohoSakusei {
         }
         SearchResult<GogitaiJohoSakuseiRsult> resultList = service.getGogitaiJohoForCSV(
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
-                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY));
+                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY, 0));
         RString path = Path.getTmpDirectoryPath();
 
         try (CsvListWriter writer = new CsvListWriter.InstanceBuilder(Path.combinePath(path, OUTPUT_CSV_FILE_NAME))

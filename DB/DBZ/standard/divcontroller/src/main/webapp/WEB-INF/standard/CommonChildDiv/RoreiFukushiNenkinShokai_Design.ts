@@ -8,8 +8,24 @@ module DBZ {
 
         export class Events {
 
-            public static add(): string {
-                return "add";
+            public static onClick_btnAdd(): string {
+                return "onClick_btnAdd";
+            }
+
+            public static onChange_btnUpdate(): string {
+                return "onChange_btnUpdate";
+            }
+
+            public static onClick_DeleteButton(): string {
+                return "onClick_DeleteButton";
+            }
+
+            public static onClick_btnSave(): string {
+                return "onClick_btnSave";
+            }
+
+            public static onClick_btnCancel(): string {
+                return "onClick_btnCancel";
             }
 
         }

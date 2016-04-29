@@ -8,15 +8,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004;
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 
 /**
  * dgListOfCommonMemo_Row のクラスファイル 
  * 
- * @author 自動生成
  */
 
 public class dgListOfCommonMemo_Row extends DataRow {

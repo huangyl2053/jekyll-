@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 過誤決定通知書情報取込一覧表（保険者分）帳票Source
+ *
+ * @reamsid_L DBC-0980-470 lijunjun
  */
 public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

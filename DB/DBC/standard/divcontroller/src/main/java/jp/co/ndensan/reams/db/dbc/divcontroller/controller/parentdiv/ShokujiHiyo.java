@@ -21,6 +21,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokujiHiyo {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel ShokujiHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<ShokujiHiyoDiv> onLoad(ShokujiHiyoDiv panel) {
         ResponseData<ShokujiHiyoDiv> response = new ResponseData<>();
 

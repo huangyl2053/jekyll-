@@ -25,12 +25,12 @@ public class IsShussekiTest extends DbeTestBase {
 
     @Test
     public void 出席を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsShusseki.出席.getコード(), is(true));
+        assertThat(IsShusseki.出席.is委員出席(), is(true));
     }
 
     @Test
     public void 欠席を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsShusseki.欠席.getコード(), is(false));
+        assertThat(IsShusseki.欠席.is委員出席(), is(false));
     }
 
     @Test

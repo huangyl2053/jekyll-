@@ -104,7 +104,7 @@ public enum ShisetsuNyutaishoValidationMessage implements IValidationMessage {
          */
         退所日と期間が重複する履歴がある(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().replace("入退所期間が重複")); //NOPMD Enumでチェックする必要性がないためチェックしない
 
-        private Message message;
+        private transient Message message;
 
         private _Message(Message message) {
             this.message = message;

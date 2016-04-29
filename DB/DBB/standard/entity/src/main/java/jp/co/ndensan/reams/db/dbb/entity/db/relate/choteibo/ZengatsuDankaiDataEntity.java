@@ -11,33 +11,19 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 前月末の段階のデータEntityです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ZengatsuDankaiDataEntity {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 段階
-     */
     private RString dankai;
-    /**
-     * 当月フラグ
-     */
     private int dogetsuFlag;
-    /**
-     * 該当する段階の前月末の件数の小計
-     */
+    private RString karisanFlag;
     private Decimal zengetsusueKensuCount;
-    /**
-     * 該当する段階の前月末の件数の小計
-     */
     private Decimal zengetsusueChoteigakuCount;
 }

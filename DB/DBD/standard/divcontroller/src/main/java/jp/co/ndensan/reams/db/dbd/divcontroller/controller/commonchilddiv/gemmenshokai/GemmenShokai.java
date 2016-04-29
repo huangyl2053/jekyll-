@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  *
  * 【共有子Div】 減免照会のDivControllerです。
+ *
+ * @reamsid_L DBD-4342-010 wangjie2
  */
 public class GemmenShokai {
 

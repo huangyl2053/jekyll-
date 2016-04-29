@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 差額令書発行指示区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum SagakuReishoHakkoShijiKubun {
 

@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 広域内住所地特例者一覧表Handlerクラスです。
+ * @reamsid_L DBU-1140-040 dongyabin
  */
 public class KoikinaiJushochiTokureiHandler {
 
@@ -151,7 +152,7 @@ public class KoikinaiJushochiTokureiHandler {
         return batchparam;
     }
     
-    private class ComparatorByStartDateSort implements Comparator {
+    private static class ComparatorByStartDateSort implements Comparator {
 
         @Override
         public int compare(Object arg0, Object arg1) {

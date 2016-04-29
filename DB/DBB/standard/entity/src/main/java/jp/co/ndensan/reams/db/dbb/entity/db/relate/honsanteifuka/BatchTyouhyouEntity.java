@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ出力帳票一覧Entityクラスです。
+ *
+ * @reamsid_L DBB-0780-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
@@ -18,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class BatchTyouhyouEntity implements Serializable {
 
     private ReportId 帳票分類ID;
-    private RString 帳票ID;
+    private ReportId 帳票ID;
     private RString 出力順ID;
 
     /**
@@ -29,7 +31,7 @@ public class BatchTyouhyouEntity implements Serializable {
      * @param 出力順ID 出力順ID
      */
     public BatchTyouhyouEntity(ReportId 帳票分類ID,
-            RString 帳票ID,
+            ReportId 帳票ID,
             RString 出力順ID) {
         this.帳票分類ID = 帳票分類ID;
         this.帳票ID = 帳票ID;

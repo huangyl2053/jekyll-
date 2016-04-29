@@ -6,9 +6,16 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定調査票（概況調査）のEditorです。
+ *
+ * @reamsid_L DBE-0080-030 xuyannan
  */
 public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor {
 
@@ -35,7 +42,19 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
     }
 
     private ChosahyoGaikyochosaReportSource editSource(ChosahyoGaikyochosaReportSource source) {
-        // TODO 内部QA:834 Redmine#78247 (複数のフォームを組み合わせて印刷することがわからません。)
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(item.getHishokenshaNo1());
+        builder.append(item.getHishokenshaNo2());
+        builder.append(item.getHishokenshaNo3());
+        builder.append(item.getHishokenshaNo4());
+        builder.append(item.getHishokenshaNo5());
+        builder.append(item.getHishokenshaNo6());
+        builder.append(item.getHishokenshaNo7());
+        builder.append(item.getHishokenshaNo8());
+        builder.append(item.getHishokenshaNo9());
+        builder.append(item.getHishokenshaNo10());
+        source.hishokenshaNo = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), builder.toRString());
         source.hokenshaNo1 = item.getHokenshaNo1();
         source.hokenshaNo2 = item.getHokenshaNo2();
         source.hokenshaNo3 = item.getHokenshaNo3();

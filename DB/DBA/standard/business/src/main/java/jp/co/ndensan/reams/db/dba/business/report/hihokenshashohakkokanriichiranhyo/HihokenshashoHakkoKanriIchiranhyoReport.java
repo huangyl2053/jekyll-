@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 被保険者証発行管理一覧表のReportです。
+ *
+ * @reamsid_L DBA-0600-070 lishengli
  */
 public class HihokenshashoHakkoKanriIchiranhyoReport extends Report<HihokenshashoHakkoKanriIchiranhyoReportSource> {
 

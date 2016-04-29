@@ -8,6 +8,10 @@ var DBZ;
                 return "onOkClose_btnZenkaiShosai";
             };
 
+            Events.onBefore_Dialog = function () {
+                return "onBefore_Dialog";
+            };
+
             Events.onCancelClose_btnZenkaiShosai = function () {
                 return "onCancelClose_btnZenkaiShosai";
             };

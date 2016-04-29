@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 介護保険入退所履歴のRelateEntityクラスです。
+ * 
+ * @reamsid_L DBA-0360-050 wangkun
  */
 @lombok.Getter
 @lombok.Setter

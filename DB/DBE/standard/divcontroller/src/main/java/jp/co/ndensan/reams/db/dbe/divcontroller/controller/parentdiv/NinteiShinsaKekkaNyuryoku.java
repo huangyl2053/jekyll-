@@ -5,16 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5030002.NinteiShinsaKekkaNyuryokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5030002.ShinsaTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5030002.dgShinsaTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5030002.NinteiShinsaKekkaNyuryokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5030002.ShinsaTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5030002.dgShinsaTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-//import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
-//import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -30,9 +28,9 @@ public class NinteiShinsaKekkaNyuryoku {
     private static final int TSUKISU_12 = 12;
     private static final int TSUKISU_23 = 23;
     private static final int TSUKISU_24 = 24;
-    private static Integer cntSelectSu = 0;
-    private static Integer cntSu = 0;
-    private static Integer selectIdx = 0;
+    private Integer cntSelectSu = 0;
+    private Integer cntSu = 0;
+    private Integer selectIdx = 0;
 
     /**
      *
@@ -221,7 +219,7 @@ public class NinteiShinsaKekkaNyuryoku {
      */
     public ResponseData<NinteiShinsaKekkaNyuryokuDiv> onClick_btnNext(NinteiShinsaKekkaNyuryokuDiv div,
             ShinsaTaishoshaIchiranDiv shinsaTaishoshaIchiranDiv) {
-        selectIdx = ++selectIdx;
+        selectIdx = selectIdx + 1;
         return onLoadData(div, shinsaTaishoshaIchiranDiv);
     }
 

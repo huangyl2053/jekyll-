@@ -7,9 +7,10 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100011;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100011.KarisanteiHenkoTsuchishoA4TateReportSource;
 
-
 /**
  * 仮算定額変更【A4縦タイプ】Builderクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenkoTsuchishoA4TateHeaderEditor implements IKarisanteiHenkoTsuchishoA4TateEditor {
 

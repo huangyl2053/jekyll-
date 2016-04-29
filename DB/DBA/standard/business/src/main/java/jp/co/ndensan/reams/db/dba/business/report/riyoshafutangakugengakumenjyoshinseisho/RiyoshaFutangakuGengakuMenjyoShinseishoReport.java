@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
  * 介護保険利用者負担額減額・免除申請書のReportです。
+ * 
+ * @reamsid_L DBA-0540-691  suguangjun 
  */
 public final class RiyoshaFutangakuGengakuMenjyoShinseishoReport extends Report<RiyoshaFutangakuGengakuMenjyoShinseishoReportSource> {
 

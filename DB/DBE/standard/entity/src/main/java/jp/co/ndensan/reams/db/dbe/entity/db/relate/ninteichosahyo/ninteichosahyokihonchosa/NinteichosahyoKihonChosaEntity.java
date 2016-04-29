@@ -14,10 +14,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItem
 
 /**
  * 認定調査票（基本調査）RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteichosahyoKihonChosaEntity implements Cloneable, Serializable {
+public class NinteichosahyoKihonChosaEntity implements Serializable {
 
     /**
      * -- GETTER -- 認定調査票（基本調査）Entityを返します。
@@ -30,8 +32,7 @@ public class NinteichosahyoKihonChosaEntity implements Cloneable, Serializable {
     /**
      * -- GETTER -- 認定調査票（基本調査）調査項目EntityListを返します。
      *
-     * @return 認定調査票（基本調査）調査項目EntityList -- SETTER --
-     * 認定調査票（基本調査）調査項目EntityListを設定します。
+     * @return 認定調査票（基本調査）調査項目EntityList -- SETTER -- 認定調査票（基本調査）調査項目EntityListを設定します。
      *
      * @param 認定調査票（基本調査）調査項目EntityList 認定調査票（基本調査）調査項目EntityList
      */
@@ -39,8 +40,7 @@ public class NinteichosahyoKihonChosaEntity implements Cloneable, Serializable {
     /**
      * -- GETTER -- 認定調査票（基本調査素点）EntityListを返します。
      *
-     * @return 認定調査票（基本調査素点）EntityList -- SETTER --
-     * 認定調査票（基本調査素点）EntityListを設定します。
+     * @return 認定調査票（基本調査素点）EntityList -- SETTER -- 認定調査票（基本調査素点）EntityListを設定します。
      *
      * @param 認定調査票（基本調査素点）EntityList 認定調査票（基本調査素点）EntityList
      */

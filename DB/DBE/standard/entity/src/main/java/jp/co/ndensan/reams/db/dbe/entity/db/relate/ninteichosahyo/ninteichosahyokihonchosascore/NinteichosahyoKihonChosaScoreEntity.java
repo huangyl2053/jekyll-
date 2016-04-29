@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5212NinteichosahyoKihonChos
 
 /**
  * 認定調査票（基本調査素点）RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteichosahyoKihonChosaScoreEntity implements Cloneable, Serializable {
+public class NinteichosahyoKihonChosaScoreEntity implements Serializable {
 
     /**
      * -- GETTER -- 認定調査票（基本調査素点）Entityを返します。
@@ -29,8 +31,7 @@ public class NinteichosahyoKihonChosaScoreEntity implements Cloneable, Serializa
     /**
      * -- GETTER -- 認定調査票（基本調査素点項目）EntityListを返します。
      *
-     * @return 認定調査票（基本調査素点項目）EntityList -- SETTER --
-     * 認定調査票（基本調査素点項目）EntityListを設定します。
+     * @return 認定調査票（基本調査素点項目）EntityList -- SETTER -- 認定調査票（基本調査素点項目）EntityListを設定します。
      *
      * @param 認定調査票（基本調査素点項目）EntityList 認定調査票（基本調査素点項目）EntityList
      */

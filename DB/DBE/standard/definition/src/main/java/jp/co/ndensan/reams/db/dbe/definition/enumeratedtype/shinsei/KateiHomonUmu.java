@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 家庭訪問の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum KateiHomonUmu {
 
@@ -32,7 +32,7 @@ public enum KateiHomonUmu {
      *
      * @return 家庭訪問の有無のコード
      */
-    public boolean getコード() {
+    public boolean is家庭訪問() {
         return code;
     }
 

@@ -12,13 +12,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.Shinsakaii
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IsHaishi;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsGogitaiSeishinkaSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinKoseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 介護認定審査会割当委員情報のHandlerクラスです。
+ *
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public class ShinsakaiIinWaritsukeHandler {
 
@@ -74,7 +76,7 @@ public class ShinsakaiIinWaritsukeHandler {
         div.getTxtKaisaiBasho().setValue(nullToEmpty(business.get開催場所()));
         div.getTxtShuryoYoteiTime().setValue(new RTime(nullToEmpty(business.get終了予定時間())));
         div.getTxtYoteiTeiin().setValue(new RString(String.valueOf(business.get予定定員())));
-        if (IsGogitaiSeishinkaSonzai.toValue(business.is精神科医()).getコード()) {
+        if (IsGogitaiSeishinkaSonzai.toValue(business.is精神科医()).is合議体精神科医存在()) {
             chkSeishinkailist.add(SELECTEDKEY);
         }
         div.getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);

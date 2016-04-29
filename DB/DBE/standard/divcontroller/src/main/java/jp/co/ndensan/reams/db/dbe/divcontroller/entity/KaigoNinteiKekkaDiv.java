@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IKaigoNinteiKekkaDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KaigoNinteiKekka のクラスファイル 
- * 
+ * KaigoNinteiKekka のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
@@ -22,6 +19,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShinseibi")
     private TextBoxFlexibleDate txtShinseibi;
     @JsonProperty("txtShinseiKubunShinsei")
@@ -74,7 +72,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtShinseibi")
     public void setTxtShinseibi(TextBoxFlexibleDate txtShinseibi) {
-        this.txtShinseibi=txtShinseibi;
+        this.txtShinseibi = txtShinseibi;
     }
 
     @JsonProperty("txtShinseiKubunShinsei")
@@ -84,7 +82,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtShinseiKubunShinsei")
     public void setTxtShinseiKubunShinsei(TextBox txtShinseiKubunShinsei) {
-        this.txtShinseiKubunShinsei=txtShinseiKubunShinsei;
+        this.txtShinseiKubunShinsei = txtShinseiKubunShinsei;
     }
 
     @JsonProperty("txtShinseiKubunHorei")
@@ -94,7 +92,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtShinseiKubunHorei")
     public void setTxtShinseiKubunHorei(TextBox txtShinseiKubunHorei) {
-        this.txtShinseiKubunHorei=txtShinseiKubunHorei;
+        this.txtShinseiKubunHorei = txtShinseiKubunHorei;
     }
 
     @JsonProperty("txtShinsaJun")
@@ -104,7 +102,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtShinsaJun")
     public void setTxtShinsaJun(TextBox txtShinsaJun) {
-        this.txtShinsaJun=txtShinsaJun;
+        this.txtShinsaJun = txtShinsaJun;
     }
 
     @JsonProperty("ddlNinteiKubun")
@@ -114,7 +112,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("ddlNinteiKubun")
     public void setDdlNinteiKubun(DropDownList ddlNinteiKubun) {
-        this.ddlNinteiKubun=ddlNinteiKubun;
+        this.ddlNinteiKubun = ddlNinteiKubun;
     }
 
     @JsonProperty("txtIchijiHanteiKekka")
@@ -124,7 +122,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtIchijiHanteiKekka")
     public void setTxtIchijiHanteiKekka(TextBox txtIchijiHanteiKekka) {
-        this.txtIchijiHanteiKekka=txtIchijiHanteiKekka;
+        this.txtIchijiHanteiKekka = txtIchijiHanteiKekka;
     }
 
     @JsonProperty("ddlTokuteiShippei")
@@ -134,7 +132,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("ddlTokuteiShippei")
     public void setDdlTokuteiShippei(DropDownList ddlTokuteiShippei) {
-        this.ddlTokuteiShippei=ddlTokuteiShippei;
+        this.ddlTokuteiShippei = ddlTokuteiShippei;
     }
 
     @JsonProperty("txtNinteibi")
@@ -144,7 +142,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtNinteibi")
     public void setTxtNinteibi(TextBoxFlexibleDate txtNinteibi) {
-        this.txtNinteibi=txtNinteibi;
+        this.txtNinteibi = txtNinteibi;
     }
 
     @JsonProperty("ddlNijiHanteiKekka")
@@ -154,7 +152,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("ddlNijiHanteiKekka")
     public void setDdlNijiHanteiKekka(DropDownList ddlNijiHanteiKekka) {
-        this.ddlNijiHanteiKekka=ddlNijiHanteiKekka;
+        this.ddlNijiHanteiKekka = ddlNijiHanteiKekka;
     }
 
     @JsonProperty("ddlJotaiZo")
@@ -164,7 +162,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("ddlJotaiZo")
     public void setDdlJotaiZo(DropDownList ddlJotaiZo) {
-        this.ddlJotaiZo=ddlJotaiZo;
+        this.ddlJotaiZo = ddlJotaiZo;
     }
 
     @JsonProperty("txtNinteiYukoKikanStart")
@@ -174,7 +172,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtNinteiYukoKikanStart")
     public void setTxtNinteiYukoKikanStart(TextBoxFlexibleDate txtNinteiYukoKikanStart) {
-        this.txtNinteiYukoKikanStart=txtNinteiYukoKikanStart;
+        this.txtNinteiYukoKikanStart = txtNinteiYukoKikanStart;
     }
 
     @JsonProperty("lblKara3")
@@ -184,7 +182,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("lblKara3")
     public void setLblKara3(Label lblKara3) {
-        this.lblKara3=lblKara3;
+        this.lblKara3 = lblKara3;
     }
 
     @JsonProperty("txtNinteiYukoKikanEnd")
@@ -194,7 +192,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtNinteiYukoKikanEnd")
     public void setTxtNinteiYukoKikanEnd(TextBoxFlexibleDate txtNinteiYukoKikanEnd) {
-        this.txtNinteiYukoKikanEnd=txtNinteiYukoKikanEnd;
+        this.txtNinteiYukoKikanEnd = txtNinteiYukoKikanEnd;
     }
 
     @JsonProperty("ddlNinteiYukoTsukisu")
@@ -204,7 +202,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("ddlNinteiYukoTsukisu")
     public void setDdlNinteiYukoTsukisu(DropDownList ddlNinteiYukoTsukisu) {
-        this.ddlNinteiYukoTsukisu=ddlNinteiYukoTsukisu;
+        this.ddlNinteiYukoTsukisu = ddlNinteiYukoTsukisu;
     }
 
     @JsonProperty("lblShinsakaiIken")
@@ -214,7 +212,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("lblShinsakaiIken")
     public void setLblShinsakaiIken(Label lblShinsakaiIken) {
-        this.lblShinsakaiIken=lblShinsakaiIken;
+        this.lblShinsakaiIken = lblShinsakaiIken;
     }
 
     @JsonProperty("btnShinsaIkenTeikei")
@@ -224,7 +222,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("btnShinsaIkenTeikei")
     public void setBtnShinsaIkenTeikei(ButtonDialog btnShinsaIkenTeikei) {
-        this.btnShinsaIkenTeikei=btnShinsaIkenTeikei;
+        this.btnShinsaIkenTeikei = btnShinsaIkenTeikei;
     }
 
     @JsonProperty("lblShinsakaiMemo")
@@ -234,7 +232,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("lblShinsakaiMemo")
     public void setLblShinsakaiMemo(Label lblShinsakaiMemo) {
-        this.lblShinsakaiMemo=lblShinsakaiMemo;
+        this.lblShinsakaiMemo = lblShinsakaiMemo;
     }
 
     @JsonProperty("txtShinsakaiIken")
@@ -244,7 +242,7 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtShinsakaiIken")
     public void setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
-        this.txtShinsakaiIken=txtShinsakaiIken;
+        this.txtShinsakaiIken = txtShinsakaiIken;
     }
 
     @JsonProperty("txtShinsakaiMemo")
@@ -254,9 +252,8 @@ public class KaigoNinteiKekkaDiv extends Panel implements IKaigoNinteiKekkaDiv {
 
     @JsonProperty("txtShinsakaiMemo")
     public void setTxtShinsakaiMemo(TextBoxMultiLine txtShinsakaiMemo) {
-        this.txtShinsakaiMemo=txtShinsakaiMemo;
+        this.txtShinsakaiMemo = txtShinsakaiMemo;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

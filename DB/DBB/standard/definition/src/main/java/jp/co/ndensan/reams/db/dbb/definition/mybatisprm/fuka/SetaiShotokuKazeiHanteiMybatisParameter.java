@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  * 世帯把握（バッチ）のバッチのパラメータです
  *
+ * @reamsid_L DBB-0640-010 chenaoqi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

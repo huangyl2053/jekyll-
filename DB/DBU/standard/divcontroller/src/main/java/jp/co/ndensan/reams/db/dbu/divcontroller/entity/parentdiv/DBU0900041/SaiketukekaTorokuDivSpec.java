@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
  * 裁決結果登録バリデーションクラスです。
+ *
+ * @reamsid_L DBU-1080-110 xuyue
  */
 public enum SaiketukekaTorokuDivSpec implements IPredicate<SaiketukekaTorokuPanelDiv> {
 

@@ -18,6 +18,7 @@ import lombok.Setter;
 /**
  * 主治医意見書督促状発行のバッチパラメータクラスです。
  *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 @Getter
 @Setter

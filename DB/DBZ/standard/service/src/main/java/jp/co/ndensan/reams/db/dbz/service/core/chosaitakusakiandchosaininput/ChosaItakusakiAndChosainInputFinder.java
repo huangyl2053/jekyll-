@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 調査委託先＆調査員入力のクラスです。
+ *
+ * @reamsid_L DBE-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInputFinder {
 

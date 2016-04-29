@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
  * ItakusakiChosainIchiran のクラスファイル
- *
  * @author 自動生成
  */
 public class ItakusakiChosainIchiranDiv extends PanelBatchParameter {

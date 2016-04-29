@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorListBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorListIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorReportViewDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorShoriButtonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFukaErrorList_Row;
@@ -32,13 +33,13 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 賦課エラー一覧のHandlerクラスです。
+ *
+ * @reamsid_L DBB-0720-010 zuotao
  */
 public class FukaErrorReportViewHandler {
 
     private final FukaErrorReportViewDiv div;
     private static final CodeShubetsu コード種別エラーコード = new CodeShubetsu(new RString("0009"));
-    private static final RString エラーコード_更正対象 = new RString("01");
-    private static final RString エラーコード_資格修正対象 = new RString("02");
 
     /**
      * コンストラクタです。
@@ -100,11 +101,12 @@ public class FukaErrorReportViewHandler {
         FukaErrorShoriButtonDiv buttonDiv = div.getFukaErrorShoriButton();
         setButtonDisplayNone();
         dgFukaErrorList_Row row = div.getDgFukaErrorList().getSelectedItems().get(0);
-        // TODO更正対象及び資格修正対象のコード値未確定 QA502
-        if (エラーコード_更正対象.equals(row.getErrorCode())) {
-            buttonDiv.getBtnFukaKosei().setDisplayNone(false);
-        } else if (エラーコード_資格修正対象.equals(row.getErrorCode())) {
+        if (ErrorCode.被保険者台帳データなし.getコード().equals(row.getErrorCode())
+                || ErrorCode.資格と住基に不整合あり.getコード().equals(row.getErrorCode())) {
             buttonDiv.getBtnShikakuFuseigo().setDisplayNone(false);
+        } else if (ErrorCode.世帯員所得データなし.getコード().equals(row.getErrorCode())
+                || ErrorCode.賦課に減免あり.getコード().equals(row.getErrorCode())) {
+            buttonDiv.getBtnFukaKosei().setDisplayNone(false);
         } else {
             setButtonDisplayNone();
         }

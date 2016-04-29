@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査スケジュール登録6のクラス。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 public class NinteiChosainJikanMasterHandler {
 
@@ -222,13 +224,15 @@ public class NinteiChosainJikanMasterHandler {
         NinteiChosaIkkatsuInputModel models = DataPassingConverter.deserialize(div.getNinteiChosaIkkatsuInputModel(), NinteiChosaIkkatsuInputModel.class);
         if (models != null) {
             List<NinteiChosaIkkatsuInputModel> データ = models.getModelList();
-            for (NinteiChosaIkkatsuInputModel model : データ) {
-                FlexibleDate 設定予定日 = model.get認定調査予定年月日();
-                boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
-                RString 時間枠 = model.get認定調査時間枠().getColumnValue();
-                RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
-                RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
-                データ編集(設定予定日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
+            if (データ != null) {
+                for (NinteiChosaIkkatsuInputModel model : データ) {
+                    FlexibleDate 設定予定日 = model.get認定調査予定年月日();
+                    boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
+                    RString 時間枠 = model.get認定調査時間枠().getColumnValue();
+                    RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
+                    RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
+                    データ編集(設定予定日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
+                }
             }
         }
     }
@@ -1088,7 +1092,9 @@ public class NinteiChosainJikanMasterHandler {
                         row.setYoyakuJokyo02(認定調査データ.get予約状況().getColumnValue());
                         row.setYoyakuKaoFlag02(get予約可能フラグ(認定調査データ.is予約可能フラグ()));
                         row.setBiko02(nullToEmpty(認定調査データ.get備考()));
-                        row.setHiddenChosaJikanwaku02(RString.EMPTY);
+                        row.setHiddenChosaJikanwaku02(予定開始時間と予定終了時間(
+                                認定調査データ.get認定調査予定開始時間(),
+                                認定調査データ.get認定調査予定終了時間()));
                         break;
                     case 時間枠_3:
                         row.setChosaJikanwaku03(予定開始時間と予定終了時間(
@@ -1397,10 +1403,10 @@ public class NinteiChosainJikanMasterHandler {
 
     private List<KeyValueDataSource> get調査地区ドロップダウンリスト() {
         List<KeyValueDataSource> dataSource = new ArrayList();
-        List<DbT5224ChikuShichosonEntity> dbT5224entityList = NinteiChosainJikanMasterManager.createInstance().
+        List<ChikuShichoson> chikuShichosonList = NinteiChosainJikanMasterManager.createInstance().
                 getChikuShichosonList().records();
-        for (DbT5224ChikuShichosonEntity dbt5224entity : dbT5224entityList) {
-            dataSource.add(調査地区ドロップダウンリスト(dbt5224entity.getChosaChikuCode()));
+        for (ChikuShichoson chikuShichoson : chikuShichosonList) {
+            dataSource.add(調査地区ドロップダウンリスト(chikuShichoson.get調査地区コード()));
         }
         return dataSource;
     }

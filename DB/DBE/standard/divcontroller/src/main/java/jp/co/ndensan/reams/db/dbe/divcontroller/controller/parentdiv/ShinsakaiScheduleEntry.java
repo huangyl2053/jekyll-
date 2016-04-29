@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4040001.ShinsakaiScheduleEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4040001.dgShinakaiScheduleList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4040001.dgShinsakaiIinList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe4040001.dgShinsakaiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4040001.ShinsakaiScheduleEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4040001.dgShinakaiScheduleList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4040001.dgShinsakaiIinList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4040001.dgShinsakaiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,7 +44,7 @@ public class ShinsakaiScheduleEntry {
 
         div.getShinakaiScheduleList().getDgShinakaiScheduleList().setDataSource(createRowShinsakaiListTestData());
         div.getShinakaiScheduleList().getDgShinakaiScheduleList().setSortOrder(new RString("shinsakaiNo"));
-        div.getShinakaiScheduleList().getDgShinakaiScheduleList().getSortOrder().toUpperCase();
+        //div.getShinakaiScheduleList().getDgShinakaiScheduleList().getSortOrder().toUpperCase();
 
         response.data = div;
         return response;
@@ -174,7 +174,7 @@ public class ShinsakaiScheduleEntry {
         for (dgShinsakaiList_Row row : arrayData) {
             shinsakaiMei = (new RString("第" + _toRString(kaisaiNo) + "回審査会"));
             row.setShinsakaiNo(shinsakaiMei);
-            kaisaiNo = ++kaisaiNo;
+            kaisaiNo = kaisaiNo + 1;
         }
 
         div.getShinsakaiList().getDgShinsakaiList().setDataSource(arrayData);

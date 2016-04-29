@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShokanMeisaiJushochiTokurei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanMeisaiJushochiTokureiBuilder {
 
@@ -74,7 +76,7 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      */
     public ShokanMeisaiJushochiTokureiBuilder set整理番号(RString 整理番号) {
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        entity.setSeiriNp(整理番号);
+        entity.setSeiriNo(整理番号);
         return this;
     }
 
@@ -169,7 +171,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
     public ShokanMeisaiJushochiTokureiBuilder set施設所在保険者番号(ShoKisaiHokenshaNo 施設所在保険者番号) {
-        requireNonNull(施設所在保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("施設所在保険者番号"));
         entity.setShisetsuShozaiHokenshaNo(施設所在保険者番号);
         return this;
     }
@@ -181,7 +182,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
     public ShokanMeisaiJushochiTokureiBuilder set摘要(RString 摘要) {
-        requireNonNull(摘要, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要"));
         entity.setTekiyo(摘要);
         return this;
     }

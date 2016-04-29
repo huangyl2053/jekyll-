@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 完了ダイアログのコントローラです。
+ *
+ * @reamsid_L DBZ-4490-010 chengsanyuan
  */
 public class KanryoDialog {
 

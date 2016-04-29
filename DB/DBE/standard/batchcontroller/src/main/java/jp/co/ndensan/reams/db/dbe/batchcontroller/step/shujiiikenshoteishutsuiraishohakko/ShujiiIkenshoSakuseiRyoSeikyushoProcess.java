@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIk
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
@@ -44,8 +44,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
+ * 帳票「主治医意見書作成料請求書」の出力バッチフ処理クラスです。
  *
- * 帳票「主治医意見書作成料請求書」の出力バッチフ処理クラスです
+ * @reamsid_L DBE-0080-130 duanzhanli
  */
 public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> {
 
@@ -129,7 +130,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
         item.setGengo(RDate.getNowDate().toDateString());
         item.setAtesakiHokenshaName(entity.get保険者名());
-        // TODO 内部QA894　Redmine#79148　意見書作成料の表示名がない
         item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_11).get名称());
         item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_12).get名称());
         item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_21).get名称());
@@ -152,26 +152,24 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
         item.setBirthYMD(entity.get生年月日());
         item.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
         if (ZaitakuShisetsuKubun.在宅.getコード().equals(entity.get在宅施設区分())) {
-            item.setIkenshosyubetu1(記号);
+            item.setShubetsuZaitaku(記号);
         } else {
-            item.setIkenshosyubetu1(RString.EMPTY);
+            item.setShubetsuZaitaku(RString.EMPTY);
         }
-        // TODO 内部QA913　設定項目は帳票Itemと違う
         if (ZaitakuShisetsuKubun.施設.getコード().equals(entity.get在宅施設区分())) {
-            item.setIkenshosyubetu1(記号);
+            item.setShubetsuShisetsu(記号);
         } else {
-            item.setIkenshosyubetu1(RString.EMPTY);
+            item.setShubetsuShisetsu(RString.EMPTY);
         }
         if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.get意見書作成回数区分())) {
-            item.setIkenshosyubetu2(記号);
+            item.setShubetsuShinki(記号);
         } else {
-            item.setIkenshosyubetu2(RString.EMPTY);
+            item.setShubetsuShinki(RString.EMPTY);
         }
-        // TODO 内部QA913　設定項目は帳票Itemと違う
         if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.get意見書作成回数区分())) {
-            item.setIkenshosyubetu2(記号);
+            item.setShubetsuKeizoku(記号);
         } else {
-            item.setIkenshosyubetu2(RString.EMPTY);
+            item.setShubetsuKeizoku(RString.EMPTY);
         }
         item.setSeikyuIryokikanName(entity.get医療機関名称());
         item.setSeikyuIryokikanDaihyoName(entity.get代表者名());
@@ -241,10 +239,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
         dbT5301Entity.setShinseishoKanriNo(new ShinseishoKanriNo(entity.get申請書管理番号()));
         dbT5301Entity.setIkenshoIraiRirekiNo(entity.get最大依頼履歴番号());
         dbT5301Entity.setLogicalDeletedFlag(false);
-        RString iraiToYMD = processParamter.getIraiToYMD();
-        if (!RString.isNullOrEmpty(iraiToYMD)) {
-            dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(iraiToYMD));
-            dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(iraiToYMD));
+        RString hakkobi = processParamter.getHakkobi();
+        if (!RString.isNullOrEmpty(hakkobi)) {
+            dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
+            dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(hakkobi));
         }
         RString 主治医意見書作成期限設定方法 = BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, SubGyomuCode.DBE認定支援);
         if (文字列1.equals(主治医意見書作成期限設定方法)) {

@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 取り込み処のバッチのプロセス用パラメータクラスです。
+ *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 @Getter
 @Setter

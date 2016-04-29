@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払支給住宅改修事前申請のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT3035ShokanJutakuKaishuJizenShinseiEntity> {
 

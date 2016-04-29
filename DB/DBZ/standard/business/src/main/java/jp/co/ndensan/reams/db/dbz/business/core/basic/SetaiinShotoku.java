@@ -304,7 +304,7 @@ public class SetaiinShotoku {
      *
      * @return 同月サービス有無
      */
-    public boolean get同月サービス有無() {
+    public boolean is同月サービス有無() {
         return 同月サービス有無;
     }
 

@@ -13,15 +13,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tplShikakuJohoDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShikakuTokusoRirekiPanel")
-    private ShikakuTokusoRirekiPanelDiv ShikakuTokusoRirekiPanel;
+    @JsonProperty("ShikakuTokusoRirekiMain")
+    private ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,22 @@ public class tplShikakuJohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ShikakuTokusoRirekiPanel")
-    public ShikakuTokusoRirekiPanelDiv getShikakuTokusoRirekiPanel() {
-        return ShikakuTokusoRirekiPanel;
+    /*
+     * getShikakuTokusoRirekiMain
+     * @return ShikakuTokusoRirekiMain
+     */
+    @JsonProperty("ShikakuTokusoRirekiMain")
+    public ShikakuTokusoRirekiMainDiv getShikakuTokusoRirekiMain() {
+        return ShikakuTokusoRirekiMain;
     }
 
-    @JsonProperty("ShikakuTokusoRirekiPanel")
-    public void setShikakuTokusoRirekiPanel(ShikakuTokusoRirekiPanelDiv ShikakuTokusoRirekiPanel) {
-        this.ShikakuTokusoRirekiPanel=ShikakuTokusoRirekiPanel;
+    /*
+     * setShikakuTokusoRirekiMain
+     * @param ShikakuTokusoRirekiMain ShikakuTokusoRirekiMain
+     */
+    @JsonProperty("ShikakuTokusoRirekiMain")
+    public void setShikakuTokusoRirekiMain(ShikakuTokusoRirekiMainDiv ShikakuTokusoRirekiMain) {
+        this.ShikakuTokusoRirekiMain = ShikakuTokusoRirekiMain;
     }
 
     // </editor-fold>

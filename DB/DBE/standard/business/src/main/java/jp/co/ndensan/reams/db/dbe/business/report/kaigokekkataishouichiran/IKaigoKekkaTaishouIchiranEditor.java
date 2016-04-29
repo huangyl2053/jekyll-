@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 要介護認定結果通知書対象者一覧表ヘッダエディターのインターフェースクラスです。
  *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 interface IKaigoKekkaTaishouIchiranEditor extends IReportEditor<KekkatsuchiTaishoshaIchiranReportSource> {
 }

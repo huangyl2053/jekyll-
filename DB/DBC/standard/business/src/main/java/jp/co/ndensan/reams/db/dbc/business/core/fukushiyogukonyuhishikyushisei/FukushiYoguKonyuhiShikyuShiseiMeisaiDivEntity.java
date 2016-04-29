@@ -17,11 +17,14 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 福祉用具購入費支給申請明細登録画面Entity
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
@@ -35,6 +38,7 @@ public class FukushiYoguKonyuhiShikyuShiseiMeisaiDivEntity implements Serializab
     private RString 証明書コード;
     private RString 明細番号;
     private RString 支給区分;
+    private ShikibetsuCode 識別コード;
 
     private List<ShokanFukushiYoguHanbaihi> 登録福祉用具販売費リスト;
     private List<ShokanFukushiYoguHanbaihi> 修正福祉用具販売費リスト;

@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
- *
  * 認定調査スケジュール表(調査員)PrinterServiceクラスです。
+ *
+ * @reamsid_L DBE-0020-080 lishengli
  */
 public class ChosaSchedulehyoTyousayinPrintService {
 

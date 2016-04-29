@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaIraiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.INinteiChosain;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 通知書打ち分け条件を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class TsuchishoUchiwakeJoken
         extends ModelBase<TsuchishoUchiwakeJokenIdentifier, DbT2014TsuchishoUchiwakeJokenEntity, TsuchishoUchiwakeJoken>

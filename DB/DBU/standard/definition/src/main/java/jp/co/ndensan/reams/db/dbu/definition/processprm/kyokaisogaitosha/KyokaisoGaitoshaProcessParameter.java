@@ -15,6 +15,8 @@ import lombok.Setter;
 /**
  *
  * 境界層管理マスタリストのバッチ処理クラスのパラメータ
+ *
+ * @reamsid_L DBU-1050-020 wanghui
  */
 @Getter
 @Setter
@@ -94,8 +96,7 @@ public class KyokaisoGaitoshaProcessParameter implements IBatchProcessParameter 
      * @return mybatisパラメータ
      */
     public KyokaisoGaitoshaMybatisParameter toKyokaisoGaitoshaMybatisParameter() {
-        return KyokaisoGaitoshaMybatisParameter.createParam(
-                mode,
+        return KyokaisoGaitoshaMybatisParameter.createParam(mode,
                 range,
                 date_FROM,
                 date_TO,
@@ -106,20 +107,6 @@ public class KyokaisoGaitoshaProcessParameter implements IBatchProcessParameter 
                 iskogakuFlag,
                 ishokenFlag,
                 order_ID,
-                ismodekjunhe,
-                ismoderange,
-                ismodenayi,
-                isRangeApplication,
-                isRangeStart,
-                isRangeEnd,
-                isDateFlag,
-                isDate_TOFlag,
-                psmShikibetsuTaisho,
-                kyuufugakuFlag,
-                hyojunFutanFlag,
-                kyojuhinadoFutangFlag,
-                shokuhiKeiFlag,
-                kogakuFlag,
-                hokenFlag);
+                psmShikibetsuTaisho);
     }
 }

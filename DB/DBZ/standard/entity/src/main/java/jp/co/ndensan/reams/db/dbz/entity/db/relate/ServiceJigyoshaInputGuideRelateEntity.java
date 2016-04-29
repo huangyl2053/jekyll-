@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.relate;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -15,11 +16,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 介護事業者施設オブジェクトの項目定義クラスです。
+ *
+ * @reamsid_L DBA-0140-030 houtianpeng
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable {
+public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable, Serializable {
 
     private KaigoJigyoshaNo jigyoshaNo;
     private FlexibleDate yukoKaishiYMD;

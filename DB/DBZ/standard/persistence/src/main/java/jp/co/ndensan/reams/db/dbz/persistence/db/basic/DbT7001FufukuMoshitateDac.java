@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 不服審査申立情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 lizhuoxuan
  */
 public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshitateEntity> {
 

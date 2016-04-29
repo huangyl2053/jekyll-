@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のITEMです。
+ *
+ * @reamsid_L DBA-0540-712 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

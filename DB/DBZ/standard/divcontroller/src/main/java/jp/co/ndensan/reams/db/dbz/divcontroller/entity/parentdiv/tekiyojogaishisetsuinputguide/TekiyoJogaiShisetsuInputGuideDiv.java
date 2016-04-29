@@ -1,19 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.tekiyojogaishisetsuinputguide;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.tekiyojogaishisetsuinputguide.dgTekiyoJogaiShisetsu_Row;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TekiyoJogaiShisetsuInputGuide のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * TekiyoJogaiShisetsuInputGuide のクラスファイル
+ *
  * @author 自動生成
  */
 public class TekiyoJogaiShisetsuInputGuideDiv extends Panel {
@@ -23,6 +21,7 @@ public class TekiyoJogaiShisetsuInputGuideDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgTekiyoJogaiShisetsu")
     private DataGrid<dgTekiyoJogaiShisetsu_Row> dgTekiyoJogaiShisetsu;
     @JsonProperty("btnReturn")
@@ -45,7 +44,7 @@ public class TekiyoJogaiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("dgTekiyoJogaiShisetsu")
     public void setDgTekiyoJogaiShisetsu(DataGrid<dgTekiyoJogaiShisetsu_Row> dgTekiyoJogaiShisetsu) {
-        this.dgTekiyoJogaiShisetsu=dgTekiyoJogaiShisetsu;
+        this.dgTekiyoJogaiShisetsu = dgTekiyoJogaiShisetsu;
     }
 
     @JsonProperty("btnReturn")
@@ -55,7 +54,7 @@ public class TekiyoJogaiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("btnReturn")
     public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
+        this.btnReturn = btnReturn;
     }
 
     @JsonProperty("shisetsuCode")
@@ -65,7 +64,7 @@ public class TekiyoJogaiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("shisetsuCode")
     public void setShisetsuCode(RString shisetsuCode) {
-        this.shisetsuCode=shisetsuCode;
+        this.shisetsuCode = shisetsuCode;
     }
 
     @JsonProperty("shisetsuMeisho")
@@ -75,7 +74,7 @@ public class TekiyoJogaiShisetsuInputGuideDiv extends Panel {
 
     @JsonProperty("shisetsuMeisho")
     public void setShisetsuMeisho(RString shisetsuMeisho) {
-        this.shisetsuMeisho=shisetsuMeisho;
+        this.shisetsuMeisho = shisetsuMeisho;
     }
 
 }

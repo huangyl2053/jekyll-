@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のITEMです。
  *
+ * @reamsid_L DBC-1000-140 hezhenzhen
+ *
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -152,7 +154,7 @@ public class ShokanKetteiTsuchiShoSealer2Item {
      * @param kyufuShurui1 給付の種類１
      * @param kyufuShurui2 給付の種類２
      * @param kyufuShurui3 給付の種3３
-     * @param kekka　支給結果
+     * @param kekka 支給結果
      * @param shikyuGaku 支給金額
      * @param riyu1 増減の理由1
      * @param riyu2 増減の理由2

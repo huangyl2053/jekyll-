@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * PSM参数のセット。
+ *
+ * @reamsid_L DBU-1110-020 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

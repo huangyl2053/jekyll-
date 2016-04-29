@@ -82,7 +82,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法4月(RString 徴収方法4月) {
-        requireNonNull(徴収方法4月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法4月"));
         entity.setChoshuHoho4gatsu(徴収方法4月);
         return this;
     }
@@ -94,7 +93,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法5月(RString 徴収方法5月) {
-        requireNonNull(徴収方法5月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法5月"));
         entity.setChoshuHoho5gatsu(徴収方法5月);
         return this;
     }
@@ -106,7 +104,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法6月(RString 徴収方法6月) {
-        requireNonNull(徴収方法6月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法6月"));
         entity.setChoshuHoho6gatsu(徴収方法6月);
         return this;
     }
@@ -118,7 +115,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法7月(RString 徴収方法7月) {
-        requireNonNull(徴収方法7月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法7月"));
         entity.setChoshuHoho7gatsu(徴収方法7月);
         return this;
     }
@@ -130,7 +126,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法8月(RString 徴収方法8月) {
-        requireNonNull(徴収方法8月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法8月"));
         entity.setChoshuHoho8gatsu(徴収方法8月);
         return this;
     }
@@ -142,7 +137,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法9月(RString 徴収方法9月) {
-        requireNonNull(徴収方法9月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法9月"));
         entity.setChoshuHoho9gatsu(徴収方法9月);
         return this;
     }
@@ -154,7 +148,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法10月(RString 徴収方法10月) {
-        requireNonNull(徴収方法10月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法10月"));
         entity.setChoshuHoho10gatsu(徴収方法10月);
         return this;
     }
@@ -166,7 +159,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法11月(RString 徴収方法11月) {
-        requireNonNull(徴収方法11月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法11月"));
         entity.setChoshuHoho11gatsu(徴収方法11月);
         return this;
     }
@@ -178,7 +170,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法12月(RString 徴収方法12月) {
-        requireNonNull(徴収方法12月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法12月"));
         entity.setChoshuHoho12gatsu(徴収方法12月);
         return this;
     }
@@ -190,7 +181,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法1月(RString 徴収方法1月) {
-        requireNonNull(徴収方法1月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法1月"));
         entity.setChoshuHoho1gatsu(徴収方法1月);
         return this;
     }
@@ -202,7 +192,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法2月(RString 徴収方法2月) {
-        requireNonNull(徴収方法2月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法2月"));
         entity.setChoshuHoho2gatsu(徴収方法2月);
         return this;
     }
@@ -214,7 +203,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法3月(RString 徴収方法3月) {
-        requireNonNull(徴収方法3月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法3月"));
         entity.setChoshuHoho3gatsu(徴収方法3月);
         return this;
     }
@@ -226,7 +214,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法翌4月(RString 徴収方法翌4月) {
-        requireNonNull(徴収方法翌4月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法翌4月"));
         entity.setChoshuHohoYoku4gatsu(徴収方法翌4月);
         return this;
     }
@@ -238,7 +225,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法翌5月(RString 徴収方法翌5月) {
-        requireNonNull(徴収方法翌5月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法翌5月"));
         entity.setChoshuHohoYoku5gatsu(徴収方法翌5月);
         return this;
     }
@@ -250,7 +236,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法翌6月(RString 徴収方法翌6月) {
-        requireNonNull(徴収方法翌6月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法翌6月"));
         entity.setChoshuHohoYoku6gatsu(徴収方法翌6月);
         return this;
     }
@@ -262,7 +247,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法翌7月(RString 徴収方法翌7月) {
-        requireNonNull(徴収方法翌7月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法翌7月"));
         entity.setChoshuHohoYoku7gatsu(徴収方法翌7月);
         return this;
     }
@@ -274,7 +258,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法翌8月(RString 徴収方法翌8月) {
-        requireNonNull(徴収方法翌8月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法翌8月"));
         entity.setChoshuHohoYoku8gatsu(徴収方法翌8月);
         return this;
     }
@@ -286,7 +269,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set徴収方法翌9月(RString 徴収方法翌9月) {
-        requireNonNull(徴収方法翌9月, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法翌9月"));
         entity.setChoshuHohoYoku9gatsu(徴収方法翌9月);
         return this;
     }
@@ -298,7 +280,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set仮徴収_基礎年金番号(RString 仮徴収_基礎年金番号) {
-        requireNonNull(仮徴収_基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・基礎年金番号"));
         entity.setKariNenkinNo(仮徴収_基礎年金番号);
         return this;
     }
@@ -310,7 +291,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set仮徴収_年金コード(RString 仮徴収_年金コード) {
-        requireNonNull(仮徴収_年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・年金コード"));
         entity.setKariNenkinCode(仮徴収_年金コード);
         return this;
     }
@@ -322,7 +302,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set仮徴収_捕捉月(RString 仮徴収_捕捉月) {
-        requireNonNull(仮徴収_捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・捕捉月"));
         entity.setKariHosokuM(仮徴収_捕捉月);
         return this;
     }
@@ -330,11 +309,10 @@ public class ChoshuHohoBuilder {
     /**
      * 本徴収・基礎年金番号を設定します。
      *
-     * @param 本徴収・基礎年金番号 本徴収・基礎年金番号
+     * @param 本徴収_基礎年金番号 本徴収・基礎年金番号
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set本徴収_基礎年金番号(RString 本徴収_基礎年金番号) {
-        requireNonNull(本徴収_基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・基礎年金番号"));
         entity.setHonNenkinNo(本徴収_基礎年金番号);
         return this;
     }
@@ -346,7 +324,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set本徴収_年金コード(RString 本徴収_年金コード) {
-        requireNonNull(本徴収_年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・年金コード"));
         entity.setHonNenkinCode(本徴収_年金コード);
         return this;
     }
@@ -358,7 +335,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set本徴収_捕捉月(RString 本徴収_捕捉月) {
-        requireNonNull(本徴収_捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・捕捉月"));
         entity.setHonHosokuM(本徴収_捕捉月);
         return this;
     }
@@ -370,7 +346,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set翌年度仮徴収_基礎年金番号(RString 翌年度仮徴収_基礎年金番号) {
-        requireNonNull(翌年度仮徴収_基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・基礎年金番号"));
         entity.setYokunendoKariNenkinNo(翌年度仮徴収_基礎年金番号);
         return this;
     }
@@ -382,7 +357,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set翌年度仮徴収_年金コード(RString 翌年度仮徴収_年金コード) {
-        requireNonNull(翌年度仮徴収_年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・年金コード"));
         entity.setYokunendoKariNenkinCode(翌年度仮徴収_年金コード);
         return this;
     }
@@ -390,11 +364,10 @@ public class ChoshuHohoBuilder {
     /**
      * 翌年度仮徴収・捕捉月を設定します。
      *
-     * @param 翌年度仮徴収・捕捉月 翌年度仮徴収・捕捉月
+     * @param 翌年度仮徴収_捕捉月 翌年度仮徴収・捕捉月
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set翌年度仮徴収_捕捉月(RString 翌年度仮徴収_捕捉月) {
-        requireNonNull(翌年度仮徴収_捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・捕捉月"));
         entity.setYokunendoKariHosokuM(翌年度仮徴収_捕捉月);
         return this;
     }
@@ -406,7 +379,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set依頼情報送付済みフラグ(boolean 依頼情報送付済みフラグ) {
-        requireNonNull(依頼情報送付済みフラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("依頼情報送付済みフラグ"));
         entity.setIraiSohuzumiFlag(依頼情報送付済みフラグ);
         return this;
     }
@@ -418,7 +390,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set追加依頼情報送付済みフラグ(boolean 追加依頼情報送付済みフラグ) {
-        requireNonNull(追加依頼情報送付済みフラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("追加依頼情報送付済みフラグ"));
         entity.setTsuikaIraiSohuzumiFlag(追加依頼情報送付済みフラグ);
         return this;
     }
@@ -430,7 +401,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set特別徴収停止日時(YMDHMS 特別徴収停止日時) {
-        requireNonNull(特別徴収停止日時, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収停止日時"));
         entity.setTokuchoTeishiNichiji(特別徴収停止日時);
         return this;
     }
@@ -442,7 +412,6 @@ public class ChoshuHohoBuilder {
      * @return {@link ChoshuHohoBuilder}
      */
     public ChoshuHohoBuilder set特別徴収停止事由コード(RString 特別徴収停止事由コード) {
-        requireNonNull(特別徴収停止事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収停止事由コード"));
         entity.setTokuchoTeishiJiyuCode(特別徴収停止事由コード);
         return this;
     }

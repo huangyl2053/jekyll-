@@ -23,6 +23,14 @@ var DBZ;
             Events.select_BtnSenTaKu = function () {
                 return "select_BtnSenTaKu";
             };
+
+            Events.select_BtnSilyuuseyi = function () {
+                return "select_BtnSilyuuseyi";
+            };
+
+            Events.select_BtnSakujo = function () {
+                return "select_BtnSakujo";
+            };
             return Events;
         })();
         JigyoshaNyuryokuGudieCommonChildDiv.Events = Events;

@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -15,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * PnlTotal のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1020-010 yangchenbing
  */
 public class PnlTotalDiv extends Panel {
 
@@ -32,6 +34,8 @@ public class PnlTotalDiv extends Panel {
     private PnlButtonDiv PnlButton;
     @JsonProperty("YoguKonyuhiShikyuShinseiContentsPanel")
     private YoguKonyuhiShikyuShinseiContentsPanelDiv YoguKonyuhiShikyuShinseiContentsPanel;
+    @JsonProperty("ccdKetteiList")
+    private ShokanbaraiketteiJohoDiv ccdKetteiList;
     @JsonProperty("ccdMessage")
     private KaigoKanryoMessageDiv ccdMessage;
 
@@ -93,6 +97,15 @@ public class PnlTotalDiv extends Panel {
     @JsonProperty("YoguKonyuhiShikyuShinseiContentsPanel")
     public void setYoguKonyuhiShikyuShinseiContentsPanel(YoguKonyuhiShikyuShinseiContentsPanelDiv YoguKonyuhiShikyuShinseiContentsPanel) {
         this.YoguKonyuhiShikyuShinseiContentsPanel = YoguKonyuhiShikyuShinseiContentsPanel;
+    }
+
+    /*
+     * getccdKetteiList
+     * @return ccdKetteiList
+     */
+    @JsonProperty("ccdKetteiList")
+    public IShokanbaraiketteiJohoDiv getCcdKetteiList() {
+        return ccdKetteiList;
     }
 
     /*

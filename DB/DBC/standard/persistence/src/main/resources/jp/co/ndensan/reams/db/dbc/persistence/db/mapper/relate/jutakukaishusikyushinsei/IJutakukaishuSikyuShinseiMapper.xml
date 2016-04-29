@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 住宅改修費支給申請のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-0992-150 xicongwang -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinsei.IJutakukaishuSikyuShinseiMapper">
@@ -38,7 +39,7 @@
         (SELECT
         kihon."hiHokenshaNo",
         kihon."serviceTeikyoYM",
-        kihon."seiriNp"
+        kihon."seiriNo"
         FROM
         rgdb."DbT3038ShokanKihon" kihon
         INNER JOIN
@@ -46,7 +47,7 @@
         ON
         shukei."hiHokenshaNo" = #{hiHokenshaNo}
         AND shukei."serviceTeikyoYM" = kihon."serviceTeikyoYM"
-        AND shukei."seiriNo" = kihon."seiriNp"
+        AND shukei."seiriNo" = kihon."seiriNo"
         AND shukei."jigyoshaNo" = kihon."jigyoshaNo"
         AND shukei."yoshikiNo" = kihon."yoshikiNo"
         AND shukei."meisaiNo" = kihon."meisaiNo"
@@ -56,7 +57,7 @@
         ON
         kaishu."hiHokenshaNo" = #{hiHokenshaNo}
         AND kaishu."serviceTeikyoYM" = kihon."serviceTeikyoYM"
-        AND kaishu."seiriNo" = kihon."seiriNp"
+        AND kaishu."seiriNo" = kihon."seiriNo"
         AND kaishu."jigyoshaNo" = kihon."jigyoshaNo"
         AND kaishu."yoshikiNo" = kihon."yoshikiNo"
         AND kaishu."meisaiNo" = kihon."meisaiNo"
@@ -66,12 +67,12 @@
         GROUP BY
         kihon."hiHokenshaNo",
         kihon."serviceTeikyoYM",
-        kihon."seiriNp"
+        kihon."seiriNo"
         ) AS T1
         ON
         T1."hiHokenshaNo" = shinsei."hiHokenshaNo"
         AND T1."serviceTeikyoYM" = shinsei."serviceTeikyoYM"
-        AND T1."seiriNp" = shinsei."seiriNo"
+        AND T1."seiriNo" = shinsei."seiriNo"
         LEFT JOIN
         rgdb."DbT3036ShokanHanteiKekka" hanteikekka
         ON

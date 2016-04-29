@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 通知書発行後異動把握帳票HakkogoIdoTaishoshaIchiranProperty
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 public class HakkogoIdoTaishoshaIchiranProperty extends ReportPropertyBase<HakkogoIdoTaishoshaIchiranSource> {
 
@@ -21,7 +23,7 @@ public class HakkogoIdoTaishoshaIchiranProperty extends ReportPropertyBase<Hakko
      * コンストラクタです。
      */
     public HakkogoIdoTaishoshaIchiranProperty() {
-        super(SubGyomuCode.DBB介護賦課,  ReportIdDBB.DBB200028.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200028.getReportId());
     }
 
     /**

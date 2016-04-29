@@ -11,24 +11,33 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 /**
  *
  * 帳票設計_DBBRP00007_3_保険料納入通知書（仮算定）【銀振タイプ】CompNinshoshaEditor
+ *
+ * @reamsid_L DBB-9110-030 wangjie2
  */
 public class CompNinshoshaEditor implements IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor {
 
     private final NinshoshaSource ninshoshaSource;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param ninshoshaSource NinshoshaSource
+     */
     protected CompNinshoshaEditor(NinshoshaSource ninshoshaSource) {
         this.ninshoshaSource = ninshoshaSource;
     }
 
     @Override
     public KarisanteiHokenryoNonyuTsuchishoGinfuriSource edit(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.denshiKoin = ninshoshaSource.denshiKoin;
-        source.hakkoYMD = ninshoshaSource.hakkoYMD;
-        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-        source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        if (ninshoshaSource != null) {
+            source.denshiKoin = ninshoshaSource.denshiKoin;
+            source.hakkoYMD = ninshoshaSource.hakkoYMD;
+            source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+            source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+            source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+            source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+            source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        }
         return source;
     }
 

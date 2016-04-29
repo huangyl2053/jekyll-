@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.Shok
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ShokanShikyuShinseishoList.dgShokanShikyuShinseishoList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.DBC0810000TransitionEventName.申請者情報;
 
@@ -35,6 +33,12 @@ public class ShokanShikyuKetteiShinseishoList {
         return ResponseData.of(panel).respond();
     }
 
+    /**
+     * onClick_dgButtonメソッドです。
+     *
+     * @param panel ShokanShikyuKetteiShinseishoListDiv
+     * @return ResponseData
+     */
     public ResponseData<ShokanShikyuKetteiShinseishoListDiv> onClick_dgButton(ShokanShikyuKetteiShinseishoListDiv panel) {
         List<dgShokanShikyuShinseishoList_Row> list = panel.getShokanShikyuKetteiShinseishoListInfo().getDgShokanShikyuShinseishoList().getDataSource();
         list.add(new dgShokanShikyuShinseishoList_Row());

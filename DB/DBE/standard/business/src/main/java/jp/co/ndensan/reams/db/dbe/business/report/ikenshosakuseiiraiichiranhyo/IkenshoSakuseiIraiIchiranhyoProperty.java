@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 /**
  * 主治医意見書作成依頼一覧のプロパティです。
  *
+ * @reamsid_L DBE-0080-090 zhangzhiming
  */
 public class IkenshoSakuseiIraiIchiranhyoProperty extends ReportPropertyBase<IkenshoSakuseiIraiIchiranhyoReportSource> {
 

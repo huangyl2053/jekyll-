@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 訪問調査依頼書発行のRelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0080-140 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
@@ -39,8 +41,8 @@ public class HomonChosaIraishoRelateEntity {
     private RString 調査委託先住所;
     private RString 事業者名称;
     private RString 調査委託先住所_郵便番号;
-    private RString 事務所業者番号;
-    private RString 認定調査員氏名;
+    private RString 事業者番号;
+    private RString 調査員氏名;
     private FlexibleDate 認定調査依頼年月日;
     private int 最大依頼履歴番号;
     private RString 認定調査期限年月日;
@@ -51,16 +53,20 @@ public class HomonChosaIraishoRelateEntity {
     private RString 要介護認定一次判定結果コード;
     private RString 二次判定要介護状態区分コード;
     private RString 二次判定年月日;
+    private RString 前回連番;
     private RString 前回連番に対する調査項目;
     private RString 連絡先郵便番号;
     private RString 連絡先電話番号;
     private RString 連絡先携帯番号;
     private RString 連絡先氏名;
     private RString 連絡先続柄;
+    private RString 連絡先住所;
+    private RString 厚労省IF識別コード;
     private RString 今回一次判定結果コード;
     private RString 介護認定審査会開催年月日;
     private RString 合議体番号;
     private RString 今回障害高齢者自立度;
     private RString 今回認知症高齢者自立度;
+    private RString 今回連番;
     private RString 今回連番に対する調査項目;
 }

@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 認定調査依頼一覧表Sourceクラスです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 public class ChosaIraiIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

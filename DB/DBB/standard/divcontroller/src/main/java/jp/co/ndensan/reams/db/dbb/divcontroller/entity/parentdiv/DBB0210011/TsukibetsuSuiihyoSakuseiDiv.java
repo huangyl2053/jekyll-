@@ -7,19 +7,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.ChikuShichosonSelectDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.IChikuShichosonSelectDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TsukibetsuSuiihyoSakusei のクラスファイル 
- * 
- * @author 自動生成
+ * TsukibetsuSuiihyoSakusei のクラスファイル
+ *
  */
 public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -57,13 +55,13 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxYear getTxtChoteiNendo() {
-        return this.getTsukibetsuSuiihyoSakuseiParameter().getTxtChoteiNendo();
+    public DropDownList getDdlChoteiNendo() {
+        return this.getTsukibetsuSuiihyoSakuseiParameter().getDdlChoteiNendo();
     }
 
     @JsonIgnore
-    public void  setTxtChoteiNendo(TextBoxYear txtChoteiNendo) {
-        this.getTsukibetsuSuiihyoSakuseiParameter().setTxtChoteiNendo(txtChoteiNendo);
+    public void setDdlChoteiNendo(DropDownList ddlChoteiNendo) {
+        this.getTsukibetsuSuiihyoSakuseiParameter().setDdlChoteiNendo(ddlChoteiNendo);
     }
 
     @JsonIgnore
@@ -72,7 +70,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChoteiKijunYMD(TextBoxDate txtChoteiKijunYMD) {
+    public void setTxtChoteiKijunYMD(TextBoxDate txtChoteiKijunYMD) {
         this.getTsukibetsuSuiihyoSakuseiParameter().setTxtChoteiKijunYMD(txtChoteiKijunYMD);
     }
 
@@ -82,7 +80,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChushutsuJoken(ChushutsuJokenDiv ChushutsuJoken) {
+    public void setChushutsuJoken(ChushutsuJokenDiv ChushutsuJoken) {
         this.getTsukibetsuSuiihyoSakuseiParameter().setChushutsuJoken(ChushutsuJoken);
     }
 
@@ -92,7 +90,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdShikakuKijunD(DropDownList ddShikakuKijunD) {
+    public void setDdShikakuKijunD(DropDownList ddShikakuKijunD) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().setDdShikakuKijunD(ddShikakuKijunD);
     }
 
@@ -102,7 +100,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin3(HorizontalLine lin3) {
+    public void setLin3(HorizontalLine lin3) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().setLin3(lin3);
     }
 
@@ -112,7 +110,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadNenrei(RadioButton radNenrei) {
+    public void setRadNenrei(RadioButton radNenrei) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().setRadNenrei(radNenrei);
     }
 
@@ -122,7 +120,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setNenrei(NenreiDiv Nenrei) {
+    public void setNenrei(NenreiDiv Nenrei) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().setNenrei(Nenrei);
     }
 
@@ -132,7 +130,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNenreiSt(TextBoxNum txtNenreiSt) {
+    public void setTxtNenreiSt(TextBoxNum txtNenreiSt) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getNenrei().setTxtNenreiSt(txtNenreiSt);
     }
 
@@ -142,7 +140,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKara1(Label lblKara1) {
+    public void setLblKara1(Label lblKara1) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getNenrei().setLblKara1(lblKara1);
     }
 
@@ -152,7 +150,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNenreiEd(TextBoxNum txtNenreiEd) {
+    public void setTxtNenreiEd(TextBoxNum txtNenreiEd) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getNenrei().setTxtNenreiEd(txtNenreiEd);
     }
 
@@ -162,7 +160,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNenreiKijunYMD(TextBoxDate txtNenreiKijunYMD) {
+    public void setTxtNenreiKijunYMD(TextBoxDate txtNenreiKijunYMD) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getNenrei().setTxtNenreiKijunYMD(txtNenreiKijunYMD);
     }
 
@@ -172,7 +170,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadUmareYMD(RadioButton radUmareYMD) {
+    public void setRadUmareYMD(RadioButton radUmareYMD) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().setRadUmareYMD(radUmareYMD);
     }
 
@@ -182,7 +180,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setUmareYMD(UmareYMDDiv UmareYMD) {
+    public void setUmareYMD(UmareYMDDiv UmareYMD) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().setUmareYMD(UmareYMD);
     }
 
@@ -192,7 +190,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUmareSt(TextBoxDate txtUmareSt) {
+    public void setTxtUmareSt(TextBoxDate txtUmareSt) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getUmareYMD().setTxtUmareSt(txtUmareSt);
     }
 
@@ -202,7 +200,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKara2(Label lblKara2) {
+    public void setLblKara2(Label lblKara2) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getUmareYMD().setLblKara2(lblKara2);
     }
 
@@ -212,7 +210,7 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUmareEd(TextBoxDate txtUmareEd) {
+    public void setTxtUmareEd(TextBoxDate txtUmareEd) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getUmareYMD().setTxtUmareEd(txtUmareEd);
     }
 
@@ -222,13 +220,33 @@ public class TsukibetsuSuiihyoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin2(HorizontalLine lin2) {
+    public void setLin2(HorizontalLine lin2) {
         this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().setLin2(lin2);
     }
 
     @JsonIgnore
     public IChikuShichosonSelectDiv getCcdChikuShichosonSelect() {
         return this.getTsukibetsuSuiihyoSakuseiParameter().getChushutsuJoken().getCcdChikuShichosonSelect();
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterRestore getBtnParameterRestore() {
+        return this.getTsukibetsuSuiihyoSakuseiParameter().getBtnParameterRestore();
+    }
+
+    @JsonIgnore
+    public void setBtnParameterRestore(ButtonBatchParameterRestore btnParameterRestore) {
+        this.getTsukibetsuSuiihyoSakuseiParameter().setBtnParameterRestore(btnParameterRestore);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterSave getBtnParameterSave() {
+        return this.getTsukibetsuSuiihyoSakuseiParameter().getBtnParameterSave();
+    }
+
+    @JsonIgnore
+    public void setBtnParameterSave(ButtonBatchParameterSave btnParameterSave) {
+        this.getTsukibetsuSuiihyoSakuseiParameter().setBtnParameterSave(btnParameterSave);
     }
 
     // </editor-fold>

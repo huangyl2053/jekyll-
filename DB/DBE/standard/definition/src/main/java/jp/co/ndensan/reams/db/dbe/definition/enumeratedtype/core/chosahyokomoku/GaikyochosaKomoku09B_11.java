@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 在宅利用-11-09Bを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public enum GaikyochosaKomoku09B_11 {
 

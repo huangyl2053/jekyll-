@@ -4,7 +4,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IIryohokenRirekiCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
@@ -13,15 +16,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tplIryoHokenDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("IryoHokenRirekiPanel")
-    private IryoHokenRirekiPanelDiv IryoHokenRirekiPanel;
+    @JsonProperty("IryoHokenRirekiMain")
+    private IryoHokenRirekiMainDiv IryoHokenRirekiMain;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +32,30 @@ public class tplIryoHokenDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("IryoHokenRirekiPanel")
-    public IryoHokenRirekiPanelDiv getIryoHokenRirekiPanel() {
-        return IryoHokenRirekiPanel;
+    /*
+     * getIryoHokenRirekiMain
+     * @return IryoHokenRirekiMain
+     */
+    @JsonProperty("IryoHokenRirekiMain")
+    public IryoHokenRirekiMainDiv getIryoHokenRirekiMain() {
+        return IryoHokenRirekiMain;
     }
 
-    @JsonProperty("IryoHokenRirekiPanel")
-    public void setIryoHokenRirekiPanel(IryoHokenRirekiPanelDiv IryoHokenRirekiPanel) {
-        this.IryoHokenRirekiPanel=IryoHokenRirekiPanel;
+    /*
+     * setIryoHokenRirekiMain
+     * @param IryoHokenRirekiMain IryoHokenRirekiMain
+     */
+    @JsonProperty("IryoHokenRirekiMain")
+    public void setIryoHokenRirekiMain(IryoHokenRirekiMainDiv IryoHokenRirekiMain) {
+        this.IryoHokenRirekiMain = IryoHokenRirekiMain;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public IIryohokenRirekiCommonChildDiv getCcdIryoHokenRireki() {
+        return this.getIryoHokenRirekiMain().getCcdIryoHokenRireki();
     }
 
     // </editor-fold>

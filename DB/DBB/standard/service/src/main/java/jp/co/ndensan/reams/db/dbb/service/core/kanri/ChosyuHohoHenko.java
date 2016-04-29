@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 徴収方法変更
+ * 徴収方法変更。
+ *
+ * @reamsid_L DBB-1760-030 sunhui
  */
 public class ChosyuHohoHenko {
 

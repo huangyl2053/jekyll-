@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 上乗せ償還払い給付種類支給限度額のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity> {
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri;
 
 import java.util.ArrayList;
@@ -11,7 +6,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.shikakushutoku.IShikakuShutokuJogaishaKanriMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.shikakushutoku.IShikakuShutokuJogaishaKanriMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1009ShikakuShutokuJogaishaDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -23,14 +19,14 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 資格取得除外者管理の取得します。
+ *
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 public class ShikakuShutokuJogaishaKanriManager {
 
@@ -88,9 +84,28 @@ public class ShikakuShutokuJogaishaKanriManager {
         return SearchResult.of(businessList, 0, false);
     }
 
+    /**
+     * 資格取得除外者一覧取得します。
+     *
+     * @return SearchResult<ShikakuShutokuJogaisha>
+     */
+    @Transaction
+    public SearchResult<ShikakuShutokuJogaisha> get資格取得除外者一覧() {
+        List<DbT1009ShikakuShutokuJogaishaEntity> entityList = dac.select一覧();
+        if (entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShikakuShutokuJogaisha>emptyList(), 0, false);
+        }
+        List<ShikakuShutokuJogaisha> businessList = new ArrayList<>();
+        for (DbT1009ShikakuShutokuJogaishaEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new ShikakuShutokuJogaisha(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
+    }
+
     private ShikakuShutokuJogaishaKanriEntity 宛名情報(ShikibetsuCode 識別コード) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         ShikakuShutokuJogaishaKanriParameter parameter = new ShikakuShutokuJogaishaKanriParameter(
@@ -123,67 +138,74 @@ public class ShikakuShutokuJogaishaKanriManager {
     /**
      * 資格取得除外者登録します。
      *
-     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
-     * @return count 件数
+     * @param insertKuJogaishaList 資格取得除外者登録リスト
+     * @return insertCount 資格取得除外者登録件数
      */
     @Transaction
-    public int insertShikakuShutokuJogaisha(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
-        IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
-        int 履歴番号 = mapper.get履歴番号(shakanrientity.getShikibetsuCode());
-        DbT1009ShikakuShutokuJogaishaEntity shikakuentity = new DbT1009ShikakuShutokuJogaishaEntity();
-        shikakuentity.setShikibetsuCode(shakanrientity.getShikibetsuCode());
-        shikakuentity.setShichosonCode(shakanrientity.getShichosonCode());
-        shikakuentity.setShikakuShutokuJogaiRiyu(shakanrientity.getShikakuShutokuJogaiRiyu());
-        shikakuentity.setShikakuShutokuJogaiYMD(shakanrientity.getShikakuShutokuJogaiYMD());
-        shikakuentity.setShikakuShutokuJogaiKaijoYMD(shakanrientity.getShikakuShutokuJogaiKaijoYMD());
-        shikakuentity.setRirekiNo(履歴番号 + 1);
-        shikakuentity.setIsDeleted(false);
-        shikakuentity.setState(EntityDataState.Added);
-        return dac.save(shikakuentity);
+    public int insertShikakuShutokuJogaisha(List<ShikakuShutokuJogaisha> insertKuJogaishaList) {
+        int insertCount = 0;
+        for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : insertKuJogaishaList) {
+            DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
+            shikakuentity.setIsDeleted(false);
+            insertCount = insertCount + dac.save(shikakuentity);
+        }
+        return insertCount;
     }
 
     /**
      * 資格取得除外者更新します。
      *
-     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
-     * @return count 件数
+     * @param updateKuJogaishaList 資格取得除外者更新リスト
+     * @return updateCount 資格取得除外者更新件数
      */
     @Transaction
-    public int updateShikakuShutokuJogaisha(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
-        DbT1009ShikakuShutokuJogaishaEntity entity = dac.selectByKey(shakanrientity.getShikibetsuCode(),
-                shakanrientity.getRirekiNo());
-        entity.setIsDeleted(true);
-        entity.setState(EntityDataState.Modified);
-        int count = dac.save(entity);
-        insertShikakuShutokuJogaisha(shakanrientity);
-        return count;
+    public int updateShikakuShutokuJogaisha(List<ShikakuShutokuJogaisha> updateKuJogaishaList) {
+        delShikakuShutokuJogaisha(updateKuJogaishaList);
+        return insertShikakuShutokuJogaisha(updateKuJogaishaList);
     }
 
     /**
      * 資格取得除外者削除します。
      *
-     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
-     * @return count 件数
+     * @param deleteKuJogaishaList 資格取得除外者削除リスト
+     * @return deleteCount 資格取得除外者削除件数
      */
     @Transaction
-    public int delShikakuShutokuJogaisha(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
-        DbT1009ShikakuShutokuJogaishaEntity entity = dac.selectByKey(shakanrientity.getShikibetsuCode(),
-                shakanrientity.getRirekiNo());
-        entity.setIsDeleted(true);
-        entity.setState(EntityDataState.Deleted);
-        return dac.save(entity);
+    public int delShikakuShutokuJogaisha(List<ShikakuShutokuJogaisha> deleteKuJogaishaList) {
+        int deleteCount = 0;
+        for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : deleteKuJogaishaList) {
+            DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
+            shikakuentity.setIsDeleted(true);
+            deleteCount = deleteCount + dac.save(shikakuentity);
+        }
+        return deleteCount;
     }
 
     /**
      * 除外期間重複チェックします。
      *
-     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
-     * @return boolean
+     * @param kuJogaishaList 資格取得除外者リスト
+     * @return 重複しない場合、falseを返却します、以外の場合は、trueを返却します。
      */
     @Transaction
-    public boolean jogaiKikanJufukuCheck(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
+    public boolean jogaiKikanJufukuCheck(List<ShikakuShutokuJogaisha> kuJogaishaList) {
         IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
-        int count = mapper.get除外期間重複チェック(shakanrientity);
-        return count != 0;
+        for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : kuJogaishaList) {
+            if (0 < mapper.get除外期間重複チェック(shikakuShutokuJogaisha.toEntity())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 履歴番号を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return 履歴番号
+     */
+    @Transaction
+    public int select履歴番号(ShikibetsuCode 識別コード) {
+        return dac.select履歴番号(識別コード) == null ? 1 : dac.select履歴番号(識別コード).getRirekiNo();
     }
 }

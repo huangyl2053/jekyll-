@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe8010001.SerchCriteriaForYokaigoninteiProgressDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE8010001.SerchCriteriaForYokaigoninteiProgressDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

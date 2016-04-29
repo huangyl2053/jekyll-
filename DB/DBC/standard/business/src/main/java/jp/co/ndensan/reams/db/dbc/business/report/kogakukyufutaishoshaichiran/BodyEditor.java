@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichir
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票BodyEditor
+ *
+ * @reamsid_L DBC-0980-490 surun
  */
 public class BodyEditor implements IKogakuKyufuTaishoshaIchiranEditor {
 

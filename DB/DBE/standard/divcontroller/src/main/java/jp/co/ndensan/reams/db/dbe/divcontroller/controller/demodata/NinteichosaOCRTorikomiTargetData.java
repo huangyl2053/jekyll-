@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2060005.dgChosahyoTorikomiKekka_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060005.dgChosahyoTorikomiKekka_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter.IConverter;
@@ -31,14 +31,41 @@ public class NinteichosaOCRTorikomiTargetData {
      */
     public enum YAMLKeys {
 
+        /**
+         * 保険者番号
+         */
         保険者番号("保険者番号"),
+        /**
+         * 保険者名
+         */
         保険者名("保険者名"),
+        /**
+         * 被保番号
+         */
         被保番号("被保番号"),
+        /**
+         * OCR成功区分
+         */
         OCR成功区分("OCR成功区分"),
+        /**
+         * 申請日
+         */
         申請日("申請日"),
+        /**
+         * 申請区分
+         */
         申請区分("申請区分"),
+        /**
+         * 調査員コード
+         */
         調査員コード("調査員コード"),
+        /**
+         * 調査実施日
+         */
         調査実施日("調査実施日"),
+        /**
+         * 調査票受領日
+         */
         調査票受領日("調査票受領日");
         private final RString theKey;
 
@@ -46,14 +73,25 @@ public class NinteichosaOCRTorikomiTargetData {
             this.theKey = new RString(key);
         }
 
+        /**
+         * value
+         *
+         * @return theKey
+         */
         public RString value() {
             return theKey;
         }
     }
 
     //<editor-fold defaultstate="collapsed" desc="public enum ShinseiKubun{...}">
+    /**
+     * ShinseiKubun
+     */
     public enum ShinseiKubun {
 
+        /**
+         *
+         */
         新規("shinki"), 更新("koshin"), 区分変更("henko");
         private final RString theKey;
         private final RString theName;
@@ -65,18 +103,39 @@ public class NinteichosaOCRTorikomiTargetData {
             this.theName = new RString(theShortName + "申請");
         }
 
+        /**
+         * Keyを取得します。
+         *
+         * @return Key
+         */
         public RString getKey() {
             return this.theKey;
         }
 
+        /**
+         * Nameを取得します。
+         *
+         * @return Name
+         */
         public RString getName() {
             return this.theName;
         }
 
+        /**
+         * ShortNameを取得します。
+         *
+         * @return ShortName
+         */
         public RString getShortName() {
             return this.theShortName;
         }
 
+        /**
+         * toValue
+         *
+         * @param rstr RString
+         * @return ShinseiKubun
+         */
         public static ShinseiKubun toValue(RString rstr) {
             for (ShinseiKubun item : values()) {
                 if (item.getKey().equals(rstr) || item.getName().equals(rstr) || item.getShortName().equals(rstr)) {
@@ -86,10 +145,20 @@ public class NinteichosaOCRTorikomiTargetData {
             return 新規;
         }
 
+        /**
+         * toKeyValueDataSource
+         *
+         * @return KeyValueDataSource
+         */
         public KeyValueDataSource toKeyValueDataSource() {
             return new KeyValueDataSource(getKey(), getName());
         }
 
+        /**
+         * getDataSources
+         *
+         * @return List<KeyValueDataSource>
+         */
         public static List<KeyValueDataSource> getDataSources() {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             for (ShinseiKubun item : values()) {
@@ -101,15 +170,30 @@ public class NinteichosaOCRTorikomiTargetData {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="public enum OCRSuccessKubun{...}">
+    /**
+     * OCRSuccessKubun
+     */
     public enum OCRSuccessKubun {
 
-        OK, NG;
+        /**
+         * OK
+         */
+        OK,
+        /**
+         * NG
+         */
+        NG;
         private final RString theName;
 
         private OCRSuccessKubun() {
             this.theName = new RString(name());
         }
 
+        /**
+         * toRString
+         *
+         * @return theName
+         */
         public RString toRString() {
             return theName;
         }

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 契約事業者一覧リスト取得のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

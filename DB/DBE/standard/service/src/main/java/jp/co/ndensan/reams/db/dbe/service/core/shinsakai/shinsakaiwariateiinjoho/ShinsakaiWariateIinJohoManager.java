@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariateiinjoh
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJohoManager;
@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会割当委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0160-010 wangxiaodong
  */
 public class ShinsakaiWariateIinJohoManager {
 

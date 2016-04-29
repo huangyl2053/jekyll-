@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 段階用パラメータクラスです。
+ *
+ * @reamsid_L DBB-0770-040 yebangqiang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
@@ -27,6 +29,7 @@ public final class DanKai {
     private final RString choshuHouhou;
     private final Decimal choteiId;
     private final Integer dogetsuFlag;
+    private final RString karisanFlag;
     private final Decimal zengetsusueChoteigaku;
     private final Decimal fueChoteigaku;
     private final Decimal genChoteigaku;
@@ -44,6 +47,7 @@ public final class DanKai {
      * @param 徴収方法 徴収方法
      * @param 調定ID 調定ID
      * @param 当月フラグ 当月フラグ
+     * @param 仮算フラグ 仮算フラグ
      * @param 該当する段階の前月末の調定額 該当する段階の前月末の調定額
      * @param 該当する段階の増の調定額 該当する段階の増の調定額
      * @param 該当する段階の減の調定額 該当する段階の減の調定額
@@ -60,6 +64,7 @@ public final class DanKai {
             RString 徴収方法,
             Decimal 調定ID,
             Integer 当月フラグ,
+            RString 仮算フラグ,
             Decimal 該当する段階の前月末の調定額,
             Decimal 該当する段階の増の調定額,
             Decimal 該当する段階の減の調定額,
@@ -74,6 +79,7 @@ public final class DanKai {
         this.choshuHouhou = 徴収方法;
         this.choteiId = 調定ID;
         this.dogetsuFlag = 当月フラグ;
+        this.karisanFlag = 仮算フラグ;
         this.zengetsusueChoteigaku = 該当する段階の前月末の調定額;
         this.fueChoteigaku = 該当する段階の増の調定額;
         this.genChoteigaku = 該当する段階の減の調定額;
@@ -92,6 +98,7 @@ public final class DanKai {
      * @param 徴収方法 徴収方法
      * @param 調定ID 調定ID
      * @param 当月フラグ 当月フラグ
+     * @param 仮算フラグ 仮算フラグ
      * @param 該当する段階の前月末の調定額 該当する段階の前月末の調定額
      * @param 該当する段階の増の調定額 該当する段階の増の調定額
      * @param 該当する段階の減の調定額 該当する段階の減の調定額
@@ -108,12 +115,13 @@ public final class DanKai {
             RString 徴収方法,
             Decimal 調定ID,
             Integer 当月フラグ,
+            RString 仮算フラグ,
             Decimal 該当する段階の前月末の調定額,
             Decimal 該当する段階の増の調定額,
             Decimal 該当する段階の減の調定額,
             Decimal 該当する段階の当月末の調定額
     ) {
-        return new DanKai(調定年度, 賦課年度, 通知書番号, 履歴番号, 被保険者番号, 段階, 徴収方法, 調定ID, 当月フラグ,
+        return new DanKai(調定年度, 賦課年度, 通知書番号, 履歴番号, 被保険者番号, 段階, 徴収方法, 調定ID, 当月フラグ, 仮算フラグ,
                 該当する段階の前月末の調定額, 該当する段階の増の調定額, 該当する段階の減の調定額, 該当する段階の当月末の調定額);
     }
 

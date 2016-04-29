@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitoutatsuyoteisha;
 
-import jp.co.ndensan.reams.db.dba.definition.processhprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitoutatsuyoteisha.INenreiToutatsuYoteishaCheckListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,6 +16,8 @@ import lombok.Setter;
 /**
  *
  * 年齢到達予定者チェックリストのBatchParameterクラスです。
+ *
+ * @reamsid_L DBA-0580-020 yaodongsheng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定延期通知発行しないことに対する同意有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistEnkitsuchiNashiDoi {
 
@@ -32,7 +32,7 @@ public enum IsExistEnkitsuchiNashiDoi {
      *
      * @return 認定延期通知発行しないことに対する同意有無のコード
      */
-    public boolean getコード() {
+    public boolean is同意する() {
         return code;
     }
 

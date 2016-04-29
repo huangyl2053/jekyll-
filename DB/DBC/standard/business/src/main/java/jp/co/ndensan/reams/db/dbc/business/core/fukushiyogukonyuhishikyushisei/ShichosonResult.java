@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 市町村entity結果
+ *
+ * @reamsid_L DBC-1020-040 zhangrui
  */
 public class ShichosonResult implements Serializable {
 

@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 要介護認定個人進捗状況票ボディのITEMです。
+ *
+ * @reamsid_L DBE-0200-040 zhangzhiming
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

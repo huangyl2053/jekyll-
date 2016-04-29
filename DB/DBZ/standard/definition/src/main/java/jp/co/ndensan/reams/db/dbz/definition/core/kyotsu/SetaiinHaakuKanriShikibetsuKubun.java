@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 世帯員把握管理識別区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum SetaiinHaakuKanriShikibetsuKubun {
 

@@ -4,15 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TokuteiNyushoshaHiyo のクラスファイル 
- * 
- * @author 自動生成
+ * TokuteiNyushoshaHiyo のクラスファイル
+ *
+ * @reamsid_L DBC-1010-160 wangkanglei
  */
 public class TokuteiNyushoshaHiyoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]

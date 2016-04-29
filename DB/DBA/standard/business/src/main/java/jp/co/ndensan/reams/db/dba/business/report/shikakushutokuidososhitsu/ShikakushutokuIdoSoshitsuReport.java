@@ -14,6 +14,7 @@ import lombok.NonNull;
 /**
  *
  * 介護保険資格取得・異動・喪失届帳票作成します。
+ * @reamsid_L DBA-0540-681 dongyabin
  */
 public final class ShikakushutokuIdoSoshitsuReport extends Report<ShikakushutokuIdoSoshitsuReportSource> {
     

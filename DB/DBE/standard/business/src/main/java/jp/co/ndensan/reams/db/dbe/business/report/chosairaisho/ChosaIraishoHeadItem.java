@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 要介護認定調査依頼書ヘッダのITEMです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -34,6 +35,7 @@ public class ChosaIraishoHeadItem {
     private final RString customerBarCode;
     private final RString sonota;
     private final RString atenaRenban;
+    private final RString title;
     private final RString tsuchibun1;
     private final RString hihokenshaNo1;
     private final RString hihokenshaNo2;
@@ -57,14 +59,12 @@ public class ChosaIraishoHeadItem {
     private final RString jusho;
     private final RString telNo;
     private final RString homonChosasakiYubinNo;
-    private final RString homonChosasakiJusho1;
-    private final RString homonChosasakiJusho2;
-    private final RString homonChosasakiJusho3;
+    private final RString homonChosasakiJusho;
+    private final RString homonChosasakiJushoName;
     private final RString homonChosasakiTelNo;
     private final RString shinseiYMD;
     private final RString teishutsuKigen;
     private final RString tsuchibun2;
-    private final RString remban;
 
     /**
      * インスタンスを生成します。
@@ -75,18 +75,19 @@ public class ChosaIraishoHeadItem {
      * @param ninshoshaYakushokuMei2 認証者役職名1行目
      * @param ninshoshaYakushokuMei1 認証者役職名1行目
      * @param koinMojiretsu 電子公印文字列
-     * @param ninshoshaShimeiKakeru 認証者氏名公印掛ける
-     * @param ninshoshaShimeiKakenai 認証者氏名公印掛けない
+     * @param ninshoshaShimeiKakeru 認証者氏名(公印に掛ける)
+     * @param ninshoshaShimeiKakenai 認証者氏名(公印に掛けない)
      * @param koinShoryaku 電子公印省略
      * @param bunshoNo 文書番号
-     * @param yubinNo1 宛名郵便番号
-     * @param jushoText 宛名住所
-     * @param kikanNameText 宛名機関名
-     * @param shimeiText 宛名氏名
-     * @param meishoFuyo 宛名名称付与
+     * @param yubinNo1 郵便番号
+     * @param jushoText 住所
+     * @param kikanNameText 機関名称
+     * @param shimeiText 氏名
+     * @param meishoFuyo 名称付与
      * @param customerBarCode カスタマーバーコード
-     * @param sonota 宛名その他
+     * @param sonota その他
      * @param atenaRenban 宛名連番
+     * @param title タイトル
      * @param tsuchibun1 通知文1
      * @param hihokenshaNo1 被保険者番号1
      * @param hihokenshaNo2 被保険者番号2
@@ -110,14 +111,12 @@ public class ChosaIraishoHeadItem {
      * @param jusho 被保険者住所
      * @param telNo 被保険者電話番号
      * @param homonChosasakiYubinNo 訪問調査先住所(郵便番号)
-     * @param homonChosasakiJusho1 訪問調査先住所1行目
-     * @param homonChosasakiJusho2 訪問調査先住所2行目
-     * @param homonChosasakiJusho3 訪問調査先名称
+     * @param homonChosasakiJusho 訪問調査先住所
+     * @param homonChosasakiJushoName 訪問調査先名称
      * @param homonChosasakiTelNo 訪問調査先電話番号
      * @param shinseiYMD 要介護認定（更新）申請日
      * @param teishutsuKigen 要介護認定調査表提出期限
      * @param tsuchibun2 通知文2
-     * @param remban 連番
      */
     public ChosaIraishoHeadItem(
             RString hakkoYMD1,
@@ -138,6 +137,7 @@ public class ChosaIraishoHeadItem {
             RString customerBarCode,
             RString sonota,
             RString atenaRenban,
+            RString title,
             RString tsuchibun1,
             RString hihokenshaNo1,
             RString hihokenshaNo2,
@@ -161,14 +161,12 @@ public class ChosaIraishoHeadItem {
             RString jusho,
             RString telNo,
             RString homonChosasakiYubinNo,
-            RString homonChosasakiJusho1,
-            RString homonChosasakiJusho2,
-            RString homonChosasakiJusho3,
+            RString homonChosasakiJusho,
+            RString homonChosasakiJushoName,
             RString homonChosasakiTelNo,
             RString shinseiYMD,
             RString teishutsuKigen,
-            RString tsuchibun2,
-            RString remban) {
+            RString tsuchibun2) {
         this.hakkoYMD1 = hakkoYMD1;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
@@ -187,6 +185,7 @@ public class ChosaIraishoHeadItem {
         this.customerBarCode = customerBarCode;
         this.sonota = sonota;
         this.atenaRenban = atenaRenban;
+        this.title = title;
         this.tsuchibun1 = tsuchibun1;
         this.hihokenshaNo1 = hihokenshaNo1;
         this.hihokenshaNo2 = hihokenshaNo2;
@@ -210,13 +209,11 @@ public class ChosaIraishoHeadItem {
         this.jusho = jusho;
         this.telNo = telNo;
         this.homonChosasakiYubinNo = homonChosasakiYubinNo;
-        this.homonChosasakiJusho1 = homonChosasakiJusho1;
-        this.homonChosasakiJusho2 = homonChosasakiJusho2;
-        this.homonChosasakiJusho3 = homonChosasakiJusho3;
+        this.homonChosasakiJusho = homonChosasakiJusho;
+        this.homonChosasakiJushoName = homonChosasakiJushoName;
         this.homonChosasakiTelNo = homonChosasakiTelNo;
         this.shinseiYMD = shinseiYMD;
         this.teishutsuKigen = teishutsuKigen;
         this.tsuchibun2 = tsuchibun2;
-        this.remban = remban;
     }
 }

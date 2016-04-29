@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 主治医意見書提出督促状Builderのインターフェースクラスです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 class ShujiiIkenshoSakuseiTokusokujoBuilderImpl implements IShujiiIkenshoSakuseiTokusokujoBuilder {
 

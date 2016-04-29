@@ -13,15 +13,18 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 宛名識別対象PSM_DB検索用のパラメータです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class AtenaMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
-      private final List<ShikibetsuCode> 識別コード;
-    
+    private final List<ShikibetsuCode> 識別コード;
+
     /**
      * 宛名識別対象PSMの取得のパラメータ作成を行います。
+     *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
      * @param 識別コード 識別コード
      */

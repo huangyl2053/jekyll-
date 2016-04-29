@@ -15,6 +15,7 @@ import lombok.Value;
  * 地域密着型介護サービスコードの識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ChiikiMitchakuServiceCodeIdentifier implements Serializable {
 
     private final ServiceShuruiCode サービス種類コード;

@@ -9,8 +9,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 出力帳票entity
- *
+ * 出力帳票entity TokuchoKariSanteiEntity
  */
 @lombok.Getter
 @lombok.Setter

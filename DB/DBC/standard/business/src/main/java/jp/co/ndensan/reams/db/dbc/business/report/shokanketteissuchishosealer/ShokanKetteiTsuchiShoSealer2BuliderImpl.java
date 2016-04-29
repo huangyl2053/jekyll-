@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）Builderのインターフェースクラスです。
  *
+ * @reamsid_L DBC-1000-140 hezhenzhen
+ *
  */
 class ShokanKetteiTsuchiShoSealer2BuliderImpl implements IShokanKetteiTsuchiShoSealer2Builder {
 

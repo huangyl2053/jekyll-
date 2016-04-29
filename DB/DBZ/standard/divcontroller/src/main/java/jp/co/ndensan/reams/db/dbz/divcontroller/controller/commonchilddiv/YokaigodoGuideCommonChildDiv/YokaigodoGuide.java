@@ -11,10 +11,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigodo
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 要介護度ガイドのクラス。
+ *
+ * @reamsid_L DBZ-4540-010 lizhuoxuan
  */
 public class YokaigodoGuide {
 
@@ -26,8 +29,8 @@ public class YokaigodoGuide {
      */
     public ResponseData<YokaigodoGuideDiv> onLoad(YokaigodoGuideDiv godoDiv) {
         ResponseData<YokaigodoGuideDiv> responseData = new ResponseData<>();
-        FlexibleYearMonth kizyuniti = new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
-        if (kizyuniti.isBefore(new FlexibleYearMonth("200003"))) {
+        FlexibleYearMonth kizyuniti = RString.isNullOrEmpty(godoDiv.getKijunYMD()) ? FlexibleYearMonth.EMPTY : new FlexibleDate(godoDiv.getKijunYMD()).getYearMonth();
+        if (FlexibleYearMonth.EMPTY.equals(kizyuniti) || kizyuniti.isBefore(new FlexibleYearMonth("200003"))) {
             ValidationMessageControlPairs validationMessages = createHandlerOf(godoDiv).check_btnKakuninn(godoDiv);
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(godoDiv).addValidationMessages(validationMessages).respond();

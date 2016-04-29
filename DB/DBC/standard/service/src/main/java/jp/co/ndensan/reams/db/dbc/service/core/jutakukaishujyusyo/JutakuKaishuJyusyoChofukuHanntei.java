@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 住宅改修費改修住所重複判定
  *
+ * @reamsid_L DBC-0992-130 yangchenbing
  */
 public class JutakuKaishuJyusyoChofukuHanntei {
 

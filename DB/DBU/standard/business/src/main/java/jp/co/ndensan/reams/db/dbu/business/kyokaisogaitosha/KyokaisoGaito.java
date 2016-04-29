@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
 
 /**
  * 境界層該当者情報を管理するビジネスです。
+ *
+ * @reamsid_L DBU-0430-020 linghuhang
  */
 @lombok.Setter
 @lombok.Getter

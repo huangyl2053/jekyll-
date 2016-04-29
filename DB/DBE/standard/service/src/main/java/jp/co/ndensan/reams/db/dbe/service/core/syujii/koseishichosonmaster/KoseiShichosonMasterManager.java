@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.syujii.koseishichosonmaster;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 構成市町村マスタを管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class KoseiShichosonMasterManager {
 

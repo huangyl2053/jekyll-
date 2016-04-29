@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【期毎タイプ】
+ *
+ * @reamsid_L DBB-9110-140 liangbc
  */
 public class HokenryoNonyuTsuchishoKigotoReport extends Report<HokenryoNonyuTsuchishoKigotoSource> {
 

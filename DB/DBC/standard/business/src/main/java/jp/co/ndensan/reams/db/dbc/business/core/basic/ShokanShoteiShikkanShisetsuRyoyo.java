@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求所定疾患施設療養費等を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanShoteiShikkanShisetsuRyoyo
         extends ModelBase<ShokanShoteiShikkanShisetsuRyoyoIdentifier, DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity, ShokanShoteiShikkanShisetsuRyoyo>

@@ -19,10 +19,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuR
 
 /**
  * 認定調査票（概況調査）RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteichosahyoGaikyoChosaEntity implements Cloneable, Serializable {
+public class NinteichosahyoGaikyoChosaEntity implements Serializable {
 
     /**
      * -- GETTER -- 認定調査票（概況調査）Entityを返します。

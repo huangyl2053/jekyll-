@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査員情報検索用RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0280-010 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

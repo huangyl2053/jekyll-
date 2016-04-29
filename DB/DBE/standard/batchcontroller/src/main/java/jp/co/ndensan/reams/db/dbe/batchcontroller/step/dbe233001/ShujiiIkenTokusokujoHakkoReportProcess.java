@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 
 /**
  * 主治医意見書督促対象者一覧表の作成クラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<ShujiiIkenTokusokujoHakkoRelateEntity> {
 
@@ -41,6 +43,10 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
      * OUT_DATA_LISTです。
      */
     public static final RString OUT_DATA_LIST;
+    /**
+     * SHUJI_DATA_LISTです。
+     */
+    public static final RString SHUJI_DATA_LIST;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001."
             + "IDbe233001RelateMapper.select主治医意見書督促対象者一覧表ByKey");
@@ -57,13 +63,18 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
+        SHUJI_DATA_LIST = new RString("shujiDataList");
     }
-    private OutputParameter<List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>> outDataList;
+    private OutputParameter<List<RString>> outDataList;
+    private OutputParameter<List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>> shujiDataList;
+    private List<RString> shinseishoKanriNoList;
 
     @Override
     protected void initialize() {
         itemList = new ArrayList();
+        shinseishoKanriNoList = new ArrayList<>();
         outDataList = new OutputParameter<>();
+        shujiDataList = new OutputParameter<>();
         super.initialize();
     }
 
@@ -80,7 +91,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     @Override
     protected void process(ShujiiIkenTokusokujoHakkoRelateEntity entity) {
-
+        shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード()
                 .getColumnValue(),
                 entity.getTemp_市町村名称(),
@@ -102,7 +113,8 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         set出力条件表();
         NinteiChosaTokusokuTaishoshaIchiranhyoReport report = NinteiChosaTokusokuTaishoshaIchiranhyoReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
-        outDataList.setValue(itemList);
+        outDataList.setValue(shinseishoKanriNoList);
+        shujiDataList.setValue(itemList);
     }
 
     private void set出力条件表() {

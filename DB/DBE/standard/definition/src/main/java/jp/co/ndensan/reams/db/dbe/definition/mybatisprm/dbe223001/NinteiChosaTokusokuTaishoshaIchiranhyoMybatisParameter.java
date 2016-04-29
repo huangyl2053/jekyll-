@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 
 /**
- *
  * 認定調査督促対象者一覧表のMybatisパラメータクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

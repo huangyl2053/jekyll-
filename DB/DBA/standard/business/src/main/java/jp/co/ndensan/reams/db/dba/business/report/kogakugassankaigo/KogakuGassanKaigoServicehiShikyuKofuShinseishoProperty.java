@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- *
  * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-712 lishengli
  */
 public class KogakuGassanKaigoServicehiShikyuKofuShinseishoProperty
         extends ReportPropertyBase<KogakuGassanKaigoServicehiShikyuKofuShinseishoReportSource> {

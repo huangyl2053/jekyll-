@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.dbamn71001;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ParameterSetMybatisParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ParameterSetMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 抽出条件の生成_バッチ用のパラメータです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 @Getter
 @Setter
@@ -26,7 +28,6 @@ public class ParameterSetProcessParameter implements IBatchProcessParameter {
     private RString 処理枝番;
     private FlexibleYear 年度;
     private RString 年度内連番;
-    
 
     /**
      * コンストラクタです。
@@ -38,20 +39,18 @@ public class ParameterSetProcessParameter implements IBatchProcessParameter {
         this.年度 = new FlexibleYear("0000");
         this.年度内連番 = new RString("00");
     }
-    
+
     /**
      * 抽出条件の生成のMybatisパラメータを作成します。
-     * 
+     *
      * @return 抽出条件の生成のMybatisパラメータ
-     */ 
+     */
     public ParameterSetMybatisParameter toNinteiChosaTokusokujoMybatisParameter() {
         return new ParameterSetMybatisParameter(市町村コード,
-                                    this.処理名,
-                                    this.処理枝番,
-                                    this.年度,
-                                    this.年度内連番);
+                this.処理名,
+                this.処理枝番,
+                this.年度,
+                this.年度内連番);
     }
-    
- 
 
 }

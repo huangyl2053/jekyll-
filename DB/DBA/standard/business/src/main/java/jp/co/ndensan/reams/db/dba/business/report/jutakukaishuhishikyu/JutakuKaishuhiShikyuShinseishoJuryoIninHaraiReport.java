@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 介護保険居宅介護（予防）住宅改修費支給（受領委任払）申請書のReportです。
+ *
+ * @reamsid_L DBA-0540-709 lishengli
  */
 public class JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReport extends Report<JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReportSource> {
 

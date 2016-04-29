@@ -1,8 +1,11 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
@@ -79,4 +82,10 @@ public interface IJushochiTokureiRirekiListDiv extends ICommonChildDivBaseProper
      * @return 履歴情報が変更されている場合はtrue、されていない場合はfalse
      */
     boolean hasChanged();
+
+    JutokuInputDiv getJutokuInput();
+
+    DataGrid<dgJutoku_Row> getDgJutoku();
+
+    List<HihokenshaDaicho> getDataList();
 }

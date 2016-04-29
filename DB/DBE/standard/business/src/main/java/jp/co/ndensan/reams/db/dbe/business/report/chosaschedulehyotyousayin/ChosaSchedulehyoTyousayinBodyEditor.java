@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- *
  * 認定調査スケジュール表(調査員)ボディEditorです。
+ *
+ * @reamsid_L DBE-0020-080 lishengli
  */
 class ChosaSchedulehyoTyousayinBodyEditor implements IChosaSchedulehyoTyousayinEditor {
 

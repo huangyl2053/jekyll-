@@ -10,9 +10,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票ＩＤの列挙型です。
+ *
+ * @reamsid_L DBC-9999-021 zhangzhiming
  */
 public enum ReportIdDBC {
 
+    /**
+     * 再審査決定通知書情報取込一覧表【保険者分】
+     */
+    DBC200048(new ReportId("DBC200048_SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBun"), new RString("再審査決定通知書情報取込一覧表【保険者分】")),
     /**
      * 高額介護サービス費給付対象者取込み
      */
@@ -34,6 +40,10 @@ public enum ReportIdDBC {
      */
     DBC100002(new ReportId("DBC100002_ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashi"), new RString("償還払い支給（不支給）決定通知書")),
     /**
+     * 償還払い支給（不支給）決定通知書の帳票ＩＤです。
+     */
+    DBC100002_2(new ReportId("DBC100002_ShokanKetteiTsuchiSho"), new RString("償還払い支給（不支給）決定通知書")),
+    /**
      * 償還払い支給（不支給）決定通知書(支払予定日あり）の帳票ＩＤです。
      */
     DBC100003(new ReportId("DBC100003_ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAri"), new RString("償還払い支給（不支給）決定通知書(支払予定日あり）")),
@@ -52,10 +62,20 @@ public enum ReportIdDBC {
     DBC100006(
             new ReportId("DBC100006_ShokanKetteiTsuchiShoSealer2"), new RString("償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）")),
     /**
+     * 償還払不支給決定者一覧情報 の帳票ＩＤです。
+     */
+    DBC200022(
+            new ReportId("DBC200022_ShokanbaraiFushikyuKetteishaIchiran"), new RString("償還払不支給決定者一覧情報")),
+    /**
      * 償還払支給（不支給）決定通知一覧表の帳票ＩＤです。
      */
     DBC200023(
             new ReportId("DBC200023_ShokanbaraiShikyuFushikyuKetteiTsuchiIchiran"), new RString("償還払支給（不支給）決定通知一覧表")),
+    /**
+     * 償還払支給（不支給）決定通知一覧表の帳票ＩＤです。
+     */
+    DBC200049(
+            new ReportId("DBC200049_SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBun"), new RString("再審査決定通知書情報取込一覧表（公費負担者分）")),
     /**
      * 過誤決定通知書情報取込一覧表（保険者分）の帳票ＩＤです。
      */

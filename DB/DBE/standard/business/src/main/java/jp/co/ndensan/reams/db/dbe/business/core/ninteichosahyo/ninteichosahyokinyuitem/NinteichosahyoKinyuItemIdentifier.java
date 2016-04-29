@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 
 /**
  * 認定調査票（概況調査）記入項目の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

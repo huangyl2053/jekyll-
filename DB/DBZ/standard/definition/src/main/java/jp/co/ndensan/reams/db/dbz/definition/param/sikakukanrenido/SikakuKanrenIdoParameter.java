@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  *
  * 資格関連異動補助のParameterクラスです。
+ *
+ * @reamsid_L DBA-0120-010 wanghui
  */
 public final class SikakuKanrenIdoParameter {
 

@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -46,6 +45,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * バッチ設計_DBUMN52001_境界層管理マスタリストのバッチ処理クラスです。
+ *
+ * @reamsid_L DBU-1050-020 wanghui
  *
  */
 public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<KyokaisogGaitoshaRelateEntity> {
@@ -73,11 +74,9 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     private static final RString 出力条件_が = new RString("が");
     private static final RString 出力条件_ = new RString("～");
     private static final RString なし = new RString("なし");
-    private static final RString 境界層該当内容 = new RString("【境界層該当内容】　");
-    private static final ReportId ID = new ReportId("DBA200005_KyokaisoKanriMasterList");
+    private static final RString 境界層該当内容 = new RString("【境界層該当内容】");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
-    private List<ReportOutputJokenhyoItem> lists;
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
     private KyokaisoKanriMasterListHeadItem headItem;
     private List<KyokaisoKanriMasterListBodyItem> bodyItemList;
     List<KyokaisogGaitoshaRelateEntity> daichoJohoList = new ArrayList<>();
@@ -89,7 +88,6 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
 
     @Override
     protected void initialize() {
-        lists = new ArrayList<>();
         kyokaisokanrimasterList = new KyokaisogGaitoshaListEntity();
         bodyItemList = new ArrayList<>();
     }
@@ -101,39 +99,25 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         KyokaisoGaitoshaMybatisParameter mybatisParameter = parameter.toKyokaisoGaitoshaMybatisParameter();
-        KyokaisoGaitoshaMybatisParameter piarameter = new KyokaisoGaitoshaMybatisParameter(
+        KyokaisoGaitoshaMybatisParameter piarameter = KyokaisoGaitoshaMybatisParameter.createParam(
                 mybatisParameter.getMode(),
                 mybatisParameter.getRange(),
                 mybatisParameter.getDate_FROM(),
                 mybatisParameter.getDate_TO(),
                 mybatisParameter.getIskyuufugakuFlag(),
-                mybatisParameter.isKyuufugakuFlag(),
                 mybatisParameter.getIshyojunFutanFlag(),
-                mybatisParameter.isHyojunFutanFlag(),
                 mybatisParameter.getIskyojuhinadoFutangFlag(),
-                mybatisParameter.isKyojuhinadoFutangFlag(),
                 mybatisParameter.getIsshokuhiKeiFlag(),
-                mybatisParameter.isShokuhiKeiFlag(),
                 mybatisParameter.getIskogakuFlag(),
-                mybatisParameter.isKogakuFlag(),
                 mybatisParameter.getIshokenFlag(),
-                mybatisParameter.isHokenFlag(),
                 mybatisParameter.getOrder_ID(),
-                mybatisParameter.isIsmodekjunhe(),
-                mybatisParameter.isIsmoderange(),
-                mybatisParameter.isIsmodenayi(),
-                mybatisParameter.isRangeApplication(),
-                mybatisParameter.isRangeStart(),
-                mybatisParameter.isRangeEnd(),
-                mybatisParameter.isDateFlag(),
-                mybatisParameter.isDate_TOFlag(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         return new BatchDbReader(MYBATIS_SELECT_ID, piarameter);
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBA200005.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
@@ -292,8 +276,10 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
                     dataSakuseiEntity.get改頁4(),
                     dataSakuseiEntity.get改頁5());
         }
-        KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
-        report.writeBy(reportSourceWriter);
-        outputJokenhyoFactory(帳票データ.size());
+        if (!bodyItemList.isEmpty()) {
+            KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
+            report.writeBy(reportSourceWriter);
+            outputJokenhyoFactory(帳票データ.size());
+        }
     }
 }

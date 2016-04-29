@@ -10,9 +10,12 @@ import java.util.List;
 
 /**
  * データリストEntityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DataListEntity {
 
     private List<KibetsuShokeiEntity> 期別小計Entity;

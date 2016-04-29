@@ -23,6 +23,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public final class KokuhorenJohoTorikomiValidationHelper {
 
+    /**
+     * validateメソッドです。
+     *
+     * @param 同月過誤分 同月過誤分
+     * @param 通常分 通常分
+     * @param 出力順 出力順
+     * @return ValidationMessageControlPairs
+     */
     public static ValidationMessageControlPairs validate(CheckBoxList 同月過誤分, CheckBoxList 通常分, IChohyoShutsuryokujunDiv 出力順) {
         // チェックした際にメッセージが返された際に、該当するコントロールを メッセージとコントロールのペアとしてあらかじめ登録する。
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary(

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link YoboKeikakuJikoSakuseiTankiRiyoNissu}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class YoboKeikakuJikoSakuseiTankiRiyoNissuBuilder {
 

@@ -27,6 +27,7 @@ public class JutakuHihokenshaSearchGaitoshaPanel {
      * 住宅改修費事前申請登録 該当者一覧の情報を表示する。
      *
      * @param panel HihokenshaSearchGaitoshaPanelDiv
+     * @param panel1 JutakuHihokenshaSearchPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<JutakuHihokenshaSearchGaitoshaPanelDiv> onClick_btnHihokenshaSearch(JutakuHihokenshaSearchGaitoshaPanelDiv panel, JutakuHihokenshaSearchPanelDiv panel1) {
@@ -57,7 +58,7 @@ public class JutakuHihokenshaSearchGaitoshaPanel {
 
         List<dgHihokenshaSearchGaitosha_Row> arrayData = new ArrayList<>();
 
-        ///////////////////////////////////////////////////////////////////////////////////////// 
+        /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuHihokenshaSearchData.xml ①
         List<HashMap> ymlData = YamlLoader.FOR_DBC.loadAsList(new RString("JutakuData.yml"));
 

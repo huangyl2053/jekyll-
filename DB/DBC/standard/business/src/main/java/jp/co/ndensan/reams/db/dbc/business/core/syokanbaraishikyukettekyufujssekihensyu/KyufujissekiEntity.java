@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3052ShokanShoteiShikkanShis
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -30,10 +28,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付実績編集用entityクラスです。
+ *
+ * @reamsid_L DBC-1030-210 xicongwang
  */
 public class KyufujissekiEntity {
 
-    private final DbT3038ShokanKihonEntity dbT3038ShokanKihon;
+    private final List<DbT3038ShokanKihonEntity> dbT3038ShokanKihonList;
     private final DbT3034ShokanShinseiEntity dbT3034ShokanShinsei;
     private final DbT3036ShokanHanteiKekkaEntity dbT3036ShokanHanteiKekka;
     private final List<DbT3039ShokanMeisaiEntity> dbT3039ShokanMeisai;
@@ -51,7 +51,7 @@ public class KyufujissekiEntity {
     /**
      * コンストラクタです。
      *
-     * @param dbT3038ShokanKihon dbT3038ShokanKihon
+     * @param dbT3038ShokanKihonList dbT3038ShokanKihonList
      * @param dbT3034ShokanShinsei dbT3034ShokanShinsei
      * @param dbT3036ShokanHanteiKekka dbT3036ShokanHanteiKekka
      * @param dbT3039ShokanMeisai dbT3039ShokanMeisai
@@ -67,7 +67,7 @@ public class KyufujissekiEntity {
      * @param dbT3053ShokanShukei dbT3053ShokanShukei
      */
     public KyufujissekiEntity(
-            DbT3038ShokanKihonEntity dbT3038ShokanKihon,
+            List<DbT3038ShokanKihonEntity> dbT3038ShokanKihonList,
             DbT3034ShokanShinseiEntity dbT3034ShokanShinsei,
             DbT3036ShokanHanteiKekkaEntity dbT3036ShokanHanteiKekka,
             List<DbT3039ShokanMeisaiEntity> dbT3039ShokanMeisai,
@@ -81,7 +81,7 @@ public class KyufujissekiEntity {
             List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> dbT3051ShokanShakaiFukushiHojinKeigengaku,
             List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> dbT3052ShokanShoteiShikkanShisetsuRyoyo,
             List<DbT3053ShokanShukeiEntity> dbT3053ShokanShukei) {
-        this.dbT3038ShokanKihon = dbT3038ShokanKihon;
+        this.dbT3038ShokanKihonList = dbT3038ShokanKihonList;
         this.dbT3034ShokanShinsei = dbT3034ShokanShinsei;
         this.dbT3036ShokanHanteiKekka = dbT3036ShokanHanteiKekka;
         this.dbT3039ShokanMeisai = dbT3039ShokanMeisai;
@@ -99,12 +99,12 @@ public class KyufujissekiEntity {
     }
 
     /**
-     * 償還払請求基本を取得します。
+     * 償還払請求基本Listを取得します。
      *
-     * @return 償還払請求基本
+     * @return 償還払請求基本List
      */
-    public DbT3038ShokanKihonEntity get償還払請求基本() {
-        return dbT3038ShokanKihon;
+    public List<DbT3038ShokanKihonEntity> get償還払請求基本List() {
+        return dbT3038ShokanKihonList;
     }
 
     /**
@@ -252,138 +252,12 @@ public class KyufujissekiEntity {
     }
 
     /**
-     * 入力識別番号を取得します。
-     *
-     * @return 入力識別番号
-     */
-    public RString get入力識別番号() {
-        return dbT3038ShokanKihon.getYoshikiNo();
-    }
-
-    /**
      * 証記載保険者番号を取得します。
      *
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo get証記載保険者番号() {
         return dbT3034ShokanShinsei.getShoKisaiHokenshaNo();
-    }
-
-    /**
-     * 被保険者番号を取得します。
-     *
-     * @return 被保険者番号
-     */
-    public HihokenshaNo get請求基本被保険者番号() {
-        return dbT3038ShokanKihon.getHiHokenshaNo();
-    }
-
-    /**
-     * サービス提供年月を取得します。
-     *
-     * @return サービス提供年月
-     */
-    public FlexibleYearMonth get請求基本サービス提供年月() {
-        return dbT3038ShokanKihon.getServiceTeikyoYM();
-    }
-
-    /**
-     * 事業所番号を取得します。
-     *
-     * @return 事業所番号
-     */
-    public JigyoshaNo get事業所番号() {
-        return dbT3038ShokanKihon.getJigyoshaNo();
-    }
-
-    /**
-     * 開始年月日を取得します。
-     *
-     * @return 開始年月日
-     */
-    public FlexibleDate get開始年月日() {
-        return dbT3038ShokanKihon.getKaishiYMD();
-    }
-
-    /**
-     * 中止年月日を取得します。
-     *
-     * @return 中止年月日
-     */
-    public FlexibleDate get中止年月日() {
-        return dbT3038ShokanKihon.getChushiYMD();
-    }
-
-    /**
-     * 中止理由・入所（院）前の状況コードを取得します。
-     *
-     * @return 中止理由・入所（院）前の状況コード
-     */
-    public RString get中止理由() {
-        return dbT3038ShokanKihon.getChushiRiyuNyushomaeJyokyoCode();
-    }
-
-    /**
-     * 入所（院）年月日を取得します。
-     *
-     * @return 入所（院）年月日
-     */
-    public FlexibleDate get入所院年月日() {
-        return dbT3038ShokanKihon.getNyushoYMD();
-    }
-
-    /**
-     * 退所（院）年月日を取得します。
-     *
-     * @return 退所（院）年月日
-     */
-    public FlexibleDate get退所院年月日() {
-        return dbT3038ShokanKihon.getTaishoYMD();
-    }
-
-    /**
-     * 入所（院）実日数を取得します。
-     *
-     * @return 入所（院）実日数
-     */
-    public int get入所院実日数() {
-        return dbT3038ShokanKihon.getNyushoJitsuNissu();
-    }
-
-    /**
-     * 外泊日数を取得します。
-     *
-     * @return 外泊日数
-     */
-    public int get外泊日数() {
-        return dbT3038ShokanKihon.getGaihakuNissu();
-    }
-
-    /**
-     * 退所（院）後の状態コードを取得します。
-     *
-     * @return 退所（院）後の状態コード
-     */
-    public RString get退所院後の状態コード() {
-        return dbT3038ShokanKihon.getTaishogoJotaiCode();
-    }
-
-    /**
-     * 保険給付率を取得します。
-     *
-     * @return 保険給付率
-     */
-    public HokenKyufuRitsu get保険給付率() {
-        return dbT3038ShokanKihon.getHokenKyufuritsu();
-    }
-
-    /**
-     * 前・保険・サービス単位数を取得します。
-     *
-     * @return 前・保険・サービス単位数
-     */
-    public int get前保険サービス単位数() {
-        return dbT3038ShokanKihon.getServiceTanisu();
     }
 
     /**
@@ -402,15 +276,6 @@ public class KyufujissekiEntity {
      */
     public int get前保険負担額() {
         return dbT3034ShokanShinsei.getRiyoshaFutangaku();
-    }
-
-    /**
-     * 後・保険・サービス単位数を取得します。
-     *
-     * @return 後・保険・サービス単位数
-     */
-    public int get後保険サービス単位数() {
-        return dbT3038ShokanKihon.getServiceTanisu();
     }
 
     /**
@@ -440,12 +305,4 @@ public class KyufujissekiEntity {
         return dbT3036ShokanHanteiKekka.getKetteiYMD();
     }
 
-    /**
-     * 整理番号を取得します。
-     *
-     * @return 整理番号
-     */
-    public RString get整理番号() {
-        return dbT3038ShokanKihon.getSeiriNp();
-    }
 }

@@ -4,10 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain;
 
+import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosain;
+import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosainCollection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.core.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;

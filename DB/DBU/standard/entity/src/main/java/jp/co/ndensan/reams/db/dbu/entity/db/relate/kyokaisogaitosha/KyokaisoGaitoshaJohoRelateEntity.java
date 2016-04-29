@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 境界層該当者一覧情報のエンティティクラスです。
+ *
+ * @reamsid_L DBU-0430-020 linghuhang
  */
 @lombok.Setter
 @lombok.Getter

@@ -5,16 +5,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * panelInput のクラスファイル 
- * 
+ * @reamsid_L DBA-0220-010 dongyabin
  * @author 自動生成
  */
 public class panelInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +30,8 @@ public class panelInputDiv extends Panel {
     private Button btnSave;
     @JsonProperty("btnCancel")
     private Button btnCancel;
+    @JsonProperty("state")
+    private RString state;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -106,6 +109,24 @@ public class panelInputDiv extends Panel {
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel = btnCancel;
+    }
+
+    /*
+     * getstate
+     * @return state
+     */
+    @JsonProperty("state")
+    public RString getState() {
+        return state;
+    }
+
+    /*
+     * setstate
+     * @param state state
+     */
+    @JsonProperty("state")
+    public void setState(RString state) {
+        this.state = state;
     }
 
     // </editor-fold>

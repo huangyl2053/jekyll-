@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.mappers.KyufukanrihyoDataTempTableMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufukanrihyodatatemptable.KyufukanrihyoDataTempTableMapper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishoshain;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -21,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * 高額介護サービス費給付対象者一時テーブルのEntity
  *
+ * @reamsid_L DBC-0980-370 chenaoqi
  */
 @lombok.Setter
 @lombok.Getter
@@ -33,48 +33,46 @@ public class DbTKogakuKyufuTaishoshaDataTempTableEntity
     @TempTableColumnOrder(2)
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @TempTableColumnOrder(3)
-    private HokenshaNo hokenshaNo;
-    @TempTableColumnOrder(4)
     private RString hihokenshaName;
-    @TempTableColumnOrder(5)
+    @TempTableColumnOrder(4)
     private FlexibleDate sakuseiYMD;
-    @TempTableColumnOrder(6)
+    @TempTableColumnOrder(5)
     private RString kokukoRengoukaiNa;
-    @TempTableColumnOrder(7)
+    @TempTableColumnOrder(6)
     private RString no;
-    @TempTableColumnOrder(8)
+    @TempTableColumnOrder(7)
     private HihokenshaNo hihokenshaNo;
-    @TempTableColumnOrder(9)
+    @TempTableColumnOrder(8)
     private RString hiHokenshaSimei;
-    @TempTableColumnOrder(10)
+    @TempTableColumnOrder(9)
     private FlexibleYearMonth serviceTeikyoYM;
-    @TempTableColumnOrder(11)
+    @TempTableColumnOrder(10)
     private JigyoshaNo jigyoshaNo;
-    @TempTableColumnOrder(12)
+    @TempTableColumnOrder(11)
     private RString jigyoshaName;
-    @TempTableColumnOrder(13)
+    @TempTableColumnOrder(12)
     private ServiceShuruiCode serviceShuruiCode;
-    @TempTableColumnOrder(14)
+    @TempTableColumnOrder(13)
     private RString serviceShuruiName;
-    @TempTableColumnOrder(15)
+    @TempTableColumnOrder(14)
     private Decimal serviceHiyoGokeiGaku;
-    @TempTableColumnOrder(16)
+    @TempTableColumnOrder(15)
     private Decimal riyoshaFutanGaku;
-    @TempTableColumnOrder(17)
+    @TempTableColumnOrder(16)
     private RString bikou;
-    @TempTableColumnOrder(18)
+    @TempTableColumnOrder(17)
     private FlexibleDate shikakuSoshitsuYMD;
-    @TempTableColumnOrder(19)
+    @TempTableColumnOrder(18)
     private Decimal serviceHiyoGokeiGakuGokei;
-    @TempTableColumnOrder(20)
+    @TempTableColumnOrder(19)
     private Decimal riyoshaFutanGakuGokei;
-    @TempTableColumnOrder(21)
+    @TempTableColumnOrder(20)
     private Decimal santeiKijunGaku;
-    @TempTableColumnOrder(22)
+    @TempTableColumnOrder(21)
     private Decimal shiharaiSumiKingakuGokei;
-    @TempTableColumnOrder(23)
+    @TempTableColumnOrder(22)
     private Decimal kogakuShikyuGaku;
-    @TempTableColumnOrder(24)
+    @TempTableColumnOrder(23)
     private HihokenshaNo setaiShuyakuNo;
 
 }

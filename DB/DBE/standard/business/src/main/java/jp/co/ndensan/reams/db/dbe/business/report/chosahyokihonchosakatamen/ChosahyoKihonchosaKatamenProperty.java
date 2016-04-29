@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 要介護認定調査票（基本調査）のプロパティです。
+ *
+ * @reamsid_L DBE-0080-020 zuotao
  */
 public class ChosahyoKihonchosaKatamenProperty extends ReportPropertyBase<ChosahyoKihonchosaKatamenReportSource> {
 

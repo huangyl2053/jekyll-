@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 認定調査スケジュール表(調査員)ボディのITEMです。
+ *
+ * @reamsid_L DBE-0020-080 lishengli
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

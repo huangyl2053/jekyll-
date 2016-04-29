@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 編集後仮算定通知書共通情報の前年度情報です。
+ *
+ * @reamsid_L DBB-9110-040 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
@@ -27,6 +29,7 @@ public class PrecedingFiscalYearInformation {
     private Decimal 前年度特徴期別金額03;
     private Decimal 前年度特徴期別金額04;
     private Decimal 前年度特徴期別金額05;
+    private Decimal 前年度特徴期別金額06;
     private Decimal 前年度最終期特徴期別介護保険料;
     private Decimal 前年度最終期普徴期別介護保険料;
 

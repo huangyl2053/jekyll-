@@ -11,6 +11,8 @@ import lombok.Getter;
 
 /**
  * 社会福祉法人等利用者負担軽減対象確認申請書ヘッダのITEMです。
+ *
+ * @reamsid_L DBA-0540-698 zhangguopeng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

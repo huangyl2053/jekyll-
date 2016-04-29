@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 介護保険被保険者証 （A4版）のReportSource
+ * 
+ * @reamsid_L DBU-0490-070  suguangjun
  */
 public class HihokenshashoA4ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

@@ -11,12 +11,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteirirekiichiran.NinteiRireki
 import jp.co.ndensan.reams.db.dbz.definition.param.ninteirirekiichiran.NinteiRirekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNinteirirekiInfo.JukyuNinteirirekiInfoHandler;
-import jp.co.ndensan.reams.db.dbz.service.NinteiRirekiIchiran;
+import jp.co.ndensan.reams.db.dbz.service.core.NinteiRirekiIchiran;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
- *
  * 受給者台帳情報のダイアログのDivControllerです。
+ *
+ * @reamsid_L DBZ-4550-010 zhangzhiming
  */
 public class JukyuNinteirirekiInfo {
 
@@ -26,11 +27,11 @@ public class JukyuNinteirirekiInfo {
      * @param div JukyuNinteirirekiInfoDiv
      * @return 受給者台帳情報div
      */
-    public ResponseData<JukyuNinteirirekiInfoDiv> onLoad(JukyuNinteirirekiInfoDiv div) {
+    public ResponseData<JukyuNinteirirekiInfoDiv> initialize(JukyuNinteirirekiInfoDiv div) {
         NinteiRirekiIchiranParameter parameter = NinteiRirekiIchiranParameter.createParam(new HihokenshaNo(div.getHdHihokenshaNo()));
         List<NinteiRirekiIchiranBusiness> ninteiChosaList
                 = NinteiRirekiIchiran.createInstance().getJyukyuuSyaDaiTyouJyoho(parameter).records();
-        getHandler(div).onLoad(ninteiChosaList);
+        getHandler(div).initialize(ninteiChosaList);
         return ResponseData.of(div).respond();
     }
 

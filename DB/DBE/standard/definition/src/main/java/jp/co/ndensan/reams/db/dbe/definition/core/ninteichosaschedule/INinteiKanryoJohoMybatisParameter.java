@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 認定調査スケジュール登録3クラスパラメータクラス。
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
@@ -135,7 +137,7 @@ public final class INinteiKanryoJohoMybatisParameter {
         boolean メモフラグ = false;
         boolean 対象地区フラグ = false;
         boolean usesSaidaiHyojiKensu = false;
-        if (new RString("1").equals(保険者フ)) {
+        if (!RString.isNullOrEmpty(保険者フ)) {
             保険者フラグ = true;
         }
         if (!RString.isNullOrEmpty(被保険者番号)) {

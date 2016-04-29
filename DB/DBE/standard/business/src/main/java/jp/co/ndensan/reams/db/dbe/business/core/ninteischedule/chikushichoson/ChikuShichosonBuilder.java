@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link ChikuShichoson}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChikuShichosonBuilder {
 
@@ -102,7 +104,7 @@ public class ChikuShichosonBuilder {
      * @return {@link ChikuShichosonBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
-    public ChikuShichosonBuilder setChosaChikuGroupIdentifier(ChosaChikuGroup  調査地区グループマスタ) {
+    public ChikuShichosonBuilder setChosaChikuGroupIdentifier(ChosaChikuGroup 調査地区グループマスタ) {
         if (hasSameIdentifier(調査地区グループマスタ.identifier())) {
             chosaChikuGroup.add(調査地区グループマスタ);
             return this;
@@ -114,6 +116,7 @@ public class ChikuShichosonBuilder {
         return (id.get市町村コード().equals(調査地区グループマスタの識別子.get市町村コード())
                 && id.get調査地区コード().equals(調査地区グループマスタの識別子.get調査地区コード()));
     }
+
     /**
      * {@link ChikuShichoson}のインスタンスを生成します。
      *

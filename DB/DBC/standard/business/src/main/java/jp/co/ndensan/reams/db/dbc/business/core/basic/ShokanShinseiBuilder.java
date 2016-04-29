@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShinsei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShokanShinseiBuilder {
 
@@ -267,7 +270,7 @@ public class ShokanShinseiBuilder {
         entity.setJutakuJushoHenko(住宅住所変更);
         return this;
     }
-    
+
     /**
      * 要介護状態３段階変更を設定します。
      *
@@ -278,7 +281,7 @@ public class ShokanShinseiBuilder {
         entity.setYokaigo3DankaiHenko(要介護状態３段階変更);
         return this;
     }
-    
+
     /**
      * 審査結果を設定します。
      *
@@ -289,7 +292,7 @@ public class ShokanShinseiBuilder {
         entity.setShinsaKekka(審査結果);
         return this;
     }
-    
+
     /**
      * 審査年月日を設定します。
      *
@@ -300,7 +303,7 @@ public class ShokanShinseiBuilder {
         entity.setShinsaYMD(審査年月日);
         return this;
     }
-    
+
     /**
      * 審査方法区分を設定します。
      *
@@ -430,5 +433,170 @@ public class ShokanShinseiBuilder {
      */
     public ShokanShinsei build() {
         return new ShokanShinsei(entity, id);
+    }
+
+    /**
+     * 申請者郵便番号を設定します。
+     *
+     * @param 申請者郵便番号 申請者郵便番号
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set申請者郵便番号(YubinNo 申請者郵便番号) {
+        entity.setShinseishaYubinNo(申請者郵便番号);
+        return this;
+    }
+
+    /**
+     * 申請事業者番号を設定します。
+     *
+     * @param 申請事業者番号 申請事業者番号
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set申請事業者番号(JigyoshaNo 申請事業者番号) {
+        entity.setShinseiJigyoshaNo(申請事業者番号);
+        return this;
+    }
+
+    /**
+     * 理由書作成日を設定します。
+     *
+     * @param 理由書作成日 理由書作成日
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set理由書作成日(FlexibleDate 理由書作成日) {
+        entity.setRiyushoSakuseiYMD(理由書作成日);
+        return this;
+    }
+
+    /**
+     * 理由書作成者を設定します。
+     *
+     * @param 理由書作成者 理由書作成者
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set理由書作成者(RString 理由書作成者) {
+        entity.setRiyushoSakuseishaName(理由書作成者);
+        return this;
+    }
+
+    /**
+     * 理由書作成者カナを設定します。
+     *
+     * @param 理由書作成者カナ 理由書作成者カナ
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set理由書作成者カナ(RString 理由書作成者カナ) {
+        entity.setRiyushoSakuseishaKanaName(理由書作成者カナ);
+        return this;
+    }
+
+    /**
+     * 理由書作成事業者番号を設定します。
+     *
+     * @param 理由書作成事業者番号 理由書作成事業者番号
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set理由書作成事業者番号(JigyoshaNo 理由書作成事業者番号) {
+        entity.setRiyushoSakuseiJigyoshaNo(理由書作成事業者番号);
+        return this;
+    }
+
+    /**
+     * 送付区分を設定します。
+     *
+     * @param 送付区分 送付区分
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set送付区分(RString 送付区分) {
+        entity.setSofuKubun(送付区分);
+        return this;
+    }
+
+    /**
+     * 国保連再送付フラグを設定します。
+     *
+     * @param 国保連再送付フラグ 国保連再送付フラグ
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set国保連再送付フラグ(boolean 国保連再送付フラグ) {
+        entity.setKokuhorenSaisofuFlag(国保連再送付フラグ);
+        return this;
+    }
+
+    /**
+     * 住宅所有者を設定します。
+     *
+     * @param 住宅所有者 住宅所有者
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set住宅所有者(RString 住宅所有者) {
+        entity.setJutakuShoyusha(住宅所有者);
+        return this;
+    }
+
+    /**
+     * 被保険者の関係を設定します。
+     *
+     * @param 被保険者の関係 被保険者の関係
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set被保険者の関係(RString 被保険者の関係) {
+        entity.setHihokenshaKankei(被保険者の関係);
+        return this;
+    }
+
+    /**
+     * 住宅改修申請区分を設定します。
+     *
+     * @param 住宅改修申請区分 住宅改修申請区分
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set住宅改修申請区分(RString 住宅改修申請区分) {
+        entity.setKaishuShinseiKubun(住宅改修申請区分);
+        return this;
+    }
+
+    /**
+     * 住宅改修申請取消事由コードを設定します。
+     *
+     * @param 住宅改修申請取消事由コード 住宅改修申請取消事由コード
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set住宅改修申請取消事由コード(RString 住宅改修申請取消事由コード) {
+        entity.setKaishuShinseiTorikeshijiyuCode(住宅改修申請取消事由コード);
+        return this;
+    }
+
+    /**
+     * 領収年月日を設定します。
+     *
+     * @param 領収年月日 領収年月日
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set領収年月日(FlexibleDate 領収年月日) {
+        entity.setRyoshuYMD(領収年月日);
+        return this;
+    }
+
+    /**
+     * 事前申請サービス提供年月を設定します。
+     *
+     * @param 事前申請サービス提供年月 事前申請サービス提供年月
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set事前申請サービス提供年月(FlexibleYearMonth 事前申請サービス提供年月) {
+        entity.setJizenServiceTeikyoYM(事前申請サービス提供年月);
+        return this;
+    }
+
+    /**
+     * 事前申請整理番号を設定します。
+     *
+     * @param 事前申請整理番号 事前申請整理番号
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set事前申請整理番号(RString 事前申請整理番号) {
+        entity.setJizenSeiriNo(事前申請整理番号);
+        return this;
     }
 }

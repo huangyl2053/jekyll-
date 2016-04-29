@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 地区市町村を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ChikuShichosonManager {
 

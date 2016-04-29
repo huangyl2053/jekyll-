@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 地区市町村を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 xuyannan
  */
 public class ChikuShichoson extends
         ParentModelBase<ChikuShichosonIdentifier, DbT5224ChikuShichosonEntity, ChikuShichoson>

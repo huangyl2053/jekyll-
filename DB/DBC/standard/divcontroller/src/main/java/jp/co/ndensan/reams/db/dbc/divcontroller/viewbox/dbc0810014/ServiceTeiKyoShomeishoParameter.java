@@ -14,6 +14,8 @@ import lombok.Getter;
 
 /**
  * 償還払い状況照会_サービス提供証明書画面のParameter
+ *
+ * @reamsid_L DBC-1010-020 gongliang
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

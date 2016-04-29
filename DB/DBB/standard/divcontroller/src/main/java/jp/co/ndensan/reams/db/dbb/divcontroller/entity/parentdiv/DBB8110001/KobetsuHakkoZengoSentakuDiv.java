@@ -1,23 +1,24 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.tblKobetsuHakkoFukakonkyoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.tblKobetsuHakkoKiwariGakuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KobetsuHakkoZengoSentaku のクラスファイル 
- * 
- * @author 自動生成
+ * KobetsuHakkoZengoSentaku のクラスファイル
+ *
+ * @reamsid_L DBB-0740-010 wangkanglei
  */
 public class KobetsuHakkoZengoSentakuDiv extends Panel {
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,44 +40,76 @@ public class KobetsuHakkoZengoSentakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getddlInjiKouseiMae
+     * @return ddlInjiKouseiMae
+     */
     @JsonProperty("ddlInjiKouseiMae")
     public DropDownList getDdlInjiKouseiMae() {
         return ddlInjiKouseiMae;
     }
 
+    /*
+     * setddlInjiKouseiMae
+     * @param ddlInjiKouseiMae ddlInjiKouseiMae
+     */
     @JsonProperty("ddlInjiKouseiMae")
     public void setDdlInjiKouseiMae(DropDownList ddlInjiKouseiMae) {
-        this.ddlInjiKouseiMae=ddlInjiKouseiMae;
+        this.ddlInjiKouseiMae = ddlInjiKouseiMae;
     }
 
+    /*
+     * getddlInjiKouseiAto
+     * @return ddlInjiKouseiAto
+     */
     @JsonProperty("ddlInjiKouseiAto")
     public DropDownList getDdlInjiKouseiAto() {
         return ddlInjiKouseiAto;
     }
 
+    /*
+     * setddlInjiKouseiAto
+     * @param ddlInjiKouseiAto ddlInjiKouseiAto
+     */
     @JsonProperty("ddlInjiKouseiAto")
     public void setDdlInjiKouseiAto(DropDownList ddlInjiKouseiAto) {
-        this.ddlInjiKouseiAto=ddlInjiKouseiAto;
+        this.ddlInjiKouseiAto = ddlInjiKouseiAto;
     }
 
+    /*
+     * gettblKobetsuHakkoFukakonkyo
+     * @return tblKobetsuHakkoFukakonkyo
+     */
     @JsonProperty("tblKobetsuHakkoFukakonkyo")
     public tblKobetsuHakkoFukakonkyoDiv getTblKobetsuHakkoFukakonkyo() {
         return tblKobetsuHakkoFukakonkyo;
     }
 
+    /*
+     * settblKobetsuHakkoFukakonkyo
+     * @param tblKobetsuHakkoFukakonkyo tblKobetsuHakkoFukakonkyo
+     */
     @JsonProperty("tblKobetsuHakkoFukakonkyo")
     public void setTblKobetsuHakkoFukakonkyo(tblKobetsuHakkoFukakonkyoDiv tblKobetsuHakkoFukakonkyo) {
-        this.tblKobetsuHakkoFukakonkyo=tblKobetsuHakkoFukakonkyo;
+        this.tblKobetsuHakkoFukakonkyo = tblKobetsuHakkoFukakonkyo;
     }
 
+    /*
+     * gettblKobetsuHakkoKiwariGaku
+     * @return tblKobetsuHakkoKiwariGaku
+     */
     @JsonProperty("tblKobetsuHakkoKiwariGaku")
     public tblKobetsuHakkoKiwariGakuDiv getTblKobetsuHakkoKiwariGaku() {
         return tblKobetsuHakkoKiwariGaku;
     }
 
+    /*
+     * settblKobetsuHakkoKiwariGaku
+     * @param tblKobetsuHakkoKiwariGaku tblKobetsuHakkoKiwariGaku
+     */
     @JsonProperty("tblKobetsuHakkoKiwariGaku")
     public void setTblKobetsuHakkoKiwariGaku(tblKobetsuHakkoKiwariGakuDiv tblKobetsuHakkoKiwariGaku) {
-        this.tblKobetsuHakkoKiwariGaku=tblKobetsuHakkoKiwariGaku;
+        this.tblKobetsuHakkoKiwariGaku = tblKobetsuHakkoKiwariGaku;
     }
 
     /*
@@ -822,4 +855,5 @@ public class KobetsuHakkoZengoSentakuDiv extends Panel {
         return this.getTblKobetsuHakkoKiwariGaku().getLblZengoFuchoAtoKei();
     }
 
+    // </editor-fold>
 }

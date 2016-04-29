@@ -10,8 +10,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * 住宅改修費改修住所重複判定のMyBatis用パラメータクラスです
+ *
+ * @reamsid_L DBC-0992-130 yangchenbing
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class JutakuKaishuJyusyoChofukuHannteiMapperParameter {
 
     private final HihokenshaNo hiHokenshaNo;

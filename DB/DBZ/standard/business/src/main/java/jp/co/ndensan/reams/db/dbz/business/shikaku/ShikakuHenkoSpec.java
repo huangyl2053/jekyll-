@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.OrderValidator;
 import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  *
@@ -81,7 +82,11 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     if (次履歴 == null || nothing.get変更日().isEmpty()) {
                         return false;
                     }
-                    return 次履歴.getShikakuHenkoYMD().isBefore(nothing.get変更日());
+                    FlexibleDate shikakuHenkoYMD = 次履歴.getShikakuHenkoYMD();
+                    if (shikakuHenkoYMD == null) {
+                        return false;
+                    }
+                    return shikakuHenkoYMD.isBefore(nothing.get変更日());
                 }
             },
     /**
@@ -97,7 +102,11 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                     if (前履歴 == null || nothing.get変更日().isEmpty()) {
                         return false;
                     }
-                    return !前履歴.getShikakuHenkoYMD().isBefore(nothing.get変更日());
+                    FlexibleDate shikakuHenkoYMD = 前履歴.getShikakuHenkoYMD();
+                    if (shikakuHenkoYMD == null) {
+                        return false;
+                    }
+                    return !shikakuHenkoYMD.isBefore(nothing.get変更日());
                 }
             },
     /**
@@ -112,7 +121,10 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
                         return false;
                     }
                     for (DbT1001HihokenshaDaichoEntity model : list) {
-                        if (model.getShikakuShutokuYMD().isEmpty() || model.getShikakuSoshitsuYMD().isEmpty()) {
+                        FlexibleDate shikakuShutokuYMD = model.getShikakuShutokuYMD();
+                        FlexibleDate shikakuSoshitsuYMD = model.getShikakuSoshitsuYMD();
+                        if ((shikakuShutokuYMD == null || shikakuShutokuYMD.isEmpty())
+                        || (shikakuSoshitsuYMD == null || shikakuSoshitsuYMD.isEmpty())) {
                             return false;
                         }
                         if (OrderValidator.from(model.getShikakuShutokuYMD())

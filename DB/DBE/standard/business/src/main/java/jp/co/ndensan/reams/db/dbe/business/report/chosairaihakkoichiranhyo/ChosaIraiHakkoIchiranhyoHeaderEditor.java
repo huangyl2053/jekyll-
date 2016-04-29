@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 認定調査依頼発行一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 class ChosaIraiHakkoIchiranhyoHeaderEditor implements IChosaIraiHakkoIchiranhyoEditor {
 

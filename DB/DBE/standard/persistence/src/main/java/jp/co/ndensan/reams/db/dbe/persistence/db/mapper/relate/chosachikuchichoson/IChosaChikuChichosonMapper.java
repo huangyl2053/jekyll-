@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikuchichoson.ChosaChik
 
 /**
  * 認定調査スケジュール登録7のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public interface IChosaChikuChichosonMapper {
 

@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * PtnTotal のクラスファイル 
- * 
- * @author 自動生成
+ * PtnTotal のクラスファイル
+ *
+ * @reamsid_L DBC-2120-010 panhe
  */
 public class PtnTotalDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -78,17 +80,17 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRdoBango(RadioButton rdoBango) {
+    public void setRdoBango(RadioButton rdoBango) {
         this.getPnlCondition().setRdoBango(rdoBango);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtJigyosyakeyakuNo() {
+    public TextBoxCode getTxtJigyosyakeyakuNo() {
         return this.getPnlCondition().getTxtJigyosyakeyakuNo();
     }
 
     @JsonIgnore
-    public void  setTxtJigyosyakeyakuNo(TextBoxNum txtJigyosyakeyakuNo) {
+    public void setTxtJigyosyakeyakuNo(TextBoxCode txtJigyosyakeyakuNo) {
         this.getPnlCondition().setTxtJigyosyakeyakuNo(txtJigyosyakeyakuNo);
     }
 
@@ -98,7 +100,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRdoMeisyo(RadioButton rdoMeisyo) {
+    public void setRdoMeisyo(RadioButton rdoMeisyo) {
         this.getPnlCondition().setRdoMeisyo(rdoMeisyo);
     }
 
@@ -108,7 +110,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRdoJyusyo(RadioButton rdoJyusyo) {
+    public void setRdoJyusyo(RadioButton rdoJyusyo) {
         this.getPnlCondition().setRdoJyusyo(rdoJyusyo);
     }
 
@@ -118,7 +120,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMeisyoKana(TextBoxKana txtMeisyoKana) {
+    public void setTxtMeisyoKana(TextBoxKana txtMeisyoKana) {
         this.getPnlCondition().setTxtMeisyoKana(txtMeisyoKana);
     }
 
@@ -128,7 +130,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkMeisyoKana(CheckBoxList chkMeisyoKana) {
+    public void setChkMeisyoKana(CheckBoxList chkMeisyoKana) {
         this.getPnlCondition().setChkMeisyoKana(chkMeisyoKana);
     }
 
@@ -138,7 +140,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtYubin(TextBoxYubinNo txtYubin) {
+    public void setTxtYubin(TextBoxYubinNo txtYubin) {
         this.getPnlCondition().setTxtYubin(txtYubin);
     }
 
@@ -148,7 +150,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMeisyoKanji(TextBox txtMeisyoKanji) {
+    public void setTxtMeisyoKanji(TextBox txtMeisyoKanji) {
         this.getPnlCondition().setTxtMeisyoKanji(txtMeisyoKanji);
     }
 
@@ -158,7 +160,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkMeisyoKanji(CheckBoxList chkMeisyoKanji) {
+    public void setChkMeisyoKanji(CheckBoxList chkMeisyoKanji) {
         this.getPnlCondition().setChkMeisyoKanji(chkMeisyoKanji);
     }
 
@@ -168,7 +170,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJyusyoKanji(TextBox txtJyusyoKanji) {
+    public void setTxtJyusyoKanji(TextBox txtJyusyoKanji) {
         this.getPnlCondition().setTxtJyusyoKanji(txtJyusyoKanji);
     }
 
@@ -178,7 +180,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkJyusyoKanji(CheckBoxList chkJyusyoKanji) {
+    public void setChkJyusyoKanji(CheckBoxList chkJyusyoKanji) {
         this.getPnlCondition().setChkJyusyoKanji(chkJyusyoKanji);
     }
 
@@ -188,7 +190,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKeiyakuSyurui(DropDownList ddlKeiyakuSyurui) {
+    public void setDdlKeiyakuSyurui(DropDownList ddlKeiyakuSyurui) {
         this.getPnlCondition().setDdlKeiyakuSyurui(ddlKeiyakuSyurui);
     }
 
@@ -198,7 +200,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getPnlCondition().setTxtMaxCount(txtMaxCount);
     }
 
@@ -208,7 +210,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getPnlCondition().setBtnClear(btnClear);
     }
 
@@ -218,7 +220,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSearch(Button btnSearch) {
+    public void setBtnSearch(Button btnSearch) {
         this.getPnlCondition().setBtnSearch(btnSearch);
     }
 
@@ -228,7 +230,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgKeiyakuJigyosya(DataGrid<dgKeiyakuJigyosya_Row> dgKeiyakuJigyosya) {
+    public void setDgKeiyakuJigyosya(DataGrid<dgKeiyakuJigyosya_Row> dgKeiyakuJigyosya) {
         this.getPnlData().setDgKeiyakuJigyosya(dgKeiyakuJigyosya);
     }
 
@@ -238,7 +240,7 @@ public class PtnTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSearchAgain(Button btnSearchAgain) {
+    public void setBtnSearchAgain(Button btnSearchAgain) {
         this.getPnlData().setBtnSearchAgain(btnSearchAgain);
     }
 

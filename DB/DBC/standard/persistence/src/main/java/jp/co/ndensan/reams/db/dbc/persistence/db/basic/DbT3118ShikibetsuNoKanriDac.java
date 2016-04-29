@@ -6,9 +6,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsubangokubun.ShikibetsubangoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.hyoujiJun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.kyufuBunruiKubun;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.kyufujissekiKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.shikibetsuNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.shikibetsuNoKubon;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.tekiyoKaishiYM;
@@ -34,11 +38,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 基準収入額適用管理のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuNoKanriEntity> {
 
     private static final int SHIKIBETSUNO_START = 1;
     private static final int SHIKIBETSUNO_END = 3;
+    private static final RString 定数_1 = new RString("1");
+    private static final RString 定数_2 = new RString("2");
+    private static final RString 定数_3 = new RString("3");
     private static final RString MSG_NAME_SHIKIBETSUNO = new RString("識別番号");
     private static final RString MSG_NAME_SERVICETEIKYOYM = new RString("サービス提供年月");
 
@@ -135,7 +144,7 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
      */
     public DbT3118ShikibetsuNoKanriEntity select識別番号管理(RString 識別番号, FlexibleYearMonth サービス提供年月)
             throws NullPointerException {
-        requireNonNull(識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("識別番号"));
+        requireNonNull(識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SHIKIBETSUNO.toString()));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SERVICETEIKYOYM.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -165,9 +174,11 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
         return accessor.select().
                 table(DbT3118ShikibetsuNoKanri.class).
                 where(and(
-                                not(eq(substr(shikibetsuNo, SHIKIBETSUNO_START, SHIKIBETSUNO_END), "21C")),
-                                not(eq(substr(shikibetsuNo, SHIKIBETSUNO_START, SHIKIBETSUNO_END), "21D")),
-                                eq(shikibetsuNoKubon, "2"),
+                                not(eq(substr(shikibetsuNo, SHIKIBETSUNO_START, SHIKIBETSUNO_END),
+                                                NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード())),
+                                not(eq(substr(shikibetsuNo, SHIKIBETSUNO_START, SHIKIBETSUNO_END),
+                                                NyuryokuShikibetsuNoShokan3Keta.住宅改修費.getコード())),
+                                eq(shikibetsuNoKubon, ShikibetsubangoKubun.入力識別番号.getコード()),
                                 leq(tekiyoKaishiYM, サービス提供年月),
                                 leq(サービス提供年月, tekiyoShuryoYM)
                         )).order(by(hyoujiJun, Order.ASC)).toList(DbT3118ShikibetsuNoKanriEntity.class);
@@ -221,6 +232,30 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
                                 leq(tekiyoKaishiYM, サービス提供年月),
                                 leq(サービス提供年月, tekiyoShuryoYM),
                                 eq(shikibetsuNoKubon, ShikibetsuNoKubon.入力識別番号.getコード()))).
+                toList(DbT3118ShikibetsuNoKanriEntity.class);
+    }
+
+    /**
+     * 様式名称とコードを取得する。
+     *
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return List<DbT3118ShikibetsuNoKanriEntity>
+     */
+    public List<DbT3118ShikibetsuNoKanriEntity> select様式名称とコード(FlexibleYearMonth サービス提供年月) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3118ShikibetsuNoKanri.class).
+                where(and(
+                                leq(tekiyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, tekiyoShuryoYM),
+                                eq(shikibetsuNoKubon, 定数_2),
+                                eq(kyufujissekiKubun, 定数_2),
+                                or(
+                                        eq(kyufuBunruiKubun, 定数_1),
+                                        eq(kyufuBunruiKubun, 定数_2),
+                                        eq(kyufuBunruiKubun, 定数_3)))).
                 toList(DbT3118ShikibetsuNoKanriEntity.class);
     }
 }

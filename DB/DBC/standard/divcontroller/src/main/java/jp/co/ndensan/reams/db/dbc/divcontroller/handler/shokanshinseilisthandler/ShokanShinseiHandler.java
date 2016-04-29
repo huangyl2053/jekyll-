@@ -8,17 +8,24 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.shokanshinseilisthandle
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseiichiran.ShokanShinseiIchiran;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.dgShinseiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiList.ShokanShinseiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiList.dgShinseiList_Row;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinseiIchiranManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 償還払申請一覧のHandlerクラスです。
+ *
+ * @reamsid_L DBC-0960-010 hezhenzhen
  *
  */
 public class ShokanShinseiHandler {
@@ -26,16 +33,44 @@ public class ShokanShinseiHandler {
     private final ShokanShinseiListDiv div;
     private static final RString 状態_照会 = new RString("照会");
     private static final RString 状態_申請 = new RString("申請");
+    private static final RString 照会 = new RString("照会");
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div ShokanShinseiListDiv
+     */
     public ShokanShinseiHandler(ShokanShinseiListDiv div) {
         this.div = div;
     }
 
     /**
+     * 償還払申請一覧の初期化です。
+     *
+     * @param 状態 状態
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月From サービス年月From
+     * @param サービス年月To サービス年月To
+     */
+    public void onLoad(RString 状態, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月From, FlexibleYearMonth サービス年月To) {
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.状態, 状態);
+        SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
+        if (照会.equals(状態)) {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListSyokai(被保険者番号, サービス年月From, サービス年月To);
+        } else {
+            shokandhinseiichiran = ShokanShinseiIchiranManager.
+                    createInstance().getShokanShinseiListShinsei(被保険者番号, サービス年月From, サービス年月To);
+        }
+        initialize(状態, shokandhinseiichiran);
+    }
+
+    /**
      * 画面初期化処理します。
      *
-     * @param 状態
-     * @param shokandhinseiichiran
+     * @param 状態 状態
+     * @param shokandhinseiichiran SearchResult<ShokanShinseiIchiran>
      */
     public void initialize(RString 状態, SearchResult<ShokanShinseiIchiran> shokandhinseiichiran) {
 

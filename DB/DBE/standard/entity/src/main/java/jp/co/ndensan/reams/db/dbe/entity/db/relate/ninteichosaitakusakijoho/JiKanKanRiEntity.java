@@ -13,12 +13,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 時間管理の場合で認定調査スケジュール情報戻るのEntity。
+ *
+ * @reamsid_L DBE-0020-050 houtianpeng
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JiKanKanRiEntity {
 
+    private RString ninteiChosaYoteiKaishiTime;
+    private RString ninteiChosaYoteiShuryoTime;
     private RString ninteiChosaItakusakiCode;
     private RString chosainShimei;
     private RString jigyoshaMeisho;

@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIin
 
 /**
  * 介護認定審査会委員情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class ShinsakaiIinJohoEntity implements Cloneable, Serializable {
+public class ShinsakaiIinJohoEntity implements Serializable {
 
     private static final long serialVersionUID = -5586836242413746270L;
 

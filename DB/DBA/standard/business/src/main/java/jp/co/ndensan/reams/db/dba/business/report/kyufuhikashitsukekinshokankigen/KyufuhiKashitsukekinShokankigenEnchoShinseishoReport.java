@@ -13,6 +13,8 @@ import lombok.NonNull;
 /**
  * 介護保険給付費貸付金償還期限延長申請書の帳票作成します。
  *
+ * @reamsid_L DBA-0540-702  lijia
+ * 
  */
 public final class KyufuhiKashitsukekinShokankigenEnchoShinseishoReport extends
         Report<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> {

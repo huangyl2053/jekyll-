@@ -11,15 +11,16 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoninteiatenainfo.KaigoNinteiAtenaInfoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.mapper.kaigoninteiatenainfo.IKaigoNinteiAtenaInfoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigoninteiatenainfo.IKaigoNinteiAtenaInfoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 介護認定宛名情報クラスです。
+ *
+ * @reamsid_L DBE-1300-050 lizhuoxuan
  */
 public class KaigoNinteiAtenaInfoManager {
 

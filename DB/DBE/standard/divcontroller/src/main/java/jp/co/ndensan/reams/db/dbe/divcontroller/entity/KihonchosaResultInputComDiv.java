@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IKihonchosaResultInputComDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KihonchosaResultInputCom のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+
+/**
+ * KihonchosaResultInputCom のクラスファイル
+ *
  * @author 自動生成
  */
 public class KihonchosaResultInputComDiv extends Panel implements IKihonchosaResultInputComDiv {
@@ -22,6 +21,7 @@ public class KihonchosaResultInputComDiv extends Panel implements IKihonchosaRes
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblItemNo")
     private Label lblItemNo;
     @JsonProperty("lblItemName")
@@ -44,7 +44,7 @@ public class KihonchosaResultInputComDiv extends Panel implements IKihonchosaRes
 
     @JsonProperty("lblItemNo")
     public void setLblItemNo(Label lblItemNo) {
-        this.lblItemNo=lblItemNo;
+        this.lblItemNo = lblItemNo;
     }
 
     @JsonProperty("lblItemName")
@@ -54,7 +54,7 @@ public class KihonchosaResultInputComDiv extends Panel implements IKihonchosaRes
 
     @JsonProperty("lblItemName")
     public void setLblItemName(Label lblItemName) {
-        this.lblItemName=lblItemName;
+        this.lblItemName = lblItemName;
     }
 
     @JsonProperty("txtAnswer")
@@ -64,7 +64,7 @@ public class KihonchosaResultInputComDiv extends Panel implements IKihonchosaRes
 
     @JsonProperty("txtAnswer")
     public void setTxtAnswer(TextBox txtAnswer) {
-        this.txtAnswer=txtAnswer;
+        this.txtAnswer = txtAnswer;
     }
 
     @JsonProperty("radChoices")
@@ -74,9 +74,8 @@ public class KihonchosaResultInputComDiv extends Panel implements IKihonchosaRes
 
     @JsonProperty("radChoices")
     public void setRadChoices(RadioButton radChoices) {
-        this.radChoices=radChoices;
+        this.radChoices = radChoices;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

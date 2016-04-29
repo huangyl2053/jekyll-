@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 帳票用Entityリスト作成と作成したdataを帳票に出力する。
+ *
+ * @reamsid_L DBC-0980-420 zhangrui
  */
 public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKetteiKohifutanshaInEntity> {
 
@@ -106,7 +108,7 @@ public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKettei
     protected void afterExecute() {
         KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun business
                 = new KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun();
-        // TODO 並び順 
+        // TODO 並び順
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200051.getReportId(), shutsuryokujunID.getValue());
         RString 改頁 = null == 並び順 ? RString.EMPTY : 並び順.getFormated改頁項目();

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 認定調査情報取得のマッピング用XMLです。 -->
 
-<!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBE-0200-020 zhangguopeng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteichosairaishokai.INinteiChosaIraiShokaiMapper">
 
     <resultMap id="result_NinteiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosairaishokai.NinteiChosaIraiShokaiRelateEntity" autoMapping="true">
@@ -64,7 +64,7 @@
                AND dbT5913."shichosonCode" = dbT7051."shichosonCode"
       WHERE
            dbT5101."hihokenshaNo" = #{hihokenshaNo}
-           AND dbT5101."shoriJotaiKubun" IN ('01','04')
+           AND dbT5101."shoriJotaiKubun" IN (#{tujou}, #{enki})
            ORDER BY
                dbT5101."ninteiShinseiYMD" DESC
     </select>

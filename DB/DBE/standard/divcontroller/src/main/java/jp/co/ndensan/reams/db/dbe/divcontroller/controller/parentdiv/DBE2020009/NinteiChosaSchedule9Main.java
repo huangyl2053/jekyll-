@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査スケジュール登録9のコントローラです。
+ *
+ * @reamsid_L DBE-0020-050 houtianpeng
  */
 public class NinteiChosaSchedule9Main {
 
@@ -174,10 +176,10 @@ public class NinteiChosaSchedule9Main {
                         div.getPrintConditionPanel().getDdlTaishoNinteiChosainShozokuKikan().getSelectedKey(),
                         div.getPrintConditionPanel().getDdlTaishoNinteiChosain().getSelectedKey(),
                         div.getPrintConditionPanel().getRadJokyo().getSelectedKey(),
-                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDFrom() == null ? RString.EMPTY
-                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDFrom().getValue().toString()),
-                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDTo() == null ? RString.EMPTY
-                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDTo().getValue().toString()),
+                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getFromValue() == null ? RString.EMPTY
+                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getFromValue().toString()),
+                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getToValue() == null ? RString.EMPTY
+                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getToValue().toString()),
                         false,
                         false,
                         false,
@@ -188,12 +190,10 @@ public class NinteiChosaSchedule9Main {
 
         return ninteichosaItakusakiJohoFinder.get事務所(JiMuSyoParameter.
                 createParam_common(
-                        // TODO 画面で入力した設定年月の月初日付 QA内部番号846
-                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDFrom() == null ? RString.EMPTY
-                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDFrom().getValue().toString()),
-                        // TODO 画面で入力した設定年月の月末日付 QA内部番号846
-                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDTo() == null ? RString.EMPTY
-                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDTo().getValue().toString()),
+                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getFromValue() == null ? RString.EMPTY
+                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getFromValue().toString()),
+                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getToValue() == null ? RString.EMPTY
+                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getToValue().toString()),
                         div.getPrintConditionPanel().getDdlTaishoChiku().getSelectedKey(),
                         div.getPrintConditionPanel().getDdlTaishoNinteiChosainShozokuKikan().getSelectedKey(),
                         div.getPrintConditionPanel().getDdlTaishoNinteiChosain().getSelectedKey(),
@@ -205,12 +205,10 @@ public class NinteiChosaSchedule9Main {
 
         return ninteichosaItakusakiJohoFinder.get時間管理(JiKanKanRiParameter.
                 createParam_common(
-                        // TODO 画面で入力した設定年月の月初日付 QA内部番号846
-                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDFrom() == null ? RString.EMPTY
-                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDFrom().getValue().toString()),
-                        // TODO 画面で入力した設定年月の月末日付 QA内部番号846
-                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDTo() == null ? RString.EMPTY
-                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMDTo().getValue().toString()),
+                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getFromValue() == null ? RString.EMPTY
+                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getFromValue().toString()),
+                        div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getToValue() == null ? RString.EMPTY
+                        : new RString(div.getPrintConditionPanel().getTxtNinteiChosaYoteiYMD().getToValue().toString()),
                         div.getPrintConditionPanel().getDdlTaishoChiku().getSelectedKey(),
                         div.getPrintConditionPanel().getDdlTaishoNinteiChosainShozokuKikan().getSelectedKey(),
                         div.getPrintConditionPanel().getDdlTaishoNinteiChosain().getSelectedKey(),

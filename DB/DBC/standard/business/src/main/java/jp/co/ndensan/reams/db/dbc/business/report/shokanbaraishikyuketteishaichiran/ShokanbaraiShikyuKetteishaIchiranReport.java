@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 償還払支給決定者一覧表帳票Report
+ *
+ * @reamsid_L DBC-0980-480 sunhui
  */
 public class ShokanbaraiShikyuKetteishaIchiranReport extends Report<ShokanbaraiShikyuKetteishaIchiranSource> {
 

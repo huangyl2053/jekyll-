@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  *
  * 構成市町村選択のクラスです。
+ * @reamsid_L DBE-3000-060 dongyabin
  */
 public class KoseiShiChosonSelector {
     

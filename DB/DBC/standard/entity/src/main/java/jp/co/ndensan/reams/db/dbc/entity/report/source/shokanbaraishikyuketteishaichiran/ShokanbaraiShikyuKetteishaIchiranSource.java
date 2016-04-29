@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 償還払支給決定者一覧表帳票Source
+ *
+ * @reamsid_L DBC-0980-480 sunhui
  */
 public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

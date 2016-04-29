@@ -29,8 +29,8 @@ public class Complete {
     public ResponseData<CompleteDiv> onAciveComplete(CompleteDiv compDiv, KihonJohoDiv kihonDiv) {
 
         RString messageMain = new RString(UrInformationMessages.保存終了.getMessage().evaluate());
-        RString messageTaishoHihoNo = kihonDiv.getCcdKaigoShikakuKihon().get被保険者番号().getColumnValue();
-        RString messageTaishoName = kihonDiv.getCcdKaigoAtenaInfo().getName().getColumnValue();
+        RString messageTaishoHihoNo = kihonDiv.getCcdKaigoShikakuKihon().get被保険者番号();
+        RString messageTaishoName = kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字();
 
         compDiv.getCcdKaigoKanryoMessage().setSuccessMessage(messageMain, messageTaishoHihoNo, messageTaishoName);
 

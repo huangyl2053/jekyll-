@@ -14,11 +14,13 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ShikibetsuCodeTempParameter
+ * ShikibetsuCodeTempのクラス
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShikibetsuCodeTempParameter {
+public final class ShikibetsuCodeTempParameter {
 
     private final ShikibetsuCode 識別コード;
     private final RString 全国住所コード;

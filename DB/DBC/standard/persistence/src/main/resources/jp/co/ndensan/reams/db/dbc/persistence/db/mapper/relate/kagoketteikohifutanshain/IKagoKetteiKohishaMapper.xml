@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-0980-440 zhangrui -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteikohifutanshain.IKagoKetteiKohishaMapper">
 
     <!--過誤決定明細一時テーブルを作成する -->
     <insert id="create過誤決定明細一時テーブル">
-        CREATE TEMP TABLE "TABLE_KAGOKETTEIMEISAIICHIJI"
+        CREATE TEMP TABLE "KaigoKyufuKagoKeteiTsuchishoJohoTemp"
         (
             "kokanShikibetsuNo" character varying(4),
             "recordTypeHeader" character varying(3),

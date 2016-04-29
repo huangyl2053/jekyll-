@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査委託先情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0020-020 lishengli
  */
 @lombok.Getter
 @lombok.Setter

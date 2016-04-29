@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 審査会自動割付のチェッククラスです。
+ *
+ * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public class ValidationHandler {
 

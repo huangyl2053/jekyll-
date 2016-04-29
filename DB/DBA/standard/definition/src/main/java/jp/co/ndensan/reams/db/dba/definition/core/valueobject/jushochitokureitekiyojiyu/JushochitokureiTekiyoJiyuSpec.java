@@ -20,7 +20,7 @@ public enum JushochitokureiTekiyoJiyuSpec implements IPredicate<JushochitokureiT
                  *
                  * コードがNullでない場合にtrueを返す。
                  *
-                 * @param JushochitokureiTekiyoJiyu 住所地特例適用事由
+                 * @param jushochitokureiTekiyoJiyu 住所地特例適用事由
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override
@@ -36,7 +36,7 @@ public enum JushochitokureiTekiyoJiyuSpec implements IPredicate<JushochitokureiT
                  *
                  * 名称がNullでない場合にtrueを返す。
                  *
-                 * @param JushochitokureiTekiyoJiyu 住所地特例適用事由
+                 * @param jushochitokureiTekiyoJiyu 住所地特例適用事由
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override

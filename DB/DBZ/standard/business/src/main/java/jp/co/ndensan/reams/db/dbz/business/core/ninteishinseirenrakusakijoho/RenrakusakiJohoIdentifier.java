@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 
 /**
  * 介護連絡先情報の識別子です。
+ * @reamsid_L DBE-1300-100 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

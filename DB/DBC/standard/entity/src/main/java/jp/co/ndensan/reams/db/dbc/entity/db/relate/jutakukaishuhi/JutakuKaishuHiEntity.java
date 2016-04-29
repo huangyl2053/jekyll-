@@ -12,6 +12,8 @@ import lombok.Setter;
 
 /**
  * 住宅改修費事前申請
+ *
+ * @reamsid_L DBC-0990-080 xicongwang
  */
 @Getter
 @Setter

@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ShujiiIryokikanAndShujiiGuide のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBE-1300-130 xuyannan
  */
 public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIryokikanAndShujiiGuideDiv {
 

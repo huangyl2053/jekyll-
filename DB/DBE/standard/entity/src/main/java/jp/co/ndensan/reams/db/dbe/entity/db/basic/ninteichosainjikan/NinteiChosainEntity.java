@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 認定調査スケジュール情報の取得のEntityクラスです。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 @Getter
 @Setter

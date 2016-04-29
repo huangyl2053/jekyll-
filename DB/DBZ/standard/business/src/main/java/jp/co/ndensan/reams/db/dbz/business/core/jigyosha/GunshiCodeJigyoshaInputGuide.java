@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 郡市コードオブジェクトの項目定義クラスです。
+ *
+ * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class GunshiCodeJigyoshaInputGuide implements Serializable {
 

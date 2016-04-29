@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbu.business.core.koikijushochi;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 広住特者住民コードSQL取得のビジュネスクラス
+ * 広住特者住民コードSQL取得のビジュネスクラスです。
+ *
+ * @reamsid_L DBU-0080-010 wangxiaodong
  */
 public class KoikinaiJutokuTaishoshaSql {
 

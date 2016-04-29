@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -34,8 +32,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定申請情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho> implements Serializable {
+public class NinteiShinseiJoho
+        extends ModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho>
+        implements Serializable {
 
     private static final long serialVersionUID = -6750659012319427853L;
 
@@ -285,7 +287,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return みなし２号等対象フラグ
      */
-    public boolean getみなし２号等対象フラグ() {
+    public boolean isみなし２号等対象フラグ() {
         return entity.getMinashiNigoEtcTaishoFlag();
     }
 
@@ -411,7 +413,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 情報提供への同意有無
      */
-    public boolean get情報提供への同意有無() {
+    public boolean is情報提供への同意有無() {
         return entity.getJohoteikyoDoiFlag();
     }
 
@@ -483,7 +485,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return entity.getShiteiiFlag();
     }
 
@@ -510,7 +512,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 認定延期通知発行しないことに対する同意有無
      */
-    public boolean get認定延期通知発行しないことに対する同意有無() {
+    public boolean is認定延期通知発行しないことに対する同意有無() {
         return entity.getEnkitsuchiNashiDoiFlag();
     }
 
@@ -519,7 +521,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 施設入所の有無
      */
-    public boolean get施設入所の有無() {
+    public boolean is施設入所の有無() {
         return entity.getShisetsuNyushoFlag();
     }
 
@@ -537,7 +539,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 家庭訪問の有無
      */
-    public boolean get家庭訪問の有無() {
+    public boolean is家庭訪問の有無() {
         return entity.getKateiHomonFlag();
     }
 
@@ -690,7 +692,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 審査継続区分
      */
-    public boolean get審査継続区分() {
+    public boolean is審査継続区分() {
         return entity.getShinsaKeizokuFlag();
     }
 
@@ -762,7 +764,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

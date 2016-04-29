@@ -4,19 +4,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -26,18 +21,23 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KaigoShikakuKihon のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0030-012 liangbc
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -313,7 +313,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             認定履歴ボタンを[] enumArray = 認定履歴ボタンを.values();
 
             for (認定履歴ボタンを enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -328,11 +328,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public 認定履歴ボタンを getMode_認定履歴ボタンを() {
-        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 認定履歴ボタンを.class );
+        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 認定履歴ボタンを.class);
     }
 
-    public void setMode_認定履歴ボタンを( 認定履歴ボタンを value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 認定履歴ボタンを.class , value );
+    public void setMode_認定履歴ボタンを(認定履歴ボタンを value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 認定履歴ボタンを.class, value);
     }
 
     public static enum 被保履歴ボタンを implements ICommonChildDivMode {
@@ -350,7 +350,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             被保履歴ボタンを[] enumArray = 被保履歴ボタンを.values();
 
             for (被保履歴ボタンを enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -365,11 +365,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public 被保履歴ボタンを getMode_被保履歴ボタンを() {
-        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 被保履歴ボタンを.class );
+        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 被保履歴ボタンを.class);
     }
 
-    public void setMode_被保履歴ボタンを( 被保履歴ボタンを value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 被保履歴ボタンを.class , value );
+    public void setMode_被保履歴ボタンを(被保履歴ボタンを value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 被保履歴ボタンを.class, value);
     }
 
     // </editor-fold>
@@ -443,6 +443,12 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         }
     }
 
+    @Override
+    @JsonIgnore
+    public RString get被保険者番号() {
+        return getTxtHihokenshaNo().getValue();
+    }
+
     @JsonIgnore
     private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
         if (認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
@@ -464,9 +470,17 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     private void initialization(KaigoAtenaKihonBusiness result) {
         this.txtHihokenshaNo.setValue(result.get被保険者番号().getColumnValue());
         this.txtShutokuYmd.setValue(result.get資格取得年月日());
-        this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).getName());
+        if (!RString.isNullOrEmpty(result.get資格取得事由コード())) {
+            this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).get名称());
+        } else {
+            this.txtShutokuJiyu.setValue(RString.EMPTY);
+        }
         this.txtSoshitsuYmd.setValue(result.get資格喪失年月日());
-        this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).getName());
+        if (!RString.isNullOrEmpty(result.get資格喪失事由コード())) {
+            this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).get名称());
+        } else {
+            this.txtSoshitsuJiyu.setValue(RString.EMPTY);
+        }
         this.txtJutokuKubun.setValue(new RString("1").equals(result.get住所地特例フラグ()) ? new RString("住特") : RString.EMPTY);
         RDate 認定有効期間開始年月日 = result.get認定有効期間開始年月日() == null ? null : new RDate(result.get認定有効期間開始年月日().toString());
         RDate 認定有効期間終了年月日 = result.get認定有効期間終了年月日() == null ? null : new RDate(result.get認定有効期間終了年月日().toString());

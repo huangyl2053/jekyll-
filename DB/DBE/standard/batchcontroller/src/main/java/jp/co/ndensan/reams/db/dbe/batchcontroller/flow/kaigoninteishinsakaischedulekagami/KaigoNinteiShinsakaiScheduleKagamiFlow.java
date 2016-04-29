@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  *
  * 介護認定審査会スケジュール表かがみ_バッチフロークラスです。
+ *
+ * @reamsid_L DBE-0130-100 yaodongsheng
  */
 public class KaigoNinteiShinsakaiScheduleKagamiFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleBatchParamter> {
 

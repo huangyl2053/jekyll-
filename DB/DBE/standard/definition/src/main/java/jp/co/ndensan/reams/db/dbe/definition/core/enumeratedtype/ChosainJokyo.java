@@ -51,6 +51,7 @@ public enum ChosainJokyo {
      *
      * @param code 調査員状況コード
      * @return 引数のコードに対応するChosainJokyo型のenum
+     * @throws NullPointerException Error
      * @throws IllegalArgumentException 実在しない調査員状況コードの場合
      */
     public static ChosainJokyo toValue(RString code) throws NullPointerException, IllegalArgumentException {

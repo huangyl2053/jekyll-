@@ -23,8 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- *
  * ShinsakaiJohoKojinのHandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class ShinsakaiJohoKojinHandler {
 
@@ -52,13 +53,21 @@ public class ShinsakaiJohoKojinHandler {
         if (kaisai.get介護認定審査会開催地区コード() != null && !kaisai.get介護認定審査会開催地区コード().isEmpty()) {
             div.getTxtShinsakaijoChikuCode().setValue(new RString(kaisai.get介護認定審査会開催地区コード().toString()));
         }
-        div.getTxtShinsakaijoChikuMeisho().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                new CodeShubetsu("5001"), kaisai.get介護認定審査会開催地区コード()));
+        if (kaisai.get介護認定審査会開催地区コード() != null && !kaisai.get介護認定審査会開催地区コード().isEmpty()) {
+            div.getTxtShinsakaijoChikuMeisho().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                    new CodeShubetsu("5001"), kaisai.get介護認定審査会開催地区コード()));
+        } else {
+            div.getTxtShinsakaijoChikuMeisho().setValue(RString.EMPTY);
+        }
         if (kaisai.get介護認定審査会開催年月日() != null && !kaisai.get介護認定審査会開催年月日().isEmpty()) {
             div.getTxtShinsaKaishiDay().setValue(kaisai.get介護認定審査会開催年月日().toRDate());
         }
-        div.getTxtShinsaKaishiTime().setValue(new RTime(kaisai.get介護認定審査会開始時刻()));
-        div.getTxtShinsaShuryoTime().setValue(new RTime(kaisai.get介護認定審査会終了時刻()));
+        if (kaisai.get介護認定審査会開始時刻() != null && !kaisai.get介護認定審査会開始時刻().isEmpty()) {
+            div.getTxtShinsaKaishiTime().setValue(new RTime(kaisai.get介護認定審査会開始時刻()));
+        }
+        if (kaisai.get介護認定審査会終了時刻() != null && !kaisai.get介護認定審査会終了時刻().isEmpty()) {
+            div.getTxtShinsaShuryoTime().setValue(new RTime(kaisai.get介護認定審査会終了時刻()));
+        }
         div.getTxtShinsaTime().setValue(new RString(String.valueOf(kaisai.get所要時間合計())));
         div.getDgShinsakaiIin().setDataSource(get審査会委員一覧データグリッド());
         div.getDgHoketsuShinsakai().setDataSource(get補欠審査会委員一覧データグリッド());

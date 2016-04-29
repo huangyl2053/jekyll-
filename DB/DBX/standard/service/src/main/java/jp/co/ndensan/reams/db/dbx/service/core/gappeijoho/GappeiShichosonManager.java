@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併市町村を管理するクラスです。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 public class GappeiShichosonManager {
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 保険料納入通知書（本算定）【コンビニ角公タイプ】CoverのBuilderのインターフェースクラスです。
  *
+ * @reamsid_L DBB-9110-120 huangh
  */
 interface INonyuTsuchishoCVSKakukoCoverBuilder extends IReportBuilder<NonyuTsuchishoCVSKakukoCoverSource> {
 

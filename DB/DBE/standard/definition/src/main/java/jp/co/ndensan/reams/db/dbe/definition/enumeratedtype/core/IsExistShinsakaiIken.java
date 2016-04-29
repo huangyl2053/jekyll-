@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会意見の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistShinsakaiIken {
 
@@ -32,7 +32,7 @@ public enum IsExistShinsakaiIken {
      *
      * @return 審査会意見の有無のコード
      */
-    public boolean getコード() {
+    public boolean has審査会意見() {
         return code;
     }
 

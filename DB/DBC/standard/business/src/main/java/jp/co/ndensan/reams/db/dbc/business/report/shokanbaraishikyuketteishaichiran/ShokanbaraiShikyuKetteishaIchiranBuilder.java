@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 償還払支給決定者一覧表Builderクラスです。
+ *
+ * @reamsid_L DBC-0980-480 sunhui
  */
 public class ShokanbaraiShikyuKetteishaIchiranBuilder implements IShokanbaraiShikyuKetteishaIchiranBuilder {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 /**
  *
  * 資格得喪履歴のParameterクラスです。
+ *
+ * @reamsid_L DBA-0130-010 wanghui
  */
 public final class ShikakuTokusoParameter {
 

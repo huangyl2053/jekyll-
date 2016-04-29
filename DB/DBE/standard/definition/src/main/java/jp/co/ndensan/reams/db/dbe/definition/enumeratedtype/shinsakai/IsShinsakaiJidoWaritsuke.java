@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会自動割付フラグを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsShinsakaiJidoWaritsuke {
 
@@ -32,7 +32,7 @@ public enum IsShinsakaiJidoWaritsuke {
      *
      * @return 審査会自動割付フラグのコード
      */
-    public boolean getコード() {
+    public boolean is審査会自動割付() {
         return code;
     }
 

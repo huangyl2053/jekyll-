@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  *
  * 要介護認定業務進捗状況一覧表リスト一覧表情報です。
+ * @reamsid_L DBE-0210-020 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

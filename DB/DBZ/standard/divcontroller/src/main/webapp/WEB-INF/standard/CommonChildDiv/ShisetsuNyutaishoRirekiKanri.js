@@ -206,9 +206,8 @@ var DBZ;
                     this.controls.txtTaishoDate().displayNone = false;
                     this.controls.txtTaishoDate().readOnly = false;
                     this.controls.btnShisetsuNyutaishoKakutei().displayNone = false;
-                    this.controls.btnShisetsuNyutaishoKakutei().disabled = false;
+
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
-                    this.controls.btnShisetsuNyutaishoTorikeshi().disabled = false;
                 };
 
                 明細表示モード.prototype.削除 = function () {
@@ -325,7 +324,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().State().JigyoshaInputGuideMode();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 

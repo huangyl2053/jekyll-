@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- *
  * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書です。
+ * 
+ * @reamsid_L DBA-0540-700  suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

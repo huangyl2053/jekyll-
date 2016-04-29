@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 月期対応取得_特徴のクラスです。
+ *
+ * @reamsid_L DBB-9020-010 sunhaidi
  */
 public class TokuchoKiUtil {
 

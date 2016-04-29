@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護期別徴収猶予を管理するクラスです。
  */
-public class KibetsuChoshuYuyo extends ModelBase<KibetsuChoshuYuyoIdentifier, DbT2007KibetsuChoshuYuyoEntity, KibetsuChoshuYuyo> implements Serializable {
+public class KibetsuChoshuYuyo
+        extends ModelBase<KibetsuChoshuYuyoIdentifier, DbT2007KibetsuChoshuYuyoEntity, KibetsuChoshuYuyo>
+        implements Serializable {
 
     private final DbT2007KibetsuChoshuYuyoEntity entity;
     private final KibetsuChoshuYuyoIdentifier id;

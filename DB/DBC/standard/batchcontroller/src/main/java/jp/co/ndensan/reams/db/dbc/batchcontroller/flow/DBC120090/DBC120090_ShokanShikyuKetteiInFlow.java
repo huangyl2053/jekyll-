@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC120090;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopy;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.RegistTempSaveProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.TempTableEditProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.TempTableUpdateProcess;
@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払支給決定情報取込のバッチです。
+ *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 public class DBC120090_ShokanShikyuKetteiInFlow extends BatchFlowBase<DBC120090_ShokanShikyuKetteiInBacthParameter> {
 
@@ -40,7 +42,7 @@ public class DBC120090_ShokanShikyuKetteiInFlow extends BatchFlowBase<DBC120090_
         executeStep(CSVFILE_COPY);
 
         HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(CSVFILE_COPY),
-                SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
+                SharedFileCopyProcess.PARAMETER_OUT_FILEPATHLIST);
         fileNameList = new ArrayList<>();
         for (RString filename : filePathList.keySet()) {
             fileNameList.add(filename);
@@ -61,7 +63,7 @@ public class DBC120090_ShokanShikyuKetteiInFlow extends BatchFlowBase<DBC120090_
         parameter.setSharedName(csvFileKey);
         parameter.setIcchijoken(IcchiJoken.前方一致);
 
-        return simpleBatch(SharedFileCopy.class).arguments(parameter).define();
+        return simpleBatch(SharedFileCopyProcess.class).arguments(parameter).define();
     }
 
     @Step(TEMP_SAVE_PROCESS)

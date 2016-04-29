@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-0130-090 duanzhanli -->
 <!--SelectMethod : getHihokenshaShutokuJyoho-->
 <!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedule.IKaigoNinteiShinsakaiScheduleMapper">
@@ -51,4 +52,23 @@
         ORDER BY 
             dbT5501."shinsakaiKaisaiYoteiYMD" 
     </select>  
+    
+    <resultMap id="resultMap_getNenkan" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleRelateEntity" autoMapping="true">
+	   <result property="kaisaiYMD"  column="shinsakaiKaisaiYoteiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="gogitai"  column="gogitaiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+     <select id="get年間" resultMap="resultMap_getNenkan" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleMybitisParamter" fetchSize="500">
+         SELECT
+            "shinsakaiKaisaiYoteiYMD",
+            "gogitaiNo"
+         FROM 
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+         WHERE
+            "shinsakaiKaisaiYoteiYMD" LIKE #{nendo} || '%'
+         ORDER BY
+            "shinsakaiKaisaiYoteiYMD",
+            "gogitaiNo"
+     </select>
 </mapper>

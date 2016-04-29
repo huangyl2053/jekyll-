@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 判定結果情報出力（保険者）のチェッククラスです。
+ *
+ * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class ValidationHandler {
 
@@ -29,6 +31,12 @@ public class ValidationHandler {
         this.nijidiv = nijidiv;
     }
 
+    /**
+     * データ空チェック
+     *
+     * @param validPairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs データ空チェック(ValidationMessageControlPairs validPairs) {
         if (nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未表示,
@@ -37,6 +45,12 @@ public class ValidationHandler {
         return validPairs;
     }
 
+    /**
+     * 未選択チェック
+     *
+     * @param validPairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs 未選択チェック(ValidationMessageControlPairs validPairs) {
         if (nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getSelectedItems().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未選択,

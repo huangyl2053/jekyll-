@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 普徴期別金額情報です。
+ *
+ * @reamsid_L DBB-9110-090 liangbc
  */
 @lombok.Getter
 @lombok.Setter

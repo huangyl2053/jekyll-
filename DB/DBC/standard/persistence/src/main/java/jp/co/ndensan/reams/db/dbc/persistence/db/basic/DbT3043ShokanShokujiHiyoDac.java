@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiy
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyo.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyo.meisaiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyo.renban;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyo.seiriNp;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyo.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyo.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyo.yoshikiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyoEntity;
@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求食事費用のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShokujiHiyoEntity> {
 
@@ -85,7 +87,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
@@ -171,7 +173,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
@@ -214,7 +216,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号)))
@@ -256,7 +258,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).
@@ -297,7 +299,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).getCount();
@@ -344,12 +346,12 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号));
+                    eq(seiriNo, 整理番号));
         } else {
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号),
+                    eq(seiriNo, 整理番号),
                     eq(jigyoshaNo, 事業者番号),
                     eq(yoshikiNo, 様式番号),
                     eq(meisaiNo, 明細番号));

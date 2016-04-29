@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIshiList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * IshiList のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * IshiList のクラスファイル
+ *
  * @author 自動生成
  */
 public class IshiListDiv extends Panel {
@@ -22,6 +19,7 @@ public class IshiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgIshiList")
     private DataGrid<dgIshiList_Row> dgIshiList;
 
@@ -38,7 +36,7 @@ public class IshiListDiv extends Panel {
 
     @JsonProperty("dgIshiList")
     public void setDgIshiList(DataGrid<dgIshiList_Row> dgIshiList) {
-        this.dgIshiList=dgIshiList;
+        this.dgIshiList = dgIshiList;
     }
 
 }

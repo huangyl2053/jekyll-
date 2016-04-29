@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -240,7 +240,7 @@ public class KyufujissekiFukushiYoguHanbaihiBuilder {
     /**
      * 摘要（品目コード）を設定します。
      *
-     * @param 摘要（品目コード） 摘要（品目コード）
+     * @param 摘要_品目コード 摘要（品目コード）
      * @return {@link KyufujissekiFukushiYoguHanbaihiBuilder}
      */
     public KyufujissekiFukushiYoguHanbaihiBuilder set摘要_品目コード(RString 摘要_品目コード) {

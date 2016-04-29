@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -107,8 +107,8 @@ public class FukaManager {
         }
         return 1 == dac.save(介護賦課.toEntity());
     }
-    
-        /**
+
+    /**
      * 引数のキーに一致する介護賦課を取得します。<br />
      * 賦課の任意対象比較に使用します。<br />
      * 調定日時＜＝更生日時、を抽出条件とします。
@@ -116,7 +116,7 @@ public class FukaManager {
      * @param 調定年度 ChoteiNendo
      * @param 賦課年度 FukaNendo
      * @param 被保険者番号 HihokenshaNo
-     * @param 更生日時 RDateTime
+     * @param 調定日時 RDateTime
      * @return Fuka
      */
     @Transaction
@@ -141,8 +141,8 @@ public class FukaManager {
         entity.initializeMd5();
         return Optional.of(new Fuka(entity));
     }
-    
-        /**
+
+    /**
      * 指定の年度の賦課履歴を検索します。
      *
      * @param 賦課年度 賦課年度
@@ -156,8 +156,8 @@ public class FukaManager {
         }
         return new FukaRireki(list);
     }
-    
-     /**
+
+    /**
      * 指定の年度の前年度の賦課履歴を検索します。
      *
      * @param 賦課年度 賦課年度。この前年度を検索対象とする。

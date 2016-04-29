@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 適用除外者台帳情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0412-010 linghuhang
  */
 @lombok.Getter
 @lombok.Setter
@@ -19,6 +21,7 @@ public class TekiyoJogaishaDaichoJohoRelateEntity {
 
     private RString 印刷日時;
     private int ページ目;
+    private RString タイトル;
     private RString 市町村コード;
     private RString 市町村名称;
     private RString 状態;

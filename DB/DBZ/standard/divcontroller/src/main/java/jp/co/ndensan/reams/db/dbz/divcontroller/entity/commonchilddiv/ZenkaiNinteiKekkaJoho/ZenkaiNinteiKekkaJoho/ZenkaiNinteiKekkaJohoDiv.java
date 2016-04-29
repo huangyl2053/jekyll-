@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * ZenkaiNinteiKekkaJoho のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBE-3000-020 dongyabin
  */
 public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekkaJohoDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
@@ -48,6 +48,8 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     private RString hdnDatabaseSubGyomuCode;
     @JsonProperty("hdnGamenKubun")
     private RString hdnGamenKubun;
+    @JsonProperty("hdnZenkaiShinseishoKanriNo")
+    private RString hdnZenkaiShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -197,6 +199,24 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     @JsonProperty("hdnGamenKubun")
     public void setHdnGamenKubun(RString hdnGamenKubun) {
         this.hdnGamenKubun = hdnGamenKubun;
+    }
+
+    /*
+     * gethdnZenkaiShinseishoKanriNo
+     * @return hdnZenkaiShinseishoKanriNo
+     */
+    @JsonProperty("hdnZenkaiShinseishoKanriNo")
+    public RString getHdnZenkaiShinseishoKanriNo() {
+        return hdnZenkaiShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnZenkaiShinseishoKanriNo
+     * @param hdnZenkaiShinseishoKanriNo hdnZenkaiShinseishoKanriNo
+     */
+    @JsonProperty("hdnZenkaiShinseishoKanriNo")
+    public void setHdnZenkaiShinseishoKanriNo(RString hdnZenkaiShinseishoKanriNo) {
+        this.hdnZenkaiShinseishoKanriNo = hdnZenkaiShinseishoKanriNo;
     }
 
     /*

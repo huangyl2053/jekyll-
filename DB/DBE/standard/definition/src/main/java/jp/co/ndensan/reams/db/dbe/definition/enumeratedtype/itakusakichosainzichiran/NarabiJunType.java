@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 並び順を定義する列挙型です。
+ * @reamsid_L DBE-0290-010 dongyabin
  */
 public enum NarabiJunType implements ICodeValueEnumeratedType {
 

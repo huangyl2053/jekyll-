@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 利用者負担割合明細を特定するためのMyBatis用パラメータクラスです。
@@ -18,8 +17,6 @@ public final class RiyoshaFutanWariaiMeisaiMapperParameter {
 // TODO 主キーの数が足りない場合、処理を追加してください。
     private final FlexibleYear 主キー1;
     private final HihokenshaNo 主キー2;
-    private Decimal 主キー3;
-    private Decimal 主キー4;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
@@ -72,26 +69,38 @@ public final class RiyoshaFutanWariaiMeisaiMapperParameter {
         return new RiyoshaFutanWariaiMeisaiMapperParameter(主キー1, HihokenshaNo.EMPTY, true, false);
     }
 
+    /**
+     * 主キー1を取得します。
+     *
+     * @return 主キー1
+     */
     public FlexibleYear get主キー1() {
         return 主キー1;
     }
 
+    /**
+     * 主キー2を取得します。
+     *
+     * @return 主キー2
+     */
     public HihokenshaNo get主キー2() {
         return 主キー2;
     }
 
-    public Decimal get主キー3() {
-        return 主キー3;
-    }
-
-    public Decimal get主キー4() {
-        return 主キー4;
-    }
-
+    /**
+     * uses主キー1を取得します。
+     *
+     * @return uses主キー1
+     */
     public boolean isUses主キー1() {
         return uses主キー1;
     }
 
+    /**
+     * uses主キー2を取得します。
+     *
+     * @return uses主キー2
+     */
     public boolean isUses主キー2() {
         return uses主キー2;
     }

@@ -11,6 +11,8 @@ import lombok.Getter;
 /**
  *
  * 介護保険償還払支給申請書Itemです。
+ *
+ * @reamsid_L DBA-0540-706 yaodongsheng
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

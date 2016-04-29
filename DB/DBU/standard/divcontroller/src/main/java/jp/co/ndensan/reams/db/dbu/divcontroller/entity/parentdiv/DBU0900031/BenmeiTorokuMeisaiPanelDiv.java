@@ -11,26 +11,27 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * BenmeiTorokuMeisaiPanel のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBU-1080-020 lijia
+ *
  */
 public class BenmeiTorokuMeisaiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtdateBenmeiSyoSakuseibi")
-    private TextBoxDate txtdateBenmeiSyoSakuseibi;
+    @JsonProperty("txtBenmeiSyoSakuseibi")
+    private TextBoxDate txtBenmeiSyoSakuseibi;
     @JsonProperty("txtMultiLineBenmeisya")
     private TextBoxMultiLine txtMultiLineBenmeisya;
     @JsonProperty("txtMultiLineShobunNaiyo")
     private TextBoxMultiLine txtMultiLineShobunNaiyo;
     @JsonProperty("txtMultiLineBenmeiNaiyo")
     private TextBoxMultiLine txtMultiLineBenmeiNaiyo;
-    @JsonProperty("txtDateBenmeisyoTeishutubi")
-    private TextBoxDate txtDateBenmeisyoTeishutubi;
+    @JsonProperty("txtBenmeisyoTeishutubi")
+    private TextBoxDate txtBenmeisyoTeishutubi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,21 +40,21 @@ public class BenmeiTorokuMeisaiPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtdateBenmeiSyoSakuseibi
-     * @return txtdateBenmeiSyoSakuseibi
+     * gettxtBenmeiSyoSakuseibi
+     * @return txtBenmeiSyoSakuseibi
      */
-    @JsonProperty("txtdateBenmeiSyoSakuseibi")
-    public TextBoxDate getTxtdateBenmeiSyoSakuseibi() {
-        return txtdateBenmeiSyoSakuseibi;
+    @JsonProperty("txtBenmeiSyoSakuseibi")
+    public TextBoxDate getTxtBenmeiSyoSakuseibi() {
+        return txtBenmeiSyoSakuseibi;
     }
 
     /*
-     * settxtdateBenmeiSyoSakuseibi
-     * @param txtdateBenmeiSyoSakuseibi txtdateBenmeiSyoSakuseibi
+     * settxtBenmeiSyoSakuseibi
+     * @param txtBenmeiSyoSakuseibi txtBenmeiSyoSakuseibi
      */
-    @JsonProperty("txtdateBenmeiSyoSakuseibi")
-    public void setTxtdateBenmeiSyoSakuseibi(TextBoxDate txtdateBenmeiSyoSakuseibi) {
-        this.txtdateBenmeiSyoSakuseibi = txtdateBenmeiSyoSakuseibi;
+    @JsonProperty("txtBenmeiSyoSakuseibi")
+    public void setTxtBenmeiSyoSakuseibi(TextBoxDate txtBenmeiSyoSakuseibi) {
+        this.txtBenmeiSyoSakuseibi = txtBenmeiSyoSakuseibi;
     }
 
     /*
@@ -111,21 +112,21 @@ public class BenmeiTorokuMeisaiPanelDiv extends Panel {
     }
 
     /*
-     * gettxtDateBenmeisyoTeishutubi
-     * @return txtDateBenmeisyoTeishutubi
+     * gettxtBenmeisyoTeishutubi
+     * @return txtBenmeisyoTeishutubi
      */
-    @JsonProperty("txtDateBenmeisyoTeishutubi")
-    public TextBoxDate getTxtDateBenmeisyoTeishutubi() {
-        return txtDateBenmeisyoTeishutubi;
+    @JsonProperty("txtBenmeisyoTeishutubi")
+    public TextBoxDate getTxtBenmeisyoTeishutubi() {
+        return txtBenmeisyoTeishutubi;
     }
 
     /*
-     * settxtDateBenmeisyoTeishutubi
-     * @param txtDateBenmeisyoTeishutubi txtDateBenmeisyoTeishutubi
+     * settxtBenmeisyoTeishutubi
+     * @param txtBenmeisyoTeishutubi txtBenmeisyoTeishutubi
      */
-    @JsonProperty("txtDateBenmeisyoTeishutubi")
-    public void setTxtDateBenmeisyoTeishutubi(TextBoxDate txtDateBenmeisyoTeishutubi) {
-        this.txtDateBenmeisyoTeishutubi = txtDateBenmeisyoTeishutubi;
+    @JsonProperty("txtBenmeisyoTeishutubi")
+    public void setTxtBenmeisyoTeishutubi(TextBoxDate txtBenmeisyoTeishutubi) {
+        this.txtBenmeisyoTeishutubi = txtBenmeisyoTeishutubi;
     }
 
     // </editor-fold>

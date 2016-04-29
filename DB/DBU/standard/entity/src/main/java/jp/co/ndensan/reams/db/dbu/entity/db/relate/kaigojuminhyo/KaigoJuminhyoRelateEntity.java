@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 
 /**
  * 構成介護住民票個別事項連携情報RelateEntityクラスです。
+ * 
+ * @reamsid_L DBU-0350-020  lijia
+ * 
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

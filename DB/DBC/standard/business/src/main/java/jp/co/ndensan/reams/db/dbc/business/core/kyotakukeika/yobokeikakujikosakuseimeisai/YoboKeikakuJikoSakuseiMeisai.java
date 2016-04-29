@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 予防給付計画自己作成明細を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class YoboKeikakuJikoSakuseiMeisai
         extends ParentModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011YoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai>
@@ -42,7 +44,7 @@ public class YoboKeikakuJikoSakuseiMeisai
     private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
     private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
     private final Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei;
-    private final Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissu;
+    private final Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboJikoSakuseiTankiRiyoNissu;
 
     /**
      * コンストラクタです。<br/>
@@ -88,7 +90,7 @@ public class YoboKeikakuJikoSakuseiMeisai
                 サービス項目コード
         );
         this.yoboKeikakuJikoSakuseiGokei = Models.create(new ArrayList<YoboKeikakuJikoSakuseiGokei>());
-        this.yoboKeikakuJikoSakuseiTankiRiyoNissu = Models.create(new ArrayList<YoboKeikakuJikoSakuseiTankiRiyoNissu>());
+        this.yoboJikoSakuseiTankiRiyoNissu = Models.create(new ArrayList<YoboKeikakuJikoSakuseiTankiRiyoNissu>());
     }
 
     /**
@@ -108,17 +110,17 @@ public class YoboKeikakuJikoSakuseiMeisai
                 entity.get予防給付計画自己作成明細Entity().getServiceTeikyoJigyoshaNo(),
                 entity.get予防給付計画自己作成明細Entity().getServiceShuruiCode(),
                 entity.get予防給付計画自己作成明細Entity().getServiceKomokuCode());
-        List<YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokeiList = new ArrayList<>();
+        List<YoboKeikakuJikoSakuseiGokei> yoboJikoSakuseiGokeiList = new ArrayList<>();
         for (DbT3012YoboKeikakuJikoSakuseiGokeiEntity gokeiEntity : entity.get予防給付計画自己作成合計Entity()) {
-            yoboKeikakuJikoSakuseiGokeiList.add(new YoboKeikakuJikoSakuseiGokei(gokeiEntity));
+            yoboJikoSakuseiGokeiList.add(new YoboKeikakuJikoSakuseiGokei(gokeiEntity));
         }
-        this.yoboKeikakuJikoSakuseiGokei = Models.create(yoboKeikakuJikoSakuseiGokeiList);
+        this.yoboKeikakuJikoSakuseiGokei = Models.create(yoboJikoSakuseiGokeiList);
 
-        List<YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissuList = new ArrayList<>();
+        List<YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboSakuseiTankiRiyoNissuList = new ArrayList<>();
         for (DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity riyoNissuEntity : entity.get予防給付計画自己作成短期利用日数Entity()) {
-            yoboKeikakuJikoSakuseiTankiRiyoNissuList.add(new YoboKeikakuJikoSakuseiTankiRiyoNissu(riyoNissuEntity));
+            yoboSakuseiTankiRiyoNissuList.add(new YoboKeikakuJikoSakuseiTankiRiyoNissu(riyoNissuEntity));
         }
-        this.yoboKeikakuJikoSakuseiTankiRiyoNissu = Models.create(yoboKeikakuJikoSakuseiTankiRiyoNissuList);
+        this.yoboJikoSakuseiTankiRiyoNissu = Models.create(yoboSakuseiTankiRiyoNissuList);
     }
 
     /**
@@ -131,12 +133,12 @@ public class YoboKeikakuJikoSakuseiMeisai
             DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity,
             YoboKeikakuJikoSakuseiMeisaiIdentifier id,
             Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei,
-            Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissu
+            Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboJikoSakuseiTankiRiyoNissu
     ) {
         this.entity = entity;
         this.id = id;
         this.yoboKeikakuJikoSakuseiGokei = yoboKeikakuJikoSakuseiGokei;
-        this.yoboKeikakuJikoSakuseiTankiRiyoNissu = yoboKeikakuJikoSakuseiTankiRiyoNissu;
+        this.yoboJikoSakuseiTankiRiyoNissu = yoboJikoSakuseiTankiRiyoNissu;
     }
 
     /**
@@ -337,12 +339,12 @@ public class YoboKeikakuJikoSakuseiMeisai
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new YoboKeikakuJikoSakuseiMeisai(
-                deletedEntity, id, yoboKeikakuJikoSakuseiGokei.deleted(), yoboKeikakuJikoSakuseiTankiRiyoNissu.deleted());
+                deletedEntity, id, yoboKeikakuJikoSakuseiGokei.deleted(), yoboJikoSakuseiTankiRiyoNissu.deleted());
     }
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity() || yoboKeikakuJikoSakuseiGokei.hasAnyChanged() || yoboKeikakuJikoSakuseiTankiRiyoNissu.hasAnyChanged();
+        return hasChangedEntity() || yoboKeikakuJikoSakuseiGokei.hasAnyChanged() || yoboJikoSakuseiTankiRiyoNissu.hasAnyChanged();
     }
 
     /**
@@ -357,7 +359,7 @@ public class YoboKeikakuJikoSakuseiMeisai
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new YoboKeikakuJikoSakuseiMeisai(
-                modifiedEntity, id, yoboKeikakuJikoSakuseiGokei, yoboKeikakuJikoSakuseiTankiRiyoNissu);
+                modifiedEntity, id, yoboKeikakuJikoSakuseiGokei, yoboJikoSakuseiTankiRiyoNissu);
     }
 
     /**
@@ -392,8 +394,8 @@ public class YoboKeikakuJikoSakuseiMeisai
      * @throws IllegalStateException 指定の識別子に該当する予防給付計画自己作成短期利用日数がない場合
      */
     public YoboKeikakuJikoSakuseiTankiRiyoNissu getYoboKeikakuJikoSakuseiTankiRiyoNissu(YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier id) {
-        if (yoboKeikakuJikoSakuseiTankiRiyoNissu.contains(id)) {
-            return yoboKeikakuJikoSakuseiTankiRiyoNissu.clone().get(id);
+        if (yoboJikoSakuseiTankiRiyoNissu.contains(id)) {
+            return yoboJikoSakuseiTankiRiyoNissu.clone().get(id);
         }
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
@@ -404,7 +406,7 @@ public class YoboKeikakuJikoSakuseiMeisai
      * @return 予防給付計画自己作成短期利用日数リスト
      */
     public List<YoboKeikakuJikoSakuseiTankiRiyoNissu> getYoboKeikakuJikoSakuseiTankiRiyoNissuList() {
-        return new ArrayList<>(yoboKeikakuJikoSakuseiTankiRiyoNissu.values());
+        return new ArrayList<>(yoboJikoSakuseiTankiRiyoNissu.values());
     }
 
     /**
@@ -413,7 +415,7 @@ public class YoboKeikakuJikoSakuseiMeisai
      * @return {@link YoboKeikakuJikoSakuseiMeisai}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, yoboKeikakuJikoSakuseiGokei, yoboKeikakuJikoSakuseiTankiRiyoNissu);
+        return new _SerializationProxy(entity, id, yoboKeikakuJikoSakuseiGokei, yoboJikoSakuseiTankiRiyoNissu);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -422,23 +424,24 @@ public class YoboKeikakuJikoSakuseiMeisai
         private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
         private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
         private final Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei;
-        private final Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissu;
+        private final Models<
+                YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboJikoSakuseiTankiRiyoNissu;
 
         private _SerializationProxy(
                 DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity,
                 YoboKeikakuJikoSakuseiMeisaiIdentifier id,
                 Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei,
-                Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissu
+                Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboSakuseiTankiRiyoNissu
         ) {
             this.entity = entity;
             this.id = id;
             this.yoboKeikakuJikoSakuseiGokei = yoboKeikakuJikoSakuseiGokei;
-            this.yoboKeikakuJikoSakuseiTankiRiyoNissu = yoboKeikakuJikoSakuseiTankiRiyoNissu;
+            this.yoboJikoSakuseiTankiRiyoNissu = yoboSakuseiTankiRiyoNissu;
         }
 
         private Object readResolve() {
             return new YoboKeikakuJikoSakuseiMeisai(this.entity,
-                    this.id, this.yoboKeikakuJikoSakuseiGokei, this.yoboKeikakuJikoSakuseiTankiRiyoNissu);
+                    this.id, this.yoboKeikakuJikoSakuseiGokei, this.yoboJikoSakuseiTankiRiyoNissu);
         }
     }
 
@@ -449,7 +452,7 @@ public class YoboKeikakuJikoSakuseiMeisai
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
     public YoboKeikakuJikoSakuseiMeisaiBuilder createBuilderForEdit() {
-        return new YoboKeikakuJikoSakuseiMeisaiBuilder(entity, id, yoboKeikakuJikoSakuseiGokei, yoboKeikakuJikoSakuseiTankiRiyoNissu);
+        return new YoboKeikakuJikoSakuseiMeisaiBuilder(entity, id, yoboKeikakuJikoSakuseiGokei, yoboJikoSakuseiTankiRiyoNissu);
     }
 
     @Override

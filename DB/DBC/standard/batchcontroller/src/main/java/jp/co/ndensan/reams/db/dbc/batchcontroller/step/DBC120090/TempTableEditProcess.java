@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * @reamsid_L DBC-0980-330 gongliang
  */
 public class TempTableEditProcess extends BatchProcessBase<ShokanBaraiShikyuKetteiJohoItijiEntity> {
 

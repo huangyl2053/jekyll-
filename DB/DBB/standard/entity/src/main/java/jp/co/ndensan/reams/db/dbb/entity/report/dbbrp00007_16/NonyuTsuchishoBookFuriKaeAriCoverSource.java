@@ -1,10 +1,14 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_16;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼なし）通知書 NonyuTsuchishoBookFuriKaeAriCoverSource
+ *
+ * @reamsid_L DBB-9110-160 liangbc
+ */
 public class NonyuTsuchishoBookFuriKaeAriCoverSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
@@ -18,18 +22,18 @@ public class NonyuTsuchishoBookFuriKaeAriCoverSource implements IReportSource {
     public RString titleNendo;
     @ReportItem(name = "titleNendoBun", length = 9, order = 5)
     public RString titleNendoBun;
-    @ReportItem(name = "HyojicodeName1", order = 6)
-    public RString HyojicodeName1;
-    @ReportItem(name = "HyojicodeName2", order = 7)
-    public RString HyojicodeName2;
-    @ReportItem(name = "HyojicodeName3", order = 8)
-    public RString HyojicodeName3;
-    @ReportItem(name = "Hyojicode1", length = 11, order = 9)
-    public RString Hyojicode1;
-    @ReportItem(name = "Hyojicode2", length = 9, order = 10)
-    public RString Hyojicode2;
-    @ReportItem(name = "Hyojicode3", length = 9, order = 11)
-    public RString Hyojicode3;
+    @ReportItem(name = "hyojicodeName1", order = 6)
+    public RString hyojicodeName1;
+    @ReportItem(name = "hyojicodeName2", order = 7)
+    public RString hyojicodeName2;
+    @ReportItem(name = "hyojicodeName3", order = 8)
+    public RString hyojicodeName3;
+    @ReportItem(name = "hyojicode1", length = 11, order = 9)
+    public RString hyojicode1;
+    @ReportItem(name = "hyojicode2", length = 9, order = 10)
+    public RString hyojicode2;
+    @ReportItem(name = "hyojicode3", length = 9, order = 11)
+    public RString hyojicode3;
     @ReportItem(name = "keisanMeisaishoKi1", length = 2, order = 12)
     public RString keisanMeisaishoKi1;
     @ReportItem(name = "keisanMeisaishoNokigenKaishi1", length = 11, order = 13)

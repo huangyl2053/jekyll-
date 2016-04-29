@@ -3,26 +3,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Mar 01 17:38:32 CST 2016 
+ * Wed Apr 20 17:05:34 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * dgMishinsaShikyuShinsei_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgMishinsaShikyuShinsei_Row のクラスファイル
+ *
+ * @reamsid_L DBC-0991-030 surun
  */
-
 public class dgMishinsaShikyuShinsei_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private TextBoxDate txtShikyuShinseiDate;
     private TextBoxDate txtTeikyoYM;
@@ -37,6 +33,7 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
     private Boolean txt3DankaiReset;
     private RString txtShinsaResult;
     private TextBoxCode txtSeiriNo;
+    private RString txtSikibetsuCode;
 
     public dgMishinsaShikyuShinsei_Row() {
         super();
@@ -53,6 +50,7 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
         this.txt3DankaiReset = false;
         this.txtShinsaResult = RString.EMPTY;
         this.txtSeiriNo = new TextBoxCode();
+        this.txtSikibetsuCode = RString.EMPTY;
         this.setOriginalData("txtShikyuShinseiDate", txtShikyuShinseiDate);
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -66,9 +64,10 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
         this.setOriginalData("txt3DankaiReset", txt3DankaiReset);
         this.setOriginalData("txtShinsaResult", txtShinsaResult);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
+        this.setOriginalData("txtSikibetsuCode", txtSikibetsuCode);
     }
 
-    public dgMishinsaShikyuShinsei_Row(TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTeikyoYM, RString txtHihoNo, RString txtShokisaiHokenshaNo, RString txtHihokenshaName, RString txtHokenTaishoHiyogaku, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotalAmount, Boolean txtTenkyoReset, Boolean txt3DankaiReset, RString txtShinsaResult, TextBoxCode txtSeiriNo) {
+    public dgMishinsaShikyuShinsei_Row(TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTeikyoYM, RString txtHihoNo, RString txtShokisaiHokenshaNo, RString txtHihokenshaName, RString txtHokenTaishoHiyogaku, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotalAmount, Boolean txtTenkyoReset, Boolean txt3DankaiReset, RString txtShinsaResult, TextBoxCode txtSeiriNo, RString txtSikibetsuCode) {
         super();
         this.setOriginalData("txtShikyuShinseiDate", txtShikyuShinseiDate);
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
@@ -83,6 +82,7 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
         this.setOriginalData("txt3DankaiReset", txt3DankaiReset);
         this.setOriginalData("txtShinsaResult", txtShinsaResult);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
+        this.setOriginalData("txtSikibetsuCode", txtSikibetsuCode);
         this.txtShikyuShinseiDate = txtShikyuShinseiDate;
         this.txtTeikyoYM = txtTeikyoYM;
         this.txtHihoNo = txtHihoNo;
@@ -96,6 +96,7 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
         this.txt3DankaiReset = txt3DankaiReset;
         this.txtShinsaResult = txtShinsaResult;
         this.txtSeiriNo = txtSeiriNo;
+        this.txtSikibetsuCode = txtSikibetsuCode;
     }
 
     public TextBoxDate getTxtShikyuShinseiDate() {
@@ -148,6 +149,10 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
 
     public TextBoxCode getTxtSeiriNo() {
         return txtSeiriNo;
+    }
+
+    public RString getTxtSikibetsuCode() {
+        return txtSikibetsuCode;
     }
 
     public void setTxtShikyuShinseiDate(TextBoxDate txtShikyuShinseiDate) {
@@ -213,6 +218,11 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
     public void setTxtSeiriNo(TextBoxCode txtSeiriNo) {
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.txtSeiriNo = txtSeiriNo;
+    }
+
+    public void setTxtSikibetsuCode(RString txtSikibetsuCode) {
+        this.setOriginalData("txtSikibetsuCode", txtSikibetsuCode);
+        this.txtSikibetsuCode = txtSikibetsuCode;
     }
 
     // </editor-fold>

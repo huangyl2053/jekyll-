@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuCh
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikuchichoson.ChosaChikuChichosonRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachikuchichoson.IChosaChikuChichosonMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査スケジュール登録7を管理クラスです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public class ChosaChikuFinder {
 

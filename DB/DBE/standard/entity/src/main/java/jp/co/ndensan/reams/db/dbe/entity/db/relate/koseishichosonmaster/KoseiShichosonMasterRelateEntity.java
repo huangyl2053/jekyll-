@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.Sh
 
 /**
  * 構成市町村マスタRelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class KoseiShichosonMasterRelateEntity implements Cloneable, Serializable {
+public class KoseiShichosonMasterRelateEntity implements Serializable {
 
     /**
      * -- GETTER -- 構成市町村マスタEntityを返します。
@@ -47,8 +49,7 @@ public class KoseiShichosonMasterRelateEntity implements Cloneable, Serializable
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * KoseiShichosonMasterEntityが持つ{@link 構成市町村マスタEntity}と{@link 主治医医療機関情報RelateEntity}と<br/>
-     * {@link ShujiiIryoKikanJohoRelateEntity}のMD5値を計算し、設定します。
+     * KoseiShichosonMasterEntityが持つ{@link 構成市町村マスタEntity}と{@link 主治医医療機関情報RelateEntity}と<br/> {@link ShujiiIryoKikanJohoRelateEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.構成市町村マスタEntity.initializeMd5();

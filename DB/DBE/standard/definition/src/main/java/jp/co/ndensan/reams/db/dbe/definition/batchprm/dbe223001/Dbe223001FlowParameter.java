@@ -18,6 +18,7 @@ import lombok.Setter;
 /**
  * 認定調査督促状発行のバッチパラメータクラスです。
  *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

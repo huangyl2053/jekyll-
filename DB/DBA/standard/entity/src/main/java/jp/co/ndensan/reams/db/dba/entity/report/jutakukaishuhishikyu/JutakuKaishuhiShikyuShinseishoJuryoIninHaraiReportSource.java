@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険居宅介護（予防）住宅改修費支給（受領委任払）申請書のReportSourceクラスです。
+ *
+ * @reamsid_L DBA-0540-709 lishengli
  */
 public class JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

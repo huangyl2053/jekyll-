@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoshujiiich
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran.IkenshoShujiiIchiranMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
 
 /**
  * 主治医医療機関・主治医一覧表のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0260-030 zuotao
  */
 public interface IkenshoShujiiIchiranRelateMapper {
 

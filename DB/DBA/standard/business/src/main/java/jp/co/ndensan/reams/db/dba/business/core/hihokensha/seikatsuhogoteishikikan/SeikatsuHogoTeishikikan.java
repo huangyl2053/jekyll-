@@ -19,8 +19,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 生活保護停止期間を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
-public class SeikatsuHogoTeishikikan extends ModelBase<SeikatsuHogoTeishikikanIdentifier, UrT0528SeikatsuHogoTeishikikanEntity, SeikatsuHogoTeishikikan> implements Serializable {
+public class SeikatsuHogoTeishikikan
+        extends
+        ModelBase<SeikatsuHogoTeishikikanIdentifier, UrT0528SeikatsuHogoTeishikikanEntity, SeikatsuHogoTeishikikan>
+        implements Serializable {
 
     private final UrT0528SeikatsuHogoTeishikikanEntity entity;
     private final SeikatsuHogoTeishikikanIdentifier id;

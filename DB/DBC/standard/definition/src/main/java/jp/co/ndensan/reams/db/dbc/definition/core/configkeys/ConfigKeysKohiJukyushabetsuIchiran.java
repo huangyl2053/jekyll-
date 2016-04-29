@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護給付費公費受給者別一覧表情報コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ConfigKeysKohiJukyushabetsuIchiran {
 

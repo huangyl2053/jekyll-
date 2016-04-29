@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 /**
  * 資格取得除外者登録パラメータクラスです。
  *
+ * @reamsid_L DBA-0440-030 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter

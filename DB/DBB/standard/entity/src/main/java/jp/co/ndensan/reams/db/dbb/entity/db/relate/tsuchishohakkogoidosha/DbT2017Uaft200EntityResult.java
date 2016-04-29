@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 
 /**
  * DbT2017Uaft200EntityResult
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

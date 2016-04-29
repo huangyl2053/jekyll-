@@ -10,12 +10,15 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoE
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link RendoHoryuTokuteiJusho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-021 zhangzhiming
  */
 public class RendoHoryuTokuteiJushoBuilder {
 
@@ -131,6 +134,18 @@ public class RendoHoryuTokuteiJushoBuilder {
     public RendoHoryuTokuteiJushoBuilder set施設コード(RString 施設コード) {
         requireNonNull(施設コード, UrSystemErrorMessages.値がnull.getReplacedMessage("施設コード"));
         entity.setShisetsuCode(施設コード);
+        return this;
+    }
+
+    /**
+     * 施設名称を設定します。
+     *
+     * @param 施設名称 施設名称
+     * @return {@link RendoHoryuTokuteiJushoBuilder}
+     */
+    public RendoHoryuTokuteiJushoBuilder set施設名称(AtenaMeisho 施設名称) {
+        requireNonNull(施設名称, UrSystemErrorMessages.値がnull.getReplacedMessage("施設名称"));
+        entity.setShisetsuMeisho(施設名称);
         return this;
     }
 

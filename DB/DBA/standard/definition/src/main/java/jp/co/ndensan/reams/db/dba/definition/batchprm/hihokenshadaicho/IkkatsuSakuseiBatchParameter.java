@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保険者証一括発行のバッチのパラメータです
+ * 被保険者台帳一括作成のバッチのパラメータです
+ *
+ * @reamsid_L DBA-0510-010 duanzhanli
  *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")

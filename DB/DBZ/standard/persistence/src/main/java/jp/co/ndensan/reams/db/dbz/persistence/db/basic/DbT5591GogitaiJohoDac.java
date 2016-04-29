@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合議体情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 chengsanyuan
  */
 public class DbT5591GogitaiJohoDac implements ISaveable<DbT5591GogitaiJohoEntity> {
 

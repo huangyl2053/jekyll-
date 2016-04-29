@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 特徴依頼金額計算方法8月を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum TokuchoIraikingakuKeisanHoho8Gatsu {
 

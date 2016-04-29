@@ -20,8 +20,8 @@ var DBZ;
                 return "onSelectByModifyButton_dgShikakuShutokuRireki";
             };
 
-            Events.onSelectByDeleteButton_dgShikakuShutokuRireki = function () {
-                return "onSelectByDeleteButton_dgShikakuShutokuRireki";
+            Events.onSelectByDeleteButton = function () {
+                return "onSelectByDeleteButton";
             };
             return Events;
         })();

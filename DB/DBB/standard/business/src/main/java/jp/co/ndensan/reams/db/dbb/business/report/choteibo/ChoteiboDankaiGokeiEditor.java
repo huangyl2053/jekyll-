@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
 
 /**
  * 調定簿帳票段階合計編集
+ *
+ * @reamsid_L DBB-0770-050 zhangrui
  */
 public class ChoteiboDankaiGokeiEditor implements IChoteiboEditor {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 保険料納入通知書（仮算定）【期毎タイプ】帳票 KarisanteiHokenryoNonyuTsuchishoKigotoBuilder
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public class KarisanteiHokenryoNonyuTsuchishoKigotoBuilder implements IKarisanteiHokenryoNonyuTsuchishoKigotoBuilder {
 
@@ -18,7 +20,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoBuilder implements IKarisante
     private final IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compRyoshushoEditor;
     private final IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compNofushoEditor;
     private final IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compNinshoshaEditor;
-    //private final IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compSofubutsuAtesakiEditor;
+    private final IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compSofubutsuAtesakiEditor;
 
     /**
      * インスタンスを生成します。
@@ -27,19 +29,20 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoBuilder implements IKarisante
      * @param compRyoshushoEditor {@link IKarisanteiHokenryoNonyuTsuchishoKigotoEditor}
      * @param compNofushoEditor {@link IKarisanteiHokenryoNonyuTsuchishoKigotoEditor}
      * @param compNinshoshaEditor {@link IKarisanteiHokenryoNonyuTsuchishoKigotoEditor}
+     * @param compSofubutsuAtesakiEditor {@link IKarisanteiHokenryoNonyuTsuchishoKigotoEditor}
      */
     public KarisanteiHokenryoNonyuTsuchishoKigotoBuilder(
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor editor,
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compRyoshushoEditor,
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compNofushoEditor,
-            IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compNinshoshaEditor
-    //IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compSofubutsuAtesakiEditor
+            IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compNinshoshaEditor,
+            IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compSofubutsuAtesakiEditor
     ) {
         this.editor = editor;
         this.compRyoshushoEditor = compRyoshushoEditor;
         this.compNofushoEditor = compNofushoEditor;
         this.compNinshoshaEditor = compNinshoshaEditor;
-        //this.compSofubutsuAtesakiEditor = compSofubutsuAtesakiEditor;
+        this.compSofubutsuAtesakiEditor = compSofubutsuAtesakiEditor;
     }
 
     /**
@@ -51,7 +54,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoBuilder implements IKarisante
     public KarisanteiHokenryoNonyuTsuchishoKigotoSource build() {
         return ReportEditorJoiner.from(new KarisanteiHokenryoNonyuTsuchishoKigotoSource())
                 .join(editor).join(compRyoshushoEditor).join(compNofushoEditor).join(compNinshoshaEditor)
-                //.join(compSofubutsuAtesakiEditor)
+                .join(compSofubutsuAtesakiEditor)
                 .buildSource();
     }
 

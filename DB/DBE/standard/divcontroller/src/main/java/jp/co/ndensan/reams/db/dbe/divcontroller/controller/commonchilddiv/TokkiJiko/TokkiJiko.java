@@ -28,8 +28,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 特記事項入力のクラスです。
+ *
+ * @reamsid_L DBE-3000-140 lishengli
  */
 public class TokkiJiko {
 
@@ -61,7 +62,11 @@ public class TokkiJiko {
         }
         if (イメージ情報 == null || イメージ情報.getイメージ共有ファイルID() == null) {
             div.getImgTokkiJiko().setSrc(RString.EMPTY);
-            ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, new Image(管理番号));
+            if (イメージ情報 != null && イメージ情報.getイメージ共有ファイルID() == null) {
+                ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, イメージ情報.modifiedModel());
+            } else {
+                ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, new Image(管理番号));
+            }
         } else {
             RString path = 共有ファイルを引き出す(イメージ情報);
             if (!RString.isNullOrEmpty(path)) {

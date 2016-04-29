@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- *
  * 受給者台帳情報一覧ガイドにＤＢから検索するデータが表示するクラスです。
+ *
+ * @reamsid_L DBZ-4550-020 zhangzhiming
  */
 public class NinteiRirekiIchiranBusiness {
 

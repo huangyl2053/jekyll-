@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT5592ShinsakaiKaisaiBashoJohoマスタとエンティティのマッピング用XMLです。 -->
-
+<!-- @reamsid_L DBE-0100-010 wangkun -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper">
     

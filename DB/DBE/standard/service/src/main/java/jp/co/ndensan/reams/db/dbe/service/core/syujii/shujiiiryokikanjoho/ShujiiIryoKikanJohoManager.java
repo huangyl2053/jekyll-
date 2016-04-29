@@ -8,9 +8,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho.IShujiiIryoKikanJohoMapper;
-import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -18,12 +17,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医医療機関情報を管理するクラスです。
+ * @reamsid_L DBE-0240-010 dongyabin
  */
 public class ShujiiIryoKikanJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5911ShujiiIryoKikanJohoDac 主治医医療機関情報Dac;
-    private final ShujiiJohoManager 主治医情報Manager;
+//    private final ShujiiJohoManager 主治医情報Manager;
 
     /**
      * コンストラクタです。
@@ -31,24 +31,23 @@ public class ShujiiIryoKikanJohoManager {
     ShujiiIryoKikanJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.主治医医療機関情報Dac = InstanceProvider.create(DbT5911ShujiiIryoKikanJohoDac.class);
-        this.主治医情報Manager = new ShujiiJohoManager();
+//        this.主治医情報Manager = new ShujiiJohoManager();
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
-     * @param 主治医医療機関情報Dac 主治医医療機関情報Dac
-     * @param 主治医情報Manager 主治医情報Manager
+     * @param 主治医医療機関情報Dac 主治医医療機関情報Dac // * @param 主治医情報Manager 主治医情報Manager
      */
     ShujiiIryoKikanJohoManager(
             MapperProvider mapperProvider,
-            DbT5911ShujiiIryoKikanJohoDac 主治医医療機関情報Dac,
-            ShujiiJohoManager 主治医情報Manager
+            DbT5911ShujiiIryoKikanJohoDac 主治医医療機関情報Dac
+    //            ShujiiJohoManager 主治医情報Manager
     ) {
         this.mapperProvider = mapperProvider;
         this.主治医医療機関情報Dac = 主治医医療機関情報Dac;
-        this.主治医情報Manager = 主治医情報Manager;
+//        this.主治医情報Manager = 主治医情報Manager;
     }
 
     /**

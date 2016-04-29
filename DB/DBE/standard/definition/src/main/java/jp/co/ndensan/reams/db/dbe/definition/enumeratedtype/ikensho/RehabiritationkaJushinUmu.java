@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * リハビリテーション科受診の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum RehabiritationkaJushinUmu {
 
@@ -32,7 +32,7 @@ public enum RehabiritationkaJushinUmu {
      *
      * @return リハビリテーション科受診の有無のコード
      */
-    public boolean getコード() {
+    public boolean isリハビリテーション科受診() {
         return code;
     }
 

@@ -14,6 +14,8 @@ import lombok.Value;
 
 /**
  * 償還払請求福祉用具販売費の識別子です。
+ * 
+ * @reamsid_L DBC-1020-050 chenaoqi
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")

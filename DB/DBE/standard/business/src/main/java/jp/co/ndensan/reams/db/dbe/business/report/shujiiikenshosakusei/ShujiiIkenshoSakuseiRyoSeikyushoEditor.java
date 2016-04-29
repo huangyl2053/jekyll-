@@ -6,16 +6,22 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  *
  * 主治医意見書作成料請求書Editorです。
+ *
+ * @reamsid_L DBE-0050-040 sunhaidi
  */
 public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSakuseiRyoSeikyushoEditor {
 
@@ -65,9 +71,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.hihokenshaName = item.getHihokenshaName();
         source.birthYMD = item.getBirthYMD();
         source.seibetsu = item.getSeibetsu();
-// TODO QA629 #75594 「意見書作成料種別_在宅・施設」と「意見書作成料種別_新規・継続」はフィールドではないため、ReportSourceに項目名は生成できない
-//        source.ikenshosyubetu1 = item.getIkenshosyubetu1();
-//        source.ikenshosyubetu2 = item.getIkenshosyubetu2();
+        source.shubetsuZaitaku = item.getShubetsuZaitaku();
+        source.shubetsuShisetsu = item.getShubetsuShisetsu();
+        source.shubetsuShinki = item.getShubetsuShinki();
+        source.shubetsuKeizoku = item.getShubetsuKeizoku();
         source.ikenshoSakuseiRyo1 = item.getIkenshoSakuseiRyo1();
         source.ikenshoSakuseiRyo2 = item.getIkenshoSakuseiRyo2();
         source.ikenshoSakuseiRyo3 = item.getIkenshoSakuseiRyo3();
@@ -81,7 +88,24 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.yubinNo = item.getSeikyuIryokikanYubinNo();
         source.iryokikanJusho = item.getSeikyuIryokikanJusho();
         source.iryokikanTel = item.getSeikyuIryokikanTel();
-        source.ikenshoSakuseiYMD = RString.EMPTY;
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), getHokenshaNo());
         return source;
     }
+
+    private RString getHokenshaNo() {
+        RStringBuilder hokenshaNo = new RStringBuilder();
+        hokenshaNo.append(item.getHihokenshaNo1());
+        hokenshaNo.append(item.getHihokenshaNo2());
+        hokenshaNo.append(item.getHihokenshaNo3());
+        hokenshaNo.append(item.getHihokenshaNo4());
+        hokenshaNo.append(item.getHihokenshaNo5());
+        hokenshaNo.append(item.getHihokenshaNo6());
+        hokenshaNo.append(item.getHihokenshaNo7());
+        hokenshaNo.append(item.getHihokenshaNo8());
+        hokenshaNo.append(item.getHihokenshaNo9());
+        hokenshaNo.append(item.getHihokenshaNo10());
+        return hokenshaNo.toRString();
+    }
+
 }

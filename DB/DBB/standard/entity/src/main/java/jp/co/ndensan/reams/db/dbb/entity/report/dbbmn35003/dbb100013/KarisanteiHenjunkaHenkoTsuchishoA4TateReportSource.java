@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票「特別徴収平準化【A4縦タイプ】」の項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 public class KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

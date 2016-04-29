@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100010.KarisanteiH
 
 /**
  * 仮算定額変更【B5横タイプ】ボディEditorです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenkoTsuchishoB5YokoBodyEditor implements IKarisanteiHenkoTsuchishoB5YokoEditor {
 

@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
  * 介護認定審査会共有一覧のDivControllerです。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranList {
 
@@ -41,6 +42,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
+        div.getDgShinsakaiIchiran().getDataSource().clear();
         モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
         RDate 表示期間From = div.getTxtHyojiKikanFrom().getValue();
         RDate 表示期間To = div.getTxtHyojiKikanTo().getValue();
@@ -65,12 +67,16 @@ public class YokaigoNinteiShinsakaiIchiranList {
         }
         List<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
                 createInstance().get審査会一覧(表示期間From, 表示期間To, モード, 表示条件, ダミー審査会).records();
+        if (審査会一覧 == null || 審査会一覧.isEmpty()) {
+            validationMessages = getHandler(div).該当データが存在のチェック();
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         getHandler(div).set審査会委員一覧(審査会一覧);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 選択アイコンの処理です。
+     * 選択ボタンの処理です。
      *
      * @param div YokaigoNinteiShinsakaiIchiranListDiv
      * @return 介護認定審査会共有一覧Divを持つResponseData

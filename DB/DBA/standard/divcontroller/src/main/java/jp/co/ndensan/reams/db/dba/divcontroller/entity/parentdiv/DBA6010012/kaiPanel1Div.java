@@ -1,24 +1,17 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.Panel3Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.TablePanel1Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaiItaku1Div;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaiShokuhiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaiTakaDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.kaikyuheruDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * kaiPanel1 のクラスファイル 
- * 
+ * kaiPanel1 のクラスファイル
+ *
  * @author 自動生成
  */
 public class kaiPanel1Div extends Panel {
@@ -28,6 +21,7 @@ public class kaiPanel1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("TablePanel1")
     private TablePanel1Div TablePanel1;
 
@@ -44,7 +38,7 @@ public class kaiPanel1Div extends Panel {
 
     @JsonProperty("TablePanel1")
     public void setTablePanel1(TablePanel1Div TablePanel1) {
-        this.TablePanel1=TablePanel1;
+        this.TablePanel1 = TablePanel1;
     }
 
     /*
@@ -61,7 +55,7 @@ public class kaiPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadioButton1(RadioButton RadioButton1) {
+    public void setRadioButton1(RadioButton RadioButton1) {
         this.getTablePanel1().getKaikyuheru().setRadioButton1(RadioButton1);
     }
 
@@ -71,7 +65,7 @@ public class kaiPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTextBox16(TextBox TextBox16) {
+    public void setTextBox16(TextBox TextBox16) {
         this.getTablePanel1().getKaikyuheru().setTextBox16(TextBox16);
     }
 

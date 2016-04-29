@@ -13,8 +13,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 償還払支給申請RelateEntityクラスです。
  *
+ * @reamsid_L DBC-0960-020 hezhenzhen
+ *
  */
 @lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShinseiIchiranRelateEntity {
 
@@ -25,41 +28,5 @@ public class ShokanShinseiIchiranRelateEntity {
     private FlexibleYearMonth sofuYM;
     private RString yoshikiNo;
     private FlexibleDate ketteiYMD;
-    private FlexibleYearMonth サービス提供年月From;
-    private FlexibleYearMonth サービス提供年月To;
-
-    /**
-     * 償還払支給申請RelateEntityを生成します
-     *
-     * @param hiHokenshaNo HihokenshaNo
-     * @param serviceTeikyoYM FlexibleYearMonth
-     * @param seiriNo RString
-     * @param shinseiYMD FlexibleDate
-     * @param sofuYM FlexibleYearMonth
-     * @param yoshikiNo RString
-     * @param ketteiYMD FlexibleDate
-     * @param サービス提供年月From FlexibleYearMonth
-     * @param サービス提供年月To FlexibleYearMonth
-     */
-    public ShokanShinseiIchiranRelateEntity(
-            HihokenshaNo hiHokenshaNo,
-            FlexibleYearMonth serviceTeikyoYM,
-            RString seiriNo,
-            FlexibleDate shinseiYMD,
-            FlexibleYearMonth sofuYM,
-            RString yoshikiNo,
-            FlexibleDate ketteiYMD,
-            FlexibleYearMonth サービス提供年月From,
-            FlexibleYearMonth サービス提供年月To) {
-        this.hiHokenshaNo = hiHokenshaNo;
-        this.serviceTeikyoYM = serviceTeikyoYM;
-        this.seiriNo = seiriNo;
-        this.shinseiYMD = shinseiYMD;
-        this.sofuYM = sofuYM;
-        this.yoshikiNo = yoshikiNo;
-        this.ketteiYMD = ketteiYMD;
-        this.サービス提供年月From = サービス提供年月From;
-        this.サービス提供年月To = サービス提供年月To;
-    }
 
 }

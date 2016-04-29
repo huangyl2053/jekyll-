@@ -22,11 +22,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額介護サービス費給付対象者取込の一時テーブル編集
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 public class KogakuKyufuTaishoshaInTempUpdateProcess extends BatchProcessBase<DbTKogakuKyufuTaishoshaDataTempTableEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
-            + "relate.kogakukyufutaishoshain.select被保険者番号From一時テーブル");
+            + "relate.kogakukyufutaishoshain.IKogakuKyufuTaishoshaInMapper.select被保険者番号From一時テーブル");
     private IKogakuKyufuTaishoshaInMapper mapper;
     private List<DbT7026ShinKyuHihokenshaNoHenkanEntity> targetList;
 

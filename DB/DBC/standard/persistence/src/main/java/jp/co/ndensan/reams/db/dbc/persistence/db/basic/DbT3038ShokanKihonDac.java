@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon.meisaiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon.seiriNp;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihon.yoshikiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求基本のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity> {
 
@@ -48,7 +50,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
      *
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
-     * @param 整理番号 SeiriNp
+     * @param 整理番号 SeiriNo
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 明細番号 MeisaiNo
@@ -77,7 +79,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).
@@ -155,7 +157,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号))).getCount();
     }
@@ -184,7 +186,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(substr(yoshikiNo, 開始桁, 終了桁), "21D"))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3038ShokanKihonEntity.class);
@@ -195,7 +197,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
      *
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
-     * @param 整理番号 SeiriNp
+     * @param 整理番号 SeiriNo
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 明細番号 MeisaiNo
@@ -231,12 +233,12 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号));
+                    eq(seiriNo, 整理番号));
         } else {
             iTrueFalseCriteria = and(
                     eq(hiHokenshaNo, 被保険者番号),
                     eq(serviceTeikyoYM, サービス提供年月),
-                    eq(seiriNp, 整理番号),
+                    eq(seiriNo, 整理番号),
                     eq(jigyoshaNo, 事業者番号),
                     eq(yoshikiNo, 様式番号),
                     eq(meisaiNo, 明細番号));

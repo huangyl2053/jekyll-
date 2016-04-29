@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 広域内転居結果一覧表Builderクラスです。
+ *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 class KoikinaiTenkyoKekkaIchiranhyoBuilderImpl implements IKoikinaiTenkyoKekkaIchiranhyoBuilder {
 

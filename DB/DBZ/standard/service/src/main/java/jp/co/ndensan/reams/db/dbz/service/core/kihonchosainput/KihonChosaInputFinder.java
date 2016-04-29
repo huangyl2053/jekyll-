@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 共有子Div「認定基本調査入力」の状態を変更するクラスです
+ *
+ * @reamsid_L DBE-3000-090 wangjie2
  */
 public class KihonChosaInputFinder {
 

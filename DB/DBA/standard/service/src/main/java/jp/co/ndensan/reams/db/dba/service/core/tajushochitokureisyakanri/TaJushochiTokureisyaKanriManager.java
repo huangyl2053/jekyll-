@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 他市町村住所地特例者管理を管理するクラスです。
+ *
+ * @reamsid_L DBA-0400-050 hezhenzhen
  *
  */
 public class TaJushochiTokureisyaKanriManager {
@@ -69,6 +71,9 @@ public class TaJushochiTokureisyaKanriManager {
                 sortList.add(date);
             }
         }
+        if (sortList.isEmpty()) {
+            return;
+        }
         Collections.sort(sortList, new DateComparator());
         TaJushochiTokureisyaKanriParameter 直近適用グリッド行 = sortList.get(0);
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
@@ -87,6 +92,7 @@ public class TaJushochiTokureisyaKanriManager {
         public int compare(TaJushochiTokureisyaKanriParameter o1, TaJushochiTokureisyaKanriParameter o2) {
             return o1.getTekiyoYMD().compareTo(o2.getTekiyoYMD());
         }
+        private static final long serialVersionUID = 5004135092514753307L;
     }
 
     /**
@@ -112,7 +118,7 @@ public class TaJushochiTokureisyaKanriManager {
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
             if (追加.equals(date.get状態()) || 修正.equals(date.get状態())) {
 
-                TaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(TaJushochiTokureisyaKanriMapper.class);
+                ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
                 int count = mapper.select施設入退所情報リスト件数取得(date);
                 if (count > 1) {
                     throw new ApplicationException(

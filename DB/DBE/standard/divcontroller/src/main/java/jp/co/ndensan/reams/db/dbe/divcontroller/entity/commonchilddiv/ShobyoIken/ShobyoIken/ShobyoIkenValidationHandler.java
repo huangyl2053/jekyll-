@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 共有子Div「ShobyoIken」の抽象ValidationHandlerクラスです。
  *
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIkenValidationHandler {
 
@@ -42,7 +43,8 @@ public class ShobyoIkenValidationHandler {
         List<dgGenyin_Row> rowlist = div.getGeninShikkanPanel().getDgGenyin().getDataSource();
         if (追加.equals(div.getGeninShikkanPanel().getGeninShikkanShosai().getJotai())) {
             for (dgGenyin_Row row : rowlist) {
-                if (row.getGeninShikkanCode().equals(div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().getValue())) {
+                if (row.getGeninShikkanCode().getValue().equals(div.getGeninShikkanPanel().getGeninShikkanShosai()
+                        .getCcdCodeInputGeninShikkan().getCode().getColumnValue())) {
                     validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.validation));
                 }
             }

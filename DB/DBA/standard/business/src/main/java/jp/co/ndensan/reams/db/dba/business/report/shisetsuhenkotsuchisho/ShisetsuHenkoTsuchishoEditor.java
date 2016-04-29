@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.shisetsuhenkotsuchisho.Sh
 
 /**
  * 介護保険住所地特例施設変更通知書Editorです。
+ *
+ * @reamsid_L DBA-0380-070 duanzhanli
  */
 class ShisetsuHenkoTsuchishoEditor implements IShisetsuHenkoTsuchishoEditor {
 
@@ -65,9 +67,13 @@ class ShisetsuHenkoTsuchishoEditor implements IShisetsuHenkoTsuchishoEditor {
         source.henkogoShisetsuYubinNo = item.getHenkogoShisetsuYubinNo();
         source.henkogoShisetsuJusho = item.getHenkogoShisetsuJusho();
         source.denshiKoin = item.getDenshiKoin();
-        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.shuchoMei = item.getShuchoMei();
-        source.shichosonMei = item.getShichosonMei();
+        source.hakkoYMD1 = item.getHakkoYMD1();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
         source.koinShoryaku = item.getKoinShoryaku();
         return source;
     }

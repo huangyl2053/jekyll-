@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 地区認定調査員情報のマッピング用XMLです。 -->
-
+<!-- @reamsid_L DBE-0023-010 xuyannan -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachikuchichoson.IChosaChikuChichosonMapper">
     <resultMap id="resultMap_ChosaChikuChichosonJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikuchichoson.ChosaChikuChichosonRelateEntity" autoMapping="true">

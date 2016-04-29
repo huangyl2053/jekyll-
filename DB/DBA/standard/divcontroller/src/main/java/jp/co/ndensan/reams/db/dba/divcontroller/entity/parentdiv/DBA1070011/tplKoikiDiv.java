@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgKoiki_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplKoiki のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+
+/**
+ * tplKoiki のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplKoikiDiv extends TabPanel {
@@ -22,6 +19,7 @@ public class tplKoikiDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgKoiki")
     private DataGrid<dgKoiki_Row> dgKoiki;
 
@@ -38,7 +36,7 @@ public class tplKoikiDiv extends TabPanel {
 
     @JsonProperty("dgKoiki")
     public void setDgKoiki(DataGrid<dgKoiki_Row> dgKoiki) {
-        this.dgKoiki=dgKoiki;
+        this.dgKoiki = dgKoiki;
     }
 
 }

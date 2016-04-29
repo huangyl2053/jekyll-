@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定主治医意見書記入項目を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class ShujiiIkenshoKinyuItemManager {
 

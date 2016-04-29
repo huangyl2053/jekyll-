@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 /**
  * 合議体情報作成の抽象Handlerクラスです。
  *
+ * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiJohoSakuseiHandler {
 
@@ -42,7 +43,6 @@ public class GogitaiJohoSakuseiHandler {
     private static final RString DUMMY_FLAG_TUUJOU = new RString("key0");
     private static final RString DUMMY_FLAG_DAMI = new RString("key1");
     private static final RString KAISAI_BASHO_CODE_EMPTY = new RString("empty");
-    private static final Decimal DUMMY_DISP_MAX = new Decimal(100);
 
     private int hoketsuCount = 0;
     private int shinsainCount = 0;
@@ -73,7 +73,6 @@ public class GogitaiJohoSakuseiHandler {
         div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
         div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_TUUJOU);
         this.setDisableByAdd(true);
-        div.getTxtDispMax().setValue(DUMMY_DISP_MAX);
 
     }
 
@@ -132,7 +131,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getTxtYoteiTeiin().setValue(row.getYoteiTeiin().getValue());
         div.getTxtJidoWariateTeiin().setValue(row.getJidoWariateTeiin().getValue());
         div.getTxtIinTeiin().setValue(row.getIinTeiin().getValue());
-        if (IsGogitaiSeishinkaSonzai.toValue(row.getSeishinkaiSonzai()).getコード()) {
+        if (IsGogitaiSeishinkaSonzai.toValue(row.getSeishinkaiSonzai()).is合議体精神科医存在()) {
             div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SURU);
         } else {
             div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
@@ -216,8 +215,8 @@ public class GogitaiJohoSakuseiHandler {
                 && result.get介護認定審査会予定定員() == div.getTxtYoteiTeiin().getValue().intValue()
                 && result.get介護認定審査会自動割当定員() == div.getTxtJidoWariateTeiin().getValue().intValue()
                 && result.get介護認定審査会委員定員() == div.getTxtIinTeiin().getValue().intValue()
-                && result.get合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
-                && result.get合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
+                && result.is合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
+                && result.is合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
 
         if (!flg) {
             return flg;
@@ -255,7 +254,7 @@ public class GogitaiJohoSakuseiHandler {
             dgShinsainList_Row dgShinsain,
             GogitaiWariateIinJoho gogitaiWariateIinJoho,
             boolean flg) {
-        if (gogitaiWariateIinJoho.get補欠()) {
+        if (gogitaiWariateIinJoho.is補欠()) {
             if (!gogitaiWariateIinJoho.get介護認定審査会委員コード().equals(dgHoketsuShinsain.getHoketsuShinsakaiIinCode())) {
                 return !flg;
             }

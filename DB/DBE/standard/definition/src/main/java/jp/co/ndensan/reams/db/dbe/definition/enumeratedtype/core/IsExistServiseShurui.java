@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * サービス種類の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistServiseShurui {
 
@@ -32,7 +32,7 @@ public enum IsExistServiseShurui {
      *
      * @return サービス種類の有無のコード
      */
-    public boolean getコード() {
+    public boolean isサービス種類の有無() {
         return code;
     }
 

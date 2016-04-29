@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shikibets
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shikibetsubangoselector.ShikibetsuBangoSelectorDivHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -20,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
 
 /**
  * ShikibetsuBangoSelector のクラスファイル
+ *
+ * @reamsid_L DBC-1030-170 panhe
  */
 public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBangoSelectorDiv {
 

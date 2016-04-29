@@ -14,7 +14,8 @@ import lombok.Setter;
 
 /**
  *
- * 広域内住所地特例者一覧表のバッチ処理クラスのパラメータ
+ * 広域内住所地特例者一覧表のバッチ処理クラスのパラメータです。
+ * @reamsid_L DBU-1140-020 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

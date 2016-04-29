@@ -17,19 +17,23 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokih
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosahyokihonchosascore.NinteichosahyoKihonChosaScoreEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票（基本調査）を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteichosahyoKihonChosa extends ModelBase<NinteichosahyoKihonChosaIdentifier, DbT5203NinteichosahyoKihonChosaEntity, NinteichosahyoKihonChosa> implements Serializable {
+public class NinteichosahyoKihonChosa
+        extends ModelBase<NinteichosahyoKihonChosaIdentifier, DbT5203NinteichosahyoKihonChosaEntity, NinteichosahyoKihonChosa>
+        implements Serializable {
 
     private final DbT5203NinteichosahyoKihonChosaEntity entity;
     private final NinteichosahyoKihonChosaIdentifier id;
@@ -75,11 +79,11 @@ public class NinteichosahyoKihonChosa extends ModelBase<NinteichosahyoKihonChosa
         }
         this.ninteichosahyoChosaItem = Models.create(ninteichosahyoChosaItemList);
 
-        List<NinteichosahyoKihonChosaScore> ninteichosahyoKihonChosaScoreList = new ArrayList<>();
+        List<NinteichosahyoKihonChosaScore> kihonChosaScoreList = new ArrayList<>();
         for (NinteichosahyoKihonChosaScoreEntity todokedeshaEntity : entity.get認定調査票_基本調査素点Entity()) {
-            ninteichosahyoKihonChosaScoreList.add(new NinteichosahyoKihonChosaScore(todokedeshaEntity));
+            kihonChosaScoreList.add(new NinteichosahyoKihonChosaScore(todokedeshaEntity));
         }
-        this.ninteichosahyoKihonChosaScore = Models.create(ninteichosahyoKihonChosaScoreList);
+        this.ninteichosahyoKihonChosaScore = Models.create(kihonChosaScoreList);
     }
 
     /**
@@ -166,14 +170,11 @@ public class NinteichosahyoKihonChosa extends ModelBase<NinteichosahyoKihonChosa
     }
 
     /**
-     * 認定調査票（基本調査）配下の要素を削除対象とします。<br/>
-     * {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査票（基本調査）配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link NinteichosahyoKihonChosa}を返します。
+     * 認定調査票（基本調査）配下の要素を削除対象とします。<br/> {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査票（基本調査）配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteichosahyoKihonChosa}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoKihonChosa}
-     * @throws IllegalStateException
-     * DbT5203NinteichosahyoKihonChosaEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5203NinteichosahyoKihonChosaEntityのデータ状態が変更の場合
      */
     @Override
     public NinteichosahyoKihonChosa deleted() {
@@ -194,8 +195,7 @@ public class NinteichosahyoKihonChosa extends ModelBase<NinteichosahyoKihonChosa
     }
 
     /**
-     * 認定調査票（基本調査）のみを変更対象とします。<br/>
-     * {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票（基本調査）のみを変更対象とします。<br/> {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoKihonChosa}
      */

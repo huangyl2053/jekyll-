@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 本算定異動（過年度）賦課確定（削除込）用パラメータです
+ * 本算定異動（過年度）賦課確定（削除込）用パラメータです。
+ *
+ * @reamsid_L DBB-0680-020 wangkanglei
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

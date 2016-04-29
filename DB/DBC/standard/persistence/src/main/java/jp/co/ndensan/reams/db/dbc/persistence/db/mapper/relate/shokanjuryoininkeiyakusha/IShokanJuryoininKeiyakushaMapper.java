@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanjuryoinink
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaListParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaEntity;
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 public interface IShokanJuryoininKeiyakushaMapper {
 
@@ -18,8 +20,8 @@ public interface IShokanJuryoininKeiyakushaMapper {
      * 契約事業者一覧リスト取得
      *
      * @param parameter parameter
-     * @return List<DbT3078ShokanJuryoininKeiyakushaEntity>
+     * @return List<ShokanJuryoininKeiyakushaEntity>
      */
-    List<DbT3078ShokanJuryoininKeiyakushaEntity> get契約事業者一覧(ShokanJuryoininKeiyakushaListParameter parameter);
+    List<ShokanJuryoininKeiyakushaEntity> get契約事業者一覧(ShokanJuryoininKeiyakushaListParameter parameter);
 
 }

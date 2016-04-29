@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書Printクラスです。
  *
+ * @reamsid_L DBA-0540-480  lijia
+ * 
  */
 public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho {
 

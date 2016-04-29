@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosascheduleinput.NinteiChosaScheduleInputParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosascheduleinput.NinteiChosaScheduleRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosascheduleinput.INinteiChosaScheduleInputMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
@@ -30,8 +30,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
  * 認定調査スケジュール登録10Managerクラです。
+ *
+ * @reamsid_L DBE-0020-060 lishengli
  */
 public class NinteiChosaScheduleInputManager {
 

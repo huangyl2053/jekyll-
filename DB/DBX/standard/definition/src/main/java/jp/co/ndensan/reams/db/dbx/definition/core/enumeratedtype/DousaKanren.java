@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype;
 
 /**
  * このクラスでは、業務Config 動作関連 に対応するキーをまとめています。
+ *
+ * @reamsid_L DBX-9999-023 liangbc
  */
 public enum DousaKanren implements IConfigKey {
 

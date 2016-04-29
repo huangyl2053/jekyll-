@@ -9,18 +9,20 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5593GogitaiWariateIinJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiWariateIinJoho.IGogitaiWariateIinJohoMapper;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiwariateiinjoho.IGogitaiWariateIinJohoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5593GogitaiWariateIinJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合議体割当委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public class GogitaiWariateIinJohoManager {
 
@@ -57,8 +59,7 @@ public class GogitaiWariateIinJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GogitaiWariateIinJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link GogitaiWariateIinJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link GogitaiWariateIinJohoManager}のインスタンス
      */
     public static GogitaiWariateIinJohoManager createInstance() {
         return InstanceProvider.create(GogitaiWariateIinJohoManager.class);

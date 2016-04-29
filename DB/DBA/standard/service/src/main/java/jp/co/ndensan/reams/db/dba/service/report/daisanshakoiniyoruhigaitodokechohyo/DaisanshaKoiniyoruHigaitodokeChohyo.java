@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigoh
 import jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -43,8 +43,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 第三者行為による被害届（介護保険用）Printerです。
+ *
+ * @reamsid_L DBA-0540-380 suguangjun
  */
 public class DaisanshaKoiniyoruHigaitodokeChohyo {
 
@@ -130,10 +131,12 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
 
     private static List<RString> get受給者台帳情報(HihokenshaKihonBusiness business) {
         List<RString> 受給者情報 = new ArrayList();
-        // TODO 受給者台帳情報を取得されない、「QA：716」を提出します。
-        受給者情報.add(new RString("20160219"));
-        受給者情報.add(new RString("20160219"));
-        受給者情報.add(new RString("要介護状態区分"));
+        if (business != null) {
+            // TODO 受給者台帳情報を取得されない、「QA：716」を提出します。
+            受給者情報.add(new RString("20160219"));
+            受給者情報.add(new RString("20160219"));
+            受給者情報.add(new RString("要介護状態区分"));
+        }
         return 受給者情報;
     }
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link ShiharaiHenkoShokanbaraikaShoryoShinseishoReport}のプロパティです。
+ *
+ * @reamsid_L DBA-0540-697 zhangguopeng
  */
 public class ShiharaiHenkoShokanbaraikaShoryoShinseishoProperty extends ReportPropertyBase<ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource> {
 

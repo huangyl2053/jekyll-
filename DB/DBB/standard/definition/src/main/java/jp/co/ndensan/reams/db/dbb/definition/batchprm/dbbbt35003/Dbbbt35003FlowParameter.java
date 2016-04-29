@@ -16,6 +16,7 @@ import lombok.Setter;
 /**
  * 特徴平準化（特徴6月分）通知書一括発行のバッチパラメータクラスです。
  *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

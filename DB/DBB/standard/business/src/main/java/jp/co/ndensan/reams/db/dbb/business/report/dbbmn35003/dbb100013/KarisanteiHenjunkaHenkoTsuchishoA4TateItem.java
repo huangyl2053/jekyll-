@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 特別徴収平準化【A4縦タイプ】の情報です。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 @Setter
 @Getter

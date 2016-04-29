@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbe.service.shobyoiken.ShobyoIkenFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.Anteisei;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -27,12 +28,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- *
  * 傷病の意見入力のHandlerクラスです。
+ *
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIkenHandler {
 
@@ -42,6 +45,7 @@ public class ShobyoIkenHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 安定性_True = new RString("True");
     private static final RString 安定性_False = new RString("False");
+    private static final CodeShubetsu コード種別 = new CodeShubetsu("5003");
 
     /**
      * コンストラクタです。
@@ -74,7 +78,7 @@ public class ShobyoIkenHandler {
             if (要介護認定主治医意見書情報.get意見書_発症年月日2() != null && !要介護認定主治医意見書情報.get意見書_発症年月日2().isEmpty()) {
                 div.getTxtShindanYMD2().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日2().toString()));
             }
-            div.getTxtShindanName3().setValue(要介護認定主治医意見書情報.get意見書_診断名3());
+            div.getTxtShindanName().setValue(要介護認定主治医意見書情報.get意見書_診断名3());
             if (要介護認定主治医意見書情報.get意見書_発症年月日3() != null && !要介護認定主治医意見書情報.get意見書_発症年月日3().isEmpty()) {
                 div.getTxtShindanYMD3().setValue(new RDate(要介護認定主治医意見書情報.get意見書_発症年月日3().toString()));
             }
@@ -94,7 +98,7 @@ public class ShobyoIkenHandler {
     private void 初期化() {
         div.getTxtShindanName1().setValue(RString.EMPTY);
         div.getTxtShindanName2().setValue(RString.EMPTY);
-        div.getTxtShindanName3().setValue(RString.EMPTY);
+        div.getTxtShindanName().setValue(RString.EMPTY);
         div.setName1(RString.EMPTY);
         div.setYMD1(RString.EMPTY);
         div.setName2(RString.EMPTY);
@@ -113,17 +117,19 @@ public class ShobyoIkenHandler {
         div.getRadShojoAnteisei().setSelectedKey(new RString("3"));
         div.getTxtFuanteiShosaiJokyo().setDisabled(true);
         div.getTxtFuanteiShosaiJokyo().setValue(RString.EMPTY);
-        div.setRadantei(new RString("3"));
-        div.setFuantei(RString.EMPTY);
+        div.getShojoAnteisei().setRadantei(new RString("3"));
+        div.getShojoAnteisei().setFuantei(RString.EMPTY);
     }
 
     private void 原因疾患一覧を設定(NinteiShinseiJoho 意見書情報) {
         List<dgGenyin_Row> 原因疾患一覧 = new ArrayList<>();
         for (GeninShikkan 原因疾患 : 意見書情報.getGeninShikkanList()) {
             dgGenyin_Row dgGenyin_row = new dgGenyin_Row();
-            dgGenyin_row.setGeninShikkanCode(new RString(原因疾患.get原因疾患コード().toString()));
-            dgGenyin_row.setMeiSho(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5003"), 原因疾患.get原因疾患コード()));
-            if (原因疾患.get主たる原因疾患フラグ()) {
+            TextBoxCode 原因疾患コード = new TextBoxCode();
+            原因疾患コード.setValue(原因疾患.get原因疾患コード().getColumnValue());
+            dgGenyin_row.setGeninShikkanCode(原因疾患コード);
+            dgGenyin_row.setMeiSho(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, 原因疾患.get原因疾患コード()));
+            if (原因疾患.is主たる原因疾患フラグ()) {
                 dgGenyin_row.setIsShutaruGeninShikkan(Boolean.TRUE);
             } else {
                 dgGenyin_row.setIsShutaruGeninShikkan(Boolean.FALSE);
@@ -132,23 +138,23 @@ public class ShobyoIkenHandler {
             原因疾患一覧.add(dgGenyin_row);
         }
         div.getDgGenyin().setDataSource(原因疾患一覧);
-        div.getTxtGeninShikkanCode().setDisabled(true);
-        div.getTxtMeisho().setDisabled(true);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(true);
         div.getGeninShikkanShosai().setVisible(false);
     }
 
     private void 症状としての安定性エリアを設定(ShujiiIkenshoJoho 要介護認定主治医意見書情報) {
-        if (要介護認定主治医意見書情報.get意見書_症状としての安定性() != null && !要介護認定主治医意見書情報.get意見書_症状としての安定性().trim().isEmpty()) {
+        if (要介護認定主治医意見書情報.get意見書_症状としての安定性() != null
+                && !要介護認定主治医意見書情報.get意見書_症状としての安定性().trim().isEmpty()) {
             div.getRadShojoAnteisei().setSelectedKey(要介護認定主治医意見書情報.get意見書_症状としての安定性());
-            div.setRadantei(要介護認定主治医意見書情報.get意見書_症状としての安定性());
-            if (!div.getRadShojoAnteisei().getSelectedKey().equals(Anteisei.不安定.getコード())) {
-                div.getTxtFuanteiShosaiJokyo().setDisabled(true);
+            div.getShojoAnteisei().setRadantei(要介護認定主治医意見書情報.get意見書_症状としての安定性());
+            if (div.getRadShojoAnteisei().getSelectedKey().equals(Anteisei.不安定.getコード())) {
+                div.getTxtFuanteiShosaiJokyo().setDisabled(false);
             }
         }
         if (要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況() != null
                 && !要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況().isEmpty()) {
             div.getTxtFuanteiShosaiJokyo().setValue(要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況());
-            div.setFuantei(要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況());
+            div.getShojoAnteisei().setFuantei(要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況());
         }
     }
 
@@ -158,10 +164,11 @@ public class ShobyoIkenHandler {
      */
     public void onClick_tsuika() {
         div.getGeninShikkanShosai().setVisible(true);
-        div.getTxtGeninShikkanCode().setDisabled(true);
-        div.getTxtMeisho().setDisabled(true);
-        div.getBtnToSearch().setDisabled(false);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(false);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().clearDisplayedValues();
         div.getRadIsShutaruGeninShikkan().setDisabled(false);
+        div.getCcdCodeInputGeninShikkan().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援,
+                コード種別);
         div.getGeninShikkanPanel().getGeninShikkanShosai().setJotai(追加);
     }
 
@@ -171,21 +178,19 @@ public class ShobyoIkenHandler {
      */
     public void onClick_syusei() {
         div.getGeninShikkanShosai().setVisible(true);
-        div.getTxtGeninShikkanCode().setDisabled(true);
-        div.getTxtMeisho().setDisabled(true);
-        div.getBtnToSearch().setDisabled(false);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(false);
         div.getRadIsShutaruGeninShikkan().setDisabled(false);
         div.getBtnNo().setDisabled(false);
         div.getBtnOK().setDisabled(false);
         dgGenyin_Row row = div.getDgGenyin().getClickedItem();
-        div.getTxtGeninShikkanCode().setValue(row.getGeninShikkanCode());
-        div.getTxtMeisho().setValue(row.getMeiSho());
+        div.getCcdCodeInputGeninShikkan().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援,
+                コード種別, new Code(row.getGeninShikkanCode().getValue()));
         if (row.getIsShutaruGeninShikkan()) {
             div.getRadIsShutaruGeninShikkan().setSelectedKey(安定性_True);
         } else {
             div.getRadIsShutaruGeninShikkan().setSelectedKey(安定性_False);
         }
-        div.getGeninShikkanPanel().getGeninShikkanShosai().setShikkanCode(row.getGeninShikkanCode());
+        div.getGeninShikkanPanel().getGeninShikkanShosai().setShikkanCode(row.getGeninShikkanCode().getValue());
         div.getGeninShikkanPanel().getGeninShikkanShosai().setMeisho(row.getMeiSho());
         if (row.getIsShutaruGeninShikkan()) {
             div.getGeninShikkanPanel().getGeninShikkanShosai().setIsShutaru(安定性_True);
@@ -201,13 +206,13 @@ public class ShobyoIkenHandler {
      */
     public void onClick_sakujyo() {
         div.getGeninShikkanShosai().setVisible(true);
-        div.getBtnToSearch().setDisabled(true);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(true);
         div.getRadIsShutaruGeninShikkan().setDisabled(true);
         div.getBtnNo().setDisabled(false);
         div.getBtnOK().setDisabled(false);
         dgGenyin_Row row = div.getDgGenyin().getClickedItem();
-        div.getTxtGeninShikkanCode().setValue(row.getGeninShikkanCode());
-        div.getTxtMeisho().setValue(row.getMeiSho());
+        div.getCcdCodeInputGeninShikkan().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, コード種別,
+                new Code(row.getGeninShikkanCode().getValue()));
         if (row.getIsShutaruGeninShikkan()) {
             div.getRadIsShutaruGeninShikkan().setSelectedKey(安定性_True);
         } else {
@@ -218,10 +223,9 @@ public class ShobyoIkenHandler {
 
     private void 追加状態() {
         div.getGeninShikkanShosai().setVisible(true);
-        div.getTxtGeninShikkanCode().setDisabled(true);
-        div.getTxtMeisho().setDisabled(true);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(false);
         dgGenyin_Row row = div.getDgGenyin().getClickedItem();
-        div.getGeninShikkanPanel().getGeninShikkanShosai().setShikkanCode(row.getGeninShikkanCode());
+        div.getGeninShikkanPanel().getGeninShikkanShosai().setShikkanCode(row.getGeninShikkanCode().getValue());
         div.getGeninShikkanPanel().getGeninShikkanShosai().setMeisho(row.getMeiSho());
         if (row.getIsShutaruGeninShikkan()) {
             div.getGeninShikkanPanel().getGeninShikkanShosai().setIsShutaru(安定性_True);
@@ -234,21 +238,19 @@ public class ShobyoIkenHandler {
 
     private void 空白状態() {
         div.getGeninShikkanPanel().getGeninShikkanShosai().setVisible(true);
-        div.getTxtGeninShikkanCode().setDisabled(true);
-        div.getBtnToSearch().setDisabled(true);
-        div.getTxtMeisho().setDisabled(true);
+        div.getGeninShikkanShosai().getCcdCodeInputGeninShikkan().setDisabled(true);
         div.getRadIsShutaruGeninShikkan().setRequired(true);
         div.getBtnNo().setDisabled(true);
         div.getBtnOK().setDisabled(true);
         dgGenyin_Row row = div.getDgGenyin().getClickedItem();
-        div.getTxtGeninShikkanCode().setValue(row.getGeninShikkanCode());
-        div.getTxtMeisho().setValue(row.getMeiSho());
+        div.getCcdCodeInputGeninShikkan().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, コード種別,
+                new Code(row.getGeninShikkanCode().getValue()));
         if (row.getIsShutaruGeninShikkan()) {
             div.getRadIsShutaruGeninShikkan().setSelectedKey(安定性_True);
         } else {
             div.getRadIsShutaruGeninShikkan().setSelectedKey(安定性_False);
         }
-        div.getGeninShikkanPanel().getGeninShikkanShosai().setShikkanCode(row.getGeninShikkanCode());
+        div.getGeninShikkanPanel().getGeninShikkanShosai().setShikkanCode(row.getGeninShikkanCode().getValue());
         div.getGeninShikkanPanel().getGeninShikkanShosai().setMeisho(row.getMeiSho());
         if (row.getIsShutaruGeninShikkan()) {
             div.getGeninShikkanPanel().getGeninShikkanShosai().setIsShutaru(安定性_True);
@@ -284,16 +286,10 @@ public class ShobyoIkenHandler {
      * @return 編集チェック結果
      */
     public boolean 一覧編集がある() {
-        if (div.getTxtGeninShikkanCode().getValue().equals(div.getGeninShikkanShosai().getShikkanCode())) {
+        if (!div.getCcdCodeInputGeninShikkan().getCode().getColumnValue().equals(div.getGeninShikkanShosai().getShikkanCode())) {
             return true;
         }
-        if (div.getTxtMeisho().getValue().equals(div.getGeninShikkanShosai().getMeisho())) {
-            return true;
-        }
-        if (div.getRadIsShutaruGeninShikkan().getSelectedKey().equals(div.getGeninShikkanShosai().getIsShutaru())) {
-            return true;
-        }
-        return false;
+        return !div.getRadIsShutaruGeninShikkan().getSelectedKey().equals(div.getGeninShikkanShosai().getIsShutaru());
     }
 
     /**
@@ -317,8 +313,10 @@ public class ShobyoIkenHandler {
         if (追加.equals(div.getGeninShikkanShosai().getJotai())) {
             row = new dgGenyin_Row();
             row.setJotai(追加);
-            row.setGeninShikkanCode(div.getTxtGeninShikkanCode().getValue());
-            row.setMeiSho(div.getTxtMeisho().getValue());
+            TextBoxCode 原因疾患コード = new TextBoxCode();
+            原因疾患コード.setValue(div.getCcdCodeInputGeninShikkan().getCode().getColumnValue());
+            row.setGeninShikkanCode(原因疾患コード);
+            row.setMeiSho(div.getCcdCodeInputGeninShikkan().getCodeMeisho());
             if (安定性_True.equals(div.getRadIsShutaruGeninShikkan().getSelectedKey())) {
                 row.setIsShutaruGeninShikkan(Boolean.TRUE);
             } else {
@@ -329,8 +327,10 @@ public class ShobyoIkenHandler {
         }
         if (修正.equals(div.getGeninShikkanShosai().getJotai())) {
             row = rowlist.get(rowcount);
-            row.setGeninShikkanCode(div.getTxtGeninShikkanCode().getValue());
-            row.setMeiSho(div.getTxtMeisho().getValue());
+            TextBoxCode 原因疾患コード = new TextBoxCode();
+            原因疾患コード.setValue(div.getCcdCodeInputGeninShikkan().getCode().getColumnValue());
+            row.setGeninShikkanCode(原因疾患コード);
+            row.setMeiSho(div.getCcdCodeInputGeninShikkan().getCodeMeisho());
             if (安定性_True.equals(div.getRadIsShutaruGeninShikkan().getSelectedKey())) {
                 row.setIsShutaruGeninShikkan(Boolean.TRUE);
             } else {
@@ -374,7 +374,7 @@ public class ShobyoIkenHandler {
         if (div.getTxtShindanYMD2().getValue() != null && !div.getTxtShindanYMD2().getValue().toDateString().equals(div.getYMD2())) {
             return true;
         }
-        if (!div.getTxtShindanName3().getValue().equals(div.getName3())) {
+        if (!div.getTxtShindanName().getValue().equals(div.getName3())) {
             return true;
         }
         if (div.getTxtShindanYMD3().getValue() != null && !div.getTxtShindanYMD3().getValue().toDateString().equals(div.getYMD3())) {
@@ -386,10 +386,10 @@ public class ShobyoIkenHandler {
                 return true;
             }
         }
-        if (!div.getRadShojoAnteisei().getSelectedKey().equals(div.getRadantei())) {
+        if (!div.getRadShojoAnteisei().getSelectedKey().equals(div.getShojoAnteisei().getRadantei())) {
             return true;
         }
-        if (!div.getTxtFuanteiShosaiJokyo().getValue().equals(div.getFuantei())) {
+        if (!div.getTxtFuanteiShosaiJokyo().getValue().equals(div.getShojoAnteisei().getFuantei())) {
             return true;
         }
         return !div.getTxtNaiyo().getValue().equals(div.getNaiyo());
@@ -446,7 +446,7 @@ public class ShobyoIkenHandler {
         if (div.getTxtShindanYMD2().getValue() != null) {
             要介護認定主治医builder.set意見書_発症年月日2(div.getTxtShindanYMD2().getValue().toDateString());
         }
-        要介護認定主治医builder.set意見書_診断名3(div.getTxtShindanName3().getValue());
+        要介護認定主治医builder.set意見書_診断名3(div.getTxtShindanName().getValue());
         if (div.getTxtShindanYMD3().getValue() != null) {
             要介護認定主治医builder.set意見書_発症年月日3(div.getTxtShindanYMD3().getValue().toDateString());
         }
@@ -471,7 +471,7 @@ public class ShobyoIkenHandler {
         if (div.getTxtShindanYMD2().getValue() != null) {
             要介護認定主治医builder.set意見書_発症年月日2(div.getTxtShindanYMD2().getValue().toDateString());
         }
-        要介護認定主治医builder.set意見書_診断名3(div.getTxtShindanName3().getValue());
+        要介護認定主治医builder.set意見書_診断名3(div.getTxtShindanName().getValue());
         if (div.getTxtShindanYMD3().getValue() != null) {
             要介護認定主治医builder.set意見書_発症年月日3(div.getTxtShindanYMD3().getValue().toDateString());
         }
@@ -490,7 +490,7 @@ public class ShobyoIkenHandler {
             if (修正.equals(row.getJotai())) {
                 GeninShikkan 原因疾患 = 意見書情報.getGeninShikkan(new GeninShikkanIdentifier(管理番号, row.getRenBan().getValue().intValue()));
                 GeninShikkanBuilder builder = 原因疾患.createBuilderForEdit();
-                builder.set原因疾患コード(new Code(row.getGeninShikkanCode()));
+                builder.set原因疾患コード(new Code(row.getGeninShikkanCode().getValue()));
                 builder.set主たる原因疾患フラグ(false);
                 if (row.getIsShutaruGeninShikkan()) {
                     builder.set主たる原因疾患フラグ(true);
@@ -501,9 +501,9 @@ public class ShobyoIkenHandler {
                 意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(原因疾患).build();
             }
             if (追加.equals(row.getJotai())) {
-                GeninShikkan geninShikkan = new GeninShikkan(管理番号, row.getRenBan().getValue().intValue());
+                GeninShikkan geninShikkan = new GeninShikkan(管理番号, get連番(管理番号));
                 GeninShikkanBuilder builder2 = geninShikkan.createBuilderForEdit();
-                builder2.set原因疾患コード(new Code(row.getGeninShikkanCode()));
+                builder2.set原因疾患コード(new Code(row.getGeninShikkanCode().getValue()));
                 if (row.getIsShutaruGeninShikkan()) {
                     builder2.set主たる原因疾患フラグ(true);
                 } else {
@@ -512,8 +512,25 @@ public class ShobyoIkenHandler {
                 geninShikkan = builder2.build();
                 意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(geninShikkan).build();
             }
+
+            if (削除.equals(row.getJotai())) {
+                GeninShikkan 原因疾患 = 意見書情報.getGeninShikkan(new GeninShikkanIdentifier(管理番号, row.getRenBan().getValue().intValue()));
+                GeninShikkanBuilder builder = 原因疾患.createBuilderForEdit();
+                builder.set原因疾患コード(new Code(row.getGeninShikkanCode().getValue()));
+                builder.set主たる原因疾患フラグ(false);
+                if (row.getIsShutaruGeninShikkan()) {
+                    builder.set主たる原因疾患フラグ(true);
+                } else {
+                    builder.set主たる原因疾患フラグ(false);
+                }
+                原因疾患 = builder.build().deleted();
+                意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(原因疾患).build();
+            }
         }
         return 意見書情報;
     }
 
+    private int get連番(ShinseishoKanriNo 管理番号) {
+        return ShobyoIkenFinder.createInstance().get連番(管理番号);
+    }
 }

@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShokanShokujiHiyo}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanShokujiHiyoBuilder {
 
@@ -71,7 +73,7 @@ public class ShokanShokujiHiyoBuilder {
      */
     public ShokanShokujiHiyoBuilder set整理番号(RString 整理番号) {
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        entity.setSeiriNp(整理番号);
+        entity.setSeiriNo(整理番号);
         return this;
     }
 

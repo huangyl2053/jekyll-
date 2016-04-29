@@ -9,11 +9,16 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 帳票ＩＤの列挙型です。
+ *
+ * @reamsid_L DBA-9999-021 xuyannan
  */
 public enum ReportIdDBA {
 
+    /**
+     * 適用除外者台帳の帳票ID。
+     */
+    DBA100010(new ReportId("DBA100010_TekiyojogaishaDaicho"), new RString("適用除外者台帳")),
     /**
      * 境界層管理マスタリストの帳票ID。
      */
@@ -21,7 +26,7 @@ public enum ReportIdDBA {
     /**
      * 広域内住所地特例者一覧表の帳票ID。
      */
-    DBA200013(new ReportId("DBA200013"), new RString("広域内住所地特例者一覧表")),
+    DBA200013(new ReportId("DBA200013_KoikinaiJushochitokureishaIchiranhyo"), new RString("広域内住所地特例者一覧表")),
     /**
      * 被保険者証発行一覧表の帳票ＩＤです。
      */
@@ -211,7 +216,27 @@ public enum ReportIdDBA {
     /**
      * 年齢到達予定者一覧表の帳票ＩＤです。
      */
-    DBA200001(new ReportId("DBA200001_NenreitotatsuYoteishaIchiranhyo"), new RString("年齢到達予定者一覧表"));
+    DBA200001(new ReportId("DBA200001_NenreitotatsuYoteishaIchiranhyo"), new RString("年齢到達予定者一覧表")),
+    /**
+     * 被保険者台帳一覧表の帳票ＩＤです。
+     */
+    DBA200002(new ReportId("DBA200002_HihokenshaDaichoHakkoIchiranhyo"), new RString("被保険者台帳一覧表")),
+    /**
+     * 異動チェックリスト帳票の帳票ＩＤです。
+     */
+    DBA200006(new ReportId("DBA200006_IdoCheckList"), new RString("異動チェックリスト")),
+    /**
+     * 介護保険　転入・転出未登録一覧表です。
+     */
+    DBA200014(new ReportId("DBA200014_TennyuTenshutsuMitorokuIchiranhyo"), new RString("介護保険　転入・転出未登録一覧表")),
+    /**
+     * 被保険者台帳です。
+     */
+    DBA100009(new ReportId("DBA100009_HihokenshaDaicho"), new RString("被保険者台帳")),
+    /**
+     * 他市町村住所地特例者台帳の帳票ＩＤです。
+     */
+    DBA100011(new ReportId("DBA100011_TashichosonJushochitokureishaDaicho"), new RString("他市町村住所地特例者台帳"));
 
     private final ReportId reportId;
     private final RString reportName;

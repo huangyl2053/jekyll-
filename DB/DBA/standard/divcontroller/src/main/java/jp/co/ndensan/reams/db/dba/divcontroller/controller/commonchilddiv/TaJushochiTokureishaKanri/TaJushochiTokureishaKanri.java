@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.TaJushochiTokureishaKanri;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriHandler;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriValidationHandler;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri.TaJushochiTokureishaKanriValidationHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,10 +15,11 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 他住所地特例者管理のクラス。
+ *
+ * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TaJushochiTokureishaKanri {
 
@@ -78,7 +78,7 @@ public class TaJushochiTokureishaKanri {
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
      */
     public ResponseData<TaJushochiTokureishaKanriDiv> onClick_onBlur(TaJushochiTokureishaKanriDiv requestDiv) {
-        RString 親画面状態 = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        RString 親画面状態 = new RString(requestDiv.getMode_DisplayMode().toString());
         getHandler(requestDiv).onClick_onBlur(親画面状態);
         return ResponseData.of(requestDiv).respond();
     }
@@ -114,7 +114,7 @@ public class TaJushochiTokureishaKanri {
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
      */
     public ResponseData<TaJushochiTokureishaKanriDiv> onClick_BtnKakunin(TaJushochiTokureishaKanriDiv requestDiv) {
-        RString 親画面状態 = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        RString 親画面状態 = new RString(requestDiv.getMode_DisplayMode().toString());
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate(親画面状態);
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();

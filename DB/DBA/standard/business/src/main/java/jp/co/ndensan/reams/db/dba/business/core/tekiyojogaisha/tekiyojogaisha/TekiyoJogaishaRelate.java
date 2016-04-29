@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 適用除外者を管理するクラスです。
+ *
+ * @reamsid_L DBA-0210-020 dingyi
  */
 public class TekiyoJogaishaRelate {
 
@@ -39,6 +41,42 @@ public class TekiyoJogaishaRelate {
      */
     public ShikibetsuCode get識別コード() {
         return relateEntity.getShikibetsuCode();
+    }
+
+    /**
+     * 異動日を返します。
+     *
+     * @return 異動日
+     */
+    public FlexibleDate get異動日() {
+        return relateEntity.getIdoYMD();
+    }
+
+    /**
+     * 枝番を返します。
+     *
+     * @return 枝番
+     */
+    public RString get枝番() {
+        return relateEntity.getEdaNo();
+    }
+
+    /**
+     * 異動事由コードを返します。
+     *
+     * @return 異動事由コード
+     */
+    public RString get異動事由コード() {
+        return relateEntity.getIdoJiyuCode();
+    }
+
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return relateEntity.getShichosonCode();
     }
 
     /**
@@ -75,24 +113,6 @@ public class TekiyoJogaishaRelate {
      */
     public Decimal get履歴番号() {
         return relateEntity.getRirekiNo();
-    }
-
-    /**
-     * 枝番を返します。
-     *
-     * @return 枝番
-     */
-    public RString get枝番() {
-        return relateEntity.getEdaNo();
-    }
-
-    /**
-     * 異動日を返します。
-     *
-     * @return 異動日
-     */
-    public FlexibleDate get異動日() {
-        return relateEntity.getIdoYMD();
     }
 
     /**
@@ -157,4 +177,50 @@ public class TekiyoJogaishaRelate {
     public RString get適用除外適用事由コード() {
         return relateEntity.getTekiyoJogaiTekiyoJiyuCode();
     }
+
+    /**
+     * 台帳種別を返します。
+     *
+     * @return 台帳種別
+     */
+    public RString get台帳種別() {
+        return relateEntity.getDaichoShubetsu();
+    }
+
+    /**
+     * 入所通知発行日を返します。
+     *
+     * @return 入所通知発行日
+     */
+    public FlexibleDate get入所通知発行日() {
+        return relateEntity.getNyushoTsuchiHakkoYMD();
+    }
+
+    /**
+     * 退所通知発行日を返します。
+     *
+     * @return 退所通知発行日
+     */
+    public FlexibleDate get退所通知発行日() {
+        return relateEntity.getTaishoTsuchiHakkoYMD();
+    }
+
+    /**
+     * 変更通知発行日を返します。
+     *
+     * @return 変更通知発行日
+     */
+    public FlexibleDate get変更通知発行日() {
+        return relateEntity.getHenkoTsuchiHakkoYMD();
+    }
+
+    /**
+     * 入所施設種類を返します。
+     *
+     * @return 入所施設種類
+     */
+    public RString get入所施設種類() {
+        return relateEntity.getNyushoShisetsuShurui();
+    }
+
 }

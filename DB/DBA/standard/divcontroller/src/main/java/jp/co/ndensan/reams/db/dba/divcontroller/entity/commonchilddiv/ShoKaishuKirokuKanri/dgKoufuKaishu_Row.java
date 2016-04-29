@@ -3,19 +3,23 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 22 18:02:39 CST 2015
+ * Tue Apr 19 20:06:34 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgKoufuKaishu_Row のクラスファイル
- *
+ * dgKoufuKaishu_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgKoufuKaishu_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString status;
     private RString koufuType;
@@ -26,6 +30,10 @@ public class dgKoufuKaishu_Row extends DataRow {
     private RString yukoKigen;
     private RString kofuRiyu;
     private RString kaishuRiyu;
+    private RString rirekiNo;
+    private RString koufuTypeNo;
+    private RString koufuJiyuNo;
+    private RString kaishuJiyuNo;
 
     public dgKoufuKaishu_Row() {
         super();
@@ -38,6 +46,10 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.yukoKigen = RString.EMPTY;
         this.kofuRiyu = RString.EMPTY;
         this.kaishuRiyu = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
+        this.koufuTypeNo = RString.EMPTY;
+        this.koufuJiyuNo = RString.EMPTY;
+        this.kaishuJiyuNo = RString.EMPTY;
         this.setOriginalData("status", status);
         this.setOriginalData("koufuType", koufuType);
         this.setOriginalData("koufuDate", koufuDate);
@@ -47,9 +59,13 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.setOriginalData("yukoKigen", yukoKigen);
         this.setOriginalData("kofuRiyu", kofuRiyu);
         this.setOriginalData("kaishuRiyu", kaishuRiyu);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("koufuTypeNo", koufuTypeNo);
+        this.setOriginalData("koufuJiyuNo", koufuJiyuNo);
+        this.setOriginalData("kaishuJiyuNo", kaishuJiyuNo);
     }
 
-    public dgKoufuKaishu_Row(RString status, RString koufuType, RString koufuDate, RString koufuJiyu, RString kaishuDate, RString kaishuJiyu, RString yukoKigen, RString kofuRiyu, RString kaishuRiyu) {
+    public dgKoufuKaishu_Row(RString status, RString koufuType, RString koufuDate, RString koufuJiyu, RString kaishuDate, RString kaishuJiyu, RString yukoKigen, RString kofuRiyu, RString kaishuRiyu, RString rirekiNo, RString koufuTypeNo, RString koufuJiyuNo, RString kaishuJiyuNo) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("koufuType", koufuType);
@@ -60,6 +76,10 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.setOriginalData("yukoKigen", yukoKigen);
         this.setOriginalData("kofuRiyu", kofuRiyu);
         this.setOriginalData("kaishuRiyu", kaishuRiyu);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("koufuTypeNo", koufuTypeNo);
+        this.setOriginalData("koufuJiyuNo", koufuJiyuNo);
+        this.setOriginalData("kaishuJiyuNo", kaishuJiyuNo);
         this.status = status;
         this.koufuType = koufuType;
         this.koufuDate = koufuDate;
@@ -69,6 +89,10 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.yukoKigen = yukoKigen;
         this.kofuRiyu = kofuRiyu;
         this.kaishuRiyu = kaishuRiyu;
+        this.rirekiNo = rirekiNo;
+        this.koufuTypeNo = koufuTypeNo;
+        this.koufuJiyuNo = koufuJiyuNo;
+        this.kaishuJiyuNo = kaishuJiyuNo;
     }
 
     public RString getStatus() {
@@ -105,6 +129,22 @@ public class dgKoufuKaishu_Row extends DataRow {
 
     public RString getKaishuRiyu() {
         return kaishuRiyu;
+    }
+
+    public RString getRirekiNo() {
+        return rirekiNo;
+    }
+
+    public RString getKoufuTypeNo() {
+        return koufuTypeNo;
+    }
+
+    public RString getKoufuJiyuNo() {
+        return koufuJiyuNo;
+    }
+
+    public RString getKaishuJiyuNo() {
+        return kaishuJiyuNo;
     }
 
     public void setStatus(RString status) {
@@ -150,6 +190,26 @@ public class dgKoufuKaishu_Row extends DataRow {
     public void setKaishuRiyu(RString kaishuRiyu) {
         this.setOriginalData("kaishuRiyu", kaishuRiyu);
         this.kaishuRiyu = kaishuRiyu;
+    }
+
+    public void setRirekiNo(RString rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
+    }
+
+    public void setKoufuTypeNo(RString koufuTypeNo) {
+        this.setOriginalData("koufuTypeNo", koufuTypeNo);
+        this.koufuTypeNo = koufuTypeNo;
+    }
+
+    public void setKoufuJiyuNo(RString koufuJiyuNo) {
+        this.setOriginalData("koufuJiyuNo", koufuJiyuNo);
+        this.koufuJiyuNo = koufuJiyuNo;
+    }
+
+    public void setKaishuJiyuNo(RString kaishuJiyuNo) {
+        this.setOriginalData("kaishuJiyuNo", kaishuJiyuNo);
+        this.kaishuJiyuNo = kaishuJiyuNo;
     }
 
     // </editor-fold>

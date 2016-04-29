@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.shokanharaishikyushinseisho.Shok
 /**
  *
  * 介護保険償還払支給申請書Editorです。
+ *
+ * @reamsid_L DBA-0540-706 yaodongsheng
  */
 public class ShokanharaiShikyuShinseishoEditor implements IShokanharaiShikyuShinseishoEditor {
 

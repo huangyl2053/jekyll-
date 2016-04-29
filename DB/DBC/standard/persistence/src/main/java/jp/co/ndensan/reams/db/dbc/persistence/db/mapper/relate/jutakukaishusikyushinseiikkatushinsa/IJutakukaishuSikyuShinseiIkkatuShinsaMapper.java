@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkat
 
 /**
  * 住宅改修費支給申請一括審査のマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-0991-040 xicongwang
  */
 public interface IJutakukaishuSikyuShinseiIkkatuShinsaMapper {
 

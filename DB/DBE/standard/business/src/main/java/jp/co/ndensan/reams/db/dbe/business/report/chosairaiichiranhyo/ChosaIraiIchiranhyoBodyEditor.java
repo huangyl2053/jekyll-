@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 認定調査依頼一覧表ボディEditorです。
+ *
+ * @reamsid_L DBE-0010-030 lishengli
  */
 class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
 

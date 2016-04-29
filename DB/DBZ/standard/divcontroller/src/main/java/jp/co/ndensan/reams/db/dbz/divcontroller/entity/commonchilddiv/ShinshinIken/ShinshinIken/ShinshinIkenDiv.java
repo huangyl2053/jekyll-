@@ -4,18 +4,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinshinI
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.IShinshinIkenDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * ShinshinIken のクラスファイル 
- * 
+ * ShinshinIken のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
@@ -179,7 +184,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkShogaiKoreishaNichijoSeikatsuJiritsudo(CheckBoxList chkShogaiKoreishaNichijoSeikatsuJiritsudo) {
+    public void setChkShogaiKoreishaNichijoSeikatsuJiritsudo(CheckBoxList chkShogaiKoreishaNichijoSeikatsuJiritsudo) {
         this.getNichijoJiritsudo().setChkShogaiKoreishaNichijoSeikatsuJiritsudo(chkShogaiKoreishaNichijoSeikatsuJiritsudo);
     }
 
@@ -189,7 +194,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkNinchishoKoreishaJiritsu(CheckBoxList chkNinchishoKoreishaJiritsu) {
+    public void setChkNinchishoKoreishaJiritsu(CheckBoxList chkNinchishoKoreishaJiritsu) {
         this.getNichijoJiritsudo().setChkNinchishoKoreishaJiritsu(chkNinchishoKoreishaJiritsu);
     }
 
@@ -199,7 +204,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setRadTankiKioku(RadioButton radTankiKioku) {
+    public void setRadTankiKioku(RadioButton radTankiKioku) {
         this.getNinchishoChukakuShojo().setRadTankiKioku(radTankiKioku);
     }
 
@@ -209,7 +214,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setRadNichijoNinchiNoryoku(RadioButton radNichijoNinchiNoryoku) {
+    public void setRadNichijoNinchiNoryoku(RadioButton radNichijoNinchiNoryoku) {
         this.getNinchishoChukakuShojo().setRadNichijoNinchiNoryoku(radNichijoNinchiNoryoku);
     }
 
@@ -219,7 +224,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setRadIshiDentatsuNoryoku(RadioButton radIshiDentatsuNoryoku) {
+    public void setRadIshiDentatsuNoryoku(RadioButton radIshiDentatsuNoryoku) {
         this.getNinchishoChukakuShojo().setRadIshiDentatsuNoryoku(radIshiDentatsuNoryoku);
     }
 
@@ -229,7 +234,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkNinchishoShuhenShojoUmu(CheckBoxList chkNinchishoShuhenShojoUmu) {
+    public void setChkNinchishoShuhenShojoUmu(CheckBoxList chkNinchishoShuhenShojoUmu) {
         this.getNinchishoShuhenShojo().setChkNinchishoShuhenShojoUmu(chkNinchishoShuhenShojoUmu);
     }
 
@@ -239,7 +244,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkNinchishoShuhenShojo(CheckBoxList chkNinchishoShuhenShojo) {
+    public void setChkNinchishoShuhenShojo(CheckBoxList chkNinchishoShuhenShojo) {
         this.getNinchishoShuhenShojo().setChkNinchishoShuhenShojo(chkNinchishoShuhenShojo);
     }
 
@@ -249,7 +254,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkNinchishoShuhenShojoSonota(CheckBoxList chkNinchishoShuhenShojoSonota) {
+    public void setChkNinchishoShuhenShojoSonota(CheckBoxList chkNinchishoShuhenShojoSonota) {
         this.getNinchishoShuhenShojo().setChkNinchishoShuhenShojoSonota(chkNinchishoShuhenShojoSonota);
     }
 
@@ -259,7 +264,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtSonotaKinyu(TextBox txtSonotaKinyu) {
+    public void setTxtSonotaKinyu(TextBox txtSonotaKinyu) {
         this.getNinchishoShuhenShojo().setTxtSonotaKinyu(txtSonotaKinyu);
     }
 
@@ -269,7 +274,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkSonotaShojo(CheckBoxList chkSonotaShojo) {
+    public void setChkSonotaShojo(CheckBoxList chkSonotaShojo) {
         this.getSonotaShojo().setChkSonotaShojo(chkSonotaShojo);
     }
 
@@ -279,7 +284,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShojomei(TextBox txtShojomei) {
+    public void setTxtShojomei(TextBox txtShojomei) {
         this.getSonotaShojo().setTxtShojomei(txtShojomei);
     }
 
@@ -289,7 +294,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkSenmonJushin(CheckBoxList chkSenmonJushin) {
+    public void setChkSenmonJushin(CheckBoxList chkSenmonJushin) {
         this.getSonotaShojo().setChkSenmonJushin(chkSenmonJushin);
     }
 
@@ -299,7 +304,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShosaiTokkiJiko(TextBox txtShosaiTokkiJiko) {
+    public void setTxtShosaiTokkiJiko(TextBox txtShosaiTokkiJiko) {
         this.getSonotaShojo().setTxtShosaiTokkiJiko(txtShosaiTokkiJiko);
     }
 
@@ -309,7 +314,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKikiude(CheckBoxList chkKikiude) {
+    public void setChkKikiude(CheckBoxList chkKikiude) {
         this.getKaradaJotai().setChkKikiude(chkKikiude);
     }
 
@@ -319,7 +324,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShincho(TextBox txtShincho) {
+    public void setTxtShincho(TextBox txtShincho) {
         this.getKaradaJotai().setTxtShincho(txtShincho);
     }
 
@@ -329,7 +334,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTaiju(TextBox txtTaiju) {
+    public void setTxtTaiju(TextBox txtTaiju) {
         this.getKaradaJotai().setTxtTaiju(txtTaiju);
     }
 
@@ -339,7 +344,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKakoTaijuHenka(CheckBoxList chkKakoTaijuHenka) {
+    public void setChkKakoTaijuHenka(CheckBoxList chkKakoTaijuHenka) {
         this.getKaradaJotai().setChkKakoTaijuHenka(chkKakoTaijuHenka);
     }
 
@@ -349,7 +354,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkShishiKesson(CheckBoxList chkShishiKesson) {
+    public void setChkShishiKesson(CheckBoxList chkShishiKesson) {
         this.getKaradaJotai().setChkShishiKesson(chkShishiKesson);
     }
 
@@ -359,7 +364,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShishiKessonBui(TextBox txtShishiKessonBui) {
+    public void setTxtShishiKessonBui(TextBox txtShishiKessonBui) {
         this.getKaradaJotai().setTxtShishiKessonBui(txtShishiKessonBui);
     }
 
@@ -369,7 +374,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLinHorizon1(HorizontalLine linHorizon1) {
+    public void setLinHorizon1(HorizontalLine linHorizon1) {
         this.getKaradaJotai().setLinHorizon1(linHorizon1);
     }
 
@@ -379,7 +384,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkMahi(CheckBoxList chkMahi) {
+    public void setChkMahi(CheckBoxList chkMahi) {
         this.getKaradaJotai().setChkMahi(chkMahi);
     }
 
@@ -389,7 +394,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkMigiJoshiMahi(CheckBoxList chkMigiJoshiMahi) {
+    public void setChkMigiJoshiMahi(CheckBoxList chkMigiJoshiMahi) {
         this.getKaradaJotai().setChkMigiJoshiMahi(chkMigiJoshiMahi);
     }
 
@@ -399,7 +404,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkMigiJoshiMahiTeido(CheckBoxList chkMigiJoshiMahiTeido) {
+    public void setChkMigiJoshiMahiTeido(CheckBoxList chkMigiJoshiMahiTeido) {
         this.getKaradaJotai().setChkMigiJoshiMahiTeido(chkMigiJoshiMahiTeido);
     }
 
@@ -409,7 +414,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkHidariJoshiMahi(CheckBoxList chkHidariJoshiMahi) {
+    public void setChkHidariJoshiMahi(CheckBoxList chkHidariJoshiMahi) {
         this.getKaradaJotai().setChkHidariJoshiMahi(chkHidariJoshiMahi);
     }
 
@@ -419,7 +424,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkHidariJoshiMahiTeido(CheckBoxList chkHidariJoshiMahiTeido) {
+    public void setChkHidariJoshiMahiTeido(CheckBoxList chkHidariJoshiMahiTeido) {
         this.getKaradaJotai().setChkHidariJoshiMahiTeido(chkHidariJoshiMahiTeido);
     }
 
@@ -429,7 +434,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkMigiKashiMahi(CheckBoxList chkMigiKashiMahi) {
+    public void setChkMigiKashiMahi(CheckBoxList chkMigiKashiMahi) {
         this.getKaradaJotai().setChkMigiKashiMahi(chkMigiKashiMahi);
     }
 
@@ -439,7 +444,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkMigiKashiMahiTeido(CheckBoxList chkMigiKashiMahiTeido) {
+    public void setChkMigiKashiMahiTeido(CheckBoxList chkMigiKashiMahiTeido) {
         this.getKaradaJotai().setChkMigiKashiMahiTeido(chkMigiKashiMahiTeido);
     }
 
@@ -449,7 +454,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkHidariKashiMahi(CheckBoxList chkHidariKashiMahi) {
+    public void setChkHidariKashiMahi(CheckBoxList chkHidariKashiMahi) {
         this.getKaradaJotai().setChkHidariKashiMahi(chkHidariKashiMahi);
     }
 
@@ -459,7 +464,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkHidariKashiMahiTeido(CheckBoxList chkHidariKashiMahiTeido) {
+    public void setChkHidariKashiMahiTeido(CheckBoxList chkHidariKashiMahiTeido) {
         this.getKaradaJotai().setChkHidariKashiMahiTeido(chkHidariKashiMahiTeido);
     }
 
@@ -469,7 +474,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkSonotaMahi(CheckBoxList chkSonotaMahi) {
+    public void setChkSonotaMahi(CheckBoxList chkSonotaMahi) {
         this.getKaradaJotai().setChkSonotaMahi(chkSonotaMahi);
     }
 
@@ -479,7 +484,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtSonotaMahiBui(TextBox txtSonotaMahiBui) {
+    public void setTxtSonotaMahiBui(TextBox txtSonotaMahiBui) {
         this.getKaradaJotai().setTxtSonotaMahiBui(txtSonotaMahiBui);
     }
 
@@ -489,7 +494,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setSonotaMahiTeido(CheckBoxList SonotaMahiTeido) {
+    public void setSonotaMahiTeido(CheckBoxList SonotaMahiTeido) {
         this.getKaradaJotai().setSonotaMahiTeido(SonotaMahiTeido);
     }
 
@@ -499,7 +504,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLinHorizon2(HorizontalLine linHorizon2) {
+    public void setLinHorizon2(HorizontalLine linHorizon2) {
         this.getKaradaJotai().setLinHorizon2(linHorizon2);
     }
 
@@ -509,7 +514,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKinryokuTeika(CheckBoxList chkKinryokuTeika) {
+    public void setChkKinryokuTeika(CheckBoxList chkKinryokuTeika) {
         this.getKaradaJotai().setChkKinryokuTeika(chkKinryokuTeika);
     }
 
@@ -519,7 +524,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtKinryokuTeikaBui(TextBox txtKinryokuTeikaBui) {
+    public void setTxtKinryokuTeikaBui(TextBox txtKinryokuTeikaBui) {
         this.getKaradaJotai().setTxtKinryokuTeikaBui(txtKinryokuTeikaBui);
     }
 
@@ -529,7 +534,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKinryokuTeikaTeido(CheckBoxList chkKinryokuTeikaTeido) {
+    public void setChkKinryokuTeikaTeido(CheckBoxList chkKinryokuTeikaTeido) {
         this.getKaradaJotai().setChkKinryokuTeikaTeido(chkKinryokuTeikaTeido);
     }
 
@@ -539,7 +544,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLinHorizon3(HorizontalLine linHorizon3) {
+    public void setLinHorizon3(HorizontalLine linHorizon3) {
         this.getKaradaJotai().setLinHorizon3(linHorizon3);
     }
 
@@ -549,7 +554,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKansetsuKoshuku(CheckBoxList chkKansetsuKoshuku) {
+    public void setChkKansetsuKoshuku(CheckBoxList chkKansetsuKoshuku) {
         this.getKaradaJotai().setChkKansetsuKoshuku(chkKansetsuKoshuku);
     }
 
@@ -559,7 +564,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtKansetsuKoshukuBui(TextBox txtKansetsuKoshukuBui) {
+    public void setTxtKansetsuKoshukuBui(TextBox txtKansetsuKoshukuBui) {
         this.getKaradaJotai().setTxtKansetsuKoshukuBui(txtKansetsuKoshukuBui);
     }
 
@@ -569,7 +574,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKansetsuKoshukuTeido(CheckBoxList chkKansetsuKoshukuTeido) {
+    public void setChkKansetsuKoshukuTeido(CheckBoxList chkKansetsuKoshukuTeido) {
         this.getKaradaJotai().setChkKansetsuKoshukuTeido(chkKansetsuKoshukuTeido);
     }
 
@@ -579,7 +584,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLinHorizon4(HorizontalLine linHorizon4) {
+    public void setLinHorizon4(HorizontalLine linHorizon4) {
         this.getKaradaJotai().setLinHorizon4(linHorizon4);
     }
 
@@ -589,7 +594,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKansetsuItami(CheckBoxList chkKansetsuItami) {
+    public void setChkKansetsuItami(CheckBoxList chkKansetsuItami) {
         this.getKaradaJotai().setChkKansetsuItami(chkKansetsuItami);
     }
 
@@ -599,7 +604,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtKansetsuItamiBui(TextBox txtKansetsuItamiBui) {
+    public void setTxtKansetsuItamiBui(TextBox txtKansetsuItamiBui) {
         this.getKaradaJotai().setTxtKansetsuItamiBui(txtKansetsuItamiBui);
     }
 
@@ -609,7 +614,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkKansetsuItamiTeido(CheckBoxList chkKansetsuItamiTeido) {
+    public void setChkKansetsuItamiTeido(CheckBoxList chkKansetsuItamiTeido) {
         this.getKaradaJotai().setChkKansetsuItamiTeido(chkKansetsuItamiTeido);
     }
 
@@ -619,7 +624,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLinHorizon5(HorizontalLine linHorizon5) {
+    public void setLinHorizon5(HorizontalLine linHorizon5) {
         this.getKaradaJotai().setLinHorizon5(linHorizon5);
     }
 
@@ -629,7 +634,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkShicchoFuzuii(CheckBoxList chkShicchoFuzuii) {
+    public void setChkShicchoFuzuii(CheckBoxList chkShicchoFuzuii) {
         this.getKaradaJotai().setChkShicchoFuzuii(chkShicchoFuzuii);
     }
 
@@ -639,7 +644,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkFuzuiiJoshi(CheckBoxList chkFuzuiiJoshi) {
+    public void setChkFuzuiiJoshi(CheckBoxList chkFuzuiiJoshi) {
         this.getKaradaJotai().setChkFuzuiiJoshi(chkFuzuiiJoshi);
     }
 
@@ -649,7 +654,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkFuzuiiKashi(CheckBoxList chkFuzuiiKashi) {
+    public void setChkFuzuiiKashi(CheckBoxList chkFuzuiiKashi) {
         this.getKaradaJotai().setChkFuzuiiKashi(chkFuzuiiKashi);
     }
 
@@ -659,7 +664,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkTaikan(CheckBoxList chkTaikan) {
+    public void setChkTaikan(CheckBoxList chkTaikan) {
         this.getKaradaJotai().setChkTaikan(chkTaikan);
     }
 
@@ -669,7 +674,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLinHorizon6(HorizontalLine linHorizon6) {
+    public void setLinHorizon6(HorizontalLine linHorizon6) {
         this.getKaradaJotai().setLinHorizon6(linHorizon6);
     }
 
@@ -679,7 +684,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkJokuso(CheckBoxList chkJokuso) {
+    public void setChkJokuso(CheckBoxList chkJokuso) {
         this.getKaradaJotai().setChkJokuso(chkJokuso);
     }
 
@@ -689,7 +694,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtJokusoBui(TextBox txtJokusoBui) {
+    public void setTxtJokusoBui(TextBox txtJokusoBui) {
         this.getKaradaJotai().setTxtJokusoBui(txtJokusoBui);
     }
 
@@ -699,7 +704,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkJokusoTeido(CheckBoxList chkJokusoTeido) {
+    public void setChkJokusoTeido(CheckBoxList chkJokusoTeido) {
         this.getKaradaJotai().setChkJokusoTeido(chkJokusoTeido);
     }
 
@@ -709,7 +714,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setLinHorizon7(HorizontalLine linHorizon7) {
+    public void setLinHorizon7(HorizontalLine linHorizon7) {
         this.getKaradaJotai().setLinHorizon7(linHorizon7);
     }
 
@@ -719,7 +724,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkSonotaHifuShikkan(CheckBoxList chkSonotaHifuShikkan) {
+    public void setChkSonotaHifuShikkan(CheckBoxList chkSonotaHifuShikkan) {
         this.getKaradaJotai().setChkSonotaHifuShikkan(chkSonotaHifuShikkan);
     }
 
@@ -729,7 +734,7 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setTxtSonotaHifuShikkanBui(TextBox txtSonotaHifuShikkanBui) {
+    public void setTxtSonotaHifuShikkanBui(TextBox txtSonotaHifuShikkanBui) {
         this.getKaradaJotai().setTxtSonotaHifuShikkanBui(txtSonotaHifuShikkanBui);
     }
 
@@ -739,11 +744,10 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public void  setChkSonotaHifuShikkanTeido(CheckBoxList chkSonotaHifuShikkanTeido) {
+    public void setChkSonotaHifuShikkanTeido(CheckBoxList chkSonotaHifuShikkanTeido) {
         this.getKaradaJotai().setChkSonotaHifuShikkanTeido(chkSonotaHifuShikkanTeido);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

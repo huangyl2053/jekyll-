@@ -15,11 +15,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * KokuhorenJohoTorikomiBatchKido のクラスファイル 
- * 
- * @author 自動生成
+ * KokuhorenJohoTorikomiBatchKido のクラスファイル
+ *
+ * @reamsid_L DBC-0980-030 quxiaodong
  */
 public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
@@ -123,7 +124,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblChushutsuJoken(Label lblChushutsuJoken) {
+    public void setLblChushutsuJoken(Label lblChushutsuJoken) {
         this.getPnlChushutsuJoken().setLblChushutsuJoken(lblChushutsuJoken);
     }
 
@@ -133,7 +134,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShoriJoken(TextBoxDate txtShoriJoken) {
+    public void setTxtShoriJoken(TextBoxDate txtShoriJoken) {
         this.getPnlChushutsuJoken().setTxtShoriJoken(txtShoriJoken);
     }
 
@@ -143,7 +144,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtSaishoriKubun(TextBox txtSaishoriKubun) {
+    public void setTxtSaishoriKubun(TextBox txtSaishoriKubun) {
         this.getPnlChushutsuJoken().setTxtSaishoriKubun(txtSaishoriKubun);
     }
 
@@ -153,7 +154,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtKokanShikibetsuNo(TextBox txtKokanShikibetsuNo) {
+    public void setTxtKokanShikibetsuNo(TextBox txtKokanShikibetsuNo) {
         this.getPnlChushutsuJoken().setTxtKokanShikibetsuNo(txtKokanShikibetsuNo);
     }
 
@@ -163,7 +164,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblShoritaishoJobo(Label lblShoritaishoJobo) {
+    public void setLblShoritaishoJobo(Label lblShoritaishoJobo) {
         this.getPnlShoritaishoJoho().setLblShoritaishoJobo(lblShoritaishoJobo);
     }
 
@@ -173,7 +174,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkDogetsuKagobun(CheckBoxList chkDogetsuKagobun) {
+    public void setChkDogetsuKagobun(CheckBoxList chkDogetsuKagobun) {
         this.getPnlShoritaishoJoho().setChkDogetsuKagobun(chkDogetsuKagobun);
     }
 
@@ -183,7 +184,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkTsujobun(CheckBoxList chkTsujobun) {
+    public void setChkTsujobun(CheckBoxList chkTsujobun) {
         this.getPnlShoritaishoJoho().setChkTsujobun(chkTsujobun);
     }
 
@@ -193,7 +194,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setKakuninJiko(KakuninJikoDiv KakuninJiko) {
+    public void setKakuninJiko(KakuninJikoDiv KakuninJiko) {
         this.getPnlShoritaishoJoho().setKakuninJiko(KakuninJiko);
     }
 
@@ -203,7 +204,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblKakuninJiko1(Label lblKakuninJiko1) {
+    public void setLblKakuninJiko1(Label lblKakuninJiko1) {
         this.getPnlShoritaishoJoho().getKakuninJiko().setLblKakuninJiko1(lblKakuninJiko1);
     }
 
@@ -213,7 +214,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblKakuninJiko2(Label lblKakuninJiko2) {
+    public void setLblKakuninJiko2(Label lblKakuninJiko2) {
         this.getPnlShoritaishoJoho().getKakuninJiko().setLblKakuninJiko2(lblKakuninJiko2);
     }
 
@@ -223,7 +224,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblKakuninJiko3(Label lblKakuninJiko3) {
+    public void setLblKakuninJiko3(Label lblKakuninJiko3) {
         this.getPnlShoritaishoJoho().getKakuninJiko().setLblKakuninJiko3(lblKakuninJiko3);
     }
 

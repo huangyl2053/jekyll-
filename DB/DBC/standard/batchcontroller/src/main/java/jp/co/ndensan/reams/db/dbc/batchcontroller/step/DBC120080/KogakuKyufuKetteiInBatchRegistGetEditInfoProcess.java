@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120080;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.HihokenshaNoDataParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.SinBangoTempParameter;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.PSMParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShikibetsuCodeTempParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.PSMEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijoho.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper;
@@ -27,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,19 +35,25 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 一時テーブルにデータの編集
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class KogakuKyufuKetteiInBatchRegistGetEditInfoProcess extends BatchProcessBase<KogakuKyufuKetteiInTempTableEntity> {
+
+    private static final RString データ_0010 = new RString("0010");
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.kogakuserviceketteijohotorikomidatahenshu."
             + "IKogakuServiceKetteiJohoTorikomiDataHenshuMapper.select被保険者番号");
 
     private IKogakuServiceKetteiJohoTorikomiDataHenshuMapper mapper;
+    private List<DbT7026ShinKyuHihokenshaNoHenkanEntity> targetList;
 
     @Override
     protected void initialize() {
         super.initialize();
         mapper = getMapper(IKogakuServiceKetteiJohoTorikomiDataHenshuMapper.class);
+        targetList = new ArrayList<>();
     }
 
     @Override
@@ -60,51 +64,53 @@ public class KogakuKyufuKetteiInBatchRegistGetEditInfoProcess extends BatchProce
     @Override
     protected void process(KogakuKyufuKetteiInTempTableEntity entity) {
         HihokenshaNo 被保険者番号 = entity.get被保険者番号();
-        ShichosonHihokenshaParameter parameter1 = ShichosonHihokenshaParameter.createParameter(被保険者番号);
-        DbT1001HihokenshaDaichoEntity 被保険者台帳管理 = mapper.select市町村コード(parameter1);
+        ShichosonHihokenshaParameter parameter = ShichosonHihokenshaParameter.createParameter(被保険者番号);
+        DbT1001HihokenshaDaichoEntity 被保険者台帳管理 = mapper.select市町村コード(parameter);
         if (null != 被保険者台帳管理) {
             LasdecCode 市町村コード = 被保険者台帳管理.getShichosonCode();
-            ShichosonHihokenshaParameter parameter2 = ShichosonHihokenshaParameter
+            parameter = ShichosonHihokenshaParameter
                     .createParameter(被保険者番号, 市町村コード);
-            DbT7026ShinKyuHihokenshaNoHenkanEntity henkanEntity = mapper.select新番号(parameter2);
-            if (henkanEntity != null) {
-                RString 新番号 = henkanEntity.getShinNo();
-                RString 旧番号 = henkanEntity.getKyuNo();
-                SinBangoTempParameter parameter3 = SinBangoTempParameter.createParameter(新番号, 旧番号);
-                mapper.update高額サービス費決定情報一時TBL1(parameter3);
+            DbT7026ShinKyuHihokenshaNoHenkanEntity henkanEntity = mapper.select新番号(parameter);
+            targetList.add(henkanEntity);
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (targetList != null && !targetList.isEmpty()) {
+            for (DbT7026ShinKyuHihokenshaNoHenkanEntity henkanEntity : targetList) {
+                mapper.update高額サービス費決定情報一時TBL1(henkanEntity);
             }
         }
-        DbT1001HihokenshaDaichoEntity 被保険者台帳管理1 = mapper.select被保険者情報();
-        if (被保険者台帳管理1 != null) {
-            HihokenshaNo 被保険者番号_New = 被保険者台帳管理1.getHihokenshaNo();
-            ShikibetsuCode 識別コード = 被保険者台帳管理1.getShikibetsuCode();
+
+        DbT1001HihokenshaDaichoEntity 被保険者台帳管理 = mapper.select被保険者情報();
+        if (被保険者台帳管理 != null) {
+//            HihokenshaNo 被保険者番号_New = 被保険者台帳管理.getHihokenshaNo();
+//            ShikibetsuCode 識別コード = 被保険者台帳管理.getShikibetsuCode();
+            // TODO
             RDate date = RDate.getNowDate();
             UzT0007CodeEntity 資格喪失事由コード = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(new RString("0010")), new Code(被保険者台帳管理1.getShikakuSoshitsuJiyuCode()),
+                    new CodeShubetsu(データ_0010), new Code(被保険者台帳管理.getShikakuSoshitsuJiyuCode()),
                     new FlexibleDate(date.toDateString()));
-//            RString 資格喪失事由コード = 被保険者台帳管理1.getShikakuSoshitsuJiyuCode();
-            FlexibleDate 資格喪失年月日 = 被保険者台帳管理1.getShikakuSoshitsuYMD();
-            HihokenshaNoDataParameter parmeter4 = HihokenshaNoDataParameter
-                    .creatParmeter(被保険者番号_New, 識別コード, new RString(資格喪失事由コード.toString()), 資格喪失年月日);
-            mapper.update高額サービス費決定情報一時TBL2(parmeter4);
-            KogakuKyufuKetteiInTempTableEntity 一時デーブルから識別コード = mapper.select一時デーブルから識別コード();
-            ShikibetsuTaishoPSMSearchKeyBuilder builder
-                    = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-            builder.setデータ取得区分(DataShutokuKubun.直近レコード);
-            builder.set識別コード(識別コード);
-            IShikibetsuTaishoPSMSearchKey key = builder.build();
-            PSMParameter parameter5 = new PSMParameter(key);
-            PSMEntity 宛名識別対象PSM = mapper.select宛名識別対象PSM(parameter5);
-            ShikibetsuCodeTempParameter parameter6 = ShikibetsuCodeTempParameter.createParameter(
-                    一時デーブルから識別コード.get識別コード(),
-                    宛名識別対象PSM.get全国住所コード(),
-                    宛名識別対象PSM.get郵便番号(),
-                    宛名識別対象PSM.get住所(),
-                    宛名識別対象PSM.get行政区コード(),
-                    宛名識別対象PSM.get行政区名(),
-                    宛名識別対象PSM.getカナ名称(),
-                    宛名識別対象PSM.get名称());
-            mapper.update高額サービス費決定情報一時TBL3(parameter6);
+            被保険者台帳管理.setShikakuSoshitsuJiyuCode(資格喪失事由コード.getコード略称());
+//            FlexibleDate 資格喪失年月日 = 被保険者台帳管理.getShikakuSoshitsuYMD();
+//            HihokenshaNoDataParameter parmeter4 = HihokenshaNoDataParameter
+//                    .creatParmeter(被保険者番号_New, 識別コード, new RString(資格喪失事由コード.toString()), 資格喪失年月日);
+            mapper.update高額サービス費決定情報一時TBL2(被保険者台帳管理);
+        }
+
+        List<KogakuKyufuKetteiInTempTableEntity> 識別コードList = mapper.select一時デーブルから識別コード();
+        if (null != 識別コードList && !識別コードList.isEmpty()) {
+            for (KogakuKyufuKetteiInTempTableEntity entity : 識別コードList) {
+                ShikibetsuTaishoPSMSearchKeyBuilder builder
+                        = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+                builder.setデータ取得区分(DataShutokuKubun.直近レコード);
+                builder.set識別コード(entity.get識別コード());
+                IShikibetsuTaishoPSMSearchKey key = builder.build();
+                PSMParameter parameter = new PSMParameter(key);
+                PSMEntity 宛名識別対象PSM = mapper.select宛名識別対象PSM(parameter);
+                mapper.update高額サービス費決定情報一時TBL3(宛名識別対象PSM);
+            }
         }
     }
 }

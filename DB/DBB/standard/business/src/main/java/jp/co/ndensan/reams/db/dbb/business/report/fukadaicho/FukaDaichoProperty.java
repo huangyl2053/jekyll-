@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 賦課台帳（本算定）帳票FukaDaichoProperty
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 public class FukaDaichoProperty extends ReportPropertyBase<FukaDaichoSource> {
 
@@ -29,7 +31,7 @@ public class FukaDaichoProperty extends ReportPropertyBase<FukaDaichoSource> {
 
     /**
      * 改頁メソッド
-     * 
+     *
      * @param breakers Breakers<FukaDaichoSource>
      * @param catalog BreakerCatalog<FukaDaichoSource>
      * @return Breaker

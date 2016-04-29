@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 委員遅刻有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsChikokuUmu {
 
@@ -32,7 +32,7 @@ public enum IsChikokuUmu {
      *
      * @return 委員遅刻有無のコード
      */
-    public boolean getコード() {
+    public boolean is委員遅刻() {
         return code;
     }
 

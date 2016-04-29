@@ -18,6 +18,8 @@ import lombok.Setter;
 
 /**
  * 異動者情報 通知書異動情報を格納する。
+ *
+ * @reamsid_L DBB-0690-020 xuhao
  */
 @Getter
 @Setter

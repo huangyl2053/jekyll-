@@ -6,13 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.business.core;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVDataEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVHeaderEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3014KyufuKanrihyo200004Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3015KyufuKanrihyo200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufuInCtrlTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVHeaderEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -35,6 +35,13 @@ public class KyufuKanrihyoInBatch {
     private static final int INDEX_4 = 4;
     private static final int INDEX_6 = 6;
 
+    /**
+     * DbTKyufuInCtrlTempTableの項目定義を返します。
+     *
+     * @param input input
+     * @param filtpath filtpath
+     * @return DbTKyufuInCtrlTempTableの項目定義
+     */
     public DbTKyufuInCtrlTempTableEntity createControlRecord(List<RString> input, RString filtpath) {
 
         DbTKyufuInCtrlTempTableEntity result = new DbTKyufuInCtrlTempTableEntity();
@@ -60,6 +67,12 @@ public class KyufuKanrihyoInBatch {
         return result;
     }
 
+    /**
+     * DbTKyufukanrihyoDataTempTableの項目定義を返します。
+     *
+     * @param input input
+     * @return DbTKyufukanrihyoDataTempTableの項目定義
+     */
     public DbTKyufukanrihyoDataTempTableEntity createDataRecord(List<RString> input) {
 
         DbTKyufukanrihyoDataTempTableEntity result = new DbTKyufukanrihyoDataTempTableEntity();
@@ -100,6 +113,13 @@ public class KyufuKanrihyoInBatch {
         return result;
     }
 
+    /**
+     * 給付管理票200004テーブルのエンティティを返します。
+     *
+     * @param input input
+     * @param shoriNengetsu shoriNengetsu
+     * @return 給付管理票200004テーブルのエンティティ
+     */
     public DbT3014KyufuKanrihyo200004Entity createKyufuKanrihyo200004Record(
             DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
 
@@ -149,6 +169,13 @@ public class KyufuKanrihyoInBatch {
         return result;
     }
 
+    /**
+     * DbT3015KyufuKanrihyo200604の項目定義を返します。
+     *
+     * @param input input
+     * @param shoriNengetsu shoriNengetsu
+     * @return DbT3015KyufuKanrihyo200604の項目定義
+     */
     public DbT3015KyufuKanrihyo200604Entity createKyufuKanrihyo200604Record(
             DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
 
@@ -205,6 +232,15 @@ public class KyufuKanrihyoInBatch {
         return result;
     }
 
+    /**
+     * 国保連インターフェース管理テーブルのエンティティを返します。
+     *
+     * @param kokuhorenIFkanri kokuhorenIFkanri
+     * @param kyufuCtrlTemps kyufuCtrlTemps
+     * @param fileName fileName
+     * @param shoriNichiji shoriNichiji
+     * @return 国保連インターフェース管理テーブルのエンティティ
+     */
     public DbT3104KokuhorenInterfaceKanriEntity createKokuhorenIFKanriRecord(
             DbT3104KokuhorenInterfaceKanriEntity kokuhorenIFkanri,
             List<DbTKyufuInCtrlTempTableEntity> kyufuCtrlTemps,
@@ -214,7 +250,10 @@ public class KyufuKanrihyoInBatch {
         kokuhorenIFkanri.setShoriJotaiKubun(new RString("3"));
         kokuhorenIFkanri.setShoriJisshiTimestamp(new YMDHMS(shoriNichiji));
         kokuhorenIFkanri.setSaiShoriKanoKubun(false);
-        kokuhorenIFkanri.setShoriJikkoKaisu(kokuhorenIFkanri.getShoriJikkoKaisu().add(1));
+        Decimal shoriJikkoKaisu = kokuhorenIFkanri.getShoriJikkoKaisu();
+        if (shoriJikkoKaisu != null) {
+            kokuhorenIFkanri.setShoriJikkoKaisu(shoriJikkoKaisu.add(1));
+        }
         kokuhorenIFkanri.setFileName1(fileName);
         kokuhorenIFkanri.setFileKensu1(kyufuCtrlTemps.size());
         kokuhorenIFkanri.setSaiShoriFukaKubun(false);
@@ -262,7 +301,6 @@ public class KyufuKanrihyoInBatch {
         if (金額 == null || 金額.isEmpty()) {
             return Integer.valueOf(0);
         }
-
-        return new Integer(金額.toString());
+        return Integer.valueOf(金額.toString());
     }
 }

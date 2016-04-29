@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 賦課台帳（本算定）帳票IFukaDaichoEditor
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 interface IFukaDaichoEditor extends IReportEditor<FukaDaichoSource> {
 

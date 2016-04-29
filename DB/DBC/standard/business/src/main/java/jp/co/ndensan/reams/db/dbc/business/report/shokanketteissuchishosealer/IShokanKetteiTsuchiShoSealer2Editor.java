@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoseal
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）ヘッダエディターのインターフェースクラスです
+ * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）ヘッダエディターのインターフェースクラスです。
+ *
+ * @reamsid_L DBC-1000-140 hezhenzhen
  *
  */
 public interface IShokanKetteiTsuchiShoSealer2Editor extends IReportEditor<ShokanKetteiTsuchiShoSealer2ReportSource> {

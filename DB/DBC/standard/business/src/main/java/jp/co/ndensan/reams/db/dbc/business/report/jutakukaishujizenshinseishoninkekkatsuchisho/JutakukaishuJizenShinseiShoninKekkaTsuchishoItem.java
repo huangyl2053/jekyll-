@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 住宅改修事前申請承認結果通知書のITEMです。
+ *
+ * @reamsid_L DBC-0990-100 zuotao
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

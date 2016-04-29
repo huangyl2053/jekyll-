@@ -25,12 +25,12 @@ public class RehabiritationkaJushinUmuTest extends DbeTestBase {
 
     @Test
     public void ありを指定した場合_getコードは_Trueを返す() {
-        assertThat(RehabiritationkaJushinUmu.あり.getコード(), is(true));
+        assertThat(RehabiritationkaJushinUmu.あり.isリハビリテーション科受診(), is(true));
     }
 
     @Test
     public void なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(RehabiritationkaJushinUmu.なし.getコード(), is(false));
+        assertThat(RehabiritationkaJushinUmu.なし.isリハビリテーション科受診(), is(false));
     }
 
     @Test

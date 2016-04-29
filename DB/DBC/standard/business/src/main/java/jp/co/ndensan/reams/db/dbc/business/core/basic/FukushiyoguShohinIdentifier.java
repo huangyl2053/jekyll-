@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 福祉用具商品名入力ガイドの識別子です。
+ *
+ * @reamsid_L DBC-9999-011 lizhuoxuan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

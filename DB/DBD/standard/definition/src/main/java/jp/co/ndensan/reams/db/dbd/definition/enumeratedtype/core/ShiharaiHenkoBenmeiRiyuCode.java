@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支払方法変更弁明理由コードを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum ShiharaiHenkoBenmeiRiyuCode {
 

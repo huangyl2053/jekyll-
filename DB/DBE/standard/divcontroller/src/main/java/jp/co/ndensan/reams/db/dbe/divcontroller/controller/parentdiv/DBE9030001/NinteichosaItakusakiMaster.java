@@ -25,12 +25,17 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -41,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.io.csv.auth.DecimalConverter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -56,17 +60,17 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査委託先マスタのクラスです
+ *
+ * @reamsid_L DBE-0270-010 liangbc
  */
 public class NinteichosaItakusakiMaster {
 
-    private static final RString CSV出力完了 = new RString("CSV出力");
     private static final RString 削除状態 = new RString("削除");
     private static final RString 追加状態コード = new RString("追加");
     private static final RString 修正状態コード = new RString("修正");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
     private static final RString その他状態コード = new RString("その他");
-    private static final RString 割付地区名称コード種別 = new RString("5002");
     private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
 
     /**
@@ -159,43 +163,20 @@ public class NinteichosaItakusakiMaster {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        try (CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(true).
-                setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+        try (CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             int rowIndex = 0;
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
                 csvWriter.writeLine(converterDataSourceFromToCsvEntity(div, row, rowIndex));
                 rowIndex++;
             }
         }
-        FilesystemName sharedFileName = new FilesystemName(CSVファイル名);
-        RDateTime sharedFileId = SharedFile.copyToSharedFile(new FilesystemPath(filePath), sharedFileName);
-        div.getCcdKanryoMessage().setSuccessMessage(
-                new RString(UrInformationMessages.正常終了.getMessage().evaluate()), CSV出力完了, RString.EMPTY);
-        return SharedFileDirectAccessDownload.directAccessDownload(sharedFileName, sharedFileId, CSVファイル名, response);
-//        TODO QA #72362
-//        if (!ResponseHolder.isReRequest()) {
-//            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-//            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-//            DBE9030001ErrorMessage 対象データなし = new DBE9030001ErrorMessage(UrErrorMessages.対象データなし);
-//            messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの存在チェック)
-//                    .thenAdd(対象データなし).messages());
-//            messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先一覧データの編集しないチェック)
-//                    .thenAdd(DbzErrorMessages.編集後更新指示).messages());
-//            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-//                    対象データなし, div.getChosaitakusakiJohoInput()).build().check(messages));
-//            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-//                    DbzErrorMessages.編集後更新指示,
-//                    div.getChosaitakusakiJohoInput()).build().check(messages));
-//            if (pairs.iterator().hasNext()) {
-//                return ResponseData.of(div).addValidationMessages(pairs).respond();
-//            }
-//            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-//        } else {
-//            getHandler(div).outputCsv();
-//            div.getCcdKanryoMessage().setSuccessMessage(
-//                    new RString(UrInformationMessages.正常終了.getMessage().evaluate()), CSV出力完了, RString.EMPTY);
-//            return ResponseData.of(div).setState(DBE9030001StateName.完了);
-//        }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
     /**

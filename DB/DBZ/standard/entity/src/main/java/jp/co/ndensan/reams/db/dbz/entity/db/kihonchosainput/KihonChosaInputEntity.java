@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査基本情報Entityです。
+ *
+ * @reamsid_L DBE-3000-090 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
@@ -30,5 +32,6 @@ public class KihonChosaInputEntity implements Serializable {
     private int 認定調査特記事項連番;
     private Code 原本マスク区分;
     private RString 特記事項;
+    private boolean 特記事項有無;
 
 }

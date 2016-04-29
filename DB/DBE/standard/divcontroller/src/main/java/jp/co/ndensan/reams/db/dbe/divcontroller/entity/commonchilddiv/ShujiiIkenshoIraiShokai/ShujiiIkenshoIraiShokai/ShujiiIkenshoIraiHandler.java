@@ -18,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- *
  * 主治医意見書作成依頼情報のHandlerクラスです。
+ *
+ * @reamsid_L DBE-0200-030 zhangzhiming
  */
 public class ShujiiIkenshoIraiHandler {
 
@@ -38,9 +39,9 @@ public class ShujiiIkenshoIraiHandler {
      * 主治医意見書作成依頼情報を設定します。
      *
      */
-    public void onLoad() {
+    public void initialize() {
         HihokenshaNo hihokenshano = new HihokenshaNo(div.getHihokenshano());
-        div.getCcdKaigoShikakuKihon().initialize(hihokenshano);
+        div.getCcdKaigoShikakuKihon().onLoad(hihokenshano);
         ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
         List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(hihokenshano).records();
         init(認定調査情報);

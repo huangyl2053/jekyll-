@@ -1,18 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.shakaiFukushiHojinKeigen;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.shakaiFukushiHojinKeigen.ShakaiFukushiHojinKeigenRiyoshaFutanDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShakaiFukushiHojinKeigenDetail のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * ShakaiFukushiHojinKeigenDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
@@ -22,6 +19,7 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShinseiDate")
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("ShakaiFukushiHojinKeigenRiyoshaFutan")
@@ -46,7 +44,7 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
 
     @JsonProperty("txtShinseiDate")
     public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
-        this.txtShinseiDate=txtShinseiDate;
+        this.txtShinseiDate = txtShinseiDate;
     }
 
     @JsonProperty("ShakaiFukushiHojinKeigenRiyoshaFutan")
@@ -56,7 +54,7 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
 
     @JsonProperty("ShakaiFukushiHojinKeigenRiyoshaFutan")
     public void setShakaiFukushiHojinKeigenRiyoshaFutan(ShakaiFukushiHojinKeigenRiyoshaFutanDiv ShakaiFukushiHojinKeigenRiyoshaFutan) {
-        this.ShakaiFukushiHojinKeigenRiyoshaFutan=ShakaiFukushiHojinKeigenRiyoshaFutan;
+        this.ShakaiFukushiHojinKeigenRiyoshaFutan = ShakaiFukushiHojinKeigenRiyoshaFutan;
     }
 
     @JsonProperty("txtKyotakuServiceOnly")
@@ -66,7 +64,7 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
 
     @JsonProperty("txtKyotakuServiceOnly")
     public void setTxtKyotakuServiceOnly(TextBox txtKyotakuServiceOnly) {
-        this.txtKyotakuServiceOnly=txtKyotakuServiceOnly;
+        this.txtKyotakuServiceOnly = txtKyotakuServiceOnly;
     }
 
     @JsonProperty("txtKyojuhiShokujiOnly")
@@ -76,7 +74,7 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
 
     @JsonProperty("txtKyojuhiShokujiOnly")
     public void setTxtKyojuhiShokujiOnly(TextBox txtKyojuhiShokujiOnly) {
-        this.txtKyojuhiShokujiOnly=txtKyojuhiShokujiOnly;
+        this.txtKyojuhiShokujiOnly = txtKyojuhiShokujiOnly;
     }
 
     @JsonProperty("txtUnitPrivateRoomOnly")
@@ -86,7 +84,7 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
 
     @JsonProperty("txtUnitPrivateRoomOnly")
     public void setTxtUnitPrivateRoomOnly(TextBox txtUnitPrivateRoomOnly) {
-        this.txtUnitPrivateRoomOnly=txtUnitPrivateRoomOnly;
+        this.txtUnitPrivateRoomOnly = txtUnitPrivateRoomOnly;
     }
 
 }

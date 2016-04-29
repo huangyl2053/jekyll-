@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeiJohoResultEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.BenmeisyoTyohyoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.HihokenshaDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo.NinshoshaDenshiKoinDataEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.benmeisyo.BenmeisyoMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeisyo.IBenmeisyoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShobunShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -55,8 +55,10 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 弁明書のFinderクラスです。
+ *
+ * @reamsid_L DBU-1080-010 zhengshukai
+ *
  */
 public class BenmeisyoFinder {
 
@@ -198,7 +200,7 @@ public class BenmeisyoFinder {
     }
 
     private BenmeiJohoEntity getBenmeiJohoData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
-        BenmeisyoMapper benmeisyoMapper = mapperProvider.create(BenmeisyoMapper.class);
+        IBenmeisyoMapper benmeisyoMapper = mapperProvider.create(IBenmeisyoMapper.class);
         BenmeiJohoEntity entity = new BenmeiJohoEntity();
         BenmeiJohoResultEntity resultentity = benmeisyoMapper.getBenmeijoho(BenmeisyoMapperParameter.
                 createSelectByKeyParam(識別コード, 被保険者番号, 審査請求届出日));
@@ -217,7 +219,7 @@ public class BenmeisyoFinder {
     }
 
     private HihokenshaDateEntity getHihokenshaDate(ShikibetsuCode 識別コード) {
-        BenmeisyoMapper benmeisyoMapper = mapperProvider.create(BenmeisyoMapper.class);
+        IBenmeisyoMapper benmeisyoMapper = mapperProvider.create(IBenmeisyoMapper.class);
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = benmeisyoMapper.selectAtena(BenmeiAtenaParameter.
                 createSelectByKeyParam(識別コード, this.getPsm()));
         HihokenshaDateEntity hihokenEntity = new HihokenshaDateEntity();

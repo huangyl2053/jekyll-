@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Bunsh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.BunshoBangoInput.BunshoBangoInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.bunshobangoinput.BunshoBangoInputHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

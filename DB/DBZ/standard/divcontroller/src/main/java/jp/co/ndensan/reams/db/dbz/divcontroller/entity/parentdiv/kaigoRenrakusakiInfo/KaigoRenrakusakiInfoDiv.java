@@ -1,20 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoRenrakusakiInfo;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoRenrakusakiInfo.SelectedContentsDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoRenrakusakiInfo.dgRenrakusaki_Row;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KaigoRenrakusakiInfo のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * KaigoRenrakusakiInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoRenrakusakiInfoDiv extends Panel {
@@ -24,6 +21,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("btnAdd")
     private Button btnAdd;
     @JsonProperty("btnDelete")
@@ -54,7 +52,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("btnAdd")
     public void setBtnAdd(Button btnAdd) {
-        this.btnAdd=btnAdd;
+        this.btnAdd = btnAdd;
     }
 
     @JsonProperty("btnDelete")
@@ -64,7 +62,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("btnDelete")
     public void setBtnDelete(Button btnDelete) {
-        this.btnDelete=btnDelete;
+        this.btnDelete = btnDelete;
     }
 
     @JsonProperty("dgRenrakusaki")
@@ -74,7 +72,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("dgRenrakusaki")
     public void setDgRenrakusaki(DataGrid<dgRenrakusaki_Row> dgRenrakusaki) {
-        this.dgRenrakusaki=dgRenrakusaki;
+        this.dgRenrakusaki = dgRenrakusaki;
     }
 
     @JsonProperty("btnClose")
@@ -84,7 +82,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     @JsonProperty("SelectedContents")
@@ -94,7 +92,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("SelectedContents")
     public void setSelectedContents(SelectedContentsDiv SelectedContents) {
-        this.SelectedContents=SelectedContents;
+        this.SelectedContents = SelectedContents;
     }
 
     @JsonProperty("hokenshaNo")
@@ -104,7 +102,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("hokenshaNo")
     public void setHokenshaNo(RString hokenshaNo) {
-        this.hokenshaNo=hokenshaNo;
+        this.hokenshaNo = hokenshaNo;
     }
 
     @JsonProperty("hihokenshaNo")
@@ -114,7 +112,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("hihokenshaNo")
     public void setHihokenshaNo(RString hihokenshaNo) {
-        this.hihokenshaNo=hihokenshaNo;
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     @JsonProperty("shoriKbn")
@@ -124,7 +122,7 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
 
     @JsonProperty("shoriKbn")
     public void setShoriKbn(RString shoriKbn) {
-        this.shoriKbn=shoriKbn;
+        this.shoriKbn = shoriKbn;
     }
 
 }

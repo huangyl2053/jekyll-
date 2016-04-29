@@ -22,8 +22,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- *
  * 認定調査スケジュール登録8のハンドラークラスです。
+ * 
+ * @reamsid_L DBE-0024-010  suguangjun 
  */
 public class NinteiChosaSchedule8MainHandler {
 
@@ -69,7 +70,7 @@ public class NinteiChosaSchedule8MainHandler {
      * @param row 調査地区グループ一覧で選択された行
      */
     public void setChosaChikuGroupChosaChikuList(List<ChosaChikuGroupMaster> entityList, dgChosaChikuGroupList_Row row) {
-        div.getTxtChosaChikuCode().setValue(new Decimal(row.getChosaChikuGroupCode().toString()));
+        div.getTxtChosaChikuCode().setValue(row.getChosaChikuGroupCode());
         div.getTxtChosaChikuName().setValue(row.getChosaChikuGroupName());
         List<dgChosaChikuGroupChosaChikuList_Row> dataGridList = new ArrayList<>();
         for (ChosaChikuGroupMaster chosaChikuGroupMaster : entityList) {
@@ -172,7 +173,7 @@ public class NinteiChosaSchedule8MainHandler {
     public ChosaChikuGroup editChosaChikuGroup(ChosaChikuGroup chosaChikuGroup) {
         return chosaChikuGroup.createBuilderForEdit().set優先番号(Integer.valueOf(
                 div.getChosaChikuGroupChosaChikuInput().getTxtYusenNo().getValue().toString())).
-                set調査地区グループ名称(div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuMeisho1().getValue())
+                set調査地区グループ名称(div.getChosaChikuGroupChosaChikuList().getTxtChosaChikuName().getValue())
                 .build();
     }
 

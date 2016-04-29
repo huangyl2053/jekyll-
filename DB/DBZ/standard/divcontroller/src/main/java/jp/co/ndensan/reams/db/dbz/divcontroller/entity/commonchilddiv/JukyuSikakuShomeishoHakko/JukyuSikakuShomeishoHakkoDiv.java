@@ -4,18 +4,36 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuSika
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * JukyuSikakuShomeishoHakko のクラスファイル 
- * 
- * @author 自動生成
+ * JukyuSikakuShomeishoHakko のクラスファイル
+ *
+ * @reamsid_L DBA-1090-011 wangkun
  */
 public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuShomeishoHakkoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -78,7 +96,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setTxtKofubi(TextBox txtKofubi) {
+    public void setTxtKofubi(TextBox txtKofubi) {
         this.getPnlJukyushaJoho1().setTxtKofubi(txtKofubi);
     }
 
@@ -88,7 +106,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setTxtIdoYotebi(TextBox txtIdoYotebi) {
+    public void setTxtIdoYotebi(TextBox txtIdoYotebi) {
         this.getPnlJukyushaJoho1().setTxtIdoYotebi(txtIdoYotebi);
     }
 
@@ -98,7 +116,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
+    public void setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
         this.getPnlJukyushaJoho1().setTxtYokaigoJotaiKubun(txtYokaigoJotaiKubun);
     }
 
@@ -108,7 +126,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setTxtShinsebi(TextBox txtShinsebi) {
+    public void setTxtShinsebi(TextBox txtShinsebi) {
         this.getPnlJukyushaJoho1().setTxtShinsebi(txtShinsebi);
     }
 
@@ -118,7 +136,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setTxtdrYukokikan(TextBoxDateRange txtdrYukokikan) {
+    public void setTxtdrYukokikan(TextBoxDateRange txtdrYukokikan) {
         this.getPnlJukyushaJoho1().setTxtdrYukokikan(txtdrYukokikan);
     }
 
@@ -128,7 +146,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setCblInji(CheckBoxList cblInji) {
+    public void setCblInji(CheckBoxList cblInji) {
         this.getPnlJukyushaJoho1().setCblInji(cblInji);
     }
 
@@ -138,7 +156,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setLblShinsakaiYikan(Label lblShinsakaiYikan) {
+    public void setLblShinsakaiYikan(Label lblShinsakaiYikan) {
         this.getPnlJukyushaJoho2().setLblShinsakaiYikan(lblShinsakaiYikan);
     }
 
@@ -148,7 +166,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setTbmShinsakaiYikan(TextBoxMultiLine tbmShinsakaiYikan) {
+    public void setTbmShinsakaiYikan(TextBoxMultiLine tbmShinsakaiYikan) {
         this.getPnlJukyushaJoho2().setTbmShinsakaiYikan(tbmShinsakaiYikan);
     }
 
@@ -158,7 +176,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setLblBiko(Label lblBiko) {
+    public void setLblBiko(Label lblBiko) {
         this.getPnlJukyushaJoho2().setLblBiko(lblBiko);
     }
 
@@ -168,11 +186,44 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
-    public void  setTbmBiko(TextBoxMultiLine tbmBiko) {
+    public void setTbmBiko(TextBoxMultiLine tbmBiko) {
         this.getPnlJukyushaJoho2().setTbmBiko(tbmBiko);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private JukyuSikakuShomeishoHakkoHandler getHandler() {
+        return new JukyuSikakuShomeishoHakkoHandler(this);
+    }
+    private static final RString 有効区分 = new RString("1");
 
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    @Override
+    public void initialize(RString 被保険者番号) {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.未定義), true);
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        List<JuminShubetsu> 住民種別 = new ArrayList<>();
+        List<JuminJotai> 住民状態 = new ArrayList();
+        住民種別.add(JuminShubetsu.日本人);
+        住民種別.add(JuminShubetsu.外国人);
+        住民状態.add(JuminJotai.住民);
+        住民状態.add(JuminJotai.住登外);
+        住民状態.add(JuminJotai.消除者);
+        住民状態.add(JuminJotai.転出者);
+        key.set住民種別(住民種別);
+        key.set住民状態(住民状態);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号, 有効区分,
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString())));
+    }
+
+    @Override
+    public JukyuSikakuShomeishoHakkoDiv getJukyuSikakuShomeishoHakkoDiv() {
+        return this;
+    }
 }

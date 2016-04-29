@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ】（連帳）CoverのBuilderのインターフェースクラスです。
  *
+ * @reamsid_L DBB-9110-110 huangh
  */
 interface INonyuTsuchishoCVSMultiRenchoCoverBuilder extends IReportBuilder<NonyuTsuchishoCVSMultiRenchoCoverSource> {
 

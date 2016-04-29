@@ -2,6 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT4012HyojunFutangakuGemmenマスタとエンティティのマッピング用XMLです。 -->
 <!-- 作者： n1070 久保裕是 -->
+<!-- @reamsid_L DBC-9999-012 xicongwang -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4012HyojunFutangakuGemmenMapper">
@@ -28,12 +29,6 @@
          "DbT4012HyojunFutangakuGemmen"."updateCount" as "dbT4012HyojunFutangakuGemmen_updateCount",
          "DbT4012HyojunFutangakuGemmen"."lastUpdateTimestamp" as "dbT4012HyojunFutangakuGemmen_lastUpdateTimestamp",
          "DbT4012HyojunFutangakuGemmen"."lastUpdateReamsLoginId" as "dbT4012HyojunFutangakuGemmen_lastUpdateReamsLoginId",
-         "DbT4012HyojunFutangakuGemmen"."shinseiYMD" as "dbT4012HyojunFutangakuGemmen_shinseiYMD",
-         "DbT4012HyojunFutangakuGemmen"."ketteiYMD" as "dbT4012HyojunFutangakuGemmen_ketteiYMD",
-         "DbT4012HyojunFutangakuGemmen"."tekiyoKaishiYMD" as "dbT4012HyojunFutangakuGemmen_tekiyoKaishiYMD",
-         "DbT4012HyojunFutangakuGemmen"."tekiyoShuryoYMD" as "dbT4012HyojunFutangakuGemmen_tekiyoShuryoYMD",
-         "DbT4012HyojunFutangakuGemmen"."ketteiKubun" as "dbT4012HyojunFutangakuGemmen_ketteiKubun",
-         "DbT4012HyojunFutangakuGemmen"."hiShoninRiyu" as "dbT4012HyojunFutangakuGemmen_hiShoninRiyu",
          "DbT4012HyojunFutangakuGemmen"."shinseiJiyu" as "dbT4012HyojunFutangakuGemmen_shinseiJiyu",
          "DbT4012HyojunFutangakuGemmen"."gengakuKubun" as "dbT4012HyojunFutangakuGemmen_gengakuKubun",
          "DbT4012HyojunFutangakuGemmen"."gengakugoKingaku" as "dbT4012HyojunFutangakuGemmen_gengakugoKingaku",
@@ -54,12 +49,6 @@
         <result property="updateCount" column="dbT4012HyojunFutangakuGemmen_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4012HyojunFutangakuGemmen_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4012HyojunFutangakuGemmen_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiYMD" column="dbT4012HyojunFutangakuGemmen_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ketteiYMD" column="dbT4012HyojunFutangakuGemmen_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="tekiyoKaishiYMD" column="dbT4012HyojunFutangakuGemmen_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="tekiyoShuryoYMD" column="dbT4012HyojunFutangakuGemmen_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ketteiKubun" column="dbT4012HyojunFutangakuGemmen_ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hiShoninRiyu" column="dbT4012HyojunFutangakuGemmen_hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiJiyu" column="dbT4012HyojunFutangakuGemmen_shinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gengakuKubun" column="dbT4012HyojunFutangakuGemmen_gengakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gengakugoKingaku" column="dbT4012HyojunFutangakuGemmen_gengakugoKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

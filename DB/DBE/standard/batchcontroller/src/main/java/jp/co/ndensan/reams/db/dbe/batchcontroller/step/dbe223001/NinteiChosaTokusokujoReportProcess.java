@@ -7,34 +7,24 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokujoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.DbeMapperInterfaces;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokujoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.AtenaKikan;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoReportSource;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
-import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
-import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -42,24 +32,22 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.CountedItem;
-import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 要介護認定調査督促状の作成クラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiChosaTokusokujoRelateEntity> {
 
@@ -72,11 +60,10 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokujoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokujoReportSource> reportSourceWriter;
+    IDbe223001RelateMapper mapper;
 
     private NinteiChosaTokusokujoBodyItem bodyItem;
-    private final RString 汎用キー_文書番号 = new RString("文書番号");
     private final int パターン番号_1 = 1;
-    private static final RString 首長名印字位置 = new RString("1");
 
     private static final RString 星アイコン = new RString("＊");
     private static final RString 明 = new RString("明");
@@ -95,6 +82,11 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         shinseishoKanriNoList = new ArrayList<>();
         outShinseishoKanriNoList = new OutputParameter<>();
         super.initialize();
+    }
+
+    @Override
+    protected void beforeExecute() {
+        mapper = getMapper(IDbe223001RelateMapper.class);
     }
 
     @Override
@@ -127,40 +119,28 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
 
     private NinteiChosaTokusokujoBodyItem setBodyItem(NinteiChosaTokusokujoRelateEntity entity) {
 
-        IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
-        BunshoNo bushoNo = bushoFineder.get文書番号管理(REPORT_DBE223001, paramter.getTemp_基準日());
-        RString 文書番号 = RString.EMPTY;
-        if (bushoNo != null) {
-            文書番号 = get文書番号(bushoNo);
-        }
+        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日());
+        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日(), reportSourceWriter);
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
 
-        INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), paramter.getTemp_基準日());
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
-        ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBE認定支援, REPORT_DBE223001);
-        boolean is公印に掛ける = false;
-        boolean is公印を省略 = false;
-        if (chohyoSeigyoKyotsu != null) {
-            is公印に掛ける = 首長名印字位置.equals(chohyoSeigyoKyotsu.get首長名印字位置());
-            is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
+        DbT7051KoseiShichosonMasterEntity shichoson = mapper.select市町村コード(paramter.getTemp_保険者コード());
+        RString temp_市町村コード = RString.EMPTY;
+        if (shichoson != null) {
+            temp_市町村コード = shichoson.getShichosonCode().getColumnValue();
         }
-
-        TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定型文項目(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
-        ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBE認定支援, REPORT_DBE223001);
-        List<TsuchishoTeikeibunEntity> tsuchishoTeikeibunList = info.get通知書定型文List();
-        int 項目番号;
-        RString 通知文定型文 = RString.EMPTY;
-        RString 通知文問合せ = RString.EMPTY;
-        for (TsuchishoTeikeibunEntity tsuchishoTeikeibun : tsuchishoTeikeibunList) {
-            項目番号 = tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentenceNo();
-            if (項目番号 == 1) {
-                通知文定型文 = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
-            } else if (項目番号 == 2) {
-                通知文問合せ = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
-            }
+        AtenaKikan atenaKikan = mapper.select宛名機関(paramter.toNinteiChosaTokusokujoMybatisParameter(new LasdecCode(temp_市町村コード)));
+        if (atenaKikan == null) {
+            atenaKikan = new AtenaKikan();
         }
+        RString 宛名郵便番号 = RString.EMPTY;
+        if (atenaKikan.get宛名郵便番号() != null) {
+            宛名郵便番号 = atenaKikan.get宛名郵便番号().getColumnValue();
+        }
+        RString 住所 = RString.EMPTY;
+        if (atenaKikan.get宛名住所() != null) {
+            住所 = atenaKikan.get宛名住所();
+        }
+        RString customerBarCode = ReportUtil.getCustomerBarCode(宛名郵便番号, 住所);
 
         RString tempP_性別男 = RString.EMPTY;
         RString tempP_性別女 = RString.EMPTY;
@@ -191,11 +171,33 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
 
+        RString 帳票宛先敬称コード;
+        RString tempP_宛名名称付与;
+        try {
+            帳票宛先敬称コード = DbBusinessConifg.get(ConfigNameDBE.認定調査督促状_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            tempP_宛名名称付与 = ChohyoAtesakiKeisho.toValue(帳票宛先敬称コード).get名称();
+        } catch (Exception e) {
+            tempP_宛名名称付与 = RString.EMPTY;
+        }
+        RString title;
+        try {
+            title = DbBusinessConifg.get(ConfigNameDBE.要介護認定調査督促状, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        } catch (Exception e) {
+            title = RString.EMPTY;
+        }
+
         return new NinteiChosaTokusokujoBodyItem(
-                ninshosha, association,
-                reportSourceWriter.getImageFolderPath(), new RDate(paramter.getTemp_基準日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし,
+                ninshoshaSource.hakkoYMD,
+                ninshoshaSource.denshiKoin,
+                ninshoshaSource.koinMojiretsu,
+                ninshoshaSource.koinShoryaku,
+                ninshoshaSource.ninshoshaYakushokuMei,
+                ninshoshaSource.ninshoshaYakushokuMei1,
+                ninshoshaSource.ninshoshaYakushokuMei2,
+                ninshoshaSource.ninshoshaShimeiKakenai,
+                ninshoshaSource.ninshoshaShimeiKakeru,
                 文書番号,
-                通知文定型文,
+                通知文.get(1),
                 申請区分,
                 getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
                 getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
@@ -225,21 +227,16 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(2),
                 entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
                 entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
-                通知文問合せ);
-    }
-
-    private RString get文書番号(BunshoNo bushoNo) {
-        RString 文書番号 = RString.EMPTY;
-        RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
-        if (BunshoNoHatsubanHoho.固定.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            文書番号 = bushoNo.edit文書番号();
-        } else if (BunshoNoHatsubanHoho.手入力.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("文書番号情報の取得"));
-        } else if (BunshoNoHatsubanHoho.自動採番.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            CountedItem 採番 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー_文書番号, new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
-            文書番号 = bushoNo.edit文書番号(採番.nextString());
-        }
-        return 文書番号;
+                通知文.get(2),
+                宛名郵便番号,
+                住所,
+                atenaKikan.get宛名機関名(),
+                atenaKikan.get宛名氏名(),
+                tempP_宛名名称付与,
+                customerBarCode,
+                entity.getTemp_保険者番号(),
+                title
+        );
     }
 
     private RString getLenStr(RString rstr, int startIndex, int len) {

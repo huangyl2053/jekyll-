@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護住民票個別事項連携情報パラメータクラスです。
+ *
+ * @reamsid_L DBU-0550-040 zhangzhiming
  */
 @lombok.Getter
 @lombok.Setter
@@ -18,5 +20,5 @@ public class KobetsuKoikiunyoParameter {
 
     private RString shichosonCode;
     private RString dateFrom;
-    private RString dateTo;
+    private RDateTime dateTo;
 }

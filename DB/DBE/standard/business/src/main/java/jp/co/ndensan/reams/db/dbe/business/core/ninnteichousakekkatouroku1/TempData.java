@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査結果登録1のTempDataクラスです。
+ *
+ * @reamsid_L DBE-0040-010 xuyue
  */
 public class TempData {
 

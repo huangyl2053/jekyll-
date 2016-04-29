@@ -7,26 +7,26 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * KojinJokyoShokai のクラスファイル
  *
- * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -53,10 +53,8 @@ public class KojinJokyoShokaiDiv extends Panel {
     private ShujiiIryokikaknAndShujiiInputDiv ShujiiIryokikaknAndShujiiInput;
     @JsonProperty("ChosaItakusakiAndChosainGuide")
     private ChosaItakusakiAndChosainGuideDiv ChosaItakusakiAndChosainGuide;
-    @JsonProperty("ccdKaigoNinteiAtenInfo")
-    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenInfo;
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("hdnHokenshaCode")
     private RString hdnHokenshaCode;
     @JsonProperty("NinteiShinseiBusinessCollection")
@@ -67,6 +65,10 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hdnRenrakusakiJoho;
     @JsonProperty("hdnRenrakusakiReadOnly")
     private RString hdnRenrakusakiReadOnly;
+    @JsonProperty("hihokenshano")
+    private RString hihokenshano;
+    @JsonProperty("shoKisaiHokenshaNo")
+    private RString shoKisaiHokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -255,21 +257,12 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiAtenInfo
-     * @return ccdKaigoNinteiAtenInfo
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
      */
-    @JsonProperty("ccdKaigoNinteiAtenInfo")
-    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenInfo() {
-        return ccdKaigoNinteiAtenInfo;
-    }
-
-    /*
-     * getccdKaigoNinteiShikakuInfo
-     * @return ccdKaigoNinteiShikakuInfo
-     */
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
-        return ccdKaigoNinteiShikakuInfo;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
     }
 
     /*
@@ -360,6 +353,42 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("hdnRenrakusakiReadOnly")
     public void setHdnRenrakusakiReadOnly(RString hdnRenrakusakiReadOnly) {
         this.hdnRenrakusakiReadOnly = hdnRenrakusakiReadOnly;
+    }
+
+    /*
+     * gethihokenshano
+     * @return hihokenshano
+     */
+    @JsonProperty("hihokenshano")
+    public RString getHihokenshano() {
+        return hihokenshano;
+    }
+
+    /*
+     * sethihokenshano
+     * @param hihokenshano hihokenshano
+     */
+    @JsonProperty("hihokenshano")
+    public void setHihokenshano(RString hihokenshano) {
+        this.hihokenshano = hihokenshano;
+    }
+
+    /*
+     * getshoKisaiHokenshaNo
+     * @return shoKisaiHokenshaNo
+     */
+    @JsonProperty("shoKisaiHokenshaNo")
+    public RString getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
+    }
+
+    /*
+     * setshoKisaiHokenshaNo
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     */
+    @JsonProperty("shoKisaiHokenshaNo")
+    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /*

@@ -4,17 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult;
 
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiChukanHyokaKomokuTokuten;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.core.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.SuiteiKyuhuKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiKijunTime;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiResultDetail;
-import jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiResultKomoku;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.NichijoSeikatsuJiritsudoKumiawase;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiResultSofu;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.JotaiAnteiseiKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikokuList;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiKijunTime;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiResultDetail;
+import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiResultKomoku;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.NichijoSeikatsuJiritsudoKumiawase;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiResultSofu;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.JotaiAnteiseiKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KariIchijiHanteiKubun;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.jotaianteiseicode;
 
-import static jp.co.ndensan.reams.uz.uza.batch.parameter.message._BatchMessageUtil.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum JotaiAnteiseiCodeValidationMessage implements IValidationMessage {
 
+    /**
+     * テスト用です。
+     */
     テスト用(JotaiAnteiseiCodeErrorMessage.テスト用);
     private final Message message;
 
@@ -35,6 +38,9 @@ public enum JotaiAnteiseiCodeValidationMessage implements IValidationMessage {
      */
     public enum JotaiAnteiseiCodeErrorMessage implements IMessageGettable {
 
+        /**
+         * テスト用 "" です。
+         */
         テスト用(1, "");
         private final int no;
         private final RString message;

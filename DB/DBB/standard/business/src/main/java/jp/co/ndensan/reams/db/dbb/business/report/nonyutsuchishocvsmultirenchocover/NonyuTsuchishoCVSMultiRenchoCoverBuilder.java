@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ】（連帳）CoverのBuilder
  *
+ * @reamsid_L DBB-9110-110 huangh
  */
 public class NonyuTsuchishoCVSMultiRenchoCoverBuilder implements INonyuTsuchishoCVSMultiRenchoCoverBuilder {
 

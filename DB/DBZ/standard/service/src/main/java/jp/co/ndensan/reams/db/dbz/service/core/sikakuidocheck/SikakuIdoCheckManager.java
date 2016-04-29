@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.sikakuidocheck.ISikakuIdoCheckMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.sikakuidocheck.ISikakuIdoCheckMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 資格異動チェック処理クラスです。
  *
+ * @reamsid_L DBU-0110-010 xuyannan
  */
 public class SikakuIdoCheckManager {
 

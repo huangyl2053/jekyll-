@@ -8,12 +8,16 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.ChikuNinteiChosainBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.ChikuShichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.NinteichosaSchedulBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteichosaScheduleMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.ChikuNinteiChosainRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.ChikuShichosonRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.INinteichosaScheduleRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ninteichosaschedule.INinteichosaSchedule;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaschedule.INinteichosaSchedule;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -21,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 認定調査スケジュール登録3クラスです。
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 public class NinteichosaScheduleFinder {
 
@@ -138,15 +144,15 @@ public class NinteichosaScheduleFinder {
      * @return 保険者ドロップダウンリスト
      */
     @Transaction
-    public SearchResult<NinteichosaSchedulBusiness> get保険者ドロップダウン(INinteiKanryoJohoMybatisParameter parametere) {
-        List<NinteichosaSchedulBusiness> kojinJokyoShokaiList = new ArrayList();
+    public SearchResult<ChikuShichosonBusiness> get保険者ドロップダウン(INinteiKanryoJohoMybatisParameter parametere) {
+        List<ChikuShichosonBusiness> kojinJokyoShokaiList = new ArrayList();
         INinteichosaSchedule mapper = mapperProvider.create(INinteichosaSchedule.class);
-        List<INinteichosaScheduleRelateEntity> 保険者ドロップダウンリスト = mapper.select保険者ドロップダウンリスト(parametere);
+        List<ChikuShichosonRelateEntity> 保険者ドロップダウンリスト = mapper.select保険者ドロップダウンリスト(parametere);
         if (保険者ドロップダウンリスト == null || 保険者ドロップダウンリスト.isEmpty()) {
-            return SearchResult.of(Collections.<NinteichosaSchedulBusiness>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ChikuShichosonBusiness>emptyList(), 0, false);
         }
-        for (INinteichosaScheduleRelateEntity entity : 保険者ドロップダウンリスト) {
-            kojinJokyoShokaiList.add(new NinteichosaSchedulBusiness(entity));
+        for (ChikuShichosonRelateEntity entity : 保険者ドロップダウンリスト) {
+            kojinJokyoShokaiList.add(new ChikuShichosonBusiness(entity));
         }
         return SearchResult.of(kojinJokyoShokaiList, 0, false);
     }
@@ -158,15 +164,15 @@ public class NinteichosaScheduleFinder {
      * @return 認定調査委託先ドロップダウンリスト
      */
     @Transaction
-    public SearchResult<NinteichosaSchedulBusiness> get認定調査委託先ロップダウン(INinteichosaScheduleMybatisParameter parametere) {
-        List<NinteichosaSchedulBusiness> kojinJokyoShokaiList = new ArrayList();
+    public SearchResult<ChikuNinteiChosainBusiness> get認定調査委託先ロップダウン(INinteichosaScheduleMybatisParameter parametere) {
+        List<ChikuNinteiChosainBusiness> kojinJokyoShokaiList = new ArrayList();
         INinteichosaSchedule mapper = mapperProvider.create(INinteichosaSchedule.class);
-        List<INinteichosaScheduleRelateEntity> 認定調査委託先ドロップダウンリスト = mapper.select認定調査委託先ドロップダウンリスト(parametere);
+        List<ChikuNinteiChosainRelateEntity> 認定調査委託先ドロップダウンリスト = mapper.select認定調査委託先ドロップダウンリスト(parametere);
         if (認定調査委託先ドロップダウンリスト == null || 認定調査委託先ドロップダウンリスト.isEmpty()) {
-            return SearchResult.of(Collections.<NinteichosaSchedulBusiness>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ChikuNinteiChosainBusiness>emptyList(), 0, false);
         }
-        for (INinteichosaScheduleRelateEntity entity : 認定調査委託先ドロップダウンリスト) {
-            kojinJokyoShokaiList.add(new NinteichosaSchedulBusiness(entity));
+        for (ChikuNinteiChosainRelateEntity entity : 認定調査委託先ドロップダウンリスト) {
+            kojinJokyoShokaiList.add(new ChikuNinteiChosainBusiness(entity));
         }
         return SearchResult.of(kojinJokyoShokaiList, 0, false);
     }

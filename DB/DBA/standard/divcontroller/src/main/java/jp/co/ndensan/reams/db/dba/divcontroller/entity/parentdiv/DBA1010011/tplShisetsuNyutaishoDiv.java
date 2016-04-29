@@ -4,20 +4,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplShisetsuNyutaisho のクラスファイル
- *
+ * tplShisetsuNyutaisho のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tplShisetsuNyutaishoDiv extends TabPanel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,11 +32,19 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getShisetsuNyutaishoRireki
+     * @return ShisetsuNyutaishoRireki
+     */
     @JsonProperty("ShisetsuNyutaishoRireki")
     public ShisetsuNyutaishoRirekiDiv getShisetsuNyutaishoRireki() {
         return ShisetsuNyutaishoRireki;
     }
 
+    /*
+     * setShisetsuNyutaishoRireki
+     * @param ShisetsuNyutaishoRireki ShisetsuNyutaishoRireki
+     */
     @JsonProperty("ShisetsuNyutaishoRireki")
     public void setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
         this.ShisetsuNyutaishoRireki = ShisetsuNyutaishoRireki;
@@ -46,16 +53,6 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public ShisetsuNyutaishoInputDiv getShisetsuNyutaishoInput() {
-        return this.getShisetsuNyutaishoRireki().getShisetsuNyutaishoInput();
-    }
-
-    @JsonIgnore
-    public void setShisetsuNyutaishoInput(ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput) {
-        this.getShisetsuNyutaishoRireki().setShisetsuNyutaishoInput(ShisetsuNyutaishoInput);
-    }
-
     @JsonIgnore
     public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
         return this.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri();

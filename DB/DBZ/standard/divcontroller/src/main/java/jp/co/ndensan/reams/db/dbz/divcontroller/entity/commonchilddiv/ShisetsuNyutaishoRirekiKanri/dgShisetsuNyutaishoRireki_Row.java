@@ -3,24 +3,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Mar 11 14:36:18 JST 2016 
+ * Thu Apr 07 18:25:39 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgShisetsuNyutaishoRireki_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgShisetsuNyutaishoRireki_Row のクラスファイル
+ *
  */
-
 public class dgShisetsuNyutaishoRireki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString state;
     private TextBoxFlexibleDate nyushoDate;
@@ -32,6 +27,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
     private RString daichoShubetsu;
     private RString shisetsuShuruiKey;
     private RString shisetsuShurui;
+    private RString rirekiNo;
 
     public dgShisetsuNyutaishoRireki_Row() {
         super();
@@ -45,6 +41,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.daichoShubetsu = RString.EMPTY;
         this.shisetsuShuruiKey = RString.EMPTY;
         this.shisetsuShurui = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
         this.setOriginalData("state", state);
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
@@ -55,9 +52,10 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShuruiKey", shisetsuShuruiKey);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
+        this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgShisetsuNyutaishoRireki_Row(RString state, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString daichoShubetsuKey, RString daichoShubetsu, RString shisetsuShuruiKey, RString shisetsuShurui) {
+    public dgShisetsuNyutaishoRireki_Row(RString state, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString daichoShubetsuKey, RString daichoShubetsu, RString shisetsuShuruiKey, RString shisetsuShurui, RString rirekiNo) {
         super();
         this.setOriginalData("state", state);
         this.setOriginalData("nyushoDate", nyushoDate);
@@ -69,6 +67,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShuruiKey", shisetsuShuruiKey);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
+        this.setOriginalData("rirekiNo", rirekiNo);
         this.state = state;
         this.nyushoDate = nyushoDate;
         this.taishoDate = taishoDate;
@@ -79,6 +78,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.daichoShubetsu = daichoShubetsu;
         this.shisetsuShuruiKey = shisetsuShuruiKey;
         this.shisetsuShurui = shisetsuShurui;
+        this.rirekiNo = rirekiNo;
     }
 
     public RString getState() {
@@ -119,6 +119,10 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
     public RString getShisetsuShurui() {
         return shisetsuShurui;
+    }
+
+    public RString getRirekiNo() {
+        return rirekiNo;
     }
 
     public void setState(RString state) {
@@ -169,6 +173,11 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
     public void setShisetsuShurui(RString shisetsuShurui) {
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.shisetsuShurui = shisetsuShurui;
+    }
+
+    public void setRirekiNo(RString rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
     }
 
     // </editor-fold>

@@ -7,6 +7,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 
  * 介護保険被保険者証交付申請書（第2号被保険者）の帳票データのクラスです。
+ *
+ * @reamsid_L DBA-0540-140 houtianpeng
  */
 public class HihokenshashokoufuShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

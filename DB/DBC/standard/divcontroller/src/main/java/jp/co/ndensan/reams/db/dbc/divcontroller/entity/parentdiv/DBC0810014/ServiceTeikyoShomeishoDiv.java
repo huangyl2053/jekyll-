@@ -4,17 +4,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810014;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ServiceTeikyoShomeisho のクラスファイル 
- * 
- * @author 自動生成
+ * ServiceTeikyoShomeisho のクラスファイル
+ *
+ * @reamsid_L DBC-1010-020 gongliang
  */
 public class ServiceTeikyoShomeishoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -98,7 +100,7 @@ public class ServiceTeikyoShomeishoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgdServiceTeikyoShomeisyo(DataGrid<dgdServiceTeikyoShomeisyo_Row> dgdServiceTeikyoShomeisyo) {
+    public void setDgdServiceTeikyoShomeisyo(DataGrid<dgdServiceTeikyoShomeisyo_Row> dgdServiceTeikyoShomeisyo) {
         this.getPanelShinseiNaiyo().setDgdServiceTeikyoShomeisyo(dgdServiceTeikyoShomeisyo);
     }
 

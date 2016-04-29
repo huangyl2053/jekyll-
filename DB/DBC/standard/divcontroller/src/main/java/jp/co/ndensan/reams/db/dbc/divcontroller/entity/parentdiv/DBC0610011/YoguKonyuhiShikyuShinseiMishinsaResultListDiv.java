@@ -4,25 +4,29 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * YoguKonyuhiShikyuShinseiMishinsaResultList のクラスファイル 
- * 
- * @author 自動生成
+ * YoguKonyuhiShikyuShinseiMishinsaResultList のクラスファイル
+ *
+ * @reamsid_L DBC-1020-040 gongliang
  */
 public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("TextBoxDate2")
-    private TextBoxDate TextBoxDate2;
+    @JsonProperty("txtKetteiYMD")
+    private TextBoxDate txtKetteiYMD;
     @JsonProperty("dgYoguKonyuhiShisaMishinsaShikyuShinseiList")
     private DataGrid<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> dgYoguKonyuhiShisaMishinsaShikyuShinseiList;
     @JsonProperty("btnIkkatsuShinsa")
@@ -35,21 +39,21 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getTextBoxDate2
-     * @return TextBoxDate2
+     * gettxtKetteiYMD
+     * @return txtKetteiYMD
      */
-    @JsonProperty("TextBoxDate2")
-    public TextBoxDate getTextBoxDate2() {
-        return TextBoxDate2;
+    @JsonProperty("txtKetteiYMD")
+    public TextBoxDate getTxtKetteiYMD() {
+        return txtKetteiYMD;
     }
 
     /*
-     * setTextBoxDate2
-     * @param TextBoxDate2 TextBoxDate2
+     * settxtKetteiYMD
+     * @param txtKetteiYMD txtKetteiYMD
      */
-    @JsonProperty("TextBoxDate2")
-    public void setTextBoxDate2(TextBoxDate TextBoxDate2) {
-        this.TextBoxDate2 = TextBoxDate2;
+    @JsonProperty("txtKetteiYMD")
+    public void setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
+        this.txtKetteiYMD = txtKetteiYMD;
     }
 
     /*

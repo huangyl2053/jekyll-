@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tbp4 のクラスファイル 
- * 
- * @author 自動生成
+ * tbp4 のクラスファイル
+ *
+ * @reamsid_L DBU-1100-080 lijunjun
  */
 public class tbp4Div extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -206,9 +208,10 @@ public class tbp4Div extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * cel411 のクラスファイル 
- * 
+ * cel411 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel411Attbp4 extends TableCell {
@@ -216,12 +219,14 @@ class cel411Attbp4 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel4R2C2 のクラスファイル 
- * 
+ * cel4R2C2 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel4R2C2Attbp4 extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtRiyoshaDaiichiKensu1")
     private TextBoxNum txtRiyoshaDaiichiKensu1;
@@ -246,12 +251,14 @@ class cel4R2C2Attbp4 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel4R2C3 のクラスファイル 
- * 
+ * cel4R2C3 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel4R2C3Attbp4 extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtRiyoshaDaiichiKensu2")
     private TextBoxNum txtRiyoshaDaiichiKensu2;
@@ -276,12 +283,14 @@ class cel4R2C3Attbp4 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel4R2C4 のクラスファイル 
- * 
+ * cel4R2C4 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel4R2C4Attbp4 extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtRiyoshaDaiichiKensu3")
     private TextBoxNum txtRiyoshaDaiichiKensu3;
@@ -306,12 +315,14 @@ class cel4R2C4Attbp4 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel4R3C2 のクラスファイル 
- * 
+ * cel4R3C2 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel4R3C2Attbp4 extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtRiyoshaDaiichiKyufugaku1")
     private TextBoxNum txtRiyoshaDaiichiKyufugaku1;
@@ -336,12 +347,14 @@ class cel4R3C2Attbp4 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel4R3C3 のクラスファイル 
- * 
+ * cel4R3C3 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel4R3C3Attbp4 extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtRiyoshaDaiichiKyufugaku2")
     private TextBoxNum txtRiyoshaDaiichiKyufugaku2;
@@ -366,12 +379,14 @@ class cel4R3C3Attbp4 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * cel4R3C4 のクラスファイル 
- * 
+ * cel4R3C4 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel4R3C4Attbp4 extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtRiyoshaDaiichiKyufugaku3")
     private TextBoxNum txtRiyoshaDaiichiKyufugaku3;

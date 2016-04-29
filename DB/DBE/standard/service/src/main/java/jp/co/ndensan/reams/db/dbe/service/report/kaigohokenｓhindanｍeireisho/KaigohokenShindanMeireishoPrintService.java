@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReport;
-import jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportJoho;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -29,8 +28,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- *
  * 介護保険診断命令書PrinterServiceクラスです。
+ *
+ * @reamsid_L DBE-0080-070 wangxiaodong
  */
 public class KaigohokenShindanMeireishoPrintService {
 
@@ -48,6 +48,7 @@ public class KaigohokenShindanMeireishoPrintService {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
+                List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
                 for (KaigohokenShindanMeireishoHeaderItem headItem : headItemlist) {
                     headItem = new KaigohokenShindanMeireishoHeaderItem(
                             headItem.getShichosonMei(),
@@ -84,19 +85,20 @@ public class KaigohokenShindanMeireishoPrintService {
                             headItem.getTsuchibun17(),
                             headItem.getRemban()
                     );
-                    for (KaigohokenShindanMeireishoReport report : toReports(new KaigohokenShindanMeireishoReportJoho(headItem))) {
-                        ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                        report.writeBy(reportSourceWriter);
-                    }
+                    itemList.add(headItem);
+                }
+                for (KaigohokenShindanMeireishoReport report : toReports(itemList)) {
+                    ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                    report.writeBy(reportSourceWriter);
                 }
             }
             return reportManager.publish();
         }
     }
 
-    private static List<KaigohokenShindanMeireishoReport> toReports(KaigohokenShindanMeireishoReportJoho reportJoho) {
+    private static List<KaigohokenShindanMeireishoReport> toReports(List<KaigohokenShindanMeireishoHeaderItem> itemlist) {
         List<KaigohokenShindanMeireishoReport> list = new ArrayList<>();
-        list.add(KaigohokenShindanMeireishoReport.createFrom(reportJoho.getHeadItem()));
+        list.add(KaigohokenShindanMeireishoReport.createFrom(itemlist));
         return list;
     }
 
@@ -110,5 +112,4 @@ public class KaigohokenShindanMeireishoPrintService {
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
     }
-
 }

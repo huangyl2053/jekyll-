@@ -76,7 +76,7 @@ public class GaikyoTokkiBuilder {
     /**
      * 住宅改修(回収箇所)を設定します。
      *
-     * @param 住宅改修(回収箇所) 住宅改修(回収箇所)
+     * @param 住宅改修 住宅改修(回収箇所)
      * @return {@link GaikyoTokkiBuilder}
      */
     public GaikyoTokkiBuilder set住宅改修(RString 住宅改修) {
@@ -132,7 +132,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setShusoImageSharedFileId(概況特記_主訴_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記_主訴_マスキングイメージ共有ファイルIDを設定します。
      *
@@ -144,7 +143,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setShusoMaskingImageSharedFileId(概況特記_主訴_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記事項_家族状況を設定します。
      *
@@ -168,7 +166,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKazokuJokyoImageSharedFileId(概況特記_家族状況_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記_家族状況_マスキングイメージ共有ファイルIDを設定します。
      *
@@ -180,7 +177,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKazokuJokyoMaskingImageSharedFileId(概況特記_家族状況_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記事項_居住環境を設定します。
      *
@@ -204,7 +200,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKyojuKankyoImageSharedFileId(概況特記_居住環境_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記_居住環境_マスキングイメージ共有ファイルIDを設定します。
      *
@@ -216,7 +211,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKyojuKankyoMaskingImageSharedFileId(概況特記_居住環境_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記事項_機器_器械を設定します。
      *
@@ -240,7 +234,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKikaiKikiImageSharedFileId(概況特記_機器_器械_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記_機器_器械_マスキングイメージ共有ファイルIDを設定します。
      *
@@ -252,7 +245,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKikaiKikiMaskingImageSharedFileId(概況特記_機器_器械_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * {@link GaikyoTokki}のインスタンスを生成します。
      *

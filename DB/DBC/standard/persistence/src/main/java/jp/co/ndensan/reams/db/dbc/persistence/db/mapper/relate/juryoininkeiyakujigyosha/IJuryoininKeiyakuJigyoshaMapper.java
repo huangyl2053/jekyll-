@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosh
 
 /**
  * 受領委任契約事業者登録・追加・修正・照会
+ *
+ * @reamsid_L DBC-2120-030 panhe
  */
 public interface IJuryoininKeiyakuJigyoshaMapper {
 

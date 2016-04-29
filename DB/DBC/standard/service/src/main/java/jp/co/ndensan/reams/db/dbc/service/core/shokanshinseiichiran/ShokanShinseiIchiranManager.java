@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseiichiran.ShokanShins
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameterCount;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanShinseiIchiranRelateEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshinseiichiran.ShokanShinseiIchiranMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshinseiichiran.IShokanShinseiIchiranMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 償還払支給申請リストを取得するクラスです。
+ *
+ * @reamsid_L DBC-0960-020 hezhenzhen
  *
  */
 public class ShokanShinseiIchiranManager {
@@ -39,8 +41,7 @@ public class ShokanShinseiIchiranManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンスを返します。
      *
-     * @return // *
-     * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンス
+     * @return // * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンス
      */
     public static ShokanShinseiIchiranManager createInstance() {
         return InstanceProvider.create(ShokanShinseiIchiranManager.class);
@@ -61,7 +62,7 @@ public class ShokanShinseiIchiranManager {
         if ((サービス提供年月From == null || サービス提供年月From.isEmpty()) && (サービス提供年月To == null || サービス提供年月To.isEmpty())) {
             return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
         }
-        ShokanShinseiIchiranMapper mapper = mapperProvider.create(ShokanShinseiIchiranMapper.class);
+        IShokanShinseiIchiranMapper mapper = mapperProvider.create(IShokanShinseiIchiranMapper.class);
         List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト照会(
                 ShokanShinseiIchiranParameter.createSelectByKeyParam(
                         被保険者番号,
@@ -92,7 +93,7 @@ public class ShokanShinseiIchiranManager {
         if ((サービス提供年月From == null || サービス提供年月From.isEmpty()) && (サービス提供年月To == null || サービス提供年月To.isEmpty())) {
             return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);
         }
-        ShokanShinseiIchiranMapper mapper = mapperProvider.create(ShokanShinseiIchiranMapper.class);
+        IShokanShinseiIchiranMapper mapper = mapperProvider.create(IShokanShinseiIchiranMapper.class);
         List<ShokanShinseiIchiranRelateEntity> relateEntity = mapper.select償還払支給申請リスト申請(ShokanShinseiIchiranParameter.createSelectByKeyParam(
                 被保険者番号,
                 サービス提供年月From,
@@ -117,7 +118,7 @@ public class ShokanShinseiIchiranManager {
     public int getShokanShinseiCount(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス年月"));
-        ShokanShinseiIchiranMapper mapper = mapperProvider.create(ShokanShinseiIchiranMapper.class);
+        IShokanShinseiIchiranMapper mapper = mapperProvider.create(IShokanShinseiIchiranMapper.class);
         return mapper.select償還払支給申請情報件数取得(ShokanShinseiIchiranParameterCount.createSelectByKeyParam(被保険者番号, サービス年月));
     }
 }

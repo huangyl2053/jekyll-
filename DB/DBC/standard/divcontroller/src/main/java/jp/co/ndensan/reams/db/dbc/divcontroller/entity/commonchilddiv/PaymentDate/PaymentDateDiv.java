@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * PaymentDate のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-4470-010 wangkanglei
  */
 public class PaymentDateDiv extends Panel implements IPaymentDateDiv {
 

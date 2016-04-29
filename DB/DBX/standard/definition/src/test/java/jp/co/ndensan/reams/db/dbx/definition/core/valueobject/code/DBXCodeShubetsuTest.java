@@ -5,252 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyokankyoKijun_BeforeH19_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_Byoinkeikagata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Tsushokaigo_AfterH18_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.DoitsuTatemonoKyojuUserGenzanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_RigakuRyoho3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.UnitCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_ByoinKeikagata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoSeikatsukaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SetsubiKijun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JakunenseiNinchishoCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_7;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokiboKyotenShugoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_Sonota;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Shinryojo_AfterH17_10;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokubetsuChiikiKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteiJigyoshoKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_BeforeH18_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_RigakuRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinfukushishisetsu_AfterH18_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinfukushishisetsu_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_Ryoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.DBXCodeShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YuryoRojinHome;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JunUnitCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_YogoRojinHome;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Tsushokaigo_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KeihiRojinHome;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JigyoshoHyokaKasanMoshideUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YogoRojinHome;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_Roken_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanKangoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KangoTaiseiKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_Sonota;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JushoHifukaiyoShidoKanriUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_NinchishoShikkangata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinfukushishisetsu_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokiboTakinogataKyotakukaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_AfterH17_10;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JigyoshoHyokaKasanKetteiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKaigoStaffKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_ShinryojoRyoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoSemmonCareKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceIdoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH24_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ServiceTeikyoTaiseiKyokaKasanForKushoType;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationKasanJokyoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_ByoinRyoyogata_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_NinchishoShikkangata_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.CareerPathsTaioJokyo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboNinchishotaiogataTsuchokaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_ShinryojoRyoyogata_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_NinchishoShikkangata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanKinmuJokenKijun_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyokankyoKijun_ShinryojoRyoyogataUnitGata_ShinryojoRyoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanCareUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ServiceTeikyoTaiseikyokakasan_SonotaService;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.IryoRenkeiTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoStaffShoguKaizenKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboShokiboTakinogataKyotakukaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakantaiogataHomonkaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShintaiKaigoUnder20minutesInDaytimeTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByRigakuryohoshiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakinStaffHaichiKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SeishinkaIshiTeikitekiRyoyoshidoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakuzaiKanriShidoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShogaishaSeikatsuSupportTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_shinryoujokata_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KansentaisakuShidoKanriUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Ryoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShintaikosokuHaishiTorikumiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_UnitGataNinchishoShikkangata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JutakuNyushoSogoriyoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokubetsuNyuyokuKaijoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoSeikatsukaigo_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuBySagyoryohoshiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByGengoChokakushiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_SagyoRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NichijoSeikatsuKeizokuSupprtKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_KaigoryokuKyokagata_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KangoStaffHaichiKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KoreishaSenyoChintaijutaku;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JokinSenjuIshiHaichiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataKaigoRojinfukushishisetsu_JininHaichiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_BeforeH17_9;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Roken_BeforeH17_9;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_Byoinryoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanKinmuJokenKijun_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_BeforeH21_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyokankyoKijun_AfterH19_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_ShinryojoRyoyogata_Before_H15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboHomonkango;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.DaikiboJigyoshoGaitoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_NinchishoShikkangata_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsushoRehabilitation_BeforeH21_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ServiceTeikyoTaiseikyokakasan_Homonkango_etc;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTsuchoRehabilitation;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokubetsuKanriTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SogeiTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoSeikatsukaigo_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyoshokuKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsushoRehabilitation_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKaigoSupportSemmoninKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishotaiogataTsushokaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShafukuhojinKeigenJigyoJisshiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TerminalCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_Shinryojogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.IshiHaichiKijun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinfukushishisetsu_AfterH17_10;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_Byoinryoyogata_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_ByoinRyoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.HomonRehabilitation;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyoTaiseiIjiTokubetsuKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShudanCommunicationRyohoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinkyuTankinyushoTaiseiKakuhoKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JakunenseiNinchishoRiyoshaUkeireKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinkyuUkeireTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoTankiShuchuRehabilitationKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Roken_AfterH17_10;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokujiTeikyoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Teikijunkai_zuijitaiogataHomonkaigokango;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JudokaTaioTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoSeikatsukaigo_AfterH17_10;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_UnitGataNinchishoShikkangata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ServiceTeikyoSekininshaTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboHomonRehabilitation;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SeikatsuKinoKojoGroupKatsudoKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Shinryojo_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoSeikatsukaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_NormalType;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JuryoininUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.UndokiKinoKojoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_ByoinRyoyogata_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokiboJigyoshoKasanInMountainArea_SituationAboutScale;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_yuryoRojinHome;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsuhoTaioFor24HoursKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiKijunGaitoJigyoshoKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Homonkango_BeforeH24_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Homonkaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinhokenshisetsu_NormalType;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyokankyoKijun_AfterH20_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_KaigoryokuKyokagata_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Tsushokaigo_BeforeH18_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_NinchishoShikkangata_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanCareKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_AfterH18_7;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinfukushishisetsu_AfterH15_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoSemmontoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KokuKinoKojoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinhokenshisetsu_BeforeH17_9;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationKinoKyokaUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinkyujiHomonKaigoKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NyuyokuKaijoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKaigojugyoshaKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ZaitakuFukkiZaitakuRyoyoSupportKinoKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Tsushokaigo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH18_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokiboJigyoshoKasanInMountainArea_SituationAboutArea;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Shinryojo_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKangoStaffKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiUmuBySeikatsuhogoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JikanEnchoServiceTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.HojinsShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH18_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KoreishaSenyoChintaijutaku;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Shinryojo_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_ShinryojoRyoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTankinyushoRyoyokaigo_Roken_AfterH18_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokujiTeikyoJokyo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuKinokunrentaiseiUmu_Tsushokaigoigai;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.EiyoKanriHyoka;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoTatokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TeiseiKubunCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsushoRehabilitation_AfterH24_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanKinmuJokenKijun_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.EiyoManagementTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH21_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiKoshinShinseichuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoKofushoShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_BeforeH24_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_AfterH24_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Shinryojo_AfterH18_7;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_NinchishoShikkangata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinhokenshisetsu_Ryoyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Kaigorojinfukushishisetsu_BeforeH17_9;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinokunrenShidoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KyojuhiTaiseku;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ServiceTeikyoTaiseikyokakasan_Homonnyuyokukaigo_etc;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ThirdGradeHelperTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Tsujogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Byoinkeikagata_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByIshiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Shinryojo_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoCareKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH24_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH24_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogata;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_Byoinryoyogata_BeforeH15_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TankinyushoRyoyokaigo_Roken_AfterH20_5;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.Homonkango_AfterH24_4;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoryoyogataIryoshisetsu_Shinryojogata_BeforeH15_3;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -1688,32 +1442,32 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無の場合_getReturnTypeはRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsuを返す() {
-            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu.class.getName()));
+            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmuSogoRehabilitationShisetsu.class.getName()));
         }
 
         @Test
         public void ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無の場合_getReturnTypeはRehabilitationTeikyoTaiseiUmu_RigakuRyoho2を返す() {
-            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmu_RigakuRyoho2.class.getName()));
+            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmuRigakuRyoho2.class.getName()));
         }
 
         @Test
         public void ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無の場合_getReturnTypeはRehabilitationTeikyoTaiseiUmu_RigakuRyoho3を返す() {
-            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmu_RigakuRyoho3.class.getName()));
+            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmuRigakuRyoho3.class.getName()));
         }
 
         @Test
         public void ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無の場合_getReturnTypeはRehabilitationTeikyoTaiseiUmu_SagyoRyoho2を返す() {
-            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmu_SagyoRyoho2.class.getName()));
+            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmuSagyoRyoho2.class.getName()));
         }
 
         @Test
         public void ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無の場合_getReturnTypeはRehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyohoを返す() {
-            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho.class.getName()));
+            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmuSeishinkaSagyoRyoho.class.getName()));
         }
 
         @Test
         public void ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無の場合_getReturnTypeはRehabilitationTeikyoTaiseiUmu_Sonotaを返す() {
-            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmu_Sonota.class.getName()));
+            assertThat(DBXCodeShubetsu.ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無.getReturnType().getName(), is(RehabilitationTeikyoTaiseiUmuSonota.class.getName()));
         }
 
         @Test
@@ -1798,32 +1552,32 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsuを返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuSogoRehabilitationShisetsu.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2を返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho2.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無_平成18年3月以前の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3を返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無_平成18年3月以前.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無_平成18年3月以前.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho3BeforeH183.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1を返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuGengoChokakuRyoho1.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2を返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuGengoChokakuRyoho2.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2を返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuSagyoRyoho2.class.getName()));
         }
 
         @Test
@@ -1933,27 +1687,27 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1を返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho1.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無_平成21年3月以前の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3を返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無_平成21年3月以前.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無_平成21年3月以前.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuRigakuRyoho2BeforeH213.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyohoを返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuSagyoRyoho.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyohoを返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuGengoChokakuRyoho.class.getName()));
         }
 
         @Test
         public void 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無の場合_getReturnTypeはKobetsuRehabilitationTeikyoTaiseiUmu_Sonotaを返す() {
-            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmu_Sonota.class.getName()));
+            assertThat(DBXCodeShubetsu.個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無.getReturnType().getName(), is(KobetsuRehabilitationTeikyoTaiseiUmuSonota.class.getName()));
         }
 
         @Test
@@ -1973,12 +1727,12 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 中山間地域等における小規模事業所加算_地域に関する状況の場合_getReturnTypeはShokiboJigyoshoKasanInMountainArea_SituationAboutAreaを返す() {
-            assertThat(DBXCodeShubetsu.中山間地域等における小規模事業所加算_地域に関する状況.getReturnType().getName(), is(ShokiboJigyoshoKasanInMountainArea_SituationAboutArea.class.getName()));
+            assertThat(DBXCodeShubetsu.中山間地域等における小規模事業所加算_地域に関する状況.getReturnType().getName(), is(ShokiboJigyoshoKasanInMountainAreaSituationAboutArea.class.getName()));
         }
 
         @Test
         public void 中山間地域等における小規模事業所加算_規模に関する状況の場合_getReturnTypeはShokiboJigyoshoKasanInMountainArea_SituationAboutScaleを返す() {
-            assertThat(DBXCodeShubetsu.中山間地域等における小規模事業所加算_規模に関する状況.getReturnType().getName(), is(ShokiboJigyoshoKasanInMountainArea_SituationAboutScale.class.getName()));
+            assertThat(DBXCodeShubetsu.中山間地域等における小規模事業所加算_規模に関する状況.getReturnType().getName(), is(ShokiboJigyoshoKasanInMountainAreaSituationAboutScale.class.getName()));
         }
 
         @Test
@@ -2093,12 +1847,12 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 訪問看護_平成24年3月以前の場合_getReturnTypeはHomonkango_BeforeH24_3を返す() {
-            assertThat(DBXCodeShubetsu.訪問看護_平成24年3月以前.getReturnType().getName(), is(Homonkango_BeforeH24_3.class.getName()));
+            assertThat(DBXCodeShubetsu.訪問看護_平成24年3月以前.getReturnType().getName(), is(HomonkangoBeforeH243.class.getName()));
         }
 
         @Test
         public void 訪問看護_平成24年4月以降の場合_getReturnTypeはHomonkango_AfterH24_4を返す() {
-            assertThat(DBXCodeShubetsu.訪問看護_平成24年4月以降.getReturnType().getName(), is(Homonkango_AfterH24_4.class.getName()));
+            assertThat(DBXCodeShubetsu.訪問看護_平成24年4月以降.getReturnType().getName(), is(HomonkangoAfterH244.class.getName()));
         }
 
         @Test
@@ -2108,167 +1862,167 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 通所介護_平成18年3月以前の場合_getReturnTypeはTsushokaigo_BeforeH18_3を返す() {
-            assertThat(DBXCodeShubetsu.通所介護_平成18年3月以前.getReturnType().getName(), is(Tsushokaigo_BeforeH18_3.class.getName()));
+            assertThat(DBXCodeShubetsu.通所介護_平成18年3月以前.getReturnType().getName(), is(TsushokaigoBeforeH183.class.getName()));
         }
 
         @Test
         public void 通所介護_平成18年4月以降の場合_getReturnTypeはTsushokaigo_AfterH18_4を返す() {
-            assertThat(DBXCodeShubetsu.通所介護_平成18年4月以降.getReturnType().getName(), is(Tsushokaigo_AfterH18_4.class.getName()));
+            assertThat(DBXCodeShubetsu.通所介護_平成18年4月以降.getReturnType().getName(), is(TsushokaigoAfterH184.class.getName()));
         }
 
         @Test
         public void 通所介護_平成21年4月以降の場合_getReturnTypeはTsushokaigo_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.通所介護_平成21年4月以降.getReturnType().getName(), is(Tsushokaigo_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.通所介護_平成21年4月以降.getReturnType().getName(), is(TsushokaigoAfterH214.class.getName()));
         }
 
         @Test
         public void 通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前の場合_getReturnTypeはTsushoRehabilitation_BeforeH21_3を返す() {
-            assertThat(DBXCodeShubetsu.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前.getReturnType().getName(), is(TsushoRehabilitation_BeforeH21_3.class.getName()));
+            assertThat(DBXCodeShubetsu.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年3月以前.getReturnType().getName(), is(TsushoRehabilitationBeforeH213.class.getName()));
         }
 
         @Test
         public void 通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年4月以降の場合_getReturnTypeはTsushoRehabilitation_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年4月以降.getReturnType().getName(), is(TsushoRehabilitation_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成21年4月以降.getReturnType().getName(), is(TsushoRehabilitationAfterH214.class.getName()));
         }
 
         @Test
         public void 通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成24年4月以降の場合_getReturnTypeはTsushoRehabilitation_AfterH24_4を返す() {
-            assertThat(DBXCodeShubetsu.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成24年4月以降.getReturnType().getName(), is(TsushoRehabilitation_AfterH24_4.class.getName()));
+            assertThat(DBXCodeShubetsu.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_平成24年4月以降.getReturnType().getName(), is(TsushoRehabilitationAfterH244.class.getName()));
         }
 
         @Test
         public void 短期入所生活介護_平成15年3月以前の場合_getReturnTypeはTankinyushoSeikatsukaigo_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.短期入所生活介護_平成15年3月以前.getReturnType().getName(), is(TankinyushoSeikatsukaigo_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所生活介護_平成15年3月以前.getReturnType().getName(), is(TankinyushoSeikatsukaigoBeforeH153.class.getName()));
         }
 
         @Test
         public void 短期入所生活介護_平成15年4月以降の場合_getReturnTypeはTankinyushoSeikatsukaigo_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.短期入所生活介護_平成15年4月以降.getReturnType().getName(), is(TankinyushoSeikatsukaigo_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所生活介護_平成15年4月以降.getReturnType().getName(), is(TankinyushoSeikatsukaigoAfterH154.class.getName()));
         }
 
         @Test
         public void 短期入所生活介護_平成17年10月以降の場合_getReturnTypeはTankinyushoSeikatsukaigo_AfterH17_10を返す() {
-            assertThat(DBXCodeShubetsu.短期入所生活介護_平成17年10月以降.getReturnType().getName(), is(TankinyushoSeikatsukaigo_AfterH17_10.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所生活介護_平成17年10月以降.getReturnType().getName(), is(TankinyushoSeikatsukaigoAfterH1710.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_老健_平成17年9月以前の場合_getReturnTypeはTankinyushoRyoyokaigo_Roken_BeforeH17_9を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_老健_平成17年9月以前.getReturnType().getName(), is(TankinyushoRyoyokaigo_Roken_BeforeH17_9.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_老健_平成17年9月以前.getReturnType().getName(), is(TankinyushoRyoyokaigoRokenBeforeH179.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_老健_平成17年10月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Roken_AfterH17_10を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_老健_平成17年10月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Roken_AfterH17_10.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_老健_平成17年10月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoRokenAfterH1710.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_老健_平成20年5月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Roken_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_老健_平成20年5月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Roken_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_老健_平成20年5月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoRokenAfterH205.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所等_平成15年3月以前の場合_getReturnTypeはTankinyushoRyoyokaigo_Shinryojo_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigo_Shinryojo_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoBeforeH153.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所等_平成15年4月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Shinryojo_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Shinryojo_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoAfterH154.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所等_平成17年10月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Shinryojo_AfterH17_10を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成17年10月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Shinryojo_AfterH17_10.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成17年10月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoAfterH1710.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所等_平成18年7月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Shinryojo_AfterH18_7を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成18年7月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Shinryojo_AfterH18_7.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成18年7月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoAfterH187.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所等_平成20年5月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Shinryojo_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成20年5月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Shinryojo_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成20年5月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoAfterH205.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所等_平成21年4月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Shinryojo_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成21年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Shinryojo_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所等_平成21年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoAfterH214.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_平成18年3月以前の場合_getReturnTypeはTokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_BeforeH18_3を返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成18年3月以前.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_BeforeH18_3.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成18年3月以前.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiBeforeH183.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_平成18年4月以降の場合_getReturnTypeはTokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH18_4を返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成18年4月以降.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH18_4.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成18年4月以降.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiAfterH184.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_平成21年4月以降の場合_getReturnTypeはTokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成21年4月以降.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成21年4月以降.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiAfterH214.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_平成24年4月以降の場合_getReturnTypeはTokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH24_4を返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成24年4月以降.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigo_tankiriyogataIgai_AfterH24_4.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_平成24年4月以降.getReturnType().getName(), is(TokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataIgaiAfterH244.class.getName()));
         }
 
         @Test
         public void 介護老人福祉施設_平成15年3月以前の場合_getReturnTypeはKaigorojinfukushishisetsu_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成15年3月以前.getReturnType().getName(), is(Kaigorojinfukushishisetsu_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成15年3月以前.getReturnType().getName(), is(KaigorojinfukushishisetsuBeforeH153.class.getName()));
         }
 
         @Test
         public void 介護老人福祉施設_平成15年4月以降の場合_getReturnTypeはKaigorojinfukushishisetsu_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成15年4月以降.getReturnType().getName(), is(Kaigorojinfukushishisetsu_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成15年4月以降.getReturnType().getName(), is(KaigorojinfukushishisetsuAfterH154.class.getName()));
         }
 
         @Test
         public void 介護老人福祉施設_平成17年10月以降の場合_getReturnTypeはKaigorojinfukushishisetsu_AfterH17_10を返す() {
-            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成17年10月以降.getReturnType().getName(), is(Kaigorojinfukushishisetsu_AfterH17_10.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成17年10月以降.getReturnType().getName(), is(KaigorojinfukushishisetsuAfterH1710.class.getName()));
         }
 
         @Test
         public void 介護老人保健施設_平成17年10月以降の場合_getReturnTypeはKaigorojinfukushishisetsu_AfterH17_10を返す() {
-            assertThat(DBXCodeShubetsu.介護老人保健施設_平成17年10月以降.getReturnType().getName(), is(Kaigorojinfukushishisetsu_AfterH17_10.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人保健施設_平成17年10月以降.getReturnType().getName(), is(KaigorojinfukushishisetsuAfterH1710.class.getName()));
         }
 
         @Test
         public void 介護老人保健施設_平成18年4月以降の場合_getReturnTypeはKaigorojinfukushishisetsu_AfterH18_4を返す() {
-            assertThat(DBXCodeShubetsu.介護老人保健施設_平成18年4月以降.getReturnType().getName(), is(Kaigorojinfukushishisetsu_AfterH18_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人保健施設_平成18年4月以降.getReturnType().getName(), is(KaigorojinfukushishisetsuAfterH184.class.getName()));
         }
 
         @Test
         public void 介護老人保健施設_平成20年5月以降の場合_getReturnTypeはKaigorojinfukushishisetsu_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.介護老人保健施設_平成20年5月以降.getReturnType().getName(), is(Kaigorojinfukushishisetsu_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人保健施設_平成20年5月以降.getReturnType().getName(), is(KaigorojinfukushishisetsuAfterH205.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_平成15年3月以前の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuBeforeH153.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_平成15年4月以降の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuAfterH154.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_平成17年10月以降の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_AfterH17_10を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成17年10月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_AfterH17_10.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成17年10月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuAfterH1710.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_平成18年7月以降の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_AfterH18_7を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成18年7月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_AfterH18_7.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成18年7月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuAfterH187.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_平成20年5月以降の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成20年5月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_平成20年5月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuAfterH205.class.getName()));
         }
 
         @Test
@@ -2288,42 +2042,42 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 介護予防短期入所療養介護_老健_平成18年4月以降の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_Roken_AfterH18_4を返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_老健_平成18年4月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_Roken_AfterH18_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_老健_平成18年4月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoRokenAfterH184.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_老健_平成20年5月以降の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_Roken_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_老健_平成20年5月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_Roken_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_老健_平成20年5月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoRokenAfterH205.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_診療所等_平成18年4月以降の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_4を返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成18年4月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成18年4月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH184.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_診療所等_平成18年7月以降の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_7を返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成18年7月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH18_7.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成18年7月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH187.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_診療所等_平成20年5月以降の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成20年5月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成20年5月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH205.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_診療所等_平成21年4月以降の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成21年4月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_Shinryojo_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所等_平成21年4月以降.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoShinryojoAfterH214.class.getName()));
         }
 
         @Test
         public void 介護予防特定施設入居者生活介護_平成24年3月以前の場合_getReturnTypeはKaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_BeforeH24_3を返す() {
-            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_平成24年3月以前.getReturnType().getName(), is(KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_BeforeH24_3.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_平成24年3月以前.getReturnType().getName(), is(KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigoBeforeH243.class.getName()));
         }
 
         @Test
         public void 介護予防特定施設入居者生活介護_平成24年4月以降の場合_getReturnTypeはKaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_AfterH24_4を返す() {
-            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_平成24年4月以降.getReturnType().getName(), is(KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigo_AfterH24_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_平成24年4月以降.getReturnType().getName(), is(KaigoyoboTokuteishisetsunyukyoshaSeikatsukaigoAfterH244.class.getName()));
         }
 
         @Test
@@ -2337,22 +2091,22 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 地域密着型特定施設入居者生活介護_短期利用型以外_平成18年4月以降の場合_getReturnTypeはChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH18_4を返す() {
-            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型以外_平成18年4月以降.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH18_4.class.getName()));
+            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型以外_平成18年4月以降.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataigaiAfterH184.class.getName()));
         }
 
         @Test
         public void 地域密着型特定施設入居者生活介護_短期利用型以外_平成20年5月以降の場合_getReturnTypeはChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型以外_平成20年5月以降.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型以外_平成20年5月以降.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataigaiAfterH205.class.getName()));
         }
 
         @Test
         public void 地域密着型特定施設入居者生活介護_短期利用型以外_平成24年4月以降の場合_getReturnTypeはChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH24_4を返す() {
-            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型以外_平成24年4月以降.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataigai_AfterH24_4.class.getName()));
+            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型以外_平成24年4月以降.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogataigaiAfterH244.class.getName()));
         }
 
         @Test
         public void 地域密着型介護老人福祉施設_施設等の区分の場合_getReturnTypeはChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubunを返す() {
-            assertThat(DBXCodeShubetsu.地域密着型介護老人福祉施設_施設等の区分.getReturnType().getName(), is(ChiikimitchakugataKaigorojinfukushishisetsu_ShisetsutoKubun.class.getName()));
+            assertThat(DBXCodeShubetsu.地域密着型介護老人福祉施設_施設等の区分.getReturnType().getName(), is(ChiikimitchakugataKaigorojinfukushishisetsuShisetsutoKubun.class.getName()));
         }
 
         @Test
@@ -2362,7 +2116,7 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 特定施設入居者生活介護_短期利用型の場合_getReturnTypeはTokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataを返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogata.class.getName()));
         }
 
         @Test
@@ -2372,7 +2126,7 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 定期巡回_随時対応型訪問介護看護の場合_getReturnTypeはTeikijunkai_zuijitaiogataHomonkaigokangoを返す() {
-            assertThat(DBXCodeShubetsu.定期巡回_随時対応型訪問介護看護.getReturnType().getName(), is(Teikijunkai_zuijitaiogataHomonkaigokango.class.getName()));
+            assertThat(DBXCodeShubetsu.定期巡回_随時対応型訪問介護看護.getReturnType().getName(), is(TeikijunkaiZuijitaiogataHomonkaigokango.class.getName()));
         }
 
         @Test
@@ -2382,17 +2136,17 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 認知症対応型共同生活介護_短期利用型以外の場合_getReturnTypeはNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigaiを返す() {
-            assertThat(DBXCodeShubetsu.認知症対応型共同生活介護_短期利用型以外.getReturnType().getName(), is(NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai.class.getName()));
+            assertThat(DBXCodeShubetsu.認知症対応型共同生活介護_短期利用型以外.getReturnType().getName(), is(NinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai.class.getName()));
         }
 
         @Test
         public void 認知症対応型共同生活介護_短期利用型の場合_getReturnTypeはNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataを返す() {
-            assertThat(DBXCodeShubetsu.認知症対応型共同生活介護_短期利用型.getReturnType().getName(), is(NinchishotaiogataKyodoSeikatsukaigo_Tankiriyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.認知症対応型共同生活介護_短期利用型.getReturnType().getName(), is(NinchishotaiogataKyodoSeikatsukaigoTankiriyogata.class.getName()));
         }
 
         @Test
         public void 地域密着型特定施設入居者生活介護_短期利用型の場合_getReturnTypeはChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogataを返す() {
-            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigo_Tankiriyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.地域密着型特定施設入居者生活介護_短期利用型.getReturnType().getName(), is(ChiikimitchakugataTokuteishisetsunyukyoshaSeikatsukaigoTankiriyogata.class.getName()));
         }
 
         @Test
@@ -2402,12 +2156,12 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 介護予防認知症対応型共同生活介護_短期利用型以外の場合_getReturnTypeはKaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigaiを返す() {
-            assertThat(DBXCodeShubetsu.介護予防認知症対応型共同生活介護_短期利用型以外.getReturnType().getName(), is(KaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataigai.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防認知症対応型共同生活介護_短期利用型以外.getReturnType().getName(), is(KaigoyoboNinchishotaiogataKyodoSeikatsukaigoTankiriyogataigai.class.getName()));
         }
 
         @Test
         public void 介護予防認知症対応型共同生活介護_短期利用型の場合_getReturnTypeはKaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogataを返す() {
-            assertThat(DBXCodeShubetsu.介護予防認知症対応型共同生活介護_短期利用型.getReturnType().getName(), is(KaigoyoboNinchishotaiogataKyodoSeikatsukaigo_Tankiriyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防認知症対応型共同生活介護_短期利用型.getReturnType().getName(), is(KaigoyoboNinchishotaiogataKyodoSeikatsukaigoTankiriyogata.class.getName()));
         }
 
         @Test
@@ -2422,317 +2176,317 @@ public class DBXCodeShubetsuTest {
 
         @Test
         public void 短期入所療養介護_平成17年9月以前の場合_getReturnTypeはTankinyushoRyoyokaigo_BeforeH17_9を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_平成17年9月以前.getReturnType().getName(), is(TankinyushoRyoyokaigo_BeforeH17_9.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_平成17年9月以前.getReturnType().getName(), is(TankinyushoRyoyokaigoBeforeH179.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_通常型の場合_getReturnTypeはTankinyushoRyoyokaigo_Tsujogataを返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_通常型.getReturnType().getName(), is(TankinyushoRyoyokaigo_Tsujogata.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_通常型.getReturnType().getName(), is(TankinyushoRyoyokaigoTsujogata.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_療養型の場合_getReturnTypeはTankinyushoRyoyokaigo_Ryoyogataを返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_療養型.getReturnType().getName(), is(TankinyushoRyoyokaigo_Ryoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_療養型.getReturnType().getName(), is(TankinyushoRyoyokaigoRyoyogata.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_病院療養型_平成15年3月以前の場合_getReturnTypeはTankinyushoRyoyokaigo_ByoinRyoyogata_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_病院療養型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigo_ByoinRyoyogata_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_病院療養型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigoByoinRyoyogataBeforeH153.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_病院療養型_平成15年4月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_ByoinRyoyogata_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_病院療養型_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_ByoinRyoyogata_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_病院療養型_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoByoinRyoyogataAfterH154.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所療養型_平成15年3月以前の場合_getReturnTypeはTankinyushoRyoyokaigo_ShinryojoRyoyogata_Before_H15_3を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所療養型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigo_ShinryojoRyoyogata_Before_H15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所療養型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoRyoyogataBeforeH153.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所療養型_平成15年4月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_ShinryojoRyoyogata_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所療養型_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_ShinryojoRyoyogata_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所療養型_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoRyoyogataAfterH154.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_認知症疾患型_平成15年3月以前の場合_getReturnTypeはTankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_認知症疾患型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigo_NinchishoShikkangata_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_認知症疾患型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigoNinchishoShikkangataBeforeH153.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_認知症疾患型_平成15年4月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_NinchishoShikkangata_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_認知症疾患型_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_NinchishoShikkangata_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_認知症疾患型_平成15年4月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoNinchishoShikkangataAfterH154.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_介護力強化型_平成15年3月以前の場合_getReturnTypeはTankinyushoRyoyokaigo_KaigoryokuKyokagata_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_介護力強化型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigo_KaigoryokuKyokagata_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_介護力強化型_平成15年3月以前.getReturnType().getName(), is(TankinyushoRyoyokaigoKaigoryokuKyokagataBeforeH153.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_病院療養型の場合_getReturnTypeはTankinyushoRyoyokaigo_ByoinRyoyogataを返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_病院療養型.getReturnType().getName(), is(TankinyushoRyoyokaigo_ByoinRyoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_病院療養型.getReturnType().getName(), is(TankinyushoRyoyokaigoByoinRyoyogata.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_診療所療養型の場合_getReturnTypeはTankinyushoRyoyokaigo_ShinryojoRyoyogataを返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所療養型.getReturnType().getName(), is(TankinyushoRyoyokaigo_ShinryojoRyoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_診療所療養型.getReturnType().getName(), is(TankinyushoRyoyokaigoShinryojoRyoyogata.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_認知症疾患型の場合_getReturnTypeはTankinyushoRyoyokaigo_NinchishoShikkangataを返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_認知症疾患型.getReturnType().getName(), is(TankinyushoRyoyokaigo_NinchishoShikkangata.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_認知症疾患型.getReturnType().getName(), is(TankinyushoRyoyokaigoNinchishoShikkangata.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_ユニット型認知症疾患型の場合_getReturnTypeはTankinyushoRyoyokaigo_UnitGataNinchishoShikkangataを返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_ユニット型認知症疾患型.getReturnType().getName(), is(TankinyushoRyoyokaigo_UnitGataNinchishoShikkangata.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_ユニット型認知症疾患型.getReturnType().getName(), is(TankinyushoRyoyokaigoUnitGataNinchishoShikkangata.class.getName()));
         }
 
         @Test
         public void 短期入所療養介護_病院経過型_平成20年5月以降の場合_getReturnTypeはTankinyushoRyoyokaigo_Byoinkeikagata_AfterH20_5を返す() {
-            assertThat(DBXCodeShubetsu.短期入所療養介護_病院経過型_平成20年5月以降.getReturnType().getName(), is(TankinyushoRyoyokaigo_Byoinkeikagata_AfterH20_5.class.getName()));
+            assertThat(DBXCodeShubetsu.短期入所療養介護_病院経過型_平成20年5月以降.getReturnType().getName(), is(TankinyushoRyoyokaigoByoinkeikagataAfterH205.class.getName()));
         }
 
         @Test
         public void 介護老人福祉施設_平成17年9月以前の場合_getReturnTypeはKaigorojinfukushishisetsu_BeforeH17_9を返す() {
-            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成17年9月以前.getReturnType().getName(), is(Kaigorojinfukushishisetsu_BeforeH17_9.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人福祉施設_平成17年9月以前.getReturnType().getName(), is(KaigorojinfukushishisetsuBeforeH179.class.getName()));
         }
 
         @Test
         public void 介護老人保健施設_平成17年9月以前の場合_getReturnTypeはKaigorojinhokenshisetsu_BeforeH17_9を返す() {
-            assertThat(DBXCodeShubetsu.介護老人保健施設_平成17年9月以前.getReturnType().getName(), is(Kaigorojinhokenshisetsu_BeforeH17_9.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人保健施設_平成17年9月以前.getReturnType().getName(), is(KaigorojinhokenshisetsuBeforeH179.class.getName()));
         }
 
         @Test
         public void 介護老人保健施設_通常型の場合_getReturnTypeはKaigorojinhokenshisetsu_NormalTypeを返す() {
-            assertThat(DBXCodeShubetsu.介護老人保健施設_通常型.getReturnType().getName(), is(Kaigorojinhokenshisetsu_NormalType.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人保健施設_通常型.getReturnType().getName(), is(KaigorojinhokenshisetsuNormalType.class.getName()));
         }
 
         @Test
         public void 介護老人保健施設_療養型の場合_getReturnTypeはKaigorojinhokenshisetsu_Ryoyogataを返す() {
-            assertThat(DBXCodeShubetsu.介護老人保健施設_療養型.getReturnType().getName(), is(Kaigorojinhokenshisetsu_Ryoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護老人保健施設_療養型.getReturnType().getName(), is(KaigorojinhokenshisetsuRyoyogata.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_病院療養型_平成15年3月以前の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_Byoinryoyogata_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院療養型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_Byoinryoyogata_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院療養型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuByoinryoyogataBeforeH153.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_病院療養型_平成15年4月以降の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_Byoinryoyogata_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院療養型_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_Byoinryoyogata_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院療養型_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuByoinryoyogataAfterH154.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_診療所型_平成15年3月以前の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_Shinryojogata_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_診療所型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_Shinryojogata_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_診療所型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuShinryojogataBeforeH153.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_診療所型_平成15年4月以降の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_shinryoujokata_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_診療所型_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_shinryoujokata_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_診療所型_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuShinryoujokataAfterH154.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_認知症疾患型_平成15年3月以前の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_NinchishoShikkangata_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_認知症疾患型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_NinchishoShikkangata_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_認知症疾患型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuNinchishoShikkangataBeforeH153.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_認知症疾患型_平成15年4月以降の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_NinchishoShikkangata_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_認知症疾患型_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_NinchishoShikkangata_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_認知症疾患型_平成15年4月以降.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuNinchishoShikkangataAfterH154.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_介護力強化型_平成15年3月以前の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_KaigoryokuKyokagata_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_介護力強化型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_KaigoryokuKyokagata_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_介護力強化型_平成15年3月以前.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuKaigoryokuKyokagataBeforeH153.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_病院療養型の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_Byoinryoyogataを返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院療養型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_Byoinryoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院療養型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuByoinryoyogata.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_診療所型の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_Shinryojogataを返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_診療所型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_Shinryojogata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_診療所型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuShinryojogata.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_認知症疾患型の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_NinchishoShikkangataを返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_認知症疾患型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_NinchishoShikkangata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_認知症疾患型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuNinchishoShikkangata.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_ユニット型認知症疾患型の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_UnitGataNinchishoShikkangataを返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_ユニット型認知症疾患型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_UnitGataNinchishoShikkangata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_ユニット型認知症疾患型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuUnitGataNinchishoShikkangata.class.getName()));
         }
 
         @Test
         public void 介護療養型医療施設_病院経過型の場合_getReturnTypeはKaigoryoyogataIryoshisetsu_Byoinkeikagataを返す() {
-            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院経過型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsu_Byoinkeikagata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護療養型医療施設_病院経過型.getReturnType().getName(), is(KaigoryoyogataIryoshisetsuByoinkeikagata.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_有料老人ホームの場合_getReturnTypeはTokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_yuryoRojinHomeを返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_有料老人ホーム.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_yuryoRojinHome.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_有料老人ホーム.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiYuryoRojinHome.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_軽費老人ホームの場合_getReturnTypeはTokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHomeを返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_軽費老人ホーム.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KeihiRojinHome.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_軽費老人ホーム.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKeihiRojinHome.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_養護老人ホームの場合_getReturnTypeはTokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_YogoRojinHomeを返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_養護老人ホーム.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_YogoRojinHome.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_養護老人ホーム.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiYogoRojinHome.class.getName()));
         }
 
         @Test
         public void 特定施設入居者生活介護_短期利用型以外_高齢者専用賃貸住宅の場合_getReturnTypeはTokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KoreishaSenyoChintaijutakuを返す() {
-            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_高齢者専用賃貸住宅.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigo_Tankiriyogataigai_KoreishaSenyoChintaijutaku.class.getName()));
+            assertThat(DBXCodeShubetsu.特定施設入居者生活介護_短期利用型以外_高齢者専用賃貸住宅.getReturnType().getName(), is(TokuteishisetsuNyukyoshaSeikatsukaigoTankiriyogataigaiKoreishaSenyoChintaijutaku.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_病院療養型の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogataを返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_病院療養型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_ByoinRyoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_病院療養型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoByoinRyoyogata.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_診療所療養型の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_ShinryojoRyoyogataを返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所療養型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_ShinryojoRyoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_診療所療養型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoShinryojoRyoyogata.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_認知症疾患型の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_NinchishoShikkangataを返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_認知症疾患型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_NinchishoShikkangata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_認知症疾患型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoNinchishoShikkangata.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_ユニット型認知症疾患型の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_UnitGataNinchishoShikkangataを返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_ユニット型認知症疾患型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_UnitGataNinchishoShikkangata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_ユニット型認知症疾患型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoUnitGataNinchishoShikkangata.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_病院経過型の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_ByoinKeikagataを返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_病院経過型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_ByoinKeikagata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_病院経過型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoByoinKeikagata.class.getName()));
         }
 
         @Test
         public void 介護予防特定施設入居者生活介護_有料老人ホームの場合_getReturnTypeはKaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YuryoRojinHomeを返す() {
-            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_有料老人ホーム.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YuryoRojinHome.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_有料老人ホーム.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoYuryoRojinHome.class.getName()));
         }
 
         @Test
         public void 介護予防特定施設入居者生活介護_軽費老人ホームの場合_getReturnTypeはKaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KeihiRojinHomeを返す() {
-            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_軽費老人ホーム.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KeihiRojinHome.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_軽費老人ホーム.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoKeihiRojinHome.class.getName()));
         }
 
         @Test
         public void 介護予防特定施設入居者生活介護_養護老人ホームの場合_getReturnTypeはKaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YogoRojinHomeを返す() {
-            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_養護老人ホーム.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_YogoRojinHome.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_養護老人ホーム.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoYogoRojinHome.class.getName()));
         }
 
         @Test
         public void 介護予防特定施設入居者生活介護_高齢者専用賃貸住宅の場合_getReturnTypeはKaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KoreishaSenyoChintaijutakuを返す() {
-            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_高齢者専用賃貸住宅.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigo_KoreishaSenyoChintaijutaku.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防特定施設入居者生活介護_高齢者専用賃貸住宅.getReturnType().getName(), is(KaigoyoboTokuteishisetsuNyukyoshaSeikatsukaigoKoreishaSenyoChintaijutaku.class.getName()));
         }
 
         @Test
         public void 地域密着型介護老人福祉施設_人員配置区分の場合_getReturnTypeはChiikimitchakugataKaigoRojinfukushishisetsu_JininHaichiKubunを返す() {
-            assertThat(DBXCodeShubetsu.地域密着型介護老人福祉施設_人員配置区分.getReturnType().getName(), is(ChiikimitchakugataKaigoRojinfukushishisetsu_JininHaichiKubun.class.getName()));
+            assertThat(DBXCodeShubetsu.地域密着型介護老人福祉施設_人員配置区分.getReturnType().getName(), is(ChiikimitchakugataKaigoRojinfukushishisetsuJininHaichiKubun.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_通常型の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_NormalTypeを返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_通常型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_NormalType.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_通常型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoNormalType.class.getName()));
         }
 
         @Test
         public void 介護予防短期入所療養介護_療養型の場合_getReturnTypeはKaigoyoboTankinyushoRyoyokaigo_Ryoyogataを返す() {
-            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_療養型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigo_Ryoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.介護予防短期入所療養介護_療養型.getReturnType().getName(), is(KaigoyoboTankinyushoRyoyokaigoRyoyogata.class.getName()));
         }
 
         @Test
         public void 夜間勤務条件基準_平成15年3月以前の場合_getReturnTypeはYakanKinmuJokenKijun_BeforeH15_3を返す() {
-            assertThat(DBXCodeShubetsu.夜間勤務条件基準_平成15年3月以前.getReturnType().getName(), is(YakanKinmuJokenKijun_BeforeH15_3.class.getName()));
+            assertThat(DBXCodeShubetsu.夜間勤務条件基準_平成15年3月以前.getReturnType().getName(), is(YakanKinmuJokenKijunBeforeH153.class.getName()));
         }
 
         @Test
         public void 夜間勤務条件基準_平成15年4月以降の場合_getReturnTypeはYakanKinmuJokenKijun_AfterH15_4を返す() {
-            assertThat(DBXCodeShubetsu.夜間勤務条件基準_平成15年4月以降.getReturnType().getName(), is(YakanKinmuJokenKijun_AfterH15_4.class.getName()));
+            assertThat(DBXCodeShubetsu.夜間勤務条件基準_平成15年4月以降.getReturnType().getName(), is(YakanKinmuJokenKijunAfterH154.class.getName()));
         }
 
         @Test
         public void 夜間勤務条件基準_平成21年4月以降の場合_getReturnTypeはYakanKinmuJokenKijun_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.夜間勤務条件基準_平成21年4月以降.getReturnType().getName(), is(YakanKinmuJokenKijun_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.夜間勤務条件基準_平成21年4月以降.getReturnType().getName(), is(YakanKinmuJokenKijunAfterH214.class.getName()));
         }
 
         @Test
         public void 療養環境基準_平成19年3月以前の場合_getReturnTypeはRyoyokankyoKijun_BeforeH19_3を返す() {
-            assertThat(DBXCodeShubetsu.療養環境基準_平成19年3月以前.getReturnType().getName(), is(RyoyokankyoKijun_BeforeH19_3.class.getName()));
+            assertThat(DBXCodeShubetsu.療養環境基準_平成19年3月以前.getReturnType().getName(), is(RyoyokankyoKijunBeforeH193.class.getName()));
         }
 
         @Test
         public void 療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成19年4月以降の場合_getReturnTypeはRyoyokankyoKijun_AfterH19_4を返す() {
-            assertThat(DBXCodeShubetsu.療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成19年4月以降.getReturnType().getName(), is(RyoyokankyoKijun_AfterH19_4.class.getName()));
+            assertThat(DBXCodeShubetsu.療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成19年4月以降.getReturnType().getName(), is(RyoyokankyoKijunAfterH194.class.getName()));
         }
 
         @Test
         public void 療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成20年4月以降の場合_getReturnTypeはRyoyokankyoKijun_AfterH20_4を返す() {
-            assertThat(DBXCodeShubetsu.療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成20年4月以降.getReturnType().getName(), is(RyoyokankyoKijun_AfterH20_4.class.getName()));
+            assertThat(DBXCodeShubetsu.療養環境基準_病院療養型ユニット型_病院療養型_病院経過型_平成20年4月以降.getReturnType().getName(), is(RyoyokankyoKijunAfterH204.class.getName()));
         }
 
         @Test
         public void 療養環境基準_診療所療養型ユニット型_診療所療養型の場合_getReturnTypeはRyoyokankyoKijun_shinryoujoryouyoukatayunittokatashinryoujoryouyoukataを返す() {
-            assertThat(DBXCodeShubetsu.療養環境基準_診療所療養型ユニット型_診療所療養型.getReturnType().getName(), is(RyoyokankyoKijun_ShinryojoRyoyogataUnitGata_ShinryojoRyoyogata.class.getName()));
+            assertThat(DBXCodeShubetsu.療養環境基準_診療所療養型ユニット型_診療所療養型.getReturnType().getName(), is(RyoyokankyoKijunShinryojoRyoyogataUnitGataShinryojoRyoyogata.class.getName()));
         }
 
         @Test
         public void 特定事業所加算_居宅介護支援_の有無_平成21年3月以前の場合_getReturnTypeはTokuteijigyoshokasan_Kyotakukaigoshien_Umu_BeforeH21_3を返す() {
-            assertThat(DBXCodeShubetsu.特定事業所加算_居宅介護支援_の有無_平成21年3月以前.getReturnType().getName(), is(Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_BeforeH21_3.class.getName()));
+            assertThat(DBXCodeShubetsu.特定事業所加算_居宅介護支援_の有無_平成21年3月以前.getReturnType().getName(), is(TokuteijigyoshokasanKyotakukaigoshienUmuBeforeH213.class.getName()));
         }
 
         @Test
         public void 特定事業所加算_居宅介護支援_の有無_平成21年4月以降の場合_getReturnTypeはTokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.特定事業所加算_居宅介護支援_の有無_平成21年4月以降.getReturnType().getName(), is(Tokuteijigyoshokasan_Kyotakukaigoshien_Umu_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.特定事業所加算_居宅介護支援_の有無_平成21年4月以降.getReturnType().getName(), is(TokuteijigyoshokasanKyotakukaigoshienUmuAfterH214.class.getName()));
         }
 
         @Test
         public void 個別機能訓練体制の有無_通所介護_平成21年3月以前の場合_getReturnTypeはKobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3を返す() {
-            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護_平成21年3月以前.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmu_Tsushokaigo_BeforeH21_3.class.getName()));
+            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護_平成21年3月以前.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmuTsushokaigoBforeH213.class.getName()));
         }
 
         @Test
         public void 個別機能訓練体制の有無_通所介護_平成21年4月以降の場合_getReturnTypeはKobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH21_4を返す() {
-            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護_平成21年4月以降.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH21_4.class.getName()));
+            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護_平成21年4月以降.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmuTsushokaigoAfterH214.class.getName()));
         }
 
         @Test
         public void 個別機能訓練体制の有無_通所介護_平成24年4月以降の場合_getReturnTypeはKobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH24_4を返す() {
-            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護_平成24年4月以降.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmu_Tsushokaigo_AfterH24_4.class.getName()));
+            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護_平成24年4月以降.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmuTsushokaigoAfterH244.class.getName()));
         }
 
         @Test
         public void 個別機能訓練体制の有無_通所介護以外の場合_getReturnTypeはKobetsuKinokunrentaiseiUmu_Tsushokaigoigaiを返す() {
-            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護以外.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmu_Tsushokaigoigai.class.getName()));
+            assertThat(DBXCodeShubetsu.個別機能訓練体制の有無_通所介護以外.getReturnType().getName(), is(KobetsuKinokunrentaiseiUmuTsushokaigoigai.class.getName()));
         }
 
         @Test
         public void サービス提供体制強化加算_訪問入浴介護等の場合_getReturnTypeはServiceTeikyoTaiseikyokakasan_Homonnyuyokukaigo_etcを返す() {
-            assertThat(DBXCodeShubetsu.サービス提供体制強化加算_訪問入浴介護等.getReturnType().getName(), is(ServiceTeikyoTaiseikyokakasan_Homonnyuyokukaigo_etc.class.getName()));
+            assertThat(DBXCodeShubetsu.サービス提供体制強化加算_訪問入浴介護等.getReturnType().getName(), is(ServiceTeikyoTaiseikyokakasanHomonnyuyokukaigoEtc.class.getName()));
         }
 
         @Test
         public void サービス提供体制強化加算_訪問看護等の場合_getReturnTypeはServiceTeikyoTaiseikyokakasan_Homonkango_etcを返す() {
-            assertThat(DBXCodeShubetsu.サービス提供体制強化加算_訪問看護等.getReturnType().getName(), is(ServiceTeikyoTaiseikyokakasan_Homonkango_etc.class.getName()));
+            assertThat(DBXCodeShubetsu.サービス提供体制強化加算_訪問看護等.getReturnType().getName(), is(ServiceTeikyoTaiseikyokakasanHomonkangoEtc.class.getName()));
         }
 
         @Test
         public void サービス提供体制強化加算_その他サービスの場合_getReturnTypeはServiceTeikyoTaiseikyokakasan_SonotaServiceを返す() {
-            assertThat(DBXCodeShubetsu.サービス提供体制強化加算_その他サービス.getReturnType().getName(), is(ServiceTeikyoTaiseikyokakasan_SonotaService.class.getName()));
+            assertThat(DBXCodeShubetsu.サービス提供体制強化加算_その他サービス.getReturnType().getName(), is(ServiceTeikyoTaiseikyokakasanSonotaService.class.getName()));
         }
 
         @Test

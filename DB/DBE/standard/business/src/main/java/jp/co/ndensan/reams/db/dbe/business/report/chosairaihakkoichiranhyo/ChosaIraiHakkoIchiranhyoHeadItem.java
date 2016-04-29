@@ -12,6 +12,8 @@ import lombok.Setter;
 
 /**
  * 認定調査依頼発行一覧表ヘッダのITEMです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 @Getter
 @Setter

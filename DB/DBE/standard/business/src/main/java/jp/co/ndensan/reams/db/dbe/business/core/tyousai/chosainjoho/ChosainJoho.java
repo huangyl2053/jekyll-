@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 調査員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913ChosainJohoEntity, ChosainJoho> implements Serializable {
 

@@ -1,12 +1,17 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBE {
 
      export module ShobyoIken {
 
         export class Events {
+
+            public static onClick_tsuika(): string {
+                return "onClick_tsuika";
+            }
 
             public static onClick_double(): string {
                 return "onClick_double";
@@ -18,14 +23,6 @@ module DBE {
 
             public static onClick_sakujyo(): string {
                 return "onClick_sakujyo";
-            }
-
-            public static onClick_selectok(): string {
-                return "onClick_selectok";
-            }
-
-            public static onClick_select(): string {
-                return "onClick_select";
             }
 
             public static onClick_btnNo(): string {
@@ -93,8 +90,8 @@ module DBE {
                 return new UZA.TextBoxDate(this.convFiledName("txtShindanYMD2"));
             }
 
-            public txtShindanName3(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShindanName3"));
+            public txtShindanName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShindanName"));
             }
 
             public txtShindanYMD3(): UZA.TextBoxDate {
@@ -105,8 +102,8 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("geninShikkanPanel"));
             }
 
-            public btnAdd(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnAdd"));
+            public btnAdd(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAdd"));
             }
 
             public dgGenyin(): UZA.DataGrid {
@@ -117,16 +114,8 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
             }
 
-            public txtGeninShikkanCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
-            }
-
-            public btnToSearch(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnToSearch"));
-            }
-
-            public txtMeisho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtMeisho"));
+            public ccdCodeInputGeninShikkan(): URZ.CodeInput.ModeController {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
             }
 
             public radIsShutaruGeninShikkan(): UZA.RadioButton {

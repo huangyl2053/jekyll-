@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 保険料納入通知書（本算定過年度）【コンビニ期毎タイプ】のReportです。
  *
+ * @reamsid_L DBB-9110-190 huangh
  */
 public class KanendoNonyuTsuchishoCVSKigotoReport extends Report<KanendoNonyuTsuchishoCVSKigotoSource> {
 

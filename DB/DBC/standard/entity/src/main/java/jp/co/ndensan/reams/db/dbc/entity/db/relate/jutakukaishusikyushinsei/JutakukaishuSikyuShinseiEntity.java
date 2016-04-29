@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 住宅改修費支給申請情報クラスです。
+ *
+ * @reamsid_L DBC-0992-150 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

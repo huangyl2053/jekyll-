@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 /**
  * 償還払支給申請リスト取得条件を特定するためのMyBatis用パラメータクラスです。
  *
+ * @reamsid_L DBC-0960-020 hezhenzhen
+ *
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

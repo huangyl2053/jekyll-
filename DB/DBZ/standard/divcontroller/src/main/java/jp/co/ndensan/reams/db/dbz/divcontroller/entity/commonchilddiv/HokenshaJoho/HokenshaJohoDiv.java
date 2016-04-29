@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJ
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 /**
  * HokenshaJoho のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0180-010 lishengli
  */
 public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
 
@@ -100,6 +101,16 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     }
 
     /**
+     * 共通子DIVの初期化です。
+     *
+     * @param 保険者番号 保険者番号
+     */
+    @Override
+    public void intialize(HokenjaNo 保険者番号) {
+        getHandler().intialize(保険者番号);
+    }
+
+    /**
      * 共通子DIVのクリアです。
      *
      */
@@ -126,5 +137,25 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     @Override
     public RString getHokenjaName() {
         return getHandler().getHokenjaName();
+    }
+
+    /**
+     * 保険者番号を設定する。
+     *
+     * @param 保険者番号 HokenjaNo
+     */
+    @Override
+    public void setHokenjaNo(RString 保険者番号) {
+        getHandler().setHokenjaNo(保険者番号);
+    }
+
+    /**
+     * 保険者名を設定する。
+     *
+     * @param 保険者名 HokenjaName
+     */
+    @Override
+    public void setHokenjaName(RString 保険者名) {
+        getHandler().setHokenjaName(保険者名);
     }
 }

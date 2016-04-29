@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgDoctorSelection_Row のクラスファイル 
  * 
- * @author 自動生成
  */
 
 public class dgDoctorSelection_Row extends DataRow {

@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 要介護認定個人状況照会のハンドラークラスです。
+ *
+ * @reamsid_L DBE-0200-010 suguangjun
  */
 public class KojinJokyoShokaiHandler {
 
@@ -49,11 +51,11 @@ public class KojinJokyoShokaiHandler {
      * @param 申請書管理番号 申請書管理番号
      */
     public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, RString 申請書管理番号) {
-        div.getCcdKaigoNinteiAtenInfo().initialize();
-        // TODO  内部QA：886 Redmine：#79069(画面遷移の設定方式が知らない、現時対応不可)
-        //div.getCcdKaigoNinteiShikakuInfo().initialize(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, new ShinseishoKanriNo(申請書管理番号), SubGyomuCode.DBE認定支援);
         div.getCcdChosaItakusakiAndChosainInput().initialize(RString.EMPTY);
+        div.setHihokenshano(kojinJokyoShokaiList.get(0).get被保番号());
+        div.setShoKisaiHokenshaNo(kojinJokyoShokaiList.get(0).get保険者番号());
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
     }
@@ -148,8 +150,8 @@ public class KojinJokyoShokaiHandler {
         }
         div.getTxtNinteiKikanMonth().setValue(new Decimal(kojinJokyoShokaiList.get(0).get二次判定認定有効期間()));
         if (kojinJokyoShokaiList.get(0).get要支援申請の区分() != null) {
-         div.getTxtShinseiShubetsu().setValue(ShienShinseiKubun.
-                toValue(new RString(kojinJokyoShokaiList.get(0).get要支援申請の区分().toString())).get名称());
+            div.getTxtShinseiShubetsu().setValue(ShienShinseiKubun.
+                    toValue(new RString(kojinJokyoShokaiList.get(0).get要支援申請の区分().toString())).get名称());
         }
         if (kojinJokyoShokaiList.get(0).get二号特定疾病コード() != null) {
             div.getTxtTokuteiShippei().setValue(TokuteiShippei.
@@ -158,8 +160,8 @@ public class KojinJokyoShokaiHandler {
         div.getTxtJohoTeikyoDoi().setValue(IsExistJohoTeikyoDoui.
                 toValue(kojinJokyoShokaiList.get(0).is情報提供への同意有無()).get名称());
         if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null) {
-        div.getTxtIchijiHantei().setValue(IchijiHanteiKekkaCode09.
-                toValue(new RString(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().toString())).get名称());
+            div.getTxtIchijiHantei().setValue(IchijiHanteiKekkaCode09.
+                    toValue(new RString(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().toString())).get名称());
         }
         if (kojinJokyoShokaiList.get(0).get審査会開催年月日() != null) {
             div.getTxtKaisaiDay().setValue(new RDate(
@@ -178,13 +180,12 @@ public class KojinJokyoShokaiHandler {
      * @return KojinShinchokuJokyohyoEntity
      */
     public KojinShinchokuJokyohyoJoho setKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        KojinShinchokuJokyohyoJoho shinchokuJokyohyoEntity = getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
-        return shinchokuJokyohyoEntity;
+        return getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
     }
 
     private KojinShinchokuJokyohyoJoho getKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
         KojinShinchokuJokyohyoJoho jokyohyoEntity = new KojinShinchokuJokyohyoJoho();
-        jokyohyoEntity.setHihokenshaNo(kojinJokyoShokaiList.get(0).get被保険者番号().getColumnValue());
+        jokyohyoEntity.setHihokenshaNo(kojinJokyoShokaiList.get(0).get被保険者番号());
         jokyohyoEntity.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(
                 kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue()).toRString());
         jokyohyoEntity.setHihokenshaNameKana(kojinJokyoShokaiList.get(0).get被保険者氏名カナ());
@@ -202,7 +203,6 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setShinseiDaikoJigyoshaName(kojinJokyoShokaiList.get(0).get申請代行事業者());
         jokyohyoEntity.setShinseishaKankei(ShinseiTodokedeDaikoKubunCode.toValue(
                 kojinJokyoShokaiList.get(0).get申請届出代行区分コード().getColumnValue()).toRString());
-        // TODO  内部QA：886 Redmine： (Enum（DBD：続柄コード）存在なし,一時固定値を使用します)
         jokyohyoEntity.setHonninKankei(kojinJokyoShokaiList.get(0).get申請届出者続柄コード().getColumnValue());
         jokyohyoEntity.setYubinNo2(kojinJokyoShokaiList.get(0).get申請者郵便番号().getColumnValue());
         jokyohyoEntity.setShinseishaJusho(kojinJokyoShokaiList.get(0).get申請届出者住所().getColumnValue());

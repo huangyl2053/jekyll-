@@ -19,7 +19,7 @@
     <sql id="allColumns_DbT3038ShokanKihon">
         "DbT3038ShokanKihon"."hiHokenshaNo" as "dbT3038ShokanKihon_hiHokenshaNo",
         "DbT3038ShokanKihon"."serviceTeikyoYM" as "dbT3038ShokanKihon_serviceTeikyoYM",
-        "DbT3038ShokanKihon"."seiriNp" as "dbT3038ShokanKihon_seiriNp",
+        "DbT3038ShokanKihon"."seiriNo" as "dbT3038ShokanKihon_seiriNo",
         "DbT3038ShokanKihon"."jigyoshaNo" as "dbT3038ShokanKihon_jigyoshaNo",
         "DbT3038ShokanKihon"."yoshikiNo" as "dbT3038ShokanKihon_yoshikiNo",
         "DbT3038ShokanKihon"."meisaiNo" as "dbT3038ShokanKihon_meisaiNo",
@@ -56,7 +56,7 @@
     <resultMap id="ResultMap_DbT3038ShokanKihonEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity" autoMapping="true">
         <id property="hiHokenshaNo" column="dbT3038ShokanKihon_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="dbT3038ShokanKihon_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="seiriNp" column="dbT3038ShokanKihon_seiriNp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="seiriNo" column="dbT3038ShokanKihon_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="jigyoshaNo" column="dbT3038ShokanKihon_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="yoshikiNo" column="dbT3038ShokanKihon_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="meisaiNo" column="dbT3038ShokanKihon_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain
-        .KagoKetteiKohifutanshaInSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain.KagoKetteiKohifutanshaInSource;
 
 /**
  *
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票HeaderEditor
+ *
+ * @reamsid_L DBC-0980-510 surun
  */
 public class HeaderEditor implements IKagoKetteiKohifutanshaInEditor {
 

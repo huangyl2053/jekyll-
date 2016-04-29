@@ -19,8 +19,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定主治医意見書記入項目を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShujiiIkenshoKinyuItem extends ModelBase<ShujiiIkenshoKinyuItemIdentifier, DbT5303ShujiiIkenshoKinyuItemEntity, ShujiiIkenshoKinyuItem> implements Serializable {
+public class ShujiiIkenshoKinyuItem
+        extends ModelBase<ShujiiIkenshoKinyuItemIdentifier, DbT5303ShujiiIkenshoKinyuItemEntity, ShujiiIkenshoKinyuItem>
+        implements Serializable {
 
     private static final long serialVersionUID = 3817856119698703295L;
 
@@ -146,8 +150,7 @@ public class ShujiiIkenshoKinyuItem extends ModelBase<ShujiiIkenshoKinyuItemIden
     }
 
     /**
-     * 要介護認定主治医意見書記入項目のみを変更対象とします。<br/>
-     * {@link DbT5303ShujiiIkenshoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定主治医意見書記入項目のみを変更対象とします。<br/> {@link DbT5303ShujiiIkenshoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIkenshoKinyuItem}
      */
@@ -161,8 +164,7 @@ public class ShujiiIkenshoKinyuItem extends ModelBase<ShujiiIkenshoKinyuItemIden
     }
 
     /**
-     * 保持する要介護認定主治医意見書記入項目を削除対象とします。<br/>
-     * {@link DbT5303ShujiiIkenshoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定主治医意見書記入項目を削除対象とします。<br/> {@link DbT5303ShujiiIkenshoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShujiiIkenshoKinyuItem}
      */

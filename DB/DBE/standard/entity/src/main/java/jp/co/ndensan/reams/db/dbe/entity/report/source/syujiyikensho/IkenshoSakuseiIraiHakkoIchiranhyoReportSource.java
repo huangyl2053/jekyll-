@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 主治医意見書作成依頼発行一覧表Sourceクラスです。
+ *
+ * @reamsid_L DBE-0080-100 lizhuoxuan
  */
 public class IkenshoSakuseiIraiHakkoIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

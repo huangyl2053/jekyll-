@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査スケジュール登録3戻るのEntity。
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 @lombok.Getter
 @lombok.Setter
@@ -27,14 +29,10 @@ public class INinteichosaScheduleRelateEntity {
     private RString ninteiShinseiShinseijiKubunCode;
     private RString taishoshaMemo;
     private RString shinseishoKanriNo;
-    private RString shoKisaiHokenshaNo;
     private RString ninteiChosaItakusakiCode;
     private RString ninteiChosainCode;
     private RString ninteiChosaJikanWaku;
     private RString yoyakuKaoFlag;
-    private RString ninteiChosaItakusakiCode2;
-    private RString jigyoshaMeisho;
-    private RString ninteiChosainCode2;
-    private RString chosainShimei;
-
+    private RString shichosonCode;
+    private RString shoKisaiHokenshaNo;
 }

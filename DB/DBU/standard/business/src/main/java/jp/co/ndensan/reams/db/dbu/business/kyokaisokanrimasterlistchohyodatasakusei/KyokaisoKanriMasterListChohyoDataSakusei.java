@@ -25,10 +25,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  *
  * ビジネス設計_DBUMN52001_境界層管理マスタリスト_帳票データ作成のクラスです。
+ *
+ * @reamsid_L DBU-1050-040 wanghui
  */
 public class KyokaisoKanriMasterListChohyoDataSakusei {
 
@@ -181,8 +184,13 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 給付額減額解除.add(RString.EMPTY);
             }
             標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
-            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu(CODESHUBETSU_0243),
-                    new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode())).getコード名称().toString()));
+            UzT0007CodeEntity 居室種類 = CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu(CODESHUBETSU_0243),
+                    new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()));
+            if (居室種類 != null) {
+                居住費軽減後居室種類.add(new RString(居室種類.getコード名称().toString()));
+            } else {
+                居住費軽減後居室種類.add(RString.EMPTY);
+            }
             居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
             食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
             高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));

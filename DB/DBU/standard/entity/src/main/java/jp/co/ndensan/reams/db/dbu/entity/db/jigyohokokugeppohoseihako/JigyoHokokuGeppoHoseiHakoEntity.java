@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 事業報告集計一覧データEntityクラスです。
+ *
+ * @reamsid_L DBU-1100-100 cuilin
  */
 @lombok.Getter
 @lombok.Setter

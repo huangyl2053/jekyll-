@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusoku
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenshoTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikentokusokujo.ShujiiIkenTokusokujoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 主治医意見書督促状発行のHandlerクラスです。
  *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public class ShujiiIkenTokusokujoHakkoHandler {
 
@@ -63,11 +65,14 @@ public class ShujiiIkenTokusokujoHakkoHandler {
 
     private void initializtion() {
         div.getHakkoJoken().getTxtKijunDay().setValue(FlexibleDate.getNowDate());
-        RString 主治医意見書督促期限日数 = BusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数, SubGyomuCode.DBE認定支援);
+        RString 主治医意見書督促期限日数 = BusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数, SubGyomuCode.DBE認定支援)
+                == null ? RString.EMPTY : BusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数, SubGyomuCode.DBE認定支援);
         if (Decimal.canConvert(主治医意見書督促期限日数)) {
             div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(主治医意見書督促期限日数.toString()));
         }
         div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdIryokikanShujii().initialize(div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getHakkoJoken().getRadChohyoSentaku().setSelectedKey(RADIOBUTTONKEY0);
         div.getShujiiIkenshoTokusokujo().getTxtHakkoDay().setValue(FlexibleDate.getNowDate());
     }
@@ -97,7 +102,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
     public ShujiiIkenTokusokujoHakkoTempData getTempData() {
         ShujiiIkenTokusokujoHakkoTempData tempData = new ShujiiIkenTokusokujoHakkoTempData();
         tempData.setTemp_保険者コード(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue());
-        tempData.setTemp_保険者名称(div.getCcdHokenshaList().getSelectedItem().get保険者区分().get名称());
+        tempData.setTemp_保険者名称(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
         tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getIryoKikanCode());
         tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getShujiiCode());
         tempData.setTemp_基準日(div.getHakkoJoken().getTxtKijunDay().getValue());

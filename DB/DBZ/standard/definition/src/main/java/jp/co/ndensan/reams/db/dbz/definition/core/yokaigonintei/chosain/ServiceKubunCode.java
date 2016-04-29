@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 現在のサービス区分コードを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum ServiceKubunCode {
 

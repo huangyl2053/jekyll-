@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shujiiikenshoteishutsuir
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoHeadItem;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -18,8 +17,8 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIk
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
@@ -51,7 +50,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
- * 帳票「主治医意見書作成依頼一覧表」の出力バッチフ処理クラスです
+ * 帳票「主治医意見書作成依頼一覧表」の出力処理クラスです。
+ *
+ * @reamsid_L DBE-0080-130 duanzhanli
  */
 public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> {
 
@@ -88,7 +89,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
     private RString 機関名称 = RString.EMPTY;
     private RString 氏名 = RString.EMPTY;
     private IShujiiIkenshoTeishutsuIraishoHakkoMapper mapper;
-    private List<IkenshoSakuseiIraiIchiranhyoBodyItem> bodyItemList;
+    private List<IkenshoSakuseiIraiIchiranhyoItem> bodyItemList;
     private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
 
     @BatchWriter
@@ -125,19 +126,20 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
     @Override
     protected void afterExecute() {
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            IkenshoSakuseiIraiIchiranhyoReport report = IkenshoSakuseiIraiIchiranhyoReport.createFrom(setHeadItem(), bodyItemList);
+            IkenshoSakuseiIraiIchiranhyoReport report = IkenshoSakuseiIraiIchiranhyoReport.createFrom(bodyItemList);
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
     }
 
-    private IkenshoSakuseiIraiIchiranhyoHeadItem setHeadItem() {
+    private IkenshoSakuseiIraiIchiranhyoItem setBodyItem(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
                 帳票ID,
                 new FlexibleDate(processParamter.getHakkobi()),
                 reportSourceWriter);
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
-        return new IkenshoSakuseiIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
+        return new IkenshoSakuseiIraiIchiranhyoItem(
+                ninshoshaSource.hakkoYMD,
                 ninshoshaSource.denshiKoin,
                 ninshoshaSource.ninshoshaYakushokuMei1,
                 ninshoshaSource.ninshoshaYakushokuMei,
@@ -152,11 +154,8 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
                 氏名,
                 get名称付与(),
                 get印刷日時(),
-                通知文Map.get(1));
-    }
-
-    private IkenshoSakuseiIraiIchiranhyoBodyItem setBodyItem(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
-        return new IkenshoSakuseiIraiIchiranhyoBodyItem(entity.get主治医氏名(),
+                通知文Map.get(1),
+                entity.get主治医氏名(),
                 entity.get被保険者番号(),
                 entity.get被保険者氏名(),
                 entity.get被保険者氏名カナ(),
@@ -236,10 +235,10 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
         dbT5301Entity.setShinseishoKanriNo(new ShinseishoKanriNo(entity.get申請書管理番号()));
         dbT5301Entity.setIkenshoIraiRirekiNo(entity.get最大依頼履歴番号());
         dbT5301Entity.setLogicalDeletedFlag(false);
-        RString iraiToYMD = processParamter.getIraiToYMD();
-        if (!RString.isNullOrEmpty(iraiToYMD)) {
-            dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(iraiToYMD));
-            dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(iraiToYMD));
+        RString hakkobi = processParamter.getHakkobi();
+        if (!RString.isNullOrEmpty(hakkobi)) {
+            dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
+            dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(hakkobi));
         }
         RString 主治医意見書作成期限設定方法 = BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, SubGyomuCode.DBE認定支援);
         if (文字列1.equals(主治医意見書作成期限設定方法)) {

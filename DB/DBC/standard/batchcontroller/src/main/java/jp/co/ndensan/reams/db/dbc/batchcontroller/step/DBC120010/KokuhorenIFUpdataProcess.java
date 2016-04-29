@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.persistence.mappers.IKokuhorenInterfaceKanriMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhoreninterfacekanri.IKokuhorenInterfaceKanriMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,9 +19,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KokuhorenIFUpdataProcess extends SimpleBatchProcessBase {
 
     //パラメータ名
-    public static final RString PARAMETER_SHORIYM = new RString("shoriYM");
-    public static final RString PARAMETER_KOKANSHIKIBETSUNO = new RString("kokanShikibetsuNo");
-    public static final RString PARAMETER_SHORIJOTAIKUBUN = new RString("shoriJotaiKubun");
+    /**
+     * shoriYM
+     */
+    public static final RString PARAMETER_SHORIYM;
+    /**
+     * kokanShikibetsuNo
+     */
+    public static final RString PARAMETER_KOKANSHIKIBETSUNO;
+    /**
+     * shoriJotaiKubun
+     */
+    public static final RString PARAMETER_SHORIJOTAIKUBUN;
+
+    static {
+        PARAMETER_SHORIYM = new RString("shoriYM");
+        PARAMETER_KOKANSHIKIBETSUNO = new RString("kokanShikibetsuNo");
+        PARAMETER_SHORIJOTAIKUBUN = new RString("shoriJotaiKubun");
+    }
 
     //パラメータ受取変数
     InputParameter<RString> shoriYM;

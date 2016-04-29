@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  *
- * 被保険者証発行一覧表Builderクラスです
+ * 被保険者証発行一覧表Builderクラスです。
+ * @reamsid_L DBU-0420-060 dongyabin
  */
 public final class HihokenshashoHakkoIchiranHyoBuilderImpl implements IHihokenshashoHakkoIchiranHyoBuilder {
     

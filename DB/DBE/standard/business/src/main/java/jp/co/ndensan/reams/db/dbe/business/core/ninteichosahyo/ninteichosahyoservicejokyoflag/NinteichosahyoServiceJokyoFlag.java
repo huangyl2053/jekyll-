@@ -18,8 +18,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票（概況調査）サービスの状況フラグを管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteichosahyoServiceJokyoFlag extends ParentModelBase<NinteichosahyoServiceJokyoFlagIdentifier, DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag> implements Serializable {
+public class NinteichosahyoServiceJokyoFlag
+        extends ParentModelBase<NinteichosahyoServiceJokyoFlagIdentifier, DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag>
+        implements Serializable {
 
     private final DbT5208NinteichosahyoServiceJokyoFlagEntity entity;
     private final NinteichosahyoServiceJokyoFlagIdentifier id;
@@ -118,7 +122,7 @@ public class NinteichosahyoServiceJokyoFlag extends ParentModelBase<Ninteichosah
      *
      * @return サービスの状況フラグ
      */
-    public boolean getサービスの状況フラグ() {
+    public boolean isサービスの状況フラグ() {
         return entity.getServiceJokyoFlag();
     }
 
@@ -135,8 +139,7 @@ public class NinteichosahyoServiceJokyoFlag extends ParentModelBase<Ninteichosah
     /**
      * 認定調査票（概況調査）サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}を返します。
      *
-     * @return
-     * 認定調査票（概況調査）サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}
+     * @return 認定調査票（概況調査）サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}
      */
     @Override
     public NinteichosahyoServiceJokyoFlagIdentifier identifier() {
@@ -144,8 +147,7 @@ public class NinteichosahyoServiceJokyoFlag extends ParentModelBase<Ninteichosah
     }
 
     /**
-     * 認定調査票（概況調査）サービスの状況フラグのみを変更対象とします。<br/>
-     * {@link DbT5208NinteichosahyoServiceJokyoFlagEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票（概況調査）サービスの状況フラグのみを変更対象とします。<br/> {@link DbT5208NinteichosahyoServiceJokyoFlagEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoServiceJokyoFlag}
      */

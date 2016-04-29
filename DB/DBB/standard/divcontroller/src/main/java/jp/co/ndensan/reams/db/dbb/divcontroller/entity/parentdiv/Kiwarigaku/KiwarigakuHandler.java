@@ -7,26 +7,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.Kiwarigaku;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
-//import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
-//import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 
 /**
@@ -34,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
  *
  * @author N8156 宮本 康
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KiwarigakuHandler {
 
     private final KiwarigakuDiv div;
@@ -44,15 +37,13 @@ public class KiwarigakuHandler {
         月, 特徴期, 特徴期別額, 特徴納付額, 普徴期, 普徴期別額, 普徴納付額;
     };
 
-    private Map<RString, Label> 期割額テーブル = new HashMap<>();
-    private static final int TABLE_SIZE = 15;
+    private final Map<RString, Label> 期割額テーブル;
+//    private static final int TABLE_SIZE = 15;
 
-    private static final RString SUFFIX_月 = new RString("月");
-    private static final RString SUFFIX_期 = new RString("期");
-
-    private static final int 追加期1 = 13;
-    private static final int 追加期2 = 14;
-
+//    private static final RString SUFFIX_月 = new RString("月");
+//    private static final RString SUFFIX_期 = new RString("期");
+//    private static final int 追加期1 = 13;
+//    private static final int 追加期2 = 14;
     private final FukaKeisanConfig 賦課計算Config;
     private final HizukeConfig 日付Config;
     private final FuchoConfig 普徴Config;
@@ -125,104 +116,99 @@ public class KiwarigakuHandler {
         // ここまで
     }
 
-    private Map<RString, Integer> createIndexMap(List<RString> data) {
-        Map<RString, Integer> map = new HashMap<>();
-        for (int index = 0; index < data.size(); index++) {
-            if (map.get(data.get(index)) == null) {
-                map.put(data.get(index), index);
-            }
-        }
-        return map;
-    }
-
-    private void setDisplayMode(FukaNendo 賦課年度, int 普徴期数) {
-
-        FlexibleYear 納期統一年度 = new FlexibleYear(賦課計算Config.get納期統一年度());
-        boolean is月列表示 = 納期統一年度.isBeforeOrEquals(賦課年度.value());
-        boolean is追加期1表示 = (追加期1 <= 普徴期数);
-        boolean is追加期2表示 = (追加期2 <= 普徴期数);
-
-        div.getTblTsuki1().setVisible(is月列表示);
-        div.getTblTsuki1().setDisplayNone(!is月列表示);
-        div.getTblTsuki2().setVisible(is月列表示 && is追加期1表示);
-        div.getTblTsuki2().setDisplayNone(!(is月列表示 && is追加期1表示));
-        div.getTblTsuki3().setVisible(is月列表示 && is追加期2表示);
-        div.getTblTsuki3().setDisplayNone(!(is月列表示 && is追加期2表示));
-        div.getTblTsuki4().setVisible(is月列表示);
-        div.getTblTsuki4().setDisplayNone(!is月列表示);
-
-        div.getTblKiwariGaku1().setVisible(true);
-        div.getTblKiwariGaku1().setDisplayNone(false);
-        div.getTblKiwariGaku2().setVisible(is追加期1表示);
-        div.getTblKiwariGaku2().setDisplayNone(!is追加期1表示);
-        div.getTblKiwariGaku3().setVisible(is追加期2表示);
-        div.getTblKiwariGaku3().setDisplayNone(!is追加期2表示);
-        div.getTblKiwariGaku4().setVisible(true);
-        div.getTblKiwariGaku4().setDisplayNone(false);
-
-        div.getLblTokuchoKiGokei().setVisible(!is月列表示);
-    }
-
-    private void setTableData(TableItem itemNo, List<RString> dataList, RString suffix) {
-        for (int index = 0; index < dataList.size(); index++) {
-            RString data = dataList.get(index);
-            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
-            label.setText((data != null) ? new RStringBuilder(data).append(suffix).toRString() : RString.EMPTY);
-        }
-    }
-
-    private void setTableData(TableItem itemNo, Decimal[] dataList) {
-        for (int index = 0; index < dataList.length; index++) {
-            Decimal data = dataList[index];
-            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
-            label.setText((data != null) ? new RString(data.toString("#,##0")) : RString.EMPTY);
-        }
-    }
-
-    private void setKiwarigaku(Kiwarigaku 期割額, Map<RString, Integer> 特徴期IndexMap, Map<RString, Integer> 普徴期IndexMap) {
-
-        Decimal[] 特徴期別額列 = new Decimal[TABLE_SIZE];
-        Decimal[] 特徴納付額列 = new Decimal[TABLE_SIZE];
-        Decimal[] 普徴期別額列 = new Decimal[TABLE_SIZE];
-        Decimal[] 普徴納付額列 = new Decimal[TABLE_SIZE];
-        int 合計Index = TABLE_SIZE - 1;
-
-        for (KiwarigakuMeisai 明細 : 期割額.get期割額明細()) {
-
-            // TODO n8300姜　ビルドエラー回避のために暫定対応
-            ChoshuHohoKibetsu 徴収方法 = ChoshuHohoKibetsu.特別徴収;
-//            ChoshuHohoKibetsu 徴収方法 = 明細.get期別調定共通().get介護期別モデル().get徴収方法();
-//            RString 期 = new RString(String.format("%1$02d", 明細.get期別調定共通().get介護期別モデル().get期()));
-            RString 期 = new RString(String.valueOf(明細.get期別調定共通().get介護期別モデル().get期()));
-            Decimal 調定額 = 明細.get期別調定共通().get調定共通モデル().get調定額();
-            Decimal 収入額 = 明細.get収入額();
-
-            if (徴収方法 == ChoshuHohoKibetsu.特別徴収) {
-                Integer 特徴期Index = 特徴期IndexMap.get(期);
-                if (特徴期Index != null && 0 <= 特徴期Index && 特徴期Index < 合計Index) {
-                    特徴期別額列[特徴期Index] = 調定額;
-                    特徴納付額列[特徴期Index] = 収入額;
-                }
-            } else if (徴収方法 == ChoshuHohoKibetsu.普通徴収) {
-                Integer 普徴期Index = 普徴期IndexMap.get(期);
-                if (普徴期Index != null && 0 <= 普徴期Index && 普徴期Index < 合計Index) {
-                    普徴期別額列[普徴期Index] = 調定額;
-                    普徴納付額列[普徴期Index] = 収入額;
-                }
-            }
-        }
-
-        特徴期別額列[合計Index] = 期割額.get特徴期別額合計();
-        特徴納付額列[合計Index] = 期割額.get特徴納付額合計();
-        普徴期別額列[合計Index] = 期割額.get普徴期別額合計();
-        普徴納付額列[合計Index] = 期割額.get普徴納付額合計();
-
-        setTableData(TableItem.特徴期別額, 特徴期別額列);
-        setTableData(TableItem.特徴納付額, 特徴納付額列);
-        setTableData(TableItem.普徴期別額, 普徴期別額列);
-        setTableData(TableItem.普徴納付額, 普徴納付額列);
-    }
-
+//    private Map<RString, Integer> createIndexMap(List<RString> data) {
+//        Map<RString, Integer> map = new HashMap<>();
+//        for (int index = 0; index < data.size(); index++) {
+//            if (map.get(data.get(index)) == null) {
+//                map.put(data.get(index), index);
+//            }
+//        }
+//        return map;
+//    }
+//    private void setDisplayMode(FukaNendo 賦課年度, int 普徴期数) {
+//
+//        FlexibleYear 納期統一年度 = new FlexibleYear(賦課計算Config.get納期統一年度());
+//        boolean is月列表示 = 納期統一年度.isBeforeOrEquals(賦課年度.value());
+//        boolean is追加期1表示 = (追加期1 <= 普徴期数);
+//        boolean is追加期2表示 = (追加期2 <= 普徴期数);
+//
+//        div.getTblTsuki1().setVisible(is月列表示);
+//        div.getTblTsuki1().setDisplayNone(!is月列表示);
+//        div.getTblTsuki2().setVisible(is月列表示 && is追加期1表示);
+//        div.getTblTsuki2().setDisplayNone(!(is月列表示 && is追加期1表示));
+//        div.getTblTsuki3().setVisible(is月列表示 && is追加期2表示);
+//        div.getTblTsuki3().setDisplayNone(!(is月列表示 && is追加期2表示));
+//        div.getTblTsuki4().setVisible(is月列表示);
+//        div.getTblTsuki4().setDisplayNone(!is月列表示);
+//
+//        div.getTblKiwariGaku1().setVisible(true);
+//        div.getTblKiwariGaku1().setDisplayNone(false);
+//        div.getTblKiwariGaku2().setVisible(is追加期1表示);
+//        div.getTblKiwariGaku2().setDisplayNone(!is追加期1表示);
+//        div.getTblKiwariGaku3().setVisible(is追加期2表示);
+//        div.getTblKiwariGaku3().setDisplayNone(!is追加期2表示);
+//        div.getTblKiwariGaku4().setVisible(true);
+//        div.getTblKiwariGaku4().setDisplayNone(false);
+//
+//        div.getLblTokuchoKiGokei().setVisible(!is月列表示);
+//    }
+//    private void setTableData(TableItem itemNo, List<RString> dataList, RString suffix) {
+//        for (int index = 0; index < dataList.size(); index++) {
+//            RString data = dataList.get(index);
+//            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
+//            label.setText((data != null) ? new RStringBuilder(data).append(suffix).toRString() : RString.EMPTY);
+//        }
+//    }
+//    private void setTableData(TableItem itemNo, Decimal[] dataList) {
+//        for (int index = 0; index < dataList.length; index++) {
+//            Decimal data = dataList[index];
+//            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
+//            label.setText((data != null) ? new RString(data.toString("#,##0")) : RString.EMPTY);
+//        }
+//    }
+//    private void setKiwarigaku(Kiwarigaku 期割額, Map<RString, Integer> 特徴期IndexMap, Map<RString, Integer> 普徴期IndexMap) {
+//
+//        Decimal[] 特徴期別額列 = new Decimal[TABLE_SIZE];
+//        Decimal[] 特徴納付額列 = new Decimal[TABLE_SIZE];
+//        Decimal[] 普徴期別額列 = new Decimal[TABLE_SIZE];
+//        Decimal[] 普徴納付額列 = new Decimal[TABLE_SIZE];
+//        int 合計Index = TABLE_SIZE - 1;
+//
+//        for (KiwarigakuMeisai 明細 : 期割額.get期割額明細()) {
+//
+//            // TODO n8300姜　ビルドエラー回避のために暫定対応
+//            ChoshuHohoKibetsu 徴収方法 = ChoshuHohoKibetsu.特別徴収;
+////            ChoshuHohoKibetsu 徴収方法 = 明細.get期別調定共通().get介護期別モデル().get徴収方法();
+////            RString 期 = new RString(String.format("%1$02d", 明細.get期別調定共通().get介護期別モデル().get期()));
+//            RString 期 = new RString(String.valueOf(明細.get期別調定共通().get介護期別モデル().get期()));
+//            Decimal 調定額 = 明細.get期別調定共通().get調定共通モデル().get調定額();
+//            Decimal 収入額 = 明細.get収入額();
+//
+//            if (徴収方法 == ChoshuHohoKibetsu.特別徴収) {
+//                Integer 特徴期Index = 特徴期IndexMap.get(期);
+//                if (特徴期Index != null && 0 <= 特徴期Index && 特徴期Index < 合計Index) {
+//                    特徴期別額列[特徴期Index] = 調定額;
+//                    特徴納付額列[特徴期Index] = 収入額;
+//                }
+//            } else if (徴収方法 == ChoshuHohoKibetsu.普通徴収) {
+//                Integer 普徴期Index = 普徴期IndexMap.get(期);
+//                if (普徴期Index != null && 0 <= 普徴期Index && 普徴期Index < 合計Index) {
+//                    普徴期別額列[普徴期Index] = 調定額;
+//                    普徴納付額列[普徴期Index] = 収入額;
+//                }
+//            }
+//        }
+//
+//        特徴期別額列[合計Index] = 期割額.get特徴期別額合計();
+//        特徴納付額列[合計Index] = 期割額.get特徴納付額合計();
+//        普徴期別額列[合計Index] = 期割額.get普徴期別額合計();
+//        普徴納付額列[合計Index] = 期割額.get普徴納付額合計();
+//
+//        setTableData(TableItem.特徴期別額, 特徴期別額列);
+//        setTableData(TableItem.特徴納付額, 特徴納付額列);
+//        setTableData(TableItem.普徴期別額, 普徴期別額列);
+//        setTableData(TableItem.普徴納付額, 普徴納付額列);
+//    }
     private Map<RString, Label> createTableMap() {
 
         Map<RString, Label> map = new HashMap<>();

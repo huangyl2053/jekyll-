@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払決定情報クラスです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 public class SyokanbaraiketteJoho {
 
@@ -132,5 +134,14 @@ public class SyokanbaraiketteJoho {
      */
     public RString getDekidakaKbn() {
         return entity.getDekidakaKbn();
+    }
+
+    /**
+     * 更新カウントを取得します。
+     *
+     * @return 更新カウント
+     */
+    public int getUpdateCount() {
+        return entity.getUpdateCount();
     }
 }

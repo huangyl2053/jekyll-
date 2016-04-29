@@ -17,6 +17,8 @@ import lombok.Setter;
 /**
  *
  * 月別推移表作成_バッチ用のパラメータです。
+ *
+ * @reamsid_L DBB-0760-020 zhangguopeng
  */
 @Getter
 @Setter

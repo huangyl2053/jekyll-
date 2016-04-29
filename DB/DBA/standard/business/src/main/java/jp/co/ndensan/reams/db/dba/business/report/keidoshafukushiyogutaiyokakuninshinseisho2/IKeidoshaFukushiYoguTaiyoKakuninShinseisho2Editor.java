@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2エディターのインターフェースクラスです。
  *
+ * @reamsid_L DBA-0540-705 lijia
+ *
  */
 public interface IKeidoshaFukushiYoguTaiyoKakuninShinseisho2Editor extends IReportEditor<KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource> {
 

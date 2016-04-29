@@ -4,8 +4,10 @@ import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBE-0120-010 lishengli
  */
 public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBaseProperties {
 
@@ -35,4 +37,10 @@ public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBa
      * @return 一覧件数
      */
     int get一覧件数();
+
+    /**
+     * SelectedGridLineを取得する。
+     *
+     */
+    void getSelectedGridLine();
 }

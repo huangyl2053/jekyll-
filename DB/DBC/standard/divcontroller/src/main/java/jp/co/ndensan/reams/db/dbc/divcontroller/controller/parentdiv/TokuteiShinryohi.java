@@ -22,6 +22,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 public class TokuteiShinryohi {
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel TokuteiShinryohiDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiShinryohiDiv> onLoad(TokuteiShinryohiDiv panel) {
         ResponseData<TokuteiShinryohiDiv> response = new ResponseData<>();
 

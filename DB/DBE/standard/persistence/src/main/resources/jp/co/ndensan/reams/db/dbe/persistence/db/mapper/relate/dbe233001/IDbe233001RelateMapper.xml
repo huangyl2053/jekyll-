@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 主治医意見書督促状発行のマッピング用XMLです。 -->
-
-<!-- どのマッパーインターフェースと対応するかを指定する -->
+<!-- @reamsid_L DBE-0060-040 zhangzhiming -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001.IDbe233001RelateMapper">
 
     <resultMap id="resultMap_ShujiiIkenTokusokujoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoRelateEntity" autoMapping="true">
@@ -51,6 +50,7 @@
         INNER JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911ShujiiIryoKikanJoho
         ON  DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        AND DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5101NinteiShinseiJoho."shujiiIryokikanCode"
         INNER JOIN
         rgdb."DbT5912ShujiiJoho"  AS  DbT5912ShujiiJoho
         ON  DbT5912ShujiiJoho."shichosonCode" = DbT5911ShujiiIryoKikanJoho."shichosonCode"
@@ -95,9 +95,9 @@
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
         WHERE
             DbT5101NinteiShinseiJoho."shujiiIryokikanCode" is not null 
-            AND DbT5101NinteiShinseiJoho."shujiiIryokikanCode" !=''
+            AND DbT5101NinteiShinseiJoho."shujiiIryokikanCode" <![CDATA[<>]]> ''
             AND  DbT5101NinteiShinseiJoho."shujiiCode" is not null
-            AND  DbT5101NinteiShinseiJoho."shujiiCode" !=''
+            AND  DbT5101NinteiShinseiJoho."shujiiCode" <![CDATA[<>]]> ''
             GROUP BY
             DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
             DbT5101NinteiShinseiJoho."hihokenshaNo"
@@ -105,8 +105,8 @@
             ON 
             dbT5101.shoKisaiHokenshaNo = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
             AND  dbT5101.hihokenshaNo = DbT5101NinteiShinseiJoho."hihokenshaNo"
-            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
-            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{取下}
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{却下}
             <if test="uses保険者コード">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
@@ -126,6 +126,7 @@
         <result property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="temp_申請書管理番号" column="temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="temp_督促状発行日" column="temp_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -143,6 +144,7 @@
         DbT5101NinteiShinseiJoho."hihokenshaKana"  AS temp_被保険者氏名カナ,
         DbT5101NinteiShinseiJoho."hihokenshaName"  AS temp_被保険者氏名,
         DbT5101NinteiShinseiJoho."ninteiShinseiYMD" AS temp_申請日,
+        DbT5101NinteiShinseiJoho."shinseishoKanriNo" AS temp_申請書管理番号,
         DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" AS temp_督促状発行日,
         DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" AS temp_事業者コード,
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" AS temp_事業者名称,
@@ -152,10 +154,11 @@
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster"  AS  DbT7051KoseiShichosonMaster
-        ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+        ON DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911ShujiiIryoKikanJoho
-        ON  DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        ON DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        AND DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5101NinteiShinseiJoho."shujiiIryokikanCode"
         INNER JOIN
         (
         SELECT
@@ -193,16 +196,10 @@
         AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."centerSoshinYMD" is null
         <where>
-            DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
-            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+            DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{取下}
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{却下}
             <if test="uses保険者コード">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
-            </if>
-            <if test="uses主治医医療機関コード">
-                AND  DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = #{temp_主治医医療機関コード}
-            </if>
-            <if test="uses主治医コード">
-                AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
             </if>
         </where>
     </select>

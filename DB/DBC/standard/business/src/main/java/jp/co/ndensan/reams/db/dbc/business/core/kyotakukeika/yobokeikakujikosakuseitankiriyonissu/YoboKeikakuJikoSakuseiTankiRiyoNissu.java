@@ -19,9 +19,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 予防給付計画自己作成短期利用日数を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
-public class YoboKeikakuJikoSakuseiTankiRiyoNissu
-        extends ModelBase<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu>
+public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<
+        YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu>
         implements Serializable {
 
     private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity;

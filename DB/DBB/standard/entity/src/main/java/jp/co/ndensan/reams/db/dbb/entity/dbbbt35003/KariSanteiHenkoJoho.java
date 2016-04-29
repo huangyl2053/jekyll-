@@ -13,6 +13,7 @@ import lombok.Setter;
 /**
  * 画面側からの出力帳票一覧データを定義したEntityクラスです。
  *
+ * @reamsid_L DBB-0820-030 xuyue
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Setter
@@ -40,7 +41,5 @@ public class KariSanteiHenkoJoho {
     private RString 対象者_追加含む_更正前;
     private RString 収入情報;
     private RString 帳票制御共通情報;
-    
-    
- 
+
 }

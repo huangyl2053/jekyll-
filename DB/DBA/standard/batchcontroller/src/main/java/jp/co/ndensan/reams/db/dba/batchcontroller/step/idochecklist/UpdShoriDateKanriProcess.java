@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 処理日付管理マスタを更新のプロセスグラス
+ *
+ * @reamsid_L DBA-0530-020 chengsanyuan
  */
 public class UpdShoriDateKanriProcess extends BatchProcessBase<RString> {
 

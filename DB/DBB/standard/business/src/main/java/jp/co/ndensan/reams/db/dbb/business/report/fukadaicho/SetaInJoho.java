@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 世帯員情報
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @lombok.Getter
 @lombok.Setter

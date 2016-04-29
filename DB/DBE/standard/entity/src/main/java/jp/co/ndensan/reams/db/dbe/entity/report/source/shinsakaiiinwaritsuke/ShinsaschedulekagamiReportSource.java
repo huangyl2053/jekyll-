@@ -1,16 +1,18 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaiiinwaritsuke;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 介護認定審査会スケジュール表かがみのReportSourceです。
+ *
+ * @reamsid_L DBE-0130-080 xuyannan
+ */
 public class ShinsaschedulekagamiReportSource implements IReportSource {
+    //TODO 業務に合わせてパスを変更してください
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    /**
-     * 介護認定審査会スケジュール表かがみのReportSourceです。
-     */
     @ReportItem(name = "hakkoYMD", length = 12, order = 1)
     public RString hakkoYMD;
     @ReportItem(name = "denshiKoin", order = 2)

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  *
  * 住宅改修内容一覧のバリデーションハンドラークラスです。
+ *
+ * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class JyutakugaisyunaiyoListValidationHandler {
 

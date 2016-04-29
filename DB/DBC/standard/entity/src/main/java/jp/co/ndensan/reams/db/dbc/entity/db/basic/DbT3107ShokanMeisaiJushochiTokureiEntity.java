@@ -1,14 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -16,9 +9,18 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 償還払請求明細・住所地特例テーブルのエンティティクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<DbT3107ShokanMeisaiJushochiTokureiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
@@ -39,7 +41,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private RString seiriNp;
+    private RString seiriNo;
     @PrimaryKey
     private JigyoshaNo jigyoshaNo;
     @PrimaryKey
@@ -142,17 +144,17 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @return 整理番号
      */
-    public RString getSeiriNp() {
-        return seiriNp;
+    public RString getSeiriNo() {
+        return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
      *
-     * @param seiriNp 整理番号
+     * @param seiriNo 整理番号
      */
-    public void setSeiriNp(@Nonnull RString seiriNp) {
-        this.seiriNp = seiriNp;
+    public void setSeiriNo(@Nonnull RString seiriNo) {
+        this.seiriNo = seiriNo;
     }
 
     /**
@@ -378,7 +380,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
         if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
             return false;
         }
-        if (!Objects.equals(this.seiriNp, other.seiriNp)) {
+        if (!Objects.equals(this.seiriNo, other.seiriNo)) {
             return false;
         }
         if (!Objects.equals(this.jigyoshaNo, other.jigyoshaNo)) {
@@ -403,7 +405,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
     public void shallowCopy(DbT3107ShokanMeisaiJushochiTokureiEntity entity) {
         this.hiHokenshaNo = entity.hiHokenshaNo;
         this.serviceTeikyoYM = entity.serviceTeikyoYM;
-        this.seiriNp = entity.seiriNp;
+        this.seiriNo = entity.seiriNo;
         this.jigyoshaNo = entity.jigyoshaNo;
         this.yoshikiNo = entity.yoshikiNo;
         this.meisaiNo = entity.meisaiNo;
@@ -424,7 +426,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNp, jigyoshaNo, yoshikiNo, meisaiNo, renban, serviceShuruiCode, serviceKomokuCode, tanisu, nissuKaisu, serviceTanisu, shisetsuShozaiHokenshaNo, tekiyo);
+        return super.toMd5(hiHokenshaNo, serviceTeikyoYM, seiriNo, jigyoshaNo, yoshikiNo, meisaiNo, renban, serviceShuruiCode, serviceKomokuCode, tanisu, nissuKaisu, serviceTanisu, shisetsuShozaiHokenshaNo, tekiyo);
     }
 
 // </editor-fold>

@@ -33,18 +33,6 @@ public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteich
      * @param 調査票定義 調査票定義
      * @param 調査項目グループ 調査項目グループ
      */
-    public Ninteichosahyo(Map<E, T> 調査票定義, INinteichosaItemGroup[] 調査項目グループ) {
-        this.調査票定義 = requireNonNull(調査票定義, UrErrorMessages.存在しない.getMessage().replace("調査票定義").getMessage());
-        requireNonNull(調査項目グループ, UrErrorMessages.存在しない.getMessage().replace("調査項目グループ").getMessage());
-        this.調査項目グループ = Arrays.asList(調査項目グループ);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param 調査票定義 調査票定義
-     * @param 調査項目グループ 調査項目グループ
-     */
     public Ninteichosahyo(Map<E, T> 調査票定義, List<INinteichosaItemGroup> 調査項目グループ) {
         this.調査票定義 = requireNonNull(調査票定義, UrErrorMessages.存在しない.getMessage().replace("調査票定義").getMessage());
         this.調査項目グループ = requireNonNull(調査項目グループ, UrErrorMessages.存在しない.getMessage().replace("調査項目グループ").getMessage());

@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査スケジュール登録7のHandlerクラスです。
+ *
+ * @reamsid_L DBE-0023-010 xuyannan
  */
 public class MainPanelHandler {
 

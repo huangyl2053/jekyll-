@@ -38,6 +38,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 支払方法変更のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHohoHenkoEntity> {
 
@@ -126,6 +128,23 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
                                 not(eq(mukoKubun, ShiharaiHenkoMukoKubun.無効.getコード())),
                                 leq(substr(tekiyoKaishiYMD, 1, NUM), サービス提供年月),
                                 leq(サービス提供年月, substr(tekiyoShuryoYMD, 1, NUM)))).
+                order(by(rirekiNo, DESC)).
+                toList(DbT4021ShiharaiHohoHenkoEntity.class);
+    }
+
+    /**
+     * 支払方法変更リストの取得。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT4021ShiharaiHohoHenkoEntity>
+     */
+    @Transaction
+    public List<DbT4021ShiharaiHohoHenkoEntity> get支支払方法変更(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4021ShiharaiHohoHenko.class).
+                where(
+                        eq(hihokenshaNo, 被保険者番号)).
                 order(by(rirekiNo, DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }

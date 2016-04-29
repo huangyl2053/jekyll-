@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- *
  * 要介護認定調査依頼書ヘッダEditorです。
+ *
+ * @reamsid_L DBE-0010-020 lishengli
  */
 class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
-    private static final RString TITLE = new RString("認定調査依頼書");
     private final ChosaIraishoHeadItem item;
 
     /**
@@ -66,7 +66,7 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.sonota = item.getSonota();
         source.atenaRenban = item.getAtenaRenban();
         source.customerBarCode = item.getCustomerBarCode();
-        source.title = TITLE;
+        source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.hihokenshaNo1 = item.getHihokenshaNo1();
         source.hihokenshaNo2 = item.getHihokenshaNo2();
@@ -94,9 +94,8 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.jusho = item.getJusho();
         source.telNo = item.getTelNo();
         source.homonChosasakiYubinNo = item.getHomonChosasakiYubinNo();
-        source.homonChosasakiJusho1 = item.getHomonChosasakiJusho1();
-        source.homonChosasakiJusho2 = item.getHomonChosasakiJusho2();
-        source.homonChosasakiJusho3 = item.getHomonChosasakiJusho3();
+        source.homonChosasakiJusho = item.getHomonChosasakiJusho();
+        source.homonChosasakiName = item.getHomonChosasakiJushoName();
         source.homonChosasakiTelNo = item.getHomonChosasakiTelNo();
         if (item.getShinseiYMD().isNullOrEmpty()) {
             source.shinseiYMD = RString.EMPTY;
@@ -109,7 +108,6 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
             source.teishutsuKigen = パターン12(new RDate(item.getTeishutsuKigen().toString()));
         }
         source.tsuchibun2 = item.getTsuchibun2();
-        source.remban = item.getRemban();
         return source;
     }
 

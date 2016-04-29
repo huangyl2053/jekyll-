@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会一覧のコントローラです。
+ *
+ * @reamsid_L DBE-1350-010 zuotao
  */
 public class KaigoNinteiShinsakai {
 
@@ -48,7 +50,7 @@ public class KaigoNinteiShinsakai {
      * 審査会一覧初期化の設定します。
      *
      * @param div 審査会一覧Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onLoad(KaigoNinteiShinsakaiDiv div) {
 
@@ -61,7 +63,7 @@ public class KaigoNinteiShinsakai {
      * 個人別状況照会へ遷移を処理します。
      *
      * @param div 審査会一覧Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnkojin(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択不可(div);
@@ -69,14 +71,14 @@ public class KaigoNinteiShinsakai {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.個人別状況照会へ遷移する).respond();
     }
 
     /**
      * データ出力を実行します。
      *
      * @param div 審査会一覧Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btndataoutput(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択可(div);
@@ -85,14 +87,14 @@ public class KaigoNinteiShinsakai {
         }
         ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ出力を実行する).respond();
     }
 
     /**
      * 審査会対象者割付へ遷移を実行します。
      *
      * @param div 審査会一覧Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnwaritsuke(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択不可(div);
@@ -100,14 +102,14 @@ public class KaigoNinteiShinsakai {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         ViewStateHolder.put(TaishouWaritsukeViewStateKey.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会対象者割付へ遷移する).respond();
     }
 
     /**
      * 自動割付へ遷移を実行します。
      *
      * @param div 審査会一覧Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnAutoWaritsuke(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択可(div);
@@ -116,14 +118,14 @@ public class KaigoNinteiShinsakai {
         }
         ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.自動割付を実行する).respond();
     }
 
     /**
      * 選択ボタンの処理を実行します。
      *
      * @param div 審査会一覧Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelect(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会選択(div);
@@ -137,7 +139,7 @@ public class KaigoNinteiShinsakai {
      * データ取込みを実行します。
      *
      * @param div 審査会一覧Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btndatainput(KaigoNinteiShinsakaiDiv div) {
 
@@ -147,7 +149,7 @@ public class KaigoNinteiShinsakai {
         }
         ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ取込みを実行する).respond();
     }
 
     private KaigoNinteiShinsakaiValidationHandler createValidationHandler(KaigoNinteiShinsakaiDiv div) {

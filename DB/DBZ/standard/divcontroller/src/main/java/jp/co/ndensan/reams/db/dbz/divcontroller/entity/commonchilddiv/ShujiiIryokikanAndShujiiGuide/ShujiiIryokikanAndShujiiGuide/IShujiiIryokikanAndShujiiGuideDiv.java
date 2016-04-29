@@ -3,8 +3,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIry
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
-/*
- * このコードはツールによって生成されました。
+/**
+ * 主治医医療機関＆主治医ガイドのインタフェースです。
+ *
+ * @reamsid_L DBE-1300-130 xuyannan
  */
 public interface IShujiiIryokikanAndShujiiGuideDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 

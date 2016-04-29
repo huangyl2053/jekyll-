@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5140002;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinKoseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.ShinsakaiIinWaritsukeHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.ShinsakaiIinWaritsukeValidationHandler;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.ShinsakaiKaisaiYoteiJohoManager2;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.ShinsakaiiinJohoManager2;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiKaisaiYoteiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -32,14 +32,16 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 介護認定審査会割当委員情報更新のコントローラです。
+ *
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public class ShinsakaiIinWaritsuke {
 
     private static final int 時刻桁数 = 4;
     private final RString 開催番号;
     private final RString 開催年月日;
-    private final ShinsakaiKaisaiYoteiJohoManager2 kaisaiYoteiJohomanager;
-    private final ShinsakaiiinJohoManager2 iinJohomanager;
+    private final ShinsakaiKaisaiYoteiJohoManager kaisaiYoteiJohomanager;
+    private final ShinsakaiiinJohoManager iinJohomanager;
 
     /**
      * コンストラクタです。
@@ -47,8 +49,8 @@ public class ShinsakaiIinWaritsuke {
     public ShinsakaiIinWaritsuke() {
         開催番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class);
         開催年月日 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催年月日, RString.class);
-        kaisaiYoteiJohomanager = ShinsakaiKaisaiYoteiJohoManager2.createInstance();
-        iinJohomanager = ShinsakaiiinJohoManager2.createInstance();
+        kaisaiYoteiJohomanager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
+        iinJohomanager = ShinsakaiiinJohoManager.createInstance();
     }
 
     /**

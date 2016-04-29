@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会割当情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class DbT5502ShinsakaiWariateJohoDac implements ISaveable<DbT5502ShinsakaiWariateJohoEntity> {
 

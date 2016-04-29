@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 社会福祉法人等利用者負担軽減を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class ShakaiFukushiHojinRiyoshaFutanKeigen
         extends
@@ -254,7 +256,7 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

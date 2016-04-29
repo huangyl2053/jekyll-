@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiYoteiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140001.ShinsakaiKaisaiYoteiTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.ShinsakaiKaisaiYoteiTorokuManager;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.GogitaiManager;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.ShinsakaiKaisaiYoteiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.GogitaiManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.HolidayAccessor;
+import jp.co.ndensan.reams.uz.uza.lang.HolidayCategory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -59,6 +60,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 介護認定審査会開催予定登録1のコントローラです。
+ *
+ * @reamsid_L DBE-0130-010 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiToroku {
 
@@ -464,7 +467,7 @@ public class ShinsakaiKaisaiYoteiToroku {
      * 「保存する」ボタン<br/>。
      *
      * @param div ShinsakaiKaisaiYoteiTorokuDiv
-     * @return　ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_Hozon(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;
@@ -776,7 +779,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         getConfig時間枠();
         FlexibleDate zenbuDate = new FlexibleDate(Integer.parseInt(年月.substring(0, INDEX_4).toString()),
                 Integer.parseInt(年月.substring(INDEX_4).toString()), 1);
-        List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList();
+        List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList(HolidayCategory.日本の休日.getCategoryId());
         int dayCount = zenbuDate.getLastDay();
         if (モード.equals(モード_月) || モード.equals(モード_初期化)) {
             yoteiJohoEntityList = new ArrayList<>();

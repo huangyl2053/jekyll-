@@ -11,18 +11,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特記事項入力情報作成のクラスです。
+ *
+ * @reamsid_L DBE-0040-030 huangh
  */
 public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private final GaikyoTokkiYichiranNyurokuRelateEntity gaikyoTokkiYichiranNyurokuRelateEntity;
+    private final GaikyoTokkiYichiranNyurokuRelateEntity relateEntity;
 
     /**
      * コンストラクタです。<br/>
      *
      */
     public GaikyoTokkiYichiranNyurokuBusiness() {
-        this.gaikyoTokkiYichiranNyurokuRelateEntity = new GaikyoTokkiYichiranNyurokuRelateEntity(
+        this.relateEntity = new GaikyoTokkiYichiranNyurokuRelateEntity(
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -60,7 +62,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
             RString temp_特記事項名称,
             RString temp_新規区分,
             RString temp_編集区分) {
-        this.gaikyoTokkiYichiranNyurokuRelateEntity = new GaikyoTokkiYichiranNyurokuRelateEntity(
+        this.relateEntity = new GaikyoTokkiYichiranNyurokuRelateEntity(
                 temp_レコードNO,
                 temp_認定調査特記事項番号,
                 temp_認定調査特記事項連番,
@@ -79,7 +81,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return 特記事項入力情報作成ののエンティティ
      */
     public GaikyoTokkiYichiranNyurokuRelateEntity getGaikyoTokkiYichiranNyurokuRelateEntity() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity;
+        return relateEntity;
     }
 
     /**
@@ -88,7 +90,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_レコードNO
      */
     public RString getTemp_レコードNO() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_レコードNO();
+        return relateEntity.getTemp_レコードNO();
     }
 
     /**
@@ -97,7 +99,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_認定調査特記事項番号
      */
     public RString getTemp_認定調査特記事項番号() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_認定調査特記事項番号();
+        return relateEntity.getTemp_認定調査特記事項番号();
     }
 
     /**
@@ -106,7 +108,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_認定調査特記事項連番
      */
     public RString getTemp_認定調査特記事項連番() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_認定調査特記事項連番();
+        return relateEntity.getTemp_認定調査特記事項連番();
     }
 
     /**
@@ -115,7 +117,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_特記事項テキストイメージ区分
      */
     public RString getTemp_特記事項テキストイメージ区分() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_特記事項テキストイメージ区分();
+        return relateEntity.getTemp_特記事項テキストイメージ区分();
     }
 
     /**
@@ -124,7 +126,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_原本マスク区分
      */
     public RString getTemp_原本マスク区分() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_原本マスク区分();
+        return relateEntity.getTemp_原本マスク区分();
     }
 
     /**
@@ -133,7 +135,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_特記事項
      */
     public RString getTemp_特記事項() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_特記事項();
+        return relateEntity.getTemp_特記事項();
     }
 
     /**
@@ -142,7 +144,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_特記事項イメージ共有ファイルID
      */
     public RString getTemp_特記事項イメージ共有ファイルID() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_特記事項イメージ共有ファイルID();
+        return relateEntity.getTemp_特記事項イメージ共有ファイルID();
     }
 
     /**
@@ -151,7 +153,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_特記事項名称
      */
     public RString getTemp_特記事項名称() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_特記事項名称();
+        return relateEntity.getTemp_特記事項名称();
     }
 
     /**
@@ -160,7 +162,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_新規区分
      */
     public RString getTemp_新規区分() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_新規区分();
+        return relateEntity.getTemp_新規区分();
     }
 
     /**
@@ -169,6 +171,6 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @return temp_編集区分
      */
     public RString getTemp_編集区分() {
-        return gaikyoTokkiYichiranNyurokuRelateEntity.getTemp_編集区分();
+        return relateEntity.getTemp_編集区分();
     }
 }

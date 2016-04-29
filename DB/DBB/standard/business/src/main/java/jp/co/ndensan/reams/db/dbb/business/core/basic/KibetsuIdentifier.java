@@ -15,6 +15,7 @@ import lombok.Value;
  * 介護期別の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KibetsuIdentifier implements Serializable {
 
     private final FlexibleYear 調定年度;

@@ -10,14 +10,16 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyocho
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyochosaitem.NinteichosahyoChosaItemIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosascore.NinteichosahyoKihonChosaScore;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosascore.NinteichosahyoKihonChosaScoreIdentifier;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link NinteichosahyoKihonChosa}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosahyoKihonChosaBuilder {
 

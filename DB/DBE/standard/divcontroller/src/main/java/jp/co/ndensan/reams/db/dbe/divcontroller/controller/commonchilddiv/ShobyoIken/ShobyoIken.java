@@ -10,9 +10,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIken
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIken.ShobyoIken.ShobyoIkenValidationHandler;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.Anteisei;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputHandler.CodeMasterKind;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -20,8 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
  * 共有子Div 「ShobyoIken」のイベントを定義したDivControllerです。
+ *
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIken {
 
@@ -45,8 +44,10 @@ public class ShobyoIken {
     public ResponseData<ShobyoIkenDiv> onChange_antei(ShobyoIkenDiv div) {
         if (Anteisei.不安定.getコード().equals(div.getRadShojoAnteisei().getSelectedKey())) {
             div.getTxtFuanteiShosaiJokyo().setDisabled(false);
+            div.getTxtFuanteiShosaiJokyo().setValue(div.getShojoAnteisei().getFuantei());
         } else {
             div.getTxtFuanteiShosaiJokyo().setDisabled(true);
+            div.getTxtFuanteiShosaiJokyo().clearValue();
         }
         return ResponseData.of(div).respond();
     }
@@ -57,7 +58,6 @@ public class ShobyoIken {
      * @param div ShobyoIkenDiv
      * @return ResponseData<ShobyoIkenDiv>
      */
-    //TODO chramlファイルの「原因疾患を追加する」ボタンはButtonDialogです。 QA:896 2016/03/16
     public ResponseData<ShobyoIkenDiv> onClick_tsuika(ShobyoIkenDiv div) {
         getHandler(div).onClick_tsuika();
         return ResponseData.of(div).respond();
@@ -93,33 +93,6 @@ public class ShobyoIken {
      */
     public ResponseData<ShobyoIkenDiv> onClick_double(ShobyoIkenDiv div) {
         getHandler(div).onClick_double();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 原因疾患検索　ボタン押下、コードマスタダイアログを表示します。
-     *
-     * @param div ShobyoIkenDiv
-     * @return ResponseData<ShobyoIkenDiv>
-     */
-    public ResponseData<ShobyoIkenDiv> onClick_select(ShobyoIkenDiv div) {
-        div.setHdnTxtSchemaName(new RString("rgdb"));
-        div.setHdnTxtSubGyomuCode(new RString("DBE"));
-        div.setHdnTxtCodeShubetsu(new RString("5003"));
-        div.setHdnTxtKijunYmd(new RString(FlexibleDate.getNowDate().toString()));
-        div.setHdnTxtCodeMasterKind(CodeMasterKind.NoOption.toRString());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * コードマスタダイアログで選択した原因疾患コードと原因疾患名称を原因疾患詳細エリアに表示します。
-     *
-     * @param div ShobyoIkenDiv
-     * @return ResponseData<ShobyoIkenDiv>
-     */
-    public ResponseData<ShobyoIkenDiv> onClick_selectok(ShobyoIkenDiv div) {
-        div.getTxtGeninShikkanCode().setValue(div.getHdnTxtCode());
-        div.getTxtMeisho().setValue(div.getHdnTxtCodeMeisho());
         return ResponseData.of(div).respond();
     }
 

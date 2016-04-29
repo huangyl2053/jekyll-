@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.report.choshuyuyoshinseisho.HokenryoG
 import jp.co.ndensan.reams.db.dba.business.report.choshuyuyoshinseisho.HokenryoGenmenChoshuYoyuShinseishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.choshuyuyoshinseisho.HokenryoGenmenChoshuYoyuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -47,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護保険料徴収猶予申請書のPrintクラスです。
+ *
+ * @reamsid_L DBA-0540-260 xuyannan
  */
 public class ChoshuYuyoShinseisho {
 

@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.dac._ReportDACUtility;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
@@ -48,11 +46,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳管理のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDaichoEntity> {
 
     private static final RString メッセージ_識別コード = new RString("識別コード");
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
+    private static final RString メッセージ_異動日 = new RString("異動日");
     @InjectSession
     private SqlSession session;
 
@@ -316,16 +317,14 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_識別コード.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<OrderBy> orderBy = new ArrayList<>();
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST));
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST));
 
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(logicalDeletedFlag, 論理削除フラグ),
                                 eq(shikibetsuCode, 識別コード))).
-                order(_ReportDACUtility.toOrderBysArray(orderBy)).
+                order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -342,15 +341,13 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
             throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<OrderBy> orderBy = new ArrayList<>();
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST));
-        orderBy.add(new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST));
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(logicalDeletedFlag, false))).
-                order(_ReportDACUtility.toOrderBysArray(orderBy)).
+                order(new OrderBy(DbT1001HihokenshaDaicho.idoYMD, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(DbT1001HihokenshaDaicho.edaNo, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
@@ -568,6 +565,27 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where((eq(hihokenshaNo, 被保険者番号))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 異動日を指定し、該当する被保険者台帳情報のなかから最新の1件を取得します。
+     *
+     * @param 異動日 異動日
+     * @return 該当する被保険者台帳情報から最新1件
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectBy異動日(FlexibleDate 異動日) {
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_異動日.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(
+                        leq(idoYMD, 異動日)).
+                order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }

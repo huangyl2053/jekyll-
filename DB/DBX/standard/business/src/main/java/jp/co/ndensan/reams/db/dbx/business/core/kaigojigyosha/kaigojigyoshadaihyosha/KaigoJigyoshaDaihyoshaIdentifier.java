@@ -12,8 +12,11 @@ import lombok.Value;
 
 /**
  * 介護事業者代表者の識別子です。
+ *
+ * @reamsid_L DBX-9999-011 sunhaidi
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoJigyoshaDaihyoshaIdentifier implements Serializable {
 
     private static final long serialVersionUID = 1929745273131603816L;

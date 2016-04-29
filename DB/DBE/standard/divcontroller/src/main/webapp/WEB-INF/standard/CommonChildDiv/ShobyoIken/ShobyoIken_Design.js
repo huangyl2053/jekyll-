@@ -4,6 +4,10 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_tsuika = function () {
+                return "onClick_tsuika";
+            };
+
             Events.onClick_double = function () {
                 return "onClick_double";
             };
@@ -14,14 +18,6 @@ var DBE;
 
             Events.onClick_sakujyo = function () {
                 return "onClick_sakujyo";
-            };
-
-            Events.onClick_selectok = function () {
-                return "onClick_selectok";
-            };
-
-            Events.onClick_select = function () {
-                return "onClick_select";
             };
 
             Events.onClick_btnNo = function () {
@@ -87,8 +83,8 @@ var DBE;
                 return new UZA.TextBoxDate(this.convFiledName("txtShindanYMD2"));
             };
 
-            Controls.prototype.txtShindanName3 = function () {
-                return new UZA.TextBox(this.convFiledName("txtShindanName3"));
+            Controls.prototype.txtShindanName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShindanName"));
             };
 
             Controls.prototype.txtShindanYMD3 = function () {
@@ -100,7 +96,7 @@ var DBE;
             };
 
             Controls.prototype.btnAdd = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnAdd"));
+                return new UZA.Button(this.convFiledName("btnAdd"));
             };
 
             Controls.prototype.dgGenyin = function () {
@@ -111,16 +107,8 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
             };
 
-            Controls.prototype.txtGeninShikkanCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
-            };
-
-            Controls.prototype.btnToSearch = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnToSearch"));
-            };
-
-            Controls.prototype.txtMeisho = function () {
-                return new UZA.TextBox(this.convFiledName("txtMeisho"));
+            Controls.prototype.ccdCodeInputGeninShikkan = function () {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
             };
 
             Controls.prototype.radIsShutaruGeninShikkan = function () {

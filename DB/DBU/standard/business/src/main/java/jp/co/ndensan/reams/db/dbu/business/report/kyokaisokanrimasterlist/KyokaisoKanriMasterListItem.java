@@ -9,6 +9,8 @@ import lombok.Getter;
 
 /**
  * 境界層管理マスタリストのITEMです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

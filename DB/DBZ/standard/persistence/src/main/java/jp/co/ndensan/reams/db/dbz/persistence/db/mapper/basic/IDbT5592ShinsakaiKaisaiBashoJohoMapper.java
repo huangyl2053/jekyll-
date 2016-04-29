@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJoh
 /**
  * {@link jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity}のマッパーIFです。
  *
+ * @reamsid_L DBE-0100-010  wangkun
  */
 public interface IDbT5592ShinsakaiKaisaiBashoJohoMapper {
 

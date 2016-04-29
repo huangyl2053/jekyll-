@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 介護保険被保険者証一括作成モードクラスです。
+ *
+ * @reamsid_L DBU-0420-010 duanzhanli
  */
 public class HihokenshashoIkkatsuHakkoModel implements Serializable {
 

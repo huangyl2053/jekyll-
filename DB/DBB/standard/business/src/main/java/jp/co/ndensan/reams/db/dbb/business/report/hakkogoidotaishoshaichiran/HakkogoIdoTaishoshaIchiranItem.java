@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 通知書発行後異動把握帳票HakkogoIdoTaishoshaIchiranItem
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 @Getter
 @Setter

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-1750-030 sunhui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.setai.ISetaiinMapper">
+    <select id="get宛名識別対象PSM"
+            resultType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.setai.SetaiinParameter">
+        SELECT A.*
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  AS A
+    </select>
+</mapper>

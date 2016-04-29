@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  *
  * 認定調査スケジュール登録1を管理するクラスです。
+ *
+ * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 public class NinteichosaScheduleBusiness {
 

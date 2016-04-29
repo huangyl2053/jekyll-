@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 仮算定額変更【B5横タイプ】のReportです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenkoTsuchishoB5YokoReportSource> {
 

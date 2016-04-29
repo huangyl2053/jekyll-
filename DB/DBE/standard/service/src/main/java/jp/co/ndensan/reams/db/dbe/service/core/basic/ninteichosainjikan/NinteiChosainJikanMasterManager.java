@@ -11,10 +11,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainjikan.NinteiChosainBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninteichosainjikan.NinteiChosainEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ninteichosainjikan.INinteiChosainJikanMasterMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainjikan.INinteiChosainJikanMasterMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
@@ -32,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査スケジュール登録6を管理するクラスです。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 public class NinteiChosainJikanMasterManager {
 
@@ -82,16 +85,20 @@ public class NinteiChosainJikanMasterManager {
      * @return SearchResult<DbT5224ChikuShichosonEntity>
      */
     @Transaction
-    public SearchResult<DbT5224ChikuShichosonEntity> getChikuShichosonList() {
+    public SearchResult<ChikuShichoson> getChikuShichosonList() {
+        List<ChikuShichoson> chikuShichoson = new ArrayList<>();
         List<DbT5224ChikuShichosonEntity> dbT5224EntityList = new ArrayList();
         ShichosonSecurityJoho 自市町村情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         if (自市町村情報 != null && 自市町村情報.get市町村情報().get市町村コード() != null) {
             dbT5224EntityList = dbt5224dac.selectByShichosonCode(自市町村情報.get市町村情報().get市町村コード());
         }
         if (dbT5224EntityList == null || dbT5224EntityList.isEmpty()) {
-            return SearchResult.of(Collections.<DbT5224ChikuShichosonEntity>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ChikuShichoson>emptyList(), 0, false);
         }
-        return SearchResult.of(dbT5224EntityList, 0, false);
+        for (DbT5224ChikuShichosonEntity entity : dbT5224EntityList) {
+            chikuShichoson.add(new ChikuShichoson(entity));
+        }
+        return SearchResult.of(chikuShichoson, 0, false);
     }
 
     /**
@@ -209,9 +216,30 @@ public class NinteiChosainJikanMasterManager {
      */
     @Transaction
     public void 更新(DbT5221NinteichosaScheduleEntity 変更前データ, DbT5221NinteichosaScheduleEntity 変更後データ) {
+        変更後データ.setState(EntityDataState.Added);
         dac.saveOrDelete(変更前データ);
         if (!EntityDataState.Added.equals(変更前データ.getState())) {
             dac.save(変更後データ);
         }
+    }
+
+    /**
+     * DbT5221NinteichosaScheduleEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     */
+    @Transaction
+    public void saveOrDelete(DbT5221NinteichosaScheduleEntity entity) {
+        dac.saveOrDelete(entity);
+    }
+
+    /**
+     * DbT5221NinteichosaScheduleEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     */
+    @Transaction
+    public void save(DbT5221NinteichosaScheduleEntity entity) {
+        dac.save(entity);
     }
 }

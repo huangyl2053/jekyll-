@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【銀振タイプ】帳票項目定義_5期
+ *
+ * @reamsid_L DBB-9110-150 liangbc
  */
 public class HokenryoNonyuTsuchishoGinfuriFiveKiReport extends Report<HokenryoNonyuTsuchishoGinfuriFiveKiSource> {
 

@@ -14,6 +14,8 @@ import lombok.Value;
 
 /**
  * 償還払請求明細・住所地特例の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBX-9999-021 linghuhang
  */
 public class DbT7055GappeiJohoDac {
 

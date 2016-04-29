@@ -10,10 +10,11 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
-import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -33,12 +34,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 被保険者台帳管理（資格取得）情報を管理するサービスクラスです。
+ *
+ * @reamsid_L DBA-0520-010 lishengli
  */
 public class HihokenshaShikakuShutokuManager {
 
     private static final int AGE_65 = 65;
     private static final int AGE_64 = 64;
     private static final int AGE_40 = 40;
+    private static final int INT_4 = 4;
     private static final FlexibleDate ICHIGOSHIKAKUSHUTOKUYMD = new FlexibleDate("");
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
@@ -46,7 +50,7 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final MapperProvider mapperProvider;
-    private static boolean checkFlg = false;
+    private boolean checkFlg = false;
 
     /**
      * コンストラクタです。
@@ -72,8 +76,7 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
      */
     public static HihokenshaShikakuShutokuManager createInstance() {
         return InstanceProvider.create(HihokenshaShikakuShutokuManager.class);
@@ -107,13 +110,14 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * 被保険者台帳管理（資格取得）登録処理します。
      *
-     * @param entity 被保険者台帳管理テーブルのエンティティ
+     * @param hihokenshaDaicho 被保険者台帳管理
      * @param 生年月日 当該識別対象の生年月日
      */
     @Transaction
-    public void saveHihokenshaShutoku(DbT1001HihokenshaDaichoEntity entity, IDateOfBirth 生年月日) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理（資格取得）Entity"));
+    public void saveHihokenshaShutoku(HihokenshaDaicho hihokenshaDaicho, IDateOfBirth 生年月日) {
+        requireNonNull(hihokenshaDaicho, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理"));
         requireNonNull(生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("当該識別対象の生年月日"));
+        DbT1001HihokenshaDaichoEntity entity = hihokenshaDaicho.toEntity();
         HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(entity.getShikibetsuCode());
         RString age = get年齢(生年月日, entity.getShikakuShutokuYMD());
         if (Integer.parseInt(age.toString()) >= AGE_65) {
@@ -146,7 +150,7 @@ public class HihokenshaShikakuShutokuManager {
         if (entity == null || entity.getEdaNo().isEmpty()) {
             return 枝番;
         } else {
-            return new RString(String.valueOf(Integer.valueOf(entity.getEdaNo().toString().trim()) + 1));
+            return new RString(String.valueOf(Integer.valueOf(entity.getEdaNo().toString().trim()) + 1)).padZeroToLeft(INT_4);
         }
     }
 
@@ -160,7 +164,6 @@ public class HihokenshaShikakuShutokuManager {
     @Transaction
     public HihokenshaShutokuJyoho getSaishinDeta(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
         IHihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(IHihokenshaShikakuShutokuMapper.class);
         HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter
                 .createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);

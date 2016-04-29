@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 世帯所得・課税判定（バッチ）
  *
+ * @reamsid_L DBB-0640-020 chenaoqi
  */
 public class SetaiShotokuKazeiHantei {
 
@@ -111,8 +112,7 @@ public class SetaiShotokuKazeiHantei {
      */
     @Transaction
     public void getJuminShotokuJoho() {
-        ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class
-        );
+        ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class);
         List<DbV2502KaigoShotokuEntity> 介護所得list = mapper.select介護所得();
         if (介護所得list != null && !介護所得list.isEmpty()) {
             for (DbV2502KaigoShotokuEntity 介護所得entity : 介護所得list) {

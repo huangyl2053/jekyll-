@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.jukyuHaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.jukyuKaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
@@ -18,12 +19,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 老齢福祉年金受給者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-020 suguangjun
  */
 public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006RoreiFukushiNenkinJukyushaEntity> {
 
@@ -142,6 +146,29 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
         return accessor.select().
                 table(DbT7006RoreiFukushiNenkinJukyusha.class).
                 where(eq(shikibetsuCode, 識別コード)).
+                toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
+    }
+
+    /**
+     * 入力識別コード、適用日で老齢福祉年金受給者の判定します。
+     *
+     * @param 識別コード 識別コード
+     * @param 適用日 適用日
+     * @return List<DbT7006RoreiFukushiNenkinJukyushaEntity>
+     *
+     */
+    @Transaction
+    public List<DbT7006RoreiFukushiNenkinJukyushaEntity> selectfor老齢福祉年金受給者の判定(
+            ShikibetsuCode 識別コード, FlexibleDate 適用日) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7006RoreiFukushiNenkinJukyusha.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                leq(jukyuKaishiYMD, 適用日),
+                                leq(適用日, jukyuHaishiYMD))).
                 toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
     }
 }

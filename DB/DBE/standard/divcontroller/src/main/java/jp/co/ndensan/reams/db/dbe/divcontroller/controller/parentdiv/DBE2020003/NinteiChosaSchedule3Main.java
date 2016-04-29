@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * 認定調査スケジュール登録3のコントローラです。
+ * 認定調査スケジュール登録3のコントローラです。\
+ *
+ * @reamsid_L DBE-0020-030 wanghui
  */
 public class NinteiChosaSchedule3Main {
 
@@ -72,6 +74,7 @@ public class NinteiChosaSchedule3Main {
      */
     public ResponseData<NinteiChosaSchedule3MainDiv> onChange_District(NinteiChosaSchedule3MainDiv div) {
         getHandler(div).set保険者DDL();
+        getHandler(div).set認定調査委託先コード();
         return ResponseData.of(div).respond();
     }
 
@@ -122,6 +125,12 @@ public class NinteiChosaSchedule3Main {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, div.getDdlTaishoChiku().getSelectedKey());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_時間枠, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaJikanWaku());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約可否, div.getDgResultList().getSelectedItems().get(0).getYoyakuKaoFlag());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約状況, div.getDgResultList().getSelectedItems().get(0).getJokyo());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, div.getDdlHokensha().getSelectedKey());
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, 未定者モード);
             return ResponseData.of(div).respond();
         }
@@ -130,7 +139,7 @@ public class NinteiChosaSchedule3Main {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, 編集モード);
         }
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, div.getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_市町村コード, div.getDdlHokensha().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_市町村コード, div.getDgResultList().getSelectedItems().get(0).getShichosonCode());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaYmd().getValue());

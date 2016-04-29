@@ -9,12 +9,13 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsainYusoKub
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiIinJohoMapper;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJohoManager;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikan.KaigoNinteiShinsakaiIinShozokuKikanJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -22,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会委員情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class ShinsakaiIinJohoManager {
 
@@ -59,8 +62,7 @@ public class ShinsakaiIinJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiIinJohoManager}のインスタンス
      */
     public static ShinsakaiIinJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiIinJohoManager.class);
@@ -111,17 +113,19 @@ public class ShinsakaiIinJohoManager {
      * 審査会委員一覧情報は表示条件で検索を取得する。
      *
      * @param 表示条件 RString
+     * @param dispMax 最大表示件数
      * @return List<ShinsakaiIinJoho>
      */
     @Transaction
-    public SearchResult<ShinsakaiIinJoho> get審査会委員一覧(RString 表示条件) {
+    public SearchResult<ShinsakaiIinJoho> get審査会委員一覧(RString 表示条件, Decimal dispMax) {
         List<ShinsakaiIinJoho> 審査会委員一覧 = new ArrayList<>();
         boolean is全ての審査会委員 = false;
         if (new RString("key1").equals(表示条件)) {
             is全ての審査会委員 = true;
         }
         IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
-        List<ShinsakaiIinJohoEntity> 審査会委員情報 = mapper.get審査会委員情報By表示条件(is全ての審査会委員);
+        List<ShinsakaiIinJohoEntity> 審査会委員情報 = mapper.get審査会委員情報By表示条件(
+                ShinsakaiIinJohoMapperParameter.createParamForShinsakaiIin(is全ての審査会委員, dispMax.intValue()));
         if (審査会委員情報 == null || 審査会委員情報.isEmpty()) {
             return SearchResult.of(審査会委員一覧, 0, false);
         }

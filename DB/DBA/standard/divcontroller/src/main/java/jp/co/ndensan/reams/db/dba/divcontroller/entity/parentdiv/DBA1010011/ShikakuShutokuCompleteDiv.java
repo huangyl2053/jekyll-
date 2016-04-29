@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShikakuShutokuComplete のクラスファイル
  *
- * @author 自動生成
  */
 public class ShikakuShutokuCompleteDiv extends Panel {
     /*

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain.
 /**
  *
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票BodyEditor
+ *
+ * @reamsid_L DBC-0980-510 surun
  */
 public class BodyEditor implements IKagoKetteiKohifutanshaInEditor {
 

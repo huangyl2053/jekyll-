@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 弁明書Builderクラスです。
+ *
+ * @reamsid_L DBU-1080-150 linghuhang
  */
 class BemmeisyoBuilderImpl implements IBemmeisyoBuilder {
 

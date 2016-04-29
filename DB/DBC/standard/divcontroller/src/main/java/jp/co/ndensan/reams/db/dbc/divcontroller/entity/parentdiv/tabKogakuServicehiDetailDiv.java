@@ -5,10 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IPaymentMethodDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IShinseishaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KogakuServicehiDetail.tplKetteiJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KogakuServicehiJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.kogakuservicehidetail.tplKetteiJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KogakuServicehiJudgementResult.KogakuServicehiJudgementResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;

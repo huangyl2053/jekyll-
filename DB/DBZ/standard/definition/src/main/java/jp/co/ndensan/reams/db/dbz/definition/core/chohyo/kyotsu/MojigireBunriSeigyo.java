@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 文字切れ分離制御を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum MojigireBunriSeigyo {
 

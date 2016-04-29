@@ -12,15 +12,45 @@ package jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype;
  */
 public enum ConfigKeysKyufuJissekiKoshinKekka implements IConfigKeysKokuhorenTorikomi {
 
+    /**
+     * 国保連取込_給付実績更新結果情報
+     */
     国保連取込_給付実績更新結果情報,
+    /**
+     * 国保連取込_給付実績更新結果情報_バッチID
+     */
     国保連取込_給付実績更新結果情報_バッチID,
+    /**
+     * 国保連取込_給付実績更新結果情報_一覧表示順
+     */
     国保連取込_給付実績更新結果情報_一覧表示順,
+    /**
+     * 国保連取込_給付実績更新結果情報_交換情報識別番号
+     */
     国保連取込_給付実績更新結果情報_交換情報識別番号,
+    /**
+     * 国保連取込_給付実績更新結果情報_再処理不可区分
+     */
     国保連取込_給付実績更新結果情報_再処理不可区分,
+    /**
+     * 国保連取込_給付実績更新結果情報_処理サイクル区分
+     */
     国保連取込_給付実績更新結果情報_処理サイクル区分,
+    /**
+     * 国保連取込_給付実績更新結果情報_処理月
+     */
     国保連取込_給付実績更新結果情報_処理月,
+    /**
+     * 国保連取込_給付実績更新結果情報_処理名称
+     */
     国保連取込_給付実績更新結果情報_処理名称,
+    /**
+     * 国保連取込_給付実績更新結果情報_排他チェック有り区分
+     */
     国保連取込_給付実績更新結果情報_排他チェック有り区分,
+    /**
+     * 国保連取込_給付実績更新結果情報_有効区分
+     */
     国保連取込_給付実績更新結果情報_有効区分;
 
     @Override
@@ -68,6 +98,11 @@ public enum ConfigKeysKyufuJissekiKoshinKekka implements IConfigKeysKokuhorenTor
         return 国保連取込_給付実績更新結果情報_有効区分;
     }
 
+    /**
+     * IConfigKeysKokuhorenTorikomi
+     *
+     * @return IConfigKeysKokuhorenTorikomi
+     */
     public static IConfigKeysKokuhorenTorikomi getEnum() {
         return 国保連取込_給付実績更新結果情報;
     }

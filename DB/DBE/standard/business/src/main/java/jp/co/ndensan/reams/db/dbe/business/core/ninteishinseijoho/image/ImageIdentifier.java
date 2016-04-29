@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * イメージ情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

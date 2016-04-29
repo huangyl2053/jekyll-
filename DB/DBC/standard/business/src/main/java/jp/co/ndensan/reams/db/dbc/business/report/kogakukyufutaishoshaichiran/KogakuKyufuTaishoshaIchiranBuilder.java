@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 高額介護サービス費給付対象者一覧表帳票Builder
+ *
+ * @reamsid_L DBC-0980-490 surun
  */
 public class KogakuKyufuTaishoshaIchiranBuilder implements IKogakuKyufuTaishoshaIchiranBuilder {
 

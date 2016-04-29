@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払支給決定情報の更新
+ *
+ * @reamsid_L DBC-0980-350 gongliang
  */
 public class ShokanBaraiShikyuKetteiJoho {
 

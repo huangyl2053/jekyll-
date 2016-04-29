@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * KeidoshaFukushiYoguTaiyoKakuninShinseishoProertyのプロパティです。
  *
+ * @reamsid_L DBA-0540-704  lijia
+ * 
  */
 public class KeidoshaFukushiYoguTaiyoKakuninShinseishoProerty extends ReportPropertyBase<KeidoshaFukushiYoguTaiyoKakuninShinseishoReportSource> {
 

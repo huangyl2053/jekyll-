@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 処理日付管理マスタのエンティティです。
+ *
+ * @reamsid_L DBU-1130-050 wangjie2
  */
 @lombok.Getter
 @lombok.Setter

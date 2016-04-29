@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- *
  * 受給資格証明書のReportSource
+ *
+ * @reamsid_L DBU-0490-090 suguangjun
  */
 public class JukyuShikakuShomeishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -65,37 +66,43 @@ public class JukyuShikakuShomeishoReportSource implements IReportSource {
     public RString hokenshaNo5;
     @ReportItem(name = "hokenshaNo6", length = 1, order = 27)
     public RString hokenshaNo6;
-    @ReportItem(name = "kofuYmd", length = 11, order = 28)
-    public RString kofuYmd;
-    @ReportItem(name = "ninteizumi", length = 3, order = 29)
+    @ReportItem(name = "ninteizumi", length = 3, order = 28)
     public RString ninteizumi;
-    @ReportItem(name = "shinseichu", length = 3, order = 30)
+    @ReportItem(name = "shinseichu", length = 3, order = 29)
     public RString shinseichu;
-    @ReportItem(name = "shinseiYMD", length = 11, order = 31)
+    @ReportItem(name = "shinseiYMD", length = 11, order = 30)
     public RString shinseiYMD;
-    @ReportItem(name = "ninteiYMD", length = 11, order = 32)
+    @ReportItem(name = "ninteiYMD", length = 11, order = 31)
     public RString ninteiYMD;
-    @ReportItem(name = "yokaigoKubun", length = 7, order = 33)
+    @ReportItem(name = "yokaigoKubun", length = 7, order = 32)
     public RString yokaigoKubun;
-    @ReportItem(name = "yukoKaishiYMD", length = 11, order = 34)
+    @ReportItem(name = "yukoKaishiYMD", length = 11, order = 33)
     public RString yukoKaishiYMD;
-    @ReportItem(name = "yukoShuryoYMD", length = 11, order = 35)
+    @ReportItem(name = "yukoShuryoYMD", length = 11, order = 34)
     public RString yukoShuryoYMD;
-    @ReportItem(name = "shinsakaiIken", order = 36)
+    @ReportItem(name = "shinsakaiIken", order = 35)
     public RString shinsakaiIken;
-    @ReportItem(name = "biko", order = 37)
+    @ReportItem(name = "biko", order = 36)
     public RString biko;
-    @ReportItem(name = "remban", length = 4, order = 38)
+    @ReportItem(name = "remban", length = 4, order = 37)
     public RString remban;
-    @ReportItem(name = "denshiKoin", order = 39)
+    @ReportItem(name = "denshiKoin", order = 38)
     public RString denshiKoin;
-    @ReportItem(name = "shomeiHakkoYMD", length = 22, order = 40)
-    public RString shomeiHakkoYMD;
-    @ReportItem(name = "shichosonMei", length = 40, order = 41)
-    public RString shichosonMei;
-    @ReportItem(name = "shuchoMei", length = 14, order = 42)
-    public RString shuchoMei;
-    @ReportItem(name = "koinShoryaku", length = 15, order = 43)
+    @ReportItem(name = "hakkoYMD", length = 12, order = 39)
+    public RString hakkoYMD;
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 40)
+    public RString ninshoshaYakushokuMei;
+    @ReportItem(name = "ninshoshaYakushokuMei2", order = 41)
+    public RString ninshoshaYakushokuMei2;
+    @ReportItem(name = "ninshoshaYakushokuMei1", order = 42)
+    public RString ninshoshaYakushokuMei1;
+    @ReportItem(name = "koinMojiretsu", length = 4, order = 43)
+    public RString koinMojiretsu;
+    @ReportItem(name = "ninshoshaShimeiKakenai", order = 44)
+    public RString ninshoshaShimeiKakenai;
+    @ReportItem(name = "ninshoshaShimeiKakeru", order = 45)
+    public RString ninshoshaShimeiKakeru;
+    @ReportItem(name = "koinShoryaku", length = 15, order = 46)
     public RString koinShoryaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

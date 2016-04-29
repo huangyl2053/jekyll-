@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 出力帳票一覧のクラスです。
+ *
+ * @reamsid_L DBB-0780-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

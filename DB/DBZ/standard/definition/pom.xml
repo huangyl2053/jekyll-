@@ -39,5 +39,11 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxBusiness</artifactId>
+            <version>1.8.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

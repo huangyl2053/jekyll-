@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 特徴依頼情報作成を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum TokuchoIraiJohoSakusei {
 

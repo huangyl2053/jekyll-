@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会開催予定情報のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 chengsanyuan
  */
 public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501ShinsakaiKaisaiYoteiJohoEntity> {
 

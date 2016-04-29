@@ -23,6 +23,10 @@ public final class HokenryoDankaiUtil {
     private static final RString 改正前表記 = new RString("(改正前%1$d)");
     private static final RString 対象外表記 = new RString("-");
 
+    private HokenryoDankaiUtil() {
+
+    }
+
     /**
      * 表示用の保険料段階を編集して返します。
      *

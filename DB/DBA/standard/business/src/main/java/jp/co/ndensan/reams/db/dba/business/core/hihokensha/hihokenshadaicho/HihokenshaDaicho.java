@@ -37,8 +37,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 被保険者台帳管理を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
-public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho> implements Serializable {
+public class HihokenshaDaicho
+        extends ParentModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho>
+        implements Serializable {
 
     private final DbT1001HihokenshaDaichoEntity entity;
     private final HihokenshaDaichoIdentifier id;
@@ -384,7 +388,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -409,8 +413,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
     }
 
     /**
-     * 被保険者台帳管理配下の要素を削除対象とします。<br/>
-     * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 被保険者台帳管理配下の要素を削除対象とします。<br/> {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 被保険者台帳管理配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link HihokenshaDaicho}を返します。
      *
      * @return 削除対象処理実施後の{@link HihokenshaDaicho}
@@ -437,8 +440,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
     }
 
     /**
-     * 被保険者台帳管理のみを変更対象とします。<br/>
-     * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 被保険者台帳管理のみを変更対象とします。<br/> {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link HihokenshaDaicho}
      */

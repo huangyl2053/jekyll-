@@ -10,9 +10,12 @@ import java.util.List;
 
 /**
  * 年度データリストEntityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NendoDataListEntity {
 
     private List<DataListEntity> 当年度データリストEntity;

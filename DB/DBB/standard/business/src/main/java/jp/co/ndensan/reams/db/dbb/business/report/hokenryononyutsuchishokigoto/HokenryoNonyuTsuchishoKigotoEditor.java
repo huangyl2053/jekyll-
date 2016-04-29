@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSante
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NinshoshaSource;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
@@ -26,8 +27,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
  * 保険料納入通知書（本算定）【期毎タイプ】HokenryoNonyuTsuchishoKigotoEditor
+ *
+ * @reamsid_L DBB-9110-080 liangbc
  */
 public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchishoKigotoEditor {
 
@@ -37,7 +39,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     private final NonyuTsuchiShoKiJoho 納入通知書期情報;
     private final NofuShoKyotsu 納付書共通;
     private final int 連番;
-    //private final NinshoshaSource ninshoshaSource;
+    private final NinshoshaSource ninshoshaSource;
     private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
@@ -57,13 +59,10 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
      * @param item {@link HokenryoNonyuTsuchishoKigotoItem}
      * @param 納入通知書期情報 納入通知書期情報
      * @param 連番 連番
-     * @param sofubutsuAtesakiSource sofubutsuAtesakiSource
      */
     protected HokenryoNonyuTsuchishoKigotoEditor(HokenryoNonyuTsuchishoKigotoItem item,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
-            int 連番,
-            //NinshoshaSource ninshoshaSource,
-            SofubutsuAtesakiSource sofubutsuAtesakiSource) {
+            int 連番) {
         this.本算定納入通知書情報 = null == item.get本算定納入通知書情報() ? new HonSanteiNonyuTsuchiShoJoho() : item.get本算定納入通知書情報();
         this.編集後本算定通知書共通情報 = null == 本算定納入通知書情報.get編集後本算定通知書共通情報()
                 ? new EditedHonSanteiTsuchiShoKyotsu() : 本算定納入通知書情報.get編集後本算定通知書共通情報();
@@ -72,14 +71,14 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         this.納入通知書期情報 = 納入通知書期情報;
         this.納付書共通 = null == 本算定納入通知書情報.get納付書共通() ? new NofuShoKyotsu() : 本算定納入通知書情報.get納付書共通();
         this.連番 = 連番;
-        //this.ninshoshaSource = ninshoshaSource;
-        this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;
+        this.ninshoshaSource = 本算定納入通知書情報.getNinshoshaSource();
+        this.sofubutsuAtesakiSource = 本算定納入通知書情報.getSofubutsuAtesakiSource();
     }
 
     @Override
     public HokenryoNonyuTsuchishoKigotoSource edit(HokenryoNonyuTsuchishoKigotoSource source) {
         editレイヤ１(source);
-        //editCompNinshosha(source);
+        editCompNinshosha(source);
         editCompNofushoItem(source);
         editCompRyoshushoItem(source);
         editCompSofubutsuAtesaki(source);
@@ -132,10 +131,10 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.ryoshushoKatagaki = 納付書共通.get方書();
         source.ryoshushoSofusakiName = 納付書共通.get納付者氏名();
         RString 被代納人氏名 = 納付書共通.get被代納人氏名();
+        source.ryoshushoHonninName = 被代納人氏名;
+        source.ryoshushoKakko2 = RString.EMPTY;
         if (!被代納人氏名.isNullOrEmpty()) {
             source.ryoshushoKakko1 = new RString("(");
-            source.ryoshushoHonninName = 被代納人氏名;
-            source.ryoshushoKakko2 = RString.EMPTY;
             source.ryoshushoKakko3 = 納付書共通.get被代納人敬称().concat(")");
         }
         source.ryoshushoTsuchishoNo = 納付書共通.get通知書番号().getColumnValue();
@@ -158,8 +157,8 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     }
 
     private void editCompNofushoItem(HokenryoNonyuTsuchishoKigotoSource source) {
-        Map<Integer, RString> ocr = 納入通知書期情報.getOCR();
-        if (ocr.isEmpty()) {
+        Map<Integer, RString> ocr = 納入通知書期情報.getOcr();
+        if (ocr == null || ocr.isEmpty()) {
             ocr = new HashMap<>();
         }
         source.nofushoKanendo = RString.EMPTY;
@@ -174,10 +173,10 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nofushoNofugaku = 納入通知書期情報.get納付書納付額欄();
         source.nofushoSofusakiName = 納付書共通.get納付者氏名();
         RString 被代納人氏名 = 納付書共通.get被代納人氏名();
+        source.nofushoHonninName1 = 被代納人氏名;
+        source.nofushoKakko2 = RString.EMPTY;
         if (!被代納人氏名.isNullOrEmpty()) {
             source.nofushoKakko1 = new RString("(");
-            source.nofushoHonninName1 = 被代納人氏名;
-            source.nofushoKakko2 = RString.EMPTY;
             source.nofushoKakko3 = 納付書共通.get被代納人敬称().concat(")");
         }
         source.nofushoTsuchishoNo = 納付書共通.get通知書番号().getColumnValue();
@@ -196,17 +195,18 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nofushoShichosonMei = 納付書共通.get納付書市町村名();
     }
 
-//    private void editCompNinshosha(HokenryoNonyuTsuchishoKigotoSource source) {
-//        source.denshiKoin = ninshoshaSource.denshiKoin;
-//        source.hakkoYMD = ninshoshaSource.hakkoYMD;
-//        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-//        source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
-//        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-//        source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
-//        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-//        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-//        source.koinShoryaku = ninshoshaSource.koinShoryaku;
-//    }
+    private void editCompNinshosha(HokenryoNonyuTsuchishoKigotoSource source) {
+        source.denshiKoin = ninshoshaSource.get電子公印();
+        source.hakkoYMD = ninshoshaSource.get発効年月日();
+        source.ninshoshaYakushokuMei = ninshoshaSource.get承認者役職名();
+        source.ninshoshaYakushokuMei1 = ninshoshaSource.get承認者役職名1();
+        source.koinMojiretsu = ninshoshaSource.get公印文字列();
+        source.ninshoshaYakushokuMei2 = ninshoshaSource.get承認者役職名2();
+        source.ninshoshaShimeiKakenai = ninshoshaSource.get承認者氏名掛けない();
+        source.ninshoshaShimeiKakeru = ninshoshaSource.get承認者氏名掛ける();
+        source.koinShoryaku = ninshoshaSource.get公印書略();
+    }
+
     private void editレイヤ１(HokenryoNonyuTsuchishoKigotoSource source) {
         boolean is納期限出力方法が0 = is納期限出力方法が0();
         List<AfterEditInformation> 普徴納期情報リスト = null == 編集後本算定通知書共通情報.get普徴納期情報リスト()
@@ -234,7 +234,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         AfterEditInformation 普徴納期情報リスト9期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_9);
         AfterEditInformation 普徴納期情報リスト10期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_10);
 
-        source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし()).padLeft(RString.HALF_SPACE, 2);
+        source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
         source.nokiKaishi1 = get納期開始日(普徴納期情報リスト1期);
         source.nokiShuryo1 = get納期終了日(普徴納期情報リスト1期);
         source.nokiKaishi2 = get納期開始日(普徴納期情報リスト2期);
@@ -299,20 +299,20 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
             source.ki10 = 普徴納期情報リストの十番目.get期().padLeft(RString.HALF_SPACE, 2);
             source.tsuki10 = 普徴納期情報リストの十番目.get月().padLeft(RString.HALF_SPACE, 2);
         }
-        source.HyojicodeName1 = RString.EMPTY;
-        source.HyojicodeName2 = RString.EMPTY;
-        source.HyojicodeName3 = RString.EMPTY;
+        source.hyojicodeName1 = RString.EMPTY;
+        source.hyojicodeName2 = RString.EMPTY;
+        source.hyojicodeName3 = RString.EMPTY;
         HyojiCodes 表示コード = null == 編集後本算定通知書共通情報.get表示コード() ? new HyojiCodes() : 編集後本算定通知書共通情報.get表示コード();
         source.hyojiKomoku1 = 表示コード.get表示コード名１();
         source.hyojiKomoku2 = 表示コード.get表示コード名２();
         source.hyojiKomoku3 = 表示コード.get表示コード名３();
-        source.Hyojicode1 = 表示コード.get表示コード１();
-        source.Hyojicode2 = 表示コード.get表示コード２();
-        source.Hyojicode3 = 表示コード.get表示コード３();
+        source.hyojicode1 = 表示コード.get表示コード１();
+        source.hyojicode2 = 表示コード.get表示コード２();
+        source.hyojicode3 = 表示コード.get表示コード３();
         source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().getColumnValue();
-        source.setaiCode = null; //編集後個人
-        source.hihokenshaName = null; //編集後個人
-        source.setaiNushiName = null; //編集後個人
+        source.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().getColumnValue();
+        source.hihokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().getColumnValue();
+        source.setaiNushiName = 編集後本算定通知書共通情報.get編集後個人().get世帯主名().getColumnValue();
         source.nendo = 編集後本算定通知書共通情報.get賦課年度_年度なし();
         source.nendo1 = 編集後本算定通知書共通情報.get賦課年度_年度あり();
         source.hokenryoGaku = new RString(更正後.get確定保険料_年額().toString());
@@ -333,11 +333,11 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.santeiKisoTokiHokenryoGaku = new RString(get普徴期別金額By期(普徴期別金額リスト, 期).toString());
         source.santeiKisoJikiTitle = new RString("次期以降");
         source.santeiKisoJikoHokenryoGaku = new RString(get普徴期別金額By期(普徴期別金額リスト, 期 + 1).toString());
-        source.bankName = null; //編集後口座
-        source.kozaMeigi = null; //編集後口座
-        source.bankCode = null; //編集後口座
-        source.kozaShurui = null; //編集後口座
-        source.kozaNo = null; //編集後口座
+        source.bankName = 編集後本算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名();
+        source.kozaMeigi = 編集後本算定通知書共通情報.get編集後口座().get口座名義人優先();
+        source.bankCode = 編集後本算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード();
+        source.kozaShurui = 編集後本算定通知書共通情報.get編集後口座().get口座種別略称();
+        source.kozaNo = 編集後本算定通知書共通情報.get編集後口座().get口座番号Or通帳記号番号();
         source.renban = new RString(String.valueOf(連番)).padLeft("0", INDEX_6);
         source.hokenshaName = 編集後本算定通知書共通情報.get保険者名();
     }

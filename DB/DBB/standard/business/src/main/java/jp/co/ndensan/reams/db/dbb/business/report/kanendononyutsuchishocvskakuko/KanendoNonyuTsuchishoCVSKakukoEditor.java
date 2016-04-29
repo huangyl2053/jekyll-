@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.report.kanendononyutsuchishocvskakuk
 /**
  * 保険料納入通知書（本算定過年度）【コンビニ角公タイプ】のEditorです。
  *
+ * @reamsid_L DBB-9110-180 huangh
  */
 public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchishoCVSKakukoEditor {
 

@@ -25,12 +25,12 @@ public class JutakuKaishuKeiyakuKubunTest extends DbcTestBase {
 
     @Test
     public void 契約有りを指定した場合_getコードは_trueを返す() {
-        assertThat(JutakuKaishuKeiyakuKubun.契約有り.getコード(), is(true));
+        assertThat(JutakuKaishuKeiyakuKubun.契約有り.is契約有り(), is(true));
     }
 
     @Test
     public void 契約無しを指定した場合_getコードは_falseを返す() {
-        assertThat(JutakuKaishuKeiyakuKubun.契約無し.getコード(), is(false));
+        assertThat(JutakuKaishuKeiyakuKubun.契約無し.is契約有り(), is(false));
     }
 
     @Test

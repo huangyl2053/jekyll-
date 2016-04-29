@@ -8,13 +8,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * ShujiiIkenshoTokusokujo のクラスファイル
  *
- * @author 自動生成
  */
 public class ShujiiIkenshoTokusokujoDiv extends Panel {
 

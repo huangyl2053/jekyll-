@@ -3,21 +3,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 29 19:02:27 CST 2016 
+ * Mon Feb 29 19:02:27 CST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
- * dgShinsakaiKaisaiGogitaiJoho_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgShinsakaiKaisaiGogitaiJoho_Row のクラスファイル。
+ *
  */
-
 public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 

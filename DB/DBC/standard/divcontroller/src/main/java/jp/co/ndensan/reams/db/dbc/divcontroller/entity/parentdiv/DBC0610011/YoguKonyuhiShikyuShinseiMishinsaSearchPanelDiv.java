@@ -4,16 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * YoguKonyuhiShikyuShinseiMishinsaSearchPanel のクラスファイル 
- * 
- * @author 自動生成
+ * YoguKonyuhiShikyuShinseiMishinsaSearchPanel のクラスファイル
+ *
+ * @reamsid_L DBC-1020-040 gongliang
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,6 +28,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv extends Panel {
     private YoguKonyuhiShikyuShinseiMishinsaSearchConditionDiv YoguKonyuhiShikyuShinseiMishinsaSearchCondition;
     @JsonProperty("YoguKonyuhiShikyuShinseiMishinsaResultList")
     private YoguKonyuhiShikyuShinseiMishinsaResultListDiv YoguKonyuhiShikyuShinseiMishinsaResultList;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -65,6 +71,15 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv extends Panel {
     @JsonProperty("YoguKonyuhiShikyuShinseiMishinsaResultList")
     public void setYoguKonyuhiShikyuShinseiMishinsaResultList(YoguKonyuhiShikyuShinseiMishinsaResultListDiv YoguKonyuhiShikyuShinseiMishinsaResultList) {
         this.YoguKonyuhiShikyuShinseiMishinsaResultList = YoguKonyuhiShikyuShinseiMishinsaResultList;
+    }
+
+    /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
     }
 
     // </editor-fold>

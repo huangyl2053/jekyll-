@@ -49,6 +49,12 @@ public final class KokuhorenTorikomiConfigKeysFactory {
 
     }
 
+    /**
+     * 給付実績情報のコンフィグ名を返します。
+     *
+     * @param 交換情報識別番号 交換情報識別番号
+     * @return 給付実績情報のコンフィグ名
+     */
     public static IConfigKeysKokuhorenTorikomi getEnumValues(RString 交換情報識別番号) {
 
         switch (交換情報識別番号.toString()) {
@@ -87,6 +93,13 @@ public final class KokuhorenTorikomiConfigKeysFactory {
                 return ConfigKeysKogakuSikyuKetteishaIchiran.getEnum();
             case "37H": //高額合算自己負担額証明書情報
                 return ConfigKeysKogakugassanJikofutangakuShomeisho.getEnum();
+            default:
+                return getEnumValuesPrivate(交換情報識別番号);
+        }
+    }
+
+    private static IConfigKeysKokuhorenTorikomi getEnumValuesPrivate(RString 交換情報識別番号) {
+        switch (交換情報識別番号.toString()) {
             case "37J": //高額合算自己負担額確認情報
                 return ConfigKeysKogakugassanJikofutangakuKakunin.getEnum();
             case "386": //高額合算支給額計算結果連絡票情報
@@ -115,10 +128,8 @@ public final class KokuhorenTorikomiConfigKeysFactory {
                 return ConfigKeysSaishinsaKetteiTuchi_Kohi.getEnum();
             case "741": //請求明細給付管理票返戻保留一覧表情報
                 return ConfigKeysHenreiIchiranhyo.getEnum();
-
             default:
+                return null;
         }
-
-        return null;
     }
 }

@@ -12,6 +12,8 @@ import lombok.Setter;
 
 /**
  * 管理情報のクラス。
+ *
+ * @reamsid_L DBU-0050-010 liangbc
  */
 @Getter
 @Setter

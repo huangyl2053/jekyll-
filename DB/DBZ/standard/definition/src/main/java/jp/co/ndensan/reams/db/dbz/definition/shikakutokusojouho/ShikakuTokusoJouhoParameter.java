@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * ShikakuRirekiInfo_資格履歴情報のParameterクラスです。
+ *
+ * @reamsid_L DBZ-4560-020 wanghui
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

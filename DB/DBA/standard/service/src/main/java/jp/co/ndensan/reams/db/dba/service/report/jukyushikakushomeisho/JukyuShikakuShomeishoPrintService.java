@@ -12,6 +12,10 @@ import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShi
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShikakuShomeishoReportSource;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -24,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 受給資格証明書Printerです。
+ *
+ * @reamsid_L DBU-0490-090 suguangjun
  */
 public class JukyuShikakuShomeishoPrintService {
 
@@ -37,6 +43,11 @@ public class JukyuShikakuShomeishoPrintService {
         JukyuShikakuShomeishoProerty property = new JukyuShikakuShomeishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JukyuShikakuShomeishoReportSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<JukyuShikakuShomeishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                        property.reportId(),
+                        FlexibleDate.getNowDate(),
+                        reportSourceWriter);
                 for (JukyuShikakuShomeishoBodyItem bodyItem : bodyItemList) {
                     bodyItem = new JukyuShikakuShomeishoBodyItem(
                             bodyItem.getHihokenshaNo(),
@@ -51,11 +62,11 @@ public class JukyuShikakuShomeishoPrintService {
                             bodyItem.getTenshutsusakiYoteiJusho(),
                             bodyItem.getIdoYoteiYMD(),
                             bodyItem.getHokenshaNo(),
-                            bodyItem.getShomeiHakkoYMD(),
-                            bodyItem.getShuchoMei(),
+                            ninshoshaSource.hakkoYMD,
+                            ninshoshaSource.ninshoshaYakushokuMei,
                             bodyItem.getRecognizedName(),
-                            bodyItem.getDenshiKoin(),
-                            bodyItem.getKoinShoryaku(),
+                            ninshoshaSource.denshiKoin,
+                            ninshoshaSource.koinShoryaku,
                             bodyItem.getShichosonMei(),
                             bodyItem.getShinseichu(),
                             bodyItem.getShinseiYMD(),
@@ -65,10 +76,15 @@ public class JukyuShikakuShomeishoPrintService {
                             bodyItem.getYukoShuryoYMD(),
                             bodyItem.getShinsakaiIken(),
                             bodyItem.getBiko(),
-                            bodyItem.getRemban());
+                            bodyItem.getRemban(),
+                            ninshoshaSource.koinMojiretsu,
+                            ninshoshaSource.ninshoshaShimeiKakenai,
+                            ninshoshaSource.ninshoshaShimeiKakeru,
+                            ninshoshaSource.ninshoshaYakushokuMei1,
+                            ninshoshaSource.ninshoshaYakushokuMei2);
                     for (JukyuShikakuShomeishoReport report : toReports(new JukyuShikakuShomeishoJoho(bodyItem))) {
-                        ReportSourceWriter<JukyuShikakuShomeishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                        report.writeBy(reportSourceWriter);
+                        ReportSourceWriter<JukyuShikakuShomeishoReportSource> reportSourceWrite = new ReportSourceWriter(assembler);
+                        report.writeBy(reportSourceWrite);
                     }
                 }
             }

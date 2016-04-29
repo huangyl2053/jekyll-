@@ -7,16 +7,18 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShokanTokuteiNyushoshaKaigoServiceHiyo}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
 
@@ -156,7 +158,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set費用単価(int 費用単価) {
-        requireNonNull(費用単価, UrSystemErrorMessages.値がnull.getReplacedMessage("費用単価"));
         entity.setHiyoTanka(費用単価);
         return this;
     }
@@ -168,7 +169,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set負担限度額(int 負担限度額) {
-        requireNonNull(負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額"));
         entity.setFutanGendogaku(負担限度額);
         return this;
     }
@@ -180,7 +180,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set日数(int 日数) {
-        requireNonNull(日数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数"));
         entity.setNissu(日数);
         return this;
     }
@@ -192,7 +191,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set費用額(int 費用額) {
-        requireNonNull(費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("費用額"));
         entity.setHiyogaku(費用額);
         return this;
     }
@@ -204,7 +202,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set保険分請求額(int 保険分請求額) {
-        requireNonNull(保険分請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険分請求額"));
         entity.setHokenbunSeikyugaku(保険分請求額);
         return this;
     }
@@ -216,7 +213,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set利用者負担額(int 利用者負担額) {
-        requireNonNull(利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額"));
         entity.setRiyoshaFutangaku(利用者負担額);
         return this;
     }
@@ -228,7 +224,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set費用額合計(int 費用額合計) {
-        requireNonNull(費用額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("費用額合計"));
         entity.setHiyogakuTotal(費用額合計);
         return this;
     }
@@ -240,7 +235,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set保険分請求額合計(int 保険分請求額合計) {
-        requireNonNull(保険分請求額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("保険分請求額合計"));
         entity.setHokenbunSeikyugakuTotal(保険分請求額合計);
         return this;
     }
@@ -252,7 +246,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set利用者負担額合計(int 利用者負担額合計) {
-        requireNonNull(利用者負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額合計"));
         entity.setRiyoshaFutangakuTotal(利用者負担額合計);
         return this;
     }

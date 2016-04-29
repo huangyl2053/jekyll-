@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 領収書日付欄期表示を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum RyoshushoHizukeranKiHyoji {
 

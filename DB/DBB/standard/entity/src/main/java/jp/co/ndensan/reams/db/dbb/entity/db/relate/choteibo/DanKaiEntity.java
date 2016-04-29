@@ -14,62 +14,27 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 段階情報一時Entityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DanKaiEntity implements IDbAccessable {
 
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 通知書番号
-     */
     private TsuchishoNo tsuchishoNo;
-    /**
-     * 履歴番号
-     */
     private Decimal rirekiNo;
-    /**
-     * 被保険者番号
-     */
     private HihokenshaNo hihokenshaNo;
-    /**
-     * 段階
-     */
     private RString dankai;
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 調定ID
-     */
     private Decimal choteiId;
-    /**
-     * 当月フラグ
-     */
     private int dogetsuFlag;
-    /**
-     * 該当する段階の前月末の調定額
-     */
+    private RString karisanFlag;
     private Decimal zengetsusueChoteigaku;
-    /**
-     * 該当する段階の増の調定額
-     */
     private Decimal fueChoteigaku;
-    /**
-     * 該当する段階の減の調定額
-     */
     private Decimal genChoteigaku;
-    /**
-     * 該当する段階の当月末の調定額
-     */
     private Decimal dogetsusueChoteigaku;
 
 }

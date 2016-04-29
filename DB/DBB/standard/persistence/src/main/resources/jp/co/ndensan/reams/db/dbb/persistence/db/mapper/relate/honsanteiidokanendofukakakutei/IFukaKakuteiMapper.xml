@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-0680-020 wangkanglei -->
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -62,66 +63,17 @@ and open the template in the editor.
         AND Kibetsu."choshuHouhou"=#{choshuHouhou}
          
     </select>
-   
-    <select id="select調定状況" resultType="jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0707ChoteiJokyoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">
-        select * 
-        from rgdb."UrT0707ChoteiJokyo" as ChoteiJokyo 
-        INNER JOIN rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu 
-        ON ChoteiJokyo."shoriNendo"=ChoteiKyotsu."shoriNendo"   
-        AND ChoteiJokyo."shoriNo"=ChoteiKyotsu."shoriNo"
-        INNER JOIN  rgdb."DbT2003Kibetsu" as Kibetsu 
-        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
-        where Kibetsu."choteiNendo"=#{choteiNendo}
-        AND Kibetsu."fukaNendo"=#{fukaNendo}
-        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
-        AND Kibetsu."rirekiNo"=#{rirekiNo}        
-    </select>
+
     <select id="delete調定状況" parameterType="java.util.Map" fetchSize="500">
          delete 
         from rgdb."UrT0707ChoteiJokyo"
         where "choteiJokyoId"=#{choteiJokyoId}
     </select>
-    
-    <select id="select調定額内訳" resultType="jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0706ChoteigakuUchiwakeEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
-        select *
-        from rgdb."UrT0706ChoteigakuUchiwake" as ChoteigakuUchiwake 
-        INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu 
-        ON ChoteigakuUchiwake."choteiId"=Kibetsu."choteiId"
-        INNER JOIN rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu
-        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
-        where Kibetsu."choteiNendo"=#{choteiNendo}
-        AND Kibetsu."fukaNendo"=#{fukaNendo}
-        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
-        AND Kibetsu."rirekiNo"=#{rirekiNo}
-    </select>
+
     <select id="delete調定額内訳" parameterType="java.util.Map" fetchSize="500">
         delete 
         from rgdb."UrT0706ChoteigakuUchiwake" as ChoteigakuUchiwake 
         where "choteiId"=#{choteiId}
-    </select>
-    
-    <select id="select調定共通" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
-        select *
-        from rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu
-        INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu
-        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
-        where Kibetsu."choteiNendo"=#{choteiNendo}
-        AND Kibetsu."fukaNendo"=#{fukaNendo}
-        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
-        AND Kibetsu."rirekiNo"=#{rirekiNo}
-    </select>
-    
-    <select id="select収納管理マスタ" resultType="jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
-        select *
-        from rgdb."UrT0700ShunoKanri" as ShunoKanri
-        INNER JOIN rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu
-        ON ShunoKanri."shunoId"=ChoteiKyotsu."shunoId"
-        INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu
-        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
-        where Kibetsu."choteiNendo"=#{choteiNendo}
-        AND Kibetsu."fukaNendo"=#{fukaNendo}
-        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
-        AND Kibetsu."rirekiNo"=#{rirekiNo}
     </select>
     
     <select id="delete収納管理マスタ" parameterType="java.util.Map" fetchSize="500">

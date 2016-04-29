@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  *
  * {@link 介護保険指定医依頼兼主治医意見書提出依頼書のReport}のプロパティです。
+ *
+ * @reamsid_L DBE-0080-080 duanzhanli
  */
 public class ShujiiIkenshoTeishutsuIraishoProperty extends ReportPropertyBase<ShujiiIkenshoTeishutsuIraishoReportSource> {
 

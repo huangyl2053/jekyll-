@@ -14,6 +14,8 @@ import lombok.Getter;
 /**
  * 弁明登録明細情報パラメータを作成します。
  *
+ * @reamsid_L DBU-1080-020  lijia
+ * 
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.ninteishinsaka
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,8 +18,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護認定審査会委員所属機関情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class KaigoNinteiShinsakaiIinShozokuKikanJoho extends ModelBase<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier, DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity, KaigoNinteiShinsakaiIinShozokuKikanJoho> implements Serializable {
+public class KaigoNinteiShinsakaiIinShozokuKikanJoho
+        extends ModelBase<KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier,
+        DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity,
+        KaigoNinteiShinsakaiIinShozokuKikanJoho>
+        implements Serializable {
 
     private final DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity;
     private final KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier id;
@@ -209,9 +215,7 @@ public class KaigoNinteiShinsakaiIinShozokuKikanJoho extends ModelBase<KaigoNint
     /**
      * 保持する{@link DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}の{@link EntityDataState#Unchanged}以外であればtrueを返す。
      *
-     * @return
-     * 保持する{@link DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}の{@link EntityDataState#Unchanged}以外:true
-     * それ以外:false
+     * @return 保持する{@link DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}の{@link EntityDataState#Unchanged}以外:true それ以外:false
      */
     @Override
     public boolean hasChanged() {
@@ -225,7 +229,8 @@ public class KaigoNinteiShinsakaiIinShozokuKikanJoho extends ModelBase<KaigoNint
         private final DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity;
         private final KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier id;
 
-        private _SerializationProxy(DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity, KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier id) {
+        private _SerializationProxy(DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity,
+                KaigoNinteiShinsakaiIinShozokuKikanJohoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 仮算定額変更通知書発行一覧表の情報です。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 @Setter
 @Getter
@@ -140,7 +142,6 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranItem {
         this.listLower_4 = listLower_4;
         this.listLower_5 = listLower_5;
         this.listLower_6 = listLower_6;
-        
 
     }
 

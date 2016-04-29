@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dba.business.report.kyufuhikashitsukekinshokankige
 import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KyufuhiKashitsukeKinKetteiEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KyufuhiKashitsukekinShakuyoshoJuriEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.kyufuhikashitsukekinshokankigen.KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.kyufuhikashitsukekinkettei.IKyufuhiKashitsukeKinKetteiMapper;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.kyufuhikashitsukekinshakuyoshojuri.IKyufuhiKashitsukekinShakuyoshoJuriMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyufuhikashitsukekinkettei.IKyufuhiKashitsukeKinKetteiMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kyufuhikashitsukekinshakuyoshojuri.IKyufuhiKashitsukekinShakuyoshoJuriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -49,6 +49,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 護保険給付費貸付金償還期限延長申請書Printクラスです。
+ *
+ * @reamsid_L DBA-0540-440 lijia
  *
  */
 public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
@@ -134,13 +136,11 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo != null) {
-            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                RString 帳票文言 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-                RString 借受年月日 = get借受年月日(被保険者番号).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).toDateString();
-                return 帳票文言.replace(new RString("@@@@"), 借受年月日);
-            }
+        if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            RString 帳票文言 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            RString 借受年月日 = get借受年月日(被保険者番号).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).toDateString();
+            return 帳票文言.replace(new RString("@@@@"), 借受年月日);
         }
         return RString.EMPTY;
     }

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTei
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe090001.YouKaiGoNinTeiKekTesuChiProcessParemeter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  *
  * 調査員一覧情報の取得バッチクラスです。
+ * @reamsid_L DBE-0220-030 wangkun
  */
 public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNinTeiKekTesuChiRelateEntity> {
 
@@ -47,7 +48,7 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
      */
     public static final RString OUT_DATA_LIST;
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi"
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteikekktesuchi"
                     + ".IYouKaiGoNinTeiKekTesuChiMapper.getCyouHyouSyuTsuRyoKu");
     private static final int 通知文1 = 1;
     private static final int 通知文2 = 2;

@@ -22,10 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 利用者負担割合を管理するクラスです。
  */
-public class RiyoshaFutanWariai 
-extends ModelBase<RiyoshaFutanWariaiIdentifier, 
-        DbT3113RiyoshaFutanWariaiEntity, 
-        RiyoshaFutanWariai> implements Serializable {
+public class RiyoshaFutanWariai
+        extends ModelBase<RiyoshaFutanWariaiIdentifier, DbT3113RiyoshaFutanWariaiEntity, RiyoshaFutanWariai> implements Serializable {
 
     private final DbT3113RiyoshaFutanWariaiEntity entity;
     private final RiyoshaFutanWariaiIdentifier id;
@@ -204,8 +202,8 @@ extends ModelBase<RiyoshaFutanWariaiIdentifier,
     }
 
     /**
-     * 保持する利用者負担割合を削除対象とします。<br/>
-     * {@link DbT3113RiyoshaFutanWariaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する利用者負担割合を削除対象とします。
+     * <br/> {@link DbT3113RiyoshaFutanWariaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link RiyoshaFutanWariai}
      */
@@ -236,10 +234,20 @@ extends ModelBase<RiyoshaFutanWariaiIdentifier,
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * modifiedModel
+     *
+     * @return UnsupportedOperationException("Not supported yet.")
+     */
     public RiyoshaFutanWariai modifiedModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * getRiyoshaFutanWariaiMeisaiList
+     *
+     * @return UnsupportedOperationException("Not supported yet.")
+     */
     public List<RiyoshaFutanWariaiMeisai> getRiyoshaFutanWariaiMeisaiList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

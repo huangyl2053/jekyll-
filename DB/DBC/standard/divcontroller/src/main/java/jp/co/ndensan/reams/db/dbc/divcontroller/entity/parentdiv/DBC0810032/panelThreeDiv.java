@@ -4,17 +4,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810032;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * panelThree のクラスファイル 
- * 
- * @author 自動生成
+ * panelThree のクラスファイル
+ *
+ * @reamsid_L DBC-1010-040 quxiaodong
  */
 public class panelThreeDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -78,7 +84,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceShuruiCode(TextBoxCode txtServiceShuruiCode) {
+    public void setTxtServiceShuruiCode(TextBoxCode txtServiceShuruiCode) {
         this.getPanelFour().setTxtServiceShuruiCode(txtServiceShuruiCode);
     }
 
@@ -88,7 +94,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceKoumokuCode(TextBoxCode txtServiceKoumokuCode) {
+    public void setTxtServiceKoumokuCode(TextBoxCode txtServiceKoumokuCode) {
         this.getPanelFour().setTxtServiceKoumokuCode(txtServiceKoumokuCode);
     }
 
@@ -98,7 +104,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServicename(TextBox txtServicename) {
+    public void setTxtServicename(TextBox txtServicename) {
         this.getPanelFour().setTxtServicename(txtServicename);
     }
 
@@ -108,7 +114,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTanyi(TextBoxNum txtTanyi) {
+    public void setTxtTanyi(TextBoxNum txtTanyi) {
         this.getPanelFour().setTxtTanyi(txtTanyi);
     }
 
@@ -118,7 +124,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaisu(TextBoxNum txtKaisu) {
+    public void setTxtKaisu(TextBoxNum txtKaisu) {
         this.getPanelFour().setTxtKaisu(txtKaisu);
     }
 
@@ -128,7 +134,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtServiceTanyi(TextBoxNum txtServiceTanyi) {
+    public void setTxtServiceTanyi(TextBoxNum txtServiceTanyi) {
         this.getPanelFour().setTxtServiceTanyi(txtServiceTanyi);
     }
 
@@ -138,7 +144,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShisetsuHokenshaCode(TextBoxCode txtShisetsuHokenshaCode) {
+    public void setTxtShisetsuHokenshaCode(TextBoxCode txtShisetsuHokenshaCode) {
         this.getPanelFour().setTxtShisetsuHokenshaCode(txtShisetsuHokenshaCode);
     }
 
@@ -148,7 +154,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShisetsuHokenshaName(TextBox txtShisetsuHokenshaName) {
+    public void setTxtShisetsuHokenshaName(TextBox txtShisetsuHokenshaName) {
         this.getPanelFour().setTxtShisetsuHokenshaName(txtShisetsuHokenshaName);
     }
 
@@ -158,7 +164,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTeikiyo(TextBox txtTeikiyo) {
+    public void setTxtTeikiyo(TextBox txtTeikiyo) {
         this.getPanelFour().setTxtTeikiyo(txtTeikiyo);
     }
 
@@ -168,7 +174,7 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClose(Button btnClose) {
+    public void setBtnClose(Button btnClose) {
         this.getPanelFour().setBtnClose(btnClose);
     }
 

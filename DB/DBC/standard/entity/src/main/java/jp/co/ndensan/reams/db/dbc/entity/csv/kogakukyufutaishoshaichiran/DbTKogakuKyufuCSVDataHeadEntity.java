@@ -13,9 +13,12 @@ import lombok.Setter;
 
 /**
  * 高額介護サービス費給付対象者headCsvField
+ *
+ * @reamsid_L DBB-0890-040 zhangrui
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class DbTKogakuKyufuCSVDataHeadEntity {
 
     @CsvField(order = 10, name = "交換情報識別番号")
@@ -24,13 +27,11 @@ public class DbTKogakuKyufuCSVDataHeadEntity {
     private RString chouhyouCodeShubetsu;
     @CsvField(order = 30, name = "証記載保険者番号")
     private RString shoKisaiHokenshaNo;
-    @CsvField(order = 40, name = "保険者番号")
-    private RString hokenshaNo;
-    @CsvField(order = 50, name = "保険者名")
+    @CsvField(order = 40, name = "保険者名")
     private RString hihokenshaName;
-    @CsvField(order = 60, name = "作成年月日")
+    @CsvField(order = 50, name = "作成年月日")
     private RString sakuseiYMD;
-    @CsvField(order = 70, name = "国保連合会名")
+    @CsvField(order = 60, name = "国保連合会名")
     private RString kokukoRengoukaiNa;
 
     /**
@@ -48,7 +49,6 @@ public class DbTKogakuKyufuCSVDataHeadEntity {
         return builder.append(null == kokanShikibetsuNo ? RString.EMPTY : kokanShikibetsuNo)
                 .append(null == chouhyouCodeShubetsu ? RString.EMPTY : chouhyouCodeShubetsu)
                 .append(null == shoKisaiHokenshaNo ? RString.EMPTY : shoKisaiHokenshaNo)
-                .append(null == hokenshaNo ? RString.EMPTY : hokenshaNo)
                 .append(null == hihokenshaName ? RString.EMPTY : hihokenshaName)
                 .append(null == sakuseiYMD ? RString.EMPTY : sakuseiYMD)
                 .append(null == kokukoRengoukaiNa ? RString.EMPTY : kokukoRengoukaiNa)

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShikakuTokusoRirekiPanel のクラスファイル
  *
- * @author 自動生成
  */
 public class ShikakuTokusoRirekiPanelDiv extends Panel {
 

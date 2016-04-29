@@ -5,14 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity;
 
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 
 /**
  * 市町村情報 の項目定義クラスです。
+ *
+ * @reamsid_L DBU-0050-010 liangbc
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -65,8 +67,7 @@ public final class ShichosonSecurityJoho {
         }
 
         /**
-         * 導入形態コードを指定してBuilderを生成します。
-         * {@link #build()}二より生成されるinstanceは、ここで指定された導入形態コードを保持します。
+         * 導入形態コードを指定してBuilderを生成します。 {@link #build()}二より生成されるinstanceは、ここで指定された導入形態コードを保持します。
          *
          * @param 導入形態コード 導入形態コード
          */

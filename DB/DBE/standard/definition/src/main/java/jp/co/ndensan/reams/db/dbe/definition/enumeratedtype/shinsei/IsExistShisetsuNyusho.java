@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 施設入所の有無を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum IsExistShisetsuNyusho {
 
@@ -32,7 +32,7 @@ public enum IsExistShisetsuNyusho {
      *
      * @return 施設入所の有無のコード
      */
-    public boolean getコード() {
+    public boolean is施設入所() {
         return code;
     }
 

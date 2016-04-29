@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 審査会内容検索のインタフェイスです。
+ *
+ * @reamsid_L DBE-0130-050 xuyannan
  */
 public interface IShinsakaiIinWaritsukeMapper {
 

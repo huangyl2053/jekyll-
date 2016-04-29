@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 介護保険料納付額証明書交付申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-694 yaodongsheng
  */
 public class NofugakuShomeishoKofuShinseishoProerty extends ReportPropertyBase<NofugakuShomeishoKofuShinseishoReportSource> {
 

@@ -4,15 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KouzaInfo のクラスファイル 
- * 
- * @author 自動生成
+ * KouzaInfo のクラスファイル
+ *
+ * @reamsid_L DBC-1030-150 gongliang
  */
 public class KouzaInfoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]

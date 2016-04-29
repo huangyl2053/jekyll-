@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5050001.NinteishinsaKekkaOutputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5050001.dgTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5050001.NinteishinsaKekkaOutputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5050001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -30,7 +30,7 @@ public class NinteishinsaKekkaOutput {
 
     private static final RString CST_TSUJO = new RString("0");
     private static final RString CST_SAISHORI = new RString("1");
-    private static RString shoriFlag = RString.EMPTY;
+    private RString shoriFlag = RString.EMPTY;
 
     /**
      * 認定審査結果出力画面ロード時の処理を表します。

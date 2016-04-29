@@ -4,22 +4,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.List;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * ShisetsuNyutaishoRirekiKanri のクラスファイル 
- * 
- * @author 自動生成
+ * ShisetsuNyutaishoRirekiKanri のクラスファイル
+ *
+ * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -197,7 +202,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             表示widthサイズ[] enumArray = 表示widthサイズ.values();
 
             for (表示widthサイズ enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -212,11 +217,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 表示widthサイズ getMode_表示widthサイズ() {
-        return (表示widthサイズ) _CommonChildDivModeUtil.getMode( this.modes, 表示widthサイズ.class );
+        return (表示widthサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示widthサイズ.class);
     }
 
-    public void setMode_表示widthサイズ( 表示widthサイズ value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示widthサイズ.class , value );
+    public void setMode_表示widthサイズ(表示widthサイズ value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示widthサイズ.class, value);
     }
 
     public static enum 利用 implements ICommonChildDivMode {
@@ -237,7 +242,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             利用[] enumArray = 利用.values();
 
             for (利用 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -252,11 +257,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 利用 getMode_利用() {
-        return (利用) _CommonChildDivModeUtil.getMode( this.modes, 利用.class );
+        return (利用) _CommonChildDivModeUtil.getMode(this.modes, 利用.class);
     }
 
-    public void setMode_利用( 利用 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 利用.class , value );
+    public void setMode_利用(利用 value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 利用.class, value);
     }
 
     public static enum 表示heightサイズ implements ICommonChildDivMode {
@@ -279,7 +284,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             表示heightサイズ[] enumArray = 表示heightサイズ.values();
 
             for (表示heightサイズ enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -294,11 +299,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 表示heightサイズ getMode_表示heightサイズ() {
-        return (表示heightサイズ) _CommonChildDivModeUtil.getMode( this.modes, 表示heightサイズ.class );
+        return (表示heightサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示heightサイズ.class);
     }
 
-    public void setMode_表示heightサイズ( 表示heightサイズ value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示heightサイズ.class , value );
+    public void setMode_表示heightサイズ(表示heightサイズ value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示heightサイズ.class, value);
     }
 
     public static enum 表示モード implements ICommonChildDivMode {
@@ -318,7 +323,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             表示モード[] enumArray = 表示モード.values();
 
             for (表示モード enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -333,11 +338,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
+        return (表示モード) _CommonChildDivModeUtil.getMode(this.modes, 表示モード.class);
     }
 
-    public void setMode_表示モード( 表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
+    public void setMode_表示モード(表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示モード.class, value);
     }
 
     public static enum 明細表示モード implements ICommonChildDivMode {
@@ -357,7 +362,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             明細表示モード[] enumArray = 明細表示モード.values();
 
             for (明細表示モード enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -372,14 +377,75 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 明細表示モード getMode_明細表示モード() {
-        return (明細表示モード) _CommonChildDivModeUtil.getMode( this.modes, 明細表示モード.class );
+        return (明細表示モード) _CommonChildDivModeUtil.getMode(this.modes, 明細表示モード.class);
     }
 
-    public void setMode_明細表示モード( 明細表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 明細表示モード.class , value );
+    public void setMode_明細表示モード(明細表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 明細表示モード.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private ShisetsuNyutaishoRirekiKanriHandler getHandler() {
+        return new ShisetsuNyutaishoRirekiKanriHandler(this);
+    }
 
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     * @param 識別コード 識別コード
+     */
+    @Override
+    public void initialize(ShikibetsuCode 識別コード) {
+        getHandler().initialize(識別コード);
+    }
+
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
+     */
+    @Override
+    public void initialize(ShikibetsuCode 識別コード, RString 台帳種別) {
+        getHandler().initialize(識別コード, 台帳種別);
+    }
+
+    /**
+     * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
+     */
+    @Override
+    public void saveShisetsuNyutaisho() {
+        getHandler().saveShisetsuNyutaisho();
+    }
+
+    @Override
+    public void set表示モード(RString 表示) {
+        setMode_表示モード(表示モード.getEnum(表示.toString()));
+    }
+
+    @Override
+    public void set明細表示モード(RString 明細表示) {
+        setMode_明細表示モード(明細表示モード.getEnum(明細表示.toString()));
+    }
+
+    @Override
+    public void set利用モード(RString 利用モード) {
+        setMode_利用(利用.getEnum(利用モード.toString()));
+    }
+
+    @Override
+    public void set表示widthサイズ(RString widthサイズ) {
+        setMode_表示widthサイズ(表示widthサイズ.getEnum(widthサイズ.toString()));
+    }
+
+    @Override
+    public void set表示heightサイズ(RString heightサイズ) {
+        setMode_表示heightサイズ(表示heightサイズ.getEnum(heightサイズ.toString()));
+    }
+
+    @Override
+    public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧() {
+        return getHandler().get施設入退所履歴一覧();
+    }
 }

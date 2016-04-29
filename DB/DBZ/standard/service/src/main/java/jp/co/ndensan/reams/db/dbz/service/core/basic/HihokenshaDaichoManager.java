@@ -44,6 +44,15 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンス
+     */
+    public static HihokenshaDaichoManager createInstance() {
+        return InstanceProvider.create(HihokenshaDaichoManager.class);
+    }
+
+    /**
      * 主キーに合致する被保険者台帳管理を返します。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -185,6 +194,22 @@ public class HihokenshaDaichoManager {
     public HihokenshaDaicho find最新被保険者台帳(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbT1001HihokenshaDaichoEntity entity = dac.selectByShikibetsuCode(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 異動日に該当する最新の被保険者台帳を取得します。
+     *
+     * @param 異動日 異動日
+     * @return 該当する被保険者台帳情報の内、最新の1件
+     */
+    public HihokenshaDaicho find最新被保険者台帳(FlexibleDate 異動日) {
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbT1001HihokenshaDaichoEntity entity = dac.selectBy異動日(異動日);
         if (entity == null) {
             return null;
         }

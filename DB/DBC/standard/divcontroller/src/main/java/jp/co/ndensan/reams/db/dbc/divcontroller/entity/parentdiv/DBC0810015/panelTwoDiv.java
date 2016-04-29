@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810015;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * panelTwo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1010-110 xuhao
  */
 public class panelTwoDiv extends Panel {
 

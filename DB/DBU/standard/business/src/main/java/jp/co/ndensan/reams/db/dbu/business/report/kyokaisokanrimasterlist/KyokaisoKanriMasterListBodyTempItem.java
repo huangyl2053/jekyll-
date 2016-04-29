@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 境界層管理マスタリストのEntityクラス。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 @Getter
 @Setter

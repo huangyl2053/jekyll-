@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 激変緩和措置区分の列挙型です。
+ *
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum GekihenkanwaSochi implements IRStringConvertable {
 

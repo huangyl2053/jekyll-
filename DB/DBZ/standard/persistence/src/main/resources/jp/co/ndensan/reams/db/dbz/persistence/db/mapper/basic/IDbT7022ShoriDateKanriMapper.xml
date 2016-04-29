@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7022ShoriDateKanri">
         SELECT
@@ -80,5 +80,19 @@
         rgdb."DbT7022ShoriDateKanri"."shoriEdaban" = '0000'
         ORDER BY rgdb."DbT7022ShoriDateKanri"."taishoShuryoTimestamp" DESC
         LIMIT 1
+    </select>
+    <select id="get処理日付管理マスタByKey"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ParameterSetMybatisParameter" fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        "shichosonCode" = #{市町村コード}
+        AND "shoriName" = #{処理名}
+        AND "shoriEdaban" = #{処理枝番}
+        AND "nendo" = #{年度}
+        AND "nendoNaiRenban" = #{年度内連番}
     </select>
 </mapper>

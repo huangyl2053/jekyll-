@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraishikyukettekyufujs
 
 /**
  * 宛名取得PSM取得するマッパーインタフェースです。
+ *
+ * @reamsid_L DBC-1030-210 xicongwang
  */
 public interface ISyokanbaraiShikyuKetteKyufuJssekiHensyuMapper {
 

@@ -8,14 +8,16 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiikentokusokujo;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikentokusokujo.IShujiiIkenTokusokujoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医意見書情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0060-010 zhangzhiming
  */
 public class ShujiiIkenTokusokujoFinder {
 

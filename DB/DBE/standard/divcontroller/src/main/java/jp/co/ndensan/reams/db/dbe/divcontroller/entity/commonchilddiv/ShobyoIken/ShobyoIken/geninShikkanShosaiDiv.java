@@ -4,17 +4,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
- * geninShikkanShosai のクラスファイル 
- * 
- * @author 自動生成
+ * geninShikkanShosai のクラスファイル
+ *
  */
 public class geninShikkanShosaiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -22,26 +26,22 @@ public class geninShikkanShosaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtGeninShikkanCode")
-    private TextBoxCode txtGeninShikkanCode;
-    @JsonProperty("btnToSearch")
-    private ButtonDialog btnToSearch;
-    @JsonProperty("txtMeisho")
-    private TextBox txtMeisho;
+    @JsonProperty("ccdCodeInputGeninShikkan")
+    private CodeInputDiv ccdCodeInputGeninShikkan;
     @JsonProperty("radIsShutaruGeninShikkan")
     private RadioButton radIsShutaruGeninShikkan;
     @JsonProperty("btnNo")
     private Button btnNo;
     @JsonProperty("btnOK")
     private Button btnOK;
-    @JsonProperty("Jotai")
-    private RString Jotai;
     @JsonProperty("ShikkanCode")
     private RString ShikkanCode;
     @JsonProperty("Meisho")
     private RString Meisho;
     @JsonProperty("IsShutaru")
     private RString IsShutaru;
+    @JsonProperty("Jotai")
+    private RString Jotai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,57 +50,12 @@ public class geninShikkanShosaiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtGeninShikkanCode
-     * @return txtGeninShikkanCode
+     * getccdCodeInputGeninShikkan
+     * @return ccdCodeInputGeninShikkan
      */
-    @JsonProperty("txtGeninShikkanCode")
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return txtGeninShikkanCode;
-    }
-
-    /*
-     * settxtGeninShikkanCode
-     * @param txtGeninShikkanCode txtGeninShikkanCode
-     */
-    @JsonProperty("txtGeninShikkanCode")
-    public void setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.txtGeninShikkanCode = txtGeninShikkanCode;
-    }
-
-    /*
-     * getbtnToSearch
-     * @return btnToSearch
-     */
-    @JsonProperty("btnToSearch")
-    public ButtonDialog getBtnToSearch() {
-        return btnToSearch;
-    }
-
-    /*
-     * setbtnToSearch
-     * @param btnToSearch btnToSearch
-     */
-    @JsonProperty("btnToSearch")
-    public void setBtnToSearch(ButtonDialog btnToSearch) {
-        this.btnToSearch = btnToSearch;
-    }
-
-    /*
-     * gettxtMeisho
-     * @return txtMeisho
-     */
-    @JsonProperty("txtMeisho")
-    public TextBox getTxtMeisho() {
-        return txtMeisho;
-    }
-
-    /*
-     * settxtMeisho
-     * @param txtMeisho txtMeisho
-     */
-    @JsonProperty("txtMeisho")
-    public void setTxtMeisho(TextBox txtMeisho) {
-        this.txtMeisho = txtMeisho;
+    @JsonProperty("ccdCodeInputGeninShikkan")
+    public ICodeInputDiv getCcdCodeInputGeninShikkan() {
+        return ccdCodeInputGeninShikkan;
     }
 
     /*
@@ -158,24 +113,6 @@ public class geninShikkanShosaiDiv extends Panel {
     }
 
     /*
-     * getJotai
-     * @return Jotai
-     */
-    @JsonProperty("Jotai")
-    public RString getJotai() {
-        return Jotai;
-    }
-
-    /*
-     * setJotai
-     * @param Jotai Jotai
-     */
-    @JsonProperty("Jotai")
-    public void setJotai(RString Jotai) {
-        this.Jotai = Jotai;
-    }
-
-    /*
      * getShikkanCode
      * @return ShikkanCode
      */
@@ -227,6 +164,24 @@ public class geninShikkanShosaiDiv extends Panel {
     @JsonProperty("IsShutaru")
     public void setIsShutaru(RString IsShutaru) {
         this.IsShutaru = IsShutaru;
+    }
+
+    /*
+     * getJotai
+     * @return Jotai
+     */
+    @JsonProperty("Jotai")
+    public RString getJotai() {
+        return Jotai;
+    }
+
+    /*
+     * setJotai
+     * @param Jotai Jotai
+     */
+    @JsonProperty("Jotai")
+    public void setJotai(RString Jotai) {
+        this.Jotai = Jotai;
     }
 
     // </editor-fold>

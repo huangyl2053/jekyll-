@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * dgDetail_Row のクラスファイル
+ *
+ * @reamsid_L DBC-1030-170 panhe
  */
 public class dgDetail_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">

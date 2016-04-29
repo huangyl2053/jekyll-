@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -23,10 +23,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会開催場所情報を管理するクラスです。
+ * 
+ * @reamsid_L DBE-0100-010  wangkun
  */
 public class ShinsakaiKaisaiBashoJohoManager {
 
-    private final static String MSG_介護認定審査会開催場所情報 = "介護認定審査会開催場所情報";
+    private static final RString MSG_介護認定審査会開催場所情報 = new RString("介護認定審査会開催場所情報");
     private final DbT5592ShinsakaiKaisaiBashoJohoDac dac;
     private final MapperProvider mapperProvider;
 
@@ -56,7 +58,7 @@ public class ShinsakaiKaisaiBashoJohoManager {
     public static ShinsakaiKaisaiBashoJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiKaisaiBashoJohoManager.class);
     }
-    
+
     /**
      * 主キーに合致する介護認定審査会開催場所情報を返します。
      *
@@ -66,9 +68,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
     @Transaction
     public SearchResult<ShinsakaiKaisaiBashoJoho> get介護認定審査会開催場所情報(
             RString 介護認定審査会開催場所コード) {
-        requireNonNull(介護認定審査会開催場所コード
-                , UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所コード"));
-         List<ShinsakaiKaisaiBashoJoho> businessList = new ArrayList<>();
+        requireNonNull(介護認定審査会開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所コード"));
+        List<ShinsakaiKaisaiBashoJoho> businessList = new ArrayList<>();
         DbT5592ShinsakaiKaisaiBashoJohoEntity entity = dac.selectByKey(
                 介護認定審査会開催場所コード);
         if (entity == null) {
@@ -104,7 +105,7 @@ public class ShinsakaiKaisaiBashoJohoManager {
     @Transaction
     public SearchResult<ShinsakaiKaisaiBashoJoho> get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter param) {
         List<ShinsakaiKaisaiBashoJoho> businessList = new ArrayList<>();
-        IDbT5592ShinsakaiKaisaiBashoJohoMapper iDbT5592Mapper 
+        IDbT5592ShinsakaiKaisaiBashoJohoMapper iDbT5592Mapper
                 = mapperProvider.create(IDbT5592ShinsakaiKaisaiBashoJohoMapper.class);
         List<DbT5592ShinsakaiKaisaiBashoJohoEntity> dbT5592EntityList = iDbT5592Mapper.getYiChiRanEntity(param);
         for (DbT5592ShinsakaiKaisaiBashoJohoEntity entity : dbT5592EntityList) {
@@ -113,8 +114,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
         }
         return SearchResult.of(businessList, businessList.size(), true);
     }
-    
-     /**
+
+    /**
      * 介護認定審査会開催場所情報{@link ShinsakaiKaisaiBashoJoho}を更新します。
      *
      * @param 介護認定審査会開催場所情報 {@link ShinsakaiKaisaiBashoJoho}
@@ -122,8 +123,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
      */
     @Transaction
     public boolean 介護認定審査会開催場所情報の更新(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
-        requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
+        requireNonNull(介護認定審査会開催場所情報,
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報.toString()));
         if (!介護認定審査会開催場所情報.hasChanged()) {
             return false;
         }
@@ -131,8 +132,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
         dbT5592Entity.setState(EntityDataState.Modified);
         return 1 == dac.save(dbT5592Entity);
     }
-    
-     /**
+
+    /**
      * 介護認定審査会開催場所情報{@link ShinsakaiKaisaiBashoJoho}を追加します。
      *
      * @param 介護認定審査会開催場所情報 {@link ShinsakaiKaisaiBashoJoho}
@@ -140,8 +141,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
      */
     @Transaction
     public boolean 介護認定審査会開催場所情報の追加(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
-        requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
+        requireNonNull(介護認定審査会開催場所情報,
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報.toString()));
         if (!介護認定審査会開催場所情報.hasChanged()) {
             return false;
         }
@@ -149,8 +150,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
         dbT5592Entity.setState(EntityDataState.Added);
         return 1 == dac.save(dbT5592Entity);
     }
-    
-     /**
+
+    /**
      * 介護認定審査会開催場所情報{@link ShinsakaiKaisaiBashoJoho}を削除します。
      *
      * @param 介護認定審査会開催場所情報 {@link ShinsakaiKaisaiBashoJoho}
@@ -158,13 +159,13 @@ public class ShinsakaiKaisaiBashoJohoManager {
      */
     @Transaction
     public boolean 介護認定審査会開催場所情報の削除(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
-        requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
+        requireNonNull(介護認定審査会開催場所情報,
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報.toString()));
         DbT5592ShinsakaiKaisaiBashoJohoEntity dbT5592Entity = 介護認定審査会開催場所情報.toEntity();
         dbT5592Entity.setState(EntityDataState.Deleted);
         return 1 == dac.save(dbT5592Entity);
     }
-    
+
     /**
      * 介護認定審査会開催場所情報{@link ShinsakaiKaisaiBashoJoho}を保存します。
      *
@@ -173,8 +174,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
      */
     @Transaction
     public boolean save介護認定審査会開催場所情報(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
-        requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
+        requireNonNull(介護認定審査会開催場所情報,
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報.toString()));
         if (!介護認定審査会開催場所情報.hasChanged()) {
             return false;
         }

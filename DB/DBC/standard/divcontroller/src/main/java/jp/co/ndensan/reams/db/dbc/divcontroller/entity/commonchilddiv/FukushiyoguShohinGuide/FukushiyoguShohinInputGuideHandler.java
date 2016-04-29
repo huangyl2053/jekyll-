@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 /**
  *
  * 福祉用具商品名入力ガイドの取得するクラスです。
+ *
+ * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 public class FukushiyoguShohinInputGuideHandler {
 
@@ -84,7 +86,7 @@ public class FukushiyoguShohinInputGuideHandler {
             div.getPanInput().getTxtHinmokuCode().clearValue();
         }
         if (追加.equals(状態) || 修正.equals(状態)) {
-            div.getPanInput().getTxtKanriKaishiDay().setReadOnly(false);
+            div.getPanInput().getTxtKanriKaishiDay().setReadOnly(true);
             div.getPanInput().getTxtKanriShuryoDay().setReadOnly(false);
             div.getPanInput().getTxtShohinmei().setReadOnly(false);
             div.getPanInput().getTxtSeizoJigyoshamei().setReadOnly(false);

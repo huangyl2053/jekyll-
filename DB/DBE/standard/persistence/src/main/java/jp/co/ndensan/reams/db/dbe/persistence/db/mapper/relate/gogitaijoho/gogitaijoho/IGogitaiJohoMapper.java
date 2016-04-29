@@ -5,11 +5,13 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 
 /**
  * 合議体情報のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public interface IGogitaiJohoMapper {
 

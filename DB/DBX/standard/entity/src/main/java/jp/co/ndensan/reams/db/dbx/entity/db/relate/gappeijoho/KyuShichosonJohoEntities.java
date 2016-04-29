@@ -18,8 +18,8 @@ public final class KyuShichosonJohoEntities implements Serializable, Iterable<Db
 
     private static final long serialVersionUID = 1L;
 
-    private final List<DbT7056GappeiShichosonEntity> entities;
-    private final boolean gappeiShichoUmuFlag;
+    private List<DbT7056GappeiShichosonEntity> entities;
+    private boolean gappeiShichoUmuFlag;
 
     /**
      * コンストラクタです。
@@ -79,5 +79,41 @@ public final class KyuShichosonJohoEntities implements Serializable, Iterable<Db
     @Override
     public Iterator<DbT7056GappeiShichosonEntity> iterator() {
         return this.entities.iterator();
+    }
+
+    /**
+     * 合併市町村有無フラグを設定します。
+     *
+     * @param 合併市町村有無フラグ boolean
+     */
+    public void setGappeiShichoUmuFlag(boolean 合併市町村有無フラグ) {
+        gappeiShichoUmuFlag = 合併市町村有無フラグ;
+    }
+
+    /**
+     * 合併市町村有無フラグを返却します。
+     *
+     * @return 合併市町村有無フラグ
+     */
+    public boolean hasGappeiShichoUmuFlag() {
+        return gappeiShichoUmuFlag;
+    }
+
+    /**
+     * DbT7056GappeiShichosonEntityのリストを設定します。
+     *
+     * @param dbT7056EntityList List<DbT7056GappeiShichosonEntity>
+     */
+    public void setEntitys(List<DbT7056GappeiShichosonEntity> dbT7056EntityList) {
+        entities = dbT7056EntityList;
+    }
+
+    /**
+     * DbT7056GappeiShichosonEntityのリストを返却します。
+     *
+     * @return DbT7056GappeiShichosonEntityのリスト
+     */
+    public List<DbT7056GappeiShichosonEntity> getEntitys() {
+        return entities;
     }
 }

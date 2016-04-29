@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class ShinsainKubunCode implements Comparable<ShinsainKubunCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
 
     private final Code code;
-
+    /**
+     * ShinsainKubunCodeのEMPTY値です.
+     */
     public static final ShinsainKubunCode EMPTY;
 
     /**

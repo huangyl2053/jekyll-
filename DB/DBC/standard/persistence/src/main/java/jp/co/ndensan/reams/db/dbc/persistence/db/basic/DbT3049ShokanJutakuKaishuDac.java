@@ -34,11 +34,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求住宅改修のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJutakuKaishuEntity> {
 
     private static final int 開始 = 1;
     private static final int 完了 = 3;
+    private static final RString 文字_21D = new RString("21D");
 
     @InjectSession
     private SqlSession session;
@@ -168,7 +171,7 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
+                                eq(substr(yoshikiNo, 開始, 完了), 文字_21D))).
                 order(by(DbT3049ShokanJutakuKaishu.yoshikiNo, Order.DESC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
@@ -184,15 +187,26 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
     public List<DbT3049ShokanJutakuKaishuEntity> get住宅改修住宅住所(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
-                where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
-                order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC),
-                        by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).
-                toList(DbT3049ShokanJutakuKaishuEntity.class);
+        if (整理番号 != null) {
+            return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                    where(and(
+                                    eq(hiHokenshaNo, 被保険者番号),
+                                    eq(serviceTeikyoYM, サービス提供年月),
+                                    eq(seiriNo, 整理番号),
+                                    eq(substr(yoshikiNo, 開始, 完了), 文字_21D))).
+                    order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC),
+                            by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).
+                    toList(DbT3049ShokanJutakuKaishuEntity.class);
+        } else {
+            return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                    where(and(
+                                    eq(hiHokenshaNo, 被保険者番号),
+                                    eq(serviceTeikyoYM, サービス提供年月),
+                                    eq(substr(yoshikiNo, 開始, 完了), 文字_21D))).
+                    order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC),
+                            by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).
+                    toList(DbT3049ShokanJutakuKaishuEntity.class);
+        }
     }
 
     /**
@@ -211,7 +225,7 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
+                                eq(substr(yoshikiNo, 開始, 完了), 文字_21D))).
                 order(by(jigyoshaNo, Order.ASC), by(yoshikiNo, Order.ASC), by(meisaiNo, Order.ASC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }

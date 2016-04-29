@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 主治医意見書提出督促状のプロパティです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 public class ShujiiIkenshoSakuseiTokusokujoProperty extends ReportPropertyBase<ShujiiIkenshoSakuseiTokusokujoReportSource> {
 

@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * HihokenshaNoDataParameter
+ * HihokenshaNoDataのパラメタ
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
-public class HihokenshaNoDataParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class HihokenshaNoDataParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final ShikibetsuCode 識別コード;

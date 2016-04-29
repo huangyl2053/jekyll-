@@ -4,19 +4,29 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakuga
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListDataPassModel;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListHandler;
+
 /**
- * JyutakugaisyunaiyoList のクラスファイル 
- * 
- * @author 自動生成
+ * JyutakugaisyunaiyoList のクラスファイル
+ *
+ * @reamsid_L DBC-0940-010 yaodongsheng
  */
 public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyunaiyoListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +37,10 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     private PnlGaisyuListAreaDiv PnlGaisyuListArea;
     @JsonProperty("PnlNyuryokuArea")
     private PnlNyuryokuAreaDiv PnlNyuryokuArea;
+    @JsonProperty("hiddenPass")
+    private RString hiddenPass;
+    @JsonProperty("jushoData")
+    private RString jushoData;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -71,6 +85,86 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     /*
+     * gethiddenPass
+     * @return hiddenPass
+     */
+    @JsonProperty("hiddenPass")
+    public RString getHiddenPass() {
+        return hiddenPass;
+    }
+
+    /*
+     * sethiddenPass
+     * @param hiddenPass hiddenPass
+     */
+    @JsonProperty("hiddenPass")
+    public void setHiddenPass(RString hiddenPass) {
+        this.hiddenPass = hiddenPass;
+    }
+
+    /*
+     * getjushoData
+     * @return jushoData
+     */
+    @JsonProperty("jushoData")
+    public RString getJushoData() {
+        return jushoData;
+    }
+
+    /*
+     * setjushoData
+     * @param jushoData jushoData
+     */
+    @JsonProperty("jushoData")
+    public void setJushoData(RString jushoData) {
+        this.jushoData = jushoData;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum State implements ICommonChildDivMode {
+
+        touroku("touroku"),
+        teisei("teisei"),
+        sansyo("sansyo");
+
+        private final String name;
+
+        private State(final String name) {
+            this.name = name;
+        }
+
+        public static State getEnum(String str) {
+            State[] enumArray = State.values();
+
+            for (State enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public State getMode_State() {
+        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
+    }
+
+    public void setMode_State(State value) {
+        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -79,7 +173,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setBtnDetailAdd(Button btnDetailAdd) {
+    public void setBtnDetailAdd(Button btnDetailAdd) {
         this.getPnlGaisyuListArea().setBtnDetailAdd(btnDetailAdd);
     }
 
@@ -89,7 +183,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setDgGaisyuList(DataGrid<dgGaisyuList_Row> dgGaisyuList) {
+    public void setDgGaisyuList(DataGrid<dgGaisyuList_Row> dgGaisyuList) {
         this.getPnlGaisyuListArea().setDgGaisyuList(dgGaisyuList);
     }
 
@@ -99,7 +193,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setTxtKaisyunaiyo(TextBoxMultiLine txtKaisyunaiyo) {
+    public void setTxtKaisyunaiyo(TextBoxMultiLine txtKaisyunaiyo) {
         this.getPnlNyuryokuArea().setTxtKaisyunaiyo(txtKaisyunaiyo);
     }
 
@@ -109,7 +203,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setTxtJigyosya(TextBox txtJigyosya) {
+    public void setTxtJigyosya(TextBox txtJigyosya) {
         this.getPnlNyuryokuArea().setTxtJigyosya(txtJigyosya);
     }
 
@@ -119,7 +213,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setLblTaisyojyutakujyusyo(Label lblTaisyojyutakujyusyo) {
+    public void setLblTaisyojyutakujyusyo(Label lblTaisyojyutakujyusyo) {
         this.getPnlNyuryokuArea().setLblTaisyojyutakujyusyo(lblTaisyojyutakujyusyo);
     }
 
@@ -129,7 +223,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setBtnHonnijyusyoCopy(Button btnHonnijyusyoCopy) {
+    public void setBtnHonnijyusyoCopy(Button btnHonnijyusyoCopy) {
         this.getPnlNyuryokuArea().setBtnHonnijyusyoCopy(btnHonnijyusyoCopy);
     }
 
@@ -139,7 +233,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setTxtJyusyo(TextBoxJusho txtJyusyo) {
+    public void setTxtJyusyo(TextBoxJusho txtJyusyo) {
         this.getPnlNyuryokuArea().setTxtJyusyo(txtJyusyo);
     }
 
@@ -149,7 +243,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setTxtTyakkoyotebi(TextBoxDate txtTyakkoyotebi) {
+    public void setTxtTyakkoyotebi(TextBoxDate txtTyakkoyotebi) {
         this.getPnlNyuryokuArea().setTxtTyakkoyotebi(txtTyakkoyotebi);
     }
 
@@ -159,7 +253,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setTxtKanseyotebi(TextBoxDate txtKanseyotebi) {
+    public void setTxtKanseyotebi(TextBoxDate txtKanseyotebi) {
         this.getPnlNyuryokuArea().setTxtKanseyotebi(txtKanseyotebi);
     }
 
@@ -169,7 +263,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setTxtKaisyukingaku(TextBoxNum txtKaisyukingaku) {
+    public void setTxtKaisyukingaku(TextBoxNum txtKaisyukingaku) {
         this.getPnlNyuryokuArea().setTxtKaisyukingaku(txtKaisyukingaku);
     }
 
@@ -179,7 +273,7 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getPnlNyuryokuArea().setBtnClear(btnClear);
     }
 
@@ -189,11 +283,24 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     }
 
     @JsonIgnore
-    public void  setBtnDetailConfirm(Button btnDetailConfirm) {
+    public void setBtnDetailConfirm(Button btnDetailConfirm) {
         this.getPnlNyuryokuArea().setBtnDetailConfirm(btnDetailConfirm);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private JyutakugaisyunaiyoListHandler getHandler() {
+        return new JyutakugaisyunaiyoListHandler(this);
+    }
+
+    @Override
+    public void initialize(JyutakugaisyunaiyoListDataPassModel model) {
+        getHandler().initialize(model);
+    }
+
+    @Override
+    public List<dgGaisyuList_Row> get住宅改修内容一覧() {
+        return getHandler().get住宅改修内容一覧();
+    }
 
 }

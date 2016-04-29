@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * その他納入通知書タイプを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBB-9999-023 liangbc
  */
 public enum SonotaTsuchishoType {
 
@@ -25,7 +25,15 @@ public enum SonotaTsuchishoType {
     /**
      * コード:10C 名称:上田市版コンビニタイプ 略称:定義なし
      */
-    上田市版コンビニタイプ("10C", "上田市版コンビニタイプ");
+    上田市版コンビニタイプ("10C", "上田市版コンビニタイプ"),
+    /**
+     * コード:301 名称:コンビニマルチ収納タイプ 略称:定義なし
+     */
+    コンビニマルチ収納タイプ("301", "コンビニマルチ収納タイプ"),
+    /**
+     * コード:302 名称:コンビニ角公タイプ 略称:定義なし
+     */
+    コンビニ角公タイプ("302", "コンビニ角公タイプ");
 
     private final RString code;
     private final RString fullName;

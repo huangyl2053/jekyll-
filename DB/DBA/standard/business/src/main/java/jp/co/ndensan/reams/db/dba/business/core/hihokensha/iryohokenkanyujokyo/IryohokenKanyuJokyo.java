@@ -16,14 +16,17 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護保険医療保険加入状況を管理するクラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
-public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier, DbT1008IryohokenKanyuJokyoEntity, IryohokenKanyuJokyo> implements Serializable {
+public class IryohokenKanyuJokyo
+        extends ModelBase<IryohokenKanyuJokyoIdentifier, DbT1008IryohokenKanyuJokyoEntity, IryohokenKanyuJokyo>
+        implements Serializable {
 
     private final DbT1008IryohokenKanyuJokyoEntity entity;
     private final IryohokenKanyuJokyoIdentifier id;

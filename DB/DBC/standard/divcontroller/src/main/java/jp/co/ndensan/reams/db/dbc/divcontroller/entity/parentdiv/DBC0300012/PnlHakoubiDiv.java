@@ -4,16 +4,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * PnlHakoubi のクラスファイル 
- * 
- * @author 自動生成
+ * PnlHakoubi のクラスファイル
+ *
+ * @reamsid_L DBC-2120-020 panhe
  */
 public class PnlHakoubiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]

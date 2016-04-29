@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ChosaItakusakiAndChosainGuide;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
@@ -22,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * 調査委託先＆調査員ガイドのクラス。
+ *
+ * @reamsid_L DBE-1300-020 wanghui
  */
 public class ChosaItakusakiAndChosainGuide {
 
@@ -42,7 +45,7 @@ public class ChosaItakusakiAndChosainGuide {
      * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onLoad(ChosaItakusakiAndChosainGuideDiv div) {
-        div.getHokensha().loadHokenshaList();
+        div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).intialize();
         return ResponseData.of(div).respond();
     }
@@ -83,6 +86,7 @@ public class ChosaItakusakiAndChosainGuide {
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onSelect(ChosaItakusakiAndChosainGuideDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForSelectbtn();
         if (validPairs.iterator().hasNext()) {
+            div.getDgKensakuKekkaIchiran().setReadOnly(true);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).onSelectbtn();
@@ -116,8 +120,8 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getTxtMaxKensu().getValue(),
                 市町村コード,
                 ControlDataHolder.getSubGyomuCD().value(),
-                div.getDdlChosaItakusakiKubun().getSelectedKey(),
-                div.getTxtChikuCode().getDomain().value());
+                div.getTxtChikuCode().getDomain().value(),
+                div.getDdlChosaItakusakiKubun().getSelectedKey());
     }
 
     private ChosaItakusakiAndChosainGuideValidationHandler getValidationHandler(ChosaItakusakiAndChosainGuideDiv div) {

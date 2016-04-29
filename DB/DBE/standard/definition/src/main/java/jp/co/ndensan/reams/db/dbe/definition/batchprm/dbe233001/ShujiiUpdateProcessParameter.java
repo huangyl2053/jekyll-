@@ -6,12 +6,14 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ShujiiUpdateMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 主治医意見書督促状発行更新_バッチ処理クラスパラメータクラスです。
+ *
+ * @reamsid_L DBE-0060-040 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

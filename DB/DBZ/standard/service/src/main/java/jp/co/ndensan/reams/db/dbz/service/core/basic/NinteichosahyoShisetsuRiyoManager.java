@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5210NinteichosahyoShisetsuRiyoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -65,6 +65,37 @@ public class NinteichosahyoShisetsuRiyoManager {
         }
         entity.initializeMd5();
         return new NinteichosahyoShisetsuRiyo(entity);
+    }
+
+    /**
+     * 主キーに合致する認定調査票_概況調査_施設利用を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 連番List 連番List
+     * @return NinteichosahyoShisetsuRiyo
+     */
+    @Transaction
+    public List<NinteichosahyoShisetsuRiyo> get認定調査票_概況調査_施設利用By連番List(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            List<Integer> 連番List) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(連番List, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+
+        List<NinteichosahyoShisetsuRiyo> list = new ArrayList<>();
+        List<DbT5210NinteichosahyoShisetsuRiyoEntity> entityList = dac.selectBy連番List(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                連番List);
+        if (entityList == null) {
+            return list;
+        }
+        for (DbT5210NinteichosahyoShisetsuRiyoEntity entity : entityList) {
+            list.add(new NinteichosahyoShisetsuRiyo(entity));
+        }
+        return list;
     }
 
     /**

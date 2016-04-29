@@ -11,12 +11,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dba.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.IryoHokenJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.JushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.RoreiFukushiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuKanrenYidouEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuSyousayiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshashikakuteisei.ShikakuTeyiseyiEntity;
@@ -27,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -52,6 +52,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 被保険者台帳管理（資格訂正）を管理するクラスです。
+ *
+ * @reamsid_L DBA-0521-030 zhengshukai
+ *
  */
 public class HihokenshaShikakuTeiseiManager {
 
@@ -122,6 +125,15 @@ public class HihokenshaShikakuTeiseiManager {
         this.市町村情報取得Finder = 市町村情報取得Finder;
         this.kyuShichosonCodeJoho = kyuShichosonCodeJoho;
         this.getIdoCheckManager = getIdoCheckManager;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuTeiseiManager}のインスタンスを返します。
+     *
+     * @return HihokenshaShikakuTeiseiManager
+     */
+    public static HihokenshaShikakuTeiseiManager createInstance() {
+        return InstanceProvider.create(HihokenshaShikakuTeiseiManager.class);
     }
 
     /**
@@ -443,7 +455,7 @@ public class HihokenshaShikakuTeiseiManager {
      * @param newList 保存ボタン押下時のList＜老福年金情報Entity＞
      * @return 老福年金比較結果フラグ
      */
-    public RString checkRofukuNenkin(List<RoreiFukushiEntity> oldList, List<RoreiFukushiEntity> newList) {
+    public RString checkRofukuNenkin(List<RoreiFukushiJoho> oldList, List<RoreiFukushiJoho> newList) {
         if (oldList.size() != newList.size()) {
             return チェックOK;
         }

@@ -10,25 +10,21 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_16.NonyuTsuchishoBookFuriKaeAriRenchoCoverSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- *
  * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼あり）通知書_連帳
+ *
+ * @reamsid_L DBB-9110-160 liangbc
  */
 public class NonyuTsuchishoBookFuriKaeAriRenchoCoverReport extends Report<NonyuTsuchishoBookFuriKaeAriRenchoCoverSource> {
 
@@ -65,14 +61,15 @@ public class NonyuTsuchishoBookFuriKaeAriRenchoCoverReport extends Report<NonyuT
         }
 
         // TODO 雛形部品CompNinshoshaを作成する
-        // TODO 帳票制御情報を取得する 
+        // TODO 帳票制御情報を取得する
         // 帳票制御共通（DbT7065ChohyoSeigyoKyotsu）
         // パラメータ：　サブ業務コード　＝　DBB
-	//	　　　   帳票分類ID　＝　"DBB100045_HokenryoNonyuTsuchishoDaihyo"
-        
-        Ninshosha 帳票認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()));
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        // 帳票分類ID　＝　"DBB100045_HokenryoNonyuTsuchishoDaihyo"
+        Ninshosha 帳票認証者 = null;
+//        NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
+//                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()));
+        Association 地方公共団体 = null;
+//        AssociationFinderFactory.createInstance().getAssociation();
         // TODO is公印に掛ける　=　帳票制御共通.首長名印字位置 が 1（公印にかける）のとき　True
         // TODO is公印を省略　=　帳票制御共通.電子公印印字有無　が　False　のとき、True
         INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(帳票認証者,
@@ -80,15 +77,15 @@ public class NonyuTsuchishoBookFuriKaeAriRenchoCoverReport extends Report<NonyuT
         NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
 
         // TODO 共通部品CompSofubutsuAtesakiを作成する
-        SofubutsuAtesakiSource sofubutsuAtesakiSource = 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource();
+        KaigoSofubutsuAtesakiSource sofubutsuAtesakiSource = 本算定納入通知書情報.get編集後本算定通知書共通情報().get編集後宛先().getSofubutsuAtesakiSource();
         int 連番 = 1;
-        
+
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
                 continue;
             }
             INonyuTsuchishoBookFuriKaeAriRenchoCoverEditor editor = new NonyuTsuchishoBookFuriKaeAriRenchoCoverEditor(item,
-                    連番, ninshoshaSource, sofubutsuAtesakiSource);
+                    連番, ninshoshaSource, sofubutsuAtesakiSource.get送付物宛先ソース());
             INonyuTsuchishoBookFuriKaeAriRenchoCoverBuilder builder = new NonyuTsuchishoBookFuriKaeAriRenchoCoverBuilder(editor);
             writer.writeLine(builder);
             連番++;

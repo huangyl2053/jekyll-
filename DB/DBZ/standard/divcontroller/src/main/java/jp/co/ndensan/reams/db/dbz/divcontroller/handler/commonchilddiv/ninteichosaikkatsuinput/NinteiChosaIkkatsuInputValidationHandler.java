@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 共有子Div「NinteiChosaIkkatsuInput」の抽象ValidationHandlerクラスです。
  *
+ * @reamsid_L DBE-3000-210 zhengshukai
  */
 public class NinteiChosaIkkatsuInputValidationHandler {
 

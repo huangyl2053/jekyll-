@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 特別徴収平準化【B5横タイプ】のReportです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource> {
 

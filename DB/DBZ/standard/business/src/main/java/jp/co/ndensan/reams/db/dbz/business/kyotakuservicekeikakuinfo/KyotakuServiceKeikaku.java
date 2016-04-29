@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 居宅サービス計画情報クラスです。
+ * 
+ * @reamsid_L DBE-3000-170  suguangjun 
  */
 public class KyotakuServiceKeikaku {
 

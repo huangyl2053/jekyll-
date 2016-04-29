@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.viewbox;
 
 /**
  * 通知書発行後異動把握のViewStateKeys
+ *
+ * @reamsid_L DBB-9999-022 cuilin
  */
 public enum ViewStateKeys {
 
@@ -49,6 +51,18 @@ public enum ViewStateKeys {
     /**
      * キーが「打分け方法情報キー」であることを表します
      */
-    打分け方法情報キー;
+    打分け方法情報キー,
+    /**
+     * キーが「賦課の情報リスト」であることを表します
+     */
+    賦課の情報リスト,
+    /**
+     * 徴収方法データ
+     */
+    徴収方法データ,
+    /**
+     * キーが「調定日時リスト」であることを表します
+     */
+    調定日時リスト;
 
 }

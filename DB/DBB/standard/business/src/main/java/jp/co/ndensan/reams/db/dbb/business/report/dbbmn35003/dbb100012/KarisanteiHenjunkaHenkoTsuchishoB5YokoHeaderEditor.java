@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100012.KarisanteiH
 
 /**
  * 特別徴収平準化【B5横タイプ】Builderクラスです。
+ *
+ * @reamsid_L DBB-0820-050 xuyue
  */
 class KarisanteiHenjunkaHenkoTsuchishoB5YokoHeaderEditor implements IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor {
 

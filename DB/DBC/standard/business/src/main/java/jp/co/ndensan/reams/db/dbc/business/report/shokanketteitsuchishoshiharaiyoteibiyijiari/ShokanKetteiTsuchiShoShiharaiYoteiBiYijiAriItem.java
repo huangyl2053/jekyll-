@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 償還払い支給（不支給）決定通知書(支払予定日あり）のITEMです。
+ *
+ * @reamsid_L DBC-1000-110 zuotao
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

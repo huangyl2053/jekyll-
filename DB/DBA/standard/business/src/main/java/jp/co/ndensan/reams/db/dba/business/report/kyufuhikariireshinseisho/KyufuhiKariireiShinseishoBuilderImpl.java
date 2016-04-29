@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険給付費借入申請書のEditorです。
+ *
+ * @reamsid_L DBA-0540-708 xuyannan
  */
 public class KyufuhiKariireiShinseishoBuilderImpl implements IKyufuhiKariireiShinseishoBuilder {
 

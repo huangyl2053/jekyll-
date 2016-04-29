@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払決定情報Entityクラスです。
+ *
+ * @reamsid_L DBC-0950-010 zuotao
  */
 @lombok.Getter
 @lombok.Setter
@@ -30,4 +32,5 @@ public class SyokanbaraiketeJohoEntity implements Cloneable, Serializable {
     private Integer sagakuKingaku;
     private RString tableKbn;
     private RString dekidakaKbn;
+    private int updateCount;
 }

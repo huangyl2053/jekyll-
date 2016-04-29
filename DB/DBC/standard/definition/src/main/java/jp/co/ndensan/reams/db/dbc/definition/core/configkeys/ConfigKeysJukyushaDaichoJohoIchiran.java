@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給者台帳情報一覧コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ConfigKeysJukyushaDaichoJohoIchiran {
 

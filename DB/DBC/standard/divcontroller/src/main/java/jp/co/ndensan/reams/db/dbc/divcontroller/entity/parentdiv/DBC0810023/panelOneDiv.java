@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * panelOne のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1010-150 wangkanglei
  */
 public class panelOneDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

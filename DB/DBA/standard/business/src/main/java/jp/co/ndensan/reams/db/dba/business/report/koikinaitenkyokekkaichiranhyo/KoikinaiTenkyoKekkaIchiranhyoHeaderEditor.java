@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.koikinaitenkyokekkaichiranhyo.Ko
 
 /**
  * 広域内転居結果一覧表ヘッダEditorです。
+ *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 class KoikinaiTenkyoKekkaIchiranhyoHeaderEditor implements IKoikinaiTenkyoKekkaIchiranhyoEditor {
 

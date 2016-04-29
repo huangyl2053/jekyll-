@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 認定調査督促対象者一覧表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBE-0030-030 xuyue
  */
 interface INinteiChosaTokusokuTaishoshaIchiranhyoBuilder extends IReportBuilder<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 }

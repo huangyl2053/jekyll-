@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 居室種別を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBD-9999-023 wangchao
  */
 public enum KyoshitsuShubetsu {
 
@@ -25,11 +25,11 @@ public enum KyoshitsuShubetsu {
     /**
      * コード: 名称:多床室 略称:多床室
      */
-    多床室("", "多床室", "多床室"),
+    多床室("TODO1", "多床室", "多床室"),
     /**
      * コード: 名称:従来型個室_老健 略称:従来型個室（老健・療養等）
      */
-    従来型個室_老健_療養等("", "従来型個室_老健", "従来型個室（老健・療養等）");
+    従来型個室_老健_療養等("TODO2", "従来型個室_老健", "従来型個室（老健・療養等）");
 
     private final RString code;
     private final RString fullName;

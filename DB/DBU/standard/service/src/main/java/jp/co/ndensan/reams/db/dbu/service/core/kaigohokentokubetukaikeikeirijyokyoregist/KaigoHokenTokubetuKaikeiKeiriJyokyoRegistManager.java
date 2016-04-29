@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
@@ -50,12 +50,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 介護保険特別会計経理状況登録Managerクラスです。
+ *
+ * @reamsid_L DBU-1130-050 wangjie2
  */
 public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
 
-    private final int 整数4 = 4;
-    private final int 整数3 = 3;
-    private final int 整数31 = 31;
+    private static final int 整数4 = 4;
+    private static final int 整数3 = 3;
+    private static final int 整数31 = 31;
 
     /**
      * コンストラクタです。
@@ -79,7 +81,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
     public List<Shichoson> getShichosonCodeNameList() {
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = Code.EMPTY;
-        KoseiShichosonJoho 市町村情報 = new KoseiShichosonJoho();
+        KoseiShichosonJoho 市町村情報;
         if (shichosonsecurityjoho != null && shichosonsecurityjoho.get市町村情報() != null) {
             導入形態コード = shichosonsecurityjoho.get導入形態コード();
             市町村情報 = shichosonsecurityjoho.get市町村情報();
@@ -338,18 +340,18 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
     }
 
     private boolean is項目コード同じ(Code 項目コード1, Code 項目コード2) {
-        if (null == 項目コード1) {
-            return null == 項目コード2;
+        if (項目コード1 != null) {
+            return 項目コード1.equals(項目コード2);
         } else {
-            return 項目コード2 != null && 項目コード1.equals(項目コード2);
+            return null == 項目コード2;
         }
     }
 
     private boolean is集計項目名称同じ(RString 集計項目名1, RString 集計項目名2) {
-        if (null == 集計項目名1) {
-            return null == 集計項目名2;
+        if (集計項目名1 != null) {
+            return 集計項目名1.equals(集計項目名2);
         } else {
-            return 集計項目名2 != null && 集計項目名1.equals(集計項目名2);
+            return null == 集計項目名2;
         }
     }
 

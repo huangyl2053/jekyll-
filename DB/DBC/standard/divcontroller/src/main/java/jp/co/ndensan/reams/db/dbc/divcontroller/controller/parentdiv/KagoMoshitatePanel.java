@@ -21,8 +21,8 @@ public class KagoMoshitatePanel {
      * 介護給付費過誤申立書登録 給付実積該当者一覧で、選択した内容もとに、過誤申立書情報の内容を設定する。
      *
      * @param panel MishinsaShikyuShinseiListPanelDiv
-     * @param gaitoshaListpanel
-     * @return
+     * @param gaitoshaListpanel KyufuJissekiGaitoshaListPanelDiv
+     * @return ResponseData
      */
     public ResponseData<KagoMoshitatePanelDiv> onClick_btnSelect(
             KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
@@ -41,6 +41,8 @@ public class KagoMoshitatePanel {
      */
     private void setKagoMoshitateHihokensha(KagoMoshitatePanelDiv panel) {
 
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getBtnCancel();
 //        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
 //        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getCommonKaigpAtenainfoChildDiv1(),
@@ -55,7 +57,9 @@ public class KagoMoshitatePanel {
      * @return
      */
     private void setKagoMoshitate(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
-
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getBtnCancel();
+        gaitoshaListpanel.getDgHihokenshaSearchGaitosha();
 //        //入力した情報・選択された情報をもとに過誤申立書情報の内容を設定する。
 //        //事業者NO
 //        panel.getKagoMoshitateInfo().getTxtJigyoshaNo().

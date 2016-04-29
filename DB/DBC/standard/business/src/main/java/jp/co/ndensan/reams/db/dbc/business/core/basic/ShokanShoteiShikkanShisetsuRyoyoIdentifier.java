@@ -14,6 +14,8 @@ import lombok.Value;
 
 /**
  * 償還払請求所定疾患施設療養費等の識別子です。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")

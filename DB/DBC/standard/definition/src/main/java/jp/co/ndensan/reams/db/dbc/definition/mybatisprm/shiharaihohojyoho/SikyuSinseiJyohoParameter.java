@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 支給申請情報を特定するためのMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBC-0300-010 houtianpeng
  */
 @lombok.Getter
 @lombok.Setter

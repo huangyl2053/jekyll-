@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 資格異動対象者情報取得_DB検索用のパラメータです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -17,9 +19,10 @@ public final class ShikakuIdoTaishoshaShutokuMybatisParameter {
 
     private final ShikibetsuCode 識別コード;
     private final FlexibleDate 年齢到達日;
-   
+
     /**
      * コンストラクタです。
+     *
      * @param 識別コード 識別コード
      * @param 年齢到達日 年齢到達日
      */

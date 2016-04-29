@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBDのエラーメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum DbdErrorMessages implements IMessageGettable {
 
@@ -33,7 +33,8 @@ public enum DbdErrorMessages implements IMessageGettable {
     減免減額_給付率範囲外(20, "範囲外の給付率の入力はできません。"),
     支払方法変更_要滞納状況確定(21, "滞納状況を確定させてください。"),
     特別地域加算減免_軽減率範囲外(22, "軽減率は%1～100の範囲で設定してください。"),
-    受給共通_受給者_事業対象者登録なし(23, "受給者または総合事業対象者として登録されていないため、この処理はできません。");
+    受給共通_受給者_事業対象者登録なし(23, "受給者または総合事業対象者として登録されていないため、この処理はできません。"),
+    社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択(24, "「居宅サービス限定」と「旧措置ユニット型個室限定」は同時に選択できません。");
 
     private final Message message;
 

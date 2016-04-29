@@ -31,7 +31,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuPersistence</artifactId>
         </dependency>
-
+        <!-- DBC -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcPersistence</artifactId>
+        </dependency>
         <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>

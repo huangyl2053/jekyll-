@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 介護認定審査会対象者申請者オブザーバーチェックパラメータクラス。
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -40,13 +42,13 @@ public final class CountShinsakaiWariateIinJohoMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param isKikannMade
-     * @param kaisaiNo
-     * @param shujiiIryokikanCode
-     * @param ninteiChosaItakusakiCode
-     * @param nyushoShisetsuCode
-     * @param shujiiCode
-     * @param ninteiChosainNo
+     * @param isKikannMade boolean
+     * @param kaisaiNo RString
+     * @param shujiiIryokikanCode RString
+     * @param ninteiChosaItakusakiCode RString
+     * @param nyushoShisetsuCode RString
+     * @param shujiiCode RString
+     * @param ninteiChosainNo RString
      * @return 介護認定審査会対象者候補者一覧エリア内容検索パラメータ
      */
     public static CountShinsakaiWariateIinJohoMapperParameter createCountKohoshaIchiranMapperParameter(boolean isKikannMade, RString kaisaiNo,

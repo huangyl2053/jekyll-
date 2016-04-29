@@ -13,6 +13,7 @@ import lombok.NonNull;
 /**
  * 訪問介護利用者負担額減額申請書の帳票作成します。
  *
+ * @reamsid_L DBA-0540-701 zhengshukai
  */
 public final class HomonkaigoRiyoushaFutangakuGengakuShinseishoReport extends Report<HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource> {
 

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.shujiiiryokikanandshujiiguide
 
 /**
  * 主治医医療機関＆主治医情報検索のインタフェイスです。
+ *
+ * @reamsid_L DBE-1300-130 xuyannan
  */
 public interface IShujiiIryokikanAndShujiiGuideMapper {
 

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * {@link GeninShikkan}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class GeninShikkanBuilder {
 

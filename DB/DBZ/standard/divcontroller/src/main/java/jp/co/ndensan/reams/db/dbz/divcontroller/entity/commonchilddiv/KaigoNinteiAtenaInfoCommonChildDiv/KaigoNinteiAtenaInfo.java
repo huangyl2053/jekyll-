@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfoCommonChildDiv;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  * 介護認定宛名情報の取得処理。
+ *
+ * @reamsid_L DBE-1300-050 lizhuoxuan
  */
 public class KaigoNinteiAtenaInfo {
 

@@ -4,16 +4,18 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * RofukuNenkinInput のクラスファイル 
- * 
- * @author 自動生成
+ * RofukuNenkinInput のクラスファイル
+ *
  */
 public class RofukuNenkinInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -41,7 +43,7 @@ public class RofukuNenkinInputDiv extends Panel {
 
     @JsonProperty("txtRofukuNenkinKaishiDate")
     public void setTxtRofukuNenkinKaishiDate(TextBoxFlexibleDate txtRofukuNenkinKaishiDate) {
-        this.txtRofukuNenkinKaishiDate=txtRofukuNenkinKaishiDate;
+        this.txtRofukuNenkinKaishiDate = txtRofukuNenkinKaishiDate;
     }
 
     @JsonProperty("txtRofukuNenkinShuryoDate")
@@ -51,7 +53,7 @@ public class RofukuNenkinInputDiv extends Panel {
 
     @JsonProperty("txtRofukuNenkinShuryoDate")
     public void setTxtRofukuNenkinShuryoDate(TextBoxFlexibleDate txtRofukuNenkinShuryoDate) {
-        this.txtRofukuNenkinShuryoDate=txtRofukuNenkinShuryoDate;
+        this.txtRofukuNenkinShuryoDate = txtRofukuNenkinShuryoDate;
     }
 
     @JsonProperty("txtRofukuNenkinJukyushaNo")
@@ -61,7 +63,7 @@ public class RofukuNenkinInputDiv extends Panel {
 
     @JsonProperty("txtRofukuNenkinJukyushaNo")
     public void setTxtRofukuNenkinJukyushaNo(TextBoxCode txtRofukuNenkinJukyushaNo) {
-        this.txtRofukuNenkinJukyushaNo=txtRofukuNenkinJukyushaNo;
+        this.txtRofukuNenkinJukyushaNo = txtRofukuNenkinJukyushaNo;
     }
 
     // </editor-fold>

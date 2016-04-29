@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認知症高齢者自立度コードを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum NinchishoNichijoSeikatsuJiritsudoCode {
 

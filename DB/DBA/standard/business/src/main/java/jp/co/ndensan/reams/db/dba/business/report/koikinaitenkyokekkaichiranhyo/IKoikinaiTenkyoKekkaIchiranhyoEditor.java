@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 広域内転居結果一覧表のインターフェースクラスです。
  *
+ * @reamsid_L DBU-1150-070 zhangguopeng
  */
 interface IKoikinaiTenkyoKekkaIchiranhyoEditor extends IReportEditor<KoikinaiTenkyoKekkaIchiranhyoReportSource> {
 }

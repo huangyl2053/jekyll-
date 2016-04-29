@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 /**
  * 世帯所得・課税判定のマッパーインタフェースです。
  *
+ * @reamsid_L DBB-0640-020 chenaoqi
  */
 public interface ISetaiShotokuKazeiHanteiMapper {
 

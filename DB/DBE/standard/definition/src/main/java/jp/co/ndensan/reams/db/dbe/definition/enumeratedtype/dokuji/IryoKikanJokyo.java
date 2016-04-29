@@ -31,7 +31,7 @@ public enum IryoKikanJokyo {
      *
      * @return 医療機関状況のコード
      */
-    public boolean getコード() {
+    public boolean isコード() {
         return code;
     }
 

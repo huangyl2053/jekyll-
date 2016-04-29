@@ -28,8 +28,9 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- *
  * 主治医意見書作成依頼書PrinterServiceクラスです。
+ *
+ * @reamsid_L DBE-0050-020 sunhaidi
  */
 public class ShujiiIkenshoSakuseiIraishoPrintService {
 

@@ -17,6 +17,7 @@ import lombok.Value;
  * 再審査申立の識別子です。
  */
 @Value
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class SaishinsaMoshitateIdentifier implements Serializable {
 
     private final JigyoshaNo 事業所番号;

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 /**
  * dgNenreiTotatshusha_Row のクラスファイル
  *
- * @author 自動生成
  */
 public class dgNenreiTotatshusha_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

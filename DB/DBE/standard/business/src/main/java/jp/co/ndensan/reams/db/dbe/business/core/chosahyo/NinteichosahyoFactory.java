@@ -35,13 +35,28 @@ public final class NinteichosahyoFactory {
      * @return 認定調査票（サービス状況）を扱うクラスのインスタンスを返します。
      */
     public static Ninteichosahyo<NinteichosaItemKubunOfGaikyo, INinteichosaItem> createサービス状況Instance(KoroshoIFKubun 厚労省IF識別区分) {
+        List<INinteichosaItemGroup> list = new ArrayList<>();
         switch (厚労省IF識別区分) {
             case V06A:
+
+                for (INinteichosaItemGroup item : NinteichosaItemGroupOf2006.values()) {
+                    if (!item.isKihonChosaGroup()) {
+                        list.add(item);
+                    }
+                }
                 return new Ninteichosahyo(new NinteichosahyoRegulationOf2006().getサービス状況調査定義(),
-                        toListOfGaikyoChosaGroup(NinteichosaItemGroupOf2006.values()));
+                        list);
+
             case V09A:
+
+                for (INinteichosaItemGroup item : NinteichosaItemGroupOf2009.values()) {
+                    if (!item.isKihonChosaGroup()) {
+                        list.add(item);
+                    }
+                }
                 return new Ninteichosahyo(new NinteichosahyoRegulationOf2009().getサービス状況調査定義(),
-                        toListOfGaikyoChosaGroup(NinteichosaItemGroupOf2009.values()));
+                        list);
+
             default:
                 return new Ninteichosahyo(Collections.EMPTY_MAP, Collections.EMPTY_LIST);
         }
@@ -55,35 +70,32 @@ public final class NinteichosahyoFactory {
      * @return 認定調査票（基本調査）を扱うクラスのインスタンスを返します。
      */
     public static Ninteichosahyo<NinteichosaItemKubunOfKihon, INinteichosaItem> create基本調査Instance(KoroshoIFKubun 厚労省IF識別区分) {
+        List<INinteichosaItemGroup> list = new ArrayList<>();
         switch (厚労省IF識別区分) {
             case V06A:
+//                return new Ninteichosahyo(new NinteichosahyoRegulationOf2006().get基本調査定義(),
+//                        toListOfKihonChosaGroup(NinteichosaItemGroupOf2006.values()));
+
+                for (INinteichosaItemGroup item : NinteichosaItemGroupOf2006.values()) {
+                    if (item.isKihonChosaGroup()) {
+                        list.add(item);
+                    }
+                }
                 return new Ninteichosahyo(new NinteichosahyoRegulationOf2006().get基本調査定義(),
-                        toListOfKihonChosaGroup(NinteichosaItemGroupOf2006.values()));
+                        list);
+
             case V09A:
+
+                for (INinteichosaItemGroup item : NinteichosaItemGroupOf2009.values()) {
+                    if (item.isKihonChosaGroup()) {
+                        list.add(item);
+                    }
+                }
                 return new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(),
-                        toListOfKihonChosaGroup(NinteichosaItemGroupOf2009.values()));
+                        list);
             default:
                 return new Ninteichosahyo(Collections.EMPTY_MAP, Collections.EMPTY_LIST);
         }
     }
 
-    private static List<INinteichosaItemGroup> toListOfGaikyoChosaGroup(INinteichosaItemGroup[] items) {
-        List<INinteichosaItemGroup> list = new ArrayList<>();
-        for (INinteichosaItemGroup item : items) {
-            if (!item.isKihonChosaGroup()) {
-                list.add(item);
-            }
-        }
-        return list;
-    }
-
-    private static List<INinteichosaItemGroup> toListOfKihonChosaGroup(INinteichosaItemGroup[] items) {
-        List<INinteichosaItemGroup> list = new ArrayList<>();
-        for (INinteichosaItemGroup item : items) {
-            if (item.isKihonChosaGroup()) {
-                list.add(item);
-            }
-        }
-        return list;
-    }
 }

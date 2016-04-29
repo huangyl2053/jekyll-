@@ -7,11 +7,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceket
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.DbShoriDataParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.HihokenshaNoDataParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.kogakuserviceketteijohotorikomidatahenshu.SinBangoTempParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.PSMParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShikibetsuCodeTempParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInPartEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInYiLanEntity;
@@ -21,6 +18,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenk
 
 /**
  * 高額サービス費決定情報取込みのMapper
+ *
+ * @reamsid_L DBC-0980-400 lijunjun
  */
 public interface IKogakuServiceKetteiJohoTorikomiDataHenshuMapper {
 
@@ -58,10 +57,10 @@ public interface IKogakuServiceKetteiJohoTorikomiDataHenshuMapper {
     /**
      * 新旧被保険者番号を変換する
      *
-     * @param par SinBangoTempParameter
+     * @param henkanEntity DbT7026ShinKyuHihokenshaNoHenkanEntity
      * @return KogakuKyufuKetteiInTempTableEntity
      */
-    KogakuKyufuKetteiInTempTableEntity update高額サービス費決定情報一時TBL1(SinBangoTempParameter par);
+    KogakuKyufuKetteiInTempTableEntity update高額サービス費決定情報一時TBL1(DbT7026ShinKyuHihokenshaNoHenkanEntity henkanEntity);
 
     /**
      * select被保険者情報の取得
@@ -73,25 +72,25 @@ public interface IKogakuServiceKetteiJohoTorikomiDataHenshuMapper {
     /**
      * update高額サービス費決定情報一時TBLの更新
      *
-     * @param par HihokenshaNoDataParameter
+     * @param 被保険者台帳管理Entity DbT1001HihokenshaDaichoEntity
      * @return KogakuKyufuKetteiInTempTableEntity
      */
-    KogakuKyufuKetteiInTempTableEntity update高額サービス費決定情報一時TBL2(HihokenshaNoDataParameter par);
+    KogakuKyufuKetteiInTempTableEntity update高額サービス費決定情報一時TBL2(DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity);
 
     /**
      * select一時デーブルから識別コードを取得
      *
-     * @return KogakuKyufuKetteiInTempTableEntity
+     * @return List<KogakuKyufuKetteiInTempTableEntity>
      */
-    KogakuKyufuKetteiInTempTableEntity select一時デーブルから識別コード();
+    List<KogakuKyufuKetteiInTempTableEntity> select一時デーブルから識別コード();
 
     /**
      * update高額サービス費決定情報一時TBLの更新3
      *
-     * @param par ShikibetsuCodeTempParameter
+     * @param 宛名識別対象PSM PSMEntity
      * @return KogakuKyufuKetteiInTempTableEntity
      */
-    KogakuKyufuKetteiInTempTableEntity update高額サービス費決定情報一時TBL3(ShikibetsuCodeTempParameter par);
+    KogakuKyufuKetteiInTempTableEntity update高額サービス費決定情報一時TBL3(PSMEntity 宛名識別対象PSM);
 
     /**
      * creat高額サービス費決定情報一時テーブル

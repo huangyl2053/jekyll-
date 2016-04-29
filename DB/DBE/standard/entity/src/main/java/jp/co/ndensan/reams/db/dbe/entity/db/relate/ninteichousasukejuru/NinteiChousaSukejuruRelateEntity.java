@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 認定調査スケジュール登録1RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

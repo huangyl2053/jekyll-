@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 出力期を編集する処理クラスです。
+ *
+ * @reamsid_L DBB-9040-110 wangxiaodong
  */
 public class ShutsuryokuKiKohoFactory {
 
@@ -51,7 +53,8 @@ public class ShutsuryokuKiKohoFactory {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShutsuryokuKiKohoFactory}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShutsuryokuKiKohoFactory}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShutsuryokuKiKohoFactory}のインスタンス
      */
     public static ShutsuryokuKiKohoFactory createInstance() {
         return InstanceProvider.create(ShutsuryokuKiKohoFactory.class);

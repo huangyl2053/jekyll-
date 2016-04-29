@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 支払方法変更（償還払い化）終了申請書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-697 zhangguopeng
  */
 interface IShiharaiHenkoShokanbaraikaShoryoShinseishoBuilder extends IReportBuilder<ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource> {
 }

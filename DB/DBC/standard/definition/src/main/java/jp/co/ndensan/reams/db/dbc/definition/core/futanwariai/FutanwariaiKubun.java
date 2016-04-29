@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 負担割合区分を表す列挙型です。
+ *
+ * @reamsid_L DBC-9999-022 xicongwang
  */
 public enum FutanwariaiKubun {
 

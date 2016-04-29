@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopy;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInTempUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120070.KogakuKyufuTaishoshaInUpdateProcess;
@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額介護サービス費給付対象者取込みのバッチ処理フロー
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 public class KogakuKyufuTaishoshaInFlow extends BatchFlowBase<KogakuKyufuTaishoshaInBatchParameter> {
 
@@ -42,7 +44,7 @@ public class KogakuKyufuTaishoshaInFlow extends BatchFlowBase<KogakuKyufuTaishos
         executeStep(CSV_FILE_CHECK);
 
         HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(CSV_FILE_CHECK),
-                SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
+                SharedFileCopyProcess.PARAMETER_OUT_FILEPATHLIST);
         fileNameList = new ArrayList<>();
         for (RString filename : filePathList.keySet()) {
             fileNameList.add(filename);
@@ -59,11 +61,11 @@ public class KogakuKyufuTaishoshaInFlow extends BatchFlowBase<KogakuKyufuTaishos
     @Step(CSV_FILE_CHECK)
     IBatchFlowCommand csvFileCheckProcess() {
         Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
-        processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
-        processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_SHAREDNAME, sharedFileKey);
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
 
-        return simpleBatch(SharedFileCopy.class).arguments(processParameter).define();
+        return simpleBatch(SharedFileCopyProcess.class).arguments(processParameter).define();
     }
 
     @Step(TEMP_TABLE_INSERT)

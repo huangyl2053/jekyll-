@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichousasukejuru.
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichousasukejuru.NinteiChousaSukejuruRelateEntity;
 
 /**
- *
  * 認定調査スケジュール登録1のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0020-010 lizhuoxuan
  */
 public interface INinteichosaScheduleMapper {
 

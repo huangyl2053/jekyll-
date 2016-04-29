@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 
 /**
  * 宛名識別対象Entity。
+ *
+ * @reamsid_L DBA-0560-020 xuyannan
  */
 @lombok.Getter
 @lombok.Setter

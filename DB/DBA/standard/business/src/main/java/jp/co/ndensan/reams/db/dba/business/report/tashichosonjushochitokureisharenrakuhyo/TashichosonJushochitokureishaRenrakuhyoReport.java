@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護保険他市町村住所地特例者連絡票のReportです。
+ *
+ * @reamsid_L DBA-0380-080 duanzhanli
+ *
  */
 public class TashichosonJushochitokureishaRenrakuhyoReport extends Report<TashichosonJushochitokureishaRenrakuhyoReportSource> {
 

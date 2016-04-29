@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--  -->
 
+<!-- @reamsid_L DBC-1021-100 chenaoqi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper">
                     
     <select id="select未審査申請"
@@ -13,7 +13,8 @@
         SELECT
         dbT3038ShokanKihon.*,
         dbT3034ShokanShinsei.*,  
-        ShikibetsuTaisho."meisho" AS "氏名"
+        ShikibetsuTaisho."meisho" AS "氏名",
+        ShikibetsuTaisho."shikibetsuCode" AS 識別コード
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) AS dbT3038ShokanKihon
         INNER JOIN (SELECT "hihokenshaNo","shikibetsuCode",MAX("idoYMD" || "edaNo") FROM rgdb."DbT1001HihokenshaDaicho" 
@@ -23,13 +24,23 @@
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS dbT3034ShokanShinsei
         ON  "dbT3038ShokanKihon_hiHokenshaNo" = "dbT3034ShokanShinsei_hiHokenshaNo"
         AND "dbT3038ShokanKihon_serviceTeikyoYM" = "dbT3034ShokanShinsei_serviceTeikyoYM"
-        AND "dbT3038ShokanKihon_seiriNp" = "dbT3034ShokanShinsei_seiriNo"
+        AND "dbT3038ShokanKihon_seiriNo" = "dbT3034ShokanShinsei_seiriNo"
         AND "dbT3034ShokanShinsei_shikyuShinseiShinsaKubun" = '1'
         LEFT OUTER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS ShikibetsuTaisho
         on temp1."shikibetsuCode" = ShikibetsuTaisho."shikibetsuCode"
         WHERE substring("dbT3038ShokanKihon_yoshikiNo",1,3)='21C'
-        AND NOT EXISTS(SELECT "hiHokenshaNo","serviceTeikyoYM","seiriNo" FROM rgdb."DbT3036ShokanHanteiKekka")
+        AND NOT EXISTS(
+            SELECT
+            "hiHokenshaNo",
+            "serviceTeikyoYM",
+            "seiriNo"
+        FROM
+            rgdb. "DbT3036ShokanHanteiKekka" AS "DbT3036"
+            WHERE "DbT3036"."hiHokenshaNo" = "dbT3038ShokanKihon_hiHokenshaNo"
+            AND "DbT3036"."serviceTeikyoYM" = "dbT3038ShokanKihon_serviceTeikyoYM"
+            AND "DbT3036"."seiriNo" = "dbT3038ShokanKihon_seiriNo"
+        )
         <if test="支給申請日From != null">
             AND "dbT3034ShokanShinsei_shinseiYMD" <![CDATA[>=]]> #{支給申請日From}
         </if>
@@ -44,29 +55,17 @@
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntity">
         <id column="dbT3038ShokanKihon_hiHokenshaNo"/>
         <id column="dbT3038ShokanKihon_serviceTeikyoYM"/>
-        <id column="dbT3038ShokanKihon_seiriNp"/>
+        <id column="dbT3038ShokanKihon_seiriNo"/>
         <id column="dbT3038ShokanKihon_jigyoshaNo"/>
         <id column="dbT3038ShokanKihon_yoshikiNo"/>
         <id column="dbT3038ShokanKihon_meisaiNo"/>
         <result property="氏名" column="meisho"
             typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode"
+            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <association property="償還払請求基本Entity" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
         <association property="償還払支給申請Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
     </resultMap>  
-    
-    <resultMap id="resultMap_DbT1001HihokenshaDaichoEntity"
-               type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
-               autoMapping="true">
-         <result property="shikibetsuCode" column="shikibetsuCode" 
-                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-    </resultMap>
-    <select id="get識別コード" resultMap="resultMap_DbT1001HihokenshaDaichoEntity" parameterType="java.util.Map" fetchSize="500">
-        select "shikibetsuCode"
-        from rgdb."DbT1001HihokenshaDaicho"
-        where "hihokenshaNo" = #{hihokenshaNo}
-        order by "idoYMD" DESC,"edaNo" DESC
-        LIMIT 1
-    </select>
 </mapper>

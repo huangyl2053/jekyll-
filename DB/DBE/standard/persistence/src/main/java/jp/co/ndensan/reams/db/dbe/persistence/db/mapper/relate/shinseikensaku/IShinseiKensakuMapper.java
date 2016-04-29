@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseikensaku.ShinseiKensaku
 
 /**
  * 要介護認定申請検索のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-1370-010 sunhaidi
  */
 public interface IShinseiKensakuMapper {
 

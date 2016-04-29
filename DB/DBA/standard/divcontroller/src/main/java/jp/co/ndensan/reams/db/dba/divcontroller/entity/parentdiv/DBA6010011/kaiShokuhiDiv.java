@@ -1,17 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010011;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * kaiShokuhi のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+
+/**
+ * kaiShokuhi のクラスファイル
+ *
  * @author 自動生成
  */
 public class kaiShokuhiDiv extends Panel {
@@ -21,6 +20,7 @@ public class kaiShokuhiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("radShokuhiGaku")
     private RadioButton radShokuhiGaku;
     @JsonProperty("txtShokuhiGaku")
@@ -39,7 +39,7 @@ public class kaiShokuhiDiv extends Panel {
 
     @JsonProperty("radShokuhiGaku")
     public void setRadShokuhiGaku(RadioButton radShokuhiGaku) {
-        this.radShokuhiGaku=radShokuhiGaku;
+        this.radShokuhiGaku = radShokuhiGaku;
     }
 
     @JsonProperty("txtShokuhiGaku")
@@ -49,7 +49,7 @@ public class kaiShokuhiDiv extends Panel {
 
     @JsonProperty("txtShokuhiGaku")
     public void setTxtShokuhiGaku(TextBox txtShokuhiGaku) {
-        this.txtShokuhiGaku=txtShokuhiGaku;
+        this.txtShokuhiGaku = txtShokuhiGaku;
     }
 
 }

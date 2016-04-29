@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受領委任払いの契約事業者を管理する画面のパラメータです。
+ *
+ * @reamsid_L DBC-2130-010 cuilin
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class PnlTotalSearchParameter implements Serializable {
 
-    private static final long serialVersionUID = -6680438140785085186L;
+    private static final long serialVersionUID = -6680438140785085181L;
 
     private final RString 契約番号;
     private final RString 契約サービス種類;
@@ -29,15 +31,16 @@ public class PnlTotalSearchParameter implements Serializable {
     private final RString 契約事業者名;
 
     /**
+     * パラメータを作成する。
      *
-     * @param 契約番号 契約番号
-     * @param 契約サービス種類 契約サービス種類
-     * @param 被保番号 被保番号
-     * @param 氏名 氏名
-     * @param 契約申請日 契約申請日
-     * @param 契約決定日 契約決定日
-     * @param 契約事業者番号 契約事業者番号
-     * @param 契約事業者名 契約事業者名
+     * @param 契約番号 RString
+     * @param 契約サービス種類 RString
+     * @param 被保番号 RString
+     * @param 氏名 RString
+     * @param 契約申請日 FlexibleDate
+     * @param 契約決定日 FlexibleDate
+     * @param 契約事業者番号 RString
+     * @param 契約事業者名 RString
      */
     public PnlTotalSearchParameter(RString 契約番号,
             RString 契約サービス種類,

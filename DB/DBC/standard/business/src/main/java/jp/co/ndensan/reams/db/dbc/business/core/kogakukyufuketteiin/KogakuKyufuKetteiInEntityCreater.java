@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額サービス費決定情報一時TBLの登録
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class KogakuKyufuKetteiInEntityCreater {
 
@@ -36,7 +38,7 @@ public class KogakuKyufuKetteiInEntityCreater {
      * @param csvMesai KogakuKyufuKetteiInMeisaiCSVEntity
      * @return KogakuKyufuKetteiInTempTableEntity
      */
-    public KogakuKyufuKetteiInTempTableEntity createMeisaiEntity(
+    public KogakuKyufuKetteiInTempTableEntity createEntity(
             KogakuKyufuKetteiInHeaderCSVEntity csvHeader,
             KogakuKyufuKetteiInMeisaiCSVEntity csvMesai) {
         KogakuKyufuKetteiInTempTableEntity entity = new KogakuKyufuKetteiInTempTableEntity();
@@ -48,7 +50,7 @@ public class KogakuKyufuKetteiInEntityCreater {
         entity.set国保連合会名(trim囲み文字(csvHeader.get国保連合会名()));
 
         entity.set帳票レコード種別(trim囲み文字(csvMesai.get帳票レコード種別()));
-        entity.setNo(Integer.parseInt(trim囲み文字(csvMesai.getNo()).toString()));
+        entity.setNo(trim囲み文字(csvMesai.getNo()));
         entity.set被保険者番号(new HihokenshaNo(trim囲み文字(csvMesai.get被保険者番号())));
         entity.set被保険者氏名漢字(new AtenaMeisho(trim囲み文字(csvMesai.get被保険者氏名())));
         entity.setサービス提供年月(new FlexibleYearMonth(trim囲み文字(csvMesai.getサービス提供年月())));

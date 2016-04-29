@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査地区グループ調査地区一覧情報を管理するクラスです。
+ * 
+ * @reamsid_L DBE-0024-010  suguangjun
  */
 public class ChosaChikuGroupMaster {
 

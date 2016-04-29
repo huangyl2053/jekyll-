@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.chikuninteicho
 
 /**
  * 地区認定調査員のマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public interface IChikuNinteiChosainMapper {
 

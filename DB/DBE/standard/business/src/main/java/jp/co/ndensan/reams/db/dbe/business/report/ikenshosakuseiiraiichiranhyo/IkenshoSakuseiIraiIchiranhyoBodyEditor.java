@@ -10,10 +10,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医意見書作成依頼一覧Editorです。
+ *
+ * @reamsid_L DBE-0080-090 zhangzhiming
  */
 public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIraiIchiranhyoEditor {
 
-    private final IkenshoSakuseiIraiIchiranhyoBodyItem item;
+    private final IkenshoSakuseiIraiIchiranhyoItem item;
     private final int index;
 
     /**
@@ -22,7 +24,7 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
      * @param item {@link IkenshoSakuseiIraiIchiranhyoHeadEditor}
      * @param index int
      */
-    protected IkenshoSakuseiIraiIchiranhyoBodyEditor(IkenshoSakuseiIraiIchiranhyoBodyItem item, int index) {
+    protected IkenshoSakuseiIraiIchiranhyoBodyEditor(IkenshoSakuseiIraiIchiranhyoItem item, int index) {
         this.item = item;
         this.index = index;
     }
@@ -33,6 +35,22 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
     }
 
     private IkenshoSakuseiIraiIchiranhyoReportSource editSource(IkenshoSakuseiIraiIchiranhyoReportSource source) {
+        source.hakkoYMD = item.getHakkoYMD();
+        source.denshiKoin = item.getDenshiKoin();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.koinShoryaku = item.getKoinShoryaku();
+        source.yubinNo1 = item.getYubinNo1();
+        source.jushoText = item.getJushoText();
+        source.kikanNameText = item.getKikanNameText();
+        source.shimeiText = item.getShimeiText();
+        source.meishoFuyo = item.getMeishoFuyo();
+        source.printTimeStamp = item.getPrintTimeStamp();
+        source.tsuchibun1 = item.getTsuchibun1();
         source.listIchiranhyo_1 = new RString(String.valueOf(index));
         source.listIchiranhyo_2 = item.getListIchiranhyo_2();
         source.listIchiranhyo_3 = item.getListIchiranhyo_3();

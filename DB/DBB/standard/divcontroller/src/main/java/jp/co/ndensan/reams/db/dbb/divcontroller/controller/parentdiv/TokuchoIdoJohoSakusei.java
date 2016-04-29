@@ -37,6 +37,12 @@ public class TokuchoIdoJohoSakusei {
 
     private static final RString 処理日時 = new RString("処理日時");
 
+    /**
+     * 画面の初期化メソッドです。
+     *
+     * @param panel TokuchoIdoJohoSakuseiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<TokuchoIdoJohoSakuseiDiv> onLoad_TokuchoIdoJohoSakusei(TokuchoIdoJohoSakuseiDiv panel) {
         ResponseData<TokuchoIdoJohoSakuseiDiv> response = new ResponseData<>();
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(TOKUCHO_IDO_JOHO_SAKUSEI);
@@ -109,6 +115,12 @@ public class TokuchoIdoJohoSakusei {
         return response;
     }
 
+    /**
+     * chkSentaku07ボッタのonClick事件です。
+     *
+     * @param panel TokuchoIdoJohoSakuseiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<TokuchoIdoJohoSakuseiDiv> onClick_chkSentaku07(TokuchoIdoJohoSakuseiDiv panel) {
         ResponseData<TokuchoIdoJohoSakuseiDiv> response = new ResponseData<>();
 
@@ -124,6 +136,12 @@ public class TokuchoIdoJohoSakusei {
         return response;
     }
 
+    /**
+     * chkSentaku08ボッタのonClick事件です。
+     *
+     * @param panel TokuchoIdoJohoSakuseiDiv
+     * @return 画面のResponseData
+     */
     public ResponseData<TokuchoIdoJohoSakuseiDiv> onClick_chkSentaku08(TokuchoIdoJohoSakuseiDiv panel) {
         ResponseData<TokuchoIdoJohoSakuseiDiv> response = new ResponseData<>();
 

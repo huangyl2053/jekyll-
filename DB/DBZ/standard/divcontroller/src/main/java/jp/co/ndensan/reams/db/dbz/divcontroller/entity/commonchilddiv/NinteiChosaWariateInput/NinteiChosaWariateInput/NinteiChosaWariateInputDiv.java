@@ -4,18 +4,25 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaWariateInput.NinteiChosaWariateInput.INinteiChosaWariateInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * NinteiChosaWariateInput のクラスファイル 
- * 
+ * NinteiChosaWariateInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWariateInputDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
     /*
      * [ private の作成 ]
@@ -119,7 +126,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosainCode(TextBoxCode txtNinteiChosainCode) {
+    public void setTxtNinteiChosainCode(TextBoxCode txtNinteiChosainCode) {
         this.getWariateJokyo().setTxtNinteiChosainCode(txtNinteiChosainCode);
     }
 
@@ -129,7 +136,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
+    public void setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
         this.getWariateJokyo().setTxtNinteiChosainName(txtNinteiChosainName);
     }
 
@@ -139,7 +146,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiCode(TextBoxCode txtNinteiChosaItakusakiCode) {
+    public void setTxtNinteiChosaItakusakiCode(TextBoxCode txtNinteiChosaItakusakiCode) {
         this.getWariateJokyo().setTxtNinteiChosaItakusakiCode(txtNinteiChosaItakusakiCode);
     }
 
@@ -149,7 +156,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
+    public void setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
         this.getWariateJokyo().setTxtNinteiChosaItakusakiName(txtNinteiChosaItakusakiName);
     }
 
@@ -159,7 +166,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaDate(TextBoxFlexibleDate txtNinteiChosaDate) {
+    public void setTxtNinteiChosaDate(TextBoxFlexibleDate txtNinteiChosaDate) {
         this.getWariateJokyo().setTxtNinteiChosaDate(txtNinteiChosaDate);
     }
 
@@ -169,7 +176,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaTime(TextBox txtNinteiChosaTime) {
+    public void setTxtNinteiChosaTime(TextBox txtNinteiChosaTime) {
         this.getWariateJokyo().setTxtNinteiChosaTime(txtNinteiChosaTime);
     }
 
@@ -179,7 +186,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaTimeFrame(TextBox txtNinteiChosaTimeFrame) {
+    public void setTxtNinteiChosaTimeFrame(TextBox txtNinteiChosaTimeFrame) {
         this.getWariateJokyo().setTxtNinteiChosaTimeFrame(txtNinteiChosaTimeFrame);
     }
 
@@ -189,7 +196,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setRadYoyakuKahi(RadioButton radYoyakuKahi) {
+    public void setRadYoyakuKahi(RadioButton radYoyakuKahi) {
         this.getWariateJokyo().setRadYoyakuKahi(radYoyakuKahi);
     }
 
@@ -199,7 +206,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaBiko(TextBox txtNinteiChosaBiko) {
+    public void setTxtNinteiChosaBiko(TextBox txtNinteiChosaBiko) {
         this.getWariateJokyo().setTxtNinteiChosaBiko(txtNinteiChosaBiko);
     }
 
@@ -209,7 +216,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setRadYoyakuJokyo(RadioButton radYoyakuJokyo) {
+    public void setRadYoyakuJokyo(RadioButton radYoyakuJokyo) {
         this.getWariateJokyo().setRadYoyakuJokyo(radYoyakuJokyo);
     }
 
@@ -219,7 +226,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtHihoBangoNumber(TextBox txtHihoBangoNumber) {
+    public void setTxtHihoBangoNumber(TextBox txtHihoBangoNumber) {
         this.getTaishoshaShosai().setTxtHihoBangoNumber(txtHihoBangoNumber);
     }
 
@@ -229,7 +236,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtHihoBangoGosu(TextBox txtHihoBangoGosu) {
+    public void setTxtHihoBangoGosu(TextBox txtHihoBangoGosu) {
         this.getTaishoshaShosai().setTxtHihoBangoGosu(txtHihoBangoGosu);
     }
 
@@ -239,7 +246,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtHokenshaName(TextBox txtHokenshaName) {
+    public void setTxtHokenshaName(TextBox txtHokenshaName) {
         this.getTaishoshaShosai().setTxtHokenshaName(txtHokenshaName);
     }
 
@@ -249,7 +256,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiShinseiDate(TextBoxFlexibleDate txtNinteiShinseiDate) {
+    public void setTxtNinteiShinseiDate(TextBoxFlexibleDate txtNinteiShinseiDate) {
         this.getTaishoshaShosai().setTxtNinteiShinseiDate(txtNinteiShinseiDate);
     }
 
@@ -259,7 +266,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtNinteiShinseiKubun(TextBox txtNinteiShinseiKubun) {
+    public void setTxtNinteiShinseiKubun(TextBox txtNinteiShinseiKubun) {
         this.getTaishoshaShosai().setTxtNinteiShinseiKubun(txtNinteiShinseiKubun);
     }
 
@@ -269,7 +276,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtTaishoshaName(TextBox txtTaishoshaName) {
+    public void setTxtTaishoshaName(TextBox txtTaishoshaName) {
         this.getTaishoshaShosai().setTxtTaishoshaName(txtTaishoshaName);
     }
 
@@ -279,7 +286,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtTaishoshaNameKana(TextBox txtTaishoshaNameKana) {
+    public void setTxtTaishoshaNameKana(TextBox txtTaishoshaNameKana) {
         this.getTaishoshaShosai().setTxtTaishoshaNameKana(txtTaishoshaNameKana);
     }
 
@@ -289,7 +296,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtBasho(TextBox txtBasho) {
+    public void setTxtBasho(TextBox txtBasho) {
         this.getTaishoshaShosai().setTxtBasho(txtBasho);
     }
 
@@ -299,7 +306,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtChushajo(TextBox txtChushajo) {
+    public void setTxtChushajo(TextBox txtChushajo) {
         this.getTaishoshaShosai().setTxtChushajo(txtChushajo);
     }
 
@@ -309,7 +316,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtTachiainin1(TextBox txtTachiainin1) {
+    public void setTxtTachiainin1(TextBox txtTachiainin1) {
         this.getTaishoshaShosai().setTxtTachiainin1(txtTachiainin1);
     }
 
@@ -319,7 +326,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtRenrakusaki1(TextBox txtRenrakusaki1) {
+    public void setTxtRenrakusaki1(TextBox txtRenrakusaki1) {
         this.getTaishoshaShosai().setTxtRenrakusaki1(txtRenrakusaki1);
     }
 
@@ -329,7 +336,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtTachiainin2(TextBox txtTachiainin2) {
+    public void setTxtTachiainin2(TextBox txtTachiainin2) {
         this.getTaishoshaShosai().setTxtTachiainin2(txtTachiainin2);
     }
 
@@ -339,7 +346,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtRenrakusaki2(TextBox txtRenrakusaki2) {
+    public void setTxtRenrakusaki2(TextBox txtRenrakusaki2) {
         this.getTaishoshaShosai().setTxtRenrakusaki2(txtRenrakusaki2);
     }
 
@@ -349,7 +356,7 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setTxtTaishoshaShosaiMemo(TextBoxMultiLine txtTaishoshaShosaiMemo) {
+    public void setTxtTaishoshaShosaiMemo(TextBoxMultiLine txtTaishoshaShosaiMemo) {
         this.getTaishoshaShosai().setTxtTaishoshaShosaiMemo(txtTaishoshaShosaiMemo);
     }
 
@@ -359,11 +366,10 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getTaishoshaShosai().setBtnClear(btnClear);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

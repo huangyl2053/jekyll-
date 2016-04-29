@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
+ * 異動チェックリストの帳票項目クラスです。
  *
- * 異動チェックリストの帳票項目クラスです
+ * @reamsid_L DBA-0530-060 xuyue
  */
 public class IdoCheckListReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

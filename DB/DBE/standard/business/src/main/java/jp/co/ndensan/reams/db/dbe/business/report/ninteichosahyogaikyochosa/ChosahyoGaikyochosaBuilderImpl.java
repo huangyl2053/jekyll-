@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 要介護認定調査票（概況調査）Builderのクラスです。
+ *
+ * @reamsid_L DBE-0080-030 xuyannan
  */
 public class ChosahyoGaikyochosaBuilderImpl implements IChosahyoGaikyochosaBuilder {
 

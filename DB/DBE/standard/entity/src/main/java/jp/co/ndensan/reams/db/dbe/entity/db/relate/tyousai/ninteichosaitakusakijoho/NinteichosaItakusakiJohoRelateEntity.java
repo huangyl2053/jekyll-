@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 
 /**
  * 認定調査委託先情報RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
-public class NinteichosaItakusakiJohoRelateEntity implements Cloneable, Serializable {
+public class NinteichosaItakusakiJohoRelateEntity implements Serializable {
 
     private static final long serialVersionUID = 8105757481386721125L;
 

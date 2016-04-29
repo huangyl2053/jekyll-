@@ -92,6 +92,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払い状況照会のクラス
+ *
+ * @reamsid_L DBC-1010-180 panhe
  */
 public class ShokanbaraiJyokyoShokai {
 

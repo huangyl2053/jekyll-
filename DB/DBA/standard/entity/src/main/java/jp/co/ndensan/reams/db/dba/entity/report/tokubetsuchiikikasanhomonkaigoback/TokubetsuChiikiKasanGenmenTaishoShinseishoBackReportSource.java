@@ -1,10 +1,14 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigoback;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書のReportSource
+ *
+ * @reamsid_L DBA-0540-700 suguangjun
+ */
 public class TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

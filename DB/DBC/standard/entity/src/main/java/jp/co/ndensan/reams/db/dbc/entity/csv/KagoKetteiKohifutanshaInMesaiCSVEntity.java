@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 介護給付費過誤決定通知書情報取込（公費負担者分）項目定義
  *
+ * @reamsid_L DBC-0980-420 zhangrui
  */
 @lombok.Getter
 @lombok.Setter

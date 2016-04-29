@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会スケジュール表かがみのマッパーインタフェースです。
+ *
+ * @reamsid_L DBE-0130-100 yaodongsheng
  */
 public interface IKaigoNinteiShinsakaiScheduleKagamiMapper {
 

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 納入通知書期情報です。
+ *
+ * @reamsid_L DBB-9110-070 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
@@ -48,8 +50,8 @@ public class NonyuTsuchiShoKiJoho {
     private RString 納付番号;
     private RString 確認番号;
     private RString 納付区分;
-    private RString OCRID;
-    private Map<Integer, RString> OCR;
+    private RString ocrid;
+    private Map<Integer, RString> ocr;
     private RString バーコード情報;
     private RString バーコード情報上段;
     private RString バーコード情報下段;

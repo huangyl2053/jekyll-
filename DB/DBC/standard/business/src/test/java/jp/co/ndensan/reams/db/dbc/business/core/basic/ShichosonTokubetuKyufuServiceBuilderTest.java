@@ -112,7 +112,7 @@ public class ShichosonTokubetuKyufuServiceBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の市町村特別給付用給付率引下有フラグは_設定した値と同じ市町村特別給付用給付率引下有フラグを返す() {
             business = sut.set市町村特別給付用給付率引下有フラグ(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用給付率引下有フラグ).build();
-            assertThat(business.get市町村特別給付用給付率引下有フラグ(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用給付率引下有フラグ));
+            assertThat(business.is市町村特別給付用給付率引下有フラグ(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用給付率引下有フラグ));
         }
 
         @Test

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 出力帳票entityクラスです。
  *
+ * @reamsid_L DBB-0820-020 xuyue
  */
 public class ShuturyokuChohuoEntity {
 

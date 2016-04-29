@@ -13,6 +13,8 @@ import lombok.Getter;
 
 /**
  * 判定結果情報出力(保険者)を特定するためのProcess用パラメータクラスです。
+ *
+ * @reamsid_L DBE-0190-030 duanzhanli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -45,7 +47,7 @@ public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessP
      * @return mybatisパラメータ
      */
     public HanteiKekkaJohoShutsuryokuMybitisParamter toHanteiKekkaJohoShutsuryokuMybitisParamter() {
-        return new HanteiKekkaJohoShutsuryokuMybitisParamter(shinseishoKanriNo, nijiHanteiYMDFrom, nijiHanteiYMDTo);
+        return HanteiKekkaJohoShutsuryokuMybitisParamter.createParam(shinseishoKanriNo, nijiHanteiYMDFrom, nijiHanteiYMDTo);
     }
 
 }

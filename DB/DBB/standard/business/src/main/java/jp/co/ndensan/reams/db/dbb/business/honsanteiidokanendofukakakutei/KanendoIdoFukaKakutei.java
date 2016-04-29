@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
+ * 異動賦課対象取得用ビジネスです。
  *
- * 異動賦課対象取得用ビジネスです
+ * @reamsid_L DBB-0680-020 wangkanglei
  */
 @lombok.Getter
 @lombok.Setter

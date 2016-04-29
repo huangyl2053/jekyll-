@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  *
  * DBUMN00000_資格事由取得のカラスです。
+ *
+ * @reamsid_L DBU-0111-010 wanghui
  */
 public class SikakuJiyuShutoku {
 

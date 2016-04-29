@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 賦課台帳（本算定）帳票FukaDaichoReport
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 public class FukaDaichoReport extends Report<FukaDaichoSource> {
 
@@ -31,7 +33,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
      * createFormメソッド
      *
      * @param choteiboItems List<FukaDaichoItem>
-     * @return  FukaDaichoReport
+     * @return FukaDaichoReport
      */
     public static FukaDaichoReport createForm(@NonNull List<FukaDaichoItem> choteiboItems) {
         return new FukaDaichoReport(choteiboItems);

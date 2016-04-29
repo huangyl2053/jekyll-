@@ -8,17 +8,20 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.ShujiiIraiAtenaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.Shujiiikenshosakuseiirai;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiikenshosakuseiiraiRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshosakuseiirai.IShujiiIkenshoSakuseiIraiMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5301ShujiiIkenshoIraiJohoDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -27,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 主治医意見書作成依頼情報を管理するクラスです。
  *
+ * @reamsid_L DBE-0050-010 zuotao
  */
 public class ShujiiIkenshoSakuseiIraiManager {
 
@@ -55,13 +59,13 @@ public class ShujiiIkenshoSakuseiIraiManager {
     /**
      * 申請者情報を取得します。
      *
-     * @param hiHokenshaNo 被保険者番号
+     * @param param 主治医意見書一覧のMyBatis用パラメータ
      * @return 申請者情報
      */
     @Transaction
-    public SearchResult<Shujiiikenshosakuseiirai> get申請者情報(RString hiHokenshaNo) {
+    public SearchResult<Shujiiikenshosakuseiirai> get申請者情報(ShujiiIkenshoSakuseiIraiParameter param) {
         IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
-        List<ShujiiikenshosakuseiiraiRelateEntity> entityList = mapper.get申請者情報(hiHokenshaNo);
+        List<ShujiiikenshosakuseiiraiRelateEntity> entityList = mapper.get申請者情報(param);
         List<Shujiiikenshosakuseiirai> businessList = new ArrayList<>();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<Shujiiikenshosakuseiirai>emptyList(), 0, false);
@@ -75,13 +79,13 @@ public class ShujiiIkenshoSakuseiIraiManager {
     /**
      * 主治医意見書作成依頼情報を取得します。
      *
-     * @param hiHokenshaNo 被保険者番号
+     * @param param 主治医意見書一覧のMyBatis用パラメータ
      * @return 主治医意見書作成依頼情報
      */
     @Transaction
-    public SearchResult<ShujiiIkenshoIraiJoho> get主治医意見書作成依頼情報(RString hiHokenshaNo) {
+    public SearchResult<ShujiiIkenshoIraiJoho> get主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiParameter param) {
         IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
-        List<DbT5301ShujiiIkenshoIraiJohoEntity> entityList = mapper.get主治医意見書作成依頼情報(hiHokenshaNo);
+        List<DbT5301ShujiiIkenshoIraiJohoEntity> entityList = mapper.get主治医意見書作成依頼情報(param);
         List<ShujiiIkenshoIraiJoho> businessList = new ArrayList<>();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<Shujiiikenshosakuseiirai>emptyList(), 0, false);
@@ -97,13 +101,13 @@ public class ShujiiIkenshoSakuseiIraiManager {
     /**
      * 要介護認定申請情報を取得します。
      *
-     * @param hiHokenshaNo 被保険者番号
+     * @param param 主治医意見書一覧のMyBatis用パラメータ
      * @return 要介護認定申請情報
      */
     @Transaction
-    public SearchResult<NinteiShinseiJoho> get要介護認定申請情報(RString hiHokenshaNo) {
+    public SearchResult<NinteiShinseiJoho> get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param) {
         IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
-        List<DbT5101NinteiShinseiJohoEntity> entityList = mapper.get要介護認定申請情報(hiHokenshaNo);
+        List<DbT5101NinteiShinseiJohoEntity> entityList = mapper.get要介護認定申請情報(param);
         List<NinteiShinseiJoho> businessList = new ArrayList<>();
         if (entityList.isEmpty()) {
             return SearchResult.of(Collections.<Shujiiikenshosakuseiirai>emptyList(), 0, false);
@@ -138,5 +142,21 @@ public class ShujiiIkenshoSakuseiIraiManager {
         DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
         entity.setState(state);
         要介護認定申請情報dac.save(entity);
+    }
+
+    /**
+     * 宛先情報を取得します。
+     *
+     * @param atenaJohoParameter 宛先情報取得のパラメータ
+     * @return 宛先情報
+     */
+    @Transaction
+    public ShujiiIraiAtenaJoho get宛先情報(ShujiiIraiAtenaJohoParameter atenaJohoParameter) {
+        IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
+        ShujiiIraiAtenaJohoRelateEntity entity = mapper.get宛名情報(atenaJohoParameter);
+        if (entity == null) {
+            return null;
+        }
+        return new ShujiiIraiAtenaJoho(entity);
     }
 }

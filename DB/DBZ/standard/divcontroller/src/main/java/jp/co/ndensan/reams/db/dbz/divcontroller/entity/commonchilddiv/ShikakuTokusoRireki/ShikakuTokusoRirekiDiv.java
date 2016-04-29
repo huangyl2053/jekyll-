@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併あり;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併なし;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -40,11 +41,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  * ShikakuTokusoRireki のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0130-011 huangh
  */
 public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirekiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -371,62 +372,57 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
             }
         }
-
         ShikakuTokusoFinder shikakuTokusoFinder = ShikakuTokusoFinder.createInstance();
         ShikakuTokusoParameter parmeter = ShikakuTokusoParameter.createParam(hihokenshaNo, shikibetsuCode);
 
         // 「ビジネス設計_DBAMN00000_資格得喪履歴」の「一覧データ取得」を参照する
         SearchResult<ShikakuTokuso> result = shikakuTokusoFinder.getShikakuTokuso(parmeter);
         List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
-
-        // 画面設定
         for (ShikakuTokuso shikakuTokuso : result.records()) {
-
             dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
 
             TextBoxFlexibleDate 資格取得日 = new TextBoxFlexibleDate();
             資格取得日.setValue(shikakuTokuso.get資格取得年月日());
             row.setShutokuDate(資格取得日);
-
             TextBoxFlexibleDate 資格取得届出日 = new TextBoxFlexibleDate();
             資格取得届出日.setValue(shikakuTokuso.get資格取得届出年月日());
             row.setShutokuTodokedeDate(資格取得届出日);
-
-            try {
-                row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getName());
-            } catch (IllegalArgumentException e) {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get取得事由コード())) {
+                row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).get名称());
+                row.setShutokuJiyuKey(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getコード());
+            } else {
                 row.setShutokuJiyu(RString.EMPTY);
+                row.setShutokuJiyuKey(RString.EMPTY);
             }
-            try {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get被保険者区分コード())) {
                 row.setHihokenshaKubun(ShikakuKubun.toValue(shikakuTokuso.get被保険者区分コード()).get略称());
-            } catch (IllegalArgumentException e) {
+            } else {
                 row.setHihokenshaKubun(RString.EMPTY);
             }
-
             TextBoxFlexibleDate 資格喪失日 = new TextBoxFlexibleDate();
             資格喪失日.setValue(shikakuTokuso.get資格喪失年月日());
             row.setSoshitsuDate(資格喪失日);
-
             TextBoxFlexibleDate 資格喪失届出日 = new TextBoxFlexibleDate();
             資格喪失届出日.setValue(shikakuTokuso.get資格喪失届出年月日());
             row.setSoshitsuTodokedeDate(資格喪失届出日);
-
-            try {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get喪失事由コード())) {
                 row.setSoshitsuJiyu(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).get名称());
-            } catch (IllegalArgumentException e) {
+                row.setSoshitsuJiyuKey(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).getコード());
+            } else {
                 row.setSoshitsuJiyu(RString.EMPTY);
+                row.setSoshitsuJiyuKey(RString.EMPTY);
             }
-
-            try {
+            if (!RString.isNullOrEmpty(shikakuTokuso.get住所地特例フラグ())) {
                 row.setJutokuKubun(JushochitokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
-            } catch (IllegalArgumentException e) {
+            } else {
                 row.setJutokuKubun(RString.EMPTY);
             }
             row.setShozaiHokensha(shikakuTokuso.get市町村名称());
             row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
             row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
             row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
-
+            row.setHihokenshaNo(shikakuTokuso.get被保険者番号().getColumnValue());
+            row.setDaNo(shikakuTokuso.get枝番());
             RDateTime 処理日時 = shikakuTokuso.get処理日時();
             RStringBuilder 処理日時表示 = new RStringBuilder();
             処理日時表示.append(処理日時.getDate().wareki().toDateString());
@@ -436,12 +432,48 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
             処理日時表示.append(":");
             処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
-
             row.setShoriDateTime(処理日時表示.toRString());
-
+            row.setDeleteButtonState(DataGridButtonState.Disabled);
+            row.setModifyButtonState(DataGridButtonState.Disabled);
             dgShikakuShutokuRirekiList.add(row);
         }
-
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
+        this.getBtnAddShikakuShutoku().setDisabled(true);
+    }
+
+    @Override
+    public void setDataGridSelectItem(dgShikakuShutokuRireki_Row dataSource) {
+        List<dgShikakuShutokuRireki_Row> rowList = this.getDgShikakuShutokuRireki().getDataSource();
+        if (this.getDgShikakuShutokuRireki().getClickedRowId() != -1) {
+            rowList.set(this.getDgShikakuShutokuRireki().getClickedRowId(), dataSource);
+        } else {
+            rowList.add(dataSource);
+        }
+        this.getDgShikakuShutokuRireki().setDataSource(rowList);
+    }
+
+    @Override
+    public dgShikakuShutokuRireki_Row getDataGridSelectItem() {
+        return this.getDgShikakuShutokuRireki().getClickedItem();
+    }
+
+    @Override
+    public void setDataGridDataSource(List<dgShikakuShutokuRireki_Row> dataSource) {
+        this.getDgShikakuShutokuRireki().setDataSource(dataSource);
+    }
+
+    @Override
+    public List<dgShikakuShutokuRireki_Row> getDataGridDataSource() {
+        return this.getDgShikakuShutokuRireki().getDataSource();
+    }
+
+    @Override
+    public void set追加するボタン(boolean jyotai) {
+        this.getBtnAddShikakuShutoku().setDisabled(jyotai);
+    }
+
+    @Override
+    public void set追加するボタンの表示状態(boolean 表示モード) {
+        this.getBtnAddShikakuShutoku().setDisplayNone(表示モード);
     }
 }

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 認定調査依頼発行一覧表Builderクラスです。
+ *
+ * @reamsid_L DBE-0080-110 yaodongsheng
  */
 class ChosaIraiHakkoIchiranhyoBuilderImpl implements IChosaIraiHakkoIchiranhyoBuilder {
 

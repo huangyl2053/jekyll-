@@ -8,24 +8,25 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求福祉用具販売費を管理するクラスです。
+ *
+ * @reamsid_L DBC-1020-050 chenaoqi
  */
-public class ShokanFukushiYoguHanbaihi 
-extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, 
-        DbT3048ShokanFukushiYoguHanbaihiEntity, 
-        ShokanFukushiYoguHanbaihi> implements Serializable {
+public class ShokanFukushiYoguHanbaihi
+        extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier, DbT3048ShokanFukushiYoguHanbaihiEntity, ShokanFukushiYoguHanbaihi>
+        implements Serializable {
 
     private final DbT3048ShokanFukushiYoguHanbaihiEntity entity;
     private final ShokanFukushiYoguHanbaihiIdentifier id;
@@ -297,6 +298,30 @@ extends ModelBase<ShokanFukushiYoguHanbaihiIdentifier,
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanFukushiYoguHanbaihi(deletedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求福祉用具販売費を削除対象とします。<br/>
+     * {@link DbT3048ShokanFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return modified対象処理実施後の{@link ShokanFukushiYoguHanbaihi}
+     */
+    public ShokanFukushiYoguHanbaihi modified() {
+        DbT3048ShokanFukushiYoguHanbaihiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanFukushiYoguHanbaihi(modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求福祉用具販売費を削除対象とします。<br/>
+     * {@link DbT3048ShokanFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return added対象処理実施後の{@link ShokanFukushiYoguHanbaihi}
+     */
+    public ShokanFukushiYoguHanbaihi added() {
+        DbT3048ShokanFukushiYoguHanbaihiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanFukushiYoguHanbaihi(addedEntity, id);
     }
 
     /**

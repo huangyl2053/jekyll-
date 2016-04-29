@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 保険料ランクの情報のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-9999-013 huangh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.hokenryodankai.IHokenryoDankaiJohoRelateMapper">
+
+    <select id="select保険料ランクの情報ByKey" resultMap="resultMap_HokenryoDankaiJohoRelateEntity" fetchSize="500">
+        <include refid="selectHokenryoDankaiJohoRelateEntity" />
+    </select>
+
+    <sql id="selectHokenryoDankaiJohoRelateEntity">
+        SELECT
+        DbT2013HokenryoDankai.*,
+        DbT2011RankJoho.*,
+        DbT2012HokenryoRank.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.noDeleted_DbT2013HokenryoDankai" />) AS DbT2013HokenryoDankai
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2011RankJohoMapper.noDeleted_DbT2011RankJoho" />) AS DbT2011RankJoho
+        ON
+        DbT2013HokenryoDankai"dbT2013HokenryoDankai_fukaNendo" = DbT2011RankJoho."dbT2011RankJoho_fukaNendo" and
+        DbT2013HokenryoDankai."dbT2013HokenryoDankai_rankuKubun" = DbT2011RankJoho."dbT2011RankJoho_rankKubun"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2012HokenryoRankMapper.noDeleted_DbT2012HokenryoRank" />) AS DbT2012HokenryoRank
+        ON
+        DbT2011RankJoho."dbT2011RankJoho_fukaNendo" = DbT2012HokenryoRank."dbT2012HokenryoRank_fukaNendo" and
+        DbT2011RankJoho."dbT2011RankJoho_rankKubun" = DbT2012HokenryoRank."dbT2012HokenryoRank_rankKubun"
+        <where>
+            <if test="uses賦課年度">
+                AND DbT2013HokenryoDankai"dbT2013HokenryoDankai_fukaNendo"= #{賦課年度}
+            </if>
+            <if test="usesランク区分">
+                and DbT2013HokenryoDankai."dbT2013HokenryoDankai_rankuKubun"  = #{ランク区分}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="resultMap_HokenryoDankaiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.hokenryodankai.HokenryoDankaiJohoRelateEntity" autoMapping="true">
+        <id property="保険料段階Entity.fukaNendo" column="dbT2013HokenryoDankai_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="保険料段階Entity.rankuKubun" column="dbT2013HokenryoDankai_rankuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="保険料段階Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.ResultMap_DbT2013HokenryoDankaiEntity"/>
+        <collection property="ランク情報Entity" resultMap="resultMap_RankJohoEntity"/>
+    </resultMap>
+
+    <resultMap id="resultMap_RankJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.hokenryodankai.RankJohoEntity" autoMapping="true">
+        <id property="ランク情報Entity.fukaNendo" column="dbT2011RankJoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="ランク情報Entity.rankKubun" column="dbT2011RankJoho_rankKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="ランク情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2011RankJohoMapper.ResultMap_DbT2011RankJohoEntity"/>
+        <collection property="保険料ランクEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2012HokenryoRankMapper.ResultMap_DbT2012HokenryoRankEntity"/>
+    </resultMap>
+</mapper>

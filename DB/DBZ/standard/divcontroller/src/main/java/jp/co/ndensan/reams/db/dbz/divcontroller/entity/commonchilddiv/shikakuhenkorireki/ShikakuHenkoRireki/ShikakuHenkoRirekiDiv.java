@@ -14,22 +14,31 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * ShikakuHenkoRireki のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-1300-050 chengsanyuan
  */
 public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,24 +51,14 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     private DataGrid<dgHenko_Row> dgHenko;
     @JsonProperty("HenkoInput")
     private HenkoInputDiv HenkoInput;
-    @JsonProperty("executionStatus")
-    private RString executionStatus;
-    @JsonProperty("henkoRirekiExecutionState")
-    private RString henkoRirekiExecutionState;
-    @JsonProperty("selectRow")
-    private RString selectRow;
     @JsonProperty("inputMode")
     private RString inputMode;
-    @JsonProperty("selectIdoYMD")
-    private RString selectIdoYMD;
-    @JsonProperty("latestSoshitsubi")
-    private RString latestSoshitsubi;
-    @JsonProperty("latestShutokubi")
-    private RString latestShutokubi;
-    @JsonProperty("latestKoshinbi")
-    private RString latestKoshinbi;
-    @JsonProperty("ichigoShikakuShutokubi")
-    private RString ichigoShikakuShutokubi;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
+    @JsonProperty("idoDate")
+    private RString idoDate;
+    @JsonProperty("edaban")
+    private RString edaban;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -122,60 +121,6 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     /*
-     * getexecutionStatus
-     * @return executionStatus
-     */
-    @JsonProperty("executionStatus")
-    public RString getExecutionStatus() {
-        return executionStatus;
-    }
-
-    /*
-     * setexecutionStatus
-     * @param executionStatus executionStatus
-     */
-    @JsonProperty("executionStatus")
-    public void setExecutionStatus(RString executionStatus) {
-        this.executionStatus = executionStatus;
-    }
-
-    /*
-     * gethenkoRirekiExecutionState
-     * @return henkoRirekiExecutionState
-     */
-    @JsonProperty("henkoRirekiExecutionState")
-    public RString getHenkoRirekiExecutionState() {
-        return henkoRirekiExecutionState;
-    }
-
-    /*
-     * sethenkoRirekiExecutionState
-     * @param henkoRirekiExecutionState henkoRirekiExecutionState
-     */
-    @JsonProperty("henkoRirekiExecutionState")
-    public void setHenkoRirekiExecutionState(RString henkoRirekiExecutionState) {
-        this.henkoRirekiExecutionState = henkoRirekiExecutionState;
-    }
-
-    /*
-     * getselectRow
-     * @return selectRow
-     */
-    @JsonProperty("selectRow")
-    public RString getSelectRow() {
-        return selectRow;
-    }
-
-    /*
-     * setselectRow
-     * @param selectRow selectRow
-     */
-    @JsonProperty("selectRow")
-    public void setSelectRow(RString selectRow) {
-        this.selectRow = selectRow;
-    }
-
-    /*
      * getinputMode
      * @return inputMode
      */
@@ -194,93 +139,57 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     /*
-     * getselectIdoYMD
-     * @return selectIdoYMD
+     * gethihokenshaNo
+     * @return hihokenshaNo
      */
-    @JsonProperty("selectIdoYMD")
-    public RString getSelectIdoYMD() {
-        return selectIdoYMD;
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
     }
 
     /*
-     * setselectIdoYMD
-     * @param selectIdoYMD selectIdoYMD
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
      */
-    @JsonProperty("selectIdoYMD")
-    public void setSelectIdoYMD(RString selectIdoYMD) {
-        this.selectIdoYMD = selectIdoYMD;
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     /*
-     * getlatestSoshitsubi
-     * @return latestSoshitsubi
+     * getidoDate
+     * @return idoDate
      */
-    @JsonProperty("latestSoshitsubi")
-    public RString getLatestSoshitsubi() {
-        return latestSoshitsubi;
+    @JsonProperty("idoDate")
+    public RString getIdoDate() {
+        return idoDate;
     }
 
     /*
-     * setlatestSoshitsubi
-     * @param latestSoshitsubi latestSoshitsubi
+     * setidoDate
+     * @param idoDate idoDate
      */
-    @JsonProperty("latestSoshitsubi")
-    public void setLatestSoshitsubi(RString latestSoshitsubi) {
-        this.latestSoshitsubi = latestSoshitsubi;
+    @JsonProperty("idoDate")
+    public void setIdoDate(RString idoDate) {
+        this.idoDate = idoDate;
     }
 
     /*
-     * getlatestShutokubi
-     * @return latestShutokubi
+     * getedaban
+     * @return edaban
      */
-    @JsonProperty("latestShutokubi")
-    public RString getLatestShutokubi() {
-        return latestShutokubi;
+    @JsonProperty("edaban")
+    public RString getEdaban() {
+        return edaban;
     }
 
     /*
-     * setlatestShutokubi
-     * @param latestShutokubi latestShutokubi
+     * setedaban
+     * @param edaban edaban
      */
-    @JsonProperty("latestShutokubi")
-    public void setLatestShutokubi(RString latestShutokubi) {
-        this.latestShutokubi = latestShutokubi;
-    }
-
-    /*
-     * getlatestKoshinbi
-     * @return latestKoshinbi
-     */
-    @JsonProperty("latestKoshinbi")
-    public RString getLatestKoshinbi() {
-        return latestKoshinbi;
-    }
-
-    /*
-     * setlatestKoshinbi
-     * @param latestKoshinbi latestKoshinbi
-     */
-    @JsonProperty("latestKoshinbi")
-    public void setLatestKoshinbi(RString latestKoshinbi) {
-        this.latestKoshinbi = latestKoshinbi;
-    }
-
-    /*
-     * getichigoShikakuShutokubi
-     * @return ichigoShikakuShutokubi
-     */
-    @JsonProperty("ichigoShikakuShutokubi")
-    public RString getIchigoShikakuShutokubi() {
-        return ichigoShikakuShutokubi;
-    }
-
-    /*
-     * setichigoShikakuShutokubi
-     * @param ichigoShikakuShutokubi ichigoShikakuShutokubi
-     */
-    @JsonProperty("ichigoShikakuShutokubi")
-    public void setIchigoShikakuShutokubi(RString ichigoShikakuShutokubi) {
-        this.ichigoShikakuShutokubi = ichigoShikakuShutokubi;
+    @JsonProperty("edaban")
+    public void setEdaban(RString edaban) {
+        this.edaban = edaban;
     }
 
     /*
@@ -666,16 +575,54 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
      * 引数から渡されたキーを元に被保険者台帳を検索し、その結果をグリッドに設定します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param 識別コード 識別コード
+     * @param 処理対象者 処理対象者
      * @param 取得日 取得日
      */
     @Override
-    public void load(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
-        getHandler().load(被保険者番号, 識別コード, 取得日);
+    public void initialize(HihokenshaNo 被保険者番号, IKojin 処理対象者, FlexibleDate 取得日) {
+        getHandler().initialize(被保険者番号, 処理対象者, 取得日);
     }
 
     private ShikakuHenkoRirekiHandler getHandler() {
         return new ShikakuHenkoRirekiHandler(this);
+    }
+
+    /**
+     * 変更履歴グリッドのデータを取得します。
+     *
+     * @return SearchResult<HihokenshaDaicho>
+     */
+    @Override
+    public SearchResult<HihokenshaDaicho> getGridData() {
+        Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result
+                = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
+        List<HihokenshaDaicho> hihokenshaList = new ArrayList<>(result.values());
+        if (hihokenshaList.isEmpty()) {
+            return SearchResult.of(Collections.<HihokenshaDaicho>emptyList(), 0, false);
+        }
+        return SearchResult.of(hihokenshaList, 0, false);
+    }
+
+    /**
+     * 変更事由DDLを設定します。
+     *
+     * @param key 変更事由key
+     * @param falg 活性フラグ
+     */
+    @Override
+    public void setDdlHenkoJiyu(RString key, boolean falg) {
+        this.getDdlHenkoJiyu().setSelectedKey(key);
+        this.getDdlHenkoJiyu().setDisabled(falg);
+    }
+
+    /**
+     * モードを設定します。
+     *
+     * @param mode モードキー
+     */
+    @Override
+    public void setDisplayTypeBykey(RString mode) {
+        this.setMode_DisplayType(ShikakuHenkoRirekiDiv.DisplayType.getEnum(mode.toString()));
     }
 
 }

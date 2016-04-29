@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 直近異動事由コードを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBD-9999-023 liangbc
  */
 public enum ChokkinIdoJiyuCode {
 

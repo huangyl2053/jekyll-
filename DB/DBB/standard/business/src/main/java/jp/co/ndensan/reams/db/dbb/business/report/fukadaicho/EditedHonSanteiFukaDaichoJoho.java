@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 
 import java.util.List;
@@ -14,12 +13,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *  編集後本算定賦課台帳情報
+ * 編集後本算定賦課台帳情報
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class EditedHonSanteiFukaDaichoJoho {
+
     private RString 口座名義人;
     private RString 金融機関名;
     private RString 金融機関番号;
@@ -90,5 +92,5 @@ public class EditedHonSanteiFukaDaichoJoho {
     private RString 世帯コード;
     private RString タイトル;
     private RString 通知書NO;
-    
+
 }

@@ -14,9 +14,12 @@ import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuShokei;
 /**
  *
  * 合計用RelateEntityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeiEntity implements Cloneable, Serializable {
 
     private List<KibetsuShokei> 期別小計Parameter;

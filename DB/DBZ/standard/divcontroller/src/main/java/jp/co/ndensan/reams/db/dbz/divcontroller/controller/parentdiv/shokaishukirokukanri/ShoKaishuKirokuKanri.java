@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.shokaishukirokukanri;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

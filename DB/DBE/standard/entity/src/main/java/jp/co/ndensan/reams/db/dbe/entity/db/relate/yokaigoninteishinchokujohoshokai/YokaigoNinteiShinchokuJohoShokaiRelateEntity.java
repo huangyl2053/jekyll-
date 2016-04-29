@@ -15,6 +15,7 @@ import lombok.Setter;
 /**
  *
  * 申請者一覧内容検索情報RelateEntityクラスです。
+ * @reamsid_L DBE-0210-010 dongyabin
  */
 @Getter
 @Setter

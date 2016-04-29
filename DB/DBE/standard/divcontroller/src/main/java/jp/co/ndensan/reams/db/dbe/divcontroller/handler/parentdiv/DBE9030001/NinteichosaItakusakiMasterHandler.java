@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaKikanKubu
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosaitakusakimaster.NinteichosaItakusakiManager;
-import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -45,12 +44,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査委託先マスタ画面でのバリデーションを管理するハンドラークラスです。
  *
+ * @reamsid_L DBE-0270-010 liangbc
  */
 public class NinteichosaItakusakiMasterHandler {
 
     private final NinteichosaItakusakiMasterDiv div;
     private static final int DROPDOWNLIST_BLANK = 0;
-    private final KoseiShichosonMasterManager masterManager;
     private final NinteichosaItakusakiJohoManager johoManager;
     private static final RString 状況フラグ有効 = new RString("有効");
     private static final RString 状況フラグ無効 = new RString("無効");
@@ -76,7 +75,6 @@ public class NinteichosaItakusakiMasterHandler {
     public NinteichosaItakusakiMasterHandler(NinteichosaItakusakiMasterDiv div) {
         this.div = div;
         johoManager = NinteichosaItakusakiJohoManager.createInstance();
-        masterManager = KoseiShichosonMasterManager.createInstance();
     }
 
     /**
@@ -436,7 +434,7 @@ public class NinteichosaItakusakiMasterHandler {
                         割付地区名称,
                         joho.is自動割付フラグTrue() ? 自動割付フラグ可能 : 自動割付フラグ不可能,
                         chosaKikanKubun,
-                        joho.get状況フラグ() ? 状況フラグ有効 : 状況フラグ無効);
+                        joho.is状況フラグ() ? 状況フラグ有効 : 状況フラグ無効);
                 dataSources.add(row);
                 div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(joho.get市町村コード().toString()).concat(CSV_WRITER_DELIMITER));
             }
@@ -445,8 +443,8 @@ public class NinteichosaItakusakiMasterHandler {
     }
 
     private RString get特定調査員表示フラグ(NinteichosaItakusakiJoho joho) {
-        if (joho.get特定調査員表示フラグ() != null) {
-            return joho.get特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示;
+        if (joho.is特定調査員表示フラグ() != null) {
+            return joho.is特定調査員表示フラグ() ? 特定調査員表示フラグ表示 : 特定調査員表示フラグ非表示;
         }
         return RString.EMPTY;
     }

@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護サービス種類を管理するクラスです。
+ *
+ * @reamsid_L DBX-9999-011 chengsanyuan
  */
 public class KaigoServiceShuruiManager {
 

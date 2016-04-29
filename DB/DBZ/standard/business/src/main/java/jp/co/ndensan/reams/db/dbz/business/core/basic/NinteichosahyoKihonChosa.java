@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -18,9 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票（基本調査）を管理するクラスです。
  */
-public class NinteichosahyoKihonChosa extends 
-        ParentModelBase<NinteichosahyoKihonChosaIdentifier, 
-        DbT5203NinteichosahyoKihonChosaEntity, NinteichosahyoKihonChosa> implements Serializable {
+public class NinteichosahyoKihonChosa extends
+        ParentModelBase<NinteichosahyoKihonChosaIdentifier, DbT5203NinteichosahyoKihonChosaEntity, NinteichosahyoKihonChosa> implements Serializable {
 
     private final DbT5203NinteichosahyoKihonChosaEntity entity;
     private final NinteichosahyoKihonChosaIdentifier id;
@@ -139,8 +138,7 @@ public class NinteichosahyoKihonChosa extends
     }
 
     /**
-     * 認定調査票（基本調査）のみを変更対象とします。<br/>
-     * {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票（基本調査）のみを変更対象とします。<br/> {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoKihonChosa}
      */
@@ -155,8 +153,7 @@ public class NinteichosahyoKihonChosa extends
     }
 
     /**
-     * 保持する認定調査票（基本調査）を削除対象とします。<br/>
-     * {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査票（基本調査）を削除対象とします。<br/> {@link DbT5203NinteichosahyoKihonChosaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoKihonChosa}
      */
@@ -184,7 +181,7 @@ public class NinteichosahyoKihonChosa extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

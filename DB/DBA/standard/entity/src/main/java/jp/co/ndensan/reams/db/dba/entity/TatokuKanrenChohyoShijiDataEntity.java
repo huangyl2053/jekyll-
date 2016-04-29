@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 他市町村住所地特例者関連帳票発行指示データEntity
  *
+ * @reamsid_L DBA-0380-050 huangh
  */
 @lombok.Getter
 @lombok.Setter
@@ -32,5 +33,5 @@ public class TatokuKanrenChohyoShijiDataEntity {
     private RString edaNo;
     private FlexibleDate 入所年月日;
     private ShikibetsuCode 識別コード;
-
+    private boolean 住所出力不要フラグ;
 }

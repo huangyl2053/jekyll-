@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 国保連情報データ取込
+ *
+ * @reamsid_L DBC-0980-520 quxiaodong
  */
 public class IryoHokenRirekiManager {
 

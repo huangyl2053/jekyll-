@@ -15,11 +15,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 統計対象区分、表番号、集計番号クラスです。
  *
+ * @reamsid_L DBU-1060-050 zhengshukai
+ *
  */
 public final class ShukeiInfo {
 
     private static final Map<RString, RString> SHUKEI_INFO;
-    
+
     private ShukeiInfo() {
     }
 
@@ -38,6 +40,7 @@ public final class ShukeiInfo {
 
     /**
      * 主計情報の取得します。
+     *
      * @param key key
      * @return RString
      */

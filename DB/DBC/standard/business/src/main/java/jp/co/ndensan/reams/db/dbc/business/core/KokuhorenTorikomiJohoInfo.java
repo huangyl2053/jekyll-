@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 国保連取込情報を管理するクラスです。
+ *
+ * @reamsid_L DBC-0980-460 wangkanglei
  */
 public class KokuhorenTorikomiJohoInfo {
 

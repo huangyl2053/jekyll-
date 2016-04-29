@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-0022-010 linghuhang
  */
 public class NinteiChosainBusiness {
 

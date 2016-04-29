@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 境界層管理マスタリストのReportです。
+ *
+ * @reamsid_L DBU-1050-060 linghuhang
  */
 public class KyokaisoKanriMasterListReport extends Report<KyokaisoKanriMasterListReportSource> {
 

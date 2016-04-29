@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関＆主治医情報検索パラメータークラス
+ *
+ * @reamsid_L DBE-1300-130 xuyannan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShujiiIryokikanAndShujiiGuideParameter {
 
     private final RString hokensha;
+    private final boolean hokenshaFlag;
     private final boolean subGyomuCodeFlag;
     private final RString shujiiIryokikanCodeFrom;
     private final boolean shujiiIryokikanCodeFromFlag;
@@ -40,6 +43,7 @@ public final class ShujiiIryokikanAndShujiiGuideParameter {
      * コンストラクタです。
      *
      * @param hokensha 保険者
+     * @param hokenshaFlag 保険者フラグ
      * @param subGyomuCodeFlag サブ業務コードフラグ
      * @param shujiiIryokikanCodeFrom 主治医医療機関コードFROM
      * @param shujiiIryokikanCodeFromFlag 主治医医療機関コードFROMフラグ
@@ -63,6 +67,7 @@ public final class ShujiiIryokikanAndShujiiGuideParameter {
      */
     private ShujiiIryokikanAndShujiiGuideParameter(
             RString hokensha,
+            boolean hokenshaFlag,
             boolean subGyomuCodeFlag,
             RString shujiiIryokikanCodeFrom,
             boolean shujiiIryokikanCodeFromFlag,
@@ -84,6 +89,7 @@ public final class ShujiiIryokikanAndShujiiGuideParameter {
             boolean shujiiKanaFlag,
             int maxCount) {
         this.hokensha = hokensha;
+        this.hokenshaFlag = hokenshaFlag;
         this.subGyomuCodeFlag = subGyomuCodeFlag;
         this.shujiiIryokikanCodeFromFlag = shujiiIryokikanCodeFromFlag;
         this.shujiiIryokikanCodeFrom = shujiiIryokikanCodeFrom;
@@ -139,6 +145,7 @@ public final class ShujiiIryokikanAndShujiiGuideParameter {
             RString shujiiName,
             RString shujiiKana,
             int maxCount) {
+        boolean hokenshaFlag = false;
         boolean shujiiIryokikanCodeFromFlag = false;
         boolean shujiiIryokikanCodeToFlag = false;
         boolean iryoKikanMeishoFlag = false;
@@ -147,6 +154,9 @@ public final class ShujiiIryokikanAndShujiiGuideParameter {
         boolean shujiiCodeToFlag = false;
         boolean shujiiNameFlag = false;
         boolean shujiiKanaFlag = false;
+        if (!RString.isNullOrEmpty(hokensha)) {
+            hokenshaFlag = true;
+        }
         if (!RString.isNullOrEmpty(shujiiIryokikanCodeFrom)) {
             shujiiIryokikanCodeFromFlag = true;
         }
@@ -173,6 +183,7 @@ public final class ShujiiIryokikanAndShujiiGuideParameter {
         }
         return new ShujiiIryokikanAndShujiiGuideParameter(
                 hokensha,
+                hokenshaFlag,
                 subGyomuCodeFlag,
                 shujiiIryokikanCodeFrom,
                 shujiiIryokikanCodeFromFlag,

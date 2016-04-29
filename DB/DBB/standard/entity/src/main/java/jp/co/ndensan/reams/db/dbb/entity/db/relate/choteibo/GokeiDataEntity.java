@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * バッチ処理で作成した帳票用Entityリスト 合計データリスト
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class GokeiDataEntity {
 
     private RString 徴収方法;

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokuTai
 
 /**
  * 認定調査督促対象者一覧表ボディEditorです。
+ *
+ * @reamsid_L DBE-0030-030 xuyue
  */
 class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTokusokuTaishoshaIchiranhyoEditor {
 

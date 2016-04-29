@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * ShinseiKensaku のクラスファイル
  *
- * @author 自動生成
  */
 public class ShinseiKensakuDiv extends Panel {
 

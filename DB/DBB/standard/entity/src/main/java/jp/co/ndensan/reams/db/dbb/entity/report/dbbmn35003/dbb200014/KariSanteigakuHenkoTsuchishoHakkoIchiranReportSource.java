@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 帳票「仮算定額変更通知書発行一覧表」の項目を定義するクラスです。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 public class KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

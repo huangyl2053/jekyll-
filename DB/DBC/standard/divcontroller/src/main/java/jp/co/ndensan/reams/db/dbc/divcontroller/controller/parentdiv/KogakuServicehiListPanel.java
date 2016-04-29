@@ -38,11 +38,12 @@ public class KogakuServicehiListPanel {
     /**
      * 高額介護サービス費照会 高額介護サービス費照会画面の一覧で該当者を検索するボタンを押したら、一覧の内容が表示する。
      *
-     * @author n8223 ①高額介護サービス費照会画面の一覧から選択された 「被保険番号 ,被保険名 , 提供年月, 申請年月, 決定年月」 その YMLデータを設定する。」014．07.01
+     * @author n8223 ①高額介護サービス費照会画面の一覧から選択された 「被保険番号 ,被保険名 , 提供年月, 申請年月, 決定年月」
+     * その YMLデータを設定する。」014．07.01
      *
-     * @param panel
-     * @param searchpanel
-     * @return
+     * @param panel KogakuServicehiListPanelDiv
+     * @param searchpanel SearchKogakuServicehiPanelDiv
+     * @return ResponseData
      */
     public ResponseData<KogakuServicehiListPanelDiv> onClick_btnSearch(KogakuServicehiListPanelDiv panel, SearchKogakuServicehiPanelDiv searchpanel) {
         ResponseData<KogakuServicehiListPanelDiv> response = new ResponseData<>();
@@ -94,6 +95,8 @@ public class KogakuServicehiListPanel {
             case "YMShitei":
                 yMShitei(ymlDt, arrayData, searchpanel);
                 break;
+            default:
+                break;
         }
 
         item = createRowKogakuServicehiListData(
@@ -120,6 +123,8 @@ public class KogakuServicehiListPanel {
 
     private void hihokenshaShitei(ControlGenerator ymlDt, List<dgKogakuServicehiRireki_Row> arrayData, SearchKogakuServicehiPanelDiv searchpanel) {
 
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        arrayData.hashCode();
         //2014.07.01 画面入力
         //被保番号
         //  hihonNo = searchpanel.getSearchKogakuHihokensha().getTxtHihoNo().getValue();
@@ -154,6 +159,8 @@ public class KogakuServicehiListPanel {
     }
 
     private void yMShitei(ControlGenerator ymlDt, List<dgKogakuServicehiRireki_Row> arrayData, SearchKogakuServicehiPanelDiv searchpanel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        arrayData.hashCode();
         //被保番号
         hihonNo = ymlDt.getAsRString("hihoNo");
         //提供年月

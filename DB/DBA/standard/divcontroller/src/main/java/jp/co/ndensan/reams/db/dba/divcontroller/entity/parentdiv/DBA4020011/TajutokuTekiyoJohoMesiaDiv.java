@@ -1,21 +1,17 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.KaijoJiyuInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.TekiyoJiyuInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * TajutokuTekiyoJohoMesia のクラスファイル 
- * 
- * @author 自動生成
+ * TajutokuTekiyoJohoMesia のクラスファイル
+ *
  */
 public class TajutokuTekiyoJohoMesiaDiv extends Panel {
     /*
@@ -24,6 +20,7 @@ public class TajutokuTekiyoJohoMesiaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("TekiyoJiyuInput")
     private TekiyoJiyuInputDiv TekiyoJiyuInput;
     @JsonProperty("KaijoJiyuInput")
@@ -42,7 +39,7 @@ public class TajutokuTekiyoJohoMesiaDiv extends Panel {
 
     @JsonProperty("TekiyoJiyuInput")
     public void setTekiyoJiyuInput(TekiyoJiyuInputDiv TekiyoJiyuInput) {
-        this.TekiyoJiyuInput=TekiyoJiyuInput;
+        this.TekiyoJiyuInput = TekiyoJiyuInput;
     }
 
     @JsonProperty("KaijoJiyuInput")
@@ -52,7 +49,7 @@ public class TajutokuTekiyoJohoMesiaDiv extends Panel {
 
     @JsonProperty("KaijoJiyuInput")
     public void setKaijoJiyuInput(KaijoJiyuInputDiv KaijoJiyuInput) {
-        this.KaijoJiyuInput=KaijoJiyuInput;
+        this.KaijoJiyuInput = KaijoJiyuInput;
     }
 
     /*
@@ -64,7 +61,7 @@ public class TajutokuTekiyoJohoMesiaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaijoDate(TextBoxFlexibleDate txtKaijoDate) {
+    public void setTxtKaijoDate(TextBoxFlexibleDate txtKaijoDate) {
         this.getKaijoJiyuInput().setTxtKaijoDate(txtKaijoDate);
     }
 
@@ -74,7 +71,7 @@ public class TajutokuTekiyoJohoMesiaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
+    public void setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
         this.getKaijoJiyuInput().setTxtKaijoTodokedeDate(txtKaijoTodokedeDate);
     }
 
@@ -84,7 +81,7 @@ public class TajutokuTekiyoJohoMesiaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKaijoJiyu(DropDownList ddlKaijoJiyu) {
+    public void setDdlKaijoJiyu(DropDownList ddlKaijoJiyu) {
         this.getKaijoJiyuInput().setDdlKaijoJiyu(ddlKaijoJiyu);
     }
 
@@ -94,7 +91,7 @@ public class TajutokuTekiyoJohoMesiaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShisetsuTaishoDate(TextBoxFlexibleDate txtShisetsuTaishoDate) {
+    public void setTxtShisetsuTaishoDate(TextBoxFlexibleDate txtShisetsuTaishoDate) {
         this.getKaijoJiyuInput().setTxtShisetsuTaishoDate(txtShisetsuTaishoDate);
     }
 

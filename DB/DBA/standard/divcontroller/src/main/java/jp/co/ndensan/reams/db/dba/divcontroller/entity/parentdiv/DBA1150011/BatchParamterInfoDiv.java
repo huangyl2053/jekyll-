@@ -4,19 +4,22 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1150011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * BatchParamterInfo のクラスファイル 
- * 
- * @author 自動生成
+ * BatchParamterInfo のクラスファイル
+ *
+ * @reamsid_L DBA-0570-010 xuyannan
  */
 public class BatchParamterInfoDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +28,10 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
      */
     @JsonProperty("lblIdoTaishoKikan")
     private Label lblIdoTaishoKikan;
+    @JsonProperty("lalkaishi")
+    private Label lalkaishi;
+    @JsonProperty("lalshuryou")
+    private Label lalshuryou;
     @JsonProperty("lblzenkaikaishi")
     private Label lblzenkaikaishi;
     @JsonProperty("txtzenkaikaishi")
@@ -66,6 +73,42 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     @JsonProperty("lblIdoTaishoKikan")
     public void setLblIdoTaishoKikan(Label lblIdoTaishoKikan) {
         this.lblIdoTaishoKikan = lblIdoTaishoKikan;
+    }
+
+    /*
+     * getlalkaishi
+     * @return lalkaishi
+     */
+    @JsonProperty("lalkaishi")
+    public Label getLalkaishi() {
+        return lalkaishi;
+    }
+
+    /*
+     * setlalkaishi
+     * @param lalkaishi lalkaishi
+     */
+    @JsonProperty("lalkaishi")
+    public void setLalkaishi(Label lalkaishi) {
+        this.lalkaishi = lalkaishi;
+    }
+
+    /*
+     * getlalshuryou
+     * @return lalshuryou
+     */
+    @JsonProperty("lalshuryou")
+    public Label getLalshuryou() {
+        return lalshuryou;
+    }
+
+    /*
+     * setlalshuryou
+     * @param lalshuryou lalshuryou
+     */
+    @JsonProperty("lalshuryou")
+    public void setLalshuryou(Label lalshuryou) {
+        this.lalshuryou = lalshuryou;
     }
 
     /*

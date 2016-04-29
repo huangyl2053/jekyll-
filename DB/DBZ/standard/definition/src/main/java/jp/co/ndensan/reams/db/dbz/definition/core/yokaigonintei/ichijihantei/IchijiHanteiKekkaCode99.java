@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定一次判定結果コード99を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 huangh
  */
 public enum IchijiHanteiKekkaCode99 {
 

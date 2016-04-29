@@ -5,8 +5,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
+ * 住基連動登録リストの帳票項目クラスです。
  *
- * 住基連動登録リストの帳票項目クラスです
+ * @reamsid_L DBA-0560-060 xuyue
  */
 public class JukiRendoTorokuListReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

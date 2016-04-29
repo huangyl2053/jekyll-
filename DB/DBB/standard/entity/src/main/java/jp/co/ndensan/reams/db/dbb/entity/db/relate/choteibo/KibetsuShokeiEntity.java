@@ -12,9 +12,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 期別小計一時テーブルEntityです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KibetsuShokeiEntity implements IDbAccessable {
 
     private static final int 第1期 = 1;
@@ -31,80 +34,29 @@ public class KibetsuShokeiEntity implements IDbAccessable {
     private static final int 第12期 = 12;
     private static final int 第13期 = 13;
     private static final int 第14期 = 14;
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 第1期の調定額の小計
-     */
     private Decimal dai1kiChoteigakuCount;
-    /**
-     * 第2期の調定額の小計
-     */
     private Decimal dai2kiChoteigakuCount;
-    /**
-     * 第3期の調定額の小計
-     */
     private Decimal dai3kiChoteigakuCount;
-    /**
-     * 第4期の調定額の小計
-     */
     private Decimal dai4kiChoteigakuCount;
-    /**
-     * 第5期の調定額の小計
-     */
     private Decimal dai5kiChoteigakuCount;
-    /**
-     * 第6期の調定額の小計
-     */
     private Decimal dai6kiChoteigakuCount;
-    /**
-     * 第7期の調定額の小計
-     */
     private Decimal dai7kiChoteigakuCount;
-    /**
-     * 第8期の調定額の小計
-     */
     private Decimal dai8kiChoteigakuCount;
-    /**
-     * 第9期の調定額の小計
-     */
     private Decimal dai9kiChoteigakuCount;
-    /**
-     * 第10期の調定額の小計
-     */
     private Decimal dai10kiChoteigakuCount;
-    /**
-     * 第11期の調定額の小計
-     */
     private Decimal dai11kiChoteigakuCount;
-    /**
-     * 第12期の調定額の小計
-     */
     private Decimal dai12kiChoteigakuCount;
-    /**
-     * 第13期の調定額の小計
-     */
     private Decimal dai13kiChoteigakuCount;
-    /**
-     * 第14期の調定額の小計
-     */
     private Decimal dai14kiChoteigakuCount;
 
     /**
      * 第○期の調定額の小計を取得する。
      *
      * @param 期別 期別
-     * @return Decimal Decimal
+     * @return Decimal 期の調定額の小計
      */
     public Decimal get調定額の小計By期別(int 期別) {
         switch (期別) {

@@ -12,12 +12,15 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
  * 編集後本算定通知書共通情報です。
+ *
+ * @reamsid_L DBB-9020-160 sunhaidi
  */
 @lombok.Getter
 @lombok.Setter
@@ -28,10 +31,10 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private EditedKojin 編集後個人;
     private HyojiCodes 表示コード;
     private HihokenshaNo 被保険者番号;
-    private RString 調定年度;
+    private FlexibleYear 調定年度;
     private RString 調定年度_年度あり;
     private RString 調定年度_年度なし;
-    private RString 賦課年度;
+    private FlexibleYear 賦課年度;
     private RString 賦課年度_年度あり;
     private RString 賦課年度_年度なし;
     private ShikibetsuCode 識別コード;
@@ -61,6 +64,7 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private RString 調定事由３;
     private RString 調定事由４;
     private List<AfterEditInformation> 普徴納期情報リスト;
+    private List<AfterEditInformation> 特徴納期情報リスト;
     private int 普徴期数_現年度;
     private RString 保険者名;
     private HihokenshaNo 保険者番号;

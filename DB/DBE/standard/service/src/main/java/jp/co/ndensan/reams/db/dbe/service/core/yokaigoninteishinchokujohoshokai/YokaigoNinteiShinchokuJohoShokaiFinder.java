@@ -12,8 +12,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteishinchokujohoshokai.IYokaigoNinteiShinchokuJohoShokaiMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 要介護認定進捗状況照会を管理するクラスです。
+ * @reamsid_L DBE-0210-010 dongyabin
  */
 public class YokaigoNinteiShinchokuJohoShokaiFinder {
     

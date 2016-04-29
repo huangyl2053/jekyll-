@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 合議体情報のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-9999-011 chengsanyuan -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho.IGogitaiJohoMapper">
@@ -88,7 +89,7 @@
         <id column="dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD"/>
         <association property="合議体情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.ResultMap_DbT5591GogitaiJohoEntity"/>
         <collection property="介護認定審査会開催場所情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity"/>
-        <collection property="合議体割当委員情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiWariateIinJoho.IGogitaiWariateIinJohoMapper.resultMap_GogitaiWariateIinJohoRelateEntity"/>
+        <collection property="合議体割当委員情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiwariateiinjoho.IGogitaiWariateIinJohoMapper.resultMap_GogitaiWariateIinJohoRelateEntity"/>
     </resultMap>
 
 </mapper>

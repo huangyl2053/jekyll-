@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 申請届出代行区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBD-9999-023 wangchao
  */
 public enum ShinseiTodokedeDaikoKubun {
 

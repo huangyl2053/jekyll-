@@ -29,8 +29,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- *
  * 認定審査会委員ガイドのDivControllerです
+ * 
+ * @reamsid_L DBE-3000-030  lijia
+ * 
  */
 public class NinteiShinsakaiIinGuide {
 
@@ -138,7 +140,7 @@ public class NinteiShinsakaiIinGuide {
     }
 
     /**
-     * 条件クリアボタンを押した時の処理をします。
+     * 保険者を選択した時の処理をします。
      *
      * @param div 認定審査会委員ガイドDiv
      * @return ResponseData<NinteiShinsakaiIinGuideDiv>

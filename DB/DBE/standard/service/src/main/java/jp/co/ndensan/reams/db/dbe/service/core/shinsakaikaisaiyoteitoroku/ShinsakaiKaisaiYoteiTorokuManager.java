@@ -11,7 +11,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteitoroku.IShinsakaiKaisaiYoteiTorokuMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  *
  * 介護認定審査会開催予定登録1のManagerです。
+ *
+ * @reamsid_L DBE-0130-010 yaodongsheng
  */
 public class ShinsakaiKaisaiYoteiTorokuManager {
 

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IraishoIkkatsuHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -197,6 +197,26 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtChosaDispMax() {
+        return this.getNinteiChosa().getNinteichosaKensakuJoken().getTxtChosaDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaDispMax(TextBoxNum txtChosaDispMax) {
+        this.getNinteiChosa().getNinteichosaKensakuJoken().setTxtChosaDispMax(txtChosaDispMax);
+    }
+
+    @JsonIgnore
+    public Button getBtnChosaClear() {
+        return this.getNinteiChosa().getNinteichosaKensakuJoken().getBtnChosaClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaClear(Button btnChosaClear) {
+        this.getNinteiChosa().getNinteichosaKensakuJoken().setBtnChosaClear(btnChosaClear);
+    }
+
+    @JsonIgnore
     public Button getBtnNinteichosaKensaku() {
         return this.getNinteiChosa().getNinteichosaKensakuJoken().getBtnNinteichosaKensaku();
     }
@@ -349,6 +369,26 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     @JsonIgnore
     public void  setChkShujiiIkensho(CheckBoxList chkShujiiIkensho) {
         this.getShujiiIkensho().getShujiiIkenshoKensakujoken().setChkShujiiIkensho(chkShujiiIkensho);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtIkenshoDispMax() {
+        return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getTxtIkenshoDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtIkenshoDispMax(TextBoxNum txtIkenshoDispMax) {
+        this.getShujiiIkensho().getShujiiIkenshoKensakujoken().setTxtIkenshoDispMax(txtIkenshoDispMax);
+    }
+
+    @JsonIgnore
+    public Button getBtnIkenshoClear() {
+        return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getBtnIkenshoClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnIkenshoClear(Button btnIkenshoClear) {
+        this.getShujiiIkensho().getShujiiIkenshoKensakujoken().setBtnIkenshoClear(btnIkenshoClear);
     }
 
     @JsonIgnore

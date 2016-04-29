@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  *
  * 認定調査依頼照会のダイアログのDivControllerです
+ *
+ * @reamsid_L DBE-0200-020 zhangguopeng
  */
 public class NinteiChosaIraiShokai {
 
@@ -30,6 +32,7 @@ public class NinteiChosaIraiShokai {
      * @return 認定調査情報div
      */
     public ResponseData<NinteiChosaIraiShokaiDiv> load(NinteiChosaIraiShokaiDiv div) {
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("6688"));
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
                 = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(被保険者番号.value()).records();

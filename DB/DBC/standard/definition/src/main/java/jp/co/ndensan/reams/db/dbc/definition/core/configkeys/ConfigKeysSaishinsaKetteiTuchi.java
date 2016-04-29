@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護給付費再審査決定通知書情報コンフィグキーを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ConfigKeysSaishinsaKetteiTuchi {
 

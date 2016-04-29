@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 介護認定申請基本情報の入力用クラスのハンドラークラスです。
+ *
+ * @reamsid_L DBE-1300-070 wangxiaodong
  */
 public class KaigoNinteiShinseiKihonJohoInputHandler {
 

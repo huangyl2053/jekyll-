@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.jukinentotorokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.JukiNendoTorokushaListDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -16,17 +16,19 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 住基連動登録者のバリデーションチェッククラスです。
+ *
+ * @reamsid_L DBA-0560-010 xuyannan
  */
 public class JukinenTotorokuValidationHandler {
 
-    private final jukinentotorokuDiv div;
+    private final JukiNendoTorokushaListDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 住基連動登録者Div
      */
-    public JukinenTotorokuValidationHandler(jukinentotorokuDiv div) {
+    public JukinenTotorokuValidationHandler(JukiNendoTorokushaListDiv div) {
         this.div = div;
     }
 
@@ -45,7 +47,6 @@ public class JukinenTotorokuValidationHandler {
         } else {
             if (!div.getBatchParamterInfo().getTxtkonkaikaishi().getValue().isValid()
                     || !div.getBatchParamterInfo().getTxtkonkaishuryo().getValue().isValid()) {
-                // TODO QA415
                 validPairs.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.不正, "日付")));
             } else {

@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * pnlService2 のクラスファイル 
- * 
- * @author 自動生成
+ * pnlService2 のクラスファイル
+ *
+ * @reamsid_L DBU-1100-080 lijunjun
  */
 public class pnlService2Div extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -139,7 +140,7 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpA(tbpADiv tbpA) {
+    public void setTbpA(tbpADiv tbpA) {
         this.getPnlA().setTbpA(tbpA);
     }
 
@@ -159,7 +160,7 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpI(tbpIDiv tbpI) {
+    public void setTbpI(tbpIDiv tbpI) {
         this.getPnlI().setTbpI(tbpI);
     }
 
@@ -179,7 +180,7 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpU(tbpUDiv tbpU) {
+    public void setTbpU(tbpUDiv tbpU) {
         this.getPnlU().setTbpU(tbpU);
     }
 
@@ -199,7 +200,7 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpE(tbpEDiv tbpE) {
+    public void setTbpE(tbpEDiv tbpE) {
         this.getPnlE().setTbpE(tbpE);
     }
 
@@ -219,7 +220,7 @@ public class pnlService2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTbpO(tbpODiv tbpO) {
+    public void setTbpO(tbpODiv tbpO) {
         this.getPnlO().setTbpO(tbpO);
     }
 

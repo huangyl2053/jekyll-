@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 被保険者基本情報Businessです。
+ *
+ * @reamsid_L DBA-0540-714 yaodongsheng
  */
 public class HihokenshaKihonBusiness {
 

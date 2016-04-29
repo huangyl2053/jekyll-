@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku;
 
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikokuHairetsuCode;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuUmu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

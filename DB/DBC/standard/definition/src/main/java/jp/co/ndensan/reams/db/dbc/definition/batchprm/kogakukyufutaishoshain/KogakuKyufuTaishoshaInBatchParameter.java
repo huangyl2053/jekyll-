@@ -14,9 +14,12 @@ import lombok.Setter;
 
 /**
  * 高額介護サービス費給付対象者取込みのバッチ用パラメータクラスです。
+ *
+ * @reamsid_L DBC-0980-360 chenaoqi
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuKyufuTaishoshaInBatchParameter extends BatchParameterBase {
 
     @BatchParameter(key = "処理年月", name = "処理年月")

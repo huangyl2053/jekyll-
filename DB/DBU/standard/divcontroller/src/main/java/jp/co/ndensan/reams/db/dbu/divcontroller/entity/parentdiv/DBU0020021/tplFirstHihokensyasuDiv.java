@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tplFirstHihokensyasu のクラスファイル 
- * 
- * @author 自動生成
+ * tplFirstHihokensyasu のクラスファイル
+ *
+ * @reamsid_L DBU-1100-060 zhangrui
  */
 public class tplFirstHihokensyasuDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -346,12 +349,14 @@ public class tplFirstHihokensyasuDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celZenGetsumatsugenzailrokugoijonanagomiman のクラスファイル 
- * 
+ * celZenGetsumatsugenzailrokugoijonanagomiman のクラスファイル
+ *
  * @author 自動生成
  */
 class celZenGetsumatsugenzailrokugoijonanagomimanAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtZenGetsumatsugenzailrokugoijonanagomiman")
     private TextBoxNum txtZenGetsumatsugenzailrokugoijonanagomiman;
@@ -376,12 +381,14 @@ class celZenGetsumatsugenzailrokugoijonanagomimanAttplFirstHihokensyasu extends 
 
     // </editor-fold>
 }
+
 /**
- * celToGetsumatsugenzailrokugoijonanagomiman のクラスファイル 
- * 
+ * celToGetsumatsugenzailrokugoijonanagomiman のクラスファイル
+ *
  * @author 自動生成
  */
 class celToGetsumatsugenzailrokugoijonanagomimanAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsumatsugenzailrokugoijonanagomiman")
     private TextBoxNum txtToGetsumatsugenzailrokugoijonanagomiman;
@@ -406,12 +413,14 @@ class celToGetsumatsugenzailrokugoijonanagomimanAttplFirstHihokensyasu extends T
 
     // </editor-fold>
 }
+
 /**
- * celZennGetsumatsugenzaiKoki のクラスファイル 
- * 
+ * celZennGetsumatsugenzaiKoki のクラスファイル
+ *
  * @author 自動生成
  */
 class celZennGetsumatsugenzaiKokiAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtZennGetsumatsugenzaiKoki")
     private TextBoxNum txtZennGetsumatsugenzaiKoki;
@@ -436,12 +445,14 @@ class celZennGetsumatsugenzaiKokiAttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celToGetsumatsugenzaiKoki のクラスファイル 
- * 
+ * celToGetsumatsugenzaiKoki のクラスファイル
+ *
  * @author 自動生成
  */
 class celToGetsumatsugenzaiKokiAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsumatsugenzaiKoki")
     private TextBoxNum txtToGetsumatsugenzaiKoki;
@@ -466,12 +477,14 @@ class celToGetsumatsugenzaiKokiAttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celZenGetsumatsugenzaiGai のクラスファイル 
- * 
+ * celZenGetsumatsugenzaiGai のクラスファイル
+ *
  * @author 自動生成
  */
 class celZenGetsumatsugenzaiGaiAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtZenGetsumatsugenzaiGai")
     private TextBoxNum txtZenGetsumatsugenzaiGai;
@@ -496,12 +509,14 @@ class celZenGetsumatsugenzaiGaiAttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celToGetsumatsugenzaiGai のクラスファイル 
- * 
+ * celToGetsumatsugenzaiGai のクラスファイル
+ *
  * @author 自動生成
  */
 class celToGetsumatsugenzaiGaiAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsumatsugenzaiGai")
     private TextBoxNum txtToGetsumatsugenzaiGai;
@@ -526,12 +541,14 @@ class celToGetsumatsugenzaiGaiAttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celZenGetsumatsugenzaiJusho のクラスファイル 
- * 
+ * celZenGetsumatsugenzaiJusho のクラスファイル
+ *
  * @author 自動生成
  */
 class celZenGetsumatsugenzaiJushoAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtZenGetsumatsugenzaiJusho")
     private TextBoxNum txtZenGetsumatsugenzaiJusho;
@@ -556,12 +573,14 @@ class celZenGetsumatsugenzaiJushoAttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celToGetsumatsugenzaiJusho のクラスファイル 
- * 
+ * celToGetsumatsugenzaiJusho のクラスファイル
+ *
  * @author 自動生成
  */
 class celToGetsumatsugenzaiJushoAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsumatsugenzaiJusho")
     private TextBoxNum txtToGetsumatsugenzaiJusho;
@@ -586,12 +605,14 @@ class celToGetsumatsugenzaiJushoAttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celZenGetsumatsugenzaiKei のクラスファイル 
- * 
+ * celZenGetsumatsugenzaiKei のクラスファイル
+ *
  * @author 自動生成
  */
 class celZenGetsumatsugenzaiKeiAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtZenGetsumatsugenzaiKei")
     private TextBoxNum txtZenGetsumatsugenzaiKei;
@@ -616,12 +637,14 @@ class celZenGetsumatsugenzaiKeiAttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celSanko1 のクラスファイル 
- * 
+ * celSanko1 のクラスファイル
+ *
  * @author 自動生成
  */
 class celSanko1AttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblSanko1")
     private Label lblSanko1;
@@ -666,12 +689,14 @@ class celSanko1AttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celSanko2 のクラスファイル 
- * 
+ * celSanko2 のクラスファイル
+ *
  * @author 自動生成
  */
 class celSanko2AttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblSanko2")
     private Label lblSanko2;
@@ -716,12 +741,14 @@ class celSanko2AttplFirstHihokensyasu extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celToGetsumatsugenzaiKei のクラスファイル 
- * 
+ * celToGetsumatsugenzaiKei のクラスファイル
+ *
  * @author 自動生成
  */
 class celToGetsumatsugenzaiKeiAttplFirstHihokensyasu extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtToGetsumatsugenzaiKei")
     private TextBoxNum txtToGetsumatsugenzaiKei;

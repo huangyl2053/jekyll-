@@ -4,12 +4,12 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3115RiyoshaFutanWariaiKonkyoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3115RiyoshaFutanWariaiKonkyoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3115RiyoshaFutanWariaiKonkyo">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3115RiyoshaFutanWariaiKonkyoMapper.allColumns_DbT3115RiyoshaFutanWariaiKonkyo" />
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3115RiyoshaFutanWariaiKonkyoMapper.allColumns_DbT3115RiyoshaFutanWariaiKonkyo" />
      FROM
          rgdb."DbT3115RiyoshaFutanWariaiKonkyo"
      WHERE
@@ -35,7 +35,7 @@
 
 
     <!--テーブルDbT3115RiyoshaFutanWariaiKonkyoの項目をDbT3115RiyoshaFutanWariaiKonkyoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3115RiyoshaFutanWariaiKonkyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3115RiyoshaFutanWariaiKonkyoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT3115RiyoshaFutanWariaiKonkyoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3115RiyoshaFutanWariaiKonkyoEntity" autoMapping="true">
         <id property="nendo" column="dbT3115RiyoshaFutanWariaiKonkyo_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="hihokenshaNo" column="dbT3115RiyoshaFutanWariaiKonkyo_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbT3115RiyoshaFutanWariaiKonkyo_rirekiNo" />

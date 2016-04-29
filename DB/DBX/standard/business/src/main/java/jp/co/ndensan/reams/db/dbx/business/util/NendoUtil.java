@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 年度変換共通クラスです。
+ *
+ * @reamsid_L DBB-9020-020 sunhaidi
  */
 public final class NendoUtil {
 

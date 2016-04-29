@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.nofugakushomeishokofushinseisho.
 /**
  *
  * 介護保険料納付額証明書交付申請書Editorです。
+ *
+ * @reamsid_L DBA-0540-694 yaodongsheng
  */
 public class NofugakuShomeishoKofuShinseishoEditor implements INofugakuShomeishoKofuShinseishoEditor {
 

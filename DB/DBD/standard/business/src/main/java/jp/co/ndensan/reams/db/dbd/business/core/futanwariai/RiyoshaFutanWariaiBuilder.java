@@ -181,6 +181,12 @@ public class RiyoshaFutanWariaiBuilder {
         return new RiyoshaFutanWariai(entity, id);
     }
 
+    /**
+     * setRiyoshaFutanWariaiMeisai
+     *
+     * @param createRiyoshaFutanWariaiMeisai RiyoshaFutanWariaiMeisai
+     * @return UnsupportedOperationException("Not supported yet.")
+     */
     public RiyoshaFutanWariaiBuilder setRiyoshaFutanWariaiMeisai(RiyoshaFutanWariaiMeisai createRiyoshaFutanWariaiMeisai) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

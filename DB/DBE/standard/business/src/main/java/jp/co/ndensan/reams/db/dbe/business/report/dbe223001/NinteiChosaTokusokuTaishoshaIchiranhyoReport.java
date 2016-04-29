@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * 認定調査督促状のReportです。
+ *
+ * @reamsid_L DBE-0030-030 xuyue
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoReport extends Report<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
 
@@ -41,7 +43,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReport extends Report<NinteiC
 
     @Override
     public void writeBy(ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter) {
-        
+
         for (NinteiChosaTokusokuTaishoshaIchiranhyoItem item : targets) {
             INinteiChosaTokusokuTaishoshaIchiranhyoEditor headerEditor = new NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor(item);
             INinteiChosaTokusokuTaishoshaIchiranhyoEditor bodyEditor = new NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor(item);

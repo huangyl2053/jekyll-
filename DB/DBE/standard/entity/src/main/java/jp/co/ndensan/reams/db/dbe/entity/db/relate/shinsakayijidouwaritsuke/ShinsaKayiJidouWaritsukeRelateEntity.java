@@ -11,6 +11,8 @@ import lombok.Setter;
 
 /**
  * 審査会自動割付RelateEntityクラスです。
+ *
+ * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

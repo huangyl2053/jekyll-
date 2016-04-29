@@ -25,12 +25,12 @@ public class IsShinsakaiJidoWaritsukeTest extends DbeTestBase {
 
     @Test
     public void 自動を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsShinsakaiJidoWaritsuke.自動.getコード(), is(true));
+        assertThat(IsShinsakaiJidoWaritsuke.自動.is審査会自動割付(), is(true));
     }
 
     @Test
     public void 手動を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsShinsakaiJidoWaritsuke.手動.getコード(), is(false));
+        assertThat(IsShinsakaiJidoWaritsuke.手動.is審査会自動割付(), is(false));
     }
 
     @Test

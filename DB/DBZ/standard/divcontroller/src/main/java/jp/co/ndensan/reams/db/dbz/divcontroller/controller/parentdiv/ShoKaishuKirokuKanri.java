@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.dgShoKaishuJokyo_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyoshosai.IShoKaishuJokyoShosaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
@@ -28,22 +28,21 @@ public class ShoKaishuKirokuKanri {
     public ResponseData onClick_btnSelect(ShoKaishuKirokuKanriDiv kanriDiv) {
         ResponseData<ShoKaishuKirokuKanriDiv> response = new ResponseData<>();
 
-        DataGrid<dgShoKaishuJokyo_Row> grid = kanriDiv.getCcdShoKaishuJokyoList().getDgShoKaishuJokyo();
-        setShosaiDiv(kanriDiv.getCcdShoKaishuJokyoShosai(), grid.getClickedItem());
+        DataGrid<dgKoufuKaishu_Row> grid = kanriDiv.getPanelKoufuList().getDgKoufuKaishu();
+        setShosaiDiv(kanriDiv, grid.getClickedItem());
 
         response.data = kanriDiv;
         return response;
     }
 
-    private void setShosaiDiv(IShoKaishuJokyoShosaiDiv shosaiDiv, dgShoKaishuJokyo_Row row) {
-        shosaiDiv.getTxtShoKofuShurui().setValue(row.getKofushoShurui());
-        shosaiDiv.getTxtKofuDate().setValue(row.getKofuDate().getValue());
-        shosaiDiv.getTxtYukoKigen().setValue(row.getYukoKigen().getValue());
-        shosaiDiv.getTxtKofuJiyu().setValue(row.getKofuJiyu());
-        shosaiDiv.getTxtKofuRiyu().setValue(row.getKofuRiyu());
-        shosaiDiv.getTxtKaishuDate().setValue(row.getKaishuDate().getValue());
-        shosaiDiv.getDdlKaishuJiyu().setSelectedItem(row.getKaishuJiyuKey());
-        shosaiDiv.getTxtKaishuRiyu().setValue(row.getKaishuRiyu());
+    private void setShosaiDiv(ShoKaishuKirokuKanriDiv kanriDiv, dgKoufuKaishu_Row row) {
+        kanriDiv.getTxtKoufuType().setValue(row.getKoufuType());
+        kanriDiv.getTxtKoufuDate().setValue(new RDate(row.getKoufuDate().toString()));
+        kanriDiv.getDdlKoufuJiyu().setSelectedValue(row.getKoufuJiyu());
+        kanriDiv.getTxtKaisyuDate().setValue(new RDate(row.getKaishuDate().toString()));
+        kanriDiv.getDdlKaisyuJiyu().setSelectedValue(row.getKaishuJiyu());
+        kanriDiv.getTxtYukouKigen().setValue(new RDate(row.getYukoKigen().toString()));
+
     }
 
     /**
@@ -55,27 +54,24 @@ public class ShoKaishuKirokuKanri {
     public ResponseData onClick_btnUpdateShoKaishuJokyo(ShoKaishuKirokuKanriDiv kanriDiv) {
         ResponseData<ShoKaishuKirokuKanriDiv> response = new ResponseData<>();
 
-        DataGrid<dgShoKaishuJokyo_Row> grid = kanriDiv.getCcdShoKaishuJokyoList().getDgShoKaishuJokyo();
+        DataGrid<dgKoufuKaishu_Row> grid = kanriDiv.getPanelKoufuList().getDgKoufuKaishu();
         //TODO n8178 入力を確定して、明細情報をグリッドに反映する際、選択していた行を見つける実装法が決定した後に修正が必要。　2014年12月
         int index = grid.getClickedRowId();
-        setUpdateRow(grid.getDataSource().get(index), kanriDiv.getCcdShoKaishuJokyoShosai());
+        setUpdateRow(grid.getDataSource().get(index), kanriDiv);
 
         response.data = kanriDiv;
         return response;
     }
 
-    private void setUpdateRow(dgShoKaishuJokyo_Row row, IShoKaishuJokyoShosaiDiv shosaiDiv) {
+    private void setUpdateRow(dgKoufuKaishu_Row row, ShoKaishuKirokuKanriDiv shosaiDiv) {
 
         row.setRowState(RowState.Modified);
-        row.setKofushoShurui(shosaiDiv.getTxtShoKofuShurui().getValue());
-        row.getKofuDate().setValue(shosaiDiv.getTxtKofuDate().getValue());
-        row.getYukoKigen().setValue(shosaiDiv.getTxtYukoKigen().getValue());
-        row.setKofuJiyu(shosaiDiv.getTxtKofuJiyu().getValue());
-        row.setKofuRiyu(shosaiDiv.getTxtKofuRiyu().getValue());
-        row.getKaishuDate().setValue(shosaiDiv.getTxtKaishuDate().getValue());
-        row.setKaishuJiyuKey(shosaiDiv.getDdlKaishuJiyu().getSelectedItem());
-        row.setKaishuJiyu(shosaiDiv.getDdlKaishuJiyu().getSelectedValue());
-        row.setKaishuRiyu(shosaiDiv.getTxtKaishuRiyu().getValue());
+        row.setKoufuType(shosaiDiv.getTxtKoufuType().getValue());
+        row.setKoufuDate(shosaiDiv.getTxtKoufuDate().getValue().toDateString());
+        row.setKoufuJiyu(shosaiDiv.getDdlKoufuJiyu().getSelectedValue());
+        row.setKaishuDate(shosaiDiv.getTxtKoufuDate().getValue().toDateString());
+        row.setKaishuJiyu(shosaiDiv.getDdlKaisyuJiyu().getSelectedValue());
+        row.setYukoKigen(shosaiDiv.getTxtYukouKigen().getValue().toDateString());
     }
 
 }

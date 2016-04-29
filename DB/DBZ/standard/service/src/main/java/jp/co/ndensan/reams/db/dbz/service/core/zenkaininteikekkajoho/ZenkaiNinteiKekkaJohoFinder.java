@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 前回結果情報のサービスクラスです。
+ * @reamsid_L DBE-3000-020 dongyabin
  */
 public class ZenkaiNinteiKekkaJohoFinder {
     
@@ -103,7 +104,9 @@ public class ZenkaiNinteiKekkaJohoFinder {
         List<ZenkaiNinteiKekkaJohoRelate> zenkaiNinteiKekkaJohoList = new ArrayList<>();
         IZenkaiNinteiKekkaJohoMapper mapper = mapperProvider.create(IZenkaiNinteiKekkaJohoMapper.class);
         ZenkaiNinteiKekkaJohoRelateEntity entity = mapper.get要介護度_今回認定(申請書管理番号);
-        zenkaiNinteiKekkaJohoList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
+        if (entity != null) {
+            zenkaiNinteiKekkaJohoList.add(new ZenkaiNinteiKekkaJohoRelate(entity));
+        }
         return SearchResult.of(zenkaiNinteiKekkaJohoList, 0, false);
     }
     

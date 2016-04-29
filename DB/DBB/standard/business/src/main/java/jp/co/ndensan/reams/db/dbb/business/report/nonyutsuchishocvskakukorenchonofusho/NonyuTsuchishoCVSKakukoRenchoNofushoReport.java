@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 保険料納入通知書（本算定）【コンビニ角公タイプ】納付書のReportです。
  *
+ * @reamsid_L DBB-9110-120 huangh
  */
 public class NonyuTsuchishoCVSKakukoRenchoNofushoReport extends Report<NonyuTsuchishoCVSKakukoRenchoNofushoSource> {
 

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.idochecklist;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoInfoEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 異動チェックリストのマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-0530-010 chengsanyuan
  */
 public interface IIdoCheckListMapper {
 

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.C
 
 /**
  * 要介護認定調査票（特記事項）のEditorです。
+ *
+ * @reamsid_L DBE-0080-040 xuyannan
  */
 public class ChosahyoTokkijikoEditorImpl implements IChosahyoTokkijikoEditor {
 

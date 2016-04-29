@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  * 共有子Div「調査委託先/調査員入力」のDivControllerです。
  *
+ * @reamsid_L DBE-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInput {
 

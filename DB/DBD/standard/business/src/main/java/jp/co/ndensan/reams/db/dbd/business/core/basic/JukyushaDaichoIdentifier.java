@@ -16,6 +16,8 @@ import lombok.Value;
  * 受給者台帳の識別子です。
  */
 @Value
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JukyushaDaichoIdentifier implements Serializable {
 
     private final LasdecCode 市町村コード;

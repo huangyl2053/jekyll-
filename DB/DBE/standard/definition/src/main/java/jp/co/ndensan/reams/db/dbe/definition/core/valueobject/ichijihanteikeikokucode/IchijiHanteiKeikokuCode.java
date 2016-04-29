@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class IchijiHanteiKeikokuCode implements Comparable<IchijiHanteiKeikokuCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
 
     private final Code code;
-
+    /**
+     * IchijiHanteiKeikokuCodeのEMPTY値です。
+     */
     public static final IchijiHanteiKeikokuCode EMPTY;
 
     /**

@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 /**
  * 合議体情報作成の抽象ValidationHandlerクラスです。
  *
+ * @reamsid_L DBE-0090-010 chengsanyuan
  */
 public class GogitaiJohoSakuseiValidationHandler {
 

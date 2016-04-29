@@ -15,21 +15,20 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 主治医意見書提出督促状のEditorです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoSakuseiTokusokujoEditor {
 
     private final ShujiiIkenshoSakuseiTokusokujoItem headitem;
-    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param headitem {@link ShujiiIkenshoSakuseiTokusokujoItem}
-     * @param index int
      */
-    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem, int index) {
+    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem) {
         this.headitem = headitem;
-        this.index = index;
     }
 
     @Override
@@ -106,6 +105,7 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.birthGengoMeiji = headitem.getBirthGengoMeiji();
         source.birthGengoTaisho = headitem.getBirthGengoTaisho();
         source.birthGengoShowa = headitem.getBirthGengoShowa();
+        source.shoriName = headitem.getShoriName();
         return source;
     }
 }

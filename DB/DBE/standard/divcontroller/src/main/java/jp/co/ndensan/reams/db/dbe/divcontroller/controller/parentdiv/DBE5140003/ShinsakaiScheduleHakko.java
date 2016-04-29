@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedu
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.ShinsakaiScheduleHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.dgShinsakaiScheduleKagami_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003.ShinsakaiScheduleHakkoValidationHandler;
-import jp.co.ndensan.reams.db.dbe.service.shinsakai.ShinsakaiiinJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護認定審査会開催予定登録3クラスです。
+ *
+ * @reamsid_L DBE-0130-030 yaodongsheng
  */
 public class ShinsakaiScheduleHakko {
 
@@ -40,6 +41,8 @@ public class ShinsakaiScheduleHakko {
         div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().clear();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
+        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().getSelectedKeys().clear();
+        div.getShinsakaiScheduleSrch().getTxtNendo().clearValue();
         CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKO_BTTON, false);
         return ResponseData.of(div).respond();
     }
@@ -118,9 +121,15 @@ public class ShinsakaiScheduleHakko {
         for (dgShinsakaiScheduleKagami_Row row : rowList) {
             審査会委員コードリスト.add(row.getShinsakaiIinCode());
         }
+        RString nendoParameter = RString.EMPTY;
+        if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
+            nendoParameter = div.getShinsakaiScheduleSrch().getTxtNendo().getValue().toDateString();
+        }
         return new KaigoNinteiShinsakaiScheduleBatchParamter(
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toDateString(),
-                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(), 審査会委員コードリスト);
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(),
+                nendoParameter,
+                審査会委員コードリスト);
     }
 
     private ValidationMessageControlPairs getCheck(ShinsakaiScheduleHakkoValidationHandler validationHandler) {
@@ -133,6 +142,10 @@ public class ShinsakaiScheduleHakko {
             return validPairs;
         }
         validPairs = validationHandler.印刷対象介護認定審査会委員選択チェック();
+        if (validPairs.iterator().hasNext()) {
+            return validPairs;
+        }
+        validPairs = validationHandler.年間チェック();
         if (validPairs.iterator().hasNext()) {
             return validPairs;
         }

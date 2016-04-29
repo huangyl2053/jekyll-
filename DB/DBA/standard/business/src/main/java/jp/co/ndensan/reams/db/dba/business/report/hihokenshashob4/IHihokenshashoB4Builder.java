@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 介護保険被保険者証（B4版）Builderのインターフェースクラスです。
+ * @reamsid_L DBU-0490-060 dongyabin
  */
 public interface IHihokenshashoB4Builder extends IReportBuilder<HihokenshashoB4ReportSource> {
 }

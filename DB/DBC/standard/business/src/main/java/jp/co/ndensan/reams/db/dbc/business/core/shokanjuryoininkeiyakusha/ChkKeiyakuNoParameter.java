@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受領委任契約番号存在チェック用画面検索DIVのクラスです。
+ *
+ * @reamsid_L DBC-2130-030 xicongwang
  */
 @lombok.Getter
 @lombok.Setter

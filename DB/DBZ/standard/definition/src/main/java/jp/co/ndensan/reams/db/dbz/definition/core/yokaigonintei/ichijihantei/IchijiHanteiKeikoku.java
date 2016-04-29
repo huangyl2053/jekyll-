@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 一次判定警告コード09を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 huangh
  */
 public enum IchijiHanteiKeikoku {
 

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域内転居結果一覧表CSV用データEntity
+ *
+ * @reamsid_L DBU-1150-030 xuhao
  */
 @lombok.Getter
 @lombok.Setter

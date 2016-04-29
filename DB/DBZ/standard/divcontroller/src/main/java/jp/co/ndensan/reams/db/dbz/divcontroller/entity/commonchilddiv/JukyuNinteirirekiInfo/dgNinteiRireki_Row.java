@@ -3,22 +3,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNint
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 23 10:28:55 CST 2016 
+ * Wed Apr 06 16:01:32 CST 2016
  */
 
-
-
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-
 
 /**
- * dgNinteiRireki_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgNinteiRireki_Row のクラスファイル
+ *
  */
-
 public class dgNinteiRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 

@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -24,10 +24,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護連絡先情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-1300-100 dongyabin
  */
-public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT4150RenrakusakiJohoEntity, RenrakusakiJoho> implements Serializable {
+public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT5150RenrakusakiJohoEntity, RenrakusakiJoho> implements Serializable {
 
-    private final DbT4150RenrakusakiJohoEntity entity;
+    private final DbT5150RenrakusakiJohoEntity entity;
     private final RenrakusakiJohoIdentifier id;
 
     /**
@@ -41,7 +43,7 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT415
             int 連番) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        this.entity = new DbT4150RenrakusakiJohoEntity();
+        this.entity = new DbT5150RenrakusakiJohoEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setRenban(連番);
 
@@ -50,11 +52,11 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT415
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link DbT4150RenrakusakiJohoEntity}より{@link RenrakusakiJoho}を生成します。
+     * DBより取得した{@link DbT5150RenrakusakiJohoEntity}より{@link RenrakusakiJoho}を生成します。
      *
-     * @param entity DBより取得した{@link DbT4150RenrakusakiJohoEntity}
+     * @param entity DBより取得した{@link DbT5150RenrakusakiJohoEntity}
      */
-    public RenrakusakiJoho(DbT4150RenrakusakiJohoEntity entity) {
+    public RenrakusakiJoho(DbT5150RenrakusakiJohoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護連絡先情報"));
         this.id = new RenrakusakiJohoIdentifier(
                 entity.getShinseishoKanriNo(),
@@ -64,11 +66,11 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT415
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity {@link DbT4150RenrakusakiJohoEntity}
+     * @param entity {@link DbT5150RenrakusakiJohoEntity}
      * @param id {@link RenrakusakiJohoIdentifier}
      */
     RenrakusakiJoho(
-            DbT4150RenrakusakiJohoEntity entity,
+            DbT5150RenrakusakiJohoEntity entity,
             RenrakusakiJohoIdentifier id
     ) {
         this.entity = entity;
@@ -184,12 +186,12 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT415
     }
 
     /**
-     * {@link DbT4150RenrakusakiJohoEntity}のクローンを返します。
+     * {@link DbT5150RenrakusakiJohoEntity}のクローンを返します。
      *
-     * @return {@link DbT4150RenrakusakiJohoEntity}のクローン
+     * @return {@link DbT5150RenrakusakiJohoEntity}のクローン
      */
     @Override
-    public DbT4150RenrakusakiJohoEntity toEntity() {
+    public DbT5150RenrakusakiJohoEntity toEntity() {
         return this.entity.clone();
     }
 
@@ -204,12 +206,12 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT415
     }
 
     /**
-     * 介護連絡先情報のみを変更対象とします。<br/> {@link DbT4150RenrakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護連絡先情報のみを変更対象とします。<br/> {@link DbT5150RenrakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link RenrakusakiJoho}
      */
     public RenrakusakiJoho modifiedModel() {
-        DbT4150RenrakusakiJohoEntity modifiedEntity = entity.clone();
+        DbT5150RenrakusakiJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
@@ -218,13 +220,13 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT415
     }
 
     /**
-     * 保持する介護連絡先情報を削除対象とします。<br/> {@link DbT4150RenrakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護連絡先情報を削除対象とします。<br/> {@link DbT5150RenrakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link RenrakusakiJoho}
      */
     @Override
     public RenrakusakiJoho deleted() {
-        DbT4150RenrakusakiJohoEntity deletedEntity = this.toEntity();
+        DbT5150RenrakusakiJohoEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
@@ -251,10 +253,10 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT415
 
     private static final class _SerializationProxy implements Serializable {
 
-        private final DbT4150RenrakusakiJohoEntity entity;
+        private final DbT5150RenrakusakiJohoEntity entity;
         private final RenrakusakiJohoIdentifier id;
 
-        private _SerializationProxy(DbT4150RenrakusakiJohoEntity entity, RenrakusakiJohoIdentifier id) {
+        private _SerializationProxy(DbT5150RenrakusakiJohoEntity entity, RenrakusakiJohoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

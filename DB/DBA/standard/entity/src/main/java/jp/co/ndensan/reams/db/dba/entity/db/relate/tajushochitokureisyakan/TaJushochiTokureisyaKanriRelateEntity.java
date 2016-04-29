@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 他住所地特例者管理のRelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0200-020 linghuhang
  */
 @lombok.Getter
 @lombok.Setter

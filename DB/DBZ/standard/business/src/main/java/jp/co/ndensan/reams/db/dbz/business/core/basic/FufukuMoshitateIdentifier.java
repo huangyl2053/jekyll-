@@ -13,6 +13,8 @@ import lombok.Value;
 
 /**
  * 不服審査申立情報の識別子です。
+ *
+ * @reamsid_L DBZ-9999-011 lizhuoxuan
  */
 @Value
 public class FufukuMoshitateIdentifier implements Serializable {

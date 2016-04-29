@@ -25,12 +25,12 @@ public class IsminashiNigoEtcTest extends DbeTestBase {
 
     @Test
     public void 対象を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsminashiNigoEtc.対象.getコード(), is(true));
+        assertThat(IsminashiNigoEtc.対象.is対象(), is(true));
     }
 
     @Test
     public void 対象外を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsminashiNigoEtc.対象外.getコード(), is(false));
+        assertThat(IsminashiNigoEtc.対象外.is対象(), is(false));
     }
 
     @Test

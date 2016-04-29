@@ -25,12 +25,12 @@ public class IsShinsaKeizokuTest extends DbeTestBase {
 
     @Test
     public void 継続するを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsShinsaKeizoku.継続する.getコード(), is(true));
+        assertThat(IsShinsaKeizoku.継続する.is継続する(), is(true));
     }
 
     @Test
     public void 継続しないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsShinsaKeizoku.継続しない.getコード(), is(false));
+        assertThat(IsShinsaKeizoku.継続しない.is継続する(), is(false));
     }
 
     @Test

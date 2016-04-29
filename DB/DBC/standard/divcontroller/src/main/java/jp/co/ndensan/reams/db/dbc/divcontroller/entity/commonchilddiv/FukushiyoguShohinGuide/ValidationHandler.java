@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 福祉用具商品名入力ガイドのチェッククラスです。
+ *
+ * @reamsid_L DBC-0970-020 lizhuoxuan
  */
 public class ValidationHandler {
 

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -132,6 +132,26 @@ public class NinteiChosaDiv extends Panel {
     @JsonIgnore
     public void  setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
         this.getNinteichosaKensakuJoken().setChkNinteiChosahyo(chkNinteiChosahyo);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtChosaDispMax() {
+        return this.getNinteichosaKensakuJoken().getTxtChosaDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaDispMax(TextBoxNum txtChosaDispMax) {
+        this.getNinteichosaKensakuJoken().setTxtChosaDispMax(txtChosaDispMax);
+    }
+
+    @JsonIgnore
+    public Button getBtnChosaClear() {
+        return this.getNinteichosaKensakuJoken().getBtnChosaClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaClear(Button btnChosaClear) {
+        this.getNinteichosaKensakuJoken().setBtnChosaClear(btnChosaClear);
     }
 
     @JsonIgnore

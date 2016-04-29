@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 給付額減額免除申請書のプロパティです。
+ *
+ * @reamsid_L DBA-0540-695 yaodongsheng
  */
 public class KyufugengakuMenjyoShinseishoProerty extends ReportPropertyBase<KyufugengakuMenjyoShinseishoReportSource> {
 

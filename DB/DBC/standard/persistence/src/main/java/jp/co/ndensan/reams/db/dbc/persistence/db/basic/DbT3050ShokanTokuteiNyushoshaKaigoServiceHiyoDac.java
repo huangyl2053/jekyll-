@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払請求特定入所者介護サービス費用のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac implements ISaveable<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> {
 

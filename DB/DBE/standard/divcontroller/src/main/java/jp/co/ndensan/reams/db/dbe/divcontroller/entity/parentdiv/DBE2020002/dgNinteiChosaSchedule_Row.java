@@ -3,24 +3,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 29 19:38:23 CST 2016 
+ * Tue Apr 12 19:08:19 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgNinteiChosaSchedule_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgNinteiChosaSchedule_Row のクラスファイル
+ *
  */
-
 public class dgNinteiChosaSchedule_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString ninteiChosainCode;
     private RString ninteiChosainName;

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopy;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120080.KogakuKyufuKetteiDbUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120080.KogakuKyufuKetteiEntityProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120080.KogakuKyufuKetteiInBatchRegistGetEditInfoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120080.KogakuKyufuKetteiInBatchRegistTempSaveProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.KogakuKyufuKetteiInBatchRegistGetEditInfoProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.ｋogakuｋyufuｋetteiIn.KogakuKyufuKetteiInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukyufuketteiin.KogakuKyufuKetteiInBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IcchiJoken;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額サービス費決定情報取込みのバッチ
+ *
+ * @reamsid_L DBC-0980-390 lijunjun
  */
 public class DBC120080_KogakuKyufuKetteiIn extends BatchFlowBase<KogakuKyufuKetteiInBatchParameter> {
 
@@ -43,7 +45,7 @@ public class DBC120080_KogakuKyufuKetteiIn extends BatchFlowBase<KogakuKyufuKett
         executeStep(SHAREDFILE_COPY);
 
         HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY),
-                SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
+                SharedFileCopyProcess.PARAMETER_OUT_FILEPATHLIST);
         fileNameList = new ArrayList<>();
         for (RString filename : filePathList.keySet()) {
             fileNameList.add(filename);
@@ -60,11 +62,11 @@ public class DBC120080_KogakuKyufuKetteiIn extends BatchFlowBase<KogakuKyufuKett
     @Step(SHAREDFILE_COPY)
     IBatchFlowCommand sharedFileCopy() {
         Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
-        processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
-        processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_SHAREDNAME, sharedFileKey);
+        processParameter.put(SharedFileCopyProcess.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
 
-        return simpleBatch(SharedFileCopy.class)
+        return simpleBatch(SharedFileCopyProcess.class)
                 .arguments(processParameter)
                 .define();
     }

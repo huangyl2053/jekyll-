@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.kihonchosainput.KihonChosaInputEntit
 /**
  *
  * 認定調査基本情報取得です。
+ *
+ * @reamsid_L DBE-3000-090 wangjie2
  */
 public interface IKihonChosaInputMapper {
 

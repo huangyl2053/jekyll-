@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.tokuteifutangendogakushin
 
 /**
  * 介護保険特定負担限度額申請書Editorです。
+ *
+ * @reamsid_L DBA-0540-688 houtianpeng
  */
 public class TokuteiFutangendogakuShinseishoEditor implements ITokuteiFutangendogakuShinseishoEditor {
 

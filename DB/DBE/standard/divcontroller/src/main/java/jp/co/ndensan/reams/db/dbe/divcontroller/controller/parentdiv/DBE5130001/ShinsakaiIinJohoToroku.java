@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 介護認定審査会委員情報登録のコントローラです。
+ *
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class ShinsakaiIinJohoToroku {
 
@@ -95,7 +97,8 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onClick_btnKensaku(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
-        List<ShinsakaiIinJoho> 審査会委員一覧情報 = manager.get審査会委員一覧(div.getRadHyojiJoken().getSelectedKey()).records();
+        List<ShinsakaiIinJoho> 審査会委員一覧情報 = manager.get審査会委員一覧(
+                div.getRadHyojiJoken().getSelectedKey(), div.getTxtDispMax().getValue()).records();
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報 = Models.create(審査会委員一覧情報);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報, 介護認定審査会委員情報);
         div.getDgShinsaInJohoIchiran().setDataSource(createHandOf(div).setShinsaInJohoIchiranDiv(審査会委員一覧情報));
@@ -621,8 +624,9 @@ public class ShinsakaiIinJohoToroku {
     }
 
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
-        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder.get所属機関一覧情報(ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(
-                div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
+        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder.get所属機関一覧情報(
+                ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(
+                        div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
         div.getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(所属機関一覧));
         setDisabledBy所属機関コード(div);
     }

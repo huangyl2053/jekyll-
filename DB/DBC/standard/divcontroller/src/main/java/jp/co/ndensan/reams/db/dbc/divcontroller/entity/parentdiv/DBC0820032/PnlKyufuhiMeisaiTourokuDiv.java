@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -22,13 +22,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdServiceCodeInput")
+    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
     @JsonProperty("txtTanyi")
     private TextBoxNum txtTanyi;
     @JsonProperty("txtKaisu")
@@ -47,8 +49,6 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
     private Button btnClear;
     @JsonProperty("ccdHokenshaJoho")
     private HokenshaJohoDiv ccdHokenshaJoho;
-    @JsonProperty("ccdServiceCodeInput")
-    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,6 +56,15 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdServiceCodeInput
+     * @return ccdServiceCodeInput
+     */
+    @JsonProperty("ccdServiceCodeInput")
+    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
+        return ccdServiceCodeInput;
+    }
+
     /*
      * gettxtTanyi
      * @return txtTanyi
@@ -207,15 +216,6 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
     @JsonProperty("ccdHokenshaJoho")
     public IHokenshaJohoDiv getCcdHokenshaJoho() {
         return ccdHokenshaJoho;
-    }
-
-    /*
-     * getccdServiceCodeInput
-     * @return ccdServiceCodeInput
-     */
-    @JsonProperty("ccdServiceCodeInput")
-    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
-        return ccdServiceCodeInput;
     }
 
     // </editor-fold>

@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画届出を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuTodokede
         extends ParentModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede>
@@ -89,11 +91,11 @@ public class KyotakuKeikakuTodokede
         }
         this.kyotakuKeikakuJikoSakusei = Models.create(kyotakuKeikakuJikoSakuseiList);
 
-        List<KyotakuKeikakuJigyoshaSakusei> kyotakuKeikakuJigyoshaSakuseiList = new ArrayList<>();
-        for (DbT3006KyotakuKeikakuJigyoshaSakuseiEntity kyotakuKeikakuJigyoshaSakuseiEntity : entity.get居宅給付計画事業者作成Entity()) {
-            kyotakuKeikakuJigyoshaSakuseiList.add(new KyotakuKeikakuJigyoshaSakusei(kyotakuKeikakuJigyoshaSakuseiEntity));
+        List<KyotakuKeikakuJigyoshaSakusei> kyotakuJigyoshaSakuseiList = new ArrayList<>();
+        for (DbT3006KyotakuKeikakuJigyoshaSakuseiEntity kyotakuJigyoshaSakuseiEntity : entity.get居宅給付計画事業者作成Entity()) {
+            kyotakuJigyoshaSakuseiList.add(new KyotakuKeikakuJigyoshaSakusei(kyotakuJigyoshaSakuseiEntity));
         }
-        this.kyotakuKeikakuJigyoshaSakusei = Models.create(kyotakuKeikakuJigyoshaSakuseiList);
+        this.kyotakuKeikakuJigyoshaSakusei = Models.create(kyotakuJigyoshaSakuseiList);
     }
 
     /**

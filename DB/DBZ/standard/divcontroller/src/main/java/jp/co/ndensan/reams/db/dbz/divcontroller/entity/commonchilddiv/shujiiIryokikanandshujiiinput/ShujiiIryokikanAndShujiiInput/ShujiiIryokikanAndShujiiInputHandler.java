@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 共有子Div「主治医医療機関＆主治医入力」のhandlerクラスです
  *
+ * @reamsid_L DBE-1300-140 chengsanyuan
  */
 public class ShujiiIryokikanAndShujiiInputHandler {
 
@@ -79,5 +80,17 @@ public class ShujiiIryokikanAndShujiiInputHandler {
      */
     public void setShujiiName(RString 主治医氏名) {
         div.getTxtShujiiName().setValue(主治医氏名 == null ? RString.EMPTY : 主治医氏名);
+    }
+
+    /**
+     * テキストボックスのクリア。
+     *
+     */
+    public void clear() {
+        div.getTxtIryoKikanCode().clearValue();
+        div.getTxtIryoKikanName().clearValue();
+        div.getTxtShujiiCode().clearValue();
+        div.getTxtShujiiName().clearValue();
+        div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());
     }
 }

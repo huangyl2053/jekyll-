@@ -12,24 +12,28 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyogaikyochosa.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyogaikyochosa.NinteichosahyoGaikyoChosaIdentifier;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosahyogaikyochosa.NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査依頼情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier, DbT5201NinteichosaIraiJohoEntity, NinteichosaIraiJoho> implements Serializable {
+public class NinteichosaIraiJoho
+        extends ModelBase<NinteichosaIraiJohoIdentifier, DbT5201NinteichosaIraiJohoEntity, NinteichosaIraiJoho>
+        implements Serializable {
 
     private final DbT5201NinteichosaIraiJohoEntity entity;
     private final NinteichosaIraiJohoIdentifier id;
@@ -194,7 +198,7 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
      *
      * @return モバイルデータ出力済フラグ
      */
-    public boolean getモバイルデータ出力済フラグ() {
+    public boolean isモバイルデータ出力済フラグ() {
         return entity.getMobileDataShutsuryokuZumiFlag();
     }
 
@@ -203,7 +207,7 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
      *
      * @return 事前調査フラグ
      */
-    public boolean get事前調査フラグ() {
+    public boolean is事前調査フラグ() {
         return entity.getJizenChosaFlag();
     }
 
@@ -248,7 +252,7 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -273,14 +277,11 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
     }
 
     /**
-     * 認定調査依頼情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査依頼情報配下の要素である認定調査票（概況調査）情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link NinteichosaIraiJoho}を返します。
+     * 認定調査依頼情報配下の要素を削除対象とします。<br/> {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査依頼情報配下の要素である認定調査票（概況調査）情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteichosaIraiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosaIraiJoho}
-     * @throws IllegalStateException
-     * DbT5201NinteichosaIraiJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5201NinteichosaIraiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public NinteichosaIraiJoho deleted() {
@@ -301,8 +302,7 @@ public class NinteichosaIraiJoho extends ModelBase<NinteichosaIraiJohoIdentifier
     }
 
     /**
-     * 認定調査依頼情報のみを変更対象とします。<br/>
-     * {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査依頼情報のみを変更対象とします。<br/> {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaIraiJoho}
      */

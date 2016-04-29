@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 合議体情報一括作成_バッチ処理クラスパラメータクラスです
+ *
+ * @reamsid_L DBE-0090-020 chengsanyuan
  */
 @lombok.Getter
 @lombok.Setter

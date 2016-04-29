@@ -1,20 +1,15 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.IHyojunFutangakuGengakuDiv;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.HyojunFutangakuGemmenDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.dgHyojunFutangakuGengakuList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HyojunFutangakuGengaku のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * HyojunFutangakuGengaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class HyojunFutangakuGengakuDiv extends Panel implements IHyojunFutangakuGengakuDiv {
@@ -24,6 +19,7 @@ public class HyojunFutangakuGengakuDiv extends Panel implements IHyojunFutangaku
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHiddenHihokenshaNo")
     private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgHyojunFutangakuGengakuList")
@@ -46,7 +42,7 @@ public class HyojunFutangakuGengakuDiv extends Panel implements IHyojunFutangaku
 
     @JsonProperty("txtHiddenHihokenshaNo")
     public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
-        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+        this.txtHiddenHihokenshaNo = txtHiddenHihokenshaNo;
     }
 
     @JsonProperty("dgHyojunFutangakuGengakuList")
@@ -56,7 +52,7 @@ public class HyojunFutangakuGengakuDiv extends Panel implements IHyojunFutangaku
 
     @JsonProperty("dgHyojunFutangakuGengakuList")
     public void setDgHyojunFutangakuGengakuList(DataGrid<dgHyojunFutangakuGengakuList_Row> dgHyojunFutangakuGengakuList) {
-        this.dgHyojunFutangakuGengakuList=dgHyojunFutangakuGengakuList;
+        this.dgHyojunFutangakuGengakuList = dgHyojunFutangakuGengakuList;
     }
 
     @JsonProperty("HyojunFutangakuGemmenDetail")
@@ -66,7 +62,7 @@ public class HyojunFutangakuGengakuDiv extends Panel implements IHyojunFutangaku
 
     @JsonProperty("HyojunFutangakuGemmenDetail")
     public void setHyojunFutangakuGemmenDetail(HyojunFutangakuGemmenDetailDiv HyojunFutangakuGemmenDetail) {
-        this.HyojunFutangakuGemmenDetail=HyojunFutangakuGemmenDetail;
+        this.HyojunFutangakuGemmenDetail = HyojunFutangakuGemmenDetail;
     }
 
     @JsonProperty("btnClose")
@@ -76,9 +72,8 @@ public class HyojunFutangakuGengakuDiv extends Panel implements IHyojunFutangaku
 
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+        this.btnClose = btnClose;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

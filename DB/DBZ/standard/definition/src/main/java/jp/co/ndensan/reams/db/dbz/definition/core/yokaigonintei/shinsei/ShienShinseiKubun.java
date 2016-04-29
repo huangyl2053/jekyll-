@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護申請・要支援申請の区分を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBZ-9999-023 wangchao
  */
 public enum ShienShinseiKubun {
 
@@ -26,7 +26,7 @@ public enum ShienShinseiKubun {
     /**
      * コード:3 名称:不明 略称:定義なし
      */
-    不明("3", "不明");
+    不明("9", "不明");
 
     private final RString code;
     private final RString fullName;

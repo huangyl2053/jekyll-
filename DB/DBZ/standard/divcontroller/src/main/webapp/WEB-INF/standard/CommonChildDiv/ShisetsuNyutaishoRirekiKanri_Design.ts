@@ -13,14 +13,6 @@ module DBZ {
                 return "onClick_btnAddShisetsuNyutaisho";
             }
 
-            public static onSelect_dgShisetsuNyutaishoRireki(): string {
-                return "onSelect_dgShisetsuNyutaishoRireki";
-            }
-
-            public static onSelectByDblClick_dgShisetsuNyutaishoRireki(): string {
-                return "onSelectByDblClick_dgShisetsuNyutaishoRireki";
-            }
-
             public static onSelectBySelectButton_dgShisetsuNyutaishoRireki(): string {
                 return "onSelectBySelectButton_dgShisetsuNyutaishoRireki";
             }

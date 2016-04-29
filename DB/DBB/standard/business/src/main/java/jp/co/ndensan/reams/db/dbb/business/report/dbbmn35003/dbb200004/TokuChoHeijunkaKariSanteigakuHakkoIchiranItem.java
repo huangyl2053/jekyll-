@@ -10,6 +10,8 @@ import lombok.Getter;
 
 /**
  * 特別徴収平準化_仮算定額変更通知書_発行一覧表の情報です。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

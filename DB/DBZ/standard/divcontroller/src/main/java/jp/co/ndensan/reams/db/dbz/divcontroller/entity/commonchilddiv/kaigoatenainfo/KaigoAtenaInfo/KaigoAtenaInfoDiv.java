@@ -13,14 +13,18 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.IAtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.ShokaiDataDiv;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * KaigoAtenaInfo のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBA-0030-011 liangbc
  */
 public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
 
@@ -64,4 +68,63 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
         getAtenaInfo().onChangeDisplayMode三行タイプ();
     }
 
+    /**
+     * 氏名漢字を取得
+     *
+     * @return 氏名漢字
+     */
+    @Override
+    public RString get氏名漢字() {
+        return atenaInfo.getCcdMeishoHyoji().get漢字名称();
+    }
+
+    /**
+     * 氏名カナを取得
+     *
+     * @return 氏名カナ
+     */
+    @Override
+    public RString get氏名カナ() {
+        return atenaInfo.getCcdMeishoHyoji().getカナ名称();
+    }
+
+    /**
+     * 郵便番号を取得
+     *
+     * @return 郵便番号
+     */
+    @Override
+    public YubinNo get郵便番号() {
+        return atenaInfo.getShokaiData().getTxtYubinNo().getValue();
+    }
+
+    /**
+     * 住所を取得
+     *
+     * @return 住所
+     */
+    @Override
+    public AtenaJusho get住所() {
+        return atenaInfo.getShokaiData().getTxtJusho().getDomain();
+    }
+
+    /**
+     * ShokaiDataを取得
+     *
+     * @return ShokaiData
+     */
+    @Override
+    public ShokaiDataDiv getShokaiData() {
+        return atenaInfo.getShokaiData();
+    }
+
+    /**
+     * 宛名情報を取得
+     *
+     * @return 宛名情報
+     */
+    @Override
+    public AtenaShokaiSimpleDiv getAtenaInfoDiv() {
+        return atenaInfo;
+    }
 }

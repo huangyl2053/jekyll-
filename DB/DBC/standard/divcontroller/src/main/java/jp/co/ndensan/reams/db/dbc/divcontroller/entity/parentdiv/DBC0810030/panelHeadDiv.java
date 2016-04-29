@@ -4,16 +4,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * panelHead のクラスファイル 
- * 
- * @author 自動生成
+ * panelHead のクラスファイル
+ *
+ * @reamsid_L DBC-1010-140 quxiaodong
  */
 public class panelHeadDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -49,8 +55,8 @@ public class panelHeadDiv extends Panel {
     private Button btnKyufuhiMeisaiJyutoku;
     @JsonProperty("btnKinkyujiShisetsuRyoyo")
     private Button btnKinkyujiShisetsuRyoyo;
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    private Button btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteishikkan")
+    private Button btnKinkyujiShoteishikkan;
     @JsonProperty("btnShokujiHiyo")
     private Button btnShokujiHiyo;
     @JsonProperty("btnSeikyugakuShukei")
@@ -319,21 +325,21 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKinkyujiShoteiShikkan
-     * @return btnKinkyujiShoteiShikkan
+     * getbtnKinkyujiShoteishikkan
+     * @return btnKinkyujiShoteishikkan
      */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public Button getBtnKinkyujiShoteiShikkan() {
-        return btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteishikkan")
+    public Button getBtnKinkyujiShoteishikkan() {
+        return btnKinkyujiShoteishikkan;
     }
 
     /*
-     * setbtnKinkyujiShoteiShikkan
-     * @param btnKinkyujiShoteiShikkan btnKinkyujiShoteiShikkan
+     * setbtnKinkyujiShoteishikkan
+     * @param btnKinkyujiShoteishikkan btnKinkyujiShoteishikkan
      */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public void setBtnKinkyujiShoteiShikkan(Button btnKinkyujiShoteiShikkan) {
-        this.btnKinkyujiShoteiShikkan = btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteishikkan")
+    public void setBtnKinkyujiShoteishikkan(Button btnKinkyujiShoteishikkan) {
+        this.btnKinkyujiShoteishikkan = btnKinkyujiShoteishikkan;
     }
 
     /*

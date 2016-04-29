@@ -4,16 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * ChoteiboSakuseiParameter のクラスファイル 
- * 
- * @author 自動生成
+ * ChoteiboSakuseiParameter のクラスファイル
+ *
+ * @reamsid_L DBB-0770-010 cuilin
  */
 public class ChoteiboSakuseiParameterDiv extends PanelBatchParameter {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]

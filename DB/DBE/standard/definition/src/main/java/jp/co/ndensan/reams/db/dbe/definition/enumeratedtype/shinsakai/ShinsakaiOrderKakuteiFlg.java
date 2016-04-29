@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定審査会審査順確定フラグを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBE-9999-023 liangbc
  */
 public enum ShinsakaiOrderKakuteiFlg {
 
@@ -32,7 +32,7 @@ public enum ShinsakaiOrderKakuteiFlg {
      *
      * @return 介護認定審査会審査順確定フラグのコード
      */
-    public boolean getコード() {
+    public boolean is介護認定審査会審査順確定() {
         return code;
     }
 

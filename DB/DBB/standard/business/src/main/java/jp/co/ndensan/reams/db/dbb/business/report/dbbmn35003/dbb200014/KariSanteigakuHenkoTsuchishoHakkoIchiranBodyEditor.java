@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200014.KariSanteig
 
 /**
  * 仮算定額変更通知書発行一覧表ボディEditorです。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 class KariSanteigakuHenkoTsuchishoHakkoIchiranBodyEditor implements IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor {
 

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Mar 28 11:31:32 JST 2016 
+ * Fri Apr 08 13:45:44 CST 2016 
  */
 
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgShinsakaiIinIchiran_Row のクラスファイル 
  * 
- * @author 自動生成
+ * 
  */
 
 public class dgShinsakaiIinIchiran_Row extends DataRow {

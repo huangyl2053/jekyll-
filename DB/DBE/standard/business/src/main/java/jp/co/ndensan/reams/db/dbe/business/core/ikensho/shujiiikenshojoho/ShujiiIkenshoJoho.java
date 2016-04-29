@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItemIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItemIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoJoho.ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity;
@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -31,8 +30,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定主治医意見書情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, DbT5302ShujiiIkenshoJohoEntity, ShujiiIkenshoJoho> implements Serializable {
+public class ShujiiIkenshoJoho
+        extends ModelBase<ShujiiIkenshoJohoIdentifier, DbT5302ShujiiIkenshoJohoEntity, ShujiiIkenshoJoho>
+        implements Serializable {
 
     private static final long serialVersionUID = -2535465454451217924L;
 
@@ -181,7 +184,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 意見書同意フラグ
      */
-    public boolean get意見書同意フラグ() {
+    public boolean is意見書同意フラグ() {
         return entity.getIkenshoDoiFlag();
     }
 
@@ -199,7 +202,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 他科受診の有無
      */
-    public boolean get他科受診の有無() {
+    public boolean is他科受診の有無() {
         return entity.getExistTakaJushinFlag();
     }
 
@@ -208,7 +211,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 内科受診の有無
      */
-    public boolean get内科受診の有無() {
+    public boolean is内科受診の有無() {
         return entity.getExistNaikaJushinFlag();
     }
 
@@ -217,7 +220,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 精神科受診の有無
      */
-    public boolean get精神科受診の有無() {
+    public boolean is精神科受診の有無() {
         return entity.getExistSeishinkaJushinFlag();
     }
 
@@ -226,7 +229,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 外科受診の有無
      */
-    public boolean get外科受診の有無() {
+    public boolean is外科受診の有無() {
         return entity.getExistGekaJushinFlag();
     }
 
@@ -235,7 +238,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 整形外科受診の有無
      */
-    public boolean get整形外科受診の有無() {
+    public boolean is整形外科受診の有無() {
         return entity.getExistSeikeigekaJushinFlag();
     }
 
@@ -244,7 +247,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 脳神経外科の有無
      */
-    public boolean get脳神経外科の有無() {
+    public boolean is脳神経外科の有無() {
         return entity.getExistNoshinkeigekaJushinFlag();
     }
 
@@ -253,7 +256,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 皮膚科受診の有無
      */
-    public boolean get皮膚科受診の有無() {
+    public boolean is皮膚科受診の有無() {
         return entity.getExistHifukaJushinFlag();
     }
 
@@ -262,7 +265,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 泌尿器科受診の有無
      */
-    public boolean get泌尿器科受診の有無() {
+    public boolean is泌尿器科受診の有無() {
         return entity.getExistHinyokikaJushinFlag();
     }
 
@@ -271,7 +274,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 婦人科受診の有無
      */
-    public boolean get婦人科受診の有無() {
+    public boolean is婦人科受診の有無() {
         return entity.getExistFujinkaJushinFlag();
     }
 
@@ -280,7 +283,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 耳鼻咽喉科受診の有無
      */
-    public boolean get耳鼻咽喉科受診の有無() {
+    public boolean is耳鼻咽喉科受診の有無() {
         return entity.getExistJibiinkokaJushinFlag();
     }
 
@@ -289,7 +292,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return リハビリテーション科受診の有無
      */
-    public boolean getリハビリテーション科受診の有無() {
+    public boolean isリハビリテーション科受診の有無() {
         return entity.getExistRehabilitationkaJushinFlag();
     }
 
@@ -298,7 +301,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 歯科受診の有無
      */
-    public boolean get歯科受診の有無() {
+    public boolean is歯科受診の有無() {
         return entity.getExistShikaJushinFlag();
     }
 
@@ -307,7 +310,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 眼科の有無
      */
-    public boolean get眼科の有無() {
+    public boolean is眼科の有無() {
         return entity.getExistGankaJushinFlag();
     }
 
@@ -316,7 +319,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return その他受診科の有無
      */
-    public boolean getその他受診科の有無() {
+    public boolean isその他受診科の有無() {
         return entity.getExistSonotaJushinkaFlag();
     }
 
@@ -424,7 +427,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
      *
      * @return 認定審査会後の二次判定結果の連絡確認フラグ
      */
-    public boolean get認定審査会後の二次判定結果の連絡確認フラグ() {
+    public boolean is認定審査会後の二次判定結果の連絡確認フラグ() {
         return entity.getNijiHanteiKekkaRenrakuFlag();
     }
 
@@ -458,10 +461,8 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
     }
 
     /**
-     * 要介護認定主治医意見書情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5302ShujiiIkenshoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 要介護認定主治医意見書情報配下の要素である要介護認定主治医意見書記入項目の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ShujiiIkenshoJoho}を返します。
+     * 要介護認定主治医意見書情報配下の要素を削除対象とします。<br/> {@link DbT5302ShujiiIkenshoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 要介護認定主治医意見書情報配下の要素である要介護認定主治医意見書記入項目の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShujiiIkenshoJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShujiiIkenshoJoho}
      * @throws IllegalStateException DbT5302ShujiiIkenshoJohoEntityのデータ状態が変更の場合
@@ -484,8 +485,7 @@ public class ShujiiIkenshoJoho extends ModelBase<ShujiiIkenshoJohoIdentifier, Db
     }
 
     /**
-     * 要介護認定主治医意見書情報のみを変更対象とします。<br/>
-     * {@link DbT5302ShujiiIkenshoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定主治医意見書情報のみを変更対象とします。<br/> {@link DbT5302ShujiiIkenshoJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIkenshoJoho}
      */

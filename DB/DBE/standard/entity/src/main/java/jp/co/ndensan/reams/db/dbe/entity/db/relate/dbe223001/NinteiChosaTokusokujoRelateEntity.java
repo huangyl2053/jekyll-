@@ -17,8 +17,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 要介護認定調査督促状の取得のEntityクラスです。
+ *
+ * @reamsid_L DBE-0030-040 xuyue
  */
 @Getter
 @Setter

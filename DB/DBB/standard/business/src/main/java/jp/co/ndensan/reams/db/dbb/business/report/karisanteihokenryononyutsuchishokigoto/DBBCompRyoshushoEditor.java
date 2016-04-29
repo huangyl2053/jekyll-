@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 /**
  *
  * 帳票設計_DBBRP00007_2_保険料納入通知書（仮算定）【期毎タイプ】DBBCompRyoshushoEditor
+ *
+ * @reamsid_L DBB-9110-020 wangjie2
  */
 public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchishoKigotoEditor {
 
@@ -135,33 +137,27 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
     }
 
     private void editRyoshushohyojicodeName1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicodeName1 = null;
-        //TODO 納付書共通.表示コード.表示コード名１
+        source.ryoshushohyojicodeName1 = 納付書共通.get表示コード().get表示コード名１();
     }
 
     private void editRyoshushohyojicode1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicode1 = null;
-        //TODO 納付書共通.表示コード.表示コード１
+        source.ryoshushohyojicode1 = 納付書共通.get表示コード().get表示コード１();
     }
 
     private void editRyoshushohyojicodeName2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicodeName2 = null;
-        //TODO 納付書共通.表示コード.表示コード名2
+        source.ryoshushohyojicodeName2 = 納付書共通.get表示コード().get表示コード名２();
     }
 
     private void editRyoshushohyojicode2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicode2 = null;
-        //TODO 納付書共通.表示コード.表示コード2
+        source.ryoshushohyojicode2 = 納付書共通.get表示コード().get表示コード２();
     }
 
     private void editRyoshushohyojicodeName3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicodeName3 = null;
-        //TODO 納付書共通.表示コード.表示コード名3
+        source.ryoshushohyojicodeName3 = 納付書共通.get表示コード().get表示コード名３();
     }
 
     private void editRyoshushohyojicode3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicode1 = null;
-        //TODO 納付書共通.表示コード.表示コード3
+        source.ryoshushohyojicode1 = 納付書共通.get表示コード().get表示コード３();
     }
 
     private void editRyoshushoNokigen(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {

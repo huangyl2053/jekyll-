@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費支給限度額判定
  *
- * @author 陳奥奇
+ * @reamsid_L DBC-1020-060 chenaoqi
  */
 public class FukushiyoguKonyuhiShikyuGendogaku {
 
@@ -27,6 +27,15 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
      */
     FukushiyoguKonyuhiShikyuGendogaku() {
         sut = InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
+    }
+
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @return FukushiyoguKonyuhiShikyuGendogaku
+     */
+    public static FukushiyoguKonyuhiShikyuGendogaku createInstance() {
+        return InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogaku.class);
     }
 
     /**
@@ -57,13 +66,15 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
             RString 様式番号,
             RString 明細番号, Decimal 今回の保険対象費用額) {
         boolean flag = false;
-        if (被保険者番号 == null || サービス提供年月 == null || 事業者番号 == null
-                || 様式番号 == null || 明細番号 == null || 今回の保険対象費用額 == null) {
-            return flag;
+        if (今回の保険対象費用額 == null) {
+            今回の保険対象費用額 = Decimal.ZERO;
         }
         Decimal 支給限度額 = sut.getShikyuGendogaku(被保険者番号, サービス提供年月);
         SokanbaraiShiharaiKekkaResult entity = sut.getShokanShiharaiKekkaAll(被保険者番号, サービス提供年月);
-        Decimal 今までの保険者対象費用額 = entity.get保険対象費用額();
+        Decimal 今までの保険者対象費用額 = Decimal.ZERO;
+        if (entity != null) {
+            今までの保険者対象費用額 = entity.get保険対象費用額();
+        }
         Decimal 前回までの保険対象費用額 = 今までの保険者対象費用額;
 
         if (今までの保険者対象費用額 != Decimal.ZERO && 整理番号 != null) {

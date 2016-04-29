@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinjokyoshokai;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -15,13 +14,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定個人状況照会用Entityクラスです。
- * 
+ *
+ * @reamsid_L DBE-0200-010 suguangjun
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KojinJokyoShokaiRelateEntity {
-    
+
     private FlexibleDate ninteichosaIraiYoteiYMD;
     private FlexibleDate ninteichosaYoteiYMD;
     private FlexibleDate ikenshoSakuseiIraiYoteiYMD;
@@ -37,6 +37,8 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate maskingKanryoYMD;
     private FlexibleDate ninteiShinsakaiWariateKanryoYMD;
     private FlexibleDate ninteiShinsakaiKanryoYMD;
+    private RString shoKisaiHokenshaNo;
+    private RString hihokenshaNo;
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
     private Code ninteiShinseiHoreiKubunCode;
@@ -50,7 +52,7 @@ public class KojinJokyoShokaiRelateEntity {
     private Code ichijiHanteiKekkaCode;
     private FlexibleDate shinsakaiKaisaiYMD;
     private Code shoriJotaiKubun;
-    private HihokenshaNo hihokenshaNo;
+    //private HihokenshaNo hihokenshaNo;
     private Code shinseiKubun;
     private RString hihokenshaNameKana;
     private FlexibleDate shinseiYMD;
@@ -156,5 +158,5 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate konnkai_22;
     private FlexibleDate zennkai_22;
     private FlexibleDate zennnoma_22;
-    
+
 }

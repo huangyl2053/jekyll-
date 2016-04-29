@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanKihon}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 panhe
  */
 public class ShokanKihonBuilder {
 
@@ -74,7 +76,7 @@ public class ShokanKihonBuilder {
      */
     public ShokanKihonBuilder set整理番号(RString 整理番号) {
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        entity.setSeiriNp(整理番号);
+        entity.setSeiriNo(整理番号);
         return this;
     }
 
@@ -121,7 +123,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set旧措置入所者特例コード(RString 旧措置入所者特例コード) {
-        requireNonNull(旧措置入所者特例コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧措置入所者特例コード"));
         entity.setKyuSochiNyushoshaTokureiCode(旧措置入所者特例コード);
         return this;
     }
@@ -133,7 +134,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set居宅サービス計画作成区分コード(RString 居宅サービス計画作成区分コード) {
-        requireNonNull(居宅サービス計画作成区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成区分コード"));
         entity.setKyotakuServiceSakuseiKubunCode(居宅サービス計画作成区分コード);
         return this;
     }
@@ -145,7 +145,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set居宅サービス計画事業者番号(JigyoshaNo 居宅サービス計画事業者番号) {
-        requireNonNull(居宅サービス計画事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画事業者番号"));
         entity.setKyotakuserviceJigyoshaNo(居宅サービス計画事業者番号);
         return this;
     }
@@ -157,7 +156,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set開始年月日(FlexibleDate 開始年月日) {
-        requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
         entity.setKaishiYMD(開始年月日);
         return this;
     }
@@ -169,7 +167,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set中止年月日(FlexibleDate 中止年月日) {
-        requireNonNull(中止年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("中止年月日"));
         entity.setChushiYMD(中止年月日);
         return this;
     }
@@ -181,7 +178,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set中止理由_入所_院前の状況コード(RString 中止理由_入所_院前の状況コード) {
-        requireNonNull(中止理由_入所_院前の状況コード, UrSystemErrorMessages.値がnull.getReplacedMessage("中止理由_入所_院前の状況コード"));
         entity.setChushiRiyuNyushomaeJyokyoCode(中止理由_入所_院前の状況コード);
         return this;
     }
@@ -193,7 +189,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set入所_院年月日(FlexibleDate 入所_院年月日) {
-        requireNonNull(入所_院年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所_院年月日"));
         entity.setNyushoYMD(入所_院年月日);
         return this;
     }
@@ -205,7 +200,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set退所_院年月日(FlexibleDate 退所_院年月日) {
-        requireNonNull(退所_院年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所_院年月日"));
         entity.setTaishoYMD(退所_院年月日);
         return this;
     }
@@ -217,7 +211,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set入所_院実日数(int 入所_院実日数) {
-        requireNonNull(入所_院実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("入所_院実日数"));
         entity.setNyushoJitsuNissu(入所_院実日数);
         return this;
     }
@@ -229,7 +222,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set外泊日数(int 外泊日数) {
-        requireNonNull(外泊日数, UrSystemErrorMessages.値がnull.getReplacedMessage("外泊日数"));
         entity.setGaihakuNissu(外泊日数);
         return this;
     }
@@ -241,7 +233,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set退所_院後の状態コード(RString 退所_院後の状態コード) {
-        requireNonNull(退所_院後の状態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("退所_院後の状態コード"));
         entity.setTaishogoJotaiCode(退所_院後の状態コード);
         return this;
     }
@@ -253,7 +244,6 @@ public class ShokanKihonBuilder {
      * @return {@link ShokanKihonBuilder}
      */
     public ShokanKihonBuilder set保険給付率(HokenKyufuRitsu 保険給付率) {
-        requireNonNull(保険給付率, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付率"));
         entity.setHokenKyufuritsu(保険給付率);
         return this;
     }

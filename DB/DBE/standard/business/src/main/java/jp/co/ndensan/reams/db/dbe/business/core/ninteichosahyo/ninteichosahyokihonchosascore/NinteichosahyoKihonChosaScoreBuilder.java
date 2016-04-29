@@ -8,20 +8,22 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoki
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosascoreitem.NinteichosahyoKihonChosaScoreItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosascoreitem.NinteichosahyoKihonChosaScoreItemIdentifier;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5204NinteichosahyoKihonChosaScoreEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link NinteichosahyoKihonChosaScore}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
 public class NinteichosahyoKihonChosaScoreBuilder {
 
     private final DbT5204NinteichosahyoKihonChosaScoreEntity entity;
     private final NinteichosahyoKihonChosaScoreIdentifier id;
-    private final Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> ninteichosahyoKihonChosaScoreItem;
+    private final Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> kihonChosaScoreItem;
 
     /**
      * {@link DbT5204NinteichosahyoKihonChosaScoreEntity}より{@link NinteichosahyoKihonChosaScore}の編集用Builderクラスを生成します。
@@ -35,11 +37,11 @@ public class NinteichosahyoKihonChosaScoreBuilder {
     NinteichosahyoKihonChosaScoreBuilder(
             DbT5204NinteichosahyoKihonChosaScoreEntity entity,
             NinteichosahyoKihonChosaScoreIdentifier id,
-            Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> ninteichosahyoKihonChosaScoreItem
+            Models<NinteichosahyoKihonChosaScoreItemIdentifier, NinteichosahyoKihonChosaScoreItem> kihonChosaScoreItem
     ) {
         this.entity = entity.clone();
         this.id = id;
-        this.ninteichosahyoKihonChosaScoreItem = ninteichosahyoKihonChosaScoreItem.clone();
+        this.kihonChosaScoreItem = kihonChosaScoreItem.clone();
 
     }
 
@@ -151,7 +153,7 @@ public class NinteichosahyoKihonChosaScoreBuilder {
      */
     public NinteichosahyoKihonChosaScoreBuilder setSeishinTechoNini(NinteichosahyoKihonChosaScoreItem 認定調査票_基本調査素点項目情報) {
         if (hasSameIdentifier(認定調査票_基本調査素点項目情報.identifier())) {
-            ninteichosahyoKihonChosaScoreItem.add(認定調査票_基本調査素点項目情報);
+            kihonChosaScoreItem.add(認定調査票_基本調査素点項目情報);
             return this;
         }
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -168,7 +170,7 @@ public class NinteichosahyoKihonChosaScoreBuilder {
      * @return {@link NinteichosahyoKihonChosaScore}のインスタンス
      */
     public NinteichosahyoKihonChosaScore build() {
-        return new NinteichosahyoKihonChosaScore(entity, id, ninteichosahyoKihonChosaScoreItem);
+        return new NinteichosahyoKihonChosaScore(entity, id, kihonChosaScoreItem);
     }
 
 }

@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 老人保健受給者台帳管理Divを制御します。
+ * 
+ * @reamsid_L DBU-1060-020 wangkun
  */
 public class NenpoYoushiki1Hosei {
 

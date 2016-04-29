@@ -22,8 +22,14 @@ public class ChosaItakusakiData {
 
     private static final RString FILE_NAME = new RString("ChosaKikanDialog/ChosaKikanList.yml");
 
+    /**
+     * 調査委託先のデモデータです。
+     */
     public static final class ChosaItakusaki {
 
+        /**
+         * ChosaItakusaki
+         */
         public static final ChosaItakusaki EMPTY;
 
         static {
@@ -37,15 +43,30 @@ public class ChosaItakusakiData {
             this.theName = name;
         }
 
+        /**
+         * codeを取得します。
+         *
+         * @return code
+         */
         public RString code() {
             return this.theCode;
         }
 
+        /**
+         * nameを取得します。
+         *
+         * @return name
+         */
         public RString name() {
             return this.theName;
         }
     }
 
+    /**
+     * 調査委託先一覧を取得します。
+     *
+     * @return 調査委託先一覧情報
+     */
     public IDemoData<ChosaItakusaki> get調査委託先一覧() {
         List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(FILE_NAME);
         return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<ChosaItakusaki>() {
@@ -57,6 +78,12 @@ public class ChosaItakusakiData {
         });
     }
 
+    /**
+     * 調査委託先Fromを取得します。
+     *
+     * @param code RString
+     * @return 調査委託先From情報
+     */
     public ChosaItakusaki get調査委託先From(RString code) {
         List<ChosaItakusaki> list = get調査委託先一覧().asConvertedType();
         for (ChosaItakusaki itakusaki : list) {

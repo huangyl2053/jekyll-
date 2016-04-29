@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiResultSimple;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiRiyu;
-import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
-import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiRiyu;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitorisage.NinteiShinseiTorisage;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.HihokenshaOutlineDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010002.ShinseiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
@@ -36,25 +36,50 @@ public final class YokaigoNinteiShinseiDivMapper {
     }
 
     //TODO n3327 三浦凌 取り急ぎこの形で実装するが、また見直す。
+    /**
+     *
+     */
     public static class YokaigoNinteiShinseiDiv {
 
         private final HihokenshaOutlineDiv hihokensha;
         private final ShinseiJohoInputDiv shinsei;
 
+        /**
+         * YokaigoNinteiShinseiDiv
+         *
+         * @param shinsei ShinseiJohoInputDiv
+         * @param hihokensha HihokenshaOutlineDiv
+         */
         public YokaigoNinteiShinseiDiv(ShinseiJohoInputDiv shinsei, HihokenshaOutlineDiv hihokensha) {
             this.hihokensha = hihokensha;
             this.shinsei = shinsei;
         }
 
+        /**
+         * getHihokenshaOUtline
+         *
+         * @return hihokensha
+         */
         public HihokenshaOutlineDiv getHihokenshaOUtline() {
             return this.hihokensha;
         }
 
+        /**
+         * getShinseiJohoInput
+         *
+         * @return shinsei
+         */
         public ShinseiJohoInputDiv getShinseiJohoInput() {
             return this.shinsei;
         }
     }
 
+    /**
+     * toYokaigoNinteiShinsei
+     *
+     * @param div YokaigoNinteiShinseiDiv
+     * @return YokaigoNinteiShinsei
+     */
     public static YokaigoNinteiShinsei toYokaigoNinteiShinsei(YokaigoNinteiShinseiDiv div) {
         return new YokaigoNinteiShinsei(
                 Item.申請書管理番号.<ShinseishoKanriNo>extractValue(div),

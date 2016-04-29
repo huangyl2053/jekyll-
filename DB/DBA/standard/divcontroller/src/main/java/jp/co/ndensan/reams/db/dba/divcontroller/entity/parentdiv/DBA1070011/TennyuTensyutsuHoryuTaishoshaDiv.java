@@ -1,25 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgKoiki_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgTennyu_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.dgTenshutsu_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.tabHoryuTaishoshaDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.tplKoikiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.tplTennyuDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011.tplTenshutsuDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TennyuTensyutsuHoryuTaishosha のクラスファイル 
- * 
+ * TennyuTensyutsuHoryuTaishosha のクラスファイル
+ *
  * @author 自動生成
  */
 public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
@@ -29,6 +20,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tabHoryuTaishosha")
     private tabHoryuTaishoshaDiv tabHoryuTaishosha;
 
@@ -45,7 +37,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
 
     @JsonProperty("tabHoryuTaishosha")
     public void setTabHoryuTaishosha(tabHoryuTaishoshaDiv tabHoryuTaishosha) {
-        this.tabHoryuTaishosha=tabHoryuTaishosha;
+        this.tabHoryuTaishosha = tabHoryuTaishosha;
     }
 
     /*
@@ -57,7 +49,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplTenshutsu(tplTenshutsuDiv tplTenshutsu) {
+    public void setTplTenshutsu(tplTenshutsuDiv tplTenshutsu) {
         this.getTabHoryuTaishosha().setTplTenshutsu(tplTenshutsu);
     }
 
@@ -67,7 +59,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTenshutsu(DataGrid<dgTenshutsu_Row> dgTenshutsu) {
+    public void setDgTenshutsu(DataGrid<dgTenshutsu_Row> dgTenshutsu) {
         this.getTabHoryuTaishosha().getTplTenshutsu().setDgTenshutsu(dgTenshutsu);
     }
 
@@ -77,7 +69,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplTennyu(tplTennyuDiv tplTennyu) {
+    public void setTplTennyu(tplTennyuDiv tplTennyu) {
         this.getTabHoryuTaishosha().setTplTennyu(tplTennyu);
     }
 
@@ -87,7 +79,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgTennyu(DataGrid<dgTennyu_Row> dgTennyu) {
+    public void setDgTennyu(DataGrid<dgTennyu_Row> dgTennyu) {
         this.getTabHoryuTaishosha().getTplTennyu().setDgTennyu(dgTennyu);
     }
 
@@ -97,7 +89,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplKoiki(tplKoikiDiv tplKoiki) {
+    public void setTplKoiki(tplKoikiDiv tplKoiki) {
         this.getTabHoryuTaishosha().setTplKoiki(tplKoiki);
     }
 
@@ -107,7 +99,7 @@ public class TennyuTensyutsuHoryuTaishoshaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgKoiki(DataGrid<dgKoiki_Row> dgKoiki) {
+    public void setDgKoiki(DataGrid<dgKoiki_Row> dgKoiki) {
         this.getTabHoryuTaishosha().getTplKoiki().setDgKoiki(dgKoiki);
     }
 

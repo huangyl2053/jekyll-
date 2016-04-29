@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  *
  * 居宅（介護予防）サービス計画作成依頼（変更）届出書Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBA-0540-696 yaodongsheng
  */
 public interface IItakuServiceKeikaluSakuseiIraiTodokedeshoBuilder extends IReportBuilder<ItakuServiceKeikaluSakuseiIraiTodokedeshoReportSource> {
 }

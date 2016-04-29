@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 期と月の対応を扱います。
+ *
+ * @reamsid_L DBB-9020-080 sunhaidi
  */
 public class Kitsuki {
 

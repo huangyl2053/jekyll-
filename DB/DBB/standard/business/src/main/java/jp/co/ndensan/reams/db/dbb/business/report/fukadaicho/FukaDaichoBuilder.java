@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 賦課台帳（本算定）帳票FukaDaichoBuilder
+ *
+ * @reamsid_L DBB-9100-030 surun
  */
 class FukaDaichoBuilder implements IFukaDaichoBuilder {
 

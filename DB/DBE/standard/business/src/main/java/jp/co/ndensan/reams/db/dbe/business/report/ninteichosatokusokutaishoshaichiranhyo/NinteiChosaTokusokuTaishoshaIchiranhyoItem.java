@@ -12,6 +12,8 @@ import lombok.Getter;
 /**
  * 主治医意見書督促対象者一覧表のITEMです。
  *
+ * @reamsid_L DBE-0060-030 hezhenzhen
+ *
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

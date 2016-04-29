@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * ShichosonSelector のクラスファイル
  *
- * @author 自動生成
  */
 public class ShichosonSelectorDiv extends Panel implements IShichosonSelectorDiv {
 

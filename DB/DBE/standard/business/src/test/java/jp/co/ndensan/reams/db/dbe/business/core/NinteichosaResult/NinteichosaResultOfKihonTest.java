@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult;
 
-import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaResultOfKihon;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;

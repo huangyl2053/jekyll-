@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenE
 
 /**
  * 通知書打ち分け条件の取得処理
+ *
+ * @reamsid_L DBB-0780-030 xicongwang
  */
 public interface IHonsanteifukaMapper {
 

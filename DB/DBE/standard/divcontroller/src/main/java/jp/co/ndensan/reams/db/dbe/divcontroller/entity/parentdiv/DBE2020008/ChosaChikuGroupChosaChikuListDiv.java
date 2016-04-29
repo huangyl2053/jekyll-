@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ChosaChikuGroupChosaChikuList のクラスファイル 
  * 
- * @author 自動生成
  */
 public class ChosaChikuGroupChosaChikuListDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
@@ -22,7 +21,7 @@ public class ChosaChikuGroupChosaChikuListDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtChosaChikuCode")
-    private TextBoxNum txtChosaChikuCode;
+    private TextBoxCode txtChosaChikuCode;
     @JsonProperty("txtChosaChikuName")
     private TextBox txtChosaChikuName;
     @JsonProperty("btnInsert")
@@ -41,7 +40,7 @@ public class ChosaChikuGroupChosaChikuListDiv extends Panel {
      * @return txtChosaChikuCode
      */
     @JsonProperty("txtChosaChikuCode")
-    public TextBoxNum getTxtChosaChikuCode() {
+    public TextBoxCode getTxtChosaChikuCode() {
         return txtChosaChikuCode;
     }
 
@@ -50,7 +49,7 @@ public class ChosaChikuGroupChosaChikuListDiv extends Panel {
      * @param txtChosaChikuCode txtChosaChikuCode
      */
     @JsonProperty("txtChosaChikuCode")
-    public void setTxtChosaChikuCode(TextBoxNum txtChosaChikuCode) {
+    public void setTxtChosaChikuCode(TextBoxCode txtChosaChikuCode) {
         this.txtChosaChikuCode = txtChosaChikuCode;
     }
 

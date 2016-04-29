@@ -3,8 +3,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shikibets
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBC-1030-170 panhe
  */
 public interface IShikibetsuBangoSelectorDiv extends ICommonChildDivBaseProperties {
 

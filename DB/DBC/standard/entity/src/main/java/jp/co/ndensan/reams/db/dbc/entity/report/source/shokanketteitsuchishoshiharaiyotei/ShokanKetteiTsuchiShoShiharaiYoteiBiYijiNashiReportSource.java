@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 償還払い支給（不支給）決定通知書のReportSourceです。
+ *
+ * @reamsid_L DBC-1000-110 zuotao
  */
 public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

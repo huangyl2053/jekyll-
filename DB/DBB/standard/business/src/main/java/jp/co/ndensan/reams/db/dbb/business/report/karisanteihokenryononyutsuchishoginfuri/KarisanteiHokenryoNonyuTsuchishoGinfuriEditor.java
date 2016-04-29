@@ -8,26 +8,32 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchi
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  *
  * 帳票設計_DBBRP00007_3_保険料納入通知書（仮算定）【銀振タイプ】KarisanteiHokenryoNonyuTsuchishoGinfuriEditor
+ *
+ * @reamsid_L DBB-9110-030 wangjie2
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor {
 
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT6 = 6;
+    private static final RString 星2 = new RString("**");
+    private static final RString 星10 = new RString("**********");
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
-    private final KariSanteiNonyuTsuchiShoSeigyoJoho 仮算定納入通知書制御情報;
-    private final NonyuTsuchiShoSeigyoJoho 納入通知書制御情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final int 連番;
 
@@ -35,26 +41,36 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
      * インスタンスを生成します。
      *
      * @param item {@link KarisanteiHokenryoNonyuTsuchishoGinfuriItem}
-     * @param 納入通知書期情報リスト
-     * @param 連番
+     * @param 納入通知書期情報リスト 納入通知書期情報リスト
+     * @param 連番 連番
      */
     protected KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(
             KarisanteiHokenryoNonyuTsuchishoGinfuriItem item,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 連番) {
         this.仮算定納入通知書情報 = item.get仮算定納入通知書情報();
-        this.編集後仮算定通知書共通情報 = 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
-        this.仮算定納入通知書制御情報 = 仮算定納入通知書情報.get仮算定納入通知書制御情報();
-        this.納入通知書制御情報 = 仮算定納入通知書制御情報.get納入通知書制御情報();
+        this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報
+                ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
         this.連番 = 連番;
     }
 
     @Override
     public KarisanteiHokenryoNonyuTsuchishoGinfuriSource edit(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        editBankCode(source);
-        editBankName(source);
-        editHihokenshaName(source);
+        EditedKojin 編集後個人 = 編集後仮算定通知書共通情報.get編集後個人();
+        EditedKoza 編集後口座 = 編集後仮算定通知書共通情報.get編集後口座();
+        if (編集後個人 != null) {
+            editHihokenshaName(source, 編集後個人);
+            editSetaiCode(source, 編集後個人);
+            editSetaiNushiName(source, 編集後個人);
+        }
+        if (編集後口座 != null) {
+            editBankCode(source, 編集後口座);
+            editBankName(source, 編集後口座);
+            editKozaMeigi(source, 編集後口座);
+            editKozaShurui(source, 編集後口座);
+            editkozaNo(source, 編集後口座);
+        }
         editHokenryoGaku(source);
         editHokenshaName(source);
         editHyojicode1(source);
@@ -63,8 +79,6 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
         editHyojicodeName1(source);
         editHyojicodeName2(source);
         editHyojicodeName3(source);
-        editKozaMeigi(source);
-        editKozaShurui(source);
         editNendo1(source);
         editRyoshushoNendo(source);
         editSanteiKisoGenmenGaku(source);
@@ -87,14 +101,12 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
         editSanteiKisoKiTitle2(source);
         editSanteiKisoZanteikiHokenryoGaku1(source);
         editSanteiKisoZanteikiHokenryoGaku2(source);
-        editSetaiCode(source);
-        editSetaiNushiName(source);
         editTitleNendo(source);
         editTsuchiKaishiKi(source);
         editTsuchiShuryoKi(source);
         editTsuchishoNo(source);
-        editkozaNo(source);
         editRenban(source);
+        editSanteiKisoNokisu(source);
         edit納入通知書期情報(source);
         return source;
     }
@@ -104,43 +116,43 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editHyojicodeName1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.HyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
+        source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
     }
 
     private void editHyojicodeName2(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.HyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
+        source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
     }
 
     private void editHyojicodeName3(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.HyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
+        source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
     }
 
     private void editHyojicode1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.Hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
+        source.hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
     }
 
     private void editHyojicode2(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.Hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
+        source.hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
     }
 
     private void editHyojicode13(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.Hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
+        source.hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
     }
 
     private void editTsuchishoNo(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         source.tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
     }
 
-    private void editSetaiCode(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.setaiCode = null;//TODO 仮算定納入通知書情報.編集後仮算定通知書共通情報.編集後個人.get世帯コード()
+    private void editSetaiCode(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKojin 編集後個人) {
+        source.setaiCode = 編集後個人.get世帯コード().getColumnValue();
     }
 
-    private void editHihokenshaName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.hihokenshaName = null;//TODO 仮算定納入通知書情報.編集後仮算定通知書共通情報.編集後個人.getName()
+    private void editHihokenshaName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKojin 編集後個人) {
+        source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
     }
 
-    private void editSetaiNushiName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.setaiNushiName = null;//TODO 仮算定納入通知書情報.編集後仮算定通知書共通情報.編集後個人.get世帯主名()
+    private void editSetaiNushiName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKojin 編集後個人) {
+        source.setaiNushiName = 編集後個人.get世帯主名().getColumnValue();
     }
 
     private void editNendo1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
@@ -259,11 +271,11 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
                     set納入通知書期情報2(source, 納入通知書期情報);
                     納入通知書期情報2有無 = true;
                     break;
-                case 3:
+                case INT3:
                     set納入通知書期情報3(source, 納入通知書期情報);
                     納入通知書期情報3有無 = true;
                     break;
-                case 4:
+                case INT4:
                     set納入通知書期情報4(source, 納入通知書期情報);
                     納入通知書期情報4有無 = true;
                     break;
@@ -302,9 +314,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     private void set納入通知書期情報1無(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         source.ki1 = RString.EMPTY;
         source.tsuki1 = RString.EMPTY;
-        source.ryoshushoKi1 = new RString("**");
-        source.ryoshushoNofuGaku1 = new RString("**********");
-        source.ryoshushoNofuin1 = new RString("**");
+        source.ryoshushoKi1 = 星2;
+        source.ryoshushoNofuGaku1 = 星10;
+        source.ryoshushoNofuin1 = 星2;
         source.ryoshushoRyoshuHizukein1 = RString.EMPTY;
         source.ryoshushoZuiji1 = RString.EMPTY;
     }
@@ -326,9 +338,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     private void set納入通知書期情報2無(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         source.ki2 = RString.EMPTY;
         source.tsuki2 = RString.EMPTY;
-        source.ryoshushoKi2 = new RString("**");
-        source.ryoshushoNofuGaku2 = new RString("**********");
-        source.ryoshushoNofuin2 = new RString("**");
+        source.ryoshushoKi2 = 星2;
+        source.ryoshushoNofuGaku2 = 星10;
+        source.ryoshushoNofuin2 = 星2;
         source.ryoshushoRyoshuHizukein2 = RString.EMPTY;
         source.ryoshushoZuiji2 = RString.EMPTY;
     }
@@ -350,9 +362,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     private void set納入通知書期情報3無(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         source.ki3 = RString.EMPTY;
         source.tsuki3 = RString.EMPTY;
-        source.ryoshushoKi3 = new RString("**");
-        source.ryoshushoNofuGaku3 = new RString("**********");
-        source.ryoshushoNofuin3 = new RString("**");
+        source.ryoshushoKi3 = 星2;
+        source.ryoshushoNofuGaku3 = 星10;
+        source.ryoshushoNofuin3 = 星2;
         source.ryoshushoRyoshuHizukein3 = RString.EMPTY;
         source.ryoshushoZuiji3 = RString.EMPTY;
     }
@@ -374,31 +386,31 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     private void set納入通知書期情報4無(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         source.ki4 = RString.EMPTY;
         source.tsuki4 = RString.EMPTY;
-        source.ryoshushoKi4 = new RString("**");
-        source.ryoshushoNofuGaku4 = new RString("**********");
-        source.ryoshushoNofuin4 = new RString("**");
+        source.ryoshushoKi4 = 星2;
+        source.ryoshushoNofuGaku4 = 星10;
+        source.ryoshushoNofuin4 = 星2;
         source.ryoshushoRyoshuHizukein4 = RString.EMPTY;
         source.ryoshushoZuiji4 = RString.EMPTY;
     }
 
-    private void editBankCode(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.bankCode = null;//TODO 編集後口座
+    private void editBankCode(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKoza 編集後口座) {
+        source.bankCode = 編集後口座.get金融機関コードCombinedWith支店コード();
     }
 
-    private void editKozaMeigi(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.kozaMeigi = null;//TODO 編集後口座
+    private void editKozaMeigi(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKoza 編集後口座) {
+        source.kozaMeigi = 編集後口座.get口座名義人優先();
     }
 
-    private void editKozaShurui(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.kozaNo = null;//TODO 編集後口座
+    private void editKozaShurui(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKoza 編集後口座) {
+        source.kozaShurui = 編集後口座.get口座種別略称();
     }
 
-    private void editkozaNo(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.bankCode = null;//TODO 編集後口座
+    private void editkozaNo(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKoza 編集後口座) {
+        source.kozaNo = 編集後口座.get口座番号Or通帳記号番号();
     }
 
-    private void editBankName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.bankName = null;//TODO 編集後口座
+    private void editBankName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source, EditedKoza 編集後口座) {
+        source.bankName = 編集後口座.get金融機関名CombinedWith支店名();
     }
 
     private void editTsuchiKaishiKi(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
@@ -428,13 +440,13 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editHokenshaName(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.hokenshaName = new RString(編集後仮算定通知書共通情報.get保険者名().getText());
+        source.hokenshaName = 編集後仮算定通知書共通情報.get保険者名();
     }
 
     private void editRenban(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            連番.padLeft(連番, 6);
+            連番.padLeft(連番, INT6);
         }
         source.renban = 連番;
     }

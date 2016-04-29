@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 異動チェックリストパラメータBusinessクラスです。
+ *
+ * @reamsid_L DBA-0530-010 chengsanyuan
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

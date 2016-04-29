@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.honsanteiidokanendofukakakutei;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
@@ -32,9 +30,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0706ChoteigakuUchiwakeEntity;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0707ChoteiJokyoEntity;
-import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -48,7 +43,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 本算定異動（過年度）賦課確定（削除込）用クラスです
+ * 本算定異動（過年度）賦課確定（削除込）用クラスです。
+ *
+ * @reamsid_L DBB-0680-020 wangkanglei
  */
 public class HonsanteiIdoKanendoFukaKakutei {
 
@@ -61,6 +58,20 @@ public class HonsanteiIdoKanendoFukaKakutei {
     private static final RString 処理枝番 = new RString("0001");
     private static final RString FORMAT = new RString("%04d");
     private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBB");
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
+    private static final int NUM_7 = 7;
+    private static final int NUM_8 = 8;
+    private static final int NUM_9 = 9;
+    private static final int NUM_10 = 10;
+    private static final int NUM_11 = 11;
+    private static final int NUM_12 = 12;
+    private static final int NUM_14 = 14;
+    private static final int NUM_15 = 15;
 
     /**
      * HonsanteiIdoKanendoFukaKakutei
@@ -145,34 +156,34 @@ public class HonsanteiIdoKanendoFukaKakutei {
     }
 
     private int getKoseiKi(KanendoKiUtil kanendoKiUtil, KanendoIdoFukaKakutei idofukaKakutei) {
-        switch (idofukaKakutei.getFukaKakuteiEntity().get更正月().toString()) {
-            case "01":
+        switch (Integer.valueOf(idofukaKakutei.getFukaKakuteiEntity().get更正月().toString())) {
+            case NUM_1:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._1月).get期AsInt();
-            case "02":
+            case NUM_2:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._2月).get期AsInt();
-            case "03":
+            case NUM_3:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._3月).get期AsInt();
-            case "04":
+            case NUM_4:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._4月).get期AsInt();
-            case "05":
+            case NUM_5:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._5月).get期AsInt();
-            case "06":
+            case NUM_6:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._6月).get期AsInt();
-            case "07":
+            case NUM_7:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._7月).get期AsInt();
-            case "08":
+            case NUM_8:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._8月).get期AsInt();
-            case "09":
+            case NUM_9:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._9月).get期AsInt();
-            case "10":
+            case NUM_10:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._10月).get期AsInt();
-            case "11":
+            case NUM_11:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._11月).get期AsInt();
-            case "12":
+            case NUM_12:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki._12月).get期AsInt();
-            case "14":
+            case NUM_14:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度4月).get期AsInt();
-            case "15":
+            case NUM_15:
                 return kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度5月).get期AsInt();
             default:
                 return 0;
@@ -243,49 +254,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
      */
     @Transaction
     public void deleteFuka(List<KanendoIdoFukaKakutei> fukaKakuteiList, boolean deleteFlag) {
-        IFukaKakuteiMapper mapper = mapperProvider.create(IFukaKakuteiMapper.class);
         for (KanendoIdoFukaKakutei fukaKakutei : fukaKakuteiList) {
-            FukaKakuteiParameter parameter = new FukaKakuteiParameter(
-                    fukaKakutei.get調定年度(),
-                    fukaKakutei.get賦課年度(),
-                    fukaKakutei.get通知書番号(),
-                    fukaKakutei.get履歴番号(),
-                    0,
-                    null,
-                    null);
-            Map<String, Object> deleteParameter = new HashMap<>();
-            List<UrT0700ShunoKanriEntity> shunoKanriList = mapper.select収納管理マスタ(parameter);
-            if (shunoKanriList != null) {
-                for (UrT0700ShunoKanriEntity shunoKanriEntity : shunoKanriList) {
-                    deleteParameter.put("shunoId", shunoKanriEntity.getShunoId());
-                    mapper.delete収納管理マスタ(deleteParameter);
-                }
-            }
-
-            List<UrT0707ChoteiJokyoEntity> choteiJokyoList = mapper.select調定状況(parameter);
-            if (choteiJokyoList != null) {
-                for (UrT0707ChoteiJokyoEntity choteiJokyoEntity : choteiJokyoList) {
-                    deleteParameter.put("choteiJokyoId", choteiJokyoEntity.getChoteiJokyoId());
-                    mapper.delete調定状況(deleteParameter);
-                }
-            }
-
-            List<UrT0706ChoteigakuUchiwakeEntity> choteigakuUchiwakeList = mapper.select調定額内訳(parameter);
-            if (choteigakuUchiwakeList != null) {
-                for (UrT0706ChoteigakuUchiwakeEntity choteigakuUchiwakeEntity : choteigakuUchiwakeList) {
-                    deleteParameter.put("choteiId", choteigakuUchiwakeEntity.getChoteiId());
-                    mapper.delete調定額内訳(deleteParameter);
-                }
-            }
-
-            List<UrT0705ChoteiKyotsuEntity> choteiKyotsuList = mapper.select調定共通(parameter);
-            if (choteiKyotsuList != null) {
-                for (UrT0705ChoteiKyotsuEntity choteiKyotsuEntity : choteiKyotsuList) {
-                    choteiKyotsuEntity.setState(EntityDataState.Deleted);
-                    choteiKyotsuDac.deletePhysicalBy(choteiKyotsuEntity);
-                }
-            }
-
             DbT2002FukaEntity fukaEntity = fukaDac.selectByKey(
                     fukaKakutei.get調定年度(),
                     fukaKakutei.get賦課年度(),
@@ -337,7 +306,6 @@ public class HonsanteiIdoKanendoFukaKakutei {
                 choteiKyotsuDac.update(choteiKyotsuEntity);
             }
         }
-        // TODO QA310 調定年度
         RString choteiNendo = DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         save処理日付管理(new FlexibleYear(choteiNendo.toString()));

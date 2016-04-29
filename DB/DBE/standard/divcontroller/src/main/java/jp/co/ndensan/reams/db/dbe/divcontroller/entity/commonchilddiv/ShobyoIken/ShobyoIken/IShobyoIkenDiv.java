@@ -3,8 +3,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
-/*
+/**
  * このコードはツールによって生成されました。
+ *
+ * @reamsid_L DBE-3000-130 zhengshukai
  */
 public interface IShobyoIkenDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 

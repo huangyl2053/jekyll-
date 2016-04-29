@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 期別小計の合計情報Entityクラスです。
+ *
+ * @reamsid_L DBB-0770-030 zhangrui
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KibetsuShokeiGokeiEntity {
 
     private static final int 第1期 = 1;
@@ -30,80 +33,29 @@ public class KibetsuShokeiGokeiEntity {
     private static final int 第12期 = 12;
     private static final int 第13期 = 13;
     private static final int 第14期 = 14;
-    /**
-     * 調定年度
-     */
     private FlexibleYear choteiNendo;
-    /**
-     * 賦課年度
-     */
     private FlexibleYear fukaNendo;
-    /**
-     * 徴収方法
-     */
     private RString choshuHouhou;
-    /**
-     * 第1期の調定額の合計
-     */
     private Decimal dai1kiChoteigakuGokei;
-    /**
-     * 第2期の調定額の合計
-     */
     private Decimal dai2kiChoteigakuGokei;
-    /**
-     * 第3期の調定額の合計
-     */
     private Decimal dai3kiChoteigakuGokei;
-    /**
-     * 第4期の調定額の合計
-     */
     private Decimal dai4kiChoteigakuGokei;
-    /**
-     * 第5期の調定額の合計
-     */
     private Decimal dai5kiChoteigakuGokei;
-    /**
-     * 第6期の調定額の合計
-     */
     private Decimal dai6kiChoteigakuGokei;
-    /**
-     * 第7期の調定額の合計
-     */
     private Decimal dai7kiChoteigakuGokei;
-    /**
-     * 第8期の調定額の合計
-     */
     private Decimal dai8kiChoteigakuGokei;
-    /**
-     * 第9期の調定額の合計
-     */
     private Decimal dai9kiChoteigakuGokei;
-    /**
-     * 第10期の調定額の合計
-     */
     private Decimal dai10kiChoteigakuGokei;
-    /**
-     * 第11期の調定額の合計
-     */
     private Decimal dai11kiChoteigakuGokei;
-    /**
-     * 第12期の調定額の合計
-     */
     private Decimal dai12kiChoteigakuGokei;
-    /**
-     * 第13期の調定額の合計
-     */
     private Decimal dai13kiChoteigakuGokei;
-    /**
-     * 第14期の調定額の合計
-     */
     private Decimal dai14kiChoteigakuGokei;
 
     /**
      * 第○期の調定額の合計を取得する。
      *
      * @param 期別 期別
-     * @return Decimal Decimal
+     * @return Decimal 期の調定額の合計
      */
     public Decimal get調定額の合計By期別(int 期別) {
         switch (期別) {

@@ -37,14 +37,20 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 
     private static final RString ADDEDFLG = new RString("追加");
     private static final RString MODIFIEDFLG = new RString("修正");
+    private static final RString IDODATE = new RString("idoDate");
+    private static final RString YUKODATERANGEFROM = new RString("yukoDateRangefrom");
 //    private static final RString DELETEFFLAG = new RString("削除");
 
     /**
      * 支給限度額登録（居宅サービス費）　区分支給限度額を追加するボタン押下後、（居宅サービス費）サービス費区分支給限度内容の情報を表示する。
      *
      * @author n8223
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
      */
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddKubunShikyuGendogaku(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddKubunShikyuGendogaku(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         panel.getKubunShikyuGendogaku().setDisplayNone(false);
@@ -68,20 +74,21 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         setViewPutState(panel,
                 kun,
                 flg,
-                (RString) ymlData.get(0).get("idoDate"),
+                (RString) ymlData.get(0).get(IDODATE),
                 panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue(),
-                (RString) ymlData.get(0).get("yukoDateRangefrom"),
+                (RString) ymlData.get(0).get(YUKODATERANGEFROM),
                 (RString) ymlData.get(0).get("yukoDateRangeto"));
 
         //TOP
         //異動日
-        panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().setValue(new RDate(ymlData.get(0).get("idoDate").toString()));
+        panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().setValue(new RDate(ymlData.get(0).get(IDODATE.toString()).toString()));
         //異動区分 new
         panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().setSelectedItem(new RString("radIdoKubun"));
         //異動事由
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoJiyu().setValue(new RString(ymlData.get(0).get("idoJiyu").toString()));
         //有効期間 from ~ to
-        panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setFromValue(new RDate(ymlData.get(0).get("yukoDateRangefrom").toString()));
+        panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange()
+                .setFromValue(new RDate(ymlData.get(0).get(YUKODATERANGEFROM.toString()).toString()));
 
         //panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setToValue(new RDate((String) ymlData.get(0).get("yukoDateRangeto")));
         //サービス費区分支給限度基準額
@@ -117,8 +124,12 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
      * 支給限度額登録（居宅サービス費）　種類支給限度額を追加するボタン押下後、（居宅サービス費）サービス費種類支給限度内容の情報を表示する。
      *
      * @author n8223
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
      */
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddShuruiShikyuGendogaku(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddShuruiShikyuGendogaku(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         panel.getShuruiShikyuGendogaku().setDisplayNone(false);
@@ -141,20 +152,21 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         setViewPutState(panel,
                 kun,
                 flg,
-                (RString) ymlData.get(0).get("idoDate"),
+                (RString) ymlData.get(0).get(IDODATE.toString()),
                 (RString) panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue(),
-                (RString) ymlData.get(0).get("yukoDateRangefrom"),
+                (RString) ymlData.get(0).get(YUKODATERANGEFROM.toString()),
                 (RString) ymlData.get(0).get("yukoDateRangeto"));
 
         //TOP
         //異動日
-        panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().setValue(new RDate(ymlData.get(0).get("idoDate").toString()));
+        panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().setValue(new RDate(ymlData.get(0).get(IDODATE.toString()).toString()));
         //異動区分 new
         panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().setSelectedItem(new RString("radIdoKubun"));
         //異動事由
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoJiyu().setValue(new RString(ymlData.get(0).get("idoJiyu").toString()));
         //有効期間 from ~ to
-        panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setFromValue(new RDate(ymlData.get(0).get("yukoDateRangefrom").toString()));
+        panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange()
+                .setFromValue(new RDate(ymlData.get(0).get(YUKODATERANGEFROM.toString()).toString()));
         // panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setToValue(new RDate((String) ymlData.get(0).get("yukoDateRangeto")));
 
     }
@@ -163,8 +175,12 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
      * 支給限度額登録（居宅サービス費）　サービス費種類支給限度標準額の内容を追加するため、追加ボタン押す。
      *
      * @author n8223
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
      */
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddServicehiShurui(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddServicehiShurui(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         List<dgServicehiShurui_Row> arraydata = setAddServicehiShuruiList(panel);
@@ -178,6 +194,8 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
     }
 
     private List<dgServicehiShurui_Row> setAddServicehiShuruiList(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel) {
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getBtnCancel();
 
         List<HashMap> ymlData = ymlData(new RString("dbc4200011/ShikyuGendogakuKyotakuServiceDetaildgServicehiShurui.yml"));
 
@@ -243,8 +261,12 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
      * 支給限度額登録（居宅サービス費）　標準該該当サービス費比率の内容を追加するため、追加ボタン押す。
      *
      * @author n8223
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
      */
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddServicehiHiritsu(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddServicehiHiritsu(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         List<dgServicehiHiritsu_Row> arraydata = setAddServicehiHiritsuList(panel);
@@ -259,7 +281,8 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
     }
 
     private List<dgServicehiHiritsu_Row> setAddServicehiHiritsuList(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel) {
-
+        // TODO 未使用のメソッド引数があります。 Checkstyle 対応。
+        panel.getBtnCancel();
         List<HashMap> ymlData = ymlData(new RString("dbc4200011/ShikyuGendogakuKyotakuServiceDetaildgServicehiHiritsu.yml"));
 
         List<dgServicehiHiritsu_Row> arrayData = new ArrayList<>();
@@ -293,11 +316,15 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
      * 支給限度額登録（居宅サービス費）　支給限度額一覧の行を選択によって【　区分支給処理、　種類支給処理　】の内容を入力する。
      *
      * @author n8223
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
      */
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnModifyRow(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnModifyRow(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
-        if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(SHIKYUKUN)) {
+        if (SHIKYUKUN.equals(panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui())) {
             setViewPutState(panel,
                     SHIKYUKUN,
                     MODIFIEDFLG,
@@ -310,7 +337,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
             panel.getShuruiShikyuGendogaku().setDisplayNone(true);
             panel.getShuruiShikyuGendogaku().setVisible(true);
 
-        } else if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(SHURUIKUN)) {
+        } else if (SHURUIKUN.equals(panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui())) {
             setViewPutState(panel,
                     SHURUIKUN,
                     MODIFIEDFLG,
@@ -328,7 +355,15 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         return response;
     }
 
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_radIdoKubun(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    /**
+     * onClick_radIdoKubunメソッドです。
+     *
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_radIdoKubun(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         //setRadIdoKubunViewStateHolder(panel);
@@ -346,7 +381,15 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         return response;
     }
 
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onBlur_txtIdoJiyu(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    /**
+     * onBlur_txtIdoJiyuメソッドです。
+     *
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onBlur_txtIdoJiyu(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         //setIdoJiyuViewStateHolder(panel);
@@ -357,7 +400,15 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         return response;
     }
 
-    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onBlur_txtYukoDateRange(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
+    /**
+     * onBlur_txtYukoDateRangeメソッドです。
+     *
+     * @param panel ShikyuGendogakuKyotakuServiceDetailPanelDiv
+     * @param panel1 ShikyuGendogakuKyotakuServiceListPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onBlur_txtYukoDateRange(
+            ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         //setYukoDateRangeFromValueViewStateHolder(panel);

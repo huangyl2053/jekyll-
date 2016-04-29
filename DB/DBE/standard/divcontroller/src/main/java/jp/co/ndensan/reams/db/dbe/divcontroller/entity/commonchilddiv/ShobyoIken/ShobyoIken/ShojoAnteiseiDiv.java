@@ -4,16 +4,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIke
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * ShojoAnteisei のクラスファイル 
- * 
- * @author 自動生成
+ * ShojoAnteisei のクラスファイル
+ *
  */
 public class ShojoAnteiseiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -25,6 +28,10 @@ public class ShojoAnteiseiDiv extends Panel {
     private RadioButton radShojoAnteisei;
     @JsonProperty("txtFuanteiShosaiJokyo")
     private TextBox txtFuanteiShosaiJokyo;
+    @JsonProperty("Radantei")
+    private RString Radantei;
+    @JsonProperty("Fuantei")
+    private RString Fuantei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +73,42 @@ public class ShojoAnteiseiDiv extends Panel {
     @JsonProperty("txtFuanteiShosaiJokyo")
     public void setTxtFuanteiShosaiJokyo(TextBox txtFuanteiShosaiJokyo) {
         this.txtFuanteiShosaiJokyo = txtFuanteiShosaiJokyo;
+    }
+
+    /*
+     * getRadantei
+     * @return Radantei
+     */
+    @JsonProperty("Radantei")
+    public RString getRadantei() {
+        return Radantei;
+    }
+
+    /*
+     * setRadantei
+     * @param Radantei Radantei
+     */
+    @JsonProperty("Radantei")
+    public void setRadantei(RString Radantei) {
+        this.Radantei = Radantei;
+    }
+
+    /*
+     * getFuantei
+     * @return Fuantei
+     */
+    @JsonProperty("Fuantei")
+    public RString getFuantei() {
+        return Fuantei;
+    }
+
+    /*
+     * setFuantei
+     * @param Fuantei Fuantei
+     */
+    @JsonProperty("Fuantei")
+    public void setFuantei(RString Fuantei) {
+        this.Fuantei = Fuantei;
     }
 
     // </editor-fold>

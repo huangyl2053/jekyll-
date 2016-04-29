@@ -58,6 +58,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査依頼のコントローラです。
+ *
+ * @reamsid_L DBE-0010-010 sunhaidi
  */
 public class NinteiChosaIrai {
 

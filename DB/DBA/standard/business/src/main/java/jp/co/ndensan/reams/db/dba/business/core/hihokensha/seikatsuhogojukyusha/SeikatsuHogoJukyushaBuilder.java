@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogojukyusha
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
-import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShuruiBuilder;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShuruiIdentifier;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikan;
 import jp.co.ndensan.reams.db.dba.business.core.hihokensha.seikatsuhogoteishikikan.SeikatsuHogoTeishikikanIdentifier;
@@ -23,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link SeikatsuHogoJukyusha}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
  */
 public class SeikatsuHogoJukyushaBuilder {
 

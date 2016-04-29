@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTaishoshaSearchDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -30,7 +30,7 @@ public class TekiyoJogaiTaishoshaJoho {
      * 対象者検索で選択された個人の情報を元に、被保険者の基本情報を表示します。
      *
      * @param taishoshaJohoDiv 資格関連処理対象者情報
-     * @param searchDiv
+     * @param searchDiv 検索Div
      * @return レスポンス
      */
     public ResponseData onClick_btnToDecide(TekiyoJogaiTaishoshaJohoDiv taishoshaJohoDiv, TekiyoJogaiTaishoshaSearchDiv searchDiv) {

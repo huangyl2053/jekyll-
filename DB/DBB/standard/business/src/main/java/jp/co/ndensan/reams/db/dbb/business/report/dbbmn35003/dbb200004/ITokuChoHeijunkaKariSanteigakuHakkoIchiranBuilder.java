@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  * 特別徴収平準化_仮算定額変更通知書_発行一覧表Builderのインターフェースクラスです。
+ *
+ * @reamsid_L DBB-0820-060 xuyue
  */
 interface ITokuChoHeijunkaKariSanteigakuHakkoIchiranBuilder
         extends IReportBuilder<TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource> {

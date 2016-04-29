@@ -19,12 +19,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KyotakuKeikakuJikoSakusei}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-011 sunhaidi
  */
 public class KyotakuKeikakuJikoSakuseiBuilder {
 
     private final DbT3007KyotakuKeikakuJikoSakuseiEntity entity;
     private final KyotakuKeikakuJikoSakuseiIdentifier id;
-    private final Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai;
+    private final Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuJikosakuseiMeisai;
     private final Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai;
 
     /**
@@ -32,22 +34,21 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
      *
      * @param entity {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}
      * @param id {@link KyotakuKeikakuJikoSakuseiIdentifier}
-     * @param kyotakuKeikakuJikosakuseiMeisai {@link Models}
+     * @param kyotakuJikosakuseiMeisai {@link Models}
      * @param yoboKeikakuJikoSakuseiMeisai {@link Models}
      *
      */
     KyotakuKeikakuJikoSakuseiBuilder(
             DbT3007KyotakuKeikakuJikoSakuseiEntity entity,
             KyotakuKeikakuJikoSakuseiIdentifier id,
-            Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai,
+            Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuJikosakuseiMeisai,
             Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai
-            ) {
+    ) {
         this.entity = entity.clone();
         this.id = id;
-        this.kyotakuKeikakuJikosakuseiMeisai = kyotakuKeikakuJikosakuseiMeisai.clone();
+        this.kyotakuJikosakuseiMeisai = kyotakuJikosakuseiMeisai.clone();
         this.yoboKeikakuJikoSakuseiMeisai = yoboKeikakuJikoSakuseiMeisai.clone();
     }
-
 
     /**
      * 居宅・総合事業区分を設定します。
@@ -56,8 +57,7 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
      * @return {@link KyotakuKeikakuJikoSakuseiBuilder}
      */
     public KyotakuKeikakuJikoSakuseiBuilder set居宅_総合事業区分(RString 居宅_総合事業区分) {
-        requireNonNull(居宅_総合事業区分
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・総合事業区分"));
+        requireNonNull(居宅_総合事業区分, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・総合事業区分"));
         entity.setKyotaku_SogoJigyoKubun(居宅_総合事業区分);
         return this;
     }
@@ -146,7 +146,7 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
      */
     public KyotakuKeikakuJikoSakuseiBuilder setKyotakuKeikakuJikosakuseiMeisai(KyotakuKeikakuJikosakuseiMeisai 居宅給付計画自己作成明細) {
         if (hasSameIdentifier(居宅給付計画自己作成明細.identifier())) {
-            kyotakuKeikakuJikosakuseiMeisai.add(居宅給付計画自己作成明細);
+            kyotakuJikosakuseiMeisai.add(居宅給付計画自己作成明細);
             return this;
         }
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
@@ -188,6 +188,6 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
      * @return {@link KyotakuKeikakuJikoSakusei}のインスタンス
      */
     public KyotakuKeikakuJikoSakusei build() {
-        return new KyotakuKeikakuJikoSakusei(entity, id, kyotakuKeikakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
+        return new KyotakuKeikakuJikoSakusei(entity, id, kyotakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
     }
 }

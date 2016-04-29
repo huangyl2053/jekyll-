@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）のプロパティです。
+ *
+ * @reamsid_L DBC-1000-130 zhangzhiming
  */
 public class ShokanKetteiTsuchiShoSealerProperty extends ReportPropertyBase<ShokanKetteiTsuchiShoSealerReportSource> {
 

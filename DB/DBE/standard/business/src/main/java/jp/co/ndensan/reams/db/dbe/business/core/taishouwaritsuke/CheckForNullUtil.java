@@ -15,8 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * NullをCheckのツール
+ *
+ * @reamsid_L DBE-0140-010 liangbc
  */
-public class CheckForNullUtil {
+public final class CheckForNullUtil {
 
     /**
      * コンストラクタ

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 要介護認定結果情報のマッピング用XMLです。 -->
-
+<!-- @reamsid_L DBE-0020-060 lishengli -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosascheduleinput.INinteiChosaScheduleInputMapper">
 
@@ -49,15 +49,17 @@
 		ON ChosainJoho."ninteiChosainCode" = NinteichosaSchedule."ninteiChosainCode"
                 AND ChosainJoho."ninteiChosaItakusakiCode" = NinteichosaSchedule."ninteiChosaItakusakiCode"
                 AND ChosainJoho."shichosonCode" = NinteichosaSchedule."shichosonCode"
-	WHERE
-		NinteichosaSchedule."shinseishoKanriNo" = #{申請者管理番号2}
-		AND NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
+        WHERE
+		NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
 		AND NinteichosaSchedule."ninteiChosaJikanWaku" = #{時間枠}
 		AND NinteichosaSchedule."chosaChikuCode" = #{地区コード}
 		AND NinteichosaSchedule."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
 		AND NinteichosaSchedule."ninteiChosainCode" = #{認定調査員コード}
 		AND NinteichosaSchedule."shichosonCode" = #{市町村コード}
 		AND NinteichosaSchedule."yoyakuJokyo" = #{調査員状況02}
+        <if test="has申請者管理番号2">
+		AND NinteichosaSchedule."shinseishoKanriNo" = #{申請者管理番号2}
+        </if>
     </select>
     
     <select id="get調査員情報"
@@ -77,13 +79,15 @@
                 AND ChosainJoho."ninteiChosaItakusakiCode" = NinteichosaSchedule."ninteiChosaItakusakiCode"
                 AND ChosainJoho."shichosonCode" = NinteichosaSchedule."shichosonCode"
 	WHERE
-		NinteichosaSchedule."shinseishoKanriNo" = #{申請者管理番号2}
-		AND NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
+		NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
 		AND NinteichosaSchedule."ninteiChosaJikanWaku" = #{時間枠}
 		AND NinteichosaSchedule."chosaChikuCode" = #{地区コード}
 		AND NinteichosaSchedule."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
 		AND NinteichosaSchedule."ninteiChosainCode" = #{認定調査員コード}
 		AND NinteichosaSchedule."shichosonCode" = #{市町村コード}
 		AND NinteichosaSchedule."yoyakuJokyo" = #{調査員状況02}
+	<if test="has申請者管理番号2">
+		AND NinteichosaSchedule."shinseishoKanriNo" = #{申請者管理番号2}
+        </if>
     </select>
 </mapper>

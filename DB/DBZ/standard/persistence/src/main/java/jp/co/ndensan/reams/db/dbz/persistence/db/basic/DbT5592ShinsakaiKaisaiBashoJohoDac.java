@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護認定審査会開催場所情報のデータアクセスクラスです。
+ * 
+ * @reamsid_L DBE-0100-010  wangkun
  */
 public class DbT5592ShinsakaiKaisaiBashoJohoDac implements ISaveable<DbT5592ShinsakaiKaisaiBashoJohoEntity> {
 

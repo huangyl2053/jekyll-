@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 主治医意見書提出督促状のReportです。
  *
+ * @reamsid_L DBE-0060-020 hezhenzhen
+ *
  */
 public class ShujiiIkenshoSakuseiTokusokujoReport extends Report<ShujiiIkenshoSakuseiTokusokujoReportSource> {
 
@@ -41,11 +43,9 @@ public class ShujiiIkenshoSakuseiTokusokujoReport extends Report<ShujiiIkenshoSa
 
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoSakuseiTokusokujoReportSource> reportSourceWriter) {
-        int index = 1;
         for (ShujiiIkenshoSakuseiTokusokujoItem item : itemList) {
-            IShujiiIkenshoSakuseiTokusokujoEditor editor = new ShujiiIkenshoSakuseiTokusokujoHeadEditor(item, index);
+            IShujiiIkenshoSakuseiTokusokujoEditor editor = new ShujiiIkenshoSakuseiTokusokujoHeadEditor(item);
             IShujiiIkenshoSakuseiTokusokujoBuilder builder = new ShujiiIkenshoSakuseiTokusokujoBuilderImpl(editor);
-            index = index + 1;
             reportSourceWriter.writeLine(builder);
 
         }

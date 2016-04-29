@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 年齢到達登録者リストEntity。
+ *
+ * @reamsid_L DBA-0570-020 xuyannan
  */
 @lombok.Getter
 @lombok.Setter

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashokoufushinsei
 
 /**
  * 介護保険被保険者証交付申請書（第2号被保険者）Editorです。
+ *
+ * @reamsid_L DBA-0540-140 houtianpeng
  */
 public class HihokenshashokoufuShinseishoEditor implements IHihokenshashokoufuShinseishoEditor {
 

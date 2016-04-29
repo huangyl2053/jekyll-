@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbb.entity.report.hakkogoidotaishoshaichiran.Hakko
 
 /**
  * 通知書発行後異動把握帳票HeaderEditor
+ *
+ * @reamsid_L DBB-0690-030 surun
  */
 public class HeaderEditor implements IHakkogoIdoTaishoshaIchiranEditor {
 

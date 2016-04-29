@@ -17,13 +17,15 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 要介護認定結果通知書対象者一覧表Printerです。
+ *
+ * @reamsid_L DBE-0190-020 lizhuoxuan
  */
 public class KaigoKekkaTaishouIchiranPrintService {
 
     /**
      * 要介護認定結果通知書対象者一覧表を印刷します。
      *
-     * @param kaigoJoho　KaigoKekkaTaishouIchiranReportJoho
+     * @param kaigoJoho KaigoKekkaTaishouIchiranReportJoho
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection print(KaigoKekkaTaishouIchiranReportJoho kaigoJoho) {

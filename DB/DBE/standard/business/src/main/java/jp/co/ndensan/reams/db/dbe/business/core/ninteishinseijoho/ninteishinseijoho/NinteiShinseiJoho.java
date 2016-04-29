@@ -20,8 +20,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikanryojo
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikanryojoho.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikeikakujoho.NinteiKeikakuJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.renrakusakijoho.RenrakusakiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiiinjogaijoho.ShinsakaiIinJogaiJoho;
@@ -35,13 +33,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tennyushibo.Te
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5122TsuchishoHakkoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
@@ -52,8 +45,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -72,8 +69,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定申請情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 sunhaidi
  */
-public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho> implements Serializable {
+public class NinteiShinseiJoho
+        extends ParentModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho>
+        implements Serializable {
 
     private final DbT5101NinteiShinseiJohoEntity entity;
     private final NinteiShinseiJohoIdentifier id;
@@ -157,12 +158,11 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         }
         this.ninteiKeikakuJoho = Models.create(ninteiKeikakuJohoList);
 
-        List<NinteiKekkaJoho> ninteiKekkaJohoList = new ArrayList<>();
-        for (DbT5102NinteiKekkaJohoEntity ninteiKekkaJohoEntity : entity.get要介護認定結果情報Entity()) {
-            ninteiKekkaJohoList.add(new NinteiKekkaJoho(ninteiKekkaJohoEntity));
-        }
+//        List<NinteiKekkaJoho> ninteiKekkaJohoList = new ArrayList<>();
+//        for (DbT5102NinteiKekkaJohoEntity ninteiKekkaJohoEntity : entity.get要介護認定結果情報Entity()) {
+//            ninteiKekkaJohoList.add(new NinteiKekkaJoho(ninteiKekkaJohoEntity));
+//        }
 //        this.ninteiKekkaJoho = Models.create(ninteiKekkaJohoList);
-
         List<RenrakusakiJoho> renrakusakiJohoList = new ArrayList<>();
         for (DbT5150RenrakusakiJohoEntity renrakusakiJohoEntity : entity.get介護連絡先情報Entity()) {
             renrakusakiJohoList.add(new RenrakusakiJoho(renrakusakiJohoEntity));
@@ -441,7 +441,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return みなし２号等対象フラグ
      */
-    public boolean getみなし２号等対象フラグ() {
+    public boolean isみなし２号等対象フラグ() {
         return entity.getMinashiNigoEtcTaishoFlag();
     }
 
@@ -567,7 +567,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 情報提供への同意有無
      */
-    public boolean get情報提供への同意有無() {
+    public boolean is情報提供への同意有無() {
         return entity.getJohoteikyoDoiFlag();
     }
 
@@ -639,7 +639,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return entity.getShiteiiFlag();
     }
 
@@ -666,7 +666,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 認定延期通知発行しないことに対する同意有無
      */
-    public boolean get認定延期通知発行しないことに対する同意有無() {
+    public boolean is認定延期通知発行しないことに対する同意有無() {
         return entity.getEnkitsuchiNashiDoiFlag();
     }
 
@@ -675,7 +675,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 施設入所の有無
      */
-    public boolean get施設入所の有無() {
+    public boolean is施設入所の有無() {
         return entity.getShisetsuNyushoFlag();
     }
 
@@ -693,7 +693,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 家庭訪問の有無
      */
-    public boolean get家庭訪問の有無() {
+    public boolean is家庭訪問の有無() {
         return entity.getKateiHomonFlag();
     }
 
@@ -846,7 +846,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 審査継続区分
      */
-    public boolean get審査継続区分() {
+    public boolean is審査継続区分() {
         return entity.getShinsaKeizokuFlag();
     }
 
@@ -918,7 +918,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -1006,7 +1006,10 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
             modifiedEntity.setState(EntityDataState.Modified);
         }
 //        return new NinteiShinseiJoho(
-//                modifiedEntity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+//                modifiedEntity, id, ichiGojiHanteiKekkaJoho,
+//        ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null,
+//        renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho,
+//        tennyuShibo, tsuchishoHakkoJoho);
         return null;
     }
 
@@ -1035,6 +1038,12 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
 
     }
 
+    /**
+     * 要介護認定一次判定結果情報を取得する
+     *
+     * @param id IchijiHanteiKekkaJohoIdentifier
+     * @return IchijiHanteiKekkaJoho
+     */
     public IchijiHanteiKekkaJoho getIchijiHanteiKekkaJoho(IchijiHanteiKekkaJohoIdentifier id) {
         if (ichijiHanteiKekkaJoho.contains(id)) {
             return ichijiHanteiKekkaJoho.clone().get(id);
@@ -1043,10 +1052,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 要介護認定一次判定結果情報リストを取得する
+     *
+     * @return List<IchijiHanteiKekkaJoho>
+     */
     public List<IchijiHanteiKekkaJoho> getIchijiHanteiKekkaJohoList() {
         return new ArrayList<>(ichijiHanteiKekkaJoho.values());
     }
 
+    /**
+     * イメージ情報を取得する
+     *
+     * @param id ImageIdentifier
+     * @return Image
+     */
     public Image getImage(ImageIdentifier id) {
         if (image.contains(id)) {
             return image.clone().get(id);
@@ -1055,10 +1075,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * イメージ情報リストを取得する
+     *
+     * @return List<Image>
+     */
     public List<Image> getImageList() {
         return new ArrayList<>(image.values());
     }
 
+    /**
+     * 要介護認定完了情報を取得する
+     *
+     * @param id NinteiKanryoJohoIdentifier
+     * @return NinteiKanryoJoho
+     */
     public NinteiKanryoJoho getNinteiKanryoJoho(NinteiKanryoJohoIdentifier id) {
         if (ninteiKanryoJoho.contains(id)) {
             return ninteiKanryoJoho.clone().get(id);
@@ -1067,10 +1098,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 要介護認定完了情報リストを取得する
+     *
+     * @return List<NinteiKanryoJoho>
+     */
     public List<NinteiKanryoJoho> getNinteiKanryoJohoList() {
         return new ArrayList<>(ninteiKanryoJoho.values());
     }
 
+    /**
+     * 要介護認定計画情報を取得する
+     *
+     * @param id NinteiKeikakuJohoIdentifier
+     * @return NinteiKeikakuJoho
+     */
     public NinteiKeikakuJoho getNinteiKeikakuJoho(NinteiKeikakuJohoIdentifier id) {
         if (ninteiKeikakuJoho.contains(id)) {
             return ninteiKeikakuJoho.clone().get(id);
@@ -1079,21 +1121,31 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 要介護認定計画情報リストを取得する
+     *
+     * @return List<NinteiKeikakuJoho>
+     */
     public List<NinteiKeikakuJoho> getNinteiKeikakuJohoList() {
         return new ArrayList<>(ninteiKeikakuJoho.values());
     }
 
-    public NinteiKekkaJoho getNinteiKekkaJoho(NinteiKekkaJohoIdentifier id) {
-//        if (ninteiKekkaJoho.contains(id)) {
-//            return ninteiKekkaJoho.clone().get(id);
-//        }
-        //TODO メッセージの検討
-        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
-    }
-
+//    public NinteiKekkaJoho getNinteiKekkaJoho(NinteiKekkaJohoIdentifier id) {
+////        if (ninteiKekkaJoho.contains(id)) {
+////            return ninteiKekkaJoho.clone().get(id);
+////        }
+//        //TODO メッセージの検討
+//        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+//    }
 //    public List<NinteiKekkaJoho> getNinteiKekkaJohoList() {
 //        return new ArrayList<>(ninteiKekkaJoho.values());
 //    }
+    /**
+     * 介護連絡先情報を取得する
+     *
+     * @param id RenrakusakiJohoIdentifier
+     * @return RenrakusakiJoho
+     */
     public RenrakusakiJoho getRenrakusakiJoho(RenrakusakiJohoIdentifier id) {
         if (renrakusakiJoho.contains(id)) {
             return renrakusakiJoho.clone().get(id);
@@ -1102,10 +1154,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護連絡先情報リストを取得する
+     *
+     * @return List<RenrakusakiJoho>
+     */
     public List<RenrakusakiJoho> getRenrakusakiJohoList() {
         return new ArrayList<>(renrakusakiJoho.values());
     }
 
+    /**
+     * 審査会委員除外情報を取得する
+     *
+     * @param id ShinsakaiIinJogaiJohoIdentifier
+     * @return ShinsakaiIinJogaiJoho
+     */
     public ShinsakaiIinJogaiJoho getShinsakaiIinJogaiJoho(ShinsakaiIinJogaiJohoIdentifier id) {
         if (shinsakaiIinJogaiJoho.contains(id)) {
             return shinsakaiIinJogaiJoho.clone().get(id);
@@ -1114,10 +1177,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 審査会委員除外情報リストを取得する
+     *
+     * @return List<ShinsakaiIinJogaiJoho>
+     */
     public List<ShinsakaiIinJogaiJoho> getShinsakaiIinJogaiJohoList() {
         return new ArrayList<>(shinsakaiIinJogaiJoho.values());
     }
 
+    /**
+     * 申請履歴情報を取得する
+     *
+     * @param id ShinseiRirekiJohoIdentifier
+     * @return ShinseiRirekiJoho
+     */
     public ShinseiRirekiJoho getShinseiRirekiJoho(ShinseiRirekiJohoIdentifier id) {
         if (shinseiRirekiJoho.contains(id)) {
             return shinseiRirekiJoho.clone().get(id);
@@ -1126,10 +1200,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 申請履歴情報リストを取得する
+     *
+     * @return List<ShinseiRirekiJoho>
+     */
     public List<ShinseiRirekiJoho> getShinseiRirekiJohoList() {
         return new ArrayList<>(shinseiRirekiJoho.values());
     }
 
+    /**
+     * 申請届出情報を取得する
+     *
+     * @param id ShinseitodokedeJohoIdentifier
+     * @return ShinseitodokedeJoho
+     */
     public ShinseitodokedeJoho getShinseitodokedeJoho(ShinseitodokedeJohoIdentifier id) {
         if (shinseitodokedeJoho.contains(id)) {
             return shinseitodokedeJoho.clone().get(id);
@@ -1138,10 +1223,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 申請届出情報リストを取得する
+     *
+     * @return List<ShinseitodokedeJoho>
+     */
     public List<ShinseitodokedeJoho> getShinseitodokedeJohoList() {
         return new ArrayList<>(shinseitodokedeJoho.values());
     }
 
+    /**
+     * 転入・死亡情報を取得する
+     *
+     * @param id TennyuShiboIdentifier
+     * @return TennyuShibo
+     */
     public TennyuShibo getTennyuShibo(TennyuShiboIdentifier id) {
         if (tennyuShibo.contains(id)) {
             return tennyuShibo.clone().get(id);
@@ -1150,10 +1246,21 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 転入・死亡情報リストを取得する
+     *
+     * @return List<TennyuShibo>
+     */
     public List<TennyuShibo> getTennyuShiboList() {
         return new ArrayList<>(tennyuShibo.values());
     }
 
+    /**
+     * 通知書発行情報を取得する
+     *
+     * @param id TsuchishoHakkoJohoIdentifier
+     * @return TsuchishoHakkoJoho
+     */
     public TsuchishoHakkoJoho getTsuchishoHakkoJoho(TsuchishoHakkoJohoIdentifier id) {
         if (tsuchishoHakkoJoho.contains(id)) {
             return tsuchishoHakkoJoho.clone().get(id);
@@ -1162,6 +1269,11 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 通知書発行情報リストを取得する
+     *
+     * @return List<TsuchishoHakkoJoho>
+     */
     public List<TsuchishoHakkoJoho> getTsuchishoHakkoJohoList() {
         return new ArrayList<>(tsuchishoHakkoJoho.values());
     }
@@ -1173,7 +1285,10 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      */
     protected Object writeReplace() {
         return null;
-//        return new _SerializationProxy(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+//        return new _SerializationProxy(entity, id, ichiGojiHanteiKekkaJoho,
+//        ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null,
+//        renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho,
+//        tennyuShibo, tsuchishoHakkoJoho);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -1228,7 +1343,10 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
 
         private Object readResolve() {
             return null;
-//            return new NinteiShinseiJoho(this.entity, this.id, this.ichiGojiHanteiKekkaJoho, this.ichijiHanteiKekkaJoho, this.image, this.ninteiKanryoJoho, this.ninteiKeikakuJoho, null, this.renrakusakiJoho, this.shinsakaiIinJogaiJoho, this.shinseiRirekiJoho, this.shinseitodokedeJoho, this.tennyuShibo, this.tsuchishoHakkoJoho);
+//            return new NinteiShinseiJoho(this.entity, this.id, this.ichiGojiHanteiKekkaJoho,
+//            this.ichijiHanteiKekkaJoho, this.image, this.ninteiKanryoJoho, this.ninteiKeikakuJoho,
+//            null, this.renrakusakiJoho, this.shinsakaiIinJogaiJoho, this.shinseiRirekiJoho,
+//            this.shinseitodokedeJoho, this.tennyuShibo, this.tsuchishoHakkoJoho);
         }
     }
 
@@ -1240,7 +1358,10 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      */
     public NinteiShinseiJohoBuilder createBuilderForEdit() {
         return null;
-//        return new NinteiShinseiJohoBuilder(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+//        return new NinteiShinseiJohoBuilder(entity, id, ichiGojiHanteiKekkaJoho,
+//        ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null,
+//        renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho,
+//        tennyuShibo, tsuchishoHakkoJoho);
     }
 
     @Override

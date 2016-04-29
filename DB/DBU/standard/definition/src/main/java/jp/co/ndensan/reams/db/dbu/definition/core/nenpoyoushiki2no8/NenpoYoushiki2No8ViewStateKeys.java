@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushiki2no8;
 /**
  * NenpoYoushiki2No8ViewStateKeys。
  *
+ * @reamsid_L DBU-1060-030 zhengshukai
+ *
  */
 public enum NenpoYoushiki2No8ViewStateKeys {
 

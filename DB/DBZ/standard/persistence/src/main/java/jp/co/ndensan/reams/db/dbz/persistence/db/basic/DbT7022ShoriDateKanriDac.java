@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 処理日付管理マスタのデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-012 cuilin
  */
 public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanriEntity> {
 
@@ -715,5 +717,27 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 調定年度))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、処理状況取得する。
+     *
+     * @param 調定年度 調定年度
+     * @param 処理名 処理名
+     * @param サブ業務コード サブ業務コード
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> select処理状況_普徴仮算定賦課(FlexibleYear 調定年度, RString 処理名, SubGyomuCode サブ業務コード) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, 処理名),
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(nendo, 調定年度))).
+                toList(DbT7022ShoriDateKanriEntity.class);
     }
 }

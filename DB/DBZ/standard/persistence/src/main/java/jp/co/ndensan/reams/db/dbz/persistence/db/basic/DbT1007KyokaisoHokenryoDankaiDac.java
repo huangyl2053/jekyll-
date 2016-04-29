@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 境界層保険料段階のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-021 linghuhang
  */
 public class DbT1007KyokaisoHokenryoDankaiDac implements ISaveable<DbT1007KyokaisoHokenryoDankaiEntity> {
 
@@ -39,6 +41,7 @@ public class DbT1007KyokaisoHokenryoDankaiDac implements ISaveable<DbT1007Kyokai
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 RirekiNo
+     * @param リンク番号 int
      * @param 適用開始年月 TekiyoKaishiYM
      * @return DbT1007KyokaisoHokenryoDankaiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
@@ -47,9 +50,11 @@ public class DbT1007KyokaisoHokenryoDankaiDac implements ISaveable<DbT1007Kyokai
     public DbT1007KyokaisoHokenryoDankaiEntity selectByKey(
             HihokenshaNo 被保険者番号,
             int 履歴番号,
+            int リンク番号,
             FlexibleYearMonth 適用開始年月) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(リンク番号, UrSystemErrorMessages.値がnull.getReplacedMessage("リンク番号"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -59,6 +64,7 @@ public class DbT1007KyokaisoHokenryoDankaiDac implements ISaveable<DbT1007Kyokai
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(rirekiNo, 履歴番号),
+                                eq(linkNo, リンク番号),
                                 eq(tekiyoKaishiYM, 適用開始年月))).
                 toObject(DbT1007KyokaisoHokenryoDankaiEntity.class);
     }
