@@ -106,8 +106,6 @@ public class DBD1030001Handler {
      * @return 初期化完フラグ
      */
     public boolean onLoad() {
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("123456"));
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123"));
         ShikibetsuCode 識別コード = get識別コードFromViewState();
         HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
         if (被保険者番号.isEmpty()) {
@@ -117,7 +115,7 @@ public class DBD1030001Handler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             return false;
         }
-        //div.getCcdAtenaInfo().onLoad(識別コード);
+        div.getCcdAtenaInfo().onLoad(識別コード);
         div.getCcdShikakuKihon().onLoad(被保険者番号);
         div.getShafukuRiyoshaKeigen().setHihokenshaNo(被保険者番号.getColumnValue());
         RString メニューID = ResponseHolder.getMenuID();
