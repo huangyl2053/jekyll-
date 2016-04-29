@@ -183,7 +183,7 @@ public class ChoteiKyotsu extends ModelBase<ChoteiKyotsuIdentifier, UrT0705Chote
      *
      * @return 賦課処理状況
      */
-    public boolean get賦課処理状況() {
+    public boolean is賦課処理状況() {
         return entity.getFukaShoriJokyo();
     }
 
