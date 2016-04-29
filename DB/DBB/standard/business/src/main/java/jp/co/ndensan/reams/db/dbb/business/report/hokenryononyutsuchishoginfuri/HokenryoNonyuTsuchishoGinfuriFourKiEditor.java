@@ -66,14 +66,14 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
         List<Kitsuki> 出力期リスト = 本算定納入通知書情報.get出力期リスト();
         Kitsuki 出力期リストの一番目 = get出力期By番目(出力期リスト, 0);
         Kitsuki 出力期リストの二番目 = get出力期By番目(出力期リスト, 1);
-        source.HyojicodeName1 = 表示コード.get表示コード名１();
-        source.HyojicodeName2 = 表示コード.get表示コード名２();
-        source.HyojicodeName3 = 表示コード.get表示コード名３();
+        source.hyojicodeName1 = 表示コード.get表示コード名１();
+        source.hyojicodeName2 = 表示コード.get表示コード名２();
+        source.hyojicodeName3 = 表示コード.get表示コード名３();
         source.santeiKisoKiaknShuryo = 更正後.get期間_至();
         source.titleKanendoBun = RString.EMPTY;
-        source.Hyojicode2 = 表示コード.get表示コード１();
-        source.Hyojicode3 = 表示コード.get表示コード２();
-        source.Hyojicode1 = 表示コード.get表示コード３();
+        source.hyojicode2 = 表示コード.get表示コード１();
+        source.hyojicode3 = 表示コード.get表示コード２();
+        source.hyojicode1 = 表示コード.get表示コード３();
         source.santeiKisoNokisu = RStringUtil.convert半角to全角(更正後.get月数_ケ月());
         source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().getColumnValue();
 
