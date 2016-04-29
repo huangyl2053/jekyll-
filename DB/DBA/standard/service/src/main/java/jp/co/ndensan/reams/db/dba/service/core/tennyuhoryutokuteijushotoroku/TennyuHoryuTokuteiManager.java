@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiBusiness;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyuhoryutokuteijushoichiran.ITennyuHoryuTokuteiMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relete.tennyuhoryutokuteijushoichiran.ITennyuHoryuTokuteiMapper;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJusho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7023RendoHoryuTokuteiJushoDac;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.mapper.tennyuhoryutokuteijushoichiran;
+package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relete.tennyuhoryutokuteijushoichiran;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity;
