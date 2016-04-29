@@ -126,9 +126,11 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.kaisanMeisaishoNofuZumiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額(), 0);
         }
         if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(納付額算出方法)) {
-            source.keisanMeisaishoKongoNofuGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
+            source.keisanMeisaishoKongoNofuGaku
+                    = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
         } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
-            source.keisanMeisaishoKongoNofuGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
+            source.keisanMeisaishoKongoNofuGaku
+                    = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
         }
         source.yen1 = 円;
         source.yen2 = 円;
@@ -137,7 +139,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
         source.yen3 = 円;
         source.yen4 = 円;
         source.keisanmeisaishoNendo2 = 編集後本算定通知書共通情報.get賦課年度_年度なし();
-        source.keisanMeisaishoHokenryoGokeiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+        source.keisanMeisaishoHokenryoGokeiGaku
+                = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
         source.pagerenban1 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-1")) : new RString("1-1");
         source.pagerenban2 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-2")) : new RString("1-2");
         source.nokibetsuMeisaishoNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
