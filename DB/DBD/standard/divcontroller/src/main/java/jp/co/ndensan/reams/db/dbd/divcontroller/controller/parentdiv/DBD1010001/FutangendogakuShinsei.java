@@ -299,6 +299,33 @@ public class FutangendogakuShinsei {
         }
     }
 
+    /**
+     * 「配偶者の有無」ボタンの処理
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onChange_radHaigushaUmu(FutangendogakuShinseiDiv div) {
+        if (配偶者の有無_無.equals(div.getRadHaigushaUmu().getSelectedKey())) {
+            div.getTxtHaigushaShimeiKana().setDisabled(true);
+            div.getTxtHaigushaShimei().setDisabled(true);
+            div.getTxtHaigushaUmareYMD().setDisabled(true);
+            div.getTxtHaigushaRenrakusaki().setDisabled(true);
+            div.getTxtHaigushaJusho1().setDisabled(true);
+            div.getTxtHaigushaJusho2().setDisabled(true);
+            div.getRadHaigushaKazeiKubun().setDisabled(true);
+        } else {
+            div.getTxtHaigushaShimeiKana().setDisabled(false);
+            div.getTxtHaigushaShimei().setDisabled(false);
+            div.getTxtHaigushaUmareYMD().setDisabled(false);
+            div.getTxtHaigushaRenrakusaki().setDisabled(false);
+            div.getTxtHaigushaJusho1().setDisabled(false);
+            div.getTxtHaigushaJusho2().setDisabled(false);
+            div.getRadHaigushaKazeiKubun().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
     private FutangendogakuNinteiShinseiHandler getHandler(FutangendogakuShinseiDiv div) {
         return new FutangendogakuNinteiShinseiHandler(div);
     }

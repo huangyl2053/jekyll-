@@ -23,15 +23,19 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.Futa
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgShinseiList_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei.FutangendogakuNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -71,7 +75,7 @@ public class FutangendogakuNinteiShinseiHandler {
     private static final RString SELECT_EMPTYKEY = new RString("empty");
     private static final RString 追加状態 = new RString("Added");
     private static final RString 修正状態 = new RString("Modified");
-    private static final RString 削除状態 = new RString("Deleted");
+    private static final int INT_4 = 4;
 
     /**
      * コンストラクタです。
@@ -87,10 +91,6 @@ public class FutangendogakuNinteiShinseiHandler {
      */
     public void onLoad() {
 
-        TaishoshaKey 資格対象者 = new TaishoshaKey(
-                new HihokenshaNo("9990000007"), new ShikibetsuCode("000000000999904"), new SetaiCode("1"));
-
-        ViewStateHolder.put(ViewStateKeys.資格対象者, 資格対象者);
         boolean is受給共通_被保データなし = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号() == null;
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
             if (is受給共通_被保データなし) {
@@ -118,15 +118,18 @@ public class FutangendogakuNinteiShinseiHandler {
             ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
             ArrayList<FutanGendogakuNinteiViewState> new負担限度額認定申請の情報 = new ArrayList<>();
             for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
-                new負担限度額認定申請の情報.add(new FutanGendogakuNinteiViewState(futanGendogakuNintei,
+                FutanGendogakuNintei fgn = new FutanGendogakuNintei(
+                        futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号());
+                fgn = copyFutanGendogakuNintei(futanGendogakuNintei, fgn);
+                new負担限度額認定申請の情報.add(new FutanGendogakuNinteiViewState(fgn,
                         futanGendogakuNintei.getState(), futanGendogakuNintei.get履歴番号()));
             }
             ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, 申請一覧情報ArrayList);
             ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new負担限度額認定申請の情報);
             set申請一覧(new負担限度額認定申請の情報);
         }
-//        RiyoshaFutanDankai 利用者負担段階 = FutangendogakuNinteiService.createInstance().judge利用者負担段階(被保険者番号, 識別コード);
-//        div.getTxtRiyoshaFutanDankai().setValue(利用者負担段階.get名称());
+        RiyoshaFutanDankai 利用者負担段階 = FutangendogakuNinteiService.createInstance().judge利用者負担段階(被保険者番号, 識別コード);
+        div.getTxtRiyoshaFutanDankai().setValue(利用者負担段階.get名称());
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         AccessLogger.log(AccessLogType.照会,
                 PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"), 拡張情報NAME, 被保険者番号.value())));
@@ -185,6 +188,7 @@ public class FutangendogakuNinteiShinseiHandler {
         ninteiViewState.setState(EntityDataState.Deleted);
         list.set(index, ninteiViewState);
         set申請一覧(list);
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, list);
         return true;
     }
 
@@ -396,27 +400,27 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getChkGekihenKanwa().setDisabled(!is平成18年or平成19年(futanGendogakuNintei.get申請年月日()));
         init食費DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
         if (futanGendogakuNintei.get食費負担限度額() != null) {
-            div.getDdlShokuhi().setSelectedValue(new RString(futanGendogakuNintei.get食費負担限度額().toString()));
+            div.getDdlShokuhi().setSelectedValue(new RString(futanGendogakuNintei.get食費負担限度額().toString()).padZeroToLeft(INT_4));
         }
         initユニット型個室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
         if (futanGendogakuNintei.getユニット型個室() != null) {
-            div.getDdlUnitGataKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型個室().toString()));
+            div.getDdlUnitGataKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型個室().toString()).padZeroToLeft(INT_4));
         }
         initユニット型準個室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
         if (futanGendogakuNintei.getユニット型準個室() != null) {
-            div.getDdlUnitGataJunKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型準個室().toString()));
+            div.getDdlUnitGataJunKoshitsu().setSelectedValue(new RString(futanGendogakuNintei.getユニット型準個室().toString()).padZeroToLeft(INT_4));
         }
         init従来型個室_特養等DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
         if (futanGendogakuNintei.get従来型個室_特養等() != null) {
-            div.getDdlJuraiGataKoshitsuTokuyo().setSelectedValue(new RString(futanGendogakuNintei.get従来型個室_特養等().toString()));
+            div.getDdlJuraiGataKoshitsuTokuyo().setSelectedValue(new RString(futanGendogakuNintei.get従来型個室_特養等().toString()).padZeroToLeft(INT_4));
         }
         init従来型個室_老健療養等DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
         if (futanGendogakuNintei.get従来型個室_老健_療養等() != null) {
-            div.getDdlJuraiGataKoshitsuRoken().setSelectedValue(new RString(futanGendogakuNintei.get従来型個室_老健_療養等().toString()));
+            div.getDdlJuraiGataKoshitsuRoken().setSelectedValue(new RString(futanGendogakuNintei.get従来型個室_老健_療養等().toString()).padZeroToLeft(INT_4));
         }
         init多床室DDL(futanGendogakuNintei.get旧措置者区分(), futanGendogakuNintei.get利用者負担段階());
         if (futanGendogakuNintei.get多床室() != null) {
-            div.getDdlTashoshitsu().setSelectedValue(new RString(futanGendogakuNintei.get多床室().toString()));
+            div.getDdlTashoshitsu().setSelectedValue(new RString(futanGendogakuNintei.get多床室().toString()).padZeroToLeft(INT_4));
         }
         div.getTxtHiShoninRiyu().setValue(futanGendogakuNintei.get非承認理由());
 
@@ -424,20 +428,18 @@ public class FutangendogakuNinteiShinseiHandler {
 
     private ShoKisaiHokenshaNo get証記載保険者番号(FlexibleDate 申請日) {
 
-//        HokenshaListLoader loader = HokenshaListLoader.createInstance();
-//        HokenshaList hokenshaList = loader.getShichosonCodeNameList(GyomuBunrui.介護事務);
-//
-//        HihokenshaDaichoManager manager = new HihokenshaDaichoManager();
-//        HihokenshaDaicho daicho = manager.find最新被保険者台帳(申請日);
-//        if (daicho == null) {
-//            return new ShoKisaiHokenshaNo(RString.EMPTY);
-//        }
-//        if (daicho.get広住特措置元市町村コード() != null && !daicho.get広住特措置元市町村コード().isEmpty()) {
-//            return hokenshaList.get(daicho.get広住特措置元市町村コード()).get証記載保険者番号();
-//        }
-        //TODO
-        //return hokenshaList.get(daicho.get市町村コード()).get証記載保険者番号();
-        return new ShoKisaiHokenshaNo("202184");
+        HokenshaListLoader loader = HokenshaListLoader.createInstance();
+        HokenshaList hokenshaList = loader.getShichosonCodeNameList(GyomuBunrui.介護事務);
+
+        HihokenshaDaichoManager manager = new HihokenshaDaichoManager();
+        HihokenshaDaicho daicho = manager.find最新被保険者台帳(申請日);
+        if (daicho == null) {
+            return new ShoKisaiHokenshaNo(RString.EMPTY);
+        }
+        if (daicho.get広住特措置元市町村コード() != null && !daicho.get広住特措置元市町村コード().isEmpty()) {
+            return hokenshaList.get(daicho.get広住特措置元市町村コード()).get証記載保険者番号();
+        }
+        return hokenshaList.get(daicho.get市町村コード()).get証記載保険者番号();
     }
 
     private FutanGendogakuNintei 申請情報Builder(FutanGendogakuNintei futanGendogakuNintei) {
@@ -476,12 +478,18 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set旧措置者区分(div.getDdlKyusochisha().getSelectedKey());
         builder.set利用者負担段階(div.getDdlRiyoshaFutanDankai().getSelectedKey());
         builder.set居室種別(div.getDdlKyoshitsuShubetsu().getSelectedKey());
-        builder.set食費負担限度額(new Decimal(div.getDdlShokuhi().getSelectedValue().toString()));
-        builder.setユニット型個室(new Decimal(div.getDdlUnitGataKoshitsu().getSelectedValue().toString()));
-        builder.setユニット型準個室(new Decimal(div.getDdlUnitGataJunKoshitsu().getSelectedValue().toString()));
-        builder.set従来型個室_特養等(new Decimal(div.getDdlJuraiGataKoshitsuTokuyo().getSelectedValue().toString()));
-        builder.set従来型個室_老健_療養等(new Decimal(div.getDdlJuraiGataKoshitsuRoken().getSelectedValue().toString()));
-        builder.set多床室(new Decimal(div.getDdlTashoshitsu().getSelectedValue().toString()));
+        builder.set食費負担限度額(
+                div.getDdlShokuhi().getSelectedValue().isNullOrEmpty() ? null : new Decimal(div.getDdlShokuhi().getSelectedValue().toString()));
+        builder.setユニット型個室(
+                div.getDdlUnitGataKoshitsu().getSelectedValue().isNullOrEmpty() ? null : new Decimal(div.getDdlUnitGataKoshitsu().getSelectedValue().toString()));
+        builder.setユニット型準個室(
+                div.getDdlUnitGataJunKoshitsu().getSelectedValue().isNullOrEmpty() ? null : new Decimal(div.getDdlUnitGataJunKoshitsu().getSelectedValue().toString()));
+        builder.set従来型個室_特養等(
+                div.getDdlJuraiGataKoshitsuTokuyo().getSelectedValue().isNullOrEmpty() ? null : new Decimal(div.getDdlJuraiGataKoshitsuTokuyo().getSelectedValue().toString()));
+        builder.set従来型個室_老健_療養等(
+                div.getDdlJuraiGataKoshitsuRoken().getSelectedValue().isNullOrEmpty() ? null : new Decimal(div.getDdlJuraiGataKoshitsuRoken().getSelectedValue().toString()));
+        builder.set多床室(
+                div.getDdlTashoshitsu().getSelectedValue().isNullOrEmpty() ? null : new Decimal(div.getDdlTashoshitsu().getSelectedValue().toString()));
         builder.set非承認理由(div.getTxtHiShoninRiyu().getValue() == null ? RString.EMPTY : div.getTxtHiShoninRiyu().getValue());
         builder.set境界層該当者区分(!div.getChkKyokaiso().getSelectedValues().isEmpty());
         builder.set激変緩和措置対象者区分(!div.getChkGekihenKanwa().getSelectedValues().isEmpty());
@@ -671,7 +679,7 @@ public class FutangendogakuNinteiShinseiHandler {
             return new RString("追加");
         } else if (EntityDataState.Deleted.equals(jotai)) {
             return new RString("削除");
-        } else if (EntityDataState.Added.equals(jotai)) {
+        } else if (EntityDataState.Modified.equals(jotai)) {
             return new RString("修正");
         } else {
             return RString.EMPTY;
