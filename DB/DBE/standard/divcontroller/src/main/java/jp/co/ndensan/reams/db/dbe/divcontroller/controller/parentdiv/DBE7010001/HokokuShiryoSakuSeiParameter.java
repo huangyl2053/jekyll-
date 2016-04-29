@@ -54,35 +54,30 @@ public class HokokuShiryoSakuSeiParameter {
      */
     public ResponseData<HokokuShiryoSakuSeiParameterDiv> onChange_chkShutsuryokuChohyo(HokokuShiryoSakuSeiParameterDiv div) {
         List<RString> disabledItems = new ArrayList<>();
-        for (RString selectedKey : div.getChkShutsuryokuChohyo().getSelectedKeys()) {
-            if (SELECTKEY_KEY0.equals(selectedKey)) {
-                disabledItems.clear();
-                disabledItems.add(SELECTKEY_KEY1);
-                disabledItems.add(SELECTKEY_KEY2);
-                div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
-                div.getCcdHokenshaList().setDisabled(true);
-                div.getDdlGogitaiBango().setDisabled(true);
-                continue;
-            } else {
-                disabledItems.clear();
-                div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
-                div.getCcdHokenshaList().setDisabled(false);
-                div.getDdlGogitaiBango().setDisabled(false);
-            }
-            if (SELECTKEY_KEY1.equals(selectedKey) || SELECTKEY_KEY2.equals(selectedKey)) {
+        if (div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY0)) {
+            disabledItems.clear();
+            disabledItems.add(SELECTKEY_KEY1);
+            disabledItems.add(SELECTKEY_KEY2);
+            div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
+            div.getChkHihokenshaKubun().setDisabled(true);
+            div.getDdlGogitaiBango().setDisabled(true);
+        } else {
+            div.getChkHihokenshaKubun().setDisabled(false);
+            div.getDdlGogitaiBango().setDisabled(false);
+            if (div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY1)
+                    || div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY2)) {
                 disabledItems.clear();
                 disabledItems.add(SELECTKEY_KEY0);
                 div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
-                continue;
             } else {
                 disabledItems.clear();
                 div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
             }
-            if (SELECTKEY_KEY3.equals(selectedKey)) {
-                div.getTxtKijyunYMD().setDisabled(true);
-            } else {
-                div.getTxtKijyunYMD().setDisabled(false);
-            }
+        }
+        if (div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY3)) {
+            div.getTxtKijyunYMD().setDisabled(true);
+        } else {
+            div.getTxtKijyunYMD().setDisabled(false);
         }
         return ResponseData.of(div).respond();
     }
