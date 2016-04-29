@@ -239,7 +239,7 @@ public class FutangendogakuShinsei {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).申請情報を保存する();
-            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().toString()));
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBD1010001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -292,7 +292,11 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnHaigushaJohoSet(FutangendogakuShinseiDiv div) {
-        return getHandler(div).onClick_btnHaigushaJohoSet();
+        if (!ResponseHolder.isReRequest()) {
+            return getHandler(div).onClick_btnHaigushaJohoSet();
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     private FutangendogakuNinteiShinseiHandler getHandler(FutangendogakuShinseiDiv div) {
