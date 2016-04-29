@@ -46,7 +46,7 @@ public class RiyoshaFutangakuGengakuService {
 
     private final MapperProvider mapperProvider;
     private final DbT4001JukyushaDaichoDac dac;
-    RiyoshaFutangakuGengakuManager manager;
+    private RiyoshaFutangakuGengakuManager manager;
     private static final int INDEX_2 = 2;
     private static final int INDEX_4 = 4;
     private static final RString 空白KEY = new RString("-1");
@@ -57,7 +57,7 @@ public class RiyoshaFutangakuGengakuService {
     RiyoshaFutangakuGengakuService() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
         dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
-
+        manager = RiyoshaFutangakuGengakuManager.createInstance();
     }
 
     /**
@@ -173,18 +173,17 @@ public class RiyoshaFutangakuGengakuService {
     public void 保存処理(List<RiyoshaFutangakuGengakuViewState> 削除List, List<RiyoshaFutangakuGengakuViewState> 追加List,
             List<RiyoshaFutangakuGengakuViewState> 修正List, List<RiyoshaFutangakuGengakuViewState> 履歴修正ありList) {
 
-        manager = RiyoshaFutangakuGengakuManager.createInstance();
-        if (削除List.size() > 0) {
+        if (!削除List.isEmpty()) {
             delete(削除List);
         }
-        if (修正List.size() > 0) {
+        if (!修正List.isEmpty()) {
             更新or登録(修正List);
         }
-        if (履歴修正ありList.size() > 0) {
+        if (!履歴修正ありList.isEmpty()) {
             delete(履歴修正ありList);
             更新or登録(履歴修正ありList);
         }
-        if (追加List.size() > 0) {
+        if (!追加List.isEmpty()) {
             更新or登録(追加List);
         }
 
@@ -200,7 +199,8 @@ public class RiyoshaFutangakuGengakuService {
             joho = viewState.getRiyoshaFutangakuGengaku();
 
             if (処理後履歴番号 == joho.get履歴番号()) {
-                dbObject = manager.get利用者負担額減額(RiyoshaFutangakuGengakuMapperParameter.createSelectByKeyParam(joho.get証記載保険者番号(), joho.get被保険者番号(), joho.get履歴番号()));
+                dbObject = manager.get利用者負担額減額(RiyoshaFutangakuGengakuMapperParameter
+                        .createSelectByKeyParam(joho.get証記載保険者番号(), joho.get被保険者番号(), joho.get履歴番号()));
                 update(joho, dbObject);
             } else {
                 joho = joho.createBuilderForEdit().set履歴番号(処理後履歴番号).build();
@@ -291,14 +291,16 @@ public class RiyoshaFutangakuGengakuService {
         RiyoshaFutangakuGengaku object;
         for (RiyoshaFutangakuGengakuViewState viewState : 削除List) {
             joho = viewState.getRiyoshaFutangakuGengaku();
-            object = manager.get利用者負担額減額(RiyoshaFutangakuGengakuMapperParameter.createSelectByKeyParam(joho.get証記載保険者番号(), joho.get被保険者番号(), joho.get履歴番号()));
+            object = manager.get利用者負担額減額(RiyoshaFutangakuGengakuMapperParameter
+                    .createSelectByKeyParam(joho.get証記載保険者番号(), joho.get被保険者番号(), joho.get履歴番号()));
             if (object != null) {
                 manager.delete利用者負担額減額(object);
             }
         }
     }
 
-    private void setGemmenGengakuShinseiBuilder(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder, GemmenGengakuShinsei pageGemmenGengakuShinsei) {
+    private void setGemmenGengakuShinseiBuilder(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder,
+            GemmenGengakuShinsei pageGemmenGengakuShinsei) {
         if (pageGemmenGengakuShinsei.get事業者区分() != null && !空白KEY.equals(pageGemmenGengakuShinsei.get事業者区分())) {
             gemmenGengakuShinseiBuilder.set事業者区分(pageGemmenGengakuShinsei.get事業者区分());
         }
