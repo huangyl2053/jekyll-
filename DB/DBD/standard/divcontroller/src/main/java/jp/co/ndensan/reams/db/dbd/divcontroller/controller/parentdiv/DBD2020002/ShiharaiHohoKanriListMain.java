@@ -11,12 +11,9 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.Shih
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002.ShiharaiHohoKanriListMainHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 
 /**
  * 支払方法変更管理リストのイベントを定義したDivControllerです。
@@ -32,7 +29,7 @@ public class ShiharaiHohoKanriListMain {
      * @param div ShiharaiHohoKanriListMainDiv
      * @return ResponseData
      */
-    public ResponseData<ShiharaiHohoKanriListMainDiv> onLoad(ShiharaiHohoKanriListMainDiv div) {							
+    public ResponseData<ShiharaiHohoKanriListMainDiv> onLoad(ShiharaiHohoKanriListMainDiv div) {						
 
         createHandler(div).onLoad();
         return ResponseData.of(div).respond();						

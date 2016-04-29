@@ -213,7 +213,7 @@ public class ShiharaiHohoKanriListMainHandler {
         div.getDdl2GoSashitomeYokoku().setSelectedKey(DROPDOWNKEY0);
         div.getDdlGoSashitomeToroku().setSelectedKey(DROPDOWNKEY0);
         div.getDdl2GoShokanYokoku().setSelectedKey(DROPDOWNKEY0);
-        div.getDdl1GoShokanKettei().setSelectedKey(DROPDOWNKEY0);;
+        div.getDdl1GoShokanKettei().setSelectedKey(DROPDOWNKEY0);
         div.getDdl1GoShokanKetteiSashitomeAriOnly().setSelectedKey(DROPDOWNKEY0);
         div.getDdl1GoShokanKetteiKojoAriOnly().setSelectedKey(DROPDOWNKEY0);
     }
