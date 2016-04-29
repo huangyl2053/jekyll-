@@ -1,5 +1,6 @@
-package jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

@@ -2,21 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoMukoKubun;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.kanriKubun;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.mukoKubun;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.rirekiNo;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.shoKisaiHokenshaNo;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.tekiyoKaishiYMD;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.tekiyoShuryoYMD;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoMukoKubun;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.kanriKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.mukoKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.shoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.tekiyoKaishiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.tekiyoShuryoYMD;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
