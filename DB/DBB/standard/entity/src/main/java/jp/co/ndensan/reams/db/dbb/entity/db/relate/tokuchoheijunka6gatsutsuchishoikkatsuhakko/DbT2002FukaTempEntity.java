@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt310FindKozaEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,9 +21,6 @@ import lombok.Setter;
 @Getter
 public class DbT2002FukaTempEntity extends DbTableEntityBase<DbT2002FukaTempEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
-    @TableName
-    public static final RString TABLE_NAME = new RString("DbT2002FukaTemp");
 
     // TODO TempEntity 「更正後」計算後情報の全項目
     private DbT2015KeisangoJohoEntity 更正後_計算後情報;
