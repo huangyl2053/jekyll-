@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureishaKubun;
@@ -62,7 +63,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
  * @author N8156 宮本 康
  */
 public class TaishoshaSearch {
- private static final ISearchCondition 条件無 = null;
+
+    private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
 
@@ -355,7 +357,7 @@ public class TaishoshaSearch {
                 被保険者区分 = HihoKubun.適除;
             } else if (資格検索.getTatokureiTekiyoJiyuCode() != null && !資格検索.getTatokureiTekiyoJiyuCode().isEmpty()) {
                 被保険者区分 = HihoKubun.他住;
-            } else if (資格検索.getJushochiTokureiFlag().toString().equals("1")) {
+            } else if (Objects.equals(new RString("1"), 資格検索.getJushochiTokureiFlag())) {
                 被保険者区分 = HihoKubun.自住;
             } else if (資格検索.getJukyushaDaichoHihokenshaNo() != null && !資格検索.getJukyushaDaichoHihokenshaNo().isEmpty()) {
                 被保険者区分 = HihoKubun.受給;
