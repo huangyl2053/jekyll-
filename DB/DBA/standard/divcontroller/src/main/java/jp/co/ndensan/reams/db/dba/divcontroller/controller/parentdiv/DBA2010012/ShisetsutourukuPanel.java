@@ -148,7 +148,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> btnComplete(ShisetsutourukuPanelDiv div) {
-        //TODO: 前排他制御
+        //TODO 前排他制御
 
         return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
     }
@@ -160,7 +160,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> onClick_Search(ShisetsutourukuPanelDiv div) {
-        //TODO: 前排他制御
+        //TODO 前排他制御
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
                     UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
