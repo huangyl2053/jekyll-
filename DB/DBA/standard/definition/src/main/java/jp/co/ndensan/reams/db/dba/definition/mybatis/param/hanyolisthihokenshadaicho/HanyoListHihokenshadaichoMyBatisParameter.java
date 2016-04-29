@@ -367,7 +367,7 @@ public final class HanyoListHihokenshadaichoMyBatisParameter implements IMyBatis
     }
 
     private static boolean has事由(List<RString> 事由) {
-        return 事由 != null && !事由.isEmpty() && 事由.size() > 0;
+        return 事由 != null && !事由.isEmpty();
     }
 
     private static FlexibleDate get宛名抽出年齢開始(FlexibleDate psmAgeKijunni, RString psmChushutsuAge_Start) {
