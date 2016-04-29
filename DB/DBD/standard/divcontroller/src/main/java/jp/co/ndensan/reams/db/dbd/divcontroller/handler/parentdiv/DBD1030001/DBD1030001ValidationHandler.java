@@ -301,7 +301,7 @@ public class DBD1030001ValidationHandler {
                     NoInputMessages.社会福祉法人減免_減免率_分母は100,
                     div.getTxtKeigenRitsuBunbo()).build().check(messages2));
         } else if (特例措置期間開始日.isBeforeOrEquals(適用開始日) && !特例措置期間終了日.isEmpty() && 適用開始日.isBeforeOrEquals(特例措置期間終了日)) {
-            承認情報相関チェック１_15_1(減免率_分子, 居宅サービス限定SelectKeys, div, pairs);
+            承認情報相関チェック１_15_1(居宅サービス限定SelectKeys, div, pairs);
         } else if (!居宅サービス限定SelectKeys.isEmpty() || !旧措置ユニット型個室SelectKeys.isEmpty()) {
             承認情報相関チェック１_15_2(減免率_分母, div, pairs);
         } else {
@@ -364,7 +364,7 @@ public class DBD1030001ValidationHandler {
         }
     }
 
-    private void 承認情報相関チェック１_15_1(Decimal 減免率_分子,
+    private void 承認情報相関チェック１_15_1(
             List<RString> 居宅サービス限定SelectKeys, DBD1030001Div div, ValidationMessageControlPairs pairs) {
         if (!居宅サービス限定SelectKeys.isEmpty() || isすべてがチェックオフ(div)) {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -425,9 +425,9 @@ public class DBD1030001ValidationHandler {
         List<RString> 居宅サービス限定SelectKeys = div.getChkKyotakuServiceGentei().getSelectedKeys();
         List<RString> 居居住費_食費限定SelectKeys = div.getChkKyojuhiShokuhiGentei().getSelectedKeys();
         List<RString> 旧措置ユニット型個室限定SelectKeys = div.getChkKyusochiUnitGataJunKoshitsu().getSelectedKeys();
-        return !is入力内容がある(居宅サービス限定SelectKeys)
-                && !is入力内容がある(居居住費_食費限定SelectKeys)
-                && !is入力内容がある(旧措置ユニット型個室限定SelectKeys);
+        return is入力内容がある(居宅サービス限定SelectKeys)
+                && is入力内容がある(居居住費_食費限定SelectKeys)
+                && is入力内容がある(旧措置ユニット型個室限定SelectKeys);
     }
 
     private FlexibleDate get特例措置期間開始日() {

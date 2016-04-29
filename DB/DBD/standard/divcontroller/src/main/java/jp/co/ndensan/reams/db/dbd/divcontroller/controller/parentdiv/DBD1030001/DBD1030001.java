@@ -45,12 +45,10 @@ public class DBD1030001 {
      * @return ResponseData<DBD1030001Div>
      */
     public ResponseData<DBD1030001Div> onLoad(DBD1030001Div div) {
-        if (!ResponseHolder.isReRequest()) {
-            if (!getHandler(div).onLoad()) {
-                InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
-                        DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        if (!ResponseHolder.isReRequest() && !getHandler(div).onLoad()) {
+            InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
+                    DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         return ResponseData.of(div).respond();
     }

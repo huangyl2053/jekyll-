@@ -282,7 +282,7 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分母は100のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_減免率_分母は100です、false:社会福祉法人減免_減免率_分母は100です。
+                 * @return true:社会福祉法人減免_減免率_分母は100です、false:not社会福祉法人減免_減免率_分母は100です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {

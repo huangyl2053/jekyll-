@@ -106,6 +106,8 @@ public class DBD1030001Handler {
      * @return 初期化完フラグ
      */
     public boolean onLoad() {
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("123456"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123"));
         ShikibetsuCode 識別コード = get識別コードFromViewState();
         HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
         if (被保険者番号.isEmpty()) {
@@ -115,7 +117,7 @@ public class DBD1030001Handler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             return false;
         }
-        div.getCcdAtenaInfo().onLoad(識別コード);
+        //div.getCcdAtenaInfo().onLoad(識別コード);
         div.getCcdShikakuKihon().onLoad(被保険者番号);
         div.getShafukuRiyoshaKeigen().setHihokenshaNo(被保険者番号.getColumnValue());
         RString メニューID = ResponseHolder.getMenuID();
@@ -417,7 +419,14 @@ public class DBD1030001Handler {
     private void 状態６画面表示(dgShinseiList_Row dataSouce, ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態) {
         div.getCcdShinseiJoho().set減免減額申請情報(getShinseiJoho(情報と状態), dataSouce.getTxtShinseiYMD().getValue());
         承認情報エリア画面表示(dataSouce);
-        div.getTxtShinseiYMD().setDisabled(true);
+        RString 状態 = 情報と状態.get状態();
+        if (状態_追加.equals(状態)) {
+            div.getTxtShinseiYMD().setDisabled(false);
+            div.getTxtShinseiRiyu().setDisabled(false);
+        } else {
+            div.getTxtShinseiYMD().setDisabled(true);
+            div.getTxtShinseiRiyu().setDisabled(true);
+        }
         div.getBtnShowSetaiJoho().setDisabled(false);
         div.getBtnShowGenmenJoho().setDisabled(false);
         div.getBtnBackToShinseiList().setDisabled(false);
@@ -1366,8 +1375,8 @@ public class DBD1030001Handler {
      */
     public void onClick_onBlur() {
         FlexibleDate 適用日 = div.getTxtTekiyoYMD().getValue();
-        if (null == 適用日) {
-            適用日 = FlexibleDate.EMPTY;
+        if (null == 適用日 || 適用日.isEmpty()) {
+            return;
         }
         FlexibleDate 有効期限 = ShakaiFukushiHojinKeigenService.createIntance().estimate有効期限(適用日);
         div.getTxtYukoKigenYMD().setValue(有効期限);
