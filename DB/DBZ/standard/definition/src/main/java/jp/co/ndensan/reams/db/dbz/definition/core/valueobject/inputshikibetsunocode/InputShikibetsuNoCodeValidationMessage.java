@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum InputShikibetsuNoCodeValidationMessage implements IValidationMessage {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
+    /**
+     * メッセージ:TODO 一つ目の要素が定義されたらこの要素は削除する。
+     */
     ダミーメッセージ(UrInformationMessages.該当データなし);
     private final Message message;
 
