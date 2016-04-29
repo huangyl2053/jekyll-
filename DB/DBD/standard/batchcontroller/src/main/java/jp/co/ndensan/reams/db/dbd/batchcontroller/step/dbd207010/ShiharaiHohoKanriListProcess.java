@@ -7,27 +7,8 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd207010;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 
 /**
  * 支払方法変更管理リスト作成_バッチフ処理クラスです。
@@ -37,15 +18,12 @@ import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 public class ShiharaiHohoKanriListProcess extends BatchProcessBase {
 
 
-    static {
-        
-    }
 //    private OutputParameter<List<ShikakuIdoTaishoshaEntity>> ShiharaiHohoKanriList;
 
-    @Override
-    protected void beforeExecute() {
-        
-    }
+//    @Override
+//    protected void beforeExecute() {
+//        
+//    }
 
     @Override
     protected void process(Object t) {
@@ -68,7 +46,8 @@ public class ShiharaiHohoKanriListProcess extends BatchProcessBase {
     }
 
     private void set出力条件表() {
-//        List 出力条件 = new ArrayList();
+        List 出力条件 = new ArrayList();
+        出力条件.add("");
 //        出力条件.add(processPrm.getTemp_保険者コード());
 //        出力条件.add(processPrm.getTemp_保険者名称());
 //        出力条件.add(processPrm.getTemp_主治医医療機関コード());
