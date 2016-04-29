@@ -29,10 +29,10 @@ public class ShiharaiHohoKanriListMain {
      * @param div ShiharaiHohoKanriListMainDiv
      * @return ResponseData
      */
-    public ResponseData<ShiharaiHohoKanriListMainDiv> onLoad(ShiharaiHohoKanriListMainDiv div) {						
+    public ResponseData<ShiharaiHohoKanriListMainDiv> onLoad(ShiharaiHohoKanriListMainDiv div) {
 
         createHandler(div).onLoad();
-        return ResponseData.of(div).respond();						
+        return ResponseData.of(div).respond();
     }
 
     private ShiharaiHohoKanriListMainHandler createHandler(ShiharaiHohoKanriListMainDiv div) {
@@ -45,9 +45,9 @@ public class ShiharaiHohoKanriListMain {
      * @param div ShiharaiHohoKanriListMainDiv のクラスファイル
      * @return ResponseData<ShiharaiHohoKanriListMainDiv>
      */
-    public ResponseData<ShiharaiHohoKanriListMainDiv> onChange_radTorokusha(ShiharaiHohoKanriListMainDiv div) {					
+    public ResponseData<ShiharaiHohoKanriListMainDiv> onChange_radTorokusha(ShiharaiHohoKanriListMainDiv div) {
         createHandler(div).onChange_radTorokusha();
-        return ResponseData.of(div).respond();						
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -56,9 +56,9 @@ public class ShiharaiHohoKanriListMain {
      * @param div ShiharaiHohoKanriListMainDiv のクラスファイル
      * @return ResponseData<ShiharaiHohoKanriListMainDiv>
      */
-    public ResponseData<Dbd207010BatchFlowParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {	
-        ResponseData<Dbd207010BatchFlowParameter> responseData = new ResponseData<>();        
-        responseData.data = createHandler(div).batchParameter();       
+    public ResponseData<Dbd207010BatchFlowParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {
+        ResponseData<Dbd207010BatchFlowParameter> responseData = new ResponseData<>();
+        responseData.data = createHandler(div).batchParameter();
         return responseData;
     }
 
