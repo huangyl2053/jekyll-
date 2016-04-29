@@ -215,7 +215,9 @@ public class DBD1030001Handler {
     }
 
     private void setDataSource(dgShinseiList_Row dataSource, ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報) {
-        if (社会福祉法人等利用者負担軽減情報.get軽減率_分子() != null && 社会福祉法人等利用者負担軽減情報.get軽減率_分母() != null) {
+        if (社会福祉法人等利用者負担軽減情報.get軽減率_分子() != null
+                && 社会福祉法人等利用者負担軽減情報.get軽減率_分母() != null
+                && 社会福祉法人等利用者負担軽減情報.get軽減率_分母().compareTo(Decimal.ZERO) != 0) {
             dataSource.setKeigenRitsu(new RString(社会福祉法人等利用者負担軽減情報.get軽減率_分子().toString())
                     .concat("/").concat(社会福祉法人等利用者負担軽減情報.get軽減率_分母().toString()));
         }
@@ -300,6 +302,7 @@ public class DBD1030001Handler {
     }
 
     private void 状態５画面表示() {
+        div.getTxtShinseiYMD().setDisabled(false);
         div.getTxtShinseiYMD().setValue(FlexibleDate.EMPTY);
         div.getTxtShinseiRiyu().setValue(RString.EMPTY);
         div.getRadKetteiKubun().setSelectedKey(KEY0);
@@ -930,52 +933,37 @@ public class DBD1030001Handler {
         ShakaifukuRiyoshaFutanKeigen 情報 = 編集情報.get社会福祉法人等利用者負担軽減情報();
         ShakaifukuRiyoshaFutanKeigenBuilder builder = 情報.createBuilderForEdit();
         boolean 変更ある = 軽減率_分母_分子Builder(builder, 画面社会福祉法人等利用者負担軽減申請情報, 情報);
-        変更ある = set修正後社会福祉法人等利用者負担軽減申請情報(builder, 変更ある, 画面社会福祉法人等利用者負担軽減申請情報, 情報);
-        if (null == 情報.get適用終了年月日()) {
-            if (画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日() != null
-                    && !画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日().isEmpty()) {
-                builder.set適用終了年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日());
+        boolean is承認しない = false;
+        if (null == 情報.get決定区分()) {
+            if (画面社会福祉法人等利用者負担軽減申請情報.get決定区分() != null && !画面社会福祉法人等利用者負担軽減申請情報.get決定区分().isEmpty()) {
+                builder.set決定区分(画面社会福祉法人等利用者負担軽減申請情報.get決定区分());
                 変更ある = true;
             }
-        } else if (!情報.get適用終了年月日().equals(画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日())) {
-            builder.set適用終了年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日());
+        } else if (!情報.get決定区分().equals(画面社会福祉法人等利用者負担軽減申請情報.get決定区分())) {
+            builder.set決定区分(画面社会福祉法人等利用者負担軽減申請情報.get決定区分());
             変更ある = true;
+        } else {
+            builder.set決定区分(情報.get決定区分());
+            if (承認しない.equals(画面社会福祉法人等利用者負担軽減申請情報.get決定区分())) {
+                is承認しない = true;
+            }
         }
-        if (null == 情報.get適用開始年月日()) {
-            if (画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日() != null
-                    && !画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日().isEmpty()) {
-                builder.set適用開始年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日());
+        if (!is承認しない) {
+            変更ある = set修正後社会福祉法人等利用者負担軽減申請情報(builder, 変更ある, 画面社会福祉法人等利用者負担軽減申請情報, 情報);
+            if (set修正後社会福祉法人等利用者負担軽減申請情報By承認する(builder, 画面社会福祉法人等利用者負担軽減申請情報, 情報)) {
                 変更ある = true;
             }
-        } else if (!情報.get適用開始年月日().equals(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日())) {
-            builder.set適用開始年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日());
-            変更ある = true;
-        }
-        if (null == 情報.get非承認理由()) {
-            if (画面社会福祉法人等利用者負担軽減申請情報.get非承認理由() != null
-                    && !画面社会福祉法人等利用者負担軽減申請情報.get非承認理由().isEmpty()) {
+        } else {
+            if (null == 情報.get非承認理由()) {
+                if (画面社会福祉法人等利用者負担軽減申請情報.get非承認理由() != null
+                        && !画面社会福祉法人等利用者負担軽減申請情報.get非承認理由().isEmpty()) {
+                    builder.set非承認理由(画面社会福祉法人等利用者負担軽減申請情報.get非承認理由());
+                    変更ある = true;
+                }
+            } else if (!情報.get非承認理由().equals(画面社会福祉法人等利用者負担軽減申請情報.get非承認理由())) {
                 builder.set非承認理由(画面社会福祉法人等利用者負担軽減申請情報.get非承認理由());
                 変更ある = true;
             }
-        } else if (!情報.get非承認理由().equals(画面社会福祉法人等利用者負担軽減申請情報.get非承認理由())) {
-            builder.set非承認理由(画面社会福祉法人等利用者負担軽減申請情報.get非承認理由());
-            変更ある = true;
-        }
-        if (情報.is生保扶助見直し特例有無() != 画面社会福祉法人等利用者負担軽減申請情報.is生保扶助見直し特例有無()) {
-            builder.set生保扶助見直し特例有無(画面社会福祉法人等利用者負担軽減申請情報.is生保扶助見直し特例有無());
-            変更ある = true;
-        }
-        if (情報.is居宅サービス限定() != 画面社会福祉法人等利用者負担軽減申請情報.is居宅サービス限定()) {
-            builder.set居宅サービス限定(画面社会福祉法人等利用者負担軽減申請情報.is居宅サービス限定());
-            変更ある = true;
-        }
-        if (情報.is居住費_食費のみ() != 画面社会福祉法人等利用者負担軽減申請情報.is居住費_食費のみ()) {
-            builder.set居住費_食費のみ(画面社会福祉法人等利用者負担軽減申請情報.is居住費_食費のみ());
-            変更ある = true;
-        }
-        if (情報.is旧措置者ユニット型個室のみ() != 画面社会福祉法人等利用者負担軽減申請情報.is旧措置者ユニット型個室のみ()) {
-            builder.set旧措置者ユニット型個室のみ(画面社会福祉法人等利用者負担軽減申請情報.is旧措置者ユニット型個室のみ());
-            変更ある = true;
         }
         List<GemmenGengakuShinsei> gemmenGengakuShinseiList = 画面社会福祉法人等利用者負担軽減申請情報.getGemmenGengakuShinseiList();
         GemmenGengakuShinsei 減免減額申請;
@@ -996,6 +984,48 @@ public class DBD1030001Handler {
         RString 編集前状態 = 編集情報.get状態();
         ShakaifukuRiyoshaFutanKeigen 編集後情報 = builder.build();
         return get編集後情報と状態By編集後情報(編集後情報, 変更ある, 編集前状態);
+    }
+
+    private boolean set修正後社会福祉法人等利用者負担軽減申請情報By承認する(ShakaifukuRiyoshaFutanKeigenBuilder builder,
+            ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報, ShakaifukuRiyoshaFutanKeigen 情報) {
+        boolean 変更ある = false;
+        if (null == 情報.get適用終了年月日()) {
+            if (画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日() != null
+                    && !画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日().isEmpty()) {
+                builder.set適用終了年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日());
+                変更ある = true;
+            }
+        } else if (!情報.get適用終了年月日().equals(画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日())) {
+            builder.set適用終了年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用終了年月日());
+            変更ある = true;
+        }
+        if (null == 情報.get適用開始年月日()) {
+            if (画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日() != null
+                    && !画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日().isEmpty()) {
+                builder.set適用開始年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日());
+                変更ある = true;
+            }
+        } else if (!情報.get適用開始年月日().equals(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日())) {
+            builder.set適用開始年月日(画面社会福祉法人等利用者負担軽減申請情報.get適用開始年月日());
+            変更ある = true;
+        }
+        if (情報.is生保扶助見直し特例有無() != 画面社会福祉法人等利用者負担軽減申請情報.is生保扶助見直し特例有無()) {
+            builder.set生保扶助見直し特例有無(画面社会福祉法人等利用者負担軽減申請情報.is生保扶助見直し特例有無());
+            変更ある = true;
+        }
+        if (情報.is居宅サービス限定() != 画面社会福祉法人等利用者負担軽減申請情報.is居宅サービス限定()) {
+            builder.set居宅サービス限定(画面社会福祉法人等利用者負担軽減申請情報.is居宅サービス限定());
+            変更ある = true;
+        }
+        if (情報.is居住費_食費のみ() != 画面社会福祉法人等利用者負担軽減申請情報.is居住費_食費のみ()) {
+            builder.set居住費_食費のみ(画面社会福祉法人等利用者負担軽減申請情報.is居住費_食費のみ());
+            変更ある = true;
+        }
+        if (情報.is旧措置者ユニット型個室のみ() != 画面社会福祉法人等利用者負担軽減申請情報.is旧措置者ユニット型個室のみ()) {
+            builder.set旧措置者ユニット型個室のみ(画面社会福祉法人等利用者負担軽減申請情報.is旧措置者ユニット型個室のみ());
+            変更ある = true;
+        }
+        return 変更ある;
     }
 
     private boolean 減免減額申請変更(GemmenGengakuShinsei 減免減額申請, GemmenGengakuShinsei 画面減免減額申請) {
@@ -1085,17 +1115,6 @@ public class DBD1030001Handler {
     private boolean set修正後社会福祉法人等利用者負担軽減申請情報(ShakaifukuRiyoshaFutanKeigenBuilder builder, boolean is変更ある,
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報, ShakaifukuRiyoshaFutanKeigen 情報) {
         boolean 変更ある = false;
-        if (null == 情報.get決定区分()) {
-            if (画面社会福祉法人等利用者負担軽減申請情報.get決定区分() != null && !画面社会福祉法人等利用者負担軽減申請情報.get決定区分().isEmpty()) {
-                builder.set決定区分(画面社会福祉法人等利用者負担軽減申請情報.get決定区分());
-                変更ある = true;
-            }
-        } else if (!情報.get決定区分().equals(画面社会福祉法人等利用者負担軽減申請情報.get決定区分())) {
-            builder.set決定区分(画面社会福祉法人等利用者負担軽減申請情報.get決定区分());
-            変更ある = true;
-        } else {
-            builder.set決定区分(情報.get決定区分());
-        }
         if (null == 情報.get決定年月日()) {
             if (画面社会福祉法人等利用者負担軽減申請情報.get決定年月日() != null && !画面社会福祉法人等利用者負担軽減申請情報.get決定年月日().isEmpty()) {
                 builder.set決定年月日(画面社会福祉法人等利用者負担軽減申請情報.get決定年月日());
@@ -1171,7 +1190,7 @@ public class DBD1030001Handler {
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報, ShakaifukuRiyoshaFutanKeigen 情報) {
         boolean 変更ある = false;
         if (null == 画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分子()) {
-            if (情報.get軽減率_分子() != null) {
+            if (情報.get軽減率_分子() != null && 情報.get軽減率_分子().compareTo(Decimal.ZERO) != 0) {
                 変更ある = true;
             }
         } else {
@@ -1184,7 +1203,7 @@ public class DBD1030001Handler {
             }
         }
         if (null == 画面社会福祉法人等利用者負担軽減申請情報.get軽減率_分母()) {
-            if (情報.get軽減率_分母() != null) {
+            if (情報.get軽減率_分母() != null && 情報.get軽減率_分母().compareTo(Decimal.ZERO) != 0) {
                 変更ある = true;
             }
         } else {
@@ -1281,7 +1300,7 @@ public class DBD1030001Handler {
         PersonalData personalData = PersonalData.of(get識別コードFromViewState(),
                 new ExpandedInformation(CODE_0003, NAME_被保険者番号, get被保険者番号FromViewState().getColumnValue()));
         AccessLogger.log(AccessLogType.更新, personalData);
-        ShakaiFukushiHojinKeigenManager.createIntance().更新処理(情報と状態ArrayList, ResponseHolder.getMenuID());
+        ShakaiFukushiHojinKeigenManager.createIntance().更新処理(情報と状態ArrayList, 申請メニューID.equals(ResponseHolder.getMenuID()));
         前排他の解除();
         div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
     }

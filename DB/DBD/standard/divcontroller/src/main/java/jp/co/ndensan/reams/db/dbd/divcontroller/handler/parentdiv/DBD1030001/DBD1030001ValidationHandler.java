@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -451,36 +450,36 @@ public class DBD1030001ValidationHandler {
 
     private static enum NoInputMessages implements IValidationMessage {
 
-        申請日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "申請日"),
-        軽減事由の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "軽減事由"),
-        確認番号の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "確認番号"),
-        決定区分の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定区分"),
-        決定日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定日"),
-        適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "適用日"),
-        有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "有効期限"),
-        軽減率_分子の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "軽減率（分子）"),
-        軽減率_分母の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "軽減率（分母）"),
-        給付率の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "給付率"),
-        減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
-        減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
-        減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),
-        社会福祉法人減免_減免率_分子が分母より大(DbdErrorMessages.社会福祉法人減免_減免率_分子が分母より大),
+        申請日の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "申請日"),
+        軽減事由の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "軽減事由"),
+        確認番号の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "確認番号"),
+        決定区分の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "決定区分"),
+        決定日の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "決定日"),
+        適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "適用日"),
+        有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "有効期限"),
+        軽減率_分子の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "軽減率（分子）"),
+        軽減率_分母の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "軽減率（分母）"),
+        給付率の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "給付率"),
+        減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前.getMessage()),
+        減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外.getMessage()),
+        減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前.getMessage()),
+        社会福祉法人減免_減免率_分子が分母より大(DbdErrorMessages.社会福祉法人減免_減免率_分子が分母より大.getMessage()),
         社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択(
-                DbdErrorMessages.社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択),
-        受給共通_受給者_事業対象者登録なし(DbdErrorMessages.受給共通_受給者_事業対象者登録なし),
-        社会福祉法人減免_減免率_分子は1桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は1桁整数),
-        社会福祉法人減免_減免率_分母は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分母は2桁整数),
-        社会福祉法人減免_減免率_分子は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は2桁整数),
-        社会福祉法人減免_減免率_分母は100(DbdErrorMessages.社会福祉法人減免_減免率_分母は100),
-        社会福祉法人減免_減免率_分子は1から99の範囲(DbdErrorMessages.社会福祉法人減免_減免率_分子は1から99の範囲),
-        減免減額_確認番号が既に存在(DbdErrorMessages.減免減額_確認番号が既に存在),
-        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複),
-        社会福祉法人減免_軽減率_特例措置期間(DbdWarningMessages.社会福祉法人減免_軽減率_特例措置期間),
-        社会福祉法人減免_非生活保護者_軽減率100(DbdWarningMessages.社会福祉法人減免_非生活保護者_軽減率100);
+                DbdErrorMessages.社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択.getMessage()),
+        受給共通_受給者_事業対象者登録なし(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage()),
+        社会福祉法人減免_減免率_分子は1桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は1桁整数.getMessage()),
+        社会福祉法人減免_減免率_分母は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分母は2桁整数.getMessage()),
+        社会福祉法人減免_減免率_分子は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は2桁整数.getMessage()),
+        社会福祉法人減免_減免率_分母は100(DbdErrorMessages.社会福祉法人減免_減免率_分母は100.getMessage()),
+        社会福祉法人減免_減免率_分子は1から99の範囲(DbdErrorMessages.社会福祉法人減免_減免率_分子は1から99の範囲.getMessage()),
+        減免減額_確認番号が既に存在(DbdErrorMessages.減免減額_確認番号が既に存在.getMessage()),
+        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複.getMessage()),
+        社会福祉法人減免_軽減率_特例措置期間(DbdWarningMessages.社会福祉法人減免_軽減率_特例措置期間.getMessage()),
+        社会福祉法人減免_非生活保護者_軽減率100(DbdWarningMessages.社会福祉法人減免_非生活保護者_軽減率100.getMessage());
         private final Message message;
 
-        private NoInputMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
+        private NoInputMessages(Message message, String... replacements) {
+            this.message = message.replace(replacements);
         }
 
         @Override

@@ -358,6 +358,7 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                     for (ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 : 情報と状態ArrayList) {
                         ShakaifukuRiyoshaFutanKeigen 情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
                         if (new RString("追加").equals(情報と状態.get状態())
+                        && new RString("1").equals(情報.get決定区分())
                         && ShakaiFukushiHojinKeigenService.createIntance()
                         .exsits確認番号In同一年度(情報.get確認番号(), 情報.get適用開始年月日())) {
                             return false;

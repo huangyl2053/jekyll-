@@ -39,7 +39,6 @@ public class ShakaiFukushiHojinKeigenManager {
     private final RString 状態_修正 = new RString("修正");
     private final RString 状態_削除 = new RString("削除");
     private final RString 承認する = new RString("1");
-    private static final RString 申請メニューID = new RString("DBDMN21004");
 
     /**
      * コンストラクタです。
@@ -61,13 +60,13 @@ public class ShakaiFukushiHojinKeigenManager {
      * 更新処理です。
      *
      * @param 情報と状態ArrayList 情報と状態
-     * @param メニューID メニューID
+     * @param isメニューID isメニューID
      */
     @Transaction
-    public void 更新処理(ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList, RString メニューID) {
+    public void 更新処理(ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList, boolean isメニューID) {
         boolean isすべて履歴番号変更 = false;
-        if (!申請メニューID.equals(メニューID) && !情報と状態ArrayList.isEmpty()) {
-            ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態ArrayList.get(0);
+        if (!isメニューID && !情報と状態ArrayList.isEmpty()) {
+            ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態ArrayList.get(情報と状態ArrayList.size() - 1);
             if (!情報と状態.get状態().isEmpty() && 情報と状態.get新履歴番号() == 0) {
                 isすべて履歴番号変更 = true;
             }
@@ -81,10 +80,10 @@ public class ShakaiFukushiHojinKeigenManager {
                 if (状態_削除.equals(状態)) {
                     削除処理(社会福祉法人等利用者負担軽減情報);
                 } else if (状態_追加.equals(状態)) {
-                    追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), メニューID);
+                    追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), isメニューID);
                 } else {
                     削除処理(社会福祉法人等利用者負担軽減情報);
-                    追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), メニューID);
+                    追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), isメニューID);
                 }
                 continue;
             }
@@ -92,16 +91,16 @@ public class ShakaiFukushiHojinKeigenManager {
                 削除処理(社会福祉法人等利用者負担軽減情報);
             } else if (状態_修正.equals(状態)) {
                 if (履歴番号 == 社会福祉法人等利用者負担軽減情報.get履歴番号()) {
-                    修正処理(社会福祉法人等利用者負担軽減情報, メニューID);
+                    修正処理(社会福祉法人等利用者負担軽減情報, isメニューID);
                 } else {
                     削除処理(社会福祉法人等利用者負担軽減情報);
-                    追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), メニューID);
+                    追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), isメニューID);
                 }
             } else if (状態_追加.equals(状態)) {
-                追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), メニューID);
+                追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), isメニューID);
             } else if (履歴番号 != 社会福祉法人等利用者負担軽減情報.get履歴番号()) {
                 削除処理(社会福祉法人等利用者負担軽減情報);
-                追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), メニューID);
+                追加処理(get社会福祉法人等利用者負担軽減情報ByChange履歴番号(社会福祉法人等利用者負担軽減情報, 履歴番号), isメニューID);
             }
         }
     }
@@ -118,10 +117,18 @@ public class ShakaiFukushiHojinKeigenManager {
         if (社会福祉法人等利用者負担軽減情報.get決定区分() != null) {
             builder.set決定区分(社会福祉法人等利用者負担軽減情報.get決定区分());
         }
-        builder.set決定年月日(社会福祉法人等利用者負担軽減情報.get決定年月日());
-        builder.set適用開始年月日(社会福祉法人等利用者負担軽減情報.get適用開始年月日());
-        builder.set適用終了年月日(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
-        builder.set減免区分(社会福祉法人等利用者負担軽減情報.get減免区分());
+        if (社会福祉法人等利用者負担軽減情報.get決定区分() != null) {
+            builder.set決定年月日(社会福祉法人等利用者負担軽減情報.get決定年月日());
+        }
+        if (社会福祉法人等利用者負担軽減情報.get適用開始年月日() != null) {
+            builder.set適用開始年月日(社会福祉法人等利用者負担軽減情報.get適用開始年月日());
+        }
+        if (社会福祉法人等利用者負担軽減情報.get適用終了年月日() != null) {
+            builder.set適用終了年月日(社会福祉法人等利用者負担軽減情報.get適用終了年月日());
+        }
+        if (社会福祉法人等利用者負担軽減情報.get減免区分() != null) {
+            builder.set減免区分(社会福祉法人等利用者負担軽減情報.get減免区分());
+        }
         if (社会福祉法人等利用者負担軽減情報.get軽減率_分子() != null) {
             builder.set軽減率_分子(社会福祉法人等利用者負担軽減情報.get軽減率_分子());
         }
@@ -132,8 +139,12 @@ public class ShakaiFukushiHojinKeigenManager {
         builder.set居宅サービス限定(社会福祉法人等利用者負担軽減情報.is居宅サービス限定());
         builder.set居住費_食費のみ(社会福祉法人等利用者負担軽減情報.is居住費_食費のみ());
         builder.set旧措置者ユニット型個室のみ(社会福祉法人等利用者負担軽減情報.is旧措置者ユニット型個室のみ());
-        builder.set確認番号(社会福祉法人等利用者負担軽減情報.get確認番号());
-        builder.set非承認理由(社会福祉法人等利用者負担軽減情報.get非承認理由());
+        if (社会福祉法人等利用者負担軽減情報.get確認番号() != null) {
+            builder.set確認番号(社会福祉法人等利用者負担軽減情報.get確認番号());
+        }
+        if (社会福祉法人等利用者負担軽減情報.get非承認理由() != null) {
+            builder.set非承認理由(社会福祉法人等利用者負担軽減情報.get非承認理由());
+        }
         builder.set生活保護受給有無(社会福祉法人等利用者負担軽減情報.is生活保護受給有無());
         builder.set老齢福祉年金受給有無(社会福祉法人等利用者負担軽減情報.is老齢福祉年金受給有無());
         List<GemmenGengakuShinsei> gemmenGengakuShinseiList = 社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList();
@@ -180,14 +191,14 @@ public class ShakaiFukushiHojinKeigenManager {
         return gemmenGengakuShinseiBuilder.build();
     }
 
-    private void 修正処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報, RString メニューID) {
+    private void 修正処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報, boolean isメニューID) {
         ShakaifukuRiyoshaFutanKeigen 修正社会福祉法人等利用者負担軽減情報
                 = manager.get社会福祉法人等利用者負担軽減(ShafukuRiyoshaFutanKeigenMapperParameter.createSelectByKeyParam(
                                 社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
                                 社会福祉法人等利用者負担軽減情報.get被保険者番号(),
                                 社会福祉法人等利用者負担軽減情報.get履歴番号()));
         ShakaifukuRiyoshaFutanKeigenBuilder builder = 修正社会福祉法人等利用者負担軽減情報.createBuilderForEdit();
-        edit修正社会福祉法人等利用者負担軽減情報(社会福祉法人等利用者負担軽減情報, builder, メニューID);
+        edit修正社会福祉法人等利用者負担軽減情報(社会福祉法人等利用者負担軽減情報, builder, isメニューID);
         List<GemmenGengakuShinsei> 減免減額申請リスト = 修正社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList();
         if (減免減額申請リスト.isEmpty()) {
             減免減額申請リスト.add(new GemmenGengakuShinsei(
@@ -204,8 +215,8 @@ public class ShakaiFukushiHojinKeigenManager {
 
     private void edit修正社会福祉法人等利用者負担軽減情報(
             ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報,
-            ShakaifukuRiyoshaFutanKeigenBuilder builder, RString メニューID) {
-        if (申請メニューID.equals(メニューID)) {
+            ShakaifukuRiyoshaFutanKeigenBuilder builder, boolean isメニューID) {
+        if (isメニューID) {
             builder.set申請年月日(社会福祉法人等利用者負担軽減情報.get申請年月日());
             if (社会福祉法人等利用者負担軽減情報.get申請事由() != null) {
                 builder.set申請事由(社会福祉法人等利用者負担軽減情報.get申請事由());
@@ -301,8 +312,8 @@ public class ShakaiFukushiHojinKeigenManager {
         manager.delete社会福祉法人等利用者負担軽減By減免減額種類(削除社会福祉法人等利用者負担軽減情報, GemmenGengakuShurui.社会福祉法人等軽減.getコード());
     }
 
-    private void 追加処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報, RString メニューID) {
-        if (申請メニューID.equals(メニューID)) {
+    private void 追加処理(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報, boolean isメニューID) {
+        if (isメニューID) {
             ShakaifukuRiyoshaFutanKeigen new社会福祉法人等利用者負担軽減情報 = new ShakaifukuRiyoshaFutanKeigen(
                     社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
                     社会福祉法人等利用者負担軽減情報.get被保険者番号(),
