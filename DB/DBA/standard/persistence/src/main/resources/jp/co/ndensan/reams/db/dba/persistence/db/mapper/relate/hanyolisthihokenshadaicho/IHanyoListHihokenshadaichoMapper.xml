@@ -43,7 +43,7 @@
         LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
             ON DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
             AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{kijunni}
-            AND DbT4001."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{kijunni}
+            AND #{kijunni} <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
             AND DbT4001."yokaigoJotaiKubunCode" <![CDATA[<>]]> '01'
             AND DbT4001."yukoMukoKubun" = '1'
             AND DbT4001."logicalDeletedFlag" = False
@@ -55,27 +55,27 @@
                 AND "ShikibetsuTaisho"."seinengappiYMD"  <![CDATA[<=]]> #{宛名抽出年齢開始}
             </if>
             <if test="has年齢終了">
-                AND "ShikibetsuTaisho"."seinengappiYMD"  <![CDATA[>=]]> #{宛名抽出年齢終了}
+                AND #{宛名抽出年齢終了} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD" 
             </if>
         </if>
         <if test="is生年月日">
             <if test="has生年月日開始">
-                AND "ShikibetsuTaisho"."seinengappiYMD"  <![CDATA[>=]]> #{psmSeinengappiYMD_Start}
+                AND #{psmSeinengappiYMD_Start} <![CDATA[<=]]> "ShikibetsuTaisho"."seinengappiYMD"
             </if>
             <if test="has生年月日終了">
                 AND "ShikibetsuTaisho"."seinengappiYMD"  <![CDATA[<=]]> #{psmSeinengappiYMD_End}
             </if>
         </if>
         <if test="is住所">
-            AND "ShikibetsuTaisho"."zenkokuJushoCode"  <![CDATA[>=]]> #{psmJusho_From}
+            AND #{psmJusho_From} <![CDATA[<=]]> "ShikibetsuTaisho"."zenkokuJushoCode"
             AND "ShikibetsuTaisho"."zenkokuJushoCode"  <![CDATA[<=]]> #{psmJusho_To}
         </if>
         <if test="is行政区">
-            AND "ShikibetsuTaisho"."gyoseikuCode"  <![CDATA[>=]]> #{psmGyoseiku_From}
+            AND #{psmGyoseiku_From}  <![CDATA[<=]]> "ShikibetsuTaisho"."gyoseikuCode"
             AND "ShikibetsuTaisho"."gyoseikuCode"  <![CDATA[<=]]> #{psmGyoseiku_To}
         </if>
         <if test="is地区">
-            AND "ShikibetsuTaisho"."chikuCode1"  <![CDATA[>=]]> #{psmChiku1_From}
+            AND #{psmChiku1_From} <![CDATA[<=]]> "ShikibetsuTaisho"."chikuCode1"
             AND "ShikibetsuTaisho"."chikuCode1"  <![CDATA[<=]]> #{psmChiku1_To}
         </if>
         LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
@@ -91,27 +91,27 @@
         </if>
         <if test="is基準日">
             <if test="is資格取得日">
-                AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> #{kijunni} AND (DbT1001."shikakuSoshitsuYMD" <![CDATA[>]]> #{kijunni} OR DbT1001."shikakuSoshitsuYMD" IS NULL)
+                AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> #{kijunni} AND (#{kijunni} <![CDATA[<]]> DbT1001."shikakuSoshitsuYMD" OR DbT1001."shikakuSoshitsuYMD" IS NULL)
             </if>
             <if test="is資格取得届出日">
-                AND DbT1001."shikakuShutokuTodokedeYMD" <![CDATA[<=]]> #{kijunni} AND (DbT1001."shikakuSoshitsuTodokedeYMD" <![CDATA[>=]]> #{kijunni} OR DbT1001."shikakuSoshitsuTodokedeYMD" IS NULL)
+                AND DbT1001."shikakuShutokuTodokedeYMD" <![CDATA[<=]]> #{kijunni} AND (#{kijunni} <![CDATA[<=]]> DbT1001."shikakuSoshitsuTodokedeYMD" OR DbT1001."shikakuSoshitsuTodokedeYMD" IS NULL)
             </if>
         </if>
         <if test="is範囲">
             <if test="is取得日">
-                AND DbT1001."shikakuShutokuYMD"  <![CDATA[>=]]> #{rangeChushutsuhiFrom}
+                AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
                 AND DbT1001."shikakuShutokuYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
             </if>
             <if test="is取得届出日">
-                AND DbT1001."shikakuShutokuTodokedeYMD"  <![CDATA[>=]]> #{rangeChushutsuhiFrom}
+                AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuShutokuTodokedeYMD"
                 AND DbT1001."shikakuShutokuTodokedeYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
             </if>
             <if test="is喪失日">
-                AND DbT1001."shikakuSoshitsuYMD"  <![CDATA[>=]]> #{rangeChushutsuhiFrom}
+                AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuSoshitsuYMD"
                 AND DbT1001."shikakuSoshitsuYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
             </if>
             <if test="is喪失届出日">
-                AND DbT1001."shikakuSoshitsuTodokedeYMD"  <![CDATA[>=]]> #{rangeChushutsuhiFrom}
+                AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuSoshitsuTodokedeYMD"
                 AND DbT1001."shikakuSoshitsuTodokedeYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
             </if>
         </if>
@@ -160,7 +160,7 @@
             </if>
         )
         <if test="isEmpty">
-                AND DbT4001."hihokenshaNo" = IS NULL
+                AND DbT4001."hihokenshaNo" IS NULL
         </if>
     </select>
 </mapper>

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisthihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -158,7 +157,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
     @CsvField(order = 620, name = "住所地特例状態")
     private final RString 住所地特例状態;
     @CsvField(order = 630, name = "資格_証記載保険者番号")
-    private final ShoKisaiHokenshaNo 資格_証記載保険者番号;
+    private final RString 資格_証記載保険者番号;
 
     /**
      * コンストラクタ。
@@ -292,7 +291,7 @@ public class HanyoListHihokenshadaichoCSVEntity {
             RString 資格喪失届日,
             RString 資格区分,
             RString 住所地特例状態,
-            ShoKisaiHokenshaNo 資格_証記載保険者番号) {
+            RString 資格_証記載保険者番号) {
         this.連番 = 連番;
         this.識別コード = 識別コード;
         this.住民種別 = 住民種別;

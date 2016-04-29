@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisthihokenshadaicho.Han
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -295,11 +294,11 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         }
         if (!Chiku.全て.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
             if (Chiku.住所.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                get条件(住所, getFrom_To(mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_To()));
+                出力条件.add(get条件(住所, getFrom_To(mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_To())));
             } else if (Chiku.行政区.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                get条件(行政区, getFrom_To(mybatisPrm.getPsmGyoseiku_From(), mybatisPrm.getPsmGyoseiku_To()));
+                出力条件.add(get条件(行政区, getFrom_To(mybatisPrm.getPsmGyoseiku_From(), mybatisPrm.getPsmGyoseiku_To())));
             } else if (Chiku.地区.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                get条件(地区, getFrom_To(mybatisPrm.getPsmChiku1_From(), mybatisPrm.getPsmChiku1_To()));
+                出力条件.add(get条件(地区, getFrom_To(mybatisPrm.getPsmChiku1_From(), mybatisPrm.getPsmChiku1_To())));
             }
         }
         return 出力条件;
@@ -566,7 +565,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     getパターン32(t.getShikakuSoshitsuTodokedeYMD()),
                     HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).toRString(),
                     t.isJushochiTokureiFlag() ? new RString("住特") : RString.EMPTY,
-                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getShichosonCode(), t.getKoikinaiTokureiSochimotoShichosonCode()));
+                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getKoikinaiTokureiSochimotoShichosonCode(), t.getShichosonCode()));
         } else {
             return new HanyoListHihokenshadaichoCSVEntity(
                     連番, entity.getShikibetsuCode(), entity.getJuminShubetsuCode(),
@@ -617,25 +616,25 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     getYYYYMMDD(t.getShikakuSoshitsuTodokedeYMD()),
                     HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).toRString(),
                     t.isJushochiTokureiFlag() ? new RString("住特") : RString.EMPTY,
-                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getShichosonCode(), t.getKoikinaiTokureiSochimotoShichosonCode()));
+                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getKoikinaiTokureiSochimotoShichosonCode(), t.getShichosonCode()));
         }
 
     }
 
-    private ShoKisaiHokenshaNo get証記載保険者番号(boolean is広域, LasdecCode 広住特措置元市町村コード, LasdecCode 市町村コード) {
+    private RString get証記載保険者番号(boolean is広域, LasdecCode 広住特措置元市町村コード, LasdecCode 市町村コード) {
         HokenshaListLoader loader = HokenshaListLoader.createInstance();
         HokenshaList hokenshaList = loader.getShichosonCodeNameList(GyomuBunrui.介護事務);
         if (is広域) {
             if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
-                return hokenshaList.get(広住特措置元市町村コード).get証記載保険者番号();
+                return hokenshaList.get(広住特措置元市町村コード).get証記載保険者番号().getColumnValue();
             } else {
-                return ShoKisaiHokenshaNo.EMPTY;
+                return RString.EMPTY;
             }
         } else {
             if (市町村コード != null && !市町村コード.isEmpty()) {
-                return hokenshaList.get(市町村コード).get証記載保険者番号();
+                return hokenshaList.get(市町村コード).get証記載保険者番号().getColumnValue();
             } else {
-                return ShoKisaiHokenshaNo.EMPTY;
+                return RString.EMPTY;
             }
         }
     }
