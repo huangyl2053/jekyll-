@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,7 +40,7 @@ public class HizukeConfig {
         Map<ConfigKeysHizuke, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHizuke target : ConfigKeysHizuke.values()) {
-            map.put(target, BusinessConfig.get(target, nowDate));
+            map.put(target, BusinessConfig.get(target, nowDate, SubGyomuCode.DBB介護賦課));
         }
         return Collections.unmodifiableMap(map);
     }
