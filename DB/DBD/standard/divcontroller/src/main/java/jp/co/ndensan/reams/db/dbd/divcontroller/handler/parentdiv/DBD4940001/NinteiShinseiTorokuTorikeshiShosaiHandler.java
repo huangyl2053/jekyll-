@@ -128,11 +128,13 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         }
 
         // TODO. 共通部品　DBZ.KaigoNinteiShikakuInfoのinitializeについて、被保険者番号がだけですか。
-        div.getCcdKaigoNinteiShikakuInfo().initialize(association.get地方公共団体コード().value(), 識別コード.value(), RString.EMPTY, 被保険者番号);
-
+//        div.getCcdKaigoNinteiShikakuInfo().initialize(association.get地方公共団体コード().value(), 識別コード.value(), RString.EMPTY, 被保険者番号);
         IKaigoNinteiShinseiKihonJohoInputDiv 介護認定申請基本情報入力Div = div.getCcdKaigoNinteiShinseiKihon();
         介護認定申請基本情報入力Div.initialize();
-        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(認定情報.get受給申請事由()));
+        try {
+            介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(認定情報.get受給申請事由()));
+        } catch (IllegalArgumentException e) {
+        }
         介護認定申請基本情報入力Div.setTxtShinseiJokyo(認定情報.get申請状況区分());
         介護認定申請基本情報入力Div.setKyuSochisha(認定情報.get旧措置者フラグ() ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         介護認定申請基本情報入力Div.setChkShikakuShutokuMae(認定情報.get資格取得前申請フラグ()
@@ -140,29 +142,56 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         if (is受給) {
             介護認定申請基本情報入力Div.setRadShinseishoKubun(認定情報.get要支援申請の区分受給());
             介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(認定情報.get認定申請年月日受給()));
-            介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(認定情報.get認定申請区分法令コード受給().value()));
-            介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
-                    NinteiShinseiShinseijiKubunCode.toValue(認定情報.get認定申請区分申請時コード受給().value()));
+            try {
+                介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(認定情報.get認定申請区分法令コード受給().value()));
+            } catch (IllegalArgumentException e) {
+            }
+            try {
+                介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
+                        NinteiShinseiShinseijiKubunCode.toValue(認定情報.get認定申請区分申請時コード受給().value()));
+            } catch (IllegalArgumentException e) {
+            }
             介護認定申請基本情報入力Div.setShisho(new ShishoCode(認定情報.get支所コード受給()));
-            介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード受給()));
-            介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(認定情報.get二号特定疾病コード受給().value()));
+            try {
+                介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード受給()));
+            } catch (IllegalArgumentException e) {
+            }
+            try {
+                介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(認定情報.get二号特定疾病コード受給().value()));
+            } catch (IllegalArgumentException e) {
+            }
             介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(認定情報.get認定申請理由受給());
             介護認定申請基本情報入力Div.setServiceSakujoTeikeibun(認定情報.get申請サービス削除の理由受給());
         } else {
             介護認定申請基本情報入力Div.setRadShinseishoKubun(認定情報.get要支援申請の区分認定());
             介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(認定情報.get認定申請年月日認定()));
-            介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(認定情報.get認定申請区分法令コード認定().value()));
-            介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
-                    NinteiShinseiShinseijiKubunCode.toValue(認定情報.get認定申請区分申請時コード認定().value()));
+            try {
+                介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(認定情報.get認定申請区分法令コード認定().value()));
+            } catch (IllegalArgumentException e) {
+            }
+            try {
+                介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
+                        NinteiShinseiShinseijiKubunCode.toValue(認定情報.get認定申請区分申請時コード認定().value()));
+            } catch (IllegalArgumentException e) {
+            }
             介護認定申請基本情報入力Div.setShisho(new ShishoCode(認定情報.get支所コード認定()));
-            介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード認定()));
-            介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(認定情報.get二号特定疾病コード認定().value()));
+            try {
+                介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード認定()));
+            } catch (IllegalArgumentException e) {
+            }
+            try {
+                介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(認定情報.get二号特定疾病コード認定().value()));
+            } catch (IllegalArgumentException e) {
+            }
             介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(認定情報.get認定申請理由認定());
             介護認定申請基本情報入力Div.setServiceSakujoTeikeibun(認定情報.get申請サービス削除の理由認定());
         }
-        介護認定申請基本情報入力Div.setInputMode(new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
+
+        介護認定申請基本情報入力Div.setInputMode(
+                new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
 
         IShujiiIryokikanAndShujiiInputDiv 主治医Div = div.getCcdShujiiIryokikanAndShujiiInput();
+
         主治医Div.setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
         if (is受給) {
             主治医Div.initialize(
@@ -192,16 +221,24 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         INinteiInputDiv 認定Div = div.getCcdNinteiInput();
         // TODO. V4001.指定サービス種類01～V4001.指定サービス種類30の設定がない。
         NinteiInputDataPassModel model = new NinteiInputDataPassModel();
+
         model.set要介護度コード(認定情報.get要介護認定状態区分コード().value());
         model.set有効開始年月日(認定情報.get認定有効期間開始年月日());
         model.set有効終了年月日(認定情報.get認定有効期間終了年月日());
         model.set認定年月日(認定情報.get認定年月日());
         model.set審査会意見(認定情報.get介護認定審査会意見());
+
+        // TODO. for test
+        model.set認定区分(new RString("1"));
+        model.set申請書管理番号(new ShinseishoKanriNo(認定情報.get申請書管理番号受給()));
         認定Div.initialize(model);
-        認定Div.set状態(new RString(NinteiInputDiv.ShoriType.ShokaiMode.toString()));
+
+        認定Div.set状態(
+                new RString(NinteiInputDiv.ShoriType.ShokaiMode.toString()));
 
         // 前回結果情報
         IZenkaiNinteiKekkaJohoDiv 前回結果情報Div = div.getCcdZenkaiNinteiKekkaJoho();
+
         前回結果情報Div.setMode_ShokaiButtonType(ZenkaiNinteiKekkaJohoDiv.ShokaiButtonType.ShokaiButtonNoneMode);
         // TODO. 項目設定がない。
         if (is受給) {
@@ -217,8 +254,11 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         }
 
         IShinseiSonotaJohoInputDiv 申請その他情報Div = div.getCcdSonotaJoho();
+
         申請その他情報Div.initialize();
+
         申請その他情報Div.setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode);
+
         申請その他情報Div.set異動事由(認定情報.getデータ区分().value());
         申請その他情報Div.set削除事由(認定情報.get削除事由コード().value());
         申請その他情報Div.set理由(認定情報.get異動理由());
