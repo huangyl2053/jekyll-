@@ -1,0 +1,1911 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;施設異動情報&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;ShisetsuIdoJoho&quot;,&quot;businessId&quot;:&quot;DBD&quot;,&quot;controlName&quot;:&quot;ShisetsuIdoJoho&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;CloseOK&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;400px&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBD.ShisetsuIdoJoho"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="ShisetsuIdoJoho" style="width: 810px; margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShisetsuIdoJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;810px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ShisetsuIdoJoho&quot;,&quot;title&quot;:&quot;施設異動情報&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShisetsuIdoJoho&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbd/db/dbd/FutanGendogakuNintei/onLoad&quot;},{&quot;eventName&quot;:&quot;onSelect_dgFutanGendogakuNinteiList&quot;,&quot;requestUrl&quot;:&quot;dbd/db/dbd/FutanGendogakuNintei/onSelect_dgFutanGendogakuNinteiList&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShisetsuIdoJoho_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">施設異動情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShisetsuIdoJoho_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="dgShisetsuIdoJoho" style="width: 798px; height: 185px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgShisetsuIdoJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;798px&quot;,&quot;selectControlID&quot;:&quot;dgShisetsuIdoJoho&quot;,&quot;height&quot;:&quot;185px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;入所日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;nyushoDate&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;nyushoDate&quot;},{&quot;columnName&quot;:&quot;退所日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;taishoDate&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;taishoDate&quot;},{&quot;columnName&quot;:&quot;事業者名称&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;jigyoshaName&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:300,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;jigyoshaName&quot;},{&quot;columnName&quot;:&quot;事業者コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;jigyoshaCode&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;jigyoshaCode&quot;},{&quot;columnName&quot;:&quot;転出先保険者番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;tenshutsusakiHokenshaNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;groupName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;tenshutsusakiHokenshaNo&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgShisetsuIdoJoho_grid_table" role="" style="width: 798px; height: 160px; position: relative;"></div><div id="dgShisetsuIdoJoho_footer" style="width: 798px; height: 25px;"></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnClose" style="width: 120px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;CloseOK&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBD;
+(function (DBD) {
+    var FutanGendogakuNintei_Design = (function (_super) {
+        __extends(FutanGendogakuNintei_Design, _super);
+        function FutanGendogakuNintei_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, FutanGendogakuNintei_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(FutanGendogakuNintei_Design.prototype, "visible_Kyusochisha", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[2].items[2].items[4]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        FutanGendogakuNintei_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("visible_Kyusochisha");
+        };
+
+        FutanGendogakuNintei_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["visible_Kyusochisha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]).getEditablePropertyInfo()["visible"];
+
+            return editablePropertyInfo;
+        };
+        FutanGendogakuNintei_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "FutanGendogakuNintei",
+                    "items": [
+                        {
+                            "fieldName": "txtHiddenHihokenshaNo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "XS",
+                            "visible": false,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHiddenHihokenshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "dgFutanGendogakuNinteiList",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "910px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgFutanGendogakuNinteiList",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "185px",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "申請日",
+                                        "dataName": "shinseiDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinseiDate"
+                                    },
+                                    {
+                                        "columnName": "決定日",
+                                        "dataName": "ketteiDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ketteiDate"
+                                    },
+                                    {
+                                        "columnName": "決定区分",
+                                        "dataName": "ketteiKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ketteiKubun"
+                                    },
+                                    {
+                                        "columnName": "適用日",
+                                        "dataName": "tekiyoDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "tekiyoDate"
+                                    },
+                                    {
+                                        "columnName": "有効期限",
+                                        "dataName": "yukoKigen",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "yukoKigen"
+                                    },
+                                    {
+                                        "columnName": "申請理由",
+                                        "dataName": "shinseiRiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 180,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinseiRiyu"
+                                    },
+                                    {
+                                        "columnName": "承認しない理由",
+                                        "dataName": "fushoninRiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 180,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "fushoninRiyu"
+                                    },
+                                    {
+                                        "columnName": "負担段階",
+                                        "dataName": "futanDankai",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "futanDankai"
+                                    },
+                                    {
+                                        "columnName": "旧措置",
+                                        "dataName": "kyushochisha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kyushochisha"
+                                    },
+                                    {
+                                        "columnName": "居室種別",
+                                        "dataName": "kyoshitsuType",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kyoshitsuType"
+                                    },
+                                    {
+                                        "columnName": "境界層",
+                                        "dataName": "kyokaiso",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kyokaiso"
+                                    },
+                                    {
+                                        "columnName": "激変緩和",
+                                        "dataName": "gekihenKanwa",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "gekihenKanwa"
+                                    },
+                                    {
+                                        "columnName": "食費",
+                                        "dataName": "shokuhi",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": false,
+                                            "decimalPointLength": "0",
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shokuhi"
+                                    },
+                                    {
+                                        "columnName": "ユニット型個室",
+                                        "dataName": "unitKoshitsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": false,
+                                            "decimalPointLength": "0",
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "unitKoshitsu"
+                                    },
+                                    {
+                                        "columnName": "ユニット型準個室",
+                                        "dataName": "unitJunKoshitsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": false,
+                                            "decimalPointLength": "0",
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "unitJunKoshitsu"
+                                    },
+                                    {
+                                        "columnName": "多床室",
+                                        "dataName": "tashoshitsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": false,
+                                            "decimalPointLength": "0",
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "tashoshitsu"
+                                    },
+                                    {
+                                        "columnName": "従来型個室(特養等)",
+                                        "dataName": "juraigataKoshitsuTokuyo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": false,
+                                            "decimalPointLength": "0",
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "juraigataKoshitsuTokuyo"
+                                    },
+                                    {
+                                        "columnName": "従来型個室(老健)",
+                                        "dataName": "juraigataKoshitsuRoken",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": false,
+                                            "decimalPointLength": "0",
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "juraigataKoshitsuRoken"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "onSelect_dgFutanGendogakuNinteiList",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "riyoshaFutangaku",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "gridAction": []
+                        },
+                        {
+                            "fieldName": "FutanGendogakuNinteiDetail",
+                            "items": [
+                                {
+                                    "fieldName": "txtShinseiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "S",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShinseiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "申請日",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtShinseiRiyu",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "L",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShinseiRiyu_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "申請理由",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "FutanGendogakuNinteiRiyoshaFutan",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtKetteiDate",
+                                            "items": [],
+                                            "controlType": "TextBoxFlexibleDate",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtKetteiDate_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "決定日",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "permitCharactor": "./_-"
+                                        },
+                                        {
+                                            "fieldName": "txtKetteiKubun",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtKetteiKubun_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "決定区分",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "txtTekiyoDate",
+                                            "items": [],
+                                            "controlType": "TextBoxFlexibleDate",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtTekiyoDate_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "適用日",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "permitCharactor": "./_-"
+                                        },
+                                        {
+                                            "fieldName": "txtYukokigenDate",
+                                            "items": [],
+                                            "controlType": "TextBoxFlexibleDate",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYukokigenDate_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "有効期限",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "permitCharactor": "./_-"
+                                        },
+                                        {
+                                            "fieldName": "txtKyushochisha",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtKyushochisha_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "旧措置",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "txtFutanDankai",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtFutanDankai_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "負担段階",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "txtKyoshitsuType",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtKyoshitsuType_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "居室種別",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "txtKyokaiso",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtKyokaiso_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "境界層",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "txtGekihenKanwa",
+                                            "items": [],
+                                            "controlType": "TextBox",
+                                            "width": "80px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtGekihenKanwa_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "isComboBox": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "suggest": [],
+                                            "value": "",
+                                            "labelLText": "激変緩和",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "permitCharactor": ""
+                                        },
+                                        {
+                                            "fieldName": "FutanGendogaku",
+                                            "items": [
+                                                {
+                                                    "fieldName": "txtShokuhi",
+                                                    "items": [],
+                                                    "controlType": "TextBoxNum",
+                                                    "width": "60px",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "XS",
+                                                    "selectControlID": "txtShokuhi_core",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": true,
+                                                    "required": false,
+                                                    "maxLength": "5",
+                                                    "minLength": 0,
+                                                    "textAlign": 2,
+                                                    "placeHolder": "",
+                                                    "textKind": 2,
+                                                    "isPrivateInfo": false,
+                                                    "isPassword": false,
+                                                    "isComboBox": false,
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "onKeyPress": "",
+                                                    "text": "",
+                                                    "suggest": [],
+                                                    "value": "",
+                                                    "labelLText": "食費",
+                                                    "labelRText": "円",
+                                                    "labelLWidth": "S",
+                                                    "labelRWidth": "16px",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "decorationClass": "",
+                                                    "maxValue": "99999",
+                                                    "minValue": 0,
+                                                    "isCurrency": false,
+                                                    "isComma": true,
+                                                    "decimalPointLength": 0,
+                                                    "permitCharactor": "+-,.\\"
+                                                },
+                                                {
+                                                    "fieldName": "txtUnitKoshitsu",
+                                                    "items": [],
+                                                    "controlType": "TextBoxNum",
+                                                    "width": "60px",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "XS",
+                                                    "selectControlID": "txtUnitKoshitsu_core",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": true,
+                                                    "required": false,
+                                                    "maxLength": "5",
+                                                    "minLength": 0,
+                                                    "textAlign": 2,
+                                                    "placeHolder": "",
+                                                    "textKind": 2,
+                                                    "isPrivateInfo": false,
+                                                    "isPassword": false,
+                                                    "isComboBox": false,
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "onKeyPress": "",
+                                                    "text": "",
+                                                    "suggest": [],
+                                                    "value": "",
+                                                    "labelLText": "ユニット型個室",
+                                                    "labelRText": "円",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "decorationClass": "",
+                                                    "maxValue": "99999",
+                                                    "minValue": 0,
+                                                    "isCurrency": false,
+                                                    "isComma": true,
+                                                    "decimalPointLength": 0,
+                                                    "permitCharactor": "+-,.\\"
+                                                },
+                                                {
+                                                    "fieldName": "txtUnitJunKoshitsu",
+                                                    "items": [],
+                                                    "controlType": "TextBoxNum",
+                                                    "width": "60px",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "",
+                                                    "selectControlID": "txtUnitJunKoshitsu_core",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": true,
+                                                    "required": false,
+                                                    "maxLength": 100000000,
+                                                    "minLength": 0,
+                                                    "textAlign": 2,
+                                                    "placeHolder": "",
+                                                    "textKind": 2,
+                                                    "isPrivateInfo": false,
+                                                    "isPassword": false,
+                                                    "isComboBox": false,
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "onKeyPress": "",
+                                                    "text": "",
+                                                    "suggest": [],
+                                                    "value": "",
+                                                    "labelLText": "ユニット型準個室",
+                                                    "labelRText": "円",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "decorationClass": "",
+                                                    "maxValue": "99999",
+                                                    "minValue": 0,
+                                                    "isCurrency": false,
+                                                    "isComma": true,
+                                                    "decimalPointLength": 0,
+                                                    "permitCharactor": "+-,.\\"
+                                                },
+                                                {
+                                                    "fieldName": "txtTashoshitsu",
+                                                    "items": [],
+                                                    "controlType": "TextBoxNum",
+                                                    "width": "60px",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": true,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "XS",
+                                                    "selectControlID": "txtTashoshitsu_core",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": true,
+                                                    "required": false,
+                                                    "maxLength": "5",
+                                                    "minLength": 0,
+                                                    "textAlign": 2,
+                                                    "placeHolder": "",
+                                                    "textKind": 2,
+                                                    "isPrivateInfo": false,
+                                                    "isPassword": false,
+                                                    "isComboBox": false,
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "onKeyPress": "",
+                                                    "text": "",
+                                                    "suggest": [],
+                                                    "value": "",
+                                                    "labelLText": "多床室",
+                                                    "labelRText": "円",
+                                                    "labelLWidth": "S",
+                                                    "labelRWidth": "16px",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "decorationClass": "",
+                                                    "maxValue": "99999",
+                                                    "minValue": 0,
+                                                    "isCurrency": false,
+                                                    "isComma": true,
+                                                    "decimalPointLength": 0,
+                                                    "permitCharactor": "+-,.\\"
+                                                },
+                                                {
+                                                    "fieldName": "txtJuraigataKoshitsuTokuyo",
+                                                    "items": [],
+                                                    "controlType": "TextBoxNum",
+                                                    "width": "60px",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "XS",
+                                                    "selectControlID": "txtJuraigataKoshitsuTokuyo_core",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": true,
+                                                    "required": false,
+                                                    "maxLength": "5",
+                                                    "minLength": 0,
+                                                    "textAlign": 2,
+                                                    "placeHolder": "",
+                                                    "textKind": 2,
+                                                    "isPrivateInfo": false,
+                                                    "isPassword": false,
+                                                    "isComboBox": false,
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "onKeyPress": "",
+                                                    "text": "",
+                                                    "suggest": [],
+                                                    "value": "",
+                                                    "labelLText": "従来型個室(特養等)",
+                                                    "labelRText": "円",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "decorationClass": "",
+                                                    "maxValue": "99999",
+                                                    "minValue": 0,
+                                                    "isCurrency": false,
+                                                    "isComma": true,
+                                                    "decimalPointLength": 0,
+                                                    "permitCharactor": "+-,.\\"
+                                                },
+                                                {
+                                                    "fieldName": "txtJuraigataKoshitsuRoken",
+                                                    "items": [],
+                                                    "controlType": "TextBoxNum",
+                                                    "width": "60px",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "",
+                                                    "selectControlID": "txtJuraigataKoshitsuRoken_core",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": true,
+                                                    "required": false,
+                                                    "maxLength": "5",
+                                                    "minLength": 0,
+                                                    "textAlign": 2,
+                                                    "placeHolder": "",
+                                                    "textKind": 2,
+                                                    "isPrivateInfo": false,
+                                                    "isPassword": false,
+                                                    "isComboBox": false,
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "onKeyPress": "",
+                                                    "text": "",
+                                                    "suggest": [],
+                                                    "value": "",
+                                                    "labelLText": "従来型個室(老健)",
+                                                    "labelRText": "円",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "decorationClass": "",
+                                                    "maxValue": "99999",
+                                                    "minValue": 0,
+                                                    "isCurrency": false,
+                                                    "isComma": false,
+                                                    "decimalPointLength": 0,
+                                                    "permitCharactor": "+-,.\\"
+                                                }
+                                            ],
+                                            "controlType": "Panel",
+                                            "width": "875px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "FutanGendogaku",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "onLoad": "",
+                                            "title": "負担限度額",
+                                            "marginTop": "Default",
+                                            "marginBottom": "Default",
+                                            "isOpen": true,
+                                            "canOpenAndClose": false,
+                                            "postParameterPanelNames": [
+                                                {
+                                                    "postParameterPanelNames": "FutanGendogaku"
+                                                }
+                                            ],
+                                            "requestSettings": [],
+                                            "hiddenInput": [],
+                                            "onOpen": "",
+                                            "onClose": "",
+                                            "session": {},
+                                            "eraseBorder": false,
+                                            "backgroundColor": 0,
+                                            "widthAuto": false,
+                                            "panelDisplay": 1,
+                                            "isGroupBox": false,
+                                            "readOnly": false,
+                                            "height": "Auto",
+                                            "canPost": true
+                                        },
+                                        {
+                                            "fieldName": "txtFushoninRiyu",
+                                            "items": [],
+                                            "controlType": "TextBoxMultiLine",
+                                            "width": "750px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtFushoninRiyu_text_area",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "height": "XS",
+                                            "required": false,
+                                            "maxLength": "200",
+                                            "minLength": 0,
+                                            "placeHolder": "",
+                                            "textKind": 0,
+                                            "isPrivateInfo": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "value": "",
+                                            "labelLText": "承認しない理由",
+                                            "labelRText": "",
+                                            "labelLWidth": "S",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "decorationClass": "",
+                                            "limitLength": "200",
+                                            "countDisp": false
+                                        }
+                                    ],
+                                    "controlType": "Panel",
+                                    "width": "892px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "FutanGendogakuNinteiRiyoshaFutan",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onLoad": "",
+                                    "title": "利用者負担",
+                                    "marginTop": "Default",
+                                    "marginBottom": "Default",
+                                    "isOpen": true,
+                                    "canOpenAndClose": false,
+                                    "postParameterPanelNames": [
+                                        {
+                                            "postParameterPanelNames": "FutanGendogakuNinteiRiyoshaFutan"
+                                        }
+                                    ],
+                                    "requestSettings": [],
+                                    "hiddenInput": [],
+                                    "onOpen": "",
+                                    "onClose": "",
+                                    "session": {},
+                                    "eraseBorder": false,
+                                    "backgroundColor": 0,
+                                    "widthAuto": false,
+                                    "panelDisplay": 1,
+                                    "isGroupBox": false,
+                                    "readOnly": false,
+                                    "height": "Auto",
+                                    "canPost": true
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "910px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "FutanGendogakuNinteiDetail",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "詳細",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "FutanGendogakuNinteiDetail"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 1,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "CloseOK",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G10",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "FutanGendogakuNintei",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "負担限度額認定",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "FutanGendogakuNintei"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbd/db/dbd/FutanGendogakuNintei/onLoad"
+                        },
+                        {
+                            "eventName": "onSelect_dgFutanGendogakuNinteiList",
+                            "requestUrl": "dbd/db/dbd/FutanGendogakuNintei/onSelect_dgFutanGendogakuNinteiList"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "560px",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBD",
+            "controlName": "FutanGendogakuNintei",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "txtKyushochisha",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "visible_Kyusochisha"
+                }
+            ],
+            "dataPassingForDialog": [
+                {
+                    "key": "hihokenshaNo",
+                    "controlName": "txtHiddenHihokenshaNo"
+                }
+            ],
+            "dialogOkEventNameForDialog": "CloseOK",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "600px",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return FutanGendogakuNintei_Design;
+    })(Uz.CommonChildDiv);
+    DBD.FutanGendogakuNintei_Design = FutanGendogakuNintei_Design;
+
+    (function (FutanGendogakuNintei) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onSelect_dgFutanGendogakuNinteiList = function () {
+                return "onSelect_dgFutanGendogakuNinteiList";
+            };
+
+            Events.CloseOK = function () {
+                return "CloseOK";
+            };
+            return Events;
+        })();
+        FutanGendogakuNintei.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "FutanGendogakuNintei";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBD.FutanGendogakuNintei.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.FutanGendogakuNintei = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHiddenHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+            };
+
+            Controls.prototype.dgFutanGendogakuNinteiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgFutanGendogakuNinteiList"));
+            };
+
+            Controls.prototype.FutanGendogakuNinteiDetail = function () {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.txtShinseiRiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiRiyu"));
+            };
+
+            Controls.prototype.FutanGendogakuNinteiRiyoshaFutan = function () {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail_FutanGendogakuNinteiRiyoshaFutan"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.txtKetteiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtYukokigenDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+            };
+
+            Controls.prototype.txtKyushochisha = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyushochisha"));
+            };
+
+            Controls.prototype.txtFutanDankai = function () {
+                return new UZA.TextBox(this.convFiledName("txtFutanDankai"));
+            };
+
+            Controls.prototype.txtKyoshitsuType = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyoshitsuType"));
+            };
+
+            Controls.prototype.txtKyokaiso = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyokaiso"));
+            };
+
+            Controls.prototype.txtGekihenKanwa = function () {
+                return new UZA.TextBox(this.convFiledName("txtGekihenKanwa"));
+            };
+
+            Controls.prototype.FutanGendogaku = function () {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail_FutanGendogakuNinteiRiyoshaFutan_FutanGendogaku"));
+            };
+
+            Controls.prototype.txtShokuhi = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShokuhi"));
+            };
+
+            Controls.prototype.txtUnitKoshitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtUnitKoshitsu"));
+            };
+
+            Controls.prototype.txtUnitJunKoshitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtUnitJunKoshitsu"));
+            };
+
+            Controls.prototype.txtTashoshitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtTashoshitsu"));
+            };
+
+            Controls.prototype.txtJuraigataKoshitsuTokuyo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuTokuyo"));
+            };
+
+            Controls.prototype.txtJuraigataKoshitsuRoken = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuRoken"));
+            };
+
+            Controls.prototype.txtFushoninRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        FutanGendogakuNintei.Controls = Controls;
+    })(DBD.FutanGendogakuNintei || (DBD.FutanGendogakuNintei = {}));
+    var FutanGendogakuNintei = DBD.FutanGendogakuNintei;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (FutanGendogakuNintei) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new FutanGendogakuNintei.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        FutanGendogakuNintei.ModeController = ModeController;
+    })(DBD.FutanGendogakuNintei || (DBD.FutanGendogakuNintei = {}));
+    var FutanGendogakuNintei = DBD.FutanGendogakuNintei;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (FutanGendogakuNintei) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new FutanGendogakuNintei.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("visible_Kyusochisha", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getvisible_Kyusochisha = function () {
+                return this.controls.txtKyushochisha().visible;
+            };
+
+            PublicProperties.prototype.setvisible_Kyusochisha = function (value) {
+                this.controls.txtKyushochisha().visible = value;
+            };
+            return PublicProperties;
+        })();
+        FutanGendogakuNintei.PublicProperties = PublicProperties;
+    })(DBD.FutanGendogakuNintei || (DBD.FutanGendogakuNintei = {}));
+    var FutanGendogakuNintei = DBD.FutanGendogakuNintei;
+})(DBD || (DBD = {}));
+</script>
+  
+         
+   
+   
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBD= DBD? DBD: {};
+DBD['SHISETSUIDOJOHO'] = {};
+DBD['SHISETSUIDOJOHO'].ShisetsuIdoJohoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShisetsuIdoJoho').getProperty();parameter0.dgShisetsuIdoJoho = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgShisetsuIdoJoho').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBD;
+(function (DBD) {
+    (function (ShisetsuIdoJoho) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.CloseOK = function () {
+                return "CloseOK";
+            };
+            return Events;
+        })();
+        ShisetsuIdoJoho.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShisetsuIdoJoho";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBD.ShisetsuIdoJoho.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBD.ShisetsuIdoJoho.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShisetsuIdoJoho = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgShisetsuIdoJoho = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShisetsuIdoJoho"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        ShisetsuIdoJoho.Controls = Controls;
+    })(DBD.ShisetsuIdoJoho || (DBD.ShisetsuIdoJoho = {}));
+    var ShisetsuIdoJoho = DBD.ShisetsuIdoJoho;
+})(DBD || (DBD = {}));
+var DBD;
+(function (DBD) {
+    (function (ShisetsuIdoJoho) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShisetsuIdoJoho.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShisetsuIdoJoho.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShisetsuIdoJoho.ModeController = ModeController;
+    })(DBD.ShisetsuIdoJoho || (DBD.ShisetsuIdoJoho = {}));
+    var ShisetsuIdoJoho = DBD.ShisetsuIdoJoho;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (ShisetsuIdoJoho) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShisetsuIdoJoho.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShisetsuIdoJoho.PublicProperties = PublicProperties;
+    })(DBD.ShisetsuIdoJoho || (DBD.ShisetsuIdoJoho = {}));
+    var ShisetsuIdoJoho = DBD.ShisetsuIdoJoho;
+})(DBD || (DBD = {}));
+</script></div>
