@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -215,7 +216,8 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onBeforeOpenDialog_btnShowGemmenJoho(RiyoshaFutangakuGengakuPanelDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         div.setHihokenshaNo(被保険者番号.getColumnValue());
         return ResponseData.of(div).respond();
     }
@@ -427,7 +429,8 @@ public class RiyoshaFutangakuGengakuPanel {
     }
 
     private void 前排他キーの解除() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.release(排他キー);

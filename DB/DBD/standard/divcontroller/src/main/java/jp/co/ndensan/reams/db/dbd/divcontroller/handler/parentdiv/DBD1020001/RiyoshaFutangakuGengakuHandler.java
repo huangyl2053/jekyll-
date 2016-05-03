@@ -167,7 +167,8 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
         EntityDataState state;
@@ -321,7 +322,8 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
         EntityDataState state;
@@ -610,8 +612,9 @@ public class RiyoshaFutangakuGengakuHandler {
      * @return PersonalData
      */
     public PersonalData toPersonalData() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
         return PersonalData.of(識別コード, expandedInfo);
@@ -692,7 +695,8 @@ public class RiyoshaFutangakuGengakuHandler {
      * 申請情報エリアの入力情報をクリアします。
      */
     public void 入力情報をクリア() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
 
         div.getTxtShinseiYmd().clearValue();
         div.getTxtShinseiRiyu().clearValue();
@@ -1027,7 +1031,8 @@ public class RiyoshaFutangakuGengakuHandler {
     }
 
     private void 前排他の設定() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.lock(排他キー);
