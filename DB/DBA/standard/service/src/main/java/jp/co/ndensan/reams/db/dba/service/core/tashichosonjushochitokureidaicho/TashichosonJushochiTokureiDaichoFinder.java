@@ -249,9 +249,9 @@ public class TashichosonJushochiTokureiDaichoFinder {
         List<OtherAddressInfEntity> otherAddressInfEntityLst = new ArrayList<>();
         int no = 1;
         for (OtherAddressInfFromDBEntity otherAddressInfFromDBEntity : 他市町村住所地特例者情報Lst) {
-            RString 適用事由名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0008"),
+            RString 適用事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0008"),
                     new Code(otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード()));
-            RString 解除事由名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0011"),
+            RString 解除事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0011"),
                     new Code(otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード()));
             OtherAddressInfEntity otherAddressInfEntity = new OtherAddressInfEntity();
             set他市町村住所地特例者情報(otherAddressInfEntity, otherAddressInfFromDBEntity, no, 適用事由名称, 解除事由名称);
