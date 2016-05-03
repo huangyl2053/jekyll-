@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.relate;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -31,6 +32,7 @@ public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable, Ser
     private AtenaMeisho jigyoshaMeisho;
     private AtenaKanaMeisho jigyoshaNameKana;
     private RString jigyoshaKanaAddress;
+    private AtenaJusho jigyoshaAddress;
     private TelNo telNo;
     private RString serviceShuruiCode;
     private RString serviceShuruiRyakusho;
