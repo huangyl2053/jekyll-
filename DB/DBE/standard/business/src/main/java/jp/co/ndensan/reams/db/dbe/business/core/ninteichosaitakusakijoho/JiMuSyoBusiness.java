@@ -39,6 +39,24 @@ public class JiMuSyoBusiness {
     }
 
     /**
+     * Temp_ninteiChosaItakusakiCodeを返します。
+     *
+     * @return Temp_ninteiChosaItakusakiCode
+     */
+    public RString get調査事務所コード() {
+        return entity.getTemp_ninteiChosaItakusakiCode();
+    }
+
+    /**
+     * Temp_jigyoshaMeishoを返します。
+     *
+     * @return Temp_jigyoshaMeisho
+     */
+    public RString get調査事業者名称() {
+        return entity.getTemp_jigyoshaMeisho();
+    }
+
+    /**
      * 空きの午前イメージを返します。
      *
      * @return 空きの午前イメージ
