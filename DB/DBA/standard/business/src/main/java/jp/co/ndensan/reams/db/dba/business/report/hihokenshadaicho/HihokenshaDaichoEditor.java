@@ -21,6 +21,7 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
     private final HihokenshaDaichoSakusei joho;
     private static final RString FOMART_TEN = new RString(".");
     private static final RString FOMART_LINE = new RString("/");
+    private static final int ZERO = 0;
 
     /**
      * コンストラクタです。
@@ -118,5 +119,19 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
             return RString.EMPTY;
         }
         return list.get(index);
+    }
+
+    /**
+     * リストサイズを取得します。
+     *
+     * @param list リスト項目
+     * @return サイズ
+     */
+    public static int getMaxIndex(List<RString> list) {
+
+        if (list == null || list.isEmpty()) {
+            return ZERO;
+        }
+        return list.size();
     }
 }
