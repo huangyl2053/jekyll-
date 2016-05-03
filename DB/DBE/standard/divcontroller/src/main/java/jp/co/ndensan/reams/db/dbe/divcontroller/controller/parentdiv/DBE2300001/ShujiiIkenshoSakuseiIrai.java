@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
@@ -41,6 +42,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -53,6 +55,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -166,6 +172,7 @@ public class ShujiiIkenshoSakuseiIrai {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        AccessLogger.log(AccessLogType.照会, toPersonalData(div));
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
         createHandler(div).init(manager.get申請者情報(param).records());
@@ -466,7 +473,8 @@ public class ShujiiIkenshoSakuseiIrai {
         iraishoItem.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         iraishoItem.setHihokenshaName(row.getHihokennshaShimei());
         iraishoItem.setJusho(row.getJusho());
-        iraishoItem.setBirthYMD(new RString(row.getBirthYMD().toString()));
+        iraishoItem.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
         iraishoItem.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         RString hokenshaNo = row.getHokenshaNo().padRight(RString.HALF_SPACE, 数字_5);
         iraishoItem.setHokenshaNo1(hokenshaNo.substring(数字_0, 数字_1));
@@ -482,8 +490,7 @@ public class ShujiiIkenshoSakuseiIrai {
         if (div.getIraiprint().getTxtkigenymd().getValue() != null) {
             iraishoItem.setTeishutsuKigen(div.getIraiprint().getTxtkigenymd().getValue().toDateString());
         }
-        iraishoItem.setShoriName(RString.isNullOrEmpty(row.getIraiKubun()) ? RString.EMPTY
-                : new RString(ShujiiIkenshoIraiKubun.toValue(row.getIraiKubun()).name()));
+        iraishoItem.setShoriName(row.getIraiKubun());
         iraishoItem.setRemban(new RString("1"));
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIraiAtenaJohoParameter parameter = new ShujiiIraiAtenaJohoParameter();
@@ -497,14 +504,13 @@ public class ShujiiIkenshoSakuseiIrai {
             iraishoItem.setKikanNameText(atenaJoho.getTemp_宛名機関名());
             iraishoItem.setShimeiText(atenaJoho.getTemp_宛名氏名().value());
         }
+        iraishoItem.setMeishoFuyo(
+                ChohyoAtesakiKeisho.toValue(BusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, SubGyomuCode.DBE認定支援)).get名称());
+        iraishoItem.setSonota(RString.EMPTY);
 
         CustomerBarCode barcode = new CustomerBarCode();
-        // 郵便番号と住所を渡して、カスタマーバーコード文字列変換情報を取得。;
         CustomerBarCodeResult result = barcode.convertCustomerBarCode(row.getYubinNo(), row.getJusho());
-        // カスタマーバーコード文字列をソースにセット。変換エラー時は空白が返されるため、エラー有無による分岐は不要
-        if (result.hasConverted()) {
-            iraishoItem.setCustomerBarCode(result.getCustomerBarCode());
-        }
+        iraishoItem.setCustomerBarCode(result.getCustomerBarCode());
         return iraishoItem;
     }
 
@@ -625,8 +631,9 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem();
         item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), FlexibleDate.getNowDate()));
-        RString 通知文定型文 = ReportUtil.get通知文(
-                SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_0).get(数字_0);
+        RString 通知文定型文 = new RString("1024641");
+//        ReportUtil.get通知文(
+//                SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_0).get(数字_0);
         通知文定型文 = 通知文定型文.padRight(RString.HALF_SPACE, 数字_17);
         item.setTsuchibun1(通知文定型文.substring(数字_0, 数字_1));
         item.setTsuchibun2(通知文定型文.substring(数字_1, 数字_2));
@@ -676,7 +683,8 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         item.setJusho(row.getJusho());
         if (row.getBirthYMD() != null) {
-            item.setBirthYMD(new RString(row.getBirthYMD().getValue().toString()));
+            item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
         }
         if (Seibetsu.女.getコード().equals(row.getSeibetsu())) {
             item.setSeibetsuMan(Seibetsu.男.get名称());
@@ -743,5 +751,11 @@ public class ShujiiIkenshoSakuseiIrai {
             result = row.getShinseiDay().getValue().plusDay(Integer.parseInt(期限日数.toString())).toDateString();
         }
         return result;
+    }
+
+    private PersonalData toPersonalData(ShujiiIkenshoSakuseiIraiDiv div) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 }
