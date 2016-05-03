@@ -927,14 +927,14 @@ public class TaJushochiTokureishaKanriHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護他特適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護他特解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード));
     }
 
     private List<KeyValueDataSource> set適用事由() {
@@ -943,7 +943,7 @@ public class TaJushochiTokureishaKanriHandler {
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;
@@ -955,7 +955,7 @@ public class TaJushochiTokureishaKanriHandler {
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;
