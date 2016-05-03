@@ -92,7 +92,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set境界層該当者区分(boolean 境界層該当者区分) {
-        requireNonNull(境界層該当者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("境界層該当者区分"));
         entity.setKyokaisoGaitoshaKubun(境界層該当者区分);
         return this;
     }
@@ -104,7 +103,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set激変緩和措置対象者区分(boolean 激変緩和措置対象者区分) {
-        requireNonNull(激変緩和措置対象者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("激変緩和措置対象者区分"));
         entity.setGekihenKanwaSochiTaishoshaKubun(激変緩和措置対象者区分);
         return this;
     }
@@ -194,7 +192,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set配偶者の有無(boolean 配偶者の有無) {
-        requireNonNull(配偶者の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("配偶者の有無"));
         entity.setHaigushaUmuFlag(配偶者の有無);
         return this;
     }
@@ -230,6 +227,7 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set配偶者生年月日(FlexibleDate 配偶者生年月日) {
+        requireNonNull(配偶者生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("配偶者生年月日"));
         entity.setHaigushaSeinenGappiYMD(配偶者生年月日);
         return this;
     }

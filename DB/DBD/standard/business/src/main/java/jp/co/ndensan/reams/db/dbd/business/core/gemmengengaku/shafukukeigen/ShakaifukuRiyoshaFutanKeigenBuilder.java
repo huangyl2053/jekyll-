@@ -63,7 +63,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set生活保護受給有無(boolean 生活保護受給有無) {
-        requireNonNull(生活保護受給有無, UrSystemErrorMessages.値がnull.getReplacedMessage("生活保護受給有無"));
         entity.setSeihoJukyuUmu(生活保護受給有無);
         return this;
     }
@@ -75,7 +74,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set老齢福祉年金受給有無(boolean 老齢福祉年金受給有無) {
-        requireNonNull(老齢福祉年金受給有無, UrSystemErrorMessages.値がnull.getReplacedMessage("老齢福祉年金受給有無"));
         entity.setRoreiFukushiNenkinJukyuUmu(老齢福祉年金受給有無);
         return this;
     }
@@ -87,7 +85,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set生保扶助見直し特例有無(boolean 生保扶助見直し特例有無) {
-        requireNonNull(生保扶助見直し特例有無, UrSystemErrorMessages.値がnull.getReplacedMessage("生保扶助見直し特例有無"));
         entity.setSeihoFujoMinaoshiTokureiUmu(生保扶助見直し特例有無);
         return this;
     }
@@ -99,7 +96,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set軽減率_分子(Decimal 軽減率_分子) {
-        requireNonNull(軽減率_分子, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率（分子）"));
         entity.setKeigenritsu_Bunshi(軽減率_分子);
         return this;
     }
@@ -111,7 +107,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set軽減率_分母(Decimal 軽減率_分母) {
-        requireNonNull(軽減率_分母, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減率（分母）"));
         entity.setKeigenritsu_Bumbo(軽減率_分母);
         return this;
     }
@@ -123,7 +118,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set居宅サービス限定(boolean 居宅サービス限定) {
-        requireNonNull(居宅サービス限定, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス限定"));
         entity.setKyotakuServiceGentei(居宅サービス限定);
         return this;
     }
@@ -135,7 +129,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set居住費_食費のみ(boolean 居住費_食費のみ) {
-        requireNonNull(居住費_食費のみ, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費・食費のみ"));
         entity.setKyojuhiShokuhiNomi(居住費_食費のみ);
         return this;
     }
@@ -147,7 +140,6 @@ public class ShakaifukuRiyoshaFutanKeigenBuilder {
      * @return {@link ShakaifukuRiyoshaFutanKeigenBuilder}
      */
     public ShakaifukuRiyoshaFutanKeigenBuilder set旧措置者ユニット型個室のみ(boolean 旧措置者ユニット型個室のみ) {
-        requireNonNull(旧措置者ユニット型個室のみ, UrSystemErrorMessages.値がnull.getReplacedMessage("旧措置者ユニット型個室のみ"));
         entity.setKyusochishaUnitTypeKoshitsuNomi(旧措置者ユニット型個室のみ);
         return this;
     }
