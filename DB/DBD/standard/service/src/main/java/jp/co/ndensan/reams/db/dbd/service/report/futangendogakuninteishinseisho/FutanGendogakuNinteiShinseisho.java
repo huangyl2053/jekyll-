@@ -61,6 +61,15 @@ public class FutanGendogakuNinteiShinseisho {
     private static final RString ハイフン = new RString("-");
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiShinseisho}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link FutanGendogakuNinteiShinseisho}のインスタンス
+     */
+    public static FutanGendogakuNinteiShinseisho createInstance() {
+        return InstanceProvider.create(FutanGendogakuNinteiShinseisho.class);
+    }
+
+    /**
      * 介護保険負担限度額認定申請書Printします。
      *
      * @param 識別コード 識別コード
