@@ -1,7 +1,7 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="./kaigoshikakukihon/KaigoShikakuKihon.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="./../kaigoshikakukihon/KaigoShikakuKihon.ts" />
 
 module DBZ {
 

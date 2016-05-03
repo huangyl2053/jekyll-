@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.NinteiChosaIraiShokai;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.NinteiChosaIraiShokai;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteichosairaishokai.NinteiChos
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.NinteiChosaIraiShokaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.dgNinteiChosaIrai_Row;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -47,7 +45,7 @@ public class NinteiChosaIraiShokaiHandler {
      * @param ninteiChosaList 認定調査情報
      * @param 被保険者番号 被保険者番号
      */
-    public void load(List<NinteiChosaIraiShokaiMaster> ninteiChosaList, HihokenshaNo 被保険者番号) {
+    public void onLoad(List<NinteiChosaIraiShokaiMaster> ninteiChosaList, HihokenshaNo 被保険者番号) {
         div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         List<dgNinteiChosaIrai_Row> rowList = new ArrayList<>();
         int no = 1;
