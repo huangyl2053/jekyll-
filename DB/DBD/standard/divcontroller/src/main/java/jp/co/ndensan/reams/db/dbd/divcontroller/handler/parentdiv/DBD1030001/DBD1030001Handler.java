@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -106,9 +107,10 @@ public class DBD1030001Handler {
      * @return 初期化完フラグ
      */
     public boolean onLoad() {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = get識別コードFromViewState();
         HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
-        if (被保険者番号.isEmpty()) {
+        if (taishoshaKey == null || 被保険者番号.isEmpty()) {
             div.getBtnShowGenmenJoho().setDisabled(true);
             div.getBtnAddShinsei().setDisabled(true);
             div.getDgShinseiList().setDisabled(true);
@@ -269,7 +271,11 @@ public class DBD1030001Handler {
     }
 
     private ShikibetsuCode get識別コードFromViewState() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (null == taishoshaKey) {
+            return ShikibetsuCode.EMPTY;
+        }
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
@@ -277,7 +283,11 @@ public class DBD1030001Handler {
     }
 
     private HihokenshaNo get被保険者番号FromViewState() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (null == taishoshaKey) {
+            return HihokenshaNo.EMPTY;
+        }
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         if (null == 被保険者番号) {
             被保険者番号 = HihokenshaNo.EMPTY;
         }
@@ -670,15 +680,19 @@ public class DBD1030001Handler {
         ShakaifukuRiyoshaFutanKeigenToJotai 編集情報
                 = ViewStateHolder.get(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
+        ShoKisaiHokenshaNo 証記載保険者番号;
         if (null == 編集情報) {
             RString 決定区分 = RString.EMPTY;
-            ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報 = get社会福祉法人等利用者負担軽減申請の情報From画面(true, 0, 決定区分);
+            証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+            ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
+                    = get社会福祉法人等利用者負担軽減申請の情報From画面(true, 0, 決定区分, 証記載保険者番号);
             追加社会福祉法人等利用者負担軽減申請の情報(画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList);
         } else {
             RString 決定区分 = 編集情報.get社会福祉法人等利用者負担軽減情報().get決定区分();
+            証記載保険者番号 = 編集情報.get社会福祉法人等利用者負担軽減情報().get証記載保険者番号();
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
                     = get社会福祉法人等利用者負担軽減申請の情報From画面(
-                            false, 編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号(), 決定区分);
+                            false, 編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号(), 決定区分, 証記載保険者番号);
             修正社会福祉法人等利用者負担軽減申請の情報(画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList, 編集情報);
         }
         情報エリアクリア();
@@ -712,7 +726,7 @@ public class DBD1030001Handler {
     }
 
     private ShakaifukuRiyoshaFutanKeigen get社会福祉法人等利用者負担軽減申請の情報From画面(
-            boolean is新规, int 履歴番号, RString 決定区分) {
+            boolean is新规, int 履歴番号, RString 決定区分, ShoKisaiHokenshaNo 証記載保険者番号) {
         Integer 追加履歴番号;
         if (is新规) {
             追加履歴番号 = ViewStateHolder.get(DBD1030001ViewStateKey.追加履歴番号, Integer.class);
@@ -723,7 +737,9 @@ public class DBD1030001Handler {
             追加履歴番号 = 履歴番号;
         }
         RString メニューID = ResponseHolder.getMenuID();
-        ShoKisaiHokenshaNo 証記載保険者番号 = get証記載保険者番号();
+        if (証記載保険者番号.isEmpty()) {
+            証記載保険者番号 = get証記載保険者番号();
+        }
         ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減申請の情報
                 = new ShakaifukuRiyoshaFutanKeigen(証記載保険者番号, get被保険者番号FromViewState(), 追加履歴番号);
         ViewStateHolder.put(DBD1030001ViewStateKey.追加履歴番号, 追加履歴番号 - 1);
