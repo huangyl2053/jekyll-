@@ -101,9 +101,14 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
+        if (new RString(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
+        }
         if (!getHandler(div).onSelectByDeleteButton()) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
         }
+
         return ResponseData.of(div).respond();
     }
 

@@ -72,7 +72,7 @@ public class FutangendogakuNinteiShinseiHandler {
     private static final RString 拡張情報NAME = new RString("被保険者番号");
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
-    private static final RString SELECT_EMPTYKEY = new RString("empty");
+    private static final RString SELECT_EMPTYKEY = RString.EMPTY;
     private static final RString 追加状態 = new RString("Added");
     private static final RString 修正状態 = new RString("Modified");
     private static final int INT_4 = 4;
@@ -473,6 +473,10 @@ public class FutangendogakuNinteiShinseiHandler {
             builder.set決定区分(KetteiKubun.承認しない.getコード());
         }
         builder.set決定年月日(div.getTxtKetteiYMD().getValue());
+        if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            builder.set決定区分(RString.EMPTY);
+            builder.set決定年月日(FlexibleDate.EMPTY);
+        }
         builder.set適用開始年月日(div.getTxtTekiyoYMD().getValue());
         builder.set適用終了年月日(div.getTxtYukoKigenYMD().getValue());
         builder.set旧措置者区分(div.getDdlKyusochisha().getSelectedKey());
@@ -570,7 +574,6 @@ public class FutangendogakuNinteiShinseiHandler {
 
     private void init旧措置DDL() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(getEmptyDataSource());
         for (KyuSochishaKubun kubun : KyuSochishaKubun.values()) {
             KeyValueDataSource source = new KeyValueDataSource();
             source.setKey(kubun.getコード());
@@ -650,16 +653,20 @@ public class FutangendogakuNinteiShinseiHandler {
             row = new dgShinseiList_Row(
                     get状態(ninteiViewState.getState()),
                     申請年月日,
-                    ShinseiRiyuKubun.toValueByCode(futanGendogakuNintei.get申請理由区分()).get名称(),
+                    SELECT_EMPTYKEY.equals(futanGendogakuNintei.get申請理由区分())
+                    ? RString.EMPTY : ShinseiRiyuKubun.toValue(futanGendogakuNintei.get申請理由区分()).get名称(),
                     get配偶者課税区分(futanGendogakuNintei),
                     YochokinShinkokuKubun.超過.getコード().equals(futanGendogakuNintei.get預貯金申告区分()),
-                    KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称(),
+                    SELECT_EMPTYKEY.equals(futanGendogakuNintei.get決定区分())
+                    ? RString.EMPTY : KetteiKubun.toValue(futanGendogakuNintei.get決定区分()).get名称(),
                     決定日,
                     適用日,
                     有効期限,
                     KyuSochishaKubun.旧措置.getコード().equals(futanGendogakuNintei.get旧措置者区分()),
-                    RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get略称(),
-                    KyoshitsuShubetsu.toValue(futanGendogakuNintei.get居室種別()).get略称(),
+                    SELECT_EMPTYKEY.equals(futanGendogakuNintei.get利用者負担段階())
+                    ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get略称(),
+                    SELECT_EMPTYKEY.equals(futanGendogakuNintei.get居室種別())
+                    ? RString.EMPTY : KyoshitsuShubetsu.toValue(futanGendogakuNintei.get居室種別()).get略称(),
                     futanGendogakuNintei.is境界層該当者区分(),
                     futanGendogakuNintei.is激変緩和措置対象者区分(),
                     食費負担限度額,
@@ -877,7 +884,8 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getTxtYukoKigenYMD().clearValue();
         init旧措置DDL();
         FutangendogakuNinteiService ninteiService = FutangendogakuNinteiService.createInstance();
-        if (ninteiService.is旧措置者(get被保険者番号FromViewState())) {
+        if (!申請メニューID.equals(ResponseHolder.getMenuID())
+                && ninteiService.is旧措置者(get被保険者番号FromViewState())) {
             div.getDdlKyusochisha().setSelectedKey(KyuSochishaKubun.旧措置.getコード());
         } else {
             div.getDdlKyusochisha().setIsBlankLine(true);
@@ -886,7 +894,9 @@ public class FutangendogakuNinteiShinseiHandler {
         if (ninteiService.is境界層該当者(get被保険者番号FromViewState(), FlexibleDate.getNowDate())) {
             dataSource.add(SELECT_KEY0);
         }
-        div.getChkKyokaiso().setSelectedItemsByKey(dataSource);
+        if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+            div.getChkKyokaiso().setSelectedItemsByKey(dataSource);
+        }
         div.getDdlRiyoshaFutanDankai().setIsBlankLine(true);
         div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
         div.getDdlShokuhi().setIsBlankLine(true);
