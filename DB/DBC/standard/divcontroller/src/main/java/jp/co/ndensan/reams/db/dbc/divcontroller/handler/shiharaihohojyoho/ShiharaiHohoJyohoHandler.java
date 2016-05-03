@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.commonchilddiv.shiharaihohojyoho;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.shiharaihohojyoho;
 
 import java.util.ArrayList;
 import java.util.List;
