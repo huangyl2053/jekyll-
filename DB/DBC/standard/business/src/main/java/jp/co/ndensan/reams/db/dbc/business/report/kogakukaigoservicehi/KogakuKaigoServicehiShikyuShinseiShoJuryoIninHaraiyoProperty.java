@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.kogakukaigoservicehi;
+package jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi;
 
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoProperty
         extends ReportPropertyBase<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource> {
 
-    private static final ReportId ID = ReportIdDBA.DBC800015.getReportId();
+    private static final ReportId ID = ReportIdDBC.DBC800015.getReportId();
 
     /**
      * インスタンスを生成します。

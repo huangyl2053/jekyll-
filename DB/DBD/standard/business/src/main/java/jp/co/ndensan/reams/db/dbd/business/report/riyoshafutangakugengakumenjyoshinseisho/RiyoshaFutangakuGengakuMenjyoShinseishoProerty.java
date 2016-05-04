@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.riyoshafutangakugengakumenjyoshinseisho;
+package jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho;
 
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link RiyoshaFutangakuGengakuMenjyoShinseishoReportSource}のプロパティです。
- * 
- * @reamsid_L DBA-0540-691  suguangjun 
+ *
+ * @reamsid_L DBA-0540-691 suguangjun
  */
 public class RiyoshaFutangakuGengakuMenjyoShinseishoProerty extends ReportPropertyBase<RiyoshaFutangakuGengakuMenjyoShinseishoReportSource> {
 
@@ -21,6 +21,6 @@ public class RiyoshaFutangakuGengakuMenjyoShinseishoProerty extends ReportProper
      * コンストラクタです。
      */
     public RiyoshaFutangakuGengakuMenjyoShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBD800002.getReportId());
+        super(SubGyomuCode.DBA介護資格, ReportIdDBD.DBD800002.getReportId());
     }
 }
