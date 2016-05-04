@@ -13,8 +13,12 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicek
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -173,8 +177,10 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         builder.append(構成市町村);
         LasdecCode lasdecCode = parameter.get構成市町村コード();
         RString 構成市町村コード = 左記号.concat(lasdecCode == null ? RString.EMPTY : lasdecCode.getColumnValue()).concat(右記号);
-        //TODOのNo.716 構成市町村名 ?
-        builder.append(構成市町村コード);
+        HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+        HokenshaSummary hokenshaSummary = hokenshaList.get(lasdecCode);
+        RString 構成市町村名 = hokenshaSummary.get市町村名称();
+        builder.append(構成市町村コード).append(構成市町村名);
         出力条件.add(builder.toRString());
         builder = get作成区分();
         出力条件.add(builder.toRString());

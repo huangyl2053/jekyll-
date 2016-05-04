@@ -270,7 +270,6 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set消除事由(isNull(entity.get宛名Entity().getShojoJiyuCode())
                 ? RString.EMPTY : entity.get宛名Entity().getShojoJiyuCode());
         csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD()));
-        //TODOのNo.714  宛名・本人・
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo yubinNo1 = entity.get宛名Entity().getTennyumaeYubinNo();
         if (yubinNo1 != null) {
@@ -325,10 +324,9 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(entity.getDbV1001市町村コード(),
                 FlexibleDate.getNowDate());
         csvEntity.set市町村名(地方公共団体.get市町村名());
-        //TODOのNo.714 URZ.Association
-        csvEntity.set保険者コード(RString.EMPTY);
-        //TODOのNo.714 URZ.Association
-        csvEntity.set保険者名(RString.EMPTY);
+        Association 地方公共団体1 = AssociationFinderFactory.createInstance().getAssociation();
+        csvEntity.set保険者コード(地方公共団体1.get地方公共団体コード().getColumnValue());
+        csvEntity.set保険者名(地方公共団体1.get市町村名());
         csvEntity.set空白(RString.EMPTY);
         AtenaMeisho atenaMeisho2 = entity.get宛先Entity().getKanjiShimei();
         if (atenaMeisho2 != null) {
