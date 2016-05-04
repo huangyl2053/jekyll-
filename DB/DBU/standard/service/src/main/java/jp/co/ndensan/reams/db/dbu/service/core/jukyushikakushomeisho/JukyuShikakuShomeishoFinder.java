@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeinengappiFushoKubunType;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
@@ -109,6 +110,8 @@ public class JukyuShikakuShomeishoFinder {
         get申請状況情報(outEntity, inEntity);
         outEntity.set認定審査会の意見等(inEntity.get認定審査会の意見等());
         outEntity.set備考(inEntity.get備考());
+        outEntity.set負担割合(inEntity.get負担割合());
+        outEntity.set負担割該当(inEntity.get負担割該当());
         outEntity.set連番(null);
 
         return edit認証者電子公印(outEntity, inEntity.get交付日());
@@ -260,7 +263,7 @@ public class JukyuShikakuShomeishoFinder {
             outEntity.set被保険者生年月日(生年月日西暦);
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード()
                 .equals(外国人表示制御_生年月日表示方法)) {
-            if (new RString("false").equals(宛名識別対象PSM.getSeinengappiFushoKubun())) {
+            if (SeinengappiFushoKubunType.不詳なし.code().equals(宛名識別対象PSM.getSeinengappiFushoKubun())) {
                 生年月日編集1(年号, 日付, outEntity);
             } else {
                 outEntity.set被保険者生年月日(RString.EMPTY);

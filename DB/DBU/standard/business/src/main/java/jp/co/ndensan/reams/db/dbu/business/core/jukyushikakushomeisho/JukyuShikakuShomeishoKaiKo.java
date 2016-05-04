@@ -148,4 +148,22 @@ public class JukyuShikakuShomeishoKaiKo {
     public boolean is住所を印字() {
         return entity.is住所を印字();
     }
+
+    /**
+     * 負担割合を返します。
+     *
+     * @return 負担割合
+     */
+    public RString get負担割合() {
+        return entity.get負担割合();
+    }
+
+    /**
+     * 負担割該当を返します。
+     *
+     * @return 負担割該当
+     */
+    public RString get負担割該当() {
+        return entity.get負担割該当();
+    }
 }

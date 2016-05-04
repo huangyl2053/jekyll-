@@ -33,5 +33,6 @@ public class JukyuShikakuShomeishoKaiKoEntity {
     private RString 有効期間の開始年月日;
     private ShikibetsuCode 識別コード;
     private boolean 住所を印字;
-
+    private RString 負担割合;
+    private RString 負担割該当;
 }
