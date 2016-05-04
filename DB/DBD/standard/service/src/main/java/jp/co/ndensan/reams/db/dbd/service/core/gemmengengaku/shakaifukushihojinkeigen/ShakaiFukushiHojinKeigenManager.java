@@ -200,17 +200,27 @@ public class ShakaiFukushiHojinKeigenManager {
         ShakaifukuRiyoshaFutanKeigenBuilder builder = 修正社会福祉法人等利用者負担軽減情報.createBuilderForEdit();
         edit修正社会福祉法人等利用者負担軽減情報(社会福祉法人等利用者負担軽減情報, builder, isメニューID);
         List<GemmenGengakuShinsei> 減免減額申請リスト = 修正社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList();
-        if (減免減額申請リスト.isEmpty()) {
-            減免減額申請リスト.add(new GemmenGengakuShinsei(
+        GemmenGengakuShinsei 減免減額申請 = get減免減額申請By減免減額種類(減免減額申請リスト, GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        if (null == 減免減額申請) {
+            減免減額申請 = new GemmenGengakuShinsei(
                     修正社会福祉法人等利用者負担軽減情報.get証記載保険者番号(),
                     修正社会福祉法人等利用者負担軽減情報.get被保険者番号(),
                     GemmenGengakuShurui.社会福祉法人等軽減.getコード(),
-                    修正社会福祉法人等利用者負担軽減情報.get履歴番号()));
+                    修正社会福祉法人等利用者負担軽減情報.get履歴番号());
         }
         builder.setGemmenGengakuShinsei(get修正減免減額申請(
                 社会福祉法人等利用者負担軽減情報.getGemmenGengakuShinseiList().get(0),
-                減免減額申請リスト.get(0)));
+                減免減額申請));
         manager.save(builder.build());
+    }
+
+    private GemmenGengakuShinsei get減免減額申請By減免減額種類(List<GemmenGengakuShinsei> 減免減額申請リスト, RString 減免減額種類) {
+        for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請リスト) {
+            if (減免減額種類.equals(減免減額申請.get減免減額種類())) {
+                return 減免減額申請;
+            }
+        }
+        return null;
     }
 
     private void edit修正社会福祉法人等利用者負担軽減情報(
