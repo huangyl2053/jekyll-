@@ -59,26 +59,23 @@ public final class GogitaiJohoMapperParameter {
      *
      * @param gogitaiNo int
      * @param gogitaiYukoKikanKaishiYMD FlexibleDate
-     * @param maxCount maxCount
      * @return 身体手帳検索パラメータ
      */
     public static GogitaiJohoMapperParameter createSelectByKeyParam(
             int gogitaiNo,
-            FlexibleDate gogitaiYukoKikanKaishiYMD,
-            int maxCount) {
-        return new GogitaiJohoMapperParameter(gogitaiNo, gogitaiYukoKikanKaishiYMD, true, true, true, false, maxCount);
+            FlexibleDate gogitaiYukoKikanKaishiYMD) {
+        return new GogitaiJohoMapperParameter(gogitaiNo, gogitaiYukoKikanKaishiYMD, true, true, true, false, 0);
     }
 
     /**
      * 一覧検索用のパラメータを生成します。
      *
      * @param gogitaiNo int
-     * @param maxCount maxCount
      * @return 身体手帳検索パラメータ
      */
     public static GogitaiJohoMapperParameter createSelectListParam(
-            int gogitaiNo, int maxCount) {
-        return new GogitaiJohoMapperParameter(gogitaiNo, FlexibleDate.EMPTY, true, false, true, false, maxCount);
+            int gogitaiNo) {
+        return new GogitaiJohoMapperParameter(gogitaiNo, FlexibleDate.EMPTY, true, false, true, false, 0);
     }
 
     /**
@@ -96,10 +93,9 @@ public final class GogitaiJohoMapperParameter {
      * 合議体情報作成のパラメータを生成します。
      *
      * @param 現在有効な合議体のみ 現在有効な合議体のみ
-     * @param maxCount maxCount
      * @return 合議体情報作成パラメータ
      */
-    public static GogitaiJohoMapperParameter createSelectBy合議体情報作成(boolean 現在有効な合議体のみ, int maxCount) {
-        return new GogitaiJohoMapperParameter(0, FlexibleDate.getNowDate(), false, false, false, 現在有効な合議体のみ, maxCount);
+    public static GogitaiJohoMapperParameter createSelectBy合議体情報作成(boolean 現在有効な合議体のみ) {
+        return new GogitaiJohoMapperParameter(0, FlexibleDate.getNowDate(), false, false, false, 現在有効な合議体のみ, 0);
     }
 }
