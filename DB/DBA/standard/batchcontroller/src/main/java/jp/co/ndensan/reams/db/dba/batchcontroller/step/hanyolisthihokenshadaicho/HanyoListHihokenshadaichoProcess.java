@@ -498,11 +498,11 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         return 条件.substring(0, 条件.length() - 1);
     }
 
-    private RString getCode_Name(RString Code, RString Name) {
+    private RString getCode_Name(RString code, RString name) {
         RStringBuilder 条件 = new RStringBuilder();
-        条件.append(Code);
+        条件.append(code);
         条件.append(" ");
-        条件.append(Name);
+        条件.append(name);
         return 条件.toRString();
     }
 
