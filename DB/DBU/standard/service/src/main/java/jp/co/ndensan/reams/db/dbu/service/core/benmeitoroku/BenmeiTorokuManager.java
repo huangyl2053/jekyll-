@@ -143,7 +143,7 @@ public class BenmeiTorokuManager {
         }
         return new BemmeiNaiyo(entity);
     }
-
+    
     /**
      * 弁明者情報の取得処理を行うです。
      *
