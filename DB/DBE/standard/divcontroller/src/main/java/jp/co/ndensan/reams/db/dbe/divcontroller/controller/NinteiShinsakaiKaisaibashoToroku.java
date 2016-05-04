@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * 介護認定審査会開催場所登録Divを制御クラスです。
  *
- * @reamsid_L DBE-0100-010  wangkun
+ * @reamsid_L DBE-0100-010 wangkun
  */
 public class NinteiShinsakaiKaisaibashoToroku {
 
@@ -222,11 +222,13 @@ public class NinteiShinsakaiKaisaibashoToroku {
         if (デフォルト検索条件.equals(div.getRadHyojiJoken().getSelectedKey())) {
             businessList = manager.
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
-                            createSelectBy審査会開催場所状況(有効)).records();
+                            createSelectBy審査会開催場所状況(有効, div.getShinsakaiKaisaibashokensaku().getTxtDispMax().getValue().intValue()))
+                    .records();
         } else {
             businessList = manager.
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
-                            createSelectBy審査会開催場所状況(全て)).records();
+                            createSelectBy審査会開催場所状況(全て, div.getShinsakaiKaisaibashokensaku().getTxtDispMax().getValue().intValue()))
+                    .records();
         }
         Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
                 = Models.create(businessList);
