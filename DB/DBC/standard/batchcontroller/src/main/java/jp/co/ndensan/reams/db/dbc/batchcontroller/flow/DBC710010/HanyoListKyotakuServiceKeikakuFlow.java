@@ -28,7 +28,8 @@ public class HanyoListKyotakuServiceKeikakuFlow
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        return loopBatch(HanyoListKyotakuServiceKeikakuProcess.class).define();
+        return loopBatch(HanyoListKyotakuServiceKeikakuProcess.class)
+                .arguments(getParameter().toProcessParameter()).define();
     }
 
 }
