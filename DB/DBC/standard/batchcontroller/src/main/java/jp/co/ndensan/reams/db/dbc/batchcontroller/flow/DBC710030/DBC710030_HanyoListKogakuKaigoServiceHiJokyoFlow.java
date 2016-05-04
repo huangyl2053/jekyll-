@@ -28,6 +28,7 @@ public class DBC710030_HanyoListKogakuKaigoServiceHiJokyoFlow
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        return loopBatch(HanyoListKogakuKaigoServiceHiJokyoProcess.class).define();
+        return loopBatch(HanyoListKogakuKaigoServiceHiJokyoProcess.class)
+                .arguments(getParameter().toProcessParamter()).define();
     }
 }
