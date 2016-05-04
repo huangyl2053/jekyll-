@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.kogakukaigoservicehi;
+package jp.co.ndensan.reams.db.dbc.service.report.kogakukaigoservicehi;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem;
-import jp.co.ndensan.reams.db.dba.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoProperty;
-import jp.co.ndensan.reams.db.dba.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
-import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoProperty;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -56,6 +58,24 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
     private static final RString 外国人 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
     private static final int INDEX_3 = 3;
     private static RString 生年月日;
+    private final DbT3055KogakuKyufuTaishoshaGokeiDac dac;
+
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @param dac {@link DbT3055KogakuKyufuTaishoshaGokeiDac}
+     */
+    KogakuKaigoServicehiShikyuJuryoIninShinseisho(
+            DbT3055KogakuKyufuTaishoshaGokeiDac dac) {
+        this.dac = dac;
+    }
+
+    /**
+     * コンストラクタです。
+     */
+    public KogakuKaigoServicehiShikyuJuryoIninShinseisho() {
+        this.dac = InstanceProvider.create(DbT3055KogakuKyufuTaishoshaGokeiDac.class);
+    }
 
     /**
      * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書を印刷します。
@@ -86,7 +106,7 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
         }
     }
 
-    private static List<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport> toReports(
+    private List<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport> toReports(
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport> list = new ArrayList<>();
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
@@ -102,9 +122,7 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
         } else {
             郵便番号 = RString.EMPTY;
         }
-        //TODO 内部QA:684 Redmine：75904(サービス提供年月の取得方式が知らない、一時固定値を使用します)
-        RString サービス提供年月 = new RString("");
-
+        RString サービス提供年月 = getサービス提供年月(business.get被保険者番号());
         KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem item = new KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem(
                 サービス提供年月,
                 RString.EMPTY,
@@ -182,12 +200,11 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
                 .fillType(FillType.BLANK).toDateString();
     }
 
-//    private static RString パターン62(FlexibleDate date) {
-//        if (date == null || date.isEmpty()) {
-//            return RString.EMPTY;
-//        }
-//        return date.wareki().eraType(EraType.ALPHABET)
-//                .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH)
-//                .fillType(FillType.ZERO).toDateString();
-//    }
+    private RString getサービス提供年月(HihokenshaNo 被保険者番号) {
+        List<DbT3055KogakuKyufuTaishoshaGokeiEntity> entityList = dac.get高額介護サービス費給付対象者合計の最新データ(被保険者番号);
+        if (!entityList.isEmpty()) {
+            return entityList.get(0).getServiceTeikyoYM().toDateString();
+        }
+        return RString.EMPTY;
+    }
 }

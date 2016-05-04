@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.riyoshafutangakugengakumenjyoshinseisho;
+package jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyoshinseisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem;
-import jp.co.ndensan.reams.db.dba.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoProerty;
-import jp.co.ndensan.reams.db.dba.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
-import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem;
+import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -59,8 +59,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護保険利用者負担額減額・免除申請書Printerです。
- * 
- * @reamsid_L DBA-0540-220  suguangjun 
+ *
+ * @reamsid_L DBA-0540-220 suguangjun
  */
 public class RiyoshaFutangakuGengakuMenjyoShinseisho {
 
@@ -88,8 +88,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
     /**
      * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutangakuGengakuMenjyoShinseisho}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutangakuGengakuMenjyoShinseisho}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link RiyoshaFutangakuGengakuMenjyoShinseisho}のインスタンス
      */
     public static RiyoshaFutangakuGengakuMenjyoShinseisho createInstance() {
         return InstanceProvider.create(RiyoshaFutangakuGengakuMenjyoShinseisho.class);
