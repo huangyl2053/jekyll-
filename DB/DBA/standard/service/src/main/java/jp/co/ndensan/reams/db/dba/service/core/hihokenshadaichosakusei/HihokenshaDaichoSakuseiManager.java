@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.Hihok
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.RoreiFukushiNenkinJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SeikatsuHogoJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiDivisionEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiLeftEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiRightEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiinJohoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionEntity;
@@ -56,10 +58,10 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -107,6 +109,7 @@ public class HihokenshaDaichoSakuseiManager {
     private static final RString CODESHUBETSU_0002 = new RString("0002");
     private static final RString CODESHUBETSU_0001 = new RString("0001");
     private static final int NOCOUNT_5 = 5;
+    private static final int NOCOUNT_4 = 4;
     private static final int NOCOUNT_3 = 3;
     private static final int NOCOUNT_6 = 6;
     private static final int NOCOUNT_8 = 8;
@@ -216,6 +219,11 @@ public class HihokenshaDaichoSakuseiManager {
                 hihokenshaEntity.setShichosonMeisho(shichosonMeisho);
             }
         }
+        UaFt200FindShikibetsuTaishoFunctionDac dac = InstanceProvider.create(
+                UaFt200FindShikibetsuTaishoFunctionDac.class);
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険,
+                        KensakuYusenKubun.住登外優先));
         if (!dbT1001HihokenList.isEmpty()) {
             hihokenshaEntity.setHihokenshaNoTitle(HIHOKENSHANO_TITLE);
             hihokenshaEntity.setHihokenshaNo(dbT1001HihokenList.get(0).getHihokenshaNo());
@@ -228,12 +236,8 @@ public class HihokenshaDaichoSakuseiManager {
             } else {
                 hihokenshaEntity.setState(STATE_資格喪失者);
             }
+            key.set識別コード(dbT1001HihokenList.get(0).getShikibetsuCode());
         }
-        UaFt200FindShikibetsuTaishoFunctionDac dac = InstanceProvider.create(
-                UaFt200FindShikibetsuTaishoFunctionDac.class);
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(SubGyomuCode.DBA介護資格.getGyomuCode(),
-                        KensakuYusenKubun.住登外優先));
         List<JuminShubetsu> 住民種別 = new ArrayList<>();
         List<JuminJotai> 住民状態 = new ArrayList<>();
         住民種別.add(JuminShubetsu.住登外個人_外国人);
@@ -255,7 +259,7 @@ public class HihokenshaDaichoSakuseiManager {
             hihokenshaEntity.setMeisho(shikibetsuTaisho.get名称().getName());
             hihokenshaEntity.setSeinengappiYMD(shikibetsuTaisho.to個人().get生年月日().toFlexibleDate());
             hihokenshaEntity.setSeibetsuCode(shikibetsuTaisho.to個人().get性別() == null ? RString.EMPTY
-                    : new RString(shikibetsuTaisho.to個人().get性別().getName().toString()));
+                    : shikibetsuTaisho.to個人().get性別().getName().getShortJapanese());
             hihokenshaEntity.setSetaiCode(shikibetsuTaisho.to個人().get世帯コード());
             hihokenshaEntity.setShikibetsuCode(shikibetsuTaisho.to個人().get識別コード());
             hihokenshaEntity.setChikucodeTitle1(shikibetsuTaisho.to個人().get行政区画().getChiku1().get名称());
@@ -265,7 +269,7 @@ public class HihokenshaDaichoSakuseiManager {
             hihokenshaEntity.setChikucodeTitle3(shikibetsuTaisho.to個人().get行政区画().getChiku3().get名称());
             hihokenshaEntity.setChikuCode3(shikibetsuTaisho.to個人().get行政区画().getChiku3().getコード());
             hihokenshaEntity.setJushoTitle(JUSHO_TITLE);
-            hihokenshaEntity.setJusho(new RString(shikibetsuTaisho.get住所().toString()));
+            hihokenshaEntity.setJusho(shikibetsuTaisho.get住所().get住所());
             hihokenshaEntity.setZenkokuJushoCode(shikibetsuTaisho.to個人().get住所().get全国住所コード());
             hihokenshaEntity.setGyoseikuTitle(GYOSEIKU_TITLE);
             hihokenshaEntity.setGyoseikuCode(shikibetsuTaisho.to個人().get行政区画().getGyoseiku().getコード());
@@ -338,8 +342,7 @@ public class HihokenshaDaichoSakuseiManager {
         List<HihokenshaDaichoDivisionEntity> 分割した被保険者台帳管理List = get分割した被保険者台帳管理リスト(
                 hihokenshaEntity.getDbT1001HihokenshaDaichoEntityList());
         List<RoreiFukushiNenkinJukyushaDivisionEntity> 分割した老齢福祉年金受給者List
-                = get分割した老齢福祉年金受給者リスト(
-                        hihokenshaEntity.getDbT7006RoreiFukushiNenkinJukyushaEntityList());
+                = get分割した老齢福祉年金受給者リスト(hihokenshaEntity.getDbT7006RoreiFukushiNenkinJukyushaEntityList());
         List<ShoKofuKaishuDivisionEntity> 分割した証交付回収List = get分割した証交付回収リスト(
                 hihokenshaEntity.getDbT7037ShoKofuKaishuEntityList());
         List<SeikatsuHogoJukyushaDivisionEntity> 分割した生活保護受給者List = get分割した生活保護受給者リスト(
@@ -403,7 +406,11 @@ public class HihokenshaDaichoSakuseiManager {
             } else {
                 setEmptiy被保険者証発行履歴情報(hihokenshaDaichoSakuseiEntity, NOCOUNT_10);
             }
-
+            if (!分割した世帯一覧情報List.isEmpty() && i < 分割した世帯一覧情報List.size()) {
+                set世帯情報(hihokenshaDaichoSakuseiEntity, 分割した世帯一覧情報List.get(i));
+            } else {
+                this.setEmptiy世帯情報(hihokenshaDaichoSakuseiEntity, NOCOUNT_5);
+            }
             hihokenshaDaichoSakuseiList.add(hihokenshaDaichoSakuseiEntity);
         }
         return hihokenshaDaichoSakuseiList;
@@ -428,7 +435,7 @@ public class HihokenshaDaichoSakuseiManager {
         資格異動情報Entity.set変更事由コード(hihokenshaDaichoDivisionEntity.get変更事由コード());
         資格異動情報Entity.set変更事由名称(hihokenshaDaichoDivisionEntity.get変更事由名称());
         資格異動情報Entity.set住特適用日(hihokenshaDaichoDivisionEntity.get住特適用日());
-        資格異動情報Entity.set住特適用日(hihokenshaDaichoDivisionEntity.get住特解除日());
+        資格異動情報Entity.set住特解除日(hihokenshaDaichoDivisionEntity.get住特解除日());
         資格異動情報Entity.set措置保険者(hihokenshaDaichoDivisionEntity.get措置保険者());
         資格異動情報Entity.set旧保険者(hihokenshaDaichoDivisionEntity.get旧保険者());
         hihokenshaDaichoSakuseiEntity.set資格異動情報Entity(資格異動情報Entity);
@@ -574,31 +581,33 @@ public class HihokenshaDaichoSakuseiManager {
         List<FlexibleDate> 証履歴発行日2 = new ArrayList<>();
         List<RString> 証履歴事由名称2 = new ArrayList<>();
         List<FlexibleDate> 証履歴回収日2 = new ArrayList<>();
-        for (int i = 0; i < shoKofuKaishuDivisionEntity.get証履歴No().size(); i++) {
-            if (i < NOCOUNT_5) {
-                証履歴No1.add(shoKofuKaishuDivisionEntity.get証履歴No().get(i));
-                証履歴発行日1.add(shoKofuKaishuDivisionEntity.get証履歴発行日().get(i));
-                証履歴事由名称1.add(shoKofuKaishuDivisionEntity.get証履歴事由名称().get(i));
-                証履歴回収日1.add(shoKofuKaishuDivisionEntity.get証履歴回収日().get(i));
-                continue;
+        if (shoKofuKaishuDivisionEntity.get証履歴No() != null) {
+            for (int i = 0; i < shoKofuKaishuDivisionEntity.get証履歴No().size(); i++) {
+                if (i < NOCOUNT_5) {
+                    証履歴No1.add(shoKofuKaishuDivisionEntity.get証履歴No().get(i));
+                    証履歴発行日1.add(shoKofuKaishuDivisionEntity.get証履歴発行日().get(i));
+                    証履歴事由名称1.add(shoKofuKaishuDivisionEntity.get証履歴事由名称().get(i));
+                    証履歴回収日1.add(shoKofuKaishuDivisionEntity.get証履歴回収日().get(i));
+                    continue;
+                }
+                if (i >= NOCOUNT_5 && i < NOCOUNT_10) {
+                    証履歴No2.add(shoKofuKaishuDivisionEntity.get証履歴No().get(i));
+                    証履歴発行日2.add(shoKofuKaishuDivisionEntity.get証履歴発行日().get(i));
+                    証履歴事由名称2.add(shoKofuKaishuDivisionEntity.get証履歴事由名称().get(i));
+                    証履歴回収日2.add(shoKofuKaishuDivisionEntity.get証履歴回収日().get(i));
+                }
             }
-            if (i >= NOCOUNT_5 && i < NOCOUNT_10) {
-                証履歴No2.add(shoKofuKaishuDivisionEntity.get証履歴No().get(i));
-                証履歴発行日2.add(shoKofuKaishuDivisionEntity.get証履歴発行日().get(i));
-                証履歴事由名称2.add(shoKofuKaishuDivisionEntity.get証履歴事由名称().get(i));
-                証履歴回収日2.add(shoKofuKaishuDivisionEntity.get証履歴回収日().get(i));
-            }
+            被保険者証発行履歴情報１.set証履歴No1(証履歴No1);
+            被保険者証発行履歴情報１.set証履歴事由名称1(証履歴事由名称1);
+            被保険者証発行履歴情報１.set証履歴回収日1(証履歴回収日1);
+            被保険者証発行履歴情報１.set証履歴発行日1(証履歴発行日1);
+            被保険者証発行履歴情報２.set証履歴No2(証履歴No2);
+            被保険者証発行履歴情報２.set証履歴事由名称2(証履歴事由名称2);
+            被保険者証発行履歴情報２.set証履歴回収日2(証履歴回収日2);
+            被保険者証発行履歴情報２.set証履歴発行日2(証履歴発行日2);
+            hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報１(被保険者証発行履歴情報１);
+            hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報２(被保険者証発行履歴情報２);
         }
-        被保険者証発行履歴情報１.set証履歴No1(証履歴No1);
-        被保険者証発行履歴情報１.set証履歴事由名称1(証履歴事由名称1);
-        被保険者証発行履歴情報１.set証履歴回収日1(証履歴回収日1);
-        被保険者証発行履歴情報１.set証履歴発行日1(証履歴発行日1);
-        被保険者証発行履歴情報２.set証履歴No2(証履歴No2);
-        被保険者証発行履歴情報２.set証履歴事由名称2(証履歴事由名称2);
-        被保険者証発行履歴情報２.set証履歴回収日2(証履歴回収日2);
-        被保険者証発行履歴情報２.set証履歴発行日2(証履歴発行日2);
-        hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報１(被保険者証発行履歴情報１);
-        hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報２(被保険者証発行履歴情報２);
     }
 
     private void setEmptiy被保険者証発行履歴情報(HihokenshaDaichoSakuseiEntity hihokenshaDaichoSakuseiEntity,
@@ -640,6 +649,71 @@ public class HihokenshaDaichoSakuseiManager {
         hihokenshaDaichoSakuseiEntity.set被保険者証発行履歴情報２(被保険者証発行履歴情報２);
     }
 
+    private void set世帯情報(HihokenshaDaichoSakuseiEntity hihokenshaDaichoSakuseiEntity,
+            SetaiDivisionEntity setaiDivisionEntity) {
+        requireNonNull(setaiDivisionEntity, UrSystemErrorMessages.値がnull.
+                getReplacedMessage("setaiDivisionEntity"));
+        SetaiLeftEntity leftEntity = new SetaiLeftEntity();
+        SetaiRightEntity rightEntity = new SetaiRightEntity();
+        if (setaiDivisionEntity.get世帯左No() != null) {
+            for (int i = 0; i < setaiDivisionEntity.get世帯左No().size(); i++) {
+                if (i == 0) {
+                    hihokenshaDaichoSakuseiEntity.setSetaiName1(setaiDivisionEntity.get氏名().get(i));
+                }
+                if (i == 1) {
+                    hihokenshaDaichoSakuseiEntity.setSetaiName2(setaiDivisionEntity.get氏名().get(i));
+                }
+                if (i == 2) {
+                    hihokenshaDaichoSakuseiEntity.setSetaiName3(setaiDivisionEntity.get氏名().get(i));
+                }
+                if (i == NOCOUNT_3) {
+                    hihokenshaDaichoSakuseiEntity.setSetaiName4(setaiDivisionEntity.get氏名().get(i));
+                }
+                if (i == NOCOUNT_4) {
+                    hihokenshaDaichoSakuseiEntity.setSetaiName5(setaiDivisionEntity.get氏名().get(i));
+                }
+            }
+            leftEntity.set世帯左No(setaiDivisionEntity.get世帯左No());
+            leftEntity.set世帯左識別コード(setaiDivisionEntity.get世帯左識別コード());
+            rightEntity.set世帯右性別(setaiDivisionEntity.get世帯性別());
+            rightEntity.set世帯右生年月日(setaiDivisionEntity.get世帯生年月日());
+            rightEntity.set世帯右続柄(setaiDivisionEntity.get世帯続柄());
+            rightEntity.set世帯右被保険者番号(setaiDivisionEntity.get世帯被保険者番号());
+            hihokenshaDaichoSakuseiEntity.set世帯左情報(leftEntity);
+            hihokenshaDaichoSakuseiEntity.set世帯右情報(rightEntity);
+        }
+    }
+
+    private void setEmptiy世帯情報(HihokenshaDaichoSakuseiEntity hihokenshaDaichoSakuseiEntity, int 一ページのレコード) {
+        hihokenshaDaichoSakuseiEntity.setSetaiName1(RString.EMPTY);
+        hihokenshaDaichoSakuseiEntity.setSetaiName2(RString.EMPTY);
+        hihokenshaDaichoSakuseiEntity.setSetaiName3(RString.EMPTY);
+        hihokenshaDaichoSakuseiEntity.setSetaiName4(RString.EMPTY);
+        hihokenshaDaichoSakuseiEntity.setSetaiName5(RString.EMPTY);
+        SetaiLeftEntity leftEntity = new SetaiLeftEntity();
+        SetaiRightEntity rightEntity = new SetaiRightEntity();
+        List<RString> 世帯左No = new ArrayList<>();
+        List<ShikibetsuCode> 世帯左識別コード = new ArrayList<>();
+        List<RString> 世帯右性別 = new ArrayList<>();
+        List<FlexibleDate> 世帯右生年月日 = new ArrayList<>();
+        List<RString> 世帯右続柄 = new ArrayList<>();
+        List<HihokenshaNo> 世帯右被保険者番号 = new ArrayList<>();
+        for (int i = 0; i < 一ページのレコード; i++) {
+            世帯左No.add(RString.EMPTY);
+            世帯左識別コード.add(ShikibetsuCode.EMPTY);
+            世帯右性別.add(RString.EMPTY);
+            世帯右生年月日.add(FlexibleDate.EMPTY);
+            世帯右続柄.add(RString.EMPTY);
+            世帯右被保険者番号.add(HihokenshaNo.EMPTY);
+        }
+        leftEntity.set世帯左No(世帯左No);
+        leftEntity.set世帯左識別コード(世帯左識別コード);
+        rightEntity.set世帯右性別(世帯右性別);
+        rightEntity.set世帯右生年月日(世帯右生年月日);
+        rightEntity.set世帯右続柄(世帯右続柄);
+        rightEntity.set世帯右被保険者番号(世帯右被保険者番号);
+    }
+
     private List<DbT1001HihokenshaDaichoEntity> get被保険者台帳管理情報(HihokenshaDaichoSakuseiParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage(REPLACED_MESSAGE.toString()));
         IHihokenshaDaichoSakuseiMapper mapper = mapperProvider.create(IHihokenshaDaichoSakuseiMapper.class);
@@ -647,7 +721,6 @@ public class HihokenshaDaichoSakuseiManager {
         if (entityList.isEmpty()) {
             return new ArrayList<>();
         }
-
         return entityList;
     }
 
@@ -752,6 +825,10 @@ public class HihokenshaDaichoSakuseiManager {
         List<RString> 住特解除日 = new ArrayList<>();
         List<LasdecCode> 措置保険者 = new ArrayList<>();
         List<LasdecCode> 旧保険者 = new ArrayList<>();
+        if (entityList.isEmpty()) {
+            hihokenshaDaichoDivisionEntity.set資格異動No(資格異動No);
+            分割した被保険者台帳管理List.add(hihokenshaDaichoDivisionEntity);
+        }
         for (DbT1001HihokenshaDaichoEntity entity : entityList) {
             資格異動No.add(new RString(String.valueOf(nocount + 1)));
             取得日.add(flexRString(entity.getShikakuShutokuYMD()));
@@ -802,22 +879,22 @@ public class HihokenshaDaichoSakuseiManager {
                 hihokenshaDaichoDivisionEntity.set措置保険者(措置保険者);
                 hihokenshaDaichoDivisionEntity.set旧保険者(旧保険者);
                 分割した被保険者台帳管理List.add(hihokenshaDaichoDivisionEntity);
-                資格異動No.clear();
-                取得日.clear();
-                取得事由コード.clear();
-                取得事由名称.clear();
-                一号取得日.clear();
-                喪失日.clear();
-                喪失事由コード.clear();
-                喪失事由名称.clear();
-                資格区分.clear();
-                変更日.clear();
-                変更事由コード.clear();
-                変更事由名称.clear();
-                住特適用日.clear();
-                住特解除日.clear();
-                措置保険者.clear();
-                旧保険者.clear();
+                資格異動No = new ArrayList<>();
+                取得日 = new ArrayList<>();
+                取得事由コード = new ArrayList<>();
+                取得事由名称 = new ArrayList<>();
+                一号取得日 = new ArrayList<>();
+                喪失日 = new ArrayList<>();
+                喪失事由コード = new ArrayList<>();
+                喪失事由名称 = new ArrayList<>();
+                資格区分 = new ArrayList<>();
+                変更日 = new ArrayList<>();
+                変更事由コード = new ArrayList<>();
+                変更事由名称 = new ArrayList<>();
+                住特適用日 = new ArrayList<>();
+                住特解除日 = new ArrayList<>();
+                措置保険者 = new ArrayList<>();
+                旧保険者 = new ArrayList<>();
                 hihokenshaDaichoDivisionEntity = new HihokenshaDaichoDivisionEntity();
             } else if (entityList.size() - entityList.size() % NOCOUNT_5 < (nocount + 1)) {
                 hihokenshaDaichoDivisionEntity.set資格異動No(資格異動No);
@@ -836,11 +913,12 @@ public class HihokenshaDaichoSakuseiManager {
                 hihokenshaDaichoDivisionEntity.set住特解除日(住特解除日);
                 hihokenshaDaichoDivisionEntity.set措置保険者(措置保険者);
                 hihokenshaDaichoDivisionEntity.set旧保険者(旧保険者);
-                分割した被保険者台帳管理List.add(hihokenshaDaichoDivisionEntity);
             }
             nocount++;
         }
-
+        if (nocount % NOCOUNT_5 != 0) {
+            分割した被保険者台帳管理List.add(hihokenshaDaichoDivisionEntity);
+        }
         return 分割した被保険者台帳管理List;
     }
 
@@ -863,6 +941,10 @@ public class HihokenshaDaichoSakuseiManager {
         List<FlexibleDate> 全額停止開始日 = new ArrayList<>();
         List<FlexibleDate> 全額停止終了日 = new ArrayList<>();
         List<RString> 扶助種類 = new ArrayList<>();
+        if (entityList.isEmpty()) {
+            seikatsuHogoJukyushaDivisionEntity.set生活保護No(生活保護No);
+            分割した生活保護受給者List.add(seikatsuHogoJukyushaDivisionEntity);
+        }
         for (ShisetsuNyutaishoEntity entity : entityList) {
             生活保護No.add(new RString(String.valueOf(nocount + 1)));
             受給開始日.add(entity.getJukyuKaishiYMD());
@@ -878,12 +960,12 @@ public class HihokenshaDaichoSakuseiManager {
                 seikatsuHogoJukyushaDivisionEntity.set全額停止終了日(全額停止終了日);
                 seikatsuHogoJukyushaDivisionEntity.set扶助種類(扶助種類);
                 分割した生活保護受給者List.add(seikatsuHogoJukyushaDivisionEntity);
-                生活保護No.clear();
-                受給開始日.clear();
-                受給廃止日.clear();
-                全額停止開始日.clear();
-                全額停止終了日.clear();
-                扶助種類.clear();
+                生活保護No = new ArrayList<>();
+                受給開始日 = new ArrayList<>();
+                受給廃止日 = new ArrayList<>();
+                全額停止開始日 = new ArrayList<>();
+                全額停止終了日 = new ArrayList<>();
+                扶助種類 = new ArrayList<>();
                 seikatsuHogoJukyushaDivisionEntity = new SeikatsuHogoJukyushaDivisionEntity();
             } else if (entityList.size() - entityList.size() % NOCOUNT_3 < (nocount + 1)) {
                 seikatsuHogoJukyushaDivisionEntity.set生活保護No(生活保護No);
@@ -892,9 +974,11 @@ public class HihokenshaDaichoSakuseiManager {
                 seikatsuHogoJukyushaDivisionEntity.set全額停止開始日(全額停止開始日);
                 seikatsuHogoJukyushaDivisionEntity.set全額停止終了日(全額停止終了日);
                 seikatsuHogoJukyushaDivisionEntity.set扶助種類(扶助種類);
-                分割した生活保護受給者List.add(seikatsuHogoJukyushaDivisionEntity);
             }
             nocount++;
+        }
+        if (nocount % NOCOUNT_3 != 0) {
+            分割した生活保護受給者List.add(seikatsuHogoJukyushaDivisionEntity);
         }
         return 分割した生活保護受給者List;
     }
@@ -919,6 +1003,10 @@ public class HihokenshaDaichoSakuseiManager {
         List<RString> 老齢福祉No = new ArrayList<>();
         List<FlexibleDate> 老齢福祉受給開始日 = new ArrayList<>();
         List<FlexibleDate> 老齢福祉受給終了日 = new ArrayList<>();
+        if (entityList.isEmpty()) {
+            roreiDivisionEntity.set老齢福祉No(老齢福祉No);
+            分割した老齢福祉年金受給者List.add(roreiDivisionEntity);
+        }
         for (DbT7006RoreiFukushiNenkinJukyushaEntity entity : entityList) {
             老齢福祉No.add(new RString(String.valueOf(nocount + 1)));
             老齢福祉受給開始日.add(entity.getJukyuKaishiYMD());
@@ -928,19 +1016,20 @@ public class HihokenshaDaichoSakuseiManager {
                 roreiDivisionEntity.set老齢福祉受給開始日(老齢福祉受給開始日);
                 roreiDivisionEntity.set老齢福祉受給終了日(老齢福祉受給終了日);
                 分割した老齢福祉年金受給者List.add(roreiDivisionEntity);
-                老齢福祉No.clear();
-                老齢福祉受給開始日.clear();
-                老齢福祉受給終了日.clear();
+                老齢福祉No = new ArrayList<>();
+                老齢福祉受給開始日 = new ArrayList<>();
+                老齢福祉受給終了日 = new ArrayList<>();
                 roreiDivisionEntity = new RoreiFukushiNenkinJukyushaDivisionEntity();
-            } else if (entityList.size() - entityList.size() % NOCOUNT_3 < (nocount + 1)) {
+            } else if ((entityList.size() - entityList.size() % NOCOUNT_3) < (nocount + 1)) {
                 roreiDivisionEntity.set老齢福祉No(老齢福祉No);
                 roreiDivisionEntity.set老齢福祉受給開始日(老齢福祉受給開始日);
                 roreiDivisionEntity.set老齢福祉受給終了日(老齢福祉受給終了日);
-                分割した老齢福祉年金受給者List.add(roreiDivisionEntity);
             }
             nocount++;
         }
-
+        if (nocount % NOCOUNT_3 != 0) {
+            分割した老齢福祉年金受給者List.add(roreiDivisionEntity);
+        }
         return 分割した老齢福祉年金受給者List;
     }
 
@@ -968,21 +1057,22 @@ public class HihokenshaDaichoSakuseiManager {
                 kaishuDivisionEntity.set証履歴事由名称(証履歴事由名称);
                 kaishuDivisionEntity.set証履歴回収日(証履歴回収日);
                 分割した証交付回収List.add(kaishuDivisionEntity);
-                証履歴No.clear();
-                証履歴発行日.clear();
-                証履歴事由名称.clear();
-                証履歴回収日.clear();
+                証履歴No = new ArrayList<>();
+                証履歴発行日 = new ArrayList<>();
+                証履歴事由名称 = new ArrayList<>();
+                証履歴回収日 = new ArrayList<>();
                 kaishuDivisionEntity = new ShoKofuKaishuDivisionEntity();
             } else if (entityList.size() - entityList.size() % NOCOUNT_10 < (nocount + 1)) {
                 kaishuDivisionEntity.set証履歴No(証履歴No);
                 kaishuDivisionEntity.set証履歴発行日(証履歴発行日);
                 kaishuDivisionEntity.set証履歴事由名称(証履歴事由名称);
                 kaishuDivisionEntity.set証履歴回収日(証履歴回収日);
-                分割した証交付回収List.add(kaishuDivisionEntity);
             }
             nocount++;
         }
-
+        if (nocount % NOCOUNT_10 != 0) {
+            分割した証交付回収List.add(kaishuDivisionEntity);
+        }
         return 分割した証交付回収List;
     }
 
@@ -992,22 +1082,28 @@ public class HihokenshaDaichoSakuseiManager {
         int nocount = 0;
         List<RString> 世帯左No = new ArrayList<>();
         List<ShikibetsuCode> 世帯左識別コード = new ArrayList<>();
-        List<AtenaKanaMeisho> 氏名 = new ArrayList<>();
+        List<RString> 氏名 = new ArrayList<>();
         List<RString> 世帯性別 = new ArrayList<>();
         List<FlexibleDate> 世帯生年月日 = new ArrayList<>();
         List<RString> 世帯続柄 = new ArrayList<>();
         List<HihokenshaNo> 世帯被保険者番号 = new ArrayList<>();
+        if (setaiinJohoEntityList.isEmpty()) {
+            setaiDivisionEntity.set世帯左No(世帯左No);
+            setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
+            分割した世帯情報List.add(setaiDivisionEntity);
+        }
         for (SetaiinJohoEntity entity : setaiinJohoEntityList) {
             IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(entity.getUaFt200Entity());
             世帯左No.add(new RString(String.valueOf(nocount + 1)));
             世帯左識別コード.add(shikibetsuTaisho.get識別コード());
-            氏名.add(shikibetsuTaisho.get名称().getKana());
+            氏名.add(shikibetsuTaisho.get名称().getKana() == null ? RString.EMPTY : shikibetsuTaisho.get名称().getKana().getColumnValue());
             世帯性別.add(shikibetsuTaisho.to個人().get性別() == null ? RString.EMPTY
                     : new RString(shikibetsuTaisho.to個人().get性別().getName().toString()));
             世帯生年月日.add(shikibetsuTaisho.to個人().get生年月日() == null ? FlexibleDate.EMPTY
                     : shikibetsuTaisho.to個人().get生年月日().toFlexibleDate());
             世帯続柄.add(shikibetsuTaisho.to個人().get続柄());
-            //世帯被保険者番号.add(setaiinJoho.get識別対象());
+            // TODO  内部QA：1107 Redmine：#83700(被保番号の取得方式が知らない、一時固定値を使用します)
+            世帯被保険者番号.add(new HihokenshaNo("123456"));
             if ((nocount + 1) % NOCOUNT_5 == 0) {
                 setaiDivisionEntity.set世帯左No(世帯左No);
                 setaiDivisionEntity.set世帯左識別コード(世帯左識別コード);
@@ -1015,13 +1111,15 @@ public class HihokenshaDaichoSakuseiManager {
                 setaiDivisionEntity.set世帯性別(世帯性別);
                 setaiDivisionEntity.set世帯生年月日(世帯生年月日);
                 setaiDivisionEntity.set世帯続柄(世帯続柄);
+                setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
                 分割した世帯情報List.add(setaiDivisionEntity);
-                世帯左No.clear();
-                世帯左識別コード.clear();
-                氏名.clear();
-                世帯性別.clear();
-                世帯生年月日.clear();
-                世帯続柄.clear();
+                世帯左No = new ArrayList<>();
+                世帯左識別コード = new ArrayList<>();
+                氏名 = new ArrayList<>();
+                世帯性別 = new ArrayList<>();
+                世帯生年月日 = new ArrayList<>();
+                世帯続柄 = new ArrayList<>();
+                世帯被保険者番号 = new ArrayList<>();
                 setaiDivisionEntity = new SetaiDivisionEntity();
             } else if (setaiinJohoEntityList.size() - setaiinJohoEntityList.size() % NOCOUNT_10 < (nocount + 1)) {
                 setaiDivisionEntity.set世帯左No(世帯左No);
@@ -1031,11 +1129,12 @@ public class HihokenshaDaichoSakuseiManager {
                 setaiDivisionEntity.set世帯生年月日(世帯生年月日);
                 setaiDivisionEntity.set世帯続柄(世帯続柄);
                 setaiDivisionEntity.set世帯被保険者番号(世帯被保険者番号);
-                分割した世帯情報List.add(setaiDivisionEntity);
             }
             nocount++;
         }
-
+        if (nocount % NOCOUNT_5 != 0) {
+            分割した世帯情報List.add(setaiDivisionEntity);
+        }
         return 分割した世帯情報List;
     }
 
@@ -1061,9 +1160,8 @@ public class HihokenshaDaichoSakuseiManager {
     }
 
     private RString dateFormat日時(RString formatDate) {
-        RStringBuilder nianYueRiShiFenMiao
-                = new RStringBuilder(new RDate(formatDate.substring(0, NOCOUNT_11).toString())
-                        .wareki().separator(Separator.JAPANESE).toDateString());
+        RStringBuilder nianYueRiShiFenMiao = new RStringBuilder(new RDate(formatDate.substring(0, NOCOUNT_11).toString())
+                .wareki().separator(Separator.JAPANESE).toDateString());
         RString temp = formatDate.substring(NOCOUNT_12);
         RStringBuilder tempTime = new RStringBuilder(temp.substring(0, 2));
         tempTime.append(HOUR);

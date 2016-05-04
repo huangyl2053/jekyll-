@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBUUC00300",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "様式別連携情報作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0030011",
+     "toLayoutTitle": "事業状況報告(月報)様式別連携情報作成",
+     "toState": "バッチ実行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0030011",
+     "layoutTitle": "事業状況報告(月報)様式別連携情報作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

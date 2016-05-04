@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListKyotakuServiceKeikakuEntity {
 
     private LasdecCode dbV1001市町村コード;

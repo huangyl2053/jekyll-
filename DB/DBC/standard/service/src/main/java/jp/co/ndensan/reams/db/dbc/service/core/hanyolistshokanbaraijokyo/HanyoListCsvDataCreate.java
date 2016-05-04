@@ -367,8 +367,12 @@ public class HanyoListCsvDataCreate {
                     ? 国保連送付年月.toDateString() : RString.EMPTY);
             csvEntity.set申請状態(entity.get支給申請Entity().getKaishuShinseiKubun());
             csvEntity.set施行完了予定日(dataToRString(entity.get支給住宅Entity().getSekoKanryoYoteiYMD()));
-            RString 申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
-                    new Code(entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode()), FlexibleDate.getNowDate());
+            RString 申請取消事由 = RString.EMPTY;
+            RString 申請取消事由Code = entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode();
+            if (申請取消事由Code != null && !申請取消事由Code.isEmpty()) {
+                申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
+                        new Code(申請取消事由Code), FlexibleDate.getNowDate());
+            }
             csvEntity.set申請取消事由(申請取消事由);
             csvEntity.set支給届出年月日(dataToRString(entity.get支給申請Entity().getShinseiYMD()));
             csvEntity.set支給受付年月日(dataToRString(entity.get支給申請Entity().getUketsukeYMD()));
@@ -415,8 +419,11 @@ public class HanyoListCsvDataCreate {
         csvEntity.set空白(RString.EMPTY);
         csvEntity.set被保険者番号(entity.get被保険者番号() != null
                 ? entity.get被保険者番号().getColumnValue() : RString.EMPTY);
-        RString 資格取得事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 資格取得事由コード種別,
-                new Code(entity.get資格取得事由コード()), FlexibleDate.getNowDate());
+        RString 資格取得事由 = RString.EMPTY;
+        if (entity.get資格取得事由コード().isNullOrEmpty()) {
+            資格取得事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 資格取得事由コード種別,
+                    new Code(entity.get資格取得事由コード()), FlexibleDate.getNowDate());
+        }
         csvEntity.set資格取得事由(資格取得事由);
         csvEntity.set資格取得日(dataToRString(entity.get資格取得年月日()));
         csvEntity.set資格取得届出日(dataToRString(entity.get資格取得届出年月日()));
@@ -447,8 +454,7 @@ public class HanyoListCsvDataCreate {
     }
 
     private RString get証記載保険者番号(HanyoListShokanbaraiJokyoEntity entity, HokenshaList 保険者リスト) {
-        ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
-        HokenshaSummary 保険者 = HokenshaSummary.EMPTY;
+        HokenshaSummary 保険者;
         if (entity.is広域内住所地特例フラグ()) {
             if (entity.get広住特措置元市町村コード() == null) {
                 return RString.EMPTY;
@@ -461,7 +467,7 @@ public class HanyoListCsvDataCreate {
             }
             保険者 = 保険者リスト.get(entity.get市町村コード());
         }
-        証記載保険者番号 = 保険者 != null ? 保険者.get証記載保険者番号() : ShoKisaiHokenshaNo.EMPTY;
+        ShoKisaiHokenshaNo 証記載保険者番号 = 保険者 != null ? 保険者.get証記載保険者番号() : ShoKisaiHokenshaNo.EMPTY;
         return 証記載保険者番号 != null ? 証記載保険者番号.getColumnValue() : RString.EMPTY;
     }
 

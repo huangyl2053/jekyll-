@@ -23,7 +23,8 @@ public enum FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDivSpec implements IPre
                  */
                 @Override
                 public boolean apply(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-                    return div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsPublish();
+                    return div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsPublish()
+                    || div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getFutanGendogakuNinteiHeddaXinseiSyo().isIsPublish();
                 }
             },
     発行日の非空チェック {
@@ -36,7 +37,7 @@ public enum FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDivSpec implements IPre
                 @Override
                 public boolean apply(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
                     return div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().
-                    getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD() != null;
+                    getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue() != null;
                 }
             },
 }

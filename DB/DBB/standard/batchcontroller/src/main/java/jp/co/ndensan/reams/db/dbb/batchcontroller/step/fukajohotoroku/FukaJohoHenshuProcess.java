@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -73,27 +74,27 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
     private void save特徴期別(DbT2002FukaJohoTempTableEntity 賦課情報,
             ShunoKamokuManager manager,
             FukaNokiResearcher 賦課納期取得) {
-        if (初期金額.compareTo(賦課情報.getTkKibetsuGaku01()) == -1) {
+        if (賦課情報.getTkKibetsuGaku01() != null && 初期金額.compareTo(賦課情報.getTkKibetsuGaku01()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収),
                     1, 賦課納期取得.get特徴納期(1).get納期限(), 賦課情報.getTkKibetsuGaku01());
         }
-        if (初期金額.compareTo(賦課情報.getTkKibetsuGaku02()) == -1) {
+        if (賦課情報.getTkKibetsuGaku02() != null && 初期金額.compareTo(賦課情報.getTkKibetsuGaku02()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収),
                     特徴期_2, 賦課納期取得.get特徴納期(特徴期_2).get納期限(), 賦課情報.getTkKibetsuGaku02());
         }
-        if (初期金額.compareTo(賦課情報.getTkKibetsuGaku03()) == -1) {
+        if (賦課情報.getTkKibetsuGaku03() != null && 初期金額.compareTo(賦課情報.getTkKibetsuGaku03()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収),
                     特徴期_3, 賦課納期取得.get特徴納期(特徴期_3).get納期限(), 賦課情報.getTkKibetsuGaku03());
         }
-        if (初期金額.compareTo(賦課情報.getTkKibetsuGaku04()) == -1) {
+        if (賦課情報.getTkKibetsuGaku04() != null && 初期金額.compareTo(賦課情報.getTkKibetsuGaku04()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収),
                     特徴期_4, 賦課納期取得.get特徴納期(特徴期_4).get納期限(), 賦課情報.getTkKibetsuGaku04());
         }
-        if (初期金額.compareTo(賦課情報.getTkKibetsuGaku05()) == -1) {
+        if (賦課情報.getTkKibetsuGaku05() != null && 初期金額.compareTo(賦課情報.getTkKibetsuGaku05()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収),
                     特徴期_5, 賦課納期取得.get特徴納期(特徴期_5).get納期限(), 賦課情報.getTkKibetsuGaku05());
         }
-        if (初期金額.compareTo(賦課情報.getTkKibetsuGaku06()) == -1) {
+        if (賦課情報.getTkKibetsuGaku06() != null && 初期金額.compareTo(賦課情報.getTkKibetsuGaku06()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収),
                     特徴期_6, 賦課納期取得.get特徴納期(特徴期_6).get納期限(), 賦課情報.getTkKibetsuGaku06());
         }
@@ -103,85 +104,99 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
             ShunoKamokuManager manager,
             FukaNokiResearcher 賦課納期取得) {
         KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku01()) == -1) {
+        save普徴期別By07期(賦課情報, manager, 賦課納期取得, 期月リスト);
+        save普徴期別By14期(賦課情報, manager, 賦課納期取得, 期月リスト);
+    }
+
+    private void save普徴期別By07期(DbT2002FukaJohoTempTableEntity 賦課情報,
+            ShunoKamokuManager manager,
+            FukaNokiResearcher 賦課納期取得,
+            KitsukiList 期月リスト) {
+        if (賦課情報.getFuKibetsuGaku01() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku01()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._4月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._4月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku01());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku02()) == -1) {
+        if (賦課情報.getFuKibetsuGaku02() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku02()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._5月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._5月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku02());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku03()) == -1) {
+        if (賦課情報.getFuKibetsuGaku03() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku03()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._6月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._5月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku03());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku04()) == -1) {
+        if (賦課情報.getFuKibetsuGaku04() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku04()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._7月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._7月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku04());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku05()) == -1) {
+        if (賦課情報.getFuKibetsuGaku05() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku05()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._8月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._8月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku05());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku06()) == -1) {
+        if (賦課情報.getFuKibetsuGaku06() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku06()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._9月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._9月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku06());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku07()) == -1) {
+        if (賦課情報.getFuKibetsuGaku07() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku07()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._10月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._10月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku07());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku08()) == -1) {
+    }
+
+    private void save普徴期別By14期(DbT2002FukaJohoTempTableEntity 賦課情報,
+            ShunoKamokuManager manager,
+            FukaNokiResearcher 賦課納期取得,
+            KitsukiList 期月リスト) {
+        if (賦課情報.getFuKibetsuGaku08() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku08()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._11月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._11月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku08());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku09()) == -1) {
+        if (賦課情報.getFuKibetsuGaku09() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku09()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._12月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._12月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku09());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku10()) == -1) {
+        if (賦課情報.getFuKibetsuGaku10() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku10()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._1月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._1月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku10());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku11()) == -1) {
+        if (賦課情報.getFuKibetsuGaku11() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku11()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._2月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._2月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku11());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku12()) == -1) {
+        if (賦課情報.getFuKibetsuGaku12() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku12()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki._3月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki._3月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku12());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku13()) == -1) {
+        if (賦課情報.getFuKibetsuGaku13() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku13()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt()).get納期限(),
                     賦課情報.getFuKibetsuGaku13());
         }
-        if (初期金額.compareTo(賦課情報.getFuKibetsuGaku14()) == -1) {
+        if (賦課情報.getFuKibetsuGaku14() != null && 初期金額.compareTo(賦課情報.getFuKibetsuGaku14()) == -1) {
             saveTemp(賦課情報, manager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収),
                     期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt(),
                     賦課納期取得.get普徴納期(期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt()).get納期限(),
@@ -191,7 +206,7 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
 
     private void saveTemp(DbT2002FukaJohoTempTableEntity 賦課情報, IShunoKamoku 科目, int 期別, RDate 納期限, Decimal 調定額) {
         dbT0700ShunoKanriTemp.insert(get収納管理(科目, 賦課情報, 期別));
-        dbT0705ChoteiKyotsuTemp.insert(get調定共通(納期限, 調定額));
+        dbT0705ChoteiKyotsuTemp.insert(get調定共通(賦課情報.getChoteiNendo(), 納期限, 調定額));
         収納ID++;
         調定ID++;
     }
@@ -209,10 +224,11 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         return entity;
     }
 
-    private DbT0705ChoteiKyotsuTempTableEntity get調定共通(RDate 納期限, Decimal 調定額) {
+    private DbT0705ChoteiKyotsuTempTableEntity get調定共通(FlexibleYear 会計年度, RDate 納期限, Decimal 調定額) {
         DbT0705ChoteiKyotsuTempTableEntity entity = new DbT0705ChoteiKyotsuTempTableEntity();
         entity.setChoteiId(調定ID);
         entity.setShunoId(収納ID);
+        entity.setKaikeiNendo(会計年度);
         entity.setChoteiJiyuCode(parameter.is当初処理() ? 当初処理 : 非当初処理);
         entity.setChoteigaku(調定額);
         entity.setShohizei(初期金額);

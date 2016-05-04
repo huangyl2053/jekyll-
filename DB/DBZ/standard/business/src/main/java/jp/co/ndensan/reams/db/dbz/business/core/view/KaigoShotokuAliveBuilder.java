@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.view;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.view.DbV2502KaigoShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 
 /**
  * {@link KaigoShotokuAlive}の編集を行うビルダークラスです。

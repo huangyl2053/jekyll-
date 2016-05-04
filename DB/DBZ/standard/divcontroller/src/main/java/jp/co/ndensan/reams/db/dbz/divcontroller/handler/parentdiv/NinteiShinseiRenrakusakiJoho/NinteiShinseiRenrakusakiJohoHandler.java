@@ -241,7 +241,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 div.getDdlShisho().getSelectedKey(),
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
                 div.getTxtYubinNo().getValue() == null ? RString.EMPTY : div.getTxtYubinNo().getValue().getColumnValue());
-        dateSoruce.set(div.getDdlRenrakusakiKubun().getSelectedIndex(), row);
+        dateSoruce.set(div.getDgRenrakusakiIchiran().getClickedRowId(), row);
         div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
     }
 

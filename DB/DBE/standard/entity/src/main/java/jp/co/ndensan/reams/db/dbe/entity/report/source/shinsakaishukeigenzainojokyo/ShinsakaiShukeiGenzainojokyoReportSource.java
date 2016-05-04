@@ -100,6 +100,15 @@ public class ShinsakaiShukeiGenzainojokyoReportSource implements IReportSource {
     public RString listShukei5_7;
     @ReportItem(name = "listShukei5_8", length = 9, order = 44)
     public RString listShukei5_8;
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        shichosonName,
+
+    }
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

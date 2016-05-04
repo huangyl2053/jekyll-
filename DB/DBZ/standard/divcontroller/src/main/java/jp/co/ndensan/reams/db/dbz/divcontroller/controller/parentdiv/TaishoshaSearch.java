@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
@@ -356,7 +357,7 @@ public class TaishoshaSearch {
                 被保険者区分 = HihoKubun.適除;
             } else if (資格検索.getTatokureiTekiyoJiyuCode() != null && !資格検索.getTatokureiTekiyoJiyuCode().isEmpty()) {
                 被保険者区分 = HihoKubun.他住;
-            } else if (資格検索.getJushochiTokureiFlag().toString().equals("1")) {
+            } else if (Objects.equals(new RString("1"), 資格検索.getJushochiTokureiFlag())) {
                 被保険者区分 = HihoKubun.自住;
             } else if (資格検索.getJukyushaDaichoHihokenshaNo() != null && !資格検索.getJukyushaDaichoHihokenshaNo().isEmpty()) {
                 被保険者区分 = HihoKubun.受給;

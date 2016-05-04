@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC19201",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定申請連携データ取込",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE1920001",
+     "toLayoutTitle": "要介護認定申請連携データ取込み",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1920001",
+     "layoutTitle": "要介護認定申請連携データ取込み",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

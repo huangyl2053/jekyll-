@@ -102,7 +102,7 @@ public class KihonChosaInputHandler5 {
                             認定調査基本情報.get障害高齢者自立度(), 認定調査基本情報.get調査連番(), get調査項目By単項Key(単項Key),
                             認定調査基本情報.get前回認知症高齢者自立度(), 認定調査基本情報.get前回障害高齢者自立度(), 認定調査基本情報.get前回調査連番(),
                             認定調査基本情報.get前回調査項目(), 認定調査基本情報.get認定調査特記事項番号(), 認定調査基本情報.get認定調査特記事項連番(),
-                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.get特記事項有無());
+                            認定調査基本情報.get原本マスク区分(), 認定調査基本情報.get特記事項(), 認定調査基本情報.is特記事項有無());
                     remove認定調査基本情報リスト.add(認定調査基本情報);
                     add認定調査基本情報リスト.add(new認定調査基本情報);
                 }
@@ -221,7 +221,7 @@ public class KihonChosaInputHandler5 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数61) {
-            div.getBtnKaiMono().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnKaiMono().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(買い物Keys, 調査項目, true, false);
             div.getKaiMono().setKaiMonoShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -252,7 +252,7 @@ public class KihonChosaInputHandler5 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数60) {
-            div.getBtnShudan().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnShudan().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(集団への不適用Keys, 調査項目, true, false);
             div.getShudan().setShudanShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -283,7 +283,7 @@ public class KihonChosaInputHandler5 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数59) {
-            div.getBtnIshiKetei().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnIshiKetei().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(日常の意思決定Keys, 調査項目, true, false);
             div.getIshiKetei().setIshiKeteiShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -314,7 +314,7 @@ public class KihonChosaInputHandler5 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数58) {
-            div.getBtnKingakuKanri().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnKingakuKanri().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(金銭の管理Keys, 調査項目, false, false);
             div.getKingakuKanri().setKingakuKanriShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));
@@ -345,7 +345,7 @@ public class KihonChosaInputHandler5 {
         RString 調査項目 = 認定調査基本情報.get調査項目();
         RString 前回調査項目 = 認定調査基本情報.get前回調査項目();
         if (連番 == 整数57) {
-            div.getBtnKusuri().setDisabled(!認定調査基本情報.get特記事項有無());
+            div.getBtnKusuri().setDisabled(!認定調査基本情報.is特記事項有無());
             setKeyBy調査項目(薬の内服Keys, 調査項目, false, false);
             div.getKusuri().setKusuriShinseishoKanriNo(
                     DataPassingConverter.serialize(get認定調査特記事項番号List(認定調査基本情報)));

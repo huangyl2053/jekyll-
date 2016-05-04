@@ -36,11 +36,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class TsukibetsuSuiihyoSakuseiHandler {
 
     private final TsukibetsuSuiihyoSakuseiDiv div;
-    private static final RString SHICHOSONCODE_120 = new RString("120");
     private static final RString SHICHOSONCODE_220 = new RString("220");
     private static final RString SHICHOSONCODE_111 = new RString("111");
     private static final RString SHICHOSONCODE_112 = new RString("112");
-    private static final RString SHICHOSONCODE_211 = new RString("211");
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
     private static final RString 空白文字 = new RString("");

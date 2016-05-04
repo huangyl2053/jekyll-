@@ -82,7 +82,7 @@ public class KihonChosaInputHandler7 {
                 障害高齢者認定調査基本情報.get認定調査特記事項連番(),
                 障害高齢者認定調査基本情報.get原本マスク区分(),
                 障害高齢者認定調査基本情報.get特記事項(),
-                障害高齢者認定調査基本情報.get特記事項有無());
+                障害高齢者認定調査基本情報.is特記事項有無());
         KihonChosaInput new認知症高齢者認定調査基本情報 = new KihonChosaInput(
                 get日常生活自立度(認知症高齢者の日常生活自立度Key),
                 認知症高齢者認定調査基本情報.get障害高齢者自立度(),
@@ -96,7 +96,7 @@ public class KihonChosaInputHandler7 {
                 認知症高齢者認定調査基本情報.get認定調査特記事項連番(),
                 認知症高齢者認定調査基本情報.get原本マスク区分(),
                 認知症高齢者認定調査基本情報.get特記事項(),
-                認知症高齢者認定調査基本情報.get特記事項有無());
+                認知症高齢者認定調査基本情報.is特記事項有無());
         認定調査基本情報リスト.clear();
         認定調査基本情報リスト.add(new障害高齢者認定調査基本情報);
         認定調査基本情報リスト.add(new認知症高齢者認定調査基本情報);
@@ -158,8 +158,8 @@ public class KihonChosaInputHandler7 {
         List<RString> 認知症高齢者特記事項番号 = new ArrayList<>();
         KihonChosaInput 障害高齢者認定調査基本情報 = 認定調査基本情報リスト.get(0);
         KihonChosaInput 認知症高齢者認定調査基本情報 = 認定調査基本情報リスト.get(1);
-        div.getBtnShogaiKoreisha().setDisabled(!障害高齢者認定調査基本情報.get特記事項有無());
-        div.getBtnNinchishaJiritsudo().setDisabled(!認知症高齢者認定調査基本情報.get特記事項有無());
+        div.getBtnShogaiKoreisha().setDisabled(!障害高齢者認定調査基本情報.is特記事項有無());
+        div.getBtnNinchishaJiritsudo().setDisabled(!認知症高齢者認定調査基本情報.is特記事項有無());
         set障害高齢者の日常生活自立度_寝たきり度Keys(障害高齢者の日常生活自立度_寝たきり度Keys,
                 前回障害高齢者の日常生活自立度_寝たきり度Keys, 障害高齢者認定調査基本情報, 障害高齢者特記事項番号);
         set認知症高齢者の日常生活自立度Keys(認知症高齢者の日常生活自立度Keys,

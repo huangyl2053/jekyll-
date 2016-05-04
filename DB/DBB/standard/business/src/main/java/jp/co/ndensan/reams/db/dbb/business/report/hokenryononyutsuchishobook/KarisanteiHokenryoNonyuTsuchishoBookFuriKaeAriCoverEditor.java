@@ -37,12 +37,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         implements IKarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor {
 
+    private final HokenryoNonyuTsuchishoBookItem item;
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
     private final List<Kitsuki> 出力期リスト;
     private final int 連番;
-    private final NinshoshaSource ninshoshaSource;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -59,13 +59,13 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
             HokenryoNonyuTsuchishoBookItem item,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 連番) {
+        this.item = item;
         this.仮算定納入通知書情報 = null == item ? new KariSanteiNonyuTsuchiShoJoho() : item.get仮算定納入通知書情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.出力期リスト = 仮算定納入通知書情報.get出力期リスト().isEmpty() ? new ArrayList<Kitsuki>() : 仮算定納入通知書情報.get出力期リスト();
         this.連番 = 連番;
-        this.ninshoshaSource = item.getNinshoshaSource();
     }
 
     @Override
@@ -122,6 +122,10 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
     }
 
     private void editCompNinshosha(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
+        NinshoshaSource ninshoshaSource = null;
+        if (item != null) {
+            ninshoshaSource = item.getNinshoshaSource();
+        }
         if (ninshoshaSource != null) {
             source.denshiKoin = ninshoshaSource.denshiKoin;
             source.hakkoYMD = ninshoshaSource.hakkoYMD;
@@ -218,7 +222,7 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
     }
 
     private void editNokibetsuMeisaishoHohokenshaName(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source) {
-        NofuShoKyotsu 納付書共通 = null == 仮算定納入通知書情報.get納付書共通() ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
+        NofuShoKyotsu 納付書共通 = null == 仮算定納入通知書情報 ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
         if (仮算定納入通知書情報 != null && 納付書共通 != null) {
             source.nokibetsuMeisaishoHohokenshaName = 納付書共通.get被保険者氏名().getColumnValue();
         }

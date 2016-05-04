@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 負担限度額認定申請を管理するクラスです。
+ *
+ * @reamsid_L DBD-3590-010 huangh
  */
 public class FutangendogakuNinteiShinseiManager {
 
@@ -65,7 +67,7 @@ public class FutangendogakuNinteiShinseiManager {
             HihokenshaNo 被保険者番号) {
         FutanGendogakuNinteiManager ninteiManager = FutanGendogakuNinteiManager.createInstance();
         for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
-            futanGendogakuNintei.deleted();
+            futanGendogakuNintei = futanGendogakuNintei.deleted();
             ninteiManager.saveOrDeletePhysicalBy(futanGendogakuNintei);
         }
         ArrayList<FutanGendogakuNinteiViewState> new申請一覧情報ArrayList = new申請情報List;

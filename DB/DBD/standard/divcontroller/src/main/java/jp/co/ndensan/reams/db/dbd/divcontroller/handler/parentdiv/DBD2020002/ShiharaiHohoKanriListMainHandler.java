@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.Dbd207010BatchFlowParameter;
-import jp.co.ndensan.reams.db.dbd.definition.core.shiharaiHohoKanriList.ShiharaiHohoKanriListData;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -213,7 +213,7 @@ public class ShiharaiHohoKanriListMainHandler {
         div.getDdl2GoSashitomeYokoku().setSelectedKey(DROPDOWNKEY0);
         div.getDdlGoSashitomeToroku().setSelectedKey(DROPDOWNKEY0);
         div.getDdl2GoShokanYokoku().setSelectedKey(DROPDOWNKEY0);
-        div.getDdl1GoShokanKettei().setSelectedKey(DROPDOWNKEY0);;
+        div.getDdl1GoShokanKettei().setSelectedKey(DROPDOWNKEY0);
         div.getDdl1GoShokanKetteiSashitomeAriOnly().setSelectedKey(DROPDOWNKEY0);
         div.getDdl1GoShokanKetteiKojoAriOnly().setSelectedKey(DROPDOWNKEY0);
     }

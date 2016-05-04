@@ -95,6 +95,10 @@ public class HihosyosaiHandler {
         if (被保険者番号 == null || 被保険者番号.isEmpty() || 識別コード == null || 識別コード.isEmpty() || 資格取得日 == null || 資格取得日.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
+        if (市町村コード != null && !市町村コード.isEmpty()) {
+            div.setHiddenShichosonCode(市町村コード.getColumnValue());
+        }
+        div.setHiddenDonyuKeitaiCode(導入形態コード);
         List<KeyValueDataSource> 被保区分情報
                 = HihousyosaiFinder.createInstance().getHihokubunList().records();
         div.getDdlSyozaiHokensya().setDataSource(get所在保険者());
@@ -151,6 +155,10 @@ public class HihosyosaiHandler {
         if (被保険者番号 == null || 被保険者番号.isEmpty() || 識別コード == null || 識別コード.isEmpty() || 資格取得日 == null || 資格取得日.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
+        if (市町村コード != null && !市町村コード.isEmpty()) {
+            div.setHiddenShichosonCode(市町村コード.getColumnValue());
+        }
+        div.setHiddenDonyuKeitaiCode(導入形態コード);
         List<KeyValueDataSource> 被保区分情報
                 = HihousyosaiFinder.createInstance().getHihokubunList().records();
         div.getDdlSyozaiHokensya().setDataSource(get所在保険者());
@@ -179,7 +187,14 @@ public class HihosyosaiHandler {
      * 所在保険者部品連動処理します。
      */
     public void onClick_Change() {
-// TODO 陽さん確認です。
+        LasdecCode 市町村コード = new LasdecCode(div.getHiddenShichosonCode());
+        RString 導入形態コード = div.getHiddenDonyuKeitaiCode();
+        if (広域保険者.equals(広域と市町村判断())) {
+            RString 措置元保険者 = div.getDdlSotimotoHokensya().getSelectedKey();
+            if (!RString.isNullOrEmpty(広域保険者)) {
+                div.getDdlKyuHokensya().setDataSource(get旧保険者(市町村コード, 導入形態コード, new LasdecCode(措置元保険者)));
+            }
+        }
     }
 
     /**
@@ -255,7 +270,7 @@ public class HihosyosaiHandler {
     private void 登録モード(ShikibetsuCode 識別コード) {
         LasdecCode 旧地方公共団体コード = LasdecCode.EMPTY;
         LasdecCode 現地方公共団体コード = LasdecCode.EMPTY;
-        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoSearchKey 検索キー
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
                 .set識別コード(識別コード)

@@ -189,7 +189,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(非該当計 - 非該当非該当被保険者数),
                 new RString(0),
                 new RString(非該当計 - 非該当非該当被保険者数),
-                非該当計 == 0 ? 割合なし : new RString(String.valueOf(
+                非該当計 == 0 || 非該当計 == 非該当非該当被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (非該当計 - 非該当非該当被保険者数) / 非該当計 * 割合) + パーセント),
                 new RString(非該当計 - 非該当非該当被保険者数),
                 new RString(0),
@@ -241,7 +241,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要支援1計 - 要支援1要支援1被保険者数),
                 new RString(要支援1非該当被保険者数),
                 new RString(要支援1計 - 要支援1非該当被保険者数 - 要支援1要支援1被保険者数),
-                要支援1計 == 0 ? 割合なし : new RString(String.valueOf(
+                要支援1計 == 0 || 要支援1計 == 要支援1要支援1被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要支援1計 - 要支援1要支援1被保険者数) / 要支援1計 * 割合) + パーセント),
                 new RString(要支援1計 - 要支援1要支援1被保険者数),
                 new RString(要支援1非該当被保険者数),
@@ -293,7 +293,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要支援2計 - 要支援2要支援2被保険者数),
                 new RString(要支援2非該当被保険者数 + 要支援2要支援1被保険者数),
                 new RString(要支援2計 - 要支援2非該当被保険者数 - 要支援2要支援1被保険者数 - 要支援2要支援2被保険者数),
-                要支援2計 == 0 ? 割合なし : new RString(String.valueOf(
+                要支援2計 == 0 || 要支援2計 == 要支援2要支援2被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要支援2計 - 要支援2要支援2被保険者数) / 要支援2計 * 割合) + パーセント),
                 new RString(要支援2計 - 要支援2要支援2被保険者数),
                 new RString(要支援2非該当被保険者数 + 要支援2要支援1被保険者数),
@@ -345,7 +345,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要介護1計 - 要介護1要介護1被保険者数),
                 new RString(要介護1非該当被保険者数 + 要介護1要支援1被保険者数 + 要介護1要支援2被保険者数),
                 new RString(要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数),
-                要介護1計 == 0 ? 割合なし : new RString(String.valueOf(
+                要介護1計 == 0 || 要介護1計 == 要介護1要介護1被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要介護1計 - 要介護1要介護1被保険者数) / 要介護1計 * 割合) + パーセント),
                 new RString(要介護1計 - 要介護1要介護1被保険者数),
                 new RString(要介護1非該当被保険者数 + 要介護1要支援1被保険者数 + 要介護1要支援2被保険者数),
@@ -397,7 +397,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要介護2計 - 要介護2要介護2被保険者数),
                 new RString(要介護2非該当被保険者数 + 要介護2要支援1被保険者数 + 要介護2要支援2被保険者数 + 要介護2要介護1被保険者数),
                 new RString(要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数),
-                要介護2計 == 0 ? 割合なし : new RString(String.valueOf(
+                要介護2計 == 0 || 要介護2計 == 要介護2要介護2被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要介護2計 - 要介護2要介護2被保険者数) / 要介護2計 * 割合) + パーセント),
                 new RString(要介護2計 - 要介護2要介護2被保険者数),
                 new RString(要介護2非該当被保険者数 + 要介護2要支援1被保険者数 + 要介護2要支援2被保険者数 + 要介護2要介護1被保険者数),
@@ -450,7 +450,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要介護3非該当被保険者数 + 要介護3要支援1被保険者数
                         + 要介護3要支援2被保険者数 + 要介護3要介護1被保険者数 + 要介護3要介護2被保険者数),
                 new RString(要介護3要介護4被保険者数 + 要介護3要介護5被保険者数),
-                要介護3計 == 0 ? 割合なし : new RString(String.valueOf(
+                要介護3計 == 0 || 要介護3計 == 要介護3要介護3被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要介護3計 - 要介護3要介護3被保険者数) / 要介護3計 * 割合) + パーセント),
                 new RString(要介護3計 - 要介護3要介護3被保険者数),
                 new RString(要介護3非該当被保険者数 + 要介護3要支援1被保険者数
@@ -503,7 +503,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要介護4計 - 要介護4要介護4被保険者数),
                 new RString(要介護4計 - 要介護4要介護4被保険者数 - 要介護4要介護5被保険者数),
                 new RString(要介護4要介護5被保険者数),
-                要介護4計 == 0 ? 割合なし : new RString(String.valueOf(
+                要介護4計 == 0 || 要介護4計 == 要介護4要介護4被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要介護4計 - 要介護4要介護4被保険者数) / 要介護4計 * 割合) + パーセント),
                 new RString(要介護4計 - 要介護4要介護4被保険者数),
                 new RString(要介護4計 - 要介護4要介護4被保険者数 - 要介護4要介護5被保険者数),
@@ -555,7 +555,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要介護5計 - 要介護5要介護5被保険者数),
                 new RString(要介護5計 - 要介護5要介護5被保険者数),
                 new RString(0),
-                要介護5計 == 0 ? 割合なし : new RString(String.valueOf(
+                要介護5計 == 0 || 要介護5計 == 要介護5要介護5被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要介護5計 - 要介護5要介護5被保険者数) / 要介護5計 * 割合) + パーセント),
                 new RString(要介護5計 - 要介護5要介護5被保険者数),
                 new RString(要介護5計 - 要介護5要介護5被保険者数),
@@ -580,6 +580,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + Integer.parseInt(一次判定要介護3.getListHantei_10().toString())
                 + Integer.parseInt(一次判定要介護4.getListHantei_10().toString())
                 + Integer.parseInt(一次判定要介護5.getListHantei_10().toString());
+        int 計判定変更者数 = Integer.parseInt(一次判定非該当.getListHantei_12().toString())
+                + Integer.parseInt(一次判定要支援1.getListHantei_12().toString())
+                + Integer.parseInt(一次判定要支援2.getListHantei_12().toString())
+                + Integer.parseInt(一次判定要介護1.getListHantei_12().toString())
+                + Integer.parseInt(一次判定要介護2.getListHantei_12().toString())
+                + Integer.parseInt(一次判定要介護3.getListHantei_12().toString())
+                + Integer.parseInt(一次判定要介護4.getListHantei_12().toString())
+                + Integer.parseInt(一次判定要介護5.getListHantei_12().toString());
         ShinsaHanteiJokyoItem 合計 = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 current.getGogitaiMei(),
@@ -616,14 +624,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                         + Integer.parseInt(一次判定要介護3.getListHantei_11().toString())
                         + Integer.parseInt(一次判定要介護4.getListHantei_11().toString())
                         + Integer.parseInt(一次判定要介護5.getListHantei_11().toString())),
-                new RString(Integer.parseInt(一次判定非該当.getListHantei_12().toString())
-                        + Integer.parseInt(一次判定要支援1.getListHantei_12().toString())
-                        + Integer.parseInt(一次判定要支援2.getListHantei_12().toString())
-                        + Integer.parseInt(一次判定要介護1.getListHantei_12().toString())
-                        + Integer.parseInt(一次判定要介護2.getListHantei_12().toString())
-                        + Integer.parseInt(一次判定要介護3.getListHantei_12().toString())
-                        + Integer.parseInt(一次判定要介護4.getListHantei_12().toString())
-                        + Integer.parseInt(一次判定要介護5.getListHantei_12().toString())),
+                new RString(計判定変更者数),
                 new RString(Integer.parseInt(一次判定非該当.getListHantei_13().toString())
                         + Integer.parseInt(一次判定要支援1.getListHantei_13().toString())
                         + Integer.parseInt(一次判定要支援2.getListHantei_13().toString())
@@ -640,16 +641,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                         + Integer.parseInt(一次判定要介護3.getListHantei_14().toString())
                         + Integer.parseInt(一次判定要介護4.getListHantei_14().toString())
                         + Integer.parseInt(一次判定要介護5.getListHantei_14().toString())),
-                計計 == 0 ? 割合なし
-                : new RString(String.valueOf((Integer.parseInt(一次判定非該当.getListHantei_12().toString())
-                                + Integer.parseInt(一次判定要支援1.getListHantei_12().toString())
-                                + Integer.parseInt(一次判定要支援2.getListHantei_12().toString())
-                                + Integer.parseInt(一次判定要介護1.getListHantei_12().toString())
-                                + Integer.parseInt(一次判定要介護2.getListHantei_12().toString())
-                                + Integer.parseInt(一次判定要介護3.getListHantei_12().toString())
-                                + Integer.parseInt(一次判定要介護4.getListHantei_12().toString())
-                                + Integer.parseInt(一次判定要介護5.getListHantei_12().toString()))
-                                / 計計 * 割合) + パーセント),
+                計計 == 0 || 計判定変更者数 == 0 ? 割合なし : new RString(String.valueOf((計判定変更者数) / 計計 * 割合) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -713,6 +705,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
 
     private ShinsaHanteiJokyoItem get割合(SinsakaiHanteiJyokyoHeaderEntity current,
             ShinsaHanteiJokyoItem 合計) {
+        int 二次判定非該当計 = Integer.parseInt(合計.getListHantei_2().toString());
+        int 二次判定要支援1計 = Integer.parseInt(合計.getListHantei_3().toString());
+        int 二次判定要支援2計 = Integer.parseInt(合計.getListHantei_4().toString());
+        int 二次判定要介護1計 = Integer.parseInt(合計.getListHantei_5().toString());
+        int 二次判定要介護2計 = Integer.parseInt(合計.getListHantei_6().toString());
+        int 二次判定要介護3計 = Integer.parseInt(合計.getListHantei_7().toString());
+        int 二次判定要介護4計 = Integer.parseInt(合計.getListHantei_8().toString());
+        int 二次判定要介護5計 = Integer.parseInt(合計.getListHantei_9().toString());
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
         ShinsaHanteiJokyoItem 変更者 = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
@@ -733,22 +733,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 要介護5,
                 計,
                 new RString("割合"),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_2().toString()) / 合計計 * 割合) + パーセント),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_3().toString()) / 合計計 * 割合) + パーセント),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_4().toString()) / 合計計 * 割合) + パーセント),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_5().toString()) / 合計計 * 割合) + パーセント),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_6().toString()) / 合計計 * 割合) + パーセント),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_7().toString()) / 合計計 * 割合) + パーセント),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_8().toString()) / 合計計 * 割合) + パーセント),
-                合計計 == 0 ? 割合なし : new RString(String.valueOf(
-                                Integer.parseInt(合計.getListHantei_9().toString()) / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定非該当計 == 0 ? 割合なし : new RString(String.valueOf(二次判定非該当計 / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定要支援1計 == 0 ? 割合なし : new RString(String.valueOf(二次判定要支援1計 / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定要支援2計 == 0 ? 割合なし : new RString(String.valueOf(二次判定要支援2計 / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定要介護1計 == 0 ? 割合なし : new RString(String.valueOf(二次判定要介護1計 / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定要介護2計 == 0 ? 割合なし : new RString(String.valueOf(二次判定要介護2計 / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定要介護3計 == 0 ? 割合なし : new RString(String.valueOf(二次判定要介護3計 / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定要介護4計 == 0 ? 割合なし : new RString(String.valueOf(二次判定要介護4計 / 合計計 * 割合) + パーセント),
+                合計計 == 0 || 二次判定要介護5計 == 0 ? 割合なし : new RString(String.valueOf(二次判定要介護5計 / 合計計 * 割合) + パーセント),
                 new RString("100%"),
                 RString.EMPTY,
                 RString.EMPTY,

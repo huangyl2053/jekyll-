@@ -164,7 +164,11 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
 
     private void setFilePath(RString shichosonCode, RString spoolWorkPath) {
         RStringBuilder filePath = new RStringBuilder();
-        filePath.append(FILENAME).append(shichosonCode).append(FILENAMEGO);
+        if (processParamter.getShichosoncode().size() > 1) {
+            filePath.append(FILENAME).append(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード()).append(FILENAMEGO);
+        } else {
+            filePath.append(FILENAME).append(shichosonCode).append(FILENAMEGO);
+        }
         eucFilePath = Path.combinePath(spoolWorkPath, filePath.toRString());
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).

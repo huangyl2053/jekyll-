@@ -569,6 +569,24 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
+     * 事前申請サービス提供年月を返します。
+     *
+     * @return 事前申請サービス提供年月
+     */
+    public FlexibleYearMonth get事前申請サービス提供年月() {
+        return entity.getJizenServiceTeikyoYM();
+    }
+
+    /**
+     * 事前申請整理番号を返します。
+     *
+     * @return 事前申請整理番号
+     */
+    public RString get事前申請整理番号() {
+        return entity.getJizenSeiriNo();
+    }
+
+    /**
      * 償還払支給申請のみを変更対象とします。<br/> {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShokanShinsei}

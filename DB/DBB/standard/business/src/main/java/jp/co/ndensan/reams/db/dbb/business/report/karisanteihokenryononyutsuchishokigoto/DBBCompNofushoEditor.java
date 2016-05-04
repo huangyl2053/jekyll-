@@ -89,19 +89,19 @@ public class DBBCompNofushoEditor implements IKarisanteiHokenryoNonyuTsuchishoKi
     }
 
     private void editNofushoOcr11(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushoOcr11 = 納入通知書期情報.getOCR().get(1);
+        source.nofushoOcr11 = 納入通知書期情報.getOcr().get(1);
     }
 
     private void editNofushoOcr21(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushoOcr21 = 納入通知書期情報.getOCR().get(2);
+        source.nofushoOcr21 = 納入通知書期情報.getOcr().get(2);
     }
 
     private void editNofushoOcr31(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushoOcr31 = 納入通知書期情報.getOCR().get(OCR3);
+        source.nofushoOcr31 = 納入通知書期情報.getOcr().get(OCR3);
     }
 
     private void editNofushoOcr41(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.nofushoOcr41 = 納入通知書期情報.getOCR().get(OCR4);
+        source.nofushoOcr41 = 納入通知書期情報.getOcr().get(OCR4);
     }
 
     private void editNofushoNofugaku1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {

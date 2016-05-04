@@ -88,12 +88,12 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
         source.keisanMeisaishoNendoBun = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat(分);
         source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
         source.titleNendoBun = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat(分);
-        source.HyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
-        source.HyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
-        source.HyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
-        source.Hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
-        source.Hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
-        source.Hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
+        source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
+        source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
+        source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+        source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
+        source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
+        source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
         source.bankCode = 編集後本算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード();
         source.kozaShurui = 編集後本算定通知書共通情報.get編集後口座().get口座種別略称();
         source.kozaNo = 編集後本算定通知書共通情報.get編集後口座().get口座番号Or通帳記号番号();
@@ -126,9 +126,11 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.kaisanMeisaishoNofuZumiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額(), 0);
         }
         if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(納付額算出方法)) {
-            source.keisanMeisaishoKongoNofuGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
+            source.keisanMeisaishoKongoNofuGaku
+                    = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
         } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
-            source.keisanMeisaishoKongoNofuGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
+            source.keisanMeisaishoKongoNofuGaku
+                    = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
         }
         source.yen1 = 円;
         source.yen2 = 円;
@@ -137,7 +139,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
         source.yen3 = 円;
         source.yen4 = 円;
         source.keisanmeisaishoNendo2 = 編集後本算定通知書共通情報.get賦課年度_年度なし();
-        source.keisanMeisaishoHokenryoGokeiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+        source.keisanMeisaishoHokenryoGokeiGaku
+                = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
         source.pagerenban1 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-1")) : new RString("1-1");
         source.pagerenban2 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-2")) : new RString("1-2");
         source.nokibetsuMeisaishoNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
@@ -157,7 +160,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
         source.nokibetsuMeisaishoTokuchoNofuGaku4 = 金額_0;
         source.nokibetsuMeisaishoTokuchoNofuZumiGaku4 = 金額_0;
         source.nokibetsuMeisaishoTokuchoSaGaku4 = new RString(Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku1.toString())
-                + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku2.toString()) + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku3.toString()));
+                + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku2.toString())
+                + Integer.parseInt(source.nokibetsuMeisaishoTokuchoSaGaku3.toString()));
         // TODO 分割前の納入通知書期情報リスト、全部期月の情報を出力
         source.nokibetsuMeisaishoKi1 = new RString("第").concat(納入通知書期情報リスト.get(0).get期表記()).concat(new RString("期"));
         source.nokibetsuMeisaishoFuchoNofuGaku1 = 納入通知書期情報リスト.get(0).get調定額表記();
@@ -191,11 +195,11 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.nofushoTitleKi1 = 納入通知書期情報リスト.get(0).get期表記();
             source.nofushoTitleTsuki1 = 納入通知書期情報リスト.get(0).get月表記();
             // TODO 納入通知書期情報.OCRの一行目の印字文字列
-            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの二行目の印字文字列
-            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの三行目の印字文字列
-            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOcrid();
             source.nofuzumishoNokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
             source.ryoshushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get領収証書納付額欄();
             source.nofushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get納付書納付額欄();

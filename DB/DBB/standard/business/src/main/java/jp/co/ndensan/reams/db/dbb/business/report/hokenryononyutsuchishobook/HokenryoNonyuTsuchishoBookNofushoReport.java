@@ -57,9 +57,6 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
             仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
         }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
-        if (納入通知書期情報リスト.isEmpty()) {
-            納入通知書期情報リスト = new ArrayList<>();
-        }
         if (is全部の納付額が0(納入通知書期情報リスト)) {
             return;
         }
@@ -67,6 +64,11 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
         if (null == 帳票ID) {
             return;
         }
+        edit納入通知書期情報(帳票ID, 納入通知書期情報リスト, writer);
+    }
+
+    private void edit納入通知書期情報(RString 帳票ID, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
+            ReportSourceWriter<HokenryoNonyuTsuchishoBookNofushoSource> writer) {
         RString 帳票IDの先頭 = 帳票ID.substring(0, 帳票ID.indexOf("-"));
         boolean is口振あり = new RString("DBB100020").equals(帳票IDの先頭) || new RString("DBB100022").equals(帳票IDの先頭);
         int 通知書の連番 = INT1;
@@ -124,19 +126,7 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
                 } else if (!is納入通知書期情報リスト設定中) {
                     納入通知書期情報リストEdit.add(納入通知書期情報);
                     is納入通知書期情報リスト設定中 = true;
-                    switch (ブック開始位置) {
-                        case INT2:
-                            納入通知書期情報リストの設定数 = INT1;
-                            break;
-                        case INT3:
-                            納入通知書期情報リストの設定数 = INT2;
-                            break;
-                        case INT4:
-                            納入通知書期情報リストの設定数 = INT3;
-                            break;
-                        default:
-                            break;
-                    }
+                    納入通知書期情報リストの設定数 = set納入通知書期情報リストの設定数(ブック開始位置, 納入通知書期情報リストの設定数);
                 } else if (納入通知書期情報リストの設定数 == INT3) {
                     納入通知書期情報リストEdit.add(納入通知書期情報);
                     edit(納入通知書期情報リストEdit, 通知書の連番, writer);
@@ -150,6 +140,23 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
             }
         }
         edit(納入通知書期情報リストEdit, 通知書の連番, writer);
+    }
+
+    private int set納入通知書期情報リストの設定数(int ブック開始位置, int 納入通知書期情報リストの設定数) {
+        switch (ブック開始位置) {
+            case INT2:
+                納入通知書期情報リストの設定数 = INT1;
+                break;
+            case INT3:
+                納入通知書期情報リストの設定数 = INT2;
+                break;
+            case INT4:
+                納入通知書期情報リストの設定数 = INT3;
+                break;
+            default:
+                break;
+        }
+        return 納入通知書期情報リストの設定数;
     }
 
     private void edit(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int 通知書の連番,

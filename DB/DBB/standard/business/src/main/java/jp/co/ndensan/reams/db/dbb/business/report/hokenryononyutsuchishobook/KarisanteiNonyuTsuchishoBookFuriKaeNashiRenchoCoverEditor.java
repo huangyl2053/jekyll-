@@ -38,12 +38,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         implements IKarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor {
 
+    private final HokenryoNonyuTsuchishoBookItem item;
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
     private final List<Kitsuki> 出力期リスト;
     private final int 連番;
-    private final NinshoshaSource ninshoshaSource;
     private final NofuShoKyotsu 納付書共通;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
@@ -61,13 +61,13 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
             HokenryoNonyuTsuchishoBookItem item,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 連番) {
+        this.item = item;
         this.仮算定納入通知書情報 = null == item ? new KariSanteiNonyuTsuchiShoJoho() : item.get仮算定納入通知書情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
-        this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
+        this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
-        this.出力期リスト = 仮算定納入通知書情報.get出力期リスト().isEmpty() ? new ArrayList<Kitsuki>() : 仮算定納入通知書情報.get出力期リスト();
+        this.出力期リスト = null == 仮算定納入通知書情報 ? new ArrayList<Kitsuki>() : 仮算定納入通知書情報.get出力期リスト();
         this.連番 = 連番;
-        this.ninshoshaSource = item.getNinshoshaSource();
         this.納付書共通 = null == 仮算定納入通知書情報 ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
     }
 
@@ -81,6 +81,10 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
     }
 
     private void editCompNinshosha(KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource source) {
+        NinshoshaSource ninshoshaSource = null;
+        if (item != null) {
+            ninshoshaSource = item.getNinshoshaSource();
+        }
         if (ninshoshaSource != null) {
             source.denshiKoin = ninshoshaSource.denshiKoin;
             source.hakkoYMD = ninshoshaSource.hakkoYMD;
@@ -173,9 +177,9 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         source.nofuzumishoTitleKi1 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofuzumishoTitleTsuki1 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
         source.nofozumishoTitleNendo1 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : new RString("******");
-        source.nofuzumishoOCR11 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(1) : new RString("*******************");
-        source.nofuzumishoOCR21 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(2) : new RString("********************");
-        source.nofuzumishoOCR31 = is納入通知書期情報がある ? 納入通知書期情報.getOCR().get(INT3) : new RString("************");
+        source.nofuzumishoOCR11 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(1) : new RString("*******************");
+        source.nofuzumishoOCR21 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(2) : new RString("********************");
+        source.nofuzumishoOCR31 = is納入通知書期情報がある ? 納入通知書期情報.getOcr().get(INT3) : new RString("************");
         source.nofuzumishoNofuGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : new RString("**********");
         source.nofuzumishoJusho1 = 納付書共通.get住所();
         source.nofuzumishoKatagaki1 = 納付書共通.get方書();
@@ -213,12 +217,12 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor
         List<UniversalPhase> 普徴期別金額リスト
                 = null == 更正後.get更正後普徴期別金額リスト() ? new ArrayList<UniversalPhase>() : 更正後.get更正後普徴期別金額リスト();
         source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
-        source.Hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
-        source.Hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
-        source.Hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
-        source.HyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
-        source.HyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
-        source.HyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
+        source.hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
+        source.hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
+        source.hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
+        source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
+        source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
+        source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
         edit編集後個人And編集後口座(source);
         source.keisanMeisaishoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         source.keisanMeisaishoKi1 = 納入通知書期情報リストの一番目.get期表記();

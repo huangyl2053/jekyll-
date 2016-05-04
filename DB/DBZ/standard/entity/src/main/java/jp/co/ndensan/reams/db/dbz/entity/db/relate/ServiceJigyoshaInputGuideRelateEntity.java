@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.relate;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -21,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable {
+public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable, Serializable {
 
     private KaigoJigyoshaNo jigyoshaNo;
     private FlexibleDate yukoKaishiYMD;
@@ -30,6 +32,7 @@ public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable {
     private AtenaMeisho jigyoshaMeisho;
     private AtenaKanaMeisho jigyoshaNameKana;
     private RString jigyoshaKanaAddress;
+    private AtenaJusho jigyoshaAddress;
     private TelNo telNo;
     private RString serviceShuruiCode;
     private RString serviceShuruiRyakusho;

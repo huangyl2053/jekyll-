@@ -18,11 +18,9 @@ import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hanyolisthihokenshada
 import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoCSVEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolisthihokenshadaicho.IHanyoListHihokenshadaichoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -109,7 +107,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     private static final RString 地区 = new RString("地区");
     private HanyoListHihokenshadaichoProcessParameter processPrm;
     private HanyoListHihokenshadaichoMyBatisParameter mybatisPrm;
-    private IHanyoListHihokenshadaichoMapper mapper;
     private List<PersonalData> personalDataList;
     private RString eucFilename;
     private RString spoolWorkPath;
@@ -119,8 +116,8 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     @Override
     protected void initialize() {
         mybatisPrm = processPrm.toMyBatisParameter();
-        mapper = getMapper(IHanyoListHihokenshadaichoMapper.class);
         personalDataList = new ArrayList<>();
+        //TODO システム日時は使用なし
 //        RDateTime システム日時 = RDate.getNowDateTime();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
@@ -242,27 +239,27 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         条件.append(コロン);
         for (RString code : 被保険者情報List) {
             if (HihokenshaJoho._１号.getコード().equals(code)) {
-                条件.append(HihokenshaJoho._１号.get略称());
+                条件.append(HihokenshaJoho._１号.get名称());
                 条件.append(読点);
             }
             if (HihokenshaJoho._２号.getコード().equals(code)) {
-                条件.append(HihokenshaJoho._２号.get略称());
+                条件.append(HihokenshaJoho._２号.get名称());
                 条件.append(読点);
             }
             if (HihokenshaJoho.日本人.getコード().equals(code)) {
-                条件.append(HihokenshaJoho.日本人.get略称());
+                条件.append(HihokenshaJoho.日本人.get名称());
                 条件.append(読点);
             }
             if (HihokenshaJoho.外国人.getコード().equals(code)) {
-                条件.append(HihokenshaJoho.外国人.get略称());
+                条件.append(HihokenshaJoho.外国人.get名称());
                 条件.append(読点);
             }
             if (HihokenshaJoho.自住所特例.getコード().equals(code)) {
-                条件.append(HihokenshaJoho.自住所特例.get略称());
+                条件.append(HihokenshaJoho.自住所特例.get名称());
                 条件.append(読点);
             }
             if (HihokenshaJoho.広域住特者.getコード().equals(code)) {
-                条件.append(HihokenshaJoho.広域住特者.get略称());
+                条件.append(HihokenshaJoho.広域住特者.get名称());
                 条件.append(読点);
             }
         }
@@ -297,11 +294,11 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         }
         if (!Chiku.全て.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
             if (Chiku.住所.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                get条件(住所, getFrom_To(mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_To()));
+                出力条件.add(get条件(住所, getFrom_To(mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_To())));
             } else if (Chiku.行政区.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                get条件(行政区, getFrom_To(mybatisPrm.getPsmGyoseiku_From(), mybatisPrm.getPsmGyoseiku_To()));
+                出力条件.add(get条件(行政区, getFrom_To(mybatisPrm.getPsmGyoseiku_From(), mybatisPrm.getPsmGyoseiku_To())));
             } else if (Chiku.地区.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                get条件(地区, getFrom_To(mybatisPrm.getPsmChiku1_From(), mybatisPrm.getPsmChiku1_To()));
+                出力条件.add(get条件(地区, getFrom_To(mybatisPrm.getPsmChiku1_From(), mybatisPrm.getPsmChiku1_To())));
             }
         }
         return 出力条件;
@@ -494,8 +491,11 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     }
 
     private RString getパターン9(FlexibleDate 基準日) {
-        return 基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        if (基準日 != null && !基準日.isEmpty()) {
+            return 基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private RString get条件(RString バッチパラメータ名, RString 値) {
@@ -525,7 +525,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     iKojin.get年齢算出().get年齢(), entity.getSeibetsuCode(),
                     entity.getTsuzukigaraCode(), entity.getSetaiCode(),
                     entity.getSetainushiMei(),
-                    //住所コード
                     entity.getZenkokuJushoCode(),
                     get郵便番号(entity.getYubinNo()),
                     get住所_番地_方書(entity.getJusho(), entity.getBanchi(), entity.getKatagaki()),
@@ -533,7 +532,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     entity.getKatagaki(), entity.getGyoseikuCode(),
                     entity.getGyoseikuName(), entity.getChikuCode1(),
                     entity.getChikuCode2(), entity.getChikuCode3(),
-                    entity.getRenrakusaki1(), entity.getRenrakusaki1(),
+                    entity.getRenrakusaki1(), entity.getRenrakusaki2(),
                     getパターン32(entity.getTorokuIdoYMD()), entity.getTorokuJiyuCode(),
                     getパターン32(entity.getTorokuTodokedeYMD()), getパターン32(entity.getJuteiIdoYMD()),
                     entity.getJuteiJiyuCode(), getパターン32(entity.getJuteiTodokedeYMD()),
@@ -544,7 +543,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     get住所_番地_方書(entity.getTennyumaeJusho(), entity.getTennyumaeBanchi(), entity.getTennyumaeKatagaki()),
                     entity.getTennyumaeJusho(), entity.getTennyumaeBanchi(),
                     entity.getTennyumaeKatagaki(), t.getShichosonCode(), 市町村名,
-                    //TODO 保険者コード
                     AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
                     AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                     RString.EMPTY,
@@ -567,21 +565,20 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     getパターン32(t.getShikakuSoshitsuTodokedeYMD()),
                     HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).toRString(),
                     t.isJushochiTokureiFlag() ? new RString("住特") : RString.EMPTY,
-                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getShichosonCode(), t.getKoikinaiTokureiSochimotoShichosonCode()));
+                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getKoikinaiTokureiSochimotoShichosonCode(), t.getShichosonCode()));
         } else {
             return new HanyoListHihokenshadaichoCSVEntity(
                     連番, entity.getShikibetsuCode(), entity.getJuminShubetsuCode(),
                     entity.getMeisho(), entity.getKanaMeisho(), getYYYYMMDD(entity.getSeinengappiYMD()),
                     iKojin.get年齢算出().get年齢(), entity.getSeibetsuCode(), entity.getTsuzukigaraCode(),
                     entity.getSetaiCode(), entity.getSetainushiMei(),
-                    //住所コード
                     entity.getZenkokuJushoCode(),
                     get郵便番号(entity.getYubinNo()),
                     get住所_番地_方書(entity.getJusho(), entity.getBanchi(), entity.getKatagaki()),
                     entity.getJusho(), entity.getBanchi(), entity.getKatagaki(),
                     entity.getGyoseikuCode(), entity.getGyoseikuName(),
                     entity.getChikuCode1(), entity.getChikuCode2(), entity.getChikuCode3(),
-                    entity.getRenrakusaki1(), entity.getRenrakusaki1(), getYYYYMMDD(entity.getTorokuIdoYMD()),
+                    entity.getRenrakusaki1(), entity.getRenrakusaki2(), getYYYYMMDD(entity.getTorokuIdoYMD()),
                     entity.getTorokuJiyuCode(),
                     getYYYYMMDD(entity.getTorokuTodokedeYMD()),
                     getYYYYMMDD(entity.getJuteiIdoYMD()),
@@ -597,7 +594,6 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     entity.getTennyumaeKatagaki(),
                     t.getShichosonCode(),
                     市町村名,
-                    //保険者コード  保険者名
                     AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
                     AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                     RString.EMPTY,
@@ -620,18 +616,26 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     getYYYYMMDD(t.getShikakuSoshitsuTodokedeYMD()),
                     HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).toRString(),
                     t.isJushochiTokureiFlag() ? new RString("住特") : RString.EMPTY,
-                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getShichosonCode(), t.getKoikinaiTokureiSochimotoShichosonCode()));
+                    get証記載保険者番号(t.isKoikinaiJushochiTokureiFlag(), t.getKoikinaiTokureiSochimotoShichosonCode(), t.getShichosonCode()));
         }
 
     }
 
-    private ShoKisaiHokenshaNo get証記載保険者番号(boolean is広域, LasdecCode 広住特措置元市町村コード, LasdecCode 市町村コード) {
+    private RString get証記載保険者番号(boolean is広域, LasdecCode 広住特措置元市町村コード, LasdecCode 市町村コード) {
         HokenshaListLoader loader = HokenshaListLoader.createInstance();
         HokenshaList hokenshaList = loader.getShichosonCodeNameList(GyomuBunrui.介護事務);
         if (is広域) {
-            return hokenshaList.get(広住特措置元市町村コード).get証記載保険者番号();
+            if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
+                return hokenshaList.get(広住特措置元市町村コード).get証記載保険者番号().getColumnValue();
+            } else {
+                return RString.EMPTY;
+            }
         } else {
-            return hokenshaList.get(市町村コード).get証記載保険者番号();
+            if (市町村コード != null && !市町村コード.isEmpty()) {
+                return hokenshaList.get(市町村コード).get証記載保険者番号().getColumnValue();
+            } else {
+                return RString.EMPTY;
+            }
         }
     }
 

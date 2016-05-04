@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class DBD1030001 {
 
     private static final RString 申請メニューID = new RString("DBDMN21004");
+    private static final RString KEY0 = new RString("key0");
 
     /**
      * 画面初期化
@@ -44,12 +45,10 @@ public class DBD1030001 {
      * @return ResponseData<DBD1030001Div>
      */
     public ResponseData<DBD1030001Div> onLoad(DBD1030001Div div) {
-        if (!ResponseHolder.isReRequest()) {
-            if (!getHandler(div).onLoad()) {
-                InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
-                        DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+        if (!ResponseHolder.isReRequest() && !getHandler(div).onLoad()) {
+            InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
+                    DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -123,25 +122,19 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnBackToShinseiList(DBD1030001Div div) {
-        if (getHandler(div).is申請情報エリア入力内容がある()) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-                getHandler(div).情報エリアクリア();
-                div.getDgShinseiList().setDisabled(false);
-                div.getShinseiList().setDisplayNone(false);
-                div.getShinseiDetail().setDisplayNone(true);
-                return ResponseData.of(div).setState(一覧);
-            } else {
-                return ResponseData.of(div).respond();
-            }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
-        div.getDgShinseiList().setDisabled(false);
-        div.getShinseiList().setDisplayNone(false);
-        div.getShinseiDetail().setDisplayNone(true);
-        return ResponseData.of(div).setState(一覧);
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            getHandler(div).情報エリアクリア();
+            div.getDgShinseiList().setDisabled(false);
+            div.getShinseiList().setDisplayNone(false);
+            div.getShinseiDetail().setDisplayNone(true);
+            return ResponseData.of(div).setState(一覧);
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**
@@ -182,16 +175,24 @@ public class DBD1030001 {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             DBD1030001ValidationHandler validationHandler = getValidationHandler();
             validationHandler.申請日の未入力チェック(pairs, div);
-            validationHandler.決定区分の未入力チェック(pairs, div);
-            validationHandler.決定日の未入力チェック(pairs, div);
-            validationHandler.適用日の未入力チェック(pairs, div);
-            validationHandler.有効期限の未入力チェック(pairs, div);
-            ResponseData<DBD1030001Div> responseData = validationHandler.承認情報相関チェック１(pairs, div);
+            if (KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
+                validationHandler.決定区分の未入力チェック(pairs, div);
+                validationHandler.決定日の未入力チェック(pairs, div);
+                validationHandler.適用日の未入力チェック(pairs, div);
+                validationHandler.有効期限の未入力チェック(pairs, div);
+                validationHandler.軽減事由の未入力チェック(pairs, div);
+                validationHandler.軽減率_分子の未入力チェック(pairs, div);
+                validationHandler.軽減率_分母の未入力チェック(pairs, div);
+                validationHandler.確認番号の未入力チェック(pairs, div);
+            }
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
-            if (responseData != null) {
-                return responseData;
+            if (KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
+                validationHandler.承認情報相関チェック１(pairs, div);
+            }
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
             getHandler(div).情報を確定();
             return ResponseData.of(div).setState(一覧);

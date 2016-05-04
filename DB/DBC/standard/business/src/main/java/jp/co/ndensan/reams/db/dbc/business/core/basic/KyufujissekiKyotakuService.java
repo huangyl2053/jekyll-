@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 給付実績居宅サービス計画費を管理するクラスです。
  */
 public class KyufujissekiKyotakuService
-        extends ModelBase<KyufujissekiKyotakuServiceIdentifier, DbT3025KyufujissekiKyotakuServiceEntity, KyufujissekiKyotakuService> implements Serializable {
+        extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
+        DbT3025KyufujissekiKyotakuServiceEntity,
+        KyufujissekiKyotakuService> implements Serializable {
 
     private final DbT3025KyufujissekiKyotakuServiceEntity entity;
     private final KyufujissekiKyotakuServiceIdentifier id;

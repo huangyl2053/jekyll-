@@ -502,6 +502,9 @@ public class TaJushochiTokureishaKanriHandler {
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set適用状態他住所地特例(他住所地特例Model.get(住所地特例の識別子), 適用情報).toEntity());
                 Collections.sort(rowList, new DateComparatorRirekiNo());
                 RString 履歴番号 = rowList.get(0).getRirekiNo();
+                if (RString.isNullOrEmpty(履歴番号)) {
+                    履歴番号 = new RString("0");
+                }
                 int 最新履歴番号 = Integer.parseInt(履歴番号.toString()) + 1;
                 ShisetsuNyutaishoIdentifier taisho = new ShisetsuNyutaishoIdentifier(識別コード, 最新履歴番号);
                 TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(set適用状態介護保険施設入退所(保険施設入退所Model.get(taisho), 適用情報).toEntity());
@@ -924,14 +927,14 @@ public class TaJushochiTokureishaKanriHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護他特適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護他特解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード));
     }
 
     private List<KeyValueDataSource> set適用事由() {
@@ -940,7 +943,7 @@ public class TaJushochiTokureishaKanriHandler {
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;
@@ -952,7 +955,7 @@ public class TaJushochiTokureishaKanriHandler {
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;

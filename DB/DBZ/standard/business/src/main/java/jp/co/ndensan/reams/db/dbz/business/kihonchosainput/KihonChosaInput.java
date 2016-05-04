@@ -239,7 +239,7 @@ public class KihonChosaInput implements Serializable {
      *
      * @return 特記事項
      */
-    public boolean get特記事項有無() {
+    public boolean is特記事項有無() {
         return 認定調査基本情報.is特記事項有無();
     }
 

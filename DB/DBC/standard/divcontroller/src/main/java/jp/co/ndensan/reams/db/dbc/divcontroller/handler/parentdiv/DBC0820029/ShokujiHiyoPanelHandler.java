@@ -683,8 +683,6 @@ public class ShokujiHiyoPanelHandler {
 
     private ShokanMeisai clearShokanMeisai(ShokanMeisai entityModified) {
 
-//        entityModified = entityModified.createBuilderForEdit().setサービス種類コード(null).build();
-//        entityModified = entityModified.createBuilderForEdit().setサービス項目コード(null).build();
         entityModified = entityModified.createBuilderForEdit().set単位数(0).build();
         entityModified = entityModified.createBuilderForEdit().set日数_回数(0).build();
         entityModified = entityModified.createBuilderForEdit().setサービス単位数(0).build();

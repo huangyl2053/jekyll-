@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
@@ -13,10 +12,12 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -83,6 +84,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
 
     /**
      * コンストラクタです。
@@ -117,7 +119,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set市町村コード(entity.get市町村コード() != null
                 ? entity.get市町村コード().getColumnValue() : RString.EMPTY);
 
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        Association association = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
         csvEntity.set市町村名(association.get市町村名());
         // TODO 保険者コードと保険者名取りに来ない
         csvEntity.set保険者コード(RString.EMPTY);
@@ -155,8 +157,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         boolean 広域内住所地特例フラグ = entity.is広域内住所地特例フラグ();
         LasdecCode 広住特措置元市町村コード = entity.get広住特措置元市町村コード();
         LasdecCode 市町村コード = entity.get市町村コード();
-        List<HokenshaSummary> list = new ArrayList<>();
-        HokenshaList hokenshaList = HokenshaList.createFor単一(list);
+        HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         HokenshaSummary hokenshaSummary;
         if (広域内住所地特例フラグ) {
             hokenshaSummary = hokenshaList.get(広住特措置元市町村コード);
@@ -166,7 +167,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         ShoKisaiHokenshaNo 証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
         csvEntity.set資格証記載保険者番号(証記載保険者番号 != null ? 証記載保険者番号.getColumnValue() : RString.EMPTY);
 
-        // TODO 89.銀行郵便区分 -- 101.名義人
+        // TODO　実装方法不確定  89.銀行郵便区分 -- 101.名義人
 //        if (koza.isゆうちょ銀行()) {
 //            csvEntity.set銀行郵便区分(ゆうちょ);
 //        } else {
@@ -523,15 +524,16 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             return RString.EMPTY;
         } else {
             List<RString> list = 高額給付根拠.toRStringList();
-            if (null != list.get(INDEX_0) && (list.get(INDEX_0).equals(RST_月)
+
+            if (list.size() > INDEX_1 && (list.get(INDEX_0).equals(RST_月)
                     || list.get(INDEX_0).equals(RString.EMPTY))) {
-                世帯の所得区分コード = null != list.get(INDEX_1) ? list.get(INDEX_1) : RString.EMPTY;
-                本人の所得区分コード = null != list.get(INDEX_2) ? list.get(INDEX_2) : RString.EMPTY;
-                老齢福祉年金受給の有無 = null != list.get(INDEX_4) ? list.get(INDEX_4) : RString.EMPTY;
+                世帯の所得区分コード = list.size() > INDEX_2 ? list.get(INDEX_1) : RString.EMPTY;
+                本人の所得区分コード = list.size() > INDEX_3 ? list.get(INDEX_2) : RString.EMPTY;
+                老齢福祉年金受給の有無 = list.size() > INDEX_5 ? list.get(INDEX_4) : RString.EMPTY;
             } else {
-                世帯の所得区分コード = null != list.get(INDEX_0) ? list.get(INDEX_0) : RString.EMPTY;
-                本人の所得区分コード = null != list.get(INDEX_1) ? list.get(INDEX_1) : RString.EMPTY;
-                老齢福祉年金受給の有無 = null != list.get(INDEX_3) ? list.get(INDEX_3) : RString.EMPTY;
+                世帯の所得区分コード = list.size() > INDEX_1 ? list.get(INDEX_0) : RString.EMPTY;
+                本人の所得区分コード = list.size() > INDEX_2 ? list.get(INDEX_1) : RString.EMPTY;
+                老齢福祉年金受給の有無 = list.size() > INDEX_4 ? list.get(INDEX_3) : RString.EMPTY;
             }
 
             if (RST_生.equals(本人の所得区分コード)) {

@@ -6,14 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeigenzainojokyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 介護認定審査会集計表（現在の状況別）のEditorです。
@@ -22,9 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ShinsakaiShukeiGenzainojokyoEditor implements IShinsakaiShukeiGenzainojokyoEditor {
 
-    private static final RString DATE_時 = new RString("時");
-    private static final RString DATE_分 = new RString("分");
-    private static final RString DATE_秒 = new RString("秒");
     private static final int 数字6 = 6;
     private final ShinsakaiShukeiGenzainojokyo item;
     private final int count;
@@ -46,28 +35,6 @@ public class ShinsakaiShukeiGenzainojokyoEditor implements IShinsakaiShukeiGenza
     }
 
     private ShinsakaiShukeiGenzainojokyoReportSource editSource(ShinsakaiShukeiGenzainojokyoReportSource source) {
-        source.title = item.getTitle();
-        source.shichosonName = item.getShichosonName();
-        if (!RString.isNullOrEmpty(item.getYukoKijunYMD())) {
-            source.yukoKijunYMD = new RDate(item.getYukoKijunYMD().toString()).wareki()
-                    .eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-        }
-        RStringBuilder printTimeStampSb = new RStringBuilder();
-        RDateTime printdate = RDateTime.now();
-        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
-        printTimeStampSb.append(DATE_時);
-        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
-        printTimeStampSb.append(DATE_分);
-        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
-        printTimeStampSb.append(DATE_秒);
-        source.printTimeStamp = printTimeStampSb.toRString();
         source.listShukei1_1 = item.getListShukei1_1();
         source.listShukei1_2 = item.getListShukei1_2();
         source.listShukei1_3 = item.getListShukei1_3();

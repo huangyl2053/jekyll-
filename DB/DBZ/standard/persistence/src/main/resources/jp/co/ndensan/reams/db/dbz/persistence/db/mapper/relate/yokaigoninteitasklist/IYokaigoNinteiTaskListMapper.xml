@@ -676,18 +676,18 @@
             DbT5105."ikenshoTorokuKanryoYMD",
             DbT7051."shichosonMeisho",
             DbT5105."ninteiShinseiJohoTorokuKanryoYMD",
-            DbT4116."ichijiHanteiYMD",
-            DbT4116."ichijiHanteiKekkaCode",
-            DbT4116."ichijiHnateiKeikokuCode",
-            DbT4116."kariIchijiHanteiKubun"
+            DbT5116."ichijiHanteiYMD",
+            DbT5116."ichijiHanteiKekkaCode",
+            DbT5116."ichijiHnateiKeikokuCode",
+            DbT5116."kariIchijiHanteiKubun"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT4116IchijiHanteiKekkaJoho" DbT4116
-                ON  DbT4116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            INNER  JOIN  rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116
+                ON  DbT5116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
                 DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL

@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * @author liangbc
+ * 負担限度額認定申請画面ハンドラクラスです。
+ *
+ * @reamsid_L DBD-3590-010 huangh
  */
 public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShinseiDiv> {
 

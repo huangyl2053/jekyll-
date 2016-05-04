@@ -70,7 +70,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.nofuBango = item.get納入通知書期情報リスト().get(index).get納付番号();
                 source.kakuninBango1 = item.get納入通知書期情報リスト().get(index).get確認番号();
                 source.nofuKubun1 = item.get納入通知書期情報リスト().get(index).get納付区分();
-                source.ocrId1 = item.get納入通知書期情報リスト().get(index).getOCRID();
+                source.ocrId1 = item.get納入通知書期情報リスト().get(index).getOcrid();
                 source.barcodeCvsBarcode1 = item.get納入通知書期情報リスト().get(index).getバーコード情報();
                 source.cvsBarcodeNaiyo11 = item.get納入通知書期情報リスト().get(index).getバーコード情報上段();
                 source.cvsBarcodeNaiyo21 = item.get納入通知書期情報リスト().get(index).getバーコード情報下段();
@@ -78,8 +78,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.gokeigaku = item.get納入通知書期情報リスト().get(index).get納付額表記();
                 source.nokigenYmd = item.get納入通知書期情報リスト().get(index).get納期限表記();
                 source.honzei = item.get納入通知書期情報リスト().get(index).get納付額表記();
-                source.ocr11 = item.get納入通知書期情報リスト().get(index).getOCR().get(1);
-                source.ocr21 = item.get納入通知書期情報リスト().get(index).getOCR().get(2);
+                source.ocr11 = item.get納入通知書期情報リスト().get(index).getOcr().get(1);
+                source.ocr21 = item.get納入通知書期情報リスト().get(index).getOcr().get(2);
             }
             if (item.get納入通知書期情報リスト().get(index).getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen1 = item.get納入通知書期情報リスト().get(index).getコンビニ支払期限().toDateString();
@@ -134,7 +134,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.nofuBango = item.get納入通知書期情報リスト().get(index + 1).get納付番号();
                 source.kakuninBango2 = item.get納入通知書期情報リスト().get(index + 1).get確認番号();
                 source.nofuKubun2 = item.get納入通知書期情報リスト().get(index + 1).get納付区分();
-                source.ocrId2 = item.get納入通知書期情報リスト().get(index + 1).getOCRID();
+                source.ocrId2 = item.get納入通知書期情報リスト().get(index + 1).getOcrid();
                 source.barcodeCvsBarcode2 = item.get納入通知書期情報リスト().get(index + 1).getバーコード情報();
                 source.cvsBarcodeNaiyo12 = item.get納入通知書期情報リスト().get(index + 1).getバーコード情報上段();
                 source.cvsBarcodeNaiyo22 = item.get納入通知書期情報リスト().get(index + 1).getバーコード情報下段();
@@ -142,8 +142,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.gokeigaku = item.get納入通知書期情報リスト().get(index + 1).get納付額表記();
                 source.nokigenYmd = item.get納入通知書期情報リスト().get(index + 1).get納期限表記();
                 source.honzei = item.get納入通知書期情報リスト().get(index + 1).get納付額表記();
-                source.ocr12 = item.get納入通知書期情報リスト().get(index + 1).getOCR().get(1);
-                source.ocr22 = item.get納入通知書期情報リスト().get(index + 1).getOCR().get(2);
+                source.ocr12 = item.get納入通知書期情報リスト().get(index + 1).getOcr().get(1);
+                source.ocr22 = item.get納入通知書期情報リスト().get(index + 1).getOcr().get(2);
             }
             if (item.get納入通知書期情報リスト().get(index + 1).getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen2 = item.get納入通知書期情報リスト().get(index + 1).getコンビニ支払期限().toDateString();
@@ -198,7 +198,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.nofuBango = item.get納入通知書期情報リスト().get(index + 2).get納付番号();
                 source.kakuninBango3 = item.get納入通知書期情報リスト().get(index + 2).get確認番号();
                 source.nofuKubun3 = item.get納入通知書期情報リスト().get(index + 2).get納付区分();
-                source.ocrId3 = item.get納入通知書期情報リスト().get(index + 2).getOCRID();
+                source.ocrId3 = item.get納入通知書期情報リスト().get(index + 2).getOcrid();
                 source.barcodeCvsBarcode3 = item.get納入通知書期情報リスト().get(index + 2).getバーコード情報();
                 source.cvsBarcodeNaiyo13 = item.get納入通知書期情報リスト().get(index + 2).getバーコード情報上段();
                 source.cvsBarcodeNaiyo23 = item.get納入通知書期情報リスト().get(index + 2).getバーコード情報下段();
@@ -206,8 +206,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.gokeigaku = item.get納入通知書期情報リスト().get(index + 2).get納付額表記();
                 source.nokigenYmd = item.get納入通知書期情報リスト().get(index + 2).get納期限表記();
                 source.honzei = item.get納入通知書期情報リスト().get(index + 2).get納付額表記();
-                source.ocr13 = item.get納入通知書期情報リスト().get(index + 2).getOCR().get(1);
-                source.ocr23 = item.get納入通知書期情報リスト().get(index + 2).getOCR().get(2);
+                source.ocr13 = item.get納入通知書期情報リスト().get(index + 2).getOcr().get(1);
+                source.ocr23 = item.get納入通知書期情報リスト().get(index + 2).getOcr().get(2);
             }
             if (item.get納入通知書期情報リスト().get(index + 2).getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen3 = item.get納入通知書期情報リスト().get(index + 2).getコンビニ支払期限().toDateString();
@@ -262,7 +262,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.nofuBango = item.get納入通知書期情報リスト().get(index + 2).get納付番号();
                 source.kakuninBango4 = item.get納入通知書期情報リスト().get(index + 2).get確認番号();
                 source.nofuKubun4 = item.get納入通知書期情報リスト().get(index + 2).get納付区分();
-                source.ocrId4 = item.get納入通知書期情報リスト().get(index + 2).getOCRID();
+                source.ocrId4 = item.get納入通知書期情報リスト().get(index + 2).getOcrid();
                 source.barcodeCvsBarcode4 = item.get納入通知書期情報リスト().get(index + 2).getバーコード情報();
                 source.cvsBarcodeNaiyo14 = item.get納入通知書期情報リスト().get(index + 2).getバーコード情報上段();
                 source.cvsBarcodeNaiyo24 = item.get納入通知書期情報リスト().get(index + 2).getバーコード情報下段();
@@ -270,8 +270,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
                 source.gokeigaku = item.get納入通知書期情報リスト().get(index + 2).get納付額表記();
                 source.nokigenYmd = item.get納入通知書期情報リスト().get(index + 2).get納期限表記();
                 source.honzei = item.get納入通知書期情報リスト().get(index + 2).get納付額表記();
-                source.ocr14 = item.get納入通知書期情報リスト().get(index + 2).getOCR().get(1);
-                source.ocr24 = item.get納入通知書期情報リスト().get(index + 2).getOCR().get(2);
+                source.ocr14 = item.get納入通知書期情報リスト().get(index + 2).getOcr().get(1);
+                source.ocr24 = item.get納入通知書期情報リスト().get(index + 2).getOcr().get(2);
             }
             if (item.get納入通知書期情報リスト().get(index + 2).getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen4 = item.get納入通知書期情報リスト().get(index + 2).getコンビニ支払期限().toDateString();

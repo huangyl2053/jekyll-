@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC10301",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "完了処理・審査受付",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE1030001",
+     "toLayoutTitle": "完了処理・審査受付",
+     "toState": "登録"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1030001",
+     "layoutTitle": "完了処理・審査受付",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

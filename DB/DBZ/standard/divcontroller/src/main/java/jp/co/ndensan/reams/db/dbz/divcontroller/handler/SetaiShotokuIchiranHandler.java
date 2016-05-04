@@ -148,7 +148,7 @@ public class SetaiShotokuIchiranHandler {
     public List<SetaiinShotoku> get世帯員所得Data(ShikibetsuCode 識別コード, YMDHMS 所得基準年月日) {
         // 現在設定されている共有子Divのモードを取得する
         DisplayMode mode = div.getMode_DisplayMode();
-        SetaiinShotokuJohoFinder 世帯員所得情報Finder = new SetaiinShotokuJohoFinder();
+        SetaiinShotokuJohoFinder 世帯員所得情報Finder = SetaiinShotokuJohoFinder.createInstance();
         List<SetaiinShotoku> 世帯員所得情報 = new ArrayList();
         // 世帯員所得情報を取得する。モードにより条件を変更する。
         // 賦課照会モードのとき
@@ -181,7 +181,7 @@ public class SetaiShotokuIchiranHandler {
      */
     public List<SetaiinShotoku> set最新世帯員所得情報(ShikibetsuCode 識別コード) {
         DisplayMode mode = div.getMode_DisplayMode();
-        SetaiinShotokuJohoFinder 世帯員所得情報Finder = new SetaiinShotokuJohoFinder();
+        SetaiinShotokuJohoFinder 世帯員所得情報Finder = SetaiinShotokuJohoFinder.createInstance();
         List<SetaiinShotoku> 世帯員所得情報 = new ArrayList();
         if (mode.equals(DisplayMode.FukaShokai)) {
             世帯員所得情報 = 世帯員所得情報Finder.get世帯員所得情報(識別コード, FlexibleDate.getNowDate(),
@@ -394,7 +394,7 @@ public class SetaiShotokuIchiranHandler {
      * @return 所得情報履歴リスト
      */
     public List<KaigoShotokuAlive> get所得情報履歴(ShikibetsuCode 識別コード) {
-        ShotokuManager 介護所得Finder = new ShotokuManager();
+        ShotokuManager 介護所得Finder = ShotokuManager.createInstance();
         KaigoShotokuAlive shotokuAlive = 介護所得Finder.get介護所得Alive(識別コード,
                 new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
                         .getYear().toDateString()));

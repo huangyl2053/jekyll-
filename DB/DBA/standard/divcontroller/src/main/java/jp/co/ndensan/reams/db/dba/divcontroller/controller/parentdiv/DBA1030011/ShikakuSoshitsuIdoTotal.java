@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格喪失異動の対象者情報を表示するためのDivControllerです。
@@ -125,6 +127,11 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnBack(ShikakuSoshitsuIdoTotalDiv div) {
         RealInitialLocker.release(前排他ロックキー);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_証類状況タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_施設入退所タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_老福年金タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_医療保険タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, null);
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.再検索).respond();
     }
 

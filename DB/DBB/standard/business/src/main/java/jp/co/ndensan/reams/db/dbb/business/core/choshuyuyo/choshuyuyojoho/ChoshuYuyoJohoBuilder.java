@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyo
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -36,7 +35,7 @@ public class ChoshuYuyoJohoBuilder {
     private final Models<KibetsuIdentifier, Kibetsu> kibetsu;
 
     /**
-     * {@link ChoshuYuyoJohoRelateEntity}より{@link ChoshuYuyoJoho}の編集用Builderクラスを生成します。
+     * {@link DbT2002FukaEntity}より{@link ChoshuYuyoJoho}の編集用Builderクラスを生成します。
      *
      * @param entity {@link DbT2002FukaEntity}
      * @param id {@link ChoshuYuyoJohoIdentifier}

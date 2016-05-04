@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ValidationHandler {
 
     private static final int INT8 = 8;
-    private static RString 特記事項番号 = RString.EMPTY;
 
     /**
      * 特記事項番号入力チェックします。
@@ -42,12 +41,16 @@ public class ValidationHandler {
     public ValidationMessageControlPairs 特記事項番号入力チェック(
             ValidationMessageControlPairs validPairs,
             TextBox texBox) {
-        特記事項番号 = texBox.getValue();
+
+        RString 特記事項番号 = RString.EMPTY;
+        if (texBox.getValue() != null) {
+            特記事項番号 = texBox.getValue();
+        }
         try {
             NinteichosaKomoku09B.toValue(texBox.getValue());
         } catch (IllegalArgumentException e) {
             validPairs.add(new ValidationMessageControlPair(
-                    RRVMessages.Validate特記事項番号不正,
+                    new RRVMessages(UrErrorMessages.不正, "特記事項番号(" + 特記事項番号 + ")"),
                     texBox));
         }
 
@@ -79,7 +82,7 @@ public class ValidationHandler {
             if (texBox.getValue().equals(value.getTemp_認定調査特記事項番号())
                     && (value.getTemp_特記事項() == null || value.getTemp_特記事項().isEmpty())) {
 
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate特記事項番号が追加不可,
+                validPairs.add(new ValidationMessageControlPair(new RRVMessages(DbeErrorMessages.特記事項番号が追加不可),
                         texBox));
             }
         }
@@ -118,7 +121,7 @@ public class ValidationHandler {
             }
             if (texBox.getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate連番最大値を超過,
+                validPairs.add(new ValidationMessageControlPair(new RRVMessages(DbeErrorMessages.連番最大値を超過),
                         texBox));
             }
         }
@@ -126,11 +129,8 @@ public class ValidationHandler {
         return validPairs;
     }
 
-    private static enum RRVMessages implements IValidationMessage {
+    private static final class RRVMessages implements IValidationMessage {
 
-        Validate特記事項番号不正(UrErrorMessages.不正, "特記事項番号(" + 特記事項番号.toString() + ")"),
-        Validate特記事項番号が追加不可(DbeErrorMessages.特記事項番号が追加不可),
-        Validate連番最大値を超過(DbeErrorMessages.連番最大値を超過);
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.FutanGendogakuNinteiKanshoTsuchisho;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -22,14 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBD-3570-010 wangchao
  */
 public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
-
-    /**
-     * コンストラクタです。
-     *
-     * @param div 負担限度額認定更新のお知らせ通知書個別発行のコントロールdiv
-     */
-    public FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-    }
 
     /**
      * 業務概念「介護負担限度額認定の情報」を取得する

@@ -166,7 +166,7 @@
         AND F."maskingKanryoYMD" IS NOT NULL
         AND F."ninteichosaKanryoYMD" IS NOT NULL
         AND E."ichijiHanteiKekkaCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
-        AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
+        AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25', '31')
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>

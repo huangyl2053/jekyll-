@@ -44,6 +44,15 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンス
+     */
+    public static HihokenshaDaichoManager createInstance() {
+        return InstanceProvider.create(HihokenshaDaichoManager.class);
+    }
+
+    /**
      * 主キーに合致する被保険者台帳管理を返します。
      *
      * @param 被保険者番号 HihokenshaNo

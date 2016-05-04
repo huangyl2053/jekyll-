@@ -233,6 +233,9 @@ public class FukaManager {
         return builder.build();
     }
 
+    /**
+     * TODO shunoKamokuManager.get科目()で有効な科目を取得できない、 QA1133を提出、外部redmine提出まち
+     */
     private Nokitsuki get納期月(IShunoKamoku 科目, int 期) {
         Nokitsuki.Builder builder = Nokitsuki.newBuilder();
         builder.set科目コード(科目.getコード());

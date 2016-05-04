@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -26,11 +25,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -43,10 +40,6 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class DBD1030001ValidationHandler {
 
-    private static final Decimal DECIMAL_28 = new Decimal("28.0");
-    private static final Decimal DECIMAL_53 = new Decimal("53.0");
-    private static final Decimal DECIMAL_50 = new Decimal("50.0");
-    private static final Decimal DECIMAL_25 = new Decimal("25.0");
     private static final Decimal DECIMAL_100 = new Decimal("100");
     private static final FlexibleDate FLEXIBLEDDTE_20060701 = new FlexibleDate("20060701");
     private static final FlexibleDate FLEXIBLEDDTE_20110331 = new FlexibleDate("20110331");
@@ -64,6 +57,38 @@ public class DBD1030001ValidationHandler {
                 .thenAdd(NoInputMessages.申請日の必須入力).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.申請日の必須入力, div.getTxtShinseiYMD()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 軽減事由の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div DBD1030001Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 軽減事由の未入力チェック(ValidationMessageControlPairs pairs, DBD1030001Div div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.軽減事由の非空チェック)
+                .thenAdd(NoInputMessages.軽減事由の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.軽減事由の必須入力, div.getDdlKeigenJiyu()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 確認番号の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div DBD1030001Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 確認番号の未入力チェック(ValidationMessageControlPairs pairs, DBD1030001Div div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.確認番号の非空チェック)
+                .thenAdd(NoInputMessages.確認番号の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.確認番号の必須入力, div.getTxtKakuninNo()).build().check(messages));
         return pairs;
     }
 
@@ -132,6 +157,38 @@ public class DBD1030001ValidationHandler {
     }
 
     /**
+     * 軽減率_分子の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div DBD1030001Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 軽減率_分子の未入力チェック(ValidationMessageControlPairs pairs, DBD1030001Div div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.軽減率_分子の非空チェック)
+                .thenAdd(NoInputMessages.軽減率_分子の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.軽減率_分子の必須入力, div.getTxtKeigenRitsuBunshi()).build().check(messages));
+        return pairs;
+    }
+
+    /**
+     * 軽減率_分母の未入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div DBD1030001Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 軽減率_分母の未入力チェック(ValidationMessageControlPairs pairs, DBD1030001Div div) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.軽減率_分母の非空チェック)
+                .thenAdd(NoInputMessages.軽減率_分母の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.軽減率_分母の必須入力, div.getTxtKeigenRitsuBunbo()).build().check(messages));
+        return pairs;
+    }
+
+    /**
      * 減免減額_確認番号が既に存在チェックを行います。
      *
      * @param pairs バリデーションコントロール
@@ -168,9 +225,8 @@ public class DBD1030001ValidationHandler {
      *
      * @param pairs バリデーションコントロール
      * @param div DBD1030001Div
-     * @return ResponseData<DBD1030001Div>
      */
-    public ResponseData<DBD1030001Div> 承認情報相関チェック１(ValidationMessageControlPairs pairs, DBD1030001Div div) {
+    public void 承認情報相関チェック１(ValidationMessageControlPairs pairs, DBD1030001Div div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
         messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.減免減額_適用日が法施行前のチェック)
@@ -200,20 +256,16 @@ public class DBD1030001ValidationHandler {
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択,
                 div.getChkKyotakuServiceGentei(), div.getChkKyusochiUnitGataJunKoshitsu()).build().check(messages4));
+        承認情報相関チェック１_15(適用開始日, div, pairs);
         IValidationMessages messages5 = ValidationMessagesFactory.createInstance();
         messages5.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.受給共通_受給者_事業対象者登録なしのチェック)
                 .thenAdd(NoInputMessages.受給共通_受給者_事業対象者登録なし).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.受給共通_受給者_事業対象者登録なし,
                 div.getTxtTekiyoYMD()).build().check(messages5));
-        ResponseData<DBD1030001Div> responseData = 承認情報相関チェック１_15(適用開始日, div, pairs);
-        if (responseData != null) {
-            return responseData;
-        }
-        return null;
     }
 
-    private ResponseData<DBD1030001Div> 承認情報相関チェック１_15(FlexibleDate 適用開始日,
+    private void 承認情報相関チェック１_15(FlexibleDate 適用開始日,
             DBD1030001Div div, ValidationMessageControlPairs pairs) {
         Decimal 減免率_分子 = div.getTxtKeigenRitsuBunshi().getValue();
         Decimal 減免率_分母 = div.getTxtKeigenRitsuBunbo().getValue();
@@ -249,25 +301,15 @@ public class DBD1030001ValidationHandler {
                     NoInputMessages.社会福祉法人減免_減免率_分母は100,
                     div.getTxtKeigenRitsuBunbo()).build().check(messages2));
         } else if (特例措置期間開始日.isBeforeOrEquals(適用開始日) && !特例措置期間終了日.isEmpty() && 適用開始日.isBeforeOrEquals(特例措置期間終了日)) {
-            ResponseData<DBD1030001Div> responseData = 承認情報相関チェック１_15_1(減免率_分子, 居宅サービス限定SelectKeys, div, pairs);
-            if (responseData != null) {
-                return responseData;
-            }
+            承認情報相関チェック１_15_1(居宅サービス限定SelectKeys, div, pairs);
         } else if (!居宅サービス限定SelectKeys.isEmpty() || !旧措置ユニット型個室SelectKeys.isEmpty()) {
-            ResponseData<DBD1030001Div> responseData = 承認情報相関チェック１_15_2(減免率_分子, 減免率_分母, div, pairs);
-            if (responseData != null) {
-                return responseData;
-            }
+            承認情報相関チェック１_15_2(減免率_分母, div, pairs);
         } else {
-            ResponseData<DBD1030001Div> responseData = 承認情報相関チェック１_15_3(減免率_分子, div, 適用開始日, pairs);
-            if (responseData != null) {
-                return responseData;
-            }
+            承認情報相関チェック１_15_3(減免率_分子, div, 適用開始日, pairs);
         }
-        return null;
     }
 
-    private ResponseData<DBD1030001Div> 承認情報相関チェック１_15_3(Decimal 減免率_分子,
+    private void 承認情報相関チェック１_15_3(Decimal 減免率_分子,
             DBD1030001Div div, FlexibleDate 適用開始日, ValidationMessageControlPairs pairs) {
         IValidationMessages messages2 = ValidationMessagesFactory.createInstance();
         messages2.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分母は100のチェック)
@@ -276,9 +318,12 @@ public class DBD1030001ValidationHandler {
                 NoInputMessages.社会福祉法人減免_減免率_分母は100,
                 div.getTxtKeigenRitsuBunbo()).build().check(messages2));
         if (減免率_分子.compareTo(DECIMAL_100) == 0 && FLEXIBLEDDTE_20110331.isBefore(適用開始日) && is対象の被保険者が生活保護(div)) {
-            WarningMessage message = new WarningMessage(DbdWarningMessages.社会福祉法人減免_非生活保護者_軽減率100.getMessage().getCode(),
-                    DbdWarningMessages.社会福祉法人減免_非生活保護者_軽減率100.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            IValidationMessages messages3 = ValidationMessagesFactory.createInstance();
+            messages3.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_非生活保護者_軽減率100のチェック)
+                    .thenAdd(NoInputMessages.社会福祉法人減免_非生活保護者_軽減率100).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    NoInputMessages.社会福祉法人減免_非生活保護者_軽減率100,
+                    div.getTxtKeigenRitsuBunshi()).build().check(messages3));
         } else {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分子は1から99の範囲のチェック)
@@ -287,11 +332,15 @@ public class DBD1030001ValidationHandler {
                     NoInputMessages.社会福祉法人減免_減免率_分子は1から99の範囲,
                     div.getTxtKeigenRitsuBunshi()).build().check(messages));
         }
-        return null;
     }
 
-    private ResponseData<DBD1030001Div> 承認情報相関チェック１_15_2(Decimal 減免率_分子,
-            Decimal 減免率_分母, DBD1030001Div div, ValidationMessageControlPairs pairs) {
+    private void 承認情報相関チェック１_15_2(Decimal 減免率_分母, DBD1030001Div div, ValidationMessageControlPairs pairs) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_軽減率_特例措置期間のチェック2)
+                .thenAdd(NoInputMessages.社会福祉法人減免_軽減率_特例措置期間).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.社会福祉法人減免_軽減率_特例措置期間,
+                div.getTxtKeigenRitsuBunshi()).build().check(messages));
         if (減免率_分母.compareTo(DECIMAL_100) != 0) {
             IValidationMessages messages2 = ValidationMessagesFactory.createInstance();
             messages2.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分母は100のチェック)
@@ -300,28 +349,22 @@ public class DBD1030001ValidationHandler {
                     NoInputMessages.社会福祉法人減免_減免率_分母は100,
                     div.getTxtKeigenRitsuBunbo()).build().check(messages2));
         } else {
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分母は100のチェック)
-                    .thenAdd(NoInputMessages.社会福祉法人減免_減免率_分母は100).messages());
-            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    NoInputMessages.社会福祉法人減免_減免率_分母は100,
-                    div.getTxtKeigenRitsuBunbo()).build().check(messages));
             IValidationMessages messages2 = ValidationMessagesFactory.createInstance();
             messages2.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分子は1から99の範囲のチェック)
                     .thenAdd(NoInputMessages.社会福祉法人減免_減免率_分子は1から99の範囲).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                     NoInputMessages.社会福祉法人減免_減免率_分子は1から99の範囲,
                     div.getTxtKeigenRitsuBunshi()).build().check(messages2));
+            IValidationMessages messages3 = ValidationMessagesFactory.createInstance();
+            messages3.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分母は100のチェック)
+                    .thenAdd(NoInputMessages.社会福祉法人減免_減免率_分母は100).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    NoInputMessages.社会福祉法人減免_減免率_分母は100,
+                    div.getTxtKeigenRitsuBunbo()).build().check(messages3));
         }
-        if (減免率_分子.compareTo(DECIMAL_25) != 0 && 減免率_分子.compareTo(DECIMAL_50) != 0) {
-            WarningMessage message = new WarningMessage(DbdWarningMessages.社会福祉法人減免_軽減率_特例措置期間.getMessage().getCode(),
-                    DbdWarningMessages.社会福祉法人減免_軽減率_特例措置期間.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        return null;
     }
 
-    private ResponseData<DBD1030001Div> 承認情報相関チェック１_15_1(Decimal 減免率_分子,
+    private void 承認情報相関チェック１_15_1(
             List<RString> 居宅サービス限定SelectKeys, DBD1030001Div div, ValidationMessageControlPairs pairs) {
         if (!居宅サービス限定SelectKeys.isEmpty() || isすべてがチェックオフ(div)) {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
@@ -330,26 +373,26 @@ public class DBD1030001ValidationHandler {
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                     NoInputMessages.社会福祉法人減免_減免率_分母は100,
                     div.getTxtKeigenRitsuBunbo()).build().check(messages));
-            if (減免率_分子.compareTo(DECIMAL_28) != 0 && 減免率_分子.compareTo(DECIMAL_53) != 0) {
-                WarningMessage message = new WarningMessage(DbdWarningMessages.社会福祉法人減免_軽減率_特例措置期間.getMessage().getCode(),
-                        DbdWarningMessages.社会福祉法人減免_軽減率_特例措置期間.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        } else {
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分母は100のチェック)
-                    .thenAdd(NoInputMessages.社会福祉法人減免_減免率_分母は100).messages());
+            IValidationMessages messages2 = ValidationMessagesFactory.createInstance();
+            messages2.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_軽減率_特例措置期間のチェック1)
+                    .thenAdd(NoInputMessages.社会福祉法人減免_軽減率_特例措置期間).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                    NoInputMessages.社会福祉法人減免_減免率_分母は100,
-                    div.getTxtKeigenRitsuBunbo()).build().check(messages));
+                    NoInputMessages.社会福祉法人減免_軽減率_特例措置期間,
+                    div.getTxtKeigenRitsuBunshi()).build().check(messages2));
+        } else {
             IValidationMessages messages2 = ValidationMessagesFactory.createInstance();
             messages2.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分子は1から99の範囲のチェック)
                     .thenAdd(NoInputMessages.社会福祉法人減免_減免率_分子は1から99の範囲).messages());
             pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                     NoInputMessages.社会福祉法人減免_減免率_分子は1から99の範囲,
                     div.getTxtKeigenRitsuBunshi()).build().check(messages2));
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div).ifNot(DBD1030001DivSpec.社会福祉法人減免_減免率_分母は100のチェック)
+                    .thenAdd(NoInputMessages.社会福祉法人減免_減免率_分母は100).messages());
+            pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                    NoInputMessages.社会福祉法人減免_減免率_分母は100,
+                    div.getTxtKeigenRitsuBunbo()).build().check(messages));
         }
-        return null;
     }
 
     private FlexibleDate get制度改正施行日_平成１７年１０月改正() {
@@ -363,7 +406,7 @@ public class DBD1030001ValidationHandler {
 
     private boolean is対象の被保険者が生活保護(DBD1030001Div div) {
         return SeikatsuhogoManagerFactory.createInstance()
-                .get生活保護(get識別コードFromViewState(), GyomuCode.DB介護保険, div.getTxtShinseiYMD().getValue()) != null;
+                .get生活保護(get識別コードFromViewState(), GyomuCode.DB介護保険, div.getTxtShinseiYMD().getValue()) == null;
     }
 
     private boolean is入力内容がある(List<RString> 入力内容) {
@@ -382,9 +425,9 @@ public class DBD1030001ValidationHandler {
         List<RString> 居宅サービス限定SelectKeys = div.getChkKyotakuServiceGentei().getSelectedKeys();
         List<RString> 居居住費_食費限定SelectKeys = div.getChkKyojuhiShokuhiGentei().getSelectedKeys();
         List<RString> 旧措置ユニット型個室限定SelectKeys = div.getChkKyusochiUnitGataJunKoshitsu().getSelectedKeys();
-        return !is入力内容がある(居宅サービス限定SelectKeys)
-                && !is入力内容がある(居居住費_食費限定SelectKeys)
-                && !is入力内容がある(旧措置ユニット型個室限定SelectKeys);
+        return is入力内容がある(居宅サービス限定SelectKeys)
+                && is入力内容がある(居居住費_食費限定SelectKeys)
+                && is入力内容がある(旧措置ユニット型個室限定SelectKeys);
     }
 
     private FlexibleDate get特例措置期間開始日() {
@@ -407,30 +450,36 @@ public class DBD1030001ValidationHandler {
 
     private static enum NoInputMessages implements IValidationMessage {
 
-        申請日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "申請日"),
-        決定区分の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定区分"),
-        決定日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "決定日"),
-        適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "適用日"),
-        有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "有効期限"),
-        給付率の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "給付率"),
-        減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
-        減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
-        減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),
-        社会福祉法人減免_減免率_分子が分母より大(DbdErrorMessages.社会福祉法人減免_減免率_分子が分母より大),
+        申請日の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "申請日"),
+        軽減事由の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "軽減事由"),
+        確認番号の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "確認番号"),
+        決定区分の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "決定区分"),
+        決定日の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "決定日"),
+        適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "適用日"),
+        有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "有効期限"),
+        軽減率_分子の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "軽減率（分子）"),
+        軽減率_分母の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "軽減率（分母）"),
+        給付率の必須入力(UrErrorMessages.必須項目_追加メッセージあり.getMessage(), "給付率"),
+        減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前.getMessage()),
+        減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外.getMessage()),
+        減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前.getMessage()),
+        社会福祉法人減免_減免率_分子が分母より大(DbdErrorMessages.社会福祉法人減免_減免率_分子が分母より大.getMessage()),
         社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択(
-                DbdErrorMessages.社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択),
-        受給共通_受給者_事業対象者登録なし(DbdErrorMessages.受給共通_受給者_事業対象者登録なし),
-        社会福祉法人減免_減免率_分子は1桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は1桁整数),
-        社会福祉法人減免_減免率_分母は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分母は2桁整数),
-        社会福祉法人減免_減免率_分子は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は2桁整数),
-        社会福祉法人減免_減免率_分母は100(DbdErrorMessages.社会福祉法人減免_減免率_分母は100),
-        社会福祉法人減免_減免率_分子は1から99の範囲(DbdErrorMessages.社会福祉法人減免_減免率_分子は1から99の範囲),
-        減免減額_確認番号が既に存在(DbdErrorMessages.減免減額_確認番号が既に存在),
-        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複);
+                DbdErrorMessages.社会福祉法人減免_居宅サービス限定と旧措置ユニット型個室限定の同時選択.getMessage()),
+        受給共通_受給者_事業対象者登録なし(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage()),
+        社会福祉法人減免_減免率_分子は1桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は1桁整数.getMessage()),
+        社会福祉法人減免_減免率_分母は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分母は2桁整数.getMessage()),
+        社会福祉法人減免_減免率_分子は2桁整数(DbdErrorMessages.社会福祉法人減免_減免率_分子は2桁整数.getMessage()),
+        社会福祉法人減免_減免率_分母は100(DbdErrorMessages.社会福祉法人減免_減免率_分母は100.getMessage()),
+        社会福祉法人減免_減免率_分子は1から99の範囲(DbdErrorMessages.社会福祉法人減免_減免率_分子は1から99の範囲.getMessage()),
+        減免減額_確認番号が既に存在(DbdErrorMessages.減免減額_確認番号が既に存在.getMessage()),
+        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複.getMessage()),
+        社会福祉法人減免_軽減率_特例措置期間(DbdWarningMessages.社会福祉法人減免_軽減率_特例措置期間.getMessage()),
+        社会福祉法人減免_非生活保護者_軽減率100(DbdWarningMessages.社会福祉法人減免_非生活保護者_軽減率100.getMessage());
         private final Message message;
 
-        private NoInputMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
+        private NoInputMessages(Message message, String... replacements) {
+            this.message = message.replace(replacements);
         }
 
         @Override

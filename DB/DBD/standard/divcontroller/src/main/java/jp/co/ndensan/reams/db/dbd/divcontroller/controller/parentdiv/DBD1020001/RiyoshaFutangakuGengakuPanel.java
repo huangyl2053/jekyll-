@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -48,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class RiyoshaFutangakuGengakuPanel {
 
-    private final RString 承認メニュー = new RString("DBDMN22002");
+    private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 追加 = new RString("追加");
 
@@ -215,7 +216,8 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onBeforeOpenDialog_btnShowGemmenJoho(RiyoshaFutangakuGengakuPanelDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         div.setHihokenshaNo(被保険者番号.getColumnValue());
         return ResponseData.of(div).respond();
     }
@@ -369,8 +371,7 @@ public class RiyoshaFutangakuGengakuPanel {
         Collections.sort(viewStateList, new RiyoshaFutangakuGengakuComparator());
 
         int size = viewStateList.size();
-        int minRirekiNo = 0;
-        boolean isRirekiNoSet = false;
+        int minRirekiNo = Integer.MAX_VALUE;
 
         List<RiyoshaFutangakuGengakuViewState> not削除List = new ArrayList<>();
         RiyoshaFutangakuGengakuViewState joho;
@@ -379,8 +380,7 @@ public class RiyoshaFutangakuGengakuPanel {
         for (int i = 0; i < size; i++) {
             joho = viewStateList.get(i);
             状態 = joho.getState();
-            if (!isRirekiNoSet && (EntityDataState.Unchanged == 状態 || EntityDataState.Modified == 状態)) {
-                isRirekiNoSet = true;
+            if (minRirekiNo > joho.getShorigoRirekiNo() && joho.getShorigoRirekiNo() >= 0) {
                 minRirekiNo = joho.getShorigoRirekiNo();
                 始まり承認データ状態 = 状態;
             }
@@ -390,8 +390,13 @@ public class RiyoshaFutangakuGengakuPanel {
                 not削除List.add(joho);
             }
         }
-        if (ResponseHolder.getMenuID().equals(承認メニュー) && EntityDataState.Modified == 始まり承認データ状態
-                && minRirekiNo == 0) {
+        if (minRirekiNo == Integer.MAX_VALUE && ResponseHolder.getMenuID().equals(承認メニュー)) {
+            minRirekiNo = 1;
+        } else if (minRirekiNo == Integer.MAX_VALUE) {
+            minRirekiNo = 0;
+        }
+        if (ResponseHolder.getMenuID().equals(承認メニュー)
+                && EntityDataState.Modified == 始まり承認データ状態 && minRirekiNo == 0) {
             minRirekiNo = 1;
         }
 
@@ -424,7 +429,8 @@ public class RiyoshaFutangakuGengakuPanel {
     }
 
     private void 前排他キーの解除() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.release(排他キー);

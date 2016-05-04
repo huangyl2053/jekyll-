@@ -13,8 +13,12 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicek
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -31,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -67,6 +72,9 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private static final RString CODE_1 = new RString("1");
     private static final RString CODE_2 = new RString("2");
     private static final RString CODE_3 = new RString("3");
+    private static final RString CODE = new RString("0003");
+    private static final RString 左記号 = new RString("(");
+    private static final RString 右記号 = new RString(")");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC701001"));
     private static final ReportId EUC_ID = new ReportId("DBC701001");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
@@ -148,7 +156,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     }
 
     private PersonalData toPersonalData(HanyoListKyotakuServiceKeikakuEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), new RString("被保険者番号"),
                 entity.getDbT3005被保険者番号().value());
         return PersonalData.of(entity.get宛名Entity().getShikibetsuCode(), expandedInfo);
     }
@@ -167,10 +175,12 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(構成市町村);
-        RString 構成市町村コード = new RString("(").concat(parameter.get構成市町村コード().getColumnValue()).concat(new RString(")"));
-        //TODO 構成市町村名 ?
-        builder.append(parameter.get構成市町村コード().isEmpty()
-                ? RString.EMPTY : 構成市町村コード);
+        LasdecCode lasdecCode = parameter.get構成市町村コード();
+        RString 構成市町村コード = 左記号.concat(lasdecCode == null ? RString.EMPTY : lasdecCode.getColumnValue()).concat(右記号);
+        HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+        HokenshaSummary hokenshaSummary = hokenshaList.get(lasdecCode);
+        RString 構成市町村名 = hokenshaSummary.get市町村名称();
+        builder.append(構成市町村コード).append(構成市町村名);
         出力条件.add(builder.toRString());
         builder = get作成区分();
         出力条件.add(builder.toRString());
@@ -178,13 +188,14 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(基準年月日);
-        builder.append(parameter.get基準年月日().isEmpty()
-                ? RString.EMPTY : dataToRString(parameter.get基準年月日()));
+        FlexibleDate flexibleDate = parameter.get基準年月日();
+        builder.append(flexibleDate == null || flexibleDate.isEmpty()
+                ? null : dataToRString(flexibleDate));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(支援事業者番号);
-        builder.append(parameter.get支援事業者番号().isEmpty()
-                ? RString.EMPTY : parameter.get支援事業者番号());
+        builder.append(parameter.get支援事業者番号() == null || parameter.get支援事業者番号().isEmpty()
+                ? null : parameter.get支援事業者番号());
         出力条件.add(builder.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ID.value(),

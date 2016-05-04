@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoMybatisParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 汎用リスト出力(高額介護サービス費状況)のProcessパラメータです。
@@ -52,6 +54,11 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private boolean rebanFuka;
     private boolean hizukeHeshu;
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+
+    private static final int 基準額_ONE = 15000;
+    private static final int 基準額_TWO = 26400;
+    private static final int 基準額_THREE = 37200;
+    private static final int 基準額_FOUR = 44400;
 
     /**
      * コンストラクタです。
@@ -153,6 +160,23 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
      * @return 域内住所地特例者一覧表のMyBatisパラメータ
      */
     public HanyoListKogakuKaigoMybatisParameter toMybatisParamter() {
+
+        Decimal santeiKijunParamter = Decimal.ZERO;
+        if (null != santeiKijun) {
+            SanteiKijun 算定基準 = SanteiKijun.toValue(santeiKijun);
+            if (SanteiKijun.すべて.get名称().equals(算定基準.get名称())) {
+                santeiKijunParamter = Decimal.ZERO;
+            } else if (SanteiKijun._１５０００円.get名称().equals(算定基準.get名称())) {
+                santeiKijunParamter = new Decimal(基準額_ONE);
+            } else if (SanteiKijun._２６４００円.get名称().equals(算定基準.get名称())) {
+                santeiKijunParamter = new Decimal(基準額_TWO);
+            } else if (SanteiKijun._３７２００円.get名称().equals(算定基準.get名称())) {
+                santeiKijunParamter = new Decimal(基準額_THREE);
+            } else {
+                santeiKijunParamter = new Decimal(基準額_FOUR);
+            }
+        }
+
         return new HanyoListKogakuKaigoMybatisParameter(
                 宛名検索条件,
                 kouseiShichosonCode,
@@ -161,6 +185,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 shoriJokyo,
                 shinsaHoho,
                 santeiKijun,
+                santeiKijunParamter,
                 kokuhorenFuicchi,
                 taishosha,
                 shinseiKubun,

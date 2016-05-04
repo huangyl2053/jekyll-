@@ -22,20 +22,20 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource implements 
     public RString titleNendo;
     @ReportItem(name = "titleNendoBun", length = 9, order = 5)
     public RString titleNendoBun;
-    @ReportItem(name = "HyojicodeName1", order = 6)
-    public RString HyojicodeName1;
-    @ReportItem(name = "HyojicodeName2", order = 7)
-    public RString HyojicodeName2;
-    @ReportItem(name = "HyojicodeName3", order = 8)
-    public RString HyojicodeName3;
+    @ReportItem(name = "hyojicodeName1", order = 6)
+    public RString hyojicodeName1;
+    @ReportItem(name = "hyojicodeName2", order = 7)
+    public RString hyojicodeName2;
+    @ReportItem(name = "hyojicodeName3", order = 8)
+    public RString hyojicodeName3;
     @ReportItem(name = "keisanMeisaishoNokigenKaishi1", length = 11, order = 9)
     public RString keisanMeisaishoNokigenKaishi1;
-    @ReportItem(name = "Hyojicode1", length = 11, order = 10)
-    public RString Hyojicode1;
-    @ReportItem(name = "Hyojicode2", length = 9, order = 11)
-    public RString Hyojicode2;
-    @ReportItem(name = "Hyojicode3", length = 9, order = 12)
-    public RString Hyojicode3;
+    @ReportItem(name = "hyojicode1", length = 11, order = 10)
+    public RString hyojicode1;
+    @ReportItem(name = "hyojicode2", length = 9, order = 11)
+    public RString hyojicode2;
+    @ReportItem(name = "hyojicode3", length = 9, order = 12)
+    public RString hyojicode3;
     @ReportItem(name = "keisanMeisaishoKi1", length = 2, order = 13)
     public RString keisanMeisaishoKi1;
     @ReportItem(name = "kaisanMeisaishoHihokenshaName", order = 14)

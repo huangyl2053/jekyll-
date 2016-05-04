@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.Te
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha.ITekiyoJogaishaMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
@@ -174,16 +173,17 @@ public class TekiyoJogaishaManager {
         TekiyoJogaishaMapperParameter 適用除外者Parameter = TekiyoJogaishaMapperParameter.
                 createParam_get適用除外者(shikibetsuCode, ronrisakujyoFlg);
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        List<TekiyoJogaishaKanriRelateEntity> 適用除外者管理情報List = mapper.get適用除外者と施設入退所情報(適用除外者Parameter);
+        List<DbT1002TekiyoJogaishaEntity> 適用除外者管理適用除外者情報List = mapper.get適用除外者更新用(適用除外者Parameter);
         List<TekiyoJogaisha> 適用除外者List = new ArrayList();
         List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList();
-        for (TekiyoJogaishaKanriRelateEntity entity : 適用除外者管理情報List) {
-            DbT1002TekiyoJogaishaEntity 適用除外者Entity = entity.get適用除外者Entity();
-            適用除外者Entity.initializeMd5();
-            適用除外者List.add(new TekiyoJogaisha(適用除外者Entity));
-            DbT1004ShisetsuNyutaishoEntity 施設入退所Entity = entity.get施設入退所Entity();
-            施設入退所Entity.initializeMd5();
-            施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(施設入退所Entity));
+        for (DbT1002TekiyoJogaishaEntity 適用除外者 : 適用除外者管理適用除外者情報List) {
+            適用除外者.initializeMd5();
+            適用除外者List.add(new TekiyoJogaisha(適用除外者));
+            List<DbT1004ShisetsuNyutaishoEntity> 適用除外者管理施設情報List = mapper.get施設情報更新用(適用除外者Parameter);
+            for (DbT1004ShisetsuNyutaishoEntity 施設情報 : 適用除外者管理施設情報List) {
+                施設情報.initializeMd5();
+                施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(施設情報));
+            }
         }
         tekiyoJogaishaBusiness.set適用除外者List(適用除外者List);
         tekiyoJogaishaBusiness.set施設入退所Lsit(施設入退所Lsit);

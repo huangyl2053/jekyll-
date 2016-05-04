@@ -127,15 +127,15 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         NonyuTsuchiShoKiJoho 納入通知書期情報 = 納入通知書期情報リスト.isEmpty() ? new NonyuTsuchiShoKiJoho() : 納入通知書期情報リスト.get(0);
         source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         source.noutsu_renban = isバッチ ? new RString("*").concat(new RString(String.valueOf(連番)).padLeft("0", INT6)).concat("#") : RString.EMPTY;
-        source.HyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
-        source.HyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
-        source.HyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
-        source.Hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
-        source.Hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
-        source.Hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
+        source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
+        source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
+        source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
+        source.hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
+        source.hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
+        source.hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
         //編集後個人
-        source.SetaiCode = null;
-        source.TsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
+        source.setaiCode = null;
+        source.tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
         //if (true) {
         //編集後口座に、口座の情報   isPresent()がtrueの場合
         source.bankCodeTitle = new RString("金融機関コード");
@@ -162,8 +162,8 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         source.ki1 = 納入通知書期情報.get期表記();
         source.tsuki1 = 納入通知書期情報.get月表記();
         source.nofuGaku1 = 納入通知書期情報.get納付額表記();
-        source.Nokigen1 = 納入通知書期情報.get納期限表記();
-        source.Hyojicode1 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
+        source.nokigen1 = 納入通知書期情報.get納期限表記();
+        source.hyojicode1 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
         source.pageCount1 = new RString(String.valueOf(連番)).concat("-1");
         if (HyojiUmu.表示する.equals(仮算定納入通知書情報.get仮算定納入通知書制御情報().get納入通知書制御情報().getコンビニ明細書表示())) {
             PrecedingFiscalYearInformation 前年度情報 = 編集後仮算定通知書共通情報.get前年度情報();

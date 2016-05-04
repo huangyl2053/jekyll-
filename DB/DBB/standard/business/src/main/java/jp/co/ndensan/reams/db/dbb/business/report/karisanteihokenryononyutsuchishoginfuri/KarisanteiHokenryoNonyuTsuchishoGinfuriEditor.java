@@ -116,27 +116,27 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editHyojicodeName1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.HyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
+        source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
     }
 
     private void editHyojicodeName2(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.HyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
+        source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
     }
 
     private void editHyojicodeName3(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.HyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
+        source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
     }
 
     private void editHyojicode1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.Hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
+        source.hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
     }
 
     private void editHyojicode2(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.Hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
+        source.hyojicode2 = 編集後仮算定通知書共通情報.get表示コード２();
     }
 
     private void editHyojicode13(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        source.Hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
+        source.hyojicode3 = 編集後仮算定通知書共通情報.get表示コード３();
     }
 
     private void editTsuchishoNo(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {

@@ -112,6 +112,7 @@ public class ShisetsutourukuPanelHandler {
             div.getTxtShisetsuBiko().setValue(business.get備考());
             div.getJigyoshaShurui().getRadServiceShurui().setSelectedKey(business.get事業者種別());
         }
+        div.getShisetsuJoho().getTxtShisetsuJigyoshaNo().setDisabled(true);
         div.getJigyoshaShurui().getRadServiceShurui().setDisabled(true);
     }
 

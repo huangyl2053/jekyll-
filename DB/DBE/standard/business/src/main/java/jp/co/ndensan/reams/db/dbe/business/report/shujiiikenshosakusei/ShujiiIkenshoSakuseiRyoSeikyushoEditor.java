@@ -6,12 +6,16 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  *
@@ -84,6 +88,24 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.yubinNo = item.getSeikyuIryokikanYubinNo();
         source.iryokikanJusho = item.getSeikyuIryokikanJusho();
         source.iryokikanTel = item.getSeikyuIryokikanTel();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), getHokenshaNo());
         return source;
     }
+
+    private RString getHokenshaNo() {
+        RStringBuilder hokenshaNo = new RStringBuilder();
+        hokenshaNo.append(item.getHihokenshaNo1());
+        hokenshaNo.append(item.getHihokenshaNo2());
+        hokenshaNo.append(item.getHihokenshaNo3());
+        hokenshaNo.append(item.getHihokenshaNo4());
+        hokenshaNo.append(item.getHihokenshaNo5());
+        hokenshaNo.append(item.getHihokenshaNo6());
+        hokenshaNo.append(item.getHihokenshaNo7());
+        hokenshaNo.append(item.getHihokenshaNo8());
+        hokenshaNo.append(item.getHihokenshaNo9());
+        hokenshaNo.append(item.getHihokenshaNo10());
+        return hokenshaNo.toRString();
+    }
+
 }

@@ -11,17 +11,12 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyu
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007_16.NonyuTsuchishoBookFuriKaeAriRenchoCoverSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -69,10 +64,12 @@ public class NonyuTsuchishoBookFuriKaeAriRenchoCoverReport extends Report<NonyuT
         // TODO 帳票制御情報を取得する
         // 帳票制御共通（DbT7065ChohyoSeigyoKyotsu）
         // パラメータ：　サブ業務コード　＝　DBB
-        //	　　　   帳票分類ID　＝　"DBB100045_HokenryoNonyuTsuchishoDaihyo"
-        Ninshosha 帳票認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()));
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        // 帳票分類ID　＝　"DBB100045_HokenryoNonyuTsuchishoDaihyo"
+        Ninshosha 帳票認証者 = null;
+//        NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
+//                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()));
+        Association 地方公共団体 = null;
+//        AssociationFinderFactory.createInstance().getAssociation();
         // TODO is公印に掛ける　=　帳票制御共通.首長名印字位置 が 1（公印にかける）のとき　True
         // TODO is公印を省略　=　帳票制御共通.電子公印印字有無　が　False　のとき、True
         INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(帳票認証者,

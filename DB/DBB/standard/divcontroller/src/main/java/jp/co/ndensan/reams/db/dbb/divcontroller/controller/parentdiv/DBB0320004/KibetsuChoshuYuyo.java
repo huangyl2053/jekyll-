@@ -38,19 +38,21 @@ public class KibetsuChoshuYuyo {
     };
 
     private Map<RString, Label> 期別テーブル = new HashMap<>();
-//    private static final int TABLE_SIZE = 14;
 
-    private static final int ROWNO_3 = 3;
-    private static final int ROWNO_4 = 4;
-    private static final int ROWNO_5 = 5;
-    private static final int ROWNO_6 = 6;
-    private static final int ROWNO_7 = 7;
-    private static final int ROWNO_8 = 8;
-    private static final int ROWNO_9 = 9;
-    private static final int ROWNO_10 = 10;
-    private static final int ROWNO_11 = 11;
-    private static final int ROWNO_12 = 12;
-    private static final int ROWNO_13 = 13;
+    private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_7 = 7;
+    private static final int INT_8 = 8;
+    private static final int INT_9 = 9;
+    private static final int INT_10 = 10;
+    private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
     private static final RString SUFFIX_月 = new RString("月");
     private static final RString SUFFIX_期 = new RString("期");
 
@@ -89,7 +91,7 @@ public class KibetsuChoshuYuyo {
     }
 
     private boolean are調定年度and賦課年度SameAge(Optional<Object> model) {
-        // TODO 未使用のメソッド引数があります。modelのCheckstyle対応。
+        // TODO modelのCheckstyle対応。
         model.hashCode();
         return true;
     }
@@ -116,8 +118,6 @@ public class KibetsuChoshuYuyo {
     }
 
     private void setKibetsu(Map<RString, Integer> 期IndexMap) {
-        // TODO 未使用のメソッド引数があります。
-        期IndexMap.isEmpty();
         List<FlexibleDate> 開始日 = new ArrayList<>();
         List<FlexibleDate> 終了日 = new ArrayList<>();
 
@@ -131,6 +131,8 @@ public class KibetsuChoshuYuyo {
 //                終了日[期Index] = model.get徴収猶予終了年月日();
 //            }
 //        }
+        // TODO 未使用のメソッド引数があります。期IndexMapのCheckstyle対応。
+        期IndexMap.isEmpty();
         setTableData(TableItem.開始日, 開始日);
         setTableData(TableItem.終了日, 終了日);
     }
@@ -147,65 +149,65 @@ public class KibetsuChoshuYuyo {
 
         Map<RString, Label> map = new HashMap<>();
 
-        map.put(getTableKey(TableItem.月, 0), div.getLblChoshuYuyoTsuki1());
-        map.put(getTableKey(TableItem.月, 1), div.getLblChoshuYuyoTsuki2());
-        map.put(getTableKey(TableItem.月, 2), div.getLblChoshuYuyoTsuki3());
-        map.put(getTableKey(TableItem.月, ROWNO_3), div.getLblChoshuYuyoTsuki4());
-        map.put(getTableKey(TableItem.月, ROWNO_4), div.getLblChoshuYuyoTsuki5());
-        map.put(getTableKey(TableItem.月, ROWNO_5), div.getLblChoshuYuyoTsuki6());
-        map.put(getTableKey(TableItem.月, ROWNO_6), div.getLblChoshuYuyoTsuki7());
-        map.put(getTableKey(TableItem.月, ROWNO_7), div.getLblChoshuYuyoTsuki8());
-        map.put(getTableKey(TableItem.月, ROWNO_8), div.getLblChoshuYuyoTsuki9());
-        map.put(getTableKey(TableItem.月, ROWNO_9), div.getLblChoshuYuyoTsuki10());
-        map.put(getTableKey(TableItem.月, ROWNO_10), div.getLblChoshuYuyoTsuki11());
-        map.put(getTableKey(TableItem.月, ROWNO_11), div.getLblChoshuYuyoTsuki12());
-        map.put(getTableKey(TableItem.月, ROWNO_12), div.getLblChoshuYuyoTsuki13());
-        map.put(getTableKey(TableItem.月, ROWNO_13), div.getLblChoshuYuyoTsuki14());
+        map.put(getTableKey(TableItem.月, INT_0), div.getLblChoshuYuyoTsuki1());
+        map.put(getTableKey(TableItem.月, INT_1), div.getLblChoshuYuyoTsuki2());
+        map.put(getTableKey(TableItem.月, INT_2), div.getLblChoshuYuyoTsuki3());
+        map.put(getTableKey(TableItem.月, INT_3), div.getLblChoshuYuyoTsuki4());
+        map.put(getTableKey(TableItem.月, INT_4), div.getLblChoshuYuyoTsuki5());
+        map.put(getTableKey(TableItem.月, INT_5), div.getLblChoshuYuyoTsuki6());
+        map.put(getTableKey(TableItem.月, INT_6), div.getLblChoshuYuyoTsuki7());
+        map.put(getTableKey(TableItem.月, INT_7), div.getLblChoshuYuyoTsuki8());
+        map.put(getTableKey(TableItem.月, INT_8), div.getLblChoshuYuyoTsuki9());
+        map.put(getTableKey(TableItem.月, INT_9), div.getLblChoshuYuyoTsuki10());
+        map.put(getTableKey(TableItem.月, INT_10), div.getLblChoshuYuyoTsuki11());
+        map.put(getTableKey(TableItem.月, INT_11), div.getLblChoshuYuyoTsuki12());
+        map.put(getTableKey(TableItem.月, INT_12), div.getLblChoshuYuyoTsuki13());
+        map.put(getTableKey(TableItem.月, INT_13), div.getLblChoshuYuyoTsuki14());
 
-        map.put(getTableKey(TableItem.期, 0), div.getLblChoshuYuyoKi1());
-        map.put(getTableKey(TableItem.期, 1), div.getLblChoshuYuyoKi2());
-        map.put(getTableKey(TableItem.期, 2), div.getLblChoshuYuyoKi3());
-        map.put(getTableKey(TableItem.期, ROWNO_3), div.getLblChoshuYuyoKi4());
-        map.put(getTableKey(TableItem.期, ROWNO_4), div.getLblChoshuYuyoKi5());
-        map.put(getTableKey(TableItem.期, ROWNO_5), div.getLblChoshuYuyoKi6());
-        map.put(getTableKey(TableItem.期, ROWNO_6), div.getLblChoshuYuyoKi7());
-        map.put(getTableKey(TableItem.期, ROWNO_7), div.getLblChoshuYuyoKi8());
-        map.put(getTableKey(TableItem.期, ROWNO_8), div.getLblChoshuYuyoKi9());
-        map.put(getTableKey(TableItem.期, ROWNO_9), div.getLblChoshuYuyoKi10());
-        map.put(getTableKey(TableItem.期, ROWNO_10), div.getLblChoshuYuyoKi11());
-        map.put(getTableKey(TableItem.期, ROWNO_11), div.getLblChoshuYuyoKi12());
-        map.put(getTableKey(TableItem.期, ROWNO_12), div.getLblChoshuYuyoKi13());
-        map.put(getTableKey(TableItem.期, ROWNO_13), div.getLblChoshuYuyoKi14());
+        map.put(getTableKey(TableItem.期, INT_0), div.getLblChoshuYuyoKi1());
+        map.put(getTableKey(TableItem.期, INT_1), div.getLblChoshuYuyoKi2());
+        map.put(getTableKey(TableItem.期, INT_2), div.getLblChoshuYuyoKi3());
+        map.put(getTableKey(TableItem.期, INT_3), div.getLblChoshuYuyoKi4());
+        map.put(getTableKey(TableItem.期, INT_4), div.getLblChoshuYuyoKi5());
+        map.put(getTableKey(TableItem.期, INT_5), div.getLblChoshuYuyoKi6());
+        map.put(getTableKey(TableItem.期, INT_6), div.getLblChoshuYuyoKi7());
+        map.put(getTableKey(TableItem.期, INT_7), div.getLblChoshuYuyoKi8());
+        map.put(getTableKey(TableItem.期, INT_8), div.getLblChoshuYuyoKi9());
+        map.put(getTableKey(TableItem.期, INT_9), div.getLblChoshuYuyoKi10());
+        map.put(getTableKey(TableItem.期, INT_10), div.getLblChoshuYuyoKi11());
+        map.put(getTableKey(TableItem.期, INT_11), div.getLblChoshuYuyoKi12());
+        map.put(getTableKey(TableItem.期, INT_12), div.getLblChoshuYuyoKi13());
+        map.put(getTableKey(TableItem.期, INT_13), div.getLblChoshuYuyoKi14());
 
-        map.put(getTableKey(TableItem.開始日, 0), div.getLblKaishiDate1());
-        map.put(getTableKey(TableItem.開始日, 1), div.getLblKaishiDate2());
-        map.put(getTableKey(TableItem.開始日, 2), div.getLblKaishiDate3());
-        map.put(getTableKey(TableItem.開始日, ROWNO_3), div.getLblKaishiDate4());
-        map.put(getTableKey(TableItem.開始日, ROWNO_4), div.getLblKaishiDate5());
-        map.put(getTableKey(TableItem.開始日, ROWNO_5), div.getLblKaishiDate6());
-        map.put(getTableKey(TableItem.開始日, ROWNO_6), div.getLblKaishiDate7());
-        map.put(getTableKey(TableItem.開始日, ROWNO_7), div.getLblKaishiDate8());
-        map.put(getTableKey(TableItem.開始日, ROWNO_8), div.getLblKaishiDate9());
-        map.put(getTableKey(TableItem.開始日, ROWNO_9), div.getLblKaishiDate10());
-        map.put(getTableKey(TableItem.開始日, ROWNO_10), div.getLblKaishiDate11());
-        map.put(getTableKey(TableItem.開始日, ROWNO_11), div.getLblKaishiDate12());
-        map.put(getTableKey(TableItem.開始日, ROWNO_12), div.getLblKaishiDate13());
-        map.put(getTableKey(TableItem.開始日, ROWNO_13), div.getLblKaishiDate14());
+        map.put(getTableKey(TableItem.開始日, INT_0), div.getLblKaishiDate1());
+        map.put(getTableKey(TableItem.開始日, INT_1), div.getLblKaishiDate2());
+        map.put(getTableKey(TableItem.開始日, INT_2), div.getLblKaishiDate3());
+        map.put(getTableKey(TableItem.開始日, INT_3), div.getLblKaishiDate4());
+        map.put(getTableKey(TableItem.開始日, INT_4), div.getLblKaishiDate5());
+        map.put(getTableKey(TableItem.開始日, INT_5), div.getLblKaishiDate6());
+        map.put(getTableKey(TableItem.開始日, INT_6), div.getLblKaishiDate7());
+        map.put(getTableKey(TableItem.開始日, INT_7), div.getLblKaishiDate8());
+        map.put(getTableKey(TableItem.開始日, INT_8), div.getLblKaishiDate9());
+        map.put(getTableKey(TableItem.開始日, INT_9), div.getLblKaishiDate10());
+        map.put(getTableKey(TableItem.開始日, INT_10), div.getLblKaishiDate11());
+        map.put(getTableKey(TableItem.開始日, INT_11), div.getLblKaishiDate12());
+        map.put(getTableKey(TableItem.開始日, INT_12), div.getLblKaishiDate13());
+        map.put(getTableKey(TableItem.開始日, INT_13), div.getLblKaishiDate14());
 
-        map.put(getTableKey(TableItem.終了日, 0), div.getLblShuryoDate1());
-        map.put(getTableKey(TableItem.終了日, 1), div.getLblShuryoDate2());
-        map.put(getTableKey(TableItem.終了日, 2), div.getLblShuryoDate3());
-        map.put(getTableKey(TableItem.終了日, ROWNO_3), div.getLblShuryoDate4());
-        map.put(getTableKey(TableItem.終了日, ROWNO_4), div.getLblShuryoDate5());
-        map.put(getTableKey(TableItem.終了日, ROWNO_5), div.getLblShuryoDate6());
-        map.put(getTableKey(TableItem.終了日, ROWNO_6), div.getLblShuryoDate7());
-        map.put(getTableKey(TableItem.終了日, ROWNO_7), div.getLblShuryoDate8());
-        map.put(getTableKey(TableItem.終了日, ROWNO_8), div.getLblShuryoDate9());
-        map.put(getTableKey(TableItem.終了日, ROWNO_9), div.getLblShuryoDate10());
-        map.put(getTableKey(TableItem.終了日, ROWNO_10), div.getLblShuryoDate11());
-        map.put(getTableKey(TableItem.終了日, ROWNO_11), div.getLblShuryoDate12());
-        map.put(getTableKey(TableItem.終了日, ROWNO_12), div.getLblShuryoDate13());
-        map.put(getTableKey(TableItem.終了日, ROWNO_13), div.getLblShuryoDate14());
+        map.put(getTableKey(TableItem.終了日, INT_0), div.getLblShuryoDate1());
+        map.put(getTableKey(TableItem.終了日, INT_1), div.getLblShuryoDate2());
+        map.put(getTableKey(TableItem.終了日, INT_2), div.getLblShuryoDate3());
+        map.put(getTableKey(TableItem.終了日, INT_3), div.getLblShuryoDate4());
+        map.put(getTableKey(TableItem.終了日, INT_4), div.getLblShuryoDate5());
+        map.put(getTableKey(TableItem.終了日, INT_5), div.getLblShuryoDate6());
+        map.put(getTableKey(TableItem.終了日, INT_6), div.getLblShuryoDate7());
+        map.put(getTableKey(TableItem.終了日, INT_7), div.getLblShuryoDate8());
+        map.put(getTableKey(TableItem.終了日, INT_8), div.getLblShuryoDate9());
+        map.put(getTableKey(TableItem.終了日, INT_9), div.getLblShuryoDate10());
+        map.put(getTableKey(TableItem.終了日, INT_10), div.getLblShuryoDate11());
+        map.put(getTableKey(TableItem.終了日, INT_11), div.getLblShuryoDate12());
+        map.put(getTableKey(TableItem.終了日, INT_12), div.getLblShuryoDate13());
+        map.put(getTableKey(TableItem.終了日, INT_13), div.getLblShuryoDate14());
 
         return map;
     }

@@ -39,7 +39,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoValidationHandler {
                 .thenAdd(NoInputMessages.出力対象の選択されていない).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.出力対象の選択されていない,
-                div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu()).build().check(messages));
+                div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu()).build().check(messages));
         return pairs;
     }
 

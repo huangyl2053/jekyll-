@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojink
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -40,6 +43,30 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 @Override
                 public boolean apply(DBD1030001Div div) {
                     return div.getTxtShinseiYMD().getValue() != null && !div.getTxtShinseiYMD().getValue().isEmpty();
+                }
+            },
+    軽減事由の非空チェック {
+                /**
+                 * 軽減事由の非空チェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:軽減事由が非空です、false:軽減事由が空です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    return div.getDdlKeigenJiyu().getSelectedValue() != null && !div.getDdlKeigenJiyu().getSelectedValue().isEmpty();
+                }
+            },
+    確認番号の非空チェック {
+                /**
+                 * 確認番号の非空チェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:確認番号が非空です、false:確認番号が空です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    return div.getTxtKakuninNo().getValue() != null && !div.getTxtKakuninNo().getValue().isEmpty();
                 }
             },
     決定区分の非空チェック {
@@ -88,6 +115,30 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 @Override
                 public boolean apply(DBD1030001Div div) {
                     return div.getTxtYukoKigenYMD().getValue() != null && !div.getTxtYukoKigenYMD().getValue().isEmpty();
+                }
+            },
+    軽減率_分子の非空チェック {
+                /**
+                 * 有効期限の非空チェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:有効期限が非空です、false:有効期限が空です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    return div.getTxtKeigenRitsuBunshi().getValue() != null;
+                }
+            },
+    軽減率_分母の非空チェック {
+                /**
+                 * 有効期限の非空チェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:有効期限が非空です、false:有効期限が空です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    return div.getTxtKeigenRitsuBunbo().getValue() != null;
                 }
             },
     減免減額_適用日が法施行前のチェック {
@@ -231,7 +282,7 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  * 社会福祉法人減免_減免率_分母は100のチェックです。
                  *
                  * @param div 社会福祉法人等利用者負担軽減申請Div
-                 * @return true:not社会福祉法人減免_減免率_分母は100です、false:社会福祉法人減免_減免率_分母は100です。
+                 * @return true:社会福祉法人減免_減免率_分母は100です、false:not社会福祉法人減免_減免率_分母は100です。
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
@@ -307,12 +358,60 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                     for (ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 : 情報と状態ArrayList) {
                         ShakaifukuRiyoshaFutanKeigen 情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
                         if (new RString("追加").equals(情報と状態.get状態())
+                        && new RString("1").equals(情報.get決定区分())
                         && ShakaiFukushiHojinKeigenService.createIntance()
                         .exsits確認番号In同一年度(情報.get確認番号(), 情報.get適用開始年月日())) {
                             return false;
                         }
                     }
                     return true;
+                }
+            },
+    社会福祉法人減免_軽減率_特例措置期間のチェック1 {
+                /**
+                 * 社会福祉法人減免_軽減率_特例措置期間のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not社会福祉法人減免_軽減率_特例措置期間です、false:社会福祉法人減免_軽減率_特例措置期間です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    Decimal 減免率_分子 = div.getTxtKeigenRitsuBunshi().getValue();
+                    return 減免率_分子.compareTo(new Decimal("28.0")) == 0 || 減免率_分子.compareTo(new Decimal("53.0")) == 0;
+                }
+            },
+    社会福祉法人減免_軽減率_特例措置期間のチェック2 {
+                /**
+                 * 社会福祉法人減免_軽減率_特例措置期間のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not社会福祉法人減免_軽減率_特例措置期間です、false:社会福祉法人減免_軽減率_特例措置期間です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    Decimal 減免率_分子 = div.getTxtKeigenRitsuBunshi().getValue();
+                    return 減免率_分子.compareTo(new Decimal("25.0")) == 0 || 減免率_分子.compareTo(new Decimal("50.0")) == 0;
+                }
+            },
+    社会福祉法人減免_非生活保護者_軽減率100のチェック {
+                /**
+                 * 社会福祉法人減免_非生活保護者_軽減率100のチェックです。
+                 *
+                 * @param div 社会福祉法人等利用者負担軽減申請Div
+                 * @return true:not社会福祉法人減免_非生活保護者_軽減率100です、false:社会福祉法人減免_非生活保護者_軽減率100です。
+                 */
+                @Override
+                public boolean apply(DBD1030001Div div) {
+                    Decimal 減免率_分子 = div.getTxtKeigenRitsuBunshi().getValue();
+                    FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
+                    ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+                    if (null == 識別コード) {
+                        識別コード = ShikibetsuCode.EMPTY;
+                    }
+                    return 減免率_分子.compareTo(new Decimal("100")) != 0
+                    || !new FlexibleDate("20110331").isBefore(適用開始日)
+                    || SeikatsuhogoManagerFactory.createInstance()
+                    .get生活保護(識別コード, GyomuCode.DB介護保険, div.getTxtShinseiYMD().getValue()) != null;
                 }
             }
 }

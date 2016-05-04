@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
  * @reamsid_L DBB-9999-013 huangh
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class GemmenJohoRelateMapperParameter {
 
     private final FlexibleYear 調定年度;

@@ -88,12 +88,12 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor implements 
         source.keisanMeisaishoNendoBun = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat(分);
         source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
         source.titleNendoBun = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat(分);
-        source.HyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
-        source.HyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
-        source.HyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
-        source.Hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
-        source.Hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
-        source.Hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
+        source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
+        source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
+        source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+        source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
+        source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
+        source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
         // TODO 分割前の納入通知書期情報リスト、全部期月の情報を出力
         source.keisanMeisaishoKi1 = 納入通知書期情報リスト.get(0).get期表記();
         source.keisanMeisaishoNokigenKaishi1 = 納入通知書期情報リスト.get(0).get納期開始日表記();
@@ -188,11 +188,11 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor implements 
             source.nofushoTitleKi1 = 納入通知書期情報リスト.get(0).get期表記();
             source.nofushoTitleTsuki1 = 納入通知書期情報リスト.get(0).get月表記();
             // TODO 納入通知書期情報.OCRの一行目の印字文字列
-            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR11 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの二行目の印字文字列
-            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR21 = 納入通知書期情報リスト.get(0).getOcrid();
             // TODO 納入通知書期情報.OCRの三行目の印字文字列
-            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOCRID();
+            source.nofuzumishoOCR31 = 納入通知書期情報リスト.get(0).getOcrid();
             source.nofuzumishoNokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
             source.ryoshushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get領収証書納付額欄();
             source.nofushoHokenryoGaku1 = 納入通知書期情報リスト.get(0).get納付書納付額欄();

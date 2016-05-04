@@ -451,7 +451,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonIgnore
     private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
-        if (認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
+        if (認定有効期間終了年月日 == null || 要介護認定状態区分コード == null || 認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
             return RString.EMPTY;
         }
         if (認定有効期間終了年月日.isBefore(有効期間2002年04月)) {

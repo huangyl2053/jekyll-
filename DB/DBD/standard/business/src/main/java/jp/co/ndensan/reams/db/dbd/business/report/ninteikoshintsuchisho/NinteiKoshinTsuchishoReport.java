@@ -29,6 +29,7 @@ public class NinteiKoshinTsuchishoReport extends Report<NinteiKoshinTsuchisho> {
 
     @Override
     public void writeBy(ReportSourceWriter<NinteiKoshinTsuchisho> reportSourceWriter) {
+        target.setイメージファイルパス(reportSourceWriter.getImageFolderPath());
         NinteiKoshinTsuchishoLayer1Editor layer1Editor = new NinteiKoshinTsuchishoLayer1Editor(target);
         NinteiKoshinTsuchishoCompNinshoshaEditor compNinshoshaEditor = new NinteiKoshinTsuchishoCompNinshoshaEditor(target);
         NinteiKoshinTsuchishoCompSofubutsuAtesakiEditor compSofubutsuAtesakiEditor = new NinteiKoshinTsuchishoCompSofubutsuAtesakiEditor(target);

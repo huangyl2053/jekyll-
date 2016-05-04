@@ -71,6 +71,9 @@ public class TaJushochiTokureisyaKanriManager {
                 sortList.add(date);
             }
         }
+        if (sortList.isEmpty()) {
+            return;
+        }
         Collections.sort(sortList, new DateComparator());
         TaJushochiTokureisyaKanriParameter 直近適用グリッド行 = sortList.get(0);
         for (TaJushochiTokureisyaKanriParameter date : paramater) {
@@ -89,6 +92,7 @@ public class TaJushochiTokureisyaKanriManager {
         public int compare(TaJushochiTokureisyaKanriParameter o1, TaJushochiTokureisyaKanriParameter o2) {
             return o1.getTekiyoYMD().compareTo(o2.getTekiyoYMD());
         }
+        private static final long serialVersionUID = 5004135092514753307L;
     }
 
     /**

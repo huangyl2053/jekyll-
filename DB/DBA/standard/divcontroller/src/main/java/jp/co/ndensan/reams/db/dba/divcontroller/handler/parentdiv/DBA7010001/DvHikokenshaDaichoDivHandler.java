@@ -164,8 +164,7 @@ public class DvHikokenshaDaichoDivHandler {
 //        batchParameter.setPageShuturyokujun_Id(new RString(div.getCcdKogakuShutsuryokujun().get出力順ID().toString()));
         // TODO 出力項目ID
 //        batchParameter.setShutsuryokuKomuku_Id(div.getCcdKogakuShutsuryokuKomoku().get出力項目ID());
-        // TODO 帳票IDの値が不明、 QA：1112回答まち、
-//        batchParameter.setChohyoId(RString.EMPTY);
+        batchParameter.setChohyoId(new RString("DBA701001_HanyoListHihokenshaDaicho"));
     }
 
     private void 日付抽出区分が直近非活性() {

@@ -128,7 +128,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set食費負担限度額(Decimal 食費負担限度額) {
-        requireNonNull(食費負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("食費負担限度額"));
         entity.setShokuhiFutanGendogaku(食費負担限度額);
         return this;
     }
@@ -140,7 +139,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder setユニット型個室(Decimal ユニット型個室) {
-        requireNonNull(ユニット型個室, UrSystemErrorMessages.値がnull.getReplacedMessage("ユニット型個室"));
         entity.setUnitTypeKoshitsu(ユニット型個室);
         return this;
     }
@@ -152,7 +150,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder setユニット型準個室(Decimal ユニット型準個室) {
-        requireNonNull(ユニット型準個室, UrSystemErrorMessages.値がnull.getReplacedMessage("ユニット型準個室"));
         entity.setUnitTypeJunKoshitsu(ユニット型準個室);
         return this;
     }
@@ -164,8 +161,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set従来型個室_特養等(Decimal 従来型個室_特養等) {
-        requireNonNull(従来型個室_特養等, UrSystemErrorMessages.値がnull.getReplacedMessage("従来型個室（特養等）")
-        );
         entity.setJuraiTypeKoshitsu_Tokuyo(従来型個室_特養等);
         return this;
     }
@@ -177,7 +172,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set従来型個室_老健_療養等(Decimal 従来型個室_老健_療養等) {
-        requireNonNull(従来型個室_老健_療養等, UrSystemErrorMessages.値がnull.getReplacedMessage("従来型個室（老健・療養等）"));
         entity.setJuraiTypeKoshitsu_Roken_Ryoyo(従来型個室_老健_療養等);
         return this;
     }
@@ -189,7 +183,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set多床室(Decimal 多床室) {
-        requireNonNull(多床室, UrSystemErrorMessages.値がnull.getReplacedMessage("多床室"));
         entity.setTashoshitsu(多床室);
         return this;
     }
@@ -237,7 +230,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set配偶者生年月日(FlexibleDate 配偶者生年月日) {
-        requireNonNull(配偶者生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("配偶者生年月日"));
         entity.setHaigushaSeinenGappiYMD(配偶者生年月日);
         return this;
     }
@@ -321,7 +313,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set預貯金額(Decimal 預貯金額) {
-        requireNonNull(預貯金額, UrSystemErrorMessages.値がnull.getReplacedMessage("預貯金額"));
         entity.setYochokinGaku(預貯金額);
         return this;
     }
@@ -333,7 +324,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set有価証券評価概算額(Decimal 有価証券評価概算額) {
-        requireNonNull(有価証券評価概算額, UrSystemErrorMessages.値がnull.getReplacedMessage("有価証券評価概算額"));
         entity.setYukashoukenGaisangaku(有価証券評価概算額);
         return this;
     }
@@ -345,7 +335,6 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder setその他金額(Decimal その他金額) {
-        requireNonNull(その他金額, UrSystemErrorMessages.値がnull.getReplacedMessage("その他金額"));
         entity.setSonotaKingaku(その他金額);
         return this;
     }

@@ -330,7 +330,7 @@ public class TekiyoJogaiRirekiHandler {
                             枝番 = new RString(Integer.parseInt(row.getHenkougoEdaNo().toString()) + 1).padZeroToLeft(PADZERO);
                             break;
                         } else {
-                            枝番 = 開始枝番;
+                            枝番 = new RString(Integer.parseInt(row.getHenkoumaeEdaNo().toString()) + 1).padZeroToLeft(PADZERO);;
                         }
                     }
                 }
@@ -378,6 +378,12 @@ public class TekiyoJogaiRirekiHandler {
                 }
             }
             div.getPanelTekiyoInput().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtTekiyoDate().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().setDisabled(true);
+            div.getPanelTekiyoInput().getDdlTekiyoJiyu().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtKayijoDate().setDisabled(true);
+            div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().setDisabled(true);
+            div.getPanelTekiyoInput().getDdlKaijyoJiyu().setDisabled(true);
         }
         div.getDatagridTekiyoJogai().setDataSource(rowList);
         div.setStauts(RString.EMPTY);
@@ -571,7 +577,7 @@ public class TekiyoJogaiRirekiHandler {
             } else {
                 row.getTekiyoTodokeDate().clearValue();
             }
-            row.setTekiyoJiyu(get適用事由(適用除外者情報.get適用除外適用事由コード()));
+            row.setTekiyoJiyu((適用除外者情報.get適用除外適用事由コード()));
             if (適用除外者情報.get解除年月日() != null && !適用除外者情報.get解除年月日().isEmpty()) {
                 row.getKayijoDate().setValue(new RDate(適用除外者情報.get解除年月日().toString()));
             } else {
@@ -808,14 +814,14 @@ public class TekiyoJogaiRirekiHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護除外適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(介護除外適用理由, new Code(適用事由コード));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護除外解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(介護除外解除理由, new Code(解除事由コード));
     }
 
     private List<KeyValueDataSource> set適用事由() {
@@ -824,7 +830,7 @@ public class TekiyoJogaiRirekiHandler {
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;
@@ -836,7 +842,7 @@ public class TekiyoJogaiRirekiHandler {
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;

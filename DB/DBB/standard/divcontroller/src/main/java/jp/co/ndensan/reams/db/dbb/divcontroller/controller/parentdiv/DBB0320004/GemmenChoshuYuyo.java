@@ -5,15 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320004;
 
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.FukaShokaiController;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenDiv;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.GemmenManager;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-//import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
-//import jp.co.ndensan.reams.db.dbz.realservice.ChoshuYuyoFinder;
-//import jp.co.ndensan.reams.db.dbz.realservice.GemmenFinder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 減免・徴収猶予Divです。
@@ -48,23 +49,24 @@ public class GemmenChoshuYuyo {
      */
     private void setGemmenDiv(GemmenDiv div, FukaShokaiKey key) {
         clearGemmenDiv(div);
-        // TODO 未使用のメソッド引数があります。keyのCheckstyle対応。
-        key.get履歴番号();
-//        Optional<Gemmen> modeloid = Optional.of(new GemmenManager().get介護賦課減免(
-//                key.get調定年度(), key.get賦課年度(),
-//                key.get通知書番号(), Decimal.ZERO));
+
+        Optional<Gemmen> modeloid = Optional.of(new GemmenManager().get介護賦課減免(
+                key.get調定年度(), key.get賦課年度(),
+                key.get通知書番号(), Decimal.ZERO));
 //                key.get調定年度(), key.get賦課年度(),
 //                key.get通知書番号(), key.get処理日時(), 状態区分);
 
-//        if (modeloid.isPresent()) {
-//            Gemmen model = modeloid.get();
+        if (modeloid.isPresent()) {
+            Gemmen model = modeloid.get();
+            // TODO modelのCheckstyle対応
+            model.get取消減免額();
 //            div.getTxtGemmenShinseiYMD().setValue(FukaMapper.toRDate(model.get減免申請年月日()));
 //            div.getTxtGemmenShinseiGaku().setValue(model.get申請減免額());
 //            div.getTxtGemmenShinseiRiyu().setValue(model.get申請事由());
 //            div.getTxtGemmenKetteiYMD().setValue(FukaMapper.toRDate(model.get減免決定年月日()));
 //            div.getTxtGemmenShurui().setValue(model.get減免種類().getRyakusho());
 //            div.getTxtGemmenShouninRiyu().setValue(model.get減免事由());
-//        }
+        }
     }
 
     private void clearGemmenDiv(GemmenDiv div) {
@@ -84,10 +86,9 @@ public class GemmenChoshuYuyo {
      * @param key 賦課照会key
      */
     private void setChoshuYuyoDiv(ChoshuYuyoDiv div, FukaShokaiKey key) {
-        // TODO 未使用のメソッド引数があります。keyのCheckstyle対応。
-        key.get履歴番号();
         clearChoshuYuyoDiv(div);
-
+        // TODO keyのCheckstyle対応
+        key.get履歴番号();
 //        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
 //                key.get調定年度(), key.get賦課年度(),
 //                key.get通知書番号(), key.get処理日時(), 状態区分);

@@ -157,7 +157,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     }
 
     private void editCompNofushoItem(HokenryoNonyuTsuchishoKigotoSource source) {
-        Map<Integer, RString> ocr = 納入通知書期情報.getOCR();
+        Map<Integer, RString> ocr = 納入通知書期情報.getOcr();
         if (ocr == null || ocr.isEmpty()) {
             ocr = new HashMap<>();
         }
@@ -299,16 +299,16 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
             source.ki10 = 普徴納期情報リストの十番目.get期().padLeft(RString.HALF_SPACE, 2);
             source.tsuki10 = 普徴納期情報リストの十番目.get月().padLeft(RString.HALF_SPACE, 2);
         }
-        source.HyojicodeName1 = RString.EMPTY;
-        source.HyojicodeName2 = RString.EMPTY;
-        source.HyojicodeName3 = RString.EMPTY;
+        source.hyojicodeName1 = RString.EMPTY;
+        source.hyojicodeName2 = RString.EMPTY;
+        source.hyojicodeName3 = RString.EMPTY;
         HyojiCodes 表示コード = null == 編集後本算定通知書共通情報.get表示コード() ? new HyojiCodes() : 編集後本算定通知書共通情報.get表示コード();
         source.hyojiKomoku1 = 表示コード.get表示コード名１();
         source.hyojiKomoku2 = 表示コード.get表示コード名２();
         source.hyojiKomoku3 = 表示コード.get表示コード名３();
-        source.Hyojicode1 = 表示コード.get表示コード１();
-        source.Hyojicode2 = 表示コード.get表示コード２();
-        source.Hyojicode3 = 表示コード.get表示コード３();
+        source.hyojicode1 = 表示コード.get表示コード１();
+        source.hyojicode2 = 表示コード.get表示コード２();
+        source.hyojicode3 = 表示コード.get表示コード３();
         source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().getColumnValue();
         source.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().getColumnValue();
         source.hihokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().getColumnValue();

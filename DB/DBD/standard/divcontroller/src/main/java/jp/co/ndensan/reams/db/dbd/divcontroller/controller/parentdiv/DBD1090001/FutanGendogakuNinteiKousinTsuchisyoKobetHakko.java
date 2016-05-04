@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -50,8 +51,12 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, ShikibetsuCode.class);
         div.getCcdKaigoAtenaInfoDiv().onLoad(識別コード);
 
-        if (被保険者番号.isEmpty()) {
-            getHandler(div).setアクセスログ(被保険者番号, 識別コード);
+        if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
+        }
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+            getHandler().setアクセスログ(被保険者番号, 識別コード);
 
             div.getBtnZenRireki().setDisabled(true);
             div.getBtnShotaiJohou().setDisabled(true);
@@ -65,7 +70,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoBangoInputDiv()
                 .initialize(ReportIdDBD.DBDPR12002_1_1.getReportId());
 
-        getHandler(div).get介護負担限度額認定(被保険者番号, 識別コード);
+        getHandler().get介護負担限度額認定(被保険者番号, 識別コード);
 
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
@@ -81,7 +86,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
             div.getBtnZenRireki().setDisabled(true);
             div.getBtnGoRireki().setDisabled(true);
         }
-        getHandler(div).setアクセスログ(被保険者番号, 識別コード);
+        getHandler().setアクセスログ(被保険者番号, 識別コード);
 
         div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD()
                 .setValue(RDate.getNowDate());
@@ -89,8 +94,8 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         return ResponseData.of(div).respond();
     }
 
-    private FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler getHandler(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-        return new FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler(div);
+    private FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler getHandler() {
+        return new FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler();
     }
 
     private FutanGendogakuNinteiKousinTsuchisyoKobetHakkoValidationHandler getValidationHandler() {
@@ -171,18 +176,28 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
     }
 
     /**
+     * 「発行」ボタン実行前、必須入力チェックを行います。
+     *
+     * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_validate(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor出力チェックボックス(pairs, div);
+        getValidationHandler().validateFor発行日の必須入力(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「発行」ボタンをクリックする
      *
      * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnPublish(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor出力チェックボックス(pairs, div);
-        if (div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsPublish()) {
-            getValidationHandler().validateFor発行日の必須入力(pairs, div);
-        }
 
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, ShikibetsuCode.class);

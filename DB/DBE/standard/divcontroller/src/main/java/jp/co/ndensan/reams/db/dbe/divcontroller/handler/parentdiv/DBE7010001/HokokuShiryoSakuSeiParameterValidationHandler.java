@@ -105,11 +105,12 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
     public ValidationMessageControlPairs check_txtTaishoGappiFrom(ValidationMessageControlPairs validationMessages) {
 
         if (!div.getChkModifyTaishoGeppi().getSelectedKeys().isEmpty()
+                && div.getTxtTaishoGappi().getFromValue() != null
                 && ((div.getChkModifyTaishoTsuki().getSelectedKeys().isEmpty()
                 && div.getTxtTaishoGappi().getFromValue().getYearValue() != div.getTxtTaishoNendo().getValue().getYearValue())
                 || (!div.getChkModifyTaishoTsuki().getSelectedKeys().isEmpty()
-                && div.getTxtTaishoGappi().getFromValue().getYearValue() != div.getTxtTaishoNendo().getValue().getYearValue()
-                && div.getTxtTaishoGappi().getFromValue().getMonthValue() != Integer.parseInt(div.getDdlTsuki().getSelectedKey().toString())))) {
+                && (div.getTxtTaishoGappi().getFromValue().getYearValue() != div.getTxtTaishoNendo().getValue().getYearValue()
+                || div.getTxtTaishoGappi().getFromValue().getMonthValue() != Integer.parseInt(div.getDdlTsuki().getSelectedKey().toString()))))) {
             validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.入力値が不正_追加メッセージあり_対象年月日From));
         }
         return validationMessages;
@@ -124,11 +125,12 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
     public ValidationMessageControlPairs check_txtTaishoGappiTo(ValidationMessageControlPairs validationMessages) {
 
         if (!div.getChkModifyTaishoGeppi().getSelectedKeys().isEmpty()
+                && div.getTxtTaishoGappi().getToValue() != null
                 && ((div.getChkModifyTaishoTsuki().getSelectedKeys().isEmpty()
                 && div.getTxtTaishoGappi().getToValue().getYearValue() != div.getTxtTaishoNendo().getValue().getYearValue())
                 || (!div.getChkModifyTaishoTsuki().getSelectedKeys().isEmpty()
-                && div.getTxtTaishoGappi().getToValue().getYearValue() != div.getTxtTaishoNendo().getValue().getYearValue()
-                && div.getTxtTaishoGappi().getToValue().getMonthValue() != Integer.parseInt(div.getDdlTsuki().getSelectedKey().toString())))) {
+                && (div.getTxtTaishoGappi().getToValue().getYearValue() != div.getTxtTaishoNendo().getValue().getYearValue()
+                || div.getTxtTaishoGappi().getToValue().getMonthValue() != Integer.parseInt(div.getDdlTsuki().getSelectedKey().toString()))))) {
             validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.入力値が不正_追加メッセージあり_対象年月日To));
         }
         return validationMessages;

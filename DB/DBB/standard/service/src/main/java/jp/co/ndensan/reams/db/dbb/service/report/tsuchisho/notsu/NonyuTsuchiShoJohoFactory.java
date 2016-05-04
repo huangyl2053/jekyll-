@@ -56,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBB-9110-012 wangjie2
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NonyuTsuchiShoJohoFactory {
 
     private final IShunoKamoku 収納科目;

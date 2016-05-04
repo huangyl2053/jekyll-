@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.shiharaiHohoKanriList.ShiharaiHohoKanriListData;
+import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd207010.ShiharaiHohoKanriListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -22,14 +22,14 @@ import lombok.Getter;
 public class Dbd207010BatchFlowParameter extends BatchParameterBase {
 
     private FlexibleDate 基準日;
-    private RString 登録者選択;	
+    private RString 登録者選択;
     private RString 差止予告登録者の選択;
     private RString 差止登録者の選択;
     private RString 償還予告登録者の選択;
-    private RString 償還決定登録者の選択;	
+    private RString 償還決定登録者の選択;
     private RString 償還決定登録者1の選択;
     private RString 償還決定登録者2の選択;
-    private RString 改頁出力順ID;	
+    private RString 改頁出力順ID;
     private RString 帳票ID;
 
     /**
