@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJoky
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkinJukyushaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -193,9 +194,8 @@ public class HihokenshaDaichoSakuseiManager {
         List<ShisetsuNyutaishoEntity> shisetsuNyutaishoEntityList = get生活保護受給者情報(parameter);
         List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiList = get老齢福祉年金受給者情報(parameter);
         List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKoList = get証交付回収情報(parameter);
-        //SetaiinFinder setaiinFinder = SetaiinFinder.createInstance();
-        List<SetaiinJoho> setaiinJohoList = new ArrayList<>();
-        // List<SetaiinJoho> setaiinJohoList = setaiinFinder.get世帯員情報By識別コード(parameter.getShikibetsuCode(), FlexibleDate.getNowDate());
+        SetaiinFinder setaiinFinder = SetaiinFinder.createInstance();
+        List<SetaiinJoho> setaiinJohoList = setaiinFinder.get世帯員情報By識別コード(parameter.getShikibetsuCode(), FlexibleDate.getNowDate());
         DbT1008IryohokenKanyuJokyoEntity dbT1008IryohoEntity = get介護保険医療保険加入状況情報(parameter);
         HihokenshaEntity hihokenshaEntity = new HihokenshaEntity();
         hihokenshaEntity.setPrintDate(dateFormat(RDateTime.now()));
