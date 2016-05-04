@@ -58,7 +58,6 @@ public class DvKogakuServiceJoho {
             ViewStateHolder.put(ViewStateKeys.市町村判定, 事務単一);
             panel.getCcdHokenshaList().setDisabled(true);
             panel.getCcdHokenshaList().setVisible(false);
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
