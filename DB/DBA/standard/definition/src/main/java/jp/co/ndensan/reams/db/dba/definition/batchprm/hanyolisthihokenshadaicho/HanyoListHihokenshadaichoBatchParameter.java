@@ -59,6 +59,17 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     private static final String PSMCHIKU2_TO = "psmChiku2_To";
     private static final String PSMCHIKU3_FROM = "psmChiku3_From";
     private static final String PSMCHIKU3_TO = "psmChiku3_To";
+    private static final String SHICHOSON_NAME = "shichoson_Name";
+    private static final String PSMJUSHO_FROM_NAME = "psmJusho_From_Name";
+    private static final String PSMJUSHO_TO_NAME = "psmJusho_To_Name";
+    private static final String PSMGYOSEIKU_FROM_NAME = "psmGyoseiku_From_Name";
+    private static final String PSMGYOSEIKU_TO_NAME = "psmGyoseiku_To_Name";
+    private static final String PSMCHIKU1_FROM_NAME = "psmChiku1_From_Name";
+    private static final String PSMCHIKU1_TO_NAME = "psmChiku1_To_Name";
+    private static final String PSMCHIKU2_FROM_NAME = "psmChiku2_From_Name";
+    private static final String PSMCHIKU2_TO_NAME = "psmChiku2_To_Name";
+    private static final String PSMCHIKU3_FROM_NAME = "psmChiku3_From_Name";
+    private static final String PSMCHIKU3_TO_NAME = "psmChiku3_To_Name";
 
     @BatchParameter(key = KOMUKUFUKAMEYI, name = "項目名付加")
     private boolean komukuFukaMeyi;
@@ -108,16 +119,26 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     private FlexibleDate psmAgeKijunni;
     @BatchParameter(key = SHICHOSON_CODE, name = "市町村コード")
     private RString shichoson_Code;
+    @BatchParameter(key = SHICHOSON_NAME, name = "市町村名称")
+    private RString shichoson_Name;
     @BatchParameter(key = PSMCHIKU_KUBUN, name = "地区区分")
     private RString psmChiku_Kubun;
     @BatchParameter(key = PSMJUSHO_FROM, name = "町域From")
     private RString psmJusho_From;
+    @BatchParameter(key = PSMJUSHO_FROM_NAME, name = "町域From名称")
+    private RString psmJusho_From_Name;
     @BatchParameter(key = PSMJUSHO_TO, name = "町域To")
     private RString psmJusho_To;
+    @BatchParameter(key = PSMJUSHO_TO_NAME, name = "町域To名称")
+    private RString psmJusho_To_Name;
     @BatchParameter(key = PSMGYOSEIKU_FROM, name = "行政区From")
     private RString psmGyoseiku_From;
+    @BatchParameter(key = PSMGYOSEIKU_FROM_NAME, name = "行政区From名称")
+    private RString psmGyoseiku_From_Name;
     @BatchParameter(key = PSMGYOSEIKU_TO, name = "行政区To")
     private RString psmGyoseiku_To;
+    @BatchParameter(key = PSMGYOSEIKU_TO_NAME, name = "行政区To名称")
+    private RString psmGyoseiku_To_Name;
     @BatchParameter(key = PSMCHIKU1_FROM, name = "地区１From")
     private RString psmChiku1_From;
     @BatchParameter(key = PSMCHIKU1_TO, name = "地区１To")
@@ -130,6 +151,18 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
     private RString psmChiku3_From;
     @BatchParameter(key = PSMCHIKU3_TO, name = "地区３To")
     private RString psmChiku3_To;
+    @BatchParameter(key = PSMCHIKU1_FROM_NAME, name = "地区１From名称")
+    private RString psmChiku1_From_Name;
+    @BatchParameter(key = PSMCHIKU1_TO_NAME, name = "地区１To名称")
+    private RString psmChiku1_To_Name;
+    @BatchParameter(key = PSMCHIKU2_FROM_NAME, name = "地区２From名称")
+    private RString psmChiku2_From_Name;
+    @BatchParameter(key = PSMCHIKU2_TO_NAME, name = "地区２To名称")
+    private RString psmChiku2_To_Name;
+    @BatchParameter(key = PSMCHIKU3_FROM_NAME, name = "地区３From名称")
+    private RString psmChiku3_From_Name;
+    @BatchParameter(key = PSMCHIKU3_TO_NAME, name = "地区３To名称")
+    private RString psmChiku3_To_Name;
 
     /**
      * コンストラクタです。
@@ -168,17 +201,28 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
                 this.psmSeinengappiYMD_End,
                 this.psmAgeKijunni,
                 this.shichoson_Code,
+                this.shichoson_Name,
                 this.psmChiku_Kubun,
                 this.psmJusho_From,
+                this.psmJusho_From,
+                this.psmJusho_To,
                 this.psmJusho_To,
                 this.psmGyoseiku_From,
+                this.psmGyoseiku_From_Name,
                 this.psmGyoseiku_To,
+                this.psmGyoseiku_To_Name,
                 this.psmChiku1_From,
                 this.psmChiku1_To,
                 this.psmChiku2_From,
                 this.psmChiku2_To,
                 this.psmChiku3_From,
-                this.psmChiku3_To
+                this.psmChiku3_To,
+                this.psmChiku1_From_Name,
+                this.psmChiku1_To_Name,
+                this.psmChiku2_From_Name,
+                this.psmChiku2_To_Name,
+                this.psmChiku3_From_Name,
+                this.psmChiku3_To_Name
         );
     }
 }

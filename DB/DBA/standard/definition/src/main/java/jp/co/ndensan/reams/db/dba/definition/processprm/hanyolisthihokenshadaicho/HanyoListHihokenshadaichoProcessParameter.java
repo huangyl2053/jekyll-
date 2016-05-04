@@ -45,17 +45,28 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
     private final RString psmSeinengappiYMD_End;
     private final FlexibleDate psmAgeKijunni;
     private final RString shichoson_Code;
+    private final RString shichoson_Name;
     private final RString psmChiku_Kubun;
     private final RString psmJusho_From;
     private final RString psmJusho_To;
     private final RString psmGyoseiku_From;
     private final RString psmGyoseiku_To;
+    private final RString psmJusho_From_Name;
+    private final RString psmJusho_To_Name;
+    private final RString psmGyoseiku_From_Name;
+    private final RString psmGyoseiku_To_Name;
     private final RString psmChiku1_From;
     private final RString psmChiku1_To;
     private final RString psmChiku2_From;
     private final RString psmChiku2_To;
     private final RString psmChiku3_From;
     private final RString psmChiku3_To;
+    private final RString psmChiku1_From_Name;
+    private final RString psmChiku1_To_Name;
+    private final RString psmChiku2_From_Name;
+    private final RString psmChiku2_To_Name;
+    private final RString psmChiku3_From_Name;
+    private final RString psmChiku3_To_Name;
     private RString psmShikibetsuTaisho;
     private RString psmAtesaki;
 
@@ -86,17 +97,28 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
      * @param psmSeinengappiYMD_End 宛名抽出生年月日終了
      * @param psmAgeKijunni 宛名抽出年齢基準日
      * @param shichoson_Code 市町村コード
+     * @param shichoson_Name 市町村名称
      * @param psmChiku_Kubun 宛名抽出地区区分
      * @param psmJusho_From 町域From
+     * @param psmJusho_From_Name 町域From名称
      * @param psmJusho_To 町域To
+     * @param psmJusho_To_Name 町域To名称
      * @param psmGyoseiku_From 行政区From
+     * @param psmGyoseiku_From_Name 行政区From名称
      * @param psmGyoseiku_To 行政区To
+     * @param psmGyoseiku_To_Name 行政区To名称
      * @param psmChiku1_From 地区１From
      * @param psmChiku1_To 地区１To
      * @param psmChiku2_From 地区２From
      * @param psmChiku2_To 地区２To
      * @param psmChiku3_From 地区３From
      * @param psmChiku3_To 地区３To
+     * @param psmChiku1_From_Name 地区１From名称
+     * @param psmChiku1_To_Name 地区１To名称
+     * @param psmChiku2_From_Name 地区２From名称
+     * @param psmChiku2_To_Name 地区２To名称
+     * @param psmChiku3_From_Name 地区３From名称
+     * @param psmChiku3_To_Name 地区３To名称
      */
     public HanyoListHihokenshadaichoProcessParameter(
             boolean komukuFukaMeyi,
@@ -123,17 +145,28 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
             RString psmSeinengappiYMD_End,
             FlexibleDate psmAgeKijunni,
             RString shichoson_Code,
+            RString shichoson_Name,
             RString psmChiku_Kubun,
             RString psmJusho_From,
+            RString psmJusho_From_Name,
             RString psmJusho_To,
+            RString psmJusho_To_Name,
             RString psmGyoseiku_From,
+            RString psmGyoseiku_From_Name,
             RString psmGyoseiku_To,
+            RString psmGyoseiku_To_Name,
             RString psmChiku1_From,
             RString psmChiku1_To,
             RString psmChiku2_From,
             RString psmChiku2_To,
             RString psmChiku3_From,
-            RString psmChiku3_To) {
+            RString psmChiku3_To,
+            RString psmChiku1_From_Name,
+            RString psmChiku1_To_Name,
+            RString psmChiku2_From_Name,
+            RString psmChiku2_To_Name,
+            RString psmChiku3_From_Name,
+            RString psmChiku3_To_Name) {
         this.komukuFukaMeyi = komukuFukaMeyi;
         this.rembanfuka = rembanfuka;
         this.hidukeHensyu = hidukeHensyu;
@@ -158,17 +191,28 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
         this.psmSeinengappiYMD_End = psmSeinengappiYMD_End;
         this.psmAgeKijunni = psmAgeKijunni;
         this.shichoson_Code = shichoson_Code;
+        this.shichoson_Name = shichoson_Name;
         this.psmChiku_Kubun = psmChiku_Kubun;
         this.psmJusho_From = psmJusho_From;
+        this.psmJusho_From_Name = psmJusho_From_Name;
         this.psmJusho_To = psmJusho_To;
+        this.psmJusho_To_Name = psmJusho_To_Name;
         this.psmGyoseiku_From = psmGyoseiku_From;
+        this.psmGyoseiku_From_Name = psmGyoseiku_From_Name;
         this.psmGyoseiku_To = psmGyoseiku_To;
+        this.psmGyoseiku_To_Name = psmGyoseiku_To_Name;
         this.psmChiku1_From = psmChiku1_From;
         this.psmChiku1_To = psmChiku1_To;
         this.psmChiku2_From = psmChiku2_From;
         this.psmChiku2_To = psmChiku2_To;
         this.psmChiku3_From = psmChiku3_From;
         this.psmChiku3_To = psmChiku3_To;
+        this.psmChiku1_From_Name = psmChiku1_From_Name;
+        this.psmChiku1_To_Name = psmChiku1_To_Name;
+        this.psmChiku2_From_Name = psmChiku2_From_Name;
+        this.psmChiku2_To_Name = psmChiku2_To_Name;
+        this.psmChiku3_From_Name = psmChiku3_From_Name;
+        this.psmChiku3_To_Name = psmChiku3_To_Name;
     }
 
     /**
@@ -199,6 +243,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
                 psmSeinengappiYMD_End,
                 psmAgeKijunni,
                 shichoson_Code,
+                shichoson_Name,
                 psmChiku_Kubun,
                 psmJusho_From,
                 psmJusho_To,
@@ -210,6 +255,16 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
                 psmChiku2_To,
                 psmChiku3_From,
                 psmChiku3_To,
+                psmJusho_From_Name,
+                psmJusho_To_Name,
+                psmGyoseiku_From_Name,
+                psmGyoseiku_To_Name,
+                psmChiku1_From_Name,
+                psmChiku1_To_Name,
+                psmChiku2_From_Name,
+                psmChiku2_To_Name,
+                psmChiku3_From_Name,
+                psmChiku3_To_Name,
                 psmShikibetsuTaisho,
                 psmAtesaki);
     }
