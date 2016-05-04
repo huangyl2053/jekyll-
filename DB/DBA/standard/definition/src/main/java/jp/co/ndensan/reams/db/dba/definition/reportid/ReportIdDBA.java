@@ -160,10 +160,6 @@ public enum ReportIdDBA {
      */
     DBC800004(new ReportId("DBC800004_ItakuServiceKeikaluSakuseiIraiTodokedesho"), new RString("居宅（介護予防）サービス計画作成依頼（変更）届出書")),
     /**
-     * 介護保険利用者負担額減額・免除申請書の帳票ＩＤです。
-     */
-    DBD800002(new ReportId("DBD800002_RiyoshaFutangakuGengakuMenjyoShinseisho"), new RString("介護保険利用者負担額減額・免除申請書")),
-    /**
      * 介護保険料減免申請書の帳票ＩＤです。
      */
     DBB800001(new ReportId("DBB800001_HokenryoGenmenChoshuYoyuShinseisho"), new RString("介護保険料減免申請書")),

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.kogakukaigoservicehi;
+package jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi;
 
-import jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
 
 /**
  * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書のEditorです。
@@ -20,8 +20,7 @@ public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemEditor
     /**
      * インスタンスを生成します。
      *
-     * @param item
-     * {@link KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem}
+     * @param item {@link KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem}
      */
     protected KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemEditor(KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem item) {
         this.item = item;

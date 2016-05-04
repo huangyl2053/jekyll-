@@ -125,7 +125,13 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem {
     private RString customerBarCode;
 
     /**
-     * インスタンスを生成します。
+     * コンストラクタです。
+     */
+    public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param bunshoNo 文章番号
      * @param title タイトル

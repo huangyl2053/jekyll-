@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi;
+package jp.co.ndensan.reams.db.dbc.entity.report.kogakukaigoservicehi;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;

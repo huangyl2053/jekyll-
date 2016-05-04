@@ -63,16 +63,6 @@ public class BenmeiTorokuPanel {
      * @return ResponseData<ShikakukihonPanelDiv>
      */
     public ResponseData<BenmeiTorokuPanelDiv> onLoad(BenmeiTorokuPanelDiv panelDiv) {
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000022505");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("100001");
-        FlexibleDate 審査請求届出日 = new FlexibleDate("20160503");
-        FlexibleDate 弁明書作成日 = new FlexibleDate("20160520");
-        RString モード = new RString("更新");
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.識別コード, 識別コード);
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.被保険者番号, 被保険者番号);
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.審査請求届出日, 審査請求届出日);
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.弁明書作成日, 弁明書作成日);
-        ViewStateHolder.put(BenmeiTorokuViewStateKeys.モード, モード);
         識別コード = ViewStateHolder.get(BenmeiTorokuViewStateKeys.識別コード, ShikibetsuCode.class);
         被保険者番号 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.被保険者番号, HihokenshaNo.class);
         審査請求届出日 = ViewStateHolder.get(BenmeiTorokuViewStateKeys.審査請求届出日, FlexibleDate.class);

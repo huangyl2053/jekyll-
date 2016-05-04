@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.kogakukaigoservicehi;
+package jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi;
 
-import jp.co.ndensan.reams.db.dba.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -21,8 +21,7 @@ public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemBuilder
     /**
      * インスタンスを生成します。
      *
-     * @param editor
-     * {@link IKogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoEditor}
+     * @param editor {@link IKogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoEditor}
      */
     public KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemBuilder(IKogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoEditor editor) {
         this.editor = editor;
@@ -31,8 +30,7 @@ public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItemBuilder
     /**
      * 帳票ソースをビルドします。
      *
-     * @return
-     * {@link KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource}
+     * @return {@link KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource}
      */
     @Override
     public KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource build() {
