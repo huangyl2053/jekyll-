@@ -72,10 +72,10 @@ public class ShoKaishuKirokuKanriHandler {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
                     dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類())));
                     dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
-                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由())));
+                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由())));
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
                     dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
-                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
+                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
                     dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
@@ -99,11 +99,11 @@ public class ShoKaishuKirokuKanriHandler {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
                     dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0014), new Code(jigyoshaInput.get交付証種類())));
                     dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
-                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由())));
+                    dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0116), new Code(jigyoshaInput.get交付事由())));
                     dgJigyoshaItiran.setKoufuJiyuNo(jigyoshaInput.get交付事由());
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
                     dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
-                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
+                    dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0015), new Code(jigyoshaInput.get回収事由())));
                     dgJigyoshaItiran.setKaishuJiyuNo(jigyoshaInput.get回収事由());
                     dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
@@ -180,5 +180,4 @@ public class ShoKaishuKirokuKanriHandler {
             }
         }
     }
-
 }
