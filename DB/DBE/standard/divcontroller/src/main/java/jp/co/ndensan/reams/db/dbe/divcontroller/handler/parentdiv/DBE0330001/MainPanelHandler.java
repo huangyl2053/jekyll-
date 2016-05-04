@@ -7,10 +7,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.YouK
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgDoctorSelection_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgResultList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -64,31 +66,45 @@ public class MainPanelHandler {
      */
     public void edit結果通知出力対象申請者一覧情報(List<YouKaiGoNinTeiKekTesuChi> businessList) {
         List<dgResultList_Row> rowList = new ArrayList();
-        RString 認定状況提供日;
+        TextBoxDate 認定状況提供日 = new TextBoxDate();
+        boolean 認定状況提供日フラグ = false;
         for (YouKaiGoNinTeiKekTesuChi youKaiGoNinTeiKekTesuChi : businessList) {
             if (youKaiGoNinTeiKekTesuChi.get認定状況提供日() == null || youKaiGoNinTeiKekTesuChi.get認定状況提供日().isEmpty()) {
-                認定状況提供日 = レ点;
+                認定状況提供日フラグ = true;
             } else {
-                認定状況提供日 = youKaiGoNinTeiKekTesuChi.get認定状況提供日();
+                認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
             }
+            TextBoxDate 生年月日 = new TextBoxDate();
+            TextBoxDate 申請日 = new TextBoxDate();
+            TextBoxDate 二次判定結果 = new TextBoxDate();
+            TextBoxDate 有効期間終了 = new TextBoxDate();
+            TextBoxDate 二次判定日 = new TextBoxDate();
+            生年月日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get生年月日().toString()));
+            申請日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get申請日().toString()));
+            二次判定結果.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定結果().toString()));
+            有効期間終了.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get有効期間終了().toString()));
+            二次判定日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
             dgResultList_Row row = new dgResultList_Row(
                     new RString(String.valueOf(youKaiGoNinTeiKekTesuChi.get連番())),
                     youKaiGoNinTeiKekTesuChi.get被保険者番号(),
                     youKaiGoNinTeiKekTesuChi.get被保険者氏名(),
                     youKaiGoNinTeiKekTesuChi.get性別(),
-                    youKaiGoNinTeiKekTesuChi.get生年月日(),
+                    生年月日,
                     new RString(String.valueOf(youKaiGoNinTeiKekTesuChi.get年齢())),
-                    youKaiGoNinTeiKekTesuChi.get申請日(),
+                    申請日,
                     youKaiGoNinTeiKekTesuChi.get申請区分_申請時(),
                     youKaiGoNinTeiKekTesuChi.get申請区分_法令(),
-                    youKaiGoNinTeiKekTesuChi.get二次判定結果(),
+                    二次判定結果,
                     youKaiGoNinTeiKekTesuChi.get有効期間(),
                     youKaiGoNinTeiKekTesuChi.get有効期間開始(),
-                    youKaiGoNinTeiKekTesuChi.get有効期間終了(),
-                    youKaiGoNinTeiKekTesuChi.get二次判定日(),
+                    有効期間終了,
+                    二次判定日,
                     認定状況提供日,
                     youKaiGoNinTeiKekTesuChi.get申請書管理番号()
             );
+            if (認定状況提供日フラグ) {
+                row.setSelected(認定状況提供日フラグ);
+            }
             rowList.add(row);
         }
         div.getDgResultList().setDataSource(rowList);

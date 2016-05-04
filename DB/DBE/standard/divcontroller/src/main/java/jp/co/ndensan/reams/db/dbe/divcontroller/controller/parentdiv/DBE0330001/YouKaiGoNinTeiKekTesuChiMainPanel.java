@@ -10,24 +10,33 @@ import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi.YouKai
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe090001.YouKaiGoNinTeiKekTesuChiFlowParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.DBE0330001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.YouKaiGoNinTeiKekTesuChiMainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 要介護認定結果通知（主治医）Divを制御クラスです。
  *
  */
 public class YouKaiGoNinTeiKekTesuChiMainPanel {
-    
+
     private static final RString 未出力のみ = new RString("key0");
     private static final RString 未出力のみフラグ = new RString("1");
     private static final RString 未出力のみ以外 = new RString("2");
@@ -36,20 +45,44 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
     /**
      * 要介護認定結果通知（主治医）の初期処理を表示します。
      *
-     * @param div MainPanelDiv
+     * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onLoad(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        LasdecCode lasdecCode = 市町村セキュリティ情報.get市町村情報().get市町村コード();
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(lasdecCode, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+
+        div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setDisabled(false);
         div.getDgResultList().setDisabled(false);
         div.getDoctorSelectionPanel().getDgDoctorSelection().setDisabled(false);
+        return ResponseData.of(div).setState(DBE0330001StateName.照会);
+    }
+
+    /**
+     * 要介護認定結果通知（主治医）のクリアを処理します。
+     *
+     * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnClear(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        div.getSearchConditionPanel().getTxtNijiHanteiKikan().clearFromValue();
+        div.getSearchConditionPanel().getTxtNijiHanteiKikan().clearToValue();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        LasdecCode lasdecCode = 市町村セキュリティ情報.get市町村情報().get市町村コード();
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(lasdecCode, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+        div.getRadKekkaTsuchiOutputTaisho().setSelectedKey(希望のみ);
+        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         return ResponseData.of(div).respond();
     }
 
     /**
      * 要介護認定結果通知（主治医）の「検索」ボタンが押下します。
      *
-     * @param div MainPanelDiv
+     * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnSearch(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
@@ -64,7 +97,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         if (未出力のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
             未出力のみFlag = true;
         }
-        if (希望のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
+        if (希望のみ.equals(div.getRadKekkaTsuchiOutputTaisho().getSelectedKey())) {
             希望のみFlag = true;
         }
         if (div.getTxtNijiHanteiKikan().getFromValue() != null) {
@@ -73,24 +106,23 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         if (div.getTxtNijiHanteiKikan().getToValue() != null) {
             dateTo = div.getTxtNijiHanteiKikan().getToValue().toDateString();
         }
-        // TODO 主治医医療機関コードと主治医コード　QA421を待ち
         List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get主治医選択一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(dateFrom,
                                 dateTo,
-                                RString.EMPTY, RString.EMPTY, 未出力のみFlag, 希望のみFlag)).records();
+                                div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode(),
+                                div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode(), 未出力のみFlag, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        
         getHandler(div).edit主治医選択一覧情報(youKaiGoNinTeiKekTesuChi);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE0330001StateName.主治医選択一覧);
     }
 
     /**
      * 主治医選択一覧の「選択」ボタンが押下します。
      *
-     * @param div MainPanelDiv
+     * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_SelectByButton(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
@@ -121,13 +153,13 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).edit結果通知出力対象申請者一覧情報(youKaiGoNinTeiKekTesuChi);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE0330001StateName.一覧);
     }
 
     /**
      * 結果通知を実行する」ボタンが押下場合、チェックを実行します。
      *
-     * @param div MainPanelDiv
+     * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnBatchRegisterCheck(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
@@ -158,7 +190,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
     /**
      * 「結果通知を実行する」ボタンが押下します。
      *
-     * @param div MainPanelDiv
+     * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiFlowParameter> onClick_btnBatchRegister(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {

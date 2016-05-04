@@ -3,38 +3,40 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 16 15:28:54 CST 2016 
+ * Wed May 04 19:24:46 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
  * dgResultList_Row のクラスファイル 
  * 
+ * @author 自動生成
  */
 
 public class dgResultList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString no;
     private RString hihokenshaNo;
     private RString hihokenshaName;
     private RString seibetsu;
-    private RString birthDay;
+    private TextBoxDate birthDay;
     private RString age;
-    private RString shinseiYMD;
+    private TextBoxDate shinseiYMD;
     private RString shinseiKubunOnShinsei;
     private RString shinseiKubunOnHorei;
+    private TextBoxDate nijiHanteiYMD;
     private RString nijiHanteiKekka;
     private RString yukoKikan;
-    private RString yukoKikanFrom;
-    private RString yukoKikanTo;
-    private RString nijiHanteiYMD;
-    private RString ninteiJokyoTeikyoYMD;
+    private TextBoxDate yukoKikanFrom;
+    private TextBoxDate yukoKikanTo;
+    private TextBoxDate ninteiJokyoTeikyoYMD;
     private RString shinseishoKanriNo;
 
     public dgResultList_Row() {
@@ -43,17 +45,17 @@ public class dgResultList_Row extends DataRow {
         this.hihokenshaNo = RString.EMPTY;
         this.hihokenshaName = RString.EMPTY;
         this.seibetsu = RString.EMPTY;
-        this.birthDay = RString.EMPTY;
+        this.birthDay = new TextBoxDate();
         this.age = RString.EMPTY;
-        this.shinseiYMD = RString.EMPTY;
+        this.shinseiYMD = new TextBoxDate();
         this.shinseiKubunOnShinsei = RString.EMPTY;
         this.shinseiKubunOnHorei = RString.EMPTY;
+        this.nijiHanteiYMD = new TextBoxDate();
         this.nijiHanteiKekka = RString.EMPTY;
         this.yukoKikan = RString.EMPTY;
-        this.yukoKikanFrom = RString.EMPTY;
-        this.yukoKikanTo = RString.EMPTY;
-        this.nijiHanteiYMD = RString.EMPTY;
-        this.ninteiJokyoTeikyoYMD = RString.EMPTY;
+        this.yukoKikanFrom = new TextBoxDate();
+        this.yukoKikanTo = new TextBoxDate();
+        this.ninteiJokyoTeikyoYMD = new TextBoxDate();
         this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -64,16 +66,16 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("shinseiYMD", shinseiYMD);
         this.setOriginalData("shinseiKubunOnShinsei", shinseiKubunOnShinsei);
         this.setOriginalData("shinseiKubunOnHorei", shinseiKubunOnHorei);
+        this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("nijiHanteiKekka", nijiHanteiKekka);
         this.setOriginalData("yukoKikan", yukoKikan);
         this.setOriginalData("yukoKikanFrom", yukoKikanFrom);
         this.setOriginalData("yukoKikanTo", yukoKikanTo);
-        this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgResultList_Row(RString no, RString hihokenshaNo, RString hihokenshaName, RString seibetsu, RString birthDay, RString age, RString shinseiYMD, RString shinseiKubunOnShinsei, RString shinseiKubunOnHorei, RString nijiHanteiKekka, RString yukoKikan, RString yukoKikanFrom, RString yukoKikanTo, RString nijiHanteiYMD, RString ninteiJokyoTeikyoYMD, RString shinseishoKanriNo) {
+    public dgResultList_Row(RString no, RString hihokenshaNo, RString hihokenshaName, RString seibetsu, TextBoxDate birthDay, RString age, TextBoxDate shinseiYMD, RString shinseiKubunOnShinsei, RString shinseiKubunOnHorei, TextBoxDate nijiHanteiYMD, RString nijiHanteiKekka, RString yukoKikan, TextBoxDate yukoKikanFrom, TextBoxDate yukoKikanTo, TextBoxDate ninteiJokyoTeikyoYMD, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -84,11 +86,11 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("shinseiYMD", shinseiYMD);
         this.setOriginalData("shinseiKubunOnShinsei", shinseiKubunOnShinsei);
         this.setOriginalData("shinseiKubunOnHorei", shinseiKubunOnHorei);
+        this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("nijiHanteiKekka", nijiHanteiKekka);
         this.setOriginalData("yukoKikan", yukoKikan);
         this.setOriginalData("yukoKikanFrom", yukoKikanFrom);
         this.setOriginalData("yukoKikanTo", yukoKikanTo);
-        this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.no = no;
@@ -100,11 +102,11 @@ public class dgResultList_Row extends DataRow {
         this.shinseiYMD = shinseiYMD;
         this.shinseiKubunOnShinsei = shinseiKubunOnShinsei;
         this.shinseiKubunOnHorei = shinseiKubunOnHorei;
+        this.nijiHanteiYMD = nijiHanteiYMD;
         this.nijiHanteiKekka = nijiHanteiKekka;
         this.yukoKikan = yukoKikan;
         this.yukoKikanFrom = yukoKikanFrom;
         this.yukoKikanTo = yukoKikanTo;
-        this.nijiHanteiYMD = nijiHanteiYMD;
         this.ninteiJokyoTeikyoYMD = ninteiJokyoTeikyoYMD;
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
@@ -125,7 +127,7 @@ public class dgResultList_Row extends DataRow {
         return seibetsu;
     }
 
-    public RString getBirthDay() {
+    public TextBoxDate getBirthDay() {
         return birthDay;
     }
 
@@ -133,7 +135,7 @@ public class dgResultList_Row extends DataRow {
         return age;
     }
 
-    public RString getShinseiYMD() {
+    public TextBoxDate getShinseiYMD() {
         return shinseiYMD;
     }
 
@@ -145,6 +147,10 @@ public class dgResultList_Row extends DataRow {
         return shinseiKubunOnHorei;
     }
 
+    public TextBoxDate getNijiHanteiYMD() {
+        return nijiHanteiYMD;
+    }
+
     public RString getNijiHanteiKekka() {
         return nijiHanteiKekka;
     }
@@ -153,19 +159,15 @@ public class dgResultList_Row extends DataRow {
         return yukoKikan;
     }
 
-    public RString getYukoKikanFrom() {
+    public TextBoxDate getYukoKikanFrom() {
         return yukoKikanFrom;
     }
 
-    public RString getYukoKikanTo() {
+    public TextBoxDate getYukoKikanTo() {
         return yukoKikanTo;
     }
 
-    public RString getNijiHanteiYMD() {
-        return nijiHanteiYMD;
-    }
-
-    public RString getNinteiJokyoTeikyoYMD() {
+    public TextBoxDate getNinteiJokyoTeikyoYMD() {
         return ninteiJokyoTeikyoYMD;
     }
 
@@ -193,7 +195,7 @@ public class dgResultList_Row extends DataRow {
         this.seibetsu = seibetsu;
     }
 
-    public void setBirthDay(RString birthDay) {
+    public void setBirthDay(TextBoxDate birthDay) {
         this.setOriginalData("birthDay", birthDay);
         this.birthDay = birthDay;
     }
@@ -203,7 +205,7 @@ public class dgResultList_Row extends DataRow {
         this.age = age;
     }
 
-    public void setShinseiYMD(RString shinseiYMD) {
+    public void setShinseiYMD(TextBoxDate shinseiYMD) {
         this.setOriginalData("shinseiYMD", shinseiYMD);
         this.shinseiYMD = shinseiYMD;
     }
@@ -218,6 +220,11 @@ public class dgResultList_Row extends DataRow {
         this.shinseiKubunOnHorei = shinseiKubunOnHorei;
     }
 
+    public void setNijiHanteiYMD(TextBoxDate nijiHanteiYMD) {
+        this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
+        this.nijiHanteiYMD = nijiHanteiYMD;
+    }
+
     public void setNijiHanteiKekka(RString nijiHanteiKekka) {
         this.setOriginalData("nijiHanteiKekka", nijiHanteiKekka);
         this.nijiHanteiKekka = nijiHanteiKekka;
@@ -228,22 +235,17 @@ public class dgResultList_Row extends DataRow {
         this.yukoKikan = yukoKikan;
     }
 
-    public void setYukoKikanFrom(RString yukoKikanFrom) {
+    public void setYukoKikanFrom(TextBoxDate yukoKikanFrom) {
         this.setOriginalData("yukoKikanFrom", yukoKikanFrom);
         this.yukoKikanFrom = yukoKikanFrom;
     }
 
-    public void setYukoKikanTo(RString yukoKikanTo) {
+    public void setYukoKikanTo(TextBoxDate yukoKikanTo) {
         this.setOriginalData("yukoKikanTo", yukoKikanTo);
         this.yukoKikanTo = yukoKikanTo;
     }
 
-    public void setNijiHanteiYMD(RString nijiHanteiYMD) {
-        this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
-        this.nijiHanteiYMD = nijiHanteiYMD;
-    }
-
-    public void setNinteiJokyoTeikyoYMD(RString ninteiJokyoTeikyoYMD) {
+    public void setNinteiJokyoTeikyoYMD(TextBoxDate ninteiJokyoTeikyoYMD) {
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
         this.ninteiJokyoTeikyoYMD = ninteiJokyoTeikyoYMD;
     }
