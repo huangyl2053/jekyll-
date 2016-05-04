@@ -353,7 +353,7 @@
         AND
         (DbT5221."yoyakuKaoFlag" = TRUE
         OR
-        DbT5221.yoyakuKaoFlagIS　NULL)
+        DbT5221.yoyakuKaoFlag IS NULL)
         <if test="保険者フラグ">
             AND
             DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
