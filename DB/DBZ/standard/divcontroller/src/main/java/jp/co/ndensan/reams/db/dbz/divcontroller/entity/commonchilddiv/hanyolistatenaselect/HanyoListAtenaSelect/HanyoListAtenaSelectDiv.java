@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
@@ -520,6 +521,11 @@ public class HanyoListAtenaSelectDiv extends Panel implements IHanyoListAtenaSel
     @Override
     public void set地区３終了(ChikuCode 地区3コード) {
         getHandler().set地区３終了(地区3コード);
+    }
+
+    @Override
+    public AtenaSelectBatchParameter get宛名抽出条件() {
+        return getHandler().get宛名抽出条件();
     }
 
     private HanyoListAtenaSelectHandler getHandler() {

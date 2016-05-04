@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecur
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -430,9 +432,9 @@ public class HanyoListAtenaSelectHandler {
     }
 
     /**
-     * 汎用リスト宛名抽出条件共有子Divの住所終了の設定値を返却します。
+     * 汎用リスト宛名抽出条件共有子Divの行政区終了の設定値を返却します。
      *
-     * @return 住所終了の設定値
+     * @return 行政区終了の設定値
      */
     public RString get行政区終了() {
         return div.getCcdGyoseikuTo().get行政区コード().getColumnValue();
@@ -499,6 +501,47 @@ public class HanyoListAtenaSelectHandler {
      */
     public void set地区３終了(ChikuCode 地区3コード) {
         div.getCcdChiku3To().load(地区3コード);
+    }
+
+    /**
+     * 宛名の抽出条件を作成して返却します。
+     *
+     * @return 宛名の抽出条件
+     */
+    public AtenaSelectBatchParameter get宛名抽出条件() {
+        AtenaSelectBatchParameter atenaSelect = new AtenaSelectBatchParameter();
+
+        atenaSelect.setAgeSelectKijun(this.get年齢層抽出方法());
+        Range<Decimal> 年齢範囲 = new Range(this.get年齢開始(), this.get年齢終了());
+        atenaSelect.setNenreiRange(年齢範囲);
+        atenaSelect.setNenreiKijunbi(this.get年齢基準日());
+        Range<RDate> 生年月日範囲 = new Range(this.get生年月日開始(), this.get生年月日終了());
+        atenaSelect.setSeinengappiRange(生年月日範囲);
+        atenaSelect.setShichoson_Code(this.get保険者().get市町村コード());
+        atenaSelect.setShichoson_Mesho(this.get保険者().get市町村名称());
+        atenaSelect.setChiku_Kubun(this.get地区());
+        atenaSelect.setJusho_From(this.get住所開始());
+        atenaSelect.setJusho_FromMesho(div.getCcdJushoFrom().get町域名称());
+        atenaSelect.setJusho_To(this.get住所終了());
+        atenaSelect.setJusho_ToMesho(div.getCcdJushoTo().get町域名称());
+        atenaSelect.setGyoseiku_From(this.get行政区開始());
+        atenaSelect.setGyoseiku_FromMesho(div.getCcdGyoseikuFrom().get行政区名称());
+        atenaSelect.setGyoseiku_To(this.get行政区終了());
+        atenaSelect.setGyoseiku_ToMesho(div.getCcdGyoseikuTo().get行政区名称());
+        atenaSelect.setChiku1_From(this.get地区１開始());
+        atenaSelect.setChiku1_FromMesho(div.getCcdChiku1From().get地区1名称());
+        atenaSelect.setChiku1_To(this.get地区１終了());
+        atenaSelect.setChiku1_ToMesho(div.getCcdChiku1To().get地区1名称());
+        atenaSelect.setChiku2_From(this.get地区２開始());
+        atenaSelect.setChiku2_FromMesho(div.getCcdChiku2From().get地区2名称());
+        atenaSelect.setChiku2_To(this.get地区２終了());
+        atenaSelect.setChiku2_ToMesho(div.getCcdChiku2To().get地区2名称());
+        atenaSelect.setChiku3_From(this.get地区３開始());
+        atenaSelect.setChiku3_FromMesho(div.getCcdChiku3From().get地区3名称());
+        atenaSelect.setChiku3_To(this.get地区３終了());
+        atenaSelect.setChiku3_ToMesho(div.getCcdChiku3To().get地区3名称());
+
+        return atenaSelect;
     }
 
     private void set初期項目状態() {
