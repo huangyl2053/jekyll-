@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyorisutojyukyusyadaich
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -16,12 +17,12 @@ import lombok.Setter;
  *
  * 汎用リスト受給者台帳２_バッチ用のパラメータです。
  *
- * @reamsid_L DBE-1810-020 yaodongsheng
+ * @reamsid_L DBD-1810-020 yaodongsheng
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoRisutoJyukyusyaDaichoBatchParameter {
+public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase {
 
     private static final String CYUSYUTSUDATAKUBUN = "cyusyutsudatakubun";
     private static final String SHINSEITORIKESHIDETACYUSYUTSU = "shinseitorikeshidetacyusyutsu";
@@ -42,6 +43,7 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter {
     private static final String CSVKOMOKUMEIFUKA = "csvkomokumeifuka";
     private static final String CSVRENBANFUKA = "csvrenbanfuka";
     private static final String CSVHITSUKESURASYUHENSYU = "csvhitsukesurasyuhensyu";
+    private static final long serialVersionUID = 6184743641347261427L;
 
     @BatchParameter(key = CYUSYUTSUDATAKUBUN, name = "抽出データ区分")
     private RString cyusyutsudatakubun;

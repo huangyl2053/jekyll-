@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -14,12 +15,12 @@ import lombok.Setter;
 /**
  * 汎用リスト受給者台帳２のProcess用パラメータクラスです。
  *
- * @reamsid_L DBE-1810-020 yaodongsheng
+ * @reamsid_L DBD-1810-020 yaodongsheng
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class HanyoRisutoJyukyusyaDaichoProcessParameter {
+public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcessParameter {
 
     private RString cyusyutsudatakubun;
     private boolean shinseitorikeshidetacyusyutsu;
