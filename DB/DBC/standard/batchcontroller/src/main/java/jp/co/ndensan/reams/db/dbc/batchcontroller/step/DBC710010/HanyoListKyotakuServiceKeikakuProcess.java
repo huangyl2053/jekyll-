@@ -81,11 +81,12 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private static final RString 日本語ファイル名 = new RString("汎用リスト 居宅サービス計画CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KyotakuServiceKeikaku.csv");
     private static final RString CSV出力有無 = new RString("");
-    private static final RString 構成市町村 = new RString("【構成市町村】");
-    private static final RString 作成区分 = new RString("【作成区分】");
-    private static final RString 抽出区分 = new RString("【抽出区分】");
-    private static final RString 基準年月日 = new RString("【基準年月日】");
-    private static final RString 支援事業者番号 = new RString("【支援事業者番号】");
+    private static final RString 抽出対象者 = new RString("【抽出対象者】");
+    private static final RString 構成市町村 = new RString("構成市町村 :");
+    private static final RString 作成区分 = new RString("作成区分 :");
+    private static final RString 抽出区分 = new RString("抽出区分 :");
+    private static final RString 基準年月日 = new RString("基準年月日 :");
+    private static final RString 支援事業者番号 = new RString("支援事業者番号 :");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSVNAME = new RString("HanyoList_KyotakuServiceKeikaku.csv");
@@ -174,6 +175,9 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         RString 出力件数 = new RString(String.valueOf(eucCsvWriter.getCount()));
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
+        builder.append(抽出対象者);
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(構成市町村);
         LasdecCode lasdecCode = parameter.get構成市町村コード();
         RString 構成市町村コード = 左記号.concat(lasdecCode == null ? RString.EMPTY : lasdecCode.getColumnValue()).concat(右記号);
