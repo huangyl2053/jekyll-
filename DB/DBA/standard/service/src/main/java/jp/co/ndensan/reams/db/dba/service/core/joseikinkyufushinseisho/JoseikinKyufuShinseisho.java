@@ -107,7 +107,7 @@ public class JoseikinKyufuShinseisho {
                 null,
                 Gender.toValue(entity.get性別()).getCommonName(),
                 entity.get電話番号(),
-                get帳票文言(), // TODO 内部QA：648 (文言の取得不明です)
+                get帳票文言(),
                 set郵便番号(entity.get郵便番号())
         );
         list.add(JoseikinKyufuShinseishoReport.createFrom(item));
