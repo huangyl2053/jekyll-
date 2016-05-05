@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgen
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.business.gemmengengaku.ShinseiJoho;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

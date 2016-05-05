@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.Shak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shakaifukushihojinkeigen.ShakaifukuRiyoshaFutanKeigenToJotai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
-import jp.co.ndensan.reams.db.dbd.business.gemmengengaku.ShinseiJoho;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;

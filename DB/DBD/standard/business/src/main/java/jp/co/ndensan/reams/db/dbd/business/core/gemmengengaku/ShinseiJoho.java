@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.gemmengengaku;
+package jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 減免減額申請情報エンティティです。
+ *
+ * @reamsid_L DBD-4341-010 xuyue
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
