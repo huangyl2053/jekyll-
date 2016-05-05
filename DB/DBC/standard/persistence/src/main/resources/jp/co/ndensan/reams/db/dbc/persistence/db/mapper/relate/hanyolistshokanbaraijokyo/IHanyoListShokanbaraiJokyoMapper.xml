@@ -277,7 +277,7 @@
         <association property="請求住宅Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.ResultMap_DbT3049ShokanJutakuKaishuEntity"/>
         <association property="口座情報Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
+                     resultMap="resultMap_KozaRelateEntity"/>
         <association property="宛名Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity" 
@@ -285,4 +285,15 @@
         <collection property="請求基本List"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
     </resultMap>  
+    <resultMap id="resultMap_KozaRelateEntity"
+               type="jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity"
+               autoMapping="true">
+        <id column="uaT0310Koza_kozaId"/>
+<!--        <association property="koza"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0310KozaMapper.ResultMap_UaT0310KozaEntity"/>-->
+<!--        <collection property="kinyuKikan"
+                    resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.relate.kinyukikan.IKinyuKikanMapper.resultMap_KinyuKikanEntity"/>-->
+<!--        <collection property="shunoKanri"
+                    resultMap="jp.co.ndensan.reams.ur.urc.persistence.db.mapper.basic.shuno.shunokanri.IUrT0700ShunoKanriMapper.resultMap_UrT0700ShunoKanriEntity"/>-->
+    </resultMap>
 </mapper>
