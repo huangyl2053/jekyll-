@@ -115,9 +115,15 @@
         LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho" As DbV4001
         ON DbV4001."shichosonCode" = DbV1001."shichosonCode"
         AND DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
+        LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
+        ON DbT4001."shichosonCode" = DbV4001."shichosonCode"
+        AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"
+        AND DbT4001."rirekiNo" = DbV4001."rirekiNo"
+        AND DbT4001."edaban" = DbV4001."edaban"
+        AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
         LEFT OUTER JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
-        ON DbT3034."dbT3034ShokanShinsei_kozaID" = koza."uaT0310Koza_kozaId"
+        ON DbT3056."dbT3056KogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
@@ -285,9 +291,9 @@
         <if test="shiharaiSaki == 2">
             AND DbT3056."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" = '1'
         </if>
-<!--        <if test="kiyuKikanCode != null">
-            AND Uat0310."kinyuKikanCode" = #{kiyuKikanCode}
-        </if>-->
+       <if test="kiyuKikanCode != null">
+            AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
+        </if>
        UNION ALL
         SELECT
         DbV1001."hihokenshaNo" as 被保険者番号,
@@ -337,7 +343,7 @@
         DbV4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,
         DbV4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
         DbV4001."ninteiYMD" as 受給認定日,
-        DbV4001."yokaigoJotaiKubunCode" as みなし要介護区分コード,
+        DbT4001."minashiCode" as みなし要介護区分コード,
         DbV4001."kyuSochishaFlag" as 旧措置フラグ,
         DbV4001."chokkinIdoJiyuCode" as 直近異動事由コード,
         DbT3109.*,
@@ -400,12 +406,16 @@
         AND DbT4001."rirekiNo" = DbV4001."rirekiNo"
         AND DbT4001."edaban" = DbV4001."edaban"
         AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
+        LEFT OUTER JOIN 
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
         INNER JOIN 
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
+        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }') AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
-
         Where 1 = 1
         <if test="serviceYmFrom != null">
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[>=]]>#{serviceYmFrom}

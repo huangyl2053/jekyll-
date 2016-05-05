@@ -95,7 +95,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
      * @param 国保連IFなし区分 RString
      * @param 事業高額分 RString
      * @param searchkey IKozaSearchKey
-     * @param list
+     * @param list List<KamokuCode>
      */
     public HanyoListKogakuKaigoMybatisParameter(
             LasdecCode kouseiShichosonCode,
