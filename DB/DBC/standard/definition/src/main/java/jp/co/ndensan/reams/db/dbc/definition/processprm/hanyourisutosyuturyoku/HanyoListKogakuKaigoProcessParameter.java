@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.SanteiKijun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -54,9 +56,10 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private boolean tomokumeFuka;
     private boolean rebanFuka;
     private boolean hizukeHeshu;
-    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
     private RString 国保連IFなし区分;
     private RString 事業高額分;
+    private IKozaSearchKey searchkey;
+    private List<KamokuCode> list;
 
     private static final int 基準額_ONE = 15000;
     private static final int 基準額_TWO = 26400;
@@ -95,7 +98,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
      * @param tomokumeFuka tomokumeFuka
      * @param rebanFuka rebanFuka
      * @param hizukeHeshu hizukeHeshu
-     * @param 宛名検索条件 宛名検索条件
+     * @param searchkey IKozaSearchKey
+     * @param list List<KamokuCode>
      */
     public HanyoListKogakuKaigoProcessParameter(
             LasdecCode kouseiShichosonCode,
@@ -127,7 +131,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             boolean tomokumeFuka,
             boolean rebanFuka,
             boolean hizukeHeshu,
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list) {
 
         this.kouseiShichosonCode = kouseiShichosonCode;
         this.serviceYmFrom = serviceYmFrom;
@@ -158,7 +163,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
         this.tomokumeFuka = tomokumeFuka;
         this.rebanFuka = rebanFuka;
         this.hizukeHeshu = hizukeHeshu;
-        this.宛名検索条件 = 宛名検索条件;
+        this.searchkey = searchkey;
+        this.list = list;
     }
 
     /**
@@ -185,7 +191,6 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
         }
 
         return new HanyoListKogakuKaigoMybatisParameter(
-                宛名検索条件,
                 kouseiShichosonCode,
                 serviceYmFrom,
                 serviceYmTo,
@@ -217,6 +222,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 rebanFuka,
                 hizukeHeshu,
                 国保連IFなし区分,
-                事業高額分);
+                事業高額分,
+                searchkey,
+                list);
     }
 }

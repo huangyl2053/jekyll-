@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -115,8 +114,6 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private boolean rebanFuka;
     @BatchParameter(key = KEY_HIZUKE_HESHU, name = "日付’／’編集")
     private boolean hizukeHeshu;
-    @BatchParameter(key = KEY_ISHIKIPSMSEARCH, name = "宛名検索条件")
-    private IShikibetsuTaishoPSMSearchKey ishikiPsmSearch;
 
     /**
      * 汎用リスト_高額介護サービス費状況のProcessParamterパラメータ作成です。
@@ -154,6 +151,6 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
                 tomokumeFuka,
                 rebanFuka,
                 hizukeHeshu,
-                ishikiPsmSearch);
+                null, null);
     }
 }

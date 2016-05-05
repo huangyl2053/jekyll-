@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyourisutosyuturyoku;
 
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
+import java.util.List;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -21,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuTaishoParam
+public class HanyoListKogakuKaigoMybatisParameter extends KozaSearchParameter
         implements IMyBatisParameter {
 
     private final LasdecCode kouseiShichosonCode;
@@ -60,7 +62,6 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
     /**
      * コンストラクタです。
      *
-     * @param 宛名検索条件 宛名検索条件
      * @param kouseiShichosonCode kouseiShichosonCode
      * @param serviceYmFrom serviceYmFrom
      * @param serviceYmTo serviceYmTo
@@ -93,9 +94,10 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
      * @param hizukeHeshu hizukeHeshu
      * @param 国保連IFなし区分 RString
      * @param 事業高額分 RString
+     * @param searchkey IKozaSearchKey
+     * @param list
      */
     public HanyoListKogakuKaigoMybatisParameter(
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件,
             LasdecCode kouseiShichosonCode,
             FlexibleYearMonth serviceYmFrom,
             FlexibleYearMonth serviceYmTo,
@@ -127,9 +129,11 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
             boolean rebanFuka,
             boolean hizukeHeshu,
             RString 国保連IFなし区分,
-            RString 事業高額分
+            RString 事業高額分,
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list
     ) {
-        super(宛名検索条件);
+        super(searchkey, list);
         this.kouseiShichosonCode = kouseiShichosonCode;
         this.serviceYmFrom = serviceYmFrom;
         this.serviceYmTo = serviceYmTo;
