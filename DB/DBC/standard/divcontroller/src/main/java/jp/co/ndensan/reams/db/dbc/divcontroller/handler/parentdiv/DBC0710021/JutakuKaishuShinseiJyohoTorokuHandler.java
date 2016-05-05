@@ -1390,7 +1390,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             set償還払請求住宅改修(row, dbt3049Builder);
             dbt3049 = dbt3049Builder.set事前申請サービス提供年月(new FlexibleYearMonth(
                     div.getTxtTeikyoYM().getValue().getYearMonth().toDateString())).set審査方法区分コード(
-                            dbt3034.get審査方法区分()).set事前申請整理番号(div.getTxtSeiriNo().getValue()).build();
+                            審査方法初期).set事前申請整理番号(div.getTxtSeiriNo().getValue()).build();
             dbt3049List.add(dbt3049);
         }
 

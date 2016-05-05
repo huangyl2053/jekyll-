@@ -219,7 +219,7 @@ public class ShokanJutakuKaishuBuilder {
      * @return {@link ShokanJutakuKaishuBuilder}
      */
     public ShokanJutakuKaishuBuilder set審査方法区分コード(RString 審査方法区分コード) {
-        requireNonNull(審査方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分コード"));
+//        requireNonNull(審査方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分コード"));
         entity.setShinsaHohoKubunCode(審査方法区分コード);
         return this;
     }
