@@ -5,8 +5,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.Ko
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shiharaihohojyoho.ShiharaiHohoJyohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shiharaihohojyoho.ShiharaiHohoJyohoHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 支払方法情報のコントローラです。
@@ -128,9 +130,9 @@ public class ShiharaiHohoJyoho {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
         ShiharaiHohoJyohoHandler handler = getHandler(div);
         getHandler(div).clear口座払い();
-        KozaJohoPSM kozaJohoPSM = ShiharaiHohoJyohoFinder.createInstance().
+        SearchResult<KozaJohoPSM> kozaJohoPSM = ShiharaiHohoJyohoFinder.createInstance().
                 getKozaJyoho(KozaParameter.createParam(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
-        handler.口座払いエリアの初期化(kozaJohoPSM, Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
+        handler.口座払いエリアの初期化(kozaJohoPSM.records().get(0), Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
         response.data = div;
         return response;
     }
@@ -143,9 +145,24 @@ public class ShiharaiHohoJyoho {
      */
     public ResponseData onClick_btnKozaToroku(ShiharaiHohoJyohoDiv div) {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
+
+
 //        TODO 口座情報照会ダイアログ
         response.data = div;
         return response;
+    }
+
+    /**
+     * 口座情報照会ダイアログ。<br/>
+     *
+     * @param div ShiharaiHohoJyohoDiv
+     * @return ResponseData<ShiharaiHohoJyohoDiv>
+     */
+    public ResponseData<ShiharaiHohoJyohoDiv> onBeforeOpenDialog_koza(ShiharaiHohoJyohoDiv div) {
+
+        div.setサブ業務コード(DataPassingConverter.serialize(div.getサブ業務コード()));
+        div.set識別コード(DataPassingConverter.serialize(div.get識別コード()));
+        return ResponseData.of(div).respond();
     }
 
     /**

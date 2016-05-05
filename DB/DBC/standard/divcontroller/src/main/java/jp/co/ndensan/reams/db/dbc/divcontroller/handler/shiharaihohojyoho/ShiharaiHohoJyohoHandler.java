@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanShitenManager;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -22,8 +24,11 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -44,6 +49,24 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 償還払給付費 = new RString("001");
     private final RString 高額給付費 = new RString("002");
     private final RString 高額合算給付費 = new RString("003");
+    private final RString 償還払い状況照会 = new RString("DBCMN11006");
+    private final RString 福祉用具購入費支給申請 = new RString("DBCMN51001");
+    private final RString 住宅改修費支給申請 = new RString("DBCMN52002");
+    private final RString 住宅改修費事前申請 = new RString("DBCMN52001");
+    private final RString 償還払い費支給申請 = new RString("DBCMN53001");
+    private final RString 高額サービス費支給申請 = new RString("DBCMN42001");
+    private final RString 高額合算支給申請1 = new RString("DBCMN61001");
+    private final RString 高額合算支給申請2 = new RString("DBCMN61002");
+    private final RString 高額合算支給申請3 = new RString("DBCMN61003");
+    private final RString 高額合算支給申請4 = new RString("DBCMN61004");
+    private final RString 高額合算支給申請5 = new RString("DBCMN61005");
+    private final RString 高額合算支給申請6 = new RString("DBCMN61006");
+    private final RString 高額合算支給申請7 = new RString("DBCMN61007");
+    private final RString 高額合算支給申請8 = new RString("DBCMN61008");
+    private final RString 高額合算支給申請9 = new RString("DBCMN61009");
+    private final RString 高額合算支給申請10 = new RString("DBCMN61010");
+    private final RString 高額合算支給申請11 = new RString("DBCMN61011");
+    private final RString 高額合算支給申請12 = new RString("DBCMN61012");
     private final ShiharaiHohoJyohoDiv div;
 
     /**
@@ -60,10 +83,15 @@ public class ShiharaiHohoJyohoHandler {
      *
      *
      * @param 支給申請情報 支給申請情報
-     * @param 業務内区分コード 業務内区分コード
      * @param 状態 状態
      */
-    public void initialize(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード, RString 状態) {
+    public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
+        div.setサブ業務コード(SubGyomuCode.DBC介護給付.value());
+        div.set識別コード(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
+        KamokuCode 業務内区分コード = KamokuCode.EMPTY;
+
+        業務内区分コード = get業務内区分コード(業務内区分コード);
+
         set口座ID(支給申請情報, 業務内区分コード);
 
         ViewStateHolder.put(ViewStateKeys.支給申請情報パラメータ, 支給申請情報);
@@ -77,7 +105,8 @@ public class ShiharaiHohoJyohoHandler {
             if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
                 口座払いエリアの初期化(ShiharaiHohoJyohoFinder.createInstance()
-                        .getKozaJyoho(KozaParameter.createParam(支給申請情報.getKozaId(), null, null)), 支給申請情報.getKozaId());
+                        .getKozaJyoho(KozaParameter.createParam(支給申請情報.
+                                        getKozaId(), null, null)).records().get(0), 支給申請情報.getKozaId());
             }
             if (ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
                 div.getRadJyryoinin().setSelectedKey(支払方法区分.getコード());
@@ -541,8 +570,8 @@ public class ShiharaiHohoJyohoHandler {
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     口座情報.get支店コード() == null ? KinyuKikanShitenCode.EMPTY : 口座情報.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
-            div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-            div.getTxtYokinShubetsu().setReadOnly(true);
+            div.getTxtKinyuKikanShitenCode().setVisible(true);
+            div.getTxtYokinShubetsu().setVisible(true);
             div.getTxtTenban().setVisible(false);
         }
         UzT0007CodeEntity uzT0007CodeEntity = 預金種別に対する略称(nullToEmpty(口座情報.get預金種別()));
@@ -689,6 +718,99 @@ public class ShiharaiHohoJyohoHandler {
     }
 
     /**
+     * 支払方法を取得します。
+     *
+     * @return 支払方法
+     */
+    public RString getShiharaiHoho() {
+
+        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
+
+            return div.getRadMadoguti().getSelectedKey();
+        }
+        if (!div.getRadKoza().getSelectedKey().isNullOrEmpty()) {
+
+            return div.getRadKoza().getSelectedKey();
+        }
+        if (!div.getRadJyryoinin().getSelectedKey().isNullOrEmpty()) {
+
+            return div.getRadJyryoinin().getSelectedKey();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 開始日を取得します。
+     *
+     * @return RDate
+     */
+    public RDate getStartYMD() {
+
+        return div.getTxtStartYMD().getValue();
+    }
+
+    /**
+     * 終了日を取得します。
+     *
+     * @return RDate
+     */
+    public RDate getEndYMD() {
+
+        return div.getTxtEndYMD().getValue();
+    }
+
+    /**
+     * 開始時間を取得します。
+     *
+     * @return RTime
+     */
+    public RTime getStartHHMM() {
+
+        return div.getTxtStartHHMM().getValue();
+    }
+
+    /**
+     * 終了時間を取得します。
+     *
+     * @return RTime
+     */
+    public RTime getEndHHMM() {
+
+        return div.getTxtEndHHMM().getValue();
+    }
+
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
+    public RString getKozaNo() {
+
+        return div.getDdlKozaID().getSelectedKey();
+    }
+
+    /**
+     * 契約番号を取得します。
+     *
+     * @return RString
+     */
+    public RString getKeiyakuNo() {
+
+        return div.getTxtKeiyakuNo().getValue();
+    }
+
+    /**
+     * 支払場所を取得します。
+     *
+     * @return RString
+     */
+    public RString getShiharaiBasho() {
+
+        return div.getTxtShiharaiBasho().getValue();
+    }
+
+
+    /**
      * 受領委任払いエリアを入力可になります。
      *
      */
@@ -711,6 +833,41 @@ public class ShiharaiHohoJyohoHandler {
         List<KozaJohoPSM> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
                 .getKozaIDList(KozaParameter.createParam(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
         div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト));
+    }
+
+    private KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {
+
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
+
+        if (償還払い状況照会.equals(menuID) || 福祉用具購入費支給申請.equals(menuID)
+                || 住宅改修費支給申請.equals(menuID) || 住宅改修費事前申請.equals(menuID)
+                || 償還払い費支給申請.equals(menuID)) {
+
+//            業務内区分コード = new KamokuCode(KozaBunruiKubun.償還払い支給.getコード());
+            業務内区分コード = new KamokuCode(new RString("001"));
+        }
+        if (高額サービス費支給申請.equals(menuID)) {
+
+//            業務内区分コード = new KamokuCode(KozaBunruiKubun.高額介護サービス費支給.getコード());
+            業務内区分コード = new KamokuCode(new RString("002"));
+        }
+        if (高額合算支給申請1.equals(menuID)
+                || 高額合算支給申請2.equals(menuID)
+                || 高額合算支給申請3.equals(menuID)
+                || 高額合算支給申請4.equals(menuID)
+                || 高額合算支給申請5.equals(menuID)
+                || 高額合算支給申請6.equals(menuID)
+                || 高額合算支給申請7.equals(menuID)
+                || 高額合算支給申請8.equals(menuID)
+                || 高額合算支給申請9.equals(menuID)
+                || 高額合算支給申請10.equals(menuID)
+                || 高額合算支給申請11.equals(menuID)
+                || 高額合算支給申請12.equals(menuID)) {
+//            業務内区分コード = new KamokuCode(KozaBunruiKubun.高額合算費支給.getコード());
+            業務内区分コード = new KamokuCode(new RString("003"));
+        }
+        return 業務内区分コード;
     }
 
     private RString nullToEmpty(RString obj) {
