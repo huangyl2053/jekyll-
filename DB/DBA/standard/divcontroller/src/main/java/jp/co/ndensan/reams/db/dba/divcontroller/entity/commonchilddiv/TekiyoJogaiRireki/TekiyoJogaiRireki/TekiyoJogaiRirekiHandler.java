@@ -298,7 +298,7 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(true);
         } else if (状態_訂正履歴.equals(画面状態)) {
             if (状態_修正.equals(div.getStauts())) {
-                if (!RowState.Added.equals(選択データ.getRowState())) {
+                if (!RowState.Added.equals(選択データ.getRowState()) && isデータ変更(選択データ)) {
                     選択データ.setRowState(RowState.Modified);
                 }
                 RDate 変更後適用日 = div.getPanelTekiyoInput().getTxtTekiyoDate().getValue();
@@ -1025,6 +1025,18 @@ public class TekiyoJogaiRirekiHandler {
     private UaFt200FindShikibetsuTaishoEntity get宛名情報() {
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getHiddenInputShikibetsuCode());
         return TekiyoJogaishaManager.createInstance().get宛名情報(識別コード);
+    }
+
+    private boolean isデータ変更(datagridTekiyoJogai_Row 選択データ) {
+        if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
+                && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())
+                && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())
+                && 選択データ.getKayijoDate().getValue().equals(div.getPanelTekiyoInput().getTxtKayijoDate().getValue())
+                && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())
+                && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey())) {
+            return false;
+        }
+        return true;
     }
 
     private static class DateComparator implements Comparator<datagridTekiyoJogai_Row>, Serializable {
