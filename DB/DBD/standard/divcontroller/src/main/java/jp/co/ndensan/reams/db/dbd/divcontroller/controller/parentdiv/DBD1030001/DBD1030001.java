@@ -261,6 +261,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnToSearchResult(DBD1030001Div div) {
+        ViewStateHolder.put(DBD1030001Handler.DBD1030001ViewStateKey.申請一覧情報と状態, null);
         getHandler(div).前排他の解除();
         return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
     }
