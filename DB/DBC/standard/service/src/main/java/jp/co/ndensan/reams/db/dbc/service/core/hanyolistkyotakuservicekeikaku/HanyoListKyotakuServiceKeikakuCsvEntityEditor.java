@@ -80,27 +80,31 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         if (parameter.isCsv項目名付加()) {
             csvEntity.set連番(numToRString(連番));
         }
-        editor宛名(entity, csvEntity);
+        editor宛名(entity, csvEntity, parameter);
         editor地区(entity, csvEntity);
-        editor前住所(entity, csvEntity);
+        editor前住所(entity, csvEntity, parameter);
         editor宛先(entity, csvEntity);
-        editor資格(entity, csvEntity);
+        editor資格(entity, csvEntity, parameter);
         if (介護保険施設.equals(entity.getDbV1004入所施設種類())) {
-            editor指定事業者_介護保険施設(entity, csvEntity);
+            editor指定事業者_介護保険施設(entity, csvEntity, parameter);
 
         } else if (住所地特例対象施設.equals(entity.getDbV1004入所施設種類())
                 || 適用除外施設.equals(entity.getDbV1004入所施設種類())) {
-            editor指定事業者_住所地特例対象施設_適用除外施設(entity, csvEntity);
+            editor指定事業者_住所地特例対象施設_適用除外施設(entity, csvEntity, parameter);
         }
-        editor計画(entity, csvEntity);
+        editor計画(entity, csvEntity, parameter);
         return csvEntity;
     }
 
-    private RString dataToRString(FlexibleDate 日付) {
+    private RString dataToRString(FlexibleDate 日付, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
-        return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        if (!parameter.isCsv日付スラッシュ編集()) {
+            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+        } else {
+            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
     }
 
     private RString numToRString(Decimal 数字) {
@@ -115,7 +119,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor宛名(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         ShikibetsuCode shikibetsuCode = entity.get宛名Entity().getShikibetsuCode();
         if (shikibetsuCode != null) {
             csvEntity.set識別コード(shikibetsuCode.getColumnValue());
@@ -136,7 +140,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         } else {
             csvEntity.set氏名カナ(RString.EMPTY);
         }
-        csvEntity.set生年月日(dataToRString(entity.get宛名Entity().getSeinengappiYMD()));
+        csvEntity.set生年月日(dataToRString(entity.get宛名Entity().getSeinengappiYMD(), parameter));
 
         IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
         AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
@@ -256,20 +260,20 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor前住所(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
 
-        csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD()));
+        csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD(), parameter));
         csvEntity.set登録事由(isNull(entity.get宛名Entity().getTorokuJiyuCode())
                 ? RString.EMPTY : entity.get宛名Entity().getTorokuJiyuCode());
-        csvEntity.set登録届出日(dataToRString(entity.get宛名Entity().getTorokuTodokedeYMD()));
-        csvEntity.set住定異動日(dataToRString(entity.get宛名Entity().getJuteiIdoYMD()));
+        csvEntity.set登録届出日(dataToRString(entity.get宛名Entity().getTorokuTodokedeYMD(), parameter));
+        csvEntity.set住定異動日(dataToRString(entity.get宛名Entity().getJuteiIdoYMD(), parameter));
         csvEntity.set住定事由(isNull(entity.get宛名Entity().getJuteiJiyuCode())
                 ? RString.EMPTY : entity.get宛名Entity().getJuteiJiyuCode());
-        csvEntity.set住定届出日(dataToRString(entity.get宛名Entity().getJuteiTodokedeYMD()));
-        csvEntity.set消除異動日(dataToRString(entity.get宛名Entity().getShojoIdoYMD()));
+        csvEntity.set住定届出日(dataToRString(entity.get宛名Entity().getJuteiTodokedeYMD(), parameter));
+        csvEntity.set消除異動日(dataToRString(entity.get宛名Entity().getShojoIdoYMD(), parameter));
         csvEntity.set消除事由(isNull(entity.get宛名Entity().getShojoJiyuCode())
                 ? RString.EMPTY : entity.get宛名Entity().getShojoJiyuCode());
-        csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD()));
+        csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD(), parameter));
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo yubinNo1 = entity.get宛名Entity().getTennyumaeYubinNo();
         if (yubinNo1 != null) {
@@ -398,7 +402,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor資格(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
 
         csvEntity.set送付先行政区名(isNull(entity.get宛先Entity().getGyoseiku())
                 ? RString.EMPTY : entity.get宛名Entity().getGyoseikuName());
@@ -408,14 +412,14 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 new Code(entity.getDbV1001資格取得事由コード()), FlexibleDate.getNowDate());
         csvEntity.set資格取得事由(isNull(資格取得事由)
                 ? RString.EMPTY : 資格取得事由);
-        csvEntity.set資格取得日(dataToRString(entity.getDbV1001資格取得年月日()));
-        csvEntity.set資格取得届出日(dataToRString(entity.getDbV1001資格取得届出年月日()));
+        csvEntity.set資格取得日(dataToRString(entity.getDbV1001資格取得年月日(), parameter));
+        csvEntity.set資格取得届出日(dataToRString(entity.getDbV1001資格取得届出年月日(), parameter));
         RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, new CodeShubetsu(介護資格喪失事由),
                 new Code(entity.getDbV1001資格喪失事由コード()), FlexibleDate.getNowDate());
         csvEntity.set喪失事由(isNull(喪失事由)
                 ? RString.EMPTY : 喪失事由);
-        csvEntity.set資格喪失日(dataToRString(entity.getDbV1001資格喪失年月日()));
-        csvEntity.set資格喪失届日(dataToRString(entity.getDbV1001資格喪失届出年月日()));
+        csvEntity.set資格喪失日(dataToRString(entity.getDbV1001資格喪失年月日(), parameter));
+        csvEntity.set資格喪失届日(dataToRString(entity.getDbV1001資格喪失届出年月日(), parameter));
         HihokenshaKubunCode hihokenshaKubunCode = HihokenshaKubunCode.toValue(entity.getDbV1001被保険者区分コード());
         csvEntity.set資格区分(isNull(hihokenshaKubunCode)
                 ? RString.EMPTY : hihokenshaKubunCode.get名称());
@@ -439,13 +443,13 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         }
         csvEntity.set指定事業者コード(isNull(entity.getDbV1004入所施設コード())
                 ? RString.EMPTY : entity.getDbV1004入所施設コード().value());
-        csvEntity.set施設入所日(dataToRString(entity.getDbV1004入所年月日()));
-        csvEntity.set施設退所日(dataToRString(entity.getDbV1004退所年月日()));
+        csvEntity.set施設入所日(dataToRString(entity.getDbV1004入所年月日(), parameter));
+        csvEntity.set施設退所日(dataToRString(entity.getDbV1004退所年月日(), parameter));
 
     }
 
     private void editor指定事業者_介護保険施設(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         csvEntity.set指定事業者名(isNull(entity.getDbT7060事業者名称())
                 ? RString.EMPTY : entity.getDbT7060事業者名称().value());
         csvEntity.set指定事業者名カナ(isNull(entity.getDbT7060事業者名称カナ())
@@ -466,15 +470,15 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbT7060FAX番号().value());
         csvEntity.set指定事業者ケアマネ数(numToRString(entity.getDbT7060所属人数()));
         csvEntity.set指定事業者利用者数(numToRString(entity.getDbT7060利用者数()));
-        csvEntity.set指定事業者認定日(dataToRString(entity.getDbT7060有効開始日()));
-        csvEntity.set指定事業者取消日(dataToRString(entity.getDbT7060有効終了日()));
+        csvEntity.set指定事業者認定日(dataToRString(entity.getDbT7060有効開始日(), parameter));
+        csvEntity.set指定事業者取消日(dataToRString(entity.getDbT7060有効終了日(), parameter));
         csvEntity.set指定事業者実施地域(isNull(entity.getDbT7060サービス実施地域())
                 ? RString.EMPTY : entity.getDbT7060サービス実施地域());
 
     }
 
     private void editor指定事業者_住所地特例対象施設_適用除外施設(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         csvEntity.set指定事業者名(isNull(entity.getDbV1005事業者名称())
                 ? RString.EMPTY : entity.getDbV1005事業者名称().value());
         csvEntity.set指定事業者名カナ(isNull(entity.getDbV1005事業者名称カナ())
@@ -495,13 +499,13 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbV1005FAX番号().value());
         csvEntity.set指定事業者ケアマネ数(RString.EMPTY);
         csvEntity.set指定事業者利用者数(RString.EMPTY);
-        csvEntity.set指定事業者認定日(dataToRString(entity.getDbV1005有効開始日()));
-        csvEntity.set指定事業者取消日(dataToRString(entity.getDbV1005有効終了年月日()));
+        csvEntity.set指定事業者認定日(dataToRString(entity.getDbV1005有効開始日(), parameter));
+        csvEntity.set指定事業者取消日(dataToRString(entity.getDbV1005有効終了年月日(), parameter));
         csvEntity.set指定事業者実施地域(RString.EMPTY);
     }
 
     private void editor計画(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         RString 届出区分 = entity.getDbT3005届出区分();
         if (KEY_ONE.equals(届出区分)) {
             csvEntity.set届出区分(表示名称_新規);
@@ -532,11 +536,11 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbT7062代表者名().value());
         csvEntity.set計画管理者カナ(isNull(entity.getDbT7062代表者名カナ())
                 ? RString.EMPTY : entity.getDbT7062代表者名カナ().value());
-        csvEntity.set計画適用開始日(dataToRString(entity.getDbT3006適用開始年月日()));
-        csvEntity.set計画適用終了日(dataToRString(entity.getDbT3006適用終了年月日()));
-        csvEntity.set計画届出日(dataToRString(entity.getDbT3005届出年月日()));
-        csvEntity.set計画作成日(dataToRString(entity.getDbT3007計画作成年月日()));
-        csvEntity.set計画変更日(dataToRString(entity.getDbT3007計画変更年月日()));
+        csvEntity.set計画適用開始日(dataToRString(entity.getDbT3006適用開始年月日(), parameter));
+        csvEntity.set計画適用終了日(dataToRString(entity.getDbT3006適用終了年月日(), parameter));
+        csvEntity.set計画届出日(dataToRString(entity.getDbT3005届出年月日(), parameter));
+        csvEntity.set計画作成日(dataToRString(entity.getDbT3007計画作成年月日(), parameter));
+        csvEntity.set計画変更日(dataToRString(entity.getDbT3007計画変更年月日(), parameter));
         csvEntity.set変更理由(isNull(entity.getDbT3007変更理由())
                 ? RString.EMPTY : entity.getDbT3007変更理由());
         csvEntity.set委託先計画事業者番号(isNull(entity.getDbT3006委託先事業者番号())
@@ -545,12 +549,12 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbT7060事業者名称().value());
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : entity.getDbV4001受給申請事由().value());
-        csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日()));
+        csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));
         csvEntity.set受給要介護度(isNull(entity.getDbV4001要介護認定状態区分コード())
                 ? RString.EMPTY : entity.getDbV4001要介護認定状態区分コード().value());
-        csvEntity.set受給認定開始日(dataToRString(entity.getDbV4001認定有効期間開始日()));
-        csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日()));
-        csvEntity.set受給認定日(dataToRString(entity.getDbV4001受給認定日()));
+        csvEntity.set受給認定開始日(dataToRString(entity.getDbV4001認定有効期間開始日(), parameter));
+        csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日(), parameter));
+        csvEntity.set受給認定日(dataToRString(entity.getDbV4001受給認定日(), parameter));
         csvEntity.set受給旧措置(entity.isDbV4001旧措置フラグ());
         //TODOのNo.715 DBD：みなし要介護区分コード
         csvEntity.set受給みなし更新認定(isNull(entity.getDbV4001みなし要介護区分コード())
