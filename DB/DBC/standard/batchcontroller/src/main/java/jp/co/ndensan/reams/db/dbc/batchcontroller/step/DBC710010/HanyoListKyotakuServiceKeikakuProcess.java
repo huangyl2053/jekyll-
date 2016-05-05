@@ -82,11 +82,11 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private static final RString 英数字ファイル名 = new RString("HanyoList_KyotakuServiceKeikaku.csv");
     private static final RString CSV出力有無 = new RString("");
     private static final RString 抽出対象者 = new RString("【抽出対象者】");
-    private static final RString 構成市町村 = new RString("構成市町村 :");
-    private static final RString 作成区分 = new RString("作成区分 :");
-    private static final RString 抽出区分 = new RString("抽出区分 :");
-    private static final RString 基準年月日 = new RString("基準年月日 :");
-    private static final RString 支援事業者番号 = new RString("支援事業者番号 :");
+    private static final RString 構成市町村 = new RString("構成市町村：");
+    private static final RString 作成区分 = new RString("作成区分：");
+    private static final RString 抽出区分 = new RString("抽出区分：");
+    private static final RString 基準年月日 = new RString("基準年月日：");
+    private static final RString 支援事業者番号 = new RString("支援事業者番号：");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSVNAME = new RString("HanyoList_KyotakuServiceKeikaku.csv");
