@@ -180,11 +180,15 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         builder = new RStringBuilder();
         builder.append(構成市町村);
         LasdecCode lasdecCode = parameter.get構成市町村コード();
-        RString 構成市町村コード = 左記号.concat(lasdecCode == null ? RString.EMPTY : lasdecCode.getColumnValue()).concat(右記号);
-        HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
-        HokenshaSummary hokenshaSummary = hokenshaList.get(lasdecCode);
-        RString 構成市町村名 = hokenshaSummary == null ? RString.EMPTY : hokenshaSummary.get市町村名称();
-        builder.append(構成市町村コード).append(構成市町村名);
+        if (lasdecCode != null) {
+            RString 構成市町村コード = 左記号.concat(lasdecCode.getColumnValue()).concat(右記号);
+            HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+            HokenshaSummary hokenshaSummary = hokenshaList.get(lasdecCode);
+            RString 構成市町村名 = hokenshaSummary == null ? RString.EMPTY : hokenshaSummary.get市町村名称();
+            builder.append(構成市町村コード).append(構成市町村名);
+        } else {
+            builder.append(RString.EMPTY);
+        }
         出力条件.add(builder.toRString());
         builder = get作成区分();
         出力条件.add(builder.toRString());
