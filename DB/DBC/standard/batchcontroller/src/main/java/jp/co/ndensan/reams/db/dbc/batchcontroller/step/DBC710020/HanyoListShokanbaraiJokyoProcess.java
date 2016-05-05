@@ -46,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -136,7 +135,6 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void createWriter() {
-        RDate システム日時 = RDate.getNowDate();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
