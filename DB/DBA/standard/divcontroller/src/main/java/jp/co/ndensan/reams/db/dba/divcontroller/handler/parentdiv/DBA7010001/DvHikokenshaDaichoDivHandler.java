@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHikokenshaDaichoDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -139,6 +140,9 @@ public class DvHikokenshaDaichoDivHandler {
         batchParameter.setShikakuChushutsuKubun(div.getRadChushutsuKijun().getSelectedKey());
         batchParameter.setShutokujiyu(div.getChkShutokuJiyu().getSelectedKeys());
         batchParameter.setSoshitsujiyu(div.getChkSoshitsuJiyu().getSelectedKeys());
+
+        AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
+
         batchParameter.setPsmChushutsu_Kubun(div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード());
         batchParameter.setPsmChushutsuAge_Start(nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢開始()));
         batchParameter.setPsmChushutsuAge_End(nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢終了()));
@@ -148,18 +152,29 @@ public class DvHikokenshaDaichoDivHandler {
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
                 && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
             batchParameter.setShichoson_Code(div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue());
+            batchParameter.setShichoson_Name(div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称());
         }
         batchParameter.setPsmChiku_Kubun(div.getCcdHanyoListAtenaSelect().get地区().getコード());
         batchParameter.setPsmJusho_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get住所開始()));
+        batchParameter.setPsmJusho_From_Name(宛名抽出条件.getJusho_FromMesho());
         batchParameter.setPsmJusho_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get住所終了()));
+        batchParameter.setPsmJusho_To_Name(宛名抽出条件.getJusho_ToMesho());
         batchParameter.setPsmGyoseiku_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get行政区開始()));
+        batchParameter.setPsmGyoseiku_From_Name(宛名抽出条件.getGyoseiku_FromMesho());
         batchParameter.setPsmGyoseiku_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get行政区終了()));
+        batchParameter.setPsmGyoseiku_To_Name(宛名抽出条件.getGyoseiku_ToMesho());
         batchParameter.setPsmChiku1_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区１開始()));
+        batchParameter.setPsmChiku1_From_Name(宛名抽出条件.getChiku1_FromMesho());
         batchParameter.setPsmChiku1_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区１終了()));
+        batchParameter.setPsmChiku1_To_Name(宛名抽出条件.getChiku1_ToMesho());
         batchParameter.setPsmChiku2_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区２開始()));
+        batchParameter.setPsmChiku2_From_Name(宛名抽出条件.getChiku2_FromMesho());
         batchParameter.setPsmChiku2_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区２終了()));
+        batchParameter.setPsmChiku2_To_Name(宛名抽出条件.getChiku2_ToMesho());
         batchParameter.setPsmChiku3_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区３開始()));
+        batchParameter.setPsmChiku3_From_Name(宛名抽出条件.getChiku3_FromMesho());
         batchParameter.setPsmChiku3_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区３終了()));
+        batchParameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
         // TODO QA #73393 出力順ID実装方式 回復待ち  2016/01/20まで
 //        batchParameter.setPageShuturyokujun_Id(new RString(div.getCcdKogakuShutsuryokujun().get出力順ID().toString()));
         // TODO 出力項目ID
