@@ -21,14 +21,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護サービス内容を管理するクラスです。
- * @reamsid_L DBA-0340-060 dongyabin
+ *
+ * @reamsid_L DBA-0060-020 dongyabin
  */
 public class KaigoServiceNaiyouManager {
 
     private final DbT7131KaigoServiceNaiyouDac dac;
-    
+
     private final MapperProvider mapperProvider;
-    
+
     /**
      * コンストラクタです。
      */
@@ -47,7 +48,7 @@ public class KaigoServiceNaiyouManager {
         this.dac = dac;
         this.mapperProvider = mapperProvider;
     }
-    
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンスを返します。
      *
@@ -56,7 +57,7 @@ public class KaigoServiceNaiyouManager {
     public static KaigoServiceNaiyouManager createInstance() {
         return InstanceProvider.create(KaigoServiceNaiyouManager.class);
     }
-    
+
     /**
      * 介護サービス内容{@link KaigoServiceNaiyou}を保存します。
      *
@@ -71,7 +72,7 @@ public class KaigoServiceNaiyouManager {
         }
         return 1 == dac.save(介護サービス内容.toEntity());
     }
-    
+
     /**
      * サービスコードのフォーカスアウトを取得します。
      *
@@ -81,7 +82,7 @@ public class KaigoServiceNaiyouManager {
     public List<KaigoServiceNaiyou> getFouceServiceCodeList(SabisuKodoParameter parameter) {
         List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = dac.getサービス内容(new ServiceShuruiCode(parameter.
                 getServiceShuruiCode()),
-                parameter.getServiceKoumokuCode(), 
+                parameter.getServiceKoumokuCode(),
                 parameter.getHaakuKijunYM());
         List<KaigoServiceNaiyou> サービスコード情報検索リスト = new ArrayList<>();
         for (DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity : サービスコード情報リスト) {
@@ -89,7 +90,7 @@ public class KaigoServiceNaiyouManager {
         }
         return サービスコード情報検索リスト;
     }
-    
+
     /**
      * サービスコード取得を取得します。
      *
@@ -105,5 +106,5 @@ public class KaigoServiceNaiyouManager {
         }
         return サービスコード情報検索リスト;
     }
-    
+
 }

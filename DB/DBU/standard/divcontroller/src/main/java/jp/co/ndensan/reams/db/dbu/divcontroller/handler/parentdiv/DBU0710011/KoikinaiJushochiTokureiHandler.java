@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 広域内住所地特例者一覧表Handlerクラスです。
- * @reamsid_L DBU-1140-040 dongyabin
+ *
+ * @reamsid_L DBU-1140-030 dongyabin
  */
 public class KoikinaiJushochiTokureiHandler {
 
@@ -32,7 +33,7 @@ public class KoikinaiJushochiTokureiHandler {
     private static final RString 直近 = new RString("1");
     private static final RString 基準日 = new RString("2");
     private static final RString 範囲 = new RString("3");
-    private static final int 市町村コード = 6;  
+    private static final int 市町村コード = 6;
     private static final int 市町村名称 = 7;
 
     private final KoikinaiJushochiTokureiDiv div;
@@ -40,7 +41,7 @@ public class KoikinaiJushochiTokureiHandler {
     /**
      * コンストラクタです。
      *
-     * @param div KoikinaiJushochiTokurei のクラスファイル 
+     * @param div KoikinaiJushochiTokurei のクラスファイル
      */
     public KoikinaiJushochiTokureiHandler(KoikinaiJushochiTokureiDiv div) {
         this.div = div;
@@ -48,6 +49,7 @@ public class KoikinaiJushochiTokureiHandler {
 
     /**
      * 画面初期化処理です。
+     *
      * @param 市町村List 広域全市町村
      */
     public void onLoad(SearchResult<KoikiZenShichosonJoho> 市町村List) {
@@ -71,7 +73,7 @@ public class KoikinaiJushochiTokureiHandler {
         div.getBatchParamterInfo().getTxtKonkaiKaishibi().setDisabled(true);
         div.getBatchParamterInfo().getTxtKonkaiShuryobi().setDisabled(true);
     }
-    
+
     /**
      * 「直近」ラジオボタンを選択します。
      */
@@ -80,7 +82,7 @@ public class KoikinaiJushochiTokureiHandler {
         div.getBatchParamterInfo().getTxtKonkaiKaishibi().setDisabled(true);
         div.getBatchParamterInfo().getTxtKonkaiShuryobi().setDisabled(true);
     }
-    
+
     /**
      * 「基準日」ラジオボタンを選択します。
      */
@@ -89,7 +91,7 @@ public class KoikinaiJushochiTokureiHandler {
         div.getBatchParamterInfo().getTxtKonkaiKaishibi().setDisabled(true);
         div.getBatchParamterInfo().getTxtKonkaiShuryobi().setDisabled(true);
     }
-    
+
     /**
      * 「範囲」ラジオボタンを選択します。
      */
@@ -98,7 +100,7 @@ public class KoikinaiJushochiTokureiHandler {
         div.getBatchParamterInfo().getTxtKonkaiKaishibi().setDisabled(false);
         div.getBatchParamterInfo().getTxtKonkaiShuryobi().setDisabled(false);
     }
-    
+
     /**
      * 「実行する」ボタンを押下前のチェック実行します。
      */
@@ -119,9 +121,10 @@ public class KoikinaiJushochiTokureiHandler {
             }
         }
     }
-    
+
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
+     *
      * @return KoikinaiJushochiTokureiBatchParamter 広域内住所地特例者一覧表_バッチパラメータクラスです
      */
     public KoikinaiJushochiTokureiBatchParamter click実行() {
@@ -130,9 +133,8 @@ public class KoikinaiJushochiTokureiHandler {
                 .getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().substring(0, 市町村コード));
         batchparam.setShichosonName(div.getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().isEmpty() ? RString.EMPTY : div
                 .getBatchParamterInfo().getDdlShichosonShitei().getSelectedValue().substring(市町村名称));
-        batchparam.setNarabiId(div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID() == null ? RString.
-                EMPTY : new RString(div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID().toString()));
-        
+        batchparam.setNarabiId(div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID() == null ? RString.EMPTY : new RString(div.getBatchParamterInfo().getCcdChohyoShutsuryokujun().get出力順ID().toString()));
+
         if (!div.getBatchParamterInfo().getRadChokin().getSelectedKey().isEmpty()) {
             batchparam.setModel(直近);
             batchparam.setKijyunbi(null);
@@ -151,7 +153,7 @@ public class KoikinaiJushochiTokureiHandler {
         }
         return batchparam;
     }
-    
+
     private static class ComparatorByStartDateSort implements Comparator {
 
         @Override
