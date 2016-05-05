@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 弁明登録情報の処理を行うです。
  *
- * @reamsid_L DBU-1080-020  lijia
+ * @reamsid_L DBU-1080-030  lijia
  * 
  */
 public class BenmeiTorokuManager {
