@@ -103,9 +103,9 @@ public class HihokenshaDaichoSakuseiManager {
     private static final RString STATE_資格喪失者 = new RString("資格喪失者");
     private static final RString TITLE_介護保険被保険者台帳 = new RString("介護保険被保険者台帳");
     private static final RString NYUSHOSHISETSUSHURUI_11 = new RString("11");
-    private static final RString CODESHUBETSU_0117 = new RString("0117");
-    private static final RString CODESHUBETSU_0121 = new RString("0121");
-    private static final RString CODESHUBETSU_0126 = new RString("0126");
+    private static final RString CODESHUBETSU_0007 = new RString("0007");
+    private static final RString CODESHUBETSU_0010 = new RString("0010");
+    private static final RString CODESHUBETSU_0013 = new RString("0013");
     private static final RString CODESHUBETSU_0002 = new RString("0002");
     private static final RString CODESHUBETSU_0001 = new RString("0001");
     private static final int NOCOUNT_5 = 5;
@@ -834,8 +834,8 @@ public class HihokenshaDaichoSakuseiManager {
             取得日.add(flexRString(entity.getShikakuShutokuYMD()));
             取得事由コード.add(entity.getShikakuShutokuJiyuCode());
             if (entity.getShikakuShutokuJiyuCode() != null) {
-                取得事由名称.add(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
-                        new CodeShubetsu(CODESHUBETSU_0117), new Code(entity.getShikakuShutokuJiyuCode())));
+                取得事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu(CODESHUBETSU_0007), new Code(entity.getShikakuShutokuJiyuCode())));
             } else {
                 取得事由名称.add(RString.EMPTY);
             }
@@ -843,8 +843,8 @@ public class HihokenshaDaichoSakuseiManager {
             喪失日.add(flexRString(entity.getShikakuSoshitsuYMD()));
             喪失事由コード.add(entity.getShikakuSoshitsuJiyuCode());
             if (entity.getShikakuSoshitsuJiyuCode() != null) {
-                喪失事由名称.add(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
-                        new CodeShubetsu(CODESHUBETSU_0121), new Code(entity.getShikakuSoshitsuJiyuCode())));
+                喪失事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu(CODESHUBETSU_0010), new Code(entity.getShikakuSoshitsuJiyuCode())));
             } else {
                 喪失事由名称.add(RString.EMPTY);
             }
@@ -852,8 +852,8 @@ public class HihokenshaDaichoSakuseiManager {
             変更日.add(flexRString(entity.getShikakuHenkoYMD()));
             変更事由コード.add(entity.getShikakuHenkoJiyuCode());
             if (entity.getShikakuHenkoJiyuCode() != null) {
-                変更事由名称.add(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
-                        new CodeShubetsu(CODESHUBETSU_0126), new Code(entity.getShikakuHenkoJiyuCode())));
+                変更事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu(CODESHUBETSU_0013), new Code(entity.getShikakuHenkoJiyuCode())));
             } else {
                 変更事由名称.add(RString.EMPTY);
             }
@@ -1045,7 +1045,7 @@ public class HihokenshaDaichoSakuseiManager {
             証履歴No.add(new RString(String.valueOf(nocount + 1)));
             証履歴発行日.add(entity.getKofuYMD());
             if (entity.getKofuJiyu() != null) {
-                証履歴事由名称.add(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
+                証履歴事由名称.add(CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
                         new CodeShubetsu(CODESHUBETSU_0002), new Code(entity.getKofuJiyu())));
             } else {
                 証履歴事由名称.add(RString.EMPTY);
