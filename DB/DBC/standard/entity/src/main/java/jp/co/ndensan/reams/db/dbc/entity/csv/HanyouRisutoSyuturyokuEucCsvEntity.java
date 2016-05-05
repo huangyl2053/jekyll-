@@ -295,7 +295,7 @@ public class HanyouRisutoSyuturyokuEucCsvEntity {
     @CsvField(order = 1370, name = "国保連委託なし")
     private RString 国保連委託なし;
     @CsvField(order = 1380, name = "高額自動償還")
-    private RString 高額自動償還;
+    private boolean 高額自動償還;
     @CsvField(order = 1390, name = "利用者負担段階")
     private RString 利用者負担段階;
     @CsvField(order = 1400, name = "受給申請事由")

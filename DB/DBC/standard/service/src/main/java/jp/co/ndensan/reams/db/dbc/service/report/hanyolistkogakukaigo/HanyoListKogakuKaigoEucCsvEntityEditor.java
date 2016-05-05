@@ -12,28 +12,36 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -41,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.TsuzukigaraCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -69,7 +78,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private static final RString RST_市 = new RString("市");
     private static final RString RST_低 = new RString("低");
     private static final RString RST_老 = new RString("老");
-    private static final RString RST_2 = new RString("２");
+    private static final RString RST_2 = new RString("2");
     private static final RString RST_緩１ = new RString("緩１");
     private static final RString RST_緩２ = new RString("緩２");
     private static final RString RST_般 = new RString("般");
@@ -79,6 +88,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private static final RString RST_第３ = new RString("第３");
     private static final RString RST_第４ = new RString("第４");
     private static final RString RST_第５ = new RString("第５");
+    private static final RString RST_1 = new RString("1");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -109,6 +119,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
 
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
+        set口座(entity, csvEntity);
         set入所施設種類(entity, csvEntity, parameter);
         set支給申請(entity, csvEntity, parameter);
         set給付対象者合計(entity, csvEntity, parameter);
@@ -120,10 +131,10 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 ? entity.get市町村コード().getColumnValue() : RString.EMPTY);
 
         Association association = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         csvEntity.set市町村名(association.get市町村名());
-        // TODO 保険者コードと保険者名取りに来ない
-        csvEntity.set保険者コード(RString.EMPTY);
-        csvEntity.set保険者名(RString.EMPTY);
+        csvEntity.set保険者コード(地方公共団体.get地方公共団体コード().getColumnValue());
+        csvEntity.set保険者名(地方公共団体.get市町村名());
 
         csvEntity.set空白(RString.EMPTY);
         HihokenshaNo 被保険者番号 = entity.get被保険者番号();
@@ -231,7 +242,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set世帯コード(世帯コード != null ? 世帯コード.getColumnValue() : RString.EMPTY);
             AtenaMeisho 世帯主名 = entity.get宛名().getSetainushiMei();
             csvEntity.set世帯主名(世帯主名 != null ? 世帯主名.getColumnValue() : RString.EMPTY);
-            AtenaJusho 住所コード = entity.get宛名().getJusho();
+            ZenkokuJushoCode 住所コード = entity.get宛名().getZenkokuJushoCode();
             csvEntity.set住所コード(住所コード != null ? 住所コード.getColumnValue() : RString.EMPTY);
             YubinNo 郵便番号 = entity.get宛名().getYubinNo();
             csvEntity.set郵便番号(郵便番号 != null ? 郵便番号.getColumnValue() : RString.EMPTY);
@@ -250,12 +261,11 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     }
 
     private void set宛名(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+        set地区(entity, csvEntity);
         GyoseikuCode 行政区コード = entity.get宛名().getGyoseikuCode();
         csvEntity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
         csvEntity.set行政区名(entity.get宛名().getGyoseikuName());
-        csvEntity.set地区１(entity.get宛名().getChikuName1());
-        csvEntity.set地区２(entity.get宛名().getChikuName2());
-        csvEntity.set地区３(entity.get宛名().getChikuName3());
+
         TelNo 連絡先１ = entity.get宛名().getRenrakusaki1();
         csvEntity.set連絡先１(連絡先１ != null ? 連絡先１.getColumnValue() : RString.EMPTY);
         TelNo 連絡先２ = entity.get宛名().getRenrakusaki2();
@@ -276,8 +286,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         FlexibleDate 消除届出日 = entity.get宛名().getShojoTodokedeYMD();
         csvEntity.set消除届出日(消除届出日 != null ? new RString(消除届出日.toString()) : RString.EMPTY);
         //  TODO 宛名・本人・は不明です
-        RString 転出入理由 = entity.get宛名().getAimaiShojobiMongon();
-        csvEntity.set転出入理由(転出入理由);
+        csvEntity.set転出入理由(RString.EMPTY);
         YubinNo 前住所郵便番号 = entity.get宛名().getTennyumaeYubinNo();
         csvEntity.set前住所郵便番号(前住所郵便番号 != null ? 前住所郵便番号.getColumnValue() : RString.EMPTY);
         AtenaJusho 前住所 = entity.get宛名().getTennyumaeJusho();
@@ -292,6 +301,15 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 .concat(前住所方書 != null ? 前住所方書.getColumnValue() : RString.EMPTY));
     }
 
+    private void set地区(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+        ChikuCode 地区1 = entity.get宛名().getChikuCode1();
+        ChikuCode 地区2 = entity.get宛名().getChikuCode2();
+        ChikuCode 地区3 = entity.get宛名().getChikuCode3();
+        csvEntity.set地区１(地区1 != null ? 地区1.getColumnValue() : RString.EMPTY);
+        csvEntity.set地区２(地区2 != null ? 地区2.getColumnValue() : RString.EMPTY);
+        csvEntity.set地区３(地区3 != null ? 地区2.getColumnValue() : RString.EMPTY);
+    }
+
     private void set宛先(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
 
         UaFt250FindAtesakiEntity 宛先 = entity.get宛先();
@@ -300,14 +318,12 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set送付先氏名(送付先氏名 != null ? 送付先氏名.getColumnValue() : RString.EMPTY);
             AtenaKanaMeisho 送付先氏名カナ = 宛先.getKanaShimei();
             csvEntity.set送付先氏名カナ(送付先氏名カナ != null ? 送付先氏名カナ.getColumnValue() : RString.EMPTY);
-            // 宛名・送付先・住所コード
-            ChoikiCode 送付先住所コード = 宛先.getChoikiCode();
+            ZenkokuJushoCode 送付先住所コード = 宛先.getZenkokuJushoCode();
             csvEntity.set送付先住所コード(送付先住所コード != null ? 送付先住所コード.getColumnValue() : RString.EMPTY);
             YubinNo 送付先郵便番号 = 宛先.getYubinNo();
             csvEntity.set送付先郵便番号(送付先郵便番号 != null ? 送付先郵便番号.getColumnValue() : RString.EMPTY);
-            // 宛名・送付先・住所コード
             AtenaJusho 送付先住所 = 宛先.getJusho();
-            csvEntity.set送付先住所(送付先住所 != null ? 送付先住所.getColumnValue() : RString.EMPTY);
+            csvEntity.set送付先住所(送付先住所コード != null ? 送付先住所コード.getColumnValue() : RString.EMPTY);
             AtenaBanchi 送付先番地 = 宛先.getBanchi();
             csvEntity.set送付先番地(送付先番地 != null ? 送付先番地.getColumnValue() : RString.EMPTY);
             Katagaki 送付先方書 = 宛先.getKatagaki();
@@ -319,6 +335,34 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             GyoseikuCode 送付先行政区コード = 宛先.getGyoseikuCode();
             csvEntity.set送付先行政区コード(送付先行政区コード != null ? 送付先行政区コード.getColumnValue() : RString.EMPTY);
             csvEntity.set送付先行政区名(宛先.getGyoseiku());
+        }
+    }
+
+    private void set口座(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+        if (entity.get口座情報() != null) {
+            KozaRelateEntity releteEntity = entity.get口座情報();
+            IKoza 口座 = new Koza(releteEntity);
+            if (口座.isゆうちょ銀行()) {
+                csvEntity.set銀行郵便区分(RST_2);
+                csvEntity.set支店コード(口座.get店番());
+            } else {
+                csvEntity.set銀行郵便区分(RST_1);
+                KinyuKikanShitenCode 支店コード = 口座.get支店コード();
+                csvEntity.set支店コード(支店コード != null ? 支店コード.getColumnValue() : RString.EMPTY);
+            }
+            KinyuKikanCode 銀行コード = 口座.get金融機関コード();
+            csvEntity.set銀行コード(銀行コード != null ? 銀行コード.getColumnValue() : RString.EMPTY);
+            csvEntity.set銀行名カナ(口座.get金融機関().get金融機関カナ名称());
+            csvEntity.set銀行名(口座.get金融機関().get金融機関名称());
+            csvEntity.set支店名カナ(口座.get支店().get支店カナ名称());
+            csvEntity.set支店名(口座.get支店().get支店名称());
+            YokinShubetsuPattern 口座種目 = 口座.get預金種別();
+            csvEntity.set口座種目(口座種目 != null ? 口座種目.get預金種別名称() : RString.EMPTY);
+            csvEntity.set口座番号(口座.get口座番号());
+            AtenaKanaMeisho 名義人カナ = 口座.get口座名義人();
+            csvEntity.set名義人カナ(名義人カナ != null ? 名義人カナ.getColumnValue() : RString.EMPTY);
+            AtenaMeisho 名義人 = 口座.get口座名義人漢字();
+            csvEntity.set名義人(名義人 != null ? 名義人.getColumnValue() : RString.EMPTY);
         }
     }
 
@@ -479,10 +523,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
 
         if (isNotNull(entity.get給付対象者明細())) {
             csvEntity.set備考算定基準(entity.get給付対象者明細().getKogakuKyufuKonkyo());
-            // DBCコンフィグ.国保連共同処理受託区分_高額
-            csvEntity.set国保連委託なし(entity.get給付対象者明細().getKogakuKyufuKonkyo());
-            // 高額介護サービス費給付対象者明細.高額対象外フラグ
-            csvEntity.set高額自動償還(entity.get給付対象者明細().getKogakuKyufuKonkyo());
+            RString 国保連委託なし = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            csvEntity.set国保連委託なし(国保連委託なし);
+            csvEntity.set高額自動償還(entity.get給付対象者合計().getKogakuTaishoGaiFlag());
             csvEntity.set利用者負担段階(get高額給付根拠(entity.get給付対象者明細().getKogakuKyufuKonkyo()));
         }
     }
@@ -525,15 +568,15 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         } else {
             List<RString> list = 高額給付根拠.toRStringList();
 
-            if (list.size() > INDEX_1 && (list.get(INDEX_0).equals(RST_月)
+            if (list.size() >= INDEX_1 && (list.get(INDEX_0).equals(RST_月)
                     || list.get(INDEX_0).equals(RString.EMPTY))) {
-                世帯の所得区分コード = list.size() > INDEX_2 ? list.get(INDEX_1) : RString.EMPTY;
-                本人の所得区分コード = list.size() > INDEX_3 ? list.get(INDEX_2) : RString.EMPTY;
-                老齢福祉年金受給の有無 = list.size() > INDEX_5 ? list.get(INDEX_4) : RString.EMPTY;
+                世帯の所得区分コード = list.size() >= INDEX_2 ? list.get(INDEX_1) : RString.EMPTY;
+                本人の所得区分コード = list.size() >= INDEX_3 ? list.get(INDEX_2) : RString.EMPTY;
+                老齢福祉年金受給の有無 = list.size() >= INDEX_5 ? list.get(INDEX_4) : RString.EMPTY;
             } else {
-                世帯の所得区分コード = list.size() > INDEX_1 ? list.get(INDEX_0) : RString.EMPTY;
-                本人の所得区分コード = list.size() > INDEX_2 ? list.get(INDEX_1) : RString.EMPTY;
-                老齢福祉年金受給の有無 = list.size() > INDEX_4 ? list.get(INDEX_3) : RString.EMPTY;
+                世帯の所得区分コード = list.size() >= INDEX_1 ? list.get(INDEX_0) : RString.EMPTY;
+                本人の所得区分コード = list.size() >= INDEX_2 ? list.get(INDEX_1) : RString.EMPTY;
+                老齢福祉年金受給の有無 = list.size() >= INDEX_4 ? list.get(INDEX_3) : RString.EMPTY;
             }
 
             if (RST_生.equals(本人の所得区分コード)) {
