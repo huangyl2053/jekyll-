@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,4 +30,5 @@ public class ShokanharaKeteiJyohoParameter implements Serializable {
     private RString 証明書;
     private Decimal 給付率;
     private RString 画面モード;
+    private HokenshaNo 保険者番号;
 }
