@@ -43,9 +43,6 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      * @return レスポンスデータ
      */
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onLoad(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-        // TODO テストデータ準備
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, new HihokenshaNo("1000000001"));
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, new ShikibetsuCode("210000000000011"));
 
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_被保険者番号, HihokenshaNo.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.負担限度額認定更新のお知らせ通知書個別発行_識別コード, ShikibetsuCode.class);

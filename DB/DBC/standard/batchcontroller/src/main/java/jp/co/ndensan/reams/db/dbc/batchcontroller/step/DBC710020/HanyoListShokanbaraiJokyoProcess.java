@@ -81,18 +81,22 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private static final RString CODE_1 = new RString("1");
     private static final RString CODE_2 = new RString("2");
     private static final RString CODE_3 = new RString("3");
-    private static final RString 保険者 = new RString("【保険者】");
-    private static final RString サービス提供年月 = new RString("【サービス提供年月】");
-    private static final RString 処理状況 = new RString("【処理状況】");
-    private static final RString 決定状況 = new RString("【決定状況】");
-    private static final RString 支払方法 = new RString("【支払方法】");
-    private static final RString 金融機関 = new RString("【金融機関】");
-    private static final RString 申請日 = new RString("【申請日】");
-    private static final RString 住宅改修支給届出日 = new RString("【住宅改修支給届出日】");
-    private static final RString 決定日 = new RString("【決定日】");
-    private static final RString 国保連送付年月 = new RString("【国保連送付年月】");
-    private static final RString 様式番号 = new RString("【様式番号】");
+    private static final int INDEX_15 = 15;
+    private static final RString 抽出対象者 = new RString("【抽出対象者】");
+    private static final RString 保険者 = new RString("保険者：");
+    private static final RString サービス提供年月 = new RString("サービス提供年月：");
+    private static final RString 処理状況 = new RString("処理状況：");
+    private static final RString 決定状況 = new RString("決定状況：");
+    private static final RString 支払方法 = new RString("支払方法：");
+    private static final RString 金融機関 = new RString("金融機関：");
+    private static final RString 申請日 = new RString("申請日：");
+    private static final RString 住宅改修支給届出日 = new RString("住宅改修支給届出日：");
+    private static final RString 決定日 = new RString("決定日：");
+    private static final RString 国保連送付年月 = new RString("国保連送付年月：");
+    private static final RString 様式番号 = new RString("様式番号：");
     private static final RString すべて = new RString("すべて");
+    private static final RString 左記号 = new RString("(");
+    private static final RString 右記号 = new RString(")");
     private HanyoListShokanbaraiJokyoProcessParameter parameter;
     private HanyoListCsvDataCreate dataCreate;
     private RString eucFilePath;
@@ -217,9 +221,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private List<RString> get出力条件() {
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
+        builder.append(抽出対象者);
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(保険者);
         builder.append(parameter.get保険者コード() == null
-                ? RString.EMPTY : parameter.get保険者コード().concat(parameter.get保険者名()));
+                ? RString.EMPTY : 左記号.concat(parameter.get保険者コード())
+                .concat(右記号).concat(parameter.get保険者名()));
         出力条件.add(builder.toRString());
         builder = get処理状況();
         出力条件.add(builder.toRString());
@@ -233,7 +241,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         builder.append(金融機関);
         builder.append(parameter.get金融機関コード() == null
                 || parameter.get金融機関コード().isEmpty()
-                ? RString.EMPTY : parameter.get金融機関コード().concat(parameter.get金融機関名称()));
+                ? RString.EMPTY : 左記号.concat(parameter.get金融機関コード())
+                .concat(右記号).concat(parameter.get金融機関名称()));
         出力条件.add(builder.toRString());
         builder = get申請日();
         出力条件.add(builder.toRString());
@@ -243,8 +252,10 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         出力条件.add(builder.toRString());
         builder = get国保連送付年月();
         出力条件.add(builder.toRString());
-        builder = get様式番号();
-        出力条件.add(builder.toRString());
+        List<RStringBuilder> 様式番号List = get様式番号(parameter.get様式番号());
+        for (RStringBuilder 番号 : 様式番号List) {
+            出力条件.add(番号.toRString());
+        }
         return 出力条件;
     }
 
@@ -393,15 +404,47 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         return builder;
     }
 
-    private RStringBuilder get様式番号() {
+    private List<RStringBuilder> get様式番号(RString 番号) {
+
+        List<RStringBuilder> buiderList = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(様式番号);
-        RString yoshikiNo = RString.EMPTY;
-        if (CODE_1.equals(parameter.get様式番号選択())) {
-            yoshikiNo = すべて;
+        if (番号.isNullOrEmpty()) {
+            buiderList.add(builder);
+            return buiderList;
         }
-        builder.append(yoshikiNo);
-        return builder;
+
+        boolean 様式番号分行 = false;
+        if (CODE_1.equals(parameter.get様式番号選択())) {
+            builder.append(すべて);
+        } else {
+            List<RString> 様式番号list = 番号.split(EUC_WRITER_DELIMITER.toString());
+            for (int i = 1; i < 様式番号list.size(); i++) {
+                if (様式番号分行) {
+                    builder = new RStringBuilder();
+                    builder.append(RString.FULL_SPACE).append(RString.FULL_SPACE).append(RString.FULL_SPACE)
+                            .append(RString.FULL_SPACE).append(RString.FULL_SPACE);
+                }
+                builder.append(様式番号list.get(i - 1));
+                if (builder.toRString().length() + 1 + 様式番号list.get(i).length() < INDEX_15) {
+                    builder.append(RString.FULL_SPACE);
+                    getLast様式番号(builder, i, 様式番号list, buiderList);
+                    様式番号分行 = false;
+                } else {
+                    buiderList.add(builder);
+                    様式番号分行 = true;
+                }
+            }
+
+        }
+        return buiderList;
+    }
+
+    private void getLast様式番号(RStringBuilder builder, int i, List<RString> 様式番号list, List<RStringBuilder> buiderList) {
+        if (i == 様式番号list.size() - 1) {
+            builder.append(様式番号list.get(i));
+            buiderList.add(builder);
+        }
     }
 
 }

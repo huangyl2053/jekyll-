@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳管理Aliveのデータアクセスクラスです。
+ *
+ * @reamsid_L DBA-1300-030 lishengli
  */
 public class DbV1001HihokenshaDaichoAliveDac {
 
@@ -86,5 +88,24 @@ public class DbV1001HihokenshaDaichoAliveDac {
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 被保険者番号により、最新の被保険者台帳情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbV1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1001HihokenshaDaichoEntity get最新の被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
     }
 }

@@ -176,8 +176,10 @@ public class DvShokanbaraiJohoHandler {
         FlexibleDate 決定日To = 決定日T == null ? FlexibleDate.EMPTY : new FlexibleDate(決定日T.toString());
         RDate 国保連送付年月F = panel.getTxtShokanKokuhorenSofuYM().getFromValue();
         RDate 国保連送付年月T = panel.getTxtShokanKokuhorenSofuYM().getToValue();
-        FlexibleYearMonth 国保連送付年月From = 国保連送付年月F == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(国保連送付年月F.toString());
-        FlexibleYearMonth 国保連送付年月To = 国保連送付年月T == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(国保連送付年月T.toString());
+        FlexibleYearMonth 国保連送付年月From = 国保連送付年月F == null ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(国保連送付年月F.getYearMonth().toString());
+        FlexibleYearMonth 国保連送付年月To = 国保連送付年月T == null ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(国保連送付年月T.getYearMonth().toString());
         RString 様式番号選択 = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getTotalRecords()
                 == div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getSelectedItems().size() ? すべて_1 : 部分_2;
         List<dgYoshikiNo_Row> rowLists = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getSelectedItems();

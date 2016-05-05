@@ -698,13 +698,13 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             throw new ApplicationException(DbcErrorMessages.給付実績複数件取得.getMessage());
         } else {
             if (後保険請求額 == shshResult.get保険給付額()) {
-                // TODO 　ボタンを活性にする。
+                div.getPnlButton().getBtnKetteiJoho().setDisabled(false);
                 shshResult.get審査結果();
             } else {
                 getHandler(div).set参照モード();
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getChkKokuhorenSend().setDisabled(false);
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShiharaiHoho().setDisabled(false);
-                // TODO 　ボタンを活性にする。
+                div.getPnlButton().getBtnKetteiJoho().setDisabled(false);
             }
         }
     }

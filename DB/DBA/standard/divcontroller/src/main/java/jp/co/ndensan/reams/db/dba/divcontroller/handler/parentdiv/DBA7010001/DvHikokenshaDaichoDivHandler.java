@@ -113,73 +113,83 @@ public class DvHikokenshaDaichoDivHandler {
 
     /**
      * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
+     *
+     * @return parameter HanyoListHihokenshadaichoBatchParameter
      */
-    public void onClick_btnKogakuParamSave() {
-        HanyoListHihokenshadaichoBatchParameter batchParameter = new HanyoListHihokenshadaichoBatchParameter();
-        set編集方法(batchParameter);
-        batchParameter.setHidukeTyuushutuKubun(div.getRadChushutsu().getSelectedKey());
-        batchParameter.setKijunniKubun(div.getRadKijunbiDate().getSelectedKey());
+    public HanyoListHihokenshadaichoBatchParameter onClick_btnKogakuParamSave() {
+        boolean 項目名付加 = false;
+        boolean 連番付加 = false;
+        boolean 日付編集 = false;
+        List<RString> 編集方法List = div.getChkCsvHenshuHoho().getSelectedKeys();
+        for (RString 編集方法 : 編集方法List) {
+            if (CSVSettings.項目名付加.getコード().equals(編集方法)) {
+                項目名付加 = true;
+                continue;
+            }
+            if (CSVSettings.連番付加.getコード().equals(編集方法)) {
+                連番付加 = true;
+                continue;
+            }
+            if (CSVSettings.日付スラッシュ編集.getコード().equals(編集方法)) {
+                日付編集 = true;
+            }
+        }
+        FlexibleDate 基準日 = FlexibleDate.EMPTY;
+        FlexibleDate 範囲抽出日From = FlexibleDate.EMPTY;
+        FlexibleDate 範囲抽出日To = FlexibleDate.EMPTY;
         if (div.getTxtKijunDate() != null && div.getTxtKijunDate().getValue() != null) {
-            batchParameter.setKijunni(new FlexibleDate(div.getTxtKijunDate().getValue().toDateString()));
+            基準日 = new FlexibleDate(div.getTxtKijunDate().getValue().toDateString());
         }
         boolean 基準日時点の受給者を除く = false;
         if (div.getChkKijunDateNozoku().isAllSelected()) {
             基準日時点の受給者を除く = true;
         }
-        batchParameter.setKijunNichijiJukyusha(基準日時点の受給者を除く);
-        batchParameter.setRangeChushutsuhiKubun(div.getRadHani().getSelectedKey());
         if (div.getTxtChushutsuHani() != null) {
             if (div.getTxtChushutsuHani().getFromValue() != null) {
-                batchParameter.setRangeChushutsuhiFrom(new FlexibleDate(div.getTxtChushutsuHani().getFromValue().toDateString()));
+                範囲抽出日From = new FlexibleDate(div.getTxtChushutsuHani().getFromValue().toDateString());
             }
             if (div.getTxtChushutsuHani().getToValue() != null) {
-                batchParameter.setRangeChushutsuhiTo(new FlexibleDate(div.getTxtChushutsuHani().getToValue().toDateString()));
+                範囲抽出日To = new FlexibleDate(div.getTxtChushutsuHani().getToValue().toDateString());
             }
         }
-        batchParameter.setHiHokenshaJyoho(div.getChkHihokenshaJoho().getSelectedKeys());
-        batchParameter.setShikakuChushutsuKubun(div.getRadChushutsuKijun().getSelectedKey());
-        batchParameter.setShutokujiyu(div.getChkShutokuJiyu().getSelectedKeys());
-        batchParameter.setSoshitsujiyu(div.getChkSoshitsuJiyu().getSelectedKeys());
-
-        AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
-
-        batchParameter.setPsmChushutsu_Kubun(div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード());
-        batchParameter.setPsmChushutsuAge_Start(nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢開始()));
-        batchParameter.setPsmChushutsuAge_End(nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢終了()));
-        batchParameter.setPsmSeinengappiYMD_Start(nullToEmpty(div.getCcdHanyoListAtenaSelect().get生年月日開始()));
-        batchParameter.setPsmSeinengappiYMD_End(nullToEmpty(div.getCcdHanyoListAtenaSelect().get生年月日終了()));
-        batchParameter.setPsmAgeKijunni(日期(div.getCcdHanyoListAtenaSelect().get年齢基準日()));
+        RString 市町村コード = RString.EMPTY;
+        RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
                 && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
-            batchParameter.setShichoson_Code(div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue());
-            batchParameter.setShichoson_Name(div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称());
+            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
         }
-        batchParameter.setPsmChiku_Kubun(div.getCcdHanyoListAtenaSelect().get地区().getコード());
-        batchParameter.setPsmJusho_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get住所開始()));
-        batchParameter.setPsmJusho_From_Name(宛名抽出条件.getJusho_FromMesho());
-        batchParameter.setPsmJusho_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get住所終了()));
-        batchParameter.setPsmJusho_To_Name(宛名抽出条件.getJusho_ToMesho());
-        batchParameter.setPsmGyoseiku_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get行政区開始()));
-        batchParameter.setPsmGyoseiku_From_Name(宛名抽出条件.getGyoseiku_FromMesho());
-        batchParameter.setPsmGyoseiku_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get行政区終了()));
-        batchParameter.setPsmGyoseiku_To_Name(宛名抽出条件.getGyoseiku_ToMesho());
-        batchParameter.setPsmChiku1_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区１開始()));
-        batchParameter.setPsmChiku1_From_Name(宛名抽出条件.getChiku1_FromMesho());
-        batchParameter.setPsmChiku1_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区１終了()));
-        batchParameter.setPsmChiku1_To_Name(宛名抽出条件.getChiku1_ToMesho());
-        batchParameter.setPsmChiku2_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区２開始()));
-        batchParameter.setPsmChiku2_From_Name(宛名抽出条件.getChiku2_FromMesho());
-        batchParameter.setPsmChiku2_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区２終了()));
-        batchParameter.setPsmChiku2_To_Name(宛名抽出条件.getChiku2_ToMesho());
-        batchParameter.setPsmChiku3_From(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区３開始()));
-        batchParameter.setPsmChiku3_From_Name(宛名抽出条件.getChiku3_FromMesho());
-        batchParameter.setPsmChiku3_To(nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区３終了()));
-        batchParameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
+        AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
         // TODO QA #73393 出力順ID実装方式 回復待ち  2016/01/20まで
 //        batchParameter.setPageShuturyokujun_Id(new RString(div.getCcdKogakuShutsuryokujun().get出力順ID().toString()));
         // TODO 出力項目ID
 //        batchParameter.setShutsuryokuKomuku_Id(div.getCcdKogakuShutsuryokuKomoku().get出力項目ID());
-        batchParameter.setChohyoId(new RString("DBA701001_HanyoListHihokenshaDaicho"));
+        return new HanyoListHihokenshadaichoBatchParameter(項目名付加, 連番付加, 日付編集,
+                div.getRadChushutsu().getSelectedKey(),
+                div.getRadKijunbiDate().getSelectedKey(), 基準日, 基準日時点の受給者を除く, div.getRadHani().getSelectedKey(),
+                範囲抽出日From, 範囲抽出日To, div.getChkHihokenshaJoho().getSelectedKeys(),
+                div.getRadChushutsuKijun().getSelectedKey(), div.getChkShutokuJiyu().getSelectedKeys(), div.getChkSoshitsuJiyu().getSelectedKeys(),
+                RString.EMPTY, RString.EMPTY, new RString("DBA701001_HanyoListHihokenshaDaicho"),
+                div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード(), nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢開始()),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢終了()), nullToEmpty(div.getCcdHanyoListAtenaSelect().get生年月日開始()),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get生年月日終了()), 日期(div.getCcdHanyoListAtenaSelect().get年齢基準日()),
+                市町村コード, 市町村名称, div.getCcdHanyoListAtenaSelect().get地区().getコード(),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get住所開始()), 宛名抽出条件.getJusho_FromMesho(),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get住所終了()), 宛名抽出条件.getJusho_ToMesho(),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get行政区開始()), 宛名抽出条件.getGyoseiku_FromMesho(),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get行政区終了()), 宛名抽出条件.getGyoseiku_ToMesho(),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区１開始()),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区１終了()),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区２開始()),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区２終了()),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区３開始()),
+                nullToEmpty(div.getCcdHanyoListAtenaSelect().get地区３終了()),
+                宛名抽出条件.getChiku1_FromMesho(),
+                宛名抽出条件.getChiku1_ToMesho(),
+                宛名抽出条件.getChiku2_FromMesho(),
+                宛名抽出条件.getChiku2_ToMesho(),
+                宛名抽出条件.getChiku3_FromMesho(),
+                宛名抽出条件.getChiku3_ToMesho());
     }
 
     private void 日付抽出区分が直近非活性() {

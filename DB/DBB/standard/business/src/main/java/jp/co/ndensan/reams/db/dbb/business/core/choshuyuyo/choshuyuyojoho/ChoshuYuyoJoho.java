@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 徴収猶予の情報を管理するクラスです。
+ *
+ * @reamsid_L DBB-9999-013 huangh
  */
 public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, DbT2002FukaEntity, ChoshuYuyoJoho> implements Serializable {
 

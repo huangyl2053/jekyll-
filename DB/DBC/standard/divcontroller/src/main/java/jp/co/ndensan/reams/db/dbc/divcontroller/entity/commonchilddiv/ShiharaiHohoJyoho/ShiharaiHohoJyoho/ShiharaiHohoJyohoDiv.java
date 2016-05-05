@@ -737,86 +737,6 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    /**
-     * 支払方法を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString getShiharaiHoho() {
-        return this.getRadJyryoinin().getSelectedKey();
-    }
-
-    /**
-     * 支払場所を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString getShiharaiBasho() {
-        return this.getTxtShiharaiBasho().getValue();
-    }
-
-    /**
-     * 開始日を取得します。
-     *
-     * @return RDate
-     */
-    @Override
-    public RDate getStartYMD() {
-        return this.getTxtStartYMD().getValue();
-    }
-
-    /**
-     * 終了日を取得します。
-     *
-     * @return RDate
-     */
-    @Override
-    public RDate getEndYMD() {
-        return this.getTxtEndYMD().getValue();
-    }
-
-    /**
-     * 開始時間を取得します。
-     *
-     * @return RTime
-     */
-    @Override
-    public RTime getStartHHMM() {
-        return this.getTxtStartHHMM().getValue();
-    }
-
-    /**
-     * 終了時間を取得します。
-     *
-     * @return RTime
-     */
-    @Override
-    public RTime getEndHHMM() {
-        return this.getTxtEndHHMM().getValue();
-    }
-
-    /**
-     * 口座IDを取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString getKozaNo() {
-        return this.getTxtKozaNo().getValue();
-    }
-
-    /**
-     * 契約番号を取得します。
-     *
-     * @return RString
-     */
-    @Override
-    public RString getKeiyakuNo() {
-        return this.getTxtKeiyakuNo().getValue();
-    }
-
     public static enum DisplayMode implements ICommonChildDivMode {
 
         shokai("shokai"),
@@ -932,4 +852,49 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
         return RString.EMPTY;
     }
 
+    @Override
+    public RString getShiharaiHoho() {
+        return this.getRadJyryoinin().getSelectedKey();
+    }
+
+    @Override
+    public RString getShiharaiBasho() {
+        return this.getTxtShiharaiBasho().getValue();
+    }
+
+    @Override
+    public RDate getStartYMD() {
+        return this.getTxtStartYMD().getValue();
+    }
+
+    @Override
+    public RDate getEndYMD() {
+        return this.getTxtEndYMD().getValue();
+    }
+
+    @Override
+    public RTime getStartHHMM() {
+        return this.getTxtStartHHMM().getValue();
+    }
+
+    @Override
+    public RTime getEndHHMM() {
+        return this.getTxtEndHHMM().getValue();
+    }
+
+    @Override
+    public RString getKozaNo() {
+        return this.getTxtKozaNo().getValue();
+    }
+
+    @Override
+    public RString getKeiyakuNo() {
+        return this.getTxtKeiyakuNo().getValue();
+    }
+
+    @Override
+    public RString getKozaID() {
+        RString kozaID = this.getDdlKozaID().getSelectedValue();
+        return kozaID == null ? RString.EMPTY : kozaID;
+    }
 }
