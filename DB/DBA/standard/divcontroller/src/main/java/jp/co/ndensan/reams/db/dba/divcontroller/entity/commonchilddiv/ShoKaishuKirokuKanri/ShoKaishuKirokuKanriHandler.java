@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * 証交付回収情報の取得するクラスです。
  *
- * @reamsid_L DBA-1070-020 lizhuoxuan
+ * @reamsid_L DBA-1070-010 lizhuoxuan
  */
 public class ShoKaishuKirokuKanriHandler {
 

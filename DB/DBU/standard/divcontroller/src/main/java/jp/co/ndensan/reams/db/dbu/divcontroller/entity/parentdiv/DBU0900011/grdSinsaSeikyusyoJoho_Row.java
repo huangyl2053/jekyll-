@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * grdSinsaSeikyusyoJoho_Row のクラスファイル
  *
- * @reamsid_L DBU-1080-070 lizhuoxuan
+ * @reamsid_L DBU-1080-050 lizhuoxuan
  */
 public class grdSinsaSeikyusyoJoho_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">

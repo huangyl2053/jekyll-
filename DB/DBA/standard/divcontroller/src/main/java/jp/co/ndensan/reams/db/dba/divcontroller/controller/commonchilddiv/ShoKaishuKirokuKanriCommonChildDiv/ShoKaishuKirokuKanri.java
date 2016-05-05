@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 証回収記録管理のクラス。
  *
- * @reamsid_L DBA-1070-020 lizhuoxuan
+ * @reamsid_L DBA-1070-010 lizhuoxuan
  */
 public class ShoKaishuKirokuKanri {
 
