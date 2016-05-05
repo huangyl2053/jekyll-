@@ -108,13 +108,13 @@ public class SetaiinShotokuJohoFinder {
                     被保険者台帳 != null ? 被保険者台帳.get被保険者番号() : new HihokenshaNo(RString.EMPTY),
                     世帯員.get識別対象().get名称().getName().value(),
                     世帯員.get識別対象().get名称().getKana().value(),
-                    世帯員.get識別対象().to個人().get生年月日().toFlexibleDate(),
-                    世帯員.get識別対象().to個人().get性別().getCode(),
-                    世帯員.get識別対象().to個人().get性別().getCommonName(),
-                    世帯員.get識別対象().to個人().get続柄コードリスト().toRString(),
-                    世帯員.get識別対象().to個人().get続柄(),
-                    世帯員.get識別対象().to個人().get住民状態().コード(),
-                    世帯員.get識別対象().to個人().get住民状態().住民状態略称(),
+                    世帯員.get生年月日(),
+                    世帯員.get性別().getCode(),
+                    世帯員.get性別().getCommonName(),
+                    世帯員.get続柄コード(),
+                    世帯員.get続柄(),
+                    世帯員.get住民状態().コード(),
+                    世帯員.get住民状態().住民状態略称(),
                     介護所得 != null ? 介護所得.get課税区分_住民税減免前() : RString.EMPTY,
                     介護所得 != null ? 介護所得.get課税区分_住民税減免後() : RString.EMPTY,
                     介護所得 != null ? 介護所得.get激変緩和措置() : RString.EMPTY,
@@ -126,12 +126,12 @@ public class SetaiinShotokuJohoFinder {
                     介護所得 != null ? new FlexibleDate(介護所得.get更正日().toDateString()) : new FlexibleDate(RString.EMPTY),
                     false,
                     世帯員.get識別対象().get異動年月日(),
-                    世帯員.get識別対象().to個人().get住定異動年月日(),
+                    世帯員.get住定異動年月日(),
                     世帯員.get識別対象().get異動事由().get異動事由コード(),
                     世帯員.get識別対象().get異動事由().get異動事由正式名称(),
-                    世帯員.get識別対象().to個人().to住基個人().get住民票表示順(),
+                    世帯員.get住民票表示順(),
                     世帯員.get本人区分(),
-                    世帯員.get識別対象().to個人().get世帯コード().value()));
+                    世帯員.get世帯コード().value()));
         }
         return 世帯員所得情報リスト;
     }
@@ -165,13 +165,13 @@ public class SetaiinShotokuJohoFinder {
                     被保険者台帳 != null ? 被保険者台帳.get被保険者番号() : new HihokenshaNo(RString.EMPTY),
                     世帯員所得.get識別対象().get名称().getName().value(),
                     世帯員所得.get識別対象().get名称().getKana().value(),
-                    世帯員所得.get識別対象().to個人().get生年月日().toFlexibleDate(),
-                    世帯員所得.get識別対象().to個人().get性別().getCode(),
-                    世帯員所得.get識別対象().to個人().get性別().getCommonName(),
-                    世帯員所得.get識別対象().to個人().get続柄コードリスト().toRString(),
-                    世帯員所得.get識別対象().to個人().get続柄(),
-                    世帯員所得.get識別対象().to個人().get住民状態().コード(),
-                    世帯員所得.get識別対象().to個人().get住民状態().住民状態略称(),
+                    世帯員所得.get生年月日(),
+                    世帯員所得.get性別().getCode(),
+                    世帯員所得.get性別().getCommonName(),
+                    世帯員所得.get続柄コード(),
+                    世帯員所得.get続柄(),
+                    世帯員所得.get住民状態().コード(),
+                    世帯員所得.get住民状態().住民状態略称(),
                     介護所得 != null ? 介護所得.get課税区分_住民税減免前() : RString.EMPTY,
                     介護所得 != null ? 介護所得.get課税区分_住民税減免後() : RString.EMPTY,
                     介護所得 != null ? 介護所得.get激変緩和措置() : RString.EMPTY,
@@ -183,12 +183,12 @@ public class SetaiinShotokuJohoFinder {
                     介護所得 != null ? new FlexibleDate(介護所得.get更正日().toDateString()) : new FlexibleDate(RString.EMPTY),
                     false,
                     世帯員所得.get識別対象().get異動年月日(),
-                    世帯員所得.get識別対象().to個人().get住定異動年月日(),
+                    世帯員所得.get住定異動年月日(),
                     世帯員所得.get識別対象().get異動事由().get異動事由コード(),
                     世帯員所得.get識別対象().get異動事由().get異動事由正式名称(),
-                    世帯員所得.get識別対象().to個人().to住基個人().get住民票表示順(),
+                    世帯員所得.get住民票表示順(),
                     世帯員所得.get本人区分(),
-                    世帯員所得.get識別対象().to個人().get世帯コード().value()));
+                    世帯員所得.get世帯コード().value()));
         }
         return 世帯員所得情報リスト;
     }
