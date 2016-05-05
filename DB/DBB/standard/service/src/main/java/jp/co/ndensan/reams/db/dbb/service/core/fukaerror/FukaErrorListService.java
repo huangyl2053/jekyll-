@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 賦課エラー一覧を管理するクラスです。
  *
- * @reamsid_L DBB-0720-010 zuotao
+ * @reamsid_L DBB-0720-020 zuotao
  */
 public class FukaErrorListService {
 
