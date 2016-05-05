@@ -45,7 +45,6 @@ public class DvKogakuServiceJoho {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
-        panel.getCcdHokenshaList().loadHokenshaList();
         if (市町村セキュリティ情報 == null) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
@@ -54,6 +53,7 @@ public class DvKogakuServiceJoho {
             ViewStateHolder.put(ViewStateKeys.市町村判定, 事務広域);
             panel.getCcdHokenshaList().setDisabled(false);
             panel.getCcdHokenshaList().setVisible(true);
+            panel.getCcdHokenshaList().loadHokenshaList();
         } else {
             ViewStateHolder.put(ViewStateKeys.市町村判定, 事務単一);
             panel.getCcdHokenshaList().setDisabled(true);
