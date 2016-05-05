@@ -381,7 +381,7 @@ public class HihosyosaiHandler {
         for (Shichoson 旧保険者 : 旧保険者情報) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(旧保険者.get旧市町村コード().getColumnValue());
-            keyValue.setValue(旧保険者.get旧市町村名称());
+            keyValue.setValue(new RString(旧保険者.get旧市町村コード().getColumnValue() + " " + 旧保険者.get旧市町村名称()));
             keyValueList.add(keyValue);
         }
         return keyValueList;
