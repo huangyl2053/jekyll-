@@ -46,6 +46,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006");
     private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007");
     private static final RString FIRSTREQUEST以外 = new RString("2");
+    public static final int FIRSTINDEX = 0;
     private static final RString 修正 = new RString("修正");
     private final RString 表示モード = new RString("HihokenrirekiNashiMode");
 
@@ -91,8 +92,12 @@ public class ShikakuSoshitsuIdoTotalHandler {
             状態_被保履歴タブ = new RString("2");
             ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, 状態_被保履歴タブ);
         }
-        setDdlShikakuSoshitsuJiyu();
-        資格喪失情報パネルの初期化();
+        資格喪失情報状態の設定(資格喪失情報パネル初期のチェック());
+        if (資格喪失情報パネル初期のチェック()) {
+            資格喪失情報パネルの活性初期化();
+        } else {
+            資格喪失情報パネルの非活性初期化();
+        }
     }
 
     /**
@@ -197,13 +202,61 @@ public class ShikakuSoshitsuIdoTotalHandler {
     }
 
     /**
-     * 資格喪失情報パネルの初期化
+     * 資格喪失情報パネル初期のチェック １、最新被保履歴に資格喪失情報があるの場合：false ２、最新被保履歴に資格喪失情報がなしの場合：true
+     *
+     * @return boolean
      */
-    public void 資格喪失情報パネルの初期化() {
+    public boolean 資格喪失情報パネル初期のチェック() {
+        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridDataSource();
+        if (rowList.isEmpty()) {
+            return false;
+        }
+        dgShikakuShutokuRireki_Row row = rowList.get(0);
+        return (row.getSoshitsuDate().getValue().isEmpty()
+                && row.getSoshitsuTodokedeDate().getValue().isEmpty()
+                && RString.isNullOrEmpty(row.getSoshitsuJiyu())
+                && RString.isNullOrEmpty(row.getSoshitsuJiyuKey()));
+    }
+
+    /**
+     * 資格喪失情報状態の設定
+     *
+     * @param 状態フラグ 状態フラグ
+     */
+    public void 資格喪失情報状態の設定(boolean 状態フラグ) {
+        List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
+                .getCcdShikakuTokusoRireki().getDataGridDataSource();
+        if (rowList.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < rowList.size(); i++) {
+            rowList.get(i).setModifyButtonState(DataGridButtonState.Disabled);
+            if (状態フラグ && i == FIRSTINDEX) {
+                rowList.get(i).setModifyButtonState(DataGridButtonState.Enabled);
+            }
+        }
+    }
+
+    /**
+     * 資格喪失情報パネルの非活性初期化
+     */
+    public void 資格喪失情報パネルの非活性初期化() {
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタンの表示状態(true);
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate().clearValue();
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().clearValue();
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setReadOnly(true);
+        setDdlShikakuSoshitsuJiyu();
+    }
+
+    /**
+     * 資格喪失情報パネルの活性初期化
+     */
+    public void 資格喪失情報パネルの活性初期化() {
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタンの表示状態(true);
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate().clearValue();
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuTodokedeDate().clearValue();
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setReadOnly(false);
         setDdlShikakuSoshitsuJiyu();
     }
 
