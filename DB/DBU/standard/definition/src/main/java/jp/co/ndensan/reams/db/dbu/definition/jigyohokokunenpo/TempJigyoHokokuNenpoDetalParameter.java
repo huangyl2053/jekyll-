@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 修正データを格納のパラメタークラスです。
  *
+ * @reamsid_L DBU-1060-020 wangkun
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
