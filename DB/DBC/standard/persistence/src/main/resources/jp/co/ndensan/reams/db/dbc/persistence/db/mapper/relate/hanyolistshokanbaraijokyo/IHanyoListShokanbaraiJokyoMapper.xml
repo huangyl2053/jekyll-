@@ -171,7 +171,7 @@
         </if>
         <if test="金融機関コード != null">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{金融機関コード}
-        </if>-->
+        </if>
         <if test="処理状況 == 1">
             AND DbT3034."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[<>]]> ''
             AND DbT3034."dbT3034ShokanShinsei_shinseiYMD" IS NOT NULL

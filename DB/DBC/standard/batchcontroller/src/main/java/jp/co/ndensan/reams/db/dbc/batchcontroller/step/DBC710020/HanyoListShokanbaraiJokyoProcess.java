@@ -304,6 +304,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス提供年月);
         RString serviceTeikyoYM = RString.EMPTY;
+        if (parameter.getサービス提供年月From() == null && parameter.getサービス提供年月To() == null) {
+            return builder;
+        }
         if (parameter.getサービス提供年月From() != null && parameter.getサービス提供年月To() != null) {
             serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
                     .concat(ITEM)
@@ -322,6 +325,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(申請日);
         RString shinseiYMD = RString.EMPTY;
+        if (parameter.get申請日From() == null && parameter.get申請日To() == null) {
+            return builder;
+        }
         if (parameter.get申請日From() != null && parameter.get申請日To() != null) {
             shinseiYMD = dataToRString(parameter.get申請日From())
                     .concat(ITEM)
@@ -340,6 +346,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(住宅改修支給届出日);
         RString kaishuYM = RString.EMPTY;
+        if (parameter.get住宅改修支給届出日From() == null && parameter.get住宅改修支給届出日From() == null) {
+            return builder;
+        }
         if (parameter.get住宅改修支給届出日From() != null && parameter.get住宅改修支給届出日To() != null) {
             kaishuYM = dataToRString(parameter.get住宅改修支給届出日From())
                     .concat(ITEM)
@@ -358,6 +367,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(決定日);
         RString ketteiYMD = RString.EMPTY;
+        if (parameter.get決定日From() == null && parameter.get決定日To() == null) {
+            return builder;
+        }
         if (parameter.get決定日From() != null && parameter.get決定日To() != null) {
             ketteiYMD = dataToRString(parameter.get決定日From())
                     .concat(ITEM)
@@ -376,6 +388,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(国保連送付年月);
         RString kokuhorenYM = RString.EMPTY;
+        if (parameter.get国保連送付年月From() == null && parameter.get国保連送付年月To() == null) {
+            return builder;
+        }
         if (parameter.get国保連送付年月From() != null && parameter.get国保連送付年月To() != null) {
             kokuhorenYM = monthToRString(parameter.get国保連送付年月From())
                     .concat(ITEM)
