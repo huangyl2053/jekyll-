@@ -527,10 +527,12 @@ public class HanyoListCsvDataCreate {
         RStringBuilder builder = new RStringBuilder();
         List<DbT3038ShokanKihonEntity> 請求基本List = entity.get請求基本List();
         if (請求基本List != null && !請求基本List.isEmpty()) {
-            for (int i = 1; i < 請求基本List.size(); i++) {
+            for (int i = 1; i <= 請求基本List.size(); i++) {
                 builder.append(請求基本List.get(i - 1));
-                if (builder.toRString().length() + 1 + 請求基本List.get(i).getYoshikiNo().length() >= INDEX_13) {
+                if (i != 請求基本List.size() && builder.toRString().length() + 1 + 請求基本List.get(i).getYoshikiNo().length() >= INDEX_13) {
                     builder.append(RString.FULL_SPACE).append(そう);
+                    break;
+                } else if (i == 請求基本List.size()) {
                     break;
                 } else {
                     builder.append(RString.FULL_SPACE);

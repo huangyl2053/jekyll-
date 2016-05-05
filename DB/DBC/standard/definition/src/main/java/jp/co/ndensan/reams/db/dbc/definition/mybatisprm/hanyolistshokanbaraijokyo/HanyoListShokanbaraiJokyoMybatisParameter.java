@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistshokanbaraijokyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -24,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListShokanbaraiJokyoMybatisParameter extends UaFt200FindShikibetsuTaishoParam
+public class HanyoListShokanbaraiJokyoMybatisParameter extends KozaSearchParameter
         implements IMyBatisParameter {
 
     private final RString 保険者コード;
@@ -56,7 +57,8 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends UaFt200FindShikib
     /**
      * コンストラクタです
      *
-     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
+     * @param searchkey KozaSearchParameter
+     * @param list List<KamokuCode>
      * @param 保険者コード RString
      * @param 保険者名 RString
      * @param サービス提供年月From FlexibleYearMonth
@@ -84,7 +86,8 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends UaFt200FindShikib
      * @param 帳票ID ReportId
      */
     public HanyoListShokanbaraiJokyoMybatisParameter(
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件,
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list,
             RString 保険者コード,
             RString 保険者名,
             FlexibleYearMonth サービス提供年月From,
@@ -111,7 +114,7 @@ public class HanyoListShokanbaraiJokyoMybatisParameter extends UaFt200FindShikib
             RString 出力項目,
             ReportId 帳票ID
     ) {
-        super(宛名検索条件);
+        super(searchkey, list);
         this.保険者コード = 保険者コード;
         this.保険者名 = 保険者名;
         this.サービス提供年月From = サービス提供年月From;

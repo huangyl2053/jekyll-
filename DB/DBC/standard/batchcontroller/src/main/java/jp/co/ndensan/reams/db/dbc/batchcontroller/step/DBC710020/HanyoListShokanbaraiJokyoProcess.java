@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710020;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
@@ -19,15 +19,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -58,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト出力(償還払い状況)Process
@@ -125,11 +127,14 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.住登外優先);
-        builder.setデータ取得区分(DataShutokuKubun.直近レコード);
-        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        parameter.set宛名検索条件(searchKey);
+        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
+        builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        builder.set業務コード(GyomuCode.DB介護保険);
+        IKozaSearchKey searchKey = builder.build();
+        parameter.setSearchkey(searchKey);
+        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
+        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        parameter.setList(list);
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
 
@@ -265,20 +270,16 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RString shoriJokyo = RString.EMPTY;
         if (ShoriJokyo.すべて.getコード().equals(parameter.get処理状況())) {
             shoriJokyo = ShoriJokyo.すべて.get名称();
-        } else if (ShoriJokyo.国保連決定取込済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.国保連決定取込済み.get名称();
-        } else if (ShoriJokyo.国保連結果送付済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.国保連結果送付済み.get名称();
-        } else if (ShoriJokyo.通知書発行済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.通知書発行済み.get名称();
-        } else if (ShoriJokyo.振込明細発行済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.振込明細発行済み.get名称();
-        } else if (ShoriJokyo.申請入力のみ.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.申請入力のみ.get名称();
-        } else if (ShoriJokyo.支給不支給決定済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.支給不支給決定済み.get名称();
-        } else if (ShoriJokyo.対象者で申請なし.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.支給不支給決定済み.get名称();
+        } else if (ShoriJokyo.不給不支給決定済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.不給不支給決定済.get名称();
+        } else if (ShoriJokyo.国保連送付済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.国保連送付済.get名称();
+        } else if (ShoriJokyo.振込明細発行済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.振込明細発行済.get名称();
+        } else if (ShoriJokyo.申請入力.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.申請入力.get名称();
+        } else if (ShoriJokyo.通知書発行済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.通知書発行済.get名称();
         }
         builder.append(shoriJokyo);
         return builder;
@@ -288,11 +289,11 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(決定状況);
         RString ketteiJokyo = RString.EMPTY;
-        if (KetteiJokyo.支給区分の判定を行わない.getコード().equals(parameter.get処理状況())) {
+        if (KetteiJokyo.支給区分の判定を行わない.getコード().equals(parameter.get決定情報())) {
             ketteiJokyo = KetteiJokyo.支給区分の判定を行わない.get名称();
-        } else if (KetteiJokyo.不支給決定されたデータのみ抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (KetteiJokyo.不支給決定されたデータのみ抽出.getコード().equals(parameter.get決定情報())) {
             ketteiJokyo = KetteiJokyo.不支給決定されたデータのみ抽出.get名称();
-        } else if (KetteiJokyo.支給決定されたデータのみ抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (KetteiJokyo.支給決定されたデータのみ抽出.getコード().equals(parameter.get決定情報())) {
             ketteiJokyo = KetteiJokyo.支給決定されたデータのみ抽出.get名称();
         }
         builder.append(ketteiJokyo);
@@ -303,11 +304,11 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(支払方法);
         RString shiharaiHoho = RString.EMPTY;
-        if (ShiharaiHoho.支払方法の判定を行わない.getコード().equals(parameter.get処理状況())) {
+        if (ShiharaiHoho.支払方法の判定を行わない.getコード().equals(parameter.get支払方法())) {
             shiharaiHoho = ShiharaiHoho.支払方法の判定を行わない.get名称();
-        } else if (ShiharaiHoho.窓口払いのデータを抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (ShiharaiHoho.窓口払いのデータを抽出.getコード().equals(parameter.get支払方法())) {
             shiharaiHoho = ShiharaiHoho.窓口払いのデータを抽出.get名称();
-        } else if (ShiharaiHoho.金融機関への振込データを抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (ShiharaiHoho.金融機関への振込データを抽出.getコード().equals(parameter.get支払方法())) {
             shiharaiHoho = ShiharaiHoho.金融機関への振込データを抽出.get名称();
         }
         builder.append(shiharaiHoho);
@@ -413,29 +414,31 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
             buiderList.add(builder);
             return buiderList;
         }
-
         boolean 様式番号分行 = false;
         if (CODE_1.equals(parameter.get様式番号選択())) {
             builder.append(すべて);
+            buiderList.add(builder);
         } else {
             List<RString> 様式番号list = 番号.split(EUC_WRITER_DELIMITER.toString());
-            for (int i = 1; i < 様式番号list.size(); i++) {
+            for (int i = 1; i <= 様式番号list.size(); i++) {
                 if (様式番号分行) {
                     builder = new RStringBuilder();
                     builder.append(RString.FULL_SPACE).append(RString.FULL_SPACE).append(RString.FULL_SPACE)
                             .append(RString.FULL_SPACE).append(RString.FULL_SPACE);
                 }
                 builder.append(様式番号list.get(i - 1));
-                if (builder.toRString().length() + 1 + 様式番号list.get(i).length() < INDEX_15) {
-                    builder.append(RString.FULL_SPACE);
+                if (i != 様式番号list.size() && builder.toRString().length() + 1 + 様式番号list.get(i).length() < INDEX_15) {
+                    builder.append(EUC_WRITER_DELIMITER);
                     getLast様式番号(builder, i, 様式番号list, buiderList);
                     様式番号分行 = false;
+                } else if (i == 様式番号list.size()) {
+                    buiderList.add(builder);
+                    break;
                 } else {
                     buiderList.add(builder);
                     様式番号分行 = true;
                 }
             }
-
         }
         return buiderList;
     }

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -99,7 +98,6 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
     private RString 出力項目;
     @BatchParameter(key = REPORTID, name = "帳票ID")
     private ReportId 帳票ID;
-    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
 
     /**
      * mybatisのパラメータを生成します。
@@ -108,7 +106,8 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
      */
     public HanyoListShokanbaraiJokyoProcessParameter toProcessParam() {
         return new HanyoListShokanbaraiJokyoProcessParameter(
-                宛名検索条件,
+                null,
+                null,
                 保険者コード,
                 保険者名,
                 サービス提供年月From,

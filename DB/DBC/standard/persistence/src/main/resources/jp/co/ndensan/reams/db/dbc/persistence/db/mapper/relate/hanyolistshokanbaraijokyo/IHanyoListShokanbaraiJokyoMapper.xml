@@ -66,6 +66,7 @@
         DbT3038.*,
         DbT3048.*,
         DbT3049.*,
+        koza.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From 
@@ -96,9 +97,9 @@
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3049."dbT3049ShokanJutakuKaishu_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3049."dbT3049ShokanJutakuKaishu_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3049."dbT3049ShokanJutakuKaishu_seiriNo"
-<!--        LEFT OUTER JOIN 
+        LEFT OUTER JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
-        ON DbT3034."dbT3034ShokanShinsei_kozaID" = koza."kozaId"-->
+        ON DbT3034."dbT3034ShokanShinsei_kozaID" = koza."uaT0310Koza_kozaId"
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" As DbV1001
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN rgdb."DbV1004HihokenshaShisetsuNyutaisho" As DbV1004
@@ -122,7 +123,9 @@
         AND DbT4001."edaban" = DbV4001."edaban"
         AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
         INNER JOIN 
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
+        '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
@@ -166,8 +169,8 @@
         <if test="支払方法 == 2">
             AND DbT3034."dbT3034ShokanShinsei_shiharaiHohoKubunCode" = '2'
         </if>
-<!--        <if test="金融機関コード != null">
-            AND koza."kinyuKikanCode" = #{金融機関コード}
+        <if test="金融機関コード != null">
+            AND koza."uaT0310Koza_kinyuKikanCode" = #{金融機関コード}
         </if>-->
         <if test="処理状況 == 1">
             AND DbT3034."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[<>]]> ''
@@ -273,8 +276,8 @@
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.ResultMap_DbT3048ShokanFukushiYoguHanbaihiEntity"/>
         <association property="請求住宅Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.ResultMap_DbT3049ShokanJutakuKaishuEntity"/>
-<!--        <association property="口座情報Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>-->
+        <association property="口座情報Entity"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
         <association property="宛名Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity" 
