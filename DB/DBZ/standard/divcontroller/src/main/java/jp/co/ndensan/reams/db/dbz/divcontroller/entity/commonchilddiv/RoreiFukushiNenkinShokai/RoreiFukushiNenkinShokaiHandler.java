@@ -82,6 +82,7 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金追加ボタン画面表示() {
+        div.getPanelInput().setDisabled(false);
         div.getPanelInput().getBtnCancel().setDisabled(false);
         div.getPanelInput().getBtnSave().setDisabled(false);
         div.getPanelInput().getTxtStartDate().setDisabled(false);
@@ -97,6 +98,7 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金修正ボタン画面表示() {
+        div.getPanelInput().setDisabled(false);
         div.getPanelInput().getTxtEndDate().setDisabled(false);
         div.getPanelInput().getTxtStartDate().setDisabled(true);
         div.getPanelInput().getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
@@ -112,6 +114,7 @@ public class RoreiFukushiNenkinShokaiHandler {
      *
      */
     public void set老齢福祉年金削除ボタン画面表示() {
+        div.getPanelInput().setDisabled(false);
         div.getPanelInput().getTxtStartDate().setValue(div.getDatagridRireki().getClickedItem().getStartDate().getValue());
         div.getPanelInput().getTxtEndDate().setValue(div.getDatagridRireki().getClickedItem().getEndDate().getValue());
         div.getPanelInput().setDisplayNone(false);
@@ -265,10 +268,13 @@ public class RoreiFukushiNenkinShokaiHandler {
         list = getSeiReKi(list);
         Collections.sort(list, new ComparatorByStartDateSort());
         for (int i = 0; i < list.size() - 1; i++) {
-            if (!list.get(i).getEndDate().getValue()
-                    .isBefore(list.get(i + 1).getStartDate().getValue())) {
+            RDate date = RDate.MAX;
+            if (list.get(i).getEndDate().getValue() != null) {
+                date = list.get(i).getEndDate().getValue();
+            }
+            if (!date.isBefore(list.get(i + 1).getStartDate().getValue())) {
                 addMessage(validPairs,
-                        list.get(i).getEndDate().getValue().toString(),
+                        date.toString(),
                         list.get(i + 1).getStartDate().getValue().toString());
             }
         }
