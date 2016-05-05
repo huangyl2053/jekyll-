@@ -17,9 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -27,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳管理Aliveのデータアクセスクラスです。
+ *
+ * @reamsid_L DBA-1300-030 lishengli
  */
 public class DbV1001HihokenshaDaichoAliveDac {
 
@@ -106,8 +106,6 @@ public class DbV1001HihokenshaDaichoAliveDac {
         return accessor.select().
                 table(DbV1001HihokenshaDaicho.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
-                order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC))
-                .limit(1).
                 toObject(DbV1001HihokenshaDaichoEntity.class);
     }
 }

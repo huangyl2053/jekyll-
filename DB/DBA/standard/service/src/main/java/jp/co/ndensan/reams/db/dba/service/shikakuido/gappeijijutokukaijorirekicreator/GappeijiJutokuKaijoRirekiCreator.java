@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -164,18 +163,49 @@ public class GappeijiJutokuKaijoRirekiCreator {
         List<HihokenshaDaicho> hihokenshaDaichoList = new ArrayList<>();
         DbV1001HihokenshaDaichoEntity entity = dac.get最新の被保険者台帳情報(被保険者番号);
         if (entity == null) {
-            //TODO UrErrorMessages.不正
-            throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+            throw new IllegalArgumentException();
         }
         if (フラグ.equals(entity.getKoikinaiJushochiTokureiFlag())) {
-            //TODO HihokenshaDaicho 被保険者台帳履歴
-            hihokenshaDaichoList.addAll(release広域内住所地特例By広域内合併(null, 合併日, 名寄せ識別コード, 名寄せ市町村コード));
+            hihokenshaDaichoList.addAll(release広域内住所地特例By広域内合併(
+                    get被保険者台帳履歴(entity), 合併日, 名寄せ識別コード, 名寄せ市町村コード));
         } else if (フラグ.equals(entity.getJushochiTokureiFlag())) {
-            //TODO HihokenshaDaicho 被保険者台帳履歴
-            hihokenshaDaichoList.addAll(release住所地特例By単一合併(null, 合併日, 名寄せ識別コード, 名寄せ市町村コード));
+            hihokenshaDaichoList.addAll(release住所地特例By単一合併(get被保険者台帳履歴(entity), 合併日, 名寄せ識別コード, 名寄せ市町村コード));
         } else {
-            throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+            throw new IllegalArgumentException();
         }
         return hihokenshaDaichoList;
+    }
+
+    private HihokenshaDaicho get被保険者台帳履歴(DbV1001HihokenshaDaichoEntity entity) {
+        DbT1001HihokenshaDaichoEntity dbT1001Entity = new DbT1001HihokenshaDaichoEntity();
+        dbT1001Entity.setHihokenshaNo(entity.getHihokenshaNo());
+        dbT1001Entity.setIdoYMD(entity.getIdoYMD());
+        dbT1001Entity.setEdaNo(entity.getEdaNo());
+        dbT1001Entity.setIdoJiyuCode(entity.getIdoJiyuCode());
+        dbT1001Entity.setShichosonCode(entity.getShichosonCode());
+        dbT1001Entity.setShikibetsuCode(entity.getShikibetsuCode());
+        dbT1001Entity.setShikakuShutokuJiyuCode(entity.getShikakuShutokuJiyuCode());
+        dbT1001Entity.setShikakuShutokuYMD(entity.getShikakuShutokuYMD());
+        dbT1001Entity.setShikakuShutokuTodokedeYMD(entity.getShikakuShutokuTodokedeYMD());
+        dbT1001Entity.setIchigoShikakuShutokuYMD(entity.getIchigoShikakuShutokuYMD());
+        dbT1001Entity.setHihokennshaKubunCode(entity.getHihokennshaKubunCode());
+        dbT1001Entity.setShikakuSoshitsuJiyuCode(entity.getShikakuSoshitsuJiyuCode());
+        dbT1001Entity.setShikakuSoshitsuYMD(entity.getShikakuSoshitsuYMD());
+        dbT1001Entity.setShikakuSoshitsuTodokedeYMD(entity.getShikakuSoshitsuTodokedeYMD());
+        dbT1001Entity.setShikakuHenkoJiyuCode(entity.getShikakuHenkoJiyuCode());
+        dbT1001Entity.setShikakuHenkoYMD(entity.getShikakuHenkoYMD());
+        dbT1001Entity.setShikakuHenkoTodokedeYMD(entity.getShikakuHenkoTodokedeYMD());
+        dbT1001Entity.setJushochitokureiTekiyoJiyuCode(entity.getJushochitokureiTekiyoJiyuCode());
+        dbT1001Entity.setJushochitokureiTekiyoYMD(entity.getJushochitokureiTekiyoYMD());
+        dbT1001Entity.setJushochitokureiTekiyoTodokedeYMD(entity.getJushochitokureiTekiyoTodokedeYMD());
+        dbT1001Entity.setJushochitokureiKaijoJiyuCode(entity.getJushochitokureiKaijoJiyuCode());
+        dbT1001Entity.setJushochitokureiKaijoYMD(entity.getJushochitokureiKaijoYMD());
+        dbT1001Entity.setJushochitokureiKaijoTodokedeYMD(entity.getJushochitokureiKaijoTodokedeYMD());
+        dbT1001Entity.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
+        dbT1001Entity.setKoikinaiJushochiTokureiFlag(entity.getKoikinaiJushochiTokureiFlag());
+        dbT1001Entity.setKoikinaiTokureiSochimotoShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCode());
+        dbT1001Entity.setKyuShichosonCode(entity.getKyuShichosonCode());
+        dbT1001Entity.setLogicalDeletedFlag(entity.getLogicalDeletedFlag());
+        return new HihokenshaDaicho(dbT1001Entity);
     }
 }
