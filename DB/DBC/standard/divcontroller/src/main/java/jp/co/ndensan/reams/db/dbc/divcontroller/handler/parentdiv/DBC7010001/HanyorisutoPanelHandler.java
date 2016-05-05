@@ -14,10 +14,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.Hany
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -50,7 +52,10 @@ public class HanyorisutoPanelHandler {
     public void initialize(HanyorisutoPanelDiv div) {
         ShichosonSecurityJoho shichosonsecurityjoho
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonsecurityjoho != null && shichosonsecurityjoho.get導入形態コード() != null
+        if (shichosonsecurityjoho == null) {
+            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
+        if (shichosonsecurityjoho.get導入形態コード() != null
                 && shichosonsecurityjoho.get導入形態コード().is広域()) {
             div.getCcdHokensya().setVisible(true);
             div.getCcdHokensya().setDisabled(false);
