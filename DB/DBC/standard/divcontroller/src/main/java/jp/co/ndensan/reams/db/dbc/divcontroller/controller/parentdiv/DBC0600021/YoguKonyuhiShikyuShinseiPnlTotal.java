@@ -502,11 +502,32 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      * @return ResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnSave(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        JigyoshaNo 事業者番号 = null;
+        RString 整理番号 = null;
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(
+                div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue().getYearMonth().toString());
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        } else {
+            整理番号 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().getValue();
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue() != null) {
+            事業者番号 = new JigyoshaNo(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());
+        }
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        List<ShokanFukushiYoguHanbaihi> list = getHandler(div).getGridData(被保険者番号, サービス提供年月, 整理番号,
+                事業者番号, 様式番号);
+        FukushiYoguKounyuhiDouituHinmokuChofukuHantei entity = new FukushiYoguKounyuhiDouituHinmokuChofukuHantei();
+        boolean flag = entity.chkHinmokuCodePerYear(被保険者番号, サービス提供年月, list, 整理番号);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return 保存処理(div);
         }
         if (!getHandler(div).is内容変更状態()) {
             return notChanges(div);
+        }
+        if (flag) {
+            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("品目コード"));
         }
         ValidationMessageControlPairs validPairs;
         if (!ResponseHolder.isWarningIgnoredRequest() && !保存確認.equals(div.getCheckflag())) {
@@ -519,7 +540,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return 保存処理(div);
-
     }
 
     /**
@@ -762,11 +782,13 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnCheckGendogaku(
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         JigyoshaNo 事業者番号 = null;
+        RString 整理番号 = null;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        RString 整理番号 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().getValue();
-        if (整理番号.isEmpty()) {
-            整理番号 = null;
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        } else {
+            整理番号 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().getValue();
         }
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue() != null) {
             事業者番号 = new JigyoshaNo(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());
