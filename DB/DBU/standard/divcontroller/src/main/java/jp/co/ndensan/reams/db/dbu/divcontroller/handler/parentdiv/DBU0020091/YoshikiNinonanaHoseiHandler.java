@@ -251,11 +251,45 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     /**
+     * 引き継ぎデータより、データ削除する。
+     *
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 様式種類 RString
+     * @return boolean DB操作結果
+     */
+    public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
+        if (様式種類.equalsIgnoreCase(様式種類_039)
+                || 様式種類.equalsIgnoreCase(様式種類_139)
+                || 様式種類.equalsIgnoreCase(様式種類_239)) {
+            int row = deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0701);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0702);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0703);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0704);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0705);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0706);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0707);
+            return 0 < row;
+        } else {
+            int row = deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0801);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0802);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0803);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0804);
+            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0805);
+            return 0 < row;
+        }
+    }
+
+    /**
      * 削除のメソッドます。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 表番号 Code
+     * @param 集計番号 Code
+     * @return 削除件数
      */
-    public void deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
+            Code 表番号,
+            Code 集計番号) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
         JigyoHokokuGeppoDetalSearchParameter parameter
                 = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
@@ -265,9 +299,9 @@ public class YoshikiNinonanaHoseiHandler {
                         引き継ぎデータ.get行集計対象月(),
                         引き継ぎデータ.get行統計対象区分(),
                         new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        new Code(引き継ぎデータ.get行集計番号()));
-        finder.deleteJigyoHokokuGeppoData(parameter);
+                        表番号,
+                        集計番号);
+        return finder.deleteJigyoHokokuGeppoData(parameter);
     }
 
     /**

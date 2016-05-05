@@ -36,6 +36,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
     private final RString shinseiKubun;
     private final RString shiharaiSaki;
     private final RString kiyuKikanCode;
+    private final RString kiyuKikanName;
     private final FlexibleDate shisehiFrom;
     private final FlexibleDate shisehiTo;
     private final FlexibleDate hokemonoKeteihiFrom;
@@ -53,6 +54,8 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
     private final boolean tomokumeFuka;
     private final boolean rebanFuka;
     private final boolean hizukeHeshu;
+    private final RString 国保連IFなし区分;
+    private final RString 事業高額分;
 
     /**
      * コンストラクタです。
@@ -70,6 +73,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
      * @param shinseiKubun shinseiKubun
      * @param shiharaiSaki shiharaiSaki
      * @param kiyuKikanCode kiyuKikanCode
+     * @param kiyuKikanName kiyuKikanName
      * @param shisehiFrom shisehiFrom
      * @param shisehiTo shisehiTo
      * @param hokemonoKeteihiFrom hokemonoKeteihiFrom
@@ -87,6 +91,8 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
      * @param tomokumeFuka tomokumeFuka
      * @param rebanFuka rebanFuka
      * @param hizukeHeshu hizukeHeshu
+     * @param 国保連IFなし区分 RString
+     * @param 事業高額分 RString
      */
     public HanyoListKogakuKaigoMybatisParameter(
             IShikibetsuTaishoPSMSearchKey 宛名検索条件,
@@ -102,6 +108,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
             RString shinseiKubun,
             RString shiharaiSaki,
             RString kiyuKikanCode,
+            RString kiyuKikanName,
             FlexibleDate shisehiFrom,
             FlexibleDate shisehiTo,
             FlexibleDate hokemonoKeteihiFrom,
@@ -118,7 +125,10 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
             RString shutsuryokuTomoku,
             boolean tomokumeFuka,
             boolean rebanFuka,
-            boolean hizukeHeshu) {
+            boolean hizukeHeshu,
+            RString 国保連IFなし区分,
+            RString 事業高額分
+    ) {
         super(宛名検索条件);
         this.kouseiShichosonCode = kouseiShichosonCode;
         this.serviceYmFrom = serviceYmFrom;
@@ -132,6 +142,7 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
         this.shinseiKubun = shinseiKubun;
         this.shiharaiSaki = shiharaiSaki;
         this.kiyuKikanCode = kiyuKikanCode;
+        this.kiyuKikanName = kiyuKikanName;
         this.shisehiFrom = shisehiFrom;
         this.shisehiTo = shisehiTo;
         this.hokemonoKeteihiFrom = hokemonoKeteihiFrom;
@@ -149,6 +160,8 @@ public class HanyoListKogakuKaigoMybatisParameter extends UaFt200FindShikibetsuT
         this.tomokumeFuka = tomokumeFuka;
         this.rebanFuka = rebanFuka;
         this.hizukeHeshu = hizukeHeshu;
+        this.国保連IFなし区分 = 国保連IFなし区分;
+        this.事業高額分 = 事業高額分;
     }
 
 }

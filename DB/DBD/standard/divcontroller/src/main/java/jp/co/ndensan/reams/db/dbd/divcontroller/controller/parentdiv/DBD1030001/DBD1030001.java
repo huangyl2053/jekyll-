@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001Div;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001StateName.一覧;
+import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001StateName.世帯情報from一覧;
+import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001StateName.世帯情報from詳細;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001StateName.完了;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001StateName.詳細;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001TransitionEventName.検索処理へ;
@@ -35,6 +37,9 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class DBD1030001 {
 
+    private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
+    private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
+    private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
     private static final RString 申請メニューID = new RString("DBDMN21004");
     private static final RString KEY0 = new RString("key0");
 
@@ -51,6 +56,43 @@ public class DBD1030001 {
             return ResponseData.of(div).addMessage(message).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 社会福祉法人等利用者負担軽減申請画面を「世帯情報を表示する」を押下する。<br/>
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     */
+    public ResponseData<DBD1030001Div> onClick_btnShowSetaiJoho(DBD1030001Div div) {
+        div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisplayNone(true);
+        div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(false);
+        div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisabled(false);
+        if (一覧.getName().equals(ResponseHolder.getState())) {
+            div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setText(文字列_申請一覧を表示する);
+            return ResponseData.of(div).setState(世帯情報from一覧);
+        } else if (詳細.getName().equals(ResponseHolder.getState())) {
+            div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho()
+                    .setText(申請メニューID.equals(ResponseHolder.getMenuID()) ? 文字列_申請入力を表示する : 文字列_承認入力を表示する);
+            return ResponseData.of(div).setState(世帯情報from詳細);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 社会福祉法人等利用者負担軽減申請画面を「申請一覧を表示する」を押下する。<br/>
+     *
+     * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
+     * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
+     */
+    public ResponseData<DBD1030001Div> onClick_btnCloseSetaiJoho(DBD1030001Div div) {
+        div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisplayNone(false);
+        div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(true);
+        if (世帯情報from一覧.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(一覧);
+        } else {
+            return ResponseData.of(div).setState(詳細);
+        }
     }
 
     /**
@@ -129,8 +171,8 @@ public class DBD1030001 {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).情報エリアクリア();
             div.getDgShinseiList().setDisabled(false);
-            div.getShinseiList().setDisplayNone(false);
-            div.getShinseiDetail().setDisplayNone(true);
+            div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(false);
+            div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(true);
             return ResponseData.of(div).setState(一覧);
         } else {
             return ResponseData.of(div).respond();
@@ -219,6 +261,7 @@ public class DBD1030001 {
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
     public ResponseData<DBD1030001Div> onClick_btnToSearchResult(DBD1030001Div div) {
+        ViewStateHolder.put(DBD1030001Handler.DBD1030001ViewStateKey.申請一覧情報と状態, null);
         getHandler(div).前排他の解除();
         return ResponseData.of(div).forwardWithEventName(検索結果一覧へ).respond();
     }
@@ -262,8 +305,8 @@ public class DBD1030001 {
      * @param div {@link DBD1030001Div 社会福祉法人等利用者負担軽減申請画面Div}
      * @return 社会福祉法人等利用者負担軽減申請画面Divを持つResponseData
      */
-    public ResponseData<DBD1030001Div> onClick_onBlur(DBD1030001Div div) {
-        getHandler(div).onClick_onBlur();
+    public ResponseData<DBD1030001Div> onBlur_txtTekiyoYMD(DBD1030001Div div) {
+        getHandler(div).onBlur_txtTekiyoYMD();
         return ResponseData.of(div).respond();
     }
 

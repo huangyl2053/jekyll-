@@ -176,7 +176,7 @@ public class ShikakuSoshitsuIdoTotal {
                 .getTxtShutokuTodokedeDate().getValue());
         row.setSoshitsuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
                 .getDdlShikakuShutokuJiyu().getSelectedValue());
-        row.setShutokuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+        row.setSoshitsuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
                 .getDdlShikakuShutokuJiyu().getSelectedKey());
         row.setState(修正);
         rowlist.set(FIRSTINDEX, row);

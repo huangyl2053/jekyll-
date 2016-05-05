@@ -36,6 +36,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private RString shinseiKubun;
     private RString shiharaiSaki;
     private RString kiyuKikanCode;
+    private RString kiyuKikanName;
     private FlexibleDate shisehiFrom;
     private FlexibleDate shisehiTo;
     private FlexibleDate hokemonoKeteihiFrom;
@@ -54,6 +55,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private boolean rebanFuka;
     private boolean hizukeHeshu;
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    private RString 国保連IFなし区分;
+    private RString 事業高額分;
 
     private static final int 基準額_ONE = 15000;
     private static final int 基準額_TWO = 26400;
@@ -74,6 +77,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
      * @param shinseiKubun shinseiKubun
      * @param shiharaiSaki shiharaiSaki
      * @param kiyuKikanCode kiyuKikanCode
+     * @param kiyuKikanName kiyuKikanName
      * @param shisehiFrom shisehiFrom
      * @param shisehiTo shisehiTo
      * @param hokemonoKeteihiFrom hokemonoKeteihiFrom
@@ -105,6 +109,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             RString shinseiKubun,
             RString shiharaiSaki,
             RString kiyuKikanCode,
+            RString kiyuKikanName,
             FlexibleDate shisehiFrom,
             FlexibleDate shisehiTo,
             FlexibleDate hokemonoKeteihiFrom,
@@ -123,6 +128,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             boolean rebanFuka,
             boolean hizukeHeshu,
             IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
+
         this.kouseiShichosonCode = kouseiShichosonCode;
         this.serviceYmFrom = serviceYmFrom;
         this.serviceYmTo = serviceYmTo;
@@ -134,6 +140,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
         this.shinseiKubun = shinseiKubun;
         this.shiharaiSaki = shiharaiSaki;
         this.kiyuKikanCode = kiyuKikanCode;
+        this.kiyuKikanName = kiyuKikanName;
         this.shisehiFrom = shisehiFrom;
         this.shisehiTo = shisehiTo;
         this.hokemonoKeteihiFrom = hokemonoKeteihiFrom;
@@ -191,6 +198,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 shinseiKubun,
                 shiharaiSaki,
                 kiyuKikanCode,
+                kiyuKikanName,
                 shisehiFrom,
                 shisehiTo,
                 hokemonoKeteihiFrom,
@@ -207,6 +215,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 shutsuryokuTomoku,
                 tomokumeFuka,
                 rebanFuka,
-                hizukeHeshu);
+                hizukeHeshu,
+                国保連IFなし区分,
+                事業高額分);
     }
 }
