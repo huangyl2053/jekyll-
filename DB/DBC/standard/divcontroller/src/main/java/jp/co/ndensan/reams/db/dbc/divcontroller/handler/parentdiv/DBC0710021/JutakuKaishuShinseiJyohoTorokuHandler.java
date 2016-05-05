@@ -988,7 +988,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             RTime 支払窓口終了時間 = div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().getEndHHMM();
             支払窓口終了時間save = get支払窓口終了時間save(支払窓口終了時間);
         } else if (支払方法情報_口座.equals(支払方法区分コード)) {
-            RString 口座ID = div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().getKozaNo();
+            RString 口座ID = div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().getKozaID();
             口座IDsave = get口座IDsave(口座ID, 口座IDsave);
         } else if (支払方法情報_受領委任.equals(支払方法区分コード)) {
             受領委任契約番号 = div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().getKeiyakuNo();
@@ -1462,6 +1462,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         償還払決定情報.set証明書(div.getDdlSyomeisyo().getSelectedKey());
         償還払決定情報.set給付率(div.getTxtKyufuritsu().getValue());
         償還払決定情報.set画面モード(画面モード);
+        償還払決定情報.set保険者番号(new HokenshaNo(
+                div.getJutakuKaishuShinseiContents().getDdlHokensha().getSelectedKey()));
         ViewStateHolder.put(ViewStateKeys.検索情報キー, 償還払決定情報);
     }
 

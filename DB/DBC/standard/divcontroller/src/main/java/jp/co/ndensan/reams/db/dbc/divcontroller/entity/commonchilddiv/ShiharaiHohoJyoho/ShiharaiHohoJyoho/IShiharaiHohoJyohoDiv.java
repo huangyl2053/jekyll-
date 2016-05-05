@@ -12,68 +12,76 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
 
-    public abstract void initialize(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード, RString 状態);
+    void initialize(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード, RString 状態);
 
     /**
-     * 支払方法を取得します。
+     * 支払方法を返します。
      *
      * @return RString
      */
-    public RString getShiharaiHoho();
+    RString getShiharaiHoho();
 
     /**
-     * 支払方法を取得します。
+     * 支払方法を返します。
      *
      * @return RString
      */
-    public RString getShiharaiHohoRad();
+    RString getShiharaiHohoRad();
 
     /**
-     * 支払場所を取得します。
+     * 支払場所を返します。
      *
      * @return RString
      */
-    public RString getShiharaiBasho();
+    RString getShiharaiBasho();
 
     /**
-     * 開始日を取得します。
+     * 開始日を返します。
      *
      * @return RDate
      */
-    public RDate getStartYMD();
+    RDate getStartYMD();
 
     /**
-     * 終了日を取得します。
+     * 終了日を返します。
      *
      * @return RDate
      */
-    public RDate getEndYMD();
+    RDate getEndYMD();
 
     /**
-     * 開始時間を取得します。
+     * 開始時間を返します。
      *
      * @return RTime
      */
-    public RTime getStartHHMM();
+    RTime getStartHHMM();
 
     /**
-     * 終了時間を取得します。
+     * 終了時間を返します。
      *
      * @return RTime
      */
-    public RTime getEndHHMM();
+    RTime getEndHHMM();
 
     /**
-     * 口座IDを取得します。
+     * 口座番号を返します。
      *
      * @return RString
      */
-    public RString getKozaNo();
+    RString getKozaNo();
 
     /**
-     * 契約番号を取得します。
+     * 契約番号を返します。
      *
      * @return RString
      */
-    public RString getKeiyakuNo();
+    RString getKeiyakuNo();
+
+    /**
+     * 口座IDを返します。
+     *
+     * @return 口座ID
+     */
+    RString getKozaID();
+
 }
