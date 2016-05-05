@@ -102,6 +102,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 審査 = new RString("審査");
+    private static final RString 購入日 = new RString("購入日");
+    private static final RString 種目 = new RString("種目");
+    private static final RString 商品名 = new RString("商品名");
+    private static final RString 製造事業者 = new RString("製造事業者");
+    private static final RString 販売事業者 = new RString("販売事業者");
+    private static final RString 購入金額 = new RString("購入金額");
     private static final RString 処理モード登録 = new RString("処理モード登録");
     private static final RString 処理モード修正 = new RString("処理モード修正");
     private static final RString 処理モード削除 = new RString("処理モード削除");
@@ -963,6 +969,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         RString hinmokuCode = div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getYoguKonyuhiDetailInput().getTxtHinmokuCode().getValue();
         RString モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        入力チェック(validPairs);
         if (!処理モード登録.equals(モード) && RowState.Deleted.equals(selectRow().getRowState())) {
             return validPairs;
         }
@@ -985,6 +992,44 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                         getYoguKonyuhiDetailInput().getTxtBuyYMD().getValue().getYearMonth())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.入力値が不正_追加メッセージあり, 購入年月日.toString())));
+        }
+        return validPairs;
+    }
+
+    private ValidationMessageControlPairs 入力チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyYMD().
+                getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 購入日.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getDdlShumoku().getSelectedKey() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 種目.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtShohinName().
+                getValue() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtShohinName().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 商品名.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtSeizoJigyosha().
+                getValue() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtSeizoJigyosha().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 製造事業者.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().
+                getValue() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 販売事業者.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyAmount().
+                getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 購入金額.toString())));
         }
         return validPairs;
     }
