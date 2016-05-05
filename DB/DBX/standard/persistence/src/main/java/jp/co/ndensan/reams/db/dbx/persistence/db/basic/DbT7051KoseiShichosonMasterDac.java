@@ -205,7 +205,7 @@ public class DbT7051KoseiShichosonMasterDac {
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(and(
-                                eq(shichosonShokibetsuID, 市町村コード),
+                                eq(shichosonCode, 市町村コード),
                                 eq(gappeiKyuShichosonKubun, "0"))).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
