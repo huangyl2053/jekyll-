@@ -480,8 +480,7 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3036entity.setHiHokenshaNo(parameter.get被保険者番号());
             dbt3036entity.setServiceTeikyoYM(parameter.getサービス提供年月());
             dbt3036entity.setSeiriNo(parameter.get整理番号());
-            //TODO QA内部番号685
-            dbt3036entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("123456"));
+            dbt3036entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(parameter.get証記載保険者番号().value()));
             dbt3036entity.setKetteiYMD(parameter.get決定年月日());
             dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get支給決定区分());
             dbt3036entity.setShiharaiKingaku(parameter.get支払金額());

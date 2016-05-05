@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 実施状況統計情報の一覧データのクラスです。
+ *
+ * @reamsid_L DBE-1450-040 dongyabin
  */
 @Getter
 @Setter
