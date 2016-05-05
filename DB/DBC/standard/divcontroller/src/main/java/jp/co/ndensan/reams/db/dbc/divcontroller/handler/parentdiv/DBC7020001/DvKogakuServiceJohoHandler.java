@@ -152,13 +152,12 @@ public class DvKogakuServiceJohoHandler {
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().setDisabled(false);
         }
         if (窓口払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki()
-                .getSelectedValue())
-                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
-                .getKinyuKikanCode() == null
-                || div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode()
-                .isEmpty())
-                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関() == null)) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setVisible(true);
+                .getSelectedValue())) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関()
+                    .get金融機関コード().value().isNull();
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関()
+                    .get金融機関名称().isNull();
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().setVisible(false);
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().setDisabled(true);
         }
     }
