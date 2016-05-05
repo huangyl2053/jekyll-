@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.Shien
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -144,7 +143,7 @@ public class KaigoHokenShikakushasho {
         dataEntity.setBirthYMD(hihokenshaDateEntity.getBirthYMD());
         dataEntity.setSeibetsu(hihokenshaDateEntity.getSeibetsu());
         dataEntity.setKofuYMD(business.get交付日());
-        dataEntity.setYokaigoJotaiKubun(YokaigoJotaiKubun09.toValue(business.get介護状態()).get名称());
+        dataEntity.setYokaigoJotaiKubun(business.get介護状態());
         dataEntity.setNinteiYMD(business.get認定日());
         dataEntity.setYukoKaishiYMD(business.get有効期間の開始日付());
         dataEntity.setYukoShuryoYMD(business.get有効期間の終了日付());
