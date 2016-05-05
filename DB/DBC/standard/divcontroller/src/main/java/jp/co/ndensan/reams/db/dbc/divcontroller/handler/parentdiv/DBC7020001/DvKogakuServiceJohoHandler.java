@@ -159,7 +159,8 @@ public class DvKogakuServiceJohoHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
-     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @return HanyoListKogakuKaigoBatchParameter
+     * 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
     public HanyoListKogakuKaigoBatchParameter getBatchParamter() {
         HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
@@ -203,10 +204,10 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setShiharaiSaki(div
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedKey());
         batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
-                .getKinyuKikanCode().isEmpty() ? RString.EMPTY : div
+                .getKinyuKikanCode() == null ? RString.EMPTY : div
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
         batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
-                .get金融機関().get金融機関名称().isEmpty() ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
+                .get金融機関() == null ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
                 .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
