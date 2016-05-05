@@ -428,7 +428,6 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         } else {
             csvEntity.set住所地特例状態(RString.EMPTY);
         }
-
         HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         if (FLAG.equals(entity.getDbV1001広域内住所地特例フラグ())) {
             if (entity.getDbV1001広住特措置元市町村コード() != null) {
@@ -556,9 +555,8 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.getDbV4001受給認定日(), parameter));
         csvEntity.set受給旧措置(entity.isDbV4001旧措置フラグ());
-        //TODOのNo.715 DBD：みなし要介護区分コード
-        csvEntity.set受給みなし更新認定(isNull(entity.getDbV4001みなし要介護区分コード())
-                ? RString.EMPTY : entity.getDbV4001みなし要介護区分コード().value());
+        csvEntity.set受給みなし更新認定(isNull(entity.getDbT4001みなし要介護区分コード())
+                ? RString.EMPTY : entity.getDbT4001みなし要介護区分コード().value());
         csvEntity.set受給直近事由(isNull(entity.getDbV4001直近異動事由コード())
                 ? RString.EMPTY : entity.getDbV4001直近異動事由コード().value());
     }

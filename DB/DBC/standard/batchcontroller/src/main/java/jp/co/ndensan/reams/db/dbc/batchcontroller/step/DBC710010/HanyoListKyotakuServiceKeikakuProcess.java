@@ -128,22 +128,13 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     protected void createWriter() {
         システム日時 = RDate.getNowDate();
         文字コード = DbBusinessConifg.get(ConfigNameDBU.EUC共通_文字コード, システム日時, SubGyomuCode.DBU介護統計報告);
-        if (CODE_1.equals(文字コード)) {
-            ファイル文字コード = Encode.UTF_8withBOM;
-        } else if (CODE_2.equals(文字コード)) {
-            ファイル文字コード = Encode.SJIS;
-        } else if (CODE_3.equals(文字コード)) {
-            ファイル文字コード = Encode.JIS;
-        } else {
-            ファイル文字コード = Encode.UTF_8withBOM;
-        }
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVNAME);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(ファイル文字コード).
+                setEncode(Encode.UTF_8).
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.isCsv項目名付加()).build();
     }
