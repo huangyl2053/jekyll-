@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 /**
  * JukyuSikakuShomeishoHakko のクラスファイル
  *
- * @reamsid_L DBA-1090-011 wangkun
+ * @reamsid_L DBA-1090-010 wangkun
  */
 public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuShomeishoHakkoDiv {
 

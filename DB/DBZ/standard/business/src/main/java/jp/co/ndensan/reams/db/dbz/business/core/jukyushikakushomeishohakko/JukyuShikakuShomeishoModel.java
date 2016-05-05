@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給資格証明書を表すクラスです。
  *
- * @reamsid_L DBA-1090-021 wangkun
+ * @reamsid_L DBA-1090-020 wangkun
  */
 public class JukyuShikakuShomeishoModel {
 
