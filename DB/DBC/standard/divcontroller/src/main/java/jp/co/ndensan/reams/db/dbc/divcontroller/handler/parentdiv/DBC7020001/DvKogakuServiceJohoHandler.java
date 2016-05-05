@@ -195,27 +195,20 @@ public class DvKogakuServiceJohoHandler {
             batchparam.setServiceYmTo(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
                     .getTxtKogakuServiceTeikyoYM().getToValue().getYearMonth().toString()));
         }
-        batchparam.setShoriJokyo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedValue());
-        batchparam.setShinsaHoho(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedValue());
-        batchparam.setSanteiKijun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedValue());
-        batchparam.setKokuhorenFuicchi(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getRadKogakuKokuhorenFuicchi().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedValue());
-        batchparam.setTaishosha(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedValue());
-        batchparam.setShinseiKubun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedValue());
-        batchparam.setShiharaiSaki(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue());
+        batchparam.setShoriJokyo(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedKey());
+        batchparam.setShinsaHoho(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedKey());
+        batchparam.setSanteiKijun(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedKey());
+        batchparam.setKokuhorenFuicchi(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedKey());
+        batchparam.setTaishosha(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedKey());
+        batchparam.setShinseiKubun(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedKey());
+        batchparam.setShiharaiSaki(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedKey());
         batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .getKinyuKikanCode().isEmpty() ? RString.EMPTY : div
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
