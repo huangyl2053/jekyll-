@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -254,8 +253,8 @@ public class ShakaiFukushiHojinKeigenManager {
                 builder.set減免区分(RString.EMPTY);
                 builder.set適用開始年月日(FlexibleDate.EMPTY);
                 builder.set適用終了年月日(FlexibleDate.EMPTY);
-                builder.set軽減率_分子(Decimal.ZERO);
-                builder.set軽減率_分母(Decimal.ZERO);
+                builder.set軽減率_分子(null);
+                builder.set軽減率_分母(null);
                 builder.set居宅サービス限定(false);
                 builder.set居住費_食費のみ(false);
                 builder.set旧措置者ユニット型個室のみ(false);
