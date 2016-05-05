@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojink
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -231,7 +232,13 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 public boolean apply(DBD1030001Div div) {
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
                     ShakaiFukushiHojinKeigenService service = ShakaiFukushiHojinKeigenService.createIntance();
-                    HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                    HihokenshaNo 被保険者番号;
+                    if (null == taishoshaKey) {
+                        被保険者番号 = HihokenshaNo.EMPTY;
+                    } else {
+                        被保険者番号 = taishoshaKey.get被保険者番号();
+                    }
                     if (null == 被保険者番号) {
                         被保険者番号 = HihokenshaNo.EMPTY;
                     }
@@ -404,7 +411,13 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 public boolean apply(DBD1030001Div div) {
                     Decimal 減免率_分子 = div.getTxtKeigenRitsuBunshi().getValue();
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
-                    ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                    ShikibetsuCode 識別コード;
+                    if (null == taishoshaKey) {
+                        識別コード = ShikibetsuCode.EMPTY;
+                    } else {
+                        識別コード = taishoshaKey.get識別コード();
+                    }
                     if (null == 識別コード) {
                         識別コード = ShikibetsuCode.EMPTY;
                     }
