@@ -428,7 +428,7 @@ public class JutakukaishuSikyuShinseiManager {
         GeifuEntity kyufuentity = new GeifuEntity();
         kyufuentity.setShikibetsuCode(識別コード);
         kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
-        kyufuentity.setShinsaYM(決定日.getYearMonth());
+        kyufuentity.setShinsaYM((決定日 == null || 決定日.isEmpty()) ? FlexibleYearMonth.EMPTY : 決定日.getYearMonth());
         kyufuentity.setKyufuSakuseiKubunCode(区分_コード3);
         ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
         DbT3038ShokanKihonEntity entity = null;

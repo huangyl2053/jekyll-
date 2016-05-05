@@ -21,7 +21,7 @@ public interface IKaigoGekihenKanwaSetteiDiv extends ICommonChildDivBaseProperti
      * @param hdnGekihenIndex10 保険料率10
      * @param hdnGekihenIndex11 保険料率11
      */
-    public void onLoad(Decimal hdnGekihenIndex04,
+    public void initialize(Decimal hdnGekihenIndex04,
             Decimal hdnGekihenIndex05,
             Decimal hdnGekihenIndex06,
             Decimal hdnGekihenIndex08,
