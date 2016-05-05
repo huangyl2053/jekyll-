@@ -282,15 +282,19 @@ public class SeikyuGakuShukeiPanel {
     }
 
     private ResponseData<SeikyuGakuShukeiPanelDiv> 保存処理(SeikyuGakuShukeiPanelDiv div, RString 状態) {
-        if (!ResponseHolder.isReRequest()) {
-            getHandler(div).保存処理();
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+        try {
+            if (!ResponseHolder.isReRequest()) {
+                getHandler(div).保存処理();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                return createResponse(div);
+            }
+        } catch (Exception e) {
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-            return createResponse(div);
-        }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+        return createResponse(div);
     }
 
     private ResponseData<SeikyuGakuShukeiPanelDiv> notChanges(SeikyuGakuShukeiPanelDiv div) {
