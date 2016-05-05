@@ -205,7 +205,9 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .getKinyuKikanCode().isEmpty() ? RString.EMPTY : div
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
-
+        batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
+                .get金融機関().get金融機関名称().isEmpty() ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
+                .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
         return batchparam;
