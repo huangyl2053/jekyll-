@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 /**
  * 介護認定審査会開催場所情報テーブルのエンティティクラスです。
  *
- * @reamsid_L DBA-1090-021 wangkun
+ * @reamsid_L DBA-1090-020 wangkun
  */
 @lombok.Getter
 @lombok.Setter

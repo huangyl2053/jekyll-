@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 /**
  * 受給資格証明書を編集するクラスです。
  *
- * @reamsid_L DBA-1090-011 wangkun
+ * @reamsid_L DBA-1090-010 wangkun
  */
 public class JukyuSikakuShomeishoHakkoHandler {
 

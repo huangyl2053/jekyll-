@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 受給資格証明書を管理するクラスです。
  *
- * @reamsid_L DBA-1090-021 wangkun
+ * @reamsid_L DBA-1090-020 wangkun
  */
 public class JukyuShikakuShomeishoHakkoFinder {
 
