@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -27,7 +29,7 @@ public class CreateTsukibetsuSuiihyoProcessParameter implements IBatchProcessPar
     private boolean ageFlg;
     private RString ageStart;
     private RString ageEnd;
-    private RString ageKijunNi;
+    private FlexibleDate ageKijunNi;
     private boolean seinengappiYMD_Flg;
     private RString seinengappiYMDStart;
     private RString seinengappiYMDEnd;
@@ -37,6 +39,23 @@ public class CreateTsukibetsuSuiihyoProcessParameter implements IBatchProcessPar
     private RString shichosonMeisho;
     private RString kyuShichosonCode;
     private RString kyuShichosonMeisho;
+    private boolean is1と3場合;
+    private boolean is2場合;
+    private boolean is町域;
+    private boolean is行政区;
+    private boolean is地区1;
+    private boolean is地区2;
+    private boolean is地区3;
+    private boolean is市町村コード;
+    private boolean is市町村と旧市町村;
+    private RString 調定年度3月31日;
+    private RString 調定年度0401;
+    private RString 調定年度0430;
+    private RString 調定年度減1;
+    private RString 調定年度減2;
+    private FlexibleDate 終了生年月日;
+    private FlexibleDate 開始生年月日;
+    private RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタ
@@ -65,7 +84,7 @@ public class CreateTsukibetsuSuiihyoProcessParameter implements IBatchProcessPar
             boolean ageFlg,
             RString ageStart,
             RString ageEnd,
-            RString ageKijunNi,
+            FlexibleDate ageKijunNi,
             boolean seinengappiYMD_Flg,
             RString seinengappiYMDStart,
             RString seinengappiYMDEnd,
@@ -98,8 +117,8 @@ public class CreateTsukibetsuSuiihyoProcessParameter implements IBatchProcessPar
      *
      * @return 月別推移表作成_バッチ用のMybatisパラメータクラス
      */
-    public CreateTsukibetsuSuiihyoProcessParameter toCreateTsukibetsuSuiihyoMyBatisParameter() {
-        return new CreateTsukibetsuSuiihyoProcessParameter(
+    public CreateTsukibetsuSuiihyoMyBatisParameter toCreateTsukibetsuSuiihyoMyBatisParameter() {
+        return new CreateTsukibetsuSuiihyoMyBatisParameter(
                 choteiNendo,
                 choteiKijunNichiji,
                 kakutukiShikakuKijunNichi,
@@ -115,7 +134,24 @@ public class CreateTsukibetsuSuiihyoProcessParameter implements IBatchProcessPar
                 shichosonCode,
                 shichosonMeisho,
                 kyuShichosonCode,
-                kyuShichosonMeisho);
+                kyuShichosonMeisho,
+                is1と3場合,
+                is2場合,
+                is町域,
+                is行政区,
+                is地区1,
+                is地区2,
+                is地区3,
+                is市町村コード,
+                is市町村と旧市町村,
+                調定年度3月31日,
+                調定年度0401,
+                調定年度0430,
+                調定年度減1,
+                調定年度減2,
+                終了生年月日,
+                開始生年月日,
+                psmShikibetsuTaisho);
     }
 
 }
