@@ -48,9 +48,9 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase
     @BatchParameter(key = CYUSYUTSUDATAKUBUN, name = "抽出データ区分")
     private RString cyusyutsudatakubun;
     @BatchParameter(key = SHINSEITORIKESHIDETACYUSYUTSU, name = "申請取消データ抽出")
-    private boolean shinseitorikeshidetacyusyutsu;
+    private boolean isShinseikeshidetacyusyutsu;
     @BatchParameter(key = SAKUJYODATACYUSYUTSU, name = "削除データ抽出")
-    private boolean sakujyodatacyusyutsu;
+    private boolean isSakujyodatacyusyutsu;
     @BatchParameter(key = SOSHITSUKUBUN, name = "喪失区分")
     private RString soshitsukubun;
     @BatchParameter(key = CYUSYUTSUTAISYO, name = "抽出対象")
@@ -78,11 +78,11 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase
     @BatchParameter(key = CYOHYOID, name = "帳票ID")
     private RString cyohyoid;
     @BatchParameter(key = CSVKOMOKUMEIFUKA, name = "CSV項目名付加")
-    private boolean csvkomokumeifuka;
+    private boolean isCsvkomokumeifuka;
     @BatchParameter(key = CSVRENBANFUKA, name = "CSV連番付加")
-    private boolean csvrenbanfuka;
+    private boolean isCsvrenbanfuka;
     @BatchParameter(key = CSVHITSUKESURASYUHENSYU, name = "CSV日付スラッシュ編集")
-    private boolean csvhitsukesurasyuhensyu;
+    private boolean isCsvhitsukesurasyuhensyu;
 
     /**
      * コンストラクタです。
@@ -98,8 +98,8 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase
      */
     public HanyoRisutoJyukyusyaDaichoProcessParameter toHanyoRisutoJyukyusyaDaichoProcessParameter() {
         return new HanyoRisutoJyukyusyaDaichoProcessParameter(cyusyutsudatakubun,
-                shinseitorikeshidetacyusyutsu,
-                sakujyodatacyusyutsu,
+                isShinseikeshidetacyusyutsu,
+                isSakujyodatacyusyutsu,
                 soshitsukubun,
                 cyusyutsutaisyo,
                 cyusyutsunichisyurai,
@@ -113,8 +113,8 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase
                 kaipejisyutsuryokujunid,
                 syutsuryokukomokuid,
                 cyohyoid,
-                csvkomokumeifuka,
-                csvrenbanfuka,
-                csvhitsukesurasyuhensyu);
+                isCsvkomokumeifuka,
+                isCsvrenbanfuka,
+                isCsvhitsukesurasyuhensyu);
     }
 }

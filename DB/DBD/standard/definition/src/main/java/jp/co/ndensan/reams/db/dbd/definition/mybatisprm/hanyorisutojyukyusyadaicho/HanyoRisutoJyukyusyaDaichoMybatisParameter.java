@@ -35,7 +35,7 @@ import lombok.Setter;
 @Setter
 public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParameter {
 
-    private final boolean isShinseitorikeshidetacyusyutsu;
+    private final boolean isShinseikeshidetacyusyutsu;
     private final boolean isSakujyodatacyusyutsu;
     private final FlexibleDate cyusyutsunichifrom;
     private final FlexibleDate cyusyutsunichito;
@@ -72,7 +72,7 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
      * コンストラクタです。
      *
      * @param cyusyutsudatakubun 抽出データ区分
-     * @param isShinseitorikeshidetacyusyutsu 申請取消データ抽出
+     * @param isShinseikeshidetacyusyutsu 申請取消データ抽出
      * @param isSakujyodatacyusyutsu 削除データ抽出
      * @param soshitsukubun 喪失区分
      * @param cyusyutsutaisyo 抽出対象
@@ -85,7 +85,7 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
      * @param cyosaitakusakicodefto 調査委託先コードTo
      */
     public HanyoRisutoJyukyusyaDaichoMybatisParameter(RString cyusyutsudatakubun,
-            boolean isShinseitorikeshidetacyusyutsu,
+            boolean isShinseikeshidetacyusyutsu,
             boolean isSakujyodatacyusyutsu,
             RString soshitsukubun,
             RString cyusyutsutaisyo,
@@ -98,7 +98,7 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
             RString cyosaitakusakicodefto) {
         set抽出データ区分(cyusyutsudatakubun);
         set抽出日種類(cyusyutsunichisyurai);
-        this.isShinseitorikeshidetacyusyutsu = isShinseitorikeshidetacyusyutsu;
+        this.isShinseikeshidetacyusyutsu = isShinseikeshidetacyusyutsu;
         this.isSakujyodatacyusyutsu = isSakujyodatacyusyutsu;
         if (SoshitsuKubun.資格取得者のみ.getコード().equals(soshitsukubun)) {
             is資格取得者のみ = true;

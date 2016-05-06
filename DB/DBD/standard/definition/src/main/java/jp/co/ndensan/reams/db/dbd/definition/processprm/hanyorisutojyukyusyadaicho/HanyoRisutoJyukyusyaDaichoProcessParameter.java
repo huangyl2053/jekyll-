@@ -23,8 +23,8 @@ import lombok.Setter;
 public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcessParameter {
 
     private RString cyusyutsudatakubun;
-    private boolean shinseitorikeshidetacyusyutsu;
-    private boolean sakujyodatacyusyutsu;
+    private boolean isShinseikeshidetacyusyutsu;
+    private boolean isSakujyodatacyusyutsu;
     private RString soshitsukubun;
     private RString cyusyutsutaisyo;
     private RString cyusyutsunichisyurai;
@@ -38,16 +38,16 @@ public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcess
     private Long kaipejisyutsuryokujunid;
     private Long syutsuryokukomokuid;
     private RString cyohyoid;
-    private boolean csvkomokumeifuka;
-    private boolean csvrenbanfuka;
-    private boolean csvhitsukesurasyuhensyu;
+    private boolean isCsvkomokumeifuka;
+    private boolean isCsvrenbanfuka;
+    private boolean isCsvhitsukesurasyuhensyu;
 
     /**
      * コンストラクタです。
      *
      * @param cyusyutsudatakubun 抽出データ区分
-     * @param shinseitorikeshidetacyusyutsu 申請取消データ抽出
-     * @param sakujyodatacyusyutsu 削除データ抽出
+     * @param isShinseikeshidetacyusyutsu 申請取消データ抽出
+     * @param isSakujyodatacyusyutsu 削除データ抽出
      * @param soshitsukubun 喪失区分
      * @param cyusyutsutaisyo 抽出対象
      * @param cyusyutsunichisyurai 抽出日種類
@@ -61,13 +61,13 @@ public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcess
      * @param kaipejisyutsuryokujunid 改頁出力順ID
      * @param syutsuryokukomokuid 出力項目ID
      * @param cyohyoid 帳票ID
-     * @param csvkomokumeifuka CSV項目名付加
-     * @param csvrenbanfuka CSV連番付加
-     * @param csvhitsukesurasyuhensyu CSV日付スラッシュ編集
+     * @param isCsvkomokumeifuka CSV項目名付加
+     * @param isCsvrenbanfuka CSV連番付加
+     * @param isCsvhitsukesurasyuhensyu CSV日付スラッシュ編集
      */
     public HanyoRisutoJyukyusyaDaichoProcessParameter(RString cyusyutsudatakubun,
-            boolean shinseitorikeshidetacyusyutsu,
-            boolean sakujyodatacyusyutsu,
+            boolean isShinseikeshidetacyusyutsu,
+            boolean isSakujyodatacyusyutsu,
             RString soshitsukubun,
             RString cyusyutsutaisyo,
             RString cyusyutsunichisyurai,
@@ -81,12 +81,12 @@ public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcess
             Long kaipejisyutsuryokujunid,
             Long syutsuryokukomokuid,
             RString cyohyoid,
-            boolean csvkomokumeifuka,
-            boolean csvrenbanfuka,
-            boolean csvhitsukesurasyuhensyu) {
+            boolean isCsvkomokumeifuka,
+            boolean isCsvrenbanfuka,
+            boolean isCsvhitsukesurasyuhensyu) {
         this.cyusyutsudatakubun = cyusyutsudatakubun;
-        this.shinseitorikeshidetacyusyutsu = shinseitorikeshidetacyusyutsu;
-        this.sakujyodatacyusyutsu = sakujyodatacyusyutsu;
+        this.isShinseikeshidetacyusyutsu = isShinseikeshidetacyusyutsu;
+        this.isSakujyodatacyusyutsu = isSakujyodatacyusyutsu;
         this.soshitsukubun = soshitsukubun;
         this.cyusyutsutaisyo = cyusyutsutaisyo;
         this.cyusyutsunichisyurai = cyusyutsunichisyurai;
@@ -100,9 +100,9 @@ public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcess
         this.kaipejisyutsuryokujunid = kaipejisyutsuryokujunid;
         this.syutsuryokukomokuid = syutsuryokukomokuid;
         this.cyohyoid = cyohyoid;
-        this.csvkomokumeifuka = csvkomokumeifuka;
-        this.csvrenbanfuka = csvrenbanfuka;
-        this.csvhitsukesurasyuhensyu = csvhitsukesurasyuhensyu;
+        this.isCsvkomokumeifuka = isCsvkomokumeifuka;
+        this.isCsvrenbanfuka = isCsvrenbanfuka;
+        this.isCsvhitsukesurasyuhensyu = isCsvhitsukesurasyuhensyu;
     }
 
     /**
@@ -112,8 +112,8 @@ public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcess
      */
     public HanyoRisutoJyukyusyaDaichoMybatisParameter toHanyoRisutoJyukyusyaDaichoMybatisParameter() {
         return new HanyoRisutoJyukyusyaDaichoMybatisParameter(cyusyutsudatakubun,
-                shinseitorikeshidetacyusyutsu,
-                sakujyodatacyusyutsu,
+                isShinseikeshidetacyusyutsu,
+                isSakujyodatacyusyutsu,
                 soshitsukubun,
                 cyusyutsutaisyo,
                 cyusyutsunichisyurai,

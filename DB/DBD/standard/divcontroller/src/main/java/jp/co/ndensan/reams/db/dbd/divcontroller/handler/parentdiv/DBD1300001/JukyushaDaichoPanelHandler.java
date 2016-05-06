@@ -121,9 +121,9 @@ public class JukyushaDaichoPanelHandler {
 
                 if (keys.equals(申請取消データ抽出)) {
                     申請取消データ抽出Flag = true;
-                    parameter.setShinseitorikeshidetacyusyutsu(申請取消データ抽出Flag);
+                    parameter.setShinseikeshidetacyusyutsu(申請取消データ抽出Flag);
                 } else {
-                    parameter.setShinseitorikeshidetacyusyutsu(申請取消データ抽出Flag);
+                    parameter.setShinseikeshidetacyusyutsu(申請取消データ抽出Flag);
                 }
                 if (keys.equals(削除データ抽出)) {
                     削除データ抽出Flag = true;
