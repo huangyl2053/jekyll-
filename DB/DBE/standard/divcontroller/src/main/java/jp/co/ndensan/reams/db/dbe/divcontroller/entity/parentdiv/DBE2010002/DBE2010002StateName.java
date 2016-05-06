@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5030001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
@@ -7,20 +7,19 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBD5030001の状態名定義クラスです
+ * DBE2010002の状態名定義クラスです
  *
  * @author 自動生成
  */
-public enum DBD5030001StateName implements IStateEnumerations {
+public enum DBE2010002StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    初期表示("初期表示"),
-    完了("完了");
+    Default("default");
 
     private final RString name;
 
-    private DBD5030001StateName(String name) {
+    private DBE2010002StateName(String name) {
         this.name = new RString(name);
     }
 

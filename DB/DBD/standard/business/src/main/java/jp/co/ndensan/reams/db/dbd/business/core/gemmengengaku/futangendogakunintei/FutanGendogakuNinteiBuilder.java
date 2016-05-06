@@ -227,6 +227,7 @@ public class FutanGendogakuNinteiBuilder {
      * @return {@link FutanGendogakuNinteiBuilder}
      */
     public FutanGendogakuNinteiBuilder set配偶者生年月日(FlexibleDate 配偶者生年月日) {
+        requireNonNull(配偶者生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("配偶者生年月日"));
         entity.setHaigushaSeinenGappiYMD(配偶者生年月日);
         return this;
     }
