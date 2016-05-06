@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuViewState;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
-import jp.co.ndensan.reams.db.dbd.business.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
@@ -31,9 +31,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -42,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -101,8 +104,9 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> initialize() {
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         div.getCcdAtenaInfo().onLoad(識別コード);
         div.getCcdShinseiJoho().initialize(識別コード);
@@ -125,6 +129,7 @@ public class RiyoshaFutangakuGengakuHandler {
 
         if (!ResponseHolder.isReRequest()
                 && (被保険者番号 == null || 被保険者番号.getColumnValue().isEmpty())) {
+            div.getBtnShowSetaiJoho().setDisabled(true);
             div.getBtnShowGemmenJoho().setDisabled(true);
             div.getBtnInputNew().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
@@ -143,6 +148,8 @@ public class RiyoshaFutangakuGengakuHandler {
             ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, new ArrayList<>(利用者負担額減額の情報List));
             一覧エリアの設定(利用者負担額減額の情報List);
         }
+        世帯所得一覧の初期化();
+        div.getBtnCloseSetaiJoho().setDisplayNone(true);
 
         PersonalData personalData = toPersonalData();
         AccessLogger.log(AccessLogType.照会, personalData);
@@ -165,7 +172,8 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
         EntityDataState state;
@@ -319,7 +327,8 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(Dbd1020001Keys.該当DB申請, RiyoshaFutangakuGengaku.class);
         RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(Dbd1020001Keys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
 
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShoKisaiHokenshaNo 証記載保険者番号;
         int 履歴番号;
         EntityDataState state;
@@ -536,6 +545,7 @@ public class RiyoshaFutangakuGengakuHandler {
      */
     public void viewState破棄() {
         ViewStateHolder.put(Dbd1020001Keys.利用者負担額減額情報ListのViewState, null);
+        ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, null);
         入力情報をクリア();
     }
 
@@ -608,8 +618,9 @@ public class RiyoshaFutangakuGengakuHandler {
      * @return PersonalData
      */
     public PersonalData toPersonalData() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
         return PersonalData.of(識別コード, expandedInfo);
@@ -690,7 +701,8 @@ public class RiyoshaFutangakuGengakuHandler {
      * 申請情報エリアの入力情報をクリアします。
      */
     public void 入力情報をクリア() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
 
         div.getTxtShinseiYmd().clearValue();
         div.getTxtShinseiRiyu().clearValue();
@@ -703,6 +715,15 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
         div.getTxtKyufuRitsu().clearValue();
         div.getTxtHiShoninRiyu().clearValue();
+    }
+
+    private void 世帯所得一覧の初期化() {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+
+        YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
+        div.getCcdSetaiShotokuIchiran().initialize(識別コード, new FlexibleDate(現在年月日日時時分秒.getDate().toDateString()),
+                new HizukeConfig().get所得年度(), 現在年月日日時時分秒);
     }
 
     private void 一覧エリアの設定(List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List) {
@@ -746,6 +767,8 @@ public class RiyoshaFutangakuGengakuHandler {
     private GemmenGengakuShinseiBuilder setGemmenGengakuShinseiBuilderBy入力データ(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder) {
         if (div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分() != null) {
             gemmenGengakuShinseiBuilder.set申請届出代行区分(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行区分().getCode());
+        } else {
+            gemmenGengakuShinseiBuilder.set申請届出代行区分(RString.EMPTY);
         }
         gemmenGengakuShinseiBuilder.set申請届出者氏名(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名());
         gemmenGengakuShinseiBuilder.set申請届出者氏名カナ(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者氏名カナ());
@@ -753,6 +776,8 @@ public class RiyoshaFutangakuGengakuHandler {
         gemmenGengakuShinseiBuilder.set申請届出代行事業者番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出代行事業者番号());
         if (div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分() != null) {
             gemmenGengakuShinseiBuilder.set事業者区分(div.getCcdShinseiJoho().get減免減額申請情報().get事業者区分().getCode());
+        } else {
+            gemmenGengakuShinseiBuilder.set事業者区分(RString.EMPTY);
         }
         gemmenGengakuShinseiBuilder.set申請届出者郵便番号(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者郵便番号());
         gemmenGengakuShinseiBuilder.set申請届出者住所(div.getCcdShinseiJoho().get減免減額申請情報().get申請届出者住所());
@@ -782,7 +807,8 @@ public class RiyoshaFutangakuGengakuHandler {
         JigyoshaKubun 事業者区分 = null;
 
         if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().size() > 0) {
-            if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分() != null) {
+            if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分() != null
+                    && !joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分().isEmpty()) {
                 申請届出代行区分 = ShinseiTodokedeDaikoKubunCode.toValue(joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行区分());
             }
             申請届出者氏名 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者氏名();
@@ -791,7 +817,8 @@ public class RiyoshaFutangakuGengakuHandler {
             if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行事業者番号() != null) {
                 申請届出代行事業者番号 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出代行事業者番号();
             }
-            if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分() != null) {
+            if (joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分() != null
+                    && !joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分().isEmpty()) {
                 事業者区分 = JigyoshaKubun.toValue(joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get事業者区分());
             }
             申請届出者郵便番号 = joho.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0).get申請届出者郵便番号();
@@ -1025,7 +1052,8 @@ public class RiyoshaFutangakuGengakuHandler {
     }
 
     private void 前排他の設定() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.lock(排他キー);

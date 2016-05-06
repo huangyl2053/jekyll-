@@ -10,16 +10,21 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosh
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shiharaihohojyoho.KozaJohoPSMEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shiharaihohojyoho.IShiharaiHohoJyohoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 支払方法情報を取得するクラスです。
+ *
+ * @reamsid_L DBC-0300-020 houtianpeng
  */
 public class ShiharaiHohoJyohoFinder {
 
@@ -58,16 +63,12 @@ public class ShiharaiHohoJyohoFinder {
      */
     public SearchResult<KozaJohoPSM> getKozaIDList(KozaParameter parameter) {
 
-//        IShiharaiHohoJyohoMapper mapper = mapperProvider.create(IShiharaiHohoJyohoMapper.class);
+        IShiharaiHohoJyohoMapper mapper = mapperProvider.create(IShiharaiHohoJyohoMapper.class);
         List<KozaJohoPSM> 口座ID = new ArrayList<>();
-//        List<KozaJohoPSMEntity> entityList = mapper.get口座IDリストByKozaParameter(parameter);
-        List<KozaJohoPSMEntity> entityList = new ArrayList<>();
-        KozaJohoPSMEntity entity1 = new KozaJohoPSMEntity();
-        entity1.setKozaId(1L);
-        entityList.add(entity1);
-//        if (entityList == null || entityList.isEmpty()) {
-//            return SearchResult.of(口座ID, 0, false);
-//        }
+        List<KozaJohoPSMEntity> entityList = mapper.get口座IDリストByKozaParameter(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(口座ID, 0, false);
+        }
         for (KozaJohoPSMEntity entity : entityList) {
             口座ID.add(new KozaJohoPSM(entity));
         }
@@ -78,33 +79,47 @@ public class ShiharaiHohoJyohoFinder {
      * 口座IDで口座情報を取得します。
      *
      * @param parameter 口座ID
-     * @return SearchResult<KozaJoho>
+     * @return SearchResult<KozaJohoPSM>
      */
-    public KozaJohoPSM getKozaJyoho(KozaParameter parameter) {
-//        IShiharaiHohoJyohoMapper mapper = mapperProvider.create(IShiharaiHohoJyohoMapper.class);
-//        UrT0715KozaEntity entity = mapper.get口座情報ByKey(parameter);
-//        if (entity == null) {
-//            return null;
-//        }
-//        KozaSearchKeyBuilder kozaSearchKey = new KozaSearchKeyBuilder();
-//        kozaSearchKey.setGyomuCode(entity.getGyomuCode());
-//        kozaSearchKey.setSubGyomuCode(entity.getSubGyomuCode());
-//        kozaSearchKey.setKamokuCode(entity.getKamokuCode());
-//        kozaSearchKey.setCodeShubetsu(entity.getGyomuKoyuKey());
-//        kozaSearchKey.setYotoKubun(entity.getYotoKubun());
-//        UrFt700FindKozaFunction kozaPsm = new UrFt700FindKozaFunction(kozaSearchKey);
-
-//        UrFt700FindKozaFunction.PSM_KEY, kozaPsm.toString();
-        KozaJohoPSMEntity entity = new KozaJohoPSMEntity();
-        entity.setKinyuKikanCode(new KinyuKikanCode(new RString("1234")));
-        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(new RString("456")));
-        entity.setKinyuKikanMeisho(new RString("5555"));
-        entity.setTemban(new RString("121"));
-        entity.setYokinShubetsu(new RString("22"));
-        entity.setKozaNo(new RString("11"));
-        entity.setKozaMeiginin(new AtenaKanaMeisho("33"));
-        entity.setKozaMeigininKanji(new AtenaMeisho(new RString("66")));
-        return new KozaJohoPSM(entity);
+    public SearchResult<KozaJohoPSM> getKozaJyoho(KozaParameter parameter) {
+        IShiharaiHohoJyohoMapper mapper = mapperProvider.create(IShiharaiHohoJyohoMapper.class);
+        IKozaRelateMapper kozaMapper = mapperProvider.create(IKozaRelateMapper.class);
+        List<KozaJohoPSMEntity> entityList = mapper.get口座情報ByKey(parameter);
+        List<KozaJohoPSM> kozaJohoPSMList = new ArrayList<>();
+        KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
+        if (entityList != null && !entityList.isEmpty()) {
+            kozaBuilder.set業務コード(entityList.get(0).getGyomuCode());
+            kozaBuilder.setサブ業務コード(entityList.get(0).getSubGyomuCode());
+            kozaBuilder.set科目コード(entityList.get(0).getKamokuCode());
+            kozaBuilder.set用途区分(new KozaYotoKubunCodeValue(entityList.get(0).getYotoKubun() == null
+                    ? Code.EMPTY : entityList.get(0).getYotoKubun()));
+        }
+        List<RString> 業務固有キーList = new ArrayList<>();
+        List<KamokuCode> kamokuCodeList = new ArrayList<>();
+        if (entityList != null && !entityList.isEmpty()) {
+            for (KozaJohoPSMEntity entity : entityList) {
+                kamokuCodeList.add(entity.getKamokuCode());
+                業務固有キーList.add(entity.getGyomuKoyuKey());
+                kozaBuilder.set業務固有キーリスト(業務固有キーList);
+            }
+        }
+        KozaSearchParameter kozaSearchParameter = new KozaSearchParameter(kozaBuilder.build(), kamokuCodeList);
+        List<KozaRelateEntity> kozaRelateList = kozaMapper.select(kozaSearchParameter);
+        if (kozaRelateList == null) {
+            return SearchResult.of(kozaJohoPSMList, 0, false);
+        }
+        for (KozaRelateEntity entity : kozaRelateList) {
+            KozaJohoPSMEntity psmEntity = new KozaJohoPSMEntity();
+            psmEntity.setKinyuKikanCode(entity.getUaT0310KozaEntity().getKinyuKikanCode());
+            psmEntity.setKinyuKikanShitenCode(entity.getUaT0310KozaEntity().getKinyuKikanShitenCode());
+            psmEntity.setTemban(entity.getUaT0310KozaEntity().getTemban());
+            psmEntity.setYokinShubetsu(entity.getUaT0310KozaEntity().getYokinShubetsu());
+            psmEntity.setKozaNo(entity.getUaT0310KozaEntity().getKozaNo());
+            psmEntity.setKozaMeiginin(entity.getUaT0310KozaEntity().getKozaMeiginin());
+            psmEntity.setKozaMeigininKanji(entity.getUaT0310KozaEntity().getKozaMeigininKanji());
+            kozaJohoPSMList.add(new KozaJohoPSM(psmEntity));
+        }
+        return SearchResult.of(kozaJohoPSMList, 0, false);
     }
 
     /**

@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -19,10 +19,10 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * 資格変更履歴の初期化処理
      *
      * @param 被保険者番号
-     * @param 処理対象者
+     * @param 識別コード
      * @param 取得日
      */
-    void initialize(HihokenshaNo 被保険者番号, IKojin 処理対象者, FlexibleDate 取得日);
+    void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日);
 
     /**
      * 変更履歴グリッドのデータを取得します。

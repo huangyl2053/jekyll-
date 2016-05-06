@@ -110,8 +110,8 @@ public class KaigoGekihenKanwaSetteiHandler {
         row.getTxtHokenryoRitsu().setValue(hdnGekihenIndex11);
         rowList.add(row);
         div.getDgGekihenKanwa().setDataSource(rowList);
-        int i = NUM_0;
-        while (i <= NUM_6) {
+
+        for (int i = NUM_0; i <= NUM_6; i++) {
             if (i < NUM_3) {
                 div.getDgGekihenKanwa().getDataSource().get(i).setCellBgColor(
                         税改正前.toString(), DataGridCellBgColor.bgColorLightRed);
@@ -123,7 +123,6 @@ public class KaigoGekihenKanwaSetteiHandler {
                 div.getDgGekihenKanwa().getDataSource().get(i).setCellBgColor(
                         税改正後.toString(), DataGridCellBgColor.bgColorLightGreen);
             }
-            i = i + NUM_1;
         }
     }
 

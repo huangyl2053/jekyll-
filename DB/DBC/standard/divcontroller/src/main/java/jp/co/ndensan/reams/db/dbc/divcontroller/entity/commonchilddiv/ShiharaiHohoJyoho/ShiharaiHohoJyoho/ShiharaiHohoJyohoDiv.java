@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiH
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.commonchilddiv.shiharaihohojyoho.ShiharaiHohoJyohoHandler;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shiharaihohojyoho.ShiharaiHohoJyohoHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -37,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -112,6 +111,10 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     private TextBoxAtenaKanaMeisho txtMeigininKana1;
     @JsonProperty("txtMeigininKanji1")
     private TextBoxAtenaMeisho txtMeigininKanji1;
+    @JsonProperty("サブ業務コード")
+    private RString サブ業務コード;
+    @JsonProperty("識別コード")
+    private RString 識別コード;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -732,6 +735,42 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     }
 
     /*
+     * getサブ業務コード
+     * @return サブ業務コード
+     */
+    @JsonProperty("サブ業務コード")
+    public RString getサブ業務コード() {
+        return サブ業務コード;
+    }
+
+    /*
+     * setサブ業務コード
+     * @param サブ業務コード サブ業務コード
+     */
+    @JsonProperty("サブ業務コード")
+    public void setサブ業務コード(RString サブ業務コード) {
+        this.サブ業務コード = サブ業務コード;
+    }
+
+    /*
+     * get識別コード
+     * @return 識別コード
+     */
+    @JsonProperty("識別コード")
+    public RString get識別コード() {
+        return 識別コード;
+    }
+
+    /*
+     * set識別コード
+     * @param 識別コード 識別コード
+     */
+    @JsonProperty("識別コード")
+    public void set識別コード(RString 識別コード) {
+        this.識別コード = 識別コード;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -825,12 +864,11 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
      *
      *
      * @param 支給申請情報
-     * @param 業務内区分コード
      * @param 状態
      */
     @Override
-    public void initialize(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード, RString 状態) {
-        getHandler().initialize(支給申請情報, 業務内区分コード, 状態);
+    public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
+        getHandler().initialize(支給申請情報, 状態);
     }
 
     /**
@@ -840,61 +878,86 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
      */
     @Override
     public RString getShiharaiHohoRad() {
-        if (!this.getRadJyryoinin().getSelectedKey().isNullOrEmpty()) {
-            return this.getRadJyryoinin().getSelectedKey();
-        }
-        if (!this.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
-            return this.getRadMadoguti().getSelectedKey();
-        }
-        if (!this.getRadKoza().getSelectedKey().isNullOrEmpty()) {
-            return this.getRadKoza().getSelectedKey();
-        }
-        return RString.EMPTY;
+        return getHandler().getShiharaiHoho();
     }
 
-    @Override
-    public RString getShiharaiHoho() {
-        return this.getRadJyryoinin().getSelectedKey();
-    }
-
-    @Override
-    public RString getShiharaiBasho() {
-        return this.getTxtShiharaiBasho().getValue();
-    }
-
+    /**
+     * 開始日を取得します。
+     *
+     * @return RDate
+     */
     @Override
     public RDate getStartYMD() {
-        return this.getTxtStartYMD().getValue();
+        return getHandler().getStartYMD();
     }
 
+    /**
+     * 終了日を取得します。
+     *
+     * @return RDate
+     */
     @Override
     public RDate getEndYMD() {
-        return this.getTxtEndYMD().getValue();
+        return getHandler().getEndYMD();
     }
 
+    /**
+     * 開始時間を取得します。
+     *
+     * @return RTime
+     */
     @Override
     public RTime getStartHHMM() {
-        return this.getTxtStartHHMM().getValue();
+        return getHandler().getStartHHMM();
     }
 
+    /**
+     * 終了時間を取得します。
+     *
+     * @return RTime
+     */
     @Override
     public RTime getEndHHMM() {
-        return this.getTxtEndHHMM().getValue();
+        return getHandler().getEndHHMM();
     }
 
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
     @Override
     public RString getKozaNo() {
-        return this.getTxtKozaNo().getValue();
+        return getHandler().getKozaNo();
     }
 
+    /**
+     * 契約番号を取得します。
+     *
+     * @return RString
+     */
     @Override
     public RString getKeiyakuNo() {
-        return this.getTxtKeiyakuNo().getValue();
+        return getHandler().getKeiyakuNo();
     }
 
+    /**
+     * 支払場所を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getShiharaiBasho() {
+        return getHandler().getShiharaiBasho();
+    }
+
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
     @Override
     public RString getKozaID() {
-        RString kozaID = this.getDdlKozaID().getSelectedValue();
-        return kozaID == null ? RString.EMPTY : kozaID;
+        return getHandler().getKozaID();
     }
 }

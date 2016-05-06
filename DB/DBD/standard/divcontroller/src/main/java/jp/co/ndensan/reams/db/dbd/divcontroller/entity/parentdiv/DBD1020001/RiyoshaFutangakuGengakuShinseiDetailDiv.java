@@ -216,16 +216,6 @@ public class RiyoshaFutangakuGengakuShinseiDetailDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnBackShinseiIchirai() {
-        return this.getCcdJohoAreaButton().getBtnBackShinseiIchirai();
-    }
-
-    @JsonIgnore
-    public void  setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
-        this.getCcdJohoAreaButton().setBtnBackShinseiIchirai(btnBackShinseiIchirai);
-    }
-
-    @JsonIgnore
     public Button getBtnConfirm() {
         return this.getCcdJohoAreaButton().getBtnConfirm();
     }
@@ -233,6 +223,16 @@ public class RiyoshaFutangakuGengakuShinseiDetailDiv extends Panel {
     @JsonIgnore
     public void  setBtnConfirm(Button btnConfirm) {
         this.getCcdJohoAreaButton().setBtnConfirm(btnConfirm);
+    }
+
+    @JsonIgnore
+    public Button getBtnBackShinseiIchirai() {
+        return this.getCcdJohoAreaButton().getBtnBackShinseiIchirai();
+    }
+
+    @JsonIgnore
+    public void  setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
+        this.getCcdJohoAreaButton().setBtnBackShinseiIchirai(btnBackShinseiIchirai);
     }
 
     // </editor-fold>

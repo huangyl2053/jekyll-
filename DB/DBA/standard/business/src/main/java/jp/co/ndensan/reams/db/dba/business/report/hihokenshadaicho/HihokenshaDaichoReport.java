@@ -63,22 +63,26 @@ public final class HihokenshaDaichoReport extends Report<HihokenshaDaichoReportS
 
     private int getMaxBreakCount(HihokenshaDaichoSakusei item) {
         int maxCount = item.get老齢福祉情報() == null ? ZERO : item.get老齢福祉情報().get老齢福祉No().size();
-        if (item.get生活保護情報() != null && maxCount < item.get生活保護情報().get生活保護No().size()) {
+        if (item.get生活保護情報() != null && maxCount < HihokenshaDaichoEditor.getMaxIndex(item.get生活保護情報().get生活保護No())) {
             maxCount = item.get生活保護情報().get生活保護No().size();
         }
-        if (item.get世帯左情報() != null && maxCount < item.get世帯左情報().get世帯左No().size()) {
+        if (item.get世帯左情報() != null && maxCount < HihokenshaDaichoEditor.getMaxIndex(item.get世帯左情報().get世帯左No())) {
             maxCount = item.get世帯左情報().get世帯左No().size();
         }
-        if (item.get世帯右情報() != null && maxCount < item.get世帯右情報().get世帯右被保険者番号().size()) {
+        if (item.get世帯右情報() != null && item.get世帯右情報().get世帯右被保険者番号() != null
+                && maxCount < item.get世帯右情報().get世帯右被保険者番号().size()) {
             maxCount = item.get世帯右情報().get世帯右被保険者番号().size();
         }
-        if (item.get資格異動情報() != null && maxCount < item.get資格異動情報().get資格異動No().size()) {
+        if (item.get資格異動情報() != null
+                && maxCount < HihokenshaDaichoEditor.getMaxIndex(item.get資格異動情報().get資格異動No())) {
             maxCount = item.get資格異動情報().get資格異動No().size();
         }
-        if (item.get被保険者証発行履歴情報１() != null && maxCount < item.get被保険者証発行履歴情報１().get証履歴No1().size()) {
+        if (item.get被保険者証発行履歴情報１() != null
+                && maxCount < HihokenshaDaichoEditor.getMaxIndex(item.get被保険者証発行履歴情報１().get証履歴No1())) {
             maxCount = item.get被保険者証発行履歴情報１().get証履歴No1().size();
         }
-        if (item.get被保険者証発行履歴情報2() != null && maxCount < item.get被保険者証発行履歴情報2().get証履歴No2().size()) {
+        if (item.get被保険者証発行履歴情報2() != null
+                && maxCount < HihokenshaDaichoEditor.getMaxIndex(item.get被保険者証発行履歴情報2().get証履歴No2())) {
             maxCount = item.get被保険者証発行履歴情報2().get証履歴No2().size();
         }
         return maxCount;

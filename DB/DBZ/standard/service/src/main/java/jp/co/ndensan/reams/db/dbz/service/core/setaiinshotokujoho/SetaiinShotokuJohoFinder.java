@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.view.ShotokuManager;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -158,20 +159,24 @@ public class SetaiinShotokuJohoFinder {
         }
         List<SetaiinShotoku> 世帯員所得情報リスト = new ArrayList();
         for (SetaiinJoho 世帯員所得 : 世帯員情報リスト) {
+            if (世帯員所得.get識別対象().get住民種別().equals(JuminShubetsu.共有者)
+                    || 世帯員所得.get識別対象().get住民種別().equals(JuminShubetsu.法人)) {
+                continue;
+            }
             HihokenshaDaicho 被保険者台帳 = 被保険者台帳Manager.find最新被保険者台帳(世帯員所得.get識別対象().get識別コード());
-            KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得Alive(世帯員所得.get識別対象().get識別コード(), 所得年度, 所得基準年月日);
+            KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得Alive(世帯員所得.get識別対象().to個人().get識別コード(), 所得年度, 所得基準年月日);
             世帯員所得情報リスト.add(new SetaiinShotoku(
-                    世帯員所得.get識別対象().get識別コード(),
+                    世帯員所得.get識別対象().to個人().get識別コード(),
                     被保険者台帳 != null ? 被保険者台帳.get被保険者番号() : new HihokenshaNo(RString.EMPTY),
-                    世帯員所得.get識別対象().get名称().getName().value(),
-                    世帯員所得.get識別対象().get名称().getKana().value(),
-                    世帯員所得.get生年月日(),
-                    世帯員所得.get性別().getCode(),
-                    世帯員所得.get性別().getCommonName(),
-                    世帯員所得.get続柄コード(),
-                    世帯員所得.get続柄(),
-                    世帯員所得.get住民状態().コード(),
-                    世帯員所得.get住民状態().住民状態略称(),
+                    世帯員所得.get識別対象().to個人().get名称().getName().value(),
+                    世帯員所得.get識別対象().to個人().get名称().getKana().value(),
+                    世帯員所得.get識別対象().to個人().get生年月日().toFlexibleDate(),
+                    世帯員所得.get識別対象().to個人().get性別().getCode(),
+                    世帯員所得.get識別対象().to個人().get性別().getCommonName(),
+                    世帯員所得.get識別対象().to個人().get続柄コードリスト().toRString(),
+                    世帯員所得.get識別対象().to個人().get続柄(),
+                    世帯員所得.get識別対象().to個人().get住民種別().getCode(),
+                    世帯員所得.get識別対象().to個人().get住民種別().toRString(),
                     介護所得 != null ? 介護所得.get課税区分_住民税減免前() : RString.EMPTY,
                     介護所得 != null ? 介護所得.get課税区分_住民税減免後() : RString.EMPTY,
                     介護所得 != null ? 介護所得.get激変緩和措置() : RString.EMPTY,
@@ -182,13 +187,13 @@ public class SetaiinShotokuJohoFinder {
                     介護所得 != null ? 介護所得.get登録業務() : RString.EMPTY,
                     介護所得 != null ? new FlexibleDate(介護所得.get更正日().toDateString()) : new FlexibleDate(RString.EMPTY),
                     false,
-                    世帯員所得.get識別対象().get異動年月日(),
-                    世帯員所得.get住定異動年月日(),
-                    世帯員所得.get識別対象().get異動事由().get異動事由コード(),
-                    世帯員所得.get識別対象().get異動事由().get異動事由正式名称(),
-                    世帯員所得.get住民票表示順(),
+                    世帯員所得.get識別対象().to個人().get異動年月日(),
+                    世帯員所得.get識別対象().to個人().get住定異動年月日(),
+                    世帯員所得.get識別対象().to個人().get異動事由().get異動事由コード(),
+                    世帯員所得.get識別対象().to個人().get異動事由().get異動事由略称(),
+                    世帯員所得.get識別対象().to個人().canBe住基個人() ? 世帯員所得.get識別対象().to個人().to住基個人().get住民票表示順() : 0,
                     世帯員所得.get本人区分(),
-                    世帯員所得.get世帯コード().value()));
+                    世帯員所得.get識別対象().to個人().get世帯コード().value()));
         }
         return 世帯員所得情報リスト;
     }

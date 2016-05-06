@@ -63,6 +63,8 @@ public class TotalHandler {
      */
     public void onLoad() {
         if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
+            div.getShikakuShaShoHakko().getBtnTainoInfo().setVisible(false);
+            div.getShikakuShaShoHakko().getBtnGengakuInfo().setVisible(false);
             div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
             div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号());
@@ -70,6 +72,8 @@ public class TotalHandler {
                     .get被保険者番号(), MENUID_DBUMN12001);
         }
         if (MENUID_DBUMN12002.equals(ResponseHolder.getMenuID())) {
+            div.getShikakuShaShoHakko().getBtnTainoInfo().setVisible(false);
+            div.getShikakuShaShoHakko().getBtnGengakuInfo().setVisible(false);
             div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
             div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号());

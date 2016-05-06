@@ -11,7 +11,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.TekiyoJogaishaMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha.ITekiyoJogaishaMapper;
@@ -45,7 +44,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -326,22 +324,15 @@ public class TekiyoJogaishaManager {
             RString 画面状態,
             ShikibetsuCode 識別コード) {
         if (状態_適用登録.equals(画面状態)) {
-            RString 画面喪失 = HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
-            if (DbaErrorMessages.住所地特例として未適用.getMessage().getCode().equals(画面喪失.toString())) {
-                throw new ApplicationException(DbaErrorMessages.住所地特例として未適用.getMessage());
-            }
+            HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
             TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
             TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(dbT1004Entity);
-
-            if (!(DbaErrorMessages.被保険者履歴に期間重複.getMessage().getCode().equals(画面喪失.toString())
-                    && DbaErrorMessages.他の期間情報との期間重複.getMessage().getCode().equals(画面喪失.toString()))) {
-                HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
-                        識別コード,
-                        HihokenshaNo.EMPTY,
-                        変更後適用除外者情報.getTekiyoYMD(),
-                        ShikakuSoshitsuJiyu.除外者.getコード(),
-                        変更後適用除外者情報.getTekiyoTodokedeYMD());
-            }
+            HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
+                    識別コード,
+                    HihokenshaNo.EMPTY,
+                    変更後適用除外者情報.getTekiyoYMD(),
+                    ShikakuSoshitsuJiyu.除外者.getコード(),
+                    変更後適用除外者情報.getTekiyoTodokedeYMD());
         } else if (状態_解除.equals(画面状態)) {
             TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
             TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);

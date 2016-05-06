@@ -131,6 +131,7 @@
         <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者住所" column="temp_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_主治医氏名" column="temp_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
     <select id="select主治医意見書督促対象者一覧表ByKey" resultMap="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity"
@@ -149,6 +150,7 @@
         DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" AS temp_事業者コード,
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" AS temp_事業者名称,
         DbT5911ShujiiIryoKikanJoho."jusho" AS temp_事業者住所,
+        DbT5912ShujiiJoho."shujiiName" AS temp_主治医氏名,
         DbT5911ShujiiIryoKikanJoho."telNo" AS temp_事業者電話番号
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
@@ -159,6 +161,9 @@
         rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911ShujiiIryoKikanJoho
         ON DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         AND DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5101NinteiShinseiJoho."shujiiIryokikanCode"
+        INNER JOIN
+        rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho
+        ON DbT5912ShujiiJoho."shichosonCode" = DbT5911ShujiiIryoKikanJoho."shichosonCode"
         INNER JOIN
         (
         SELECT

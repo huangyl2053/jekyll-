@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyorisutojyukyusyadaich
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -16,12 +17,12 @@ import lombok.Setter;
  *
  * 汎用リスト受給者台帳２_バッチ用のパラメータです。
  *
- * @reamsid_L DBE-1810-020 yaodongsheng
+ * @reamsid_L DBD-1810-020 yaodongsheng
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoRisutoJyukyusyaDaichoBatchParameter {
+public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase {
 
     private static final String CYUSYUTSUDATAKUBUN = "cyusyutsudatakubun";
     private static final String SHINSEITORIKESHIDETACYUSYUTSU = "shinseitorikeshidetacyusyutsu";
@@ -42,13 +43,14 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter {
     private static final String CSVKOMOKUMEIFUKA = "csvkomokumeifuka";
     private static final String CSVRENBANFUKA = "csvrenbanfuka";
     private static final String CSVHITSUKESURASYUHENSYU = "csvhitsukesurasyuhensyu";
+    private static final long serialVersionUID = 6184743641347261427L;
 
     @BatchParameter(key = CYUSYUTSUDATAKUBUN, name = "抽出データ区分")
     private RString cyusyutsudatakubun;
     @BatchParameter(key = SHINSEITORIKESHIDETACYUSYUTSU, name = "申請取消データ抽出")
-    private boolean shinseitorikeshidetacyusyutsu;
+    private boolean isShinseikeshidetacyusyutsu;
     @BatchParameter(key = SAKUJYODATACYUSYUTSU, name = "削除データ抽出")
-    private boolean sakujyodatacyusyutsu;
+    private boolean isSakujyodatacyusyutsu;
     @BatchParameter(key = SOSHITSUKUBUN, name = "喪失区分")
     private RString soshitsukubun;
     @BatchParameter(key = CYUSYUTSUTAISYO, name = "抽出対象")
@@ -76,11 +78,11 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter {
     @BatchParameter(key = CYOHYOID, name = "帳票ID")
     private RString cyohyoid;
     @BatchParameter(key = CSVKOMOKUMEIFUKA, name = "CSV項目名付加")
-    private boolean csvkomokumeifuka;
+    private boolean isCsvkomokumeifuka;
     @BatchParameter(key = CSVRENBANFUKA, name = "CSV連番付加")
-    private boolean csvrenbanfuka;
+    private boolean isCsvrenbanfuka;
     @BatchParameter(key = CSVHITSUKESURASYUHENSYU, name = "CSV日付スラッシュ編集")
-    private boolean csvhitsukesurasyuhensyu;
+    private boolean isCsvhitsukesurasyuhensyu;
 
     /**
      * コンストラクタです。
@@ -96,8 +98,8 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter {
      */
     public HanyoRisutoJyukyusyaDaichoProcessParameter toHanyoRisutoJyukyusyaDaichoProcessParameter() {
         return new HanyoRisutoJyukyusyaDaichoProcessParameter(cyusyutsudatakubun,
-                shinseitorikeshidetacyusyutsu,
-                sakujyodatacyusyutsu,
+                isShinseikeshidetacyusyutsu,
+                isSakujyodatacyusyutsu,
                 soshitsukubun,
                 cyusyutsutaisyo,
                 cyusyutsunichisyurai,
@@ -111,8 +113,8 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter {
                 kaipejisyutsuryokujunid,
                 syutsuryokukomokuid,
                 cyohyoid,
-                csvkomokumeifuka,
-                csvrenbanfuka,
-                csvhitsukesurasyuhensyu);
+                isCsvkomokumeifuka,
+                isCsvrenbanfuka,
+                isCsvhitsukesurasyuhensyu);
     }
 }

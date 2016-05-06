@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5210001;
 
-import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJohoBuilder;
@@ -16,14 +15,15 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.介護認定審査会共有一覧_開催番号;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001.ShinsakaiKaisaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaikekka.ShinsakaiKaisaiKekkaFinder;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.介護認定審査会共有一覧_開催番号;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -49,6 +49,7 @@ public class ShinsakaiKaisaiKekka {
     private static final int LENGTH_開催番号 = 8;
     private final ShinsakaiKaisaiKekkaFinder service;
     private final ShinsakaiKaisaiYoteiJohoManager manager;
+    private final ShinsakaiOnseiJohoManager onseiJohoManager;
 
     /**
      * コンストラクタです。
@@ -56,6 +57,7 @@ public class ShinsakaiKaisaiKekka {
     public ShinsakaiKaisaiKekka() {
         service = ShinsakaiKaisaiKekkaFinder.createInstance();
         manager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
+        onseiJohoManager = new ShinsakaiOnseiJohoManager();
     }
 
     /**
@@ -92,18 +94,14 @@ public class ShinsakaiKaisaiKekka {
         RString 開催番号 = ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class);
         int 連番 = service.get連番(開催番号);
         for (FileData file : files) {
-            ByteReader byteReader = new ByteReader(file.getFilePath().concat(File.separator).concat(file.getFileName()));
+            ByteReader byteReader = new ByteReader(file.getFilePath());
             byte[] array = new byte[BYTE_1024];
             byteReader.read(array);
-            ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = new ShinsakaiKaisaiYoteiJoho(開催番号);
-            ShinsakaiOnseiJoho shinsakaiOnseiJoho = new ShinsakaiOnseiJoho(開催番号, 連番);
+            ShinsakaiOnseiJoho shinsakaiOnseiJoho = new ShinsakaiOnseiJoho(開催番号, 連番 + 1);
             ShinsakaiOnseiJohoBuilder shinsakaiOnseiJohoBuilder = shinsakaiOnseiJoho.createBuilderForEdit();
             shinsakaiOnseiJohoBuilder.set審査会音声ファイル(array);
             shinsakaiOnseiJoho = shinsakaiOnseiJohoBuilder.build();
-            ShinsakaiKaisaiYoteiJohoBuilder kaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
-            kaisaiYoteiJohoBuilder.setShinsakaiOnseiJoho(shinsakaiOnseiJoho);
-            shinsakaiKaisaiYoteiJoho = kaisaiYoteiJohoBuilder.build();
-            manager.save(shinsakaiKaisaiYoteiJoho);
+            onseiJohoManager.save介護認定審査会音声情報(shinsakaiOnseiJoho);
         }
         return ResponseData.of(div).respond();
     }

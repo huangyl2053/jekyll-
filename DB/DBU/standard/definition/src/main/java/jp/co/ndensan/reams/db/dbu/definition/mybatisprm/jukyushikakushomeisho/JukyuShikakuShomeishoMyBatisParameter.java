@@ -11,14 +11,15 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import lombok.Getter;
 
 /**
- *
  * 広域内住所地特例者一覧表のMyBatisパラメータクラスです。
+ *
+ * @reamsid_L DBU-0490-050 wangchao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 public class JukyuShikakuShomeishoMyBatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
-     /**
+    /**
      * パラメータを生成します。
      *
      * @param key IShikibetsuTaishoPSMSearchKey

@@ -41,41 +41,47 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     private static final String SINSEIKUBUNHOREI = "sinseiKubunHorei";
 
     @BatchParameter(key = JIGYOJYOKYOHOKOKU, name = "事業状況報告出力区分")
-    private final boolean jigyoJyokyoHokoku;
+    private boolean jigyoJyokyoHokoku;
     @BatchParameter(key = JISSIJYOKYOTOKEI, name = "実施状況統計出力区分")
-    private final boolean jissiJyokyoTokei;
+    private boolean jissiJyokyoTokei;
     @BatchParameter(key = SINSAHANTEIJYOKYO, name = "審査判定状況出力区分")
-    private final boolean sinsaHanteiJyokyo;
+    private boolean sinsaHanteiJyokyo;
     @BatchParameter(key = SINSAKAIKANRENTOKEI, name = "審査会関連統計資料作成出力区分")
-    private final boolean sinsakaiKanrenTokei;
+    private boolean sinsakaiKanrenTokei;
     @BatchParameter(key = CSVSHUTSURYOKU, name = "CSV出力区分")
-    private final boolean csvShutsuryoku;
+    private boolean csvShutsuryoku;
     @BatchParameter(key = SHUTSURYOKUFAIRU, name = "出力ファイル名")
-    private final RString shutsuryokuFairu;
+    private RString shutsuryokuFairu;
     @BatchParameter(key = HOKENSYANO, name = "保険者番号")
-    private final RString hokensyaNo;
+    private RString hokensyaNo;
     @BatchParameter(key = HIHOKENSYAKUBUN, name = "被保険者区分")
-    private final RString hiHokensyaKubun;
+    private RString hiHokensyaKubun;
     @BatchParameter(key = TAISHONENDO, name = "対象年度")
-    private final RDate taishoNendo;
+    private RDate taishoNendo;
     @BatchParameter(key = GOGITAINO, name = "合議体番号")
-    private final int gogitaiNo;
+    private int gogitaiNo;
     @BatchParameter(key = TAISHOTSUKIKUBUN, name = "対象月編集区分")
-    private final boolean taishoTsukiKubun;
+    private boolean taishoTsukiKubun;
     @BatchParameter(key = TAISHOTSUKI, name = "対象月")
-    private final RString taishoTsuki;
+    private RString taishoTsuki;
     @BatchParameter(key = KIJYUNYMD, name = "基準年月日")
-    private final RDate kijyunYMD;
+    private RDate kijyunYMD;
     @BatchParameter(key = TAISHOGEPPIKUBUN, name = "対象月日編集区分")
-    private final boolean taishoGeppiKubun;
+    private boolean taishoGeppiKubun;
     @BatchParameter(key = TAISHOGEPPIFROM, name = "対象月日開始")
-    private final RString taishoGeppiFrom;
+    private RString taishoGeppiFrom;
     @BatchParameter(key = TAISHOGEPPITO, name = "対象月日終了")
-    private final RString taishoGeppiTo;
+    private RString taishoGeppiTo;
     @BatchParameter(key = SINSEIKUBUNSINSEITOKI, name = "申請区分(申請時)")
-    private final boolean sinseiKubunSinseitoki;
+    private boolean sinseiKubunSinseitoki;
     @BatchParameter(key = SINSEIKUBUNHOREI, name = "申請区分(法令)")
-    private final boolean sinseiKubunHorei;
+    private boolean sinseiKubunHorei;
+
+    /**
+     * コンストラクタです。
+     */
+    public HokokuShiryoSakuSeiBatchParameter() {
+    }
 
     /**
      * コンストラクタです。

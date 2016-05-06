@@ -14,10 +14,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.Hany
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -50,7 +52,10 @@ public class HanyorisutoPanelHandler {
     public void initialize(HanyorisutoPanelDiv div) {
         ShichosonSecurityJoho shichosonsecurityjoho
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (shichosonsecurityjoho != null && shichosonsecurityjoho.get導入形態コード() != null
+        if (shichosonsecurityjoho == null) {
+            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
+        if (shichosonsecurityjoho.get導入形態コード() != null
                 && shichosonsecurityjoho.get導入形態コード().is広域()) {
             div.getCcdHokensya().setVisible(true);
             div.getCcdHokensya().setDisabled(false);
@@ -104,13 +109,16 @@ public class HanyorisutoPanelHandler {
         bparam.set作成区分(div.getRadSakuseiKubun().getSelectedKey());
         RString radchusyutukubunkey = div.getRadChusyutuKubun().getSelectedKey();
         bparam.set抽出区分(radchusyutukubunkey);
+        FlexibleDate 基準年月日 = div.getTxtKijunYMD().getValue() == null
+                ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKijunYMD().getValue().toString());
         if (ChushutsuKubun.全有効データ.getコード().equals(radchusyutukubunkey)) {
-            bparam.set基準年月日(new FlexibleDate(div.getTxtKijunYMD().getValue().toString()));
+            bparam.set基準年月日(基準年月日);
         } else {
             bparam.set基準年月日(null);
         }
         bparam.set支援事業者番号(div.getTxtSienJigyosyano().getValue());
-        bparam.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
+        bparam.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID() == null
+                ? RString.EMPTY : new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
         bparam.set出力項目ID(div.getCcdChohyoShutsuryokukoumoku().get出力項目ID());
         List<RString> list = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
         bparam.setCsv項目名付加(list.contains(ONE));

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanSh
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanbaraiJutakuShikyuGendogakuHanteiCheck;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.SeikyuGakuShukeiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -410,7 +410,8 @@ public class SeikyuGakuShukeiPanelHandler {
                     様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード);
         }
         if (falg1 && falg2) {
-            throw new ApplicationException("限度額対象単位および限度額対象外単位数が計画単位数を一致しません。");
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbcErrorMessages.計画単位数不一致)));
         }
         List<dgdSeikyugakushukei_Row> rowData = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
@@ -420,7 +421,8 @@ public class SeikyuGakuShukeiPanelHandler {
             ServiceShuruiCode serviceCode = new ServiceShuruiCode(row.getDefaultDataName19());
             if (div.getPanelSeikyugakuShukei().
                     getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード().equals(serviceCode.value())) {
-                throw new ApplicationException("サービス種類が登録されています。");
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        DbcErrorMessages.サービス種類が登録済)));
             }
         }
         if (falg3) {

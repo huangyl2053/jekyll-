@@ -102,6 +102,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 審査 = new RString("審査");
+    private static final RString 購入日 = new RString("購入日");
+    private static final RString 種目 = new RString("種目");
+    private static final RString 商品名 = new RString("商品名");
+    private static final RString 製造事業者 = new RString("製造事業者");
+    private static final RString 販売事業者 = new RString("販売事業者");
+    private static final RString 購入金額 = new RString("購入金額");
     private static final RString 処理モード登録 = new RString("処理モード登録");
     private static final RString 処理モード修正 = new RString("処理モード修正");
     private static final RString 処理モード削除 = new RString("処理モード削除");
@@ -838,8 +844,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             entity = entity.createBuilderForEdit().set利用者負担額(div.getTpSummary().
                     getTxtKonkaiRiyoshaFutangakuGokei().getValue().intValue()).build();
         }
-        if (div.getCcdShiharaiHohoInfo().getShiharaiHoho() != null
-                && !div.getCcdShiharaiHohoInfo().getShiharaiHoho().isEmpty()) {
+        if (div.getCcdShiharaiHohoInfo().getShiharaiHohoRad() != null
+                && !div.getCcdShiharaiHohoInfo().getShiharaiHohoRad().isEmpty()) {
             entity = entity.createBuilderForEdit().set支払方法区分コード(
                     div.getCcdShiharaiHohoInfo().getShiharaiHohoRad()).build();
         }
@@ -963,6 +969,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         RString hinmokuCode = div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getYoguKonyuhiDetailInput().getTxtHinmokuCode().getValue();
         RString モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        入力チェック(validPairs);
         if (!処理モード登録.equals(モード) && RowState.Deleted.equals(selectRow().getRowState())) {
             return validPairs;
         }
@@ -989,6 +996,44 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         return validPairs;
     }
 
+    private ValidationMessageControlPairs 入力チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyYMD().
+                getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 購入日.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
+                getDdlShumoku().getSelectedKey() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey().equals(BLANK)) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 種目.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtShohinName().
+                getValue() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtShohinName().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 商品名.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtSeizoJigyosha().
+                getValue() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtSeizoJigyosha().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 製造事業者.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().
+                getValue() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 販売事業者.toString())));
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtBuyAmount().
+                getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 購入金額.toString())));
+        }
+        return validPairs;
+    }
+
     /**
      * 保存チェック
      *
@@ -1007,17 +1052,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                         UrWarningMessages.重複, 品目コード.toString())));
             }
         }
-        //TODO
-//        RString ddlShumoku = div.getYoguKonyuhiShikyuShinseiContentsPanel().
-//                getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey();
-//        for (dgSeikyuDetail_Row row : rowList) {
-//            if (ddlShumoku.equals(row.getTxtShumoku().getValue()) && !RowState.Deleted.equals(row.getRowState())) {
-//                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-//                        UrWarningMessages.重複, 種目コード.toString())));
-////                return validPairs;
-//            }
-//        }
-
         //TODO限度額チェック
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);

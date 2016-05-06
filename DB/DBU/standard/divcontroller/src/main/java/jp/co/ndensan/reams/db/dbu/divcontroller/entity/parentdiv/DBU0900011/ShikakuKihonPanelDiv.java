@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShikakuKihonPanel のクラスファイル
  *
- * @reamsid_L DBU-1080-070 lizhuoxuan
+ * @reamsid_L DBU-1080-050 lizhuoxuan
  */
 public class ShikakuKihonPanelDiv extends Panel {
 

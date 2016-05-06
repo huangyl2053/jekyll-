@@ -18,17 +18,21 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.H
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvEntityEditor;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -36,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -60,6 +66,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト出力(高額介護サービス費状況)CSV出力の処理クラスです。
@@ -80,25 +87,26 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private static final RString CODE_1 = new RString("1");
     private static final RString CODE_2 = new RString("2");
     private static final RString CODE_3 = new RString("3");
-    private static final RString 構成市町村 = new RString("【構成市町村】");
-    private static final RString サービス提供年月 = new RString("【サービス提供年月】");
-    private static final RString 処理状況 = new RString("【処理状況】");
-    private static final RString 審査方法 = new RString("【審査方法】");
-    private static final RString 算定基準 = new RString("【算定基準】");
-    private static final RString 国保連不一致 = new RString("【国保連不一致】");
-    private static final RString 対象者 = new RString("【対象者】");
-    private static final RString 申請区分 = new RString("【申請区分】");
-    private static final RString 支払先 = new RString("【支払先】");
-    private static final RString 金融機関 = new RString("【金融機関】");
-    private static final RString 申請日 = new RString("【申請日】");
-    private static final RString 保険者決定日 = new RString("【保険者決定日】");
-    private static final RString 国保連決定年月 = new RString("【国保連決定年月】");
-    private static final RString 対象者受取年月 = new RString("【対象者受取年月】");
-    private static final RString 国保連送付年月 = new RString("【国保連送付年月】");
-    private static final RString 決定情報受取年月 = new RString("【決定情報受取年月】");
-    private static final RString 括弧_L = new RString("(");
-    private static final RString 括弧_R = new RString(")");
+    private static final RString 抽出対象者 = new RString("【抽出対象者】");
+    private static final RString 構成市町村 = new RString("構成市町村：");
+    private static final RString サービス提供年月 = new RString("サービス提供年月:");
+    private static final RString 処理状況 = new RString("処理状況：");
+    private static final RString 審査方法 = new RString("審査方法：");
+    private static final RString 算定基準 = new RString("算定基準：");
+    private static final RString 国保連不一致 = new RString("国保連不一致：");
+    private static final RString 対象者 = new RString("対象者：");
+    private static final RString 申請区分 = new RString("申請区分：");
+    private static final RString 支払先 = new RString("支払先：");
+    private static final RString 金融機関 = new RString("金融機関：");
+    private static final RString 申請日 = new RString("申請日：");
+    private static final RString 保険者決定日 = new RString("保険者決定日：");
+    private static final RString 国保連決定年月 = new RString("国保連決定年月：");
+    private static final RString 対象者受取年月 = new RString("対象者受取年月：");
+    private static final RString 国保連送付年月 = new RString("国保連送付年月：");
+    private static final RString 決定情報受取年月 = new RString("決定情報受取年月：");
     private static final RString 波線 = new RString("　～　");
+    private static final RString 左記号 = new RString("(");
+    private static final RString 右記号 = new RString(")");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
     private HanyoListKogakuKaigoProcessParameter parameter;
     private HanyoListKogakuKaigoEucCsvEntityEditor dataCreate;
@@ -106,8 +114,6 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
     private Association 地方公共団体;
-    private RString 文字コード;
-    private Encode csv文字コード;
     private Decimal 連番;
 
     @BatchWriter
@@ -123,35 +129,30 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
 
     @Override
     protected IBatchReader createReader() {
-        //DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.住登外優先);
-        builder.setデータ取得区分(DataShutokuKubun.直近レコード);
-        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        parameter.set宛名検索条件(searchKey);
+        RString 国保連IFなし区分 = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RString 事業高額分 = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_事業高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
+        builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        builder.set業務コード(GyomuCode.DB介護保険);
+        IKozaSearchKey searchKey = builder.build();
+        parameter.setSearchkey(searchKey);
+        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
+        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        parameter.setList(list);
+        parameter.set国保連IFなし区分(国保連IFなし区分);
+        parameter.set事業高額分(事業高額分);
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParamter());
     }
 
     @Override
     protected void createWriter() {
-        RDate システム日時 = RDate.getNowDate();
-        文字コード = DbBusinessConifg.get(ConfigNameDBU.EUC共通_文字コード, システム日時, SubGyomuCode.DBU介護統計報告);
-        if (CODE_1.equals(文字コード)) {
-            csv文字コード = Encode.UTF_8withBOM;
-        } else if (CODE_2.equals(文字コード)) {
-            csv文字コード = Encode.SJIS;
-        } else if (CODE_3.equals(文字コード)) {
-            csv文字コード = Encode.JIS;
-        } else {
-            csv文字コード = Encode.UTF_8withBOM;
-        }
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(csv文字コード).
+                setEncode(Encode.UTF_8).
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.isTomokumeFuka())
                 .build();
@@ -202,12 +203,20 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
 
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
+        builder.append(抽出対象者);
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(構成市町村);
-        // TODO QA:710 : 構成市町村名
-        builder.append(parameter.getKouseiShichosonCode() == null
-                || parameter.getKouseiShichosonCode().isEmpty()
-                ? RString.EMPTY : 括弧_L.concat(new RString(parameter.getKouseiShichosonCode().toString())
-                        .concat(括弧_R).concat(括弧_R)));
+        LasdecCode lasdecCode = parameter.getKouseiShichosonCode();
+        if (lasdecCode != null) {
+            RString 構成市町村コード = 左記号.concat(lasdecCode.getColumnValue()).concat(右記号);
+            HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+            HokenshaSummary hokenshaSummary = hokenshaList.get(lasdecCode);
+            RString 構成市町村名 = hokenshaSummary == null ? RString.EMPTY : hokenshaSummary.get市町村名称();
+            builder.append(構成市町村コード).append(構成市町村名);
+        } else {
+            builder.append(RString.EMPTY);
+        }
         出力条件.add(builder.toRString());
 
         builder = new RStringBuilder();
@@ -281,11 +290,9 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
 
         builder = new RStringBuilder();
         builder.append(金融機関);
-        // TODO QA:710 : 金融機関名称
-        builder.append(null == parameter.getKiyuKikanCode()
-                || parameter.getKiyuKikanCode().isEmpty()
-                ? RString.EMPTY : 括弧_L.concat(new RString(parameter.getKiyuKikanCode().toString())
-                        .concat(括弧_R).concat(括弧_R)));
+        builder.append(parameter.getKiyuKikanCode() == null
+                ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
+                .concat(右記号).concat(parameter.getKiyuKikanName()));
         出力条件.add(builder.toRString());
     }
 

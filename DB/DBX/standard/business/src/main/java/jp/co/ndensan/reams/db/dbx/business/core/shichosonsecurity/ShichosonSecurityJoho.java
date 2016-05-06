@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 市町村情報 の項目定義クラスです。
  *
- * @reamsid_L DBU-0050-010 liangbc
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

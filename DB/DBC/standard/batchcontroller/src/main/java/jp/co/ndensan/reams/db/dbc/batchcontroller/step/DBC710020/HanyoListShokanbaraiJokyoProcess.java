@@ -7,27 +7,25 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710020;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvDataCreate;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -35,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -47,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -58,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト出力(償還払い状況)Process
@@ -81,18 +80,22 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private static final RString CODE_1 = new RString("1");
     private static final RString CODE_2 = new RString("2");
     private static final RString CODE_3 = new RString("3");
-    private static final RString 保険者 = new RString("【保険者】");
-    private static final RString サービス提供年月 = new RString("【サービス提供年月】");
-    private static final RString 処理状況 = new RString("【処理状況】");
-    private static final RString 決定状況 = new RString("【決定状況】");
-    private static final RString 支払方法 = new RString("【支払方法】");
-    private static final RString 金融機関 = new RString("【金融機関】");
-    private static final RString 申請日 = new RString("【申請日】");
-    private static final RString 住宅改修支給届出日 = new RString("【住宅改修支給届出日】");
-    private static final RString 決定日 = new RString("【決定日】");
-    private static final RString 国保連送付年月 = new RString("【国保連送付年月】");
-    private static final RString 様式番号 = new RString("【様式番号】");
+    private static final int INDEX_15 = 15;
+    private static final RString 抽出対象者 = new RString("【抽出対象者】");
+    private static final RString 保険者 = new RString("保険者：");
+    private static final RString サービス提供年月 = new RString("サービス提供年月：");
+    private static final RString 処理状況 = new RString("処理状況：");
+    private static final RString 決定状況 = new RString("決定状況：");
+    private static final RString 支払方法 = new RString("支払方法：");
+    private static final RString 金融機関 = new RString("金融機関：");
+    private static final RString 申請日 = new RString("申請日：");
+    private static final RString 住宅改修支給届出日 = new RString("住宅改修支給届出日：");
+    private static final RString 決定日 = new RString("決定日：");
+    private static final RString 国保連送付年月 = new RString("国保連送付年月：");
+    private static final RString 様式番号 = new RString("様式番号：");
     private static final RString すべて = new RString("すべて");
+    private static final RString 左記号 = new RString("(");
+    private static final RString 右記号 = new RString(")");
     private HanyoListShokanbaraiJokyoProcessParameter parameter;
     private HanyoListCsvDataCreate dataCreate;
     private RString eucFilePath;
@@ -100,8 +103,6 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
     private HokenshaList 保険者リスト;
-    private RString 文字コード;
-    private Encode csv文字コード;
     private Decimal 連番;
 
     @BatchWriter
@@ -121,35 +122,26 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.住登外優先);
-        builder.setデータ取得区分(DataShutokuKubun.直近レコード);
-        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        parameter.set宛名検索条件(searchKey);
+        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
+        builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        builder.set業務コード(GyomuCode.DB介護保険);
+        IKozaSearchKey searchKey = builder.build();
+        parameter.setSearchkey(searchKey);
+        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
+        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        parameter.setList(list);
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
 
     @Override
     protected void createWriter() {
-        RDate システム日時 = RDate.getNowDate();
-        文字コード = DbBusinessConifg.get(ConfigNameDBU.EUC共通_文字コード, システム日時, SubGyomuCode.DBU介護統計報告);
-        if (CODE_1.equals(文字コード)) {
-            csv文字コード = Encode.UTF_8withBOM;
-        } else if (CODE_2.equals(文字コード)) {
-            csv文字コード = Encode.SJIS;
-        } else if (CODE_3.equals(文字コード)) {
-            csv文字コード = Encode.JIS;
-        } else {
-            csv文字コード = Encode.UTF_8withBOM;
-        }
-
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(csv文字コード).
+                setEncode(Encode.UTF_8).
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.is項目名付加()).
                 build();
@@ -217,9 +209,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private List<RString> get出力条件() {
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
+        builder.append(抽出対象者);
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(保険者);
         builder.append(parameter.get保険者コード() == null
-                ? RString.EMPTY : parameter.get保険者コード().concat(parameter.get保険者名()));
+                ? RString.EMPTY : 左記号.concat(parameter.get保険者コード())
+                .concat(右記号).concat(parameter.get保険者名()));
         出力条件.add(builder.toRString());
         builder = get処理状況();
         出力条件.add(builder.toRString());
@@ -233,7 +229,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         builder.append(金融機関);
         builder.append(parameter.get金融機関コード() == null
                 || parameter.get金融機関コード().isEmpty()
-                ? RString.EMPTY : parameter.get金融機関コード().concat(parameter.get金融機関名称()));
+                ? RString.EMPTY : 左記号.concat(parameter.get金融機関コード())
+                .concat(右記号).concat(parameter.get金融機関名称()));
         出力条件.add(builder.toRString());
         builder = get申請日();
         出力条件.add(builder.toRString());
@@ -243,8 +240,10 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         出力条件.add(builder.toRString());
         builder = get国保連送付年月();
         出力条件.add(builder.toRString());
-        builder = get様式番号();
-        出力条件.add(builder.toRString());
+        List<RStringBuilder> 様式番号List = get様式番号(parameter.get様式番号());
+        for (RStringBuilder 番号 : 様式番号List) {
+            出力条件.add(番号.toRString());
+        }
         return 出力条件;
     }
 
@@ -254,20 +253,16 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RString shoriJokyo = RString.EMPTY;
         if (ShoriJokyo.すべて.getコード().equals(parameter.get処理状況())) {
             shoriJokyo = ShoriJokyo.すべて.get名称();
-        } else if (ShoriJokyo.国保連決定取込済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.国保連決定取込済み.get名称();
-        } else if (ShoriJokyo.国保連結果送付済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.国保連結果送付済み.get名称();
-        } else if (ShoriJokyo.通知書発行済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.通知書発行済み.get名称();
-        } else if (ShoriJokyo.振込明細発行済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.振込明細発行済み.get名称();
-        } else if (ShoriJokyo.申請入力のみ.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.申請入力のみ.get名称();
-        } else if (ShoriJokyo.支給不支給決定済み.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.支給不支給決定済み.get名称();
-        } else if (ShoriJokyo.対象者で申請なし.getコード().equals(parameter.get処理状況())) {
-            shoriJokyo = ShoriJokyo.支給不支給決定済み.get名称();
+        } else if (ShoriJokyo.不給不支給決定済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.不給不支給決定済.get名称();
+        } else if (ShoriJokyo.国保連送付済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.国保連送付済.get名称();
+        } else if (ShoriJokyo.振込明細発行済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.振込明細発行済.get名称();
+        } else if (ShoriJokyo.申請入力.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.申請入力.get名称();
+        } else if (ShoriJokyo.通知書発行済.getコード().equals(parameter.get処理状況())) {
+            shoriJokyo = ShoriJokyo.通知書発行済.get名称();
         }
         builder.append(shoriJokyo);
         return builder;
@@ -277,11 +272,11 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(決定状況);
         RString ketteiJokyo = RString.EMPTY;
-        if (KetteiJokyo.支給区分の判定を行わない.getコード().equals(parameter.get処理状況())) {
+        if (KetteiJokyo.支給区分の判定を行わない.getコード().equals(parameter.get決定情報())) {
             ketteiJokyo = KetteiJokyo.支給区分の判定を行わない.get名称();
-        } else if (KetteiJokyo.不支給決定されたデータのみ抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (KetteiJokyo.不支給決定されたデータのみ抽出.getコード().equals(parameter.get決定情報())) {
             ketteiJokyo = KetteiJokyo.不支給決定されたデータのみ抽出.get名称();
-        } else if (KetteiJokyo.支給決定されたデータのみ抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (KetteiJokyo.支給決定されたデータのみ抽出.getコード().equals(parameter.get決定情報())) {
             ketteiJokyo = KetteiJokyo.支給決定されたデータのみ抽出.get名称();
         }
         builder.append(ketteiJokyo);
@@ -292,11 +287,11 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(支払方法);
         RString shiharaiHoho = RString.EMPTY;
-        if (ShiharaiHoho.支払方法の判定を行わない.getコード().equals(parameter.get処理状況())) {
+        if (ShiharaiHoho.支払方法の判定を行わない.getコード().equals(parameter.get支払方法())) {
             shiharaiHoho = ShiharaiHoho.支払方法の判定を行わない.get名称();
-        } else if (ShiharaiHoho.窓口払いのデータを抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (ShiharaiHoho.窓口払いのデータを抽出.getコード().equals(parameter.get支払方法())) {
             shiharaiHoho = ShiharaiHoho.窓口払いのデータを抽出.get名称();
-        } else if (ShiharaiHoho.金融機関への振込データを抽出.getコード().equals(parameter.get処理状況())) {
+        } else if (ShiharaiHoho.金融機関への振込データを抽出.getコード().equals(parameter.get支払方法())) {
             shiharaiHoho = ShiharaiHoho.金融機関への振込データを抽出.get名称();
         }
         builder.append(shiharaiHoho);
@@ -307,6 +302,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス提供年月);
         RString serviceTeikyoYM = RString.EMPTY;
+        if (parameter.getサービス提供年月From() == null && parameter.getサービス提供年月To() == null) {
+            return builder;
+        }
         if (parameter.getサービス提供年月From() != null && parameter.getサービス提供年月To() != null) {
             serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
                     .concat(ITEM)
@@ -325,6 +323,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(申請日);
         RString shinseiYMD = RString.EMPTY;
+        if (parameter.get申請日From() == null && parameter.get申請日To() == null) {
+            return builder;
+        }
         if (parameter.get申請日From() != null && parameter.get申請日To() != null) {
             shinseiYMD = dataToRString(parameter.get申請日From())
                     .concat(ITEM)
@@ -343,6 +344,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(住宅改修支給届出日);
         RString kaishuYM = RString.EMPTY;
+        if (parameter.get住宅改修支給届出日From() == null && parameter.get住宅改修支給届出日From() == null) {
+            return builder;
+        }
         if (parameter.get住宅改修支給届出日From() != null && parameter.get住宅改修支給届出日To() != null) {
             kaishuYM = dataToRString(parameter.get住宅改修支給届出日From())
                     .concat(ITEM)
@@ -361,6 +365,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(決定日);
         RString ketteiYMD = RString.EMPTY;
+        if (parameter.get決定日From() == null && parameter.get決定日To() == null) {
+            return builder;
+        }
         if (parameter.get決定日From() != null && parameter.get決定日To() != null) {
             ketteiYMD = dataToRString(parameter.get決定日From())
                     .concat(ITEM)
@@ -379,6 +386,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(国保連送付年月);
         RString kokuhorenYM = RString.EMPTY;
+        if (parameter.get国保連送付年月From() == null && parameter.get国保連送付年月To() == null) {
+            return builder;
+        }
         if (parameter.get国保連送付年月From() != null && parameter.get国保連送付年月To() != null) {
             kokuhorenYM = monthToRString(parameter.get国保連送付年月From())
                     .concat(ITEM)
@@ -393,15 +403,49 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         return builder;
     }
 
-    private RStringBuilder get様式番号() {
+    private List<RStringBuilder> get様式番号(RString 番号) {
+
+        List<RStringBuilder> buiderList = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(様式番号);
-        RString yoshikiNo = RString.EMPTY;
-        if (CODE_1.equals(parameter.get様式番号選択())) {
-            yoshikiNo = すべて;
+        if (番号.isNullOrEmpty()) {
+            buiderList.add(builder);
+            return buiderList;
         }
-        builder.append(yoshikiNo);
-        return builder;
+        boolean 様式番号分行 = false;
+        if (CODE_1.equals(parameter.get様式番号選択())) {
+            builder.append(すべて);
+            buiderList.add(builder);
+        } else {
+            List<RString> 様式番号list = 番号.split(EUC_WRITER_DELIMITER.toString());
+            for (int i = 1; i <= 様式番号list.size(); i++) {
+                if (様式番号分行) {
+                    builder = new RStringBuilder();
+                    builder.append(RString.FULL_SPACE).append(RString.FULL_SPACE).append(RString.FULL_SPACE)
+                            .append(RString.FULL_SPACE).append(RString.FULL_SPACE);
+                }
+                builder.append(様式番号list.get(i - 1));
+                if (i != 様式番号list.size() && builder.toRString().length() + 1 + 様式番号list.get(i).length() < INDEX_15) {
+                    builder.append(EUC_WRITER_DELIMITER);
+                    getLast様式番号(builder, i, 様式番号list, buiderList);
+                    様式番号分行 = false;
+                } else if (i == 様式番号list.size()) {
+                    buiderList.add(builder);
+                    break;
+                } else {
+                    buiderList.add(builder);
+                    様式番号分行 = true;
+                }
+            }
+        }
+        return buiderList;
+    }
+
+    private void getLast様式番号(RStringBuilder builder, int i, List<RString> 様式番号list, List<RStringBuilder> buiderList) {
+        if (i == 様式番号list.size() - 1) {
+            builder.append(様式番号list.get(i));
+            buiderList.add(builder);
+        }
     }
 
 }

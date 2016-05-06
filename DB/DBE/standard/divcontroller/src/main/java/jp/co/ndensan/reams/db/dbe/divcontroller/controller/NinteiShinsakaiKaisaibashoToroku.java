@@ -12,15 +12,18 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -28,11 +31,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 介護認定審査会開催場所登録Divを制御クラスです。
  *
- * @reamsid_L DBE-0100-010  wangkun
+ * @reamsid_L DBE-0100-010 wangkun
  */
 public class NinteiShinsakaiKaisaibashoToroku {
 
@@ -51,8 +55,23 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @return ResponseData
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onLoad(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        div.getShinsakaiKaisaibashokensaku().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
         div.getBtnTsuika().setDisabled(false);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 介護認定審査会開催場所登録の「クリア」ボタンが押下します。
+     *
+     * @param div NinteiShinsakaiKaisaibashoTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnClear(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        div.getShinsakaiKaisaibashokensaku().getRadHyojiJoken().setSelectedKey(デフォルト検索条件);
+        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        div.getShinsakaiKaisaibashokensaku().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         return ResponseData.of(div).respond();
     }
 
@@ -222,11 +241,13 @@ public class NinteiShinsakaiKaisaibashoToroku {
         if (デフォルト検索条件.equals(div.getRadHyojiJoken().getSelectedKey())) {
             businessList = manager.
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
-                            createSelectBy審査会開催場所状況(有効)).records();
+                            createSelectBy審査会開催場所状況(有効, div.getShinsakaiKaisaibashokensaku().getTxtDispMax().getValue().intValue()))
+                    .records();
         } else {
             businessList = manager.
                     get介護認定審査会開催場所情報一覧(GogitaiJohoMapperParameter.
-                            createSelectBy審査会開催場所状況(全て)).records();
+                            createSelectBy審査会開催場所状況(全て, div.getShinsakaiKaisaibashokensaku().getTxtDispMax().getValue().intValue()))
+                    .records();
         }
         Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
                 = Models.create(businessList);

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDa
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.paymentdate.PaymentDateHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -79,7 +78,7 @@ public class PaymentDateDiv extends Panel implements IPaymentDateDiv {
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void onLoad(RString 支払方法機能区分) {
+    public void initialize(RString 支払方法機能区分) {
         PaymentDateHandler.of(this).onLoad(支払方法機能区分);
     }
 

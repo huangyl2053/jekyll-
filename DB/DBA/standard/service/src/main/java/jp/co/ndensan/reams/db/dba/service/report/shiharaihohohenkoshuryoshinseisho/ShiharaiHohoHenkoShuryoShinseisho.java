@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -65,8 +66,9 @@ public class ShiharaiHohoHenkoShuryoShinseisho {
      *
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
+     * @return SourceDataCollection
      */
-    public void createShiharaiHohoHenkoShuryoShinseishoChohyo(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
+    public SourceDataCollection createShiharaiHohoHenkoShuryoShinseishoChohyo(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         ShiharaiHenkoShokanbaraikaShoryoShinseishoProperty proerty = new ShiharaiHenkoShokanbaraikaShoryoShinseishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
@@ -81,6 +83,7 @@ public class ShiharaiHohoHenkoShuryoShinseisho {
                     report.writeBy(reportSourceWriter);
                 }
             }
+            return reportManager.publish();
         }
     }
 

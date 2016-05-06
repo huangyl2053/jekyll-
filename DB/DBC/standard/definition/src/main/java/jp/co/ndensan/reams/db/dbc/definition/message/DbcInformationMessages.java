@@ -13,12 +13,10 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 /**
  * DBCのインフォメーションメッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBB-9999-013 wangchao
  */
 public enum DbcInformationMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, ""),
     限度額チェック前(1, "画面のデータを変更するため、限度額をチェックしてください。");
 
     private final Message message;

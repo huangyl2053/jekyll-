@@ -104,13 +104,13 @@
       CASE  WHEN "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = TRUE  THEN (         
           CASE  WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0007')             
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0007' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode")   
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0007' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode")   
           WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0013')  
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0013' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0013' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode")
           WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0014')  
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0014' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0014' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode")
               END )
           ELSE NULL END AS "取得情報_前_事由",
       CASE  WHEN "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = TRUE  THEN (         
@@ -139,10 +139,10 @@
      CASE  WHEN "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = TRUE  THEN (         
           CASE  WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0010')             
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0010' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0010' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode")
           WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0015')  
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0015' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0015' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode")
               END )
           ELSE NULL END AS "喪失情報_前_事由",
 
@@ -166,13 +166,13 @@
       CASE  WHEN "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = FALSE  THEN (         
           CASE  WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0007')             
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0007' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0007' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode")
           WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0013')  
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0013' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0013' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode")
           WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0014')  
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0014' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0014' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode")
               END )
           ELSE NULL END AS "取得情報_後_事由",
       CASE  WHEN "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = FALSE  THEN (         
@@ -201,10 +201,10 @@
       CASE  WHEN "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = FALSE  THEN (         
           CASE  WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0010')             
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0010' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0010' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode")
           WHEN "DbT1001HihokenshaDaicho"."idoJiyuCode" IN (SELECT "code" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0015')  
           THEN 
-             (SELECT "codeMeisho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0015' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode")
+             (SELECT "codeRyakusho" FROM rgdb."UzT0007Code" WHERE "UzT0007Code"."subGyomuCode" ='DBA' AND "UzT0007Code"."codeShubetsu"='0015' AND "UzT0007Code"."code" = "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode")
               END )
           ELSE NULL END AS "喪失情報_後_事由",
 

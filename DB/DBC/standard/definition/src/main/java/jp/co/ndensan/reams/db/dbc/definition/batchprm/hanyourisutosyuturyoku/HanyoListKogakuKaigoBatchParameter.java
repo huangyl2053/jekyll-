@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -37,6 +36,7 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private static final String KEY_SHINSEI_KUBUN = "shinseiKubun";
     private static final String KEY_SHIHARAI_SAKI = "shiharaiSaki";
     private static final String KEY_KIYU_KIKAN_CODE = "kiyuKikanCode";
+    private static final String KEY_KIYU_KIKAN_NAME = "kiyuKikanName";
     private static final String KEY_SHISEHI_FROM = "shisehiFrom";
     private static final String KEY_SHISEHI_TO = "shisehiTo";
     private static final String KEY_HOKEMONO_KETEIHI_FROM = "hokemonoKeteihiFrom";
@@ -78,6 +78,8 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private RString shiharaiSaki;
     @BatchParameter(key = KEY_KIYU_KIKAN_CODE, name = "金融機関コード")
     private RString kiyuKikanCode;
+    @BatchParameter(key = KEY_KIYU_KIKAN_NAME, name = "金融機関名称")
+    private RString kiyuKikanName;
     @BatchParameter(key = KEY_SHISEHI_FROM, name = "申請日From")
     private FlexibleDate shisehiFrom;
     @BatchParameter(key = KEY_SHISEHI_TO, name = "申請日To")
@@ -112,8 +114,6 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private boolean rebanFuka;
     @BatchParameter(key = KEY_HIZUKE_HESHU, name = "日付’／’編集")
     private boolean hizukeHeshu;
-    @BatchParameter(key = KEY_ISHIKIPSMSEARCH, name = "宛名検索条件")
-    private IShikibetsuTaishoPSMSearchKey ishikiPsmSearch;
 
     /**
      * 汎用リスト_高額介護サービス費状況のProcessParamterパラメータ作成です。
@@ -133,6 +133,7 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
                 shinseiKubun,
                 shiharaiSaki,
                 kiyuKikanCode,
+                kiyuKikanName,
                 shisehiFrom,
                 shisehiTo,
                 hokemonoKeteihiFrom,
@@ -150,6 +151,6 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
                 tomokumeFuka,
                 rebanFuka,
                 hizukeHeshu,
-                ishikiPsmSearch);
+                null, null);
     }
 }

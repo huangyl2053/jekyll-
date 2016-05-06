@@ -96,7 +96,7 @@ public class HanyoListKyotakuServiceKeikakuEntity {
     private FlexibleDate dbV4001認定有効期間終了日;
     private FlexibleDate dbV4001受給認定日;
     private boolean dbV4001旧措置フラグ;
-    private Code dbV4001みなし要介護区分コード;
+    private Code dbT4001みなし要介護区分コード;
     private Code dbV4001直近異動事由コード;
 
     /**

@@ -79,7 +79,12 @@ public enum ReportIdDBC {
     /**
      * 過誤決定通知書情報取込一覧表（保険者分）の帳票ＩＤです。
      */
-    DBC200050(new ReportId("DBC200050_KagoKetteitsuchishoTorikomiIchiranHokenshaBun"), new RString("過誤決定通知書情報取込一覧表（保険者分）"));
+    DBC200050(new ReportId("DBC200050_KagoKetteitsuchishoTorikomiIchiranHokenshaBun"), new RString("過誤決定通知書情報取込一覧表（保険者分）")),
+    /**
+     * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書の帳票ＩＤです。
+     */
+    DBC800015(new ReportId("DBC800015_KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyo"),
+            new RString("介護保険高額介護（予防）サービス費支給（受領委任払）申請書"));
     private final ReportId reportId;
     private final RString reportName;
 

@@ -148,17 +148,10 @@ public class DvKogakuServiceJohoHandler {
                 .getSelectedValue())
                 || 口座払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki()
                         .getSelectedValue())) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setVisible(true);
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().setDisabled(false);
-        }
-        if (窓口払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki()
-                .getSelectedValue())
-                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
-                .getKinyuKikanCode() == null
-                || div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode()
-                .isEmpty())
-                && (div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関() == null)) {
-            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setVisible(true);
+        } else if (窓口払い.equals(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki()
+                .getSelectedValue())) {
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().clear();
             div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().setDisabled(true);
         }
     }
@@ -166,7 +159,8 @@ public class DvKogakuServiceJohoHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
-     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @return HanyoListKogakuKaigoBatchParameter
+     * 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
     public HanyoListKogakuKaigoBatchParameter getBatchParamter() {
         HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
@@ -195,31 +189,26 @@ public class DvKogakuServiceJohoHandler {
             batchparam.setServiceYmTo(new FlexibleYearMonth(div.getDvKogakuChushutsuJoken().getDvKogakuService()
                     .getTxtKogakuServiceTeikyoYM().getToValue().getYearMonth().toString()));
         }
-        batchparam.setShoriJokyo(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedValue());
-        batchparam.setShinsaHoho(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedValue());
-        batchparam.setSanteiKijun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedValue());
-        batchparam.setKokuhorenFuicchi(div.getDvKogakuChushutsuJoken().getDvKogakuService()
-                .getRadKogakuKokuhorenFuicchi().getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedValue());
-        batchparam.setTaishosha(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedValue());
-        batchparam.setShinseiKubun(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedValue());
-        batchparam.setShiharaiSaki(div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki()
-                .getSelectedValue().isEmpty() ? RString.EMPTY : div
-                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedValue());
+        batchparam.setShoriJokyo(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().getSelectedKey());
+        batchparam.setShinsaHoho(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().getSelectedKey());
+        batchparam.setSanteiKijun(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().getSelectedKey());
+        batchparam.setKokuhorenFuicchi(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().getSelectedKey());
+        batchparam.setTaishosha(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().getSelectedKey());
+        batchparam.setShinseiKubun(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().getSelectedKey());
+        batchparam.setShiharaiSaki(div
+                .getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().getSelectedKey());
         batchparam.setKiyuKikanCode(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
-                .getKinyuKikanCode().isEmpty() ? RString.EMPTY : div
+                .getKinyuKikanCode() == null ? RString.EMPTY : div
                 .getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan().getKinyuKikanCode().value());
-
+        batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
+                .get金融機関() == null ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
+                .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
         return batchparam;

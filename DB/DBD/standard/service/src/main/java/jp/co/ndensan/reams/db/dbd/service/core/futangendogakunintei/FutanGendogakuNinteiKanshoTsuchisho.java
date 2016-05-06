@@ -49,7 +49,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      */
     public void setAccessLogger(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
 
-        //アクセスログの記録
         JukyushaDaichoEntity jukyushaDaicho = new JukyushaDaichoEntity();
         jukyushaDaicho.setコード(new Code(コード));
         jukyushaDaicho.setName(TXT被保険者番号);

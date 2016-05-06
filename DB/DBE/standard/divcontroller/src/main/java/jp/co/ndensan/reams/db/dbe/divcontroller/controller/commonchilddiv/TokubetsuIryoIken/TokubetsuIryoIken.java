@@ -29,7 +29,7 @@ public class TokubetsuIryoIken {
      * @param div TokubetsuIryoIkenDiv
      * @return ResponseData<TokubetsuIryoIkenDiv>
      */
-    public ResponseData<TokubetsuIryoIkenDiv> load(TokubetsuIryoIkenDiv div) {
+    public ResponseData<TokubetsuIryoIkenDiv> onLoad(TokubetsuIryoIkenDiv div) {
         getHandler(div).onLoad();
         div.setHiddenHenSyu(編集設定(div));
         return ResponseData.of(div).respond();

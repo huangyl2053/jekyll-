@@ -190,8 +190,8 @@ public final class MainPanelHandler {
                 getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtSagakuGoke().getValue();
 
         UpdSyokanbaraiketeJoho parameter = UpdSyokanbaraiketeJoho.createSelectByKeyParam(
-                被保険者番号, サービス年月, 整理番号, 証明書, 識別コード, null, 決定日, 支給区分, 決定年月日,
-                支給決定区分, 支払金額, 前回支払金額, 差額金額合計);
+                被保険者番号, サービス年月, 整理番号, 証明書, 識別コード, 検索情報キー.get保険者番号(), 決定日, 支給区分,
+                決定年月日, 支給決定区分, 支払金額, 前回支払金額, 差額金額合計);
         ShokanShinsei dbt3034 = new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
 
         RString 国保連共同処理受託区分_償還 = DbBusinessConifg.get(

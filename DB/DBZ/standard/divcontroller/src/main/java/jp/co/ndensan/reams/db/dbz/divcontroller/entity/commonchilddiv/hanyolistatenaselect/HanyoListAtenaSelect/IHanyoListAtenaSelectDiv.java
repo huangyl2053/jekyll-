@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolist
 
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -226,9 +227,9 @@ public interface IHanyoListAtenaSelectDiv extends ICommonChildDivBaseProperties 
     public void set住所終了(ChoikiCode 町域コード);
 
     /**
-     * 汎用リスト宛名抽出条件共有子Divの住所終了の設定値を返却します。
+     * 汎用リスト宛名抽出条件共有子Divの行政区終了の設定値を返却します。
      *
-     * @return 住所終了の設定値
+     * @return 行政区終了の設定値
      */
     public RString get行政区終了();
 
@@ -280,5 +281,12 @@ public interface IHanyoListAtenaSelectDiv extends ICommonChildDivBaseProperties 
      * @param 地区3コード
      */
     public void set地区３終了(ChikuCode 地区3コード);
+
+    /**
+     * 宛名の抽出条件を作成して返却します。
+     *
+     * @return 宛名の抽出条件
+     */
+    public AtenaSelectBatchParameter get宛名抽出条件();
 
 }

@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -12,76 +11,68 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
 
-    void initialize(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード, RString 状態);
+    public abstract void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態);
 
     /**
-     * 支払方法を返します。
+     * 支払方法を取得します。
      *
      * @return RString
      */
-    RString getShiharaiHoho();
+    public RString getShiharaiHohoRad();
 
     /**
-     * 支払方法を返します。
+     * 支払場所を取得します。
      *
      * @return RString
      */
-    RString getShiharaiHohoRad();
+    public RString getShiharaiBasho();
 
     /**
-     * 支払場所を返します。
-     *
-     * @return RString
-     */
-    RString getShiharaiBasho();
-
-    /**
-     * 開始日を返します。
+     * 開始日を取得します。
      *
      * @return RDate
      */
-    RDate getStartYMD();
+    public RDate getStartYMD();
 
     /**
-     * 終了日を返します。
+     * 終了日を取得します。
      *
      * @return RDate
      */
-    RDate getEndYMD();
+    public RDate getEndYMD();
 
     /**
-     * 開始時間を返します。
+     * 開始時間を取得します。
      *
      * @return RTime
      */
-    RTime getStartHHMM();
+    public RTime getStartHHMM();
 
     /**
-     * 終了時間を返します。
+     * 終了時間を取得します。
      *
      * @return RTime
      */
-    RTime getEndHHMM();
+    public RTime getEndHHMM();
 
     /**
-     * 口座番号を返します。
+     * 口座IDを取得します。
      *
      * @return RString
      */
-    RString getKozaNo();
+    public RString getKozaNo();
 
     /**
-     * 契約番号を返します。
+     * 契約番号を取得します。
      *
      * @return RString
      */
-    RString getKeiyakuNo();
+    public RString getKeiyakuNo();
 
     /**
-     * 口座IDを返します。
+     * 口座IDを取得します。
      *
-     * @return 口座ID
+     * @return RString
      */
-    RString getKozaID();
-
+    public RString getKozaID();
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -119,7 +120,7 @@ public class HanyoListShokanbaraiJokyoEntity {
      *
      * @param 請求基本Entity 請求基本Entity
      */
-    private DbT3038ShokanKihonEntity 請求基本Entity;
+    private List<DbT3038ShokanKihonEntity> 請求基本List;
     /**
      * -- GETTER -- 福祉用具Entity。
      *
@@ -143,7 +144,7 @@ public class HanyoListShokanbaraiJokyoEntity {
      *
      * @param 口座情報Entity 口座情報Entity
      */
-    private UaT0310KozaEntity 口座情報Entity;
+    private KozaRelateEntity 口座情報Entity;
     /**
      * -- GETTER -- 宛名Entity。
      *
