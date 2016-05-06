@@ -287,11 +287,11 @@ public class ShikakuSoshitsuIdoTotalHandler {
         List<SikakuKikan> sikakuKikanList = get取得日と喪失日(rowList);
         for (dgShikakuShutokuRireki_Row row : rowList) {
             if (修正.equals(row.getState())) {
-                RString errorCode = manager.shikakuSoshitsuTorokuCheck(識別コード, 被保険者番号, row.getShutokuDate().getValue(),
+                RString errorCode = manager.shikakuSoshitsuTorokuCheck(識別コード, 被保険者番号, row.getSoshitsuDate().getValue(),
                         DateOfBirthFactory.createInstance(div.getKihonJoho().getCcdKaigoAtenaInfo().getShokaiData()
                                 .getTxtSeinengappiYMD().getValue()),
                         tokusoRirekiList, sikakuKikanList);
-                // TODO
+                // TODO 王さんと楊さん検討中
                 if (!RString.isNullOrEmpty(errorCode)) {
                     throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
                 }
