@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 月別推移表作成のMyBatis用パラメータクラスです。
+ *
+ * @reamsid_L DBB-0760-030 lishengli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -267,13 +268,6 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
             RString 市町村コード, RString 旧市町村コード, RString psmShikibetsuTaisho) {
         boolean is1と3場合 = false;
         boolean is2場合 = false;
-        boolean is町域;
-        boolean is行政区;
-        boolean is地区1;
-        boolean is地区2;
-        boolean is地区3;
-        boolean is市町村コード;
-        boolean is市町村と旧市町村;
         RString 調定年度3月31日;
         RString 調定年度0401;
         FlexibleDate 終了生年月日 = FlexibleDate.EMPTY;
@@ -294,13 +288,13 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
             終了生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢開始.toString()));
             is1と3場合 = true;
         }
-        is町域 = is町域(選択対象);
-        is行政区 = is行政区(選択対象);
-        is地区1 = is地区1(選択対象);
-        is地区2 = is地区2(選択対象);
-        is地区3 = is地区3(選択対象);
-        is市町村コード = is市町村コード(市町村コード);
-        is市町村と旧市町村 = is市町村と旧市町村(市町村コード, 旧市町村コード);
+        boolean is町域 = 選択対象_町域.equals(選択対象);
+        boolean is行政区 = 選択対象_行政区.equals(選択対象);
+        boolean is地区1 = 選択対象_地区1.equals(選択対象);
+        boolean is地区2 = 選択対象_地区2.equals(選択対象);
+        boolean is地区3 = 選択対象_地区3.equals(選択対象);
+        boolean is市町村コード = has市町村コード(市町村コード);
+        boolean is市町村と旧市町村 = has市町村と旧市町村(市町村コード, 旧市町村コード);
         StringBuilder builder1 = new StringBuilder();
         builder1.append(調定年度.plusYear(1).toString());
         builder1.append("0331");
@@ -316,31 +310,11 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
                 null, null, null, 終了生年月日, 開始生年月日, psmShikibetsuTaisho);
     }
 
-    private static boolean is町域(RString 選択対象) {
-        return 選択対象_町域.equals(選択対象);
-    }
-
-    private static boolean is行政区(RString 選択対象) {
-        return 選択対象_行政区.equals(選択対象);
-    }
-
-    private static boolean is地区1(RString 選択対象) {
-        return 選択対象_地区1.equals(選択対象);
-    }
-
-    private static boolean is地区2(RString 選択対象) {
-        return 選択対象_地区2.equals(選択対象);
-    }
-
-    private static boolean is地区3(RString 選択対象) {
-        return 選択対象_地区3.equals(選択対象);
-    }
-
-    private static boolean is市町村コード(RString 市町村コード) {
+    private static boolean has市町村コード(RString 市町村コード) {
         return 市町村コード != null && !市町村コード.isEmpty();
     }
 
-    private static boolean is市町村と旧市町村(RString 市町村コード, RString 旧市町村コード) {
+    private static boolean has市町村と旧市町村(RString 市町村コード, RString 旧市町村コード) {
         return 市町村コード != null && !市町村コード.isEmpty() && 旧市町村コード != null && !旧市町村コード.isEmpty();
     }
 

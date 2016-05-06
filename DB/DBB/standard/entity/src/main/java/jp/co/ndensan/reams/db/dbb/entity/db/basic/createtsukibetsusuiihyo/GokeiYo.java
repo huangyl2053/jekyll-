@@ -13,7 +13,7 @@ import lombok.Setter;
 /**
  * 合計用Entityクラスです。
  *
- * @reamsid_L DBB-0760-040 lishengli
+ * @reamsid_L DBB-0760-030 lishengli
  */
 @Getter
 @Setter
@@ -36,6 +36,18 @@ public class GokeiYo {
     private int itiGetuNinsuu;
     private int niGetuNinsuu;
     private int sanGetuNinsuu;
+    private int yoGetufumeNinsu;
+    private int goGetufumeNinsu;
+    private int rokuGetufumeNinsu;
+    private int nanaGetufumeNinsu;
+    private int hatiGetufumeNinsu;
+    private int kyuGetufumeNinsu;
+    private int jyuGetufumeNinsu;
+    private int jyuitiGetufumeNinsu;
+    private int jyuniGetufumeNinsu;
+    private int itiGetufumeNinsu;
+    private int niGetufumeNinsu;
+    private int sanGetufumeNinsu;
     private int 現年随時の人数;
     private int 過年度の人数;
     private int 歳出還付の人数;
@@ -51,6 +63,18 @@ public class GokeiYo {
     private int itiGetuKinkaku;
     private int niGetuKinkaku;
     private int sanGetuKinkaku;
+    private int yoGetufumeKinkaku;
+    private int goGetufumeKinkaku;
+    private int rokuGetufumeKinkaku;
+    private int nanaGetufumeKinkaku;
+    private int hatiGetufumeKinkaku;
+    private int kyuGetufumeKinkaku;
+    private int jyuGetufumeKinkaku;
+    private int jyuitiGetufumeKinkaku;
+    private int jyuniGetufumeKinkaku;
+    private int itiGetufumeKinkaku;
+    private int niGetufumeKinkaku;
+    private int sanGetufumeKinkaku;
     private int 現年随時の金額;
     private int 過年度の金額;
     private int 歳出還付の金額;

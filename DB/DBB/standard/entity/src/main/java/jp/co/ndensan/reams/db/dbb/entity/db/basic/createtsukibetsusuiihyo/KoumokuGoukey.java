@@ -11,17 +11,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 合計値Entityクラスです。
+ * 合計部分合計値Entityクラスです。
  *
  * @reamsid_L DBB-0760-030 lishengli
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GokeiChi {
+public class KoumokuGoukey {
 
     private RString hokenryoDankai;
-    private RString choshuHouhou;
     private Decimal yoGetuNinsuuGoukeyi;
     private Decimal goGetuNinsuuGoukeyi;
     private Decimal rokuGetuNinsuuGoukeyi;
