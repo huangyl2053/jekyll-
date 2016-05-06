@@ -109,13 +109,16 @@ public class HanyorisutoPanelHandler {
         bparam.set作成区分(div.getRadSakuseiKubun().getSelectedKey());
         RString radchusyutukubunkey = div.getRadChusyutuKubun().getSelectedKey();
         bparam.set抽出区分(radchusyutukubunkey);
+        FlexibleDate 基準年月日 = div.getTxtKijunYMD().getValue() == null
+                ? FlexibleDate.EMPTY : new FlexibleDate(div.getTxtKijunYMD().getValue().toString());
         if (ChushutsuKubun.全有効データ.getコード().equals(radchusyutukubunkey)) {
-            bparam.set基準年月日(new FlexibleDate(div.getTxtKijunYMD().getValue().toString()));
+            bparam.set基準年月日(基準年月日);
         } else {
             bparam.set基準年月日(null);
         }
         bparam.set支援事業者番号(div.getTxtSienJigyosyano().getValue());
-        bparam.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
+        bparam.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID() == null
+                ? RString.EMPTY : new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
         bparam.set出力項目ID(div.getCcdChohyoShutsuryokukoumoku().get出力項目ID());
         List<RString> list = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();
         bparam.setCsv項目名付加(list.contains(ONE));
