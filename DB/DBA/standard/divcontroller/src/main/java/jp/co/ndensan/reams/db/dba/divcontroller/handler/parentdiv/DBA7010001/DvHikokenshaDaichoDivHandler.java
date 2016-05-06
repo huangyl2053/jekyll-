@@ -234,30 +234,6 @@ public class DvHikokenshaDaichoDivHandler {
         div.getChkSoshitsuJiyu().setDisabled(false);
     }
 
-    private HanyoListHihokenshadaichoBatchParameter set編集方法(HanyoListHihokenshadaichoBatchParameter batchParameter) {
-        boolean 項目名付加 = false;
-        boolean 連番付加 = false;
-        boolean 日付編集 = false;
-        List<RString> 編集方法List = div.getChkCsvHenshuHoho().getSelectedKeys();
-        for (RString 編集方法 : 編集方法List) {
-            if (CSVSettings.項目名付加.getコード().equals(編集方法)) {
-                項目名付加 = true;
-                continue;
-            }
-            if (CSVSettings.連番付加.getコード().equals(編集方法)) {
-                連番付加 = true;
-                continue;
-            }
-            if (CSVSettings.日付スラッシュ編集.getコード().equals(編集方法)) {
-                日付編集 = true;
-            }
-        }
-        batchParameter.setKomukuFukaMeyi(項目名付加);
-        batchParameter.setRembanfuka(連番付加);
-        batchParameter.setHidukeHensyu(日付編集);
-        return batchParameter;
-    }
-
     private RString nullToEmpty(Decimal 項目) {
         if (項目 != null) {
             return new RString(項目.toString());
