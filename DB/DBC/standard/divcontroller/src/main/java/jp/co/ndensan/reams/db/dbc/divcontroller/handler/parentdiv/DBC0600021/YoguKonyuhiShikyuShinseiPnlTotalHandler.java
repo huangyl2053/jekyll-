@@ -1004,7 +1004,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         }
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
                 getDdlShumoku().getSelectedKey() == null || div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey().isEmpty()) {
+                getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey().equals(BLANK)) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.必須, 種目.toString())));
         }
@@ -1052,17 +1052,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                         UrWarningMessages.重複, 品目コード.toString())));
             }
         }
-        //TODO
-//        RString ddlShumoku = div.getYoguKonyuhiShikyuShinseiContentsPanel().
-//                getYoguKonyuhiDetailInput().getDdlShumoku().getSelectedKey();
-//        for (dgSeikyuDetail_Row row : rowList) {
-//            if (ddlShumoku.equals(row.getTxtShumoku().getValue()) && !RowState.Deleted.equals(row.getRowState())) {
-//                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-//                        UrWarningMessages.重複, 種目コード.toString())));
-////                return validPairs;
-//            }
-//        }
-
         //TODO限度額チェック
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
