@@ -85,28 +85,30 @@ public class ShiharaiHohoJyohoFinder {
         IShiharaiHohoJyohoMapper mapper = mapperProvider.create(IShiharaiHohoJyohoMapper.class);
         IKozaRelateMapper kozaMapper = mapperProvider.create(IKozaRelateMapper.class);
         List<KozaJohoPSMEntity> entityList = mapper.get口座情報ByKey(parameter);
-        List<KozaJohoPSM> KozaJohoPSMList = new ArrayList<>();
-        KozaSearchKeyBuilder KozaBuilder = new KozaSearchKeyBuilder();
-        if (entityList != null && entityList.size() > 0) {
-            KozaBuilder.set業務コード(entityList.get(0).getGyomuCode());
-            KozaBuilder.setサブ業務コード(entityList.get(0).getSubGyomuCode());
-            KozaBuilder.set科目コード(entityList.get(0).getKamokuCode());
-            KozaBuilder.set用途区分(new KozaYotoKubunCodeValue(entityList.get(0).getYotoKubun() == null
+        List<KozaJohoPSM> kozaJohoPSMList = new ArrayList<>();
+        KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
+        if (entityList != null && !entityList.isEmpty()) {
+            kozaBuilder.set業務コード(entityList.get(0).getGyomuCode());
+            kozaBuilder.setサブ業務コード(entityList.get(0).getSubGyomuCode());
+            kozaBuilder.set科目コード(entityList.get(0).getKamokuCode());
+            kozaBuilder.set用途区分(new KozaYotoKubunCodeValue(entityList.get(0).getYotoKubun() == null
                     ? Code.EMPTY : entityList.get(0).getYotoKubun()));
         }
         List<RString> 業務固有キーList = new ArrayList<>();
         List<KamokuCode> kamokuCodeList = new ArrayList<>();
-        for (KozaJohoPSMEntity entity : entityList) {
-            kamokuCodeList.add(entity.getKamokuCode());
-            業務固有キーList.add(entity.getGyomuKoyuKey());
-            KozaBuilder.set業務固有キーリスト(業務固有キーList);
+        if (entityList != null && !entityList.isEmpty()) {
+            for (KozaJohoPSMEntity entity : entityList) {
+                kamokuCodeList.add(entity.getKamokuCode());
+                業務固有キーList.add(entity.getGyomuKoyuKey());
+                kozaBuilder.set業務固有キーリスト(業務固有キーList);
+            }
         }
-        KozaSearchParameter KozaSearchParameter = new KozaSearchParameter(KozaBuilder.build(), kamokuCodeList);
-        List<KozaRelateEntity> KozaRelateList = kozaMapper.select(KozaSearchParameter);
-        if (KozaRelateList == null) {
-            return SearchResult.of(KozaJohoPSMList, 0, false);
+        KozaSearchParameter kozaSearchParameter = new KozaSearchParameter(kozaBuilder.build(), kamokuCodeList);
+        List<KozaRelateEntity> kozaRelateList = kozaMapper.select(kozaSearchParameter);
+        if (kozaRelateList == null) {
+            return SearchResult.of(kozaJohoPSMList, 0, false);
         }
-        for (KozaRelateEntity entity : KozaRelateList) {
+        for (KozaRelateEntity entity : kozaRelateList) {
             KozaJohoPSMEntity psmEntity = new KozaJohoPSMEntity();
             psmEntity.setKinyuKikanCode(entity.getUaT0310KozaEntity().getKinyuKikanCode());
             psmEntity.setKinyuKikanShitenCode(entity.getUaT0310KozaEntity().getKinyuKikanShitenCode());
@@ -115,9 +117,9 @@ public class ShiharaiHohoJyohoFinder {
             psmEntity.setKozaNo(entity.getUaT0310KozaEntity().getKozaNo());
             psmEntity.setKozaMeiginin(entity.getUaT0310KozaEntity().getKozaMeiginin());
             psmEntity.setKozaMeigininKanji(entity.getUaT0310KozaEntity().getKozaMeigininKanji());
-            KozaJohoPSMList.add(new KozaJohoPSM(psmEntity));
+            kozaJohoPSMList.add(new KozaJohoPSM(psmEntity));
         }
-        return SearchResult.of(KozaJohoPSMList, 0, false);
+        return SearchResult.of(kozaJohoPSMList, 0, false);
     }
 
     /**
