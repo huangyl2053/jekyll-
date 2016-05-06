@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunint
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiMapper;
@@ -43,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -156,7 +158,7 @@ public class FutangendogakuNinteiService {
                 return 利用者負担段階の再判定(識別コード, 世帯員所得情報, 処理日);
             }
         }
-        return null;
+        throw new ApplicationException(DbdErrorMessages.利用者負担段階_判定失敗.getMessage());
     }
 
     private RiyoshaFutanDankai 利用者負担段階の再判定(ShikibetsuCode 識別コード, SetaiinShotoku 世帯員所得情報, FlexibleDate 処理日) {
@@ -173,7 +175,7 @@ public class FutangendogakuNinteiService {
                 return RiyoshaFutanDankai.第三段階;
             }
         }
-        return null;
+        throw new ApplicationException(DbdErrorMessages.利用者負担段階_判定失敗.getMessage());
     }
 
     /**
@@ -731,7 +733,7 @@ public class FutangendogakuNinteiService {
     }
 
     private RString get配偶者1月1日住所(List<IKojin> kojinList, IKojin 配偶者情報) {
-        RString 配偶者1月1日住所 = RString.EMPTY;
+        RString 配偶者1月1日住所;
         if (kojinList.isEmpty()) {
             配偶者1月1日住所 = RString.EMPTY;
         } else {

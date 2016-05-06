@@ -23,8 +23,9 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 汎用リスト_被保険者台帳CSVEntityクラスです。
  *
- * @author 863
+ * @reamsid_L DBA-1610-030 lishengli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

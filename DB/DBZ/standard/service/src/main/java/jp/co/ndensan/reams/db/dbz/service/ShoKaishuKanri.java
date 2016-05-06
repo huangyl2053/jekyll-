@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 証交付回収の更新処理クラスです。
  *
- *
+ * @reamsid_L DBU-0160-010 wangxueshu
  */
 public class ShoKaishuKanri {
 

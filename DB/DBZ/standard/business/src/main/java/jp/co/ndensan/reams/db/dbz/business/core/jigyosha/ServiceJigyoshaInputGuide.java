@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.jigyosha;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -121,6 +122,24 @@ public class ServiceJigyoshaInputGuide implements Serializable {
      */
     public RString get介護除外住所地特例対象施設_事業者住所カナ() {
         return entity.getJigyoshaKanaJusho();
+    }
+
+    /**
+     * 事業者住所を取得します。
+     *
+     * @return 事業者住所
+     */
+    public RString get介護除外住所地特例対象施設_事業者住所() {
+        return entity.getJigyoshaJusho();
+    }
+
+    /**
+     * 事業者住所を取得します。
+     *
+     * @return 事業者住所
+     */
+    public AtenaJusho get介護事業者_事業者住所() {
+        return entity.getJigyoshaAddress();
     }
 
     /**

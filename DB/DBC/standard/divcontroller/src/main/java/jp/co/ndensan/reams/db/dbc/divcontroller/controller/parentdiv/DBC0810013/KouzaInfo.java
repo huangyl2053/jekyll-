@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.Shokanbar
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -34,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KouzaInfo {
 
     private static final RString 照会 = new RString("照会");
-    private static final RString 償還払給付費 = new RString("001");
 
     /**
      * 画面初期化onLoad
@@ -82,7 +80,7 @@ public class KouzaInfo {
         parameter.setKozaId(支給申請情報.get口座ID());
         parameter.setShiharaiBasho(支給申請情報.get支払場所());
         // TODO QA638画面レイアウトと画面が一致しません。
-        div.getPanelShinseiNaiyo().getCcdShiharaiHohoJyoho().initialize(parameter, new KamokuCode(償還払給付費), 照会);
+        div.getPanelShinseiNaiyo().getCcdShiharaiHohoJyoho().initialize(parameter, 照会);
         return createResponse(div);
     }
 

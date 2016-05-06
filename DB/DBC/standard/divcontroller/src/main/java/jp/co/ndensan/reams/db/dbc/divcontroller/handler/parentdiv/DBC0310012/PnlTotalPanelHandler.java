@@ -124,7 +124,6 @@ public class PnlTotalPanelHandler {
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
-            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
@@ -137,6 +136,7 @@ public class PnlTotalPanelHandler {
         div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().setDisabled(true);
         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().setDisabled(true);
         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().setDisabled(true);
+        div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().setDisabled(true);
         div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setDisabled(true);
         div.getPnlCommon().getPnlDetail().getBtnKeiyakuJigyoshaNoIcon().setDisabled(true);
         div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninchutisyosakuseibi().setDisabled(true);

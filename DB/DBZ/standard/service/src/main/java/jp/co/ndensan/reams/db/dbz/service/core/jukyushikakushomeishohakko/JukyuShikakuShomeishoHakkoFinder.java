@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 受給資格証明書を管理するクラスです。
  *
- * @reamsid_L DBA-1090-021 wangkun
+ * @reamsid_L DBA-1090-020 wangkun
  */
 public class JukyuShikakuShomeishoHakkoFinder {
 
@@ -163,7 +163,8 @@ public class JukyuShikakuShomeishoHakkoFinder {
 
     private void edit介護認定審査会意見(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
             List<RString> サービス種類名称リスト, List<RString> サービス種類略称リスト) {
-        RStringBuilder 介護認定審査会意見と名称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
+        RStringBuilder 介護認定審査会意見と名称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken() == null
+                ? RString.EMPTY : jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
         介護認定審査会意見と名称.append(SPACE);
         介護認定審査会意見と名称.append(サービス種類名称リスト.get(FIRST_INDEX));
         for (int i = 1; i < サービス種類名称リスト.size(); i++) {

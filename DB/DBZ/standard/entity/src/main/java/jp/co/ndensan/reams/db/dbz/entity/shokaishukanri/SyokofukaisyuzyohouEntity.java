@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.shokaishukanri;
 
-
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 証交付回収情報
  *
- * @author x_wangxs2
+ * @reamsid_L DBU-0160-010 wangxueshu
  */
 @Getter
 @Setter
@@ -28,6 +28,4 @@ public class SyokofukaisyuzyohouEntity {
     private FlexibleDate 回収日;
     private RString 回収事由;
     private RString 更新_削除区分;
-    
-    
 }

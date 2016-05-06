@@ -298,7 +298,7 @@ public class TekiyoJogaiRirekiHandler {
             div.getPanelTekiyoJokaiKaiJyoInput().setDisabled(true);
         } else if (状態_訂正履歴.equals(画面状態)) {
             if (状態_修正.equals(div.getStauts())) {
-                if (!RowState.Added.equals(選択データ.getRowState())) {
+                if (!RowState.Added.equals(選択データ.getRowState()) && isデータ変更(選択データ)) {
                     選択データ.setRowState(RowState.Modified);
                 }
                 RDate 変更後適用日 = div.getPanelTekiyoInput().getTxtTekiyoDate().getValue();
@@ -577,7 +577,7 @@ public class TekiyoJogaiRirekiHandler {
             } else {
                 row.getTekiyoTodokeDate().clearValue();
             }
-            row.setTekiyoJiyu(get適用事由(適用除外者情報.get適用除外適用事由コード()));
+            row.setTekiyoJiyu((適用除外者情報.get適用除外適用事由コード()));
             if (適用除外者情報.get解除年月日() != null && !適用除外者情報.get解除年月日().isEmpty()) {
                 row.getKayijoDate().setValue(new RDate(適用除外者情報.get解除年月日().toString()));
             } else {
@@ -814,14 +814,14 @@ public class TekiyoJogaiRirekiHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護除外適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(介護除外適用理由, new Code(適用事由コード));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護除外解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(介護除外解除理由, new Code(解除事由コード));
     }
 
     private List<KeyValueDataSource> set適用事由() {
@@ -830,7 +830,7 @@ public class TekiyoJogaiRirekiHandler {
         for (UzT0007CodeEntity key : 適用事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;
@@ -842,7 +842,7 @@ public class TekiyoJogaiRirekiHandler {
         for (UzT0007CodeEntity key : 解除事由Key) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(key.getコード().getColumnValue());
-            keyValue.setValue(key.getコード名称());
+            keyValue.setValue(key.getコード略称());
             dataSource.add(keyValue);
         }
         return dataSource;
@@ -1025,6 +1025,18 @@ public class TekiyoJogaiRirekiHandler {
     private UaFt200FindShikibetsuTaishoEntity get宛名情報() {
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getHiddenInputShikibetsuCode());
         return TekiyoJogaishaManager.createInstance().get宛名情報(識別コード);
+    }
+
+    private boolean isデータ変更(datagridTekiyoJogai_Row 選択データ) {
+        if (選択データ.getTekiyoDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoDate().getValue())
+                && 選択データ.getTekiyoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtTekiyoTodokeDate().getValue())
+                && 選択データ.getTekiyoJiyuCode().equals(div.getPanelTekiyoInput().getDdlTekiyoJiyu().getSelectedKey())
+                && 選択データ.getKayijoDate().getValue().equals(div.getPanelTekiyoInput().getTxtKayijoDate().getValue())
+                && 選択データ.getKaijoTodokeDate().getValue().equals(div.getPanelTekiyoInput().getTxtKaijoTodokedeDate().getValue())
+                && 選択データ.getKaijoJiyuCode().equals(div.getPanelTekiyoInput().getDdlKaijyoJiyu().getSelectedKey())) {
+            return false;
+        }
+        return true;
     }
 
     private static class DateComparator implements Comparator<datagridTekiyoJogai_Row>, Serializable {

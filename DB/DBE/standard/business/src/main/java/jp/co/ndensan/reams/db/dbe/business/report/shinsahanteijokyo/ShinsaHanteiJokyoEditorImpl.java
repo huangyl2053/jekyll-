@@ -49,9 +49,6 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
     }
 
     private ShinsaHanteiJokyoReportSource editSource(ShinsaHanteiJokyoReportSource source) {
-        //TODO QA1127 アクセスログの出力
-//        source.shikibetuCode = ShikibetsuCode.EMPTY;
-//        source.shokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.getHokenshaNo());
         source.title = item.getTitle();
         source.gogitaiName = item.getGogitaiName();
         source.kaisaiKaishiYMD = item.getKaisaiKaishiYMD() == null

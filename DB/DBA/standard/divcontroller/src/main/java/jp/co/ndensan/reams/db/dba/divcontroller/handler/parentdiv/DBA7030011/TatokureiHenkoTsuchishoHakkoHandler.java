@@ -197,15 +197,15 @@ public class TatokureiHenkoTsuchishoHakkoHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護他特適用理由, new Code(適用事由コード)) == null
-                ? RString.EMPTY : CodeMaster.getCodeMeisho(介護他特適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード)) == null
+                ? RString.EMPTY : CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeMeisho(介護他特解除理由, new Code(解除事由コード)) == null
-                ? RString.EMPTY : CodeMaster.getCodeMeisho(介護他特解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード)) == null
+                ? RString.EMPTY : CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード));
     }
 }

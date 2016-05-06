@@ -64,9 +64,14 @@
             rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005KaigoJogaiTokureiTaishoShisetsu
         ON
             DbT1004ShisetsuNyutaisho."nyushoShisetsuCode" = DbT1005KaigoJogaiTokureiTaishoShisetsu."jigyoshaNo"
-        AND DbT1005KaigoJogaiTokureiTaishoShisetsu."jigyoshaShubetsu" = '21'
-        AND DbT1005KaigoJogaiTokureiTaishoShisetsu."yukoKaishiYMD" <![CDATA[<=]]> DbT1004ShisetsuNyutaisho."nyushoYMD"
-        AND DbT1004ShisetsuNyutaisho."nyushoYMD" <![CDATA[<]]> DbT1005KaigoJogaiTokureiTaishoShisetsu."yukoShuryoYMD"
+            AND DbT1005KaigoJogaiTokureiTaishoShisetsu."jigyoshaShubetsu" = '02'
+            AND DbT1005KaigoJogaiTokureiTaishoShisetsu."yukoKaishiYMD" = (SELECT
+                                            MAX(KaigoJogaiTokureiTaishoShisetsu."yukoKaishiYMD")
+                                      FROM
+                                            rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS KaigoJogaiTokureiTaishoShisetsu
+                                      WHERE
+                                            KaigoJogaiTokureiTaishoShisetsu."jigyoshaNo" = DbT1005KaigoJogaiTokureiTaishoShisetsu."jigyoshaNo"
+                                            AND KaigoJogaiTokureiTaishoShisetsu."jigyoshaShubetsu" = '02')
         ORDER BY
             DbT1002TekiyoJogaisha."tekiyoYMD", DbT1004ShisetsuNyutaisho."nyushoYMD"
 

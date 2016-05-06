@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -43,12 +45,15 @@ public class DvKogakuServiceJoho {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
-        panel.getCcdHokenshaList().loadHokenshaList();
-        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null
+        if (市町村セキュリティ情報 == null) {
+            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        }
+        if (市町村セキュリティ情報.get導入形態コード() != null
                 && 市町村セキュリティ情報.get導入形態コード().is広域()) {
             ViewStateHolder.put(ViewStateKeys.市町村判定, 事務広域);
             panel.getCcdHokenshaList().setDisabled(false);
             panel.getCcdHokenshaList().setVisible(true);
+            panel.getCcdHokenshaList().loadHokenshaList();
         } else {
             ViewStateHolder.put(ViewStateKeys.市町村判定, 事務単一);
             panel.getCcdHokenshaList().setDisabled(true);

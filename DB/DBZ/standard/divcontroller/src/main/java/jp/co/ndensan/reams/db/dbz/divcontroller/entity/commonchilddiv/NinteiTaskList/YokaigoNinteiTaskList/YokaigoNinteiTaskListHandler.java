@@ -463,7 +463,7 @@ public class YokaigoNinteiTaskListHandler {
     private void 意見書依頼モードの日付設定(dgNinteiTaskList_Row row, IKnSyoiRaiBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            row.getKeikaNissu().setValue(new Decimal(business.get認定申請年月日().getBetweenDays(FlexibleDate.getNowDate())));
+            row.getKeikaNissu().setValue(new Decimal(FlexibleDate.getNowDate().getBetweenDays(business.get認定申請年月日())));
         }
         if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()) {
             row.getIkenshoIraiDay().setValue(new RDate(business.get主治医意見書作成依頼年月日().toString()));
@@ -593,7 +593,7 @@ public class YokaigoNinteiTaskListHandler {
     private void 意見書入手モードの日付設定(dgNinteiTaskList_Row row, IkenSyoNyuSyuBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
-            row.getKeikaNissu().setValue(new Decimal(business.get認定申請年月日().getBetweenDays(FlexibleDate.getNowDate())));
+            row.getKeikaNissu().setValue(new Decimal(FlexibleDate.getNowDate().getBetweenDays(business.get認定申請年月日())));
         }
         if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
             row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));

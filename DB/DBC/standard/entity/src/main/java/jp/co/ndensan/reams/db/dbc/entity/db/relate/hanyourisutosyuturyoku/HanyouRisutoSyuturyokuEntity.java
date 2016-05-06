@@ -10,11 +10,16 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGok
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -41,9 +46,14 @@ public class HanyouRisutoSyuturyokuEntity {
     private DbT3057KogakuShikyuHanteiKekkaEntity 支給判定結果;
     private DbT3058KogakuShikyuShinsaKetteiEntity 支給審査決定;
     private DbT3054KogakuKyufuTaishoshaMeisaiEntity 給付対象者明細;
+    private DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity 事業給付対象者明細;
+    private DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 事業給付対象者合計;
+    private DbT3110JigyoKogakuShikyuShinseiEntity 事業支給申請;
+    private DbT3111JigyoKogakuShikyuHanteiKekkaEntity 事業支給判定結果;
+    private DbT3112KogakuShikyuShinsaKetteiEntity 事業支給審査決定;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private UaFt250FindAtesakiEntity 宛先;
-    private UaT0310KozaEntity 口座情報;
+    private KozaRelateEntity 口座情報;
 
     private LasdecCode 市町村コード;
     private RString 資格取得事由コード;

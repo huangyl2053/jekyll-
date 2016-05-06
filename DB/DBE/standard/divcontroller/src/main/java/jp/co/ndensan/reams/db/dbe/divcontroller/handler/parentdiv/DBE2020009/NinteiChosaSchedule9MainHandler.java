@@ -225,12 +225,11 @@ public class NinteiChosaSchedule9MainHandler {
      */
     public ChosaSchedulehyoHeadItem createHeadItemItem_事務所(List<JiMuSyoBusiness> businessList) {
 
-//        if (businessList != null && !businessList.isEmpty()) {
-//            JiMuSyoBusiness business = businessList.get(0);
-//            return new ChosaSchedulehyoHeadItem(RString.EMPTY, RString.EMPTY,
-//                    RString.EMPTY);
-//        }
-        // TODO 引数が不正です。QA内部番号1086
+        if (businessList != null && !businessList.isEmpty()) {
+            JiMuSyoBusiness business = businessList.get(0);
+            return new ChosaSchedulehyoHeadItem(business.get調査事務所コード(), business.get調査事業者名称(),
+                    business.get認定調査予定日().getYearMonth().toDateString());
+        }
         return new ChosaSchedulehyoHeadItem(RString.EMPTY, RString.EMPTY,
                 RString.EMPTY);
     }

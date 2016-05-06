@@ -140,43 +140,43 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     }
 
     private void set出力条件表() {
-        List 出力条件 = new ArrayList();
+        List<RString> 出力条件 = new ArrayList();
         RStringBuilder builder = new RStringBuilder();
         builder.append(市町村コード);
         builder.append(processParameter.getShichosonCode());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(市町村名);
         builder.append(processParameter.getShichosonName());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(主治医医療機関コードFROM);
         builder.append(processParameter.getIryoKikanCodeFrom());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(主治医医療機関コードTO);
         builder.append(processParameter.getIryoKikanCodeTo());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(主治医コードFROM);
         builder.append(processParameter.getShujiiCodeFrom());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(主治医コードTO);
         builder.append(processParameter.getShujiiCodeTo());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(状況);
         builder.append(processParameter.getJyokyo());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(並び順);
         builder.append(processParameter.getOutputSort());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(改頁);
         builder.append(processParameter.getNextpage());
-        出力条件.add(builder);
+        出力条件.add(builder.toRString());
 
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ

@@ -28,6 +28,6 @@ public class DBC710020_HanyoListShokanbaraiJokyoFlow
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        return loopBatch(HanyoListShokanbaraiJokyoProcess.class).define();
+        return loopBatch(HanyoListShokanbaraiJokyoProcess.class).arguments(getParameter().toProcessParam()).define();
     }
 }

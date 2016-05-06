@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigenBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigenIdentifier;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shakaifukushihojinkeigen.ShakaifukuRiyoshaFutanKeigenToJotai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
-import jp.co.ndensan.reams.db.dbd.business.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
@@ -29,9 +29,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -41,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -109,14 +112,16 @@ public class DBD1030001Handler {
         ShikibetsuCode 識別コード = get識別コードFromViewState();
         HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
         if (被保険者番号.isEmpty()) {
-            div.getBtnShowGenmenJoho().setDisabled(true);
+            div.getShafukuRiyoshaKeigen().getBtnShowGenmenJoho().setDisabled(true);
+            div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisabled(true);
+            div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(true);
             div.getBtnAddShinsei().setDisabled(true);
             div.getDgShinseiList().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
             return false;
         }
-        div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdShikakuKihon().onLoad(被保険者番号);
+        div.getShafukuRiyoshaKeigen().getCcdAtenaInfo().onLoad(識別コード);
+        div.getShafukuRiyoshaKeigen().getCcdShikakuKihon().onLoad(被保険者番号);
         div.getShafukuRiyoshaKeigen().setHihokenshaNo(被保険者番号.getColumnValue());
         RString メニューID = ResponseHolder.getMenuID();
         if (申請メニューID.equals(メニューID)) {
@@ -126,20 +131,31 @@ public class DBD1030001Handler {
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(保存する, "申請情報を");
         } else {
             div.getBtnAddShinsei().setText(承認情報を追加する);
-            div.getShinseiDetail().setTitle(承認情報);
+            div.getShafukuRiyoshaKeigen().getShinseiDetail().setTitle(承認情報);
             申請一覧エリア初期化(被保険者番号);
             div.getBtnShinseiKakutei().setDisplayNone(true);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(保存する, "承認情報を");
         }
         div.getTxtKeigenRitsuBunshi().setDecimalPointLength(1);
         div.getCcdShinseiJoho().initialize(識別コード);
+        世帯所得一覧の初期化();
         div.getDdlKeigenJiyu().setDataSource(getAll軽減事由());
-        div.getShinseiList().setDisplayNone(false);
-        div.getShinseiDetail().setDisplayNone(true);
+        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(false);
+        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(true);
+        div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(true);
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
         RealInitialLocker.lock(new LockingKey(new RString("DB").concat(被保険者番号.getColumnValue().concat("ShafukuKeigen"))));
         return true;
+    }
+
+    private void 世帯所得一覧の初期化() {
+        YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
+        div.getCcdSetaiShotokuIchiran().initialize(
+                get識別コードFromViewState(),
+                new FlexibleDate(現在年月日日時時分秒.getDate().toDateString()),
+                new HizukeConfig().get所得年度(),
+                現在年月日日時時分秒);
     }
 
     private List<KeyValueDataSource> getAll軽減事由() {
@@ -269,7 +285,11 @@ public class DBD1030001Handler {
     }
 
     private ShikibetsuCode get識別コードFromViewState() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (null == taishoshaKey) {
+            return ShikibetsuCode.EMPTY;
+        }
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
@@ -277,7 +297,11 @@ public class DBD1030001Handler {
     }
 
     private HihokenshaNo get被保険者番号FromViewState() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (null == taishoshaKey) {
+            return HihokenshaNo.EMPTY;
+        }
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         if (null == 被保険者番号) {
             被保険者番号 = HihokenshaNo.EMPTY;
         }
@@ -295,8 +319,8 @@ public class DBD1030001Handler {
         } else if (承認情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態５画面表示();
         }
-        div.getShinseiList().setDisplayNone(true);
-        div.getShinseiDetail().setDisplayNone(false);
+        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(true);
+        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(false);
         div.getDgShinseiList().setDisabled(true);
         div.getCcdShinseiJoho().initialize(get識別コードFromViewState());
     }
@@ -358,8 +382,8 @@ public class DBD1030001Handler {
     }
 
     private void 状態２制御() {
-        div.getBtnShowSetaiJoho().setDisabled(false);
-        div.getBtnShowGenmenJoho().setDisabled(false);
+        div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisabled(false);
+        div.getShafukuRiyoshaKeigen().getBtnShowGenmenJoho().setDisabled(false);
         div.getTxtShinseiYMD().setDisabled(false);
         div.getTxtShinseiRiyu().setDisabled(false);
         div.getRadKetteiKubun().setDisabled(true);
@@ -398,8 +422,8 @@ public class DBD1030001Handler {
             状態６画面表示(dataSouce, 情報と状態);
         }
         div.getDgShinseiList().setDisabled(true);
-        div.getShinseiList().setDisplayNone(true);
-        div.getShinseiDetail().setDisplayNone(false);
+        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(true);
+        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(false);
     }
 
     private ShakaifukuRiyoshaFutanKeigenToJotai get情報FromDataSouce(dgShinseiList_Row dataSouce) {
@@ -425,8 +449,8 @@ public class DBD1030001Handler {
             div.getTxtShinseiYMD().setDisabled(true);
             div.getTxtShinseiRiyu().setDisabled(true);
         }
-        div.getBtnShowSetaiJoho().setDisabled(false);
-        div.getBtnShowGenmenJoho().setDisabled(false);
+        div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisabled(false);
+        div.getShafukuRiyoshaKeigen().getBtnShowGenmenJoho().setDisabled(false);
         div.getBtnBackToShinseiList().setDisabled(false);
         div.getBtnShoninKakutei().setDisplayNone(false);
         div.getBtnShinseiKakutei().setDisplayNone(true);
@@ -467,8 +491,8 @@ public class DBD1030001Handler {
     }
 
     private void 状態３制御(RString 状態) {
-        div.getBtnShowSetaiJoho().setDisabled(false);
-        div.getBtnShowGenmenJoho().setDisabled(false);
+        div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisabled(false);
+        div.getShafukuRiyoshaKeigen().getBtnShowGenmenJoho().setDisabled(false);
         if (状態_追加.equals(状態)) {
             div.getTxtShinseiYMD().setDisabled(false);
             div.getTxtShinseiRiyu().setDisabled(false);
@@ -670,21 +694,25 @@ public class DBD1030001Handler {
         ShakaifukuRiyoshaFutanKeigenToJotai 編集情報
                 = ViewStateHolder.get(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, ShakaifukuRiyoshaFutanKeigenToJotai.class);
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList = get情報と状態ArrayList();
+        ShoKisaiHokenshaNo 証記載保険者番号;
         if (null == 編集情報) {
             RString 決定区分 = RString.EMPTY;
-            ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報 = get社会福祉法人等利用者負担軽減申請の情報From画面(true, 0, 決定区分);
+            証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+            ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
+                    = get社会福祉法人等利用者負担軽減申請の情報From画面(true, 0, 決定区分, 証記載保険者番号);
             追加社会福祉法人等利用者負担軽減申請の情報(画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList);
         } else {
             RString 決定区分 = 編集情報.get社会福祉法人等利用者負担軽減情報().get決定区分();
+            証記載保険者番号 = 編集情報.get社会福祉法人等利用者負担軽減情報().get証記載保険者番号();
             ShakaifukuRiyoshaFutanKeigen 画面社会福祉法人等利用者負担軽減申請情報
                     = get社会福祉法人等利用者負担軽減申請の情報From画面(
-                            false, 編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号(), 決定区分);
+                            false, 編集情報.get社会福祉法人等利用者負担軽減情報().get履歴番号(), 決定区分, 証記載保険者番号);
             修正社会福祉法人等利用者負担軽減申請の情報(画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList, 編集情報);
         }
         情報エリアクリア();
         div.getDgShinseiList().setDisabled(false);
-        div.getShinseiList().setDisplayNone(false);
-        div.getShinseiDetail().setDisplayNone(true);
+        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(false);
+        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(true);
     }
 
     /**
@@ -712,7 +740,7 @@ public class DBD1030001Handler {
     }
 
     private ShakaifukuRiyoshaFutanKeigen get社会福祉法人等利用者負担軽減申請の情報From画面(
-            boolean is新规, int 履歴番号, RString 決定区分) {
+            boolean is新规, int 履歴番号, RString 決定区分, ShoKisaiHokenshaNo 証記載保険者番号) {
         Integer 追加履歴番号;
         if (is新规) {
             追加履歴番号 = ViewStateHolder.get(DBD1030001ViewStateKey.追加履歴番号, Integer.class);
@@ -723,7 +751,9 @@ public class DBD1030001Handler {
             追加履歴番号 = 履歴番号;
         }
         RString メニューID = ResponseHolder.getMenuID();
-        ShoKisaiHokenshaNo 証記載保険者番号 = get証記載保険者番号();
+        if (証記載保険者番号.isEmpty()) {
+            証記載保険者番号 = get証記載保険者番号();
+        }
         ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減申請の情報
                 = new ShakaifukuRiyoshaFutanKeigen(証記載保険者番号, get被保険者番号FromViewState(), 追加履歴番号);
         ViewStateHolder.put(DBD1030001ViewStateKey.追加履歴番号, 追加履歴番号 - 1);
@@ -1371,7 +1401,7 @@ public class DBD1030001Handler {
      * 社会福祉法人等利用者負担軽減申請画面を適用日入力する。
      *
      */
-    public void onClick_onBlur() {
+    public void onBlur_txtTekiyoYMD() {
         FlexibleDate 適用日 = div.getTxtTekiyoYMD().getValue();
         if (null == 適用日 || 適用日.isEmpty()) {
             return;

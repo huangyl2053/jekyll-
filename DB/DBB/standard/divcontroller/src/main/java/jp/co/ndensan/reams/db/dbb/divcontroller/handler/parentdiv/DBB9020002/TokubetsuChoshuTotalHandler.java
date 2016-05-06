@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020002;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukinitsuNokiKanri;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTani;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.FutsuChoshuKirikaeKeisanHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.HeijunkaUmu;
@@ -31,19 +32,23 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNen
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuｃhoKaishiMaeFucho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.TokubetsuChoshuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.dgKibetsuJoho_Row;
-import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.FukinitsuNokiKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.tokucho.TokuchokiJohoTsukiShoriKubun;
-import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
+import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
@@ -63,6 +68,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -78,6 +84,7 @@ public final class TokubetsuChoshuTotalHandler {
     private static final FlexibleYear 平成12年 = new FlexibleYear("2000");
     private static final RString 合併情報区分_合併なし = new RString("0");
     private static final RString 合併情報区分_合併あり = new RString("1");
+    private static final RString 合併旧市町村表示区分_表示あり = new RString("1");
     private static final RString 月の期_00 = new RString("00");
     private static final RString 括弧_左 = new RString("(");
     private static final RString 括弧_右 = new RString(")");
@@ -157,9 +164,7 @@ public final class TokubetsuChoshuTotalHandler {
     public void set調定年度DDL(FlexibleYear 調定年度) {
         RString 新年度管理情報 = 未作成;
         ShoriDateKanriManager manager = InstanceProvider.create(ShoriDateKanriManager.class);
-        ShoriDateKanri result = manager.get抽出調定日時(SubGyomuCode.DBB介護賦課,
-                ShoriName.新年度管理情報作成.toRString(),
-                調定年度.plusYear(1));
+        ShoriDateKanri result = manager.get基準年月日(ShoriName.新年度管理情報作成.toRString(), 調定年度.plusYear(1));
         if (result == null) {
             新年度管理情報 = 未作成;
         } else if (result.get基準年月日() != null && !result.get基準年月日().isEmpty()) {
@@ -204,30 +209,21 @@ public final class TokubetsuChoshuTotalHandler {
             div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(false);
             return;
         }
-        // TODO QA No.534(Redmine#80710)
-        KaigoDonyuKeitai 介護導入形態 = KaigoDonyuKeitaiManager.createInstance().
-                get介護導入形態By業務分類(GyomuBunrui.介護事務).get(0);
-        if (is市町村指定DDL表示(介護導入形態)) {
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村セキュリティ情報.get導入形態コード() == null) {
+            div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(false);
+            return;
+        }
+        if (is市町村指定DDL表示(市町村セキュリティ情報)) {
             div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(true);
-            div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setDataSource(create市町村指定DDL(介護導入形態));
+            div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setDataSource(create市町村指定DDL(市町村セキュリティ情報, 調定年度));
         } else {
             div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(false);
         }
     }
 
-    private List<KeyValueDataSource> create市町村指定DDL(KaigoDonyuKeitai 介護導入形態) {
-        List<KeyValueDataSource> list = new ArrayList<>();
-        // TODO QA No.534(Redmine#80710)
-        介護導入形態.get導入形態コード();
-        list.add(new KeyValueDataSource(new RString("0"), new RString("0")));
-        return list;
-    }
-
-    private Boolean is市町村指定DDL表示(KaigoDonyuKeitai 介護導入形態) {
-        if (介護導入形態 == null) {
-            return false;
-        }
-        if (DonyuKeitaiCode.事務単一.getCode().equals(介護導入形態.get導入形態コード().getCode())) {
+    private Boolean is市町村指定DDL表示(ShichosonSecurityJoho 市町村セキュリティ情報) {
+        if (DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
             RString 合併情報区分 = DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分,
                     RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
             if (合併情報区分_合併なし.equals(合併情報区分)) {
@@ -235,7 +231,7 @@ public final class TokubetsuChoshuTotalHandler {
             } else if (合併情報区分_合併あり.equals(合併情報区分)) {
                 return true;
             }
-        } else if (DonyuKeitaiCode.事務広域.getCode().equals(介護導入形態.get導入形態コード().getCode())) {
+        } else if (DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
             return true;
         } else {
             前排他キーの解除();
@@ -243,6 +239,54 @@ public final class TokubetsuChoshuTotalHandler {
                     .replace(保険者構成エラーメッセージ.toString()).evaluate());
         }
         return false;
+    }
+
+    private List<KeyValueDataSource> create市町村指定DDL(ShichosonSecurityJoho 市町村セキュリティ情報, FlexibleYear 調定年度) {
+        List<KeyValueDataSource> list = new ArrayList<>();
+        FukinitsuNokiKanriManager manager = InstanceProvider.create(FukinitsuNokiKanriManager.class);
+        List<FukinitsuNokiKanri> 不均一納期リスト = manager.get市町村コード(調定年度);
+        if (不均一納期リスト == null || 不均一納期リスト.isEmpty()) {
+            return list;
+        }
+        for (FukinitsuNokiKanri 不均一納期 : 不均一納期リスト) {
+            if (DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
+                set合併市町村DDL(不均一納期, list);
+            } else if (DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
+                set構成市町村DDL(不均一納期, list);
+            }
+        }
+        return list;
+    }
+
+    private void set合併市町村DDL(FukinitsuNokiKanri 不均一納期, List<KeyValueDataSource> list) {
+        KyuShichosonCodeJoho 合併市町村情報 = KyuShichosonCode
+                .getKyuShichosonCodeJoho(不均一納期.get市町村コード(), DonyuKeitaiCode.事務単一);
+        if (合併市町村情報 != null && 合併市町村情報.is合併市町村有無フラグ()
+                && !合併市町村情報.get旧市町村コード情報List().isEmpty()) {
+            for (KyuShichosonCode コード情報 : 合併市町村情報.get旧市町村コード情報List()) {
+                if (不均一納期.get市町村コード().equals(コード情報.get旧市町村コード())) {
+                    list.add(new KeyValueDataSource(不均一納期.get市町村コード().getColumnValue(),
+                            コード情報.get旧市町村名称()));
+                    break;
+                }
+            }
+        }
+    }
+
+    private void set構成市町村DDL(FukinitsuNokiKanri 不均一納期, List<KeyValueDataSource> list) {
+        KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
+        SearchResult<ShichosonCodeYoriShichoson> 構成市町村マスタ
+                = finder.shichosonCodeYoriShichosonJoho(不均一納期.get市町村コード());
+        if (構成市町村マスタ == null || 構成市町村マスタ.records().isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < 構成市町村マスタ.records().size(); i++) {
+            if (合併旧市町村表示区分_表示あり.equals(構成市町村マスタ.records().get(i).get合併旧市町村表示有無())
+                    && 不均一納期.get市町村コード().equals(構成市町村マスタ.records().get(i).get市町村コード())) {
+                list.add(new KeyValueDataSource(不均一納期.get市町村コード().getColumnValue(),
+                        構成市町村マスタ.records().get(i).get市町村名称()));
+            }
+        }
     }
 
     private void set特別徴収期別情報Grid(FlexibleYear 調定年度) {

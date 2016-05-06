@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhe
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -38,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  * @reamsid_L DBA-1300-050 chengsanyuan
  */
 public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -217,7 +217,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             DataGridHeight[] enumArray = DataGridHeight.values();
 
             for (DataGridHeight enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -232,11 +232,11 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     public DataGridHeight getMode_DataGridHeight() {
-        return (DataGridHeight) _CommonChildDivModeUtil.getMode( this.modes, DataGridHeight.class );
+        return (DataGridHeight) _CommonChildDivModeUtil.getMode(this.modes, DataGridHeight.class);
     }
 
-    public void setMode_DataGridHeight( DataGridHeight value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DataGridHeight.class , value );
+    public void setMode_DataGridHeight(DataGridHeight value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DataGridHeight.class, value);
     }
 
     public static enum ShoriNichijiDisplayMode implements ICommonChildDivMode {
@@ -254,7 +254,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             ShoriNichijiDisplayMode[] enumArray = ShoriNichijiDisplayMode.values();
 
             for (ShoriNichijiDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -269,11 +269,11 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     public ShoriNichijiDisplayMode getMode_ShoriNichijiDisplayMode() {
-        return (ShoriNichijiDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, ShoriNichijiDisplayMode.class );
+        return (ShoriNichijiDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, ShoriNichijiDisplayMode.class);
     }
 
-    public void setMode_ShoriNichijiDisplayMode( ShoriNichijiDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShoriNichijiDisplayMode.class , value );
+    public void setMode_ShoriNichijiDisplayMode(ShoriNichijiDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShoriNichijiDisplayMode.class, value);
     }
 
     public static enum DataGridWidth implements ICommonChildDivMode {
@@ -301,7 +301,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             DataGridWidth[] enumArray = DataGridWidth.values();
 
             for (DataGridWidth enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -316,11 +316,11 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     public DataGridWidth getMode_DataGridWidth() {
-        return (DataGridWidth) _CommonChildDivModeUtil.getMode( this.modes, DataGridWidth.class );
+        return (DataGridWidth) _CommonChildDivModeUtil.getMode(this.modes, DataGridWidth.class);
     }
 
-    public void setMode_DataGridWidth( DataGridWidth value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DataGridWidth.class , value );
+    public void setMode_DataGridWidth(DataGridWidth value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DataGridWidth.class, value);
     }
 
     public static enum HokenshaJohoDisplayMode implements ICommonChildDivMode {
@@ -340,7 +340,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             HokenshaJohoDisplayMode[] enumArray = HokenshaJohoDisplayMode.values();
 
             for (HokenshaJohoDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -355,11 +355,11 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     public HokenshaJohoDisplayMode getMode_HokenshaJohoDisplayMode() {
-        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, HokenshaJohoDisplayMode.class );
+        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, HokenshaJohoDisplayMode.class);
     }
 
-    public void setMode_HokenshaJohoDisplayMode( HokenshaJohoDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, HokenshaJohoDisplayMode.class , value );
+    public void setMode_HokenshaJohoDisplayMode(HokenshaJohoDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HokenshaJohoDisplayMode.class, value);
     }
 
     public static enum BtnDisplayMode implements ICommonChildDivMode {
@@ -377,7 +377,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             BtnDisplayMode[] enumArray = BtnDisplayMode.values();
 
             for (BtnDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -392,11 +392,11 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     public BtnDisplayMode getMode_BtnDisplayMode() {
-        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, BtnDisplayMode.class );
+        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, BtnDisplayMode.class);
     }
 
-    public void setMode_BtnDisplayMode( BtnDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, BtnDisplayMode.class , value );
+    public void setMode_BtnDisplayMode(BtnDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, BtnDisplayMode.class, value);
     }
 
     public static enum MeisaiMode implements ICommonChildDivMode {
@@ -416,7 +416,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             MeisaiMode[] enumArray = MeisaiMode.values();
 
             for (MeisaiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -431,11 +431,11 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     public MeisaiMode getMode_MeisaiMode() {
-        return (MeisaiMode) _CommonChildDivModeUtil.getMode( this.modes, MeisaiMode.class );
+        return (MeisaiMode) _CommonChildDivModeUtil.getMode(this.modes, MeisaiMode.class);
     }
 
-    public void setMode_MeisaiMode( MeisaiMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, MeisaiMode.class , value );
+    public void setMode_MeisaiMode(MeisaiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, MeisaiMode.class, value);
     }
 
     public static enum DisplayType implements ICommonChildDivMode {
@@ -454,7 +454,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -469,11 +469,11 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
     }
 
-    public void setMode_DisplayType( DisplayType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
+    public void setMode_DisplayType(DisplayType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
     }
 
     /*
@@ -485,7 +485,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setTxtHenkoDate(TextBoxFlexibleDate txtHenkoDate) {
+    public void setTxtHenkoDate(TextBoxFlexibleDate txtHenkoDate) {
         this.getHenkoInput().setTxtHenkoDate(txtHenkoDate);
     }
 
@@ -495,7 +495,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setTxtHenkoTodokedeDate(TextBoxFlexibleDate txtHenkoTodokedeDate) {
+    public void setTxtHenkoTodokedeDate(TextBoxFlexibleDate txtHenkoTodokedeDate) {
         this.getHenkoInput().setTxtHenkoTodokedeDate(txtHenkoTodokedeDate);
     }
 
@@ -505,7 +505,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setDdlHenkoJiyu(DropDownList ddlHenkoJiyu) {
+    public void setDdlHenkoJiyu(DropDownList ddlHenkoJiyu) {
         this.getHenkoInput().setDdlHenkoJiyu(ddlHenkoJiyu);
     }
 
@@ -515,7 +515,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setHenkoHokenshaJoho(HenkoHokenshaJohoDiv HenkoHokenshaJoho) {
+    public void setHenkoHokenshaJoho(HenkoHokenshaJohoDiv HenkoHokenshaJoho) {
         this.getHenkoInput().setHenkoHokenshaJoho(HenkoHokenshaJoho);
     }
 
@@ -525,7 +525,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setDdlHenkoSochimotoHokensha(DropDownList ddlHenkoSochimotoHokensha) {
+    public void setDdlHenkoSochimotoHokensha(DropDownList ddlHenkoSochimotoHokensha) {
         this.getHenkoInput().getHenkoHokenshaJoho().setDdlHenkoSochimotoHokensha(ddlHenkoSochimotoHokensha);
     }
 
@@ -535,7 +535,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setDdlHenkoKyuHokensha(DropDownList ddlHenkoKyuHokensha) {
+    public void setDdlHenkoKyuHokensha(DropDownList ddlHenkoKyuHokensha) {
         this.getHenkoInput().getHenkoHokenshaJoho().setDdlHenkoKyuHokensha(ddlHenkoKyuHokensha);
     }
 
@@ -545,7 +545,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setDdlJuminJoho(DropDownList ddlJuminJoho) {
+    public void setDdlJuminJoho(DropDownList ddlJuminJoho) {
         this.getHenkoInput().getHenkoHokenshaJoho().setDdlJuminJoho(ddlJuminJoho);
     }
 
@@ -555,7 +555,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setBtnHenkoKakutei(Button btnHenkoKakutei) {
+    public void setBtnHenkoKakutei(Button btnHenkoKakutei) {
         this.getHenkoInput().setBtnHenkoKakutei(btnHenkoKakutei);
     }
 
@@ -565,7 +565,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public void  setBtnHenkoTorikeshi(Button btnHenkoTorikeshi) {
+    public void setBtnHenkoTorikeshi(Button btnHenkoTorikeshi) {
         this.getHenkoInput().setBtnHenkoTorikeshi(btnHenkoTorikeshi);
     }
 
@@ -575,12 +575,12 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
      * 引数から渡されたキーを元に被保険者台帳を検索し、その結果をグリッドに設定します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param 処理対象者 処理対象者
+     * @param 識別コード 識別コード
      * @param 取得日 取得日
      */
     @Override
-    public void initialize(HihokenshaNo 被保険者番号, IKojin 処理対象者, FlexibleDate 取得日) {
-        getHandler().initialize(被保険者番号, 処理対象者, 取得日);
+    public void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+        getHandler().initialize(被保険者番号, 識別コード, 取得日);
     }
 
     private ShikakuHenkoRirekiHandler getHandler() {

@@ -5,11 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2050011;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.datagridTekiyoJogai_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.DBA2050011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.DBA2050011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050011.TekiyoJogaiTotalHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -24,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -85,25 +90,26 @@ public class TekiyoJogaiTotal {
      * @return レスポンス
      */
     public ResponseData onClick_btnUpdate(TekiyoJogaiTotalDiv requestDiv) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
-            RString menuId = ResponseHolder.getMenuID();
-            if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_解除.equals(menuId)) {
-                requestDiv.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().saveTekiyoJogaisha(識別コード);
-            } else if (遷移元メニューID_変更.equals(menuId)) {
-                requestDiv.getTekiyoJogaiJohoIchiran().getCddShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+        if (!isデータ変更(requestDiv)) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(requestDiv).addMessage(
+                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
             }
-            RealInitialLocker.release(前排他ロックキー);
-            requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-            return ResponseData.of(requestDiv).setState(DBA2050011StateName.完了状態);
+        } else {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                return ResponseData.of(requestDiv).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                一覧データの保存(requestDiv);
+                RealInitialLocker.release(前排他ロックキー);
+                requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
+                        new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+                return ResponseData.of(requestDiv).setState(DBA2050011StateName.完了状態);
+            }
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -121,6 +127,37 @@ public class TekiyoJogaiTotal {
 
     private TekiyoJogaiTotalHandler getHandler(TekiyoJogaiTotalDiv requestDiv) {
         return new TekiyoJogaiTotalHandler(requestDiv);
+    }
+
+    private boolean isデータ変更(TekiyoJogaiTotalDiv requestDiv) {
+        RString menuId = ResponseHolder.getMenuID();
+        if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_解除.equals(menuId)) {
+            List<datagridTekiyoJogai_Row> 適用情報一覧 = requestDiv.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().get適用情報一覧();
+            for (datagridTekiyoJogai_Row row : 適用情報一覧) {
+                if (!RowState.Unchanged.equals(row.getRowState())) {
+                    return true;
+                }
+            }
+        } else if (遷移元メニューID_変更.equals(menuId)) {
+            List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴一覧 = requestDiv.getTekiyoJogaiJohoIchiran().
+                    getCddShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧();
+            for (dgShisetsuNyutaishoRireki_Row row : 施設入退所履歴一覧) {
+                if (!RString.isNullOrEmpty(row.getState())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void 一覧データの保存(TekiyoJogaiTotalDiv requestDiv) {
+        RString menuId = ResponseHolder.getMenuID();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_解除.equals(menuId)) {
+            requestDiv.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().saveTekiyoJogaisha(識別コード);
+        } else if (遷移元メニューID_変更.equals(menuId)) {
+            requestDiv.getTekiyoJogaiJohoIchiran().getCddShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
+        }
     }
 
     private enum TekiyoJogaiTotalErrorMessage implements IValidationMessage {

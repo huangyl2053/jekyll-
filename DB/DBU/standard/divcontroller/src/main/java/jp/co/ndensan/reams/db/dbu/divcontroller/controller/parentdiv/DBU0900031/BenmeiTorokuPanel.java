@@ -27,12 +27,12 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -180,9 +180,10 @@ public class BenmeiTorokuPanel {
             if (blnState1) {
                 panelDiv.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                         .replace(状態_登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(panelDiv).setState(DBU0900031StateName.完了状態);
             }
         }
-        return ResponseData.of(panelDiv).setState(DBU0900031StateName.完了状態);
+        return ResponseData.of(panelDiv).respond();
     }
 
     private boolean get弁明登録明細情報の登録(BenmeiTorokuPanelDiv panelDiv) {
@@ -246,11 +247,12 @@ public class BenmeiTorokuPanel {
                 get更新処理の実施(panelDiv);
                 panelDiv.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                         .replace(状態_更新.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(panelDiv).setState(DBU0900031StateName.完了状態);
             }
         } else {
             throw new ApplicationException("内容が変更されていないため、保存はできません。");
         }
-        return ResponseData.of(panelDiv).setState(DBU0900031StateName.完了状態);
+        return ResponseData.of(panelDiv).respond();
     }
 
     private ResponseData<BenmeiTorokuPanelDiv> get更新処理の実施(BenmeiTorokuPanelDiv panelDiv) {
@@ -273,9 +275,10 @@ public class BenmeiTorokuPanel {
             if (blnStateDel) {
                 panelDiv.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                         .replace(状態_削除.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(panelDiv).setState(DBU0900031StateName.完了状態);
             }
         }
-        return ResponseData.of(panelDiv).setState(DBU0900031StateName.完了状態);
+        return ResponseData.of(panelDiv).respond();
     }
 
     private boolean is弁明登録明細情報の削除() {
@@ -328,8 +331,8 @@ public class BenmeiTorokuPanel {
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineShobunNaiyo().getValue());
         inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().getValue());
-        TextBoxDate 弁明書提出日 = panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi();
-        inputDiv.append(弁明書提出日 == null ? RString.EMPTY : 弁明書提出日.getValue().toDateString());
+        RDate 弁明書提出日 = panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().getValue();
+        inputDiv.append(弁明書提出日 == null ? RString.EMPTY : 弁明書提出日.toDateString());
         return inputDiv.toRString();
     }
 

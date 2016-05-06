@@ -17,7 +17,9 @@ public enum DBD1020001StateName implements IStateEnumerations {
     NoChange(""),
     一覧("一覧"),
     入力("入力"),
-    完了メッセージ("完了メッセージ");
+    完了メッセージ("完了メッセージ"),
+    世帯情報From一覧("世帯情報From一覧"),
+    世帯情報From入力("世帯情報From入力");
 
     private final RString name;
 

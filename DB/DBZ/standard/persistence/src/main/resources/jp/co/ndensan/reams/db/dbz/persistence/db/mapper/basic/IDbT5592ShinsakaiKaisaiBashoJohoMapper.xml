@@ -75,5 +75,6 @@
         </if>
         ORDER BY
         rgdb."DbT5592ShinsakaiKaisaiBashoJoho"."shinsakaiKaisaiBashoCode"
+        Limit #{maxCount}
     </select>
 </mapper>

@@ -168,16 +168,16 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
         item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分申請時コード()).toRString());
         RString hihokenshaNo = entity.get被保険者番号();
         if (!RString.isNullOrEmpty(hihokenshaNo) && INT10 <= hihokenshaNo.length()) {
-            item.setHihokenshaNo1(entity.get被保険者番号().substring(0, 1));
-            item.setHihokenshaNo2(entity.get被保険者番号().substring(1, 2));
-            item.setHihokenshaNo3(entity.get被保険者番号().substring(2, INT3));
-            item.setHihokenshaNo4(entity.get被保険者番号().substring(INT3, INT4));
-            item.setHihokenshaNo5(entity.get被保険者番号().substring(INT4, INT5));
-            item.setHihokenshaNo6(entity.get被保険者番号().substring(INT5, INT6));
-            item.setHihokenshaNo7(entity.get被保険者番号().substring(INT6, INT7));
-            item.setHihokenshaNo8(entity.get被保険者番号().substring(INT7, INT8));
-            item.setHihokenshaNo9(entity.get被保険者番号().substring(INT8, INT9));
-            item.setHihokenshaNo10(entity.get被保険者番号().substring(INT9, INT10));
+            item.setHihokenshaNo1(hihokenshaNo.substring(0, 1));
+            item.setHihokenshaNo2(hihokenshaNo.substring(1, 2));
+            item.setHihokenshaNo3(hihokenshaNo.substring(2, INT3));
+            item.setHihokenshaNo4(hihokenshaNo.substring(INT3, INT4));
+            item.setHihokenshaNo5(hihokenshaNo.substring(INT4, INT5));
+            item.setHihokenshaNo6(hihokenshaNo.substring(INT5, INT6));
+            item.setHihokenshaNo7(hihokenshaNo.substring(INT6, INT7));
+            item.setHihokenshaNo8(hihokenshaNo.substring(INT7, INT8));
+            item.setHihokenshaNo9(hihokenshaNo.substring(INT8, INT9));
+            item.setHihokenshaNo10(hihokenshaNo.substring(INT9, INT10));
         }
         RString hokenshaNo = entity.get証記載保険者番号();
         if (!RString.isNullOrEmpty(hokenshaNo) && INT5 <= hokenshaNo.length()) {

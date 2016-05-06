@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -97,4 +98,41 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
     private RString 出力項目;
     @BatchParameter(key = REPORTID, name = "帳票ID")
     private ReportId 帳票ID;
+
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @return mybatisパラメータ
+     */
+    public HanyoListShokanbaraiJokyoProcessParameter toProcessParam() {
+        return new HanyoListShokanbaraiJokyoProcessParameter(
+                null,
+                null,
+                保険者コード,
+                保険者名,
+                サービス提供年月From,
+                サービス提供年月To,
+                処理状況,
+                決定情報,
+                支払方法,
+                金融機関コード,
+                金融機関名称,
+                申請日From,
+                申請日To,
+                住宅改修支給届出日From,
+                住宅改修支給届出日To,
+                決定日From,
+                決定日To,
+                国保連送付年月From,
+                国保連送付年月To,
+                様式番号選択,
+                様式番号,
+                項目名付加,
+                連番付加,
+                日付スラッシュ付加,
+                出力順,
+                出力項目,
+                帳票ID);
+    }
+
 }

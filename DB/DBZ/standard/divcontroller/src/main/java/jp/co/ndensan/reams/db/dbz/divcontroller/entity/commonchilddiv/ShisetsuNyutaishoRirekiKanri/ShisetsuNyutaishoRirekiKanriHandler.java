@@ -220,6 +220,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         dgShisetsuNyutaishoRireki_Row newRow = new dgShisetsuNyutaishoRireki_Row();
         int 最大履歴番号 = 1;
         if (listRow != null && !listRow.isEmpty()) {
+            Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
             最大履歴番号 = Integer.parseInt(listRow.get(listRow.size() - 1).getRirekiNo().toString()) + 1;
         } else {
             listRow = new ArrayList();
@@ -259,7 +260,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
         ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(施設入退所情報Model));
         div.setInputMode(RString.EMPTY);
-        Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
+        Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.NyushoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(listRow);
         onClick_btnShisetsuNyutaishoTorikeshi();
     }
@@ -319,7 +320,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             rowList.add(row);
 
         }
-        Collections.sort(rowList, new ShisetsuNyutaishoRirekiKanriHandler.RirekiNoDateComparator());
+        Collections.sort(rowList, new ShisetsuNyutaishoRirekiKanriHandler.NyushoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(rowList);
     }
 
@@ -546,6 +547,14 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         @Override
         public int compare(dgShisetsuNyutaishoRireki_Row o1, dgShisetsuNyutaishoRireki_Row o2) {
             return o1.getRirekiNo().compareTo(o2.getRirekiNo());
+        }
+    }
+
+    private static class NyushoDateComparator implements Comparator<dgShisetsuNyutaishoRireki_Row>, Serializable {
+
+        @Override
+        public int compare(dgShisetsuNyutaishoRireki_Row o1, dgShisetsuNyutaishoRireki_Row o2) {
+            return o2.getNyushoDate().getValue().compareTo(o1.getNyushoDate().getValue());
         }
     }
 }

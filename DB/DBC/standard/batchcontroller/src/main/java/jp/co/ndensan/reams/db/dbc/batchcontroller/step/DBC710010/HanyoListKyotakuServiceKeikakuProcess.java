@@ -13,8 +13,12 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicek
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -77,11 +81,12 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private static final RString 日本語ファイル名 = new RString("汎用リスト 居宅サービス計画CSV");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KyotakuServiceKeikaku.csv");
     private static final RString CSV出力有無 = new RString("");
-    private static final RString 構成市町村 = new RString("【構成市町村】");
-    private static final RString 作成区分 = new RString("【作成区分】");
-    private static final RString 抽出区分 = new RString("【抽出区分】");
-    private static final RString 基準年月日 = new RString("【基準年月日】");
-    private static final RString 支援事業者番号 = new RString("【支援事業者番号】");
+    private static final RString 抽出対象者 = new RString("【抽出対象者】");
+    private static final RString 構成市町村 = new RString("構成市町村：");
+    private static final RString 作成区分 = new RString("作成区分：");
+    private static final RString 抽出区分 = new RString("抽出区分：");
+    private static final RString 基準年月日 = new RString("基準年月日：");
+    private static final RString 支援事業者番号 = new RString("支援事業者番号：");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSVNAME = new RString("HanyoList_KyotakuServiceKeikaku.csv");
@@ -123,22 +128,13 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     protected void createWriter() {
         システム日時 = RDate.getNowDate();
         文字コード = DbBusinessConifg.get(ConfigNameDBU.EUC共通_文字コード, システム日時, SubGyomuCode.DBU介護統計報告);
-        if (CODE_1.equals(文字コード)) {
-            ファイル文字コード = Encode.UTF_8withBOM;
-        } else if (CODE_2.equals(文字コード)) {
-            ファイル文字コード = Encode.SJIS;
-        } else if (CODE_3.equals(文字コード)) {
-            ファイル文字コード = Encode.JIS;
-        } else {
-            ファイル文字コード = Encode.UTF_8withBOM;
-        }
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSVNAME);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(ファイル文字コード).
+                setEncode(Encode.UTF_8).
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.isCsv項目名付加()).build();
     }
@@ -159,6 +155,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
 
     @Override
     protected void afterExecute() {
+        eucCsvWriter.close();
         AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         バッチ出力条件リストの出力();
@@ -170,11 +167,20 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         RString 出力件数 = new RString(String.valueOf(eucCsvWriter.getCount()));
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
+        builder.append(抽出対象者);
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(構成市町村);
         LasdecCode lasdecCode = parameter.get構成市町村コード();
-        RString 構成市町村コード = 左記号.concat(lasdecCode == null ? RString.EMPTY : lasdecCode.getColumnValue()).concat(右記号);
-        //TODOのNo.716 構成市町村名 ?
-        builder.append(構成市町村コード);
+        if (lasdecCode != null) {
+            RString 構成市町村コード = 左記号.concat(lasdecCode.getColumnValue()).concat(右記号);
+            HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+            HokenshaSummary hokenshaSummary = hokenshaList.get(lasdecCode);
+            RString 構成市町村名 = hokenshaSummary == null ? RString.EMPTY : hokenshaSummary.get市町村名称();
+            builder.append(構成市町村コード).append(構成市町村名);
+        } else {
+            builder.append(RString.EMPTY);
+        }
         出力条件.add(builder.toRString());
         builder = get作成区分();
         出力条件.add(builder.toRString());

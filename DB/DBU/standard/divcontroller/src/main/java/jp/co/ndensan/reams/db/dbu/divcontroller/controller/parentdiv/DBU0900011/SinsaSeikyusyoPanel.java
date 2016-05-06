@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011.DBU0900011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900011.SinsaSeikyusyoPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900011.SinsaSeikyusyoJohoHandler;
+import jp.co.ndensan.reams.db.dbu.service.core.benmeisyo.BenmeisyoFinder;
 import jp.co.ndensan.reams.db.dbu.service.sinsasei.SinsaSeikyusyoJohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 審査請求書登録_一覧情報の取得処理。
  *
- * @reamsid_L DBU-1080-070 lizhuoxuan
+ * @reamsid_L DBU-1080-050 lizhuoxuan
  */
 public class SinsaSeikyusyoPanel {
 
@@ -37,12 +38,10 @@ public class SinsaSeikyusyoPanel {
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onLoad(SinsaSeikyusyoPanelDiv div) {
-        // TODO QA415 共有子Divのload事件問題が存在する。
-//        // 宛名基本情報を取得する。
-//        div.getAtenainfoCommonChildDiv1().load(ShikibetsuCode.EMPTY);
-////        div.getAtenainfoCommonChildDiv1().load(new ShikibetsuCode(new RString("123401234000011")));
+//        div.getAtenainfoCommonChildDiv1().onLoad(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
 //        // 資格系基本情報を取得。
-//        div.getShikakuKihonCommonChildDiv1().initialize(HihokenshaNo.EMPTY);
+//        div.getShikakuKihonCommonChildDiv1().initialize(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        // 宛名基本情報を取得する。
         List<FufukuMoshitate> sinsaSeikyusyoJohoList
                 = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
                         ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).records();
@@ -65,17 +64,20 @@ public class SinsaSeikyusyoPanel {
     }
 
     // TODO 弁明書発行実装しない、「選択ボタン」利用しない。
-//    /**
-//     * 選択ボタン。<br/>
-//     *
-//     * @param div
-//     * @return ResponseData<SinsaSeikyusyoPanelDiv>
-//     */
-//    public ResponseData<SinsaSeikyusyoPanelDiv> onClick_BtnSenTaKu(SinsaSeikyusyoPanelDiv div) {
-//        grdSinsaSeikyusyoJoho_Row grdSinsaSeikyusyoJoho_Row = div.getGrdSinsaSeikyusyoJoho().getSelectedItems().get(0);
-//        div.getGrdSinsaSeikyusyoJoho().getGridSetting().selectedRowCount();
-//        return createResponseData(div);
-//    }
+    /**
+     * 選択ボタン。<br/>
+     *
+     * @param div SinsaSeikyusyoPanelDiv
+     * @return ResponseData<SinsaSeikyusyoPanelDiv>
+     */
+    public ResponseData<SinsaSeikyusyoPanelDiv> onClick_BtnSenTaKu(SinsaSeikyusyoPanelDiv div) {
+        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        ViewStateHolder.put(ViewStateKeys.審査請求届出日,
+                new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
+        return ResponseData.of(div).respond();
+    }
+
     /**
      * 修正ボタン。<br/>
      *
@@ -108,19 +110,20 @@ public class SinsaSeikyusyoPanel {
         return ResponseData.of(sindiv).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(状態_削除);
     }
     // TODO 弁明書の発行処理 該当機能実装しない。
-//    /**
-//     * 弁明書発行。<br/>
-//     *
-//     * @param sindiv
-//     * @return ResponseData<SinsaSeikyusyoPanelDiv>
-//     */
-//    public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnbennsho(SinsaSeikyusyoPanelDiv sindiv) {
-//        grdSinsaSeikyusyoJoho_Row grdSinsaSeikyusyoJoho_Row = sindiv.getGrdSinsaSeikyusyoJoho().getSelectedItems().get(0);
-//        ViewStateHolder.put(ViewStateKeys.識別コード, sindiv.getAtenainfoCommonChildDiv1().getName());
-//        ViewStateHolder.put(ViewStateKeys.被保険者番号, sindiv.getShikakuKihonCommonChildDiv1().get被保険者番号());
-//        sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue();
-//        return ResponseData.of(sindiv).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(状態_削除);
-//    }
+    /**
+     * 弁明書発行。<br/>
+     *
+     * @param sindiv SinsaSeikyusyoPanelDiv
+     * @return ResponseData<SinsaSeikyusyoPanelDiv>
+     */
+    public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnbennsho(SinsaSeikyusyoPanelDiv sindiv) {
+        BenmeisyoFinder.createInstance().setBenmeisyoTyohyoData(ShikibetsuCode.EMPTY, HihokenshaNo.EMPTY, FlexibleDate.MAX, null);
+//        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
+//        ViewStateHolder.put(ViewStateKeys.被保険者番号, ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+//        ViewStateHolder.put(ViewStateKeys.審査請求届出日,
+//                new FlexibleDate(sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
+        return ResponseData.of(sindiv).respond();
+    }
 
     private SinsaSeikyusyoJohoHandler getHandler(SinsaSeikyusyoPanelDiv panel) {
         return new SinsaSeikyusyoJohoHandler(panel);

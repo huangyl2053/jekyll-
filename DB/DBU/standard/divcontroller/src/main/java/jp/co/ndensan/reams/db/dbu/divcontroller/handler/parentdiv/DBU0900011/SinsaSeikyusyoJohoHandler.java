@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 審査請求書登録_一覧情報の取得処理。
  *
- * @reamsid_L DBU-1080-070 lizhuoxuan
+ * @reamsid_L DBU-1080-050 lizhuoxuan
  */
 public class SinsaSeikyusyoJohoHandler {
 

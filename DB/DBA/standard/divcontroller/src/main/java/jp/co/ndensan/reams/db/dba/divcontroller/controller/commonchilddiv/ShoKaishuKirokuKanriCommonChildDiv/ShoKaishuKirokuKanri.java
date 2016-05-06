@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.ShoKa
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ValidationHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 証回収記録管理のクラス。
  *
- * @reamsid_L DBA-1070-020 lizhuoxuan
+ * @reamsid_L DBA-1070-010 lizhuoxuan
  */
 public class ShoKaishuKirokuKanri {
 
@@ -58,7 +59,8 @@ public class ShoKaishuKirokuKanri {
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_ModifyButton(ShoKaishuKirokuKanriDiv requestDiv) {
         ViewStateHolder.put(ViewStateKeys.状態, 状態_修正);
-        return createResponseData(状態の修正(requestDiv, 状態_修正));
+        createHandlerOf(requestDiv).状態の修正(状態_修正);
+        return createResponseData(requestDiv);
     }
 
     /**
@@ -69,27 +71,9 @@ public class ShoKaishuKirokuKanri {
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_DeleteButton(ShoKaishuKirokuKanriDiv requestDiv) {
         ViewStateHolder.put(ViewStateKeys.状態, 状態_削除);
-        return createResponseData(状態の修正(requestDiv, 状態_削除));
-    }
+        createHandlerOf(requestDiv).状態の修正(状態_削除);
+        return createResponseData(requestDiv);
 
-    private ShoKaishuKirokuKanriDiv 状態の修正(ShoKaishuKirokuKanriDiv requestDiv, RString 状態) {
-        dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
-        requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
-        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
-        requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
-        requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
-        requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
-        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
-        requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
-        requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
-
-        if (状態_削除.equals(状態)) {
-
-            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.sakujyo);
-        } else {
-            requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.koshin);
-        }
-        return requestDiv;
     }
 
     /**
@@ -194,5 +178,9 @@ public class ShoKaishuKirokuKanri {
 
     private ValidationHandler getValidationHandler(ShoKaishuKirokuKanriDiv requestDiv) {
         return new ValidationHandler(requestDiv);
+    }
+
+    private ShoKaishuKirokuKanriHandler createHandlerOf(ShoKaishuKirokuKanriDiv requestDiv) {
+        return new ShoKaishuKirokuKanriHandler(requestDiv);
     }
 }

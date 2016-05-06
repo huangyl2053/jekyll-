@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA7010001;
 
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHikokenshaDaichoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001.DvHikokenshaDaichoDivHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001.DvHikokenshaDaichoDivValidationHandler;
@@ -96,11 +97,10 @@ public class DvHikokenshaDaicho {
      * 実行するボタンを押下する場合、バッチ起動する。
      *
      * @param div 汎用リスト被保険者台帳Div
-     * @return ResponseData<DvHikokenshaDaichoDiv>
+     * @return ResponseData<HanyoListHihokenshadaichoBatchParameter>
      */
-    public ResponseData<DvHikokenshaDaichoDiv> onClick_btnExecute(DvHikokenshaDaichoDiv div) {
-        getHandler(div).onClick_btnKogakuParamSave();
-        return ResponseData.of(div).respond();
+    public ResponseData<HanyoListHihokenshadaichoBatchParameter> onClick_btnExecute(DvHikokenshaDaichoDiv div) {
+        return ResponseData.of(getHandler(div).onClick_btnKogakuParamSave()).respond();
     }
 
     private DvHikokenshaDaichoDivHandler getHandler(DvHikokenshaDaichoDiv div) {

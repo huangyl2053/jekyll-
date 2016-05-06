@@ -52,7 +52,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 介護保険助成金給付申請書Printerです。
  *
- * @reamsid_L DBA-0540-120 houtp
+ * @reamsid_L DBA-0540-120 houtianpeng
  */
 public class JoseikinKyufuShinseisho {
 
@@ -107,7 +107,7 @@ public class JoseikinKyufuShinseisho {
                 null,
                 Gender.toValue(entity.get性別()).getCommonName(),
                 entity.get電話番号(),
-                get帳票文言(), // TODO 内部QA：648 (文言の取得不明です)
+                get帳票文言(),
                 set郵便番号(entity.get郵便番号())
         );
         list.add(JoseikinKyufuShinseishoReport.createFrom(item));
