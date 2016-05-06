@@ -8,23 +8,21 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -57,64 +55,106 @@ public class TsukibetsuSuiihyoSakuseiHandler {
      *
      */
     public void onload() {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
-                GyomuBunrui.介護事務);
-        if (new Code(SHICHOSONCODE_111).equals(shichosonSecurityJoho.get導入形態コード())) {
-            // 状態１　初期化状態（広域保険者）
-            setヘッダエリア();
-            set抽出条件エリア();
-            // 市町村==全市町村
-        } else if (new Code(SHICHOSONCODE_112).equals(shichosonSecurityJoho.get導入形態コード())
-                || new Code(SHICHOSONCODE_220).equals(shichosonSecurityJoho.get導入形態コード())) {
-            // 状態２　初期化状態（単一保険者）
-            setヘッダエリア();
-            set抽出条件エリア();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村セキュリティ情報 != null) {
+            Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+            if (new Code(SHICHOSONCODE_111).equals(導入形態コード)) {
+                // 状態１　初期化状態（広域保険者）
+                setヘッダエリア();
+                set抽出条件エリア();
+                // 市町村==全市町村
+            } else if (new Code(SHICHOSONCODE_112).equals(導入形態コード)
+                    || new Code(SHICHOSONCODE_220).equals(導入形態コード)) {
+                // 状態２　初期化状態（単一保険者）
+                setヘッダエリア();
+                set抽出条件エリア();
 //            div.getCcdChikuShichosonSelect().
-            // 選択対象==全て
+                // 選択対象==全て
+            }
         }
+    }
+
+    /**
+     * 条件を復元するボタンを押下する場合、バッチパラメータの設定値を画面に表示する。
+     */
+    public void onClick_btnKogakuParamRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnParameterRestore().getRestoreBatchParameterMap();
+        RString 調定年度 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("ddlChoteiNendo"));
+        div.getDdlChoteiNendo().setSelectedKey(調定年度);
+        RDate 調定基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtChoteiKijunYMD"));
+        div.getTxtChoteiKijunYMD().setValue(調定基準日);
+        RString 各月資格基準日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("ddShikakuKijunD"));
+        div.getDdShikakuKijunD().setSelectedKey(各月資格基準日);
+        boolean is年齢 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("radNenrei"));
+        if (is年齢) {
+            div.getRadNenrei().setSelectedKey(年齢);
+        }
+        boolean is生年月日 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("radUmareYMD"));
+        if (is生年月日) {
+            div.getRadUmareYMD().setSelectedKey(生年月日);
+        }
+        Decimal 年齢開始 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("txtNenreiSt"));
+        div.getTxtNenreiSt().setValue(年齢開始);
+        Decimal 年齢終了 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("txtNenreiEd"));
+        div.getTxtNenreiEd().setValue(年齢終了);
+        RDate 年齢基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtNenreiKijunYMD"));
+        div.getTxtNenreiKijunYMD().setValue(年齢基準日);
+        RDate 生年月日開始 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtUmareSt"));
+        div.getTxtUmareSt().setValue(生年月日開始);
+        RDate 生年月日終了 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtUmareEd"));
+        div.getTxtUmareEd().setValue(生年月日終了);
+        // TODO 介護地区・市町村選択DIVに項目設定無し、技術点NO.65
     }
 
     /**
      * バッチパラメータを作成します。
      *
-     * @param div 月別推移表のクラスファイル
      * @return CreateTsukibetsuSuiihyoBatchParameter 月別推移表作成_バッチ用のパラメータ
      */
-    public CreateTsukibetsuSuiihyoBatchParameter batchParameter(TsukibetsuSuiihyoSakuseiDiv div) {
-        CreateTsukibetsuSuiihyoBatchParameter batchParameter = new CreateTsukibetsuSuiihyoBatchParameter();
-        batchParameter.setChoteiNendo(new FlexibleYear(div.getDdlChoteiNendo().getSelectedValue()));
-        RStringBuilder buf = new RStringBuilder();
-        buf.append(div.getTxtChoteiKijunYMD().getValue());
-        buf.append(RTime.now().toString());
-        batchParameter.setChoteiKijunNichiji(buf.toRString());
-        batchParameter.setKakutukiShikakuKijunNichi(div.getDdShikakuKijunD().getSelectedValue());
+    public CreateTsukibetsuSuiihyoBatchParameter batchParameter() {
+
+        FlexibleYear 調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedValue());
+        RStringBuilder 調定基準日 = new RStringBuilder();
+        調定基準日.append(div.getTxtChoteiKijunYMD().getValue());
+        調定基準日.append(RDate.getNowDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
+        boolean is年齢 = false;
+        boolean is生年月日 = false;
         if (年齢.equals(div.getRadNenrei().getSelectedKey())) {
-            batchParameter.setAgeFlg(true);
-        } else {
-            batchParameter.setAgeFlg(false);
+            is年齢 = true;
         }
-        batchParameter.setAgeStart(new RString(div.getTxtNenreiSt().toString()));
-        batchParameter.setAgeEnd(new RString(div.getTxtNenreiEd().toString()));
-        batchParameter.setAgeKijunNi(div.getTxtNenreiKijunYMD().getValue().toDateString());
         if (生年月日.equals(div.getRadUmareYMD().getSelectedKey())) {
-            batchParameter.setSeinengappiYMD_Flg(true);
-        } else {
-            batchParameter.setSeinengappiYMD_Flg(false);
+            is生年月日 = true;
         }
-        batchParameter.setSeinengappiYMDStart(div.getTxtUmareSt().getValue().toDateString());
-        batchParameter.setSeinengappiYMDEnd(div.getTxtUmareEd().getValue().toDateString());
         // TODO 介護地区・市町村選択共有子Divを呼び出す
-//        batchParameter.setSentakuTaisho();
-//        batchParameter.setSentakuKekkaList();
-//        batchParameter.setShichosonCode();
-//        batchParameter.setShichosonMeisho();
-//        batchParameter.setKyuShichosonCode();
-//        batchParameter.setKyuShichosonMeisho();
-        return batchParameter;
+        return new CreateTsukibetsuSuiihyoBatchParameter(調定年度, 調定基準日.toRString(), div.getDdShikakuKijunD().getSelectedKey(), is年齢, nullToEmpty(div.getTxtNenreiSt().getValue()),
+                nullToEmpty(div.getTxtNenreiSt().getValue()), nullToEmpty(div.getTxtNenreiKijunYMD().getValue()), is生年月日,
+                nullToEmpt(div.getTxtUmareSt().getValue()), nullToEmpt(div.getTxtUmareEd().getValue()),
+                RString.EMPTY, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+    }
+
+    private RString nullToEmpty(Decimal 年齢) {
+        if (年齢 != null) {
+            return new RString(年齢.toString());
+        }
+        return RString.EMPTY;
+    }
+
+    private FlexibleDate nullToEmpty(RDate 日期) {
+        if (日期 != null) {
+            return new FlexibleDate(日期.toDateString());
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    private RString nullToEmpt(RDate 日期) {
+        if (日期 != null) {
+            return 日期.toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private void setヘッダエリア() {
-        div.getDdlChoteiNendo().setSelectedValue((BusinessConfig.get(ConfigNameDBB.日付関連_調定年度)));
+        div.getDdlChoteiNendo().setSelectedValue((BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課)));
         div.getTxtChoteiKijunYMD().setValue(RDate.getNowDate());
     }
 
@@ -128,69 +168,18 @@ public class TsukibetsuSuiihyoSakuseiHandler {
 
     private void set各月資格基準日() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (int i = 0; i < RDate.getNowDate().getLastDay(); i++) {
+        for (int i = 1; i < RDate.getNowDate().getLastDay(); i++) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(new RString(空白文字.toString() + i));
             dataSource.setValue(new RString(空白文字.toString() + i));
             dataSourceList.add(dataSource);
         }
         div.getDdShikakuKijunD().setDataSource(dataSourceList);
-        for (int i = 0; i < RDate.getNowDate().getLastDay(); i++) {
+        for (int i = 1; i < RDate.getNowDate().getLastDay(); i++) {
             if (i == RDate.getNowDate().getDayValue()) {
                 div.getDdShikakuKijunD().setSelectedKey(new RString(空白文字.toString() + i));
             }
         }
 
-    }
-
-    /**
-     * 年齢開始に入力した値が65より小さい場合、エラーとする。
-     *
-     * @return validationMessages
-     */
-    public ValidationMessageControlPairs 年齢65歳未満チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.年齢65歳未満));
-        return validationMessages;
-    }
-
-    /**
-     * 抽出開始年齢大小不整合チェック場合、エラーとする。
-     *
-     * @return validationMessages
-     */
-    public ValidationMessageControlPairs 抽出開始年齢大小不整合チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始年齢大小不整合));
-        return validationMessages;
-    }
-
-    /**
-     * 抽出開始生年月日大小不整合チェック場合、エラーとする。
-     *
-     * @return validationMessages
-     */
-    public ValidationMessageControlPairs 抽出開始生年月日大小不整合チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始生年月日大小不整合));
-        return validationMessages;
-    }
-
-    private static enum RRVMessages implements IValidationMessage {
-
-        年齢65歳未満(DbbErrorMessages.年齢65歳未満),
-        抽出開始年齢大小不整合(DbbErrorMessages.抽出開始年齢大小不整合, "抽出開始年齢", "抽出終了年齢"),
-        抽出開始生年月日大小不整合(DbbErrorMessages.抽出開始生年月日大小不整合, "抽出開始生年月日", "抽出終了生年月日");
-
-        private final Message message;
-
-        private RRVMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }
