@@ -76,8 +76,12 @@ public class HanyoListKyotakuServiceKeikakuProcessParameter implements IBatchPro
      * @return HanyoListKyotakuServiceKeikakuMybatisParameter
      */
     public HanyoListKyotakuServiceKeikakuMybatisParameter toMybatisParameter() {
-        return new HanyoListKyotakuServiceKeikakuMybatisParameter(構成市町村コード, 作成区分, 抽出区分, 基準年月日, 支援事業者番号,
-                改頁出力順ID, 出力項目ID, csv項目名付加, csv連番付加, csv日付スラッシュ編集, 宛名検索条件);
+        return new HanyoListKyotakuServiceKeikakuMybatisParameter(構成市町村コード, 作成区分,
+                抽出区分,
+                (基準年月日 != null && !基準年月日.isEmpty()) ? 基準年月日 : null,
+                支援事業者番号,
+                改頁出力順ID, 出力項目ID, csv項目名付加,
+                csv連番付加, csv日付スラッシュ編集, 宛名検索条件);
     }
 
 }
