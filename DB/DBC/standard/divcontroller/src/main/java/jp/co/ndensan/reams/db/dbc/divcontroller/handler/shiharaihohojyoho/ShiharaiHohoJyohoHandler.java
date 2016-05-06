@@ -854,11 +854,11 @@ public class ShiharaiHohoJyohoHandler {
                 || 住宅改修費支給申請.equals(menuID) || 住宅改修費事前申請.equals(menuID)
                 || 償還払い費支給申請.equals(menuID)) {
 
-            業務内区分コード = new KamokuCode(KozaBunruiKubun.償還払い支給.getコード());
+            業務内区分コード = new KamokuCode(String.format("%03d", KozaBunruiKubun.償還払い支給.getコード().toString()));
         }
         if (高額サービス費支給申請.equals(menuID)) {
 
-            業務内区分コード = new KamokuCode(KozaBunruiKubun.高額介護サービス費支給.getコード());
+            業務内区分コード = new KamokuCode(String.format("%03d", KozaBunruiKubun.高額介護サービス費支給.getコード().toString()));
         }
         if (高額合算支給申請1.equals(menuID)
                 || 高額合算支給申請2.equals(menuID)
@@ -872,7 +872,7 @@ public class ShiharaiHohoJyohoHandler {
                 || 高額合算支給申請10.equals(menuID)
                 || 高額合算支給申請11.equals(menuID)
                 || 高額合算支給申請12.equals(menuID)) {
-            業務内区分コード = new KamokuCode(KozaBunruiKubun.高額合算費支給.getコード());
+            業務内区分コード = new KamokuCode(String.format("%03d", KozaBunruiKubun.高額合算費支給.getコード().toString()));
         }
         return 業務内区分コード;
     }
