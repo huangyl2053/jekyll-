@@ -143,4 +143,28 @@ public class ShoriDateKanriManager {
         entity.initializeMd5();
         return new ShoriDateKanri(entity);
     }
+
+    /**
+     * 処理日付管理マスタを返します。
+     *
+     * @param 処理名 ShoriName
+     * @param 年度 Nendo
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get基準年月日(
+            RString 処理名,
+            FlexibleYear 年度) {
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+
+        DbT7022ShoriDateKanriEntity entity = dac.selectKijunYMD(
+                処理名,
+                年度);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
 }
