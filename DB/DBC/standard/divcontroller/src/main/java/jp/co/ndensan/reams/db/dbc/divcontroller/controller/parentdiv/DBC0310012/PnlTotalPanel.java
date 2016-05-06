@@ -78,7 +78,7 @@ public class PnlTotalPanel {
             div.getPnlCommon().getCcdAtena().setDisabled(true);
             div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
-            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認しない.getコード());
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認する.getコード());
             div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
             div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
@@ -90,6 +90,11 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtShikyuumukubun().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtServiceYM().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlFoot().getTxtSyokanseriNo().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
+
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             div.getPnlCommon().getCcdAtena().onLoad(識別コード);
             HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
