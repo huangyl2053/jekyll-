@@ -197,7 +197,11 @@ public enum ReportIdDBE {
     /**
      * 要介護認定結果通知一覧表の帳票ＩＤです。
      */
-    DBE525004(new ReportId("DBE525004_kekkatsuchiIchiranhyo"), new RString("要介護認定結果通知一覧表"));
+    DBE525004(new ReportId("DBE525004_kekkatsuchiIchiranhyo"), new RString("要介護認定結果通知一覧表")),
+    /**
+     * 認定調査委託先・認定調査員一覧表の帳票ＩＤです。
+     */
+    DBE592001(new ReportId("DBE592001_ChosaItakusakiNinteiChosainIchiranhyo"), new RString("認定調査委託先・認定調査員一覧表"));
 
     private final ReportId reportId;
 

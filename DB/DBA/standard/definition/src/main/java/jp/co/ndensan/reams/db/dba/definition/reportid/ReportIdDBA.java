@@ -30,7 +30,7 @@ public enum ReportIdDBA {
     /**
      * 被保険者証発行一覧表の帳票ＩＤです。
      */
-    DBA200003(new ReportId("DBA200003"), new RString("被保険者証発行一覧表")),
+    DBA200003(new ReportId("DBA200003_HihokenshashoHakkoIchiranhyo"), new RString("被保険者証発行一覧表")),
     /**
      * 介護保険被保険者証（B4版）の帳票ＩＤです。
      */
