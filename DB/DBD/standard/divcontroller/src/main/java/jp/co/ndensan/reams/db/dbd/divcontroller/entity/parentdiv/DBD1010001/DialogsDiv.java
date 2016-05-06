@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinseiSetai のクラスファイル 
+ * Dialogs のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShinseiSetaiDiv extends Panel {
+public class DialogsDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -21,10 +21,8 @@ public class ShinseiSetaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtRiyoshaFutanDankai")
-    private TextBox txtRiyoshaFutanDankai;
-    @JsonProperty("txtDispSetaiJoho")
-    private ButtonDialog txtDispSetaiJoho;
+    @JsonProperty("btnDispShisetsuJoho")
+    private ButtonDialog btnDispShisetsuJoho;
     @JsonProperty("btnDispGemmenJoho")
     private ButtonDialog btnDispGemmenJoho;
 
@@ -35,39 +33,21 @@ public class ShinseiSetaiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtRiyoshaFutanDankai
-     * @return txtRiyoshaFutanDankai
+     * getbtnDispShisetsuJoho
+     * @return btnDispShisetsuJoho
      */
-    @JsonProperty("txtRiyoshaFutanDankai")
-    public TextBox getTxtRiyoshaFutanDankai() {
-        return txtRiyoshaFutanDankai;
+    @JsonProperty("btnDispShisetsuJoho")
+    public ButtonDialog getBtnDispShisetsuJoho() {
+        return btnDispShisetsuJoho;
     }
 
     /*
-     * settxtRiyoshaFutanDankai
-     * @param txtRiyoshaFutanDankai txtRiyoshaFutanDankai
+     * setbtnDispShisetsuJoho
+     * @param btnDispShisetsuJoho btnDispShisetsuJoho
      */
-    @JsonProperty("txtRiyoshaFutanDankai")
-    public void setTxtRiyoshaFutanDankai(TextBox txtRiyoshaFutanDankai) {
-        this.txtRiyoshaFutanDankai = txtRiyoshaFutanDankai;
-    }
-
-    /*
-     * gettxtDispSetaiJoho
-     * @return txtDispSetaiJoho
-     */
-    @JsonProperty("txtDispSetaiJoho")
-    public ButtonDialog getTxtDispSetaiJoho() {
-        return txtDispSetaiJoho;
-    }
-
-    /*
-     * settxtDispSetaiJoho
-     * @param txtDispSetaiJoho txtDispSetaiJoho
-     */
-    @JsonProperty("txtDispSetaiJoho")
-    public void setTxtDispSetaiJoho(ButtonDialog txtDispSetaiJoho) {
-        this.txtDispSetaiJoho = txtDispSetaiJoho;
+    @JsonProperty("btnDispShisetsuJoho")
+    public void setBtnDispShisetsuJoho(ButtonDialog btnDispShisetsuJoho) {
+        this.btnDispShisetsuJoho = btnDispShisetsuJoho;
     }
 
     /*

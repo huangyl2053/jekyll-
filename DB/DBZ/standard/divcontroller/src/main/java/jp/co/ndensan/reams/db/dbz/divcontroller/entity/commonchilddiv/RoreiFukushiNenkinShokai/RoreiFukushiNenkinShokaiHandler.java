@@ -67,11 +67,10 @@ public class RoreiFukushiNenkinShokaiHandler {
         div.getPanelInput().getTxtEndDate().setDisabled(true);
         div.getPanelInput().getBtnCancel().setDisabled(true);
         div.getPanelInput().getBtnSave().setDisabled(true);
-        if (RoreiFukushiNenkinShokaiDiv.ModeA.init.equals(div.getMode_ModeA())) {
+        if (RoreiFukushiNenkinShokaiDiv.ModeC.init.equals(div.getMode_ModeC())) {
             div.getPanelRireki().setDisabled(true);
             div.getPanelInput().setDisplayNone(true);
-            div.getDatagridRireki().getGridSetting().getColumn(new RString("jotai")).setVisible(true);
-            div.getDatagridRireki().getGridSetting().getColumn(new RString("jotai")).setVisible(true);
+            div.getDatagridRireki().getGridSetting().getColumn(new RString("jotai")).setVisible(false);
             div.getDatagridRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDatagridRireki().getGridSetting().setIsShowModifyButtonColumn(false);
         }

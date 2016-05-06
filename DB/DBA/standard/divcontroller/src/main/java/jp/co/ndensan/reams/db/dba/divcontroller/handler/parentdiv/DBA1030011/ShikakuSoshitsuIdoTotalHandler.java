@@ -17,9 +17,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTok
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -287,14 +285,10 @@ public class ShikakuSoshitsuIdoTotalHandler {
         List<SikakuKikan> sikakuKikanList = get取得日と喪失日(rowList);
         for (dgShikakuShutokuRireki_Row row : rowList) {
             if (修正.equals(row.getState())) {
-                RString errorCode = manager.shikakuSoshitsuTorokuCheck(識別コード, 被保険者番号, row.getSoshitsuDate().getValue(),
+                manager.shikakuSoshitsuTorokuCheck(識別コード, 被保険者番号, row.getSoshitsuDate().getValue(),
                         DateOfBirthFactory.createInstance(div.getKihonJoho().getCcdKaigoAtenaInfo().getShokaiData()
                                 .getTxtSeinengappiYMD().getValue()),
                         tokusoRirekiList, sikakuKikanList);
-                // TODO 王さんと楊さん検討中
-                if (!RString.isNullOrEmpty(errorCode)) {
-                    throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
-                }
                 manager.saveHihokenshaShikakuSoshitsu(識別コード, 被保険者番号,
                         row.getSoshitsuDate().getValue(),
                         row.getSoshitsuJiyuKey(),

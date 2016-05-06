@@ -160,6 +160,7 @@ public class ShiharaiHohoJyoho {
      */
     public ResponseData<ShiharaiHohoJyohoDiv> onBeforeOpenDialog_koza(ShiharaiHohoJyohoDiv div) {
 
+        //        TODO QA:内部番号 928
         div.setサブ業務コード(DataPassingConverter.serialize(div.getサブ業務コード()));
         div.set識別コード(DataPassingConverter.serialize(div.get識別コード()));
         return ResponseData.of(div).respond();
@@ -173,7 +174,7 @@ public class ShiharaiHohoJyoho {
      */
     public ResponseData onClick_btnKeiyakuNo(ShiharaiHohoJyohoDiv div) {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
-//        TODO QA:内部番号 444「DBCMN31003_受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会」画面へ遷移する
+//        TODO QA:内部番号 928
         response.data = div;
         return response;
     }

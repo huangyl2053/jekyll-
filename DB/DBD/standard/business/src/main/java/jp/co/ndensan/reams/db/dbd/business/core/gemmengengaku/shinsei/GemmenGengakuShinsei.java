@@ -246,6 +246,23 @@ public class GemmenGengakuShinsei
     }
 
     /**
+     * 減免減額申請のみを変更対象とします。<br/> {@link DbT4010GemmenGengakuShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link GemmenGengakuShinsei}
+     */
+    public GemmenGengakuShinsei added() {
+        DbT4010GemmenGengakuShinseiEntity addedEntity = entity.clone();
+        if (!addedEntity.getState().equals(EntityDataState.Deleted)) {
+            addedEntity.setState(EntityDataState.Added);
+        } else {
+            //TODO メッセージの検討
+            throw new IllegalStateException(UrErrorMessages.不正.toString());
+        }
+        return new GemmenGengakuShinsei(
+                addedEntity, id);
+    }
+
+    /**
      * 保持する減免減額申請を削除対象とします。<br/> {@link DbT4010GemmenGengakuShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link GemmenGengakuShinsei}

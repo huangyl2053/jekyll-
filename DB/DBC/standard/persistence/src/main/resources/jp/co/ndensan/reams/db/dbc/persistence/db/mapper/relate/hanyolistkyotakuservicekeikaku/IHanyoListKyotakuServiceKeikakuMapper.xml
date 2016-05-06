@@ -165,7 +165,7 @@
 
 	</if>
         <if test="抽出区分 == 2">
-            <if test="基準年月日 == null OR 基準年月日.isEmpty()">
+            <if test="基準年月日 == null ">
                 AND  (DbT3005. "hihokenshaNo", DbT3005. "taishoYM", DbT3005. "rirekiNo")  in
                      (SELECT
                             B. "hihokenshaNo",

@@ -7,7 +7,11 @@ package jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendog
 
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiIdentifier;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4036FutanGendogakuNinteiBatchTestResultsMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -68,14 +72,36 @@ public class FutangendogakuNinteiShinseiManager {
         FutanGendogakuNinteiManager ninteiManager = FutanGendogakuNinteiManager.createInstance();
         for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
             futanGendogakuNintei = futanGendogakuNintei.deleted();
-            ninteiManager.saveOrDeletePhysicalBy(futanGendogakuNintei);
+            GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinsei(
+                    new GemmenGengakuShinseiIdentifier(futanGendogakuNintei.identifier().get証記載保険者番号(),
+                            futanGendogakuNintei.identifier().get被保険者番号(),
+                            GemmenGengakuShurui.負担限度額認定.getコード(),
+                            futanGendogakuNintei.identifier().get履歴番号()));
+            gemmenGengakuShinsei = gemmenGengakuShinsei.deleted();
+            FutanGendogakuNinteiBuilder builder = futanGendogakuNintei.createBuilderForEdit();
+            builder.setGemmenGengakuShinsei(gemmenGengakuShinsei);
+            ninteiManager.saveOrDeletePhysicalBy(builder.build());
         }
         ArrayList<FutanGendogakuNinteiViewState> new申請一覧情報ArrayList = new申請情報List;
         for (FutanGendogakuNinteiViewState ninteiViewState : new申請一覧情報ArrayList) {
             if (EntityDataState.Deleted.equals(ninteiViewState.getState())) {
                 continue;
             }
-            ninteiManager.saveOrDeletePhysicalBy(ninteiViewState.getFutanGendogakuNintei());
+
+            FutanGendogakuNintei futanGendogakuNintei = ninteiViewState.getFutanGendogakuNintei();
+            futanGendogakuNintei = futanGendogakuNintei.added();
+
+            GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinsei(
+                    new GemmenGengakuShinseiIdentifier(
+                            futanGendogakuNintei.get証記載保険者番号(),
+                            futanGendogakuNintei.get被保険者番号(),
+                            GemmenGengakuShurui.負担限度額認定.getコード(),
+                            futanGendogakuNintei.get履歴番号()));
+
+            gemmenGengakuShinsei = gemmenGengakuShinsei.added();
+            futanGendogakuNintei = futanGendogakuNintei.
+                    createBuilderForEdit().setGemmenGengakuShinsei(gemmenGengakuShinsei).build();
+            ninteiManager.saveOrDeletePhysicalBy(futanGendogakuNintei);
         }
         this.delete利用者負担額減額by被保険者番号(被保険者番号);
     }

@@ -74,7 +74,7 @@ public class JuminJohoCreator {
      */
     public List<RString> create住民情報List(List<IKojin> kojinList) {
         requireNonNull(kojinList, UrSystemErrorMessages.値がnull.getReplacedMessage("個人情報リスト"));
-        List<RString> 住民情報を表す文字列リスト = new ArrayList();
+        List<RString> 住民情報を表す文字列リスト = new ArrayList<>();
         for (IKojin 個人情報 : kojinList) {
             RString 住民情報を表す文字列 = create住民情報(個人情報);
             住民情報を表す文字列リスト.add(住民情報を表す文字列);

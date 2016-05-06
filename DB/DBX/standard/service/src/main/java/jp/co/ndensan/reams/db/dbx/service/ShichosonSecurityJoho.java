@@ -41,6 +41,8 @@ import lombok.Setter;
 
 /**
  * 市町村セキュリティ情報取得のクラスです。
+ *
+ * @reamsid_L DBU-0050-010 liangbc
  */
 @Getter
 @Setter

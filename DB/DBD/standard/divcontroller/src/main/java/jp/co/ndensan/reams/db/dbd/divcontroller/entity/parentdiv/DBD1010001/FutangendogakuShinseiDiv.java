@@ -9,8 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.IGemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.IShisetSunyushoInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetSunyushoInfo.ShisetSunyushoInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
@@ -52,16 +53,16 @@ public class FutangendogakuShinseiDiv extends Panel {
      */
     @JsonProperty("lin1")
     private HorizontalLine lin1;
-    @JsonProperty("ShinseiSetai")
-    private ShinseiSetaiDiv ShinseiSetai;
-    @JsonProperty("ShinseiNyusho")
-    private ShinseiNyushoDiv ShinseiNyusho;
+    @JsonProperty("HosokuJoho")
+    private HosokuJohoDiv HosokuJoho;
+    @JsonProperty("Dialogs")
+    private DialogsDiv Dialogs;
     @JsonProperty("ShinseiList")
     private ShinseiListDiv ShinseiList;
     @JsonProperty("ShinseiDetail")
     private ShinseiDetailDiv ShinseiDetail;
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdAtenaInfo")
@@ -102,39 +103,39 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
-     * getShinseiSetai
-     * @return ShinseiSetai
+     * getHosokuJoho
+     * @return HosokuJoho
      */
-    @JsonProperty("ShinseiSetai")
-    public ShinseiSetaiDiv getShinseiSetai() {
-        return ShinseiSetai;
+    @JsonProperty("HosokuJoho")
+    public HosokuJohoDiv getHosokuJoho() {
+        return HosokuJoho;
     }
 
     /*
-     * setShinseiSetai
-     * @param ShinseiSetai ShinseiSetai
+     * setHosokuJoho
+     * @param HosokuJoho HosokuJoho
      */
-    @JsonProperty("ShinseiSetai")
-    public void setShinseiSetai(ShinseiSetaiDiv ShinseiSetai) {
-        this.ShinseiSetai = ShinseiSetai;
+    @JsonProperty("HosokuJoho")
+    public void setHosokuJoho(HosokuJohoDiv HosokuJoho) {
+        this.HosokuJoho = HosokuJoho;
     }
 
     /*
-     * getShinseiNyusho
-     * @return ShinseiNyusho
+     * getDialogs
+     * @return Dialogs
      */
-    @JsonProperty("ShinseiNyusho")
-    public ShinseiNyushoDiv getShinseiNyusho() {
-        return ShinseiNyusho;
+    @JsonProperty("Dialogs")
+    public DialogsDiv getDialogs() {
+        return Dialogs;
     }
 
     /*
-     * setShinseiNyusho
-     * @param ShinseiNyusho ShinseiNyusho
+     * setDialogs
+     * @param Dialogs Dialogs
      */
-    @JsonProperty("ShinseiNyusho")
-    public void setShinseiNyusho(ShinseiNyushoDiv ShinseiNyusho) {
-        this.ShinseiNyusho = ShinseiNyusho;
+    @JsonProperty("Dialogs")
+    public void setDialogs(DialogsDiv Dialogs) {
+        this.Dialogs = Dialogs;
     }
 
     /*
@@ -174,12 +175,12 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
+     * getccdShisetsuNyushoInfo
+     * @return ccdShisetsuNyushoInfo
      */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
+        return ccdShisetsuNyushoInfo;
     }
 
     /*
@@ -271,11 +272,11 @@ public class FutangendogakuShinseiDiv extends Panel {
     public void setLockKey(RString lockKey) {
         this.lockKey = lockKey;
     }
+
     /*
      * getjotai
      * @return jotai
      */
-
     @JsonProperty("jotai")
     public RString getJotai() {
         return jotai;
@@ -289,53 +290,78 @@ public class FutangendogakuShinseiDiv extends Panel {
     public void setJotai(RString jotai) {
         this.jotai = jotai;
     }
+
     /*
      * [ ショートカットの作成 ]
      */
-
     @JsonIgnore
     public TextBox getTxtRiyoshaFutanDankai() {
-        return this.getShinseiSetai().getTxtRiyoshaFutanDankai();
+        return this.getHosokuJoho().getTxtRiyoshaFutanDankai();
     }
 
     @JsonIgnore
     public void setTxtRiyoshaFutanDankai(TextBox txtRiyoshaFutanDankai) {
-        this.getShinseiSetai().setTxtRiyoshaFutanDankai(txtRiyoshaFutanDankai);
+        this.getHosokuJoho().setTxtRiyoshaFutanDankai(txtRiyoshaFutanDankai);
     }
 
     @JsonIgnore
-    public ButtonDialog getTxtDispSetaiJoho() {
-        return this.getShinseiSetai().getTxtDispSetaiJoho();
+    public Button getBtnDispSetaiJoho() {
+        return this.getHosokuJoho().getBtnDispSetaiJoho();
     }
 
     @JsonIgnore
-    public void setTxtDispSetaiJoho(ButtonDialog txtDispSetaiJoho) {
-        this.getShinseiSetai().setTxtDispSetaiJoho(txtDispSetaiJoho);
+    public void setBtnDispSetaiJoho(Button btnDispSetaiJoho) {
+        this.getHosokuJoho().setBtnDispSetaiJoho(btnDispSetaiJoho);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnDispGemmenJoho() {
-        return this.getShinseiSetai().getBtnDispGemmenJoho();
+    public Button getBtnCloseSetaiJoho() {
+        return this.getHosokuJoho().getBtnCloseSetaiJoho();
     }
 
     @JsonIgnore
-    public void setBtnDispGemmenJoho(ButtonDialog btnDispGemmenJoho) {
-        this.getShinseiSetai().setBtnDispGemmenJoho(btnDispGemmenJoho);
+    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
+        this.getHosokuJoho().setBtnCloseSetaiJoho(btnCloseSetaiJoho);
+    }
+
+    @JsonIgnore
+    public SetaiJohoDiv getSetaiJoho() {
+        return this.getHosokuJoho().getSetaiJoho();
+    }
+
+    @JsonIgnore
+    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
+        this.getHosokuJoho().setSetaiJoho(SetaiJoho);
+    }
+
+    @JsonIgnore
+    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
+        return this.getHosokuJoho().getSetaiJoho().getCcdSetaiShotokuIchiran();
+    }
+
+    @JsonIgnore
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return this.getHosokuJoho().getCcdKanryoMessage();
     }
 
     @JsonIgnore
     public ButtonDialog getBtnDispShisetsuJoho() {
-        return this.getShinseiNyusho().getBtnDispShisetsuJoho();
+        return this.getDialogs().getBtnDispShisetsuJoho();
     }
 
     @JsonIgnore
     public void setBtnDispShisetsuJoho(ButtonDialog btnDispShisetsuJoho) {
-        this.getShinseiNyusho().setBtnDispShisetsuJoho(btnDispShisetsuJoho);
+        this.getDialogs().setBtnDispShisetsuJoho(btnDispShisetsuJoho);
     }
 
     @JsonIgnore
-    public IShisetSunyushoInfoDiv getCcdShisetsuNyushoInfo() {
-        return this.getShinseiNyusho().getCcdShisetsuNyushoInfo();
+    public ButtonDialog getBtnDispGemmenJoho() {
+        return this.getDialogs().getBtnDispGemmenJoho();
+    }
+
+    @JsonIgnore
+    public void setBtnDispGemmenJoho(ButtonDialog btnDispGemmenJoho) {
+        this.getDialogs().setBtnDispGemmenJoho(btnDispGemmenJoho);
     }
 
     @JsonIgnore
