@@ -690,11 +690,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         for (KyufujissekiKihon kylist : kyufulist) {
             int t = i;
             i = (max審査年月 == kylist.get審査年月()) ? t + 1 : t;
-            if (kylist.get後_保険_特定診療費請求額() != null) {
-                後保険請求額 = (max審査年月 == kylist.get審査年月()) ? kylist.get後_保険_特定診療費請求額().intValue() : 0;
+            if (kylist.get後_保険_請求額() != null) {
+                後保険請求額 = (max審査年月 == kylist.get審査年月()) ? kylist.get後_保険_請求額().intValue() : 0;
             }
         }
-        if (i > 1) {
+        if (i > 0 && kyufulist.size() > 1) {
             throw new ApplicationException(DbcErrorMessages.給付実績複数件取得.getMessage());
         } else {
             if (後保険請求額 == shshResult.get保険給付額()) {
