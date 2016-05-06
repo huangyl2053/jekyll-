@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShikakuShutokuIdoTotal {
 
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuShutokuIdo");
+    private LockingKey 前排他ロックキー;
     private static final RString DEFAULT = new RString("資格取得情報");
     private static final RString IRYOU = new RString("医療保険");
     private static final RString RONEN = new RString("老福年金");
@@ -55,6 +55,7 @@ public class ShikakuShutokuIdoTotal {
     public ResponseData<ShikakuShutokuIdoTotalDiv> onLoad(ShikakuShutokuIdoTotalDiv div) {
         ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
         createHandler(div).load();
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -103,6 +104,7 @@ public class ShikakuShutokuIdoTotal {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
+            前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
             RealInitialLocker.release(前排他ロックキー);
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
@@ -118,6 +120,7 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData onClick_commonButtonUpdateDone(ShikakuShutokuIdoTotalDiv div) {
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).setState(DBA1010011StateName.初期状態);
     }
@@ -129,6 +132,7 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData onClick_btnBack(ShikakuShutokuIdoTotalDiv div) {
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
         RealInitialLocker.release(前排他ロックキー);
         ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_被保履歴タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_医療保険タブ, null);
@@ -144,6 +148,7 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuShutokuIdoTotalDiv div) {
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.詳細へ).respond();
     }

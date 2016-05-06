@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -82,6 +83,22 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
         被保険者番号 = key.get被保険者番号();
         識別コード = key.get識別コード();
+    }
+
+    /**
+     * 前排他キーの取得します。
+     *
+     * @return 前排他キー 前排他キー
+     */
+    public RString get前排他キー() {
+        RStringBuilder rstrBuilder = new RStringBuilder("ShikakuShutokuIdo");
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
+            HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(識別コード);
+            if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
+                rstrBuilder.append("HihokenshaNo");
+            }
+        }
+        return rstrBuilder.toRString();
     }
 
     /**
