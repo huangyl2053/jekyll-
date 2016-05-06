@@ -950,4 +950,14 @@ public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv
     public RString getShiharaiBasho() {
         return getHandler().getShiharaiBasho();
     }
+
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString getKozaID() {
+        return getHandler().getKozaID();
+    }
 }

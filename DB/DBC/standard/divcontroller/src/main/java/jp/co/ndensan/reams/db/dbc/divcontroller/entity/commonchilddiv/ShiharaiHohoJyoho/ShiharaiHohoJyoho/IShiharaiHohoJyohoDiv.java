@@ -68,4 +68,11 @@ public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
      * @return RString
      */
     public RString getKeiyakuNo();
+
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
+    public RString getKozaID();
 }

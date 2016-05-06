@@ -809,6 +809,15 @@ public class ShiharaiHohoJyohoHandler {
         return div.getTxtShiharaiBasho().getValue();
     }
 
+    /**
+     * 口座IDを取得します。
+     *
+     * @return RString
+     */
+    public RString getKozaID() {
+        RString kozaID = div.getDdlKozaID().getSelectedValue();
+        return kozaID == null ? RString.EMPTY : kozaID;
+    }
 
     /**
      * 受領委任払いエリアを入力可になります。
