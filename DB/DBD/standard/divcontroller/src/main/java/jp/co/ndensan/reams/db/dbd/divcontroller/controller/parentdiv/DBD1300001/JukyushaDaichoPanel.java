@@ -156,10 +156,8 @@ public class JukyushaDaichoPanel {
      * @param div 汎用リスト受給者台帳２
      * @return ResponseData
      */
-    public ResponseData onClick_jiko(JukyushaDaichoPanelDiv div) {
-        ResponseData<HanyoRisutoJyukyusyaDaichoBatchParameter> response = new ResponseData<>();
-        response.data = getHandler(div).setBatchParameter();
-        return ResponseData.of(div).respond();
+    public ResponseData<HanyoRisutoJyukyusyaDaichoBatchParameter> onClick_jiko(JukyushaDaichoPanelDiv div) {
+        return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 
     private JukyushaDaichoPanelHandler getHandler(JukyushaDaichoPanelDiv div) {
