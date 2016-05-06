@@ -85,13 +85,6 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase
     private boolean isCsvhitsukesurasyuhensyu;
 
     /**
-     * コンストラクタです。
-     *
-     */
-    public HanyoRisutoJyukyusyaDaichoBatchParameter() {
-    }
-
-    /**
      * バーチのパラメータを作成します。
      *
      * @return HanyoRisutoJyukyusyaDaichoProcessParameter
