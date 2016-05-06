@@ -27,7 +27,7 @@ public class HokenryoDankaiSettings {
 
     private final MapperProvider mapperProvider;
     private final DbT2013HokenryoDankaiDac 賦課年度dac;
-    private static final RString 段階区分_000 = new RString("00");
+    private static final RString 段階区分_000 = new RString("000");
 
     /**
      * コンストラクタです。
