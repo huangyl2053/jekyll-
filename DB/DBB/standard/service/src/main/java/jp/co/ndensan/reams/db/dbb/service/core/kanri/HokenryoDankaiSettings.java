@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -26,6 +27,7 @@ public class HokenryoDankaiSettings {
 
     private final MapperProvider mapperProvider;
     private final DbT2013HokenryoDankaiDac 賦課年度dac;
+    private static final RString 段階区分_000 = new RString("00");
 
     /**
      * コンストラクタです。
@@ -91,7 +93,10 @@ public class HokenryoDankaiSettings {
             return new HokenryoDankaiList(serviceShuruiList);
         }
         for (DbT2013HokenryoDankaiEntity entity : 賦課年度リスタ) {
-            serviceShuruiList.add(new HokenryoDankai(entity));
+            if (entity.getDankaiKubun() != null && !entity.getDankaiKubun().isEmpty()
+                    && !段階区分_000.equals(entity.getDankaiKubun())) {
+                serviceShuruiList.add(new HokenryoDankai(entity));
+            }
 
         }
         return new HokenryoDankaiList(serviceShuruiList);
