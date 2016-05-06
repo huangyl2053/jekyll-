@@ -24,7 +24,9 @@ public class ccdSetaiKazeiDiv extends Panel {
     @JsonProperty("txtSetaiKazeiJokyo")
     private TextBox txtSetaiKazeiJokyo;
     @JsonProperty("btnShowSetaiJoho")
-    private ButtonDialog btnShowSetaiJoho;
+    private Button btnShowSetaiJoho;
+    @JsonProperty("btnCloseSetaiJoho")
+    private Button btnCloseSetaiJoho;
     @JsonProperty("btnShowGemmenJoho")
     private ButtonDialog btnShowGemmenJoho;
 
@@ -57,7 +59,7 @@ public class ccdSetaiKazeiDiv extends Panel {
      * @return btnShowSetaiJoho
      */
     @JsonProperty("btnShowSetaiJoho")
-    public ButtonDialog getBtnShowSetaiJoho() {
+    public Button getBtnShowSetaiJoho() {
         return btnShowSetaiJoho;
     }
 
@@ -66,8 +68,26 @@ public class ccdSetaiKazeiDiv extends Panel {
      * @param btnShowSetaiJoho btnShowSetaiJoho
      */
     @JsonProperty("btnShowSetaiJoho")
-    public void setBtnShowSetaiJoho(ButtonDialog btnShowSetaiJoho) {
+    public void setBtnShowSetaiJoho(Button btnShowSetaiJoho) {
         this.btnShowSetaiJoho = btnShowSetaiJoho;
+    }
+
+    /*
+     * getbtnCloseSetaiJoho
+     * @return btnCloseSetaiJoho
+     */
+    @JsonProperty("btnCloseSetaiJoho")
+    public Button getBtnCloseSetaiJoho() {
+        return btnCloseSetaiJoho;
+    }
+
+    /*
+     * setbtnCloseSetaiJoho
+     * @param btnCloseSetaiJoho btnCloseSetaiJoho
+     */
+    @JsonProperty("btnCloseSetaiJoho")
+    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
+        this.btnCloseSetaiJoho = btnCloseSetaiJoho;
     }
 
     /*

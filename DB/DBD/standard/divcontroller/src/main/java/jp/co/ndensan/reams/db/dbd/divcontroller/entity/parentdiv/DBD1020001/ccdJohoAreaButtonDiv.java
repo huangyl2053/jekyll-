@@ -23,10 +23,10 @@ public class ccdJohoAreaButtonDiv extends Panel {
      */
     @JsonProperty("btnShinseiKakutei")
     private Button btnShinseiKakutei;
-    @JsonProperty("btnBackShinseiIchirai")
-    private Button btnBackShinseiIchirai;
     @JsonProperty("btnConfirm")
     private Button btnConfirm;
+    @JsonProperty("btnBackShinseiIchirai")
+    private Button btnBackShinseiIchirai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,24 +53,6 @@ public class ccdJohoAreaButtonDiv extends Panel {
     }
 
     /*
-     * getbtnBackShinseiIchirai
-     * @return btnBackShinseiIchirai
-     */
-    @JsonProperty("btnBackShinseiIchirai")
-    public Button getBtnBackShinseiIchirai() {
-        return btnBackShinseiIchirai;
-    }
-
-    /*
-     * setbtnBackShinseiIchirai
-     * @param btnBackShinseiIchirai btnBackShinseiIchirai
-     */
-    @JsonProperty("btnBackShinseiIchirai")
-    public void setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
-        this.btnBackShinseiIchirai = btnBackShinseiIchirai;
-    }
-
-    /*
      * getbtnConfirm
      * @return btnConfirm
      */
@@ -86,6 +68,24 @@ public class ccdJohoAreaButtonDiv extends Panel {
     @JsonProperty("btnConfirm")
     public void setBtnConfirm(Button btnConfirm) {
         this.btnConfirm = btnConfirm;
+    }
+
+    /*
+     * getbtnBackShinseiIchirai
+     * @return btnBackShinseiIchirai
+     */
+    @JsonProperty("btnBackShinseiIchirai")
+    public Button getBtnBackShinseiIchirai() {
+        return btnBackShinseiIchirai;
+    }
+
+    /*
+     * setbtnBackShinseiIchirai
+     * @param btnBackShinseiIchirai btnBackShinseiIchirai
+     */
+    @JsonProperty("btnBackShinseiIchirai")
+    public void setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
+        this.btnBackShinseiIchirai = btnBackShinseiIchirai;
     }
 
     // </editor-fold>
