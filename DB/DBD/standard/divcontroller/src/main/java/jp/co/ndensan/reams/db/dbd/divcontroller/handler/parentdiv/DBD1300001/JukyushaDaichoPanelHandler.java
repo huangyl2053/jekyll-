@@ -28,7 +28,7 @@ public class JukyushaDaichoPanelHandler {
     private static final RString 連番付加 = new RString("7");
     private static final RString 日付_編集 = new RString("8");
     private static final RString 帳票ID = new RString("DBD130001_HanyoList_JukyushaDaicho2");
-    private static final RString 全履歴 = new RString("key3");
+    private static final RString 全履歴 = new RString("0");
 
     /**
      * コンストラクタです。
