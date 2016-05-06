@@ -133,8 +133,8 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     private static final RString KIBU = new RString("～");
     private static final RString CYUSYUTSUHANI = new RString("【抽出範囲】  ");
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.HanyoRisutoJyukyusyaDaicho."
-            + "IHanyoRisutoJyukyusyaDaichoMapper.get転入保留対象者");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutojyukyusyadaicho."
+            + "IHanyoRisutoJyukyusyaDaichoMapper.get汎用リスト");
     private FileSpoolManager manager;
     private RString eucFilePath;
     private HanyoRisutoJyukyusyaDaichoProcessParameter processParamter;
