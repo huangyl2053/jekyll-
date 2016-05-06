@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC69101",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "報酬マスタメンテナンス",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE6910001",
+     "toLayoutTitle": "報酬マスタメンテナンス",
+     "toState": "照会"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE6910001",
+     "layoutTitle": "報酬マスタメンテナンス",
+     "eventName": "終了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
