@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 支払方法情報を取得するクラスです。
+ *
+ * @reamsid_L DBC-0300-020 houtianpeng
  */
 public class ShiharaiHohoJyohoFinder {
 
