@@ -505,6 +505,22 @@ public class FutanGendogakuNintei
     }
 
     /**
+     * 保持する介護保険負担限度額認定を削除対象とします。<br/> {@link DbT4018KaigoHokenFutanGendogakuNinteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return 削除対象処理実施後の{@link FutanGendogakuNintei}
+     */
+    public FutanGendogakuNintei added() {
+        DbT4018KaigoHokenFutanGendogakuNinteiEntity addedEntity = this.toEntity();
+        if (addedEntity.getState() != EntityDataState.Deleted) {
+            addedEntity.setState(EntityDataState.Added);
+        } else {
+            //TODO メッセージの検討
+            throw new IllegalStateException(UrErrorMessages.不正.toString());
+        }
+        return new FutanGendogakuNintei(addedEntity, id, gemmenGengakuShinsei);
+    }
+
+    /**
      * {@link FutanGendogakuNintei}のシリアライズ形式を提供します。
      *
      * @return {@link FutanGendogakuNintei}のシリアライズ形式

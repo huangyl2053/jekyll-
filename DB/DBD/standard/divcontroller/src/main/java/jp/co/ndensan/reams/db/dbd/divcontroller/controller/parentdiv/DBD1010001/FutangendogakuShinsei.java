@@ -36,7 +36,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class FutangendogakuShinsei {
 
     private static final RString 配偶者の有無_無 = new RString("key1");
+    private static final RString 申請メニューID = new RString("DBDMN21001");
     private static final RString 承認メニューID = new RString("DBDMN22001");
+    private final RString 文字列_申請情報を表示する = new RString("申請情報を表示する");
+    private final RString 文字列_承認情報を表示する = new RString("承認情報を表示する");
 
     /**
      * 画面初期化
@@ -63,6 +66,42 @@ public class FutangendogakuShinsei {
     public ResponseData<FutangendogakuShinseiDiv> onBeforeOpenDialog_btnDispGemmenJoho(FutangendogakuShinseiDiv div) {
         getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「世帯情報を表示する」ボタンをクリック
+     *
+     * @param div FutangendogakuShinseiDiv
+     * @return ResponseData<FutangendogakuShinseiDiv>
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onClick_btnDispSetaiJoho(FutangendogakuShinseiDiv div) {
+        div.getBtnDispSetaiJoho().setDisplayNone(true);
+        div.getBtnCloseSetaiJoho().setDisplayNone(false);
+        div.getBtnCloseSetaiJoho().setDisabled(false);
+        if (DBD1010001StateName.一覧.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBD1010001StateName.世帯情報From一覧);
+        } else if (DBD1010001StateName.詳細.getName().equals(ResponseHolder.getState())) {
+            div.getBtnCloseSetaiJoho()
+                    .setText(申請メニューID.equals(ResponseHolder.getMenuID()) ? 文字列_申請情報を表示する : 文字列_承認情報を表示する);
+            return ResponseData.of(div).setState(DBD1010001StateName.世帯情報From詳細);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 負担限度額認定申請画面を「申請一覧を表示する」を押下する。<br/>
+     *
+     * @param div {@link FutangendogakuShinseiDiv 負担限度額認定申請画面Div}
+     * @return 負担限度額認定申請画面Divを持つResponseData
+     */
+    public ResponseData<FutangendogakuShinseiDiv> onClick_btnCloseSetaiJoho(FutangendogakuShinseiDiv div) {
+        div.getBtnDispSetaiJoho().setDisplayNone(false);
+        div.getBtnCloseSetaiJoho().setDisplayNone(true);
+        if (DBD1010001StateName.世帯情報From一覧.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBD1010001StateName.一覧);
+        } else {
+            return ResponseData.of(div).setState(DBD1010001StateName.詳細);
+        }
     }
 
     /**
@@ -244,7 +283,7 @@ public class FutangendogakuShinsei {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).申請情報を保存する();
-            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+            div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBD1010001StateName.完了);
         }
         return ResponseData.of(div).respond();
