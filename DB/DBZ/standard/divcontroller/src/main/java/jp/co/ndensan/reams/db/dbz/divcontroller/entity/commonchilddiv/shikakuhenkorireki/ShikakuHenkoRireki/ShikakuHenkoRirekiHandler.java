@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkorireki.Shikakuhenkori
 import jp.co.ndensan.reams.db.dbz.service.sikakukanrenidoa.SikakuKanrenIdoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -82,10 +81,10 @@ public class ShikakuHenkoRirekiHandler {
      * 引数から渡されたキーを元に被保険者台帳を検索し、その結果をグリッドに設定します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param 処理対象者 処理対象者
+     * @param 識別コード 識別コード
      * @param 取得日 取得日
      */
-    public void initialize(HihokenshaNo 被保険者番号, IKojin 処理対象者, FlexibleDate 取得日) {
+    public void initialize(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
         Boolean is単一 = !ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().equals(広域);
         Boolean is合併有り = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告).equals(合併有り);
         if (is単一 && !is合併有り) {
@@ -97,11 +96,11 @@ public class ShikakuHenkoRirekiHandler {
         } else if (!is単一 && is合併有り) {
             div.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
         }
-        div.getDgHenko().setDataSource(get資格変更履歴(被保険者番号, 処理対象者.get識別コード(), 取得日));
+        div.getDgHenko().setDataSource(get資格変更履歴(被保険者番号, 識別コード, 取得日));
         div.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setDataSource(get措置元保険者DDL());
         div.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setDataSource(get旧保険者リスト情報());
         div.getDdlHenkoJiyu().setDataSource(get変更事由リスト情報());
-        div.getHenkoHokenshaJoho().getDdlJuminJoho().setDataSource(get住民情報DDL(処理対象者));
+        div.getHenkoHokenshaJoho().getDdlJuminJoho().setDataSource(get住民情報DDL(識別コード));
         if (ShikakuHenkoRirekiDiv.DisplayType.shokai.equals(div.getMode_DisplayType())) {
             div.setMode_BtnDisplayMode(ShikakuHenkoRirekiDiv.BtnDisplayMode.SetDisplayNone);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleTrue);
@@ -351,7 +350,7 @@ public class ShikakuHenkoRirekiHandler {
         届出日.setValue(sikakuKanrenIdo.get資格変更届出年月日());
         RString 変更事由;
         try {
-            変更事由 = ShikakuHenkoJiyu.toValue(sikakuKanrenIdo.get住所地特例適用事由コード()).getName();
+            変更事由 = ShikakuHenkoJiyu.toValue(sikakuKanrenIdo.get住所地特例適用事由コード()).get名称();
         } catch (IllegalArgumentException e) {
             変更事由 = RString.EMPTY;
         }
@@ -442,22 +441,22 @@ public class ShikakuHenkoRirekiHandler {
         RString menuID = ResponseHolder.getMenuID();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         if (MENUID_DBAMN52003.equals(menuID)) {
-            dataSource.add(new KeyValueDataSource(ShikakuHenkoRirekiEnum.広域内転居.getコード(),
-                    ShikakuHenkoRirekiEnum.広域内転居.get名称()));
+            dataSource.add(new KeyValueDataSource(ShikakuHenkoJiyu.広域内転居.getコード(),
+                    ShikakuHenkoJiyu.広域内転居.get名称()));
         } else if (MENUID_DBAMN52004.equals(menuID)) {
-            dataSource.add(new KeyValueDataSource(ShikakuHenkoRirekiEnum.広住特適用.getコード(),
-                    ShikakuHenkoRirekiEnum.広住特適用.get名称()));
-            dataSource.add(new KeyValueDataSource(ShikakuHenkoRirekiEnum.広住特居住.getコード(),
-                    ShikakuHenkoRirekiEnum.広住特居住.get名称()));
-            dataSource.add(new KeyValueDataSource(ShikakuHenkoRirekiEnum.広住特転入.getコード(),
-                    ShikakuHenkoRirekiEnum.広住特転入.get名称()));
-            dataSource.add(new KeyValueDataSource(ShikakuHenkoRirekiEnum.広住特転居.getコード(),
-                    ShikakuHenkoRirekiEnum.広住特転居.get名称()));
+            dataSource.add(new KeyValueDataSource(ShikakuHenkoJiyu.広住特適用.getコード(),
+                    ShikakuHenkoJiyu.広住特適用.get名称()));
+            dataSource.add(new KeyValueDataSource(ShikakuHenkoJiyu.広住特居住.getコード(),
+                    ShikakuHenkoJiyu.広住特居住.get名称()));
+            dataSource.add(new KeyValueDataSource(ShikakuHenkoJiyu.広住特転入.getコード(),
+                    ShikakuHenkoJiyu.広住特転入.get名称()));
+            dataSource.add(new KeyValueDataSource(ShikakuHenkoJiyu.広住特転居.getコード(),
+                    ShikakuHenkoJiyu.広住特転居.get名称()));
         } else if (MENUID_DBAMN52002.equals(menuID)) {
-            dataSource.add(new KeyValueDataSource(ShikakuHenkoRirekiEnum.合併.getコード(),
-                    ShikakuHenkoRirekiEnum.合併.get名称()));
+            dataSource.add(new KeyValueDataSource(ShikakuHenkoJiyu.合併.getコード(),
+                    ShikakuHenkoJiyu.合併.get名称()));
         } else {
-            for (ShikakuHenkoRirekiEnum shikakuHenkoRirekiEnum : ShikakuHenkoRirekiEnum.values()) {
+            for (ShikakuHenkoJiyu shikakuHenkoRirekiEnum : ShikakuHenkoJiyu.values()) {
                 dataSource.add(new KeyValueDataSource(shikakuHenkoRirekiEnum.getコード(),
                         shikakuHenkoRirekiEnum.get名称()));
             }
@@ -465,10 +464,11 @@ public class ShikakuHenkoRirekiHandler {
         return dataSource;
     }
 
-    private List<KeyValueDataSource> get住民情報DDL(IKojin 処理対象者) {
+    private List<KeyValueDataSource> get住民情報DDL(ShikibetsuCode 識別コード) {
+
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         ShikakuhenkorirekiFinder shikakuhenkorirekiManage = ShikakuhenkorirekiFinder.createInstance();
-        List<IKojin> kojins = shikakuhenkorirekiManage.getKojinInfoByShikibetuCd(処理対象者);
+        List<IKojin> kojins = shikakuhenkorirekiManage.getKojinInfoByShikibetuCd(識別コード);
         for (IKojin iKojin : kojins) {
             dataSource.add(
                     new KeyValueDataSource(iKojin.get識別コード().getColumnValue().
@@ -527,106 +527,5 @@ public class ShikakuHenkoRirekiHandler {
             }
         }
         return RString.EMPTY;
-    }
-
-    private enum ShikakuHenkoRirekiEnum {
-
-        /**
-         * コード:21 名称:転居 略称:定義なし
-         */
-        転居("21", "転居"),
-        /**
-         * コード:22 名称:氏名変更 略称:定義なし
-         */
-        氏名変更("22", "氏名変更"),
-        /**
-         * コード:11 名称:広域内転居 略称:定義なし
-         */
-        広域内転居("11", "広域内転居"),
-        /**
-         * コード:13 名称:広住特適用 略称:定義なし
-         */
-        広住特適用("13", "広住特適用"),
-        /**
-         * コード:14 名称:広住特転入 略称:定義なし
-         */
-        広住特転入("14", "広住特転入"),
-        /**
-         * コード:15 名称:広住特居住 略称:定義なし
-         */
-        広住特居住("15", "広住特居住"),
-        /**
-         * コード:17 名称:広住特転居 略称:定義なし
-         */
-        広住特転居("17", "広住特転居"),
-        /**
-         * コード:16 名称:合併内転居 略称:定義なし
-         */
-        合併内転居("16", "合併内転居"),
-        /**
-         * コード:41 名称:一本化 略称:定義なし
-         */
-        一本化("41", "一本化"),
-        /**
-         * コード:31 名称:１号到達 略称:定義なし
-         */
-        _１号到達("31", "１号到達"),
-        /**
-         * コード:42 名称:合併 略称:定義なし
-         */
-        合併("42", "合併"),
-        /**
-         * コード:23 名称:帰化 略称:定義なし
-         */
-        帰化("23", "帰化"),
-        /**
-         * コード:24 名称:国籍取得 略称:定義なし
-         */
-        国籍取得("24", "国籍取得"),
-        /**
-         * コード:48 名称:その他 略称:定義なし
-         */
-        その他("48", "その他");
-
-        private final RString code;
-        private final RString fullName;
-
-        private ShikakuHenkoRirekiEnum(String code, String fullname) {
-            this.code = new RString(code);
-            this.fullName = new RString(fullname);
-        }
-
-        /**
-         * 資格変更事由のコードを返します。
-         *
-         * @return 資格変更事由のコード
-         */
-        public RString getコード() {
-            return code;
-        }
-
-        /**
-         * 資格変更事由の名称を返します。
-         *
-         * @return 資格変更事由の名称
-         */
-        public RString get名称() {
-            return fullName;
-        }
-
-        /**
-         * 資格変更事由のコードと一致する内容を探します。
-         *
-         * @param code 資格変更事由のコード
-         * @return {@code code} に対応する資格変更事由
-         */
-        public static ShikakuHenkoRirekiEnum toValue(RString code) {
-            for (ShikakuHenkoRirekiEnum shikakuHenkoJiyu : ShikakuHenkoRirekiEnum.values()) {
-                if (shikakuHenkoJiyu.code.equals(code)) {
-                    return shikakuHenkoJiyu;
-                }
-            }
-            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("資格変更事由"));
-        }
     }
 }
