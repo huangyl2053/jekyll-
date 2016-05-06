@@ -226,6 +226,8 @@
         <result property="委託先事業者_事業者名称カナ" column="委託先事業者_事業者名称カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="委託先事業者代表者_代表者名" column="委託先事業者代表者_代表者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="委託先事業者代表者_代表者名カナ" column="委託先事業者代表者_代表者名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
      <select id="get汎用リスト"
             resultMap="resultMap_HanyoRisutoJyukyusyaDaichoEntity"
@@ -236,15 +238,15 @@ WITH
         (
             SELECT 
                 dbT7060."jigyoshaNo",         
-                dbT7060."jigyoshaName",      
-                dbT7060."jigyoshaNameKana",  
+                dbT7060."jigyoshaName",       
+                dbT7060."jigyoshaNameKana",   
                 dbT7060."jigyoshaAddress",    
-                dbT7060."telNo",             
-                dbT7060."faxNo",             
-                dbT7060."shozokuNinzu",      
-                dbT7060."riyoshaSu",         
+                dbT7060."telNo",              
+                dbT7060."faxNo",              
+                dbT7060."shozokuNinzu",       
+                dbT7060."riyoshaSu",          
                 dbT7060."yukoKaishiYMD",      
-                dbT7060."yukoShuryoYMD",     
+                dbT7060."yukoShuryoYMD",      
                 dbT7060."serviceJisshiChiiki",
                 dbT7060."yubinNo"             
             FROM 
@@ -259,7 +261,7 @@ WITH
                     AND dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
                 )
         ),
-        受給者台帳枝番MAX AS                           
+        受給者台帳枝番MAX AS                             
         ( 
           SELECT
             * 
@@ -496,11 +498,20 @@ SELECT
     委託先事業者."jigyoshaName" AS 委託先事業者_事業者名称,
     委託先事業者."jigyoshaNameKana" AS 委託先事業者_事業者名称カナ,
     委託先事業者代表者."daihyoshaShimei" AS 委託先事業者代表者_代表者名,
-    委託先事業者代表者."daihyoshaKanaShimei" AS 委託先事業者代表者_代表者名カナ
+    委託先事業者代表者."daihyoshaKanaShimei" AS 委託先事業者代表者_代表者名カナ,
+    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+    , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
 FROM
   rgdb."DbT4001JukyushaDaicho"AS 受給者台帳 
   INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳 
     ON 最新被保台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo" 
+     INNER  JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+     ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
+     INNER  JOIN
+         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+     ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"  
   LEFT JOIN ( 
     SELECT
       I."shikibetsuCode", I."iryoHokenShubetsuCode" ,I."iryoHokenshaNo", I."iryoHokenshaMeisho", I."iryoHokenKigoNo" 
@@ -734,5 +745,129 @@ FROM
               受給者台帳枝番MAX."rirekiNo" = '0001'
           ) AS 初回受給情報 ON 初回受給情報."hihokenshaNo" = 受給者台帳."hihokenshaNo" 
           INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS 初回申請 ON 初回申請."shinseishoKanriNo" = 初回受給情報."shinseishoKanriNo"
+                 AND
+                1  =  1
+                <if test="is直近認定">
+                    AND (    受給者台帳."rirekiNo"
+                             = ( SELECT  "rirekiNo"  FROM rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest 
+                                    WHERE 受給者台帳Newest."hihokenshaNo" = 受給者台帳."hihokenshaNo")
+                            AND    受給者台帳."logicalDeletedFlag" = false )
+                </if>
+                
+                <if test="is申請">
+                    AND (    受給者台帳."rirekiNo" = '0000'
+                            AND    受給者台帳."logicalDeletedFlag" = false )
+                </if>
+                
+                <if test="is両方">
+                    AND (    ( 受給者台帳."rirekiNo"
+                             = ( SELECT  "rirekiNo"  FROM rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest 
+                    WHERE 受給者台帳Newest."hihokenshaNo" = 受給者台帳."hihokenshaNo" )
+                        OR 受給者台帳."rirekiNo" = '0000'  )
+                        AND    受給者台帳."logicalDeletedFlag" = false )
+                </if>
+                
+                <if test="is全履歴">
+                    AND (    受給者台帳."logicalDeletedFlag" = false
+
+                        
+                        <if test="isSakujyodatacyusyutsu">
+                            OR (受給者台帳."logicalDeletedFlag" = true
+                                AND ( 受給者台帳."sakujoJiyuCode" <![CDATA[<>]]> '' OR 受給者台帳."sakujoJiyuCode" <![CDATA[<>]]> '01')
+                            )
+                        </if>
+                    )
+                </if>
+                
+                <if test="isShinseikeshidetacyusyutsu">
+                    OR    (受給者台帳."logicalDeletedFlag" = false
+                    AND    受給者台帳."dataKubun" IN ('11','12','13','14','15','19') )
+                </if>
+            
+            <if test="is資格取得者のみ">
+                AND    (最新被保台帳."shikakuSoshitsuYMD" = '' OR 最新被保台帳."shikakuSoshitsuYMD" IS NULL)
+            </if>
+            
+            <if test="is資格喪失者のみ">
+                AND    (最新被保台帳."shikakuSoshitsuYMD" <![CDATA[<>]]> '' AND 最新被保台帳."shikakuSoshitsuYMD" IS NOT NULL)
+            </if>
+            
+            <if test="is指定日範囲">
+                
+                <if test="is認定日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
+                    AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is申請日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."jukyuShinseiYMD"
+                    AND    受給者台帳."jukyuShinseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is調査依頼日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査依頼."ninteichosaIraiYMD"
+                    AND    今回調査依頼."ninteichosaIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is調査実施予定日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaIraiYoteiYMD"
+                    AND    今回計画情報."ninteichosaIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is調査実施日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査結果_概況."ninteichosaJisshiYMD"
+                    AND    今回調査結果_概況."ninteichosaJisshiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is意見書依頼日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書作成依頼."ikenshoSakuseiIraiYMD"
+                    AND    今回意見書作成依頼."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is意見書入手予定日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ikenshoSakuseiIraiYoteiYMD"
+                    AND    今回計画情報."ikenshoSakuseiIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is意見書入手日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書情報."ikenshoJuryoYMD"
+                    AND    今回意見書情報."ikenshoJuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is審査会資料作成日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回結果情報."shinsakaiShiryoSakuseiYMD"
+                    AND    今回結果情報."shinsakaiShiryoSakuseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is審査会回答予定日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaYoteiYMD"
+                    AND    今回計画情報."ninteichosaYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is審査会回答日">
+                    AND    #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
+                    AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is認定有効開始日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanKaishiYMD"
+                    AND    受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+                
+                <if test="is認定有効終了日">
+                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
+                    AND    受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+                </if>
+            </if>
+            
+            <if test="is医療機関コード範囲">
+                    AND    #{iryokikancodefrom} <![CDATA[<=]]> 今回主治医医療機関."shujiiIryokikanCode"
+                    AND    今回主治医医療機関."shujiiIryokikanCode" <![CDATA[<=]]> #{iryokikancodefto}
+            </if>
+            
+            <if test="is調査委託先コード範囲">
+                    AND    #{cyosaitakusakicodefrom} <![CDATA[<=]]> 今回調査委託先."ninteichosaItakusakiCode"
+                    AND    今回調査委託先."ninteichosaItakusakiCode" <![CDATA[<=]]> #{cyosaitakusakicodefto}
+            </if>
     </select>
 </mapper>
