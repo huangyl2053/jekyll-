@@ -844,8 +844,8 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             entity = entity.createBuilderForEdit().set利用者負担額(div.getTpSummary().
                     getTxtKonkaiRiyoshaFutangakuGokei().getValue().intValue()).build();
         }
-        if (div.getCcdShiharaiHohoInfo().getShiharaiHoho() != null
-                && !div.getCcdShiharaiHohoInfo().getShiharaiHoho().isEmpty()) {
+        if (div.getCcdShiharaiHohoInfo().getShiharaiHohoRad() != null
+                && !div.getCcdShiharaiHohoInfo().getShiharaiHohoRad().isEmpty()) {
             entity = entity.createBuilderForEdit().set支払方法区分コード(
                     div.getCcdShiharaiHohoInfo().getShiharaiHohoRad()).build();
         }

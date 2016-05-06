@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -91,7 +90,6 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 参照 = new RString("参照");
     private static final RString 照会 = new RString("照会");
     private static final RString 審査 = new RString("審査");
-    private static final RString 償還払給付費 = new RString("001");
     private static final RString 国保連合 = new RString("国保連合会より送付されてくる決定情報がまだ取り込まなかった");
     private static final RString 決定情報 = new RString("決定情報の登録を続きます");
 
@@ -272,14 +270,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         if (参照.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 || 削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
-                    para, new KamokuCode(償還払給付費), 照会);
+                    para, 照会);
         } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))
                 || 審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
-                    para, new KamokuCode(償還払給付費), 修正);
+                    para, 修正);
         } else if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getCcdShiharaiHohoInfo().initialize(
-                    para, new KamokuCode(償還払給付費), 登録);
+                    para, 登録);
         }
     }
 

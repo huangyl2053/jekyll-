@@ -50,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -105,7 +104,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 住宅住所変更_KEY = new RString("changeAddress");
     private static final RString 住宅住所変更_VALUE = new RString("住宅住所変更による");
     private static final Decimal 数字_100 = new Decimal("100");
-    private static final RString 償還払給付費 = new RString("001");
     private static final RString メッセージ引数_着工日完成日 = new RString("着工日、または完成日");
     private static final RString メッセージ引数_着工日 = new RString("着工日");
     private static final RString 初期化済み = new RString("true");
@@ -309,7 +307,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             状態 = 照会モード;
         }
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabKozaJyoho()
-                .getCcdJutakuKaishuJizenShinseiKoza().initialize(param, new KamokuCode(償還払給付費), 状態);
+                .getCcdJutakuKaishuJizenShinseiKoza().initialize(param, 状態);
         div.setHidKozaJyohoFlg(初期化済み);
     }
 
@@ -1055,7 +1053,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
 //        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
 //                .getTxtCreationJigyoshaNo().getValue()));
         RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHoho();
+                .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHohoRad();
         // TODO No.678 共有子DIVの選択値は正常取得できない。
 //        builder.set支払方法区分コード(支払方法区分コード);
         if (ShiharaiHohoKubun.窓口払.getコード().equals(支払方法区分コード)) {
@@ -1165,7 +1163,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
 //        builder.set理由書作成事業者番号(new JigyoshaNo(div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason()
 //                .getTxtCreationJigyoshaNo().getValue()));
         RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHoho();
+                .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHohoRad();
 //        builder.set支払方法区分コード(支払方法区分コード);
         if (ShiharaiHohoKubun.窓口払.getコード().equals(支払方法区分コード)) {
             builder.set支払場所(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
