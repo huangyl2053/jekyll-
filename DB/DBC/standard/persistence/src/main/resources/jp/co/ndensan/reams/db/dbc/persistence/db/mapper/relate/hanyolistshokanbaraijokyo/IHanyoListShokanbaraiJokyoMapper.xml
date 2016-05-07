@@ -130,37 +130,37 @@
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
         Where 1 = 1
-        <if test="サービス提供年月From != null">
+        <if test="サービス提供年月From != null and !サービス提供年月From.isEmpty()">
             AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM"<![CDATA[>=]]>#{サービス提供年月From}
         </if>
-        <if test="サービス提供年月To != null">
+        <if test="サービス提供年月To != null and !サービス提供年月To.isEmpty()">
             AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM"<![CDATA[<=]]>#{サービス提供年月To}
         </if>
-        <if test="決定情報 != 0">
+        <if test="決定情報 != 0 and 決定情報 != null and !決定情報.isEmpty() ">
             AND DbT3036."dbT3036ShokanHanteiKekka_shikyuHushikyuKetteiKubun"=#{決定情報}
         </if>
-        <if test="申請日From != null">
+        <if test="申請日From != null and !申請日From.isEmpty()">
             AND DbT3034."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[>=]]>#{申請日From}
         </if>
-        <if test="申請日To != null">
+        <if test="申請日To != null and !申請日To.isEmpty()">
             AND DbT3034."dbT3034ShokanShinsei_shinseiYMD"<![CDATA[<=]]>#{申請日To}
         </if>
-        <if test="住宅改修支給届出日From != null">
+        <if test="住宅改修支給届出日From != null and !住宅改修支給届出日From.isEmpty()">
             AND DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_uketsukeYMD"<![CDATA[>=]]>#{住宅改修支給届出日From}
         </if>
-        <if test="住宅改修支給届出日To != null">
+        <if test="住宅改修支給届出日To != null and !住宅改修支給届出日To.isEmpty()">
             AND DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_uketsukeYMD"<![CDATA[<=]]>#{住宅改修支給届出日To}
         </if>
-        <if test="決定日From != null">
+        <if test="決定日From != null and !決定日From.isEmpty()">
             AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD"<![CDATA[>=]]>#{決定日From}
         </if>
-        <if test="決定日To != null">
+        <if test="決定日To != null and !決定日To.isEmpty()">
             AND DbT3036."dbT3036ShokanHanteiKekka_ketteiYMD"<![CDATA[<=]]>#{決定日To}
         </if>
-        <if test="国保連送付年月From != null">
+        <if test="国保連送付年月From != null and !国保連送付年月From.isEmpty()">
             AND DbT3034."dbT3034ShokanShinsei_sofuYM"<![CDATA[>=]]>#{国保連送付年月From}
         </if>
-        <if test="国保連送付年月To != null">
+        <if test="国保連送付年月To != null and !国保連送付年月To.isEmpty()">
             AND DbT3034."dbT3034ShokanShinsei_sofuYM"<![CDATA[<=]]>#{国保連送付年月To}
         </if>
         <if test="支払方法 == 1">
@@ -169,7 +169,7 @@
         <if test="支払方法 == 2">
             AND DbT3034."dbT3034ShokanShinsei_shiharaiHohoKubunCode" = '2'
         </if>
-        <if test="金融機関コード != null">
+        <if test="金融機関コード != null and !金融機関コード.isEmpty() ">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{金融機関コード}
         </if>
         <if test="処理状況 == 1">
@@ -202,12 +202,20 @@
             AND DbT3036."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]> ''
             AND DbT3036."dbT3036ShokanHanteiKekka_furikomiMeisaishoSakuseiYMD" IS NOT NULL
         </if>
-        <if test="様式番号!=null">
+        <if test="様式番号 !=null and !様式番号.isEmpty()">
             AND DbT3038."dbT3038ShokanKihon_yoshikiNo" IN
             <foreach item="様式番号" index="index" collection="様式番号" open="(" separator="," close=")">
                 #{様式番号}
             </foreach>
         </if>
+            order by  DbT3034. "dbT3034ShokanShinsei_hiHokenshaNo",
+                    DbT3034. "dbT3034ShokanShinsei_serviceTeikyoYM",
+                    DbT3034. "dbT3034ShokanShinsei_seiriNo",
+                    DbT3034. "dbT3034ShokanShinsei_shinseiJigyoshaNo",
+                    DbT3038."dbT3038ShokanKihon_yoshikiNo",
+                    DbT3038."dbT3038ShokanKihon_meisaiNo",
+                    koza. "uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode",
+                    koza. "uaT0301YokinShubetsuPattern_yokinShubetsuCode"
     </sql>
         
     <resultMap id="resultMap_HanyoListShokanbaraiJokyoEntity" autoMapping="true"
@@ -216,6 +224,10 @@
         <id column="dbT3034ShokanShinsei_serviceTeikyoYM"/>
         <id column="dbT3034ShokanShinsei_seiriNo"/>
         <id column="dbT3034ShokanShinsei_shinseiJigyoshaNo"/>
+        <id column="dbT3038ShokanKihon_yoshikiNo"/>
+        <id column="dbT3038ShokanKihon_meisaiNo"/>
+        <id column="uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode"/>
+        <id column="uaT0301YokinShubetsuPattern_yokinShubetsuCode"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -277,7 +289,7 @@
         <association property="請求住宅Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3049ShokanJutakuKaishuMapper.ResultMap_DbT3049ShokanJutakuKaishuEntity"/>
         <association property="口座情報Entity"
-                     resultMap="resultMap_KozaRelateEntity"/>
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
         <association property="宛名Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity" 
@@ -285,15 +297,4 @@
         <collection property="請求基本List"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
     </resultMap>  
-    <resultMap id="resultMap_KozaRelateEntity"
-               type="jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity"
-               autoMapping="true">
-        <id column="uaT0310Koza_kozaId"/>
-<!--        <association property="koza"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0310KozaMapper.ResultMap_UaT0310KozaEntity"/>-->
-<!--        <collection property="kinyuKikan"
-                    resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.relate.kinyukikan.IKinyuKikanMapper.resultMap_KinyuKikanEntity"/>-->
-<!--        <collection property="shunoKanri"
-                    resultMap="jp.co.ndensan.reams.ur.urc.persistence.db.mapper.basic.shuno.shunokanri.IUrT0700ShunoKanriMapper.resultMap_UrT0700ShunoKanriEntity"/>-->
-    </resultMap>
 </mapper>

@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
@@ -16,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
@@ -67,8 +72,9 @@ public class HanyoListCsvDataCreate {
     private static final RString INDEX_1 = new RString("1");
     private static final RString INDEX_2 = new RString("2");
     private static final RString 住特 = new RString("住特");
-    private static final RString そう = new RString("他");
+    private static final RString 他 = new RString("他");
     private static final int INDEX_13 = 13;
+    private static final int INDEX_15 = 15;
 
     /**
      * createCsvData
@@ -477,11 +483,13 @@ public class HanyoListCsvDataCreate {
                 csvEntity.set支店コード(支店コード != null ? 支店コード.getColumnValue() : RString.EMPTY);
             }
             KinyuKikanCode 銀行コード = 口座.get金融機関コード();
+            KinyuKikan 金融機関 = 口座.get金融機関();
+            KinyuKikanShiten 支店 = 口座.get支店();
             csvEntity.set銀行コード(銀行コード != null ? 銀行コード.getColumnValue() : RString.EMPTY);
-            csvEntity.set銀行名カナ(口座.get金融機関().get金融機関カナ名称());
-            csvEntity.set銀行名(口座.get金融機関().get金融機関名称());
-            csvEntity.set支店名カナ(口座.get支店().get支店カナ名称());
-            csvEntity.set支店名(口座.get支店().get支店名称());
+            csvEntity.set銀行名カナ(金融機関 != null ? 金融機関.get金融機関カナ名称() : RString.EMPTY);
+            csvEntity.set銀行名(金融機関 != null ? 金融機関.get金融機関名称() : RString.EMPTY);
+            csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
+            csvEntity.set支店名(支店 != null ? 支店.get支店名称() : RString.EMPTY);
             YokinShubetsuPattern 口座種目 = 口座.get預金種別();
             csvEntity.set口座種目(口座種目 != null ? 口座種目.get預金種別名称() : RString.EMPTY);
             csvEntity.set口座番号(口座.get口座番号());
@@ -525,29 +533,42 @@ public class HanyoListCsvDataCreate {
 
     private RString get様式番号(HanyoListShokanbaraiJokyoEntity entity) {
         RStringBuilder builder = new RStringBuilder();
+        Map<RString, Object> map様式番号 = new HashMap<>();
         List<DbT3038ShokanKihonEntity> 請求基本List = entity.get請求基本List();
-        if (請求基本List != null && !請求基本List.isEmpty()) {
-            for (int i = 1; i <= 請求基本List.size(); i++) {
-                builder.append(請求基本List.get(i - 1).getYoshikiNo());
-                if (i != 請求基本List.size() && builder.toRString().length() + 1 + 請求基本List.get(i).getYoshikiNo().length() >= INDEX_13) {
-                    builder.append(RString.FULL_SPACE).append(そう);
-                    break;
-                } else if (i == 請求基本List.size()) {
-                    break;
-                } else {
-                    builder.append(RString.FULL_SPACE);
-                    getLast様式番号(builder, i, 請求基本List);
+        if (請求基本List == null || 請求基本List.isEmpty()) {
+            return RString.EMPTY;
+        }
+        List<RString> lst様式番号 = new ArrayList<>();
+        for (int i = 0; i < 請求基本List.size(); i++) {
+            if (map様式番号.containsKey(請求基本List.get(i).getYoshikiNo())) {
+                continue;
+            }
+            map様式番号.put(請求基本List.get(i).getYoshikiNo(), true);
+            lst様式番号.add(請求基本List.get(i).getYoshikiNo());
+        }
+        if (lst様式番号.size() == 1) {
+            return lst様式番号.get(0);
+        }
+        for (int i = 1; i < lst様式番号.size(); i++) {
+            builder.append(lst様式番号.get(i - 1));
+
+            if (builder.toRString().length() + 1 + lst様式番号.get(i).length() < INDEX_13) {
+                builder.append(RString.FULL_SPACE);
+                if (i == lst様式番号.size() - 1) {
+                    builder.append(lst様式番号.get(i));
                 }
+            } else {
+                if (i == (lst様式番号.size() - 1) && (builder.toRString().length() + 1 + lst様式番号.get(i).length()) < INDEX_15) {
+                    builder.append(RString.FULL_SPACE);
+                    builder.append(lst様式番号.get(i));
+                    break;
+                }
+                builder.append(RString.FULL_SPACE).append(他);
+                break;
             }
         }
+
         return builder.toRString();
-
-    }
-
-    private void getLast様式番号(RStringBuilder builder, int i, List<DbT3038ShokanKihonEntity> 請求基本List) {
-        if (i == 請求基本List.size() - 1) {
-            builder.append(請求基本List.get(i).getYoshikiNo());
-        }
     }
 
     private RString dataToRString(FlexibleDate 日付, HanyoListShokanbaraiJokyoProcessParameter parameter) {
