@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -40,10 +42,16 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
     private static final RString 仮徴収月8月 = new RString("8月");
 
     private final List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList;
-    // TODO  改頁１～改頁５
-    private final RString 改頁;
-    // TODO 出力順１～出力順５
-    private final RString 出力順;
+    private final RString 改頁1;
+    private final RString 改頁2;
+    private final RString 改頁3;
+    private final RString 改頁4;
+    private final RString 改頁5;
+    private final RString 出力順1;
+    private final RString 出力順2;
+    private final RString 出力順3;
+    private final RString 出力順4;
+    private final RString 出力順5;
     private final FlexibleYear 調定年度;
     private final YMDHMS 帳票作成日時;
     private final List<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranItem> targets;
@@ -52,20 +60,35 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
      * コンストラクタです
      *
      * @param 編集後仮算定通知書共通情報entityList List<EditedKariSanteiTsuchiShoKyotsu>
-     * @param 改頁 RString
-     * @param 出力順 RString
+     * @param 改頁1 RString
+     * @param 改頁2 RString
+     * @param 改頁3 RString
+     * @param 改頁4 RString
+     * @param 改頁5 RString
+     * @param 出力順1 RString
+     * @param 出力順2 RString
+     * @param 出力順3 RString
+     * @param 出力順4 RString
+     * @param 出力順5 RString
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport(
             List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList,
-            RString 改頁,
-            RString 出力順,
-            FlexibleYear 調定年度,
-            YMDHMS 帳票作成日時) {
+            RString 改頁1, RString 改頁2, RString 改頁3, RString 改頁4, RString 改頁5,
+            RString 出力順1, RString 出力順2, RString 出力順3, RString 出力順4, RString 出力順5,
+            FlexibleYear 調定年度, YMDHMS 帳票作成日時) {
         this.編集後仮算定通知書共通情報entityList = 編集後仮算定通知書共通情報entityList;
-        this.改頁 = 改頁;
-        this.出力順 = 出力順;
+        this.改頁1 = 改頁1;
+        this.改頁2 = 改頁2;
+        this.改頁3 = 改頁3;
+        this.改頁4 = 改頁4;
+        this.改頁5 = 改頁5;
+        this.出力順1 = 出力順1;
+        this.出力順2 = 出力順2;
+        this.出力順3 = 出力順3;
+        this.出力順4 = 出力順4;
+        this.出力順5 = 出力順5;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
         this.targets = new ArrayList<>();
@@ -75,19 +98,36 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
      * createFormメソッド
      *
      * @param 編集後仮算定通知書共通情報entityList List<EditedKariSanteiTsuchiShoKyotsu>
-     * @param 改頁 RString
-     * @param 出力順 RString
+     * @param 改頁1 RString
+     * @param 改頁2 RString
+     * @param 改頁3 RString
+     * @param 改頁4 RString
+     * @param 改頁5 RString
+     * @param 出力順1 RString
+     * @param 出力順2 RString
+     * @param 出力順3 RString
+     * @param 出力順4 RString
+     * @param 出力順5 RString
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
      * @return TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport
      */
     public static TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport createForm(
             @NonNull List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList,
-            @NonNull RString 改頁,
-            @NonNull RString 出力順,
+            @NonNull RString 改頁1,
+            @NonNull RString 改頁2,
+            @NonNull RString 改頁3,
+            @NonNull RString 改頁4,
+            @NonNull RString 改頁5,
+            @NonNull RString 出力順1,
+            @NonNull RString 出力順2,
+            @NonNull RString 出力順3,
+            @NonNull RString 出力順4,
+            @NonNull RString 出力順5,
             @NonNull FlexibleYear 調定年度,
             @NonNull YMDHMS 帳票作成日時) {
-        return new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport(編集後仮算定通知書共通情報entityList, 改頁, 出力順, 調定年度, 帳票作成日時);
+        return new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport(編集後仮算定通知書共通情報entityList, 改頁1, 改頁2,
+                改頁3, 改頁4, 改頁5, 出力順1, 出力順2, 出力順3, 出力順4, 出力順5, 調定年度, 帳票作成日時);
     }
 
     @Override
@@ -116,29 +156,19 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
             item.setタイトル(タイトル);
             item.set年度(調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
                     .fillType(FillType.BLANK).toDateString().concat(NENDO));
-//            Association association = AssociationFinderFactory.createInstance().getAssociation();
-//            item.set市町村コード(association.get地方公共団体コード().value());
-//            item.set市町村名称(association.get市町村名());
-            // TODO 並び順１
-            //item.setShutsuryokujun1();
-            // TODO 並び順2
-            //item.setShutsuryokujun2();
-            // TODO 並び順3
-            //item.setShutsuryokujun3();
-            // TODO 並び順4
-            //item.setShutsuryokujun4();
-            // TODO 並び順5
-            //item.setShutsuryokujun5();
-            // TODO 改頁１
-            //item.setKaipage1();
-            // TODO 改頁2
-            //item.setKaipage2();
-            // TODO 改頁3
-            //item.setKaipage3();
-            // TODO 改頁4
-            //item.setKaipage4();
-            // TODO 改頁5
-            //item.setKaipage5();
+            Association association = AssociationFinderFactory.createInstance().getAssociation();
+            item.set市町村コード(association.get地方公共団体コード().value());
+            item.set市町村名称(association.get市町村名());
+            item.set並び順１(出力順1);
+            item.set並び順２(出力順2);
+            item.set並び順３(出力順3);
+            item.set並び順４(出力順4);
+            item.set並び順５(出力順5);
+            item.set改頁１(改頁1);
+            item.set改頁２(改頁2);
+            item.set改頁３(改頁3);
+            item.set改頁４(改頁4);
+            item.set改頁５(改頁5);
             item.set徴収額タイトル(徴収額タイトル);
             item.set連番(new RString(連番.toString()));
             item.set郵便番号(entity.get編集後宛先().get郵便番号());
