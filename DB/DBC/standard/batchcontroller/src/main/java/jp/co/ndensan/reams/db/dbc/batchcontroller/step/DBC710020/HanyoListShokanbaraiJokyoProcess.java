@@ -81,7 +81,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private static final RString 英数字ファイル名 = new RString("HanyoList_ShokanbaraiJokyo.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString CODE = new RString("0003");
+    private static final Code CODE = new Code("0003");
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString CODE_1 = new RString("1");
     private static final int INDEX_15 = 15;
@@ -205,7 +205,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void afterExecute() {
-        if (preEntity.get請求基本List() != null && !preEntity.get請求基本List().isEmpty()) {
+        if (preEntity != null && preEntity.get請求基本List() != null && !preEntity.get請求基本List().isEmpty()) {
             preEntity.get請求基本List().clear();
             preEntity.get請求基本List().addAll(lstDbt3038List);
         }
@@ -218,9 +218,11 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
             kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
             preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
         }
-        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 保険者リスト));
-        連番 = 連番.add(Decimal.ONE);
-        personalDataList.add(toPersonalData(preEntity));
+        if (preEntity != null) {
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 保険者リスト));
+            連番 = 連番.add(Decimal.ONE);
+            personalDataList.add(toPersonalData(preEntity));
+        }
         eucCsvWriter.close();
         AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
@@ -228,7 +230,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     }
 
     private PersonalData toPersonalData(HanyoListShokanbaraiJokyoEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 被保険者番号,
+        ExpandedInformation expandedInfo = new ExpandedInformation(CODE, 被保険者番号,
                 entity.get被保険者番号().value());
         return PersonalData.of(entity.get宛名Entity().getShikibetsuCode(), expandedInfo);
     }

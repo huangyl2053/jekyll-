@@ -108,6 +108,7 @@ public class HanyoListCsvDataCreate {
 
     private void set介護保険(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
+
         JigyoshaNo 指定事業者コード = entity.get入所施設コード();
         csvEntity.set指定事業者コード(指定事業者コード != null
                 ? 指定事業者コード.getColumnValue() : RString.EMPTY);
@@ -118,10 +119,12 @@ public class HanyoListCsvDataCreate {
         } else if (入所施設種類_12.equals(entity.get入所施設種類()) || 入所施設種類_21.equals(entity.get入所施設種類())) {
             set介護対象施設(entity, csvEntity, parameter);
         }
+
     }
 
     private void set介護事業者(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
+
         AtenaMeisho 指定事業者名 = entity.get事業者名称_60();
         AtenaKanaMeisho 指定事業者名カナ = entity.get事業者名称カナ_60();
         csvEntity.set指定事業者名(指定事業者名 != null
@@ -439,6 +442,7 @@ public class HanyoListCsvDataCreate {
 
     private void set被保険者台帳管理(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
             HokenshaList 保険者リスト, HanyoListShokanbaraiJokyoProcessParameter parameter) {
+
         csvEntity.set市町村コード(entity.get市町村コード() != null
                 ? entity.get市町村コード().getColumnValue() : RString.EMPTY);
         Association association = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
@@ -472,10 +476,13 @@ public class HanyoListCsvDataCreate {
         csvEntity.set受給旧措置(entity.get旧措置者フラグ());
         csvEntity.set受給みなし更新認定(codeToRString(entity.getみなし要介護区分コード()));
         csvEntity.set受給直近事由(codeToRString(entity.get直近異動事由コード()));
+
     }
 
     private void set口座情報(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
-        if (entity.get口座情報Entity() != null) {
+        if (entity.get口座情報Entity() != null && entity.get口座情報Entity().getUaT0310KozaEntity() != null
+                && (entity.get口座情報Entity().getKinyuKikanEntity() != null || !entity.get口座情報Entity().getKinyuKikanEntity().isEmpty())
+                && (entity.get口座情報Entity().getUrT0700ShunoKanriEntity() != null || !entity.get口座情報Entity().getUrT0700ShunoKanriEntity().isEmpty())) {
             KozaRelateEntity releteEntity = entity.get口座情報Entity();
             IKoza 口座 = new Koza(releteEntity);
             if (口座.isゆうちょ銀行()) {
