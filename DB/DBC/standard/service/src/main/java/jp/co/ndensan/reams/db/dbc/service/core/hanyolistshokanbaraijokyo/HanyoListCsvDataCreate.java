@@ -91,6 +91,8 @@ public class HanyoListCsvDataCreate {
         HanyoListShokanbaraiJokyoCSVEntity csvEntity = new HanyoListShokanbaraiJokyoCSVEntity();
         if (parameter.is連番付加()) {
             csvEntity.set連番(numToRString(連番));
+        } else {
+            csvEntity.set連番(RString.EMPTY);
         }
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
@@ -391,7 +393,9 @@ public class HanyoListCsvDataCreate {
             csvEntity.set国保連送付年月(国保連送付年月 != null
                     ? 国保連送付年月.toDateString() : RString.EMPTY);
             csvEntity.set申請状態(entity.get支給申請Entity().getKaishuShinseiKubun());
-            csvEntity.set施行完了予定日(dataToRString(entity.get支給住宅Entity().getSekoKanryoYoteiYMD(), parameter));
+            if (entity.get支給住宅Entity() != null) {
+                csvEntity.set施行完了予定日(dataToRString(entity.get支給住宅Entity().getSekoKanryoYoteiYMD(), parameter));
+            }
             RString 申請取消事由 = RString.EMPTY;
             RString 申請取消事由Code = entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode();
             if (申請取消事由Code != null && !申請取消事由Code.isEmpty()) {
@@ -493,6 +497,8 @@ public class HanyoListCsvDataCreate {
             YokinShubetsuPattern 口座種目 = 口座.get預金種別();
             csvEntity.set口座種目(口座種目 != null ? 口座種目.get預金種別名称() : RString.EMPTY);
             csvEntity.set口座番号(口座.get口座番号());
+            csvEntity.set名義人カナ短(RString.EMPTY);
+            csvEntity.set名義人短(RString.EMPTY);
             AtenaKanaMeisho 名義人カナ = 口座.get口座名義人();
             csvEntity.set名義人カナ(名義人カナ != null ? 名義人カナ.getColumnValue() : RString.EMPTY);
             AtenaMeisho 名義人 = 口座.get口座名義人漢字();

@@ -165,13 +165,19 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
                 .concat(entity.get支給申請Entity().getServiceTeikyoYM().toDateString()).concat(SPLIT)
                 .concat(entity.get支給申請Entity().getSeiriNo()).concat(SPLIT)
                 .concat(entity.get支給申請Entity().getShinseiJigyoshaNo().value());
+
         if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
             preBreakKey = nowBreakKey;
-            RString key3038 = nowBreakKey.concat(SPLIT).concat(entity.get請求基本List().get(0).getYoshikiNo())
-                    .concat(SPLIT).concat(entity.get請求基本List().get(0).getMeisaiNo());
+            RString key3038 = RString.EMPTY;
+            if (entity.get請求基本List() != null && !entity.get請求基本List().isEmpty()) {
+                key3038 = nowBreakKey.concat(SPLIT).concat(entity.get請求基本List().get(0).getYoshikiNo())
+                        .concat(SPLIT).concat(entity.get請求基本List().get(0).getMeisaiNo());
+            }
             mapFlag.put(key3038, true);
             lstDbt3038List.addAll(entity.get請求基本List());
-            lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+            if (entity.get口座情報Entity() != null) {
+                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+            }
             preEntity = entity;
             return;
         }
@@ -271,7 +277,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(保険者);
-        builder.append(parameter.get保険者コード() == null
+        builder.append(parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
                 ? RString.EMPTY : 左記号.concat(parameter.get保険者コード())
                 .concat(右記号).concat(parameter.get保険者名()));
         出力条件.add(builder.toRString());
@@ -285,8 +291,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(金融機関);
-        builder.append(parameter.get金融機関コード() == null
-                || parameter.get金融機関コード().isEmpty()
+        builder.append(parameter.get金融機関コード() == null || parameter.get金融機関コード().isEmpty()
                 ? RString.EMPTY : 左記号.concat(parameter.get金融機関コード())
                 .concat(右記号).concat(parameter.get金融機関名称()));
         出力条件.add(builder.toRString());
@@ -360,14 +365,16 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス提供年月);
         RString serviceTeikyoYM = RString.EMPTY;
-        if (parameter.getサービス提供年月From() == null && parameter.getサービス提供年月To() == null) {
+        if ((parameter.getサービス提供年月From() == null || parameter.getサービス提供年月From().isEmpty())
+                && (parameter.getサービス提供年月To() == null || parameter.getサービス提供年月To().isEmpty())) {
             return builder;
         }
         if (parameter.getサービス提供年月From() != null && parameter.getサービス提供年月To() != null) {
             serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
                     .concat(ITEM)
                     .concat(monthToRString(parameter.getサービス提供年月To()));
-        } else if (parameter.getサービス提供年月From() == null && parameter.getサービス提供年月To() != null) {
+        } else if ((parameter.getサービス提供年月From() == null)
+                && parameter.getサービス提供年月To() != null) {
             serviceTeikyoYM = ITEM.concat(monthToRString(parameter.getサービス提供年月To()));
         } else if (parameter.getサービス提供年月From() != null && parameter.getサービス提供年月To() == null) {
             serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
@@ -381,7 +388,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(申請日);
         RString shinseiYMD = RString.EMPTY;
-        if (parameter.get申請日From() == null && parameter.get申請日To() == null) {
+        if ((parameter.get申請日From() == null || parameter.get申請日From().isEmpty())
+                && (parameter.get申請日To() == null || parameter.get申請日To().isEmpty())) {
             return builder;
         }
         if (parameter.get申請日From() != null && parameter.get申請日To() != null) {
@@ -402,7 +410,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(住宅改修支給届出日);
         RString kaishuYM = RString.EMPTY;
-        if (parameter.get住宅改修支給届出日From() == null && parameter.get住宅改修支給届出日From() == null) {
+        if ((parameter.get住宅改修支給届出日From() == null || parameter.get住宅改修支給届出日From().isEmpty())
+                && (parameter.get住宅改修支給届出日To() == null || parameter.get住宅改修支給届出日To().isEmpty())) {
             return builder;
         }
         if (parameter.get住宅改修支給届出日From() != null && parameter.get住宅改修支給届出日To() != null) {
@@ -423,7 +432,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(決定日);
         RString ketteiYMD = RString.EMPTY;
-        if (parameter.get決定日From() == null && parameter.get決定日To() == null) {
+        if ((parameter.get決定日From() == null || parameter.get決定日From().isEmpty())
+                && (parameter.get決定日To() == null || parameter.get決定日To().isEmpty())) {
             return builder;
         }
         if (parameter.get決定日From() != null && parameter.get決定日To() != null) {
@@ -444,7 +454,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(国保連送付年月);
         RString kokuhorenYM = RString.EMPTY;
-        if (parameter.get国保連送付年月From() == null && parameter.get国保連送付年月To() == null) {
+        if ((parameter.get国保連送付年月From() == null || parameter.get国保連送付年月From().isEmpty())
+                && (parameter.get国保連送付年月To() == null || parameter.get国保連送付年月To().isEmpty())) {
             return builder;
         }
         if (parameter.get国保連送付年月From() != null && parameter.get国保連送付年月To() != null) {
