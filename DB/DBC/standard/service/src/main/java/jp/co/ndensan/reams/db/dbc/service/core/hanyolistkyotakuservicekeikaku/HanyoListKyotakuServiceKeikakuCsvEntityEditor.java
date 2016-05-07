@@ -77,8 +77,10 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     public HanyoListKyotakuServiceKeikakuCsvEntity editor(HanyoListKyotakuServiceKeikakuEntity entity,
             HanyoListKyotakuServiceKeikakuProcessParameter parameter, Decimal 連番) {
         HanyoListKyotakuServiceKeikakuCsvEntity csvEntity = new HanyoListKyotakuServiceKeikakuCsvEntity();
-        if (parameter.isCsv項目名付加()) {
+        if (parameter.isCsv連番付加()) {
             csvEntity.set連番(numToRString(連番));
+        } else {
+            csvEntity.set連番(RString.EMPTY);
         }
         editor宛名(entity, csvEntity, parameter);
         editor地区(entity, csvEntity);
