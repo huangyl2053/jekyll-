@@ -60,6 +60,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private RString 事業高額分;
     private IKozaSearchKey searchkey;
     private List<KamokuCode> list;
+    private List<KamokuCode> kamokuCodelist;
 
     private static final int 基準額_ONE = 15000;
     private static final int 基準額_TWO = 26400;
@@ -100,6 +101,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
      * @param hizukeHeshu hizukeHeshu
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
+     * @param kamokuCodelist List<KamokuCode>
      */
     public HanyoListKogakuKaigoProcessParameter(
             LasdecCode kouseiShichosonCode,
@@ -132,7 +134,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             boolean rebanFuka,
             boolean hizukeHeshu,
             IKozaSearchKey searchkey,
-            List<KamokuCode> list) {
+            List<KamokuCode> list,
+            List<KamokuCode> kamokuCodelist) {
 
         this.kouseiShichosonCode = kouseiShichosonCode;
         this.serviceYmFrom = serviceYmFrom;
@@ -165,6 +168,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
         this.hizukeHeshu = hizukeHeshu;
         this.searchkey = searchkey;
         this.list = list;
+        this.kamokuCodelist = kamokuCodelist;
     }
 
     /**
@@ -210,8 +214,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 hokemonoKeteihiTo,
                 kokuhoreKeteiymFrom,
                 kokuhoreKeteiymTo,
-                taishoshaUketoriymFrom,
-                taishoshaUketoriymTo,
+                (taishoshaUketoriymFrom != null && taishoshaUketoriymFrom.isEmpty()) ? taishoshaUketoriymFrom : null,
+                (taishoshaUketoriymTo != null && taishoshaUketoriymTo.isEmpty()) ? taishoshaUketoriymTo : null,
                 kokuhoreSofuYMFrom,
                 kokuhoreSofuYMTo,
                 keteijohoUketoriymFrom,
@@ -224,6 +228,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
                 国保連IFなし区分,
                 事業高額分,
                 searchkey,
-                list);
+                list,
+                kamokuCodelist);
     }
 }

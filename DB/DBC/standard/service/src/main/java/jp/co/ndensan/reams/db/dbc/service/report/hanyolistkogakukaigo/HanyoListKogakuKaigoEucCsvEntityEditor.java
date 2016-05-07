@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
@@ -107,7 +109,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
      *
      * @param entity HanyouRisutoSyuturyokuEntity
      * @param parameter HanyouRisutoSyuturyokuProcessParameter
-     * @param 連番 連番
+     * @param 連番 Decimal
      * @return HanyouRisutoSyuturyokuEucCsvEntity
      */
     public HanyouRisutoSyuturyokuEucCsvEntity edit(HanyouRisutoSyuturyokuEntity entity,
@@ -146,9 +148,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set資格取得事由(略称 != null ? 略称 : RString.EMPTY);
         }
         FlexibleDate 資格取得日 = entity.get資格取得年月日();
-        csvEntity.set資格取得日(資格取得日 != null ? get日付項目(資格取得日, parameter) : RString.EMPTY);
+        csvEntity.set資格取得日(get日付項目(資格取得日, parameter));
         FlexibleDate 資格取得届出日 = entity.get資格取得届出年月日();
-        csvEntity.set資格取得届出日(資格取得届出日 != null ? get日付項目(資格取得届出日, parameter) : RString.EMPTY);
+        csvEntity.set資格取得届出日(get日付項目(資格取得届出日, parameter));
         RString 喪失事由コード = entity.get資格取得事由コード();
         if (喪失事由コード != null) {
             RString 略称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
@@ -156,9 +158,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             csvEntity.set喪失事由(略称 != null ? 略称 : RString.EMPTY);
         }
         FlexibleDate 資格喪失日 = entity.get資格喪失年月日();
-        csvEntity.set資格喪失日(資格喪失日 != null ? get日付項目(資格喪失日, parameter) : RString.EMPTY);
+        csvEntity.set資格喪失日(get日付項目(資格喪失日, parameter));
         FlexibleDate 資格喪失届日 = entity.get資格喪失届出年月日();
-        csvEntity.set資格取得届出日(資格喪失届日 != null ? get日付項目(資格喪失届日, parameter) : RString.EMPTY);
+        csvEntity.set資格取得届出日(get日付項目(資格喪失届日, parameter));
         if (entity.get被保険者区分コード() != null) {
             HihokenshaKubunCode 被保険者区分コード = HihokenshaKubunCode.toValue(entity.get被保険者区分コード());
             csvEntity.set資格区分(被保険者区分コード != null ? 被保険者区分コード.get名称() : RString.EMPTY);
@@ -176,16 +178,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             hokenshaSummary = hokenshaList.get(市町村コード);
         }
         ShoKisaiHokenshaNo 証記載保険者番号 = hokenshaSummary.get証記載保険者番号();
-        csvEntity.set資格証記載保険者番号(証記載保険者番号 != null ? 証記載保険者番号.getColumnValue() : RString.EMPTY);
+        csvEntity.set資格証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
+                ? 証記載保険者番号.getColumnValue() : RString.EMPTY);
 
-        // TODO　実装方法不確定  89.銀行郵便区分 -- 101.名義人
-//        if (koza.isゆうちょ銀行()) {
-//            csvEntity.set銀行郵便区分(ゆうちょ);
-//        } else {
-//            csvEntity.set銀行郵便区分(銀行);
-//        }
-//        KinyuKikanCode 金融機関コード = koza.get金融機関コード();
-//        csvEntity.set銀行コード(金融機関コード != null ? 金融機関コード.getColumnValue() : RString.EMPTY);
         return csvEntity;
     }
 
@@ -195,22 +190,18 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         JigyoshaNo 指定事業者コード = entity.get入所施設コード();
         csvEntity.set指定事業者コード(指定事業者コード != null ? 指定事業者コード.getColumnValue() : RString.EMPTY);
         FlexibleDate 施設入所日 = entity.get入所年月日();
-        csvEntity.set施設入所日(施設入所日 != null ? get日付項目(施設入所日, parameter) : RString.EMPTY);
+        csvEntity.set施設入所日(get日付項目(施設入所日, parameter));
         FlexibleDate 施設退所日 = entity.get退所年月日();
-        csvEntity.set施設退所日(施設退所日 != null ? get日付項目(施設退所日, parameter) : RString.EMPTY);
+        csvEntity.set施設退所日(get日付項目(施設退所日, parameter));
 
         csvEntity.set受給申請事由(entity.get受給申請事由() != null
                 ? entity.get受給申請事由().getColumnValue() : RString.EMPTY);
-        csvEntity.set受給申請日(entity.get受給申請年月日() != null
-                ? get日付項目(entity.get受給申請年月日(), parameter) : RString.EMPTY);
+        csvEntity.set受給申請日(get日付項目(entity.get受給申請年月日(), parameter));
         csvEntity.set受給要介護度(entity.get要介護認定状態区分コード() != null
                 ? entity.get要介護認定状態区分コード().getColumnValue() : RString.EMPTY);
-        csvEntity.set受給認定開始日(entity.get認定有効期間開始日() != null
-                ? get日付項目(entity.get認定有効期間開始日(), parameter) : RString.EMPTY);
-        csvEntity.set受給認定終了日(entity.get認定有効期間終了日() != null
-                ? get日付項目(entity.get認定有効期間終了日(), parameter) : RString.EMPTY);
-        csvEntity.set受給認定日(entity.get受給認定日() != null
-                ? get日付項目(entity.get受給認定日(), parameter) : RString.EMPTY);
+        csvEntity.set受給認定開始日(get日付項目(entity.get認定有効期間開始日(), parameter));
+        csvEntity.set受給認定終了日(get日付項目(entity.get認定有効期間終了日(), parameter));
+        csvEntity.set受給認定日(get日付項目(entity.get受給認定日(), parameter));
         csvEntity.set受給旧措置(entity.is旧措置フラグ());
         csvEntity.set受給みなし更新認定(entity.getみなし要介護区分コード() != null
                 ? entity.getみなし要介護区分コード().getColumnValue() : RString.EMPTY);
@@ -230,7 +221,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             AtenaKanaMeisho 氏名カナ = entity.get宛名().getKanaShimei();
             csvEntity.set氏名カナ(氏名カナ != null ? 氏名カナ.getColumnValue() : RString.EMPTY);
             FlexibleDate 生年月日 = entity.get宛名().getSeinengappiYMD();
-            csvEntity.set生年月日(生年月日 != null ? get日付項目(生年月日, parameter) : RString.EMPTY);
+            csvEntity.set生年月日(get日付項目(生年月日, parameter));
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
             AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(), 宛名.get消除異動年月日());
             csvEntity.set年齢(ageCalculator.get年齢());
@@ -306,7 +297,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         ChikuCode 地区3 = entity.get宛名().getChikuCode3();
         csvEntity.set地区１(地区1 != null ? 地区1.getColumnValue() : RString.EMPTY);
         csvEntity.set地区２(地区2 != null ? 地区2.getColumnValue() : RString.EMPTY);
-        csvEntity.set地区３(地区3 != null ? 地区2.getColumnValue() : RString.EMPTY);
+        csvEntity.set地区３(地区3 != null ? 地区3.getColumnValue() : RString.EMPTY);
     }
 
     private void set宛先(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
@@ -338,7 +329,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     }
 
     private void set口座(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
-        if (entity.get口座情報() != null) {
+        if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null
+                && (entity.get口座情報().getKinyuKikanEntity() != null || !entity.get口座情報().getKinyuKikanEntity().isEmpty())
+                && (entity.get口座情報().getUrT0700ShunoKanriEntity() != null || !entity.get口座情報().getUrT0700ShunoKanriEntity().isEmpty())) {
             KozaRelateEntity releteEntity = entity.get口座情報();
             IKoza 口座 = new Koza(releteEntity);
             if (口座.isゆうちょ銀行()) {
@@ -350,19 +343,24 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 csvEntity.set支店コード(支店コード != null ? 支店コード.getColumnValue() : RString.EMPTY);
             }
             KinyuKikanCode 銀行コード = 口座.get金融機関コード();
+            KinyuKikan 金融機関 = 口座.get金融機関();
+            KinyuKikanShiten 支店 = 口座.get支店();
             csvEntity.set銀行コード(銀行コード != null ? 銀行コード.getColumnValue() : RString.EMPTY);
-            csvEntity.set銀行名カナ(口座.get金融機関().get金融機関カナ名称());
-            csvEntity.set銀行名(口座.get金融機関().get金融機関名称());
-            csvEntity.set支店名カナ(口座.get支店().get支店カナ名称());
-            csvEntity.set支店名(口座.get支店().get支店名称());
+            csvEntity.set銀行名カナ(金融機関 != null ? 金融機関.get金融機関カナ名称() : RString.EMPTY);
+            csvEntity.set銀行名(金融機関 != null ? 金融機関.get金融機関名称() : RString.EMPTY);
+            csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
+            csvEntity.set支店名(支店 != null ? 支店.get支店名称() : RString.EMPTY);
             YokinShubetsuPattern 口座種目 = 口座.get預金種別();
             csvEntity.set口座種目(口座種目 != null ? 口座種目.get預金種別名称() : RString.EMPTY);
             csvEntity.set口座番号(口座.get口座番号());
+            csvEntity.set名義人カナ短(RString.EMPTY);
+            csvEntity.set名義人短(RString.EMPTY);
             AtenaKanaMeisho 名義人カナ = 口座.get口座名義人();
             csvEntity.set名義人カナ(名義人カナ != null ? 名義人カナ.getColumnValue() : RString.EMPTY);
             AtenaMeisho 名義人 = 口座.get口座名義人漢字();
             csvEntity.set名義人(名義人 != null ? 名義人.getColumnValue() : RString.EMPTY);
         }
+
     }
 
     private void set入所施設種類(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
@@ -426,175 +424,105 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private void set支給申請(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
 
-        if (entity.get事業給付対象者合計() == null) {
-            if (isNotNull(entity.get支給申請())) {
-                csvEntity.set支払場所(entity.get支給申請().getShiharaiBasho());
-                FlexibleDate 支払開始日 = entity.get支給申請().getShiharaiKaishiYMD();
-                csvEntity.set支払開始日(支払開始日 != null ? get日付項目(支払開始日, parameter) : RString.EMPTY);
-                FlexibleDate 支払終了日 = entity.get支給申請().getShiharaiShuryoYMD();
-                csvEntity.set支払終了日(支払終了日 != null ? get日付項目(支払終了日, parameter) : RString.EMPTY);
-                RString 支払開始時間 = entity.get支給申請().getShiharaiKaishiTime();
-                csvEntity.set支払開始時間(支払開始時間 != null ? 支払開始時間 : RString.EMPTY);
-                RString 支払終了時間 = entity.get支給申請().getShiharaiShuryoTime();
-                csvEntity.set支払終了時間(支払終了時間 != null ? 支払終了時間 : RString.EMPTY);
-                csvEntity.set支払開始曜日(支払開始日 != null ? new RString(支払開始日.getDayOfWeek().toString()) : RString.EMPTY);
-                csvEntity.set支払終了曜日(支払終了日 != null ? new RString(支払終了日.getDayOfWeek().toString()) : RString.EMPTY);
-                csvEntity.setサービス提供年月(entity.get支給申請().getServiceTeikyoYM().isEmpty()
-                        ? RString.EMPTY : get年月(entity.get支給申請().getServiceTeikyoYM(), parameter));
-                Decimal 管理番号 = entity.get支給申請().getRirekiNo();
-                csvEntity.set管理番号(管理番号 != null ? new RString(管理番号.toString()) : RString.EMPTY);
-                HokenshaNo 給付証記載保険者番号 = entity.get支給申請().getShoKisaiHokenshaNo();
-                csvEntity.set給付証記載保険者番号(給付証記載保険者番号 != null ? 給付証記載保険者番号.getColumnValue() : RString.EMPTY);
-                FlexibleDate 申請日 = entity.get支給申請().getShinseiYMD();
-                csvEntity.set申請日(申請日 != null ? new RString(申請日.toString()) : RString.EMPTY);
-                csvEntity.set申請理由(entity.get支給申請().getShinseiRiyu());
-                csvEntity.set申請区分(entity.get支給申請().getShinseishaKubun());
-                AtenaMeisho 申請氏名 = entity.get支給申請().getShinseishaShimei();
-                csvEntity.set申請氏名(申請氏名 != null ? 申請氏名.getColumnValue() : RString.EMPTY);
-                AtenaKanaMeisho 申請氏名カナ = entity.get支給申請().getShinseishaShimeiKana();
-                csvEntity.set申請氏名カナ(申請氏名カナ != null ? 申請氏名カナ.getColumnValue() : RString.EMPTY);
-                csvEntity.set申請電話番号(entity.get支給申請().getShinseishaTelNo().isEmpty()
-                        ? RString.EMPTY : entity.get支給申請().getShinseishaTelNo().getColumnValue());
-                FlexibleDate 受付日 = entity.get支給申請().getUketsukeYMD();
-                csvEntity.set受付日(受付日 != null ? get日付項目(受付日, parameter) : RString.EMPTY);
-                RString 支払方法区分コード = entity.get支給申請().getShiharaiHohoKubunCode();
+        if (entity != null) {
+            csvEntity.set支払場所(entity.get支払場所());
+            FlexibleDate 支払開始日 = entity.get支払期間開始年月日();
+            csvEntity.set支払開始日(get日付項目(支払開始日, parameter));
+            FlexibleDate 支払終了日 = entity.get支払期間終了年月日();
+            csvEntity.set支払終了日(get日付項目(支払終了日, parameter));
+            csvEntity.set支払開始曜日(支払開始日 != null ? new RString(支払開始日.getDayOfWeek().toString()) : RString.EMPTY);
+            csvEntity.set支払終了曜日(支払終了日 != null ? new RString(支払終了日.getDayOfWeek().toString()) : RString.EMPTY);
+            csvEntity.set支払開始時間(entity.get支払窓口開始時間());
+            csvEntity.set支払終了時間(entity.get支払窓口終了時間());
+            csvEntity.setサービス提供年月(get年月(entity.getサービス提供年月(), parameter));
+            Decimal 履歴番号 = entity.get履歴番号();
+            csvEntity.set管理番号(履歴番号 != null ? new RString(履歴番号.toString()) : RString.EMPTY);
+            HokenshaNo 証記載保険者番号 = entity.get証記載保険者番号();
+            csvEntity.set給付証記載保険者番号(証記載保険者番号 != null && !証記載保険者番号.isEmpty()
+                    ? entity.get証記載保険者番号().getColumnValue() : RString.EMPTY);
+            FlexibleDate 申請日 = entity.get申請年月日();
+            csvEntity.set申請日(申請日 != null ? new RString(申請日.toString()) : RString.EMPTY);
+            csvEntity.set申請理由(entity.get申請理由());
+            csvEntity.set申請区分(entity.get申請者区分());
+            AtenaMeisho 申請氏名 = entity.get申請者氏名();
+            csvEntity.set申請氏名(申請氏名 != null ? 申請氏名.getColumnValue() : RString.EMPTY);
+            AtenaKanaMeisho 申請氏名カナ = entity.get申請者氏名カナ();
+            csvEntity.set申請氏名カナ(申請氏名カナ != null ? 申請氏名カナ.getColumnValue() : RString.EMPTY);
+            TelNo 申請者電話番号 = entity.get申請者電話番号();
+            csvEntity.set申請電話番号(申請者電話番号 != null && !申請者電話番号.isEmpty()
+                    ? entity.get申請者電話番号().getColumnValue() : RString.EMPTY);
+            FlexibleDate 受付日 = entity.get受付年月日();
+            csvEntity.set受付日(get日付項目(受付日, parameter));
+            RString 支払方法区分コード = entity.get支払方法区分コード();
+            if (支払方法区分コード != null && !支払方法区分コード.isEmpty()) {
                 ShiharaiHohoKubun 支払方法区分 = ShiharaiHohoKubun.toValue(支払方法区分コード);
                 csvEntity.set支払方法(支払方法区分 != null ? 支払方法区分.get名称() : RString.EMPTY);
-            }
-        } else {
-            if (isNotNull(entity.get事業支給申請())) {
-                csvEntity.set支払場所(entity.get事業支給申請().getShiharaiBasho());
-                FlexibleDate 支払開始日 = entity.get事業支給申請().getShiharaiKaishiYMD();
-                csvEntity.set支払開始日(支払開始日 != null ? get日付項目(支払開始日, parameter) : RString.EMPTY);
-                FlexibleDate 支払終了日 = entity.get事業支給申請().getShiharaiShuryoYMD();
-                csvEntity.set支払終了日(支払終了日 != null ? get日付項目(支払終了日, parameter) : RString.EMPTY);
-                RString 支払開始時間 = entity.get事業支給申請().getShiharaiKaishiTime();
-                csvEntity.set支払開始時間(支払開始時間 != null ? 支払開始時間 : RString.EMPTY);
-                RString 支払終了時間 = entity.get事業支給申請().getShiharaiShuryoTime();
-                csvEntity.set支払終了時間(支払終了時間 != null ? 支払終了時間 : RString.EMPTY);
-
-                csvEntity.setサービス提供年月(entity.get事業支給申請().getServiceTeikyoYM().isEmpty()
-                        ? RString.EMPTY : get年月(entity.get事業支給申請().getServiceTeikyoYM(), parameter));
-                Decimal 管理番号 = entity.get事業支給申請().getRirekiNo();
-                csvEntity.set管理番号(管理番号 != null ? new RString(管理番号.toString()) : RString.EMPTY);
-                HokenshaNo 給付証記載保険者番号 = entity.get事業支給申請().getShoKisaiHokenshaNo();
-                csvEntity.set給付証記載保険者番号(給付証記載保険者番号 != null ? 給付証記載保険者番号.getColumnValue() : RString.EMPTY);
-                FlexibleDate 申請日 = entity.get事業支給申請().getShinseiYMD();
-                csvEntity.set申請日(申請日 != null ? new RString(申請日.toString()) : RString.EMPTY);
-                csvEntity.set申請理由(entity.get事業支給申請().getShinseiRiyu());
-                csvEntity.set申請区分(entity.get事業支給申請().getShinseishaKubun());
-                AtenaMeisho 申請氏名 = entity.get事業支給申請().getShinseishaShimei();
-                csvEntity.set申請氏名(申請氏名 != null ? 申請氏名.getColumnValue() : RString.EMPTY);
-                AtenaKanaMeisho 申請氏名カナ = entity.get事業支給申請().getShinseishaShimeiKana();
-                csvEntity.set申請氏名カナ(申請氏名カナ != null ? 申請氏名カナ.getColumnValue() : RString.EMPTY);
-                csvEntity.set申請電話番号(entity.get事業支給申請().getShinseishaTelNo().isEmpty()
-                        ? RString.EMPTY : entity.get事業支給申請().getShinseishaTelNo().getColumnValue());
-                FlexibleDate 受付日 = entity.get事業支給申請().getUketsukeYMD();
-                csvEntity.set受付日(受付日 != null ? get日付項目(受付日, parameter) : RString.EMPTY);
-                csvEntity.set支払方法(RString.EMPTY);
             }
         }
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
-        if (entity.get事業給付対象者合計() == null) {
-            if (isNotNull(entity.get給付対象者合計())) {
-                csvEntity.set申請支払額(numToRString(entity.get給付対象者合計().getKogakuShikyuGaku()));
-                csvEntity.set判定費用額(numToRString(entity.get給付対象者合計().getServiceHiyoGokeiGakuGokei()));
-                csvEntity.set判定利用負担額(numToRString(entity.get給付対象者合計().getRiyoshaFutanGakuGokei()));
-                csvEntity.set判定算定基準額(numToRString(entity.get給付対象者合計().getSanteiKijunGaku()));
-                csvEntity.set判定支払済金額(numToRString(entity.get給付対象者合計().getShiharaiSumiKingakuGokei()));
-                csvEntity.set判定高額支給額(numToRString(entity.get給付対象者合計().getKogakuShikyuGaku()));
-                FlexibleYearMonth 判定受取年月 = entity.get給付対象者合計().getTashoshaUketoriYM();
-                csvEntity.set判定受取年月(判定受取年月 != null ? get年月(判定受取年月, parameter) : RString.EMPTY);
-                FlexibleYearMonth 高額対象判定年月 = entity.get給付対象者合計().getTaishoshaHanteiShinsaYM();
-                csvEntity.set高額対象判定年月(高額対象判定年月 != null ? get年月(高額対象判定年月, parameter) : RString.EMPTY);
-            }
-        } else {
-            csvEntity.set申請支払額(numToRString(entity.get事業給付対象者合計().getJigyoKogakuShikyuGaku()));
+        if (entity != null) {
+            csvEntity.set申請支払額(numToRString(entity.get合計_高額支給額()));
+            csvEntity.set判定費用額(numToRString(entity.getサービス費用合計額合計()));
+            csvEntity.set判定利用負担額(numToRString(entity.get利用者負担額合計()));
+            csvEntity.set判定算定基準額(numToRString(entity.get算定基準額()));
+            csvEntity.set判定支払済金額(numToRString(entity.get支払済金額合計()));
+            csvEntity.set判定高額支給額(numToRString(entity.get合計_高額支給額()));
+            FlexibleYearMonth 判定受取年月 = entity.get対象者受取年月();
+            csvEntity.set判定受取年月(get年月(判定受取年月, parameter));
+            FlexibleYearMonth 高額対象判定年月 = entity.get対象者判定審査年月();
+            csvEntity.set高額対象判定年月(get年月(高額対象判定年月, parameter));
         }
     }
 
     private void set支給判定結果(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
-        if (entity.get事業給付対象者合計() == null) {
-            if (isNotNull(entity.get支給判定結果())) {
-                FlexibleDate 決定日 = entity.get支給判定結果().getKetteiYMD();
-                csvEntity.set決定日(決定日 != null ? get日付項目(決定日, parameter) : RString.EMPTY);
-                Decimal 保決定利用負担額 = entity.get支給判定結果().getHonninShiharaiGaku();
-                csvEntity.set保決定利用負担額(保決定利用負担額 != null ? numToRString(保決定利用負担額) : RString.EMPTY);
-                csvEntity.set保決定支給区分(entity.get支給判定結果().getShikyuKubunCode());
-                Decimal 保決定高額支給額 = entity.get支給判定結果().getShikyuKingaku();
-                csvEntity.set保決定高額支給額(保決定高額支給額 != null ? numToRString(保決定高額支給額) : RString.EMPTY);
-                csvEntity.set保決定不支給理由(entity.get支給判定結果().getFushikyuRiyu());
-                csvEntity.set審査方法(entity.get支給判定結果().getShinsaHohoKubun());
-                FlexibleYearMonth 保決定送付年月 = entity.get支給判定結果().getHanteiKekkaSofuYM();
-                csvEntity.set保決定送付年月(保決定送付年月 != null ? get年月(保決定送付年月, parameter) : RString.EMPTY);
-                FlexibleDate 通知書作成日 = entity.get支給判定結果().getKetteiTsuchishoSakuseiYMD();
-                csvEntity.set通知書作成日(通知書作成日 != null ? get日付項目(通知書作成日, parameter) : RString.EMPTY);
-                FlexibleDate 振込書作成日 = entity.get支給判定結果().getFurikomiMeisaishoSakuseiYMD();
-                csvEntity.set振込書作成日(振込書作成日 != null ? get日付項目(振込書作成日, parameter) : RString.EMPTY);
-            }
-        } else {
-            if (isNotNull(entity.get事業支給判定結果())) {
-                FlexibleDate 決定日 = entity.get事業支給判定結果().getKetteiYMD();
-                csvEntity.set決定日(決定日 != null ? get日付項目(決定日, parameter) : RString.EMPTY);
-                Decimal 保決定利用負担額 = entity.get事業支給判定結果().getHonninShiharaiGaku();
-                csvEntity.set保決定利用負担額(保決定利用負担額 != null ? numToRString(保決定利用負担額) : RString.EMPTY);
-                csvEntity.set保決定支給区分(entity.get事業支給判定結果().getShiharaiKubunCode());
-                Decimal 保決定高額支給額 = entity.get事業支給判定結果().getShiharaiKingaku();
-                csvEntity.set保決定高額支給額(保決定高額支給額 != null ? numToRString(保決定高額支給額) : RString.EMPTY);
-                csvEntity.set保決定不支給理由(entity.get事業支給判定結果().getFushikyuRiyu());
-                csvEntity.set審査方法(entity.get事業支給判定結果().getShinsaHohoKubun());
-                csvEntity.set保決定送付年月(RString.EMPTY);
-                FlexibleDate 通知書作成日 = entity.get事業支給判定結果().getKetteiTsuchishoSakuseiYMD();
-                csvEntity.set通知書作成日(通知書作成日 != null ? get日付項目(通知書作成日, parameter) : RString.EMPTY);
-                FlexibleDate 振込書作成日 = entity.get事業支給判定結果().getFurikomiMeisaishoSakuseiYMD();
-                csvEntity.set振込書作成日(振込書作成日 != null ? get日付項目(振込書作成日, parameter) : RString.EMPTY);
-            }
-
+        if (entity != null) {
+            FlexibleDate 決定日 = entity.get決定年月日();
+            csvEntity.set決定日(get日付項目(決定日, parameter));
+            Decimal 保決定利用負担額 = entity.get本人支払額();
+            csvEntity.set保決定利用負担額(保決定利用負担額 != null ? numToRString(保決定利用負担額) : RString.EMPTY);
+            csvEntity.set保決定支給区分(entity.get判定_支給区分コード());
+            Decimal 保決定高額支給額 = entity.get支給金額();
+            csvEntity.set保決定高額支給額(保決定高額支給額 != null ? numToRString(保決定高額支給額) : RString.EMPTY);
+            csvEntity.set保決定不支給理由(entity.get不支給理由());
+            csvEntity.set審査方法(entity.get審査方法区分());
+            FlexibleYearMonth 保決定送付年月 = entity.get判定結果送付年月();
+            csvEntity.set保決定送付年月(get年月(保決定送付年月, parameter));
+            FlexibleDate 通知書作成日 = entity.get決定通知書作成年月日();
+            csvEntity.set通知書作成日(get日付項目(通知書作成日, parameter));
+            FlexibleDate 振込書作成日 = entity.get振込通知書作成年月日();
+            csvEntity.set振込書作成日(get日付項目(振込書作成日, parameter));
         }
     }
 
     private void set支給審査決定(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
-        if (entity.get事業給付対象者合計() == null) {
-            if (isNotNull(entity.get支給審査決定())) {
-                FlexibleYearMonth 国決定年月 = entity.get支給審査決定().getKetteiYM();
-                csvEntity.set国決定年月(国決定年月 != null ? get年月(国決定年月, parameter) : RString.EMPTY);
-                csvEntity.set国決定通知書ＮＯ(entity.get支給審査決定().getTsuchishoNo());
-                Decimal 国決定利用負担額 = entity.get支給審査決定().getRiyoshaFutanGaku();
-                csvEntity.set国決定利用負担額(numToRString(国決定利用負担額));
-                csvEntity.set国決定支給区分(entity.get支給審査決定().getShikyuKubunCode());
-                Decimal 国決定高額支給額 = entity.get支給審査決定().getKogakuShikyuGaku();
-                csvEntity.set国決定高額支給額(numToRString(国決定高額支給額));
-                FlexibleYearMonth 国決定受取年月 = entity.get支給審査決定().getKetteishaUketoriYM();
-                csvEntity.set国決定受取年月(国決定受取年月 != null ? get年月(国決定受取年月, parameter) : RString.EMPTY);
-            }
-        } else {
-            if (isNotNull(entity.get事業支給審査決定())) {
-                FlexibleYearMonth 国決定年月 = entity.get事業支給審査決定().getKetteiYM();
-                csvEntity.set国決定年月(国決定年月 != null ? get年月(国決定年月, parameter) : RString.EMPTY);
-                csvEntity.set国決定通知書ＮＯ(entity.get事業支給審査決定().getTsuchishoNo());
-                Decimal 国決定利用負担額 = entity.get事業支給審査決定().getRiyoshaFutanGaku();
-                csvEntity.set国決定利用負担額(numToRString(国決定利用負担額));
-                csvEntity.set国決定支給区分(entity.get事業支給審査決定().getShikyuKubunCode());
-                Decimal 国決定高額支給額 = entity.get事業支給審査決定().getJigyoKogakuShikyuGaku();
-                csvEntity.set国決定高額支給額(numToRString(国決定高額支給額));
-                csvEntity.set国決定受取年月(RString.EMPTY);
-            }
+        if (entity != null) {
+            FlexibleYearMonth 国決定年月 = entity.get決定年月();
+            csvEntity.set国決定年月(get年月(国決定年月, parameter));
+            csvEntity.set国決定通知書ＮＯ(entity.get通知書番号());
+            Decimal 国決定利用負担額 = entity.get利用者負担額();
+            csvEntity.set国決定利用負担額(numToRString(国決定利用負担額));
+            csvEntity.set国決定支給区分(entity.get決定_支給区分コード());
+            Decimal 国決定高額支給額 = entity.get決定_高額支給額();
+            csvEntity.set国決定高額支給額(numToRString(国決定高額支給額));
+            FlexibleYearMonth 国決定受取年月 = entity.get決定者受取年月();
+            csvEntity.set国決定受取年月(get年月(国決定受取年月, parameter));
         }
     }
 
     private void set給付対象者明細(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
 
-        if (isNotNull(entity.get給付対象者明細()) && isNotNull(entity.get給付対象者合計())) {
-            csvEntity.set備考算定基準(entity.get給付対象者明細().getKogakuKyufuKonkyo());
+        if (entity != null) {
+            csvEntity.set備考算定基準(entity.get高額給付根拠());
             RString 国保連委託なし = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             csvEntity.set国保連委託なし(国保連委託なし);
-            csvEntity.set高額自動償還(entity.get給付対象者合計().getKogakuTaishoGaiFlag());
-            csvEntity.set利用者負担段階(get高額給付根拠(entity.get給付対象者明細().getKogakuKyufuKonkyo()));
+            //TODO 仕様変更
+            csvEntity.set高額自動償還(entity.is自動償還対象フラグ());
+            csvEntity.set利用者負担段階(get高額給付根拠(entity.get高額給付根拠()));
         }
     }
 
@@ -603,7 +531,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     }
 
     private RString get日付項目(FlexibleDate 生年月日, HanyoListKogakuKaigoProcessParameter parameter) {
-
+        if (生年月日 == null || 生年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
         if (!parameter.isHizukeHeshu()) {
             return 生年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
         } else {
@@ -612,6 +542,9 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     }
 
     private RString get年月(FlexibleYearMonth 年月, HanyoListKogakuKaigoProcessParameter parameter) {
+        if (年月 == null || 年月.isEmpty()) {
+            return RString.EMPTY;
+        }
         if (!parameter.isHizukeHeshu()) {
             return 年月.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         } else {
@@ -619,11 +552,11 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private RString numToRString(Decimal 数字) {
-        if (数字 == null) {
+    private RString numToRString(Decimal 項目) {
+        if (項目 == null) {
             return RString.EMPTY;
         }
-        return new RString(数字.toString());
+        return new RString(項目.toString());
     }
 
     private RString get高額給付根拠(RString 高額給付根拠) {
@@ -631,7 +564,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         RString 世帯の所得区分コード;
         RString 本人の所得区分コード;
         RString 老齢福祉年金受給の有無;
-        if (高額給付根拠.trim().isEmpty()) {
+        if (高額給付根拠 == null || 高額給付根拠.trim().isEmpty()) {
             return RString.EMPTY;
         } else {
             List<RString> list = 高額給付根拠.toRStringList();

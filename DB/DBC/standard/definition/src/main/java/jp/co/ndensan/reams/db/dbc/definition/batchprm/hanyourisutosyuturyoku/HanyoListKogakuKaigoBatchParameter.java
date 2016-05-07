@@ -151,6 +151,6 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
                 tomokumeFuka,
                 rebanFuka,
                 hizukeHeshu,
-                null, null);
+                null, null, null);
     }
 }

@@ -61,11 +61,47 @@
         DbT4001."minashiCode" as みなし要介護区分コード,
         DbV4001."kyuSochishaFlag" as 旧措置フラグ,
         DbV4001."chokkinIdoJiyuCode" as 直近異動事由コード,
-        DbT3055.*,
-        DbT3056.*,
-        DbT3057.*,
-        DbT3058.*,
-        DbT3054.*,
+        DbT3056."dbT3056KogakuShikyuShinsei_shiharaiBasho" as 支払場所,
+        DbT3056."dbT3056KogakuShikyuShinsei_shiharaiKaishiYMD" as 支払期間開始年月日,
+        DbT3056."dbT3056KogakuShikyuShinsei_shiharaiShuryoYMD" as 支払期間終了年月日,
+        DbT3056."dbT3056KogakuShikyuShinsei_shiharaiKaishiTime" as 支払窓口開始時間,
+        DbT3056."dbT3056KogakuShikyuShinsei_shiharaiShuryoTime" as 支払窓口終了時間,
+        DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM" as サービス提供年月,
+        DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo" as 履歴番号,
+        DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" as 証記載保険者番号,
+        DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD" as 申請年月日,
+        DbT3056."dbT3056KogakuShikyuShinsei_shinseiRiyu" as 申請理由,
+        DbT3056."dbT3056KogakuShikyuShinsei_shinseishaKubun" as 申請者区分,
+        DbT3056."dbT3056KogakuShikyuShinsei_shinseishaShimei" as 申請者氏名,
+        DbT3056."dbT3056KogakuShikyuShinsei_shinseishaShimeiKana" as 申請者氏名カナ,
+        DbT3056."dbT3056KogakuShikyuShinsei_shinseishaTelNo" as 申請者電話番号,
+        DbT3056."dbT3056KogakuShikyuShinsei_uketsukeYMD" as 受付年月日,
+        DbT3056."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" as 支払方法区分コード,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" as 合計_高額支給額,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceHiyoGokeiGakuGokei" as サービス費用合計額合計,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_riyoshaFutanGakuGokei" as 利用者負担額合計,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" as 算定基準額,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_shiharaiSumiKingakuGokei" as 支払済金額合計,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" as 対象者受取年月,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" as 対象者判定審査年月,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag" as 自動償還対象フラグ,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD" as 決定年月日,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_honninShiharaiGaku" as 本人支払額,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_shikyuKubunCode" as 判定_支給区分コード,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_shikyuKingaku" as 支給金額,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_fushikyuRiyu" as 不支給理由,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" as 審査方法区分,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM" as 判定結果送付年月,
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" as 決定通知書作成年月日,  
+        DbT3057."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" as 振込通知書作成年月日,
+        DbT3058."dbT3058KogakuShikyuShinsaKettei_tsuchishoNo" as 通知書番号,
+        DbT3058."dbT3058KogakuShikyuShinsaKettei_riyoshaFutanGaku" as 利用者負担額,
+        DbT3058."dbT3058KogakuShikyuShinsaKettei_shikyuKubunCode" as 決定_支給区分コード,
+        DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteiYM" as 決定年月,
+        DbT3058."dbT3058KogakuShikyuShinsaKettei_kogakuShikyuGaku" as 決定_高額支給額,  
+        DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" as 決定者受取年月,      
+        DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_kogakuKyufuKonkyo" as 高額給付根拠,
+        koza.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From 
@@ -133,13 +169,13 @@
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
 
         Where 1 = 1
-        <if test="serviceYmFrom != null">
+        <if test="serviceYmFrom != null and !serviceYmFrom.isEmpty()">
             AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[>=]]>#{serviceYmFrom}
         </if>
-        <if test="serviceYmTo != null">
+        <if test="serviceYmTo != null and !serviceYmTo.isEmpty()">
             AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[<=]]>#{serviceYmTo}
         </if>
-        <if test="shinsaHoho != 0">
+        <if test="shinsaHoho != 0 and shinsaHoho != null and !shinsaHoho.isEmpty()">
             AND DbT3057."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" = #{shinsaHoho}
         </if>
         <if test="taishosha == 1 and santeiKijun != 0">
@@ -149,37 +185,37 @@
             AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_shiharaiSumiKingakuGokei" <![CDATA[<>]]> 0
             AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" <![CDATA[<>]]> 0
         </if>
-        <if test="santeiKijun != 0">
+        <if test="santeiKijun != 0 and santeiKijun != null and !santeiKijun.isEmpty()">
             AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijun}
         </if>
-        <if test="shisehiFrom != null">
+        <if test="shisehiFrom != null and !shisehiFrom.isEmpty()">
             AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD"<![CDATA[>=]]>#{shisehiFrom}
         </if>
-        <if test="shisehiTo != null">
+        <if test="shisehiTo != null and !shisehiTo.isEmpty()">
             AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD"<![CDATA[<=]]>#{shisehiTo}
         </if>
-        <if test="hokemonoKeteihiFrom != null">
+        <if test="hokemonoKeteihiFrom != null and !hokemonoKeteihiFrom.isEmpty()">
             AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[>=]]>#{hokemonoKeteihiFrom}
         </if>
-        <if test="hokemonoKeteihiTo != null">
+        <if test="hokemonoKeteihiTo != null and !hokemonoKeteihiTo.isEmpty()">
             AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[<=]]>#{hokemonoKeteihiTo}
         </if>
-        <if test="kokuhoreKeteiymFrom != null">
+        <if test="kokuhoreKeteiymFrom != null and !kokuhoreKeteiymFrom.isEmpty()">
             AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[>=]]>#{kokuhoreKeteiymFrom}
         </if>
-        <if test="kokuhoreKeteiymTo != null">
+        <if test="kokuhoreKeteiymTo != null and !kokuhoreKeteiymTo.isEmpty()">
             AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[<=]]>#{kokuhoreKeteiymTo}
         </if>
-        <if test="kokuhoreSofuYMFrom != null">
+        <if test="kokuhoreSofuYMFrom != null and !kokuhoreSofuYMFrom.isEmpty()">
             AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[>=]]>#{kokuhoreSofuYMFrom}
         </if>
-        <if test="kokuhoreSofuYMTo != null">
+        <if test="kokuhoreSofuYMTo != null and !kokuhoreSofuYMTo.isEmpty()">
             AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[<=]]>#{kokuhoreSofuYMTo}
         </if>
-        <if test="keteijohoUketoriymFrom != null">
+        <if test="keteijohoUketoriymFrom != null and !keteijohoUketoriymFrom.isEmpty()">
             AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[>=]]>#{keteijohoUketoriymFrom}
         </if>
-        <if test="keteijohoUketoriymTo != null">
+        <if test="keteijohoUketoriymTo != null and !keteijohoUketoriymTo.isEmpty()">
             AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[<=]]>#{keteijohoUketoriymTo}
         </if>
        <if test="shinseiKubun == 1">
@@ -291,10 +327,10 @@
         <if test="shiharaiSaki == 2">
             AND DbT3056."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" = '1'
         </if>
-       <if test="kiyuKikanCode != null">
+       <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
         </if>
-       UNION ALL
+  UNION ALL
         SELECT
         DbV1001."hihokenshaNo" as 被保険者番号,
         DbV1001."shichosonCode" as 市町村コード,
@@ -346,11 +382,47 @@
         DbT4001."minashiCode" as みなし要介護区分コード,
         DbV4001."kyuSochishaFlag" as 旧措置フラグ,
         DbV4001."chokkinIdoJiyuCode" as 直近異動事由コード,
-        DbT3109.*,
-        DbT3110.*,
-        DbT3111.*,
-        DbT3112.*,
-        DbT3108.*,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiBasho" as 支払場所,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiKaishiYMD" as 支払期間開始年月日,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiShuryoYMD" as 支払期間終了年月日,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiKaishiTime" as 支払窓口開始時間,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiShuryoTime" as 支払窓口終了時間,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" as サービス提供年月,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_rirekiNo" as 履歴番号,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo" as 証記載保険者番号,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseiYMD" as 申請年月日,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseiRiyu" as 申請理由,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseishaKubun" as 申請者区分,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseishaShimei" as 申請者氏名,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseishaShimeiKana" as 申請者氏名カナ,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseishaTelNo" as 申請者電話番号,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_uketsukeYMD" as 受付年月日,
+        DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiHohoKubunCode" as 支払方法区分コード,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_jigyoKogakuShikyuGaku" as 合計_高額支給額,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceHiyoGokeiGakuGokei" as サービス費用合計額合計,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_riyoshaFutanGakuGokei" as 利用者負担額合計,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_santeiKijunGaku" as 算定基準額,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_shiharaiSumiKingakuGokei" as 支払済金額合計,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM" as 対象者受取年月,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" as 対象者判定審査年月,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag" as 自動償還対象フラグ,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_ketteiYMD" as 決定年月日,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_honninShiharaiGaku" as 本人支払額,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shiharaiKubunCode" as 判定_支給区分コード,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shiharaiKingaku" as 支給金額,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_fushikyuRiyu" as 不支給理由,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shinsaHohoKubun" as 審査方法区分,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_hanteiKekkaSofuYM" as 判定結果送付年月,
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" as 決定通知書作成年月日,  
+        DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" as 振込通知書作成年月日,
+        DbT3112."dbT3112KogakuShikyuShinsaKettei_tsuchishoNo" as 通知書番号,
+        DbT3112."dbT3112KogakuShikyuShinsaKettei_riyoshaFutanGaku" as 利用者負担額,
+        DbT3112."dbT3112KogakuShikyuShinsaKettei_shikyuKubunCode" as 決定_支給区分コード,
+        DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteiYM" as 決定年月,
+        DbT3112."dbT3112KogakuShikyuShinsaKettei_jigyoKogakuShikyuGaku" as 決定_高額支給額,  
+        DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteishaUketoriYM" as 決定者受取年月,      
+        DbT3108."dbT3108JigyoKogakuKyufuTaishoshaMeisai_jigyoKogakuKyufuKonkyo" as 高額給付根拠,
+        koza.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From 
@@ -360,7 +432,7 @@
         ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_hihokenshaNo" = DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" = DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceTeikyoYM"
         AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_rirekiNo" = (select MAX("rirekiNo") from 
-                  rgdb."DbT3056KogakuShikyuShinsei" where  "hihokenshaNo"=DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo"
+                  rgdb."DbT3110JigyoKogakuShikyuShinsei" where  "hihokenshaNo"=DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND "serviceTeikyoYM"=DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceTeikyoYM")
         LEFT OUTER JOIN 
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.noDeleted_DbT3111JigyoKogakuShikyuHanteiKekka" />) As DbT3111
@@ -374,7 +446,7 @@
         AND DbT3112."dbT3112KogakuShikyuShinsaKettei_serviceTeikyoYM" = DbT3110."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM"
         AND DbT3112."dbT3112KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" = DbT3110."dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo"
         AND DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteishaUketoriYM" =(select MAX("ketteishaUketoriYM") from 
-                  rgdb."DbT3058KogakuShikyuShinsaKettei" where  "hihokenshaNo"=DbT3110."dbT3110JigyoKogakuShikyuShinsei_hihokenshaNo"
+                  rgdb."DbT3112KogakuShikyuShinsaKettei" where  "hihokenshaNo"=DbT3110."dbT3110JigyoKogakuShikyuShinsei_hihokenshaNo"
         AND "serviceTeikyoYM"=DbT3110."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM"
         AND "shoKisaiHokenshaNo"=DbT3110."dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo")
         LEFT OUTER JOIN 
@@ -407,7 +479,7 @@
         AND DbT4001."edaban" = DbV4001."edaban"
         AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
         LEFT OUTER JOIN 
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.kozaSearchResult" />) AS koza
         ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
@@ -417,13 +489,13 @@
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
         Where 1 = 1
-        <if test="serviceYmFrom != null">
+        <if test="serviceYmFrom != null and !serviceYmFrom.isEmpty()">
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[>=]]>#{serviceYmFrom}
         </if>
-        <if test="serviceYmTo != null">
+        <if test="serviceYmTo != null and !serviceYmTo.isEmpty()">
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[<=]]>#{serviceYmTo}
         </if>
-        <if test="shinsaHoho != 0">
+        <if test="shinsaHoho != 0 and shinsaHoho != null and !shinsaHoho.isEmpty()">
             AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shinsaHohoKubun" = #{shinsaHoho}
         </if>
         <if test="taishosha == 1 and santeiKijun != 0">
@@ -433,37 +505,37 @@
             AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_shiharaiSumiKingakuGokei" <![CDATA[<>]]> 0
             AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_jigyoKogakuShikyuGaku" <![CDATA[<>]]> 0
         </if>
-        <if test="santeiKijun != 0">
+        <if test="santeiKijun != 0 and santeiKijun != null and !santeiKijun.isEmpty()">
             AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijun}
         </if>
-        <if test="shisehiFrom != null">
+        <if test="shisehiFrom != null and !shisehiFrom.isEmpty()">
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseiYMD"<![CDATA[>=]]>#{shisehiFrom}
         </if>
-        <if test="shisehiTo != null">
+        <if test="shisehiTo != null and !shisehiTo.isEmpty()">
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseiYMD"<![CDATA[<=]]>#{shisehiTo}
         </if>
-        <if test="hokemonoKeteihiFrom != null">
+        <if test="hokemonoKeteihiFrom != null and !hokemonoKeteihiFrom.isEmpty()">
             AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[>=]]>#{hokemonoKeteihiFrom}
         </if>
-        <if test="hokemonoKeteihiTo != null">
+        <if test="hokemonoKeteihiTo != null and !hokemonoKeteihiTo.isEmpty()">
             AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[<=]]>#{hokemonoKeteihiTo}
         </if>
-        <if test="kokuhoreKeteiymFrom != null">
+        <if test="kokuhoreKeteiymFrom != null and !kokuhoreKeteiymFrom.isEmpty()">
             AND DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[>=]]>#{kokuhoreKeteiymFrom}
         </if>
-        <if test="kokuhoreKeteiymTo != null">
+        <if test="kokuhoreKeteiymTo != null and !kokuhoreKeteiymTo.isEmpty()">
             AND DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[<=]]>#{kokuhoreKeteiymTo}
         </if>
-        <if test="kokuhoreSofuYMFrom != null">
+        <if test="kokuhoreSofuYMFrom != null and !kokuhoreSofuYMFrom.isEmpty()">
             AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[>=]]>#{kokuhoreSofuYMFrom}
         </if>
-        <if test="kokuhoreSofuYMTo != null">
+        <if test="kokuhoreSofuYMTo != null and !kokuhoreSofuYMTo.isEmpty()">
             AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[<=]]>#{kokuhoreSofuYMTo}
         </if>
-        <if test="keteijohoUketoriymFrom != null">
+        <if test="keteijohoUketoriymFrom != null and !keteijohoUketoriymFrom.isEmpty()">
             AND DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[>=]]>#{keteijohoUketoriymFrom}
         </if>
-        <if test="keteijohoUketoriymTo != null">
+        <if test="keteijohoUketoriymTo != null and !keteijohoUketoriymTo.isEmpty()">
             AND DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[<=]]>#{keteijohoUketoriymTo}
         </if>
        <if test="shinseiKubun == 1">
@@ -575,19 +647,19 @@
         <if test="shiharaiSaki == 2">
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiHohoKubunCode" = '1'
         </if>
-        <if test="kiyuKikanCode != null">
+        <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
-        </if> 
+        </if>
     </sql>
         
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity">
-        <id column="dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"/>
+<!--        <id column="dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"/>
         <id column="dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"/>
         <id column="dbT3055KogakuKyufuTaishoshaGokei_rirekiNo"/>
         <id column="dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo"/>
         <id column="dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceTeikyoYM"/>
-        <id column="dbT3109JigyoKogakuKyufuTaishoshaGokei_rirekiNo"/>
+        <id column="dbT3109JigyoKogakuKyufuTaishoshaGokei_rirekiNo"/>-->
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -638,26 +710,46 @@
         <result property="旧措置フラグ" column="旧措置フラグ"/>
         <result property="みなし要介護区分コード" column="みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="直近異動事由コード" column="直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <association property="給付対象者合計" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
-        <association property="支給申請" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"/>
-        <association property="支給判定結果"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
-        <association property="支給審査決定"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
-        <association property="給付対象者明細"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3054KogakuKyufuTaishoshaMeisaiEntity"/>
-        <association property="事業給付対象者合計" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity"/>
-        <association property="事業支給申請" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"/>
-        <association property="事業支給審査決定"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>
-        <association property="事業支給判定結果"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.ResultMap_DbT3111JigyoKogakuShikyuHanteiKekkaEntity"/>
-        <association property="事業給付対象者明細"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity"/>
+        <result property="支払場所" column="支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払期間開始年月日" column="支払期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支払期間終了年月日" column="支払期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支払窓口開始時間" column="支払窓口開始時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払窓口終了時間" column="支払窓口終了時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="申請年月日" column="申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="申請理由" column="申請理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者区分" column="申請者区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請者氏名" column="申請者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="申請者氏名カナ" column="申請者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="申請者電話番号" column="申請者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="受付年月日" column="受付年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="支払方法区分コード" column="支払方法区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合計_高額支給額" column="合計_高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="サービス費用合計額合計" column="サービス費用合計額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="利用者負担額合計" column="利用者負担額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="算定基準額" column="算定基準額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支払済金額合計" column="支払済金額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="対象者受取年月" column="対象者受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="対象者判定審査年月" column="対象者判定審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="自動償還対象フラグ" column="自動償還対象フラグ"/>
+        <result property="決定年月日" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="本人支払額" column="本人支払額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="判定_支給区分コード" column="判定_支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支給金額" column="支給金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="不支給理由" column="不支給理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="審査方法区分" column="審査方法区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="判定結果送付年月" column="判定結果送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="決定通知書作成年月日" column="決定通知書作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="振込通知書作成年月日" column="振込通知書作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="通知書番号" column="通知書番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担額" column="利用者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="決定_支給区分コード" column="決定_支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="決定年月" column="決定年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="決定_高額支給額" column="決定_高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="決定者受取年月" column="決定者受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="高額給付根拠" column="高額給付根拠" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="口座情報"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
         <association property="宛名" 
@@ -665,4 +757,78 @@
         <association property="宛先" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>  
+    
+    <sql id="kozaSearchResult">
+        SELECT
+        koza.*,
+        kinyuKikan.*,
+        yokinShubetsu.*,
+        shiten.*,
+        shunoKanri.*
+        FROM (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0310KozaMapper.noDeleted_UaT0310Koza"/>
+        ) AS koza
+        INNER JOIN
+        (SELECT "gyomubetsuPrimaryKey", "kamokuCode" FROM rgua."UaT0100GyomubetsuPrimaryKey"
+        WHERE "kamokuCode" IN
+        <foreach item="kamokuCodelist" index="index" collection="kamokuCodelist" open="(" separator="," close=")">
+            #{kamokuCodelist}
+        </foreach>
+        <if test="usesKoza_gyomuCode">
+            AND "gyomuCode"=#{koza_gyomuCode}
+        </if>
+        <if test="usesKoza_subGyomuCode">
+            AND "subGyomuCode"=#{koza_subGyomuCode}
+        </if>
+        <if test="usesKoza_gyomubetsuPrimaryKey">
+            AND "gyomubetsuPrimaryKey"=#{koza_gyomubetsuPrimaryKey}
+        </if>
+        ) AS pkey
+        ON koza."uaT0310Koza_gyomubetsuPrimaryKey"=pkey."gyomubetsuPrimaryKey"
+        LEFT JOIN (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0302KinyuKikanMapper.noDeleted_UaT0302KinyuKikan"/>
+        ) AS kinyuKikan
+        ON koza."uaT0310Koza_kinyuKikanCode"=kinyuKikan."uaT0302KinyuKikan_kinyuKikanCode"
+        <if test="usesKoza_kijunYMD">
+            AND kinyuKikan."uaT0302KinyuKikan_kaishiYMD" <![CDATA[<=]]> #{koza_kijunYMD}
+            AND kinyuKikan."uaT0302KinyuKikan_shuryoYMD" <![CDATA[>=]]> #{koza_kijunYMD}
+        </if>
+        LEFT JOIN (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0301YokinShubetsuPatternMapper.noDeleted_UaT0301YokinShubetsuPattern"/>
+        ) AS yokinShubetsu
+        ON kinyukikan."uaT0302KinyuKikan_yokinShubetsuPatternCode"=yokinShubetsu."uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode"
+        LEFT JOIN (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0303KinyuKikanShitenMapper.noDeleted_UaT0303KinyuKikanShiten"/>
+        ) AS shiten
+        ON kinyuKikan."uaT0302KinyuKikan_kinyuKikanCode" = shiten."uaT0303KinyuKikanShiten_kinyuKikanCode"
+        LEFT JOIN
+        (SELECT
+        <include refid="jp.co.ndensan.reams.ur.urc.persistence.db.mapper.basic.shuno.shunokanri.IUrT0700ShunoKanriMapper.allColumn_UrT0700ShunoKanri"/>
+        FROM rshare."UrT0700ShunoKanri"
+        ) AS shunoKanri
+        ON koza."uaT0310Koza_shikibetsuCode"=shunoKanri."urT0700ShunoKanri_shikibetsuCode"
+        AND pkey."kamokuCode"=shunoKanri."urT0700ShunoKanri_kamokuCode"
+        AND shunoKanri."urT0700ShunoKanri_choteiNendo"=#{koza_genNendo}
+        <where>
+            <if test="usesKoza_kijunYMD">
+                koza."uaT0310Koza_kaishiYMD" <![CDATA[<=]]> #{koza_kijunYMD}
+                AND koza."uaT0310Koza_shuryoYMD" <![CDATA[>=]]> #{koza_kijunYMD}
+            </if>
+            <if test="usesKoza_kozaId">
+                AND koza."uaT0310Koza_kozaId"=#{koza_kozaId}
+            </if>
+            <if test="usesKoza_shikibetsuCode">
+                AND koza."uaT0310Koza_shikibetsuCode"=#{koza_shikibetsuCode}
+            </if>
+            <if test="usesKoza_gyomuKoyuKey">
+                AND koza."uaT0310Koza_gyomuKoyuKey" IN
+                <foreach item="koza_gyomuKoyuKey" index="index" collection="koza_gyomuKoyuKey" open="(" separator="," close=")">
+                    #{koza_gyomuKoyuKey}
+                </foreach>
+            </if>
+            <if test="usesKoza_yotoKubun">
+                AND koza."uaT0310Koza_yotoKubun"=#{koza_yotoKubun}
+            </if>
+        </where>
+    </sql>
 </mapper>
