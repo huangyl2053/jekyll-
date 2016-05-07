@@ -33,8 +33,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YoshikiNinonanaHosei {
 
-    private static final RString MSG_JI = new RString("計");
-    private static final RString MSG_JIEGUO = new RString("合計計算結果");
+    private static final RString MSG_KEE = new RString("計");
+    private static final RString MSG_GOUKEIKEISANNKEKKA = new RString("合計計算結果");
     private static final RString 更新 = new RString("更新");
     private static final RString 削除 = new RString("削除");
     private static final RString 様式種類_039 = new RString("039");
@@ -113,7 +113,7 @@ public class YoshikiNinonanaHosei {
         if (handler.is整合性チェック_NG() && !ResponseHolder.isReRequest()) {
             WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
                     UrWarningMessages.相違.getMessage().replace(
-                            MSG_JI.toString(), MSG_JIEGUO.toString()).evaluate());
+                            MSG_KEE.toString(), MSG_GOUKEIKEISANNKEKKA.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
 
         }
