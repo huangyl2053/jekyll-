@@ -205,8 +205,10 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void afterExecute() {
-        preEntity.get請求基本List().clear();
-        preEntity.get請求基本List().addAll(lstDbt3038List);
+        if (preEntity.get請求基本List() != null && !preEntity.get請求基本List().isEmpty()) {
+            preEntity.get請求基本List().clear();
+            preEntity.get請求基本List().addAll(lstDbt3038List);
+        }
         List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
 
         for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
