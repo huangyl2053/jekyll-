@@ -64,4 +64,12 @@ public class WaritsukeEntity {
     private RString shinseishoKanriNo;
     private int ninteichosaIraiRirekiNo;
     private RString ninteiChosainCode;
+    private RString hokenshaNo;
+    private RString ninteiChosaItakusakiCode;
+    private RString renrakusakiTuzukigara;
+    private YubinNo renrakusakiYubinNo;
+    private AtenaJusho renrakusakiJusho;
+    private TelNo renrakusakiTelNo;
+    private TelNo renrakusakiKeitaiTelNo;
+    private AtenaMeisho renrakusakiShimei;
 }
