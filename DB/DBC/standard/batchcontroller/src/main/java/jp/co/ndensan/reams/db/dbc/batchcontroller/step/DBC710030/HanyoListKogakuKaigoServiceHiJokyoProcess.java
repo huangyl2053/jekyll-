@@ -311,7 +311,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
 
         builder = new RStringBuilder();
         builder.append(金融機関);
-        builder.append(parameter.getKiyuKikanCode() == null
+        builder.append(parameter.getKiyuKikanCode() == null || parameter.getKiyuKikanCode().isEmpty()
                 ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
                 .concat(右記号).concat(parameter.getKiyuKikanName()));
         出力条件.add(builder.toRString());
