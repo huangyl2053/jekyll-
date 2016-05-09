@@ -48,13 +48,22 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.TsuzukigaraCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -115,11 +124,13 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     private RString spoolWorkPath;
     private FileSpoolManager manager;
     private int int_連番;
+    private boolean hasCSVデータ;
 
     @Override
     protected void initialize() {
         mybatisPrm = processPrm.toMyBatisParameter();
         personalDataList = new ArrayList<>();
+        hasCSVデータ = false;
         //TODO システム日時は使用なし
 //        RDateTime システム日時 = RDate.getNowDateTime();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -199,10 +210,24 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), t.getHihokenshaNo());
         PersonalData personalData = PersonalData.of(t.getPsmEntity().getShikibetsuCode(), expandedInformations);
         personalDataList.add(personalData);
+        hasCSVデータ = true;
     }
 
     @Override
     protected void afterExecute() {
+        if (mybatisPrm.isKomukuFukaMeyi() && !hasCSVデータ) {
+            eucCsvWriterJunitoJugo.writeLine(new HanyoListHihokenshadaichoCSVEntity(
+                    RString.EMPTY, ShikibetsuCode.EMPTY, RString.EMPTY, AtenaMeisho.EMPTY, AtenaKanaMeisho.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, TsuzukigaraCode.EMPTY, SetaiCode.EMPTY, AtenaMeisho.EMPTY, ZenkokuJushoCode.EMPTY,
+                    RString.EMPTY, RString.EMPTY, AtenaJusho.EMPTY, AtenaBanchi.EMPTY, Katagaki.EMPTY, GyoseikuCode.EMPTY,
+                    RString.EMPTY, ChikuCode.EMPTY, ChikuCode.EMPTY, ChikuCode.EMPTY, TelNo.EMPTY, TelNo.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, YubinNo.EMPTY, RString.EMPTY, AtenaJusho.EMPTY, AtenaBanchi.EMPTY, Katagaki.EMPTY,
+                    LasdecCode.EMPTY, RString.EMPTY, LasdecCode.EMPTY, RString.EMPTY, RString.EMPTY, AtenaMeisho.EMPTY, AtenaKanaMeisho.EMPTY,
+                    ZenkokuJushoCode.EMPTY, RString.EMPTY, RString.EMPTY, AtenaJusho.EMPTY, AtenaBanchi.EMPTY, Katagaki.EMPTY, GyoseikuCode.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY));
+        }
         outputJokenhyoFactory();
         eucCsvWriterJunitoJugo.close();
         AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
