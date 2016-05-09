@@ -121,7 +121,7 @@ public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuKanriEnt
      * @return 非課税区分（住民税減免後）
      */
     public RString get非課税区分_住民税減免後() {
-        return entity.getKazeiKubun();
+        return entity.getKazeiKubunGemmenGo();
     }
 
     /**
