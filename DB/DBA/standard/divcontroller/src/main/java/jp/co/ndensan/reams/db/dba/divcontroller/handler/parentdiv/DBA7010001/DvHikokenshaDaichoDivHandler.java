@@ -9,10 +9,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHikokenshaDaichoDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class DvHikokenshaDaichoDivHandler {
 
+    private final RString 帳票ID = new RString("DBA701001_HanyoListHihokenshaDaicho");
     private final DvHikokenshaDaichoDiv div;
 
     /**
@@ -42,6 +45,9 @@ public class DvHikokenshaDaichoDivHandler {
     public void onLoad() {
         日付抽出区分が直近非活性();
         div.getCcdHanyoListAtenaSelect().initialize();
+        div.getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701001.getReportId());
+        // TODO QA #73393 出力順ID実装方式 回復待ち  2016/01/20まで
+//        div.getCcdKogakuShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBA介護資格);
     }
 
     /**
@@ -169,7 +175,7 @@ public class DvHikokenshaDaichoDivHandler {
                 div.getRadKijunbiDate().getSelectedKey(), 基準日, 基準日時点の受給者を除く, div.getRadHani().getSelectedKey(),
                 範囲抽出日From, 範囲抽出日To, div.getChkHihokenshaJoho().getSelectedKeys(),
                 div.getRadChushutsuKijun().getSelectedKey(), div.getChkShutokuJiyu().getSelectedKeys(), div.getChkSoshitsuJiyu().getSelectedKeys(),
-                RString.EMPTY, RString.EMPTY, new RString("DBA701001_HanyoListHihokenshaDaicho"),
+                RString.EMPTY, RString.EMPTY, 帳票ID,
                 div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード(), nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢開始()),
                 nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢終了()), nullToEmpty(div.getCcdHanyoListAtenaSelect().get生年月日開始()),
                 nullToEmpty(div.getCcdHanyoListAtenaSelect().get生年月日終了()), 日期(div.getCcdHanyoListAtenaSelect().get年齢基準日()),
