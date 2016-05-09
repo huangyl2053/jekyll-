@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKo
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionSumEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaichosakusei.IHihokenshaDaichoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
@@ -204,8 +204,8 @@ public class HihokenshaDaichoSakuseiManager {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
         for (DbT1001HihokenshaDaichoEntity entity : dbT1001HihokenList) {
-            if (new Code(DonyukeitaiCode.事務構成市町村.getCode()).equals(shichosonSecurityJoho.get導入形態コード())
-                    || new Code(DonyukeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
+            if (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).equals(shichosonSecurityJoho.get導入形態コード())
+                    || new Code(DonyuKeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
                 hihokenshaEntity.setShichosonCode(entity.getShichosonCode());
                 Association association = AssociationFinderFactory.createInstance().getAssociation();
                 hihokenshaEntity.setShichosonMeisho(association.get市町村名());
@@ -296,10 +296,10 @@ public class HihokenshaDaichoSakuseiManager {
     }
 
     private HihokenshaEntity get被保険者(ShichosonSecurityJoho shichosonSecurityJoho, HihokenshaEntity hihokenshaEntity) {
-        if (new Code(DonyukeitaiCode.事務広域.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
+        if (new Code(DonyuKeitaiCode.事務広域.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
             hihokenshaEntity.setSochiHokensha(措置保険者タイトル);
-        } else if (new Code(DonyukeitaiCode.事務構成市町村.getCode()).equals(shichosonSecurityJoho.get導入形態コード())
-                || new Code(DonyukeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
+        } else if (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).equals(shichosonSecurityJoho.get導入形態コード())
+                || new Code(DonyuKeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
             hihokenshaEntity.setSochiHokensha(RString.EMPTY);
         }
         RString 合併情報区分 = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告);
