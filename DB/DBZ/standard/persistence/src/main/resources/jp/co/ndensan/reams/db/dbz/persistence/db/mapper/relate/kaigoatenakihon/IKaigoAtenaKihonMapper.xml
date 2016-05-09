@@ -83,7 +83,7 @@ and open the template in the editor.
         LEFT JOIN rgdb."DbT4001JukyushaDaicho" DbT4001
         ON  DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
         AND DbT4001."rirekiNo" = (SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
-        AND DbT4001."edaban" = (SELECT MAX("edaban") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
+        AND DbT4001."edaban" = (SELECT MAX("edaban") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND DbT4001."rirekiNo"=(SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
         AND DbT4001."ninteiYMD" IS NOT NULL
         WHERE DbT1001."shikibetsuCode" = #{shikibetsuCode}
         ORDER BY
@@ -130,7 +130,7 @@ and open the template in the editor.
         LEFT JOIN rgdb."DbT4001JukyushaDaicho" DbT4001
         ON  DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
         AND DbT4001."rirekiNo" = (SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
-        AND DbT4001."edaban" = (SELECT MAX("edaban") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
+        AND DbT4001."edaban" = (SELECT MAX("edaban") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND DbT4001."rirekiNo"=(SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
         AND DbT4001."ninteiYMD" IS NOT NULL
         WHERE DbT1001."hihokenshaNo" = #{hihokenshaNo}
         ORDER BY
