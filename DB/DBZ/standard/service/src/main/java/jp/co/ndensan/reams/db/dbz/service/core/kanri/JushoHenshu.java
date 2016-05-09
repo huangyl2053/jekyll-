@@ -102,6 +102,32 @@ public class JushoHenshu {
     }
 
     /**
+     * 宛名の情報によって、住所2を編集します。
+     *
+     * @param 住所 住所
+     * @param 番地 番地
+     * @return 住所2
+     */
+    public RString editJusho2(RString 住所, RString 番地) {
+        return editJusho2(住所, 番地, null);
+    }
+
+    /**
+     * 宛名の情報によって、住所2を編集します。
+     *
+     * @param 住所 住所
+     * @param 番地 番地
+     * @param 方書 方書
+     * @return 住所2
+     */
+    public RString editJusho2(RString 住所, RString 番地, RString 方書) {
+        if (方書 == null) {
+            return 住所.concat(番地);
+        }
+        return 住所.concat(番地).concat(RString.FULL_SPACE).concat(方書);
+    }
+
+    /**
      * 宛名の情報によって、住所を編集します。
      *
      * @param 帳票共通情報 帳票共通情報
