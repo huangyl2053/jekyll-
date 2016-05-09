@@ -774,4 +774,47 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendo, 調定年度))).
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 本算定異動_過年度_抽出開始日時取得する。
+     *
+     * @param 調定年度 調定年度
+     * @param 処理名 処理名
+     * @param サブ業務コード サブ業務コード
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select抽出開始日時_本算定異動_過年度(FlexibleYear 調定年度,
+            RString 処理名, SubGyomuCode サブ業務コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, 処理名),
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(nendo, 調定年度))).
+                order(by(DbT7022ShoriDateKanri.nendo, Order.DESC), by(DbT7022ShoriDateKanri.shoriEdaban, Order.DESC),
+                        by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 本算定異動_過年度_処理状況取得する
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理状況_本算定異動_過年度(FlexibleYear 調定年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.過年度賦課.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriEdaban, "0001"),
+                                eq(nendo, 調定年度))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }
