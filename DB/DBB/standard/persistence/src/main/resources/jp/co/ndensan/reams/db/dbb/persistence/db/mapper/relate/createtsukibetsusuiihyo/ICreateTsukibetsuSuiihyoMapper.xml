@@ -1550,6 +1550,8 @@
             SUM(GemmenJyoho."hoDankaiKanendoNinsuGoukeyi") AS "gemmenJyoho_hokenryoDankaiKanendoNinsuGoukeyi",
             SUM(GemmenJyoho."hoDankaiKanendoGemenGakuGoukei") AS "gemmenJyoho_hokenryoDankaiKanendoGemmenGakuGoukeyi"
         FROM "TmpGemmenJyoho_Ichi" AS GemmenJyoho
+        WHERE GemmenJyoho."choteiNendo" IS NULL
+            AND GemmenJyoho."fukaNendo" IS NULL
     </select>
     
     <select  id="get該当段階の過年度の人数と金額合計" resultMap="resultMap_GemmenJyoho" 
