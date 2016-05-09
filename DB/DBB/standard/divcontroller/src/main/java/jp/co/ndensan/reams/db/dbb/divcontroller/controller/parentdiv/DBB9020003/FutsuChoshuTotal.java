@@ -137,7 +137,7 @@ public class FutsuChoshuTotal {
     public ResponseData<FutsuChoshuTotalDiv> onClick_btnFuchoKibetsuUpdate(FutsuChoshuTotalDiv div) {
         getHandler(div).現年度入力チェック();
         getHandler(div).過年度入力チェック();
-        getHandler(div).選択数チェック();
+
         getHandler(div).set保存処理();
         RStringBuilder message = new RStringBuilder(MSG);
         message.append(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedValue()).append(MSG_NENNDO);
