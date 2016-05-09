@@ -17,12 +17,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -44,8 +41,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- *
  * 介護保険住所地特例適用・変更・終了届のPrintクラスです。
+ *
  * @reamsid_L DBA-0540-100 dongyabin
  */
 public class JushochiTokureiTekiyoHenkoShuryoTodoke {
@@ -64,12 +61,11 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         JyushochiTokureiTekiyoHenkoProerty proerty = new JyushochiTokureiTekiyoHenkoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JyushochiTokureiTekiyoHenkoReportSource> assembler = createAssembler(proerty, reportManager)) {
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
+                ReportSourceWriter<JyushochiTokureiTekiyoHenkoReportSource> reportSourceWrite = new ReportSourceWriter(assembler);
+                RString 認証者 = ReportUtil.get認証者情報(SubGyomuCode.DBA介護資格, proerty.reportId(), null,
+                        NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWrite).ninshoshaYakushokuMei;
                 for (JyushochiTokureiTekiyoHenkoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
-                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                        認証者)) {
                     ReportSourceWriter<JyushochiTokureiTekiyoHenkoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
