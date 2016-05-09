@@ -170,6 +170,8 @@ public class MainPanelHandler {
         }
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
         if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+            List<dgResultList_Row> list = new ArrayList<>();
+            div.getResultListPanel().getDgResultList().setDataSource(list);
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
     }
@@ -237,12 +239,15 @@ public class MainPanelHandler {
      * 認定調査委託先ドロップダウンリストと認定調査員値取得を検索する。
      */
     public void set認定調査委託先コード() {
-        LasdecCode 市町村コード;
+        LasdecCode 市町村コード = LasdecCode.EMPTY;
         IUrControlData controlData = UrControlDataFactory.createInstance();
         loginId = controlData.getLoginInfo().getUserId();
         List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(loginId);
-        KoseiShichosonJoho 構成市町村情報取得 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID.get(0).getItemId());
-        市町村コード = 構成市町村情報取得 == null ? LasdecCode.EMPTY : 構成市町村情報取得.get市町村コード();
+        if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
+            KoseiShichosonJoho 構成市町村情報取得 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID.get(0).getItemId());
+            市町村コード = 構成市町村情報取得 == null ? LasdecCode.EMPTY : 構成市町村情報取得.get市町村コード();
+        }
+
         INinteichosaScheduleMybatisParameter mybatisParameter = INinteichosaScheduleMybatisParameter.createParam(RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -343,6 +348,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
         }
@@ -404,6 +411,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
         }
@@ -466,6 +475,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -528,6 +539,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -590,7 +603,10 @@ public class MainPanelHandler {
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
-            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null
+                    || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
         }
