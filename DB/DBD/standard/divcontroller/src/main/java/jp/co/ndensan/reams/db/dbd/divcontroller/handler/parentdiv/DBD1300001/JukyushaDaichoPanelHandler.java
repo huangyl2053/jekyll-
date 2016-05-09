@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 汎用リスト受給者台帳２
  *
- *
+ * @reamsid_L DBD-1810-010 wanghui
  */
 public class JukyushaDaichoPanelHandler {
 
@@ -53,6 +53,10 @@ public class JukyushaDaichoPanelHandler {
         date.setKey(抽出年月日);
         dataSource.add(date);
         div.getRadChushutsuTaisho().setDisabledItem(dataSource);
+        div.getDdlChushutsuYmd().setDisabled(false);
+        div.getTxtChushutsuYMD().setDisabled(false);
+        div.getTxtIryokikan().setDisabled(true);
+        div.getTxtChosaItakusaki().setDisabled(true);
     }
 
     /**
@@ -60,10 +64,10 @@ public class JukyushaDaichoPanelHandler {
      *
      */
     public void set抽出年月日() {
-        div.getTxtIryokikan().setDisabled(true);
-        div.getTxtChosaItakusaki().setDisabled(true);
         div.getDdlChushutsuYmd().setDisabled(false);
         div.getTxtChushutsuYMD().setDisabled(false);
+        div.getTxtIryokikan().setDisabled(true);
+        div.getTxtChosaItakusaki().setDisabled(true);
     }
 
     /**
@@ -89,8 +93,9 @@ public class JukyushaDaichoPanelHandler {
     public void set医療機関() {
         div.getDdlChushutsuYmd().setDisabled(true);
         div.getTxtChushutsuYMD().setDisabled(true);
-        div.getTxtChosaItakusaki().setDisabled(true);
         div.getTxtIryokikan().setDisabled(false);
+        div.getTxtChosaItakusaki().setDisabled(true);
+
     }
 
     /**
@@ -106,9 +111,9 @@ public class JukyushaDaichoPanelHandler {
     }
 
     /**
-     * 境界層管理マスタリスト作成画面入力するデータより、バッチ用パラメータクラスを作成します。
+     * 「条件を保存する」ボタンを押下時、バッチパラメータを保存します。
      *
-     * @return batchPara 境界層管理マスタリストバッチパラメータ
+     * @return HanyoRisutoJyukyusyaDaichoBatchParameter
      */
     public HanyoRisutoJyukyusyaDaichoBatchParameter setBatchParameter() {
         HanyoRisutoJyukyusyaDaichoBatchParameter parameter = new HanyoRisutoJyukyusyaDaichoBatchParameter();

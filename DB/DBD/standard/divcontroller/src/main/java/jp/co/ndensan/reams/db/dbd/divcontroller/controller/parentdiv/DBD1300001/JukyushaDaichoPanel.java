@@ -25,9 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class JukyushaDaichoPanel {
 
-    private static final RString 抽出年月日 = new RString("0");
-    private static final RString 医療機関 = new RString("1");
-    private static final RString 調査委託先 = new RString("2");
+    private static final RString 抽出年月日 = new RString("1");
+    private static final RString 医療機関 = new RString("2");
+    private static final RString 調査委託先 = new RString("3");
     private static final RString BATCHID = new RString("HanyoRisutoJyukyusyaDaichoFlow");
 
     /**
