@@ -43,7 +43,9 @@ public class ShinseiSearch {
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        if (被保険者番号 != null) {
+            div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        }
         div.getPanelShokan().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
         return ResponseData.of(div).respond();
     }
@@ -57,6 +59,7 @@ public class ShinseiSearch {
     public ResponseData<ShinseiSearchDiv> onClick_SelectButton(ShinseiSearchDiv div) {
         RString yoshikiNo = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         if (yoshikiNo.startsWith(判定_21C)) {
+            ViewStateHolder.put(ViewStateKeys.表示モード, 照会_モード);
             return ResponseData.of(div).forwardWithEventName(福祉用具購入費支給).respond();
         } else if (yoshikiNo.startsWith(判定_21D)) {
             ViewStateHolder.put(ViewStateKeys.表示モード, 照会_モード);
