@@ -301,16 +301,14 @@ public class HihokenshashoShikakushoHakkoFinder {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
             RString 保険者名称;
             LasdecCode shichosonCode = hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode();
-            List<ShichosonCodeYoriShichoson> 市町村情報 = finder.shichosonCodeYoriShichosonJoho(shichosonCode).records();
             if (shichosonCode != null) {
-                保険者名称 = 市町村情報 == null ? RString.EMPTY : finder.
-                        shichosonCodeYoriShichosonJoho(shichosonCode).
-                        records().get(0).get市町村名称();
+                List<ShichosonCodeYoriShichoson> 市町村情報 = finder.shichosonCodeYoriShichosonJoho(shichosonCode).records();
+                保険者名称 = 市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称();
                 entity.set市町村コード(shichosonCode.value());
                 entity.set保険者名称(保険者名称);
             } else if (hokenshajohoEntity.getShichosonCode() != null) {
-                保険者名称 = 市町村情報 == null ? RString.EMPTY : finder.shichosonCodeYoriShichosonJoho(
-                        hokenshajohoEntity.getShichosonCode()).records().get(0).get市町村名称();
+                List<ShichosonCodeYoriShichoson> 市町村情報 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getShichosonCode()).records();
+                保険者名称 = 市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称();
                 entity.set市町村コード(hokenshajohoEntity.getShichosonCode().value());
                 entity.set保険者名称(保険者名称);
 
