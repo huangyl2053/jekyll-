@@ -512,16 +512,16 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
             RString key = getMapKey(ninsuKinkak);
             if (map1.containsKey(key)) {
                 GemmenJyoho gemmenJyoho = (GemmenJyoho) map1.get(key);
-                gemmenJyoho.setHoDankaiKanendoNinsuGoukeyi(getNinsuOrKinkakul(ninsuKinkak.getKanendoNinsu()));
-                gemmenJyoho.setHoDankaiKanendoGemenGakuGoukei(getNinsuOrKinkakul(ninsuKinkak.getKanendoGemmenGaku()));
+                gemmenJyoho.setHoDankaiKanendoNinsuGoukeyi(getNinsuOrKinkakul(ninsuKinkak.getKanendoNinsuGoukeyi()));
+                gemmenJyoho.setHoDankaiKanendoGemenGakuGoukei(getNinsuOrKinkakul(ninsuKinkak.getKanendoGemmenGakuGokeyi()));
                 map1.put(key, gemmenJyoho);
             } else {
                 GemmenJyoho gemmenJyoho = new GemmenJyoho();
                 gemmenJyoho.setChoteiNendo(ninsuKinkak.getChoteiNendo());
                 gemmenJyoho.setFukaNendo(ninsuKinkak.getFukaNendo());
                 gemmenJyoho.setHokenryoDankai(ninsuKinkak.getHokenryoDankai());
-                gemmenJyoho.setHoDankaiKanendoNinsuGoukeyi(getNinsuOrKinkakul(ninsuKinkak.getKanendoNinsu()));
-                gemmenJyoho.setHoDankaiKanendoGemenGakuGoukei(getNinsuOrKinkakul(ninsuKinkak.getKanendoGemmenGaku()));
+                gemmenJyoho.setHoDankaiKanendoNinsuGoukeyi(getNinsuOrKinkakul(ninsuKinkak.getKanendoNinsuGoukeyi()));
+                gemmenJyoho.setHoDankaiKanendoGemenGakuGoukei(getNinsuOrKinkakul(ninsuKinkak.getKanendoGemmenGakuGokeyi()));
                 map1.put(key, gemmenJyoho);
             }
         }
@@ -554,7 +554,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
             koumokuSyoukeyi.setFukaNendo(kinkaku.getFukaNendo());
             koumokuSyoukeyi.setChoshuHouhou(kinkaku.getChoshuHouhou());
             koumokuSyoukeyi.setHokenryoDankai(kinkaku.getHokenryoDankai());
-            koumokuSyoukeyi.setYoGetuKinkaku(kinkaku.getYoGetuNinsu());
+            koumokuSyoukeyi.setYoGetuNinsu(kinkaku.getYoGetuNinsu());
             koumokuSyoukeyi.setYoGetuKinkaku(kinkaku.getYoGetuKinkaku());
             koumokuSyoukeyi.setGoGetuNinsu(getNinsuOrKinkakul(kinkaku.getGoGetuNinsu()));
             koumokuSyoukeyi.setGoGetuKinkaku(getNinsuOrKinkakul(kinkaku.getGoGetuKinkaku()));
@@ -562,7 +562,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
             koumokuSyoukeyi.setRokuGetuKinkaku(getNinsuOrKinkakul(kinkaku.getRokuGetuKinkaku()));
             koumokuSyoukeyi.setNanaGetuNinsu(getNinsuOrKinkakul(kinkaku.getNanaGetuNinsu()));
             koumokuSyoukeyi.setNanaGetuKinkaku(getNinsuOrKinkakul(kinkaku.getNanaGetuKinkaku()));
-            koumokuSyoukeyi.setHatiGetuKinkaku(getNinsuOrKinkakul(kinkaku.getHatiGetuNinsu()));
+            koumokuSyoukeyi.setHatiGetuNinsu(getNinsuOrKinkakul(kinkaku.getHatiGetuNinsu()));
             koumokuSyoukeyi.setHatiGetuKinkaku(getNinsuOrKinkakul(kinkaku.getHatiGetuKinkaku()));
             koumokuSyoukeyi.setKyuGetuNinsu(getNinsuOrKinkakul(kinkaku.getKyuGetuNinsu()));
             koumokuSyoukeyi.setKyuGetuKinkaku(getNinsuOrKinkakul(kinkaku.getKyuGetuKinkaku()));

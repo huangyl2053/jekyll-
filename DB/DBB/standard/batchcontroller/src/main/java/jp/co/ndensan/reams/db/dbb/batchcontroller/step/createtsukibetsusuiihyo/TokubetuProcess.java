@@ -75,7 +75,7 @@ public class TokubetuProcess extends BatchProcessBase<KoumokuGoukey> {
     protected void afterExecute() {
         List<ReportDate> reportDateList = getReportDate(koumokuGoukeyList);
 
-        TsukibetsuSuiihyoReport report2 = TsukibetsuSuiihyoReport.createFrom(setHeadItem(new RString("普通徴収")),
+        TsukibetsuSuiihyoReport report2 = TsukibetsuSuiihyoReport.createFrom(setHeadItem(new RString("特別徴収")),
                 setBodyTitleItem(reportDateList), setbodyItemList(reportDateList));
         report2.writeBy(reportSourceWriter);
     }
