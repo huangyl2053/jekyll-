@@ -29,7 +29,6 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
 
     private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
     private final HonSanteiIdoKanendoIkkatsuHakkoBatchParameter バッチパラメータ;
-//    private final YMDHMS 調定日時;
 
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
@@ -41,8 +40,9 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
     private static final int 金融機関コード_START = 0;
     private static final int 金融機関コード_END = 4;
 
-    private static final RString 全角スペース = new RString("　");
+    private static final RString 所得段階名 = new RString("所得段階");
     private static final RString 半角ハイフン = new RString("-");
+    private static final RString アステリスク = new RString("*");
 
     /**
      * コンストラクタです。
@@ -52,7 +52,6 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
     public BodyEditor(HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
         this.編集後本算定通知書共通情報 = inputEntity.get編集後本算定通知書共通情報();
         this.バッチパラメータ = inputEntity.getバッチパラメータ();
-//        this.調定日時 = inputEntity.get調定日時();
     }
 
     @Override
@@ -72,7 +71,7 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
                 source.hyojicodeName2 = 共通情報.get表示コード().get表示コード名２();
                 source.hyojicodeName3 = 共通情報.get表示コード().get表示コード名３();
             }
-            source.shotokuDankaiTitle = new RString("所得段階");
+            source.shotokuDankaiTitle = 所得段階名;
             Integer 連番 = (i - 1) % SIZE + 1;
             source.listUpper_1 = new RString(連番.toString());
             if (共通情報.get通知書番号() != null) {
@@ -99,7 +98,7 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
             setOtherValue(共通情報, source);
             if ((共通情報.get編集後宛先() != null) && ((共通情報.get編集後宛先().get本人名称())
                     != (共通情報.get編集後宛先().get宛先名称()))) {
-                source.listUpper_12 = new RString("*" + 全角スペース + 共通情報.get編集後宛先().get宛先名称().toString());
+                source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE + 共通情報.get編集後宛先().get宛先名称().toString());
             }
             if (共通情報.get更正後() != null
                     && 共通情報.get更正後().get生保開始日() != null) {

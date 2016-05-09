@@ -50,7 +50,6 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
     private static final int NUM_11 = 11;
     private static final int NUM_12 = 12;
 
-    private static final RString スペース = new RString(" ");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
 
@@ -145,7 +144,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         source.list7_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
         source.list8_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
         source.list9_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
-        source.list10_1 = スペース;
+        source.list10_1 = RString.EMPTY;
         return source;
     }
 
@@ -168,7 +167,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
 
     private void set月別取得段階(KanendoIdouKekkaIchiranSource item, int 開始月, int 終了月,
             RString 保険料算定段階, RString 更正前後区分) {
-        for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) { //来年1月は1+12=13月
+        for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
             int currentMonth = (i - 1) / NUM_12 + 1;
             if (更正前後区分_更正前.equals(更正前後区分)) {
                 set更正前_保険料算定段階(item, currentMonth, 保険料算定段階);
@@ -294,7 +293,6 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
     private IKoza to口座(UaFt310FindKozaEntity uaFt310Entity) {
         KozaRelateEntity relateEntity = new KozaRelateEntity();
         UaT0310KozaEntity kozaEntity = new UaT0310KozaEntity();
-//      kozaEntity.setGyomubetsuPrimaryKey(); //ない  uaFt310EntityにUaFt310FindKozaEntityにとって必要な項目がない
         uaFt310Entity.getサブ業務コード();
         kozaEntity.setKozaId(uaFt310Entity.get口座ID().longValue());
         kozaEntity.setKozaMeiginin(uaFt310Entity.get口座名義人());
@@ -309,22 +307,16 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         kozaEntity.setKozaKaishiUketsukeYMD(new FlexibleDate(uaFt310Entity.get口座開始受付年月日().toDateString()));
         kozaEntity.setTemban(uaFt310Entity.get店番());
         kozaEntity.setKinyuKikanShitenCode(uaFt310Entity.get支店コード());
-        // uaFt310Entity.get支店名称();
         kozaEntity.setKensakuyoMeiginin(uaFt310Entity.get検索用名義人());
-//        uaFt310Entity.get業務コード();
         kozaEntity.setGyomuKoyuKey(uaFt310Entity.get業務固有キー());
         kozaEntity.setYotoKubun(new KozaYotoKubunCodeValue(uaFt310Entity.get用途区分()));
-//        uaFt310Entity.get用途区分名称();
-//        uaFt310Entity.get科目コード();
         kozaEntity.setShuryoYMD(new FlexibleDate(uaFt310Entity.get終了年月日().toDateString()));
         kozaEntity.setShikibetsuCode(uaFt310Entity.get識別コード());
         kozaEntity.setTsuchoNo(uaFt310Entity.get通帳番号());
         kozaEntity.setTsuchoKigo(uaFt310Entity.get通帳記号());
         kozaEntity.setKinyuKikanCode(uaFt310Entity.get金融機関コード());
-//        uaFt310Entity.get金融機関名称();
         kozaEntity.setKaishiYMD(new FlexibleDate(uaFt310Entity.get開始年月日().toDateString()));
         kozaEntity.setYokinShubetsu(uaFt310Entity.get預金種別());
-//        uaFt310Entity.get預金種別名称();
 
         relateEntity.setUaT0310KozaEntity(kozaEntity);
         return new Koza(relateEntity);

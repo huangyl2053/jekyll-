@@ -43,8 +43,9 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
     private static final int 金融機関コード_START = 0;
     private static final int 金融機関コード_END = 4;
 
-    private static final RString 全角スペース = new RString("　");
+    private static final RString 所得段階名 = new RString("所得段階");
     private static final RString 半角ハイフン = new RString("-");
+    private static final RString アステリスク = new RString("*");
 
     /**
      * コンストラクタです。
@@ -73,13 +74,9 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
                 source.hyojicodeName2 = 共通情報.get表示コード().get表示コード名２();
                 source.hyojicodeName3 = 共通情報.get表示コード().get表示コード名３();
             }
-            source.shotokuDankaiTitle = new RString("所得段階");
-            if ((i + 1) % SIZE != 0) {
-                source.listUpper_1 = new RString(Integer.valueOf((i + 1) % SIZE).toString());
-            } else {
-                source.listUpper_1 = new RString("18");
-            }
-
+            source.shotokuDankaiTitle = 所得段階名;
+            Integer 連番 = (i - 1) % SIZE + 1;
+            source.listUpper_1 = new RString(連番.toString());
             if (共通情報.get通知書番号() != null) {
                 source.listUpper_2 = new RString(共通情報.get通知書番号().toString());
             }
@@ -104,7 +101,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
             setOtherValue(共通情報, source);
             if ((共通情報.get編集後宛先() != null) && ((共通情報.get編集後宛先().get本人名称())
                     != (共通情報.get編集後宛先().get宛先名称()))) {
-                source.listUpper_12 = new RString("*" + 全角スペース + 共通情報.get編集後宛先().get宛先名称().toString());
+                source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE + 共通情報.get編集後宛先().get宛先名称().toString());
             }
             if (共通情報.get更正後() != null
                     && 共通情報.get更正後().get生保開始日() != null) {
