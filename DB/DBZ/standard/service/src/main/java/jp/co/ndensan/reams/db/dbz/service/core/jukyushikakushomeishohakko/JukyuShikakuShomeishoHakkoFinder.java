@@ -173,7 +173,8 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
             }
         }
-        RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
+        RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken() == null
+                ? RString.EMPTY : jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
         介護認定審査会意見と略称.append(SPACE);
         介護認定審査会意見と略称.append(サービス種類略称リスト.get(FIRST_INDEX));
         for (int j = 1; j < サービス種類略称リスト.size(); j++) {

@@ -153,7 +153,8 @@ public class HihokenshashikakusoshitsuManager {
         }
 
         if (喪失年月日.isBefore(hihokenshaShutokuJyoho.get資格取得年月日())) {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage());
+            throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
+                    .replace(喪失年月日.toString(), hihokenshaShutokuJyoho.get資格取得年月日().toString()));
         }
 
         SikakuIdoCheckManager sikakuIdoCheckManager = SikakuIdoCheckManager.createInstance();
