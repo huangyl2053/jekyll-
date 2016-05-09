@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820011;
 
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820011.DBC0820011TransitionEventName.償還申請;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820011.PnlShokanHanteiKekkaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -23,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class PnlShokanHanteiKekka {
 
     private static final RString 照会 = new RString("照会");
+    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
 
     /**
      * 初期表示
@@ -38,8 +41,42 @@ public class PnlShokanHanteiKekka {
         div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(識別コード);
 
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
-        div.getPnlShokanShinseiList().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
+        div.getPnlShokanShinseiList().getCcdShokanShinseiList().initialize(照会, 被保険者番号,
+                FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
 
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 選択ボタン
+     *
+     * @param div PnlShokanHanteiKekkaDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_SelectButton(PnlShokanHanteiKekkaDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
+        return ResponseData.of(div).forwardWithEventName(償還申請).respond();
+    }
+
+    /**
+     * 修正ボタン
+     *
+     * @param div PnlShokanHanteiKekkaDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_ModifyButton(PnlShokanHanteiKekkaDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
+        return ResponseData.of(div).forwardWithEventName(償還申請).respond();
+    }
+
+    /**
+     * 削除ボタン
+     *
+     * @param div PnlShokanHanteiKekkaDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_DeleteButton(PnlShokanHanteiKekkaDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, 削除);
+        return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }
 }
