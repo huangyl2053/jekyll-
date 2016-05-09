@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
@@ -298,16 +299,18 @@ public class HihokenshashoShikakushoHakkoFinder {
 
         if (hokenshajohoEntity != null) {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-            RString 保険者名称 = RString.EMPTY;
+            RString 保険者名称;
             LasdecCode shichosonCode = hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode();
+            List<ShichosonCodeYoriShichoson> 市町村情報 = finder.shichosonCodeYoriShichosonJoho(shichosonCode).records();
             if (shichosonCode != null) {
-                保険者名称 = finder.
+                保険者名称 = 市町村情報 == null ? RString.EMPTY : finder.
                         shichosonCodeYoriShichosonJoho(shichosonCode).
                         records().get(0).get市町村名称();
                 entity.set市町村コード(shichosonCode.value());
                 entity.set保険者名称(保険者名称);
             } else if (hokenshajohoEntity.getShichosonCode() != null) {
-                保険者名称 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getShichosonCode()).records().get(0).get市町村名称();
+                保険者名称 = 市町村情報 == null ? RString.EMPTY : finder.shichosonCodeYoriShichosonJoho(
+                        hokenshajohoEntity.getShichosonCode()).records().get(0).get市町村名称();
                 entity.set市町村コード(hokenshajohoEntity.getShichosonCode().value());
                 entity.set保険者名称(保険者名称);
 
