@@ -99,4 +99,16 @@ public class ShotokuManager {
         }
         return 1 == dac.save(介護所得.toEntity());
     }
+
+    /**
+     * 介護所得{@link Shotoku}を插入します。
+     *
+     * @param 介護所得 {@link Shotoku}
+     * @return 插入することが成功しますか　true:成功　false:失敗
+     */
+    @Transaction
+    public boolean insert介護所得(Shotoku 介護所得) {
+        requireNonNull(介護所得, UrSystemErrorMessages.値がnull.getReplacedMessage("介護所得"));
+        return 1 == dac.save(介護所得.toEntity());
+    }
 }
