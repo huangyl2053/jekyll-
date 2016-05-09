@@ -326,6 +326,7 @@ public class DBD1030001Handler {
     }
 
     private void 状態５画面表示() {
+        div.getTxtShinseiRiyu().setDisabled(false);
         div.getTxtShinseiYMD().setDisabled(false);
         div.getTxtShinseiYMD().setValue(FlexibleDate.EMPTY);
         div.getTxtShinseiRiyu().setValue(RString.EMPTY);
