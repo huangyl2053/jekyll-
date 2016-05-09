@@ -68,6 +68,8 @@ public class HihokenshaEntity {
     private RString iryoHokenshaMeisho;
     private RString iryoHokenKigoNo;
     private RString orderNo;
+    private RString sochiHokensha;
+    private RString kyuHokensha;
     private List<DbT1001HihokenshaDaichoEntity> dbT1001HihokenshaDaichoEntityList;
     private List<ShisetsuNyutaishoEntity> shisetsuNyutaishoEntityList;
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiFukushiNenkinJukyushaEntityList;

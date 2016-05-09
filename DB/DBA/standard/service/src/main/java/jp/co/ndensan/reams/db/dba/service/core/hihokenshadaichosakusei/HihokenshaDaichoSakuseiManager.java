@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.Shise
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.ShoKofuKaishuDivisionSumEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaichosakusei.IHihokenshaDaichoSakuseiMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
@@ -73,6 +75,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -90,11 +93,8 @@ public class HihokenshaDaichoSakuseiManager {
 
     private static final RString TITLE = new RString("介護保険　被保険者台帳");
     private static final RString HIHOKENSHANO_TITLE = new RString("被保険者番号");
-    private static final RString SHICHOSONCODE_120 = new RString("120");
-    private static final RString SHICHOSONCODE_220 = new RString("220");
-    private static final RString SHICHOSONCODE_111 = new RString("111");
-    private static final RString SHICHOSONCODE_112 = new RString("112");
-    private static final RString SHICHOSONCODE_211 = new RString("211");
+    private static final RString 措置保険者タイトル = new RString("措置保険者");
+    private static final RString 旧保険者タイトル = new RString("旧保険者");
     private static final RString SHIKAKUSOSHITSUJIYUCODE_03 = new RString("03");
     private static final RString SHIKAKUSOSHITSUJIYUCODE_05 = new RString("05");
     private static final RString STATE_適用除外者 = new RString("適用除外者");
@@ -204,21 +204,19 @@ public class HihokenshaDaichoSakuseiManager {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
         for (DbT1001HihokenshaDaichoEntity entity : dbT1001HihokenList) {
-            if (new Code(SHICHOSONCODE_120).equals(shichosonSecurityJoho.get導入形態コード())
-                    || new Code(SHICHOSONCODE_220).equals(shichosonSecurityJoho.get導入形態コード())) {
+            if (new Code(DonyukeitaiCode.事務構成市町村.getCode()).equals(shichosonSecurityJoho.get導入形態コード())
+                    || new Code(DonyukeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
                 hihokenshaEntity.setShichosonCode(entity.getShichosonCode());
                 Association association = AssociationFinderFactory.createInstance().getAssociation();
                 hihokenshaEntity.setShichosonMeisho(association.get市町村名());
-            }
-            if (new Code(SHICHOSONCODE_111).equals(shichosonSecurityJoho.get導入形態コード())
-                    || new Code(SHICHOSONCODE_112).equals(shichosonSecurityJoho.get導入形態コード())
-                    || new Code(SHICHOSONCODE_211).equals(shichosonSecurityJoho.get導入形態コード())) {
+            } else {
                 List<DbT7051KoseiShichosonMasterEntity> dbT7051KoseiEntityList
                         = 構成市町村マスタDac.shichosonCodeYoriShichosonJoho(entity.getShichosonCode());
                 RString shichosonMeisho = !dbT7051KoseiEntityList.isEmpty() ? dbT7051KoseiEntityList.get(0).getShichosonMeisho() : RString.EMPTY;
                 hihokenshaEntity.setShichosonMeisho(shichosonMeisho);
             }
         }
+        get被保険者(shichosonSecurityJoho, hihokenshaEntity);
         UaFt200FindShikibetsuTaishoFunctionDac dac = InstanceProvider.create(
                 UaFt200FindShikibetsuTaishoFunctionDac.class);
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
@@ -294,6 +292,22 @@ public class HihokenshaDaichoSakuseiManager {
         hihokenshaEntity.setDbT7006RoreiFukushiNenkinJukyushaEntityList(dbT7006RoreiList);
         hihokenshaEntity.setDbT7037ShoKofuKaishuEntityList(dbT7037ShoKoList);
         hihokenshaEntity.setSetaiinJohoEntityList(get世帯員取得(setaiinJohoList));
+        return hihokenshaEntity;
+    }
+
+    private HihokenshaEntity get被保険者(ShichosonSecurityJoho shichosonSecurityJoho, HihokenshaEntity hihokenshaEntity) {
+        if (new Code(DonyukeitaiCode.事務広域.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
+            hihokenshaEntity.setSochiHokensha(措置保険者タイトル);
+        } else if (new Code(DonyukeitaiCode.事務構成市町村.getCode()).equals(shichosonSecurityJoho.get導入形態コード())
+                || new Code(DonyukeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
+            hihokenshaEntity.setSochiHokensha(RString.EMPTY);
+        }
+        RString 合併情報区分 = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告);
+        if (new RString("0").equals(合併情報区分)) {
+            hihokenshaEntity.setKyuHokensha(RString.EMPTY);
+        } else if (new RString("1").equals(合併情報区分)) {
+            hihokenshaEntity.setKyuHokensha(旧保険者タイトル);
+        }
         return hihokenshaEntity;
     }
 
@@ -386,6 +400,8 @@ public class HihokenshaDaichoSakuseiManager {
             hihokenshaDaichoSakuseiEntity.setIryoHokenshaMeisho(hihokenshaEntity.getIryoHokenshaMeisho());
             hihokenshaDaichoSakuseiEntity.setIryoHokenKigoNo(hihokenshaEntity.getIryoHokenKigoNo());
             hihokenshaDaichoSakuseiEntity.setOrderNo(hihokenshaEntity.getOrderNo());
+            hihokenshaDaichoSakuseiEntity.setSochiHokensha(hihokenshaEntity.getSochiHokensha());
+            hihokenshaDaichoSakuseiEntity.setKyuHokensha(hihokenshaEntity.getKyuHokensha());
             if (!分割した被保険者台帳管理List.isEmpty() && i < 分割した被保険者台帳管理List.size()) {
                 set資格異動情報(hihokenshaDaichoSakuseiEntity, 分割した被保険者台帳管理List.get(i));
             } else {
