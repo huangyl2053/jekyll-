@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.jukyushikakushomeishohakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbz.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -17,6 +19,9 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeisho
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -264,6 +269,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
     private JukyuShikakuShomeishoHakkoRelateEntity edit負担割合(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
             JukyuShikakuShomeishoHakkoRelateEntity 負担割合情報Entity) {
         if (!RString.isNullOrEmpty(負担割合情報Entity.getFutanWariaiKubun())) {
+            jukyuShikakuShomeishoHakkoRe.setFutanWariaiKubun(負担割合情報Entity.getFutanWariaiKubun());
             if (FutanwariaiKubun._２割.getコード().equals(負担割合情報Entity.getFutanWariaiKubun())) {
                 jukyuShikakuShomeishoHakkoRe.setFutanWariai(RString.EMPTY);
             } else if (FutanwariaiKubun._１割.getコード().equals(負担割合情報Entity.getFutanWariaiKubun())) {
@@ -324,6 +330,13 @@ public class JukyuShikakuShomeishoHakkoFinder {
     }
 
     private RString get受給資格証明書_備考項目文言() {
-        return BusinessConfig.get(ConfigKeysJukyuShikakuShomeishoHakko.受給資格証明書_備考項目文言, SubGyomuCode.DBD介護受給);
+        Map<Integer, RString> 通知文List = ReportUtil.get通知文(SubGyomuCode.DBA介護資格, new ReportId("DBA100004_JukyuShikakuShomeisho"),
+                KamokuCode.EMPTY, 1);
+        RStringBuilder sb = new RStringBuilder();
+        Set<Integer> keySet = 通知文List.keySet();
+        for (Integer index : keySet) {
+            sb.append(通知文List.get(index));
+        }
+        return sb.toRString();
     }
 }
