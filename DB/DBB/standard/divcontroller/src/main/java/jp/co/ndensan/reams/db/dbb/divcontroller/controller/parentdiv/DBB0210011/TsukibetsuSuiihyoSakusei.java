@@ -23,7 +23,7 @@ public class TsukibetsuSuiihyoSakusei {
     /**
      * コントロールdivが「生成」された際の処理です。
      *
-     * @param div コントロールdiv
+     * @param div 月別推移表Div
      * @return ResponseData<TsukibetsuSuiihyoSakuseiDiv>
      */
     public ResponseData<TsukibetsuSuiihyoSakuseiDiv> onLoad(TsukibetsuSuiihyoSakuseiDiv div) {
@@ -34,7 +34,7 @@ public class TsukibetsuSuiihyoSakusei {
     /**
      * バッチパラメータ保存ボタンの処理です。
      *
-     * @param div コントロールdiv
+     * @param div 月別推移表Div
      * @return ResponseData<TsukibetsuSuiihyoSakuseiDiv>
      */
     public ResponseData<TsukibetsuSuiihyoSakuseiDiv> onClick_btnParameterSave(TsukibetsuSuiihyoSakuseiDiv div) {
@@ -43,9 +43,26 @@ public class TsukibetsuSuiihyoSakusei {
     }
 
     /**
+     * 生年月日ラジオボタンを選択する場合、生年月日の処理します。
+     *
+     * @param div 月別推移表Div
+     * @return ResponseData<TsukibetsuSuiihyoSakuseiDiv>
+     */
+    public ResponseData<TsukibetsuSuiihyoSakuseiDiv> onClick_onChange(TsukibetsuSuiihyoSakuseiDiv div) {
+        if (div.getRadUmareYMD().getSelectedKey() != null && !div.getRadUmareYMD().getSelectedKey().isEmpty()) {
+            div.getTxtUmareSt().setDisabled(false);
+            div.getTxtUmareEd().setDisabled(false);
+        } else {
+            div.getTxtUmareSt().setDisabled(true);
+            div.getTxtUmareEd().setDisabled(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * コバッチパラメータ復元ボタンの処理です。
      *
-     * @param div コントロールdiv
+     * @param div 月別推移表Div
      * @return ResponseData<TsukibetsuSuiihyoSakuseiDiv>
      */
     public ResponseData<TsukibetsuSuiihyoSakuseiDiv> onClick_btnParameterRestore(TsukibetsuSuiihyoSakuseiDiv div) {
@@ -56,7 +73,7 @@ public class TsukibetsuSuiihyoSakusei {
     /**
      * 月別推移表作成を「実行する」を押下チェックする。<br/>
      *
-     * @param div
+     * @param div 月別推移表Div
      * {@link KobetsuJikoRenkeiInfoSakuseiDiv 介護住民票個別事項連携情報作成【他社住基】情報Div}
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
@@ -71,7 +88,7 @@ public class TsukibetsuSuiihyoSakusei {
     /**
      * 「実行する」ボタン押下時の処理です。<br/>
      *
-     * @param div {@link TsukibetsuSuiihyoSakuseiDiv  資格得喪履歴Div}
+     * @param div {@link TsukibetsuSuiihyoSakuseiDiv  月別推移表Div}
      * @return 月別推移表作成Divを持つResponseData
      */
     public ResponseData<CreateTsukibetsuSuiihyoBatchParameter> onClick_btnJikou(TsukibetsuSuiihyoSakuseiDiv div) {

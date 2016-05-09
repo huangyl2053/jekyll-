@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiDiv;
@@ -56,6 +59,7 @@ public class TsukibetsuSuiihyoSakuseiHandler {
      */
     public void onload() {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        set調定年度();
         if (市町村セキュリティ情報 != null) {
             Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
             if (new Code(SHICHOSONCODE_111).equals(導入形態コード)) {
@@ -166,20 +170,53 @@ public class TsukibetsuSuiihyoSakuseiHandler {
 
     }
 
+    private void set調定年度() {
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        RString 調定年度 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課);
+        RString 当初年度 = BusinessConfig.get(ConfigNameDBB.日付関連_当初年度, SubGyomuCode.DBB介護賦課);
+        RString 遡及年度 = BusinessConfig.get(ConfigNameDBB.日付関連_遡及年度, SubGyomuCode.DBB介護賦課);
+        RString 所得年度 = BusinessConfig.get(ConfigNameDBB.日付関連_所得年度, SubGyomuCode.DBB介護賦課);
+        KeyValueDataSource 調定年度Key = new KeyValueDataSource();
+        調定年度Key.setKey(new RString("調定年度"));
+        調定年度Key.setValue(調定年度);
+        KeyValueDataSource 当初年度Key = new KeyValueDataSource();
+        当初年度Key.setKey(new RString("当初年度"));
+        当初年度Key.setValue(当初年度);
+        KeyValueDataSource 遡及年度Key = new KeyValueDataSource();
+        遡及年度Key.setKey(new RString("遡及年度"));
+        遡及年度Key.setValue(遡及年度);
+        KeyValueDataSource 所得年度Key = new KeyValueDataSource();
+        所得年度Key.setKey(new RString("所得年度"));
+        所得年度Key.setValue(所得年度);
+        dataSourceList.add(調定年度Key);
+        dataSourceList.add(当初年度Key);
+        dataSourceList.add(遡及年度Key);
+        dataSourceList.add(所得年度Key);
+        Collections.sort(dataSourceList, new DateComparator());
+        div.getDdlChoteiNendo().setDataSource(dataSourceList);
+    }
+
     private void set各月資格基準日() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (int i = 1; i < RDate.getNowDate().getLastDay(); i++) {
+        for (int i = 1; i <= RDate.getNowDate().getLastDay(); i++) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(new RString(空白文字.toString() + i));
             dataSource.setValue(new RString(空白文字.toString() + i));
             dataSourceList.add(dataSource);
         }
         div.getDdShikakuKijunD().setDataSource(dataSourceList);
-        for (int i = 1; i < RDate.getNowDate().getLastDay(); i++) {
+        for (int i = 1; i <= RDate.getNowDate().getLastDay(); i++) {
             if (i == RDate.getNowDate().getDayValue()) {
                 div.getDdShikakuKijunD().setSelectedKey(new RString(空白文字.toString() + i));
             }
         }
+    }
 
+    private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {
+
+        @Override
+        public int compare(KeyValueDataSource o1, KeyValueDataSource o2) {
+            return o2.getValue().compareTo(o1.getValue());
+        }
     }
 }
