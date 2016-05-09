@@ -58,8 +58,10 @@ public class ShotokuJohoTorokuValidationHandler {
         return new ValidationDictionaryBuilder()
                 .add(ShotokuJohoTorokuValidationMessages.住民税非課税区分のチェック, div.getShotokuJohoToroku().getDdlJuminzei())
                 .add(ShotokuJohoTorokuValidationMessages.合計所得金額のチェック, div.getShotokuJohoToroku().getTxtGokeiShotokuGaku())
-                .add(ShotokuJohoTorokuValidationMessages.生年月日のチェック, div.getAtenaInfo().getKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD())
-                .add(ShotokuJohoTorokuValidationMessages.激変緩和対象者となっていない人のチェック, div.getShotokuJohoToroku().getTxtGokeiShotokuGaku())
+                .add(ShotokuJohoTorokuValidationMessages.生年月日のチェック,
+                        div.getAtenaInfo().getKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD())
+                .add(ShotokuJohoTorokuValidationMessages.激変緩和対象者となっていない人のチェック,
+                        div.getShotokuJohoToroku().getTxtGokeiShotokuGaku())
                 .add(ShotokuJohoTorokuValidationMessages.年金収入額のチェック, div.getShotokuJohoToroku().getTxtNenkinShotokuGaku())
                 .build();
     }

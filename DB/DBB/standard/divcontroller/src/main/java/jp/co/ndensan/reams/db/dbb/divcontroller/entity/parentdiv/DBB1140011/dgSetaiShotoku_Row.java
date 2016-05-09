@@ -3,22 +3,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 05 10:55:37 CST 2016 
+ * Thu May 05 10:55:37 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgSetaiShotoku_Row のクラスファイル 
- * 
+ * dgSetaiShotoku_Row のクラスファイル
+ *
  * @author 自動生成
+ * @reamsid_L DBB-1750-010 zhangrui
  */
-
 public class dgSetaiShotoku_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 

@@ -7,9 +7,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1140011
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.DBB1140011StateName;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.DBB1140011TransitionEventName.再検索;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.DBB1140011TransitionEventName.完了;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.DBB1140011TransitionEventName.所得照会状況一覧へ;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.ShotokuJohoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140011.ShotokuJohoTorokuHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140011.ShotokuJohoTorokuValidationHandler;
@@ -46,26 +43,6 @@ public class ShotokuJohoTorokuTotal {
     }
 
     /**
-     * 所得照会回答内容登録を「検索結果一覧へ「所得照会状況一覧へ戻る」」を押下する。<br/>
-     *
-     * @param div {@link ShotokuJohoTorokuTotalDiv 所得照会回答内容登録情報Div}
-     * @return 所得照会回答内容登録情報Divを持つResponseData
-     */
-    public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnToSearchResult(ShotokuJohoTorokuTotalDiv div) {
-        return ResponseData.of(div).forwardWithEventName(所得照会状況一覧へ).respond();
-    }
-
-    /**
-     * 所得照会回答内容登録を「再検索する」を押下する。<br/>
-     *
-     * @param div {@link ShotokuJohoTorokuTotalDiv 所得照会回答内容登録Div}
-     * @return 所得照会回答内容登録情報Divを持つResponseData
-     */
-    public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnReSearch(ShotokuJohoTorokuTotalDiv div) {
-        return ResponseData.of(div).forwardWithEventName(再検索).respond();
-    }
-
-    /**
      * 「再表示する」ボタンを押下する。<br/>
      *
      * @param div {@link ShotokuJohoTorokuTotalDiv 所得照会回答内容登録Div}
@@ -77,7 +54,7 @@ public class ShotokuJohoTorokuTotal {
         RDate kazeiNendo = new RDate(div.getSetaiShotokuInfo().getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString());
         FlexibleYear 所得年度 = new FlexibleYear(kazeiNendo.getYear().toString());
         YMDHMS 所得基準日時 = YMDHMS.now();
-        getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, false);
+        getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         div.getSetaiShotokuInfo().getTxtSetaiIchiranKazeiNendo().setDomain(所得年度);
         div.getSetaiShotokuInfo().getChkSetaiIchiranAll().setSelectedItems(Collections.EMPTY_LIST);
         return ResponseData.of(div).respond();
@@ -101,7 +78,6 @@ public class ShotokuJohoTorokuTotal {
      * @return 所得照会回答内容登録Divを持つResponseData
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnKakutei(ShotokuJohoTorokuTotalDiv div) {
-        //TODO check!!!!!!!!!!!!!!!!!!!!!!!!!
         ValidationMessageControlPairs messages = getValidationHandler(div).validate();
         if (!ResponseHolder.isReRequest() && messages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(messages).respond();
@@ -132,9 +108,9 @@ public class ShotokuJohoTorokuTotal {
         FlexibleYear 所得年度 = viewStateData.get賦課年度();
         YMDHMS 所得基準日時 = YMDHMS.now();
         if (div.getSetaiShotokuInfo().getChkSetaiIchiranAll().isAllSelected()) {
-            getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
-        } else {
             getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, false);
+        } else {
+            getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         }
         //TODO 最新の世帯員・所得状況を表示するチェックボックスのチェック状態変更 QA735
         return ResponseData.of(div).respond();
@@ -153,16 +129,6 @@ public class ShotokuJohoTorokuTotal {
         RString 氏名又は名称 = div.getAtenaInfo().getKaigoAtenaInfo().get氏名漢字();
         div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(処理名, 識別コード.value(), 氏名又は名称, success);
         return ResponseData.of(div).setState(DBB1140011StateName.完了状態);
-    }
-
-    /**
-     * 「完了する」ボタンを押下します。
-     *
-     * @param div {@link ShotokuJohoTorokuTotalDiv 所得照会回答内容登録Div}
-     * @return 所得照会回答内容登録Divを持つResponseData
-     */
-    public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnEnd(ShotokuJohoTorokuTotalDiv div) {
-        return ResponseData.of(div).forwardWithEventName(完了).respond();
     }
 
     private ShotokuJohoTorokuHandler getHandler(ShotokuJohoTorokuTotalDiv div) {
