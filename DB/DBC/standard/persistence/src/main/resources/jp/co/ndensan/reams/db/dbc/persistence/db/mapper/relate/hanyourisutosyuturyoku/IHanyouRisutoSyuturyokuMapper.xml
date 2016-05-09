@@ -149,8 +149,7 @@
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from 
                   rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
         LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho" As DbV4001
-        ON DbV4001."shichosonCode" = DbV1001."shichosonCode"
-        AND DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
+        ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
         ON DbT4001."shichosonCode" = DbV4001."shichosonCode"
         AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"
@@ -470,8 +469,7 @@
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from 
                   rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
         LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho" As DbV4001
-        ON DbV4001."shichosonCode" = DbV1001."shichosonCode"
-        AND DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
+        ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
         ON DbT4001."shichosonCode" = DbV4001."shichosonCode"
         AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"

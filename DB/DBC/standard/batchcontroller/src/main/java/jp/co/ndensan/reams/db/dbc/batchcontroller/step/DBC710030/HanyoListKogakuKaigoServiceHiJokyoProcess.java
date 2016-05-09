@@ -16,8 +16,10 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJoky
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.Taishosha;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvNoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvNoEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -111,6 +113,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
     private HanyoListKogakuKaigoProcessParameter parameter;
     private HanyoListKogakuKaigoEucCsvEntityEditor dataCreate;
+    private HanyoListKogakuKaigoEucCsvNoEntityEditor dataNoCreate;
     private List<HanyouRisutoSyuturyokuEntity> preEntityList;
     private RString eucFilePath;
     private List<PersonalData> personalDataList;
@@ -118,17 +121,22 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private Association 地方公共団体;
     private Decimal 連番;
     private List<KinyuKikanEntity> lstKinyuKikanEntity;
+    private boolean 連番付加flg;
 
     @BatchWriter
     private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvEntity> eucCsvWriter;
+    @BatchWriter
+    private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvNoEntity> eucNoCsvWriter;
 
     @Override
     protected void beforeExecute() {
         連番 = Decimal.ONE;
         dataCreate = new HanyoListKogakuKaigoEucCsvEntityEditor();
+        dataNoCreate = new HanyoListKogakuKaigoEucCsvNoEntityEditor();
         personalDataList = new ArrayList<>();
         lstKinyuKikanEntity = new ArrayList<>();
         preEntityList = new ArrayList<>();
+        連番付加flg = parameter.isRebanFuka();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
     }
 
@@ -155,13 +163,23 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8).
-                setNewLine(NewLine.CRLF).
-                hasHeader(parameter.isTomokumeFuka())
-                .build();
+        if (連番付加flg) {
+            eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(parameter.isTomokumeFuka())
+                    .build();
+        } else {
+            eucNoCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(parameter.isTomokumeFuka())
+                    .build();
+        }
     }
 
     @Override
@@ -188,7 +206,11 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
                     preEntity.get口座情報().getKinyuKikanEntity().add(kinyuKikanEntity);
                 }
             }
-            eucCsvWriter.writeLine(dataCreate.edit(preEntity, parameter, 連番));
+            if (連番付加flg) {
+                eucCsvWriter.writeLine(dataCreate.edit(preEntity, parameter, 連番));
+            } else {
+                eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番));
+            }
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
         }

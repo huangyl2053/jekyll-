@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvNoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -66,7 +66,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  *
  * @reamsid_L DBC-3092-020 sunhui
  */
-public class HanyoListKogakuKaigoEucCsvEntityEditor {
+public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
 
     private final RString 住所地特例状態_住特 = new RString("住特");
     private static final RString 入所施設種類_11 = new RString("11");
@@ -100,7 +100,8 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     /**
      * コンストラクタです。
      */
-    public HanyoListKogakuKaigoEucCsvEntityEditor() {
+    public HanyoListKogakuKaigoEucCsvNoEntityEditor() {
+
     }
 
     /**
@@ -109,14 +110,11 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
      * @param entity HanyouRisutoSyuturyokuEntity
      * @param parameter HanyouRisutoSyuturyokuProcessParameter
      * @param 連番 Decimal
-     * @return HanyouRisutoSyuturyokuEucCsvEntity
+     * @return HanyouRisutoSyuturyokuEucCsvNoEntity
      */
-    public HanyouRisutoSyuturyokuEucCsvEntity edit(HanyouRisutoSyuturyokuEntity entity,
+    public HanyouRisutoSyuturyokuEucCsvNoEntity edit(HanyouRisutoSyuturyokuEntity entity,
             HanyoListKogakuKaigoProcessParameter parameter, Decimal 連番) {
-        HanyouRisutoSyuturyokuEucCsvEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvEntity();
-        if (parameter.isRebanFuka()) {
-            csvEntity.set連番(numToRString(連番));
-        }
+        HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvNoEntity();
 
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
@@ -183,7 +181,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         return csvEntity;
     }
 
-    private void set受給者台帳(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set受給者台帳(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
 
         JigyoshaNo 指定事業者コード = entity.get入所施設コード();
@@ -208,7 +206,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 ? entity.get直近異動事由コード().getColumnValue() : RString.EMPTY);
     }
 
-    private void set宛名(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set宛名(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
 
         if (isNotNull(entity.get宛名())) {
@@ -249,7 +247,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private void set宛名(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+    private void set宛名(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
         set地区(entity, csvEntity);
         GyoseikuCode 行政区コード = entity.get宛名().getGyoseikuCode();
         csvEntity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
@@ -290,7 +288,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 .concat(前住所方書 != null ? 前住所方書.getColumnValue() : RString.EMPTY));
     }
 
-    private void set地区(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+    private void set地区(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
         ChikuCode 地区1 = entity.get宛名().getChikuCode1();
         ChikuCode 地区2 = entity.get宛名().getChikuCode2();
         ChikuCode 地区3 = entity.get宛名().getChikuCode3();
@@ -299,7 +297,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set地区３(地区3 != null ? 地区3.getColumnValue() : RString.EMPTY);
     }
 
-    private void set宛先(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+    private void set宛先(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
 
         UaFt250FindAtesakiEntity 宛先 = entity.get宛先();
         if (isNotNull(宛先)) {
@@ -327,7 +325,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private void set口座(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+    private void set口座(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
         if (entity.get口座情報() != null && entity.get口座情報().getUaT0310KozaEntity() != null
                 && (entity.get口座情報().getKinyuKikanEntity() != null || !entity.get口座情報().getKinyuKikanEntity().isEmpty())
                 && (entity.get口座情報().getUrT0700ShunoKanriEntity() != null || !entity.get口座情報().getUrT0700ShunoKanriEntity().isEmpty())) {
@@ -362,7 +360,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
 
     }
 
-    private void set入所施設種類(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set入所施設種類(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
 
         if (入所施設種類_11.equals(entity.get入所施設種類())) {
@@ -393,7 +391,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private void set介護保険施設(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set介護保険施設(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
 
         csvEntity.set指定事業者名(entity.get事業者名称_60().isEmpty()
@@ -420,7 +418,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set指定事業者実施地域(entity.getサービス実施地域_60());
     }
 
-    private void set支給申請(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set支給申請(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
 
         if (entity != null) {
@@ -460,7 +458,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
         if (entity != null) {
             csvEntity.set申請支払額(numToRString(entity.get合計_高額支給額()));
@@ -476,7 +474,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private void set支給判定結果(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set支給判定結果(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
         if (entity != null) {
             FlexibleDate 決定日 = entity.get決定年月日();
@@ -497,7 +495,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private void set支給審査決定(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity,
+    private void set支給審査決定(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity,
             HanyoListKogakuKaigoProcessParameter parameter) {
         if (entity != null) {
             FlexibleYearMonth 国決定年月 = entity.get決定年月();
@@ -513,7 +511,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         }
     }
 
-    private void set給付対象者明細(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
+    private void set給付対象者明細(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
 
         if (entity != null) {
             csvEntity.set備考算定基準(entity.get高額給付根拠());
