@@ -132,18 +132,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
 
     @Override
     protected void afterExecute() {
-        List<KoumokuGoukey> 特別徴収帳票データList = iCreateTsukibetsuSuiihyoMapper.get特別徴収帳票データの取得();
         List<KoumokuGoukey> 普通徴収帳票データList = iCreateTsukibetsuSuiihyoMapper.get普通徴収帳票データの取得();
-        List<KoumokuGoukey> 合計帳票データList = iCreateTsukibetsuSuiihyoMapper.get合計帳票データの取得();
-        List<GemmenJyoho> 減免帳票データList = iCreateTsukibetsuSuiihyoMapper.get減免帳票データの取得();
-        List<ReportDate> reportDateList1 = getReportDate(特別徴収帳票データList);
-        for (ReportDate reportDate : reportDateList1) {
-            reportDate.setChoshuHouhouTitle(new RString("特別徴収"));
-            reportDate.setGengo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setNendo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setHokenshaName(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
-            reportDate.setHokenshaNo(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue());
-        }
         List<ReportDate> reportDateList2 = getReportDate(普通徴収帳票データList);
         for (ReportDate reportDate : reportDateList2) {
             reportDate.setChoshuHouhouTitle(new RString("普通徴収"));
@@ -155,33 +144,12 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
         TsukibetsuSuiihyoReport report2 = TsukibetsuSuiihyoReport.createFrom(setHeadItem(new RString("普通徴収")),
                 setBodyTitleItem(reportDateList2), setbodyItemList(reportDateList2));
         report2.writeBy(reportSourceWriter);
-        List<ReportDate> reportDateList3 = getReportDate(合計帳票データList);
-        for (ReportDate reportDate : reportDateList3) {
-            reportDate.setChoshuHouhouTitle(new RString("合計"));
-            reportDate.setGengo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setNendo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setHokenshaName(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
-            reportDate.setHokenshaNo(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue());
-        }
-        List<ReportDate> reportDateList4 = getReportGemmenDate(減免帳票データList);
-        for (ReportDate reportDate : reportDateList4) {
-            reportDate.setChoshuHouhouTitle(new RString("減免"));
-            reportDate.setGengo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setNendo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-            reportDate.setHokenshaName(AssociationFinderFactory.createInstance().getAssociation().get市町村名());
-            reportDate.setHokenshaNo(AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue());
-        }
         outputJokenhyoFactory(1);
     }
 
     private List<ReportDate> getReportDate(List<KoumokuGoukey> list) {
         ReportDateHensyu reportDateHensyu = new ReportDateHensyu();
         return reportDateHensyu.getReportDateList(list);
-    }
-
-    private List<ReportDate> getReportGemmenDate(List<GemmenJyoho> list) {
-        ReportDateHensyu reportDateHensyu = new ReportDateHensyu();
-        return reportDateHensyu.getReportGemmenDateList(list);
     }
 
     private TsukibetsuSuiihyoHeaderItem setHeadItem(RString choshuHouhouTitle) {
@@ -534,8 +502,10 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
             iCreateTsukibetsuSuiihyoMapper.insertTmpGemmenJyoho_Ichi(gemmenJyoho);
         }
         GemmenJyoho gemmenJyoho = iCreateTsukibetsuSuiihyoMapper.get減免部分過年度の人数合計と金額合計();
-        gemmenJyoho.setHokenryoDankai(new RString("合計"));
-        iCreateTsukibetsuSuiihyoMapper.insertTmpGemmenJyoho_Ichi(gemmenJyoho);
+        if (gemmenJyoho != null) {
+            gemmenJyoho.setHokenryoDankai(new RString("合計"));
+            iCreateTsukibetsuSuiihyoMapper.insertTmpGemmenJyoho_Ichi(gemmenJyoho);
+        }
     }
 
     private void set項目小計() {
