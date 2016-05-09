@@ -44,6 +44,12 @@
         <result property="shiteiServiceShurui30" column="shiteiServiceShurui30" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceShuruiMeisho" column="serviceShuruiMeisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        
+        <result property="futanWariaiKubun" column="futanWariaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="setaiIchigouHihokenshaSu" column="setaiIchigouHihokenshaSu"/>
+        <result property="honninGoukeiShotokuGaku" column="honninGoukeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="nenkinShunyuGoukei" column="nenkinShunyuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="sonotanoGoukeiShotokuKingakuGoukei" column="sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
     </resultMap>
 
     <select id="getJukyuShikakuShomeishoHakko" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
@@ -138,7 +144,7 @@
         AND  DbT7130."isDeleted" = FALSE
         AND  DbT7130."teikyoKaishiYM" <![CDATA[<=]]>  #{nowDateYearMonth}
         AND (DbT7130."teikyoshuryoYM" <![CDATA[>=]]> #{nowDateYearMonth}
-        OR DbT7130."serviceShuruiCd" IS NULL)
+            OR DbT7130."serviceShuruiCd" IS NULL)
     </select>
 
     <select id="getNinTeiShinSeiChuData" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
@@ -170,5 +176,41 @@
         E."ninteichosaRirekiNo"
         DESC LIMIT 1
     </select>
-
+    
+     <select id="getFuDanuRiAiKuBen" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+            SELECT
+               TB2."futanWariaiKubun" AS futanWariaiKubun,
+               TB2."setaiIchigouHihokenshaSu" AS setaiIchigouHihokenshaSu,
+               TB2."honninGoukeiShotokuGaku" AS honninGoukeiShotokuGaku,
+               TB2."nenkinShunyuGoukei" AS nenkinShunyuGoukei,
+               TB2."sonotanoGoukeiShotokuKingakuGoukei" AS sonotanoGoukeiShotokuKingakuGoukei
+             FROM
+               ( 
+                 SELECT
+                   * 
+                 FROM
+                   rgdb."DbT3113RiyoshaFutanWariai"
+                 WHERE
+                        rgdb."DbT3113RiyoshaFutanWariai"."logicalDeletedFlag" = false 
+                   and  rgdb."DbT3113RiyoshaFutanWariai"."hakoFuyoFlag" = false
+               ) AS TB1 
+               INNER JOIN ( 
+                 SELECT
+                   * 
+                 FROM
+                   rgdb."DbT3114RiyoshaFutanWariaiMeisai" 
+                 WHERE
+                   rgdb."DbT3114RiyoshaFutanWariaiMeisai"."logicalDeletedFlag" = false
+               ) AS TB2 
+                 ON TB1.nendo = TB2.nendo 
+                 AND TB1."hihokenshaNo" = TB2."hihokenshaNo" 
+                 AND TB1."rirekiNo" = TB2."rirekiNo" 
+             WHERE
+                     TB1.nendo  <![CDATA[=]]>  #{nendo}
+                     AND
+                     TB1."hihokenshaNo" = #{hihokenshaNo}
+             ORDER BY 
+                     TB2."rirekiNo" ,TB2."edaNo" DESC
+             LIMIT 1
+    </select>
 </mapper>

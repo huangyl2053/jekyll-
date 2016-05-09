@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.relate;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
@@ -57,4 +58,11 @@ public class JukyuShikakuShomeishoHakkoRelateEntity implements IDbAccessable {
     private Boolean yoshienshaNinteiShinseiFlag;
     private RString ninteichosaJisshiYMD;
     private RString biko;
+    private RString futanWariaiKubun;
+    private RString futanWariai;
+    private Decimal honninGoukeiShotokuGaku;
+    private int setaiIchigouHihokenshaSu;
+    private Decimal nenkinShunyuGoukei;
+    private Decimal sonotanoGoukeiShotokuKingakuGoukei;
+
 }

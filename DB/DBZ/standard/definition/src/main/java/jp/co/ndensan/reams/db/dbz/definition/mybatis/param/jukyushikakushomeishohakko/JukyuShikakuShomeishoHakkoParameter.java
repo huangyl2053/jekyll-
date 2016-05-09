@@ -18,9 +18,11 @@ public final class JukyuShikakuShomeishoHakkoParameter {
     private final RString nowDateYearMonth;
     private final RString yukoMukoKubun;
     private final RString psmShikibetsuTaisho;
+    private final RString nendo;
 
     private JukyuShikakuShomeishoHakkoParameter(RString hihokenshaNo, RString serviceShuruiCd, RString shinseishoKanriNo, RString yukoMukoKubun,
-            RString psmShikibetsuTaisho) {
+            RString psmShikibetsuTaisho,
+            RString nendo) {
 
         this.serviceShuruiCd = serviceShuruiCd;
         this.hihokenshaNo = hihokenshaNo;
@@ -28,6 +30,7 @@ public final class JukyuShikakuShomeishoHakkoParameter {
         this.nowDateYearMonth = FlexibleDate.getNowDate().getYearMonth().toDateString();
         this.yukoMukoKubun = yukoMukoKubun;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.nendo = nendo;
     }
 
     /**
@@ -36,11 +39,12 @@ public final class JukyuShikakuShomeishoHakkoParameter {
      * @param 被保険者番号 被保険者番号
      * @param 有効無効区分_有効 有効無効区分_有効
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param nendo nendo
      * @return JukyuShikakuShomeishoHakkoParameter
      */
     public static JukyuShikakuShomeishoHakkoParameter createSelectBy被保険者番号(RString 被保険者番号, RString 有効無効区分_有効,
-            RString psmShikibetsuTaisho) {
-        return new JukyuShikakuShomeishoHakkoParameter(被保険者番号, null, null, 有効無効区分_有効, psmShikibetsuTaisho);
+            RString psmShikibetsuTaisho, RString nendo) {
+        return new JukyuShikakuShomeishoHakkoParameter(被保険者番号, null, null, 有効無効区分_有効, psmShikibetsuTaisho, nendo);
     }
 
     /**
@@ -52,7 +56,7 @@ public final class JukyuShikakuShomeishoHakkoParameter {
      */
     public static JukyuShikakuShomeishoHakkoParameter createSelectByサービス種類コード(RString サービス種類コード,
             RString 有効無効区分_有効) {
-        return new JukyuShikakuShomeishoHakkoParameter(null, サービス種類コード, null, 有効無効区分_有効, null);
+        return new JukyuShikakuShomeishoHakkoParameter(null, サービス種類コード, null, 有効無効区分_有効, null, null);
     }
 
     /**
@@ -62,6 +66,6 @@ public final class JukyuShikakuShomeishoHakkoParameter {
      * @return JukyuShikakuShomeishoHakkoParameter
      */
     public static JukyuShikakuShomeishoHakkoParameter createSelectBy申請書管理番号(RString 申請書管理番号) {
-        return new JukyuShikakuShomeishoHakkoParameter(null, null, 申請書管理番号, null, null);
+        return new JukyuShikakuShomeishoHakkoParameter(null, null, 申請書管理番号, null, null, null);
     }
 }

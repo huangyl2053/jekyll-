@@ -52,6 +52,14 @@ var DBZ;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtdrYukokikan"));
             };
 
+            Controls.prototype.txtfutanWariaiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtfutanWariaiKubun"));
+            };
+
+            Controls.prototype.txtfutanWariai = function () {
+                return new UZA.TextBox(this.convFiledName("txtfutanWariai"));
+            };
+
             Controls.prototype.cblInji = function () {
                 return new UZA.CheckBoxList(this.convFiledName("cblInji"));
             };

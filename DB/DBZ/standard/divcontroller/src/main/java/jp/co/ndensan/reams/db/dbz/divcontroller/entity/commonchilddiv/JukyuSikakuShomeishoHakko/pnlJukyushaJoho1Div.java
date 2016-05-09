@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  *
  */
 public class pnlJukyushaJoho1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +30,10 @@ public class pnlJukyushaJoho1Div extends Panel {
     private TextBox txtShinsebi;
     @JsonProperty("txtdrYukokikan")
     private TextBoxDateRange txtdrYukokikan;
+    @JsonProperty("txtfutanWariaiKubun")
+    private TextBox txtfutanWariaiKubun;
+    @JsonProperty("txtfutanWariai")
+    private TextBox txtfutanWariai;
     @JsonProperty("cblInji")
     private CheckBoxList cblInji;
 
@@ -127,6 +131,42 @@ public class pnlJukyushaJoho1Div extends Panel {
     @JsonProperty("txtdrYukokikan")
     public void setTxtdrYukokikan(TextBoxDateRange txtdrYukokikan) {
         this.txtdrYukokikan = txtdrYukokikan;
+    }
+
+    /*
+     * gettxtfutanWariaiKubun
+     * @return txtfutanWariaiKubun
+     */
+    @JsonProperty("txtfutanWariaiKubun")
+    public TextBox getTxtfutanWariaiKubun() {
+        return txtfutanWariaiKubun;
+    }
+
+    /*
+     * settxtfutanWariaiKubun
+     * @param txtfutanWariaiKubun txtfutanWariaiKubun
+     */
+    @JsonProperty("txtfutanWariaiKubun")
+    public void setTxtfutanWariaiKubun(TextBox txtfutanWariaiKubun) {
+        this.txtfutanWariaiKubun = txtfutanWariaiKubun;
+    }
+
+    /*
+     * gettxtfutanWariai
+     * @return txtfutanWariai
+     */
+    @JsonProperty("txtfutanWariai")
+    public TextBox getTxtfutanWariai() {
+        return txtfutanWariai;
+    }
+
+    /*
+     * settxtfutanWariai
+     * @param txtfutanWariai txtfutanWariai
+     */
+    @JsonProperty("txtfutanWariai")
+    public void setTxtfutanWariai(TextBox txtfutanWariai) {
+        this.txtfutanWariai = txtfutanWariai;
     }
 
     /*
