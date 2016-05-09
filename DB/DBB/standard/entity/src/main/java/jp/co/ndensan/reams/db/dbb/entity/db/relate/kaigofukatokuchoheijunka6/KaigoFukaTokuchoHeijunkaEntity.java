@@ -3,29 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6;
+package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6;
 
-import java.util.List;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * batchParameterクラスです。
+ * 画面divデータクラスです。
  *
  * @reamsid_L DBB-0820-020 xuyue
  */
-public class TokuchoHeijunka6BatchParameterEntity {
+public class KaigoFukaTokuchoHeijunkaEntity {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
     private RString 増額平準化方法;
     private RString 減額平準化方法;
     private RString 帳票グループ;
-    private List<ShuturyokuChohuoEntity> 出力帳票entity;
+    private ReportId 帳票分類ＩＤ;
+    private RString 帳票名;
+    private RString 改頁出力順ID;
     private RString 出力対象指示フラグ;
     private FlexibleDate 発行日;
     private RString 文書番号;
+    private RString 遷移元区分;
 
     /**
      * 調定年度のgetメソッドです。
@@ -118,21 +121,57 @@ public class TokuchoHeijunka6BatchParameterEntity {
     }
 
     /**
-     * 出力帳票entityのgetメソッドです。
+     * 帳票分類ＩＤのgetメソッドです。
      *
-     * @return List<ShuturyokuChohuoEntity> 出力帳票entity
+     * @return 帳票分類ＩＤ
      */
-    public List<ShuturyokuChohuoEntity> get出力帳票entity() {
-        return 出力帳票entity;
+    public ReportId get帳票分類ＩＤ() {
+        return 帳票分類ＩＤ;
     }
 
     /**
-     * 出力帳票entityのsetメソッドです。
+     * 帳票分類ＩＤのsetメソッドです。
      *
-     * @param 出力帳票entity
+     * @param 帳票分類ＩＤ
      */
-    public void set出力帳票entity(List<ShuturyokuChohuoEntity> 出力帳票entity) {
-        this.出力帳票entity = 出力帳票entity;
+    public void set帳票分類ＩＤ(ReportId 帳票分類ＩＤ) {
+        this.帳票分類ＩＤ = 帳票分類ＩＤ;
+    }
+
+    /**
+     * 帳票名のgetメソッドです。
+     *
+     * @return 帳票名
+     */
+    public RString get帳票名() {
+        return 帳票名;
+    }
+
+    /**
+     * 帳票名のsetメソッドです。
+     *
+     * @param 帳票名
+     */
+    public void set帳票名(RString 帳票名) {
+        this.帳票名 = 帳票名;
+    }
+
+    /**
+     * 改頁出力順IDのgetメソッドです。
+     *
+     * @return 改頁出力順ID
+     */
+    public RString get改頁出力順ID() {
+        return 改頁出力順ID;
+    }
+
+    /**
+     * 改頁出力順IDのsetメソッドです。
+     *
+     * @param 改頁出力順ID
+     */
+    public void set改頁出力順ID(RString 改頁出力順ID) {
+        this.改頁出力順ID = 改頁出力順ID;
     }
 
     /**
@@ -187,6 +226,24 @@ public class TokuchoHeijunka6BatchParameterEntity {
      */
     public void set文書番号(RString 文書番号) {
         this.文書番号 = 文書番号;
+    }
+
+    /**
+     * 遷移元区分のgetメソッドです。
+     *
+     * @return 遷移元区分
+     */
+    public RString get遷移元区分() {
+        return 遷移元区分;
+    }
+
+    /**
+     * 遷移元区分のsetメソッドです。
+     *
+     * @param 遷移元区分
+     */
+    public void set遷移元区分(RString 遷移元区分) {
+        this.遷移元区分 = 遷移元区分;
     }
 
 }

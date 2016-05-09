@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;

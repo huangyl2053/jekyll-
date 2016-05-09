@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6;
+package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6;
 
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

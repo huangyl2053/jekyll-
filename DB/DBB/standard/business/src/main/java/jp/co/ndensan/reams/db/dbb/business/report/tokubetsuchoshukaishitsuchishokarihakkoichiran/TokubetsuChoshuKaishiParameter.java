@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShuturyokuChohuoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6.ShuturyokuChohuoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
