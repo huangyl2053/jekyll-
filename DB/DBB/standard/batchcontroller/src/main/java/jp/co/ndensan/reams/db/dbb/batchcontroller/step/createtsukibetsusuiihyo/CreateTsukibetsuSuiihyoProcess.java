@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSu
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GemmenJyoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GennendoDate;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GokeiChi;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.HihokenshaDaichoPsm;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuSyoukeyi;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.NinsuKinkaku;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.ReportDate;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GennendoDate;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GokeiChi;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.HihokenshaDaichoPsm;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.NinsuKinkaku;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.ReportDate;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -186,8 +186,8 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
 
     private TsukibetsuSuiihyoHeaderItem setHeadItem(RString choshuHouhouTitle) {
         return new TsukibetsuSuiihyoHeaderItem(
-                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString(),
-                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString(),
+                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).getEra(),
+                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().substring(2),
                 AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 choshuHouhouTitle);
@@ -931,13 +931,13 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
     }
 
     private Decimal get該当段階の金額合計(KoumokuSyoukeyi koumokuSyoukeyi) {
-        return new Decimal(chickNull(koumokuSyoukeyi.getYoGetuNinsu()) + chickNull(koumokuSyoukeyi.getGoGetuNinsu())
-                + chickNull(koumokuSyoukeyi.getRokuGetuNinsu()) + chickNull(koumokuSyoukeyi.getNanaGetuNinsu())
-                + chickNull(koumokuSyoukeyi.getHatiGetuNinsu()) + chickNull(koumokuSyoukeyi.getKyuGetuNinsu())
-                + chickNull(koumokuSyoukeyi.getJyuGetuNinsu()) + chickNull(koumokuSyoukeyi.getJyuitiGetuNinsu())
-                + chickNull(koumokuSyoukeyi.getJyuniGetuNinsu()) + chickNull(koumokuSyoukeyi.getItiGetuNinsu())
-                + chickNull(koumokuSyoukeyi.getNiGetuNinsu()) + chickNull(koumokuSyoukeyi.getSanGetuNinsu())
-                + chickNull(koumokuSyoukeyi.getGennenSuyijiNinsu()) + chickNull(koumokuSyoukeyi.getKanendoNinsu()));
+        return new Decimal(chickNull(koumokuSyoukeyi.getYoGetuKinkaku()) + chickNull(koumokuSyoukeyi.getGoGetuKinkaku())
+                + chickNull(koumokuSyoukeyi.getRokuGetuKinkaku()) + chickNull(koumokuSyoukeyi.getNanaGetuKinkaku())
+                + chickNull(koumokuSyoukeyi.getHatiGetuKinkaku()) + chickNull(koumokuSyoukeyi.getKyuGetuKinkaku())
+                + chickNull(koumokuSyoukeyi.getJyuGetuKinkaku()) + chickNull(koumokuSyoukeyi.getJyuitiGetuKinkaku())
+                + chickNull(koumokuSyoukeyi.getJyuniGetuKinkaku()) + chickNull(koumokuSyoukeyi.getItiGetuKinkaku())
+                + chickNull(koumokuSyoukeyi.getNiGetuKinkaku()) + chickNull(koumokuSyoukeyi.getSanGetuKinkaku())
+                + chickNull(koumokuSyoukeyi.getGennenSuyijiKinkaku()) + chickNull(koumokuSyoukeyi.getKanendoKinkaku()));
     }
 
     private void get合計部分の項目() {

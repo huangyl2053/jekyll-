@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSu
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.ReportDate;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.ReportDate;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -87,8 +87,8 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
 
     private TsukibetsuSuiihyoHeaderItem setHeadItem(RString choshuHouhouTitle) {
         return new TsukibetsuSuiihyoHeaderItem(
-                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString(),
-                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString(),
+                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).getEra(),
+                mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().substring(2),
                 AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 choshuHouhouTitle);

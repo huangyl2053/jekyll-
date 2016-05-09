@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBB-0760-030 lishengli -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper">
 
-    <select  id="get特別徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey"
+    <select  id="get特別徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
         SELECT
             koumokuGoukey."hokenryoDankai",
@@ -46,7 +46,7 @@
         ORDER BY koumokuGoukey."hokenryoDankai"
     </select>
     
-    <select  id="get普通徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey"
+    <select  id="get普通徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
         SELECT
             koumokuGoukey."hokenryoDankai",
@@ -88,7 +88,7 @@
         ORDER BY koumokuGoukey."hokenryoDankai"
     </select>
     
-    <select  id="get合計帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey"
+    <select  id="get合計帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500"> 
         SELECT
             gokeyBubunKoumoku."hokenryoDankai",
@@ -130,7 +130,7 @@
         ORDER BY gokeyBubunKoumoku."hokenryoDankai"
     </select>
     
-    <select  id="get減免帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GemmenJyoho"
+    <select  id="get減免帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500"> 
         SELECT
             gemmenJyoho."hokenryoDankai",
@@ -144,7 +144,7 @@
         ORDER BY gemmenJyoho."hokenryoDankai"
     </select>
     
-    <resultMap id="resultMap_HihokenshaDaichoPsm" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.HihokenshaDaichoPsm" autoMapping="true">
+    <resultMap id="resultMap_HihokenshaDaichoPsm" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.HihokenshaDaichoPsm" autoMapping="true">
         <result property="hihokenshaNo" column="hihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="idoYMD" column="hihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="edaNo" column="hihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -340,7 +340,7 @@
         FROM "TmpKayigoJyoho_Ichi" AS kayigoJyoho
     </select>
     
-    <select  id="get項目小計一時テーブルデータの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuSyoukeyi"
+    <select  id="get項目小計一時テーブルデータの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
         SELECT 
             koumokuSyoukeyi."hokenryoDankai",
@@ -376,7 +376,7 @@
         GROUP BY koumokuSyoukeyi."choshuHouhou", koumokuSyoukeyi."hokenryoDankai"
     </select>
     
-    <select  id="get項目小計一時テーブル合計データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuSyoukeyi"
+    <select  id="get項目小計一時テーブル合計データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
         SELECT 
             koumokuSyoukeyi."choshuHouhou",
@@ -411,7 +411,7 @@
         GROUP BY koumokuSyoukeyi."choshuHouhou"
     </select>
     
-    <select  id="get項目合計一時テーブルデータの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey"
+    <select  id="get項目合計一時テーブルデータの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
         SELECT
             koumokuGoukey."hokenryoDankai",
@@ -453,7 +453,7 @@
         GROUP BY koumokuGoukey."hokenryoDankai"
     </select>
     
-    <select  id="get項目合計一時テーブル合計データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey"
+    <select  id="get項目合計一時テーブル合計データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
         SELECT
             sum(koumokuGoukey."yoGetuNinsuuGoukeyi") AS "yoGetuNinsuuGoukeyi",
@@ -494,7 +494,7 @@
     </select>
     
     <resultMap id="resultMap_現年度データの取得" 
-               type="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GennendoDate" autoMapping="true">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GennendoDate" autoMapping="true">
         <result property="choteiNendo" column="fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="fukaNendo" column="fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tsuchishoNo" column="fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -741,7 +741,7 @@
         DELETE FROM "TmpSikakuJyoukyou_Ichi"
     </insert>
     
-    <insert id="insertTmpSikakuJyoukyou_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.HihokenshaDaichoPsm">
+    <insert id="insertTmpSikakuJyoukyou_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.HihokenshaDaichoPsm">
         INSERT INTO
         "TmpSikakuJyoukyou_Ichi"
         VALUES 
@@ -816,7 +816,7 @@
         "dankaiFumeyiFlg"boolean)
     </insert>
     
-    <insert id="insertTmpKayigoJyoho_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GennendoDate">
+    <insert id="insertTmpKayigoJyoho_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GennendoDate">
         INSERT INTO
         "TmpKayigoJyoho_Ichi"
         VALUES 
@@ -875,7 +875,7 @@
         "sayisyutuKanpuKinkaku"smallint)
      </insert> 
     
-     <insert id="insertTmpKoumokuSyoukeyi_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuSyoukeyi">
+     <insert id="insertTmpKoumokuSyoukeyi_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi">
         INSERT INTO
         "TmpKoumokuSyoukeyi_Ichi"
         VALUES 
@@ -952,7 +952,7 @@
         "総金額合計"smallint)
      </insert>
      
-     <insert id="insertTmpKoumokuGoukey_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GokeiChi">
+     <insert id="insertTmpKoumokuGoukey_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GokeiChi">
         INSERT INTO
         "TmpKoumokuGoukey_Ichi"
         VALUES 
@@ -1033,7 +1033,7 @@
         "総金額合計"smallint)
      </insert>
      
-     <insert id="insertTmpGokeyBubunKoumoku_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey">
+     <insert id="insertTmpGokeyBubunKoumoku_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey">
         INSERT INTO
         "TmpGokeyBubunKoumoku_Ichi"
         VALUES 
@@ -1085,7 +1085,7 @@
         "hoDankaiKanendoGemenGakuGoukei"smallint)
     </insert>
     
-    <insert id="insertTmpGemmenJyoho_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GemmenJyoho">
+    <insert id="insertTmpGemmenJyoho_Ichi" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho">
         INSERT INTO
         "TmpGemmenJyoho_Ichi"
         VALUES 
@@ -1099,7 +1099,7 @@
     </insert>
     
     <resultMap id="resultMap_4月の人数金額" 
-               type="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.NinsuKinkaku" autoMapping="true">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.NinsuKinkaku" autoMapping="true">
         <result property="choteiNendo" column="kayigoJyoho_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="fukaNendo" column="kayigoJyoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="choshuHouhou" column="kayigoJyoho_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1534,7 +1534,7 @@
     </select>
     
     <resultMap id="resultMap_GemmenJyoho" 
-               type="jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GemmenJyoho" autoMapping="true">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho" autoMapping="true">
         <result property="hokenryoDankai" column="gemmenJyoho_hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenryoDankaiKanendoNinsu" column="gemmenJyoho_hokenryoDankaiKanendoNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="hoDankaiKanendoGemmenGaku" column="gemmenJyoho_hokenryoDankaiKanendoGemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

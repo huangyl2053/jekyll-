@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo;
+package jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 減免部分のEntityクラスです。
+ * 現年度データのEntityクラスです。
  *
  * @reamsid_L DBB-0760-030 lishengli
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GenmenBubun {
+public class GennendoDate {
 
     private RString choteiNendo;
     private RString fukaNendo;
@@ -25,5 +26,14 @@ public class GenmenBubun {
     private RString rirekiNo;
     private RString hihokenshaNo;
     private RString hokenryoDankai;
-    private RString gemmenGaku;
+    private Decimal tkSaishutsuKampuGaku;
+    private Decimal fuSaishutsuKampuGaku;
+    private Decimal gemmenGaku;
+    private RString choshuHouhou;
+    private int ki;
+    private RString getu;
+    private RString choteiId;
+    private Decimal choteigaku;
+    private boolean dankaiFumeyiFlg;
+
 }

@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsu
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GemmenJyoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GennendoDate;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.GokeiChi;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.HihokenshaDaichoPsm;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuGoukey;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.KoumokuSyoukeyi;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.createtsukibetsusuiihyo.NinsuKinkaku;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GennendoDate;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GokeiChi;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.HihokenshaDaichoPsm;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.NinsuKinkaku;
 
 /**
  * 月別推移表作成のmapperクラスです。
