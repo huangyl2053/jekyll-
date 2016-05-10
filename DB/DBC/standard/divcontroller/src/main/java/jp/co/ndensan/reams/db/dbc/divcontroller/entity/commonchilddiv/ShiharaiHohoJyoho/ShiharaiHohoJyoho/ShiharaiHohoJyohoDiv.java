@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ShiharaiHohoJyoho のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-0300-010 houtianpeng
  */
 public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv {
 
