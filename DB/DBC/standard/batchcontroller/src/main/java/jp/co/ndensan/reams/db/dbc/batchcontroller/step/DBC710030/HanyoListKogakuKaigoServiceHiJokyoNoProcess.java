@@ -309,13 +309,21 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
                 ? RString.EMPTY : ShiharaiSaki.toValue(parameter.getShiharaiSaki()));
         出力条件.add(builder.toRString());
 
-        builder = new RStringBuilder();
-        builder.append(金融機関);
-        builder.append(parameter.getKiyuKikanCode() == null || parameter.getKiyuKikanCode().isEmpty()
-                ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
-                .concat(右記号).concat(parameter.getKiyuKikanName()));
+        builder = get金融機関();
         出力条件.add(builder.toRString());
         return 出力条件;
+    }
+
+    private RStringBuilder get金融機関() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(金融機関);
+        if (parameter.getKiyuKikanCode() == null || parameter.getKiyuKikanCode().isEmpty()) {
+            return builder;
+        }
+        builder.append(parameter.getKiyuKikanCode() == null || parameter.getKiyuKikanCode().isEmpty()
+                ? RString.EMPTY : 左記号.concat(parameter.getKiyuKikanCode())
+                .concat(右記号).concat(parameter.getKiyuKikanCode()));
+        return builder;
     }
 
     private List<RString> get時間出力条件(List<RString> 出力条件) {

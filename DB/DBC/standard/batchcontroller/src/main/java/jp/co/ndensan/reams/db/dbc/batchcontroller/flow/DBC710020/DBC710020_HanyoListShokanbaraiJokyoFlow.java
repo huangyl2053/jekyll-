@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC710020;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710020.HanyoListShokanbaraiJokyoNoRenbanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710020.HanyoListShokanbaraiJokyoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -28,6 +29,11 @@ public class DBC710020_HanyoListShokanbaraiJokyoFlow
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        return loopBatch(HanyoListShokanbaraiJokyoProcess.class).arguments(getParameter().toProcessParam()).define();
+        if (getParameter().is連番付加()) {
+            return loopBatch(HanyoListShokanbaraiJokyoProcess.class)
+                    .arguments(getParameter().toProcessParam()).define();
+        }
+        return loopBatch(HanyoListShokanbaraiJokyoNoRenbanProcess.class)
+                .arguments(getParameter().toProcessParam()).define();
     }
 }
