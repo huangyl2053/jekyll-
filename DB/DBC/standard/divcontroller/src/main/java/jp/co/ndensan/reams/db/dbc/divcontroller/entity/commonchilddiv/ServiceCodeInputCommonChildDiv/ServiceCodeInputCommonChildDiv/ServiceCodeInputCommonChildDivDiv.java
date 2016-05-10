@@ -172,7 +172,7 @@ public class ServiceCodeInputCommonChildDivDiv extends Panel implements IService
      */
     @Override
     public RString getサービスコード1() {
-        return this.txtServiceCode1.getValue();
+        return this.getTxtServiceCode1().getValue();
     }
 
     /**
@@ -182,7 +182,7 @@ public class ServiceCodeInputCommonChildDivDiv extends Panel implements IService
      */
     @Override
     public RString getサービスコード2() {
-        return this.txtServiceCode2.getValue();
+        return this.getTxtServiceCode2().getValue();
     }
 
     /**
@@ -192,6 +192,37 @@ public class ServiceCodeInputCommonChildDivDiv extends Panel implements IService
      */
     @Override
     public RString getサービス名称() {
-        return this.txtServiceCodeName.getValue();
+        return this.getTxtServiceCodeName().getValue();
     }
+
+    /**
+     * サービス種類コードを返します。
+     *
+     * @param サービス種類コード RString
+     */
+    @Override
+    public void setサービス種類コード(RString サービス種類コード) {
+        this.getTxtServiceCode1().setValue(サービス種類コード);
+    }
+
+    /**
+     * サービス項目コードを返します。
+     *
+     * @param サービス項目コード RString
+     */
+    @Override
+    public void setサービス項目コード(RString サービス項目コード) {
+        this.getTxtServiceCode2().setValue(サービス項目コード);
+    }
+
+    /**
+     * サービス名称を返します。
+     *
+     * @param サービス名称 RString
+     */
+    @Override
+    public void setサービス名称(RString サービス名称) {
+        this.getTxtServiceCodeName().setValue(サービス名称);
+    }
+
 }

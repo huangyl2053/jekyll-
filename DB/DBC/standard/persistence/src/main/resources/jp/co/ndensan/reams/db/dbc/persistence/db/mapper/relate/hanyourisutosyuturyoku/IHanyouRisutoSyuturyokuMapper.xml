@@ -582,7 +582,7 @@
         </if>
         <if test="kokuhorenFuicchi == 2">
             AND DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<>]]> ''
-            AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shiharaiKingaku" <![CDATA[<>]]> DbT3112."dbT3112KogakuShikyuShinsaKettei_kogakuShikyuGaku"
+            AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shiharaiKingaku" <![CDATA[<>]]> DbT3112."dbT3112KogakuShikyuShinsaKettei_jigyoKogakuShikyuGaku"
         </if>
         <if test="taishosha == 1">
             AND (DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011.Jut
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -75,7 +77,7 @@ public class JutakuKaishuJizenShinseiToroku {
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().onLoad(識別コード);
 
         // TODO 単体テスト
-//        ViewStateHolder.put(ViewStateKeys.処理モード, 修正モード);
+//        ViewStateHolder.put(ViewStateKeys.処理モード, new RString("修正"));
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (state != null) {
@@ -86,7 +88,7 @@ public class JutakuKaishuJizenShinseiToroku {
             state = 登録モード;
             ViewStateHolder.put(ViewStateKeys.処理モード, 登録モード);
             RString 整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
-                getコード()).nextString();
+                    getコード()).nextString();
             ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         }
         handler.項目表示制御処理(state);
@@ -383,9 +385,8 @@ public class JutakuKaishuJizenShinseiToroku {
             }
         }
 
-//        if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
-//            throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate().toString());
-//        }
+        dataChangeCheck(div);
+
         boolean 確認対象変更有無チェック結果 = false;
         if (!削除モード.equals(state)) {
             確認対象変更有無チェック結果 = handler.確認対象変更有無チェック();
@@ -450,14 +451,21 @@ public class JutakuKaishuJizenShinseiToroku {
     }
 
     /**
-     * 画面入力値の変更確認
+     * 画面データ変更有無チェック処理
      *
      * @param div JutakuKaishuJizenShinseiTorokuDiv
-     * @return ResponseData
      */
-    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onChangeData(JutakuKaishuJizenShinseiTorokuDiv div) {
-        div.setHidDataChangeFlg(非表示用フラグ_TRUE);
-        return ResponseData.of(div).respond();
+    public void dataChangeCheck(JutakuKaishuJizenShinseiTorokuDiv div) {
+        JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
+        RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (!削除モード.equals(state)) {
+            if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
+                handler.画面データ変更有無();
+            }
+            if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
+                throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate());
+            }
+        }
     }
 
     /**

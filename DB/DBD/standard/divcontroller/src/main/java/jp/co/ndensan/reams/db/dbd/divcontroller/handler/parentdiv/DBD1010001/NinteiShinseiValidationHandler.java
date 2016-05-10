@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001;
 
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDivSpec;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
@@ -24,22 +23,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBD-3590-010 liangbc
  */
 public class NinteiShinseiValidationHandler {
-
-    /**
-     * 受給共通_被保データなしチェックです。
-     *
-     * @param pairs ValidationMessageControlPairs
-     * @param div TaishouWaritsukeDiv
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 受給共通_被保データなしチェック(ValidationMessageControlPairs pairs, FutangendogakuShinseiDiv div) {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(FutangendogakuShinseiDivSpec.受給共通_被保データなし)
-                .thenAdd(NinteiShinseiValidationMessages.受給共通_被保データなし).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().
-                add(NinteiShinseiValidationMessages.受給共通_被保データなし).build().check(messages));
-        return pairs;
-    }
 
     /**
      * 受給共通_受給者登録なしチェックです。
@@ -127,8 +110,7 @@ public class NinteiShinseiValidationHandler {
         減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
         減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
         減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),
-        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複),
-        受給共通_被保データなし(DbdInformationMessages.受給共通_被保データなし);
+        減免減額_適用期間重複(DbdErrorMessages.減免減額_適用期間重複);
 
         private final Message message;
 

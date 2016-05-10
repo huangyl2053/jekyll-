@@ -419,8 +419,45 @@ public class KihonInfoMainPanelHandler {
                 return true;
             }
             return checkPanelShisetuNyutaisyoInfo(shokanKihon);
+        } else {
+            return check登録場合();
         }
-        return false;
+    }
+
+    private boolean check登録場合() {
+        RString 事業者 = div.getPanelKihon().getPanelKyotaku().getCcdShisetsuJoho().getNyuryokuShisetsuKodo();
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        if (is登録場合(事業者)) {
+            if ((サービス年月.isBeforeOrEquals(平成２１年３月) || (平成２１年４月.isBeforeOrEquals(サービス年月)
+                    && !list.contains(様式番号)))
+                    && div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu()
+                    .getSelectedKey().equals(KEY)) {
+                return false;
+            }
+            if ((!サービス年月.isBeforeOrEquals(平成２１年３月)
+                    && !(平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号)))
+                    && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState()
+                    .getSelectedKey().equals(KEY)) {
+                return false;
+            }
+            return true;
+        }
+        return true;
+    }
+
+    private boolean is登録場合(RString 事業者) {
+        return div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().getSelectedKey().equals(KEY)
+                && div.getPanelKihon().getPanelKyotaku().getChkKyusochi().getSelectedKeys().isEmpty()
+                && (事業者 == null || 事業者.isEmpty())
+                && div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().getFromValue() == null
+                && div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().getToValue() == null
+                && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue() == null
+                && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().getValue() == null
+                && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue() == null
+                && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().getValue() == null
+                && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().getSelectedKey().equals(KEY);
     }
 
     private boolean checkPanelKyotaku(ShokanKihon shokanKihon) {
@@ -494,7 +531,7 @@ public class KihonInfoMainPanelHandler {
         List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         if (サービス年月.isBeforeOrEquals(平成２１年３月)
-                || 平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号)) {
+                || (平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号))) {
             RString 中止理由コード = shokanKihon.get中止理由_入所_院前の状況コード();
             RString 中止理由Key = div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu()
                     .getSelectedKey();
@@ -548,7 +585,10 @@ public class KihonInfoMainPanelHandler {
 
     private boolean checkDdl(ShokanKihon shokanKihon) {
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        if (!サービス年月.isBeforeOrEquals(平成２１年３月)) {
+        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        if (!サービス年月.isBeforeOrEquals(平成２１年３月)
+                && !(平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号))) {
             RString 入所_院前の状況コード = shokanKihon.get中止理由_入所_院前の状況コード();
             RString 入所_院前の状況Key = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState()
                     .getSelectedKey();
@@ -834,7 +874,7 @@ public class KihonInfoMainPanelHandler {
         list.add(STR_2164);
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        if (サービス年月.isBeforeOrEquals(平成14年１月) && list.contains(様式番号)
+        if (!サービス年月.isBefore(平成14年１月) && list.contains(様式番号)
                 && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue() == null) {
             pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
                     UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
@@ -851,6 +891,24 @@ public class KihonInfoMainPanelHandler {
             }
         }
         return pairs;
+    }
+
+    /**
+     * 画面の個別設定のメソッドます。
+     *
+     * @param サービス年月 FlexibleYearMonth
+     */
+    public void set画面の個別設定(FlexibleYearMonth サービス年月) {
+        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        if (サービス年月.isBeforeOrEquals(平成２１年３月)
+                || (平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号))) {
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisplayNone(true);
+            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDisplayNone(false);
+        } else {
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisplayNone(false);
+            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDisplayNone(true);
+        }
     }
 
     private static class IdocheckMessages implements IValidationMessage {
