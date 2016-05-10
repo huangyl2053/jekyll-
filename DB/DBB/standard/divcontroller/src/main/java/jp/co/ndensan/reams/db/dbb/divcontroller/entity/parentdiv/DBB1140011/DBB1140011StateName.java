@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBB1140011の状態名定義クラスです
  *
- * @author 自動生成
  * @reamsid_L DBB-1750-010 zhangrui
  */
 public enum DBB1140011StateName implements IStateEnumerations {

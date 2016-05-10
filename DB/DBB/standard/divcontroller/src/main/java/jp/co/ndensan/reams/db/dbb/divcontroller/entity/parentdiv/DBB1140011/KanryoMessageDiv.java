@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KanryoMessage のクラスファイル
  *
- * @author 自動生成
  * @reamsid_L DBB-1750-010 zhangrui
  */
 public class KanryoMessageDiv extends Panel {
