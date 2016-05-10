@@ -88,6 +88,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -128,7 +129,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString 審査結果_却下する = new RString("2");
     private static final RString 証明書様式内容_NULL = new RString("証明書様式内容");
     private static final JigyoshaNo 償還払請求基本_事業者番号 = new JigyoshaNo("0000000000");
-    private static final RString 償還払給付費 = new RString("001");
     private static final RString 申請者区分_空 = new RString("0");
     private static final RString 申請取消事由_空 = new RString("0");
     private static final RString 連番_固定値 = new RString("01");
@@ -296,9 +296,20 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().getBtnRireki().setDisabled(true);
             div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(
                     支給申請情報, 支払方法状態_照会);
-        }
-        if (画面モード_削除.equals(画面モード) && 給付実績緋連動_受託あり.equals(償還)) {
-            set画面照会モードに変更();
+            div.getCommHeadPanel().getTxtTeikyoYM().setDisabled(true);
+            div.getCommHeadPanel().getDdlSyomeisyo().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
+            div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
+            if (給付実績緋連動_受託あり.equals(償還)) {
+                div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(true);
+//                set画面照会モードに変更();
+            }
         }
         if (画面モード_取消.equals(画面モード)) {
             div.getJutakuKaishuShinseiContents().getTxtJutakuOwner().setDisabled(true);
@@ -605,7 +616,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getTxtRelationWithHihokensha().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getTxtRyoshuYMD().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getDdlHokensha().setDisabled(true);
-        div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().setDisabled(true);
@@ -825,14 +835,19 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getTxtTelNo().setDomain(
                 償還払支給申請情報.get申請者電話番号());
         RString 申請取消事由コード = 償還払支給申請情報.get住宅改修申請取消事由コード();
+        List<UzT0007CodeEntity> costlist = CodeMaster.getCode(
+                SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
+        List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
+        torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
+        for (UzT0007CodeEntity list : costlist) {
+            KeyValueDataSource dataSource = new KeyValueDataSource(list.getコード().value(), list.getコード略称());
+            torikesuJiyu.add(dataSource);
+        }
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
+                torikesuJiyu);
+        div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
+                申請取消事由_空);
         if (申請取消事由コード != null) {
-            RString 申請取消事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別),
-                    new Code(申請取消事由コード), FlexibleDate.getNowDate());
-            List<KeyValueDataSource> torikesuJiyu = new ArrayList<>();
-            torikesuJiyu.add(new KeyValueDataSource(申請取消事由_空, RString.EMPTY));
-            torikesuJiyu.add(new KeyValueDataSource(申請取消事由コード, 申請取消事由));
-            div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDataSource(
-                    torikesuJiyu);
             div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setSelectedKey(
                     申請取消事由コード);
         }
@@ -1561,9 +1576,10 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     /**
      * 画面のデータが変更されているがないかの判断
      *
+     * @param 画面モード RString
      * @return (true:画面データが変更される ; false:画面データが変更されない)
      */
-    public boolean is画面データが変更() {
+    public boolean is画面データが変更(RString 画面モード) {
         Map<RString, RString> 更新前データmap = ViewStateHolder.get(ViewStateKeys.申請情報登録_更新前データ, Map.class);
         Map<RString, RString> 画面データmap = get画面データ();
         if (更新前データmap.size() != 画面データmap.size()) {
@@ -1573,6 +1589,9 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 ViewStateKeys.申請情報登録_住宅住所更新前データ, List.class);
         List<dgGaisyuList_Row> 画面住宅住所 = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
+        if (画面モード_削除.equals(画面モード) || 画面モード_審査.equals(画面モード)) {
+            return true;
+        }
         if (住宅住所更新前データ.size() != 画面住宅住所.size()) {
             return true;
         }

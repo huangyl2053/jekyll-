@@ -178,7 +178,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 ResponseHolder.getMessageCode());
         boolean 確認_汎用 = new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
-        if (!handler.is画面データが変更()) {
+        if (!handler.is画面データが変更(画面モード)) {
             if (isCheckデータ変更(内容変更, 判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
                 QuestionMessage message = new QuestionMessage(
                         DbzQuestionMessages.内容変更なし処理中止確認.getMessage().getCode(),
