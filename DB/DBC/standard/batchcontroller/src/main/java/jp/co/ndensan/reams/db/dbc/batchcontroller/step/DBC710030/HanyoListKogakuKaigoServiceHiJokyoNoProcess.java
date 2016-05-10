@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShinseiKu
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kogaku.Taishosha;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.HanyouRisutoSyuturyokuEucCsvNoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity;
-import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListKogakuKaigoEucCsvNoEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -75,7 +75,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBC-3092-020 sunhui
  */
-public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<HanyouRisutoSyuturyokuEntity> {
+public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBase<HanyouRisutoSyuturyokuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.selectAllデータ");
@@ -110,7 +110,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
     private HanyoListKogakuKaigoProcessParameter parameter;
-    private HanyoListKogakuKaigoEucCsvEntityEditor dataCreate;
+    private HanyoListKogakuKaigoEucCsvNoEntityEditor dataNoCreate;
     private List<HanyouRisutoSyuturyokuEntity> preEntityList;
     private RString eucFilePath;
     private List<PersonalData> personalDataList;
@@ -120,12 +120,12 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private List<KinyuKikanEntity> lstKinyuKikanEntity;
 
     @BatchWriter
-    private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvEntity> eucCsvWriter;
+    private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvNoEntity> eucNoCsvWriter;
 
     @Override
     protected void beforeExecute() {
         連番 = Decimal.ONE;
-        dataCreate = new HanyoListKogakuKaigoEucCsvEntityEditor();
+        dataNoCreate = new HanyoListKogakuKaigoEucCsvNoEntityEditor();
         personalDataList = new ArrayList<>();
         lstKinyuKikanEntity = new ArrayList<>();
         preEntityList = new ArrayList<>();
@@ -155,7 +155,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucNoCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8).
@@ -188,11 +188,11 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
                     preEntity.get口座情報().getKinyuKikanEntity().add(kinyuKikanEntity);
                 }
             }
-            eucCsvWriter.writeLine(dataCreate.edit(preEntity, parameter, 連番));
+            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
         }
-        eucCsvWriter.close();
+        eucNoCsvWriter.close();
         AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         バッチ出力条件リストの出力();
@@ -207,7 +207,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private void バッチ出力条件リストの出力() {
         RString 導入団体コード = 地方公共団体.getLasdecCode_().value();
         RString 市町村名 = 地方公共団体.get市町村名();
-        RString 出力件数 = new RString(String.valueOf(eucCsvWriter.getCount()));
+        RString 出力件数 = new RString(String.valueOf(eucNoCsvWriter.getCount()));
 
         List<RString> 出力条件 = get出力条件();
 

@@ -114,10 +114,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     public HanyouRisutoSyuturyokuEucCsvEntity edit(HanyouRisutoSyuturyokuEntity entity,
             HanyoListKogakuKaigoProcessParameter parameter, Decimal 連番) {
         HanyouRisutoSyuturyokuEucCsvEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvEntity();
-        if (parameter.isRebanFuka()) {
-            csvEntity.set連番(numToRString(連番));
-        }
-
+        csvEntity.set連番(numToRString(連番));
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
         set口座(entity, csvEntity);

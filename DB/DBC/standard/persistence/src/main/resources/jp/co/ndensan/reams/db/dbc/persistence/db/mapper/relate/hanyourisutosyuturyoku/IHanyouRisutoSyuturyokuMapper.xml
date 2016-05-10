@@ -10,6 +10,7 @@
         <include refid="selectHanyouRisutoSyuturyokuEntity" />
     </select>
     <sql id="selectHanyouRisutoSyuturyokuEntity">
+    SELECT ROW_NUMBER() over(order by A."被保険者番号")as row ,* from(
        SELECT
         DbV1001."hihokenshaNo" as 被保険者番号,
         DbV1001."shichosonCode" as 市町村コード,
@@ -648,16 +649,12 @@
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
         </if>
+     ) as A
     </sql>
         
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.HanyouRisutoSyuturyokuEntity">
-<!--        <id column="dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"/>
-        <id column="dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"/>
-        <id column="dbT3055KogakuKyufuTaishoshaGokei_rirekiNo"/>
-        <id column="dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo"/>
-        <id column="dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceTeikyoYM"/>
-        <id column="dbT3109JigyoKogakuKyufuTaishoshaGokei_rirekiNo"/>-->
+        <id column="row"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

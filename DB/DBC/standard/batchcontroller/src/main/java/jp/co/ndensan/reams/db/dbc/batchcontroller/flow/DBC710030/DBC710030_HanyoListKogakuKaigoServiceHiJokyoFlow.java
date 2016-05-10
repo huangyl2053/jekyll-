@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC710030;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710030.HanyoListKogakuKaigoServiceHiJokyoNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710030.HanyoListKogakuKaigoServiceHiJokyoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -28,7 +29,11 @@ public class DBC710030_HanyoListKogakuKaigoServiceHiJokyoFlow
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        return loopBatch(HanyoListKogakuKaigoServiceHiJokyoProcess.class)
+        if (getParameter().isRebanFuka()) {
+            return loopBatch(HanyoListKogakuKaigoServiceHiJokyoProcess.class)
+                    .arguments(getParameter().toProcessParamter()).define();
+        }
+        return loopBatch(HanyoListKogakuKaigoServiceHiJokyoNoProcess.class)
                 .arguments(getParameter().toProcessParamter()).define();
     }
 }
