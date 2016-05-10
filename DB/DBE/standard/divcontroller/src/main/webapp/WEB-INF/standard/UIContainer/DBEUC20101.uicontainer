@@ -26,23 +26,23 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2200001",
-     "toLayoutTitle": "認定調査依頼",
-     "toState": "調査員選択後"
+     "toLayoutName": "DBE2010002",
+     "toLayoutTitle": "認定調査依頼（手動）",
+     "toState": "default"
     },
     {
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2200001",
-     "layoutTitle": "認定調査依頼",
-     "eventName": "認定調査依頼戻る",
+     "layoutName": "DBE2010002",
+     "layoutTitle": "認定調査依頼（手動）",
+     "eventName": "個人依頼内容更新に戻る",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2010001",
      "toLayoutTitle": "完了処理・認定調査依頼",
-     "toState": ""
+     "toState": "登録"
     },
     {
      "id": "4",
