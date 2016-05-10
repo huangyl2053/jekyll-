@@ -196,16 +196,18 @@ public class HihokenshashoChohyoFinder {
                 business.set行政区2(RString.EMPTY);
             }
             List<SofusakiJohoEntity> sofusa = get送付先情報(hihoken.get(i).get識別コード());
-            if (管外.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
-                RStringBuilder builder = new RStringBuilder();
-                builder.append(sofusa.get(桁数_0).getJusho());
-                builder.append(sofusa.get(桁数_0).getBanchi());
-                builder.append(全角スペース);
-                builder.append(sofusa.get(桁数_0).getKatagaki());
-                business.set住所(builder.toRString());
-            }
-            if (管内.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
-                set住所(business, sofusa.get(桁数_0), honni.get(桁数_0));
+            if (sofusa != null) {
+                if (管外.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
+                    RStringBuilder builder = new RStringBuilder();
+                    builder.append(sofusa.get(桁数_0).getJusho());
+                    builder.append(sofusa.get(桁数_0).getBanchi());
+                    builder.append(全角スペース);
+                    builder.append(sofusa.get(桁数_0).getKatagaki());
+                    business.set住所(builder.toRString());
+                }
+                if (管内.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
+                    set住所(business, sofusa.get(桁数_0), honni.get(桁数_0));
+                }
             }
             if (氏名カナ表示有.equals(BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_氏名カナ表示有無))) {
                 business.set氏名カナ(honni.get(0).getKanaMeisho());
