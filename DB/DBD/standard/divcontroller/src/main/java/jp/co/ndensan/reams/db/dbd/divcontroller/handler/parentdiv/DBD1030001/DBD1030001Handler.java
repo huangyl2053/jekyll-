@@ -356,7 +356,7 @@ public class DBD1030001Handler {
     private GemmenKubun get減免区分初期値() {
         ShikibetsuCode 識別コード = get識別コードFromViewState();
         FlexibleDate 申請日 = div.getTxtShinseiYMD().getValue();
-        if (null == 申請日) {
+        if (null == 申請日 || 申請日.isEmpty()) {
             申請日 = FlexibleDate.EMPTY;
         }
         return ShakaiFukushiHojinKeigenService.createIntance().find減免区分初期値(識別コード, 申請日);

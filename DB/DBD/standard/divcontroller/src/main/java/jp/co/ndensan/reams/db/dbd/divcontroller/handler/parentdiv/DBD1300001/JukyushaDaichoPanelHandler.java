@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1300001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1300001.JukyushaDaichoPanelDiv;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -23,7 +25,7 @@ public class JukyushaDaichoPanelHandler {
     private final JukyushaDaichoPanelDiv div;
     private static final RString 申請取消データ抽出 = new RString("4");
     private static final RString 削除データ抽出 = new RString("5");
-    private static final RString 抽出年月日 = new RString("0");
+    private static final RString 抽出年月日 = new RString("1");
     private static final RString 項目名付加 = new RString("6");
     private static final RString 連番付加 = new RString("7");
     private static final RString 日付_編集 = new RString("8");
@@ -44,7 +46,7 @@ public class JukyushaDaichoPanelHandler {
      *
      */
     public void initialize() {
-        //div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBA介護資格, chohyoBunruiKanri.get帳票分類ID());
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD130001.getReportId());
         List<RString> selectKeys = new ArrayList<>();
         selectKeys.add(削除データ抽出);
         div.getChkTorikeshiSakujo().setDisabledItemsByKey(selectKeys);
