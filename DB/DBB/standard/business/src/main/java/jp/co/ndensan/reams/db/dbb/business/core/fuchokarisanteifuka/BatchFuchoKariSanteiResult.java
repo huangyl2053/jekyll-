@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.BatchFuchoKariSanteiEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko.BatchFuchoKariSanteiEntity;
 
 /**
  * バッチ出力帳票一覧Entityクラスです。
