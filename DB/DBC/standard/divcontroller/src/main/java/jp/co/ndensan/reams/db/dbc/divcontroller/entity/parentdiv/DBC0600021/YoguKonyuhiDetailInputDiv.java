@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -35,8 +36,8 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
     private DropDownList ddlShumoku;
     @JsonProperty("txtShohinName")
     private TextBox txtShohinName;
-    @JsonProperty("btnShohinmeiSearch")
-    private Button btnShohinmeiSearch;
+    @JsonProperty("btnShohinmei")
+    private ButtonDialog btnShohinmei;
     @JsonProperty("txtSeizoJigyosha")
     private TextBox txtSeizoJigyosha;
     @JsonProperty("txtHanbaiJigyosha")
@@ -113,21 +114,21 @@ public class YoguKonyuhiDetailInputDiv extends Panel {
     }
 
     /*
-     * getbtnShohinmeiSearch
-     * @return btnShohinmeiSearch
+     * getbtnShohinmei
+     * @return btnShohinmei
      */
-    @JsonProperty("btnShohinmeiSearch")
-    public Button getBtnShohinmeiSearch() {
-        return btnShohinmeiSearch;
+    @JsonProperty("btnShohinmei")
+    public ButtonDialog getBtnShohinmei() {
+        return btnShohinmei;
     }
 
     /*
-     * setbtnShohinmeiSearch
-     * @param btnShohinmeiSearch btnShohinmeiSearch
+     * setbtnShohinmei
+     * @param btnShohinmei btnShohinmei
      */
-    @JsonProperty("btnShohinmeiSearch")
-    public void setBtnShohinmeiSearch(Button btnShohinmeiSearch) {
-        this.btnShohinmeiSearch = btnShohinmeiSearch;
+    @JsonProperty("btnShohinmei")
+    public void setBtnShohinmei(ButtonDialog btnShohinmei) {
+        this.btnShohinmei = btnShohinmei;
     }
 
     /*

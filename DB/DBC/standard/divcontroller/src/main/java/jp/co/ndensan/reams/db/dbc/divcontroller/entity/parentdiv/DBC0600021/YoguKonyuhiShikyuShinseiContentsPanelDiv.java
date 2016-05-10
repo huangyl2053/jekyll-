@@ -61,6 +61,8 @@ public class YoguKonyuhiShikyuShinseiContentsPanelDiv extends Panel {
     private TextBox txtServiceCode;
     @JsonProperty("JigyoshaMode")
     private RString JigyoshaMode;
+    @JsonProperty("FukushiyoguShohinMode")
+    private RString FukushiyoguShohinMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -372,6 +374,24 @@ public class YoguKonyuhiShikyuShinseiContentsPanelDiv extends Panel {
     @JsonProperty("JigyoshaMode")
     public void setJigyoshaMode(RString JigyoshaMode) {
         this.JigyoshaMode = JigyoshaMode;
+    }
+
+    /*
+     * getFukushiyoguShohinMode
+     * @return FukushiyoguShohinMode
+     */
+    @JsonProperty("FukushiyoguShohinMode")
+    public RString getFukushiyoguShohinMode() {
+        return FukushiyoguShohinMode;
+    }
+
+    /*
+     * setFukushiyoguShohinMode
+     * @param FukushiyoguShohinMode FukushiyoguShohinMode
+     */
+    @JsonProperty("FukushiyoguShohinMode")
+    public void setFukushiyoguShohinMode(RString FukushiyoguShohinMode) {
+        this.FukushiyoguShohinMode = FukushiyoguShohinMode;
     }
 
     /*
