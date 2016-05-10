@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuSika
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
@@ -226,9 +226,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
      */
     @Override
     public void initialize(RString 被保険者番号) {
-
         RString nendo = ViewStateHolder.get(ViewStateKeys.年度, RString.class);
-        nendo = new RString("2016");
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.未定義), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
