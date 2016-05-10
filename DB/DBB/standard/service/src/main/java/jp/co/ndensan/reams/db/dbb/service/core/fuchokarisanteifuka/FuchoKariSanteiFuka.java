@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKa
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisantei.FuchoKarisanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuchokarisanteitsuchishohakko.BatchFuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokarisanteifuka.BatchFuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -156,7 +156,7 @@ public class FuchoKariSanteiFuka {
      * @param entity FuchoKariSanteiFukaEntity
      * @return FuchoKariSanteiFukaParameter
      */
-    public FuchoKarisanteiBatchParameter createFuchoKariSanteiBatchParameter(FuchoKariSanteiFukaEntity entity) {
+    public FuchoKarisanteiBatchParameter createFuchoKariSanteiParameter(FuchoKariSanteiFukaEntity entity) {
         List<BatchFuchoKariSanteiResult> 出力帳票一覧List = get出力帳票一覧(entity.get出力帳票一覧List(),
                 entity.get調定年度(), entity.get算定期());
         FuchoKarisanteiBatchParameter resultParameter = new FuchoKarisanteiBatchParameter();

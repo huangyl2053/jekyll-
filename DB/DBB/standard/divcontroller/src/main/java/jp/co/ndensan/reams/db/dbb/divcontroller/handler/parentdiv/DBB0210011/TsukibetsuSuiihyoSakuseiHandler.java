@@ -13,10 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -25,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -37,12 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class TsukibetsuSuiihyoSakuseiHandler {
 
     private final TsukibetsuSuiihyoSakuseiDiv div;
-    private static final RString SHICHOSONCODE_220 = new RString("220");
-    private static final RString SHICHOSONCODE_111 = new RString("111");
-    private static final RString SHICHOSONCODE_112 = new RString("112");
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
-    private static final RString 空白文字 = new RString("");
 
     /**
      * コンストラクタです。
@@ -58,24 +50,23 @@ public class TsukibetsuSuiihyoSakuseiHandler {
      *
      */
     public void onload() {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         set調定年度();
-        if (市町村セキュリティ情報 != null) {
-            Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
-            if (new Code(SHICHOSONCODE_111).equals(導入形態コード)) {
-                // 状態１　初期化状態（広域保険者）
-                setヘッダエリア();
-                set抽出条件エリア();
-                // 市町村==全市町村
-            } else if (new Code(SHICHOSONCODE_112).equals(導入形態コード)
-                    || new Code(SHICHOSONCODE_220).equals(導入形態コード)) {
-                // 状態２　初期化状態（単一保険者）
-                setヘッダエリア();
-                set抽出条件エリア();
-//            div.getCcdChikuShichosonSelect().
-                // 選択対象==全て
-            }
-        }
+        setヘッダエリア();
+        set抽出条件エリア();
+        // TODO 子DIVを実装しない
+//        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
+//        if (市町村セキュリティ情報 != null) {
+//            DonyuKeitaiCode 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+//            if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getCode())) {
+//                // 状態１　初期化状態（広域保険者）
+//                // 市町村==全市町村
+//            } else if (DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード.getCode())
+//                    || DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード.getCode())) {
+//                // 状態２　初期化状態（単一保険者）
+////            div.getCcdChikuShichosonSelect().
+//                // 選択対象==全て
+//            }
+//        }
     }
 
     /**
@@ -120,7 +111,7 @@ public class TsukibetsuSuiihyoSakuseiHandler {
         FlexibleYear 調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedValue());
         RStringBuilder 調定基準日 = new RStringBuilder();
         調定基準日.append(div.getTxtChoteiKijunYMD().getValue());
-        調定基準日.append(RDate.getNowDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
+        調定基準日.append(new RString("23:59:59"));
         boolean is年齢 = false;
         boolean is生年月日 = false;
         if (年齢.equals(div.getRadNenrei().getSelectedKey())) {
@@ -200,16 +191,12 @@ public class TsukibetsuSuiihyoSakuseiHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (int i = 1; i <= RDate.getNowDate().getLastDay(); i++) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(new RString(空白文字.toString() + i));
-            dataSource.setValue(new RString(空白文字.toString() + i));
+            dataSource.setKey(new RString(i));
+            dataSource.setValue(new RString(i));
             dataSourceList.add(dataSource);
         }
         div.getDdShikakuKijunD().setDataSource(dataSourceList);
-        for (int i = 1; i <= RDate.getNowDate().getLastDay(); i++) {
-            if (i == RDate.getNowDate().getDayValue()) {
-                div.getDdShikakuKijunD().setSelectedKey(new RString(空白文字.toString() + i));
-            }
-        }
+        div.getDdShikakuKijunD().setSelectedKey(new RString(RDate.getNowDate().getDayValue()));
     }
 
     private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {

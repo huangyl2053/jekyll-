@@ -578,11 +578,11 @@
             AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''
             AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> ''
             AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_ketteiYMD" <![CDATA[<>]]> ''
-            AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_jigyoKogakuShikyuGaku" <![CDATA[<>]]> DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shikyuKingaku"
+            AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_jigyoKogakuShikyuGaku" <![CDATA[<>]]> DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shiharaiKingaku"
         </if>
         <if test="kokuhorenFuicchi == 2">
             AND DbT3112."dbT3112KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<>]]> ''
-            AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shikyuKingaku" <![CDATA[<>]]> DbT3112."dbT3112KogakuShikyuShinsaKettei_kogakuShikyuGaku"
+            AND DbT3111."dbT3111JigyoKogakuShikyuHanteiKekka_shiharaiKingaku" <![CDATA[<>]]> DbT3112."dbT3112KogakuShikyuShinsaKettei_jigyoKogakuShikyuGaku"
         </if>
         <if test="taishosha == 1">
             AND (DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''

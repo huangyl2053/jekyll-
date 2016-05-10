@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001.Nin
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -51,10 +52,8 @@ public class FutangendogakuShinsei {
      */
     public ResponseData<FutangendogakuShinseiDiv> onLoad(FutangendogakuShinseiDiv div) {
         getHandler(div).onLoad();
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs = getValidationHandler().受給共通_被保データなしチェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号() == null) {
+            return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -357,23 +356,7 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onChange_radHaigushaUmu(FutangendogakuShinseiDiv div) {
-        if (配偶者の有無_無.equals(div.getRadHaigushaUmu().getSelectedKey())) {
-            div.getTxtHaigushaShimeiKana().setDisabled(true);
-            div.getTxtHaigushaShimei().setDisabled(true);
-            div.getTxtHaigushaUmareYMD().setDisabled(true);
-            div.getTxtHaigushaRenrakusaki().setDisabled(true);
-            div.getTxtHaigushaJusho1().setDisabled(true);
-            div.getTxtHaigushaJusho2().setDisabled(true);
-            div.getRadHaigushaKazeiKubun().setDisabled(true);
-        } else {
-            div.getTxtHaigushaShimeiKana().setDisabled(false);
-            div.getTxtHaigushaShimei().setDisabled(false);
-            div.getTxtHaigushaUmareYMD().setDisabled(false);
-            div.getTxtHaigushaRenrakusaki().setDisabled(false);
-            div.getTxtHaigushaJusho1().setDisabled(false);
-            div.getTxtHaigushaJusho2().setDisabled(false);
-            div.getRadHaigushaKazeiKubun().setDisabled(false);
-        }
+        getHandler(div).onChange_radHaigushaUmu();
         return ResponseData.of(div).respond();
     }
 

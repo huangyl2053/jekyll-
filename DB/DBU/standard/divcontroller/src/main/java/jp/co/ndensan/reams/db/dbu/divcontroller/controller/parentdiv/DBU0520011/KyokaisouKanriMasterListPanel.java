@@ -90,10 +90,8 @@ public class KyokaisouKanriMasterListPanel {
      * @param div 境界層管理マスタリストDiv
      * @return ResponseData
      */
-    public ResponseData onClick_jiko(KyokaisouKanriMasterListPanelDiv div) {
-        ResponseData<KyokaisoKanriMasterListBatchParameter> response = new ResponseData<>();
-        response.data = getHandler(div).setBatchParameter();
-        return response;
+    public ResponseData<KyokaisoKanriMasterListBatchParameter> onClick_jiko(KyokaisouKanriMasterListPanelDiv div) {
+        return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 
     private KyokaisouKanriMasterListPanelHandler getHandler(KyokaisouKanriMasterListPanelDiv div) {

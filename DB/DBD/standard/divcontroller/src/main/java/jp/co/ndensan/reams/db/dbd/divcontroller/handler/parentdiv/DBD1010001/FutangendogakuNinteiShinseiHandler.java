@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
@@ -36,6 +37,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -364,11 +367,41 @@ public class FutangendogakuNinteiShinseiHandler {
         }
     }
 
+    /**
+     * 「配偶者の有無」ボタンの処理
+     */
+    public void onChange_radHaigushaUmu() {
+        if (SELECT_KEY1.equals(div.getRadHaigushaUmu().getSelectedKey())) {
+            div.getTxtHaigushaShimeiKana().setDisabled(true);
+            div.getTxtHaigushaShimei().setDisabled(true);
+            div.getTxtHaigushaUmareYMD().setDisabled(true);
+            div.getTxtHaigushaRenrakusaki().setDisabled(true);
+            div.getTxtHaigushaJusho1().setDisabled(true);
+            div.getTxtHaigushaJusho2().setDisabled(true);
+            div.getRadHaigushaKazeiKubun().setDisabled(true);
+        } else {
+            div.getTxtHaigushaShimeiKana().setDisabled(false);
+            div.getTxtHaigushaShimei().setDisabled(false);
+            div.getTxtHaigushaUmareYMD().setDisabled(false);
+            div.getTxtHaigushaRenrakusaki().setDisabled(false);
+            div.getTxtHaigushaJusho1().setDisabled(false);
+            div.getTxtHaigushaJusho2().setDisabled(false);
+            div.getRadHaigushaKazeiKubun().setDisabled(false);
+        }
+    }
+
     private void set申請情報エリア(FutanGendogakuNintei futanGendogakuNintei) {
         div.getTxtShinseiYMD().setValue(futanGendogakuNintei.get申請年月日());
         init申請理由DDL();
         div.getDdlShinseiRiyu().setSelectedKey(futanGendogakuNintei.get申請理由区分());
         div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState());
+        GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
+        ShinseiJoho shinseiJoho = new ShinseiJoho(
+                ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
+                gemmenGengakuShinsei.get申請届出者氏名(), gemmenGengakuShinsei.get申請届出者氏名カナ(), gemmenGengakuShinsei.get申請届出者続柄(),
+                gemmenGengakuShinsei.get申請届出代行事業者番号(), JigyoshaKubun.toValue(gemmenGengakuShinsei.get事業者区分()),
+                gemmenGengakuShinsei.get申請届出者郵便番号(), gemmenGengakuShinsei.get申請届出者住所(), gemmenGengakuShinsei.get申請届出者電話番号());
+        div.getCcdGemmenGengakuShinsei().set減免減額申請情報(shinseiJoho, futanGendogakuNintei.get申請年月日());
         div.getRadHaigushaUmu().setSelectedKey(futanGendogakuNintei.is配偶者の有無() ? SELECT_KEY0 : SELECT_KEY1);
         if (futanGendogakuNintei.is配偶者の有無()) {
             div.getTxtHaigushaShikibetsuCode().setDomain(futanGendogakuNintei.get配偶者識別コード());
@@ -512,8 +545,8 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set激変緩和措置対象者区分(!div.getChkGekihenKanwa().getSelectedValues().isEmpty());
 
         GemmenGengakuShinsei gemmenGengakuShinsei = new GemmenGengakuShinsei(
-                get証記載保険者番号(div.getTxtShinseiYMD().getValue()),
-                get被保険者番号FromViewState(),
+                futanGendogakuNintei.get証記載保険者番号(),
+                futanGendogakuNintei.get被保険者番号(),
                 GemmenGengakuShurui.負担限度額認定.getコード(),
                 futanGendogakuNintei.get履歴番号());
         GemmenGengakuShinseiBuilder genmenBuilder = gemmenGengakuShinsei.createBuilderForEdit();
@@ -763,15 +796,7 @@ public class FutangendogakuNinteiShinseiHandler {
     }
 
     private void set申請情報エリア表示制御() {
-
-        div.getTxtHaigushaShikibetsuCode().setDisabled(true);
-        div.getTxtHaigushaShimeiKana().setDisabled(true);
-        div.getTxtHaigushaShimei().setDisabled(true);
-        div.getTxtHaigushaUmareYMD().setDisabled(true);
-        div.getTxtHaigushaRenrakusaki().setDisabled(true);
-        div.getTxtHaigushaJusho1().setDisabled(true);
-        div.getTxtHaigushaJusho2().setDisabled(true);
-        div.getRadHaigushaKazeiKubun().setDisabled(true);
+        onChange_radHaigushaUmu();
         if (申請メニューID.equals(ResponseHolder.getMenuID())) {
             div.getRadKetteiKubun().setDisabled(true);
             div.getTxtKetteiYMD().setDisabled(true);
