@@ -15,8 +15,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -31,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 要介護認定進捗状況照会のハンドラークラスです。
+ *
  * @reamsid_L DBE-0210-010 dongyabin
  */
 public class YokaigoNinteiShinchokuJohoShokaiHandler {
@@ -109,6 +112,9 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> serchResult) {
         div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
+        if (serchResult.records().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
         for (YokaigoNinteiShinchokuJoho joho : serchResult.records()) {
             dg_row.add(setRow(joho));
         }
