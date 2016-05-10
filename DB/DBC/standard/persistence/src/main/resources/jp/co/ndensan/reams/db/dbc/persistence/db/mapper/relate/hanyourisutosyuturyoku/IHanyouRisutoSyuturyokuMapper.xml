@@ -186,7 +186,7 @@
             AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" <![CDATA[<>]]> 0
         </if>
         <if test="santeiKijun != 0 and santeiKijun != null and !santeiKijun.isEmpty()">
-            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijun}
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijunParameter}
         </if>
         <if test="shisehiFrom != null and !shisehiFrom.isEmpty()">
             AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD"<![CDATA[>=]]>#{shisehiFrom}
@@ -505,7 +505,7 @@
             AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_jigyoKogakuShikyuGaku" <![CDATA[<>]]> 0
         </if>
         <if test="santeiKijun != 0 and santeiKijun != null and !santeiKijun.isEmpty()">
-            AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijun}
+            AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijunParameter}
         </if>
         <if test="shisehiFrom != null and !shisehiFrom.isEmpty()">
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_shinseiYMD"<![CDATA[>=]]>#{shisehiFrom}
@@ -702,7 +702,7 @@
         <result property="認定有効期間開始日" column="認定有効期間開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定有効期間終了日" column="認定有効期間終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="受給認定日" column="受給認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="旧措置フラグ" column="旧措置フラグ"/>
+        <result property="旧措置フラグ" column="旧措置フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="みなし要介護区分コード" column="みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="直近異動事由コード" column="直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="支払場所" column="支払場所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -728,7 +728,7 @@
         <result property="支払済金額合計" column="支払済金額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="対象者受取年月" column="対象者受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="対象者判定審査年月" column="対象者判定審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="自動償還対象フラグ" column="自動償還対象フラグ"/>
+        <result property="自動償還対象フラグ" column="自動償還対象フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="決定年月日" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="本人支払額" column="本人支払額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="判定_支給区分コード" column="判定_支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

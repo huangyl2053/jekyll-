@@ -198,7 +198,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set受給認定開始日(get日付項目(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(get日付項目(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(get日付項目(entity.get受給認定日(), parameter));
-        csvEntity.set受給旧措置(entity.is旧措置フラグ());
+        csvEntity.set受給旧措置(entity.get旧措置フラグ());
         csvEntity.set受給みなし更新認定(entity.getみなし要介護区分コード() != null
                 ? entity.getみなし要介護区分コード().getColumnValue() : RString.EMPTY);
         csvEntity.set受給直近事由(entity.get直近異動事由コード() != null
@@ -517,7 +517,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             RString 国保連委託なし = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             csvEntity.set国保連委託なし(国保連委託なし);
             //TODO 仕様変更
-            csvEntity.set高額自動償還(entity.is自動償還対象フラグ());
+            csvEntity.set高額自動償還(entity.get自動償還対象フラグ());
             csvEntity.set利用者負担段階(get高額給付根拠(entity.get高額給付根拠()));
         }
     }

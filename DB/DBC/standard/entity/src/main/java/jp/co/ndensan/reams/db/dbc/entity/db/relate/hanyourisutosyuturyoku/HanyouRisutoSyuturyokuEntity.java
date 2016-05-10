@@ -56,7 +56,7 @@ public class HanyouRisutoSyuturyokuEntity {
     private Decimal 支払済金額合計;
     private FlexibleYearMonth 対象者受取年月;
     private FlexibleYearMonth 対象者判定審査年月;
-    private boolean 自動償還対象フラグ;
+    private RString 自動償還対象フラグ;
     private FlexibleDate 決定年月日;
     private Decimal 本人支払額;
     private RString 判定_支給区分コード;
@@ -131,7 +131,7 @@ public class HanyouRisutoSyuturyokuEntity {
     private FlexibleDate 認定有効期間開始日;
     private FlexibleDate 認定有効期間終了日;
     private FlexibleDate 受給認定日;
-    private boolean 旧措置フラグ;
+    private RString 旧措置フラグ;
     private Code みなし要介護区分コード;
     private Code 直近異動事由コード;
 
