@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyak
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.otheraddressledger.OtherAddressInformationParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfFromDBEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressLedgerEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfFromDBEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressLedgerEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.otheraddressinformation.IOtherAddressInformationMapper;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;

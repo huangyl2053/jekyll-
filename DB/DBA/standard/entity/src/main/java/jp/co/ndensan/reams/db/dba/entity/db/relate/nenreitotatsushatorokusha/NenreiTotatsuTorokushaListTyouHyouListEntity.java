@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.jyukirendotorokushalistbatchentity;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住基連動登録者リスト帳票用データリストEntity。
+ * 年齢到達登録者リスト帳票用データリストEntity。
  *
- * @reamsid_L DBA-0560-020 xuyannan
+ * @reamsid_L DBA-0570-020 xuyannan
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JyukiRendoTorokushaListTyouHyouListEntity {
+public class NenreiTotatsuTorokushaListTyouHyouListEntity {
 
     private RString 印刷日時;
     private RString 対象情報タイトル;
@@ -44,13 +44,13 @@ public class JyukiRendoTorokushaListTyouHyouListEntity {
     private RString 異動情報タイトル6;
     private RString リスト上_世帯コード;
     private RString リスト上_被保険者カナ氏名;
-    private RString リスト上_事由;
-    private RString リスト上_異動年月日;
-    private RString リスト上_届出年月日;
+    private RString リスト上_事由_左;
+    private RString リスト上_異動年月日_左;
+    private RString リスト上_届出年月日_左;
     private RString リスト上_開始年月日;
-    private RString リスト上_事由_2;
-    private RString リスト上_異動年月日_2;
-    private RString リスト上_届出年月日_2;
+    private RString リスト上_事由_右;
+    private RString リスト上_異動年月日_右;
+    private RString リスト上_届出年月日_右;
     private RString リスト上_終了年月日;
     private RString リスト上_区分;
     private RString リスト上_異動情報1;
@@ -59,17 +59,16 @@ public class JyukiRendoTorokushaListTyouHyouListEntity {
     private RString リスト_被保険者番号;
     private RString リスト下_識別コード;
     private RString リスト下_被保険者氏名;
-    private RString リスト下_事由;
-    private RString リスト下_異動年月日;
-    private RString リスト下_届出年月日;
+    private RString リスト下_事由_左;
+    private RString リスト下_異動年月日_左;
+    private RString リスト下_届出年月日_左;
     private RString リスト下_開始年月日;
-    private RString リスト下_事由_2;
-    private RString リスト下_異動年月日_2;
-    private RString リスト下_届出年月日_2;
+    private RString リスト下_事由_右;
+    private RString リスト下_異動年月日_右;
+    private RString リスト下_届出年月日_右;
     private RString リスト下_終了年月日;
     private RString リスト下_区分;
     private RString リスト下_異動情報4;
     private RString リスト下_異動情報5;
     private RString リスト下_異動情報6;
-
 }

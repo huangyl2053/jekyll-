@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBA-0480-020 zhangzhiming -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyuhoryutokuteijushoichiran.ITennyuHoryuTokuteiMapper">
-    <resultMap id="resultMap_TennyuHoryuTokuteiEntity" type="jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity" autoMapping="true">
+    <resultMap id="resultMap_TennyuHoryuTokuteiEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity" autoMapping="true">
         <id property="kanriNo" column="DbT7023RendoHoryu_kanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="shichosonCode" column="DbT7023RendoHoryu_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="shichosonMeisho" column="DbT7023RendoHoryu_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

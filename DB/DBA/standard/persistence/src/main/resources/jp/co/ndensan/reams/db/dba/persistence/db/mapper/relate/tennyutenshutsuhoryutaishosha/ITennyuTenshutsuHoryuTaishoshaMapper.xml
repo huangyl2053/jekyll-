@@ -29,7 +29,7 @@
         ,DbT1011TenshutsuHoryuTaishosha."tenshutsuKakuteiIdoYMD" AS "tenshutsuKakuteiIdoYMD"
         FROM  rgdb."DbT1011TenshutsuHoryuTaishosha" DbT1011TenshutsuHoryuTaishosha
     </select>
-    <resultMap id="resultMap_TennyuTenshutsuHoryuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_TennyuTenshutsuHoryuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="履歴番号" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -71,7 +71,7 @@
         WHERE
         NOT EXISTS ( SELECT * FROM rgdb."DbT7051KoseiShichosonMaster"  DbT7051KoseiShichosonMaster WHERE DbT7051KoseiShichosonMaster."shichosonCode" =  substr(DbT1010TennyushutsuHoryuTaishosha."zenkokuJushoCode" , 1 ,5))
     </select>
-    <resultMap id="resultMap_HoryuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_HoryuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="履歴番号" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -110,7 +110,7 @@
         WHERE
         EXISTS ( SELECT * FROM rgdb."DbT7051KoseiShichosonMaster"  DbT7051KoseiShichosonMaster WHERE DbT7051KoseiShichosonMaster."shichosonCode" =  substr(DbT1010TennyushutsuHoryuTaishosha."zenkokuJushoCode" , 1 ,5))
     </select>
-    <resultMap id="resultMap_TenshutsuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_TenshutsuEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity" autoMapping="true">
         <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="履歴番号" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyuhoryutokuteijushoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity;
 
 /**
