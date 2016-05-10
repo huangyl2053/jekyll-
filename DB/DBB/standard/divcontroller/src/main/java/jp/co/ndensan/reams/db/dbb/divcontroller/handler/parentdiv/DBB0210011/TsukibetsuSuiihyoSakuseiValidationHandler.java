@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -49,11 +48,11 @@ public class TsukibetsuSuiihyoSakuseiValidationHandler {
         RDate 生年月日E = div.getTxtUmareEd().getValue();
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getRadNenrei().getSelectedKey() != null && !div.getRadNenrei().getSelectedKey().isEmpty()) {
-            if (ageStart == null || ageStart.intValue() <= 年齢_65) {
+            if (ageStart == null || ageStart.intValue() < 年齢_65) {
                 validationMessages.add(new ValidationMessageControlPair(RRVMessages.年齢65歳未満));
             }
             if ((ageStart != null || ageEnd != null) && 年齢基準日 == null) {
-                throw new ApplicationException(UrWarningMessages.未入力.getMessage().replace("年齢基準日"));
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.年齢基準日));
             }
             if (ageStart != null && ageEnd != null && ageStart.compareTo(ageEnd) > 0) {
                 validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始年齢大小不整合));
@@ -66,11 +65,12 @@ public class TsukibetsuSuiihyoSakuseiValidationHandler {
         return validationMessages;
     }
 
-    private static enum RRVMessages implements IValidationMessage {
+    private enum RRVMessages implements IValidationMessage {
 
         年齢65歳未満(DbbErrorMessages.年齢65歳未満),
         抽出開始年齢大小不整合(DbbErrorMessages.抽出開始年齢大小不整合),
-        抽出開始生年月日大小不整合(DbbErrorMessages.抽出開始生年月日大小不整合);
+        抽出開始生年月日大小不整合(DbbErrorMessages.抽出開始生年月日大小不整合),
+        年齢基準日(UrWarningMessages.未入力, "年齢基準日");
 
         private final Message message;
 
