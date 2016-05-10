@@ -177,6 +177,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString 国保連再送付_チェック = new RString("0");
     private static final RString 行状態_削除 = new RString("削除");
     private static final RString 行状態_更新 = new RString("更新");
+    private static final RString 行状態_更新なし = RString.EMPTY;
     private static final RString FORMAT = new RString("%02d");
     private static final RString 住宅改修_状態 = new RString("Unchanged");
     private static final RString 申請を保存ボタン = new RString("btnAddShikyuShinsei");
@@ -1245,18 +1246,28 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         ServiceShuruiCode サービス種類コード = 住宅改修費事前申請.getServiceShuruiCode(引き継ぎ被保険者番号,
                 new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
         for (dgGaisyuList_Row tmpRow : gridList) {
-            if (行状態_更新.equals(tmpRow.getTxtJyotai()) || 行状態_削除.equals(tmpRow.getTxtJyotai())) {
+            if (行状態_更新.equals(tmpRow.getTxtJyotai()) || 行状態_削除.equals(tmpRow.getTxtJyotai())
+                    || 行状態_更新なし.equals(tmpRow.getTxtJyotai())) {
                 ShokanJutakuKaishu oldData = 住宅改修レコードの取得(tmpRow, oldDataList);
                 ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = oldData.createBuilderForEdit();
                 shokanJutakuKaishuBuilder.set住宅改修内容(tmpRow.getTxtKaishuNaiyo());
                 shokanJutakuKaishuBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
                 shokanJutakuKaishuBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
-                shokanJutakuKaishuBuilder.set住宅改修着工年月日(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()));
-                shokanJutakuKaishuBuilder.set住宅改修完成年月日(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()));
+                if (tmpRow.getTxtChakkoYoteibi() != null) {
+                    shokanJutakuKaishuBuilder.set住宅改修着工年月日(new FlexibleDate(
+                            new RDate(tmpRow.getTxtChakkoYoteibi().toString()).toDateString()));
+                }
+                if (tmpRow.getTxtKanseiYoteibi() != null) {
+                    shokanJutakuKaishuBuilder.set住宅改修完成年月日(new FlexibleDate(
+                            new RDate(tmpRow.getTxtKanseiYoteibi().toString()).toDateString()));
+                }
                 shokanJutakuKaishuBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty()
                         ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
-                EntityDataState state = 行状態_更新.equals(tmpRow.getTxtJyotai())
-                        ? EntityDataState.Modified : EntityDataState.Deleted;
+                EntityDataState state = EntityDataState.Unchanged;
+                if (!行状態_更新なし.equals(tmpRow.getTxtJyotai())) {
+                    state = 行状態_更新.equals(tmpRow.getTxtJyotai())
+                            ? EntityDataState.Modified : EntityDataState.Deleted;
+                }
                 shokanJutakuKaishuBuilder.setステータス(state);
                 oldData = shokanJutakuKaishuBuilder.build();
                 kaishuList.add(oldData);

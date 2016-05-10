@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -359,10 +358,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         if (!row.getDefaultDataName1().isEmpty() && row.getDefaultDataName1().length() == SIX) {
             RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
             RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, SIX).toString());
-            ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv
-                    = (ServiceCodeInputCommonChildDivDiv) div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput();
-            serviceCodeInputDiv.getTxtServiceCode1().setValue(serviceCodeShuruyi);
-            serviceCodeInputDiv.getTxtServiceCode2().setValue(serviceCodeKoumoku);
+            div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().setサービス種類コード(serviceCodeShuruyi);
+            div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().setサービス項目コード(serviceCodeKoumoku);
         }
         div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setValue(row.getDefaultDataName2().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setValue(row.getDefaultDataName3().getValue());
@@ -377,10 +374,9 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * 特定入所者費登録エリアclearのメソッドます。
      */
     public void clear特定入所者費登録エリア() {
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div.getPanelTokutei()
-                .getPanelMeisai().getCcdServiceCodeInput();
-        serviceCodeInputDiv.getTxtServiceCode1().clearValue();
-        serviceCodeInputDiv.getTxtServiceCode2().clearValue();
+        div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().setサービス種類コード(RString.EMPTY);
+        div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().setサービス項目コード(RString.EMPTY);
+        div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().setサービス名称(RString.EMPTY);
         div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().clearValue();
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().clearValue();
         div.getPanelTokutei().getPanelMeisai().getTxtNisu().clearValue();
@@ -460,10 +456,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     private boolean modifiedCheck(dgdTokuteiYichiran_Row dgdRow) {
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div.getPanelTokutei()
-                .getPanelMeisai().getCcdServiceCodeInput();
-        RString サービス種類コード = serviceCodeInputDiv.getTxtServiceCode1().getValue();
-        RString サービス項目コード = serviceCodeInputDiv.getTxtServiceCode2().getValue();
+        RString サービス種類コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード1();
+        RString サービス項目コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード2();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(サービス項目コード);
         if (!dgdRow.getDefaultDataName1().equals(builder.toRString())) {
@@ -494,10 +488,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
     }
 
     private void setDgdTokuteiYichiran_Row(dgdTokuteiYichiran_Row dgdRow) {
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div.getPanelTokutei()
-                .getPanelMeisai().getCcdServiceCodeInput();
-        RString サービス種類コード = serviceCodeInputDiv.getTxtServiceCode1().getValue();
-        RString サービス項目コード = serviceCodeInputDiv.getTxtServiceCode2().getValue();
+        RString サービス種類コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード1();
+        RString サービス項目コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード2();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(サービス項目コード);
         dgdRow.setDefaultDataName1(builder.toRString());
@@ -704,10 +696,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * @param flag boolean
      */
     public void readOnly特定入所者費登録エリア(boolean flag) {
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div.getPanelTokutei()
-                .getPanelMeisai().getCcdServiceCodeInput();
-        serviceCodeInputDiv.getTxtServiceCode2().setReadOnly(flag);
-        serviceCodeInputDiv.getBtnKensaku().setDisabled(flag);
+        div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getTxtNisu().setReadOnly(flag);
