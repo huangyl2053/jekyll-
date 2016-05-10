@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Soshit
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.NinteiShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.SakujoJiyuCode;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoEucCsvEntity;
@@ -28,6 +29,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.Hihoken
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
@@ -48,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -69,6 +73,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -238,7 +244,6 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             eucCsvEntity.set前住所番地(kojin.get転入前().get番地().getBanchi().value());
             eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
         }
-
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         eucCsvEntity.set市町村名(association.get市町村名());
         eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
@@ -261,10 +266,10 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             eucCsvEntity.set送付先行政区名(atesaki.get宛先行政区().get名称());
         }
         eucCsvEntity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
-        eucCsvEntity.set資格取得事由(entity.get被保険者台帳管理_資格取得事由コード());
+        eucCsvEntity.set資格取得事由(set資格取得事由(entity.get被保険者台帳管理_資格取得事由コード()));
         eucCsvEntity.set資格取得日(set年月日(entity.get被保険者台帳管理_資格取得年月日()));
         eucCsvEntity.set資格取得届出日(set年月日(entity.get被保険者台帳管理_資格取得届出年月日()));
-        eucCsvEntity.set喪失事由(entity.get被保険者台帳管理_資格喪失事由コード());
+        eucCsvEntity.set喪失事由(set喪失事由(entity.get被保険者台帳管理_資格喪失事由コード()));
         eucCsvEntity.set資格喪失日(set年月日(entity.get被保険者台帳管理_資格喪失年月日()));
         eucCsvEntity.set資格喪失届日(set年月日(entity.get被保険者台帳管理_資格喪失届出年月日()));
         eucCsvEntity.set資格区分(set資格区分(entity.get被保険者台帳管理_被保険者区分コード()));
@@ -276,14 +281,16 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             lasdecCode = new LasdecCode(entity.get被保険者台帳管理_市町村コード());
         }
         eucCsvEntity.set資格証記載保険者番号(hokenshaList.get(lasdecCode).get証記載保険者番号().value());
-        eucCsvEntity.set医療保険種別(entity.get医療保険加入状況_医療保険種別コード());
+        eucCsvEntity.set医療保険種別(set医療保険種別(entity.get医療保険加入状況_医療保険種別コード()));
         eucCsvEntity.set医療保険番号(entity.get医療保険加入状況_医療保険番号());
         eucCsvEntity.set医療保険者名(entity.get医療保険加入状況_医療保険者名称());
         eucCsvEntity.set医療保険記号番号(entity.get医療保険加入状況_医療保険記号番号());
-        eucCsvEntity.set特定疾病(entity.get受給者台帳_2号特定疾病コード());
+        eucCsvEntity.set特定疾病(RString.isNullOrEmpty(entity.get受給者台帳_2号特定疾病コード()) ? RString.EMPTY
+                : TokuteiShippei.toValue(entity.get受給者台帳_2号特定疾病コード()).get名称());
         eucCsvEntity.set受給申請事由(set受給申請事由(entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
         eucCsvEntity.set申請理由(entity.get受給者台帳_申請理由());
-        eucCsvEntity.set申請関係者(entity.get受給者台帳_申請者関係コード());
+        eucCsvEntity.set申請関係者(RString.isNullOrEmpty(entity.get受給者台帳_申請者関係コード()) ? RString.EMPTY
+                : ShinseishaKankeiCode.toValue(entity.get受給者台帳_申請者関係コード()).get名称());
         eucCsvEntity.set本人関係(entity.get受給者台帳_本人との関係());
         eucCsvEntity.set申請氏名(entity.get今回申請届出_申請届出者氏名());
         eucCsvEntity.set申請氏名カナ(entity.get今回申請届出_申請届出者氏名カナ());
@@ -306,11 +313,12 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set委託先状況(entity.is今回調査委託先_状況フラグ() ? ARI : MURI);
         eucCsvEntity.set調査員氏名(entity.get今回調査員_調査員氏名());
         eucCsvEntity.set調査員氏名カナ(entity.get今回調査員_調査員氏名カナ());
-        eucCsvEntity.set調査員性別(entity.get今回調査員_性別());
+        eucCsvEntity.set調査員性別(set性別(entity.get今回調査員_性別()));
         eucCsvEntity.set調査員郵便(set郵便番号(entity.get今回調査員_郵便番号()));
         eucCsvEntity.set調査員住所(entity.get今回調査員_住所());
         eucCsvEntity.set調査員連絡先(entity.get今回調査員_電話番号());
-        eucCsvEntity.set調査員資格(entity.get今回調査員_調査員資格());
+        eucCsvEntity.set調査員資格(RString.isNullOrEmpty(entity.get今回調査員_調査員資格()) ? RString.EMPTY
+                : Sikaku.toValue(entity.get今回調査員_調査員資格()).get名称());
         eucCsvEntity.set調査員所属機関名(entity.get今回調査員_所属機関名称());
         eucCsvEntity.set調査員状況(entity.is今回調査員_状況フラグ() ? ARI : MURI);
         eucCsvEntity.set医療機関コード(entity.get今回申請_主治医医療機関コード());
@@ -333,16 +341,16 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set調査委託日(set年月日(entity.get今回調査依頼_認定調査依頼年月日()));
         eucCsvEntity.set調査予定日(set年月日(entity.get今回計画情報_認定調査予定年月日()));
         eucCsvEntity.set調査終了日(set年月日(entity.get今回完了情報_認定調査完了年月日()));
+        setEucCsvEntity2(eucCsvEntity, entity);
+    }
+
+    private void setEucCsvEntity2(HanyoRisutoJyukyusyaDaichoEucCsvEntity eucCsvEntity, HanyoRisutoJyukyusyaDaichoEntity entity) {
         eucCsvEntity.set意見依頼日(set年月日(entity.get今回意見書作成依頼_主治医意見書作成依頼年月日()));
         eucCsvEntity.set意見予定日(set年月日(entity.get今回計画情報_主治医意見書登録予定年月日()));
         eucCsvEntity.set意見取寄日(set年月日(entity.get今回意見書情報_主治医意見書受領年月日()));
         eucCsvEntity.set資料作成日(set年月日(entity.get今回結果情報_介護認定審査会資料作成年月日()));
         eucCsvEntity.set審査予定日(set年月日(entity.get今回計画情報_認定審査会予定年月日()));
         eucCsvEntity.set審査回答日(set年月日(entity.get受給者台帳_認定年月日()));
-        setEucCsvEntity2(eucCsvEntity, entity);
-    }
-
-    private void setEucCsvEntity2(HanyoRisutoJyukyusyaDaichoEucCsvEntity eucCsvEntity, HanyoRisutoJyukyusyaDaichoEntity entity) {
         eucCsvEntity.set認定開始日(set年月日(entity.get受給者台帳_認定有効期間開始年月日()));
         eucCsvEntity.set認定終了日(set年月日(entity.get受給者台帳_認定有効期間終了年月日()));
         eucCsvEntity.set認定日(set年月日(entity.get受給者台帳_認定年月日()));
@@ -494,11 +502,34 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set要介護度(RString koroshoIfCode, RString code) {
-        try {
-            return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(koroshoIfCode) || RString.isNullOrEmpty(code)) {
             return RString.EMPTY;
         }
+        return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
+    }
+
+    private RString set資格取得事由(RString 事由コード) {
+        UzT0007CodeEntity 資格取得事由 = CodeMaster.getCode(new CodeShubetsu("0007"), new Code(事由コード));
+        if (資格取得事由 == null) {
+            return RString.EMPTY;
+        }
+        return 資格取得事由.getコード略称();
+    }
+
+    private RString set喪失事由(RString 事由コード) {
+        UzT0007CodeEntity 喪失事由 = CodeMaster.getCode(new CodeShubetsu("0010"), new Code(事由コード));
+        if (喪失事由 == null) {
+            return RString.EMPTY;
+        }
+        return 喪失事由.getコード略称();
+    }
+
+    private RString set医療保険種別(RString 医療保険種別コード) {
+        UzT0007CodeEntity 医療保険種別 = CodeMaster.getCode(new CodeShubetsu("0001"), new Code(医療保険種別コード));
+        if (医療保険種別 == null) {
+            return RString.EMPTY;
+        }
+        return 医療保険種別.getコード略称();
     }
 
     private RString set郵便番号(RString 郵便番号) {
@@ -568,16 +599,14 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set異動事由コード(RString データ区分) {
-        RString 異動事由コード;
-        try {
-            異動事由コード = DataKubun.toValue(データ区分).toRString();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(データ区分)) {
             return RString.EMPTY;
         }
+        RString 異動事由コード = DataKubun.toValue(データ区分).toRString();
         if (DataKubun.通常_認定.toRString().equals(異動事由コード)) {
             return RString.EMPTY;
         } else {
-            return DataKubun.toValue(データ区分).toRString();
+            return 異動事由コード;
         }
     }
 
@@ -630,35 +659,31 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set障害高齢者自立度(RString 障害高齢者の日常生活自立度コード) {
-        try {
-            return ShogaiNichijoSeikatsuJiritsudoCode.toValue(障害高齢者の日常生活自立度コード).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(障害高齢者の日常生活自立度コード)) {
             return RString.EMPTY;
         }
+        return ShogaiNichijoSeikatsuJiritsudoCode.toValue(障害高齢者の日常生活自立度コード).get名称();
     }
 
     private RString set認知症高齢者自立度(RString 認知症高齢者の日常生活自立度コード) {
-        try {
-            return NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者の日常生活自立度コード).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(認知症高齢者の日常生活自立度コード)) {
             return RString.EMPTY;
         }
+        return NinchishoNichijoSeikatsuJiritsudoCode.toValue(認知症高齢者の日常生活自立度コード).get名称();
     }
 
     private RString set申請区分申請時(RString 認定申請区分申請時コード) {
-        try {
-            return NinteiShinseiShinseijiKubunCode.toValue(認定申請区分申請時コード).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(認定申請区分申請時コード)) {
             return RString.EMPTY;
         }
+        return NinteiShinseiShinseijiKubunCode.toValue(認定申請区分申請時コード).get名称();
     }
 
     private RString set申請区分法令(RString 認定申請区分法令コード) {
-        try {
-            return NinteiShinseiHoreiCode.toValue(認定申請区分法令コード).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(認定申請区分法令コード)) {
             return RString.EMPTY;
         }
+        return NinteiShinseiHoreiCode.toValue(認定申請区分法令コード).get名称();
     }
 
     private void set指定事業者(HanyoRisutoJyukyusyaDaichoEucCsvEntity eucCsvEntity, HanyoRisutoJyukyusyaDaichoEntity entity) {
@@ -716,11 +741,10 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set居宅計画作成区分(RString 作成区分コード) {
-        try {
-            return KyotakuservicekeikakuSakuseikubunCode.toValue(作成区分コード).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(作成区分コード)) {
             return RString.EMPTY;
         }
+        return KyotakuservicekeikakuSakuseikubunCode.toValue(作成区分コード).get名称();
     }
 
     private PersonalData toPersonalData(HanyoRisutoJyukyusyaDaichoEntity entity) {
@@ -730,27 +754,25 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set性別(RString 性別コード) {
-        try {
-            return Seibetsu.toValue(性別コード).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(性別コード)) {
             return RString.EMPTY;
         }
+        return Seibetsu.toValue(性別コード).get名称();
     }
 
     private RString set削除理由文言(RString 削除事由コード) {
-        try {
-            return SakujoJiyuCode.toValue(削除事由コード).get名称();
-        } catch (IllegalArgumentException e) {
+
+        if (RString.isNullOrEmpty(削除事由コード)) {
             return RString.EMPTY;
         }
+        return SakujoJiyuCode.toValue(削除事由コード).get名称();
     }
 
     private RString set資格区分(RString 被保険者区分コード) {
-        try {
-            return HihokenshaKubunCode.toValue(被保険者区分コード).toRString();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(被保険者区分コード)) {
             return RString.EMPTY;
         }
+        return HihokenshaKubunCode.toValue(被保険者区分コード).toRString();
     }
 
     private Encode getEncode(RString sakiEncodeKeitai) {
@@ -777,10 +799,10 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         RStringBuilder builder = new RStringBuilder();
         builder.append(CYUSYUTSUDATA);
         RString chusyutsu;
-        try {
-            chusyutsu = ChushutsuDataKubun.toValue(processParamter.getCyusyutsudatakubun()).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(processParamter.getCyusyutsudatakubun())) {
             chusyutsu = RString.EMPTY;
+        } else {
+            chusyutsu = ChushutsuDataKubun.toValue(processParamter.getCyusyutsudatakubun()).get名称();
         }
         builder.append(chusyutsu);
         出力条件.add(builder.toRString());
@@ -789,27 +811,24 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         builder = new RStringBuilder();
         builder.append(SASHIKUBUN);
         RString soshitsu;
-        try {
-            soshitsu = SoshitsuKubun.toValue(processParamter.getSoshitsukubun()).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(processParamter.getSoshitsukubun())) {
             soshitsu = RString.EMPTY;
+        } else {
+            soshitsu = SoshitsuKubun.toValue(processParamter.getSoshitsukubun()).get名称();
         }
         builder.append(soshitsu);
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         RString tasyo;
-        try {
-            tasyo = ChushutsuTaisho.toValue(processParamter.getCyusyutsutaisyo()).get名称();
-        } catch (IllegalArgumentException e) {
+        if (RString.isNullOrEmpty(processParamter.getCyusyutsutaisyo())) {
             tasyo = RString.EMPTY;
+        } else {
+            tasyo = ChushutsuTaisho.toValue(processParamter.getCyusyutsutaisyo()).get名称();
         }
 
         if (ChushutsuTaisho.抽出年月日.get名称().equals(tasyo)) {
-            try {
-                builder.append(CYUSYUTSUHOHO).append(ChushutsuDateShurui.toValue(processParamter.getCyusyutsunichisyurai()).get名称()).append(KIKAN);
-            } catch (IllegalArgumentException e) {
-                builder.append(CYUSYUTSUHOHO).append(RString.EMPTY).append(KIKAN);
-            }
+            builder.append(CYUSYUTSUHOHO).append(RString.isNullOrEmpty(processParamter.getCyusyutsunichisyurai())
+                    ? RString.EMPTY : ChushutsuDateShurui.toValue(processParamter.getCyusyutsunichisyurai()).get名称()).append(KIKAN);
         } else {
             builder.append(CYUSYUTSUHOHO).append(tasyo);
         }
