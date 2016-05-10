@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.entity.report.source.tokuteifutangendogakushinseisho;
+package jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
