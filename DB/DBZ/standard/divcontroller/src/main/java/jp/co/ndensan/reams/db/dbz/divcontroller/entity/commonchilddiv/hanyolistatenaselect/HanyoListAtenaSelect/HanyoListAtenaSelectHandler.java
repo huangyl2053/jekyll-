@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolist
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
@@ -63,8 +63,9 @@ public class HanyoListAtenaSelectHandler {
      * 汎用リスト宛名抽出条件共有子Divを初期化します(パラメータがなし)。
      */
     public void initialize() {
-        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (市町村情報 != null && 市町村情報.get導入形態コード() != null && 市町村情報.get導入形態コード().is広域()) {
+        ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (市町村情報 != null && 市町村情報.get導入形態コード() != null
+                && DonyuKeitaiCode.toValue(市町村情報.get導入形態コード().getColumnValue()).is広域()) {
             div.getCcdHokenshaList().setVisible(true);
             div.getDvChiku().setVisible(false);
         } else {
@@ -542,6 +543,15 @@ public class HanyoListAtenaSelectHandler {
         atenaSelect.setChiku3_ToMesho(div.getCcdChiku3To().get地区3名称());
 
         return atenaSelect;
+    }
+
+    /**
+     * 宛名抽出条件子Divを返却します。
+     *
+     * @return 宛名抽出条件子Div
+     */
+    public HanyoListAtenaSelectDiv get宛名抽出条件子Div() {
+        return div;
     }
 
     private void set初期項目状態() {
