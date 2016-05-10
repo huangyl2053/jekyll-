@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  *
  * @reamsid_L DBC-3091-020 surun
  */
-public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
+public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
 
     private static final RString KEY_ONE = new RString("1");
     private static final RString KEY_TWO = new RString("2");
@@ -71,17 +71,11 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
      *
      * @param entity HanyoListKyotakuServiceKeikakuEntity
      * @param parameter HanyoListKyotakuServiceKeikakuProcessParameter
-     * @param 連番 Decimal
-     * @return HanyoListKyotakuServiceKeikakuCsvEntity
+     * @return HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity
      */
-    public HanyoListKyotakuServiceKeikakuCsvEntity editor(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuProcessParameter parameter, Decimal 連番) {
-        HanyoListKyotakuServiceKeikakuCsvEntity csvEntity = new HanyoListKyotakuServiceKeikakuCsvEntity();
-        if (parameter.isCsv連番付加()) {
-            csvEntity.set連番(numToRString(連番));
-        } else {
-            csvEntity.set連番(RString.EMPTY);
-        }
+    public HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity editor(HanyoListKyotakuServiceKeikakuEntity entity,
+            HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+        HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity();
         editor宛名(entity, csvEntity, parameter);
         editor地区(entity, csvEntity);
         editor前住所(entity, csvEntity, parameter);
@@ -121,7 +115,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor宛名(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         ShikibetsuCode shikibetsuCode = entity.get宛名Entity().getShikibetsuCode();
         if (shikibetsuCode != null) {
             csvEntity.set識別コード(shikibetsuCode.getColumnValue());
@@ -182,7 +176,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor地区(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity) {
 
         StringBuilder stringBuilder = new StringBuilder();
         AtenaJusho atenaJusho = entity.get宛名Entity().getJusho();
@@ -262,7 +256,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor前住所(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
 
         csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD(), parameter));
         csvEntity.set登録事由(isNull(entity.get宛名Entity().getTorokuJiyuCode())
@@ -323,7 +317,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor宛先(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity) {
 
         csvEntity.set市町村コード(isNull(entity.getDbV1001市町村コード())
                 ? RString.EMPTY : entity.getDbV1001市町村コード().value());
@@ -404,7 +398,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor資格(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
 
         csvEntity.set送付先行政区名(isNull(entity.get宛先Entity().getGyoseiku())
                 ? RString.EMPTY : entity.get宛名Entity().getGyoseikuName());
@@ -450,7 +444,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor指定事業者_介護保険施設(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         csvEntity.set指定事業者名(isNull(entity.getDbT7060事業者名称())
                 ? RString.EMPTY : entity.getDbT7060事業者名称().value());
         csvEntity.set指定事業者名カナ(isNull(entity.getDbT7060事業者名称カナ())
@@ -479,7 +473,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor指定事業者_住所地特例対象施設_適用除外施設(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         csvEntity.set指定事業者名(isNull(entity.getDbV1005事業者名称())
                 ? RString.EMPTY : entity.getDbV1005事業者名称().value());
         csvEntity.set指定事業者名カナ(isNull(entity.getDbV1005事業者名称カナ())
@@ -506,7 +500,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     }
 
     private void editor計画(HanyoListKyotakuServiceKeikakuEntity entity,
-            HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
+            HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
         RString 届出区分 = entity.getDbT3005届出区分();
         if (KEY_ONE.equals(届出区分)) {
             csvEntity.set届出区分(表示名称_新規);

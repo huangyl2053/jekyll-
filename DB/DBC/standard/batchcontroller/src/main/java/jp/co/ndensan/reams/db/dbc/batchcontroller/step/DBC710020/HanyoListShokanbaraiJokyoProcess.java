@@ -407,7 +407,10 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(申請日);
         RString shinseiYMD = RString.EMPTY;
-
+        if ((parameter.get申請日From() == null || parameter.get申請日From().isEmpty())
+                && (parameter.get申請日To() == null || parameter.get申請日To().isEmpty())) {
+            return builder;
+        }
         shinseiYMD = dataToRString(parameter.get申請日From())
                 .concat(ITEM)
                 .concat(dataToRString(parameter.get申請日To()));
@@ -419,7 +422,10 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         RStringBuilder builder = new RStringBuilder();
         builder.append(住宅改修支給届出日);
         RString kaishuYM = RString.EMPTY;
-
+        if ((parameter.get住宅改修支給届出日From() == null || parameter.get住宅改修支給届出日From().isEmpty())
+                && (parameter.get住宅改修支給届出日To() == null || parameter.get住宅改修支給届出日To().isEmpty())) {
+            return builder;
+        }
         kaishuYM = dataToRString(parameter.get住宅改修支給届出日From())
                 .concat(ITEM)
                 .concat(dataToRString(parameter.get住宅改修支給届出日To()));

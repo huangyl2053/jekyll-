@@ -233,7 +233,6 @@
 	<if test="支援事業者番号 !=null and !支援事業者番号.isEmpty()">
 		AND DbT3006."keikakuJigyoshaNo" = #{支援事業者番号}
 	</if>
-
     </sql>
     
     <resultMap id="resultMapHanyoListKyotakuServiceKeikakuEntity" autoMapping="true"
@@ -302,7 +301,7 @@
         <result property="dbV4001認定有効期間開始日" column="dbV4001認定有効期間開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="dbV4001認定有効期間終了日" column="dbV4001認定有効期間終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="dbV4001受給認定日" column="dbV4001受給認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="dbV4001旧措置フラグ" column="dbV4001旧措置フラグ"/>
+        <result property="dbV4001旧措置フラグ" column="dbV4001旧措置フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbT4001みなし要介護区分コード" column="dbT4001みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="dbV4001直近異動事由コード" column="dbV4001直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <association property="宛名Entity" 

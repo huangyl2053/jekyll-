@@ -374,8 +374,7 @@ public class HanyoListCsvDataCreate {
             ShoKisaiHokenshaNo 給付証記載保険者番号 = entity.get支給申請Entity().getShoKisaiHokenshaNo();
             TelNo 申請電話番号 = entity.get支給申請Entity().getShinseishaTelNo();
             FlexibleYearMonth 国保連送付年月 = entity.get支給申請Entity().getSofuYM();
-            csvEntity.setサービス提供年月(サービス提供年月 != null
-                    ? サービス提供年月.toDateString() : RString.EMPTY);
+            csvEntity.setサービス提供年月(monthToRString(サービス提供年月, parameter));
             csvEntity.set整理番号(entity.get支給申請Entity().getSeiriNo());
             csvEntity.set様式番号(get様式番号(entity));
             csvEntity.set給付証記載保険者番号(給付証記載保険者番号 != null
@@ -392,8 +391,7 @@ public class HanyoListCsvDataCreate {
             csvEntity.set保険請求額(new RString(String.valueOf(entity.get支給申請Entity().getHokenKyufugaku())));
             csvEntity.set自己負担額(new RString(String.valueOf(entity.get支給申請Entity().getRiyoshaFutangaku())));
             csvEntity.set支払方法(entity.get支給申請Entity().getShiharaiHohoKubunCode());
-            csvEntity.set国保連送付年月(国保連送付年月 != null
-                    ? 国保連送付年月.toDateString() : RString.EMPTY);
+            csvEntity.set国保連送付年月(monthToRString(国保連送付年月, parameter));
             if (entity.get支給申請Entity().getKaishuShinseiKubun() != null && !entity.get支給申請Entity().getKaishuShinseiKubun().isEmpty()) {
                 JutakukaishuShinseiKubun 住宅改修申請区分 = JutakukaishuShinseiKubun.toValue(entity.get支給申請Entity().getKaishuShinseiKubun());
                 csvEntity.set申請状態(住宅改修申請区分 != null ? 住宅改修申請区分.get名称() : RString.EMPTY);
@@ -593,6 +591,17 @@ public class HanyoListCsvDataCreate {
     }
 
     private RString dataToRString(FlexibleDate 日付, HanyoListShokanbaraiJokyoProcessParameter parameter) {
+        if (日付 == null || 日付.isEmpty()) {
+            return RString.EMPTY;
+        }
+        if (!parameter.is日付スラッシュ付加()) {
+            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+        } else {
+            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
+    }
+
+    private RString monthToRString(FlexibleYearMonth 日付, HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
