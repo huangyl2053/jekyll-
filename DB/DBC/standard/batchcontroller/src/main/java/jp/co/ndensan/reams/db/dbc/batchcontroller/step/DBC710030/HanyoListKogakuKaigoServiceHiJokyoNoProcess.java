@@ -175,6 +175,10 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
 
     @Override
     protected void afterExecute() {
+        if ((preEntityList == null || preEntityList.isEmpty()) && parameter.isTomokumeFuka()) {
+            eucNoCsvWriter.writeLine(new HanyouRisutoSyuturyokuEucCsvNoEntity());
+
+        }
 
         List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
         for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
