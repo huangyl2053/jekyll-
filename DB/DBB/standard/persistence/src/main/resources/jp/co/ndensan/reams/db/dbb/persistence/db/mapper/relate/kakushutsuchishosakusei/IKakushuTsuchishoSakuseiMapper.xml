@@ -73,7 +73,7 @@
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="納組" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.nokumiResult"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.kozaResult"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
     </resultMap>
     
     <select id="get宛名納組宛先口座" resultMap="resultMap_KakushuTsuchishoFind"
@@ -82,7 +82,7 @@
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.columns_Koza"/>
+            koza.*
         FROM
             rgdb."DbT2002Fuka" AS "DbT2002Fuka"
         INNER JOIN
@@ -100,9 +100,9 @@
         ON 
             "Nokumi"."CaT0714shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         LEFT JOIN
-            rgua."UaFt310FindKoza"(NULL, NULL, NULL, NULL, NULL, NULL) AS "Koza"
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON 
-            "Koza"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
+            koza."uaT0310Koza_shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         WHERE
             "DbT2002Fuka"."choteiNendo"= #{調定年度} 
         AND "DbT2002Fuka"."fukaNendo"= #{賦課年度} 

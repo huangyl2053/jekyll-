@@ -5,7 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kakushutsuchishosakusei;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class KakushuTsuchishoEntityParameter {
+public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
+        implements IMyBatisParameter {
 
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
@@ -35,14 +41,19 @@ public final class KakushuTsuchishoEntityParameter {
      * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
      * @param 調定日 調定日
+     * @param searchkey IKozaSearchKey
+     * @param list List<KamokuCode>
      */
-    private KakushuTsuchishoEntityParameter(
+    public KakushuTsuchishoEntityParameter(
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             int 履歴番号,
             YMDHMS 調定日時,
-            RString 調定日) {
+            RString 調定日,
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list) {
+        super(searchkey, list);
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
@@ -60,6 +71,8 @@ public final class KakushuTsuchishoEntityParameter {
      * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
      * @param 調定日 調定日
+     * @param searchkey IKozaSearchKey
+     * @param list List<KamokuCode>
      * @return パラメータ
      */
     public static KakushuTsuchishoEntityParameter createSelectByKeyParam(
@@ -68,7 +81,9 @@ public final class KakushuTsuchishoEntityParameter {
             TsuchishoNo 通知書番号,
             int 履歴番号,
             YMDHMS 調定日時,
-            RString 調定日) {
-        return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 履歴番号, 調定日時, 調定日);
+            RString 調定日,
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list) {
+        return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 履歴番号, 調定日時, 調定日, searchkey, list);
     }
 }
