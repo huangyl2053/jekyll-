@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.otheraddressledger.OtherAddressInformationParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInfFromDBEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInformationRecipientNameMybatisEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
  * 他市町村住所地特例者情報のMapperクラスです。
@@ -32,6 +32,5 @@ public interface IOtherAddressInformationMapper {
      * @param recipientNameMybatisParam recipientNameMybatisParam
      * @return List<OtherAddressInformationRecipientNameMybatisEntity>
      */
-    List<OtherAddressInformationRecipientNameMybatisEntity>
-            get宛名識別対象(OtherAddressInformationRecipientNameMybatisParam recipientNameMybatisParam);
+    List<UaFt200FindShikibetsuTaishoEntity> get宛名識別対象(OtherAddressInformationRecipientNameMybatisParam recipientNameMybatisParam);
 }
