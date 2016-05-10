@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1030011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler;
+import static jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalHandler.FIRSTINDEX;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -25,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格喪失異動の対象者情報を表示するためのDivControllerです。
@@ -125,6 +129,11 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnBack(ShikakuSoshitsuIdoTotalDiv div) {
         RealInitialLocker.release(前排他ロックキー);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_証類状況タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_施設入退所タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_老福年金タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_医療保険タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格喪失異動_状態_被保履歴タブ, null);
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.再検索).respond();
     }
 
@@ -136,8 +145,7 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_ModifyButton(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setDisabled(false);
-        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().setReadOnly(false);
+        createHandler(div).資格喪失情報パネルの活性初期化();
         dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki()
                 .getDataGridSelectItem();
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getTxtShutokuDate()
@@ -148,7 +156,6 @@ public class ShikakuSoshitsuIdoTotal {
             div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu()
                     .setSelectedKey(row.getSoshitsuJiyuKey());
         }
-
         response.data = div;
         return response;
     }
@@ -161,21 +168,20 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnKakutei(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-        dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
-        if (row != null) {
-            row.getSoshitsuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                    .getTxtShutokuDate().getValue());
-            row.getSoshitsuTodokedeDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                    .getTxtShutokuTodokedeDate().getValue());
-
-            row.setSoshitsuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                    .getDdlShikakuShutokuJiyu().getSelectedValue());
-            row.setShutokuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
-                    .getDdlShikakuShutokuJiyu().getSelectedKey());
-            row.setState(修正);
-            div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
-            createHandler(div).資格喪失情報パネルの初期化();
-        }
+        List<dgShikakuShutokuRireki_Row> rowlist = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridDataSource();
+        dgShikakuShutokuRireki_Row row = rowlist.get(FIRSTINDEX);
+        row.getSoshitsuDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                .getTxtShutokuDate().getValue());
+        row.getSoshitsuTodokedeDate().setValue(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                .getTxtShutokuTodokedeDate().getValue());
+        row.setSoshitsuJiyu(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                .getDdlShikakuShutokuJiyu().getSelectedValue());
+        row.setSoshitsuJiyuKey(div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput()
+                .getDdlShikakuShutokuJiyu().getSelectedKey());
+        row.setState(修正);
+        rowlist.set(FIRSTINDEX, row);
+        div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridDataSource(rowlist);
+        createHandler(div).資格喪失情報パネルの非活性初期化();
         response.data = div;
         return response;
     }
@@ -188,7 +194,7 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnTorikeshi(ShikakuSoshitsuIdoTotalDiv div) {
         ResponseData<ShikakuSoshitsuIdoTotalDiv> response = new ResponseData<>();
-        createHandler(div).資格喪失情報パネルの初期化();
+        createHandler(div).資格喪失情報パネルの非活性初期化();
         response.data = div;
         return response;
     }

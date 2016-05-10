@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 /**
  * このコードはツールによって生成されました。
  *
- * @reamsid_L DBA-1070-020 lizhuoxuan
+ * @reamsid_L DBA-1070-010 lizhuoxuan
  */
 public interface IShoKaishuKirokuKanriDiv extends ICommonChildDivBaseProperties {
 

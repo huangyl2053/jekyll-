@@ -176,8 +176,10 @@ public class DvShokanbaraiJohoHandler {
         FlexibleDate 決定日To = 決定日T == null ? FlexibleDate.EMPTY : new FlexibleDate(決定日T.toString());
         RDate 国保連送付年月F = panel.getTxtShokanKokuhorenSofuYM().getFromValue();
         RDate 国保連送付年月T = panel.getTxtShokanKokuhorenSofuYM().getToValue();
-        FlexibleYearMonth 国保連送付年月From = 国保連送付年月F == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(国保連送付年月F.toString());
-        FlexibleYearMonth 国保連送付年月To = 国保連送付年月T == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(国保連送付年月T.toString());
+        FlexibleYearMonth 国保連送付年月From = 国保連送付年月F == null ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(国保連送付年月F.getYearMonth().toString());
+        FlexibleYearMonth 国保連送付年月To = 国保連送付年月T == null ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(国保連送付年月T.getYearMonth().toString());
         RString 様式番号選択 = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getTotalRecords()
                 == div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getSelectedItems().size() ? すべて_1 : 部分_2;
         List<dgYoshikiNo_Row> rowLists = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getSelectedItems();
@@ -190,8 +192,10 @@ public class DvShokanbaraiJohoHandler {
         boolean 連番付加 = div.getDvShokanbaraiParam().getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(連番);
         boolean 日付スラッシュ付加 = div.getDvShokanbaraiParam()
                 .getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ);
-        long 出力順 = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID();
-        ReportId 帳票ID = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get帳票ID();
+        long 出力順 = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun() == null
+                ? null : div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID();
+        ReportId 帳票ID = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun() == null
+                ? null : div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get帳票ID();
         parameter.setサービス提供年月From(サービス提供年月From);
         parameter.setサービス提供年月To(サービス提供年月To);
         parameter.set住宅改修支給届出日From(住宅改修支給届出日From);

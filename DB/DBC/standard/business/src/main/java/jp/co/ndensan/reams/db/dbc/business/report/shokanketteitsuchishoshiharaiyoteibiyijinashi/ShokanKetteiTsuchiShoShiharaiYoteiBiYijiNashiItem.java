@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 償還払い支給（不支給）決定通知書のITEMです。
  *
- * @reamsid_L DBC-1000-110 zuotao
+ * @reamsid_L DBC-1000-100 zuotao
  */
 @Getter
 @Setter
@@ -125,7 +125,13 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem {
     private RString customerBarCode;
 
     /**
-     * インスタンスを生成します。
+     * コンストラクタです。
+     */
+    public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param bunshoNo 文章番号
      * @param title タイトル

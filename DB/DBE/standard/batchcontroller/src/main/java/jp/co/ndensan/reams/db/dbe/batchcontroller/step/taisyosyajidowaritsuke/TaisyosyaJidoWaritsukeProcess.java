@@ -13,14 +13,19 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 対象者自動割付の取得バッチクラスです。TODO 2016/04/12 AccessLog出力を実装しない
+ * 対象者自動割付の取得バッチクラスです。
  *
  * @reamsid_L DBE-1350-040 wangxiaodong
  */
@@ -78,6 +83,8 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                     continue;
                 }
                 insert介護認定審査会割付情報(shinsakaiKaisaiNo.get(i), taisyosya.get(j), shinsakaiKaisaiYMD.get(i));
+                AccessLogger.log(AccessLogType.更新,
+                        toPersonalData(shinsakaiKaisaiNo.get(i), taisyosya.get(j).getShinseishoKanriNo().value()));
                 割付人数++;
                 taisyosya.remove(j);
                 if (!(shinsakaiWaritsukeNinsu.get(i) + 割付人数 < shinsakaiJidoWariateTeiin.get(i))) {
@@ -118,5 +125,10 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
         dbT5502Entity.setShinsakaiShiryoSofuYMD(FlexibleDate.EMPTY);
         dbT5502Entity.setHanteiKekkaCode(Code.EMPTY);
         mapper.insertDbT5502ShinsakaiWariateJoho(dbT5502Entity);
+    }
+
+    private PersonalData toPersonalData(RString 開催番号, RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), 開催番号, 申請書管理番号);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 }

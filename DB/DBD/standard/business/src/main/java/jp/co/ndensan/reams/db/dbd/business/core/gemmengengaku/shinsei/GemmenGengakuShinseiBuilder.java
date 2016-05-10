@@ -49,7 +49,6 @@ public class GemmenGengakuShinseiBuilder {
      * @return {@link GemmenGengakuShinseiBuilder}
      */
     public GemmenGengakuShinseiBuilder set履歴番号(int 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setShinseiRirekiNo(履歴番号);
         return this;
     }

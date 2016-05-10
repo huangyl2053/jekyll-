@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link ChoshuYuyoJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBB-9999-013 huangh
  */
 public class ChoshuYuyoJohoBuilder {
 

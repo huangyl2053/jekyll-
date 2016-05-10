@@ -124,6 +124,8 @@ public class KihonInfoMainPanel {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisabled(true);
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDisabled(true);
         } else {
+            div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setDisabled(false);
+            div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setReadOnly(false);
             HokenKyufuRitsu 保険給付率 = JutakuKaishuJizenShinsei.createInstance().getKyufuritsu(被保険者番号, サービス年月);
             if (保険給付率 != null) {
                 div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(保険給付率.value());

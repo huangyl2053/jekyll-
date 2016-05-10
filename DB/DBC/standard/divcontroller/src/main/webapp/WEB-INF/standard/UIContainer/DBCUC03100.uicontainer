@@ -42,7 +42,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0310011",
      "toLayoutTitle": "受領委任契約申請登録・修正",
-     "toState": ""
+     "toState": "修正モード"
     },
     {
      "id": "4",
@@ -64,15 +64,15 @@
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZU020001",
+     "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
-     "toState": "対象者検索"
+     "toState": "検索条件"
     },
     {
      "id": "6",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZU020001",
+     "layoutName": "DBZ0200001",
      "layoutTitle": "対象者検索",
      "eventName": "対象者特定",
      "destroy": true,
@@ -80,7 +80,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0310011",
      "toLayoutTitle": "受領委任契約申請登録・修正",
-     "toState": ""
+     "toState": "修正モード"
     },
     {
      "id": "7",

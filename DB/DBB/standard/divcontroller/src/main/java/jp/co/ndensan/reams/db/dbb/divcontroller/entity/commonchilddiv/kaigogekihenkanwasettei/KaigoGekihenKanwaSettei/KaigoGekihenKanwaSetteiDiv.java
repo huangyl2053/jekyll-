@@ -238,7 +238,7 @@ public class KaigoGekihenKanwaSetteiDiv extends Panel implements IKaigoGekihenKa
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void onLoad(Decimal hdnGekihenIndex04,
+    public void initialize(Decimal hdnGekihenIndex04,
             Decimal hdnGekihenIndex05,
             Decimal hdnGekihenIndex06,
             Decimal hdnGekihenIndex08,

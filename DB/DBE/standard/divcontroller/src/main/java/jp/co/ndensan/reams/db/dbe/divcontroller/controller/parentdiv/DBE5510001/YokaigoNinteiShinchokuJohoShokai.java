@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5510001;
 
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
@@ -27,12 +26,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 /**
  *
  * 要介護認定進捗状況照会クラスです。
+ *
  * @reamsid_L DBE-0210-010 dongyabin
  */
 public class YokaigoNinteiShinchokuJohoShokai {
-    
+
     /**
      * 画面初期化処理です。
+     *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
@@ -40,9 +41,10 @@ public class YokaigoNinteiShinchokuJohoShokai {
         getHandler(div).onload();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 検索する場合、選択変更します。
+     *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
@@ -50,9 +52,10 @@ public class YokaigoNinteiShinchokuJohoShokai {
         getHandler(div).radKensakuHohoChange();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 日付範囲、選択変更します。
+     *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
@@ -60,9 +63,10 @@ public class YokaigoNinteiShinchokuJohoShokai {
         getHandler(div).radHizukeHaniChange();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 条件をクリアするボタン押下します。
+     *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
@@ -70,22 +74,24 @@ public class YokaigoNinteiShinchokuJohoShokai {
         getHandler(div).btnConditionClear();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「検索する」ボタン押下します。
+     *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnKensaku(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-       
+
         SearchResult<YokaigoNinteiShinchokuJoho> serchResult = YokaigoNinteiShinchokuJohoShokaiFinder
                 .createInstance().selectItirannJoho(get検索パラメータ(div));
         getHandler(div).btnKensaku(serchResult);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「照会」ボタン押下します。
+     *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
@@ -94,41 +100,44 @@ public class YokaigoNinteiShinchokuJohoShokai {
                 getActiveRow().getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「進捗状況一覧表を発行する」ボタン押下の場合、入力チェック実行します。
+     *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintCheck(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         if (div.getDgShinseiJoho().getDataSource().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 進捗状況一覧表を発行する」ボタン押下の場合、帳票を印刷します。
+     *
      * @param div 画面情報
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<SourceDataCollection> btnPrint(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return ResponseData.of(new NiteiGyomuShinchokuJokyoIchiranhyoPrintService().print(ceratePrint(div))).respond();
     }
-    
+
     /**
      * 進捗状況一覧表を発行する」ボタン押下の場合、完了メッセージの表示します。
+     *
      * @param div 画面情報
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(
-                UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
+                    UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
         }
         return ResponseData.of(div).respond();
     }
-    
+
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return YokaigoNinteiParamter.createParamter(
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
@@ -153,13 +162,13 @@ public class YokaigoNinteiShinchokuJohoShokai {
                 div.getTxtMaximumDisplayNumber().getValue().isEmpty() ? -1 : Integer.parseInt(div
                         .getTxtMaximumDisplayNumber().getValue().toString()));
     }
-    
+
     private NiteiGyomuShinchokuJokyoIchiranhyoJoho ceratePrint(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return new NiteiGyomuShinchokuJokyoIchiranhyoJoho(getHandler(div).createBodyItem());
     }
-    
+
     private YokaigoNinteiShinchokuJohoShokaiHandler getHandler(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return new YokaigoNinteiShinchokuJohoShokaiHandler(div);
     }
-    
+
 }

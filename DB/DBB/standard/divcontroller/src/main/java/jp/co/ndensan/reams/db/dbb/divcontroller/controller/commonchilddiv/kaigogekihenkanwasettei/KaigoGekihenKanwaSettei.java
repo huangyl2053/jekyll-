@@ -62,7 +62,6 @@ public class KaigoGekihenKanwaSettei {
      */
     public ResponseData<KaigoGekihenKanwaSetteiDiv> onClickBtnKakutei(KaigoGekihenKanwaSetteiDiv div) {
         if (getHandler(div).isHiddenInput()) {
-            // TODO エラーのンメソッドが何ですか。
             throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage()
                     .replace(保険料率.toString()));
         }

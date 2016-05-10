@@ -97,7 +97,7 @@ public class YoshikiNinonanaHosei {
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
 
-            handler.deleteByParameter(引き継ぎデータ);
+            handler.delete(引き継ぎデータ, 様式種類);
             div.getPnlKanryo()
                     .getCcdKanryoMessage().setSuccessMessage(new RString(
                                     UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));

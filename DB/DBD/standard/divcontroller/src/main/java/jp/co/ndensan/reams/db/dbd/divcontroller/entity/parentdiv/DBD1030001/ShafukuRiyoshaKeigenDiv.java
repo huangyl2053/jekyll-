@@ -7,33 +7,24 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.GemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.IGemmenGengakuShinseiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShafukuRiyoshaKeigen のクラスファイル
- *
- * @reamsid_L DBD-3660-010 wangjie2
+ * ShafukuRiyoshaKeigen のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShafukuRiyoshaKeigenDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -46,9 +37,13 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     @JsonProperty("txtSetaiKazeiJokyo")
     private TextBox txtSetaiKazeiJokyo;
     @JsonProperty("btnShowSetaiJoho")
-    private ButtonDialog btnShowSetaiJoho;
+    private Button btnShowSetaiJoho;
+    @JsonProperty("btnCloseSetaiJoho")
+    private Button btnCloseSetaiJoho;
     @JsonProperty("btnShowGenmenJoho")
     private ButtonDialog btnShowGenmenJoho;
+    @JsonProperty("SetaiJoho")
+    private SetaiJohoDiv SetaiJoho;
     @JsonProperty("ShinseiList")
     private ShinseiListDiv ShinseiList;
     @JsonProperty("ShinseiDetail")
@@ -111,7 +106,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
      * @return btnShowSetaiJoho
      */
     @JsonProperty("btnShowSetaiJoho")
-    public ButtonDialog getBtnShowSetaiJoho() {
+    public Button getBtnShowSetaiJoho() {
         return btnShowSetaiJoho;
     }
 
@@ -120,8 +115,26 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
      * @param btnShowSetaiJoho btnShowSetaiJoho
      */
     @JsonProperty("btnShowSetaiJoho")
-    public void setBtnShowSetaiJoho(ButtonDialog btnShowSetaiJoho) {
+    public void setBtnShowSetaiJoho(Button btnShowSetaiJoho) {
         this.btnShowSetaiJoho = btnShowSetaiJoho;
+    }
+
+    /*
+     * getbtnCloseSetaiJoho
+     * @return btnCloseSetaiJoho
+     */
+    @JsonProperty("btnCloseSetaiJoho")
+    public Button getBtnCloseSetaiJoho() {
+        return btnCloseSetaiJoho;
+    }
+
+    /*
+     * setbtnCloseSetaiJoho
+     * @param btnCloseSetaiJoho btnCloseSetaiJoho
+     */
+    @JsonProperty("btnCloseSetaiJoho")
+    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
+        this.btnCloseSetaiJoho = btnCloseSetaiJoho;
     }
 
     /*
@@ -140,6 +153,24 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     @JsonProperty("btnShowGenmenJoho")
     public void setBtnShowGenmenJoho(ButtonDialog btnShowGenmenJoho) {
         this.btnShowGenmenJoho = btnShowGenmenJoho;
+    }
+
+    /*
+     * getSetaiJoho
+     * @return SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public SetaiJohoDiv getSetaiJoho() {
+        return SetaiJoho;
+    }
+
+    /*
+     * setSetaiJoho
+     * @param SetaiJoho SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
+        this.SetaiJoho = SetaiJoho;
     }
 
     /*
@@ -254,12 +285,17 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
+        return this.getSetaiJoho().getCcdSetaiShotokuIchiran();
+    }
+
+    @JsonIgnore
     public Button getBtnAddShinsei() {
         return this.getShinseiList().getBtnAddShinsei();
     }
 
     @JsonIgnore
-    public void setBtnAddShinsei(Button btnAddShinsei) {
+    public void  setBtnAddShinsei(Button btnAddShinsei) {
         this.getShinseiList().setBtnAddShinsei(btnAddShinsei);
     }
 
@@ -269,7 +305,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgShinseiList(DataGrid<dgShinseiList_Row> dgShinseiList) {
+    public void  setDgShinseiList(DataGrid<dgShinseiList_Row> dgShinseiList) {
         this.getShinseiList().setDgShinseiList(dgShinseiList);
     }
 
@@ -279,7 +315,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
+    public void  setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
         this.getShinseiDetail().setTxtShinseiYMD(txtShinseiYMD);
     }
 
@@ -289,7 +325,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+    public void  setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
         this.getShinseiDetail().setTxtShinseiRiyu(txtShinseiRiyu);
     }
 
@@ -299,7 +335,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShoninJoho(ShoninJohoDiv ShoninJoho) {
+    public void  setShoninJoho(ShoninJohoDiv ShoninJoho) {
         this.getShinseiDetail().setShoninJoho(ShoninJoho);
     }
 
@@ -309,7 +345,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKetteiKubun(RadioButton radKetteiKubun) {
+    public void  setRadKetteiKubun(RadioButton radKetteiKubun) {
         this.getShinseiDetail().getShoninJoho().setRadKetteiKubun(radKetteiKubun);
     }
 
@@ -319,7 +355,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
+    public void  setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
         this.getShinseiDetail().getShoninJoho().setTxtKetteiYMD(txtKetteiYMD);
     }
 
@@ -329,7 +365,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTekiyoYMD(TextBoxFlexibleDate txtTekiyoYMD) {
+    public void  setTxtTekiyoYMD(TextBoxFlexibleDate txtTekiyoYMD) {
         this.getShinseiDetail().getShoninJoho().setTxtTekiyoYMD(txtTekiyoYMD);
     }
 
@@ -339,7 +375,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtYukoKigenYMD(TextBoxFlexibleDate txtYukoKigenYMD) {
+    public void  setTxtYukoKigenYMD(TextBoxFlexibleDate txtYukoKigenYMD) {
         this.getShinseiDetail().getShoninJoho().setTxtYukoKigenYMD(txtYukoKigenYMD);
     }
 
@@ -349,7 +385,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlKeigenJiyu(DropDownList ddlKeigenJiyu) {
+    public void  setDdlKeigenJiyu(DropDownList ddlKeigenJiyu) {
         this.getShinseiDetail().getShoninJoho().setDdlKeigenJiyu(ddlKeigenJiyu);
     }
 
@@ -359,7 +395,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKeigenRitsuBunshi(TextBoxNum txtKeigenRitsuBunshi) {
+    public void  setTxtKeigenRitsuBunshi(TextBoxNum txtKeigenRitsuBunshi) {
         this.getShinseiDetail().getShoninJoho().setTxtKeigenRitsuBunshi(txtKeigenRitsuBunshi);
     }
 
@@ -369,7 +405,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKeigenRitsuBunbo(TextBoxNum txtKeigenRitsuBunbo) {
+    public void  setTxtKeigenRitsuBunbo(TextBoxNum txtKeigenRitsuBunbo) {
         this.getShinseiDetail().getShoninJoho().setTxtKeigenRitsuBunbo(txtKeigenRitsuBunbo);
     }
 
@@ -379,7 +415,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
+    public void  setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
         this.getShinseiDetail().getShoninJoho().setChkTokureiTaisho(chkTokureiTaisho);
     }
 
@@ -389,7 +425,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkKyotakuServiceGentei(CheckBoxList chkKyotakuServiceGentei) {
+    public void  setChkKyotakuServiceGentei(CheckBoxList chkKyotakuServiceGentei) {
         this.getShinseiDetail().getShoninJoho().setChkKyotakuServiceGentei(chkKyotakuServiceGentei);
     }
 
@@ -399,7 +435,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkKyojuhiShokuhiGentei(CheckBoxList chkKyojuhiShokuhiGentei) {
+    public void  setChkKyojuhiShokuhiGentei(CheckBoxList chkKyojuhiShokuhiGentei) {
         this.getShinseiDetail().getShoninJoho().setChkKyojuhiShokuhiGentei(chkKyojuhiShokuhiGentei);
     }
 
@@ -409,7 +445,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkKyusochiUnitGataJunKoshitsu(CheckBoxList chkKyusochiUnitGataJunKoshitsu) {
+    public void  setChkKyusochiUnitGataJunKoshitsu(CheckBoxList chkKyusochiUnitGataJunKoshitsu) {
         this.getShinseiDetail().getShoninJoho().setChkKyusochiUnitGataJunKoshitsu(chkKyusochiUnitGataJunKoshitsu);
     }
 
@@ -419,7 +455,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKakuninNo(TextBoxCode txtKakuninNo) {
+    public void  setTxtKakuninNo(TextBoxCode txtKakuninNo) {
         this.getShinseiDetail().getShoninJoho().setTxtKakuninNo(txtKakuninNo);
     }
 
@@ -429,7 +465,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSelectHiShoninRiyu(ButtonDialog btnSelectHiShoninRiyu) {
+    public void  setBtnSelectHiShoninRiyu(ButtonDialog btnSelectHiShoninRiyu) {
         this.getShinseiDetail().getShoninJoho().setBtnSelectHiShoninRiyu(btnSelectHiShoninRiyu);
     }
 
@@ -439,7 +475,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHiShoninRiyu(TextBoxMultiLine txtHiShoninRiyu) {
+    public void  setTxtHiShoninRiyu(TextBoxMultiLine txtHiShoninRiyu) {
         this.getShinseiDetail().getShoninJoho().setTxtHiShoninRiyu(txtHiShoninRiyu);
     }
 
@@ -449,7 +485,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShinseiKakutei(Button btnShinseiKakutei) {
+    public void  setBtnShinseiKakutei(Button btnShinseiKakutei) {
         this.getShinseiDetail().setBtnShinseiKakutei(btnShinseiKakutei);
     }
 
@@ -459,7 +495,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShoninKakutei(Button btnShoninKakutei) {
+    public void  setBtnShoninKakutei(Button btnShoninKakutei) {
         this.getShinseiDetail().setBtnShoninKakutei(btnShoninKakutei);
     }
 
@@ -469,7 +505,7 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnBackToShinseiList(Button btnBackToShinseiList) {
+    public void  setBtnBackToShinseiList(Button btnBackToShinseiList) {
         this.getShinseiDetail().setBtnBackToShinseiList(btnBackToShinseiList);
     }
 

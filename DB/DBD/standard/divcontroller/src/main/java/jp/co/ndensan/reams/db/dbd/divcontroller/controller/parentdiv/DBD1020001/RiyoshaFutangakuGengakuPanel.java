@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -51,6 +52,9 @@ public class RiyoshaFutangakuGengakuPanel {
     private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 追加 = new RString("追加");
+    private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
+    private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
+    private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
 
     /**
      * 利用者負担額減額申請の初期化。(オンロード)
@@ -71,8 +75,46 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onActive(RiyoshaFutangakuGengakuPanelDiv div) {
 
+        getHandler(div).viewState破棄();
         getHandler(div).initialize();
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+    }
+
+    /**
+     * 「世帯情報を表示する」ボタン押下時の処理です。
+     *
+     * @param div RiyoshaFutangakuGengakuPanelPanelDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnShowSetaiJoho(RiyoshaFutangakuGengakuPanelDiv div) {
+        div.getBtnShowSetaiJoho().setDisplayNone(true);
+        div.getBtnCloseSetaiJoho().setDisplayNone(false);
+        div.getBtnCloseSetaiJoho().setDisabled(false);
+        if (DBD1020001StateName.一覧.getName().equals(ResponseHolder.getState())) {
+            div.getBtnCloseSetaiJoho().setText(文字列_申請一覧を表示する);
+            return ResponseData.of(div).setState(DBD1020001StateName.世帯情報From一覧);
+        } else if (DBD1020001StateName.入力.getName().equals(ResponseHolder.getState())) {
+            div.getBtnCloseSetaiJoho()
+                    .setText(承認メニュー.equals(ResponseHolder.getMenuID()) ? 文字列_承認入力を表示する : 文字列_申請入力を表示する);
+            return ResponseData.of(div).setState(DBD1020001StateName.入力);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「申請一覧を表示する/申請情報を表示する」ボタン押下時の処理です。
+     *
+     * @param div RiyoshaFutangakuGengakuPanelPanelDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnCloseSetaiJoho(RiyoshaFutangakuGengakuPanelDiv div) {
+        div.getBtnShowSetaiJoho().setDisplayNone(false);
+        div.getBtnCloseSetaiJoho().setDisplayNone(true);
+        if (DBD1020001StateName.世帯情報From一覧.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+        } else {
+            return ResponseData.of(div).setState(DBD1020001StateName.入力);
+        }
     }
 
     /**
@@ -215,7 +257,8 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onBeforeOpenDialog_btnShowGemmenJoho(RiyoshaFutangakuGengakuPanelDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         div.setHihokenshaNo(被保険者番号.getColumnValue());
         return ResponseData.of(div).respond();
     }
@@ -272,7 +315,7 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnUpdate(RiyoshaFutangakuGengakuPanelDiv div) {
 
-        if (new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode())
+        if (ResponseHolder.isReRequest() && new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
@@ -427,7 +470,8 @@ public class RiyoshaFutangakuGengakuPanel {
     }
 
     private void 前排他キーの解除() {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.release(排他キー);

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  * 汎用リスト_被保険者台帳_バッチフロークラスです。
+ *
+ * @reamsid_L DBA-1610-030 lishengli
  */
 public class HanyoListHihokenshadaichoFlow extends BatchFlowBase<HanyoListHihokenshadaichoBatchParameter> {
 

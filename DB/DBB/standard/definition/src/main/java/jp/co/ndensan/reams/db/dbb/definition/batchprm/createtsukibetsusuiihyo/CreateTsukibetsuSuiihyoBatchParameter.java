@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -55,7 +56,7 @@ public class CreateTsukibetsuSuiihyoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_AGEEND, name = "年齢終了")
     private RString ageEnd;
     @BatchParameter(key = KEY_AGEKIJUNNI, name = "年齢基準日")
-    private RString ageKijunNi;
+    private FlexibleDate ageKijunNi;
     @BatchParameter(key = KEY_SEINENGAPPIYMD_FLG, name = "生年月日フラグ")
     private boolean seinengappiYMD_Flg;
     @BatchParameter(key = KEY_SEINENGAPPIYMDSTART, name = "生年月日開始")
@@ -74,6 +75,67 @@ public class CreateTsukibetsuSuiihyoBatchParameter extends BatchParameterBase {
     private RString kyuShichosonCode;
     @BatchParameter(key = KEY_KYUSHICHOSONMEISHO, name = "旧市町村名称")
     private RString kyuShichosonMeisho;
+
+    /**
+     * コンストラクタです。
+     */
+    public CreateTsukibetsuSuiihyoBatchParameter() {
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param choteiNendo 調定年度
+     * @param choteiKijunNichiji 調定基準日時
+     * @param kakutukiShikakuKijunNichi 各月資格基準日
+     * @param ageFlg 年齢フラグ
+     * @param ageStart 年齢開始
+     * @param ageEnd 年齢終了
+     * @param ageKijunNi 年齢基準日
+     * @param seinengappiYMD_Flg 生年月日フラグ
+     * @param seinengappiYMDStart 生年月日開始
+     * @param seinengappiYMDEnd 生年月日終了
+     * @param sentakuTaisho 選択対象
+     * @param sentakuKekkaList List<SentakuKekka>
+     * @param shichosonCode 市町村コード
+     * @param shichosonMeisho 市町村名称
+     * @param kyuShichosonCode 旧市町村コード
+     * @param kyuShichosonMeisho 旧市町村名称
+     */
+    public CreateTsukibetsuSuiihyoBatchParameter(
+            FlexibleYear choteiNendo,
+            RString choteiKijunNichiji,
+            RString kakutukiShikakuKijunNichi,
+            boolean ageFlg,
+            RString ageStart,
+            RString ageEnd,
+            FlexibleDate ageKijunNi,
+            boolean seinengappiYMD_Flg,
+            RString seinengappiYMDStart,
+            RString seinengappiYMDEnd,
+            RString sentakuTaisho,
+            List<RString> sentakuKekkaList,
+            RString shichosonCode,
+            RString shichosonMeisho,
+            RString kyuShichosonCode,
+            RString kyuShichosonMeisho) {
+        this.choteiNendo = choteiNendo;
+        this.choteiKijunNichiji = choteiKijunNichiji;
+        this.kakutukiShikakuKijunNichi = kakutukiShikakuKijunNichi;
+        this.ageFlg = ageFlg;
+        this.ageStart = ageStart;
+        this.ageEnd = ageEnd;
+        this.ageKijunNi = ageKijunNi;
+        this.seinengappiYMD_Flg = seinengappiYMD_Flg;
+        this.seinengappiYMDStart = seinengappiYMDStart;
+        this.seinengappiYMDEnd = seinengappiYMDEnd;
+        this.sentakuTaisho = sentakuTaisho;
+        this.sentakuKekkaList = sentakuKekkaList;
+        this.shichosonCode = shichosonCode;
+        this.shichosonMeisho = shichosonMeisho;
+        this.kyuShichosonCode = kyuShichosonCode;
+        this.kyuShichosonMeisho = kyuShichosonMeisho;
+    }
 
     /**
      * 月別推移表作成_バッチ用のパラメータ作成

@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 負担限度額認定申請のViewStateクラスです。
  *
+ * @reamsid_L DBD-9999-013 huangh
+ *
  */
 public class FutanGendogakuNinteiViewState implements Serializable {
 

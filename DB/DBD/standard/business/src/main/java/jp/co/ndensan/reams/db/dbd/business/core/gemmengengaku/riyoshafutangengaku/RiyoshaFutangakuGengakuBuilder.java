@@ -51,7 +51,6 @@ public class RiyoshaFutangakuGengakuBuilder {
      * @return {@link RiyoshaFutangakuGengakuBuilder}
      */
     public RiyoshaFutangakuGengakuBuilder set履歴番号(int 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
     }
@@ -63,7 +62,6 @@ public class RiyoshaFutangakuGengakuBuilder {
      * @return {@link RiyoshaFutangakuGengakuBuilder}
      */
     public RiyoshaFutangakuGengakuBuilder set旧措置者有無(boolean 旧措置者有無) {
-        requireNonNull(旧措置者有無, UrSystemErrorMessages.値がnull.getReplacedMessage("旧措置者有無"));
         entity.setKyuSochishaUmu(旧措置者有無);
         return this;
     }

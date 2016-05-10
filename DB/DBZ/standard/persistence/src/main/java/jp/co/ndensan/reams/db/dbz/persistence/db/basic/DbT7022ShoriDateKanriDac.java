@@ -49,9 +49,18 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     private static final RString SUB_CODE = new RString("DBU");
     @InjectSession
     private SqlSession session;
-    private static final RString サブ業務 = new RString("サブ業務コード");
-    private static final RString 処理_名 = new RString("処理名");
-    private static final RString 処理_枝番 = new RString("処理枝番");
+    private static final RString サブ業務コードメッセージ = new RString("サブ業務コード");
+    private static final RString 処理名メッセージ = new RString("処理名");
+    private static final RString 処理枝番メッセージ = new RString("処理枝番");
+    private static final RString 市町村コードメッセージ = new RString("市町村コード");
+    private static final RString 年度メッセージ = new RString("年度");
+    private static final RString 年度内連番メッセージ = new RString("年度内連番");
+    private static final RString 被保険者証一括発行 = new RString("被保険者証一括発行");
+    private static final RString 異動チェックリスト = new RString("異動チェックリスト");
+    private static final RString 処理日付管理マスタエンティティ = new RString("処理日付管理マスタエンティティ");
+    private static final RString 年度内連番_0 = new RString("0000");
+    private static final RString 年度内連番_1 = new RString("0001");
+    private static final RString 年度内連番_2 = new RString("0002");
 
     /**
      * 主キーで処理日付管理マスタを取得します。
@@ -73,12 +82,12 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             RString 処理枝番,
             FlexibleYear 年度,
             RString 年度内連番) throws NullPointerException {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務.toString()));
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_名.toString()));
-        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_枝番.toString()));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
-        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -140,11 +149,11 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             RString 処理枝番,
             FlexibleYear 年度,
             RString 年度内連番) throws NullPointerException {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務.toString()));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_名.toString()));
-        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_枝番.toString()));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
-        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -177,11 +186,11 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             RString 処理枝番,
             FlexibleYear 年度,
             RString 年度内連番) throws NullPointerException {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務.toString()));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_名.toString()));
-        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_枝番.toString()));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
-        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -213,10 +222,10 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             RString 処理名,
             RString 処理枝番,
             FlexibleYear 年度) throws NullPointerException {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務.toString()));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_名.toString()));
-        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_枝番.toString()));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -245,9 +254,9 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             SubGyomuCode サブ業務コード,
             RString 処理名,
             FlexibleYear 年度) throws NullPointerException {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務.toString()));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_名.toString()));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -274,9 +283,9 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             SubGyomuCode サブ業務コード,
             RString 処理名,
             FlexibleYear 年度) throws NullPointerException {
-        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務.toString()));
-        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_名.toString()));
-        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -287,6 +296,31 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendo, 年度))).
                 order(by(DbT7022ShoriDateKanri.nendo, Order.DESC),
                         by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 基準年月日を取得します。
+     *
+     * @param 処理名 shoriName
+     * @param 年度 nendo
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectKijunYMD(
+            RString 処理名,
+            FlexibleYear 年度) throws NullPointerException {
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, 処理名),
+                                eq(nendo, 年度))).
+                order(by(DbT7022ShoriDateKanri.nendo, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -313,7 +347,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     @Transaction
     @Override
     public int save(DbT7022ShoriDateKanriEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理マスタエンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
@@ -335,7 +369,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SUB_CODE),
                                 eq(shoriName, 介護住民票個別事項連携情報作成_他社住基),
-                                eq(shoriEdaban, "0000"))).
+                                eq(shoriEdaban, 年度内連番_0))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -353,8 +387,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(subGyomuCode, "DBA"),
-                                eq(shoriName, "異動チェックリスト"))).
+                                eq(subGyomuCode, SubGyomuCode.DBA介護資格),
+                                eq(shoriName, 異動チェックリスト))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -392,7 +426,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     @Transaction
     public DbT7022ShoriDateKanriEntity selectBy抽出期間の取得(RString 処理枝番,
             LasdecCode 市町村コード) throws NullPointerException {
-        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理_枝番.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -400,7 +434,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SUB_CODE),
                                 eq(shichosonCode, 市町村コード),
-                                eq(shoriName, "被保険者証一括発行"),
+                                eq(shoriName, 被保険者証一括発行),
                                 eq(shoriEdaban, 処理枝番))).
                 order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -426,7 +460,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SUB_CODE),
                                 eq(shichosonCode, 導入団体取得),
-                                eq(shoriName, "被保険者証一括発行"),
+                                eq(shoriName, 被保険者証一括発行),
                                 in(shoriEdaban, 処理枝番))).
                 order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -448,7 +482,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SUB_CODE),
                                 eq(shoriName, 介護住民票個別事項連携情報作成_他社住基),
-                                eq(shoriEdaban, "0000"))).
+                                eq(shoriEdaban, 年度内連番_0))).
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -514,7 +548,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(subGyomuCode, "DBB"),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 賦課年度),
                                 in(shoriName, 処理名))).
                 order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
@@ -537,10 +571,10 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(subGyomuCode, "DBB"),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 賦課年度),
                                 eq(shoriName, 処理名),
-                                eq(nendoNaiRenban, "0001"))).
+                                eq(nendoNaiRenban, 年度内連番_1))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -560,7 +594,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         return accessor.selectSpecific(max(nendoNaiRenban)).
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(subGyomuCode, "DBB"),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 賦課年度),
                                 eq(shoriName, 処理名))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -582,10 +616,10 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 or(and(
                                                 eq(shoriName, ShoriName.特徴対象者同定.get名称()),
-                                                eq(nendoNaiRenban, "0002")),
+                                                eq(nendoNaiRenban, 年度内連番_2)),
                                         and(
                                                 eq(shoriName, ShoriName.依頼金額計算.get名称()),
-                                                eq(nendoNaiRenban, "0002"))),
+                                                eq(nendoNaiRenban, 年度内連番_2))),
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 調定年度))).
                 toList(DbT7022ShoriDateKanriEntity.class);
@@ -606,7 +640,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(shoriName, ShoriName.本算定賦課.get名称()),
-                                eq(nendoNaiRenban, "0001"),
+                                eq(nendoNaiRenban, 年度内連番_1),
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 調定年度))).
                 toList(DbT7022ShoriDateKanriEntity.class);

@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dba.business.report.yokaigoninteikbnhenkoshinseisho;
 
 import jp.co.ndensan.reams.db.dba.entity.report.yokaigoninteikbnhenkoshinseisho.YokaigoNinteikbnHenkoShinseishoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定区分変更申請書のITEMのEditorです。
@@ -40,6 +44,8 @@ public class YokaigoNinteikbnHenkoShinseishoItemEditor
 
     private YokaigoNinteikbnHenkoShinseishoReportSource editSource(
             YokaigoNinteikbnHenkoShinseishoReportSource source) {
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hishokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.getHihokenshaNo());
         source.hihokenshaNo = item.getHihokenshaNo();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.birthYMD = item.getBirthYMD();

@@ -20,4 +20,5 @@ public class ShienJigyoshaBusiness {
     private RString jigyosha;
     private RString todokedeYMD;
     private RString tekiyoKaishiYMD;
+    private RString tekiyoShuryoYMD;
 }

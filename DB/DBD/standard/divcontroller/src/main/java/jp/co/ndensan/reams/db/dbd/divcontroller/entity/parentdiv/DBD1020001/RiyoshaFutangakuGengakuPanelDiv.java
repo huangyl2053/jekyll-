@@ -10,13 +10,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgengakushinsei.GemmenGengakuShinsei.IGemmenGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * RiyoshaFutangakuGengakuPanel のクラスファイル
@@ -36,16 +46,18 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     private HorizontalLine lin1;
     @JsonProperty("ccdSetaiKazei")
     private ccdSetaiKazeiDiv ccdSetaiKazei;
+    @JsonProperty("SetaiJoho")
+    private SetaiJohoDiv SetaiJoho;
     @JsonProperty("RiyoshaFutangakuGengakuShinseiList")
     private RiyoshaFutangakuGengakuShinseiListDiv RiyoshaFutangakuGengakuShinseiList;
     @JsonProperty("RiyoshaFutangakuGengakuShinseiDetail")
     private RiyoshaFutangakuGengakuShinseiDetailDiv RiyoshaFutangakuGengakuShinseiDetail;
+    @JsonProperty("ccdAtenaInfo")
+    private KaigoAtenaInfoDiv ccdAtenaInfo;
     @JsonProperty("ccdKaigoKihon")
     private KaigoShikakuKihonDiv ccdKaigoKihon;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
-    @JsonProperty("ccdAtenaInfo")
-    private KaigoAtenaInfoDiv ccdAtenaInfo;
     @JsonProperty("hihokenshaNo")
     private RString hihokenshaNo;
     @JsonProperty("hidden登録業務コード")
@@ -98,6 +110,24 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     }
 
     /*
+     * getSetaiJoho
+     * @return SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public SetaiJohoDiv getSetaiJoho() {
+        return SetaiJoho;
+    }
+
+    /*
+     * setSetaiJoho
+     * @param SetaiJoho SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
+        this.SetaiJoho = SetaiJoho;
+    }
+
+    /*
      * getRiyoshaFutangakuGengakuShinseiList
      * @return RiyoshaFutangakuGengakuShinseiList
      */
@@ -134,6 +164,15 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     }
 
     /*
+     * getccdAtenaInfo
+     * @return ccdAtenaInfo
+     */
+    @JsonProperty("ccdAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return ccdAtenaInfo;
+    }
+
+    /*
      * getccdKaigoKihon
      * @return ccdKaigoKihon
      */
@@ -149,15 +188,6 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
-    }
-
-    /*
-     * getccdAtenaInfo
-     * @return ccdAtenaInfo
-     */
-    @JsonProperty("ccdAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return ccdAtenaInfo;
     }
 
     /*
@@ -246,13 +276,23 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnShowSetaiJoho() {
+    public Button getBtnShowSetaiJoho() {
         return this.getCcdSetaiKazei().getBtnShowSetaiJoho();
     }
 
     @JsonIgnore
-    public void setBtnShowSetaiJoho(ButtonDialog btnShowSetaiJoho) {
+    public void setBtnShowSetaiJoho(Button btnShowSetaiJoho) {
         this.getCcdSetaiKazei().setBtnShowSetaiJoho(btnShowSetaiJoho);
+    }
+
+    @JsonIgnore
+    public Button getBtnCloseSetaiJoho() {
+        return this.getCcdSetaiKazei().getBtnCloseSetaiJoho();
+    }
+
+    @JsonIgnore
+    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
+        this.getCcdSetaiKazei().setBtnCloseSetaiJoho(btnCloseSetaiJoho);
     }
 
     @JsonIgnore
@@ -263,6 +303,11 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     @JsonIgnore
     public void setBtnShowGemmenJoho(ButtonDialog btnShowGemmenJoho) {
         this.getCcdSetaiKazei().setBtnShowGemmenJoho(btnShowGemmenJoho);
+    }
+
+    @JsonIgnore
+    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
+        return this.getSetaiJoho().getCcdSetaiShotokuIchiran();
     }
 
     @JsonIgnore
@@ -416,16 +461,6 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnBackShinseiIchirai() {
-        return this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().getBtnBackShinseiIchirai();
-    }
-
-    @JsonIgnore
-    public void setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
-        this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().setBtnBackShinseiIchirai(btnBackShinseiIchirai);
-    }
-
-    @JsonIgnore
     public Button getBtnConfirm() {
         return this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().getBtnConfirm();
     }
@@ -433,6 +468,16 @@ public class RiyoshaFutangakuGengakuPanelDiv extends Panel {
     @JsonIgnore
     public void setBtnConfirm(Button btnConfirm) {
         this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().setBtnConfirm(btnConfirm);
+    }
+
+    @JsonIgnore
+    public Button getBtnBackShinseiIchirai() {
+        return this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().getBtnBackShinseiIchirai();
+    }
+
+    @JsonIgnore
+    public void setBtnBackShinseiIchirai(Button btnBackShinseiIchirai) {
+        this.getRiyoshaFutangakuGengakuShinseiDetail().getCcdJohoAreaButton().setBtnBackShinseiIchirai(btnBackShinseiIchirai);
     }
 
     @JsonIgnore

@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護サービス種類のデータアクセスクラスです。
  *
- * @reamsid_L DBX-9999-021 chengsanyuan
+ * @reamsid_L DBA-0070-020 chengsanyuan
  */
 public class DbT7130KaigoServiceShuruiDac {
 

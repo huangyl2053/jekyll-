@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakunin
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogakunintei.IShikibetsuTaishoPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.ninteikoshintsuchisho.NinteiKoshinTsuchishoService;
+import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -106,6 +107,31 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
     public SourceDataCollection publish(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
             int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書) {
         SourceDataCollection sourceDataCollection = new SourceDataCollection();
+        if (お知らせ通知書) {
+            return publishお知らせ通知書(被保険者番号, 識別コード, 履歴番号, 発行日, 文書番号, お知らせ通知書, 申請書);
+        }
+        if (申請書) {
+            FutanGendogakuNinteiShinseisho futanGendogakuNinteiShinseisho = new FutanGendogakuNinteiShinseisho();
+            return futanGendogakuNinteiShinseisho.createFutanGendogakuNinteiShinseishoChohyo(識別コード, 被保険者番号);
+        }
+        return sourceDataCollection;
+    }
+
+    /**
+     * お知らせ通知書発行
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
+     * @param 履歴番号 履歴番号
+     * @param 発行日 発行日
+     * @param 文書番号 文書番号
+     * @param お知らせ通知書 willPublishお知らせ通知書
+     * @param 申請書 willPublish申請書
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection publishお知らせ通知書(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
+            int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書) {
+        SourceDataCollection sourceDataCollection = new SourceDataCollection();
 
         FutanGendogakuNintei 介護保険負担限度額認定 = get介護負担限度額認定の情報(被保険者番号, 履歴番号);
 
@@ -124,13 +150,10 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         Ninshosha ninshosha = get認証者情報(new FlexibleDate(発行日.toDateString()));
 
         if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
-            //  ReportId 帳票ID;
             int パターン番号;
             if (介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
-                //     帳票ID = ReportIdDBD.DBDPR12002_1_1.getReportId();
                 パターン番号 = 1;
             } else {
-                //     帳票ID = ReportIdDBD.DBDPR12002_1_2.getReportId();
                 パターン番号 = パターン番号_21;
             }
 
@@ -160,7 +183,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             insert発行履歴(sourceDataCollection, 発行日, 識別コード);
         }
 
-        // 4.  負担限度額認定申請書の発行TODO
         return sourceDataCollection;
     }
 
@@ -216,7 +238,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         shikibetsuCodeList.add(識別コード);
         boolean is正常終了 = false;
         HashMap<Code, RString> hashMap = new HashMap();
-        //hashMap.put(new Code(ChohyoHakkoRirekiSearchDefault.帳票ID.getCode()), 帳票ID.getColumnValue());
 
         while (sourceDataList.hasNext()) {
 
@@ -254,4 +275,5 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         DbT7067ChohyoSeigyoHanyoDac dbT7067Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
         return dbT7067Dac.get帳票制御汎用(SubGyomuCode.DBD介護受給, 帳票分類ID, new FlexibleYear("0000"));
     }
+
 }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100002
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.DBE5100002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.ShinsakaiAutoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002.ShinsakaiAutoHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002.ValidationHandler;
@@ -77,16 +78,16 @@ public class ShinsakaiAuto {
         return validationMessages;
     }
 
-//    /**
-//     * 「審査会一覧へ戻る」ボタンを遷移処理します。<br/>
-//     *
-//     * @param shinDiv ShinsakaiAutoDiv
-//     * @return ResponseData<ShinsakaiAutoDiv>
-//     */
-    // QA938 画面遷移処理はUIContainer存在しません
-//    public ResponseData<ShinsakaiAutoDiv> onClick_btnPrintSchedule(ShinsakaiAutoDiv shinDiv) {
-//        return ResponseData.of(shinDiv).forwardWithEventName().respond();
-//    }
+    /**
+     * 「審査会一覧へ戻る」ボタンを遷移処理します。<br/>
+     *
+     * @param shinDiv ShinsakaiAutoDiv
+     * @return ResponseData<ShinsakaiAutoDiv>
+     */
+    public ResponseData<ShinsakaiAutoDiv> onClick_btnReturn(ShinsakaiAutoDiv shinDiv) {
+        return ResponseData.of(shinDiv).forwardWithEventName(DBE5100002TransitionEventName.審査会一覧へ戻る).respond();
+    }
+
     private ResponseData<ShinsakaiAutoDiv> createResponseData(ShinsakaiAutoDiv shinDiv) {
         ResponseData<ShinsakaiAutoDiv> response = new ResponseData();
         response.data = shinDiv;

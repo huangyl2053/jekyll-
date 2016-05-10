@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoMybatisParameter;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -51,7 +53,8 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
     private Long 出力順;
     private RString 出力項目;
     private ReportId 帳票ID;
-    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+    private IKozaSearchKey searchkey;
+    private List<KamokuCode> list;
 
     /**
      * コンストラクタです
@@ -62,7 +65,8 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
     /**
      * コンストラクタです
      *
-     * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
+     * @param searchkey IKozaSearchKey
+     * @param list List<KamokuCode>
      * @param 保険者コード RString
      * @param 保険者名 RString
      * @param サービス提供年月From FlexibleYearMonth
@@ -90,7 +94,8 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
      * @param 帳票ID ReportId
      */
     public HanyoListShokanbaraiJokyoProcessParameter(
-            IShikibetsuTaishoPSMSearchKey 宛名検索条件,
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list,
             RString 保険者コード,
             RString 保険者名,
             FlexibleYearMonth サービス提供年月From,
@@ -117,7 +122,8 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
             RString 出力項目,
             ReportId 帳票ID
     ) {
-        this.宛名検索条件 = 宛名検索条件;
+        this.searchkey = searchkey;
+        this.list = list;
         this.保険者コード = 保険者コード;
         this.保険者名 = 保険者名;
         this.サービス提供年月From = サービス提供年月From;
@@ -152,7 +158,8 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
      */
     public HanyoListShokanbaraiJokyoMybatisParameter toMybatisParam() {
         return new HanyoListShokanbaraiJokyoMybatisParameter(
-                宛名検索条件,
+                searchkey,
+                list,
                 保険者コード,
                 保険者名,
                 サービス提供年月From,

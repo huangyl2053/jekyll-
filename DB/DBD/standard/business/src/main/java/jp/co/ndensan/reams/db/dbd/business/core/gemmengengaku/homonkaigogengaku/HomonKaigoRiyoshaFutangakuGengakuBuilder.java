@@ -66,7 +66,6 @@ public class HomonKaigoRiyoshaFutangakuGengakuBuilder {
      * @return {@link HomonKaigoRiyoshaFutangakuGengakuBuilder}
      */
     public HomonKaigoRiyoshaFutangakuGengakuBuilder set障害者手帳有無(boolean 障害者手帳有無) {
-        requireNonNull(障害者手帳有無, UrSystemErrorMessages.値がnull.getReplacedMessage("障害者手帳有無"));
         entity.setShogaishaTechoUmu(障害者手帳有無);
         return this;
     }

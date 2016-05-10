@@ -132,7 +132,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtMeisho(Jigyosha.records().get(i).get事業者名称() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get事業者名称().value());
                     dgJigyoshaItiran.setTxtServiceShurui(Jigyosha.records().get(i).getサービス種類略称());
-                    dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get事業者住所カナ());
+                    dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get介護事業者_事業者住所() == null
+                            ? RString.EMPTY : Jigyosha.records().get(i).get介護事業者_事業者住所().value());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
@@ -199,9 +200,10 @@ public class JiGyoSyaHandler {
                     if (Jigyosha.records().get(i).get有効終了日() != null && !Jigyosha.records().get(i).get有効終了日().isEmpty()) {
                         dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(Jigyosha.records().get(i).get有効終了日().toString()));
                     }
-                    dgJigyoshaItiran.setTxtMeisho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称カナ() == null
-                            ? RString.EMPTY : Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称カナ().value());
-                    dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所カナ());
+                    dgJigyoshaItiran.setTxtMeisho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称() == null
+                            ? RString.EMPTY : Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称().value());
+                    dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所() == null
+                            ? RString.EMPTY : Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
@@ -251,9 +253,10 @@ public class JiGyoSyaHandler {
                     if (Jigyosha.records().get(i).get有効終了日() != null && !Jigyosha.records().get(i).get有効終了日().isEmpty()) {
                         dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(Jigyosha.records().get(i).get有効終了日().toString()));
                     }
-                    dgJigyoshaItiran.setTxtMeisho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称カナ() == null
-                            ? RString.EMPTY : Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称カナ().value());
-                    dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所カナ());
+                    dgJigyoshaItiran.setTxtMeisho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称() == null
+                            ? RString.EMPTY : Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者名称().value());
+                    dgJigyoshaItiran.setTxtJusho(Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所() == null
+                            ? RString.EMPTY : Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);

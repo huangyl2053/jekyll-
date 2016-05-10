@@ -104,7 +104,10 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     private static final RString 生年月日 = new RString("生年月日");
     private static final RString 住所 = new RString("住所");
     private static final RString 行政区 = new RString("行政区");
-    private static final RString 地区 = new RString("地区");
+    private static final RString 地区1 = new RString("地区1");
+    private static final RString 地区2 = new RString("地区2");
+    private static final RString 地区3 = new RString("地区3");
+    private static final RString 保険者 = new RString("保険者");
     private HanyoListHihokenshadaichoProcessParameter processPrm;
     private HanyoListHihokenshadaichoMyBatisParameter mybatisPrm;
     private List<PersonalData> personalDataList;
@@ -175,9 +178,14 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                 mybatisPrm.getShikakuChushutsuKubun(), mybatisPrm.getShutokujiyu(), mybatisPrm.getSoshitsujiyu(),
                 mybatisPrm.getPsmChushutsu_Kubun(), mybatisPrm.getPsmChushutsuAge_Start(), mybatisPrm.getPsmChushutsuAge_End(),
                 mybatisPrm.getPsmSeinengappiYMD_Start(), mybatisPrm.getPsmSeinengappiYMD_End(), mybatisPrm.getPsmAgeKijunni(),
-                mybatisPrm.getShichoson_Code(), mybatisPrm.getPsmChiku_Kubun(), mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_To(),
+                mybatisPrm.getShichoson_Code(),
+                mybatisPrm.getShichoson_Name(), mybatisPrm.getPsmChiku_Kubun(), mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_To(),
                 mybatisPrm.getPsmGyoseiku_From(), mybatisPrm.getPsmGyoseiku_To(), mybatisPrm.getPsmChiku1_From(), mybatisPrm.getPsmChiku1_To(),
                 mybatisPrm.getPsmChiku2_From(), mybatisPrm.getPsmChiku2_To(), mybatisPrm.getPsmChiku3_From(), mybatisPrm.getPsmChiku3_To(),
+                mybatisPrm.getPsmJusho_From_Name(), mybatisPrm.getPsmJusho_To_Name(), mybatisPrm.getPsmGyoseiku_From_Name(),
+                mybatisPrm.getPsmGyoseiku_To_Name(), mybatisPrm.getPsmChiku1_From_Name(), mybatisPrm.getPsmChiku1_To_Name(),
+                mybatisPrm.getPsmChiku2_From_Name(), mybatisPrm.getPsmChiku2_To_Name(), mybatisPrm.getPsmChiku3_From_Name(),
+                mybatisPrm.getPsmChiku3_To_Name(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()));
         return new BatchDbReader(MYBATIS_SELECT_ID, myBatisParameter);
@@ -294,13 +302,21 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         }
         if (!Chiku.全て.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
             if (Chiku.住所.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                出力条件.add(get条件(住所, getFrom_To(mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_To())));
+                出力条件.add(get条件(住所, getFrom_To(getCode_Name(mybatisPrm.getPsmJusho_From(), mybatisPrm.getPsmJusho_From_Name()),
+                        getCode_Name(mybatisPrm.getPsmJusho_To(), mybatisPrm.getPsmJusho_To_Name()))));
             } else if (Chiku.行政区.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                出力条件.add(get条件(行政区, getFrom_To(mybatisPrm.getPsmGyoseiku_From(), mybatisPrm.getPsmGyoseiku_To())));
+                出力条件.add(get条件(行政区, getFrom_To(getCode_Name(mybatisPrm.getPsmGyoseiku_From(), mybatisPrm.getPsmGyoseiku_From_Name()),
+                        getCode_Name(mybatisPrm.getPsmGyoseiku_To(), mybatisPrm.getPsmGyoseiku_To_Name()))));
             } else if (Chiku.地区.getコード().equals(mybatisPrm.getPsmChiku_Kubun())) {
-                出力条件.add(get条件(地区, getFrom_To(mybatisPrm.getPsmChiku1_From(), mybatisPrm.getPsmChiku1_To())));
+                出力条件.add(get条件(地区1, getFrom_To(getCode_Name(mybatisPrm.getPsmChiku1_From(), mybatisPrm.getPsmChiku1_From_Name()),
+                        getCode_Name(mybatisPrm.getPsmChiku1_To(), mybatisPrm.getPsmChiku1_To_Name()))));
+                出力条件.add(get条件(地区2, getFrom_To(getCode_Name(mybatisPrm.getPsmChiku2_From(), mybatisPrm.getPsmChiku2_From_Name()),
+                        getCode_Name(mybatisPrm.getPsmChiku2_To(), mybatisPrm.getPsmChiku2_To_Name()))));
+                出力条件.add(get条件(地区3, getFrom_To(getCode_Name(mybatisPrm.getPsmChiku3_From(), mybatisPrm.getPsmChiku3_From_Name()),
+                        getCode_Name(mybatisPrm.getPsmChiku3_To(), mybatisPrm.getPsmChiku3_To_Name()))));
             }
         }
+        出力条件.add(get条件(保険者, getCode_Name(mybatisPrm.getShichoson_Code(), mybatisPrm.getShichoson_Name())));
         return 出力条件;
     }
 
@@ -482,6 +498,14 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         return 条件.substring(0, 条件.length() - 1);
     }
 
+    private RString getCode_Name(RString code, RString name) {
+        RStringBuilder 条件 = new RStringBuilder();
+        条件.append(code);
+        条件.append(" ");
+        条件.append(name);
+        return 条件.toRString();
+    }
+
     private RString getFrom_To(RString from, RString to) {
         RStringBuilder 条件 = new RStringBuilder();
         条件.append(from);
@@ -532,7 +556,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     entity.getKatagaki(), entity.getGyoseikuCode(),
                     entity.getGyoseikuName(), entity.getChikuCode1(),
                     entity.getChikuCode2(), entity.getChikuCode3(),
-                    entity.getRenrakusaki1(), entity.getRenrakusaki1(),
+                    entity.getRenrakusaki1(), entity.getRenrakusaki2(),
                     getパターン32(entity.getTorokuIdoYMD()), entity.getTorokuJiyuCode(),
                     getパターン32(entity.getTorokuTodokedeYMD()), getパターン32(entity.getJuteiIdoYMD()),
                     entity.getJuteiJiyuCode(), getパターン32(entity.getJuteiTodokedeYMD()),
@@ -578,7 +602,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     entity.getJusho(), entity.getBanchi(), entity.getKatagaki(),
                     entity.getGyoseikuCode(), entity.getGyoseikuName(),
                     entity.getChikuCode1(), entity.getChikuCode2(), entity.getChikuCode3(),
-                    entity.getRenrakusaki1(), entity.getRenrakusaki1(), getYYYYMMDD(entity.getTorokuIdoYMD()),
+                    entity.getRenrakusaki1(), entity.getRenrakusaki2(), getYYYYMMDD(entity.getTorokuIdoYMD()),
                     entity.getTorokuJiyuCode(),
                     getYYYYMMDD(entity.getTorokuTodokedeYMD()),
                     getYYYYMMDD(entity.getJuteiIdoYMD()),

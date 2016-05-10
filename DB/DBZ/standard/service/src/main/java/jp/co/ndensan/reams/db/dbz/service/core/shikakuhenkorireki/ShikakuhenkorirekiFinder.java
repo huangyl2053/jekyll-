@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
@@ -22,9 +23,8 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTaishoFunctionDac;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -58,46 +58,41 @@ public class ShikakuhenkorirekiFinder {
     /**
      * 対象者個人情報取得(識別コード経由)
      *
-     * @param 処理対象者 IKojin
+     * @param 識別コード ShikibetsuCode
      * @return 個人情報
      */
-    public List<IKojin> getKojinInfoByShikibetuCd(IKojin 処理対象者) {
-        List<JuminShubetsu> 住民種別list = new ArrayList<>();
-        住民種別list.add(JuminShubetsu.日本人);
-        住民種別list.add(JuminShubetsu.外国人);
-        住民種別list.add(JuminShubetsu.住登外個人_日本人);
-        住民種別list.add(JuminShubetsu.住登外個人_外国人);
-
-        List<JuminJotai> 住民状態list = new ArrayList<>();
-        住民状態list.add(JuminJotai.住民);
-        住民状態list.add(JuminJotai.住登外);
-        住民状態list.add(JuminJotai.消除者);
-        住民状態list.add(JuminJotai.転出者);
-        住民状態list.add(JuminJotai.死亡者);
-
-        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
-        IShikibetsuTaishoSearchKey 検索キー
+    public List<IKojin> getKojinInfoByShikibetuCd(ShikibetsuCode 識別コード) {
+        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        IShikibetsuTaishoSearchKey 宛名検索キー
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
-                .set氏名検索方法(TextSearchType.部分一致)
-                .set氏名(処理対象者.get名称().getKana().value())
-                .set性別(処理対象者.get性別())
-                .set生年月日(処理対象者.get生年月日().toFlexibleDate())
-                .set住民種別(住民種別list)
-                .set住民状態(住民状態list)
+                .set識別コード(識別コード)
                 .build();
-        IPsmCriteria psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(検索キー);
+        IPsmCriteria 宛名psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(宛名検索キー);
+        List<UaFt200FindShikibetsuTaishoEntity> 宛名PSM = InstanceProvider.create(UaFt200FindShikibetsuTaishoFunctionDac.class).select(宛名psm);
+        if (宛名PSM != null && !宛名PSM.isEmpty()) {
+            IShikibetsuTaisho 処理対象者 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名PSM.get(0));
+            IShikibetsuTaishoSearchKey 検索キー
+                    = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
+                    .set氏名検索方法(TextSearchType.部分一致)
+                    .set氏名(処理対象者.get名称().getKana().value())
+                    .set性別(処理対象者.to個人().get性別())
+                    .set生年月日(処理対象者.to個人().get生年月日().toFlexibleDate())
+                    .build();
+            IPsmCriteria psm = ShikibetsuTaishoSearchEntityHolder.getCriteria(検索キー);
 
-        List<UaFt200FindShikibetsuTaishoEntity> 対象者個人情報 = InstanceProvider.create(
-                UaFt200FindShikibetsuTaishoFunctionDac.class).select(psm);
-        if (対象者個人情報.isEmpty()) {
-            return new ArrayList<>();
-        } else {
-            List<IKojin> kojins = new ArrayList<>();
-            for (UaFt200FindShikibetsuTaishoEntity entity : 対象者個人情報) {
-                kojins.add(ShikibetsuTaishoFactory.createKojin(entity));
+            List<UaFt200FindShikibetsuTaishoEntity> 対象者個人情報 = InstanceProvider.create(
+                    UaFt200FindShikibetsuTaishoFunctionDac.class).select(psm);
+            if (対象者個人情報.isEmpty()) {
+                return new ArrayList<>();
+            } else {
+                List<IKojin> kojins = new ArrayList<>();
+                for (UaFt200FindShikibetsuTaishoEntity entity : 対象者個人情報) {
+                    kojins.add(ShikibetsuTaishoFactory.createKojin(entity));
+                }
+                return kojins;
             }
-            return kojins;
         }
+        return new ArrayList<>();
     }
 
     /**

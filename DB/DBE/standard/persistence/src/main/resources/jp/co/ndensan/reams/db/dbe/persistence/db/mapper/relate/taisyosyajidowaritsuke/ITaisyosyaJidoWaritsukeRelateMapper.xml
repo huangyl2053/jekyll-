@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： 主治医意見書督促状発行のマッピング用XMLです。 -->
+<!-- 概要： 対象者自動割付のマッピング用XMLです。 -->
 <!-- @reamsid_L DBE-1350-040 wangxiaodong -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taisyosyajidowaritsuke.ITaisyosyaJidoWaritsukeRelateMapper">
@@ -45,7 +45,6 @@
         AND DbT5201."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT5203NinteichosahyoKihonChosa" DbT5203
         ON DbT5203."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5201."ninteichosaIraiRirekiNo" = DbT5203."ninteichosaRirekiNo"
         AND DbT5203."ninteichosaRirekiNo" =
         (SELECT MAX("ninteichosaRirekiNo")
         FROM rgdb."DbT5203NinteichosahyoKihonChosa" DbT5203
@@ -56,7 +55,6 @@
         INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" DbT5304
         ON DbT5304."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5304."remban" IN (13, 14)
-        AND DbT5304."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         AND DbT5304."ikenshoIraiRirekiNo" =
         (SELECT MAX("ikenshoIraiRirekiNo")
         FROM rgdb."DbT5304ShujiiIkenshoIkenItem" DbT5304

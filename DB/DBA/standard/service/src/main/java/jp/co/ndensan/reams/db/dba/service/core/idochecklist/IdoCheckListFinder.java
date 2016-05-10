@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 異動チェックリストのサービスクラスです。
  *
- * @reamsid_L DBA-0530-010 chengsanyuan
+ * @reamsid_L DBA-0530-030 chengsanyuan
  */
 public class IdoCheckListFinder {
 

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyosaicheckhyo.Chosa
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
@@ -48,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- *
  * 帳票「前回認定調査結果との比較表」の出力処理クラスです。
  *
  * @reamsid_L DBE-0080-140 duanzhanli
@@ -83,10 +83,6 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
-    private static final RString IFSHIKIBETSUCODE99A = new RString("99A");
-    private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
-    private static final RString IFSHIKIBETSUCODE06A = new RString("06A");
-    private static final RString IFSHIKIBETSUCODE09A = new RString("09A");
     private RString shinseishoKanriNo = RString.EMPTY;
     private List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
@@ -416,9 +412,9 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
 
     private RString set軽重FLG(RString 前回, RString 今回) {
         RString 軽重FLG = RString.EMPTY;
-        if (!RString.isNullOrEmpty(前回) && 前回.compareTo(今回) < 0) {
+        if (!RString.isNullOrEmpty(前回) && !RString.isNullOrEmpty(今回) && 前回.compareTo(今回) < 0) {
             軽重FLG = UESANKAKU;
-        } else if (!RString.isNullOrEmpty(今回) && 今回.compareTo(前回) < 0) {
+        } else if (!RString.isNullOrEmpty(前回) && !RString.isNullOrEmpty(今回) && 今回.compareTo(前回) < 0) {
             軽重FLG = SHITASANKAKU;
         }
         return 軽重FLG;
@@ -426,13 +422,13 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
 
     private RString get判定結果(RString 厚労省IF識別コード, RString 判定結果コード) {
         RString 判定結果 = RString.EMPTY;
-        if (IFSHIKIBETSUCODE99A.equals(厚労省IF識別コード)) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode99.toValue(判定結果コード).get名称();
-        } else if (IFSHIKIBETSUCODE09A.equals(厚労省IF識別コード)) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode09.toValue(判定結果コード).get名称();
-        } else if (IFSHIKIBETSUCODE06A.equals(厚労省IF識別コード)) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode06.toValue(判定結果コード).get名称();
-        } else if (IFSHIKIBETSUCODE02A.equals(厚労省IF識別コード)) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode02.toValue(判定結果コード).get名称();
         }
         return 判定結果;

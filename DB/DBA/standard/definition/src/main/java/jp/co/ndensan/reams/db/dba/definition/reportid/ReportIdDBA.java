@@ -30,7 +30,7 @@ public enum ReportIdDBA {
     /**
      * 被保険者証発行一覧表の帳票ＩＤです。
      */
-    DBA200003(new ReportId("DBA200003"), new RString("被保険者証発行一覧表")),
+    DBA200003(new ReportId("DBA200003_HihokenshashoHakkoIchiranhyo"), new RString("被保険者証発行一覧表")),
     /**
      * 介護保険被保険者証（B4版）の帳票ＩＤです。
      */
@@ -159,10 +159,6 @@ public enum ReportIdDBA {
      * 居宅（介護予防）サービス計画作成依頼（変更）届出書の帳票ＩＤです。
      */
     DBC800004(new ReportId("DBC800004_ItakuServiceKeikaluSakuseiIraiTodokedesho"), new RString("居宅（介護予防）サービス計画作成依頼（変更）届出書")),
-    /**
-     * 介護保険利用者負担額減額・免除申請書の帳票ＩＤです。
-     */
-    DBD800002(new ReportId("DBD800002_RiyoshaFutangakuGengakuMenjyoShinseisho"), new RString("介護保険利用者負担額減額・免除申請書")),
     /**
      * 介護保険料減免申請書の帳票ＩＤです。
      */

@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.Shien
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -28,13 +27,17 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsu
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -68,14 +71,15 @@ public class KaigoHokenShikakushasho {
     private static final RString 居宅支援事業者履歴_2 = new RString("2");
     private static final RString 居宅支援事業者履歴_3 = new RString("3");
     private static final ReportId 帳票分類ID = new ReportId("DBA100003_Shikakushasho");
-    // TODO QA:1088 Redmine：  (住所の編集方法がわかりません。)
-//    private static final RString 帳票独自 = new RString("1");
-//    private static final RString 市町村共通 = new RString("0");
-//    private static final RString 編集方法_1 = new RString("1");
-//    private static final RString 編集方法_2 = new RString("2");
-//    private static final RString 編集方法_3 = new RString("3");
-//    private static final RString 編集方法_4 = new RString("4");
-//    private static final RString 編集方法_5 = new RString("5");
+    private static final RString 帳票独自 = new RString("1");
+    private static final RString 市町村共通 = new RString("0");
+    private static final RString 表示する = new RString("1");
+    private static final RString 編集方法_1 = new RString("1");
+    private static final RString 編集方法_2 = new RString("2");
+    private static final RString 編集方法_3 = new RString("3");
+    private static final RString 編集方法_4 = new RString("4");
+    private static final RString 左括弧 = new RString("、（");
+    private static final RString 右括弧 = new RString("）");
     private static final RString 管内区分 = new RString("1");
     private static final RString 管外区分 = new RString("2");
     private static final RString 年号_明治 = new RString("明治");
@@ -139,7 +143,7 @@ public class KaigoHokenShikakushasho {
         dataEntity.setBirthYMD(hihokenshaDateEntity.getBirthYMD());
         dataEntity.setSeibetsu(hihokenshaDateEntity.getSeibetsu());
         dataEntity.setKofuYMD(business.get交付日());
-        dataEntity.setYokaigoJotaiKubun(YokaigoJotaiKubun09.toValue(business.get介護状態()).get名称());
+        dataEntity.setYokaigoJotaiKubun(business.get介護状態());
         dataEntity.setNinteiYMD(business.get認定日());
         dataEntity.setYukoKaishiYMD(business.get有効期間の開始日付());
         dataEntity.setYukoShuryoYMD(business.get有効期間の終了日付());
@@ -228,7 +232,7 @@ public class KaigoHokenShikakushasho {
         if (shikibetsuTaishoentity != null) {
             RString kannaiKangai = ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get住所().get管内管外().code();
             if (管内区分.equals(kannaiKangai)) {
-                set住所();
+                entity.setJusho(set住所(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity)));
             } else if (管外区分.equals(kannaiKangai)) {
                 RStringBuilder jushoSb = new RStringBuilder();
                 jushoSb.append(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get住所().get住所());
@@ -250,45 +254,76 @@ public class KaigoHokenShikakushasho {
 
     }
 
-    // TODO QA:1088 Redmine：  (住所の編集方法がわかりません。)
-    private RString set住所() {
-//        if (市町村共通.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
-//
-//            if (帳票制御共通Entity.getJushoHenshuTodoufukenMeiHyojiUmu()) {
-//
-//            } else {
-//
-//            }
-//            if (帳票制御共通Entity.getJushoHenshuGunMeiHyojiUmu()) {
-//
-//            } else {
-//
-//            }
-//            if (帳票制御共通Entity.getJushoHenshuShichosonMeiHyojiUmu()) {
-//
-//            } else {
-//
-//            }
-//            if (編集方法_1.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
-//
-//            } else if (編集方法_2.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
-//
-//            } else if (編集方法_3.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
-//
-//            } else if (編集方法_4.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
-//
-//            } else if (編集方法_5.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
-//
-//            }
-//            if (帳票制御共通Entity.getJushoHenshuKatagakiHyojiUmu()) {
-//
-//            } else {
-//
-//            }
-//        } else if (帳票独自.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
-//            BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集, SubGyomuCode.DBU介護統計報告);
-//        }
-        return null;
+    private RString set住所(IKojin kojin) {
+        RStringBuilder 住所 = new RStringBuilder();
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association association = finder.getAssociation();
+        if (帳票独自.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
+            if (帳票制御共通Entity.getJushoHenshuTodoufukenMeiHyojiUmu()) {
+                住所.append(association.get都道府県名());
+            }
+            if (帳票制御共通Entity.getJushoHenshuGunMeiHyojiUmu()) {
+                住所.append(association.get郡名());
+            }
+            if (帳票制御共通Entity.getJushoHenshuShichosonMeiHyojiUmu()) {
+                住所.append(association.get市町村名());
+            }
+            if (編集方法_1.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+                住所.append(kojin.get住所().get住所());
+                住所.append(kojin.get住所().get番地());
+            } else if (編集方法_2.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+                住所.append(kojin.get行政区画().getGyoseiku().get名称());
+                住所.append(kojin.get住所().get番地());
+            } else if (編集方法_3.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+                住所.append(kojin.get住所().get住所());
+                住所.append(kojin.get住所().get番地());
+                住所.append(左括弧);
+                住所.append(kojin.get行政区画().getGyoseiku().get名称());
+                住所.append(右括弧);
+            } else if (編集方法_4.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
+                住所.append(kojin.get住所().get番地());
+            }
+            if (帳票制御共通Entity.getJushoHenshuKatagakiHyojiUmu()) {
+                住所.append(kojin.get住所().get方書());
+            }
+        } else if (市町村共通.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
+            if (表示する.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(association.get都道府県名());
+            }
+            if (表示する.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(association.get郡名());
+            }
+            if (表示する.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(association.get市町村名());
+            }
+            if (編集方法_1.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(kojin.get住所().get住所());
+                住所.append(kojin.get住所().get番地());
+            } else if (編集方法_2.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(kojin.get行政区画().getGyoseiku().get名称());
+                住所.append(kojin.get住所().get番地());
+            } else if (編集方法_3.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(kojin.get住所().get住所());
+                住所.append(kojin.get住所().get番地());
+                住所.append(左括弧);
+                住所.append(kojin.get行政区画().getGyoseiku().get名称());
+                住所.append(右括弧);
+            } else if (編集方法_4.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(kojin.get住所().get番地());
+            }
+            if (表示する.equals(
+                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))) {
+                住所.append(kojin.get住所().get方書());
+            }
+        }
+        return 住所.toRString();
     }
 
     private RString setBirthYMD(FlexibleDate oldBirthYMD, RString juminShubetsuCode, RString seinengappiFushoKubun) {
@@ -371,17 +406,19 @@ public class KaigoHokenShikakushasho {
     private ShienJigyoshaDataEntity set支援事業者情報(ShikakushashoHakkoBusiness business,
             ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
         // TODO QA:1088 Redmine：  (支援事業者の編集方法)
+        RString 最新適用終了日 = business.get支援事業者の情報().isEmpty()
+                ? RString.EMPTY : business.get支援事業者の情報().get(0).getTekiyoShuryoYMD();
+        RString 最新適用終了日のデータ = null;
         if (適用切れ非表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))) {
-            if (RString.isNullOrEmpty(business.get支援事業者の情報().get(0).getTekiyoKaishiYMD())) {
-                shienJigyoshaDataEntity.setJigyoshaName1(business.get支援事業者の情報().get(0).getJigyosha());
-                shienJigyoshaDataEntity.setTodokedeYMD1(business.get支援事業者の情報().get(0).getTodokedeYMD());
+            if (!RString.isNullOrEmpty(最新適用終了日) && 最新適用終了日.compareTo(business.get交付日()) == -1) {
+                最新適用終了日のデータ = RString.EMPTY;
+            } else {
+                最新適用終了日のデータ = 最新適用終了日;
             }
-            if (business.get支援事業者の情報().get(1).getTekiyoKaishiYMD().compareTo(business.get交付日()) >= 0) {
-                setNameAndYMD(business.get支援事業者の情報(), shienJigyoshaDataEntity);
-            }
-        } else if (適用切れ表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))
-                && (RString.isNullOrEmpty(business.get支援事業者の情報().get(0).getTekiyoKaishiYMD())
-                || business.get支援事業者の情報().get(0).getTekiyoKaishiYMD().compareTo(business.get交付日()) == -1)) {
+        } else if (適用切れ表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))) {
+            最新適用終了日のデータ = 最新適用終了日;
+        }
+        if (!RString.isNullOrEmpty(最新適用終了日のデータ)) {
             shienJigyoshaDataEntity.setJigyoshaName1(business.get支援事業者の情報().get(0).getJigyosha());
             shienJigyoshaDataEntity.setTodokedeYMD1(business.get支援事業者の情報().get(0).getTodokedeYMD());
             setNameAndYMDBy居宅支援事業者履歴(business.get支援事業者の情報(), shienJigyoshaDataEntity);

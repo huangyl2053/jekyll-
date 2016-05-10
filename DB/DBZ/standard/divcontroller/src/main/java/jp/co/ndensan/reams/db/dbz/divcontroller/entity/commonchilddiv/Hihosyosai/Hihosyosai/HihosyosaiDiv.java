@@ -7,26 +7,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Hihosyosa
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.IJushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.IShikakuHenkoRirekiDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.IJushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -93,6 +94,10 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     private TextBox txtSyoninichiji2;
     @JsonProperty("tabContainerDetail")
     private tabContainerDetailDiv tabContainerDetail;
+    @JsonProperty("HiddenShichosonCode")
+    private RString HiddenShichosonCode;
+    @JsonProperty("HiddenDonyuKeitaiCode")
+    private RString HiddenDonyuKeitaiCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -548,6 +553,42 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     @JsonProperty("tabContainerDetail")
     public void setTabContainerDetail(tabContainerDetailDiv tabContainerDetail) {
         this.tabContainerDetail = tabContainerDetail;
+    }
+
+    /*
+     * getHiddenShichosonCode
+     * @return HiddenShichosonCode
+     */
+    @JsonProperty("HiddenShichosonCode")
+    public RString getHiddenShichosonCode() {
+        return HiddenShichosonCode;
+    }
+
+    /*
+     * setHiddenShichosonCode
+     * @param HiddenShichosonCode HiddenShichosonCode
+     */
+    @JsonProperty("HiddenShichosonCode")
+    public void setHiddenShichosonCode(RString HiddenShichosonCode) {
+        this.HiddenShichosonCode = HiddenShichosonCode;
+    }
+
+    /*
+     * getHiddenDonyuKeitaiCode
+     * @return HiddenDonyuKeitaiCode
+     */
+    @JsonProperty("HiddenDonyuKeitaiCode")
+    public RString getHiddenDonyuKeitaiCode() {
+        return HiddenDonyuKeitaiCode;
+    }
+
+    /*
+     * setHiddenDonyuKeitaiCode
+     * @param HiddenDonyuKeitaiCode HiddenDonyuKeitaiCode
+     */
+    @JsonProperty("HiddenDonyuKeitaiCode")
+    public void setHiddenDonyuKeitaiCode(RString HiddenDonyuKeitaiCode) {
+        this.HiddenDonyuKeitaiCode = HiddenDonyuKeitaiCode;
     }
 
     /*

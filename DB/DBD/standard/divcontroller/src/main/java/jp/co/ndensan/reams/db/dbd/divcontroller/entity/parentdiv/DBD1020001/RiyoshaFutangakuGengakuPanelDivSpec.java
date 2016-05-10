@@ -9,9 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -112,7 +113,9 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                     Decimal 給付率_91 = new Decimal(91);
                     Decimal 給付率_100 = new Decimal(100);
 
-                    HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                    HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
                     RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
 
                     FutanwariaiKubun 負担割合区分 = service.get利用者負担割合(被保険者番号, div.getTxtShinseiYmd().getValue());
@@ -196,7 +199,9 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                 public boolean apply(RiyoshaFutangakuGengakuPanelDiv div) {
                     RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
 
-                    HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                    HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
                     FlexibleDate 適用日 = div.getTxtTekiyoYmd().getValue();
 
                     boolean 利用者 = service.canBe利用者(被保険者番号, 適用日);

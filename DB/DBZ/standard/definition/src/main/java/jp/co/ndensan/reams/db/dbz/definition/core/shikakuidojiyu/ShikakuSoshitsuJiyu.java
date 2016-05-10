@@ -11,46 +11,46 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShikakuSoshitsuJiyu {
 
     /**
-     * コード:51 名称:転出 略称:転出【資格喪失】
+     * コード:51 名称:転出 備考:転出【資格喪失】
      */
     転出("51", "転出", "転出【資格喪失】"),
     /**
-     * コード:52 名称:死亡 略称:死亡【資格喪失】
+     * コード:52 名称:死亡 備考:死亡【資格喪失】
      */
     死亡("52", "死亡", "死亡【資格喪失】"),
     /**
-     * コード:53 名称:除外者 略称:適用除外者【資格喪失】
+     * コード:53 名称:除外者 備考:適用除外者【資格喪失】
      */
     除外者("53", "除外者", "適用除外者【資格喪失】"),
     /**
-     * コード:55 名称:自特例解除 略称:自住所特例者が施設退所外居住
+     * コード:55 名称:自特例解除 備考:自住所特例者が施設退所外居住
      */
     自特例解除("55", "自特例解除", "自住所特例者が施設退所外居住"),
     /**
-     * コード:57 名称:国籍喪失 略称:日本人が国籍を喪失した【資格喪失】
+     * コード:57 名称:国籍喪失 備考:日本人が国籍を喪失した【資格喪失】
      */
     国籍喪失("57", "国籍喪失", "日本人が国籍を喪失した【資格喪失】"),
     /**
-     * コード:58 名称:他特例者 略称:転入者が他特例者として特養施設に入所。
+     * コード:58 名称:他特例者 備考:転入者が他特例者として特養施設に入所。
      */
     他特例者("58", "他特例者", "転入者が他特例者として特養施設に入所。"),
     /**
-     * コード:68 名称:職権喪失 略称:住民を職権削除【資格喪失】
+     * コード:68 名称:職権喪失 備考:住民を職権削除【資格喪失】
      */
     職権喪失("68", "職権喪失", "住民を職権削除【資格喪失】"),
     /**
-     * コード:99 名称:その他 略称:その他の理由により資格を喪失【資格喪失】
+     * コード:99 名称:その他 備考:その他の理由により資格を喪失【資格喪失】
      */
     その他("99", "その他", "その他の理由により資格を喪失【資格喪失】");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
+    private final RString bikouName;
 
-    private ShikakuSoshitsuJiyu(String code, String fullname, String shortName) {
+    private ShikakuSoshitsuJiyu(String code, String fullname, String bikouName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
+        this.bikouName = new RString(bikouName);
     }
 
     /**
@@ -63,12 +63,12 @@ public enum ShikakuSoshitsuJiyu {
     }
 
     /**
-     * 資格喪失事由の略称を返します。
+     * 資格喪失事由の備考を返します。
      *
-     * @return 資格喪失事由の略称
+     * @return 資格喪失事由の備考
      */
-    public RString get略称() {
-        return shortName;
+    public RString get備考() {
+        return bikouName;
     }
 
     /**

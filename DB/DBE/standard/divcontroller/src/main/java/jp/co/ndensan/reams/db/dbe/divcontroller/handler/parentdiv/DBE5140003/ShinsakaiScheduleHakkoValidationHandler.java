@@ -93,7 +93,8 @@ public class ShinsakaiScheduleHakkoValidationHandler {
      */
     public ValidationMessageControlPairs 年間チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
+        if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()
+                && div.getShinsakaiScheduleSrch().getTxtNendo().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
                     UrErrorMessages.必須項目_追加メッセージあり, NENDO.toString()), div.getShinsakaiScheduleSrch().getTxtNendo()));
         }
