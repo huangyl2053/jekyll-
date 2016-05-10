@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseish
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReport;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam;
-import jp.co.ndensan.reams.db.dba.entity.report.source.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoRelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

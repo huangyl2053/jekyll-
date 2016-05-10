@@ -1,15 +1,15 @@
-package jp.co.ndensan.reams.db.dba.entity.report.source.tashichosonjushochi;
+package jp.co.ndensan.reams.db.dba.entity.report.tekiyojogaishadaicho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 他市町村住所地特例者台帳の帳票データのクラスです。
+ * 適用除外者台帳の帳票データのクラスです。
  *
- * @reamsid_L DBA-0402-030 xuyannan
+ * @reamsid_L DBA-0412-040 lishengli
  */
-public class TashichosonJushochitokureishaDaichoReportSource implements IReportSource {
+public class TekiyojogaishaDaichoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
@@ -46,66 +46,58 @@ public class TashichosonJushochitokureishaDaichoReportSource implements IReportS
     public RString chiku2Code;
     @ReportItem(name = "jusho1", order = 17)
     public RString jusho1;
-    @ReportItem(name = "telNo1", length = 14, order = 18)
-    public RString telNo1;
-    @ReportItem(name = "jusho1Title", length = 5, order = 19)
+    @ReportItem(name = "jusho1Title", length = 5, order = 18)
     public RString jusho1Title;
+    @ReportItem(name = "telNo1", length = 14, order = 19)
+    public RString telNo1;
     @ReportItem(name = "telNo2", length = 14, order = 20)
     public RString telNo2;
     @ReportItem(name = "chiku3CodeTitle", length = 5, order = 21)
     public RString chiku3CodeTitle;
     @ReportItem(name = "chiku3Code", length = 8, order = 22)
     public RString chiku3Code;
-    @ReportItem(name = "gyoseikuTitle", length = 5, order = 23)
-    public RString gyoseikuTitle;
-    @ReportItem(name = "jusho1Code", length = 11, order = 24)
+    @ReportItem(name = "jusho1Code", length = 11, order = 23)
     public RString jusho1Code;
+    @ReportItem(name = "gyoseikuTitle", length = 5, order = 24)
+    public RString gyoseikuTitle;
     @ReportItem(name = "gyoseikuCode", length = 9, order = 25)
     public RString gyoseikuCode;
-    @ReportItem(name = "maeJushoCode", length = 11, order = 26)
-    public RString maeJushoCode;
-    @ReportItem(name = "jusho2", order = 27)
+    @ReportItem(name = "jusho2", order = 26)
     public RString jusho2;
-    @ReportItem(name = "tennyuYMD", length = 12, order = 28)
-    public RString tennyuYMD;
-    @ReportItem(name = "jusho2Title", length = 5, order = 29)
+    @ReportItem(name = "jusho2Title", length = 10, order = 27)
     public RString jusho2Title;
-    @ReportItem(name = "tenshutsuYMD", length = 12, order = 30)
-    public RString tenshutsuYMD;
-    @ReportItem(name = "listNo_1", length = 2, order = 31)
+    @ReportItem(name = "jusho2Code", length = 11, order = 28)
+    public RString jusho2Code;
+    @ReportItem(name = "listNo_1", length = 2, order = 29)
     public RString listNo_1;
-    @ReportItem(name = "listUpper_1", length = 10, order = 32)
+    @ReportItem(name = "listUpper_1", length = 10, order = 30)
     public RString listUpper_1;
-    @ReportItem(name = "listUpper_2", length = 10, order = 33)
+    @ReportItem(name = "listUpper_2", length = 10, order = 31)
     public RString listUpper_2;
-    @ReportItem(name = "listUpper_3", length = 2, order = 34)
+    @ReportItem(name = "listUpper_3", length = 2, order = 32)
     public RString listUpper_3;
-    @ReportItem(name = "listUpper_4", length = 6, order = 35)
+    @ReportItem(name = "listUpper_4", length = 6, order = 33)
     public RString listUpper_4;
-    @ReportItem(name = "listUpper_5", length = 10, order = 36)
+    @ReportItem(name = "listUpper_5", length = 10, order = 34)
     public RString listUpper_5;
-    @ReportItem(name = "listUpper_6", length = 25, order = 37)
+    @ReportItem(name = "listUpper_6", length = 36, order = 35)
     public RString listUpper_6;
-    @ReportItem(name = "listUpper_7", length = 14, order = 38)
+    @ReportItem(name = "listUpper_7", length = 14, order = 36)
     public RString listUpper_7;
-    @ReportItem(name = "listUpper_8", length = 10, order = 39)
-    public RString listUpper_8;
-    @ReportItem(name = "listLower_1", length = 10, order = 40)
+    @ReportItem(name = "listLower_1", length = 10, order = 37)
     public RString listLower_1;
-    @ReportItem(name = "listLower_2", length = 10, order = 41)
+    @ReportItem(name = "listLower_2", length = 10, order = 38)
     public RString listLower_2;
-    @ReportItem(name = "listLower_3", length = 2, order = 42)
+    @ReportItem(name = "listLower_3", length = 2, order = 39)
     public RString listLower_3;
-    @ReportItem(name = "listLower_4", length = 6, order = 43)
+    @ReportItem(name = "listLower_4", length = 6, order = 40)
     public RString listLower_4;
-    @ReportItem(name = "listLower_5", length = 10, order = 44)
+    @ReportItem(name = "listLower_5", length = 10, order = 41)
     public RString listLower_5;
-    @ReportItem(name = "listLower_6", length = 25, order = 45)
+    @ReportItem(name = "listLower_6", length = 36, order = 42)
     public RString listLower_6;
-    @ReportItem(name = "listLower_7", length = 14, order = 46)
+    @ReportItem(name = "listLower_7", length = 14, order = 43)
     public RString listLower_7;
-    @ReportItem(name = "listLower_8", length = 10, order = 47)
-    public RString listLower_8;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

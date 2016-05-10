@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.report.source.tekiyojogaishadaicho.TekiyojogaishaDaichoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tekiyojogaishadaicho.TekiyojogaishaDaichoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
