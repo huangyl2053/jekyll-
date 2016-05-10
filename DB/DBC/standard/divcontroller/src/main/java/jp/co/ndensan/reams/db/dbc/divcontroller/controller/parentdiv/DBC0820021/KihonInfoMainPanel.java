@@ -94,6 +94,7 @@ public class KihonInfoMainPanel {
 
         if (明細番号 == null || 明細番号.isEmpty()) {
             getHandler(div).set初期基本情報();
+            getHandler(div).set画面の個別設定(サービス年月);
         } else {
             ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance()
                     .getShokanbarayiSeikyukihonDetail(被保険者番号,
