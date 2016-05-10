@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho;
 
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.source.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 

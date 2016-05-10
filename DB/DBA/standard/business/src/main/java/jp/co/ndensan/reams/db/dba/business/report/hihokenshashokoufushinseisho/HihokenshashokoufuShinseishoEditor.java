@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashokoufushinseisho;
 
-import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReportSource;
 
 /**
  * 介護保険被保険者証交付申請書（第2号被保険者）Editorです。
