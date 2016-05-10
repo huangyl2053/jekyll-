@@ -676,6 +676,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set納期限(FukaJoho 更正後情報) {
+        // TODO
+        更正後情報.get普徴期別金額01();
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                 .getLblZengoNokigen1().setText(RString.EMPTY);
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
