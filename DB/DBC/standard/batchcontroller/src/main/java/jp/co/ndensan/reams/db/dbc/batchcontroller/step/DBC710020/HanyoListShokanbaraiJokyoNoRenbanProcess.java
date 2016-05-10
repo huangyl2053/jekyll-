@@ -205,6 +205,9 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
 
     @Override
     protected void afterExecute() {
+        if (preEntity == null && parameter.is項目名付加()) {
+            eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoNoRenbanCSVEntity());
+        }
         if (preEntity != null && preEntity.get請求基本List() != null && !preEntity.get請求基本List().isEmpty()) {
             preEntity.get請求基本List().clear();
             preEntity.get請求基本List().addAll(lstDbt3038List);

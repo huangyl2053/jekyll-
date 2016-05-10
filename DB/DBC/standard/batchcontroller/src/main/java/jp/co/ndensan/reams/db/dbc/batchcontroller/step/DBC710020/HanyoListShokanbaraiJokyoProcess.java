@@ -209,6 +209,9 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void afterExecute() {
+        if (preEntity == null && parameter.is項目名付加()) {
+            eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoCSVEntity());
+        }
         if (preEntity != null && preEntity.get請求基本List() != null && !preEntity.get請求基本List().isEmpty()) {
             preEntity.get請求基本List().clear();
             preEntity.get請求基本List().addAll(lstDbt3038List);
