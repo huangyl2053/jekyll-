@@ -1,15 +1,15 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.shiharaihohojyoho;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.shiharaihoho.UzT0007CodeBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozabunrui.KozaBunruiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 支払方法情報のコントローラです。
@@ -575,10 +574,10 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtYokinShubetsu().setVisible(true);
             div.getTxtTenban().setVisible(false);
         }
-        UzT0007CodeEntity uzT0007CodeEntity = 預金種別に対する略称(nullToEmpty(口座情報.get預金種別()));
-        if (uzT0007CodeEntity != null) {
+        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(口座情報.get預金種別()));
+        if (uzT0007CodeBusiness != null) {
 
-            div.getTxtYokinShubetsu().setValue(uzT0007CodeEntity.getコード略称() == null ? RString.EMPTY : uzT0007CodeEntity.getコード略称());
+            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード略称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード略称());
         }
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
@@ -623,9 +622,9 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         }
-        UzT0007CodeEntity uzT0007CodeEntity = 預金種別に対する略称(nullToEmpty(受領委任契約事業者.get口座種別()));
-        if (uzT0007CodeEntity != null) {
-            div.getTxtYokinShubetsu1().setValue(uzT0007CodeEntity.getコード略称() == null ? RString.EMPTY : uzT0007CodeEntity.getコード略称());
+        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(受領委任契約事業者.get口座種別()));
+        if (uzT0007CodeBusiness != null) {
+            div.getTxtYokinShubetsu1().setValue(uzT0007CodeBusiness.getコード略称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード略称());
         }
         div.getTxtKozaNo1().setValue(nullToEmpty(受領委任契約事業者.get口座番号()));
         div.getTxtMeigininKana1().setDomain(受領委任契約事業者.get口座名義人カナ() == null
@@ -643,9 +642,9 @@ public class ShiharaiHohoJyohoHandler {
         }
     }
 
-    private UzT0007CodeEntity 預金種別に対する略称(RString 口座種別) {
+    private UzT0007CodeBusiness 預金種別に対する略称(RString 口座種別) {
 
-        return CodeMaster.getCode(預金種別, new Code(口座種別));
+        return new UzT0007CodeBusiness(CodeMaster.getCode(預金種別, new Code(口座種別)));
     }
 
     private KinyuKikan 金融機関コードに対する名称(KinyuKikanCode 金融機関コード) {
