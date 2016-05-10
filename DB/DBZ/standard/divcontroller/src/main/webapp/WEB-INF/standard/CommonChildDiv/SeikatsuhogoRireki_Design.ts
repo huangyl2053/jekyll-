@@ -12,8 +12,8 @@ module DBZ {
                 return "onOk_Cancel";
             }
 
-            public static btnAddRow(): string {
-                return "btnAddRow";
+            public static onbtn_AddRow(): string {
+                return "onbtn_AddRow";
             }
 
         }

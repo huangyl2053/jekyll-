@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HonsanteiIdoKanendo {
 
     private static final RString 定数調定年度 = new RString("調定年度");
+    private static final RString 定数処理名 = new RString("処理名");
     private final RString 通知書タイプ = new RString("通知書タイプ");
     private final RString zeroRS = new RString("0");
     private final RString oneRS = new RString("1");
@@ -47,6 +48,7 @@ public class HonsanteiIdoKanendo {
     private final RString zOneRS = new RString("001");
     private final RString twlZRS = new RString("301");
     private final RString twlTRS = new RString("302");
+    private final RString zOneOneRS = new RString("0001");
     private final RString 納入通知書の帳票ID = new RString("納入通知書の帳票ID");
     private final RString 期毎納入通知書タイプ = new RString("期毎納入通知書タイプ");
     private final RString 銀振納入通知書タイプ = new RString("銀振納入通知書タイプ");
@@ -78,6 +80,22 @@ public class HonsanteiIdoKanendo {
      */
     public static HonsanteiIdoKanendo createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendo.class);
+    }
+
+    /**
+     * 最大基準日時取得
+     *
+     * @param 処理名 RString
+     * @param 調定年度 FlexibleYear
+     * @return ShoriDateKanri
+     */
+    public ShoriDateKanri get最大基準日時(RString 処理名, FlexibleYear 調定年度) {
+        SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(定数処理名.toString()));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.
+                select最大基準日時(サブ業務コード, 処理名, zOneOneRS, 調定年度);
+        return new ShoriDateKanri(entity);
     }
 
     /**

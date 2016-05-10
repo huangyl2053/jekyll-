@@ -8,8 +8,8 @@ var DBZ;
                 return "onOk_Cancel";
             };
 
-            Events.btnAddRow = function () {
-                return "btnAddRow";
+            Events.onbtn_AddRow = function () {
+                return "onbtn_AddRow";
             };
             return Events;
         })();
