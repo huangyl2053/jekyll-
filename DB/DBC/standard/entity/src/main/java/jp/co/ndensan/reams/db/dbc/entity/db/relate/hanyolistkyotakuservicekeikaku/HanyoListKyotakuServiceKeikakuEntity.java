@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyoListKyotakuServiceKeikakuEntity {
 
+    private HihokenshaNo dbV1001被保険者番号;
     private LasdecCode dbV1001市町村コード;
     private RString dbV1001資格取得事由コード;
     private FlexibleDate dbV1001資格取得年月日;

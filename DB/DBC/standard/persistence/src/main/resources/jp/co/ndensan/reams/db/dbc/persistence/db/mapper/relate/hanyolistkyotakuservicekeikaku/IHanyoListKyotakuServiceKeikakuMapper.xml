@@ -9,6 +9,7 @@
     </select>
     <sql id="selectHanyoListKyotakuServiceKeikakuEntity">
         SELECT 	    
+            DbV1001."hihokenshaNo"                                              AS dbV1001被保険者番号,	
             DbV1001."shichosonCode"                     			AS dbV1001市町村コード,						
 	    DbV1001."shikakuShutokuJiyuCode"					AS dbV1001資格取得事由コード,					
 	    DbV1001."shikakuShutokuYMD"						AS dbV1001資格取得年月日,					
@@ -125,8 +126,7 @@
                                     FROM rgdb."DbT7062KaigoJigyoshaDaihyosha" 
                                     GROUP BY "jigyoshaNo") AS A)
                 LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho"                                     AS DbV4001
-                    ON DbV4001."shichosonCode" = DbV1001."shichosonCode"
-                    AND DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
+                    ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
                 LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho"                                     AS DbT4001
                     ON  DbT4001."shichosonCode" = DbV4001."shichosonCode"										
                     AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"										
@@ -238,6 +238,7 @@
     
     <resultMap id="resultMapHanyoListKyotakuServiceKeikakuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity">
+        <result property="dbV1001被保険者番号" column="dbV1001被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbV1001市町村コード" column="dbV1001市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="dbV1001資格取得事由コード" column="dbV1001資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbV1001資格取得年月日" column="dbV1001資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

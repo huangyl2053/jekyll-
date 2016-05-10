@@ -408,8 +408,8 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
 
         csvEntity.set送付先行政区名(isNull(entity.get宛先Entity().getGyoseiku())
                 ? RString.EMPTY : entity.get宛名Entity().getGyoseikuName());
-        csvEntity.set被保険者番号(isNull(entity.getDbT3005被保険者番号())
-                ? RString.EMPTY : entity.getDbT3005被保険者番号().value());
+        csvEntity.set被保険者番号(isNull(entity.getDbV1001被保険者番号())
+                ? RString.EMPTY : entity.getDbV1001被保険者番号().value());
         RString 資格取得事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, new CodeShubetsu(介護資格取得事由),
                 new Code(entity.getDbV1001資格取得事由コード()), FlexibleDate.getNowDate());
         csvEntity.set資格取得事由(isNull(資格取得事由)
