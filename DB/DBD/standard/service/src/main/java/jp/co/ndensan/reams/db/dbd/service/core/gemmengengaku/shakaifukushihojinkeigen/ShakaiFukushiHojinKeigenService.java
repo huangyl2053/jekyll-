@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -173,7 +174,11 @@ public class ShakaiFukushiHojinKeigenService {
             return GemmenKubun.非課税_老年受給;
         }
         SetaiinShotokuJohoFinder setaiinShotokuJohoFinder = SetaiinShotokuJohoFinder.createInstance();
-        List<SetaiinShotoku> 世帯員所得情報List = setaiinShotokuJohoFinder.get世帯員所得情報(識別コード, 適用日.getYear(), null);
+        FlexibleYear 所得年度 = FlexibleYear.EMPTY;
+        if (適用日 != null && !適用日.isEmpty()) {
+            所得年度 = 適用日.getYear();
+        }
+        List<SetaiinShotoku> 世帯員所得情報List = setaiinShotokuJohoFinder.get世帯員所得情報(識別コード, 所得年度, null);
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報List) {
             if (識別コード.equals(世帯員所得情報.get識別コード())
                     && KazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免前())) {
