@@ -194,8 +194,6 @@ public class DbT7130KaigoServiceShuruiDac {
                                 leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, サービス提供年月),
                                 or(leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM),
                                         isNULL(DbT7130KaigoServiceShurui.teikyoshuryoYM))))
-                .order(by(DbT7130KaigoServiceShurui.teikyoKaishiYM, Order.DESC))
-                .limit(1)
                 .toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 }

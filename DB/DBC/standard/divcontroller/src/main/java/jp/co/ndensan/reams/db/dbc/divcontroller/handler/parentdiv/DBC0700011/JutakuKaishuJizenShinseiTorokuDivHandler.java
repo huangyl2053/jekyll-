@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,21 +39,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
-import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
-import jp.co.ndensan.reams.ur.urz.definition.core.jusho.KannaiKangaiKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -316,8 +308,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
             model.set被保険者番号(被保険者番号);
             model.set状態(状態_登録);
-            // TODO QAのNo.664 項目「住所クラス」の設定値は確認中
-            model.set住所クラス(new _Jusho());
+            // TODO QAのNo.664 項目「サービス提供年月」の設定値は確認中
+            model.set住所クラス(div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                    .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().get住所());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()
@@ -335,7 +328,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             model.set整理番号(seiriNo);
             model.set様式番号(yoshikiNo);
             model.set状態((照会モード.equals(画面モード) || 削除モード.equals(画面モード)) ? 状態_参照 : 状態_登録);
-            model.set住所クラス(new _Jusho());
+            model.set住所クラス(div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
+                    .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().get住所());
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()
@@ -1447,48 +1441,5 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                         .setValue(new RDate(data.get事前申請決定通知発行日().toString()));
             }
         }
-    }
-}
-
-/**
- * 疎通のため、内部クラス
- *
- * @author SE1007
- */
-class _Jusho implements IJusho, Serializable {
-
-    @Override
-    public KannaiKangaiKubunType get管内管外() {
-        return KannaiKangaiKubunType.管内;
-    }
-
-    @Override
-    public ChoikiCode get町域コード() {
-        return new ChoikiCode("123546");
-    }
-
-    @Override
-    public ZenkokuJushoCode get全国住所コード() {
-        return new ZenkokuJushoCode("789456");
-    }
-
-    @Override
-    public YubinNo get郵便番号() {
-        return new YubinNo("654897");
-    }
-
-    @Override
-    public RString get住所() {
-        return new RString("广島");
-    }
-
-    @Override
-    public Banchi get番地() {
-        return new Banchi();
-    }
-
-    @Override
-    public Katagaki get方書() {
-        return new Katagaki("3698522");
     }
 }
