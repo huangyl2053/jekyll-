@@ -810,7 +810,9 @@ public class FutangendogakuNinteiShinseiHandler {
             FutanGendogakuNintei 申請情報 = 申請情報Builder(futanGendogakuNintei);
             申請情報 = 申請情報.modifiedModel();
             ninteiViewState.setFutanGendogakuNintei(申請情報);
-            ninteiViewState.setState(EntityDataState.Modified);
+            if (!EntityDataState.Added.equals(ninteiViewState.getState())) {
+                ninteiViewState.setState(EntityDataState.Modified);
+            }
             list.set(index, ninteiViewState);
         } else {
             FutanGendogakuNintei futanGendogakuNintei = new FutanGendogakuNintei(get証記載保険者番号(div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(), 0);

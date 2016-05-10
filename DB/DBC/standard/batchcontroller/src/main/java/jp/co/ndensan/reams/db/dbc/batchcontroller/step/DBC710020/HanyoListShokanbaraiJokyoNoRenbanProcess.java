@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.KetteiJok
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShiharaiHoho;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.shokan.ShoriJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoNoRenbanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvDataCreate;
+import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvNoRenbanDataCreate;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
@@ -58,7 +58,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -68,7 +67,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBC-3093-020 chenaoqi
  */
-public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoListShokanbaraiJokyoEntity> {
+public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<HanyoListShokanbaraiJokyoEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper.getCSVData");
@@ -101,13 +100,12 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
     private HanyoListShokanbaraiJokyoProcessParameter parameter;
-    private HanyoListCsvDataCreate dataCreate;
+    private HanyoListCsvNoRenbanDataCreate dataCreate;
     private RString eucFilePath;
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
     private HokenshaList 保険者リスト;
-    private Decimal 連番;
     private RString preBreakKey;
     private HanyoListShokanbaraiJokyoEntity preEntity;
     private Map<RString, Object> mapFlag;
@@ -115,13 +113,12 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private List<KinyuKikanEntity> lstKinyuKikanEntity;
 
     @BatchWriter
-    private EucCsvWriter<HanyoListShokanbaraiJokyoCSVEntity> eucCsvWriter;
+    private EucCsvWriter<HanyoListShokanbaraiJokyoNoRenbanCSVEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
-        連番 = Decimal.ONE;
         preBreakKey = RString.EMPTY;
-        dataCreate = new HanyoListCsvDataCreate();
+        dataCreate = new HanyoListCsvNoRenbanDataCreate();
         personalDataList = new ArrayList<>();
         mapFlag = new HashMap<>();
         lstDbt3038List = new ArrayList<>();
@@ -193,8 +190,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
                 kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
                 preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
             }
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 保険者リスト));
-            連番 = 連番.add(Decimal.ONE);
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 保険者リスト));
             personalDataList.add(toPersonalData(preEntity));
             lstDbt3038List.clear();
             lstDbt3038List.addAll(entity.get請求基本List());
@@ -223,8 +219,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
             preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
         }
         if (preEntity != null) {
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 保険者リスト));
-            連番 = 連番.add(Decimal.ONE);
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 保険者リスト));
             personalDataList.add(toPersonalData(preEntity));
         }
         eucCsvWriter.close();

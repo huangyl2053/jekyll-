@@ -125,52 +125,10 @@
         <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
-    <select id="get宛名識別対象" resultMap="resultMap_OtherAddressInformationRecipientNameMybatisEntity"
+    <select id="get宛名識別対象" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.atena.OtherAddressInformationRecipientNameMybatisParam"  fetchSize="500">
-        SELECT T1."kanaMeisho" AS "カナ名称",
-        T1."meisho" AS "氏名",
-        T1."seinengappiYMD" AS "生年月日",
-        T1."seibetsuCode" AS "性別コード",
-        T1."setaiCode" AS "世帯コード",
-        T1."shikibetsuCode" AS "識別コード",
-        T1."chikuName1" AS "地区名１",
-        T1."chikuName2" AS "地区名２",
-        T1."chikuName3" AS "地区名３",
-        T1."chikuCode1" AS "地区コード１",
-        T1."chikuCode2" AS "地区コード２",
-        T1."chikuCode3" AS "地区コード３",
-        T1."jusho" AS "住所",
-        T1."zenkokuJushoCode" AS "住所コード",
-        T1."gyoseikuCode" AS "行政区コード",
-        T1."tennyumaeZenkokuJushoCode" AS "前住所コード",
-        T1."tennyumaeJusho" AS "前住所",
-        T1."torokuIdoYMD" AS "転入年月日",
-        T1."renrakusaki1" AS "連絡先",
-        COALESCE(T1."tenshutsuKakuteiIdoYMD",T1."tenshutsuYoteiIdoYMD")AS "転出年月日"
+        SELECT <include refid="columns_ShikibetsuTaisho" />
         FROM <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
-        AS T1
+        AS     <include refid="as_ShikibetsuTaisho" />
     </select>
-    <resultMap id="resultMap_OtherAddressInformationRecipientNameMybatisEntity"
-               type="jp.co.ndensan.reams.db.dba.entity.db.otheraddressledger.OtherAddressInformationRecipientNameMybatisEntity" autoMapping="true">
-        <result property="カナ名称" column="カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
-        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
-        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="性別コード" column="性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="世帯コード" column="世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
-        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
-        <result property="地区名１" column="地区名１" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="地区名２" column="地区名２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="地区名３" column="地区名３" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="地区コード１" column="地区コード１" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
-        <result property="地区コード２" column="地区コード２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
-        <result property="地区コード３" column="地区コード３" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
-        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
-        <result property="住所コード" column="住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
-        <result property="行政区コード" column="行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
-        <result property="前住所コード" column="前住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
-        <result property="前住所" column="前住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
-        <result property="転入年月日" column="転入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="連絡先" column="連絡先" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="転出年月日" column="転出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-    </resultMap>
 </mapper>

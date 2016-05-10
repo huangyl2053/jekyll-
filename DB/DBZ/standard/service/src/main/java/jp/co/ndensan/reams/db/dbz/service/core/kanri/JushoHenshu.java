@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.service.core.kanri;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -21,6 +22,9 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -108,7 +112,7 @@ public class JushoHenshu {
      * @param 番地 番地
      * @return 住所2
      */
-    public RString editJusho2(RString 住所, RString 番地) {
+    public RString editJusho2(AtenaJusho 住所, AtenaBanchi 番地) {
         return editJusho2(住所, 番地, null);
     }
 
@@ -120,11 +124,13 @@ public class JushoHenshu {
      * @param 方書 方書
      * @return 住所2
      */
-    public RString editJusho2(RString 住所, RString 番地, RString 方書) {
+    public RString editJusho2(AtenaJusho 住所, AtenaBanchi 番地, Katagaki 方書) {
+        住所 = ObjectUtil.defaultIfNull(住所, AtenaJusho.EMPTY);
+        番地 = ObjectUtil.defaultIfNull(番地, AtenaBanchi.EMPTY);
         if (方書 == null) {
-            return 住所.concat(番地);
+            return 住所.getColumnValue().concat(番地.getColumnValue());
         }
-        return 住所.concat(番地).concat(RString.FULL_SPACE).concat(方書);
+        return 住所.getColumnValue().concat(番地.getColumnValue()).concat(RString.FULL_SPACE).concat(方書.getColumnValue());
     }
 
     /**

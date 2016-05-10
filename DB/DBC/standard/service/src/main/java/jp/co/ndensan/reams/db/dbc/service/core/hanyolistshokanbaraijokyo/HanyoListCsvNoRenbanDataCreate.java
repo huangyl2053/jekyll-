@@ -12,7 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishu.JutakukaishuShinseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoNoRenbanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
@@ -64,7 +64,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  *
  * @reamsid_L DBC-3093-020 chenaoqi
  */
-public class HanyoListCsvDataCreate {
+public class HanyoListCsvNoRenbanDataCreate {
 
     private static final RString 入所施設種類_11 = new RString("11");
     private static final RString 入所施設種類_12 = new RString("12");
@@ -84,15 +84,13 @@ public class HanyoListCsvDataCreate {
      *
      * @param entity HanyoListShokanbaraiJokyoEntity
      * @param parameter HanyoListShokanbaraiJokyoProcessParameter
-     * @param 連番 Decimal
      * @param 保険者リスト HokenshaList
-     * @return HanyoListShokanbaraiJokyoCSVEntity
+     * @return HanyoListShokanbaraiJokyoNoRenbanCSVEntity
      */
-    public HanyoListShokanbaraiJokyoCSVEntity createCsvData(HanyoListShokanbaraiJokyoEntity entity,
-            HanyoListShokanbaraiJokyoProcessParameter parameter, Decimal 連番,
+    public HanyoListShokanbaraiJokyoNoRenbanCSVEntity createCsvData(HanyoListShokanbaraiJokyoEntity entity,
+            HanyoListShokanbaraiJokyoProcessParameter parameter,
             HokenshaList 保険者リスト) {
-        HanyoListShokanbaraiJokyoCSVEntity csvEntity = new HanyoListShokanbaraiJokyoCSVEntity();
-        csvEntity.set連番(numToRString(連番));
+        HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity = new HanyoListShokanbaraiJokyoNoRenbanCSVEntity();
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
         set被保険者台帳管理(entity, csvEntity, 保険者リスト, parameter);
@@ -105,7 +103,7 @@ public class HanyoListCsvDataCreate {
         return csvEntity;
     }
 
-    private void set介護保険(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set介護保険(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
 
         JigyoshaNo 指定事業者コード = entity.get入所施設コード();
@@ -121,7 +119,7 @@ public class HanyoListCsvDataCreate {
 
     }
 
-    private void set介護事業者(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set介護事業者(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
 
         AtenaMeisho 指定事業者名 = entity.get事業者名称_60();
@@ -151,7 +149,7 @@ public class HanyoListCsvDataCreate {
 
     }
 
-    private void set介護対象施設(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set介護対象施設(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         csvEntity.set指定事業者名(entity.get事業者名称_05() != null
                 ? entity.get事業者名称_05().getColumnValue() : RString.EMPTY);
@@ -177,7 +175,7 @@ public class HanyoListCsvDataCreate {
         csvEntity.set指定事業者実施地域(RString.EMPTY);
     }
 
-    private void set宛名(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set宛名(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get宛名Entity() != null) {
             ShikibetsuCode 識別コード = entity.get宛名Entity().getShikibetsuCode();
@@ -215,7 +213,7 @@ public class HanyoListCsvDataCreate {
         }
     }
 
-    private void set住所番地方書(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity
+    private void set住所番地方書(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity
     ) {
         if (entity.get宛名Entity() != null) {
             AtenaBanchi 番地 = entity.get宛名Entity().getBanchi();
@@ -236,7 +234,7 @@ public class HanyoListCsvDataCreate {
 
     }
 
-    private void set宛名本人(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set宛名本人(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get宛名Entity() != null) {
             GyoseikuCode 行政区コード = entity.get宛名Entity().getGyoseikuCode();
@@ -277,7 +275,7 @@ public class HanyoListCsvDataCreate {
     }
 
     private void set前住所番地方書(HanyoListShokanbaraiJokyoEntity entity,
-            HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
+            HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity) {
         if (entity.get宛名Entity() != null) {
             AtenaJusho 前住所 = entity.get宛名Entity().getTennyumaeJusho();
             AtenaBanchi 前住所番地 = entity.get宛名Entity().getTennyumaeBanchi();
@@ -298,7 +296,7 @@ public class HanyoListCsvDataCreate {
 
     }
 
-    private void set宛先(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
+    private void set宛先(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity) {
         if (entity.get宛先Entity() != null) {
             AtenaMeisho 送付先氏名 = entity.get宛先Entity().getKanjiShimei();
             AtenaKanaMeisho 送付先氏名カナ = entity.get宛先Entity().getKanaShimei();
@@ -322,7 +320,7 @@ public class HanyoListCsvDataCreate {
     }
 
     private void set送付先住所番地方書(HanyoListShokanbaraiJokyoEntity entity,
-            HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
+            HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity) {
         if (entity.get宛先Entity() != null) {
             AtenaJusho 送付先住所 = entity.get宛先Entity().getJusho();
             AtenaBanchi 送付先番地 = entity.get宛先Entity().getBanchi();
@@ -342,7 +340,7 @@ public class HanyoListCsvDataCreate {
 
     }
 
-    private void set福祉用具(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set福祉用具(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get福祉用具Entity() != null) {
             csvEntity.set購入年月日(dataToRString(entity.get福祉用具Entity().getFukushiYoguHanbaiYMD(), parameter));
@@ -356,7 +354,7 @@ public class HanyoListCsvDataCreate {
         }
     }
 
-    private void set請求住宅(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set請求住宅(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get請求住宅Entity() != null) {
             csvEntity.set着工年月日(dataToRString(entity.get請求住宅Entity().getJutakuKaishuChakkoYMD(), parameter));
@@ -367,7 +365,7 @@ public class HanyoListCsvDataCreate {
         }
     }
 
-    private void set支給申請(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set支給申請(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get支給申請Entity() != null) {
             FlexibleYearMonth サービス提供年月 = entity.get支給申請Entity().getServiceTeikyoYM();
@@ -430,7 +428,7 @@ public class HanyoListCsvDataCreate {
         }
     }
 
-    private void set判定結果情報(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set判定結果情報(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get判定結果情報Entity() != null) {
             csvEntity.set決定日(dataToRString(entity.get判定結果情報Entity().getKetteiYMD(), parameter));
@@ -442,7 +440,7 @@ public class HanyoListCsvDataCreate {
         }
     }
 
-    private void set被保険者台帳管理(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
+    private void set被保険者台帳管理(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity,
             HokenshaList 保険者リスト, HanyoListShokanbaraiJokyoProcessParameter parameter) {
 
         csvEntity.set市町村コード(entity.get市町村コード() != null
@@ -489,7 +487,7 @@ public class HanyoListCsvDataCreate {
 
     }
 
-    private void set口座情報(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity) {
+    private void set口座情報(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity) {
         KozaRelateEntity releteEntity = entity.get口座情報Entity();
         if (releteEntity != null) {
             IKoza 口座 = new Koza(releteEntity);
