@@ -177,19 +177,19 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
     private void outputJokenhyoFactory() {
         int pageCnt = 1;
         if (koumokuGoukeyList != null && !koumokuGoukeyList.isEmpty()) {
-            pageCnt += 1;
+            pageCnt = pageCnt + 1;
         }
         List<KoumokuGoukey> 特別徴収List = iCreateTsukibetsuSuiihyoMapper.get特別徴収帳票データの取得();
         if (特別徴収List != null && !特別徴収List.isEmpty()) {
-            pageCnt += 1;
+            pageCnt = pageCnt + 1;
         }
         List<KoumokuGoukey> 合計List = iCreateTsukibetsuSuiihyoMapper.get合計帳票データの取得();
         if (合計List != null && !合計List.isEmpty()) {
-            pageCnt += 1;
+            pageCnt = pageCnt + 1;
         }
         List<GemmenJyoho> 減免List = iCreateTsukibetsuSuiihyoMapper.get減免帳票データの取得();
         if (減免List != null && !減免List.isEmpty()) {
-            pageCnt += 1;
+            pageCnt = pageCnt + 1;
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(

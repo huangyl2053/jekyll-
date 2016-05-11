@@ -382,8 +382,8 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
         builder2.append("0401");
         調定年度0401 = new RString(builder2.toString());
         StringBuilder builder3 = new StringBuilder();
-        builder3.append(調定年度.toString());
-        builder3.append("0431");
+        builder3.append(調定年度.plusYear(1).toString());
+        builder3.append("0331");
         調定年度0430 = new RString(builder3.toString());
         return new CreateTsukibetsuSuiihyoMyBatisParameter(
                 調定年度, 調定基準日時,
