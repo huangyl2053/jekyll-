@@ -72,7 +72,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             RString 宛名連番) {
 
         TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
-        // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
@@ -108,7 +107,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             RString 宛名連番) {
         TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty();
 
-        // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
@@ -144,7 +142,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerProperty();
 
-        // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
@@ -179,7 +176,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty();
 
-        // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
@@ -216,7 +212,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty();
 
-        // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
@@ -259,7 +254,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty();
 
-        // TODO 仮算定通知書情報がない QA647
         JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
