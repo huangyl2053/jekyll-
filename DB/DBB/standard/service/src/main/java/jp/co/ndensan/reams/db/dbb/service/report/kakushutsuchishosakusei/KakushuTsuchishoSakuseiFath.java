@@ -9,12 +9,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.FukaDaityouInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoCommonInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoSeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.GinfuriTsuchishoType;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KigotoShutsuryoku;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KigotoTsuchishoType;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SonotaTsuchishoType;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kakushutsuchishosakusei.IKakushuTsuchishoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
@@ -30,12 +48,18 @@ import jp.co.ndensan.reams.ua.uax.business.core.dainonin.DainoninRelate;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.dainonin.DainoninRelateFinderFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -49,6 +73,58 @@ public class KakushuTsuchishoSakuseiFath {
     private static final RString 番号 = new RString("0001");
     private static final RString キー_調定日 = new RString("調定日");
     private static final RString キー_識別コード = new RString("識別コード");
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_7 = 7;
+    private static final int INT_8 = 8;
+    private static final int INT_9 = 9;
+    private static final int INT_10 = 10;
+    private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
+    private static final int INT_14 = 14;
+    private static final int 定値_番号1 = 1;
+    private static final int 定値_番号2 = 2;
+    private static final int 設定値_番号0 = 0;
+    private static final int 設定値_番号4 = 4;
+    private static final int 設定値_番号5 = 5;
+    private static final int 設定値_番号6 = 6;
+    private static final int 設定値_番号9 = 9;
+    private static final RString 定値_0 = new RString("0");
+    private static final RString 定値_納入通知書制御情報 = new RString("納入通知書制御情報");
+    private static final RString 定値_出力期 = new RString("出力期");
+    private static final RString 定値_仮算定_本算定_過年度区分 = new RString("仮算定_本算定_過年度区分");
+    private static final RString 仮算定_区分 = new RString("1");
+    private static final RString 本算定_区分 = new RString("2");
+    private static final RString 過年度_区分 = new RString("3");
+    private static final RString 定値_期毎 = new RString("期毎タイプ");
+    private static final RString 定値_銀振型5期 = new RString("銀振型5期タイプ");
+    private static final RString 定値_銀振型4期 = new RString("銀振型4期タイプ");
+    private static final RString 定値_ブック = new RString("ブックタイプ");
+    private static final RString 定値_コンビニ収納 = new RString("コンビニ収納タイプ");
+    private static final RString 定値_その他 = new RString("その他（カスタマイズ）");
+    private static final RString 括弧_左 = new RString("（");
+    private static final RString 定値_期 = new RString("期");
+    private static final int 定値_1期 = 1;
+    private static final int 定値_2期 = 2;
+    private static final int 定値_3期 = 3;
+    private static final int 定値_4期 = 4;
+    private static final int 定値_5期 = 5;
+    private static final int 定値_6期 = 6;
+    private static final int 定値_7期 = 7;
+    private static final int 定値_8期 = 8;
+    private static final int 定値_9期 = 9;
+    private static final int 定値_10期 = 10;
+    private static final int 定値_11期 = 11;
+    private static final int 定値_12期 = 12;
+    private static final int 定値_13期 = 13;
+    private static final int 定値_14期 = 14;
+    private Models<KibetsuIdentifier, Kibetsu> kibetsu;
+    private List<TotalShunyuRelateEntity> 収入情報取得PSM;
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
     private final DbT4021ShiharaiHohoHenkoDac 支払方法変更Dac;
@@ -148,5 +224,481 @@ public class KakushuTsuchishoSakuseiFath {
             賦課台帳情報.set基準日時(処理日付マスタ.getKijunTimestamp());
         }
         return 賦課台帳情報;
+    }
+
+    /**
+     * 特徴収入額01を返します。
+     *
+     * @return 特徴収入額01
+     */
+    public Decimal get特徴収入額01() {
+
+        return this.get収入額(INT_1, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴収入額02を返します。
+     *
+     * @return 特徴収入額02
+     */
+    public Decimal get特徴収入額02() {
+
+        return this.get収入額(INT_2, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴収入額03を返します。
+     *
+     * @return 特徴収入額03
+     */
+    public Decimal get特徴収入額03() {
+
+        return this.get収入額(INT_3, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴収入額04を返します。
+     *
+     * @return 特徴収入額04
+     */
+    public Decimal get特徴収入額04() {
+
+        return this.get収入額(INT_4, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴収入額05を返します。
+     *
+     * @return 特徴収入額05
+     */
+    public Decimal get特徴収入額05() {
+
+        return this.get収入額(INT_5, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴収入額06を返します。
+     *
+     * @return 特徴収入額06
+     */
+    public Decimal get特徴収入額06() {
+
+        return this.get収入額(INT_6, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額01を返します。
+     *
+     * @return 普徴収入額01
+     */
+    public Decimal get普徴収入額01() {
+
+        return this.get収入額(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額02を返します。
+     *
+     * @return 普徴収入額02
+     */
+    public Decimal get普徴収入額02() {
+
+        return this.get収入額(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額03を返します。
+     *
+     * @return 普徴収入額03
+     */
+    public Decimal get普徴収入額03() {
+
+        return this.get収入額(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額04を返します。
+     *
+     * @return 普徴収入額04
+     */
+    public Decimal get普徴収入額04() {
+
+        return this.get収入額(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額05を返します。
+     *
+     * @return 普徴収入額05
+     */
+    public Decimal get普徴収入額05() {
+
+        return this.get収入額(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額06を返します。
+     *
+     * @return 普徴収入額06
+     */
+    public Decimal get普徴収入額06() {
+
+        return this.get収入額(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額07を返します。
+     *
+     * @return 普徴収入額07
+     */
+    public Decimal get普徴収入額07() {
+
+        return this.get収入額(INT_7, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額08を返します。
+     *
+     * @return 普徴収入額08
+     */
+    public Decimal get普徴収入額08() {
+
+        return this.get収入額(INT_8, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額09を返します。
+     *
+     * @return 普徴収入額09
+     */
+    public Decimal get普徴収入額09() {
+
+        return this.get収入額(INT_9, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額10を返します。
+     *
+     * @return 普徴収入額10
+     */
+    public Decimal get普徴収入額10() {
+
+        return this.get収入額(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額11を返します。
+     *
+     * @return 普徴収入額11
+     */
+    public Decimal get普徴収入額11() {
+
+        return this.get収入額(INT_11, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額12を返します。
+     *
+     * @return 普徴収入額12
+     */
+    public Decimal get普徴収入額12() {
+
+        return this.get収入額(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額13を返します。
+     *
+     * @return 普徴収入額13
+     */
+    public Decimal get普徴収入額13() {
+
+        return this.get収入額(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴収入額14を返します。
+     *
+     * @return 普徴収入額14
+     */
+    public Decimal get普徴収入額14() {
+
+        return this.get収入額(INT_14, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link FukaJohoRelateEntity}より{@link FukaJoho}を生成します。
+     *
+     * @param entity DBより取得した{@link FukaJohoRelateEntity}
+     * @param 収入情報List List<TotalShunyuRelateEntity>
+     */
+    public void fukaJoho(FukaJohoRelateEntity entity, List<TotalShunyuRelateEntity> 収入情報List) {
+        requireNonNull(entity.get介護賦課Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("賦課の情報"));
+        List<Kibetsu> kibetsuList = new ArrayList<>();
+        for (KibetsuEntity kibetsuEntity : entity.get介護期別RelateEntity()) {
+            kibetsuList.add(new Kibetsu(kibetsuEntity));
+        }
+        kibetsu = Models.create(kibetsuList);
+        収入情報取得PSM = 収入情報List;
+    }
+
+    /**
+     * 収入額を返します。
+     *
+     * @param 期 int
+     * @param 徴収方法期別 RString
+     * @return 収入額
+     */
+    private Decimal get収入額(int 期, RString 徴収方法期別) {
+
+        if (kibetsu.iterator().hasNext()) {
+            Kibetsu thisKibetsu = kibetsu.iterator().next();
+            if (徴収方法期別.equals(thisKibetsu.get徴収方法())
+                    && 期 == thisKibetsu.get期()) {
+
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(thisKibetsu.get調定ID().longValue());
+                return get収入額(thisKibetsu.getChoteiKyotsu(identifier));
+            }
+        }
+        return Decimal.ZERO;
+    }
+
+    private Decimal get収入額(ChoteiKyotsu 調定共通情報) {
+        if (収入情報取得PSM == null || 収入情報取得PSM.isEmpty() || 調定共通情報 == null) {
+            return Decimal.ZERO;
+        }
+        for (TotalShunyuRelateEntity 収入情報 : 収入情報取得PSM) {
+            if (収入情報.get収納キーRelateEntity() == null || 収入情報.get収納キーRelateEntity().get収納管理Entity() == null) {
+                continue;
+            }
+            if (調定共通情報.get収納ID().equals(収入情報.get収納キーRelateEntity().get収納管理Entity().getShunoId())) {
+                return 収入情報.get最新収入Entity() == null ? Decimal.ZERO : 収入情報.get最新収入Entity().getShunyugaku();
+            }
+        }
+        return Decimal.ZERO;
+    }
+
+    /**
+     * 納入通知書帳票ID判定メソッドです。
+     *
+     * @param 納入通知書制御情報 納入通知書制御情報
+     * @param 出力期 出力期
+     * @param 仮算定_本算定_過年度区分 仮算定_本算定_過年度区分
+     * @return 帳票ID
+     * @throws NullPointerException 入力.納入通知書制御情報、出力期、仮算定_本算定_過年度区分が null の場合
+     */
+    public ReportId judge納入通知書帳票ID(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報,
+            RString 出力期, RString 仮算定_本算定_過年度区分) throws NullPointerException {
+
+        requireNonNull(納入通知書制御情報, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_納入通知書制御情報.toString()));
+        requireNonNull(出力期, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_出力期.toString()));
+        requireNonNull(仮算定_本算定_過年度区分, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_仮算定_本算定_過年度区分.toString()));
+
+        RString 納入通知書タイプ = get納入通知書タイプ(出力期);
+        if (仮算定_区分.equals(仮算定_本算定_過年度区分)) {
+            return get仮算定帳票ID(納入通知書制御情報, 納入通知書タイプ);
+        } else if (本算定_区分.equals(仮算定_本算定_過年度区分)) {
+            return get本算定帳票ID(納入通知書制御情報, 納入通知書タイプ);
+        } else if (過年度_区分.equals(仮算定_本算定_過年度区分)) {
+            return get過年度帳票ID(納入通知書制御情報, 納入通知書タイプ);
+        }
+        return null;
+    }
+
+    private ReportId get仮算定帳票ID(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 納入通知書タイプ)
+            throws ApplicationException {
+        if (定値_期毎.equals(納入通知書タイプ)
+                && KigotoTsuchishoType.標準版期毎タイプ.equals(納入通知書制御情報.get期毎納入通知書タイプ())) {
+            return ReportIdDBB.DBB100014.getReportId();
+        } else if (定値_銀振型5期.equals(納入通知書タイプ)) {
+            throw new ApplicationException(UrErrorMessages.該当データなし
+                    .getMessage().replace(定値_銀振型5期.toString()).evaluate());
+        } else if (定値_銀振型4期.equals(納入通知書タイプ)
+                && GinfuriTsuchishoType.標準版銀振タイプ.equals(納入通知書制御情報.get銀振納入通知書タイプ())) {
+            return ReportIdDBB.DBB100018.getReportId();
+        } else if (定値_ブック.equals(納入通知書タイプ)
+                && SonotaTsuchishoType.標準版ブックタイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+            if (HyojiUmu.表示しない.equals(納入通知書制御情報.getブック口座振替依頼表示())) {
+                return ReportIdDBB.DBB100021.getReportId();
+            } else if (HyojiUmu.表示する.equals(納入通知書制御情報.getブック口座振替依頼表示())) {
+                return ReportIdDBB.DBB100020.getReportId();
+            }
+        } else if (定値_コンビニ収納.equals(納入通知書タイプ)
+                && KigotoShutsuryoku.期毎出力.equals(納入通知書制御情報.getコンビニ期毎出力())) {
+            return ReportIdDBB.DBB100028.getReportId();
+        } else if (定値_コンビニ収納.equals(納入通知書タイプ)
+                && KigotoShutsuryoku.通常出力.equals(納入通知書制御情報.getコンビニ期毎出力())) {
+            if (SonotaTsuchishoType.コンビニマルチ収納タイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+                return ReportIdDBB.DBB100026.getReportId();
+            } else if (SonotaTsuchishoType.コンビニ角公タイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+                return ReportIdDBB.DBB100024.getReportId();
+            }
+        }
+        return null;
+    }
+
+    private ReportId get本算定帳票ID(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 納入通知書タイプ) {
+        if (定値_期毎.equals(納入通知書タイプ)
+                && KigotoTsuchishoType.標準版期毎タイプ.equals(納入通知書制御情報.get期毎納入通知書タイプ())) {
+            return ReportIdDBB.DBB100045.getReportId();
+        } else if (定値_銀振型5期.equals(納入通知書タイプ)
+                && GinfuriTsuchishoType.標準版銀振タイプ.equals(納入通知書制御情報.get銀振納入通知書タイプ())) {
+            return ReportIdDBB.DBB100053.getReportId();
+        } else if (定値_銀振型4期.equals(納入通知書タイプ)
+                && GinfuriTsuchishoType.標準版銀振タイプ.equals(納入通知書制御情報.get銀振納入通知書タイプ())) {
+            return ReportIdDBB.DBB100051.getReportId();
+        } else if (定値_ブック.equals(納入通知書タイプ)
+                && SonotaTsuchishoType.標準版ブックタイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+            if (HyojiUmu.表示しない.equals(納入通知書制御情報.getブック口座振替依頼表示())) {
+                return ReportIdDBB.DBB100056.getReportId();
+            } else if (HyojiUmu.表示する.equals(納入通知書制御情報.getブック口座振替依頼表示())) {
+                return ReportIdDBB.DBB100055.getReportId();
+            }
+        } else if (定値_コンビニ収納.equals(納入通知書タイプ)
+                && KigotoShutsuryoku.期毎出力.equals(納入通知書制御情報.getコンビニ期毎出力())) {
+            return ReportIdDBB.DBB100063.getReportId();
+        } else if (定値_コンビニ収納.equals(納入通知書タイプ)
+                && KigotoShutsuryoku.通常出力.equals(納入通知書制御情報.getコンビニ期毎出力())) {
+            if (SonotaTsuchishoType.コンビニマルチ収納タイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+                return ReportIdDBB.DBB100061.getReportId();
+            } else if (SonotaTsuchishoType.コンビニ角公タイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+                return ReportIdDBB.DBB100059.getReportId();
+            }
+        }
+        return null;
+    }
+
+    private ReportId get過年度帳票ID(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 納入通知書タイプ) {
+        if (定値_期毎.equals(納入通知書タイプ)
+                && KigotoTsuchishoType.標準版期毎タイプ.equals(納入通知書制御情報.get期毎納入通知書タイプ())) {
+            return ReportIdDBB.DBB100066.getReportId();
+        } else if (定値_銀振型5期.equals(納入通知書タイプ)
+                && GinfuriTsuchishoType.標準版銀振タイプ.equals(納入通知書制御情報.get銀振納入通知書タイプ())) {
+            return ReportIdDBB.DBB100070.getReportId();
+        } else if (定値_銀振型4期.equals(納入通知書タイプ)
+                && GinfuriTsuchishoType.標準版銀振タイプ.equals(納入通知書制御情報.get銀振納入通知書タイプ())) {
+            return ReportIdDBB.DBB100069.getReportId();
+        } else if (定値_ブック.equals(納入通知書タイプ)
+                && SonotaTsuchishoType.標準版ブックタイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+            if (HyojiUmu.表示しない.equals(納入通知書制御情報.getブック口座振替依頼表示())) {
+                return ReportIdDBB.DBB100072.getReportId();
+            } else if (HyojiUmu.表示する.equals(納入通知書制御情報.getブック口座振替依頼表示())) {
+                return ReportIdDBB.DBB100071.getReportId();
+            }
+        } else if (定値_コンビニ収納.equals(納入通知書タイプ)
+                && KigotoShutsuryoku.期毎出力.equals(納入通知書制御情報.getコンビニ期毎出力())) {
+            return ReportIdDBB.DBB100076.getReportId();
+        } else if (定値_コンビニ収納.equals(納入通知書タイプ)
+                && KigotoShutsuryoku.通常出力.equals(納入通知書制御情報.getコンビニ期毎出力())) {
+            if (SonotaTsuchishoType.コンビニマルチ収納タイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+                return ReportIdDBB.DBB100075.getReportId();
+            } else if (SonotaTsuchishoType.コンビニ角公タイプ.equals(納入通知書制御情報.getその他納入通知書タイプ())) {
+                return ReportIdDBB.DBB100073.getReportId();
+            }
+        }
+        return null;
+    }
+
+    private RString get納入通知書タイプ(RString 出力期) {
+
+        RString 設定値 = 定値_0;
+        RDate 運用日 = RDate.getNowDate();
+        出力期 = 出力期.split(括弧_左.toString()).get(0).replace(定値_期, RString.EMPTY);
+        switch (Integer.parseInt(出力期.toString())) {
+            case 定値_1期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_2期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型2, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_3期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型3, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_4期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型4, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_5期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型5, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_6期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型6, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_7期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型7, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_8期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型8, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_9期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型9, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_10期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型10, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_11期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型11, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_12期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型12, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_13期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型13, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_14期:
+                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型14, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            default:
+                break;
+        }
+        return set納入通知書タイプ(設定値);
+    }
+
+    private RString set納入通知書タイプ(RString 設定値) {
+
+        switch (Integer.parseInt(設定値.toString())) {
+            case 設定値_番号0:
+                return RString.EMPTY;
+            case 定値_番号1:
+                return 定値_期毎;
+            case 定値_番号2:
+                return 定値_銀振型5期;
+            case 設定値_番号4:
+                return 定値_銀振型4期;
+            case 設定値_番号5:
+                return 定値_ブック;
+            case 設定値_番号6:
+                return 定値_コンビニ収納;
+            case 設定値_番号9:
+                return 定値_その他;
+            default:
+                return RString.EMPTY;
+        }
+    }
+
+    /**
+     * 発行日を取得メソッドです。
+     *
+     * @param 発行日 FlexibleDate
+     * @return 発行日 RDate
+     */
+    public RDate get発行日(FlexibleDate 発行日) {
+        if (発行日 == null || 発行日.isEmpty()) {
+            return null;
+        }
+        return new RDate(発行日.toString());
+    }
+
+    /**
+     * 空値判断メソッドです。
+     *
+     * @param 項目 RString
+     * @return 項目 RString
+     */
+    public RString nullTOEmpty(RString 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 項目;
     }
 }
