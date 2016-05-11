@@ -550,44 +550,44 @@ public class HihokenshashoShikakushoHakkoFinder {
 
             if (i == 0) {
                 if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    DbT7060KaigoJigyoshaEntity dbT7060 = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
-
-                    entity.set入所施設１(dbT7060.getJigyoshaName().value());
+                    List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
+                    RString 入所施設１ = dbT7060List.isEmpty() ? RString.EMPTY : dbT7060List.get(0).getJigyoshaName().value();
+                    entity.set入所施設１(入所施設１);
                 } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005 = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
-
-                    entity.set入所施設１(dbT1005.getJigyoshaMeisho().value());
+                    List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
+                    RString 入所施設１ = dbT1005List.isEmpty() ? RString.EMPTY : dbT1005List.get(0).getJigyoshaMeisho().value();
+                    entity.set入所施設１(入所施設１);
                 }
                 entity.set入所年月日１(resultList.get(i).get入所年月日());
                 entity.set退所年月日１(resultList.get(i).get退所年月日());
             } else if (i == 1) {
                 if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    DbT7060KaigoJigyoshaEntity dbT7060 = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
-
-                    entity.set入所施設２(dbT7060.getJigyoshaName().value());
+                    List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
+                    RString 入所施設２ = dbT7060List.isEmpty() ? RString.EMPTY : dbT7060List.get(0).getJigyoshaName().value();
+                    entity.set入所施設２(入所施設２);
                 } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005 = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
-
-                    entity.set入所施設２(dbT1005.getJigyoshaMeisho().value());
+                    List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
+                    RString 入所施設２ = dbT1005List.isEmpty() ? RString.EMPTY : dbT1005List.get(0).getJigyoshaMeisho().value();
+                    entity.set入所施設２(入所施設２);
 
                 }
                 entity.set入所年月日２(resultList.get(i).get入所年月日());
                 entity.set退所年月日２(resultList.get(i).get退所年月日());
             } else if (i == 2) {
                 if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    DbT7060KaigoJigyoshaEntity dbT7060 = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
-
-                    entity.set入所施設３(dbT7060.getJigyoshaName().value());
+                    List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
+                    RString 入所施設３ = dbT7060List.isEmpty() ? RString.EMPTY : dbT7060List.get(0).getJigyoshaName().value();
+                    entity.set入所施設３(入所施設３);
                 } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005 = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
-
-                    entity.set入所施設３(dbT1005.getJigyoshaMeisho().value());
+                    List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード()));
+                    RString 入所施設３ = dbT1005List.isEmpty() ? RString.EMPTY : dbT1005List.get(0).getJigyoshaMeisho().value();
+                    entity.set入所施設３(入所施設３);
 
                 }
                 entity.set入所年月日３(resultList.get(i).get入所年月日());
