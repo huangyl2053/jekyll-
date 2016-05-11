@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
@@ -52,54 +53,27 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
 
     @Override
     public TokubetsuChoshuKaishiTsuchishoB52RenchoSource edit(TokubetsuChoshuKaishiTsuchishoB52RenchoSource source) {
-        source.nendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-        source.nendo2 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-        source.nendo3 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-        source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
+        if (編集後本算定通知書共通情報.get賦課年度() != null) {
+            source.nendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+            source.nendo2 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+            source.nendo3 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+        }
+        if (編集後本算定通知書共通情報.get通知書番号() != null) {
+            source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
+        }
         if (編集後本算定通知書共通情報.get編集後個人() != null) {
-            source.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
-            source.hihokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
+            if (編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {
+                source.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
+            }
+            if (編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
+                source.hihokenshaName = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
+            }
             source.birthYMD = 編集後本算定通知書共通情報.get編集後個人().get生年月日();
             source.seibetsu = 編集後本算定通知書共通情報.get編集後個人().get性別();
         }
         source.atenaRenban = 宛名連番;
-        if (編集後本算定通知書共通情報.get更正後() != null) {
-            source.tokuchoGimushaName = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();
-            source.tokuchoTaishonenkinName = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金();
-            source.kikan = 編集後本算定通知書共通情報.get更正後().get期間_自().concat(TOKEN)
-                    .concat(編集後本算定通知書共通情報.get更正後().get期間_至());
-            source.tsukiSu1 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
-            source.shotokuDankai = 編集後本算定通知書共通情報.get更正後().get保険料段階();
-            source.tsukiSu2 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
-            source.hokenryoRitsu = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get保険料率(), 0);
-            source.hokenryoGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
-        }
-        source.tsuchibunNendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-        source.gekihenHeader = RString.EMPTY;
-        source.gekihenMongon = RString.EMPTY;
-        if (編集後本算定通知書共通情報.get表示コード() != null) {
-            source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
-            source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
-            source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
-            source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
-            source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
-            source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
-        }
-        source.hokenryoGaku4Gatsu = set特徴期別金額(特徴期別金額1期);
-        source.hokenryoGaku10Gatsu = set特徴期別金額(特徴期別金額4期);
-        source.hokenryoGaku6Gatsu = set特徴期別金額(特徴期別金額2期);
-        source.hokenryoGaku12Gatsu = set特徴期別金額(特徴期別金額5期);
-        source.hokenryoGaku8Gatsu = set特徴期別金額(特徴期別金額3期);
-        source.hokenryoGaku2Gatsu = set特徴期別金額(特徴期別金額6期);
-        if (編集後本算定通知書共通情報.get更正後() != null) {
-            source.hokenryoNenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
-        }
-        source.kariHokenryoGaku = set仮保険料額();
-        source.hokenryoGokei = set保険料合計();
-        if (編集後本算定通知書共通情報.get更正後() != null) {
-            source.fuchoNoufugaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get普通徴収額合計(), 0);
-        }
-        if (編集後本算定通知書共通情報.get編集後宛先() != null) {
+        editorSource(source);
+        if (編集後本算定通知書共通情報.get編集後宛先() != null && 編集後本算定通知書共通情報.get編集後宛先().getSofubutsuAtesakiSource() != null) {
             KaigoSofubutsuAtesakiSource sofubutsuAtesakiSource = 編集後本算定通知書共通情報.get編集後宛先().getSofubutsuAtesakiSource();
             source.yubinNo = sofubutsuAtesakiSource.get送付物宛先ソース().yubinNo;
             source.gyoseiku = sofubutsuAtesakiSource.get送付物宛先ソース().gyoseiku;
@@ -147,6 +121,53 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
         return source;
     }
 
+    private void editorSource(TokubetsuChoshuKaishiTsuchishoB52RenchoSource source) {
+        if (編集後本算定通知書共通情報.get更正後() != null) {
+            source.tokuchoGimushaName = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();
+            source.tokuchoTaishonenkinName = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金();
+            if (編集後本算定通知書共通情報.get更正後().get期間_自() != null && 編集後本算定通知書共通情報.get更正後().get期間_至() != null) {
+                source.kikan = 編集後本算定通知書共通情報.get更正後().get期間_自().concat(TOKEN)
+                        .concat(編集後本算定通知書共通情報.get更正後().get期間_至());
+            }
+            source.tsukiSu1 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
+            source.shotokuDankai = 編集後本算定通知書共通情報.get更正後().get保険料段階();
+            source.tsukiSu2 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
+            if (編集後本算定通知書共通情報.get更正後().get保険料率() != null) {
+                source.hokenryoRitsu = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get保険料率(), 0);
+            }
+            if (編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {
+                source.hokenryoGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+            }
+        }
+        if (編集後本算定通知書共通情報.get賦課年度() != null) {
+            source.tsuchibunNendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+        }
+        source.gekihenHeader = RString.EMPTY;
+        source.gekihenMongon = RString.EMPTY;
+        if (編集後本算定通知書共通情報.get表示コード() != null) {
+            source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
+            source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
+            source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+            source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
+            source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
+            source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
+        }
+        source.hokenryoGaku4Gatsu = set特徴期別金額(特徴期別金額1期);
+        source.hokenryoGaku10Gatsu = set特徴期別金額(特徴期別金額4期);
+        source.hokenryoGaku6Gatsu = set特徴期別金額(特徴期別金額2期);
+        source.hokenryoGaku12Gatsu = set特徴期別金額(特徴期別金額5期);
+        source.hokenryoGaku8Gatsu = set特徴期別金額(特徴期別金額3期);
+        source.hokenryoGaku2Gatsu = set特徴期別金額(特徴期別金額6期);
+        if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {
+            source.hokenryoNenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+        }
+        source.kariHokenryoGaku = set仮保険料額();
+        source.hokenryoGokei = set保険料合計();
+        if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get普通徴収額合計() != null) {
+            source.fuchoNoufugaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get普通徴収額合計(), 0);
+        }
+    }
+
     /**
      * 設定仮保険料額のメソッドます。
      */
@@ -154,7 +175,10 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
         Decimal 金額1期 = Decimal.ZERO;
         Decimal 金額2期 = Decimal.ZERO;
         Decimal 金額3期 = Decimal.ZERO;
-        List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
+        if (編集後本算定通知書共通情報.get更正後() != null) {
+            特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        }
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (特徴期別金額1期.equals(特徴期別金額.get期())) {
                 金額1期 = 特徴期別金額.get金額();
@@ -174,7 +198,10 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
         Decimal 金額4期 = Decimal.ZERO;
         Decimal 金額5期 = Decimal.ZERO;
         Decimal 金額6期 = Decimal.ZERO;
-        List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
+        if (編集後本算定通知書共通情報.get更正後() != null) {
+            特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        }
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (特徴期別金額4期.equals(特徴期別金額.get期())) {
                 金額4期 = 特徴期別金額.get金額();
@@ -195,7 +222,10 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
      */
     private RString set特徴期別金額(RString 期) {
         Decimal 金額 = Decimal.ZERO;
-        List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
+        if (編集後本算定通知書共通情報.get更正後() != null) {
+            特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        }
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (期.equals(特徴期別金額.get期())) {
                 金額 = 特徴期別金額.get金額();
