@@ -205,7 +205,11 @@ public enum ReportIdDBE {
     /**
      * 介護認定審査会スケジュール表（年間）の帳票ＩＤです。
      */
-    DBE514003(new ReportId("DBE514003_shinsakainenkansukejuruhyo"), new RString("介護認定審査会スケジュール表（年間）"));
+    DBE514003(new ReportId("DBE514003_shinsakainenkansukejuruhyo"), new RString("介護認定審査会スケジュール表（年間）")),
+    /**
+     * 要介護状態区分別判定件数の帳票ＩＤです。
+     */
+    DBE701005(new ReportId("DBE701005_Jotaikubumbetsuhantei"), new RString("要介護状態区分別判定件数"));
 
     private final ReportId reportId;
 
