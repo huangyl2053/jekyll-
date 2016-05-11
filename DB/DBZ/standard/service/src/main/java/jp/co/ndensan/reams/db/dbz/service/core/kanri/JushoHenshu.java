@@ -1,8 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.service.core.kanri;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -39,14 +38,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class JushoHenshu {
 
-    private static final RString 帳票自体 = new RString("1");
-    private static final RString 市町村共通 = new RString("0");
-    private static final RString 住所番地 = new RString("1");
-    private static final RString 行政区番地 = new RString("2");
-    private static final RString 住所番地行政区 = new RString("3");
-    private static final RString 表示する = new RString("1");
-    private static final RString 表示しない = new RString("0");
-    private static final RString カスタマバーコード使用有 = new RString("1");
     private final DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac;
 
     /**
@@ -196,11 +187,7 @@ public class JushoHenshu {
      */
     public boolean usesCustomerBarcode(ChohyoSeigyoKyotsu 帳票共通情報) {
 
-        if (帳票自体.equals(帳票共通情報.get住所編集区分())) {
-            return 帳票共通情報.isカスタマバーコード使用有無();
-        }
-        return 市町村共通.equals(帳票共通情報.get住所編集区分()) && カスタマバーコード使用有.equals(
-                BusinessConfig.get(ConfigNameDBU.カスタマバーコード_使用有無, SubGyomuCode.DBU介護統計報告));
+        return EditedAtesakiBuilder.usesCustomerBarcode(帳票共通情報);
     }
 
     /**
@@ -210,32 +197,7 @@ public class JushoHenshu {
      * @return 管内住所接頭辞
      */
     public JushoPrefix getJushoPrefix(ChohyoSeigyoKyotsu 帳票共通情報) {
-
-        if (帳票自体.equals(帳票共通情報.get住所編集区分())) {
-            if (帳票共通情報.is住所編集都道府県名表示有無()) {
-                return JushoPrefix.県_郡_市町村名付加;
-            }
-            if (帳票共通情報.is住所編集郡名表示有無()) {
-                return JushoPrefix.郡_市町村名付加;
-            }
-            if (帳票共通情報.is住所編集市町村名表示有無()) {
-                return JushoPrefix.市町村名付加;
-            }
-        } else if (市町村共通.equals(帳票共通情報.get住所編集区分())) {
-            if (表示する.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
-                return JushoPrefix.県_郡_市町村名付加;
-            }
-            if (表示する.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告))) {
-                return JushoPrefix.郡_市町村名付加;
-            }
-            if (表示する.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告))) {
-                return JushoPrefix.市町村名付加;
-            }
-        }
-        return JushoPrefix.付加しない;
+        return EditedAtesakiBuilder.getJushoPrefix(帳票共通情報);
     }
 
     /**
@@ -245,13 +207,7 @@ public class JushoHenshu {
      * @return 管内住所編集パターン
      */
     public JushoKannaiEditPattern getJushoKannaiEditPattern(ChohyoSeigyoKyotsu 帳票共通情報) {
-        if (帳票自体.equals(帳票共通情報.get住所編集区分())) {
-            return get管内住所編集パターンBy帳票自体(帳票共通情報);
-        }
-        if (市町村共通.equals(帳票共通情報.get住所編集区分())) {
-            return get管内住所編集パターンBy市町村共通();
-        }
-        return JushoKannaiEditPattern.未定義;
+        return EditedAtesakiBuilder.getJushoKannaiEditPattern(帳票共通情報);
     }
 
     /**
@@ -261,20 +217,7 @@ public class JushoHenshu {
      * @return 行政区印字区分
      */
     public GyoseikuInjiKubun getGyoseikuInjiKubun(ChohyoSeigyoKyotsu 帳票共通情報) {
-        if (帳票自体.equals(帳票共通情報.get住所編集区分())) {
-            if (住所番地行政区.equals(帳票共通情報.is住所編集町域編集方法())) {
-                return GyoseikuInjiKubun.括弧付きで印字;
-            }
-            return GyoseikuInjiKubun.印字しない;
-        }
-        if (市町村共通.equals(帳票共通情報.get住所編集区分())) {
-            if (住所番地行政区.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                return GyoseikuInjiKubun.括弧付きで印字;
-            }
-            return GyoseikuInjiKubun.印字しない;
-        }
-        return GyoseikuInjiKubun.印字しない;
+        return EditedAtesakiBuilder.getGyoseikuInjiKubun(帳票共通情報);
     }
 
     /**
@@ -284,16 +227,7 @@ public class JushoHenshu {
      * @return 管外住所編集パターン
      */
     public JushoKangaiEditPattern getJushoKangaiEditPattern(ChohyoSeigyoKyotsu 帳票共通情報) {
-        if (帳票自体.equals(帳票共通情報.get住所編集区分())
-                && 帳票共通情報.is住所編集方書表示有無()) {
-            return JushoKangaiEditPattern.方書;
-        }
-        if (市町村共通.equals(帳票共通情報.get住所編集区分())
-                && 表示する.equals(BusinessConfig.get(
-                                ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))) {
-            return JushoKangaiEditPattern.方書;
-        }
-        return JushoKangaiEditPattern.付加しない;
+        return EditedAtesakiBuilder.getJushoKangaiEditPattern(帳票共通情報);
     }
 
     /**
@@ -308,69 +242,7 @@ public class JushoHenshu {
             IAtesaki 宛先,
             Association 地方公共団体,
             ChohyoSeigyoKyotsu 帳票共通情報) {
-        return new EditedAtesaki(
-                宛先,
-                地方公共団体,
-                帳票共通情報,
-                null,
-                null,
-                usesCustomerBarcode(帳票共通情報),
-                getJushoKangaiEditPattern(帳票共通情報),
-                getJushoPrefix(帳票共通情報),
-                getJushoKannaiEditPattern(帳票共通情報),
-                getGyoseikuInjiKubun(帳票共通情報));
-    }
-
-    private JushoKannaiEditPattern get管内住所編集パターンBy帳票自体(ChohyoSeigyoKyotsu 帳票共通情報) {
-
-        if (帳票共通情報.is住所編集方書表示有無()) {
-            if (住所番地.equals(帳票共通情報.is住所編集町域編集方法())
-                    || 住所番地行政区.equals(帳票共通情報.is住所編集町域編集方法())) {
-                return JushoKannaiEditPattern.町域番地方書;
-            }
-            if (行政区番地.equals(帳票共通情報.is住所編集町域編集方法())) {
-                return JushoKannaiEditPattern.行政区番地方書;
-            }
-        } else {
-            if (住所番地.equals(帳票共通情報.is住所編集町域編集方法())
-                    || 住所番地行政区.equals(帳票共通情報.is住所編集町域編集方法())) {
-                return JushoKannaiEditPattern.町域番地;
-            }
-            if (行政区番地.equals(帳票共通情報.is住所編集町域編集方法())) {
-                return JushoKannaiEditPattern.行政区番地;
-            }
-        }
-        return JushoKannaiEditPattern.未定義;
-    }
-
-    private JushoKannaiEditPattern get管内住所編集パターンBy市町村共通() {
-        if (表示する.equals(BusinessConfig.get(
-                ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))) {
-            if (住所番地.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))
-                    || 住所番地行政区.equals(BusinessConfig.get(
-                                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                return JushoKannaiEditPattern.町域番地方書;
-            }
-            if (行政区番地.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                return JushoKannaiEditPattern.行政区番地方書;
-            }
-        }
-        if (表示しない.equals(BusinessConfig.get(
-                ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))) {
-            if (住所番地.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))
-                    || 住所番地行政区.equals(BusinessConfig.get(
-                                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                return JushoKannaiEditPattern.町域番地;
-            }
-            if (行政区番地.equals(BusinessConfig.get(
-                    ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                return JushoKannaiEditPattern.行政区番地;
-            }
-        }
-        return JushoKannaiEditPattern.未定義;
+        return EditedAtesakiBuilder.create編集後宛先(宛先, 地方公共団体, 帳票共通情報);
     }
 
     private void set管内住所編集パターン(JushoEditorBuilder jushoEditorBuilder, ChohyoSeigyoKyotsu 帳票共通情報) {

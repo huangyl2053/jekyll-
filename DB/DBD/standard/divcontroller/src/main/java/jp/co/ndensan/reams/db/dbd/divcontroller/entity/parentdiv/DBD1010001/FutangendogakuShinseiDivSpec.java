@@ -52,7 +52,7 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                     if (法施行日.isEmpty() || 適用開始日 == null || 適用開始日.isEmpty()) {
                         return false;
                     }
-                    return 法施行日.isBefore(適用開始日);
+                    return 法施行日.isBeforeOrEquals(適用開始日);
                 }
             },
     負担限度額認定_適用終了日が年度外 {
@@ -69,7 +69,7 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                     if (標準有効期限.isEmpty() || 有効期限 == null || 有効期限.isEmpty()) {
                         return false;
                     }
-                    return 有効期限.isBefore(標準有効期限);
+                    return 有効期限.isBeforeOrEquals(標準有効期限);
                 }
             },
     負担限度額認定_適用終了日が開始日以前 {
@@ -86,7 +86,7 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                     if (適用日 == null || 適用日.isEmpty() || 有効期限 == null || 有効期限.isEmpty()) {
                         return false;
                     }
-                    return 適用日.isBefore(有効期限);
+                    return 適用日.isBeforeOrEquals(有効期限);
                 }
             },
     減免減額_適用期間重複 {
