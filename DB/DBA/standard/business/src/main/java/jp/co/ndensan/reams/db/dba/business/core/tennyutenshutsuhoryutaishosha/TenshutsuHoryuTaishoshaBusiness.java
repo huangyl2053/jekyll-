@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 転入 広域保留対象者情報の取得処理の取得します。
@@ -63,7 +62,7 @@ public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTai
      * @return 履歴番号
      */
     @Override
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.get履歴番号();
     }
 
@@ -78,12 +77,12 @@ public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTai
     }
 
     /**
-     * 住民種別コードのgetメソッドです。
+     * 住民種別のgetメソッドです。
      *
-     * @return 住民種別コード
+     * @return 住民種別
      */
     @Override
-    public RString get住民種別コード() {
+    public RString get住民種別() {
 
         return new RString(JuminShubetsu.toValue(entity.get住民種別コード()).name());
     }
@@ -129,12 +128,12 @@ public class TenshutsuHoryuTaishoshaBusiness implements ITennyuTenshutsuHoryuTai
     }
 
     /**
-     * 異動事由コードのgetメソッドです。
+     * 異動事由のgetメソッドです。
      *
-     * @return 異動事由コード
+     * @return 異動事由
      */
     @Override
-    public RString get異動事由コード() {
+    public RString get異動事由() {
         return JukiIdoJiyu.toValue(entity.get異動事由コード()).get異動事由略称();
     }
 

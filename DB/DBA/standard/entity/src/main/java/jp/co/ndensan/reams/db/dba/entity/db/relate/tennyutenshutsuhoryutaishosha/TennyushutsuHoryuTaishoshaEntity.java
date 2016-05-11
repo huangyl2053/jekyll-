@@ -13,10 +13,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 転出保留対象者管理
+ * 転出保留対象者管理クラスです。
  *
  * @reamsid_L DBA-0470-010 wangxiaodong
  */
@@ -24,7 +23,7 @@ public class TennyushutsuHoryuTaishoshaEntity {
 
     private ShikibetsuCode 識別コード;
     private HihokenshaNo 被保険者番号;
-    private Decimal 履歴番号;
+    private int 履歴番号;
     private LasdecCode 市町村コード;
     private RString 住民種別コード;
     private AtenaMeisho 宛名氏名;
@@ -78,16 +77,16 @@ public class TennyushutsuHoryuTaishoshaEntity {
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return 履歴番号;
     }
 
     /**
      * 履歴番号のsetメソッドです。
      *
-     * @param 履歴番号 Decimal
+     * @param 履歴番号 int
      */
-    public void set履歴番号(Decimal 履歴番号) {
+    public void set履歴番号(int 履歴番号) {
         this.履歴番号 = 履歴番号;
     }
 
