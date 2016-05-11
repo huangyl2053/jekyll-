@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
-import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
@@ -18,10 +17,8 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendofukakakutei.IFukaKakuteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -58,20 +55,6 @@ public class HonsanteiIdoKanendoFukaKakutei {
     private static final RString 処理枝番 = new RString("0001");
     private static final RString FORMAT = new RString("%04d");
     private static final SubGyomuCode サブ業務コード = new SubGyomuCode("DBB");
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
-    private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
-    private static final int NUM_6 = 6;
-    private static final int NUM_7 = 7;
-    private static final int NUM_8 = 8;
-    private static final int NUM_9 = 9;
-    private static final int NUM_10 = 10;
-    private static final int NUM_11 = 11;
-    private static final int NUM_12 = 12;
-    private static final int NUM_14 = 14;
-    private static final int NUM_15 = 15;
 
     /**
      * HonsanteiIdoKanendoFukaKakutei
@@ -129,7 +112,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
                 TsuchishoNo.EMPTY,
                 0,
                 kitsuki.get期AsInt(),
-                new RString(ChoshuHohoKibetsu.普通徴収.getコード().toString()),
+                RString.EMPTY,
                 調定日時);
         List<KanendoIdoFukaKakuteiEntity> fukaList = mapper.select更新後の賦課内容(parameter);
 
@@ -139,13 +122,7 @@ public class HonsanteiIdoKanendoFukaKakutei {
         for (KanendoIdoFukaKakuteiEntity fuka : fukaList) {
             fukaKakuteiList.add(new KanendoIdoFukaKakutei(fuka));
         }
-        KanendoKiUtil kanendoKiUtil = new KanendoKiUtil();
-        int koseiKi;
         for (KanendoIdoFukaKakutei idofukaKakutei : fukaKakuteiList) {
-            if (idofukaKakutei.getFukaKakuteiEntity().get更正月() != null) {
-                koseiKi = getKoseiKi(kanendoKiUtil, idofukaKakutei);
-                set納付額と納期限(parameter, idofukaKakutei, mapper, koseiKi);
-            }
             List<DbT2002FukaEntity> dbtFukaList = fukaDac.select更正前のデータ(idofukaKakutei.getFukaKakuteiEntity().
                     get通知書番号());
             if (dbtFukaList != null && !dbtFukaList.isEmpty()) {
@@ -153,68 +130,6 @@ public class HonsanteiIdoKanendoFukaKakutei {
             }
         }
         return fukaKakuteiList;
-    }
-
-    private int getKoseiKi(KanendoKiUtil kanendoKiUtil, KanendoIdoFukaKakutei idofukaKakutei) {
-        switch (Integer.valueOf(idofukaKakutei.getFukaKakuteiEntity().get更正月().toString())) {
-            case NUM_1:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._1月).get期AsInt();
-            case NUM_2:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._2月).get期AsInt();
-            case NUM_3:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._3月).get期AsInt();
-            case NUM_4:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._4月).get期AsInt();
-            case NUM_5:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._5月).get期AsInt();
-            case NUM_6:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._6月).get期AsInt();
-            case NUM_7:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._7月).get期AsInt();
-            case NUM_8:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._8月).get期AsInt();
-            case NUM_9:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._9月).get期AsInt();
-            case NUM_10:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._10月).get期AsInt();
-            case NUM_11:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._11月).get期AsInt();
-            case NUM_12:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki._12月).get期AsInt();
-            case NUM_14:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度4月).get期AsInt();
-            case NUM_15:
-                return kanendoKiUtil.get期月リスト().get月の期(Tsuki.翌年度5月).get期AsInt();
-            default:
-                return 0;
-        }
-    }
-
-    private void set納付額と納期限(FukaKakuteiParameter parameter,
-            KanendoIdoFukaKakutei idofukaKakutei,
-            IFukaKakuteiMapper mapper,
-            int koseiKi) {
-        if (koseiKi != 0) {
-            parameter = new FukaKakuteiParameter(
-                    idofukaKakutei.getFukaKakuteiEntity().get調定年度(),
-                    idofukaKakutei.getFukaKakuteiEntity().get賦課年度(),
-                    idofukaKakutei.getFukaKakuteiEntity().get通知書番号(),
-                    idofukaKakutei.getFukaKakuteiEntity().get履歴番号(),
-                    koseiKi,
-                    ChoshuHohoKibetsu.特別徴収.getコード(),
-                    YMDHMS.now());
-            UrT0705ChoteiKyotsuEntity choteiKyotsuEntity = mapper.select納付額と納期限(parameter);
-            if (choteiKyotsuEntity != null) {
-                set納付額と納期限(choteiKyotsuEntity, idofukaKakutei);
-            }
-        }
-    }
-
-    private void set納付額と納期限(UrT0705ChoteiKyotsuEntity choteiKyotsuEntity, KanendoIdoFukaKakutei idofukaKakutei) {
-        idofukaKakutei.getFukaKakuteiEntity().set調定額(choteiKyotsuEntity.getChoteigaku());
-        if (choteiKyotsuEntity.getNokigenYMD() != null) {
-            idofukaKakutei.getFukaKakuteiEntity().set納期限(choteiKyotsuEntity.getNokigenYMD());
-        }
     }
 
     private void set更正前項目(List<DbT2002FukaEntity> dbtFukaList, KanendoIdoFukaKakutei idofukaKakutei) {
