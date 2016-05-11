@@ -104,4 +104,23 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                 table(DbT1003TashichosonJushochiTokurei.class).toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
+    /**
+     * 他市町村住所地特例で異動日のレコード中で最大の枝番を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1003TashichosonJushochiTokureiEntity
+     */
+    @Transaction
+    public DbT1003TashichosonJushochiTokureiEntity selectMaxByKey(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(idoYMD), max(edaNo)).
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(
+                        eq(shikibetsuCode, 識別コード)).
+                toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
 }

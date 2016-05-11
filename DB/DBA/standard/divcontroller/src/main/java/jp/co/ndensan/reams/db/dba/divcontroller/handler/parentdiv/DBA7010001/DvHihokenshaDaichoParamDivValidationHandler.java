@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001;
 
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHikokenshaDaichoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHihokenshaDaichoParamDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -19,16 +19,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBA-1610-010 linghuhang
  */
-public class DvHikokenshaDaichoDivValidationHandler {
+public class DvHihokenshaDaichoParamDivValidationHandler {
 
-    private final DvHikokenshaDaichoDiv div;
+    private final DvHihokenshaDaichoParamDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 汎用リスト被保険者台帳Div
      */
-    public DvHikokenshaDaichoDivValidationHandler(DvHikokenshaDaichoDiv div) {
+    public DvHihokenshaDaichoParamDivValidationHandler(DvHihokenshaDaichoParamDiv div) {
         this.div = div;
     }
 

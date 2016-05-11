@@ -5,15 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoBatchParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHikokenshaDaichoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001.DvHihokenshaDaichoParamDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -25,17 +29,17 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBA-1610-010 linghuhang
  */
-public class DvHikokenshaDaichoDivHandler {
+public class DvHihokenshaDaichoParamDivHandler {
 
     private final RString 帳票ID = new RString("DBA701001_HanyoListHihokenshaDaicho");
-    private final DvHikokenshaDaichoDiv div;
+    private final DvHihokenshaDaichoParamDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 汎用リスト被保険者台帳パネル
      */
-    public DvHikokenshaDaichoDivHandler(DvHikokenshaDaichoDiv div) {
+    public DvHihokenshaDaichoParamDivHandler(DvHihokenshaDaichoParamDiv div) {
         this.div = div;
     }
 
@@ -85,36 +89,60 @@ public class DvHikokenshaDaichoDivHandler {
      */
     public void onClick_btnKogakuParamRestore() {
         BatchParameterMap restoreBatchParameterMap = div.getBtnKogakuParamRestore().getRestoreBatchParameterMap();
-        List<RString> 編集方法 = restoreBatchParameterMap.getParameterValue(List.class, new RString("chkCsvHenshuHoho"));
+        List<RString> 編集方法 = new ArrayList<>();
+        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("komukuFukaMeyi"));
+        if (is項目名付加) {
+            編集方法.add(new RString("1"));
+        }
+        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("rembanfuka"));
+        if (is連番付加) {
+            編集方法.add(new RString("2"));
+        }
+        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("hidukeHensyu"));
+        if (is日付編集) {
+            編集方法.add(new RString("3"));
+        }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
-        RString 日付抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("radChushutsu"));
+        RString 日付抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hidukeTyuushutuKubun"));
         div.getRadChushutsu().setSelectedKey(日付抽出区分);
-        RString 基準日区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("radKijunbiDate"));
+        RString 基準日区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunniKubun"));
         div.getRadKijunbiDate().setSelectedKey(基準日区分);
-        RDate 基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtKijunDate"));
-        div.getTxtKijunDate().setValue(基準日);
-        boolean 基準日時点の受給者を除く = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("chkKijunDateNozoku"));
-        div.getChkKijunDateNozoku().setIsAllSelectable(基準日時点の受給者を除く);
-        RString 範囲抽出日区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("radHani"));
+        FlexibleDate 基準日 = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("kijunni"));
+        if (基準日 != null && !基準日.isEmpty()) {
+            div.getTxtKijunDate().setValue(new RDate(基準日.toString()));
+        }
+        List<RString> 基準日時点 = new ArrayList<>();
+        boolean 基準日時点の受給者を除く = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("kijunNichijiJukyusha"));
+        if (基準日時点の受給者を除く) {
+            基準日時点.add(new RString("0"));
+        }
+        div.getChkKijunDateNozoku().setSelectedItemsByKey(基準日時点);
+        RString 範囲抽出日区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("rangeChushutsuhiKubun"));
         div.getRadHani().setSelectedKey(範囲抽出日区分);
-        RDate 範囲抽出日From = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtChushutsuHani"));
-        div.getTxtChushutsuHani().setFromValue(範囲抽出日From);
-        RDate 範囲抽出日To = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtChushutsuHani"));
-        div.getTxtChushutsuHani().setToValue(範囲抽出日To);
-        List<RString> 被保険者情報 = restoreBatchParameterMap.getParameterValue(List.class, new RString("chkHihokenshaJoho"));
-        div.getChkHihokenshaJoho().setSelectedItemsByKey(被保険者情報);
-        RString 資格抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("radChushutsuKijun"));
+        FlexibleDate 範囲抽出日From = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("rangeChushutsuhiFrom"));
+        if (範囲抽出日From != null && !範囲抽出日From.isEmpty()) {
+            div.getTxtChushutsuHani().setFromValue(new RDate(範囲抽出日From.toString()));
+        }
+        FlexibleDate 範囲抽出日To = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("rangeChushutsuhiTo"));
+        if (範囲抽出日To != null && !範囲抽出日To.isEmpty()) {
+            div.getTxtChushutsuHani().setToValue(new RDate(範囲抽出日To.toString()));
+        }
+        List<String> 被保険者情報 = restoreBatchParameterMap.getParameterValue(List.class, new RString("hiHokenshaJyoho"));
+        div.getChkHihokenshaJoho().setSelectedItemsByKey(転換(被保険者情報));
+        RString 資格抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shikakuChushutsuKubun"));
         div.getRadChushutsuKijun().setSelectedKey(資格抽出区分);
-        List<RString> 取得事由 = restoreBatchParameterMap.getParameterValue(List.class, new RString("chkShutokuJiyu"));
-        div.getChkShutokuJiyu().setSelectedItemsByKey(取得事由);
-        List<RString> 喪失事由 = restoreBatchParameterMap.getParameterValue(List.class, new RString("chkSoshitsuJiyu"));
-        div.getChkSoshitsuJiyu().setSelectedItemsByKey(喪失事由);
-        // TODO 宛名抽出条件DIVに項目設定無し、技術点NO.65
+        List<String> 取得事由 = restoreBatchParameterMap.getParameterValue(List.class, new RString("shutokujiyu"));
+        div.getChkShutokuJiyu().setSelectedItemsByKey(転換(取得事由));
+        List<String> 喪失事由 = restoreBatchParameterMap.getParameterValue(List.class, new RString("soshitsujiyu"));
+        div.getChkSoshitsuJiyu().setSelectedItemsByKey(転換(喪失事由));
+        宛名抽出条件復元(restoreBatchParameterMap);
         // 改頁出力順ID
+//        RString 改頁出力順ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("pageShuturyokujun_Id"));
+//        div.getCcdKogakuShutsuryokuKomoku().
         // 出力項目ID
-        //        bparam.set改頁出力順ID(new RString(div.getCcdChohyoShutsuryokujun().get出力順ID().toString()));
-//        bparam.set出力項目ID(div.getCcdChohyoShutsuryokukoumoku().get出力項目ID());
-        // TODO 帳票IDの値が不明、 QA：1112回答まち、
+//        RString 出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shutsuryokuKomuku_Id"));
+        //        div.getCcdKogakuShutsuryokuKomoku().
+
     }
 
     /**
@@ -268,4 +296,80 @@ public class DvHikokenshaDaichoDivHandler {
         return RString.EMPTY;
     }
 
+    private List<RString> 転換(List<String> 項目List) {
+        List<RString> 転換項目 = new ArrayList<>();
+        for (int i = 0; i < 項目List.size(); i++) {
+            転換項目.add(new RString(項目List.get(i)));
+        }
+        return 転換項目;
+    }
+
+    private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {
+        RString 年齢層抽出方法 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChushutsu_Kubun"));
+        div.getCcdHanyoListAtenaSelect().set年齢層抽出方法(年齢層抽出方法);
+        RString 宛名抽出年齢開始 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChushutsuAge_Start"));
+        if (!RString.isNullOrEmpty(宛名抽出年齢開始)) {
+            div.getCcdHanyoListAtenaSelect().set年齢開始(new Decimal(宛名抽出年齢開始.toString()));
+        }
+        RString 宛名抽出年齢終了 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChushutsuAge_End"));
+        if (!RString.isNullOrEmpty(宛名抽出年齢終了)) {
+            div.getCcdHanyoListAtenaSelect().set年齢終了(new Decimal(宛名抽出年齢終了.toString()));
+        }
+        RString 宛名抽出生年月日開始 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmSeinengappiYMD_Start"));
+        if (!RString.isNullOrEmpty(宛名抽出生年月日開始)) {
+            div.getCcdHanyoListAtenaSelect().set生年月日開始(new RDate(宛名抽出生年月日開始.toString()));
+        }
+        RString 宛名抽出生年月日終了 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmSeinengappiYMD_End"));
+        if (!RString.isNullOrEmpty(宛名抽出生年月日終了)) {
+            div.getCcdHanyoListAtenaSelect().set生年月日終了(new RDate(宛名抽出生年月日終了.toString()));
+        }
+        FlexibleDate 年齢基準日 = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("psmAgeKijunni"));
+        if (年齢基準日 != null && !年齢基準日.isEmpty()) {
+            div.getCcdHanyoListAtenaSelect().set年齢基準日(new RDate(年齢基準日.toString()));
+        }
+        div.getCcdHanyoListAtenaSelect().set保険者();
+        RString 地区区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku_Kubun"));
+        div.getCcdHanyoListAtenaSelect().set地区(地区区分);
+
+        RString 町域From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmJusho_From"));
+        if (!RString.isNullOrEmpty(町域From)) {
+            div.getCcdHanyoListAtenaSelect().set住所開始(new ChoikiCode(町域From));
+        }
+        RString 町域To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmJusho_To"));
+        if (!RString.isNullOrEmpty(町域To)) {
+            div.getCcdHanyoListAtenaSelect().set住所終了(new ChoikiCode(町域To));
+        }
+        RString 行政区From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmGyoseiku_From"));
+        if (!RString.isNullOrEmpty(行政区From)) {
+            div.getCcdHanyoListAtenaSelect().set行政区開始(new GyoseikuCode(行政区From));
+        }
+        RString 行政区To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmGyoseiku_To"));
+        if (!RString.isNullOrEmpty(行政区To)) {
+            div.getCcdHanyoListAtenaSelect().set行政区終了(new GyoseikuCode(行政区To));
+        }
+        RString 地区１From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku1_From"));
+        if (!RString.isNullOrEmpty(地区１From)) {
+            div.getCcdHanyoListAtenaSelect().set地区１開始(new ChikuCode(地区１From));
+        }
+        RString 地区１To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku1_To"));
+        if (!RString.isNullOrEmpty(地区１To)) {
+            div.getCcdHanyoListAtenaSelect().set地区１終了(new ChikuCode(地区１To));
+        }
+        RString 地区２From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku2_From"));
+        if (!RString.isNullOrEmpty(地区２From)) {
+            div.getCcdHanyoListAtenaSelect().set地区２開始(new ChikuCode(地区２From));
+        }
+        RString 地区２To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku2_To"));
+        if (!RString.isNullOrEmpty(地区２To)) {
+            div.getCcdHanyoListAtenaSelect().set地区２終了(new ChikuCode(地区２To));
+        }
+        RString 地区３From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku3_From"));
+        if (!RString.isNullOrEmpty(地区３From)) {
+            div.getCcdHanyoListAtenaSelect().set地区３開始(new ChikuCode(地区３From));
+        }
+        RString 地区３To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("psmChiku3_To"));
+        if (!RString.isNullOrEmpty(地区３To)) {
+            div.getCcdHanyoListAtenaSelect().set地区３終了(new ChikuCode(地区３To));
+        }
+    }
 }

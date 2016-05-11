@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.shikakufuseigo;
+package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiTeki
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -62,8 +63,7 @@ public class ShikakuFuseigoCorrector {
     public HihokenshaDaicho correct資格不整合(HihokenshaDaicho 資格の情報修正前,
             IKojin 個人情報, FuseigoRiyu 不整合理由) {
         if (不整合理由 == FuseigoRiyu.資格取得日_転入者) {
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    個人情報.get登録異動年月日(), 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get登録異動年月日());
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_1);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格取得年月日(個人情報.get登録異動年月日());
@@ -74,8 +74,7 @@ public class ShikakuFuseigoCorrector {
             return 資格の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.資格取得日_年齢到達者) {
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    個人情報.get年齢算出().get年齢到達日(AGE_65), 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get年齢算出().get年齢到達日(AGE_65));
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_1);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格取得年月日(個人情報.get年齢算出().get年齢到達日(AGE_65));
@@ -86,8 +85,7 @@ public class ShikakuFuseigoCorrector {
             return 資格の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.資格取得者_消除者 || 不整合理由 == FuseigoRiyu.資格喪失日_住基不一致) {
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    個人情報.get消除異動年月日(), 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get消除異動年月日());
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_2);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格喪失年月日(個人情報.get消除異動年月日());
@@ -103,8 +101,7 @@ public class ShikakuFuseigoCorrector {
             } else {
                 資格喪失年月日 = 個人情報.get転出予定().get異動年月日();
             }
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    資格喪失年月日, 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 資格喪失年月日);
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_2);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格喪失年月日(資格喪失年月日);
@@ -114,8 +111,7 @@ public class ShikakuFuseigoCorrector {
             return 資格の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.資格喪失日_転出確定者) {
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    個人情報.get転出確定().get異動年月日(), 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get転出確定().get異動年月日());
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_2);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格喪失年月日(個人情報.get転出確定().get異動年月日());
@@ -125,8 +121,7 @@ public class ShikakuFuseigoCorrector {
             return 資格の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.資格喪失日_転出予定者) {
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    個人情報.get転出予定().get異動年月日(), 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get転出予定().get異動年月日());
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_2);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格喪失年月日(個人情報.get転出予定().get異動年月日());
@@ -136,8 +131,7 @@ public class ShikakuFuseigoCorrector {
             return 資格の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.資格取得者_死亡者) {
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    個人情報.get消除異動年月日(), 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get消除異動年月日());
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_2);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格喪失年月日(個人情報.get消除異動年月日());
@@ -147,8 +141,7 @@ public class ShikakuFuseigoCorrector {
             return 資格の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.資格変更者_１号被保険者到達) {
-            HihokenshaDaicho 資格の情報修正後 = new HihokenshaDaicho(資格の情報修正前.get被保険者番号(),
-                    個人情報.get消除異動年月日(), 資格の情報修正前.get枝番());
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get消除異動年月日());
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_3);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
             資格の情報修正後Builder.set資格変更年月日(個人情報.get消除異動年月日());
@@ -172,8 +165,7 @@ public class ShikakuFuseigoCorrector {
     public TekiyoJogaisha correct除外不整合(TekiyoJogaisha 除外の情報修正前,
             IKojin 個人情報, FuseigoRiyu 不整合理由) {
         if (不整合理由 == FuseigoRiyu.除外適用日_転入者) {
-            TekiyoJogaisha 除外の情報修正後 = new TekiyoJogaisha(除外の情報修正前.get識別コード(),
-                    個人情報.get登録異動年月日(), 除外の情報修正前.get枝番());
+            TekiyoJogaisha 除外の情報修正後 = getTekiyoJogaisha(除外の情報修正前, 個人情報.get登録異動年月日());
             除外の情報修正後 = set除外の情報(除外の情報修正前, 除外の情報修正後, FLAG_1);
             TekiyoJogaishaBuilder 除外の情報修正後Builder = 除外の情報修正後.createBuilderForEdit();
             除外の情報修正後Builder.set適用除外適用事由コード(JogaiTekiyoJiyu.除外者適用.getコード());
@@ -182,8 +174,8 @@ public class ShikakuFuseigoCorrector {
             return 除外の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.除外解除日_住基不一致) {
-            TekiyoJogaisha 除外の情報修正後 = new TekiyoJogaisha(除外の情報修正前.get識別コード(),
-                    個人情報.get消除異動年月日().plusDay(FLAG_1), 除外の情報修正前.get枝番());
+            TekiyoJogaisha 除外の情報修正後 = getTekiyoJogaisha(除外の情報修正前,
+                    個人情報.get消除異動年月日().plusDay(FLAG_1));
             除外の情報修正後 = set除外の情報(除外の情報修正前, 除外の情報修正後, FLAG_2);
             TekiyoJogaishaBuilder 除外の情報修正後Builder = 除外の情報修正後.createBuilderForEdit();
             if (JukiIdoJiyu.死亡.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())) {
@@ -197,8 +189,8 @@ public class ShikakuFuseigoCorrector {
             return 除外の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.除外解除日_転出確定者) {
-            TekiyoJogaisha 除外の情報修正後 = new TekiyoJogaisha(除外の情報修正前.get識別コード(),
-                    個人情報.get転出確定().get異動年月日().plusDay(FLAG_1), 除外の情報修正前.get枝番());
+            TekiyoJogaisha 除外の情報修正後 = getTekiyoJogaisha(除外の情報修正前,
+                    個人情報.get転出確定().get異動年月日().plusDay(FLAG_1));
             除外の情報修正後 = set除外の情報(除外の情報修正前, 除外の情報修正後, FLAG_2);
             TekiyoJogaishaBuilder 除外の情報修正後Builder = 除外の情報修正後.createBuilderForEdit();
             除外の情報修正後Builder.set適用除外解除事由コード(JogaiKaijoJiyu.除外者転出.getコード());
@@ -207,8 +199,7 @@ public class ShikakuFuseigoCorrector {
             return 除外の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.除外解除日_転出予定者) {
-            TekiyoJogaisha 除外の情報修正後 = new TekiyoJogaisha(除外の情報修正前.get識別コード(),
-                    個人情報.get転出予定().get異動年月日(), 除外の情報修正前.get枝番());
+            TekiyoJogaisha 除外の情報修正後 = getTekiyoJogaisha(除外の情報修正前, 個人情報.get転出予定().get異動年月日());
             除外の情報修正後 = set除外の情報(除外の情報修正前, 除外の情報修正後, FLAG_2);
             TekiyoJogaishaBuilder 除外の情報修正後Builder = 除外の情報修正後.createBuilderForEdit();
             除外の情報修正後Builder.set適用除外解除事由コード(JogaiKaijoJiyu.除外者転出.getコード());
@@ -231,8 +222,8 @@ public class ShikakuFuseigoCorrector {
             IKojin 個人情報, FuseigoRiyu 不整合理由) {
 
         if (不整合理由 == FuseigoRiyu.他住所地特例適用日_転入者) {
-            TashichosonJushochiTokurei 他特の情報修正後 = new TashichosonJushochiTokurei(他特の情報修正前.get識別コード(),
-                    個人情報.get登録異動年月日(), 他特の情報修正前.get枝番());
+            TashichosonJushochiTokurei 他特の情報修正後 = getTashichosonJushochiTokurei(他特の情報修正前,
+                    個人情報.get登録異動年月日());
             他特の情報修正後 = set他特の情報(他特の情報修正前, 他特の情報修正後, FLAG_1);
             TashichosonJushochiTokureiBuilder 他特の情報修正後Builder = 他特の情報修正後.createBuilderForEdit();
             他特の情報修正後Builder.set他市町村住所地特例適用事由コード(TatokureiTekiyoJiyu.他特例適用.getコード());
@@ -241,8 +232,8 @@ public class ShikakuFuseigoCorrector {
             return 他特の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.他住所地特例解除日_住基不一致) {
-            TashichosonJushochiTokurei 他特の情報修正後 = new TashichosonJushochiTokurei(他特の情報修正前.get識別コード(),
-                    個人情報.get消除異動年月日().plusDay(FLAG_1), 他特の情報修正前.get枝番());
+            TashichosonJushochiTokurei 他特の情報修正後 = getTashichosonJushochiTokurei(他特の情報修正前,
+                    個人情報.get消除異動年月日().plusDay(FLAG_1));
             他特の情報修正後 = set他特の情報(他特の情報修正前, 他特の情報修正後, FLAG_2);
             TashichosonJushochiTokureiBuilder 他特の情報修正後Builder = 他特の情報修正後.createBuilderForEdit();
             if (JukiIdoJiyu.死亡.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())) {
@@ -256,8 +247,8 @@ public class ShikakuFuseigoCorrector {
             return 他特の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.他住所地特例解除日_転出確定者) {
-            TashichosonJushochiTokurei 他特の情報修正後 = new TashichosonJushochiTokurei(他特の情報修正前.get識別コード(),
-                    個人情報.get転出確定().get異動年月日().plusDay(FLAG_1), 他特の情報修正前.get枝番());
+            TashichosonJushochiTokurei 他特の情報修正後 = getTashichosonJushochiTokurei(他特の情報修正前,
+                    個人情報.get転出確定().get異動年月日().plusDay(FLAG_1));
             他特の情報修正後 = set他特の情報(他特の情報修正前, 他特の情報修正後, FLAG_2);
             TashichosonJushochiTokureiBuilder 他特の情報修正後Builder = 他特の情報修正後.createBuilderForEdit();
             他特の情報修正後Builder.set他市町村住所地特例解除事由コード(TatokureiKaijoJiyu.他特例転出.getコード());
@@ -266,8 +257,8 @@ public class ShikakuFuseigoCorrector {
             return 他特の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.他住所地特例解除日_転出予定者) {
-            TashichosonJushochiTokurei 他特の情報修正後 = new TashichosonJushochiTokurei(他特の情報修正前.get識別コード(),
-                    個人情報.get転出予定().get異動年月日(), 他特の情報修正前.get枝番());
+            TashichosonJushochiTokurei 他特の情報修正後 = getTashichosonJushochiTokurei(他特の情報修正前,
+                    個人情報.get転出予定().get異動年月日());
             他特の情報修正後 = set他特の情報(他特の情報修正前, 他特の情報修正後, FLAG_2);
             TashichosonJushochiTokureiBuilder 他特の情報修正後Builder = 他特の情報修正後.createBuilderForEdit();
             他特の情報修正後Builder.set他市町村住所地特例解除事由コード(TatokureiKaijoJiyu.他特例転出.getコード());
@@ -374,4 +365,29 @@ public class ShikakuFuseigoCorrector {
         return 他特の情報修正後Builder.build();
     }
 
+    private HihokenshaDaicho getHihokenshaDaicho(HihokenshaDaicho 資格の情報修正前, FlexibleDate 異動日) {
+        if (異動日.compareTo(資格の情報修正前.get異動日()) == 0) {
+            return new HihokenshaDaicho(資格の情報修正前.get被保険者番号(), 異動日, add枝番(資格の情報修正前.get枝番()));
+        }
+        return new HihokenshaDaicho(資格の情報修正前.get被保険者番号(), 異動日, 資格の情報修正前.get枝番());
+    }
+
+    private TekiyoJogaisha getTekiyoJogaisha(TekiyoJogaisha 除外の情報修正前, FlexibleDate 異動日) {
+        if (異動日.compareTo(除外の情報修正前.get異動日()) == 0) {
+            return new TekiyoJogaisha(除外の情報修正前.get識別コード(), 異動日, add枝番(除外の情報修正前.get枝番()));
+        }
+        return new TekiyoJogaisha(除外の情報修正前.get識別コード(), 異動日, 除外の情報修正前.get枝番());
+    }
+
+    private TashichosonJushochiTokurei getTashichosonJushochiTokurei(
+            TashichosonJushochiTokurei 他特の情報修正前, FlexibleDate 異動日) {
+        if (異動日.compareTo(他特の情報修正前.get異動日()) == 0) {
+            return new TashichosonJushochiTokurei(他特の情報修正前.get識別コード(), 異動日, add枝番(他特の情報修正前.get枝番()));
+        }
+        return new TashichosonJushochiTokurei(他特の情報修正前.get識別コード(), 異動日, 他特の情報修正前.get枝番());
+    }
+
+    private RString add枝番(RString 枝番) {
+        return new RString(Integer.parseInt(枝番.toString()) + 1);
+    }
 }

@@ -394,6 +394,8 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         } catch (RuntimeException e) {
             if (e.getMessage().equals(UrErrorMessages.対象データなし.getMessage().evaluate())) {
                 setReadOnly();
+            } else {
+                throw e;
             }
         }
         if (result != null) {
