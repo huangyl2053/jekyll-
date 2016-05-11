@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoaderFinder;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
@@ -154,6 +155,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         ViewStateHolder.put(ViewStateKeys.調定日時リスト, 調定日時List);
         FukaJoho 賦課の情報 = 賦課の情報List.get(0);
         set調定パネルの共通エリア(賦課の情報);
+        FlexibleYear 賦課年度 = 賦課の情報.get賦課年度();
+        FlexibleYear 調定年度 = 賦課の情報.get調定年度();
         if (賦課の情報List.size() == 1) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setDisabled(true);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setDisabled(true);
@@ -174,8 +177,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                         .setSelectedKey(new RString(調定日時.toString()));
             }
             set更正後賦課根拠(賦課の情報);
-            set特別徴収(null, 賦課の情報);
-            set普通徴収(null, 賦課の情報);
+            if (!賦課年度.isBefore(調定年度)) {
+                FuchoKiUtil util = new FuchoKiUtil();
+                set特別徴収(null, 賦課の情報);
+                set普通徴収(null, 賦課の情報, util.get期月リスト());
+            } else {
+                KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set普通徴収(null, 賦課の情報, kanendoKi.get期月リスト());
+            }
         } else {
             List<KeyValueDataSource> 更正後Data = new ArrayList<>();
             List<KeyValueDataSource> 更正前Data = new ArrayList<>();
@@ -206,8 +215,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             FukaJoho 更正前賦課の情報 = 賦課の情報List.get(1);
             set更正後賦課根拠(更正後賦課の情報);
             set更正前賦課根拠(更正前賦課の情報);
-            set特別徴収(更正前賦課の情報, 更正後賦課の情報);
-            set普通徴収(更正前賦課の情報, 更正後賦課の情報);
+            if (!賦課年度.isBefore(調定年度)) {
+                FuchoKiUtil util = new FuchoKiUtil();
+                set特別徴収(更正前賦課の情報, 更正後賦課の情報);
+                set普通徴収(更正前賦課の情報, 更正後賦課の情報, util.get期月リスト());
+            } else {
+                KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set普通徴収(更正前賦課の情報, 更正後賦課の情報, kanendoKi.get期月リスト());
+            }
         }
         List<RString> 発行する帳票リスト = KakushuTsuchishoSakusei.createInstance().get帳票リスト(賦課の情報);
         if (発行する帳票リスト != null && !発行する帳票リスト.isEmpty()) {
@@ -219,7 +234,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         div.getFukaShokaiGrandsonTsuchisho().getTxtChoteiNendo().setDomain(賦課の情報.get調定年度());
         div.getFukaShokaiGrandsonTsuchisho().getTxtFukaNendo().setDomain(賦課の情報.get賦課年度());
         div.getFukaShokaiGrandsonTsuchisho().getTxtKoseiM().setValue(賦課の情報.get更正月());
-        div.getFukaShokaiGrandsonTsuchisho().getTxtKoseiDateTime().setValue(賦課の情報.get調定日時().toDateString());
+        div.getFukaShokaiGrandsonTsuchisho().getTxtKoseiDateTime().setValue(new RString(賦課の情報.get調定日時().toString()));
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getRadKobetsuHakkoChoteiJiyu()
                 .setSelectedKey(KEY0);
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setValue(
@@ -527,13 +542,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
     }
 
-    private void set普通徴収(FukaJoho 更正前情報, FukaJoho 更正後情報) {
+    private void set普通徴収(FukaJoho 更正前情報, FukaJoho 更正後情報, KitsukiList 期月リスト) {
         clear更正前_普徴();
         clear更正後_普徴();
         clear期_普徴();
         clear納期限();
-        FuchoKiUtil util = new FuchoKiUtil();
-        KitsukiList 期月リスト = util.get期月リスト();
         RString 期_4月 = 期月リスト.get月の期(Tsuki._4月).get期();
         RString 期_5月 = 期月リスト.get月の期(Tsuki._5月).get期();
         RString 期_6月 = 期月リスト.get月の期(Tsuki._6月).get期();
@@ -548,10 +561,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         RString 期_3月 = 期月リスト.get月の期(Tsuki._3月).get期();
         RString 期_13月 = 期月リスト.get月の期(Tsuki.翌年度4月).get期();
         RString 期_14月 = 期月リスト.get月の期(Tsuki.翌年度5月).get期();
-//        KanendoKiUtil kanendoKi = new KanendoKiUtil();
-//        KitsukiList 過年度期月リスト = kanendoKi.get期月リスト();
-//        RString 期_13月 = 過年度期月リスト.get月の期(Tsuki._4月).get期();
-//        RString 期_14月 = 過年度期月リスト.get月の期(Tsuki._5月).get期();
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                 .getLblZengoFuchoKi1().setText(get期(期_4月));
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
@@ -866,6 +875,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         boolean 調定事由Flag = false;
         List<RString> 帳票リスト = new ArrayList<>();
         int publishNumber = 0;
+        Map<RString, RString> map = new HashMap<>();
         for (RString 帳票 : 発行する帳票リスト) {
             row = new dgChohyoSentaku_Row();
             RString 帳票略称 = TsuchiSho.valueOf(帳票.toString()).get略称();
@@ -896,7 +906,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 帳票リスト.add(帳票略称);
                 publishNumber++;
             }
+            map.put(帳票略称, 帳票);
         }
+        ViewStateHolder.put(ViewStateKeys.発行する帳票リスト, (Serializable) map);
         List<YMDHMS> 調定日時List = ViewStateHolder.get(ViewStateKeys.調定日時リスト, List.class);
         RString 調定日時 = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().getSelectedKey();
         List<dgChohyoSentaku_Row> dgRowList = new ArrayList<>();
@@ -1102,8 +1114,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         clear更正前_特徴();
         clear更正前_普徴();
         set更正前賦課根拠(更正前Info);
-        set特別徴収(更正前Info, 更正後Info);
-        set普通徴収(更正前Info, 更正後Info);
+        FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
+        FlexibleYear 調定年度 = 更正後Info.get調定年度();
+        if (!賦課年度.isBefore(調定年度)) {
+            FuchoKiUtil util = new FuchoKiUtil();
+            set特別徴収(更正前Info, 更正後Info);
+            set普通徴収(更正前Info, 更正後Info, util.get期月リスト());
+        } else {
+            KanendoKiUtil kanendoKi = new KanendoKiUtil();
+            set普通徴収(更正前Info, 更正後Info, kanendoKi.get期月リスト());
+        }
     }
 
     /**
@@ -1136,8 +1156,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setDisabled(true);
             clear更正前賦課根拠();
             set更正後賦課根拠(更正後Info);
-            set特別徴収(null, 更正後Info);
-            set普通徴収(null, 更正後Info);
+            FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
+            FlexibleYear 調定年度 = 更正後Info.get調定年度();
+            if (!賦課年度.isBefore(調定年度)) {
+                FuchoKiUtil util = new FuchoKiUtil();
+                set特別徴収(null, 更正後Info);
+                set普通徴収(null, 更正後Info, util.get期月リスト());
+            } else {
+                KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set普通徴収(null, 更正後Info, kanendoKi.get期月リスト());
+            }
         } else {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setDisabled(false);
             RString 更正後日時 = new RString(更正後の調定日時.get(0).toString());
@@ -1162,8 +1190,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             clear更正後賦課根拠();
             set更正前賦課根拠(更正前Info);
             set更正後賦課根拠(更正後Info);
-            set特別徴収(更正前Info, 更正後Info);
-            set普通徴収(更正前Info, 更正後Info);
+            FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
+            FlexibleYear 調定年度 = 更正後Info.get調定年度();
+            if (!賦課年度.isBefore(調定年度)) {
+                FuchoKiUtil util = new FuchoKiUtil();
+                set特別徴収(更正前Info, 更正後Info);
+                set普通徴収(更正前Info, 更正後Info, util.get期月リスト());
+            } else {
+                KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set普通徴収(更正前Info, 更正後Info, kanendoKi.get期月リスト());
+            }
         }
         List<RString> 発行する帳票リスト = KakushuTsuchishoSakusei.createInstance().get帳票リスト(更正後Info);
         if (発行する帳票リスト != null && !発行する帳票リスト.isEmpty()) {
@@ -1184,11 +1220,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getDdlInjiKouseiAto().getSelectedKey();
 
         KakushuTsuchishoParameter parameter = new KakushuTsuchishoParameter();
+        // TODO 仮デ—タ
+//        Map<RString, RString> 帳票Map = ViewStateHolder.get(ViewStateKeys.発行する帳票リスト, Map.class);
         List<RString> 発行する帳票List = new ArrayList<>();
-        List<dgChohyoSentaku_Row> rowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
-        for (dgChohyoSentaku_Row row : rowList) {
-            発行する帳票List.add(row.getTxtChohyoSentaku());
-        }
+//        List<dgChohyoSentaku_Row> rowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
+//        for (dgChohyoSentaku_Row row : rowList) {
+//            発行する帳票List.add(帳票Map.get(row.getTxtChohyoSentaku()));
+//        }
+        発行する帳票List.add(TsuchiSho.特別徴収開始通知書_本算定.get名称());
         parameter.set発行する帳票List(発行する帳票List);
         if (更正前Key != null && !更正前Key.isEmpty()) {
             parameter.set賦課の情報_更正前(map.get(更正前Key));
