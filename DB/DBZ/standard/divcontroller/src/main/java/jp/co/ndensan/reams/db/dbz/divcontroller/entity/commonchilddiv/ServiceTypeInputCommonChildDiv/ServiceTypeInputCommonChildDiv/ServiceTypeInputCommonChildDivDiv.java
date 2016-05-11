@@ -5,11 +5,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTy
  * 不正な動作の原因になります。
  */
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  */
 public class ServiceTypeInputCommonChildDivDiv extends Panel implements IServiceTypeInputCommonChildDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,8 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
     private ButtonDialog btnKensaku;
     @JsonProperty("txtServiceTypeName")
     private TextBox txtServiceTypeName;
+    @JsonProperty("hdnServiceRyakusho")
+    private RString hdnServiceRyakusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,6 +96,24 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
         this.txtServiceTypeName = txtServiceTypeName;
     }
 
+    /*
+     * gethdnServiceRyakusho
+     * @return hdnServiceRyakusho
+     */
+    @JsonProperty("hdnServiceRyakusho")
+    public RString getHdnServiceRyakusho() {
+        return hdnServiceRyakusho;
+    }
+
+    /*
+     * sethdnServiceRyakusho
+     * @param hdnServiceRyakusho hdnServiceRyakusho
+     */
+    @JsonProperty("hdnServiceRyakusho")
+    public void setHdnServiceRyakusho(RString hdnServiceRyakusho) {
+        this.hdnServiceRyakusho = hdnServiceRyakusho;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
@@ -119,6 +139,11 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
     @Override
     public RString getサービス種類名称() {
         return this.getTxtServiceTypeName().getValue();
+    }
+
+    @Override
+    public RString getサービス種類略称() {
+        return this.getHdnServiceRyakusho();
     }
 
     @JsonIgnore

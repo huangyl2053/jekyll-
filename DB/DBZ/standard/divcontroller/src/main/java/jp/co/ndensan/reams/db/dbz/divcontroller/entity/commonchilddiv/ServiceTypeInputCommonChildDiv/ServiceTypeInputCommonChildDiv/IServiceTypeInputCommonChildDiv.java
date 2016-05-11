@@ -41,4 +41,12 @@ public interface IServiceTypeInputCommonChildDiv extends ICommonChildDivBaseProp
      * @return RString
      */
     RString getサービス種類名称();
+
+    /**
+     *
+     * サービス種類略称を取得します。
+     *
+     * @return RString
+     */
+    RString getサービス種類略称();
 }

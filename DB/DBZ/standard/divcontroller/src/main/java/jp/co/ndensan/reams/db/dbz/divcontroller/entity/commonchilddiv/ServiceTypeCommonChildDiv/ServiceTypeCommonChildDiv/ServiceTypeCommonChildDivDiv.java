@@ -4,12 +4,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTy
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * ServiceTypeCommonChildDiv のクラスファイル
@@ -17,8 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBA-0070-010 chengsanyuan
  */
 public class ServiceTypeCommonChildDivDiv extends Panel implements IServiceTypeCommonChildDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +34,8 @@ public class ServiceTypeCommonChildDivDiv extends Panel implements IServiceTypeC
     private RString hdnServiceType;
     @JsonProperty("hdnServiceTypeName")
     private RString hdnServiceTypeName;
+    @JsonProperty("hdnServiceRyakusho")
+    private RString hdnServiceRyakusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -132,6 +133,25 @@ public class ServiceTypeCommonChildDivDiv extends Panel implements IServiceTypeC
         this.hdnServiceTypeName = hdnServiceTypeName;
     }
 
+    /*
+     * gethdnServiceRyakusho
+     * @return hdnServiceRyakusho
+     */
+    @JsonProperty("hdnServiceRyakusho")
+    public RString getHdnServiceRyakusho() {
+        return hdnServiceRyakusho;
+    }
+
+    /*
+     * sethdnServiceRyakusho
+     * @param hdnServiceRyakusho hdnServiceRyakusho
+     */
+    @JsonProperty("hdnServiceRyakusho")
+    public void setHdnServiceRyakusho(RString hdnServiceRyakusho) {
+        this.hdnServiceRyakusho = hdnServiceRyakusho;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }
