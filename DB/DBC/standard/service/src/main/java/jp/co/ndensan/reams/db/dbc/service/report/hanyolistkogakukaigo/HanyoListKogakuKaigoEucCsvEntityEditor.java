@@ -32,12 +32,12 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -219,9 +219,12 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
             FlexibleDate 生年月日 = entity.get宛名().getSeinengappiYMD();
             csvEntity.set生年月日(get日付項目(生年月日, parameter));
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-            AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(), 宛名.get消除異動年月日());
+            AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
+                    宛名.get消除異動年月日());
             csvEntity.set年齢(ageCalculator.get年齢());
-            csvEntity.set性別(entity.get宛名().getSeibetsuCode());
+            if (宛名.get性別() != null) {
+                csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
+            }
             TsuzukigaraCode 続柄コード = entity.get宛名().getTsuzukigaraCode();
             csvEntity.set続柄コード(続柄コード != null ? 続柄コード.getColumnValue() : RString.EMPTY);
             SetaiCode 世帯コード = entity.get宛名().getSetaiCode();
@@ -251,30 +254,37 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         GyoseikuCode 行政区コード = entity.get宛名().getGyoseikuCode();
         csvEntity.set行政区コード(行政区コード != null ? 行政区コード.getColumnValue() : RString.EMPTY);
         csvEntity.set行政区名(entity.get宛名().getGyoseikuName());
-
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         TelNo 連絡先１ = entity.get宛名().getRenrakusaki1();
         csvEntity.set連絡先１(連絡先１ != null ? 連絡先１.getColumnValue() : RString.EMPTY);
         TelNo 連絡先２ = entity.get宛名().getRenrakusaki2();
         csvEntity.set連絡先２(連絡先２ != null ? 連絡先２.getColumnValue() : RString.EMPTY);
+        IIdoJiyu 登録事由 = 宛名.get登録事由();
+        IIdoJiyu 住定事由 = 宛名.get住定事由();
+        IIdoJiyu 消除事由 = 宛名.get消除事由();
         FlexibleDate 登録異動日 = entity.get宛名().getTorokuIdoYMD();
         csvEntity.set登録異動日(登録異動日 != null ? new RString(登録異動日.toString()) : RString.EMPTY);
-        csvEntity.set登録事由(entity.get宛名().getTorokuJiyuCode());
+        csvEntity.set登録事由(登録事由 != null ? 登録事由.get異動事由略称() : RString.EMPTY);
         FlexibleDate 登録届出日 = entity.get宛名().getTorokuTodokedeYMD();
         csvEntity.set登録届出日(登録届出日 != null ? new RString(登録届出日.toString()) : RString.EMPTY);
         FlexibleDate 住定異動日 = entity.get宛名().getJuteiIdoYMD();
         csvEntity.set住定異動日(住定異動日 != null ? new RString(住定異動日.toString()) : RString.EMPTY);
-        csvEntity.set住定事由(entity.get宛名().getJuteiJiyuCode());
+        csvEntity.set住定事由(住定事由 != null ? 住定事由.get異動事由略称() : RString.EMPTY);
         FlexibleDate 住定届出日 = entity.get宛名().getJuteiTodokedeYMD();
         csvEntity.set住定届出日(住定届出日 != null ? new RString(住定届出日.toString()) : RString.EMPTY);
         FlexibleDate 消除異動日 = entity.get宛名().getShojoIdoYMD();
         csvEntity.set消除異動日(消除異動日 != null ? new RString(消除異動日.toString()) : RString.EMPTY);
-        csvEntity.set消除事由(entity.get宛名().getShojoJiyuCode());
+        csvEntity.set消除事由(登録事由 != null ? 消除事由.get異動事由略称() : RString.EMPTY);
         FlexibleDate 消除届出日 = entity.get宛名().getShojoTodokedeYMD();
         csvEntity.set消除届出日(消除届出日 != null ? new RString(消除届出日.toString()) : RString.EMPTY);
         //  TODO 宛名・本人・は不明です
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo 前住所郵便番号 = entity.get宛名().getTennyumaeYubinNo();
         csvEntity.set前住所郵便番号(前住所郵便番号 != null ? 前住所郵便番号.getColumnValue() : RString.EMPTY);
+
+    }
+
+    private void set地区(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
         AtenaJusho 前住所 = entity.get宛名().getTennyumaeJusho();
         csvEntity.set前住所(前住所 != null ? 前住所.getColumnValue() : RString.EMPTY);
         AtenaBanchi 前住所番地 = entity.get宛名().getTennyumaeBanchi();
@@ -285,15 +295,22 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
                 .concat(前住所番地 != null ? 前住所番地.getColumnValue() : RString.EMPTY)
                 .concat(RString.FULL_SPACE)
                 .concat(前住所方書 != null ? 前住所方書.getColumnValue() : RString.EMPTY));
-    }
-
-    private void set地区(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
-        ChikuCode 地区1 = entity.get宛名().getChikuCode1();
-        ChikuCode 地区2 = entity.get宛名().getChikuCode2();
-        ChikuCode 地区3 = entity.get宛名().getChikuCode3();
-        csvEntity.set地区１(地区1 != null ? 地区1.getColumnValue() : RString.EMPTY);
-        csvEntity.set地区２(地区2 != null ? 地区2.getColumnValue() : RString.EMPTY);
-        csvEntity.set地区３(地区3 != null ? 地区3.getColumnValue() : RString.EMPTY);
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        RString 地区1 = RString.EMPTY;
+        RString 地区2 = RString.EMPTY;
+        RString 地区3 = RString.EMPTY;
+        if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku1() != null) {
+            地区1 = 宛名.get行政区画().getChiku1().get名称();
+        }
+        if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku2() != null) {
+            地区2 = 宛名.get行政区画().getChiku1().get名称();
+        }
+        if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku3() != null) {
+            地区3 = 宛名.get行政区画().getChiku1().get名称();
+        }
+        csvEntity.set地区１(地区1);
+        csvEntity.set地区２(地区2);
+        csvEntity.set地区３(地区3);
     }
 
     private void set宛先(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvEntity csvEntity) {
