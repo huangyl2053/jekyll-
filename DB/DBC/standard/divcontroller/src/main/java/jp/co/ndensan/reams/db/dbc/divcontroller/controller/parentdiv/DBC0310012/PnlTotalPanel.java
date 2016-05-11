@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0310012TransitionEventName;
@@ -372,10 +373,10 @@ public class PnlTotalPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).保存処理(画面モード);
-            } else {
-                return ResponseData.of(div).respond();
+                div.getPnlMsgPrint().getCcdKanryoMessage()
+                        .setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(deleted);
             }
-            div.getPnlMsgPrint().getPnlPrint().setDisplayNone(true);
         } else {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -386,13 +387,12 @@ public class PnlTotalPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).保存処理(画面モード);
-            } else {
-                return ResponseData.of(div).respond();
+                div.getPnlMsgPrint().getCcdKanryoMessage()
+                        .setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(saved);
             }
         }
-        div.getPnlMsgPrint().getCcdKanryoMessage()
-                .setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
-        return ResponseData.of(div).setState(saved);
+        return ResponseData.of(div).respond();
     }
 
     /**

@@ -210,8 +210,16 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                             .getRdoKettekubun().getSelectedKey())) {
                 RString 状態 = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
                 ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+                HihokenshaNo 被保険者番号;
+                if (登録.equals(状態)) {
+                    被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                } else {
+                    ShokanJuryoininKeiyakusha shokan = ViewStateHolder.
+                            get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
+                    被保険者番号 = shokan.get被保険者番号();
+                }
                 ChkKeiyakuNoParameter parameter = new ChkKeiyakuNoParameter(
-                        new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
+                        被保険者番号,
                         new FlexibleDate(div.getPnlCommon().getPnlDetail()
                                 .getTxtKeyakushinseibi().getValue().toDateString()),
                         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
@@ -233,8 +241,9 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                 return true;
             }
             if (登録.equals(状態)) {
+                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
                 parameter = new ChkTorokuzumiParameter(
-                        new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
+                        被保険者番号,
                         null,
                         null,
                         null,
