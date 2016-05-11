@@ -87,16 +87,14 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onLoad(JutakuKaishuShinseiJyohoTorokuDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RDate サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, RDate.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
 
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().onLoad(識別コード);
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().onLoad(識別コード);
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        handler.onLoad(識別コード, 被保険者番号,
-                サービス提供年月 != null ? new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()) : null,
-                整理番号, 画面モード);
+        handler.onLoad(識別コード, 被保険者番号, サービス提供年月, 整理番号, 画面モード);
         return ResponseData.of(div).respond();
     }
 
@@ -143,15 +141,14 @@ public class JutakuKaishuShinseiJyohoToroku {
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RDate サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, RDate.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         ShokanharaKeteiJyohoParameter 引き継ぎデータEntity = new ShokanharaKeteiJyohoParameter();
         引き継ぎデータEntity.set画面モード(画面モード);
         引き継ぎデータEntity.set識別コード(識別コード);
         引き継ぎデータEntity.set被保険者番号(被保険者番号);
-        引き継ぎデータEntity.setサービス提供年月(
-                サービス提供年月 != null ? new FlexibleYearMonth(サービス提供年月.getYearMonth().toDateString()) : null);
+        引き継ぎデータEntity.setサービス提供年月(サービス提供年月);
         引き継ぎデータEntity.set整理番号(整理番号);
 
         ValidationMessageControlPairs valid = getJutakuKaishuShinseiJyohoTorokuValidationHandler(
