@@ -1600,7 +1600,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 ViewStateKeys.申請情報登録_住宅住所更新前データ, List.class);
         List<dgGaisyuList_Row> 画面住宅住所 = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
                 .get住宅改修内容一覧();
-        if (画面モード_削除.equals(画面モード) || 画面モード_審査.equals(画面モード)) {
+        if (!画面モード_修正.equals(画面モード)) {
             return true;
         }
         if (住宅住所更新前データ.size() != 画面住宅住所.size()) {
