@@ -210,6 +210,7 @@ public class ShikakuKihonJoho {
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get入所日() == null ? FlexibleDate.EMPTY
                                 : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get入所日()), 住所出力不要フラグ));
     }
+
     private TashichosonJushochitokureishaRenrakuhyoItem dba100007_Item(TatokuKanrenChohyoRenrakuhyoBusiness business) {
 
         TashichosonJushochitokureishaRenrakuhyoItem item = new TashichosonJushochitokureishaRenrakuhyoItem();
@@ -220,7 +221,7 @@ public class ShikakuKihonJoho {
         item.setHokenshaName(business.get保険者名());
         item.setTantoBushoName(business.get担当部署名());
         item.setBarcode(business.getバーコード情報());
-        item.setMidashi(business.get見出し());
+        item.setMidashi1(business.get見出し());
         item.setTennyuYMD(business.get転入年月日());
         item.setNyushoYMD(business.get入所年月日());
         item.setHihokenshaNo1(business.get被保険者番号１());
