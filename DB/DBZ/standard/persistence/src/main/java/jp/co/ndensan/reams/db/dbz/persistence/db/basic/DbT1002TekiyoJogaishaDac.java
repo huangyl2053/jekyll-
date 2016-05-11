@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -59,6 +60,27 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                                 eq(shikibetsuCode, 識別コード),
                                 eq(idoYMD, 異動日),
                                 eq(edaNo, 枝番))).
+                toObject(DbT1002TekiyoJogaishaEntity.class);
+    }
+
+    /**
+     * 適用除外者で最大の異動日のレコード中で最大の枝番を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1002TekiyoJogaishaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1002TekiyoJogaishaEntity selectMaxByKey(
+            ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(idoYMD), max(edaNo)).
+                table(DbT1002TekiyoJogaisha.class).
+                where(
+                        eq(shikibetsuCode, 識別コード)).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
     }
 

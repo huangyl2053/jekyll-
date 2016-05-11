@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.shikakufuseigo;
+package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +65,7 @@ public class ShikakuJukiValidator {
      * @param 個人情報 IKojin
      * @param 資格の情報 HihokenshaDaicho
      * @return FuseigoRiyu
-     * @exception IllegalStateException
+     * @throws IllegalStateException
      */
     public FuseigoRiyu checkFor資格不整合(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
         if (資格の情報 != null && 資格の情報.get識別コード().compareTo(個人情報.get識別コード()) != 0) {
