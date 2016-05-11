@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 普徴仮算定通知書一括発行のprocessパラメーターです。
  *
- * @reamsid_L DBC-0710-030 gongliang
+ * @reamsid_L DBB-0710-030 gongliang
  */
 @lombok.Getter
 @lombok.Setter
