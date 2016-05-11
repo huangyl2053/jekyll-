@@ -40,7 +40,9 @@ class TashichosonJushochitokureishaRenrakuhyoEditor implements ITashichosonJusho
         source.hokenshaName = item.getHokenshaName();
         source.tantoBushoName = item.getTantoBushoName();
         source.barcode = item.getBarcode();
-        source.midashi = item.getMidashi();
+        source.midashi1 = item.getMidashi1();
+        source.midashi2 = item.getMidashi2();
+        source.midashi3 = item.getMidashi3();
         source.tennyuYMD = item.getTennyuYMD();
         source.nyushoYMD = item.getNyushoYMD();
         source.hihokenshaNo1 = item.getHihokenshaNo1();
@@ -65,13 +67,11 @@ class TashichosonJushochitokureishaRenrakuhyoEditor implements ITashichosonJusho
         source.shisetsuYubinNo = item.getShisetsuYubinNo();
         source.shisetsuJusho = item.getShisetsuJusho();
         source.denshiKoin = item.getDenshiKoin();
-        source.hakkoYMD1 = item.getHakkoYMD1();
-        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
-        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
-        source.koinMojiretsu = item.getKoinMojiretsu();
-        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
-        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
-        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+        source.denshiKoin = item.getDenshiKoin();
+        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
+        source.shuchoMei = item.getShuchoMei();
+        source.shichosonMei = item.getShichosonMei();
+        source.koinShoryaku = item.getKoinShoryaku();
         source.koinShoryaku = item.getKoinShoryaku();
         return source;
     }

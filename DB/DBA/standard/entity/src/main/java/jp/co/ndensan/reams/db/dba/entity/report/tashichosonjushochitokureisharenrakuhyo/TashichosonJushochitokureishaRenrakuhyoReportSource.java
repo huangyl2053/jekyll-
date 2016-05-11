@@ -26,71 +26,67 @@ public class TashichosonJushochitokureishaRenrakuhyoReportSource implements IRep
     public RString tantoBushoName;
     @ReportItem(name = "barcode", order = 7)
     public RString barcode;
-    @ReportItem(name = "midashi", order = 8)
-    public RString midashi;
-    @ReportItem(name = "tennyuYMD", length = 16, order = 9)
+    @ReportItem(name = "midashi1", length = 35, order = 8)
+    public RString midashi1;
+    @ReportItem(name = "midashi2", length = 35, order = 9)
+    public RString midashi2;
+    @ReportItem(name = "midashi3", length = 35, order = 10)
+    public RString midashi3;
+    @ReportItem(name = "tennyuYMD", length = 16, order = 11)
     public RString tennyuYMD;
-    @ReportItem(name = "nyushoYMD", length = 16, order = 10)
+    @ReportItem(name = "nyushoYMD", length = 16, order = 12)
     public RString nyushoYMD;
-    @ReportItem(name = "hihokenshaNo1", length = 1, order = 11)
+    @ReportItem(name = "hihokenshaNo1", length = 1, order = 13)
     public RString hihokenshaNo1;
-    @ReportItem(name = "hihokenshaNo2", length = 1, order = 12)
+    @ReportItem(name = "hihokenshaNo2", length = 1, order = 14)
     public RString hihokenshaNo2;
-    @ReportItem(name = "hihokenshaNo3", length = 1, order = 13)
+    @ReportItem(name = "hihokenshaNo3", length = 1, order = 15)
     public RString hihokenshaNo3;
-    @ReportItem(name = "hihokenshaNo4", length = 1, order = 14)
+    @ReportItem(name = "hihokenshaNo4", length = 1, order = 16)
     public RString hihokenshaNo4;
-    @ReportItem(name = "hihokenshaNo5", length = 1, order = 15)
+    @ReportItem(name = "hihokenshaNo5", length = 1, order = 17)
     public RString hihokenshaNo5;
-    @ReportItem(name = "hihokenshaNo6", length = 1, order = 16)
+    @ReportItem(name = "hihokenshaNo6", length = 1, order = 18)
     public RString hihokenshaNo6;
-    @ReportItem(name = "hihokenshaNo7", length = 1, order = 17)
+    @ReportItem(name = "hihokenshaNo7", length = 1, order = 19)
     public RString hihokenshaNo7;
-    @ReportItem(name = "hihokenshaNo8", length = 1, order = 18)
+    @ReportItem(name = "hihokenshaNo8", length = 1, order = 20)
     public RString hihokenshaNo8;
-    @ReportItem(name = "hihokenshaNo9", length = 1, order = 19)
+    @ReportItem(name = "hihokenshaNo9", length = 1, order = 21)
     public RString hihokenshaNo9;
-    @ReportItem(name = "hihokenshaNo10", length = 1, order = 20)
+    @ReportItem(name = "hihokenshaNo10", length = 1, order = 22)
     public RString hihokenshaNo10;
-    @ReportItem(name = "taishoshaNameKana", order = 21)
+    @ReportItem(name = "taishoshaNameKana", order = 23)
     public RString taishoshaNameKana;
-    @ReportItem(name = "taishoshaName", order = 22)
+    @ReportItem(name = "taishoshaName", order = 24)
     public RString taishoshaName;
-    @ReportItem(name = "birthYMD", length = 16, order = 23)
+    @ReportItem(name = "birthYMD", length = 16, order = 25)
     public RString birthYMD;
-    @ReportItem(name = "seibetsu", length = 1, order = 24)
+    @ReportItem(name = "seibetsu", length = 1, order = 26)
     public RString seibetsu;
-    @ReportItem(name = "tennyumaeYubinNo", length = 11, order = 25)
+    @ReportItem(name = "tennyumaeYubinNo", length = 11, order = 27)
     public RString tennyumaeYubinNo;
-    @ReportItem(name = "tennyumaeJusho", order = 26)
+    @ReportItem(name = "tennyumaeJusho", order = 28)
     public RString tennyumaeJusho;
-    @ReportItem(name = "shisetsuName", order = 27)
+    @ReportItem(name = "shisetsuName", order = 29)
     public RString shisetsuName;
-    @ReportItem(name = "shisetsuTelNo", length = 14, order = 28)
+    @ReportItem(name = "shisetsuTelNo", length = 14, order = 30)
     public RString shisetsuTelNo;
-    @ReportItem(name = "shisetsuFaxNo", length = 14, order = 29)
+    @ReportItem(name = "shisetsuFaxNo", length = 14, order = 31)
     public RString shisetsuFaxNo;
-    @ReportItem(name = "shisetsuYubinNo", length = 11, order = 30)
+    @ReportItem(name = "shisetsuYubinNo", length = 11, order = 32)
     public RString shisetsuYubinNo;
-    @ReportItem(name = "shisetsuJusho", order = 31)
+    @ReportItem(name = "shisetsuJusho", order = 33)
     public RString shisetsuJusho;
-    @ReportItem(name = "denshiKoin", order = 32)
+    @ReportItem(name = "denshiKoin", order = 34)
     public RString denshiKoin;
-    @ReportItem(name = "hakkoYMD1", length = 12, order = 33)
-    public RString hakkoYMD1;
-    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 34)
-    public RString ninshoshaYakushokuMei;
-    @ReportItem(name = "ninshoshaYakushokuMei1", order = 35)
-    public RString ninshoshaYakushokuMei1;
-    @ReportItem(name = "koinMojiretsu", length = 4, order = 36)
-    public RString koinMojiretsu;
-    @ReportItem(name = "ninshoshaShimeiKakenai", order = 37)
-    public RString ninshoshaShimeiKakenai;
-    @ReportItem(name = "ninshoshaShimeiKakeru", order = 38)
-    public RString ninshoshaShimeiKakeru;
-    @ReportItem(name = "ninshoshaYakushokuMei2", order = 39)
-    public RString ninshoshaYakushokuMei2;
-    @ReportItem(name = "koinShoryaku", length = 15, order = 40)
+    @ReportItem(name = "shomeiHakkoYMD", length = 22, order = 35)
+    public RString shomeiHakkoYMD;
+    @ReportItem(name = "shuchoMei", length = 14, order = 36)
+    public RString shuchoMei;
+    @ReportItem(name = "shichosonMei", length = 40, order = 37)
+    public RString shichosonMei;
+    @ReportItem(name = "koinShoryaku", length = 15, order = 38)
     public RString koinShoryaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

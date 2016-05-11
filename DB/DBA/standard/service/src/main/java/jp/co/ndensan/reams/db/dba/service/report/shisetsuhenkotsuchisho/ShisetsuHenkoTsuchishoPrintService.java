@@ -49,13 +49,9 @@ public class ShisetsuHenkoTsuchishoPrintService {
                         FlexibleDate.getNowDate(),
                         reportSourceWriter);
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setHakkoYMD1(ninshoshaSource.hakkoYMD);
-                item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
-                item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
-                item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
-                item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
-                item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
-                item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+                item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
+                item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
+                item.setShichosonMei(ninshoshaSource.ninshoshaYakushokuMei2);
                 item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
             }
         }
