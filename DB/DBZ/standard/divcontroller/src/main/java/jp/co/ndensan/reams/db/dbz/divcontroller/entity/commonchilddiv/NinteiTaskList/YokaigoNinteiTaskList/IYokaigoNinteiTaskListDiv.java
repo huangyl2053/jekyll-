@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -9,4 +10,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 public interface IYokaigoNinteiTaskListDiv extends ICommonChildDivBaseProperties {
 
     public abstract void initialize(RString モード);
+
+    public abstract RString 一览件数();
+
+    public abstract List<dgNinteiTaskList_Row> getCheckbox();
 }
