@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210011;
 
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -21,17 +21,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBB-0760-010 zhangguopeng
  */
-public class TsukibetsuSuiihyoSakuseiValidationHandler {
+public class TsukibetsuSuiihyoSakuseiParameterValidationHandler {
 
     private static final int 年齢_65 = 65;
-    private final TsukibetsuSuiihyoSakuseiDiv div;
+    private final TsukibetsuSuiihyoSakuseiParameterDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 月別推移表Div
      */
-    public TsukibetsuSuiihyoSakuseiValidationHandler(TsukibetsuSuiihyoSakuseiDiv div) {
+    public TsukibetsuSuiihyoSakuseiParameterValidationHandler(TsukibetsuSuiihyoSakuseiParameterDiv div) {
         this.div = div;
     }
 
@@ -59,7 +59,7 @@ public class TsukibetsuSuiihyoSakuseiValidationHandler {
             }
         } else {
             if (生年月日F != null && 生年月日E != null && 生年月日E.isBefore(生年月日F)) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始年齢大小不整合));
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始生年月日大小不整合));
             }
         }
         return validationMessages;
