@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.kyotakuservicekeikakuinfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.kyotakuservicekeikakuinfo.KyotakuServiceKeikaku;
+import jp.co.ndensan.reams.db.dbz.business.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyotakuservicekeikakuinfo.IKyotakuServiceKeikakuInfoMapper;

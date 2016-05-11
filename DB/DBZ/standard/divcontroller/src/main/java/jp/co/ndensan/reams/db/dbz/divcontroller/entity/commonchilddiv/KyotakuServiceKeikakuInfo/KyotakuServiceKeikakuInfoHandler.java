@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KyotakuSe
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.kyotakuservicekeikakuinfo.KyotakuServiceKeikaku;
+import jp.co.ndensan.reams.db.dbz.business.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoFinder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

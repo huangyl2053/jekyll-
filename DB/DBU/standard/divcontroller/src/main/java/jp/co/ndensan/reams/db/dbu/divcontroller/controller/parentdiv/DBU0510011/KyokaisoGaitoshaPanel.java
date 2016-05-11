@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0510011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoGaito;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoGaitoshaJoho;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoHokenryo;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoGaito;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoGaitoshaJoho;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoHokenryo;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.DBU0510011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.DBU0510011TransitionEventName;
