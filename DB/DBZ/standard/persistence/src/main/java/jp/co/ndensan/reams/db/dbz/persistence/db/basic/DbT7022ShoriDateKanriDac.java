@@ -10,6 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.isDeleted;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.kijunTimestamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.nendo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.nendoNaiRenban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shichosonCode;
@@ -122,6 +123,34 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(shoriName, 処理名),
+                                eq(shoriEdaban, 処理枝番),
+                                eq(nendo, 年度))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、最大基準日時を取得する。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @param 年度 Nendo
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select基準日時_MAX(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            RString 処理枝番,
+            FlexibleYear 年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(kijunTimestamp)).
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, サブ業務コード),
