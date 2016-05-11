@@ -9,17 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Chushu
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuDateShurui;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -65,8 +55,14 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
     private boolean is審査会回答日;
     private boolean is認定有効開始日;
     private boolean is認定有効終了日;
-    private RString psmShikibetsuTaisho;
-    private RString psmAtesaki;
+    private boolean isCyusyutsunichifrom;
+    private boolean isCyusyutsunichito;
+    private boolean isIryokikancodefrom;
+    private boolean isIryokikancodefto;
+    private boolean isCyosaitakusakicodefrom;
+    private boolean isCyosaitakusakicodefto;
+    private final RString psmShikibetsuTaisho;
+    private final RString psmAtesaki;
 
     /**
      * コンストラクタです。
@@ -83,6 +79,8 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
      * @param iryokikancodefto 医療機関コードTo
      * @param cyosaitakusakicodefrom 調査委託先コードFrom
      * @param cyosaitakusakicodefto 調査委託先コードTo
+     * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @param psmAtesaki 宛名識別対象PSM
      */
     public HanyoRisutoJyukyusyaDaichoMybatisParameter(RString cyusyutsudatakubun,
             boolean isShinseikeshidetacyusyutsu,
@@ -95,7 +93,9 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
             RString iryokikancodefrom,
             RString iryokikancodefto,
             RString cyosaitakusakicodefrom,
-            RString cyosaitakusakicodefto) {
+            RString cyosaitakusakicodefto,
+            RString psmShikibetsuTaisho,
+            RString psmAtesaki) {
         set抽出データ区分(cyusyutsudatakubun);
         set抽出日種類(cyusyutsunichisyurai);
         this.isShinseikeshidetacyusyutsu = isShinseikeshidetacyusyutsu;
@@ -106,21 +106,46 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
             is資格喪失者のみ = true;
         }
         set抽出対象(cyusyutsutaisyo);
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        this.psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
-                KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBA介護資格));
-        UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
-        psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.psmAtesaki = psmAtesaki;
         this.cyusyutsunichifrom = cyusyutsunichifrom;
         this.cyusyutsunichito = cyusyutsunichito;
         this.iryokikancodefrom = iryokikancodefrom;
         this.iryokikancodefto = iryokikancodefto;
         this.cyosaitakusakicodefrom = cyosaitakusakicodefrom;
         this.cyosaitakusakicodefto = cyosaitakusakicodefto;
+        setFromTo(cyusyutsunichifrom,
+                cyusyutsunichito,
+                iryokikancodefrom,
+                iryokikancodefto,
+                cyosaitakusakicodefrom,
+                cyosaitakusakicodefto);
+    }
+
+    private void setFromTo(FlexibleDate cyusyutsunichifrom,
+            FlexibleDate cyusyutsunichito,
+            RString iryokikancodefrom,
+            RString iryokikancodefto,
+            RString cyosaitakusakicodefrom,
+            RString cyosaitakusakicodefto) {
+        if (cyusyutsunichifrom == null || cyusyutsunichifrom.isEmpty()) {
+            isCyusyutsunichifrom = true;
+        }
+        if (cyusyutsunichito == null || cyusyutsunichito.isEmpty()) {
+            isCyusyutsunichito = true;
+        }
+        if (RString.isNullOrEmpty(iryokikancodefrom)) {
+            isIryokikancodefrom = true;
+        }
+        if (RString.isNullOrEmpty(iryokikancodefto)) {
+            isIryokikancodefto = true;
+        }
+        if (RString.isNullOrEmpty(cyosaitakusakicodefrom)) {
+            this.isCyosaitakusakicodefrom = true;
+        }
+        if (RString.isNullOrEmpty(cyosaitakusakicodefto)) {
+            this.isCyosaitakusakicodefto = false;
+        }
     }
 
     private void set抽出データ区分(RString cyusyutsudatakubun) {
