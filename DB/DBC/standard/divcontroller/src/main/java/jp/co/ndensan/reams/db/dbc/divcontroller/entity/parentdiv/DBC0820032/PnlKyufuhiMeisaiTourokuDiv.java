@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * PnlKyufuhiMeisaiTouroku のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1030-030 quxiaodong
  */
 public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
 
@@ -29,8 +29,6 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdServiceCodeInput")
-    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
     @JsonProperty("txtTanyi")
     private TextBoxNum txtTanyi;
     @JsonProperty("txtKaisu")
@@ -49,6 +47,8 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
     private Button btnClear;
     @JsonProperty("ccdHokenshaJoho")
     private HokenshaJohoDiv ccdHokenshaJoho;
+    @JsonProperty("ccdServiceCodeInput")
+    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,15 +56,6 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdServiceCodeInput
-     * @return ccdServiceCodeInput
-     */
-    @JsonProperty("ccdServiceCodeInput")
-    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
-        return ccdServiceCodeInput;
-    }
-
     /*
      * gettxtTanyi
      * @return txtTanyi
@@ -216,6 +207,15 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
     @JsonProperty("ccdHokenshaJoho")
     public IHokenshaJohoDiv getCcdHokenshaJoho() {
         return ccdHokenshaJoho;
+    }
+
+    /*
+     * getccdServiceCodeInput
+     * @return ccdServiceCodeInput
+     */
+    @JsonProperty("ccdServiceCodeInput")
+    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
+        return ccdServiceCodeInput;
     }
 
     // </editor-fold>
