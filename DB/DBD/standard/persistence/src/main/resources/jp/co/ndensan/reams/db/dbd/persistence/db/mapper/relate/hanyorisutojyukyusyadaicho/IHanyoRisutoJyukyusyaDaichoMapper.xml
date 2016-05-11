@@ -504,7 +504,7 @@ SELECT
 FROM
   rgdb."DbT4001JukyushaDaicho"AS 受給者台帳 
   INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳 
-    ON 最新被保台帳."hihokenshaNo" = '8' 
+    ON 最新被保台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo" 
      INNER  JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
