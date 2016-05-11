@@ -827,33 +827,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
         本算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
         本算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-
-        //TODO 収入情報
-        ShunyuJoho 収入情報 = new ShunyuJoho();
-        収入情報.set調定年度(通知書共通情報.get賦課の情報_更正後().get賦課情報().get調定年度());
-        収入情報.set賦課年度(通知書共通情報.get賦課の情報_更正後().get賦課情報().get賦課年度());
-        収入情報.set通知書番号(通知書共通情報.get賦課の情報_更正後().get賦課情報().get通知書番号());
-        収入情報.set普徴収入額01(Decimal.TEN);
-        収入情報.set普徴収入額02(Decimal.TEN);
-        収入情報.set普徴収入額03(Decimal.TEN);
-        収入情報.set普徴収入額04(Decimal.TEN);
-        収入情報.set普徴収入額05(Decimal.TEN);
-        収入情報.set普徴収入額06(Decimal.TEN);
-        収入情報.set普徴収入額07(Decimal.TEN);
-        収入情報.set普徴収入額08(Decimal.TEN);
-        収入情報.set普徴収入額09(Decimal.TEN);
-        収入情報.set普徴収入額10(Decimal.TEN);
-        収入情報.set普徴収入額11(Decimal.TEN);
-        収入情報.set普徴収入額12(Decimal.TEN);
-        収入情報.set普徴収入額13(Decimal.TEN);
-        収入情報.set普徴収入額14(Decimal.TEN);
-        収入情報.set特徴収入額01(Decimal.TEN);
-        収入情報.set特徴収入額02(Decimal.TEN);
-        収入情報.set特徴収入額03(Decimal.TEN);
-        収入情報.set特徴収入額04(Decimal.TEN);
-        収入情報.set特徴収入額05(Decimal.TEN);
-        収入情報.set特徴収入額06(Decimal.TEN);
-        本算定通知書情報.set収入情報(収入情報);
+        本算定通知書情報.set収入情報(通知書共通情報.get収入情報());
         DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(特別徴収開始通知書本算定_帳票分類ID);
         if (entity != null) {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
