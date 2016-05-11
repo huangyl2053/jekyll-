@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
- * 被保険者台帳一覧表Printクラスです。QA987 RSEファイルLayOut不正
+ * 被保険者台帳一覧表Printクラスです。
  *
  * @reamsid_L DBA-0510-070 wangxiaodong
  */
