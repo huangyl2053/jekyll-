@@ -40,7 +40,6 @@ public class JukyushaDaichoPanel {
      * @return ResponseData
      */
     public ResponseData<JukyushaDaichoPanelDiv> onLoad(JukyushaDaichoPanelDiv div) {
-        //TODO 画面設計_DBZ_HanyoListAtenaSelect_【共有子Div】 汎用リスト宛名抽出条件実装しません。
         div.getCcdAtenaJoken().initialize();
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
@@ -82,7 +81,6 @@ public class JukyushaDaichoPanel {
      * @return ResponseData onClick_btnBatchParameterRestore
      */
     public ResponseData<JukyushaDaichoPanelDiv> onClick_btnBatchParameterRestore(JukyushaDaichoPanelDiv div) {
-        //TODO 技術点NO.65
         List<RString> selectKeys = new ArrayList<>();
         BatchParameterMap restoreBatchParameterMap = div.getBtnBatchParameterRestore().getRestoreBatchParameterMap();
         RString 抽出データ区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsudatakubun"));
@@ -100,12 +98,42 @@ public class JukyushaDaichoPanel {
         RString 抽出対象 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsutaisyo"));
         RString 抽出日種類 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsunichisyurai"));
         RString 抽出日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsunichifrom"));
+        if (抽出日From == null) {
+            div.getTxtChushutsuYMD().setFromValue(null);
+        } else {
+            div.getTxtChushutsuYMD().setFromValue(new RDate(抽出日From.toString()));
+        }
         RString 抽出日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsunichito"));
+        if (抽出日To == null) {
+            div.getTxtChushutsuYMD().setToValue(null);
+        } else {
+            div.getTxtChushutsuYMD().setToValue(new RDate(抽出日To.toString()));
+        }
         RString 医療機関コードFrom = restoreBatchParameterMap.getParameterValue(RString.class, new RString("iryokikancodefrom"));
+        if (医療機関コードFrom == null) {
+            div.getTxtIryokikan().setFromValue(null);
+        } else {
+            div.getTxtIryokikan().setFromValue(new Decimal(医療機関コードFrom.toString()));
+        }
         RString 医療機関コードTo = restoreBatchParameterMap.getParameterValue(RString.class, new RString("iryokikancodefto"));
+        if (医療機関コードTo == null) {
+            div.getTxtIryokikan().setToValue(null);
+        } else {
+            div.getTxtIryokikan().setToValue(new Decimal(医療機関コードTo.toString()));
+        }
         RString 調査委託先コードFrom = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyosaitakusakicodefrom"));
+        if (調査委託先コードFrom == null) {
+            div.getTxtChosaItakusaki().setFromValue(null);
+        } else {
+            div.getTxtChosaItakusaki().setFromValue(new Decimal(調査委託先コードFrom.toString()));
+        }
         RString 調査委託先コードTo = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyosaitakusakicodefto"));
-        // TODO 宛名抽出条件DIVに項目設定無し、技術点NO.65
+        if (調査委託先コードTo == null) {
+            div.getTxtChosaItakusaki().setToValue(null);
+        } else {
+            div.getTxtChosaItakusaki().setToValue(new Decimal(調査委託先コードTo.toString()));
+        }
+        // TODO 出力項目ID 改頁出力順ID
 //        RString 宛名抽出条件 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("宛名抽出条件"));
 //        RString 改頁出力順ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("改頁出力順ID"));
 //        RString 出力項目ID = restoreBatchParameterMap.getParameterValue(RString.class, new RString("出力項目ID"));
@@ -133,16 +161,10 @@ public class JukyushaDaichoPanel {
             dataSource.add(keyValue);
             div.getChkCsvHenshuHoho().setSelectedItems(dataSource);
         }
-        div.getDdlChushutsuData().setSelectedValue(抽出データ区分);
-        div.getDdlSoushitsuKubun().setSelectedValue(喪失区分);
-        div.getRadChushutsuTaisho().setSelectedValue(抽出対象);
-        div.getDdlChushutsuYmd().setSelectedValue(抽出日種類);
-        div.getTxtChushutsuYMD().setFromValue(new RDate(抽出日From.toString()));
-        div.getTxtChushutsuYMD().setToValue(new RDate(抽出日To.toString()));
-        div.getTxtIryokikan().setFromValue(new Decimal(医療機関コードFrom.toString()));
-        div.getTxtIryokikan().setToValue(new Decimal(医療機関コードTo.toString()));
-        div.getTxtChosaItakusaki().setFromValue(new Decimal(調査委託先コードFrom.toString()));
-        div.getTxtChosaItakusaki().setToValue(new Decimal(調査委託先コードTo.toString()));
+        div.getDdlChushutsuData().setSelectedKey(抽出データ区分);
+        div.getDdlSoushitsuKubun().setSelectedKey(喪失区分);
+        div.getRadChushutsuTaisho().setSelectedKey(抽出対象);
+        div.getDdlChushutsuYmd().setSelectedKey(抽出日種類);
         div.getCcdAtenaJoken();
         div.getChkCsvHenshuHoho().setSelectedItems(dataSource);
         ResponseData<JukyushaDaichoPanelDiv> response = new ResponseData<>();
