@@ -72,18 +72,11 @@ public class TashichosonJushochiTokureiDaichoFinder {
     private static final RString 連絡先 = new RString("連絡先");
     private static final RString 男 = new RString("男");
     private static final RString 女 = new RString("女");
-    private static final RString CHANGE_LINE = new RString("\n");
     private static final RString HOUR = new RString("時");
     private static final RString MINUTE = new RString("分");
     private static final RString SECOND = new RString("秒");
     private static final RString SPACE = new RString("　");
     private static final int INT10 = 10;
-    private static final int INT40 = 40;
-    private static final int INT39 = 39;
-    private static final int INT80 = 80;
-    private static final int INT120 = 120;
-    private static final int INT79 = 79;
-    private static final int INT119 = 119;
 
     /**
      * 他市町村住所地特例者台帳の帳票出力用データを作成します。
@@ -261,7 +254,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
                         JigyosyaType.住所地特例対象施設.getコード());
                 TaJushochiTokureisyaKanriRelateEntity 事業者名称 = mapper.get事業者名称_住所地特例対象施設(iParameter);
                 if (事業者名称 != null) {
-                    new事業者名称 = 事業者名称.getJigyoshaName();
+                    new事業者名称 = 事業者名称.getJigyoshaMeisho();
                 }
             }
             RString 適用事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0008"),
