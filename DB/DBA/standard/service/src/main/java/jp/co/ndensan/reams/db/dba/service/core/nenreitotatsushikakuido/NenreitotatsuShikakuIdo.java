@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido;
 
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
-import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushikakuido.NenreitotatsuJokenEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushikakuido.NenreitotatsuJokenEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

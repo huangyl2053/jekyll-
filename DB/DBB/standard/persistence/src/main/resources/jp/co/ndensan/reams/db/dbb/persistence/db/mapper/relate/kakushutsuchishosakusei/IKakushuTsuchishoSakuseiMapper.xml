@@ -16,7 +16,7 @@
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <collection property="介護期別RelateEntity" resultMap="resultMap_KibetsuEntity"/>
     </resultMap>
-         <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
+    <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
         <result property="介護期別Entity.choteiId" column="dbT2003Kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
         <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
@@ -96,7 +96,7 @@
         ON 
             "Atesaki"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         LEFT JOIN
-            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL) AS "Nokumi"
+            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
         ON 
             "Nokumi"."CaT0714shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         LEFT JOIN

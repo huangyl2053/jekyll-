@@ -17,7 +17,7 @@
         DbT1009ShikakuShutokuJogaisha."isDeleted" <![CDATA[<>]]> TRUE
         ORDER BY DbT1009ShikakuShutokuJogaisha."rirekiNo"
     </select>
-    <resultMap id="resultMap_ShikakuShutokuJogaishaKanriEntity" type="jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity" autoMapping="true">
+    <resultMap id="resultMap_ShikakuShutokuJogaishaKanriEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity" autoMapping="true">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="rirekiNo" column="rirekiNo" />
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
@@ -35,7 +35,7 @@
         WHERE
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = #{識別コード}
     </select>
-    <resultMap id="resultMap_getIkkatsuHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity">
+    <resultMap id="resultMap_getIkkatsuHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity">
         <result property="meisho"                             column="ShikibetsuTaisho_meisho"                             typeHandler="AtenaMeishoTypeHandler" />
         <result property="seinengappiYMD"                     column="ShikibetsuTaisho_seinengappiYMD"                     typeHandler="FlexibleDateTypeHandler" />
         <result property="seibetsuCode"                       column="ShikibetsuTaisho_seibetsuCode"                       typeHandler="RStringTypeHandler" />

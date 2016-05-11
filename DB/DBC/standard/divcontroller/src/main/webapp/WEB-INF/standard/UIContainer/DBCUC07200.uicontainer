@@ -53,6 +53,16 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0710021",
+     "layoutTitle": "住宅改修費支給申請登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

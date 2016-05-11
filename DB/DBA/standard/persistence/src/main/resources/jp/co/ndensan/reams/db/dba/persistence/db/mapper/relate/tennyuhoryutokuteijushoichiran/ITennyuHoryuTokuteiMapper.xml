@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBA-0480-020 zhangzhiming -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyuhoryutokuteijushoichiran.ITennyuHoryuTokuteiMapper">
+    <resultMap id="resultMap_TennyuHoryuTokuteiEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity" autoMapping="true">
+        <id property="kanriNo" column="DbT7023RendoHoryu_kanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shichosonCode" column="DbT7023RendoHoryu_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="shichosonMeisho" column="DbT7023RendoHoryu_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jushoCode" column="DbT7023RendoHoryu_jushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jusho" column="DbT7023RendoHoryu_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="banchiCode1" column="DbT7023RendoHoryu_banchiCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler" />
+        <result property="banchiCode2" column="DbT7023RendoHoryu_banchiCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler" />
+        <result property="banchiCode3" column="DbT7023RendoHoryu_banchiCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler" />
+        <result property="banchi" column="DbT7023RendoHoryu_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler" />
+        <result property="shisetsuShurui" column="DbT7023RendoHoryu_shisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shisetsuCode" column="DbT7023RendoHoryu_shisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaName" column="DbT7023RendoHoryu_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+    </resultMap>
+    <select id="getTennyuHoryuTokuteiJushoIchiran" resultMap="resultMap_TennyuHoryuTokuteiEntity" fetchSize="500">
+        SELECT
+        DbT7023Rendo."kanriNo" AS "DbT7023RendoHoryu_kanriNo"
+        , DbT7023Rendo."shichosonCode" AS "DbT7023RendoHoryu_shichosonCode"
+        , DbT7051Kosei."shichosonMeisho" AS "DbT7023RendoHoryu_shichosonMeisho"
+        , DbT7023Rendo."jushoCode" AS "DbT7023RendoHoryu_jushoCode"
+        , DbT7023Rendo."jusho" AS "DbT7023RendoHoryu_jusho"
+        , DbT7023Rendo."banchiCode1" AS "DbT7023RendoHoryu_banchiCode1"
+        , DbT7023Rendo."banchiCode2" AS "DbT7023RendoHoryu_banchiCode2"
+        , DbT7023Rendo."banchiCode3" AS "DbT7023RendoHoryu_banchiCode3"
+        , DbT7023Rendo."banchi" AS "DbT7023RendoHoryu_banchi"
+        , DbT7023Rendo."shisetsuShurui" AS "DbT7023RendoHoryu_shisetsuShurui"
+        , DbT7023Rendo."shisetsuCode" AS "DbT7023RendoHoryu_shisetsuCode"
+        , DbT7060Kai."jigyoshaName" AS "DbT7023RendoHoryu_jigyoshaName"
+        FROM
+        rgdb."DbT7023RendoHoryuTokuteiJusho" AS DbT7023Rendo
+        LEFT JOIN
+        (select *,
+        ROW_NUMBER() over (
+        partition by
+        (A."jigyoshaNo")
+        order by
+        A."jigyoshaNo" desc
+        , A."yukoKaishiYMD" desc
+        ) AS rank_number2 from rgdb."DbT7060KaigoJigyosha" as A where "isDeleted" <![CDATA[<>]]> TRUE) AS DbT7060Kai
+        ON DbT7060Kai."jigyoshaNo" = DbT7023Rendo."shisetsuCode"
+        AND rank_number2 = '1'
+        LEFT JOIN
+        (select *,ROW_NUMBER() over (
+        partition by
+        (B."shichosonCode")
+        order by
+        B."shichosonCode" desc
+        , B."kanyuYMD" desc
+        ) AS rank_number1 from rgdb."DbT7051KoseiShichosonMaster" as B) as DbT7051Kosei
+        ON DbT7023Rendo."shichosonCode" = DbT7051Kosei."shichosonCode"
+        AND rank_number1 = '1'
+        WHERE
+        DbT7051Kosei."isDeleted" <![CDATA[<>]]> TRUE
+        AND DbT7023Rendo."isDeleted" <![CDATA[<>]]> TRUE
+        order by
+        DbT7023Rendo."kanriNo"
+    </select>
+    <resultMap id="resultMap_DbT7023Entity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity" autoMapping="true">
+        <id property="kanriNo" column="DbT7023RendoHoryu_kanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shichosonCode" column="DbT7023RendoHoryu_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="shisetsuMeisho" column="DbT7023RendoHoryu_shisetsuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="jushoCode" column="DbT7023RendoHoryu_jushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler" />
+        <result property="jusho" column="DbT7023RendoHoryu_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="banchiCode1" column="DbT7023RendoHoryu_banchiCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler" />
+        <result property="banchiCode2" column="DbT7023RendoHoryu_banchiCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler" />
+        <result property="banchiCode3" column="DbT7023RendoHoryu_banchiCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BanchiCodeTypeHandler" />
+        <result property="banchi" column="DbT7023RendoHoryu_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler" />
+        <result property="shisetsuShurui" column="DbT7023RendoHoryu_shisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shisetsuCode" column="DbT7023RendoHoryu_shisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="get連動保留特定住所" resultMap="resultMap_DbT7023Entity" fetchSize="500">
+        SELECT
+        DbT7023Rendo."kanriNo" AS "DbT7023RendoHoryu_kanriNo",
+        DbT7023Rendo."shichosonCode" AS "DbT7023RendoHoryu_shichosonCode",
+        DbT7023Rendo."shisetsuMeisho" AS "DbT7023RendoHoryu_shisetsuMeisho",
+        DbT7023Rendo."jushoCode" AS "DbT7023RendoHoryu_jushoCode",
+        DbT7023Rendo."jusho" AS "DbT7023RendoHoryu_jusho",
+        DbT7023Rendo."banchiCode1" AS "DbT7023RendoHoryu_banchiCode1",
+        DbT7023Rendo."banchiCode2" AS "DbT7023RendoHoryu_banchiCode2",
+        DbT7023Rendo."banchiCode3" AS "DbT7023RendoHoryu_banchiCode3",
+        DbT7023Rendo."banchi" AS "DbT7023RendoHoryu_banchi",
+        DbT7023Rendo."shisetsuShurui" AS "DbT7023RendoHoryu_shisetsuShurui",
+        DbT7023Rendo."shisetsuCode" AS "DbT7023RendoHoryu_shisetsuCode"
+        FROM
+        rgdb."DbT7023RendoHoryuTokuteiJusho" AS DbT7023Rendo
+        LEFT JOIN
+        (select *,
+        ROW_NUMBER() over (
+        partition by
+        (A."jigyoshaNo")
+        order by
+        A."jigyoshaNo" desc
+        , A."yukoKaishiYMD" desc
+        ) AS rank_number2 from rgdb."DbT7060KaigoJigyosha" as A where "isDeleted" <![CDATA[<>]]> TRUE) AS DbT7060Kai
+        ON DbT7060Kai."jigyoshaNo" = DbT7023Rendo."shisetsuCode"
+        AND rank_number2 = '1'
+        LEFT JOIN
+        (select *,ROW_NUMBER() over (
+        partition by
+        (B."shichosonCode")
+        order by
+        B."shichosonCode" desc
+        , B."kanyuYMD" desc
+        ) AS rank_number1 from rgdb."DbT7051KoseiShichosonMaster" as B) as DbT7051Kosei
+        ON DbT7023Rendo."shichosonCode" = DbT7051Kosei."shichosonCode"
+        AND rank_number1 = '1'
+        WHERE
+        DbT7051Kosei."isDeleted" <![CDATA[<>]]> TRUE
+        AND DbT7023Rendo."isDeleted" <![CDATA[<>]]> TRUE
+        order by
+        DbT7023Rendo."kanriNo"
+    </select>
+</mapper>

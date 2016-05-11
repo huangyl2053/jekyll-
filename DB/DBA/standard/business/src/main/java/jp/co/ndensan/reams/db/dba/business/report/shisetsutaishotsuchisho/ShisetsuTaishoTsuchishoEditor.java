@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho;
 
-import jp.co.ndensan.reams.db.dba.entity.report.source.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoReportSource;
 
 /**
  * 介護保険住所地特例施設退所通知書Editorです。

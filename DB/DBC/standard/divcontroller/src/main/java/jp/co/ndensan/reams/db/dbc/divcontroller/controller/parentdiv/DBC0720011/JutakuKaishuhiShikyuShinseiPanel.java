@@ -259,7 +259,8 @@ public class JutakuKaishuhiShikyuShinseiPanel {
         ViewStateHolder.put(ViewStateKeys.支給申請日_TO, 支給申請日終了);
         ViewStateHolder.put(ViewStateKeys.住宅改修費支給申請一括審査_決定_申請一覧, (Serializable) viewStateList);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, row.getTxtTeikyoYM().getValue());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(
+                row.getTxtTeikyoYM().getValue().getYearMonth().toDateString()));
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.表示モード, 審査);

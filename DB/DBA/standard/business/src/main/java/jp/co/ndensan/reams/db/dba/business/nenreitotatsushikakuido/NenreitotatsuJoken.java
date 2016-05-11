@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.nenreitotatsushikakuido;
 
-import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushikakuido.NenreitotatsuJokenEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushikakuido.NenreitotatsuJokenEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

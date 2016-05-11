@@ -277,8 +277,8 @@
         AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999'
             )
-             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> '000000'
-                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> '999999')
+             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
+                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999')
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )
@@ -287,8 +287,8 @@
         AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
             )
-             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> '000000'
-                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> #{taishoshaUketoriymTo})
+             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
+                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )
@@ -297,8 +297,8 @@
         AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999'
             )
-             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> '999999')
+             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999')
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )
@@ -307,8 +307,8 @@
         AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
             )
-             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> #{taishoshaUketoriymTo})
+             OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+                AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )
@@ -596,8 +596,8 @@
         AND ((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999'
             )
-             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> '000000'
-                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> '999999')
+             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
+                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999')
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )
@@ -606,8 +606,8 @@
         AND ((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
             )
-             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> '000000'
-                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> #{taishoshaUketoriymTo})
+             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
+                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )
@@ -616,8 +616,8 @@
         AND ((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999'
             )
-             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> '999999')
+             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999')
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )
@@ -626,8 +626,8 @@
         AND ((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
             )
-             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_setaiShuyakuNo"<![CDATA[<=]]> #{taishoshaUketoriymTo})
+             OR((DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+                AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
                 AND DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
             )

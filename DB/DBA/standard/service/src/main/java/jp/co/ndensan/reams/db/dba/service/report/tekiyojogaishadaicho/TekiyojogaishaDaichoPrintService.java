@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.TekiyojogaishaDaichoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.TekiyojogaishaDaichoReport;
 import jp.co.ndensan.reams.db.dba.business.report.tekiyojogaishadaicho.TekiyojogaishaDaichoReportJoho;
-import jp.co.ndensan.reams.db.dba.entity.report.source.tekiyojogaishadaicho.TekiyojogaishaDaichoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tekiyojogaishadaicho.TekiyojogaishaDaichoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
