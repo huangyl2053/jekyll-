@@ -19,17 +19,17 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJus
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.otheraddressinformation.IOtherAddressInformationMapper;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ChohyoSeigyoKyotsuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.service.core.relate.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -151,7 +152,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
         他市町村住所地特例者台帳情報.set市町村名称(市町村名称);
         他市町村住所地特例者台帳情報.set状態(他住所地特例者);
         他市町村住所地特例者台帳情報.set電話番号タイトル(連絡先);
-        他市町村住所地特例者台帳情報.set電話番号１(宛名識別対象取得PSM.getRenrakusaki1().getColumnValue());
+        他市町村住所地特例者台帳情報.set電話番号１(ObjectUtil.defaultIfNull(宛名識別対象取得PSM.getRenrakusaki1(), TelNo.EMPTY).getColumnValue());
         他市町村住所地特例者台帳情報.set電話番号２(RString.EMPTY);
         他市町村住所地特例者台帳情報.set生年月日(宛名識別対象取得PSM.getSeinengappiYMD());
         他市町村住所地特例者台帳情報.set性別(new RString("1").equals(宛名識別対象取得PSM.getSeibetsuCode()) ? 男 : 女);
@@ -166,8 +167,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
         他市町村住所地特例者台帳情報.set地区コード3(宛名識別対象取得PSM.getChikuCode3());
         他市町村住所地特例者台帳情報.set地区タイトル3(宛名識別対象取得PSM.getChikuName3());
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名識別対象取得PSM);
-        ChohyoSeigyoKyotsu 帳票共通情報 = ChohyoSeigyoKyotsuManager.createInstance().get帳票制御共通(
-                ChohyoSeigyoKyotsuMapperParameter.createSelectByKeyParam(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100011.getReportId()));
+        ChohyoSeigyoKyotsu 帳票共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100011.getReportId());
         他市町村住所地特例者台帳情報.set住所1(JushoHenshu.createInstance().editJusho(帳票共通情報, 宛名情報));
         他市町村住所地特例者台帳情報.set住所タイトル1(住所);
         他市町村住所地特例者台帳情報.set住所コード(宛名識別対象取得PSM.getZenkokuJushoCode());

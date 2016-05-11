@@ -19,11 +19,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ChohyoSeigyoKyotsuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.service.core.relate.ChohyoSeigyoKyotsuManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -247,8 +246,8 @@ public class TekiyoJogaishaDaichoJohoFinder {
         適用除外者台帳情報Entity.set地区コード3(nullToEmpty(宛名情報PSM.getChikuCode3()));
         適用除外者台帳情報Entity.set地区タイトル3(宛名情報PSM.getChikuName3());
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報PSM);
-        ChohyoSeigyoKyotsu 帳票共通情報 = ChohyoSeigyoKyotsuManager.createInstance().get帳票制御共通(
-                ChohyoSeigyoKyotsuMapperParameter.createSelectByKeyParam(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100010.getReportId()));
+        ChohyoSeigyoKyotsu 帳票共通情報
+                = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100010.getReportId());
         適用除外者台帳情報Entity.set住所1(JushoHenshu.createInstance().editJusho(帳票共通情報, 宛名情報));
         適用除外者台帳情報Entity.set住所タイトル1(住所);
         適用除外者台帳情報Entity.set住所コード(nullToEmpty(宛名情報PSM.getZenkokuJushoCode()));
