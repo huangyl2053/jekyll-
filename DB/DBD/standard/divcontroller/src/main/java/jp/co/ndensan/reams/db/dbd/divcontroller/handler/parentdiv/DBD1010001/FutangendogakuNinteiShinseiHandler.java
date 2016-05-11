@@ -397,9 +397,11 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState());
         GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
         ShinseiJoho shinseiJoho = new ShinseiJoho(
-                ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
+                gemmenGengakuShinsei.get申請届出代行区分() == null
+                ? null : ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
                 gemmenGengakuShinsei.get申請届出者氏名(), gemmenGengakuShinsei.get申請届出者氏名カナ(), gemmenGengakuShinsei.get申請届出者続柄(),
-                gemmenGengakuShinsei.get申請届出代行事業者番号(), JigyoshaKubun.toValue(gemmenGengakuShinsei.get事業者区分()),
+                gemmenGengakuShinsei.get申請届出代行事業者番号(),
+                gemmenGengakuShinsei.get事業者区分() == null ? null : JigyoshaKubun.toValue(gemmenGengakuShinsei.get事業者区分()),
                 gemmenGengakuShinsei.get申請届出者郵便番号(), gemmenGengakuShinsei.get申請届出者住所(), gemmenGengakuShinsei.get申請届出者電話番号());
         div.getCcdGemmenGengakuShinsei().set減免減額申請情報(shinseiJoho, futanGendogakuNintei.get申請年月日());
         div.getRadHaigushaUmu().setSelectedKey(futanGendogakuNintei.is配偶者の有無() ? SELECT_KEY0 : SELECT_KEY1);
