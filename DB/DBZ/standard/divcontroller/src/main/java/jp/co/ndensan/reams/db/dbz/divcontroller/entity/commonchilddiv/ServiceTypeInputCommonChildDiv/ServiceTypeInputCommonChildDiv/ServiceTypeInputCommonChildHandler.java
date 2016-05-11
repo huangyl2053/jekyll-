@@ -87,6 +87,7 @@ public class ServiceTypeInputCommonChildHandler {
 
         if (!focusServiceTypeList.isEmpty()) {
             div.getTxtServiceTypeName().setValue(focusServiceTypeList.get(0).getサービス種類名称());
+            div.setHdnServiceRyakusho(focusServiceTypeList.get(0).getサービス種類略称());
         }
     }
 }
