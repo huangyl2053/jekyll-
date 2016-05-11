@@ -17,8 +17,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -30,12 +32,12 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -85,17 +87,15 @@ public class HanyoListCsvDataCreate {
      * @param entity HanyoListShokanbaraiJokyoEntity
      * @param parameter HanyoListShokanbaraiJokyoProcessParameter
      * @param 連番 Decimal
-     * @param 保険者リスト HokenshaList
      * @return HanyoListShokanbaraiJokyoCSVEntity
      */
     public HanyoListShokanbaraiJokyoCSVEntity createCsvData(HanyoListShokanbaraiJokyoEntity entity,
-            HanyoListShokanbaraiJokyoProcessParameter parameter, Decimal 連番,
-            HokenshaList 保険者リスト) {
+            HanyoListShokanbaraiJokyoProcessParameter parameter, Decimal 連番) {
         HanyoListShokanbaraiJokyoCSVEntity csvEntity = new HanyoListShokanbaraiJokyoCSVEntity();
         csvEntity.set連番(numToRString(連番));
         set宛名(entity, csvEntity, parameter);
         set宛先(entity, csvEntity);
-        set被保険者台帳管理(entity, csvEntity, 保険者リスト, parameter);
+        set被保険者台帳管理(entity, csvEntity, parameter);
         set介護保険(entity, csvEntity, parameter);
         set支給申請(entity, csvEntity, parameter);
         set判定結果情報(entity, csvEntity, parameter);
@@ -194,7 +194,9 @@ public class HanyoListCsvDataCreate {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(), 宛名.get消除異動年月日());
             csvEntity.set年齢(ageCalculator.get年齢());
-            csvEntity.set性別(entity.get宛名Entity().getSeibetsuCode());
+            if (宛名.get性別() != null) {
+                csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
+            }
             TsuzukigaraCode 続柄コード = entity.get宛名Entity().getTsuzukigaraCode();
             csvEntity.set続柄コード(続柄コード != null
                     ? 続柄コード.getColumnValue() : RString.EMPTY);
@@ -239,34 +241,44 @@ public class HanyoListCsvDataCreate {
     private void set宛名本人(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get宛名Entity() != null) {
+            IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             GyoseikuCode 行政区コード = entity.get宛名Entity().getGyoseikuCode();
-            ChikuCode 地区1 = entity.get宛名Entity().getChikuCode1();
-            ChikuCode 地区2 = entity.get宛名Entity().getChikuCode2();
-            ChikuCode 地区3 = entity.get宛名Entity().getChikuCode3();
+            RString 地区1 = RString.EMPTY;
+            RString 地区2 = RString.EMPTY;
+            RString 地区3 = RString.EMPTY;
+            if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku1() != null) {
+                地区1 = 宛名.get行政区画().getChiku1().get名称();
+            }
+            if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku2() != null) {
+                地区2 = 宛名.get行政区画().getChiku1().get名称();
+            }
+            if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku3() != null) {
+                地区3 = 宛名.get行政区画().getChiku1().get名称();
+            }
             TelNo 連絡先1 = entity.get宛名Entity().getRenrakusaki1();
             TelNo 連絡先2 = entity.get宛名Entity().getRenrakusaki2();
             YubinNo 前住所郵便番号 = entity.get宛名Entity().getTennyumaeYubinNo();
             csvEntity.set行政区コード(行政区コード != null
                     ? 行政区コード.getColumnValue() : RString.EMPTY);
             csvEntity.set行政区名(entity.get宛名Entity().getGyoseikuName());
-            csvEntity.set地区１(地区1 != null
-                    ? 地区1.getColumnValue() : RString.EMPTY);
-            csvEntity.set地区２(地区2 != null
-                    ? 地区2.getColumnValue() : RString.EMPTY);
-            csvEntity.set地区３(地区3 != null
-                    ? 地区3.getColumnValue() : RString.EMPTY);
+            csvEntity.set地区１(地区1);
+            csvEntity.set地区２(地区2);
+            csvEntity.set地区３(地区3);
             csvEntity.set連絡先１(連絡先1 != null
                     ? 連絡先1.getColumnValue() : RString.EMPTY);
             csvEntity.set連絡先２(連絡先2 != null
                     ? 連絡先2.getColumnValue() : RString.EMPTY);
             csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD(), parameter));
-            csvEntity.set登録事由(entity.get宛名Entity().getTorokuJiyuCode());
+            IIdoJiyu 登録事由 = 宛名.get登録事由();
+            IIdoJiyu 住定事由 = 宛名.get住定事由();
+            IIdoJiyu 消除事由 = 宛名.get消除事由();
+            csvEntity.set登録事由(登録事由 != null ? 登録事由.get異動事由略称() : RString.EMPTY);
             csvEntity.set登録届出日(dataToRString(entity.get宛名Entity().getTorokuTodokedeYMD(), parameter));
             csvEntity.set住定異動日(dataToRString(entity.get宛名Entity().getJuteiIdoYMD(), parameter));
-            csvEntity.set住定事由(entity.get宛名Entity().getJuteiJiyuCode());
+            csvEntity.set住定事由(住定事由 != null ? 住定事由.get異動事由略称() : RString.EMPTY);
             csvEntity.set住定届出日(dataToRString(entity.get宛名Entity().getJuteiTodokedeYMD(), parameter));
             csvEntity.set消除異動日(dataToRString(entity.get宛名Entity().getShojoIdoYMD(), parameter));
-            csvEntity.set消除事由(entity.get宛名Entity().getShojoJiyuCode());
+            csvEntity.set消除事由(登録事由 != null ? 消除事由.get異動事由略称() : RString.EMPTY);
             csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD(), parameter));
             //TODO
             csvEntity.set転出入理由(RString.EMPTY);
@@ -441,7 +453,7 @@ public class HanyoListCsvDataCreate {
     }
 
     private void set被保険者台帳管理(HanyoListShokanbaraiJokyoEntity entity, HanyoListShokanbaraiJokyoCSVEntity csvEntity,
-            HokenshaList 保険者リスト, HanyoListShokanbaraiJokyoProcessParameter parameter) {
+            HanyoListShokanbaraiJokyoProcessParameter parameter) {
 
         csvEntity.set市町村コード(entity.get市町村コード() != null
                 ? entity.get市町村コード().getColumnValue() : RString.EMPTY);
@@ -454,7 +466,7 @@ public class HanyoListCsvDataCreate {
         csvEntity.set被保険者番号(entity.get被保険者番号() != null
                 ? entity.get被保険者番号().getColumnValue() : RString.EMPTY);
         RString 資格取得事由 = RString.EMPTY;
-        if (entity.get資格取得事由コード().isNullOrEmpty()) {
+        if (entity.get資格取得事由コード() != null && !entity.get資格取得事由コード().isEmpty()) {
             資格取得事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, 資格取得事由コード種別,
                     new Code(entity.get資格取得事由コード()), FlexibleDate.getNowDate());
         }
@@ -462,7 +474,7 @@ public class HanyoListCsvDataCreate {
         csvEntity.set資格取得日(dataToRString(entity.get資格取得年月日(), parameter));
         csvEntity.set資格取得届出日(dataToRString(entity.get資格取得届出年月日(), parameter));
         RString 資格喪失事由 = RString.EMPTY;
-        if (entity.get資格喪失事由コード().isNullOrEmpty()) {
+        if (entity.get資格喪失事由コード() != null && !entity.get資格喪失事由コード().isEmpty()) {
             資格喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, 資格喪失事由コード種別,
                     new Code(entity.get資格喪失事由コード()), FlexibleDate.getNowDate());
         }
@@ -474,7 +486,7 @@ public class HanyoListCsvDataCreate {
             csvEntity.set資格区分(被保険者区分コード != null ? 被保険者区分コード.get名称() : RString.EMPTY);
         }
         csvEntity.set住所地特例状態(entity.is住所地特例フラグ() ? 住特 : RString.EMPTY);
-        csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity, 保険者リスト));
+        csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity));
         csvEntity.set受給申請事由(codeToRString(entity.get受給申請事由()));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日(), parameter));
         csvEntity.set受給要介護度(codeToRString(entity.get要介護認定状態区分コード()));
@@ -520,8 +532,9 @@ public class HanyoListCsvDataCreate {
 
     }
 
-    private RString get証記載保険者番号(HanyoListShokanbaraiJokyoEntity entity, HokenshaList 保険者リスト) {
-        HokenshaSummary 保険者 = HokenshaSummary.EMPTY;
+    private RString get証記載保険者番号(HanyoListShokanbaraiJokyoEntity entity) {
+        HokenshaList 保険者リスト = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
+        HokenshaSummary 保険者;
         if (entity.is広域内住所地特例フラグ()) {
             if (entity.get広住特措置元市町村コード() == null) {
                 return RString.EMPTY;
@@ -534,7 +547,7 @@ public class HanyoListCsvDataCreate {
             }
             保険者 = 保険者リスト.get(entity.get市町村コード());
         }
-        ShoKisaiHokenshaNo 証記載保険者番号 = 保険者 != null ? 保険者.get証記載保険者番号() : ShoKisaiHokenshaNo.EMPTY;
+        ShoKisaiHokenshaNo 証記載保険者番号 = 保険者.get証記載保険者番号();
         return 証記載保険者番号 != null ? 証記載保険者番号.getColumnValue() : RString.EMPTY;
     }
 
