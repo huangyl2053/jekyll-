@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -30,9 +30,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * @reamsid_L DBB-0760-010 zhangguopeng
  */
-public class TsukibetsuSuiihyoSakuseiHandler {
+public class TsukibetsuSuiihyoSakuseiParameterHandler {
 
-    private final TsukibetsuSuiihyoSakuseiDiv div;
+    private final TsukibetsuSuiihyoSakuseiParameterDiv div;
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
 
@@ -41,7 +41,7 @@ public class TsukibetsuSuiihyoSakuseiHandler {
      *
      * @param div 月別推移表のクラスファイル
      */
-    public TsukibetsuSuiihyoSakuseiHandler(TsukibetsuSuiihyoSakuseiDiv div) {
+    public TsukibetsuSuiihyoSakuseiParameterHandler(TsukibetsuSuiihyoSakuseiParameterDiv div) {
         this.div = div;
     }
 
@@ -74,31 +74,47 @@ public class TsukibetsuSuiihyoSakuseiHandler {
      */
     public void onClick_btnKogakuParamRestore() {
         BatchParameterMap restoreBatchParameterMap = div.getBtnParameterRestore().getRestoreBatchParameterMap();
-        RString 調定年度 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("ddlChoteiNendo"));
-        div.getDdlChoteiNendo().setSelectedKey(調定年度);
-        RDate 調定基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtChoteiKijunYMD"));
-        div.getTxtChoteiKijunYMD().setValue(調定基準日);
-        RString 各月資格基準日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("ddShikakuKijunD"));
-        div.getDdShikakuKijunD().setSelectedKey(各月資格基準日);
-        boolean is年齢 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("radNenrei"));
+        FlexibleYear 調定年度 = restoreBatchParameterMap.getParameterValue(FlexibleYear.class, new RString("choteiNendo"));
+        if (調定年度 != null && !調定年度.isEmpty()) {
+            div.getDdlChoteiNendo().setSelectedValue(new RString(調定年度.toString()));
+        }
+        RString 調定基準日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("choteiKijunNichiji"));
+        if (!RString.isNullOrEmpty(調定基準日)) {
+            div.getTxtChoteiKijunYMD().setValue(new RDate(調定基準日.toString()));
+        }
+        RString 各月資格基準日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kakutukiShikakuKijunNichi"));
+        if (!RString.isNullOrEmpty(各月資格基準日)) {
+            div.getDdShikakuKijunD().setSelectedKey(各月資格基準日);
+        }
+        boolean is年齢 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("ageFlg"));
         if (is年齢) {
             div.getRadNenrei().setSelectedKey(年齢);
         }
-        boolean is生年月日 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("radUmareYMD"));
+        boolean is生年月日 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("seinengappiYMD_Flg"));
         if (is生年月日) {
             div.getRadUmareYMD().setSelectedKey(生年月日);
         }
-        Decimal 年齢開始 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("txtNenreiSt"));
-        div.getTxtNenreiSt().setValue(年齢開始);
-        Decimal 年齢終了 = restoreBatchParameterMap.getParameterValue(Decimal.class, new RString("txtNenreiEd"));
-        div.getTxtNenreiEd().setValue(年齢終了);
-        RDate 年齢基準日 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtNenreiKijunYMD"));
-        div.getTxtNenreiKijunYMD().setValue(年齢基準日);
-        RDate 生年月日開始 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtUmareSt"));
-        div.getTxtUmareSt().setValue(生年月日開始);
-        RDate 生年月日終了 = restoreBatchParameterMap.getParameterValue(RDate.class, new RString("txtUmareEd"));
-        div.getTxtUmareEd().setValue(生年月日終了);
-        // TODO 介護地区・市町村選択DIVに項目設定無し、技術点NO.65
+        RString 年齢開始 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("ageStart"));
+        if (!RString.isNullOrEmpty(年齢開始)) {
+            div.getTxtNenreiSt().setValue(new Decimal(年齢開始.toString()));
+        }
+        RString 年齢終了 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("ageEnd"));
+        if (!RString.isNullOrEmpty(年齢終了)) {
+            div.getTxtNenreiEd().setValue(new Decimal(年齢終了.toString()));
+        }
+        FlexibleDate 年齢基準日 = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("ageKijunNi"));
+        if (年齢基準日 != null && !年齢基準日.isEmpty()) {
+            div.getTxtNenreiKijunYMD().setValue(new RDate(年齢基準日.toString()));
+        }
+        RString 生年月日開始 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("seinengappiYMDStart"));
+        if (!RString.isNullOrEmpty(生年月日開始)) {
+            div.getTxtUmareSt().setValue(new RDate(生年月日開始.toString()));
+        }
+        RString 生年月日終了 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("seinengappiYMDEnd"));
+        if (!RString.isNullOrEmpty(生年月日終了)) {
+            div.getTxtUmareEd().setValue(new RDate(生年月日終了.toString()));
+        }
+        // TODO 介護地区・市町村選択DIVを実装無し、この項目設定無し、
     }
 
     /**
