@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteish
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiKihon;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiKihon;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihonDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiKihonFinder;

@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0020002
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
-import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
-import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
-import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvReport;
+import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvItem;
+import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvItemList;
+import jp.co.ndensan.reams.db.dbb.business.report.fukaerror.FukaErrorListCsvReport;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.DBB0020002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorReportViewDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.FukaErrorReportViewHandler;

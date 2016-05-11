@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashochohyo.Hihokenshash
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShienJigyoshaBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShikakushashoHakkoBusiness;
-import jp.co.ndensan.reams.db.dbu.business.jukyushikakushomeisho.JukyuShikakuShomeishoData;
+import jp.co.ndensan.reams.db.dbu.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoData;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.HihokenshashoChohyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.JushochitokureiTekiParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.NyutaiShoParameter;

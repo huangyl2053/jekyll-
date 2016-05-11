@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmenshokai.GemmenShokai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.common.NursingCareInformationBusiness;
-import jp.co.ndensan.reams.db.dbd.business.common.VariousReductionInformation;
+import jp.co.ndensan.reams.db.dbd.business.core.common.NursingCareInformationBusiness;
+import jp.co.ndensan.reams.db.dbd.business.core.common.VariousReductionInformation;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.homonkaigogemmen.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
-import jp.co.ndensan.reams.db.dbd.service.common.GemmenJokyoFinder;
+import jp.co.ndensan.reams.db.dbd.service.core.common.GemmenJokyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
