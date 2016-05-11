@@ -3,7 +3,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.shokofukaishujoho.IShoKofuKaishuJohoMapper">
 
     <!-- 証交付回収の更新処理 -->
-    <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity" >
+    <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dba.entity.db.relate.shokofukaishujoho.ShoKofuKaishuJohoEntity" >
         UPDATE rgdb."DbT7037ShoKofuKaishu"
         SET
         "kofuYMD" = #{kofuYMD},
@@ -19,7 +19,7 @@
         and "hakkoShoriTimestamp" = #{hakkoShoriTimestamp}
     </update>
     <!-- 証交付回収の削除処理 -->
-    <update id="delShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity">
+    <update id="delShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dba.entity.db.relate.shokofukaishujoho.ShoKofuKaishuJohoEntity">
         UPDATE rgdb."DbT7037ShoKofuKaishu"
         SET
         "logicalDeletedFlag" = true

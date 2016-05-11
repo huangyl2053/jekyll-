@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.shokofukaishujoho;
 
-import jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.shokofukaishujoho.ShoKofuKaishuJohoEntity;
 
 /**
  * 証交付回収情報のMapperクラスです。

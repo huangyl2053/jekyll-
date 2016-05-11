@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 他住特施設連絡票データEntity
  *
- * @reamsid_L DBA-0380-050 huangh
+ * 他住特施設退所通知書データEntity
+ *
+ * @reamsid_L DBA-0380-010 huangh
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TatokuKanrenChohyoRenrakuhyoEntity {
+public class TatokuKanrenChohyoTaishoTsuchishoEntity {
 
     private RString 保険者郵便番号;
     private RString 文書番号;
@@ -27,7 +29,6 @@ public class TatokuKanrenChohyoRenrakuhyoEntity {
     private RString 担当部署名敬称;
     private RString バーコード情報;
     private RString 見出し;
-
     private RString 被保険者番号１;
     private RString 被保険者番号２;
     private RString 被保険者番号３;
@@ -44,17 +45,16 @@ public class TatokuKanrenChohyoRenrakuhyoEntity {
     private RString 性別;
     private RString 郵便番号;
     private RString 住所;
-    private RString 転入年月日;
-    private RString 入所年月日;
+    private RString 退所年月日;
+    private RString 退所事由;
     private RString 施設名称;
     private RString 施設電話番号;
     private RString 施設FAX番号;
     private RString 施設郵便番号;
     private RString 施設住所;
     private RString 電子公印;
-    private RString 証明発行日;
+    private FlexibleDate 証明発行日;
     private RString 首長名;
     private RString 市町村名;
     private RString 公印省略;
-
 }

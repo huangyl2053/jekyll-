@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 他住特施設変更通知書データEntity
  *
- * 他住特施設退所通知書データEntity
- *
- * @reamsid_L DBA-0380-010 huangh
+ * @reamsid_L DBA-0380-040 huangh
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TatokuKanrenChohyoTaishoTsuchishoEntity {
+public class TatokuKanrenChohyoHenkoTsuchishoEntity {
 
     private RString 保険者郵便番号;
     private RString 文書番号;
@@ -43,18 +44,24 @@ public class TatokuKanrenChohyoTaishoTsuchishoEntity {
     private RString 対象者名;
     private RString 誕生日;
     private RString 性別;
-    private RString 郵便番号;
-    private RString 住所;
-    private RString 退所年月日;
-    private RString 退所事由;
-    private RString 施設名称;
-    private RString 施設電話番号;
-    private RString 施設FAX番号;
-    private RString 施設郵便番号;
-    private RString 施設住所;
+    private RString 変更年月日;
+
+    private AtenaMeisho 変更前施設名称;
+    private TelNo 変更前施設電話番号;
+    private TelNo 変更前施設FAX番号;
+    private YubinNo 変更前施設郵便番号;
+    private RString 変更前施設住所;
+
+    private AtenaMeisho 変更後施設名称;
+    private TelNo 変更後施設電話番号;
+    private TelNo 変更後施設FAX番号;
+    private YubinNo 変更後施設郵便番号;
+    private RString 変更後施設住所;
+
     private RString 電子公印;
-    private FlexibleDate 証明発行日;
+    private RString 証明発行日;
     private RString 首長名;
     private RString 市町村名;
     private RString 公印省略;
+
 }

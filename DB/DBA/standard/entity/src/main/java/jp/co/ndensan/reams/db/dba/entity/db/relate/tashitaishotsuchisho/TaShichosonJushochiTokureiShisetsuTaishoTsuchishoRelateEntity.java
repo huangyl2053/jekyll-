@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 他住特施設退所通知書 RelateEntityクラスです。
+ *
+ * @reamsid_L DBA-0380-010 huangh
  */
 @lombok.Getter
 @lombok.Setter
