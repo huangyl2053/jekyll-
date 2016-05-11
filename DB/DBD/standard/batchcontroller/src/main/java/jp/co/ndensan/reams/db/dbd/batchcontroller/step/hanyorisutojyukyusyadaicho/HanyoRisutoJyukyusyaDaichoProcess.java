@@ -510,9 +510,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             eucCsvEntity.set方書(kojin.get住所().get方書().value());
             eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
             eucCsvEntity.set行政区名(kojin.get行政区画().getGyoseiku().get名称());
-            eucCsvEntity.set地区１(kojin.get行政区画().getChiku1().getコード().value());
-            eucCsvEntity.set地区２(kojin.get行政区画().getChiku2().getコード().value());
-            eucCsvEntity.set地区３(kojin.get行政区画().getChiku3().getコード().value());
+            eucCsvEntity.set地区１(kojin.get行政区画().getChiku1().get名称());
+            eucCsvEntity.set地区２(kojin.get行政区画().getChiku2().get名称());
+            eucCsvEntity.set地区３(kojin.get行政区画().getChiku3().get名称());
             eucCsvEntity.set連絡先１(kojin.get連絡先１().value());
             eucCsvEntity.set連絡先２(kojin.get連絡先２().value());
             eucCsvEntity.set登録異動日(set年月日(kojin.get登録異動年月日()));
@@ -556,10 +556,10 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             eucCsvEntity.set送付先行政区名(atesaki.get宛先行政区().get名称());
         }
         eucCsvEntity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
-        eucCsvEntity.set資格取得事由(set資格取得事由(entity.get被保険者台帳管理_資格取得事由コード()));
+        eucCsvEntity.set資格取得事由(RString.EMPTY);
         eucCsvEntity.set資格取得日(set年月日(entity.get被保険者台帳管理_資格取得年月日()));
         eucCsvEntity.set資格取得届出日(set年月日(entity.get被保険者台帳管理_資格取得届出年月日()));
-        eucCsvEntity.set喪失事由(set喪失事由(entity.get被保険者台帳管理_資格喪失事由コード()));
+        eucCsvEntity.set喪失事由(RString.EMPTY);
         eucCsvEntity.set資格喪失日(set年月日(entity.get被保険者台帳管理_資格喪失年月日()));
         eucCsvEntity.set資格喪失届日(set年月日(entity.get被保険者台帳管理_資格喪失届出年月日()));
         eucCsvEntity.set資格区分(set資格区分(entity.get被保険者台帳管理_被保険者区分コード()));
@@ -760,10 +760,10 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set届出区分(set届出区分(entity.get居宅届出_届出区分()));
         eucCsvEntity.set居宅計画作成区分(set居宅計画作成区分(entity.get事業者作成_作成区分コード()));
         eucCsvEntity.set計画事業者番号(entity.get事業者作成_計画事業者番号());
-        eucCsvEntity.set計画事業者名(entity.get計画事業者_事業者名称());
-        eucCsvEntity.set計画事業者カナ(entity.get計画事業者_事業者名称カナ());
-        eucCsvEntity.set計画管理者名(entity.get計画事業者代表者_代表者名());
-        eucCsvEntity.set計画管理者カナ(entity.get計画事業者代表者_代表者名カナ());
+        eucCsvEntity.set計画事業者名(RString.EMPTY);
+        eucCsvEntity.set計画事業者カナ(RString.EMPTY);
+        eucCsvEntity.set計画管理者名(RString.EMPTY);
+        eucCsvEntity.set計画管理者カナ(RString.EMPTY);
         eucCsvEntity.set計画適用開始日(set年月日(entity.get事業者作成_適用開始年月日()));
         eucCsvEntity.set計画適用終了日(set年月日(entity.get事業者作成_適用終了年月日()));
         eucCsvEntity.set計画届出日(set年月日(entity.get居宅届出_届出年月日()));
@@ -796,22 +796,6 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             return RString.EMPTY;
         }
         return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
-    }
-
-    private RString set資格取得事由(RString 事由コード) {
-        UzT0007CodeEntity 資格取得事由 = CodeMaster.getCode(new CodeShubetsu("0007"), new Code(事由コード));
-        if (資格取得事由 == null) {
-            return RString.EMPTY;
-        }
-        return 資格取得事由.getコード略称();
-    }
-
-    private RString set喪失事由(RString 事由コード) {
-        UzT0007CodeEntity 喪失事由 = CodeMaster.getCode(new CodeShubetsu("0010"), new Code(事由コード));
-        if (喪失事由 == null) {
-            return RString.EMPTY;
-        }
-        return 喪失事由.getコード略称();
     }
 
     private RString set医療保険種別(RString 医療保険種別コード) {
