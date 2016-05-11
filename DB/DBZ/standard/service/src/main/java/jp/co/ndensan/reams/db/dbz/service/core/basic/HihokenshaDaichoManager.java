@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -54,9 +53,9 @@ public class HihokenshaDaichoManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link SetaiinFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoManager}のインスタンス
      */
     public static HihokenshaDaichoManager createInstance() {
         return InstanceProvider.create(HihokenshaDaichoManager.class);
@@ -234,7 +233,6 @@ public class HihokenshaDaichoManager {
      * @return 最新の資格の情報を取得
      */
     public List<HihokenshaDaicho> find資格の情報(HihokenshaDaichoSearchCondition param) {
-        requireNonNull(param, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         List<HihokenshaDaicho> businessList = new ArrayList<>();
         List<DbT1001HihokenshaDaichoEntity> entityList = mapperProvider.create(
                 IDbT1001HihokenshaDaichoMapper.class).get資格の情報(param);

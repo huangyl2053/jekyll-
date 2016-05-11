@@ -87,7 +87,7 @@ public class SeigoseiCheck extends
      *
      * @return 対象外フラグ
      */
-    public boolean get対象外フラグ() {
+    public boolean is対象外フラグ() {
         return entity.getTaishogaiFlag();
     }
 
@@ -249,7 +249,7 @@ public class SeigoseiCheck extends
      *
      * @return 消除通知フラグ
      */
-    public boolean get消除通知フラグ() {
+    public boolean is消除通知フラグ() {
         return entity.getShojoTsuchiFlag();
     }
 
