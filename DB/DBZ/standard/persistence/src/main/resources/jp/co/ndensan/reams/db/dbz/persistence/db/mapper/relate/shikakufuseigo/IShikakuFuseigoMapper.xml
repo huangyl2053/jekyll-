@@ -3,14 +3,14 @@
 <!-- 概要： 資格不整合一覧情報のマッピング用XMLです。 -->
 <!-- @reamsid_L DBB-0630-020 chengsanyuan -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shikakufuseigo.IShikakuFuseigoMapper">
-    <resultMap id="shikakuResult" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shikakufuseigo.ShikakuFuseigoEntity">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakufuseigo.IShikakuFuseigoMapper">
+    <resultMap id="shikakuResult" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakufuseigo.ShikakuFuseigoEntity">
         <association property="dbt1014Entity" resultMap="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity"/>
         <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>    
     <select id="get被保険者資格不整合一覧" 
                 resultType="shikakuResult"
-                parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shikakufuseigo.ShikakuFuseigoMybatisParameter" 
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakufuseigo.ShikakuFuseigoMybatisParameter" 
                 fetchSize="500">
         SELECT
             DbT1014SeigoseiCheck.*,
@@ -32,7 +32,7 @@
     </resultMap>    
     <select id="get整合性チェック情報" 
                 resultType="shikakufuseigo"
-                parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shikakufuseigo.ShikakuFuseigoMybatisParameter" 
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakufuseigo.ShikakuFuseigoMybatisParameter" 
                 fetchSize="500">
         SELECT
             DbT1014SeigoseiCheck.*,

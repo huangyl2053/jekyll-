@@ -104,7 +104,7 @@
 	FROM
 	rgdb."DbT1001HihokenshaDaicho"
 	</select>
-    <select id="get資格の情報" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.hihokenshadaicho.HihokenshaDaichoSearchCondition" fetchSize="500">
+    <select id="get資格の情報" resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition" fetchSize="500">
         SELECT
           A.* 
         FROM
