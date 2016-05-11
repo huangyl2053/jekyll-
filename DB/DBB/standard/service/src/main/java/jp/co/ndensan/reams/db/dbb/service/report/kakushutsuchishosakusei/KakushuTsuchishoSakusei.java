@@ -139,6 +139,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
@@ -225,6 +226,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     private static final RString 通知書タイプ_シーラ = new RString("101");
     private static final RString キー_被保険者番号 = new RString("hihokenshaNo");
     private static final RString キー_賦課年度 = new RString("fukaNendo");
+    private static final RString LEFT_FORMAT = new RString("'{");
+    private static final RString RIGHT_FORMAT = new RString("}'");
+    private static final RString MIDDLE_FORMAT = new RString(",");
     private final MapperProvider mapperProvider;
     private final DbT2004GemmenDac 介護賦課減免Dac;
     private final DbT2006ChoshuYuyoDac 介護賦課徴収猶予Dac;
@@ -845,7 +849,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
         本算定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
-        本算定通知書情報.set発行日(new RDate(parameter.get特徴開始通知書_発行日().toString()));
+        本算定通知書情報.set発行日(get発行日(parameter.get特徴開始通知書_発行日()));
         本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
         本算定通知書情報.set帳票ID(帳票ID);
         本算定通知書情報.set処理区分(ShoriKubun.リアル);
@@ -863,7 +867,30 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
 
         //TODO 収入情報
-        ShunyuJoho 収入情報 = null;
+        ShunyuJoho 収入情報 = new ShunyuJoho();
+        収入情報.set調定年度(通知書共通情報.get賦課の情報_更正後().get賦課情報().get調定年度());
+        収入情報.set賦課年度(通知書共通情報.get賦課の情報_更正後().get賦課情報().get賦課年度());
+        収入情報.set通知書番号(通知書共通情報.get賦課の情報_更正後().get賦課情報().get通知書番号());
+        収入情報.set普徴収入額01(Decimal.TEN);
+        収入情報.set普徴収入額02(Decimal.TEN);
+        収入情報.set普徴収入額03(Decimal.TEN);
+        収入情報.set普徴収入額04(Decimal.TEN);
+        収入情報.set普徴収入額05(Decimal.TEN);
+        収入情報.set普徴収入額06(Decimal.TEN);
+        収入情報.set普徴収入額07(Decimal.TEN);
+        収入情報.set普徴収入額08(Decimal.TEN);
+        収入情報.set普徴収入額09(Decimal.TEN);
+        収入情報.set普徴収入額10(Decimal.TEN);
+        収入情報.set普徴収入額11(Decimal.TEN);
+        収入情報.set普徴収入額12(Decimal.TEN);
+        収入情報.set普徴収入額13(Decimal.TEN);
+        収入情報.set普徴収入額14(Decimal.TEN);
+        収入情報.set特徴収入額01(Decimal.TEN);
+        収入情報.set特徴収入額02(Decimal.TEN);
+        収入情報.set特徴収入額03(Decimal.TEN);
+        収入情報.set特徴収入額04(Decimal.TEN);
+        収入情報.set特徴収入額05(Decimal.TEN);
+        収入情報.set特徴収入額06(Decimal.TEN);
         本算定通知書情報.set収入情報(収入情報);
         DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(特別徴収開始通知書本算定_帳票分類ID);
         if (entity != null) {
@@ -1523,17 +1550,30 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         IKozaSearchKey kozaSearchKey = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        RStringBuilder rStringBuilder = new RStringBuilder();
+        rStringBuilder.append(LEFT_FORMAT);
+        if (list != null && !list.isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                rStringBuilder.append(list.get(i) == null ? RString.EMPTY : list.get(i).getColumnValue());
+                if (i != list.size() - 1) {
+                    rStringBuilder.append(MIDDLE_FORMAT);
+                }
+            }
+        }
+        rStringBuilder.append(RIGHT_FORMAT);
+        RString 科目コード = rStringBuilder.toRString();
+        RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
         KakushuTsuchishoEntityParameter 更正後
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正後.get調定年度(),
                         賦課の情報_更正後.get賦課年度(), 賦課の情報_更正後.get通知書番号(),
                         賦課の情報_更正後.get履歴番号(), 賦課の情報_更正後.get調定日時(),
-                        賦課の情報_更正後.get調定日時().getDate().toDateString(), kozaSearchKey, list);
+                        賦課の情報_更正後.get調定日時().getDate().toDateString(), 処理日, kozaSearchKey, list, 科目コード);
         KakushuTsuchishoEntity 更正後entity = mapper.get更正前後賦課の情報(更正後);
         KakushuTsuchishoEntityParameter 更正前
                 = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正前.get調定年度(),
                         賦課の情報_更正前.get賦課年度(), 賦課の情報_更正前.get通知書番号(),
                         賦課の情報_更正前.get履歴番号(), 賦課の情報_更正前.get調定日時(),
-                        賦課の情報_更正前.get調定日時().getDate().toDateString(), kozaSearchKey, list);
+                        賦課の情報_更正前.get調定日時().getDate().toDateString(), 処理日, kozaSearchKey, list, 科目コード);
         KakushuTsuchishoEntity 更正前entity = mapper.get更正前後賦課の情報(更正前);
         FukaAtena 賦課の情報更正後 = get賦課の情報_宛名(更正後entity);
         FukaAtena 賦課の情報更正前 = get賦課の情報_宛名(更正前entity);
@@ -1608,7 +1648,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             通知書共通情報.set宛名情報(宛名);
             IAtesaki 宛先 = AtesakiFactory.createInstance(宛名納組宛先口座entity.get宛先());
             通知書共通情報.set宛先情報(宛先);
-            通知書共通情報.set口座情報(new Koza(宛名納組宛先口座entity.get口座()));
+            if (宛名納組宛先口座entity.get口座() != null) {
+                通知書共通情報.set口座情報(new Koza(宛名納組宛先口座entity.get口座()));
+            }
         }
         通知書共通情報.setマスク口座情報(マスク済み口座);
         通知書共通情報.set徴収方法情報_更正前(new ChoshuHoho(更正前entity.get介護徴収方法()));
@@ -1919,10 +1961,23 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     }
 
     /**
+     * 発行日を取得メソッドです。
+     *
+     * @param 発行日 FlexibleDate
+     * @return 発行日 RDate
+     */
+    private RDate get発行日(FlexibleDate 発行日) {
+        if (発行日 == null || 発行日.isEmpty()) {
+            return null;
+        }
+        return new RDate(発行日.toString());
+    }
+
+    /**
      * 空値判断メソッドです。
      *
-     * @param 項目 項目
-     * @return RString
+     * @param 項目 RString
+     * @return 項目 RString
      */
     private RString nullTOEmpty(RString 項目) {
         if (項目 == null || 項目.isEmpty()) {

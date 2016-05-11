@@ -31,6 +31,8 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
     private final int 履歴番号;
     private final YMDHMS 調定日時;
     private final RString 調定日;
+    private final RString 処理日;
+    private final RString 科目コード;
 
     /**
      * コンストラクタです。
@@ -40,9 +42,11 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
      * @param 通知書番号 通知書番号
      * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
-     * @param 調定日 調定日
+     * @param 調定日 RString
+     * @param 処理日 RString
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
+     * @param 科目コード RString
      */
     public KakushuTsuchishoEntityParameter(
             FlexibleYear 調定年度,
@@ -51,15 +55,19 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
             int 履歴番号,
             YMDHMS 調定日時,
             RString 調定日,
+            RString 処理日,
             IKozaSearchKey searchkey,
-            List<KamokuCode> list) {
+            List<KamokuCode> list,
+            RString 科目コード) {
         super(searchkey, list);
+        this.科目コード = 科目コード;
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
         this.履歴番号 = 履歴番号;
         this.調定日時 = 調定日時;
         this.調定日 = 調定日;
+        this.処理日 = 処理日;
     }
 
     /**
@@ -70,9 +78,11 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
      * @param 通知書番号 通知書番号
      * @param 履歴番号 履歴番号
      * @param 調定日時 調定日時
-     * @param 調定日 調定日
+     * @param 調定日 RString
+     * @param 処理日 RString
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
+     * @param 科目コード RString
      * @return パラメータ
      */
     public static KakushuTsuchishoEntityParameter createSelectByKeyParam(
@@ -82,8 +92,11 @@ public final class KakushuTsuchishoEntityParameter extends KozaSearchParameter
             int 履歴番号,
             YMDHMS 調定日時,
             RString 調定日,
+            RString 処理日,
             IKozaSearchKey searchkey,
-            List<KamokuCode> list) {
-        return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 履歴番号, 調定日時, 調定日, searchkey, list);
+            List<KamokuCode> list,
+            RString 科目コード) {
+        return new KakushuTsuchishoEntityParameter(調定年度, 賦課年度, 通知書番号, 履歴番号,
+                調定日時, 調定日, 処理日, searchkey, list, 科目コード);
     }
 }
