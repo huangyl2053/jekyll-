@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.CharacteristicsPhase;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
@@ -212,10 +211,10 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
         Decimal 金額1期 = Decimal.ZERO;
         Decimal 金額2期 = Decimal.ZERO;
         Decimal 金額3期 = Decimal.ZERO;
-        List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
-        if (編集後本算定通知書共通情報.get更正後() != null) {
-            特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        if (編集後本算定通知書共通情報.get更正後() == null || 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト() == null) {
+            return RString.EMPTY;
         }
+        List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (特徴期別金額1期.equals(特徴期別金額.get期())) {
                 金額1期 = 特徴期別金額.get金額();
@@ -236,10 +235,10 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
      */
     private RString set特徴期別金額(RString 期) {
         Decimal 金額 = Decimal.ZERO;
-        List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
-        if (編集後本算定通知書共通情報.get更正後() != null) {
-            特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        if (編集後本算定通知書共通情報.get更正後() == null || 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト() == null) {
+            return RString.EMPTY;
         }
+        List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (期.equals(特徴期別金額.get期())) {
                 金額 = 特徴期別金額.get金額();
@@ -257,10 +256,10 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
      */
     private RString set翌年度仮特徴保険料額(RString 期) {
         Decimal 金額 = Decimal.ZERO;
-        List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
-        if (編集後本算定通知書共通情報.get更正後() != null) {
-            特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+        if (編集後本算定通知書共通情報.get更正後() == null || 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト() == null) {
+            return RString.EMPTY;
         }
+        List<CharacteristicsPhase> 特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
         for (CharacteristicsPhase 特徴期別金額 : 特徴期別金額リスト) {
             if (期.equals(特徴期別金額.get期())) {
                 金額 = 特徴期別金額.get金額().multiply(MULTIPLY);
