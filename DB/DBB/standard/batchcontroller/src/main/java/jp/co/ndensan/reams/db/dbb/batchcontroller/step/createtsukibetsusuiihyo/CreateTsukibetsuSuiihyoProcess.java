@@ -65,7 +65,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGoukey> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get特別徴収帳票データの取得");
+            "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get普通徴収帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
     private static final RString 普通徴収 = new RString("2");
     private static final RString 特別徴収 = new RString("1");
@@ -91,6 +91,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
     private static final RString 生年月日終了 = new RString("生年月日終了");
     private static final RString 選択対象 = new RString("選択対象");
     private static final RString 市町村 = new RString("市町村");
+    private List<KoumokuGoukey> koumokuGoukeyList;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
     private ICreateTsukibetsuSuiihyoMapper iCreateTsukibetsuSuiihyoMapper;
@@ -102,38 +103,29 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
     protected void initialize() {
         mybatisPrm = processPrm.toCreateTsukibetsuSuiihyoMyBatisParameter();
         iCreateTsukibetsuSuiihyoMapper = getMapper(ICreateTsukibetsuSuiihyoMapper.class);
+        koumokuGoukeyList = new ArrayList<>();
     }
 
     @Override
     protected IBatchReader createReader() {
         get合計部分の項目();
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        CreateTsukibetsuSuiihyoMyBatisParameter myBatisParameter
-                = CreateTsukibetsuSuiihyoMyBatisParameter.create_被保険者台帳管理と宛名のデータ(
-                        mybatisPrm.getChoteiNendo(), mybatisPrm.isAgeFlg(), mybatisPrm.getAgeStart(), mybatisPrm.getAgeEnd(),
-                        mybatisPrm.getAgeKijunNi(), mybatisPrm.isSeinengappiYMDFlg(), mybatisPrm.getSeinengappiYMDStart(),
-                        mybatisPrm.getSeinengappiYMDEnd(), mybatisPrm.getSentakuTaisho(), mybatisPrm.getSentakuKekkaList(),
-                        mybatisPrm.getShichosonCode(), mybatisPrm.getKyuShichosonCode(),
-                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
-        return new BatchDbReader(MYBATIS_SELECT_ID, myBatisParameter);
+        return new BatchDbReader(MYBATIS_SELECT_ID);
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB300002.getReportId().getColumnValue()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB300002.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
     protected void process(KoumokuGoukey koumokuGoukey) {
+        koumokuGoukeyList.add(koumokuGoukey);
     }
 
     @Override
     protected void afterExecute() {
-        List<KoumokuGoukey> 普通徴収帳票データList = iCreateTsukibetsuSuiihyoMapper.get普通徴収帳票データの取得();
-        List<ReportDate> reportDateList2 = getReportDate(普通徴収帳票データList);
+        List<ReportDate> reportDateList2 = getReportDate(koumokuGoukeyList);
         for (ReportDate reportDate : reportDateList2) {
             reportDate.setChoshuHouhouTitle(new RString("普通徴収"));
             reportDate.setGengo(mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
@@ -143,8 +135,8 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
         }
         TsukibetsuSuiihyoReport report2 = TsukibetsuSuiihyoReport.createFrom(setHeadItem(new RString("普通徴収")),
                 setBodyTitleItem(reportDateList2), setbodyItemList(reportDateList2));
+        outputJokenhyoFactory();
         report2.writeBy(reportSourceWriter);
-        outputJokenhyoFactory(1);
     }
 
     private List<ReportDate> getReportDate(List<KoumokuGoukey> list) {
@@ -182,7 +174,23 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
         return list;
     }
 
-    private void outputJokenhyoFactory(int pageCnt) {
+    private void outputJokenhyoFactory() {
+        int pageCnt = 1;
+        if (koumokuGoukeyList != null && !koumokuGoukeyList.isEmpty()) {
+            pageCnt += 1;
+        }
+        List<KoumokuGoukey> 特別徴収List = iCreateTsukibetsuSuiihyoMapper.get特別徴収帳票データの取得();
+        if (特別徴収List != null && !特別徴収List.isEmpty()) {
+            pageCnt += 1;
+        }
+        List<KoumokuGoukey> 合計List = iCreateTsukibetsuSuiihyoMapper.get合計帳票データの取得();
+        if (合計List != null && !合計List.isEmpty()) {
+            pageCnt += 1;
+        }
+        List<GemmenJyoho> 減免List = iCreateTsukibetsuSuiihyoMapper.get減免帳票データの取得();
+        if (減免List != null && !減免List.isEmpty()) {
+            pageCnt += 1;
+        }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 帳票ID.value(),
@@ -295,7 +303,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<KoumokuGouk
             if (普通徴収.equals(gennendoDate.getChoshuHouhou())) {
                 FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
                 Kitsuki kitsuki = fuchoKiUtil.get期月リスト().get最終法定納期();
-                if (get期に対する月の設定(gennendoDate).equals(kitsuki.get期())) {
+                if (gennendoDate.getKi() > kitsuki.get期AsInt()) {
                     gennendoDate.setGetu(new RString("随"));
                 }
             }

@@ -57,6 +57,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
     private final RString 調定年度減2;
     private final FlexibleDate 終了生年月日;
     private final FlexibleDate 開始生年月日;
+    private final boolean hasCodeList;
     private final RString psmShikibetsuTaisho;
 
     /**
@@ -87,7 +88,6 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
      * @param is地区3 is地区3
      * @param is市町村コード is市町村コード
      * @param is市町村と旧市町村 is市町村と旧市町村
-     * @param psmShikibetsuTaisho PSM
      * @param 調定年度3月31日 調定年度3月31日
      * @param 調定年度0430 調定年度0430
      * @param 調定年度0401 調定年度0401
@@ -95,6 +95,8 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
      * @param 調定年度減2 調定年度減2
      * @param 終了生年月日 終了生年月日
      * @param 開始生年月日 開始生年月日
+     * @param hasCodeList hasCodeList
+     * @param psmShikibetsuTaisho PSM
      */
     private CreateTsukibetsuSuiihyoMyBatisParameter(
             FlexibleYear choteiNendo,
@@ -129,6 +131,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
             RString 調定年度減2,
             FlexibleDate 終了生年月日,
             FlexibleDate 開始生年月日,
+            boolean hasCodeList,
             RString psmShikibetsuTaisho) {
         this.choteiNendo = choteiNendo;
         this.choteiKijunNichiji = choteiKijunNichiji;
@@ -162,6 +165,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
         this.調定年度減2 = 調定年度減2;
         this.終了生年月日 = 終了生年月日;
         this.開始生年月日 = 開始生年月日;
+        this.hasCodeList = hasCodeList;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
@@ -193,7 +197,6 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
      * @param is地区3 is地区3
      * @param is市町村コード is市町村コード
      * @param is市町村と旧市町村 is市町村と旧市町村
-     * @param psmShikibetsuTaisho PSM
      * @param 調定年度3月31日 調定年度3月31日
      * @param 調定年度0430 調定年度0430
      * @param 調定年度0401 調定年度0401
@@ -201,6 +204,8 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
      * @param 調定年度減2 調定年度減2
      * @param 終了生年月日 終了生年月日
      * @param 開始生年月日 開始生年月日
+     * @param hasCodeList hasCodeList
+     * @param psmShikibetsuTaisho PSM
      * @return CreateTsukibetsuSuiihyoMyBatisParameter
      */
     public static CreateTsukibetsuSuiihyoMyBatisParameter create_MyBatisParameter(
@@ -236,12 +241,13 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
             RString 調定年度減2,
             FlexibleDate 終了生年月日,
             FlexibleDate 開始生年月日,
+            boolean hasCodeList,
             RString psmShikibetsuTaisho) {
         return new CreateTsukibetsuSuiihyoMyBatisParameter(choteiNendo, choteiKijunNichiji, kakutukiShikakuKijunNichi, ageFlg, ageStart,
                 ageEnd, ageKijunNi, seinengappiYMDFlg, seinengappiYMDStart, seinengappiYMDEnd, sentakuTaisho, sentakuKekkaList, shichosonCode,
                 shichosonMeisho, kyuShichosonCode, kyuShichosonMeisho, is1と3場合, is2場合, is町域, is行政区, is地区1, is地区2, is地区3,
                 is市町村コード, is市町村と旧市町村, 調定年度3月31日, 調定年度0401, 調定年度0430, 調定年度減1, 調定年度減2, 終了生年月日,
-                開始生年月日, psmShikibetsuTaisho);
+                開始生年月日, hasCodeList, psmShikibetsuTaisho);
     }
 
     /**
@@ -272,19 +278,16 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
         RString 調定年度0401;
         FlexibleDate 終了生年月日 = FlexibleDate.EMPTY;
         FlexibleDate 開始生年月日 = FlexibleDate.EMPTY;
-        if ((年齢開始 != null && !年齢開始.isEmpty()) && (年齢終了 != null && !年齢終了.isEmpty())
-                && (年齢基準日 != null && !年齢基準日.isEmpty())) {
+        if (!RString.isNullOrEmpty(年齢開始) && !RString.isNullOrEmpty(年齢終了) && (年齢基準日 != null && !年齢基準日.isEmpty())) {
             終了生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢開始.toString()));
             開始生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢終了.toString()));
             is1と3場合 = true;
         }
-        if (((年齢開始 == null || 年齢開始.isEmpty()) && 年齢終了 != null && !年齢終了.isEmpty())
-                && (年齢基準日 != null && !年齢基準日.isEmpty())) {
+        if (RString.isNullOrEmpty(年齢開始) && (年齢基準日 != null && !年齢基準日.isEmpty())) {
             開始生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢終了.toString()));
             is2場合 = true;
         }
-        if (年齢開始 != null && !年齢開始.isEmpty() && (年齢終了 == null || 年齢終了.isEmpty())
-                && (年齢基準日 != null && !年齢基準日.isEmpty())) {
+        if (!RString.isNullOrEmpty(年齢開始) && RString.isNullOrEmpty(年齢終了) && (年齢基準日 != null && !年齢基準日.isEmpty())) {
             終了生年月日 = 年齢基準日.minusYear(Integer.valueOf(年齢開始.toString()));
             is1と3場合 = true;
         }
@@ -293,7 +296,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
         boolean is地区1 = 選択対象_地区1.equals(選択対象);
         boolean is地区2 = 選択対象_地区2.equals(選択対象);
         boolean is地区3 = 選択対象_地区3.equals(選択対象);
-        boolean is市町村コード = has市町村コード(市町村コード);
+        boolean is市町村コード = has市町村コード(市町村コード, 旧市町村コード);
         boolean is市町村と旧市町村 = has市町村と旧市町村(市町村コード, 旧市町村コード);
         StringBuilder builder1 = new StringBuilder();
         builder1.append(調定年度.plusYear(1).toString());
@@ -303,19 +306,24 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
         builder2.append(調定年度.toString());
         builder2.append("0401");
         調定年度0401 = new RString(builder2.toString());
+        boolean hasCodeList = hasList(sentakuKekkaList);
         return new CreateTsukibetsuSuiihyoMyBatisParameter(
                 null, null, null, 年齢フラグ, null, null, null, 生年月日フラグ, 生年月日開始, 生年月日終了, null, sentakuKekkaList,
                 市町村コード, null, 旧市町村コード, null, is1と3場合, is2場合, is町域, is行政区, is地区1, is地区2, is地区3,
                 is市町村コード, is市町村と旧市町村, 調定年度3月31日, 調定年度0401,
-                null, null, null, 終了生年月日, 開始生年月日, psmShikibetsuTaisho);
+                null, null, null, 終了生年月日, 開始生年月日, hasCodeList, psmShikibetsuTaisho);
     }
 
-    private static boolean has市町村コード(RString 市町村コード) {
-        return 市町村コード != null && !市町村コード.isEmpty();
+    private static boolean hasList(List<RString> sentakuKekkaList) {
+        return sentakuKekkaList != null && !sentakuKekkaList.isEmpty();
+    }
+
+    private static boolean has市町村コード(RString 市町村コード, RString 旧市町村コード) {
+        return !RString.isNullOrEmpty(市町村コード) && RString.isNullOrEmpty(旧市町村コード);
     }
 
     private static boolean has市町村と旧市町村(RString 市町村コード, RString 旧市町村コード) {
-        return 市町村コード != null && !市町村コード.isEmpty() && 旧市町村コード != null && !旧市町村コード.isEmpty();
+        return !RString.isNullOrEmpty(市町村コード) && !RString.isNullOrEmpty(旧市町村コード);
     }
 
     /**
@@ -333,7 +341,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
                 調定基準日時,
                 null, false, null, null, null, false, null, null, null, null, null, null, null, null,
                 false, false, false, false, false, false, false, false, false, null,
-                null, null, null, null, null, null, null);
+                null, null, null, null, null, null, false, null);
     }
 
     /**
@@ -354,7 +362,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
                 調定年度, 調定基準日時,
                 null, false, null, null, null, false, null, null, null, null, null, null, null, null,
                 false, false, false, false, false, false, false, false, false, null, null, null,
-                調定年度減1, 調定年度減2, null, null, null);
+                調定年度減1, 調定年度減2, null, null, false, null);
     }
 
     /**
@@ -375,13 +383,13 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
         調定年度0401 = new RString(builder2.toString());
         StringBuilder builder3 = new StringBuilder();
         builder3.append(調定年度.toString());
-        builder3.append("0430");
+        builder3.append("0431");
         調定年度0430 = new RString(builder3.toString());
         return new CreateTsukibetsuSuiihyoMyBatisParameter(
                 調定年度, 調定基準日時,
                 null, false, null, null, null, false, null, null, null, null, null, null, null, null,
                 false, false, false, false, false, false, false, false, false, null,
-                調定年度0401, 調定年度0430, null, null, null, null, null);
+                調定年度0401, 調定年度0430, null, null, null, null, false, null);
     }
 
     /**
@@ -396,7 +404,7 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
                 調定年度, null,
                 null, false, null, null, null, false, null, null, null, null, null, null, null, null,
                 false, false, false, false, false, false, false, false, false, null,
-                null, null, null, null, null, null, null);
+                null, null, null, null, null, null, false, null);
     }
 
     /**
@@ -415,24 +423,6 @@ public final class CreateTsukibetsuSuiihyoMyBatisParameter implements IMyBatisPa
                 調定年度, null,
                 null, false, null, null, null, false, null, null, null, null, null, null, null, null,
                 false, false, false, false, false, false, false, false, false, null,
-                null, null, 調定年度減1, 調定年度減2, null, null, null);
+                null, null, 調定年度減1, 調定年度減2, null, null, false, null);
     }
-
-//    /**
-//     * 月別推移表作成のパラメータクラス作成。
-//     *
-//     * @param 調定年度 調定年度
-//     * @param 徴収方法 徴収方法
-//     * @return 月別推移表作成のMyBatis用パラメータクラスです。
-//     */
-//    public static CreateTsukibetsuSuiihyoMyBatisParameter create_歳出還付人数と金額の取得(
-//            FlexibleYear 調定年度,
-//            RString 徴収方法) {
-//        return new CreateTsukibetsuSuiihyoMyBatisParameter(
-//                調定年度, null,
-//                null, false, null, null, null, false, null, null, null, null, null, null, null, null,
-//                false, false, false, false, false, false, false, false, false, null,
-//                null, null, null, null, null, null, null
-//        );
-//    }
 }

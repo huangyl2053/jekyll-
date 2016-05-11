@@ -4,8 +4,7 @@
 <!-- @reamsid_L DBB-0760-030 lishengli -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper">
 
-    <select  id="get特別徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
-             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+    <select  id="get特別徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey" fetchSize="500">
         SELECT
             koumokuGoukey."hokenryoDankai",
             koumokuGoukey."yoGetuNinsuuGoukeyi" AS "yoGetuNinsuuGoukeyi",
@@ -46,8 +45,7 @@
         ORDER BY koumokuGoukey."hokenryoDankai"
     </select>
     
-    <select  id="get普通徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
-             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
+    <select  id="get普通徴収帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey" fetchSize="500">
         SELECT
             koumokuGoukey."hokenryoDankai",
             koumokuGoukey."yoGetuNinsuuGoukeyi" AS "yoGetuNinsuuGoukeyi",
@@ -88,8 +86,7 @@
         ORDER BY koumokuGoukey."hokenryoDankai"
     </select>
     
-    <select  id="get合計帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey"
-             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500"> 
+    <select  id="get合計帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey" fetchSize="500"> 
         SELECT
             gokeyBubunKoumoku."hokenryoDankai",
             gokeyBubunKoumoku."yoGetuNinsuuGoukeyi",
@@ -130,8 +127,7 @@
         ORDER BY gokeyBubunKoumoku."hokenryoDankai"
     </select>
     
-    <select  id="get減免帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho"
-             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500"> 
+    <select  id="get減免帳票データの取得" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho" fetchSize="500"> 
         SELECT
             gemmenJyoho."hokenryoDankai",
             gemmenJyoho."hokenryoDankaiKanendoNinsu",
@@ -263,59 +259,69 @@
             AND PSM."seinengappiYMD" <![CDATA[<=]]> #{seinengappiYMDEnd}
         </if>
         <if test="is町域">
-            AND PSM."choikiCode" IN 
-            <foreach  
-                collection="sentakuKekkaList"  
-                item="code"  
-                open="("  
-                separator=","  
-                close=")">  
-                 #{code} 
-            </foreach>
+            <if test="hasCodeList">
+                AND PSM."choikiCode" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
         </if>
         <if test="is行政区">
-            AND PSM."gyoseikuCode" IN 
-            <foreach  
-                collection="sentakuKekkaList"  
-                item="code"  
-                open="("  
-                separator=","  
-                close=")">  
-                 #{code} 
-            </foreach>
+            <if test="hasCodeList">
+                AND PSM."gyoseikuCode" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
         </if>
         <if test="is地区1">
-            AND PSM."chikuCode1" IN 
-            <foreach  
-                collection="sentakuKekkaList"  
-                item="code"  
-                open="("  
-                separator=","  
-                close=")">  
-                 #{code} 
-            </foreach>
+            <if test="hasCodeList">
+                AND PSM."chikuCode1" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
         </if>
         <if test="is地区2">
-            AND PSM."chikuCode2" IN 
-            <foreach  
-                collection="sentakuKekkaList"  
-                item="code"  
-                open="("  
-                separator=","  
-                close=")">  
-                 #{code} 
-            </foreach>
+            <if test="hasCodeList">
+                AND PSM."chikuCode2" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
         </if>
         <if test="is地区3">
-            AND PSM."chikuCode3" IN 
-            <foreach  
-                collection="sentakuKekkaList"  
-                item="code"  
-                open="("  
-                separator=","  
-                close=")">  
-                 #{code} 
-            </foreach>
+            <if test="hasCodeList">
+                AND PSM."chikuCode3" IN 
+                <foreach  
+                    collection="sentakuKekkaList"  
+                    item="code"  
+                    open="("  
+                    separator=","  
+                    close=")">  
+                     #{code} 
+                </foreach>
+            </if>
         </if>
         <if test="is市町村コード">
             AND HihokenshaDaicho."shichosonCode" = #{shichosonCode}
@@ -542,7 +548,7 @@
                     FROM rgdb."DbT2002Fuka" AS T
                     WHERE T."choteiNendo" = #{choteiNendo}
                         AND T."fukaNendo" = #{choteiNendo}
-                        AND T."choteiNichiji" = #{choteiKijunNichiji}
+                        AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
                     GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
             ON fukaT."choteiNendo" = fuka."choteiNendo"
             AND fukaT."fukaNendo" = fuka."fukaNendo"
@@ -551,7 +557,7 @@
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
         WHERE fuka."choteiNendo" = #{choteiNendo}
             AND fuka."fukaNendo" = #{choteiNendo}
-            AND fuka."choteiNichiji" = #{choteiKijunNichiji}
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
         ORDER BY fuka."tsuchishoNo"
     </select>
     
@@ -587,7 +593,7 @@
                     FROM rgdb."DbT2002Fuka" AS T
                     WHERE T."choteiNendo" = #{choteiNendo}
                         AND (T."fukaNendo" = #{調定年度減1} OR T."fukaNendo" = #{調定年度減2})
-                        AND T."choteiNichiji" = #{choteiKijunNichiji}
+                        AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
                     GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
             ON fukaT."choteiNendo" = fuka."choteiNendo"
             AND fukaT."fukaNendo" = fuka."fukaNendo"
@@ -596,14 +602,14 @@
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
         WHERE fuka."choteiNendo" = #{choteiNendo}
             AND (fuka."fukaNendo" = #{調定年度減1} OR fuka."fukaNendo" = #{調定年度減2})
-            AND fuka."choteiNichiji" = #{choteiKijunNichiji}
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
         ORDER BY fuka."tsuchishoNo"
     </select>
     
     <select  id="get不明のデータの取得" resultMap="resultMap_現年度データの取得" 
              parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter" fetchSize="500">
         SELECT 
-            DISTINCT fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
+            DISTINCT ON(fuka."hihokenshaNo") fuka."hihokenshaNo" AS "fuka_hihokenshaNo",
             fuka."choteiNendo" AS "fuka_choteiNendo",
             fuka."fukaNendo" AS "fuka_fukaNendo",
             fuka."tsuchishoNo" AS "fuka_tsuchishoNo",
@@ -633,7 +639,7 @@
                     FROM rgdb."DbT2002Fuka" AS T
                     WHERE T."choteiNendo" = #{choteiNendo}
                         AND T."fukaNendo" = #{choteiNendo}
-                        AND T."choteiNichiji" = #{choteiKijunNichiji}
+                        AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
                     GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
             ON fukaT."choteiNendo" = fuka."choteiNendo"
             AND fukaT."fukaNendo" = fuka."fukaNendo"
@@ -642,12 +648,12 @@
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
         WHERE fuka."choteiNendo" = #{choteiNendo}
             AND fuka."fukaNendo" = #{choteiNendo}
-            AND fuka."choteiNichiji" = #{choteiKijunNichiji}
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
             AND (fuka."hokenryoDankai1" IS NULL AND fuka."hokenryoDankai2" IS NULL
                     AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
             OR ((fuka."hokenryoDankai1" IS NOT NULL OR fuka."hokenryoDankai2" IS NOT NULL)
                     AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[>=]]> #{調定年度0401} AND HihokenshaDaicho."shikakuSoshitsuYMD" <![CDATA[<=]]> #{調定年度0430})
-        ORDER BY fuka."tsuchishoNo"
+        ORDER BY fuka."hihokenshaNo", fuka."tsuchishoNo"
     </select>
 
     <select  id="get減免部分のデータの取得" resultMap="resultMap_現年度データの取得" 
@@ -679,7 +685,7 @@
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
         WHERE fuka."choteiNendo" = #{choteiNendo}
             AND (fuka."fukaNendo"  = #{choteiNendo} OR fuka."fukaNendo"  = #{調定年度減1} OR fuka."fukaNendo"  = #{調定年度減2})
-            AND fuka."choteiNichiji" = #{choteiKijunNichiji}
+            AND fuka."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
         ORDER BY fuka."tsuchishoNo"
     </select>
     

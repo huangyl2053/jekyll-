@@ -122,7 +122,7 @@ public class CreateTsukibetsuSuiihyoProcessParameter implements IBatchProcessPar
                 kakutukiShikakuKijunNichi, ageFlg, ageStart, ageEnd, ageKijunNi, seinengappiYMD_Flg, seinengappiYMDStart,
                 seinengappiYMDEnd, sentakuTaisho, sentakuKekkaList, shichosonCode, shichosonMeisho, kyuShichosonCode, kyuShichosonMeisho,
                 is1と3場合, is2場合, is町域, is行政区, is地区1, is地区2, is地区3, is市町村コード, is市町村と旧市町村, 調定年度3月31日,
-                調定年度0401, 調定年度0430, 調定年度減1, 調定年度減2, 終了生年月日, 開始生年月日, psmShikibetsuTaisho);
+                調定年度0401, 調定年度0430, 調定年度減1, 調定年度減2, 終了生年月日, 開始生年月日, false, psmShikibetsuTaisho);
     }
 
 }
