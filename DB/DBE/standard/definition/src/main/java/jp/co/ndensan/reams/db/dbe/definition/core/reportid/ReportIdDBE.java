@@ -229,7 +229,11 @@ public enum ReportIdDBE {
     /**
      * 審査判定の変更状況の帳票ＩＤです。
      */
-    DBE701006(new ReportId("DBE701006_ShinsahanteinoHenkojokyo"), new RString("審査判定の変更状況"));
+    DBE701006(new ReportId("DBE701006_ShinsahanteinoHenkojokyo"), new RString("審査判定の変更状況")),
+    /**
+     * 介護認定審査会集計表（判定別）の帳票ＩＤです。
+     */
+    DBE701007(new ReportId("DBE701007_shinsakaishukeihyoHanteibetsu"), new RString("介護認定審査会集計表（判定別）"));
 
     private final ReportId reportId;
 
