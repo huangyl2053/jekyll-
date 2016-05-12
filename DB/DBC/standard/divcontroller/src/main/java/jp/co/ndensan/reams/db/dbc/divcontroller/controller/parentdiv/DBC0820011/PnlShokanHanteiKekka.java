@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -23,9 +24,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class PnlShokanHanteiKekka {
 
-    private static final RString 照会 = new RString("照会");
+    private static final RString 申請 = new RString("申請");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString 新規 = new RString("新規");
 
     /**
      * 初期表示
@@ -41,20 +43,20 @@ public class PnlShokanHanteiKekka {
         div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(識別コード);
 
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
-        div.getPnlShokanShinseiList().getCcdShokanShinseiList().initialize(照会, 被保険者番号,
-                FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
+        FlexibleYearMonth 前月 = FlexibleDate.getNowDate().plusMonth(-1).getYearMonth();
+        div.getPnlShokanShinseiList().getCcdShokanShinseiList().initialize(申請, 被保険者番号, 前月, 前月);
 
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 選択ボタン
+     * 申請を追加ボタン
      *
      * @param div PnlShokanHanteiKekkaDiv
      * @return ResponseData
      */
-    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_SelectButton(PnlShokanHanteiKekkaDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
+    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_InsertButton(PnlShokanHanteiKekkaDiv div) {
+        ViewStateHolder.put(ViewStateKeys.処理モード, 新規);
         return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }
 
