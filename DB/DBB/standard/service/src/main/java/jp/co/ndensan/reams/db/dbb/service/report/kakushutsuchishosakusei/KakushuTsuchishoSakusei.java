@@ -1610,7 +1610,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     private ShunyuJoho get収入情報(FukaJoho 賦課の情報, FukaJohoRelateEntity 賦課,
             List<TotalShunyuRelateEntity> 収入情報取得PSM) {
 
-        if (収入情報取得PSM == null || 収入情報取得PSM.isEmpty()) {
+        if (収入情報取得PSM == null || 収入情報取得PSM.isEmpty() || 賦課 == null) {
             return null;
         }
         fukaJoho(賦課, 収入情報取得PSM);

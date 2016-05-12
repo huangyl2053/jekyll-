@@ -443,10 +443,12 @@ public class KakushuTsuchishoSakuseiFath {
      * @param 収入情報List List<TotalShunyuRelateEntity>
      */
     public void fukaJoho(FukaJohoRelateEntity entity, List<TotalShunyuRelateEntity> 収入情報List) {
-        requireNonNull(entity.get介護賦課Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("賦課の情報"));
+
         kibetsuList = new ArrayList<>();
-        for (KibetsuEntity kibetsuEntity : entity.get介護期別RelateEntity()) {
-            kibetsuList.add(new Kibetsu(kibetsuEntity));
+        if (entity.get介護期別RelateEntity() != null && !entity.get介護期別RelateEntity().isEmpty()) {
+            for (KibetsuEntity kibetsuEntity : entity.get介護期別RelateEntity()) {
+                kibetsuList.add(new Kibetsu(kibetsuEntity));
+            }
         }
         収入情報取得PSM = 収入情報List;
     }
