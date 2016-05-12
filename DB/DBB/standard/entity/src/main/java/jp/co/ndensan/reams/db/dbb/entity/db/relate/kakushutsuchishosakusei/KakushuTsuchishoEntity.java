@@ -26,6 +26,6 @@ public class KakushuTsuchishoEntity implements Serializable {
     private DbT2002FukaEntity 介護賦課;
     private List<KibetsuEntity> 介護期別RelateEntity;
     private DbT2001ChoshuHohoEntity 介護徴収方法;
-    private TotalShunyuRelateEntity 収入情報取得PSM;
+    private List<TotalShunyuRelateEntity> 収入情報取得PSM;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
 }

@@ -54,7 +54,6 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private static final String KEY_TOMOKUME_FUKA = "tomokumeFuka";
     private static final String KEY_REBAN_FUKA = "rebanFuka";
     private static final String KEY_HIZUKE_HESHU = "hizukeHeshu";
-    private static final String KEY_ISHIKIPSMSEARCH = "ishikiPsmSearch";
 
     @BatchParameter(key = KEY_KOUSEI_SHICHOSON_CODE, name = "構成市町村コード")
     private LasdecCode kouseiShichosonCode;
@@ -151,6 +150,6 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
                 tomokumeFuka,
                 rebanFuka,
                 hizukeHeshu,
-                null, null);
+                null, null, null);
     }
 }

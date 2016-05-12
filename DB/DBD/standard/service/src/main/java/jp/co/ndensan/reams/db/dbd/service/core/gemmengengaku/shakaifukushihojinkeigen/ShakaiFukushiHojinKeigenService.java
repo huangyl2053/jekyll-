@@ -18,18 +18,22 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojin
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shakaifukushihojinkeigen.IShakaiFukushiHojinKeigenMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkinJukyushaDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -169,7 +173,18 @@ public class ShakaiFukushiHojinKeigenService {
         if (dbT7006EntityList != null && !dbT7006EntityList.isEmpty()) {
             return GemmenKubun.非課税_老年受給;
         }
-        //TODO QA82160 ビジネス設計_DBZMN00000_世帯員取得.xlsx　より作成された　SetaiinShotokujohoFineder　を使用する。
+        SetaiinShotokuJohoFinder setaiinShotokuJohoFinder = SetaiinShotokuJohoFinder.createInstance();
+        FlexibleYear 所得年度 = FlexibleYear.EMPTY;
+        if (適用日 != null && !適用日.isEmpty()) {
+            所得年度 = 適用日.getYear();
+        }
+        List<SetaiinShotoku> 世帯員所得情報List = setaiinShotokuJohoFinder.get世帯員所得情報(識別コード, 所得年度, null);
+        for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報List) {
+            if (識別コード.equals(世帯員所得情報.get識別コード())
+                    && KazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免前())) {
+                return GemmenKubun.非課税_老年受給;
+            }
+        }
         if (SeikatsuhogoManagerFactory.createInstance().get生活保護(識別コード, GyomuCode.DB介護保険, 適用日) != null) {
             return GemmenKubun.生保に準ずる;
         }

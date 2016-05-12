@@ -7,16 +7,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tabHihokenshaShikakuShosai のクラスファイル 
- * 
+ * tabHihokenshaShikakuShosai のクラスファイル
+ *
  * @author 自動生成
  */
 public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -139,7 +146,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
+    public void setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
         this.getTplGendoGaku().setTblGendoGaku(tblGendoGaku);
     }
 
@@ -154,7 +161,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
+    public void setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtKubunShikyuGendoKijunGaku(txtKubunShikyuGendoKijunGaku);
     }
 
@@ -164,7 +171,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
+    public void setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoFromYMD(txtYukoFromYMD);
     }
 
@@ -174,7 +181,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblKara(Label lblKara) {
+    public void setLblKara(Label lblKara) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setLblKara(lblKara);
     }
 
@@ -184,7 +191,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
+    public void setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
         this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoToYMD(txtYukoToYMD);
     }
 
@@ -199,7 +206,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblShinsakaiIken(Label lblShinsakaiIken) {
+    public void setLblShinsakaiIken(Label lblShinsakaiIken) {
         this.getTplShinsakaiIken().setLblShinsakaiIken(lblShinsakaiIken);
     }
 
@@ -209,7 +216,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
+    public void setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
         this.getTplShinsakaiIken().setTxtShinsakaiIken(txtShinsakaiIken);
     }
 
@@ -219,7 +226,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblKyufuSeigen(Label lblKyufuSeigen) {
+    public void setLblKyufuSeigen(Label lblKyufuSeigen) {
         this.getTplKyufuSeigen().setLblKyufuSeigen(lblKyufuSeigen);
     }
 
@@ -229,7 +236,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblKyuhuSeigen(tblKyuhuSeigenDiv tblKyuhuSeigen) {
+    public void setTblKyuhuSeigen(tblKyuhuSeigenDiv tblKyuhuSeigen) {
         this.getTplKyufuSeigen().setTblKyuhuSeigen(tblKyuhuSeigen);
     }
 
@@ -279,7 +286,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblShienJigyosha(Label lblShienJigyosha) {
+    public void setLblShienJigyosha(Label lblShienJigyosha) {
         this.getTplShienJigyosha().setLblShienJigyosha(lblShienJigyosha);
     }
 
@@ -289,7 +296,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
+    public void setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
         this.getTplShienJigyosha().setTblJigyosha(tblJigyosha);
     }
 
@@ -359,7 +366,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblKaigoHokensha(Label lblKaigoHokensha) {
+    public void setLblKaigoHokensha(Label lblKaigoHokensha) {
         this.getTplShisetsuNyutaisho().setLblKaigoHokensha(lblKaigoHokensha);
     }
 
@@ -369,7 +376,7 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setTblShisetsuNyutaisho(tblShisetsuNyutaishoDiv tblShisetsuNyutaisho) {
+    public void setTblShisetsuNyutaisho(tblShisetsuNyutaishoDiv tblShisetsuNyutaisho) {
         this.getTplShisetsuNyutaisho().setTblShisetsuNyutaisho(tblShisetsuNyutaisho);
     }
 

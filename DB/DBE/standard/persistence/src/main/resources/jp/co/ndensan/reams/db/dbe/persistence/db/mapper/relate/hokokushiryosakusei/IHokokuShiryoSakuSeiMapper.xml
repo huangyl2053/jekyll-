@@ -80,11 +80,11 @@
                 <choose>
                     <when test="!taishoGeppiKubun">
                         <if test="!taishoTsukiKubun">
-                            AND #{taishoNendoKaishiYM} <![CDATA[<=]]> SUBSTR(A."shinsakaiKaisaiYMD", 0, 6)
-                            AND SUBSTR(A."shinsakaiKaisaiYMD", 0, 6) <![CDATA[<=]]> #{taishoNendoShuryoYM}
+                            AND #{taishoNendoKaishiYM} <![CDATA[<=]]> SUBSTR(A."shinsakaiKaisaiYMD", 1, 6)
+                            AND SUBSTR(A."shinsakaiKaisaiYMD", 1, 6) <![CDATA[<=]]> #{taishoNendoShuryoYM}
                         </if>
                         <if test="taishoTsukiKubun">
-                            AND SUBSTR(A."shinsakaiKaisaiYMD", 0, 6) = #{taishoNendoYM}
+                            AND SUBSTR(A."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
                         </if>
                     </when>
                     <otherwise>
@@ -106,8 +106,8 @@
                                         AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                                     </when>
                                     <otherwise>
-                                        AND #{taishoNendoKaishiYM} <![CDATA[<=]]> SUBSTR(A."shinsakaiKaisaiYMD", 0, 6)
-                                        AND SUBSTR(A."shinsakaiKaisaiYMD", 0, 6) <![CDATA[<=]]> #{taishoNendoShuryoYM}
+                                        AND #{taishoNendoKaishiYM} <![CDATA[<=]]> SUBSTR(A."shinsakaiKaisaiYMD", 1, 6)
+                                        AND SUBSTR(A."shinsakaiKaisaiYMD", 1, 6) <![CDATA[<=]]> #{taishoNendoShuryoYM}
                                     </otherwise>
                                 </choose>
                             </otherwise>

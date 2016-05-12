@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

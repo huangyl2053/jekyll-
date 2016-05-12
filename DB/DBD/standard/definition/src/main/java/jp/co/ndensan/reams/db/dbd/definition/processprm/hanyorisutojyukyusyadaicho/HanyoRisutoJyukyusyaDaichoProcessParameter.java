@@ -108,9 +108,11 @@ public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcess
     /**
      * Mybatisのパラメータを作成します。
      *
+     * @param psmShikibetsuTaisho 宛名識別対象PSM
+     * @param psmAtesaki 宛先PSM
      * @return HanyoRisutoJyukyusyaDaichoMybatisParameter
      */
-    public HanyoRisutoJyukyusyaDaichoMybatisParameter toHanyoRisutoJyukyusyaDaichoMybatisParameter() {
+    public HanyoRisutoJyukyusyaDaichoMybatisParameter toHanyoRisutoJyukyusyaDaichoMybatisParameter(RString psmShikibetsuTaisho, RString psmAtesaki) {
         return new HanyoRisutoJyukyusyaDaichoMybatisParameter(cyusyutsudatakubun,
                 isShinseikeshidetacyusyutsu,
                 isSakujyodatacyusyutsu,
@@ -122,6 +124,8 @@ public class HanyoRisutoJyukyusyaDaichoProcessParameter implements IBatchProcess
                 iryokikancodefrom,
                 iryokikancodefto,
                 cyosaitakusakicodefrom,
-                cyosaitakusakicodefto);
+                cyosaitakusakicodefto,
+                psmShikibetsuTaisho,
+                psmAtesaki);
     }
 }

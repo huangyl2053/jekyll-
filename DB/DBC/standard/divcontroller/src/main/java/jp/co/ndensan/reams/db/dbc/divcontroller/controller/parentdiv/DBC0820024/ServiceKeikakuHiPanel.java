@@ -56,6 +56,7 @@ public class ServiceKeikakuHiPanel {
     private static final RString 登録 = new RString("登録");
     private static final RString 修正 = new RString("修正");
     private static final RString 申請を保存するボタン = new RString("btnUpdate");
+    private static final RString 申請を削除するボタン = new RString("btnDelete");
 
     /**
      * 画面初期化onLoad
@@ -78,7 +79,7 @@ public class ServiceKeikakuHiPanel {
         // TODO 償還払費申請検索キー
         ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                 new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
+                new FlexibleYearMonth(new RString("201501")),
                 new RString("0000000004"),
                 new JigyoshaNo("0000000003"),
                 new RString("0004"),
@@ -267,7 +268,7 @@ public class ServiceKeikakuHiPanel {
     }
 
     /**
-     * 共通エリア「取消する」ボタンを押下した際に実行します。
+     * 共通エリア「証明書一覧へ戻る」ボタンを押下した際に実行します。
      *
      * @param div ServiceKeikakuHiPanelDiv
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
@@ -294,54 +295,60 @@ public class ServiceKeikakuHiPanel {
     }
 
     /**
-     * 保存ボタンを押下した際に実行します
+     * 保存ボタンを押下した際に実行します。
      *
      * @param div ServiceKeikakuHiPanelDiv
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnUpdate(ServiceKeikakuHiPanelDiv div) {
         ServiceKeikakuHiPanelHandler handler = getHandler(div);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (削除モード.equals(画面モード)) {
-            handler.保存処理(削除モード);
-        } else if (登録モード.equals(画面モード)) {
-            boolean 変更 = false;
-            ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                    ShoukanharaihishinseikensakuParameter.class);
-            FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-            if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
-                変更 = handler.変更チェック処理();
-            } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-                変更 = handler.変更チェック処理200604();
-            } else {
-                変更 = handler.変更チェック処理200004();
-            }
-            if (!変更) {
-                return saveOut(div);
-            } else {
-                return 保存処理(div, 登録モード);
-            }
+        boolean 変更 = false;
+        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter.class);
+        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+        if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+            変更 = handler.変更チェック処理();
+        } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
+            変更 = handler.変更チェック処理200604();
+        } else {
+            変更 = handler.変更チェック処理200004();
         }
-        if (削除モード.equals(画面モード)) {
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
-        } else if (登録モード.equals(画面モード)) {
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(登録.toString())).respond();
+        if (!変更) {
+            return saveOut(div);
+        } else {
+            return 保存処理(div);
+        }
+    }
+
+    /**
+     * 「申請を削除する」ボタンを押下した際に実行します。
+     *
+     * @param div ServiceKeikakuHiPanelDiv
+     * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
+     */
+    public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnDelete(ServiceKeikakuHiPanelDiv div) {
+        // TODO QA712 異常メッセージを実装します。
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).保存処理(削除モード);
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除モード.toString())).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return createResponse(div);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除するボタン, true);
+            return ResponseData.of(div).respond();
         }
         return createResponse(div);
     }
 
-    private ResponseData<ServiceKeikakuHiPanelDiv> 保存処理(ServiceKeikakuHiPanelDiv div, RString 状態) {
+    private ResponseData<ServiceKeikakuHiPanelDiv> 保存処理(ServiceKeikakuHiPanelDiv div) {
+        // TODO QA712 異常メッセージを実装します。
         try {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).保存処理(登録モード);
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(登録.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存するボタン, true);
-                return createResponse(div);
+                return ResponseData.of(div).respond();
             }
         } catch (Exception e) {
             throw new ApplicationException(UrErrorMessages.異常終了.getMessage());

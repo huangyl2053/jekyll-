@@ -153,6 +153,8 @@ public class PnlTotalSearch {
             } else {
                 div.getPnlSearch().getTxtJigyoshakeiyakuName().clearValue();
             }
+        } else {
+            div.getPnlSearch().getTxtJigyoshakeiyakuName().clearValue();
         }
         return ResponseData.of(div).respond();
     }

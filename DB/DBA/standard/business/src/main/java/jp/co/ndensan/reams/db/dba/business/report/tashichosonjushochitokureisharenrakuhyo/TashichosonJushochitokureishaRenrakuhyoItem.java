@@ -26,7 +26,9 @@ public class TashichosonJushochitokureishaRenrakuhyoItem {
     private RString hokenshaName;
     private RString tantoBushoName;
     private RString barcode;
-    private RString midashi;
+    private RString midashi1;
+    private RString midashi2;
+    private RString midashi3;
     private RString tennyuYMD;
     private RString nyushoYMD;
     private RString hihokenshaNo1;
@@ -51,13 +53,9 @@ public class TashichosonJushochitokureishaRenrakuhyoItem {
     private RString shisetsuYubinNo;
     private RString shisetsuJusho;
     private RString denshiKoin;
-    private RString hakkoYMD1;
-    private RString ninshoshaYakushokuMei;
-    private RString ninshoshaYakushokuMei1;
-    private RString koinMojiretsu;
-    private RString ninshoshaShimeiKakenai;
-    private RString ninshoshaShimeiKakeru;
-    private RString ninshoshaYakushokuMei2;
+    private RString shomeiHakkoYMD;
+    private RString shuchoMei;
+    private RString shichosonMei;
     private RString koinShoryaku;
 
 }

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.hihousyosai.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.business.shichoson.Shichoson;
+import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;

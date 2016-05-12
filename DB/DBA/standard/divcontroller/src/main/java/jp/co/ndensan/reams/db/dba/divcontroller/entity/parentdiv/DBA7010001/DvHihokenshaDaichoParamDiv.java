@@ -35,10 +35,10 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     private DvChushutsuJokenDiv DvChushutsuJoken;
     @JsonProperty("DvCsvHenshuHoho")
     private DvCsvHenshuHohoDiv DvCsvHenshuHoho;
-    @JsonProperty("ccdKogakuShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdKogakuShutsuryokujun;
     @JsonProperty("ccdKogakuShutsuryokuKomoku")
     private ChohyoShutsuryokuKomokuDiv ccdKogakuShutsuryokuKomoku;
+    @JsonProperty("ccdKogakuShutsuryokujun")
+    private ChohyoShutsuryokujunDiv ccdKogakuShutsuryokujun;
     @JsonProperty("ccdHanyoListAtenaSelect")
     private HanyoListAtenaSelectDiv ccdHanyoListAtenaSelect;
 
@@ -103,21 +103,21 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     }
 
     /*
-     * getccdKogakuShutsuryokujun
-     * @return ccdKogakuShutsuryokujun
-     */
-    @JsonProperty("ccdKogakuShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdKogakuShutsuryokujun() {
-        return ccdKogakuShutsuryokujun;
-    }
-
-    /*
      * getccdKogakuShutsuryokuKomoku
      * @return ccdKogakuShutsuryokuKomoku
      */
     @JsonProperty("ccdKogakuShutsuryokuKomoku")
     public IChohyoShutsuryokuKomokuDiv getCcdKogakuShutsuryokuKomoku() {
         return ccdKogakuShutsuryokuKomoku;
+    }
+
+    /*
+     * getccdKogakuShutsuryokujun
+     * @return ccdKogakuShutsuryokujun
+     */
+    @JsonProperty("ccdKogakuShutsuryokujun")
+    public IChohyoShutsuryokujunDiv getCcdKogakuShutsuryokujun() {
+        return ccdKogakuShutsuryokujun;
     }
 
     /*

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -28,6 +29,8 @@ public class KakushuTsuchishoSakuseiKobetsuDiv extends Panel {
     private TsuchishoSakuseiKobetsuDiv TsuchishoSakuseiKobetsu;
     @JsonProperty("FukaShokaiGrandsonTsuchisho")
     private FukaShokaiGrandsonTsuchishoDiv FukaShokaiGrandsonTsuchisho;
+    @JsonProperty("hdnPublishFlag")
+    private RString hdnPublishFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -87,6 +90,24 @@ public class KakushuTsuchishoSakuseiKobetsuDiv extends Panel {
     @JsonProperty("FukaShokaiGrandsonTsuchisho")
     public void setFukaShokaiGrandsonTsuchisho(FukaShokaiGrandsonTsuchishoDiv FukaShokaiGrandsonTsuchisho) {
         this.FukaShokaiGrandsonTsuchisho = FukaShokaiGrandsonTsuchisho;
+    }
+
+    /*
+     * gethdnPublishFlag
+     * @return hdnPublishFlag
+     */
+    @JsonProperty("hdnPublishFlag")
+    public RString getHdnPublishFlag() {
+        return hdnPublishFlag;
+    }
+
+    /*
+     * sethdnPublishFlag
+     * @param hdnPublishFlag hdnPublishFlag
+     */
+    @JsonProperty("hdnPublishFlag")
+    public void setHdnPublishFlag(RString hdnPublishFlag) {
+        this.hdnPublishFlag = hdnPublishFlag;
     }
 
     // </editor-fold>

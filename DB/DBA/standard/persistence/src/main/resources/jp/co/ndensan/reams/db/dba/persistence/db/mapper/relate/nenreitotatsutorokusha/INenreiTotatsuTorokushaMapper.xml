@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper">
     <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
-    <resultMap id="resultMap_getHiHokenshaDaichoList" type="jp.co.ndensan.reams.db.dba.entity.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity" autoMapping="true">
+    <resultMap id="resultMap_getHiHokenshaDaichoList" type="jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity" autoMapping="true">
         <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
         <result property="被保険者カナ氏名" column="hihokenshakanamei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="被保険者氏名" column="hihokenshamei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />

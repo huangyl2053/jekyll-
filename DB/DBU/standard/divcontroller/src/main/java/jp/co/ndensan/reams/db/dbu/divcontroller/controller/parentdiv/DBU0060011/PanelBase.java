@@ -2,8 +2,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0060011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.JigyoHokokuNenpoResult;
-import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
+import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.JigyoHokokuNenpoResult;
+import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;

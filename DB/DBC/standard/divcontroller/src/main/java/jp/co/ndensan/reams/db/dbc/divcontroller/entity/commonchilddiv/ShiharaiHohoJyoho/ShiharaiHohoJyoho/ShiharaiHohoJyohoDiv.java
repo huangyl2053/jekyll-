@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiH
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shiharaihohojyoho.ShiharaiHohoJyohoHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -32,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ShiharaiHohoJyoho のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-0300-010 houtianpeng
  */
 public class ShiharaiHohoJyohoDiv extends Panel implements IShiharaiHohoJyohoDiv {
 

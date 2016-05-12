@@ -68,8 +68,6 @@ public final class FutsuChoshuTotalHandler {
     private static final RString メッセージ = new RString("保険者が単一市町村または広域市町村ではないため処理の継続");
     private static final RString メッセージ_現年度 = new RString("現年度のxx月のyy");
     private static final RString メッセージ_過年度 = new RString("過年度のxx月のyy");
-    private static final RString メッセージ_選択 = new RString("選択をONにできる数");
-    private static final RString メッセージ_選択数 = new RString("12以下");
     private static final RString 当行月 = new RString("xx");
     private static final RString セル名 = new RString("yy");
     private static final RString 発行日 = new RString("発行日");
@@ -322,6 +320,10 @@ public final class FutsuChoshuTotalHandler {
         div.getFutsuChoshu().getDdlFukaHoho().setDataSource(set賦課方法ddl());
         div.getFutsuChoshu().getDdlFukaHoho().setSelectedKey(DbBusinessConifg.get(ConfigNameDBB.普通徴収_仮算定賦課方法,
                 システム日時, SubGyomuCode.DBB介護賦課));
+        RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, new CodeShubetsu(コード種別),
+                new Code(div.getFutsuChoshu().getZanteiKeisanHoho().getDdlFukaHoho().getSelectedKey()),
+                new FlexibleDate(システム日時.toDateString())).getコード名称();
+        div.getFutsuChoshu().getZanteiKeisanHoho().getTxtFukaHohoHelp().setValue(賦課方法説明);
         div.getFutsuChoshu().getDdlIdoHoho().setDataSource(set異動方法ddl());
         div.getFutsuChoshu().getDdlIdoHoho().setSelectedKey(DbBusinessConifg.get(ConfigNameDBB.普通徴収_仮算定異動方法,
                 システム日時, SubGyomuCode.DBB介護賦課));
@@ -747,22 +749,6 @@ public final class FutsuChoshuTotalHandler {
             message.replace(セル名, columnName);
         }
         return message.toRString();
-    }
-
-    /**
-     * 過年度グリッド内の選択数のチェック
-     */
-    public void 選択数チェック() {
-        int i = 0;
-        for (dgGenNendoKibetsuJoho_Row row : div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getDataSource()) {
-            if (row.getSelected()) {
-                i = i + 数字_１;
-            }
-        }
-        if (i > 数字_１２) {
-            throw new ApplicationException(UrErrorMessages.項目に対する制約.getMessage().replace(
-                    メッセージ_選択.toString(), メッセージ_選択数.toString()));
-        }
     }
 
     /**
@@ -1312,8 +1298,6 @@ public final class FutsuChoshuTotalHandler {
                 FuchokiJohoTsukiShoriKubun.普徴仮算定.get名称()));
         月処理区分.add(new KeyValueDataSource(FuchokiJohoTsukiShoriKubun.普徴仮算定異動.getコード(),
                 FuchokiJohoTsukiShoriKubun.普徴仮算定異動.get名称()));
-        月処理区分.add(new KeyValueDataSource(FuchokiJohoTsukiShoriKubun.特徴仮算定異動.getコード(),
-                FuchokiJohoTsukiShoriKubun.特徴仮算定異動.get名称()));
         月処理区分.add(new KeyValueDataSource(FuchokiJohoTsukiShoriKubun.本算定.getコード(),
                 FuchokiJohoTsukiShoriKubun.本算定.get名称()));
         月処理区分.add(new KeyValueDataSource(FuchokiJohoTsukiShoriKubun.本算定異動.getコード(),

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.shisetsuhenkotsuchisho;
 
-import jp.co.ndensan.reams.db.dba.entity.report.source.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoReportSource;
 
 /**
  * 介護保険住所地特例施設変更通知書Editorです。
@@ -40,7 +40,9 @@ class ShisetsuHenkoTsuchishoEditor implements IShisetsuHenkoTsuchishoEditor {
         source.hokenshaName = item.getHokenshaName();
         source.tantoBushoName = item.getTantoBushoName();
         source.barcode = item.getBarcode();
-        source.midashi = item.getMidashi();
+        source.midashi1 = item.getMidashi1();
+        source.midashi2 = item.getMidashi2();
+        source.midashi3 = item.getMidashi3();
         source.hihokenshaNo1 = item.getHihokenshaNo1();
         source.hihokenshaNo2 = item.getHihokenshaNo2();
         source.hihokenshaNo3 = item.getHihokenshaNo3();
@@ -67,13 +69,9 @@ class ShisetsuHenkoTsuchishoEditor implements IShisetsuHenkoTsuchishoEditor {
         source.henkogoShisetsuYubinNo = item.getHenkogoShisetsuYubinNo();
         source.henkogoShisetsuJusho = item.getHenkogoShisetsuJusho();
         source.denshiKoin = item.getDenshiKoin();
-        source.hakkoYMD1 = item.getHakkoYMD1();
-        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
-        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
-        source.koinMojiretsu = item.getKoinMojiretsu();
-        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
-        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
-        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
+        source.shuchoMei = item.getShuchoMei();
+        source.shichosonMei = item.getShichosonMei();
         source.koinShoryaku = item.getKoinShoryaku();
         return source;
     }

@@ -34,4 +34,25 @@ public interface IServiceCodeInputCommonChildDiv extends ICommonChildDivBaseProp
      * @return サービス名称
      */
     public RString getサービス名称();
+
+    /**
+     * サービス種類コードを返します。
+     *
+     * @param サービス種類コード RString
+     */
+    public void setサービス種類コード(RString サービス種類コード);
+
+    /**
+     * サービス項目コードを返します。
+     *
+     * @param サービス項目コード RString
+     */
+    public void setサービス項目コード(RString サービス項目コード);
+
+    /**
+     * サービス名称を返します。
+     *
+     * @param サービス名称 RString
+     */
+    public void setサービス名称(RString サービス名称);
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt310FindKozaEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 
 /**
  * 宛名、納組、納期、宛先、口座情報を取得するEntityクラスです。
@@ -24,5 +24,5 @@ public class KakushuTsuchishoFindEntity implements Serializable {
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private UaFt250FindAtesakiEntity 宛先;
     private CaFt703FindNokumiEntity 納組;
-    private UaFt310FindKozaEntity 口座;
+    private KozaRelateEntity 口座;
 }

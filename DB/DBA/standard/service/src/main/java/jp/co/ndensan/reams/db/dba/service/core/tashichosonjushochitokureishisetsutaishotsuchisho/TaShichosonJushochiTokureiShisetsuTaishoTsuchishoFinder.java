@@ -8,24 +8,15 @@ package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishiset
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoTaishoTsuchishoEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,8 +32,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -189,25 +178,6 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
                 outEntity.set性別(Seibetsu.女.get名称());
             }
         }
-
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association association = finder.getAssociation();
-        INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
-        ReportAssembler assembler = new ReportManager().
-                reportAssembler(new RString("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), SubGyomuCode.DBA介護資格).create();
-        RString imageFilePath = assembler.getImageFolderPath();
-
-        INinshoshaSourceBuilder builder
-                = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, imageFilePath, RDate.getNowDate());
-        outEntity.set電子公印(builder.buildSource().denshiKoin);
-        if (builder.buildSource().ninshoshaShimeiKakenai.isEmpty()) {
-            outEntity.set首長名(builder.buildSource().ninshoshaShimeiKakeru);
-        } else {
-            outEntity.set首長名(builder.buildSource().ninshoshaShimeiKakenai);
-        }
-        outEntity.set市町村名(association.get市町村名());
-        outEntity.set公印省略(builder.buildSource().koinShoryaku);
 
         return new TatokuKanrenChohyoTaishoTsuchishoBusiness(outEntity);
     }

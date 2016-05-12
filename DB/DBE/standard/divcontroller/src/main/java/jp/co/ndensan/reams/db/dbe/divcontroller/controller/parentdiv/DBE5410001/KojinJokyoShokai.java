@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.Koji
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001.KojinJokyoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai.KojinJokyoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
@@ -116,7 +117,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHihokenshano());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(div.getHihokenshano()));
         return ResponseData.of(div).respond();
     }
 

@@ -67,6 +67,12 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.13</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdBatchController</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会開催結果情報Entityクラスです。
+ *
+ * @reamsid_L DBE-0180-030 xuyannan
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter

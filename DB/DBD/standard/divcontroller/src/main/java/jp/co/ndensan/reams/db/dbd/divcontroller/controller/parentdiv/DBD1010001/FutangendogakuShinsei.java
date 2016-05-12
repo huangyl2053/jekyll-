@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgSh
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001.FutangendogakuNinteiShinseiHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001.NinteiShinseiValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -48,11 +50,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onLoad(FutangendogakuShinseiDiv div) {
-        getHandler(div).onLoad();
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs = getValidationHandler().受給共通_被保データなしチェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!ResponseHolder.isReRequest() && !getHandler(div).onLoad()) {
+            return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -78,6 +77,7 @@ public class FutangendogakuShinsei {
         div.getBtnDispSetaiJoho().setDisplayNone(true);
         div.getBtnCloseSetaiJoho().setDisplayNone(false);
         div.getBtnCloseSetaiJoho().setDisabled(false);
+        getHandler(div).世帯所得一覧の初期化();
         if (DBD1010001StateName.一覧.getName().equals(ResponseHolder.getState())) {
             return ResponseData.of(div).setState(DBD1010001StateName.世帯情報From一覧);
         } else if (DBD1010001StateName.詳細.getName().equals(ResponseHolder.getState())) {
@@ -235,6 +235,9 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnReSearch(FutangendogakuShinseiDiv div) {
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, null);
+
         RealInitialLocker.release(new LockingKey(div.getLockKey()));
         return ResponseData.of(div).forwardWithEventName(DBD1010001TransitionEventName.検索処理へ).respond();
     }
@@ -246,6 +249,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnToSearchResult(FutangendogakuShinseiDiv div) {
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, null);
         getHandler(div).onClick_btnToSearchResult();
         RealInitialLocker.release(new LockingKey(div.getLockKey()));
         return ResponseData.of(div).forwardWithEventName(DBD1010001TransitionEventName.検索結果一覧へ).respond();
@@ -350,23 +355,7 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onChange_radHaigushaUmu(FutangendogakuShinseiDiv div) {
-        if (配偶者の有無_無.equals(div.getRadHaigushaUmu().getSelectedKey())) {
-            div.getTxtHaigushaShimeiKana().setDisabled(true);
-            div.getTxtHaigushaShimei().setDisabled(true);
-            div.getTxtHaigushaUmareYMD().setDisabled(true);
-            div.getTxtHaigushaRenrakusaki().setDisabled(true);
-            div.getTxtHaigushaJusho1().setDisabled(true);
-            div.getTxtHaigushaJusho2().setDisabled(true);
-            div.getRadHaigushaKazeiKubun().setDisabled(true);
-        } else {
-            div.getTxtHaigushaShimeiKana().setDisabled(false);
-            div.getTxtHaigushaShimei().setDisabled(false);
-            div.getTxtHaigushaUmareYMD().setDisabled(false);
-            div.getTxtHaigushaRenrakusaki().setDisabled(false);
-            div.getTxtHaigushaJusho1().setDisabled(false);
-            div.getTxtHaigushaJusho2().setDisabled(false);
-            div.getRadHaigushaKazeiKubun().setDisabled(false);
-        }
+        getHandler(div).onChange_radHaigushaUmu();
         return ResponseData.of(div).respond();
     }
 

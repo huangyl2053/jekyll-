@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofukakakutei.KanendoIdoFukaKakutei;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.KanendoFukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgKanendoFukaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgShoriNichiji_Row;

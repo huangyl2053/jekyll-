@@ -149,7 +149,6 @@ public class SetaiinShotokuJohoFinder {
     public List<SetaiinShotoku> get世帯員所得情報(ShikibetsuCode 識別コード, FlexibleYear 所得年度, YMDHMS 所得基準年月日) {
         requireNonNull(識別コード, UrErrorMessages.検索キーの誤り.getMessage().toString());
         requireNonNull(所得年度, UrErrorMessages.検索キーの誤り.getMessage().toString());
-        requireNonNull(所得基準年月日, UrErrorMessages.検索キーの誤り.getMessage().toString());
         if (所得基準年月日 == null) {
             所得基準年月日 = YMDHMS.now();
         }

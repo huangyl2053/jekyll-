@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.shinsakaijohokojin.WariateIinAndIinJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.shinsakaijohokojin.WariateIinAndIinJoho;
 import jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity;

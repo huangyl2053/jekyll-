@@ -7,13 +7,15 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
+import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako.ShichosonCodeResult;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.JigyoJokyoHokokuHoseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuGeppoHoseiHyoji;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -118,10 +120,14 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
                 .split(RString.HALF_SPACE.toString());
         parameter.set市町村名称(市町村.get(1));
         parameter.set選択した市町村コード(市町村.get(0));
+
         if (div.getTaishokensaku().getDdlShichoson().getSelectedKey().isEmpty()) {
             parameter.set保険者コード(RString.EMPTY);
         } else {
-            parameter.set保険者コード(TokeiTaishoKubun.保険者分.getコード());
+            LasdecCode 市町村コード = new LasdecCode(市町村.get(0));
+            Map<RString, ShichosonCodeResult> map = ViewStateHolder.get(ViewStateKeys.市町村Entiyリスト, Map.class);
+            ShichosonCodeResult codeResult = map.get(市町村コード.value());
+            parameter.set保険者コード(codeResult.get保険者コード());
         }
         ViewStateHolder.put(ViewStateKeys.事業報告基本, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);

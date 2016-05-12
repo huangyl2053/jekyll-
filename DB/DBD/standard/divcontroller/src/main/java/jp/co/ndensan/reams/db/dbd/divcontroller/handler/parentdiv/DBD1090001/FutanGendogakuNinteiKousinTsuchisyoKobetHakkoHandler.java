@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
@@ -35,7 +37,22 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler {
         FutanGendogakuNinteiParameter parameter
                 = FutanGendogakuNinteiParameter.createSelectParam(GemmenGengakuShurui.負担限度額認定.getコード(), 被保険者番号);
         ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List = futanGendogakuNinteiManager.get負担限度額認定画面用リスト(parameter);
+        compareTo(介護保険負担限度額認定List);
         ViewStateHolder.put(KgHoukenFutanGendogakuNintei.リストキー, 介護保険負担限度額認定List);
+    }
+
+    /**
+     * 介護保険負担限度額認定Listをsort
+     *
+     * @param 介護保険負担限度額認定List
+     */
+    public static void compareTo(ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List) {
+        Collections.sort(介護保険負担限度額認定List, new Comparator<FutanGendogakuNintei>() {
+            @Override
+            public int compare(FutanGendogakuNintei o1, FutanGendogakuNintei o2) {
+                return o2.get履歴番号() - o1.get履歴番号();
+            }
+        });
     }
 
     /**

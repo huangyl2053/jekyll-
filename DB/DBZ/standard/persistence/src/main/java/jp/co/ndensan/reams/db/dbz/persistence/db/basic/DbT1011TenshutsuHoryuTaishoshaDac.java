@@ -89,8 +89,10 @@ public class DbT1011TenshutsuHoryuTaishoshaDac implements ISaveable<DbT1011Tensh
      * @return 登録件数
      */
     @Transaction
-    public int delete(DbT1011TenshutsuHoryuTaishoshaEntity entity) {
+    public int deletePhysical(DbT1011TenshutsuHoryuTaishoshaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("転出保留対象者エンティティ"));
-        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.deletePhysical(entity).execute();
     }
 }

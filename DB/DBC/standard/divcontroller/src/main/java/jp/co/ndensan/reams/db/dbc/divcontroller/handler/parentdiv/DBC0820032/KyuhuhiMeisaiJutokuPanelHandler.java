@@ -22,8 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -120,14 +118,13 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      */
     public void set給付費明細() {
         dgJushochiTokutei_Row row = div.getPnlBtnDetail().getPnlKyufuhiMeisai().getDgJushochiTokutei().getClickedItem();
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput();
         if (row.getDefaultDataName1() != null && !row.getDefaultDataName1().isEmpty()) {
             RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
             RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
-            sercode.getTxtServiceCode1().setValue(serviceCodeShuruyi);
-            sercode.getTxtServiceCode2().setValue(serviceCodeKoumoku);
+            div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                    getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス種類コード(serviceCodeShuruyi);
+            div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                    getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス項目コード(serviceCodeKoumoku);
         }
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTanyi().
                 setValue(row.getDefaultDataName2().getValue());
@@ -139,11 +136,14 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 setValue(row.getDefaultDataName5());
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getRowId().setValue(new Decimal(row.getId()));
         if (row.getDefaultDataName8() != null && !row.getDefaultDataName8().isEmpty()) {
-            sercode.getTxtServiceCodeName().setValue(row.getDefaultDataName8());
+            div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                    getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス名称(row.getDefaultDataName8());
         }
         if (row.getDefaultDataName6() != null) {
             div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().
                     intialize(new HokenjaNo(row.getDefaultDataName6()));
+            div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().
+                    getCcdHokenshaJoho().setHokenjaNo(row.getDefaultDataName6());
         }
 
     }
@@ -152,15 +152,14 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      * clear給付費明細登録
      */
     public void clear給付費明細登録() {
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput();
-        HokenshaJohoDiv hojo = (HokenshaJohoDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho();
-        sercode.getTxtServiceCode1().clearValue();
-        sercode.getTxtServiceCode2().clearValue();
-        sercode.getTxtServiceCodeName().clearValue();
-        hojo.clear();
+
+        div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス種類コード(null);
+        div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス項目コード(null);
+        div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().setサービス名称(null);
+        div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().clear();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTanyi().clearValue();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtKaisu().clearValue();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().clearValue();
@@ -211,13 +210,10 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
     }
 
     private boolean checkState(dgJushochiTokutei_Row ddgRow) {
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput();
-        HokenshaJohoDiv hojo = (HokenshaJohoDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho();
-        RString サービス種類コード = sercode.getTxtServiceCode1().getValue();
-        RString サービス項目コード = sercode.getTxtServiceCode2().getValue();
+        RString サービス種類コード = div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().getサービスコード1();
+        RString サービス項目コード = div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().getサービスコード2();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(サービス項目コード);
         if (!ddgRow.getDefaultDataName1().equals(builder.toRString())) {
@@ -241,7 +237,8 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                 getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().getValue())) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName6().equals(hojo.getTxtHokenshaMeisho().getValue())) {
+        if (!ddgRow.getDefaultDataName6().equals(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().getHokenjaNo())) {
             return true;
         }
         return (!ddgRow.getDefaultDataName5().equals(
@@ -249,17 +246,16 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
     }
 
     private void setDgJushochiTokutei(dgJushochiTokutei_Row ddgRow) {
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput();
         RStringBuilder builder = new RStringBuilder();
-        builder.append(NUM1);
-//TODO   QA399
-//        if (serviceCodeInputDiv.getTxtServiceCode1() != null) {
-//            builder.append(serviceCodeInputDiv.getTxtServiceCode1().getValue());
-//        }
-        if (sercode.getTxtServiceCode2() != null) {
-            builder.append(sercode.getTxtServiceCode2().getValue());
+        if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().getサービスコード1() != null) {
+            builder.append(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                    getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().getサービスコード1());
+        }
+        if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().getサービスコード2() != null) {
+            builder.append(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
+                    getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput().getサービスコード2());
         }
         ddgRow.setDefaultDataName1(builder.toRString());
         if (div.getPnlBtnDetail().getPnlKyufuhiMeisai().
@@ -289,7 +285,6 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                     getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho().getHokenjaNo());
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-
             List<dgJushochiTokutei_Row> list = div.getPnlBtnDetail().
                     getPnlKyufuhiMeisai().getDgJushochiTokutei().getDataSource();
             list.add(ddgRow);
@@ -647,17 +642,10 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
      * @param flag boolean
      */
     public void readOnly給付費明細登録(boolean flag) {
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdServiceCodeInput();
-        HokenshaJohoDiv hojo = (HokenshaJohoDiv) div.getPnlBtnDetail().getPnlKyufuhiMeisai().
-                getPnlKyufuhiMeisaiTouroku().getCcdHokenshaJoho();
-        sercode.getTxtServiceCode2().setReadOnly(flag);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTanyi().setReadOnly(flag);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtKaisu().setReadOnly(flag);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().setReadOnly(flag);
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().setReadOnly(flag);
-        hojo.getTxtHokenshaMeisho().setReadOnly(flag);
 
     }
 

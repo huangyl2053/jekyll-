@@ -42,6 +42,7 @@ public class DBD1030001 {
     private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
     private static final RString 申請メニューID = new RString("DBDMN21004");
     private static final RString KEY0 = new RString("key0");
+    private static final RString ROOTTITLE_承認メニュ = new RString("社会福祉法事等利用者負担軽減申請承認");
 
     /**
      * 画面初期化
@@ -53,9 +54,15 @@ public class DBD1030001 {
         if (!ResponseHolder.isReRequest() && !getHandler(div).onLoad()) {
             InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
                     DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            return ResponseData.of(div).rootTitle(ROOTTITLE_承認メニュ).addMessage(message).respond();
         }
-        return ResponseData.of(div).respond();
+        if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).rootTitle(ROOTTITLE_承認メニュ).respond();
     }
 
     /**
@@ -68,6 +75,7 @@ public class DBD1030001 {
         div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisplayNone(true);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(false);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisabled(false);
+        getHandler(div).世帯所得一覧の初期化();
         if (一覧.getName().equals(ResponseHolder.getState())) {
             div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setText(文字列_申請一覧を表示する);
             return ResponseData.of(div).setState(世帯情報from一覧);
@@ -170,9 +178,6 @@ public class DBD1030001 {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).情報エリアクリア();
-            div.getDgShinseiList().setDisabled(false);
-            div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(false);
-            div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(true);
             return ResponseData.of(div).setState(一覧);
         } else {
             return ResponseData.of(div).respond();

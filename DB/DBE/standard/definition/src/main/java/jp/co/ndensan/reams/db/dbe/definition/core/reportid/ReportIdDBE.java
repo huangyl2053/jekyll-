@@ -195,13 +195,45 @@ public enum ReportIdDBE {
      */
     DBE702001(new ReportId("DBE702001_JigyoJokyoHokoku"), new RString("要介護認定事業状況報告")),
     /**
+     * 要介護認定判定結果一覧表の帳票ＩＤです。
+     */
+    DBE525001(new ReportId("DBE525001_hanteikekkaichiranA4"), new RString("要介護認定判定結果一覧表")),
+    /**
+     * 要介護認定判定結果一覧表Ａ３版の帳票ＩＤです。
+     */
+    DBE525002(new ReportId("DBE525002_HanteiKekkaIchiranA3"), new RString("要介護認定判定結果一覧表Ａ３版")),
+    /**
+     * 介護認定審査判定結果（鑑）の帳票ＩＤです。
+     */
+    DBE525006(new ReportId("DBE525006_HanteikekkaKagami"), new RString("介護認定審査判定結果（鑑）")),
+    /**
+     * 介護認定審査会議事録の帳票ＩＤです。
+     */
+    DBE525003(new ReportId("DBE525003_ShinsakaiGijiroku"), new RString("介護認定審査会議事録")),
+    /**
      * 要介護認定結果通知一覧表の帳票ＩＤです。
      */
     DBE525004(new ReportId("DBE525004_kekkatsuchiIchiranhyo"), new RString("要介護認定結果通知一覧表")),
     /**
      * 認定調査委託先・認定調査員一覧表の帳票ＩＤです。
      */
-    DBE592001(new ReportId("DBE592001_ChosaItakusakiNinteiChosainIchiranhyo"), new RString("認定調査委託先・認定調査員一覧表"));
+    DBE592001(new ReportId("DBE592001_ChosaItakusakiNinteiChosainIchiranhyo"), new RString("認定調査委託先・認定調査員一覧表")),
+    /**
+     * 介護認定審査会スケジュール表（年間）の帳票ＩＤです。
+     */
+    DBE514003(new ReportId("DBE514003_shinsakainenkansukejuruhyo"), new RString("介護認定審査会スケジュール表（年間）")),
+    /**
+     * 要介護状態区分別判定件数の帳票ＩＤです。
+     */
+    DBE701005(new ReportId("DBE701005_Jotaikubumbetsuhantei"), new RString("要介護状態区分別判定件数")),
+    /**
+     * 審査判定の変更状況の帳票ＩＤです。
+     */
+    DBE701006(new ReportId("DBE701006_ShinsahanteinoHenkojokyo"), new RString("審査判定の変更状況")),
+    /**
+     * 介護認定審査会集計表（判定別）の帳票ＩＤです。
+     */
+    DBE701007(new ReportId("DBE701007_shinsakaishukeihyoHanteibetsu"), new RString("介護認定審査会集計表（判定別）"));
 
     private final ReportId reportId;
 

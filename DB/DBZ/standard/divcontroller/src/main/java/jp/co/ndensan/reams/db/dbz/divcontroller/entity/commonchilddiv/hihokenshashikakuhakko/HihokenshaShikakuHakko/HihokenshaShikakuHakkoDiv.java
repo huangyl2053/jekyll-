@@ -7,22 +7,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * HihokenshaShikakuHakko のクラスファイル
@@ -31,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShikakuHakkoDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,6 +40,18 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     private NinteiInfoDiv NinteiInfo;
     @JsonProperty("tabHihokenshaShikakuShosai")
     private tabHihokenshaShikakuShosaiDiv tabHihokenshaShikakuShosai;
+    @JsonProperty("hidden入所施設コード１")
+    private RString hidden入所施設コード１;
+    @JsonProperty("hidden入所施設種類１")
+    private RString hidden入所施設種類１;
+    @JsonProperty("hidden入所施設コード２")
+    private RString hidden入所施設コード２;
+    @JsonProperty("hidden入所施設種類２")
+    private RString hidden入所施設種類２;
+    @JsonProperty("hidden入所施設コード３")
+    private RString hidden入所施設コード３;
+    @JsonProperty("hidden入所施設種類３")
+    private RString hidden入所施設種類３;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,7 +64,6 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return YukoKigenInfo
      */
     @JsonProperty("YukoKigenInfo")
-    @Override
     public YukoKigenInfoDiv getYukoKigenInfo() {
         return YukoKigenInfo;
     }
@@ -75,7 +82,6 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return NinteiInfo
      */
     @JsonProperty("NinteiInfo")
-    @Override
     public NinteiInfoDiv getNinteiInfo() {
         return NinteiInfo;
     }
@@ -94,7 +100,6 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * @return tabHihokenshaShikakuShosai
      */
     @JsonProperty("tabHihokenshaShikakuShosai")
-    @Override
     public tabHihokenshaShikakuShosaiDiv getTabHihokenshaShikakuShosai() {
         return tabHihokenshaShikakuShosai;
     }
@@ -109,46 +114,111 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     /*
-     * [共有子DIVモード]
+     * gethidden入所施設コード１
+     * @return hidden入所施設コード１
      */
-    @JsonProperty("modes")
-    private HashSet<Mode> modes;
-
-    public static enum 発行証タイプ implements ICommonChildDivMode {
-
-        被保険者証("被保険者証"),
-        資格者証("資格者証");
-
-        private final String name;
-
-        private 発行証タイプ(final String name) {
-            this.name = name;
-        }
-
-        public static 発行証タイプ getEnum(String str) {
-            発行証タイプ[] enumArray = 発行証タイプ.values();
-
-            for (発行証タイプ enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
+    @JsonProperty("hidden入所施設コード１")
+    public RString getHidden入所施設コード１() {
+        return hidden入所施設コード１;
     }
 
-    public 発行証タイプ getMode_発行証タイプ() {
-        return (発行証タイプ) _CommonChildDivModeUtil.getMode(this.modes, 発行証タイプ.class);
+    /*
+     * sethidden入所施設コード１
+     * @param hidden入所施設コード１ hidden入所施設コード１
+     */
+    @JsonProperty("hidden入所施設コード１")
+    public void setHidden入所施設コード１(RString hidden入所施設コード１) {
+        this.hidden入所施設コード１ = hidden入所施設コード１;
     }
 
-    public void setMode_発行証タイプ(発行証タイプ value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 発行証タイプ.class, value);
+    /*
+     * gethidden入所施設種類１
+     * @return hidden入所施設種類１
+     */
+    @JsonProperty("hidden入所施設種類１")
+    public RString getHidden入所施設種類１() {
+        return hidden入所施設種類１;
+    }
+
+    /*
+     * sethidden入所施設種類１
+     * @param hidden入所施設種類１ hidden入所施設種類１
+     */
+    @JsonProperty("hidden入所施設種類１")
+    public void setHidden入所施設種類１(RString hidden入所施設種類１) {
+        this.hidden入所施設種類１ = hidden入所施設種類１;
+    }
+
+    /*
+     * gethidden入所施設コード２
+     * @return hidden入所施設コード２
+     */
+    @JsonProperty("hidden入所施設コード２")
+    public RString getHidden入所施設コード２() {
+        return hidden入所施設コード２;
+    }
+
+    /*
+     * sethidden入所施設コード２
+     * @param hidden入所施設コード２ hidden入所施設コード２
+     */
+    @JsonProperty("hidden入所施設コード２")
+    public void setHidden入所施設コード２(RString hidden入所施設コード２) {
+        this.hidden入所施設コード２ = hidden入所施設コード２;
+    }
+
+    /*
+     * gethidden入所施設種類２
+     * @return hidden入所施設種類２
+     */
+    @JsonProperty("hidden入所施設種類２")
+    public RString getHidden入所施設種類２() {
+        return hidden入所施設種類２;
+    }
+
+    /*
+     * sethidden入所施設種類２
+     * @param hidden入所施設種類２ hidden入所施設種類２
+     */
+    @JsonProperty("hidden入所施設種類２")
+    public void setHidden入所施設種類２(RString hidden入所施設種類２) {
+        this.hidden入所施設種類２ = hidden入所施設種類２;
+    }
+
+    /*
+     * gethidden入所施設コード３
+     * @return hidden入所施設コード３
+     */
+    @JsonProperty("hidden入所施設コード３")
+    public RString getHidden入所施設コード３() {
+        return hidden入所施設コード３;
+    }
+
+    /*
+     * sethidden入所施設コード３
+     * @param hidden入所施設コード３ hidden入所施設コード３
+     */
+    @JsonProperty("hidden入所施設コード３")
+    public void setHidden入所施設コード３(RString hidden入所施設コード３) {
+        this.hidden入所施設コード３ = hidden入所施設コード３;
+    }
+
+    /*
+     * gethidden入所施設種類３
+     * @return hidden入所施設種類３
+     */
+    @JsonProperty("hidden入所施設種類３")
+    public RString getHidden入所施設種類３() {
+        return hidden入所施設種類３;
+    }
+
+    /*
+     * sethidden入所施設種類３
+     * @param hidden入所施設種類３ hidden入所施設種類３
+     */
+    @JsonProperty("hidden入所施設種類３")
+    public void setHidden入所施設種類３(RString hidden入所施設種類３) {
+        this.hidden入所施設種類３ = hidden入所施設種類３;
     }
 
     /*

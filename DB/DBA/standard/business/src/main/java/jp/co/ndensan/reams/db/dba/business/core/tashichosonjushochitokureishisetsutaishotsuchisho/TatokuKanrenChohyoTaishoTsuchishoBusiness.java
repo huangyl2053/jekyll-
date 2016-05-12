@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho;
 
-import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoTaishoTsuchishoEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

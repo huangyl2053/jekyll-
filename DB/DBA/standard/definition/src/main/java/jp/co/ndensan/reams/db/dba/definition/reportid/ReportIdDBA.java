@@ -232,7 +232,11 @@ public enum ReportIdDBA {
     /**
      * 他市町村住所地特例者台帳の帳票ＩＤです。
      */
-    DBA100011(new ReportId("DBA100011_TashichosonJushochitokureishaDaicho"), new RString("他市町村住所地特例者台帳"));
+    DBA100011(new ReportId("DBA100011_TashichosonJushochitokureishaDaicho"), new RString("他市町村住所地特例者台帳")),
+    /**
+     * 汎用リスト 被保険者台帳の帳票ＩＤです。
+     */
+    DBA701001(new ReportId("DBA701001_HanyoListHihokenshaDaicho"), new RString("汎用リスト 被保険者台帳"));
 
     private final ReportId reportId;
     private final RString reportName;

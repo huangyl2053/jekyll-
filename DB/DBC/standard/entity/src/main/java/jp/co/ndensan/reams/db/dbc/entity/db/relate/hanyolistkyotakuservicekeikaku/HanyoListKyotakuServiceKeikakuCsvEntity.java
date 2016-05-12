@@ -223,7 +223,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntity {
     @CsvField(order = 1020, name = "受給認定日")
     private RString 受給認定日;
     @CsvField(order = 1030, name = "受給旧措置")
-    private boolean 受給旧措置;
+    private RString 受給旧措置;
     @CsvField(order = 1040, name = "受給みなし更新認定")
     private RString 受給みなし更新認定;
     @CsvField(order = 1050, name = "受給直近事由")

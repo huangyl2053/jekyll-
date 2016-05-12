@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1020011;
 
-import jp.co.ndensan.reams.db.dba.business.nenreitotatsushikakuido.NenreitotatsuJoken;
+import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsushikakuido.NenreitotatsuJoken;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1020011.NenReiTotatsuSearchConditionDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1020011.NenReiTotatsuSearchConditionHandler;

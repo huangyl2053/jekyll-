@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * tblGendoGaku のクラスファイル 
- * 
+ * tblGendoGaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class tblGendoGakuDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -87,13 +87,15 @@ public class tblGendoGakuDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celKubunGendoGaku のクラスファイル 
- * 
+ * celKubunGendoGaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celKubunGendoGakuAttblGendoGaku extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("KubunGendoGaku")
     private KubunGendoGakuDiv KubunGendoGaku;
 
@@ -117,13 +119,15 @@ class celKubunGendoGakuAttblGendoGaku extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celShuruiGendoKijungaku のクラスファイル 
- * 
+ * celShuruiGendoKijungaku のクラスファイル
+ *
  * @author 自動生成
  */
 class celShuruiGendoKijungakuAttblGendoGaku extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("ShuruiShikyuGendoKijungaku")
     private ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku;
 

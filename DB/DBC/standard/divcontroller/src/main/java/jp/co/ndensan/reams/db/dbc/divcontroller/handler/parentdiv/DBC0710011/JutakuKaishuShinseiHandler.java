@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.dgJu
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -99,9 +100,9 @@ public final class JutakuKaishuShinseiHandler {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
             }
         }
-        ViewStateHolder.put(
-                ViewStateKeys.サービス提供年月, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtTeikyoYM().getValue());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(div.getJutakuKaishuShinseiList()
+                .getDgJutakuKaishuShinseiList().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth()
+                .toDateString()));
         ViewStateHolder.put(
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
                 .getClickedItem().getTxtSeiriNo().getValue());
@@ -111,9 +112,9 @@ public final class JutakuKaishuShinseiHandler {
      * 「｢削除｣ボタン」押した時、表示モードの設定
      */
     public void setDeleteMode() {
-        ViewStateHolder.put(
-                ViewStateKeys.サービス提供年月, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtTeikyoYM().getValue());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(div.getJutakuKaishuShinseiList()
+                .getDgJutakuKaishuShinseiList().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth()
+                .toDateString()));
         ViewStateHolder.put(
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
                 .getClickedItem().getTxtSeiriNo().getValue());
@@ -124,9 +125,9 @@ public final class JutakuKaishuShinseiHandler {
      * 「｢取消｣ボタン」押した時、表示モードの設定
      */
     public void setCancelMode() {
-        ViewStateHolder.put(
-                ViewStateKeys.サービス提供年月, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
-                .getClickedItem().getTxtTeikyoYM().getValue());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(div.getJutakuKaishuShinseiList()
+                .getDgJutakuKaishuShinseiList().getClickedItem().getTxtTeikyoYM().getValue().getYearMonth()
+                .toDateString()));
         ViewStateHolder.put(
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
                 .getClickedItem().getTxtSeiriNo().getValue());

@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.source.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -49,13 +49,9 @@ public class ShisetsuTaishoTsuchishoPrintService {
                         FlexibleDate.getNowDate(),
                         reportSourceWriter);
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setHakkoYMD1(ninshoshaSource.hakkoYMD);
-                item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
-                item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
-                item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
-                item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
-                item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
-                item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+                item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
+                item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
+                item.setShichosonMei2(ninshoshaSource.ninshoshaYakushokuMei2);
                 item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
             }
         }

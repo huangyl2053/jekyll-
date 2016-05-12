@@ -12,12 +12,13 @@
         <id property="介護賦課.rirekiNo" column="dbT2002Fuka_rirekiNo" />
         <association property="介護賦課" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
         <association property="介護徴収方法" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
-        <association property="収入情報取得PSM" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <collection property="収入情報取得PSM" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
         <collection property="介護期別RelateEntity" resultMap="resultMap_KibetsuEntity"/>
     </resultMap>
-         <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
-        <result property="介護期別Entity.choteiId" column="dbT2003Kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
+        <id property="介護期別Entity.choshuHouhou" column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="介護期別Entity.ki" column="dbT2003Kibetsu_ki" />
         <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
         <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
@@ -73,7 +74,7 @@
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <association property="納組" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.nokumiResult"/>
-        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.kozaResult"/>
+        <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
     </resultMap>
     
     <select id="get宛名納組宛先口座" resultMap="resultMap_KakushuTsuchishoFind"
@@ -82,7 +83,7 @@
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi"/>,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.columns_Koza"/>
+            koza.*
         FROM
             rgdb."DbT2002Fuka" AS "DbT2002Fuka"
         INNER JOIN
@@ -96,13 +97,13 @@
         ON 
             "Atesaki"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         LEFT JOIN
-            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL) AS "Nokumi"
+            rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
         ON 
             "Nokumi"."CaT0714shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         LEFT JOIN
-            rgua."UaFt310FindKoza"(NULL, NULL, NULL, NULL, NULL, NULL) AS "Koza"
+            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON 
-            "Koza"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
+            koza."uaT0310Koza_shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         WHERE
             "DbT2002Fuka"."choteiNendo"= #{調定年度} 
         AND "DbT2002Fuka"."fukaNendo"= #{賦課年度} 

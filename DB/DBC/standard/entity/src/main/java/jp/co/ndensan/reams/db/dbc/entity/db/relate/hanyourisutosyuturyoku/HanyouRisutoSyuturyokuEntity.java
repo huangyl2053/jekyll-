@@ -5,17 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3112KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
@@ -28,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -41,16 +33,47 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HanyouRisutoSyuturyokuEntity {
 
-    private DbT3055KogakuKyufuTaishoshaGokeiEntity 給付対象者合計;
-    private DbT3056KogakuShikyuShinseiEntity 支給申請;
-    private DbT3057KogakuShikyuHanteiKekkaEntity 支給判定結果;
-    private DbT3058KogakuShikyuShinsaKetteiEntity 支給審査決定;
-    private DbT3054KogakuKyufuTaishoshaMeisaiEntity 給付対象者明細;
-    private DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity 事業給付対象者明細;
-    private DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 事業給付対象者合計;
-    private DbT3110JigyoKogakuShikyuShinseiEntity 事業支給申請;
-    private DbT3111JigyoKogakuShikyuHanteiKekkaEntity 事業支給判定結果;
-    private DbT3112KogakuShikyuShinsaKetteiEntity 事業支給審査決定;
+    private RString 支払場所;
+    private FlexibleDate 支払期間開始年月日;
+    private FlexibleDate 支払期間終了年月日;
+    private RString 支払窓口開始時間;
+    private RString 支払窓口終了時間;
+    private FlexibleYearMonth サービス提供年月;
+    private Decimal 履歴番号;
+    private HokenshaNo 証記載保険者番号;
+    private FlexibleDate 申請年月日;
+    private RString 申請理由;
+    private RString 申請者区分;
+    private AtenaMeisho 申請者氏名;
+    private AtenaKanaMeisho 申請者氏名カナ;
+    private TelNo 申請者電話番号;
+    private FlexibleDate 受付年月日;
+    private RString 支払方法区分コード;
+    private Decimal 合計_高額支給額;
+    private Decimal サービス費用合計額合計;
+    private Decimal 利用者負担額合計;
+    private Decimal 算定基準額;
+    private Decimal 支払済金額合計;
+    private FlexibleYearMonth 対象者受取年月;
+    private FlexibleYearMonth 対象者判定審査年月;
+    private RString 自動償還対象フラグ;
+    private FlexibleDate 決定年月日;
+    private Decimal 本人支払額;
+    private RString 判定_支給区分コード;
+    private Decimal 支給金額;
+    private RString 不支給理由;
+    private RString 審査方法区分;
+    private FlexibleYearMonth 判定結果送付年月;
+    private FlexibleDate 決定通知書作成年月日;
+    private FlexibleDate 振込通知書作成年月日;
+    private RString 通知書番号;
+    private Decimal 利用者負担額;
+    private RString 決定_支給区分コード;
+    private FlexibleYearMonth 決定年月;
+    private Decimal 決定_高額支給額;
+    private FlexibleYearMonth 決定者受取年月;
+    private RString 高額給付根拠;
+
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private UaFt250FindAtesakiEntity 宛先;
     private KozaRelateEntity 口座情報;
@@ -108,7 +131,7 @@ public class HanyouRisutoSyuturyokuEntity {
     private FlexibleDate 認定有効期間開始日;
     private FlexibleDate 認定有効期間終了日;
     private FlexibleDate 受給認定日;
-    private boolean 旧措置フラグ;
+    private RString 旧措置フラグ;
     private Code みなし要介護区分コード;
     private Code 直近異動事由コード;
 

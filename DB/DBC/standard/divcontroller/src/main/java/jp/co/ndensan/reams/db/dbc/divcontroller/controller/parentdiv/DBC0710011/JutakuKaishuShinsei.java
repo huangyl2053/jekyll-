@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JutakuKaishuShinsei {
 
     private static final RString 申請区分事前申請 = new RString("1");
-    private final RString 申請区分取消 = new RString("9");
+    private final RString 申請区分取消 = new RString("取消");
 
     /**
      * 画面ロードメソッド

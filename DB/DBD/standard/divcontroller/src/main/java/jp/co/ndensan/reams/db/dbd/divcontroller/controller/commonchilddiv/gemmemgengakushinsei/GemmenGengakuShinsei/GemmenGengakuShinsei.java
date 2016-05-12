@@ -75,7 +75,8 @@ public class GemmenGengakuShinsei {
             div.getTxtShinseishaTsuzukigara().setValue(new RString("本人"));
             div.getTxtShinseishaYubinNo().setValue(kojin.get住所().get郵便番号());
             div.getTxtShinseishaTelNo().setDomain(kojin.get連絡先１());
-            div.getTxtShinseishaJusho().setDomain(new AtenaJusho(kojin.get住所().get住所()));
+            div.getTxtShinseishaJusho().setDomain(new AtenaJusho(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().value())
+                    .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().value())));
 
         }
         return ResponseData.of(div).respond();

@@ -22,10 +22,12 @@ and open the template in the editor.
         Fuka."nengakuHokenryo2" as "算定年額保険料２",
         Fuka."gemmenGaku" as "減免額",
         Fuka."kakuteiHokenryo" as "確定介護保険料",
-        Fuka."koseiM" as "更正月"
+        Fuka."koseiM" as "更正月",
+        ChoteiKyotsu."choteigaku" as "調定額",
+        ChoteiKyotsu."nokigenYMD" as "納期限"
         FROM
         rgdb."DbT2002Fuka" AS Fuka
-        INNER JOIN 
+        LEFT JOIN 
         rgdb."DbT2003Kibetsu" AS Kibetsu
         ON 
         Fuka."choteiNendo"=Kibetsu."choteiNendo"
@@ -33,7 +35,6 @@ and open the template in the editor.
         AND Fuka."tsuchishoNo"=Kibetsu."tsuchishoNo"
         AND Fuka."rirekiNo"=Kibetsu."rirekiNo"
         AND Kibetsu."ki"=#{ki}
-        AND Kibetsu."choshuHouhou"=#{choshuHouhou}
         INNER JOIN 
         rgdb."UrT0705ChoteiKyotsu" AS ChoteiKyotsu
         ON Kibetsu."choteiId"=ChoteiKyotsu."choteiId"
@@ -44,43 +45,6 @@ and open the template in the editor.
         Fuka."choteiNendo" DESC,
         Fuka."fukaNendo" DESC
     </select>  
-    
-    <select id="select納付額と納期限" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">
-        SELECT
-        ChoteiKyotsu."choteigaku",
-        ChoteiKyotsu."nokigenYMD"
-        FROM
-        rgdb."UrT0705ChoteiKyotsu" AS ChoteiKyotsu  
-        INNER JOIN 
-        rgdb."DbT2003Kibetsu" AS  Kibetsu
-        ON
-        Kibetsu."choteiId"=ChoteiKyotsu."choteiId"
-        AND Kibetsu."choteiNendo"=#{choteiNendo}
-        AND Kibetsu."fukaNendo"=#{fukaNendo}
-        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
-        AND Kibetsu."rirekiNo"=#{rirekiNo}
-        AND Kibetsu."ki"=#{ki}
-        AND Kibetsu."choshuHouhou"=#{choshuHouhou}
-         
-    </select>
-
-    <select id="delete調定状況" parameterType="java.util.Map" fetchSize="500">
-         delete 
-        from rgdb."UrT0707ChoteiJokyo"
-        where "choteiJokyoId"=#{choteiJokyoId}
-    </select>
-
-    <select id="delete調定額内訳" parameterType="java.util.Map" fetchSize="500">
-        delete 
-        from rgdb."UrT0706ChoteigakuUchiwake" as ChoteigakuUchiwake 
-        where "choteiId"=#{choteiId}
-    </select>
-    
-    <select id="delete収納管理マスタ" parameterType="java.util.Map" fetchSize="500">
-        delete 
-        from rgdb."UrT0700ShunoKanri"
-        where "shunoId"=#{shunoId}
-    </select>
     
     <select id="select調定共通ForUpdate" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
         select distinct ChoteiKyotsu.*

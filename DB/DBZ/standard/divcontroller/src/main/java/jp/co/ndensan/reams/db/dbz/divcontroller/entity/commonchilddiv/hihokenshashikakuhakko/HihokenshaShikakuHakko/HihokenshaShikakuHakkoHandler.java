@@ -67,7 +67,7 @@ public class HihokenshaShikakuHakkoHandler {
 
         div.getYukoKigenInfo().getTxtYukoKigen().clearValue();
         div.getYukoKigenInfo().getTxtKofuDate().setValue(FlexibleDate.getNowDate());
-        if (entity.get市町村コード() != null) {
+        if (!entity.get市町村コード().isNullOrEmpty()) {
             div.getYukoKigenInfo().getTxtHokensha().setValue(entity.get市町村コード().concat(RString.FULL_SPACE).concat(entity.get保険者名称()));
         }
         List<UzT0007CodeEntity> 交付事由List = new ArrayList<>();
@@ -174,6 +174,12 @@ public class HihokenshaShikakuHakkoHandler {
         div.getTplShienJigyosha().getTxtTekiyoStYMD3().setValue(entity.get適用開始年月日３());
 
         // 施設入退所タブ
+        div.setHidden入所施設コード１(entity.get入所施設コード１());
+        div.setHidden入所施設コード２(entity.get入所施設コード２());
+        div.setHidden入所施設コード３(entity.get入所施設コード３());
+        div.setHidden入所施設種類１(entity.get入所施設種類１());
+        div.setHidden入所施設種類２(entity.get入所施設種類２());
+        div.setHidden入所施設種類３(entity.get入所施設種類３());
         div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu1().setValue(entity.get入所施設１());
         div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu2().setValue(entity.get入所施設２());
         div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu3().setValue(entity.get入所施設３());

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.Keisa
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KeisangojohoAtenaKozaKouseizengoEntity {
 
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;

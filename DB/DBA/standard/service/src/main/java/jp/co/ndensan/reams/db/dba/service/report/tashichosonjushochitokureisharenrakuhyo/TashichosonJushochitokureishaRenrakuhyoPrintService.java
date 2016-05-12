@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.source.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -49,13 +49,9 @@ public class TashichosonJushochitokureishaRenrakuhyoPrintService {
                         FlexibleDate.getNowDate(),
                         reportSourceWriter);
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setHakkoYMD1(ninshoshaSource.hakkoYMD);
-                item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
-                item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
-                item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
-                item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
-                item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
-                item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+                item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
+                item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
+                item.setShichosonMei(ninshoshaSource.ninshoshaYakushokuMei2);
                 item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
             }
         }

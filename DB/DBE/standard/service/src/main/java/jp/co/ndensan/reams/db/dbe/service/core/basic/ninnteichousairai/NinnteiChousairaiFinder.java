@@ -11,12 +11,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.SaiChekkuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.SaiChekkuhyoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinteichosaIraiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.SaiChekkuhyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ininnteichousairai.INinnteiChousairaiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
@@ -232,6 +235,26 @@ public class NinnteiChousairaiFinder {
         entity.initializeMd5();
         List<NinteichosaIraiJoho> list = new ArrayList<>();
         list.add(new NinteichosaIraiJoho(entity));
+        return SearchResult.of(list, 0, false);
+    }
+
+    /**
+     * 認定調査票差異チェック票を取得します。
+     *
+     * @param parameter SaiChekkuhyoParameter
+     * @return SearchResult<SaiChekkuhyoBusiness> 認定調査票差異チェック票
+     */
+    @Transaction
+    public SearchResult<SaiChekkuhyoBusiness> get認定調査票差異チェック票情報(SaiChekkuhyoParameter parameter) {
+        INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
+        List<SaiChekkuhyoEntity> entityList = mapper.get認定調査票差異チェック票情報(parameter);
+        if (entityList == null) {
+            return SearchResult.of(Collections.<SaiChekkuhyoBusiness>emptyList(), 0, false);
+        }
+        List<SaiChekkuhyoBusiness> list = new ArrayList<>();
+        for (SaiChekkuhyoEntity entity : entityList) {
+            list.add(new SaiChekkuhyoBusiness(entity));
+        }
         return SearchResult.of(list, 0, false);
     }
 }

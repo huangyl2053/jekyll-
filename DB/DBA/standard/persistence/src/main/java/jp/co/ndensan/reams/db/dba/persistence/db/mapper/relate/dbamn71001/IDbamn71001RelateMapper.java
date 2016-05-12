@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.dbamn71001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.AtenaMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.dbamn71001.ShikakuIdoTaishoshaShutokuMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;

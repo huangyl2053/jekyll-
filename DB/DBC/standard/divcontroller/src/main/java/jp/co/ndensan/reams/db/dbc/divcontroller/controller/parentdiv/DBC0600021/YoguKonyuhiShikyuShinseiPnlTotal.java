@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.ShichosonResult;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogushohin.FukushiyoguShohinMode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
@@ -566,6 +567,43 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 getJigyoshaMode(), JigyoshaMode.class);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().getTxtJigyosya().setValue(
                 jigyoshaMode.getJigyoshaNo().value());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「商品名入力ガイド
+     *
+     * @param div 住宅改修費支給申請_申請情報登録DIV
+     * @return ResponseData
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onBeforeOpenDialog_btnShohinmei(
+            YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「商品名入力ガイド」ダイアログのOKボタンを押した後のメソッドです。
+     *
+     * @param div YoguKonyuhiShikyuShinseiPnlTotalDiv
+     * @return ResponseData
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onOkClose_btnShohinmei(
+            YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
+        FukushiyoguShohinMode jigyoshaMode = DataPassingConverter.deserialize(div.
+                getYoguKonyuhiShikyuShinseiContentsPanel().
+                getFukushiyoguShohinMode(), FukushiyoguShohinMode.class);
+        if (jigyoshaMode.getShohinmei() != null && !jigyoshaMode.getShohinmei().isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtShohinName().
+                    setValue(jigyoshaMode.getShohinmei());
+        }
+        if (jigyoshaMode.getSeizoJigyoshamei() != null && !jigyoshaMode.getSeizoJigyoshamei().isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtSeizoJigyosha().
+                    setValue(jigyoshaMode.getSeizoJigyoshamei());
+        }
+        if (jigyoshaMode.getHinmokuCode() != null && !jigyoshaMode.getHinmokuCode().isEmpty()) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().
+                    setValue(jigyoshaMode.getHinmokuCode());
+        }
         return ResponseData.of(div).respond();
     }
 

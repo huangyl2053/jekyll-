@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6;
 
-import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.OutputChohyoIchiranEntity;
+import jp.co.ndensan.reams.db.dbb.entity.report.dbbbt35003.OutputChohyoIchiranEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 

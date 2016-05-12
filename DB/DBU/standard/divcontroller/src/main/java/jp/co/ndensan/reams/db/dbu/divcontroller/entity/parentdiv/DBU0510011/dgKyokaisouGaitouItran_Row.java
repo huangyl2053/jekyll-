@@ -3,19 +3,23 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 29 16:41:15 CST 2016
+ * Thu May 12 14:46:01 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgKyokaisouGaitouItran_Row のクラスファイル
- *
- * @reamsid_L DBU-0430-010 linghuhang
+ * dgKyokaisouGaitouItran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgKyokaisouGaitouItran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString shinseiDate;
     private RString ketteiDate;

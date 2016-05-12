@@ -47,7 +47,7 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 申請を保存する = new RString("Element3");
+    private static final RString 申請を保存する = new RString("btnUpdate");
 
     /**
      * onLoad事件
@@ -195,8 +195,8 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnFree(KyufuShiharayiMeisaiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.戻る)
+                    .parameter(new RString("戻る"));
         }
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
@@ -209,15 +209,15 @@ public class KyufuShiharayiMeisaiPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 //TODO
-                return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る)
-                        .parameter(new RString("一覧に戻る"));
+                return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.戻る)
+                        .parameter(new RString("戻る"));
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
             //TODO
-            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.戻る)
+                    .parameter(new RString("戻る"));
         }
         return createResponse(div);
     }

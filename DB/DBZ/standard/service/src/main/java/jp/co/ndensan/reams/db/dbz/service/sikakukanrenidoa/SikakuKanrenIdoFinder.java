@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.HenkoJiyu;
+import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenidoa.HenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
-import jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku.SikakuJiyuShutoku;
+import jp.co.ndensan.reams.db.dbz.business.core.sikakujiyushutoku.SikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.SikakuKanrenIdoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;

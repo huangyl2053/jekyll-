@@ -47,7 +47,6 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
                 .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
     }
 
-//    TODO　仕様変更1.02～1.0.3が未対応
     /**
      * 帳票「護認定審査会スケジュール表(年間)」のProcessです。
      *

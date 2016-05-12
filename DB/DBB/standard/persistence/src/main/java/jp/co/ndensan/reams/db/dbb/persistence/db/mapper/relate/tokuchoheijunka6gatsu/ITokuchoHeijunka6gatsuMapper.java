@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6gatsu.TsuchishoIkkatsuHakkoParamEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko.DbT2002FukaTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.ChohyoHakkoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.report.dbbbt35003.ChohyoHakkoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

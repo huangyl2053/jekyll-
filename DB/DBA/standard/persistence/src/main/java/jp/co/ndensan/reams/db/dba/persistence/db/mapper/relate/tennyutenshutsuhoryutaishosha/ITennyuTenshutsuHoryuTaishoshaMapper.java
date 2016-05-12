@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyutenshutsuhoryutaishosha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
 
 /**
  * 転入転出保留対象者管理のMapperクラスです。

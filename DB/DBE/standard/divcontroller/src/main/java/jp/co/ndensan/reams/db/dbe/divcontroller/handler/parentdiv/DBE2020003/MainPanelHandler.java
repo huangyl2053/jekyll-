@@ -16,13 +16,16 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.YoyakuJokyo;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.NinteiChosaSchedule3MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.NinteichosaScheduleFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -52,6 +54,7 @@ public class MainPanelHandler {
     private static final RString 性別_女 = new RString("女");
     private static final RString 男 = new RString("1");
     private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
+    private RString loginId;
 
     /**
      * コンストラクタ。
@@ -69,8 +72,6 @@ public class MainPanelHandler {
         div.getDdlTaishoChiku().setDataSource(調査地区ドロップダウンリスト());
         div.getSearchConditionPanel().getDdlTaishoChiku()
                 .setSelectedKey(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
-        div.getTxtMaxRow().setValue(new RString(BusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
         set保険者DDL();
         set認定調査委託先コード();
         List<dgResultList_Row> rowList = new ArrayList<>();
@@ -169,6 +170,8 @@ public class MainPanelHandler {
         }
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
         if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+            List<dgResultList_Row> list = new ArrayList<>();
+            div.getResultListPanel().getDgResultList().setDataSource(list);
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
     }
@@ -236,8 +239,15 @@ public class MainPanelHandler {
      * 認定調査委託先ドロップダウンリストと認定調査員値取得を検索する。
      */
     public void set認定調査委託先コード() {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        RString 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+        LasdecCode 市町村コード = LasdecCode.EMPTY;
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        loginId = controlData.getLoginInfo().getUserId();
+        List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(loginId);
+        if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
+            KoseiShichosonJoho 構成市町村情報取得 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID.get(0).getItemId());
+            市町村コード = 構成市町村情報取得 == null ? LasdecCode.EMPTY : 構成市町村情報取得.get市町村コード();
+        }
+
         INinteichosaScheduleMybatisParameter mybatisParameter = INinteichosaScheduleMybatisParameter.createParam(RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -257,7 +267,7 @@ public class MainPanelHandler {
                 RString.EMPTY,
                 RString.EMPTY,
                 Decimal.ZERO,
-                市町村コード);
+                new RString(市町村コード.toString()));
         List<ChikuNinteiChosainBusiness> 認定調査委託先リスト = NinteichosaScheduleFinder.createInstance()
                 .get認定調査委託先ロップダウン(mybatisParameter).records();
         List<KeyValueDataSource> dataList = new ArrayList<>();
@@ -338,6 +348,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
         }
@@ -399,6 +411,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
         }
@@ -461,6 +475,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -523,6 +539,8 @@ public class MainPanelHandler {
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
             if (div.getResultListPanel().getDgResultList().getDataSource() == null
                     || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
@@ -585,7 +603,10 @@ public class MainPanelHandler {
                 rowList.add(row);
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
-            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null
+                    || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                List<dgResultList_Row> list = new ArrayList<>();
+                div.getResultListPanel().getDgResultList().setDataSource(list);
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
         }

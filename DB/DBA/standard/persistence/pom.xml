@@ -56,5 +56,9 @@
             <artifactId>DbxEntity</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxEntity</artifactId>
+        </dependency>
     </dependencies>
 </project>

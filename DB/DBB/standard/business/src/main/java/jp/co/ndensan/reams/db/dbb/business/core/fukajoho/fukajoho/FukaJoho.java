@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -768,6 +769,146 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
     }
 
     /**
+     * 普徴期別納期限01を返します。
+     *
+     * @return 普徴期別納期限01
+     */
+    public RDate get普徴期別納期限01() {
+
+        return this.get期別納期限(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限02を返します。
+     *
+     * @return 普徴期別納期限02
+     */
+    public RDate get普徴期別納期限02() {
+
+        return this.get期別納期限(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限03を返します。
+     *
+     * @return 普徴期別納期限03
+     */
+    public RDate get普徴期別納期限03() {
+
+        return this.get期別納期限(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限04を返します。
+     *
+     * @return 普徴期別納期限04
+     */
+    public RDate get普徴期別納期限04() {
+
+        return this.get期別納期限(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限05を返します。
+     *
+     * @return 普徴期別納期限05
+     */
+    public RDate get普徴期別納期限05() {
+
+        return this.get期別納期限(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限06を返します。
+     *
+     * @return 普徴期別納期限06
+     */
+    public RDate get普徴期別納期限06() {
+
+        return this.get期別納期限(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限07を返します。
+     *
+     * @return 普徴期別納期限07
+     */
+    public RDate get普徴期別納期限07() {
+
+        return this.get期別納期限(INT_7, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限08を返します。
+     *
+     * @return 普徴期別納期限08
+     */
+    public RDate get普徴期別納期限08() {
+
+        return this.get期別納期限(INT_8, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限09を返します。
+     *
+     * @return 普徴期別納期限09
+     */
+    public RDate get普徴期別納期限09() {
+
+        return this.get期別納期限(INT_9, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限10を返します。
+     *
+     * @return 普徴期別納期限10
+     */
+    public RDate get普徴期別納期限10() {
+
+        return this.get期別納期限(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限11を返します。
+     *
+     * @return 普徴期別納期限11
+     */
+    public RDate get普徴期別納期限11() {
+
+        return this.get期別納期限(INT_11, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限12を返します。
+     *
+     * @return 普徴期別納期限12
+     */
+    public RDate get普徴期別納期限12() {
+
+        return this.get期別納期限(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限13を返します。
+     *
+     * @return 普徴期別納期限13
+     */
+    public RDate get普徴期別納期限13() {
+
+        return this.get期別納期限(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別納期限14を返します。
+     *
+     * @return 普徴期別納期限14
+     */
+    public RDate get普徴期別納期限14() {
+
+        return this.get期別納期限(INT_14, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
      * 期別金額を返します。
      *
      * @param 期 int
@@ -776,16 +917,43 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
-        if (kibetsu.iterator().hasNext()) {
-            Kibetsu thisKibetsu = kibetsu.iterator().next();
-            if (徴収方法期別.equals(thisKibetsu.get徴収方法())
-                    && 期 == thisKibetsu.get期()) {
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return Decimal.ZERO;
+        }
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            if (徴収方法期別.equals(介護期別.get徴収方法())
+                    && 期 == 介護期別.get期()) {
 
-                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(thisKibetsu.get調定ID().longValue());
-                return thisKibetsu.getChoteiKyotsu(identifier).get調定額();
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+                return 介護期別.getChoteiKyotsu(identifier).get調定額();
             }
         }
         return Decimal.ZERO;
+    }
+
+    /**
+     * 期別納期限を返します。
+     *
+     * @param 期 int
+     * @param 徴収方法期別 RString
+     * @return 期別納期限
+     */
+    private RDate get期別納期限(int 期, RString 徴収方法期別) {
+
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return null;
+        }
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            if (徴収方法期別.equals(介護期別.get徴収方法())
+                    && 期 == 介護期別.get期()) {
+
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+                return 介護期別.getChoteiKyotsu(identifier).get納期限();
+            }
+        }
+        return null;
     }
 
     /**

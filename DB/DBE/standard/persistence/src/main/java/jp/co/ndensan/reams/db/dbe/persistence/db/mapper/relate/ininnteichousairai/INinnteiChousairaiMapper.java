@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ininnteichousair
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.SaiChekkuhyoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinteichosaIraiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.SaiChekkuhyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -75,4 +77,12 @@ public interface INinnteiChousairaiMapper {
      * @return WaritsukeEntity 認定調査依頼情報Entity
      */
     DbT5201NinteichosaIraiJohoEntity getNinteichosaIraiJoho(RString 申請書管理番号);
+
+    /**
+     * 認定調査票差異チェック票を取得します。
+     *
+     * @param parameter SaiChekkuhyoParameter。
+     * @return SaiChekkuhyoEntity 認定調査票差異チェック票Entity
+     */
+    List<SaiChekkuhyoEntity> get認定調査票差異チェック票情報(SaiChekkuhyoParameter parameter);
 }

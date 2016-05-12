@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbz.service.core.jukyushikakushomeishohakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbz.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JuKyuShinSeiZiYu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.ConfigKeysJukyuShikakuShomeishoHakko;
@@ -16,10 +19,14 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeisho
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -34,6 +41,9 @@ public class JukyuShikakuShomeishoHakkoFinder {
     private static final RString SAKAKO = new RString("（");
     private static final RString MIGIKAKO = new RString("）");
     private static final RString MATAHA = new RString("までは");
+    private static final RString 所得 = new RString("所得");
+    private static final RString 単身収入 = new RString("単身収入");
+    private static final RString 世帯収入 = new RString("世帯収入");
     private static final RString 読点 = new RString("、");
     private static final int FIRST_INDEX = 0;
     private static final int LENGTH_150 = 150;
@@ -79,6 +89,11 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 .getServiceCode(受給資格証明書発行情報の検索キー);
         get種類名称と種類略称(jukyuShikakuShomeishoHakkoRe,
                 jukyuShikakuShomeishoHakkoCode, jukyuShikakuShomeishoHakko);
+        JukyuShikakuShomeishoHakkoRelateEntity 負担割合情報Entity = jukyuShikakuShomeishoHakko
+                .getFuDanuRiAiKuBen(受給資格証明書発行情報の検索キー);
+        if (負担割合情報Entity != null) {
+            edit負担割合(jukyuShikakuShomeishoHakkoRe, 負担割合情報Entity);
+        }
         JukyuShikakuShomeishoHakkoRelateEntity ninTeiShinSeiChuDataEntity = jukyuShikakuShomeishoHakko
                 .getNinTeiShinSeiChuData(受給資格証明書発行情報の検索キー);
         if (ninTeiShinSeiChuDataEntity == null) {
@@ -173,7 +188,8 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
             }
         }
-        RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
+        RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken() == null
+                ? RString.EMPTY : jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
         介護認定審査会意見と略称.append(SPACE);
         介護認定審査会意見と略称.append(サービス種類略称リスト.get(FIRST_INDEX));
         for (int j = 1; j < サービス種類略称リスト.size(); j++) {
@@ -250,11 +266,77 @@ public class JukyuShikakuShomeishoHakkoFinder {
         return jukyuShikakuShomeishoHakkoRe;
     }
 
+    private JukyuShikakuShomeishoHakkoRelateEntity edit負担割合(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
+            JukyuShikakuShomeishoHakkoRelateEntity 負担割合情報Entity) {
+        if (!RString.isNullOrEmpty(負担割合情報Entity.getFutanWariaiKubun())) {
+            jukyuShikakuShomeishoHakkoRe.setFutanWariaiKubun(負担割合情報Entity.getFutanWariaiKubun());
+            if (FutanwariaiKubun._２割.getコード().equals(負担割合情報Entity.getFutanWariaiKubun())) {
+                jukyuShikakuShomeishoHakkoRe.setFutanWariai(RString.EMPTY);
+            } else if (FutanwariaiKubun._１割.getコード().equals(負担割合情報Entity.getFutanWariaiKubun())) {
+                条件＿本人合計所得金額(jukyuShikakuShomeishoHakkoRe, 負担割合情報Entity);
+            }
+        }
+        return jukyuShikakuShomeishoHakkoRe;
+    }
+
+    private void 条件＿本人合計所得金額(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
+            JukyuShikakuShomeishoHakkoRelateEntity 負担割合情報Entity) {
+        Decimal honninGoukeiShotokuGakutem = 負担割合情報Entity.getHonninGoukeiShotokuGaku() == null
+                ? Decimal.ZERO : 負担割合情報Entity.getHonninGoukeiShotokuGaku();
+        if (new Decimal("1600000").compareTo(honninGoukeiShotokuGakutem) >= 0) {
+            jukyuShikakuShomeishoHakkoRe.setFutanWariai(所得);
+        } else {
+            条件＿世帯１号被保険者数(jukyuShikakuShomeishoHakkoRe, 負担割合情報Entity);
+        }
+    }
+
+    private void 条件＿世帯１号被保険者数(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
+            JukyuShikakuShomeishoHakkoRelateEntity 負担割合情報Entity) {
+        if (負担割合情報Entity.getSetaiIchigouHihokenshaSu() == 1) {
+            条件＿年金収入合計とその他の合計所得金額合計_1(jukyuShikakuShomeishoHakkoRe, 負担割合情報Entity);
+        } else if (負担割合情報Entity.getSetaiIchigouHihokenshaSu() >= 2) {
+            条件＿年金収入合計とその他の合計所得金額合計_2(jukyuShikakuShomeishoHakkoRe, 負担割合情報Entity);
+        }
+    }
+
+    private void 条件＿年金収入合計とその他の合計所得金額合計_1(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
+            JukyuShikakuShomeishoHakkoRelateEntity 負担割合情報Entity) {
+        Decimal sonotanoGoukeitemp = 負担割合情報Entity.getSonotanoGoukeiShotokuKingakuGoukei() == null
+                ? Decimal.ZERO : 負担割合情報Entity.getSonotanoGoukeiShotokuKingakuGoukei();
+        Decimal nenkinShunyuGoutemp = 負担割合情報Entity.getNenkinShunyuGoukei() == null ? Decimal.ZERO : 負担割合情報Entity.getNenkinShunyuGoukei();
+        Decimal total = sonotanoGoukeitemp.add(nenkinShunyuGoutemp);
+        if (new Decimal("2800000").compareTo(total) >= 0) {
+            jukyuShikakuShomeishoHakkoRe.setFutanWariai(単身収入);
+        } else {
+            jukyuShikakuShomeishoHakkoRe.setFutanWariai(RString.EMPTY);
+        }
+    }
+
+    private void 条件＿年金収入合計とその他の合計所得金額合計_2(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
+            JukyuShikakuShomeishoHakkoRelateEntity 負担割合情報Entity) {
+        Decimal sonotanoGoukeitemp = 負担割合情報Entity.getSonotanoGoukeiShotokuKingakuGoukei() == null
+                ? Decimal.ZERO : 負担割合情報Entity.getSonotanoGoukeiShotokuKingakuGoukei();
+        Decimal nenkinShunyuGoutemp = 負担割合情報Entity.getNenkinShunyuGoukei() == null ? Decimal.ZERO : 負担割合情報Entity.getNenkinShunyuGoukei();
+        Decimal total = sonotanoGoukeitemp.add(nenkinShunyuGoutemp);
+        if (new Decimal("3460000").compareTo(total) >= 0) {
+            jukyuShikakuShomeishoHakkoRe.setFutanWariai(世帯収入);
+        } else {
+            jukyuShikakuShomeishoHakkoRe.setFutanWariai(RString.EMPTY);
+        }
+    }
+
     private RString get制度改正施行管理_新予防給付_適用開始日() {
         return BusinessConfig.get(ConfigKeysJukyuShikakuShomeishoHakko.制度改正施行管理_新予防給付_適用開始日, SubGyomuCode.DBU介護統計報告);
     }
 
     private RString get受給資格証明書_備考項目文言() {
-        return BusinessConfig.get(ConfigKeysJukyuShikakuShomeishoHakko.受給資格証明書_備考項目文言, SubGyomuCode.DBD介護受給);
+        Map<Integer, RString> 通知文List = ReportUtil.get通知文(SubGyomuCode.DBA介護資格, new ReportId("DBA100004_JukyuShikakuShomeisho"),
+                KamokuCode.EMPTY, 1);
+        RStringBuilder sb = new RStringBuilder();
+        Set<Integer> keySet = 通知文List.keySet();
+        for (Integer index : keySet) {
+            sb.append(通知文List.get(index));
+        }
+        return sb.toRString();
     }
 }

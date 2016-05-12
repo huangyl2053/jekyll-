@@ -45,6 +45,7 @@ public class ServiceTypeCommonChildHandler {
             dgServiceType_Row row = new dgServiceType_Row();
             row.setTxtServiceShuruiCode(result.getサービス種類コード().getColumnValue());
             row.setTxtServiceShuruiName(result.getサービス種類名称());
+            row.setTxtServiceRyakusho(result.getサービス種類略称());
             if (result.getサービス種類コード().getColumnValue().equals(サービス種類コード.getColumnValue())) {
                 row.setSelected(Boolean.TRUE);
             }
@@ -71,8 +72,10 @@ public class ServiceTypeCommonChildHandler {
         if (!div.getDgServiceType().getSelectedItems().isEmpty()) {
             RString serviceShuruiCode = div.getDgServiceType().getSelectedItems().get(0).getTxtServiceShuruiCode();
             RString serviceShuruiName = div.getDgServiceType().getSelectedItems().get(0).getTxtServiceShuruiName();
+            RString serviceRyakusho = div.getDgServiceType().getSelectedItems().get(0).getTxtServiceRyakusho();
             div.setHdnServiceType(serviceShuruiCode);
             div.setHdnServiceTypeName(serviceShuruiName);
+            div.setHdnServiceRyakusho(serviceRyakusho);
         }
     }
 }

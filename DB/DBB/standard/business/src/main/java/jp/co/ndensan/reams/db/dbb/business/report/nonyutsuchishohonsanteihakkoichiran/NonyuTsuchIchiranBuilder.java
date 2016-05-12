@@ -16,17 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class NonyuTsuchIchiranBuilder implements INonyuTsuchIchiranBuilder {
 
     private final INonyuTsuchIchiranEditor headerEditor;
-    private final INonyuTsuchIchiranEditor hyojiIchiranEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param headerEditor {@link IKarisanteiFukaDaichoEditor}
-     * @param hyojiIchiranEditor {@link IKarisanteiFukaDaichoEditor}
      */
-    public NonyuTsuchIchiranBuilder(INonyuTsuchIchiranEditor headerEditor, INonyuTsuchIchiranEditor hyojiIchiranEditor) {
+    public NonyuTsuchIchiranBuilder(INonyuTsuchIchiranEditor headerEditor) {
         this.headerEditor = headerEditor;
-        this.hyojiIchiranEditor = hyojiIchiranEditor;
     }
 
     /**
@@ -36,6 +33,6 @@ public class NonyuTsuchIchiranBuilder implements INonyuTsuchIchiranBuilder {
      */
     @Override
     public NonyuTsuchIchiranSource build() {
-        return ReportEditorJoiner.from(new NonyuTsuchIchiranSource()).join(headerEditor).join(hyojiIchiranEditor).buildSource();
+        return ReportEditorJoiner.from(new NonyuTsuchIchiranSource()).join(headerEditor).buildSource();
     }
 }

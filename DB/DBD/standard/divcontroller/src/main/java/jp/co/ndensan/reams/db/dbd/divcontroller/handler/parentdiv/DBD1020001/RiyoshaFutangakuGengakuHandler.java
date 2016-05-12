@@ -122,8 +122,7 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getBtnInputNew().setText(承認情報を追加する);
             div.getRiyoshaFutangakuGengakuShinseiDetail().setTitle(承認情報);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(BTNUPDATE_FIELDNAME, 承認情報を.toString());
-            承認情報エリア状態(承認する_KEY, true, false);
-            div.getBtnConfirm().setDisplayNone(true);
+            承認情報エリア状態(承認する_KEY, true, false, false);
             div.getBtnShinseiKakutei().setDisplayNone(true);
         }
 
@@ -148,7 +147,6 @@ public class RiyoshaFutangakuGengakuHandler {
             ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, new ArrayList<>(利用者負担額減額の情報List));
             一覧エリアの設定(利用者負担額減額の情報List);
         }
-        世帯所得一覧の初期化();
         div.getBtnCloseSetaiJoho().setDisplayNone(true);
 
         PersonalData personalData = toPersonalData();
@@ -242,7 +240,7 @@ public class RiyoshaFutangakuGengakuHandler {
         builder.set決定区分(決定区分コード);
         builder.set申請事由(div.getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getTxtShinseiYmd().getValue());
-        builder.set旧措置者有無(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
+        builder.set旧措置者有無(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
         builder.set決定年月日(div.getTxtKettaiYmd().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
 
@@ -275,7 +273,7 @@ public class RiyoshaFutangakuGengakuHandler {
                 row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
                 row.getTxtTekiyoYMD().setValue(適用開始年月日);
                 row.getTxtYukoKigen().setValue(適用終了年月日);
-                row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
+                row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
                 if (給付率 == HokenKyufuRitsu.ZERO) {
                     row.getTxtKyufuritsu().clearValue();
                 } else {
@@ -295,7 +293,7 @@ public class RiyoshaFutangakuGengakuHandler {
             row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
             row.getTxtTekiyoYMD().setValue(適用開始年月日);
             row.getTxtYukoKigen().setValue(適用終了年月日);
-            row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
+            row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
             if (給付率 == HokenKyufuRitsu.ZERO) {
                 row.getTxtKyufuritsu().clearValue();
             } else {
@@ -310,8 +308,7 @@ public class RiyoshaFutangakuGengakuHandler {
         Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
         div.getDdlShinseiIchiran().setDataSource(newRowList);
         入力情報をクリア();
-        承認情報エリア状態(承認する_KEY, true, false);
-        div.getBtnConfirm().setDisplayNone(true);
+        承認情報エリア状態(承認する_KEY, true, false, false);
     }
 
     /**
@@ -431,8 +428,7 @@ public class RiyoshaFutangakuGengakuHandler {
             申請情報エリ状態(true, false);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
             div.getTxtKettaiYmd().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-            承認情報エリア状態(承認する_KEY, true, false);
-            div.getBtnConfirm().setDisplayNone(false);
+            承認情報エリア状態(承認する_KEY, true, false, true);
         }
     }
 
@@ -483,7 +479,7 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
 
         if (旧措置有無) {
-            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.旧措置.getコード());
+            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.旧措置者.getコード());
         } else {
             div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.非該当.getコード());
         }
@@ -495,8 +491,7 @@ public class RiyoshaFutangakuGengakuHandler {
             申請情報エリ状態(true, is申請日非活性);
             div.getBtnShinseiKakutei().setDisplayNone(false);
         } else if (ResponseHolder.getMenuID().equals(承認メニュー)) {
-            承認情報エリア状態(決定区分RadInx, false, is申請日非活性);
-            div.getBtnConfirm().setDisplayNone(false);
+            承認情報エリア状態(決定区分RadInx, false, is申請日非活性, true);
         }
     }
 
@@ -546,16 +541,17 @@ public class RiyoshaFutangakuGengakuHandler {
     public void viewState破棄() {
         ViewStateHolder.put(Dbd1020001Keys.利用者負担額減額情報ListのViewState, null);
         ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, null);
+        ViewStateHolder.put(Dbd1020001Keys.世帯所得一覧初期化済み, null);
         入力情報をクリア();
     }
 
     /**
      * 申請情報エリ状態の設定です。
      *
-     * @param is確定ボタン表示 true:表示 false:非表示
+     * @param isエリア活性 true:活性 false:非活性
      * @param is申請日非活性 true:「申請日」が非活性 false:「申請日」が活性
      */
-    public void 申請情報エリ状態(boolean is確定ボタン表示, boolean is申請日非活性) {
+    public void 申請情報エリ状態(boolean isエリア活性, boolean is申請日非活性) {
         if (is申請日非活性) {
             div.getTxtShinseiYmd().setDisabled(true);
         } else {
@@ -569,7 +565,11 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtKyufuRitsu().setDisabled(true);
         div.getBtnHiShoninRiyu().setDisabled(true);
         div.getTxtHiShoninRiyu().setDisabled(true);
-        div.getBtnShinseiKakutei().setDisplayNone(!is確定ボタン表示);
+        if (isエリア活性) {
+            div.getRiyoshaFutangakuGengakuShinseiDetail().setDisabled(false);
+        } else {
+            div.getRiyoshaFutangakuGengakuShinseiDetail().setDisabled(true);
+        }
         div.getBtnConfirm().setDisplayNone(true);
     }
 
@@ -579,8 +579,9 @@ public class RiyoshaFutangakuGengakuHandler {
      * @param 決定区分 承認する:key0, 承認しない:key1
      * @param is申請日非活性 true:「申請日」が非活性 false:「申請日」が活性
      * @param is初期 true:初期
+     * @param isエリア活性 true:活性 false:非活性
      */
-    public void 承認情報エリア状態(RString 決定区分, boolean is初期, boolean is申請日非活性) {
+    public void 承認情報エリア状態(RString 決定区分, boolean is初期, boolean is申請日非活性, boolean isエリア活性) {
         div.getRadKetteiKubun().setDisabled(false);
         div.getTxtKettaiYmd().setDisabled(false);
 
@@ -609,6 +610,12 @@ public class RiyoshaFutangakuGengakuHandler {
             div.getTxtKyufuRitsu().setDisabled(true);
             div.getBtnHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
+        }
+
+        if (isエリア活性) {
+            div.getRiyoshaFutangakuGengakuShinseiDetail().setDisabled(false);
+        } else {
+            div.getRiyoshaFutangakuGengakuShinseiDetail().setDisabled(true);
         }
     }
 
@@ -717,13 +724,18 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getTxtHiShoninRiyu().clearValue();
     }
 
-    private void 世帯所得一覧の初期化() {
+    /**
+     * 世帯所得一覧の初期化初期化処理です。
+     */
+    public void 世帯所得一覧の初期化() {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
 
         YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
         div.getCcdSetaiShotokuIchiran().initialize(識別コード, new FlexibleDate(現在年月日日時時分秒.getDate().toDateString()),
                 new HizukeConfig().get所得年度(), 現在年月日日時時分秒);
+
+        ViewStateHolder.put(Dbd1020001Keys.世帯所得一覧初期化済み, true);
     }
 
     private void 一覧エリアの設定(List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List) {
@@ -886,7 +898,7 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分コード = KetteiKubun.承認しない.getコード();
         }
         boolean is旧措置者有無 = false;
-        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置.get名称())) {
+        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置者.get名称())) {
             is旧措置者有無 = true;
         }
 
@@ -1135,7 +1147,11 @@ public class RiyoshaFutangakuGengakuHandler {
         /**
          * 新規申請の履歴番号
          */
-        新規申請の履歴番号
+        新規申請の履歴番号,
+        /**
+         * 世帯所得一覧初期化済み
+         */
+        世帯所得一覧初期化済み
     }
 
 }

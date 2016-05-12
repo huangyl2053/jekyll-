@@ -47,6 +47,8 @@ public class JukyuSikakuShomeishoHakkoHandler {
                 jukyuSikakuShomeishoHakkoDiv.getTxtdrYukokikan()
                         .setToValue(new RDate(jukyuShikakuBusiness.get有効期間終了日().toString()));
             }
+            jukyuSikakuShomeishoHakkoDiv.getTxtfutanWariaiKubun().setValue(jukyuShikakuBusiness.get負担割合());
+            jukyuSikakuShomeishoHakkoDiv.getTxtfutanWariai().setValue(jukyuShikakuBusiness.get負担割該当());
             jukyuSikakuShomeishoHakkoDiv.getTbmShinsakaiYikan().setValue(jukyuShikakuBusiness.get介護認定審査会意見());
             jukyuSikakuShomeishoHakkoDiv.getTbmBiko().setValue(jukyuShikakuBusiness.get備考());
         }

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbz.business.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.KihonChosaInputHandler1;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput2.KihonChosaInput2.KihonChosaInputHandler2;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput3.KihonChosaInput3.KihonChosaInputHandler3;

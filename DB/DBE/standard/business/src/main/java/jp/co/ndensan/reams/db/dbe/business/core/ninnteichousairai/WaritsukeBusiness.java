@@ -366,4 +366,76 @@ public class WaritsukeBusiness {
     public RString getNinteiChosainCode() {
         return entity.getNinteiChosainCode();
     }
+
+    /**
+     * 保険者番号を返します。
+     *
+     * @return 保険者番号
+     */
+    public RString getHokenshaNo() {
+        return entity.getHokenshaNo();
+    }
+
+    /**
+     * 認定調査委託先コードを返します。
+     *
+     * @return 認定調査委託先コード
+     */
+    public RString getNinteiChosaItakusakiCode() {
+        return entity.getNinteiChosaItakusakiCode();
+    }
+
+    /**
+     * 連絡先続柄を返します。
+     *
+     * @return 連絡先続柄
+     */
+    public RString getRenrakusakiTuzukigara() {
+        return entity.getRenrakusakiTuzukigara();
+    }
+
+    /**
+     * 連絡先郵便番号を返します。
+     *
+     * @return 連絡先郵便番号
+     */
+    public YubinNo getRenrakusakiYubinNo() {
+        return entity.getRenrakusakiYubinNo();
+    }
+
+    /**
+     * 連絡先電話番号を返します。
+     *
+     * @return 連絡先電話番号
+     */
+    public TelNo getRenrakusakiTelNo() {
+        return entity.getRenrakusakiTelNo();
+    }
+
+    /**
+     * 連絡先携帯番号を返します。
+     *
+     * @return 連絡先携帯番号
+     */
+    public TelNo getRenrakusakiKeitaiTelNo() {
+        return entity.getRenrakusakiKeitaiTelNo();
+    }
+
+    /**
+     * 連絡先氏名を返します。
+     *
+     * @return 連絡先氏名
+     */
+    public AtenaMeisho getRenrakusakiShimei() {
+        return entity.getRenrakusakiShimei();
+    }
+
+    /**
+     * 連絡先住所を返します。
+     *
+     * @return 連絡先住所
+     */
+    public AtenaJusho getRenrakusakiJusho() {
+        return entity.getRenrakusakiJusho();
+    }
 }

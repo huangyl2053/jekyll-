@@ -46,7 +46,7 @@ public class KyuhuhiMeisaiJutokuPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 申請を保存する = new RString("Element1");
+    private static final RString 申請を保存する = new RString("btnUpdate");
 
     /**
      * onLoad事件

@@ -130,14 +130,19 @@
         Jutakukaishu."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
         AND Jutakukaishu."serviceTeikyoYM" = jizenshinsei."serviceTeikyoYM"
         AND Jutakukaishu."seiriNo" = jizenshinsei."seiriNo"
-        INNER JOIN
-        rgdb."DbT3034ShokanShinsei" shinsei
-        ON
-        shinsei."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
-        AND shinsei."jizenServiceTeikyoYM" <![CDATA[<>]]> jizenshinsei."serviceTeikyoYM"
-        AND shinsei."jizenSeiriNo" <![CDATA[<>]]> jizenshinsei."seiriNo"
         WHERE
         jizenshinsei."hiHokenshaNo" = #{hiHokenshaNo}
+        AND
+        NOT EXISTS
+        (
+           SELECT *
+           FROM
+             rgdb."DbT3034ShokanShinsei" shinsei
+           WHERE
+             shinsei."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
+             AND shinsei."jizenServiceTeikyoYM" = jizenshinsei."serviceTeikyoYM"
+             AND shinsei."jizenSeiriNo" = jizenshinsei."seiriNo"
+        )
     </select>
 
     <resultMap id="resultMap_JutakukaishuJizenShinsei"

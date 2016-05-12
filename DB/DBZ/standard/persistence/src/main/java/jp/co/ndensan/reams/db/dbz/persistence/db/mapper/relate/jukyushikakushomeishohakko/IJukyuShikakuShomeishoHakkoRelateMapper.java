@@ -55,4 +55,12 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
      */
     JukyuShikakuShomeishoHakkoRelateEntity getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー);
 
+    /**
+     * 負担割合情報を取得します。
+     *
+     * @param 受給資格証明書発行情報の検索キー 受給資格証明書発行情報の検索キー
+     * @return JukyuShikakuShomeishoHakkoRelateEntity
+     */
+    JukyuShikakuShomeishoHakkoRelateEntity getFuDanuRiAiKuBen(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー);
+
 }

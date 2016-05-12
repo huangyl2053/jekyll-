@@ -157,6 +157,7 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
         if (!eucCsvList.isEmpty()) {
             eucCsvWriter.close();
         }
+        manager.spool(eucFilePath);
         TennyuTenshutsuMiTorokuIchiranhyoReport report = TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
 

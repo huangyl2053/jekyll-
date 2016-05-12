@@ -10,24 +10,27 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJoho;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.TekiyoJogaiShisetuJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaishadaichojoho.ITekiyoJogaiShisetuJyohoMapper;
-import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.jushoedit.KaigoJushoEditor;
+import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -102,8 +105,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
      */
     public static TekiyoJogaishaDaichoJohoFinder createInstance() {
         return InstanceProvider.create(TekiyoJogaishaDaichoJohoFinder.class);
@@ -243,12 +245,16 @@ public class TekiyoJogaishaDaichoJohoFinder {
         適用除外者台帳情報Entity.set地区タイトル2(宛名情報PSM.getChikuName2());
         適用除外者台帳情報Entity.set地区コード3(nullToEmpty(宛名情報PSM.getChikuCode3()));
         適用除外者台帳情報Entity.set地区タイトル3(宛名情報PSM.getChikuName3());
-        適用除外者台帳情報Entity.set住所1(get住所の編集(ShikibetsuTaishoFactory.createKojin(宛名情報PSM).get住所()));
+        IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報PSM);
+        ChohyoSeigyoKyotsu 帳票共通情報
+                = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100010.getReportId());
+        適用除外者台帳情報Entity.set住所1(JushoHenshu.createInstance().editJusho(帳票共通情報, 宛名情報));
         適用除外者台帳情報Entity.set住所タイトル1(住所);
         適用除外者台帳情報Entity.set住所コード(nullToEmpty(宛名情報PSM.getZenkokuJushoCode()));
         適用除外者台帳情報Entity.set行政区タイトル(行政区);
         適用除外者台帳情報Entity.set行政区コード(nullToEmpty(宛名情報PSM.getGyoseikuCode()));
-        適用除外者台帳情報Entity.set住所2(get住所の編集(ShikibetsuTaishoFactory.createKojin(宛名情報PSM).get転入前()));
+        適用除外者台帳情報Entity.set住所2(JushoHenshu.createInstance().editJusho2(
+                宛名情報PSM.getTennyumaeJusho(), 宛名情報PSM.getTennyumaeBanchi(), 宛名情報PSM.getTennyumaeKatagaki()));
         適用除外者台帳情報Entity.set住所タイトル2(転入前住所);
         適用除外者台帳情報Entity.set住所コード2(nullToEmpty(宛名情報PSM.getTennyumaeZenkokuJushoCode()));
         daichoJohoList.add(new TekiyoJogaishaDaichoJoho(適用除外者台帳情報Entity));
@@ -286,40 +292,6 @@ public class TekiyoJogaishaDaichoJohoFinder {
             }
         }
         return 市町村名称;
-    }
-
-    private RString get住所の編集(IJusho 住所クラス) {
-        RString 編集後住所 = new KaigoJushoEditor().create編集後住所(住所クラス, SubGyomuCode.DBA介護資格, 帳票分類ID);
-        if (RString.isNullOrEmpty(編集後住所)) {
-            return RString.EMPTY;
-        }
-        int 住所_LENGTH = 編集後住所.length();
-        if (住所_LENGTH_40 < 住所_LENGTH && 住所_LENGTH <= 住所_LENGTH_80) {
-            RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(編集後住所.substringEmptyOnError(0, 住所_LENGTH_40))
-                    .append(改行)
-                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH));
-            return stringBuffer.toRString();
-        }
-        if (住所_LENGTH_80 < 住所_LENGTH && 住所_LENGTH <= 住所_LENGTH_120) {
-            RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(編集後住所.substringEmptyOnError(0, 住所_LENGTH_40))
-                    .append(改行)
-                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
-                    .append(改行)
-                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH));
-            return stringBuffer.toRString();
-        }
-        if (住所_LENGTH_120 < 住所_LENGTH) {
-            RStringBuilder stringBuffer = new RStringBuilder();
-            stringBuffer.append(編集後住所.substringEmptyOnError(0, 住所_LENGTH_40))
-                    .append(改行)
-                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_40, 住所_LENGTH_80))
-                    .append(改行)
-                    .append(編集後住所.substringEmptyOnError(住所_LENGTH_80, 住所_LENGTH_120));
-            return stringBuffer.toRString();
-        }
-        return 編集後住所;
     }
 
     private RString get印刷日時() {

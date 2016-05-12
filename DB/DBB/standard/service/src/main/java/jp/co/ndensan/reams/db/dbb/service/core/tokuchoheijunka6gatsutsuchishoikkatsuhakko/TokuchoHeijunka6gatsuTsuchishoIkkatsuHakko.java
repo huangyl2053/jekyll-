@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6gatsutsuchishoikkatsuhakko.DbT2002FukaTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.ChohyoHakkoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.report.dbbbt35003.ChohyoHakkoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6gatsu.ITokuchoHeijunka6gatsuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
