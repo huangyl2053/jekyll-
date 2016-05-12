@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishohihokenshabun.ShokanKetteiTsuchiShoHihokenshabunItem;
+import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -109,13 +109,13 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
      * @param businessList 償還払支給（不支給）決定通知書情報Entityリスト
      * @param batchPram バッチパラメータ
      * @param reportSourceWriter ReportSourceWriter
-     * @return List<ShokanKetteiTsuchiShoHihokenshabunItem>
+     * @return List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem>
      */
-    public List<ShokanKetteiTsuchiShoHihokenshabunItem> shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(
+    public List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(
             List<ShokanKetteiTsuchiShoShiharai> businessList,
             ShokanKetteiTsuchiShoSealerBatchParameter batchPram, ReportSourceWriter reportSourceWriter) {
 
-        List<ShokanKetteiTsuchiShoHihokenshabunItem> retList = new ArrayList<>();
+        List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> retList = new ArrayList<>();
 
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002.getReportId(),
@@ -150,7 +150,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         List<RString> typeList = new ArrayList<>();
         Decimal 支給金額 = Decimal.ZERO;
         int count = 0;
-        ShokanKetteiTsuchiShoHihokenshabunItem item = null;
+        ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = null;
         for (ShokanKetteiTsuchiShoShiharai shoShiharai : businessList) {
             if (key.equals(getKey(shoShiharai))) {
                 支給金額 = 支給金額.add(shoShiharai.get支給額());
@@ -164,12 +164,12 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
                     count = 1;
                     支給金額 = Decimal.ZERO;
                     retList.add(item);
-                    item = setItemKyufuShu(new ShokanKetteiTsuchiShoHihokenshabunItem(), count, shoShiharai);
+                    item = setItemKyufuShu(new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem(), count, shoShiharai);
                     key = getKey(shoShiharai);
                     typeList = new ArrayList<>();
                 }
             } else {
-                item = new ShokanKetteiTsuchiShoHihokenshabunItem();
+                item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
                 key = getKey(shoShiharai);
                 typeList = new ArrayList<>();
                 支給金額 = shoShiharai.get支給額();
@@ -206,8 +206,8 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
 
             setTitle(item, shoShiharai);
             item.setTsuchibun1(通知文１);
-            item.setTsuchibun2(通知文２);
-            item.setTsuchibunLarge3(通知文３大);
+            item.setTsuchibun２(通知文２);
+            item.setTsuchibunLarge(通知文３大);
             item.setTsuchibunMix1(通知文4_上小);
             item.setTsuchibunMix2(通知文5_下大);
             item.setTsuchibunMixtwo1(通知文6_上大);
@@ -220,7 +220,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         return retList;
     }
 
-    private void setTitle(ShokanKetteiTsuchiShoHihokenshabunItem item, ShokanKetteiTsuchiShoShiharai shoShiharai) {
+    private void setTitle(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, ShokanKetteiTsuchiShoShiharai shoShiharai) {
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         if (取り消し線を編集しない.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_取り消し線))) {
             item.setTitle(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル));
@@ -242,7 +242,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         }
     }
 
-    private void setNinshosha(ShokanKetteiTsuchiShoHihokenshabunItem item, NinshoshaSource ninshoshaSource) {
+    private void setNinshosha(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, NinshoshaSource ninshoshaSource) {
         item.setHakkoYMD(ninshoshaSource.hakkoYMD);
         item.setDenshiKoin(ninshoshaSource.denshiKoin);
         item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
@@ -254,7 +254,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
     }
 
-    private void setSofubutsuAtesaki(ShokanKetteiTsuchiShoHihokenshabunItem item, SofubutsuAtesakiSource atesakiSource) {
+    private void setSofubutsuAtesaki(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, SofubutsuAtesakiSource atesakiSource) {
         item.setYubinNo(atesakiSource.yubinNo);
         item.setGyoseiku2(atesakiSource.gyoseiku);
         item.setJusho4(atesakiSource.jusho1);
@@ -288,7 +288,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         item.setCustomerBarCode(atesakiSource.customerBarCode);
     }
 
-    private ShokanKetteiTsuchiShoHihokenshabunItem setItemKyufuShu(ShokanKetteiTsuchiShoHihokenshabunItem item,
+    private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem setItemKyufuShu(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item,
             int count, ShokanKetteiTsuchiShoShiharai shoShiharai) {
         if (count == ONE) {
             item.setKyufuShu1(shoShiharai.get種類());
