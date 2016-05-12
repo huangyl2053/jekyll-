@@ -917,6 +917,9 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return Decimal.ZERO;
+        }
         List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
         for (Kibetsu 介護期別 : 介護期別List) {
             if (徴収方法期別.equals(介護期別.get徴収方法())
@@ -938,6 +941,9 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      */
     private RDate get期別納期限(int 期, RString 徴収方法期別) {
 
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return null;
+        }
         List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
         for (Kibetsu 介護期別 : 介護期別List) {
             if (徴収方法期別.equals(介護期別.get徴収方法())
