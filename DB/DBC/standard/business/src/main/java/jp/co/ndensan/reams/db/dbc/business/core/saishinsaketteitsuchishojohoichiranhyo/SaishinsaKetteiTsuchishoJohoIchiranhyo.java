@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteitsuchishojohoichiranhyo;
 
-import jp.co.ndensan.reams.db.dbc.business.*;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.KohiFutanShaMeiSai;
