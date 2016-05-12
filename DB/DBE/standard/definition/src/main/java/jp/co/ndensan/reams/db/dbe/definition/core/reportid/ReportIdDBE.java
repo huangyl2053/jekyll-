@@ -225,7 +225,11 @@ public enum ReportIdDBE {
     /**
      * 要介護状態区分別判定件数の帳票ＩＤです。
      */
-    DBE701005(new ReportId("DBE701005_Jotaikubumbetsuhantei"), new RString("要介護状態区分別判定件数"));
+    DBE701005(new ReportId("DBE701005_Jotaikubumbetsuhantei"), new RString("要介護状態区分別判定件数")),
+    /**
+     * 審査判定の変更状況の帳票ＩＤです。
+     */
+    DBE701006(new ReportId("DBE701006_ShinsahanteinoHenkojokyo"), new RString("審査判定の変更状況"));
 
     private final ReportId reportId;
 
