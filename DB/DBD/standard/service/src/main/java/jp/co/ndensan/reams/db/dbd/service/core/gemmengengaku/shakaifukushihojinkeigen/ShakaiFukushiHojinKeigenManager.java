@@ -251,7 +251,8 @@ public class ShakaiFukushiHojinKeigenManager {
                 builder.set確認番号(社会福祉法人等利用者負担軽減情報.get確認番号());
                 builder.set非承認理由(RString.EMPTY);
             } else {
-                builder.set非承認理由(社会福祉法人等利用者負担軽減情報.get非承認理由());
+                builder.set非承認理由(null == 社会福祉法人等利用者負担軽減情報.get非承認理由()
+                        ? RString.EMPTY : 社会福祉法人等利用者負担軽減情報.get非承認理由());
                 builder.set生保扶助見直し特例有無(false);
                 builder.set減免区分(RString.EMPTY);
                 builder.set適用開始年月日(FlexibleDate.EMPTY);

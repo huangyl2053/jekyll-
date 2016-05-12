@@ -140,13 +140,27 @@ public class DBD1030001Handler {
         div.getCcdShinseiJoho().initialize(識別コード);
         世帯所得一覧の初期化();
         div.getDdlKeigenJiyu().setDataSource(getAll軽減事由());
-        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(false);
-        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(true);
+        入力パネルをClose状態表示か(true);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(true);
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
         RealInitialLocker.lock(new LockingKey(new RString("DB").concat(被保険者番号.getColumnValue().concat("ShafukuKeigen"))));
         return true;
+    }
+
+    private void 入力パネルをClose状態表示か(boolean isClose状態) {
+        div.getTxtShinseiYMD().setDisabled(isClose状態);
+        div.getTxtShinseiRiyu().setDisabled(isClose状態);
+        div.getCcdShinseiJoho().setDisabled(isClose状態);
+        div.getShoninJoho().setDisabled(isClose状態);
+        div.getBtnBackToShinseiList().setDisabled(isClose状態);
+        div.getBtnShinseiKakutei().setDisabled(isClose状態);
+        div.getBtnShoninKakutei().setDisabled(isClose状態);
+    }
+
+    private void 一覧パネルをClose状態表示か(boolean isClose状態) {
+        div.getBtnAddShinsei().setDisabled(isClose状態);
+        div.getDgShinseiList().setDisabled(isClose状態);
     }
 
     private void 世帯所得一覧の初期化() {
@@ -314,14 +328,13 @@ public class DBD1030001Handler {
      */
     public void onClick_btnAddShinsei() {
         ViewStateHolder.put(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, null);
+        一覧パネルをClose状態表示か(true);
+        入力パネルをClose状態表示か(false);
         if (申請情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態２画面表示();
         } else if (承認情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態５画面表示();
         }
-        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(true);
-        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(false);
-        div.getDgShinseiList().setDisabled(true);
         div.getCcdShinseiJoho().initialize(get識別コードFromViewState());
     }
 
@@ -417,14 +430,13 @@ public class DBD1030001Handler {
         dgShinseiList_Row dataSouce = div.getDgShinseiList().getActiveRow();
         ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = get情報FromDataSouce(dataSouce);
         ViewStateHolder.put(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, 情報と状態);
+        一覧パネルをClose状態表示か(true);
+        入力パネルをClose状態表示か(false);
         if (申請情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態３画面表示(dataSouce, 情報と状態);
         } else if (承認情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態６画面表示(dataSouce, 情報と状態);
         }
-        div.getDgShinseiList().setDisabled(true);
-        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(true);
-        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(false);
     }
 
     private ShakaifukuRiyoshaFutanKeigenToJotai get情報FromDataSouce(dgShinseiList_Row dataSouce) {
@@ -711,9 +723,8 @@ public class DBD1030001Handler {
             修正社会福祉法人等利用者負担軽減申請の情報(画面社会福祉法人等利用者負担軽減申請情報, 情報と状態ArrayList, 編集情報);
         }
         情報エリアクリア();
-        div.getDgShinseiList().setDisabled(false);
-        div.getShafukuRiyoshaKeigen().getShinseiList().setDisplayNone(false);
-        div.getShafukuRiyoshaKeigen().getShinseiDetail().setDisplayNone(true);
+        一覧パネルをClose状態表示か(false);
+        入力パネルをClose状態表示か(true);
     }
 
     /**
@@ -738,6 +749,8 @@ public class DBD1030001Handler {
         ShinseiJoho shinseiJoho = new ShinseiJoho(null, AtenaMeisho.EMPTY, AtenaKanaMeisho.EMPTY,
                 RString.EMPTY, JigyoshaNo.EMPTY, null, YubinNo.EMPTY, AtenaJusho.EMPTY, TelNo.EMPTY);
         div.getCcdShinseiJoho().set減免減額申請情報(shinseiJoho, FlexibleDate.EMPTY);
+        一覧パネルをClose状態表示か(false);
+        入力パネルをClose状態表示か(true);
     }
 
     private ShakaifukuRiyoshaFutanKeigen get社会福祉法人等利用者負担軽減申請の情報From画面(
