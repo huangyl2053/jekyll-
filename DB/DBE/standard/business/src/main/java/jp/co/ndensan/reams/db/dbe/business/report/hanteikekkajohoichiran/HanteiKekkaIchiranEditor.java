@@ -47,7 +47,7 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.title = item.getTitle();
         source.taishoHokenshaName = item.get出力対象();
         source.hakkoYMD = hakkoYMD.toRString();
-        // source.listNo_1 = item.get
+        source.listNo_1 = new RString(item.getNo());
         source.listNo_2 = new RString(item.get介護認定審査会審査順());
         source.listNo_3 = item.get認定申請区分_申請時();
         source.listNo_4 = item.get認定申請区分_法令();
@@ -61,7 +61,7 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listHihokenshaNo_4 = item.getTb_二次判定要介護状態区分();
         source.listHihokenshaNo_5 = item.get一次判定結果();
         source.listHihokenshaNo_6 = item.get二次判定要介護状態区分();
-        source.listHihokenshaNo_7 = item.get要介護状態像例();
+        source.listHihokenshaNo_7 = item.get要介護状態像例コード();
 
         RStringBuilder tempTokuteishippei_1 = new RStringBuilder(String.valueOf(item.get二次判定認定有効期間()));
         tempTokuteishippei_1
@@ -70,8 +70,7 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
                 .append("～")
                 .append(item.get二次判定認定有効終了年月日());
         source.listTokuteishippei_1 = tempTokuteishippei_1.toRString();
-        source.listTokuteishippei_2 = item.get二号特定疾病();
-
+        source.listTokuteishippei_2 = item.get二号特定疾病内容();
         source.listShinsakaiiken_1 = item.get介護認定審査会意見();
         return source;
     }
