@@ -8,23 +8,24 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -37,11 +38,13 @@ public class HihokenshaDaichoManagerTest {
 
     private static DbT1001HihokenshaDaichoDac dac;
     private static HihokenshaDaichoManager sut;
+    private static MapperProvider mapperProvider;
 
     @BeforeClass
     public static void test() {
         dac = mock(DbT1001HihokenshaDaichoDac.class);
-        sut = new HihokenshaDaichoManager(dac);
+        mapperProvider = mock(MapperProvider.class);
+        sut = new HihokenshaDaichoManager(dac, mapperProvider);
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
