@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -16,7 +16,8 @@ public enum DBC0700011StateName implements IStateEnumerations {
 
     NoChange(""),
     申請登録("申請登録"),
-    更新完了("更新完了");
+    更新完了("更新完了"),
+    照会("照会");
 
     private final RString name;
 
