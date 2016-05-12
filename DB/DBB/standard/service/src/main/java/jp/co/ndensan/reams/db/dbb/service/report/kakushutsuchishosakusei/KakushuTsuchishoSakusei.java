@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoK
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiKetteiTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
@@ -600,10 +601,10 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         仮算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
         仮算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
         仮算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-        //仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
+        仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
         DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(仮算定額変更通知書_帳票分類ID);
         if (entity != null) {
-            仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(load帳票制御共通(仮算定額変更通知書_帳票分類ID)));
+            仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
         }
 
         KariSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
@@ -665,25 +666,23 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         仮算定通知書情報.set帳票ID(帳票ID);
         仮算定通知書情報.set処理区分(ShoriKubun.リアル);
         仮算定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
-        //仮算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前().toEntity());
-        //仮算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後().toEntity());
+        仮算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
+        仮算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         仮算定通知書情報.set納組情報(通知書共通情報.get納組情報());
         仮算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
         仮算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
         仮算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
-        //仮算定通知書情報.set前年度賦課情報(find前年度賦課(通知書共通情報.get賦課の情報_更正後()));
+        仮算定通知書情報.set前年度賦課情報(find前年度賦課(通知書共通情報.get賦課の情報_更正後().get賦課情報()));
         仮算定通知書情報.set口座情報(通知書共通情報.get口座情報());
-//        仮算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
-//        仮算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
-        //TODO 対象者（追加含む）情報（更正前）
-        //TODO 対象者（追加含む）情報（更正後）
-        //仮算定通知書情報.set対象者_追加含む_の情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
-        //仮算定通知書情報.set対象者_追加含む_の情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-
-        //TODO 収入情報
-        ShunyuJoho 収入情報 = null;
-        仮算定通知書情報.set収入情報(収入情報);
-        仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(load帳票制御共通(保険料納入通知書仮算定_帳票分類ID)));
+        仮算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
+        仮算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
+        仮算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
+        仮算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
+        仮算定通知書情報.set収入情報(通知書共通情報.get収入情報());
+        DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(保険料納入通知書仮算定_帳票分類ID);
+        if (entity != null) {
+            仮算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
+        }
 
         //TODO 出力期リスト?
         List<Kitsuki> 出力期リスト = parameter.get納入通知書出力期リスト();
@@ -890,29 +889,34 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set帳票ID(帳票ID);
         本算定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
-        //本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前().toEntity());
-        //本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後().toEntity());
+        本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
+        本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
         本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
         本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
         本算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定通知書情報.set口座情報(通知書共通情報.get口座情報());
-//        本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
-//        本算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
-        //本算定通知書情報.set対象者_追加含む_の情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
-        //本算定通知書情報.set対象者_追加含む_の情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-
-        //TODO 収入情報
-        ShunyuJoho 収入情報 = null;
-        本算定通知書情報.set収入情報(収入情報);
+        本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
+        本算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
+        本算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
+        本算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
+        本算定通知書情報.set収入情報(通知書共通情報.get収入情報());
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = load帳票制御共通(決定通知書_帳票分類ID);
         if (帳票制御共通 != null) {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
         }
-//         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-//        EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
+        HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
+        EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
 
-        //TODO 1.2　本算定決定通知書情報を作成する。
+        HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報 = new HonSanteiKetteiTsuchiShoJoho();
+        本算定決定通知書情報.set発行日(new RDate(parameter.get決定通知書_発行日().toString()));
+        本算定決定通知書情報.set帳票分類ID(決定通知書_帳票分類ID);
+        本算定決定通知書情報.set帳票ID(帳票ID);
+        本算定決定通知書情報.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+        本算定決定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
+        本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
+        本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
+
         RString 通知書定型文 = RString.EMPTY;
         if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).isEmpty()) {
             int パターン番号 = Integer.parseInt(nullTOEmpty(帳票制御共通.getTeikeibunMojiSize()).toString());
@@ -968,29 +972,34 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set帳票ID(帳票ID);
         本算定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
-        //本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前().toEntity());
-        //本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後().toEntity());
+        本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
+        本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
         本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
         本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
         本算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定通知書情報.set口座情報(通知書共通情報.get口座情報());
-//        本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
-//        本算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
-        //本算定通知書情報.set対象者_追加含む_の情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
-        //本算定通知書情報.set対象者_追加含む_の情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-
-        //TODO 収入情報
-        ShunyuJoho 収入情報 = null;
-        本算定通知書情報.set収入情報(収入情報);
+        本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
+        本算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
+        本算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
+        本算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
+        本算定通知書情報.set収入情報(通知書共通情報.get収入情報());
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = load帳票制御共通(決定通知書_帳票分類ID);
         if (帳票制御共通 != null) {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(帳票制御共通));
         }
-//        HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-//        EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
+        HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
+        EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
 
-        //TODO 本算定決定通知書情報を作成する。
+        HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報 = new HonSanteiKetteiTsuchiShoJoho();
+        本算定決定通知書情報.set発行日(new RDate(parameter.get変更通知書_発行日().toString()));
+        本算定決定通知書情報.set帳票分類ID(決定通知書_帳票分類ID);
+        本算定決定通知書情報.set帳票ID(帳票ID);
+        本算定決定通知書情報.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+        本算定決定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
+        本算定決定通知書情報.set処理区分(ShoriKubun.リアル);
+        本算定決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
+
         //TODO 帳票設計_DBBRP00005_3_介護保険料額変更兼特別徴収中止通知書
         SourceDataCollection sourceDataCollection = null;
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
@@ -1027,24 +1036,18 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         本算定通知書情報.set帳票ID(帳票ID);
         本算定通知書情報.set処理区分(ShoriKubun.リアル);
         本算定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
-        //本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
-        //本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
+        本算定通知書情報.set賦課の情報_更正前(通知書共通情報.get賦課の情報_更正前());
+        本算定通知書情報.set賦課の情報_更正後(通知書共通情報.get賦課の情報_更正後());
         本算定通知書情報.set納組情報(通知書共通情報.get納組情報());
         本算定通知書情報.set普徴納期情報リスト(通知書共通情報.get普徴納期情報List());
         本算定通知書情報.set特徴納期情報リスト(通知書共通情報.get特徴収入情報List());
         本算定通知書情報.set宛先情報(通知書共通情報.get宛先情報());
         本算定通知書情報.set口座情報(通知書共通情報.get口座情報());
-        //TODO HonSanteiTsuchiShoKyotsu違います。(徴収方法情報_更正前 徴収方法情報_更正後)
-        //本算定通知書情報.get徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
-        //本算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
-        //TODO 対象者（追加含む）情報（更正前）
-        //TODO 対象者（追加含む）情報（更正後）
-        //本算定通知書情報.set対象者_追加含む_の情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
-        //本算定通知書情報.set対象者_追加含む_の情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
-
-        //TODO 収入情報
-        ShunyuJoho 収入情報 = new ShunyuJoho();
-        本算定通知書情報.set収入情報(収入情報);
+        本算定通知書情報.set徴収方法情報_更正前(通知書共通情報.get徴収方法情報_更正前());
+        本算定通知書情報.set徴収方法情報_更正後(通知書共通情報.get徴収方法情報_更正後());
+        本算定通知書情報.set対象者_追加含む_情報_更正前(通知書共通情報.get対象者_追加含む_の情報_更正前());
+        本算定通知書情報.set対象者_追加含む_情報_更正後(通知書共通情報.get対象者_追加含む_の情報_更正後());
+        本算定通知書情報.set収入情報(通知書共通情報.get収入情報());
         DbT7065ChohyoSeigyoKyotsuEntity entity = load帳票制御共通(保険料納入通知書_帳票分類ID);
         if (entity != null) {
             本算定通知書情報.set帳票制御共通(new ChohyoSeigyoKyotsu(entity));
