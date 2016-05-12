@@ -209,9 +209,9 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         boolean 申請書 = div.getHihokenshashoHakkoTaishoshaJoho().getTsuchishoSakuseiKobetsu().getFutanGendogakuNinteiHeddaXinseiSyo().isIsPublish();
 
         FutanGendogakuNinteiKanshoTsuchisho tsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
+        int rirekiNo = div.getRirekiNo().isEmpty() ? 0 : Integer.valueOf(div.getRirekiNo().toString());
         SourceDataCollection sourceDataCollection = tsuchisho.publish(
-                被保険者番号, 識別コード, Integer.valueOf(div.getRirekiNo().toString()), 発行日, 文書番号, お知らせ通知書, 申請書);
-
+                被保険者番号, 識別コード, rirekiNo, 発行日, 文書番号, お知らせ通知書, 申請書);
         return ResponseData.of(sourceDataCollection).respond();
     }
 

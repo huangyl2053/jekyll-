@@ -242,7 +242,7 @@ public class RiyoshaFutangakuGengakuHandler {
         builder.set決定区分(決定区分コード);
         builder.set申請事由(div.getTxtShinseiRiyu().getValue());
         builder.set申請年月日(div.getTxtShinseiYmd().getValue());
-        builder.set旧措置者有無(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
+        builder.set旧措置者有無(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
         builder.set決定年月日(div.getTxtKettaiYmd().getValue());
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
 
@@ -275,7 +275,7 @@ public class RiyoshaFutangakuGengakuHandler {
                 row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
                 row.getTxtTekiyoYMD().setValue(適用開始年月日);
                 row.getTxtYukoKigen().setValue(適用終了年月日);
-                row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
+                row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
                 if (給付率 == HokenKyufuRitsu.ZERO) {
                     row.getTxtKyufuritsu().clearValue();
                 } else {
@@ -295,7 +295,7 @@ public class RiyoshaFutangakuGengakuHandler {
             row.getTxtKetteiYMD().setValue(div.getTxtKettaiYmd().getValue());
             row.getTxtTekiyoYMD().setValue(適用開始年月日);
             row.getTxtYukoKigen().setValue(適用終了年月日);
-            row.setKyusochishaUmu(KyuSochishaKubun.旧措置.getコード().equals(旧措置));
+            row.setKyusochishaUmu(KyuSochishaKubun.旧措置者.getコード().equals(旧措置));
             if (給付率 == HokenKyufuRitsu.ZERO) {
                 row.getTxtKyufuritsu().clearValue();
             } else {
@@ -483,7 +483,7 @@ public class RiyoshaFutangakuGengakuHandler {
         div.getDdlKyusochiKubun().setDataSource(getDdlKyusochiKubun());
 
         if (旧措置有無) {
-            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.旧措置.getコード());
+            div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.旧措置者.getコード());
         } else {
             div.getDdlKyusochiKubun().setSelectedKey(KyuSochishaKubun.非該当.getコード());
         }
@@ -886,7 +886,7 @@ public class RiyoshaFutangakuGengakuHandler {
             決定区分コード = KetteiKubun.承認しない.getコード();
         }
         boolean is旧措置者有無 = false;
-        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置.get名称())) {
+        if (div.getDdlKyusochiKubun().getSelectedValue().equals(KyuSochishaKubun.旧措置者.get名称())) {
             is旧措置者有無 = true;
         }
 

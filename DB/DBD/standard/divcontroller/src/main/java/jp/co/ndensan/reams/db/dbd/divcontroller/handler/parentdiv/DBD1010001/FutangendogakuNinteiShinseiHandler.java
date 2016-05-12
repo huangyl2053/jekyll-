@@ -735,7 +735,7 @@ public class FutangendogakuNinteiShinseiHandler {
                     決定日,
                     適用日,
                     有効期限,
-                    KyuSochishaKubun.旧措置.getコード().equals(futanGendogakuNintei.get旧措置者区分()),
+                    KyuSochishaKubun.旧措置者.getコード().equals(futanGendogakuNintei.get旧措置者区分()),
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get利用者負担段階())
                     ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get略称(),
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get居室種別())
@@ -990,7 +990,7 @@ public class FutangendogakuNinteiShinseiHandler {
         FutangendogakuNinteiService ninteiService = FutangendogakuNinteiService.createInstance();
         if (!申請メニューID.equals(ResponseHolder.getMenuID())
                 && ninteiService.is旧措置者(get被保険者番号FromViewState())) {
-            div.getDdlKyusochisha().setSelectedKey(KyuSochishaKubun.旧措置.getコード());
+            div.getDdlKyusochisha().setSelectedKey(KyuSochishaKubun.旧措置者.getコード());
         } else {
             div.getDdlKyusochisha().setIsBlankLine(true);
         }
