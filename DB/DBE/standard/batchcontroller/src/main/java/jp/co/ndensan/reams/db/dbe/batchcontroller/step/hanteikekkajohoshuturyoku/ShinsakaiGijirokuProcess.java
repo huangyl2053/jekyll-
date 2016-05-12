@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiGijirokuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku.IHanteiKekkaJohoShuturyokuMapper;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -32,6 +35,12 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
     private IHanteiKekkaJohoShuturyokuMapper mapper;
     private ShinsakaiGijirokuEntity shinsakaiGijirokuEntity;
     private RDateTime システム時刻;
+    private List<DbT5594ShinsakaiIinJohoEntity> 委員情報;
+    private ShinsakaiKaisaiKekkaJohoEntity 審査会情報;
+    private int 未判定;
+    private int 未審査;
+    private int 一次判定を変更した件数;
+    private int 審査会意見を付した件数;
 
     // TODO 帳票について、未作成
 //    @BatchWriter
@@ -58,19 +67,25 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
-        mapper = getMapper(IHanteiKekkaJohoShuturyokuMapper.class);
+        委員情報 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getIinJoho(mybatisParameter);
+        審査会情報 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getShinsakaiJoho(mybatisParameter);
+        未判定 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getMiHanteiKensu(mybatisParameter);
+        未審査 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getMishinSaKensu(mybatisParameter);
+        一次判定を変更した件数 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getItiDoHanteiHenkoKensu(mybatisParameter);
+        審査会意見を付した件数 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).getSinSakaiIkenTukeKensu(mybatisParameter);
+
     }
 
     @Override
     protected void process(ShinsakaiKekkaJohoRelateEntity entity) {
         shinsakaiGijirokuEntity.set作成年月日(システム時刻);
-        shinsakaiGijirokuEntity.set委員情報(mapper.getIinJoho(mybatisParameter));
-        shinsakaiGijirokuEntity.set審査会情報(mapper.getShinsakaiJoho(mybatisParameter));
+        shinsakaiGijirokuEntity.set委員情報(委員情報);
+        shinsakaiGijirokuEntity.set審査会情報(審査会情報);
         shinsakaiGijirokuEntity.set審査会審査結果等(entity);
-        shinsakaiGijirokuEntity.set未判定(mapper.getMiHanteiKensu(mybatisParameter));
-        shinsakaiGijirokuEntity.set未審査(mapper.getMishinSaKensu(mybatisParameter));
-        shinsakaiGijirokuEntity.set一次判定を変更した件数(mapper.getItiDoHanteiHenkoKensu(mybatisParameter));
-        shinsakaiGijirokuEntity.set審査会意見を付した件数(mapper.getSinSakaiIkenTukeKensu(mybatisParameter));
+        shinsakaiGijirokuEntity.set未判定(未判定);
+        shinsakaiGijirokuEntity.set未審査(未審査);
+        shinsakaiGijirokuEntity.set一次判定を変更した件数(一次判定を変更した件数);
+        shinsakaiGijirokuEntity.set審査会意見を付した件数(審査会意見を付した件数);
 //        shinsakaiGijirokuReport report = new shinsakaiGijirokuReport(entity);
 //        report.writeBy(reportSourceWriter);
     }
