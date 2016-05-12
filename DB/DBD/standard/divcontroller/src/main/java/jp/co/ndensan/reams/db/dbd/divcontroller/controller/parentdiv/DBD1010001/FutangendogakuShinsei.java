@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1010001.Nin
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -51,8 +50,7 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onLoad(FutangendogakuShinseiDiv div) {
-        getHandler(div).onLoad();
-        if (ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号() == null) {
+        if (!ResponseHolder.isReRequest() && !getHandler(div).onLoad()) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
@@ -79,6 +77,7 @@ public class FutangendogakuShinsei {
         div.getBtnDispSetaiJoho().setDisplayNone(true);
         div.getBtnCloseSetaiJoho().setDisplayNone(false);
         div.getBtnCloseSetaiJoho().setDisabled(false);
+        getHandler(div).世帯所得一覧の初期化();
         if (DBD1010001StateName.一覧.getName().equals(ResponseHolder.getState())) {
             return ResponseData.of(div).setState(DBD1010001StateName.世帯情報From一覧);
         } else if (DBD1010001StateName.詳細.getName().equals(ResponseHolder.getState())) {
