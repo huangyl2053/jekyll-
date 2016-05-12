@@ -144,7 +144,7 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
             this.isCyosaitakusakicodefrom = true;
         }
         if (RString.isNullOrEmpty(cyosaitakusakicodefto)) {
-            this.isCyosaitakusakicodefto = false;
+            this.isCyosaitakusakicodefto = true;
         }
     }
 
