@@ -217,8 +217,6 @@
     <result property="ninteiShinseiYMD"  column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     <result property="yusenWaritsukeKubunCode"  column="shinsakaiYusenWaritsukeKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     <result property="shichosonMeisho"  column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    <result property="ninteichosaKanryoYMD"  column="ninteichosaKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-    <result property="ikenshoTorokuKanryoYMD"  column="ikenshoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     <result property="maskingKanryoYMD"  column="maskingKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     <result property="ninteiShinsakaiKanryoYMD"  column="ninteiShinsakaiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     <result property="kaiWariateKanryoYMD"  column="ninteiShinsakaiWariateKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
