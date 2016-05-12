@@ -76,10 +76,13 @@ public class TaishoshaSearch {
      */
     public ResponseData<TaishoshaSearchDiv> onLoad(TaishoshaSearchDiv div) {
 
+        //AtenaFinderを初期化
+        div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().initialize();
+
         // TODO 保険者ドロップダウンの表示制御
         // div.getSearchCondition().getCcdSearchCondition().set保険者ドロップダウン();
         // 最大表示件数の取得
-//        div.getSearchCondition().getCcdSearchCondition().set最大表示件数();
+        div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder().getTxtMaxNumber().setValue(new Decimal(最大取得件数));
         // 最近処理者履歴 のロード
         div.getSearchCondition().getCcdSearchCondition().load最近処理者();
 
@@ -101,7 +104,9 @@ public class TaishoshaSearch {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 //        div.getSearchCondition().getCcdSearchCondition().check最大表示件数(pairs);
         ResponseData<TaishoshaSearchDiv> responseData = ResponseData.of(div).addValidationMessages(pairs).respond();
-        responseData.setValidateMessageIgnoreWarningRequest(false);
+
+        //UZの仕様変更により不要になったため削除
+//        responseData.setValidateMessageIgnoreWarningRequest(false);
         return responseData;
     }
 
@@ -114,13 +119,18 @@ public class TaishoshaSearch {
     public ResponseData<TaishoshaSearchDiv> onClick_btnClear(TaishoshaSearchDiv div) {
 
         // 介護検索条件と宛名検索条件のクリア
-        // TODO 宛名検索条件のクリア
-//        div.getSearchCondition().getCcdSearchCondition().onClick_BtnClear_Shikaku();
+        div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().clear();
+        div.getSearchCondition().getCcdSearchCondition().getKaigoFinder().clear();
+        div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder().getTxtMaxNumber().setValue(new Decimal(最大取得件数));
         return ResponseDatas.newResponseData(div);
     }
 
     /**
-     * 「検索する」ボタンクリック時に呼び出される処理です。
+     * 「検索する」ボタンクリック時に呼び出される処理です。<br/>
+     * 対象者が1件の場合は次画面に遷移します。次画面へ渡されるViewStateは以下の通り<br/>
+     * ViewStateEnum：ViewStateKeys.資格対象者<br/>
+     * 渡すクラス：jp.co.ndensan.reams.db.dbz.service.TaishoshaKey<br/>
+     * クラス構成：被保険者番号、識別コード、世帯コード
      *
      * @param div TaishoshaSearchDiv
      * @return ResponseData<TaishoshaSearchDiv>
@@ -134,17 +144,20 @@ public class TaishoshaSearch {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 
         // 検索条件未指定チェック
-        // TODO AtenaFinderのhasChangedメソッドチェックされない
         HihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
 
-        if (検索条件Flag) {
+        boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
+
+        if (検索条件Flag && !宛名条件修正Flag) {
             pairs.add(TaishoshaSearchValidationHelper.validate検索条件(検索条件Flag, div.getSearchCondition()));
             responseData = ResponseData.of(div).addValidationMessages(pairs).respond();
-            responseData.setValidateMessageIgnoreWarningRequest(false);
+
+            //UZの仕様変更により不要になったため削除
+//            responseData.setValidateMessageIgnoreWarningRequest(false);
             return responseData;
         }
         // 該当者を検索する
@@ -221,7 +234,11 @@ public class TaishoshaSearch {
 
     /**
      * 「該当者一覧」選択時に呼び出される処理です。<br/>
-     * （行クリックイベント、行ダブルクリックイベント）
+     * （行クリックイベント、行ダブルクリックイベント）<br/>
+     * 選択したデータのキー項目を次画面へ渡します。次画面へ渡されるViewStateは以下の通り<br/>
+     * ViewStateEnum：ViewStateKeys.資格対象者<br/>
+     * 渡すクラス：jp.co.ndensan.reams.db.dbz.service.TaishoshaKey<br/>
+     * クラス構成：被保険者番号、識別コード、世帯コード
      *
      * @param div TaishoshaSearchDiv
      * @return ResponseData<TaishoshaSearchDiv>

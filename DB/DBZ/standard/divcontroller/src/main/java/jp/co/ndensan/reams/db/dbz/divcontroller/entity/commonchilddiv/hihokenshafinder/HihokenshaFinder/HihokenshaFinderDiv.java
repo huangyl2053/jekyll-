@@ -157,6 +157,12 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
         return getHandler().get最近処理者();
     }
 
+    @Override
+    public void set賦課年度ドロップダウン() {
+        getHandler().set賦課年度ドロップダウン();
+    }
+
+
     @JsonIgnore
     private HihokenshaFinderHandler getHandler() {
         return new HihokenshaFinderHandler(this);

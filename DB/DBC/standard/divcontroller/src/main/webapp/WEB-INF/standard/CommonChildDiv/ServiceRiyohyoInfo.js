@@ -36,19 +36,11 @@ var DBC;
                 editTypes.addEditType("BeppyoGokeiDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("BeppyoRiyoNissuVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("BeppyoRiyoNissuDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaCodeVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaCodeDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaNameVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("KeikakuJigyoshaNameDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("onClickZengetsuCopy", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("onClickRiyohyoMeisaiAdd", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoMeisaiNew", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoGokeiNew", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoMeisaiKakutei", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBeppyoGokeiKakutei", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("dgServiceRiyohyoListSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("dgServiceRiyohyoListSelectBySelect", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("dgServiceRiyohyoListSelectByDelete", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("dgServiceRiyohyoBeppyoListSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("dgServiceRiyohyoBeppyoListSelectBySelect", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("dgServiceRiyohyoBeppyoListSelectByDelete", UZA.EditTypeEnumForPublicProperty.StringType);
@@ -107,52 +99,12 @@ var DBC;
                 this.controls.ServiceRiyohyoBeppyoRiyoNissu().displayNone = value;
             };
 
-            PublicProperties.prototype.getKeikakuJigyoshaCodeVisible = function () {
-                return this.controls.txtKeikakuJigyoshaCode().visible;
-            };
-
-            PublicProperties.prototype.setKeikakuJigyoshaCodeVisible = function (value) {
-                this.controls.txtKeikakuJigyoshaCode().visible = value;
-            };
-
-            PublicProperties.prototype.getKeikakuJigyoshaCodeDisplayNone = function () {
-                return this.controls.txtKeikakuJigyoshaCode().displayNone;
-            };
-
-            PublicProperties.prototype.setKeikakuJigyoshaCodeDisplayNone = function (value) {
-                this.controls.txtKeikakuJigyoshaCode().displayNone = value;
-            };
-
-            PublicProperties.prototype.getKeikakuJigyoshaNameVisible = function () {
-                return this.controls.txtKeikakuJigyoshaName().visible;
-            };
-
-            PublicProperties.prototype.setKeikakuJigyoshaNameVisible = function (value) {
-                this.controls.txtKeikakuJigyoshaName().visible = value;
-            };
-
-            PublicProperties.prototype.getKeikakuJigyoshaNameDisplayNone = function () {
-                return this.controls.txtKeikakuJigyoshaName().displayNone;
-            };
-
-            PublicProperties.prototype.setKeikakuJigyoshaNameDisplayNone = function (value) {
-                this.controls.txtKeikakuJigyoshaName().displayNone = value;
-            };
-
             PublicProperties.prototype.getonClickZengetsuCopy = function () {
                 return this.controls.btnZengetsuCopy().onClick;
             };
 
             PublicProperties.prototype.setonClickZengetsuCopy = function (value) {
                 this.controls.btnZengetsuCopy().onClick = value;
-            };
-
-            PublicProperties.prototype.getonClickRiyohyoMeisaiAdd = function () {
-                return this.controls.btnRiyohyoMeisaiAdd().onClick;
-            };
-
-            PublicProperties.prototype.setonClickRiyohyoMeisaiAdd = function (value) {
-                this.controls.btnRiyohyoMeisaiAdd().onClick = value;
             };
 
             PublicProperties.prototype.getonClickBeppyoMeisaiNew = function () {
@@ -185,30 +137,6 @@ var DBC;
 
             PublicProperties.prototype.setonClickBeppyoGokeiKakutei = function (value) {
                 this.controls.btnBeppyoGokeiKakutei().onClick = value;
-            };
-
-            PublicProperties.prototype.getdgServiceRiyohyoListSelectByDblClick = function () {
-                return this.controls.dgServiceRiyohyoList().onSelectByDblClick;
-            };
-
-            PublicProperties.prototype.setdgServiceRiyohyoListSelectByDblClick = function (value) {
-                this.controls.dgServiceRiyohyoList().onSelectByDblClick = value;
-            };
-
-            PublicProperties.prototype.getdgServiceRiyohyoListSelectBySelect = function () {
-                return this.controls.dgServiceRiyohyoList().onSelectBySelectButton;
-            };
-
-            PublicProperties.prototype.setdgServiceRiyohyoListSelectBySelect = function (value) {
-                this.controls.dgServiceRiyohyoList().onSelectBySelectButton = value;
-            };
-
-            PublicProperties.prototype.getdgServiceRiyohyoListSelectByDelete = function () {
-                return this.controls.dgServiceRiyohyoList().onSelectByDeleteButton;
-            };
-
-            PublicProperties.prototype.setdgServiceRiyohyoListSelectByDelete = function (value) {
-                this.controls.dgServiceRiyohyoList().onSelectByDeleteButton = value;
             };
 
             PublicProperties.prototype.getdgServiceRiyohyoBeppyoListSelectByDblClick = function () {
@@ -269,6 +197,23 @@ var DBC;
             return PublicProperties;
         })();
         ServiceRiyohyoInfo.PublicProperties = PublicProperties;
+        
+        (function (Modes) {
+            var ViewMode = (function() {
+                function ViewMode(controls) {
+                    this.controls = controls;
+                }
+                ViewMode.prototype.ModifyMode = function () {
+                    this.controls.ServiceRiyohyoBeppyoMeisai.displayNone = true;
+                    this.controls.ServiceRiyohyoBeppyoGokei.displayNone = true;
+                };
+                ViewMode.prototype.InquiryMode = function () {
+                    this.controls.ServiceRiyohyoBeppyoMeisai.displayNone = false;
+                    this.controls.ServiceRiyohyoBeppyoGokei.displayNone = false;
+                };
+                return ViewMode;
+            })();
+        })(ServiceRiyohyoInfo.Modes || (ServiceRiyohyoInfo.Modes = {}));
     })(DBC.ServiceRiyohyoInfo || (DBC.ServiceRiyohyoInfo = {}));
     var ServiceRiyohyoInfo = DBC.ServiceRiyohyoInfo;
 })(DBC || (DBC = {}));

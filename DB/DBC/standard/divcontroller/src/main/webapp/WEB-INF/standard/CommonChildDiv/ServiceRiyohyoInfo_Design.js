@@ -4,9 +4,6 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlurServiceCode = function () {
-                return "onBlurServiceCode";
-            };
             return Events;
         })();
         ServiceRiyohyoInfo.Events = Events;
@@ -39,14 +36,6 @@ var DBC;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtTekiyoKikan"));
             };
 
-            Controls.prototype.txtKeikakuJigyoshaCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtKeikakuJigyoshaCode"));
-            };
-
-            Controls.prototype.txtKeikakuJigyoshaName = function () {
-                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaName"));
-            };
-
             Controls.prototype.txtTaishoYM = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtTaishoYM"));
             };
@@ -77,22 +66,6 @@ var DBC;
 
             Controls.prototype.tabServiceRiyohyo = function () {
                 return new UZA.TabContainer(this.convFiledName("tabServiceRiyohyo"));
-            };
-
-            Controls.prototype.ServiceRiyohyo = function () {
-                return new UZA.TabPanel(this.convFiledName("ServiceRiyohyo"));
-            };
-
-            Controls.prototype.lblServiceRiyohyoList = function () {
-                return new UZA.Label(this.convFiledName("lblServiceRiyohyoList"));
-            };
-
-            Controls.prototype.btnRiyohyoMeisaiAdd = function () {
-                return new UZA.Button(this.convFiledName("btnRiyohyoMeisaiAdd"));
-            };
-
-            Controls.prototype.dgServiceRiyohyoList = function () {
-                return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoList"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyo = function () {

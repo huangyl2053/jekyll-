@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.config._SystemConfig;
  *
  * @author N3317 塚田 萌
  */
-public class KihonJoho {
+public class DBB0320001KihonJoho {
 
     /**
      * コントロールdivが「生成」された際の処理です。
@@ -27,7 +27,7 @@ public class KihonJoho {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<KihonJohoDiv> onLoad(KihonJohoDiv div) {
+    public ResponseData<DBB0320001KihonJohoDiv> onLoad(DBB0320001KihonJohoDiv div) {
         return initialize(div);
     }
 
@@ -37,7 +37,7 @@ public class KihonJoho {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<KihonJohoDiv> onActive(KihonJohoDiv div) {
+    public ResponseData<DBB0320001KihonJohoDiv> onActive(DBB0320001KihonJohoDiv div) {
         return initialize(div);
     }
 
@@ -47,7 +47,7 @@ public class KihonJoho {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<KihonJohoDiv> onStateTransition(KihonJohoDiv div) {
+    public ResponseData<DBB0320001KihonJohoDiv> onStateTransition(DBB0320001KihonJohoDiv div) {
         return initialize(div);
     }
 
@@ -57,7 +57,7 @@ public class KihonJoho {
      * @param div 基本情報Div
      * @return レスポンスデータ
      */
-    public ResponseData<KihonJohoDiv> initialize(KihonJohoDiv div) {
+    public ResponseData<DBB0320001KihonJohoDiv> initialize(DBB0320001KihonJohoDiv div) {
 
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
 
@@ -75,7 +75,7 @@ public class KihonJoho {
         return createResponseData(div);
     }
 
-    private ResponseData<KihonJohoDiv> createResponseData(KihonJohoDiv div) {
+    private ResponseData<DBB0320001KihonJohoDiv> createResponseData(DBB0320001KihonJohoDiv div) {
         return ResponseData.of(div).respond();
     }
 

@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -126,6 +128,25 @@ public class KaigoFinderDiv extends Panel {
     @JsonProperty("KaigoFinderDetail")
     public void setKaigoFinderDetail(KaigoFinderDetailDiv KaigoFinderDetail) {
         this.KaigoFinderDetail = KaigoFinderDetail;
+    }
+
+    public void clear() {
+
+        if (this.ddlHokensha.getSelectedIndex() >= 0) {
+            this.ddlHokensha.setSelectedIndex(0);
+        }
+
+        this.txtHihokenshaNo.clearValue();
+        this.txtTuchishoNo.clearValue();
+
+        if (this.ddlFukaNendo.getSelectedIndex() >= 0) {
+            this.ddlFukaNendo.setSelectedIndex(0);
+        }
+
+        List<KeyValueDataSource> def = new ArrayList();
+        this.KaigoFinderDetail.getChkHihokenshaDaicho().setSelectedItems(def);
+        this.KaigoFinderDetail.getChkJukyushaDaicho().setSelectedItems(def);
+        this.KaigoFinderDetail.getChkJushochiTokureisha().setSelectedItems(def);
     }
 
     // </editor-fold>

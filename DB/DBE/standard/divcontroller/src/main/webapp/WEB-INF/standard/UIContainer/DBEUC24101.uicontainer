@@ -22,7 +22,7 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2410001",
      "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
-     "eventName": "認定調査依頼(手動)へ",
+     "eventName": "認定調査依頼へ",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
@@ -60,13 +60,13 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2410001",
      "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
-     "eventName": "主治医意見書作成依頼(手動)へ",
+     "eventName": "主治医意見書作成依頼へ",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2410002",
      "toLayoutTitle": "主治医意見書作成依頼（手動）",
-     "toState": "default"
+     "toState": ""
     },
     {
      "id": "6",

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.relate.TaishoshaRelateDac;
 import jp.co.ndensan.reams.db.dbz.service.util.SearchResult;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.KojinSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -85,8 +85,8 @@ public class TaishoshaFinder {
     @Transaction
     public SearchResult<FukaTaishoshaRelateEntity> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
-        //TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
-        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
+        FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
+//        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(ctrlData.getMenuID());
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);

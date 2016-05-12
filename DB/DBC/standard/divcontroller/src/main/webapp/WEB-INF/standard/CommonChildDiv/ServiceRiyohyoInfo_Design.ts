@@ -8,10 +8,6 @@ module DBC {
 
         export class Events {
 
-            public static onBlurServiceCode(): string {
-                return "onBlurServiceCode";
-            }
-
         }
 
         export class Controls {
@@ -45,14 +41,6 @@ module DBC {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtTekiyoKikan"));
             }
 
-            public txtKeikakuJigyoshaCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtKeikakuJigyoshaCode"));
-            }
-
-            public txtKeikakuJigyoshaName(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaName"));
-            }
-
             public txtTaishoYM(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtTaishoYM"));
             }
@@ -83,22 +71,6 @@ module DBC {
 
             public tabServiceRiyohyo(): UZA.TabContainer {
                 return new UZA.TabContainer(this.convFiledName("tabServiceRiyohyo"));
-            }
-
-            public ServiceRiyohyo(): UZA.TabPanel {
-                return new UZA.TabPanel(this.convFiledName("ServiceRiyohyo"));
-            }
-
-            public lblServiceRiyohyoList(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblServiceRiyohyoList"));
-            }
-
-            public btnRiyohyoMeisaiAdd(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnRiyohyoMeisaiAdd"));
-            }
-
-            public dgServiceRiyohyoList(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoList"));
             }
 
             public ServiceRiyohyoBeppyo(): UZA.TabPanel {

@@ -1,0 +1,46 @@
+﻿{
+ "uiContainerName": "DBDUC50301",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "完了処理・通知書発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5030001",
+     "toLayoutTitle": "完了処理・通知書発行",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5030001",
+     "layoutTitle": "完了処理・通知書発行",
+     "eventName": "通知書発行",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5320001",
+     "toLayoutTitle": "要介護認定通知書発行",
+     "toState": "初始状態"
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5320001",
+     "layoutTitle": "要介護認定通知書発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001StateName.賦課根拠期割;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiPanelDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.dgFukaRirekiFukaRireki_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
@@ -52,7 +52,7 @@ public class FukaRirekiPanel {
      * @param kihonDiv 基本情報div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onLoad(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onLoad(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, DBB0320001KihonJohoDiv kihonDiv) {
         return load(rirekiDiv, rirekiAllDiv, kihonDiv);
     }
 
@@ -64,7 +64,7 @@ public class FukaRirekiPanel {
      * @param kihonDiv 基本情報div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onActive(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onActive(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, DBB0320001KihonJohoDiv kihonDiv) {
         return reload(rirekiDiv, rirekiAllDiv, kihonDiv);
     }
 
@@ -77,7 +77,7 @@ public class FukaRirekiPanel {
      * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> load(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<FukaRirekiPanelDiv> load(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, DBB0320001KihonJohoDiv kihonDiv) {
 
 //        rirekiDiv.setDisplayNone(true);
         return ResponseData.of(rirekiDiv).setState(賦課根拠期割);
@@ -92,7 +92,7 @@ public class FukaRirekiPanel {
      * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> reload(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<FukaRirekiPanelDiv> reload(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, DBB0320001KihonJohoDiv kihonDiv) {
 
 //        rirekiDiv.setDisplayNone(false);
 //        FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
@@ -114,14 +114,14 @@ public class FukaRirekiPanel {
      * @return レスポンスデータ
      */
     public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(
-            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, DBB0320001KihonJohoDiv kihonDiv) {
 
         IItemList<Fuka> selectItemList = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
         Fuka selectRow = selectItemList.findFirst().get();
 
         final FukaManager manager = new FukaManager();
 //        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課一覧(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号()));
-        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課一覧());
+        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号()));
         if (rirekiAllDiv.getLblMode().getText().equals(FukaShokaiDisplayMode.二回目以降.getCode())) {
             setDgFukaRireki(rirekiDiv, descList, selectRow.get賦課年度());
         } else {
@@ -186,7 +186,7 @@ public class FukaRirekiPanel {
      * @return レスポンスデータ
      */
     public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(
-            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, DBB0320001KihonJohoDiv kihonDiv) {
 
 //        Fuka model = findTargetModel(
 //                rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All(),
@@ -217,7 +217,7 @@ public class FukaRirekiPanel {
      * @return レスポンスデータ
      */
     public ResponseData<FukaRirekiPanelDiv> onClick_MaeHikaku(
-            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, DBB0320001KihonJohoDiv kihonDiv) {
 
         // TODO FukaManagerを１つにしたい
         final FukaManager manager = new FukaManager();
@@ -235,7 +235,7 @@ public class FukaRirekiPanel {
         FukaShokaiKey atoRireki = ViewStateKeyCreator.createFukaShokaiKey(atoFuka, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
         ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, atoRireki);
 
-        if (履歴番号 == 0) {
+        if (履歴番号 == 1) {
             ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前年度最終との比較(atoRireki));
         } else {
             Fuka maeFuka = manager.get介護賦課(

@@ -29,8 +29,8 @@
             <artifactId>DbxDefinition</artifactId>
         </dependency>
         <!-- DBZ -->
-        <!-- å…¬é–‹ç³» -->
-        <!-- ãƒ†ã‚¹ãƒˆ -->
+        <!-- ŒöŠJŒn -->
+        <!-- ƒeƒXƒg -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
