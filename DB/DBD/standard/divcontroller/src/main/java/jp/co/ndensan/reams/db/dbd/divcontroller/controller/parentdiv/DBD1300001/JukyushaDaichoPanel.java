@@ -97,6 +97,13 @@ public class JukyushaDaichoPanel {
         RString 喪失区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("soshitsukubun"));
         RString 抽出対象 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsutaisyo"));
         RString 抽出日種類 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsunichisyurai"));
+        if (抽出年月日.equals(抽出対象)) {
+            getHandler(div).set抽出年月日();
+        } else if (医療機関.equals(抽出対象)) {
+            getHandler(div).set医療機関();
+        } else if (調査委託先.equals(抽出対象)) {
+            getHandler(div).set調査委託先();
+        }
         RString 抽出日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsunichifrom"));
         if (抽出日From == null) {
             div.getTxtChushutsuYMD().setFromValue(null);

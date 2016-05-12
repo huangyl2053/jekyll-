@@ -69,7 +69,12 @@ public class JukyushaDaichoPanelHandler {
         div.getDdlChushutsuYmd().setDisabled(false);
         div.getTxtChushutsuYMD().setDisabled(false);
         div.getTxtIryokikan().setDisabled(true);
+        div.getTxtIryokikan().clearFromValue();
+        div.getTxtIryokikan().clearToValue();
         div.getTxtChosaItakusaki().setDisabled(true);
+        div.getTxtChosaItakusaki().clearFromValue();
+        div.getTxtChosaItakusaki().clearToValue();
+
     }
 
     /**
@@ -94,7 +99,11 @@ public class JukyushaDaichoPanelHandler {
      */
     public void set医療機関() {
         div.getDdlChushutsuYmd().setDisabled(true);
+        div.getTxtChushutsuYMD().clearFromValue();
+        div.getTxtChushutsuYMD().clearToValue();
         div.getTxtChushutsuYMD().setDisabled(true);
+        div.getTxtChosaItakusaki().clearFromValue();
+        div.getTxtChosaItakusaki().clearToValue();
         div.getTxtIryokikan().setDisabled(false);
         div.getTxtChosaItakusaki().setDisabled(true);
 
@@ -108,7 +117,11 @@ public class JukyushaDaichoPanelHandler {
 
         div.getDdlChushutsuYmd().setDisabled(true);
         div.getTxtChushutsuYMD().setDisabled(true);
+        div.getTxtChushutsuYMD().clearFromValue();
+        div.getTxtChushutsuYMD().clearToValue();
         div.getTxtIryokikan().setDisabled(true);
+        div.getTxtIryokikan().clearFromValue();
+        div.getTxtIryokikan().clearToValue();
         div.getTxtChosaItakusaki().setDisabled(false);
     }
 
