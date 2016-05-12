@@ -541,6 +541,7 @@ public class RiyoshaFutangakuGengakuHandler {
     public void viewState破棄() {
         ViewStateHolder.put(Dbd1020001Keys.利用者負担額減額情報ListのViewState, null);
         ViewStateHolder.put(Dbd1020001Keys.DB利用者負担額減額情報List, null);
+        ViewStateHolder.put(Dbd1020001Keys.世帯所得一覧初期化済み, null);
         入力情報をクリア();
     }
 
