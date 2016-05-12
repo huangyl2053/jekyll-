@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
@@ -80,7 +81,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
             前年度最終期普徴期別介護保険料 = get前年度最終期普徴期別介護保険料(仮算定通知書情報);
         }
         EditedKojin 編集後個人 = new EditedKojin(仮算定通知書情報.get賦課の情報_更正後().get宛名(), 仮算定通知書情報.get帳票制御共通());
-        EditedAtesaki 編集後宛先 = new EditedAtesaki(仮算定通知書情報.get宛先情報(), 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
+        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(仮算定通知書情報.get宛先情報(), 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
         EditedKoza 編集後口座 = new EditedKoza(仮算定通知書情報.get口座情報(), 仮算定通知書情報.get帳票制御共通());
         Decimal 普徴納付済額未到来期含まない = get納付済額未到来期含まない(普徴メソッド_収入, 仮算定通知書情報.get普徴納期情報リスト(), 仮算定通知書情報.get収入情報());
         Decimal 特徴納付済額未到来期含まない = get納付済額未到来期含まない(特徴メソッド_収入, 仮算定通知書情報.get特徴納期情報リスト(), 仮算定通知書情報.get収入情報());
