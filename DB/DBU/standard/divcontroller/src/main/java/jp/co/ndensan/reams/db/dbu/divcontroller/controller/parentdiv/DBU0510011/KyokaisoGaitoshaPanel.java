@@ -347,19 +347,29 @@ public class KyokaisoGaitoshaPanel {
                 最新リンク番号 = Integer.parseInt(row.getLinkNo().toString());
                 最新履歴番号 = Integer.parseInt(nofu_Row.getTekiyoRirekiNo().toString());
             }
-            if (!状態_追加.equals(nofu_Row.getState())) {
+            if (状態_削除.equals(nofu_Row.getState()) || !状態_追加.equals(nofu_Row.getState())) {
                 最新リンク番号 = Integer.parseInt(nofu_Row.getTekiyoLinkNo().toString());
                 最新履歴番号 = Integer.parseInt(nofu_Row.getTekiyoRirekiNo().toString());
             }
-            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getTekiyoKaishiDate().toString());
-            KyokaisoHokenryoDankaiIdentifier key = new KyokaisoHokenryoDankaiIdentifier(
+            int 修正前の履歴番号 = Integer.parseInt(nofu_Row.getTekiyoRirekiNo().toString());
+            int 修正前のリンク番号 = Integer.parseInt(nofu_Row.getTekiyoLinkNo().toString());
+            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getHiddenTekiyoKaishiDate().toString());
+            RDate 修正後の適用開始年月 = new RDate(div.getTxtHohenryoNofuFromDate().getValue().getYearMonth().toString());
+            KyokaisoHokenryoDankaiIdentifier 修正前Key = new KyokaisoHokenryoDankaiIdentifier(
                     被保険者番号,
-                    最新履歴番号,
-                    最新リンク番号,
+                    修正前の履歴番号,
+                    修正前のリンク番号,
                     new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
-            KyokaisoHokenryoDankai hokenryoDan = getHandler(div).editHokenryoDankai(
-                    models.get(key).modifiedModel());
-            models.add(hokenryoDan);
+            KyokaisoHokenryoDankai hokenryoDan = new KyokaisoHokenryoDankai(
+                    被保険者番号,
+                    (修正前の履歴番号 + 1),
+                    修正前のリンク番号,
+                    new FlexibleYearMonth(修正後の適用開始年月.getYearMonth().toDateString()));
+            if (状態_削除.equals(nofu_Row.getState()) || !状態_追加.equals(nofu_Row.getState())) {
+                models.add(models.get(修正前Key).createBuilderForEdit().is論理削除フラグ(true).build());
+                hokenryoDan = getHandler(div).editHokenryoDankai(hokenryoDan);
+                models.add(hokenryoDan);
+            }
         } else if (状態_削除.equals(状態)) {
             if (状態_修正.equals(イベント状態)) {
                 最新リンク番号 = Integer.parseInt(row.getLinkNo().toString());
@@ -375,7 +385,11 @@ public class KyokaisoGaitoshaPanel {
                     最新履歴番号,
                     最新リンク番号,
                     new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
-            models.add(models.get(key).createBuilderForEdit().is論理削除フラグ(true).build());
+            if (!状態_追加.equals(nofu_Row.getState())) {
+                models.add(models.get(key).createBuilderForEdit().is論理削除フラグ(true).build());
+            } else {
+                models.deleteOrRemove(key);
+            }
         }
         ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(models));
         getHandler(div).onClick_btnKakutei(イベント状態, 最新リンク番号, 最新履歴番号);
@@ -420,7 +434,7 @@ public class KyokaisoGaitoshaPanel {
             Models<KyokaisoHokenryoDankaiIdentifier, KyokaisoHokenryoDankai> dankaiModels) {
         if (div.getDghokenryoNofu().getDataSource() != null && !div.getDghokenryoNofu().getDataSource().isEmpty()) {
             for (dghokenryoNofu_Row noFu_row : div.getDghokenryoNofu().getDataSource()) {
-                RDate 修正前の適用開始年月 = new RDate(noFu_row.getTekiyoKaishiDate().toString());
+                RDate 修正前の適用開始年月 = new RDate(noFu_row.getHiddenTekiyoKaishiDate().toString());
                 KyokaisoHokenryoDankaiIdentifier dankaiKey = new KyokaisoHokenryoDankaiIdentifier(
                         被保険者番号,
                         Integer.parseInt(noFu_row.getTekiyoRirekiNo().toString()),
