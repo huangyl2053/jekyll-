@@ -27,11 +27,12 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsu
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.HojinDaihyoshaRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -773,14 +774,15 @@ public class HihokenshashoChohyoFinder {
     }
 
     private List<SofusakiJohoEntity> get送付先情報(ShikibetsuCode 識別コード) {
-        AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
-                KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBU介護統計報告));
-        atenaSearchKeyBuilder.set識別コード(識別コード);
-        atenaSearchKeyBuilder.set基準日(FlexibleDate.getNowDate());
-        atenaSearchKeyBuilder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
-        atenaSearchKeyBuilder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-        atenaSearchKeyBuilder.set代納人利用区分(DainoRiyoKubun.利用しない);
-        UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
+        AtesakiPSMSearchKeyBuilder apsmskb = new AtesakiPSMSearchKeyBuilder(AtesakiGyomuHanteiKeyFactory
+                .createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBU介護統計報告));
+        apsmskb.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用する);
+        apsmskb.set識別コード(識別コード);
+        apsmskb.set基準日(FlexibleDate.getNowDate());
+        apsmskb.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
+        apsmskb.set代納人利用区分(DainoRiyoKubun.利用しない);
+        apsmskb.set送付先利用区分(SofusakiRiyoKubun.利用する);
+        UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(apsmskb.build());
         AtenaMybatisParameter parameter = new AtenaMybatisParameter(RString.EMPTY, new RString(uaFt250Psm.getParameterMap()
                 .get(PSMWM.toString()).toString()));
         IHihokenshashoChohyoMapper mapper = mapperProvider.create(IHihokenshashoChohyoMapper.class);
