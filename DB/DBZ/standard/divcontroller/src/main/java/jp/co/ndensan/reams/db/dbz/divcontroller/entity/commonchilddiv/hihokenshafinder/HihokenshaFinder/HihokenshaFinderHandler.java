@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -195,8 +196,8 @@ public class HihokenshaFinderHandler {
         int 所得年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_所得年度, subGyomuCode).getConfigValue().toString());
         int 遡及年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_遡及年度, subGyomuCode).getConfigValue().toString());
         int 当初年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_当初年度, subGyomuCode).getConfigValue().toString());
-        // TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
-        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
+        FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
+//        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
         // FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
         int 開始年度 = 0;
         int 終了年度 = 0;

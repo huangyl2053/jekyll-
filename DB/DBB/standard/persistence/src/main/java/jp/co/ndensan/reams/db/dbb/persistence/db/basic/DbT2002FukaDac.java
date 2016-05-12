@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -72,6 +72,35 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
                                 eq(tsuchishoNo, 通知書番号),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT2002FukaEntity.class);
+    }
+
+    /**
+     * 主キーで介護賦課を取得します。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return DbT2002FukaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT2002FukaEntity> selectByKey(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) throws NullPointerException {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2002Fuka.class).
+                where(and(
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号))).
+                toList(DbT2002FukaEntity.class);
     }
 
     /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu;
+package jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -17,43 +17,43 @@ import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 調定事由を表すドメインクラスです。
+ * 介護資格取得事由（被保険者）を表すドメインクラスです。
  *
- * @author n3327 三浦 凌
+ * @author n8187 久保田 英男
  */
-public class ChoteiJiyu implements ICodeValueObject, IDbColumnMappable, IValueObject<Code> {
+public class ShikakuShutokuJiyuHihokensha implements ICodeValueObject, IDbColumnMappable, IValueObject<Code> {
 
     /**
-     * DBZ介護共通を表すサブ業務コードです。
+     * DBA介護資格を表すサブ業務コードです。
      */
     public static final SubGyomuCode SUB_GYOMU_CODE;
     /**
-     * 調定事由を表すコード種別です。
+     * 介護資格取得事由（被保険者）を表すコード種別です。
      */
     public static final CodeShubetsu CODE_SHUBETSU;
 
     private final Code code;
 
     static {
-        SUB_GYOMU_CODE = SubGyomuCode.DBB介護賦課;
-        CODE_SHUBETSU = DBZCodeShubetsu.調定事由.getCodeShubetsu();
+        SUB_GYOMU_CODE = SubGyomuCode.DBA介護資格;
+        CODE_SHUBETSU = DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu();
     }
 
     /**
      * コンストラクタです。
      *
-     * @param code 調定事由
+     * @param code 介護資格取得事由（被保険者）
      */
-    public ChoteiJiyu(Code code) {
+    public ShikakuShutokuJiyuHihokensha(Code code) {
         this.code = code;
     }
 
     /**
      * コンストラクタです。
      *
-     * @param code 調定事由を表す文字列
+     * @param code 介護資格取得事由（被保険者）を表す文字列
      */
-    public ChoteiJiyu(RString code) {
+    public ShikakuShutokuJiyuHihokensha(RString code) {
         this.code = new Code(code);
     }
 
@@ -77,7 +77,7 @@ public class ChoteiJiyu implements ICodeValueObject, IDbColumnMappable, IValueOb
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ChoteiJiyu other = (ChoteiJiyu) obj;
+        final ShikakuShutokuJiyuHihokensha other = (ShikakuShutokuJiyuHihokensha) obj;
         return Objects.equals(this.code, other.code);
     }
 
