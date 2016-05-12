@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
@@ -231,7 +232,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 宛名.get行政区画().getChiku2().getコード().value(),
                 宛名.get行政区画().getChiku3().getコード().value(),
                 本算定通知書情報.get納組情報().getNokumi().getNokumiCode());
-        EditedAtesaki editedAtesaki = new EditedAtesaki(本算定通知書情報.get宛先情報(),
+        EditedAtesaki editedAtesaki = EditedAtesakiBuilder.create編集後宛先(
+                本算定通知書情報.get宛先情報(),
                 本算定通知書情報.get地方公共団体(),
                 本算定通知書情報.get帳票制御共通());
         EditedKoza editedKoza = new EditedKoza(本算定通知書情報.get口座情報(), 本算定通知書情報.get帳票制御共通());
