@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.IIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -263,17 +264,18 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     private void editor前住所(HanyoListKyotakuServiceKeikakuEntity entity,
             HanyoListKyotakuServiceKeikakuCsvEntity csvEntity, HanyoListKyotakuServiceKeikakuProcessParameter parameter) {
 
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
+        IIdoJiyu 登録事由 = 宛名.get登録事由();
+        IIdoJiyu 住定事由 = 宛名.get住定事由();
+        IIdoJiyu 消除事由 = 宛名.get消除事由();
         csvEntity.set登録異動日(dataToRString(entity.get宛名Entity().getTorokuIdoYMD(), parameter));
-        csvEntity.set登録事由(isNull(entity.get宛名Entity().getTorokuJiyuCode())
-                ? RString.EMPTY : entity.get宛名Entity().getTorokuJiyuCode());
+        csvEntity.set登録事由(登録事由 != null ? 登録事由.get異動事由略称() : RString.EMPTY);
         csvEntity.set登録届出日(dataToRString(entity.get宛名Entity().getTorokuTodokedeYMD(), parameter));
         csvEntity.set住定異動日(dataToRString(entity.get宛名Entity().getJuteiIdoYMD(), parameter));
-        csvEntity.set住定事由(isNull(entity.get宛名Entity().getJuteiJiyuCode())
-                ? RString.EMPTY : entity.get宛名Entity().getJuteiJiyuCode());
+        csvEntity.set住定事由(住定事由 != null ? 住定事由.get異動事由略称() : RString.EMPTY);
         csvEntity.set住定届出日(dataToRString(entity.get宛名Entity().getJuteiTodokedeYMD(), parameter));
         csvEntity.set消除異動日(dataToRString(entity.get宛名Entity().getShojoIdoYMD(), parameter));
-        csvEntity.set消除事由(isNull(entity.get宛名Entity().getShojoJiyuCode())
-                ? RString.EMPTY : entity.get宛名Entity().getShojoJiyuCode());
+        csvEntity.set消除事由(登録事由 != null ? 消除事由.get異動事由略称() : RString.EMPTY);
         csvEntity.set消除届出日(dataToRString(entity.get宛名Entity().getShojoTodokedeYMD(), parameter));
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo yubinNo1 = entity.get宛名Entity().getTennyumaeYubinNo();

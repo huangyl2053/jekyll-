@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -297,12 +296,22 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
                 .concat(前住所番地 != null ? 前住所番地.getColumnValue() : RString.EMPTY)
                 .concat(RString.FULL_SPACE)
                 .concat(前住所方書 != null ? 前住所方書.getColumnValue() : RString.EMPTY));
-        ChikuCode 地区1 = entity.get宛名().getChikuCode1();
-        ChikuCode 地区2 = entity.get宛名().getChikuCode2();
-        ChikuCode 地区3 = entity.get宛名().getChikuCode3();
-        csvEntity.set地区１(地区1 != null ? 地区1.getColumnValue() : RString.EMPTY);
-        csvEntity.set地区２(地区2 != null ? 地区2.getColumnValue() : RString.EMPTY);
-        csvEntity.set地区３(地区3 != null ? 地区3.getColumnValue() : RString.EMPTY);
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        RString 地区1 = RString.EMPTY;
+        RString 地区2 = RString.EMPTY;
+        RString 地区3 = RString.EMPTY;
+        if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku1() != null) {
+            地区1 = 宛名.get行政区画().getChiku1().get名称();
+        }
+        if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku2() != null) {
+            地区2 = 宛名.get行政区画().getChiku2().get名称();
+        }
+        if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku3() != null) {
+            地区3 = 宛名.get行政区画().getChiku3().get名称();
+        }
+        csvEntity.set地区１(地区1);
+        csvEntity.set地区２(地区2);
+        csvEntity.set地区３(地区3);
     }
 
     private void set宛先(HanyouRisutoSyuturyokuEntity entity, HanyouRisutoSyuturyokuEucCsvNoEntity csvEntity) {
