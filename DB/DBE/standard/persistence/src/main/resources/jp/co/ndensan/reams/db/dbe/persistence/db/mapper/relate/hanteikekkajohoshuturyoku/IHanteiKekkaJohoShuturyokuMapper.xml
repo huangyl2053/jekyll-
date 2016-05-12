@@ -21,11 +21,11 @@
         <result property="一次判定結果" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="一次判定結果_加算" column="ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定要介護状態区分" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="要介護状態像例" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護状態像例コード" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定認定有効期間" column="nijiHanteiNinteiYukoKikan" />
         <result property="二次判定認定有効開始年月日" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="二号特定疾病" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
@@ -109,14 +109,14 @@
         <result property="一次判定結果" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="一次判定結果_加算" column="ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定要介護状態区分" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="要介護状態像例" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護状態像例コード" column="yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="tb_二次判定認定有効開始日" column="tb_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="tb_二次判定認定有効終了日" column="tb_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="tb_二次判定認定有効期間" column="tb_nijiHanteiNinteiYukoKikan" />
         <result property="二次判定認定有効開始年月日" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定認定有効期間" column="nijiHanteiNinteiYukoKikan"/>
-        <result property="二号特定疾病" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="合議体番号" column="gogitaiNo" />
     </resultMap>

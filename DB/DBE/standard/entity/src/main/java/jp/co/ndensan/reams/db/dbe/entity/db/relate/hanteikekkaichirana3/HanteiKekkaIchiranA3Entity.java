@@ -40,14 +40,16 @@ public class HanteiKekkaIchiranA3Entity {
     private RString 一次判定結果;
     private RString 一次判定結果_加算;
     private RString 二次判定要介護状態区分;
-    private RString 要介護状態像例;
+    private RString 要介護状態像例コード;
+    private RString 状態像内容;
     private RString tb_二次判定認定有効開始日;
     private RString tb_二次判定認定有効終了日;
     private int tb_二次判定認定有効期間;
     private RString 二次判定認定有効開始年月日;
     private RString 二次判定認定有効終了年月日;
     private int 二次判定認定有効期間;
-    private RString 二号特定疾病;
+    private RString 二号特定疾病コード;
+    private RString 二号特定疾病内容;
     private RString 介護認定審査会意見;
     private int 合議体番号;
 }

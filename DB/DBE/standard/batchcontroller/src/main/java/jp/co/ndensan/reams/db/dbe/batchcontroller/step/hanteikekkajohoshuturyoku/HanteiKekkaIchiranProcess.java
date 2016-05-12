@@ -90,7 +90,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
             entity.set一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.toValue(entity.get一次判定結果()).get名称());
         }
         entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get略称());
-        entity.set二号特定疾病(TokuteiShippei.toValue(entity.get二号特定疾病()).toRString());
+        entity.set二号特定疾病内容(TokuteiShippei.toValue(entity.get二号特定疾病コード()).toRString());
 //        HanteiKekkaIchiranReport report = new HanteiKekkaIchiranReport(entity);
 //        report.writeBy(reportSourceWriter);
         index = index + 1;
