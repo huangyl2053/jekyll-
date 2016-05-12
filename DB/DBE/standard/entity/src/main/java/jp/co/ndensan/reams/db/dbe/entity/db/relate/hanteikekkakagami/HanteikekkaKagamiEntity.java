@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami;
 
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,6 +23,7 @@ import lombok.Setter;
 public class HanteikekkaKagamiEntity {
 
     private RDateTime printTimeStamp;
+    private NinshoshaSource ninshoshaSource;
     private FlexibleDate shinsakaiKaisaiYMD;
     private int gogitaiNo;
     private RString tsuchibun1;
