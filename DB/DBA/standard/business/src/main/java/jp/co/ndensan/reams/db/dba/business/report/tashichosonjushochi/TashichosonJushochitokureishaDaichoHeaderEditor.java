@@ -6,7 +6,12 @@
 package jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochi;
 
 import jp.co.ndensan.reams.db.dba.entity.report.tashichosonjushochi.TashichosonJushochitokureishaDaichoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 他市町村住所地特例者台帳ヘッダEditorです。
@@ -43,7 +48,8 @@ public class TashichosonJushochitokureishaDaichoHeaderEditor implements ITashich
         source.title = タイトル;
         source.shichosonCode = item.getShichosonCode();
         source.shichosonName = item.getShichosonName();
-        source.birthYMD = item.getBirthYMD();
+        source.birthYMD = item.getBirthYMD() == null
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getBirthYMD()));
         source.seibetsu = item.getSeibetsu();
         source.setaiCode = item.getSetaiCode();
         source.shikibetsuCode = item.getShikibetsuCode();
@@ -66,9 +72,16 @@ public class TashichosonJushochitokureishaDaichoHeaderEditor implements ITashich
         source.gyoseikuCode = item.getGyoseikuCode();
         source.maeJushoCode = item.getMaeJushoCode();
         source.jusho2 = item.getJusho2();
-        source.tennyuYMD = item.getTennyuYMD();
+        source.tennyuYMD = item.getTennyuYMD() == null
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getTennyuYMD()));
         source.jusho2Title = item.getJusho2Title();
-        source.tenshutsuYMD = item.getTenshutsuYMD();
+        source.tenshutsuYMD = item.getTenshutsuYMD() == null
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getTenshutsuYMD()));
         return source;
+    }
+
+    private RString 和暦年月日Fomart(FlexibleDate date) {
+        return (date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
     }
 }
