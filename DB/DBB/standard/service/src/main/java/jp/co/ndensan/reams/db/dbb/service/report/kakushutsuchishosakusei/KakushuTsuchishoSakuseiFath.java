@@ -35,10 +35,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1006KyokaisoGaitoshaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV4001JukyushaDaichoAliveDac;
@@ -130,6 +132,7 @@ public class KakushuTsuchishoSakuseiFath {
     private final DbT4021ShiharaiHohoHenkoDac 支払方法変更Dac;
     private final DbV4001JukyushaDaichoAliveDac 受給者台帳Dac;
     private final DbT7022ShoriDateKanriDac 処理日付Dac;
+    private final DbT1006KyokaisoGaitoshaDac 境界層該当者Dac;
 
     /**
      * コンストラクタです。
@@ -140,6 +143,7 @@ public class KakushuTsuchishoSakuseiFath {
         this.支払方法変更Dac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
         this.受給者台帳Dac = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class);
         this.処理日付Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        this.境界層該当者Dac = InstanceProvider.create(DbT1006KyokaisoGaitoshaDac.class);
     }
 
     /**
@@ -210,7 +214,14 @@ public class KakushuTsuchishoSakuseiFath {
         賦課台帳情報.set代納人連絡先1(代納人連絡先1);
         賦課台帳情報.set代納人連絡先2(代納人連絡先2);
 
-        //TODO 4.1　境界層当該者情報を取得する。(介護保険者境界層当該者台帳)
+        List<DbT1006KyokaisoGaitoshaEntity> 境界層当該者情報 = new ArrayList<>();
+        if (賦課の情報更正後.get調定日時() != null && !賦課の情報更正後.get調定日時().isEmpty()) {
+            境界層当該者情報 = 境界層該当者Dac.select境界層該当者(賦課の情報更正後.get被保険者番号(),
+                    new FlexibleDate(賦課の情報更正後.get調定日時().getDate().toDateString()));
+        }
+        if (境界層当該者情報 != null && !境界層当該者情報.isEmpty()) {
+            賦課台帳情報.set境界層当該者情報(境界層当該者情報.get(0));
+        }
         DbT1001HihokenshaDaichoEntity 被保険者台帳情報 = 被保険者台帳管理Dac.selectByHihokensha(賦課の情報更正後.get被保険者番号());
         賦課台帳情報.set被保険者台帳情報(被保険者台帳情報);
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト = 支払方法変更Dac.get支支払方法変更(賦課の情報更正後.get被保険者番号());

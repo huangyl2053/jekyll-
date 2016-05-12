@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -25,4 +27,6 @@ public class KariTokuchoKaishiTsuchisyoJoho {
     private ReportId 帳票ID;
     private EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報;
     private IAtesaki 宛先情報;
+    private ShoriKubun 処理区分;
+    private Association 地方公共団体;
 }
