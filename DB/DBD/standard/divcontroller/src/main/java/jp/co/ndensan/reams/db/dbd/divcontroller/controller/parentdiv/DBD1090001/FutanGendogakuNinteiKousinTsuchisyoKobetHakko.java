@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.ShinseiRiyuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.DBD1090001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.DBD1090001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090001.FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler;
@@ -20,9 +21,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090001.Fut
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakunintei.FutanGendogakuNinteiKanshoTsuchisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -91,6 +95,34 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
                 .setValue(RDate.getNowDate());
 
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 世帯情報を表示するボタンをクッリク
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnShotaiJohou(
+            FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        div.getCcdSetaiShotokuIchiran().initialize(識別コード, FlexibleDate.getNowDate(), new HizukeConfig().get所得年度(), YMDHMS.now());
+        div.getBtnShotaiJohou().setDisplayNone(true);
+        div.getBtnReturnChohyoHakko().setDisplayNone(false);
+        return ResponseData.of(div).setState(DBD1090001StateName.世帯所得一覧);
+    }
+
+    /**
+     * 世帯情報を表示するボタンをクッリク
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnReturnChohyoHakko(
+            FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+        div.getBtnShotaiJohou().setDisplayNone(false);
+        div.getBtnReturnChohyoHakko().setDisplayNone(true);
+        return ResponseData.of(div).setState(DBD1090001StateName.負担限度額認定);
     }
 
     private FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler getHandler() {
@@ -223,19 +255,5 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      */
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnReturn(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBD1090001TransitionEventName.検索に戻る).respond();
-    }
-
-    /**
-     * 「世帯情報を表示する」ボタンをクリックする
-     *
-     * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
-     * @return ResponseData
-     */
-    public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnShotaiJohou(
-            FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
-        div.setNowDate(RDate.getNowDate().toDateString());
-        div.setShikibetsuCode(new RString(識別コード.toString()));
-        return ResponseData.of(div).respond();
     }
 }

@@ -68,7 +68,7 @@
     </sql>
 
     <select id="get負担限度額認定帳票用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity"
-             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter" fetchSize="500">
         <include refid="selectFutanGendogakuNinteiThyouyListEntity" />
     </select>
 
@@ -89,6 +89,7 @@
             DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
             AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = #{履歴番号}
         </where>
+        limit 1
     </sql>
 
     <select id="get負担限度額認定申請の情報List"

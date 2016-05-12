@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
@@ -30,9 +32,13 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     @JsonProperty("LineHorizontal1")
     private HorizontalLine LineHorizontal1;
     @JsonProperty("btnShotaiJohou")
-    private ButtonDialog btnShotaiJohou;
+    private Button btnShotaiJohou;
+    @JsonProperty("btnReturnChohyoHakko")
+    private Button btnReturnChohyoHakko;
     @JsonProperty("HihokenshashoHakkoTaishoshaJoho")
     private HihokenshashoHakkoTaishoshaJohoDiv HihokenshashoHakkoTaishoshaJoho;
+    @JsonProperty("SetaiJoho")
+    private SetaiJohoDiv SetaiJoho;
     @JsonProperty("ccdKaigoShikakuKihonDiv")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihonDiv;
     @JsonProperty("ccdKaigoAtenaInfoDiv")
@@ -75,7 +81,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
      * @return btnShotaiJohou
      */
     @JsonProperty("btnShotaiJohou")
-    public ButtonDialog getBtnShotaiJohou() {
+    public Button getBtnShotaiJohou() {
         return btnShotaiJohou;
     }
 
@@ -84,8 +90,26 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
      * @param btnShotaiJohou btnShotaiJohou
      */
     @JsonProperty("btnShotaiJohou")
-    public void setBtnShotaiJohou(ButtonDialog btnShotaiJohou) {
+    public void setBtnShotaiJohou(Button btnShotaiJohou) {
         this.btnShotaiJohou = btnShotaiJohou;
+    }
+
+    /*
+     * getbtnReturnChohyoHakko
+     * @return btnReturnChohyoHakko
+     */
+    @JsonProperty("btnReturnChohyoHakko")
+    public Button getBtnReturnChohyoHakko() {
+        return btnReturnChohyoHakko;
+    }
+
+    /*
+     * setbtnReturnChohyoHakko
+     * @param btnReturnChohyoHakko btnReturnChohyoHakko
+     */
+    @JsonProperty("btnReturnChohyoHakko")
+    public void setBtnReturnChohyoHakko(Button btnReturnChohyoHakko) {
+        this.btnReturnChohyoHakko = btnReturnChohyoHakko;
     }
 
     /*
@@ -104,6 +128,24 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     @JsonProperty("HihokenshashoHakkoTaishoshaJoho")
     public void setHihokenshashoHakkoTaishoshaJoho(HihokenshashoHakkoTaishoshaJohoDiv HihokenshashoHakkoTaishoshaJoho) {
         this.HihokenshashoHakkoTaishoshaJoho = HihokenshashoHakkoTaishoshaJoho;
+    }
+
+    /*
+     * getSetaiJoho
+     * @return SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public SetaiJohoDiv getSetaiJoho() {
+        return SetaiJoho;
+    }
+
+    /*
+     * setSetaiJoho
+     * @param SetaiJoho SetaiJoho
+     */
+    @JsonProperty("SetaiJoho")
+    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
+        this.SetaiJoho = SetaiJoho;
     }
 
     /*
@@ -217,6 +259,11 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv extends Panel {
     @JsonIgnore
     public void  setBtnGoRireki(Button btnGoRireki) {
         this.getHihokenshashoHakkoTaishoshaJoho().getZengoRireki().setBtnGoRireki(btnGoRireki);
+    }
+
+    @JsonIgnore
+    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
+        return this.getSetaiJoho().getCcdSetaiShotokuIchiran();
     }
 
     // </editor-fold>
