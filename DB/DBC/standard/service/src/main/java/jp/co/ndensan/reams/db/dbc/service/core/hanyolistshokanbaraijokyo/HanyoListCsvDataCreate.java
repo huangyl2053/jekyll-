@@ -414,7 +414,7 @@ public class HanyoListCsvDataCreate {
             RString 申請取消事由 = RString.EMPTY;
             RString 申請取消事由Code = entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode();
             if (申請取消事由Code != null && !申請取消事由Code.isEmpty()) {
-                申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, 申請取消事由コード種別,
+                申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
                         new Code(申請取消事由Code), FlexibleDate.getNowDate());
             }
             csvEntity.set申請取消事由(申請取消事由);
