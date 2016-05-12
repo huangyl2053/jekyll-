@@ -13,11 +13,13 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護サービス種類テーブルのエンティティクラスです。
  * <br/> 介護サービス種類を管理します
  */
+@OnNextSchema("rgdb")
 public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130KaigoServiceShuruiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName

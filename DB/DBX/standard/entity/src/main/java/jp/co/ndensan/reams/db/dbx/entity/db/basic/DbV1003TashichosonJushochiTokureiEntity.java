@@ -8,11 +8,13 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 他市町村住所地特例者台帳管理Aliveテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<DbV1003TashichosonJushochiTokureiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 

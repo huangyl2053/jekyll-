@@ -9,11 +9,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護導入形態テーブルのエンティティクラスです。
  * <br/> 介護事務と介護認定を導入する形態を識別する制御情報を定義します
  */
+@OnNextSchema("rgdb")
 public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908KaigoDonyuKeitaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 

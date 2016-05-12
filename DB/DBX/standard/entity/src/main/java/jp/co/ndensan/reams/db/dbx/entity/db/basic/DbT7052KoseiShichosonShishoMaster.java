@@ -1,11 +1,13 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 構成市町村支所マスタテーブルの項目定義クラスです。
  * <br/> 構成・単独市町村単位の支所を管理する
  */
+@OnNextSchema("rgdb")
 public enum DbT7052KoseiShichosonShishoMaster implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**

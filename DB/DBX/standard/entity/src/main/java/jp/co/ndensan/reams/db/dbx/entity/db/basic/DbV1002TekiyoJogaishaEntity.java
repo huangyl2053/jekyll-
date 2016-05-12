@@ -9,10 +9,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 適用除外者台帳管理Aliveテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV1002TekiyoJogaishaEntity extends DbTableEntityBase<DbV1002TekiyoJogaishaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName

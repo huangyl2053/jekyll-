@@ -19,11 +19,13 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護事業者指定サービステーブルのエンティティクラスです。
  * <br/> 介護事業者単位に利用できるサービスを管理する
  */
+@OnNextSchema("rgdb")
 public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<DbT7063KaigoJigyoshaShiteiServiceEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName

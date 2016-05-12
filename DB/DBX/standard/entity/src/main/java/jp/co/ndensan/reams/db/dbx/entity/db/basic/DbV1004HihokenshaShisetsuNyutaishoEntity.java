@@ -9,10 +9,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * DbV1004HihokenshaShisetsuNyutaishoテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004HihokenshaShisetsuNyutaishoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
