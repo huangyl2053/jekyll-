@@ -248,10 +248,10 @@ public class HanyoListCsvNoRenbanDataCreate {
                 地区1 = 宛名.get行政区画().getChiku1().get名称();
             }
             if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku2() != null) {
-                地区2 = 宛名.get行政区画().getChiku1().get名称();
+                地区2 = 宛名.get行政区画().getChiku2().get名称();
             }
             if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku3() != null) {
-                地区3 = 宛名.get行政区画().getChiku1().get名称();
+                地区3 = 宛名.get行政区画().getChiku3().get名称();
             }
             TelNo 連絡先1 = entity.get宛名Entity().getRenrakusaki1();
             TelNo 連絡先2 = entity.get宛名Entity().getRenrakusaki2();
