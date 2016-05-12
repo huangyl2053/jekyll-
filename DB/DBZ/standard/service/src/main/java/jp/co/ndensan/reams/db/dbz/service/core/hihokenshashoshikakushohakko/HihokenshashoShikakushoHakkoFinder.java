@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
 import static jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter.createParam;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
@@ -37,7 +39,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -66,132 +67,6 @@ public class HihokenshashoShikakushoHakkoFinder {
     private final DbT7060KaigoJigyoshaDac dbT7060Dac;
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac;
     private static final int HYOJI_SIZE = 150;
-
-    /**
-     * 支払方法変更管理区分を表す列挙型です。
-     *
-     * @author LDNS
-     */
-    public enum ShiharaiHenkoKanriKubun {
-
-        /**
-         * コード:1 名称:２号差止 略称:定義なし
-         */
-        _２号差止("1", "２号差止"),
-        /**
-         * コード:2 名称:１号償還払い化 略称:定義なし
-         */
-        _１号償還払い化("2", "１号償還払い化"),
-        /**
-         * コード:3 名称:１号給付額減額 略称:定義なし
-         */
-        _１号給付額減額("3", "１号給付額減額");
-
-        private final RString code;
-        private final RString fullName;
-
-        private ShiharaiHenkoKanriKubun(String code, String fullname) {
-            this.code = new RString(code);
-            this.fullName = new RString(fullname);
-        }
-
-        /**
-         * 支払方法変更管理区分のコードを返します。
-         *
-         * @return 支払方法変更管理区分のコード
-         */
-        public RString getコード() {
-            return code;
-        }
-
-        /**
-         * 支払方法変更管理区分の名称を返します。
-         *
-         * @return 支払方法変更管理区分の名称
-         */
-        public RString get名称() {
-            return fullName;
-        }
-
-        /**
-         * 支払方法変更管理区分のコードと一致する内容を探します。
-         *
-         * @param code 支払方法変更管理区分のコード
-         * @return {@code code} に対応する支払方法変更管理区分
-         */
-        public static ShiharaiHenkoKanriKubun toValue(RString code) {
-
-            for (ShiharaiHenkoKanriKubun shiharaiHenkoKanriKubun : ShiharaiHenkoKanriKubun.values()) {
-                if (shiharaiHenkoKanriKubun.code.equals(code)) {
-                    return shiharaiHenkoKanriKubun;
-                }
-            }
-            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("支払方法変更管理区分"));
-        }
-    }
-
-    /**
-     * 有効無効区分を表す列挙型です。
-     *
-     * @author LDNS
-     */
-    public enum YukoMukoKubun {
-
-        /**
-         * コード:0 名称:初期値（申請中の場合） 略称:定義なし
-         */
-        初期値_申請中の場合("0", "初期値（申請中の場合）"),
-        /**
-         * コード:1 名称:有効 略称:定義なし
-         */
-        有効("1", "有効"),
-        /**
-         * コード:2 名称:無効 略称:定義なし
-         */
-        無効("2", "無効");
-
-        private final RString code;
-        private final RString fullName;
-
-        private YukoMukoKubun(String code, String fullname) {
-            this.code = new RString(code);
-            this.fullName = new RString(fullname);
-        }
-
-        /**
-         * 有効無効区分のコードを返します。
-         *
-         * @return 有効無効区分のコード
-         */
-        public RString getコード() {
-            return code;
-        }
-
-        /**
-         * 有効無効区分の名称を返します。
-         *
-         * @return 有効無効区分の名称
-         */
-        public RString get名称() {
-            return fullName;
-        }
-
-        /**
-         * 有効無効区分のコードと一致する内容を探します。
-         *
-         * @param code 有効無効区分のコード
-         * @return {@code code} に対応する有効無効区分
-         */
-        public static YukoMukoKubun toValue(RString code) {
-
-            for (YukoMukoKubun yukoMukoKubun : YukoMukoKubun.values()) {
-                if (yukoMukoKubun.code.equals(code)) {
-                    return yukoMukoKubun;
-                }
-            }
-            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("有効無効区分"));
-        }
-    }
 
     /**
      * コンストラクタです。
@@ -301,7 +176,7 @@ public class HihokenshashoShikakushoHakkoFinder {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
             RString 保険者名称;
             LasdecCode shichosonCode = hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode();
-            if (shichosonCode != null) {
+            if (shichosonCode != null && !shichosonCode.isEmpty()) {
                 List<ShichosonCodeYoriShichoson> 市町村情報 = finder.shichosonCodeYoriShichosonJoho(shichosonCode).records();
                 保険者名称 = 市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称();
                 entity.set市町村コード(shichosonCode.value());
@@ -544,9 +419,7 @@ public class HihokenshashoShikakushoHakkoFinder {
             return;
         }
 
-        for (int i = 0;
-                i < resultList.size();
-                i++) {
+        for (int i = 0; i < resultList.size(); i++) {
 
             if (i == 0) {
                 if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
@@ -560,6 +433,8 @@ public class HihokenshashoShikakushoHakkoFinder {
                     RString 入所施設１ = dbT1005List.isEmpty() ? RString.EMPTY : dbT1005List.get(0).getJigyoshaMeisho().value();
                     entity.set入所施設１(入所施設１);
                 }
+                entity.set入所施設コード１(resultList.get(i).get入所施設コード());
+                entity.set入所施設種類１(resultList.get(i).get入所施設種類());
                 entity.set入所年月日１(resultList.get(i).get入所年月日());
                 entity.set退所年月日１(resultList.get(i).get退所年月日());
             } else if (i == 1) {
@@ -575,6 +450,8 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set入所施設２(入所施設２);
 
                 }
+                entity.set入所施設コード２(resultList.get(i).get入所施設コード());
+                entity.set入所施設種類２(resultList.get(i).get入所施設種類());
                 entity.set入所年月日２(resultList.get(i).get入所年月日());
                 entity.set退所年月日２(resultList.get(i).get退所年月日());
             } else if (i == 2) {
@@ -590,6 +467,8 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set入所施設３(入所施設３);
 
                 }
+                entity.set入所施設コード３(resultList.get(i).get入所施設コード());
+                entity.set入所施設種類３(resultList.get(i).get入所施設種類());
                 entity.set入所年月日３(resultList.get(i).get入所年月日());
                 entity.set退所年月日３(resultList.get(i).get退所年月日());
             }
