@@ -181,6 +181,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     private static final RString FORMAT = new RString("%02d");
     private static final RString 住宅改修_状態 = new RString("Unchanged");
     private static final RString 申請を保存ボタン = new RString("btnAddShikyuShinsei");
+    private static final FlexibleYearMonth 平成21年03月 = new FlexibleYearMonth(new RString("200903"));
 
     private JutakuKaishuShinseiJyohoTorokuHandler(JutakuKaishuShinseiJyohoTorokuDiv div) {
         this.div = div;
@@ -904,22 +905,39 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         set証明書DataSource(様式名称);
         RString 制度改正施行年月日 = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
+        YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(被保険者番号, 提供着工年月);
         if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) < 0) {
-            set証明書値(証明書1);
+            証明書表示設定平成18年04月以前(要介護認定情報);
         } else if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) >= 0) {
-            証明書表示設定(被保険者番号, 提供着工年月, 画面モード);
+            証明書表示設定(画面モード, 要介護認定情報, 提供着工年月);
         }
     }
 
-    private void 証明書表示設定(HihokenshaNo 被保険者番号, FlexibleYearMonth 提供着工年月, RString 画面モード) {
-        JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
-        YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(被保険者番号, 提供着工年月);
+    private void 証明書表示設定平成18年04月以前(YokaigoNinteiJyoho 要介護認定情報) {
         if (要介護認定情報 == null) {
-            set証明書値(証明書1);
+            throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
+        } else if (要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
+                || 要介護1.equals(要介護認定情報.get要介護認定状態区分コード())
+                || 要介護2.equals(要介護認定情報.get要介護認定状態区分コード())
+                || 要介護3.equals(要介護認定情報.get要介護認定状態区分コード())
+                || 要介護4.equals(要介護認定情報.get要介護認定状態区分コード())
+                || 要介護5.equals(要介護認定情報.get要介護認定状態区分コード())) {
+            div.getDdlSyomeisyo().setSelectedKey(証明書1);
+            div.getDdlSyomeisyo().setDisabled(true);
+        } else {
+            throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
+        }
+    }
+
+    private void 証明書表示設定(RString 画面モード, YokaigoNinteiJyoho 要介護認定情報, FlexibleYearMonth 提供着工年月) {
+        if (要介護認定情報 == null) {
+            throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
         } else if (要支援1.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要支援2.equals(要介護認定情報.get要介護認定状態区分コード())) {
             set証明書値(証明書2);
-        } else if (要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
+        } else if ((要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
+                && 提供着工年月.isBeforeOrEquals(平成21年03月))
                 || 要介護1.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要介護2.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要介護3.equals(要介護認定情報.get要介護認定状態区分コード())
@@ -931,7 +949,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 div.getDdlSyomeisyo().setDisabled(true);
             }
         } else {
-            set証明書値(証明書1);
+            throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
         }
     }
 
