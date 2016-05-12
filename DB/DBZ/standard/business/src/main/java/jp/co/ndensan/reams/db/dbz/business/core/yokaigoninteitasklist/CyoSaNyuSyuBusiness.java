@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -199,5 +201,23 @@ public class CyoSaNyuSyuBusiness {
      */
     public int get認定調査依頼履歴番号() {
         return entity.getNinteichosaIraiRirekiNo();
+    }
+
+    /**
+     * 認定調査委託先コードを返します。
+     *
+     * @return 認定調査委託先コード
+     */
+    public ChosaItakusakiCode get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
+    }
+
+    /**
+     * 調査員コードを返します。
+     *
+     * @return 調査員コード
+     */
+    public ChosainCode get調査員コード() {
+        return entity.getNinteiChosainCode();
     }
 }

@@ -534,6 +534,11 @@ public class YokaigoNinteiTaskListHandler {
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
                     : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+            row.setNinteiChosaItakusakiCode(business.get認定調査委託先コード() == null
+                    ? RString.EMPTY : business.get認定調査委託先コード().value());
+            row.setNinteiChosainCode(business.get調査員コード() == null
+                    ? RString.EMPTY : business.get調査員コード().value());
+            row.setChikuCode(business.get地区コード() == null ? RString.EMPTY : business.get地区コード());
             調査入手モードの日付設定(row, business);
             rowList.add(row);
         }
