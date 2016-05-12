@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakufuseigo.IShikakuFuseigoMapper">
     <resultMap id="shikakuResult" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakufuseigo.ShikakuFuseigoEntity">
-        <association property="dbt1014Entity" resultMap="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity"/>
+        <!--<association property="dbt1014Entity" resultMap="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity"/>-->
         <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>    
     <select id="get被保険者資格不整合一覧" 
@@ -27,7 +27,7 @@
           ORDER BY hihokenshaNo,shikibetsuCode
     </select>
     
-    <resultMap id="shikakufuseigo" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity">
+    <!--<resultMap id="shikakufuseigo" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity">
         <association property="dbt1014Entity" resultMap="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity"/>
     </resultMap>    
     <select id="get整合性チェック情報" 
@@ -46,6 +46,6 @@
               DbT1014SeigoseiCheck."daichoShubetsu" IN('1','2','3')
               OR DbT1014SeigoseiCheck."fuseigoRiyuCode" IN ('11','12','13','21','22','23','31','32','33','42','51','52','53','54','61','62','63','64')
           ORDER BY hihokenshaNo,shikibetsuCode
-    </select>
+    </select>-->
 </mapper>
     

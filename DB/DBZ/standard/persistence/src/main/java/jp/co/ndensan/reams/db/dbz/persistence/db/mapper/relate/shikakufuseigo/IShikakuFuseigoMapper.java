@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shikakufuseigo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakufuseigo.ShikakuFuseigoMybatisParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakufuseigo.ShikakuFuseigoEntity;
 
 /**
@@ -31,5 +30,5 @@ public interface IShikakuFuseigoMapper {
      * @param param param
      * @return List<DbT1014SeigoseiCheckEntity>
      */
-    List<DbT1014SeigoseiCheckEntity> get整合性チェック情報(ShikakuFuseigoMybatisParameter param);
+//    List<DbT1014SeigoseiCheckEntity> get整合性チェック情報(ShikakuFuseigoMybatisParameter param);
 }
