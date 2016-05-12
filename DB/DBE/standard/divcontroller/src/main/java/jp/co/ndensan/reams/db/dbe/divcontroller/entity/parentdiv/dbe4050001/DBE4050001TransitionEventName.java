@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBE4050001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    戻る("戻る");
+    完了処理に戻る("完了処理に戻る");
 
     private final RString name;
 
