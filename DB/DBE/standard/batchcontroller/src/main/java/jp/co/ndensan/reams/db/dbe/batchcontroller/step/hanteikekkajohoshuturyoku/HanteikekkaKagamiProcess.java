@@ -62,6 +62,10 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
         hanteikekkaKagamiEntity.setPrintTimeStamp(システム時刻);
         hanteikekkaKagamiEntity.setShinsakaiKaisaiYMD(entity.getShinsakaiKaisaiYMD());
         hanteikekkaKagamiEntity.setGogitaiNo(entity.getGogitaiNo());
+//        hanteikekkaKagamiEntity.setNinshoshaSource(ReportUtil.get認証者情報(
+//                SubGyomuCode.DBE認定支援, ID,
+//                new FlexibleDate(システム時刻.getDate().toDateString()),
+//                reportSourceWriter));
         hanteikekkaKagamiEntity.setTsuchibun1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号).get(INDEX_1));
         hanteikekkaKagamiEntity.setTsuchibun2(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号).get(INDEX_2));
 //        HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity);
