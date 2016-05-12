@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoKikanDiv;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
@@ -26,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
  *
  * @author N3317 塚田 萌
  */
-public class KibetsuChoshuYuyo {
+public class KibetsuChoshuYuyoHandler {
 
     private final ChoshuYuyoKikanDiv div;
-//    private final IItemList<KibetsuChoshuYuyoModel> list;
-    private final IItemList<Object> list;
+    private final IItemList<KibetsuChoshuYuyo> list;
+//    private final IItemList<Object> list;
 
     private enum TableItem {
 
@@ -66,7 +67,7 @@ public class KibetsuChoshuYuyo {
      * @param div 期割額Div
      * @param list 期別徴収猶予モデルリスト
      */
-    public KibetsuChoshuYuyo(ChoshuYuyoKikanDiv div, IItemList<Object> list) {
+    public KibetsuChoshuYuyoHandler(ChoshuYuyoKikanDiv div, IItemList<KibetsuChoshuYuyo> list) {
 //    public KibetsuChoshuYuyo(ChoshuYuyoKikanDiv div, IItemList<KibetsuChoshuYuyoModel> list) {
         this.div = div;
         this.list = list;
@@ -90,14 +91,14 @@ public class KibetsuChoshuYuyo {
         setKibetsu(createIndexMap(期列));
     }
 
-    private boolean are調定年度and賦課年度SameAge(Optional<Object> model) {
-        // TODO modelのCheckstyle対応。
-        model.hashCode();
-        return true;
-    }
-//    private boolean are調定年度and賦課年度SameAge(Optional<KibetsuChoshuYuyoModel> model) {
-//        return model.get().get調定年度().value().equals(model.get().get賦課年度().value());
+//    private boolean are調定年度and賦課年度SameAge(Optional<Object> model) {
+//        // TODO modelのCheckstyle対応。
+//        model.hashCode();
+//        return true;
 //    }
+    private boolean are調定年度and賦課年度SameAge(Optional<KibetsuChoshuYuyo> model) {
+        return model.get().get調定年度().equals(model.get().get賦課年度());
+    }
 
     private void setTableData(TableItem itemNo, List<RString> dataList, RString suffix) {
         for (int index = 0; index < dataList.size(); index++) {
@@ -121,18 +122,18 @@ public class KibetsuChoshuYuyo {
         List<FlexibleDate> 開始日 = new ArrayList<>();
         List<FlexibleDate> 終了日 = new ArrayList<>();
 
-//        for (KibetsuChoshuYuyoModel model : list) {
-//
-//            RString 期 = new RString(String.format("%1$02d", model.get期()));
-//            Integer 期Index = 期IndexMap.get(期);
-//
-//            if (期Index != null && 0 <= 期Index && 期Index < TABLE_SIZE) {
-//                開始日[期Index] = model.get徴収猶予開始年月日();
-//                終了日[期Index] = model.get徴収猶予終了年月日();
-//            }
-//        }
+        for (KibetsuChoshuYuyo model : list) {
+
+            RString 期 = new RString(String.format("%1$02d", model.get期()));
+            Integer 期Index = 期IndexMap.get(期);
+
+            if (期Index != null && 0 <= 期Index && 期Index < 期別テーブル.size()) {
+                開始日.set(期Index, model.get徴収猶予開始日());
+                終了日.set(期Index, model.get徴収猶予終了日());
+            }
+        }
         // TODO 未使用のメソッド引数があります。期IndexMapのCheckstyle対応。
-        期IndexMap.isEmpty();
+//        期IndexMap.isEmpty();
         setTableData(TableItem.開始日, 開始日);
         setTableData(TableItem.終了日, 終了日);
     }
