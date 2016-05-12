@@ -109,9 +109,17 @@ public class DBD1030001Handler {
      * @return 初期化完フラグ
      */
     public boolean onLoad() {
-        ShikibetsuCode 識別コード = get識別コードFromViewState();
-        HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
-        if (被保険者番号.isEmpty()) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode 識別コード = null;
+        HihokenshaNo 被保険者番号 = null;
+        if (taishoshaKey != null) {
+            識別コード = taishoshaKey.get識別コード();
+            被保険者番号 = taishoshaKey.get被保険者番号();
+        }
+        if (null == 識別コード) {
+            識別コード = ShikibetsuCode.EMPTY;
+        }
+        if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
             div.getShafukuRiyoshaKeigen().getBtnShowGenmenJoho().setDisabled(true);
             div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisabled(true);
             div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(true);
@@ -136,16 +144,22 @@ public class DBD1030001Handler {
             div.getBtnShinseiKakutei().setDisplayNone(true);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(保存する, "承認情報を");
         }
-        div.getTxtKeigenRitsuBunshi().setDecimalPointLength(1);
-        div.getCcdShinseiJoho().initialize(識別コード);
-        世帯所得一覧の初期化();
-        div.getDdlKeigenJiyu().setDataSource(getAll軽減事由());
         入力パネルをClose状態表示か(true);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(true);
+        ViewStateHolder.put(DBD1030001ViewStateKey.is申請情報のDDL初期化, Boolean.FALSE);
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保険者番号.getColumnValue()));
         AccessLogger.log(AccessLogType.照会, personalData);
         RealInitialLocker.lock(new LockingKey(new RString("DB").concat(被保険者番号.getColumnValue().concat("ShafukuKeigen"))));
         return true;
+    }
+
+    private void 申請情報のDDL初期化() {
+        Boolean is申請情報のDDL初期化 = ViewStateHolder.get(DBD1030001ViewStateKey.is申請情報のDDL初期化, Boolean.class);
+        if (!Boolean.TRUE.equals(is申請情報のDDL初期化)) {
+            div.getCcdShinseiJoho().initialize(get識別コードFromViewState());
+            div.getDdlKeigenJiyu().setDataSource(getAll軽減事由());
+            ViewStateHolder.put(DBD1030001ViewStateKey.is申請情報のDDL初期化, Boolean.TRUE);
+        }
     }
 
     private void 入力パネルをClose状態表示か(boolean isClose状態) {
@@ -163,7 +177,11 @@ public class DBD1030001Handler {
         div.getDgShinseiList().setDisabled(isClose状態);
     }
 
-    private void 世帯所得一覧の初期化() {
+    /**
+     * 世帯所得一覧の初期化処理です。
+     *
+     */
+    public void 世帯所得一覧の初期化() {
         YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
         div.getCcdSetaiShotokuIchiran().initialize(
                 get識別コードFromViewState(),
@@ -189,10 +207,8 @@ public class DBD1030001Handler {
         ArrayList<ShakaifukuRiyoshaFutanKeigen> 最初申請一覧情報 = new ArrayList<>(申請一覧情報);
         ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報, 最初申請一覧情報);
         List<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態List = 情報と状態初期化(申請一覧情報);
-        if (情報と状態List != null) {
-            List<dgShinseiList_Row> dataSourceList = getDataSource(情報と状態List);
-            div.getDgShinseiList().setDataSource(dataSourceList);
-        }
+        List<dgShinseiList_Row> dataSourceList = getDataSource(情報と状態List);
+        div.getDgShinseiList().setDataSource(dataSourceList);
         ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList = new ArrayList<>(情報と状態List);
         ViewStateHolder.put(DBD1030001ViewStateKey.申請一覧情報と状態, 情報と状態ArrayList);
     }
@@ -330,12 +346,12 @@ public class DBD1030001Handler {
         ViewStateHolder.put(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, null);
         一覧パネルをClose状態表示か(true);
         入力パネルをClose状態表示か(false);
+        申請情報のDDL初期化();
         if (申請情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態２画面表示();
         } else if (承認情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態５画面表示();
         }
-        div.getCcdShinseiJoho().initialize(get識別コードFromViewState());
     }
 
     private void 状態５画面表示() {
@@ -432,6 +448,7 @@ public class DBD1030001Handler {
         ViewStateHolder.put(DBD1030001ViewStateKey.編集社会福祉法人等利用者負担軽減申請の情報, 情報と状態);
         一覧パネルをClose状態表示か(true);
         入力パネルをClose状態表示か(false);
+        申請情報のDDL初期化();
         if (申請情報を追加する.equals(div.getBtnAddShinsei().getText())) {
             状態３画面表示(dataSouce, 情報と状態);
         } else if (承認情報を追加する.equals(div.getBtnAddShinsei().getText())) {
@@ -1445,7 +1462,11 @@ public class DBD1030001Handler {
         /**
          * 追加履歴番号です。
          */
-        追加履歴番号;
+        追加履歴番号,
+        /**
+         * 追加履歴番号です。
+         */
+        is申請情報のDDL初期化;
     }
 
 }

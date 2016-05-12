@@ -75,6 +75,7 @@ public class DBD1030001 {
         div.getShafukuRiyoshaKeigen().getBtnShowSetaiJoho().setDisplayNone(true);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisplayNone(false);
         div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setDisabled(false);
+        getHandler(div).世帯所得一覧の初期化();
         if (一覧.getName().equals(ResponseHolder.getState())) {
             div.getShafukuRiyoshaKeigen().getBtnCloseSetaiJoho().setText(文字列_申請一覧を表示する);
             return ResponseData.of(div).setState(世帯情報from一覧);
