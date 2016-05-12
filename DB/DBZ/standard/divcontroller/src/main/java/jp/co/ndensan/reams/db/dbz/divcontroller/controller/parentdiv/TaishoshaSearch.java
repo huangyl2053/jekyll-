@@ -126,7 +126,11 @@ public class TaishoshaSearch {
     }
 
     /**
-     * 「検索する」ボタンクリック時に呼び出される処理です。
+     * 「検索する」ボタンクリック時に呼び出される処理です。<br/>
+     * 対象者が1件の場合は次画面に遷移します。次画面へ渡されるViewStateは以下の通り<br/>
+     * ViewStateEnum：ViewStateKeys.資格対象者<br/>
+     * 渡すクラス：jp.co.ndensan.reams.db.dbz.service.TaishoshaKey<br/>
+     * クラス構成：被保険者番号、識別コード、世帯コード
      *
      * @param div TaishoshaSearchDiv
      * @return ResponseData<TaishoshaSearchDiv>
@@ -230,7 +234,11 @@ public class TaishoshaSearch {
 
     /**
      * 「該当者一覧」選択時に呼び出される処理です。<br/>
-     * （行クリックイベント、行ダブルクリックイベント）
+     * （行クリックイベント、行ダブルクリックイベント）<br/>
+     * 選択したデータのキー項目を次画面へ渡します。次画面へ渡されるViewStateは以下の通り<br/>
+     * ViewStateEnum：ViewStateKeys.資格対象者<br/>
+     * 渡すクラス：jp.co.ndensan.reams.db.dbz.service.TaishoshaKey<br/>
+     * クラス構成：被保険者番号、識別コード、世帯コード
      *
      * @param div TaishoshaSearchDiv
      * @return ResponseData<TaishoshaSearchDiv>
