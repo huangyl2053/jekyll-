@@ -40,7 +40,7 @@ public class FukaKeisanConfigTest {
 
         @Test
         public void ランク管理情報_納期統一年度を指定したとき_2000が返る() {
-            RString result = sut.get(ConfigKeysFukaKeisan.ランク管理情報_納期統一年度);
+            RString result = sut.get(ConfigKeysFukaKeisan.ランク管理情報_不均一納期期限);
             assertThat(result, is(納期統一年度));
         }
     }
@@ -53,7 +53,7 @@ public class FukaKeisanConfigTest {
 
     private static BusinessConfig createBusinessConfigMock() {
         BusinessConfig mock = mock(BusinessConfig.class);
-        when(mock.get(eq(ConfigKeysFukaKeisan.ランク管理情報_納期統一年度), any(RDate.class))).thenReturn(納期統一年度);
+        when(mock.get(eq(ConfigKeysFukaKeisan.ランク管理情報_不均一納期期限), any(RDate.class))).thenReturn(納期統一年度);
         return mock;
     }
 }

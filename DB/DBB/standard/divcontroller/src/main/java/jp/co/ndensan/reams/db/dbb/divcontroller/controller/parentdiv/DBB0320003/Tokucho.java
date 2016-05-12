@@ -203,7 +203,9 @@ public class Tokucho {
         NenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
         NenkinTokuchoKaifuJoho kaifuJoho = manager.get年金特徴対象者情報(
                 GyomuCode.DB介護保険, 賦課年度.value(), 基礎年金番号, 年金コード, 捕捉月);
-
+        if (kaifuJoho == null) {
+            return;
+        }
         div.getTxtHosokuYM().setValue(new FlexibleDate(kaifuJoho.get処理年度().toDateString().concat(捕捉月)));
         RString tokubetsuChoshuCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.特別徴収義務者コード, kaifuJoho.getDT特別徴収義務者コード().value());
         div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().value().value().concat(tokubetsuChoshuCodeMeisho));

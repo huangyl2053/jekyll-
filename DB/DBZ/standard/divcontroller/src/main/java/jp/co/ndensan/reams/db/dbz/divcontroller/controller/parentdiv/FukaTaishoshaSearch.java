@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleYearOperator;
@@ -71,6 +72,7 @@ public class FukaTaishoshaSearch {
     private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
+    private static final RString メニューID = ResponseHolder.getMenuID();
 
     /**
      * 「初期化」時の処理です。
@@ -80,14 +82,19 @@ public class FukaTaishoshaSearch {
      */
     public ResponseData<FukaTaishoshaSearchDiv> onLoad(FukaTaishoshaSearchDiv div) {
 
+        //AtenaFinderを初期化
+        div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().initialize();
+
         // TODO 保険者ドロップダウンの表示制御
         // div.getSearchCondition().getCcdSearchCondition().set保険者ドロップダウン();
         // 賦課年度ドロップダウンの値を設定
-//        div.getSearchCondition().getCcdSearchCondition().set賦課年度ドロップダウン();
+        div.getSearchCondition().getCcdSearchCondition().set賦課年度ドロップダウン();
         // 最大表示件数の取得
 //        div.getSearchCondition().getCcdSearchCondition().set最大表示件数();
         // 最近処理者履歴 のロード
         div.getSearchCondition().getCcdSearchCondition().load最近処理者();
+        // 最大取得件数の取得
+        div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder().getTxtMaxNumber().setValue(new Decimal(最大取得件数));
 
         div.getSearchCondition().setIsOpen(true);
         div.getGaitoshaList().setIsOpen(false);
@@ -120,8 +127,10 @@ public class FukaTaishoshaSearch {
     public ResponseData<FukaTaishoshaSearchDiv> onClick_btnClear(FukaTaishoshaSearchDiv div) {
 
         // 介護検索条件と宛名検索条件のクリア
-        // TODO 宛名検索条件のクリア
 //        div.getSearchCondition().getCcdSearchCondition().onClick_BtnClear_Fuka();
+        div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().clear();
+        div.getSearchCondition().getCcdSearchCondition().getKaigoFinder().clear();
+        div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder().getTxtMaxNumber().setValue(new Decimal(最大取得件数));
         return ResponseDatas.newResponseData(div);
     }
 
@@ -314,8 +323,8 @@ public class FukaTaishoshaSearch {
 
     private SearchResult<FukaTaishoshaRelateEntity> get対象者(HihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
-        // TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
-        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
+        FukaSearchMenu menu = FukaSearchMenu.toValue(メニューID);
+//        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
         // FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
         return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数);
     }

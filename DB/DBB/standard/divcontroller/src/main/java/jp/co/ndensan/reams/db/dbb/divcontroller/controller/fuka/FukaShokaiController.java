@@ -212,7 +212,7 @@ public final class FukaShokaiController {
     public static Optional<HokenryoDankai> findZennendoHokenryoDankai(Fuka fuka) {
         FlexibleYear 前年度 = fuka.get賦課年度().minusYear(1);
 
-        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(前年度, fuka.get賦課年度(), fuka.get通知書番号(), fuka.get履歴番号()));
+        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課(前年度, fuka.get賦課年度(), fuka.get通知書番号(), fuka.get履歴番号()));
         if (!modeloid.isPresent()) {
             return Optional.empty();
         }
@@ -243,8 +243,20 @@ public final class FukaShokaiController {
         if (!modeloid.isPresent()) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
-        RDateTime 対象終了日時 = modeloid.get().get対象終了日時().getRDateTime();
-        RDateTime 調定日時 = fuka.get調定日時().getRDateTime();
+
+        RDateTime 対象終了日時;
+        if (modeloid.get().get対象終了日時() == null) {
+            対象終了日時 = RDateTime.MAX;
+        } else {
+            対象終了日時 = modeloid.get().get対象終了日時().getRDateTime();
+        }
+
+        RDateTime 調定日時;
+        if (fuka.get調定日時() == null) {
+            調定日時 = RDateTime.MAX;
+        } else {
+            調定日時 = fuka.get調定日時().getRDateTime();
+        }
 
         if (調定日時.isAfter(対象終了日時)) {
             return SanteiState.本算定;
