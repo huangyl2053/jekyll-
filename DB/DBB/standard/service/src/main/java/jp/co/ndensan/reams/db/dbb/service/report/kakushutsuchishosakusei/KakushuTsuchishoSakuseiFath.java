@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyot
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.FukaDaityouInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoCommonInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
@@ -61,7 +60,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -125,7 +123,7 @@ public class KakushuTsuchishoSakuseiFath {
     private static final int 定値_12期 = 12;
     private static final int 定値_13期 = 13;
     private static final int 定値_14期 = 14;
-    private Models<KibetsuIdentifier, Kibetsu> kibetsu;
+    private List<Kibetsu> kibetsuList;
     private List<TotalShunyuRelateEntity> 収入情報取得PSM;
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳管理Dac;
@@ -446,11 +444,10 @@ public class KakushuTsuchishoSakuseiFath {
      */
     public void fukaJoho(FukaJohoRelateEntity entity, List<TotalShunyuRelateEntity> 収入情報List) {
         requireNonNull(entity.get介護賦課Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("賦課の情報"));
-        List<Kibetsu> kibetsuList = new ArrayList<>();
+        kibetsuList = new ArrayList<>();
         for (KibetsuEntity kibetsuEntity : entity.get介護期別RelateEntity()) {
             kibetsuList.add(new Kibetsu(kibetsuEntity));
         }
-        kibetsu = Models.create(kibetsuList);
         収入情報取得PSM = 収入情報List;
     }
 
@@ -463,11 +460,9 @@ public class KakushuTsuchishoSakuseiFath {
      */
     private Decimal get収入額(int 期, RString 徴収方法期別) {
 
-        if (kibetsu.iterator().hasNext()) {
-            Kibetsu thisKibetsu = kibetsu.iterator().next();
+        for (Kibetsu thisKibetsu : kibetsuList) {
             if (徴収方法期別.equals(thisKibetsu.get徴収方法())
                     && 期 == thisKibetsu.get期()) {
-
                 ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(thisKibetsu.get調定ID().longValue());
                 return get収入額(thisKibetsu.getChoteiKyotsu(identifier));
             }
