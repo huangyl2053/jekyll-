@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.kekkatsuchiichiranhyo;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 

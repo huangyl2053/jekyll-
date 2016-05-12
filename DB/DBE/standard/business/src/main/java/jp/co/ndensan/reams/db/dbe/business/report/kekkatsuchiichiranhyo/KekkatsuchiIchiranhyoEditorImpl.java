@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.kekkatsuchiichiranhyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
