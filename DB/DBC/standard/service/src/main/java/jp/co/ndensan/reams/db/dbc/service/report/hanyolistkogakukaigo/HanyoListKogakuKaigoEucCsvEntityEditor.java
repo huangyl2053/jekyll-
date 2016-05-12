@@ -139,7 +139,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set被保険者番号(被保険者番号 != null ? 被保険者番号.getColumnValue() : RString.EMPTY);
         RString 資格取得事由コード = entity.get資格取得事由コード();
         if (資格取得事由コード != null && !資格取得事由コード.isEmpty()) {
-            RString 略称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
+            RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
                     new CodeShubetsu(取得コード種別), new Code(資格取得事由コード), FlexibleDate.getNowDate());
             csvEntity.set資格取得事由(略称 != null ? 略称 : RString.EMPTY);
         }
@@ -149,7 +149,7 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set資格取得届出日(get日付項目(資格取得届出日, parameter));
         RString 喪失事由コード = entity.get資格取得事由コード();
         if (喪失事由コード != null && !喪失事由コード.isEmpty()) {
-            RString 略称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
+            RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
                     new CodeShubetsu(喪失事由コード種別), new Code(喪失事由コード), FlexibleDate.getNowDate());
             csvEntity.set喪失事由(略称 != null ? 略称 : RString.EMPTY);
         }

@@ -411,7 +411,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbV1001被保険者番号().value());
         RString 資格取得事由 = RString.EMPTY;
         if (entity.getDbV1001資格取得事由コード() != null && !entity.getDbV1001資格取得事由コード().isEmpty()) {
-            資格取得事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格取得事由),
+            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格取得事由),
                     new Code(entity.getDbV1001資格取得事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set資格取得事由(isNull(資格取得事由)
@@ -420,7 +420,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set資格取得届出日(dataToRString(entity.getDbV1001資格取得届出年月日(), parameter));
         RString 喪失事由 = RString.EMPTY;
         if (entity.getDbV1001資格喪失事由コード() != null && !entity.getDbV1001資格喪失事由コード().isEmpty()) {
-            喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格喪失事由),
+            喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格喪失事由),
                     new Code(entity.getDbV1001資格喪失事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set喪失事由(isNull(喪失事由)
