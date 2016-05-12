@@ -681,40 +681,131 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             set普徴_更正前期割額(更正前情報, 期_1月, 期_2月, 期_3月, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
                     期_9月, 期_10月, 期_11月, 期_12月, 期_13月, 期_14月);
         }
-        set納期限(更正後情報);
+        set納期限(更正後情報, 期_1月, 期_2月, 期_3月, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
+                期_9月, 期_10月, 期_11月, 期_12月, 期_13月, 期_14月);
     }
 
-    private void set納期限(FukaJoho 更正後情報) {
-        // TODO
-        更正後情報.get普徴期別金額01();
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen1().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen2().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen3().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen4().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen5().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen6().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen7().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen8().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen9().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen10().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen11().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen12().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen13().setText(RString.EMPTY);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
-                .getLblZengoNokigen14().setText(RString.EMPTY);
+    private void set納期限(FukaJoho 更正後情報,
+            RString 期_1月,
+            RString 期_2月,
+            RString 期_3月,
+            RString 期_4月,
+            RString 期_5月,
+            RString 期_6月,
+            RString 期_7月,
+            RString 期_8月,
+            RString 期_9月,
+            RString 期_10月,
+            RString 期_11月,
+            RString 期_12月,
+            RString 期_13月,
+            RString 期_14月) {
+
+        RDate 普徴期別納期限 = get納期限(期_4月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen1().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_5月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen2().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_6月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen3().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_7月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen4().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_8月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen5().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_9月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen6().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_10月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen7().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_11月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen8().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_12月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen9().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_1月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen10().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_2月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen11().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_3月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen12().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_13月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen13().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+        普徴期別納期限 = get納期限(期_14月, 更正後情報);
+        if (普徴期別納期限 != null) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
+                    .getLblZengoNokigen14().setText(DateEditor.to和暦(普徴期別納期限));
+        }
+    }
+
+    private RDate get納期限(RString 期, FukaJoho 賦課の情報) {
+        switch (Integer.parseInt(期.toString())) {
+            case NUM_1:
+                return 賦課の情報.get普徴期別納期限01();
+            case NUM_2:
+                return 賦課の情報.get普徴期別納期限02();
+            case NUM_3:
+                return 賦課の情報.get普徴期別納期限03();
+            case NUM_4:
+                return 賦課の情報.get普徴期別納期限04();
+            case NUM_5:
+                return 賦課の情報.get普徴期別納期限05();
+            case NUM_6:
+                return 賦課の情報.get普徴期別納期限06();
+            case NUM_7:
+                return 賦課の情報.get普徴期別納期限07();
+            case NUM_8:
+                return 賦課の情報.get普徴期別納期限08();
+            case NUM_9:
+                return 賦課の情報.get普徴期別納期限09();
+            case NUM_10:
+                return 賦課の情報.get普徴期別納期限10();
+            case NUM_11:
+                return 賦課の情報.get普徴期別納期限11();
+            case NUM_12:
+                return 賦課の情報.get普徴期別納期限12();
+            case NUM_13:
+                return 賦課の情報.get普徴期別納期限13();
+            case NUM_14:
+                return 賦課の情報.get普徴期別納期限14();
+            default:
+                return null;
+        }
     }
 
     private void set普徴_更正前期割額(FukaJoho 更正前情報,
