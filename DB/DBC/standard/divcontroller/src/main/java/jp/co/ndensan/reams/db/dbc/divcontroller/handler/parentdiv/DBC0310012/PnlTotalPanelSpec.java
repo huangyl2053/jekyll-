@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlT
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -212,7 +213,8 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                 ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
                 HihokenshaNo 被保険者番号;
                 if (登録.equals(状態)) {
-                    被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                    TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                    被保険者番号 = key.get被保険者番号();
                 } else {
                     ShokanJuryoininKeiyakusha shokan = ViewStateHolder.
                             get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
@@ -241,9 +243,9 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                 return true;
             }
             if (登録.equals(状態)) {
-                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+                TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
                 parameter = new ChkTorokuzumiParameter(
-                        被保険者番号,
+                        key.get被保険者番号(),
                         null,
                         null,
                         null,

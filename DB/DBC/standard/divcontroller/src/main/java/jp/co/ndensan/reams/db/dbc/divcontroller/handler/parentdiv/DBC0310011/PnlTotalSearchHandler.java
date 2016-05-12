@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJ
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -89,11 +90,14 @@ public class PnlTotalSearchHandler {
                     .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
             set基本情報パラメータ(parameter);
             if (対象者検索.equals(表示モード)) {
-                // TODO QA No.511(Redmine#80700)
-                RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
-                RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
-                div.getPnlSearch().getTxtHihokenshaNo().setValue(被保険者番号);
-                div.getPnlSearch().getTxtJigyoshakeiyakuName().setValue(被保険者名);
+                TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                HihokenshaNo 被保険者番号 = key.get被保険者番号();
+                ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
+                IName 被保険者名 = finder.get氏名(被保険者番号);
+                div.getPnlSearch().getTxtHihokenshaNo().setValue(被保険者番号.getColumnValue());
+                if (被保険者名 != null) {
+                    div.getPnlSearch().getTxtName().setValue(被保険者名.getName().getColumnValue());
+                }
             } else if (事業者検索.equals(表示モード)) {
                 JuryoininKeiyakuJigyosha data = ViewStateHolder
                         .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
