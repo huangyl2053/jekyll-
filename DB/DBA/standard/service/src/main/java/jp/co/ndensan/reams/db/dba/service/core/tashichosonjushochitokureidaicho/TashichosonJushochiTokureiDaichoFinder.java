@@ -104,6 +104,9 @@ public class TashichosonJushochiTokureiDaichoFinder {
             return getOtherAddressLedgerBusinessList(otherAddressLedgerLst);
         }
         List<OtherAddressInfEntity> 他市町村住所地特例者情報 = get他市町村住所地特例者情報(識別コード);
+        if (他市町村住所地特例者情報.isEmpty()) {
+            return getOtherAddressLedgerBusinessList(otherAddressLedgerLst);
+        }
         LasdecCode 市町村コード = 他市町村住所地特例者情報.get(0).get市町村コード();
         RString 市町村名称 = get市町村名称(市町村コード);
         int pageNo = 1;
