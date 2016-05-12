@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -12,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBU-1100-010 huangyanan
  */
-public class ShichosonCodeResult {
+public class ShichosonCodeResult implements Serializable {
 
+    private static final long serialVersionUID = 2271333137489421256L;
     private final RString 市町村コード;
     private final RString 市町村名称;
     private final RString 保険者コード;
