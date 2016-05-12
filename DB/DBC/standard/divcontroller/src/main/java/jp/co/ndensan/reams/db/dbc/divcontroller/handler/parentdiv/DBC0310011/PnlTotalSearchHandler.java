@@ -95,9 +95,8 @@ public class PnlTotalSearchHandler {
                 ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
                 IName 被保険者名 = finder.get氏名(被保険者番号);
                 div.getPnlSearch().getTxtHihokenshaNo().setValue(被保険者番号.getColumnValue());
-                if (被保険者名 != null) {
-                    div.getPnlSearch().getTxtName().setValue(被保険者名.getName().getColumnValue());
-                }
+                div.getPnlSearch().getTxtName().setValue(被保険者名 == null ? RString.EMPTY
+                        : 被保険者名.getName().getColumnValue());
             } else if (事業者検索.equals(表示モード)) {
                 JuryoininKeiyakuJigyosha data = ViewStateHolder
                         .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
