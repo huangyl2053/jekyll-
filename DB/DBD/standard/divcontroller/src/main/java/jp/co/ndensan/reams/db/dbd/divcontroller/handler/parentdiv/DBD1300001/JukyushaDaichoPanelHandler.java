@@ -90,7 +90,6 @@ public class JukyushaDaichoPanelHandler {
             selectKeys.add(削除データ抽出);
             div.getChkTorikeshiSakujo().setDisabledItemsByKey(selectKeys);
         }
-
     }
 
     /**
@@ -135,24 +134,16 @@ public class JukyushaDaichoPanelHandler {
         parameter.setCyusyutsudatakubun(div.getDdlChushutsuData().getSelectedKey());
         boolean 申請取消データ抽出Flag = false;
         boolean 削除データ抽出Flag = false;
-        if (div.getChkTorikeshiSakujo().getSelectedItems().size() > 0) {
-
-            for (RString keys : div.getChkTorikeshiSakujo().getSelectedKeys()) {
-
-                if (keys.equals(申請取消データ抽出)) {
-                    申請取消データ抽出Flag = true;
-                    parameter.setShinseikeshidetacyusyutsu(申請取消データ抽出Flag);
-                } else {
-                    parameter.setShinseikeshidetacyusyutsu(申請取消データ抽出Flag);
-                }
-                if (keys.equals(削除データ抽出)) {
-                    削除データ抽出Flag = true;
-                    parameter.setSakujyodatacyusyutsu(削除データ抽出Flag);
-                } else {
-                    parameter.setSakujyodatacyusyutsu(削除データ抽出Flag);
-                }
+        for (RString keys : div.getChkTorikeshiSakujo().getSelectedKeys()) {
+            if (keys.equals(申請取消データ抽出)) {
+                申請取消データ抽出Flag = true;
+            }
+            if (keys.equals(削除データ抽出)) {
+                削除データ抽出Flag = true;
             }
         }
+        parameter.setShinseikeshidetacyusyutsu(申請取消データ抽出Flag);
+        parameter.setSakujyodatacyusyutsu(削除データ抽出Flag);
         parameter.setSoshitsukubun(div.getDdlSoushitsuKubun().getSelectedKey());
         parameter.setCyusyutsutaisyo(div.getRadChushutsuTaisho().getSelectedKey());
         parameter.setCyusyutsunichisyurai(div.getDdlChushutsuYmd().getSelectedKey());
@@ -194,30 +185,20 @@ public class JukyushaDaichoPanelHandler {
         boolean 項目付加 = false;
         boolean 連番の付加 = false;
         boolean 日付スラッシュ編集 = false;
-        if (div.getChkCsvHenshuHoho().getSelectedItems().size() > 0) {
-
-            for (RString keys : div.getChkCsvHenshuHoho().getSelectedKeys()) {
-
-                if (keys.equals(項目名付加)) {
-                    項目付加 = true;
-                    parameter.setCsvkomokumeifuka(項目付加);
-                } else {
-                    parameter.setCsvkomokumeifuka(項目付加);
-                }
-                if (keys.equals(連番付加)) {
-                    連番の付加 = true;
-                    parameter.setCsvrenbanfuka(連番の付加);
-                } else {
-                    parameter.setCsvrenbanfuka(連番の付加);
-                }
-                if (keys.equals(日付_編集)) {
-                    日付スラッシュ編集 = true;
-                    parameter.setCsvhitsukesurasyuhensyu(日付スラッシュ編集);
-                } else {
-                    parameter.setCsvhitsukesurasyuhensyu(日付スラッシュ編集);
-                }
+        for (RString keys : div.getChkCsvHenshuHoho().getSelectedKeys()) {
+            if (keys.equals(項目名付加)) {
+                項目付加 = true;
+            }
+            if (keys.equals(連番付加)) {
+                連番の付加 = true;
+            }
+            if (keys.equals(日付_編集)) {
+                日付スラッシュ編集 = true;
             }
         }
+        parameter.setCsvkomokumeifuka(項目付加);
+        parameter.setCsvrenbanfuka(連番の付加);
+        parameter.setCsvhitsukesurasyuhensyu(日付スラッシュ編集);
         return parameter;
     }
 }

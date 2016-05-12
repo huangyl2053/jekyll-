@@ -87,12 +87,18 @@ public class JukyushaDaichoPanel {
         boolean 申請取消データの抽出 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("isShinseikeshidetacyusyutsu"));
         if (申請取消データの抽出) {
             selectKeys.add(申請取消データ抽出);
-            div.getChkTorikeshiSakujo().setDisabledItemsByKey(selectKeys);
+            div.getChkTorikeshiSakujo().setSelectedItemsByKey(selectKeys);
+            List<RString> selectKey = new ArrayList<>();
+            selectKey.add(削除データ抽出);
+            div.getChkTorikeshiSakujo().setDisabledItemsByKey(selectKey);
         }
         boolean 削除データの抽出 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("isSakujyodatacyusyutsu"));
         if (削除データの抽出) {
             selectKeys.add(削除データ抽出);
-            div.getChkTorikeshiSakujo().setDisabledItemsByKey(selectKeys);
+            div.getChkTorikeshiSakujo().setSelectedItemsByKey(selectKeys);
+            List<RString> key = new ArrayList<>();
+            key.add(申請取消データ抽出);
+            div.getChkTorikeshiSakujo().setDisabledItemsByKey(key);
         }
         RString 喪失区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("soshitsukubun"));
         RString 抽出対象 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("cyusyutsutaisyo"));
