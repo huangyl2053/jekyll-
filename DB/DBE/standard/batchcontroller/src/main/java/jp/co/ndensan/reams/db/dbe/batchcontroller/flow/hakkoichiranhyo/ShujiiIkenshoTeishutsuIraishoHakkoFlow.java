@@ -32,7 +32,6 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoFlow extends BatchFlowBase<Iraish
     protected void defineFlow() {
         if (getParameter().isIkenshoSakuseiirai()) {
             executeStep(IKENSHOSAKUSEIIRAIICHIRANHYO);
-            //主治医意見書作成依頼一覧表
         }
         //TODO 帳票を未実装するので、Process実装不可
 //        if (getParameter().isIkenshoSakuseiSeikyuu()) {
@@ -51,10 +50,8 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoFlow extends BatchFlowBase<Iraish
 //        }
         if (getParameter().isIkenshoSakuseiSeikyuusho()) {
             executeStep(IKENSHOSAKUSEIRYOSEIKYUSHO);
-            //Temp_主治医意見書作成料依頼請求書
         }
         if (getParameter().isIkenshoTeishutu()) {
-            //介護保険指定医依頼兼主治医意見書提出意見依頼書
             executeStep(SHUJIIIKENSHOTEISHUTSUIRAISHO);
         }
     }
