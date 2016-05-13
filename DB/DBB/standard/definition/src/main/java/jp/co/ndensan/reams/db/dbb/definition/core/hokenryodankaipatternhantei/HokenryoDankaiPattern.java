@@ -107,6 +107,6 @@ public enum HokenryoDankaiPattern {
                 return hokenryodankaipattern;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(普徴処理対象));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(普徴処理対象.toString()));
     }
 }
