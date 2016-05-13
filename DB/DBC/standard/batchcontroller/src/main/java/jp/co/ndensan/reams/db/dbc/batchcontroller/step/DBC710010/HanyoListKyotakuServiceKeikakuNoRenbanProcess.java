@@ -144,10 +144,10 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
             eucCsvWriter.writeLine(new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity());
         }
         eucCsvWriter.close();
-        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         if (personalDataList == null || personalDataList.isEmpty()) {
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         } else {
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         }
         バッチ出力条件リストの出力();
