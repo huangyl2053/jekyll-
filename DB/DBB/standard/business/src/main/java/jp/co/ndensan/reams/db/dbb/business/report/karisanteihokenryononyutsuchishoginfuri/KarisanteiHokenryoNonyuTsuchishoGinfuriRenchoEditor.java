@@ -215,22 +215,14 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     }
 
     private void editDBBCompNofushoItem(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        //source.nofushoKanendo3 = RString.EMPTY;
         source.nofushoNendo4
                 = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(INT4) ? 納付書共通.get調定年度表記() : 星6);
-        //source.nofushoKanendo2 = RString.EMPTY;
-        //source.nofushoKanendo1 = RString.EMPTY;
-        //source.nofushoKanendo4 = RString.EMPTY;
         source.nofushoNendo3
                 = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(INT3) ? 納付書共通.get調定年度表記() : 星6);
         source.nofushoNendo2
                 = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(2) ? 納付書共通.get調定年度表記() : 星6);
         source.nofushoNendo1
                 = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(1) ? 納付書共通.get調定年度表記() : 星6);
-        //source.nofushoKanendobun2 = RString.EMPTY;
-        //source.nofushoKanendobun3 = RString.EMPTY;
-        //source.nofushoKanendobun4 = RString.EMPTY;
-        //source.nofushoKanendobun1 = RString.EMPTY;
         edit納入通知書期情報1(source);
         source.nofushoSofusakiName1 = 納付書共通.get納付者氏名();
         source.nofushoSofusakiName2 = 納付書共通.get納付者氏名();
