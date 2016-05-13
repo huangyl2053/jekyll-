@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * 汎用リスト 受給者台帳２
+ * 汎用リスト 受給者台帳２。
  *
  * @reamsid_L DBD-1810-010 wanghui
  */

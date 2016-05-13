@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * 汎用リスト受給者台帳２
+ * 汎用リスト受給者台帳２。
  *
  * @reamsid_L DBD-1810-010 wanghui
  */
