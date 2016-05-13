@@ -90,6 +90,9 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
     private static final RString RST_第４ = new RString("第４");
     private static final RString RST_第５ = new RString("第５");
     private static final RString RST_1 = new RString("1");
+    private static final RString RST_0 = new RString("0");
+    private static final RString 償還方法_自 = new RString("自");
+    private static final RString 償還方法_申 = new RString("申");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -148,7 +151,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
         csvEntity.set資格取得日(get日付項目(資格取得日, parameter));
         FlexibleDate 資格取得届出日 = entity.get資格取得届出年月日();
         csvEntity.set資格取得届出日(get日付項目(資格取得届出日, parameter));
-        RString 喪失事由コード = entity.get資格取得事由コード();
+        RString 喪失事由コード = entity.get資格喪失事由コード();
         if (喪失事由コード != null && !喪失事由コード.isEmpty()) {
             RString 略称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格,
                     new CodeShubetsu(喪失事由コード種別), new Code(喪失事由コード), FlexibleDate.getNowDate());
@@ -534,8 +537,11 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             csvEntity.set備考算定基準(entity.get高額給付根拠());
             RString 国保連委託なし = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             csvEntity.set国保連委託なし(国保連委託なし);
-            //TODO 仕様変更
-            csvEntity.set高額自動償還(entity.get自動償還対象フラグ());
+            if (RST_1.equals(entity.get自動償還対象フラグ())) {
+                csvEntity.set高額自動償還(償還方法_自);
+            } else if (RST_0.equals(entity.get自動償還対象フラグ())) {
+                csvEntity.set高額自動償還(償還方法_申);
+            }
             csvEntity.set利用者負担段階(get高額給付根拠(entity.get高額給付根拠()));
         }
     }
@@ -560,9 +566,9 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             return RString.EMPTY;
         }
         if (!parameter.isHizukeHeshu()) {
-            return 年月.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        } else {
             return 年月.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
+        } else {
+            return 年月.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
     }
 

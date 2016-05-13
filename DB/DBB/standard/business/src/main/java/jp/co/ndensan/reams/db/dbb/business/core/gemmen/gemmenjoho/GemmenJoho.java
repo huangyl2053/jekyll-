@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -781,6 +782,62 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     }
 
     /**
+     * 減免種類コードを返します。
+     *
+     * @return 減免種類コード
+     */
+    public Code get減免種類コード() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get減免種類コード() : null;
+    }
+
+    /**
+     * 減免状態区分を返します。
+     *
+     * @return 減免状態区分
+     */
+    public RString get減免状態区分() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get減免状態区分() : RString.EMPTY;
+    }
+
+    /**
+     * 減免決定日を返します。
+     *
+     * @return 減免決定日
+     */
+    public FlexibleDate get減免決定日() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get減免決定日() : FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 減免事由を返します。
+     *
+     * @return 減免事由
+     */
+    public RString get減免事由() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get減免事由() : RString.EMPTY;
+    }
+
+    /**
+     * 介護賦課減免を返します。
+     *
+     * @return 介護賦課減免
+     */
+    private Gemmen get介護賦課減免() {
+        if (gemmen == null || gemmen.values() == null || gemmen.values().isEmpty()) {
+            return null;
+        }
+        return gemmen.values().iterator().next();
+    }
+
+    /**
      * 期別金額を返します。
      *
      * @param 期 int
@@ -789,13 +846,16 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
      */
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
-        if (kibetsu.iterator().hasNext()) {
-            Kibetsu thisKibetsu = kibetsu.iterator().next();
-            if (徴収方法期別.equals(thisKibetsu.get徴収方法())
-                    && 期 == thisKibetsu.get期()) {
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return Decimal.ZERO;
+        }
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            if (徴収方法期別.equals(介護期別.get徴収方法())
+                    && 期 == 介護期別.get期()) {
 
-                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(thisKibetsu.get調定ID().longValue());
-                return thisKibetsu.getChoteiKyotsu(identifier).get調定額();
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+                return 介護期別.getChoteiKyotsu(identifier).get調定額();
             }
         }
         return Decimal.ZERO;

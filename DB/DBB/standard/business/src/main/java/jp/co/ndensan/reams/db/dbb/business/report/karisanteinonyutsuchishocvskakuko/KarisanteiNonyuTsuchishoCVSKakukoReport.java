@@ -42,7 +42,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoReport extends Report<KarisanteiNo
      *
      * @param item 保険料納入通知書（仮算定）【コンビニ角公タイプ】のITEM
      */
-    protected KarisanteiNonyuTsuchishoCVSKakukoReport(
+    public KarisanteiNonyuTsuchishoCVSKakukoReport(
             KariSanteiNonyuTsuchiShoJoho item) {
 
         this.item = item;
