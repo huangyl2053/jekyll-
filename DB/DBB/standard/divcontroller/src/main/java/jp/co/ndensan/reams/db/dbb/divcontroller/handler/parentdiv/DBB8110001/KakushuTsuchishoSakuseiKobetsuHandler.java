@@ -441,37 +441,41 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private RString get期(RString 期) {
-        switch (Integer.parseInt(期.toString())) {
-            case NUM_1:
-                return 期1;
-            case NUM_2:
-                return 期2;
-            case NUM_3:
-                return 期3;
-            case NUM_4:
-                return 期4;
-            case NUM_5:
-                return 期5;
-            case NUM_6:
-                return 期6;
-            case NUM_7:
-                return 期7;
-            case NUM_8:
-                return 期8;
-            case NUM_9:
-                return 期9;
-            case NUM_10:
-                return 期10;
-            case NUM_11:
-                return 期11;
-            case NUM_12:
-                return 期12;
-            case NUM_13:
-                return 期13;
-            case NUM_14:
-                return 期14;
-            default:
-                return null;
+        if (期 != null && !期.isEmpty()) {
+            switch (Integer.parseInt(期.toString())) {
+                case NUM_1:
+                    return 期1;
+                case NUM_2:
+                    return 期2;
+                case NUM_3:
+                    return 期3;
+                case NUM_4:
+                    return 期4;
+                case NUM_5:
+                    return 期5;
+                case NUM_6:
+                    return 期6;
+                case NUM_7:
+                    return 期7;
+                case NUM_8:
+                    return 期8;
+                case NUM_9:
+                    return 期9;
+                case NUM_10:
+                    return 期10;
+                case NUM_11:
+                    return 期11;
+                case NUM_12:
+                    return 期12;
+                case NUM_13:
+                    return 期13;
+                case NUM_14:
+                    return 期14;
+                default:
+                    return null;
+            }
+        } else {
+            return null;
         }
     }
 
@@ -525,21 +529,25 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private Decimal get特徴期別金額(RString 期, FukaJoho 賦課の情報) {
-        switch (Integer.parseInt(期.toString())) {
-            case NUM_1:
-                return 賦課の情報.get特徴期別金額01();
-            case NUM_2:
-                return 賦課の情報.get特徴期別金額02();
-            case NUM_3:
-                return 賦課の情報.get特徴期別金額03();
-            case NUM_4:
-                return 賦課の情報.get特徴期別金額04();
-            case NUM_5:
-                return 賦課の情報.get特徴期別金額05();
-            case NUM_6:
-                return 賦課の情報.get特徴期別金額06();
-            default:
-                return null;
+        if (期 != null && !期.isEmpty()) {
+            switch (Integer.parseInt(期.toString())) {
+                case NUM_1:
+                    return 賦課の情報.get特徴期別金額01();
+                case NUM_2:
+                    return 賦課の情報.get特徴期別金額02();
+                case NUM_3:
+                    return 賦課の情報.get特徴期別金額03();
+                case NUM_4:
+                    return 賦課の情報.get特徴期別金額04();
+                case NUM_5:
+                    return 賦課の情報.get特徴期別金額05();
+                case NUM_6:
+                    return 賦課の情報.get特徴期別金額06();
+                default:
+                    return null;
+            }
+        } else {
+            return null;
         }
     }
 
@@ -775,37 +783,41 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private RDate get納期限(RString 期, FukaJoho 賦課の情報) {
-        switch (Integer.parseInt(期.toString())) {
-            case NUM_1:
-                return 賦課の情報.get普徴期別納期限01();
-            case NUM_2:
-                return 賦課の情報.get普徴期別納期限02();
-            case NUM_3:
-                return 賦課の情報.get普徴期別納期限03();
-            case NUM_4:
-                return 賦課の情報.get普徴期別納期限04();
-            case NUM_5:
-                return 賦課の情報.get普徴期別納期限05();
-            case NUM_6:
-                return 賦課の情報.get普徴期別納期限06();
-            case NUM_7:
-                return 賦課の情報.get普徴期別納期限07();
-            case NUM_8:
-                return 賦課の情報.get普徴期別納期限08();
-            case NUM_9:
-                return 賦課の情報.get普徴期別納期限09();
-            case NUM_10:
-                return 賦課の情報.get普徴期別納期限10();
-            case NUM_11:
-                return 賦課の情報.get普徴期別納期限11();
-            case NUM_12:
-                return 賦課の情報.get普徴期別納期限12();
-            case NUM_13:
-                return 賦課の情報.get普徴期別納期限13();
-            case NUM_14:
-                return 賦課の情報.get普徴期別納期限14();
-            default:
-                return null;
+        if (期 != null && !期.isEmpty()) {
+            switch (Integer.parseInt(期.toString())) {
+                case NUM_1:
+                    return 賦課の情報.get普徴期別納期限01();
+                case NUM_2:
+                    return 賦課の情報.get普徴期別納期限02();
+                case NUM_3:
+                    return 賦課の情報.get普徴期別納期限03();
+                case NUM_4:
+                    return 賦課の情報.get普徴期別納期限04();
+                case NUM_5:
+                    return 賦課の情報.get普徴期別納期限05();
+                case NUM_6:
+                    return 賦課の情報.get普徴期別納期限06();
+                case NUM_7:
+                    return 賦課の情報.get普徴期別納期限07();
+                case NUM_8:
+                    return 賦課の情報.get普徴期別納期限08();
+                case NUM_9:
+                    return 賦課の情報.get普徴期別納期限09();
+                case NUM_10:
+                    return 賦課の情報.get普徴期別納期限10();
+                case NUM_11:
+                    return 賦課の情報.get普徴期別納期限11();
+                case NUM_12:
+                    return 賦課の情報.get普徴期別納期限12();
+                case NUM_13:
+                    return 賦課の情報.get普徴期別納期限13();
+                case NUM_14:
+                    return 賦課の情報.get普徴期別納期限14();
+                default:
+                    return null;
+            }
+        } else {
+            return null;
         }
     }
 
@@ -914,37 +926,41 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private Decimal get普徴期別金額(RString 期, FukaJoho 賦課の情報) {
-        switch (Integer.parseInt(期.toString())) {
-            case NUM_1:
-                return 賦課の情報.get普徴期別金額01();
-            case NUM_2:
-                return 賦課の情報.get普徴期別金額02();
-            case NUM_3:
-                return 賦課の情報.get普徴期別金額03();
-            case NUM_4:
-                return 賦課の情報.get普徴期別金額04();
-            case NUM_5:
-                return 賦課の情報.get普徴期別金額05();
-            case NUM_6:
-                return 賦課の情報.get普徴期別金額06();
-            case NUM_7:
-                return 賦課の情報.get普徴期別金額07();
-            case NUM_8:
-                return 賦課の情報.get普徴期別金額08();
-            case NUM_9:
-                return 賦課の情報.get普徴期別金額09();
-            case NUM_10:
-                return 賦課の情報.get普徴期別金額10();
-            case NUM_11:
-                return 賦課の情報.get普徴期別金額11();
-            case NUM_12:
-                return 賦課の情報.get普徴期別金額12();
-            case NUM_13:
-                return 賦課の情報.get普徴期別金額13();
-            case NUM_14:
-                return 賦課の情報.get普徴期別金額14();
-            default:
-                return null;
+        if (期 != null && !期.isEmpty()) {
+            switch (Integer.parseInt(期.toString())) {
+                case NUM_1:
+                    return 賦課の情報.get普徴期別金額01();
+                case NUM_2:
+                    return 賦課の情報.get普徴期別金額02();
+                case NUM_3:
+                    return 賦課の情報.get普徴期別金額03();
+                case NUM_4:
+                    return 賦課の情報.get普徴期別金額04();
+                case NUM_5:
+                    return 賦課の情報.get普徴期別金額05();
+                case NUM_6:
+                    return 賦課の情報.get普徴期別金額06();
+                case NUM_7:
+                    return 賦課の情報.get普徴期別金額07();
+                case NUM_8:
+                    return 賦課の情報.get普徴期別金額08();
+                case NUM_9:
+                    return 賦課の情報.get普徴期別金額09();
+                case NUM_10:
+                    return 賦課の情報.get普徴期別金額10();
+                case NUM_11:
+                    return 賦課の情報.get普徴期別金額11();
+                case NUM_12:
+                    return 賦課の情報.get普徴期別金額12();
+                case NUM_13:
+                    return 賦課の情報.get普徴期別金額13();
+                case NUM_14:
+                    return 賦課の情報.get普徴期別金額14();
+                default:
+                    return null;
+            }
+        } else {
+            return null;
         }
     }
 
