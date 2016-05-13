@@ -156,6 +156,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         ViewStateHolder.put(ViewStateKeys.調定日時リスト, 調定日時List);
         FukaJoho 賦課の情報 = 賦課の情報List.get(0);
         set調定パネルの共通エリア(賦課の情報);
+        ViewStateHolder.put(ViewStateKeys.調定年度, 賦課の情報.get調定年度());
+        ViewStateHolder.put(ViewStateKeys.賦課年度, 賦課の情報.get賦課年度());
         FlexibleYear 賦課年度 = 賦課の情報.get賦課年度();
         FlexibleYear 調定年度 = 賦課の情報.get調定年度();
         if (賦課の情報List.size() == 1) {
@@ -964,12 +966,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
     }
 
-    /**
-     * 通知書作成パネル設定のメソッドます。
-     *
-     * @param 発行する帳票リスト List
-     */
-    public void set通知書作成パネル(List<RString> 発行する帳票リスト) {
+    private void set通知書作成パネル(List<RString> 発行する帳票リスト) {
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         dgChohyoSentaku_Row row;
         boolean 特徴開始通知書Flag = false;
@@ -1269,9 +1266,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 調定日時.remove(日時);
             }
         }
-        FukaJoho 更正後Info;
+        FukaJoho 更正後Info = map.get(更正後Key);
+        ViewStateHolder.put(ViewStateKeys.調定年度, 更正後Info.get調定年度());
+        ViewStateHolder.put(ViewStateKeys.賦課年度, 更正後Info.get賦課年度());
         if (更正後の調定日時.size() == 1) {
-            更正後Info = map.get(更正後Key);
             set調定パネルの共通エリア(更正後Info);
             List<KeyValueDataSource> 更正前DataSource = new ArrayList<>();
             更正前DataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
@@ -1295,7 +1293,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             RString 更正後日時 = new RString(更正後の調定日時.get(0).toString());
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto()
                     .setSelectedKey(更正後日時);
-            更正後Info = map.get(更正後日時);
             set調定パネルの共通エリア(更正後Info);
             更正後の調定日時.remove(更正後の調定日時.get(0));
             List<KeyValueDataSource> 更正前Data = new ArrayList<>();

@@ -90,9 +90,10 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private static final RString RST_第４ = new RString("第４");
     private static final RString RST_第５ = new RString("第５");
     private static final RString RST_1 = new RString("1");
-    private static final RString RST_0 = new RString("0");
     private static final RString 償還方法_自 = new RString("自");
     private static final RString 償還方法_申 = new RString("申");
+    private static final RString 国保連委託_無し = new RString("受託無し");
+    private static final RString 国保連委託_有り = new RString("受託有り");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -535,10 +536,16 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         if (entity != null) {
             csvEntity.set備考算定基準(entity.get高額給付根拠());
             RString 国保連委託なし = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_高額, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-            csvEntity.set国保連委託なし(国保連委託なし);
-            if (RST_1.equals(entity.get自動償還対象フラグ())) {
+            if (RST_1.equals(国保連委託なし)) {
+                csvEntity.set国保連委託なし(国保連委託_無し);
+            } else if (RST_2.equals(国保連委託なし)) {
+                csvEntity.set国保連委託なし(国保連委託_有り);
+            } else {
+                csvEntity.set国保連委託なし(RString.EMPTY);
+            }
+            if (entity.is自動償還対象フラグ()) {
                 csvEntity.set高額自動償還(償還方法_自);
-            } else if (RST_0.equals(entity.get自動償還対象フラグ())) {
+            } else {
                 csvEntity.set高額自動償還(償還方法_申);
             }
             csvEntity.set利用者負担段階(get高額給付根拠(entity.get高額給付根拠()));
