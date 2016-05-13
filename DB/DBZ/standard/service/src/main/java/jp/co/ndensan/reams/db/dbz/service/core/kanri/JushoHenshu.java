@@ -268,12 +268,12 @@ public class JushoHenshu {
     }
 
     /**
-     * 住所コードを作成します。
+     * 住所コードを設定します。
      *
      * @param uaFt200Entity uaFt200Entity
      * @return 住所コード
      */
-    public RString set住所コード編集(UaFt200FindShikibetsuTaishoEntity uaFt200Entity) {
+    public RString get住所コード(UaFt200FindShikibetsuTaishoEntity uaFt200Entity) {
         RString 住所コード = RString.EMPTY;
         if (uaFt200Entity != null) {
             IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(uaFt200Entity);
