@@ -10,7 +10,7 @@
     <sql id="selectHanyoListKyotakuServiceKeikakuEntity">
         select ROW_NUMBER() over(order by D."dbv1001被保険者番号")as row ,* from (
         SELECT 	    
-            DbV1001."hihokenshaNo"                                              AS dbv1001被保険者番号	
+            DbV1001."hihokenshaNo"                                              AS dbv1001被保険者番号,
             DbV1001."shichosonCode"                     			AS dbV1001市町村コード,						
 	    DbV1001."shikakuShutokuJiyuCode"					AS dbV1001資格取得事由コード,					
 	    DbV1001."shikakuShutokuYMD"						AS dbV1001資格取得年月日,					
