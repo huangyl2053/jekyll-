@@ -76,21 +76,31 @@ public class FutanGendogakuNinteiShinseisho {
      * @param 被保険者番号 被保険者番号
      * @return 介護保険負担限度額認定申請書作成_帳票
      */
-    public SourceDataCollection createFutanGendogakuNinteiShinseishoChohyo(
-            ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        FutangendogakuNinteiShinseishoProerty proerty = new FutangendogakuNinteiShinseishoProerty();
+    public SourceDataCollection createFutanGendogakuNinteiShinseishoChohyo(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<FutangendogakuNinteiShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
-                for (FutangendogakuNinteiShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
-                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<FutangendogakuNinteiShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                    report.writeBy(reportSourceWriter);
-                }
-            }
+            createFutanGendogakuNinteiShinseishoChohyo(識別コード, 被保険者番号, reportManager);
             return reportManager.publish();
+        }
+    }
+
+    /**
+     * 介護保険負担限度額認定申請書Printします。
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @param reportManager 帳票発行処理の制御機能
+     */
+    public void createFutanGendogakuNinteiShinseishoChohyo(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, ReportManager reportManager) {
+        FutangendogakuNinteiShinseishoProerty proerty = new FutangendogakuNinteiShinseishoProerty();
+        try (ReportAssembler<FutangendogakuNinteiShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
+            INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
+            INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
+            for (FutangendogakuNinteiShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
+                    ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                ReportSourceWriter<FutangendogakuNinteiShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
         }
     }
 

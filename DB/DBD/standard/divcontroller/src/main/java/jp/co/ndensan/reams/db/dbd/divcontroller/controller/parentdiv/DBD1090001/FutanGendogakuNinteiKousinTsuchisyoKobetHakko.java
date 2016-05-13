@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -229,7 +230,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      * @return ResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnPublish(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-
+        ResponseData<SourceDataCollection> response = new ResponseData<>();
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
@@ -242,9 +243,11 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
 
         FutanGendogakuNinteiKanshoTsuchisho tsuchisho = FutanGendogakuNinteiKanshoTsuchisho.createInstance();
         int rirekiNo = div.getRirekiNo().isEmpty() ? 0 : Integer.valueOf(div.getRirekiNo().toString());
-        SourceDataCollection sourceDataCollection = tsuchisho.publish(
-                被保険者番号, 識別コード, rirekiNo, 発行日, 文書番号, お知らせ通知書, 申請書);
-        return ResponseData.of(sourceDataCollection).respond();
+        try (ReportManager reportManager = new ReportManager()) {
+            tsuchisho.publish(被保険者番号, 識別コード, rirekiNo, 発行日, 文書番号, お知らせ通知書, 申請書, reportManager);
+            response.data = reportManager.publish();
+        }
+        return response;
     }
 
     /**
