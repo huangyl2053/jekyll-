@@ -16,7 +16,8 @@ public enum DBC6000011TransitionEventName implements IContainerEvents {
 
     国保連情報データ取込へ("国保連情報データ取込へ"),
     保険者情報送付へ戻る("保険者情報送付へ戻る"),
-    国保連情報取込へ戻る("国保連情報取込へ戻る");
+    国保連情報取込へ戻る("国保連情報取込へ戻る"),
+    完了("完了");
 
     private final RString name;
 
