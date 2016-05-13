@@ -56,7 +56,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     private static final RString 住所地特例対象施設 = new RString("12");
     private static final RString 適用除外施設 = new RString("21");
     private static final RString 特例状態住特 = new RString("住特");
-    private static final RString FLAG = new RString("true");
+    private static final RString FLAG = new RString("1");
     private static final RString 介護資格取得事由 = new RString("0007");
     private static final RString 介護資格喪失事由 = new RString("0010");
     private static final RString 表示名称_新規 = new RString("新規");
