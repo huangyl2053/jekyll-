@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -104,7 +106,7 @@ public class DbT2016FukinitsuNokiKanriDac implements ISaveable<DbT2016FukinitsuN
                 table(DbT2016FukinitsuNokiKanri.class).
                 where(
                         eq(choteiNendo, 調定年度)
-                ).
+                ).order(by(DbT2016FukinitsuNokiKanri.shichosonCode, Order.ASC)).
                 toList(DbT2016FukinitsuNokiKanriEntity.class);
     }
 }
