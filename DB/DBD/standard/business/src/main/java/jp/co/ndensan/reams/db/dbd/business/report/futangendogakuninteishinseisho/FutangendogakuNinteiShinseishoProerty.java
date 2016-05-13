@@ -21,6 +21,6 @@ public class FutangendogakuNinteiShinseishoProerty extends ReportPropertyBase<Fu
      * コンストラクタです。
      */
     public FutangendogakuNinteiShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBD.DBD800001.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD800001.getReportId());
     }
 }
