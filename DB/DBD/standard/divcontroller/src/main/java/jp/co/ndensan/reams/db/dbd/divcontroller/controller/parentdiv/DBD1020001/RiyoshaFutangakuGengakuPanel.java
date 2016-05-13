@@ -215,7 +215,7 @@ public class RiyoshaFutangakuGengakuPanel {
             return ResponseData.of(div).setState(DBD1020001StateName.一覧);
         }
 
-        getValidationHandler().validateFor利用者負担額減額_給付率範囲外(pairs, div);
+        getValidationHandler().validateFor減免減額_給付率範囲外(pairs, div);
         getValidationHandler().validateFor利用者負担額減額_適用開始日が法施行以前(pairs, div);
         getValidationHandler().validateFor利用者負担額減額_適用終了日が年度外(pairs, div);
         getValidationHandler().validateFor利用者負担額減額_適用終了日が開始日以前(pairs, div);

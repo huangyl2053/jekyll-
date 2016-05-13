@@ -100,12 +100,12 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                     return div.getTxtKyufuRitsu().getValue() != null;
                 }
             },
-    利用者負担額減額_給付率範囲外のチェック {
+    減免減額_給付率範囲外のチェック {
                 /**
-                 * 利用者負担額減額_給付率範囲外のチェック。
+                 * 減免減額_給付率範囲外のチェック。
                  *
                  * @param div 利用者負担額減額申請Div
-                 * @return true:利用者負担額減額_給付率範囲外ではないです、false:利用者負担額減額_給付率範囲外です。
+                 * @return true:減免減額_給付率範囲外ではないです、false:減免減額_給付率範囲外です。
                  */
                 @Override
                 public boolean apply(RiyoshaFutangakuGengakuPanelDiv div) {
