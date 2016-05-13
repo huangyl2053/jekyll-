@@ -126,7 +126,8 @@ public class YoshikiIchinogoHosei {
         }
         if (!getCheckHandler(div).is整合性チェック3() && !ResponseHolder.isReRequest()) {
             WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
-                    UrWarningMessages.相違.getMessage().replace(合計.toString(), 要支援計と要介護計の合計計算結果.toString()).evaluate());
+                    UrWarningMessages.相違.getMessage().replace(合計.toString(),
+                            要支援計と要介護計の合計計算結果.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
