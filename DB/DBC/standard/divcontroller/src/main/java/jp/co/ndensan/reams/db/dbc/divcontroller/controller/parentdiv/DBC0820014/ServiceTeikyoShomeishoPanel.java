@@ -55,7 +55,7 @@ public class ServiceTeikyoShomeishoPanel {
                 new RString("0003"),
                 Decimal.ZERO);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        ViewStateHolder.put(ViewStateKeys.画面モード, 処理モード_修正);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_修正);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("000000003"));
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth("201601"));
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
@@ -72,20 +72,19 @@ public class ServiceTeikyoShomeishoPanel {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         ViewStateHolder.put(ViewStateKeys.明細番号, 明細番号);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
 
         List<ShikibetsuNoKanri> 証明書リスト = SyokanbaraihiShikyuShinseiKetteManager
                 .createInstance().getShikibetsuNoKanri(サービス提供年月);
-        // TODO QA528 償還払支給申請の取得。
+        // TODO 南京QA 償還払支給申請の取得。
         ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
-        // TODO QA529 様式番号がありません。
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
                 .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号, 様式番号);
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(画面モード, 償還払支給申請.is国保連再送付フラグ());
-        handler.load申請共通エリア(画面モード, 償還払支給申請);
+        handler.load申請共通エリア(画面モード, paramter);
         handler.load申請明細エリア(画面モード, 償還払支給申請, 証明書リスト, 証明書一覧情報);
         return createResponse(div);
     }
@@ -97,10 +96,9 @@ public class ServiceTeikyoShomeishoPanel {
      * @return 償還払支給申請_支給申請画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShinseiInfo(ServiceTeikyoShomeishoPanelDiv div) {
-        // TODO QA528。処理モードの設定。
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (登録モード.equals(画面モード)) {
-            ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_修正);
+            ViewStateHolder.put(ViewStateKeys.画面モード, 処理モード_修正);
         } else {
             ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
         }
@@ -116,8 +114,6 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnKouzaInfo(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
         handler.申請既存チェック();
         handler.putViewState();
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.口座情報).respond();
@@ -131,9 +127,9 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShokanKeteiInfo(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
+        handler.申請既存チェック();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
-        handler.申請既存チェック();
         handler.putViewState();
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払決定情報).respond();
     }
