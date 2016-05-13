@@ -34,8 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class YoshikiIchinogoHoseiHandler {
 
     private final YoshikiIchinogoHoseiDiv div;
-    private static final RString 削除状態 = new RString("削除状態");
-    private static final RString 修正状態 = new RString("修正状態");
+    private static final RString 修正状態 = new RString("更新");
+    private static final RString 削除状態 = new RString("削除");
     private static final RString 要介護 = new RString("(11)要介護(要支援)認定者数");
     private static final RString 居宅介護 = new RString("(12)居宅介護(介護予防)サビース受給者数");
     private static final RString 地域密着型 = new RString("(13)地域密着型(介護予防)サビース受給者数");
@@ -699,13 +699,13 @@ public class YoshikiIchinogoHoseiHandler {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
                     case NUMBER_1:
-                        set介護老人福祉情報(entity);
-                        break;
-                    case NUMBER_2:
                         set施設介護第１号被保険者91(entity);
                         break;
-                    case NUMBER_3:
+                    case NUMBER_2:
                         set施設介護第2号被保険者91(entity);
+                        break;
+                    case NUMBER_3:
+                        set介護老人福祉情報(entity);
                         break;
                     default:
                         break;
@@ -719,13 +719,13 @@ public class YoshikiIchinogoHoseiHandler {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
                     case NUMBER_1:
-                        set介護老人保健情報(entity);
-                        break;
-                    case NUMBER_2:
                         set施設介護第１号被保険者92(entity);
                         break;
-                    case NUMBER_3:
+                    case NUMBER_2:
                         set施設介護第2号被保険者92(entity);
+                        break;
+                    case NUMBER_3:
+                        set介護老人保健情報(entity);
                         break;
                     default:
                         break;
@@ -739,13 +739,13 @@ public class YoshikiIchinogoHoseiHandler {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
                     case NUMBER_1:
-                        set介護療養型医療施設(entity);
-                        break;
-                    case NUMBER_2:
                         set施設介護第１号被保険者93(entity);
                         break;
-                    case NUMBER_3:
+                    case NUMBER_2:
                         set施設介護第2号被保険者93(entity);
+                        break;
+                    case NUMBER_3:
+                        set介護療養型医療施設(entity);
                         break;
                     case NUMBER_4:
                         set施設介護総数(entity);
@@ -938,7 +938,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl11().getTxt110607().setValue(new RString(entity.get集計結果値().toString()));
                 break;
             case NUMBER_7:
-                div.getPnl11().getTxt110308().setValue(new RString(entity.get集計結果値().toString()));
+                div.getPnl11().getTxt110608().setValue(new RString(entity.get集計結果値().toString()));
                 break;
             case NUMBER_8:
                 div.getPnl11().getTxt110609().setValue(new RString(entity.get集計結果値().toString()));
@@ -1323,7 +1323,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140602().setValue(new RString(entity.get集計結果値().toString()));
                 break;
             case NUMBER_2:
-                div.getPnl14().getTxt140606().setValue(new RString(entity.get集計結果値().toString()));
+                div.getPnl14().getTxt140603().setValue(new RString(entity.get集計結果値().toString()));
                 break;
             case NUMBER_3:
                 div.getPnl14().getTxt140604().setValue(new RString(entity.get集計結果値().toString()));
