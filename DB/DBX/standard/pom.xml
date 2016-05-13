@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.ndensan.reams.db.dbx</groupId>
     <artifactId>dbx</artifactId>
-    <version>1.9.0</version>
+    <version>1.9.1</version>
     <packaging>pom</packaging>
     <name>DBX</name>
     <parent>
@@ -33,50 +33,6 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>DbxTestHelper</artifactId>
-                <version>${project.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                <artifactId>DbxDefinition</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                <artifactId>DbxEntity</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                <artifactId>DbxEntity</artifactId>
-                <version>${project.version}</version>
-                <type>test-jar</type>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                <artifactId>DbxPersistence</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                <artifactId>DbxBusiness</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                <artifactId>DbxService</artifactId>
-                <version>${project.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                        <artifactId>DbxPersistence</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-module-junit4</artifactId>

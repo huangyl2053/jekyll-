@@ -18,18 +18,22 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxDefinition</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxEntity</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxBusiness</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxPersistence</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- URD -->
         <dependency>
@@ -57,19 +61,21 @@
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
             <artifactId>UrfService</artifactId>
         </dependency>
-        <!-- å…¬é–‹ç³» -->
+        <!-- ŒöŠJŒn -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxService</artifactId>
         </dependency>
-        <!-- ãƒ†ã‚¹ãƒˆ -->
+        <!-- ƒeƒXƒg -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxTestHelper</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxEntity</artifactId>
+            <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
