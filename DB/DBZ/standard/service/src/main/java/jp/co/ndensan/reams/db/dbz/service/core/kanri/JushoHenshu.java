@@ -282,7 +282,7 @@ public class JushoHenshu {
                         : shikibetsuTaisho.to個人().get住所().get町域コード().getColumnValue();
             } else {
                 住所コード = shikibetsuTaisho.to個人().get住所().get全国住所コード() == null ? RString.EMPTY
-                        : new RString(shikibetsuTaisho.to個人().get住所().get全国住所コード().toString());
+                        : shikibetsuTaisho.to個人().get住所().get全国住所コード().getColumnValue();
             }
         }
         return 住所コード;
