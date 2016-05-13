@@ -140,12 +140,12 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
+        if (!getHandler(div).onSelectByDeleteButton()) {
+            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
+        }
         if (new RString(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
-        }
-        if (!getHandler(div).onSelectByDeleteButton()) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
         }
 
         return ResponseData.of(div).respond();
@@ -181,6 +181,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnBackToShinseiList(FutangendogakuShinseiDiv div) {
+        div.getShinseiList().setDisabled(false);
+        div.setJotai(RString.EMPTY);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
 
@@ -279,10 +281,10 @@ public class FutangendogakuShinsei {
                 break;
             }
         }
-        if (!is変更あり) {
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
+            if (!is変更あり) {
+                return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
