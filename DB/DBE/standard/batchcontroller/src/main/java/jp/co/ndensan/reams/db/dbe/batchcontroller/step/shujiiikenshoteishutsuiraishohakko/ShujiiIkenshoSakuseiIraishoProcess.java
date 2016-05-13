@@ -205,7 +205,7 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
         item.setJusho(entity.get住所());
         item.setShinseiYMD(get和暦(entity.get認定申請年月日(), true));
         set提出期限(entity);
-        item.setTsuchibun1(通知文Map.get(2));
+        item.setTsuchibun2(通知文Map.get(2));
         item.setShoriName(IkenshoIraiKubun.toValue(entity.get主治医意見書依頼区分()).get名称());
     }
 
