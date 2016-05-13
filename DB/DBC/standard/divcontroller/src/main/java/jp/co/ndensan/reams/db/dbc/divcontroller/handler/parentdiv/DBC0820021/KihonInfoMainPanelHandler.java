@@ -886,7 +886,7 @@ public class KihonInfoMainPanelHandler {
             int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
             if (期間_日数 > 日数) {
                 pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
-                        DbcWarningMessages.日数が30日を超える, 入所年月日.toString(), 退所年月日.toString()),
+                        DbcWarningMessages.日数３０日超過, 入所年月日.toString(), 退所年月日.toString()),
                         div.getPanelKihon().getPanelShisetuNyutaisyoInfo()));
             }
         }
