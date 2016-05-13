@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -142,6 +143,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
     private void set他市町村住所地特例者台帳情報(OtherAddressLedgerEntity 他市町村住所地特例者台帳情報,
             OtherAddressInfEntity 他市町村住所地特例者情報, UaFt200FindShikibetsuTaishoEntity 宛名識別対象取得PSM,
             RString 市町村名称, LasdecCode 市町村コード, int ページ目) {
+        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         他市町村住所地特例者台帳情報.set印刷日時(dateTimeEdit(RDate.getNowDateTime()));
         他市町村住所地特例者台帳情報.setページ目(ページ目);
         他市町村住所地特例者台帳情報.set市町村コード(市町村コード);
@@ -164,12 +166,12 @@ public class TashichosonJushochiTokureiDaichoFinder {
         他市町村住所地特例者台帳情報.set地区タイトル3(宛名識別対象取得PSM.getChikuName3());
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名識別対象取得PSM);
         ChohyoSeigyoKyotsu 帳票共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100011.getReportId());
-        他市町村住所地特例者台帳情報.set住所1(JushoHenshu.createInstance().editJusho(帳票共通情報, 宛名情報));
+        他市町村住所地特例者台帳情報.set住所1(jushoHenshu.editJusho(帳票共通情報, 宛名情報));
         他市町村住所地特例者台帳情報.set住所タイトル1(住所);
-        他市町村住所地特例者台帳情報.set住所コード(宛名識別対象取得PSM.getZenkokuJushoCode());
+        他市町村住所地特例者台帳情報.set住所コード(new ZenkokuJushoCode(jushoHenshu.get住所コード(宛名識別対象取得PSM)));
         他市町村住所地特例者台帳情報.set行政区タイトル(行政区);
         他市町村住所地特例者台帳情報.set行政区コード(宛名識別対象取得PSM.getGyoseikuCode());
-        他市町村住所地特例者台帳情報.set住所2(JushoHenshu.createInstance().editJusho2(
+        他市町村住所地特例者台帳情報.set住所2(jushoHenshu.editJusho2(
                 宛名識別対象取得PSM.getTennyumaeJusho(), 宛名識別対象取得PSM.getTennyumaeBanchi(), 宛名識別対象取得PSM.getTennyumaeKatagaki()));
         他市町村住所地特例者台帳情報.set住所タイトル2(前住所);
         他市町村住所地特例者台帳情報.set前住所コード(宛名識別対象取得PSM.getTennyumaeZenkokuJushoCode());
