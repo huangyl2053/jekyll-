@@ -799,6 +799,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set資格取得事由(RString 事由コード) {
+        if (RString.isNullOrEmpty(事由コード)) {
+            return RString.EMPTY;
+        }
         UzT0007CodeEntity 資格取得事由 = CodeMaster.getCode(new CodeShubetsu("0007"), new Code(事由コード));
         if (資格取得事由 == null) {
             return RString.EMPTY;
@@ -807,6 +810,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set喪失事由(RString 事由コード) {
+        if (RString.isNullOrEmpty(事由コード)) {
+            return RString.EMPTY;
+        }
         UzT0007CodeEntity 喪失事由 = CodeMaster.getCode(new CodeShubetsu("0010"), new Code(事由コード));
         if (喪失事由 == null) {
             return RString.EMPTY;
@@ -815,6 +821,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set医療保険種別(RString 医療保険種別コード) {
+        if (RString.isNullOrEmpty(医療保険種別コード)) {
+            return RString.EMPTY;
+        }
         UzT0007CodeEntity 医療保険種別 = CodeMaster.getCode(new CodeShubetsu("0001"), new Code(医療保険種別コード));
         if (医療保険種別 == null) {
             return RString.EMPTY;
@@ -830,6 +839,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set受給状況(RString 受給者台帳_有効無効区分) {
+        if (RString.isNullOrEmpty(受給者台帳_有効無効区分)) {
+            return RString.EMPTY;
+        }
         RString 有効無効区分;
         try {
             有効無効区分 = YukoMukoKubun.toValue(受給者台帳_有効無効区分).get名称();
@@ -845,6 +857,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set受給申請事由(RString 受給申請事由原, RString 要支援者認定申請区分) {
+        if (RString.isNullOrEmpty(受給申請事由原) || RString.isNullOrEmpty(要支援者認定申請区分)) {
+            return RString.EMPTY;
+        }
         RString 受給申請事由;
         try {
             受給申請事由 = JukyuShinseiJiyu.toValue(受給申請事由原).toRString();
@@ -875,6 +890,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString setみなし更新認定(RString みなし要介護区分コード) {
+        if (RString.isNullOrEmpty(みなし要介護区分コード)) {
+            return RString.EMPTY;
+        }
         RString みなし要介護区分;
         try {
             みなし要介護区分 = MinashiCode.toValue(みなし要介護区分コード).get名称();
@@ -901,6 +919,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set異動事由文言(RString 異動事由コード) {
+        if (RString.isNullOrEmpty(異動事由コード)) {
+            return RString.EMPTY;
+        }
         RString 直近異動事由 = ChokkinIdoJiyuCode.toValue(異動事由コード).get名称();
         if (ChokkinIdoJiyuCode.未登録.get名称().equals(直近異動事由)) {
             return RString.EMPTY;
@@ -935,6 +956,9 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set申請区分(RString 認定申請区分) {
+        if (RString.isNullOrEmpty(認定申請区分)) {
+            return RString.EMPTY;
+        }
         RString 申請区分;
         try {
             申請区分 = NinteiShienShinseiKubun.toValue(認定申請区分).get名称();
@@ -1051,7 +1075,6 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set削除理由文言(RString 削除事由コード) {
-
         if (RString.isNullOrEmpty(削除事由コード)) {
             return RString.EMPTY;
         }
