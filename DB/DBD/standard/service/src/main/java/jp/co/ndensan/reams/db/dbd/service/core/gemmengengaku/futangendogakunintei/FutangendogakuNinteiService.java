@@ -174,7 +174,9 @@ public class FutangendogakuNinteiService {
         if (null == 世帯員所得情報) {
             throw new ApplicationException(DbdErrorMessages.利用者負担段階_判定失敗.getMessage());
         }
-        int result = 世帯員所得情報.get合計所得金額().add(世帯員所得情報.get年金収入額()).compareTo(Decimal.valueOf(LONG_80000));
+        Decimal 合計所得金額 = null == 世帯員所得情報.get合計所得金額() ? Decimal.ZERO : 世帯員所得情報.get合計所得金額();
+        Decimal 年金収入額 = null == 世帯員所得情報.get年金収入額() ? Decimal.ZERO : 世帯員所得情報.get年金収入額();
+        int result = 合計所得金額.add(年金収入額).compareTo(Decimal.valueOf(LONG_80000));
         if (result <= 0) {
             return RiyoshaFutanDankai.第二段階;
         } else {
