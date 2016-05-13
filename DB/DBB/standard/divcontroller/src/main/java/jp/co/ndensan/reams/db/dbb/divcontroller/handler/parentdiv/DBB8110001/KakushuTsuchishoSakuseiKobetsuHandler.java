@@ -105,6 +105,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 期13 = new RString("13期");
     private static final RString 期14 = new RString("14期");
     private static final RString 発行する = new RString("btnReportPublish");
+    private static final RString ISPUBLISH = new RString("isPublish");
 
     /**
      * コンストラクタです。
@@ -976,13 +977,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 決定通知書Flag = true;
             } else if (変更通知書.equals(帳票略称) || 変更兼特別徴収中止通知書.equals(帳票略称)) {
                 変更通知書Flag = true;
+                ViewStateHolder.put(ViewStateKeys.変更通知書帳票略称, 帳票略称);
             } else if (納入通知書.equals(帳票略称)) {
                 set納入通知書制御情報(帳票);
                 納入通知書Flag = true;
             } else if (減免決定通知書.equals(帳票略称) || 減免取消通知書.equals(帳票略称)) {
                 減免通知書Flag = true;
+                ViewStateHolder.put(ViewStateKeys.減免通知書帳票略称, 帳票略称);
             } else if (猶予決定通知書.equals(帳票略称) || 猶予取消通知書.equals(帳票略称)) {
                 徴収猶予通知書Flag = true;
+                ViewStateHolder.put(ViewStateKeys.徴収猶予通知書帳票略称, 帳票略称);
             } else if (郵便振替納付書.equals(帳票略称)) {
                 郵振納付書Flag = true;
             } else if (賦課台帳.equals(帳票略称)) {
@@ -995,7 +999,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 row.setTxtChohyoSentaku(帳票略称);
                 rowList.add(row);
                 帳票リスト.add(帳票略称);
-                publishNumber++;
+                publishNumber = publishNumber + NUM_1;
             }
             map.put(帳票略称, 帳票);
         }
@@ -1006,6 +1010,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         dgRowList.addAll(rowList);
         if (!調定日時.equals(new RString(調定日時List.get(0).toString()))) {
             賦課台帳Flag = false;
+            publishNumber = publishNumber - NUM_1;
             for (dgChohyoSentaku_Row dgRow : rowList) {
                 if (dgRow.getTxtChohyoSentaku().equals(賦課台帳)) {
                     dgRowList.remove(dgRow);
@@ -1028,48 +1033,55 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             boolean 郵振納付書Flag,
             boolean 賦課台帳Flag,
             boolean 調定事由Flag) {
+        List<RString> key = new ArrayList<>();
+        key.add(ISPUBLISH);
         if (!特徴開始通知書Flag) {
-            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().setDisplayNone(true);
         } else {
-            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().getChkPublishTokuKaishiTsuchiKobetsu()
+                    .setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(true);
-            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsPublish(true);
         }
         if (!決定通知書Flag) {
-            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().setDisplayNone(true);
         } else {
-            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().getChkPublishKetteiTsuchiKobetsu()
+                    .setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(true);
-            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsPublish(true);
         }
         if (!変更通知書Flag) {
-            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().setDisplayNone(true);
         } else {
-            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().getChkPublishHenkoTsuchiKobetsu()
+                    .setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(true);
-            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsPublish(true);
         }
         if (!納入通知書Flag) {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(true);
         } else {
-            set納入通知書();
+            set納入通知書(key);
         }
         if (!減免通知書Flag) {
-            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(true);
         } else {
-            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().getChkPublishGemmenTsuchiKobetsu()
+                    .setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(true);
-            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsPublish(true);
         }
         if (!徴収猶予通知書Flag) {
-            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().setDisplayNone(true);
         } else {
-            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().getChkPublishChoshuYuyoTsuchiKobetsu()
+                    .setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(true);
-            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsPublish(true);
         }
         if (!郵振納付書Flag) {
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().setDisplayNone(true);
         } else {
             KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
             FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
@@ -1081,16 +1093,17 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             }
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().getDdlYufuriShuturyokuKi().setDataSource(keyValueDataSource);
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().getDdlYufuriShuturyokuKi().setSelectedKey(期月.get期());
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().getChkPublishYufuriKobetsu().setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(true);
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsPublish(true);
         }
         if (!賦課台帳Flag) {
-            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().setDisplayNone(true);
         } else {
-            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().getChkPublishFukadaichoKobetsu()
+                    .setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(true);
-            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsPublish(true);
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(調定事由Flag);
     }
@@ -1111,21 +1124,25 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     private void set出力方式と出力形式(ShutsuryokuHoshiki 出力方式, ShutsuryokuHoshiki 出力形式) {
-        if (出力方式.equals(ShutsuryokuHoshiki.全件出力)) {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getChkNotsuShuturyokuKi().setSelectedItemsByKey(null);
-        } else if (出力方式.equals(ShutsuryokuHoshiki.別々出力)) {
-            List<RString> list = new ArrayList<>();
-            list.add(KEY0);
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getChkNotsuShuturyokuKi().setSelectedItemsByKey(list);
+        if (出力方式 != null) {
+            if (ShutsuryokuHoshiki.全件出力.equals(出力方式)) {
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getChkNotsuShuturyokuKi().setSelectedItemsByKey(null);
+            } else if (ShutsuryokuHoshiki.別々出力.equals(出力方式)) {
+                List<RString> list = new ArrayList<>();
+                list.add(KEY0);
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getChkNotsuShuturyokuKi().setSelectedItemsByKey(list);
+            }
         }
-        if (出力形式.getコード().equals(ShutsuryokuKeishiki.現金.getコード())) {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getRadNotsuShuturyokuKeishiki().setSelectedKey(KEY0);
-        } else if (出力形式.getコード().equals(ShutsuryokuKeishiki.口座.getコード())) {
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getRadNotsuShuturyokuKeishiki().setSelectedKey(KEY1);
+        if (出力形式 != null) {
+            if (ShutsuryokuKeishiki.現金.getコード().equals(出力形式.getコード())) {
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getRadNotsuShuturyokuKeishiki().setSelectedKey(KEY0);
+            } else if (ShutsuryokuKeishiki.口座.getコード().equals(出力形式.getコード())) {
+                div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getRadNotsuShuturyokuKeishiki().setSelectedKey(KEY1);
+            }
         }
     }
 
-    private void set納入通知書() {
+    private void set納入通知書(List<RString> key) {
 
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
         FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
@@ -1146,9 +1163,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             Noki 普徴納期 = FukaNokiResearcher.createInstance().get普徴納期(期月.get期AsInt());
             set発行日(普徴納期.get通知書発行日());
         }
-        div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setDisplayNone(false);
+        div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(false);
+        div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().getChkPublishNotsuKobetsu().setSelectedItemsByKey(key);
         div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(true);
-        div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsPublish(true);
     }
 
     private void set発行日(RDate 発行日) {
@@ -1603,12 +1620,145 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     /**
-     * 通知書の選択処理のメソッドます。
-     *
-     * @param flag boolean
-     * @param 通知書 RString
+     * 特徴開始通知書チェックのメソッドます。
      */
-    public void check通知書(boolean flag, RString 通知書) {
+    public void check特徴開始通知書() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu()
+                .getChkPublishTokuKaishiTsuchiKobetsu().getSelectedKeys();
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 特徴開始通知書);
+            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 特徴開始通知書);
+            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(true);
+        }
+    }
+
+    /**
+     * 決定通知書チェックのメソッドます。
+     */
+    public void check決定通知書() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu()
+                .getChkPublishKetteiTsuchiKobetsu().getSelectedKeys();
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 決定通知書);
+            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 決定通知書);
+            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(true);
+        }
+    }
+
+    /**
+     * 変更通知書チェックのメソッドます。
+     */
+    public void check変更通知書() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu()
+                .getChkPublishHenkoTsuchiKobetsu().getSelectedKeys();
+        RString 変更通知書略称 = ViewStateHolder.get(ViewStateKeys.変更通知書帳票略称, RString.class);
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 変更通知書略称);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 変更通知書略称);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(true);
+        }
+    }
+
+    /**
+     * 納入通知書チェックのメソッドます。
+     */
+    public void check納入通知書() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu()
+                .getChkPublishNotsuKobetsu().getSelectedKeys();
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 納入通知書);
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 納入通知書);
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(true);
+        }
+    }
+
+    /**
+     * 郵便納付書チェックのメソッドます。
+     */
+    public void check郵便納付書() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu()
+                .getChkPublishYufuriKobetsu().getSelectedKeys();
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 郵便振替納付書);
+            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 郵便振替納付書);
+            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(true);
+        }
+    }
+
+    /**
+     * 減免通知書チェックのメソッドます。
+     */
+    public void check減免通知書() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu()
+                .getChkPublishGemmenTsuchiKobetsu().getSelectedKeys();
+        RString 減免通知書略称 = ViewStateHolder.get(ViewStateKeys.減免通知書帳票略称, RString.class);
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 減免通知書略称);
+            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 減免通知書略称);
+            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(true);
+        }
+    }
+
+    /**
+     * 徴収猶予通知書チェックのメソッドます。
+     */
+    public void check徴収猶予通知書() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu()
+                .getChkPublishChoshuYuyoTsuchiKobetsu().getSelectedKeys();
+        RString 徴収猶予通知書略称 = ViewStateHolder.get(ViewStateKeys.徴収猶予通知書帳票略称, RString.class);
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 徴収猶予通知書略称);
+            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 徴収猶予通知書略称);
+            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(true);
+        }
+    }
+
+    /**
+     * 賦課台帳チェックのメソッドます。
+     */
+    public void check賦課台帳() {
+        List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu()
+                .getChkPublishFukadaichoKobetsu().getSelectedKeys();
+        if (publish.isEmpty()) {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
+            set通知書(false, 賦課台帳);
+            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(false);
+        } else {
+            div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
+            set通知書(true, 賦課台帳);
+            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(true);
+        }
+    }
+
+    private void set通知書(boolean flag, RString 通知書) {
         List<dgChohyoSentaku_Row> dgRowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         rowList.addAll(dgRowList);
