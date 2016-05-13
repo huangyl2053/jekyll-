@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyo;
 
-import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.IJohoTeikyoShiryoEditor;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyo.ShinsakaishukeihyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
@@ -22,7 +21,7 @@ class ShinsakaishukeihyoBuilder implements IShinsakaishukeihyoBuilder {
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link IJohoTeikyoShiryoEditor}
+     * @param editor {@link IShinsakaishukeihyoEditor}
      */
     public ShinsakaishukeihyoBuilder(IShinsakaishukeihyoEditor editor,
             IShinsakaishukeihyoBodyEditor bodyEditor) {
