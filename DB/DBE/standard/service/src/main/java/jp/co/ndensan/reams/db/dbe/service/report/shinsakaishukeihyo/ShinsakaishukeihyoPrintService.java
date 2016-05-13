@@ -15,17 +15,17 @@ import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
- * 審査判定の変更状況Printクラスです。
+ * 介護認定審査会集計表（判定別）Printクラスです。
  *
- * @reamsid_L DBE-1450-060 dongyabin
+ * @reamsid_L DBE-1450-070 dongyabin
  */
 public class ShinsakaishukeihyoPrintService {
 
     /**
-     * 審査判定の変更状況Printします。
+     * 介護認定審査会集計表（判定別）Printします。
      *
-     * @param reportJoho 審査判定の変更状況作成_帳票クラスパラメータ
-     * @return 審査判定の変更状況作成_帳票
+     * @param reportJoho 介護認定審査会集計表（判定別）作成_帳票クラスパラメータ
+     * @return 介護認定審査会集計表（判定別）作成_帳票
      */
     public SourceDataCollection print(Shinsakaishukeihyo reportJoho) {
         ShinsakaishukeihyoProperty property = new ShinsakaishukeihyoProperty();
