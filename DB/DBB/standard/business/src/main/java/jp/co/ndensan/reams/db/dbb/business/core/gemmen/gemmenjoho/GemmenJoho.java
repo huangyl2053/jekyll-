@@ -804,6 +804,17 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     }
 
     /**
+     * 減免作成区分を返します。
+     *
+     * @return 減免状態区分
+     */
+    public RString get減免作成区分() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get減免作成区分() : RString.EMPTY;
+    }
+
+    /**
      * 減免決定日を返します。
      *
      * @return 減免決定日
