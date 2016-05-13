@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum DbcInformationMessages implements IMessageGettable {
 
-    限度額チェック前(1, "画面のデータを変更するため、限度額をチェックしてください。");
+    限度額チェック前(1, "画面のデータを変更するため、限度額をチェックしてください。"),
+    自己負担額データなし(2, "自己負担額情報が1件も存在しないため、処理できません。");
 
     private final Message message;
 
