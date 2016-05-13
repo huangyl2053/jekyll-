@@ -208,6 +208,7 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .get金融機関() == null ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
                 .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
+        batchparam.setReamsLogInId(ControlDataHolder.getUserId());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
         return batchparam;
