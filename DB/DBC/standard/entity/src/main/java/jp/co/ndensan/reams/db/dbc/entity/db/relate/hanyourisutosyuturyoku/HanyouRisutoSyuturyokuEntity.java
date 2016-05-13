@@ -56,7 +56,7 @@ public class HanyouRisutoSyuturyokuEntity {
     private Decimal 支払済金額合計;
     private FlexibleYearMonth 対象者受取年月;
     private FlexibleYearMonth 対象者判定審査年月;
-    private RString 自動償還対象フラグ;
+    private boolean 自動償還対象フラグ;
     private FlexibleDate 決定年月日;
     private Decimal 本人支払額;
     private RString 判定_支給区分コード;
