@@ -127,7 +127,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      * @param お知らせ通知書 willPublishお知らせ通知書
      * @param 申請書 willPublish申請書
      * @param reportManager 帳票発行処理の制御機能
-     * @return SourceDataCollection
      */
     public void publishお知らせ通知書(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
             int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書, ReportManager reportManager) {

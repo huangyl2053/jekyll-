@@ -33,7 +33,6 @@ public class NinteiKoshinTsuchishoService {
      *
      * @param targets パラメータ
      * @param reportManager 帳票発行処理の制御機能
-     * @return SourceDataCollection
      */
     public void print(List<NinteiKoshinTsuchishoItem> targets, ReportManager reportManager) {
         NinteiKoshinTsuchishoProperty property = new NinteiKoshinTsuchishoProperty();
