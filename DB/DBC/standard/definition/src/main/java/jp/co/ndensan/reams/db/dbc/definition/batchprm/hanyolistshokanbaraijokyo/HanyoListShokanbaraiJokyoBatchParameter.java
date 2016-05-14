@@ -48,6 +48,8 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
     private static final String KINYUKIKANCODE = "金融機関コード";
     private static final String KINYUKIKANNAME = "金融機関名称";
     private static final String SHIHARAIHOHO = "支払方法";
+    private static final String KEY_REAMS_LOGIN_ID = "reamsLoginId";
+
     @BatchParameter(key = HOKENSHACODE, name = "保険者コード")
     private RString 保険者コード;
     @BatchParameter(key = HOKENSHANAME, name = "保険者名")
@@ -98,6 +100,8 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
     private RString 出力項目;
     @BatchParameter(key = REPORTID, name = "帳票ID")
     private ReportId 帳票ID;
+    @BatchParameter(key = KEY_REAMS_LOGIN_ID, name = "reamsLoginId")
+    private RString reamsLoginId;
 
     /**
      * mybatisのパラメータを生成します。
@@ -132,7 +136,8 @@ public class HanyoListShokanbaraiJokyoBatchParameter extends BatchParameterBase 
                 日付スラッシュ付加,
                 出力順,
                 出力項目,
-                帳票ID);
+                帳票ID,
+                reamsLoginId);
     }
 
 }

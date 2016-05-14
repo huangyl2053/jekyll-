@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -131,7 +130,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         IKozaSearchKey searchKey = builder.build();
         parameter.setSearchkey(searchKey);
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        List<KamokuCode> list = sut.get更新権限科目コード(parameter.getReamsLoginId());
         parameter.setList(list);
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
