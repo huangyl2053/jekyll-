@@ -170,6 +170,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDataSource(
                     getHandler(div).get保険者(サービス提供年月));
             if (shokankihon == null) {
+                getHandler(div).set参照モード();
                 throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             List<ShokanFukushiYoguHanbaihi> shfuhalist = FukushiyoguKonyuhiShikyuShinsei.createInstance().
@@ -348,6 +349,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             row = getHandler(div).selectRow();
         }
         getHandler(div).modifyRow(row);
+        getHandler(div).clear福祉用具購入費明細();
         getHandler(div).今回の支払状況連動();
         return createResponse(div);
     }
@@ -592,15 +594,16 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         FukushiyoguShohinMode jigyoshaMode = DataPassingConverter.deserialize(div.
                 getYoguKonyuhiShikyuShinseiContentsPanel().
                 getFukushiyoguShohinMode(), FukushiyoguShohinMode.class);
-        if (jigyoshaMode.getShohinmei() != null && !jigyoshaMode.getShohinmei().isEmpty()) {
+        if (jigyoshaMode != null && jigyoshaMode.getShohinmei() != null && !jigyoshaMode.getShohinmei().isEmpty()) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtShohinName().
                     setValue(jigyoshaMode.getShohinmei());
         }
-        if (jigyoshaMode.getSeizoJigyoshamei() != null && !jigyoshaMode.getSeizoJigyoshamei().isEmpty()) {
+        if (jigyoshaMode != null && jigyoshaMode.getSeizoJigyoshamei() != null
+                && !jigyoshaMode.getSeizoJigyoshamei().isEmpty()) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtSeizoJigyosha().
                     setValue(jigyoshaMode.getSeizoJigyoshamei());
         }
-        if (jigyoshaMode.getHinmokuCode() != null && !jigyoshaMode.getHinmokuCode().isEmpty()) {
+        if (jigyoshaMode != null && jigyoshaMode.getHinmokuCode() != null && !jigyoshaMode.getHinmokuCode().isEmpty()) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().
                     setValue(jigyoshaMode.getHinmokuCode());
         }
