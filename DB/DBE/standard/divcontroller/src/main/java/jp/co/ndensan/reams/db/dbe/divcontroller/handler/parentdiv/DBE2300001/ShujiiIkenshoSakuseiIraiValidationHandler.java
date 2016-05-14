@@ -201,6 +201,19 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         return validationMessages;
     }
 
+    /**
+     * 排他のチェックを処理します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 排他チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(
+                new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
+                        UrErrorMessages.排他_バッチ実行中で更新不可)));
+        return validationMessages;
+    }
+
     private static final class ShujiiIkenshoSakuseiIraiMessages implements IValidationMessage {
 
         private final Message message;
