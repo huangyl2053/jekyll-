@@ -150,7 +150,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
         if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
             int パターン番号;
-            if (介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
+            if (介護保険負担限度額認定 == null || 介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
                 パターン番号 = 1;
             } else {
                 パターン番号 = パターン番号_21;
