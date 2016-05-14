@@ -16,6 +16,7 @@ import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD10300
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001TransitionEventName.検索処理へ;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001TransitionEventName.検索結果一覧へ;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001.DBD1030001Handler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001.DBD1030001Handler.DBD1030001ViewStateKey;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001.DBD1030001ValidationHandler;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -133,11 +134,15 @@ public class DBD1030001 {
      */
     public ResponseData<DBD1030001Div> onClick_onSelectByDeleteButton(DBD1030001Div div) {
         if (!ResponseHolder.isReRequest()) {
+            ViewStateHolder.put(DBD1030001ViewStateKey.is削除ReRequest, Boolean.FALSE);
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            getHandler(div).onClick_onSelectByDeleteButton();
+            if (!ViewStateHolder.get(DBD1030001ViewStateKey.is削除ReRequest, Boolean.class) && !getHandler(div).onClick_onSelectByDeleteButton()) {
+                ViewStateHolder.put(DBD1030001ViewStateKey.is削除ReRequest, Boolean.TRUE);
+                return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }

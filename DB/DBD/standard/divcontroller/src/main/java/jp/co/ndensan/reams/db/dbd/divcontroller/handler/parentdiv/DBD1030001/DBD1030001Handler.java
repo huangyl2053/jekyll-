@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGeng
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1030001Div;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.dgShinseiList_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenManager;
@@ -47,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -653,11 +651,12 @@ public class DBD1030001Handler {
     /**
      * 社会福祉法人等利用者負担軽減申請画面を「申請一覧の削除ボタン」を押下する。
      *
+     * @return is削除
      */
-    public void onClick_onSelectByDeleteButton() {
+    public boolean onClick_onSelectByDeleteButton() {
         dgShinseiList_Row dataSouce = div.getDgShinseiList().getActiveRow();
         if (dataSouce.getKetteiKubun() != null && !dataSouce.getKetteiKubun().isEmpty() && !状態_追加.equals(dataSouce.getJotai())) {
-            throw new ApplicationException(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage());
+            return false;
         }
         RString 状態 = dataSouce.getJotai();
         if (状態.isEmpty() || 状態_修正.equals(状態)) {
@@ -665,6 +664,7 @@ public class DBD1030001Handler {
         } else if (状態_追加.equals(状態)) {
             dataSourceの削除(dataSouce);
         }
+        return true;
     }
 
     private void dataSourceの削除(dgShinseiList_Row 削除DataSouce) {
@@ -1466,7 +1466,11 @@ public class DBD1030001Handler {
         /**
          * 追加履歴番号です。
          */
-        is申請情報のDDL初期化;
+        is申請情報のDDL初期化,
+        /**
+         * is削除ReRequestです。
+         */
+        is削除ReRequest;
     }
 
 }

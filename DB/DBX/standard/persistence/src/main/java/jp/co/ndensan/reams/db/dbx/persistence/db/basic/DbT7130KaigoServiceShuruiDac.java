@@ -169,8 +169,9 @@ public class DbT7130KaigoServiceShuruiDac {
         return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(eq(serviceShuruiCd, サービス種類),
-                                leq(teikyoKaishiYM, RDate.getNowDate()),
-                                or(leq(RDate.getNowDate(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).toObject(DbT7130KaigoServiceShuruiEntity.class);
+                                leq(teikyoKaishiYM, RDate.getNowDate().getYearMonth()),
+                                or(leq(RDate.getNowDate().getYearMonth(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).
+                toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 
     /**
