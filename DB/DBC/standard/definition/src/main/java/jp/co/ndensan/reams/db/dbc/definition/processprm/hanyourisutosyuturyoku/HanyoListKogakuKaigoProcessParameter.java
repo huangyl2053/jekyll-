@@ -103,6 +103,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param kamokuCodelist List<KamokuCode>
+     * @param reamsLoginId RString
      */
     public HanyoListKogakuKaigoProcessParameter(
             LasdecCode kouseiShichosonCode,

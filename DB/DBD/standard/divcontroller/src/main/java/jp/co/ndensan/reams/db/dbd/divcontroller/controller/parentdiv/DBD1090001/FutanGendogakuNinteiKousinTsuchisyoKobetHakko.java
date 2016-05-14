@@ -251,12 +251,22 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
     }
 
     /**
-     * 「発行」ボタンをクリックする
+     * 「検索結果一覧へ」ボタンをクリックする
      *
      * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
      * @return ResponseData
      */
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnReturn(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBD1090001TransitionEventName.検索に戻る).respond();
+    }
+
+    /**
+     * 「再検索する」ボタンをクリックする
+     *
+     * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnReSearch(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBD1090001TransitionEventName.検索に戻る).respond();
     }
 }

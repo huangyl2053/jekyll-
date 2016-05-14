@@ -19,10 +19,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichosonBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichosonIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -350,7 +352,10 @@ public class MainPanelHandler {
 
     private void 前排他制御処理() {
         LockingKey lockingKey = new LockingKey(new RString("ChikuShichosonCode"));
-        RealInitialLocker.lock(lockingKey);
+        if (!RealInitialLocker.tryGetLock(lockingKey)) {
+            div.setReadOnly(true);
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+        }
     }
 
     private void 前排他解除処理() {

@@ -802,7 +802,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         if (RString.isNullOrEmpty(事由コード)) {
             return RString.EMPTY;
         }
-        UzT0007CodeEntity 資格取得事由 = CodeMaster.getCode(new CodeShubetsu("0007"), new Code(事由コード));
+        UzT0007CodeEntity 資格取得事由 = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0007"), new Code(事由コード));
         if (資格取得事由 == null) {
             return RString.EMPTY;
         }
@@ -813,7 +813,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         if (RString.isNullOrEmpty(事由コード)) {
             return RString.EMPTY;
         }
-        UzT0007CodeEntity 喪失事由 = CodeMaster.getCode(new CodeShubetsu("0010"), new Code(事由コード));
+        UzT0007CodeEntity 喪失事由 = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0010"), new Code(事由コード));
         if (喪失事由 == null) {
             return RString.EMPTY;
         }
@@ -824,7 +824,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         if (RString.isNullOrEmpty(医療保険種別コード)) {
             return RString.EMPTY;
         }
-        UzT0007CodeEntity 医療保険種別 = CodeMaster.getCode(new CodeShubetsu("0001"), new Code(医療保険種別コード));
+        UzT0007CodeEntity 医療保険種別 = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0001"), new Code(医療保険種別コード));
         if (医療保険種別 == null) {
             return RString.EMPTY;
         }

@@ -56,4 +56,18 @@
     FROM
     rgdb."DbT5304ShujiiIkenshoIkenItem"
 </select>
+
+<select id="selectBy申請書管理番号" resultMap="ResultMap_DbT5304ShujiiIkenshoIkenItemEntity" 
+        parameterType="RString" fetchSize="500">
+    SELECT
+        <include refid="allColumns_DbT5304ShujiiIkenshoIkenItem" />
+    FROM
+    rgdb."DbT5304ShujiiIkenshoIkenItem"
+    WHERE "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" = #{shinseishoKanriNo}
+    AND "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" = (SELECT 
+                                                                    MAX(ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo")
+                                                                FROM rgdb."DbT5304ShujiiIkenshoIkenItem" AS ShujiiIkenshoIkenItem
+                                                                WHERE ShujiiIkenshoIkenItem."shinseishoKanriNo" = #{shinseishoKanriNo})
+</select>
+
 </mapper>

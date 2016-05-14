@@ -35,7 +35,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
     @Override
     public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
         source.bunshoNo = item.get文書番号();
-        if (KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
+        if (item.get帳票情報() == null || KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
                 if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル.name()).equals(entity.getKomokuName())) {
                     source.title = entity.getKomokuValue();
@@ -53,7 +53,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
         source.hihokenshaNameKana = 編集後個人.get名称().getKana().getColumnValue();
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        source.hihokenshaNo = item.get帳票情報().get被保険者番号().getColumnValue();
+        source.hihokenshaNo = item.get帳票情報() == null ? RString.EMPTY : item.get帳票情報().get被保険者番号().getColumnValue();
         source.tsuchibun = item.get通知書定型文List().get(1);
         source.shikibetsuCode = item.getIKojin().get識別コード();
         return source;
