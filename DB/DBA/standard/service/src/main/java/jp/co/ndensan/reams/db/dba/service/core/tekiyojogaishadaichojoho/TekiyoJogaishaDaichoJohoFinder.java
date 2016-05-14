@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -68,9 +68,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TekiyoJogaishaDaichoJohoFinder {
 
     private static final int ページ目 = 1;
-    private static final int 住所_LENGTH_40 = 40;
-    private static final int 住所_LENGTH_80 = 80;
-    private static final int 住所_LENGTH_120 = 120;
     private static final int 導入形態コード_LENGTH_1 = 1;
     private static final int 導入形態コード_LENGTH_3 = 3;
     private static final RString 広域 = new RString("11");
@@ -83,7 +80,6 @@ public class TekiyoJogaishaDaichoJohoFinder {
     private static final RString 行政区 = new RString("行政区");
     private static final RString 転入前住所 = new RString("転入前住所");
     private static final RString 連絡先 = new RString("連絡先");
-    private final RString 帳票分類ID = new RString("DBA100010_TekiyojogaishaDaicho");
     private final MapperProvider mapperProvider;
 
     /**
@@ -105,7 +101,8 @@ public class TekiyoJogaishaDaichoJohoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
      */
     public static TekiyoJogaishaDaichoJohoFinder createInstance() {
         return InstanceProvider.create(TekiyoJogaishaDaichoJohoFinder.class);
@@ -250,7 +247,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
                 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100010.getReportId());
         適用除外者台帳情報Entity.set住所1(JushoHenshu.createInstance().editJusho(帳票共通情報, 宛名情報));
         適用除外者台帳情報Entity.set住所タイトル1(住所);
-        適用除外者台帳情報Entity.set住所コード(nullToEmpty(宛名情報PSM.getZenkokuJushoCode()));
+        適用除外者台帳情報Entity.set住所コード(JushoHenshu.createInstance().get住所コード(宛名情報PSM));
         適用除外者台帳情報Entity.set行政区タイトル(行政区);
         適用除外者台帳情報Entity.set行政区コード(nullToEmpty(宛名情報PSM.getGyoseikuCode()));
         適用除外者台帳情報Entity.set住所2(JushoHenshu.createInstance().editJusho2(

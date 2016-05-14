@@ -318,13 +318,13 @@ public class KyokaisoGaitoshaManager {
         for (DbT1006KyokaisoGaitoshaEntity gaitoshaEntity : gaitoshaEntityList) {
             gaitoshaEntity.initializeMd5();
             境界層該当者List.add(new KyokaisoGaitosha(gaitoshaEntity));
-            business.set境界層該当者List(境界層該当者List);
         }
         List<KyokaisoSochiShinsei> 境界層措置申請Lsit = new ArrayList<>();
         for (DbT1013KyokaisoSochiShinseiEntity shinseiEntity : shinseiEntityList) {
             shinseiEntity.initializeMd5();
             境界層措置申請Lsit.add(new KyokaisoSochiShinsei(shinseiEntity));
-            business.set境界層措置申請Lsit(境界層措置申請Lsit);
         }
+        business.set境界層該当者List(境界層該当者List);
+        business.set境界層措置申請Lsit(境界層措置申請Lsit);
     }
 }
