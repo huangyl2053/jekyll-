@@ -205,7 +205,7 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
 
     @Override
     public HihokenshaNo get被保番号() {
-        RString 被保番号RString = this.txtHihokenshaNo.getText();
+        RString 被保番号RString = this.getTxtHihokenshaNo().getValue();
         if (null == 被保番号RString || 被保番号RString.isEmpty()) {
             return HihokenshaNo.EMPTY;
         }
