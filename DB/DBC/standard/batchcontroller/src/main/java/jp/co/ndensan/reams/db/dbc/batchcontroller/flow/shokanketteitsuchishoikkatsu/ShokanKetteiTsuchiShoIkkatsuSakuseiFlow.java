@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikka
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoMeisaiTempUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoSealer2OutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoSealerOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoSealerTensoOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoTempInsertProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
@@ -43,7 +42,6 @@ public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<Shouk
     private static final String DBC100002 = "shiharaiYoteiBiYijiNashiOutputProcess";
     private static final String DBC100003 = "shoShiharaiYoteiBiYijiAriOutputProcess";
     private static final String DBC100004 = "shokanKetteiTsuchiShoSealerOutputProcess";
-    private static final String TENSO = "shokanKetteiTsuchiShoSealerTensoOutputProcess";
     private static final String DBC100005 = "shoHihokenshabunOutputProcess";
     private static final String DBC100006 = "shokanKetteiTsuchiShoSealer2OutputProcess";
     private static final String DBC200023 = "ketteiTsuchiIchiranOutputProcess";
@@ -82,7 +80,6 @@ public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<Shouk
         }
 
         if (用紙タイプ_シーラ.equals(用紙タイプ)) {
-            executeStep(TENSO);
             executeStep(DBC100004);
         }
 
@@ -140,13 +137,6 @@ public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<Shouk
     @Step(DBC100005)
     IBatchFlowCommand shoHihokenshabunOutputProcess() {
         return loopBatch(ShoHihokenshabunOutputProcess.class)
-                .arguments(ShokanKetteiTsuchiShoSealerBatchParameter.createProcessParam(getParameter()))
-                .define();
-    }
-
-    @Step(TENSO)
-    IBatchFlowCommand shokanKetteiTsuchiShoSealerTensoOutputProcess() {
-        return loopBatch(ShokanKetteiTsuchiShoSealerTensoOutputProcess.class)
                 .arguments(ShokanKetteiTsuchiShoSealerBatchParameter.createProcessParam(getParameter()))
                 .define();
     }

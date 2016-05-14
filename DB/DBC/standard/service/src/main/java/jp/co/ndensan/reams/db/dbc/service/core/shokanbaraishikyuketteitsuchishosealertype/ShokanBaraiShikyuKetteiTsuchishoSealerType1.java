@@ -468,7 +468,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setKakkoRight1(atesaki.kakkoRight1);
         ketteiTsuchiShoSealer.setSamabunShimeiSmall1(atesaki.samabunShimeiSmall1);
         ketteiTsuchiShoSealer.setCustomerBarCode(atesaki.customerBarCode);
-        ketteiTsuchiShoSealer.setShoHokenshaNo(business.get証記載保険者番号());
+        ketteiTsuchiShoSealer.setShoHokenshaNo(business.get証記載保険者番号().value());
         // TODO QA1101 サービス年月の設定不明
         ketteiTsuchiShoSealer.setServiceYM(business.get提供年月() == null ? RString.EMPTY : business.get提供年月().seireki().
                 separator(Separator.NONE).fillType(FillType.NONE).toDateString());

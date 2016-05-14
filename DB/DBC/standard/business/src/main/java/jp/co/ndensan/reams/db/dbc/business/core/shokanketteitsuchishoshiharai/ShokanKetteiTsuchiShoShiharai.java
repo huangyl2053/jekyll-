@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharaiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -181,7 +182,7 @@ public class ShokanKetteiTsuchiShoShiharai {
      *
      * @return 金額
      */
-    public Decimal get金額() {
+    public int get金額() {
         return entity.getKingaku();
     }
 
@@ -325,7 +326,7 @@ public class ShokanKetteiTsuchiShoShiharai {
      *
      * @return 証記載保険者番号
      */
-    public RString get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 

@@ -62,6 +62,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
     private static final int EIGHT = 8;
     private static final int NINE = 9;
     private static final int TEN = 10;
+    private static final int 文字数_38 = 38;
+    private static final int 文字数_76 = 76;
     private static final RString カンマ = new RString(",");
     private static final RString 記号_星 = new RString("**************");
     private static final RString 帳票制御汎用キー_持ち物内容文言１ = new RString("持ち物内容文言１");
@@ -125,21 +127,30 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
         RString key = RString.EMPTY;
         RString serviceCode = RString.EMPTY;
+        RString kyufuShu = RString.EMPTY;
         for (ShokanKetteiTsuchiShoShiharai shiharai : shiharaiList) {
             if (key.equals(getJufukuKey(shiharai))) {
                 if (serviceCode.equals(shiharai.getサービス種類コード())) {
                     continue;
                 } else {
-                    item.setKyufuShu1(set種類(item.getKyufuShu1(), shiharai.get種類()));
+                    kyufuShu = set種類(kyufuShu, shiharai.get種類());
                 }
             } else {
                 item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
-                item.setKyufuShu1(shiharai.get種類());
+                帳票ソースデータ.add(item);
+                kyufuShu = shiharai.get種類();
             }
             key = getJufukuKey(shiharai);
             serviceCode = shiharai.getサービス種類コード();
             item.setBunshoNo(文書番号);
-            帳票ソースデータ.add(create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, atesakiSource));
+            if (kyufuShu.length() <= 文字数_38) {
+                item.setKyufuShu1(kyufuShu);
+            } else if (kyufuShu.length() <= 文字数_76) {
+                item.setKyufuShu2(kyufuShu.substring(文字数_38));
+            } else {
+                item.setKyufuShu3(kyufuShu.substring(文字数_76));
+            }
+            item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, atesakiSource);
         }
         return 帳票ソースデータ;
     }
@@ -181,13 +192,14 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         item.setKetteiYMD(shiharai.get決定年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        item.setHonninShiharaiGaku(DecimalFormatter.toコンマ区切りRString(shiharai.get本人支払額(), ZERO));
+        item.setHonninShiharaiGaku(shiharai.get本人支払額() == null
+                ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shiharai.get本人支払額(), ZERO));
         item.setTaishoYM(shiharai.get提供年月().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         if (!RString.isNullOrEmpty(shiharai.get支給不支給決定区分())) {
             item.setKekka(ShikyuFushikyuKubun.toValue(shiharai.get支給不支給決定区分()).get名称());
         }
-        item.setShikyuGaku(DecimalFormatter.toコンマ区切りRString(shiharai.get支給額(), ZERO));
+        item.setShikyuGaku(shiharai.get支給額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shiharai.get支給額(), ZERO));
         // TODO 増減の理由
         item.setRiyu1(shiharai.get増減理由等());
         if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())) {

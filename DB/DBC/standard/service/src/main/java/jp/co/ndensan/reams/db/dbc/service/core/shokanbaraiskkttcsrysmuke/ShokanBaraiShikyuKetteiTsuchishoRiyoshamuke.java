@@ -195,9 +195,11 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item.setHihokenshaNo10(temp_被保険者番号.substring(NINE));
             item.setUketsukeYMD(shoShiharai.get受付年月日().wareki().toDateString());
             item.setKetteiYMD(shoShiharai.get決定年月日().wareki().toDateString());
-            item.setHonninShiharaiGaku(new RString(shoShiharai.get本人支払額().toString()));
+            item.setHonninShiharaiGaku(shoShiharai.get本人支払額() == null ? RString.EMPTY : new RString(shoShiharai.get本人支払額().toString()));
             item.setTaishoYM(shoShiharai.get提供年月().wareki().toDateString());
-            item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).getコード());
+            if (!RString.isNullOrEmpty(shoShiharai.get支払方法区分コード())) {
+                item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).get名称());
+            }
             item.setShikyuGaku(new RString(支給金額.toString()));
             if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharai.get支払方法区分コード())) {
                 item.setRiyuTitle(増減の理由タイトル_不支給);

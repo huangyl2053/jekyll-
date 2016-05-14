@@ -15,24 +15,24 @@
         <result property="keiyakuJigyoshaTelNo" column="keiyakuJigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
     </resultMap>
 
-    <select id="get受任者情報" resultMap="resultMap_JuninInfo" 
+    <select id="get受任者情報" resultMap="resultMap_JuninInfo"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraiskkttcsrysmuke.ShokanBaraiSkKtTcsRysmukeParameter" fetchSize="500">
         SELECT
-              A."hihokenshaNo"
-              , A."keiyakuJigyoshaNo"
-              , A."shikyushinseiServiceYM"
-              , A."shikyushinseiSeiriNo"
-              , B."keiyakuJigyoshaName"
-              , B."keiyakuDaihyoshaName"
-              , B."keiyakuJigyoshaYubinNo"
-              , B."keiyakuJigyoshaJusho"
-              , B."keiyakuJigyoshaTelNo" 
-        FROM  rgdb."DbT3078ShokanJuryoininKeiyakusha" AS A 
-        LEFT JOIN rgdb."DbT3077JuryoininKeiyakuJigyosha" AS B 
-             ON A."keiyakuJigyoshaNo" = B."keiyakuJigyoshaNo" 
-        WHERE　A."hihokenshaNo" = # {被保険者番号} 
-                AND A."shikyushinseiSeiriNo" = # {支給申請サービス提供年月} 
-                AND A."shikyushinseiServiceYM" = # {支給申請償還整理番号}
+        A."hihokenshaNo"
+        , A."keiyakuJigyoshaNo"
+        , A."shikyushinseiServiceYM"
+        , A."shikyushinseiSeiriNo"
+        , B."keiyakuJigyoshaName"
+        , B."keiyakuDaihyoshaName"
+        , B."keiyakuJigyoshaYubinNo"
+        , B."keiyakuJigyoshaJusho"
+        , B."keiyakuJigyoshaTelNo"
+        FROM  rgdb."DbT3078ShokanJuryoininKeiyakusha" AS A
+        LEFT JOIN rgdb."DbT3077JuryoininKeiyakuJigyosha" AS B
+        ON A."keiyakuJigyoshaNo" = B."keiyakuJigyoshaNo"
+        WHERE A."hihokenshaNo" = #{被保険者番号}
+        AND A."shikyushinseiSeiriNo" = #{支給申請サービス提供年月}
+        AND A."shikyushinseiServiceYM" = #{支給申請償還整理番号}
     </select>
 
 </mapper>
