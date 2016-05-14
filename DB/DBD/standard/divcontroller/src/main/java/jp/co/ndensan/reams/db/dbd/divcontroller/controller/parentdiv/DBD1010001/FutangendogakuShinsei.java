@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FutangendogakuShinsei {
 
-    private static final RString 配偶者の有無_無 = new RString("key1");
+    private static final RString KEY1 = new RString("key1");
     private static final RString 申請メニューID = new RString("DBDMN21001");
     private static final RString 承認メニューID = new RString("DBDMN22001");
     private final RString 文字列_申請情報を表示する = new RString("申請情報を表示する");
@@ -137,20 +137,17 @@ public class FutangendogakuShinsei {
      */
     public ResponseData<FutangendogakuShinseiDiv> onSelectByDeleteButton(FutangendogakuShinseiDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ViewStateHolder.put(ViewStateKeys.isReRequest, Boolean.FALSE);
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
-        if (!getHandler(div).onSelectByDeleteButton()) {
+        if (!ViewStateHolder.get(ViewStateKeys.isReRequest, Boolean.class) && !getHandler(div).onSelectByDeleteButton()) {
+            ViewStateHolder.put(ViewStateKeys.isReRequest, Boolean.TRUE);
             return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
         }
-        if (new RString(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())) {
-            return ResponseData.of(div).respond();
-        }
-
         return ResponseData.of(div).respond();
     }
 
@@ -221,13 +218,15 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        NinteiShinseiValidationHandler validationHandler = getValidationHandler();
-        pairs = validationHandler.負担限度額認定_適用開始日が法施行以前チェック(pairs, div);
-        pairs = validationHandler.負担限度額認定_適用終了日が年度外チェック(pairs, div);
-        pairs = validationHandler.負担限度額認定_適用終了日が開始日以前チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!KEY1.equals(div.getRadKetteiKubun().getSelectedKey())) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            NinteiShinseiValidationHandler validationHandler = getValidationHandler();
+            pairs = validationHandler.負担限度額認定_適用開始日が法施行以前チェック(pairs, div);
+            pairs = validationHandler.負担限度額認定_適用終了日が年度外チェック(pairs, div);
+            pairs = validationHandler.負担限度額認定_適用終了日が開始日以前チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
         }
         getHandler(div).onClick_btnShinseiKakutei();
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
@@ -334,7 +333,7 @@ public class FutangendogakuShinsei {
         div.getTxtHaigushaRenrakusaki().clearDomain();
         div.getTxtHaigushaJusho1().clearDomain();
         div.getTxtHaigushaJusho2().clearDomain();
-        div.getRadHaigushaUmu().setSelectedKey(配偶者の有無_無);
+        div.getRadHaigushaUmu().setSelectedKey(KEY1);
         return ResponseData.of(div).respond();
     }
 
