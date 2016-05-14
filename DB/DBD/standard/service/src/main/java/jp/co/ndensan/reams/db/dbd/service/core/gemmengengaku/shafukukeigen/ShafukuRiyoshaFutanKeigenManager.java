@@ -156,8 +156,9 @@ public class ShafukuRiyoshaFutanKeigenManager {
             }
         }
         if (!削除減免減額申請リスト.isEmpty()) {
-            delete減免減額申請リスト(削除減免減額申請リスト);
+            減免減額申請リスト.removeAll(削除減免減額申請リスト);
         }
+        delete減免減額申請リスト(減免減額申請リスト);
         return 1 == 社会福祉法人等利用者負担軽減Dac.delete(社会福祉法人等利用者負担軽減.toEntity());
     }
 
