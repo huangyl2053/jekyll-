@@ -87,6 +87,7 @@ public class FutangendogakuNinteiShinseiHandler {
     private static final RString 追加状態 = new RString("Added");
     private static final RString 修正状態 = new RString("Modified");
     private static final int INT_4 = 4;
+    private static final RString 認定なし = new RString("認定なし");
 
     /**
      * コンストラクタです。
@@ -149,8 +150,9 @@ public class FutangendogakuNinteiShinseiHandler {
         ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, 申請一覧情報ArrayList);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new負担限度額認定申請の情報);
         set申請一覧(new負担限度額認定申請の情報);
-        RiyoshaFutanDankai 利用者負担段階 = FutangendogakuNinteiService.createInstance().judge利用者負担段階(被保険者番号, 識別コード);
-        div.getTxtRiyoshaFutanDankai().setValue(利用者負担段階.get名称());
+
+        get利用者負担段階(申請一覧情報ArrayList);
+
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         AccessLogger.log(AccessLogType.照会,
                 PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"), 拡張情報NAME, 被保険者番号.value())));
@@ -1044,5 +1046,24 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getDdlJuraiGataKoshitsuRoken().setIsBlankLine(true);
         div.getDdlTashoshitsu().setIsBlankLine(true);
         div.getTxtHiShoninRiyu().clearValue();
+    }
+
+    private void get利用者負担段階(ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList) {
+        FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
+        RString 利用者負担段階 = RString.EMPTY;
+        for (FutanGendogakuNintei 負担限度情報 : 申請一覧情報ArrayList) {
+            if (KetteiKubun.承認する.getコード().equals(負担限度情報.get決定区分())
+                    && 負担限度情報.get適用開始年月日().isBeforeOrEquals(システム日付)
+                    && システム日付.isBeforeOrEquals(負担限度情報.get適用終了年月日())) {
+                利用者負担段階 = 負担限度情報.get利用者負担段階();
+                break;
+            }
+        }
+
+        if (!利用者負担段階.isEmpty()) {
+            div.getTxtRiyoshaFutanDankai().setValue(RiyoshaFutanDankai.toValue(利用者負担段階).get名称());
+        } else {
+            div.getTxtRiyoshaFutanDankai().setValue(認定なし);
+        }
     }
 }
