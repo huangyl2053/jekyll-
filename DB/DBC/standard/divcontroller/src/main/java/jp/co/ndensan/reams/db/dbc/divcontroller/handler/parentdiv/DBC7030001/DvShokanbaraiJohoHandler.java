@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -210,6 +211,7 @@ public class DvShokanbaraiJohoHandler {
         parameter.set金融機関コード(金融機関コード);
         parameter.set金融機関名称(金融機関名称);
         parameter.set項目名付加(項目名付加);
+        parameter.setReamsLoginId(ControlDataHolder.getUserId());
         return parameter;
     }
 
