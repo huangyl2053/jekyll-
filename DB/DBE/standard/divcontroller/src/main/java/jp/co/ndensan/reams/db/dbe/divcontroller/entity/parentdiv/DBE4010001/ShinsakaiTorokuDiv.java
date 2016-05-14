@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -28,6 +30,8 @@ public class ShinsakaiTorokuDiv extends Panel {
     private shinsakaitorokuichiranDiv shinsakaitorokuichiran;
     @JsonProperty("shinsakaitorokukanryoselect")
     private shinsakaitorokukanryoselectDiv shinsakaitorokukanryoselect;
+    @JsonProperty("KanryoMsg")
+    private KanryoMsgDiv KanryoMsg;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,6 +76,24 @@ public class ShinsakaiTorokuDiv extends Panel {
     }
 
     /*
+     * getKanryoMsg
+     * @return KanryoMsg
+     */
+    @JsonProperty("KanryoMsg")
+    public KanryoMsgDiv getKanryoMsg() {
+        return KanryoMsg;
+    }
+
+    /*
+     * setKanryoMsg
+     * @param KanryoMsg KanryoMsg
+     */
+    @JsonProperty("KanryoMsg")
+    public void setKanryoMsg(KanryoMsgDiv KanryoMsg) {
+        this.KanryoMsg = KanryoMsg;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -97,6 +119,11 @@ public class ShinsakaiTorokuDiv extends Panel {
     @JsonIgnore
     public void  setHiddenbtnshinsakekkakanryooutput(ButtonDownLoad hiddenbtnshinsakekkakanryooutput) {
         this.getShinsakaitorokukanryoselect().setHiddenbtnshinsakekkakanryooutput(hiddenbtnshinsakekkakanryooutput);
+    }
+
+    @JsonIgnore
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return this.getKanryoMsg().getCcdKanryoMsg();
     }
 
     // </editor-fold>
