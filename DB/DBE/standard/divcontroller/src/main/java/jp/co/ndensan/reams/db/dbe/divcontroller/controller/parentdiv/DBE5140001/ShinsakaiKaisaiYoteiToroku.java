@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -76,6 +78,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
+    private static final LockingKey LOCKINGKEY = new LockingKey(new RString("ShinsakaiNo"));
     private static final RString MARU = new RString("○○");
     private static final RString 審査会名称 = new RString("第○○回審査会");
     private static final RString 汎用キー = new RString("審査会開催番号");
@@ -478,6 +481,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             //TODO 前排他制御
+            RealInitialLocker.lock(LOCKINGKEY);
             set番号();
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
                     = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
@@ -510,6 +514,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                     yoteiTorokuManager.insertOrUpdate(builder.build());
                 }
             }
+            RealInitialLocker.release(LOCKINGKEY);
             init();
         }
         return ResponseData.of(div).respond();
