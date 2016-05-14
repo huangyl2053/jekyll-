@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgShinseiList_Row;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei.FutangendogakuNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
@@ -428,17 +427,15 @@ public class FutangendogakuNinteiShinseiHandler {
         GemmenGengakuShinsei gemmenGengakuShinsei;
         if (!futanGendogakuNintei.getGemmenGengakuShinseiList().isEmpty()) {
             gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
-        } else {
-            gemmenGengakuShinsei = new GemmenGengakuShinsei(new DbT4010GemmenGengakuShinseiEntity());
+            ShinseiJoho shinseiJoho = new ShinseiJoho(
+                    gemmenGengakuShinsei.get申請届出代行区分() == null
+                    ? null : ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
+                    gemmenGengakuShinsei.get申請届出者氏名(), gemmenGengakuShinsei.get申請届出者氏名カナ(), gemmenGengakuShinsei.get申請届出者続柄(),
+                    gemmenGengakuShinsei.get申請届出代行事業者番号(),
+                    gemmenGengakuShinsei.get事業者区分() == null ? null : JigyoshaKubun.toValue(gemmenGengakuShinsei.get事業者区分()),
+                    gemmenGengakuShinsei.get申請届出者郵便番号(), gemmenGengakuShinsei.get申請届出者住所(), gemmenGengakuShinsei.get申請届出者電話番号());
+            div.getCcdGemmenGengakuShinsei().set減免減額申請情報(shinseiJoho, futanGendogakuNintei.get申請年月日());
         }
-        ShinseiJoho shinseiJoho = new ShinseiJoho(
-                gemmenGengakuShinsei.get申請届出代行区分() == null
-                ? null : ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
-                gemmenGengakuShinsei.get申請届出者氏名(), gemmenGengakuShinsei.get申請届出者氏名カナ(), gemmenGengakuShinsei.get申請届出者続柄(),
-                gemmenGengakuShinsei.get申請届出代行事業者番号(),
-                gemmenGengakuShinsei.get事業者区分() == null ? null : JigyoshaKubun.toValue(gemmenGengakuShinsei.get事業者区分()),
-                gemmenGengakuShinsei.get申請届出者郵便番号(), gemmenGengakuShinsei.get申請届出者住所(), gemmenGengakuShinsei.get申請届出者電話番号());
-        div.getCcdGemmenGengakuShinsei().set減免減額申請情報(shinseiJoho, futanGendogakuNintei.get申請年月日());
         div.getRadHaigushaUmu().setSelectedKey(futanGendogakuNintei.is配偶者の有無() ? SELECT_KEY0 : SELECT_KEY1);
         if (futanGendogakuNintei.is配偶者の有無()) {
             div.getTxtHaigushaShikibetsuCode().setDomain(futanGendogakuNintei.get配偶者識別コード());

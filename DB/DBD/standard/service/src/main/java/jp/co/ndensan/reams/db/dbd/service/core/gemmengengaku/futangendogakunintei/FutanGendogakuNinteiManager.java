@@ -192,7 +192,9 @@ public class FutanGendogakuNinteiManager {
         IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
 
         FutanGendogakuNinteiEntity relateEntity = mapper.get負担限度額認定帳票用リスト(負担限度額認定検索条件);
-
+        if (relateEntity == null) {
+            return null;
+        }
         return new FutanGendogakuNintei(relateEntity);
     }
 }
