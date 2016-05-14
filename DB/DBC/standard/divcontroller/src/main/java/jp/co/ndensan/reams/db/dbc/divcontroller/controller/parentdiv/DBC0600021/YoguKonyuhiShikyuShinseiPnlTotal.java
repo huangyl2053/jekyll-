@@ -58,7 +58,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -504,7 +503,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnSave(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         JigyoshaNo 事業者番号 = null;
-        RString 整理番号 = null;
+        RString 整理番号;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().getValue().getYearMonth().toString());
@@ -821,7 +820,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onClick_btnCheckGendogaku(
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         JigyoshaNo 事業者番号 = null;
-        RString 整理番号 = null;
+        RString 整理番号;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -842,26 +841,12 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                 明細番号,
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenTaishoHiyogakuGokei()
                 .getValue());
-        Decimal 前回までの保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
-                .getTxtZenkaiHokenkyufugakuGokei().getValue();
-        前回までの保険給付額 = 前回までの保険給付額 == null ? Decimal.ZERO : 前回までの保険給付額;
-        Decimal 今回の保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
-                .getTxtKonkaiHokenkyufugakuGokei().getValue();
-        今回の保険給付額 = 今回の保険給付額 == null ? Decimal.ZERO : 今回の保険給付額;
-        Decimal 限度額 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShikyuGendogaku(
-                被保険者番号, サービス提供年月);
-        限度額 = 限度額 == null ? Decimal.ZERO : 限度額;
-        boolean flag2 = true;
-        if (前回までの保険給付額.add(今回の保険給付額).compareTo(限度額) > 0) {
-            flag2 = false;
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (!flag && !ResponseHolder.isWarningIgnoredRequest()) {
+            validPairs = getHandler(div).限度額チェック();
         }
-        if (!flag || !flag2) {
-            // TODO  DBC.WarningMessage.DBCW00001
-            if (!ResponseHolder.isReRequest()) {
-                WarningMessage message = new WarningMessage("DBCW00001", "DBC.WarningMessage.DBCW00001");
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            return ResponseData.of(div).respond();
+        if (validPairs != null && validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         List<ShokanFukushiYoguHanbaihi> list = getHandler(div).getGridData(被保険者番号, サービス提供年月, 整理番号,
                 事業者番号, 様式番号);

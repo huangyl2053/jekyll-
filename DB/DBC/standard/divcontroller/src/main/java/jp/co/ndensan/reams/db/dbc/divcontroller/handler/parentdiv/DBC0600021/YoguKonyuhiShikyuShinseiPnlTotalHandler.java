@@ -20,11 +20,13 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.F
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.YoguKonyuhiShikyuShinseiPnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600021.dgSeikyuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600021.YoguKonyuhiShikyuShinseiPnlTotalParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -47,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -58,11 +59,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -1053,23 +1052,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrWarningMessages.重複, 品目コード.toString())));
             }
-        }
-        //TODO限度額チェック
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        Decimal 前回までの保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
-                .getTxtZenkaiHokenTaishoHiyogakuGokei().getValue();
-        前回までの保険給付額 = 前回までの保険給付額 == null ? Decimal.ZERO : 前回までの保険給付額;
-        Decimal 今回の保険給付額 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary()
-                .getTxtKonkaiHokenTaishoHiyogakuGokei().getValue();
-        今回の保険給付額 = 今回の保険給付額 == null ? Decimal.ZERO : 今回の保険給付額;
-        Decimal 限度額 = FukushiyoguKonyuhiShikyuShinsei.createInstance().getShikyuGendogaku(
-                被保険者番号, サービス提供年月);
-        限度額 = 限度額 == null ? Decimal.ZERO : 限度額;
-        if (前回までの保険給付額.add(今回の保険給付額).compareTo(限度額) > 0 && !ResponseHolder.isReRequest()) {
-            // TODO
-            WarningMessage message = new WarningMessage("DBCW00001", "DBC.WarningMessage.DBCW00001");
-            throw new ApplicationException(message);
+            if (!check限度額()) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        DbcWarningMessages.福祉用具限度額確認)));
+            }
         }
         if (null != div.getYoguKonyuhiShikyuShinseiContentsPanel().
                 getTxtTeikyoYM().getValue() && div.getYoguKonyuhiShikyuShinseiContentsPanel().
@@ -1085,11 +1071,18 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
     }
 
     /**
-     * 品目コード重複チェック（年度単位）
+     * 限度額チェック
      *
-     * @return flag
+     * @return validPairs
      */
-    public boolean check領収年月日() {
+    public ValidationMessageControlPairs 限度額チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                DbcWarningMessages.福祉用具限度額確認)));
+        return validPairs;
+    }
+
+    private boolean check領収年月日() {
         boolean flag = true;
         List<dgSeikyuDetail_Row> dgrow = div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getDataSource();
         RDate ryosyuYMD = div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShinsesyaJoho().
@@ -1104,6 +1097,32 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 break;
             }
         }
+        return flag;
+    }
+
+    private boolean check限度額() {
+        JigyoshaNo 事業者番号 = null;
+        RString 整理番号;
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        } else {
+            整理番号 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().getValue();
+        }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue() != null) {
+            事業者番号 = new JigyoshaNo(div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().getValue());
+        }
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 明細番号 = null;
+        boolean flag = FukushiyoguKonyuhiShikyuGendogaku.createInstance().chkKonyuhiShikyuGendogaku(被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                明細番号,
+                div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtKonkaiHokenTaishoHiyogakuGokei()
+                .getValue());
         return flag;
     }
 
