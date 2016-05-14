@@ -20,6 +20,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgSh
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -178,6 +182,25 @@ public class ShinsakaiIinWaritsukeHandler {
         row.setGogitaichoKubun(shinsakaiIinKoseiIchiranRow.getGogitaichoKubun());
         row.setShukketsuKubun(shinsakaiIinKoseiIchiranRow.getShukketsuKubun());
         div.getDgShinsakaiIinIchiran().getDataSource().add(row);
+    }
+
+    /**
+     * 排他制御を行います。
+     */
+    public void 前排他制御処理() {
+        LockingKey lockingKey = new LockingKey(new RString("ShinsakaiNo"));
+        if (!RealInitialLocker.tryGetLock(lockingKey)) {
+            div.setReadOnly(true);
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+        }
+    }
+
+    /**
+     * 排他制御の解除を行います。
+     */
+    public void 前排他解除処理() {
+        LockingKey lockingKey = new LockingKey(new RString("ShinsakaiNo"));
+        RealInitialLocker.release(lockingKey);
     }
 
     private void set一覧DataGrid(List<dgShinsakaiIinIchiran_Row> ichiranGridList, ShinsakaiiinJoho business) {

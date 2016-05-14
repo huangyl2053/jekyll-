@@ -63,10 +63,6 @@ public class ShinsakaiToroku {
      */
     public ResponseData<ShinsakaiTorokuDiv> onLoad(ShinsakaiTorokuDiv div) {
         getHandler(div).onLoad();
-        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-        if (存在チェック結果.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
-        }
         return ResponseData.of(div).respond();
     }
 

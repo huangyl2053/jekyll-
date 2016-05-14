@@ -146,8 +146,8 @@ public class ShinsakaiIinWaritsuke {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        // TODO 内部QA:495 Redmine: #74658 (前排他制御の実施がわからない、実装なし。)
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).前排他制御処理();
             Models<ShinsakaiWariateIinJohoIdentifier, ShinsakaiWariateIinJoho> models
                     = ViewStateHolder.get(ViewStateKeys.介護認定審査会割当委員情報_一覧, Models.class);
             for (ShinsakaiWariateIinJoho iinJoho : models) {
@@ -170,6 +170,7 @@ public class ShinsakaiIinWaritsuke {
                 builder.build().isAdded();
                 iinJohomanager.save(builder.build().toEntity());
             }
+            getHandler(div).前排他解除処理();
         }
         return ResponseData.of(div).respond();
     }
