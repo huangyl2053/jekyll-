@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKo
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -208,7 +209,7 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .get金融機関() == null ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
                 .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
-        batchparam.setReamsLogInId(ControlDataHolder.getUserId());
+        batchparam.setReamsLoginId(ControlDataHolder.getUserId());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
         return batchparam;

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgShinseiList_Row;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei.FutangendogakuNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
@@ -422,7 +423,12 @@ public class FutangendogakuNinteiShinseiHandler {
         init申請理由DDL();
         div.getDdlShinseiRiyu().setSelectedKey(futanGendogakuNintei.get申請理由区分());
         div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState());
-        GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
+        GemmenGengakuShinsei gemmenGengakuShinsei;
+        if (!futanGendogakuNintei.getGemmenGengakuShinseiList().isEmpty()) {
+            gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
+        } else {
+            gemmenGengakuShinsei = new GemmenGengakuShinsei(new DbT4010GemmenGengakuShinseiEntity());
+        }
         ShinseiJoho shinseiJoho = new ShinseiJoho(
                 gemmenGengakuShinsei.get申請届出代行区分() == null
                 ? null : ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),

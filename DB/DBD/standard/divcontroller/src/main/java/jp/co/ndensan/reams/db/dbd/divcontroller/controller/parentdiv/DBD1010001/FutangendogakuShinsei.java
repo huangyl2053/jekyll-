@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1010001;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.DBD1010001StateName;
@@ -237,9 +240,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnReSearch(FutangendogakuShinseiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, null);
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, null);
-
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<FutanGendogakuNintei>());
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, new ArrayList<FutanGendogakuNinteiViewState>());
         RealInitialLocker.release(new LockingKey(div.getLockKey()));
         return ResponseData.of(div).forwardWithEventName(DBD1010001TransitionEventName.検索処理へ).respond();
     }
@@ -251,8 +253,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnToSearchResult(FutangendogakuShinseiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, null);
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<FutanGendogakuNintei>());
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, new ArrayList<FutanGendogakuNinteiViewState>());
         getHandler(div).onClick_btnToSearchResult();
         RealInitialLocker.release(new LockingKey(div.getLockKey()));
         return ResponseData.of(div).forwardWithEventName(DBD1010001TransitionEventName.検索結果一覧へ).respond();
