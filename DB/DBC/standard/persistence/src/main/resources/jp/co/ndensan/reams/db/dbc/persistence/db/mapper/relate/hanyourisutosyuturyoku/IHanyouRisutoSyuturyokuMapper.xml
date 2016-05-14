@@ -10,8 +10,12 @@
         <include refid="selectHanyouRisutoSyuturyokuEntity" />
     </select>
     <sql id="selectHanyouRisutoSyuturyokuEntity">
-    SELECT ROW_NUMBER() over(order by A."被保険者番号")as row ,* from(
-       SELECT
+      SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM  
+      ( SELECT
+        1 as 区分,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" as 被保険者番号key,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM" as サービス提供年月key,
+        DbT3055."dbT3055KogakuKyufuTaishoshaGokei_rirekiNo" as 履歴番号key,
         DbV1001."hihokenshaNo" as 被保険者番号,
         DbV1001."shichosonCode" as 市町村コード,
         DbV1001."shikakuShutokuJiyuCode" as 資格取得事由コード,
@@ -332,6 +336,10 @@
         </if>
   UNION ALL
         SELECT
+        2 as 区分,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo" as 被保険者番号key,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_serviceTeikyoYM" as サービス提供年月key,
+        DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_rirekiNo" as 履歴番号key,
         DbV1001."hihokenshaNo" as 被保険者番号,
         DbV1001."shichosonCode" as 市町村コード,
         DbV1001."shikakuShutokuJiyuCode" as 資格取得事由コード,
@@ -648,8 +656,7 @@
         </if>
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
-        </if>
-     ) as A
+        </if>) as A
     </sql>
         
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"
