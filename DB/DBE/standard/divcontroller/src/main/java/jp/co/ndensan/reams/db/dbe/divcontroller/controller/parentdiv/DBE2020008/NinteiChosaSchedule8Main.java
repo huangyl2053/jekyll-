@@ -20,11 +20,15 @@ import jp.co.ndensan.reams.db.dbe.service.core.chosachikugroup.ChosaChikuGroupFi
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.chosachikugroup.ChosaChikuGroupManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputHandler;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -36,8 +40,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 認定調査スケジュール登録8のコントローラです。
- * 
- * @reamsid_L DBE-0024-010  suguangjun 
+ *
+ * @reamsid_L DBE-0024-010 suguangjun
  */
 public class NinteiChosaSchedule8Main {
 
@@ -210,7 +214,7 @@ public class NinteiChosaSchedule8Main {
         }
         return ResponseData.of(div).respond();
     }
-   
+
     /**
      * 調査地区検索ボタンを押下します。
      *
@@ -290,13 +294,13 @@ public class NinteiChosaSchedule8Main {
         return ResponseData.of(div).respond();
     }
 
-     private RString nullToEmpty(RString obj) {
+    private RString nullToEmpty(RString obj) {
         if (obj == null) {
             return RString.EMPTY;
         }
         return obj;
     }
-     
+
     /**
      * 取消するボタンが押下された場合、入力明細エリアの入力内容を破棄し、調査地区グループ調査地区一覧エリアへ戻ります。
      *
@@ -305,8 +309,7 @@ public class NinteiChosaSchedule8Main {
      */
     public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnTorikeshi(NinteiChosaSchedule8MainDiv div) {
         if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
-                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
-                ) {
+                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -322,7 +325,7 @@ public class NinteiChosaSchedule8Main {
                 return ResponseData.of(div).respond();
             }
         }
-         return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
+        return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
     }
 
     /**
@@ -412,6 +415,10 @@ public class NinteiChosaSchedule8Main {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (!RealInitialLocker.tryGetLock(new LockingKey("ChosaChikuCode"))) {
+                div.setReadOnly(true);
+                throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            }
             validPairs = validateForDelete(div);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -423,6 +430,8 @@ public class NinteiChosaSchedule8Main {
                 chosaChikuGroupManager.saveOrDelete調査地区グループマスタ(chosaChikuGroup);
             }
             div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            LockingKey 排他キー = new LockingKey(new RString("ChosaChikuCode"));
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).setState(DBE2020008StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -461,8 +470,7 @@ public class NinteiChosaSchedule8Main {
     public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnChosaChikuGroupIchiran(NinteiChosaSchedule8MainDiv div) {
         if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
-                || (状態_削除.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
-                ) {
+                || (状態_削除.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
@@ -490,8 +498,7 @@ public class NinteiChosaSchedule8Main {
      */
     public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnBackChosaChikuGroupChosaChikuIchiran(NinteiChosaSchedule8MainDiv div) {
         if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
-                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
-                ) {
+                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
@@ -510,7 +517,7 @@ public class NinteiChosaSchedule8Main {
         }
         return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
     }
-    
+
     private NinteiChosaSchedule8MainHandler getHandler(NinteiChosaSchedule8MainDiv div) {
         return new NinteiChosaSchedule8MainHandler(div);
     }

@@ -6,13 +6,12 @@
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei;
 
 import java.util.List;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 分割した証交付回収のエンティティクラスです。
  *
- * @reamsid_L DBA-0500-010  suguangjun 
+ * @reamsid_L DBA-0500-010 suguangjun
  */
 @lombok.Getter
 @lombok.Setter
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShoKofuKaishuDivisionEntity {
 
     private List<RString> 証履歴No;
-    private List<FlexibleDate> 証履歴発行日;
+    private List<RString> 証履歴発行日;
     private List<RString> 証履歴事由名称;
-    private List<FlexibleDate> 証履歴回収日;
+    private List<RString> 証履歴回収日;
 }
