@@ -78,8 +78,7 @@ public class ShinsakaiTorokuValidationHandler {
             if (データ.getShinsakaiwaritukeDay().getValue() == null) {
                 continue;
             }
-// TODO QA回答まち
-//validPairs.add(new ValidationMessageControlPair(RRVMessages.割付可能チェック));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.割付可能チェック));
         }
         return validPairs;
     }
@@ -143,8 +142,7 @@ public class ShinsakaiTorokuValidationHandler {
         存在チェック(UrErrorMessages.該当データなし),
         対象行を選択チェック(UrErrorMessages.対象行を選択),
         一覧を選択チェック(DbeErrorMessages.複数選択不可, "審査会登録一覧"),
-        // TODO QA回答まち
-        //        割付可能チェック(DbeErrorMessages),
+        割付可能チェック(DbeErrorMessages.審査会割付不可),
         完了処理事前チェック(DbzErrorMessages.理由付き完了不可, "審査会未割付"),
         完了済みデータチェック(DbzErrorMessages.理由付き完了不可, "完了済みデータ"),
         マスキング完了チェック(DbzErrorMessages.理由付き完了不可, "マスキング未完了");

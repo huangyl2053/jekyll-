@@ -80,13 +80,23 @@ public class ShinsakaiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDownLoad getBtnshinsakekkakanryooutput() {
+    public Button getBtnshinsakekkakanryooutput() {
         return this.getShinsakaitorokukanryoselect().getBtnshinsakekkakanryooutput();
     }
 
     @JsonIgnore
-    public void  setBtnshinsakekkakanryooutput(ButtonDownLoad btnshinsakekkakanryooutput) {
+    public void  setBtnshinsakekkakanryooutput(Button btnshinsakekkakanryooutput) {
         this.getShinsakaitorokukanryoselect().setBtnshinsakekkakanryooutput(btnshinsakekkakanryooutput);
+    }
+
+    @JsonIgnore
+    public ButtonDownLoad getHiddenbtnshinsakekkakanryooutput() {
+        return this.getShinsakaitorokukanryoselect().getHiddenbtnshinsakekkakanryooutput();
+    }
+
+    @JsonIgnore
+    public void  setHiddenbtnshinsakekkakanryooutput(ButtonDownLoad hiddenbtnshinsakekkakanryooutput) {
+        this.getShinsakaitorokukanryoselect().setHiddenbtnshinsakekkakanryooutput(hiddenbtnshinsakekkakanryooutput);
     }
 
     // </editor-fold>
