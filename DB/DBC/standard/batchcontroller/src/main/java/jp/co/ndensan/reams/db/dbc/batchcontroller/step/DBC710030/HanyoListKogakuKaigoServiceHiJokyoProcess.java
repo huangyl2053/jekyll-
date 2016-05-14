@@ -142,7 +142,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         IKozaSearchKey searchKey = builder.build();
         parameter.setSearchkey(searchKey);
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
+        List<KamokuCode> list = sut.get更新権限科目コード(parameter.getReamsLoginId());
         parameter.setList(list);
         parameter.setKamokuCodelist(list);
         parameter.set国保連IFなし区分(国保連IFなし区分);

@@ -61,6 +61,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
     private IKozaSearchKey searchkey;
     private List<KamokuCode> list;
     private List<KamokuCode> kamokuCodelist;
+    private RString reamsLoginId;
 
     private static final int 基準額_ONE = 15000;
     private static final int 基準額_TWO = 26400;
@@ -135,7 +136,8 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
             boolean hizukeHeshu,
             IKozaSearchKey searchkey,
             List<KamokuCode> list,
-            List<KamokuCode> kamokuCodelist) {
+            List<KamokuCode> kamokuCodelist,
+            RString reamsLoginId) {
 
         this.kouseiShichosonCode = kouseiShichosonCode;
         this.serviceYmFrom = serviceYmFrom;
@@ -169,6 +171,7 @@ public class HanyoListKogakuKaigoProcessParameter implements IBatchProcessParame
         this.searchkey = searchkey;
         this.list = list;
         this.kamokuCodelist = kamokuCodelist;
+        this.reamsLoginId = reamsLoginId;
     }
 
     /**
