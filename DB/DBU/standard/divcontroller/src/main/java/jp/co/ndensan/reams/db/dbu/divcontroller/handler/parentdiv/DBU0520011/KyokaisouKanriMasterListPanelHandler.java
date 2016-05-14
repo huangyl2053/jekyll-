@@ -73,6 +73,8 @@ public class KyokaisouKanriMasterListPanelHandler {
         div.getKyokaisoKariParam().getTxtKijumbi().setDisabled(false);
         div.getKyokaisoKariParam().getRadHaniRadio().setDisabled(true);
         div.getKyokaisoKariParam().getTxtHaniChushutsu().setDisabled(true);
+        div.getKyokaisoKariParam().getTxtHaniChushutsu().clearFromValue();
+        div.getKyokaisoKariParam().getTxtHaniChushutsu().clearToValue();
     }
 
     /**
@@ -80,6 +82,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      */
     public void setHaniState() {
         div.getKyokaisoKariParam().getTxtKijumbi().setDisabled(true);
+        div.getKyokaisoKariParam().getTxtKijumbi().clearValue();
         div.getKyokaisoKariParam().getRadHaniRadio().setDisabled(false);
         div.getKyokaisoKariParam().getTxtHaniChushutsu().setDisabled(false);
     }
@@ -91,6 +94,9 @@ public class KyokaisouKanriMasterListPanelHandler {
         div.getKyokaisoKariParam().getTxtKijumbi().setDisabled(true);
         div.getKyokaisoKariParam().getRadHaniRadio().setDisabled(true);
         div.getKyokaisoKariParam().getTxtHaniChushutsu().setDisabled(true);
+        div.getKyokaisoKariParam().getTxtHaniChushutsu().clearFromValue();
+        div.getKyokaisoKariParam().getTxtHaniChushutsu().clearToValue();
+        div.getKyokaisoKariParam().getTxtKijumbi().clearValue();
     }
 
     /**
