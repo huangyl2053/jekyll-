@@ -76,15 +76,15 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     private static final RString HAKKOBI = new RString("【発行日】");
     private static final RString TEISHUTSUKIGEN = new RString("【提出期限】");
     private static final RString KYOTSUHIZUKE = new RString("【共通日付】");
-    private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼書出力区分】");
-    private static final RString NINTEICHOSAIRAISYO = new RString("【認定調査票(基本調査)出力区分】");
-    private static final RString NINTEICHOSAHYOKIHON = new RString("【認定調査票(特記事項)出力区分】");
-    private static final RString NINTEICHOSAHYOTOKKI = new RString("【認定調査票(概況調査)出力区分】");
-    private static final RString NINTEICHOSAHYOGAIKYOU = new RString("【認定調査票OCR(基本調査)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRKIHON = new RString("【認定調査票OCR(特記事項)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRTOKKI = new RString("【認定調査票OCR(概況調査)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査差異チェック表出力区分】");
-    private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査依頼一覧表出力区分】");
+    private static final RString NINTEICHOSAIRAISYO = new RString("【認定調査依頼書出力区分】");
+    private static final RString NINTEICHOSAHYOKIHON = new RString("【認定調査票(基本調査)出力区分】");
+    private static final RString NINTEICHOSAHYOTOKKI = new RString("【認定調査票(特記事項)出力区分】");
+    private static final RString NINTEICHOSAHYOGAIKYOU = new RString("【認定調査票(概況調査)出力区分】");
+    private static final RString NINTEICHOSAHYOOCRKIHON = new RString("【認定調査票OCR(基本調査)出力区分】");
+    private static final RString NINTEICHOSAHYOOCRTOKKI = new RString("【認定調査票OCR(特記事項)出力区分】");
+    private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査票OCR(概況調査)出力区分】");
+    private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査差異チェック表出力区分】");
+    private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
     private RString 郵便番号;
     private RString 住所;
@@ -167,12 +167,12 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
                 new RString(String.valueOf(連番++)),
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
-                get和暦(entity.get認定申請年月日()),
+                get和暦(entity.get認定申請年月日(), false),
                 NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).toRString(),
                 entity.get被保険者氏名(),
                 entity.get被保険者氏名カナ(),
                 Seibetsu.toValue(entity.get性別()).get名称(),
-                get和暦(entity.get生年月日()),
+                get和暦(entity.get生年月日(), true),
                 entity.get住所(),
                 entity.get電話番号(),
                 set提出期限(entity));
@@ -249,12 +249,15 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
         return meishoFuyo;
     }
 
-    private RString get和暦(RString 日付) {
+    private RString get和暦(RString 日付, boolean flag) {
         RString 和暦 = RString.EMPTY;
         if (!RString.isNullOrEmpty(日付)) {
             FlexibleDate flexibleDate = new FlexibleDate(日付);
             和暦 = flexibleDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        if (flag && !RString.isNullOrEmpty(和暦)) {
+            和暦 = 和暦.substring(2, 和暦.length());
         }
         return 和暦;
     }

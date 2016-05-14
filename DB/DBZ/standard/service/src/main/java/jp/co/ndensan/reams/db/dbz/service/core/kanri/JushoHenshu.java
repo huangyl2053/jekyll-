@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class JushoHenshu {
 
+    private static final RString 管内 = new RString("1");
     private final DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac;
 
     /**
@@ -264,5 +265,26 @@ public class JushoHenshu {
                 jushoEditorBuilder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地);
             }
         }
+    }
+
+    /**
+     * 住所コードを設定します。
+     *
+     * @param uaFt200Entity uaFt200Entity
+     * @return 住所コード
+     */
+    public RString get住所コード(UaFt200FindShikibetsuTaishoEntity uaFt200Entity) {
+        RString 住所コード = RString.EMPTY;
+        if (uaFt200Entity != null) {
+            IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(uaFt200Entity);
+            if (管内.equals(uaFt200Entity.getKannaiKangaiKubun())) {
+                住所コード = shikibetsuTaisho.to個人().get住所().get町域コード() == null ? RString.EMPTY
+                        : shikibetsuTaisho.to個人().get住所().get町域コード().getColumnValue();
+            } else {
+                住所コード = shikibetsuTaisho.to個人().get住所().get全国住所コード() == null ? RString.EMPTY
+                        : shikibetsuTaisho.to個人().get住所().get全国住所コード().getColumnValue();
+            }
+        }
+        return 住所コード;
     }
 }

@@ -67,7 +67,7 @@ public class HihokenshaShikakuHakkoHandler {
 
         div.getYukoKigenInfo().getTxtYukoKigen().clearValue();
         div.getYukoKigenInfo().getTxtKofuDate().setValue(FlexibleDate.getNowDate());
-        if (!entity.get市町村コード().isNullOrEmpty()) {
+        if (entity.get市町村コード() != null && !entity.get市町村コード().isEmpty()) {
             div.getYukoKigenInfo().getTxtHokensha().setValue(entity.get市町村コード().concat(RString.FULL_SPACE).concat(entity.get保険者名称()));
         }
         List<UzT0007CodeEntity> 交付事由List = new ArrayList<>();

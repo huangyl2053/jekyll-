@@ -68,7 +68,6 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 被保険者番号 被保険者番号
      */
     public void load宛名と基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        // TODO QA529 「介護宛名情報」と「介護資格系基本情報」の取得のパラメータ問題があります。
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
     }
@@ -85,9 +84,12 @@ public class ServiceTeikyoShomeishoPanelHandler {
             if (受託なし.equals(config)) {
                 div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(false);
             } else if (受託あり.equals(config) && 国保連送付フラグ) {
+                div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
                 div.getPanelShinseiNaiyo().setDisabled(true);
                 div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowDeleteButtonColumn(false);
                 div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowModifyButtonColumn(false);
+            } else {
+                div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
             }
         }
     }
@@ -96,13 +98,13 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * 申請共通エリアの初期化です。
      *
      * @param 画面モード 画面モード
-     * @param 償還払支給申請 償還払支給申請
+     * @param paramter 償還払費申請検索キー
      */
-    public void load申請共通エリア(RString 画面モード, ShokanShinsei 償還払支給申請) {
+    public void load申請共通エリア(RString 画面モード, ShoukanharaihishinseikensakuParameter paramter) {
         if (登録モード.equals(画面モード)) {
             set申請共通エリア(null, 画面モード_新規);
         } else if (修正モード.equals(画面モード)) {
-            set申請共通エリア(償還払支給申請, 処理モード_修正);
+            set申請共通エリア(paramter, 処理モード_修正);
         } else if (削除モード.equals(画面モード)) {
             set申請共通エリア(null, 処理モード_参照);
         }
@@ -120,6 +122,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
             ShokanShinsei 償還払支給申請,
             List<ShikibetsuNoKanri> 証明書リスト,
             List<ServiceTeikyoShomeishoResult> 証明書一覧情報) {
+        // TODO QA南京。 申請日は「画面設計_DBCMN53001_償還払い費支給申請決定_検索」の償還払費申請検索キーにはありません。
         if (償還払支給申請.get申請年月日() != null) {
             div.getPanelShinseiNaiyo().getTxtShinseibi().setValue(new RDate(償還払支給申請.get申請年月日().toString()));
         }
@@ -170,13 +173,12 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * ViewStateに情報を設定する。
      */
     public void putViewState() {
-        // TODO QA528 ViewStateの設定。
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = null;
         if (div.getPanelTwo().getTxtServiceTeikyoYM() != null) {
-            サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().toString());
+            サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
         }
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
         ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
@@ -197,17 +199,19 @@ public class ServiceTeikyoShomeishoPanelHandler {
      */
     public void putViewStateDown(RString 処理モード) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toString());
+        FlexibleYearMonth サービス年月 = null;
+        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
+            サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
+        }
         RDate 申請日 = div.getPanelShinseiNaiyo().getTxtShinseibi().getValue();
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
         dgdServiceTeikyoShomeisyo_Row row = div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getActiveRow();
         JigyoshaNo 事業者番号 = JigyoshaNo.EMPTY;
         RString 事業者番号_入力 = div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo();
-        RString 事業者番号_当該行 = row.getData1();
         if (処理モード_登録.equals(処理モード) && 事業者番号_入力 != null) {
             事業者番号 = new JigyoshaNo(事業者番号_入力);
-        } else if (事業者番号_当該行 != null) {
-            事業者番号 = new JigyoshaNo(事業者番号_当該行);
+        } else if (row.getData1() != null) {
+            事業者番号 = new JigyoshaNo(row.getData1());
         }
         RString 様式番号 = null;
         if (処理モード_登録.equals(処理モード)) {
@@ -231,7 +235,6 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @return 申請既存チェック
      */
     public Boolean 申請既存チェック() {
-        // TODO QA528 申請既存チェックは設計書の里にありません。
         ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
@@ -265,7 +268,6 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @return サービス提供証明書の存在チェック
      */
     public Boolean サービス提供証明書の存在チェック() {
-        // TODO QA530 viewStateの償還払費証明書検索キーの取得。
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         JigyoshaNo 事業者番号 = new JigyoshaNo(div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
@@ -283,12 +285,12 @@ public class ServiceTeikyoShomeishoPanelHandler {
         return true;
     }
 
-    private void set申請共通エリア(ShokanShinsei 償還払支給申請, RString 処理モード) {
-        if (償還払支給申請 != null) {
-            if (償還払支給申請.getサービス提供年月() != null) {
-                div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(償還払支給申請.getサービス提供年月().toString()));
+    private void set申請共通エリア(ShoukanharaihishinseikensakuParameter paramter, RString 処理モード) {
+        if (paramter != null) {
+            if (paramter.getServiceTeikyoYM() != null) {
+                div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(paramter.getServiceTeikyoYM().toString()));
             }
-            div.getPanelTwo().getTxtSeiriBango().setValue(償還払支給申請.get整理番号());
+            div.getPanelTwo().getTxtSeiriBango().setValue(paramter.getSeiriNp());
         }
         div.getPanelTwo().getTxtShoriMode().setValue(処理モード);
     }
@@ -296,10 +298,11 @@ public class ServiceTeikyoShomeishoPanelHandler {
     private void set申請明細エリア表示制御(RString 画面モード) {
         if (登録モード.equals(画面モード)) {
             div.getPanelShinseiNaiyo().getTxtShinseibi().setDisabled(true);
-            // TODO QA528 事業者名の非活性
-            div.getPanelShinseiNaiyo().getCcdShisetsuJoho().setDisabled(false);
         } else if (削除モード.equals(画面モード)) {
-            div.getPanelShinseiNaiyo().setDisabled(true);
+            div.getPanelShinseiNaiyo().getDdlShomeisho().setDisabled(true);
+            div.getPanelShinseiNaiyo().getCcdShisetsuJoho().setDisabled(true);
+            div.getPanelShinseiNaiyo().getBtnAdd().setDisabled(true);
+            div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().setDisabled(true);
         }
     }
 }

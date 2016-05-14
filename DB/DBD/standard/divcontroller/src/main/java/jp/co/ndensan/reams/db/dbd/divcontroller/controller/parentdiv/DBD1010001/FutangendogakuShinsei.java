@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1010001;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiViewState;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.DBD1010001StateName;
@@ -140,12 +143,12 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
+        if (!getHandler(div).onSelectByDeleteButton()) {
+            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
+        }
         if (new RString(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
-        }
-        if (!getHandler(div).onSelectByDeleteButton()) {
-            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
         }
 
         return ResponseData.of(div).respond();
@@ -181,6 +184,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnBackToShinseiList(FutangendogakuShinseiDiv div) {
+        div.getShinseiList().setDisabled(false);
+        div.setJotai(RString.EMPTY);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
 
@@ -235,9 +240,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnReSearch(FutangendogakuShinseiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, null);
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, null);
-
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<FutanGendogakuNintei>());
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, new ArrayList<FutanGendogakuNinteiViewState>());
         RealInitialLocker.release(new LockingKey(div.getLockKey()));
         return ResponseData.of(div).forwardWithEventName(DBD1010001TransitionEventName.検索処理へ).respond();
     }
@@ -249,8 +253,8 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnToSearchResult(FutangendogakuShinseiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, null);
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, null);
+        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new ArrayList<FutanGendogakuNintei>());
+        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, new ArrayList<FutanGendogakuNinteiViewState>());
         getHandler(div).onClick_btnToSearchResult();
         RealInitialLocker.release(new LockingKey(div.getLockKey()));
         return ResponseData.of(div).forwardWithEventName(DBD1010001TransitionEventName.検索結果一覧へ).respond();
@@ -279,10 +283,10 @@ public class FutangendogakuShinsei {
                 break;
             }
         }
-        if (!is変更あり) {
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
+            if (!is変更あり) {
+                return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())

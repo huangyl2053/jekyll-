@@ -82,7 +82,6 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
 
     @Override
     protected void defineFlow() {
-        executeStep(CHOSAHYOSAICHECKHYO);
         if (getParameter().isNinteiChosaIraiChohyo()) {
             executeStep(CHOSAIRAISHOREPORT_PROCESS);
         }

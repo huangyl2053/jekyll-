@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -51,7 +50,7 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString telephoneNo2;
     private RString jushoTitle;
     private RString jusho;
-    private ZenkokuJushoCode zenkokuJushoCode;
+    private RString zenkokuJushoCode;
     private RString gyoseikuTitle;
     private GyoseikuCode gyoseikuCode;
     private RString jigyoshaNo;

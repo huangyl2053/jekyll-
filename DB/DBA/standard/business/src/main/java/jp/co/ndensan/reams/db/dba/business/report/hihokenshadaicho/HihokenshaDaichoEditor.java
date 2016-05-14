@@ -70,7 +70,7 @@ public class HihokenshaDaichoEditor implements IHihokenshaDaichoEditor {
         source.chiku3Code = joho.get地区コード3() == null ? RString.EMPTY : joho.get地区コード3().value();
         source.gyoseikuCode = joho.get行政区コード() == null ? RString.EMPTY : joho.get行政区コード().value();
         source.gyoseikuTitle = joho.get行政区タイトル();
-        source.jushoCode = joho.get住所コード() == null ? RString.EMPTY : joho.get住所コード().value();
+        source.jushoCode = joho.get住所コード() == null ? RString.EMPTY : joho.get住所コード();
         source.jigyoshaNo = joho.get事業者番号();
         source.jigyoshaName = joho.get事業者名称() == null ? RString.EMPTY : joho.get事業者名称().value();
         source.kigoNo = joho.get記号番号();

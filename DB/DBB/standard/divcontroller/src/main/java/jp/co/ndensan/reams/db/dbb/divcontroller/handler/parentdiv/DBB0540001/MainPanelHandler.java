@@ -45,6 +45,18 @@ public class MainPanelHandler {
     private static final RString 再検索する = new RString("btnResearch");
     private static final RString 検索結果一覧へ = new RString("btnSearchResult");
     private static final RString 保存する = new RString("btnUpdate");
+    private static final int 整数_1 = 1;
+    private static final int 整数_2 = 2;
+    private static final int 整数_3 = 3;
+    private static final int 整数_4 = 4;
+    private static final int 整数_5 = 5;
+    private static final int 整数_6 = 6;
+    private static final int 整数_7 = 7;
+    private static final int 整数_8 = 8;
+    private static final int 整数_9 = 9;
+    private static final int 整数_10 = 10;
+    private static final int 整数_11 = 11;
+    private static final int 整数_12 = 12;
     private static final int 現在の月_1 = 1;
     private static final int 現在の月_2 = 2;
     private static final int 現在の月_3 = 3;
@@ -97,6 +109,8 @@ public class MainPanelHandler {
     private static final RString 名称_2 = new RString("特");
     private static final RString 名称_3 = new RString("普");
     private static final RString コード種別 = new RString("0046");
+    private static final RString 特 = new RString("特");
+    private static final RString 普 = new RString("普");
 
     /**
      * MainPanelHandler
@@ -131,6 +145,8 @@ public class MainPanelHandler {
         ChoshuHohoResult serviceResult = ChosyuHohoHenko.createInstance()
                 .getChosyuHoho(賦課年度, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.徴収方法データ, serviceResult.getHoho());
+        ViewStateHolder.put(ViewStateKeys.特別徴収停止日時, serviceResult.getHoho().get特別徴収停止日時());
+        ViewStateHolder.put(ViewStateKeys.特別徴収停止事由コード, serviceResult.getHoho().get特別徴収停止事由コード());
         RDate fukaNendo = new RDate(賦課年度.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString());
         div.getChoshuInfo().getTxtFukaNendo().setValue(fukaNendo);
         if (null != serviceResult.getHoho().get本徴収_年金コード()) {
@@ -589,7 +605,6 @@ public class MainPanelHandler {
     }
 
     private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-
         int 現在の月;
         final int three = 3;
         YMDHMS 特別徴収停止日時 = null;
@@ -609,19 +624,63 @@ public class MainPanelHandler {
         } else {
             現在の月 = システム日付.getMonthValue();
         }
-        boolean flag = is四月To八月の徴収方法を比較(現在の月);
-        //TODO QA 内部番号711
-//        boolean flg = is四月To八月の徴収方法は変更無しの場合(現在の月, 徴収方法データ);
-        is四月To八月の徴収方法は変更無しの場合(現在の月, 徴収方法データ);
-        if (!flag) {
-            特別徴収停止日時 = YMDHMS.now();
-            特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
+        List<Integer> 現在月list = new ArrayList<>();
+        現在月list.add(整数_1, 現在の月_4);
+        現在月list.add(整数_2, 現在の月_5);
+        現在月list.add(整数_3, 現在の月_6);
+        現在月list.add(整数_4, 現在の月_7);
+        現在月list.add(整数_5, 現在の月_8);
+        現在月list.add(整数_6, 現在の月_9);
+        現在月list.add(整数_7, 現在の月_10);
+        現在月list.add(整数_8, 現在の月_11);
+        現在月list.add(整数_9, 現在の月_12);
+        現在月list.add(整数_10, 現在の月_1);
+        現在月list.add(整数_11, 現在の月_2);
+        現在月list.add(整数_12, 現在の月_3);
+        int j = 0;
+        for (int i = 0; i <= 整数_12; i++) {
+            if (現在の月 == 現在月list.get(i)) {
+                j = i;
+                break;
+            }
         }
-        //TODO QA 内部番号711
-//        if (!flg) {
-//            特別徴収停止日時 = 徴収方法データ.get特別徴収停止日時();
-//            特別徴収停止事由コード = 徴収方法データ.get特別徴収停止事由コード();
-//        }
+        List<RString> 現在徴収方法list = new ArrayList<>();
+        現在徴収方法list.add(整数_1, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt4Gatsu());
+        現在徴収方法list.add(整数_2, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt5Gatsu());
+        現在徴収方法list.add(整数_3, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt6Gatsu());
+        現在徴収方法list.add(整数_4, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt7Gatsu());
+        現在徴収方法list.add(整数_5, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu());
+        現在徴収方法list.add(整数_6, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu());
+        現在徴収方法list.add(整数_7, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu());
+        現在徴収方法list.add(整数_8, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu());
+        現在徴収方法list.add(整数_9, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu());
+        現在徴収方法list.add(整数_10, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu());
+        現在徴収方法list.add(整数_11, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu());
+        現在徴収方法list.add(整数_12, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu());
+        List<RString> 変更後list = new ArrayList<>();
+        変更後list.add(整数_1, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu());
+        変更後list.add(整数_2, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu());
+        変更後list.add(整数_3, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu());
+        変更後list.add(整数_4, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu());
+        変更後list.add(整数_5, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu());
+        変更後list.add(整数_6, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu());
+        変更後list.add(整数_7, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu());
+        変更後list.add(整数_8, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu());
+        変更後list.add(整数_9, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu());
+        変更後list.add(整数_10, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu());
+        変更後list.add(整数_11, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu());
+        変更後list.add(整数_12, div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu());
+        for (; j <= 整数_12; j++) {
+            if (現在徴収方法list.get(j).equals(特) && (変更後list.get(j).equals(普)
+                    || 変更後list.get(j).equals(RString.EMPTY))) {
+                特別徴収停止日時 = YMDHMS.now();
+                特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
+            } else {
+                特別徴収停止日時 = ViewStateHolder.get(ViewStateKeys.特別徴収停止日時, YMDHMS.class);
+                特別徴収停止事由コード = ViewStateHolder.get(ViewStateKeys.特別徴収停止事由コード, RString.class);
+            }
+
+        }
         徴収方法_変更後 = 徴収方法_変更後.createBuilderForEdit().
                 set徴収方法4月(get徴収方法のコード(徴収方法データ.get徴収方法4月(),
                                 div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu())).
@@ -690,302 +749,5 @@ public class MainPanelHandler {
             名称 = 名称_3;
         }
         return 名称;
-    }
-
-    private boolean is四月To八月の徴収方法を比較(int 現在の月) {
-
-        RString 現在;
-        RString 変更後;
-        boolean flg = false;
-        if (現在の月 == 現在の月_4) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt4Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu();
-            flg = judge(現在, 変更後);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt5Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu();
-            flg = judge(現在, 変更後);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt6Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu();
-            flg = judge(現在, 変更後);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt7Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu();
-            flg = judge(現在, 変更後);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6
-                || 現在の月 == 現在の月_7 || 現在の月 == 現在の月_8) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu();
-            flg = judge(現在, 変更後);
-        }
-
-        flg = is九月To十月の徴収方法を比較(現在の月, flg);
-        return flg;
-    }
-
-    private boolean is九月To十月の徴収方法を比較(int 現在の月, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu();
-            flg = judge(現在, 変更後);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu();
-            flg = judge(現在, 変更後);
-        }
-
-        flg = is十一月To十二月の徴収方法を比較(現在の月, flg);
-        return flg;
-    }
-
-    private boolean is十一月To十二月の徴収方法を比較(int 現在の月, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu();
-            flg = judge(現在, 変更後);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu();
-            flg = judge(現在, 変更後);
-        }
-
-        flg = is一月の徴収方法を比較(現在の月, flg);
-        return flg;
-    }
-
-    private boolean is一月の徴収方法を比較(int 現在の月, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu();
-            flg = judge(現在, 変更後);
-        }
-
-        flg = is二月の徴収方法を比較(現在の月, flg);
-        return flg;
-    }
-
-    private boolean is二月の徴収方法を比較(int 現在の月, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu();
-            flg = judge(現在, 変更後);
-        }
-
-        flg = is三月の徴収方法を比較(現在の月, flg);
-        return flg;
-    }
-
-    private boolean is三月の徴収方法を比較(int 現在の月, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2 || 現在の月 == 現在の月_3) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu();
-            flg = judge(現在, 変更後);
-        }
-
-        return flg;
-    }
-
-    private boolean judge(RString 現在, RString 変更後) {
-
-        boolean flag = false;
-        if (!((ChoshuHoho.toValue(コード_1).get名称().equals(現在)
-                || ChoshuHoho.toValue(コード_2).get名称().equals(現在))
-                && (ChoshuHoho.toValue(コード_0).get名称().equals(変更後)
-                || ChoshuHoho.toValue(コード_3).get名称().equals(変更後)))) {
-            return true;
-        }
-        return flag;
-    }
-
-    private boolean is四月To八月の徴収方法は変更無しの場合(int 現在の月,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho) {
-
-        RString 現在;
-        RString 変更後;
-        RString 基本;
-        boolean flg = false;
-        if (現在の月 == 現在の月_4) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt4Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu();
-            基本 = choshuHoho.get徴収方法4月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt5Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu();
-            基本 = choshuHoho.get徴収方法5月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt6Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu();
-            基本 = choshuHoho.get徴収方法6月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt7Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu();
-            基本 = choshuHoho.get徴収方法7月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu();
-            基本 = choshuHoho.get徴収方法8月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-
-        flg = is九月To十月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
-        return flg;
-    }
-
-    private boolean is九月To十月の徴収方法は変更無しの場合(int 現在の月,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu();
-            基本 = choshuHoho.get徴収方法9月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu();
-            基本 = choshuHoho.get徴収方法10月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-
-        flg = is十一月To十二月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
-        return flg;
-    }
-
-    private boolean is十一月To十二月の徴収方法は変更無しの場合(int 現在の月,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu();
-            基本 = choshuHoho.get徴収方法11月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu();
-            基本 = choshuHoho.get徴収方法12月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-
-        flg = is一月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
-        return flg;
-    }
-
-    private boolean is一月の徴収方法は変更無しの場合(int 現在の月,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu();
-            基本 = choshuHoho.get徴収方法1月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-
-        flg = is二月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
-        return flg;
-    }
-
-    private boolean is二月の徴収方法は変更無しの場合(int 現在の月,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu();
-            基本 = choshuHoho.get徴収方法2月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-
-        flg = is三月の徴収方法は変更無しの場合(現在の月, choshuHoho, flg);
-        return flg;
-    }
-
-    private boolean is三月の徴収方法は変更無しの場合(int 現在の月,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho choshuHoho, boolean flg) {
-
-        RString 現在;
-        RString 変更後;
-        RString 基本;
-        if (現在の月 == 現在の月_4 || 現在の月 == 現在の月_5 || 現在の月 == 現在の月_6 || 現在の月 == 現在の月_7
-                || 現在の月 == 現在の月_8 || 現在の月 == 現在の月_9 || 現在の月 == 現在の月_10 || 現在の月 == 現在の月_11
-                || 現在の月 == 現在の月_12 || 現在の月 == 現在の月_1 || 現在の月 == 現在の月_2 || 現在の月 == 現在の月_3) {
-            現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu();
-            変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu();
-            基本 = choshuHoho.get徴収方法3月();
-            flg = is変更無しの場合(現在, 変更後, 基本);
-        }
-
-        return flg;
-    }
-
-    private boolean is変更無しの場合(RString 現在, RString 変更後, RString 基本) {
-
-        boolean flag = false;
-        if (!現在.equals(ChoshuHoho.toValue(基本).get名称()) || !変更後.equals(ChoshuHoho.toValue(基本).get名称())) {
-            flag = true;
-        }
-        return flag;
     }
 }

@@ -123,7 +123,7 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.isCsv項目名付加()).build();
     }
@@ -148,8 +148,12 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
             eucCsvWriter.writeLine(new HanyoListKyotakuServiceKeikakuCsvEntity());
         }
         eucCsvWriter.close();
-        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        if (personalDataList == null || personalDataList.isEmpty()) {
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        } else {
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        }
         バッチ出力条件リストの出力();
     }
 

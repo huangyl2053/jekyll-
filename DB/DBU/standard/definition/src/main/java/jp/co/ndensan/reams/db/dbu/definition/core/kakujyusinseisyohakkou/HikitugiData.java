@@ -11,8 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 各種申請書発行の引き継ぎデータ
+ *
+ * @reamsid_L DBA-0540-680 dongyabin
  */
 @Getter
 @Setter

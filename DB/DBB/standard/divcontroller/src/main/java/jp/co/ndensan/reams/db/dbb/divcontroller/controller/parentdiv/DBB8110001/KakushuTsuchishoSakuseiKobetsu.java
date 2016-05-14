@@ -111,30 +111,98 @@ public class KakushuTsuchishoSakuseiKobetsu {
     }
 
     /**
-     * 通知書をOpenのメソッドます。
+     * 特徴開始通知書をチェックのメソッドます。
      *
      * @param div KakushuTsuchishoSakuseiKobetsuDiv
      * @return ResponseData
      */
-    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onOpen_Publish(
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapTokuKaishiTsuchiKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
-        div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsPublish(true);
-        div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-        getHandler(div).check通知書(true, div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().getTitle());
+        getHandler(div).check特徴開始通知書();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 通知書をCloseのメソッドます。
+     * 決定通知書をチェックのメソッドます。
      *
      * @param div KakushuTsuchishoSakuseiKobetsuDiv
      * @return ResponseData
      */
-    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onClose_Publish(
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapKetteiTsuchiKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
-        div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsPublish(false);
-        div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-        getHandler(div).check通知書(false, div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().getTitle());
+        getHandler(div).check決定通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 納入通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapNotsuKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check納入通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 変更通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapHenkoTsuchiKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check変更通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 郵便納付書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapYufuriKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check郵便納付書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 減免通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapGemmenTsuchiKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check減免通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 徴収猶予通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapChoshuYuyoTsuchiKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check徴収猶予通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 賦課台帳をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapFukadaichoKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check賦課台帳();
         return ResponseData.of(div).respond();
     }
 

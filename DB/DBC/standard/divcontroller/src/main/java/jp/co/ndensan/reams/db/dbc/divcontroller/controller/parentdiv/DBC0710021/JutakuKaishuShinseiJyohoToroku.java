@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0710021
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
@@ -33,6 +32,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -495,7 +495,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(
                     被保険者番号, サービス提供年月);
             if (要介護認定情報 == null) {
-                throw new ApplicationException(DbcErrorMessages.実行不可.getMessage().replace(
+                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
                         エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
             }
             List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
@@ -510,12 +510,12 @@ public class JutakuKaishuShinseiJyohoToroku {
             要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護4.getCode());
             要介護認定状態区分コードリスト.add(YoKaigoJotaiKubun.要介護5.getCode());
             if (!要介護認定状態区分コードリスト.contains(要介護認定状態区分コード.getKey())) {
-                throw new ApplicationException(DbcErrorMessages.実行不可.getMessage().replace(
+                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
                         エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
             }
             if (YoKaigoJotaiKubun.非該当.getCode().equals(要介護認定状態区分コード.getKey())
                     && !要介護認定情報.is旧措置者フラグ()) {
-                throw new ApplicationException(DbcErrorMessages.実行不可.getMessage().replace(
+                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(
                         エラー_RPLC_MSG_1.toString(), エラー_RPLC_MSG_2.toString()));
             }
             if (領収日.getYearMonth().equals(画面提供着工年月.getYearMonth())) {

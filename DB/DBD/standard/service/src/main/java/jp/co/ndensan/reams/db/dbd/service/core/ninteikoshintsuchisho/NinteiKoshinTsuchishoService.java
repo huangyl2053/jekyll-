@@ -12,8 +12,14 @@ import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKo
 import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKoshinTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 負担限度額認定更新のお知らせ通知書。
@@ -26,11 +32,16 @@ public class NinteiKoshinTsuchishoService {
      * 帳票を出力
      *
      * @param targets パラメータ
-     * @return SourceDataCollection
+     * @param reportManager 帳票発行処理の制御機能
      */
-    public SourceDataCollection print(List<NinteiKoshinTsuchishoItem> targets) {
+    public void print(List<NinteiKoshinTsuchishoItem> targets, ReportManager reportManager) {
         NinteiKoshinTsuchishoProperty property = new NinteiKoshinTsuchishoProperty();
-        return new Printer<NinteiKoshinTsuchisho>().spool(property, toReports(targets));
+        try (ReportAssembler<NinteiKoshinTsuchisho> assembler = createAssembler(property, reportManager)) {
+            for (NinteiKoshinTsuchishoReport report : toReports(targets)) {
+                ReportSourceWriter<NinteiKoshinTsuchisho> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
     }
 
     private static List<NinteiKoshinTsuchishoReport> toReports(List<NinteiKoshinTsuchishoItem> targets) {
@@ -42,4 +53,13 @@ public class NinteiKoshinTsuchishoService {
         return list;
     }
 
+    private <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
+    }
 }

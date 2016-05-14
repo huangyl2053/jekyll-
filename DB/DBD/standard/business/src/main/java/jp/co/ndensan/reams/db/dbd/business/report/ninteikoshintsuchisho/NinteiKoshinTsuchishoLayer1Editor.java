@@ -37,14 +37,14 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
         source.bunshoNo = item.get文書番号();
         if (KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
-                if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル.name()).equals(entity.getKomokuValue())) {
+                if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル.name()).equals(entity.getKomokuName())) {
                     source.title = entity.getKomokuValue();
                     break;
                 }
             }
         } else {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
-                if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル_旧措置者用.name()).equals(entity.getKomokuValue())) {
+                if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル_旧措置者用.name()).equals(entity.getKomokuName())) {
                     source.title = entity.getKomokuValue();
                     break;
                 }

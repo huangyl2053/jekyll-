@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -59,7 +58,7 @@ public class HihokenshaEntity {
     private RString sochiHokenshaTitle;
     private RString kyuHokenshaTitle;
     private RString jusho;
-    private ZenkokuJushoCode zenkokuJushoCode;
+    private RString zenkokuJushoCode;
     private RString gyoseikuTitle;
     private GyoseikuCode gyoseikuCode;
     private RString jigyoshaNo;
@@ -75,5 +74,6 @@ public class HihokenshaEntity {
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006RoreiFukushiNenkinJukyushaEntityList;
     private List<DbT7037ShoKofuKaishuEntity> dbT7037ShoKofuKaishuEntityList;
     private List<SetaiinJohoEntity> setaiinJohoEntityList;
+    private List<SetaiinShotokuEntity> setaiinShotokuList;
 
 }

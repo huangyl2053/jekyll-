@@ -105,15 +105,15 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         TaishoshaKey key = new TaishoshaKey(new HihokenshaNo(click転入保留対象者.getHihokenshaNo().getText()),
                 new ShikibetsuCode(click転入保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
         ViewStateHolder.put(資格対象者, key);
-        if (KEY_資格取得.equals(click転入保留対象者.getNextTask().getSelectedKey())
-                || click転入保留対象者.getNextTask().getSelectedKey().isEmpty()) {
+        RString selectedKey = click転入保留対象者.getNextTask().getSelectedKey();
+        if (KEY_資格取得.equals(selectedKey) || selectedKey.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_資格取得);
         }
-        if (KEY_他特例適用.equals(click転入保留対象者.getNextTask().getSelectedKey())) {
+        if (KEY_他特例適用.equals(selectedKey)) {
             ViewStateHolder.put(資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_他特例適用);
         }
-        if (KEY_除外者適用.equals(click転入保留対象者.getNextTask().getSelectedKey())) {
+        if (KEY_除外者適用.equals(selectedKey)) {
             ViewStateHolder.put(資格対象者, key);
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転入).parameter(PARAMETER_除外者適用);
         }

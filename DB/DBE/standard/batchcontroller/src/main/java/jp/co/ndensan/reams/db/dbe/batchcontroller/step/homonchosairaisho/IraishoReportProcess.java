@@ -86,15 +86,15 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private static final RString HAKKOBI = new RString("【発行日】");
     private static final RString TEISHUTSUKIGEN = new RString("【提出期限】");
     private static final RString KYOTSUHIZUKE = new RString("【共通日付】");
-    private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼書出力区分】");
-    private static final RString NINTEICHOSAIRAISYO = new RString("【認定調査票(基本調査)出力区分】");
-    private static final RString NINTEICHOSAHYOKIHON = new RString("【認定調査票(特記事項)出力区分】");
-    private static final RString NINTEICHOSAHYOTOKKI = new RString("【認定調査票(概況調査)出力区分】");
-    private static final RString NINTEICHOSAHYOGAIKYOU = new RString("【認定調査票OCR(基本調査)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRKIHON = new RString("【認定調査票OCR(特記事項)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRTOKKI = new RString("【認定調査票OCR(概況調査)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査差異チェック表出力区分】");
-    private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査依頼一覧表出力区分】");
+    private static final RString NINTEICHOSAIRAISYO = new RString("【認定調査依頼書出力区分】");
+    private static final RString NINTEICHOSAHYOKIHON = new RString("【認定調査票(基本調査)出力区分】");
+    private static final RString NINTEICHOSAHYOTOKKI = new RString("【認定調査票(特記事項)出力区分】");
+    private static final RString NINTEICHOSAHYOGAIKYOU = new RString("【認定調査票(概況調査)出力区分】");
+    private static final RString NINTEICHOSAHYOOCRKIHON = new RString("【認定調査票OCR(基本調査)出力区分】");
+    private static final RString NINTEICHOSAHYOOCRTOKKI = new RString("【認定調査票OCR(特記事項)出力区分】");
+    private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査票OCR(概況調査)出力区分】");
+    private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査差異チェック表出力区分】");
+    private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
     private static RString 被保険者番号1 = RString.EMPTY;
     private static RString 被保険者番号2 = RString.EMPTY;
@@ -184,6 +184,7 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                 getカスタマーバーコード(entity),
                 entity.get被保険者番号(),
                 get宛名連番(),
+                ConfigNameDBE.認定調査依頼書.get名称(),
                 通知文Map.get(1),
                 被保険者番号1,
                 被保険者番号2,
@@ -208,7 +209,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                 entity.get電話番号(),
                 entity.get訪問調査先郵便番号() != null ? new YubinNo(entity.get訪問調査先郵便番号()).getEditedYubinNo() : RString.EMPTY,
                 entity.get訪問調査先住所(),
-                RString.EMPTY,
                 entity.get訪問調査先名称(),
                 entity.get訪問調査先電話番号(),
                 entity.get認定申請年月日(),

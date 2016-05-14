@@ -110,6 +110,8 @@
 	<result property="chosainShimei"  column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
 	<result property="chikuCode"  column="chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiRirekiNo"  column="ninteichosaIraiRirekiNo" />
+        <result property="ninteiChosaItakusakiCode"  column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/>
+        <result property="ninteiChosainCode"  column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_IkenSyoNyuSyuRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IkenSyoNyuSyuRelateEntity" autoMapping="true">
 	<result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -544,7 +546,9 @@
             DbT5910."jigyoshaMeisho",
             DbT5913."chosainShimei",
             DbT5913."chikuCode",
-            DbT5201."ninteichosaIraiRirekiNo"
+            DbT5201."ninteichosaIraiRirekiNo",
+            DbT5101."ninteiChosaItakusakiCode",
+            DbT5101."ninteiChosainCode"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121

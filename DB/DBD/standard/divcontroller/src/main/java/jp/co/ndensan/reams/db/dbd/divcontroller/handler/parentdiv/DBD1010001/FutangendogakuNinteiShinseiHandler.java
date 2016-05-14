@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.FutangendogakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgShinseiList_Row;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei.FutangendogakuNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
@@ -219,7 +220,9 @@ public class FutangendogakuNinteiShinseiHandler {
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         int index = div.getDgShinseiList().getClickedRowId();
         FutanGendogakuNinteiViewState ninteiViewState = list.get(index);
-        ninteiViewState.setState(EntityDataState.Deleted);
+        if (EntityDataState.Added.equals(ninteiViewState.getState())) {
+            ninteiViewState.setState(EntityDataState.Deleted);
+        }
         list.set(index, ninteiViewState);
         set申請一覧(list);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, list);
@@ -391,12 +394,19 @@ public class FutangendogakuNinteiShinseiHandler {
     public void onChange_radHaigushaUmu() {
         if (SELECT_KEY1.equals(div.getRadHaigushaUmu().getSelectedKey())) {
             div.getTxtHaigushaShimeiKana().setDisabled(true);
+            div.getTxtHaigushaShimeiKana().clearDomain();
             div.getTxtHaigushaShimei().setDisabled(true);
+            div.getTxtHaigushaShimei().clearDomain();
             div.getTxtHaigushaUmareYMD().setDisabled(true);
+            div.getTxtHaigushaUmareYMD().clearValue();
             div.getTxtHaigushaRenrakusaki().setDisabled(true);
+            div.getTxtHaigushaRenrakusaki().clearDomain();
             div.getTxtHaigushaJusho1().setDisabled(true);
+            div.getTxtHaigushaJusho1().clearDomain();
             div.getTxtHaigushaJusho2().setDisabled(true);
+            div.getTxtHaigushaJusho2().clearDomain();
             div.getRadHaigushaKazeiKubun().setDisabled(true);
+            div.getRadHaigushaKazeiKubun().setSelectedKey(SELECT_KEY0);
         } else {
             div.getTxtHaigushaShimeiKana().setDisabled(false);
             div.getTxtHaigushaShimei().setDisabled(false);
@@ -413,7 +423,12 @@ public class FutangendogakuNinteiShinseiHandler {
         init申請理由DDL();
         div.getDdlShinseiRiyu().setSelectedKey(futanGendogakuNintei.get申請理由区分());
         div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState());
-        GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
+        GemmenGengakuShinsei gemmenGengakuShinsei;
+        if (!futanGendogakuNintei.getGemmenGengakuShinseiList().isEmpty()) {
+            gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
+        } else {
+            gemmenGengakuShinsei = new GemmenGengakuShinsei(new DbT4010GemmenGengakuShinseiEntity());
+        }
         ShinseiJoho shinseiJoho = new ShinseiJoho(
                 gemmenGengakuShinsei.get申請届出代行区分() == null
                 ? null : ShinseiTodokedeDaikoKubunCode.toValue(gemmenGengakuShinsei.get申請届出代行区分()),
@@ -970,17 +985,18 @@ public class FutangendogakuNinteiShinseiHandler {
         builder.set従来型個室_老健_療養等(formFgn.get従来型個室_老健_療養等());
         builder.set多床室(formFgn.get多床室());
         builder.set非承認理由(formFgn.get非承認理由() == null ? RString.EMPTY : formFgn.get非承認理由());
+        if (!formFgn.getGemmenGengakuShinseiList().isEmpty()) {
+            GemmenGengakuShinseiIdentifier identifier = new GemmenGengakuShinseiIdentifier(
+                    formFgn.get証記載保険者番号(),
+                    formFgn.get被保険者番号(),
+                    GemmenGengakuShurui.負担限度額認定.getコード(),
+                    formFgn.get履歴番号());
 
-        GemmenGengakuShinseiIdentifier identifier = new GemmenGengakuShinseiIdentifier(
-                formFgn.get証記載保険者番号(),
-                formFgn.get被保険者番号(),
-                GemmenGengakuShurui.負担限度額認定.getコード(),
-                formFgn.get履歴番号());
-
-        GemmenGengakuShinsei gemmenGengakuShinsei = formFgn.getGemmenGengakuShinsei(identifier);
-        gemmenGengakuShinsei = gemmenGengakuShinsei.createBuilderForEdit().set履歴番号(履歴番号).build();
-        GemmenGengakuShinsei newGemmen = new GemmenGengakuShinsei(gemmenGengakuShinsei.toEntity());
-        builder.setGemmenGengakuShinsei(newGemmen);
+            GemmenGengakuShinsei gemmenGengakuShinsei = formFgn.getGemmenGengakuShinsei(identifier);
+            gemmenGengakuShinsei = gemmenGengakuShinsei.createBuilderForEdit().set履歴番号(履歴番号).build();
+            GemmenGengakuShinsei newGemmen = new GemmenGengakuShinsei(gemmenGengakuShinsei.toEntity());
+            builder.setGemmenGengakuShinsei(newGemmen);
+        }
         return builder.build();
     }
 

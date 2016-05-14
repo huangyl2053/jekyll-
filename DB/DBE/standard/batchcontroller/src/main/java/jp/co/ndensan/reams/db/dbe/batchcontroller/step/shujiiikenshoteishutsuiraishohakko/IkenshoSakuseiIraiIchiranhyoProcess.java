@@ -119,7 +119,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
         郵便番号 = entity.get医療機関郵便番号();
         住所 = entity.get医療機関住所();
         機関名称 = entity.get医療機関名称();
-        氏名 = entity.get医療機関名称();
+        氏名 = entity.get代表者名();
         bodyItemList.add(setBodyItem(entity));
     }
 
@@ -163,7 +163,6 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
                 get和暦(entity.get生年月日()),
                 Seibetsu.toValue(entity.get性別()).get名称(),
                 get提出期限(entity));
-        //TODO 内部QA899　主治医医療機関コードを設定する必要がない確認
     }
 
     private RString get提出期限(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
@@ -352,7 +351,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchProcessBase<Shujii
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                ReportIdDBE.DBE230001.getReportName(),
+                ReportIdDBE.DBE230002.getReportName(),
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,

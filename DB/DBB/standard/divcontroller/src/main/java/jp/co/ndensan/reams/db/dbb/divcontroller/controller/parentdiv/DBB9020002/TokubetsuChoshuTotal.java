@@ -73,6 +73,9 @@ public class TokubetsuChoshuTotal {
      * @return ResponseData<TokubetsuChoshuTotalDiv>
      */
     public ResponseData<TokubetsuChoshuTotalDiv> onStateTransition(TokubetsuChoshuTotalDiv div) {
+        if (div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey().isEmpty()) {
+            return ResponseData.of(div).setState(初期状態);
+        }
         FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
         getHandler(div).set初期値(調定年度);
         return ResponseData.of(div).respond();

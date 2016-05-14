@@ -8,8 +8,9 @@
         <include refid="selectHanyoListKyotakuServiceKeikakuEntity" />
     </select>
     <sql id="selectHanyoListKyotakuServiceKeikakuEntity">
+        select ROW_NUMBER() over(order by D."dbv1001被保険者番号")as row ,* from (
         SELECT 	    
-            DbV1001."hihokenshaNo"                                              AS dbV1001被保険者番号,	
+            DbV1001."hihokenshaNo"                                              AS dbv1001被保険者番号,
             DbV1001."shichosonCode"                     			AS dbV1001市町村コード,						
 	    DbV1001."shikakuShutokuJiyuCode"					AS dbV1001資格取得事由コード,					
 	    DbV1001."shikakuShutokuYMD"						AS dbV1001資格取得年月日,					
@@ -233,11 +234,13 @@
 	<if test="支援事業者番号 !=null and !支援事業者番号.isEmpty()">
 		AND DbT3006."keikakuJigyoshaNo" = #{支援事業者番号}
 	</if>
+        ) as D
     </sql>
     
     <resultMap id="resultMapHanyoListKyotakuServiceKeikakuEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity">
-        <result property="dbV1001被保険者番号" column="dbV1001被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="row"/>
+        <result property="dbV1001被保険者番号" column="dbv1001被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbV1001市町村コード" column="dbV1001市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="dbV1001資格取得事由コード" column="dbV1001資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dbV1001資格取得年月日" column="dbV1001資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.DBC0820024StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.DBC0820024TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
@@ -91,6 +92,7 @@ public class ServiceKeikakuHiPanel {
         SikibetuNokennsakuki key = new SikibetuNokennsakuki(parame.getYoshikiNo(), parame.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
+        ViewStateHolder.put(ViewStateKeys.画面モード, 登録モード);
         ShoukanharaihishinseimeisaikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getサービス年月();
@@ -102,8 +104,8 @@ public class ServiceKeikakuHiPanel {
         HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
 
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         RString 証明書 = new RString("証明書");
-        ViewStateHolder.put(ViewStateKeys.画面モード, 登録モード);
         ServiceKeikakuHiPanelHandler handler = getHandler(div);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
@@ -161,7 +163,11 @@ public class ServiceKeikakuHiPanel {
         } else {
             handler.getボタンを制御(shikibetsuNoKanri);
         }
-        return createResponse(div);
+        if (削除モード.equals(画面モード)) {
+            return ResponseData.of(div).setState(DBC0820024StateName.削除モード);
+        } else {
+            return ResponseData.of(div).setState(DBC0820024StateName.新規修正モード);
+        }
     }
 
     /**
