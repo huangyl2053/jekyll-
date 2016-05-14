@@ -83,6 +83,8 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
+    private Map<RString, RString> 今回連番Map;
+    private Map<RString, RString> 前回連番Map;
     private RString shinseishoKanriNo = RString.EMPTY;
     private List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
@@ -98,6 +100,8 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
     protected void initialize() {
         iHomonChosaIraishoMapper = getMapper(IHomonChosaIraishoMapper.class);
         checkEntityList = new ArrayList<>();
+        今回連番Map = new HashMap();
+        前回連番Map = new HashMap();
     }
 
     @Override
@@ -134,12 +138,9 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
 
     private void getcheckEntityList(HomonChosaIraishoRelateEntity entity) {
         ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
-        Map<RString, RString> 今回連番Map = new HashMap();
-        Map<RString, RString> 前回連番Map = new HashMap();
+
         今回連番Map.put(entity.get今回連番(), entity.get今回連番に対する調査項目());
         前回連番Map.put(entity.get前回連番(), entity.get前回連番に対する調査項目());
-        checkEntity.set今回連番Map(今回連番Map);
-        checkEntity.set前回連番Map(前回連番Map);
         checkEntity.set審査会日(entity.get介護認定審査会開催年月日());
         checkEntity.set合議体番号(entity.get合議体番号());
         checkEntity.set被保険者番号(entity.get被保険者番号());
@@ -161,23 +162,23 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
         ChosahyoSaiCheckhyoItem item = new ChosahyoSaiCheckhyoItem();
         item.setTitle(TITLE);
         item.setHihokenshaNo(entity.get被保険者番号());
-        item.setHihokenshaNo(entity.get被保険者氏名());
+        item.setHihokenshaName(entity.get被保険者氏名());
         item.setZenkaiIchijihanteikekka(entity.get前回一次判定結果());
         item.setKonkaiIchijihanteikekka(entity.get今回一次判定結果());
         item.setShinsakaiYMD(entity.get審査会日());
         item.setGogitaiNo(entity.get合議体番号());
         item.setZenkaiNijihanteikekka(entity.get前回二次判定結果());
-        setZenkaiChosakekka(item, entity.get前回連番Map());
+        setZenkaiChosakekka(item);
         item.setZenkaiChosakekkaNo75(entity.get前回障害高齢者自立度());
         item.setZenkaiChosakekkaNo76(entity.get前回認知症高齢者自立度());
-        setKonkaiChosakekka(item, entity.get今回連番Map());
+        setKonkaiChosakekka(item);
         item.setKonkaiChosakekkaNo75(entity.get今回障害高齢者自立度());
         item.setKonkaiChosakekkaNo76(entity.get今回認知症高齢者自立度());
         setTokkiFuragu(item);
         return item;
     }
 
-    private void setZenkaiChosakekka(ChosahyoSaiCheckhyoItem item, Map<RString, RString> 前回連番Map) {
+    private void setZenkaiChosakekka(ChosahyoSaiCheckhyoItem item) {
         item.setZenkaiChosakekkaNo1(前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左上肢.getコード()));
         item.setZenkaiChosakekkaNo2(前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード()));
         item.setZenkaiChosakekkaNo3(前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左下肢.getコード()));
@@ -254,7 +255,7 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
         item.setZenkaiChosakekkaNo74(前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()));
     }
 
-    private void setKonkaiChosakekka(ChosahyoSaiCheckhyoItem item, Map<RString, RString> 今回連番Map) {
+    private void setKonkaiChosakekka(ChosahyoSaiCheckhyoItem item) {
         item.setKonkaiChosakekkaNo1(今回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左上肢.getコード()));
         item.setKonkaiChosakekkaNo2(今回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード()));
         item.setKonkaiChosakekkaNo3(今回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左下肢.getコード()));
