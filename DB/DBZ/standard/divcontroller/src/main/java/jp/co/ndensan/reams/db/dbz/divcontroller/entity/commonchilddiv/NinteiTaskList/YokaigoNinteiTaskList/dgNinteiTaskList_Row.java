@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTas
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 12 19:02:42 CST 2016 
+ * Mon May 16 11:15:37 CST 2016 
  */
 
 
@@ -103,6 +103,9 @@ public class dgNinteiTaskList_Row extends DataRow {
     private RString ninteiChosaItakusakiCode;
     private RString ninteiChosainCode;
     private RString chikuCode;
+    private RString nijiHanteiYokaigoJotaiKubunCode;
+    private RString koroshoIfShikibetsuCode;
+    private RString nyushoShisetsuCode;
 
     public dgNinteiTaskList_Row() {
         super();
@@ -185,6 +188,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ninteiChosaItakusakiCode = RString.EMPTY;
         this.ninteiChosainCode = RString.EMPTY;
         this.chikuCode = RString.EMPTY;
+        this.nijiHanteiYokaigoJotaiKubunCode = RString.EMPTY;
+        this.koroshoIfShikibetsuCode = RString.EMPTY;
+        this.nyushoShisetsuCode = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
@@ -264,9 +270,12 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ninteiChosaItakusakiCode", ninteiChosaItakusakiCode);
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("chikuCode", chikuCode);
+        this.setOriginalData("nijiHanteiYokaigoJotaiKubunCode", nijiHanteiYokaigoJotaiKubunCode);
+        this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
     }
 
-    public dgNinteiTaskList_Row(RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate koshinKanryoDay, TextBoxDate koshinTsuchiYMD, TextBoxDate shinseiUketsukeKanryoDay, TextBoxDate chosaIraiKanryoDay, TextBoxNum chosaIraiSaichosaCount, TextBoxDate chosaIraishoHakkoDay, TextBoxDate chousahyoOutput, TextBoxDate chosaIraiDataShutsuryokuDay, TextBoxDate chosaIraiKigen, RString chosaIraiKubun, RString konkaiChosaItakusaki, RString konkaiChosain, TextBoxNum konkaiChosaCount, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString zenzenkaiChosaItakusaki, RString zenzenkaiChosain, TextBoxDate chosahyoKanryoDay, TextBoxDate chosahyoDataNyuryokuDay, TextBoxDate ikenshoIraiKanryoDay, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, TextBoxDate ikenshoNyushuKanryoDay, TextBoxDate ikenshoNyushuTeikei, RString ikenshoIraiShokai, RString konkaiShujiiIryokikan, RString konkaiShujii, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, TextBoxDate chosaTokusokuLiit, RString chosaTokusokuChiku, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxDate ichijiHanteiKanryoDay, TextBoxDate ichijiHanteiKanri, TextBoxDate ichijiHantei, RString ichijiHanteiKekka, RString ichijiHanteiWarningCode, TextBoxDate maskingKanryoDay, TextBoxDate shinsakaiKanryoDay, TextBoxDate shinsakaiwaritukeDay, TextBoxDate shinsakaiKaisaiDay, TextBoxTime shinsakaiKaisaiJikan, RString yusenWaritsukesha, RString kaisaiNumber, RString gogitai, TextBoxDate nijihanteiKanryoDay, TextBoxDate nijihanteiKekkaToroku, RString nyuryokuHoho, RString nijihanteiKekka, RString nijihanteiYukoKikan, TextBoxDate nijihanteiShinsakaiKaisaiDay, RString nijihanteiKaisaiNumber, TextBoxDate getsureiShoriKanryoDay, TextBoxDate centerSoshinDay, TextBoxNum keikaNissu, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString ikenshoIraiRirekiNo, RString ninteiChosaItakusakiCode, RString ninteiChosainCode, RString chikuCode) {
+    public dgNinteiTaskList_Row(RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate koshinKanryoDay, TextBoxDate koshinTsuchiYMD, TextBoxDate shinseiUketsukeKanryoDay, TextBoxDate chosaIraiKanryoDay, TextBoxNum chosaIraiSaichosaCount, TextBoxDate chosaIraishoHakkoDay, TextBoxDate chousahyoOutput, TextBoxDate chosaIraiDataShutsuryokuDay, TextBoxDate chosaIraiKigen, RString chosaIraiKubun, RString konkaiChosaItakusaki, RString konkaiChosain, TextBoxNum konkaiChosaCount, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString zenzenkaiChosaItakusaki, RString zenzenkaiChosain, TextBoxDate chosahyoKanryoDay, TextBoxDate chosahyoDataNyuryokuDay, TextBoxDate ikenshoIraiKanryoDay, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, TextBoxDate ikenshoNyushuKanryoDay, TextBoxDate ikenshoNyushuTeikei, RString ikenshoIraiShokai, RString konkaiShujiiIryokikan, RString konkaiShujii, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, TextBoxDate chosaTokusokuLiit, RString chosaTokusokuChiku, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxDate ichijiHanteiKanryoDay, TextBoxDate ichijiHanteiKanri, TextBoxDate ichijiHantei, RString ichijiHanteiKekka, RString ichijiHanteiWarningCode, TextBoxDate maskingKanryoDay, TextBoxDate shinsakaiKanryoDay, TextBoxDate shinsakaiwaritukeDay, TextBoxDate shinsakaiKaisaiDay, TextBoxTime shinsakaiKaisaiJikan, RString yusenWaritsukesha, RString kaisaiNumber, RString gogitai, TextBoxDate nijihanteiKanryoDay, TextBoxDate nijihanteiKekkaToroku, RString nyuryokuHoho, RString nijihanteiKekka, RString nijihanteiYukoKikan, TextBoxDate nijihanteiShinsakaiKaisaiDay, RString nijihanteiKaisaiNumber, TextBoxDate getsureiShoriKanryoDay, TextBoxDate centerSoshinDay, TextBoxNum keikaNissu, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString ikenshoIraiRirekiNo, RString ninteiChosaItakusakiCode, RString ninteiChosainCode, RString chikuCode, RString nijiHanteiYokaigoJotaiKubunCode, RString koroshoIfShikibetsuCode, RString nyushoShisetsuCode) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
@@ -347,6 +356,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ninteiChosaItakusakiCode", ninteiChosaItakusakiCode);
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("chikuCode", chikuCode);
+        this.setOriginalData("nijiHanteiYokaigoJotaiKubunCode", nijiHanteiYokaigoJotaiKubunCode);
+        this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
         this.hihoNumber = hihoNumber;
@@ -426,6 +438,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
         this.ninteiChosainCode = ninteiChosainCode;
         this.chikuCode = chikuCode;
+        this.nijiHanteiYokaigoJotaiKubunCode = nijiHanteiYokaigoJotaiKubunCode;
+        this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
     public RString getHokensha() {
@@ -742,6 +757,18 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public RString getChikuCode() {
         return chikuCode;
+    }
+
+    public RString getNijiHanteiYokaigoJotaiKubunCode() {
+        return nijiHanteiYokaigoJotaiKubunCode;
+    }
+
+    public RString getKoroshoIfShikibetsuCode() {
+        return koroshoIfShikibetsuCode;
+    }
+
+    public RString getNyushoShisetsuCode() {
+        return nyushoShisetsuCode;
     }
 
     public void setHokensha(RString hokensha) {
@@ -1137,6 +1164,21 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setChikuCode(RString chikuCode) {
         this.setOriginalData("chikuCode", chikuCode);
         this.chikuCode = chikuCode;
+    }
+
+    public void setNijiHanteiYokaigoJotaiKubunCode(RString nijiHanteiYokaigoJotaiKubunCode) {
+        this.setOriginalData("nijiHanteiYokaigoJotaiKubunCode", nijiHanteiYokaigoJotaiKubunCode);
+        this.nijiHanteiYokaigoJotaiKubunCode = nijiHanteiYokaigoJotaiKubunCode;
+    }
+
+    public void setKoroshoIfShikibetsuCode(RString koroshoIfShikibetsuCode) {
+        this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
+    }
+
+    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+        this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
+        this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
     // </editor-fold>
