@@ -34,7 +34,11 @@ public enum ReportIdDBD {
     /**
      * 汎用リスト 受給者台帳２の帳票ＩＤです。
      */
-    DBD130001(new ReportId("DBD130001_HanyoList_JukyushaDaicho2"), new RString("汎用リスト 受給者台帳２"));
+    DBD130001(new ReportId("DBD130001_HanyoList_JukyushaDaicho2"), new RString("汎用リスト 受給者台帳２")),
+    /**
+     * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書の帳票ＩＤです。
+     */
+    DBD800007(new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseisho"), new RString("特別地域加算減免・訪問介護等利用者負担減額対象確認申請書"));
 
     private final ReportId reportId;
     private final RString reportName;

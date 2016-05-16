@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo;
+package jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo;
 
-import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 
 /**
  * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書ボディEditorです。
- * 
- * @reamsid_L DBA-0540-700  suguangjun 
+ *
+ * @reamsid_L DBA-0540-700 suguangjun
  */
 public class TokubetsuChiikiKasanGenmenTaishoShinseishoBodyEditor implements ITokubetsuChiikiKasanGenmenTaishoShinseishoEditor {
 

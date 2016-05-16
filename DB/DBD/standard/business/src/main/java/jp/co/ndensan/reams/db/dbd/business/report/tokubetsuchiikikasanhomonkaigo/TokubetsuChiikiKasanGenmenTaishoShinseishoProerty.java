@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo;
+package jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo;
 
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.definition.core.reportid.ReportIdDBD;
+import jp.co.ndensan.reams.db.dbd.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource}のプロパティです。
- * 
- * @reamsid_L DBA-0540-700  suguangjun
+ *
+ * @reamsid_L DBA-0540-700 suguangjun
  */
 public class TokubetsuChiikiKasanGenmenTaishoShinseishoProerty extends ReportPropertyBase<TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource> {
 
@@ -21,6 +21,6 @@ public class TokubetsuChiikiKasanGenmenTaishoShinseishoProerty extends ReportPro
      * コンストラクタです。
      */
     public TokubetsuChiikiKasanGenmenTaishoShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBD800007.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD800007.getReportId());
     }
 }
