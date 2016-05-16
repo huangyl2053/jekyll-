@@ -3,25 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.daisanshakoiniyoruhigaitodokechohyo;
+package jp.co.ndensan.reams.db.dbc.service.report.daisanshakoiniyoruhigaitodokechohyo;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoItem;
-import jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoProerty;
-import jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
-import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
+import jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoItem;
+import jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoProerty;
+import jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReport;
+import jp.co.ndensan.reams.db.dbc.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7068ChohyoBunruiKanriEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7068ChohyoBunruiKanriDac;
+import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -50,6 +60,36 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class DaisanshaKoiniyoruHigaitodokeChohyo {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
+    private final DbT7068ChohyoBunruiKanriDac dbT7068dac;
+    private final DbT4001JukyushaDaichoDac dbT4001dac;
+
+    /**
+     * コンストラクタです。
+     */
+    DaisanshaKoiniyoruHigaitodokeChohyo() {
+        this.dbT7068dac = InstanceProvider.create(DbT7068ChohyoBunruiKanriDac.class);
+        this.dbT4001dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+    }
+
+    /**
+     * 単体テスト用のコンストラクタです。
+     *
+     * @param dbT7068dac DbT7068ChohyoBunruiKanriDac
+     * @param dbT4001dac DbT4001JukyushaDaichoDac
+     */
+    DaisanshaKoiniyoruHigaitodokeChohyo(DbT7068ChohyoBunruiKanriDac dbT7068dac, DbT4001JukyushaDaichoDac dbT4001dac) {
+        this.dbT7068dac = dbT7068dac;
+        this.dbT4001dac = dbT4001dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link DaisanshaKoiniyoruHigaitodokeChohyo}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link DaisanshaKoiniyoruHigaitodokeChohyo}のインスタンス
+     */
+    public static DaisanshaKoiniyoruHigaitodokeChohyo createInstance() {
+        return InstanceProvider.create(DaisanshaKoiniyoruHigaitodokeChohyo.class);
+    }
 
     /**
      * 第三者行為による被害届（介護保険用）Printします。
@@ -63,11 +103,7 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
         DaisanshaKouiHigaitodokeKaigoHokenyoProerty proerty = new DaisanshaKouiHigaitodokeKaigoHokenyoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> assembler = createAssembler(proerty, reportManager)) {
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
-                for (DaisanshaKouiHigaitodokeKaigoHokenyoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
-                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                for (DaisanshaKouiHigaitodokeKaigoHokenyoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号))) {
                     ReportSourceWriter<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
@@ -76,8 +112,7 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
         }
     }
 
-    private static List<DaisanshaKouiHigaitodokeKaigoHokenyoReport> toReports(HihokenshaKihonBusiness business,
-            RString ninshoshaYakushokuMei) {
+    private List<DaisanshaKouiHigaitodokeKaigoHokenyoReport> toReports(HihokenshaKihonBusiness business) {
         List<DaisanshaKouiHigaitodokeKaigoHokenyoReport> list = new ArrayList<>();
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = business.get住民種別コード();
@@ -92,16 +127,16 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
             }
         }
         DaisanshaKouiHigaitodokeKaigoHokenyoItem item = new DaisanshaKouiHigaitodokeKaigoHokenyoItem(
-                ninshoshaYakushokuMei,
-                get受給者台帳情報(business).get(0),
-                get受給者台帳情報(business).get(1),
+                get役職名(),
+                get認定有効期間及び要介護状態区分(business).get(0),
+                get認定有効期間及び要介護状態区分(business).get(1),
                 birthYMD,
                 business.get被保険者氏名(),
                 business.getフリガナ(),
                 business.get保険者番号() == null ? RString.EMPTY : business.get保険者番号().getColumnValue(),
                 business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 RString.EMPTY,
-                get受給者台帳情報(business).get(2));
+                get認定有効期間及び要介護状態区分(business).get(2));
         list.add(DaisanshaKouiHigaitodokeKaigoHokenyoReport.createReport(item));
         return list;
     }
@@ -111,7 +146,7 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
-    private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -121,7 +156,7 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
         return RString.EMPTY;
     }
 
-    private static RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         if (生年月日不詳区分_FALG.equals(生年月日不詳区分)) {
             return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -129,15 +164,40 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
         return RString.EMPTY;
     }
 
-    private static List<RString> get受給者台帳情報(HihokenshaKihonBusiness business) {
+    private List<RString> get認定有効期間及び要介護状態区分(HihokenshaKihonBusiness business) {
+        List<DbT4001JukyushaDaichoEntity> entityList = dbT4001dac.select受給者台帳情報(business.get被保険者番号(), new Code(YukoMukoKubun.有効.getコード()),
+                new Code(ShinseiJokyoKubun.認定完了.getコード()));
         List<RString> 受給者情報 = new ArrayList();
-        if (business != null) {
-            // TODO 受給者台帳情報を取得されない、「QA：716」を提出します。
-            受給者情報.add(new RString("20160219"));
-            受給者情報.add(new RString("20160219"));
-            受給者情報.add(new RString("要介護状態区分"));
+        if (!entityList.isEmpty()) {
+            受給者情報.add(flexableDateTORString(entityList.get(0).getNinteiYukoKikanKaishiYMD()));
+            受給者情報.add(flexableDateTORString(entityList.get(0).getNinteiYukoKikanShuryoYMD()));
+            受給者情報.add(YokaigoJotaiKubun99.toValue(codeToRString(entityList.get(0).getYokaigoJotaiKubunCode())).get名称());
+        } else {
+            受給者情報.add(RString.EMPTY);
+            受給者情報.add(RString.EMPTY);
+            受給者情報.add(RString.EMPTY);
         }
         return 受給者情報;
+    }
+
+    private RString flexableDateTORString(FlexibleDate date) {
+        return date == null ? RString.EMPTY : new RString(date.toString());
+    }
+
+    private RString codeToRString(Code code) {
+        return code == null ? RString.EMPTY : code.getColumnValue();
+    }
+
+    private RString get役職名() {
+        DbT7068ChohyoBunruiKanriEntity entity = dbT7068dac.selectByKey(SubGyomuCode.DBC介護給付,
+                new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"));
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        if (entity != null) {
+            INinshoshaManager manager = NinshoshaFinderFactory.createInstance();
+            Ninshosha ninshosha = manager.get帳票認証者(GyomuCode.DB介護保険, entity.getChohyoBunruiID().getColumnValue());
+            return ninshosha != null ? ninshosha.get市町村付与名称(association) : RString.EMPTY;
+        }
+        return RString.EMPTY;
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {

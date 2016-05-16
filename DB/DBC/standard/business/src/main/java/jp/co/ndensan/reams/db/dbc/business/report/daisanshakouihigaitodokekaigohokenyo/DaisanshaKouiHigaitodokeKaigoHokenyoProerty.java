@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigohokenyo;
+package jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigohokenyo;
 
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbc.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link DaisanshaKouiHigaitodokeKaigoHokenyoProerty}のプロパティです。
- * 
- * @reamsid_L DBA-0540-699  suguangjun
+ *
+ * @reamsid_L DBA-0540-699 suguangjun
  */
 public class DaisanshaKouiHigaitodokeKaigoHokenyoProerty extends ReportPropertyBase<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> {
 
@@ -21,6 +21,6 @@ public class DaisanshaKouiHigaitodokeKaigoHokenyoProerty extends ReportPropertyB
      * コンストラクタです。
      */
     public DaisanshaKouiHigaitodokeKaigoHokenyoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800020.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC800020.getReportId());
     }
 }

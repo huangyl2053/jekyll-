@@ -84,7 +84,11 @@ public enum ReportIdDBC {
      * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書の帳票ＩＤです。
      */
     DBC800015(new ReportId("DBC800015_KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyo"),
-            new RString("介護保険高額介護（予防）サービス費支給（受領委任払）申請書"));
+            new RString("介護保険高額介護（予防）サービス費支給（受領委任払）申請書")),
+    /**
+     * 第三者行為による被害届（介護保険用）の帳票ＩＤです。
+     */
+    DBC800020(new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"), new RString("第三者行為による被害届（介護保険用）"));
     private final ReportId reportId;
     private final RString reportName;
 

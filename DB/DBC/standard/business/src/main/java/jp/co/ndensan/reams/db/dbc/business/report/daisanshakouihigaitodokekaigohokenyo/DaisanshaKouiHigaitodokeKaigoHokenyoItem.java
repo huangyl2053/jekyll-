@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigohokenyo;
+package jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigohokenyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
  * 第三者行為による被害届（介護保険用）のEntityリストです。
- * 
- * @reamsid_L DBA-0540-699  suguangjun 
+ *
+ * @reamsid_L DBA-0540-699 suguangjun
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
