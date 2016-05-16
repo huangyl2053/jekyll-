@@ -30,7 +30,7 @@ public class ShinsahanteinoHenkojokyoProperty extends ReportPropertyBase<Shinsah
     private static final ReportId ID = ReportIdDBE.DBE701006.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.
             unmodifiableList(Arrays.asList(new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.gogitaiName.name()),
-                            new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.gogitaiName.name())));
+                            new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.shichosonNo.name())));
 
     /**
      * インスタンスを生成します。
@@ -51,6 +51,7 @@ public class ShinsahanteinoHenkojokyoProperty extends ReportPropertyBase<Shinsah
             Breakers<ShinsahanteinoHenkojokyoReportSource> breakers,
             BreakerCatalog<ShinsahanteinoHenkojokyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
 
 
