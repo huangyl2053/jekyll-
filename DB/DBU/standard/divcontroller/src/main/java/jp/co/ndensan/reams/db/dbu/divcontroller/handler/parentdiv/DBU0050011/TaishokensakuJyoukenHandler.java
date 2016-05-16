@@ -108,7 +108,7 @@ public class TaishokensakuJyoukenHandler {
 
     private boolean is単一合併なし() {
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        Code 導入形態コード = Code.EMPTY;
+        Code 導入形態コード;
         if (shichosonsecurityjoho != null && shichosonsecurityjoho.get市町村情報() != null) {
             導入形態コード = shichosonsecurityjoho.get導入形態コード();
         } else {
@@ -154,6 +154,9 @@ public class TaishokensakuJyoukenHandler {
     public void lostFocus() {
         div.getTxtShukeiY().clearValue();
         FlexibleDate 報告年度 = div.getTxtHoukokuY().getValue();
+        if (!報告年度.isEmpty()) {
+            報告年度 = new FlexibleDate(報告年度.toString().substring(0, INT4).concat("0101"));
+        }
         if (報告年度.isValid() && !報告年度.isEmpty()) {
             int 報告年度Year = 報告年度.getYearValue();
             set集計年度(報告年度Year);
