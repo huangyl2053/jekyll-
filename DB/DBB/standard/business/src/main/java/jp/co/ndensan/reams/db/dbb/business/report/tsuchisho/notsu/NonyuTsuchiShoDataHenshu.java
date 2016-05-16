@@ -300,6 +300,10 @@ public class NonyuTsuchiShoDataHenshu {
         FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
         NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = new NonyuTsuchiShoSeigyoJoho();
         List<SamantabhadraIncomeInformation> 普徴収入情報リスト = new ArrayList<>();
+        EditedAtesaki 編集後宛先 = null;
+        SetaiCode 世帯コード = SetaiCode.EMPTY;
+        TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
+        HyojiCodes 表示コード = new HyojiCodes();
         if (編集後本算定通知書共通情報 != null) {
             if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
                 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
@@ -319,19 +323,29 @@ public class NonyuTsuchiShoDataHenshu {
             if (編集後本算定通知書共通情報.get普徴収入情報リスト() != null) {
                 普徴収入情報リスト = 編集後本算定通知書共通情報.get普徴収入情報リスト();
             }
+            if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {
+                世帯コード = 編集後本算定通知書共通情報.get編集後個人().get世帯コード();
+            }
+            if (編集後本算定通知書共通情報.get通知書番号() != null) {
+                通知書番号 = 編集後本算定通知書共通情報.get通知書番号();
+            }
+            if (編集後本算定通知書共通情報.get表示コード() != null) {
+                表示コード = 編集後本算定通知書共通情報.get表示コード();
+            }
+            編集後宛先 = 編集後本算定通知書共通情報.get編集後宛先();
         }
         //TODO
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(null, 普徴期別金額リスト,
                 口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度);
         NofuShoKyotsu 納付書共通 = create納付書共通(
-                編集後本算定通知書共通情報.get調定年度(),
-                編集後本算定通知書共通情報.get賦課年度(),
-                編集後本算定通知書共通情報.get編集後宛先(),
-                編集後本算定通知書共通情報.get編集後個人().get世帯コード(),
-                編集後本算定通知書共通情報.get通知書番号(),
+                調定年度,
+                賦課年度,
+                編集後宛先,
+                世帯コード,
+                通知書番号,
                 本算定通知書情報.get発行日(),
                 代納人氏名,
-                編集後本算定通知書共通情報.get表示コード(),
+                表示コード,
                 収納科目,
                 本算定納入通知書制御情報.get納入通知書制御情報());
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 = new HonSanteiNonyuTsuchiShoJoho();
