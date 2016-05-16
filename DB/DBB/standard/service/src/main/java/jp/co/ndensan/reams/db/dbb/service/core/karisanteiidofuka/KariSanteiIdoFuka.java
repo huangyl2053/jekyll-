@@ -224,7 +224,7 @@ public class KariSanteiIdoFuka {
             }
         } else if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 納入通知書entity = get納入通知書_帳票ID(調定年度, 算定期, 帳票分類ID, 出力順ID);
-            if (定値_DBB100014.equals(new RString(帳票分類ID.value().toString()))
+            if (定値_DBB100014.equals(帳票分類ID.value())
                     && 納入通知書entity == null) {
                 throw new ApplicationException(UrErrorMessages.存在しない
                         .getMessage().replace(納入通知書.toString()).evaluate());
