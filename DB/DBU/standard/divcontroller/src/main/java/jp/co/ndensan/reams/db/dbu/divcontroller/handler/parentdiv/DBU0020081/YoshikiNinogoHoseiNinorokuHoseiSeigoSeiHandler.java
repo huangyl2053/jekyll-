@@ -42,7 +42,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                 || is給付費_短期入所療養介護老人保健施設_予防要支援整合NG(div)
                 || is給付費_短期入所療養介護療養型医療施設等_予防要支援整合NG(div)
                 || is給付費_居住費滞在費_予防要支援整合NG(div) || is給付費_居住費介護老人福祉施設_予防要支援整合NG(div)
-                || is給付費_居住費介護老人保健施設_予防要支援整合NG(div) || is給付費_居住費介護療養型医療施設_予防要支援整合NG(div)
+                || is給付費_居住費介護老人保健施設_予防要支援整合NG(div)
+                || is給付費_居住費介護療養型医療施設_予防要支援整合NG(div)
                 || is給付費_居住費短期入所生活介護_予防要支援整合NG(div)
                 || is給付費_居住費短期入所療養介護老人保健施設_予防要支援整合NG(div)
                 || is給付費_居住費療養型医療施設等_予防要支援整合NG(div) || is給付費_総計_予防要支援整合NG(div)) {
@@ -58,7 +59,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                 || is件数_短期入所療養介護老人保健施設_予防要支援整合NG(div)
                 || is件数_短期入所療養介護療養型医療施設等_予防要支援整合NG(div) || is件数_居住費滞在費_予防要支援整合NG(div)
                 || is件数_居住費介護老人福祉施設_予防要支援整合NG(div) || is件数_居住費介護老人保健施設_予防要支援整合NG(div)
-                || is件数_居住費介護療養型医療施設_予防要支援整合NG(div) || is件数_居住費短期入所生活介護_予防要支援整合NG(div)
+                || is件数_居住費介護療養型医療施設_予防要支援整合NG(div)
+                || is件数_居住費短期入所生活介護_予防要支援整合NG(div)
                 || is件数_居住費短期入所療養介護老人保健施設_予防要支援整合NG(div)
                 || is件数_居住費療養型医療施設等_予防要支援整合NG(div)
                 || is件数_総計_予防要支援整合NG(div) || is給付費_食費_予防要支援整合NG(div);
@@ -587,7 +589,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt1KyojuhiTankiGokei().getValue());
     }
 
-    private boolean is件数_居住費短期入所療養介護老人保健施設_予防要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is件数_居住費短期入所療養介護老人保健施設_予防要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenYoboYoshien1().getValue() == null
                 || div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenYoboYoshien2().getValue() == null
                 || div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenYoboYoshienKei().getValue() == null
@@ -596,7 +599,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenYoboYoshienKei().getValue());
     }
 
-    private boolean is件数_居住費短期入所療養介護老人保健施設_介護要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is件数_居住費短期入所療養介護老人保健施設_介護要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenKaigoYokaigo1().getValue() == null
                 || div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenKaigoYokaigo2().getValue() == null
                 || div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenKaigoYokaigo3().getValue() == null
@@ -611,7 +615,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenKaigoYokaigoKei().getValue());
     }
 
-    private boolean is件数_居住費短期入所療養介護老人保健施設_合計要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is件数_居住費短期入所療養介護老人保健施設_合計要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenYoboYoshienKei().getValue() == null
                 || div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenKaigoYokaigoKei().getValue() == null
                 || div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenGokei().getValue() == null
@@ -908,7 +913,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt2SyokuhiTankiHokenGokei().getValue());
     }
 
-    private boolean is給付費_短期入所療養介護療養型医療施設等_予防要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is給付費_短期入所療養介護療養型医療施設等_予防要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoYoboYoshien1().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoYoboYoshien2().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoYoboYoshienKei().getValue() == null
@@ -917,7 +923,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoYoboYoshienKei().getValue());
     }
 
-    private boolean is給付費_短期入所療養介護療養型医療施設等_介護要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is給付費_短期入所療養介護療養型医療施設等_介護要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoKaigoYokaigo1().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoKaigoYokaigo2().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoKaigoYokaigo3().getValue() == null
@@ -932,7 +939,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoKaigoYokaigoKei().getValue());
     }
 
-    private boolean is給付費_短期入所療養介護療養型医療施設等_合計要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is給付費_短期入所療養介護療養型医療施設等_合計要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoYoboYoshienKei().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoKaigoYokaigoKei().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoGokei().getValue() == null
@@ -1130,7 +1138,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt2KyojuhiTankiGokei().getValue());
     }
 
-    private boolean is給付費_居住費短期入所療養介護老人保健施設_予防要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is給付費_居住費短期入所療養介護老人保健施設_予防要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenYoboYoshien1().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenYoboYoshien2().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenYoboYoshienKei().getValue() == null
@@ -1139,7 +1148,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenYoboYoshienKei().getValue());
     }
 
-    private boolean is給付費_居住費短期入所療養介護老人保健施設_介護要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is給付費_居住費短期入所療養介護老人保健施設_介護要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenKaigoYokaigo1().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenKaigoYokaigo2().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenKaigoYokaigo3().getValue() == null
@@ -1154,7 +1164,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler {
                         div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenKaigoYokaigoKei().getValue());
     }
 
-    private boolean is給付費_居住費短期入所療養介護老人保健施設_合計要支援整合NG(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private boolean is給付費_居住費短期入所療養介護老人保健施設_合計要支援整合NG(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenYoboYoshienKei().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenKaigoYokaigoKei().getValue() == null
                 || div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenGokei().getValue() == null
