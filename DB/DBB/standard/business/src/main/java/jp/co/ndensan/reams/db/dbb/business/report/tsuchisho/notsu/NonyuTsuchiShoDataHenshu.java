@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -91,46 +93,135 @@ public class NonyuTsuchiShoDataHenshu {
             IName 代納人氏名,
             List<Kitsuki> 出力期リスト,
             HenshuHaniKubun 編集範囲区分) {
-        //TODO DBBBZ00007_1の仮算定通知書共通情報作成メソッドを呼び出  未作成
+        KariSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = new KariSanteiTsuchiShoKyotsuKomokuHenshu();
+        EditedKariSanteiTsuchiShoKyotsu 編集後納入通知書共通情報 = 賦課帳票共通項目編集.create仮算定通知書共通情報(仮算定通知書情報);
+        List<SamantabhadraIncomeInformation> 普徴収入情報リスト = get普徴収入情報リスト(編集後納入通知書共通情報);
+        List<UniversalPhase> 更正後普徴期別金額リスト = new ArrayList<>();
+        //TODO 口座区分
+        KozaKubun 口座区分 = null;
+        if (編集後納入通知書共通情報 != null && 編集後納入通知書共通情報.get更正後() != null) {
+            更正後普徴期別金額リスト = 編集後納入通知書共通情報.get更正後().get更正後普徴期別金額リスト();
+            口座区分 = 編集後納入通知書共通情報.get更正後().get更正後口座区分();
+        }
+        NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = new NonyuTsuchiShoSeigyoJoho();
+        if (仮算定納入通知書制御情報 != null && 仮算定納入通知書制御情報.get納入通知書制御情報() != null) {
+            納入通知書制御情報 = 仮算定納入通知書制御情報.get納入通知書制御情報();
+        }
+        FlexibleYear 調定年度 = FlexibleYear.EMPTY;
+        FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
+        Boolean 前年度情報有無 = false;
+        EditedAtesaki 編集後宛先 = null;
+        EditedKojin 編集後個人 = null;
+        TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
+        List<UniversalSignDeliveryInformation> 普徴納期情報リスト = new ArrayList<>();
+        if (編集後納入通知書共通情報 != null) {
+            if (編集後納入通知書共通情報.get調定年度() != null) {
+                調定年度 = 編集後納入通知書共通情報.get調定年度();
+            }
+            if (編集後納入通知書共通情報.get賦課年度() != null) {
+                賦課年度 = 編集後納入通知書共通情報.get賦課年度();
+            }
+            前年度情報有無 = 編集後納入通知書共通情報.get前年度情報有無();
+            編集後宛先 = 編集後納入通知書共通情報.get編集後宛先();
+            編集後個人 = 編集後納入通知書共通情報.get編集後個人();
+            if (編集後納入通知書共通情報.get普徴納期情報リスト() != null) {
+                普徴納期情報リスト = 編集後納入通知書共通情報.get普徴納期情報リスト();
+            }
+        }
+        //TODO
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト
-                = create納入通知書期情報(null, null, null, 請求情報リスト, null, null, 出力期リスト, null, null);
-        //TODO 前年度情報有無は、1.1からの編集後仮算定通知書共通情報.前年度情報有無　とする。
-        Boolean 前年度情報有無 = true;
+                = create納入通知書期情報(get普徴納期情報リストFrom編集後納入通知書共通情報(普徴納期情報リスト), 更正後普徴期別金額リスト,
+                        口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度);
         SanteiNoKiso 算定基礎情報 = new SanteiNoKiso();
-        //TODO パラメータ：1.1からの編集後仮算定通知書共通情報
-        SanteiNoKiso 基礎1 = get算定の基礎_基礎(仮算定納入通知書制御情報.get算定の基礎1(), 前年度情報有無);
-        SanteiNoKiso 基礎2 = get算定の基礎_基礎(仮算定納入通知書制御情報.get算定の基礎2(), 前年度情報有無);
-        SanteiNoKiso 基礎3 = get算定の基礎_基礎(仮算定納入通知書制御情報.get算定の基礎3(), 前年度情報有無);
+        SanteiKiso 算定の基礎1 = SanteiKiso.空白;
+        SanteiKiso 算定の基礎2 = SanteiKiso.空白;
+        SanteiKiso 算定の基礎3 = SanteiKiso.空白;
+        SanteiNoKiso 基礎1 = get算定の基礎_基礎(算定の基礎1, 前年度情報有無, 編集後納入通知書共通情報);
+        SanteiNoKiso 基礎2 = get算定の基礎_基礎(算定の基礎2, 前年度情報有無, 編集後納入通知書共通情報);
+        SanteiNoKiso 基礎3 = get算定の基礎_基礎(算定の基礎3, 前年度情報有無, 編集後納入通知書共通情報);
         算定基礎情報.set基礎1(基礎1);
         算定基礎情報.set基礎2(基礎2);
         算定基礎情報.set基礎3(基礎3);
-//        FlexibleDate 発行日 = 仮算定通知書情報.get発行日();
-//        NofuShoKyotsu 納付書共通 = create納付書共通(
-//                null,
-//                null,
-//                null,
-//                null,
-//                null,
-//                new RDate(発行日.getYearValue(), 発行日.getMonthValue(), 発行日.getDayValue()),
-//                代納人氏名,
-//                null,
-//                収納科目,
-//                仮算定納入通知書制御情報.get納入通知書制御情報());
+        FlexibleDate 発行日 = 仮算定通知書情報.get発行日();
+        HyojiCodes 表示コード = get表示コード(編集後納入通知書共通情報);
+        NofuShoKyotsu 納付書共通 = create納付書共通(
+                調定年度,
+                賦課年度,
+                編集後宛先,
+                null == 編集後個人 ? SetaiCode.EMPTY : 編集後個人.get世帯コード(),
+                通知書番号,
+                new RDate(発行日.getYearValue(), 発行日.getMonthValue(), 発行日.getDayValue()),
+                代納人氏名,
+                表示コード,
+                収納科目,
+                納入通知書制御情報);
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報Return = new KariSanteiNonyuTsuchiShoJoho();
         仮算定納入通知書情報Return.set発行日(仮算定通知書情報.get発行日());
         仮算定納入通知書情報Return.set帳票分類ID(仮算定通知書情報.get帳票分類ID());
         仮算定納入通知書情報Return.set帳票ID(仮算定通知書情報.get帳票ID());
         仮算定納入通知書情報Return.set処理区分(仮算定通知書情報.get処理区分());
-        //TODO 1.1の結果．編集後仮算定通知書共通情報
-        仮算定納入通知書情報Return.set編集後仮算定通知書共通情報(null);
+        仮算定納入通知書情報Return.set編集後仮算定通知書共通情報(編集後納入通知書共通情報);
         仮算定納入通知書情報Return.set仮算定納入通知書制御情報(仮算定納入通知書制御情報);
         仮算定納入通知書情報Return.set算定の基礎(算定基礎情報);
         仮算定納入通知書情報Return.set地方公共団体(仮算定通知書情報.get地方公共団体());
         仮算定納入通知書情報Return.set納入通知書期情報リスト(納入通知書期情報リスト);
-        //仮算定納入通知書情報Return.set納付書共通(納付書共通);
+        仮算定納入通知書情報Return.set納付書共通(納付書共通);
         仮算定納入通知書情報Return.set編集範囲区分(編集範囲区分);
         仮算定納入通知書情報Return.set出力期リスト(出力期リスト);
         return 仮算定納入通知書情報Return;
+    }
+
+    private List<NokiJoho> get普徴納期情報リストFrom編集後納入通知書共通情報(List<UniversalSignDeliveryInformation> 普徴納期情報リスト) {
+        List<NokiJoho> 普徴納期情報リストReturn = new ArrayList<>();
+        for (UniversalSignDeliveryInformation 普徴納期情報 : 普徴納期情報リスト) {
+            NokiJoho 普徴納期情報Return = new NokiJoho();
+            普徴納期情報Return.set期月(普徴納期情報.get期月());
+            UrT0729NokiKanriEntity urt0729 = new UrT0729NokiKanriEntity();
+            普徴納期情報.get現年過年区分();
+            urt0729.setKanendoKubun(new RString("true").equals(普徴納期情報.get現年過年区分()));
+            if (普徴納期情報.get納期終了日() != null && !普徴納期情報.get納期終了日().isEmpty()) {
+                urt0729.setNokiShuryoYMD(new RDate(普徴納期情報.get納期終了日().toString()));
+            }
+            if (普徴納期情報.get納期開始日() != null && !普徴納期情報.get納期開始日().isEmpty()) {
+                urt0729.setNokiKaishiYMD(new RDate(普徴納期情報.get納期開始日().toString()));
+            }
+            if (普徴納期情報.get納期限() != null && !普徴納期情報.get納期限().isEmpty()) {
+                urt0729.setNokigenYMD(new RDate(普徴納期情報.get納期限().toString()));
+            }
+            if (普徴納期情報.get通知書発行日() != null) {
+                urt0729.setTsuchishoHakkoYMD(普徴納期情報.get通知書発行日());
+            }
+            Noki 納期 = new Noki(urt0729);
+            普徴納期情報Return.set納期(納期);
+            普徴納期情報リストReturn.add(普徴納期情報Return);
+        }
+        return 普徴納期情報リストReturn;
+    }
+
+    private HyojiCodes get表示コード(EditedKariSanteiTsuchiShoKyotsu 編集後納入通知書共通情報) {
+        HyojiCodes 表示コード = new HyojiCodes();
+        if (編集後納入通知書共通情報 != null) {
+            表示コード.set表示コード名１(編集後納入通知書共通情報.get表示コード１名());
+            表示コード.set表示コード名２(編集後納入通知書共通情報.get表示コード２名());
+            表示コード.set表示コード名３(編集後納入通知書共通情報.get表示コード３名());
+            表示コード.set表示コード１(編集後納入通知書共通情報.get表示コード1());
+            表示コード.set表示コード２(編集後納入通知書共通情報.get表示コード２());
+            表示コード.set表示コード３(編集後納入通知書共通情報.get表示コード３());
+        }
+        return 表示コード;
+    }
+
+    private List<SamantabhadraIncomeInformation> get普徴収入情報リスト(EditedKariSanteiTsuchiShoKyotsu 編集後納入通知書共通情報) {
+        List<SamantabhadraIncomeInformation> 普徴収入情報リスト = new ArrayList<>();
+        if (編集後納入通知書共通情報 != null && 編集後納入通知書共通情報.get普徴収入情報リスト() != null) {
+            for (OrdinaryIncomeInformation 普徴収入情報 : 編集後納入通知書共通情報.get普徴収入情報リスト()) {
+                SamantabhadraIncomeInformation new普徴収入情報 = new SamantabhadraIncomeInformation();
+                new普徴収入情報.set期月(普徴収入情報.get期月());
+                new普徴収入情報.set収入額(普徴収入情報.get収入額());
+                普徴収入情報リスト.add(new普徴収入情報);
+            }
+        }
+        return 普徴収入情報リスト;
     }
 
     /**
@@ -141,9 +232,14 @@ public class NonyuTsuchiShoDataHenshu {
      * @param 代納人氏名 代納人氏名
      * @return 算定の基礎の基礎1/基礎2/基礎3
      */
-    private SanteiNoKiso get算定の基礎_基礎(SanteiKiso 算定基礎, Boolean 前年度情報有無) {
+    private SanteiNoKiso get算定の基礎_基礎(SanteiKiso 算定基礎, Boolean 前年度情報有無, EditedKariSanteiTsuchiShoKyotsu 編集後納入通知書共通情報) {
+        PrecedingFiscalYearInformation 前年度情報 = new PrecedingFiscalYearInformation();
+        if (編集後納入通知書共通情報 != null && 編集後納入通知書共通情報.get前年度情報() != null) {
+            前年度情報 = 編集後納入通知書共通情報.get前年度情報();
+        }
+        RString 前年度賦課年度 = 前年度情報.get前年度賦課年度();
         SanteiNoKiso 基礎 = new SanteiNoKiso();
-        if (SanteiKiso.空白.equals(算定基礎)) {
+        if (null == 算定基礎 || SanteiKiso.空白.equals(算定基礎)) {
             基礎.set名称(空白);
             基礎.set年度(空白);
             基礎.set金額(空白);
@@ -152,24 +248,28 @@ public class NonyuTsuchiShoDataHenshu {
             基礎.set単位(単位_円);
             基礎.set名称(算定基礎.get名称());
             if (SanteiKiso.保険料率.equals(算定基礎)) {
-                //TODO 1.1からの編集後仮算定通知書共通情報.前年度賦課年度
-                基礎.set年度(RString.FULL_SPACE);
-                基礎.set金額(前年度情報有無 ? null : 空白);
+                基礎.set年度(前年度賦課年度);
+                基礎.set金額(前年度情報有無 ? decimalToRString(前年度情報.get前年度保険料率()) : 空白);
             } else if (SanteiKiso.年額保険料.equals(算定基礎)) {
-                //TODO 1.1からの編集後仮算定通知書共通情報.前年度賦課年度
-                基礎.set年度(RString.HALF_SPACE);
-                基礎.set金額(前年度情報有無 ? null : 空白);
+                基礎.set年度(前年度賦課年度);
+                基礎.set金額(前年度情報有無 ? decimalToRString(前年度情報.get前年度確定介護保険料_年額()) : 空白);
             } else if (SanteiKiso.最終期保険料額.equals(算定基礎)) {
-                //TODO 1.1からの編集後仮算定通知書共通情報.前年度賦課年度
-                基礎.set年度(RString.EMPTY);
-                基礎.set金額(前年度情報有無 ? null : 空白);
+                基礎.set年度(前年度賦課年度);
+                基礎.set金額(前年度情報有無 ? decimalToRString(前年度情報.get前年度最終期普徴期別介護保険料()) : 空白);
             } else {
-                //TODO 1.1からの編集後仮算定通知書共通情報.賦課年度
-                基礎.set年度(null);
+                基礎.set年度(編集後納入通知書共通情報.get賦課年度().toDateString());
+                //TODO
                 基礎.set金額(前年度情報有無 ? null : 空白);
             }
         }
         return 基礎;
+    }
+
+    private RString decimalToRString(Decimal decimal) {
+        if (null == decimal) {
+            return RString.EMPTY;
+        }
+        return new RString(decimal.intValue());
     }
 
     /**
@@ -193,8 +293,36 @@ public class NonyuTsuchiShoDataHenshu {
             HenshuHaniKubun 編集範囲区分) {
         HonSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = new HonSanteiTsuchiShoKyotsuKomokuHenshu();
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 賦課帳票共通項目編集.create本算定通知書共通情報(本算定通知書情報);
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(null, null, null, 請求情報リスト,
-                本算定納入通知書制御情報.get納入通知書制御情報(), null, 出力期リスト, null, null);
+        List<UniversalPhase> 普徴期別金額リスト = new ArrayList<>();
+        //TODO 口座区分
+        KozaKubun 口座区分 = null;
+        FlexibleYear 調定年度 = FlexibleYear.EMPTY;
+        FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
+        NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = new NonyuTsuchiShoSeigyoJoho();
+        List<SamantabhadraIncomeInformation> 普徴収入情報リスト = new ArrayList<>();
+        if (編集後本算定通知書共通情報 != null) {
+            if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
+                普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
+            }
+            if (編集後本算定通知書共通情報.get更正後() != null) {
+                口座区分 = 編集後本算定通知書共通情報.get更正後().get口座区分();
+            }
+            if (編集後本算定通知書共通情報.get調定年度() != null) {
+                調定年度 = 編集後本算定通知書共通情報.get調定年度();
+            }
+            if (編集後本算定通知書共通情報.get賦課年度() != null) {
+                賦課年度 = 編集後本算定通知書共通情報.get賦課年度();
+            }
+            if (本算定納入通知書制御情報.get納入通知書制御情報() != null) {
+                納入通知書制御情報 = 本算定納入通知書制御情報.get納入通知書制御情報();
+            }
+            if (編集後本算定通知書共通情報.get普徴収入情報リスト() != null) {
+                普徴収入情報リスト = 編集後本算定通知書共通情報.get普徴収入情報リスト();
+            }
+        }
+        //TODO
+        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(null, 普徴期別金額リスト,
+                口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度);
         NofuShoKyotsu 納付書共通 = create納付書共通(
                 編集後本算定通知書共通情報.get調定年度(),
                 編集後本算定通知書共通情報.get賦課年度(),
@@ -808,20 +936,22 @@ public class NonyuTsuchiShoDataHenshu {
         納付書共通.set発行日表記(HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニ納付書発行日表示())
                 ? 発行日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : 空白);
-        納付書共通.set住所(編集後宛先.get編集後住所());
-        納付書共通.set郵便番号(編集後宛先.get郵便番号());
-        納付書共通.set行政区名(編集後宛先.get行政区名());
-        納付書共通.set方書(編集後宛先.get方書());
-        納付書共通.set代納人氏名(代納人氏名.getName());
-        納付書共通.set被保険者氏名(編集後宛先.get本人名称().getName());
-        if (AtesakiShubetsu.代納人送付先.equals(編集後宛先.get宛先種別()) || AtesakiShubetsu.代納人.equals(編集後宛先.get宛先種別())) {
-            納付書共通.set納付者氏名(代納人氏名.getName().getColumnValue());
-            納付書共通.set被代納人氏名(納付書共通.get被保険者氏名().getColumnValue());
-        } else {
-            納付書共通.set納付者氏名(空白);
-            納付書共通.set被代納人氏名(空白);
+        if (編集後宛先 != null) {
+            納付書共通.set住所(編集後宛先.get編集後住所());
+            納付書共通.set郵便番号(編集後宛先.get郵便番号());
+            納付書共通.set行政区名(編集後宛先.get行政区名());
+            納付書共通.set方書(編集後宛先.get方書());
+            納付書共通.set代納人氏名(代納人氏名.getName());
+            納付書共通.set被保険者氏名(編集後宛先.get本人名称().getName());
+            if (AtesakiShubetsu.代納人送付先.equals(編集後宛先.get宛先種別()) || AtesakiShubetsu.代納人.equals(編集後宛先.get宛先種別())) {
+                納付書共通.set納付者氏名(代納人氏名.getName().getColumnValue());
+                納付書共通.set被代納人氏名(納付書共通.get被保険者氏名().getColumnValue());
+            } else {
+                納付書共通.set納付者氏名(空白);
+                納付書共通.set被代納人氏名(空白);
+            }
+            納付書共通.set被代納人敬称(編集後宛先.get本人敬称());
         }
-        納付書共通.set被代納人敬称(編集後宛先.get本人敬称());
         納付書共通.set納付書市町村名(HyojiUmu.表示する.equals(納入通知書制御情報.get納付書市町村名表示()) ? 納入通知書制御情報.get納付書市町村名() : 空白);
         return 納付書共通;
     }
