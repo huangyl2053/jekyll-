@@ -19,6 +19,8 @@ public class SinsakaiHanteiJyokyoEntity {
 
     private Code ichijiHanteiKekkaCode;
     private Code nijiHanteiYokaigoJotaiKubunCode;
+    private Code ninteiShinseiShinseijiKubunCode;
+    private Code ninteiShinseiHoreiKubunCode;
     private int hihokenshaCount;
 
 }

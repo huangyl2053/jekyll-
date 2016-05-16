@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ChushutsuJoken のクラスファイル 
@@ -25,18 +26,14 @@ public class ChushutsuJokenDiv extends Panel {
      */
     @JsonProperty("chkHihokenshaKubun")
     private CheckBoxList chkHihokenshaKubun;
-    @JsonProperty("txtTaishoNendo")
-    private TextBoxDate txtTaishoNendo;
+    @JsonProperty("radKubun")
+    private RadioButton radKubun;
     @JsonProperty("ddlGogitaiBango")
     private DropDownList ddlGogitaiBango;
-    @JsonProperty("chkModifyTaishoTsuki")
-    private CheckBoxList chkModifyTaishoTsuki;
-    @JsonProperty("ddlTsuki")
-    private DropDownList ddlTsuki;
+    @JsonProperty("txtNengetsu")
+    private TextBoxFlexibleYearMonth txtNengetsu;
     @JsonProperty("txtKijyunYMD")
     private TextBoxDate txtKijyunYMD;
-    @JsonProperty("chkModifyTaishoGeppi")
-    private CheckBoxList chkModifyTaishoGeppi;
     @JsonProperty("txtTaishoGappi")
     private TextBoxDateRange txtTaishoGappi;
     @JsonProperty("ccdHokenshaList")
@@ -67,21 +64,21 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * gettxtTaishoNendo
-     * @return txtTaishoNendo
+     * getradKubun
+     * @return radKubun
      */
-    @JsonProperty("txtTaishoNendo")
-    public TextBoxDate getTxtTaishoNendo() {
-        return txtTaishoNendo;
+    @JsonProperty("radKubun")
+    public RadioButton getRadKubun() {
+        return radKubun;
     }
 
     /*
-     * settxtTaishoNendo
-     * @param txtTaishoNendo txtTaishoNendo
+     * setradKubun
+     * @param radKubun radKubun
      */
-    @JsonProperty("txtTaishoNendo")
-    public void setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
-        this.txtTaishoNendo = txtTaishoNendo;
+    @JsonProperty("radKubun")
+    public void setRadKubun(RadioButton radKubun) {
+        this.radKubun = radKubun;
     }
 
     /*
@@ -103,39 +100,21 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getchkModifyTaishoTsuki
-     * @return chkModifyTaishoTsuki
+     * gettxtNengetsu
+     * @return txtNengetsu
      */
-    @JsonProperty("chkModifyTaishoTsuki")
-    public CheckBoxList getChkModifyTaishoTsuki() {
-        return chkModifyTaishoTsuki;
+    @JsonProperty("txtNengetsu")
+    public TextBoxFlexibleYearMonth getTxtNengetsu() {
+        return txtNengetsu;
     }
 
     /*
-     * setchkModifyTaishoTsuki
-     * @param chkModifyTaishoTsuki chkModifyTaishoTsuki
+     * settxtNengetsu
+     * @param txtNengetsu txtNengetsu
      */
-    @JsonProperty("chkModifyTaishoTsuki")
-    public void setChkModifyTaishoTsuki(CheckBoxList chkModifyTaishoTsuki) {
-        this.chkModifyTaishoTsuki = chkModifyTaishoTsuki;
-    }
-
-    /*
-     * getddlTsuki
-     * @return ddlTsuki
-     */
-    @JsonProperty("ddlTsuki")
-    public DropDownList getDdlTsuki() {
-        return ddlTsuki;
-    }
-
-    /*
-     * setddlTsuki
-     * @param ddlTsuki ddlTsuki
-     */
-    @JsonProperty("ddlTsuki")
-    public void setDdlTsuki(DropDownList ddlTsuki) {
-        this.ddlTsuki = ddlTsuki;
+    @JsonProperty("txtNengetsu")
+    public void setTxtNengetsu(TextBoxFlexibleYearMonth txtNengetsu) {
+        this.txtNengetsu = txtNengetsu;
     }
 
     /*
@@ -154,24 +133,6 @@ public class ChushutsuJokenDiv extends Panel {
     @JsonProperty("txtKijyunYMD")
     public void setTxtKijyunYMD(TextBoxDate txtKijyunYMD) {
         this.txtKijyunYMD = txtKijyunYMD;
-    }
-
-    /*
-     * getchkModifyTaishoGeppi
-     * @return chkModifyTaishoGeppi
-     */
-    @JsonProperty("chkModifyTaishoGeppi")
-    public CheckBoxList getChkModifyTaishoGeppi() {
-        return chkModifyTaishoGeppi;
-    }
-
-    /*
-     * setchkModifyTaishoGeppi
-     * @param chkModifyTaishoGeppi chkModifyTaishoGeppi
-     */
-    @JsonProperty("chkModifyTaishoGeppi")
-    public void setChkModifyTaishoGeppi(CheckBoxList chkModifyTaishoGeppi) {
-        this.chkModifyTaishoGeppi = chkModifyTaishoGeppi;
     }
 
     /*
