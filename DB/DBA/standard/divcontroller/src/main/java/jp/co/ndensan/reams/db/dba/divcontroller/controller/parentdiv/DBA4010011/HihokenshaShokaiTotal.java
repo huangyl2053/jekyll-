@@ -115,18 +115,22 @@ public class HihokenshaShokaiTotal {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())) {
+        if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())
+                && div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
             div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
         } else if (世帯照会.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
             div.getHihokenshaShokaiPanel().getCcdSeitaiIchiran().initialize(shikibetsuCode, FlexibleDate.getNowDate(),
                     FlexibleDate.getNowDate().getNendo(), YMDHMS.now());
-        } else if (医療保険.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
+        } else if (医療保険.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
+                && div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().getDataGridList().isEmpty()) {
             div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().initialize(照会, shikibetsuCode.value());
-        } else if (老福年金.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
+        } else if (老福年金.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
+                && div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().getDataGridList().isEmpty()) {
             div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().initialize(shikibetsuCode, hihokenshaNo);
         } else if (施設入退所.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
             div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoRireki().initialize(shikibetsuCode);
-        } else if (証交付回収.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
+        } else if (証交付回収.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
+                && div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().get証交付回収情報一覧().isEmpty()) {
             div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
         }
         return ResponseData.of(div).respond();
