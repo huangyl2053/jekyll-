@@ -29,7 +29,7 @@ public class JotaikubumbetsuhanteiProperty extends ReportPropertyBase<Jotaikubum
     private static final ReportId ID = ReportIdDBE.DBE701005.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.
             unmodifiableList(Arrays.asList(new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.gogitaiName.name()),
-                            new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.gogitaiName.name())));
+                            new RString(JotaikubumbetsuhanteiReportSource.ReportSourceFields.shichosonNo.name())));
 
     /**
      * インスタンスを生成します。
@@ -43,6 +43,7 @@ public class JotaikubumbetsuhanteiProperty extends ReportPropertyBase<Jotaikubum
             Breakers<JotaikubumbetsuhanteiReportSource> breakers,
             BreakerCatalog<JotaikubumbetsuhanteiReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             PAGE_BREAK_KEYS) {
             @Override
