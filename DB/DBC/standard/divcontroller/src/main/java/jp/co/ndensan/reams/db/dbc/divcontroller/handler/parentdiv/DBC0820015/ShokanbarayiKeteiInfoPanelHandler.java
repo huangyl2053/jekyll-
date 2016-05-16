@@ -17,14 +17,19 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.Shok
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 償還払い費支給申請決定_償還払決定情報
@@ -32,6 +37,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-1030-180 xuhao
  */
 public class ShokanbarayiKeteiInfoPanelHandler {
+
+    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
+    private static final RString 登録 = new RString("登録");
+    private static final RString 照会 = new RString("照会");
+    private static final RString 新規 = new RString("新規");
+    private static final RString 参照 = new RString("参照");
+    private static final RString 業務区分 = new RString("03");
+    private static final RString 受託あり = new RString("受託あり");
+    private static final RString 申請を保存する = new RString("Element3");
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
     private static final int 定数_6 = 6;
@@ -53,6 +68,45 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      */
     public static ShokanbarayiKeteiInfoPanelHandler of(ShokanbarayiKeteiInfoPanelDiv div) {
         return new ShokanbarayiKeteiInfoPanelHandler(div);
+    }
+
+    /**
+     * initialize
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     */
+    public void initialize(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RString 整理番号
+    ) {
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+            if (受託あり.equals(償還)) {
+                div.getPanelTwo().getBtnShokanbariKeteiInfo().setDisabled(true);
+            }
+            div.getCcdShokanbaraiketteiJoho().loadInitialize(
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 登録);
+            div.getPanelTwo().getBtnKouza().setDisabled(true);
+            div.getPanelTwo().getTxtShoriMode().setValue(新規);
+        }
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            div.getPanelTwo().getBtnKouza().setDisabled(true);
+            div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
+                    .toDateString().toString()));
+            div.getCcdShokanbaraiketteiJoho().loadInitialize(
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
+            div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
+            div.getPanelTwo().getTxtShoriMode().setValue(修正);
+        }
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+            div.getCcdShokanbaraiketteiJoho().loadInitialize(
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 照会);
+            div.getPanelTwo().getBtnShinsei().setDisabled(true);
+            div.getPanelTwo().getTxtShoriMode().setValue(参照);
+        }
     }
 
     /**
@@ -203,10 +257,13 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         Map<RString, Integer> 償還払決定一覧 = ViewStateHolder.get(ViewStateKeys.決定情報登録_償還払決定一覧, Map.class);
         KetteJoho 決定情報 = ViewStateHolder.get(ViewStateKeys.決定情報登録_決定情報, KetteJoho.class);
         boolean flag = false;
-        FlexibleDate ketebi = new FlexibleDate(div.getCcdShokanbaraiketteiJoho().
-                getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue().toDateString());
-        if (equal決定日(決定情報, ketebi)) {
-            flag = true;
+        RDate 決定日 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue();
+        if (決定日 != null) {
+            FlexibleDate ketebi = new FlexibleDate(div.getCcdShokanbaraiketteiJoho().
+                    getShokanbaraiketteiJohoDiv().getTxtKetebi().getValue().toDateString());
+            if (equal決定日(決定情報, ketebi)) {
+                flag = true;
+            }
         }
         RString rdoShikyukubunNew = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getRdoShikyukubun().getSelectedKey();
         if (equal支給区分(決定情報, rdoShikyukubunNew)) {
@@ -253,6 +310,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
+        // TODO viewStateのデータ取得
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(被保険者番号,
                 サービス年月, 整理番号, 識別コード);
@@ -290,6 +348,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             差額金額登録フラグ = false;
         }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        // TODO viewStateのデータ取得
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
 
         List<SyokanbaraihiShikyuShinseiKetteEntity> entityList = new ArrayList<>();
