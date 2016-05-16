@@ -75,7 +75,8 @@ public class YokaigoNinteiTaskListHandler {
     private static final Code 認定ｿﾌﾄ99 = new Code(new RString("99A"));
     private static final Code 認定ｿﾌﾄ2002 = new Code(new RString("02A"));
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
-    private static final Code 認定ｿﾌﾄ2009 = new Code(new RString("09A"));
+    private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
+    private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
     private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
     private static final int インデックス_0 = 0;
     private static final int インデックス_1 = 1;
@@ -189,6 +190,14 @@ public class YokaigoNinteiTaskListHandler {
             List<CyoSaiRaiBusiness> 調査依頼List = YokaigoNinteiTaskListFinder.createInstance().
                     get調査依頼モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (調査依頼List != null && !調査依頼List.isEmpty()) {
+                ShinSaKaiBusiness 前調査依頼Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前調査依頼モード(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査依頼Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             調査依頼モード(調査依頼List);
         }
         if (意見書依頼モード.equals(モード)) {
@@ -196,18 +205,42 @@ public class YokaigoNinteiTaskListHandler {
             List<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().
                     get意見書依頼モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (意見書依頼List != null && !意見書依頼List.isEmpty()) {
+                ShinSaKaiBusiness 前意見書依頼Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前意見書依頼(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書依頼Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             意見書依頼モード(意見書依頼List);
         }
         if (調査入手モード.equals(モード)) {
             List<CyoSaNyuSyuBusiness> 調査入手List = YokaigoNinteiTaskListFinder.createInstance().
                     get調査入手モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (調査入手List != null && !調査入手List.isEmpty()) {
+                ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前意見書依頼(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査入手Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             調査入手モード(調査入手List);
         }
         if (意見書入手モード.equals(モード)) {
             List<IkenSyoNyuSyuBusiness> 意見書入手List = YokaigoNinteiTaskListFinder.createInstance().
                     get意見書入手モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (意見書入手List != null && !意見書入手List.isEmpty()) {
+                ShinSaKaiBusiness 前意見書入手Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前意見書入手(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書入手Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             意見書入手モード(意見書入手List);
         }
 
@@ -231,9 +264,9 @@ public class YokaigoNinteiTaskListHandler {
                 ShinSaKaiBusiness 前審査会登録Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前審査会登録(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
-                ViewStateHolder.put(ViewStateKeys.タスク一覧_審査会登録モード, Models.create(前審査会登録Model.get要介護認定完了情報Lsit()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査会登録Model.get要介護認定完了情報Lsit()));
             } else {
-                ViewStateHolder.put(ViewStateKeys.タスク一覧_審査会登録モード, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
             }
             審査会登録モード(審査会登録List);
         }
@@ -241,6 +274,14 @@ public class YokaigoNinteiTaskListHandler {
             List<NiJiHanTeiBusiness> 二次判定List = YokaigoNinteiTaskListFinder.createInstance().
                     get二次判定モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (二次判定List != null && !二次判定List.isEmpty()) {
+                ShinSaKaiBusiness 前二次判定Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前二次判定(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前二次判定Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             二次判定モード(二次判定List);
         }
         if (月例処理モード.equals(モード)) {
@@ -464,6 +505,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
+            row.setNyushoShisetsuCode(business.get入所施設コード() == null ? RString.EMPTY : business.get入所施設コード().value());
             意見書依頼モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -842,6 +884,9 @@ public class YokaigoNinteiTaskListHandler {
                 row.getNijihanteiShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催年月日().toString()));
             }
             row.setNijihanteiKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY : business.get介護認定審査会開催番号());
+            row.setNijiHanteiYokaigoJotaiKubunCode(business.get二次判定要介護状態区分コード() == null
+                    ? RString.EMPTY : business.get二次判定要介護状態区分コード().value());
+            row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(二次判定List.size())));
@@ -972,7 +1017,8 @@ public class YokaigoNinteiTaskListHandler {
             return IchijiHanteiKekkaCode02.toValue(一次判定結果コード == null ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
             return IchijiHanteiKekkaCode06.toValue(一次判定結果コード == null ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
-        } else if (認定ｿﾌﾄ2009.equals(厚労省IF識別コード)) {
+        } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
+                || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
             return IchijiHanteiKekkaCode09.toValue(一次判定結果コード == null ? RString.EMPTY : 一次判定結果コード.getKey()).get名称();
         }
         return RString.EMPTY;
@@ -985,7 +1031,8 @@ public class YokaigoNinteiTaskListHandler {
             return YokaigoJotaiKubun02.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
             return YokaigoJotaiKubun06.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
-        } else if (認定ｿﾌﾄ2009.equals(厚労省IF識別コード)) {
+        } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
+                || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
             return YokaigoJotaiKubun09.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         }
         return RString.EMPTY;
