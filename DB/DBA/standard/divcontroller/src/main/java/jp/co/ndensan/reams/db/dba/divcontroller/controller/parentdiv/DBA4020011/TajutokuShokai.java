@@ -57,8 +57,24 @@ public class TajutokuShokai {
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(key.get識別コード());
         div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(key.get識別コード());
         div.getTajutokuTekiyoJohoIchiran().getCcdTaJushochiTokureishaKanri().initialize(key.get識別コード());
-        div.getJutokuJohoTeiseiIchiran().getCcdShisetsuNyushRirekiKanri().initialize(key.get識別コード(), DaichoType.他市町村住所地特例者.getコード());
-        return ResponseData.of(div).setState(DBA4020011StateName.他市町村住所特例者照会);
+        div.getJutokuJohoTeiseiIchiran().setIsOpen(false);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 施設情報を初期化します。
+     *
+     * @param div 他市町村住所地特例者照会Div
+     * @return ResponseData<TajutokuShokaiDiv> 他市町村住所地特例者照会Div
+     */
+    public ResponseData<TajutokuShokaiDiv> onOpen(TajutokuShokaiDiv div) {
+        if (RString.isNullOrEmpty(div.getHdnIsOpen())) {
+            div.setHdnIsOpen(new RString("open"));
+            div.getJutokuJohoTeiseiIchiran().setIsOpen(true);
+            div.getJutokuJohoTeiseiIchiran().getCcdShisetsuNyushRirekiKanri().initialize(
+                    key.get識別コード(), DaichoType.他市町村住所地特例者.getコード());
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
