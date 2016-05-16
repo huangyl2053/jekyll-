@@ -750,7 +750,7 @@
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="1">
         SELECT
-        MAX(DbT7022ShoriDateKanri."nendoNaiRenban")
+        MAX(CAST(DbT7022ShoriDateKanri."nendoNaiRenban" AS INT))
         FROM
         rgdb."DbT7022ShoriDateKanri" AS DbT7022ShoriDateKanri
     </select>

@@ -720,7 +720,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt1KyojuhiMitchakuKaigoKeikateki().setValue(集計結果値);
@@ -791,7 +792,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set居住費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set居住費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenYoboYoshien1().setValue(集計結果値);
@@ -831,7 +833,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set居住費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set居住費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt1KyojuhiTankiRyoyoYoboYoshien1().setValue(集計結果値);
@@ -1062,7 +1065,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2SyokuhiMitchakuKaigoKeikateki().setValue(集計結果値);
@@ -1133,7 +1137,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2SyokuhiTankiHokenYoboYoshien1().setValue(集計結果値);
@@ -1173,7 +1178,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoYoboYoshien1().setValue(集計結果値);
@@ -1364,7 +1370,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(
+            JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2KyojuhiMitchakuKaigoKeikateki().setValue(集計結果値);
@@ -1435,7 +1442,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_居住費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_居住費_短期入所療養介護介護老人保健施設の集計結果値(
+            JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenYoboYoshien1().setValue(集計結果値);
@@ -1475,7 +1483,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_居住費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_居住費_短期入所療養介護介護療養型医療施設等の集計結果値(
+            JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2KyojuhiTankiRyoyoYoboYoshien1().setValue(集計結果値);

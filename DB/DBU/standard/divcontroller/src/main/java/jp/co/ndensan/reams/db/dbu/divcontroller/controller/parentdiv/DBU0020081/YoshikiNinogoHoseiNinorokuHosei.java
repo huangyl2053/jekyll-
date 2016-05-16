@@ -218,7 +218,8 @@ public class YoshikiNinogoHoseiNinorokuHosei {
         return YoshikiNinogoHoseiNinorokuHoseiHandler.of(div);
     }
 
-    private YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler getSeigoSeiHandler(YoshikiNinogoHoseiNinorokuHoseiDiv div) {
+    private YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler getSeigoSeiHandler(
+            YoshikiNinogoHoseiNinorokuHoseiDiv div) {
         return YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler.of(div);
     }
 

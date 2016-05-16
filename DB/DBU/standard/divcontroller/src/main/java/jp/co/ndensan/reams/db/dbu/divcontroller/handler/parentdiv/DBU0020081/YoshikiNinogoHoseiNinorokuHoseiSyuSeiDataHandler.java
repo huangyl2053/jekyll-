@@ -105,7 +105,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 if (更新前.get縦番号().equals(画面データ.get縦番号())
                         && 更新前.get横番号().equals(画面データ.get横番号())
                         && 更新前.get集計番号().equals(画面データ.get集計番号())
-                        && (更新前.get集計結果値() == null || (!更新前.get集計結果値().equals(画面データ.get集計結果値())))) {
+                        && (更新前.get集計結果値() == null
+                        || (!更新前.get集計結果値().equals(画面データ.get集計結果値())))) {
                     更新前 = 更新前.createBuilderForEdit().set集計結果値(画面データ.get集計結果値()).build();
                     修正データリスト.add(更新前);
                 }
@@ -114,7 +115,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
         return 修正データリスト;
     }
 
-    private void set給付費タブ第２号被保険者分場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト, JigyoHokokuTokeiData 更新前データ) throws IllegalArgumentException, NullPointerException {
+    private void set給付費タブ第２号被保険者分場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト,
+            JigyoHokokuTokeiData 更新前データ) {
         List<Decimal> 給付費_食費リスト = new ArrayList<>();
         set給付費_食費リスト(給付費_食費リスト);
         set画面データリスト(
@@ -145,8 +147,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 new Decimal(縦番号_8));
         List<Decimal> 給付費_短期入所療養介護療養型医療施設等リスト = new ArrayList<>();
         set給付費_短期入所療養介護介護療養型医療施設等リスト(給付費_短期入所療養介護療養型医療施設等リスト);
-        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0206), 給付費_短期入所療養介護療養型医療施設等リスト,
-                new Decimal(縦番号_9));
+        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0206),
+                給付費_短期入所療養介護療養型医療施設等リスト, new Decimal(縦番号_9));
         List<Decimal> 給付費_居住費滞在費リスト = new ArrayList<>();
         set給付費_居住費滞在費リスト(給付費_居住費滞在費リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0206), 給付費_居住費滞在費リスト,
@@ -185,7 +187,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 給付費_総計リスト, new Decimal(縦番号_3));
     }
 
-    private void set件数タブ第２号被保険者分場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト, JigyoHokokuTokeiData 更新前データ) throws IllegalArgumentException, NullPointerException {
+    private void set件数タブ第２号被保険者分場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト,
+            JigyoHokokuTokeiData 更新前データ) {
         List<Decimal> 件数_食費リスト = new ArrayList<>();
         set件数_食費リスト(件数_食費リスト);
         set画面データリスト(
@@ -216,8 +219,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 new Decimal(縦番号_8));
         List<Decimal> 件数_短期入所療養介護療養型医療施設等リスト = new ArrayList<>();
         set件数_短期入所療養介護介護療養型医療施設等リスト(件数_短期入所療養介護療養型医療施設等リスト);
-        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0205), 件数_短期入所療養介護療養型医療施設等リスト,
-                new Decimal(縦番号_9));
+        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0205),
+                件数_短期入所療養介護療養型医療施設等リスト, new Decimal(縦番号_9));
         List<Decimal> 件数_居住費滞在費リスト = new ArrayList<>();
         set件数_居住費滞在費リスト(件数_居住費滞在費リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0205), 件数_居住費滞在費リスト,
@@ -256,7 +259,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 件数_総計リスト, new Decimal(縦番号_3));
     }
 
-    private void set給付費タブ総数場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト, JigyoHokokuTokeiData 更新前データ) throws NullPointerException, IllegalArgumentException {
+    private void set給付費タブ総数場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト,
+            JigyoHokokuTokeiData 更新前データ) {
         List<Decimal> 給付費_食費リスト = new ArrayList<>();
         set給付費_食費リスト(給付費_食費リスト);
         set画面データリスト(
@@ -289,8 +293,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 new Decimal(縦番号_8));
         List<Decimal> 給付費_短期入所療養介護療養型医療施設等リスト = new ArrayList<>();
         set給付費_短期入所療養介護介護療養型医療施設等リスト(給付費_短期入所療養介護療養型医療施設等リスト);
-        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0106), 給付費_短期入所療養介護療養型医療施設等リスト,
-                new Decimal(縦番号_9));
+        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0106),
+                給付費_短期入所療養介護療養型医療施設等リスト, new Decimal(縦番号_9));
         List<Decimal> 給付費_居住費滞在費リスト = new ArrayList<>();
         set給付費_居住費滞在費リスト(給付費_居住費滞在費リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0106), 給付費_居住費滞在費リスト,
@@ -331,7 +335,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 給付費_総計リスト, new Decimal(縦番号_3));
     }
 
-    private void set件数タブ総数場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト, JigyoHokokuTokeiData 更新前データ) throws IllegalArgumentException, NullPointerException {
+    private void set件数タブ総数場合_画面データリスト(List<JigyoHokokuTokeiData> 画面データリスト,
+            JigyoHokokuTokeiData 更新前データ) {
         List<Decimal> 件数_食費リスト = new ArrayList<>();
         set件数_食費リスト(件数_食費リスト);
         set画面データリスト(
@@ -364,8 +369,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
                 new Decimal(縦番号_8));
         List<Decimal> 件数_短期入所療養介護療養型医療施設等リスト = new ArrayList<>();
         set件数_短期入所療養介護介護療養型医療施設等リスト(件数_短期入所療養介護療養型医療施設等リスト);
-        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0105), 件数_短期入所療養介護療養型医療施設等リスト,
-                new Decimal(縦番号_9));
+        set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0105),
+                件数_短期入所療養介護療養型医療施設等リスト, new Decimal(縦番号_9));
         List<Decimal> 件数_居住費滞在費リスト = new ArrayList<>();
         set件数_居住費滞在費リスト(件数_居住費滞在費リスト);
         set画面データリスト(画面データリスト, 更新前データ, new Code(集計番号_0105), 件数_居住費滞在費リスト,
@@ -431,9 +436,11 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
             Decimal 縦番号) {
         for (int i = 0; i < 件数リスト.size(); i++) {
             if (件数リスト.size() == 横行データ件数_8 || 件数リスト.size() == 横行データ件数_11) {
-                画面データリスト.add(get画面データ(更新前データ, 集計番号, new Decimal(i + 横番号_2), 縦番号, 件数リスト.get(i)));
+                画面データリスト.add(get画面データ(更新前データ, 集計番号, new Decimal(i + 横番号_2), 縦番号,
+                        件数リスト.get(i)));
             } else if (件数リスト.size() == 横行データ件数_10) {
-                画面データリスト.add(get画面データ(更新前データ, 集計番号, new Decimal(i + 横番号_3), 縦番号, 件数リスト.get(i)));
+                画面データリスト.add(get画面データ(更新前データ, 集計番号, new Decimal(i + 横番号_3), 縦番号,
+                        件数リスト.get(i)));
             }
         }
     }
@@ -739,7 +746,8 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
         介護療養型医療施設リスト.add(div.getPnl2().getPnl1().getTxt2SyokuhiRyoyoGokei().getValue());
     }
 
-    private void set給付費_地域密着型介護老人福祉施設入所者生活介護リスト(List<Decimal> 老人福祉施設入所者生活介護リスト) {
+    private void set給付費_地域密着型介護老人福祉施設入所者生活介護リスト(
+            List<Decimal> 老人福祉施設入所者生活介護リスト) {
         老人福祉施設入所者生活介護リスト.add(div.getPnl2().getPnl1().getTxt2SyokuhiMitchakuKaigoKeikateki().getValue());
         老人福祉施設入所者生活介護リスト.add(div.getPnl2().getPnl1().getTxt2SyokuhiMitchakuKaigoYokaigo1().getValue());
         老人福祉施設入所者生活介護リスト.add(div.getPnl2().getPnl1().getTxt2SyokuhiMitchakuKaigoYokaigo2().getValue());
