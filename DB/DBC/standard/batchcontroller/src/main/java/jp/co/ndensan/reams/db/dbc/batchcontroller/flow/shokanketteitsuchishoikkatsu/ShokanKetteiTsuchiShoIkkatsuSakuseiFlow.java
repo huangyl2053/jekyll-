@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishoseale
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -60,10 +61,20 @@ public class ShokanKetteiTsuchiShoIkkatsuSakuseiFlow extends BatchFlowBase<Shouk
     protected void defineFlow() {
 
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
-        RString 用紙タイプ = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                FlexibleYear.MIN, 帳票制御汎用キー_用紙タイプ).get設定値();
-        RString 支払予定日印字有無 = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                FlexibleYear.MIN, 帳票制御汎用キー_支払予定日印字有無).get設定値();
+        RString 用紙タイプ = RString.EMPTY;
+
+        ChohyoSeigyoHanyo 帳票制御汎用紙タイプ = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                FlexibleYear.MIN, 帳票制御汎用キー_用紙タイプ);
+        if (帳票制御汎用紙タイプ != null) {
+            用紙タイプ = 帳票制御汎用紙タイプ.get設定値();
+        }
+        RString 支払予定日印字有無 = RString.EMPTY;
+        ChohyoSeigyoHanyo 帳票制御汎支払予定日印字
+                = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                        FlexibleYear.MIN, 帳票制御汎用キー_支払予定日印字有無);
+        if (帳票制御汎支払予定日印字 != null) {
+            支払予定日印字有無 = 帳票制御汎支払予定日印字.get設定値();
+        }
         executeStep(TEMP_INSERT);
         executeStep(MEISAI_TEMP_INSERT);
         executeStep(TEMP_UPDATE);
