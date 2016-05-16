@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogenendofuka;
 
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,14 +12,14 @@ import lombok.Setter;
 /**
  * バッチ出力帳票一覧のクラスです。
  *
- * @reamsid_L DBB-0880-020 lijunjun
+ * @reamsid_L DBB-0930-020 sunhui
  */
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChohyoResult {
 
-    private ReportId 帳票分類ID;
+    private RString 帳票分類ID;
     private RString 帳票ID;
     private RString 出力順ID;
 
@@ -31,7 +30,7 @@ public class ChohyoResult {
      * @param 帳票ID 帳票ID
      * @param 出力順ID 出力順ID
      */
-    public ChohyoResult(ReportId 帳票分類ID, RString 帳票ID, RString 出力順ID) {
+    public ChohyoResult(RString 帳票分類ID, RString 帳票ID, RString 出力順ID) {
         this.帳票分類ID = 帳票分類ID;
         this.帳票ID = 帳票ID;
         this.出力順ID = 出力順ID;

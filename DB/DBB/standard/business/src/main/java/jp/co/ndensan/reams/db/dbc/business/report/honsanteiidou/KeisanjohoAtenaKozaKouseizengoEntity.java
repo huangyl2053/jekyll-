@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran;
+package jp.co.ndensan.reams.db.dbc.business.report.honsanteiidou;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
 
 /**
- * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 計算後情報_宛名_口座_更正前後Entityです。
+ * 本算定異動（現年度）結果一覧表帳票の入力Entityです。
  *
- * @reamsid_L DBB-0910-030 zhangrui
- *
+ * @reamsid_L DBB-0930-030 sunhui
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KeisangojohoAtenaKozaKouseizengoEntity {
+public class KeisanjohoAtenaKozaKouseizengoEntity {
 
-    private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
-    private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
+    private final KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
+    private final KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
 
     /**
      * コンストラクタです。
@@ -27,8 +26,8 @@ public class KeisangojohoAtenaKozaKouseizengoEntity {
      * @param 計算後情報_宛名_口座_更正前Entity KeisangojohoAtenaKozaEntity
      * @param 計算後情報_宛名_口座_更正後Entity KeisangojohoAtenaKozaEntity
      */
-    public KeisangojohoAtenaKozaKouseizengoEntity(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity,
-            KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity) {
+    public KeisanjohoAtenaKozaKouseizengoEntity(KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity,
+            KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity) {
         this.計算後情報_宛名_口座_更正前Entity = 計算後情報_宛名_口座_更正前Entity;
         this.計算後情報_宛名_口座_更正後Entity = 計算後情報_宛名_口座_更正後Entity;
     }
