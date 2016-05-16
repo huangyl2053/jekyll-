@@ -67,9 +67,6 @@ public class KaigoHokenShikakushasho {
     private static final int 画面のデータ件数 = 6;
     private static final RString 単位種類 = new RString("1月当たり");
     private static final RString 固定文字_単位 = new RString("単位");
-    private static final RString 居宅支援事業者履歴_0 = new RString("0");
-    private static final RString 居宅支援事業者履歴_2 = new RString("2");
-    private static final RString 居宅支援事業者履歴_3 = new RString("3");
     private static final RString 帳票独自 = new RString("1");
     private static final RString 市町村共通 = new RString("0");
     private static final RString 表示する = new RString("1");
