@@ -79,18 +79,16 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 国保連送付フラグ 国保連送付フラグ
      */
     public void loadボタンエリア(RString 画面モード, Boolean 国保連送付フラグ) {
-        if (登録モード.equals(画面モード)) {
-            RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
-            if (受託なし.equals(config)) {
-                div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(false);
-            } else if (受託あり.equals(config) && 国保連送付フラグ) {
-                div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
-                div.getPanelShinseiNaiyo().setDisabled(true);
-                div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowDeleteButtonColumn(false);
-                div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowModifyButtonColumn(false);
-            } else {
-                div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
-            }
+        RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+        if (受託なし.equals(config)) {
+            div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(false);
+        } else if (受託あり.equals(config) && 国保連送付フラグ) {
+            div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
+            div.getPanelShinseiNaiyo().setDisabled(true);
+            div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getGridSetting().setIsShowModifyButtonColumn(false);
+        } else {
+            div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
         }
     }
 
@@ -114,18 +112,15 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * 申請明細エリアの初期化です。
      *
      * @param 画面モード 画面モード
-     * @param 償還払支給申請 償還払支給申請
+     * @param 申請日 申請日
      * @param 証明書リスト 証明書リスト
      * @param 証明書一覧情報 証明書一覧情報
      */
     public void load申請明細エリア(RString 画面モード,
-            ShokanShinsei 償還払支給申請,
+            RDate 申請日,
             List<ShikibetsuNoKanri> 証明書リスト,
             List<ServiceTeikyoShomeishoResult> 証明書一覧情報) {
-        // TODO QA南京。 申請日は「画面設計_DBCMN53001_償還払い費支給申請決定_検索」の償還払費申請検索キーにはありません。
-        if (償還払支給申請.get申請年月日() != null) {
-            div.getPanelShinseiNaiyo().getTxtShinseibi().setValue(new RDate(償還払支給申請.get申請年月日().toString()));
-        }
+        div.getPanelShinseiNaiyo().getTxtShinseibi().setValue(申請日);
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(証明書BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
@@ -171,8 +166,10 @@ public class ServiceTeikyoShomeishoPanelHandler {
 
     /**
      * ViewStateに情報を設定する。
+     *
+     * @param 処理モード 処理モード
      */
-    public void putViewState() {
+    public void putViewState(RString 処理モード) {
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
@@ -189,6 +186,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 parameter.getYoshikiNo(),
                 parameter.getMeisaiNo(),
                 parameter.getKyufuritsu());
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
     }
 
@@ -213,13 +211,13 @@ public class ServiceTeikyoShomeishoPanelHandler {
         } else if (row.getData1() != null) {
             事業者番号 = new JigyoshaNo(row.getData1());
         }
-        RString 様式番号 = null;
+        RString 様式番号;
         if (処理モード_登録.equals(処理モード)) {
             様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedValue();
         } else {
             様式番号 = row.getData4();
         }
-        RString 明細番号 = null;
+        RString 明細番号 = RString.EMPTY;
         if (!処理モード_登録.equals(処理モード)) {
             明細番号 = row.getData3();
         }
@@ -252,14 +250,12 @@ public class ServiceTeikyoShomeishoPanelHandler {
     /**
      * 「追加する」ボタンを押下する、チェックです。
      *
-     * @return 証明書選択チェック
      */
-    public Boolean 証明書選択チェック() {
+    public void 証明書選択チェック() {
         if (証明書BLANK.equals(div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey())) {
             throw new ApplicationException(UrErrorMessages.選択されていない
                     .getMessage().replace(証明書.toString()).evaluate());
         }
-        return true;
     }
 
     /**
@@ -271,7 +267,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         JigyoshaNo 事業者番号 = new JigyoshaNo(div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
-        RString 様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedValue();
+        RString 様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey();
         int 証明書件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(
                 parameter.getHiHokenshaNo(),
                 parameter.getServiceTeikyoYM(),
@@ -279,7 +275,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                 事業者番号,
                 様式番号);
         if (証明書件数 > 0) {
-            throw new ApplicationException(UrErrorMessages.選択されていない
+            throw new ApplicationException(UrErrorMessages.既に登録済
                     .getMessage().replace(証明書.toString()).evaluate());
         }
         return true;
