@@ -183,6 +183,7 @@ public class FutangendogakuNinteiShinseiHandler {
      */
     public void onClick_btnAddShinsei() {
         div.setJotai(追加状態);
+        div.getShinseiList().setDisabled(true);
         clear申請情報エリア();
         set申請情報エリア表示制御();
         init申請理由DDL();

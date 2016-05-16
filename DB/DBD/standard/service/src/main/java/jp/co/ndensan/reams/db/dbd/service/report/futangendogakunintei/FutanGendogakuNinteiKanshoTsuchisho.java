@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakuninte
 import jp.co.ndensan.reams.db.dbd.service.core.ninteikoshintsuchisho.NinteiKoshinTsuchishoService;
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -133,7 +134,9 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         SourceDataCollection sourceDataCollection = new SourceDataCollection();
 
         FutanGendogakuNintei 介護保険負担限度額認定 = get介護負担限度額認定の情報(被保険者番号, 履歴番号);
-
+        if (介護保険負担限度額認定 == null) {
+            介護保険負担限度額認定 = new FutanGendogakuNintei(ShoKisaiHokenshaNo.EMPTY, 被保険者番号, 履歴番号);
+        }
         Association association = get地方公共団体();
 
         UaFt200FindShikibetsuTaishoEntity uaFt200Entity = get宛名情報(識別コード);
@@ -150,7 +153,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
         if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
             int パターン番号;
-            if (介護保険負担限度額認定 == null || 介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
+            if (介護保険負担限度額認定.get旧措置者区分() == null || 介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
                 パターン番号 = 1;
             } else {
                 パターン番号 = パターン番号_21;
