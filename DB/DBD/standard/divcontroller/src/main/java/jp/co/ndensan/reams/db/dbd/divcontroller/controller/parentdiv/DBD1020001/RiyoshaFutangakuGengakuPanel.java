@@ -180,9 +180,9 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnBackShinseiIchirai(RiyoshaFutangakuGengakuPanelDiv div) {
+        div.getBtnInputNew().setDisabled(false);
         div.getDdlShinseiIchiran().setDisabled(false);
-        div.getBtnShinseiKakutei().setDisplayNone(true);
-        div.getBtnConfirm().setDisplayNone(true);
+        div.getRiyoshaFutangakuGengakuShinseiDetail().setDisabled(true);
         getHandler(div).入力情報をクリア();
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }

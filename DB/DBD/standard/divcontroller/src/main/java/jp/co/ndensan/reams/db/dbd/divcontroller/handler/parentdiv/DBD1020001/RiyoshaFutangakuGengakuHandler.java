@@ -161,6 +161,7 @@ public class RiyoshaFutangakuGengakuHandler {
      * 「承認情報を確定する」ボタン押下の処理です。
      */
     public void 承認情報を確定するボタン押下() {
+        div.getBtnInputNew().setDisabled(false);
         div.getDdlShinseiIchiran().setDisabled(false);
 
         ArrayList<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, ArrayList.class);
@@ -315,6 +316,7 @@ public class RiyoshaFutangakuGengakuHandler {
      * 「申請情報を確定する」ボタン押下の処理です。
      */
     public void 申請情報を確定するボタン押下() {
+        div.getBtnInputNew().setDisabled(false);
         div.getDdlShinseiIchiran().setDisabled(false);
 
         ArrayList<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(Dbd1020001Keys.利用者負担額減額情報ListのViewState, ArrayList.class);
@@ -422,6 +424,8 @@ public class RiyoshaFutangakuGengakuHandler {
     public void 追加するボタン押下() {
         該当情報ViewStateのクリア();
         入力情報をクリア();
+        div.getBtnInputNew().setDisabled(true);
+        div.getDdlShinseiIchiran().setDisabled(true);
 
         div.getRadKetteiKubun().setSelectedKey(承認する_KEY);
         if (ResponseHolder.getMenuID().equals(申請メニュー)) {
@@ -439,6 +443,7 @@ public class RiyoshaFutangakuGengakuHandler {
 
         該当情報ViewStateのクリア();
         入力情報をクリア();
+        div.getBtnInputNew().setDisabled(true);
         div.getDdlShinseiIchiran().setDisabled(true);
 
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
