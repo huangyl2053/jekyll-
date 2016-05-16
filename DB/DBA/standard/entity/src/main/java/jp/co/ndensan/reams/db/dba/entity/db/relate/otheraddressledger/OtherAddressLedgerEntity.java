@@ -53,7 +53,7 @@ public class OtherAddressLedgerEntity {
     private RString 地区タイトル3;
     private ChikuCode 地区コード3;
     private RString 行政区タイトル;
-    private ZenkokuJushoCode 住所コード;
+    private RString 住所コード;
     private GyoseikuCode 行政区コード;
     private ZenkokuJushoCode 前住所コード;
     private RString 住所2;
