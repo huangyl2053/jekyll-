@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki;
 
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 生活保護履歴情報のMyBatis用パラメータクラスです。
@@ -16,10 +14,25 @@ import lombok.Setter;
  * @reamsid_L DBZ-4520-010 zhangzhiming
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-@Getter
-@Setter
-public class SeikatsuhogoParameter {
+@lombok.Getter
+public final class SeikatsuhogoParameter {
 
-    private ShikibetsuCode shikibetsuCode;
-    private GyomuCode gyomuCode;
+    private final ShikibetsuCode 識別コード;
+    private final GyomuCode 業務コード;
+
+    private SeikatsuhogoParameter(ShikibetsuCode 識別コード, GyomuCode 業務コード) {
+        this.識別コード = 識別コード;
+        this.業務コード = 業務コード;
+    }
+
+    /**
+     * 検索用のパラメータを生成します。
+     *
+     * @param 識別コード 識別コード
+     * @param 業務コード 業務コード
+     * @return 生活保護履歴情報パラメータ
+     */
+    public static SeikatsuhogoParameter createParameter(ShikibetsuCode 識別コード, GyomuCode 業務コード) {
+        return new SeikatsuhogoParameter(識別コード, 業務コード);
+    }
 }

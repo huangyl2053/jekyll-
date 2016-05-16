@@ -41,8 +41,8 @@
 	ON A."shikibetsuCode" = C."shikibetsuCode"
 	AND A."gyomuCode" = C."gyomuCode"
 	AND A."jukyuKaishiYMD" = C."jukyuKaishiYMD"
-	WHERE A."shikibetsuCode" =#{shikibetsuCode}
-	AND A."gyomuCode" =#{gyomuCode}
+	WHERE A."shikibetsuCode" =#{識別コード}
+	AND A."gyomuCode" =#{業務コード}
         order by A."shikibetsuCode" desc,
         A."gyomuCode" desc,A."jukyuKaishiYMD" desc
     </select>
