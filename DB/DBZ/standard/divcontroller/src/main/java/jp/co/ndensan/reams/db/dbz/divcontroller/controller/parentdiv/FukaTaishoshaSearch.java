@@ -114,7 +114,7 @@ public class FukaTaishoshaSearch {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 //        div.getSearchCondition().getCcdSearchCondition().check最大表示件数(pairs);
         ResponseData<FukaTaishoshaSearchDiv> responseData = ResponseData.of(div).addValidationMessages(pairs).respond();
-        responseData.setValidateMessageIgnoreWarningRequest(false);
+//        responseData.setValidateMessageIgnoreWarningRequest(false);
         return responseData;
     }
 
@@ -155,10 +155,12 @@ public class FukaTaishoshaSearch {
                 && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
                 && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
                 && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
-        if (検索条件Flag) {
+
+        boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
+        if (検索条件Flag && !宛名条件修正Flag) {
             pairs.add(FukaTaishoshaSearchValidationHelper.validate検索条件(検索条件Flag, div.getSearchCondition()));
             responseData = ResponseData.of(div).addValidationMessages(pairs).respond();
-            responseData.setValidateMessageIgnoreWarningRequest(false);
+//            responseData.setValidateMessageIgnoreWarningRequest(false);
             return responseData;
         }
         // 該当者を検索する

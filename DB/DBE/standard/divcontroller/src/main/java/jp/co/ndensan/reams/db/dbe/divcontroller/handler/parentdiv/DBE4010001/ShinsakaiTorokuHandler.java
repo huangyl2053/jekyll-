@@ -52,7 +52,7 @@ public class ShinsakaiTorokuHandler {
      */
     public void 要介護認定完了更新() {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
-                = ViewStateHolder.get(ViewStateKeys.タスク一覧_審査会登録モード, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
         FlexibleDate 割当完了年月日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {

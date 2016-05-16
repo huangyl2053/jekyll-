@@ -213,16 +213,13 @@ public class FutangendogakuNinteiShinseiHandler {
      * @return is削除可
      */
     public boolean onSelectByDeleteButton() {
-        ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
-        FutanGendogakuNintei futanGendogakuNintei = 申請一覧情報ArrayList.get(div.getDgShinseiList().getClickedRowId()).getFutanGendogakuNintei();
-        if (申請メニューID.equals(ResponseHolder.getMenuID()) && !futanGendogakuNintei.get決定区分().isEmpty()) {
-            return false;
-        }
         ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         int index = div.getDgShinseiList().getClickedRowId();
         FutanGendogakuNinteiViewState ninteiViewState = list.get(index);
-        if (EntityDataState.Added.equals(ninteiViewState.getState())) {
+        if (!EntityDataState.Added.equals(ninteiViewState.getState())) {
             ninteiViewState.setState(EntityDataState.Deleted);
+        } else {
+            list.remove(index);
         }
         list.set(index, ninteiViewState);
         set申請一覧(list);

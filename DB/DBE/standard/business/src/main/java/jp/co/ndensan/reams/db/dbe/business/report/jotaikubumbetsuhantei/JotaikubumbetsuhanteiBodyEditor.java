@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.jotaikubumbetsuhantei.Jot
 /**
  * 要介護状態区分別判定件数のEditorです。
  *
- * @reamsid_L DBE-1450-040 dongyabin
+ * @reamsid_L DBE-1450-050 dongyabin
  */
 public class JotaikubumbetsuhanteiBodyEditor implements IJotaikubumbetsuhanteiBodyEditor {
 

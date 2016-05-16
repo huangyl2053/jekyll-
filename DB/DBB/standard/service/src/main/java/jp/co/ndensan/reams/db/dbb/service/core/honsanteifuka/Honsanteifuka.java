@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.Honsanteifuk
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.TyouhyouParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteifuka.BatchTyouhyouEntity;
@@ -29,7 +30,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -84,7 +84,6 @@ public class Honsanteifuka {
     private static final ReportId 特徴開始通知書_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
-    private static final RString 定値_納入通知書 = new RString("納入通知書の帳票ID");
     private static final int 設定値_番号1 = 1;
     private static final int 設定値_番号2 = 2;
     private static final int 設定値_番号0 = 0;
@@ -297,8 +296,7 @@ public class Honsanteifuka {
             } else if (納入通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
                 BatchTyouhyouEntity 納入通知書 = get納入通知書_帳票ID(調定年度, 算定期, parameter);
                 if (納入通知書 == null) {
-                    throw new ApplicationException(UrErrorMessages.存在しない
-                            .getMessage().replace(定値_納入通知書.toString()).evaluate());
+                    throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
                 }
                 resultList.add(new BatchTyouhyouResult(納入通知書));
             }
@@ -671,7 +669,7 @@ public class Honsanteifuka {
             result.set納入_ページごとに山分け(区分_イチ);
         }
         result.set打分け条件情報(parameter.get打分け条件情報());
-        result.set処理日時(RDate.getNowDate());
+        result.set処理日時(RDate.getNowDateTime());
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         return result;
     }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.daisanshakouihigaitodokekaigohokenyo;
+package jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigohokenyo;
 
-import jp.co.ndensan.reams.db.dba.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 第三者行為による被害届（介護保険用）Builderクラスです
- * 
- * @reamsid_L DBA-0540-699  suguangjun 
+ *
+ * @reamsid_L DBA-0540-699 suguangjun
  */
 public final class DaisanshaKouiHigaitodokeKaigoHokenyoBuilderImpl implements IDaisanshaKouiHigaitodokeKaigoHokenyoBuilder {
 
