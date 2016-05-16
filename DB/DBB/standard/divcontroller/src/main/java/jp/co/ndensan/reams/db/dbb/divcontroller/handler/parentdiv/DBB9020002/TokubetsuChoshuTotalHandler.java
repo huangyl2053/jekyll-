@@ -1119,8 +1119,15 @@ public final class TokubetsuChoshuTotalHandler {
                 .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho().getSelectedKey();
         if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.期割計算_普徴切替方法, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
-            BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.期割計算_普徴切替方法,
-                    key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            if (FutsuChoshuKirikaeKeisanHoho.指定期以降重複させる.getコード().equals(key)) {
+                RString 期のキー = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
+                        .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeJufukuStKi().getSelectedKey();
+                BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.期割計算_普徴切替方法,
+                        期のキー, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            } else {
+                BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.期割計算_普徴切替方法,
+                        key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            }
         }
     }
 
