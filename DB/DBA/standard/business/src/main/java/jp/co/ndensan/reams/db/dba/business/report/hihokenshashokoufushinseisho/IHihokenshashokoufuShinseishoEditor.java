@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashokoufushinseisho;
 
-import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**

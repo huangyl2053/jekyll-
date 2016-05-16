@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.jukyushikakushomeishohakko;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -121,9 +122,9 @@ public class JukyuShikakuShomeishoModel {
     }
 
     /**
-     * 介護認定審査会意見を取得します。
+     * 備考を取得します。
      *
-     * @return 介護認定審査会意見
+     * @return 備考
      */
     public RString get備考() {
         if (jukyuShikakuEntity.getBiko() != null
@@ -133,4 +134,33 @@ public class JukyuShikakuShomeishoModel {
             return RString.EMPTY;
         }
     }
+
+    /**
+     * 負担割合を取得します。
+     *
+     * @return 負担割合
+     */
+    public RString get負担割合() {
+        if (jukyuShikakuEntity.getFutanWariaiKubun() != null
+                && !jukyuShikakuEntity.getFutanWariaiKubun().isEmpty()) {
+            return FutanwariaiKubun.toValue(jukyuShikakuEntity.getFutanWariaiKubun()).get名称();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    /**
+     * 負担割該当を取得します。
+     *
+     * @return 負担割該当
+     */
+    public RString get負担割該当() {
+        if (jukyuShikakuEntity.getFutanWariai() != null
+                && !jukyuShikakuEntity.getFutanWariai().isEmpty()) {
+            return jukyuShikakuEntity.getFutanWariai();
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
 }

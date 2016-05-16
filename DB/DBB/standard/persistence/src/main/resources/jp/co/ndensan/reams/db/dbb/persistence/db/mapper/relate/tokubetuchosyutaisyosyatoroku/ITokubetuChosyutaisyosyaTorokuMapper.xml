@@ -4,7 +4,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper">
-    <select id="getChoshuHoho" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+    <select id="getChoshuHoho" parameterType="jp.co.ndensan.reams.db.dbb.entity.report.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity">
         SELECT *
         FROM rgdb."DbT2001ChoshuHoho" A
@@ -12,7 +12,7 @@
         AND A."hihokenshaNo" = #{被保険者番号}
 
     </select>
-    <select id="getShorizumiRenban" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+    <select id="getShorizumiRenban" parameterType="jp.co.ndensan.reams.db.dbb.entity.report.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
         SELECT *
         FROM rgdb."DbT7022ShoriDateKanri" A
@@ -20,7 +20,7 @@
         AND A."shoriName" = #{処理名}
         ORDER BY A."nendoNaiRenban" ASC
     </select>
-    <select id="getHihokenshaFlag" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+    <select id="getHihokenshaFlag" parameterType="jp.co.ndensan.reams.db.dbb.entity.report.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">
         SELECT *
         FROM rgdb."DbT1001HihokenshaDaicho" A
@@ -32,7 +32,7 @@
         ORDER BY A."idoYMD",A."edaNo" DESC Limit 1
 
     </select>
-    <select id="getIraikinKijunbi" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+    <select id="getIraikinKijunbi" parameterType="jp.co.ndensan.reams.db.dbb.entity.report.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
         SELECT A."kijunYMD"
         FROM rgdb."DbT7022ShoriDateKanri" A

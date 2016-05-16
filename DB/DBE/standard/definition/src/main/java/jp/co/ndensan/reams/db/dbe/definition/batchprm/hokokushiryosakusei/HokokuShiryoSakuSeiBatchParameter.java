@@ -21,6 +21,8 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     private static final int 年度開始月 = 4;
     private static final int 年度終了月 = 3;
     private static final int 年度終了日 = 31;
+    private static final int 年月終了INDEX = 6;
+    private static final int 対象月LENGTH = 2;
     private static final String JIGYOJYOKYOHOKOKU = "jigyoJyokyoHokoku";
     private static final String JISSIJYOKYOTOKEI = "jissiJyokyoTokei";
     private static final String SINSAHANTEIJYOKYO = "sinsaHanteiJyokyo";
@@ -160,9 +162,12 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 gogitaiNo,
                 taishoTsukiKubun,
                 taishoGeppiKubun,
-                taishoNendo == null ? RString.EMPTY : new RDate(taishoNendo.getYearValue(), 年度開始月, 1).toDateString(),
-                taishoNendo == null ? RString.EMPTY : new RDate(taishoNendo.getYearValue() + 1, 年度終了月, 年度終了日).toDateString(),
-                taishoNendo == null ? RString.EMPTY : taishoNendo.toDateString(),
+                taishoNendo == null ? RString.EMPTY
+                : new RDate(taishoNendo.getYearValue(), 年度開始月, 1).toDateString().substring(0, 年月終了INDEX),
+                taishoNendo == null ? RString.EMPTY
+                : new RDate(taishoNendo.getYearValue() + 1, 年度終了月, 年度終了日).toDateString().substring(0, 年月終了INDEX),
+                taishoNendo == null ? RString.EMPTY : new RString((taishoNendo.toString()
+                        + taishoTsuki.padZeroToLeft(対象月LENGTH).toString())),
                 taishoGeppiFrom == null || RString.isNullOrEmpty(taishoGeppiFrom),
                 taishoGeppiTo == null || RString.isNullOrEmpty(taishoGeppiTo),
                 taishoGeppiFrom,

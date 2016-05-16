@@ -4,22 +4,18 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tabShomeishoJoho のクラスファイル
- *
- * @reamsid_L DBU-0430-010 linghuhang
+ * tabShomeishoJoho のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class tabShomeishoJohoDiv extends TabPanel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -82,7 +78,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtShiseiHaishibi(TextBoxDate txtShiseiHaishibi) {
+    public void  setTxtShiseiHaishibi(TextBoxDate txtShiseiHaishibi) {
         this.getShomeishoNaiyo().setTxtShiseiHaishibi(txtShiseiHaishibi);
     }
 
@@ -92,7 +88,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtHogoFuyoKonshoGengakuKingaku(TextBoxNum txtHogoFuyoKonshoGengakuKingaku) {
+    public void  setTxtHogoFuyoKonshoGengakuKingaku(TextBoxNum txtHogoFuyoKonshoGengakuKingaku) {
         this.getShomeishoNaiyo().setTxtHogoFuyoKonshoGengakuKingaku(txtHogoFuyoKonshoGengakuKingaku);
     }
 
@@ -102,7 +98,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtShomeishoKoufuDate(TextBoxDate txtShomeishoKoufuDate) {
+    public void  setTxtShomeishoKoufuDate(TextBoxDate txtShomeishoKoufuDate) {
         this.getShomeishoNaiyo().setTxtShomeishoKoufuDate(txtShomeishoKoufuDate);
     }
 
@@ -112,7 +108,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKyufugakuJikoFutanGetsugaku(TextBoxNum txtKyufugakuJikoFutanGetsugaku) {
+    public void  setTxtKyufugakuJikoFutanGetsugaku(TextBoxNum txtKyufugakuJikoFutanGetsugaku) {
         this.getKyokaisoGaitouSochiNaiyo().setTxtKyufugakuJikoFutanGetsugaku(txtKyufugakuJikoFutanGetsugaku);
     }
 
@@ -122,7 +118,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setDdlKyojuhiGendogakuDankai(DropDownList ddlKyojuhiGendogakuDankai) {
+    public void  setDdlKyojuhiGendogakuDankai(DropDownList ddlKyojuhiGendogakuDankai) {
         this.getKyokaisoGaitouSochiNaiyo().setDdlKyojuhiGendogakuDankai(ddlKyojuhiGendogakuDankai);
     }
 
@@ -132,7 +128,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKyojuhiJikoFutanGetsugaku(TextBoxNum txtKyojuhiJikoFutanGetsugaku) {
+    public void  setTxtKyojuhiJikoFutanGetsugaku(TextBoxNum txtKyojuhiJikoFutanGetsugaku) {
         this.getKyokaisoGaitouSochiNaiyo().setTxtKyojuhiJikoFutanGetsugaku(txtKyojuhiJikoFutanGetsugaku);
     }
 
@@ -142,7 +138,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtShokuhiJikoFutanGetsugaku(TextBoxNum txtShokuhiJikoFutanGetsugaku) {
+    public void  setTxtShokuhiJikoFutanGetsugaku(TextBoxNum txtShokuhiJikoFutanGetsugaku) {
         this.getKyokaisoGaitouSochiNaiyo().setTxtShokuhiJikoFutanGetsugaku(txtShokuhiJikoFutanGetsugaku);
     }
 
@@ -152,7 +148,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setDdlShokuhiGakenFutanGendogakuDankai(DropDownList ddlShokuhiGakenFutanGendogakuDankai) {
+    public void  setDdlShokuhiGakenFutanGendogakuDankai(DropDownList ddlShokuhiGakenFutanGendogakuDankai) {
         this.getKyokaisoGaitouSochiNaiyo().setDdlShokuhiGakenFutanGendogakuDankai(ddlShokuhiGakenFutanGendogakuDankai);
     }
 
@@ -162,7 +158,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKaigoHokenryoJikoFutanGetsugaku(TextBoxNum txtKaigoHokenryoJikoFutanGetsugaku) {
+    public void  setTxtKaigoHokenryoJikoFutanGetsugaku(TextBoxNum txtKaigoHokenryoJikoFutanGetsugaku) {
         this.getKyokaisoGaitouSochiNaiyo().setTxtKaigoHokenryoJikoFutanGetsugaku(txtKaigoHokenryoJikoFutanGetsugaku);
     }
 
@@ -172,7 +168,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtRiyoshaFutanSeidaiGokeigaku(TextBoxNum txtRiyoshaFutanSeidaiGokeigaku) {
+    public void  setTxtRiyoshaFutanSeidaiGokeigaku(TextBoxNum txtRiyoshaFutanSeidaiGokeigaku) {
         this.getKyokaisoGaitouSochiNaiyo().setTxtRiyoshaFutanSeidaiGokeigaku(txtRiyoshaFutanSeidaiGokeigaku);
     }
 
@@ -182,7 +178,7 @@ public class tabShomeishoJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtJikoFutanGetsugakuGokeigaku(TextBoxNum txtJikoFutanGetsugakuGokeigaku) {
+    public void  setTxtJikoFutanGetsugakuGokeigaku(TextBoxNum txtJikoFutanGetsugakuGokeigaku) {
         this.getKyokaisoGaitouSochiNaiyo().setTxtJikoFutanGetsugakuGokeigaku(txtJikoFutanGetsugakuGokeigaku);
     }
 

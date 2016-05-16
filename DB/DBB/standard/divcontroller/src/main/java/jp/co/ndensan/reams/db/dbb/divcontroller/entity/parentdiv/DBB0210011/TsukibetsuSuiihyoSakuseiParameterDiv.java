@@ -7,17 +7,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.ChikuShichosonSelectDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.IChikuShichosonSelectDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * TsukibetsuSuiihyoSakuseiParameter のクラスファイル
- *
+ * TsukibetsuSuiihyoSakuseiParameter のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -140,7 +141,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setDdShikakuKijunD(DropDownList ddShikakuKijunD) {
+    public void  setDdShikakuKijunD(DropDownList ddShikakuKijunD) {
         this.getChushutsuJoken().setDdShikakuKijunD(ddShikakuKijunD);
     }
 
@@ -150,7 +151,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLin3(HorizontalLine lin3) {
+    public void  setLin3(HorizontalLine lin3) {
         this.getChushutsuJoken().setLin3(lin3);
     }
 
@@ -160,7 +161,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setRadNenrei(RadioButton radNenrei) {
+    public void  setRadNenrei(RadioButton radNenrei) {
         this.getChushutsuJoken().setRadNenrei(radNenrei);
     }
 
@@ -170,7 +171,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setNenrei(NenreiDiv Nenrei) {
+    public void  setNenrei(NenreiDiv Nenrei) {
         this.getChushutsuJoken().setNenrei(Nenrei);
     }
 
@@ -180,7 +181,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtNenreiSt(TextBoxNum txtNenreiSt) {
+    public void  setTxtNenreiSt(TextBoxNum txtNenreiSt) {
         this.getChushutsuJoken().getNenrei().setTxtNenreiSt(txtNenreiSt);
     }
 
@@ -190,7 +191,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLblKara1(Label lblKara1) {
+    public void  setLblKara1(Label lblKara1) {
         this.getChushutsuJoken().getNenrei().setLblKara1(lblKara1);
     }
 
@@ -200,7 +201,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtNenreiEd(TextBoxNum txtNenreiEd) {
+    public void  setTxtNenreiEd(TextBoxNum txtNenreiEd) {
         this.getChushutsuJoken().getNenrei().setTxtNenreiEd(txtNenreiEd);
     }
 
@@ -210,7 +211,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtNenreiKijunYMD(TextBoxDate txtNenreiKijunYMD) {
+    public void  setTxtNenreiKijunYMD(TextBoxDate txtNenreiKijunYMD) {
         this.getChushutsuJoken().getNenrei().setTxtNenreiKijunYMD(txtNenreiKijunYMD);
     }
 
@@ -220,7 +221,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setRadUmareYMD(RadioButton radUmareYMD) {
+    public void  setRadUmareYMD(RadioButton radUmareYMD) {
         this.getChushutsuJoken().setRadUmareYMD(radUmareYMD);
     }
 
@@ -230,7 +231,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setUmareYMD(UmareYMDDiv UmareYMD) {
+    public void  setUmareYMD(UmareYMDDiv UmareYMD) {
         this.getChushutsuJoken().setUmareYMD(UmareYMD);
     }
 
@@ -240,7 +241,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtUmareSt(TextBoxDate txtUmareSt) {
+    public void  setTxtUmareSt(TextBoxDate txtUmareSt) {
         this.getChushutsuJoken().getUmareYMD().setTxtUmareSt(txtUmareSt);
     }
 
@@ -250,7 +251,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLblKara2(Label lblKara2) {
+    public void  setLblKara2(Label lblKara2) {
         this.getChushutsuJoken().getUmareYMD().setLblKara2(lblKara2);
     }
 
@@ -260,7 +261,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtUmareEd(TextBoxDate txtUmareEd) {
+    public void  setTxtUmareEd(TextBoxDate txtUmareEd) {
         this.getChushutsuJoken().getUmareYMD().setTxtUmareEd(txtUmareEd);
     }
 
@@ -270,7 +271,7 @@ public class TsukibetsuSuiihyoSakuseiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLin2(HorizontalLine lin2) {
+    public void  setLin2(HorizontalLine lin2) {
         this.getChushutsuJoken().setLin2(lin2);
     }
 

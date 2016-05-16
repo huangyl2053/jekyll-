@@ -43,7 +43,6 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase
     private static final String CSVKOMOKUMEIFUKA = "csvkomokumeifuka";
     private static final String CSVRENBANFUKA = "csvrenbanfuka";
     private static final String CSVHITSUKESURASYUHENSYU = "csvhitsukesurasyuhensyu";
-    private static final long serialVersionUID = 6184743641347261427L;
 
     @BatchParameter(key = CYUSYUTSUDATAKUBUN, name = "抽出データ区分")
     private RString cyusyutsudatakubun;
@@ -83,13 +82,6 @@ public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase
     private boolean isCsvrenbanfuka;
     @BatchParameter(key = CSVHITSUKESURASYUHENSYU, name = "CSV日付スラッシュ編集")
     private boolean isCsvhitsukesurasyuhensyu;
-
-    /**
-     * コンストラクタです。
-     *
-     */
-    public HanyoRisutoJyukyusyaDaichoBatchParameter() {
-    }
 
     /**
      * バーチのパラメータを作成します。

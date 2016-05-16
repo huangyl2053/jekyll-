@@ -1,6 +1,10 @@
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshadaichohakkoichiranhyo;
 
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaichohakkoichiranhyo.HihokenshaDaichoHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 被保険者台帳一覧表エディターのインターフェースクラスです。
@@ -28,6 +32,8 @@ public class HihokenshaDaichoHakkoIchiranhyoBodyEditor implements IHihokenshaDai
 
     private HihokenshaDaichoHakkoIchiranhyoReportSource editBody(HihokenshaDaichoHakkoIchiranhyoReportSource source) {
 
+        source.shikibetuCode = new ShikibetsuCode(bodyItem.getListUpper_6());
+        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), bodyItem.getListNo_1());
         source.listNo_1 = bodyItem.getListNo_1();
         source.listUpper_1 = bodyItem.getListUpper_1();
         source.listUpper_2 = bodyItem.getListUpper_2();

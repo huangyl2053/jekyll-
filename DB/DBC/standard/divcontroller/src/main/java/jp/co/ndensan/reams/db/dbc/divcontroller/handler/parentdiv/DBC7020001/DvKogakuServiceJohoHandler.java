@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKo
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -47,9 +48,9 @@ public class DvKogakuServiceJohoHandler {
     private static final RString すべて = new RString("すべて");
     private static final RString 口座払い = new RString("口座払い");
     private static final RString 窓口払い = new RString("窓口払い");
-    private static final RString 項目名 = new RString("項目名付加");
-    private static final RString 連番 = new RString("連番付加");
-    private static final RString 日付スラッシュ = new RString("日付'/'編集");
+    private static final RString 項目名 = new RString("1");
+    private static final RString 連番 = new RString("2");
+    private static final RString 日付スラッシュ = new RString("3");
 
     /**
      * コンストラクタです。
@@ -159,8 +160,7 @@ public class DvKogakuServiceJohoHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
-     * @return HanyoListKogakuKaigoBatchParameter
-     * 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
     public HanyoListKogakuKaigoBatchParameter getBatchParamter() {
         HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
@@ -209,6 +209,7 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setKiyuKikanName(div.getDvKogakuChushutsuJoken().getDvKogakuService().getCcdKogakuKinyuKikan()
                 .get金融機関() == null ? RString.EMPTY : div.getDvKogakuChushutsuJoken()
                 .getDvKogakuService().getCcdKogakuKinyuKikan().get金融機関().get金融機関名称());
+        batchparam.setReamsLoginId(ControlDataHolder.getUserId());
         batchParamterHandleParentAdd(batchparam);
         batchParamterHandleSubAdd(batchparam);
         return batchparam;

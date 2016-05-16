@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.db.dbz.business.core.hihousyosai.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.business.shichoson.Shichoson;
+import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
@@ -128,8 +128,7 @@ public class HihosyosaiHandler {
                 break;
         }
         div.getCcdJyusyotiTokure().initialize(被保険者番号, 識別コード, 資格取得日);
-        // TODO 凌護行　Redmine#:82087回答まち、
-//        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, null, 資格取得日);
+        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, 識別コード, 資格取得日);
         if (RString.isNullOrEmpty(台帳種別)) {
             div.getCcdShisetuNyutaisyo().initialize(識別コード);
         } else {
@@ -174,8 +173,7 @@ public class HihosyosaiHandler {
             div.setDisabled(true);
         }
         div.getCcdJyusyotiTokure().initialize(被保険者番号, 識別コード, 資格取得日);
-        // TODO 凌護行　Redmine#:82087回答まち、
-//        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, null, 資格取得日);
+        div.getCcdShikakuKanrenIdo().initialize(被保険者番号, 識別コード, 資格取得日);
         if (RString.isNullOrEmpty(台帳種別)) {
             div.getCcdShisetuNyutaisyo().initialize(識別コード);
         } else {

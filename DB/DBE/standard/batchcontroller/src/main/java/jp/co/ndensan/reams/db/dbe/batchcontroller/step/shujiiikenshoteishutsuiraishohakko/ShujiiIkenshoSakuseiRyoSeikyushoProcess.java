@@ -356,7 +356,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                ReportIdDBE.DBE230001.getReportName(),
+                ReportIdDBE.DBE234001.getReportName(),
                 出力ページ数,
                 csv出力有無,
                 csvファイル名,

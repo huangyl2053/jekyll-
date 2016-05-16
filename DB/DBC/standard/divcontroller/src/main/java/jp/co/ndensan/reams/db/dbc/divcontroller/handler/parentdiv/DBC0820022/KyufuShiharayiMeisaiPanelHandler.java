@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,7 +47,6 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
     private static final int NUM = 6;
-    private static final int NUM1 = 50;
 
     /**
      * 初期化
@@ -116,13 +114,11 @@ public class KyufuShiharayiMeisaiPanelHandler {
      */
     public void set給付費明細登録() {
         dgdKyufuhiMeisai_Row row = div.getPanelThree().getDgdKyufuhiMeisai().getClickedItem();
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         if (!row.getDefaultDataName1().isEmpty()) {
             RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
             RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
-            sercode.getTxtServiceCode1().setValue(serviceCodeShuruyi);
-            sercode.getTxtServiceCode2().setValue(serviceCodeKoumoku);
+            div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス種類コード(serviceCodeShuruyi);
+            div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(serviceCodeKoumoku);
 
         }
         div.getPanelThree().getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().toString()));
@@ -130,7 +126,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setValue(new Decimal(
                 row.getDefaultDataName4().toString()));
         div.getPanelThree().getPanelFour().getTxtTeikiyo().setValue(row.getDefaultDataName5());
-        sercode.getTxtServiceCodeName().setValue(row.getDefaultDataName7());
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(row.getDefaultDataName7());
         div.getPanelThree().getRowId().setValue(new Decimal(row.getId()));
     }
 
@@ -138,11 +134,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * clear給付費明細登録
      */
     public void clear給付費明細登録() {
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
-        sercode.getTxtServiceCode1().clearValue();
-        sercode.getTxtServiceCode2().clearValue();
-        sercode.getTxtServiceCodeName().clearValue();
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス種類コード(null);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(null);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(null);
         div.getPanelThree().getPanelFour().getTxtTanyi().clearValue();
         div.getPanelThree().getPanelFour().getTxtKaisu().clearValue();
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().clearValue();
@@ -194,10 +188,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
     }
 
     private boolean checkState(dgdKyufuhiMeisai_Row ddgRow) {
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
-        RString サービス種類コード = sercode.getTxtServiceCode1().getValue();
-        RString サービス項目コード = sercode.getTxtServiceCode2().getValue();
+        RString サービス種類コード = div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービスコード1();
+        RString サービス項目コード = div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービスコード2();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(サービス項目コード);
         if (ddgRow.getDefaultDataName1() != builder.toRString()) {
@@ -230,16 +222,13 @@ public class KyufuShiharayiMeisaiPanelHandler {
     }
 
     private void setDgdKyufuhiMeisai(dgdKyufuhiMeisai_Row ddgRow) {
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv
-                = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
+
         RStringBuilder builder = new RStringBuilder();
-        builder.append(NUM1);
-//TODO
-//        if (serviceCodeInputDiv.getTxtServiceCode1() != null) {
-//            builder.append(serviceCodeInputDiv.getTxtServiceCode1().getValue());
-//        }
-        if (serviceCodeInputDiv.getTxtServiceCode2() != null) {
-            builder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
+        if (div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービスコード1() != null) {
+            builder.append(div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービスコード1());
+        }
+        if (div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービスコード2() != null) {
+            builder.append(div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービスコード2());
         }
         ddgRow.setDefaultDataName1(builder.toRString());
 
@@ -257,9 +246,6 @@ public class KyufuShiharayiMeisaiPanelHandler {
         }
         if (div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue() != null) {
             ddgRow.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
-        }
-        if (serviceCodeInputDiv.getTxtServiceCodeName().getValue() != null) {
-            ddgRow.setDefaultDataName7(serviceCodeInputDiv.getTxtServiceCodeName().getValue());
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<dgdKyufuhiMeisai_Row> list = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
@@ -601,9 +587,6 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * @param flag boolean
      */
     public void readOnly給付費明細登録(boolean flag) {
-        ServiceCodeInputCommonChildDivDiv sercode
-                = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
-        sercode.getTxtServiceCode2().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtTanyi().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtKaisu().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setReadOnly(flag);

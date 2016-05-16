@@ -72,14 +72,16 @@ public class FutangendogakuNinteiShinseiManager {
         FutanGendogakuNinteiManager ninteiManager = FutanGendogakuNinteiManager.createInstance();
         for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
             futanGendogakuNintei = futanGendogakuNintei.deleted();
-            GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinsei(
-                    new GemmenGengakuShinseiIdentifier(futanGendogakuNintei.identifier().get証記載保険者番号(),
-                            futanGendogakuNintei.identifier().get被保険者番号(),
-                            GemmenGengakuShurui.負担限度額認定.getコード(),
-                            futanGendogakuNintei.identifier().get履歴番号()));
-            gemmenGengakuShinsei = gemmenGengakuShinsei.deleted();
             FutanGendogakuNinteiBuilder builder = futanGendogakuNintei.createBuilderForEdit();
-            builder.setGemmenGengakuShinsei(gemmenGengakuShinsei);
+            if (!futanGendogakuNintei.getGemmenGengakuShinseiList().isEmpty()) {
+                GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinsei(
+                        new GemmenGengakuShinseiIdentifier(futanGendogakuNintei.identifier().get証記載保険者番号(),
+                                futanGendogakuNintei.identifier().get被保険者番号(),
+                                GemmenGengakuShurui.負担限度額認定.getコード(),
+                                futanGendogakuNintei.identifier().get履歴番号()));
+                gemmenGengakuShinsei = gemmenGengakuShinsei.deleted();
+                builder.setGemmenGengakuShinsei(gemmenGengakuShinsei);
+            }
             ninteiManager.saveOrDeletePhysicalBy(builder.build());
         }
         ArrayList<FutanGendogakuNinteiViewState> new申請一覧情報ArrayList = new申請情報List;
@@ -90,17 +92,20 @@ public class FutangendogakuNinteiShinseiManager {
 
             FutanGendogakuNintei futanGendogakuNintei = ninteiViewState.getFutanGendogakuNintei();
             futanGendogakuNintei = futanGendogakuNintei.added();
+            FutanGendogakuNinteiBuilder builder = futanGendogakuNintei.createBuilderForEdit();
+            if (!futanGendogakuNintei.getGemmenGengakuShinseiList().isEmpty()) {
+                GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinsei(
+                        new GemmenGengakuShinseiIdentifier(
+                                futanGendogakuNintei.get証記載保険者番号(),
+                                futanGendogakuNintei.get被保険者番号(),
+                                GemmenGengakuShurui.負担限度額認定.getコード(),
+                                futanGendogakuNintei.get履歴番号()));
 
-            GemmenGengakuShinsei gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinsei(
-                    new GemmenGengakuShinseiIdentifier(
-                            futanGendogakuNintei.get証記載保険者番号(),
-                            futanGendogakuNintei.get被保険者番号(),
-                            GemmenGengakuShurui.負担限度額認定.getコード(),
-                            futanGendogakuNintei.get履歴番号()));
+                gemmenGengakuShinsei = gemmenGengakuShinsei.added();
+                builder.setGemmenGengakuShinsei(gemmenGengakuShinsei);
+            }
 
-            gemmenGengakuShinsei = gemmenGengakuShinsei.added();
-            futanGendogakuNintei = futanGendogakuNintei.
-                    createBuilderForEdit().setGemmenGengakuShinsei(gemmenGengakuShinsei).build();
+            futanGendogakuNintei = builder.build();
             ninteiManager.saveOrDeletePhysicalBy(futanGendogakuNintei);
         }
         this.delete利用者負担額減額by被保険者番号(被保険者番号);

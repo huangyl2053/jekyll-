@@ -54,7 +54,7 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private static final String KEY_TOMOKUME_FUKA = "tomokumeFuka";
     private static final String KEY_REBAN_FUKA = "rebanFuka";
     private static final String KEY_HIZUKE_HESHU = "hizukeHeshu";
-    private static final String KEY_ISHIKIPSMSEARCH = "ishikiPsmSearch";
+    private static final String KEY_REAMS_LOGIN_ID = "reamsLoginId";
 
     @BatchParameter(key = KEY_KOUSEI_SHICHOSON_CODE, name = "構成市町村コード")
     private LasdecCode kouseiShichosonCode;
@@ -114,6 +114,8 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private boolean rebanFuka;
     @BatchParameter(key = KEY_HIZUKE_HESHU, name = "日付’／’編集")
     private boolean hizukeHeshu;
+    @BatchParameter(key = KEY_REAMS_LOGIN_ID, name = "reamsLoginId")
+    private RString reamsLoginId;
 
     /**
      * 汎用リスト_高額介護サービス費状況のProcessParamterパラメータ作成です。
@@ -151,6 +153,9 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
                 tomokumeFuka,
                 rebanFuka,
                 hizukeHeshu,
-                null, null);
+                null,
+                null,
+                null,
+                reamsLoginId);
     }
 }

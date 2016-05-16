@@ -37,7 +37,7 @@
      "layoutName": "DBC0820011",
      "layoutTitle": "償還払い費支給申請",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

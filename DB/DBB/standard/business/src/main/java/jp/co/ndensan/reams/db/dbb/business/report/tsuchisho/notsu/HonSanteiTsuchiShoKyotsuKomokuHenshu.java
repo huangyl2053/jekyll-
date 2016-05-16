@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
@@ -231,7 +232,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 宛名.get行政区画().getChiku2().getコード().value(),
                 宛名.get行政区画().getChiku3().getコード().value(),
                 本算定通知書情報.get納組情報().getNokumi().getNokumiCode());
-        EditedAtesaki editedAtesaki = new EditedAtesaki(本算定通知書情報.get宛先情報(),
+        EditedAtesaki editedAtesaki = EditedAtesakiBuilder.create編集後宛先(
+                本算定通知書情報.get宛先情報(),
                 本算定通知書情報.get地方公共団体(),
                 本算定通知書情報.get帳票制御共通());
         EditedKoza editedKoza = new EditedKoza(本算定通知書情報.get口座情報(), 本算定通知書情報.get帳票制御共通());
@@ -252,7 +254,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private List<AfterEditInformation> get納期情報リスト(List<NokiJoho> 納期情報リスト) {
-        List<AfterEditInformation> 普徴納期情報リスト = new ArrayList<>();
+        List<AfterEditInformation> 普特徴納期情報リスト = new ArrayList<>();
         for (NokiJoho nokiJoho : 納期情報リスト) {
             AfterEditInformation afterEditInformation = new AfterEditInformation();
             afterEditInformation.set期(nokiJoho.get期月().get期().padLeft(文字列_SP, 2));
@@ -279,8 +281,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                     fillType(FillType.BLANK).toDateString());
             afterEditInformation.set通知書発行日_西暦(nokiJoho.get納期().get通知書発行日().seireki().separator(Separator.SLASH).
                     fillType(FillType.BLANK).toDateString());
+            普特徴納期情報リスト.add(afterEditInformation);
         }
-        return 普徴納期情報リスト;
+        return 普特徴納期情報リスト;
     }
 
     private RString edit段階(RString 段階数) {
@@ -337,7 +340,13 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 fillType(FillType.BLANK).toDateString());
         更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
-        FlexibleDate 期間_至 = getFlexibleDate至(更正前_賦課情報.get月割終了年月2());
+        FlexibleYearMonth 年月 = 更正前_賦課情報.get月割終了年月2();
+        FlexibleDate 期間_至;
+        if (年月 != null) {
+            期間_至 = getFlexibleDate至(更正前_賦課情報.get月割終了年月2());
+        } else {
+            期間_至 = getFlexibleDate至(更正前_賦課情報.get月割終了年月1());
+        }
         更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());

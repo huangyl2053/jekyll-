@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 転出転入保留対象者情報の取得します。
@@ -41,7 +40,7 @@ public interface ITennyuTenshutsuHoryuTaishosha {
      *
      * @return 履歴番号
      */
-    Decimal get履歴番号();
+    int get履歴番号();
 
     /**
      * 市町村コードのgetメソッドです。
@@ -55,7 +54,7 @@ public interface ITennyuTenshutsuHoryuTaishosha {
      *
      * @return 住民種別コード
      */
-    RString get住民種別コード();
+    RString get住民種別();
 
     /**
      * 宛名氏名のgetメソッドです。
@@ -86,11 +85,11 @@ public interface ITennyuTenshutsuHoryuTaishosha {
     RString get性別();
 
     /**
-     * 異動事由コードのgetメソッドです。
+     * 異動事由のgetメソッドです。
      *
-     * @return 異動事由コード
+     * @return 異動事由
      */
-    RString get異動事由コード();
+    RString get異動事由();
 
     /**
      * 異動年月日のgetメソッドです。

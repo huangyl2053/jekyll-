@@ -169,8 +169,9 @@ public class DbT7130KaigoServiceShuruiDac {
         return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(eq(serviceShuruiCd, サービス種類),
-                                leq(teikyoKaishiYM, RDate.getNowDate()),
-                                or(leq(RDate.getNowDate(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).toObject(DbT7130KaigoServiceShuruiEntity.class);
+                                leq(teikyoKaishiYM, RDate.getNowDate().getYearMonth()),
+                                or(leq(RDate.getNowDate().getYearMonth(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).
+                toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 
     /**
@@ -194,8 +195,6 @@ public class DbT7130KaigoServiceShuruiDac {
                                 leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, サービス提供年月),
                                 or(leq(サービス提供年月, DbT7130KaigoServiceShurui.teikyoshuryoYM),
                                         isNULL(DbT7130KaigoServiceShurui.teikyoshuryoYM))))
-                .order(by(DbT7130KaigoServiceShurui.teikyoKaishiYM, Order.DESC))
-                .limit(1)
                 .toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 }

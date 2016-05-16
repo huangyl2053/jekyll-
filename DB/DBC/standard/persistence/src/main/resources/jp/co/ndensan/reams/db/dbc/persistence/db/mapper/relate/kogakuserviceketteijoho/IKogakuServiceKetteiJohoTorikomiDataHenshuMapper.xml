@@ -9,7 +9,7 @@
         <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="通知書番号," column="通知書番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="通知書番号" column="通知書番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担額" column="利用者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="支給区分コード" column="支給区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="決定年月" column="決定年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
@@ -178,7 +178,7 @@
         CREATE TEMP TABLE "TABLE_KOGAKUKYUFUKETTEI"
         (
         "kokanJohoShikibetsuNo" character(2),
-        "chohyoRecordShubetsuHeader" character(1),
+        "chohyoRecordShubetsuHeader" character(2),
         "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
         "hokensha" character(2),
         "sakuseiYMD" rshare."UDD015YMD",
@@ -189,7 +189,7 @@
         "hihokenshaShimei" rshare."UDD042AtenaMeisho",
         "serviceTeikyoYM" rshare."UDD014YM",
         "riyoshaFutangaku" Decimal,
-        "shikyuKubunCode" character(1) ,
+        "shikyuKubunCode" character(2) ,
         "ketteiYM" rshare."UDD014YM",
         "kogakuShikyuGaku" Decimal ,
         "shiharaiHohoKubunCode" character(2),

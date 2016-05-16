@@ -174,7 +174,7 @@ public class HanyoListShokanbaraiJokyoCSVEntity {
     private RString 指定事業者ケアマネ数;
     @CsvField(order = 780, name = "指定事業者利用者数")
     private RString 指定事業者利用者数;
-    @CsvField(order = 79, name = "指定事業者認定日")
+    @CsvField(order = 790, name = "指定事業者認定日")
     private RString 指定事業者認定日;
     @CsvField(order = 800, name = "指定事業者取消日")
     private RString 指定事業者取消日;

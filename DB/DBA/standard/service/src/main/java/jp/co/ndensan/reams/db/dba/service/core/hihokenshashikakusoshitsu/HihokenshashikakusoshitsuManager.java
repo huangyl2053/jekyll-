@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HihokenshashikakusoshitsuManager {
 
     private static final int 年齢_65 = 65;
+    private static final RString SIKAKU_SOUSITU_YMD = new RString("資格喪失年月日");
+    private static final RString SIKAKU_SYUTOKU_YMD = new RString("資格取得年月日");
 
     /**
      * コンストラクタです。
@@ -153,7 +155,8 @@ public class HihokenshashikakusoshitsuManager {
         }
 
         if (喪失年月日.isBefore(hihokenshaShutokuJyoho.get資格取得年月日())) {
-            throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage());
+            throw new ApplicationException(DbzErrorMessages.期間が不正_過去日付不可.getMessage()
+                    .replace(SIKAKU_SOUSITU_YMD.toString(), SIKAKU_SYUTOKU_YMD.toString()));
         }
 
         SikakuIdoCheckManager sikakuIdoCheckManager = SikakuIdoCheckManager.createInstance();

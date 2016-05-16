@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochi;
 
-import jp.co.ndensan.reams.db.dba.entity.report.source.tashichosonjushochi.TashichosonJushochitokureishaDaichoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tashichosonjushochi.TashichosonJushochitokureishaDaichoReportSource;
 
 /**
  * 他市町村住所地特例者台帳Editorです。

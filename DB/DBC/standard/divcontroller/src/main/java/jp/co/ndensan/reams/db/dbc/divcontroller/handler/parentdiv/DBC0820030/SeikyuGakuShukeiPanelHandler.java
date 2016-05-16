@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -56,6 +57,7 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final RString 対象単位 = new RString("対象単位");
     private static final RString 対象単位合計 = new RString("（対象単位+対象外単位）と等しい");
     private static final RString 単位合計 = new RString("単位合計");
+    private static final RString コロン = new RString(":");
     private static final int NUM = 10;
     private static final int NUM1 = 100;
 
@@ -77,7 +79,15 @@ public class SeikyuGakuShukeiPanelHandler {
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
         for (ShokanShukeiResult shokanshukei : shkanList) {
             dgdSeikyugakushukei_Row row = new dgdSeikyugakushukei_Row();
-            row.setDefaultDataName1(shokanshukei.getServiceShuruiRyakusho());
+            RString サービス種類コード = shokanshukei.getShukei().getサービス種類コード().value();
+            RString サービス種類略称 = shokanshukei.getServiceShuruiRyakusho();
+            RStringBuilder builder = new RStringBuilder();
+            builder.append(サービス種類コード);
+            if (サービス種類略称 != null) {
+                builder.append(コロン);
+                builder.append(サービス種類略称);
+            }
+            row.setDefaultDataName1(builder.toRString());
             row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getShukei().get単位数合計()));
             row.getDefaultDataName3().setValue(shokanshukei.getShukei().get単位数単価());
             row.getDefaultDataName4().setValue(shokanshukei.getShukei().get請求額());
@@ -133,9 +143,6 @@ public class SeikyuGakuShukeiPanelHandler {
      * set請求額集計登録
      */
     public void set請求額集計登録() {
-//        ServiceTypeInputCommonChildDiv sercode
-//                = (ServiceTypeInputCommonChildDiv) div.getPanelSeikyugakuShukei().
-//                getPanelSeikyuShokai().getCcdServiceTypeInput();
         dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setValue(
                 ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class));
@@ -165,11 +172,6 @@ public class SeikyuGakuShukeiPanelHandler {
                 row.getDefaultDataName12().getValue());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setValue(
                 row.getDefaultDataName13().getValue());
-//        if (row.getDefaultDataName16() != null && !row.getDefaultDataName16().isEmpty()) {
-//            sercode.getTxtServiceTypeName().setValue(row.getDefaultDataName16());
-//
-//        }
-        //TODO共有divAPIがない
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissu().setValue(
                 row.getDefaultDataName17().getValue());
         if (row.getDefaultDataName19() != null && !row.getDefaultDataName19().isEmpty()) {
@@ -208,7 +210,6 @@ public class SeikyuGakuShukeiPanelHandler {
      * @param row dgdSeikyugakushukei_Row
      */
     public void modifyRow(dgdSeikyugakushukei_Row row) {
-
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (修正.equals(state)) {
             boolean flag = checkState(row);
@@ -297,7 +298,17 @@ public class SeikyuGakuShukeiPanelHandler {
      * @param ddgRow dgdSeikyugakushukei_Row
      */
     private void setDgdKyufuhiMeisai(dgdSeikyugakushukei_Row ddgRow) {
-        //TODO
+        RStringBuilder builder = new RStringBuilder();
+        RString サービス種類コード = div.getPanelSeikyugakuShukei().
+                getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード();
+        RString サービス種類略称 = div.getPanelSeikyugakuShukei().
+                getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類略称();
+        builder.append(サービス種類コード);
+        if (サービス種類略称 != null) {
+            builder.append(コロン);
+            builder.append(サービス種類略称);
+        }
+        ddgRow.setDefaultDataName1(builder.toRString());
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue() != null) {
             ddgRow.getDefaultDataName2().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue());
@@ -522,9 +533,6 @@ public class SeikyuGakuShukeiPanelHandler {
             }
             for (dgdSeikyugakushukei_Row row : dgrow) {
                 if (RowState.Modified.equals(row.getRowState())) {
-                    //TODO
-//                   RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(1, 2).toString());
-
                     ShokanShukei entityModified = mapList.get(row.getDefaultDataName15());
                     entityModified = buildshokanShukei(entityModified, row);
                     entityList.add(entityModified.modified());

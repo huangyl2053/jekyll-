@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -70,11 +69,11 @@ public class HanyoListHihokenshadaichoCSVEntity {
     @CsvField(order = 180, name = "行政区名")
     private final RString 行政区名;
     @CsvField(order = 190, name = "地区１")
-    private final ChikuCode 地区１;
+    private final RString 地区１;
     @CsvField(order = 200, name = "地区２")
-    private final ChikuCode 地区２;
+    private final RString 地区２;
     @CsvField(order = 210, name = "地区３")
-    private final ChikuCode 地区３;
+    private final RString 地区３;
     @CsvField(order = 220, name = "連絡先１")
     private final TelNo 連絡先１;
     @CsvField(order = 230, name = "連絡先２")
@@ -248,9 +247,9 @@ public class HanyoListHihokenshadaichoCSVEntity {
             Katagaki 方書,
             GyoseikuCode 行政区コード,
             RString 行政区名,
-            ChikuCode 地区１,
-            ChikuCode 地区２,
-            ChikuCode 地区３,
+            RString 地区１,
+            RString 地区２,
+            RString 地区３,
             TelNo 連絡先１,
             TelNo 連絡先２,
             RString 登録異動日,

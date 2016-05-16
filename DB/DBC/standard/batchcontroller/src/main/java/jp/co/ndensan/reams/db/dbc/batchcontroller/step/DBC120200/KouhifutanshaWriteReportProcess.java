@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.SaishinsaKetteiTsuchishoJohoIchiranhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.KohiFutanShaMeiSai;
 import jp.co.ndensan.reams.db.dbc.business.core.KohiFutanShaShuKei;
 import jp.co.ndensan.reams.db.dbc.business.core.SaishinsaKohifutanshaBunSourceData;
+import jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteitsuchishojohoichiranhyo.SaishinsaKetteiTsuchishoJohoIchiranhyo;
 import jp.co.ndensan.reams.db.dbc.business.report.saishinsa.SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsa.SaishisaKohifutanshaInEntity;

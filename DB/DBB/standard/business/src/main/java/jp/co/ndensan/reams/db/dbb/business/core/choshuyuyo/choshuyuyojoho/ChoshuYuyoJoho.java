@@ -565,6 +565,40 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
+     * 徴収猶予状態区分を返します。
+     *
+     * @return 徴収猶予状態区分
+     */
+    public RString get徴収猶予状態区分() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予状態区分() : RString.EMPTY;
+    }
+
+    /**
+     * 徴収猶予作成区分を返します。
+     *
+     * @return 徴収猶予作成区分
+     */
+    public RString get徴収猶予作成区分() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予作成区分() : RString.EMPTY;
+    }
+
+    /**
+     * 徴収猶予を返します。
+     *
+     * @return 徴収猶予
+     */
+    private ChoshuYuyo get徴収猶予() {
+        if (choshuYuyo == null || choshuYuyo.values() == null || choshuYuyo.values().isEmpty()) {
+            return null;
+        }
+        return choshuYuyo.values().iterator().next();
+    }
+
+    /**
      * {@link DbT2002FukaEntity}のクローンを返します。
      *
      * @return {@link DbT2002FukaEntity}のクローン
@@ -585,7 +619,8 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
-     * 徴収猶予の情報配下の要素を削除対象とします。<br/> {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 徴収猶予の情報配下の要素を削除対象とします。<br/>
+     * {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 徴収猶予の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ChoshuYuyoJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ChoshuYuyoJoho}

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * PnlAtenaCommon のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBC-1030-030 quxiaodong
  */
 public class PnlAtenaCommonDiv extends Panel {
 

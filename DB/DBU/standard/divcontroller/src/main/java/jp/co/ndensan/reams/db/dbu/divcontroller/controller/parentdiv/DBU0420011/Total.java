@@ -52,7 +52,7 @@ public class Total {
     private static final RString テスト = new RString("テスト");
     private static final RString 証表示タイプ_01 = new RString("01");
     private static final RString 証表示タイプ_21 = new RString("21");
-    private static final int 桁数_5 = 5;
+    private static final int 桁数_6 = 6;
 
     /**
      * 被保険者証・資格者証画面初期化を処理します。
@@ -142,10 +142,10 @@ public class Total {
         parameter.setMenuId(ResponseHolder.getMenuID());
         parameter.setHihokenshaNo(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号());
         parameter.setShikibetsuCode(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
-        parameter.setShoKisaiHokenshaNo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().
-                getYukoKigenInfo().getTxtHokensha().getValue() == null ? ShoKisaiHokenshaNo.EMPTY
+        parameter.setShoKisaiHokenshaNo(RString.isNullOrEmpty(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().
+                getYukoKigenInfo().getTxtHokensha().getValue()) ? ShoKisaiHokenshaNo.EMPTY
                 : new ShoKisaiHokenshaNo(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().
-                        getYukoKigenInfo().getTxtHokensha().getValue().substring(0, 桁数_5)));
+                        getYukoKigenInfo().getTxtHokensha().getValue().substring(0, 桁数_6)));
         parameter.setKofuYMD(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue());
         parameter.setKofuJiyu(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey());
         parameter.setKofuRiyu(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());

@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
@@ -21,6 +22,7 @@ public class NinteiKoshinTsuchisho implements IReportSource {
     @ReportItem(name = "hihokenshaNameKana", length = 40, order = 3)
     public RString hihokenshaNameKana;
     @ReportItem(name = "hihokenshaNo", length = 10, order = 4)
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
     public RString hihokenshaNo;
     @ReportItem(name = "hihokenshaName", order = 5)
     public RString hihokenshaName;
@@ -106,7 +108,7 @@ public class NinteiKoshinTsuchisho implements IReportSource {
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 46)
     public RString koinShoryaku;
-    @ReportPerson(id = "X")
+    @ReportPerson(id = "001")
     public ShikibetsuCode shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
@@ -26,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.IKinyuKikanInputDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.KinyuKikanInput.KinyuKikanInputDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -90,9 +90,7 @@ public class DvShokanbaraiJohoHandler {
         }
         ViewStateHolder.put(ViewStateKeys.市町村判定, 市町村判定);
         List<ShikibetsuNoKanri> 様式番号一覧 = DvShokanbaraiJohoManager.createInstance().select様式名称とコード();
-        ViewStateHolder.put(ViewStateKeys.様式名称_様式コード, (Serializable) 様式番号一覧);
-        List<ShikibetsuNoKanri> 様式番号一覧onLoad = get様式番号一覧(介護);
-        set様式番号一覧(様式番号一覧onLoad, true);
+        set様式番号一覧(様式番号一覧);
         List<RString> selectedItems = new ArrayList<>();
         selectedItems.add(項目名);
         selectedItems.add(日付スラッシュ);
@@ -105,27 +103,20 @@ public class DvShokanbaraiJohoHandler {
         panel.getDdlShokanKetteiJoho().setSelectedValue(すべて);
         panel.getRadKogakuShiharaisaki().setSelectedValue(すべて);
         panel.getCcdKogakuKinyuKikan().setMode_State(KinyuKikanInputDiv.State.入力);
-        panel.getDvYoshikiNo().getBtnShokanKaigo().setDisabled(true);
     }
 
     /**
      * 「介護」ボタンのonClickメソッドHandlerです。
      */
     public void onClick_介護() {
-        List<ShikibetsuNoKanri> 様式番号一覧 = get様式番号一覧(介護);
-        set様式番号一覧(様式番号一覧, false);
-        div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDvYoshikiNo().getBtnYobo().setDisabled(false);
-        div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDvYoshikiNo().getBtnShokanKaigo().setDisabled(true);
+        setSelectedItems(介護);
     }
 
     /**
      * 「予防」ボタンのonClickメソッドHandlerです。
      */
     public void onClick_予防() {
-        List<ShikibetsuNoKanri> 様式番号一覧 = get様式番号一覧(予防);
-        set様式番号一覧(様式番号一覧, false);
-        div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDvYoshikiNo().getBtnYobo().setDisabled(true);
-        div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDvYoshikiNo().getBtnShokanKaigo().setDisabled(false);
+        setSelectedItems(予防);
     }
 
     /**
@@ -193,7 +184,7 @@ public class DvShokanbaraiJohoHandler {
         boolean 日付スラッシュ付加 = div.getDvShokanbaraiParam()
                 .getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ);
         long 出力順 = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun() == null
-                ? null : div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID();
+                ? 0 : div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get出力順ID();
         ReportId 帳票ID = div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun() == null
                 ? null : div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().get帳票ID();
         parameter.setサービス提供年月From(サービス提供年月From);
@@ -220,6 +211,7 @@ public class DvShokanbaraiJohoHandler {
         parameter.set金融機関コード(金融機関コード);
         parameter.set金融機関名称(金融機関名称);
         parameter.set項目名付加(項目名付加);
+        parameter.setReamsLoginId(ControlDataHolder.getUserId());
         return parameter;
     }
 
@@ -247,41 +239,38 @@ public class DvShokanbaraiJohoHandler {
         return 保険者DDL;
     }
 
-    private List<ShikibetsuNoKanri> get様式番号一覧(RString 抽出条件) {
-        List<ShikibetsuNoKanri> 様式番号一覧 = ViewStateHolder.get(ViewStateKeys.様式名称_様式コード, List.class);
-        List<ShikibetsuNoKanri> lists_介護 = new ArrayList<>();
-        List<ShikibetsuNoKanri> lists_予防 = new ArrayList<>();
-        for (ShikibetsuNoKanri 様式番号 : 様式番号一覧) {
-            if (介護_1.equals(様式番号.get給付分類区分())) {
-                lists_介護.add(様式番号);
-            } else if (予防_2.equals(様式番号.get給付分類区分())) {
-                lists_予防.add(様式番号);
+    private void setSelectedItems(RString 抽出条件) {
+        List<dgYoshikiNo_Row> dataSources = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getDataSource();
+        List<dgYoshikiNo_Row> lists_介護 = new ArrayList<>();
+        List<dgYoshikiNo_Row> lists_予防 = new ArrayList<>();
+        for (dgYoshikiNo_Row row : dataSources) {
+            if (介護_1.equals(row.getKyufuBunruiKubun())) {
+                lists_介護.add(row);
+            } else if (予防_2.equals(row.getKyufuBunruiKubun())) {
+                lists_予防.add(row);
             } else {
-                lists_介護.add(様式番号);
-                lists_予防.add(様式番号);
+                lists_介護.add(row);
+                lists_予防.add(row);
             }
         }
         if (介護.equals(抽出条件)) {
-            return lists_介護;
+            div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().setSelectedItems(lists_介護);
         } else if (予防.equals(抽出条件)) {
-            return lists_予防;
-        } else {
-            return new ArrayList<>();
+            div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().setSelectedItems(lists_予防);
         }
     }
 
-    private void set様式番号一覧(List<ShikibetsuNoKanri> 様式番号一覧, boolean すべてチェックOnFlag) {
+    private void set様式番号一覧(List<ShikibetsuNoKanri> 様式番号一覧) {
         List<dgYoshikiNo_Row> rowList = new ArrayList<>();
         for (ShikibetsuNoKanri 様式番号 : 様式番号一覧) {
             dgYoshikiNo_Row row = new dgYoshikiNo_Row();
             row.setYoshikiName(様式番号.get略称());
             row.setYoshikiNo(様式番号.get識別番号());
+            row.setKyufuBunruiKubun(様式番号.get給付分類区分());
             rowList.add(row);
         }
         div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().setDataSource(rowList);
-        if (すべてチェックOnFlag) {
-            div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().setSelectedItems(rowList);
-        }
+        div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().setSelectedItems(rowList);
     }
 
     private List<KeyValueDataSource> get処理状況リスト() {

@@ -24,13 +24,20 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -48,6 +55,7 @@ public class ShisetsutourukuPanel {
     private static final RString 照会 = new RString("照会");
     private static final RString 変更なし = new RString("2");
     private final KaigoJigyoshaShisetsuKanriManager manager;
+    private static final LockingKey LOCKINGKEY = new LockingKey(new RString("KaigoShisetsuToroku"));
 
     /**
      * コンストラクタです。
@@ -84,6 +92,12 @@ public class ShisetsutourukuPanel {
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010012StateName.照会状態);
         }
+        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
+            div.setReadOnly(true);
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -114,6 +128,7 @@ public class ShisetsutourukuPanel {
                 set有効期間追加合理性チェック(div);
                 set追加状態チェック(div);
                 get事業者情報の追加処理(div);
+                RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
@@ -125,6 +140,7 @@ public class ShisetsutourukuPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 set有効期間合理性チェック(div);
                 get事業者情報の修正処理(div);
+                RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
@@ -135,6 +151,7 @@ public class ShisetsutourukuPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 get事業者情報の削除処理(div);
+                RealInitialLocker.release(LOCKINGKEY);
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
@@ -148,8 +165,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> btnComplete(ShisetsutourukuPanelDiv div) {
-        //TODO 前排他制御
-
+        RealInitialLocker.release(LOCKINGKEY);
         return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
     }
 
@@ -160,7 +176,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> onClick_Search(ShisetsutourukuPanelDiv div) {
-        //TODO 前排他制御
+        RealInitialLocker.release(LOCKINGKEY);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
                     UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
@@ -343,5 +359,20 @@ public class ShisetsutourukuPanel {
         builde.set異動年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
         business = builde.build();
         return business;
+    }
+
+    private enum TekiyoJogaiTotalErrorMessage implements IValidationMessage {
+
+        排他_他のユーザが使用中(UrErrorMessages.排他_他のユーザが使用中);
+        private final Message message;
+
+        private TekiyoJogaiTotalErrorMessage(IMessageGettable message) {
+            this.message = message.getMessage();
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }

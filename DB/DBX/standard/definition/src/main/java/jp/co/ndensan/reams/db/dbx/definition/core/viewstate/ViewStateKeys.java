@@ -31,5 +31,9 @@ public enum ViewStateKeys {
     /**
      * new負担限度額認定申請の情報
      */
-    new負担限度額認定申請の情報;
+    new負担限度額認定申請の情報,
+    /**
+     * isReRequest
+     */
+    isReRequest;
 }

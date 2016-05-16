@@ -128,19 +128,19 @@ public class RiyoshaFutangakuGengakuValidationHandler {
     }
 
     /**
-     * 利用者負担額減額_給付率範囲外チェックを行います。
+     * 減免減額_給付率範囲外チェックを行います。
      *
      * @param pairs バリデーションコントロール
      * @param div RiyoshaFutangakuGengakuPanelDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor利用者負担額減額_給付率範囲外(ValidationMessageControlPairs pairs, RiyoshaFutangakuGengakuPanelDiv div) {
+    public ValidationMessageControlPairs validateFor減免減額_給付率範囲外(ValidationMessageControlPairs pairs, RiyoshaFutangakuGengakuPanelDiv div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(RiyoshaFutangakuGengakuPanelDivSpec.利用者負担額減額_給付率範囲外のチェック)
-                .thenAdd(NoInputMessages.利用者負担額減額_給付率範囲外).messages());
+        messages.add(ValidateChain.validateStart(div).ifNot(RiyoshaFutangakuGengakuPanelDivSpec.減免減額_給付率範囲外のチェック)
+                .thenAdd(NoInputMessages.減免減額_給付率範囲外).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.利用者負担額減額_給付率範囲外, div.getTxtKyufuRitsu()).build().check(messages));
+                NoInputMessages.減免減額_給付率範囲外, div.getTxtKyufuRitsu()).build().check(messages));
         return pairs;
     }
 
@@ -242,7 +242,7 @@ public class RiyoshaFutangakuGengakuValidationHandler {
         適用日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "適用日"),
         有効期限の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "有効期限"),
         給付率の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "給付率"),
-        利用者負担額減額_給付率範囲外(DbdErrorMessages.利用者負担額減額_給付率範囲外),
+        減免減額_給付率範囲外(DbdErrorMessages.減免減額_給付率範囲外),
         減免減額_適用日が法施行前(DbdErrorMessages.減免減額_適用日が法施行前),
         減免減額_有効期限が年度外(DbdErrorMessages.減免減額_有効期限が年度外),
         減免減額_有効期限が適用日以前(DbdErrorMessages.減免減額_有効期限が適用日以前),

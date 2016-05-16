@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.DBD1
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.ddlShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler.Dbd1020001Keys;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler.RiyoshaFutangakuGengakuComparator;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
@@ -76,8 +77,7 @@ public class RiyoshaFutangakuGengakuPanel {
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onActive(RiyoshaFutangakuGengakuPanelDiv div) {
 
         getHandler(div).viewState破棄();
-        getHandler(div).initialize();
-        return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+        return getHandler(div).initialize();
     }
 
     /**
@@ -87,6 +87,12 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnShowSetaiJoho(RiyoshaFutangakuGengakuPanelDiv div) {
+
+        Boolean 世帯所得一覧初期化済み = ViewStateHolder.get(Dbd1020001Keys.世帯所得一覧初期化済み, Boolean.class);
+        if (世帯所得一覧初期化済み == null || !世帯所得一覧初期化済み) {
+            getHandler(div).世帯所得一覧の初期化();
+        }
+
         div.getBtnShowSetaiJoho().setDisplayNone(true);
         div.getBtnCloseSetaiJoho().setDisplayNone(false);
         div.getBtnCloseSetaiJoho().setDisabled(false);
@@ -209,7 +215,7 @@ public class RiyoshaFutangakuGengakuPanel {
             return ResponseData.of(div).setState(DBD1020001StateName.一覧);
         }
 
-        getValidationHandler().validateFor利用者負担額減額_給付率範囲外(pairs, div);
+        getValidationHandler().validateFor減免減額_給付率範囲外(pairs, div);
         getValidationHandler().validateFor利用者負担額減額_適用開始日が法施行以前(pairs, div);
         getValidationHandler().validateFor利用者負担額減額_適用終了日が年度外(pairs, div);
         getValidationHandler().validateFor利用者負担額減額_適用終了日が開始日以前(pairs, div);
@@ -246,7 +252,7 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onChange_radKetteiKubun(RiyoshaFutangakuGengakuPanelDiv div) {
         boolean is申請日非活性 = div.getTxtShinseiYmd().isDisabled();
-        getHandler(div).承認情報エリア状態(div.getRadKetteiKubun().getSelectedKey(), false, is申請日非活性);
+        getHandler(div).承認情報エリア状態(div.getRadKetteiKubun().getSelectedKey(), false, is申請日非活性, true);
         return ResponseData.of(div).respond();
     }
 
@@ -348,6 +354,7 @@ public class RiyoshaFutangakuGengakuPanel {
 
             保存処理();
             前排他キーの解除();
+            div.getLin1().setDisplayNone(true);
             div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
         } else if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {

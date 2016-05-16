@@ -149,10 +149,14 @@ public class ShafukuRiyoshaFutanKeigenManager {
         requireNonNull(社会福祉法人等利用者負担軽減, UrSystemErrorMessages.値がnull.getReplacedMessage("社会福祉法人等利用者負担軽減"));
         requireNonNull(減免減額種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額種類"));
         List<GemmenGengakuShinsei> 減免減額申請リスト = 社会福祉法人等利用者負担軽減.getGemmenGengakuShinseiList();
+        List<GemmenGengakuShinsei> 削除減免減額申請リスト = new ArrayList<>();
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請リスト) {
             if (!減免減額種類.equals(減免減額申請.get減免減額種類())) {
-                減免減額申請リスト.remove(減免減額申請);
+                削除減免減額申請リスト.add(減免減額申請);
             }
+        }
+        if (!削除減免減額申請リスト.isEmpty()) {
+            減免減額申請リスト.removeAll(削除減免減額申請リスト);
         }
         delete減免減額申請リスト(減免減額申請リスト);
         return 1 == 社会福祉法人等利用者負担軽減Dac.delete(社会福祉法人等利用者負担軽減.toEntity());

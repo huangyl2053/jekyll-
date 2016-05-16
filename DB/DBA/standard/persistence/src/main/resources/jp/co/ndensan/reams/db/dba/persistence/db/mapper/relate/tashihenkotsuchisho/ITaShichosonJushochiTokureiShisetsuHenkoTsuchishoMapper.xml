@@ -11,7 +11,7 @@ and open the template in the editor.
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashihenkotsuchisho.ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper">
     <select id="getTaShichosonJushochiTokureiShisetsuHenkoTsuchisho"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
         SELECT
         C."jigyoshaMeisho" AS "jigyoshaMeisho",
         C."telNo" AS "telNo",
@@ -35,8 +35,8 @@ and open the template in the editor.
         ORDER BY B."nyushoYMD" LIMIT 2
     </select>
     <select id="setTatokuKanrenChohyoRenrakuhyo"
-            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
         SELECT
         B."nyushoYMD" AS "入所年月日",
         C."jigyoshaMeisho" AS "事業者名称",
@@ -65,7 +65,7 @@ and open the template in the editor.
         LIMIT 1
     </select>
     <select id="selectTaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatis"
-            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
+            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter">
         SELECT
         A."kanaMeisho"AS "カナ名称",
@@ -76,7 +76,7 @@ and open the template in the editor.
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />  AS A
     </select>
     <select id="selectTatokuKanrenChohyoRenrakuhyoMybatis"
-            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
+            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TatokuKanrenChohyoRenrakuhyoMybatisParameter">
         SELECT
         A."kanaMeisho" AS "カナ名称",

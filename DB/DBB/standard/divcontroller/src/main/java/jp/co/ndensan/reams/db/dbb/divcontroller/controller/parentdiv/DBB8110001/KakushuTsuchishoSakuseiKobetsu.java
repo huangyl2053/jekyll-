@@ -6,23 +6,21 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB8110001;
 
 import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.FukaInfo;
+import java.util.HashMap;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuHandler;
-import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
+import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -32,6 +30,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBB-0740-010 wangkanglei
  */
 public class KakushuTsuchishoSakuseiKobetsu {
+
+    private static final RString 賦課年度KEY = new RString("fukaNendo");
+    private static final RString 通知書番号KEY = new RString("tsuchishoNo");
 
     /**
      * 画面初期化のメソッドます。
@@ -51,39 +52,12 @@ public class KakushuTsuchishoSakuseiKobetsu {
 
         div.getJuminFukaShokai().getCcdKaigoatena().onLoad(識別コード);
         div.getJuminFukaShokai().getCcdFukaKihon().load(searchKey);
-        // TODO 仮データ
-        ArrayList<FukaInfo> 賦課の情報List = new ArrayList<>();
-        FukaInfo info = new FukaInfo().getFukaInfo();
-        info.get介護賦課().setFukaYMD(new FlexibleDate("20150626"));
-        info.get介護賦課().setKakuteiHokenryo(new Decimal("2015062"));
-        賦課の情報List.add(info);
-        FukaInfo info2 = new FukaInfo().getFukaInfo();
-        info2.get介護賦課().setChoteiNichiji(new YMDHMS("20170416161234"));
-        info2.get介護賦課().setFukaYMD(new FlexibleDate("20160425"));
-        info2.get介護賦課().setChoteiJiyu1(new RString("調定事由1"));
-        info2.get介護賦課().setChoteiJiyu2(new RString("調定事由2"));
-        info2.get介護賦課().setChoteiJiyu3(new RString("調定事由3"));
-        info2.get介護賦課().setChoteiJiyu4(new RString("調定事由4"));
-        info2.set特徴期別金額01(new Decimal("50"));
-        info2.set普徴期別金額01(new Decimal("60"));
-        賦課の情報List.add(info2);
-        FukaInfo info3 = new FukaInfo().getFukaInfo();
-        info3.get介護賦課().setChoteiNichiji(new YMDHMS("20180416161235"));
-        info3.get介護賦課().setFukaYMD(new FlexibleDate("20170425"));
-        info3.get介護賦課().setChoteiJiyu1(new RString("事由1"));
-        info3.get介護賦課().setChoteiJiyu2(new RString("事由2"));
-        info3.get介護賦課().setChoteiJiyu3(new RString("事由3"));
-        info3.get介護賦課().setChoteiJiyu4(new RString("事由4"));
-        賦課の情報List.add(info3);
-
-        getHandler(div).set調定パネル(賦課の情報List);
-
-        // TODO 通知書作成パネル
-        List<RString> 発行する帳票リスト = KakushuTsuchishoSakusei.createInstance().get帳票リスト(null);
-//        List<RString> 発行する帳票リスト = new ArrayList<>();
-//        発行する帳票リスト.add(new RString("郵便振替納付書"));
-        if (発行する帳票リスト != null && !発行する帳票リスト.isEmpty()) {
-            getHandler(div).set通知書作成パネル(発行する帳票リスト);
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put(賦課年度KEY.toString(), 賦課年度);
+        parameter.put(通知書番号KEY.toString(), 通知書番号);
+        ArrayList<FukaJoho> 賦課の情報List = (ArrayList<FukaJoho>) FukaJohoManager.createInstance().get賦課の情報(parameter);
+        if (賦課の情報List != null && !賦課の情報List.isEmpty()) {
+            getHandler(div).set調定パネル(賦課の情報List);
         }
         return ResponseData.of(div).respond();
     }
@@ -137,15 +111,98 @@ public class KakushuTsuchishoSakuseiKobetsu {
     }
 
     /**
-     * 通知書を選択のメソッドます。
+     * 特徴開始通知書をチェックのメソッドます。
      *
      * @param div KakushuTsuchishoSakuseiKobetsuDiv
      * @return ResponseData
      */
-    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_Publish(
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapTokuKaishiTsuchiKobetsu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
-        div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().isIsPublish();
-        div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsPublish(true);
+        getHandler(div).check特徴開始通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 決定通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapKetteiTsuchiKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check決定通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 納入通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapNotsuKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check納入通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 変更通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapHenkoTsuchiKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check変更通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 郵便納付書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapYufuriKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check郵便納付書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 減免通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapGemmenTsuchiKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check減免通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 徴収猶予通知書をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapChoshuYuyoTsuchiKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check徴収猶予通知書();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 賦課台帳をチェックのメソッドます。
+     *
+     * @param div KakushuTsuchishoSakuseiKobetsuDiv
+     * @return ResponseData
+     */
+    public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_WrapFukadaichoKobetsu(
+            KakushuTsuchishoSakuseiKobetsuDiv div) {
+        getHandler(div).check賦課台帳();
         return ResponseData.of(div).respond();
     }
 

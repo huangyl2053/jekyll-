@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendofukakakutei;
 
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.KanendoIdoFukaKakuteiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
@@ -27,39 +26,10 @@ public interface IFukaKakuteiMapper {
     List<KanendoIdoFukaKakuteiEntity> select更新後の賦課内容(FukaKakuteiParameter fukaKakuteiParameter);
 
     /**
-     * 対応行の納付額と納期限へ設定する。
-     *
-     * @param fukaKakuteiParameter FukaKakuteiParameter
-     * @return UrT0705ChoteiKyotsuEntity
-     */
-    UrT0705ChoteiKyotsuEntity select納付額と納期限(FukaKakuteiParameter fukaKakuteiParameter);
-
-    /**
      * 調定共通（介護継承）のデータを取得する。
      *
      * @param fukaKakuteiParameter FukaKakuteiParameter
      * @return list
      */
     List<UrT0705ChoteiKyotsuEntity> select調定共通ForUpdate(FukaKakuteiParameter fukaKakuteiParameter);
-
-    /**
-     * 調定額内訳（介護継承）のデータを削除する。
-     *
-     * @param parameter Map
-     */
-    void delete調定額内訳(Map<String, Object> parameter);
-
-    /**
-     * 調定状況（介護継承）のデータを削除する。
-     *
-     * @param parameter Map
-     */
-    void delete調定状況(Map<String, Object> parameter);
-
-    /**
-     * 収納管理マスタ（介護継承）のデータを削除する。
-     *
-     * @param parameter Map
-     */
-    void delete収納管理マスタ(Map<String, Object> parameter);
 }

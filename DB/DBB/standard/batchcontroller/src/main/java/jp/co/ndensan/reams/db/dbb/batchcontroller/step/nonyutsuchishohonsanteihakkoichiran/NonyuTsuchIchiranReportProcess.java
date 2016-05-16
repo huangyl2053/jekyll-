@@ -55,7 +55,7 @@ public class NonyuTsuchIchiranReportProcess extends SimpleBatchProcessBase {
     static {
         PARAMETER_EDITEDKAR = new RString("編集後本算定通知書共通情報");
         NAME = new RString("帳票作成日時");
-        PARAMETER_TITLE = new RString("タイトル");
+        PARAMETER_TITLE = new RString("バッチパラメータ");
         INPUT_PARAM_KEY_出力順ID = new RString("出力順ID");
     }
 
@@ -83,6 +83,12 @@ public class NonyuTsuchIchiranReportProcess extends SimpleBatchProcessBase {
         this.バッチパラメータ = バッチパラメータ;
         this.出力順ID = 出力順ID;
         this.帳票作成日時 = 帳票作成日時;
+    }
+
+    /**
+     * 変数初期化
+     */
+    public NonyuTsuchIchiranReportProcess() {
     }
 
     @Override
@@ -121,7 +127,7 @@ public class NonyuTsuchIchiranReportProcess extends SimpleBatchProcessBase {
                 }
             }
         }
-        NonyuTsuchIchiranReport report = NonyuTsuchIchiranReport.createFrom(
+        NonyuTsuchIchiranReport report = new NonyuTsuchIchiranReport(
                 編集後本算定通知書共通情報, バッチパラメータ, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名);
         report.writeBy(reportSourceWriter);
     }

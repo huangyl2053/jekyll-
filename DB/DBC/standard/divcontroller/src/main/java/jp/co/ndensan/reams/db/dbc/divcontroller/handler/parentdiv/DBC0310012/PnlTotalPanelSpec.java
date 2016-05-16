@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlT
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -210,8 +211,17 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                             .getRdoKettekubun().getSelectedKey())) {
                 RString 状態 = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
                 ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+                HihokenshaNo 被保険者番号;
+                if (登録.equals(状態)) {
+                    TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                    被保険者番号 = key.get被保険者番号();
+                } else {
+                    ShokanJuryoininKeiyakusha shokan = ViewStateHolder.
+                            get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
+                    被保険者番号 = shokan.get被保険者番号();
+                }
                 ChkKeiyakuNoParameter parameter = new ChkKeiyakuNoParameter(
-                        new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
+                        被保険者番号,
                         new FlexibleDate(div.getPnlCommon().getPnlDetail()
                                 .getTxtKeyakushinseibi().getValue().toDateString()),
                         div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
@@ -233,8 +243,9 @@ public enum PnlTotalPanelSpec implements IPredicate<PnlTotalPanelDiv> {
                 return true;
             }
             if (登録.equals(状態)) {
+                TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
                 parameter = new ChkTorokuzumiParameter(
-                        new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
+                        key.get被保険者番号(),
                         null,
                         null,
                         null,

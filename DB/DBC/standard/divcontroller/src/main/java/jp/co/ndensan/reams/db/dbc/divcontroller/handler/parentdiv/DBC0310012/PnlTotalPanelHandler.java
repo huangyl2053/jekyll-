@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -308,9 +308,10 @@ public class PnlTotalPanelHandler {
      * @return PnlTotalPanelParameter パラメータ
      */
     public PnlTotalPanelParameter createParameter() {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         PnlTotalPanelParameter parameter = new PnlTotalPanelParameter(
-                div.getPnlCommon().getCcdAtena().getShokaiData().getTxtShikibetsuCode().getDomain(),
-                div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号(),
+                key.get識別コード(),
+                key.get被保険者番号().getColumnValue(),
                 div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().getValue(),
                 div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue(),
                 div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
@@ -347,8 +348,9 @@ public class PnlTotalPanelHandler {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
         ShokanJuryoininKeiyakusha shokan;
         if (登録.equals(画面モード)) {
+            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             shokan = new ShokanJuryoininKeiyakusha(
-                    new HihokenshaNo(div.getPnlCommon().getCcdKaigoShikakuKihon().get被保険者番号()),
+                    key.get被保険者番号(),
                     new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
                     div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
                     div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey());

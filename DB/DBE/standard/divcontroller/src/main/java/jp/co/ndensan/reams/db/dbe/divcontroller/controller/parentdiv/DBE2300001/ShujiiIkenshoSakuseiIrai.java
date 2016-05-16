@@ -45,6 +45,8 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -242,8 +244,14 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).
                 equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            LockingKey 排他キー
+                    = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
+            if (!RealInitialLocker.tryGetLock(排他キー)) {
+                return ResponseData.of(div).addValidationMessages(validationHandler.排他チェック()).respond();
+            }
             toHozon(div);
             onClick_btnSearch(div);
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
@@ -260,6 +268,11 @@ public class ShujiiIkenshoSakuseiIrai {
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
+        LockingKey 排他キー
+                = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            return ResponseData.of(div).addValidationMessages(createValidationHandler(div).排他チェック()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -270,11 +283,14 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<SourceDataCollection> onClick_btnHakkou(ShujiiIkenshoSakuseiIraiDiv div) {
+        LockingKey 排他キー
+                = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
         }
+        RealInitialLocker.release(排他キー);
         return response;
     }
 
@@ -384,19 +400,6 @@ public class ShujiiIkenshoSakuseiIrai {
         return builder;
     }
 
-//    private boolean 前排他キーのセット() {
-//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-//        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
-//                .concat(temp_申請書管理番号.getColumnValue()));
-//        return RealInitialLocker.tryGetLock(排他キー);
-//    }
-//
-//    private void 前排他キーの解除() {
-//        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-//        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
-//                .concat(temp_申請書管理番号.getColumnValue()));
-//        RealInitialLocker.release(排他キー);
-//    }
     private void printData(ShujiiIkenshoSakuseiIraiDiv div, ReportManager reportManager) {
 
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報

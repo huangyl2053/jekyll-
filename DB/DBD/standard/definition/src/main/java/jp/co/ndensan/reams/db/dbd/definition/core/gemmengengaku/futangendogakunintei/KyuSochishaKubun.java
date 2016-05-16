@@ -17,11 +17,11 @@ public enum KyuSochishaKubun {
     /**
      * コード:1 名称:旧措置 略称:定義なし
      */
-    旧措置("1", "旧措置"),
+    旧措置者("1", "旧措置者"),
     /**
      * コード:2 名称:負担段階 略称:定義なし
      */
-    負担段階("2", "負担段階");
+    旧措置者実質的負担軽減者("2", "負担軽減者");
 
     private final RString code;
     private final RString fullName;

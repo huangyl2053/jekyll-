@@ -364,14 +364,14 @@ public class TaJushochiTokureisyaKanriManager {
         for (DbT1003TashichosonJushochiTokureiEntity tokureiEntity : tokureiEntityList) {
             tokureiEntity.initializeMd5();
             住所地特例List.add(new TashichosonJushochiTokurei(tokureiEntity));
-            tashichosonBusiness.set住所地特例List(住所地特例List);
         }
         List<jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho> 施設入退所Lsit = new ArrayList();
         for (DbT1004ShisetsuNyutaishoEntity nyutaishoEntity : nyutaishoEntityList) {
             nyutaishoEntity.initializeMd5();
             施設入退所Lsit.add(new jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho(nyutaishoEntity));
-            tashichosonBusiness.set施設入退所Lsit(施設入退所Lsit);
         }
+        tashichosonBusiness.set住所地特例List(住所地特例List);
+        tashichosonBusiness.set施設入退所Lsit(施設入退所Lsit);
     }
 
     private static class DateComparator implements Comparator<TaJushochiTokureisyaKanriRelateEntity>, Serializable {

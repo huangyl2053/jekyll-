@@ -197,7 +197,8 @@ public class HihokenshaDaichoHakkoIchiranhyoProcess extends BatchProcessBase<DbT
             被保険者Entity.setChikuCode2(iGyoseiKukaku.getChiku2().getコード());
             被保険者Entity.setChikucodeTitle3(iGyoseiKukaku.getChiku3().get名称());
             被保険者Entity.setChikuCode3(iGyoseiKukaku.getChiku3().getコード());
-            被保険者Entity.setZenkokuJushoCode(iKojin.get住所().get全国住所コード());
+            被保険者Entity.setZenkokuJushoCode(iKojin.get住所().get全国住所コード() != null
+                    ? iKojin.get住所().get全国住所コード().value() : RString.EMPTY);
             被保険者Entity.setGyoseikuCode(iGyoseiKukaku.getGyoseiku().getコード());
             被保険者Entity.setTelephoneNo1(iKojin.get連絡先１().value());
             被保険者Entity.setJusho(shikibetsuTaisho.get住所().get住所());

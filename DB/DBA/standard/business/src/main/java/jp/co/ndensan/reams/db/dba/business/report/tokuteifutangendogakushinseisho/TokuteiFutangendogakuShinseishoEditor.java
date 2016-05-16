@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho;
 
-import jp.co.ndensan.reams.db.dba.entity.report.source.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
 
 /**
  * 介護保険特定負担限度額申請書Editorです。

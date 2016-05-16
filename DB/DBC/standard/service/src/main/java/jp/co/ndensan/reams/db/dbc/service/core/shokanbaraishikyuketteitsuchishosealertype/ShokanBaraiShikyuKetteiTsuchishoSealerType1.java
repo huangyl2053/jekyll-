@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
+import jp.co.ndensan.reams.ur.urz.definition.report.ReportId;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -225,10 +226,12 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                         Long.parseLong(batchPram.getSyutujunId().toString()));
         List<RString> 出力順項目 = new ArrayList<>();
         List<RString> 改ページ項目 = new ArrayList<>();
-        for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
-            出力順項目.add(sortItem.get項目ID());
-            if (sortItem.is改頁項目()) {
-                改ページ項目.add(sortItem.get項目ID());
+        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
+            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
+                出力順項目.add(sortItem.get項目ID());
+                if (sortItem.is改頁項目()) {
+                    改ページ項目.add(sortItem.get項目ID());
+                }
             }
         }
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
@@ -236,7 +239,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBC.DBC100004.getReportName(),
-                ReportIdDBC.DBC100004.getReportId().value(),
+                ReportId.代行プリント送付票チェックなし.value(),
                 帳票名, ページ数, 抽出条件,
                 出力順項目, 改ページ項目, Collections.<RString>emptyList());
         IDaikoPrint daikoPrint = DaikoPrintFactory.createInstance(daikoPrintItem);

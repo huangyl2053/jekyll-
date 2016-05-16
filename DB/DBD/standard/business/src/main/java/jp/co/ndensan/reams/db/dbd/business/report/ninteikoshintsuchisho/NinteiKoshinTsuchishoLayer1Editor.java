@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakuni
 import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -34,15 +35,25 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
     @Override
     public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
         source.bunshoNo = item.get文書番号();
-        if (KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
-            source.title = new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル.name());
+        if (item.get帳票情報() == null || KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
+            for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+                if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル.name()).equals(entity.getKomokuName())) {
+                    source.title = entity.getKomokuValue();
+                    break;
+                }
+            }
         } else {
-            source.title = new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル_旧措置者用.name());
+            for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+                if (new RString(ChohyoSeigyoHanyoKeysDBD100008.帳票タイトル_旧措置者用.name()).equals(entity.getKomokuName())) {
+                    source.title = entity.getKomokuValue();
+                    break;
+                }
+            }
         }
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
         source.hihokenshaNameKana = 編集後個人.get名称().getKana().getColumnValue();
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        source.hihokenshaNo = item.get帳票情報().get被保険者番号().getColumnValue();
+        source.hihokenshaNo = item.get帳票情報() == null ? RString.EMPTY : item.get帳票情報().get被保険者番号().getColumnValue();
         source.tsuchibun = item.get通知書定型文List().get(1);
         source.shikibetsuCode = item.getIKojin().get識別コード();
         return source;

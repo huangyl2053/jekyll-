@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.HihokenshaDaichoSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei.SetaiLeftEntity;
@@ -267,7 +266,7 @@ public class HihokenshaDaichoSakusei {
      *
      * @return 住所コード
      */
-    public ZenkokuJushoCode get住所コード() {
+    public RString get住所コード() {
         return entity.getZenkokuJushoCode();
     }
 

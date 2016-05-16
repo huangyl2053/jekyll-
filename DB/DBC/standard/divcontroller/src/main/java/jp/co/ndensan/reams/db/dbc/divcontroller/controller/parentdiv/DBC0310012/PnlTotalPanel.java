@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0310012TransitionEventName;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearc
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -74,7 +76,8 @@ public class PnlTotalPanel {
     public ResponseData<PnlTotalPanelDiv> onLoad(PnlTotalPanelDiv div) {
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         getHandler(div).createDropDownList();
-        if (登録.equals(画面モード)) {
+        if (!修正.equals(画面モード) && !削除.equals(画面モード) && !参照.equals(画面モード)) {
+            ViewStateHolder.put(ViewStateKeys.画面モード, 登録);
             div.getPnlCommon().getCcdAtena().setDisabled(true);
             div.getPnlCommon().getCcdKaigoShikakuKihon().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
@@ -95,9 +98,10 @@ public class PnlTotalPanel {
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
             div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
 
-            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            ShikibetsuCode 識別コード = key.get識別コード();
             div.getPnlCommon().getCcdAtena().onLoad(識別コード);
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            HihokenshaNo 被保険者番号 = key.get被保険者番号();
             div.getPnlCommon().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
             RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
             if (事業者検索.equals(表示モード)) {
@@ -151,6 +155,8 @@ public class PnlTotalPanel {
             } else {
                 div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().clearValue();
             }
+        } else {
+            div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaName().clearValue();
         }
         return ResponseData.of(div).respond();
     }
@@ -372,10 +378,10 @@ public class PnlTotalPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).保存処理(画面モード);
-            } else {
-                return ResponseData.of(div).respond();
+                div.getPnlMsgPrint().getCcdKanryoMessage()
+                        .setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(deleted);
             }
-            div.getPnlMsgPrint().getPnlPrint().setDisplayNone(true);
         } else {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -386,13 +392,12 @@ public class PnlTotalPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).保存処理(画面モード);
-            } else {
-                return ResponseData.of(div).respond();
+                div.getPnlMsgPrint().getCcdKanryoMessage()
+                        .setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(saved);
             }
         }
-        div.getPnlMsgPrint().getCcdKanryoMessage()
-                .setMessage(UrInformationMessages.保存終了, RString.EMPTY, RString.EMPTY, true);
-        return ResponseData.of(div).setState(saved);
+        return ResponseData.of(div).respond();
     }
 
     /**

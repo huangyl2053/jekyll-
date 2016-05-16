@@ -159,7 +159,7 @@ public class ShokanJutakuKaishuBuilder {
      * @return {@link ShokanJutakuKaishuBuilder}
      */
     public ShokanJutakuKaishuBuilder set事前申請サービス提供年月(FlexibleYearMonth 事前申請サービス提供年月) {
-        requireNonNull(事前申請サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("事前申請サービス提供年月"));
+//        requireNonNull(事前申請サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("事前申請サービス提供年月"));
         entity.setJizenServiceTeikyoYM(事前申請サービス提供年月);
         return this;
     }
@@ -171,7 +171,7 @@ public class ShokanJutakuKaishuBuilder {
      * @return {@link ShokanJutakuKaishuBuilder}
      */
     public ShokanJutakuKaishuBuilder set事前申請整理番号(RString 事前申請整理番号) {
-        requireNonNull(事前申請整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事前申請整理番号"));
+//        requireNonNull(事前申請整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事前申請整理番号"));
         entity.setJizenSeiriNo(事前申請整理番号);
         return this;
     }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.DBC710010;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710010.HanyoListKyotakuServiceKeikakuNoRenbanProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710010.HanyoListKyotakuServiceKeikakuProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -28,7 +29,11 @@ public class HanyoListKyotakuServiceKeikakuFlow
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        return loopBatch(HanyoListKyotakuServiceKeikakuProcess.class)
+        if (getParameter().isCsv連番付加()) {
+            return loopBatch(HanyoListKyotakuServiceKeikakuProcess.class)
+                    .arguments(getParameter().toProcessParameter()).define();
+        }
+        return loopBatch(HanyoListKyotakuServiceKeikakuNoRenbanProcess.class)
                 .arguments(getParameter().toProcessParameter()).define();
     }
 

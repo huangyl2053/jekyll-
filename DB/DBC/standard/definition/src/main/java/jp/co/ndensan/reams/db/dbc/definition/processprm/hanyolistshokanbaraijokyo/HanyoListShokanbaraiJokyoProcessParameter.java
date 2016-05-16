@@ -55,6 +55,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
     private ReportId 帳票ID;
     private IKozaSearchKey searchkey;
     private List<KamokuCode> list;
+    private RString reamsLoginId;
 
     /**
      * コンストラクタです
@@ -92,6 +93,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
      * @param 出力順 Long
      * @param 出力項目 RString
      * @param 帳票ID ReportId
+     * @param reamsLoginId RString
      */
     public HanyoListShokanbaraiJokyoProcessParameter(
             IKozaSearchKey searchkey,
@@ -120,7 +122,8 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
             boolean 日付スラッシュ付加,
             Long 出力順,
             RString 出力項目,
-            ReportId 帳票ID
+            ReportId 帳票ID,
+            RString reamsLoginId
     ) {
         this.searchkey = searchkey;
         this.list = list;
@@ -149,6 +152,7 @@ public class HanyoListShokanbaraiJokyoProcessParameter implements IBatchProcessP
         this.出力順 = 出力順;
         this.出力項目 = 出力項目;
         this.帳票ID = 帳票ID;
+        this.reamsLoginId = reamsLoginId;
     }
 
     /**

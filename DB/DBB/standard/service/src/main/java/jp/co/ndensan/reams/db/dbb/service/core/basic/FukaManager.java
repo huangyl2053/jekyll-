@@ -77,6 +77,28 @@ public class FukaManager {
     }
 
     /**
+     * 引数に一致する介護賦課を返します。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 通知書番号 TsuchishoNo
+     * @return List<Fuka>
+     */
+    @Transaction
+    public List<Fuka> get介護賦課(FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
+        List<Fuka> businessList = new ArrayList<>();
+
+        for (DbT2002FukaEntity entity : dac.selectByKey(調定年度, 賦課年度, 通知書番号)) {
+            entity.initializeMd5();
+            businessList.add(new Fuka(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
      * 介護賦課を全件返します。
      *
      * @return List<Fuka>

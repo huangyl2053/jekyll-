@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.KoShiTaisy
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.MaSuKinGuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.NiJiHanTeiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShiSeiKeTuKeBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiToRoKuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.param.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -46,6 +48,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -223,6 +227,14 @@ public class YokaigoNinteiTaskListHandler {
             List<ShinSaKaiToRoKuBusiness> 審査会登録List = YokaigoNinteiTaskListFinder.createInstance().
                     get審査会登録モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (審査会登録List != null && !審査会登録List.isEmpty()) {
+                ShinSaKaiBusiness 前審査会登録Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前審査会登録(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_審査会登録モード, Models.create(前審査会登録Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_審査会登録モード, Models.create(new ArrayList()));
+            }
             審査会登録モード(審査会登録List);
         }
         if (二次判定モード.equals(モード)) {
@@ -522,6 +534,11 @@ public class YokaigoNinteiTaskListHandler {
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
                     : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+            row.setNinteiChosaItakusakiCode(business.get認定調査委託先コード() == null
+                    ? RString.EMPTY : business.get認定調査委託先コード().value());
+            row.setNinteiChosainCode(business.get調査員コード() == null
+                    ? RString.EMPTY : business.get調査員コード().value());
+            row.setChikuCode(business.get地区コード() == null ? RString.EMPTY : business.get地区コード());
             調査入手モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -972,5 +989,25 @@ public class YokaigoNinteiTaskListHandler {
             return YokaigoJotaiKubun09.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 一览件数を取得します。
+     *
+     * @return 一览件数
+     */
+    public RString 一览件数() {
+
+        return div.getTxtTotalCount().getValue();
+    }
+
+    /**
+     * 一览に選択のデータを取得します。
+     *
+     * @return 選択のデータ
+     */
+    public List<dgNinteiTaskList_Row> getCheckbox() {
+
+        return div.getDgNinteiTaskList().getSelectedItems();
     }
 }

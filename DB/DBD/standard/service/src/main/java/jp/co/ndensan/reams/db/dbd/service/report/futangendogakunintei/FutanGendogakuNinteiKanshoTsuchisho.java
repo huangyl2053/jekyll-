@@ -62,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -102,19 +103,17 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      * @param 文書番号 文書番号
      * @param お知らせ通知書 willPublishお知らせ通知書
      * @param 申請書 willPublish申請書
-     * @return SourceDataCollection
+     * @param reportManager 帳票発行処理の制御機能
      */
-    public SourceDataCollection publish(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
-            int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書) {
-        SourceDataCollection sourceDataCollection = new SourceDataCollection();
+    public void publish(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
+            int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書, ReportManager reportManager) {
         if (お知らせ通知書) {
-            return publishお知らせ通知書(被保険者番号, 識別コード, 履歴番号, 発行日, 文書番号, お知らせ通知書, 申請書);
+            publishお知らせ通知書(被保険者番号, 識別コード, 履歴番号, 発行日, 文書番号, お知らせ通知書, 申請書, reportManager);
         }
         if (申請書) {
             FutanGendogakuNinteiShinseisho futanGendogakuNinteiShinseisho = new FutanGendogakuNinteiShinseisho();
-            return futanGendogakuNinteiShinseisho.createFutanGendogakuNinteiShinseishoChohyo(識別コード, 被保険者番号);
+            futanGendogakuNinteiShinseisho.createFutanGendogakuNinteiShinseishoChohyo(識別コード, 被保険者番号, reportManager);
         }
-        return sourceDataCollection;
     }
 
     /**
@@ -127,10 +126,10 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      * @param 文書番号 文書番号
      * @param お知らせ通知書 willPublishお知らせ通知書
      * @param 申請書 willPublish申請書
-     * @return SourceDataCollection
+     * @param reportManager 帳票発行処理の制御機能
      */
-    public SourceDataCollection publishお知らせ通知書(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
-            int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書) {
+    public void publishお知らせ通知書(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
+            int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書, ReportManager reportManager) {
         SourceDataCollection sourceDataCollection = new SourceDataCollection();
 
         FutanGendogakuNintei 介護保険負担限度額認定 = get介護負担限度額認定の情報(被保険者番号, 履歴番号);
@@ -151,7 +150,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
         if (new RString("DBD100008_FutanGendogakuNinteiKoshinTsuchisho").equals(new RString(帳票分類ID.toString()))) {
             int パターン番号;
-            if (介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
+            if (介護保険負担限度額認定 == null || 介護保険負担限度額認定.get旧措置者区分().isNullOrEmpty()) {
                 パターン番号 = 1;
             } else {
                 パターン番号 = パターン番号_21;
@@ -179,11 +178,9 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
 
             itemList.add(item);
             NinteiKoshinTsuchishoService service = new NinteiKoshinTsuchishoService();
-            sourceDataCollection = service.print(itemList);
+            service.print(itemList, reportManager);
             insert発行履歴(sourceDataCollection, 発行日, 識別コード);
         }
-
-        return sourceDataCollection;
     }
 
     private Ninshosha get認証者情報(FlexibleDate kaisiYMD) {

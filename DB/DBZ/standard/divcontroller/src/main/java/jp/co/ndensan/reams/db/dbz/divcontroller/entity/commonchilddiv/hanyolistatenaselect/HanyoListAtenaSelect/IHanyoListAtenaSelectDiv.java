@@ -289,4 +289,11 @@ public interface IHanyoListAtenaSelectDiv extends ICommonChildDivBaseProperties 
      */
     public AtenaSelectBatchParameter get宛名抽出条件();
 
+    /**
+     * 宛名抽出条件子Divを返却します。
+     *
+     * @return 宛名抽出条件子Div
+     */
+    public HanyoListAtenaSelectDiv get宛名抽出条件子Div();
+
 }

@@ -5,11 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
-import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
+import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
+import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako.ShichosonCodeResult;
+import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.DBU0020011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.JigyoJokyoHokokuHoseiKensakuDiv;
@@ -18,7 +22,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020011.Jig
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.TokeiTaishoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -83,9 +86,15 @@ public class JigyoJokyoHokokuHoseiKensaku {
             市町村コード = new LasdecCode(市町村.get(0));
             市町村名称 = 市町村.get(1);
         }
+        Map<RString, ShichosonCodeResult> map = ViewStateHolder.get(ViewStateKeys.市町村Entiyリスト, Map.class);
+        RString コード = null;
+        if (市町村コード != null) {
+            ShichosonCodeResult codeResult = map.get(市町村コード.value());
+            コード = codeResult.get保険者区分();
+        }
         JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = JigyoHokokuGeppoSearchParameter.
                 createParameterForJigyoHokokuGeppo(報告年,
-                        報告月, 市町村コード, 市町村名称, TokeiTaishoKubun.保険者分.getコード());
+                        報告月, 市町村コード, 市町村名称, コード);
         JigyoHokokuGeppoHoseiHako result = JigyoHokokuGeppoHoseiHako.createInstance();
         List<JigyoHokokuGeppoHoseiHakoResult> businessList = result.getJigyoHokokuGeppoList(jigyoHokokuGeppoParameter);
         handler.initializeDgList(businessList);
@@ -233,6 +242,13 @@ public class JigyoJokyoHokokuHoseiKensaku {
             div.getTaishokensaku().getDdlShichoson().setDisplayNone(true);
             throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
         }
+        Map<RString, ShichosonCodeResult> map = new HashMap<>();
+        for (ShichosonCodeNameResult entity : 市町村List) {
+            ShichosonCodeResult codeResult = new ShichosonCodeResult(
+                    entity.get市町村コード().value(), entity.get市町村名称(), entity.get保険者コード().value(), entity.get保険者区分());
+            map.put(entity.get市町村コード().value(), codeResult);
+        }
+        ViewStateHolder.put(ViewStateKeys.市町村Entiyリスト, (Serializable) map);
         List<KeyValueDataSource> shichosonList = new ArrayList<>();
         if (市町村List.size() > 1) {
             shichosonList.add(new KeyValueDataSource(new RString("key0"), new RString("")));

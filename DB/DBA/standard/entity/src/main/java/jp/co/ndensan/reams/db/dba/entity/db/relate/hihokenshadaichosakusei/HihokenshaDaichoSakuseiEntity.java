@@ -13,13 +13,12 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳のエンティティクラスです。
  *
- * @reamsid_L DBA-0500-010  suguangjun
+ * @reamsid_L DBA-0500-010 suguangjun
  */
 @lombok.Getter
 @lombok.Setter
@@ -51,7 +50,7 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString telephoneNo2;
     private RString jushoTitle;
     private RString jusho;
-    private ZenkokuJushoCode zenkokuJushoCode;
+    private RString zenkokuJushoCode;
     private RString gyoseikuTitle;
     private GyoseikuCode gyoseikuCode;
     private RString jigyoshaNo;
@@ -72,7 +71,6 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString setaiName3;
     private RString setaiName4;
     private RString setaiName5;
-    // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
     private SetaiLeftEntity 世帯左情報;
     private SetaiRightEntity 世帯右情報;
 }

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * JukyuSikakuShomeishoHakko のクラスファイル
@@ -33,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
  */
 public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuShomeishoHakkoDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -141,6 +143,26 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
     }
 
     @JsonIgnore
+    public TextBox getTxtfutanWariaiKubun() {
+        return this.getPnlJukyushaJoho1().getTxtfutanWariaiKubun();
+    }
+
+    @JsonIgnore
+    public void setTxtfutanWariaiKubun(TextBox txtfutanWariaiKubun) {
+        this.getPnlJukyushaJoho1().setTxtfutanWariaiKubun(txtfutanWariaiKubun);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtfutanWariai() {
+        return this.getPnlJukyushaJoho1().getTxtfutanWariai();
+    }
+
+    @JsonIgnore
+    public void setTxtfutanWariai(TextBox txtfutanWariai) {
+        this.getPnlJukyushaJoho1().setTxtfutanWariai(txtfutanWariai);
+    }
+
+    @JsonIgnore
     public CheckBoxList getCblInji() {
         return this.getPnlJukyushaJoho1().getCblInji();
     }
@@ -204,6 +226,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
      */
     @Override
     public void initialize(RString 被保険者番号) {
+        RString nendo = ViewStateHolder.get(ViewStateKeys.年度, RString.class);
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.未定義), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -219,7 +242,7 @@ public class JukyuSikakuShomeishoHakkoDiv extends Panel implements IJukyuSikakuS
         key.set住民状態(住民状態);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         getHandler().initialize(JukyuShikakuShomeishoHakkoParameter.createSelectBy被保険者番号(被保険者番号, 有効区分,
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString())));
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()), nendo));
     }
 
     @Override

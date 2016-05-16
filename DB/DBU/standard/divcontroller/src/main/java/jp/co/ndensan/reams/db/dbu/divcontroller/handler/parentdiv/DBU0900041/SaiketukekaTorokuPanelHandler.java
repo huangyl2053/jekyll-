@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041;
 
-import jp.co.ndensan.reams.db.dbu.business.saiketukekameisaijoho.SaiketukekaMeisaiJohoData;
+import jp.co.ndensan.reams.db.dbu.business.core.saiketukekameisaijoho.SaiketukekaMeisaiJohoData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.SaiketukekaTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

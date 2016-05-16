@@ -30,7 +30,11 @@ public enum ReportIdDBD {
     /**
      * 介護保険利用者負担額減額・免除申請書の帳票ＩＤです。
      */
-    DBD800002(new ReportId("DBD800002_RiyoshaFutangakuGengakuMenjyoShinseisho"), new RString("介護保険利用者負担額減額・免除申請書"));
+    DBD800002(new ReportId("DBD800002_RiyoshaFutangakuGengakuMenjyoShinseisho"), new RString("介護保険利用者負担額減額・免除申請書")),
+    /**
+     * 汎用リスト 受給者台帳２の帳票ＩＤです。
+     */
+    DBD130001(new ReportId("DBD130001_HanyoList_JukyushaDaicho2"), new RString("汎用リスト 受給者台帳２"));
 
     private final ReportId reportId;
     private final RString reportName;

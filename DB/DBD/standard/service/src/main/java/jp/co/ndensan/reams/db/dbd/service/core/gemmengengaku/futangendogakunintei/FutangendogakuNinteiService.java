@@ -152,30 +152,36 @@ public class FutangendogakuNinteiService {
         SetaiinShotokuJohoFinder fineder = SetaiinShotokuJohoFinder.createInstance();
         List<SetaiinShotoku> 世帯員所得情報リスト = fineder.get世帯員所得情報(識別コード, 処理日.getYear(), new YMDHMS(処理日時));
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報リスト) {
-            if (HaigushaKazeiKubun.課税.getコード().contains(世帯員所得情報.get課税区分_住民税減免後())) {
+            if (HaigushaKazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免後())) {
                 return RiyoshaFutanDankai.第四段階;
-            } else {
-                return 利用者負担段階の再判定(識別コード, 世帯員所得情報, 処理日);
             }
         }
-        throw new ApplicationException(DbdErrorMessages.利用者負担段階_判定失敗.getMessage());
+        return 利用者負担段階の再判定(識別コード, 世帯員所得情報リスト, 処理日);
     }
 
-    private RiyoshaFutanDankai 利用者負担段階の再判定(ShikibetsuCode 識別コード, SetaiinShotoku 世帯員所得情報, FlexibleDate 処理日) {
+    private RiyoshaFutanDankai 利用者負担段階の再判定(ShikibetsuCode 識別コード, List<SetaiinShotoku> 世帯員所得情報リスト, FlexibleDate 処理日) {
         DbT7006RoreiFukushiNenkinJukyushaDac dbT7006Dac = InstanceProvider.create(DbT7006RoreiFukushiNenkinJukyushaDac.class);
         List<DbT7006RoreiFukushiNenkinJukyushaEntity> dbT7006Entity = dbT7006Dac.selectfor老齢福祉年金受給者の判定(識別コード, 処理日);
         if (dbT7006Entity != null && !dbT7006Entity.isEmpty()) {
             return RiyoshaFutanDankai.第一段階;
         }
-        if (識別コード.equals(世帯員所得情報.get識別コード())) {
-            int result = 世帯員所得情報.get合計所得金額().add(世帯員所得情報.get年金収入額()).compareTo(Decimal.valueOf(LONG_80000));
-            if (result == 0 || result < 0) {
-                return RiyoshaFutanDankai.第二段階;
-            } else {
-                return RiyoshaFutanDankai.第三段階;
+        SetaiinShotoku 世帯員所得情報 = null;
+        for (SetaiinShotoku 世帯員所得 : 世帯員所得情報リスト) {
+            if (識別コード.equals(世帯員所得.get識別コード())) {
+                世帯員所得情報 = 世帯員所得;
             }
         }
-        throw new ApplicationException(DbdErrorMessages.利用者負担段階_判定失敗.getMessage());
+        if (null == 世帯員所得情報) {
+            throw new ApplicationException(DbdErrorMessages.利用者負担段階_判定失敗.getMessage());
+        }
+        Decimal 合計所得金額 = null == 世帯員所得情報.get合計所得金額() ? Decimal.ZERO : 世帯員所得情報.get合計所得金額();
+        Decimal 年金収入額 = null == 世帯員所得情報.get年金収入額() ? Decimal.ZERO : 世帯員所得情報.get年金収入額();
+        int result = 合計所得金額.add(年金収入額).compareTo(Decimal.valueOf(LONG_80000));
+        if (result <= 0) {
+            return RiyoshaFutanDankai.第二段階;
+        } else {
+            return RiyoshaFutanDankai.第三段階;
+        }
     }
 
     /**
@@ -214,7 +220,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_食費３, 基準日));
             }
-        } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -240,7 +246,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置食費３, 基準日));
             }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -306,7 +312,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型個室３, 基準日));
             }
-        } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -332,7 +338,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室３, 基準日));
             }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -398,7 +404,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室３, 基準日));
             }
-        } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -424,7 +430,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室３, 基準日));
             }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -490,7 +496,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_従個特養３, 基準日));
             }
-        } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -516,7 +522,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養３, 基準日));
             }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -619,7 +625,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_多床室３, 基準日));
             }
-        } else if (KyuSochishaKubun.旧措置.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,
@@ -645,7 +651,7 @@ public class FutangendogakuNinteiService {
                         RString.EMPTY,
                         getBusinessConfig(ConfigNameDBD.特定入所者負担限度額_旧措置多床室３, 基準日));
             }
-        } else if (KyuSochishaKubun.負担段階.getコード().equals(旧措置者区分)) {
+        } else if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(旧措置者区分)) {
             if (基準日.isBeforeOrEquals(基準日_2015年4月1日)) {
                 return this.金額リスト作成(
                         利用者負担段階,

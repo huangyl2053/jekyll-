@@ -221,7 +221,7 @@ public class TatokureiTaishoTsuchishoHakko {
         item.setHokenshaName(business.get保険者名());
         item.setTantoBushoName(business.get担当部署名());
         item.setBarcode(business.getバーコード情報());
-        item.setMidashi(business.get見出し());
+        item.setMidashi1(business.get見出し());
         item.setHihokenshaNo1(business.get被保険者番号１());
         item.setHihokenshaNo2(business.get被保険者番号２());
         item.setHihokenshaNo3(business.get被保険者番号３());

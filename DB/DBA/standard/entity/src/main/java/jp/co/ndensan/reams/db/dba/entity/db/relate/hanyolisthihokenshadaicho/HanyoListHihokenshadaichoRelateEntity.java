@@ -31,8 +31,8 @@ public class HanyoListHihokenshadaichoRelateEntity {
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
     private RString hihokennshaKubunCode;
-    private boolean jushochiTokureiFlag;
-    private boolean koikinaiJushochiTokureiFlag;
+    private RString jushochiTokureiFlag;
+    private RString koikinaiJushochiTokureiFlag;
     private LasdecCode koikinaiTokureiSochimotoShichosonCode;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
     private UaFt250FindAtesakiEntity atesakiEntity;

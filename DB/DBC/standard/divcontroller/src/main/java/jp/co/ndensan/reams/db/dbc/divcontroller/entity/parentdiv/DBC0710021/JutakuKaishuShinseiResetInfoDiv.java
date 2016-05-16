@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -44,7 +43,7 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
     @JsonProperty("txtRiyoshaFutanAmountMae")
     private TextBoxNum txtRiyoshaFutanAmountMae;
     @JsonProperty("btnRireki")
-    private ButtonDialog btnRireki;
+    private Button btnRireki;
     @JsonProperty("txtHiyoTotalNow")
     private TextBoxNum txtHiyoTotalNow;
     @JsonProperty("txtHokenTaishoHiyoNow")
@@ -213,7 +212,7 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
      * @return btnRireki
      */
     @JsonProperty("btnRireki")
-    public ButtonDialog getBtnRireki() {
+    public Button getBtnRireki() {
         return btnRireki;
     }
 
@@ -222,7 +221,7 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
      * @param btnRireki btnRireki
      */
     @JsonProperty("btnRireki")
-    public void setBtnRireki(ButtonDialog btnRireki) {
+    public void setBtnRireki(Button btnRireki) {
         this.btnRireki = btnRireki;
     }
 

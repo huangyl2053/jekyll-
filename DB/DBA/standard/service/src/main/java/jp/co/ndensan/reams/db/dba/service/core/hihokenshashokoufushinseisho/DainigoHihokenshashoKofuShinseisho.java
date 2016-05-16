@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

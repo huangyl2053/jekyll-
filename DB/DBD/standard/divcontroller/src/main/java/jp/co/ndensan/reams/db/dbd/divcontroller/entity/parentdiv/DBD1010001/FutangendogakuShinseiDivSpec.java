@@ -9,15 +9,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -27,18 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShinseiDiv> {
 
-    受給共通_被保データなし {
-                /**
-                 * 受給共通_被保データなしチェックです。
-                 *
-                 * @param div TaishouWaritsukeDiv
-                 * @return true:被保データありの場合です、false:被保データなしの場合です。
-                 */
-                @Override
-                public boolean apply(FutangendogakuShinseiDiv div) {
-                    return ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号() != null;
-                }
-            },
     受給共通_受給者登録なし {
                 /**
                  * 受給共通_受給者登録なしチェックです。
@@ -64,7 +49,10 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                     FlexibleDate 法施行日 = new FlexibleDate(
                             DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
-                    return 法施行日.isBefore(適用開始日);
+                    if (法施行日.isEmpty() || 適用開始日 == null || 適用開始日.isEmpty()) {
+                        return false;
+                    }
+                    return 法施行日.isBeforeOrEquals(適用開始日);
                 }
             },
     負担限度額認定_適用終了日が年度外 {
@@ -76,8 +64,12 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                  */
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
-                    FlexibleDate date = FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue());
-                    return div.getTxtYukoKigenYMD().getValue().isBefore(date);
+                    FlexibleDate 標準有効期限 = FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue());
+                    FlexibleDate 有効期限 = div.getTxtYukoKigenYMD().getValue();
+                    if (標準有効期限.isEmpty() || 有効期限 == null || 有効期限.isEmpty()) {
+                        return false;
+                    }
+                    return 有効期限.isBeforeOrEquals(標準有効期限);
                 }
             },
     負担限度額認定_適用終了日が開始日以前 {
@@ -89,7 +81,12 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                  */
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
-                    return div.getTxtTekiyoYMD().getValue().isBefore(div.getTxtYukoKigenYMD().getValue());
+                    FlexibleDate 適用日 = div.getTxtTekiyoYMD().getValue();
+                    FlexibleDate 有効期限 = div.getTxtYukoKigenYMD().getValue();
+                    if (適用日 == null || 適用日.isEmpty() || 有効期限 == null || 有効期限.isEmpty()) {
+                        return false;
+                    }
+                    return 適用日.isBeforeOrEquals(有効期限);
                 }
             },
     減免減額_適用期間重複 {

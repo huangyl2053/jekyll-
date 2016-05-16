@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanSe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -56,7 +55,6 @@ public class ServiceKeikakuHiPanelHandler {
 
     private final ServiceKeikakuHiPanelDiv div;
     private static final int 連番LENGTH = 2;
-    // TODO QA532 MAX連番+1ですが？
     private static final RString 連番_1 = new RString("01");
     private static final RString コード種別 = new RString("0002");
     private static final RString 事業者区分BLANK = new RString("0");
@@ -68,7 +66,6 @@ public class ServiceKeikakuHiPanelHandler {
     private static final RString 設定可任意 = new RString("2");
     private static final RString 登録モード = new RString("登録");
     private static final RString 削除モード = new RString("削除");
-    private static final RString サービスコード1 = new RString("55");
     private static final int サービスコード2 = 4;
     private static final int 担当介護支援専門員番号LENGTH = 8;
 
@@ -205,7 +202,6 @@ public class ServiceKeikakuHiPanelHandler {
         div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().setReadOnly(true);
         div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().setReadOnly(true);
         div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setReadOnly(true);
-        // TODO QA454 共有子DIVの利用方法は合っていない
         IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
         serviceCodeInputDiv.setReadOnly(true);
@@ -219,13 +215,12 @@ public class ServiceKeikakuHiPanelHandler {
     /**
      * グリッドの修正、追加button Handlerのsetです。
      */
-    public void set修正_追加() {
+    private void set修正_追加() {
         div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setReadOnly(false);
         div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setReadOnly(false);
         div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().setReadOnly(false);
         div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().setReadOnly(false);
         div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setReadOnly(false);
-        // TODO QA454 共有子DIVの利用方法は合っていない
         IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
         serviceCodeInputDiv.setReadOnly(false);
@@ -253,12 +248,7 @@ public class ServiceKeikakuHiPanelHandler {
      * サービス計画費登録パネルの入力内容をクリア
      */
     public void clickクリア() {
-        setサービス計画費登録エリア(null);
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
-        // TODO QA506  ここは初期化です  入力してはいけません
-        serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード1);
+        setサービス計画費登録エリア();
     }
 
     /**
@@ -344,13 +334,11 @@ public class ServiceKeikakuHiPanelHandler {
         RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
         RStringBuilder サービスコードBuilder = new RStringBuilder();
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
-        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        RString serviceCode1 = serviceCodeInputDiv.getサービスコード1();
         サービスコードBuilder.append(serviceCode1);
-        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-        RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
+        サービスコードBuilder.append(serviceCodeInputDiv.getサービスコード2());
+        RString サービスコード名称 = serviceCodeInputDiv.getサービス名称();
         Decimal 単位数Decimal = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
         int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
@@ -383,13 +371,11 @@ public class ServiceKeikakuHiPanelHandler {
         RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
         RStringBuilder サービスコードBuilder = new RStringBuilder();
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
-        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        RString serviceCode1 = serviceCodeInputDiv.getサービスコード1();
         サービスコードBuilder.append(serviceCode1);
-        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-        RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
+        サービスコードBuilder.append(serviceCodeInputDiv.getサービスコード2());
+        RString サービスコード名称 = serviceCodeInputDiv.getサービス名称();
         Decimal 単位数Decimal = div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().getValue();
         int 単位数 = 単位数Decimal == null ? 0 : 単位数Decimal.intValue();
         Decimal 単位数単価 = div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().getValue();
@@ -525,6 +511,7 @@ public class ServiceKeikakuHiPanelHandler {
                         様式番号,
                         明細番号,
                         new RString(String.valueOf(max連番)).padZeroToLeft(連番LENGTH));
+                // TODO 採番で取得された整理番号必要ですが？
                 entity200904 = 保存_データ(row, entity200904);
                 entityList.add(entity200904);
             }
@@ -539,9 +526,7 @@ public class ServiceKeikakuHiPanelHandler {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown()
                 .getDdlShiteiJigyoshaKubunCode().getSelectedKey();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
@@ -554,11 +539,12 @@ public class ServiceKeikakuHiPanelHandler {
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().getValue();
         RString 摘要 = div.getPanelServiceKeikakuhiDown().getTxtTekiyo().getValue();
         RStringBuilder サービスコードBuilder = new RStringBuilder();
-        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        RString serviceCode1 = serviceCodeInputDiv.getサービスコード1();
         サービスコードBuilder.append(serviceCode1);
-        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
+        サービスコードBuilder.append(serviceCodeInputDiv.getサービスコード2());
 
         if (entity200604Result == null) {
+            // TODO 採番で取得された整理番号を利用ですが？
             RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
             ShokanServicePlan200604 entity200604 = new ShokanServicePlan200604(
                     被保険者番号,
@@ -602,9 +588,7 @@ public class ServiceKeikakuHiPanelHandler {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown()
                 .getDdlShiteiJigyoshaKubunCode().getSelectedKey();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
@@ -615,9 +599,9 @@ public class ServiceKeikakuHiPanelHandler {
         Decimal 請求金額Decimal = div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().getValue();
         int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
         RStringBuilder サービスコードBuilder = new RStringBuilder();
-        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        RString serviceCode1 = serviceCodeInputDiv.getサービスコード1();
         サービスコードBuilder.append(serviceCode1);
-        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
+        サービスコードBuilder.append(serviceCodeInputDiv.getサービスコード2());
         if (entity200004Result == null) {
             RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
             ShokanServicePlan200004 entity200004 = new ShokanServicePlan200004(
@@ -681,14 +665,13 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     private void 登録パネル_グリッド(dgdYichiran_Row row) {
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
         RStringBuilder サービスコードBuilder = new RStringBuilder();
-        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        RString serviceCode1 = serviceCodeInputDiv.getサービスコード1();
         サービスコードBuilder.append(serviceCode1);
-        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-        RString サービス名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
+        サービスコードBuilder.append(serviceCodeInputDiv.getサービスコード2());
+        RString サービス名称 = serviceCodeInputDiv.getサービス名称();
         Decimal 単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().getValue();
         Decimal 回数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().getValue();
         Decimal サービス単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().getValue();
@@ -723,13 +706,15 @@ public class ServiceKeikakuHiPanelHandler {
         RString 摘要 = row.getDefaultDataName5();
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().getSelectedKey();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().getSelectedKey();
-        // TODO QA506 届出日check
+        // TODO 届出日 画面のチックは必要ですが？
         FlexibleDate 届出日 = get届出日(div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().getValue());
         RString 担当介護支援専門員番号 = div.getPanelServiceKeikakuhiUp().getTxtTantoKaigoshien().getValue();
         Decimal 単位数単価Decimal = div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().getValue();
-        // TODO QA506 単位数単価check必要ですが？
         Decimal 単位数単価 = 単位数単価Decimal == null ? Decimal.ZERO : 単位数単価Decimal;
-        // TODO QA506 INSERTサービス単位数合計の設定
+        Decimal サービス単位数合計Decimal = div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().getValue();
+        int サービス単位数合計 = サービス単位数合計Decimal == null ? 0 : サービス単位数合計Decimal.intValue();
+        Decimal 請求金額Decimal = div.getPanelServiceKeikakuhiUp().getTxtSeikyugaku().getValue();
+        int 請求金額 = 請求金額Decimal == null ? 0 : 請求金額Decimal.intValue();
         entity200904 = entity200904.createBuilderForEdit()
                 .setサービスコード(サービスコード)
                 .set単位数(単位数)
@@ -740,7 +725,9 @@ public class ServiceKeikakuHiPanelHandler {
                 .set審査方法区分コード(審査方法区分コード)
                 .set居宅サービス計画作成依頼届出年月日(届出日)
                 .set担当介護支援専門員番号(担当介護支援専門員番号)
-                .set単位数単価(単位数単価).build();
+                .set単位数単価(単位数単価)
+                .setサービス単位数合計(サービス単位数合計)
+                .set請求金額(請求金額).build();
         if (RowState.Added.equals(state)) {
             entity200904 = entity200904.added();
         } else if (RowState.Deleted.equals(state)) {
@@ -816,7 +803,8 @@ public class ServiceKeikakuHiPanelHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(事業者区分BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
-        List<UzT0007CodeEntity> 事業者区分リスト = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
+        List<UzT0007CodeEntity> 事業者区分リスト = CodeMaster.getCode(
+                SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity 事業者区分 : 事業者区分リスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource(事業者区分.getコード().value(), 事業者区分.getコード名称());
             dataSourceList.add(dataSource);
@@ -833,36 +821,16 @@ public class ServiceKeikakuHiPanelHandler {
         return dataSourceList;
     }
 
-    private void setサービス計画費登録エリア(ShokanServicePlan200904Result entity200904) {
-        if (entity200904 == null) {
-            // TODO QA454 共有子DIVの利用方法は合っていない
-            ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                    .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
-            serviceCodeInputDiv.getTxtServiceCode2().clearValue();
-            serviceCodeInputDiv.getTxtServiceCode1().clearValue();
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().clearValue();
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().clearValue();
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().clearValue();
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().clearValue();
-        } else {
-            RString サービスコード = entity200904.getEntity().getサービスコード().getColumnValue();
-            Decimal 単位数 = new Decimal(entity200904.getEntity().get単位数());
-            Decimal 回数 = new Decimal(entity200904.getEntity().get回数());
-            Decimal サービス単位数 = new Decimal(entity200904.getEntity().getサービス単位数());
-            RString 摘要 = entity200904.getEntity().get摘要();
-            // TODO QA454 共有子DIVの利用方法は合っていない
-            ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                    .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
-            if (サービスコード != null) {
-                serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード.substring(0, 2));
-                serviceCodeInputDiv.getTxtServiceCode2().setValue(
-                        サービスコード.substring(サービスコード.length() - サービスコード2));
-            }
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().setValue(単位数);
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().setValue(回数);
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().setValue(サービス単位数);
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().setValue(摘要);
-        }
+    private void setサービス計画費登録エリア() {
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
+                .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
+        serviceCodeInputDiv.setサービス項目コード(RString.EMPTY);
+        serviceCodeInputDiv.setサービス種類コード(RString.EMPTY);
+        serviceCodeInputDiv.setサービス名称(RString.EMPTY);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().clearValue();
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().clearValue();
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().clearValue();
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().clearValue();
     }
 
     private void setサービス計画費登録エリアdown(dgdYichiran_Row row) {
@@ -871,16 +839,14 @@ public class ServiceKeikakuHiPanelHandler {
         Decimal 回数 = row.getDefaultDataName3().getValue();
         Decimal サービス単位数 = row.getDefaultDataName4().getValue();
         RString 摘要 = row.getDefaultDataName5();
-        RString サービス名称 = row.getDefaultDataName6();
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
+        RString サービス名称 = row.getDefaultDataName6() == null ? RString.EMPTY : row.getDefaultDataName6();
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
         if (サービスコード != null) {
-            serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード.substring(0, 2));
-            serviceCodeInputDiv.getTxtServiceCode2().setValue(サービスコード.substring(
-                    サービスコード.length() - サービスコード2));
+            serviceCodeInputDiv.setサービス種類コード(サービスコード.substring(0, 2));
+            serviceCodeInputDiv.setサービス項目コード(サービスコード.substring(サービスコード.length() - サービスコード2));
         }
-        serviceCodeInputDiv.getTxtServiceCodeName().setValue(サービス名称);
+        serviceCodeInputDiv.setサービス名称(サービス名称);
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().setValue(単位数);
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().setValue(回数);
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().setValue(サービス単位数);
@@ -975,15 +941,12 @@ public class ServiceKeikakuHiPanelHandler {
             div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(
                     entity200604.getEntity().get審査方法区分コード());
         }
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
         if (entity200604.getEntity().getサービスコード().getColumnValue() != null) {
             RString サービスコード = new RString(entity200604.getEntity().getサービスコード().getColumnValue().toString());
-            serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード.substring(0, 2));
-            serviceCodeInputDiv.getTxtServiceCode2().setValue(サービスコード.substring(
-                    サービスコード.length() - サービスコード2));
-            serviceCodeInputDiv.getTxtServiceCodeName().setValue(entity200604.getServiceName());
+            serviceCodeInputDiv.setサービス種類コード(サービスコード.substring(0, 2));
+            serviceCodeInputDiv.setサービス項目コード(サービスコード.substring(サービスコード.length() - サービスコード2));
+            serviceCodeInputDiv.setサービス名称(entity200604.getServiceName());
         }
         div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200604.getEntity().get単位数()));
         div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(entity200604.getEntity().get単位数単価());
@@ -1019,16 +982,13 @@ public class ServiceKeikakuHiPanelHandler {
             div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(
                     entity200004.getEntity().get審査方法区分コード());
         }
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div.getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
         if (entity200004.getEntity().getサービスコード().getColumnValue() != null) {
             RString サービスコード = new RString(entity200004.getEntity().getサービスコード().getColumnValue().toString());
-            serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード.substring(0, 2));
-            serviceCodeInputDiv.getTxtServiceCode2().setValue(サービスコード.substring(
-                    サービスコード.length() - サービスコード2));
-            serviceCodeInputDiv.getTxtServiceCodeName().setValue(entity200004.getServiceName());
+            serviceCodeInputDiv.setサービス種類コード(サービスコード.substring(0, 2));
+            serviceCodeInputDiv.setサービス項目コード(サービスコード.substring(サービスコード.length() - サービスコード2));
         }
+        serviceCodeInputDiv.setサービス名称(entity200004.getServiceName());
         div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setValue(new Decimal(entity200004.getEntity().get単位数()));
         div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setValue(entity200004.getEntity().get単位数単価());
         div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setValue(new Decimal(entity200004.getEntity().get請求金額()));
@@ -1045,14 +1005,13 @@ public class ServiceKeikakuHiPanelHandler {
 
     private Boolean 変更チェック(dgdYichiran_Row row) {
         int flag = 0;
-        // TODO QA454 共有子DIVの利用方法は合っていない
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
+        IServiceCodeInputCommonChildDiv serviceCodeInputDiv = div
                 .getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getCcdServiceCodeInput();
         RStringBuilder サービスコードBuilder = new RStringBuilder();
-        RString serviceCode1 = serviceCodeInputDiv.getTxtServiceCode1().getValue();
+        RString serviceCode1 = serviceCodeInputDiv.getサービスコード1();
         サービスコードBuilder.append(serviceCode1);
-        サービスコードBuilder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
-        RString サービスコード名称 = serviceCodeInputDiv.getTxtServiceCodeName().getValue();
+        サービスコードBuilder.append(serviceCodeInputDiv.getサービスコード2());
+        RString サービスコード名称 = serviceCodeInputDiv.getサービス名称();
         Decimal 単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().getValue();
         Decimal 回数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().getValue();
         Decimal サービス単位数 = div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtServiceTanyiSu().getValue();
@@ -1125,9 +1084,6 @@ public class ServiceKeikakuHiPanelHandler {
      * 審査方法区分と事業者区分の初期化200904前
      */
     public void load事業者区分リスト200904前() {
-        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
-                .getPanelServiceKeikakuhiDown().getCcdServiceCodeInput2();
-        serviceCodeInputDiv.getTxtServiceCode1().setValue(サービスコード1);
         List<KeyValueDataSource> 事業者区分リスト = get事業者区分リスト();
         div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setDataSource(事業者区分リスト);
         div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedIndex(0);

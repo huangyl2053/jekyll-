@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbu.service.kyokaisogaitosha;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoGaito;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoGaitoshaJoho;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoHokenryo;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoGaito;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoGaitoshaJoho;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoHokenryo;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaJohoRelateEntity;
@@ -318,13 +318,13 @@ public class KyokaisoGaitoshaManager {
         for (DbT1006KyokaisoGaitoshaEntity gaitoshaEntity : gaitoshaEntityList) {
             gaitoshaEntity.initializeMd5();
             境界層該当者List.add(new KyokaisoGaitosha(gaitoshaEntity));
-            business.set境界層該当者List(境界層該当者List);
         }
         List<KyokaisoSochiShinsei> 境界層措置申請Lsit = new ArrayList<>();
         for (DbT1013KyokaisoSochiShinseiEntity shinseiEntity : shinseiEntityList) {
             shinseiEntity.initializeMd5();
             境界層措置申請Lsit.add(new KyokaisoSochiShinsei(shinseiEntity));
-            business.set境界層措置申請Lsit(境界層措置申請Lsit);
         }
+        business.set境界層該当者List(境界層該当者List);
+        business.set境界層措置申請Lsit(境界層措置申請Lsit);
     }
 }

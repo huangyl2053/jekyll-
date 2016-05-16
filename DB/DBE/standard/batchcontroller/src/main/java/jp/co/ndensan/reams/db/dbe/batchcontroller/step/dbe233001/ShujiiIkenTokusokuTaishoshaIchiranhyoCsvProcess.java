@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -26,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 主治医意見書督促対象者一覧表csvの作成クラスです。
@@ -38,7 +41,6 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
             "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper."
             + "getListForProcess");
     private ShujiiCsvProcessParameter processParameter;
-    private static final RString ファイル名 = new RString("主治医意見書督促対象者一覧表.csv");
     private static final RString タイトル = new RString("督促状発行対象者一覧");
     private static final RString 市町村コード = new RString("市町村コード");
     private static final RString 市町村名称 = new RString("市町村名称");
@@ -57,6 +59,7 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
+    private FileSpoolManager manager;
 
     @Override
     protected void initialize() {
@@ -67,15 +70,17 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
 
     @Override
     protected void createWriter() {
-        eucFilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+                UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        eucFilePath = Path.combinePath(spoolWorkPath, new RString("ShujiiIkenEucCsv"));
         csvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                setEncode(Encode.SJIS)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false).
-                build();
+                setDelimiter(EUC_WRITER_DELIMITER).setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(false).build();
+    }
 
+    @Override
+    protected void process(Object list) {
         csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
                 タイトル, null, null, null, null,
                 null, null, null, null,
@@ -108,12 +113,6 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
             csvWriter.writeLine(createCsvEntity(item, idenx));
             idenx++;
         }
-        csvWriter.close();
-    }
-
-    @Override
-    protected void process(Object list) {
-
     }
 
     private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item, int idenx) {
@@ -129,6 +128,7 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
     @Override
     protected void afterExecute() {
         csvWriter.close();
+        manager.spool(eucFilePath);
     }
 
     @Override

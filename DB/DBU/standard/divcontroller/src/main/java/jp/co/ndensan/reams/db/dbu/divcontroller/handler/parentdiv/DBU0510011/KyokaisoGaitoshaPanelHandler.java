@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoGaitoshaJoho;
-import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoHokenryo;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoGaitoshaJoho;
+import jp.co.ndensan.reams.db.dbu.business.core.kyokaisogaitosha.KyokaisoHokenryo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dgKyokaisouGaitouItran_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
@@ -274,16 +274,21 @@ public class KyokaisoGaitoshaPanelHandler {
         int index = div.getDghokenryoNofu().getClickedRowId();
         if (状態_追加.equals(div.getHokenryoNofuGengaku().getTekiyoState())
                 || div.getHokenryoNofuGengaku().getTekiyoState().isEmpty()) {
+            row.setHiddenTekiyoKaishiDate(年月フォーマット(new FlexibleYearMonth(
+                    div.getTxtHohenryoNofuFromDate().getValue().getYearMonth().toString().replace(new RString("."), RString.EMPTY))));
             row.setState(状態_追加);
             div.getDghokenryoNofu().getDataSource().add(row);
         } else if (状態_修正.equals(div.getHokenryoNofuGengaku().getTekiyoState())) {
-            div.getDghokenryoNofu().getDataSource().set(index, row);
-            row.setState(状態_修正);
+            if (状態_削除.equals(row.getState()) || !状態_追加.equals(row.getState())) {
+                row.setState(状態_修正);
+                div.getDghokenryoNofu().getDataSource().set(index, row);
+            }
         } else if (状態_削除.equals(div.getHokenryoNofuGengaku().getTekiyoState())) {
             if (状態_追加.equals(row.getState())) {
                 div.getDghokenryoNofu().getDataSource().remove(index);
+            } else {
+                row.setState(状態_削除);
             }
-            row.setState(状態_削除);
         } else {
             row.setState(RString.EMPTY);
             div.getDghokenryoNofu().getDataSource().set(index, row);
@@ -535,6 +540,7 @@ public class KyokaisoGaitoshaPanelHandler {
                     境界層保険料段階.get保険料納付減額後保険料段階()));
             nofu_row.setTekiyoRirekiNo(new RString(境界層保険料段階.get履歴番号().toString()));
             nofu_row.setTekiyoLinkNo(new RString(境界層保険料段階.getリンク番号().toString()));
+            nofu_row.setHiddenTekiyoKaishiDate(年月フォーマット(境界層保険料段階.get適用開始年月()));
             nofu_rowList.add(nofu_row);
         }
         div.getDghokenryoNofu().setDataSource(nofu_rowList);

@@ -9,6 +9,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaNyuSyuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaiRaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.GeTuReiSyoRiBusiness;
@@ -19,8 +21,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.KoShiTaisy
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.MaSuKinGuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.NiJiHanTeiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShiSeiKeTuKeBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiToRoKuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.param.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity;
@@ -31,10 +36,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.KoShiTa
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.MaSuKinGuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.NiJiHanTeiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShiSeiKeTuKeRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.yokaigoninteitasklist.IYokaigoNinteiTaskListMapper;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * タスク一覧共有画面の検索処理クラスです。
@@ -77,6 +84,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<KoShiTaisyoBusiness>
      */
+    @Transaction
     public SearchResult<KoShiTaisyoBusiness> get更新対象モード(YokaigoNinteiTaskListParameter parameter) {
         List<KoShiTaisyoBusiness> 更新対象List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -93,6 +101,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<ShiSeiKeTuKeBusiness>
      */
+    @Transaction
     public SearchResult<ShiSeiKeTuKeBusiness> get申請受付モード(YokaigoNinteiTaskListParameter parameter) {
         List<ShiSeiKeTuKeBusiness> 申請受付List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -109,6 +118,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<CyoSaiRaiBusiness>
      */
+    @Transaction
     public SearchResult<CyoSaiRaiBusiness> get調査依頼モード(YokaigoNinteiTaskListParameter parameter) {
         List<CyoSaiRaiBusiness> 調査依頼List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -125,6 +135,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<IKnSyoiRaiBusiness>
      */
+    @Transaction
     public SearchResult<IKnSyoiRaiBusiness> get意見書依頼モード(YokaigoNinteiTaskListParameter parameter) {
         List<IKnSyoiRaiBusiness> 意見書依頼List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -141,6 +152,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<CyoSaNyuSyuBusiness>
      */
+    @Transaction
     public SearchResult<CyoSaNyuSyuBusiness> get調査入手モード(YokaigoNinteiTaskListParameter parameter) {
         List<CyoSaNyuSyuBusiness> 調査入手List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -157,6 +169,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<IkenSyoNyuSyuBusiness>
      */
+    @Transaction
     public SearchResult<IkenSyoNyuSyuBusiness> get意見書入手モード(YokaigoNinteiTaskListParameter parameter) {
         List<IkenSyoNyuSyuBusiness> 意見書入手List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -173,6 +186,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<IChiJiHanTeiBusiness>
      */
+    @Transaction
     public SearchResult<IChiJiHanTeiBusiness> get一次判定モード(YokaigoNinteiTaskListParameter parameter) {
         List<IChiJiHanTeiBusiness> 一次判定List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -189,6 +203,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<IChiJiHanTeiBusiness>
      */
+    @Transaction
     public SearchResult<MaSuKinGuBusiness> getマスキングモード(YokaigoNinteiTaskListParameter parameter) {
         List<MaSuKinGuBusiness> マスキングList = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -205,6 +220,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<ShinSaKaiToRoKuBusiness>
      */
+    @Transaction
     public SearchResult<ShinSaKaiToRoKuBusiness> get審査会登録モード(YokaigoNinteiTaskListParameter parameter) {
         List<ShinSaKaiToRoKuBusiness> 審査会登録List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -216,11 +232,49 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     /**
+     * 適用情報リストを取得します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return 他住所地特例者管理 他住所地特例者管理
+     */
+    @Transaction
+    public ShinSaKaiBusiness get前審査会登録(YokaigoNinteiTaskListParameter parameter) {
+        ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前審査会登録(parameter);
+        for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
+            List<DbT5101NinteiShinseiJohoEntity> 要介護認定申請情報 = shinSaKaiToRoKuRelate.get要介護認定申請情報EntityList();
+            set前審査会登録(要介護認定申請情報, 要介護認定完了情報, shinSaKaiBusiness);
+        }
+        return shinSaKaiBusiness;
+    }
+
+    private void set前審査会登録(
+            List<DbT5101NinteiShinseiJohoEntity> 要介護認定申請情報,
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
+        List<NinteiShinseiJoho> 要介護認定申請情報List = new ArrayList();
+        for (DbT5101NinteiShinseiJohoEntity entity : 要介護認定申請情報) {
+            entity.initializeMd5();
+            要介護認定申請情報List.add(new NinteiShinseiJoho(entity));
+            shinSaKaiBusiness.set要介護認定申請情報List(要介護認定申請情報List);
+        }
+        List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
+        for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
+            entity.initializeMd5();
+            要介護認定完了情報Lsit.add(new NinteiKanryoJoho(entity));
+            shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
+        }
+    }
+
+    /**
      * 二次判定モードの場合でデータを検索します。
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<ShinSaKaiToRoKuBusiness>
      */
+    @Transaction
     public SearchResult<NiJiHanTeiBusiness> get二次判定モード(YokaigoNinteiTaskListParameter parameter) {
         List<NiJiHanTeiBusiness> 二次判定List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
@@ -237,6 +291,7 @@ public class YokaigoNinteiTaskListFinder {
      * @param parameter YokaigoNinteiTaskListParameter
      * @return SearchResult<GeTuReiSyoRiBusiness>
      */
+    @Transaction
     public SearchResult<GeTuReiSyoRiBusiness> get月例処理モード(YokaigoNinteiTaskListParameter parameter) {
         List<GeTuReiSyoRiBusiness> 二次判定List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);

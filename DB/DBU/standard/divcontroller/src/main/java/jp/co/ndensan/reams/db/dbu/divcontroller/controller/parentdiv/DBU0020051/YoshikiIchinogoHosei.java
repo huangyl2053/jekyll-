@@ -51,23 +51,6 @@ public class YoshikiIchinogoHosei {
      * @return ResponseData
      */
     public ResponseData<YoshikiIchinogoHoseiDiv> onload(YoshikiIchinogoHoseiDiv div) {
-        // TODO 仮データ
-        JigyoHokokuGeppoParameter par = new JigyoHokokuGeppoParameter();
-        par.set行報告年(new RString("2016"));
-        par.set行報告月(new RString("02"));
-        par.set行集計対象年(new RString("2016"));
-        par.set行集計対象月(new RString("02"));
-        par.set行統計対象区分(new RString("1"));
-        par.set行市町村コード(new RString("209007"));
-        par.set行表番号(new RString("01"));
-        par.set報告年月(new RString("201602"));
-        par.set集計年月(new RString("201602"));
-        par.set保険者コード(new RString("1001"));
-        par.set市町村名称(new RString("市町村"));
-        par.set行様式種類コード(new RString("014"));
-        par.set行集計番号(new RString("1400"));
-        ViewStateHolder.put(ViewStateKeys.事業報告基本, par);
-        ViewStateHolder.put(ViewStateKeys.状態, new RString("修正状態"));
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
@@ -143,7 +126,8 @@ public class YoshikiIchinogoHosei {
         }
         if (!getCheckHandler(div).is整合性チェック3() && !ResponseHolder.isReRequest()) {
             WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
-                    UrWarningMessages.相違.getMessage().replace(合計.toString(), 要支援計と要介護計の合計計算結果.toString()).evaluate());
+                    UrWarningMessages.相違.getMessage().replace(合計.toString(),
+                            要支援計と要介護計の合計計算結果.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())

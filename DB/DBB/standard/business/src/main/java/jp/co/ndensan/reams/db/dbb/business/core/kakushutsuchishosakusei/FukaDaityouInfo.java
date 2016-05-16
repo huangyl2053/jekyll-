@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -30,6 +31,7 @@ public class FukaDaityouInfo {
     private TelNo 本人連絡先2;
     private TelNo 代納人連絡先1;
     private TelNo 代納人連絡先2;
+    private DbT1006KyokaisoGaitoshaEntity 境界層当該者情報;
     private DbT1001HihokenshaDaichoEntity 被保険者台帳情報;
     private List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト;
     private DbV4001JukyushaDaichoEntity 受給者台帳情報;
