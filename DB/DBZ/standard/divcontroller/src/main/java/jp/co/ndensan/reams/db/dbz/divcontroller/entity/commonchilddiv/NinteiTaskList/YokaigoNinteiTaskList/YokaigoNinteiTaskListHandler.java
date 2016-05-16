@@ -190,7 +190,7 @@ public class YokaigoNinteiTaskListHandler {
             List<CyoSaiRaiBusiness> 調査依頼List = YokaigoNinteiTaskListFinder.createInstance().
                     get調査依頼モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
-            if (調査依頼List != null && !調査依頼List.isEmpty()) {
+            if (!調査依頼List.isEmpty()) {
                 ShinSaKaiBusiness 前調査依頼Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前調査依頼モード(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
@@ -205,7 +205,7 @@ public class YokaigoNinteiTaskListHandler {
             List<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().
                     get意見書依頼モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
-            if (意見書依頼List != null && !意見書依頼List.isEmpty()) {
+            if (!意見書依頼List.isEmpty()) {
                 ShinSaKaiBusiness 前意見書依頼Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前意見書依頼(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
@@ -219,7 +219,7 @@ public class YokaigoNinteiTaskListHandler {
             List<CyoSaNyuSyuBusiness> 調査入手List = YokaigoNinteiTaskListFinder.createInstance().
                     get調査入手モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
-            if (調査入手List != null && !調査入手List.isEmpty()) {
+            if (!調査入手List.isEmpty()) {
                 ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前意見書依頼(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
@@ -233,7 +233,7 @@ public class YokaigoNinteiTaskListHandler {
             List<IkenSyoNyuSyuBusiness> 意見書入手List = YokaigoNinteiTaskListFinder.createInstance().
                     get意見書入手モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
-            if (意見書入手List != null && !意見書入手List.isEmpty()) {
+            if (!意見書入手List.isEmpty()) {
                 ShinSaKaiBusiness 前意見書入手Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前意見書入手(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
@@ -260,7 +260,7 @@ public class YokaigoNinteiTaskListHandler {
             List<ShinSaKaiToRoKuBusiness> 審査会登録List = YokaigoNinteiTaskListFinder.createInstance().
                     get審査会登録モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
-            if (審査会登録List != null && !審査会登録List.isEmpty()) {
+            if (!審査会登録List.isEmpty()) {
                 ShinSaKaiBusiness 前審査会登録Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前審査会登録(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
@@ -274,7 +274,7 @@ public class YokaigoNinteiTaskListHandler {
             List<NiJiHanTeiBusiness> 二次判定List = YokaigoNinteiTaskListFinder.createInstance().
                     get二次判定モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
-            if (二次判定List != null && !二次判定List.isEmpty()) {
+            if (!二次判定List.isEmpty()) {
                 ShinSaKaiBusiness 前二次判定Model = YokaigoNinteiTaskListFinder.createInstance().
                         get前二次判定(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
