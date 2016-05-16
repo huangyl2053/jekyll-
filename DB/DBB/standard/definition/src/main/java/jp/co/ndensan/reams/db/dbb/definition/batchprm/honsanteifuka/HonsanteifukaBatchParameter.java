@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -74,7 +75,7 @@ public class HonsanteifukaBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_打分け条件情報, name = "打分け条件情報")
     private RString 打分け条件情報;
     @BatchParameter(key = KEY_処理日時, name = "処理日時")
-    private FlexibleDate 処理日時;
+    private RDate 処理日時;
     @BatchParameter(key = KEY_一括発行起動フラグ, name = "一括発行起動フラグ")
     private boolean 一括発行起動フラグ;
 }
