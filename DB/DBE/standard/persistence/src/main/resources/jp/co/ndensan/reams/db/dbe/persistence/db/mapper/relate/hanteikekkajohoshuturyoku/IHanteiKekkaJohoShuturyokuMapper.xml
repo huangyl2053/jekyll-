@@ -313,7 +313,7 @@
              AND DbT5102."shinsakaiIken" <![CDATA[<>]]> NULL)
     </select>
     <resultMap id="resultMap_getShinsakaiKekkaJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity" autoMapping="true">
-        <result property="" column="新規申請_状態区分変更件数"/>
+        <result property="新規申請_状態区分変更件数" column="新規申請_状態区分変更件数"/>
         <result property="新規申請件数" column="新規申請件数"/>
         <result property="状態区分変更件数" column="状態区分変更件数"/>
         <result property="新規の内2号被保険者数" column="新規_状変の内2号被保険者数"/>
