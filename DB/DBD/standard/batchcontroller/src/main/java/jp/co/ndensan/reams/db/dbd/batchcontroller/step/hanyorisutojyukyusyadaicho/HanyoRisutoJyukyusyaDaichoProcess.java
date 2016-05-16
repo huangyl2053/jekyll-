@@ -11,22 +11,22 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Chushu
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuDateShurui;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ChokkinIdoJiyuCode;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.SakujoJiyuCode;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShinseishaKankeiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DataKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.YukoMukoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -862,28 +862,28 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         }
         RString 受給申請事由;
         try {
-            受給申請事由 = JukyuShinseiJiyu.toValue(受給申請事由原).toRString();
+            受給申請事由 = JukyuShinseiJiyu.toValue(受給申請事由原).get名称();
         } catch (IllegalArgumentException e) {
             return RString.EMPTY;
         }
-        if (JukyuShinseiJiyu.初回申請.toRString().equals(受給申請事由)) {
+        if (JukyuShinseiJiyu.初回申請.get名称().equals(受給申請事由)) {
             return 初回申請;
-        } else if (JukyuShinseiJiyu.再申請_有効期限内.toRString().equals(受給申請事由)) {
+        } else if (JukyuShinseiJiyu.再申請_有効期限内.get名称().equals(受給申請事由)) {
             return 再申請内;
-        } else if (JukyuShinseiJiyu.再申請_有効期限外.toRString().equals(受給申請事由)) {
+        } else if (JukyuShinseiJiyu.再申請_有効期限外.get名称().equals(受給申請事由)) {
             return 再申請外;
-        } else if (JukyuShinseiJiyu.要介護度変更申請.toRString().equals(受給申請事由)) {
+        } else if (JukyuShinseiJiyu.要介護度変更申請.get名称().equals(受給申請事由)) {
             if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
                     NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
                 return 支援から申請;
             } else {
                 return 区分変更申請;
             }
-        } else if (JukyuShinseiJiyu.指定サービス種類変更申請.toRString().equals(受給申請事由)) {
+        } else if (JukyuShinseiJiyu.指定サービス種類変更申請.get名称().equals(受給申請事由)) {
             return サ変更申請;
-        } else if (JukyuShinseiJiyu.申請_法施行前.toRString().equals(受給申請事由)) {
+        } else if (JukyuShinseiJiyu.申請_法施行前.get名称().equals(受給申請事由)) {
             return 施行前申請;
-        } else if (JukyuShinseiJiyu.追加_申請なしの追加.toRString().equals(受給申請事由)) {
+        } else if (JukyuShinseiJiyu.追加_申請なしの追加.get名称().equals(受給申請事由)) {
             return 追加;
         }
         return RString.EMPTY;
@@ -910,8 +910,8 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         if (RString.isNullOrEmpty(データ区分)) {
             return RString.EMPTY;
         }
-        RString 異動事由コード = DataKubun.toValue(データ区分).toRString();
-        if (DataKubun.通常_認定.toRString().equals(異動事由コード)) {
+        RString 異動事由コード = Datakubun.toValue(データ区分).get名称();
+        if (Datakubun.通常_認定.get名称().equals(異動事由コード)) {
             return RString.EMPTY;
         } else {
             return 異動事由コード;

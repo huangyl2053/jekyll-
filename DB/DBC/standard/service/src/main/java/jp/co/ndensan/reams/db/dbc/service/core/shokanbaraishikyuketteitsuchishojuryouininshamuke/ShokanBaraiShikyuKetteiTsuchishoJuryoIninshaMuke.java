@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -200,7 +200,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
             item.setKekka(ShikyuFushikyuKubun.toValue(shiharai.get支給不支給決定区分()).get名称());
         }
         item.setShikyuGaku(shiharai.get支給額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shiharai.get支給額(), ZERO));
-        // TODO 増減の理由
+        // TODO QA1181確認中 増減の理由
         item.setRiyu1(shiharai.get増減理由等());
         if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(RString.EMPTY);
@@ -327,7 +327,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
     private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
         RString 設定値 = RString.EMPTY;
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                FlexibleDate.getNowDate().getYear(), 項目名);
+                FlexibleYear.MIN, 項目名);
         if (chohyoSeigyoHanyo != null) {
             設定値 = chohyoSeigyoHanyo.get設定値();
         }

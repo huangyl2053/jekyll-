@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JukyuNint
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteirirekiichiran.NinteiRirekiIchiranBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyusochisha.KyusochishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
