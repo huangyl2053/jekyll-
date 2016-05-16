@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 支払方法情報のコントローラです。
@@ -644,7 +645,8 @@ public class ShiharaiHohoJyohoHandler {
 
     private UzT0007CodeBusiness 預金種別に対する略称(RString 口座種別) {
 
-        return new UzT0007CodeBusiness(CodeMaster.getCode(預金種別, new Code(口座種別)));
+        return new UzT0007CodeBusiness(CodeMaster.getCode(預金種別, new Code(口座種別)) == null
+                ? new UzT0007CodeEntity() : CodeMaster.getCode(預金種別, new Code(口座種別)));
     }
 
     private KinyuKikan 金融機関コードに対する名称(KinyuKikanCode 金融機関コード) {
