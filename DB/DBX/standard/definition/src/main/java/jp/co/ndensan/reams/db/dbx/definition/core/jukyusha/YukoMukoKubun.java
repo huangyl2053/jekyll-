@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core;
+package jp.co.ndensan.reams.db.dbx.definition.core.jukyusha;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 有効無効区分を表す列挙型です。
  *
- * @reamsid_L DBA-9999-023 liangbc
+ * @reamsid_L DBZ-9999-023 liangbc
  */
 public enum YukoMukoKubun {
 

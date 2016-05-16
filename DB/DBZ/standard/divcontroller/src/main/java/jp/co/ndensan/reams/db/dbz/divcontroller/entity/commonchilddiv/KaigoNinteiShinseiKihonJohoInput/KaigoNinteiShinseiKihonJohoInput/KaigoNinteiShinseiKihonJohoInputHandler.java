@@ -2,9 +2,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7052KoseiShichosonShishoMasterDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -67,13 +67,13 @@ public class KaigoNinteiShinseiKihonJohoInputHandler {
     private List<KeyValueDataSource> get申請種別List() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
 
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.初回申請.code(), JukyuShinseiJiyu.初回申請.toRString()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.再申請_有効期限内.code(), JukyuShinseiJiyu.再申請_有効期限内.toRString()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.再申請_有効期限外.code(), JukyuShinseiJiyu.再申請_有効期限外.toRString()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.要介護度変更申請.code(), JukyuShinseiJiyu.要介護度変更申請.toRString()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.指定サービス種類変更申請.code(), JukyuShinseiJiyu.指定サービス種類変更申請.toRString()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.申請_法施行前.code(), JukyuShinseiJiyu.申請_法施行前.toRString()));
-        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.追加_申請なしの追加.code(), JukyuShinseiJiyu.追加_申請なしの追加.toRString()));
+        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.初回申請.getコード(), JukyuShinseiJiyu.初回申請.get名称()));
+        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.再申請_有効期限内.getコード(), JukyuShinseiJiyu.再申請_有効期限内.get名称()));
+        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.再申請_有効期限外.getコード(), JukyuShinseiJiyu.再申請_有効期限外.get名称()));
+        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.要介護度変更申請.getコード(), JukyuShinseiJiyu.要介護度変更申請.get名称()));
+        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.指定サービス種類変更申請.getコード(), JukyuShinseiJiyu.指定サービス種類変更申請.get名称()));
+        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.申請_法施行前.getコード(), JukyuShinseiJiyu.申請_法施行前.get名称()));
+        dataSource.add(new KeyValueDataSource(JukyuShinseiJiyu.追加_申請なしの追加.getコード(), JukyuShinseiJiyu.追加_申請なしの追加.get名称()));
 
         return dataSource;
     }
