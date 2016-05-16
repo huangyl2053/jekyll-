@@ -268,10 +268,18 @@ public class ShujiiIkenshoSakuseiIrai {
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
-        LockingKey 排他キー
-                = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            return ResponseData.of(div).addValidationMessages(createValidationHandler(div).排他チェック()).respond();
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).
+                equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+
+            LockingKey 排他キー
+                    = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
+            if (!RealInitialLocker.tryGetLock(排他キー)) {
+                return ResponseData.of(div).addValidationMessages(createValidationHandler(div).排他チェック()).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -495,12 +503,7 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         iraishoItem.setShoriName(row.getIraiKubun());
         iraishoItem.setRemban(new RString("1"));
-        ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
-        ShujiiIraiAtenaJohoParameter parameter = new ShujiiIraiAtenaJohoParameter();
-        parameter.setShichosonCode(row.getShichosonCode());
-        parameter.setShujiiCode(row.getShujiiCode());
-        parameter.setShujiiIryokikanCode(row.getShujiiIryoKikanCode());
-        ShujiiIraiAtenaJoho atenaJoho = manager.get宛先情報(parameter);
+        ShujiiIraiAtenaJoho atenaJoho = get宛先(row);
         if (atenaJoho != null) {
             iraishoItem.setYubinNo1(atenaJoho.getTemp_宛名郵便番号().value());
             iraishoItem.setJushoText(atenaJoho.getTemp_宛名住所().value());
@@ -517,17 +520,21 @@ public class ShujiiIkenshoSakuseiIrai {
         return iraishoItem;
     }
 
-// TODO QA1096 帳票設計書と画面設計書不一致
-    private IkenshoSakuseiIraiIchiranhyoItem create主治医意見書作成依頼一覧表(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row) {
+    private IkenshoSakuseiIraiIchiranhyoItem create主治医意見書作成依頼一覧表(dgShinseishaIchiran_Row row) {
         IkenshoSakuseiIraiIchiranhyoItem item = new IkenshoSakuseiIraiIchiranhyoItem();
-
         item.setYubinNo1(getEditedYubinNo(row.getYubinNo()));
         item.setJushoText(row.getJusho());
         item.setKikanNameText(row.getShujiiIryoKikan());
-        // TODO QA1096 帳票設計書と画面設計書不一致
-        item.setShimeiText(new RString("TODO氏名"));
-        item.setShimeiText(div.getSelectControlID());
-        item.setMeishoFuyo(new RString("TODO名称付与"));
+        ShujiiIraiAtenaJoho atenaJoho = get宛先(row);
+        if (atenaJoho != null) {
+            item.setYubinNo1(atenaJoho.getTemp_宛名郵便番号().value());
+            item.setJushoText(atenaJoho.getTemp_宛名住所().value());
+            item.setKikanNameText(atenaJoho.getTemp_宛名機関名());
+            item.setShimeiText(atenaJoho.getTemp_宛名氏名().value());
+        }
+        item.setMeishoFuyo(
+                ChohyoAtesakiKeisho.toValue(BusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, SubGyomuCode.DBE認定支援)).get名称());
+
         RStringBuilder systemDateTime = new RStringBuilder();
         RDateTime datetime = RDate.getNowDateTime();
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
@@ -552,8 +559,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
         item.setListIchiranhyo_8(row.getSeibetsu());
         item.setListIchiranhyo_9(get主治医意見書作成期限年月日(row));
-        // TODO QA1094 通知文関連パラメータ不明
-        item.setTsuchibun1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 数字_0).get(1));
+        item.setTsuchibun1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 数字_1).get(1));
         return item;
     }
 
@@ -621,11 +627,11 @@ public class ShujiiIkenshoSakuseiIrai {
         return item;
     }
 
-    // TODO QA1096 帳票設計書と画面設計書不一致
     private KaigohokenShindanMeireishoHeaderItem create介護保険診断命令書(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row) {
         RStringBuilder jyushin = new RStringBuilder();
         if (SELECTED_KEY0.equals(div.getMeireisho().getRadjyushin().getSelectedKey())) {
             jyushin.append(div.getMeireisho().getTxtjyushinymd().getValue().toDateString());
+            jyushin.append(RString.HALF_SPACE);
             jyushin.append(div.getMeireisho().getTxtjyushintime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm));
         } else {
             jyushin.append(div.getMeireisho().getTxtJyushinKikan().getFromValue().toDateString());
@@ -634,9 +640,9 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem();
         item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), FlexibleDate.getNowDate()));
-        RString 通知文定型文 = new RString("1024641");
-//        ReportUtil.get通知文(
-//                SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_0).get(数字_0);
+        RString 通知文定型文
+                = ReportUtil.get通知文(
+                        SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1).get(数字_1);
         通知文定型文 = 通知文定型文.padRight(RString.HALF_SPACE, 数字_17);
         item.setTsuchibun1(通知文定型文.substring(数字_0, 数字_1));
         item.setTsuchibun2(通知文定型文.substring(数字_1, 数字_2));
@@ -663,6 +669,8 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setTelNo(row.getIryoKikanTelNo());
         item.setJushinKikan(jyushin.toRString());
         item.setJushinArea(div.getMeireisho().getTxtjyushinbasho().getValue());
+        item.setHakkoYMD(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         return item;
     }
 
@@ -704,7 +712,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 主治医意見書作成依頼情報ItemList.add(create主治医意見書作成依頼書(div, row));
             }
             if (div.getIraiprint().getChkirai().getSelectedKeys().contains(SELECTED_KEY1)) {
-                主治医意見書作成依頼一覧表ItemList.add(create主治医意見書作成依頼一覧表(div, row));
+                主治医意見書作成依頼一覧表ItemList.add(create主治医意見書作成依頼一覧表(row));
             }
 //            if (div.getIraiprint().getChkprint().getSelectedKeys().contains(SELECTED_KEY0)) {
 //                // TODO 主治医意見書記入用紙帳票未実装
@@ -729,7 +737,6 @@ public class ShujiiIkenshoSakuseiIrai {
         if (!主治医意見書作成依頼情報ItemList.isEmpty()) {
             outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList);
         }
-        // TODO QA1096 帳票設計書と画面設計書不一致
         if (!主治医意見書作成依頼一覧表ItemList.isEmpty()) {
             outputService.print主治医意見書作成依頼一覧表(主治医意見書作成依頼一覧表ItemList);
         }
@@ -760,5 +767,14 @@ public class ShujiiIkenshoSakuseiIrai {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
                 div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+    }
+
+    private ShujiiIraiAtenaJoho get宛先(dgShinseishaIchiran_Row row) {
+        ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
+        ShujiiIraiAtenaJohoParameter parameter = new ShujiiIraiAtenaJohoParameter();
+        parameter.setShichosonCode(row.getShichosonCode());
+        parameter.setShujiiCode(row.getShujiiCode());
+        parameter.setShujiiIryokikanCode(row.getShujiiIryoKikanCode());
+        return manager.get宛先情報(parameter);
     }
 }
