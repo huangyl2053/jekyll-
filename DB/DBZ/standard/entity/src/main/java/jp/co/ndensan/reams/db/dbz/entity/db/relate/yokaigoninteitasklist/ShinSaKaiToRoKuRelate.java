@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 
 /**
@@ -20,6 +19,5 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinSaKaiToRoKuRelate {
 
-    private List<DbT5101NinteiShinseiJohoEntity> 要介護認定申請情報EntityList;
     private List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報EntityLsit;
 }
