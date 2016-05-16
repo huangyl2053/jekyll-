@@ -16,6 +16,7 @@ import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHoj
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.tekiyoShuryoYMD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -23,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -152,6 +155,29 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac {
                                 leq(年度開始日, tekiyoKaishiYMD),
                                 leq(tekiyoShuryoYMD, 年度終了日),
                                 eq(kakuninNo, 確認番号))).
+                toList(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity.class);
+    }
+
+    /**
+     * 確認番号の取得の取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @return List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity>
+     */
+    @Transaction
+    public List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> get確認番号(
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.class).
+                where(and(
+                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(hihokenshaNo, 被保険者番号))).
+                order(by(rirekiNo, Order.DESC)).
                 toList(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity.class);
     }
 }

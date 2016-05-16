@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo;
+package jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo;
 
-import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
  * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書のReportです。
- * 
- * @reamsid_L DBA-0540-700  suguangjun 
+ *
+ * @reamsid_L DBA-0540-700 suguangjun
  */
 public final class TokubetsuChiikiKasanGenmenTaishoShinseishoReport extends Report<TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource> {
 

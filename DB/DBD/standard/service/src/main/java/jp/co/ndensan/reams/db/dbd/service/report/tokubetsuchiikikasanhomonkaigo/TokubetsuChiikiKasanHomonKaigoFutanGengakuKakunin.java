@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.tokubetsuchiikikasanhomonkaigo;
+package jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoProerty;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
-import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
+import jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem;
+import jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
+import jp.co.ndensan.reams.db.dbd.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -59,6 +61,32 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final int INDEX_3 = 3;
     private static final RString ハイフン = new RString("-");
+    private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac dac;
+
+    /**
+     * コンストラクタです。
+     */
+    TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin() {
+        this.dac = InstanceProvider.create(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac.class);
+    }
+
+    /**
+     * 単体テスト用のコンストラクタです。
+     *
+     * @param dac DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac
+     */
+    TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac dac) {
+        this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin}のインスタンス
+     */
+    public static TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin createInstance() {
+        return InstanceProvider.create(TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin.class);
+    }
 
     /**
      * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書Printします。
@@ -85,7 +113,7 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         }
     }
 
-    private static List<TokubetsuChiikiKasanGenmenTaishoShinseishoReport> toReports(HihokenshaKihonBusiness business,
+    private List<TokubetsuChiikiKasanGenmenTaishoShinseishoReport> toReports(HihokenshaKihonBusiness business,
             RString ninshoshaYakushokuMei) {
         List<TokubetsuChiikiKasanGenmenTaishoShinseishoReport> list = new ArrayList<>();
         RString 確認番号 = get確認番号(business);
@@ -123,12 +151,12 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         return list;
     }
 
-    private static RString set生年月日_日本人(FlexibleDate 生年月日) {
+    private RString set生年月日_日本人(FlexibleDate 生年月日) {
         return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
-    private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -138,7 +166,7 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         return RString.EMPTY;
     }
 
-    private static RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+    private RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
         if (生年月日不詳区分_FALG.equals(生年月日不詳区分)) {
             return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -146,7 +174,7 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         return RString.EMPTY;
     }
 
-    private static RString set郵便番号(RString 郵便番号) {
+    private RString set郵便番号(RString 郵便番号) {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (INDEX_3 <= 郵便番号.length()) {
             yubinNoSb.append(郵便番号.substring(0, INDEX_3));
@@ -158,7 +186,7 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         return yubinNoSb.toRString();
     }
 
-    private static RString get帳票文言() {
+    private RString get帳票文言() {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBD介護受給,
@@ -173,11 +201,13 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         return RString.EMPTY;
     }
 
-    private static RString get確認番号(HihokenshaKihonBusiness business) {
-        // TODO QA:691,この機能の業務はDBAです。上記テープルはDBDです。業務間呼び出すことができない。
+    private RString get確認番号(HihokenshaKihonBusiness business) {
         RString 確認番号 = RString.EMPTY;
         if (business != null) {
-            確認番号 = new RString("12");
+            List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> entityList = dac.get確認番号(business.get保険者番号(), business.get被保険者番号());
+            if (!entityList.isEmpty()) {
+                確認番号 = entityList.get(0).getKakuninNo();
+            }
         }
         return 確認番号;
     }
