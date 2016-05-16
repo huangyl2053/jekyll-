@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4010001;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001TransitionEventName;
@@ -78,13 +77,16 @@ public class ShinsakaiToroku {
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnRyooutputBoffer(ShinsakaiTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
         ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
-        if (validation.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validation).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && validation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -124,9 +126,6 @@ public class ShinsakaiToroku {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
         ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
         ValidationMessageControlPairs validation = getValidationHandler(div).割付可能チェック(選択チェック);
-        if (validation.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validation).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -135,9 +134,13 @@ public class ShinsakaiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString 申請書管理番号リスト = div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo();
-            return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
-                    .parameter(申請書管理番号リスト);
+            if (validation.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validation).respond();
+            } else {
+                RString 申請書管理番号リスト = div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo();
+                return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
+                        .parameter(申請書管理番号リスト);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -165,24 +168,27 @@ public class ShinsakaiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            boolean gotLock = 前排他キーのセット();
-            if (!gotLock) {
-                ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
-                        UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-                throw new ApplicationException(message);
+            if (validation.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validation).respond();
+            } else {
+                前排他キーのセット();
+                getHandler(div).要介護認定完了更新();
+                前排他キーの解除();
+                div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                        replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(DBE4010001StateName.完了);
             }
-            getHandler(div).要介護認定完了更新();
-            前排他キーの解除();
-            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                    replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBE4010001StateName.完了);
         }
         return ResponseData.of(div).setState(DBE4010001StateName.登録);
     }
 
-    private boolean 前排他キーのセット() {
+    private void 前排他キーのセット() {
         LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-        return RealInitialLocker.tryGetLock(排他キー);
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
+                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
+            throw new ApplicationException(message);
+        }
     }
 
     private void 前排他キーの解除() {
@@ -233,14 +239,6 @@ public class ShinsakaiToroku {
             return new RString(時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
         }
         return RString.EMPTY;
-    }
-
-    private List<RString> 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {
-        List<RString> 申請書管理番号リスト = new ArrayList<>();
-        for (dgNinteiTaskList_Row データ : 選択データ) {
-            申請書管理番号リスト.add(データ.getShinseishoKanriNo());
-        }
-        return 申請書管理番号リスト;
     }
 
     private ShinsakaiTorokuHandler getHandler(ShinsakaiTorokuDiv div) {
