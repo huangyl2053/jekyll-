@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.Conf
 import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
 import static jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter.createParam;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
@@ -335,6 +335,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set事業者１(dbT7060KaigoJigyosha.getJigyoshaName().value());
                     entity.set届出年月日１(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
                     entity.set適用開始年月日１(dbT3006.getTekiyoKaishiYMD());
+                    entity.set適用終了年月日１(dbT3006.getTekiyoShuryoYMD());
                 } else if (dbT3007Count > 0) {
 
                     DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007 = dbT3007Dac.get居宅給付計画自己作成(
@@ -346,6 +347,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set事業者１(JIBUNSAKUSEI);
                     entity.set届出年月日１(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
                     entity.set適用開始年月日１(dbT3007.getTekiyoKaishiYMD());
+                    entity.set適用終了年月日１(dbT3007.getTekiyoShuryoYMD());
                 }
 
             } else if (i == 1) {
@@ -361,6 +363,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set事業者２(dbT7060KaigoJigyosha.getJigyoshaName().value());
                     entity.set届出年月日２(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
                     entity.set適用開始年月日２(dbT3006.getTekiyoKaishiYMD());
+                    entity.set適用終了年月日２(dbT3006.getTekiyoShuryoYMD());
                 } else if (dbT3007Count > 0) {
 
                     DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007 = dbT3007Dac.get居宅給付計画自己作成(
@@ -372,6 +375,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set事業者２(JIBUNSAKUSEI);
                     entity.set届出年月日２(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
                     entity.set適用開始年月日２(dbT3007.getTekiyoKaishiYMD());
+                    entity.set適用終了年月日２(dbT3007.getTekiyoShuryoYMD());
                 }
             } else if (i == 2) {
 
@@ -386,6 +390,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set事業者３(dbT7060KaigoJigyosha.getJigyoshaName().value());
                     entity.set届出年月日３(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
                     entity.set適用開始年月日３(dbT3006.getTekiyoKaishiYMD());
+                    entity.set適用終了年月日３(dbT3006.getTekiyoShuryoYMD());
                 } else if (dbT3007Count > 0) {
 
                     DbT3007KyotakuKeikakuJikoSakuseiEntity dbT3007 = dbT3007Dac.get居宅給付計画自己作成(
@@ -397,6 +402,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     entity.set事業者３(JIBUNSAKUSEI);
                     entity.set届出年月日３(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
                     entity.set適用開始年月日３(dbT3007.getTekiyoKaishiYMD());
+                    entity.set適用終了年月日３(dbT3007.getTekiyoShuryoYMD());
                 }
             }
         }
