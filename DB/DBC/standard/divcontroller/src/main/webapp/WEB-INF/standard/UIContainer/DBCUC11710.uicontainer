@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC11710",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "自己負担額証明書一括作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1171011",
+     "toLayoutTitle": "自己負担額証明書作成(一括)",
+     "toState": "バッチ実行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1171011",
+     "layoutTitle": "自己負担額証明書作成(一括)",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
