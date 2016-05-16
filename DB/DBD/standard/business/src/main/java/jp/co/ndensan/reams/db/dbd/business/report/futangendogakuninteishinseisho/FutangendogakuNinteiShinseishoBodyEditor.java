@@ -49,6 +49,7 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
         source.chuibun = item.getChuibun();
         source.remban = new RString("1");
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.hihokenshaNo = item.getHihokenshaNo();
         return source;
     }
 }
