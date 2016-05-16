@@ -45,9 +45,9 @@ public class HihokenshaDaichoShoRireki1Editor implements IHihokenshaDaichoEditor
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listShoRireki1_1 = entity.get証履歴No1().get(index);
-        source.listShoRireki1_2 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴発行日1(), index);
+        source.listShoRireki1_2 = HihokenshaDaichoEditor.getIndexValue(entity.get証履歴発行日1(), index);
         source.listShoRireki1_3 = HihokenshaDaichoEditor.getIndexValue(entity.get証履歴事由名称1(), index);
-        source.listShoRireki1_4 = HihokenshaDaichoEditor.dataFomart(entity.get証履歴回収日1(), index);
+        source.listShoRireki1_4 = HihokenshaDaichoEditor.getIndexValue(entity.get証履歴回収日1(), index);
         return source;
     }
 }

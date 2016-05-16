@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -168,7 +167,7 @@ public class TashichosonJushochiTokureiDaichoFinder {
         ChohyoSeigyoKyotsu 帳票共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100011.getReportId());
         他市町村住所地特例者台帳情報.set住所1(jushoHenshu.editJusho(帳票共通情報, 宛名情報));
         他市町村住所地特例者台帳情報.set住所タイトル1(住所);
-        他市町村住所地特例者台帳情報.set住所コード(new ZenkokuJushoCode(jushoHenshu.get住所コード(宛名識別対象取得PSM)));
+        他市町村住所地特例者台帳情報.set住所コード(jushoHenshu.get住所コード(宛名識別対象取得PSM));
         他市町村住所地特例者台帳情報.set行政区タイトル(行政区);
         他市町村住所地特例者台帳情報.set行政区コード(宛名識別対象取得PSM.getGyoseikuCode());
         他市町村住所地特例者台帳情報.set住所2(jushoHenshu.editJusho2(

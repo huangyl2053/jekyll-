@@ -267,6 +267,6 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
      * @return ResponseData
      */
     public ResponseData<FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv> onClick_btnReSearch(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBD1090001TransitionEventName.検索に戻る).respond();
+        return ResponseData.of(div).forwardWithEventName(DBD1090001TransitionEventName.再検索する).respond();
     }
 }

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
 
 /**
  * タスク一覧共有画面を管理するクラスです。
@@ -19,6 +18,5 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.Nin
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinSaKaiBusiness {
 
-    private List<NinteiShinseiJoho> 要介護認定申請情報List;
     private List<NinteiKanryoJoho> 要介護認定完了情報Lsit;
 }

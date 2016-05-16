@@ -365,10 +365,8 @@ public class SeikyuGakuShukeiPanelHandler {
             ddgRow.getDefaultDataName17().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissu().getValue());
         }
-        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou() != null) {
-            ddgRow.setDefaultDataName18(div.getPanelSeikyugakuShukei().
-                    getPanelSeikyuShokai().getRdoShinsahouhou().getSelectedKey());
-        }
+        ddgRow.setDefaultDataName18(div.getPanelSeikyugakuShukei().
+                getPanelSeikyuShokai().getRdoShinsahouhou().getSelectedKey());
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード()
                 != null && !div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                 getCcdServiceTypeInput().getサービス種類コード().isEmpty()) {

@@ -56,7 +56,7 @@ public class IkenshogetHandler {
      */
     public void 要介護認定完了情報更新() {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
-                = ViewStateHolder.get(ViewStateKeys.タスク一覧_審査会登録モード, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
         List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row row : rowList) {
             RString 申請書管理番号 = row.getShinseishoKanriNo();

@@ -311,7 +311,7 @@
      "layoutName": "DBU0020081",
      "layoutTitle": "様式２の５補正、式２の６補正",
      "eventName": "補正発行検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0020011",

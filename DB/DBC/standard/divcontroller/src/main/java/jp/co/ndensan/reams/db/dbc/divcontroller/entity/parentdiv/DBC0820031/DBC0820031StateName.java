@@ -9,13 +9,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 不正な動作の原因になります。</br>
  * DBC0820031の状態名定義クラスです
  *
- * @reamsid_L DBC-1030-080 xuhao
+ * @reamsid_L DBC-1030-070 xuhao
  */
 public enum DBC0820031StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    登録修正モード("登録修正モード"),
+    新規修正モード("新規修正モード"),
     削除モード("削除モード");
 
     private final RString name;

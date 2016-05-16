@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo;
 
-import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,7 +32,5 @@ public class ChosahyoSaiCheckhyoRelateEntity {
     private RString 前回障害高齢者自立度;
     private RString 今回障害高齢者自立度;
     private RString 今回認知症高齢者自立度;
-    private Map<RString, RString> 前回連番Map;
-    private Map<RString, RString> 今回連番Map;
 
 }

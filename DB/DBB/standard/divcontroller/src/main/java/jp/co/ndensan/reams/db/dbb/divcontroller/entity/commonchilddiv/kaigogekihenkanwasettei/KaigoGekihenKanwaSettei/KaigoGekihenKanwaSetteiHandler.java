@@ -77,7 +77,7 @@ public class KaigoGekihenKanwaSetteiHandler {
         dgGekihenKanwa_Row row = new dgGekihenKanwa_Row();
         row.getTxtKaiseiMaeDankai().setValue(第1段階);
         row.getTxtKaiseiAtoDankai().setValue(第4段階);
-        row.getTxtHokenryoRitsu().setValue(new Decimal(hdnGekihenIndex04.toString()));
+        row.getTxtHokenryoRitsu().setValue(hdnGekihenIndex04);
         rowList.add(row);
         row = new dgGekihenKanwa_Row();
         row.getTxtKaiseiMaeDankai().setValue(第2段階);

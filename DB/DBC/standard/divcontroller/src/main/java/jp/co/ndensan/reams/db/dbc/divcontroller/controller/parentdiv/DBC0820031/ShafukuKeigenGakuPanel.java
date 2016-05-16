@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0820031StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.DBC0820031TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.ShafukuKeigenGakuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820031.ShafukuKeigenGakuPanelHandler;
@@ -49,6 +50,7 @@ public class ShafukuKeigenGakuPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 申請を削除する = new RString("btnDelete");
     private static final RString 申請を保存する = new RString("Element1");
 
     /**
@@ -155,6 +157,7 @@ public class ShafukuKeigenGakuPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDisabled(true);
             div.getPanelShafukukenngengaku().getBtnAdd().setDisabled(true);
+            return ResponseData.of(div).setState(DBC0820031StateName.削除モード);
         }
         return ResponseData.of(div).respond();
     }
@@ -268,9 +271,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonCancel(ShafukuKeigenGakuPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            // TODO
-            return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.サービス計画費)
-                    .parameter(new RString("サービス計画費"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
@@ -283,16 +284,12 @@ public class ShafukuKeigenGakuPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).内容の破棄();
-                return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.サービス計画費)
-                        .parameter(new RString("サービス計画費"));
-            } else {
-                ResponseData.of(div).respond();
+                return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
             }
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.サービス計画費)
-                    .parameter(new RString("サービス計画費"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
     }
 
     /**
@@ -303,38 +300,55 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonSave(ShafukuKeigenGakuPanelDiv div) {
         boolean flag = getHandler(div).is内容変更状態();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        try {
+            if (flag) {
+                if (!ResponseHolder.isReRequest()) {
+                    getHandler(div).登録Save();
+                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                            .replace(登録.toString())).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                }
+
+            } else {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div)
+                            .addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).respond();
+                }
+            }
+            return ResponseData.of(div).respond();
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
+        }
+
+    }
+
+    /**
+     * 申請を削除する
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
+    public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonDelete(ShafukuKeigenGakuPanelDiv div) {
+        try {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).削除Save();
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                         .replace(削除.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-                return ResponseData.of(div).respond();
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
             }
-        } else if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                getHandler(div).登録Save();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(登録.toString())).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-                return ResponseData.of(div).respond();
-            }
-
-        } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div)
-                        .addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).respond();
-            }
+            return ResponseData.of(div).respond();
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        return ResponseData.of(div).respond();
-
     }
 
     /**
@@ -345,7 +359,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKihoninfo(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.基本情報).respond();
     }
 
     /**
@@ -356,7 +370,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuMeisai(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -367,7 +381,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteiShiryohi(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.特定診療費).respond();
     }
 
     /**
@@ -378,7 +392,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnServiceKeikakuhi(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.サービス計画費).respond();
     }
 
     /**
@@ -389,7 +403,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteinyushosha(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.特定入所者費用).respond();
     }
 
     /**
@@ -400,7 +414,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnGokeiinfo(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.合計費用).respond();
     }
 
     /**
@@ -411,7 +425,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuhiMeisaiJutoku(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -422,7 +436,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShoteiShikan(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -433,7 +447,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShisetsu(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.緊急時施設療養型).respond();
     }
 
     /**
@@ -444,7 +458,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnShokujihiyo(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.食事).respond();
     }
 
     /**
@@ -455,7 +469,7 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnSeikyugaku(ShafukuKeigenGakuPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.請求額集計).respond();
     }
 
     private ShafukuKeigenGakuPanelHandler getHandler(ShafukuKeigenGakuPanelDiv div) {

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei;
 
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,11 +18,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SinsakaiHanteiJyokyoHeaderEntity {
 
-    private int gogitaiNo;
     private RString gogitaiMei;
-    private LasdecCode shichosonCode;
     private RString shichosonMeisho;
     private RString shoKisaiHokenshaNo;
+    private Code ninteiShinseiShinseijiKubunCode;
+    private Code ninteiShinseiHoreiKubunCode;
     private RString shinsakaiKaisaiYMDMin;
     private RString shinsakaiKaisaiYMDMax;
     private int shinsakaiKaisaiNoCount;

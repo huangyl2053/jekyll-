@@ -23,19 +23,18 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
     private boolean isEmptyHokensyaNo;
     private RString hokensyaNo;
     private RString hihokenshaKubun;
-    private boolean isEmptyTaishoNendo;
     private boolean isEmptyGogitaiNo;
     private int gogitaiNo;
-    private boolean taishoTsukiKubun;
-    private boolean taishoGeppiKubun;
-    private RString taishoNendoKaishiYM;
-    private RString taishoNendoShuryoYM;
+    private boolean isTaishoTsukiKubun;
+    private boolean isTaishoGeppiKubun;
     private RString taishoNendoYM;
     private boolean isEmptyTaishoGeppiFrom;
     private boolean isEmptyTaishoGeppiTo;
     private RString taishoGeppiFrom;
     private RString taishoGeppiTo;
     private LasdecCode shichosonCode;
+    private boolean isShinseiji;
+    private boolean isHorei;
 
     /**
      * コンストラクタです。
@@ -43,53 +42,50 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
      * @param isEmptyHokensyaNo 空保険者番号
      * @param hokensyaNo 保険者番号
      * @param hihokenshaKubun 被保険者区分
-     * @param isEmptyTaishoNendo 空対象年度
      * @param isEmptyGogitaiNo 空合議体番号
      * @param gogitaiNo 合議体番号
-     * @param taishoTsukiKubun 対象月編集区分
-     * @param taishoGeppiKubun 対象月日編集区分
-     * @param taishoNendoKaishiYM 対象年度開始日
-     * @param taishoNendoShuryoYM 対象年度終了日
+     * @param isTaishoTsukiKubun 対象月編集区分
+     * @param isTaishoGeppiKubun 対象月日編集区分
      * @param taishoNendoYM 対象年月
      * @param isEmptyTaishoGeppiFrom 空対象月日開始
      * @param isEmptyTaishoGeppiTo 空対象月日終了
      * @param taishoGeppiFrom 対象月日開始
      * @param taishoGeppiTo 対象月日終了
      * @param shichosonCode 市町村コード
+     * @param isShinseiji 申請区分(申請時)
+     * @param isHorei 申請区分(法令)
      */
     public SinsakaiHanteiJyokyoProcessParameter(
             boolean isEmptyHokensyaNo,
             RString hokensyaNo,
             RString hihokenshaKubun,
-            boolean isEmptyTaishoNendo,
             boolean isEmptyGogitaiNo,
             int gogitaiNo,
-            boolean taishoTsukiKubun,
-            boolean taishoGeppiKubun,
-            RString taishoNendoKaishiYM,
-            RString taishoNendoShuryoYM,
+            boolean isTaishoTsukiKubun,
+            boolean isTaishoGeppiKubun,
             RString taishoNendoYM,
             boolean isEmptyTaishoGeppiFrom,
             boolean isEmptyTaishoGeppiTo,
             RString taishoGeppiFrom,
             RString taishoGeppiTo,
-            LasdecCode shichosonCode) {
+            LasdecCode shichosonCode,
+            boolean isShinseiji,
+            boolean isHorei) {
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
         this.hihokenshaKubun = hihokenshaKubun;
-        this.isEmptyTaishoNendo = isEmptyTaishoNendo;
         this.isEmptyGogitaiNo = isEmptyGogitaiNo;
         this.gogitaiNo = gogitaiNo;
-        this.taishoTsukiKubun = taishoTsukiKubun;
-        this.taishoGeppiKubun = taishoGeppiKubun;
-        this.taishoNendoKaishiYM = taishoNendoKaishiYM;
-        this.taishoNendoShuryoYM = taishoNendoShuryoYM;
+        this.isTaishoTsukiKubun = isTaishoTsukiKubun;
+        this.isTaishoGeppiKubun = isTaishoGeppiKubun;
         this.taishoNendoYM = taishoNendoYM;
         this.isEmptyTaishoGeppiFrom = isEmptyTaishoGeppiFrom;
         this.isEmptyTaishoGeppiTo = isEmptyTaishoGeppiTo;
         this.taishoGeppiFrom = taishoGeppiFrom;
         this.taishoGeppiTo = taishoGeppiTo;
         this.shichosonCode = shichosonCode;
+        this.isShinseiji = isShinseiji;
+        this.isHorei = isHorei;
     }
 
     /**
@@ -103,19 +99,18 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
                 isEmptyHokensyaNo,
                 hokensyaNo,
                 hihokenshaKubun,
-                isEmptyTaishoNendo,
                 isEmptyGogitaiNo,
                 gogitaiNo,
-                taishoTsukiKubun,
-                taishoGeppiKubun,
-                taishoNendoKaishiYM,
-                taishoNendoShuryoYM,
+                isTaishoTsukiKubun,
+                isTaishoGeppiKubun,
                 taishoNendoYM,
                 isEmptyTaishoGeppiFrom,
                 isEmptyTaishoGeppiTo,
                 taishoGeppiFrom,
                 taishoGeppiTo,
-                shichosonCode);
+                shichosonCode,
+                isShinseiji,
+                isHorei);
     }
 
 }

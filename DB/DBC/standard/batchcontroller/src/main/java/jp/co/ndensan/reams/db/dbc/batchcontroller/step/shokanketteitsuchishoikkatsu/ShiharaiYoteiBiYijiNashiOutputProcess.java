@@ -71,9 +71,9 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
             }
         } else {
             ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch sbsfktb = ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch.createInstance();
-            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> ariItemList
+            List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> nashiItemList
                     = sbsfktb.shokanBaraiShikyuKetteiTsuchishoRiyoshamuke(帳票データリスト, batchPram, reportSourceWriter);
-            for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item : ariItemList) {
+            for (ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item : nashiItemList) {
                 itemList.add(setShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem(item));
             }
         }

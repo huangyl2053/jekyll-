@@ -11,12 +11,13 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.KetteJoho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.DBC0820015StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.DBC0820015TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 償還払い費支給申請決定_償還払決定情報
@@ -48,9 +47,8 @@ public class ShokanbarayiKeteiInfoPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 照会 = new RString("照会");
     private static final RString 申請を保存する = new RString("Element3");
-    private static final RString 業務区分 = new RString("03");
+    private static final RString 証明書 = new RString("証明書");
 
     /**
      * onLoad
@@ -59,6 +57,7 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onLoad(ShokanbarayiKeteiInfoPanelDiv div) {
+        // TODO viewStateのデータ取得
         ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                 new HihokenshaNo("000000003"),
                 new FlexibleYearMonth(new RString("201601")),
@@ -88,34 +87,12 @@ public class ShokanbarayiKeteiInfoPanel {
         }
         div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
-        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
-            if (new RString("受託あり").equals(償還)) {
-                div.getPanelTwo().getBtnShokanbariKeteiInfo().setDisabled(true);
-            }
-            div.getCcdShokanbaraiketteiJoho().loadInitialize(
-                    被保険者番号, サービス年月, 整理番号, 業務区分, 登録);
-            div.getPanelTwo().getBtnKouza().setDisabled(true);
-            div.getPanelTwo().getTxtShoriMode().setValue(修正);
-        }
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            div.getPanelTwo().getBtnKouza().setDisabled(true);
-            div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
-                    .toDateString().toString()));
-            div.getCcdShokanbaraiketteiJoho().loadInitialize(
-                    被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
-            div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
-            div.getPanelTwo().getTxtShoriMode().setValue(修正);
-        }
+        getHandler(div).initialize(被保険者番号, サービス年月, 整理番号);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-            div.getCcdShokanbaraiketteiJoho().loadInitialize(
-                    被保険者番号, サービス年月, 整理番号, 業務区分, 照会);
-            div.getPanelTwo().getBtnShinsei().setDisabled(true);
-            div.getPanelTwo().getTxtShoriMode().setValue(削除);
+            return ResponseData.of(div).setState(DBC0820015StateName.削除モード);
         }
-        List<dgSyokanbaraikete_Row> 決定情報登録_償還払決定一覧 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete().getDataSource();
+        List<dgSyokanbaraikete_Row> 決定情報登録_償還払決定一覧 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()
+                .getDgSyokanbaraikete().getDataSource();
         KetteJoho 決定情報 = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.決定情報, KetteJoho.class);
         Map<RString, Integer> map_Row = new HashMap<>();
         for (dgSyokanbaraikete_Row list : 決定情報登録_償還払決定一覧) {
@@ -137,10 +114,10 @@ public class ShokanbarayiKeteiInfoPanel {
         RString 画面モード = div.getPanelTwo().getTxtShoriMode().getValue();
         if (登録.equals(画面モード)) {
             ViewStateHolder.put(ViewStateKeys.画面モード, 修正);
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.申請情報).respond();
         } else {
             ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.申請情報).respond();
         }
     }
 
@@ -153,7 +130,7 @@ public class ShokanbarayiKeteiInfoPanel {
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnKouza(ShokanbarayiKeteiInfoPanelDiv div) {
         RString 画面モード = div.getPanelTwo().getTxtShoriMode().getValue();
         ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.口座情報).respond();
     }
 
     /**
@@ -168,9 +145,9 @@ public class ShokanbarayiKeteiInfoPanel {
             getHandler(div).putViewState();
             RString 画面モード = div.getPanelTwo().getTxtShoriMode().getValue();
             ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.サービス提供証明書).respond();
         } else {
-            throw new ApplicationException(UrErrorMessages.既に存在.getMessage());
+            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(証明書.toString()));
         }
     }
 
@@ -186,9 +163,8 @@ public class ShokanbarayiKeteiInfoPanel {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        RString モード = 修正;
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            モード = 照会;
+            return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).get内容変更状態();
         if (flag) {
@@ -200,14 +176,13 @@ public class ShokanbarayiKeteiInfoPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getCcdShokanbaraiketteiJoho().loadInitialize(
-                        被保険者番号, サービス年月, 整理番号, 業務区分, モード);
-                return ResponseData.of(div).respond();
+                getHandler(div).initialize(被保険者番号, サービス年月, 整理番号);
+                return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
             } else {
                 return ResponseData.of(div).respond();
             }
         } else {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
         }
     }
 
@@ -219,7 +194,42 @@ public class ShokanbarayiKeteiInfoPanel {
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_CommonSave(ShokanbarayiKeteiInfoPanelDiv div) {
         boolean flag = getHandler(div).get内容変更状態();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        try {
+            if (flag) {
+                if (!ResponseHolder.isReRequest()) {
+                    getHandler(div).登録Save();
+                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                            .replace(登録.toString())).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                    return ResponseData.of(div).respond();
+                }
+
+            } else {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div)
+                            .addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).respond();
+                }
+            }
+            return ResponseData.of(div).respond();
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
+        }
+    }
+
+    /**
+     * onClick_CommonDelete
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
+    public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_CommonDelete(ShokanbarayiKeteiInfoPanelDiv div) {
+        try {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).削除Save();
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
@@ -229,27 +239,11 @@ public class ShokanbarayiKeteiInfoPanel {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
                 return ResponseData.of(div).respond();
             }
-        } else if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                getHandler(div).登録Save();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(登録.toString())).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-                return ResponseData.of(div).respond();
-            }
-
-        } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div)
-                        .addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).respond();
-            }
+            return ResponseData.of(div).respond();
+        } catch (Exception e) {
+            e.toString();
+            throw new ApplicationException(UrErrorMessages.異常終了.getMessage());
         }
-        return ResponseData.of(div).respond();
     }
 
     private ShokanbarayiKeteiInfoPanelHandler getHandler(ShokanbarayiKeteiInfoPanelDiv div) {

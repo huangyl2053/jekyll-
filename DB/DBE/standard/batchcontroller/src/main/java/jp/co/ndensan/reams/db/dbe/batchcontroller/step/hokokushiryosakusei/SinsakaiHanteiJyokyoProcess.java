@@ -132,16 +132,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
     }
 
     private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
-        return !(before.getGogitaiNo() == current.getGogitaiNo()
+        return !(before.getGogitaiMei() == current.getGogitaiMei()
                 && before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo()));
     }
 
     private List<SinsakaiHanteiJyokyoEntity> get審査判定状況(SinsakaiHanteiJyokyoHeaderEntity current) {
         SinsakaiHanteiJyokyoMyBatisParameter batisParameter = paramter.toSinsakaiHanteiJyokyoMyBatisParameter();
-        batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
-        batisParameter.setShichosonCode(current.getShichosonCode());
         return mapper.getSinsakaiHanteiJyokyo(batisParameter);
     }
 
@@ -279,7 +277,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 要介護4,
                 要介護5,
                 計,
-                要支援1,
+                要支援2,
                 new RString(要支援2非該当被保険者数),
                 new RString(要支援2要支援1被保険者数),
                 new RString(要支援2要支援2被保険者数),
@@ -290,9 +288,9 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要支援2要介護5被保険者数),
                 new RString(要支援2計),
                 new RString(get被保険者数(審査判定状況, コード_要支援2, コード_再調査)),
-                new RString(要支援2計 - 要支援2要支援2被保険者数),
+                new RString(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数),
                 new RString(要支援2非該当被保険者数 + 要支援2要支援1被保険者数),
-                new RString(要支援2計 - 要支援2非該当被保険者数 - 要支援2要支援1被保険者数 - 要支援2要支援2被保険者数),
+                new RString(要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数),
                 要支援2計 == 0 || 要支援2計 == 要支援2要支援2被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要支援2計 - 要支援2要支援2被保険者数) / 要支援2計 * 割合) + パーセント),
                 new RString(要支援2計 - 要支援2要支援2被保険者数),
@@ -342,8 +340,8 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(要介護1要介護5被保険者数),
                 new RString(要介護1計),
                 new RString(get被保険者数(審査判定状況, コード_要介護1, コード_再調査)),
-                new RString(要介護1計 - 要介護1要介護1被保険者数),
-                new RString(要介護1非該当被保険者数 + 要介護1要支援1被保険者数 + 要介護1要支援2被保険者数),
+                new RString(要介護1計 - 要介護1要介護1被保険者数 - 要介護1要支援2被保険者数),
+                new RString(要介護1非該当被保険者数 + 要介護1要支援1被保険者数),
                 new RString(要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数),
                 要介護1計 == 0 || 要介護1計 == 要介護1要介護1被保険者数 ? 割合なし : new RString(String.valueOf(
                                 (要介護1計 - 要介護1要介護1被保険者数) / 要介護1計 * 割合) + パーセント),
