@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.service.report.shisetsuhenkotsuchisho;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoReport;
@@ -16,7 +14,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
@@ -33,6 +30,17 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class ShisetsuHenkoTsuchishoPrintService {
 
+    private final ReportManager reportManager;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param reportManager ReportManager
+     */
+    public ShisetsuHenkoTsuchishoPrintService(ReportManager reportManager) {
+        this.reportManager = reportManager;
+    }
+
     /**
      * 介護保険住所地特例施設変更通知書を印刷します。
      *
@@ -41,27 +49,21 @@ public class ShisetsuHenkoTsuchishoPrintService {
      */
     public SourceDataCollection print(ShisetsuHenkoTsuchishoItem item) {
         ShisetsuHenkoTsuchishoProperty property = new ShisetsuHenkoTsuchishoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<ShisetsuHenkoTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<ShisetsuHenkoTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(property.subGyomuCode(),
-                        property.reportId(),
-                        FlexibleDate.getNowDate(),
-                        reportSourceWriter);
-                item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
-                item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
-                item.setShichosonMei(ninshoshaSource.ninshoshaYakushokuMei2);
-                item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
-            }
+        try (ReportAssembler<ShisetsuHenkoTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<ShisetsuHenkoTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(property.subGyomuCode(),
+                    property.reportId(),
+                    FlexibleDate.getNowDate(),
+                    reportSourceWriter);
+            item.setDenshiKoin(ninshoshaSource.denshiKoin);
+            item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
+            item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
+            item.setShichosonMei(ninshoshaSource.ninshoshaYakushokuMei2);
+            item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+            ShisetsuHenkoTsuchishoReport report = ShisetsuHenkoTsuchishoReport.createFrom(item);
+            report.writeBy(reportSourceWriter);
         }
-        return new Printer<ShisetsuHenkoTsuchishoReportSource>().spool(property, toReports(item));
-    }
-
-    private static List<ShisetsuHenkoTsuchishoReport> toReports(ShisetsuHenkoTsuchishoItem item) {
-        List<ShisetsuHenkoTsuchishoReport> list = new ArrayList<>();
-        list.add(ShisetsuHenkoTsuchishoReport.createFrom(item));
-        return list;
+        return reportManager.publish();
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
