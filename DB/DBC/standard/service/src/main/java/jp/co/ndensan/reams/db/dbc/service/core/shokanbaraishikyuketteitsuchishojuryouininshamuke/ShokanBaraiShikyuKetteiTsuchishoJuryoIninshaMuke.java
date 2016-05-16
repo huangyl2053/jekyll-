@@ -84,6 +84,10 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
     private static final RString 増減の理由タイトル_不支給の理由 = new RString("不支給の理由");
     private static final RString 増減の理由タイトル_増減の理由 = new RString("増減の理由");
     private static final RString 金融機関コード_郵便局 = new RString("9900");
+    private static final RString フォント小 = new RString("1");
+    private static final RString フォント大 = new RString("2");
+    private static final RString フォント混在_上大下小 = new RString("3");
+    private static final RString フォント混在_上小下大 = new RString("4");
 
     /**
      * 帳票データを作成します。
@@ -296,18 +300,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         item.setTitle2_4(タイトル2_4);
         item.setTsuchibun1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
                 KamokuCode.EMPTY, ONE, ONE, batchPram.getHakkoYMD()));
-        item.setTsuchibun２(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                KamokuCode.EMPTY, ONE, TWO, batchPram.getHakkoYMD()));
-        item.setTsuchibunLarge(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                KamokuCode.EMPTY, TWO, TWO, batchPram.getHakkoYMD()));
-        item.setTsuchibunMix1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                KamokuCode.EMPTY, THREE, TWO, batchPram.getHakkoYMD()));
-        item.setTsuchibunMix2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                KamokuCode.EMPTY, THREE, THREE, batchPram.getHakkoYMD()));
-        item.setTsuchibunMixtwo1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                KamokuCode.EMPTY, FOUR, TWO, batchPram.getHakkoYMD()));
-        item.setTsuchibunMixtwo2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
-                KamokuCode.EMPTY, FOUR, THREE, batchPram.getHakkoYMD()));
+        item = set通知文(item, batchPram);
         item.setRemban(RString.EMPTY);
         item = set認証者And宛先(item, ninshoshaSource, atesaki);
         item.setBangoTitle(番号タイトル_口座番号);
@@ -402,5 +395,28 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         result.append(getJufukuKey(shiharai));
         result.append(shiharai.getサービス種類コード());
         return result.toRString();
+    }
+
+    private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem set通知文(
+            ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, ShokanKetteiTsuchiShoSealerBatchParameter batchPram) {
+        RString 定型文文字サイズ = ReportUtil.get定型文文字サイズ(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId());
+        if (フォント小.equals(定型文文字サイズ)) {
+            item.setTsuchibun２(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                    KamokuCode.EMPTY, ONE, TWO, batchPram.getHakkoYMD()));
+        } else if (フォント大.equals(定型文文字サイズ)) {
+            item.setTsuchibunLarge(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                    KamokuCode.EMPTY, TWO, TWO, batchPram.getHakkoYMD()));
+        } else if (フォント混在_上小下大.equals(定型文文字サイズ)) {
+            item.setTsuchibunMix1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                    KamokuCode.EMPTY, THREE, TWO, batchPram.getHakkoYMD()));
+            item.setTsuchibunMix2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                    KamokuCode.EMPTY, THREE, THREE, batchPram.getHakkoYMD()));
+        } else if (フォント混在_上大下小.equals(定型文文字サイズ)) {
+            item.setTsuchibunMixtwo1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                    KamokuCode.EMPTY, FOUR, TWO, batchPram.getHakkoYMD()));
+            item.setTsuchibunMixtwo2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
+                    KamokuCode.EMPTY, FOUR, THREE, batchPram.getHakkoYMD()));
+        }
+        return item;
     }
 }

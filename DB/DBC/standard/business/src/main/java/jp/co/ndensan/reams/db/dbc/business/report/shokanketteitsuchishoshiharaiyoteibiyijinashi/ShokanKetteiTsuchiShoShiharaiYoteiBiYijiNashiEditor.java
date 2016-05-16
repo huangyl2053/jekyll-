@@ -32,6 +32,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor implements ISho
     }
 
     private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource editSource(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource source) {
+
         source.bunshoNo = item.getBunshoNo();
         source.title = item.getTitle();
         source.title2_1 = item.getTitle2_1();
@@ -79,7 +80,6 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiEditor implements ISho
         source.shumokuTitle = item.getShumokuTitle();
         source.kouzaShu = item.getKouzaShu();
         source.bangoTitle = item.getBangoTitle();
-        // TODO QA600 口座払の場合「**************」で表示
         source.kouzaNo = item.getKouzaNo();
         source.shiharaiStartYMD = item.getShiharaiStartYMD();
         source.kouzaMeigi = item.getKouzaMeigi();

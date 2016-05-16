@@ -510,7 +510,6 @@ public final class ShafukuKeigenGakuPanelHandler {
      * 内容の破棄
      */
     public void 内容の破棄() {
-        div.getPanelShafukukenngengaku().getRowId().setValue(new Decimal("123"));
         List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.情報, List.class);
         initialize(list);
     }
