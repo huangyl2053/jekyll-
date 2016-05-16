@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoKaishiTsuki8Gat
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo4Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo8Gatsu;
-import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuｃhoKaishiMaeFucho6Gatsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoKaishiMaeFucho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.TokubetsuChoshuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020002.dgKibetsuJoho_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukinitsuNokiKanriManager;
@@ -787,11 +787,11 @@ public final class TokubetsuChoshuTotalHandler {
         List<KeyValueDataSource> gatsu06List = new ArrayList<>();
         RDate nowDate = RDate.getNowDate();
         gatsu06List.add(new KeyValueDataSource(
-                TokuｃhoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収しない.getコード(),
-                TokuｃhoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収しない.get略称()));
+                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収しない.getコード(),
+                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収しない.get略称()));
         gatsu06List.add(new KeyValueDataSource(
-                TokuｃhoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収する.getコード(),
-                TokuｃhoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収する.get略称()));
+                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収する.getコード(),
+                TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収する.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl6GatsuKaishiZenhan().setDataSource(gatsu06List);
         RString key_06月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, nowDate,

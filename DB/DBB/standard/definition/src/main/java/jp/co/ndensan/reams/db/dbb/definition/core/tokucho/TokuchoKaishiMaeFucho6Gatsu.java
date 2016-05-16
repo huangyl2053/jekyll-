@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-9999-023 liangbc
  */
-public enum TokuｃhoKaishiMaeFucho6Gatsu {
+public enum TokuchoKaishiMaeFucho6Gatsu {
 
     /**
      * コード:0 名称:なし 略称:特別徴収開始前の仮算定納期で普通徴収しない
@@ -23,7 +23,7 @@ public enum TokuｃhoKaishiMaeFucho6Gatsu {
     private final RString fullName;
     private final RString shortName;
 
-    private TokuｃhoKaishiMaeFucho6Gatsu(String code, String fullname, String shortName) {
+    private TokuchoKaishiMaeFucho6Gatsu(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
         this.shortName = new RString(shortName);
@@ -62,8 +62,8 @@ public enum TokuｃhoKaishiMaeFucho6Gatsu {
      * @param code 特徴開始前普通徴収6月のコード
      * @return {@code code} に対応する特徴開始前普通徴収6月
      */
-    public static TokuｃhoKaishiMaeFucho6Gatsu toValue(RString code) {
-        for (TokuｃhoKaishiMaeFucho6Gatsu tokuｃhoKaishiMaeFucho6Gatsu : TokuｃhoKaishiMaeFucho6Gatsu.values()) {
+    public static TokuchoKaishiMaeFucho6Gatsu toValue(RString code) {
+        for (TokuchoKaishiMaeFucho6Gatsu tokuｃhoKaishiMaeFucho6Gatsu : TokuchoKaishiMaeFucho6Gatsu.values()) {
             if (tokuｃhoKaishiMaeFucho6Gatsu.code.equals(code)) {
                 return tokuｃhoKaishiMaeFucho6Gatsu;
             }
