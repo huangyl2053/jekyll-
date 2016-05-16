@@ -6,13 +6,12 @@
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei;
 
 import java.util.List;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 分割した老齢福祉受給のエンティティクラスです。
  *
- * @reamsid_L DBA-0500-010  suguangjun
+ * @reamsid_L DBA-0500-010 suguangjun
  */
 @lombok.Getter
 @lombok.Setter
@@ -20,6 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class RoreiFukushiNenkinJukyushaDivisionEntity {
 
     private List<RString> 老齢福祉No;
-    private List<FlexibleDate> 老齢福祉受給開始日;
-    private List<FlexibleDate> 老齢福祉受給終了日;
+    private List<RString> 老齢福祉受給開始日;
+    private List<RString> 老齢福祉受給終了日;
 }

@@ -271,12 +271,12 @@ public class JyutakugaisyunaiyoList {
         if (requestDiv.getTxtTyakkoyotebi().getValue() == null) {
             dgGaisyuListRow.setTxtChakkoYoteibi(RString.EMPTY);
         } else {
-            dgGaisyuListRow.setTxtChakkoYoteibi(new RString(requestDiv.getTxtTyakkoyotebi().getValue().toString()));
+            dgGaisyuListRow.setTxtChakkoYoteibi(requestDiv.getTxtTyakkoyotebi().getValue().wareki().toDateString());
         }
         if (requestDiv.getTxtKanseyotebi().getValue() == null) {
             dgGaisyuListRow.setTxtKanseiYoteibi(RString.EMPTY);
         } else {
-            dgGaisyuListRow.setTxtKanseiYoteibi(new RString(requestDiv.getTxtKanseyotebi().getValue().toString()));
+            dgGaisyuListRow.setTxtKanseiYoteibi(requestDiv.getTxtKanseyotebi().getValue().wareki().toDateString());
         }
         if (requestDiv.getTxtKaisyukingaku().getValue() == null) {
             dgGaisyuListRow.setTxtKaishuKingaku(RString.EMPTY);

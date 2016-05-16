@@ -45,8 +45,8 @@ public class HihokenshaDaichoRoreiFukushiEditor implements IHihokenshaDaichoEdit
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listRoreiFukushi_1 = entity.get老齢福祉No().get(index);
-        source.listRoreiFukushi_2 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給開始日(), index);
-        source.listRoreiFukushi_3 = HihokenshaDaichoEditor.dataFomart(entity.get老齢福祉受給終了日(), index);
+        source.listRoreiFukushi_2 = HihokenshaDaichoEditor.getIndexValue(entity.get老齢福祉受給開始日(), index);
+        source.listRoreiFukushi_3 = HihokenshaDaichoEditor.getIndexValue(entity.get老齢福祉受給終了日(), index);
         return source;
     }
 }

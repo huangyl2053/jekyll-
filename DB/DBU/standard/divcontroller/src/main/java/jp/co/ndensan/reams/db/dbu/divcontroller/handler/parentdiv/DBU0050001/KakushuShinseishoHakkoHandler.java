@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dba.service.core.shokanharaishikyushinseisho.Shouk
 import jp.co.ndensan.reams.db.dba.service.core.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseishojoho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.choshuyuyoshinseisho.ChoshuYuyoShinseisho;
-import jp.co.ndensan.reams.db.dba.service.report.daisanshakoiniyoruhigaitodokechohyo.DaisanshaKoiniyoruHigaitodokeChohyo;
 import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.KaigoHokenryoGenmenShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeishokoufushinseisho.KaigoHokenJukyushikakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.juryoininharaikeiyakushinseisho.JuryoIninbaraiKeiyakuShinseisho;
@@ -33,6 +32,7 @@ import jp.co.ndensan.reams.db.dba.service.report.shakaifukushihojinfutan.ShakaiF
 import jp.co.ndensan.reams.db.dba.service.report.shiharaihohohenkoshuryoshinseisho.ShiharaiHohoHenkoShuryoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.shikakushutokuidososhitsu.ShikakuShutokuIdoSoshitsuTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.shoukanbaraijuryoininbaraishinseishochohyo.ShoukanbaraiJuryoIninbaraiShinseishoChohyo;
+import jp.co.ndensan.reams.db.dbc.service.report.daisanshakoiniyoruhigaitodokechohyo.DaisanshaKoiniyoruHigaitodokeChohyo;
 import jp.co.ndensan.reams.db.dbc.service.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuJuryoIninShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
@@ -240,7 +240,7 @@ public class KakushuShinseishoHakkoHandler {
                     createKyufuhiKashitsukekinShokankigenEnchoShinseishoChohyo(識別コード, 被保険者番号);
         }
         if (ShinseishoChohyoShurui.第三者行為による被害届_介護保険用.get名称().equals(row.getShinseisho())) {
-            DaisanshaKoiniyoruHigaitodokeChohyo todoke = new DaisanshaKoiniyoruHigaitodokeChohyo();
+            DaisanshaKoiniyoruHigaitodokeChohyo todoke = DaisanshaKoiniyoruHigaitodokeChohyo.createInstance();
             sourceData = todoke.createDaisanshaKoiniyoruHigaitodokeChohyo(識別コード, 被保険者番号);
         }
         return sourceData;

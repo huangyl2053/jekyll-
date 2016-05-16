@@ -55,7 +55,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         source.listUpper_2 = item.getSeiriNo();
         source.listUpper_3 = item.getKeteiTsuchiNo();
         source.listUpper_4 = item.getHihokenshaNo();
-        RString hihokenshanamelenthMax = item.getHihokenshaName();
+        RString hihokenshanamelenthMax = item.getHihokenshaName() == null ? RString.EMPTY : item.getHihokenshaName();
         byte[] hihokenshaname = hihokenshanamelenthMax.toString().getBytes(Charset.forName(ENCODE.toString()));
         byte[] getHihokenshaName = new byte[hihokenshaname.length <= MAX ? hihokenshaname.length : MAX];
         System.arraycopy(hihokenshaname, MIN, getHihokenshaName, MIN, hihokenshaname.length <= MAX ? hihokenshaname.length : MAX);

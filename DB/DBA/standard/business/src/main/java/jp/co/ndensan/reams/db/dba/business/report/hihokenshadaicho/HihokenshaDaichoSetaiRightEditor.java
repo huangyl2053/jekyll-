@@ -47,7 +47,7 @@ public class HihokenshaDaichoSetaiRightEditor implements IHihokenshaDaichoEditor
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listSetaiRight_1 = HihokenshaDaichoEditor.getIndexValue(entity.get世帯右性別(), index);
-        source.listSetaiRight_2 = HihokenshaDaichoEditor.dataFomart(entity.get世帯右生年月日(), index);
+        source.listSetaiRight_2 = HihokenshaDaichoEditor.getIndexValue(entity.get世帯右生年月日(), index);
         source.listSetaiRight_3 = HihokenshaDaichoEditor.getIndexValue(entity.get世帯右続柄(), index);
         source.listSetaiRight_4 = entity.get世帯右被保険者番号().isEmpty() || entity.get世帯右被保険者番号().get(index) == null
                 ? RString.EMPTY : entity.get世帯右被保険者番号().get(index).value();

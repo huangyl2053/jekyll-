@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.Shak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoSummary;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoTorokuKubun;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShinseiJokyoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenjokyo.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.common.NursingCareInformationEntity;

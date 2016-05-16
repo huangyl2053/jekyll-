@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -107,30 +108,34 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
                     separator(Separator.PERIOD).
                     fillType(FillType.BLANK).toDateString());
             FlexibleYearMonth kizyuniti = new FlexibleDate(ichiranItem.getTeikyo()).getYearMonth();
-            if (new FlexibleYearMonth("200904").isBeforeOrEquals(kizyuniti)) {
-                ichiranItem.setYoKaigodo(YokaigoJotaiKubun09.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-            }
-            if (new FlexibleYearMonth("200604").isBeforeOrEquals(kizyuniti)
-                    && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
-                ichiranItem.setYoKaigodo(YokaigoJotaiKubun06.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-            }
-            if (new FlexibleYearMonth("200204").isBeforeOrEquals(kizyuniti)
-                    && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
-                ichiranItem.setYoKaigodo(YokaigoJotaiKubun02.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
-            }
-            if (kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200203"))) {
-                ichiranItem.setYoKaigodo(YokaigoJotaiKubun99.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
+            if (shoShiharaiList.get要介護認定状態区分コード() != null) {
+                if (new FlexibleYearMonth("200904").isBeforeOrEquals(kizyuniti)) {
+                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun09.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
+                }
+                if (new FlexibleYearMonth("200604").isBeforeOrEquals(kizyuniti)
+                        && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
+                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun06.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
+                }
+                if (new FlexibleYearMonth("200204").isBeforeOrEquals(kizyuniti)
+                        && kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun02.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
+                }
+                if (kizyuniti.isBeforeOrEquals(new FlexibleYearMonth("200203"))) {
+                    ichiranItem.setYoKaigodo(YokaigoJotaiKubun99.toValue(shoShiharaiList.get要介護認定状態区分コード().getColumnValue()).get名称());
+                }
             }
             ichiranItem.setNinteiKaishibi(共通ポリシfomart(shoShiharaiList.get認定開始日()));
             ichiranItem.setNinteiShuryobi(共通ポリシfomart(shoShiharaiList.get認定終了日()));
             ichiranItem.setUketsukeYMD(共通ポリシfomart(shoShiharaiList.get受付年月日()));
             ichiranItem.setKeteiYMD(共通ポリシfomart(shoShiharaiList.get決定年月日()));
-            ichiranItem.setHonjinShiharaigaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
-            ichiranItem.setShikyugaku(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
+            ichiranItem.setHonjinShiharaigaku(shoShiharaiList.get本人支払額() == null
+                    ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get本人支払額(), 1));
+            ichiranItem.setShikyugaku(shoShiharaiList.get支給額() == null
+                    ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get支給額(), 1));
             RStringBuilder nituliki = new RStringBuilder();
             nituliki.append(shoShiharaiList.get様式名称());
             nituliki.append(new RString("("));
-            nituliki.append(DecimalFormatter.toコンマ区切りRString(shoShiharaiList.get金額(), 1));
+            nituliki.append(DecimalFormatter.toコンマ区切りRString(Decimal.valueOf(shoShiharaiList.get金額()), 1));
             nituliki.append(new RString(")"));
             ichiranItem.setYoshikigotoKingaku(nituliki.toRString());
             ichiranItem.setTuika(RString.EMPTY);
@@ -181,6 +186,9 @@ public class ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo {
     }
 
     private RString 共通ポリシfomart(FlexibleDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
 
         return (date.
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)

@@ -217,7 +217,9 @@ public final class TokubetsuChoshuTotalHandler {
         if (is市町村指定DDL表示(市町村セキュリティ情報)) {
             div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(true);
             div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setDataSource(create市町村指定DDL(市町村セキュリティ情報, 調定年度));
-            div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setSelectedIndex(0);
+            if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().getDataSource().isEmpty()) {
+                div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setSelectedIndex(0);
+            }
         } else {
             div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(false);
         }

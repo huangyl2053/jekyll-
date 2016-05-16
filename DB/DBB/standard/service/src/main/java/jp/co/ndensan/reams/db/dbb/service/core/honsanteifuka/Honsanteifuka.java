@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.Honsanteifuk
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteifuka.TyouhyouParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteifuka.BatchTyouhyouEntity;
@@ -29,11 +30,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -59,11 +58,14 @@ public class Honsanteifuka {
     private static final RString 通知書タイプ設定値 = new RString("001");
     private static final RString コンビニマルチ収納タイプ = new RString("301");
     private static final RString コンビニ角公タイプ = new RString("302");
-    private static final RString 定値_期毎 = new RString("期毎タイプ");
-    private static final RString 定値_銀振型5期 = new RString("銀振型5期タイプ");
-    private static final RString 定値_銀振型4期 = new RString("銀振型4期タイプ");
+    private static final RString 定値_期毎 = new RString("期毎納入通知書タイプ");
+    private static final RString 定値_銀振型5期 = new RString("銀振納入通知書タイプ");
+    private static final RString 定値_銀振型4期 = new RString("銀振納入通知書タイプ");
     private static final RString 定値_ブック = new RString("ブックタイプ");
+    private static final RString 定値_ブックタイプ = new RString("ブック口座振替依頼表示");
     private static final RString 定値_コンビニ収納 = new RString("コンビニ収納タイプ");
+    private static final RString 定値_コンビニ収納タイプ = new RString("コンビニ期毎出力");
+    private static final RString 定値_その他タイプ = new RString("その他納入通知書タイプ");
     private static final RString 定値_その他 = new RString("その他（カスタマイズ）");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名_通知書タイプ = new RString("通知書タイプ");
@@ -82,7 +84,6 @@ public class Honsanteifuka {
     private static final ReportId 特徴開始通知書_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
-    private static final RString 定値_納入通知書 = new RString("納入通知書の帳票ID");
     private static final int 設定値_番号1 = 1;
     private static final int 設定値_番号2 = 2;
     private static final int 設定値_番号0 = 0;
@@ -295,8 +296,7 @@ public class Honsanteifuka {
             } else if (納入通知書_帳票分類ID.equals(parameter.get帳票分類ID())) {
                 BatchTyouhyouEntity 納入通知書 = get納入通知書_帳票ID(調定年度, 算定期, parameter);
                 if (納入通知書 == null) {
-                    throw new ApplicationException(UrErrorMessages.存在しない
-                            .getMessage().replace(定値_納入通知書.toString()).evaluate());
+                    throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
                 }
                 resultList.add(new BatchTyouhyouResult(納入通知書));
             }
@@ -322,7 +322,7 @@ public class Honsanteifuka {
             if (標準版B5横_連帳.equals(帳票タイプ_連帳区分)) {
                 帳票ID = ReportIdDBB.DBB100033.getReportId();
             } else if (標準版B5横_カット紙.equals(帳票タイプ_連帳区分)) {
-                ReportIdDBB.DBB100032.getReportId();
+                帳票ID = ReportIdDBB.DBB100032.getReportId();
             } else if (標準B5_連帳.equals(帳票タイプ_連帳区分)) {
                 帳票ID = ReportIdDBB.DBB100037.getReportId();
             } else if (標準B5_カット紙.equals(帳票タイプ_連帳区分)) {
@@ -392,6 +392,11 @@ public class Honsanteifuka {
 
         RString 項目名 = set項目名(出力期);
         RString 納通連帳区分 = get普徴期情報_納通連帳区分(出力期);
+        if (定値_ブック.equals(項目名)) {
+            項目名 = 定値_その他タイプ;
+        } else if (定値_コンビニ収納.equals(項目名)) {
+            項目名 = 定値_コンビニ収納タイプ;
+        }
         ChohyoSeigyoHanyo 帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, parameter.get帳票分類ID(),
                 調定年度, 項目名);
         if (帳票タイプ == null) {
@@ -485,11 +490,11 @@ public class Honsanteifuka {
         if (帳票ID != null) {
             return 帳票ID;
         }
-        if (定値_ブック.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
-            return getブックタイプ_帳票ID(調定年度, 項目名, 納通連帳区分, 帳票タイプ);
-        } else if (定値_コンビニ収納.equals(項目名) && 区分_ゼロ.equals(帳票タイプ.get設定値())) {
-            return getその他納入通知書_帳票ID(調定年度, 項目名, 納通連帳区分, 帳票タイプ);
-        } else if (定値_コンビニ収納.equals(項目名) && 区分_イチ.equals(帳票タイプ.get設定値())) {
+        if (定値_その他タイプ.equals(項目名) && 通知書タイプ設定値.equals(帳票タイプ.get設定値())) {
+            return getブックタイプ_帳票ID(調定年度, 定値_ブックタイプ, 納通連帳区分, 帳票タイプ);
+        } else if (定値_コンビニ収納タイプ.equals(項目名) && 区分_ゼロ.equals(帳票タイプ.get設定値())) {
+            return getその他納入通知書_帳票ID(調定年度, 定値_その他タイプ, 納通連帳区分, 帳票タイプ);
+        } else if (定値_コンビニ収納タイプ.equals(項目名) && 区分_イチ.equals(帳票タイプ.get設定値())) {
             if (区分_ゼロ.equals(納通連帳区分)) {
                 return ReportIdDBB.DBB100063.getReportId();
             } else if (区分_イチ.equals(納通連帳区分)) {
@@ -664,7 +669,7 @@ public class Honsanteifuka {
             result.set納入_ページごとに山分け(区分_イチ);
         }
         result.set打分け条件情報(parameter.get打分け条件情報());
-        result.set処理日時(new FlexibleDate(RDate.getNowTime().toString()));
+        result.set処理日時(RDate.getNowDateTime());
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         return result;
     }

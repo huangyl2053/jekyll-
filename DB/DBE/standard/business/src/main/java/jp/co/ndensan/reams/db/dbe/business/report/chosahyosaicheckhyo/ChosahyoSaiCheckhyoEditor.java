@@ -314,10 +314,10 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     }
 
     private RString setChosaAnser01(RString zenkaiChosakekkaNo) {
-        RString chosaAnser;
+        RString chosaAnser = RString.EMPTY;
         if (new RString(ChosaAnser01.あり.getコード().toString()).equals(zenkaiChosakekkaNo)) {
             chosaAnser = ChosaAnser01.あり.get名称();
-        } else {
+        } else if (new RString(ChosaAnser01.なし.getコード().toString()).equals(zenkaiChosakekkaNo)) {
             chosaAnser = ChosaAnser01.なし.get名称();
         }
         return chosaAnser;
@@ -428,10 +428,10 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     }
 
     private RString setChosaAnser16(RString zenkaiChosakekkaNo) {
-        RString chosaAnser;
+        RString chosaAnser = RString.EMPTY;
         if (new RString(ChosaAnser16.ある.getコード().toString()).equals(zenkaiChosakekkaNo)) {
             chosaAnser = ChosaAnser16.ある.get名称();
-        } else {
+        } else if (new RString(ChosaAnser16.ない.getコード().toString()).equals(zenkaiChosakekkaNo)) {
             chosaAnser = ChosaAnser16.ない.get名称();
         }
         return chosaAnser;

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -78,14 +79,14 @@ public class ServiceTeikyoShomeishoPanel {
 
         List<ShikibetsuNoKanri> 証明書リスト = SyokanbaraihiShikyuShinseiKetteManager
                 .createInstance().getShikibetsuNoKanri(サービス提供年月);
-        // TODO 南京QA 償還払支給申請の取得。
+        RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
         ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
                 .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号, 様式番号);
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(画面モード, 償還払支給申請.is国保連再送付フラグ());
         handler.load申請共通エリア(画面モード, paramter);
-        handler.load申請明細エリア(画面モード, 償還払支給申請, 証明書リスト, 証明書一覧情報);
+        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報);
         return createResponse(div);
     }
 
@@ -96,13 +97,11 @@ public class ServiceTeikyoShomeishoPanel {
      * @return 償還払支給申請_支給申請画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShinseiInfo(ServiceTeikyoShomeishoPanelDiv div) {
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (登録モード.equals(画面モード)) {
-            ViewStateHolder.put(ViewStateKeys.画面モード, 処理モード_修正);
-        } else {
-            ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (登録モード.equals(処理モード)) {
+            処理モード = 処理モード_修正;
         }
-        getHandler(div).putViewState();
+        getHandler(div).putViewState(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.申請情報).respond();
     }
 
@@ -115,7 +114,8 @@ public class ServiceTeikyoShomeishoPanel {
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnKouzaInfo(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
         handler.申請既存チェック();
-        handler.putViewState();
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        handler.putViewState(画面モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.口座情報).respond();
     }
 
@@ -129,8 +129,7 @@ public class ServiceTeikyoShomeishoPanel {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
         handler.申請既存チェック();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
-        handler.putViewState();
+        handler.putViewState(画面モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払決定情報).respond();
     }
 

@@ -284,7 +284,6 @@ public class GoukeiInfoPanelHandler {
      * putViewState
      */
     public void putViewState() {
-        // TODO 　
         ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(

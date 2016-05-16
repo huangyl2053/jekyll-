@@ -17,36 +17,16 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * Mainハンドラークラスです。
  *
  * @reamsid_L DBU-1100-070 yebangqiang
  */
-public class YoshikiNinogoHoseiNinorokuHoseiHandler {
+public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
 
     private final YoshikiNinogoHoseiNinorokuHoseiDiv div;
-    private static final RString 様式種類_保険者_現物分_総数 = new RString("033");
-    private static final RString 様式種類_保険者_現物分_第２号被保険者分 = new RString("034");
-    private static final RString 様式種類_保険者_審査年月_総数 = new RString("035");
-    private static final RString 様式種類_保険者_審査年月_第２号被保険者分 = new RString("036");
-    private static final RString 様式種類_保険者_決定年月_総数 = new RString("037");
-    private static final RString 様式種類_保険者_決定年月_第２号被保険者分 = new RString("038");
-    private static final RString 様式種類_構成市町村_現物分_総数 = new RString("133");
-    private static final RString 様式種類_構成市町村_現物分_第２号被保険者分 = new RString("134");
-    private static final RString 様式種類_構成市町村_審査年月_総数 = new RString("135");
-    private static final RString 様式種類_構成市町村_審査年月_第２号被保険者分 = new RString("136");
-    private static final RString 様式種類_構成市町村_決定年月_総数 = new RString("137");
-    private static final RString 様式種類_構成市町村_決定年月_第２号被保険者分 = new RString("138");
-    private static final RString 様式種類_旧市町村_現物分_総数 = new RString("233");
-    private static final RString 様式種類_旧市町村_現物分_第２号被保険者分 = new RString("234");
-    private static final RString 様式種類_旧市町村_審査年月_総数 = new RString("235");
-    private static final RString 様式種類_旧市町村_審査年月_第２号被保険者分 = new RString("236");
-    private static final RString 様式種類_旧市町村_決定年月_総数 = new RString("237");
-    private static final RString 様式種類_旧市町村_決定年月_第２号被保険者分 = new RString("238");
-    private static final RString 表番号_現物分 = new RString("02");
-    private static final RString 表番号_審査年月 = new RString("04");
-    private static final RString 表番号_決定年月 = new RString("06");
     private static final RString 集計番号_0105 = new RString("0105");
     private static final RString 集計番号_0205 = new RString("0205");
     private static final RString 集計番号_0106 = new RString("0106");
@@ -68,7 +48,6 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
     private static final int 縦番号_15 = 15;
     private static final int 縦番号_16 = 16;
     private static final int 縦番号_17 = 17;
-    private static final int 横番号_1 = 1;
     private static final int 横番号_2 = 2;
     private static final int 横番号_3 = 3;
     private static final int 横番号_4 = 4;
@@ -101,31 +80,11 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
      * @param 引き継ぎデータ 引き継ぎデータ
      */
     public void initialize(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-//        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-//        Map<RString, RString> 表番号Map = new HashMap<>();
-//        表番号Map.put(様式種類_保険者_現物分_総数, 表番号_現物分);
-//        表番号Map.put(様式種類_保険者_現物分_第２号被保険者分, 表番号_現物分);
-//        表番号Map.put(様式種類_保険者_審査年月_総数, 表番号_審査年月);
-//        表番号Map.put(様式種類_保険者_審査年月_第２号被保険者分, 表番号_審査年月);
-//        表番号Map.put(様式種類_保険者_決定年月_総数, 表番号_決定年月);
-//        表番号Map.put(様式種類_保険者_決定年月_第２号被保険者分, 表番号_決定年月);
-//        表番号Map.put(様式種類_構成市町村_現物分_総数, 表番号_現物分);
-//        表番号Map.put(様式種類_構成市町村_現物分_第２号被保険者分, 表番号_現物分);
-//        表番号Map.put(様式種類_構成市町村_審査年月_総数, 表番号_審査年月);
-//        表番号Map.put(様式種類_構成市町村_審査年月_第２号被保険者分, 表番号_審査年月);
-//        表番号Map.put(様式種類_構成市町村_決定年月_総数, 表番号_決定年月);
-//        表番号Map.put(様式種類_構成市町村_決定年月_第２号被保険者分, 表番号_決定年月);
-//        表番号Map.put(様式種類_旧市町村_現物分_総数, 表番号_現物分);
-//        表番号Map.put(様式種類_旧市町村_現物分_第２号被保険者分, 表番号_現物分);
-//        表番号Map.put(様式種類_旧市町村_審査年月_総数, 表番号_審査年月);
-//        表番号Map.put(様式種類_旧市町村_審査年月_第２号被保険者分, 表番号_審査年月);
-//        表番号Map.put(様式種類_旧市町村_決定年月_総数, 表番号_決定年月);
-//        表番号Map.put(様式種類_旧市町村_決定年月_第２号被保険者分, 表番号_決定年月);
         initializeKihoneria(引き継ぎデータ);
-        int 集計番号 = Integer.parseInt(引き継ぎデータ.get行集計番号().toString());
+        int 様式種類コード = Integer.parseInt(引き継ぎデータ.get行様式種類コード().toString());
         JigyoHokokuGeppoDetalSearchParameter param_kensu;
         JigyoHokokuGeppoDetalSearchParameter param_kyufuGaku;
-        if (集計番号 % 2 > 0) {
+        if (様式種類コード % 2 > 0) {
             param_kensu = JigyoHokokuGeppoDetalSearchParameter.
                     createParameterForJigyoHokokuGeppoDetal(
                             new FlexibleYear(引き継ぎデータ.get行報告年()),
@@ -761,7 +720,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt1KyojuhiMitchakuKaigoKeikateki().setValue(集計結果値);
@@ -832,7 +792,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set居住費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set居住費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt1KyojuhiTankiHokenYoboYoshien1().setValue(集計結果値);
@@ -872,7 +833,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set居住費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set居住費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt1KyojuhiTankiRyoyoYoboYoshien1().setValue(集計結果値);
@@ -1103,7 +1065,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2SyokuhiMitchakuKaigoKeikateki().setValue(集計結果値);
@@ -1174,7 +1137,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2SyokuhiTankiHokenYoboYoshien1().setValue(集計結果値);
@@ -1214,7 +1178,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ,
+            Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2SyokuhiTankiRyoyoYoboYoshien1().setValue(集計結果値);
@@ -1405,7 +1370,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_居住費_地域密着型介護老人福祉施設入所者生活介護の集計結果値(
+            JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2KyojuhiMitchakuKaigoKeikateki().setValue(集計結果値);
@@ -1476,7 +1442,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_居住費_短期入所療養介護介護老人保健施設の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_居住費_短期入所療養介護介護老人保健施設の集計結果値(
+            JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2KyojuhiTankiHokenYoboYoshien1().setValue(集計結果値);
@@ -1516,7 +1483,8 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
-    private void set給付費_居住費_短期入所療養介護介護療養型医療施設等の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
+    private void set給付費_居住費_短期入所療養介護介護療養型医療施設等の集計結果値(
+            JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
         switch (更新前データ.get横番号().intValue()) {
             case 横番号_2:
                 div.getPnl2().getPnl1().getTxt2KyojuhiTankiRyoyoYoboYoshien1().setValue(集計結果値);
@@ -1596,4 +1564,37 @@ public class YoshikiNinogoHoseiNinorokuHoseiHandler {
         }
     }
 
+    /**
+     * 引き継ぎデータより、データ削除する。
+     *
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 様式種類 様式種類
+     * @return boolean DB操作結果
+     */
+    public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
+        int row = 0;
+        if (Integer.parseInt(様式種類.toString()) % 2 > 0) {
+            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_0105));
+            row = row + deleteByParameter(引き継ぎデータ, new Code(集計番号_0106));
+        } else {
+            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_0205));
+            row = row + deleteByParameter(引き継ぎデータ, new Code(集計番号_0206));
+        }
+        return 0 <= row;
+    }
+
+    private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
+        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
+        JigyoHokokuGeppoDetalSearchParameter parameter
+                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
+                        new FlexibleYear(引き継ぎデータ.get行報告年()),
+                        引き継ぎデータ.get行報告月(),
+                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
+                        引き継ぎデータ.get行集計対象月(),
+                        引き継ぎデータ.get行統計対象区分(),
+                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
+                        new Code(引き継ぎデータ.get行表番号()),
+                        集計番号);
+        return finder.deleteJigyoHokokuGeppoData(parameter);
+    }
 }

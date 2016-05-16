@@ -12,10 +12,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001.ShinsakaiTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001.ShinsakaiTorokuValidationHandler;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -53,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShinsakaiToroku {
 
     private final RString 出力名 = new RString("審査会登録一覧.csv");
+    private final RString 介護認定審査会登録 = new RString("完了処理・介護認定審査会登録");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
@@ -169,9 +171,7 @@ public class ShinsakaiToroku {
             }
             getHandler(div).要介護認定完了更新();
             前排他キーの解除();
-            // TODO QA1169回答まち、
-//                        div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
-//                    UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
+            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE4010001StateName.完了);
         }
         return ResponseData.of(div).setState(DBE4010001StateName.登録);
@@ -191,7 +191,7 @@ public class ShinsakaiToroku {
         RString 申請時コード = RString.EMPTY;
         RString 優先割付者コード = RString.EMPTY;
         if (!RString.isNullOrEmpty(row.getShinseiKubunShinseiji())) {
-            申請時コード = NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).code();
+            申請時コード = NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード();
         }
         if (!RString.isNullOrEmpty(row.getYusenWaritsukesha())) {
             優先割付者コード = ShinsakaiYusenWaritsukeKubunCode.valueOf(row.getYusenWaritsukesha().toString()).getコード();

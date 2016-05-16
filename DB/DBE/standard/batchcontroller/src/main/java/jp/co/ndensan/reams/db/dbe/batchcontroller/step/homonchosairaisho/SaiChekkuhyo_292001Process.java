@@ -88,7 +88,7 @@ public class SaiChekkuhyo_292001Process extends BatchProcessBase<HomonChosaIrais
     private List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private HomonChosaIraishoProcessParamter processParamter;
-
+    private final Map<RString, RString> 前回連番Map = new HashMap();
     @BatchWriter
     private BatchReportWriter<SaiChekkuhyoReportSource> batchReportWriter;
     private ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter;
@@ -135,9 +135,8 @@ public class SaiChekkuhyo_292001Process extends BatchProcessBase<HomonChosaIrais
 
     private void getcheckEntityList(HomonChosaIraishoRelateEntity entity) {
         ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
-        Map<RString, RString> 前回連番Map = new HashMap();
+
         前回連番Map.put(entity.get前回連番(), entity.get前回連番に対する調査項目());
-        checkEntity.set前回連番Map(前回連番Map);
         checkEntity.set被保険者番号(entity.get被保険者番号());
         checkEntity.set被保険者氏名(entity.get被保険者氏名());
         checkEntity.set前回二次判定日(entity.get二次判定年月日());
@@ -154,7 +153,6 @@ public class SaiChekkuhyo_292001Process extends BatchProcessBase<HomonChosaIrais
     }
 
     private SaiChekkuhyoItem setItem(ChosahyoSaiCheckhyoRelateEntity entity) {
-        Map<RString, RString> 前回連番Map = entity.get前回連番Map();
         return new SaiChekkuhyoItem(
                 entity.get前回一次判定結果(),
                 entity.get被保険者番号(),

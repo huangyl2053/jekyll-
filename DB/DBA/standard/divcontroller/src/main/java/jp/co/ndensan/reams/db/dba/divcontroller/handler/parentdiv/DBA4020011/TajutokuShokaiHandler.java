@@ -59,7 +59,7 @@ public class TajutokuShokaiHandler {
         headItem.setChiku3CodeTitle(business.get地区タイトル3());
         headItem.setChiku3Code(business.get地区コード3() == null ? RString.EMPTY : business.get地区コード3().value());
         headItem.setGyoseikuTitle(business.get行政区タイトル());
-        headItem.setJusho1Code(business.get住所コード() == null ? RString.EMPTY : business.get住所コード().value());
+        headItem.setJusho1Code(business.get住所コード() == null ? RString.EMPTY : business.get住所コード());
         headItem.setGyoseikuCode(business.get行政区コード() == null ? RString.EMPTY : business.get行政区コード().value());
         headItem.setMaeJushoCode(business.get前住所コード() == null ? RString.EMPTY : business.get前住所コード().value());
         headItem.setJusho2(business.get住所2());

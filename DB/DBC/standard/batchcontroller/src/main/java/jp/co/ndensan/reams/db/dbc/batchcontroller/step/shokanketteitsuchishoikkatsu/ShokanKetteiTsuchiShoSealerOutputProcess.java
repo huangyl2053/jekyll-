@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoSealerReportSource;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyuketteitsuchishosealertype.ShokanBaraiShikyuKetteiTsuchishoSealerType1;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyuketteitsuchishosealertype.TensoData;
+import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -63,6 +64,8 @@ public class ShokanKetteiTsuchiShoSealerOutputProcess extends BatchProcessBase<S
         ShokanBaraiShikyuKetteiTsuchishoSealerType1 ichiranhyo = new ShokanBaraiShikyuKetteiTsuchishoSealerType1();
         TensoData data
                 = ichiranhyo.createChoHyoData(帳票データリスト, batchPram, reportSourceWriter);
+        IDaikoPrint daikoPrint = data.get代行プリント送付票();
+        daikoPrint.print();
         List<ShokanKetteiTsuchiShoSealerItem> itemList = new ArrayList<>();
         for (ShokanKetteiTsuchiShoSealer sealer : data.get帳票ソースデータ()) {
             itemList.add(setShokanKetteiTsuchiShoSealerReport(sealer));

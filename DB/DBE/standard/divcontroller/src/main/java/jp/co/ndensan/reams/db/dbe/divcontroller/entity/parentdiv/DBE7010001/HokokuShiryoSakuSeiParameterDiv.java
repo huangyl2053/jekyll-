@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * HokokuShiryoSakuSeiParameter のクラスファイル 
@@ -155,13 +156,13 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtTaishoNendo() {
-        return this.getChushutsuJoken().getTxtTaishoNendo();
+    public RadioButton getRadKubun() {
+        return this.getChushutsuJoken().getRadKubun();
     }
 
     @JsonIgnore
-    public void  setTxtTaishoNendo(TextBoxDate txtTaishoNendo) {
-        this.getChushutsuJoken().setTxtTaishoNendo(txtTaishoNendo);
+    public void  setRadKubun(RadioButton radKubun) {
+        this.getChushutsuJoken().setRadKubun(radKubun);
     }
 
     @JsonIgnore
@@ -175,23 +176,13 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkModifyTaishoTsuki() {
-        return this.getChushutsuJoken().getChkModifyTaishoTsuki();
+    public TextBoxFlexibleYearMonth getTxtNengetsu() {
+        return this.getChushutsuJoken().getTxtNengetsu();
     }
 
     @JsonIgnore
-    public void  setChkModifyTaishoTsuki(CheckBoxList chkModifyTaishoTsuki) {
-        this.getChushutsuJoken().setChkModifyTaishoTsuki(chkModifyTaishoTsuki);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlTsuki() {
-        return this.getChushutsuJoken().getDdlTsuki();
-    }
-
-    @JsonIgnore
-    public void  setDdlTsuki(DropDownList ddlTsuki) {
-        this.getChushutsuJoken().setDdlTsuki(ddlTsuki);
+    public void  setTxtNengetsu(TextBoxFlexibleYearMonth txtNengetsu) {
+        this.getChushutsuJoken().setTxtNengetsu(txtNengetsu);
     }
 
     @JsonIgnore
@@ -202,16 +193,6 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
     @JsonIgnore
     public void  setTxtKijyunYMD(TextBoxDate txtKijyunYMD) {
         this.getChushutsuJoken().setTxtKijyunYMD(txtKijyunYMD);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkModifyTaishoGeppi() {
-        return this.getChushutsuJoken().getChkModifyTaishoGeppi();
-    }
-
-    @JsonIgnore
-    public void  setChkModifyTaishoGeppi(CheckBoxList chkModifyTaishoGeppi) {
-        this.getChushutsuJoken().setChkModifyTaishoGeppi(chkModifyTaishoGeppi);
     }
 
     @JsonIgnore

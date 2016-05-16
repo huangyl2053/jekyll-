@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiy
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
@@ -73,26 +72,10 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
     private static final RString 取り消し線を編集する = new RString("1");
     private static final RString 増減の理由タイトル_支給 = new RString("増減の理由");
     private static final RString 増減の理由タイトル_不支給 = new RString("不支給の理由");
-
-    private final MapperProvider mapper;
-
-    /**
-     * コンストラクタです。
-     *
-     * @param mapper マッパーインタフェース
-     */
-    ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch() {
-        this.mapper = InstanceProvider.create(MapperProvider.class);
-    }
-
-    /**
-     * テスト用コンストラクタです。
-     *
-     * @param mapper MapperProvider
-     */
-    ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch(MapperProvider mapper) {
-        this.mapper = mapper;
-    }
+    private static final RString フォント小 = new RString("1");
+    private static final RString フォント大 = new RString("2");
+    private static final RString フォント混在_上大下小 = new RString("3");
+    private static final RString フォント混在_上小下大 = new RString("4");
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch}のインスタンスを返します。
@@ -122,29 +105,17 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
                 batchPram.getHakkoYMD(), NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
         RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100002.getReportId(), batchPram.getHakkoYMD());
-
         RString 通知文１ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, ONE, batchPram.getHakkoYMD());
-        RString 通知文２ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, TWO, batchPram.getHakkoYMD());
-        RString 通知文３大 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_2, TWO, batchPram.getHakkoYMD());
-        RString 通知文4_上小 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, TWO, batchPram.getHakkoYMD());
-        RString 通知文5_下大 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, THREE, batchPram.getHakkoYMD());
-        RString 通知文6_上大 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, TWO, batchPram.getHakkoYMD());
-        RString 通知文7_下小 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, THREE, batchPram.getHakkoYMD());
+
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
         宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
         宛先builder.set基準日(batchPram.getHakkoYMD());
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-        IAtesaki 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
+        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
         SofubutsuAtesakiSource atesakiSource
-                = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先s).build()).buildSource();
+                = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先).build()).buildSource();
         Collections.sort(businessList, new DateComparator());
         RString key = RString.EMPTY;
         List<RString> typeList = new ArrayList<>();
@@ -192,9 +163,11 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
             item.setHihokenshaNo10(temp_被保険者番号.substring(NINE));
             item.setUketsukeYMD(shoShiharai.get受付年月日().wareki().toDateString());
             item.setKetteiYMD(shoShiharai.get決定年月日().wareki().toDateString());
-            item.setHonninShiharaiGaku(new RString(shoShiharai.get本人支払額().toString()));
+            item.setHonninShiharaiGaku(shoShiharai.get本人支払額() == null ? RString.EMPTY : new RString(shoShiharai.get本人支払額().toString()));
             item.setTaishoYM(shoShiharai.get提供年月().wareki().toDateString());
-            item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).getコード());
+            if (!RString.isNullOrEmpty(shoShiharai.get支払方法区分コード())) {
+                item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).get名称());
+            }
             item.setShikyuGaku(new RString(支給金額.toString()));
             if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharai.get支払方法区分コード())) {
                 item.setRiyuTitle(増減の理由タイトル_不支給);
@@ -206,13 +179,7 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
 
             setTitle(item, shoShiharai);
             item.setTsuchibun1(通知文１);
-            item.setTsuchibun２(通知文２);
-            item.setTsuchibunLarge(通知文３大);
-            item.setTsuchibunMix1(通知文4_上小);
-            item.setTsuchibunMix2(通知文5_下大);
-            item.setTsuchibunMixtwo1(通知文6_上大);
-            item.setTsuchibunMixtwo2(通知文7_下小);
-
+            item = set通知文(item, batchPram);
             setNinshosha(item, ninshoshaSource);
             setSofubutsuAtesaki(item, atesakiSource);
             retList.add(item);
@@ -322,6 +289,30 @@ public class ShokanBaraiShikyuFushikyuKetteiTsuchishoBatch {
         rsb.append(shoShiharai.get提供年月().toDateString());
         rsb.append(shoShiharai.get整理番号());
         return rsb.toRString();
+    }
+
+    private ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem set通知文(
+            ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item, ShokanKetteiTsuchiShoSealerBatchParameter batchPram) {
+
+        RString 定型文文字サイズ = ReportUtil.get定型文文字サイズ(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId());
+        if (フォント小.equals(定型文文字サイズ)) {
+            item.setTsuchibun２(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, TWO, batchPram.getHakkoYMD()));
+        } else if (フォント大.equals(定型文文字サイズ)) {
+            item.setTsuchibunLarge(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_2, TWO, batchPram.getHakkoYMD()));
+        } else if (フォント混在_上小下大.equals(定型文文字サイズ)) {
+            item.setTsuchibunMix1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, TWO, batchPram.getHakkoYMD()));
+            item.setTsuchibunMix2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, THREE, batchPram.getHakkoYMD()));
+        } else if (フォント混在_上大下小.equals(定型文文字サイズ)) {
+            item.setTsuchibunMixtwo1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, TWO, batchPram.getHakkoYMD()));
+            item.setTsuchibunMixtwo2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, THREE, batchPram.getHakkoYMD()));
+        }
+        return item;
     }
 
     private static class DateComparator implements Comparator<ShokanKetteiTsuchiShoShiharai>, Serializable {
