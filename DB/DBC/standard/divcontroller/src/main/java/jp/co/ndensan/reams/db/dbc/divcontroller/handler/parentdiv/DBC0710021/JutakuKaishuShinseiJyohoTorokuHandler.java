@@ -233,6 +233,14 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             修正モードなど画面初期化(住宅改修費支給申請, 被保険者番号, サービス提供年月, 整理番号, 画面モード,
                     住宅改修費事前申請, 識別コード, 償還);
         }
+        List<dgGaisyuList_Row> gridList = div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList()
+                .get住宅改修内容一覧();
+        JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();
+        住宅改修データ.set住宅改修データ(get住宅改修内容一覧データ(gridList));
+        List<RString> 画面限度額リセット = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiResetInfo()
+                .getChkResetInfo().getSelectedKeys();
+        住宅改修データ.set限度額リセット(画面限度額リセット);
+        ViewStateHolder.put(ViewStateKeys.住宅改修データ_画面メモリ, 住宅改修データ);
     }
 
     private void 修正モードなど画面初期化(JutakukaishuSikyuShinseiManager 住宅改修費支給申請,
