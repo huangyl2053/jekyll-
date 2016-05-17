@@ -98,8 +98,7 @@ public class TokubetsuChoshuKaishiProcess extends SimpleBatchProcessBase {
     private void 作成したdataを帳票に引き渡す(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             NonyuTsuchIchiranBatchParameter バッチパラメータ, RString 帳票作成日時) {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB200011.getReportId().value())
-                .create();
+                ReportIdDBB.DBB200011.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();

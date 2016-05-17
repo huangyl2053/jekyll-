@@ -58,9 +58,9 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
         for (int i = 0; i < 編集後本算定通知書共通情報.size(); i++) {
-            ITokubetsuChoshuKaishiEditor headerEditor = new TokubetsuChoshuKaishiEditor(
+            ITokubetsuChoshuKaishiEditor tokubetsuchoshukaishieditor = new TokubetsuChoshuKaishiEditor(
                     編集後本算定通知書共通情報.get(i), バッチパラメータ, 出力項目リスト, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名, i);
-            TokubetsuChoshuKaishiBuilder builder = new TokubetsuChoshuKaishiBuilder(headerEditor);
+            TokubetsuChoshuKaishiBuilder builder = new TokubetsuChoshuKaishiBuilder(tokubetsuchoshukaishieditor);
             reportSourceWriter.writeLine(builder);
         }
     }
