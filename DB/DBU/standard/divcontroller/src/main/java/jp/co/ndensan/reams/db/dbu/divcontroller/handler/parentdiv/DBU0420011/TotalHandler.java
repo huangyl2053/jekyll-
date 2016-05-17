@@ -434,8 +434,12 @@ public class TotalHandler {
         param.set備考(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmBiko().getValue());
         param.set有効期間の終了年月日(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getToValue() == null
+                ? null : div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getToValue().toDateString());
         param.set有効期間の開始年月日(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getFromValue() == null
+                ? null : div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getFromValue().toDateString());
         param.set申請日(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtShinsebi().getValue());
