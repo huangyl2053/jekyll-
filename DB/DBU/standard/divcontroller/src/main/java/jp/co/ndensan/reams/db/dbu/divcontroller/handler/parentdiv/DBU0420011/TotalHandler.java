@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4.HihokenshashoB
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.shikakushasho.ShikakushashoBodyItem;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashochohyo.HihokenshashoChoBusiness;
+import jp.co.ndensan.reams.db.dbu.business.core.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShienJigyoshaBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShikakushashoHakkoBusiness;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.db.dbu.service.core.kaigohokenshikakushasho.KaigoHoke
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshashikakuhakko.HihokenshaShikakuHakko.dgShuruiShikyuGendoKijunGaku_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -422,27 +424,35 @@ public class TotalHandler {
      */
     public List<JukyuShikakuShomeishoBodyItem> jukyuShikakuShomeisho() {
         List<JukyuShikakuShomeishoBodyItem> items = new ArrayList<>();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtKofubi().getValue();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtIdoYotebi().getValue();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtYokaigoJotaiKubun().getValue();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtShinsebi().getValue();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getFromValue();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getToValue();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getCblInji().isAllSelected();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmShinsakaiYikan().getValue();
-        div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
-                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmBiko().getValue();
-        // TODO QA1050 パラメタ不明
+        JukyuShikakuShomeishoKaiKo param = new JukyuShikakuShomeishoKaiKo();
+        param.set交付日(RString.isNullOrEmpty(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtKofubi().getValue()) ? null
+                : new RDate(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko().getJukyuSikakuShomeishoHakkoDiv()
+                        .getPnlJukyushaJoho1().getTxtKofubi().getValue().toString()));
+        param.set住所を印字(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getCblInji().isAllSelected());
+        param.set備考(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmBiko().getValue());
+        param.set有効期間の終了年月日(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getToValue().toDateString());
+        param.set有効期間の開始年月日(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtdrYukokikan().getFromValue().toDateString());
+        param.set申請日(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtShinsebi().getValue());
+        param.set異動予定日(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtIdoYotebi().getValue());
+        param.set要介護状態区分(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtYokaigoJotaiKubun().getValue());
+        param.set認定審査会の意見等(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho2().getTbmShinsakaiYikan().getValue());
+        param.set被保険者番号(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号());
+        param.set識別コード(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+        param.set負担割合(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtfutanWariaiKubun().getValue());
+        param.set負担割該当(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
+                .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtfutanWariai().getValue());
         JukyuShikakuShomeishoFinder finder = new JukyuShikakuShomeishoFinder();
-        JukyuShikakuShomeishoData business = finder.setJukyuShikakuShomeisho(null);
+        JukyuShikakuShomeishoData business = finder.setJukyuShikakuShomeisho(param);
         JukyuShikakuShomeishoBodyItem item = new JukyuShikakuShomeishoBodyItem(business.get保険者番号(), business.get被保険者フリガナ().value(),
                 business.get被保険者氏名().value(), business.get年号_明治(), business.get年号_大正(),
                 business.get年号_昭和(), business.get被保険者生年月日(), business.get被保険者性別(), business.get被保険者住所_転出前(),
