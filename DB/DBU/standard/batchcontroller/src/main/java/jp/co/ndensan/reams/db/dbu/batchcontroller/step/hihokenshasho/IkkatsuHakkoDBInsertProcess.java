@@ -83,9 +83,12 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
         dbT7037Entity.setShichosonCode(entity.getShichosonCode());
         dbT7037Entity.setShikibetsuCode(entity.getShikibetsuCode());
         dbT7037Entity.setKofuYMD(processPrm.getKofuYMD());
+        dbT7037Entity.setYukoKigenYMD(null);
         dbT7037Entity.setKofuJiyu(kofuJiyu);
         dbT7037Entity.setKofuRiyu(kofuRiyu);
-        dbT7037Entity.setKaishuJiyu(RString.EMPTY);
+        dbT7037Entity.setKaishuJiyu(null);
+        dbT7037Entity.setKaishuRiyu(null);
+        dbT7037Entity.setKaishuJiyu(null);
         dbT7037Entity.setTanpyoHakkoUmuFlag(false);
         dbT7037Entity.setHakkoShoriTimestamp(YMDHMS.now());
         dbT7037Entity.setShinYoshikiSumiKubunCode(SHINYOSHIKISUMIKUBUN_CODE);
