@@ -311,7 +311,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().setDisabled(true);
             if (給付実績緋連動_受託あり.equals(償還)) {
                 div.getJutakuKaishuShinseiContents().getChkKokubo().setDisabled(true);
-//                set画面照会モードに変更();
             }
         }
         if (画面モード_取消.equals(画面モード)) {
@@ -374,7 +373,6 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             }
         }
 
-        証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
         ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
         set住宅改修内容更新前データ();
     }
@@ -908,17 +906,15 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
         YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(被保険者番号, 提供着工年月);
-        if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) < 0) {
+        if (要介護認定情報 != null && 画面提供着工年月.toDateString().compareTo(制度改正施行年月日) < 0) {
             証明書表示設定平成18年04月以前(要介護認定情報);
-        } else if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) >= 0) {
+        } else if (要介護認定情報 != null && 画面提供着工年月.toDateString().compareTo(制度改正施行年月日) >= 0) {
             証明書表示設定(画面モード, 要介護認定情報, 提供着工年月);
         }
     }
 
     private void 証明書表示設定平成18年04月以前(YokaigoNinteiJyoho 要介護認定情報) {
-        if (要介護認定情報 == null) {
-            throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
-        } else if (要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
+        if (要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要介護1.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要介護2.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要介護3.equals(要介護認定情報.get要介護認定状態区分コード())
@@ -932,9 +928,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     }
 
     private void 証明書表示設定(RString 画面モード, YokaigoNinteiJyoho 要介護認定情報, FlexibleYearMonth 提供着工年月) {
-        if (要介護認定情報 == null) {
-            throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
-        } else if (要支援1.equals(要介護認定情報.get要介護認定状態区分コード())
+        if (要支援1.equals(要介護認定情報.get要介護認定状態区分コード())
                 || 要支援2.equals(要介護認定情報.get要介護認定状態区分コード())) {
             set証明書値(証明書2);
         } else if ((要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
