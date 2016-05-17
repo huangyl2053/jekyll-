@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 出力帳票entityのクラスです。
+ *
+ * @reamsid_L DBB-0730-010 lijunjun
  */
 public class HonsanteiFukaEntity {
 
