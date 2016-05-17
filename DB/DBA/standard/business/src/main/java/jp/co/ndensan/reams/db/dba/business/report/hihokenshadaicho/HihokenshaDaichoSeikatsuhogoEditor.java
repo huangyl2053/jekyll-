@@ -45,10 +45,10 @@ public class HihokenshaDaichoSeikatsuhogoEditor implements IHihokenshaDaichoEdit
 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         source.listSeikatsuhogo_1 = entity.get生活保護No().get(index);
-        source.listSeikatsuhogo_2 = HihokenshaDaichoEditor.dataFomart(entity.get受給開始日(), index);
-        source.listSeikatsuhogo_3 = HihokenshaDaichoEditor.dataFomart(entity.get受給廃止日(), index);
-        source.listSeikatsuhogo_4 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止開始日(), index);
-        source.listSeikatsuhogo_5 = HihokenshaDaichoEditor.dataFomart(entity.get全額停止終了日(), index);
+        source.listSeikatsuhogo_2 = HihokenshaDaichoEditor.getIndexValue(entity.get受給開始日(), index);
+        source.listSeikatsuhogo_3 = HihokenshaDaichoEditor.getIndexValue(entity.get受給廃止日(), index);
+        source.listSeikatsuhogo_4 = HihokenshaDaichoEditor.getIndexValue(entity.get全額停止開始日(), index);
+        source.listSeikatsuhogo_5 = HihokenshaDaichoEditor.getIndexValue(entity.get全額停止終了日(), index);
         source.listSeikatsuhogo_6 = HihokenshaDaichoEditor.getIndexValue(entity.get扶助種類(), index);
         return source;
     }

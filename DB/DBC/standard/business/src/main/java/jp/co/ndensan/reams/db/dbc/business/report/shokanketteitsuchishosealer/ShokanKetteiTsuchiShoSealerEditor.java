@@ -49,8 +49,8 @@ public class ShokanKetteiTsuchiShoSealerEditor implements IShokanKetteiTsuchiSho
         if (item.getShiharaiGaku() == null) {
             shiharaiGaku = RString.EMPTY;
         }
-        if (item.getShiharaiGaku().length() < 結束_位置10) {
-            shiharaiGaku = item.getShiharaiGaku().padLeft(RString.HALF_SPACE, 結束_位置10);
+        if (shiharaiGaku.length() < 結束_位置10) {
+            shiharaiGaku = shiharaiGaku.padLeft(RString.HALF_SPACE, 結束_位置10);
         }
         source.shiharaiGaku = shiharaiGaku;
         source.shiharaiYoteiYMD = item.getShiharaiYoteiYMD();

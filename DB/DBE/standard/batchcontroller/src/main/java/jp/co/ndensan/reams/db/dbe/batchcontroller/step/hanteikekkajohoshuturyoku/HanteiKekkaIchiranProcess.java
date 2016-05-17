@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekkaIchiranEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -19,8 +23,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 要介護認定判定結果一覧表のデータを作成します。
@@ -39,6 +45,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
     private static final RString 一次判定結果_認知症加算_3 = new RString("3");
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private RDateTime システム時刻;
+    private RString 出力対象;
     private int index;
 
     // TODO 帳票について、未作成
@@ -56,8 +63,15 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         List<RString> 処理状態区分 = new ArrayList<>();
         処理状態区分.add(ShoriJotaiKubun.通常.getコード());
         処理状態区分.add(ShoriJotaiKubun.延期.getコード());
-        // TODO 内部QA:1163
-//        processParameter.setShoKisaiHokenshaNo("");
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
+        if (DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
+            出力対象 = BusinessConfig.get(ConfigNameDBE.判定結果情報出力_広域連合名称, SubGyomuCode.DBE認定支援);
+        }
+        if (DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード)) {
+            processParameter.setShoKisaiHokenshaNo(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
+            出力対象 = shichosonSecurityJoho.get市町村情報().get市町村名称();
+        }
         processParameter.setShoriJotaiKubun(処理状態区分);
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toHanteiKekkaJohoShuturyokuMybatisParameter());
     }
@@ -71,7 +85,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
     @Override
     protected void process(HanteiKekkaIchiranEntity entity) {
         entity.setTitle(REPORTNAME);
-//        entity.set出力対象("");
+        entity.set出力対象(出力対象);
         entity.setPrintTimeStamp(システム時刻);
         entity.setNo(index);
         entity.set認定申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時()).get名称());

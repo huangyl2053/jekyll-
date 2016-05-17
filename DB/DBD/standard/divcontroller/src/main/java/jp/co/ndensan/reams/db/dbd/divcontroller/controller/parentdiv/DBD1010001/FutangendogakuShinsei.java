@@ -144,10 +144,14 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
-        if (!ViewStateHolder.get(ViewStateKeys.isReRequest, Boolean.class) && !getHandler(div).onSelectByDeleteButton()) {
+        ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+        FutanGendogakuNintei futanGendogakuNintei = 申請一覧情報ArrayList.get(div.getDgShinseiList().getClickedRowId()).getFutanGendogakuNintei();
+        if (申請メニューID.equals(ResponseHolder.getMenuID()) && !futanGendogakuNintei.get決定区分().isEmpty()
+                && !ViewStateHolder.get(ViewStateKeys.isReRequest, Boolean.class)) {
             ViewStateHolder.put(ViewStateKeys.isReRequest, Boolean.TRUE);
             return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
         }
+        getHandler(div).onSelectByDeleteButton();
         return ResponseData.of(div).respond();
     }
 

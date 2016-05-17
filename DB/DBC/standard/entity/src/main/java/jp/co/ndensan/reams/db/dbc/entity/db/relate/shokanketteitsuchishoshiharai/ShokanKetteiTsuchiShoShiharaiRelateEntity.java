@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchishoshiharai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -39,7 +40,7 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private Decimal shiharaiKingakuUchiwakeRiyoshabun;
     private Decimal shiharaiKingaku;
     private RString ryakusho;
-    private Decimal kingaku;
+    private int kingaku;
     private RString tuika;
     private RString serviceNameRyaku;
     private RString shikyuHushikyuKetteiKubun;
@@ -55,6 +56,6 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private FlexibleDate shiharaiShuryoYMD;
     private RString shiharaiKaishiTime;
     private RString shiharaiShuryoTime;
-    private RString shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString serviceShuruiCode;
 }

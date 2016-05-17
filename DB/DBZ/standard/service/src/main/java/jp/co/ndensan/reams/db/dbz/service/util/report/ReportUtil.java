@@ -239,4 +239,21 @@ public final class ReportUtil {
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
         return textHenkanRule.editText(info.get文章());
     }
+
+    /**
+     * 定型文文字サイズを取得します。
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportBunruiId 帳票分類ID
+     * @return 定型文文字サイズ
+     */
+    public static RString get定型文文字サイズ(SubGyomuCode subGyomuCode, ReportId reportBunruiId) {
+
+        ChohyoSeigyoKyotsuManager manager = new ChohyoSeigyoKyotsuManager();
+        ChohyoSeigyoKyotsu kyotsu = manager.get帳票制御共通(subGyomuCode, reportBunruiId);
+        if (kyotsu != null) {
+            kyotsu.get定型文文字サイズ();
+        }
+        return RString.EMPTY;
+    }
 }

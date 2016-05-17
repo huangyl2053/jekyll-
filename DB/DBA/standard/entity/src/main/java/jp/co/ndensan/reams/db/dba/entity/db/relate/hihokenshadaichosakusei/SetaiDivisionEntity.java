@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichosakusei;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,7 +24,7 @@ public class SetaiDivisionEntity {
     private List<ShikibetsuCode> 世帯左識別コード;
     private List<RString> 氏名;
     private List<RString> 世帯性別;
-    private List<FlexibleDate> 世帯生年月日;
+    private List<RString> 世帯生年月日;
     private List<RString> 世帯続柄;
     private List<HihokenshaNo> 世帯被保険者番号;
 }

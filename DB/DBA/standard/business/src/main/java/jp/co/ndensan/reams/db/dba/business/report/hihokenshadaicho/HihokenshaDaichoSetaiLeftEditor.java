@@ -48,7 +48,8 @@ public class HihokenshaDaichoSetaiLeftEditor implements IHihokenshaDaichoEditor 
     private HihokenshaDaichoReportSource editBody(HihokenshaDaichoReportSource source) {
         SetaiLeftEntity 世帯左情報 = joho.get世帯左情報();
         source.listSetaiLeft_1 = HihokenshaDaichoEditor.getIndexValue(世帯左情報.get世帯左No(), index);
-        source.listSetaiLeft_2 = 世帯左情報.get世帯左識別コード().isEmpty() || 世帯左情報.get世帯左識別コード().get(index) == null
+        source.listSetaiLeft_2 = 世帯左情報.get世帯左識別コード() == null || 世帯左情報.get世帯左識別コード().isEmpty()
+                || 世帯左情報.get世帯左識別コード().get(index) == null
                 ? RString.EMPTY : 世帯左情報.get世帯左識別コード().get(index).value();
         return source;
     }

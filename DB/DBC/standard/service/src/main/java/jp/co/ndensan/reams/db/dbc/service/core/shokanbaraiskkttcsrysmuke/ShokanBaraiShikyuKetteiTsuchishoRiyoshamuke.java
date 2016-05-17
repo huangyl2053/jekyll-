@@ -76,6 +76,10 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     private static final RString 取り消し線を編集する = new RString("1");
     private static final RString 増減の理由タイトル_支給 = new RString("増減の理由");
     private static final RString 増減の理由タイトル_不支給 = new RString("不支給の理由");
+    private static final RString フォント小 = new RString("1");
+    private static final RString フォント大 = new RString("2");
+    private static final RString フォント混在_上大下小 = new RString("3");
+    private static final RString フォント混在_上小下大 = new RString("4");
 
     private final MapperProvider mapper;
 
@@ -195,9 +199,11 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item.setHihokenshaNo10(temp_被保険者番号.substring(NINE));
             item.setUketsukeYMD(shoShiharai.get受付年月日().wareki().toDateString());
             item.setKetteiYMD(shoShiharai.get決定年月日().wareki().toDateString());
-            item.setHonninShiharaiGaku(new RString(shoShiharai.get本人支払額().toString()));
+            item.setHonninShiharaiGaku(shoShiharai.get本人支払額() == null ? RString.EMPTY : new RString(shoShiharai.get本人支払額().toString()));
             item.setTaishoYM(shoShiharai.get提供年月().wareki().toDateString());
-            item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).getコード());
+            if (!RString.isNullOrEmpty(shoShiharai.get支払方法区分コード())) {
+                item.setKekka(ShikyuFushikyuKubun.toValue(shoShiharai.get支払方法区分コード()).get名称());
+            }
             item.setShikyuGaku(new RString(支給金額.toString()));
             if (ShikyuFushikyuKubun.不支給.getコード().equals(shoShiharai.get支払方法区分コード())) {
                 item.setRiyuTitle(増減の理由タイトル_不支給);
@@ -206,16 +212,9 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             }
             item.setSeirino(shoShiharai.get整理番号());
             item.setTsuchino(shoShiharai.get決定通知No());
-
             setTitle(item, shoShiharai);
             item.setTsuchibun1(通知文１);
-            item.setTsuchibun2(通知文２);
-            item.setTsuchibunLarge3(通知文３大);
-            item.setTsuchibunMix1(通知文4_上小);
-            item.setTsuchibunMix2(通知文5_下大);
-            item.setTsuchibunMixtwo1(通知文6_上大);
-            item.setTsuchibunMixtwo2(通知文7_下小);
-
+            item = set通知文(item, batchPram);
             setJigyoshoJoho(item, shoShiharai);
             setNinshosha(item, ninshoshaSource);
             setSofubutsuAtesaki(item, atesakiSource);
@@ -339,6 +338,29 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         rsb.append(shoShiharai.get提供年月().toDateString());
         rsb.append(shoShiharai.get整理番号());
         return rsb.toRString();
+    }
+
+    private ShokanKetteiTsuchiShoHihokenshabunItem set通知文(
+            ShokanKetteiTsuchiShoHihokenshabunItem item, ShokanKetteiTsuchiShoSealerBatchParameter batchPram) {
+        RString 定型文文字サイズ = ReportUtil.get定型文文字サイズ(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId());
+        if (フォント小.equals(定型文文字サイズ)) {
+            item.setTsuchibun2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, TWO, batchPram.getHakkoYMD()));
+        } else if (フォント大.equals(定型文文字サイズ)) {
+            item.setTsuchibunLarge3(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_2, TWO, batchPram.getHakkoYMD()));
+        } else if (フォント混在_上小下大.equals(定型文文字サイズ)) {
+            item.setTsuchibunMix1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, TWO, batchPram.getHakkoYMD()));
+            item.setTsuchibunMix2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, THREE, batchPram.getHakkoYMD()));
+        } else if (フォント混在_上大下小.equals(定型文文字サイズ)) {
+            item.setTsuchibunMixtwo1(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, TWO, batchPram.getHakkoYMD()));
+            item.setTsuchibunMixtwo2(ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, THREE, batchPram.getHakkoYMD()));
+        }
+        return item;
     }
 
     private static class DateComparator implements Comparator<ShokanKetteiTsuchiShoShiharai>, Serializable {

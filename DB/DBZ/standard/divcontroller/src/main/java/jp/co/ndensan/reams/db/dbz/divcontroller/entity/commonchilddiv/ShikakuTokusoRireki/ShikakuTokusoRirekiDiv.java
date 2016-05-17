@@ -418,8 +418,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 row.setJutokuKubun(RString.EMPTY);
             }
             row.setShozaiHokensha(shikakuTokuso.get市町村名称());
+            row.setShozaiHokenshaCode(shikakuTokuso.get市町村コード().value());
             row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
+            row.setSochimotoHokenshaCode(shikakuTokuso.get広住特措置元市町村コード().value());
             row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
+            row.setKyuHokenshaCode(shikakuTokuso.get旧市町村コード().value());
             row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
             row.setHihokenshaNo(shikakuTokuso.get被保険者番号().getColumnValue());
             row.setDaNo(shikakuTokuso.get枝番());

@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShienJigyoshaBusiness;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.ShikakushashoHakkoBusiness;
@@ -18,12 +19,13 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.Hihok
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.HokenshaBangoMeishoInDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -41,13 +43,13 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -65,15 +67,10 @@ public class KaigoHokenShikakushasho {
     private static final int 画面のデータ件数 = 6;
     private static final RString 単位種類 = new RString("1月当たり");
     private static final RString 固定文字_単位 = new RString("単位");
-    private static final RString 適用切れ非表示 = new RString("0");
-    private static final RString 適用切れ表示 = new RString("1");
-    private static final RString 居宅支援事業者履歴_0 = new RString("0");
-    private static final RString 居宅支援事業者履歴_2 = new RString("2");
-    private static final RString 居宅支援事業者履歴_3 = new RString("3");
-    private static final ReportId 帳票分類ID = new ReportId("DBA100003_Shikakushasho");
     private static final RString 帳票独自 = new RString("1");
     private static final RString 市町村共通 = new RString("0");
     private static final RString 表示する = new RString("1");
+    private static final RString 表示しない = new RString("0");
     private static final RString 編集方法_1 = new RString("1");
     private static final RString 編集方法_2 = new RString("2");
     private static final RString 編集方法_3 = new RString("3");
@@ -82,6 +79,11 @@ public class KaigoHokenShikakushasho {
     private static final RString 右括弧 = new RString("）");
     private static final RString 管内区分 = new RString("1");
     private static final RString 管外区分 = new RString("2");
+    private static final RString 項目名_表示有無 = new RString("居宅支援事業者適用切れ_表示有無");
+    private static final RString 項目名_表示方法 = new RString("居宅支援事業者履歴_表示方法");
+    private static final RString 表示方法 = new RString("0");
+    private static final RString 表示方法_星 = new RString("2");
+    private static final RString 表示方法_抹消線 = new RString("3");
     private static final RString 年号_明治 = new RString("明治");
     private static final RString 年号_大正 = new RString("大正");
     private static final RString 年号_昭和 = new RString("昭和");
@@ -92,7 +94,8 @@ public class KaigoHokenShikakushasho {
     private static final int SIZE_3 = 3;
     private static final int INDEX_2 = 2;
     private final MapperProvider mapperProvider;
-    private final DbT7065ChohyoSeigyoKyotsuDac dac;
+    private final DbT7065ChohyoSeigyoKyotsuDac dbT7065dac;
+    private final DbT7067ChohyoSeigyoHanyoDac dbT7067dac;
     private DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通Entity;
 
     /**
@@ -100,7 +103,8 @@ public class KaigoHokenShikakushasho {
      */
     public KaigoHokenShikakushasho() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
+        this.dbT7065dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
+        this.dbT7067dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
     }
 
     /**
@@ -117,9 +121,13 @@ public class KaigoHokenShikakushasho {
      *
      * @param provider
      */
-    KaigoHokenShikakushasho(MapperProvider provider, DbT7065ChohyoSeigyoKyotsuDac dac) {
+    KaigoHokenShikakushasho(
+            MapperProvider provider,
+            DbT7065ChohyoSeigyoKyotsuDac dbT7065dac,
+            DbT7067ChohyoSeigyoHanyoDac dbT7067dac) {
         this.mapperProvider = provider;
-        this.dac = dac;
+        this.dbT7065dac = dbT7065dac;
+        this.dbT7067dac = dbT7067dac;
     }
 
     /**
@@ -132,7 +140,7 @@ public class KaigoHokenShikakushasho {
         KaigoHokenShikakushashoDataBusiness dataEntity = new KaigoHokenShikakushashoDataBusiness();
         dataEntity.setYukoKigen(business.get有効期限());
         dataEntity.setHihokenshaNo(business.get被保番号());
-        帳票制御共通Entity = dac.selectByKey(SubGyomuCode.DBA介護資格, 帳票分類ID);
+        帳票制御共通Entity = dbT7065dac.selectByKey(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100003.getReportId());
         HihokenshaDateEntity hihokenshaDateEntity = getHihokenshajouhou(business.get識別コード());
         dataEntity.setJusho(hihokenshaDateEntity.getJusho());
         dataEntity.setHihokenshaNameKana(hihokenshaDateEntity.getHihokenshaNameKana());
@@ -405,17 +413,21 @@ public class KaigoHokenShikakushasho {
 
     private ShienJigyoshaDataEntity set支援事業者情報(ShikakushashoHakkoBusiness business,
             ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
-        // TODO QA:1088 Redmine：  (支援事業者の編集方法)
         RString 最新適用終了日 = business.get支援事業者の情報().isEmpty()
                 ? RString.EMPTY : business.get支援事業者の情報().get(0).getTekiyoShuryoYMD();
         RString 最新適用終了日のデータ = null;
-        if (適用切れ非表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))) {
+        DbT7067ChohyoSeigyoHanyoEntity entity = dbT7067dac.selectByKey(
+                SubGyomuCode.DBA介護資格,
+                ReportIdDBA.DBA100003.getReportId(),
+                new FlexibleYear("0000"),
+                項目名_表示有無);
+        if (表示しない.equals(entity.getKomokuValue())) {
             if (!RString.isNullOrEmpty(最新適用終了日) && 最新適用終了日.compareTo(business.get交付日()) == -1) {
                 最新適用終了日のデータ = RString.EMPTY;
             } else {
                 最新適用終了日のデータ = 最新適用終了日;
             }
-        } else if (適用切れ表示.equals(BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者, SubGyomuCode.DBD介護受給))) {
+        } else if (表示する.equals(entity.getKomokuValue())) {
             最新適用終了日のデータ = 最新適用終了日;
         }
         if (!RString.isNullOrEmpty(最新適用終了日のデータ)) {
@@ -427,18 +439,20 @@ public class KaigoHokenShikakushasho {
     }
 
     private void setNameAndYMDBy居宅支援事業者履歴(List<ShienJigyoshaBusiness> list, ShienJigyoshaDataEntity shienJigyoshaDataEntity) {
-        if (居宅支援事業者履歴_0.equals(
-                BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者履歴, SubGyomuCode.DBD介護受給))) {
+        DbT7067ChohyoSeigyoHanyoEntity entity = dbT7067dac.selectByKey(
+                SubGyomuCode.DBA介護資格,
+                ReportIdDBA.DBA100003.getReportId(),
+                new FlexibleYear("0000"),
+                項目名_表示方法);
+        if (表示方法.equals(entity.getKomokuValue())) {
             setNameAndYMD(list, shienJigyoshaDataEntity);
-        } else if (居宅支援事業者履歴_2.equals(
-                BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者履歴, SubGyomuCode.DBD介護受給))) {
+        } else if (表示方法_星.equals(entity.getKomokuValue())) {
             setNameAndYMD(list, shienJigyoshaDataEntity);
             shienJigyoshaDataEntity.setJigyoshaName2Asutarisuku(アスタリスク);
             shienJigyoshaDataEntity.setTodokedeYMD2Asutarisuku(アスタリスク);
             shienJigyoshaDataEntity.setJigyoshaName3Asutarisuku(アスタリスク);
             shienJigyoshaDataEntity.setTodokedeYMD3Asutarisuku(アスタリスク);
-        } else if (居宅支援事業者履歴_3.equals(
-                BusinessConfig.get(ConfigNameDBD.資格者証表示方法_居宅支援事業者履歴, SubGyomuCode.DBD介護受給))) {
+        } else if (表示方法_抹消線.equals(entity.getKomokuValue())) {
             setNameAndYMD(list, shienJigyoshaDataEntity);
             shienJigyoshaDataEntity.setJigyoshaName2Masshosen(抹消線);
             shienJigyoshaDataEntity.setTodokedeYMD2Masshosen(抹消線);

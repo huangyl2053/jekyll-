@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 要介護状態区分別判定件数Builderのインターフェースクラスです。
  *
- * @reamsid_L DBE-1450-040 dongyabin
+ * @reamsid_L DBE-1450-050 dongyabin
  */
 interface IJotaikubumbetsuhanteiBuilder extends IReportBuilder<JotaikubumbetsuhanteiReportSource> {
 }

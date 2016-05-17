@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -77,7 +76,7 @@ public class ShokanKetteiTsuchiShoMeisaiTempTableEntity
     private RString yoshikiNo;
     private RString yoshikiMeisho;
     @PrimaryKey
-    private ServiceCode serviceCode;
+    private RString serviceCode;
     private RString serviceShuruiName;
     private int kaishuKingaku;
     private RString zougenRiyu;

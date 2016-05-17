@@ -97,7 +97,7 @@
         <result property="shiharaiKingakuUchiwakeRiyoshabun" column="shiharaiKingakuUchiwakeRiyoshabun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="shiharaiKingaku" column="shiharaiKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="ryakusho" column="yoshikiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kingaku" column="kaishuKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kingaku" column="kaishuKingaku" />
         <result property="tuika" column="tuika" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceNameRyaku" column="serviceShuruiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikyuHushikyuKetteiKubun" column="shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -352,8 +352,6 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS ShikibetsuTaisho
         ON
         ShikibetsuTaisho."shikibetsuCode" = SUBHihokenshaDaicho."shikibetsuCode"
-        --AND
-        -- ShikibetsuTaisho."gyomuKoyuKey" = FLASE
         WHERE
         ((
         DbT3036ShokanHanteiKekka."shikyuHushikyuKetteiKubun" = #{shikyu}
@@ -752,7 +750,7 @@
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="1">
         SELECT
-        MAX(DbT7022ShoriDateKanri."nendoNaiRenban")
+        MAX(CAST(DbT7022ShoriDateKanri."nendoNaiRenban" AS INT))
         FROM
         rgdb."DbT7022ShoriDateKanri" AS DbT7022ShoriDateKanri
     </select>

@@ -241,6 +241,7 @@ public class SetaiinFinder {
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登内優先);
         builder.set世帯員取得区分(SetaiinShutokuKubun.世帯員を取得する);
+        builder.set識別コード(識別コード);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         SetaiinParameter parameter = new SetaiinParameter(searchKey);
         ISetaiinMapper mapper = mapperProvider.create(ISetaiinMapper.class);
@@ -305,6 +306,7 @@ public class SetaiinFinder {
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登内優先);
         builder.set世帯員取得区分(SetaiinShutokuKubun.世帯員を取得する);
+        builder.set識別コード(識別コード);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         SetaiinParameter parameter = new SetaiinParameter(searchKey);
         ISetaiinMapper mapper = mapperProvider.create(ISetaiinMapper.class);

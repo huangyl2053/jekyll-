@@ -252,7 +252,7 @@ public class OtherAddressLedgerBusiness {
      *
      * @return 住所コード
      */
-    public ZenkokuJushoCode get住所コード() {
+    public RString get住所コード() {
         return entity.get住所コード();
     }
 
