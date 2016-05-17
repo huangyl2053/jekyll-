@@ -112,8 +112,9 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
     }
 
     private RString パターン12(RDate rDate) {
-        return rDate.wareki().eraType(EraType.KANJI)
+        RString 生年月日 = rDate.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
+        return 生年月日.substring(2, 生年月日.length());
     }
 }
