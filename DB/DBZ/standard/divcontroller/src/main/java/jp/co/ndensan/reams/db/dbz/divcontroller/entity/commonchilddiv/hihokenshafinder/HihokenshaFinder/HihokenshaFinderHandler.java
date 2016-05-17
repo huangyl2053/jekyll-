@@ -197,7 +197,7 @@ public class HihokenshaFinderHandler {
         int 所得年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_所得年度, subGyomuCode).getConfigValue().toString());
         int 遡及年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_遡及年度, subGyomuCode).getConfigValue().toString());
         int 当初年度 = Integer.parseInt(BusinessConfig.getConfigInfo(日付関連_当初年度, subGyomuCode).getConfigValue().toString());
-        FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
+        FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getUIContainerId());
 
         int 開始年度 = 0;
         int 終了年度 = 0;
