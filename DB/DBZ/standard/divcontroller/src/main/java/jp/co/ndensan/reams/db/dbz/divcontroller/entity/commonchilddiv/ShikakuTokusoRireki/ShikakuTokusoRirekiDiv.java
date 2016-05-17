@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsu
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.service.shikakutokuso.ShikakuTokusoFinder;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -419,11 +418,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 row.setJutokuKubun(RString.EMPTY);
             }
             row.setShozaiHokensha(shikakuTokuso.get市町村名称());
-            row.setShozaiHokenshaCode(codeToRString(shikakuTokuso.get市町村コード()));
+            row.setShozaiHokenshaCode(shikakuTokuso.get市町村コード().value());
             row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
-            row.setSochimotoHokenshaCode(codeToRString(shikakuTokuso.get広住特措置元市町村コード()));
+            row.setSochimotoHokenshaCode(shikakuTokuso.get広住特措置元市町村コード().value());
             row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
-            row.setKyuHokenshaCode(codeToRString(shikakuTokuso.get旧市町村コード()));
+            row.setKyuHokenshaCode(shikakuTokuso.get旧市町村コード().value());
             row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
             row.setHihokenshaNo(shikakuTokuso.get被保険者番号().getColumnValue());
             row.setDaNo(shikakuTokuso.get枝番());
@@ -443,14 +442,6 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         }
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
         this.getBtnAddShikakuShutoku().setDisabled(true);
-    }
-
-    private RString codeToRString(LasdecCode code) {
-        RString code_RString = RString.EMPTY;
-        if (code != null && !code.isEmpty()) {
-            code_RString = code.getColumnValue();
-        }
-        return code_RString;
     }
 
     @Override

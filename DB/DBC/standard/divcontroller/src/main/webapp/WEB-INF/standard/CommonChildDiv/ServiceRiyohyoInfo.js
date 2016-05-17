@@ -16,6 +16,26 @@ var DBC;
             return ModeController;
         })();
         ServiceRiyohyoInfo.ModeController = ModeController;
+
+        (function (Modes) {
+            var ViewMode = (function () {
+                function ViewMode(controls) {
+                    this.controls = controls;
+                }
+                ViewMode.prototype.ModifyMode = function () {
+                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = true;
+                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = true;
+                };
+
+                ViewMode.prototype.InquiryMode = function () {
+                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = false;
+                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = false;
+                };
+                return ViewMode;
+            })();
+            Modes.ViewMode = ViewMode;
+        })(ServiceRiyohyoInfo.Modes || (ServiceRiyohyoInfo.Modes = {}));
+        var Modes = ServiceRiyohyoInfo.Modes;
     })(DBC.ServiceRiyohyoInfo || (DBC.ServiceRiyohyoInfo = {}));
     var ServiceRiyohyoInfo = DBC.ServiceRiyohyoInfo;
 })(DBC || (DBC = {}));
@@ -47,7 +67,6 @@ var DBC;
                 editTypes.addEditType("ServiceRiyohyoEraseBorder", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("onClickBtnCalcMeisai", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBtnCalcGokei", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("onBlurTxtSreviceCode", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             };
 
@@ -186,34 +205,9 @@ var DBC;
             PublicProperties.prototype.setonClickBtnCalcGokei = function (value) {
                 this.controls.btnCalcGokei().onClick = value;
             };
-
-            PublicProperties.prototype.getonBlurTxtSreviceCode = function () {
-                return this.controls.txtServiceCode().onBlur;
-            };
-
-            PublicProperties.prototype.setonBlurTxtSreviceCode = function (value) {
-                this.controls.txtServiceCode().onBlur = value;
-            };
             return PublicProperties;
         })();
         ServiceRiyohyoInfo.PublicProperties = PublicProperties;
-        
-        (function (Modes) {
-            var ViewMode = (function() {
-                function ViewMode(controls) {
-                    this.controls = controls;
-                }
-                ViewMode.prototype.ModifyMode = function () {
-                    this.controls.ServiceRiyohyoBeppyoMeisai.displayNone = true;
-                    this.controls.ServiceRiyohyoBeppyoGokei.displayNone = true;
-                };
-                ViewMode.prototype.InquiryMode = function () {
-                    this.controls.ServiceRiyohyoBeppyoMeisai.displayNone = false;
-                    this.controls.ServiceRiyohyoBeppyoGokei.displayNone = false;
-                };
-                return ViewMode;
-            })();
-        })(ServiceRiyohyoInfo.Modes || (ServiceRiyohyoInfo.Modes = {}));
     })(DBC.ServiceRiyohyoInfo || (DBC.ServiceRiyohyoInfo = {}));
     var ServiceRiyohyoInfo = DBC.ServiceRiyohyoInfo;
 })(DBC || (DBC = {}));
