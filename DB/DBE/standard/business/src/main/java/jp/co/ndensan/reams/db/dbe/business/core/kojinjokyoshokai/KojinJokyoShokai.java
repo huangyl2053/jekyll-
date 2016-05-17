@@ -305,6 +305,87 @@ public class KojinJokyoShokai {
     }
 
     /**
+     * 主治医医療機関コードを返します。
+     *
+     * @return 主治医医療機関コード
+     */
+    public RString get主治医医療機関コード() {
+        return entity.getShujiiIryokikanCode();
+    }
+
+    /**
+     * 医療機関名称を返します。
+     *
+     * @return 医療機関名称
+     */
+    public RString get医療機関名称() {
+        return entity.getIryoKikanMeisho();
+    }
+
+    /**
+     * 主治医コードを返します。
+     *
+     * @return 主治医コード
+     */
+    public RString get主治医コード() {
+        return entity.getShujiiCode();
+    }
+
+    /**
+     * 主治医氏名を返します。
+     *
+     * @return 主治医氏名
+     */
+    public RString get主治医氏名() {
+        return entity.getShujiiName();
+    }
+
+    /**
+     * 指定医フラグを返します。
+     *
+     * @return 指定医フラグ
+     */
+    public boolean get指定医フラグ() {
+        return entity.isShiteiiFlag();
+    }
+
+    /**
+     * 認定調査委託先コードを返します。
+     *
+     * @return 認定調査委託先コード
+     */
+    public RString get認定調査委託先コード() {
+        return entity.getNinteichosaItakusakiCode();
+    }
+
+    /**
+     * 事業者名称を返します。
+     *
+     * @return 主治医氏名
+     */
+    public RString get事業者名称() {
+        return entity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 認定調査員コードを返します。
+     *
+     * @return 認定調査員コード
+     */
+    public RString get認定調査員コード() {
+        return entity.getNinteiChosainCode();
+    }
+
+    /**
+     * 調査員氏名を返します。
+     *
+     * @return 調査員氏名
+     */
+    public RString get調査員氏名() {
+        return entity.getChosainShimei();
+    }
+
+    /**
      * 被保険者番号を取得します。
      *
      * @return 被保険者番号

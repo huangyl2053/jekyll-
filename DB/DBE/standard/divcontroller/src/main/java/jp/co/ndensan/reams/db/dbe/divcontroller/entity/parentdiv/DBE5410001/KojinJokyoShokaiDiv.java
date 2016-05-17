@@ -7,22 +7,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * KojinJokyoShokai のクラスファイル
  *
+ * @reamsid_L DBE-0200-010 suguangjun
  */
 public class KojinJokyoShokaiDiv extends Panel {
 
@@ -655,13 +656,93 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
-        return this.getShujiiIryokikaknAndShujiiInput().getCcdShujiiIryokikanAndShujiiInput();
+    public TextBoxCode getTxtShujiiIryoKikanCode() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanCode();
     }
 
     @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
-        return this.getChosaItakusakiAndChosainGuide().getCcdChosaItakusakiAndChosainInput();
+    public void setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiIryoKikanCode(txtShujiiIryoKikanCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShujiiIryoKikanName() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanName();
+    }
+
+    @JsonIgnore
+    public void setTxtShujiiIryoKikanName(TextBox txtShujiiIryoKikanName) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiIryoKikanName(txtShujiiIryoKikanName);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtShujiiCode() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiCode();
+    }
+
+    @JsonIgnore
+    public void setTxtShujiiCode(TextBoxCode txtShujiiCode) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiCode(txtShujiiCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShujiiName() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiName();
+    }
+
+    @JsonIgnore
+    public void setTxtShujiiName(TextBox txtShujiiName) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiName(txtShujiiName);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShiteii() {
+        return this.getShujiiIryokikaknAndShujiiInput().getChkShiteii();
+    }
+
+    @JsonIgnore
+    public void setChkShiteii(CheckBoxList chkShiteii) {
+        this.getShujiiIryokikaknAndShujiiInput().setChkShiteii(chkShiteii);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtChosaItakusakiCode() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiCode();
+    }
+
+    @JsonIgnore
+    public void setTxtChosaItakusakiCode(TextBoxCode txtChosaItakusakiCode) {
+        this.getChosaItakusakiAndChosainGuide().setTxtChosaItakusakiCode(txtChosaItakusakiCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChosaItakusakiName() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiName();
+    }
+
+    @JsonIgnore
+    public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
+        this.getChosaItakusakiAndChosainGuide().setTxtChosaItakusakiName(txtChosaItakusakiName);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtNinteiChosainCode() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainCode();
+    }
+
+    @JsonIgnore
+    public void setTxtNinteiChosainCode(TextBoxCode txtNinteiChosainCode) {
+        this.getChosaItakusakiAndChosainGuide().setTxtNinteiChosainCode(txtNinteiChosainCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtNinteiChosainName() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainName();
+    }
+
+    @JsonIgnore
+    public void setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
+        this.getChosaItakusakiAndChosainGuide().setTxtNinteiChosainName(txtNinteiChosainName);
     }
 
     // </editor-fold>

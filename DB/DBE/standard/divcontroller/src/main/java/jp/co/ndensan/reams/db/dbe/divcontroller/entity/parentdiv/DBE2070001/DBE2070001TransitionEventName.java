@@ -15,7 +15,8 @@ public enum DBE2070001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     イメージ取込み_規定_規定外_画面へ遷移("イメージ取込み_規定_規定外_画面へ遷移"),
-    主治医意見書入手へ遷移する("主治医意見書入手へ遷移する");
+    主治医意見書入手へ遷移する("主治医意見書入手へ遷移する"),
+    処理完了("処理完了");
 
     private final RString name;
 

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
@@ -20,8 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -33,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class KojinJokyoShokaiHandler {
 
+    private final List<RString> 指定医フラグ = new ArrayList<>();
     private final KojinJokyoShokaiDiv div;
 
     /**
@@ -52,12 +52,29 @@ public class KojinJokyoShokaiHandler {
      */
     public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, RString 申請書管理番号) {
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
-        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, new ShinseishoKanriNo(申請書管理番号), SubGyomuCode.DBE認定支援);
-        div.getCcdChosaItakusakiAndChosainInput().initialize(RString.EMPTY);
         div.setHihokenshano(kojinJokyoShokaiList.get(0).get被保番号());
         div.setShoKisaiHokenshaNo(kojinJokyoShokaiList.get(0).get保険者番号());
+        div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanCode().setValue(kojinJokyoShokaiList.get(0).get主治医医療機関コード());
+        div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanName().setValue(kojinJokyoShokaiList.get(0).get医療機関名称());
+        div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiCode().setValue(kojinJokyoShokaiList.get(0).get主治医コード());
+        div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiName().setValue(kojinJokyoShokaiList.get(0).get主治医氏名());
+        div.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiCode().setValue(kojinJokyoShokaiList.get(0).get認定調査委託先コード());
+        div.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiName().setValue(kojinJokyoShokaiList.get(0).get事業者名称());
+        div.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainCode().setValue(kojinJokyoShokaiList.get(0).get認定調査員コード());
+        div.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainName().setValue(kojinJokyoShokaiList.get(0).get調査員氏名());
+        getchkShiteii(kojinJokyoShokaiList);
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
+    }
+
+    private void getchkShiteii(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+        if (kojinJokyoShokaiList.get(0).get指定医フラグ()) {
+            指定医フラグ.add(new RString("key0"));
+            div.getChkShiteii().setSelectedItemsByKey(指定医フラグ);
+        } else {
+            指定医フラグ.clear();
+            div.getChkShiteii().setSelectedItemsByKey(指定医フラグ);
+        }
     }
 
     private void getKojinJokyoShokai1(List<KojinJokyoShokai> kojinJokyoShokaiList) {

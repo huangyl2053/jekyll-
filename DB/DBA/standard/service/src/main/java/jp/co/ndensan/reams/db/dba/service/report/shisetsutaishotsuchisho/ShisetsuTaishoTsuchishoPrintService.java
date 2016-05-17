@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.service.report.shisetsutaishotsuchisho;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoReport;
@@ -16,7 +14,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
@@ -33,6 +30,17 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class ShisetsuTaishoTsuchishoPrintService {
 
+    private final ReportManager reportManager;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param reportManager ReportManager
+     */
+    public ShisetsuTaishoTsuchishoPrintService(ReportManager reportManager) {
+        this.reportManager = reportManager;
+    }
+
     /**
      * 介護保険住所地特例施設退所通知書を印刷します。
      *
@@ -41,27 +49,21 @@ public class ShisetsuTaishoTsuchishoPrintService {
      */
     public SourceDataCollection print(ShisetsuTaishoTsuchishoItem item) {
         ShisetsuTaishoTsuchishoProperty property = new ShisetsuTaishoTsuchishoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<ShisetsuTaishoTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<ShisetsuTaishoTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(property.subGyomuCode(),
-                        property.reportId(),
-                        FlexibleDate.getNowDate(),
-                        reportSourceWriter);
-                item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
-                item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
-                item.setShichosonMei2(ninshoshaSource.ninshoshaYakushokuMei2);
-                item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
-            }
+        try (ReportAssembler<ShisetsuTaishoTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<ShisetsuTaishoTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(property.subGyomuCode(),
+                    property.reportId(),
+                    FlexibleDate.getNowDate(),
+                    reportSourceWriter);
+            item.setDenshiKoin(ninshoshaSource.denshiKoin);
+            item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
+            item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
+            item.setShichosonMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+            item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+            ShisetsuTaishoTsuchishoReport report = ShisetsuTaishoTsuchishoReport.createFrom(item);
+            report.writeBy(reportSourceWriter);
         }
-        return new Printer<ShisetsuTaishoTsuchishoReportSource>().spool(property, toReports(item));
-    }
-
-    private static List<ShisetsuTaishoTsuchishoReport> toReports(ShisetsuTaishoTsuchishoItem item) {
-        List<ShisetsuTaishoTsuchishoReport> list = new ArrayList<>();
-        list.add(ShisetsuTaishoTsuchishoReport.createFrom(item));
-        return list;
+        return reportManager.publish();
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
