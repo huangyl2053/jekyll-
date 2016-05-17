@@ -72,7 +72,6 @@ public class FukaTaishoshaSearch {
     private static final ISearchCondition 条件無 = null;
     private static final int 最近処理者検索数 = 1;
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
-    private static final RString メニューID = ResponseHolder.getMenuID();
 
     /**
      * 「初期化」時の処理です。
@@ -325,7 +324,7 @@ public class FukaTaishoshaSearch {
 
     private SearchResult<FukaTaishoshaRelateEntity> get対象者(HihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
-        FukaSearchMenu menu = FukaSearchMenu.toValue(メニューID);
+        FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
         // FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
         return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数);
