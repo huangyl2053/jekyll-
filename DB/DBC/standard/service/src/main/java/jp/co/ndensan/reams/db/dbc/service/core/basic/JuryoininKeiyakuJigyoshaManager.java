@@ -144,20 +144,17 @@ public class JuryoininKeiyakuJigyoshaManager {
      *
      * @param 契約事業者番号 RString
      * @param 契約日FROM FlexibleDate
-     * @param 契約日TO FlexibleDate
      * @return JuryoininKeiyakuJigyosha
      */
     @Transaction
     public JuryoininKeiyakuJigyosha getJuryoininKeiyakuJigyosha(
             RString 契約事業者番号,
-            FlexibleDate 契約日FROM,
-            FlexibleDate 契約日TO) {
+            FlexibleDate 契約日FROM) {
         IJuryoininKeiyakuJigyoshaMapper mapper = mapperProvider.create(IJuryoininKeiyakuJigyoshaMapper.class);
 
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("keiyakuJigyoshaNo", 契約事業者番号);
         parameter.put("kaishiYMD", 契約日FROM);
-        parameter.put("shuryoYMD", 契約日TO);
         parameter.put("systemDate", FlexibleDate.getNowDate());
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = mapper.get契約事業者(parameter);
         if (entity == null) {
