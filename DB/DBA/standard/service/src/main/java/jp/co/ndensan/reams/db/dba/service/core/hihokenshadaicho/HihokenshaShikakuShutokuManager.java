@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshadaicho.IHihokenshaShikakuShutokuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -180,18 +182,21 @@ public class HihokenshaShikakuShutokuManager {
      * @param 当該識別対象の生年月日 当該識別対象の生年月日
      * @param 資格取得日 資格取得日
      * @param 資格取得事由コード 資格取得事由コード
-     * @return boolean チェックフラグ （資格取得登録ならtrue、対象外ならfalse）
      */
     @Transaction
-    public boolean shikakuShutokuTorokuCheck(IDateOfBirth 当該識別対象の生年月日, FlexibleDate 資格取得日, RString 資格取得事由コード) {
+    public void shikakuShutokuTorokuCheck(IDateOfBirth 当該識別対象の生年月日, FlexibleDate 資格取得日, RString 資格取得事由コード) {
         requireNonNull(当該識別対象の生年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("当該識別対象の生年月日"));
         requireNonNull(資格取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得日"));
         requireNonNull(資格取得事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由コード"));
         RString age = get年齢(当該識別対象の生年月日, 資格取得日);
         if (ShikakuShutokuJiyu.年齢到達.getコード().equals(資格取得事由コード)) {
-            return Integer.parseInt(age.toString()) >= AGE_65;
+            if (!(Integer.parseInt(age.toString()) >= AGE_65)) {
+                throw new ApplicationException(DbaErrorMessages.資格取得日時点１号被保険者年齢でない.getMessage());
+            }
         } else {
-            return Integer.parseInt(age.toString()) >= AGE_40;
+            if (!(Integer.parseInt(age.toString()) >= AGE_40)) {
+                throw new ApplicationException(DbaErrorMessages.資格取得日時点２号被保険者年齢未到達.getMessage());
+            }
         }
     }
 

@@ -79,7 +79,7 @@
      "layoutName": "DBA1010011",
      "layoutTitle": "資格取得異動",
      "eventName": "完了",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
     }
    ]
