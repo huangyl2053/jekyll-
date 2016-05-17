@@ -197,7 +197,7 @@ public class HihokenshashoChohyoFinder {
                 business.set行政区2(RString.EMPTY);
             }
             List<SofusakiJohoEntity> sofusa = get送付先情報(hihoken.get(i).get識別コード());
-            if (sofusa != null) {
+            if (sofusa != null && !sofusa.isEmpty()) {
                 if (管外.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
                     RStringBuilder builder = new RStringBuilder();
                     builder.append(sofusa.get(桁数_0).getJusho());
