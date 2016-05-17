@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -148,8 +149,11 @@ public class TatokureiTaishoTsuchishoHakko {
         TatokuKanrenChohyoTaishoTsuchishoBusiness tsuchishoBusiness = TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder
                 .createInstance().setTatokuKanrenChohyoTaishoTsuchisho(business);
         他市町村住所地特例の更新(createHandler(div).他特例施設退所通知書の編集(他市町村住所地特例, 識別コード));
-        return ResponseData.of(new ShisetsuTaishoTsuchishoPrintService().
-                print(dba100005_Item(tsuchishoBusiness))).respond();
+        ResponseData<SourceDataCollection> response = new ResponseData<>();
+        try (ReportManager reportManager = new ReportManager()) {
+            response.data = new ShisetsuTaishoTsuchishoPrintService(reportManager).print(dba100005_Item(tsuchishoBusiness));
+        }
+        return response;
     }
 
     /**

@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 完了処理・主治医意見書入手のHandlerクラスです。
+ * 完了処理・主治医意見書入手のクラスです。
  *
  * @reamsid_L DBE-0020-060 lishengli
  */
@@ -70,7 +70,7 @@ public class Ikenshoget {
      */
     public ResponseData<IkenshogetDiv> onClick_BtnYitiranSyuturyoku(IkenshogetDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getCcdTaskList().一览件数().compareTo("0") == 0) {
+        if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
             主治医意見書入手一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -145,7 +145,7 @@ public class Ikenshoget {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (div.getCcdTaskList().一览件数().compareTo("0") == 0) {
+            if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
                 主治医意見書入手一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -179,7 +179,7 @@ public class Ikenshoget {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (div.getCcdTaskList().一览件数().compareTo("0") == 0) {
+            if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
                 主治医意見書入手一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -197,7 +197,7 @@ public class Ikenshoget {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             getHandler(div).要介護認定完了情報更新();
-            div.getKanryoMsg().getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書入手"),
+            div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書入手"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2070001StateName.完了);
         }

@@ -48,6 +48,7 @@ public class ShokanbarayiKeteiInfoPanel {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 申請を保存する = new RString("Element3");
+    private static final RString 申請を削除する = new RString("btnDelete");
     private static final RString 証明書 = new RString("証明書");
 
     /**
@@ -236,7 +237,7 @@ public class ShokanbarayiKeteiInfoPanel {
                         .replace(削除.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
                 return ResponseData.of(div).respond();
             }
             return ResponseData.of(div).respond();

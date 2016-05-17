@@ -132,18 +132,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
 
         RString 通知文１ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, ONE, batchPram.getHakkoYMD());
-        RString 通知文２ = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_1, TWO, batchPram.getHakkoYMD());
-        RString 通知文３大 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_2, TWO, batchPram.getHakkoYMD());
-        RString 通知文4_上小 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, TWO, batchPram.getHakkoYMD());
-        RString 通知文5_下大 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_3, THREE, batchPram.getHakkoYMD());
-        RString 通知文6_上大 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, TWO, batchPram.getHakkoYMD());
-        RString 通知文7_下小 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, THREE, batchPram.getHakkoYMD());
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
         AtesakiPSMSearchKeyBuilder 宛先builder = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー);
         宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);

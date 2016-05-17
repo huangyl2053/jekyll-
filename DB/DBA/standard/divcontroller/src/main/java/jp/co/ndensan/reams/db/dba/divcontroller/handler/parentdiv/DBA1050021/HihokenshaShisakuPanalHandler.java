@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- * 事業者登録Handlerクラスです。
+ * 被保険者資格詳細異動Handlerクラスです。
  *
  * @reamsid_L DBA-0340-050 lijia
  *
@@ -65,27 +65,24 @@ public class HihokenshaShisakuPanalHandler {
      * @param viewState 表示状態
      */
     public void initialize(RString viewState) {
-        RString 被保番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, RString.class);
-        RString 識別コード = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_識別コード, RString.class);
+        HihokenshaNo 被保番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_識別コード, ShikibetsuCode.class);
         ShikakuRirekiJoho 資格得喪情報
                 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class);
-        get宛名基本情報取得(new ShikibetsuCode(識別コード));
-        get資格系基本情報取得(new HihokenshaNo(被保番号));
+        get宛名基本情報取得(識別コード);
+        get資格系基本情報取得(被保番号);
         setドロップダウンリストの設定();
         if (viewState.equals(状態_追加)) {
             get画面初期の追加更新モードの表示制御();
         } else if (viewState.equals(状態_修正)) {
             get画面初期の追加更新モードの表示制御();
-            set資格詳細情報設定(資格得喪情報, new HihokenshaNo(被保番号),
-                    new ShikibetsuCode(識別コード), 資格得喪情報.getShutokuDate());
+            set資格詳細情報設定(資格得喪情報, 被保番号, 識別コード, 資格得喪情報.getShutokuDate());
         } else if (viewState.equals(状態_削除)) {
             get画面初期の削除照会モードの表示制御();
-            set資格詳細情報設定(資格得喪情報, new HihokenshaNo(被保番号),
-                    new ShikibetsuCode(識別コード), 資格得喪情報.getShutokuDate());
+            set資格詳細情報設定(資格得喪情報, 被保番号, 識別コード, 資格得喪情報.getShutokuDate());
         } else if (viewState.equals(状態_照会)) {
             get画面初期の削除照会モードの表示制御();
-            set資格詳細情報設定(資格得喪情報, new HihokenshaNo(被保番号),
-                    new ShikibetsuCode(識別コード), 資格得喪情報.getShutokuDate());
+            set資格詳細情報設定(資格得喪情報, 被保番号, 識別コード, 資格得喪情報.getShutokuDate());
         }
     }
 
@@ -189,10 +186,12 @@ public class HihokenshaShisakuPanalHandler {
         ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (介護導入形態 != null) {
             DonyuKeitaiCode 導入形態コード = 介護導入形態.get導入形態コード();
+            RString 所在保険者 = 資格得喪情報.getShozaiHokensha();
+            RString 措置元保険者 = 資格得喪情報.getSochimotoHokensha();
             List<Shichoson> 旧保険者情報 = 旧保険者取得(
-                    new LasdecCode(資格得喪情報.getShozaiHokensha()),
+                    RString.isNullOrEmpty(所在保険者) ? LasdecCode.EMPTY : new LasdecCode(所在保険者),
                     導入形態コード.getCode(),
-                    new LasdecCode(資格得喪情報.getSochimotoHokensha()));
+                   RString.isNullOrEmpty(措置元保険者) ? LasdecCode.EMPTY : new LasdecCode(措置元保険者));
             List<KeyValueDataSource> keyValueList = new ArrayList<>();
             for (Shichoson 旧保険者 : 旧保険者情報) {
                 KeyValueDataSource keyValue = new KeyValueDataSource();
