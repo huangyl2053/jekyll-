@@ -331,7 +331,9 @@
             resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter"
             fetchSize="500">
-        SELECT E."gogitaiMei"
+        SELECT A."gogitaiNo"
+        ,E."gogitaiMei"
+        ,F."shichosonCode"
         ,F."shichosonMeisho"
         ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
@@ -425,7 +427,9 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
-        E."gogitaiMei"
+        A."gogitaiNo"
+        ,E."gogitaiMei"
+        ,F."shichosonCode"
         ,F."shichosonMeisho"
         ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
@@ -435,7 +439,9 @@
             ,C."ninteiShinseiHoreiKubunCode"
         </if>
         ORDER BY
-        C."shoKisaiHokenshaNo"
+        A."gogitaiNo"
+        ,F."shichosonCode"
+        ,C."shoKisaiHokenshaNo"
         <if test="isShinseiji">
             ,C."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -583,8 +589,11 @@
     <resultMap id="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoHeaderEntity"
                autoMapping="true">
+        <result property="gogitaiNo" column="gogitaiNo"/>
         <result property="gogitaiMei" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiShinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ninteiShinseiHoreiKubunCode" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="shinsakaiKaisaiYMDMin" column="shinsakaiKaisaiYMDMin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
