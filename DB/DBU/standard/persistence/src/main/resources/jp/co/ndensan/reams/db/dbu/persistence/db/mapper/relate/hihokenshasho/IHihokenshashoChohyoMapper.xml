@@ -3,7 +3,7 @@
 
 <!-- @reamsid_L DBU-0490-021 zhangzhiming -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshashochohyo.IHihokenshashoChohyoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IHihokenshashoChohyoMapper">
     <resultMap id="honninJohoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.HonninJohoEntity" autoMapping="true">
         <result property="shikibetsuCode" column="ShikibetsuTaisho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="meisho" column="ShikibetsuTaisho_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
