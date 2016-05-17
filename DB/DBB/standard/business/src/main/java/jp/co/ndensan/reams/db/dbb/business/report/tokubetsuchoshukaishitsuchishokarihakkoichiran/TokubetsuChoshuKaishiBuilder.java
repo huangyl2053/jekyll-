@@ -15,18 +15,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 public class TokubetsuChoshuKaishiBuilder implements ITokubetsuChoshuKaishiBuilder {
 
-    private final ITokubetsuChoshuKaishiEditor headerEditor;
-    private final ITokubetsuChoshuKaishiEditor hyojiIchiranEditor;
+    private final ITokubetsuChoshuKaishiEditor tokubetsuchoshukaishieditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link IKarisanteiFukaDaichoEditor}
-     * @param hyojiIchiranEditor {@link IKarisanteiFukaDaichoEditor}
+     * @param tokubetsuchoshukaishieditor {@link IKarisanteiFukaDaichoEditor}
      */
-    public TokubetsuChoshuKaishiBuilder(ITokubetsuChoshuKaishiEditor headerEditor, ITokubetsuChoshuKaishiEditor hyojiIchiranEditor) {
-        this.headerEditor = headerEditor;
-        this.hyojiIchiranEditor = hyojiIchiranEditor;
+    public TokubetsuChoshuKaishiBuilder(ITokubetsuChoshuKaishiEditor tokubetsuchoshukaishieditor) {
+        this.tokubetsuchoshukaishieditor = tokubetsuchoshukaishieditor;
     }
 
     /**
@@ -36,7 +33,7 @@ public class TokubetsuChoshuKaishiBuilder implements ITokubetsuChoshuKaishiBuild
      */
     @Override
     public TokubetsuChoshuKaishiSource build() {
-        return ReportEditorJoiner.from(new TokubetsuChoshuKaishiSource()).join(headerEditor).join(hyojiIchiranEditor).buildSource();
+        return ReportEditorJoiner.from(new TokubetsuChoshuKaishiSource()).join(tokubetsuchoshukaishieditor).buildSource();
     }
 
 }
