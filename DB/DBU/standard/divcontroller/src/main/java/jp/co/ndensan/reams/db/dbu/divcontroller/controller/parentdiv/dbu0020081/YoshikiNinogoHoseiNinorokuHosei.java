@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020081;
+package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0020081;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020081.DBU0020081StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020081.DBU0020081TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020081.YoshikiNinogoHoseiNinorokuHoseiDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020081.YoshikiNinogoHoseiNinorokuHoseiHandler;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020081.YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020081.YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0020081.YoshikiNinogoHoseiNinorokuHoseiHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0020081.YoshikiNinogoHoseiNinorokuHoseiSeigoSeiHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0020081.YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
