@@ -260,6 +260,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             口座情報選択時(画面モード, data);
             div.setHidDataChangeFlg(RString.EMPTY);
         } else if (住宅改修情報.equals(selectedTab) && !初期化済み.equals(div.getHidJutakuKaisyuJyohoFlg())) {
+            if (div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue() == null) {
+                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(サービス年月.toString()));
+            }
             住宅改修情報選択時(画面モード, 被保険者番号);
             div.setHidDataChangeFlg(RString.EMPTY);
         } else if (審査結果.equals(selectedTab) && !初期化済み.equals(div.getHidSeikyuSummaryFlg())) {
