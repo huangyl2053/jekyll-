@@ -457,7 +457,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
     @Override
     public dgShikakuShutokuRireki_Row getDataGridSelectItem() {
-        return this.getDgShikakuShutokuRireki().getActiveRow();
+        return this.getDgShikakuShutokuRireki().getClickedItem();
     }
 
     @Override
