@@ -40,6 +40,7 @@ public class HihokenshaShokaiTotal {
     private static final RString 施設入退所 = new RString("tplShisetsuNyutaisho");
     private static final RString 証交付回収 = new RString("tplShoKofuKaishu");
     private static final RString 照会 = new RString("照会");
+    private static final RString LOAD済み = new RString("1");
 
     /**
      * 被保険者照会の初期化を処理します。
@@ -55,6 +56,7 @@ public class HihokenshaShokaiTotal {
         div.getKihonJoho().getCcdKaigoAtenaInfo().onLoad(shikibetsuCode);
         div.getKihonJoho().getCcdKaigoShikakuKihon().onLoad(shikibetsuCode);
         div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
+        div.setHihokenshaRirekiFlag(LOAD済み);
         return ResponseData.of(div).respond();
     }
 
@@ -116,22 +118,30 @@ public class HihokenshaShokaiTotal {
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
         if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())
-                && div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {
+                && RString.isNullOrEmpty(div.getHihokenshaRirekiFlag())) {
             div.getHihokenshaShokaiPanel().getCcdShikakuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-        } else if (世帯照会.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
+            div.setHihokenshaRirekiFlag(LOAD済み);
+        } else if (世帯照会.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
+                && RString.isNullOrEmpty(div.getSetaiShokaiFlag())) {
             div.getHihokenshaShokaiPanel().getCcdSeitaiIchiran().initialize(shikibetsuCode, FlexibleDate.getNowDate(),
                     FlexibleDate.getNowDate().getNendo(), YMDHMS.now());
+            div.setSetaiShokaiFlag(LOAD済み);
         } else if (医療保険.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().getDataGridList().isEmpty()) {
+                && RString.isNullOrEmpty(div.getIryoHokenFlag())) {
             div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().initialize(照会, shikibetsuCode.value());
+            div.setIryoHokenFlag(LOAD済み);
         } else if (老福年金.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().getDataGridList().isEmpty()) {
+                && RString.isNullOrEmpty(div.getRofukuNenkinFlag())) {
             div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().initialize(shikibetsuCode, hihokenshaNo);
-        } else if (施設入退所.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())) {
+            div.setRofukuNenkinFlag(LOAD済み);
+        } else if (施設入退所.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
+                && RString.isNullOrEmpty(div.getShisetsuNyutaishoFlag())) {
             div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoRireki().initialize(shikibetsuCode);
+            div.setShisetsuNyutaishoFlag(LOAD済み);
         } else if (証交付回収.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().get証交付回収情報一覧().isEmpty()) {
+                && RString.isNullOrEmpty(div.getShoKofuKaishuFlag())) {
             div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
+            div.setShoKofuKaishuFlag(LOAD済み);
         }
         return ResponseData.of(div).respond();
     }

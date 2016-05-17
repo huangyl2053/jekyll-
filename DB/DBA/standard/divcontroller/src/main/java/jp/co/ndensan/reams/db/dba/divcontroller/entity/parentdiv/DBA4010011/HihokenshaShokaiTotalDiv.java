@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,6 +25,18 @@ public class HihokenshaShokaiTotalDiv extends Panel {
     private KihonJohoDiv KihonJoho;
     @JsonProperty("HihokenshaShokaiPanel")
     private HihokenshaShokaiPanelDiv HihokenshaShokaiPanel;
+    @JsonProperty("hihokenshaRirekiFlag")
+    private RString hihokenshaRirekiFlag;
+    @JsonProperty("setaiShokaiFlag")
+    private RString setaiShokaiFlag;
+    @JsonProperty("iryoHokenFlag")
+    private RString iryoHokenFlag;
+    @JsonProperty("rofukuNenkinFlag")
+    private RString rofukuNenkinFlag;
+    @JsonProperty("shisetsuNyutaishoFlag")
+    private RString shisetsuNyutaishoFlag;
+    @JsonProperty("shoKofuKaishuFlag")
+    private RString shoKofuKaishuFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -65,6 +78,114 @@ public class HihokenshaShokaiTotalDiv extends Panel {
     @JsonProperty("HihokenshaShokaiPanel")
     public void setHihokenshaShokaiPanel(HihokenshaShokaiPanelDiv HihokenshaShokaiPanel) {
         this.HihokenshaShokaiPanel = HihokenshaShokaiPanel;
+    }
+
+    /*
+     * gethihokenshaRirekiFlag
+     * @return hihokenshaRirekiFlag
+     */
+    @JsonProperty("hihokenshaRirekiFlag")
+    public RString getHihokenshaRirekiFlag() {
+        return hihokenshaRirekiFlag;
+    }
+
+    /*
+     * sethihokenshaRirekiFlag
+     * @param hihokenshaRirekiFlag hihokenshaRirekiFlag
+     */
+    @JsonProperty("hihokenshaRirekiFlag")
+    public void setHihokenshaRirekiFlag(RString hihokenshaRirekiFlag) {
+        this.hihokenshaRirekiFlag = hihokenshaRirekiFlag;
+    }
+
+    /*
+     * getsetaiShokaiFlag
+     * @return setaiShokaiFlag
+     */
+    @JsonProperty("setaiShokaiFlag")
+    public RString getSetaiShokaiFlag() {
+        return setaiShokaiFlag;
+    }
+
+    /*
+     * setsetaiShokaiFlag
+     * @param setaiShokaiFlag setaiShokaiFlag
+     */
+    @JsonProperty("setaiShokaiFlag")
+    public void setSetaiShokaiFlag(RString setaiShokaiFlag) {
+        this.setaiShokaiFlag = setaiShokaiFlag;
+    }
+
+    /*
+     * getiryoHokenFlag
+     * @return iryoHokenFlag
+     */
+    @JsonProperty("iryoHokenFlag")
+    public RString getIryoHokenFlag() {
+        return iryoHokenFlag;
+    }
+
+    /*
+     * setiryoHokenFlag
+     * @param iryoHokenFlag iryoHokenFlag
+     */
+    @JsonProperty("iryoHokenFlag")
+    public void setIryoHokenFlag(RString iryoHokenFlag) {
+        this.iryoHokenFlag = iryoHokenFlag;
+    }
+
+    /*
+     * getrofukuNenkinFlag
+     * @return rofukuNenkinFlag
+     */
+    @JsonProperty("rofukuNenkinFlag")
+    public RString getRofukuNenkinFlag() {
+        return rofukuNenkinFlag;
+    }
+
+    /*
+     * setrofukuNenkinFlag
+     * @param rofukuNenkinFlag rofukuNenkinFlag
+     */
+    @JsonProperty("rofukuNenkinFlag")
+    public void setRofukuNenkinFlag(RString rofukuNenkinFlag) {
+        this.rofukuNenkinFlag = rofukuNenkinFlag;
+    }
+
+    /*
+     * getshisetsuNyutaishoFlag
+     * @return shisetsuNyutaishoFlag
+     */
+    @JsonProperty("shisetsuNyutaishoFlag")
+    public RString getShisetsuNyutaishoFlag() {
+        return shisetsuNyutaishoFlag;
+    }
+
+    /*
+     * setshisetsuNyutaishoFlag
+     * @param shisetsuNyutaishoFlag shisetsuNyutaishoFlag
+     */
+    @JsonProperty("shisetsuNyutaishoFlag")
+    public void setShisetsuNyutaishoFlag(RString shisetsuNyutaishoFlag) {
+        this.shisetsuNyutaishoFlag = shisetsuNyutaishoFlag;
+    }
+
+    /*
+     * getshoKofuKaishuFlag
+     * @return shoKofuKaishuFlag
+     */
+    @JsonProperty("shoKofuKaishuFlag")
+    public RString getShoKofuKaishuFlag() {
+        return shoKofuKaishuFlag;
+    }
+
+    /*
+     * setshoKofuKaishuFlag
+     * @param shoKofuKaishuFlag shoKofuKaishuFlag
+     */
+    @JsonProperty("shoKofuKaishuFlag")
+    public void setShoKofuKaishuFlag(RString shoKofuKaishuFlag) {
+        this.shoKofuKaishuFlag = shoKofuKaishuFlag;
     }
 
     // </editor-fold>
