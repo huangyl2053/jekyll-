@@ -70,7 +70,9 @@ public class KakushuTsuchishoSakuseiKobetsu {
      */
     public ResponseData<KakushuTsuchishoSakuseiKobetsuDiv> onChange_radKobetsuHakkoChoteiJiyu(
             KakushuTsuchishoSakuseiKobetsuDiv div) {
-        getHandler(div).onChange調定事由印字方法();
+        RString key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu()
+                .getRadKobetsuHakkoChoteiJiyu().getSelectedKey();
+        getHandler(div).onChange調定事由印字方法(key);
         return ResponseData.of(div).respond();
     }
 

@@ -1241,10 +1241,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
 
     /**
      * 調定事由印字方法を変更のメソッドます。
+     *
+     * @param key 調定事由の印字方法
      */
-    public void onChange調定事由印字方法() {
-        RString key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu()
-                .getRadKobetsuHakkoChoteiJiyu().getSelectedKey();
+    public void onChange調定事由印字方法(RString key) {
         if (KEY0.equals(key)) {
             Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
             FukaJoho info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
@@ -1860,6 +1860,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 && !div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().isIsOpen())) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(false);
         } else {
+            onChange調定事由印字方法(KEY0);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(true);
         }
     }
