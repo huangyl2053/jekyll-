@@ -79,11 +79,11 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         ArrayList<FutanGendogakuNintei> futanGendogakuNinteiList
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
         if (!futanGendogakuNinteiList.isEmpty()) {
-            set負担限度額認定エリア(div, futanGendogakuNinteiList.get(0));
+            set負担限度額認定エリア(div, futanGendogakuNinteiList.get(futanGendogakuNinteiList.size() - 1));
             div.setListIndex(new RString("0"));
-            div.getBtnZenRireki().setDisabled(true);
+            div.getBtnGoRireki().setDisabled(true);
             if (1 == futanGendogakuNinteiList.size()) {
-                div.getBtnGoRireki().setDisabled(true);
+                div.getBtnZenRireki().setDisabled(true);
             }
         } else {
             div.setListIndex(new RString("0"));
