@@ -68,6 +68,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 高額合算支給申請10 = new RString("DBCMN61010");
     private final RString 高額合算支給申請11 = new RString("DBCMN61011");
     private final RString 高額合算支給申請12 = new RString("DBCMN61012");
+    private final RString 高額合算支給決定情報補正 = new RString("DBCMN62004");
     private final ShiharaiHohoJyohoDiv div;
 
     /**
@@ -872,7 +873,8 @@ public class ShiharaiHohoJyohoHandler {
                 || 高額合算支給申請9.equals(menuID)
                 || 高額合算支給申請10.equals(menuID)
                 || 高額合算支給申請11.equals(menuID)
-                || 高額合算支給申請12.equals(menuID)) {
+                || 高額合算支給申請12.equals(menuID)
+                || 高額合算支給決定情報補正.equals(menuID)) {
             業務内区分コード = new KamokuCode(String.format("%03d", Integer.valueOf(KozaBunruiKubun.高額合算費支給.getコード().toString())));
         }
         return 業務内区分コード;
