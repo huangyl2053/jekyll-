@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybat
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.HihokenshashoChohyoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.HonninJohoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.SofusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshashochohyo.IHihokenshashoChohyoMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IHihokenshashoChohyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
