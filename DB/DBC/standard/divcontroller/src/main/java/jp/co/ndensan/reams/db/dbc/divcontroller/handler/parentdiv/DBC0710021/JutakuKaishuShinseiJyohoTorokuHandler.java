@@ -288,7 +288,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             model.set状態(改修状態_登録);
         }
         // TODO QAのNo.664 項目「住所クラス」の設定値は確認中
-        model.set住所クラス(new _Jusho());
+//        model.set住所クラス(new _Jusho());
         model.set様式番号(償還払請求基本.get様式番号());
         model.set整理番号(整理番号);
         div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().initialize(model);
@@ -446,7 +446,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         model.setサービス提供年月(サービス提供年月);
         model.set状態(改修状態_登録);
         // TODO QAのNo.664 項目「住所クラス」の設定値は確認中
-        model.set住所クラス(new _Jusho());
+//        model.set住所クラス(new _Jusho());
         model.set様式番号(様式番号);
         model.set整理番号(整理番号);
         div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().initialize(model);
@@ -475,7 +475,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         model.set被保険者番号(被保険者番号);
         model.set状態(改修状態_登録);
         // TODO QAのNo.664 項目「住所クラス」の設定値は確認中
-        model.set住所クラス(new _Jusho());
+//        model.set住所クラス(new _Jusho());
         div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().initialize(model);
         SikyuSinseiJyohoParameter 支給申請情報 = new SikyuSinseiJyohoParameter();
         支給申請情報.setShikibetsuCode(識別コード);

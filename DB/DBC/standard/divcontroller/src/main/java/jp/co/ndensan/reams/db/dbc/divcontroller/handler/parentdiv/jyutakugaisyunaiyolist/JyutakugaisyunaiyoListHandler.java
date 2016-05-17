@@ -49,7 +49,7 @@ public class JyutakugaisyunaiyoListHandler {
      * @param model JyutakugaisyunaiyoListDataPassModel
      */
     public void initialize(JyutakugaisyunaiyoListDataPassModel model) {
-        div.setJushoData(DataPassingConverter.serialize(model.get住所クラス()));
+        div.setJushoData(DataPassingConverter.serialize(model.get識別コード()));
         RString 状態 = model.get状態();
         SearchResult<ShokanJutakuKaishu> jyutakugaisyunaiyoList;
         HihokenshaNo 被保険者番号 = model.get被保険者番号();

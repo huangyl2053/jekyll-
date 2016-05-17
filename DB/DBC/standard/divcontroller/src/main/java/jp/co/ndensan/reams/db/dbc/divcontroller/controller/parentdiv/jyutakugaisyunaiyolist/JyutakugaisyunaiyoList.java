@@ -9,8 +9,17 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.JyutakugaisyunaiyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoList.dgGaisyuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.jyutakugaisyunaiyolist.JyutakugaisyunaiyoListValidationHandler;
-import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -84,9 +93,20 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_CopyButton(JyutakugaisyunaiyoListDiv requestDiv) {
-        AtenaJusho jusho = new AtenaJusho(DataPassingConverter.deserialize(
-                requestDiv.getJushoData(), IJusho.class).get住所());
-        requestDiv.getTxtJyusyo().setDomain(jusho);
+        ShikibetsuCode shikibetsuCode = DataPassingConverter.deserialize(
+                requestDiv.getJushoData(), ShikibetsuCode.class);
+        IShikibetsuTaishoGyomuHanteiKey 業務判定キー = ShikibetsuTaishoGyomuHanteiKeyFactory.
+                createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー);
+        builder.set識別コード(shikibetsuCode);
+        IShikibetsuTaishoSearchKey 識別対象検索キー = builder.build();
+
+        IKojinFinder finder = ShikibetsuTaishoService.getKojinFinder();
+        List<IKojin> kojinList = finder.get個人s(識別対象検索キー);
+        if (!kojinList.isEmpty()) {
+            IKojin kojin = kojinList.get(0);
+            requestDiv.getTxtJyusyo().setDomain(new AtenaJusho(kojin.get住所().get住所()));
+        }
         requestDiv.getBtnClear().setDisabled(false);
         requestDiv.getBtnDetailConfirm().setDisabled(false);
         requestDiv.getBtnHonnijyusyoCopy().setDisabled(false);
