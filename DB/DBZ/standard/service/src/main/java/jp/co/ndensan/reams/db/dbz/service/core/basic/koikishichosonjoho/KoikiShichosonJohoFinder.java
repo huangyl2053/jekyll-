@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
@@ -29,8 +30,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -161,31 +162,32 @@ public class KoikiShichosonJohoFinder {
     public SearchResult<KoikiZenShichosonJoho> koseiShichosonJoho() {
         List<KoikiZenShichosonJoho> koseiShichosonJohoList = new ArrayList<>();
         DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
+        RDate 適用基準日 = RDate.getNowDate();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         entity.setShichosonShokibetsuID(SHOKIBETSUID);
         entity.setShichosonCode(new LasdecCode(association.get地方公共団体コード().value()));
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号,
+        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(DbBusinessConifg.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, 適用基準日,
                 SubGyomuCode.DBU介護統計報告)));
-        entity.setShichosonMeisho(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
+        entity.setShichosonMeisho(DbBusinessConifg.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, 適用基準日, SubGyomuCode.DBU介護統計報告));
         entity.setTodofukenMeisho(association.get都道府県名());
         entity.setGunMeisho(association.get郡名());
-        entity.setYubinNo(new YubinNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_郵便番号, SubGyomuCode.DBU介護統計報告)));
-        entity.setJusho(new AtenaJusho(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_住所, SubGyomuCode.DBU介護統計報告)));
-        entity.setTelNo(new TelNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告)));
-        entity.setYusenChikuCode(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_最優先地区コード, SubGyomuCode.DBU介護統計報告));
-        entity.setTyohyoTodoufukenHyojiUmu(BusinessConfig.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告));
-        entity.setTyohyoGunHyojiUmu(BusinessConfig.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告));
-        entity.setTyohyoShichosonHyojiUmu(BusinessConfig.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告));
-        entity.setTyohyoJushoHenshuHouhou(BusinessConfig.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告));
-        entity.setTyohyoKatagakiHyojiUmu(BusinessConfig.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告));
-        entity.setRojinhokenShichosonNo(BusinessConfig.get(ConfigNameDBU.老人保健情報_市町村番号, SubGyomuCode.DBU介護統計報告));
-        entity.setRokenJukyushaNoTaikei(BusinessConfig.get(ConfigNameDBD.老人保健情報_管理体系, SubGyomuCode.DBD介護受給));
-        entity.setTokuchoBunpaishuyaku(BusinessConfig.get(ConfigNameDBB.動作関連_特徴分配集約システム, SubGyomuCode.DBB介護賦課));
+        entity.setYubinNo(new YubinNo(DbBusinessConifg.get(ConfigKeysHokenshaJoho.保険者情報_郵便番号, 適用基準日, SubGyomuCode.DBU介護統計報告)));
+        entity.setJusho(new AtenaJusho(DbBusinessConifg.get(ConfigKeysHokenshaJoho.保険者情報_住所, 適用基準日, SubGyomuCode.DBU介護統計報告)));
+        entity.setTelNo(new TelNo(DbBusinessConifg.get(ConfigKeysHokenshaJoho.保険者情報_電話番号, 適用基準日, SubGyomuCode.DBU介護統計報告)));
+        entity.setYusenChikuCode(DbBusinessConifg.get(ConfigKeysHokenshaJoho.保険者情報_最優先地区コード, 適用基準日, SubGyomuCode.DBU介護統計報告));
+        entity.setTyohyoTodoufukenHyojiUmu(DbBusinessConifg.get(
+                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, 適用基準日, SubGyomuCode.DBU介護統計報告));
+        entity.setTyohyoGunHyojiUmu(DbBusinessConifg.get(
+                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_郡名付与有無, 適用基準日, SubGyomuCode.DBU介護統計報告));
+        entity.setTyohyoShichosonHyojiUmu(DbBusinessConifg.get(
+                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_市町村名付与有無, 適用基準日, SubGyomuCode.DBU介護統計報告));
+        entity.setTyohyoJushoHenshuHouhou(DbBusinessConifg.get(
+                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_編集方法, 適用基準日, SubGyomuCode.DBU介護統計報告));
+        entity.setTyohyoKatagakiHyojiUmu(DbBusinessConifg.get(
+                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_住所編集_方書表示有無, 適用基準日, SubGyomuCode.DBU介護統計報告));
+        entity.setRojinhokenShichosonNo(DbBusinessConifg.get(ConfigNameDBU.老人保健情報_市町村番号, 適用基準日, SubGyomuCode.DBU介護統計報告));
+        entity.setRokenJukyushaNoTaikei(DbBusinessConifg.get(ConfigNameDBD.老人保健情報_管理体系, 適用基準日, SubGyomuCode.DBD介護受給));
+        entity.setTokuchoBunpaishuyaku(DbBusinessConifg.get(ConfigNameDBB.動作関連_特徴分配集約システム, 適用基準日, SubGyomuCode.DBB介護賦課));
         entity.setKokuhorenKoikiShichosonNo(RString.EMPTY);
         entity.setIkoYMD(FlexibleDate.EMPTY);
         entity.setKanyuYMD(FlexibleDate.EMPTY);

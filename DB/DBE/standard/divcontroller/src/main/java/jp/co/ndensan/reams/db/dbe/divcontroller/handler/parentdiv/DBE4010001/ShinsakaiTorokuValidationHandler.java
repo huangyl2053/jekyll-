@@ -9,17 +9,18 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 完了処理・介護認定審査会登録のバリデーションハンドラークラスです。
@@ -125,7 +126,8 @@ public class ShinsakaiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs マスキング完了チェック(ValidationMessageControlPairs validPairs) {
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
-        RString カスタム = BusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, SubGyomuCode.DBE認定支援);
+        RDate 適用基準日 = RDate.getNowDate();
+        RString カスタム = DbBusinessConifg.get(ConfigNameDBE.マスキングチェックタイミング, 適用基準日, SubGyomuCode.DBE認定支援);
         if (介護認定審査会割当後.equals(カスタム)) {
             for (dgNinteiTaskList_Row データ : 選択データ) {
                 if (データ.getMaskingKanryoDay().getValue() != null) {

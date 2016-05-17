@@ -324,7 +324,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae11().setText(DecimalFormatter.toコンマ区切りRString(年金収入額, 0));
         }
-        if (賦課の情報.get保険料段階() != null) {
+        if (賦課の情報.get保険料段階() != null && !賦課の情報.get保険料段階().isEmpty()) {
             HokenryoDankaiList 保険料段階 = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課の情報.get賦課年度());
             HokenryoDankai 段階区分 = 保険料段階.getBy段階区分(賦課の情報.get保険料段階());
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
@@ -390,7 +390,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto11().setText(DecimalFormatter.toコンマ区切りRString(年金収入額, 0));
         }
-        if (賦課の情報.get保険料段階() != null) {
+        if (賦課の情報.get保険料段階() != null && !賦課の情報.get保険料段階().isEmpty()) {
             HokenryoDankaiList 保険料段階 = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課の情報.get賦課年度());
             HokenryoDankai 段階区分 = 保険料段階.getBy段階区分(賦課の情報.get保険料段階());
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
