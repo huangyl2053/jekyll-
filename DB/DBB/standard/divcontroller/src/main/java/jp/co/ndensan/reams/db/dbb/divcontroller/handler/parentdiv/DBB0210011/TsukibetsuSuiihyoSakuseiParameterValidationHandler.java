@@ -49,17 +49,17 @@ public class TsukibetsuSuiihyoSakuseiParameterValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getRadNenrei().getSelectedKey() != null && !div.getRadNenrei().getSelectedKey().isEmpty()) {
             if (ageStart == null || ageStart.intValue() < 年齢_65) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.年齢65歳未満));
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.年齢65歳未満, div.getTxtNenreiSt()));
             }
             if ((ageStart != null || ageEnd != null) && 年齢基準日 == null) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.年齢基準日));
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.年齢基準日, div.getTxtNenreiKijunYMD()));
             }
             if (ageStart != null && ageEnd != null && ageStart.compareTo(ageEnd) > 0) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始年齢大小不整合));
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始年齢大小不整合, div.getTxtNenreiSt(), div.getTxtNenreiEd()));
             }
         } else {
             if (生年月日F != null && 生年月日E != null && 生年月日E.isBefore(生年月日F)) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始生年月日大小不整合));
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.抽出開始生年月日大小不整合, div.getTxtUmareSt(), div.getTxtUmareEd()));
             }
         }
         return validationMessages;
