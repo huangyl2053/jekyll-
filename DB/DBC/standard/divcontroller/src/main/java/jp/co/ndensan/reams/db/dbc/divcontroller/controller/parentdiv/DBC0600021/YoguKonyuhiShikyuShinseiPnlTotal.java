@@ -603,7 +603,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                     setValue(jigyoshaMode.getSeizoJigyoshamei());
         }
         if (jigyoshaMode != null && jigyoshaMode.getHinmokuCode() != null && !jigyoshaMode.getHinmokuCode().isEmpty()) {
-            div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHanbaiJigyosha().
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().getTxtHinmokuCode().
                     setValue(jigyoshaMode.getHinmokuCode());
         }
         return ResponseData.of(div).respond();
