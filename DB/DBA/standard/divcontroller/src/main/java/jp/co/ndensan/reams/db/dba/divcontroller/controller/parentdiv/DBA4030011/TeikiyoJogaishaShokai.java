@@ -54,7 +54,6 @@ public class TeikiyoJogaishaShokai {
         div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(識別コード);
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getTeikiyoJogaishaJoho().getCcdTekiyoJogaiRireki().initialize(識別コード);
-        div.getShisetsuJoho().setIsOpen(false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnReportPublish"), false);
         return ResponseData.of(div).respond();
     }
