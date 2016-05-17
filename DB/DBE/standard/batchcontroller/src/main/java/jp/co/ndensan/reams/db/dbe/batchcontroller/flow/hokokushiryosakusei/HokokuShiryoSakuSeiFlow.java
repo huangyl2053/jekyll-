@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hokokushiryosakusei;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JisshiJokyoTokeiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.SinsakaiHanteiJyokyoProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei.HokokuShiryoSakuSeiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -17,6 +18,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
 
     private static final String 事業状況データ作成 = "jigyoJyokyoDataSakuSei";
     private static final String 事業状況報告出力 = "jigyoJyokyoHokoku";
+    private static final String 認定実施状況統計 = "jissiJyokyoTokei";
     private static final String 審査判定状況出力 = "sinsaHanteiJyokyo";
 
     @Override
@@ -25,20 +27,12 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
             executeStep(事業状況データ作成);
             executeStep(事業状況報告出力);
         }
+        if (getParameter().isJissiJyokyoTokei()) {
+            executeStep(認定実施状況統計);
+        }
         if (getParameter().isSinsaHanteiJyokyo()) {
             executeStep(審査判定状況出力);
         }
-    }
-
-    /**
-     * 介護認定審査会判定状況表の作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(審査判定状況出力)
-    protected IBatchFlowCommand selectTaisyosyaByShinsakaiKaisaiNo() {
-        return loopBatch(SinsakaiHanteiJyokyoProcess.class)
-                .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
     }
 
     /**
@@ -61,4 +55,27 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     protected IBatchFlowCommand selectJigyoJyokyoHokoku() {
         return loopBatch(JigyoJyokyoHokokuProcess.class).define();
     }
+
+    /**
+     * 要介護認定実施状況統計情報の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(認定実施状況統計)
+    protected IBatchFlowCommand selectJisshiJokyoTokei() {
+        return simpleBatch(JisshiJokyoTokeiProcess.class)
+                .arguments(getParameter().toJisshiJokyoTokeiProcessParameter()).define();
+    }
+
+    /**
+     * 介護認定審査会判定状況表の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査判定状況出力)
+    protected IBatchFlowCommand selectTaisyosyaByShinsakaiKaisaiNo() {
+        return loopBatch(SinsakaiHanteiJyokyoProcess.class)
+                .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
+    }
+
 }

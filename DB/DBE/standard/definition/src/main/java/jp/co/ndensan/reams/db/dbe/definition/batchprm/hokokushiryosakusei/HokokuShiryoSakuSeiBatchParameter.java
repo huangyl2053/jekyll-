@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JigyoJyokyoHokokuProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JisshiJokyoTokeiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -171,6 +172,30 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
         return new JigyoJyokyoHokokuProcessParameter(
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
+                isTaishoTsukiKubun,
+                isTaishoGeppiKubun,
+                taishoNendoYM,
+                RString.isNullOrEmpty(taishoGeppiFrom),
+                RString.isNullOrEmpty(taishoGeppiTo),
+                taishoGeppiFrom,
+                taishoGeppiTo,
+                isSinseiKubunSinseitoki,
+                isSinseiKubunHorei);
+    }
+
+    /**
+     * JisshiJokyoTokeiProcessParameterに転換します。
+     *
+     * @return JisshiJokyoTokeiProcessParameter
+     */
+    public JisshiJokyoTokeiProcessParameter toJisshiJokyoTokeiProcessParameter() {
+
+        return new JisshiJokyoTokeiProcessParameter(
+                RString.isNullOrEmpty(hokensyaNo),
+                hokensyaNo,
+                hiHokensyaKubun,
+                -1 == gogitaiNo,
+                gogitaiNo,
                 isTaishoTsukiKubun,
                 isTaishoGeppiKubun,
                 taishoNendoYM,
