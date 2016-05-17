@@ -1,0 +1,83 @@
+package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
+
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+
+/**
+ * 国保連情報取込処理共通のビジネスです。<br>
+ * 国保連インタフェース管理TBL更新
+ *
+ * @reamsid_L DBC-0980-540 zhangrui
+ */
+public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
+
+    private final DbT3104KokuhorenInterfaceKanriDac 国保連インターフェース管理Dac;
+
+    private static final int 定数_0 = 0;
+    private static final int 定数_1 = 1;
+    private static final int 定数_2 = 2;
+    private static final int 定数_3 = 3;
+    private static final int 定数_4 = 4;
+    private static final RString 送付取込区分_取込 = new RString("2");
+    private static final RString 処理状態区分_終了 = new RString("3");
+
+    KokuhorenKyoutsuuInterfaceKanriKousinManager() {
+        this.国保連インターフェース管理Dac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link KokuhorenKyoutsuuInterfaceKanriKousinManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link KokuhorenKyoutsuuInterfaceKanriKousinManager}のインスタンス
+     */
+    public static KokuhorenKyoutsuuInterfaceKanriKousinManager createInstance() {
+        return InstanceProvider.create(KokuhorenKyoutsuuInterfaceKanriKousinManager.class);
+    }
+
+    /**
+     * 国保連インタフェース管理TBL更新
+     *
+     * @param 処理年月 FlexibleYearMonth
+     * @param 交換情報識別番号 RString
+     * @param 処理対象年月 FlexibleYearMonth
+     * @param レコード件数合計 int
+     * @param エントリ情報List List<SharedFileEntryDescriptor>
+     * @return 保存成功TRUE 失敗FALSE
+     */
+    public boolean updateInterfaceKanriTbl(FlexibleYearMonth 処理年月, RString 交換情報識別番号, FlexibleYearMonth 処理対象年月,
+            int レコード件数合計, List<SharedFileEntryDescriptor> エントリ情報List) {
+        DbT3104KokuhorenInterfaceKanriEntity entity = 国保連インターフェース管理Dac.selectByKeyUndeleted(処理年月, 交換情報識別番号);
+        if (null != entity) {
+            entity.setSofuTorikomiKubun(送付取込区分_取込);
+            entity.setShoriJotaiKubun(処理状態区分_終了);
+            entity.setShoriJisshiTimestamp(YMDHMS.now());
+            entity.setSaiShoriFukaKubun(false);
+            entity.setShoriJikkoKaisu(getNotNull(entity.getShoriJikkoKaisu()));
+            entity.setFileName1(getFileName(エントリ情報List, 定数_0));
+            entity.setFileName2(getFileName(エントリ情報List, 定数_1));
+            entity.setFileName3(getFileName(エントリ情報List, 定数_2));
+            entity.setFileName4(getFileName(エントリ情報List, 定数_3));
+            entity.setFileName5(getFileName(エントリ情報List, 定数_4));
+            entity.setCtrlRecordKensu(レコード件数合計);
+            entity.setCtrlShoriYM(処理対象年月);
+        }
+        return 1 == 国保連インターフェース管理Dac.save(entity);
+    }
+
+    private RString getFileName(List<SharedFileEntryDescriptor> エントリ情報List, int 定数) {
+        return (null == エントリ情報List || エントリ情報List.isEmpty() || エントリ情報List.size() > 定数)
+                ? RString.EMPTY : エントリ情報List.get(定数).getSharedFileName().toRString();
+    }
+
+    private Decimal getNotNull(Decimal decimal) {
+        return (null == decimal) ? Decimal.ONE : decimal.add(Decimal.ONE);
+    }
+
+}
