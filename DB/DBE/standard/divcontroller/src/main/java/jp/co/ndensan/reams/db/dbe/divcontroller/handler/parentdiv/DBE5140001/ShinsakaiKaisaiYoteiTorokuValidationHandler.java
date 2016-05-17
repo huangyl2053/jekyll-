@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgKaisaiYoteiNyuryokuran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiGogitaiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -143,7 +143,7 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 審査会の1日最大登録件数チェック(ValidationMessageControlPairs validationMessages) {
-        RString 開催最大数 = BusinessConfig.get(ConfigNameDBE.審査会開催最大数, SubGyomuCode.DBE認定支援);
+        RString 開催最大数 = DbBusinessConifg.get(ConfigNameDBE.審査会開催最大数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuRowList = div.getDgKaisaiYoteiNyuryokuran().getDataSource();
         int count = 0;
         for (dgKaisaiYoteiNyuryokuran_Row row : nyuryokuRowList) {
