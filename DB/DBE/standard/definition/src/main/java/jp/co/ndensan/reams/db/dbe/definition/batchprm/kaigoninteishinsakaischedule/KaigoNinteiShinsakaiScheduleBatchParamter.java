@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedule;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleProcessParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +25,8 @@ public class KaigoNinteiShinsakaiScheduleBatchParamter extends BatchParameterBas
     private static final String SHINSAKAIKAISAIKIKANFROM = "shinsakaiKaisaiKikanFrom";
     private static final String SHINSAKAIKAISAIKIKANTO = "shinsakaiKaisaiKikanTo";
     private static final String NENDO = "shinsakaiKaisaiKikanTo";
-    private static final String SHINSAKAIIINCODE = "shinsakaiIinCodeList";
+    private static final String SHINSAKAIIINCODE = "chohyoShutsuryokuKubun";
+    private static final String CHOHYOSHUTSURYOKUKUBUN = "chohyoShutsuryokuKubun";
 
     @BatchParameter(key = SHINSAKAIKAISAIKIKANFROM, name = "介護認定審査会開催予定期間From")
     private RString shinsakaiKaisaiKikanFrom;
@@ -35,14 +34,8 @@ public class KaigoNinteiShinsakaiScheduleBatchParamter extends BatchParameterBas
     private RString shinsakaiKaisaiKikanTo;
     @BatchParameter(key = NENDO, name = "年度")
     private RString nendo;
-    @BatchParameter(key = SHINSAKAIIINCODE, name = "審査会委員コードリスト")
-    private List<RString> shinsakaiIinCodeList;
-
-    /**
-     * コンストラクタです。
-     */
-    public KaigoNinteiShinsakaiScheduleBatchParamter() {
-    }
+    @BatchParameter(key = CHOHYOSHUTSURYOKUKUBUN, name = "帳票出力区分")
+    private RString chohyoShutsuryokuKubun;
 
     /**
      * コンストラクタです。
@@ -50,18 +43,18 @@ public class KaigoNinteiShinsakaiScheduleBatchParamter extends BatchParameterBas
      * @param 介護認定審査会開催予定期間From 介護認定審査会開催予定期間From
      * @param 介護認定審査会開催予定期間To 介護認定審査会開催予定期間To
      * @param 年度 年度
-     * @param 審査会委員コードリスト 審査会委員コードリスト
+     * @param 帳票出力区分 帳票出力区分
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public KaigoNinteiShinsakaiScheduleBatchParamter(
             RString 介護認定審査会開催予定期間From,
             RString 介護認定審査会開催予定期間To,
             RString 年度,
-            List<RString> 審査会委員コードリスト) {
+            RString 帳票出力区分) {
         this.shinsakaiKaisaiKikanFrom = 介護認定審査会開催予定期間From;
         this.shinsakaiKaisaiKikanTo = 介護認定審査会開催予定期間To;
         this.nendo = 年度;
-        this.shinsakaiIinCodeList = 審査会委員コードリスト;
+        this.chohyoShutsuryokuKubun = 帳票出力区分;
     }
 
     /**
@@ -73,17 +66,6 @@ public class KaigoNinteiShinsakaiScheduleBatchParamter extends BatchParameterBas
         return new KaigoNinteiShinsakaiScheduleProcessParamter(shinsakaiKaisaiKikanFrom,
                 shinsakaiKaisaiKikanTo,
                 nendo,
-                shinsakaiIinCodeList);
-    }
-
-    /**
-     * processのパラメータを生成します。
-     *
-     * @return KaigoNinteiShinsakaiScheduleKagamiProcessParamter
-     */
-    public KaigoNinteiShinsakaiScheduleKagamiProcessParamter toKaigoNinteiShinsakaiScheduleKagamiProcessParamter() {
-        return new KaigoNinteiShinsakaiScheduleKagamiProcessParamter(shinsakaiKaisaiKikanFrom,
-                shinsakaiKaisaiKikanTo,
-                shinsakaiIinCodeList);
+                chohyoShutsuryokuKubun);
     }
 }
