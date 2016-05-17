@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmen.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateSonotaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gemmen.IGemmenJohoRelateMapper;
@@ -83,6 +84,44 @@ public class GemmenJohoManager {
         IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
 
         GemmenJohoRelateEntity relateEntity = mapper.select減免の情報ByKey(減免の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new GemmenJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する減免の情報を返します。
+     *
+     * @param 減免の情報検索条件 減免の情報検索条件
+     * @return GemmenJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public GemmenJoho get減免の情報_決定更正後(GemmenJohoRelateSonotaMapperParameter 減免の情報検索条件) {
+        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("減免の情報検索条件"));
+        IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
+
+        GemmenJohoRelateEntity relateEntity = mapper.select減免の情報_決定更正後(減免の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new GemmenJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する減免の情報を返します。
+     *
+     * @param 減免の情報検索条件 減免の情報検索条件
+     * @return GemmenJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public GemmenJoho get減免の情報_取消更正後(GemmenJohoRelateSonotaMapperParameter 減免の情報検索条件) {
+        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("減免の情報検索条件"));
+        IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
+
+        GemmenJohoRelateEntity relateEntity = mapper.select減免の情報_取消更正後(減免の情報検索条件);
         if (relateEntity == null) {
             return null;
         }
