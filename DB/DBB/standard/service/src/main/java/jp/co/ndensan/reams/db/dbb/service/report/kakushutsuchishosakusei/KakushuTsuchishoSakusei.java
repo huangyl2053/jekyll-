@@ -418,6 +418,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         KakushuTsuchishoCommonInfo 通知書共通情報 = search通知書共通情報(parameter);
 
+        if (通知書共通情報 == null) {
+            return null;
+        }
         List<RString> 発行する帳票List = parameter.get発行する帳票List();
         for (RString 発行する帳票 : 発行する帳票List) {
             publish通知書発行(parameter, 発行する帳票, 通知書共通情報);
@@ -428,9 +431,6 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
     private void publish通知書発行(KakushuTsuchishoParameter parameter, RString 発行する帳票,
             KakushuTsuchishoCommonInfo 通知書共通情報) {
 
-        if (parameter == null || 通知書共通情報 == null) {
-            return;
-        }
         if (TsuchiSho.特別徴収開始通知書_仮算定.get名称().equals(発行する帳票)) {
             publish特別徴収開始通知書仮算定(parameter, 通知書共通情報);
         } else if (TsuchiSho.仮算定額変更通知書.get名称().equals(発行する帳票)) {
@@ -1009,7 +1009,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
         HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
         本算定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
-        本算定通知書情報.set発行日(new RDate(parameter.get変更通知書_発行日().toString()));
+        本算定通知書情報.set発行日(get発行日(parameter.get変更通知書_発行日()));
         本算定通知書情報.set帳票分類ID(決定通知書_帳票分類ID);
         本算定通知書情報.set帳票ID(帳票ID);
         本算定通知書情報.set処理区分(ShoriKubun.リアル);
@@ -1034,7 +1034,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
 
         HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報 = new HonSanteiKetteiTsuchiShoJoho();
-        本算定決定通知書情報.set発行日(new RDate(parameter.get変更通知書_発行日().toString()));
+        本算定決定通知書情報.set発行日(get発行日(parameter.get変更通知書_発行日()));
         本算定決定通知書情報.set帳票分類ID(決定通知書_帳票分類ID);
         本算定決定通知書情報.set帳票ID(帳票ID);
         本算定決定通知書情報.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
@@ -1073,7 +1073,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
         本算定通知書情報.set現年度_過年度区分(通知書共通情報.get年度区分());
-        本算定通知書情報.set発行日(new RDate(parameter.get納入通知書_発行日().toString()));
+        本算定通知書情報.set発行日(get発行日(parameter.get納入通知書_発行日()));
         本算定通知書情報.set帳票分類ID(保険料納入通知書_帳票分類ID);
         本算定通知書情報.set帳票ID(帳票ID);
         本算定通知書情報.set処理区分(ShoriKubun.リアル);
@@ -1414,9 +1414,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                 通知書定型文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
             }
         }
-        nullTOEmpty(通知書定型文);
         KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報 = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho();
-        徴収猶予決定通知書情報.set徴収猶予の情報(null);
+        徴収猶予決定通知書情報.set徴収猶予の情報(徴収猶予の情報);
         徴収猶予決定通知書情報.set宛名(通知書共通情報.get宛名情報());
         徴収猶予決定通知書情報.set宛先(通知書共通情報.get宛先情報());
         徴収猶予決定通知書情報.set地方公共団体(通知書共通情報.get地方公共団体());
@@ -1427,11 +1426,11 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         SourceDataCollection sourceDataCollection;
         if (ReportIdDBB.DBB100081.getReportId().equals(帳票ID)) {
             sourceDataCollection = new KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService()
-                    .printB5横タイプ(new RDate(parameter.get徴収猶予通知書_発行日().toString()),
+                    .printB5横タイプ(get発行日(parameter.get徴収猶予通知書_発行日()),
                             parameter.get徴収猶予通知書_文書番号(), 徴収猶予決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー);
         } else {
             sourceDataCollection = new KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService()
-                    .printA4縦タイプ(new RDate(parameter.get徴収猶予通知書_発行日().toString()),
+                    .printA4縦タイプ(get発行日(parameter.get徴収猶予通知書_発行日()),
                             parameter.get徴収猶予通知書_文書番号(), 徴収猶予決定通知書情報, 通知書定型文, 介護問合せ先ソースビルダー);
         }
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
