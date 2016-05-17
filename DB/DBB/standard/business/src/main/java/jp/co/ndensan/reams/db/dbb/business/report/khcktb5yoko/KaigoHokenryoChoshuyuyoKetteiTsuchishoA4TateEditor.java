@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.KibetsuChoshyuYuyoKikan;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource;
@@ -16,13 +18,18 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -134,17 +141,23 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
                         .eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
             }
             source.ketteiKekka = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予状態区分();
-            source.tsuchishoNo = 徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号();
-            source.setaiCode = 徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード();
-            source.hihokenshaNo = 徴収猶予決定通知書情報.get徴収猶予の情報().get被保険者番号();
-            source.shikibetsuCode = 徴収猶予決定通知書情報.get徴収猶予の情報().get識別コード();
-            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定日())) {
-                source.ketteiYMD = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定日()
+            TsuchishoNo 通知書番号 = 徴収猶予決定通知書情報.get徴収猶予の情報().get通知書番号();
+            source.tsuchishoNo = 通知書番号 != null ? 通知書番号.value() : RString.EMPTY;
+            SetaiCode 世帯コード = 徴収猶予決定通知書情報.get徴収猶予の情報().get世帯コード();
+            source.setaiCode = 世帯コード != null ? 世帯コード.value() : RString.EMPTY;
+            HihokenshaNo 被保険者番号 = 徴収猶予決定通知書情報.get徴収猶予の情報().get被保険者番号();
+            source.hihokenshaNo = 被保険者番号 != null ? 被保険者番号.value() : RString.EMPTY;
+            ShikibetsuCode 識別コード = 徴収猶予決定通知書情報.get徴収猶予の情報().get識別コード();
+            source.shikibetsuCode = 識別コード != null ? 識別コード.value() : RString.EMPTY;
+            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定年月日())) {
+                source.ketteiYMD = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予決定年月日()
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予種類())) {
-                source.ketteiRiyu1 = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予種類().getMeisho();
+            if (isNotNull(徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予種類コード())) {
+                HokenryoChoshuYuyoShurui 徴収猶予種類 = new HokenryoChoshuYuyoShurui(徴収猶予決定通知書情報.get徴収猶予の情報()
+                        .get徴収猶予種類コード());
+                source.ketteiRiyu1 = 徴収猶予種類.getMeisho();
             }
             source.ketteiRiyu2 = 徴収猶予決定通知書情報.get徴収猶予の情報().get徴収猶予取消事由();
         }
@@ -353,11 +366,14 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
         if (choshuYuyoJoho == null) {
             return 徴収猶予期間;
         }
-        RString 徴収方法 = choshuYuyoJoho.get介護期別徴収猶予().getChoshuHoho();
-        RString 期 = new RString(String.valueOf(choshuYuyoJoho.get介護期別徴収猶予().getKi()));
-        if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期().equals(期)) {
-            徴収猶予期間 = new RString(DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoStartYMD()).toString()
-                    + 波線.toString() + DateEditor.to西暦(choshuYuyoJoho.get介護期別徴収猶予().getYuyoEndYMD()).toString());
+        List<KibetsuChoshuYuyo> 介護期別徴収猶予List = choshuYuyoJoho.get介護期別徴収猶予();
+        for (KibetsuChoshuYuyo 介護期別徴収猶予 : 介護期別徴収猶予List) {
+            RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
+            RString 期 = new RString(String.valueOf(介護期別徴収猶予.get期()));
+            if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期().equals(期)) {
+                徴収猶予期間 = new RString(DateEditor.to西暦(介護期別徴収猶予.get徴収猶予開始日()).toString()
+                        + 波線.toString() + DateEditor.to西暦(介護期別徴収猶予.get徴収猶予終了日()).toString());
+            }
         }
         return 徴収猶予期間;
     }
