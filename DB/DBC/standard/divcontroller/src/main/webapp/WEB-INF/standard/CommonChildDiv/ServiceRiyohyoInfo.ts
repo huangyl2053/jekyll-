@@ -79,7 +79,6 @@ module DBC {
                 editTypes.addEditType("ServiceRiyohyoEraseBorder", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("onClickBtnCalcMeisai", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickBtnCalcGokei", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("onBlurTxtSreviceCode", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
 
@@ -241,15 +240,6 @@ module DBC {
             public setonClickBtnCalcGokei(value) {
                 this.controls.btnCalcGokei().onClick = value;
             }
-
-            public getonBlurTxtSreviceCode() {
-                return this.controls.txtServiceCode().onBlur;
-            }
-
-            public setonBlurTxtSreviceCode(value) {
-                this.controls.txtServiceCode().onBlur = value;
-            }
-
         }
     }
 }

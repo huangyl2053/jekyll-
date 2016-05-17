@@ -240,6 +240,10 @@ public class ShikakuShutokuIdoTotal {
 
         }
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
+        List<dgShikakuShutokuRireki_Row> sortList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki()
+                .getDataGridDataSource();
+        Collections.sort(sortList, new ShikakuShutokuIdoTotal.ComparatorByShutokuDateSort());
+        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridDataSource(sortList);
         createHandler(div).資格取得情報パネルの初期化();
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setReadOnly(true);
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
@@ -283,7 +287,7 @@ public class ShikakuShutokuIdoTotal {
     }
 
     /**
-     * 資格得喪履歴グリッドの枝番の昇順処理です。
+     * 資格得喪履歴グリッドの枝番の降順処理です。
      */
     public static class ComparatorByDaNoSort implements Comparator, Serializable {
 
@@ -296,6 +300,34 @@ public class ShikakuShutokuIdoTotal {
             return row0.getDaNo().compareTo(row1.getDaNo());
         }
 
+    }
+
+    /**
+     * 資格得喪履歴グリッドの枝番の昇順処理です。
+     */
+    public static class ComparatorByShutokuDateSort implements Comparator, Serializable {
+
+        private static final long serialVersionUID = -4360646115909064130L;
+
+        @Override
+        public int compare(Object arg0, Object arg1) {
+            dgShikakuShutokuRireki_Row row0 = (dgShikakuShutokuRireki_Row) arg0;
+            dgShikakuShutokuRireki_Row row1 = (dgShikakuShutokuRireki_Row) arg1;
+
+            if (ChangeStringToInt(row0.getShutokuDate().getValue().toString()) > ChangeStringToInt(row1.getShutokuDate().getValue().toString())) {
+                return -1;
+            } else {
+                if (ChangeStringToInt(row0.getShutokuDate().getValue().toString()) == ChangeStringToInt(row1.getShutokuDate().getValue().toString())) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        }
+
+        public int ChangeStringToInt(String str) {
+            return new Integer(str).intValue();
+        }
     }
 
     private enum ShikakuShutokuIdoTotalErrorMessage implements IValidationMessage {

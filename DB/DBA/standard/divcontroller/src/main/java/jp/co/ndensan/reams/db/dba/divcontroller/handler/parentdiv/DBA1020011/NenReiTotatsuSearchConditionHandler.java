@@ -80,7 +80,7 @@ public class NenReiTotatsuSearchConditionHandler {
         if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue()
                 .isBeforeOrEquals(FlexibleDate.getNowDate())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２,
-                    "年齢到達期間終了日", "システム日付")));
+                    "年齢到達期間終了日", "処理日付")));
         }
         boolean checkFlag2 = new NenreitotatsuShikakuIdo()
                 .checkKaishibiShuryobiKikanJufuku(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),

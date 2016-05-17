@@ -52,6 +52,10 @@ var DBC;
                 return new UZA.TextBox(this.convFiledName("txtKubunShikyuGendogaku"));
             };
 
+            Controls.prototype.ShuruiGendoKakunin = function () {
+                return new UZA.Button(this.convFiledName("ShuruiGendoKakunin"));
+            };
+
             Controls.prototype.txtRiyohyoSakuseisha = function () {
                 return new UZA.TextBox(this.convFiledName("txtRiyohyoSakuseisha"));
             };
@@ -62,14 +66,6 @@ var DBC;
 
             Controls.prototype.btnZengetsuCopy = function () {
                 return new UZA.Button(this.convFiledName("btnZengetsuCopy"));
-            };
-
-            Controls.prototype.tabServiceRiyohyo = function () {
-                return new UZA.TabContainer(this.convFiledName("tabServiceRiyohyo"));
-            };
-
-            Controls.prototype.ServiceRiyohyoBeppyo = function () {
-                return new UZA.TabPanel(this.convFiledName("ServiceRiyohyoBeppyo"));
             };
 
             Controls.prototype.ServiceRiyohyoBeppyoRiyoNissu = function () {
@@ -100,6 +96,10 @@ var DBC;
                 return new UZA.Button(this.convFiledName("btnBeppyoGokeiNew"));
             };
 
+            Controls.prototype.btnBeppyoMeisaiGokeiNew = function () {
+                return new UZA.Button(this.convFiledName("btnBeppyoMeisaiGokeiNew"));
+            };
+
             Controls.prototype.dgServiceRiyohyoBeppyoList = function () {
                 return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoBeppyoList"));
             };
@@ -118,18 +118,6 @@ var DBC;
 
             Controls.prototype.txtJigyoshaName = function () {
                 return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
-            };
-
-            Controls.prototype.txtServiceCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtServiceCode"));
-            };
-
-            Controls.prototype.btnService = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnService"));
-            };
-
-            Controls.prototype.txtServiceName = function () {
-                return new UZA.TextBox(this.convFiledName("txtServiceName"));
             };
 
             Controls.prototype.txtTani = function () {
@@ -162,6 +150,14 @@ var DBC;
 
             Controls.prototype.btnCalcMeisai = function () {
                 return new UZA.Button(this.convFiledName("btnCalcMeisai"));
+            };
+
+            Controls.prototype.tbTeigakuRiyoushaFudan = function () {
+                return new UZA.TextBox(this.convFiledName("tbTeigakuRiyoushaFudan"));
+            };
+
+            Controls.prototype.tbRiyoushaFudan = function () {
+                return new UZA.TextBox(this.convFiledName("tbRiyoushaFudan"));
             };
 
             Controls.prototype.btnBeppyoMeisaiKakutei = function () {
@@ -234,6 +230,14 @@ var DBC;
 
             Controls.prototype.btnBeppyoGokeiKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnBeppyoGokeiKakutei"));
+            };
+
+            Controls.prototype.btnSave = function () {
+                return new UZA.Button(this.convFiledName("btnSave"));
+            };
+
+            Controls.prototype.btnDelete = function () {
+                return new UZA.Button(this.convFiledName("btnDelete"));
             };
             return Controls;
         })();

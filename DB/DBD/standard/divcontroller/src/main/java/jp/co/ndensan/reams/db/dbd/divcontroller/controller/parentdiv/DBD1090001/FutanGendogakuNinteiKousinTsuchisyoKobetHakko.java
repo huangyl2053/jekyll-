@@ -80,7 +80,7 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
                 = ViewStateHolder.get(FutanGendogakuNinteiKousinTsuchisyoKobetHakkoHandler.KgHoukenFutanGendogakuNintei.リストキー, ArrayList.class);
         if (!futanGendogakuNinteiList.isEmpty()) {
             set負担限度額認定エリア(div, futanGendogakuNinteiList.get(futanGendogakuNinteiList.size() - 1));
-            div.setListIndex(new RString("0"));
+            div.setListIndex(new RString(Integer.toString(futanGendogakuNinteiList.size() - 1)));
             div.getBtnGoRireki().setDisabled(true);
             if (1 == futanGendogakuNinteiList.size()) {
                 div.getBtnZenRireki().setDisabled(true);

@@ -63,6 +63,8 @@ public class JutakuKaishuJizenShinseiTorokuDiv extends Panel {
     private RString hidInputConfirmMsgDisplayedFlg;
     @JsonProperty("hidInputCheckMsgDisplayedFlg")
     private RString hidInputCheckMsgDisplayedFlg;
+    @JsonProperty("JigyoshaMode")
+    private RString JigyoshaMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -428,6 +430,24 @@ public class JutakuKaishuJizenShinseiTorokuDiv extends Panel {
     @JsonProperty("hidInputCheckMsgDisplayedFlg")
     public void setHidInputCheckMsgDisplayedFlg(RString hidInputCheckMsgDisplayedFlg) {
         this.hidInputCheckMsgDisplayedFlg = hidInputCheckMsgDisplayedFlg;
+    }
+
+    /*
+     * getJigyoshaMode
+     * @return JigyoshaMode
+     */
+    @JsonProperty("JigyoshaMode")
+    public RString getJigyoshaMode() {
+        return JigyoshaMode;
+    }
+
+    /*
+     * setJigyoshaMode
+     * @param JigyoshaMode JigyoshaMode
+     */
+    @JsonProperty("JigyoshaMode")
+    public void setJigyoshaMode(RString JigyoshaMode) {
+        this.JigyoshaMode = JigyoshaMode;
     }
 
     // </editor-fold>
