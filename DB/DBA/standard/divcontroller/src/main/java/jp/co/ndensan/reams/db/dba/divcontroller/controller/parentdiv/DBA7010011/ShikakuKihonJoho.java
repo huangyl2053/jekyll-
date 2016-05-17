@@ -77,6 +77,7 @@ public class ShikakuKihonJoho {
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100007.getReportId());
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
         return ResponseData.of(div).respond();
     }
 
@@ -89,6 +90,7 @@ public class ShikakuKihonJoho {
     public ResponseData<ShikakuKihonJohoDiv> onClick_dgJushochiTokureiRireki(ShikakuKihonJohoDiv div) {
 
         RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, false);
         createHandler(div).適用情報の編集(文書番号取得);
         return ResponseData.of(div).respond();
     }
