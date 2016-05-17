@@ -1153,6 +1153,19 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
+     * 介護期別徴収猶予を返します。
+     *
+     * @return 介護期別徴収猶予
+     */
+    public List<KibetsuChoshuYuyo> get介護期別徴収猶予() {
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        if (徴収猶予 == null) {
+            return new ArrayList<>();
+        }
+        return 徴収猶予.getKibetsuChoshuYuyoList();
+    }
+
+    /**
      * 期別金額を返します。
      *
      * @param 期 int
