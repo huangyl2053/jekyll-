@@ -1311,8 +1311,10 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 addDataBuilder.set住宅改修内容(tmpRow.getTxtKaishuNaiyo());
                 addDataBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
                 addDataBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
-                addDataBuilder.set住宅改修着工年月日(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()));
-                addDataBuilder.set住宅改修完成年月日(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()));
+                addDataBuilder.set住宅改修着工年月日(new FlexibleDate(
+                        new RDate(tmpRow.getTxtChakkoYoteibi().toString()).toDateString()));
+                addDataBuilder.set住宅改修完成年月日(new FlexibleDate(
+                        new RDate(tmpRow.getTxtKanseiYoteibi().toString()).toDateString()));
                 addDataBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty()
                         ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
                 addDataBuilder.set差額金額(0);
@@ -1481,7 +1483,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
 
     private void set償還払請求住宅改修(dgGaisyuList_Row row, ShokanJutakuKaishuBuilder dbt3049Builder) {
         if (row.getTxtChakkoYoteibi() != null) {
-            dbt3049Builder.set住宅改修着工年月日(new FlexibleDate(row.getTxtChakkoYoteibi()));
+            dbt3049Builder.set住宅改修着工年月日(new FlexibleDate(
+                    new RDate(row.getTxtChakkoYoteibi().toString()).toDateString()));
         }
         if (row.getTxtKaishuNaiyo() != null) {
             dbt3049Builder.set住宅改修内容(row.getTxtKaishuNaiyo());
@@ -1496,7 +1499,8 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             dbt3049Builder.set改修金額(Integer.parseInt(row.getTxtKaishuKingaku().toString()));
         }
         if (row.getTxtKanseiYoteibi() != null) {
-            dbt3049Builder.set住宅改修完成年月日(new FlexibleDate(row.getTxtKanseiYoteibi()));
+            dbt3049Builder.set住宅改修完成年月日(new FlexibleDate(
+                    new RDate(row.getTxtKanseiYoteibi().toString()).toDateString()));
         }
         dbt3049Builder.set差額金額(0);
     }
