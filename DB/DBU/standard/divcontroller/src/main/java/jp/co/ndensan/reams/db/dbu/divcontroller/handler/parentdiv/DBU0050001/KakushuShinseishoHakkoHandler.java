@@ -78,9 +78,7 @@ public class KakushuShinseishoHakkoHandler {
      * 各種申請書発行の初期化処理です。
      */
     public void onLoad() {
-//        ShikibetsuCode 識別コード = data.get識別コード();
-//        HihokenshaNo 被保険者番号 = data.get被保険者番号();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        ShikibetsuCode 識別コード = data.get識別コード();
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
         List<dgKakushushinsei_Row> dateSource = new ArrayList<>();
@@ -100,15 +98,13 @@ public class KakushuShinseishoHakkoHandler {
      */
     public SourceDataCollection click_帳票発行() {
         SourceDataCollection sourceData = new SourceDataCollection();
-        reportPublish(sourceData);
+        sourceData = reportPublish(sourceData);
         return sourceData;
     }
 
     private SourceDataCollection reportPublish(SourceDataCollection sourceData) {
-//        ShikibetsuCode 識別コード = data.get識別コード();
-//        HihokenshaNo 被保険者番号 = data.get被保険者番号();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000022502");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("20160203");
+        ShikibetsuCode 識別コード = data.get識別コード();
+        HihokenshaNo 被保険者番号 = data.get被保険者番号();
         List<dgKakushushinsei_Row> rowList = div.getKakushushinseiIchiran().getDgKakushushinsei().getDataSource();
         for (dgKakushushinsei_Row row : rowList) {
             if (row.getSentaku().booleanValue()) {
@@ -183,10 +179,8 @@ public class KakushuShinseishoHakkoHandler {
     }
 
     private SourceDataCollection reportPublish_bak(SourceDataCollection sourceData, dgKakushushinsei_Row row) {
-//        ShikibetsuCode 識別コード = data.get識別コード();
-//        HihokenshaNo 被保険者番号 = data.get被保険者番号();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000022502");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("20160203");
+        ShikibetsuCode 識別コード = data.get識別コード();
+        HihokenshaNo 被保険者番号 = data.get被保険者番号();
         if (ShinseishoChohyoShurui.介護保険受領委任払い契約申請書_福祉用具.get名称().equals(row.getShinseisho())) {
             JuryoIninbaraiKeiyakuShinseisho todoke = new JuryoIninbaraiKeiyakuShinseisho();
             sourceData = todoke.createJuryoIninbaraiKeiyakuShinseishoChohyo(new RString("2"));
