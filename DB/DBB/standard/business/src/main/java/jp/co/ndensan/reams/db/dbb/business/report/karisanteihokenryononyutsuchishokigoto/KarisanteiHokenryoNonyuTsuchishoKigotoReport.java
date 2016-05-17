@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNony
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -25,35 +26,35 @@ import lombok.NonNull;
 public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
         extends Report<KarisanteiHokenryoNonyuTsuchishoKigotoSource> {
 
-    private final KarisanteiHokenryoNonyuTsuchishoKigotoItem target;
+    private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
+    private final NinshoshaSource ninshoshaSource;
 
     /**
      * コンストラクタです。
      *
-     * @param target KarisanteiHokenryoNonyuTsuchishoKigotoItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @param ninshoshaSource 認証者情報
      */
     protected KarisanteiHokenryoNonyuTsuchishoKigotoReport(
-            KarisanteiHokenryoNonyuTsuchishoKigotoItem target) {
-        this.target = target;
+            KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+        this.仮算定納入通知書情報 = 仮算定納入通知書情報;
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     /**
      *
-     * @param item KarisanteiHokenryoNonyuTsuchishoKigotoItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @param ninshoshaSource 認証者情報
      * @return KarisanteiHokenryoNonyuTsuchishoKigotoReport
      * @throws NullPointerException 引数が{@code null}の時
      */
     public static KarisanteiHokenryoNonyuTsuchishoKigotoReport createFrom(
-            @NonNull KarisanteiHokenryoNonyuTsuchishoKigotoItem item) {
-        return new KarisanteiHokenryoNonyuTsuchishoKigotoReport(item);
+            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+        return new KarisanteiHokenryoNonyuTsuchishoKigotoReport(仮算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoKigotoSource> reportSourceWriter) {
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = target.get仮算定納入通知書情報();
-        if (null == 仮算定納入通知書情報) {
-            仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
-        }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
         if (納入通知書期情報リスト.isEmpty()) {
             納入通知書期情報リスト = new ArrayList<>();
@@ -64,16 +65,17 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
             if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
                 continue;
             }
-            IKarisanteiHokenryoNonyuTsuchishoKigotoEditor editor = new KarisanteiHokenryoNonyuTsuchishoKigotoEditor(target, 納入通知書期情報, 連番);
+            IKarisanteiHokenryoNonyuTsuchishoKigotoEditor editor
+                    = new KarisanteiHokenryoNonyuTsuchishoKigotoEditor(仮算定納入通知書情報, 納入通知書期情報, 連番);
             NofuShoKyotsu 納付書共通 = 仮算定納入通知書情報.get納付書共通();
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compRyoshushoEditor
                     = new DBBCompRyoshushoEditor(納付書共通, 納入通知書期情報, 領収書連番);
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compNofushoEditor
                     = new DBBCompNofushoEditor(納付書共通, 納入通知書期情報);
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compNinshoshaEditor
-                    = new CompNinshoshaEditor(target.getNinshoshaSource());
+                    = new CompNinshoshaEditor(ninshoshaSource);
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compSofubutsuAtesakiEditor
-                    = new CompSofubutsuAtesakiEditor(target);
+                    = new CompSofubutsuAtesakiEditor(仮算定納入通知書情報);
             領収書連番++;
             連番++;
             IKarisanteiHokenryoNonyuTsuchishoKigotoBuilder builder

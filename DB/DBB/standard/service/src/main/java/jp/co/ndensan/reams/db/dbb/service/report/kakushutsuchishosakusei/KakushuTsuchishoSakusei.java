@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.Kar
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriItem;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriReport;
-import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoItem;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoItem;
@@ -721,9 +720,8 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
         SourceDataCollection sourceDataCollection;
         if (ReportIdDBB.DBB100014.getReportId().equals(帳票ID)) {
-            KarisanteiHokenryoNonyuTsuchishoKigotoItem item = new KarisanteiHokenryoNonyuTsuchishoKigotoItem(仮算定納入通知書情報, null);
             KarisanteiHokenryoNonyuTsuchishoKigotoReport report
-                    = KarisanteiHokenryoNonyuTsuchishoKigotoReport.createFrom(item);
+                    = KarisanteiHokenryoNonyuTsuchishoKigotoReport.createFrom(仮算定納入通知書情報, null);
             sourceDataCollection = new Printer<KarisanteiHokenryoNonyuTsuchishoKigotoSource>().spool(null, report);
         } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID)) {
             KarisanteiHokenryoNonyuTsuchishoGinfuriItem item = new KarisanteiHokenryoNonyuTsuchishoGinfuriItem(仮算定納入通知書情報, null);
