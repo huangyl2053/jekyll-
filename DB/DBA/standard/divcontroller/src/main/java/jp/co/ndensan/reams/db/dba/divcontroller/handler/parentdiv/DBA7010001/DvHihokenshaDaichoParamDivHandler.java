@@ -76,11 +76,11 @@ public class DvHihokenshaDaichoParamDivHandler {
      */
     public void onClick_ChushutsuKijun(RString 資格抽出区分) {
         if (ShikakuChushutsuKubun.両方.getコード().equals(資格抽出区分)) {
-            資格抽出区分が両方非活性();
+            資格抽出区分が両方活性();
         } else if (ShikakuChushutsuKubun.資格取得者のみ.getコード().equals(資格抽出区分)) {
-            資格抽出区分が資格取得者のみ非活性();
+            資格抽出区分が資格取得者のみ活性();
         } else {
-            資格抽出区分が資格喪失者のみ非活性();
+            資格抽出区分が両方活性();
         }
     }
 
@@ -253,19 +253,14 @@ public class DvHihokenshaDaichoParamDivHandler {
         div.getTxtChushutsuHani().setDisabled(false);
     }
 
-    private void 資格抽出区分が両方非活性() {
+    private void 資格抽出区分が両方活性() {
         div.getChkShutokuJiyu().setDisabled(false);
         div.getChkSoshitsuJiyu().setDisabled(false);
     }
 
-    private void 資格抽出区分が資格取得者のみ非活性() {
+    private void 資格抽出区分が資格取得者のみ活性() {
         div.getChkShutokuJiyu().setDisabled(false);
         div.getChkSoshitsuJiyu().setDisabled(true);
-    }
-
-    private void 資格抽出区分が資格喪失者のみ非活性() {
-        div.getChkShutokuJiyu().setDisabled(true);
-        div.getChkSoshitsuJiyu().setDisabled(false);
     }
 
     private RString nullToEmpty(Decimal 項目) {
