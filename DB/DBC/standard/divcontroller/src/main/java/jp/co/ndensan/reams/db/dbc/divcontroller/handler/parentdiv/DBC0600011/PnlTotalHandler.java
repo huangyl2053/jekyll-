@@ -58,8 +58,9 @@ public final class PnlTotalHandler {
             if (shinsei.get申請年月日() != null) {
                 row.setTxtShinseiYMD(shinsei.get申請年月日().wareki().toDateString());
             }
-            if (shinsei.get支給_不支給決定区分() != null) {
-                row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(new RString(shinsei.get支給_不支給決定区分().toString())).get名称());
+            if (shinsei.get支給_不支給決定区分() != null && !shinsei.get支給_不支給決定区分().isEmpty()) {
+                row.setTxtShikyuKubun(ShikyuFushikyuKubun.toValue(new RString(shinsei.
+                        get支給_不支給決定区分().toString())).get名称());
             }
             if (shinsei.get決定日() != null) {
                 row.setTxtKetteiYMD(shinsei.get決定日().wareki().toDateString());
