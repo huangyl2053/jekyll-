@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsu
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
 import jp.co.ndensan.reams.db.dbz.service.shikakutokuso.ShikakuTokusoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -396,8 +397,10 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             }
             if (!RString.isNullOrEmpty(shikakuTokuso.get被保険者区分コード())) {
                 row.setHihokenshaKubun(ShikakuKubun.toValue(shikakuTokuso.get被保険者区分コード()).get略称());
+                row.setHihokenshaKubunKey(shikakuTokuso.get被保険者区分コード());
             } else {
                 row.setHihokenshaKubun(RString.EMPTY);
+                row.setHihokenshaKubunKey(RString.EMPTY);
             }
             TextBoxFlexibleDate 資格喪失日 = new TextBoxFlexibleDate();
             資格喪失日.setValue(shikakuTokuso.get資格喪失年月日());
@@ -418,11 +421,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 row.setJutokuKubun(RString.EMPTY);
             }
             row.setShozaiHokensha(shikakuTokuso.get市町村名称());
-            row.setShozaiHokenshaCode(shikakuTokuso.get市町村コード().value());
+            row.setShozaiHokenshaCode(codeToRString(shikakuTokuso.get市町村コード()));
             row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
-            row.setSochimotoHokenshaCode(shikakuTokuso.get広住特措置元市町村コード().value());
+            row.setSochimotoHokenshaCode(shikakuTokuso.get広住特措置元市町村コード() == null ? RString.EMPTY : shikakuTokuso.get広住特措置元市町村コード().value());
             row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
-            row.setKyuHokenshaCode(shikakuTokuso.get旧市町村コード().value());
+            row.setKyuHokenshaCode(shikakuTokuso.get旧市町村コード() == null ? RString.EMPTY : shikakuTokuso.get旧市町村コード().value());
             row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
             row.setHihokenshaNo(shikakuTokuso.get被保険者番号().getColumnValue());
             row.setDaNo(shikakuTokuso.get枝番());
@@ -442,6 +445,14 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         }
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
         this.getBtnAddShikakuShutoku().setDisabled(true);
+    }
+
+    private RString codeToRString(LasdecCode code) {
+        RString code_RString = RString.EMPTY;
+        if (code != null && !code.isEmpty()) {
+            code_RString = code.getColumnValue();
+        }
+        return code_RString;
     }
 
     @Override
