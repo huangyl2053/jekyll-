@@ -116,14 +116,14 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
         parameter.set報告年月(div.getTaishokensaku().getTxtHokokuYM().getValue().seireki().getYearMonth());
         parameter.set集計年月(row.getTxtShukeiTaishoYM().getValue().seireki().getYearMonth());
         parameter.set行様式種類コード(row.getHdnYoshikiCode());
-        List<RString> 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue()
-                .split(RString.HALF_SPACE.toString());
-        parameter.set市町村名称(市町村.get(1));
-        parameter.set選択した市町村コード(市町村.get(0));
-
-        if (div.getTaishokensaku().getDdlShichoson().getSelectedKey().isEmpty()) {
+        if (div.getTaishokensaku().getDdlShichoson().getSelectedValue().isNullOrEmpty()) {
             parameter.set保険者コード(RString.EMPTY);
+            parameter.set市町村名称(RString.EMPTY);
         } else {
+            List<RString> 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue()
+                    .split(RString.HALF_SPACE.toString());
+            parameter.set市町村名称(市町村.get(1));
+            parameter.set選択した市町村コード(市町村.get(0));
             LasdecCode 市町村コード = new LasdecCode(市町村.get(0));
             Map<RString, ShichosonCodeResult> map = ViewStateHolder.get(ViewStateKeys.市町村Entiyリスト, Map.class);
             ShichosonCodeResult codeResult = map.get(市町村コード.value());

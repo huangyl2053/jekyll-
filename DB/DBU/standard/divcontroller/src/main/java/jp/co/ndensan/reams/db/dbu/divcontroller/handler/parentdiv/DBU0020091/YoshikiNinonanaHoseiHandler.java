@@ -261,20 +261,20 @@ public class YoshikiNinonanaHoseiHandler {
         if (様式種類.equalsIgnoreCase(様式種類_039)
                 || 様式種類.equalsIgnoreCase(様式種類_139)
                 || 様式種類.equalsIgnoreCase(様式種類_239)) {
-            int row = deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0701);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0702);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0703);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0704);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0705);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0706);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_06, 集計番号_0707);
+            int row = deleteByParameter(引き継ぎデータ, 集計番号_0701);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0702);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0703);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0704);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0705);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0706);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0707);
             return 0 < row;
         } else {
-            int row = deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0801);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0802);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0803);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0804);
-            row = row + deleteByParameter(引き継ぎデータ, 表番号_07, 集計番号_0805);
+            int row = deleteByParameter(引き継ぎデータ, 集計番号_0801);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0802);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0803);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0804);
+            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0805);
             return 0 < row;
         }
     }
@@ -283,12 +283,10 @@ public class YoshikiNinonanaHoseiHandler {
      * 削除のメソッドます。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 表番号 Code
      * @param 集計番号 Code
      * @return 削除件数
      */
     public int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            Code 表番号,
             Code 集計番号) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
         JigyoHokokuGeppoDetalSearchParameter parameter
@@ -299,7 +297,7 @@ public class YoshikiNinonanaHoseiHandler {
                         引き継ぎデータ.get行集計対象月(),
                         引き継ぎデータ.get行統計対象区分(),
                         new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        表番号,
+                        new Code(引き継ぎデータ.get行表番号()),
                         集計番号);
         return finder.deleteJigyoHokokuGeppoData(parameter);
     }
@@ -461,8 +459,7 @@ public class YoshikiNinonanaHoseiHandler {
         修正データリスト = get高額医療合算介護予防(更新前データリスト, 修正データリスト, 縦番号_0001, 集計番号_0805,
                 div.getPnlMain().getTxtGokeiKensu().getValue());
         修正データリスト = get高額医療合算介護予防(更新前データリスト, 修正データリスト, 縦番号_0002, 集計番号_0805,
-                div.getPnlMain().getTxtGokeiKyufugaku().getValue()
-        );
+                div.getPnlMain().getTxtGokeiKyufugaku().getValue());
 
         return 修正データリスト;
     }
@@ -503,13 +500,15 @@ public class YoshikiNinonanaHoseiHandler {
             Code 集計番号) {
         JigyoHokokuTokeiData entity = check事業報告統計データ(更新前データリスト, 横番号, 縦番号, 集計番号);
         if (集計結果値 == null) {
-            entity = entity.createBuilderForEdit().set集計結果値(null).build();
-            entity = entity.modifiedModel();
-            修正リスト.add(entity);
-            return 修正リスト;
+            if (entity != null && entity.get集計結果値() != null) {
+                entity = entity.createBuilderForEdit().set集計結果値(null).build();
+                entity = entity.modifiedModel();
+                修正リスト.add(entity);
+                return 修正リスト;
+            }
         } else {
             if (entity == null) {
-                entity = set事業報告統計データ(更新前データリスト, 横番号, 縦番号, 集計結果値);
+                entity = set事業報告統計データ(更新前データリスト, 横番号, 縦番号, 集計番号, 集計結果値);
                 修正リスト.add(entity);
                 return 修正リスト;
             } else if (entity.get集計結果値() == null) {
@@ -531,10 +530,12 @@ public class YoshikiNinonanaHoseiHandler {
             List<JigyoHokokuTokeiData> 更新前データリスト,
             Decimal 横番号,
             Decimal 縦番号,
+            Code 集計番号,
             Decimal 集計結果値) {
         JigyoHokokuTokeiData entity = 更新前データリスト.get(0).createBuilderForEdit()
                 .set横番号(横番号)
                 .set縦番号(縦番号)
+                .set集計番号(集計番号)
                 .set集計結果値(集計結果値)
                 .set集計項目名称(null)
                 .set縦項目コード(null)
@@ -566,19 +567,19 @@ public class YoshikiNinonanaHoseiHandler {
 
         if (様式種類.equals(様式種類_039) || 様式種類.equals(様式種類_139) || 様式種類.equals(様式種類_239)) {
             List<JigyoHokokuTokeiData> 利用者負担第四段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_06, 集計番号_0701);
+                    引き継ぎデータ, 集計番号_0701);
             List<JigyoHokokuTokeiData> 利用者負担第三段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_06, 集計番号_0702);
+                    引き継ぎデータ, 集計番号_0702);
             List<JigyoHokokuTokeiData> 利用者負担第二段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_06, 集計番号_0703);
+                    引き継ぎデータ, 集計番号_0703);
             List<JigyoHokokuTokeiData> 利用者負担第一段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_06, 集計番号_0704);
+                    引き継ぎデータ, 集計番号_0704);
             List<JigyoHokokuTokeiData> 高額介護_合計 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_06, 集計番号_0705);
+                    引き継ぎデータ, 集計番号_0705);
             List<JigyoHokokuTokeiData> 再掲利用者負担第三段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_06, 集計番号_0706);
+                    引き継ぎデータ, 集計番号_0706);
             List<JigyoHokokuTokeiData> 再掲利用者負担第二段階 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_06, 集計番号_0707);
+                    引き継ぎデータ, 集計番号_0707);
             loadList(利用者負担第四段階);
             loadList(利用者負担第三段階);
             loadList(利用者負担第二段階);
@@ -595,15 +596,15 @@ public class YoshikiNinonanaHoseiHandler {
             ViewStateHolder.put(ViewStateKeys.再掲利用者負担第二段階, (Serializable) 再掲利用者負担第二段階);
         } else if (様式種類.equals(様式種類_040) || 様式種類.equals(様式種類_140) || 様式種類.equals(様式種類_240)) {
             List<JigyoHokokuTokeiData> 現役並み所得者 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_07, 集計番号_0801);
+                    引き継ぎデータ, 集計番号_0801);
             List<JigyoHokokuTokeiData> 一般 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_07, 集計番号_0802);
+                    引き継ぎデータ, 集計番号_0802);
             List<JigyoHokokuTokeiData> 低所得者Ⅱ = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_07, 集計番号_0803);
+                    引き継ぎデータ, 集計番号_0803);
             List<JigyoHokokuTokeiData> 低所得者Ⅰ = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_07, 集計番号_0804);
+                    引き継ぎデータ, 集計番号_0804);
             List<JigyoHokokuTokeiData> 高額医療合算介護_合計 = get事業報告月報詳細データリスト(
-                    引き継ぎデータ, 表番号_07, 集計番号_0805);
+                    引き継ぎデータ, 集計番号_0805);
             loadList1(現役並み所得者);
             loadList1(一般);
             loadList1(低所得者Ⅱ);
@@ -946,7 +947,7 @@ public class YoshikiNinonanaHoseiHandler {
     }
 
     private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
-            JigyoHokokuGeppoParameter 引き継ぎデータ, Code 表番号, Code 集計番号) {
+            JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
         JigyoHokokuGeppoHoseiHako finder = new JigyoHokokuGeppoHoseiHako();
         JigyoHokokuGeppoDetalSearchParameter parameter
                 = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
@@ -956,7 +957,7 @@ public class YoshikiNinonanaHoseiHandler {
                         引き継ぎデータ.get行集計対象月(),
                         引き継ぎデータ.get行統計対象区分(),
                         new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        表番号,
+                        new Code(引き継ぎデータ.get行表番号()),
                         集計番号);
         return finder.getJigyoHokokuGeppoDetal(parameter);
     }

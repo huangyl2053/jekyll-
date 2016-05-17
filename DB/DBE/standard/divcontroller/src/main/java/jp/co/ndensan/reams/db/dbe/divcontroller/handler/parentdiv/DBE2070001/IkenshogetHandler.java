@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class IkenshogetHandler {
 
     private static final RString 意見書入手モード = new RString("意見書入手モード");
+    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
     private final IkenshogetDiv div;
 
     /**
@@ -52,28 +53,28 @@ public class IkenshogetHandler {
     }
 
     /**
-     *
+     * 要介護認定完了情報更新の処理です。
      */
     public void 要介護認定完了情報更新() {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                 = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
+            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
+                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
+            throw new ApplicationException(errorMessage);
+        }
         List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row row : rowList) {
             RString 申請書管理番号 = row.getShinseishoKanriNo();
             if (!RString.isNullOrEmpty(申請書管理番号)) {
-                if (!前排他キーのセット(申請書管理番号)) {
-                    ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
-                            UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
-                    throw new ApplicationException(errorMessage);
-                }
                 NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
                         new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
                 ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set主治医意見書登録完了年月日(
                         new FlexibleDate(RDate.getNowDate().toDateString())).build();
                 IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
-                前排他キーの解除(申請書管理番号);
             }
         }
+        前排他キーの解除(SHINSEISHOKANRINO);
     }
 
     private boolean 前排他キーのセット(RString 申請書管理番号) {
@@ -85,5 +86,4 @@ public class IkenshogetHandler {
         LockingKey 排他キー = new LockingKey(申請書管理番号);
         RealInitialLocker.release(排他キー);
     }
-
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.edaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.hihokenshaNo;
@@ -18,6 +19,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.n
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shinseiJokyoKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.yukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -50,6 +52,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     private static final int INT_6 = 6;
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_市町村コード = new RString("市町村コード");
+    private static final RString メッセージ_申請書管理番号 = new RString("申請書管理番号");
     @InjectSession
     private SqlSession session;
 
@@ -427,6 +430,26 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 leq(適用日, ninteiYukoKikanShuryoYMD),
                                 eq(logicalDeletedFlag, false),
                                 not(eq(yukoMukoKubun, 有効無効区分コード)))).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 受給者台帳情報を取得する。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return List<DbT4001JukyushaDaichoEntity>
+     * @throws NullPointerException 申請書管理番号がnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> selectサービス(ShinseishoKanriNo 申請書管理番号)
+            throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_申請書管理番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
                 toList(DbT4001JukyushaDaichoEntity.class);
     }
 }

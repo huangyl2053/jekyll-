@@ -334,27 +334,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 fillType(FillType.BLANK).toDateString());
         更正前.set月割終了年月2_西暦(更正前_賦課情報.get月割終了年月2().seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
-        FlexibleDate 期間_自 = getFlexibleDate自(更正前_賦課情報.get月割開始年月1());
-        更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
-                fillType(FillType.BLANK).toDateString());
-        FlexibleYearMonth 年月 = 更正前_賦課情報.get月割終了年月2();
-        FlexibleDate 期間_至;
-        if (年月 != null) {
-            期間_至 = getFlexibleDate至(更正前_賦課情報.get月割終了年月2());
-        } else {
-            期間_至 = getFlexibleDate至(更正前_賦課情報.get月割終了年月1());
-        }
-        更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
-        更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
-                fillType(FillType.BLANK).toDateString());
-        int 月数 = 期間_至.getBetweenMonths(期間_自);
-        更正前.set月数(月数);
-        更正前.set月数_ケ月(get月数_ケ月(月数));
+        edit期間_自と期間_至(更正前, 更正前_賦課情報);
         更正前.set市町村民税課税区分_本人(更正前_賦課情報.get課税区分());
         更正前.set市町村民税課税区分_世帯(更正前_賦課情報.get世帯課税区分());
         更正前.set合計所得金額(更正前_賦課情報.get合計所得金額());
@@ -389,9 +369,12 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正前().get賦課情報(), 1, SIZE_14));
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前 = 本算定通知書情報.get対象者_追加含む_情報_更正前();
 
-        RString 特別徴収義務者 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
-        更正前.set特別徴収義務者(特別徴収義務者);
-        更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
+        if (対象者_追加含む_情報_更正前 != null && 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード() != null) {
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
+            更正前.set特別徴収義務者(特別徴収義務者);
+            更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
+        }
+
         ChoshuHoho 徴収方法情報_更正前 = 本算定通知書情報.get徴収方法情報_更正前();
         RString 年金コード = 徴収方法情報_更正前.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
@@ -408,6 +391,40 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             更正前.set徴収方法(new RString("特別徴収　普通徴収"));
         }
         return 更正前;
+    }
+
+    private void edit期間_自と期間_至(EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前, FukaJoho 更正前_賦課情報) {
+        FlexibleYearMonth 月割開始年月1 = 更正前_賦課情報.get月割開始年月1();
+        FlexibleYearMonth 月割終了年月2 = 更正前_賦課情報.get月割終了年月2();
+        FlexibleYearMonth 月割終了年月1 = 更正前_賦課情報.get月割終了年月1();
+        FlexibleDate 期間_自 = FlexibleDate.EMPTY;
+        FlexibleDate 期間_至 = null;
+        if (月割開始年月1 != null && !月割開始年月1.isEmpty()) {
+            期間_自 = getFlexibleDate自(月割開始年月1);
+            更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
+            更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
+                    fillType(FillType.BLANK).toDateString());
+        }
+        if (月割終了年月1 != null && !月割終了年月1.isEmpty()) {
+            期間_至 = getFlexibleDate至(月割終了年月1);
+        }
+        if (月割終了年月2 != null && !月割終了年月2.isEmpty()) {
+            期間_至 = getFlexibleDate至(月割終了年月2);
+        }
+        if (期間_至 != null) {
+            更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
+            更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
+                    fillType(FillType.BLANK).toDateString());
+        }
+        if (期間_至 != null && !期間_自.isEmpty()) {
+            int 月数 = 期間_至.getBetweenMonths(期間_自);
+            更正前.set月数(月数);
+            更正前.set月数_ケ月(get月数_ケ月(月数));
+        }
     }
 
     private List<CharacteristicsPhase> get特徴期別金額リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
@@ -523,7 +540,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private Decimal get普徴納付済額(FukaJoho fukaJoho, int start, int end) {
         Decimal 普徴納付済額 = Decimal.ZERO;
-
+        if (fukaJoho == null) {
+            return 普徴納付済額;
+        }
         for (int i = start; i <= end; i++) {
             RStringBuilder sb = new RStringBuilder("get普徴期別金額");
             sb.append(new RString(i).padZeroToLeft(2));
@@ -541,7 +560,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private Decimal get特徴納付済額(FukaJoho fukaJoho, int start, int end) {
         Decimal 特徴納付済額 = Decimal.ZERO;
-
+        if (fukaJoho == null) {
+            return 特徴納付済額;
+        }
         for (int i = start; i <= end; i++) {
             RStringBuilder sb = new RStringBuilder("get特徴期別金額");
             sb.append(new RString(i).padZeroToLeft(2));
@@ -559,6 +580,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private Decimal get普徴納付済額(ShunyuJoho shunyuJoho, int start, int end) {
         Decimal 普徴納付済額 = Decimal.ZERO;
+        if (shunyuJoho == null) {
+            return 普徴納付済額;
+        }
 
         for (int i = start; i <= end; i++) {
             RStringBuilder sb = new RStringBuilder("get普徴収入額");
@@ -577,7 +601,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private Decimal get特徴納付済額(ShunyuJoho shunyuJoho, int start, int end) {
         Decimal 特徴納付済額 = Decimal.ZERO;
-
+        if (shunyuJoho == null) {
+            return 特徴納付済額;
+        }
         for (int i = start; i <= end; i++) {
             RStringBuilder sb = new RStringBuilder("get特徴収入額");
             sb.append(new RString(i).padZeroToLeft(2));

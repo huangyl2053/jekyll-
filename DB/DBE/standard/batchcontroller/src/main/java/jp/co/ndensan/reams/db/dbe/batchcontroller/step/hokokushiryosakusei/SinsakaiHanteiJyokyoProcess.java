@@ -138,8 +138,10 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
 
     private List<SinsakaiHanteiJyokyoEntity> get審査判定状況(SinsakaiHanteiJyokyoHeaderEntity current) {
         SinsakaiHanteiJyokyoMyBatisParameter batisParameter = paramter.toSinsakaiHanteiJyokyoMyBatisParameter();
+        batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
+        batisParameter.setShichosonCode(current.getShichosonCode());
         return mapper.getSinsakaiHanteiJyokyo(batisParameter);
     }
 

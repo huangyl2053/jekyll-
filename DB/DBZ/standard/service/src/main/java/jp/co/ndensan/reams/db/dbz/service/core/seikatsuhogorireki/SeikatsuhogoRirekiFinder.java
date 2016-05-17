@@ -74,9 +74,7 @@ public class SeikatsuhogoRirekiFinder {
             return SearchResult.of(business, 0, false);
         }
         ISeikatsuhogoRirekiMapper mapper = mapperProvider.create(ISeikatsuhogoRirekiMapper.class);
-        SeikatsuhogoParameter parameter = new SeikatsuhogoParameter();
-        parameter.setGyomuCode(業務コード);
-        parameter.setShikibetsuCode(識別コード);
+        SeikatsuhogoParameter parameter = SeikatsuhogoParameter.createParameter(識別コード, 業務コード);
         List<SeikatsuhogoRelateEntity> entityList = mapper.get生活保護履歴情報(parameter);
         if (entityList != null) {
             List<SeikatsuhogoRelateEntity> list = new ArrayList<>();

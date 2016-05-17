@@ -480,6 +480,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                 PnlTotalParameter.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         FlexibleYearMonth サービス提供年月;
         RString 整理番号;
         RString 様式番号;
@@ -582,7 +583,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 事業者番号,
                 明細番号);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+
             FukushiyoguKonyuhiShikyuShinsei.createInstance().
                     delete(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 識別コード);
         } else if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -596,6 +597,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     様式番号,
                     事業者番号,
                     明細番号,
+                    識別コード,
                     修正);
             FukushiyoguKonyuhiShikyuShinsei.createInstance().update(fuentity);
         } else if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -615,6 +617,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                     様式番号,
                     事業者番号,
                     明細番号,
+                    識別コード,
                     審査);
             FukushiyoguKonyuhiShikyuShinsei.createInstance().updShinsa(fuentity);
         }
@@ -630,6 +633,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
             RString 様式番号,
             JigyoshaNo 事業者番号,
             RString 明細番号,
+            ShikibetsuCode 識別コード,
             RString 状態Flag) {
 
         FukushiYoguKonyuhiShikyuShiseiMeisaiDivEntity fuentity = FukushiYoguKonyuhiShikyuShiseiMeisaiDivEntity.
@@ -640,6 +644,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         fuentity.set事業者番号(事業者番号);
         fuentity.set証明書コード(様式番号);
         fuentity.set明細番号(明細番号);
+        fuentity.set識別コード(識別コード);
         List<ShokanFukushiYoguHanbaihi> 修正List = new ArrayList<>();
         List<ShokanFukushiYoguHanbaihi> 登録List = new ArrayList<>();
         List<ShokanFukushiYoguHanbaihi> 削除List = new ArrayList<>();

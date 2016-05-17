@@ -172,6 +172,15 @@ public class HihokenshaShikakuHakkoHandler {
         div.getTplShienJigyosha().getTxtTekiyoStYMD1().setValue(entity.get適用開始年月日１());
         div.getTplShienJigyosha().getTxtTekiyoStYMD2().setValue(entity.get適用開始年月日２());
         div.getTplShienJigyosha().getTxtTekiyoStYMD3().setValue(entity.get適用開始年月日３());
+        if (entity.get適用終了年月日１() != null) {
+            div.setHidden適用終了日１(new RString(entity.get適用終了年月日１().toString()));
+        }
+        if (entity.get適用終了年月日２() != null) {
+            div.setHidden適用終了日２(new RString(entity.get適用終了年月日２().toString()));
+        }
+        if (entity.get適用終了年月日３() != null) {
+            div.setHidden適用終了日３(new RString(entity.get適用終了年月日３().toString()));
+        }
 
         // 施設入退所タブ
         div.setHidden入所施設コード１(entity.get入所施設コード１());

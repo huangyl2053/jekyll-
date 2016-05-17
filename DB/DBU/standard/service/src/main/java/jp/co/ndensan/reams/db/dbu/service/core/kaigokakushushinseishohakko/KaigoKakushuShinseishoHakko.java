@@ -15,8 +15,6 @@ import jp.co.ndensan.reams.db.dba.service.core.joseikinkyufushinseisho.JoseikinK
 import jp.co.ndensan.reams.db.dba.service.core.kyufugengakumenjyoshinseisho.KyufugakuGengakuMenjoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.nofugakushomeishokofushinseisho.KaigoHokenryoNofugakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.shokanharaishikyushinseisho.ShoukanbaraiShikyuShinseishoChohyo;
-import jp.co.ndensan.reams.db.dba.service.core.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
-import jp.co.ndensan.reams.db.dba.service.core.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseishojoho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.choshuyuyoshinseisho.ChoshuYuyoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.KaigoHokenryoGenmenShinseisho;
@@ -42,6 +40,7 @@ import jp.co.ndensan.reams.db.dbc.service.report.daisanshakoiniyoruhigaitodokech
 import jp.co.ndensan.reams.db.dbc.service.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuJuryoIninShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
+import jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
 import jp.co.ndensan.reams.db.dbu.entity.kaigokakushushinseishohakko.KaigoKakushuShinseishoHakkoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -212,12 +211,9 @@ public class KaigoKakushuShinseishoHakko {
             }
             if (ShinseishoChohyoShurui.特別地域加算減免_訪問介護等利用者負担減額対象確認申請書.getコード().equals(entity.get申請書ID())) {
                 TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin tokubetsuChiiki
-                        = new TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin();
+                        = TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin.createInstance();
                 tokubetsuChiiki
                         .createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo(識別コード, 被保険者番号);
-                TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 tokubetsuChiiki2
-                        = new TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2();
-                tokubetsuChiiki2.createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo();
             }
             if (ShinseishoChohyoShurui.給付額減額免除申請書.getコード().equals(entity.get申請書ID())) {
                 KyufugakuGengakuMenjoShinseisho kyufugakuGengakuMenjo = new KyufugakuGengakuMenjoShinseisho();

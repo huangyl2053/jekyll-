@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SetaiinJoho {
 
+    private static final int JUMINHYO_HYOJIJUN_LAST = 99;
     private final IShikibetsuTaisho 識別対象;
     private final RString 本人区分;
     private final IKojin 個人;
@@ -132,12 +133,11 @@ public class SetaiinJoho {
 
     /**
      * 住民票表示順を返します。
-     * <p/>
-     * 取得できなかった場合は、0を返します。
      *
      * @return 住民票表示順
      */
     public int get住民票表示順() {
-        return 住基個人 == null ? 0 : 住基個人.get住民票表示順();
+        return 住基個人 == null ? JUMINHYO_HYOJIJUN_LAST : 住基個人.get住民票表示順();
     }
+
 }

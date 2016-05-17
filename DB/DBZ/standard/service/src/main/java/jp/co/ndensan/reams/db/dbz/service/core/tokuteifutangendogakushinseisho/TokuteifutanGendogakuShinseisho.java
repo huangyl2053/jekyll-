@@ -158,6 +158,7 @@ public class TokuteifutanGendogakuShinseisho {
         if (jusho != null) {
             hihokenshaKihonEntity.set住所(jusho.value());
         }
+        hihokenshaKihonEntity.set住民種別コード(uaft200Entity.getJuminShubetsuCode());
         AtenaMeisho setainushiMei = uaft200Entity.getSetainushiMei();
         if (setainushiMei != null) {
             hihokenshaKihonEntity.set世帯主氏名(setainushiMei.value());

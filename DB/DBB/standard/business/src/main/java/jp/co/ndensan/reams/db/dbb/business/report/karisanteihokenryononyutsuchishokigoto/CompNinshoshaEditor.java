@@ -29,13 +29,15 @@ public class CompNinshoshaEditor implements IKarisanteiHokenryoNonyuTsuchishoKig
 
     @Override
     public KarisanteiHokenryoNonyuTsuchishoKigotoSource edit(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.denshiKoin = ninshoshaSource.denshiKoin;
-        source.hakkoYMD = ninshoshaSource.hakkoYMD;
-        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
-        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
-        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-        source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        if (ninshoshaSource != null) {
+            source.denshiKoin = ninshoshaSource.denshiKoin;
+            source.hakkoYMD = ninshoshaSource.hakkoYMD;
+            source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+            source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+            source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+            source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+            source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        }
         return source;
     }
 

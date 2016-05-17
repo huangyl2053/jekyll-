@@ -183,6 +183,7 @@ public class FutangendogakuNinteiShinseiHandler {
      */
     public void onClick_btnAddShinsei() {
         div.setJotai(追加状態);
+        div.getShinseiList().setDisabled(true);
         clear申請情報エリア();
         set申請情報エリア表示制御();
         init申請理由DDL();
@@ -218,10 +219,10 @@ public class FutangendogakuNinteiShinseiHandler {
         FutanGendogakuNinteiViewState ninteiViewState = list.get(index);
         if (!EntityDataState.Added.equals(ninteiViewState.getState())) {
             ninteiViewState.setState(EntityDataState.Deleted);
+            list.set(index, ninteiViewState);
         } else {
             list.remove(index);
         }
-        list.set(index, ninteiViewState);
         set申請一覧(list);
         ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, list);
         return true;

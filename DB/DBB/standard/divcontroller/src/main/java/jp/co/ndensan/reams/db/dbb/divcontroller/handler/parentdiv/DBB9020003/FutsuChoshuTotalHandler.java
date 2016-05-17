@@ -84,12 +84,13 @@ public final class FutsuChoshuTotalHandler {
     private static final int 数字_１３ = 13;
     private static final int 数字_１２ = 12;
     private static final int 数字_１０ = 10;
+    private static final int 数字_８ = 8;
     private static final int 数字_７ = 7;
     private static final int 数字_６ = 6;
     private static final int 数字_５ = 5;
     private static final int 数字_４ = 4;
+    private static final int 数字_３ = 4;
     private static final int 数字_１ = 1;
-    private static final int 数字_０ = 0;
     private static final RString 月の期_00 = new RString("00");
     private static final RString 第４月 = new RString("04");
     private static final RString 第５月 = new RString("05");
@@ -132,7 +133,7 @@ public final class FutsuChoshuTotalHandler {
         } else {
             div.getKonkaiShoriNaiyo().getDdlChoteiNendo().setDataSource(set選択可能年度(調定年度.plusYear(1)));
         }
-        div.getKonkaiShoriNaiyo().getDdlChoteiNendo().setSelectedIndex(数字_０);
+        div.getKonkaiShoriNaiyo().getDdlChoteiNendo().setSelectedKey(調定年度.toDateString());
     }
 
     private List<KeyValueDataSource> set選択可能年度(FlexibleYear 調定年度) {
@@ -238,22 +239,24 @@ public final class FutsuChoshuTotalHandler {
 
     private List<dgGenNendoKibetsuJoho_Row> create現年度期別情報Gird() {
         int m = 数字_４;
+
+        if (div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_５).setVisible(false);
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_６).setVisible(false);
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_７).setVisible(false);
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_８).setVisible(false);
+        } else {
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_５).setVisible(true);
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_６).setVisible(true);
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_７).setVisible(true);
+            div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(数字_８).setVisible(true);
+        }
+
         List<dgGenNendoKibetsuJoho_Row> list = new ArrayList<>();
         for (int i = 1; i < 数字_１５; i = i + 1) {
             dgGenNendoKibetsuJoho_Row row = new dgGenNendoKibetsuJoho_Row();
             row.getDdlTsukiShoriKbn().setDataSource(set月処理区分ddl());
             row.getDdlShoriTaisho().setDataSource(set処理対象ddl());
-            if (div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
-                row.getTxtHakkoYMD().setVisible(false);
-                row.getTxtNokigenYMD().setVisible(false);
-                row.getTxtNokigenStYMD().setVisible(false);
-                row.getTxtNokigenEdYMD().setVisible(false);
-            } else {
-                row.getTxtHakkoYMD().setVisible(true);
-                row.getTxtNokigenYMD().setVisible(true);
-                row.getTxtNokigenStYMD().setVisible(true);
-                row.getTxtNokigenEdYMD().setVisible(true);
-            }
             row.getDdlNofushoKata().setDataSource(set納付書の型ddl());
             row.getDdlInjiIchi().setDataSource(set印字位置ddl());
             row.getDdlCVSCutInjiIchi().setDataSource(setＣＶＳカット印字位置ddl());
@@ -343,6 +346,18 @@ public final class FutsuChoshuTotalHandler {
     private List<dgKaNendoKibetsuJoho_Row> create過年度期別情報Grid() {
         List<dgKaNendoKibetsuJoho_Row> list = new ArrayList<>();
         int m = 数字_４;
+        if (div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_３).setVisible(false);
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_４).setVisible(false);
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_５).setVisible(false);
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_６).setVisible(false);
+        } else {
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_３).setVisible(false);
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_４).setVisible(true);
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_５).setVisible(true);
+            div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(数字_６).setVisible(true);
+        }
+
         for (int i = 1; i < 数字_１３; i = i + 1) {
             dgKaNendoKibetsuJoho_Row row = new dgKaNendoKibetsuJoho_Row();
             row.getDdlNofushoKata().setDataSource(set納付書の型ddl_過年度());
@@ -358,17 +373,6 @@ public final class FutsuChoshuTotalHandler {
             過年度の歳出.add(new KeyValueDataSource(KanendoSaishutsu.現年度.getコード(),
                     KanendoSaishutsu.現年度.get名称()));
             row.getDdlSaiShutsu().setDataSource(過年度の歳出);
-            if (div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
-                row.getTxtHakkoYMD().setVisible(false);
-                row.getTxtNokigenYMD().setVisible(false);
-                row.getTxtNokigenStYMD().setVisible(false);
-                row.getTxtNokigenEtYMD().setVisible(false);
-            } else {
-                row.getTxtHakkoYMD().setVisible(true);
-                row.getTxtNokigenYMD().setVisible(true);
-                row.getTxtNokigenStYMD().setVisible(true);
-                row.getTxtNokigenEtYMD().setVisible(true);
-            }
             if (i == 数字_１０) {
                 m = 1;
             }
@@ -1402,13 +1406,13 @@ public final class FutsuChoshuTotalHandler {
         納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.なし.getコード(),
                 TsuchishoPrintConditions.なし.get名称()));
         納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.全被保険者_異動時は異動分全件.getコード(),
-                TsuchishoPrintConditions.全被保険者_異動時は異動分全件.get略称()));
+                TsuchishoPrintConditions.全被保険者_異動時は異動分全件.get名称()));
         納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.差引き保険料１円以上の被保険者.getコード(),
-                TsuchishoPrintConditions.差引き保険料１円以上の被保険者.get略称()));
+                TsuchishoPrintConditions.差引き保険料１円以上の被保険者.get名称()));
         納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.保険料変更有りで差引き保険料１円以上の被保険者_異動分のみ.getコード(),
-                TsuchishoPrintConditions.保険料変更有りで差引き保険料１円以上の被保険者_異動分のみ.get略称()));
+                TsuchishoPrintConditions.保険料変更有りで差引き保険料１円以上の被保険者_異動分のみ.get名称()));
         納付書出力条件.add(new KeyValueDataSource(TsuchishoPrintConditions.差引き保険料０円以外で確定保険料がある被保険者_当初のみ.getコード(),
-                TsuchishoPrintConditions.差引き保険料０円以外で確定保険料がある被保険者_当初のみ.get略称()));
+                TsuchishoPrintConditions.差引き保険料０円以外で確定保険料がある被保険者_当初のみ.get名称()));
         return 納付書出力条件;
     }
 

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business.report.gemmen;
 
 import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -23,8 +25,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GenmenKetteiTsuchiShoJoho {
 
-    private FukaShojoho 賦課の情報更正前;
-    private GemmenShojoho 減免の情報更正後;
+    private FukaJoho 賦課の情報更正前;
+    private GemmenJoho 減免の情報更正後;
     private IKojin 宛名;
     private IAtesaki 宛先;
     private Association 地方公共団体;

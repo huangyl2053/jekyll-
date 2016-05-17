@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dba.service.core.joseikinkyufushinseisho.JoseikinK
 import jp.co.ndensan.reams.db.dba.service.core.kyufugengakumenjyoshinseisho.KyufugakuGengakuMenjoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.nofugakushomeishokofushinseisho.KaigoHokenryoNofugakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.core.shokanharaishikyushinseisho.ShoukanbaraiShikyuShinseishoChohyo;
-import jp.co.ndensan.reams.db.dba.service.core.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseishojoho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.choshuyuyoshinseisho.ChoshuYuyoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.KaigoHokenryoGenmenShinseisho;
@@ -36,6 +35,7 @@ import jp.co.ndensan.reams.db.dbc.service.report.daisanshakoiniyoruhigaitodokech
 import jp.co.ndensan.reams.db.dbc.service.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuJuryoIninShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
+import jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
 import jp.co.ndensan.reams.db.dbu.definition.core.kakujyusinseisyohakkou.HikitugiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.KakushuShinseishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.dgKakushushinsei_Row;
@@ -78,9 +78,7 @@ public class KakushuShinseishoHakkoHandler {
      * 各種申請書発行の初期化処理です。
      */
     public void onLoad() {
-//        ShikibetsuCode 識別コード = data.get識別コード();
-//        HihokenshaNo 被保険者番号 = data.get被保険者番号();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        ShikibetsuCode 識別コード = data.get識別コード();
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getShikakuKihonJoho().getCcdKaigoShikakuKihon().onLoad(識別コード);
         List<dgKakushushinsei_Row> dateSource = new ArrayList<>();
@@ -100,15 +98,13 @@ public class KakushuShinseishoHakkoHandler {
      */
     public SourceDataCollection click_帳票発行() {
         SourceDataCollection sourceData = new SourceDataCollection();
-        reportPublish(sourceData);
+        sourceData = reportPublish(sourceData);
         return sourceData;
     }
 
     private SourceDataCollection reportPublish(SourceDataCollection sourceData) {
-//        ShikibetsuCode 識別コード = data.get識別コード();
-//        HihokenshaNo 被保険者番号 = data.get被保険者番号();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000022502");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("20160203");
+        ShikibetsuCode 識別コード = data.get識別コード();
+        HihokenshaNo 被保険者番号 = data.get被保険者番号();
         List<dgKakushushinsei_Row> rowList = div.getKakushushinseiIchiran().getDgKakushushinsei().getDataSource();
         for (dgKakushushinsei_Row row : rowList) {
             if (row.getSentaku().booleanValue()) {
@@ -161,7 +157,7 @@ public class KakushuShinseishoHakkoHandler {
                     sourceData = todoke.createShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoChohyo(被保険者番号, 識別コード);
                 }
                 if (ShinseishoChohyoShurui.特別地域加算減免_訪問介護等利用者負担減額対象確認申請書.get名称().equals(row.getShinseisho())) {
-                    TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin todoke = new TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin();
+                    TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin todoke = TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin.createInstance();
                     sourceData = todoke.createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.給付額減額免除申請書.get名称().equals(row.getShinseisho())) {
@@ -183,10 +179,8 @@ public class KakushuShinseishoHakkoHandler {
     }
 
     private SourceDataCollection reportPublish_bak(SourceDataCollection sourceData, dgKakushushinsei_Row row) {
-//        ShikibetsuCode 識別コード = data.get識別コード();
-//        HihokenshaNo 被保険者番号 = data.get被保険者番号();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000022502");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("20160203");
+        ShikibetsuCode 識別コード = data.get識別コード();
+        HihokenshaNo 被保険者番号 = data.get被保険者番号();
         if (ShinseishoChohyoShurui.介護保険受領委任払い契約申請書_福祉用具.get名称().equals(row.getShinseisho())) {
             JuryoIninbaraiKeiyakuShinseisho todoke = new JuryoIninbaraiKeiyakuShinseisho();
             sourceData = todoke.createJuryoIninbaraiKeiyakuShinseishoChohyo(new RString("2"));

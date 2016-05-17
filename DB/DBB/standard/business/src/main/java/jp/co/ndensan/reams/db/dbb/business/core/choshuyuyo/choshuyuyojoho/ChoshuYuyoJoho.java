@@ -11,8 +11,11 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyoIdentifier;
+import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.KibetsuIdentifier;
+import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.KibetsuChoshuYuyo;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoJohoRelateEntity;
@@ -21,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -45,6 +49,21 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     private final ChoshuYuyoJohoIdentifier id;
     private final Models<ChoshuYuyoIdentifier, ChoshuYuyo> choshuYuyo;
     private final Models<KibetsuIdentifier, Kibetsu> kibetsu;
+
+    private static final int INT_1 = 1;
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
+    private static final int INT_4 = 4;
+    private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
+    private static final int INT_7 = 7;
+    private static final int INT_8 = 8;
+    private static final int INT_9 = 9;
+    private static final int INT_10 = 10;
+    private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
+    private static final int INT_14 = 14;
 
     /**
      * コンストラクタです。<br/>
@@ -565,6 +584,541 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
+     * 特徴期別金額01を返します。
+     *
+     * @return 特徴期別金額01
+     */
+    public Decimal get特徴期別金額01() {
+
+        return this.get期別金額(INT_1, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額02を返します。
+     *
+     * @return 特徴期別金額02
+     */
+    public Decimal get特徴期別金額02() {
+
+        return this.get期別金額(INT_2, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額03を返します。
+     *
+     * @return 特徴期別金額03
+     */
+    public Decimal get特徴期別金額03() {
+
+        return this.get期別金額(INT_3, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額04を返します。
+     *
+     * @return 特徴期別金額04
+     */
+    public Decimal get特徴期別金額04() {
+
+        return this.get期別金額(INT_4, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額05を返します。
+     *
+     * @return 特徴期別金額05
+     */
+    public Decimal get特徴期別金額05() {
+
+        return this.get期別金額(INT_5, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 特徴期別金額06を返します。
+     *
+     * @return 特徴期別金額06
+     */
+    public Decimal get特徴期別金額06() {
+
+        return this.get期別金額(INT_6, ChoshuHohoKibetsu.特別徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額01を返します。
+     *
+     * @return 普徴期別金額01
+     */
+    public Decimal get普徴期別金額01() {
+
+        return this.get期別金額(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額02を返します。
+     *
+     * @return 普徴期別金額02
+     */
+    public Decimal get普徴期別金額02() {
+
+        return this.get期別金額(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額03を返します。
+     *
+     * @return 普徴期別金額03
+     */
+    public Decimal get普徴期別金額03() {
+
+        return this.get期別金額(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額04を返します。
+     *
+     * @return 普徴期別金額04
+     */
+    public Decimal get普徴期別金額04() {
+
+        return this.get期別金額(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額05を返します。
+     *
+     * @return 普徴期別金額05
+     */
+    public Decimal get普徴期別金額05() {
+
+        return this.get期別金額(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額06を返します。
+     *
+     * @return 普徴期別金額06
+     */
+    public Decimal get普徴期別金額06() {
+
+        return this.get期別金額(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額07を返します。
+     *
+     * @return 普徴期別金額07
+     */
+    public Decimal get普徴期別金額07() {
+
+        return this.get期別金額(INT_7, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額08を返します。
+     *
+     * @return 普徴期別金額08
+     */
+    public Decimal get普徴期別金額08() {
+
+        return this.get期別金額(INT_8, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額09を返します。
+     *
+     * @return 普徴期別金額09
+     */
+    public Decimal get普徴期別金額09() {
+
+        return this.get期別金額(INT_9, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額10を返します。
+     *
+     * @return 普徴期別金額10
+     */
+    public Decimal get普徴期別金額10() {
+
+        return this.get期別金額(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額11を返します。
+     *
+     * @return 普徴期別金額11
+     */
+    public Decimal get普徴期別金額11() {
+
+        return this.get期別金額(INT_11, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額12を返します。
+     *
+     * @return 普徴期別金額12
+     */
+    public Decimal get普徴期別金額12() {
+
+        return this.get期別金額(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額13を返します。
+     *
+     * @return 普徴期別金額13
+     */
+    public Decimal get普徴期別金額13() {
+
+        return this.get期別金額(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴期別金額14を返します。
+     *
+     * @return 普徴期別金額14
+     */
+    public Decimal get普徴期別金額14() {
+
+        return this.get期別金額(INT_14, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日01を返します。
+     *
+     * @return 普徴猶予開始日01
+     */
+    public FlexibleDate get普徴猶予開始日01() {
+
+        return this.get猶予開始日(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日02を返します。
+     *
+     * @return 普徴猶予開始日02
+     */
+    public FlexibleDate get普徴猶予開始日02() {
+
+        return this.get猶予開始日(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日03を返します。
+     *
+     * @return 普徴猶予開始日03
+     */
+    public FlexibleDate get普徴猶予開始日03() {
+
+        return this.get猶予開始日(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日04を返します。
+     *
+     * @return 普徴猶予開始日04
+     */
+    public FlexibleDate get普徴猶予開始日04() {
+
+        return this.get猶予開始日(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日05を返します。
+     *
+     * @return 普徴猶予開始日05
+     */
+    public FlexibleDate get普徴猶予開始日05() {
+
+        return this.get猶予開始日(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日06を返します。
+     *
+     * @return 普徴猶予開始日06
+     */
+    public FlexibleDate get普徴猶予開始日06() {
+
+        return this.get猶予開始日(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日07を返します。
+     *
+     * @return 普徴猶予開始日07
+     */
+    public FlexibleDate get普徴猶予開始日07() {
+
+        return this.get猶予開始日(INT_7, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日08を返します。
+     *
+     * @return 普徴猶予開始日08
+     */
+    public FlexibleDate get普徴猶予開始日08() {
+
+        return this.get猶予開始日(INT_8, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日09を返します。
+     *
+     * @return 普徴猶予開始日09
+     */
+    public FlexibleDate get普徴猶予開始日09() {
+
+        return this.get猶予開始日(INT_9, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日10を返します。
+     *
+     * @return 普徴猶予開始日10
+     */
+    public FlexibleDate get普徴猶予開始日10() {
+
+        return this.get猶予開始日(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日11を返します。
+     *
+     * @return 普徴猶予開始日11
+     */
+    public FlexibleDate get普徴猶予開始日11() {
+
+        return this.get猶予開始日(INT_11, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日12を返します。
+     *
+     * @return 普徴猶予開始日12
+     */
+    public FlexibleDate get普徴猶予開始日12() {
+
+        return this.get猶予開始日(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日13を返します。
+     *
+     * @return 普徴猶予開始日13
+     */
+    public FlexibleDate get普徴猶予開始日13() {
+
+        return this.get猶予開始日(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予開始日14を返します。
+     *
+     * @return 普徴猶予開始日14
+     */
+    public FlexibleDate get普徴猶予開始日14() {
+
+        return this.get猶予開始日(INT_14, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日01を返します。
+     *
+     * @return 普徴猶予終了日01
+     */
+    public FlexibleDate get普徴猶予終了日01() {
+
+        return this.get猶予終了日(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日02を返します。
+     *
+     * @return 普徴猶予終了日02
+     */
+    public FlexibleDate get普徴猶予終了日02() {
+
+        return this.get猶予終了日(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日03を返します。
+     *
+     * @return 普徴猶予終了日03
+     */
+    public FlexibleDate get普徴猶予終了日03() {
+
+        return this.get猶予終了日(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日04を返します。
+     *
+     * @return 普徴猶予終了日04
+     */
+    public FlexibleDate get普徴猶予終了日04() {
+
+        return this.get猶予終了日(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日05を返します。
+     *
+     * @return 普徴猶予終了日05
+     */
+    public FlexibleDate get普徴猶予終了日05() {
+
+        return this.get猶予終了日(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日06を返します。
+     *
+     * @return 普徴猶予終了日06
+     */
+    public FlexibleDate get普徴猶予終了日06() {
+
+        return this.get猶予終了日(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日07を返します。
+     *
+     * @return 普徴猶予終了日07
+     */
+    public FlexibleDate get普徴猶予終了日07() {
+
+        return this.get猶予終了日(INT_7, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日08を返します。
+     *
+     * @return 普徴猶予終了日08
+     */
+    public FlexibleDate get普徴猶予終了日08() {
+
+        return this.get猶予終了日(INT_8, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日09を返します。
+     *
+     * @return 普徴猶予終了日09
+     */
+    public FlexibleDate get普徴猶予終了日09() {
+
+        return this.get猶予終了日(INT_9, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日10を返します。
+     *
+     * @return 普徴猶予終了日10
+     */
+    public FlexibleDate get普徴猶予終了日10() {
+
+        return this.get猶予終了日(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日11を返します。
+     *
+     * @return 普徴猶予終了日11
+     */
+    public FlexibleDate get普徴猶予終了日11() {
+
+        return this.get猶予終了日(INT_11, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日12を返します。
+     *
+     * @return 普徴猶予終了日12
+     */
+    public FlexibleDate get普徴猶予終了日12() {
+
+        return this.get猶予終了日(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日13を返します。
+     *
+     * @return 普徴猶予終了日13
+     */
+    public FlexibleDate get普徴猶予終了日13() {
+
+        return this.get猶予終了日(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 普徴猶予終了日14を返します。
+     *
+     * @return 普徴猶予終了日14
+     */
+    public FlexibleDate get普徴猶予終了日14() {
+
+        return this.get猶予終了日(INT_14, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 徴収猶予申請年月日を返します。
+     *
+     * @return 徴収猶予申請年月日
+     */
+    public FlexibleDate get徴収猶予申請年月日() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予申請年月日() : FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 徴収猶予決定年月日を返します。
+     *
+     * @return 徴収猶予決定年月日
+     */
+    public FlexibleDate get徴収猶予決定年月日() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予決定年月日() : FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 徴収猶予取消年月日を返します。
+     *
+     * @return 徴収猶予取消年月日
+     */
+    public FlexibleDate get徴収猶予取消年月日() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消年月日() : FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 徴収猶予種類コードを返します。
+     *
+     * @return 徴収猶予種類コード
+     */
+    public Code get徴収猶予種類コード() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予種類コード() : Code.EMPTY;
+    }
+
+    /**
+     * 徴収猶予取消事由を返します。
+     *
+     * @return 徴収猶予取消事由
+     */
+    public RString get徴収猶予取消事由() {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消事由() : RString.EMPTY;
+    }
+
+    /**
      * 徴収猶予状態区分を返します。
      *
      * @return 徴収猶予状態区分
@@ -596,6 +1150,95 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
             return null;
         }
         return choshuYuyo.values().iterator().next();
+    }
+
+    /**
+     * 介護期別徴収猶予を返します。
+     *
+     * @return 介護期別徴収猶予
+     */
+    public List<KibetsuChoshuYuyo> get介護期別徴収猶予() {
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        if (徴収猶予 == null) {
+            return new ArrayList<>();
+        }
+        return 徴収猶予.getKibetsuChoshuYuyoList();
+    }
+
+    /**
+     * 期別金額を返します。
+     *
+     * @param 期 int
+     * @param 徴収方法期別 RString
+     * @return 期別金額
+     */
+    private Decimal get期別金額(int 期, RString 徴収方法期別) {
+
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return Decimal.ZERO;
+        }
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            if (徴収方法期別.equals(介護期別.get徴収方法())
+                    && 期 == 介護期別.get期()) {
+
+                ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
+                return 介護期別.getChoteiKyotsu(identifier).get調定額();
+            }
+        }
+        return Decimal.ZERO;
+    }
+
+    /**
+     * 猶予開始日を返します。
+     *
+     * @param 期 int
+     * @param 徴収方法期別 RString
+     * @return 猶予開始日
+     */
+    private FlexibleDate get猶予開始日(int 期, RString 徴収方法期別) {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        if (徴収猶予 == null) {
+            return FlexibleDate.EMPTY;
+        }
+        List<KibetsuChoshuYuyo> 介護期別徴収猶予情報List = 徴収猶予.getKibetsuChoshuYuyoList();
+        if (介護期別徴収猶予情報List == null || 介護期別徴収猶予情報List.isEmpty()) {
+            return FlexibleDate.EMPTY;
+        }
+        for (KibetsuChoshuYuyo 介護期別徴収猶予情報 : 介護期別徴収猶予情報List) {
+            if (徴収方法期別.equals(介護期別徴収猶予情報.get徴収方法())
+                    && 期 == 介護期別徴収猶予情報.get期()) {
+                return 介護期別徴収猶予情報.get徴収猶予開始日();
+            }
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 猶予終了日を返します。
+     *
+     * @param 期 int
+     * @param 徴収方法期別 RString
+     * @return 猶予終了日
+     */
+    private FlexibleDate get猶予終了日(int 期, RString 徴収方法期別) {
+
+        ChoshuYuyo 徴収猶予 = get徴収猶予();
+        if (徴収猶予 == null) {
+            return FlexibleDate.EMPTY;
+        }
+        List<KibetsuChoshuYuyo> 介護期別徴収猶予情報List = 徴収猶予.getKibetsuChoshuYuyoList();
+        if (介護期別徴収猶予情報List == null || 介護期別徴収猶予情報List.isEmpty()) {
+            return FlexibleDate.EMPTY;
+        }
+        for (KibetsuChoshuYuyo 介護期別徴収猶予情報 : 介護期別徴収猶予情報List) {
+            if (徴収方法期別.equals(介護期別徴収猶予情報.get徴収方法())
+                    && 期 == 介護期別徴収猶予情報.get期()) {
+                return 介護期別徴収猶予情報.get徴収猶予終了日();
+            }
+        }
+        return FlexibleDate.EMPTY;
     }
 
     /**

@@ -4,14 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * tblShisetsuNyutaisho のクラスファイル
@@ -19,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @author 自動生成
  */
 public class tblShisetsuNyutaishoDiv extends TablePanel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -340,14 +336,12 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
 
     // </editor-fold>
 }
-
 /**
- * celNyushoShisetsuTitle のクラスファイル
- *
+ * celNyushoShisetsuTitle のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNyushoShisetsuTitleAttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblNyushoShisetsu")
     private Label lblNyushoShisetsu;
@@ -372,14 +366,12 @@ class celNyushoShisetsuTitleAttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuNyushoDateTitle のクラスファイル
- *
+ * celShisetsuNyushoDateTitle のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuNyushoDateTitleAttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblShisetsuNyushoDate")
     private Label lblShisetsuNyushoDate;
@@ -404,14 +396,12 @@ class celShisetsuNyushoDateTitleAttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuTaishoDateTitle のクラスファイル
- *
+ * celShisetsuTaishoDateTitle のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuTaishoDateTitleAttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("lblShisetsuTaishoDate")
     private Label lblShisetsuTaishoDate;
@@ -436,14 +426,12 @@ class celShisetsuTaishoDateTitleAttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celNyushoShisetsu1 のクラスファイル
- *
+ * celNyushoShisetsu1 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNyushoShisetsu1AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtNyushoShisetsu1")
     private TextBox txtNyushoShisetsu1;
@@ -468,14 +456,12 @@ class celNyushoShisetsu1AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuNyushoDate1 のクラスファイル
- *
+ * celShisetsuNyushoDate1 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuNyushoDate1AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtShisetsuNyushoDate1")
     private TextBoxFlexibleDate txtShisetsuNyushoDate1;
@@ -500,14 +486,12 @@ class celShisetsuNyushoDate1AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuTaishoDate1 のクラスファイル
- *
+ * celShisetsuTaishoDate1 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuTaishoDate1AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtShisetsuTaishoDate1")
     private TextBoxFlexibleDate txtShisetsuTaishoDate1;
@@ -532,14 +516,12 @@ class celShisetsuTaishoDate1AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celNyushoShisetsu2 のクラスファイル
- *
+ * celNyushoShisetsu2 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNyushoShisetsu2AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtNyushoShisetsu2")
     private TextBox txtNyushoShisetsu2;
@@ -564,14 +546,12 @@ class celNyushoShisetsu2AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuNyushoDate2 のクラスファイル
- *
+ * celShisetsuNyushoDate2 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuNyushoDate2AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtShisetsuNyushoDate2")
     private TextBoxFlexibleDate txtShisetsuNyushoDate2;
@@ -596,14 +576,12 @@ class celShisetsuNyushoDate2AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuTaishoDate2 のクラスファイル
- *
+ * celShisetsuTaishoDate2 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuTaishoDate2AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtShisetsuTaishoDate2")
     private TextBoxFlexibleDate txtShisetsuTaishoDate2;
@@ -628,14 +606,12 @@ class celShisetsuTaishoDate2AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celNyushoShisetsu3 のクラスファイル
- *
+ * celNyushoShisetsu3 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celNyushoShisetsu3AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtNyushoShisetsu3")
     private TextBox txtNyushoShisetsu3;
@@ -660,14 +636,12 @@ class celNyushoShisetsu3AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuNyushoDate3 のクラスファイル
- *
+ * celShisetsuNyushoDate3 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuNyushoDate3AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtShisetsuNyushoDate3")
     private TextBoxFlexibleDate txtShisetsuNyushoDate3;
@@ -692,14 +666,12 @@ class celShisetsuNyushoDate3AttblShisetsuNyutaisho extends TableCell {
 
     // </editor-fold>
 }
-
 /**
- * celShisetsuTaishoDate3 のクラスファイル
- *
+ * celShisetsuTaishoDate3 のクラスファイル 
+ * 
  * @author 自動生成
  */
 class celShisetsuTaishoDate3AttblShisetsuNyutaisho extends TableCell {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     @JsonProperty("txtShisetsuTaishoDate3")
     private TextBoxFlexibleDate txtShisetsuTaishoDate3;

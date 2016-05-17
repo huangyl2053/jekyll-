@@ -38,6 +38,8 @@ public class FutsuChoshuTotal {
         if (!gotLock) {
             throw new PessimisticLockingException();
         }
+        div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getGridSetting().getColumns().get(2).setVisible(true);
+        div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getGridSetting().getColumns().get(2).setVisible(true);
         getHandler(div).set調定年度DDL();
         getHandler(div).set市町村指定();
         getHandler(div).set初期値();

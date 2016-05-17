@@ -237,7 +237,11 @@ public enum ReportIdDBE {
     /**
      * 介護認定審査会集計表（判定別）の帳票ＩＤです。
      */
-    DBE701008(new ReportId("DBE701008_ShinsakaiShukeihyo"), new RString("介護認定審査会集計表（申請区分別）"));
+    DBE701008(new ReportId("DBE701008_ShinsakaiShukeihyo"), new RString("介護認定審査会集計表（申請区分別）")),
+    /**
+     * 要介護認定情報提供その他資料情報の帳票ＩＤです。
+     */
+    DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("その他資料"));
 
     private final ReportId reportId;
 

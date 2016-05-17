@@ -63,7 +63,6 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     private static final int NUM_10 = 10;
     private static final int NUM_11 = 11;
     private static final int NUM_12 = 12;
-    private static final RString スペース = new RString(" ");
     private static final RString 半角ハイフン = new RString("_");
     private static final RString DATA_9900 = new RString("9900");
     private static final RString HEI = new RString("平");
@@ -272,19 +271,17 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         RString 通帳記号 = entity.get口座Entity().get通帳記号().substring(NUM_0, NUM_5);
         RString 通帳番号 = entity.get口座Entity().get通帳番号().substring(NUM_0, NUM_8);
         RString 口座名義人漢字 = entity.get口座Entity().get口座名義人漢字().value();
-        //TODO
         RString 支店コード = entity.get口座Entity().get支店コード().getColumnValue().substring(NUM_0, NUM_3);
-        //TODO
         IKoza koza = HonsanteiKekkaIcihiranEditor.to口座(entity.get口座Entity());
         RString 口座種別 = koza.get預金種別().get預金種別略称();
 
         RString 口座番号 = entity.get口座Entity().get口座番号().substring(NUM_0, NUM_7);
         RStringBuilder builder_ゆうちょ銀行 = new RStringBuilder();
-        builder_ゆうちょ銀行.append(スペース).append(金融機関コード).append(通帳記号)
-                .append(半角ハイフン).append(スペース).append(通帳番号).append(口座名義人漢字);
+        builder_ゆうちょ銀行.append(RString.HALF_SPACE).append(金融機関コード).append(通帳記号)
+                .append(半角ハイフン).append(RString.HALF_SPACE).append(通帳番号).append(口座名義人漢字);
         RStringBuilder builder_ゆうちょ銀行以外 = new RStringBuilder();
-        builder_ゆうちょ銀行以外.append(金融機関コード).append(半角ハイフン).append(支店コード).append(スペース)
-                .append(口座種別).append(半角ハイフン).append(口座番号).append(スペース).append(口座名義人漢字);
+        builder_ゆうちょ銀行以外.append(金融機関コード).append(半角ハイフン).append(支店コード).append(RString.HALF_SPACE)
+                .append(口座種別).append(半角ハイフン).append(口座番号).append(RString.HALF_SPACE).append(口座名義人漢字);
         if (DATA_9900.equals(金融機関コード)) {
             return builder_ゆうちょ銀行.toRString();
         } else {
@@ -333,39 +330,28 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     }
 
     private static IKoza to口座(UaFt310FindKozaEntity uaFt310Entity) {
+        // TODO インターフェースを提供しない。
         KozaRelateEntity relateEntity = new KozaRelateEntity();
         UaT0310KozaEntity kozaEntity = new UaT0310KozaEntity();
-//      kozaEntity.setGyomubetsuPrimaryKey(); //ない  uaFt310EntityにUaFt310FindKozaEntityにとって必要な項目がない
-//        uaFt310Entity.getサブ業務コード();
         kozaEntity.setKozaId(uaFt310Entity.get口座ID().longValue());
         kozaEntity.setKozaMeiginin(uaFt310Entity.get口座名義人());
         kozaEntity.setKozaMeigininKanji(uaFt310Entity.get口座名義人漢字());
         kozaEntity.setKozaMeigininShikibetsuCode(uaFt310Entity.get口座名義人識別コード());
         kozaEntity.setKozaNo(uaFt310Entity.get口座番号());
-//        kozaEntity.setKozaTorokuKubunCode(new KozaTorokuKubunCodeValue(uaFt310Entity.get口座登録区分コード()));
-//        kozaEntity.setKozaTorokuYMD(new FlexibleDate(uaFt310Entity.get口座登録年月日().toDateString()));
         kozaEntity.setKozaTorokuNo(uaFt310Entity.get口座登録番号());
-//        kozaEntity.setKozaShuryoUketsukeYMD(new FlexibleDate(uaFt310Entity.get口座終了受付年月日().toDateString()));
         kozaEntity.setKozaHyojiKubun(uaFt310Entity.get口座表示区分());
-//        kozaEntity.setKozaKaishiUketsukeYMD(new FlexibleDate(uaFt310Entity.get口座開始受付年月日().toDateString()));
         kozaEntity.setTemban(uaFt310Entity.get店番());
         kozaEntity.setKinyuKikanShitenCode(uaFt310Entity.get支店コード());
-        // uaFt310Entity.get支店名称();
         kozaEntity.setKensakuyoMeiginin(uaFt310Entity.get検索用名義人());
-//        uaFt310Entity.get業務コード();
         kozaEntity.setGyomuKoyuKey(uaFt310Entity.get業務固有キー());
         kozaEntity.setYotoKubun(new KozaYotoKubunCodeValue(uaFt310Entity.get用途区分()));
-//        uaFt310Entity.get用途区分名称();
-//        uaFt310Entity.get科目コード();
         kozaEntity.setShuryoYMD(new FlexibleDate(uaFt310Entity.get終了年月日().toDateString()));
         kozaEntity.setShikibetsuCode(uaFt310Entity.get識別コード());
         kozaEntity.setTsuchoNo(uaFt310Entity.get通帳番号());
         kozaEntity.setTsuchoKigo(uaFt310Entity.get通帳記号());
         kozaEntity.setKinyuKikanCode(uaFt310Entity.get金融機関コード());
-//        uaFt310Entity.get金融機関名称();
         kozaEntity.setKaishiYMD(new FlexibleDate(uaFt310Entity.get開始年月日().toDateString()));
         kozaEntity.setYokinShubetsu(uaFt310Entity.get預金種別());
-//        uaFt310Entity.get預金種別名称();
 
         relateEntity.setUaT0310KozaEntity(kozaEntity);
         return new Koza(relateEntity);

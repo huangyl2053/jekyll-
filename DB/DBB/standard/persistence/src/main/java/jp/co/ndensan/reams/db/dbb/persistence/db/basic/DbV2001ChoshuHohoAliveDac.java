@@ -88,4 +88,28 @@ public class DbV2001ChoshuHohoAliveDac implements ISaveable<DbV2001ChoshuHohoEnt
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+    
+    /**
+     * 被保険者徴収方法情報の取得。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbV2001ChoshuHohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV2001ChoshuHohoEntity selectChoshuhohonojohoAll(
+            FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV2001ChoshuHoho.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(hihokenshaNo, 被保険者番号))).
+                toObject(DbV2001ChoshuHohoEntity.class);
+    }
 }

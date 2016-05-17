@@ -13,6 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -35,6 +35,8 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
     private final TsukibetsuSuiihyoSakuseiParameterDiv div;
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
+    private static final int 調定基準日_S = 0;
+    private static final int 調定基準日_E = 8;
 
     /**
      * コンストラクタです。
@@ -80,7 +82,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
         }
         RString 調定基準日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("choteiKijunNichiji"));
         if (!RString.isNullOrEmpty(調定基準日)) {
-            div.getTxtChoteiKijunYMD().setValue(new RDate(調定基準日.toString()));
+            div.getTxtChoteiKijunYMD().setValue(new RDate(調定基準日.substringEmptyOnError(調定基準日_S, 調定基準日_E).toString()));
         }
         RString 各月資格基準日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kakutukiShikakuKijunNichi"));
         if (!RString.isNullOrEmpty(各月資格基準日)) {
@@ -165,7 +167,8 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
     }
 
     private void setヘッダエリア() {
-        div.getDdlChoteiNendo().setSelectedValue((BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課)));
+        RDate 適用基準日 = RDate.getNowDate();
+        div.getDdlChoteiNendo().setSelectedValue((DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課)));
         div.getTxtChoteiKijunYMD().setValue(RDate.getNowDate());
     }
 
@@ -179,10 +182,11 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
 
     private void set調定年度() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        RString 調定年度 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課);
-        RString 当初年度 = BusinessConfig.get(ConfigNameDBB.日付関連_当初年度, SubGyomuCode.DBB介護賦課);
-        RString 遡及年度 = BusinessConfig.get(ConfigNameDBB.日付関連_遡及年度, SubGyomuCode.DBB介護賦課);
-        RString 所得年度 = BusinessConfig.get(ConfigNameDBB.日付関連_所得年度, SubGyomuCode.DBB介護賦課);
+        RDate 適用基準日 = RDate.getNowDate();
+        RString 調定年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 当初年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_当初年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 遡及年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_遡及年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 所得年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_所得年度, 適用基準日, SubGyomuCode.DBB介護賦課);
         KeyValueDataSource 調定年度Key = new KeyValueDataSource();
         調定年度Key.setKey(new RString("調定年度"));
         調定年度Key.setValue(調定年度);

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -55,19 +56,19 @@ public class HonsanteifukaBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_特徴_出力対象, name = "特徴_出力対象")
     private RString 特徴_出力対象;
     @BatchParameter(key = KEY_特徴_発行日, name = "特徴_発行日")
-    private FlexibleDate 特徴_発行日;
+    private RDate 特徴_発行日;
     @BatchParameter(key = KEY_決定変更_文書番号, name = "決定変更_文書番号")
     private RString 決定変更_文書番号;
     @BatchParameter(key = KEY_決定変更_発行日, name = "決定変更_発行日")
-    private FlexibleDate 決定変更_発行日;
+    private RDate 決定変更_発行日;
     @BatchParameter(key = KEY_納入_出力方法, name = "納入_出力方法")
     private RString 納入_出力方法;
     @BatchParameter(key = KEY_納入_出力期, name = "納入_出力期")
-    private FlexibleDate 納入_出力期;
+    private RString 納入_出力期;
     @BatchParameter(key = KEY_納入_対象者, name = "納入_対象者")
     private RString 納入_対象者;
     @BatchParameter(key = KEY_納入_発行日, name = "納入_発行日")
-    private FlexibleDate 納入_発行日;
+    private RDate 納入_発行日;
     @BatchParameter(key = KEY_納入_出力対象, name = "納入_出力対象")
     private RString 納入_出力対象;
     @BatchParameter(key = KEY_納入_ページごとに山分け, name = "納入_ページごとに山分け")

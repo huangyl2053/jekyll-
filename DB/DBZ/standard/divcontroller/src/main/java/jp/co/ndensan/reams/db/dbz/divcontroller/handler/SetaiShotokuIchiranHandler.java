@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -44,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.Comparators;
 
 /**
  * {@link KaokuSearchParentDiv}のHandlerクラスです。
@@ -168,8 +170,10 @@ public class SetaiShotokuIchiranHandler {
                             .getYear().toDateString()), 所得基準年月日, true);
         }
         // 世帯所得情報リスト内のソート
-        return ItemList.of(世帯員所得情報).sorted(SetaiShotokuIchiranComparators.orderBy本人区分.desc())
-                .sorted(SetaiShotokuIchiranComparators.orderBy住民票表示順.desc()).toList();
+        return ItemList.of(世帯員所得情報).sorted(new Comparators.MultiComparator<>(
+                SetaiShotokuIchiranComparators.orderBy本人区分.desc(),
+                SetaiShotokuIchiranComparators.orderBy住民票表示順
+        )).toList();
     }
 
     /**
@@ -191,8 +195,12 @@ public class SetaiShotokuIchiranHandler {
                     new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
                             .getYear().toDateString()), YMDHMS.now(), true);
         }
-        return ItemList.of(世帯員所得情報).sorted(SetaiShotokuIchiranComparators.orderBy本人区分.desc())
-                .sorted(SetaiShotokuIchiranComparators.orderBy住民票表示順.desc()).toList();
+        return ItemList.of(世帯員所得情報).sorted(
+                new Comparators.MultiComparator<>(
+                        SetaiShotokuIchiranComparators.orderBy本人区分.desc(),
+                        SetaiShotokuIchiranComparators.orderBy住民票表示順
+                )
+        ).toList();
     }
 
     /**
@@ -241,19 +249,14 @@ public class SetaiShotokuIchiranHandler {
      * 激変緩和の表示制御
      */
     public void set激変緩和表示制御情報TO世帯一覧() {
-        DisplayMode mode = div.getMode_DisplayMode();
+        FlexibleYear 賦課年度 = find賦課年度(div);
+        if (賦課年度.isEmpty()) {
+            return;
+        }
+
         FukaKeisanConfig fukakeisanConfig = new FukaKeisanConfig();
         FlexibleYear 激変緩和開始年度 = fukakeisanConfig.get激変緩和開始年度();
         FlexibleYear 激変緩和終了年度 = fukakeisanConfig.get激変緩和終了年度();
-        FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
-        if (mode.equals(DisplayMode.ShotokuRirekiShokai)) {
-            return;
-        } else if (mode.equals(DisplayMode.FukaShokai)) {
-            賦課年度 = div.getTxtSetaiIchiranKazeiNendo().getDomain();
-        } else if (mode.equals(DisplayMode.ShotokuShokai) || mode.equals(DisplayMode.KogakuKaigoServicehi)) {
-            賦課年度 = new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
-                    .getYear().toDateString());
-        }
         if (激変緩和開始年度.isBefore(賦課年度) && 賦課年度.isBefore(激変緩和終了年度)) {
             setaiShotokuGridSetting.getColumns().get(INDEX_9).setVisible(true);
         } else {
@@ -262,15 +265,34 @@ public class SetaiShotokuIchiranHandler {
         div.getDgSetaiShotoku().setGridSetting(setaiShotokuGridSetting);
     }
 
+    private static FlexibleYear find賦課年度(SetaiShotokuIchiranDiv self) {
+        switch (self.getMode_DisplayMode()) {
+            case FukaShokai:
+                return self.getTxtSetaiIchiranKazeiNendo().getDomain();
+            case ShotokuShokai:
+            case KogakuKaigoServicehi:
+                return new FlexibleYear(
+                        new RDate(self.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
+                        .getYear().toDateString());
+            default:
+                return FlexibleYear.EMPTY;
+        }
+    }
+
     /**
      * {@link SetaiinShotoku}情報を{@link SetaiShotokuIchiranDiv}にセットします。<br/>
      * 激変緩和の表示制御
      */
     public void set激変緩和表示制御情報TO所得履歴一覧() {
+        FlexibleYear 賦課年度 = find賦課年度(div);
+        if (賦課年度.isEmpty()) {
+            return;
+        }
+
         FukaKeisanConfig fukakeisanConfig = new FukaKeisanConfig();
         FlexibleYear 激変緩和開始年度 = fukakeisanConfig.get激変緩和開始年度();
         FlexibleYear 激変緩和終了年度 = fukakeisanConfig.get激変緩和終了年度();
-        FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
+
         if (激変緩和開始年度.isBefore(賦課年度) && 賦課年度.isBefore(激変緩和終了年度)) {
             shotokuRirekiGridSetting.getColumns().get(INDEX_6).setVisible(false);
         } else {
@@ -398,7 +420,10 @@ public class SetaiShotokuIchiranHandler {
         KaigoShotokuAlive shotokuAlive = 介護所得Finder.get介護所得Alive(識別コード,
                 new FlexibleYear(new RDate(div.getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString())
                         .getYear().toDateString()));
-        return ItemList.of(shotokuAlive).sorted(ShotokuRirekiIchiranComparators.orderBy履歴番号.desc()).toList();
+
+        return shotokuAlive == null
+                ? Collections.<KaigoShotokuAlive>emptyList()
+                : ItemList.of(shotokuAlive).sorted(ShotokuRirekiIchiranComparators.orderBy履歴番号.desc()).toList();
     }
 
     /**

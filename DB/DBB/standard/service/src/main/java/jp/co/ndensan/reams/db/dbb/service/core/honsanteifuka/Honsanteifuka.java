@@ -108,7 +108,7 @@ public class Honsanteifuka {
     private static final int 定値_12期 = 12;
     private static final int 定値_13期 = 13;
     private static final int 定値_14期 = 14;
-    private static final RString 特徴出力対象_本算定 = new RString("本算定");
+    private static final RString 特徴出力対象_本算定 = new RString("本算定分");
     private static final RString 納入出力方法_別々出力 = new RString("別々出力");
     private static final RString 納入出力方法_全件出力 = new RString("全件出力");
     private static final RString 納入対象者_すべて = new RString("すべて選択");
@@ -650,12 +650,17 @@ public class Honsanteifuka {
             result.set納入_出力方法(区分_イチ);
         }
         result.set納入_出力期(parameter.get出力期());
-        if (納入対象者_すべて.equals(parameter.get納入_対象者())) {
-            result.set納入_対象者(区分_二);
-        } else if (納入対象者_現金.equals(parameter.get納入_対象者())) {
-            result.set納入_対象者(区分_ゼロ);
-        } else if (納入対象者_口座.equals(parameter.get納入_対象者())) {
-            result.set納入_対象者(区分_イチ);
+        if (parameter.get納入_対象者() != null && !parameter.get納入_対象者().isEmpty()) {
+            for (RString 納入_対象者 : parameter.get納入_対象者()) {
+                if (納入対象者_すべて.equals(納入_対象者)) {
+                    result.set納入_対象者(区分_二);
+                    break;
+                } else if (納入対象者_現金.equals(納入_対象者)) {
+                    result.set納入_対象者(区分_ゼロ);
+                } else if (納入対象者_口座.equals(納入_対象者)) {
+                    result.set納入_対象者(区分_イチ);
+                }
+            }
         }
         result.set納入_発行日(parameter.get納入_発行日());
         if (区分_する.equals(parameter.get生活保護対象者())) {

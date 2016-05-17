@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0700011;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.更新完了;
@@ -161,7 +162,7 @@ public class JutakuKaishuJizenShinseiToroku {
     }
 
     /**
-     * サービス年月入力値変更する時のメソッドです。
+     * サービス年月入力値を変更する時のメソッドです。
      *
      * @param div JutakuKaishuJizenShinseiTorokuDiv
      * @return ResponseData<JutakuKaishuJizenShinseiTorokuDiv>
@@ -171,6 +172,26 @@ public class JutakuKaishuJizenShinseiToroku {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         handler.給付率設定(被保険者番号);
         div.setHidDataChangeFlg(非表示用フラグ_TRUE);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 判定区分選択値を変更する時のメソッドです。
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onChange_radJudgeKubun(JutakuKaishuJizenShinseiTorokuDiv div) {
+        if (ShoninKubun.承認する.getコード().equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                .getTabShinsaKakka().getRadJudgeKubun().getSelectedKey())) {
+            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason().clearValue();
+            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtShoninCondition().setDisabled(false);
+            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason().setDisabled(true);
+        } else {
+            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtShoninCondition().clearValue();
+            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtShoninCondition().setDisabled(true);
+            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason().setDisabled(false);
+        }
         return ResponseData.of(div).respond();
     }
 

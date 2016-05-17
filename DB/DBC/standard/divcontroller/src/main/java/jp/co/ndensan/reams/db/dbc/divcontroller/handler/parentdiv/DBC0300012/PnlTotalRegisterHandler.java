@@ -83,7 +83,7 @@ public final class PnlTotalRegisterHandler {
         JuryoininKeiyakuJigyosha data = ViewStateHolder
                 .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
         JuryoininKeiyakuJigyosha recode = JuryoininKeiyakuJigyoshaManager.createInstance()
-                .getJuryoininKeiyakuJigyosha(data.get契約事業者番号(), data.get開始年月日(), data.get終了年月日());
+                .getJuryoininKeiyakuJigyosha(data.get契約事業者番号(), data.get開始年月日());
         if (recode == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
