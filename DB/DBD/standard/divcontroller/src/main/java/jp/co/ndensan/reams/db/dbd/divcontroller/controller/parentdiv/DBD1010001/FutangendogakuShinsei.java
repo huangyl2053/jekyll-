@@ -151,7 +151,9 @@ public class FutangendogakuShinsei {
             ViewStateHolder.put(ViewStateKeys.isReRequest, Boolean.TRUE);
             return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
         }
-        getHandler(div).onSelectByDeleteButton();
+        if (!ViewStateHolder.get(ViewStateKeys.isReRequest, Boolean.class)) {
+            getHandler(div).onSelectByDeleteButton();
+        }
         return ResponseData.of(div).respond();
     }
 
