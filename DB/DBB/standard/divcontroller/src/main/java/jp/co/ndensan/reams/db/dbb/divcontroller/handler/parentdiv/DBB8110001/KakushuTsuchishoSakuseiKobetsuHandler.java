@@ -1400,14 +1400,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getDdlInjiKouseiAto().getSelectedKey();
 
         KakushuTsuchishoParameter parameter = new KakushuTsuchishoParameter();
-        // TODO 仮デ—タ
-//        Map<RString, RString> 帳票Map = ViewStateHolder.get(ViewStateKeys.発行する帳票リスト, Map.class);
+        Map<RString, RString> 帳票Map = ViewStateHolder.get(ViewStateKeys.発行する帳票リスト, Map.class);
         List<RString> 発行する帳票List = new ArrayList<>();
-//        List<dgChohyoSentaku_Row> rowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
-//        for (dgChohyoSentaku_Row row : rowList) {
-//            発行する帳票List.add(帳票Map.get(row.getTxtChohyoSentaku()));
-//        }
-        発行する帳票List.add(TsuchiSho.特別徴収開始通知書_本算定.get名称());
+        List<dgChohyoSentaku_Row> rowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
+        for (dgChohyoSentaku_Row row : rowList) {
+            発行する帳票List.add(帳票Map.get(row.getTxtChohyoSentaku()));
+        }
         parameter.set発行する帳票List(発行する帳票List);
         if (更正前Key != null && !更正前Key.isEmpty()) {
             parameter.set賦課の情報_更正前(map.get(更正前Key));
