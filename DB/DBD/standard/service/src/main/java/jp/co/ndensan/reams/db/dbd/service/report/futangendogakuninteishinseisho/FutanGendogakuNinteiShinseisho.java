@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -181,13 +180,12 @@ public class FutanGendogakuNinteiShinseisho {
 
     private static RString get帳票文言(int 項目番号) {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get最新適用日(
                 SubGyomuCode.DBD介護受給,
                 new ReportId("DBD800001_FutangendogakuNinteiShinseisho"),
                 KamokuCode.EMPTY,
                 1,
-                項目番号,
-                new FlexibleDate(RDate.getNowDate().toDateString()));
+                項目番号);
         if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
         }
