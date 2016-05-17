@@ -42,6 +42,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -618,7 +619,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
-    
+
     /**
      * 前回の年齢到達（バッチ）処理時から今回の年齢到達（バッチ）処理時までの「年齢到達の異動」を被保険者台帳から取得する。
      *
@@ -651,6 +652,27 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(idoJiyuCode, 異動事由コード))).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC),
                         by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号、異動日で最大の枝番を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動日 IdoYMD
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectMaxEdaNoByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動日) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(edaNo)).
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日))).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 }
