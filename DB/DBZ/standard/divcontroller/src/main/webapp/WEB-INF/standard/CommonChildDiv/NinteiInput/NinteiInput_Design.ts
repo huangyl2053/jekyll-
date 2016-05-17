@@ -12,6 +12,10 @@ module DBZ {
                 return "onChange_radNinteiKubun";
             }
 
+            public static onClick_btnYokaigodoGuide(): string {
+                return "onClick_btnYokaigodoGuide";
+            }
+
             public static onClick_btnSixMonthLater(): string {
                 return "onClick_btnSixMonthLater";
             }
