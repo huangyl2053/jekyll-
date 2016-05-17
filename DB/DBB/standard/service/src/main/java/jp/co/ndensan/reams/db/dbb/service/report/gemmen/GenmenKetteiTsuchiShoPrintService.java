@@ -23,16 +23,21 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.ur.urz.business.core.gyosekukaku.IGyoseiKukaku;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -41,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -66,7 +72,6 @@ public class GenmenKetteiTsuchiShoPrintService {
 
     private static final RString 種別コード = new RString("DBB100078");
     private static final RString 種別コード1 = new RString("DBB100077");
-    private static final RString 賦課年度 = new RString("年度");
     private static final RString 定数 = new RString("0");
     private static final CodeShubetsu A4コード種別 = new CodeShubetsu(種別コード);
     private static final CodeShubetsu B5コード種別 = new CodeShubetsu(種別コード1);
@@ -195,20 +200,32 @@ public class GenmenKetteiTsuchiShoPrintService {
     private void setBaseItem(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報, RString 文書番号,
             RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder, int flag) {
         item.set文書番号(文書番号);
-        item.set調定年度(減免決定通知書情報.get減免の情報更正後().get調定年度().wareki().eraType(EraType.KANJI).toDateString());
-        item.set賦課年度(減免決定通知書情報.get減免の情報更正後().get賦課年度().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).toDateString().concat(賦課年度));
+        FlexibleYear 調定年度 = 減免決定通知書情報.get減免の情報更正後().get調定年度();
+        if (調定年度 != null) {
+            item.set調定年度(調定年度.wareki().eraType(EraType.KANJI).toDateString());
+        }
+        FlexibleYear 賦課年度 = 減免決定通知書情報.get減免の情報更正後().get賦課年度();
+        if (賦課年度 != null) {
+            item.set賦課年度(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
+        }
         item.set決定結果(減免決定通知書情報.get減免の情報更正後().get減免状態区分());
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
         if (isNotNull(減免決定通知書情報.get帳票制御共通()) && isNotNull(減免決定通知書情報.get宛名())
                 && isNotNull(減免決定通知書情報.get納組情報())) {
-            HyojiCodes 表示コード = researcher.create表示コード情報(減免決定通知書情報.get帳票制御共通().toEntity(),
-                    減免決定通知書情報.get宛名().get住所().get町域コード().value(),
-                    減免決定通知書情報.get宛名().get行政区画().getGyoseiku().getコード().value(),
-                    減免決定通知書情報.get宛名().get行政区画().getChiku1().getコード().value(),
-                    減免決定通知書情報.get宛名().get行政区画().getChiku2().getコード().value(),
-                    減免決定通知書情報.get宛名().get行政区画().getChiku3().getコード().value(),
-                    減免決定通知書情報.get納組情報().getNokumi().getNokumiCode());
+            IGyoseiKukaku 行政区画 = 減免決定通知書情報.get宛名().get行政区画();
+            IJusho 住所 = 減免決定通知書情報.get宛名().get住所();
+            HyojiCodes 表示コード = null;
+            if (行政区画 != null && 住所 != null && 行政区画.getGyoseiku() != null && 住所.get町域コード() != null
+                    && 減免決定通知書情報.get納組情報().getNokumi() != null && 行政区画.getChiku1() != null
+                    && 行政区画.getChiku2() != null && 行政区画.getChiku3() != null) {
+                表示コード = researcher.create表示コード情報(減免決定通知書情報.get帳票制御共通().toEntity(),
+                        減免決定通知書情報.get宛名().get住所().get町域コード().value(),
+                        減免決定通知書情報.get宛名().get行政区画().getGyoseiku().getコード().value(),
+                        減免決定通知書情報.get宛名().get行政区画().getChiku1().getコード().value(),
+                        減免決定通知書情報.get宛名().get行政区画().getChiku2().getコード().value(),
+                        減免決定通知書情報.get宛名().get行政区画().getChiku3().getコード().value(),
+                        減免決定通知書情報.get納組情報().getNokumi().getNokumiCode());
+            }
             if (isNotNull(表示コード)) {
                 item.set表示コード名称１(表示コード.get表示コード名１());
                 item.set表示コード名称２(表示コード.get表示コード名２());
@@ -218,36 +235,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 item.set表示コード３(表示コード.get表示コード３());
             }
         }
-        item.set通知書番号(減免決定通知書情報.get減免の情報更正後().get通知書番号().value());
-        SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get世帯コード();
-        if (世帯コード != null) {
-            item.set世帯コード(世帯コード.value());
-        }
-        item.set被保険者番号(減免決定通知書情報.get減免の情報更正後().get被保険者番号().value());
-        ShikibetsuCode 識別コード = 減免決定通知書情報.get減免の情報更正後().get識別コード();
-        if (識別コード != null) {
-            item.set識別コード(識別コード.value());
-        }
-        item.set減免決定年月日(減免決定通知書情報.get減免の情報更正後().get減免決定日().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        item.set減免額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get減免額(), 0));
-        item.set保険料算出額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get減免前介護保険料(), 0));
-        item.set保険料額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get賦課の情報更正前().get確定介護保険料(), 0));
-        item.set減免額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get減免額(), 0));
-        item.set保険料算出額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get減免前介護保険料(), 0));
-        item.set保険料額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
-                .get減免の情報更正後().get確定介護保険料(), 0));
-        if (flag == INDEX_ONE) {
-            item.set減免理由1(CodeMaster.getCodeMeisho(A4コード種別, 減免決定通知書情報.get減免の情報更正後().get減免種類()));
-        } else if (flag == INDEX_TWO) {
-            item.set減免理由1(CodeMaster.getCodeMeisho(B5コード種別, 減免決定通知書情報.get減免の情報更正後().get減免種類()));
-        }
-        item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get減免事由());
+        set減免の情報(item, 減免決定通知書情報, flag);
         item.set備考Title(通知書定型文);
         item.set備考(通知書定型文);
 
@@ -272,6 +260,50 @@ public class GenmenKetteiTsuchiShoPrintService {
             item.set内線(buildSource.naisenLabel);
             item.set内線番号(buildSource.naisenNo);
         }
+        set送付物宛先ソース(item, 減免決定通知書情報);
+
+        // TODO (QA655) 世帯主名 将来に追加する
+        // TODO (QA655) 様方 将来に追加する
+    }
+
+    private void set減免の情報(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報, int flag) {
+        if (isNotNull(減免決定通知書情報.get減免の情報更正後()) && isNotNull(減免決定通知書情報.get賦課の情報更正前())) {
+            TsuchishoNo 通知書番号 = 減免決定通知書情報.get減免の情報更正後().get通知書番号();
+            item.set通知書番号(通知書番号 != null ? 通知書番号.value() : RString.EMPTY);
+            SetaiCode 世帯コード = 減免決定通知書情報.get減免の情報更正後().get世帯コード();
+            item.set世帯コード(世帯コード != null ? 世帯コード.value() : RString.EMPTY);
+            HihokenshaNo 被保険者番号 = 減免決定通知書情報.get減免の情報更正後().get被保険者番号();
+            item.set被保険者番号(被保険者番号 != null ? 被保険者番号.value() : RString.EMPTY);
+            ShikibetsuCode 識別コード = 減免決定通知書情報.get減免の情報更正後().get識別コード();
+            item.set識別コード(識別コード != null ? 識別コード.value() : RString.EMPTY);
+            FlexibleDate 減免決定日 = 減免決定通知書情報.get減免の情報更正後().get減免決定日();
+            if (減免決定日 != null) {
+                item.set減免決定年月日(減免決定日.wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            }
+            item.set減免額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get賦課の情報更正前().get減免額(), 0));
+            item.set保険料算出額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get賦課の情報更正前().get減免前介護保険料_年額(), 0));
+            item.set保険料額前(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get賦課の情報更正前().get確定介護保険料_年額(), 0));
+            item.set減免額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get減免の情報更正後().get減免額(), 0));
+            item.set保険料算出額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get減免の情報更正後().get減免前介護保険料_年額(), 0));
+            item.set保険料額後(DecimalFormatter.toコンマ区切りRString(減免決定通知書情報
+                    .get減免の情報更正後().get確定介護保険料_年額(), 0));
+            Code 減免種類コード = 減免決定通知書情報.get減免の情報更正後().get減免種類コード();
+            if (flag == INDEX_ONE && 減免種類コード != null) {
+                item.set減免理由1(CodeMaster.getCodeMeisho(A4コード種別, 減免種類コード));
+            } else if (flag == INDEX_TWO && 減免種類コード != null) {
+                item.set減免理由1(CodeMaster.getCodeMeisho(B5コード種別, 減免種類コード));
+            }
+            item.set減免理由2(減免決定通知書情報.get減免の情報更正後().get減免事由());
+        }
+    }
+
+    private void set送付物宛先ソース(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
         if (isNotNull(減免決定通知書情報.get宛先()) && isNotNull(減免決定通知書情報.get地方公共団体())
                 && isNotNull(減免決定通知書情報.get帳票制御共通())) {
             JushoHenshu jushoHenshu = new JushoHenshu();
@@ -285,7 +317,6 @@ public class GenmenKetteiTsuchiShoPrintService {
                 item.set住所3(source.get送付物宛先ソース().jusho3);
                 item.set住所(source.get送付物宛先ソース().jushoText);
                 item.set住所1(source.get送付物宛先ソース().jusho1);
-
                 item.set住所2(source.get送付物宛先ソース().jusho2);
                 item.set方書(source.get送付物宛先ソース().katagakiText);
                 item.set方書2(source.get送付物宛先ソース().katagaki2);
@@ -315,8 +346,6 @@ public class GenmenKetteiTsuchiShoPrintService {
             }
 
         }
-        // TODO (QA655) 世帯主名 将来に追加する
-        // TODO (QA655) 様方 将来に追加する
     }
 
     /**
