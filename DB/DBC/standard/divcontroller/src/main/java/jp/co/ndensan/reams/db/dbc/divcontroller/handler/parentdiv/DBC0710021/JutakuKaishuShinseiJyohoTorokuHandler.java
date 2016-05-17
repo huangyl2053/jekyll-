@@ -901,14 +901,25 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             throw new ApplicationException(
                     UrErrorMessages.存在しない.getMessage().replace(証明書様式内容_NULL.toString()));
         }
-        set証明書DataSource(様式名称);
         RString 制度改正施行年月日 = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
         YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(被保険者番号, 提供着工年月);
-        if (要介護認定情報 != null && 画面提供着工年月.toDateString().compareTo(制度改正施行年月日) < 0) {
+        if (要介護認定情報 == null) {
+            List<KeyValueDataSource> 証明書ddl = new ArrayList<>();
+            証明書ddl.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            if (!様式名称.isEmpty()) {
+                for (ShikibetsuNoKanri 識別番号 : 様式名称) {
+                    証明書ddl.add(new KeyValueDataSource(識別番号.get識別番号(), 識別番号.get識別番号()));
+                }
+            }
+            div.getDdlSyomeisyo().setDataSource(証明書ddl);
+            div.getDdlSyomeisyo().setSelectedKey(RString.EMPTY);
+        } else if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) < 0) {
+            set証明書DataSource(様式名称);
             証明書表示設定平成18年04月以前(要介護認定情報);
-        } else if (要介護認定情報 != null && 画面提供着工年月.toDateString().compareTo(制度改正施行年月日) >= 0) {
+        } else if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) >= 0) {
+            set証明書DataSource(様式名称);
             証明書表示設定(画面モード, 要介護認定情報, 提供着工年月);
         }
     }
