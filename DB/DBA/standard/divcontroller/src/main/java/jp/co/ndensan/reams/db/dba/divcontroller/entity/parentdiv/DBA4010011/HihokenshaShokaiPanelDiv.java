@@ -8,19 +8,25 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.IShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IIryohokenRirekiCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.IRoreiFukushiNenkinShokaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.IShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HihokenshaShokaiPanel のクラスファイル
- *
+ * HihokenshaShokaiPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class HihokenshaShokaiPanelDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -64,13 +70,13 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplHihokenshaRireki(tplHihokenshaRirekiDiv tplHihokenshaRireki) {
+    public void  setTplHihokenshaRireki(tplHihokenshaRirekiDiv tplHihokenshaRireki) {
         this.getTabHihokenshaShokai().setTplHihokenshaRireki(tplHihokenshaRireki);
     }
 
     @JsonIgnore
-    public IShikakuTokusoRirekiDiv getCcdShikakuTokusoRireki() {
-        return this.getTabHihokenshaShokai().getTplHihokenshaRireki().getCcdShikakuTokusoRireki();
+    public IShikakuTokusoRirekiDiv getCcdShisetsuTokusoRireki() {
+        return this.getTabHihokenshaShokai().getTplHihokenshaRireki().getCcdShisetsuTokusoRireki();
     }
 
     @JsonIgnore
@@ -79,7 +85,7 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplSetaiShokai(tplSetaiShokaiDiv tplSetaiShokai) {
+    public void  setTplSetaiShokai(tplSetaiShokaiDiv tplSetaiShokai) {
         this.getTabHihokenshaShokai().setTplSetaiShokai(tplSetaiShokai);
     }
 
@@ -94,7 +100,7 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
+    public void  setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
         this.getTabHihokenshaShokai().setTplIryoHoken(tplIryoHoken);
     }
 
@@ -109,7 +115,7 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
+    public void  setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
         this.getTabHihokenshaShokai().setTplRofukuNenkin(tplRofukuNenkin);
     }
 
@@ -124,7 +130,7 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
+    public void  setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
         this.getTabHihokenshaShokai().setTplShisetsuNyutaisho(tplShisetsuNyutaisho);
     }
 
@@ -139,7 +145,7 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplShoKofuKaishu(tplShoKofuKaishuDiv tplShoKofuKaishu) {
+    public void  setTplShoKofuKaishu(tplShoKofuKaishuDiv tplShoKofuKaishu) {
         this.getTabHihokenshaShokai().setTplShoKofuKaishu(tplShoKofuKaishu);
     }
 

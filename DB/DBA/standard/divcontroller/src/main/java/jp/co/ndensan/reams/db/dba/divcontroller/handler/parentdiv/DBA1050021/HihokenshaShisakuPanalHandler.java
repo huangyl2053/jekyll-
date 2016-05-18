@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -46,6 +47,7 @@ public class HihokenshaShisakuPanalHandler {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_照会 = new RString("照会");
+    private static final int 処理日時_TMP = 9;
     private final RString 合併情報区分 = new RString("1");
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
@@ -191,7 +193,7 @@ public class HihokenshaShisakuPanalHandler {
             List<Shichoson> 旧保険者情報 = 旧保険者取得(
                     RString.isNullOrEmpty(所在保険者) ? LasdecCode.EMPTY : new LasdecCode(所在保険者),
                     導入形態コード.getCode(),
-                   RString.isNullOrEmpty(措置元保険者) ? LasdecCode.EMPTY : new LasdecCode(措置元保険者));
+                    RString.isNullOrEmpty(措置元保険者) ? LasdecCode.EMPTY : new LasdecCode(措置元保険者));
             List<KeyValueDataSource> keyValueList = new ArrayList<>();
             for (Shichoson 旧保険者 : 旧保険者情報) {
                 KeyValueDataSource keyValue = new KeyValueDataSource();
@@ -264,7 +266,7 @@ public class HihokenshaShisakuPanalHandler {
 
     /**
      * 広域と市町村判断の処理します。
-     * 
+     *
      * @return 広域保険者または単一保険者
      */
     public RString 広域と市町村判断() {
@@ -288,10 +290,10 @@ public class HihokenshaShisakuPanalHandler {
         }
         return RString.EMPTY;
     }
-    
+
     /**
      * 広域と市町村判断の処理します。
-     * 
+     *
      * @param 市町村コード LasdecCode
      * @param 導入形態コード RString
      * @param 広住特措置元市町村コード LasdecCode
@@ -343,7 +345,7 @@ public class HihokenshaShisakuPanalHandler {
         RString 喪失事由 = 資格得喪情報.getSoshitsuJiyuKey();
         panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlSoshitsuJiyu().setSelectedKey(
                 喪失事由.isEmpty() ? RString.EMPTY : 喪失事由);
-        RString 被保区分 = 資格得喪情報.getHihokenshaKubun();
+        RString 被保区分 = 資格得喪情報.getHihokenshaKubunKey();
         panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlHihoKubun().setSelectedKey(
                 被保区分.isEmpty() ? RString.EMPTY : 被保区分);
         RString 所在保険者 = 資格得喪情報.getShozaiHokensha();
@@ -356,10 +358,16 @@ public class HihokenshaShisakuPanalHandler {
         panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
                 旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
         RString 処理日時 = 資格得喪情報.getShoriDateTime();
-        panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuShoriDate().setValue(
-                RString.isNullOrEmpty(処理日時) ? FlexibleDate.EMPTY : new FlexibleDate(処理日時));
-        panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuShoriDate().setValue(
-                RString.isNullOrEmpty(処理日時) ? FlexibleDate.EMPTY : new FlexibleDate(処理日時));
+        panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuShoriDate().setValue(rStringToFlexibleDate(処理日時));
+        panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuShoriDate().setValue(rStringToFlexibleDate(処理日時));
+    }
+
+    private FlexibleDate rStringToFlexibleDate(RString 処理日時) {
+        if (RString.isNullOrEmpty(処理日時)) {
+            return FlexibleDate.EMPTY;
+        }
+        RDate date = new RDate(処理日時.toString().substring(0, 処理日時_TMP));
+        return new FlexibleDate(date.toDateString());
     }
 
     private void get住所地特例情報取得(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {

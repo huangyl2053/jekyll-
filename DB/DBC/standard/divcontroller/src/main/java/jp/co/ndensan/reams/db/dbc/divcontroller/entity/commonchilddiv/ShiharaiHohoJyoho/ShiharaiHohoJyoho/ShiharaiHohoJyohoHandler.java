@@ -294,11 +294,13 @@ public class ShiharaiHohoJyohoHandler {
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
         div.getTxtTenban().setReadOnly(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     private void 償還払給付または高額給付の登録モード_口座払いエリアの状態処理() {
@@ -351,6 +353,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
+        div.getTxtTenban1().setReadOnly(true);
         div.getTxtKinyuKikanName1().setReadOnly(true);
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
@@ -381,6 +384,9 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtMeigininKana1().setReadOnly(true);
             div.getTxtMeigininKanji1().setReadOnly(true);
         }
+        div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
+        div.getTxtTenban1().setReadOnly(true);
+        div.getTxtYokinShubetsu1().setReadOnly(true);
     }
 
     private void 償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理() {
@@ -484,6 +490,9 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtTenban().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     private void 高額合算の修正モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {

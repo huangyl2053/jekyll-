@@ -210,6 +210,7 @@ public class ShikakuShutokuIdoTotal {
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                 .getCcdShikakuTokusoRireki().getDataGridDataSource();
         Collections.sort(rowList, new ShikakuShutokuIdoTotal.ComparatorByDaNoSort());
+
         RString daNo = new RString("1");
         if (!rowList.isEmpty()) {
             daNo = new RString(Integer.parseInt(rowList.get(rowList.size() - 1).getDaNo().trim().toString()) + 1);
@@ -223,6 +224,7 @@ public class ShikakuShutokuIdoTotal {
                     .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedValue());
             row.setShutokuJiyuKey(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
         } else {
             row = new dgShikakuShutokuRireki_Row();
             row.setState(追加);
@@ -237,9 +239,10 @@ public class ShikakuShutokuIdoTotal {
                     .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
             row.setHihokenshaNo(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getTxtHihoNo().getValue());
-
+            rowList.add(row);
+            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridDataSource(rowList);
         }
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
+
         List<dgShikakuShutokuRireki_Row> sortList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki()
                 .getDataGridDataSource();
         Collections.sort(sortList, new ShikakuShutokuIdoTotal.ComparatorByShutokuDateSort());
