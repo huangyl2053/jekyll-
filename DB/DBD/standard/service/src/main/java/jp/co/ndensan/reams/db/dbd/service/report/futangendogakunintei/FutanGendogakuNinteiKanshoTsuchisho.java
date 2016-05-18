@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.service.report.futangendogakunintei;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
@@ -65,7 +64,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -112,7 +110,7 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             publishお知らせ通知書(被保険者番号, 識別コード, 履歴番号, 発行日, 文書番号, お知らせ通知書, 申請書, reportManager);
         }
         if (申請書) {
-            FutanGendogakuNinteiShinseisho futanGendogakuNinteiShinseisho = new FutanGendogakuNinteiShinseisho();
+            FutanGendogakuNinteiShinseisho futanGendogakuNinteiShinseisho = FutanGendogakuNinteiShinseisho.createInstance();
             futanGendogakuNinteiShinseisho.createFutanGendogakuNinteiShinseishoChohyo(識別コード, 被保険者番号, reportManager);
         }
     }
@@ -131,8 +129,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
      */
     public void publishお知らせ通知書(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード,
             int 履歴番号, RDate 発行日, RString 文書番号, boolean お知らせ通知書, boolean 申請書, ReportManager reportManager) {
-        SourceDataCollection sourceDataCollection = new SourceDataCollection();
-
         FutanGendogakuNintei 介護保険負担限度額認定 = get介護負担限度額認定の情報(被保険者番号, 履歴番号);
         if (介護保険負担限度額認定 == null) {
             介護保険負担限度額認定 = new FutanGendogakuNintei(ShoKisaiHokenshaNo.EMPTY, 被保険者番号, 履歴番号);
@@ -182,8 +178,28 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
             itemList.add(item);
             NinteiKoshinTsuchishoService service = new NinteiKoshinTsuchishoService();
             service.print(itemList, reportManager);
-            insert発行履歴(sourceDataCollection, 発行日, 識別コード);
         }
+    }
+
+    /**
+     * 発行履歴の登録
+     *
+     * @param sourceData SourceDataCollectionのSourceData
+     * @param 発行日 発行日
+     * @param 識別コード 識別コード
+     * @param hashMap 業務固有情報hashmap
+     */
+    public void insert発行履歴(SourceData sourceData, RDate 発行日, ShikibetsuCode 識別コード, HashMap<Code, RString> hashMap) {
+        IHakkoRirekiManager manager = HakkoRirekiManagerFactory.createInstance();
+        List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
+        shikibetsuCodeList.add(識別コード);
+
+        manager.insert帳票発行履歴(
+                sourceData,
+                new FlexibleDate(発行日.toDateString()),
+                ChohyoHakkoRirekiJotai.新規作成,
+                hashMap, shikibetsuCodeList
+        );
     }
 
     private Ninshosha get認証者情報(FlexibleDate kaisiYMD) {
@@ -229,26 +245,6 @@ public class FutanGendogakuNinteiKanshoTsuchisho {
         DbT7068ChohyoBunruiKanriDac dbT7068Dac = InstanceProvider.create(DbT7068ChohyoBunruiKanriDac.class);
         DbT7068ChohyoBunruiKanriEntity dbT7068Entity = dbT7068Dac.selectByKey(SubGyomuCode.DBD介護受給, ReportIdDBD.DBDPR12002_1_1.getReportId());
         return dbT7068Entity.getChohyoBunruiID();
-    }
-
-    private boolean insert発行履歴(SourceDataCollection sourceDataCollection, RDate 発行日, ShikibetsuCode 識別コード) {
-        IHakkoRirekiManager manager = HakkoRirekiManagerFactory.createInstance();
-        Iterator<SourceData> sourceDataList = sourceDataCollection.iterator();
-        List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
-        shikibetsuCodeList.add(識別コード);
-        boolean is正常終了 = false;
-        HashMap<Code, RString> hashMap = new HashMap();
-
-        while (sourceDataList.hasNext()) {
-
-            is正常終了 = manager.insert帳票発行履歴(
-                    sourceDataList.next(),
-                    new FlexibleDate(発行日.toDateString()),
-                    ChohyoHakkoRirekiJotai.新規作成,
-                    hashMap, shikibetsuCodeList
-            );
-        }
-        return is正常終了;
     }
 
     /**
