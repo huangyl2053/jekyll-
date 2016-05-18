@@ -13,6 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -288,39 +289,61 @@ public class ShikakuHenkoRirekiHandler {
         Collections.sort(hihokenshaDaichoList, new DateComparator());
         for (HihokenshaDaicho hihokenshaDaicho : hihokenshaDaichoList) {
             if (!div.getTxtHenkoDate().getValue().isBefore(hihokenshaDaicho.get異動日())) {
-                return getHihokenshaDaicho(hihokenshaDaicho);
+                return getHihokenshaDaicho(hihokenshaDaicho, result);
             }
         }
-        return getHihokenshaDaicho(hihokenshaDaichoList.get(hihokenshaDaichoList.size() - 1));
+        return getHihokenshaDaicho(hihokenshaDaichoList.get(hihokenshaDaichoList.size() - 1), result);
     }
 
-    private HihokenshaDaicho getHihokenshaDaicho(HihokenshaDaicho old) {
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(old.get被保険者番号(), FlexibleDate.getNowDate(), old.get枝番());
+    private HihokenshaDaicho getHihokenshaDaicho(HihokenshaDaicho old, Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result) {
+        HihokenshaDaichoManager manager = InstanceProvider.create(HihokenshaDaichoManager.class);
+        RString 枝番 = manager.get最大の枝番(old.get被保険者番号(), div.getTxtHenkoDate().getValue());
+        int i = 1;
+        for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
+            if (row.getHenkoDate().getValue().compareTo(div.getTxtHenkoDate().getValue()) == 0) {
+                i = i + 1;
+            }
+        }
+        if (RString.isNullOrEmpty(枝番)) {
+            枝番 = new RString("0001");
+        } else {
+            枝番 = new RString(Integer.parseInt(枝番.toString()) + i).padZeroToLeft(4);
+        }
+        if (result.get(new HihokenshaDaichoIdentifier(old.get被保険者番号(),
+                div.getTxtHenkoDate().getValue(), 枝番)) != null) {
+            枝番 = new RString(Integer.parseInt(枝番.toString()) + i).padZeroToLeft(4);
+        }
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(old.get被保険者番号(),
+                div.getTxtHenkoDate().getValue(), 枝番);
         HihokenshaDaichoBuilder hihokenshaDaichoBuilder = hihokenshaDaicho.createBuilderForEdit();
         hihokenshaDaichoBuilder.set異動事由コード(old.get異動事由コード());
         hihokenshaDaichoBuilder.set市町村コード(old.get市町村コード());
         hihokenshaDaichoBuilder.set識別コード(old.get識別コード());
-        hihokenshaDaichoBuilder.set資格取得事由コード(old.get資格取得事由コード());
-        hihokenshaDaichoBuilder.set資格取得年月日(old.get資格取得年月日());
-        hihokenshaDaichoBuilder.set資格取得届出年月日(old.get資格取得届出年月日());
-        hihokenshaDaichoBuilder.set第1号資格取得年月日(old.get第1号資格取得年月日());
+        hihokenshaDaichoBuilder.set資格取得事由コード(ObjectUtil.defaultIfNull(old.get資格取得事由コード(), RString.EMPTY));
+        hihokenshaDaichoBuilder.set資格取得年月日(ObjectUtil.defaultIfNull(old.get資格取得年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set資格取得届出年月日(ObjectUtil.defaultIfNull(old.get資格取得届出年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set第1号資格取得年月日(ObjectUtil.defaultIfNull(old.get第1号資格取得年月日(), FlexibleDate.EMPTY));
         hihokenshaDaichoBuilder.set被保険者区分コード(old.get被保険者区分コード());
-        hihokenshaDaichoBuilder.set資格喪失事由コード(old.get資格喪失事由コード());
-        hihokenshaDaichoBuilder.set資格喪失年月日(old.get資格喪失年月日());
-        hihokenshaDaichoBuilder.set資格喪失届出年月日(old.get資格喪失届出年月日());
-        hihokenshaDaichoBuilder.set資格変更事由コード(old.get資格変更事由コード());
-        hihokenshaDaichoBuilder.set資格変更年月日(old.get資格変更年月日());
-        hihokenshaDaichoBuilder.set資格変更届出年月日(old.get資格変更届出年月日());
-        hihokenshaDaichoBuilder.set住所地特例適用事由コード(old.get住所地特例適用事由コード());
-        hihokenshaDaichoBuilder.set適用年月日(old.get適用年月日());
-        hihokenshaDaichoBuilder.set適用届出年月日(old.get適用届出年月日());
-        hihokenshaDaichoBuilder.set住所地特例解除事由コード(old.get住所地特例解除事由コード());
-        hihokenshaDaichoBuilder.set解除年月日(old.get解除年月日());
-        hihokenshaDaichoBuilder.set解除届出年月日(old.get解除届出年月日());
-        hihokenshaDaichoBuilder.set住所地特例フラグ(old.get住所地特例フラグ());
-        hihokenshaDaichoBuilder.set広域内住所地特例フラグ(old.get広域内住所地特例フラグ());
-        hihokenshaDaichoBuilder.set広住特措置元市町村コード(old.get広住特措置元市町村コード());
-        hihokenshaDaichoBuilder.set旧市町村コード(old.get旧市町村コード());
+        hihokenshaDaichoBuilder.set資格喪失事由コード(ObjectUtil.defaultIfNull(old.get資格喪失事由コード(), RString.EMPTY));
+        hihokenshaDaichoBuilder.set資格喪失年月日(ObjectUtil.defaultIfNull(old.get資格喪失年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set資格喪失届出年月日(ObjectUtil.defaultIfNull(old.get資格喪失届出年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set資格変更事由コード(ObjectUtil.defaultIfNull(old.get資格変更事由コード(), RString.EMPTY));
+        hihokenshaDaichoBuilder.set資格変更年月日(ObjectUtil.defaultIfNull(old.get資格変更年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set資格変更届出年月日(ObjectUtil.defaultIfNull(old.get資格変更届出年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set住所地特例適用事由コード(
+                ObjectUtil.defaultIfNull(old.get住所地特例適用事由コード(), RString.EMPTY));
+        hihokenshaDaichoBuilder.set適用年月日(ObjectUtil.defaultIfNull(old.get適用年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set適用届出年月日(ObjectUtil.defaultIfNull(old.get適用届出年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set住所地特例解除事由コード(
+                ObjectUtil.defaultIfNull(old.get住所地特例解除事由コード(), RString.EMPTY));
+        hihokenshaDaichoBuilder.set解除年月日(ObjectUtil.defaultIfNull(old.get解除年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set解除届出年月日(ObjectUtil.defaultIfNull(old.get解除届出年月日(), FlexibleDate.EMPTY));
+        hihokenshaDaichoBuilder.set住所地特例フラグ(ObjectUtil.defaultIfNull(old.get住所地特例フラグ(), RString.EMPTY));
+        hihokenshaDaichoBuilder.set広域内住所地特例フラグ(
+                ObjectUtil.defaultIfNull(old.get広域内住所地特例フラグ(), RString.EMPTY));
+        hihokenshaDaichoBuilder.set広住特措置元市町村コード(
+                ObjectUtil.defaultIfNull(old.get広住特措置元市町村コード(), LasdecCode.EMPTY));
+        hihokenshaDaichoBuilder.set旧市町村コード(ObjectUtil.defaultIfNull(old.get旧市町村コード(), LasdecCode.EMPTY));
         hihokenshaDaichoBuilder.set論理削除フラグ(old.is論理削除フラグ());
         return hihokenshaDaichoBuilder.build();
     }
@@ -381,19 +404,13 @@ public class ShikakuHenkoRirekiHandler {
         SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<SikakuKanrenIdo> kanrenIdos = finder.getSikakuKanrenIdo(SikakuKanrenIdoParameter.createParam(被保険者番号, 識別コード, 取得日)).records();
         HihokenshaDaichoManager manager = InstanceProvider.create(HihokenshaDaichoManager.class);
-        List<HihokenshaDaicho> hihokenshaDaichoList = manager.get被保険者台帳管理一覧();
-        List<HihokenshaDaicho> hihokenshaList = new ArrayList<>();
+        List<HihokenshaDaicho> hihokenshaDaichoList = manager.get最新被保険者台帳(被保険者番号);
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = Models.create(hihokenshaDaichoList);
         List<dgHenko_Row> rows = new ArrayList<>();
         for (SikakuKanrenIdo sikakuKanrenIdo : kanrenIdos) {
             rows.add(getDgHenko_RowFromSikakuKanrenIdo(sikakuKanrenIdo, 識別コード));
-            hihokenshaList.add(result.get(new HihokenshaDaichoIdentifier(
-                    sikakuKanrenIdo.get被保険者番号(),
-                    sikakuKanrenIdo.get異動日(),
-                    sikakuKanrenIdo.get枝番().trim())));
         }
-        Collections.sort(hihokenshaList, new DateComparator());
-        ViewStateHolder.put(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.create(hihokenshaList));
+        ViewStateHolder.put(ViewStateKeys.資格変更履歴_被保険者台帳情報, result);
         return rows;
     }
 

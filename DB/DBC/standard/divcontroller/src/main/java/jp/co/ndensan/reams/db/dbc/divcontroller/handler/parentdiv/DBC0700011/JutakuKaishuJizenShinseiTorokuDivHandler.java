@@ -260,6 +260,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             口座情報選択時(画面モード, data);
             div.setHidDataChangeFlg(RString.EMPTY);
         } else if (住宅改修情報.equals(selectedTab) && !初期化済み.equals(div.getHidJutakuKaisyuJyohoFlg())) {
+            if (div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue() == null) {
+                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(サービス年月.toString()));
+            }
             住宅改修情報選択時(画面モード, 被保険者番号);
             div.setHidDataChangeFlg(RString.EMPTY);
         } else if (審査結果.equals(selectedTab) && !初期化済み.equals(div.getHidSeikyuSummaryFlg())) {
@@ -305,13 +308,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     }
 
     private void 住宅改修情報選択時(RString 画面モード, HihokenshaNo 被保険者番号) {
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         if (登録モード.equals(画面モード)) {
             JyutakugaisyunaiyoListDataPassModel model = new JyutakugaisyunaiyoListDataPassModel();
             model.set被保険者番号(被保険者番号);
             model.set状態(状態_登録);
             // TODO QAのNo.664 項目「サービス提供年月」の設定値は確認中
-            model.set住所クラス(div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
-                    .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().get住所());
+            model.set識別コード(識別コード);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()
@@ -330,8 +333,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             model.set整理番号(seiriNo);
             model.set様式番号(yoshikiNo);
             model.set状態((照会モード.equals(画面モード) || 削除モード.equals(画面モード)) ? 状態_参照 : 状態_登録);
-            model.set住所クラス(div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
-                    .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近().get住所());
+            model.set識別コード(識別コード);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
             ShiharaiKekkaResult result = JutakuKaishuJizenShinsei.createInstance()

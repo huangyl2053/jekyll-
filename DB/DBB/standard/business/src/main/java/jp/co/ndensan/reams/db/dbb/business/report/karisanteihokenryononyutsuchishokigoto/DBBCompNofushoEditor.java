@@ -31,8 +31,8 @@ public class DBBCompNofushoEditor implements IKarisanteiHokenryoNonyuTsuchishoKi
      * @param 納入通知書期情報 納入通知書期情報
      */
     protected DBBCompNofushoEditor(NofuShoKyotsu 納付書共通, NonyuTsuchiShoKiJoho 納入通知書期情報) {
-        this.納付書共通 = 納付書共通;
-        this.納入通知書期情報 = 納入通知書期情報;
+        this.納付書共通 = null == 納付書共通 ? new NofuShoKyotsu() : 納付書共通;
+        this.納入通知書期情報 = null == 納入通知書期情報 ? new NonyuTsuchiShoKiJoho() : 納入通知書期情報;
     }
 
     @Override
@@ -48,27 +48,34 @@ public class DBBCompNofushoEditor implements IKarisanteiHokenryoNonyuTsuchishoKi
         editNofushoNofugaku1(source);
         editNofushoNofuin1(source);
         editNofushoNokigen1(source);
-        editNofushoOcr11(source);
-        editNofushoOcr21(source);
-        editNofushoOcr31(source);
-        editNofushoOcr41(source);
+        if (納入通知書期情報.getOcr() != null) {
+            editNofushoOcr11(source);
+            editNofushoOcr21(source);
+            editNofushoOcr31(source);
+            editNofushoOcr41(source);
+        }
         editNofushoRyoshuHizukein1(source);
-        editNofushoSetaiCode1(source);
         editNofushoShichosonMei11(source);
         editNofushoSofusakiName1(source);
         editNofushoTsuchishoNo1(source);
         editNofushoTsuki1(source);
         editNofushoZuiji1(source);
-        editNofushohyojicode11(source);
-        editNofushohyojicode21(source);
-        editNofushohyojicode31(source);
-        editNofushohyojicodeName11(source);
-        editNofushohyojicodeName21(source);
-        editNofushohyojicodeName31(source);
+        if (納付書共通.get世帯コード() != null) {
+            editNofushoSetaiCode1(source);
+            editNofushohyojicode11(source);
+            editNofushohyojicode21(source);
+            editNofushohyojicode31(source);
+            editNofushohyojicodeName11(source);
+            editNofushohyojicodeName21(source);
+            editNofushohyojicodeName31(source);
+        }
         return source;
     }
 
     private void editNofushoNendo1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
+        if (null == 納付書共通.get調定年度表記()) {
+            return;
+        }
         source.nofushoNendo1 = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
     }
 
@@ -129,6 +136,9 @@ public class DBBCompNofushoEditor implements IKarisanteiHokenryoNonyuTsuchishoKi
     }
 
     private void editNofushoTsuchishoNo1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
+        if (null == 納付書共通.get通知書番号()) {
+            return;
+        }
         source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
     }
 

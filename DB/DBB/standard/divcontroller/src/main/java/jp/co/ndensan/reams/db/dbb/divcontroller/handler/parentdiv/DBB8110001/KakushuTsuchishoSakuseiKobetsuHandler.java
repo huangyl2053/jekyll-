@@ -15,9 +15,12 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.TyouteiZiyu;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoSeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TsuchiSho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ShutsuryokuHoshiki;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ShutsuryokuKeishiki;
@@ -25,6 +28,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.Kaku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoaderFinder;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -33,6 +37,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -72,6 +78,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 保険料納入通知書_過年度 = new RString("保険料納入通知書_過年度");
     private static final RString 介護保険料額決定通知書 = new RString("介護保険料額決定通知書");
     private static final RString 介護保険料額変更兼特別徴収中止通知書 = new RString("介護保険料額変更兼特別徴収中止通知書");
+    private static final RString 介護保険料額決定通知書_過年度 = new RString("介護保険料額決定通知書_過年度");
+    private static final RString 介護保険料額変更兼特別徴収中止通知書_過年度 = new RString("介護保険料額変更兼特別徴収中止通知書_過年度");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString スペース = RString.HALF_SPACE;
@@ -237,17 +245,29 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         div.getFukaShokaiGrandsonTsuchisho().getTxtChoteiNendo().setDomain(賦課の情報.get調定年度());
         div.getFukaShokaiGrandsonTsuchisho().getTxtFukaNendo().setDomain(賦課の情報.get賦課年度());
         div.getFukaShokaiGrandsonTsuchisho().getTxtKoseiM().setValue(賦課の情報.get更正月());
-        div.getFukaShokaiGrandsonTsuchisho().getTxtKoseiDateTime().setValue(new RString(賦課の情報.get調定日時().toString()));
+        if (賦課の情報.get調定日時() != null) {
+            RString 年月日 = 賦課の情報.get調定日時().getRDateTime().getDate().wareki().toDateString();
+            RString 時刻 = 賦課の情報.get調定日時().getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm);
+            div.getFukaShokaiGrandsonTsuchisho().getTxtKoseiDateTime().setValue(年月日.concat(スペース).concat(時刻));
+        }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getRadKobetsuHakkoChoteiJiyu()
                 .setSelectedKey(KEY0);
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setValue(
-                賦課の情報.get調定事由1());
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setValue(
-                賦課の情報.get調定事由2());
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setValue(
-                賦課の情報.get調定事由3());
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setValue(
-                賦課の情報.get調定事由4());
+        if (賦課の情報.get調定事由1() != null && !賦課の情報.get調定事由1().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setValue(
+                    ChoteiJiyuCode.toValue(賦課の情報.get調定事由1()).get名称());
+        }
+        if (賦課の情報.get調定事由2() != null && !賦課の情報.get調定事由2().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setValue(
+                    ChoteiJiyuCode.toValue(賦課の情報.get調定事由2()).get名称());
+        }
+        if (賦課の情報.get調定事由3() != null && !賦課の情報.get調定事由3().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setValue(
+                    ChoteiJiyuCode.toValue(賦課の情報.get調定事由3()).get名称());
+        }
+        if (賦課の情報.get調定事由4() != null && !賦課の情報.get調定事由4().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setValue(
+                    ChoteiJiyuCode.toValue(賦課の情報.get調定事由4()).get名称());
+        }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(true);
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(true);
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(true);
@@ -286,10 +306,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae7().setText(DateEditor.to和暦(賦課の情報.get老年廃止日()));
         }
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
-                .getLblFukankonkyoMae8().setText(賦課の情報.get課税区分());
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
-                .getLblFukankonkyoMae9().setText(賦課の情報.get世帯課税区分());
+        if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+                    .getLblFukankonkyoMae8().setText(KazeiKubun.toValue(賦課の情報.get課税区分()).get名称());
+        }
+        if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+                    .getLblFukankonkyoMae9().setText(SetaiKazeiKubun.toValue(賦課の情報.get世帯課税区分()).get名称());
+        }
         Decimal 合計所得金額 = 賦課の情報.get合計所得金額();
         if (合計所得金額 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
@@ -300,8 +324,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoMae11().setText(DecimalFormatter.toコンマ区切りRString(年金収入額, 0));
         }
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
-                .getLblFukankonkyoMae12().setText(賦課の情報.get保険料段階());
+        if (賦課の情報.get保険料段階() != null && !賦課の情報.get保険料段階().isEmpty()) {
+            HokenryoDankaiList 保険料段階 = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課の情報.get賦課年度());
+            HokenryoDankai 段階区分 = 保険料段階.getBy段階区分(賦課の情報.get保険料段階());
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+                    .getLblFukankonkyoMae12().setText(段階区分.get表記());
+        }
         Decimal 減免額 = 賦課の情報.get減免額();
         if (減免額 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
@@ -344,10 +372,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto7().setText(DateEditor.to和暦(賦課の情報.get老年廃止日()));
         }
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
-                .getLblFukankonkyoAto8().setText(賦課の情報.get課税区分());
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
-                .getLblFukankonkyoAto9().setText(賦課の情報.get世帯課税区分());
+        if (賦課の情報.get課税区分() != null && !賦課の情報.get課税区分().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+                    .getLblFukankonkyoAto8().setText(KazeiKubun.toValue(賦課の情報.get課税区分()).get名称());
+        }
+        if (賦課の情報.get世帯課税区分() != null && !賦課の情報.get世帯課税区分().isEmpty()) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+                    .getLblFukankonkyoAto9().setText(SetaiKazeiKubun.toValue(賦課の情報.get世帯課税区分()).get名称());
+        }
         Decimal 合計所得金額 = 賦課の情報.get合計所得金額();
         if (合計所得金額 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
@@ -358,8 +390,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
                     .getLblFukankonkyoAto11().setText(DecimalFormatter.toコンマ区切りRString(年金収入額, 0));
         }
-        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
-                .getLblFukankonkyoAto12().setText(賦課の情報.get保険料段階());
+        if (賦課の情報.get保険料段階() != null && !賦課の情報.get保険料段階().isEmpty()) {
+            HokenryoDankaiList 保険料段階 = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(賦課の情報.get賦課年度());
+            HokenryoDankai 段階区分 = 保険料段階.getBy段階区分(賦課の情報.get保険料段階());
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
+                    .getLblFukankonkyoAto12().setText(段階区分.get表記());
+        }
         Decimal 減免額 = 賦課の情報.get減免額();
         if (減免額 != null) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo()
@@ -1005,7 +1041,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             } else if (賦課台帳.equals(帳票略称)) {
                 賦課台帳Flag = true;
             }
-            if (!介護保険料額決定通知書.equals(帳票) && !介護保険料額変更兼特別徴収中止通知書.equals(帳票)) {
+            if (is調定事由(帳票)) {
                 調定事由Flag = true;
             }
             if (!帳票リスト.contains(帳票略称)) {
@@ -1037,6 +1073,13 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 郵振納付書Flag, 賦課台帳Flag, 調定事由Flag);
     }
 
+    private boolean is調定事由(RString 帳票) {
+        return !介護保険料額決定通知書.equals(帳票)
+                && !介護保険料額変更兼特別徴収中止通知書.equals(帳票)
+                && !介護保険料額決定通知書_過年度.equals(帳票)
+                && !介護保険料額変更兼特別徴収中止通知書_過年度.equals(帳票);
+    }
+
     private void set通知書(boolean 特徴開始通知書Flag,
             boolean 決定通知書Flag,
             boolean 変更通知書Flag,
@@ -1050,6 +1093,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         key.add(ISPUBLISH);
         if (!特徴開始通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(false);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().getChkPublishTokuKaishiTsuchiKobetsu()
@@ -1058,6 +1102,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         if (!決定通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(false);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().getChkPublishKetteiTsuchiKobetsu()
@@ -1066,6 +1111,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         if (!変更通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(false);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().getChkPublishHenkoTsuchiKobetsu()
@@ -1074,11 +1120,13 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         if (!納入通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(false);
         } else {
             set納入通知書(key);
         }
         if (!減免通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(false);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().getChkPublishGemmenTsuchiKobetsu()
@@ -1087,6 +1135,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         if (!徴収猶予通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(false);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().getChkPublishChoshuYuyoTsuchiKobetsu()
@@ -1095,6 +1144,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         if (!郵振納付書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(false);
         } else {
             KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
             FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
@@ -1112,6 +1162,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         if (!賦課台帳Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().setDisplayNone(true);
+            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(false);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().getChkPublishFukadaichoKobetsu()
@@ -1190,10 +1241,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
 
     /**
      * 調定事由印字方法を変更のメソッドます。
+     *
+     * @param key 調定事由の印字方法
      */
-    public void onChange調定事由印字方法() {
-        RString key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu()
-                .getRadKobetsuHakkoChoteiJiyu().getSelectedKey();
+    public void onChange調定事由印字方法(RString key) {
         if (KEY0.equals(key)) {
             Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
             FukaJoho info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
@@ -1202,14 +1253,22 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(true);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(true);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(true);
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setValue(
-                    info.get調定事由1());
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setValue(
-                    info.get調定事由2());
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setValue(
-                    info.get調定事由3());
-            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setValue(
-                    info.get調定事由4());
+            if (info.get調定事由1() != null && !info.get調定事由1().isEmpty()) {
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setValue(
+                        ChoteiJiyuCode.toValue(info.get調定事由1()).get名称());
+            }
+            if (info.get調定事由2() != null && !info.get調定事由2().isEmpty()) {
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setValue(
+                        ChoteiJiyuCode.toValue(info.get調定事由2()).get名称());
+            }
+            if (info.get調定事由3() != null && !info.get調定事由3().isEmpty()) {
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setValue(
+                        ChoteiJiyuCode.toValue(info.get調定事由3()).get名称());
+            }
+            if (info.get調定事由4() != null && !info.get調定事由4().isEmpty()) {
+                div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setValue(
+                        ChoteiJiyuCode.toValue(info.get調定事由4()).get名称());
+            }
         } else if (KEY1.equals(key)) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(false);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(false);
@@ -1341,14 +1400,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getDdlInjiKouseiAto().getSelectedKey();
 
         KakushuTsuchishoParameter parameter = new KakushuTsuchishoParameter();
-        // TODO 仮デ—タ
-//        Map<RString, RString> 帳票Map = ViewStateHolder.get(ViewStateKeys.発行する帳票リスト, Map.class);
+        Map<RString, RString> 帳票Map = ViewStateHolder.get(ViewStateKeys.発行する帳票リスト, Map.class);
         List<RString> 発行する帳票List = new ArrayList<>();
-//        List<dgChohyoSentaku_Row> rowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
-//        for (dgChohyoSentaku_Row row : rowList) {
-//            発行する帳票List.add(帳票Map.get(row.getTxtChohyoSentaku()));
-//        }
-        発行する帳票List.add(TsuchiSho.特別徴収開始通知書_本算定.get名称());
+        List<dgChohyoSentaku_Row> rowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
+        for (dgChohyoSentaku_Row row : rowList) {
+            発行する帳票List.add(帳票Map.get(row.getTxtChohyoSentaku()));
+        }
         parameter.set発行する帳票List(発行する帳票List);
         if (更正前Key != null && !更正前Key.isEmpty()) {
             parameter.set賦課の情報_更正前(map.get(更正前Key));
@@ -1640,12 +1697,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishTokuKaishiTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 特徴開始通知書);
             div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(false);
+            set通知書(false, 特徴開始通知書);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 特徴開始通知書);
             div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(true);
+            set通知書(true, 特徴開始通知書);
         }
     }
 
@@ -1657,12 +1714,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishKetteiTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 決定通知書);
             div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(false);
+            set通知書(false, 決定通知書);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 決定通知書);
             div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(true);
+            set通知書(true, 決定通知書);
         }
     }
 
@@ -1675,12 +1732,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         RString 変更通知書略称 = ViewStateHolder.get(ViewStateKeys.変更通知書帳票略称, RString.class);
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 変更通知書略称);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(false);
+            set通知書(false, 変更通知書略称);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 変更通知書略称);
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(true);
+            set通知書(true, 変更通知書略称);
         }
     }
 
@@ -1692,12 +1749,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishNotsuKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 納入通知書);
             div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(false);
+            set通知書(false, 納入通知書);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 納入通知書);
             div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(true);
+            set通知書(true, 納入通知書);
         }
     }
 
@@ -1709,12 +1766,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishYufuriKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 郵便振替納付書);
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(false);
+            set通知書(false, 郵便振替納付書);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 郵便振替納付書);
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(true);
+            set通知書(true, 郵便振替納付書);
         }
     }
 
@@ -1727,12 +1784,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         RString 減免通知書略称 = ViewStateHolder.get(ViewStateKeys.減免通知書帳票略称, RString.class);
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 減免通知書略称);
             div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(false);
+            set通知書(false, 減免通知書略称);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 減免通知書略称);
             div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(true);
+            set通知書(true, 減免通知書略称);
         }
     }
 
@@ -1745,12 +1802,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         RString 徴収猶予通知書略称 = ViewStateHolder.get(ViewStateKeys.徴収猶予通知書帳票略称, RString.class);
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 徴収猶予通知書略称);
             div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(false);
+            set通知書(false, 徴収猶予通知書略称);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 徴収猶予通知書略称);
             div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(true);
+            set通知書(true, 徴収猶予通知書略称);
         }
     }
 
@@ -1762,12 +1819,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishFukadaichoKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            set通知書(false, 賦課台帳);
             div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(false);
+            set通知書(false, 賦課台帳);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            set通知書(true, 賦課台帳);
             div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(true);
+            set通知書(true, 賦課台帳);
         }
     }
 
@@ -1791,6 +1848,20 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
+        }
+
+        if ((div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().isIsOpen()
+                || div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsOpen())
+                && (!div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().isIsOpen()
+                && !div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().isIsOpen()
+                && !div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().isIsOpen()
+                && !div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().isIsOpen()
+                && !div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().isIsOpen()
+                && !div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().isIsOpen())) {
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(false);
+        } else {
+            onChange調定事由印字方法(KEY0);
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(true);
         }
     }
 }

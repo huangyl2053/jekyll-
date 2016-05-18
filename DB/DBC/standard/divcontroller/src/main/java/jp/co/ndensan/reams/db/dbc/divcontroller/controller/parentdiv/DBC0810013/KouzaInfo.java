@@ -75,8 +75,14 @@ public class KouzaInfo {
         if (支給申請情報.get支払期間終了年月日() != null) {
             parameter.setEndYMD(new RDate(支給申請情報.get支払期間終了年月日().toString()));
         }
-        parameter.setStartHHMM(new RTime(支給申請情報.get支払窓口開始時間()));
-        parameter.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
+        RString 支払窓口開始時間 = 支給申請情報.get支払窓口開始時間();
+        if (支払窓口開始時間 != null && !支払窓口開始時間.isEmpty()) {
+            parameter.setStartHHMM(new RTime(支給申請情報.get支払窓口開始時間()));
+        }
+        RString 支払窓口終了時間 = 支給申請情報.get支払窓口終了時間();
+        if (支払窓口終了時間 != null && !支払窓口開始時間.isEmpty()) {
+            parameter.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
+        }
         parameter.setKozaId(支給申請情報.get口座ID());
         parameter.setShiharaiBasho(支給申請情報.get支払場所());
         // TODO QA638画面レイアウトと画面が一致しません。

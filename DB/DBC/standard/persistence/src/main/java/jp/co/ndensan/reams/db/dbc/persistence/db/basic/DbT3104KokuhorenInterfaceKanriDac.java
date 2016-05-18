@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.isDeleted;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.kokanShikibetsuNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
@@ -33,6 +34,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     @InjectSession
     private SqlSession session;
 
+    private static final boolean 論理削除フラグ = false;
+
     /**
      * 主キーで国保連インターフェース管理を取得します。
      *
@@ -55,6 +58,32 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                 where(and(
                                 eq(shoriYM, 処理年月),
                                 eq(kokanShikibetsuNo, 交換情報識別番号))).
+                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 主キーで国保連インターフェース管理を取得します(論理削除行ではない)。
+     *
+     * @param 処理年月 ShoriYM
+     * @param 交換情報識別番号 KokanShikibetsuNo
+     * @return DbT3104KokuhorenInterfaceKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT3104KokuhorenInterfaceKanriEntity selectByKeyUndeleted(
+            FlexibleYearMonth 処理年月,
+            RString 交換情報識別番号) throws NullPointerException {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(shoriYM, 処理年月),
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(isDeleted, 論理削除フラグ))).
                 toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 

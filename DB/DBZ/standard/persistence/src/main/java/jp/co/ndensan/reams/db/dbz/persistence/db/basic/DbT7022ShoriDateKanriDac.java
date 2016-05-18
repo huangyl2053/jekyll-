@@ -947,4 +947,28 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendoNaiRenban, 年度内連番_2))).
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 前回対象日を取得する。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 処理名 処理名
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select前回対象日(LasdecCode 市町村コード, RString 処理名) throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shichosonCode, 市町村コード),
+                                eq(shoriName, 処理名),
+                                eq(nendo, RDate.getNowDate().getNendo())))
+                .order(new OrderBy(shoriEdaban, Order.DESC, NullsOrder.LAST),
+                        new OrderBy(nendoNaiRenban, Order.DESC, NullsOrder.LAST)).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+
+    }
 }

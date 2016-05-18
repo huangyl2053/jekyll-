@@ -97,8 +97,14 @@ public class KouzaInfoPanel {
         if (支給申請情報.get支払期間終了年月日() != null) {
             param.setEndYMD(new RDate(支給申請情報.get支払期間終了年月日().toString()));
         }
-        param.setStartHHMM(new RTime(支給申請情報.get支払窓口開始時間()));
-        param.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
+        RString 支払窓口開始時間 = 支給申請情報.get支払窓口開始時間();
+        if (支払窓口開始時間 != null && !支払窓口開始時間.isEmpty()) {
+            param.setStartHHMM(new RTime(支給申請情報.get支払窓口開始時間()));
+        }
+        RString 支払窓口終了時間 = 支給申請情報.get支払窓口終了時間();
+        if (支払窓口終了時間 != null && !支払窓口終了時間.isEmpty()) {
+            param.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
+        }
         param.setKozaId(支給申請情報.get口座ID());
         param.setShiharaiBasho(支給申請情報.get支払場所());
         if (削除.equals(状態)) {

@@ -54,8 +54,27 @@ public class TeikiyoJogaishaShokai {
         div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(識別コード);
         div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getTeikiyoJogaishaJoho().getCcdTekiyoJogaiRireki().initialize(識別コード);
-        div.getShisetsuJoho().getCcdShisetsuNyuTaishoRireki().initialize(識別コード);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnReportPublish"), false);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 施設情報エリアの初期化です。
+     *
+     * @param div TeikiyoJogaishaShokaiDiv
+     * @return ResponseData<TeikiyoJogaishaShokaiDiv>
+     */
+    public ResponseData<TeikiyoJogaishaShokaiDiv> onOpen(TeikiyoJogaishaShokaiDiv div) {
+        if (RString.isNullOrEmpty(div.getHasOpen())) {
+            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+            if (key != null) {
+                識別コード = key.get識別コード();
+            }
+            div.getShisetsuJoho().getCcdShisetsuNyuTaishoRireki().initialize(識別コード);
+            div.setHasOpen(new RString("Open"));
+            div.getShisetsuJoho().setIsOpen(true);
+        }
         return ResponseData.of(div).respond();
     }
 

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  * 負担限度額認定更新のお知らせ通知書
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchishoEditor {
 
     private final NinteiKoshinTsuchishoItem item;
+    private static final RString REPLACE_OLD = new RString("@@@@");
 
     /**
      * インスタンスを生成します。
@@ -54,7 +56,8 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
         source.hihokenshaNameKana = 編集後個人.get名称().getKana().getColumnValue();
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
         source.hihokenshaNo = item.get帳票情報() == null ? RString.EMPTY : item.get帳票情報().get被保険者番号().getColumnValue();
-        source.tsuchibun = item.get通知書定型文List().get(1);
+        source.tsuchibun = item.get通知書定型文List().get(1).replace(
+                REPLACE_OLD, RStringUtil.convert半角to全角(new RString(item.get帳票情報().get適用終了年月日().getYear().toString())));
         source.shikibetsuCode = item.getIKojin().get識別コード();
         return source;
     }

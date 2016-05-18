@@ -120,8 +120,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuShinsei}
+     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuShinsei}
      */
     public static FukushiyoguKonyuhiShikyuShinsei createInstance() {
         return InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
@@ -518,7 +517,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         if (null != 償還払支給判定結果entity) {
             福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
                     状態_登録,
-                    ShikibetsuCode.EMPTY,
+                    福祉用具購入費支給申請明細登録画面.get識別コード(),
                     dbT3038Entity,
                     dbT3048EntityList,
                     dbT3034Entity,

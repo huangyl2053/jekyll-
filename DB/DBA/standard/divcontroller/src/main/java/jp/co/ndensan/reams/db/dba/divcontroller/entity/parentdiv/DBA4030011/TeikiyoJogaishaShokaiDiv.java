@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJoga
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -32,6 +33,8 @@ public class TeikiyoJogaishaShokaiDiv extends Panel {
     private TeikiyoJogaishaJohoDiv TeikiyoJogaishaJoho;
     @JsonProperty("ShisetsuJoho")
     private ShisetsuJohoDiv ShisetsuJoho;
+    @JsonProperty("hasOpen")
+    private RString hasOpen;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -91,6 +94,24 @@ public class TeikiyoJogaishaShokaiDiv extends Panel {
     @JsonProperty("ShisetsuJoho")
     public void setShisetsuJoho(ShisetsuJohoDiv ShisetsuJoho) {
         this.ShisetsuJoho = ShisetsuJoho;
+    }
+
+    /*
+     * gethasOpen
+     * @return hasOpen
+     */
+    @JsonProperty("hasOpen")
+    public RString getHasOpen() {
+        return hasOpen;
+    }
+
+    /*
+     * sethasOpen
+     * @param hasOpen hasOpen
+     */
+    @JsonProperty("hasOpen")
+    public void setHasOpen(RString hasOpen) {
+        this.hasOpen = hasOpen;
     }
 
     /*

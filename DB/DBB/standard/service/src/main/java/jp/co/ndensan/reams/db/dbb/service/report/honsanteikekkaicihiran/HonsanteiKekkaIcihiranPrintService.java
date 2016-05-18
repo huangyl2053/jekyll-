@@ -76,17 +76,11 @@ public class HonsanteiKekkaIcihiranPrintService {
         RString 市町村コード = association.get地方公共団体コード().value();
         RString 市町村名 = association.get市町村名();
 
-//        RString 住所編集 = RString.EMPTY;
-//         IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
-//        DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = load帳票制御共通(帳票分類Id);
-//        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-//        住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
         RString 住所編集 = RString.EMPTY;
         for (KeisangojohoAtenaKozaEntity entity : 計算後情報_宛名_口座EntityList) {
 
             IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-//            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類Id);
             ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
             住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
         }
@@ -95,7 +89,8 @@ public class HonsanteiKekkaIcihiranPrintService {
 
                 ReportSourceWriter<HonsanteiKekkaIcihiranReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 new HonsanteiKekkaIcihiranReport(
-                        計算後情報_宛名_口座EntityList, バッチパラメータ, 賦課年度, 調定日時, 市町村コード, 市町村名, 住所編集).writeBy(reportSourceWriter);
+                        計算後情報_宛名_口座EntityList, バッチパラメータ, 賦課年度, 調定日時,
+                        市町村コード, 市町村名, 住所編集).writeBy(reportSourceWriter);
 
             }
             return reportManager.publish();

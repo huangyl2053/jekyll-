@@ -20,20 +20,19 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
  */
 public class CompSofubutsuAtesakiEditor implements IKarisanteiHokenryoNonyuTsuchishoKigotoEditor {
 
-    private final KarisanteiHokenryoNonyuTsuchishoKigotoItem item;
+    private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item KarisanteiHokenryoNonyuTsuchishoKigotoItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
      */
-    protected CompSofubutsuAtesakiEditor(KarisanteiHokenryoNonyuTsuchishoKigotoItem item) {
-        this.item = item;
+    protected CompSofubutsuAtesakiEditor(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+        this.仮算定納入通知書情報 = 仮算定納入通知書情報;
     }
 
     @Override
     public KarisanteiHokenryoNonyuTsuchishoKigotoSource edit(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = item.get仮算定納入通知書情報();
         EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         EditedAtesaki 編集後宛先 = null == 編集後仮算定通知書共通情報 ? null : 編集後仮算定通知書共通情報.get編集後宛先();

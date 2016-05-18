@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,13 +26,13 @@ public class HonsanteifukaParameter implements Serializable {
     private FlexibleYear 賦課年度;
     private FlexibleDate 資格基準日;
     private RString 特徴_出力対象;
-    private FlexibleDate 特徴_発行日;
+    private RDate 特徴_発行日;
     private RString 文書番号;
-    private FlexibleDate 決定変更_発行日;
+    private RDate 決定変更_発行日;
     private RString 納入_出力方法;
-    private FlexibleDate 出力期;
-    private RString 納入_対象者;
-    private FlexibleDate 納入_発行日;
+    private RString 出力期;
+    private List<RString> 納入_対象者;
+    private RDate 納入_発行日;
     private RString 生活保護対象者;
     private RString 納入_ページごとに山分け;
     private RString 打分け条件情報;

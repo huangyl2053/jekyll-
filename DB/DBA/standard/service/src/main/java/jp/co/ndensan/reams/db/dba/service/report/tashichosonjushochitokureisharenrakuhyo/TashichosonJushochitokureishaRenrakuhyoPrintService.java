@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.service.report.tashichosonjushochitokureisharenrakuhyo;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoReport;
@@ -16,7 +14,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
@@ -33,6 +30,17 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TashichosonJushochitokureishaRenrakuhyoPrintService {
 
+    private final ReportManager reportManager;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param reportManager ReportManager
+     */
+    public TashichosonJushochitokureishaRenrakuhyoPrintService(ReportManager reportManager) {
+        this.reportManager = reportManager;
+    }
+
     /**
      * 介護保険他市町村住所地特例者連絡票を印刷します。
      *
@@ -41,27 +49,21 @@ public class TashichosonJushochitokureishaRenrakuhyoPrintService {
      */
     public SourceDataCollection print(TashichosonJushochitokureishaRenrakuhyoItem item) {
         TashichosonJushochitokureishaRenrakuhyoProperty property = new TashichosonJushochitokureishaRenrakuhyoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<TashichosonJushochitokureishaRenrakuhyoReportSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<TashichosonJushochitokureishaRenrakuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(property.subGyomuCode(),
-                        property.reportId(),
-                        FlexibleDate.getNowDate(),
-                        reportSourceWriter);
-                item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
-                item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
-                item.setShichosonMei(ninshoshaSource.ninshoshaYakushokuMei2);
-                item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
-            }
+        try (ReportAssembler<TashichosonJushochitokureishaRenrakuhyoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<TashichosonJushochitokureishaRenrakuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(property.subGyomuCode(),
+                    property.reportId(),
+                    FlexibleDate.getNowDate(),
+                    reportSourceWriter);
+            item.setDenshiKoin(ninshoshaSource.denshiKoin);
+            item.setShomeiHakkoYMD(ninshoshaSource.hakkoYMD);
+            item.setShuchoMei(ninshoshaSource.ninshoshaYakushokuMei);
+            item.setShichosonMei(ninshoshaSource.ninshoshaYakushokuMei2);
+            item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+            TashichosonJushochitokureishaRenrakuhyoReport report = TashichosonJushochitokureishaRenrakuhyoReport.createFrom(item);
+            report.writeBy(reportSourceWriter);
         }
-        return new Printer<TashichosonJushochitokureishaRenrakuhyoReportSource>().spool(property, toReports(item));
-    }
-
-    private static List<TashichosonJushochitokureishaRenrakuhyoReport> toReports(TashichosonJushochitokureishaRenrakuhyoItem item) {
-        List<TashichosonJushochitokureishaRenrakuhyoReport> list = new ArrayList<>();
-        list.add(TashichosonJushochitokureishaRenrakuhyoReport.createFrom(item));
-        return list;
+        return reportManager.publish();
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

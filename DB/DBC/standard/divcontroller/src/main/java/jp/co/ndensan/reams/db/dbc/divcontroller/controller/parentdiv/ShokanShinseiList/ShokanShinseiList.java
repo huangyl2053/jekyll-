@@ -73,11 +73,20 @@ public class ShokanShinseiList {
      */
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
         get申請を追加するcheck(requestDiv);
+
+        // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) Start
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 追加モード);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, RString.EMPTY);
+        // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) End
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
 
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 追加モード);
@@ -149,6 +158,25 @@ public class ShokanShinseiList {
      * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_ModifyButton(ShokanShinseiListDiv requestDiv) {
+        // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) Start
+        requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
+        dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
+        FlexibleYearMonth serviceYMFrom = FlexibleYearMonth.EMPTY;
+        if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
+            serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
+        }
+        FlexibleYearMonth serviceYMTo = FlexibleYearMonth.EMPTY;
+        if (requestDiv.getTxtServiceYMTo().getValue() != null) {
+            serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
+        }
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 修正モード);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+        // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) End
 
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
@@ -164,6 +192,25 @@ public class ShokanShinseiList {
      * @return ShokanShinseiListDivのResponseData
      */
     public ResponseData<ShokanShinseiListDiv> onClick_DeleteButton(ShokanShinseiListDiv requestDiv) {
+        // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) Start
+        requestDiv.getDgShinseiList().getGridSetting().selectedRowCount();
+        dgShinseiList_Row dgShinseiList = requestDiv.getDgShinseiList().getSelectedItems().get(0);
+        FlexibleYearMonth serviceYMFrom = FlexibleYearMonth.EMPTY;
+        if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
+            serviceYMFrom = new FlexibleYearMonth(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth().toDateString());
+        }
+        FlexibleYearMonth serviceYMTo = FlexibleYearMonth.EMPTY;
+        if (requestDiv.getTxtServiceYMTo().getValue() != null) {
+            serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
+        }
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 削除モード);
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+        // TODO 疎通するために、QAのNo.750を暫定対応(正式対応方針はお客様確認中) End
 
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();

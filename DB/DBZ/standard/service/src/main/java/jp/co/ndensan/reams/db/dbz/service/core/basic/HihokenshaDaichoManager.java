@@ -155,6 +155,38 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 被保険者番号に被保険者台帳を検索します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return List<HihokenshaDaicho>
+     */
+    public List<HihokenshaDaicho> get最新被保険者台帳(HihokenshaNo 被保険者番号) {
+        List<HihokenshaDaicho> businessList = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> entityList = dac.get被保険者台帳管理情報(被保険者番号);
+        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new HihokenshaDaicho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
+     * 被保険者番号、異動日で最大の枝番を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 異動日 異動日
+     * @return List<HihokenshaDaicho>
+     */
+    public RString get最大の枝番(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectMaxEdaNoByKey(被保険者番号, 異動日);
+        if (entity == null) {
+            return null;
+        }
+        return entity.getEdaNo();
+    }
+
+    /**
      * 基準日時点の被保険者番号に該当する被保険者台帳情報を取得します。
      *
      * @param 被保険者番号 被保険者番号

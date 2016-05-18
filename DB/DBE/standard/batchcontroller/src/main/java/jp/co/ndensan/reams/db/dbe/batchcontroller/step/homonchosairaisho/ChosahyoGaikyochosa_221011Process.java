@@ -277,9 +277,9 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
                 ? RensakusakiTsuzukigara.toValue(entity.get連絡先続柄()).get名称() : RString.EMPTY,
                 RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get生年月日().substring(0, INT3) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get生年月日().substring(INT3, INT4) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get生年月日().substring(INT4, INT5) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(0, INT3) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT3, INT4) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT4, INT5) : RString.EMPTY,
                 YOKAIGOJOTAIKUBUN01.equals(entity.get前回要介護状態区分コード()) ? 記号 : RString.EMPTY,
                 要支援,
                 要支援詳細,
@@ -324,6 +324,9 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
     }
 
     private void get年号(RString 生年月日) {
+        誕生日明治 = RString.EMPTY;
+        誕生日大正 = RString.EMPTY;
+        誕生日昭和 = RString.EMPTY;
         if (!RString.isNullOrEmpty(生年月日)) {
             RString 年号 = new FlexibleDate(生年月日).wareki().toDateString();
             if (年号.startsWith(年号_明治)) {

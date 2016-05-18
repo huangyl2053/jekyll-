@@ -86,6 +86,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>db#dbe</finalName>
         <plugins>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>

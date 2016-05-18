@@ -75,8 +75,8 @@ public class FukushiyoguShohinGuide {
     public ResponseData<FukushiyoguShohinGuideDiv> onClick_Btnsenntaku(FukushiyoguShohinGuideDiv fukuDiv) {
         FukushiyoguShohinMode mode = new FukushiyoguShohinMode();
         mode.setHinmokuCode(fukuDiv.getDgFukushiyoguShohin().getSelectedItems().get(0).getHinmokuCode());
-        mode.setSeizoJigyoshamei(fukuDiv.getDgFukushiyoguShohin().getSelectedItems().get(0).getHinmokuCode());
-        mode.setShohinmei(fukuDiv.getDgFukushiyoguShohin().getSelectedItems().get(0).getHinmokuCode());
+        mode.setSeizoJigyoshamei(fukuDiv.getDgFukushiyoguShohin().getSelectedItems().get(0).getSeizoJigyoshamei());
+        mode.setShohinmei(fukuDiv.getDgFukushiyoguShohin().getSelectedItems().get(0).getShohinmei());
         fukuDiv.setFukushiyoguShohinMode(DataPassingConverter.serialize(mode));
         return createResponseData(fukuDiv);
     }

@@ -47,12 +47,15 @@ public class HihokenshoShikakushoHakkoEntity implements IDbAccessable {
     private RString 事業者１;
     private FlexibleDate 届出年月日１;
     private FlexibleDate 適用開始年月日１;
+    private FlexibleDate 適用終了年月日１;
     private RString 事業者２;
     private FlexibleDate 届出年月日２;
     private FlexibleDate 適用開始年月日２;
+    private FlexibleDate 適用終了年月日２;
     private RString 事業者３;
     private FlexibleDate 届出年月日３;
     private FlexibleDate 適用開始年月日３;
+    private FlexibleDate 適用終了年月日３;
     private RString 入所施設コード１;
     private RString 入所施設１;
     private RString 入所施設種類１;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.jyutakugaisyunaiyolist;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -26,6 +26,6 @@ public class JyutakugaisyunaiyoListDataPassModel implements Serializable {
     private FlexibleYearMonth サービス提供年月;
     private RString 整理番号;
     private RString 様式番号;
-    private IJusho 住所クラス;
+    private ShikibetsuCode 識別コード;
     private RString 状態;
 }

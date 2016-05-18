@@ -85,6 +85,43 @@ public class ShoriDateKanriManager {
     }
 
     /**
+     * 主キーに合致する処理日付管理マスタを返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
+     * @param 年度 Nendo
+     * @param 年度内連番 NendoNaiRenban
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get処理日付管理マスタ(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            RString 処理枝番,
+            FlexibleYear 年度,
+            RString 年度内連番) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("処理枝番"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
+
+        DbT7022ShoriDateKanriEntity entity = dac.selectBySomeKeysLimits(
+                サブ業務コード,
+                処理名,
+                処理枝番,
+                年度,
+                年度内連番);
+        if (entity == null) {
+            return null;
+        }
+
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
      * 処理日付管理マスタを全件返します。
      *
      * @return List<ShoriDateKanri>

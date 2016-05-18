@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -45,7 +44,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     private static final RString 新規 = new RString("新規");
     private static final RString 参照 = new RString("参照");
     private static final RString 業務区分 = new RString("03");
-    private static final RString 受託あり = new RString("受託あり");
+    private static final RString 受託なし = new RString("1");
     private static final RString 申請を保存する = new RString("Element3");
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
@@ -83,9 +82,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     ) {
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
-            if (受託あり.equals(償還)) {
-                div.getPanelTwo().getBtnShokanbariKeteiInfo().setDisabled(true);
+            if (受託なし.equals(償還)) {
+                div.getPanelTwo().getBtnShokanbariKeteiInfo().setDisabled(false);
             }
+            div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
+            div.getPanelTwo().getTxtSeiriBango().clearValue();
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
                     被保険者番号, サービス年月, 整理番号, 業務区分, 登録);
             div.getPanelTwo().getBtnKouza().setDisabled(true);
@@ -101,7 +102,8 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             div.getPanelTwo().getTxtShoriMode().setValue(修正);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+            div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
+            div.getPanelTwo().getTxtSeiriBango().clearValue();
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
                     被保険者番号, サービス年月, 整理番号, 業務区分, 照会);
             div.getPanelTwo().getBtnShinsei().setDisabled(true);

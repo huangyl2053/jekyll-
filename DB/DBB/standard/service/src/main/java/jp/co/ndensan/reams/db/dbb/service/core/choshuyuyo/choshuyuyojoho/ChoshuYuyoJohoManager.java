@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyo
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.ChoshuYuyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoJohoRelateMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoJohoRelateSonotaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo.IChoshuYuyoJohoRelateMapper;
@@ -83,6 +84,44 @@ public class ChoshuYuyoJohoManager {
         IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
 
         ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報ByKey(徴収猶予の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new ChoshuYuyoJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する徴収猶予の情報を返します。
+     *
+     * @param 徴収猶予の情報検索条件 徴収猶予の情報検索条件
+     * @return ChoshuYuyoJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public ChoshuYuyoJoho get徴収猶予の情報_決定更正後(ChoshuYuyoJohoRelateSonotaMapperParameter 徴収猶予の情報検索条件) {
+        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予の情報検索条件"));
+        IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
+
+        ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報_決定更正後(徴収猶予の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new ChoshuYuyoJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する徴収猶予の情報を返します。
+     *
+     * @param 徴収猶予の情報検索条件 徴収猶予の情報検索条件
+     * @return ChoshuYuyoJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public ChoshuYuyoJoho get徴収猶予の情報_取消更正後(ChoshuYuyoJohoRelateSonotaMapperParameter 徴収猶予の情報検索条件) {
+        requireNonNull(徴収猶予の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予の情報検索条件"));
+        IChoshuYuyoJohoRelateMapper mapper = mapperProvider.create(IChoshuYuyoJohoRelateMapper.class);
+
+        ChoshuYuyoJohoRelateEntity relateEntity = mapper.select徴収猶予の情報_取消更正後(徴収猶予の情報検索条件);
         if (relateEntity == null) {
             return null;
         }

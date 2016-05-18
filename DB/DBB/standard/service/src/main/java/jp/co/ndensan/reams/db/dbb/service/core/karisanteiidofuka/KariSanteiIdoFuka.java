@@ -171,7 +171,7 @@ public class KariSanteiIdoFuka {
     public YMDHMS getTyusyutuKaishibi(FlexibleYear 調定年度) {
         DbT7022ShoriDateKanriEntity dbt;
         dbt = 処理日付管理Dac.select抽出開始日時(調定年度);
-        if (dbt == null || dbt.getKijunTimestamp() == null) {
+        if (dbt == null || dbt.getKijunTimestamp() == null || dbt.getKijunTimestamp().isEmpty()) {
             return null;
         } else {
             return dbt.getKijunTimestamp();
@@ -212,19 +212,19 @@ public class KariSanteiIdoFuka {
         if (帳票分類ID == null || 帳票分類ID.isEmpty()) {
             return null;
         }
-        if (帳票分類ID.toString().equals(特別徴収開始通知書_仮算定_帳票分類ＩＤ.toString())) {
+        if (特別徴収開始通知書_仮算定_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 特徴開始通知書 = get特徴開始通知書_帳票ID(帳票分類ID, 出力順ID);
             if (特徴開始通知書 != null) {
                 return new TyouhyouResult(特徴開始通知書);
             }
-        } else if (帳票分類ID.toString().equals(仮算定額変更通知書_帳票分類ＩＤ.toString())) {
+        } else if (仮算定額変更通知書_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 決定変更通知書 = get仮算定額変更通知書_帳票ID(調定年度, 帳票分類ID, 出力順ID);
             if (決定変更通知書 != null) {
                 return new TyouhyouResult(決定変更通知書);
             }
-        } else if (帳票分類ID.toString().equals(保険料納入通知書_本算定_帳票分類ＩＤ.toString())) {
+        } else if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 納入通知書entity = get納入通知書_帳票ID(調定年度, 算定期, 帳票分類ID, 出力順ID);
-            if (定値_DBB100014.equals(new RString(帳票分類ID.value().toString()))
+            if (定値_DBB100014.equals(帳票分類ID.value())
                     && 納入通知書entity == null) {
                 throw new ApplicationException(UrErrorMessages.存在しない
                         .getMessage().replace(納入通知書.toString()).evaluate());
@@ -251,24 +251,24 @@ public class KariSanteiIdoFuka {
             return null;
         }
         ReportId 帳票ID = null;
-        if (帳票タイプ.get設定値().equals(標準版B5横タイプ)) {
-            if (連帳区分.get設定値().equals(連帳)) {
+        if (標準版B5横タイプ.equals(帳票タイプ.get設定値())) {
+            if (連帳.equals(連帳区分.get設定値())) {
                 帳票ID = ReportIdDBB.DBB100004.getReportId();
-            } else if (連帳区分.get設定値().equals(カット紙)) {
+            } else if (カット紙.equals(連帳区分.get設定値())) {
                 帳票ID = ReportIdDBB.DBB100003.getReportId();
             }
-        } else if (帳票タイプ.get設定値().equals(標準版B5横オーバレイタイプ)) {
-            if (連帳区分.get設定値().equals(連帳) || 連帳区分.get設定値().equals(カット紙)) {
+        } else if (標準版B5横オーバレイタイプ.equals(帳票タイプ.get設定値())) {
+            if (連帳.equals(連帳区分.get設定値()) || カット紙.equals(連帳区分.get設定値())) {
                 帳票ID = ReportIdDBB.DBB100009.getReportId();
             }
-        } else if (帳票タイプ.get設定値().equals(標準版A4縦オーバレイタイプ)) {
-            if (連帳区分.get設定値().equals(連帳) || 連帳区分.get設定値().equals(カット紙)) {
+        } else if (標準版A4縦オーバレイタイプ.equals(帳票タイプ.get設定値())) {
+            if (連帳.equals(連帳区分.get設定値()) || カット紙.equals(連帳区分.get設定値())) {
                 帳票ID = ReportIdDBB.DBB100008.getReportId();
             }
-        } else if (帳票タイプ.get設定値().equals(標準シーラタイプ)) {
-            if (連帳区分.get設定値().equals(連帳)) {
+        } else if (標準シーラタイプ.equals(帳票タイプ.get設定値())) {
+            if (連帳.equals(連帳区分.get設定値())) {
                 帳票ID = ReportIdDBB.DBB100006.getReportId();
-            } else if (連帳区分.get設定値().equals(カット紙)) {
+            } else if (カット紙.equals(連帳区分.get設定値())) {
                 帳票ID = ReportIdDBB.DBB100005.getReportId();
             }
         }
@@ -580,7 +580,7 @@ public class KariSanteiIdoFuka {
             return 特徴同定未完了;
         }
         List<DbT7022ShoriDateKanriEntity> 依頼金額計算list = 処理日付管理Dac.get依頼金額計算(調定年度);
-        //TODO QAを待つ.
+        //TODO QA738を待つ.
         FlexibleYear 基準日時1 = new FlexibleYear("20160305");
         FlexibleYear 基準日時2 = new FlexibleYear("20160305");
         //TODO END

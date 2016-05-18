@@ -31,8 +31,8 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
      * @param 納入通知書期情報 納入通知書期情報
      */
     protected DBBCompRyoshushoEditor(NofuShoKyotsu 納付書共通, NonyuTsuchiShoKiJoho 納入通知書期情報, int 領収書連番) {
-        this.納付書共通 = 納付書共通;
-        this.納入通知書期情報 = 納入通知書期情報;
+        this.納付書共通 = null == 納付書共通 ? new NofuShoKyotsu() : 納付書共通;
+        this.納入通知書期情報 = null == 納入通知書期情報 ? new NonyuTsuchiShoKiJoho() : 納入通知書期情報;
         this.領収書連番 = new RString(String.valueOf(領収書連番));
     }
 
@@ -54,7 +54,6 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
         editRyoshushoNokigen(source);
         editRyoshushoRenban(source);
         editRyoshushoRyoshuHizukein(source);
-        editRyoshushoSetaiCode(source);
         editRyoshushoShichosonMei1(source);
         editRyoshushoShichosonMei2(source);
         editRyoshushoSofusakiName(source);
@@ -62,12 +61,15 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
         editRyoshushoTsuki(source);
         editRyoshushoYubinNo(source);
         editRyoshushoZuiji(source);
-        editRyoshushohyojicode1(source);
-        editRyoshushohyojicode2(source);
-        editRyoshushohyojicode3(source);
-        editRyoshushohyojicodeName1(source);
-        editRyoshushohyojicodeName2(source);
-        editRyoshushohyojicodeName3(source);
+        if (納付書共通.get世帯コード() != null) {
+            editRyoshushoSetaiCode(source);
+            editRyoshushohyojicode1(source);
+            editRyoshushohyojicode2(source);
+            editRyoshushohyojicode3(source);
+            editRyoshushohyojicodeName1(source);
+            editRyoshushohyojicodeName2(source);
+            editRyoshushohyojicodeName3(source);
+        }
         return source;
     }
 
@@ -76,6 +78,9 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
     }
 
     private void editRyoshushoNendo(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
+        if (null == 納付書共通.get調定年度表記()) {
+            return;
+        }
         source.ryoshushoNendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
     }
 
@@ -129,6 +134,9 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
     }
 
     private void editRyoshushoTsuchishoNo(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
+        if (null == 納付書共通.get通知書番号()) {
+            return;
+        }
         source.ryoshushoTsuchishoNo = 納付書共通.get通知書番号().getColumnValue();
     }
 

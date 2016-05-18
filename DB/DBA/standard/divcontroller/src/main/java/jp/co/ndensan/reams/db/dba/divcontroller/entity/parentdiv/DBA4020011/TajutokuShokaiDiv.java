@@ -4,16 +4,16 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TajutokuShokai のクラスファイル
- *
+ * TajutokuShokai のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class TajutokuShokaiDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
@@ -27,6 +27,8 @@ public class TajutokuShokaiDiv extends Panel {
     private TajutokuTekiyoJohoIchiranDiv TajutokuTekiyoJohoIchiran;
     @JsonProperty("JutokuJohoTeiseiIchiran")
     private JutokuJohoTeiseiIchiranDiv JutokuJohoTeiseiIchiran;
+    @JsonProperty("hdnIsOpen")
+    private RString hdnIsOpen;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +88,24 @@ public class TajutokuShokaiDiv extends Panel {
     @JsonProperty("JutokuJohoTeiseiIchiran")
     public void setJutokuJohoTeiseiIchiran(JutokuJohoTeiseiIchiranDiv JutokuJohoTeiseiIchiran) {
         this.JutokuJohoTeiseiIchiran = JutokuJohoTeiseiIchiran;
+    }
+
+    /*
+     * gethdnIsOpen
+     * @return hdnIsOpen
+     */
+    @JsonProperty("hdnIsOpen")
+    public RString getHdnIsOpen() {
+        return hdnIsOpen;
+    }
+
+    /*
+     * sethdnIsOpen
+     * @param hdnIsOpen hdnIsOpen
+     */
+    @JsonProperty("hdnIsOpen")
+    public void setHdnIsOpen(RString hdnIsOpen) {
+        this.hdnIsOpen = hdnIsOpen;
     }
 
     // </editor-fold>

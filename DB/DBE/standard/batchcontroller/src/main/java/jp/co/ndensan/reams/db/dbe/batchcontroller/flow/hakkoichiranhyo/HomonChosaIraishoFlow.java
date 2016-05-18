@@ -126,22 +126,20 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
     }
 
     private void call認定調査票OCR_概況調査() {
-        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目3,
-                        SubGyomuCode.DBE認定支援));
-            } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面3,
-                        SubGyomuCode.DBE認定支援));
-            }
+        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目1,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目2,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目3,
+                    SubGyomuCode.DBE認定支援));
+        } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面1,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面2,
+                    SubGyomuCode.DBE認定支援));
+            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面3,
+                    SubGyomuCode.DBE認定支援));
         }
     }
 

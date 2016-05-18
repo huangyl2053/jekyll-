@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.AtenaMybat
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashochohyo.HihokenshashoChohyoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.HonninJohoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.SofusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshashochohyo.IHihokenshashoChohyoMapper;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IHihokenshashoChohyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
@@ -197,7 +197,7 @@ public class HihokenshashoChohyoFinder {
                 business.set行政区2(RString.EMPTY);
             }
             List<SofusakiJohoEntity> sofusa = get送付先情報(hihoken.get(i).get識別コード());
-            if (sofusa != null) {
+            if (sofusa != null && !sofusa.isEmpty()) {
                 if (管外.equals(sofusa.get(桁数_0).getKannaiKangaiKubun())) {
                     RStringBuilder builder = new RStringBuilder();
                     builder.append(sofusa.get(桁数_0).getJusho());

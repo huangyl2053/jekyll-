@@ -180,12 +180,16 @@ public class DBD1030001Handler {
      *
      */
     public void 世帯所得一覧の初期化() {
-        YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
-        div.getCcdSetaiShotokuIchiran().initialize(
-                get識別コードFromViewState(),
-                new FlexibleDate(現在年月日日時時分秒.getDate().toDateString()),
-                new HizukeConfig().get所得年度(),
-                現在年月日日時時分秒);
+        Boolean is世帯所得一覧の初期化 = ViewStateHolder.get(DBD1030001ViewStateKey.is世帯所得一覧の初期化, Boolean.class);
+        if (null == is世帯所得一覧の初期化 || !is世帯所得一覧の初期化) {
+            YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
+            div.getCcdSetaiShotokuIchiran().initialize(
+                    get識別コードFromViewState(),
+                    new FlexibleDate(現在年月日日時時分秒.getDate().toDateString()),
+                    new HizukeConfig().get所得年度(),
+                    現在年月日日時時分秒);
+            ViewStateHolder.put(DBD1030001ViewStateKey.is世帯所得一覧の初期化, Boolean.TRUE);
+        }
     }
 
     private List<KeyValueDataSource> getAll軽減事由() {
@@ -1470,7 +1474,11 @@ public class DBD1030001Handler {
         /**
          * is削除ReRequestです。
          */
-        is削除ReRequest;
+        is削除ReRequest,
+        /**
+         *
+         */
+        is世帯所得一覧の初期化;
     }
 
 }

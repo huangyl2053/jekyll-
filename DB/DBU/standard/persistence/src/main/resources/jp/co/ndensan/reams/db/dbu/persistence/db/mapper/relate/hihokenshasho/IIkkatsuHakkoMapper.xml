@@ -885,7 +885,7 @@ and open the template in the editor.
         "hihokenshaNo" = #{hihokenshaNo}
         AND "kofuShoShurui" = '001')DbT7037
         WHERE
-        DbT7037.hakkoShoriDay = (SELECT 
+        DbT7037.hakkoShoriDay IN (SELECT 
         substring(DbT7022."kijunYMD",7,2)
         FROM
         rgdb."DbT7022ShoriDateKanri" AS DbT7022

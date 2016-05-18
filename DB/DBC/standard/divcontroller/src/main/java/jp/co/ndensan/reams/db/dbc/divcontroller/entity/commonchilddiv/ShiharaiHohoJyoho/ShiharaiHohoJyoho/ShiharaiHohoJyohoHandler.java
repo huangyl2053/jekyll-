@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 支払方法情報のコントローラです。
@@ -67,6 +68,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 高額合算支給申請10 = new RString("DBCMN61010");
     private final RString 高額合算支給申請11 = new RString("DBCMN61011");
     private final RString 高額合算支給申請12 = new RString("DBCMN61012");
+    private final RString 高額合算支給決定情報補正 = new RString("DBCMN62004");
     private final ShiharaiHohoJyohoDiv div;
 
     /**
@@ -644,7 +646,8 @@ public class ShiharaiHohoJyohoHandler {
 
     private UzT0007CodeBusiness 預金種別に対する略称(RString 口座種別) {
 
-        return new UzT0007CodeBusiness(CodeMaster.getCode(預金種別, new Code(口座種別)));
+        return new UzT0007CodeBusiness(CodeMaster.getCode(預金種別, new Code(口座種別)) == null
+                ? new UzT0007CodeEntity() : CodeMaster.getCode(預金種別, new Code(口座種別)));
     }
 
     private KinyuKikan 金融機関コードに対する名称(KinyuKikanCode 金融機関コード) {
@@ -870,7 +873,8 @@ public class ShiharaiHohoJyohoHandler {
                 || 高額合算支給申請9.equals(menuID)
                 || 高額合算支給申請10.equals(menuID)
                 || 高額合算支給申請11.equals(menuID)
-                || 高額合算支給申請12.equals(menuID)) {
+                || 高額合算支給申請12.equals(menuID)
+                || 高額合算支給決定情報補正.equals(menuID)) {
             業務内区分コード = new KamokuCode(String.format("%03d", Integer.valueOf(KozaBunruiKubun.高額合算費支給.getコード().toString())));
         }
         return 業務内区分コード;

@@ -18,7 +18,7 @@
     
     <select id="get出力明細一覧" resultMap="resultMap_getKaigoNinteiShinsakaiSchedule" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleMybitisParamter" fetchSize="500">
-        SELECT
+        SELECT DISTINCT
             '第' || dbT5501."shinsakaiKaisaiNo" || '回' AS shinsakai,
             dbT5501."shinsakaiKaisaiYoteiYMD" AS kaisaiYMD,
             dbT5501."shinsakaiKaishiYoteiTime" || '～' || dbT5501."shinsakaiShuryoYoteiTime" AS time,
@@ -38,17 +38,6 @@
             dbT5592."shinsakaiKaisaiBashoCode" = dbT5501."shinsakaiKaisaiYoteiBashoCode"
         WHERE
             dbT5501."shinsakaiKaisaiYoteiYMD" BETWEEN #{shinsakaiKaisaiKikanFrom} AND #{shinsakaiKaisaiKikanTo}
-        <if test= "shinsakaiIinCodeList.size() > 0">
-            AND dbT5503."shinsakaiIinCode" IN 
-            <foreach  
-                collection="shinsakaiIinCodeList"  
-                item="item"
-                open="("  
-                separator=","  
-                close=")">  
-                #{item}  
-            </foreach>
-        </if>
         ORDER BY 
             dbT5501."shinsakaiKaisaiYoteiYMD" 
     </select>  
