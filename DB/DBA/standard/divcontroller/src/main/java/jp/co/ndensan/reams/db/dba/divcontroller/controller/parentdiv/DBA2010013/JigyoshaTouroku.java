@@ -83,9 +83,11 @@ public class JigyoshaTouroku {
      */
     public ResponseData<JigyoshaTourokuDiv> onLoad(JigyoshaTourokuDiv div) {
         JigyoshaMode jigyoshaMode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
-        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
-        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, jigyoshaMode.getJigyoshaShubetsu());
-        ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate(jigyoshaMode.getYukoKaishiYMD()));
+        if (jigyoshaMode != null) {
+            ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
+            ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate(jigyoshaMode.getYukoKaishiYMD()));
+        }
+        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, new RString("11"));
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
         RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
         FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
