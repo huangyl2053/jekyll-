@@ -102,12 +102,12 @@ public class ShinsaKaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getShinsakaikanryooutput() {
+    public ButtonDownLoad getShinsakaikanryooutput() {
         return this.getShinsakaikanryoselect().getShinsakaikanryooutput();
     }
 
     @JsonIgnore
-    public void  setShinsakaikanryooutput(Button shinsakaikanryooutput) {
+    public void  setShinsakaikanryooutput(ButtonDownLoad shinsakaikanryooutput) {
         this.getShinsakaikanryoselect().setShinsakaikanryooutput(shinsakaikanryooutput);
     }
 

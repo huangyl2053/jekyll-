@@ -77,15 +77,7 @@ public class ShinsakaiToroku {
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnRyooutputBoffer(ShinsakaiTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
         ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && validation.iterator().hasNext()) {
+        if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         return ResponseData.of(div).respond();

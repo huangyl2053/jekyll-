@@ -22,7 +22,7 @@ public class shinsakaikanryoselectDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("shinsakaikanryooutput")
-    private Button shinsakaikanryooutput;
+    private ButtonDownLoad shinsakaikanryooutput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,7 +35,7 @@ public class shinsakaikanryoselectDiv extends Panel {
      * @return shinsakaikanryooutput
      */
     @JsonProperty("shinsakaikanryooutput")
-    public Button getShinsakaikanryooutput() {
+    public ButtonDownLoad getShinsakaikanryooutput() {
         return shinsakaikanryooutput;
     }
 
@@ -44,7 +44,7 @@ public class shinsakaikanryoselectDiv extends Panel {
      * @param shinsakaikanryooutput shinsakaikanryooutput
      */
     @JsonProperty("shinsakaikanryooutput")
-    public void setShinsakaikanryooutput(Button shinsakaikanryooutput) {
+    public void setShinsakaikanryooutput(ButtonDownLoad shinsakaikanryooutput) {
         this.shinsakaikanryooutput = shinsakaikanryooutput;
     }
 

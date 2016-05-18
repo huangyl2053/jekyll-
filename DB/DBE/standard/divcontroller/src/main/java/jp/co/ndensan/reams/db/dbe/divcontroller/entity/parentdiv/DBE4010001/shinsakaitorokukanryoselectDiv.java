@@ -22,9 +22,7 @@ public class shinsakaitorokukanryoselectDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnshinsakekkakanryooutput")
-    private Button btnshinsakekkakanryooutput;
-    @JsonProperty("hiddenbtnshinsakekkakanryooutput")
-    private ButtonDownLoad hiddenbtnshinsakekkakanryooutput;
+    private ButtonDownLoad btnshinsakekkakanryooutput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +35,7 @@ public class shinsakaitorokukanryoselectDiv extends Panel {
      * @return btnshinsakekkakanryooutput
      */
     @JsonProperty("btnshinsakekkakanryooutput")
-    public Button getBtnshinsakekkakanryooutput() {
+    public ButtonDownLoad getBtnshinsakekkakanryooutput() {
         return btnshinsakekkakanryooutput;
     }
 
@@ -46,26 +44,8 @@ public class shinsakaitorokukanryoselectDiv extends Panel {
      * @param btnshinsakekkakanryooutput btnshinsakekkakanryooutput
      */
     @JsonProperty("btnshinsakekkakanryooutput")
-    public void setBtnshinsakekkakanryooutput(Button btnshinsakekkakanryooutput) {
+    public void setBtnshinsakekkakanryooutput(ButtonDownLoad btnshinsakekkakanryooutput) {
         this.btnshinsakekkakanryooutput = btnshinsakekkakanryooutput;
-    }
-
-    /*
-     * gethiddenbtnshinsakekkakanryooutput
-     * @return hiddenbtnshinsakekkakanryooutput
-     */
-    @JsonProperty("hiddenbtnshinsakekkakanryooutput")
-    public ButtonDownLoad getHiddenbtnshinsakekkakanryooutput() {
-        return hiddenbtnshinsakekkakanryooutput;
-    }
-
-    /*
-     * sethiddenbtnshinsakekkakanryooutput
-     * @param hiddenbtnshinsakekkakanryooutput hiddenbtnshinsakekkakanryooutput
-     */
-    @JsonProperty("hiddenbtnshinsakekkakanryooutput")
-    public void setHiddenbtnshinsakekkakanryooutput(ButtonDownLoad hiddenbtnshinsakekkakanryooutput) {
-        this.hiddenbtnshinsakekkakanryooutput = hiddenbtnshinsakekkakanryooutput;
     }
 
     // </editor-fold>
