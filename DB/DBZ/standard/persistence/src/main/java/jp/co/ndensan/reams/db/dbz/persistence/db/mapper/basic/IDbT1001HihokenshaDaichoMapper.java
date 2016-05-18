@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 
@@ -30,6 +29,6 @@ public interface IDbT1001HihokenshaDaichoMapper {
      * @param param HihokenshaDaichoSearchCondition
      * @return List<DbT1001HihokenshaDaichoEntity>
      */
-    List<DbT1001HihokenshaDaichoEntity> get資格の情報(HihokenshaDaichoSearchCondition param);
+    DbT1001HihokenshaDaichoEntity get資格の情報(HihokenshaDaichoSearchCondition param);
 
 }

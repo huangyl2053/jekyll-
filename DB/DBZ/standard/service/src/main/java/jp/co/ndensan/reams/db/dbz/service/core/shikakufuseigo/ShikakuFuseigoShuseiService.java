@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokenshakosei.HokenshaKosei;
@@ -84,12 +83,8 @@ public class ShikakuFuseigoShuseiService {
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             return null;
         }
-        List<HihokenshaDaicho> 資格の情報List = dbt1001manager.find資格の情報(
+        HihokenshaDaicho 資格の情報 = dbt1001manager.find資格の情報(
                 HihokenshaDaichoSearchCondition.createSelectByKeyParam(被保険者番号, true));
-        HihokenshaDaicho 資格の情報 = null;
-        if (!資格の情報List.isEmpty()) {
-            資格の情報 = 資格の情報List.get(0);
-        }
         FuseigoRiyu 不整合理由 = null;
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
@@ -112,12 +107,14 @@ public class ShikakuFuseigoShuseiService {
         result.set修正後の資格の情報(修正後の資格の情報);
         if (資格の情報 == null) {
             result.set被保険者台帳状態(new RString("未作成"));
-        }
-        if (不整合理由 == null) {
-            result.set被保険者台帳状態(new RString("不整合なし"));
         } else {
-            result.set被保険者台帳状態(new RString("不整合あり"));
+            if (不整合理由 == null) {
+                result.set被保険者台帳状態(new RString("不整合なし"));
+            } else {
+                result.set被保険者台帳状態(new RString("不整合あり"));
+            }
         }
+
         return result;
     }
 
@@ -196,9 +193,9 @@ public class ShikakuFuseigoShuseiService {
      *
      * @param 個人情報 IKojin
      * @param 資格の情報 HihokenshaDaicho
-     * @return Map<DbzErrorMessages, RString>
+     * @return Map<RString, DbzErrorMessages>
      */
-    public Map<DbzErrorMessages, RString> validate被保台帳整合(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
+    public Map<RString, DbzErrorMessages> validate被保台帳整合(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
         RString 保険者構成 = BusinessConfig.get(ConfigNameDBU.保険者情報_保険者構成, SubGyomuCode.DBU介護統計報告);
         if (HokenshaKosei.広域市町村.getコード().equals(保険者構成)) {
             KoikiShikakuJukiValidator validator = KoikiShikakuJukiValidator.createInstance();
@@ -213,9 +210,9 @@ public class ShikakuFuseigoShuseiService {
      *
      * @param 個人情報 IKojin
      * @param 除外の情報 TekiyoJogaisha
-     * @return Map<DbzErrorMessages, RString>
+     * @return Map<RString, DbzErrorMessages>
      */
-    public Map<DbzErrorMessages, RString> validate被保台帳整合(IKojin 個人情報, TekiyoJogaisha 除外の情報) {
+    public Map<RString, DbzErrorMessages> validate被保台帳整合(IKojin 個人情報, TekiyoJogaisha 除外の情報) {
         return ShikakuJukiValidator.createInstance().validate適用除外者(個人情報, 除外の情報);
     }
 
@@ -224,9 +221,9 @@ public class ShikakuFuseigoShuseiService {
      *
      * @param 個人情報 IKojin
      * @param 他特の情報 TashichosonJushochiTokurei
-     * @return Map<DbzErrorMessages, RString>
+     * @return Map<RString, DbzErrorMessages>
      */
-    public Map<DbzErrorMessages, RString> validate被保台帳整合(IKojin 個人情報, TashichosonJushochiTokurei 他特の情報) {
+    public Map<RString, DbzErrorMessages> validate被保台帳整合(IKojin 個人情報, TashichosonJushochiTokurei 他特の情報) {
         return ShikakuJukiValidator.createInstance().validate他特例(個人情報, 他特の情報);
     }
 }

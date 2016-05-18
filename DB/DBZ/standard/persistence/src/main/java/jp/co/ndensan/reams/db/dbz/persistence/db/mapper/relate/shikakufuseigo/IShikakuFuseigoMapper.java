@@ -23,12 +23,4 @@ public interface IShikakuFuseigoMapper {
      * @return List<SikakuEntity>
      */
     List<ShikakuFuseigoEntity> get被保険者資格不整合一覧(ShikakuFuseigoMybatisParameter param);
-
-    /**
-     * 整合性チェック情報を取得する。
-     *
-     * @param param param
-     * @return List<DbT1014SeigoseiCheckEntity>
-     */
-//    List<DbT1014SeigoseiCheckEntity> get整合性チェック情報(ShikakuFuseigoMybatisParameter param);
 }

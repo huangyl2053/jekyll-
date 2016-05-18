@@ -111,16 +111,16 @@
           ( 
             SELECT <include refid="allColumns_DbT1001HihokenshaDaicho"/> , row_number() OVER ( 
                 PARTITION BY
-                  M."dbT1001HihokenshaDaicho_hihokenshaNo" 
+                  "DbT1001HihokenshaDaicho"."hihokenshaNo" 
                 ORDER BY
-                  M."dbT1001HihokenshaDaicho_idoYMD" DESC
-                  , M."dbT1001HihokenshaDaicho_edaNo" DESC
+                  "DbT1001HihokenshaDaicho"."idoYMD" DESC
+                  , "DbT1001HihokenshaDaicho"."edaNo" DESC
               ) AS rrkno 
             FROM
-              rgdb."DbT1001HihokenshaDaicho" M 
+              rgdb."DbT1001HihokenshaDaicho" 
             WHERE
-              M."dbT1001HihokenshaDaicho_hihokennshaKubunCode" = '1' 
-              AND M."dbT1001HihokenshaDaicho_logicalDeletedFlag" = false
+              "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" = '1' 
+              AND "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = false
           ) AS A 
         WHERE
           A.rrkno = 1 
