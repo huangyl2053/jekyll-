@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceItiranHyojiJohoBusiness;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -239,12 +239,13 @@ public class JigyoshaTourokuHandler {
      *
      * @param サービス一覧情報List サービス一覧情報List
      */
-    public void getサービス一覧情報(List<KaigoJigyoshaShiteiService> サービス一覧情報List) {
+    public void getサービス一覧情報(List<ServiceItiranHyojiJohoBusiness> サービス一覧情報List) {
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
-        for (KaigoJigyoshaShiteiService result : サービス一覧情報List) {
+        for (ServiceItiranHyojiJohoBusiness result : サービス一覧情報List) {
             dgServiceList_Row row = new dgServiceList_Row();
             if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
-                row.setServiceType(result.getサービス種類コード().getColumnValue());
+                row.setServiceShuruiCode(result.getサービス種類コード().getColumnValue());
+                row.setServiceType(result.getサービス種類略称());
                 TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
                 開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
                 TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
