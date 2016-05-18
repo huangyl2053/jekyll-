@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1090001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.HakkoRirekiKoyuJohoDBD100008;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -30,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -245,7 +249,15 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         int rirekiNo = div.getRirekiNo().isEmpty() ? 0 : Integer.valueOf(div.getRirekiNo().toString());
         try (ReportManager reportManager = new ReportManager()) {
             tsuchisho.publish(被保険者番号, 識別コード, rirekiNo, 発行日, 文書番号, お知らせ通知書, 申請書, reportManager);
-            response.data = reportManager.publish();
+            HashMap<Code, RString> hashMap = new HashMap();
+            hashMap.put(HakkoRirekiKoyuJohoDBD100008.被保番号.getコード(), 被保険者番号.getColumnValue());
+            SourceDataCollection collection = reportManager.publish();
+            for (SourceData data : collection) {
+                if (data.getReportId().equals(ReportIdDBD.DBDPR12002_1_1.getReportId().value())) {
+                    tsuchisho.insert発行履歴(data, 発行日, 識別コード, hashMap);
+                }
+            }
+            response.data = collection;
         }
         return response;
     }

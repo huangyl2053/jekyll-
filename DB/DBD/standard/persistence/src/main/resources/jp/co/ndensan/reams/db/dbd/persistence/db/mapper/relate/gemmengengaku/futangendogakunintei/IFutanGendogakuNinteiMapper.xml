@@ -64,7 +64,7 @@
             AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" IS NOT NULL
             AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" != ''
         </where>
-        ORDER BY  DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo"
+        ORDER BY  DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" DESC
     </sql>
 
     <select id="get負担限度額認定帳票用リスト" resultMap="resultMap_FutanGendogakuNinteiEntity"
