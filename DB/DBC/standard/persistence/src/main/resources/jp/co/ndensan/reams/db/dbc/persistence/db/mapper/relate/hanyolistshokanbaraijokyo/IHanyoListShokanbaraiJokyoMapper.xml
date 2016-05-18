@@ -9,7 +9,7 @@
         <include refid="selectHanyoListShokanbaraiJokyoEntity" />
     </select>
     <sql id="selectHanyoListShokanbaraiJokyoEntity">
-       SELECT DISTINCT
+        SELECT DISTINCT
         DbV1001."hihokenshaNo" as 被保険者番号,
         DbV1001."shichosonCode" as 市町村コード,
         DbV1001."shikakuShutokuJiyuCode" as 資格取得事由コード,
@@ -86,7 +86,6 @@
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3038."dbT3038ShokanKihon_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3038."dbT3038ShokanKihon_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3038."dbT3038ShokanKihon_seiriNo"
-        AND DbT3034."dbT3034ShokanShinsei_shinseiJigyoshaNo" = DbT3038."dbT3038ShokanKihon_jigyoshaNo"
         LEFT OUTER JOIN 
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.noDeleted_DbT3048ShokanFukushiYoguHanbaihi" />) As DbT3048
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3048."dbT3048ShokanFukushiYoguHanbaihi_hiHokenshaNo"
@@ -207,14 +206,14 @@
                 #{様式番号}
             </foreach>
         </if>
-            order by  DbT3034. "dbT3034ShokanShinsei_hiHokenshaNo",
-                    DbT3034. "dbT3034ShokanShinsei_serviceTeikyoYM",
-                    DbT3034. "dbT3034ShokanShinsei_seiriNo",
-                    DbT3034. "dbT3034ShokanShinsei_shinseiJigyoshaNo",
-                    DbT3038."dbT3038ShokanKihon_yoshikiNo",
-                    DbT3038."dbT3038ShokanKihon_meisaiNo",
-                    koza. "uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode",
-                    koza. "uaT0301YokinShubetsuPattern_yokinShubetsuCode"
+        order by  DbT3034. "dbT3034ShokanShinsei_hiHokenshaNo",
+        DbT3034. "dbT3034ShokanShinsei_serviceTeikyoYM",
+        DbT3034. "dbT3034ShokanShinsei_seiriNo",
+        DbT3034. "dbT3034ShokanShinsei_shinseiJigyoshaNo",
+        DbT3038."dbT3038ShokanKihon_yoshikiNo",
+        DbT3038."dbT3038ShokanKihon_meisaiNo",
+        koza. "uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode",
+        koza. "uaT0301YokinShubetsuPattern_yokinShubetsuCode"
     </sql>
         
     <resultMap id="resultMap_HanyoListShokanbaraiJokyoEntity" autoMapping="true"
@@ -294,6 +293,6 @@
         <association property="宛先Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <collection property="請求基本List"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
+                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
     </resultMap>  
 </mapper>
