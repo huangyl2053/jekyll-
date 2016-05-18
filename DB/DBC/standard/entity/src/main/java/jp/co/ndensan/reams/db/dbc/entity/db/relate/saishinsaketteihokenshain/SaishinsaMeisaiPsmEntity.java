@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * 再審査決定通知書明細情報
  *
- * @reamsid_L DBC-2520-030 chenaoqi
+ * @reamsid_L DBC-2520-010 chenaoqi
  */
 @lombok.Getter
 @lombok.Setter

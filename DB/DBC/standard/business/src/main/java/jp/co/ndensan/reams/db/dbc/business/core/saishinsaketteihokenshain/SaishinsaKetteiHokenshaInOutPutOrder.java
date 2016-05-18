@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 再審査決定通知書情報取込OutPutOrder
  *
- * @reamsid_L DBC-2520-030 chenaoqi
+ * @reamsid_L DBC-2520-010 chenaoqi
  */
 public enum SaishinsaKetteiHokenshaInOutPutOrder implements IReportItems {
 

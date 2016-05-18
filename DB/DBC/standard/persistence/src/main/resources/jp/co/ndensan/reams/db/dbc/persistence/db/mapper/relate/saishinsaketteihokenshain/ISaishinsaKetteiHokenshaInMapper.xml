@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- @reamsid_L DBC-2520-020 chenaoqi -->
+<!-- @reamsid_L DBC-2520-010 chenaoqi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsaketteihokenshain.ISaishinsaKetteiHokenshaInMapper">
 
     <insert id="insert再審査決定集計">
