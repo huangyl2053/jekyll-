@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
@@ -44,81 +43,106 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class KaigoHokenHokenryogakuKetteiTsuchishoPrintService {
 
     /**
-     * printB5Yokoメソッド
+     * printB5Yokoメソッド(単一帳票出力用)
      *
      * @param entities EditedKariSanteiFukaDaichoJoho
      * @return SourceDataCollection
      */
     public SourceDataCollection printB5Yoko(List<KaigoHokenHokenryogakuKetteiTsuchishoJoho> entities) {
+        try (ReportManager reportManager = new ReportManager()) {
+            printB5Yoko(entities, reportManager);
+            return reportManager.publish();
+        }
+    }
+
+    /**
+     * printB5Yokoメソッド(複数帳票出力用)
+     *
+     * @param entities EditedKariSanteiFukaDaichoJoho
+     * @param reportManager ReportManager
+     */
+    public void printB5Yoko(List<KaigoHokenHokenryogakuKetteiTsuchishoJoho> entities, ReportManager reportManager) {
         KaigoHokenHokenryogakuKetteiTsuchishoB5YokoProperty property = new KaigoHokenHokenryogakuKetteiTsuchishoB5YokoProperty();
         List<KaigoHokenHokenryogakuKetteiTsuchishoBusiness> targets = new ArrayList<>();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                if (entities != null && !entities.isEmpty()) {
-                    ReportId 帳票分類ID = entities.get(0).get本算定決定通知書情報().get帳票分類ID();
-                    FlexibleDate 発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
+        try (ReportAssembler<KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            if (entities != null && !entities.isEmpty()) {
+                ReportId 帳票分類ID = entities.get(0).get本算定決定通知書情報().get帳票分類ID();
+                FlexibleDate 発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
 
-                    NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
-                            property.reportId(),
-                            発行日,
-                            NinshoshaDenshikoinshubetsuCode.toValue(帳票分類ID.value()),
-                            reportSourceWriter);
-                    CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
-                    for (KaigoHokenHokenryogakuKetteiTsuchishoJoho joho : entities) {
-                        KaigoHokenHokenryogakuKetteiTsuchishoBusiness business = new KaigoHokenHokenryogakuKetteiTsuchishoBusiness();
-                        business.set文書番号(joho.get文書番号());
-                        business.set本算定決定通知書情報(joho.get本算定決定通知書情報());
-                        business.set調定事由リスト(joho.get調定事由リスト());
-                        business.set通知書定型文(joho.get通知書定型文());
-                        business.setNinshoshaSource(ninshoshaSource);
-                        business.setCompKaigoToiawasesakiSource(compKaigoToiawasesakiSource);
-                        targets.add(business);
-                    }
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
+                        property.reportId(),
+                        発行日,
+                        NinshoshaDenshikoinshubetsuCode.toValue(帳票分類ID.value()),
+                        reportSourceWriter);
+                CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
+                for (KaigoHokenHokenryogakuKetteiTsuchishoJoho joho : entities) {
+                    KaigoHokenHokenryogakuKetteiTsuchishoBusiness business = new KaigoHokenHokenryogakuKetteiTsuchishoBusiness();
+                    business.set文書番号(joho.get文書番号());
+                    business.set本算定決定通知書情報(joho.get本算定決定通知書情報());
+                    business.set調定事由リスト(joho.get調定事由リスト());
+                    business.set通知書定型文(joho.get通知書定型文());
+                    business.setNinshoshaSource(ninshoshaSource);
+                    business.setCompKaigoToiawasesakiSource(compKaigoToiawasesakiSource);
+                    targets.add(business);
+                }
+                for (KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReport report : toReportsB5Yoko(targets)) {
+                    report.writeBy(reportSourceWriter);
                 }
             }
         }
+    }
 
-        return new Printer<KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource>().spool(property, toReportsB5Yoko(targets));
+    /**
+     * printA4Tateメソッド(単一帳票出力用)
+     *
+     * @param entities EditedKariSanteiFukaDaichoJoho
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection printA4Tate(List<KaigoHokenHokenryogakuKetteiTsuchishoJoho> entities) {
+        try (ReportManager reportManager = new ReportManager()) {
+            printA4Tate(entities, reportManager);
+            return reportManager.publish();
+        }
     }
 
     /**
      * printA4Tateメソッド
      *
      * @param entities EditedKariSanteiFukaDaichoJoho
-     * @return SourceDataCollection
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection printA4Tate(List<KaigoHokenHokenryogakuKetteiTsuchishoJoho> entities) {
+    public void printA4Tate(List<KaigoHokenHokenryogakuKetteiTsuchishoJoho> entities, ReportManager reportManager) {
         KaigoHokenHokenryogakuKetteiTsuchishoA4TateProperty property = new KaigoHokenHokenryogakuKetteiTsuchishoA4TateProperty();
         List<KaigoHokenHokenryogakuKetteiTsuchishoBusiness> targets = new ArrayList<>();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                if (entities != null && !entities.isEmpty()) {
-                    ReportId 帳票分類ID = entities.get(0).get本算定決定通知書情報().get帳票分類ID();
-                    FlexibleDate 発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
+        try (ReportAssembler<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            if (entities != null && !entities.isEmpty()) {
+                ReportId 帳票分類ID = entities.get(0).get本算定決定通知書情報().get帳票分類ID();
+                FlexibleDate 発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
 
-                    NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
-                            property.reportId(),
-                            発行日,
-                            NinshoshaDenshikoinshubetsuCode.toValue(帳票分類ID.value()),
-                            reportSourceWriter);
-                    CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
-                    for (KaigoHokenHokenryogakuKetteiTsuchishoJoho joho : entities) {
-                        KaigoHokenHokenryogakuKetteiTsuchishoBusiness business = new KaigoHokenHokenryogakuKetteiTsuchishoBusiness();
-                        business.set文書番号(joho.get文書番号());
-                        business.set本算定決定通知書情報(joho.get本算定決定通知書情報());
-                        business.set調定事由リスト(joho.get調定事由リスト());
-                        business.set通知書定型文(joho.get通知書定型文());
-                        business.setNinshoshaSource(ninshoshaSource);
-                        business.setCompKaigoToiawasesakiSource(compKaigoToiawasesakiSource);
-                        targets.add(business);
-                    }
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
+                        property.reportId(),
+                        発行日,
+                        NinshoshaDenshikoinshubetsuCode.toValue(帳票分類ID.value()),
+                        reportSourceWriter);
+                CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
+                for (KaigoHokenHokenryogakuKetteiTsuchishoJoho joho : entities) {
+                    KaigoHokenHokenryogakuKetteiTsuchishoBusiness business = new KaigoHokenHokenryogakuKetteiTsuchishoBusiness();
+                    business.set文書番号(joho.get文書番号());
+                    business.set本算定決定通知書情報(joho.get本算定決定通知書情報());
+                    business.set調定事由リスト(joho.get調定事由リスト());
+                    business.set通知書定型文(joho.get通知書定型文());
+                    business.setNinshoshaSource(ninshoshaSource);
+                    business.setCompKaigoToiawasesakiSource(compKaigoToiawasesakiSource);
+                    targets.add(business);
+                }
+                for (KaigoHokenHokenryogakuKetteiTsuchishoA4TateReport report : toReportsA4Tate(targets)) {
+                    report.writeBy(reportSourceWriter);
                 }
             }
         }
 
-        return new Printer<KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource>().spool(property, toReportsA4Tate(targets));
     }
 
     private CompKaigoToiawasesakiSource getCompKaigoToiawasesakiSource(ReportId 帳票分類ID) {

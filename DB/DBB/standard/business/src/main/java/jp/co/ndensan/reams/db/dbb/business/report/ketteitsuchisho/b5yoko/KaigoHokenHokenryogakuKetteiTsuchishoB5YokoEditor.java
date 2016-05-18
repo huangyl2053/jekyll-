@@ -55,13 +55,13 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         if (調定事由リスト != null && !調定事由リスト.isEmpty()) {
             reportSource.choteiJiyu1 = 調定事由リスト.get(0);
             if (1 < 調定事由リスト.size()) {
-                reportSource.choteiJiyu2 = 調定事由リスト.get(0);
+                reportSource.choteiJiyu2 = 調定事由リスト.get(1);
             }
             if (2 < 調定事由リスト.size()) {
-                reportSource.choteiJiyu3 = 調定事由リスト.get(0);
+                reportSource.choteiJiyu3 = 調定事由リスト.get(2);
             }
             if (SIZE_3 < 調定事由リスト.size()) {
-                reportSource.choteiJiyu4 = 調定事由リスト.get(0);
+                reportSource.choteiJiyu4 = 調定事由リスト.get(SIZE_3);
             }
 
         } else {
@@ -76,7 +76,7 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
                 .fillType(FillType.BLANK).toDateString();
         reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
         reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額(), 0);
-        reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get保険者番号().value();
+        reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
         reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
         reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(更正前.get確定保険料_年額(), 0);
         reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
