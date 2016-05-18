@@ -102,16 +102,6 @@ public class IkenshogetDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnCheck() {
-        return this.getIkenshogetselect().getBtnCheck();
-    }
-
-    @JsonIgnore
-    public void  setBtnCheck(Button BtnCheck) {
-        this.getIkenshogetselect().setBtnCheck(BtnCheck);
-    }
-
-    @JsonIgnore
     public ButtonDownLoad getBtnikenshogetoutput() {
         return this.getIkenshogetselect().getBtnikenshogetoutput();
     }

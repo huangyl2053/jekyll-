@@ -69,7 +69,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             if (!RString.isNullOrEmpty(申請書管理番号)) {
                 NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
                         new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
-                ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set主治医意見書登録完了年月日(
+                ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set主治医意見書作成依頼完了年月日(
                         new FlexibleDate(RDate.getNowDate().toDateString())).build();
                 IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
             }
