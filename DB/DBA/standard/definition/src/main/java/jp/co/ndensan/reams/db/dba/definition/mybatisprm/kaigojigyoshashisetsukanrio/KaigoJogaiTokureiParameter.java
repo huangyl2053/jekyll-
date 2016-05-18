@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsuka
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
 /**
  *
@@ -21,14 +22,17 @@ public final class KaigoJogaiTokureiParameter {
     private final RString jigyoshaNo;
     private final FlexibleDate yukoKaishiYMD;
     private final FlexibleDate yukoShuryoYMD;
+    private final RYearMonth sysDateYM;
 
     private KaigoJogaiTokureiParameter(
             RString jigyoshaNo,
             FlexibleDate yukoKaishiYMD,
-            FlexibleDate yukoShuryoYMD) {
+            FlexibleDate yukoShuryoYMD,
+            RYearMonth sysDateYM) {
         this.jigyoshaNo = jigyoshaNo;
         this.yukoKaishiYMD = yukoKaishiYMD;
         this.yukoShuryoYMD = yukoShuryoYMD;
+        this.sysDateYM = sysDateYM;
     }
 
     /**
@@ -37,16 +41,19 @@ public final class KaigoJogaiTokureiParameter {
      * @param jigyoshaNo RString
      * @param yukoKaishiYMD FlexibleDate
      * @param yukoShuryoYMD FlexibleDate
+     * @param sysDateYM FlexibleDate
      * @return JigyoshaInputGuideParameter
      */
     public static KaigoJogaiTokureiParameter createParam(
             RString jigyoshaNo,
             FlexibleDate yukoKaishiYMD,
-            FlexibleDate yukoShuryoYMD) {
+            FlexibleDate yukoShuryoYMD,
+            RYearMonth sysDateYM) {
 
         return new KaigoJogaiTokureiParameter(
                 jigyoshaNo,
                 yukoKaishiYMD,
-                yukoShuryoYMD);
+                yukoShuryoYMD,
+                sysDateYM);
     }
 }
