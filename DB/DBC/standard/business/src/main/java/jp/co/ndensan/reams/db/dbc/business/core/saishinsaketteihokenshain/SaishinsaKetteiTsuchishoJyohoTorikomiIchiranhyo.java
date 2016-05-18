@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  * 再審査決定通知書情報取込一覧表（公費負担者分）
  *
- * @reamsid_L DBC-2520-030 chenaoqi
+ * @reamsid_L DBC-2520-010 chenaoqi
  */
 public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
 
