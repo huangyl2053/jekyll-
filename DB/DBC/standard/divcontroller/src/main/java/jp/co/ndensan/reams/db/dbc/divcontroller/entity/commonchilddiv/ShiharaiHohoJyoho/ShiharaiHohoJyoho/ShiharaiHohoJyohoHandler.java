@@ -475,7 +475,7 @@ public class ShiharaiHohoJyohoHandler {
 
         if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
 
-            div.getDdlKozaID().setReadOnly(true);
+            div.getDdlKozaID().setReadOnly(false);
             div.getBtnKozaToroku().setDisabled(false);
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
@@ -576,10 +576,10 @@ public class ShiharaiHohoJyohoHandler {
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     new KinyuKikanShitenCode(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番()));
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
-            div.getTxtTenban().setVisible(true);
+            div.getTxtTenban().setDisplayNone(false);
             div.getTxtTenban().setValue(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番());
-            div.getTxtKinyuKikanShitenCode().setVisible(false);
-            div.getTxtYokinShubetsu().setVisible(false);
+            div.getTxtKinyuKikanShitenCode().setDisplayNone(true);
+            div.getTxtYokinShubetsu().setDisplayNone(true);
         } else {
             KinyuKikan kinyuKikan = 金融機関コードに対する名称(口座情報.get金融機関コード() == null
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード());
@@ -587,9 +587,9 @@ public class ShiharaiHohoJyohoHandler {
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     口座情報.get支店コード() == null ? KinyuKikanShitenCode.EMPTY : 口座情報.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
-            div.getTxtKinyuKikanShitenCode().setVisible(true);
-            div.getTxtYokinShubetsu().setVisible(true);
-            div.getTxtTenban().setVisible(false);
+            div.getTxtKinyuKikanShitenCode().setDisplayNone(false);
+            div.getTxtYokinShubetsu().setDisplayNone(false);
+            div.getTxtTenban().setDisplayNone(true);
         }
         UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(口座情報.get預金種別()));
         if (uzT0007CodeBusiness != null) {
@@ -627,15 +627,15 @@ public class ShiharaiHohoJyohoHandler {
         KinyuKikanCode 金融機関コード = 受領委任契約事業者.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 受領委任契約事業者.get金融機関コード();
         if (ゆうちょ銀行.equals(金融機関コード.value())) {
-            div.getTxtKinyuKikanShitenCode1().setVisible(false);
-            div.getTxtYokinShubetsu1().setVisible(false);
-            div.getTxtTenban1().setVisible(true);
+            div.getTxtKinyuKikanShitenCode1().setDisplayNone(true);
+            div.getTxtYokinShubetsu1().setDisplayNone(true);
+            div.getTxtTenban1().setDisplayNone(false);
             div.getTxtTenban1().setValue(受領委任契約事業者.get支店コード() == null ? RString.EMPTY : 受領委任契約事業者.get支店コード().value());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         } else {
-            div.getTxtKinyuKikanShitenCode1().setVisible(true);
-            div.getTxtYokinShubetsu1().setVisible(true);
-            div.getTxtTenban1().setVisible(false);
+            div.getTxtKinyuKikanShitenCode1().setDisplayNone(false);
+            div.getTxtYokinShubetsu1().setDisplayNone(false);
+            div.getTxtTenban1().setDisplayNone(true);
             div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         }

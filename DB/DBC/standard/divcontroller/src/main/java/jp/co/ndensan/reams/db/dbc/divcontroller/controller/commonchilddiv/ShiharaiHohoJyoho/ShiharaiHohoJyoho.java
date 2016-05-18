@@ -134,9 +134,13 @@ public class ShiharaiHohoJyoho {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
         ShiharaiHohoJyohoHandler handler = getHandler(div);
         getHandler(div).clear口座払い();
-        SearchResult<KozaJohoPSM> kozaJohoPSM = ShiharaiHohoJyohoFinder.createInstance().
-                getKozaJyoho(KozaParameter.createParam(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
-        handler.口座払いエリアの初期化(kozaJohoPSM.records().get(0), Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
+        if (!div.getDdlKozaID().getSelectedKey().isNullOrEmpty()) {
+            SearchResult<KozaJohoPSM> kozaJohoPSM = ShiharaiHohoJyohoFinder.createInstance().
+                    getKozaJyoho(KozaParameter.createParam(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
+            handler.口座払いエリアの初期化(kozaJohoPSM.records().get(0), Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
+        } else {
+            getHandler(div).clear口座払い();
+        }
         response.data = div;
         return response;
     }
