@@ -54,7 +54,6 @@ public final class ShikyuShinseiDetailHandler {
     private static final RString MODEL_DEL = new RString("削除");
     private static final RString 受託あり = new RString("2");
     private static final RString 受託なし = new RString("1");
-    private static final int SIX = 6;
 
     /**
      * コンストラクタです。
@@ -288,14 +287,14 @@ public final class ShikyuShinseiDetailHandler {
             }
         }
 
-        if (ShinseishaKubun.本人.get名称().equals(div.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue())) {
-            if (!償還払支給申請.get申請者区分().equals(ShinseishaKubun.本人.getコード())) {
-                return true;
-            }
-        } else if (ShinseishaKubun.代理人.get名称().equals(div.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue())) {
-            if (!償還払支給申請.get申請者区分().equals(ShinseishaKubun.代理人.getコード())) {
-                return true;
-            }
+        if (ShinseishaKubun.本人.get名称().equals(div.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue())
+                && !償還払支給申請.get申請者区分().equals(ShinseishaKubun.本人.getコード())) {
+            return true;
+        }
+
+        if (ShinseishaKubun.代理人.get名称().equals(div.getPnlShinsei().getRdoShinseisyaKubun().getSelectedValue())
+                && !償還払支給申請.get申請者区分().equals(ShinseishaKubun.代理人.getコード())) {
+            return true;
         }
 
         return is変更あり_UPD(償還払支給申請);

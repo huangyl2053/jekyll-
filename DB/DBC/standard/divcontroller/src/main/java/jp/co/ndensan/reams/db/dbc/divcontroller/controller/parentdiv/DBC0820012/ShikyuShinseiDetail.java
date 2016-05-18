@@ -206,7 +206,6 @@ public class ShikyuShinseiDetail {
             ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, div.getPanelHead().getTxtSeiribango().getValue());
             return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
         }
-        ShikyuShinseiDetailHandler handler = getHandler(div);
         boolean flag;
         if (MODEL_ADD.equals(処理モード)) {
             flag = getHandler(div).is変更あり_ADD();
