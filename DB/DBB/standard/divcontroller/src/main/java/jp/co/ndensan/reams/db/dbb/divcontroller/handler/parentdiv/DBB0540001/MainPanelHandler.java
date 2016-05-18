@@ -673,6 +673,7 @@ public class MainPanelHandler {
                     || 変更後list.get(j).equals(RString.EMPTY))) {
                 特別徴収停止日時 = YMDHMS.now();
                 特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
+                break;
             } else {
                 特別徴収停止日時 = ViewStateHolder.get(ViewStateKeys.特別徴収停止日時, YMDHMS.class);
                 特別徴収停止事由コード = ViewStateHolder.get(ViewStateKeys.特別徴収停止事由コード, RString.class);
