@@ -24,23 +24,23 @@
     <select id="get汎用リスト被保険者台帳データの取得" resultMap="resultMap_HanyoListHihokenshadaichoRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoMyBatisParameter" fetchSize="500">
         SELECT
-            DbT1001."hihokenshaNo" AS "DbT1001_hihokenshaNo",
-            DbT1001."shichosonCode" AS "DbT1001_shichosonCode",
-            DbT1001."shikakuShutokuJiyuCode" AS "DbT1001_shikakuShutokuJiyuCode",
-            DbT1001."shikakuShutokuYMD" AS "DbT1001_shikakuShutokuYMD",
-            DbT1001."shikakuShutokuTodokedeYMD" AS "DbT1001_shikakuShutokuTodokedeYMD",
-            DbT1001."shikakuSoshitsuJiyuCode" AS "DbT1001_shikakuSoshitsuJiyuCode",
-            DbT1001."shikakuSoshitsuYMD" AS "DbT1001_shikakuSoshitsuYMD",
-            DbT1001."shikakuSoshitsuTodokedeYMD" AS "DbT1001_shikakuSoshitsuTodokedeYMD",
-            DbT1001."hihokennshaKubunCode" AS "DbT1001_hihokennshaKubunCode",
-            DbT1001."jushochiTokureiFlag" AS "DbT1001_jushochiTokureiFlag",
-            DbT1001."koikinaiJushochiTokureiFlag" AS "DbT1001_koikinaiJushochiTokureiFlag",
-            DbT1001."koikinaiTokureiSochimotoShichosonCode" AS "DbT1001_koikinaiTokureiSochimotoShichosonCode",
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-           , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+        DbT1001."hihokenshaNo" AS "DbT1001_hihokenshaNo",
+        DbT1001."shichosonCode" AS "DbT1001_shichosonCode",
+        DbT1001."shikakuShutokuJiyuCode" AS "DbT1001_shikakuShutokuJiyuCode",
+        DbT1001."shikakuShutokuYMD" AS "DbT1001_shikakuShutokuYMD",
+        DbT1001."shikakuShutokuTodokedeYMD" AS "DbT1001_shikakuShutokuTodokedeYMD",
+        DbT1001."shikakuSoshitsuJiyuCode" AS "DbT1001_shikakuSoshitsuJiyuCode",
+        DbT1001."shikakuSoshitsuYMD" AS "DbT1001_shikakuSoshitsuYMD",
+        DbT1001."shikakuSoshitsuTodokedeYMD" AS "DbT1001_shikakuSoshitsuTodokedeYMD",
+        DbT1001."hihokennshaKubunCode" AS "DbT1001_hihokennshaKubunCode",
+        DbT1001."jushochiTokureiFlag" AS "DbT1001_jushochiTokureiFlag",
+        DbT1001."koikinaiJushochiTokureiFlag" AS "DbT1001_koikinaiJushochiTokureiFlag",
+        DbT1001."koikinaiTokureiSochimotoShichosonCode" AS "DbT1001_koikinaiTokureiSochimotoShichosonCode",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
         FROM rgdb."DbT1001HihokenshaDaicho" As DbT1001
         <if test="isEmpty">
-        LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
+            LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
             ON DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
             AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{kijunni}
             AND #{kijunni} <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
@@ -49,7 +49,7 @@
             AND DbT4001."logicalDeletedFlag" = False
         </if>
         INNER JOIN rgua.${psmShikibetsuTaisho} AS "ShikibetsuTaisho"
-            ON "ShikibetsuTaisho"."shikibetsuCode" = DbT1001."shikibetsuCode"
+        ON "ShikibetsuTaisho"."shikibetsuCode" = DbT1001."shikibetsuCode"
         <if test="is年齢">
             <if test="has年齢開始">
                 AND "ShikibetsuTaisho"."seinengappiYMD"  <![CDATA[<=]]> #{宛名抽出年齢開始}
@@ -83,18 +83,18 @@
         WHERE 1 = 1
         <if test="is直近">
             AND DbT1001."hihokenshaNo" IN ( SELECT dbT1001."hihokenshaNo"
-                                            FROM(SELECT T1001.*,	
-                                                    ROW_NUMBER() OVER (PARTITION BY T1001."hihokenshaNo" ORDER BY T1001."idoYMD" DESC, T1001."edaNo" DESC) AS rrkno	
-                                                FROM rgdb."DbT1001HihokenshaDaicho" AS T1001
-                                                WHERE	T1001."logicalDeletedFlag" = FALSE) AS dbT1001				
-                                            WHERE dbT1001."rrkno" = 1)
+            FROM(SELECT T1001.*,	
+            ROW_NUMBER() OVER (PARTITION BY T1001."hihokenshaNo" ORDER BY T1001."idoYMD" DESC, T1001."edaNo" DESC) AS rrkno	
+            FROM rgdb."DbT1001HihokenshaDaicho" AS T1001
+            WHERE	T1001."logicalDeletedFlag" = FALSE) AS dbT1001				
+            WHERE dbT1001."rrkno" = 1)
         </if>
         <if test="is基準日">
             <if test="is資格取得日">
-                AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> #{kijunni} AND (#{kijunni} <![CDATA[<]]> DbT1001."shikakuSoshitsuYMD" OR DbT1001."shikakuSoshitsuYMD" IS NULL)
+                AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> #{kijunni} AND (#{kijunni} <![CDATA[<]]> DbT1001."shikakuSoshitsuYMD" OR DbT1001."shikakuSoshitsuYMD" IS NULL OR DbT1001."shikakuSoshitsuYMD" = '')
             </if>
             <if test="is資格取得届出日">
-                AND DbT1001."shikakuShutokuTodokedeYMD" <![CDATA[<=]]> #{kijunni} AND (#{kijunni} <![CDATA[<=]]> DbT1001."shikakuSoshitsuTodokedeYMD" OR DbT1001."shikakuSoshitsuTodokedeYMD" IS NULL)
+                AND DbT1001."shikakuShutokuTodokedeYMD" <![CDATA[<=]]> #{kijunni} AND (#{kijunni} <![CDATA[<=]]> DbT1001."shikakuSoshitsuTodokedeYMD" OR DbT1001."shikakuSoshitsuTodokedeYMD" IS NULL OR DbT1001."shikakuSoshitsuTodokedeYMD" = '')
             </if>
         </if>
         <if test="is範囲">
@@ -116,51 +116,51 @@
             </if>
         </if>
         AND( 1 = 1
-            <if test="is1号">
-                OR DbT1001."hihokennshaKubunCode" = '1'
-            </if>
-            <if test="is2号">
-                OR DbT1001."hihokennshaKubunCode" = '2'
-            </if>
-            <if test="is自特例者">
-                OR DbT1001."jushochiTokureiFlag" = 'true'
-            </if>
-            <if test="is広域住特">
-                OR DbT1001."koikinaiJushochiTokureiFlag" = 'true'
-            </if>
+        <if test="is1号">
+            OR DbT1001."hihokennshaKubunCode" = '1'
+        </if>
+        <if test="is2号">
+            OR DbT1001."hihokennshaKubunCode" = '2'
+        </if>
+        <if test="is自特例者">
+            OR DbT1001."jushochiTokureiFlag" = 'true'
+        </if>
+        <if test="is広域住特">
+            OR DbT1001."koikinaiJushochiTokureiFlag" = 'true'
+        </if>
         )
         <if test="is資格取得者のみ">
-                AND DbT1001."shikakuSoshitsuYMD" IS NULL
+            AND (DbT1001."shikakuSoshitsuYMD" IS NULL OR DbT1001."shikakuSoshitsuYMD" = '')
         </if>
         <if test="is資格喪失者のみ">
-                AND DbT1001."shikakuSoshitsuYMD" IS NOT NULL
+            AND (DbT1001."shikakuSoshitsuYMD" IS NOT NULL AND DbT1001."shikakuSoshitsuYMD" != '')
         </if>
         AND ( 1 = 1
-            <if test="has取得事由">
-                AND DbT1001."shikakuShutokuJiyuCode" IN 
-                <foreach  
-                    collection="shutokujiyu"  
-                    item="code"  
-                    open="("  
-                    separator=","  
-                    close=")">  
-                     #{code} 
-                </foreach>
-            </if>
-            <if test="has喪失事由">
-                OR DbT1001."shikakuSoshitsuJiyuCode" IN 
-                <foreach  
-                    collection="soshitsujiyu"  
-                    item="code"  
-                    open="("  
-                    separator=","  
-                    close=")">  
-                     #{code} 
-                </foreach>
-            </if>
+        <if test="has取得事由">
+            AND DbT1001."shikakuShutokuJiyuCode" IN 
+            <foreach  
+                collection="shutokujiyu"  
+                item="code"  
+                open="("  
+                separator=","  
+                close=")">  
+                #{code} 
+            </foreach>
+        </if>
+        <if test="has喪失事由">
+            OR DbT1001."shikakuSoshitsuJiyuCode" IN 
+            <foreach  
+                collection="soshitsujiyu"  
+                item="code"  
+                open="("  
+                separator=","  
+                close=")">  
+                #{code} 
+            </foreach>
+        </if>
         )
         <if test="isEmpty">
-                AND DbT4001."hihokenshaNo" IS NULL
+            AND (DbT4001."hihokenshaNo" IS NULL OR DbT4001."hihokenshaNo" = '')
         </if>
     </select>
 </mapper>
