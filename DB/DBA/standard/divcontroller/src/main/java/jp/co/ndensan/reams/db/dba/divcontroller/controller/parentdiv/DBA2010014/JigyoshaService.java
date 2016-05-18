@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2010014
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jigyoshaservice.JigyoshaServiceJoho;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
+import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceItiranHyojiJohoBusiness;
+import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceJohoBusiness;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010014.DBA2010014StateName;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -46,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
+ *
  * 画面サービス登録のクラスです。
  *
  * @reamsid_L DBA-0340-060 dongyabin
@@ -221,14 +224,11 @@ public class JigyoshaService {
                     new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey()),
                     div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
             business = getHandler(div).set事業者サービスDiv(business);
-            if (データ更新チェック(div)) {
-                return getService().insertJigyoshaServiceJoho(business);
-            }
+            データ更新チェック(div);
+            return getService().insertJigyoshaServiceJoho(business);
         } else if (状態_修正.equals(画面状態)) {
-            // TODO 内部QA：1038
-            if (データ更新チェック(div)) {
-                return データ更新(div);
-            }
+            データ更新チェック(div);
+            return データ更新(div);
         } else if (状態_削除.equals(画面状態)) {
             return getService_Delete().情報を物理削除(ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJigyoshaShiteiService.class));
         }
@@ -237,35 +237,38 @@ public class JigyoshaService {
 
     private boolean データ更新(JigyoshaServiceDiv div) {
         KaigoJigyoshaShiteiService business = ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJigyoshaShiteiService.class);
-        if (!div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue().equals(business.get有効開始日())) {
+        KaigoJigyoshaShiteiService businessUpdate;
+        if (div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue().equals(business.get有効開始日())) {
+            businessUpdate = getHandler(div).set事業者サービスDiv(business);
+        } else {
             KaigoJigyoshaShiteiService 更新データ = new KaigoJigyoshaShiteiService(new JigyoshaNo(div.getJigyoshaServiceKihon()
                     .getJigyosha().getTxtJigyoshaNo().getValue()),
                     new ServiceShuruiCode(div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey()),
                     div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue());
-            更新データ = getHandler(div).set事業者サービスDiv(更新データ);
-            return getService().insertJigyoshaServiceJoho(更新データ);
-        } else {
-            business = getHandler(div).set事業者サービスDiv(business);
-            return getService().updateJigyoshaServiceJoho(business, new RString("2"));
+            businessUpdate = getHandler(div).set事業者サービスDiv(更新データ);
         }
+        return getService().updateJigyoshaServiceJoho(business, businessUpdate);
     }
 
-    private boolean データ更新チェック(JigyoshaServiceDiv div) {
-        KaigoJigyoshaParameter 重複パラメータ = KaigoJigyoshaParameter.createParam(div.getJigyoshaServiceKihon().getJigyosha()
-                .getTxtJigyoshaNo().getValue(),
-                div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().getSelectedKey(),
-                div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue(),
-                div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue());
-        if (getService().checkKikanJufuku(重複パラメータ)) {
-            throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
-        }
-        KaigoJogaiTokureiParameter 合理性パラメータ = KaigoJogaiTokureiParameter.createParam(RString.EMPTY,
-                div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue(),
-                div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue());
+    private void データ更新チェック(JigyoshaServiceDiv div) {
+        FlexibleDate yukoKaishiYMD = div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue();
+        FlexibleDate yukoShuryoYMD = div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().getValue();
+        KaigoJogaiTokureiParameter 合理性パラメータ
+                = KaigoJogaiTokureiParameter.createParam(RString.EMPTY, yukoKaishiYMD, yukoShuryoYMD, null);
         if (!getService().checkKikanGorisei(合理性パラメータ)) {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
         }
-        return true;
+        KaigoJogaiTokureiParameter サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
+                ViewStateHolder.get(ViewStateKeys.サービス登録_事業者番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.サービス登録_有効開始日, FlexibleDate.class), 
+                FlexibleDate.EMPTY, RDate.getNowDate().getYearMonth());
+        List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = getService().getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
+        List<ServiceJohoBusiness> businessList = new ArrayList<>();
+        for (ServiceItiranHyojiJohoBusiness johoBusiness : サービス一覧表示情報List) {
+            ServiceJohoBusiness serviceJohoBusiness = new ServiceJohoBusiness(johoBusiness.get有効開始日(), johoBusiness.get有効終了日(), johoBusiness.getサービス種類略称());
+            businessList.add(serviceJohoBusiness);
+        }
+        getService().サービスと事業者期間関連のチェック(businessList, yukoKaishiYMD, yukoShuryoYMD);
     }
 
     private JigyoshaServiceHandler getHandler(JigyoshaServiceDiv div) {

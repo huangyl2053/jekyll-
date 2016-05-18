@@ -69,7 +69,7 @@ public class JigyoshaServiceHandler {
      * 修正状態の画面設定します。
      */
     public void set状態_修正() {
-        div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setDisabled(true);
+        div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setDisabled(false);
         div.getJigyoshaServiceKihon().getJigyosha().getTxtJigyoshaNo().setDisabled(true);
         div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setDisabled(true);
     }
@@ -189,6 +189,7 @@ public class JigyoshaServiceHandler {
         if (無.equals(joho.get基本情報準拠区分())) {
             chkKihonJunkyoFlag.add(準拠しない);
         }
+        div.getJigyoshaServiceKihon().getDdlServiceShuruiChiikiMitchaku().setSelectedKey(joho.getサービス種類コード().getColumnValue());
         div.getJigyoshaServiceKihon().getChkKihonJunkyoFlag().setSelectedItemsByKey(chkKihonJunkyoFlag);
         div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().setValue(joho.get有効開始日());
         div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoShuryoYMD().setValue(joho.get有効終了日());
