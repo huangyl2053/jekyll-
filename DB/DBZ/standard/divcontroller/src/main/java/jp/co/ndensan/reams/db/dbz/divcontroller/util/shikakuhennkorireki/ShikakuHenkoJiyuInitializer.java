@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.util.shikakuhennkorireki;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,8 +37,8 @@ public final class ShikakuHenkoJiyuInitializer {
     public static void initializeFor広域内市町村間異動(ShikakuHenkoRirekiDiv div) {
         requireNonNull(div, UrSystemErrorMessages.値がnull.getReplacedMessage(資格変更履歴文字列.toString()));
         List<KeyValueDataSource> 変更事由DDL = new ArrayList<>();
-        KeyValueDataSource 広域内転居 = new KeyValueDataSource(ShikakuHenkoJiyu.広域内転居.getCode(),
-                ShikakuHenkoJiyu.広域内転居.getName());
+        KeyValueDataSource 広域内転居 = new KeyValueDataSource(ShikakuHenkoJiyu.広域内転居.getコード(),
+                ShikakuHenkoJiyu.広域内転居.get名称());
         変更事由DDL.add(広域内転居);
         div.getDdlHenkoJiyu().setDataSource(変更事由DDL);
     }
@@ -51,14 +51,14 @@ public final class ShikakuHenkoJiyuInitializer {
     public static void initializeFor広域内住所地特例(ShikakuHenkoRirekiDiv div) {
         requireNonNull(div, UrSystemErrorMessages.値がnull.getReplacedMessage(資格変更履歴文字列.toString()));
         List<KeyValueDataSource> 変更事由DDL = new ArrayList<>();
-        KeyValueDataSource 広住特適用 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特適用.getCode(),
-                ShikakuHenkoJiyu.広住特適用.getName());
-        KeyValueDataSource 広住特居住 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特居住.getCode(),
-                ShikakuHenkoJiyu.広住特居住.getName());
-        KeyValueDataSource 広住特転入 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特転入.getCode(),
-                ShikakuHenkoJiyu.広住特転入.getName());
-        KeyValueDataSource 広住特転居 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特転居.getCode(),
-                ShikakuHenkoJiyu.広住特転居.getName());
+        KeyValueDataSource 広住特適用 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特適用.getコード(),
+                ShikakuHenkoJiyu.広住特適用.get名称());
+        KeyValueDataSource 広住特居住 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特居住.getコード(),
+                ShikakuHenkoJiyu.広住特居住.get名称());
+        KeyValueDataSource 広住特転入 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特転入.getコード(),
+                ShikakuHenkoJiyu.広住特転入.get名称());
+        KeyValueDataSource 広住特転居 = new KeyValueDataSource(ShikakuHenkoJiyu.広住特転居.getコード(),
+                ShikakuHenkoJiyu.広住特転居.get名称());
         変更事由DDL.add(広住特適用);
         変更事由DDL.add(広住特居住);
         変更事由DDL.add(広住特転入);
@@ -74,8 +74,8 @@ public final class ShikakuHenkoJiyuInitializer {
     public static void initializeFor合併時住特解除(ShikakuHenkoRirekiDiv div) {
         requireNonNull(div, UrSystemErrorMessages.値がnull.getReplacedMessage(資格変更履歴文字列.toString()));
         List<KeyValueDataSource> 変更事由DDL = new ArrayList<>();
-        KeyValueDataSource 合併 = new KeyValueDataSource(ShikakuHenkoJiyu.合併.getCode(),
-                ShikakuHenkoJiyu.合併.getName());
+        KeyValueDataSource 合併 = new KeyValueDataSource(ShikakuHenkoJiyu.合併.getコード(),
+                ShikakuHenkoJiyu.合併.get名称());
         変更事由DDL.add(合併);
         div.getDdlHenkoJiyu().setDataSource(変更事由DDL);
     }
@@ -90,8 +90,8 @@ public final class ShikakuHenkoJiyuInitializer {
         List<KeyValueDataSource> 変更事由DDL = new ArrayList<>();
         for (ShikakuHenkoJiyu 変更事由 : ShikakuHenkoJiyu.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(変更事由.getCode());
-            keyValue.setValue(変更事由.getName());
+            keyValue.setKey(変更事由.getコード());
+            keyValue.setValue(変更事由.get名称());
             変更事由DDL.add(keyValue);
         }
         div.getDdlHenkoJiyu().setDataSource(変更事由DDL);

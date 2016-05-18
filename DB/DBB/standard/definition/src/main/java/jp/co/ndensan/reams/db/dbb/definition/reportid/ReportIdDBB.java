@@ -320,11 +320,11 @@ public enum ReportIdDBB {
     /**
      * 介護保険料減免決定通知書A4縦タイプ帳票
      */
-    DBB100078(new ReportId("DBB100078_KaigoHokenryoGenmenKetteiTsuchishoA4Tate"), new RString("介護保険料減免決定通知書A4縦タイプ.")),
+    DBB100078(new ReportId("DBB100078_KaigoHokenHokenryoGenmenKetteiTsuchishoA4Tate"), new RString("介護保険料減免決定通知書A4縦タイプ.")),
     /**
      * 介護保険料減免決定通知書B5横タイプ
      */
-    DBB100077(new ReportId("DBB100077_KaigoHokenryoGenmenKetteiTsuchishoB5Yoko"), new RString("介護保険料減免決定通知書B5横タイプ.")),
+    DBB100077(new ReportId("DBB100077_KaigoHokenHokenryoGenmenKetteiTsuchishoB5Yoko"), new RString("介護保険料減免決定通知書B5横タイプ.")),
     /**
      * 賦課台帳（仮算定）の帳票ID
      */
@@ -332,11 +332,11 @@ public enum ReportIdDBB {
     /**
      * 介護保険料徴収猶予決定通知書B5横タイプの帳票ID
      */
-    DBB100081(new ReportId("DBB100081_KaigoHokenryoChoshuyuyoKetteiTsuchishoB5Yoko"), new RString("介護保険料徴収猶予決定通知書")),
+    DBB100081(new ReportId("DBB100081_KaigoHokenHokenryoChoshuyoyoKetteiTsuchishoB5Yoko"), new RString("介護保険料徴収猶予決定通知書")),
     /**
      * 介護保険料徴収猶予決定通知書A4縦タイプの帳票ID
      */
-    DBB100082(new ReportId("DBB100082_KaigoHokenryoChoshuyuyoKetteiTsuchishoA4Tate"), new RString("介護保険料徴収猶予決定通知書")),
+    DBB100082(new ReportId("DBB100082_KaigoHokenHokenryoChoshuyoyoKetteiTsuchishoA4Tate"), new RString("介護保険料徴収猶予決定通知書")),
     /**
      * 保険料納入通知書（本算定）の帳票ID
      */

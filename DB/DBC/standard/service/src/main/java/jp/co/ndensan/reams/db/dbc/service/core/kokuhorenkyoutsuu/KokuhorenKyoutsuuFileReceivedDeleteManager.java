@@ -2,11 +2,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
 import java.io.File;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -26,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 国保連情報取込処理共通のビジネスです。<br>
  * 国保連情報取込共通処理（取込済ファイル削除）
  *
- * @reamsid_L DBC-0980-530 zhangrui
+ * @reamsid_L DBC-0980-540 zhangrui
  */
 public class KokuhorenKyoutsuuFileReceivedDeleteManager {
 
@@ -45,10 +47,9 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
      */
     @Transaction
     public boolean deleteReceivedFile(FlexibleYearMonth 処理年月, RString 保存先フォルダ, List<SharedFileEntryDescriptor> エントリ情報List) {
-        if (エントリ情報List.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.未入力.getMessage().
-                    replace(ERROR_MESSAGE.toString()));
-        }
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
+        requireNonNull(保存先フォルダ, UrSystemErrorMessages.値がnull.getReplacedMessage("保存先フォルダ"));
+        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage("エントリ情報List"));
         for (SharedFileEntryDescriptor エントリ情報 : エントリ情報List) {
             RString ファイル名_拡張子あり = エントリ情報.getName();
             RString 拡張子 = ファイル名_拡張子あり.substring(ファイル名_拡張子あり.lastIndexOf(ドット));
@@ -74,9 +75,11 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
                 SharedFile.deleteEntry(エントリ情報);
             } catch (SystemException ex) {
                 Logger.getLogger(KokuhorenKyoutsuuInterfaceKanriKousinManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (!to.delete()) {
-                to.deleteOnExit();
+                return false;
+            } finally {
+                if (!to.delete()) {
+                    to.deleteOnExit();
+                }
             }
         }
         return true;

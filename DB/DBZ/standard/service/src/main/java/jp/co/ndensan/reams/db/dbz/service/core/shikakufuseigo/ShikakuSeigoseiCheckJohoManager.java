@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 資格不整合を管理するクラスです。
@@ -48,7 +47,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShikakuSeigoseiCheckJohoManager {
 
     private final MapperProvider mapperProvider;
-    private final IShikakuFuseigoMapper mapper;
     private final SeigoseiCheckManager dbt1014manager;
     private final HihokenshaDaichoManager dbt1001manager;
     private final TekiyoJogaishaManager dbt1002manager;
@@ -61,7 +59,6 @@ public class ShikakuSeigoseiCheckJohoManager {
      */
     ShikakuSeigoseiCheckJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.mapper = mapperProvider.create(IShikakuFuseigoMapper.class);
         this.dbt1014manager = SeigoseiCheckManager.createInstance();
         this.dbt1001manager = HihokenshaDaichoManager.createInstance();
         this.dbt1002manager = TekiyoJogaishaManager.createInstance();
@@ -84,14 +81,13 @@ public class ShikakuSeigoseiCheckJohoManager {
      *
      * @return SearchResult<SeigoseiCheckBusiness> 資格不整合一覧情報を取得する。
      */
-    @Transaction
     public SearchResult<ShikakuFuseigoBusiness> get被保険者資格不整合一覧() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         ShikakuFuseigoMybatisParameter param
                 = new ShikakuFuseigoMybatisParameter(new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
-        List<ShikakuFuseigoEntity> entityList = mapper.get被保険者資格不整合一覧(param);
+        List<ShikakuFuseigoEntity> entityList = mapperProvider.create(IShikakuFuseigoMapper.class).get被保険者資格不整合一覧(param);
         if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShikakuFuseigoBusiness>emptyList(), 0, false);
         }
@@ -193,6 +189,7 @@ public class ShikakuSeigoseiCheckJohoManager {
 
     private HihokenshaDaicho set資格の情報(HihokenshaDaicho 資格の情報修正前, HihokenshaDaicho 資格の情報修正後) {
         HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
+        資格の情報修正後Builder.set異動事由コード(資格の情報修正前.get異動事由コード());
         資格の情報修正後Builder.set市町村コード(資格の情報修正前.get市町村コード());
         資格の情報修正後Builder.set識別コード(資格の情報修正前.get識別コード());
         資格の情報修正後Builder.set被保険者区分コード(資格の情報修正前.get被保険者区分コード());

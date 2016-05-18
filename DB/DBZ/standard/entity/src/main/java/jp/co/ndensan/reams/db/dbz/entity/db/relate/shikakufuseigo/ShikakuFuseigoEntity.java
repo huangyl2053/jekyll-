@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakufuseigo;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1014SeigoseiCheckEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShikakuFuseigoEntity {
+public class ShikakuFuseigoEntity implements Serializable {
 
     private UaFt200FindShikibetsuTaishoEntity ft200Entity;
     private DbT1014SeigoseiCheckEntity dbt1014Entity;

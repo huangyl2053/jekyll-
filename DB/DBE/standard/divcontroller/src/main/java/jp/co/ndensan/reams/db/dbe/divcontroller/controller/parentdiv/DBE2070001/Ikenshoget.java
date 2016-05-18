@@ -78,11 +78,6 @@ public class Ikenshoget {
             主治医意見書入手一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -96,7 +91,7 @@ public class Ikenshoget {
     public IDownLoadServletResponse onClick_btnOutputCsv(IkenshogetDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
@@ -206,7 +201,7 @@ public class Ikenshoget {
 
     private boolean get完了条件(dgNinteiTaskList_Row row) {
         RDate 意見書_定型_定形外 = row.getIkenshoNyushuTeikei().getValue();
-        return 意見書_定型_定形外 != null && IkenshogetManager.createInstance().完了処理事前チェック(row.getShinseishoKanriNo());
+        return 意見書_定型_定形外 == null || IkenshogetManager.createInstance().完了処理事前チェック(row.getShinseishoKanriNo());
     }
 
     private IkenshoNyushuCsvEntity getCsvData(dgNinteiTaskList_Row row) {

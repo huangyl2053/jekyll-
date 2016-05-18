@@ -102,23 +102,13 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnikenshoiraitaishooutput() {
+    public ButtonDownLoad getBtnikenshoiraitaishooutput() {
         return this.getIkenshoiraiselect().getBtnikenshoiraitaishooutput();
     }
 
     @JsonIgnore
-    public void  setBtnikenshoiraitaishooutput(Button btnikenshoiraitaishooutput) {
+    public void  setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
         this.getIkenshoiraiselect().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
-    }
-
-    @JsonIgnore
-    public ButtonDownLoad getCSVButtonDownLoad() {
-        return this.getIkenshoiraiselect().getCSVButtonDownLoad();
-    }
-
-    @JsonIgnore
-    public void  setCSVButtonDownLoad(ButtonDownLoad CSVButtonDownLoad) {
-        this.getIkenshoiraiselect().setCSVButtonDownLoad(CSVButtonDownLoad);
     }
 
     @JsonIgnore

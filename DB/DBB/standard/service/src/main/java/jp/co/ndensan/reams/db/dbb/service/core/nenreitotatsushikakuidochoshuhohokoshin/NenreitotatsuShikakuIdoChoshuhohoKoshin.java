@@ -6,23 +6,19 @@
 package jp.co.ndensan.reams.db.dbb.service.core.nenreitotatsushikakuidochoshuhohokoshin;
 
 import java.util.List;
-
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
-
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -91,8 +87,7 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     /**
      * 初期化メソッドです。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
      */
     public static NenreitotatsuShikakuIdoChoshuhohoKoshin createInstance() {
         return InstanceProvider.create(NenreitotatsuShikakuIdoChoshuhohoKoshin.class);
@@ -101,15 +96,15 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     /**
      * 徴収方法テーブル更新
      *
+     * @param 徴収方法の情報 ChoshuHoho
      */
     @Transaction
-    public void upd徴収方法テーブル更新() {
-        ChoshuHoho 徴収方法の情報 = upd徴収方法更新();
+    public void upd徴収方法テーブル更新(ChoshuHoho 徴収方法の情報) {
         DbT2001ChoshuHohoDac 徴収方法Dac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
         DbT2001ChoshuHohoEntity entity = new DbT2001ChoshuHohoEntity();
         entity.setFukaNendo(徴収方法の情報.toEntity().getFukaNendo());
         entity.setHihokenshaNo(徴収方法の情報.toEntity().getHihokenshaNo());
-        entity.setRirekiNo(徴収方法の情報.toEntity().getRirekiNo());
+        entity.setRirekiNo(徴収方法の情報.toEntity().getRirekiNo() + 1);
         entity.setChoshuHoho4gatsu(徴収方法の情報.toEntity().getChoshuHoho4gatsu());
         entity.setChoshuHoho5gatsu(徴収方法の情報.toEntity().getChoshuHoho5gatsu());
         entity.setChoshuHoho6gatsu(徴収方法の情報.toEntity().getChoshuHoho6gatsu());
@@ -143,20 +138,18 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
         entity.setTokuchoTeishiJiyuCode(徴収方法の情報.toEntity().getTokuchoTeishiJiyuCode());
         entity.setState(EntityDataState.Added);
         徴収方法Dac.save(entity);
-
     }
 
     /**
      * 徴収方法更新
      *
-     * @return ChoshuHoho choshuHoho
+     * @param entity DbV2001ChoshuHohoEntity
+     * @param daichoEntity DbT1001HihokenshaDaichoEntity
+     * @return ChoshuHoho
      */
     @Transaction
-    public ChoshuHoho upd徴収方法更新() {
-        DbV2001ChoshuHohoEntity entity = select被保険者徴収方法情報の取得();
+    public ChoshuHoho upd徴収方法更新(DbV2001ChoshuHohoEntity entity, DbT1001HihokenshaDaichoEntity daichoEntity) {
         DbT2001ChoshuHohoEntity dbTEntity = new DbT2001ChoshuHohoEntity();
-        DbT1001HihokenshaDaichoEntity daichoEntity = select被保険者番号();
-
         FlexibleYear fukaNendo = entity.getFukaNendo();
         HihokenshaNo hihokenshaNo = entity.getHihokenshaNo();
         if (fukaNendo != null) {
@@ -201,7 +194,7 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
         ChoshuHoho 徴収方法の情報 = new ChoshuHoho(dbTEntity);
         FlexibleDate 資格取得日 = daichoEntity.getIchigoShikakuShutokuYMD();
         YMDHMS 特別徴収停止日時 = new YMDHMS("");
-        FlexibleDate 資格喪失日 = new FlexibleDate("");
+        FlexibleDate 資格喪失日 = FlexibleDate.EMPTY;
         ChoshuHoho choshuHoho = choshuHohoKoshin.getChoshuHohoKoshinData(徴収方法の情報, 特別徴収停止日時, 資格取得日, 資格喪失日);
 
         return choshuHoho;
@@ -210,18 +203,16 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     /**
      * 被保険者徴収方法情報の取得
      *
-     * @return DbV2001ChoshuHohoEntity entity
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbV2001ChoshuHohoEntity
      */
     @Transaction
-    public DbV2001ChoshuHohoEntity select被保険者徴収方法情報の取得() {
-        DbT1001HihokenshaDaichoEntity daichoEntity = select被保険者番号();
+    public DbV2001ChoshuHohoEntity select被保険者徴収方法情報の取得(HihokenshaNo 被保険者番号) {
         RString nendo = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        FlexibleYear 賦課年度 = null;
+        FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
         if (nendo != null && !nendo.isEmpty()) {
             賦課年度 = new FlexibleYear(nendo.toString());
-            //賦課年度 = new FlexibleYear("2015");
         }
-        HihokenshaNo 被保険者番号 = daichoEntity.getHihokenshaNo();
         DbV2001ChoshuHohoEntity entity = choshuHohoAliveDac.selectChoshuhohonojohoAll(賦課年度, 被保険者番号);
 
         return entity;
@@ -230,11 +221,11 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     /**
      * 被保険者番号の取得
      *
-     * @return DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity
+     * @param entity DbT7022ShoriDateKanriEntity
+     * @return DbT1001HihokenshaDaichoEntity
      */
     @Transaction
-    public DbT1001HihokenshaDaichoEntity select被保険者番号() {
-        DbT7022ShoriDateKanriEntity entity = select年齢到達の異動被保険者取得();
+    public DbT1001HihokenshaDaichoEntity select被保険者番号(DbT7022ShoriDateKanriEntity entity) {
         RString 被保険者区分コード = ShikakuKubun._１号.getコード();
         FlexibleDate 対象開始年月日 = entity.getTaishoKaishiYMD();
         FlexibleDate 対象終了年月日 = entity.getTaishoShuryoYMD();
@@ -259,7 +250,7 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
      * @return DbT7022ShoriDateKanriEntity shoriDateKanriEntity
      */
     @Transaction
-    private DbT7022ShoriDateKanriEntity select年齢到達の異動被保険者取得() {
+    public DbT7022ShoriDateKanriEntity select年齢到達の異動被保険者取得() {
         DbT7022ShoriDateKanriEntity shoriDateKanriEntity = shoriDateKanriDac.selectByKey(サブ業務コード,
                 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
         return shoriDateKanriEntity;

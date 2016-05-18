@@ -86,9 +86,12 @@ public class ShisetsutourukuPanelHandler {
             KaigoJogaiTokureiTaishoShisetsu business = list.get(0);
             div.getTxtShisetsuYukoKaishiYMD().setValue(business.get有効開始年月日());
             div.getTxtShisetsuYukoShuryoYMD().setValue(business.get有効終了年月日());
-            div.getRadShisetsuKannaiKangaiKubun().setSelectedKey(business.get管内_管外区分());
+            if (!RString.isNullOrEmpty(business.get管内_管外区分())) {
+                div.getRadShisetsuKannaiKangaiKubun().setSelectedKey(business.get管内_管外区分());
+            }
             div.getTxtShisetsuJigyoshaNo().setValue(business.get事業者番号());
-            div.getTxtShisetsuJigyoshaName().setValue(business.get事業者名称().value());
+            div.getTxtShisetsuJigyoshaName().setValue(business.get事業者名称() == null
+                    ? RString.EMPTY : business.get事業者名称().value());
             div.getTxtShisetsuJigyoshaNameKana().setValue(business.get事業者名称カナ() == null
                     ? RString.EMPTY : business.get事業者名称カナ().value());
             div.getTxtShisetsuJigyoKaishiYMD().setValue(business.get事業開始年月日());

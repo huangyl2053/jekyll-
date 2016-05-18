@@ -140,7 +140,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
         }
         // TODO 介護地区・市町村選択共有子Divを呼び出す
         return new CreateTsukibetsuSuiihyoBatchParameter(調定年度, 調定基準日.toRString(), div.getDdShikakuKijunD().getSelectedKey(), is年齢, nullToEmpty(div.getTxtNenreiSt().getValue()),
-                nullToEmpty(div.getTxtNenreiSt().getValue()), nullToEmpty(div.getTxtNenreiKijunYMD().getValue()), is生年月日,
+                nullToEmpty(div.getTxtNenreiEd().getValue()), nullToEmpty(div.getTxtNenreiKijunYMD().getValue()), is生年月日,
                 nullToEmpt(div.getTxtUmareSt().getValue()), nullToEmpt(div.getTxtUmareEd().getValue()),
                 RString.EMPTY, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }

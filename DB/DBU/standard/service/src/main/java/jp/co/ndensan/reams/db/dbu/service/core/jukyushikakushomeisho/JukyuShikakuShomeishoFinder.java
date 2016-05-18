@@ -78,14 +78,21 @@ public class JukyuShikakuShomeishoFinder {
     private final RString 年号_星 = new RString("＊");
 
     private final MapperProvider mapperProvider;
-    private final IJukyuShikakuShomeishoMapper mapper;
 
     /**
      * コンストラクタです。
      */
     public JukyuShikakuShomeishoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.mapper = mapperProvider.create(IJukyuShikakuShomeishoMapper.class);
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link JukyuShikakuShomeishoFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link JukyuShikakuShomeishoFinder}のインスタンス
+     */
+    public static JukyuShikakuShomeishoFinder createInstance() {
+        return InstanceProvider.create(JukyuShikakuShomeishoFinder.class);
     }
 
     /**
@@ -148,6 +155,7 @@ public class JukyuShikakuShomeishoFinder {
 
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.getPSM検索キー();
         JukyuShikakuShomeishoMyBatisParameter searchKey = new JukyuShikakuShomeishoMyBatisParameter(shikibetsuTaishoPSMSearchKey);
+        IJukyuShikakuShomeishoMapper mapper = mapperProvider.create(IJukyuShikakuShomeishoMapper.class);
         UaFt200FindShikibetsuTaishoEntity 宛名識別対象PSM = mapper.get宛名識別対象PSM(searchKey);
         if (null == 宛名識別対象PSM) {
             return;

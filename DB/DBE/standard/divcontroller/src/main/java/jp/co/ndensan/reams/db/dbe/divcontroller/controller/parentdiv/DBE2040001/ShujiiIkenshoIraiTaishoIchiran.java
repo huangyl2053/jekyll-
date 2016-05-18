@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTask
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -53,7 +54,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
-     * 完了処理・主治医意見書入手の初期化。(オンロード)<br/>
+     * 完了処理・主治医意見書依頼の初期化。(オンロード)<br/>
      *
      * @param div ShujiiIkenshoIraiTaishoIchiranDiv
      * @return レスポンスデータ
@@ -79,11 +80,6 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -97,7 +93,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     public IDownLoadServletResponse onClick_btnOutputCsv(ShujiiIkenshoIraiTaishoIchiranDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<ShujiiIkenshoIraiCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
@@ -249,11 +245,18 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 row.getKonkaiShujii(),
                 row.getZenkaiIryokikan(),
                 row.getZenkaiShujii(),
-                row.getYubinNumber(),
+                郵便番号編集(row.getYubinNumber()),
                 row.getJusho(),
                 row.getNyushoShisetsuCode(),
                 row.getNyushoShisetsu(),
                 RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()));
+    }
+
+    private RString 郵便番号編集(RString 郵便番号) {
+        if (!RString.isNullOrEmpty(郵便番号)) {
+            return new YubinNo(郵便番号).getEditedYubinNo();
+        }
+        return RString.EMPTY;
     }
 
     private RString getコード(RString 名称, int kubun) {

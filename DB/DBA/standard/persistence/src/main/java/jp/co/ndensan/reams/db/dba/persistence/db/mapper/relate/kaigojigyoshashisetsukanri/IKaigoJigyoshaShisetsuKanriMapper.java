@@ -4,6 +4,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJigyoshaShisetsuKanriMapperParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.JigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.K
 public interface IKaigoJigyoshaShisetsuKanriMapper {
 
     /**
-     * 事業者情報取得を取得します。
+     * 事業者情報を取得します。
      *
      * @param parameter KaigoJigyoshaShisetsuKanriMapperParameter
      * @return 事業者情報取得
@@ -25,7 +26,15 @@ public interface IKaigoJigyoshaShisetsuKanriMapper {
     List<KaigoJigyoshaEntity> getJigyoshaJoho(KaigoJigyoshaShisetsuKanriMapperParameter parameter);
 
     /**
-     * サービス一覧情報取得を取得します。
+     * サービス一覧表示情報を取得します。
+     *
+     * @param parameter KaigoJigyoshaShisetsuKanriMapperParameter
+     * @return サービス一覧表示情報取得
+     */
+    List<JigyoshaShiteiServiceEntity> getServiceItiranHyojiJoho(KaigoJogaiTokureiParameter parameter);
+    
+    /**
+     * サービス一覧情報を取得します。
      *
      * @param parameter KaigoJigyoshaShisetsuKanriMapperParameter
      * @return サービス一覧情報取得

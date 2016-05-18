@@ -321,7 +321,8 @@ public class DbT7051KoseiShichosonMasterDac {
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(gappeiKyuShichosonKubun, "0"))).
+                                eq(gappeiKyuShichosonKubun, "0")))
+                .limit(1).
                 toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 

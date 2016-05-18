@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDivHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -33,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 住宅改修費事前申請登録完了画面です。
@@ -67,18 +70,11 @@ public class JutakuKaishuJizenShinseiToroku {
             ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         }
 
-        // TODO ダミー値を設定する。
-//        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("800000008"));
-//        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-//        ViewStateHolder.put(ViewStateKeys.整理番号, new RString("0000000001"));
-//        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth("201604"));
         被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getKaigoShikakuKihonShaPanel().getCcdKaigoShikakuKihon().onLoad(識別コード);
 
-        // TODO 単体テスト
-//        ViewStateHolder.put(ViewStateKeys.処理モード, new RString("修正"));
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (state != null) {
@@ -487,6 +483,64 @@ public class JutakuKaishuJizenShinseiToroku {
                 throw new ApplicationException(DbzQuestionMessages.内容変更なし処理中止確認.getMessage().evaluate());
             }
         }
+    }
+
+    /**
+     * 「申請事業者参考」ボタンを押した後のメソッドです。
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onBeforeOpenDialog_btnJigyosha(
+            JutakuKaishuJizenShinseiTorokuDiv div) {
+        JigyoshaMode jigyoshaMode = new JigyoshaMode();
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「事業者・施設選択入力ガイド」ダイアログのOKボタンを押した後のメソッドです。
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onOkClose_btnJigyosha(
+            JutakuKaishuJizenShinseiTorokuDiv div) {
+        JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
+        div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtJigyoshaNo().setValue(jigyoshaMode
+                .getJigyoshaNo().value());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「作成事業者参考」ボタンを押した後のメソッドです。
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onBeforeOpenDialog_btnSakuSeiJigyosha(
+            JutakuKaishuJizenShinseiTorokuDiv div) {
+        JigyoshaMode jigyoshaMode = new JigyoshaMode();
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「事業者・施設選択入力ガイド」ダイアログのOKボタンを押した後のメソッドです。
+     *
+     * @param div JutakuKaishuJizenShinseiTorokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiTorokuDiv> onOkClose_btnSakuSeiJigyosha(
+            JutakuKaishuJizenShinseiTorokuDiv div) {
+        JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.getJigyoshaMode(), JigyoshaMode.class);
+        div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaNo()
+                .setValue(jigyoshaMode.getJigyoshaNo().value());
+        div.getKaigoShikakuKihonShaPanel().getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName()
+                .setValue(jigyoshaMode.getJigyoshaName().value());
+        return ResponseData.of(div).respond();
     }
 
     /**

@@ -4,22 +4,17 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0520011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 
 /**
- * KyokaisoKariParam のクラスファイル
- *
- * @reamsid_L DBU-1050-010 wanghui
+ * KyokaisoKariParam のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KyokaisoKariParamDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,6 +31,8 @@ public class KyokaisoKariParamDiv extends Panel {
     private RadioButton radHani;
     @JsonProperty("radHaniRadio")
     private RadioButton radHaniRadio;
+    @JsonProperty("Space1")
+    private Space Space1;
     @JsonProperty("txtHaniChushutsu")
     private TextBoxDateRange txtHaniChushutsu;
     @JsonProperty("radShiteiNashi")
@@ -135,6 +132,24 @@ public class KyokaisoKariParamDiv extends Panel {
     @JsonProperty("radHaniRadio")
     public void setRadHaniRadio(RadioButton radHaniRadio) {
         this.radHaniRadio = radHaniRadio;
+    }
+
+    /*
+     * getSpace1
+     * @return Space1
+     */
+    @JsonProperty("Space1")
+    public Space getSpace1() {
+        return Space1;
+    }
+
+    /*
+     * setSpace1
+     * @param Space1 Space1
+     */
+    @JsonProperty("Space1")
+    public void setSpace1(Space Space1) {
+        this.Space1 = Space1;
     }
 
     /*

@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
@@ -55,15 +54,14 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
      * @param 徴収猶予決定通知書情報 徴収猶予決定通知書情報
      * @param 通知書定型文 通知書定型文
      * @param 介護問合せ先ソースビルダー 介護問合せ先ソースビルダー
-     * @return SourceDataCollection
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection printB5横タイプ(RDate 発行日, RString 文書番号,
+    public void printB5横タイプ(RDate 発行日, RString 文書番号,
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
-
-        KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty property
-                = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, ReportManager reportManager) {
+        if (徴収猶予決定通知書情報 != null) {
+            KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty property
+                    = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty();
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, B5種別コード);
@@ -82,7 +80,6 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
                     report.writeBy(reportSourceWriter);
                 }
             }
-            return reportManager.publish();
         }
     }
 
@@ -94,15 +91,14 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
      * @param 徴収猶予決定通知書情報 徴収猶予決定通知書情報
      * @param 通知書定型文 通知書定型文
      * @param 介護問合せ先ソースビルダー 介護問合せ先ソースビルダー
-     * @return SourceDataCollection
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection printA4縦タイプ(RDate 発行日, RString 文書番号,
+    public void printA4縦タイプ(RDate 発行日, RString 文書番号,
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
-
-        KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty property
-                = new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty();
-        try (ReportManager reportManager = new ReportManager()) {
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, ReportManager reportManager) {
+        if (徴収猶予決定通知書情報 != null) {
+            KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty property
+                    = new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty();
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, A4種別コード);
@@ -121,9 +117,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
                     report.writeBy(reportSourceWriter);
                 }
             }
-            return reportManager.publish();
         }
-
     }
 
     private HyojiCodes get表示コード(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報) {

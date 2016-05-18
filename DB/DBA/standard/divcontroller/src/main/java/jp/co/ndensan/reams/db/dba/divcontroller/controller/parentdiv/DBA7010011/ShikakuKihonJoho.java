@@ -96,19 +96,6 @@ public class ShikakuKihonJoho {
     }
 
     /**
-     * 前回番号取得ボタン。
-     *
-     * @param div ShikakuKihonJohoDiv
-     * @return ResponseData<ShikakuKihonJohoDiv>
-     */
-    public ResponseData<ShikakuKihonJohoDiv> onClick_btnZenkaiBango(ShikakuKihonJohoDiv div) {
-
-        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
-        div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().setValue(文書番号取得);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 自動付番ボタン。
      *
      * @param div ShikakuKihonJohoDiv

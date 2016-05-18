@@ -56,7 +56,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class JutakuKaishuhiShikyuShinseiPanel {
 
-    private static final RString 検索 = new RString("検索モード");
+    private static final RString 検索 = new RString("申請審査");
     private static final RString 審査 = new RString("審査モード");
     private static final RString 保存パターン = new RString("btnSave");
     private static final RString 却下する = new RString("却下する");
@@ -70,7 +70,7 @@ public class JutakuKaishuhiShikyuShinseiPanel {
      * @return ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv>
      */
     public ResponseData<JutakuKaishuhiShikyuShinseiPanelDiv> onLoad(JutakuKaishuhiShikyuShinseiPanelDiv div) {
-        if (検索.equals(ViewStateHolder.get(ViewStateKeys.表示モード, RString.class))) {
+        if (検索.equals(ResponseHolder.getState())) {
             div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD().setValue(RDate.getNowDate());
             RDate 支給申請日開始 = ViewStateHolder.get(ViewStateKeys.支給申請日_FROM, RDate.class);
             RDate 支給申請日終了 = ViewStateHolder.get(ViewStateKeys.支給申請日_TO, RDate.class);

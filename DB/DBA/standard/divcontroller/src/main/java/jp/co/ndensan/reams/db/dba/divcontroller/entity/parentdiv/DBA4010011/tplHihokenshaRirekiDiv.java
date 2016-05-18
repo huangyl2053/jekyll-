@@ -22,8 +22,8 @@ public class tplHihokenshaRirekiDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdShikakuTokusoRireki")
-    private ShikakuTokusoRirekiDiv ccdShikakuTokusoRireki;
+    @JsonProperty("ccdShisetsuTokusoRireki")
+    private ShikakuTokusoRirekiDiv ccdShisetsuTokusoRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,12 +32,12 @@ public class tplHihokenshaRirekiDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdShikakuTokusoRireki
-     * @return ccdShikakuTokusoRireki
+     * getccdShisetsuTokusoRireki
+     * @return ccdShisetsuTokusoRireki
      */
-    @JsonProperty("ccdShikakuTokusoRireki")
-    public IShikakuTokusoRirekiDiv getCcdShikakuTokusoRireki() {
-        return ccdShikakuTokusoRireki;
+    @JsonProperty("ccdShisetsuTokusoRireki")
+    public IShikakuTokusoRirekiDiv getCcdShisetsuTokusoRireki() {
+        return ccdShisetsuTokusoRireki;
     }
 
     // </editor-fold>

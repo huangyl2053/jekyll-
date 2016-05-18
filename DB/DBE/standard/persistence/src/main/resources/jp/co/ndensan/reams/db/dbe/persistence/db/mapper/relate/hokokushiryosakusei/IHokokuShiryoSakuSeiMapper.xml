@@ -544,6 +544,126 @@
         </if>
     </select>
 
+    <select id="getJotaikubumbetsuhanteiHeader"
+            resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter"
+            fetchSize="500">
+        SELECT A."gogitaiNo"
+        ,E."gogitaiMei"
+        ,F."shichosonCode"
+        ,F."shichosonMeisho"
+        <if test="isShinseiji">
+            ,C."ninteiShinseiShinseijiKubunCode"
+        </if>
+        <if test="isHorei">
+            ,C."ninteiShinseiHoreiKubunCode"
+        </if>
+        ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
+        ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
+        ,COUNT(A."shinsakaiKaisaiNo") AS shinsakaiKaisaiNoCount
+        FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
+        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
+        ON A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"
+        LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" C
+        ON B."shinseishoKanriNo" = C."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" D
+        ON D."shinseishoKanriNo" = C."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5591GogitaiJoho" E
+        ON A."gogitaiNo" = E."gogitaiNo"
+        AND E."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> TO_CHAR(NOW(), 'YYYYMMDD')
+        AND TO_CHAR(NOW(), 'YYYYMMDD') <![CDATA[<=]]> E."gogitaiYukoKikanShuryoYMD"
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        ON C."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
+        WHERE D."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND D."ninteichosaKanryoYMD" IS NOT NULL
+        AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND D."ichijiHanteiKanryoYMD" IS NOT NULL
+        AND D."maskingKanryoYMD" IS NOT NULL
+        AND D."ninteichosaKanryoYMD" IS NOT NULL
+        <if test="!isEmptyHokensyaNo">
+            AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
+        </if>
+        <choose>
+            <when test="hihokenshaKubun=='0'">
+                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            </when>
+            <when test="hihokenshaKubun=='1'">
+                AND C."hihokenshaKubunCode" = '1'
+            </when>
+            <when test="hihokenshaKubun=='2'">
+                AND C."hihokenshaKubunCode" = '2'
+            </when>
+            <when test="hihokenshaKubun=='3'">
+                AND C."hihokenshaKubunCode" = '3'
+            </when>
+            <when test="hihokenshaKubun=='4'">
+                AND C."hihokenshaKubunCode" IN ('1', '2')
+            </when>
+            <when test="hihokenshaKubun=='5'">
+                AND C."hihokenshaKubunCode" IN ('1', '3')
+            </when>
+            <when test="hihokenshaKubun=='6'">
+                AND C."hihokenshaKubunCode" IN ('2', '3')
+            </when>
+        </choose>
+        <choose>
+            <when test="isTaishoTsukiKubun">
+                <if test="!isTaishoGeppiKubun">
+                    AND SUBSTR(A."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
+                </if>
+            </when>
+            <otherwise>
+                <if test="isTaishoGeppiKubun">
+                    <choose>
+                        <when test="!isEmptyTaishoGeppiFrom">
+                            <choose>
+                                <when test="!isEmptyTaishoGeppiTo">
+                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
+                                    AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                </when>
+                                <otherwise>
+                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
+                                </otherwise>
+                            </choose>
+                        </when>
+                        <otherwise>
+                            AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        </otherwise>
+                    </choose>
+                </if>
+            </otherwise>
+        </choose>
+        <if test="!isEmptyGogitaiNo">
+            AND A."gogitaiNo" = #{gogitaiNo}
+        </if>
+        <if test="isShinseiji">
+            AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+        </if>
+        <if test="isHorei">
+            AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+        </if>
+        GROUP BY
+        A."gogitaiNo"
+        ,E."gogitaiMei"
+        ,F."shichosonCode"
+        ,F."shichosonMeisho"
+        <if test="isShinseiji">
+            ,C."ninteiShinseiShinseijiKubunCode"
+        </if>
+        <if test="isHorei">
+            ,C."ninteiShinseiHoreiKubunCode"
+        </if>
+        ORDER BY
+        A."gogitaiNo"
+        ,F."shichosonCode"
+        <if test="isShinseiji">
+            ,C."ninteiShinseiShinseijiKubunCode"
+        </if>
+        <if test="isHorei">
+            ,C."ninteiShinseiHoreiKubunCode"
+        </if>
+    </select>
+
     <resultMap id="hokokushiryosakusei_JisshiJokyoTokei"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity"
                autoMapping="true">

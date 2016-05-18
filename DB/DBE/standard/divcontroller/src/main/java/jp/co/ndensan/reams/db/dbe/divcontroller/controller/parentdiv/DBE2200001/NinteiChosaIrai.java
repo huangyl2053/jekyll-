@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2200001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKanryoJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
@@ -32,6 +30,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;

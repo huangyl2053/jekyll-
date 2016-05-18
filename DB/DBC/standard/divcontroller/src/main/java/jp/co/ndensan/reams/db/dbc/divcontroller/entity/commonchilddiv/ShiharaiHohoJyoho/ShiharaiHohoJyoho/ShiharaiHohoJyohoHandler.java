@@ -69,6 +69,8 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 高額合算支給申請11 = new RString("DBCMN61011");
     private final RString 高額合算支給申請12 = new RString("DBCMN61012");
     private final RString 高額合算支給決定情報補正 = new RString("DBCMN62004");
+    private final RString 曜日_日 = new RString("日曜");
+    private final RString 曜日_土 = new RString("土曜");
     private final ShiharaiHohoJyohoDiv div;
 
     /**
@@ -294,11 +296,13 @@ public class ShiharaiHohoJyohoHandler {
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
         div.getTxtTenban().setReadOnly(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     private void 償還払給付または高額給付の登録モード_口座払いエリアの状態処理() {
@@ -351,6 +355,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
+        div.getTxtTenban1().setReadOnly(true);
         div.getTxtKinyuKikanName1().setReadOnly(true);
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
@@ -381,6 +386,9 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtMeigininKana1().setReadOnly(true);
             div.getTxtMeigininKanji1().setReadOnly(true);
         }
+        div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
+        div.getTxtTenban1().setReadOnly(true);
+        div.getTxtYokinShubetsu1().setReadOnly(true);
     }
 
     private void 償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理() {
@@ -467,7 +475,7 @@ public class ShiharaiHohoJyohoHandler {
 
         if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
 
-            div.getDdlKozaID().setReadOnly(true);
+            div.getDdlKozaID().setReadOnly(false);
             div.getBtnKozaToroku().setDisabled(false);
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
@@ -484,6 +492,9 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtTenban().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
     private void 高額合算の修正モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
@@ -526,12 +537,16 @@ public class ShiharaiHohoJyohoHandler {
         if (支給申請情報.getStartYMD() != null) {
 
             div.getTxtStartYMD().setValue(支給申請情報.getStartYMD());
-            div.getTxtStartYobi().setValue(new RString(支給申請情報.getStartYMD().getDayOfWeek().getMiddleTerm()));
+            RString 曜日 = new RString(支給申請情報.getStartYMD().getDayOfWeek().getMiddleTerm());
+            開始日_曜日の表示色(曜日);
+            div.getTxtStartYobi().setValue(曜日);
         }
         if (支給申請情報.getEndYMD() != null) {
 
             div.getTxtEndYMD().setValue(支給申請情報.getEndYMD());
-            div.getTxtEndYobi().setValue(new RString(支給申請情報.getEndYMD().getDayOfWeek().getMiddleTerm()));
+            RString 曜日 = new RString(支給申請情報.getEndYMD().getDayOfWeek().getMiddleTerm());
+            終了日_曜日の表示色(曜日);
+            div.getTxtEndYobi().setValue(曜日);
         }
         if (支給申請情報.getStartHHMM() != null) {
 
@@ -561,10 +576,10 @@ public class ShiharaiHohoJyohoHandler {
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     new KinyuKikanShitenCode(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番()));
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
-            div.getTxtTenban().setVisible(true);
+            div.getTxtTenban().setDisplayNone(false);
             div.getTxtTenban().setValue(口座情報.get店番() == null ? RString.EMPTY : 口座情報.get店番());
-            div.getTxtKinyuKikanShitenCode().setVisible(false);
-            div.getTxtYokinShubetsu().setVisible(false);
+            div.getTxtKinyuKikanShitenCode().setDisplayNone(true);
+            div.getTxtYokinShubetsu().setDisplayNone(true);
         } else {
             KinyuKikan kinyuKikan = 金融機関コードに対する名称(口座情報.get金融機関コード() == null
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード());
@@ -572,9 +587,9 @@ public class ShiharaiHohoJyohoHandler {
                     ? KinyuKikanCode.EMPTY : 口座情報.get金融機関コード(),
                     口座情報.get支店コード() == null ? KinyuKikanShitenCode.EMPTY : 口座情報.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
-            div.getTxtKinyuKikanShitenCode().setVisible(true);
-            div.getTxtYokinShubetsu().setVisible(true);
-            div.getTxtTenban().setVisible(false);
+            div.getTxtKinyuKikanShitenCode().setDisplayNone(false);
+            div.getTxtYokinShubetsu().setDisplayNone(false);
+            div.getTxtTenban().setDisplayNone(true);
         }
         UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(口座情報.get預金種別()));
         if (uzT0007CodeBusiness != null) {
@@ -612,15 +627,15 @@ public class ShiharaiHohoJyohoHandler {
         KinyuKikanCode 金融機関コード = 受領委任契約事業者.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 受領委任契約事業者.get金融機関コード();
         if (ゆうちょ銀行.equals(金融機関コード.value())) {
-            div.getTxtKinyuKikanShitenCode1().setVisible(false);
-            div.getTxtYokinShubetsu1().setVisible(false);
-            div.getTxtTenban1().setVisible(true);
+            div.getTxtKinyuKikanShitenCode1().setDisplayNone(true);
+            div.getTxtYokinShubetsu1().setDisplayNone(true);
+            div.getTxtTenban1().setDisplayNone(false);
             div.getTxtTenban1().setValue(受領委任契約事業者.get支店コード() == null ? RString.EMPTY : 受領委任契約事業者.get支店コード().value());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         } else {
-            div.getTxtKinyuKikanShitenCode1().setVisible(true);
-            div.getTxtYokinShubetsu1().setVisible(true);
-            div.getTxtTenban1().setVisible(false);
+            div.getTxtKinyuKikanShitenCode1().setDisplayNone(false);
+            div.getTxtYokinShubetsu1().setDisplayNone(false);
+            div.getTxtTenban1().setDisplayNone(true);
             div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         }
@@ -686,6 +701,38 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtStartYobi().setReadOnly(true);
         div.getTxtStartHHMM().setReadOnly(false);
         div.getTxtEndHHMM().setReadOnly(false);
+    }
+
+    /**
+     * 曜日の表示色を表示します。
+     *
+     * @param 曜日 RString
+     */
+    public void 開始日_曜日の表示色(RString 曜日) {
+
+        if (曜日_日.equals(曜日)) {
+            div.getTxtStartYobi().setDecorationClass(new RString("DBCFontcolor_red"));
+        } else if (曜日_土.equals(曜日)) {
+            div.getTxtStartYobi().setDecorationClass(new RString("DBCFontcolor_green"));
+        } else {
+            div.getTxtStartYobi().setDecorationClass(new RString("DBCFontcolor_black"));
+        }
+    }
+
+    /**
+     * 曜日の表示色を表示します。
+     *
+     * @param 曜日 RString
+     */
+    public void 終了日_曜日の表示色(RString 曜日) {
+
+        if (曜日_日.equals(曜日)) {
+            div.getTxtEndYobi().setDecorationClass(new RString("DBCFontcolor_red"));
+        } else if (曜日_土.equals(曜日)) {
+            div.getTxtEndYobi().setDecorationClass(new RString("DBCFontcolor_green"));
+        } else {
+            div.getTxtEndYobi().setDecorationClass(new RString("DBCFontcolor_black"));
+        }
     }
 
     /**

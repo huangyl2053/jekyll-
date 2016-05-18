@@ -130,6 +130,7 @@ var DBC;
                     this.controls.txtKinyuKikanShitenCode1().displayNone = true;
                     this.controls.txtYokinShubetsu1().displayNone = true;
                     this.controls.txtKozaNo1().displayNone = true;
+                    this.controls.txtTenban1().displayNone = true;
                     this.controls.txtKinyuKikanName1().displayNone = true;
                     this.controls.txtMeigininKana1().displayNone = true;
                     this.controls.txtMeigininKanji1().displayNone = true;

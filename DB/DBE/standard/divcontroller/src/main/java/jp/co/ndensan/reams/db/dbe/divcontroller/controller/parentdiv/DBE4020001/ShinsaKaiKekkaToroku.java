@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -86,15 +85,7 @@ public class ShinsaKaiKekkaToroku {
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnRyooutputBoffer(ShinsaKaiKekkaTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
         ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && validation.iterator().hasNext()) {
+        if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         return ResponseData.of(div).respond();
@@ -260,9 +251,6 @@ public class ShinsaKaiKekkaToroku {
         if (!RString.isNullOrEmpty(row.getNyuryokuHoho())) {
             入力方法 = NijiHanteiKekkaInputHoho.valueOf(row.getNyuryokuHoho().toString()).getコード();
         }
-        RStringBuilder 二次判定コード = new RStringBuilder();
-        二次判定コード.append(row.getNijiHanteiYokaigoJotaiKubunCode())
-                .append(row.getKoroshoIfShikibetsuCode());
         ShinsaKaiKekkaTorokuCsvEntity data = new ShinsaKaiKekkaTorokuCsvEntity(
                 row.getShinseishoKanriNo(),
                 row.getHokensha(),
@@ -277,8 +265,7 @@ public class ShinsaKaiKekkaToroku {
                 日期転換(row.getNijihanteiKekkaToroku().getValue()),
                 入力方法,
                 row.getNyuryokuHoho(),
-                // QA:1182回答まち、
-                二次判定コード.toRString(),
+                row.getNijiHanteiYokaigoJotaiKubunCode(),
                 二次判定結果の名称(row.getKoroshoIfShikibetsuCode(), row.getNijiHanteiYokaigoJotaiKubunCode()),
                 row.getNijihanteiYukoKikan(),
                 日期転換(row.getNijihanteiShinsakaiKaisaiDay().getValue()),

@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoNoRenbanCS
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvNoRenbanDataCreate;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
@@ -143,7 +145,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
+                setEncode(Encode.UTF_8).
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.is項目名付加()).
                 build();
@@ -151,10 +153,18 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-        RString nowBreakKey = entity.get支給申請Entity().getHiHokenshaNo().value().concat(SPLIT)
-                .concat(entity.get支給申請Entity().getServiceTeikyoYM().toDateString()).concat(SPLIT)
-                .concat(entity.get支給申請Entity().getSeiriNo()).concat(SPLIT)
-                .concat(entity.get支給申請Entity().getShinseiJigyoshaNo().value());
+        RString nowBreakKey = RString.EMPTY;
+        if (entity.get支給申請Entity() != null) {
+            HihokenshaNo hihokenshaNo = entity.get支給申請Entity().getHiHokenshaNo();
+            FlexibleYearMonth serviceTeikyoYM = entity.get支給申請Entity().getServiceTeikyoYM();
+            JigyoshaNo shinseiJigyoshaNo = entity.get支給申請Entity().getShinseiJigyoshaNo();
+            if (hihokenshaNo != null && serviceTeikyoYM != null && shinseiJigyoshaNo != null) {
+                nowBreakKey = hihokenshaNo.value().concat(SPLIT)
+                        .concat(serviceTeikyoYM.toDateString()).concat(SPLIT)
+                        .concat(entity.get支給申請Entity().getSeiriNo()).concat(SPLIT)
+                        .concat(shinseiJigyoshaNo.value());
+            }
+        }
 
         if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
             preBreakKey = nowBreakKey;

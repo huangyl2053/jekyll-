@@ -59,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -99,18 +98,21 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @param 通知書定型文 RString
      * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
-     * @return SourceDataCollection
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection printA4縦タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
+    public void printA4縦タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, ReportManager reportManager) {
         GenmenKetteiTsuchiShoTateProperty property = new GenmenKetteiTsuchiShoTateProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoTateSource> assembler = createAssembler(property, reportManager)) {
+        try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoTateSource> assembler = createAssembler(property, reportManager)) {
+            if (減免決定通知書情報 != null) {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
-                        new RDate(発行日.toString())).buildSource();
+                NinshoshaSource sourceBuilder = null;
+                if (発行日 != null) {
+                    sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                            減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
+                            new RDate(発行日.toString())).buildSource();
+                }
                 int flag = INDEX_ONE;
                 List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
                         介護問合せ先ソースビルダー, sourceBuilder, flag);
@@ -118,7 +120,6 @@ public class GenmenKetteiTsuchiShoPrintService {
                         = new ReportSourceWriter(assembler);
                 GenmenKetteiTsuchiShoTateReport.createForm(targets).writeBy(reportSourceWriter);
             }
-            return reportManager.publish();
         }
     }
 
@@ -130,18 +131,21 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @param 通知書定型文 RString
      * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
-     * @return SourceDataCollection
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection printB5横タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
+    public void printB5横タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, ReportManager reportManager) {
         GenmenKetteiTsuchiShoYokoProperty property = new GenmenKetteiTsuchiShoYokoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> assembler = createAssembler(property, reportManager)) {
+        try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> assembler = createAssembler(property, reportManager)) {
+            if (減免決定通知書情報 != null) {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード1);
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
-                        new RDate(発行日.toString())).buildSource();
+                NinshoshaSource sourceBuilder = null;
+                if (発行日 != null) {
+                    sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                            減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
+                            new RDate(発行日.toString())).buildSource();
+                }
                 int flag = INDEX_TWO;
                 List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
                         介護問合せ先ソースビルダー, sourceBuilder, flag);
@@ -149,7 +153,6 @@ public class GenmenKetteiTsuchiShoPrintService {
                         = new ReportSourceWriter(assembler);
                 GenmenKetteiTsuchiShoYokoReport.createForm(targets).writeBy(reportSourceWriter);
             }
-            return reportManager.publish();
         }
     }
 
@@ -200,15 +203,17 @@ public class GenmenKetteiTsuchiShoPrintService {
     private void setBaseItem(GenmenKetteiTsuchiShoItem item, GenmenKetteiTsuchiShoJoho 減免決定通知書情報, RString 文書番号,
             RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, NinshoshaSource sourceBuilder, int flag) {
         item.set文書番号(文書番号);
-        FlexibleYear 調定年度 = 減免決定通知書情報.get減免の情報更正後().get調定年度();
-        if (調定年度 != null) {
-            item.set調定年度(調定年度.wareki().eraType(EraType.KANJI).toDateString());
+        if (減免決定通知書情報.get減免の情報更正後() != null) {
+            FlexibleYear 調定年度 = 減免決定通知書情報.get減免の情報更正後().get調定年度();
+            if (調定年度 != null) {
+                item.set調定年度(調定年度.wareki().eraType(EraType.KANJI).toDateString());
+            }
+            FlexibleYear 賦課年度 = 減免決定通知書情報.get減免の情報更正後().get賦課年度();
+            if (賦課年度 != null) {
+                item.set賦課年度(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
+            }
+            item.set決定結果(減免決定通知書情報.get減免の情報更正後().get減免状態区分());
         }
-        FlexibleYear 賦課年度 = 減免決定通知書情報.get減免の情報更正後().get賦課年度();
-        if (賦課年度 != null) {
-            item.set賦課年度(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString());
-        }
-        item.set決定結果(減免決定通知書情報.get減免の情報更正後().get減免状態区分());
         HyojiCodeResearcher researcher = new HyojiCodeResearcher();
         if (isNotNull(減免決定通知書情報.get帳票制御共通()) && isNotNull(減免決定通知書情報.get宛名())
                 && isNotNull(減免決定通知書情報.get納組情報())) {
@@ -479,6 +484,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      */
     private Decimal set特徴期別金額更正前(RString 期, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
         int index = Integer.parseInt(期.toString());
+        if (減免決定通知書情報.get賦課の情報更正前() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_ONE:
                 return 減免決定通知書情報.get賦課の情報更正前().get特徴期別金額01();
@@ -506,6 +514,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      */
     private Decimal set特徴期別金額更正後(RString 期, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
         int index = Integer.parseInt(期.toString());
+        if (減免決定通知書情報.get減免の情報更正後() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_ONE:
                 return 減免決定通知書情報.get減免の情報更正後().get特徴期別金額01();
@@ -532,6 +543,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @return Decimal
      */
     private Decimal set普徴期別金額更正前(int index, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+        if (減免決定通知書情報.get賦課の情報更正前() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_FOUR:
                 return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額01();
@@ -574,6 +588,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @return Decimal
      */
     private Decimal set普徴期別金額更正後(int index, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+        if (減免決定通知書情報.get減免の情報更正後() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_FOUR:
                 return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額01();

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import java.util.HashMap;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
@@ -24,8 +25,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.idojiyu.JukiIdoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -35,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShikakuJukiValidator {
 
-    private static final int AGE_65 = 65;
     private static final RString 対象項目_資格取得日 = new RString("資格取得日");
     private static final RString 対象項目_資格喪失日 = new RString("資格喪失日");
     private static final RString 対象項目_資格変更日 = new RString("資格変更日");
@@ -44,10 +44,15 @@ public class ShikakuJukiValidator {
     private static final RString 対象項目_適用除外適用 = new RString("適用除外適用.適用日");
     private static final RString 対象項目_適用除外解除 = new RString("適用除外解除.解除日");
 
+    private final int 第１号被保険者到達基準年齢;
+
     /**
      * コンストラクタです。
      */
     ShikakuJukiValidator() {
+        第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConifg.get(
+                ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
     }
 
     /**
@@ -73,10 +78,8 @@ public class ShikakuJukiValidator {
         }
         FuseigoRiyu 不整合理由 = null;
         if (資格の情報 == null) {
-            RString 基準年齢 = BusinessConfig.get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,
-                    SubGyomuCode.DBU介護統計報告);
             RString 年齢 = 個人情報.get年齢算出().get年齢();
-            if (Integer.parseInt(基準年齢.toString()) <= Integer.parseInt(年齢.toString())) {
+            if (第１号被保険者到達基準年齢 <= Integer.parseInt(年齢.toString())) {
                 不整合理由 = FuseigoRiyu.資格管理情報未登録者;
             }
             return 不整合理由;
@@ -87,7 +90,8 @@ public class ShikakuJukiValidator {
             不整合理由 = FuseigoRiyu.資格取得日_転入者;
         }
         if (ShikakuShutokuJiyu.年齢到達.getコード().equals(資格の情報.get資格取得事由コード())
-                && 資格の情報.get資格取得年月日().compareTo(個人情報.get年齢算出().get年齢到達日(AGE_65)) != 0) {
+                && 資格の情報.get資格取得年月日().compareTo(個人情報.get年齢算出().get年齢到達日(
+                                第１号被保険者到達基準年齢)) != 0) {
             不整合理由 = FuseigoRiyu.資格取得日_年齢到達者;
         }
         if (JukiIdoJiyu.職権消除.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())) {
@@ -110,7 +114,8 @@ public class ShikakuJukiValidator {
         }
         if (ShikakuHenkoJiyu._１号到達.getコード().equals(資格の情報.get資格変更事由コード())
                 && (!個人情報.get生年月日().toFlexibleDate().isValid()
-                || 資格の情報.get資格変更年月日().compareTo(個人情報.get年齢算出().get年齢到達日(AGE_65)) != 0)) {
+                || 資格の情報.get資格変更年月日().compareTo(個人情報.get年齢算出().get年齢到達日(
+                                第１号被保険者到達基準年齢)) != 0)) {
             不整合理由 = FuseigoRiyu.資格取得者_死亡者;
         }
 
@@ -189,63 +194,63 @@ public class ShikakuJukiValidator {
      *
      * @param 不整合理由 FuseigoRiyu
      * @param 個人情報 IKojin
-     * @return Map<DbzErrorMessages, RString>
+     * @return Map<RString, DbzErrorMessages>
      */
-    public Map<DbzErrorMessages, RString> createValidationMessages(FuseigoRiyu 不整合理由, IKojin 個人情報) {
-        Map<DbzErrorMessages, RString> retMap = new HashMap<>();
+    public Map<RString, DbzErrorMessages> createValidationMessages(FuseigoRiyu 不整合理由, IKojin 個人情報) {
+        Map<RString, DbzErrorMessages> retMap = new HashMap<>();
         switch (不整合理由) {
             case 資格管理情報未登録者:
                 break;
             case 資格取得日_転入者:
-                retMap.put(DbzErrorMessages.資格不整合_転入, 対象項目_資格取得日);
+                retMap.put(対象項目_資格取得日, DbzErrorMessages.資格不整合_転入);
                 break;
             case 資格取得日_年齢到達者:
-                retMap.put(DbzErrorMessages.資格不整合_年齢到達, 対象項目_資格取得日);
+                retMap.put(対象項目_資格取得日, DbzErrorMessages.資格不整合_年齢到達);
                 break;
             case 資格取得者_消除者:
-                retMap.put(DbzErrorMessages.資格不整合_職権削除, 対象項目_資格喪失日);
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_職権削除);
                 break;
             case 資格取得者_転出者:
                 setMsg(retMap, 個人情報);
                 break;
             case 資格取得者_死亡者:
-                retMap.put(DbzErrorMessages.資格不整合_死亡, 対象項目_資格喪失日);
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_死亡);
                 break;
             case 資格喪失日_住基不一致:
-                retMap.put(DbzErrorMessages.資格不整合_1号年齢到達, 対象項目_資格喪失日);
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_1号年齢到達);
                 break;
             case 資格喪失日_転出予定者:
-                retMap.put(DbzErrorMessages.資格不整合_転出_転出予定日, 対象項目_資格喪失日);
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
                 break;
             case 資格喪失日_転出確定者:
-                retMap.put(DbzErrorMessages.資格不整合_転出_転出確定日, 対象項目_資格喪失日);
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
                 break;
             case 資格変更者_１号被保険者到達:
-                retMap.put(DbzErrorMessages.指定数誤り, 対象項目_資格変更日);
+                retMap.put(対象項目_資格変更日, DbzErrorMessages.指定数誤り);
                 break;
             case 他住所地特例適用日_転入者:
-                retMap.put(DbzErrorMessages.他住所地特例適用日_転入者, 対象項目_他市町村住所地特例適用);
+                retMap.put(対象項目_他市町村住所地特例適用, DbzErrorMessages.他住所地特例適用日_転入者);
                 break;
             case 他住所地特例解除日_住基不一致:
-                retMap.put(DbzErrorMessages.他住所地特例解除日_住基不一致, 対象項目_他市町村住所地特例解除);
+                retMap.put(対象項目_他市町村住所地特例解除, DbzErrorMessages.他住所地特例解除日_住基不一致);
                 break;
             case 他住所地特例解除日_転出予定者:
-                retMap.put(DbzErrorMessages.他住所地特例解除日_転出予定者, 対象項目_他市町村住所地特例解除);
+                retMap.put(対象項目_他市町村住所地特例解除, DbzErrorMessages.他住所地特例解除日_転出予定者);
                 break;
             case 他住所地特例解除日_転出確定者:
-                retMap.put(DbzErrorMessages.他住所地特例解除日_転出確定者, 対象項目_他市町村住所地特例解除);
+                retMap.put(対象項目_他市町村住所地特例解除, DbzErrorMessages.他住所地特例解除日_転出確定者);
                 break;
             case 除外適用日_転入者:
-                retMap.put(DbzErrorMessages.除外適用日_転入者, 対象項目_適用除外適用);
+                retMap.put(対象項目_適用除外適用, DbzErrorMessages.除外適用日_転入者);
                 break;
             case 除外解除日_住基不一致:
-                retMap.put(DbzErrorMessages.除外解除日_住基不一致, 対象項目_適用除外解除);
+                retMap.put(対象項目_適用除外解除, DbzErrorMessages.除外解除日_住基不一致);
                 break;
             case 除外解除日_転出予定者:
-                retMap.put(DbzErrorMessages.除外解除日_転出予定者, 対象項目_適用除外解除);
+                retMap.put(対象項目_適用除外解除, DbzErrorMessages.除外解除日_転出予定者);
                 break;
             case 除外解除日_転出確定者:
-                retMap.put(DbzErrorMessages.除外解除日_転出確定者, 対象項目_適用除外解除);
+                retMap.put(対象項目_適用除外解除, DbzErrorMessages.除外解除日_転出確定者);
                 break;
             default:
                 break;
@@ -258,9 +263,9 @@ public class ShikakuJukiValidator {
      *
      * @param 個人情報 IKojin
      * @param 資格の情報 HihokenshaDaicho
-     * @return Map<DbzErrorMessages, RString>
+     * @return Map<RString, DbzErrorMessages>
      */
-    public Map<DbzErrorMessages, RString> validate(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
+    public Map<RString, DbzErrorMessages> validate(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
         return createValidationMessages(checkFor資格不整合(個人情報, 資格の情報), 個人情報);
     }
 
@@ -269,9 +274,9 @@ public class ShikakuJukiValidator {
      *
      * @param 個人情報 IKojin
      * @param 除外の情報 TekiyoJogaisha
-     * @return Map<DbzErrorMessages, RString>
+     * @return Map<RString, DbzErrorMessages>
      */
-    public Map<DbzErrorMessages, RString> validate適用除外者(IKojin 個人情報, TekiyoJogaisha 除外の情報) {
+    public Map<RString, DbzErrorMessages> validate適用除外者(IKojin 個人情報, TekiyoJogaisha 除外の情報) {
         return createValidationMessages(checkFor除外不整合(個人情報, 除外の情報), 個人情報);
     }
 
@@ -280,17 +285,17 @@ public class ShikakuJukiValidator {
      *
      * @param 個人情報 IKojin
      * @param 他特の情報 TashichosonJushochiTokurei
-     * @return Map<DbzErrorMessages, RString>
+     * @return Map<RString, DbzErrorMessages>
      */
-    public Map<DbzErrorMessages, RString> validate他特例(IKojin 個人情報, TashichosonJushochiTokurei 他特の情報) {
+    public Map<RString, DbzErrorMessages> validate他特例(IKojin 個人情報, TashichosonJushochiTokurei 他特の情報) {
         return createValidationMessages(checkFor他特不整合(個人情報, 他特の情報), 個人情報);
     }
 
-    private void setMsg(Map<DbzErrorMessages, RString> retMap, IKojin 個人情報) {
+    private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報) {
         if (isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
-            retMap.put(DbzErrorMessages.資格不整合_転出_転出確定日, 対象項目_資格喪失日);
+            retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
         } else {
-            retMap.put(DbzErrorMessages.資格不整合_転出_転出予定日, 対象項目_資格喪失日);
+            retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
         }
     }
 

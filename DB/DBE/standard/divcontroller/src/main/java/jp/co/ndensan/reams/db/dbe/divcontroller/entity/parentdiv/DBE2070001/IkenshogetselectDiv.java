@@ -21,8 +21,6 @@ public class IkenshogetselectDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("BtnCheck")
-    private Button BtnCheck;
     @JsonProperty("btnikenshogetoutput")
     private ButtonDownLoad btnikenshogetoutput;
 
@@ -32,24 +30,6 @@ public class IkenshogetselectDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getBtnCheck
-     * @return BtnCheck
-     */
-    @JsonProperty("BtnCheck")
-    public Button getBtnCheck() {
-        return BtnCheck;
-    }
-
-    /*
-     * setBtnCheck
-     * @param BtnCheck BtnCheck
-     */
-    @JsonProperty("BtnCheck")
-    public void setBtnCheck(Button BtnCheck) {
-        this.BtnCheck = BtnCheck;
-    }
-
     /*
      * getbtnikenshogetoutput
      * @return btnikenshogetoutput

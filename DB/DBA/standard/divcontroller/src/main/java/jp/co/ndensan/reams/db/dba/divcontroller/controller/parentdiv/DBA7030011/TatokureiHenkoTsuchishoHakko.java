@@ -96,19 +96,6 @@ public class TatokureiHenkoTsuchishoHakko {
     }
 
     /**
-     * 前回番号取得ボタン。
-     *
-     * @param div TatokureiHenkoTsuchishoHakkoDiv
-     * @return ResponseData<TatokureiHenkoTsuchishoHakkoDiv>
-     */
-    public ResponseData<TatokureiHenkoTsuchishoHakkoDiv> onClick_btnZenkaiBango(TatokureiHenkoTsuchishoHakkoDiv div) {
-
-        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100006.getReportId());
-        div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().setValue(文書番号取得);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 自動付番ボタン。
      *
      * @param div TatokureiHenkoTsuchishoHakkoDiv

@@ -111,16 +111,16 @@
           ( 
             SELECT <include refid="allColumns_DbT1001HihokenshaDaicho"/> , row_number() OVER ( 
                 PARTITION BY
-                  M."dbT1001HihokenshaDaicho_hihokenshaNo" 
+                  "DbT1001HihokenshaDaicho"."hihokenshaNo" 
                 ORDER BY
-                  M."dbT1001HihokenshaDaicho_idoYMD" DESC
-                  , M."dbT1001HihokenshaDaicho_edaNo" DESC
+                  "DbT1001HihokenshaDaicho"."idoYMD" DESC
+                  , "DbT1001HihokenshaDaicho"."edaNo" DESC
               ) AS rrkno 
             FROM
-              rgdb."DbT1001HihokenshaDaicho" M 
+              rgdb."DbT1001HihokenshaDaicho" 
             WHERE
-              M."dbT1001HihokenshaDaicho_hihokennshaKubunCode" = '1' 
-              AND M."dbT1001HihokenshaDaicho_logicalDeletedFlag" = false
+              "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" = '1' 
+              AND "DbT1001HihokenshaDaicho"."logicalDeletedFlag" = false
           ) AS A 
         WHERE
           A.rrkno = 1 
@@ -130,4 +130,18 @@
         ORDER BY
           A."dbT1001HihokenshaDaicho_idoYMD" DESC
     </select>
+    <select id="ge広域運用識別コード情報の取得処理" 
+            resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter" fetchSize="500">
+	SELECT
+	DISTINCT
+        DbT1001."shikibetsuCode",
+        DbT1001."shichosonCode"
+	FROM
+	rgdb."DbT1001HihokenshaDaicho" as DbT1001
+       WHERE
+        DbT1001."shichosonCode" = #{市町村コード}
+       AND 
+        DbT1001."hihokenshaNo" = #{被保険者番号}
+	</select>
 </mapper>

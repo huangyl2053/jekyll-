@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShuto
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -26,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
@@ -334,7 +334,7 @@ public class HihokenshaShikakuTeiseiManager {
         }
         return 市町村コード;
     }
-    
+
     private LasdecCode get広住特措置元市町村コード(
             DbT1001HihokenshaDaichoEntity 資格訂正情報Entity,
             LasdecCode 広住特措置元市町村コード) {
@@ -342,14 +342,14 @@ public class HihokenshaShikakuTeiseiManager {
         for (KoikiZenShichosonJoho 現市町村情報 : 現市町村情報List) {
             RString 証記載保険者番号 = 現市町村情報.get証記載保険者番号().getColumnValue();
             LasdecCode 措置元市町村 = 資格訂正情報Entity.getKoikinaiTokureiSochimotoShichosonCode();
-            RString 広住特措置元市町村 = 措置元市町村 == null ? RString.EMPTY : 措置元市町村.getColumnValue();            
+            RString 広住特措置元市町村 = 措置元市町村 == null ? RString.EMPTY : 措置元市町村.getColumnValue();
             if (証記載保険者番号.equals(広住特措置元市町村)) {
                 広住特措置元市町村コード = 現市町村情報.get市町村コード();
             }
         }
         return 広住特措置元市町村コード;
     }
-    
+
     private LasdecCode get旧市町村コード(
             DbT1001HihokenshaDaichoEntity 資格訂正情報Entity,
             LasdecCode 市町村コード,
@@ -477,7 +477,7 @@ public class HihokenshaShikakuTeiseiManager {
     }
 
     private void getList解除事由コード(List<HihokenshaDaicho> 資格訂正登録リスト, DbT1001HihokenshaDaichoEntity entity) {
-        DbT1001HihokenshaDaichoEntity dbt1001Entity = 資格訂正登録リスト.get(資格訂正登録リスト.size() - 1).toEntity();        
+        DbT1001HihokenshaDaichoEntity dbt1001Entity = 資格訂正登録リスト.get(資格訂正登録リスト.size() - 1).toEntity();
         FlexibleDate 解除年月日 = entity.getJushochitokureiKaijoYMD();
         dbt1001Entity.setIdoYMD(解除年月日 == null ? FlexibleDate.EMPTY : 解除年月日);
         RString 解除事由コード = entity.getJushochitokureiKaijoJiyuCode();

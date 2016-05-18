@@ -241,7 +241,11 @@ public enum ReportIdDBE {
     /**
      * 要介護認定情報提供その他資料情報の帳票ＩＤです。
      */
-    DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("その他資料"));
+    DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("その他資料")),
+    /**
+     * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
+     */
+    DBE231001(new ReportId("DBE231001_ikenshokinyuyoshi"), new RString("要介護認定主治医意見書記入用紙"));
 
     private final ReportId reportId;
 

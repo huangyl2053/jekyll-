@@ -41,8 +41,6 @@ public class HenshuNaiyoDiv extends Panel {
     private TextBox txtSam;
     @JsonProperty("chkTennyumaeJushoNoPrint")
     private CheckBoxList chkTennyumaeJushoNoPrint;
-    @JsonProperty("btnZenkaiBango")
-    private Button btnZenkaiBango;
     @JsonProperty("txtBunshoBango")
     private TextBox txtBunshoBango;
     @JsonProperty("btnJidoFuban")
@@ -186,24 +184,6 @@ public class HenshuNaiyoDiv extends Panel {
     @JsonProperty("chkTennyumaeJushoNoPrint")
     public void setChkTennyumaeJushoNoPrint(CheckBoxList chkTennyumaeJushoNoPrint) {
         this.chkTennyumaeJushoNoPrint = chkTennyumaeJushoNoPrint;
-    }
-
-    /*
-     * getbtnZenkaiBango
-     * @return btnZenkaiBango
-     */
-    @JsonProperty("btnZenkaiBango")
-    public Button getBtnZenkaiBango() {
-        return btnZenkaiBango;
-    }
-
-    /*
-     * setbtnZenkaiBango
-     * @param btnZenkaiBango btnZenkaiBango
-     */
-    @JsonProperty("btnZenkaiBango")
-    public void setBtnZenkaiBango(Button btnZenkaiBango) {
-        this.btnZenkaiBango = btnZenkaiBango;
     }
 
     /*

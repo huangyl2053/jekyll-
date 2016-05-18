@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio.KaigoJigyoshaRelateEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  *
@@ -32,7 +32,7 @@ public class KaigoJigyoshaBusiness {
      *
      * @return 有効開始日
      */
-    public RString get有効開始日() {
+    public FlexibleDate get有効開始日() {
         return entity.getYukoKaishiYMD();
     }
 
@@ -41,17 +41,8 @@ public class KaigoJigyoshaBusiness {
      *
      * @return 有効終了日
      */
-    public RString get有効終了日() {
+    public FlexibleDate get有効終了日() {
         return entity.getYukoShuryoYMD();
-    }
-
-    /**
-     * 事業者番号を取得します。
-     *
-     * @return 事業者番号
-     */
-    public RString get事業者番号() {
-        return entity.getJigyoshaNo();
     }
 
     /**
@@ -59,7 +50,7 @@ public class KaigoJigyoshaBusiness {
      *
      * @return 有効開始日
      */
-    public RString get対象施設有効開始日() {
+    public FlexibleDate get対象施設有効開始日() {
         return entity.getYukoKaishiYMD2();
     }
 
@@ -68,16 +59,7 @@ public class KaigoJigyoshaBusiness {
      *
      * @return 対象施設有効終了日
      */
-    public RString get対象施設有効終了日() {
+    public FlexibleDate get対象施設有効終了日() {
         return entity.getYukoShuryoYMD2();
-    }
-
-    /**
-     * 対象施設事業者番号を取得します。
-     *
-     * @return 対象施設事業者番号
-     */
-    public RString get対象施設事業者番号() {
-        return entity.getJigyoshaNo2();
     }
 }

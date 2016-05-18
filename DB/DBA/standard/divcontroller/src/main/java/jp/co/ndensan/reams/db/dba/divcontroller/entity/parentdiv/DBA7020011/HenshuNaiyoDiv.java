@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
@@ -42,10 +41,8 @@ public class HenshuNaiyoDiv extends Panel {
     private TextBox txtSam;
     @JsonProperty("chkTaishoGonai")
     private CheckBoxList chkTaishoGonai;
-    @JsonProperty("btnZenkaiBango")
-    private Button btnZenkaiBango;
     @JsonProperty("txtBunshoBango")
-    private TextBoxCode txtBunshoBango;
+    private TextBox txtBunshoBango;
     @JsonProperty("btnJidoFuban")
     private Button btnJidoFuban;
     @JsonProperty("ccdPrintContentsSetting")
@@ -190,29 +187,11 @@ public class HenshuNaiyoDiv extends Panel {
     }
 
     /*
-     * getbtnZenkaiBango
-     * @return btnZenkaiBango
-     */
-    @JsonProperty("btnZenkaiBango")
-    public Button getBtnZenkaiBango() {
-        return btnZenkaiBango;
-    }
-
-    /*
-     * setbtnZenkaiBango
-     * @param btnZenkaiBango btnZenkaiBango
-     */
-    @JsonProperty("btnZenkaiBango")
-    public void setBtnZenkaiBango(Button btnZenkaiBango) {
-        this.btnZenkaiBango = btnZenkaiBango;
-    }
-
-    /*
      * gettxtBunshoBango
      * @return txtBunshoBango
      */
     @JsonProperty("txtBunshoBango")
-    public TextBoxCode getTxtBunshoBango() {
+    public TextBox getTxtBunshoBango() {
         return txtBunshoBango;
     }
 
@@ -221,7 +200,7 @@ public class HenshuNaiyoDiv extends Panel {
      * @param txtBunshoBango txtBunshoBango
      */
     @JsonProperty("txtBunshoBango")
-    public void setTxtBunshoBango(TextBoxCode txtBunshoBango) {
+    public void setTxtBunshoBango(TextBox txtBunshoBango) {
         this.txtBunshoBango = txtBunshoBango;
     }
 

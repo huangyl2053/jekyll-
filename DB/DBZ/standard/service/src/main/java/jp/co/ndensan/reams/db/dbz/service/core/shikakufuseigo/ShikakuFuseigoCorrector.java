@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
+import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiTekiyoJiyu;
@@ -32,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShikakuFuseigoCorrector {
 
-    private static final int AGE_65 = 65;
     private static final int FLAG_1 = 1;
     private static final int FLAG_2 = 2;
     private static final int FLAG_3 = 3;
@@ -74,12 +75,16 @@ public class ShikakuFuseigoCorrector {
             return 資格の情報修正後Builder.build();
         }
         if (不整合理由 == FuseigoRiyu.資格取得日_年齢到達者) {
-            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get年齢算出().get年齢到達日(AGE_65));
+            HihokenshaDaicho 資格の情報修正後 = getHihokenshaDaicho(資格の情報修正前, 個人情報.get年齢算出().get年齢到達日(
+                    new NenreiTotatsuKijunConfig().get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢)));
             資格の情報修正後 = set資格の情報(資格の情報修正前, 資格の情報修正後, FLAG_1);
             HihokenshaDaichoBuilder 資格の情報修正後Builder = 資格の情報修正後.createBuilderForEdit();
-            資格の情報修正後Builder.set資格取得年月日(個人情報.get年齢算出().get年齢到達日(AGE_65));
-            資格の情報修正後Builder.set第1号資格取得年月日(個人情報.get年齢算出().get年齢到達日(AGE_65));
-            資格の情報修正後Builder.set資格取得届出年月日(個人情報.get年齢算出().get年齢到達日(AGE_65));
+            資格の情報修正後Builder.set資格取得年月日(個人情報.get年齢算出().get年齢到達日(
+                    new NenreiTotatsuKijunConfig().get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢)));
+            資格の情報修正後Builder.set第1号資格取得年月日(個人情報.get年齢算出().get年齢到達日(
+                    new NenreiTotatsuKijunConfig().get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢)));
+            資格の情報修正後Builder.set資格取得届出年月日(個人情報.get年齢算出().get年齢到達日(
+                    new NenreiTotatsuKijunConfig().get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢)));
             資格の情報修正後Builder.set資格取得事由コード(ShikakuShutokuJiyu.年齢到達.getコード());
             資格の情報修正後Builder.set異動事由コード(ShikakuShutokuJiyu.年齢到達.getコード());
             return 資格の情報修正後Builder.build();

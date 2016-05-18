@@ -26,6 +26,7 @@ public class FutsuChoshuTotal {
     private static final RString メッセージ = new RString("システム管理登録_普通徴収保存処理は正常に行われました");
     private static final RString MSG = new RString("調定年度：");
     private static final RString MSG_NENNDO = new RString("年度");
+    private static final RString 現年度 = new RString("現年度");
 
     /**
      * システム管理情報（普通徴収）画面初期化する
@@ -137,8 +138,13 @@ public class FutsuChoshuTotal {
      * @return ResponseData<FutsuChoshuTotalDiv>
      */
     public ResponseData<FutsuChoshuTotalDiv> onClick_btnFuchoKibetsuUpdate(FutsuChoshuTotalDiv div) {
-        getHandler(div).現年度入力チェック();
-        getHandler(div).過年度入力チェック();
+        if (現年度.equals(div.getFutsuChoshu().getTabFuCho().getSelectedItem().getTitle())) {
+            getHandler(div).現年度入力チェック();
+            getHandler(div).過年度入力チェック();
+        } else {
+            getHandler(div).過年度入力チェック();
+            getHandler(div).現年度入力チェック();
+        }
 
         getHandler(div).set保存処理();
         RStringBuilder message = new RStringBuilder(MSG);

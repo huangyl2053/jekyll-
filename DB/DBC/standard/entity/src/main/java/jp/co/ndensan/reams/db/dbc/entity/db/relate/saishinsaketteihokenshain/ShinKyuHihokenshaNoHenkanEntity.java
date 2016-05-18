@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 再審査決定通知書情報取込（保険者分）新被保険者番号Entity
  *
- * @reamsid_L DBC-2520-020 chenaoqi
+ * @reamsid_L DBC-2520-010 chenaoqi
  */
 @lombok.Getter
 @lombok.Setter

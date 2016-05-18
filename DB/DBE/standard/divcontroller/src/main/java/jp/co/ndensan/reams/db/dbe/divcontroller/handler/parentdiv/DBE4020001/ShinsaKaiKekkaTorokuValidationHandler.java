@@ -70,7 +70,6 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
     public ValidationMessageControlPairs 完了処理事前チェック(ValidationMessageControlPairs validPairs) {
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
-            // TODO QA1182回答まち,
             if (データ.getNijihanteiKekkaToroku().getValue() != null) {
                 continue;
             }

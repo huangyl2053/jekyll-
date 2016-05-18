@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 /**
  * 支払方法変更管理リスト作成_バッチフ処理クラスです。
  * 
- * @reamsid_L DBD-3630-010  zhulx
+ * @reamsid_L DBD-3630-040  zhulx
  */
 public class ShiharaiHohoKanriListProcess extends BatchProcessBase {
 

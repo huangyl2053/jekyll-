@@ -22,9 +22,7 @@ public class ikenshoiraiselectDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnikenshoiraitaishooutput")
-    private Button btnikenshoiraitaishooutput;
-    @JsonProperty("CSVButtonDownLoad")
-    private ButtonDownLoad CSVButtonDownLoad;
+    private ButtonDownLoad btnikenshoiraitaishooutput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +35,7 @@ public class ikenshoiraiselectDiv extends Panel {
      * @return btnikenshoiraitaishooutput
      */
     @JsonProperty("btnikenshoiraitaishooutput")
-    public Button getBtnikenshoiraitaishooutput() {
+    public ButtonDownLoad getBtnikenshoiraitaishooutput() {
         return btnikenshoiraitaishooutput;
     }
 
@@ -46,26 +44,8 @@ public class ikenshoiraiselectDiv extends Panel {
      * @param btnikenshoiraitaishooutput btnikenshoiraitaishooutput
      */
     @JsonProperty("btnikenshoiraitaishooutput")
-    public void setBtnikenshoiraitaishooutput(Button btnikenshoiraitaishooutput) {
+    public void setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
         this.btnikenshoiraitaishooutput = btnikenshoiraitaishooutput;
-    }
-
-    /*
-     * getCSVButtonDownLoad
-     * @return CSVButtonDownLoad
-     */
-    @JsonProperty("CSVButtonDownLoad")
-    public ButtonDownLoad getCSVButtonDownLoad() {
-        return CSVButtonDownLoad;
-    }
-
-    /*
-     * setCSVButtonDownLoad
-     * @param CSVButtonDownLoad CSVButtonDownLoad
-     */
-    @JsonProperty("CSVButtonDownLoad")
-    public void setCSVButtonDownLoad(ButtonDownLoad CSVButtonDownLoad) {
-        this.CSVButtonDownLoad = CSVButtonDownLoad;
     }
 
     // </editor-fold>

@@ -264,15 +264,12 @@ public class HihokenshaDaichoManager {
      * @param param HihokenshaDaichoSearchCondition
      * @return 最新の資格の情報を取得
      */
-    public List<HihokenshaDaicho> find資格の情報(HihokenshaDaichoSearchCondition param) {
-        List<HihokenshaDaicho> businessList = new ArrayList<>();
-        List<DbT1001HihokenshaDaichoEntity> entityList = mapperProvider.create(
+    public HihokenshaDaicho find資格の情報(HihokenshaDaichoSearchCondition param) {
+
+        DbT1001HihokenshaDaichoEntity entity = mapperProvider.create(
                 IDbT1001HihokenshaDaichoMapper.class).get資格の情報(param);
-        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
-            entity.initializeMd5();
-            businessList.add(new HihokenshaDaicho(entity));
-        }
-        return businessList;
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
     }
 
     /**

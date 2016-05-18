@@ -311,12 +311,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
                 build.set広住特措置元市町村コード(LasdecCode.EMPTY);
                 build.set識別コード(識別コード);
                 build.set異動事由コード(row.getShutokuJiyuKey());
-                boolean checkFlag = manager.shikakuShutokuTorokuCheck(DateOfBirthFactory.createInstance(div.getKihonJoho()
+                manager.shikakuShutokuTorokuCheck(DateOfBirthFactory.createInstance(div.getKihonJoho()
                         .getCcdKaigoAtenaInfo().getShokaiData().getTxtSeinengappiYMD().getValue()),
                         row.getShutokuDate().getValue(), row.getSoshitsuJiyuKey());
-                if (!checkFlag) {
-                    return;
-                }
                 manager.saveHihokenshaShutoku(build.build(),
                         DateOfBirthFactory.createInstance(div.getKihonJoho().getCcdKaigoAtenaInfo()
                                 .getShokaiData().getTxtSeinengappiYMD().getValue()));

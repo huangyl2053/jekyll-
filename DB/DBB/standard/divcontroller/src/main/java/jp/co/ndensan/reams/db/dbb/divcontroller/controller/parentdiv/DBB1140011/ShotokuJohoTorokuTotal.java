@@ -108,11 +108,10 @@ public class ShotokuJohoTorokuTotal {
         FlexibleYear 所得年度 = viewStateData.get賦課年度();
         YMDHMS 所得基準日時 = YMDHMS.now();
         if (div.getSetaiShotokuInfo().getChkSetaiIchiranAll().isAllSelected()) {
-            getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, false);
-        } else {
             getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
+        } else {
+            getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, false);
         }
-        //TODO 最新の世帯員・所得状況を表示するチェックボックスのチェック状態変更 QA735
         return ResponseData.of(div).respond();
     }
 
