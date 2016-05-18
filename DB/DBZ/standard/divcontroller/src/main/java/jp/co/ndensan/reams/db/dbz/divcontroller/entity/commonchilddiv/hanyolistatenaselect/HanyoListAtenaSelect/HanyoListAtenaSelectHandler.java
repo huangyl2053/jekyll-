@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolist
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokenshakosei.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
@@ -48,10 +48,10 @@ public class HanyoListAtenaSelectHandler {
      * @param 保険者構成 保険者構成
      */
     public void initialize(HokenshaKosei 保険者構成) {
-        if (HokenshaKosei.単一市町村.code().equals(保険者構成.code())) {
+        if (HokenshaKosei.単一市町村.getコード().equals(保険者構成.getコード())) {
             div.getCcdHokenshaList().setVisible(false);
             div.getDvChiku().setVisible(true);
-        } else if (HokenshaKosei.広域市町村.code().equals(保険者構成.code())) {
+        } else if (HokenshaKosei.広域市町村.getコード().equals(保険者構成.getコード())) {
             div.getCcdHokenshaList().setVisible(true);
             div.getDvChiku().setVisible(false);
         }
