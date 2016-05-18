@@ -448,7 +448,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             publish特別徴収開始通知書本算定(parameter, 通知書共通情報, reportManager, reportSourceDataCollection);
         } else if (TsuchiSho.介護保険料額決定通知書.get名称().equals(発行する帳票)
                 || TsuchiSho.介護保険料額決定通知書_過年度.get名称().equals(発行する帳票)) {
-            publish介護保険料額決定通知書(parameter, 通知書共通情報, reportSourceDataCollection);
+            publish介護保険料額決定通知書(parameter, 通知書共通情報, reportManager, reportSourceDataCollection);
         } else if (TsuchiSho.介護保険料額変更兼特別徴収中止通知書.get名称().equals(発行する帳票)
                 || TsuchiSho.介護保険料額変更兼特別徴収中止通知書_過年度.get名称().equals(発行する帳票)) {
             publish介護保険料額変更兼特別徴収中止通知書(parameter, 通知書共通情報, reportSourceDataCollection);
@@ -866,10 +866,12 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
      *
      * @param parameter KakushuTsuchishoParameter
      * @param 通知書共通情報 KakushuTsuchishoCommonInfo
+     * @param reportManager ReportManager
      * @param reportSourceDataCollection List<ReportSourceDataCollection>
      */
     public void publish介護保険料額決定通知書(KakushuTsuchishoParameter parameter,
-            KakushuTsuchishoCommonInfo 通知書共通情報, List<ReportSourceDataCollection> reportSourceDataCollection) {
+            KakushuTsuchishoCommonInfo 通知書共通情報, ReportManager reportManager,
+            List<ReportSourceDataCollection> reportSourceDataCollection) {
 
         ChohyoSeigyoHanyo 帳票制御汎用 = load帳票制御汎用ByKey(決定通知書_帳票分類ID, 管理年度, 項目名);
         if (帳票制御汎用 == null) {
@@ -956,9 +958,9 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         介護保険料額決定通知書.set通知書定型文(通知書定型文);
 
         if (ReportIdDBB.DBB100039.getReportId().equals(帳票ID)) {
-            new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printB5Yoko(entities);
+            new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printB5Yoko(entities, reportManager);
         } else {
-            new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printA4Tate(entities);
+            new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printA4Tate(entities, reportManager);
         }
 
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
