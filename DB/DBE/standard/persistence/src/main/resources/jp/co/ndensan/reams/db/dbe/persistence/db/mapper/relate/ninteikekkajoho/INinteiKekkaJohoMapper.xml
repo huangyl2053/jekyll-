@@ -98,7 +98,7 @@
         LEFT OUTER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho"/>
         FROM
         rgdb."DbT5105NinteiKanryoJoho"
         )
@@ -193,7 +193,7 @@
         </collection>
         <collection  property="DbT5105NinteiKanryoJohoEntity"
                      ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity"
-                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.resultMap_DbT5105NinteiKanryoJohoEntity">
+                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.resultMap_DbT5105NinteiKanryoJohoEntity">
         </collection>
         <collection  property="DbT5115ImageEntity"
                      ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity"
