@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -260,9 +259,6 @@ public class ShinsaKaiKekkaToroku {
         if (!RString.isNullOrEmpty(row.getNyuryokuHoho())) {
             入力方法 = NijiHanteiKekkaInputHoho.valueOf(row.getNyuryokuHoho().toString()).getコード();
         }
-        RStringBuilder 二次判定コード = new RStringBuilder();
-        二次判定コード.append(row.getNijiHanteiYokaigoJotaiKubunCode())
-                .append(row.getKoroshoIfShikibetsuCode());
         ShinsaKaiKekkaTorokuCsvEntity data = new ShinsaKaiKekkaTorokuCsvEntity(
                 row.getShinseishoKanriNo(),
                 row.getHokensha(),
@@ -277,8 +273,7 @@ public class ShinsaKaiKekkaToroku {
                 日期転換(row.getNijihanteiKekkaToroku().getValue()),
                 入力方法,
                 row.getNyuryokuHoho(),
-                // QA:1182回答まち、
-                二次判定コード.toRString(),
+                row.getNijiHanteiYokaigoJotaiKubunCode(),
                 二次判定結果の名称(row.getKoroshoIfShikibetsuCode(), row.getNijiHanteiYokaigoJotaiKubunCode()),
                 row.getNijihanteiYukoKikan(),
                 日期転換(row.getNijihanteiShinsakaiKaisaiDay().getValue()),
