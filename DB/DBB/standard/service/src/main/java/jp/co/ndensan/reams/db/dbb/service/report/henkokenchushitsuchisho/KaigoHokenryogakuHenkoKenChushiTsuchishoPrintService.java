@@ -81,7 +81,6 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService {
                     business.set文書番号(joho.get文書番号());
                     business.set本算定決定通知書情報(joho.get本算定決定通知書情報());
                     business.set調定事由リスト(joho.get調定事由リスト());
-                    business.set通知書定型文(joho.get通知書定型文());
                     business.setNinshoshaSource(ninshoshaSource);
                     business.setCompKaigoToiawasesakiSource(compKaigoToiawasesakiSource);
                     targets.add(business);
@@ -132,7 +131,6 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService {
                     business.set文書番号(joho.get文書番号());
                     business.set本算定決定通知書情報(joho.get本算定決定通知書情報());
                     business.set調定事由リスト(joho.get調定事由リスト());
-                    business.set通知書定型文(joho.get通知書定型文());
                     business.setNinshoshaSource(ninshoshaSource);
                     business.setCompKaigoToiawasesakiSource(compKaigoToiawasesakiSource);
                     targets.add(business);

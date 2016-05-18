@@ -23,7 +23,6 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoBusiness {
 
     private RString 文書番号;
     private HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報;
-    private RString 通知書定型文;
     private List<RString> 調定事由リスト;
     private NinshoshaSource ninshoshaSource;
     private CompKaigoToiawasesakiSource compKaigoToiawasesakiSource;
