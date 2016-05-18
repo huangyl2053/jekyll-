@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE3010001",
      "toLayoutTitle": "要介護認定一次判定",
-     "toState": "対象者一覧"
+     "toState": "一次判定対象者一覧"
     },
     {
      "id": "3",
