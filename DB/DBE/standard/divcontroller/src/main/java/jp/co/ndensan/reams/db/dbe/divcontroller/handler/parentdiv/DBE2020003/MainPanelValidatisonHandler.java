@@ -90,8 +90,35 @@ public class MainPanelValidatisonHandler {
         return validPairs;
     }
 
+    /**
+     * 画面で認定調査日Fromと認定調査日To全て入力時、認定調査日From＞認定調査日Toの場合、エラーとする。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs データ空のチェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        データ空チェック(validPairs);
+        return validPairs;
+    }
+
+    /**
+     * データ空チェック
+     *
+     * @param validPairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs データ空チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getResultListPanel().getDgResultList().getDataSource() == null
+                || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未表示,
+                    div.getResultListPanel().getDgResultList()));
+        }
+        return validPairs;
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
+        Validate対象者一覧未表示(UrErrorMessages.該当データなし),
         認定申請日の前後順(UrErrorMessages.終了日が開始日以前),
         認定調査日の前後順(UrErrorMessages.終了日が開始日以前);
         private final Message message;
