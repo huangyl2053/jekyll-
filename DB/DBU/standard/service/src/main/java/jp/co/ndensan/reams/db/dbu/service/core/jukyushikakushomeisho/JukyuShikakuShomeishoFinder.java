@@ -89,6 +89,15 @@ public class JukyuShikakuShomeishoFinder {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link JukyuShikakuShomeishoFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link JukyuShikakuShomeishoFinder}のインスタンス
+     */
+    public static JukyuShikakuShomeishoFinder createInstance() {
+        return InstanceProvider.create(JukyuShikakuShomeishoFinder.class);
+    }
+
+    /**
      * 受給資格証明書データ作成
      *
      * @param inEntity 受給資格証明書発行Entity
