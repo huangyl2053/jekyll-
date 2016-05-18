@@ -1,10 +1,14 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -14,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * 国保連情報取込処理共通のビジネスです。<br>
  * 国保連インタフェース管理TBL更新
  *
- * @reamsid_L DBC-0980-540 zhangrui
+ * @reamsid_L DBC-0980-530 zhangrui
  */
 public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
 
@@ -27,6 +31,7 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
     private static final int 定数_4 = 4;
     private static final RString 送付取込区分_取込 = new RString("2");
     private static final RString 処理状態区分_終了 = new RString("3");
+    private static final RString ERROR_MESSAGE = new RString("国保連インタフェース管理テーブル");
 
     KokuhorenKyoutsuuInterfaceKanriKousinManager() {
         this.国保連インターフェース管理Dac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
@@ -49,10 +54,15 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
      * @param 処理対象年月 FlexibleYearMonth
      * @param レコード件数合計 int
      * @param エントリ情報List List<SharedFileEntryDescriptor>
-     * @return 保存成功TRUE 失敗FALSE
+     * @return 保存成功TRUE エントリ情報削除する時例外が発生したFALSE
      */
     public boolean updateInterfaceKanriTbl(FlexibleYearMonth 処理年月, RString 交換情報識別番号, FlexibleYearMonth 処理対象年月,
             int レコード件数合計, List<SharedFileEntryDescriptor> エントリ情報List) {
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
+        requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
+        requireNonNull(処理対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理対象年月"));
+        requireNonNull(レコード件数合計, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード件数合計"));
+        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage("エントリ情報List"));
         DbT3104KokuhorenInterfaceKanriEntity entity = 国保連インターフェース管理Dac.selectByKeyUndeleted(処理年月, 交換情報識別番号);
         if (null != entity) {
             entity.setSofuTorikomiKubun(送付取込区分_取込);
@@ -67,6 +77,9 @@ public class KokuhorenKyoutsuuInterfaceKanriKousinManager {
             entity.setFileName5(getFileName(エントリ情報List, 定数_4));
             entity.setCtrlRecordKensu(レコード件数合計);
             entity.setCtrlShoriYM(処理対象年月);
+        } else {
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().
+                    replace(ERROR_MESSAGE.toString()));
         }
         return 1 == 国保連インターフェース管理Dac.save(entity);
     }
