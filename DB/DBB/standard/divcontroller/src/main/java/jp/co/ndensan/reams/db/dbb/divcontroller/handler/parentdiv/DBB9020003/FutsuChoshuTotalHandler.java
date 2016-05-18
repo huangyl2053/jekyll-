@@ -82,6 +82,8 @@ public final class FutsuChoshuTotalHandler {
     private static final RString 納期限 = new RString("納期限");
     private static final RString 納期_自 = new RString("納期（自）");
     private static final RString 納期_至 = new RString("納期（至）");
+    private static final RString 納期限_自 = new RString("納期限（自）");
+    private static final RString 納期限_至 = new RString("納期限（至）");
     private static final RString コード種別 = new RString("0002");
     private static final FlexibleYear 平成12年 = new FlexibleYear("2000");
     private static final RString ZERO = new RString("0");
@@ -762,11 +764,11 @@ public final class FutsuChoshuTotalHandler {
                 }
                 if (row.getTxtNokigenStYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
-                            replace(setメッセージ(row, null, 納期_自).toString()));
+                            replace(setメッセージ(row, null, 納期限_自).toString()));
                 }
                 if (row.getTxtNokigenEdYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
-                            replace(setメッセージ(row, null, 納期_至).toString()));
+                            replace(setメッセージ(row, null, 納期限_至).toString()));
                 }
             }
         }
