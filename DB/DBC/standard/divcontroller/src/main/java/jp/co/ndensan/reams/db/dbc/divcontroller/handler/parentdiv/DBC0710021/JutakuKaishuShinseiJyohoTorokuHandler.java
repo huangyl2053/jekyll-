@@ -495,6 +495,11 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (!保険者リスト.isEmpty()) {
             div.getJutakuKaishuShinseiContents().getDdlHokensha().setSelectedKey(保険者リスト.get(0).getKey());
         }
+        HokenKyufuRitsu 給付率 = 住宅改修費事前申請.getKyufuritsu(被保険者番号,
+                new FlexibleYearMonth(div.getTxtTeikyoYM().getValue().getYearMonth().toString()));
+        if (給付率 != null) {
+            div.getTxtKyufuritsu().setValue(給付率.value());
+        }
     }
 
     private void set申請者区分DataSource() {
