@@ -12,7 +12,10 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -26,33 +29,39 @@ import lombok.NonNull;
  */
 public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> {
 
-    private final KarisanteiHokenryoNonyuTsuchishoGinfuriItem target;
+    private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
+    private final NinshoshaSource ninshoshaSource;
+    private static final int INT_4 = 4;
 
     /**
      * コンストラクタです。
      *
-     * @param target KarisanteiHokenryoNonyuTsuchishoGinfuriItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @param ninshoshaSource 認証者情報
      */
-    protected KarisanteiHokenryoNonyuTsuchishoGinfuriReport(KarisanteiHokenryoNonyuTsuchishoGinfuriItem target) {
-        this.target = target;
+    protected KarisanteiHokenryoNonyuTsuchishoGinfuriReport(
+            KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+        this.仮算定納入通知書情報 = 仮算定納入通知書情報;
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     /**
      *
-     * @param target KarisanteiHokenryoNonyuTsuchishoGinfuriItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @param ninshoshaSource 認証者情報
      * @return KarisanteiHokenryoNonyuTsuchishoGinfuriReport
      * @throws NullPointerException 引数が{@code null}の時
      */
-    public static KarisanteiHokenryoNonyuTsuchishoGinfuriReport createFrom(@NonNull KarisanteiHokenryoNonyuTsuchishoGinfuriItem target) {
-        return new KarisanteiHokenryoNonyuTsuchishoGinfuriReport(target);
+    public static KarisanteiHokenryoNonyuTsuchishoGinfuriReport createFrom(
+            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+        return new KarisanteiHokenryoNonyuTsuchishoGinfuriReport(仮算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> reportSourceWriter) {
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = target.get仮算定納入通知書情報();
         ShoriKubun 処理区分 = 仮算定納入通知書情報.get処理区分();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
-        if (is全部の納付額なし(納入通知書期情報リスト)) {
+        if (null == 納入通知書期情報リスト || is全部の納付額なし(納入通知書期情報リスト)) {
             return;
         }
         int 銀振印字位置Para = 0;
@@ -60,11 +69,11 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit = new ArrayList<>();
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();
-            //if (銀振印字位置 > 4) {
-            //「ブック開始位置設定エラーのため、処理を中止します。」
-            //}
+            if (銀振印字位置 > INT_4) {
+                throw new ApplicationException(DbbErrorMessages.ブック開始位置不正.getMessage());
+            }
             if (銀振印字位置 <= 銀振印字位置Para) {
-                edit(reportSourceWriter, target, 納入通知書期情報リストEdit, 連番, 処理区分);
+                edit(reportSourceWriter, 納入通知書期情報リストEdit, 連番, 処理区分);
                 納入通知書期情報リストEdit.clear();
                 納入通知書期情報リストEdit.add(納入通知書期情報);
                 連番++;
@@ -73,7 +82,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
             }
             銀振印字位置Para = 銀振印字位置;
         }
-        edit(reportSourceWriter, target, 納入通知書期情報リストEdit, 連番, 処理区分);
+        edit(reportSourceWriter, 納入通知書期情報リストEdit, 連番, 処理区分);
     }
 
     /**
@@ -83,7 +92,6 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
      */
     public List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport> devidedByPage() {
         // TODO
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = target.get仮算定納入通知書情報();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
         List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport> reportLst = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストReport = new ArrayList<>();
@@ -110,12 +118,11 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
         仮算定納入通知書情報Report.set納入通知書期情報リスト(納入通知書期情報リストReport);
         KarisanteiHokenryoNonyuTsuchishoGinfuriReport report
                 = KarisanteiHokenryoNonyuTsuchishoGinfuriReport
-                .createFrom(new KarisanteiHokenryoNonyuTsuchishoGinfuriItem(仮算定納入通知書情報Report, target.getNinshoshaSource()));
+                .createFrom(仮算定納入通知書情報Report, ninshoshaSource);
         return report;
     }
 
     private void clone仮算定納入通知書情報(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報Report) {
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = target.get仮算定納入通知書情報();
         仮算定納入通知書情報Report.set仮算定納入通知書制御情報(仮算定納入通知書情報.get仮算定納入通知書制御情報());
         仮算定納入通知書情報Report.set処理区分(仮算定納入通知書情報.get処理区分());
         仮算定納入通知書情報Report.set出力期リスト(仮算定納入通知書情報.get出力期リスト());
@@ -129,18 +136,18 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
     }
 
     private void edit(ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> reportSourceWriter,
-            KarisanteiHokenryoNonyuTsuchishoGinfuriItem target,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 連番,
             ShoriKubun 処理区分) {
-        NofuShoKyotsu 納付書共通 = target.get仮算定納入通知書情報().get納付書共通();
-        IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor editor = new KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(target, 納入通知書期情報リスト, 連番);
+        NofuShoKyotsu 納付書共通 = 仮算定納入通知書情報.get納付書共通();
+        IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor editor
+                = new KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(仮算定納入通知書情報, 納入通知書期情報リスト, 連番);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNinshoshaEditor
-                = new CompNinshoshaEditor(target.getNinshoshaSource());
+                = new CompNinshoshaEditor(ninshoshaSource);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesakiEditor
-                = new CompSofubutsuAtesakiEditor(target);
+                = new CompSofubutsuAtesakiEditor(仮算定納入通知書情報);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesaki2Editor
-                = new CompSofubutsuAtesaki2Editor(target);
+                = new CompSofubutsuAtesaki2Editor(仮算定納入通知書情報);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNofushoItemEditor
                 = new DBBCompNofushoItemEditor(納付書共通, 納入通知書期情報リスト, 連番, 処理区分);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriBuilder builder

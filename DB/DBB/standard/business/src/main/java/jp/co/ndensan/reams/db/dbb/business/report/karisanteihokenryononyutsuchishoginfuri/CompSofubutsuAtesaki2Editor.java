@@ -20,23 +20,22 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
  */
 public class CompSofubutsuAtesaki2Editor implements IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor {
 
-    private final KarisanteiHokenryoNonyuTsuchishoGinfuriItem item;
+    private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item KarisanteiHokenryoNonyuTsuchishoGinfuriItem
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
      */
-    protected CompSofubutsuAtesaki2Editor(KarisanteiHokenryoNonyuTsuchishoGinfuriItem item) {
-        this.item = item;
+    protected CompSofubutsuAtesaki2Editor(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+        this.仮算定納入通知書情報 = 仮算定納入通知書情報;
     }
 
     @Override
     public KarisanteiHokenryoNonyuTsuchishoGinfuriSource edit(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
-        KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = item.get仮算定納入通知書情報();
-        EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報
+        EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
-        EditedAtesaki 編集後宛先 = null == 編集後仮算定通知書共通情報 ? null : 編集後仮算定通知書共通情報.get編集後宛先();
+        EditedAtesaki 編集後宛先 = 編集後仮算定通知書共通情報.get編集後宛先();
         KaigoSofubutsuAtesakiSource kaigoSofubutsuAtesakiSource = null;
         if (編集後宛先 != null) {
             kaigoSofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource();

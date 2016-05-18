@@ -40,16 +40,16 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link KarisanteiHokenryoNonyuTsuchishoGinfuriItem}
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
      * @param 連番 連番
      */
     protected KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(
-            KarisanteiHokenryoNonyuTsuchishoGinfuriItem item,
+            KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             int 連番) {
-        this.仮算定納入通知書情報 = item.get仮算定納入通知書情報();
-        this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報
+        this.仮算定納入通知書情報 = 仮算定納入通知書情報;
+        this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
         this.連番 = 連番;
@@ -82,25 +82,37 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
         editNendo1(source);
         editRyoshushoNendo(source);
         editSanteiKisoGenmenGaku(source);
-        editSanteiKisoKiTitle1(source);
-        editSanteiKisoKinGaku1(source);
-        editSanteiKisoKinGaku2(source);
-        editSanteiKisoKinGaku3(source);
-        editSanteiKisoKomokuTitle1(source);
-        editSanteiKisoKomokuTitle2(source);
-        editSanteiKisoKomokuTitle3(source);
-        editSanteiKisoNendo1(source);
-        editSanteiKisoNendo2(source);
-        editSanteiKisoNendo4(source);
-        editSanteiKisoNendo3(source);
-        editSanteiKisoShutokuDankai(source);
+        if (仮算定納入通知書情報.get出力期リスト() != null && !仮算定納入通知書情報.get出力期リスト().isEmpty()) {
+            editSanteiKisoKiTitle1(source);
+            editSanteiKisoZanteikiHokenryoGaku1(source);
+            editSanteiKisoKiTitle2(source);
+            editSanteiKisoZanteikiHokenryoGaku2(source);
+        }
+        if (編集後仮算定通知書共通情報.get前年度情報() != null) {
+            editSanteiKisoNendo1(source);
+            editSanteiKisoShutokuDankai(source);
+        }
+        if (仮算定納入通知書情報.get算定の基礎() != null) {
+            if (仮算定納入通知書情報.get算定の基礎().get基礎1() != null) {
+                editSanteiKisoNendo2(source);
+                editSanteiKisoKomokuTitle1(source);
+                editSanteiKisoKinGaku1(source);
+                editSanteiKisoYen1(source);
+            }
+            if (仮算定納入通知書情報.get算定の基礎().get基礎3() != null) {
+                editSanteiKisoNendo4(source);
+                editSanteiKisoKomokuTitle3(source);
+                editSanteiKisoKinGaku3(source);
+                editSanteiKisoYen3(source);
+            }
+            if (仮算定納入通知書情報.get算定の基礎().get基礎2() != null) {
+                editSanteiKisoNendo3(source);
+                editSanteiKisoKomokuTitle2(source);
+                editSanteiKisoKinGaku2(source);
+                editSanteiKisoYen2(source);
+            }
+        }
         editSanteiKisoTokuchoKariGokeiGaku(source);
-        editSanteiKisoYen1(source);
-        editSanteiKisoYen2(source);
-        editSanteiKisoYen3(source);
-        editSanteiKisoKiTitle2(source);
-        editSanteiKisoZanteikiHokenryoGaku1(source);
-        editSanteiKisoZanteikiHokenryoGaku2(source);
         editTitleNendo(source);
         editTsuchiKaishiKi(source);
         editTsuchiShuryoKi(source);
@@ -112,6 +124,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editTitleNendo(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get調定年度_年度なし()) {
+            return;
+        }
         source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
     }
 
@@ -140,6 +155,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editTsuchishoNo(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get通知書番号()) {
+            return;
+        }
         source.tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
     }
 
@@ -160,6 +178,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editHokenryoGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計()) {
+            return;
+        }
         source.hokenryoGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計().toString());
     }
 
@@ -224,10 +245,16 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editSanteiKisoGenmenGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額()) {
+            return;
+        }
         source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額().toString());
     }
 
     private void editSanteiKisoTokuchoKariGokeiGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額合計()) {
+            return;
+        }
         source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額合計().toString());
     }
 
@@ -236,6 +263,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editSanteiKisoZanteikiHokenryoGaku1(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
+            return;
+        }
         source.santeiKisoZanteikiHokenryoGaku1
                 = get金額(編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額リスト(), 仮算定納入通知書情報.get出力期リスト().get(0).get期AsInt());
     }
@@ -246,12 +276,18 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private void editSanteiKisoZanteikiHokenryoGaku2(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
+            return;
+        }
         source.santeiKisoZanteikiHokenryoGaku2 = 仮算定納入通知書情報.get出力期リスト().size() >= 2
                 ? get金額(編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額リスト(), 仮算定納入通知書情報.get出力期リスト().get(1).get期AsInt())
                 : RString.EMPTY;
     }
 
     private void editRyoshushoNendo(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        if (null == 編集後仮算定通知書共通情報.get調定年度_年度なし()) {
+            return;
+        }
         source.ryoshushoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
     }
 
@@ -417,6 +453,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
         int 最小期 = 0;
         RString 最小の期 = RString.EMPTY;
         List<Kitsuki> 出力期リスト = 仮算定納入通知書情報.get出力期リスト();
+        if (null == 出力期リスト) {
+            return;
+        }
         for (Kitsuki 出力期 : 出力期リスト) {
             if (最小期 > 出力期.get期AsInt()) {
                 最小期 = 出力期.get期AsInt();
@@ -430,6 +469,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
         int 最大期 = 0;
         RString 最大の期 = RString.EMPTY;
         List<Kitsuki> 出力期リスト = 仮算定納入通知書情報.get出力期リスト();
+        if (null == 出力期リスト) {
+            return;
+        }
         for (Kitsuki 出力期 : 出力期リスト) {
             if (最大期 > 出力期.get期AsInt()) {
                 最大期 = 出力期.get期AsInt();
@@ -452,6 +494,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
     }
 
     private RString get金額(List<UniversalPhase> 更正後普徴期別金額リスト, int 期) {
+        if (null == 更正後普徴期別金額リスト) {
+            return RString.EMPTY;
+        }
         for (UniversalPhase 更正後普徴期別金額 : 更正後普徴期別金額リスト) {
             if (期 == 更正後普徴期別金額.get期()) {
                 return new RString(更正後普徴期別金額.get金額().toString());
