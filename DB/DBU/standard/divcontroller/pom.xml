@@ -99,6 +99,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>db#dbu</finalName>
         <plugins>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
