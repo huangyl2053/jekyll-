@@ -102,8 +102,9 @@ public class YoshikiIchinogoHosei {
         if (削除状態.equals(状態)) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).delete(引き継ぎデータ);
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(削除状態.toString())).respond();
+                div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                        UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
+                return ResponseData.of(div).setState(DBU0020051StateName.完了状態);
             }
             if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())) {

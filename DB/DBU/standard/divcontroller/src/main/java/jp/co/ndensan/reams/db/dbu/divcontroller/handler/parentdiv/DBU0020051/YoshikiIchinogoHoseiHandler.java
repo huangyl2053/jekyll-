@@ -219,7 +219,7 @@ public class YoshikiIchinogoHoseiHandler {
             List<JigyoHokokuTokeiData> 施設介護2データリスト = ViewStateHolder
                     .get(ViewStateKeys.施設介護2データリスト, List.class);
             List<JigyoHokokuTokeiData> 施設介護3データリスト = ViewStateHolder
-                    .get(ViewStateKeys.施設介護1データリスト, List.class);
+                    .get(ViewStateKeys.施設介護3データリスト, List.class);
             修正データリスト = get施設介護データリスト(
                     施設介護1データリスト, 施設介護2データリスト, 施設介護3データリスト, 修正データリスト);
         }
@@ -233,17 +233,41 @@ public class YoshikiIchinogoHoseiHandler {
      */
     public void delete(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        new Code(引き継ぎデータ.get行集計番号()));
-        finder.deleteJigyoHokokuGeppoData(parameter);
+        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
+        List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
+        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
+        List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
+        List<RString> list41 = ViewStateHolder.get(ViewStateKeys.様式種類_41, List.class);
+        if (list11.contains(様式種類)) {
+            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1100);
+            finder.deleteJigyoHokokuGeppoData(parameter);
+        } else if (list21.contains(様式種類)) {
+            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1200);
+            finder.deleteJigyoHokokuGeppoData(parameter);
+        } else if (list31.contains(様式種類)) {
+            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1400);
+            finder.deleteJigyoHokokuGeppoData(parameter);
+        } else if (list41.contains(様式種類)) {
+            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1391);
+            finder.deleteJigyoHokokuGeppoData(parameter);
+            parameter = getParameter(引き継ぎデータ, 集計番号_1392);
+            finder.deleteJigyoHokokuGeppoData(parameter);
+            parameter = getParameter(引き継ぎデータ, 集計番号_1393);
+            finder.deleteJigyoHokokuGeppoData(parameter);
+        }
+    }
+
+    private JigyoHokokuGeppoDetalSearchParameter getParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
+            Code 集計番号) {
+        return JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
+                new FlexibleYear(引き継ぎデータ.get行報告年()),
+                引き継ぎデータ.get行報告月(),
+                new FlexibleYear(引き継ぎデータ.get行集計対象年()),
+                引き継ぎデータ.get行集計対象月(),
+                引き継ぎデータ.get行統計対象区分(),
+                new LasdecCode(引き継ぎデータ.get行市町村コード()),
+                new Code(引き継ぎデータ.get行表番号()),
+                集計番号);
     }
 
     /**
@@ -251,8 +275,10 @@ public class YoshikiIchinogoHoseiHandler {
      *
      * @param 修正データリスト List<JigyoHokokuTokeiData>
      */
-    public void update(List<JigyoHokokuTokeiData> 修正データリスト) {
-        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
+    public
+            void update(List<JigyoHokokuTokeiData> 修正データリスト) {
+        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class
+        );
         finder.updateJigyoHokokuGeppoEntity(修正データリスト);
     }
 
@@ -411,7 +437,7 @@ public class YoshikiIchinogoHoseiHandler {
             List<JigyoHokokuTokeiData> 施設介護2データリスト,
             List<JigyoHokokuTokeiData> 施設介護3データリスト,
             List<JigyoHokokuTokeiData> 修正リスト) {
-        修正リスト = get画面データ(施設介護1データリスト, 修正リスト, Decimal.ONE,
+        修正リスト = get画面データ(施設介護1データリスト, 修正リスト, NUM_3,
                 div.getPnl14().getTxt140302().getValue(),
                 div.getPnl14().getTxt140303().getValue(),
                 div.getPnl14().getTxt140304().getValue(),
@@ -423,7 +449,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140310().getValue(),
                 div.getPnl14().getTxt140311().getValue(),
                 div.getPnl14().getTxt140312().getValue());
-        修正リスト = get画面データ(施設介護1データリスト, 修正リスト, NUM_2,
+        修正リスト = get画面データ(施設介護1データリスト, 修正リスト, Decimal.ONE,
                 div.getPnl14().getTxt140402().getValue(),
                 div.getPnl14().getTxt140403().getValue(),
                 div.getPnl14().getTxt140404().getValue(),
@@ -435,7 +461,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140410().getValue(),
                 div.getPnl14().getTxt140411().getValue(),
                 div.getPnl14().getTxt140412().getValue());
-        修正リスト = get画面データ(施設介護1データリスト, 修正リスト, NUM_3,
+        修正リスト = get画面データ(施設介護1データリスト, 修正リスト, NUM_2,
                 div.getPnl14().getTxt140502().getValue(),
                 div.getPnl14().getTxt140503().getValue(),
                 div.getPnl14().getTxt140504().getValue(),
@@ -447,7 +473,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140510().getValue(),
                 div.getPnl14().getTxt140511().getValue(),
                 div.getPnl14().getTxt140512().getValue());
-        修正リスト = get画面データ(施設介護2データリスト, 修正リスト, NUM_4,
+        修正リスト = get画面データ(施設介護2データリスト, 修正リスト, NUM_3,
                 div.getPnl14().getTxt140602().getValue(),
                 div.getPnl14().getTxt140603().getValue(),
                 div.getPnl14().getTxt140604().getValue(),
@@ -459,7 +485,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140610().getValue(),
                 div.getPnl14().getTxt140611().getValue(),
                 div.getPnl14().getTxt140612().getValue());
-        修正リスト = get画面データ(施設介護2データリスト, 修正リスト, NUM_5,
+        修正リスト = get画面データ(施設介護2データリスト, 修正リスト, Decimal.ONE,
                 div.getPnl14().getTxt140702().getValue(),
                 div.getPnl14().getTxt140703().getValue(),
                 div.getPnl14().getTxt140704().getValue(),
@@ -471,7 +497,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140710().getValue(),
                 div.getPnl14().getTxt140711().getValue(),
                 div.getPnl14().getTxt140712().getValue());
-        修正リスト = get画面データ(施設介護2データリスト, 修正リスト, NUM_6,
+        修正リスト = get画面データ(施設介護2データリスト, 修正リスト, NUM_2,
                 div.getPnl14().getTxt140802().getValue(),
                 div.getPnl14().getTxt140803().getValue(),
                 div.getPnl14().getTxt140804().getValue(),
@@ -483,7 +509,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140810().getValue(),
                 div.getPnl14().getTxt140811().getValue(),
                 div.getPnl14().getTxt140812().getValue());
-        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, NUM_7,
+        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, NUM_3,
                 div.getPnl14().getTxt140902().getValue(),
                 div.getPnl14().getTxt140903().getValue(),
                 div.getPnl14().getTxt140904().getValue(),
@@ -495,7 +521,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt140910().getValue(),
                 div.getPnl14().getTxt140911().getValue(),
                 div.getPnl14().getTxt140912().getValue());
-        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, NUM_8,
+        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, Decimal.ONE,
                 div.getPnl14().getTxt141002().getValue(),
                 div.getPnl14().getTxt141003().getValue(),
                 div.getPnl14().getTxt141004().getValue(),
@@ -507,7 +533,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt141010().getValue(),
                 div.getPnl14().getTxt141011().getValue(),
                 div.getPnl14().getTxt141012().getValue());
-        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, NUM_9,
+        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, NUM_2,
                 div.getPnl14().getTxt141102().getValue(),
                 div.getPnl14().getTxt141103().getValue(),
                 div.getPnl14().getTxt141104().getValue(),
@@ -519,7 +545,7 @@ public class YoshikiIchinogoHoseiHandler {
                 div.getPnl14().getTxt141110().getValue(),
                 div.getPnl14().getTxt141111().getValue(),
                 div.getPnl14().getTxt141112().getValue());
-        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, NUM_10,
+        修正リスト = get画面データ(施設介護3データリスト, 修正リスト, NUM_4,
                 div.getPnl14().getTxt141202().getValue(),
                 div.getPnl14().getTxt141203().getValue(),
                 div.getPnl14().getTxt141204().getValue(),
