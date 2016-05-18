@@ -201,39 +201,41 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
             source.naisenNo = buildSource.naisenNo;
         }
 
-        if (isNotNull(編集後宛先.getSofubutsuAtesakiSource())) {
+        if (isNotNull(編集後宛先) && isNotNull(編集後宛先.getSofubutsuAtesakiSource())) {
             SofubutsuAtesakiSource sofuSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-            source.yubinNo = sofuSource.yubinNo;
-            source.gyoseiku = sofuSource.gyoseiku;
-            source.jusho3 = sofuSource.jusho3;
-            source.jushoText = sofuSource.jushoText;
-            source.jusho1 = sofuSource.jusho1;
-            source.jusho2 = sofuSource.jusho2;
-            source.katagakiText = sofuSource.katagakiText;
-            source.katagaki2 = sofuSource.katagaki2;
-            source.katagakiSmall2 = sofuSource.katagakiSmall2;
-            source.katagaki1 = sofuSource.katagaki1;
-            source.katagakiSmall1 = sofuSource.katagakiSmall1;
-            source.kakkoRight2 = sofuSource.kakkoRight2;
-            source.kakkoRight1 = sofuSource.kakkoRight1;
-            source.shimei2 = sofuSource.shimei2;
-            source.shimeiSmall2 = sofuSource.shimeiSmall2;
-            source.shimeiText = sofuSource.shimeiText;
-            source.meishoFuyo2 = sofuSource.meishoFuyo2;
-            source.shimeiSmall1 = sofuSource.shimeiSmall1;
-            source.dainoKubunMei = sofuSource.dainoKubunMei;
-            source.shimei1 = sofuSource.shimei1;
-            source.meishoFuyo1 = sofuSource.meishoFuyo1;
-            source.samabunShimeiText = sofuSource.samabunShimeiText;
-            source.samabunShimeiSmall2 = sofuSource.samabunShimeiSmall2;
-            source.samaBun2 = sofuSource.samaBun2;
-            source.kakkoLeft2 = sofuSource.kakkoLeft2;
-            source.samabunShimei2 = sofuSource.samabunShimei2;
-            source.kakkoLeft1 = sofuSource.kakkoLeft1;
-            source.samabunShimei1 = sofuSource.samabunShimei1;
-            source.samaBun1 = sofuSource.samaBun1;
-            source.samabunShimeiSmall1 = sofuSource.samabunShimeiSmall1;
-            source.customerBarCode = sofuSource.customerBarCode;
+            if (isNotNull(sofuSource)) {
+                source.yubinNo = sofuSource.yubinNo;
+                source.gyoseiku = sofuSource.gyoseiku;
+                source.jusho3 = sofuSource.jusho3;
+                source.jushoText = sofuSource.jushoText;
+                source.jusho1 = sofuSource.jusho1;
+                source.jusho2 = sofuSource.jusho2;
+                source.katagakiText = sofuSource.katagakiText;
+                source.katagaki2 = sofuSource.katagaki2;
+                source.katagakiSmall2 = sofuSource.katagakiSmall2;
+                source.katagaki1 = sofuSource.katagaki1;
+                source.katagakiSmall1 = sofuSource.katagakiSmall1;
+                source.kakkoRight2 = sofuSource.kakkoRight2;
+                source.kakkoRight1 = sofuSource.kakkoRight1;
+                source.shimei2 = sofuSource.shimei2;
+                source.shimeiSmall2 = sofuSource.shimeiSmall2;
+                source.shimeiText = sofuSource.shimeiText;
+                source.meishoFuyo2 = sofuSource.meishoFuyo2;
+                source.shimeiSmall1 = sofuSource.shimeiSmall1;
+                source.dainoKubunMei = sofuSource.dainoKubunMei;
+                source.shimei1 = sofuSource.shimei1;
+                source.meishoFuyo1 = sofuSource.meishoFuyo1;
+                source.samabunShimeiText = sofuSource.samabunShimeiText;
+                source.samabunShimeiSmall2 = sofuSource.samabunShimeiSmall2;
+                source.samaBun2 = sofuSource.samaBun2;
+                source.kakkoLeft2 = sofuSource.kakkoLeft2;
+                source.samabunShimei2 = sofuSource.samabunShimei2;
+                source.kakkoLeft1 = sofuSource.kakkoLeft1;
+                source.samabunShimei1 = sofuSource.samabunShimei1;
+                source.samaBun1 = sofuSource.samaBun1;
+                source.samabunShimeiSmall1 = sofuSource.samabunShimeiSmall1;
+                source.customerBarCode = sofuSource.customerBarCode;
+            }
             // TODO QA:581
 //        source.setainusimei = sofuSource.setainusimei;
 //        source.samaKata = sofuSource.samaKata;
@@ -304,7 +306,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
 
     private Decimal get期と特徴期別金額の対応(
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, RString 期) {
-
+        if (徴収猶予決定通知書情報.get徴収猶予の情報() == null) {
+            return Decimal.ZERO;
+        }
         if (期_1.equals(期)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get特徴期別金額01();
         } else if (期_2.equals(期)) {
@@ -324,7 +328,9 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoEditor
 
     private Decimal get月と普徴期別金額の対応(
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報, Tsuki 月) {
-
+        if (徴収猶予決定通知書情報.get徴収猶予の情報() == null) {
+            return Decimal.ZERO;
+        }
         RString 普徴月 = new RString(月.toString());
         if (普徴期_4.equals(普徴月)) {
             return 徴収猶予決定通知書情報.get徴収猶予の情報().get普徴期別金額01();
