@@ -54,8 +54,8 @@ public class KaigoJyuminhyouTashajukiDateEntity {
     private LasdecCode 広住特措置元市町村コード;
     private LasdecCode 旧市町村コード;
     private boolean 論理削除フラグ;
-    private FlexibleDate 挿入日時;
-    private FlexibleDate 更新日時;
+    private RString 挿入日時;
+    private RString 更新日時;
     private LasdecCode 受給者市町村コード;
     private HihokenshaNo 受給者被保険者番号;
     private RString 受給者履歴番号;
@@ -136,6 +136,6 @@ public class KaigoJyuminhyouTashajukiDateEntity {
     private boolean 受給者資格取得前申請フラグ;
     private boolean 受給者旧措置者フラグ;
     private boolean 受給者論理削除フラグ;
-    private FlexibleDate 受給者挿入日時;
-    private FlexibleDate 受給者更新日時;
+    private RString 受給者挿入日時;
+    private RString 受給者更新日時;
 }
