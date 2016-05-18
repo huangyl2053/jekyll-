@@ -96,7 +96,9 @@ public class ShiharaiHohoJyoho {
         if (div.getTxtStartYMD().getValue() == null) {
             div.getTxtStartYobi().setValue(RString.EMPTY);
         } else {
-            div.getTxtStartYobi().setValue(new RString(div.getTxtStartYMD().getValue().getDayOfWeek().getMiddleTerm()));
+            RString 曜日 = new RString(div.getTxtStartYMD().getValue().getDayOfWeek().getMiddleTerm());
+            getHandler(div).開始日_曜日の表示色(曜日);
+            div.getTxtStartYobi().setValue(曜日);
         }
         response.data = div;
         return response;
@@ -110,8 +112,11 @@ public class ShiharaiHohoJyoho {
      */
     public ResponseData onBlur_txtEndYMD(ShiharaiHohoJyohoDiv div) {
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
+
         if (div.getTxtEndYMD().getValue() != null) {
-            div.getTxtEndYobi().setValue(new RString(div.getTxtEndYMD().getValue().getDayOfWeek().getMiddleTerm()));
+            RString 曜日 = new RString(div.getTxtEndYMD().getValue().getDayOfWeek().getMiddleTerm());
+            getHandler(div).終了日_曜日の表示色(曜日);
+            div.getTxtEndYobi().setValue(曜日);
         } else {
             div.getTxtEndYobi().setValue(RString.EMPTY);
         }

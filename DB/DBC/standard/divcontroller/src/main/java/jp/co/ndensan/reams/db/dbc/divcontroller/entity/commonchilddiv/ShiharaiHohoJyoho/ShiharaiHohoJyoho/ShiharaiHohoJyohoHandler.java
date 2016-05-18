@@ -69,6 +69,8 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 高額合算支給申請11 = new RString("DBCMN61011");
     private final RString 高額合算支給申請12 = new RString("DBCMN61012");
     private final RString 高額合算支給決定情報補正 = new RString("DBCMN62004");
+    private final RString 曜日_日 = new RString("日曜");
+    private final RString 曜日_土 = new RString("土曜");
     private final ShiharaiHohoJyohoDiv div;
 
     /**
@@ -535,12 +537,16 @@ public class ShiharaiHohoJyohoHandler {
         if (支給申請情報.getStartYMD() != null) {
 
             div.getTxtStartYMD().setValue(支給申請情報.getStartYMD());
-            div.getTxtStartYobi().setValue(new RString(支給申請情報.getStartYMD().getDayOfWeek().getMiddleTerm()));
+            RString 曜日 = new RString(支給申請情報.getStartYMD().getDayOfWeek().getMiddleTerm());
+            開始日_曜日の表示色(曜日);
+            div.getTxtStartYobi().setValue(曜日);
         }
         if (支給申請情報.getEndYMD() != null) {
 
             div.getTxtEndYMD().setValue(支給申請情報.getEndYMD());
-            div.getTxtEndYobi().setValue(new RString(支給申請情報.getEndYMD().getDayOfWeek().getMiddleTerm()));
+            RString 曜日 = new RString(支給申請情報.getEndYMD().getDayOfWeek().getMiddleTerm());
+            終了日_曜日の表示色(曜日);
+            div.getTxtEndYobi().setValue(曜日);
         }
         if (支給申請情報.getStartHHMM() != null) {
 
@@ -695,6 +701,38 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtStartYobi().setReadOnly(true);
         div.getTxtStartHHMM().setReadOnly(false);
         div.getTxtEndHHMM().setReadOnly(false);
+    }
+
+    /**
+     * 曜日の表示色を表示します。
+     *
+     * @param 曜日 RString
+     */
+    public void 開始日_曜日の表示色(RString 曜日) {
+
+        if (曜日_日.equals(曜日)) {
+            div.getTxtStartYobi().setDecorationClass(new RString("DBCFontcolor_red"));
+        } else if (曜日_土.equals(曜日)) {
+            div.getTxtStartYobi().setDecorationClass(new RString("DBCFontcolor_green"));
+        } else {
+            div.getTxtStartYobi().setDecorationClass(new RString("DBCFontcolor_black"));
+        }
+    }
+
+    /**
+     * 曜日の表示色を表示します。
+     *
+     * @param 曜日 RString
+     */
+    public void 終了日_曜日の表示色(RString 曜日) {
+
+        if (曜日_日.equals(曜日)) {
+            div.getTxtEndYobi().setDecorationClass(new RString("DBCFontcolor_red"));
+        } else if (曜日_土.equals(曜日)) {
+            div.getTxtEndYobi().setDecorationClass(new RString("DBCFontcolor_green"));
+        } else {
+            div.getTxtEndYobi().setDecorationClass(new RString("DBCFontcolor_black"));
+        }
     }
 
     /**
