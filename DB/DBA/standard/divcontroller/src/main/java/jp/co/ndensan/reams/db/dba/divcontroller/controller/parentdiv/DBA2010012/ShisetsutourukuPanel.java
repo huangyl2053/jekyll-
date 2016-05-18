@@ -72,7 +72,7 @@ public class ShisetsutourukuPanel {
      */
     public ResponseData<ShisetsutourukuPanelDiv> onLoad(ShisetsutourukuPanelDiv div) {
         RString 介護事業者_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
-        if (追加.equals(介護事業者_状態)) {
+        if (介護事業者_状態 == null || 追加.equals(介護事業者_状態)) {
             getHandler(div).追加_状態();
             return ResponseData.of(div).setState(DBA2010012StateName.追加状態);
         } else if (修正.equals(介護事業者_状態)) {
@@ -118,7 +118,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> onClick_HoZonn(ShisetsutourukuPanelDiv div) {
-        if (追加.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
+        if (ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class) == null || 追加.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -284,12 +284,16 @@ public class ShisetsutourukuPanel {
 
     private void 有効期間合理性チェック(ShisetsutourukuPanelDiv div) {
         JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
-        KaigoJigyoshaParameter paramter = KaigoJigyoshaParameter
-                .createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
-                        mode.getJigyoshaShubetsu(),
-                        div.getTxtShisetsuYukoKaishiYMD().getValue(),
-                        div.getTxtShisetsuYukoShuryoYMD().getValue());
-
+        if (mode != null) {
+            KaigoJigyoshaParameter paramter = KaigoJigyoshaParameter
+                    .createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
+                            mode.getJigyoshaShubetsu(),
+                            div.getTxtShisetsuYukoKaishiYMD().getValue(),
+                            div.getTxtShisetsuYukoShuryoYMD().getValue());
+            if (manager.checkKikanJufuku(paramter, new FlexibleDate(mode.getYukoKaishiYMD()))) {
+                throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
+            }
+        }
         KaigoJogaiTokureiParameter 重複paramter = KaigoJogaiTokureiParameter
                 .createParam(RString.EMPTY,
                         div.getTxtShisetsuYukoKaishiYMD().getValue(),
@@ -298,9 +302,7 @@ public class ShisetsutourukuPanel {
         if (!manager.checkKikanGorisei(重複paramter)) {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
         }
-        if (manager.checkKikanJufuku(paramter, new FlexibleDate(mode.getYukoKaishiYMD()))) {
-            throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
-        }
+
     }
 
     private KaigoJigyoshaParameter 事業者情報取得paramter() {
