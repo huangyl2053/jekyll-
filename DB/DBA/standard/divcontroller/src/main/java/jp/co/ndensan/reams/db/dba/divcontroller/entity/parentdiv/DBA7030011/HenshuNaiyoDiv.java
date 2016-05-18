@@ -38,14 +38,12 @@ public class HenshuNaiyoDiv extends Panel {
     private TextBox txtTantokamei;
     @JsonProperty("txtSam")
     private TextBox txtSam;
-    @JsonProperty("btnZenkaiBango")
-    private Button btnZenkaiBango;
-    @JsonProperty("txtBunshoBango")
-    private TextBox txtBunshoBango;
     @JsonProperty("btnJidoFuban")
     private Button btnJidoFuban;
     @JsonProperty("ccdPrintContentsSetting")
     private PrintContentsSettingDiv ccdPrintContentsSetting;
+    @JsonProperty("txtBunshoBango")
+    private TextBox txtBunshoBango;
     @JsonProperty("異動日")
     private RString 異動日;
     @JsonProperty("枝番")
@@ -168,42 +166,6 @@ public class HenshuNaiyoDiv extends Panel {
     }
 
     /*
-     * getbtnZenkaiBango
-     * @return btnZenkaiBango
-     */
-    @JsonProperty("btnZenkaiBango")
-    public Button getBtnZenkaiBango() {
-        return btnZenkaiBango;
-    }
-
-    /*
-     * setbtnZenkaiBango
-     * @param btnZenkaiBango btnZenkaiBango
-     */
-    @JsonProperty("btnZenkaiBango")
-    public void setBtnZenkaiBango(Button btnZenkaiBango) {
-        this.btnZenkaiBango = btnZenkaiBango;
-    }
-
-    /*
-     * gettxtBunshoBango
-     * @return txtBunshoBango
-     */
-    @JsonProperty("txtBunshoBango")
-    public TextBox getTxtBunshoBango() {
-        return txtBunshoBango;
-    }
-
-    /*
-     * settxtBunshoBango
-     * @param txtBunshoBango txtBunshoBango
-     */
-    @JsonProperty("txtBunshoBango")
-    public void setTxtBunshoBango(TextBox txtBunshoBango) {
-        this.txtBunshoBango = txtBunshoBango;
-    }
-
-    /*
      * getbtnJidoFuban
      * @return btnJidoFuban
      */
@@ -228,6 +190,24 @@ public class HenshuNaiyoDiv extends Panel {
     @JsonProperty("ccdPrintContentsSetting")
     public IPrintContentsSettingDiv getCcdPrintContentsSetting() {
         return ccdPrintContentsSetting;
+    }
+
+    /*
+     * gettxtBunshoBango
+     * @return txtBunshoBango
+     */
+    @JsonProperty("txtBunshoBango")
+    public TextBox getTxtBunshoBango() {
+        return txtBunshoBango;
+    }
+
+    /*
+     * settxtBunshoBango
+     * @param txtBunshoBango txtBunshoBango
+     */
+    @JsonProperty("txtBunshoBango")
+    public void setTxtBunshoBango(TextBox txtBunshoBango) {
+        this.txtBunshoBango = txtBunshoBango;
     }
 
     /*
