@@ -51,21 +51,20 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = item.get本算定決定通知書情報().get編集後本算定通知書共通情報();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = 編集後本算定通知書共通情報.get更正後();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前 = 編集後本算定通知書共通情報.get更正前();
-        //  reportSource.bankCode = item.get本算定決定通知書情報().get編集後本算定通知書共通情報().
-        // reportSource.bankName = item.get本算定決定通知書情報().get編集後本算定通知書共通情報().
-        //reportSource.birthYMD = item.get本算定決定通知書情報().get編集後本算定通知書共通情報().
+        reportSource.bankCode = 編集後本算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード();
+        reportSource.bankName = 編集後本算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名();
         reportSource.bunshoNo = item.get文書番号();
         List<RString> 調定事由リスト = item.get調定事由リスト();
         if (調定事由リスト != null && !調定事由リスト.isEmpty()) {
             reportSource.choteiJiyu1 = 調定事由リスト.get(0);
             if (1 < 調定事由リスト.size()) {
-                reportSource.choteiJiyu2 = 調定事由リスト.get(0);
+                reportSource.choteiJiyu2 = 調定事由リスト.get(1);
             }
             if (2 < 調定事由リスト.size()) {
-                reportSource.choteiJiyu3 = 調定事由リスト.get(0);
+                reportSource.choteiJiyu3 = 調定事由リスト.get(2);
             }
             if (SIZE_3 < 調定事由リスト.size()) {
-                reportSource.choteiJiyu4 = 調定事由リスト.get(0);
+                reportSource.choteiJiyu4 = 調定事由リスト.get(SIZE_3);
             }
 
         } else {
@@ -77,7 +76,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
 
         reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
         reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額(), 0);
-        reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get保険者番号().value();
+        reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
         reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
         reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(更正前.get確定保険料_年額(), 0);
         reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
@@ -91,8 +90,6 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         reportSource.hyojicodeName1 = 表示コード.get表示コード名１();
         reportSource.hyojicodeName2 = 表示コード.get表示コード名２();
         reportSource.hyojicodeName3 = 表示コード.get表示コード名３();
-
-        reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
         reportSource.korekaraChoshuho = 更正後.get徴収方法();
         edit更正内容(reportSource, 編集後本算定通知書共通情報);
 
@@ -115,6 +112,9 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         reportSource.tsukisuAto = 更正後.get月数_ケ月();
         reportSource.tsukisuMae = 更正前.get月数_ケ月();
         reportSource.zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get増減額(), 0);
+        reportSource.koseigoHokenryoGaku = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
+        reportSource.tokuchoGimusha = 更正後.get特別徴収義務者();
+        reportSource.tokuchoTaishoNenkin = 更正後.get特別徴収対象年金();
         return reportSource;
     }
 

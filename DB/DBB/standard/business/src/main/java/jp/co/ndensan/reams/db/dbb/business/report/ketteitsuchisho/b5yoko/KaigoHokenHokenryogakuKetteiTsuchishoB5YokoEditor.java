@@ -47,8 +47,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = item.get本算定決定通知書情報().get編集後本算定通知書共通情報();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = 編集後本算定通知書共通情報.get更正後();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前 = 編集後本算定通知書共通情報.get更正前();
-        //  reportSource.bankCode = item.get本算定決定通知書情報().get編集後本算定通知書共通情報().
-        // reportSource.bankName = item.get本算定決定通知書情報().get編集後本算定通知書共通情報().
+        reportSource.bankCode = 編集後本算定通知書共通情報.get編集後口座().get金融機関コードCombinedWith支店コード();
+        reportSource.bankName = 編集後本算定通知書共通情報.get編集後口座().get金融機関名CombinedWith支店名();
         reportSource.birthYMD = 編集後本算定通知書共通情報.get編集後個人().get生年月日();
         reportSource.bunshoNo = item.get文書番号();
         List<RString> 調定事由リスト = item.get調定事由リスト();
