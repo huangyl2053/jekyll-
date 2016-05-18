@@ -108,6 +108,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString 非表示用フラグ_TRUE = new RString("true");
     private static final RString 行状態_削除 = new RString("削除");
     private static final RString 行状態_更新 = new RString("更新");
+    private static final RString 行状態_登録 = new RString("登録");
 
     private JutakuKaishuJizenShinseiTorokuDivHandler(JutakuKaishuJizenShinseiTorokuDiv div) {
         this.div = div;
@@ -743,9 +744,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
      * @param hihokenshaNo HihokenshaNo
      */
     public void 支払結果の設定(HihokenshaNo hihokenshaNo) {
-        FlexibleYearMonth 着工予定日 = new FlexibleDate(div.getKaigoShikakuKihonShaPanel()
+        FlexibleYearMonth 着工予定日 = new FlexibleDate(new RDate(div.getKaigoShikakuKihonShaPanel()
                 .getTabShinseiContents().getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧()
-                .get(0).getTxtChakkoYoteibi()).getYearMonth();
+                .get(0).getTxtChakkoYoteibi().toString()).toDateString()).getYearMonth();
         Decimal 支給限度額 = JutakuKaishuJizenShinsei.createInstance().getShikyuGendoGaku(hihokenshaNo, 着工予定日);
 
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
@@ -936,7 +937,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 for (dgGaisyuList_Row row : gridList) {
                     ShokanJutakuKaishu tmpData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,
                             new JigyoshaNo(固定値_事業者番号), 様式番号, 固定値_明細番号, new RString(index++));
-                    tmpData.createBuilderForEdit().set住宅改修着工年月日(new FlexibleDate(row.getTxtChakkoYoteibi()))
+                    tmpData.createBuilderForEdit().set住宅改修着工年月日(new FlexibleDate(new RDate(row.getTxtChakkoYoteibi()
+                            .toString()).toDateString()))
                             .set住宅改修内容(row.getTxtKaishuNaiyo())
                             .set住宅改修事業者名(row.getTxtJigyosha())
                             .set住宅改修住宅住所(row.getTxtJutakuAddress())
@@ -979,22 +981,29 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = oldData.createBuilderForEdit();
                     shokanJutakuKaishuBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
                     shokanJutakuKaishuBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
-                    shokanJutakuKaishuBuilder.set住宅改修着工年月日(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()));
-                    shokanJutakuKaishuBuilder.set住宅改修完成年月日(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()));
-                    shokanJutakuKaishuBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty() ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
-                    EntityDataState state = 行状態_更新.equals(tmpRow.getTxtJyotai()) ? EntityDataState.Modified : EntityDataState.Deleted;
+                    shokanJutakuKaishuBuilder.set住宅改修着工年月日(new FlexibleDate(new RDate(tmpRow
+                            .getTxtChakkoYoteibi().toString()).toDateString()));
+                    shokanJutakuKaishuBuilder.set住宅改修完成年月日(new FlexibleDate(new RDate(tmpRow
+                            .getTxtKanseiYoteibi().toString()).toDateString()));
+                    shokanJutakuKaishuBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty() ? 0 : Integer
+                            .parseInt(tmpRow.getTxtKaishuKingaku().toString()));
+                    EntityDataState state = 行状態_更新.equals(tmpRow.getTxtJyotai()) ? EntityDataState.Modified
+                            : EntityDataState.Deleted;
                     shokanJutakuKaishuBuilder.setステータス(state);
                     oldData = shokanJutakuKaishuBuilder.build();
                     kaishuList.add(oldData);
-                } else {
+                } else if (行状態_登録.equals(tmpRow.getTxtJyotai())) {
                     ShokanJutakuKaishu addData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,
                             new JigyoshaNo(固定値_事業者番号), 様式番号, 固定値_明細番号, new RString(index++));
                     ShokanJutakuKaishuBuilder addDataBuilder = addData.createBuilderForEdit();
                     addDataBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
                     addDataBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
-                    addDataBuilder.set住宅改修着工年月日(new FlexibleDate(tmpRow.getTxtChakkoYoteibi()));
-                    addDataBuilder.set住宅改修完成年月日(new FlexibleDate(tmpRow.getTxtKanseiYoteibi()));
-                    addDataBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty() ? 0 : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
+                    addDataBuilder.set住宅改修着工年月日(new FlexibleDate(new RDate(tmpRow.getTxtChakkoYoteibi()
+                            .toString()).toDateString()));
+                    addDataBuilder.set住宅改修完成年月日(new FlexibleDate(new RDate(tmpRow.getTxtKanseiYoteibi()
+                            .toString()).toDateString()));
+                    addDataBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty() ? 0
+                            : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
                     addDataBuilder.setステータス(EntityDataState.Added);
                     addData = addDataBuilder.build();
                     kaishuList.add(addData);
@@ -1060,9 +1069,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             builder.set支払期間終了年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                     .getCcdJutakuKaishuJizenShinseiKoza().getEndYMD().toDateString()));
             builder.set支払窓口開始時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().toString()));
+                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getHour())
+                    .concat(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute())));
             builder.set支払窓口終了時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().toString()));
+                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getHour())
+                    .concat(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute())));
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード)) {
             builder.set口座ID(Long.valueOf(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                     .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().toString()));
@@ -1165,9 +1178,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             builder.set支払期間終了年月日(new FlexibleDate(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                     .getCcdJutakuKaishuJizenShinseiKoza().getEndYMD().toDateString()));
             builder.set支払窓口開始時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().toString()));
+                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getHour())
+                    .concat(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                                    .getCcdJutakuKaishuJizenShinseiKoza().getStartHHMM().getMinute())));
             builder.set支払窓口終了時間(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
-                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().toString()));
+                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getHour())
+                    .concat(new RString(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                                    .getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute())));
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード)) {
             builder.set口座ID(Long.valueOf(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                     .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().toString()));
