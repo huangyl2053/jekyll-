@@ -109,7 +109,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
-                        new RDate(発行日.toString())).buildSource();
+                        発行日 == null ? null : new RDate(発行日.toString())).buildSource();
                 int flag = INDEX_ONE;
                 List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
                         介護問合せ先ソースビルダー, sourceBuilder, flag);
@@ -139,7 +139,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード1);
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
-                        new RDate(発行日.toString())).buildSource();
+                        発行日 == null ? null : new RDate(発行日.toString())).buildSource();
                 int flag = INDEX_TWO;
                 List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
                         介護問合せ先ソースビルダー, sourceBuilder, flag);
