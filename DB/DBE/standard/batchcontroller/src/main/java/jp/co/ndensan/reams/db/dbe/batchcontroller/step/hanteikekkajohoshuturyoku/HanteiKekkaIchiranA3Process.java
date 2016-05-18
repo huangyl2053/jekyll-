@@ -7,10 +7,13 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyok
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.report.hanteikekkaichirana3.HanteiKekkaIchiranA3Report;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity;
+import jp.co.ndensan.reams.db.dbe.entity.report.hanteikekkaichirana3.HanteiKekkaIchiranA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -20,9 +23,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 要介護認定判定結果一覧表Ａ３版のデータを作成します。
@@ -31,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIchiranA3Entity> {
 
-//    private static final ReportId ID = ReportIdDBE.DBE525002.getReportId();
+    private static final ReportId ID = ReportIdDBE.DBE525002.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getHanteiKekkaIchiranA3List");
@@ -42,10 +50,10 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private RDateTime システム時刻;
 
-    // TODO 帳票について、未作成
-//    @BatchWriter
-//    private BatchReportWriter<HanteiKekkaIchiranA3ReportSource> batchReportWriter;
-//    private ReportSourceWriter<HanteiKekkaIchiranA3ReportSource> reportSourceWriter;
+    @BatchWriter
+    private BatchReportWriter<HanteiKekkaIchiranA3ReportSource> batchReportWriter;
+    private ReportSourceWriter<HanteiKekkaIchiranA3ReportSource> reportSourceWriter;
+
     @Override
     protected void initialize() {
         システム時刻 = RDateTime.now();
@@ -62,8 +70,8 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
 
     @Override
     protected void createWriter() {
-//        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
-//        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
@@ -89,8 +97,8 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get略称());
         entity.set状態像内容(YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード()).get名称());
         entity.set二号特定疾病内容(TokuteiShippei.toValue(entity.get二号特定疾病コード()).toRString());
-//        HanteiKekkaIchiranA3Report report = new HanteiKekkaIchiranA3Report(entity);
-//        report.writeBy(reportSourceWriter);
+        HanteiKekkaIchiranA3Report report = new HanteiKekkaIchiranA3Report(entity);
+        report.writeBy(reportSourceWriter);
     }
 
 }
