@@ -95,18 +95,18 @@ public class JigyoshaTouroku {
                 事業者番号, 有効開始日, RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY);
         サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
                 事業者番号, 有効開始日, FlexibleDate.EMPTY, RDate.getNowDate().getYearMonth());
-        if (初期_状態.equals(状態_追加)) {
+        if (状態_追加.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             return ResponseData.of(div).setState(DBA2010013StateName.追加状態);
-        } else if (初期_状態.equals(状態_修正)) {
+        } else if (状態_修正.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010013StateName.修正状態);
-        } else if (初期_状態.equals(状態_削除)) {
+        } else if (状態_削除.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010013StateName.削除状態);
-        } else if (初期_状態.equals(状態_照会)) {
+        } else if (状態_照会.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             get事業者情報の検索処理(div);
             return ResponseData.of(div).setState(DBA2010013StateName.照会状態);
