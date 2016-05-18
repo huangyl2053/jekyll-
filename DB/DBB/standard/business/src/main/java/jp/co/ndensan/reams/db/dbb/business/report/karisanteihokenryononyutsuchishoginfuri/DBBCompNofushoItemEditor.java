@@ -45,7 +45,7 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
      * @param 連番 連番
      */
     protected DBBCompNofushoItemEditor(NofuShoKyotsu 納付書共通, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト, int 連番, ShoriKubun 処理区分) {
-        this.納付書共通 = 納付書共通;
+        this.納付書共通 = null == 納付書共通 ? new NofuShoKyotsu() : 納付書共通;
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
         this.連番 = 連番;
         this.処理区分 = 処理区分;
@@ -53,18 +53,22 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
 
     @Override
     public KarisanteiHokenryoNonyuTsuchishoGinfuriSource edit(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
+        RString 調定年度表記 = 納付書共通.get調定年度表記();
+        if (null == 調定年度表記) {
+            調定年度表記 = RString.EMPTY;
+        }
         source.nofushoKanendo3 = RString.EMPTY;
         source.nofushoNendo4
-                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(INT4) ? 納付書共通.get調定年度表記() : 星6);
+                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(INT4) ? 調定年度表記 : 星6);
         source.nofushoKanendo2 = RString.EMPTY;
         source.nofushoKanendo1 = RString.EMPTY;
         source.nofushoKanendo4 = RString.EMPTY;
         source.nofushoNendo3
-                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(INT3) ? 納付書共通.get調定年度表記() : 星6);
+                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(INT3) ? 調定年度表記 : 星6);
         source.nofushoNendo2
-                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(2) ? 納付書共通.get調定年度表記() : 星6);
+                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(2) ? 調定年度表記 : 星6);
         source.nofushoNendo1
-                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(1) ? 納付書共通.get調定年度表記() : 星6);
+                = RStringUtil.convert半角to全角(is銀振印字位置の納入通知書期情報がある(1) ? 調定年度表記 : 星6);
         source.nofushoKanendobun2 = RString.EMPTY;
         source.nofushoKanendobun3 = RString.EMPTY;
         source.nofushoKanendobun4 = RString.EMPTY;
@@ -90,38 +94,44 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
         source.nofushoKakko33 = RString.isNullOrEmpty(source.nofushoHonninName3) ? RString.EMPTY : 納付書共通.get被代納人敬称().concat(")");
         source.nofushoKakko24 = RString.EMPTY;
         source.nofushoKakko34 = RString.isNullOrEmpty(source.nofushoHonninName4) ? RString.EMPTY : 納付書共通.get被代納人敬称().concat(")");
-        source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-        source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
-        source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
-        source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
-        source.nofushoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
-        source.nofushoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
-        source.nofushoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
-        source.nofushoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
-        source.nofushohyojicodeName11 = 納付書共通.get表示コード().get表示コード名１();
-        source.nofushohyojicode11 = 納付書共通.get表示コード().get表示コード１();
-        source.nofushohyojicodeName12 = 納付書共通.get表示コード().get表示コード名１();
-        source.nofushohyojicode12 = 納付書共通.get表示コード().get表示コード１();
-        source.nofushohyojicodeName13 = 納付書共通.get表示コード().get表示コード名１();
-        source.nofushohyojicode13 = 納付書共通.get表示コード().get表示コード１();
-        source.nofushohyojicodeName14 = 納付書共通.get表示コード().get表示コード名１();
-        source.nofushohyojicode14 = 納付書共通.get表示コード().get表示コード１();
-        source.nofushohyojicodeName21 = 納付書共通.get表示コード().get表示コード名２();
-        source.nofushohyojicode21 = 納付書共通.get表示コード().get表示コード２();
-        source.nofushohyojicodeName22 = 納付書共通.get表示コード().get表示コード名２();
-        source.nofushohyojicode22 = 納付書共通.get表示コード().get表示コード２();
-        source.nofushohyojicodeName23 = 納付書共通.get表示コード().get表示コード名２();
-        source.nofushohyojicode23 = 納付書共通.get表示コード().get表示コード２();
-        source.nofushohyojicodeName24 = 納付書共通.get表示コード().get表示コード名２();
-        source.nofushohyojicode24 = 納付書共通.get表示コード().get表示コード２();
-        source.nofushohyojicodeName31 = 納付書共通.get表示コード().get表示コード名３();
-        source.nofushohyojicode31 = 納付書共通.get表示コード().get表示コード３();
-        source.nofushohyojicodeName32 = 納付書共通.get表示コード().get表示コード名３();
-        source.nofushohyojicode32 = 納付書共通.get表示コード().get表示コード３();
-        source.nofushohyojicodeName33 = 納付書共通.get表示コード().get表示コード名３();
-        source.nofushohyojicode33 = 納付書共通.get表示コード().get表示コード３();
-        source.nofushohyojicodeName34 = 納付書共通.get表示コード().get表示コード名３();
-        source.nofushohyojicode34 = 納付書共通.get表示コード().get表示コード３();
+        if (納付書共通.get通知書番号() != null) {
+            source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+            source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+            source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+            source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+        }
+        if (納付書共通.get世帯コード() != null) {
+            source.nofushoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
+            source.nofushoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
+            source.nofushoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
+            source.nofushoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
+        }
+        if (納付書共通.get表示コード() != null) {
+            source.nofushohyojicodeName11 = 納付書共通.get表示コード().get表示コード名１();
+            source.nofushohyojicode11 = 納付書共通.get表示コード().get表示コード１();
+            source.nofushohyojicodeName12 = 納付書共通.get表示コード().get表示コード名１();
+            source.nofushohyojicode12 = 納付書共通.get表示コード().get表示コード１();
+            source.nofushohyojicodeName13 = 納付書共通.get表示コード().get表示コード名１();
+            source.nofushohyojicode13 = 納付書共通.get表示コード().get表示コード１();
+            source.nofushohyojicodeName14 = 納付書共通.get表示コード().get表示コード名１();
+            source.nofushohyojicode14 = 納付書共通.get表示コード().get表示コード１();
+            source.nofushohyojicodeName21 = 納付書共通.get表示コード().get表示コード名２();
+            source.nofushohyojicode21 = 納付書共通.get表示コード().get表示コード２();
+            source.nofushohyojicodeName22 = 納付書共通.get表示コード().get表示コード名２();
+            source.nofushohyojicode22 = 納付書共通.get表示コード().get表示コード２();
+            source.nofushohyojicodeName23 = 納付書共通.get表示コード().get表示コード名２();
+            source.nofushohyojicode23 = 納付書共通.get表示コード().get表示コード２();
+            source.nofushohyojicodeName24 = 納付書共通.get表示コード().get表示コード名２();
+            source.nofushohyojicode24 = 納付書共通.get表示コード().get表示コード２();
+            source.nofushohyojicodeName31 = 納付書共通.get表示コード().get表示コード名３();
+            source.nofushohyojicode31 = 納付書共通.get表示コード().get表示コード３();
+            source.nofushohyojicodeName32 = 納付書共通.get表示コード().get表示コード名３();
+            source.nofushohyojicode32 = 納付書共通.get表示コード().get表示コード３();
+            source.nofushohyojicodeName33 = 納付書共通.get表示コード().get表示コード名３();
+            source.nofushohyojicode33 = 納付書共通.get表示コード().get表示コード３();
+            source.nofushohyojicodeName34 = 納付書共通.get表示コード().get表示コード名３();
+            source.nofushohyojicode34 = 納付書共通.get表示コード().get表示コード３();
+        }
         editMRenban(source);
         source.nofushoShichosonMei11 = 納付書共通.get納付書市町村名();
         source.nofushoShichosonMei12 = 納付書共通.get納付書市町村名();
@@ -157,10 +167,12 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             if (銀振印字位置 == 1) {
                 source.nofushoKi1 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki1 = 納入通知書期情報.get月表記();
-                source.nofushoOcr11 = 納入通知書期情報.getOcr().get(1);
-                source.nofushoOcr21 = 納入通知書期情報.getOcr().get(2);
-                source.nofushoOcr31 = 納入通知書期情報.getOcr().get(INT3);
-                source.nofushoOcr41 = 納入通知書期情報.getOcr().get(INT4);
+                if (納入通知書期情報.getOcr() != null) {
+                    source.nofushoOcr11 = 納入通知書期情報.getOcr().get(1);
+                    source.nofushoOcr21 = 納入通知書期情報.getOcr().get(2);
+                    source.nofushoOcr31 = 納入通知書期情報.getOcr().get(INT3);
+                    source.nofushoOcr41 = 納入通知書期情報.getOcr().get(INT4);
+                }
                 source.nofushoNofugaku1 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen1 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin1 = 納入通知書期情報.get領収日付欄();
@@ -170,10 +182,12 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             } else if (銀振印字位置 == 2) {
                 source.nofushoKi2 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki2 = 納入通知書期情報.get月表記();
-                source.nofushoOcr12 = 納入通知書期情報.getOcr().get(1);
-                source.nofushoOcr22 = 納入通知書期情報.getOcr().get(2);
-                source.nofushoOcr32 = 納入通知書期情報.getOcr().get(INT3);
-                source.nofushoOcr42 = 納入通知書期情報.getOcr().get(INT4);
+                if (納入通知書期情報.getOcr() != null) {
+                    source.nofushoOcr12 = 納入通知書期情報.getOcr().get(1);
+                    source.nofushoOcr22 = 納入通知書期情報.getOcr().get(2);
+                    source.nofushoOcr32 = 納入通知書期情報.getOcr().get(INT3);
+                    source.nofushoOcr42 = 納入通知書期情報.getOcr().get(INT4);
+                }
                 source.nofushoNofugaku2 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen2 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin2 = 納入通知書期情報.get領収日付欄();
@@ -183,10 +197,12 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             } else if (銀振印字位置 == INT3) {
                 source.nofushoKi3 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki3 = 納入通知書期情報.get月表記();
-                source.nofushoOcr13 = 納入通知書期情報.getOcr().get(1);
-                source.nofushoOcr23 = 納入通知書期情報.getOcr().get(2);
-                source.nofushoOcr33 = 納入通知書期情報.getOcr().get(INT3);
-                source.nofushoOcr43 = 納入通知書期情報.getOcr().get(INT4);
+                if (納入通知書期情報.getOcr() != null) {
+                    source.nofushoOcr13 = 納入通知書期情報.getOcr().get(1);
+                    source.nofushoOcr23 = 納入通知書期情報.getOcr().get(2);
+                    source.nofushoOcr33 = 納入通知書期情報.getOcr().get(INT3);
+                    source.nofushoOcr43 = 納入通知書期情報.getOcr().get(INT4);
+                }
                 source.nofushoNofugaku3 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen3 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin3 = 納入通知書期情報.get領収日付欄();
@@ -196,10 +212,12 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
             } else if (銀振印字位置 == INT4) {
                 source.nofushoKi4 = 納入通知書期情報.get期表記();
                 source.nofushoTsuki4 = 納入通知書期情報.get月表記();
-                source.nofushoOcr14 = 納入通知書期情報.getOcr().get(1);
-                source.nofushoOcr24 = 納入通知書期情報.getOcr().get(2);
-                source.nofushoOcr34 = 納入通知書期情報.getOcr().get(INT3);
-                source.nofushoOcr44 = 納入通知書期情報.getOcr().get(INT4);
+                if (納入通知書期情報.getOcr() != null) {
+                    source.nofushoOcr14 = 納入通知書期情報.getOcr().get(1);
+                    source.nofushoOcr24 = 納入通知書期情報.getOcr().get(2);
+                    source.nofushoOcr34 = 納入通知書期情報.getOcr().get(INT3);
+                    source.nofushoOcr44 = 納入通知書期情報.getOcr().get(INT4);
+                }
                 source.nofushoNofugaku4 = 納入通知書期情報.get納付書納付額欄();
                 source.nofushoNokigen4 = 納入通知書期情報.get納期限表記();
                 source.nofushoNofuin4 = 納入通知書期情報.get領収日付欄();
