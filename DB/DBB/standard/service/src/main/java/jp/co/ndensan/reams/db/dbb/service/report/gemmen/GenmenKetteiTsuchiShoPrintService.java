@@ -59,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -99,26 +98,23 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @param 通知書定型文 RString
      * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
-     * @return SourceDataCollection
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection printA4縦タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
+    public void printA4縦タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, ReportManager reportManager) {
         GenmenKetteiTsuchiShoTateProperty property = new GenmenKetteiTsuchiShoTateProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoTateSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
-                        new RDate(発行日.toString())).buildSource();
-                int flag = INDEX_ONE;
-                List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
-                        介護問合せ先ソースビルダー, sourceBuilder, flag);
-                ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoTateSource> reportSourceWriter
-                        = new ReportSourceWriter(assembler);
-                GenmenKetteiTsuchiShoTateReport.createForm(targets).writeBy(reportSourceWriter);
-            }
-            return reportManager.publish();
+        try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoTateSource> assembler = createAssembler(property, reportManager)) {
+            INinshoshaManager manager = new _NinshoshaManager();
+            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                    減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
+                    new RDate(発行日.toString())).buildSource();
+            int flag = INDEX_ONE;
+            List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
+                    介護問合せ先ソースビルダー, sourceBuilder, flag);
+            ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoTateSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            GenmenKetteiTsuchiShoTateReport.createForm(targets).writeBy(reportSourceWriter);
         }
     }
 
@@ -130,26 +126,23 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @param 減免決定通知書情報 GenmenKetteiTsuchiShoJoho
      * @param 通知書定型文 RString
      * @param 介護問合せ先ソースビルダー IKaigoToiawasesakiSourceBuilder
-     * @return SourceDataCollection
+     * @param reportManager ReportManager
      */
-    public SourceDataCollection printB5横タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
-            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー) {
+    public void printB5横タイプ(FlexibleDate 発行日, RString 文書番号, GenmenKetteiTsuchiShoJoho 減免決定通知書情報,
+            RString 通知書定型文, IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー, ReportManager reportManager) {
         GenmenKetteiTsuchiShoYokoProperty property = new GenmenKetteiTsuchiShoYokoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード1);
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
-                        new RDate(発行日.toString())).buildSource();
-                int flag = INDEX_TWO;
-                List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
-                        介護問合せ先ソースビルダー, sourceBuilder, flag);
-                ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> reportSourceWriter
-                        = new ReportSourceWriter(assembler);
-                GenmenKetteiTsuchiShoYokoReport.createForm(targets).writeBy(reportSourceWriter);
-            }
-            return reportManager.publish();
+        try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> assembler = createAssembler(property, reportManager)) {
+            INinshoshaManager manager = new _NinshoshaManager();
+            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード1);
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                    減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
+                    new RDate(発行日.toString())).buildSource();
+            int flag = INDEX_TWO;
+            List<GenmenKetteiTsuchiShoItem> targets = setItems(文書番号, 減免決定通知書情報, 通知書定型文,
+                    介護問合せ先ソースビルダー, sourceBuilder, flag);
+            ReportSourceWriter<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            GenmenKetteiTsuchiShoYokoReport.createForm(targets).writeBy(reportSourceWriter);
         }
     }
 
