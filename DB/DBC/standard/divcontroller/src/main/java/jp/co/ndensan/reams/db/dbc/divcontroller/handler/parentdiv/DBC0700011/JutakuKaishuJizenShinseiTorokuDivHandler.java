@@ -652,12 +652,14 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             前回まで住宅住所 = 前回までの支払結果.get住宅改修住宅住所();
         }
         KeyValueDataSource item = new KeyValueDataSource(住宅住所変更_KEY, 住宅住所変更_VALUE);
+        List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
         if (!住宅住所.equals(前回まで住宅住所)) {
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
-                    .getChkResetInfo().getSelectedItems().add(item);
+            if (!selectedItems.contains(item)) {
+                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
+                        .getChkResetInfo().getSelectedItems().add(item);
+            }
         } else {
-            List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
-                    .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
             if (selectedItems.contains(item)) {
                 selectedItems.remove(item);
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
@@ -1169,7 +1171,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTxtCreationJigyoshaNo().getValue()));
         RString 支払方法区分コード = div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                 .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiHohoRad();
-//        builder.set支払方法区分コード(支払方法区分コード);
+        builder.set支払方法区分コード(支払方法区分コード);
         if (ShiharaiHohoKubun.窓口払.getコード().equals(支払方法区分コード)) {
             builder.set支払場所(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                     .getCcdJutakuKaishuJizenShinseiKoza().getShiharaiBasho());
