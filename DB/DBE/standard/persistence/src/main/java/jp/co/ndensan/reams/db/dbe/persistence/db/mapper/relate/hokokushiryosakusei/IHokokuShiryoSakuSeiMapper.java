@@ -66,4 +66,12 @@ public interface IHokokuShiryoSakuSeiMapper {
      */
     List<SinsakaiHanteiJyokyoEntity> getSinsakaiHanteiJyokyo(SinsakaiHanteiJyokyoMyBatisParameter parameter);
 
+    /**
+     * 介護認定審査会判定状況のヘッダ情報リストを取得します。
+     *
+     * @param parameter 介護認定審査会判定状況MyBatisParameter
+     * @return SinsakaiHanteiJyokyoHeaderEntityリスト
+     */
+    List<SinsakaiHanteiJyokyoHeaderEntity> getJotaikubumbetsuhanteiHeader(SinsakaiHanteiJyokyoMyBatisParameter parameter);
+
 }
