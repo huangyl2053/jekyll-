@@ -58,14 +58,14 @@ public class TekiyoJogaishaIdoTeiseiFinder {
                 if (is日付空(infEntity.get適用日()) && is日付空(infEntity.get解除日())) {
                     count++;
                 } else if (is日付空(infEntity.get適用日())
-                        && !(taishoYMD != null && taishoYMD.isBeforeOrEquals(infEntity.get適用日())
+                        && !(!is日付空(taishoYMD) && taishoYMD.isBeforeOrEquals(infEntity.get適用日())
                         && taishoYMD.isBefore(infEntity.get解除日()))) {
                     count++;
                 } else if (is日付空(infEntity.get解除日())) {
                     count++;
-                } else if (!((nyushoYMD != null && infEntity.get適用日().isBefore(nyushoYMD)
+                } else if (!((!is日付空(nyushoYMD) && infEntity.get適用日().isBefore(nyushoYMD)
                         && infEntity.get解除日().isBeforeOrEquals(nyushoYMD))
-                        || (taishoYMD != null && taishoYMD.isBeforeOrEquals(infEntity.get適用日())
+                        || (!is日付空(taishoYMD) && taishoYMD.isBeforeOrEquals(infEntity.get適用日())
                         && taishoYMD.isBefore(infEntity.get解除日())))) {
                     count++;
                 }
