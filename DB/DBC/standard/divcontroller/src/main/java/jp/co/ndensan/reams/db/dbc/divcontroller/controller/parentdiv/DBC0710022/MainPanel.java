@@ -42,7 +42,7 @@ public class MainPanel {
     private static final RString 照会 = new RString("照会モード");
     private static final RString 修正 = new RString("修正モード");
     private static final RString 審査 = new RString("審査モード");
-    private static final RString モード_修正 = new RString("修正");
+    private static final RString モード_修正 = new RString("登録");
     private static final RString モード_照会 = new RString("照会");
     private static final RString 業務区分 = new RString("01");
     private static final RString MSG_決定日 = new RString("決定日");
