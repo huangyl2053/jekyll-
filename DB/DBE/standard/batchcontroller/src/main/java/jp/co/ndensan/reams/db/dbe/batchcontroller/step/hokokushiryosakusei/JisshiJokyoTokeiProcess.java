@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.Jiss
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jisshijokyotokei.JisshiJokyoTokeiReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
@@ -129,13 +129,13 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
         int 区分変更申請受付数法令 = 0;
         if (parameter.isHorei()) {
             for (JisshiJokyoTokeiEntity entity : 申請受付List) {
-                if (NinteiShinseiHoreiCode.新規申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     新規申請受付数法令 = entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.更新申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     更新申請受付数法令 = entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.区分変更申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     区分変更申請受付数法令 = entity.getCountKensu();
                 }
             }
@@ -170,13 +170,13 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
         int 区分変更調査実施数法令 = 0;
         if (parameter.isHorei()) {
             for (JisshiJokyoTokeiEntity entity : 調査実施List) {
-                if (NinteiShinseiHoreiCode.新規申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     新規調査実施数法令 = 新規調査実施数法令 + entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.更新申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     更新調査実施数法令 = 更新調査実施数法令 + entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.区分変更申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     区分変更調査実施数法令 = 区分変更調査実施数法令 + entity.getCountKensu();
                 }
             }
@@ -211,13 +211,13 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
         int 区分変更審査会実施数法令 = 0;
         if (parameter.isHorei()) {
             for (JisshiJokyoTokeiEntity entity : 審査会実施List) {
-                if (NinteiShinseiHoreiCode.新規申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     新規審査会実施数法令 = 新規審査会実施数法令 + entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.更新申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     更新審査会実施数法令 = 更新審査会実施数法令 + entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.区分変更申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     区分変更審査会実施数法令 = 区分変更審査会実施数法令 + entity.getCountKensu();
                 }
             }
@@ -252,13 +252,13 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
         int 区分変更認定結果数法令 = 0;
         if (parameter.isHorei()) {
             for (JisshiJokyoTokeiEntity entity : 認定結果List) {
-                if (NinteiShinseiHoreiCode.新規申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     新規認定結果数法令 = 新規認定結果数法令 + entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.更新申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     更新認定結果数法令 = 更新認定結果数法令 + entity.getCountKensu();
                 }
-                if (NinteiShinseiHoreiCode.区分変更申請.code().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+                if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                     区分変更認定結果数法令 = 区分変更認定結果数法令 + entity.getCountKensu();
                 }
             }
