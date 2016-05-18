@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 
 /**
