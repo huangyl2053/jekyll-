@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import lombok.Getter;
 import lombok.Setter;
