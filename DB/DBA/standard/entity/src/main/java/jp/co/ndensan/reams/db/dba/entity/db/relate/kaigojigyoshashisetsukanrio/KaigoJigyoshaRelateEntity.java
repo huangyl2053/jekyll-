@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.kaigojigyoshashisetsukanrio;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  *
@@ -18,11 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoJigyoshaRelateEntity {
 
-    private RString yukoKaishiYMD;
-    private RString yukoShuryoYMD;
-    private RString jigyoshaNo;
-    private RString yukoKaishiYMD2;
-    private RString yukoShuryoYMD2;
-    private RString jigyoshaNo2;
+    private FlexibleDate yukoKaishiYMD;
+    private FlexibleDate yukoShuryoYMD;
+    private FlexibleDate yukoKaishiYMD2;
+    private FlexibleDate yukoShuryoYMD2;
 
 }
