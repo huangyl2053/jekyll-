@@ -472,6 +472,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      */
     private Decimal set特徴期別金額更正前(RString 期, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
         int index = Integer.parseInt(期.toString());
+        if (減免決定通知書情報 == null || 減免決定通知書情報.get賦課の情報更正前() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_ONE:
                 return 減免決定通知書情報.get賦課の情報更正前().get特徴期別金額01();
@@ -499,6 +502,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      */
     private Decimal set特徴期別金額更正後(RString 期, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
         int index = Integer.parseInt(期.toString());
+        if (減免決定通知書情報 == null || 減免決定通知書情報.get減免の情報更正後() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_ONE:
                 return 減免決定通知書情報.get減免の情報更正後().get特徴期別金額01();
@@ -525,6 +531,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @return Decimal
      */
     private Decimal set普徴期別金額更正前(int index, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+        if (減免決定通知書情報 == null || 減免決定通知書情報.get賦課の情報更正前() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_FOUR:
                 return 減免決定通知書情報.get賦課の情報更正前().get普徴期別金額01();
@@ -567,6 +576,9 @@ public class GenmenKetteiTsuchiShoPrintService {
      * @return Decimal
      */
     private Decimal set普徴期別金額更正後(int index, GenmenKetteiTsuchiShoJoho 減免決定通知書情報) {
+        if (減免決定通知書情報 == null || 減免決定通知書情報.get減免の情報更正後() == null) {
+            return Decimal.ZERO;
+        }
         switch (index) {
             case INDEX_FOUR:
                 return 減免決定通知書情報.get減免の情報更正後().get普徴期別金額01();
