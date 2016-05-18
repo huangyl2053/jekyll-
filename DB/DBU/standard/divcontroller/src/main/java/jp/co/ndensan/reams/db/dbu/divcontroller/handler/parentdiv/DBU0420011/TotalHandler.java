@@ -455,7 +455,7 @@ public class TotalHandler {
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtfutanWariaiKubun().getValue());
         param.set負担割該当(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtfutanWariai().getValue());
-        JukyuShikakuShomeishoFinder finder = new JukyuShikakuShomeishoFinder();
+        JukyuShikakuShomeishoFinder finder = JukyuShikakuShomeishoFinder.createInstance();
         JukyuShikakuShomeishoData business = finder.setJukyuShikakuShomeisho(param);
         JukyuShikakuShomeishoBodyItem item = new JukyuShikakuShomeishoBodyItem(business.get保険者番号(), business.get被保険者フリガナ().value(),
                 business.get被保険者氏名().value(), business.get年号_明治(), business.get年号_大正(),
