@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 支払方法変更管理リスト作成_バッチフロークラスです。
  * 
- * @reamsid_L DBD-3630-010  zhulx
+ * @reamsid_L DBD-3630-040  zhulx
  */
 public class Dbd207010Flow extends BatchFlowBase<Dbd207010BatchFlowParameter> {
 
