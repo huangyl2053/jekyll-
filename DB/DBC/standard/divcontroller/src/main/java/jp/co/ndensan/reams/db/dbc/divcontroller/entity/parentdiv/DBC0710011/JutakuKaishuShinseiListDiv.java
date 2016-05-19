@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * JutakuKaishuShinseiList のクラスファイル
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class JutakuKaishuShinseiListDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,6 +27,8 @@ public class JutakuKaishuShinseiListDiv extends Panel {
      */
     @JsonProperty("btnAddShinsei")
     private Button btnAddShinsei;
+    @JsonProperty("txtServiceYM")
+    private TextBoxDate txtServiceYM;
     @JsonProperty("dgJutakuKaishuShinseiList")
     private DataGrid<dgJutakuKaishuShinseiList_Row> dgJutakuKaishuShinseiList;
 
@@ -51,6 +54,24 @@ public class JutakuKaishuShinseiListDiv extends Panel {
     @JsonProperty("btnAddShinsei")
     public void setBtnAddShinsei(Button btnAddShinsei) {
         this.btnAddShinsei = btnAddShinsei;
+    }
+
+    /*
+     * gettxtServiceYM
+     * @return txtServiceYM
+     */
+    @JsonProperty("txtServiceYM")
+    public TextBoxDate getTxtServiceYM() {
+        return txtServiceYM;
+    }
+
+    /*
+     * settxtServiceYM
+     * @param txtServiceYM txtServiceYM
+     */
+    @JsonProperty("txtServiceYM")
+    public void setTxtServiceYM(TextBoxDate txtServiceYM) {
+        this.txtServiceYM = txtServiceYM;
     }
 
     /*

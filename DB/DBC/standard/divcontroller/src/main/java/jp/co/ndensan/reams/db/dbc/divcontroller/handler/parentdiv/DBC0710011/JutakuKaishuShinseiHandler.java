@@ -67,6 +67,7 @@ public final class JutakuKaishuShinseiHandler {
         List<dgJutakuKaishuShinseiList_Row> rows = new ArrayList<>();
         if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
             set支給申請一覧(manager, 被保険者番号, rows);
+            div.getJutakuKaishuShinseiList().getTxtServiceYM().setVisible(false);
         } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
             set事前申請一覧(manager, 被保険者番号, rows);
         }
