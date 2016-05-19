@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvsmulti;
+package jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;

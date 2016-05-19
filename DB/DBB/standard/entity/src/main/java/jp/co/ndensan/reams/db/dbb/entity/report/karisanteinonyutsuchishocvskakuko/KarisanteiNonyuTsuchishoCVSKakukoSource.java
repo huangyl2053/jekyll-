@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko;
+package jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -472,10 +472,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoSource implements IReportSource {
      */
     public enum Layouts {
 
-        DBB100026_KarisanteiNonyuTsuchishoCVSMultiCover(1),
-        DBB100026_NonyuTsuchishoCVSMultiNofusho(2),
-        DBB100027_KarisanteiNonyuTsuchishoCVSMultiRenchoCover(3),
-        DBB100027_NonyuTsuchishoCVSMultiRenchoNofusho(4);
+        DBB100024_KarisanteiNonyuTsuchishoCVSKakukoCover(1),
+        DBB100024_NonyuTsuchishoCVSKakukoNofusho(2),
+        DBB100025_KarisanteiNonyuTsuchishoCVSKakukoRenchoCover(3),
+        DBB100025_NonyuTsuchishoCVSKakukoRenchoNofusho(4);
         private final int formGroupIndex;
 
         private Layouts(int formGroupIndex) {

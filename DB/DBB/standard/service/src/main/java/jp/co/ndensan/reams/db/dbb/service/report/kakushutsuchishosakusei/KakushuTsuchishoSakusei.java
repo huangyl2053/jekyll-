@@ -62,7 +62,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2018RealHakkoRirekiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoFindEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100010.KarisanteiHenkoTsuchishoB5YokoReportSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100011.KarisanteiHenkoTsuchishoA4TateReportSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource;
@@ -745,7 +745,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 //            sourceDataCollection = new Printer<KarisanteiNonyuTsuchishoCVSMultiSource>().spool(null, report);
         } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID)) {
             KarisanteiNonyuTsuchishoCVSKakukoReport report
-                    = KarisanteiNonyuTsuchishoCVSKakukoReport.createFrom(null);
+                    = KarisanteiNonyuTsuchishoCVSKakukoReport.createFrom(null, null);
             new Printer<KarisanteiNonyuTsuchishoCVSKakukoSource>().spool(null, report);
         } else {
 //            KarisanteiNonyuTsuchishoCVSKigotoItem item = new KarisanteiNonyuTsuchishoCVSKigotoItem(仮算定納入通知書情報, null);
