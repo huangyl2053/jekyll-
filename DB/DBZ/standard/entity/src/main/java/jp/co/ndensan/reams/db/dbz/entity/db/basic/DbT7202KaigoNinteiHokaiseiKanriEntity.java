@@ -20,7 +20,4 @@ public class DbT7202KaigoNinteiHokaiseiKanriEntity {
 
     private FlexibleDate hokaiseiShikoYMD;
     private RString koroshoIfShikibetsuCode;
-    private boolean isChosaGaikyoKomokuChangeFlag;
-    private boolean isChosaKihonKomokuChangeFlag;
-    private boolean isChujiiIkenshoKomokuChangeFlag;
 }

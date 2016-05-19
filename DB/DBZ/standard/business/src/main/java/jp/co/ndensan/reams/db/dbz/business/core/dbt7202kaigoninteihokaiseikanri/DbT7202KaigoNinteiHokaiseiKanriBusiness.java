@@ -45,30 +45,4 @@ public class DbT7202KaigoNinteiHokaiseiKanriBusiness {
         return entity.getKoroshoIfShikibetsuCode();
     }
 
-    /**
-     * 認定調査概況項目変更フラグを取得します。
-     *
-     * @return 認定調査概況項目変更フラグ
-     */
-    public boolean get認定調査概況項目変更フラグ() {
-        return entity.isChosaGaikyoKomokuChangeFlag();
-    }
-
-    /**
-     * 認定調査基本項目変更フラグを取得します。
-     *
-     * @return 認定調査基本項目変更フラグ
-     */
-    public boolean get認定調査基本項目変更フラグ() {
-        return entity.isChosaKihonKomokuChangeFlag();
-    }
-
-    /**
-     * 主治医意見書項目変更フラグを取得します。
-     *
-     * @return 主治医意見書項目変更フラグ
-     */
-    public boolean get主治医意見書項目変更フラグ() {
-        return entity.isChujiiIkenshoKomokuChangeFlag();
-    }
 }
