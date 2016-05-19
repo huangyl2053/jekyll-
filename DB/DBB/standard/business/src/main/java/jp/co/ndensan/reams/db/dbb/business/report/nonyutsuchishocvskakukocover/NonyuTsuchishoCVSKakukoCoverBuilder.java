@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukocover;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -29,11 +29,11 @@ public class NonyuTsuchishoCVSKakukoCoverBuilder implements INonyuTsuchishoCVSKa
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link NonyuTsuchishoCVSKakukoCoverSource}
+     * @return {@link NonyuTsuchishoCVSKakukoSource}
      */
     @Override
-    public NonyuTsuchishoCVSKakukoCoverSource build() {
-        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoCoverSource())
+    public NonyuTsuchishoCVSKakukoSource build() {
+        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoSource())
                 .join(coverEditor).buildSource();
     }
 
