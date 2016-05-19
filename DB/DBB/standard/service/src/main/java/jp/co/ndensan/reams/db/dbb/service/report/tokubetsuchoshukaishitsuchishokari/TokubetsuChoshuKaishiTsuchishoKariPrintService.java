@@ -25,17 +25,20 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -56,7 +59,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
-    private final RString 帳票分類ID = new RString("DBB100004");
+    private static final RString RSTRING_1 = new RString("1");
 
     /**
      * 帳票項目定義【B5横タイプ】printメソッドです。
@@ -76,12 +79,26 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5Source> assembler = createAssembler(property, reportManager);) {
-            INinshoshaManager manager = new _NinshoshaManager();
-            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
-
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                    AssociationFinderFactory.createInstance().getAssociation(),
-                    assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
+            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
+                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            ChohyoSeigyoKyotsu 帳票制御共通 = 仮算定通知書情報.get帳票制御共通();
+            boolean is公印に掛ける = false;
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                is公印に掛ける = true;
+            }
+            boolean is公印を省略 = false;
+            if (!帳票制御共通.is電子公印印字有無()) {
+                is公印を省略 = true;
+            }
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    assembler.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
 
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariB5Source> reportSourceWriter
                     = new ReportSourceWriter(assembler);
@@ -108,12 +125,26 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> assembler = createAssembler(property, reportManager);) {
-            INinshoshaManager manager = new _NinshoshaManager();
-            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
-
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                    AssociationFinderFactory.createInstance().getAssociation(),
-                    assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
+            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
+                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            ChohyoSeigyoKyotsu 帳票制御共通 = 仮算定通知書情報.get帳票制御共通();
+            boolean is公印に掛ける = false;
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                is公印に掛ける = true;
+            }
+            boolean is公印を省略 = false;
+            if (!帳票制御共通.is電子公印印字有無()) {
+                is公印を省略 = true;
+            }
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    assembler.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
 
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
@@ -139,12 +170,26 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerSource> assembler = createAssembler(property, reportManager);) {
-            INinshoshaManager manager = new _NinshoshaManager();
-            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
-
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                    AssociationFinderFactory.createInstance().getAssociation(),
-                    assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
+            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
+                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            ChohyoSeigyoKyotsu 帳票制御共通 = 仮算定通知書情報.get帳票制御共通();
+            boolean is公印に掛ける = false;
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                is公印に掛ける = true;
+            }
+            boolean is公印を省略 = false;
+            if (!帳票制御共通.is電子公印印字有無()) {
+                is公印を省略 = true;
+            }
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    assembler.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
 
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariSealerSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
@@ -170,12 +215,26 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource> assembler = createAssembler(property, reportManager);) {
-            INinshoshaManager manager = new _NinshoshaManager();
-            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
-
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                    AssociationFinderFactory.createInstance().getAssociation(),
-                    assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
+            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
+                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            ChohyoSeigyoKyotsu 帳票制御共通 = 仮算定通知書情報.get帳票制御共通();
+            boolean is公印に掛ける = false;
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                is公印に掛ける = true;
+            }
+            boolean is公印を省略 = false;
+            if (!帳票制御共通.is電子公印印字有無()) {
+                is公印を省略 = true;
+            }
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    assembler.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
 
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
@@ -203,16 +262,30 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
-                SubGyomuCode.DBB介護賦課, 仮算定特徴開始通知書情報.get帳票分類ID());
+                SubGyomuCode.DBB介護賦課, 仮算定通知書情報.get帳票分類ID());
         CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource> assembler = createAssembler(property, reportManager);) {
-            INinshoshaManager manager = new _NinshoshaManager();
-            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
-
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                    AssociationFinderFactory.createInstance().getAssociation(),
-                    assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
+            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
+                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            ChohyoSeigyoKyotsu 帳票制御共通 = 仮算定通知書情報.get帳票制御共通();
+            boolean is公印に掛ける = false;
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                is公印に掛ける = true;
+            }
+            boolean is公印を省略 = false;
+            if (!帳票制御共通.is電子公印印字有無()) {
+                is公印を省略 = true;
+            }
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    assembler.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
 
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
@@ -246,12 +319,26 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
         CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> assembler = createAssembler(property, reportManager);) {
-            INinshoshaManager manager = new _NinshoshaManager();
-            Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 帳票分類ID);
-
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                    AssociationFinderFactory.createInstance().getAssociation(),
-                    assembler.getImageFolderPath(), new RDate(仮算定特徴開始通知書情報.get発行日().toString())).buildSource();
+            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
+                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            ChohyoSeigyoKyotsu 帳票制御共通 = 仮算定通知書情報.get帳票制御共通();
+            boolean is公印に掛ける = false;
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                is公印に掛ける = true;
+            }
+            boolean is公印を省略 = false;
+            if (!帳票制御共通.is電子公印印字有無()) {
+                is公印を省略 = true;
+            }
+            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                    認証者,
+                    地方公共団体,
+                    assembler.getImageFolderPath(),
+                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    is公印に掛ける,
+                    is公印を省略,
+                    KenmeiFuyoKubunType.付与なし).buildSource();
 
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
