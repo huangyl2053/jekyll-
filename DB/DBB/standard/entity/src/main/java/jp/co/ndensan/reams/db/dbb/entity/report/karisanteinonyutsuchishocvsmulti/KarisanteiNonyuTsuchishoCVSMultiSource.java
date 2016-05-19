@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti;
+package jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvsmulti;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -472,11 +472,10 @@ public class KarisanteiNonyuTsuchishoCVSMultiSource implements IReportSource {
      */
     public enum Layouts {
 
-        AFAPRE506_KijitsumaeTohyoroku1mai1(1),
-        AFAPRE506_KijitsumaeTohyoroku1mai2(2),
-        AFAPRE506_KijitsumaeTohyoroku3mai1(3),
-        AFAPRE506_KijitsumaeTohyoroku3mai2(4),
-        AFAPRE506_KijitsumaeTohyoroku3mai3(5);
+        DBB100026_KarisanteiNonyuTsuchishoCVSMultiCover(1),
+        DBB100026_NonyuTsuchishoCVSMultiNofusho(2),
+        DBB100027_KarisanteiNonyuTsuchishoCVSMultiRenchoCover(3),
+        DBB100027_NonyuTsuchishoCVSMultiRenchoNofusho(4);
         private final int formGroupIndex;
 
         private Layouts(int formGroupIndex) {

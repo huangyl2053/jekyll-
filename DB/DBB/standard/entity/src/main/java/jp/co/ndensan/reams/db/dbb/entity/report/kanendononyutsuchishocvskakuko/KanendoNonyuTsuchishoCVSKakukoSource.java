@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.report.kanendononyutsuchishocvskakuko;
+package jp.co.ndensan.reams.db.dbb.entity.report.kanendononyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 

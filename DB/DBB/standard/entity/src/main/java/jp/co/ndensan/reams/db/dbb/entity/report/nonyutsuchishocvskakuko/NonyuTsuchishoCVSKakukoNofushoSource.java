@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvskakuko;
+package jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 
@@ -12,6 +12,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
  *
  * @reamsid_L DBB-9110-120 huangh
  */
-public class NonyuTsuchishoCVSKakukoCoverSource implements IReportSource {
+public class NonyuTsuchishoCVSKakukoNofushoSource implements IReportSource {
 
 }

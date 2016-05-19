@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmultirenchocover;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiRenchoCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiRenchoCoverSource;
 
 /**
  * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ】（連帳）CoverのEditorです。
