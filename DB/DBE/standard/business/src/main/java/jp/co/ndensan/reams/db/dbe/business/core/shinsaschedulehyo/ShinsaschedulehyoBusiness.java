@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 介護認定審査会スケジュール表（年間）の曜日クラスです。
  *
- * @reamsid_L DBE-0130-081 duanzhanli
+ * @reamsid_L DBE-0130-090 duanzhanli
  */
 public class ShinsaschedulehyoBusiness {
 
