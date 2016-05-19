@@ -38,18 +38,20 @@ public class HenshuNaiyoDiv extends Panel {
     private TextBox txtTantokamei;
     @JsonProperty("txtSam")
     private TextBox txtSam;
+    @JsonProperty("txtBunshoBango")
+    private TextBox txtBunshoBango;
     @JsonProperty("btnJidoFuban")
     private Button btnJidoFuban;
     @JsonProperty("ccdPrintContentsSetting")
     private PrintContentsSettingDiv ccdPrintContentsSetting;
-    @JsonProperty("txtBunshoBango")
-    private TextBox txtBunshoBango;
     @JsonProperty("異動日")
     private RString 異動日;
     @JsonProperty("枝番")
     private RString 枝番;
     @JsonProperty("入所日")
     private RString 入所日;
+    @JsonProperty("措置保険者番号")
+    private RString 措置保険者番号;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -166,6 +168,24 @@ public class HenshuNaiyoDiv extends Panel {
     }
 
     /*
+     * gettxtBunshoBango
+     * @return txtBunshoBango
+     */
+    @JsonProperty("txtBunshoBango")
+    public TextBox getTxtBunshoBango() {
+        return txtBunshoBango;
+    }
+
+    /*
+     * settxtBunshoBango
+     * @param txtBunshoBango txtBunshoBango
+     */
+    @JsonProperty("txtBunshoBango")
+    public void setTxtBunshoBango(TextBox txtBunshoBango) {
+        this.txtBunshoBango = txtBunshoBango;
+    }
+
+    /*
      * getbtnJidoFuban
      * @return btnJidoFuban
      */
@@ -190,24 +210,6 @@ public class HenshuNaiyoDiv extends Panel {
     @JsonProperty("ccdPrintContentsSetting")
     public IPrintContentsSettingDiv getCcdPrintContentsSetting() {
         return ccdPrintContentsSetting;
-    }
-
-    /*
-     * gettxtBunshoBango
-     * @return txtBunshoBango
-     */
-    @JsonProperty("txtBunshoBango")
-    public TextBox getTxtBunshoBango() {
-        return txtBunshoBango;
-    }
-
-    /*
-     * settxtBunshoBango
-     * @param txtBunshoBango txtBunshoBango
-     */
-    @JsonProperty("txtBunshoBango")
-    public void setTxtBunshoBango(TextBox txtBunshoBango) {
-        this.txtBunshoBango = txtBunshoBango;
     }
 
     /*
@@ -262,6 +264,24 @@ public class HenshuNaiyoDiv extends Panel {
     @JsonProperty("入所日")
     public void set入所日(RString 入所日) {
         this.入所日 = 入所日;
+    }
+
+    /*
+     * get措置保険者番号
+     * @return 措置保険者番号
+     */
+    @JsonProperty("措置保険者番号")
+    public RString get措置保険者番号() {
+        return 措置保険者番号;
+    }
+
+    /*
+     * set措置保険者番号
+     * @param 措置保険者番号 措置保険者番号
+     */
+    @JsonProperty("措置保険者番号")
+    public void set措置保険者番号(RString 措置保険者番号) {
+        this.措置保険者番号 = 措置保険者番号;
     }
 
     // </editor-fold>

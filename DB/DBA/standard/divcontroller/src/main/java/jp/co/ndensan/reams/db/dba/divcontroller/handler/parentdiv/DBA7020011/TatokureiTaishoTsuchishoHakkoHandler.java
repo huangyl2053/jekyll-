@@ -10,11 +10,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011.dgJushochiTokureiRireki_Row;
+import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
+import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
@@ -25,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -135,9 +140,8 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
     /**
      * 編集内容か表示され、編集ができる。
      *
-     * @param 文書番号取得 文書番号取得
      */
-    public void 適用情報の編集(RString 文書番号取得) {
+    public void 適用情報の編集() {
 
         dgJushochiTokureiRireki_Row row = div.getTajutokuTekiyoJohoIchiran().getDgJushochiTokureiRireki().getActiveRow();
         Hokenja hokenja = 保険者情報取得(new HokenjaNo(row.getSochiHokenshaNo()));
@@ -146,7 +150,6 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().
                 setValue(hokenja.get住所() == null ? RString.EMPTY : hokenja.get住所());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYakushoMei().setValue(row.getSochiHokenshaMeisho());
-        div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().setValue(文書番号取得);
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().set枝番(row.getEdaNo());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
                 set異動日(new RString(row.getIdoYMD().getValue().toString()));
@@ -160,6 +163,8 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
                                     getShisetuTaishoTuchiHakkoDate().getValue().toString()), true, false, RDate.MAX, false);
         }
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().setDisabled(false);
+        div.getTajutokuTekiyoJohoIchiran().getReportPublish().
+                getHenshuNaiyo().set措置保険者番号(row.getSochiHihokenshaNo());
     }
 
     /**
@@ -180,6 +185,37 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
         return tashichosonJushochiTokurei.createBuilderForEdit().set施設退所通知発行年月日(new FlexibleDate(div.
                 getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
                 getCcdPrintContentsSetting().getIssueDate().toDateString())).build();
+    }
+
+    /**
+     * 初期文書番号取得。
+     *
+     * @param reportId 帳票ID
+     */
+    public void get初期文書番号取得(ReportId reportId) {
+
+        BunshoNo bushoNo = TashichosonJushochitokureishaRenrakuhyoFinder.
+                createInstance().get文書番号取得(reportId);
+        if (bushoNo == null) {
+
+            throw new ApplicationException(DbzErrorMessages.使用不可.getMessage().replace("文書番号情報が未登録のため、"));
+        } else {
+
+            RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
+            if (BunshoNoHatsubanHoho.固定.getCode().equals(文書番号発番方法)) {
+                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
+                        .getTxtBunshoBango().setValue(bushoNo.edit文書番号());
+                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
+            } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(文書番号発番方法)) {
+                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
+                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
+            } else if (BunshoNoHatsubanHoho.自動採番.getCode().equals(文書番号発番方法)) {
+                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
+                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(false);
+            }
+        }
     }
 
     private Hokenja 保険者情報取得(HokenjaNo 措置元保険者番号) {

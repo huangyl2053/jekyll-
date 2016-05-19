@@ -21,12 +21,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdenti
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -75,6 +71,7 @@ public class ShikakuKihonJoho {
         }
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100007.getReportId());
+        createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
@@ -89,9 +86,8 @@ public class ShikakuKihonJoho {
      */
     public ResponseData<ShikakuKihonJohoDiv> onClick_dgJushochiTokureiRireki(ShikakuKihonJohoDiv div) {
 
-        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100007.getReportId());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, false);
-        createHandler(div).適用情報の編集(文書番号取得);
+        createHandler(div).適用情報の編集();
         return ResponseData.of(div).respond();
     }
 
@@ -103,8 +99,8 @@ public class ShikakuKihonJoho {
      */
     public ResponseData<ShikakuKihonJohoDiv> onClick_btnJidoFuban(ShikakuKihonJohoDiv div) {
         CountedItem countedItem = Saiban.get(SubGyomuCode.DBZ介護共通, 汎用キー_文書番号);
-        IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
-        BunshoNo bushoNo = bushoFineder.get文書番号管理(ReportIdDBA.DBA100007.getReportId(), FlexibleDate.getNowDate());
+        BunshoNo bushoNo = TashichosonJushochitokureishaRenrakuhyoFinder.
+                createInstance().get文書番号取得(ReportIdDBA.DBA100007.getReportId());
         if (bushoNo != null) {
             div.getTajutokuTekiyoJohoIchiran().getReportPublish().
                     getHenshuNaiyo().getTxtBunshoBango().setValue(bushoNo.edit文書番号(countedItem.nextString()));
@@ -195,8 +191,7 @@ public class ShikakuKihonJoho {
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam().getValue(),
                                 ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード() == null
                                 ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード(),
-                                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号() == null
-                                ? RString.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号().value(),
+                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get措置保険者番号(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo() == null ? FlexibleDate.EMPTY
                                 : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get異動日()),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get枝番(),
@@ -239,11 +234,6 @@ public class ShikakuKihonJoho {
         item.setShisetsuYubinNo(business.get施設郵便番号());
         item.setShisetsuJusho(business.get施設住所());
         return item;
-    }
-
-    private RString get文書番号取得(ReportId reportId) {
-
-        return ReportUtil.get文書番号(SubGyomuCode.DBA介護資格, reportId, FlexibleDate.getNowDate());
     }
 
     private ShikakuKihonJohoHandler createHandler(ShikakuKihonJohoDiv div) {
