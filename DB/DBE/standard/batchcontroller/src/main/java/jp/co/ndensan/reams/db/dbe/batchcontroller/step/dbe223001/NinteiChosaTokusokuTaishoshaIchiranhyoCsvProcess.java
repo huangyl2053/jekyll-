@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
