@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBBRP43002_2_保険料納入通知書（本算定）HeaderEditor
@@ -93,7 +94,7 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == Integer.valueOf(出力期)) {
-                    source.listUpper_10 = new RString(entity.get金額().toString());
+                    source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0);
                 }
             }
         }
@@ -140,11 +141,11 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {
-            source.listUpper_9 = new RString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額().toString());
+            source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
         }
         setOtherValue(編集後本算定通知書共通情報, source);
-        if ((編集後本算定通知書共通情報.get編集後宛先() != null) && ((編集後本算定通知書共通情報.get編集後宛先().get本人名称())
-                != (編集後本算定通知書共通情報.get編集後宛先().get宛先名称()))) {
+        if ((編集後本算定通知書共通情報.get編集後宛先() != null) && ((編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName())
+                != (編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName()))) {
             source.listUpper_12 = START.concat(RString.FULL_SPACE)
                     .concat(new RString(編集後本算定通知書共通情報.get編集後宛先().get宛先名称().toString()));
         }
@@ -171,36 +172,26 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
      */
     private void 出力帳票entityss(NonyuTsuchIchiranSource source) {
         RString 並び順の1件目 = 並び順List.size() <= NUM0 ? RString.EMPTY : 並び順List.get(NUM0);
-        if (並び順の1件目 != null && !並び順の1件目.isEmpty()) {
-            source.shutsuryokujun1 = 並び順の1件目;
-        }
+        source.shutsuryokujun1 = 並び順の1件目;
         RString 並び順の2件目 = 並び順List.size() <= NUM1 ? RString.EMPTY : 並び順List.get(NUM1);
-        if (並び順の2件目 != null) {
-            source.shutsuryokujun2 = 並び順の2件目;
-        }
+        source.shutsuryokujun2 = 並び順の2件目;
         RString 並び順の3件目 = 並び順List.size() <= NUM2 ? RString.EMPTY : 並び順List.get(NUM2);
-        if (並び順の3件目 != null) {
-            source.shutsuryokujun3 = 並び順の3件目;
-        }
+        source.shutsuryokujun3 = 並び順の3件目;
         RString 並び順の4件目 = 並び順List.size() <= NUM3 ? RString.EMPTY : 並び順List.get(NUM3);
-        if (並び順の4件目 != null) {
-            source.shutsuryokujun4 = 並び順の4件目;
-        }
+        source.shutsuryokujun4 = 並び順の4件目;
         RString 並び順の5件目 = 並び順List.size() <= NUM4 ? RString.EMPTY : 並び順List.get(NUM4);
-        if (並び順の5件目 != null) {
-            source.shutsuryokujun5 = 並び順の5件目;
-        }
+        source.shutsuryokujun5 = 並び順の5件目;
     }
 
     private RString get作成日時(RDateTime 帳票作成日時) {
         RStringBuilder builder = new RStringBuilder();
         RString 作成日時 = RString.EMPTY;
         RString 帳票作成日 = 帳票作成日時.getDate().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
         RString 日時 = 帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         作成日時 = builder.append(帳票作成日).append(RString.HALF_SPACE).append(日時)
-                .append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
+                .append(RString.HALF_SPACE).append(STRING_SAKUSEI).toRString();
         return 作成日時;
     }
 
@@ -219,20 +210,20 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
             source.listLower_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
         }
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
-            source.listLower_3 = 編集後本算定通知書共通情報.get編集後宛先().get編集後住所();
+            source.listLower_3 = 編集後本算定通知書共通情報.get編集後宛先().get町域();
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get保険料段階() != null) {
             source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get保険料段階();
         }
         if (編集後本算定通知書共通情報.get今後納付すべき額() != null) {
-            source.listLower_5 = new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString());
+            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
                 if (entity.get期() == (Integer.valueOf(出力期) + 1)) {
-                    source.listLower_6 = new RString(entity.get金額().toString());
+                    source.listLower_6 = DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0);
                 }
             }
         }
@@ -248,8 +239,13 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
             RString 通帳番号 = 編集後本算定通知書共通情報.get編集後口座().get通帳番号();
             RString 口座名義人漢字 = 編集後本算定通知書共通情報.get編集後口座().get口座名義人漢字();
             RString 支店コード = 編集後本算定通知書共通情報.get編集後口座().get支店コード();
-            RString 口座番号 = 編集後本算定通知書共通情報.get編集後口座().get金融機関コード();
+            RString 口座番号 = 編集後本算定通知書共通情報.get編集後口座().get口座番号();
             RString 口座種別 = 編集後本算定通知書共通情報.get編集後口座().get預金種別略称();
+            if (金融機関コード.isEmpty() || 通帳記号.isEmpty() || 通帳番号.isEmpty()
+                    || 口座名義人漢字.isEmpty() || 支店コード.isEmpty()
+                    || 口座番号.isEmpty() || 口座種別.isEmpty()) {
+                return RString.EMPTY;
+            }
             if (INDEX.equals(金融機関コード.substring(NUM0, NUM4))) {
                 口座情報 = 金融機関コード.substring(NUM0, NUM4).concat(RString.HALF_SPACE)
                         .concat(通帳記号.substring(NUM0, NUM5)).concat(半角ハイフン)
