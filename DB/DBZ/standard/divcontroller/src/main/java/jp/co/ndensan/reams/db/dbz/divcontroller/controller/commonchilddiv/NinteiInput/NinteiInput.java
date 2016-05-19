@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.NinteiInput;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -121,8 +120,18 @@ public class NinteiInput {
         return ResponseData.of(div).respond();
     }
 
-    private NinteiInputHandler getHandler(NinteiInputDiv requestDiv) {
-        return new NinteiInputHandler(requestDiv);
+    /**
+     * 開始または終了日がlostFocusです。
+     *
+     * @param div NinteiInputDiv
+     * @return NinteiInputDiv
+     */
+    public ResponseData<NinteiInputDiv> onClick_lostFocus(NinteiInputDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).開始終了日check();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     private NinteiInputValidationHandler getValidationHandler(NinteiInputDiv div) {

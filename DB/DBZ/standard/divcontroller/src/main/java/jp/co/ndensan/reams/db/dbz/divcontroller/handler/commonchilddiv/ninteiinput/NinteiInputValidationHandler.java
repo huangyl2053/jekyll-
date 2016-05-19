@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput;
 
+import jp.co.ndensan.reams.db.dbz.business.core.dbt7202kaigoninteihokaiseikanri.DbT7202KaigoNinteiHokaiseiKanriBusiness;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteiinput.NinteiInputFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -39,8 +41,8 @@ public class NinteiInputValidationHandler {
      */
     public ValidationMessageControlPairs 有効開始日check() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (div.getTxtNinteiYMD().getValue() == null) {
-            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効開始日, div.getTxtNinteiYMD()));
+        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効開始日, div.getTxtYukoKaishiYMD()));
         }
         return validationMessage;
     }
@@ -50,11 +52,23 @@ public class NinteiInputValidationHandler {
      *
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs 開始終了日の前後順check() {
+    public ValidationMessageControlPairs 開始終了日check() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (div.getTxtYukoShuryoYMD().getValue().isBefore(div.getTxtYukoKaishiYMD().getValue())) {
+        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効開始日, div.getTxtYukoKaishiYMD()));
+        }
+        if (div.getTxtYukoShuryoYMD().getValue().isEmpty()) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効終了日, div.getTxtYukoShuryoYMD()));
+        }
+        if (!div.getTxtYukoKaishiYMD().getValue().isEmpty() && !div.getTxtYukoShuryoYMD().getValue().isEmpty()
+                && div.getTxtYukoShuryoYMD().getValue().isBefore(div.getTxtYukoKaishiYMD().getValue())) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation開始日と終了日の前後順,
                     div.getTxtYukoKaishiYMD(), div.getTxtYukoShuryoYMD()));
+        }
+        DbT7202KaigoNinteiHokaiseiKanriBusiness dbt7202 = NinteiInputFinder.createInstance().get最古法改正施行年月日();
+        if (dbt7202 != null && dbt7202.get法改正施行年月日() != null && div.getTxtYukoKaishiYMD().getValue().isBefore(dbt7202.get法改正施行年月日())) {
+            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation開始日と法施行の前後順,
+                    div.getTxtYukoKaishiYMD()));
         }
         return validationMessage;
     }
@@ -62,7 +76,9 @@ public class NinteiInputValidationHandler {
     private static enum NinteiInputCheckMessages implements IValidationMessage {
 
         validation有効開始日(UrErrorMessages.対象データなし_追加メッセージあり, "有効開始日"),
-        validation開始日と終了日の前後順(UrWarningMessages.日付の前後関係逆転以降, "開始日", "終了日");
+        validation有効終了日(UrErrorMessages.対象データなし_追加メッセージあり, "有効終了日"),
+        validation開始日と終了日の前後順(UrWarningMessages.日付の前後関係逆転以降, "開始日", "終了日"),
+        validation開始日と法施行の前後順(UrWarningMessages.日付の前後関係逆転以降, "法施行日", "有効開始日");
         private final Message message;
 
         private NinteiInputCheckMessages(IMessageGettable message, String... replacements) {

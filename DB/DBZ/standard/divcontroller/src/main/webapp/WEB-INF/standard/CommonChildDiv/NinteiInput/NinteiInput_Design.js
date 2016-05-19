@@ -12,6 +12,10 @@ var DBZ;
                 return "onClick_btnYokaigodoGuide";
             };
 
+            Events.onClick_lostFocus = function () {
+                return "onClick_lostFocus";
+            };
+
             Events.onClick_btnSixMonthLater = function () {
                 return "onClick_btnSixMonthLater";
             };
