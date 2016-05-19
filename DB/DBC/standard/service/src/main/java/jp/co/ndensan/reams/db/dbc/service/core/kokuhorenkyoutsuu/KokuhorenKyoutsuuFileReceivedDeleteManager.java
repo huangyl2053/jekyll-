@@ -36,6 +36,10 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
     private static final RString アンダーライン = new RString("_");
     private static final RString ドット = new RString(".");
 
+    private static final RString MESSAGE_処理年月 = new RString("処理年月");
+    private static final RString MESSAGE_保存先フォルダ = new RString("保存先フォルダ");
+    private static final RString MESSAGE_エントリ情報LIST = new RString("エントリ情報List");
+
     /**
      * 国保連情報取込共通処理（取込済ファイル削除）
      *
@@ -46,9 +50,9 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
      */
     @Transaction
     public boolean deleteReceivedFile(FlexibleYearMonth 処理年月, RString 保存先フォルダ, List<SharedFileEntryDescriptor> エントリ情報List) {
-        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
-        requireNonNull(保存先フォルダ, UrSystemErrorMessages.値がnull.getReplacedMessage("保存先フォルダ"));
-        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage("エントリ情報List"));
+        requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_処理年月.toString()));
+        requireNonNull(保存先フォルダ, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_保存先フォルダ.toString()));
+        requireNonNull(エントリ情報List, UrSystemErrorMessages.値がnull.getReplacedMessage(MESSAGE_エントリ情報LIST.toString()));
         for (SharedFileEntryDescriptor エントリ情報 : エントリ情報List) {
             RString ファイル名_拡張子あり = エントリ情報.getName();
             RString 拡張子 = ファイル名_拡張子あり.substring(ファイル名_拡張子あり.lastIndexOf(ドット));
