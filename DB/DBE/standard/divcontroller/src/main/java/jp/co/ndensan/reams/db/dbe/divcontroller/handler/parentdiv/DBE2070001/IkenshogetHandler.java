@@ -13,14 +13,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -32,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class IkenshogetHandler {
 
     private static final RString 意見書入手モード = new RString("意見書入手モード");
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
     private final IkenshogetDiv div;
 
     /**
@@ -58,11 +52,6 @@ public class IkenshogetHandler {
     public void 要介護認定完了情報更新() {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                 = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
-                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
-            throw new ApplicationException(errorMessage);
-        }
         List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row row : rowList) {
             RString 申請書管理番号 = row.getShinseishoKanriNo();
@@ -74,16 +63,5 @@ public class IkenshogetHandler {
                 IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
             }
         }
-        前排他キーの解除(SHINSEISHOKANRINO);
-    }
-
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
     }
 }

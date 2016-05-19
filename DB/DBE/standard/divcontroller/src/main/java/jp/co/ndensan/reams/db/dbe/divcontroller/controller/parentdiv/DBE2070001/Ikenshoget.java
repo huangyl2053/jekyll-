@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoS
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -28,12 +29,16 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -50,6 +55,7 @@ public class Ikenshoget {
 
     private static final RString CSVファイル名 = new RString("主治医意見書入手一覧.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
 
     /**
      * 完了処理・主治医意見書入手の初期化。(オンロード)<br/>
@@ -59,6 +65,11 @@ public class Ikenshoget {
      */
     public ResponseData<IkenshogetDiv> onLoad(IkenshogetDiv div) {
         getHandler(div).initialize();
+        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
+            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
+                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
+            throw new ApplicationException(errorMessage);
+        }
         return ResponseData.of(div).setState(DBE2070001StateName.登録);
     }
 
@@ -70,7 +81,7 @@ public class Ikenshoget {
      */
     public ResponseData<IkenshogetDiv> onClick_BtnYitiranSyuturyoku(IkenshogetDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
             主治医意見書入手一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -92,7 +103,7 @@ public class Ikenshoget {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -120,6 +131,7 @@ public class Ikenshoget {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.イメージ取込み_規定_規定外_画面へ遷移).respond();
         }
         return ResponseData.of(div).respond();
@@ -140,7 +152,7 @@ public class Ikenshoget {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
                 主治医意見書入手一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -154,6 +166,7 @@ public class Ikenshoget {
             }
             ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
             ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, div.getCcdTaskList().getCheckbox().get(0).getChosaIraiKubun());
+            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.主治医意見書入手へ遷移する).respond();
         }
         return ResponseData.of(div).respond();
@@ -174,7 +187,7 @@ public class Ikenshoget {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
                 主治医意見書入手一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -192,6 +205,7 @@ public class Ikenshoget {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             getHandler(div).要介護認定完了情報更新();
+            前排他キーの解除(SHINSEISHOKANRINO);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書入手"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2070001StateName.完了);
@@ -239,6 +253,16 @@ public class Ikenshoget {
             return NinteiShinseiShinseijiKubunCode.valueOf(名称.toString()).getコード();
         }
         return IkenshoSakuseiKaisuKubun.valueOf(名称.toString()).getコード();
+    }
+
+    private boolean 前排他キーのセット(RString 申請書管理番号) {
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除(RString 申請書管理番号) {
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        RealInitialLocker.release(排他キー);
     }
 
     private ValidationMessageControlPairs 主治医意見書入手一覧データの存在チェック(ValidationMessageControlPairs message) {

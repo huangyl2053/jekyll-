@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoS
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -30,12 +31,16 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -50,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShujiiIkenshoIraiTaishoIchiran {
 
+    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
     private static final RString CSVファイル名 = new RString("主治医意見書依頼一覧.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -61,6 +67,11 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onLoad(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         getHandler(div).initialize();
+        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
+            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
+                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
+            throw new ApplicationException(errorMessage);
+        }
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
 
@@ -94,7 +105,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<ShujiiIkenshoIraiCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -123,7 +134,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
                 getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -136,6 +147,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
         }
         return ResponseData.of(div).respond();
@@ -156,7 +168,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
                 getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -176,6 +188,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
             shinseishoKanriNoList.setShinseishoKanriNoList(list);
             ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
+            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
@@ -196,7 +209,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
                 getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -206,8 +219,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             }
             List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
-                // TODO QA 1180 判断方法を教えてください。
-                if (true) {
+                if (RString.isNullOrEmpty(row.getKonkaiShujiiIryokikan()) || RString.isNullOrEmpty(row.getKonkaiShujii())) {
                     getValidationHandler().主治医意見書作成依頼一覧選択行の完了処理事前チェック(validationMessages);
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
@@ -219,6 +231,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 }
             }
             getHandler(div).要介護認定完了情報更新();
+            前排他キーの解除(SHINSEISHOKANRINO);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書依頼"), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2040001StateName.完了);
         }
@@ -274,6 +287,16 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
+    }
+
+    private boolean 前排他キーのセット(RString 申請書管理番号) {
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除(RString 申請書管理番号) {
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        RealInitialLocker.release(排他キー);
     }
 
     private ShujiiIkenshoIraiTaishoIchiranHandler getHandler(ShujiiIkenshoIraiTaishoIchiranDiv div) {
