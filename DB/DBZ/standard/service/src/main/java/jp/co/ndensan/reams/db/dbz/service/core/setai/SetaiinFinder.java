@@ -264,20 +264,18 @@ public class SetaiinFinder {
             識別対象list.add(識別対象);
         }
         List<SetaiinJoho> リスト = null;
+        boolean 本人データフラグ = false;
         for (IShikibetsuTaisho 宛名識別対象 : 識別対象list) {
             リスト = new ArrayList<>();
             if (識別コード.equals(宛名識別対象.get識別コード())) {
-                if (世帯員情報リスト.isEmpty()) {
-                    IShikibetsuTaisho 識別対象 = 宛名識別対象;
-                    RString 本人区分 = RSTR_ONE;
-                    SetaiinJoho setaiinJoho = new SetaiinJoho(識別対象, 本人区分);
-                    世帯員情報リスト.add(setaiinJoho);
-                } else {
-                    IShikibetsuTaisho 識別対象 = 宛名識別対象;
-                    RString 本人区分 = RSTR_ONE;
-                    SetaiinJoho setaiinJoho = new SetaiinJoho(識別対象, 本人区分);
-                    リスト.add(setaiinJoho);
+                if (本人データフラグ) {
+                    continue;
                 }
+                IShikibetsuTaisho 識別対象 = 宛名識別対象;
+                RString 本人区分 = RSTR_ONE;
+                SetaiinJoho setaiinJoho = new SetaiinJoho(識別対象, 本人区分);
+                世帯員情報リスト.add(setaiinJoho);
+                本人データフラグ = true;
             } else {
                 IShikibetsuTaisho 識別対象 = 宛名識別対象;
                 RString 本人区分 = RSTR_ZERO;
