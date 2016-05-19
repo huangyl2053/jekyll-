@@ -45,7 +45,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     private static final RString 参照 = new RString("参照");
     private static final RString 業務区分 = new RString("03");
     private static final RString 受託なし = new RString("1");
-    private static final RString 申請を保存する = new RString("Element3");
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
     private static final int 定数_6 = 6;
@@ -88,7 +87,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
             div.getPanelTwo().getTxtSeiriBango().clearValue();
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
-                    被保険者番号, サービス年月, 整理番号, 業務区分, 登録);
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
             div.getPanelTwo().getBtnKouza().setDisabled(true);
             div.getPanelTwo().getTxtShoriMode().setValue(新規);
         }
@@ -224,10 +223,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalFuSyikyuriyu1(RString fuSyikyuriyu1, KetteJoho 決定情報) {
-        if (fuSyikyuriyu1 == null && 決定情報.getZougenRiyu() == null) {
+        if (fuSyikyuriyu1 == null && 決定情報.getHushikyuRiyu() == null) {
             return false;
         }
-        if (fuSyikyuriyu1 != null && fuSyikyuriyu1.equals(決定情報.getZougenRiyu())) {
+        if (fuSyikyuriyu1 != null && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
             return false;
         }
         return true;
