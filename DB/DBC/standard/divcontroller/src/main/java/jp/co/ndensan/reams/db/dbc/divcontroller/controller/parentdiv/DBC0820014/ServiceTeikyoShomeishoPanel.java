@@ -13,17 +13,15 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820014.ServiceTeikyoShomeishoPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -42,51 +40,30 @@ public class ServiceTeikyoShomeishoPanel {
      * 画面初期化onLoad
      *
      * @param div ServiceKeikakuHiDiv
-     * @return 償還払い状況照会_サービス計画費画面
+     * @return 償還払い状況照会_サービス提供証明書画面
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onLoad(ServiceTeikyoShomeishoPanelDiv div) {
 
-        // TODO うそのデータ
-        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
-                new HihokenshaNo("000000003"),
-                new FlexibleYearMonth(new RString("200501")),
-                new RString("0000000003"),
-                new JigyoshaNo("0000000003"),
-                new RString("2165"),
-                new RString("0003"),
-                Decimal.ZERO);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_修正);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("000000003"));
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth("201601"));
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
-        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
-        ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
-        ViewStateHolder.put(ViewStateKeys.様式番号, 様式番号);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        ViewStateHolder.put(ViewStateKeys.明細番号, 明細番号);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 様式番号 = new RString("1234");
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
+                RYearMonth.class).toString());
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
 
         List<ShikibetsuNoKanri> 証明書リスト = SyokanbaraihiShikyuShinseiKetteManager
-                .createInstance().getShikibetsuNoKanri(サービス提供年月);
-        RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
+                .createInstance().getShikibetsuNoKanri(サービス年月);
+        RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class).toString());
         ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
                 .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号, 様式番号);
+
         handler.load宛名と基本情報(識別コード, 被保険者番号);
-        handler.loadボタンエリア(画面モード, 償還払支給申請.is国保連再送付フラグ());
-        handler.load申請共通エリア(画面モード, paramter);
-        handler.load申請明細エリア(画面モード, 申請日, 証明書リスト, 証明書一覧情報);
+        handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());
+        handler.load申請共通エリア(処理モード, サービス年月, 整理番号);
+        handler.load申請明細エリア(処理モード, 申請日, 証明書リスト, 証明書一覧情報);
         return createResponse(div);
     }
 
@@ -114,8 +91,8 @@ public class ServiceTeikyoShomeishoPanel {
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnKouzaInfo(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
         handler.申請既存チェック();
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        handler.putViewState(画面モード);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        handler.putViewState(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.口座情報).respond();
     }
 
@@ -128,8 +105,8 @@ public class ServiceTeikyoShomeishoPanel {
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnShokanKeteiInfo(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
         handler.申請既存チェック();
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        handler.putViewState(画面モード);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        handler.putViewState(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払決定情報).respond();
     }
 

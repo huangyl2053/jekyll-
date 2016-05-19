@@ -43,7 +43,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
     private static final RString 受託あり = new RString("2");
     private static final RString 証明書BLANK = new RString("0");
     private static final RString 証明書 = new RString("証明書");
-    private static final RString 支給申請 = new RString("支給申請");
+    private static final RString 支給申請 = new RString("償還払支給申請");
     private static final RString 登録モード = new RString("登録");
     private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
@@ -75,10 +75,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
     /**
      * ボタンエリアの初期化です。
      *
-     * @param 画面モード 画面モード
      * @param 国保連送付フラグ 国保連送付フラグ
      */
-    public void loadボタンエリア(RString 画面モード, Boolean 国保連送付フラグ) {
+    public void loadボタンエリア(Boolean 国保連送付フラグ) {
         RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
         if (受託なし.equals(config)) {
             div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(false);
@@ -95,28 +94,29 @@ public class ServiceTeikyoShomeishoPanelHandler {
     /**
      * 申請共通エリアの初期化です。
      *
-     * @param 画面モード 画面モード
-     * @param paramter 償還払費申請検索キー
+     * @param 処理モード RString
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
      */
-    public void load申請共通エリア(RString 画面モード, ShoukanharaihishinseikensakuParameter paramter) {
-        if (登録モード.equals(画面モード)) {
-            set申請共通エリア(null, 画面モード_新規);
-        } else if (修正モード.equals(画面モード)) {
-            set申請共通エリア(paramter, 処理モード_修正);
-        } else if (削除モード.equals(画面モード)) {
-            set申請共通エリア(null, 処理モード_参照);
+    public void load申請共通エリア(RString 処理モード, FlexibleYearMonth サービス年月, RString 整理番号) {
+        if (登録モード.equals(処理モード)) {
+            set申請共通エリア(画面モード_新規, null, null);
+        } else if (修正モード.equals(処理モード)) {
+            set申請共通エリア(処理モード_修正, サービス年月, 整理番号);
+        } else if (削除モード.equals(処理モード)) {
+            set申請共通エリア(処理モード_参照, null, null);
         }
     }
 
     /**
      * 申請明細エリアの初期化です。
      *
-     * @param 画面モード 画面モード
+     * @param 処理モード 処理モード
      * @param 申請日 申請日
      * @param 証明書リスト 証明書リスト
      * @param 証明書一覧情報 証明書一覧情報
      */
-    public void load申請明細エリア(RString 画面モード,
+    public void load申請明細エリア(RString 処理モード,
             RDate 申請日,
             List<ShikibetsuNoKanri> 証明書リスト,
             List<ServiceTeikyoShomeishoResult> 証明書一覧情報) {
@@ -140,7 +140,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
             rowDataList.add(row);
         }
         div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().setDataSource(rowDataList);
-        set申請明細エリア表示制御(画面モード);
+        set申請明細エリア表示制御(処理モード);
     }
 
     /**
@@ -281,20 +281,18 @@ public class ServiceTeikyoShomeishoPanelHandler {
         return true;
     }
 
-    private void set申請共通エリア(ShoukanharaihishinseikensakuParameter paramter, RString 処理モード) {
-        if (paramter != null) {
-            if (paramter.getServiceTeikyoYM() != null) {
-                div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(paramter.getServiceTeikyoYM().toString()));
-            }
-            div.getPanelTwo().getTxtSeiriBango().setValue(paramter.getSeiriNp());
+    private void set申請共通エリア(RString 処理モード, FlexibleYearMonth サービス年月, RString 整理番号) {
+        if (サービス年月 != null) {
+            div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         }
+        div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
         div.getPanelTwo().getTxtShoriMode().setValue(処理モード);
     }
 
-    private void set申請明細エリア表示制御(RString 画面モード) {
-        if (登録モード.equals(画面モード)) {
+    private void set申請明細エリア表示制御(RString 処理モード) {
+        if (登録モード.equals(処理モード)) {
             div.getPanelShinseiNaiyo().getTxtShinseibi().setDisabled(true);
-        } else if (削除モード.equals(画面モード)) {
+        } else if (削除モード.equals(処理モード)) {
             div.getPanelShinseiNaiyo().getDdlShomeisho().setDisabled(true);
             div.getPanelShinseiNaiyo().getCcdShisetsuJoho().setDisabled(true);
             div.getPanelShinseiNaiyo().getBtnAdd().setDisabled(true);

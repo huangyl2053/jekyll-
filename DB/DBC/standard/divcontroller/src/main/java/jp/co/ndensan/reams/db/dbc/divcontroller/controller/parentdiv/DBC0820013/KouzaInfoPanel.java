@@ -13,10 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820013.KouzaInfoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012.ShikyuShinseiDetailParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -27,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -56,32 +54,23 @@ public class KouzaInfoPanel {
      */
     public ResponseData<KouzaInfoPanelDiv> onLoad(KouzaInfoPanelDiv div) {
 
-        // TODO うそのデータ
-        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
-                new RString("0003"), new RString("証明書"));
-        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
-        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
-        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
-        RString 整理番号 = parameter.getSeiriNp();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
+                RYearMonth.class).toString());
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
 
         KouzaInfoHandler handler = getHandler(div);
         ShokanShinsei 支給申請情報 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
         ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_口座情報, 支給申請情報);
         handler.loadヘッダエリア(識別コード, 被保険者番号);
-        if (登録.equals(状態)) {
+        if (登録.equals(処理モード)) {
             handler.load登録(被保険者番号, サービス年月, 整理番号, 支給申請情報.is国保連再送付フラグ());
             handler.load申請共通エリア(null, null, 新規);
-        } else if (修正.equals(状態)) {
-            handler.load申請共通エリア(支給申請情報.getサービス提供年月(), 支給申請情報.get整理番号(), 修正);
-        } else if (削除.equals(状態)) {
+        } else if (修正.equals(処理モード)) {
+            handler.load申請共通エリア(サービス年月, 整理番号, 修正);
+        } else if (削除.equals(処理モード)) {
             handler.load申請共通エリア(null, null, 参照);
         }
         SikyuSinseiJyohoParameter param = new SikyuSinseiJyohoParameter();
@@ -107,7 +96,7 @@ public class KouzaInfoPanel {
         }
         param.setKozaId(支給申請情報.get口座ID());
         param.setShiharaiBasho(支給申請情報.get支払場所());
-        if (削除.equals(状態)) {
+        if (削除.equals(処理モード)) {
             div.getPnlCommon().getCcdShinseiNaiyo().initialize(param, 参照);
             return ResponseData.of(div).setState(DBC0820013StateName.削除モード);
         } else {
@@ -123,7 +112,8 @@ public class KouzaInfoPanel {
      * @return 償還払支給申請_支給申請画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnShinseiInfo(KouzaInfoPanelDiv div) {
-        getHandler(div).onClick_btnShinseiInfo();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        getHandler(div).onClick_btnShinseiInfo(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.申請情報).respond();
     }
 
@@ -134,8 +124,13 @@ public class KouzaInfoPanel {
      * @return 償還払支給申請_サービス提供証明書画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnServiceTeikyoShomeisyo(KouzaInfoPanelDiv div) {
-        getHandler(div).申請既存チェック();
-        getHandler(div).onClick_btnServiceTeikyoShomeisyo();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
+                RYearMonth.class).toString());
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
+        getHandler(div).onClick_btnServiceTeikyoShomeisyo(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.サービス提供証明書).respond();
     }
 
@@ -146,8 +141,13 @@ public class KouzaInfoPanel {
      * @return 償還払支給申請_償還払決定情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnShokanbaraiKeiteInfo(KouzaInfoPanelDiv div) {
-        getHandler(div).申請既存チェック();
-        getHandler(div).onClick_btnShokanbaraiKeiteInfo();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
+                RYearMonth.class).toString());
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
+        getHandler(div).onClick_btnShokanbaraiKeiteInfo(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.償還払決定情報).respond();
     }
 
@@ -164,11 +164,7 @@ public class KouzaInfoPanel {
             return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.一覧に戻る).respond();
         }
         Boolean 変更有無チェック = getHandler(div).変更有無チェック();
-        ShikyuShinseiDetailParameter 償還払費申請検索キー = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                ShikyuShinseiDetailParameter.class);
-        HihokenshaNo 被保険者番号 = 償還払費申請検索キー.getHiHokenshaNo();
         if (!変更有無チェック) {
-            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
             // TODO パラメータ：viewStateの保険者番号  viewStateの申請一覧検索キー
             return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.一覧に戻る).respond();
         }
