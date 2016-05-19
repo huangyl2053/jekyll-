@@ -15,20 +15,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl implements IKarisanteiHenjunkaHenkoTsuchishoB5YokoBuilder {
 
-    private final IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor headerEditor;
     private final IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor hyojiBodyEditor;
 
-    public KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl(IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor headerEditor,
-            IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor hyojiBodyEditor) {
-
-        this.headerEditor = headerEditor;
+    public KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl(IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor hyojiBodyEditor) {
         this.hyojiBodyEditor = hyojiBodyEditor;
-
     }
 
     @Override
     public KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource build() {
-        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource()).join(headerEditor)
+        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource())
                 .join(hyojiBodyEditor).buildSource();
     }
 
