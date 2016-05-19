@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.NyushoSh
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 介護保険資格者証リスト一覧表情報です。
@@ -18,58 +19,59 @@ import lombok.Getter;
  * @reamsid_L DBU-0490-080 suguangjun
  */
 @Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShikakushashoBodyItem {
 
-    private final RString subTitle;
-    private final RString yukoKigen;
-    private final RString hihokenshaNo;
-    private final RString jusho;
-    private final RString hihokenshaNameKana;
-    private final RString hihokenshaName;
-    private final RString birthGengoMeiji;
-    private final RString birthGengoTaisho;
-    private final RString birthGengoShowa;
-    private final RString seibetsu;
-    private final RString birthYMD;
-    private final RString kofuYMD;
-    private final RString yokaigoJotaiKubun;
-    private final RString ninteiYMD;
-    private final RString yukoKaishiYMD;
-    private final RString yukoShuryoYMD;
-    private final RString kubunShikyuTanisu;
-    private final RString kubunShikyuYukoKaishiYMD;
-    private final RString kubunShikyuYukoShuryoYMD;
-    private final RString kubunShikyuTaniShurui;
-    private final RString kubunShikyuTani;
-    private final List<ShuruiShikyuGendoKizyunngakuBusiness> shuruiShikyuGendoBusiness;
-    private final RString serviceRyui;
-    private final List<KyufuseigenBusiness> kyufuseigenBusiness;
-    private final RString keikakuJigyoshaName1;
-    private final RString keikakuTodokedeYMD1;
-    private final RString keikakuJigyoshaName2;
-    private final RString shaName2Asutarisuku;
-    private final RString keikakuJigyoshaName2Masshosen;
-    private final RString keikakuTodokedeYMD2;
-    private final RString keikakuTodokedeYMD2Asutarisuku;
-    private final RString keikakuTodokedeYMD2Masshosen;
-    private final RString keikakuJigyoshaName3;
-    private final RString shaName3Asutarisuku;
-    private final RString keikakuJigyoshaName3Masshosen;
-    private final RString keikakuTodokedeYMD3;
-    private final RString keikakuTodokedeYMD3Asutarisuku;
-    private final RString keikakuTodokedeYMD3Masshosen;
-    private final List<NyushoShisetsuBusiness> nyushoShisetsuBusiness;
-    private final RString shisetsuNyusho;
-    private final RString shisetsuNyuin;
-    private final RString shisetsuTaisho;
-    private final RString shisetsuTaiin;
-    private final RString hokenshaNo;
-    private final RString hokenshaJusho;
-    private final RString hokenshaName;
-    private final RString hokenshaTelno;
-    private final RString remban;
-    private final RString denshiKoin;
+    private RString subTitle;
+    private RString yukoKigen;
+    private RString hihokenshaNo;
+    private RString jusho;
+    private RString hihokenshaNameKana;
+    private RString hihokenshaName;
+    private RString birthGengoMeiji;
+    private RString birthGengoTaisho;
+    private RString birthGengoShowa;
+    private RString seibetsu;
+    private RString birthYMD;
+    private RString kofuYMD;
+    private RString yokaigoJotaiKubun;
+    private RString ninteiYMD;
+    private RString yukoKaishiYMD;
+    private RString yukoShuryoYMD;
+    private RString kubunShikyuTanisu;
+    private RString kubunShikyuYukoKaishiYMD;
+    private RString kubunShikyuYukoShuryoYMD;
+    private RString kubunShikyuTaniShurui;
+    private RString kubunShikyuTani;
+    private List<ShuruiShikyuGendoKizyunngakuBusiness> shuruiShikyuGendoBusiness;
+    private RString serviceRyui;
+    private List<KyufuseigenBusiness> kyufuseigenBusiness;
+    private RString keikakuJigyoshaName1;
+    private RString keikakuTodokedeYMD1;
+    private RString keikakuJigyoshaName2;
+    private RString shaName2Asutarisuku;
+    private RString keikakuJigyoshaName2Masshosen;
+    private RString keikakuTodokedeYMD2;
+    private RString keikakuTodokedeYMD2Asutarisuku;
+    private RString keikakuTodokedeYMD2Masshosen;
+    private RString keikakuJigyoshaName3;
+    private RString shaName3Asutarisuku;
+    private RString keikakuJigyoshaName3Masshosen;
+    private RString keikakuTodokedeYMD3;
+    private RString keikakuTodokedeYMD3Asutarisuku;
+    private RString keikakuTodokedeYMD3Masshosen;
+    private List<NyushoShisetsuBusiness> nyushoShisetsuBusiness;
+    private RString shisetsuNyusho;
+    private RString shisetsuNyuin;
+    private RString shisetsuTaisho;
+    private RString shisetsuTaiin;
+    private RString hokenshaNo;
+    private RString hokenshaJusho;
+    private RString hokenshaName;
+    private RString hokenshaTelno;
+    private RString remban;
+    private RString denshiKoin;
 
     /**
      * インスタンスを生成します。
