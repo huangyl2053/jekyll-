@@ -20,11 +20,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2400001.Ira
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2400001.IraishoIkkatsuHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.iraisho.IraishoIkkatsuHakkoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -62,7 +63,7 @@ public class IraishoIkkatsuHakko {
      * @return ResponseData<IraishoIkkatsuHakkoDiv>
      */
     public ResponseData<IraishoIkkatsuHakkoDiv> onLoad(IraishoIkkatsuHakkoDiv div) {
-        getHandler(div).load(BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援));
+        getHandler(div).load(DbBusinessConifg.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         return ResponseData.of(div).setState(DBE2400001StateName.認定調査依頼);
     }
 
@@ -74,11 +75,13 @@ public class IraishoIkkatsuHakko {
      */
     public ResponseData<IraishoIkkatsuHakkoDiv> onChange_radTaishoSentaku(IraishoIkkatsuHakkoDiv div) {
         if (SELECTED_KEY0.equals(div.getRadTaishoSentaku().getSelectedKey())) {
-            getHandler(div).load(BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援));
+            getHandler(div).load(DbBusinessConifg.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
             return ResponseData.of(div).setState(DBE2400001StateName.認定調査依頼);
         }
         if (SELECTED_KEY1.equals(div.getRadTaishoSentaku().getSelectedKey())) {
-            getHandler(div).shuziiiKenshoLoad(BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, SubGyomuCode.DBE認定支援));
+            getHandler(div).shuziiiKenshoLoad(DbBusinessConifg.get(ConfigNameDBE.主治医意見書作成期限設定方法,
+                    RDate.getNowDate(),
+                    SubGyomuCode.DBE認定支援));
             return ResponseData.of(div).setState(DBE2400001StateName.主治医意見書作成依頼);
         }
         return ResponseData.of(div).respond();

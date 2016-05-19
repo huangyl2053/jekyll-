@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonCho
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -29,11 +30,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -106,12 +107,12 @@ public class ChosahyoKihonchosaKatamenProcess extends BatchProcessBase<HomonChos
 
     private void update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = iHomonChosaIraishoMapper.get認定調査依頼情報(entity);
-        RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
+        RString 認定調査期限設定方法 = DbBusinessConifg.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (CONFIGVALUE.equals(認定調査期限設定方法)) {
             switch (processParamter.getTeishutsuKigen().toString()) {
                 case "0":
-                    int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.認定調査期限日数,
-                            SubGyomuCode.DBE認定支援).toString());
+                    int 期限日数 = Integer.parseInt(DbBusinessConifg.get(ConfigNameDBE.認定調査期限日数,
+                            RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
                     FlexibleDate 認定調査依頼日 = entity.get認定調査依頼年月日();
                     if (認定調査依頼日 != null && !認定調査依頼日.isEmpty()) {
                         dbT5201Entity.setNinteichosaKigenYMD(認定調査依頼日.plusDay(期限日数));
