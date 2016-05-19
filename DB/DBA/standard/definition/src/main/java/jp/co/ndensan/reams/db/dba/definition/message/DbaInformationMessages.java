@@ -29,7 +29,7 @@ public enum DbaInformationMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbaInformationMessages(int no, String message) {
-        this.message = new InformationMessage(toCode("I", no), message);
+        this.message = new InformationMessage(toCode("DBAI", no), message);
     }
 
     @Override

@@ -78,7 +78,7 @@ public enum DbcErrorMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbcErrorMessages(int no, String message) {
-        this.message = new ErrorMessage(toCode("E", no), message);
+        this.message = new ErrorMessage(toCode("DBCE", no), message);
     }
 
     @Override

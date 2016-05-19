@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKo;
 import jp.co.ndensan.reams.db.dbu.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoData;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.JukyuShikakuShomeishoMyBatisParameter;
-import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jukyushikakushomeisho.IJukyuShikakuShomeishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;

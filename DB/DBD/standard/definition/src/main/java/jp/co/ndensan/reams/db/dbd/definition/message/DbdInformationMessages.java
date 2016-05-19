@@ -33,7 +33,7 @@ public enum DbdInformationMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdInformationMessages(int no, String message) {
-        this.message = new InformationMessage(toCode("I", no), message);
+        this.message = new InformationMessage(toCode("DBDI", no), message);
     }
 
     @Override
