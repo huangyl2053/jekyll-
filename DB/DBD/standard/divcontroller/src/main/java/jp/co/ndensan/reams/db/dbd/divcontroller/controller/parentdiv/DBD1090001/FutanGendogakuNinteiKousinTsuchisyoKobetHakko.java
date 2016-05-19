@@ -155,10 +155,18 @@ public class FutanGendogakuNinteiKousinTsuchisyoKobetHakko {
         } else {
             div.getHihokenshashoHakkoTaishoshaJoho().getTxtGekihenKanwa().setValue(new RString("対象者以外"));
         }
-        div.getHihokenshashoHakkoTaishoshaJoho().getTxtSinnseiDate().setValue(new RDate(futanGendogakuNintei.get申請年月日().toString()));
-        div.getHihokenshashoHakkoTaishoshaJoho().getTxtKeqteiDate().setValue(new RDate(futanGendogakuNintei.get決定年月日().toString()));
-        div.getHihokenshashoHakkoTaishoshaJoho().getTxtTekiyouDate().setValue(new RDate(futanGendogakuNintei.get適用開始年月日().toString()));
-        div.getHihokenshashoHakkoTaishoshaJoho().getTxtYuukouKigenDate().setValue(new RDate(futanGendogakuNintei.get適用終了年月日().toString()));
+        if (!futanGendogakuNintei.get申請年月日().isEmpty()) {
+            div.getHihokenshashoHakkoTaishoshaJoho().getTxtSinnseiDate().setValue(new RDate(futanGendogakuNintei.get申請年月日().toString()));
+        }
+        if (!futanGendogakuNintei.get決定年月日().isEmpty()) {
+            div.getHihokenshashoHakkoTaishoshaJoho().getTxtKeqteiDate().setValue(new RDate(futanGendogakuNintei.get決定年月日().toString()));
+        }
+        if (!futanGendogakuNintei.get適用開始年月日().isEmpty()) {
+            div.getHihokenshashoHakkoTaishoshaJoho().getTxtTekiyouDate().setValue(new RDate(futanGendogakuNintei.get適用開始年月日().toString()));
+        }
+        if (!futanGendogakuNintei.get適用終了年月日().isEmpty()) {
+            div.getHihokenshashoHakkoTaishoshaJoho().getTxtYuukouKigenDate().setValue(new RDate(futanGendogakuNintei.get適用終了年月日().toString()));
+        }
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtShokuhiNum().setValue(futanGendogakuNintei.get食費負担限度額());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtYunittoketaKoshitsuNum().setValue(futanGendogakuNintei.getユニット型個室());
         div.getHihokenshashoHakkoTaishoshaJoho().getTxtYunittoketaJyunKoshitsuNum().setValue(futanGendogakuNintei.getユニット型準個室());
