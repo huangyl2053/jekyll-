@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.Hoken
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
@@ -46,10 +47,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -292,38 +293,46 @@ public class KaigoHokenShikakushasho {
             }
         } else if (市町村共通.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(association.get都道府県名());
             }
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(association.get郡名());
             }
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(association.get市町村名());
             }
             if (編集方法_1.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get住所().get住所());
                 住所.append(kojin.get住所().get番地());
             } else if (編集方法_2.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get行政区画().getGyoseiku().get名称());
                 住所.append(kojin.get住所().get番地());
             } else if (編集方法_3.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get住所().get住所());
                 住所.append(kojin.get住所().get番地());
                 住所.append(左括弧);
                 住所.append(kojin.get行政区画().getGyoseiku().get名称());
                 住所.append(右括弧);
             } else if (編集方法_4.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get住所().get番地());
             }
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get住所().get方書());
             }
         }
@@ -352,7 +361,8 @@ public class KaigoHokenShikakushasho {
     }
 
     private RString set生年月日_外国人(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
+        RString 外国人表示制御_生年月日表示方法 = DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
@@ -471,9 +481,9 @@ public class KaigoHokenShikakushasho {
     private HokenshaBangoMeishoInDataEntity getHokenshaBangoMeishoInjouhou(RString hihokenshaNo) {
         HokenshaBangoMeishoInDataEntity entity = new HokenshaBangoMeishoInDataEntity();
         entity.setHokenshaNo(hihokenshaNo);
-        entity.setHokenshaJusho(BusinessConfig.get(ConfigNameDBU.保険者情報_住所, SubGyomuCode.DBU介護統計報告));
-        entity.setHokenshaName(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
-        entity.setHokenshaTelno(BusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告));
+        entity.setHokenshaJusho(DbBusinessConifg.get(ConfigNameDBU.保険者情報_住所, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        entity.setHokenshaName(DbBusinessConifg.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        entity.setHokenshaTelno(DbBusinessConifg.get(ConfigNameDBU.保険者情報_電話番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         return entity;
     }
 
