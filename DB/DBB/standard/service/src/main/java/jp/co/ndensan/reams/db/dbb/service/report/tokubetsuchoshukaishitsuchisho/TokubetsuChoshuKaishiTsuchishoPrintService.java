@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.T
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
@@ -62,7 +63,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class TokubetsuChoshuKaishiTsuchishoPrintService {
 
     private static final ReportId 帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
-    private static final RString 種別コード = new RString("0001");
+    private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString RSTRING_1 = new RString("1");
