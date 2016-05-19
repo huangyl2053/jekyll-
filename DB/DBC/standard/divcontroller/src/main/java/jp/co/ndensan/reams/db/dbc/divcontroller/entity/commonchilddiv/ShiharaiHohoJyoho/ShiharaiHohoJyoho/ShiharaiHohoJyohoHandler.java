@@ -661,8 +661,8 @@ public class ShiharaiHohoJyohoHandler {
 
     private UzT0007CodeBusiness 預金種別に対する略称(RString 口座種別) {
 
-        return new UzT0007CodeBusiness(CodeMaster.getCode(預金種別, new Code(口座種別)) == null
-                ? new UzT0007CodeEntity() : CodeMaster.getCode(預金種別, new Code(口座種別)));
+        return new UzT0007CodeBusiness(CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)) == null
+                ? new UzT0007CodeEntity() : CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)));
     }
 
     private KinyuKikan 金融機関コードに対する名称(KinyuKikanCode 金融機関コード) {
