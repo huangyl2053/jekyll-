@@ -254,6 +254,7 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHiShoninRiyu().setDisabled(true);
             div.getDdlRiyoshaFutanDankai().setSelectedKey(
                     service.judge利用者負担段階(資格対象者.get被保険者番号(), 資格対象者.get識別コード()).getコード());
+            onChange_ddlRiyoshaFutanDankai();
         } else {
             div.getTxtTekiyoYMD().setDisabled(true);
             div.getTxtYukoKigenYMD().setDisabled(true);
