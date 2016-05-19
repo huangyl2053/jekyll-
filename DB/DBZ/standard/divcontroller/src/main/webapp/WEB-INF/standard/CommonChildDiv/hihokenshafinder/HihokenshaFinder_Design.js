@@ -83,10 +83,6 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkJushochiTokureisha"));
             };
 
-            Controls.prototype.ccdAtenaFinder = function () {
-                return new UAX.AtenaFinder.ModeController(this.convFiledName("ccdAtenaFinder"));
-            };
-
             Controls.prototype.ButtonsForHihokenshaFinder = function () {
                 return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
             };
@@ -101,10 +97,6 @@ var DBZ;
 
             Controls.prototype.txtMaxNumber = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
-            };
-
-            Controls.prototype.ccdSaikinShorisha = function () {
-                return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
             };
 
             Controls.prototype.btnHihokenshaFinderHyoji = function () {

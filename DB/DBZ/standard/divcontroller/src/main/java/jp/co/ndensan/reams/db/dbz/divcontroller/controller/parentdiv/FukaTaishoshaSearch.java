@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaSearchValidationHelper;
@@ -83,6 +84,9 @@ public class FukaTaishoshaSearch {
 
         //AtenaFinderを初期化
         div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().initialize();
+        IShikibetsuTaishoGyomuHanteiKey gyomuHanteiKey = ShikibetsuTaishoGyomuHanteiKeyFactory.
+                createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().load(gyomuHanteiKey);
 
         // TODO 保険者ドロップダウンの表示制御
         // div.getSearchCondition().getCcdSearchCondition().set保険者ドロップダウン();
@@ -148,7 +152,6 @@ public class FukaTaishoshaSearch {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 
         // 検索条件未指定チェック
-        // TODO AtenaFinderのhasChangedメソッドチェックされない
         HihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
                 && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
@@ -162,8 +165,11 @@ public class FukaTaishoshaSearch {
 //            responseData.setValidateMessageIgnoreWarningRequest(false);
             return responseData;
         }
+
+        boolean 介護検索条件のみ = 検索条件Flag && !宛名条件修正Flag;
+
         // 該当者を検索する
-        SearchResult<FukaTaishoshaRelateEntity> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
+        SearchResult<FukaTaishoshaRelateEntity> result = get対象者(div.getSearchCondition().getCcdSearchCondition(), 介護検索条件のみ);
 
         // 検索結果の絞り込み
         // TODO 【資格、賦課共通】部分
@@ -322,11 +328,20 @@ public class FukaTaishoshaSearch {
         div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(賦課年度.toString()));
     }
 
-    private SearchResult<FukaTaishoshaRelateEntity> get対象者(HihokenshaFinderDiv div) {
+    private SearchResult<FukaTaishoshaRelateEntity> get対象者(HihokenshaFinderDiv div, boolean 介護条件のみ) {
         TaishoshaFinder finder = new TaishoshaFinder();
         FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
         // FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
+
+        ShikibetsuTaishoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoSearchKeyBuilder(div.get宛名条件().getPSMSearchKey());
+//        if (介護条件のみ) {
+//            Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(fukaKey.get調定年度(), 前年度, fukaKey.get通知書番号(), fukaKey.get履歴番号()));
+//            keyBuilder.set識別コードリスト(null);
+//        } else {
+//
+//        }
+
         return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数);
     }
 
