@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001.Shu
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho.ShujiiMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -45,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -54,7 +56,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 主治医マスタ処理のクラスです。。
@@ -85,7 +86,7 @@ public class ShujiiMaster {
     public ResponseData<ShujiiMasterDiv> onLoad(ShujiiMasterDiv div) {
         getHandler(div).load();
         getHandler(div).clearKensakuJoken();
-        RString 最大取得件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        RString 最大取得件数 = DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(最大取得件数.toString()));
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {

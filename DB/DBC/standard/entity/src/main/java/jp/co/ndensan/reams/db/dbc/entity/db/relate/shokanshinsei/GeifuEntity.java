@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei;
+package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinsei;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -22,8 +22,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GeifuEntity {
 
-    ShikibetsuCode shikibetsuCode;
-    HokenshaNo shoKisaiHokenshaNo;
-    FlexibleYearMonth shinsaYM;
-    RString kyufuSakuseiKubunCode;
+    private ShikibetsuCode shikibetsuCode;
+    private HokenshaNo shoKisaiHokenshaNo;
+    private FlexibleYearMonth shinsaYM;
+    private RString kyufuSakuseiKubunCode;
 }

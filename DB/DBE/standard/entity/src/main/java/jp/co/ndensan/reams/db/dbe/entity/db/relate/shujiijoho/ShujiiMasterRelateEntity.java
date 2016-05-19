@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiijoho;
 
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

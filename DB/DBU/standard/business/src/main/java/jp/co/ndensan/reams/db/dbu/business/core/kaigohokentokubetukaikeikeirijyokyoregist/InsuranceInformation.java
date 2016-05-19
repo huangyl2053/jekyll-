@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijy
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformationEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformationEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -45,7 +45,6 @@ public class InsuranceInformation implements Serializable {
     public InsuranceInformation(RString 処理フラグ) {
         this.insuranceInformationEntity = new InsuranceInformationEntity(FlexibleYear.EMPTY, FlexibleYear.EMPTY, RString.EMPTY, LasdecCode.EMPTY,
                 Code.EMPTY, 処理フラグ, ShoKisaiHokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        this.insuranceInformationEntity.set処理フラグ(処理フラグ);
     }
 
     /**
