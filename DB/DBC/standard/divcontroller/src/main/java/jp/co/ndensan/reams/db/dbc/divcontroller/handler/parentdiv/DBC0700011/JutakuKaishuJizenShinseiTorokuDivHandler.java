@@ -56,7 +56,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -1363,13 +1362,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
 
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().setDisabled(true);
-
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (照会モード.equals(画面モード)) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(個人検索へ戻る, true);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請一覧へ戻る, true);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請を保存する, true);
-        }
     }
 
     private void 修正モード初期化() {
