@@ -17,9 +17,9 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class HikitugiData {
 
     private ShikibetsuCode 識別コード;
     private HihokenshaNo 被保険者番号;
-
 }
