@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaik
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisaikekka.ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
