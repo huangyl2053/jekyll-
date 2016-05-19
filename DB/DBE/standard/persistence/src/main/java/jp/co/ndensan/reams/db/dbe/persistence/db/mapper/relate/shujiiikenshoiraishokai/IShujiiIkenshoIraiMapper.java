@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshoiraishokai;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikenshoiraishokai.ShujiiIkenshoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoirai.ShujiiIkenshoIraiEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 
 /**
  * 認定調査情報のマッパーインタフェースです。
@@ -19,8 +19,8 @@ public interface IShujiiIkenshoIraiMapper {
     /**
      * 認定調査情報取得します。
      *
-     * @param hihokenshaNo 被保険者番号
+     * @param param ShujiiIkenshoMapperParameter
      * @return KoseiShichosonMasterEntity
      */
-    List<ShujiiIkenshoIraiEntity> selectNinnteiChousa(HihokenshaNo hihokenshaNo);
+    List<ShujiiIkenshoIraiEntity> selectNinnteiChousa(ShujiiIkenshoMapperParameter param);
 }

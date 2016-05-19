@@ -1616,6 +1616,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getBtnAddDetail().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlShiharaiHoho().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
                 getGridSetting().setIsShowSelectButtonColumn(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().

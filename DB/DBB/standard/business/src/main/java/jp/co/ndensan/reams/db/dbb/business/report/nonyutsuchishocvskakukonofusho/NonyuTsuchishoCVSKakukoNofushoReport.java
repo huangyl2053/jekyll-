@@ -55,12 +55,12 @@ public class NonyuTsuchishoCVSKakukoNofushoReport extends Report<NonyuTsuchishoC
                 break;
             }
         }
-        if (作成フラグ) {
-            for (int i = 0; i < item.get納入通知書期情報リスト().size(); i++) {
-                INonyuTsuchishoCVSKakukoNofushoEditor nofushoEditor = new NonyuTsuchishoCVSKakukoNofushoEditor(item);
-                INonyuTsuchishoCVSKakukoNofushoBuilder builder = new NonyuTsuchishoCVSKakukoNofushoBuilder(nofushoEditor);
-                reportSourceWriter.writeLine(builder);
-            }
-        }
+//        if (作成フラグ) {
+//            for (int i = 0; i < item.get納入通知書期情報リスト().size(); i++) {
+//                INonyuTsuchishoCVSKakukoNofushoEditor nofushoEditor = new NonyuTsuchishoCVSKakukoNofushoEditor(item);
+//                INonyuTsuchishoCVSKakukoNofushoBuilder builder = new NonyuTsuchishoCVSKakukoNofushoBuilder(nofushoEditor);
+//                reportSourceWriter.writeLine(builder);
+//            }
+//        }
     }
 }

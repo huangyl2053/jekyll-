@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.更新完了;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011StateName.照会;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.DBC0700011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011.JutakuKaishuJizenShinseiTorokuDivHandler;
@@ -46,6 +47,7 @@ public class JutakuKaishuJizenShinseiToroku {
 
     private static final RString 登録モード = new RString("登録");
     private static final RString 削除モード = new RString("削除");
+    private static final RString 照会モード = new RString("照会");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
     private static final RString 要介護状態区分_KEY = new RString("threeUp");
     private static final RString 要介護状態区分_VALUE = new RString("要介護状態区分３段階変更による");
@@ -89,6 +91,9 @@ public class JutakuKaishuJizenShinseiToroku {
             ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         }
         handler.項目表示制御処理(state);
+        if (照会モード.equals(state)) {
+            return ResponseData.of(div).setState(照会);
+        }
         return ResponseData.of(div).respond();
     }
 

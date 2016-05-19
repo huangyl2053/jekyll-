@@ -645,8 +645,10 @@ public class RiyoshaFutangakuGengakuHandler {
         RiyoshaFutangakuGengakuService service = RiyoshaFutangakuGengakuService.createInstance();
 
         FlexibleDate 適用日 = div.getTxtTekiyoYmd().getValue();
-        FlexibleDate 有効期限 = service.estimate有効期限(適用日);
-        div.getTxtYukoKigenYmd().setValue(有効期限);
+        if (適用日.isValid()) {
+            FlexibleDate 有効期限 = service.estimate有効期限(適用日);
+            div.getTxtYukoKigenYmd().setValue(有効期限);
+        }
     }
 
     /**
