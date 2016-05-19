@@ -11,10 +11,14 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.Futs
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.dgGenNendoKibetsuJoho_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.dgKaNendoKibetsuJoho_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020003.FutsuChoshuTotalHandler;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 画面設計_DBB9020003_システム管理情報（普通徴収）
@@ -146,7 +150,18 @@ public class FutsuChoshuTotal {
             getHandler(div).現年度入力チェック();
         }
 
-        getHandler(div).set保存処理();
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).set保存処理();
+        } else {
+            return ResponseData.of(div).respond();
+        }
         RStringBuilder message = new RStringBuilder(MSG);
         message.append(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedValue()).append(MSG_NENNDO);
         div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(message.toRString(), メッセージ, RString.EMPTY, true);
