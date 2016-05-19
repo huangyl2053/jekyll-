@@ -143,6 +143,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 各種通知書作成（個別）クラスです。
@@ -406,6 +407,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
      * @param parameter parameter
      * @return SourceDataCollection
      */
+    @Transaction
     public SourceDataCollection publish(KakushuTsuchishoParameter parameter) {
 
         if (parameter == null || parameter.get発行する帳票List() == null || parameter.get発行する帳票List().isEmpty()) {
