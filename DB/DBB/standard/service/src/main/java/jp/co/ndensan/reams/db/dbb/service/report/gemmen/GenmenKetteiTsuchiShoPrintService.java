@@ -108,7 +108,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード);
                 NinshoshaSource sourceBuilder = null;
-                if (発行日 != null) {
+                if (発行日 != null && !発行日.isEmpty()) {
                     sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                             減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
                             new RDate(発行日.toString())).buildSource();
@@ -141,7 +141,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード1);
                 NinshoshaSource sourceBuilder = null;
-                if (発行日 != null) {
+                if (発行日 != null && !発行日.isEmpty()) {
                     sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                             減免決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(),
                             new RDate(発行日.toString())).buildSource();

@@ -65,8 +65,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, B5種別コード);
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                NinshoshaSource sourceBuilder = null;
+                if (発行日 != null) {
+                    sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                            徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                }
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 EditedAtesaki 編集後宛先 = get編集後宛先(徴収猶予決定通知書情報);
@@ -102,8 +105,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> assembler = createAssembler(property, reportManager)) {
                 INinshoshaManager manager = new _NinshoshaManager();
                 Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, A4種別コード);
-                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                        徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                NinshoshaSource sourceBuilder = null;
+                if (発行日 != null) {
+                    sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                            徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                }
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 EditedAtesaki 編集後宛先 = get編集後宛先(徴収猶予決定通知書情報);

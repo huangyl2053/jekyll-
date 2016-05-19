@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoi
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -20,33 +22,35 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
 
-    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
-    private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
-    private final List<RString> 改頁項目リスト;
-    private final RString 帳票作成日時;
-    private final RString 市町村コード;
-    private final RString 市町村名;
+    private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
+    private final int 出力期;
+    private final RDateTime 帳票作成日時;
+    private final Association 地方公共団体;
+    private final List<RString> 並び順List;
+    private final Decimal 連番;
 
     /**
      * コンストラクタです。
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
-     * @param バッチパラメータ NonyuTsuchIchiranBatchParameter
-     * @param 改頁項目リスト List<RString>
-     * @param 帳票作成日時 RString
-     * @param 市町村コード RString
-     * @param 市町村名 RString
+     * @param 出力期 int
+     * @param 帳票作成日時 RDateTime
+     * @param 地方公共団体 Association
+     * @param 並び順List List<RString>
+     * @param 連番 Decimal
      */
-    public NonyuTsuchIchiranReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
-            NonyuTsuchIchiranBatchParameter バッチパラメータ,
-            List<RString> 改頁項目リスト,
-            RString 帳票作成日時, RString 市町村コード, RString 市町村名) {
+    public NonyuTsuchIchiranReport(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            int 出力期,
+            RDateTime 帳票作成日時,
+            Association 地方公共団体,
+            List<RString> 並び順List,
+            Decimal 連番) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
-        this.バッチパラメータ = バッチパラメータ;
-        this.改頁項目リスト = 改頁項目リスト;
+        this.出力期 = 出力期;
         this.帳票作成日時 = 帳票作成日時;
-        this.市町村コード = 市町村コード;
-        this.市町村名 = 市町村名;
+        this.地方公共団体 = 地方公共団体;
+        this.並び順List = 並び順List;
+        this.連番 = 連番;
     }
 
     /**
@@ -56,11 +60,9 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
      */
     @Override
     public void writeBy(ReportSourceWriter<NonyuTsuchIchiranSource> reportSourceWriter) {
-        for (int i = 0; i < 編集後本算定通知書共通情報.size(); i++) {
-            INonyuTsuchIchiranEditor headerEditor
-                    = new HeaderEditor(編集後本算定通知書共通情報.get(i), バッチパラメータ, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名, i);
-            INonyuTsuchIchiranBuilder builder = new NonyuTsuchIchiranBuilder(headerEditor);
-            reportSourceWriter.writeLine(builder);
-        }
+        INonyuTsuchIchiranEditor headerEditor
+                = new HeaderEditor(編集後本算定通知書共通情報, 出力期, 帳票作成日時, 地方公共団体, 並び順List, 連番);
+        INonyuTsuchIchiranBuilder builder = new NonyuTsuchIchiranBuilder(headerEditor);
+        reportSourceWriter.writeLine(builder);
     }
 }
