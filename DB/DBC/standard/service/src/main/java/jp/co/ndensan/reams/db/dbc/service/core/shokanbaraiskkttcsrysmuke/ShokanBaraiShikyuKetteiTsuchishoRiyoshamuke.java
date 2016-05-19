@@ -5,10 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.shokanbaraiskkttcsrysmuke;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanketteitsuchishoshiharai.ShokanKetteiTsuchiShoShiharai;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishohihokenshabun.ShokanKetteiTsuchiShoHihokenshabunItem;
@@ -62,6 +59,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     private static final int EIGHT = 8;
     private static final int NINE = 9;
     private static final int TEN = 10;
+    private static final RString カンマ = new RString(",");
     private static final int パターン番号_1 = 1;
     private static final int パターン番号_2 = 2;
     private static final int パターン番号_3 = 3;
@@ -80,6 +78,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
     private static final RString フォント大 = new RString("2");
     private static final RString フォント混在_上大下小 = new RString("3");
     private static final RString フォント混在_上小下大 = new RString("4");
+    private static final int 文字数_38 = 38;
+    private static final int 文字数_76 = 76;
 
     private final MapperProvider mapper;
 
@@ -140,36 +140,36 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         IAtesaki 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先(宛先builder.build());
         SofubutsuAtesakiSource atesakiSource
                 = new SofubutsuAtesakiSourceBuilder(new SofubutsuAtesakiEditorBuilder(宛先s).build()).buildSource();
-        Collections.sort(businessList, new DateComparator());
         RString key = RString.EMPTY;
-        List<RString> typeList = new ArrayList<>();
         Decimal 支給金額 = Decimal.ZERO;
-        int count = 0;
-        ShokanKetteiTsuchiShoHihokenshabunItem item = null;
+        RString 給付の種類 = RString.EMPTY;
+        RString サービス種類コード = RString.EMPTY;
+        ShokanKetteiTsuchiShoHihokenshabunItem item = new ShokanKetteiTsuchiShoHihokenshabunItem();
         for (ShokanKetteiTsuchiShoShiharai shoShiharai : businessList) {
             if (key.equals(getKey(shoShiharai))) {
                 支給金額 = 支給金額.add(shoShiharai.get支給額());
-                if (!typeList.contains(shoShiharai.get種類())) {
-                    count = count + 1;
-                    typeList.add(shoShiharai.get種類());
-                }
-                if (count < FOUR) {
-                    item = setItemKyufuShu(item, count, shoShiharai);
+                if (サービス種類コード.equals(shoShiharai.getサービス種類コード())) {
+                    continue;
                 } else {
-                    count = 1;
-                    支給金額 = Decimal.ZERO;
-                    retList.add(item);
-                    item = setItemKyufuShu(new ShokanKetteiTsuchiShoHihokenshabunItem(), count, shoShiharai);
-                    key = getKey(shoShiharai);
-                    typeList = new ArrayList<>();
+                    給付の種類 = set種類(給付の種類, shoShiharai.get種類());
                 }
             } else {
                 item = new ShokanKetteiTsuchiShoHihokenshabunItem();
                 key = getKey(shoShiharai);
-                typeList = new ArrayList<>();
                 支給金額 = shoShiharai.get支給額();
-                item = setItemKyufuShu(item, ONE, shoShiharai);
-                typeList.add(shoShiharai.get種類());
+                給付の種類 = shoShiharai.get種類();
+                サービス種類コード = shoShiharai.getサービス種類コード();
+            }
+            // TODO QA1137 増減理由等、帳票設計がない
+            if (給付の種類.length() <= 文字数_38) {
+                item.setKyufuShu1(給付の種類);
+                item.setRiyu1(shoShiharai.get増減理由等());
+            } else if (給付の種類.length() <= 文字数_76) {
+                item.setKyufuShu2(給付の種類.substring(文字数_38));
+                item.setRiyu2(shoShiharai.get増減理由等());
+            } else {
+                item.setKyufuShu3(給付の種類.substring(文字数_76));
+                item.setRiyu3(shoShiharai.get増減理由等());
             }
             item.setBunshoNo(文書番号);
             item.setHihokenshaName(shoShiharai.get被保険者氏名());
@@ -185,8 +185,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             item.setHihokenshaNo8(temp_被保険者番号.substring(SEVEN, EIGHT));
             item.setHihokenshaNo9(temp_被保険者番号.substring(EIGHT, NINE));
             item.setHihokenshaNo10(temp_被保険者番号.substring(NINE));
-            item.setUketsukeYMD(shoShiharai.get受付年月日().wareki().toDateString());
-            item.setKetteiYMD(shoShiharai.get決定年月日().wareki().toDateString());
+            item.setUketsukeYMD(shoShiharai.get受付年月日() == null ? RString.EMPTY : shoShiharai.get受付年月日().wareki().toDateString());
+            item.setKetteiYMD(shoShiharai.get決定年月日() == null ? RString.EMPTY : shoShiharai.get決定年月日().wareki().toDateString());
             item.setHonninShiharaiGaku(shoShiharai.get本人支払額() == null ? RString.EMPTY : new RString(shoShiharai.get本人支払額().toString()));
             item.setTaishoYM(shoShiharai.get提供年月().wareki().toDateString());
             if (!RString.isNullOrEmpty(shoShiharai.get支払方法区分コード())) {
@@ -209,6 +209,15 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
             retList.add(item);
         }
         return retList;
+    }
+
+    private RString set種類(RString kyufuShu, RString 種類) {
+
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(kyufuShu);
+        builder.append(カンマ);
+        builder.append(種類);
+        return builder.toRString();
     }
 
     private void setTitle(ShokanKetteiTsuchiShoHihokenshabunItem item, ShokanKetteiTsuchiShoShiharai shoShiharai) {
@@ -292,24 +301,6 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         item.setCustomerBarCode(atesakiSource.customerBarCode);
     }
 
-    private ShokanKetteiTsuchiShoHihokenshabunItem setItemKyufuShu(ShokanKetteiTsuchiShoHihokenshabunItem item,
-            int count, ShokanKetteiTsuchiShoShiharai shoShiharai) {
-        if (count == ONE) {
-            item.setKyufuShu1(shoShiharai.get種類());
-            item.setRiyu1(shoShiharai.get増減理由等());
-        }
-        if (count == TWO) {
-            item.setKyufuShu2(shoShiharai.get種類());
-            item.setRiyu2(shoShiharai.get増減理由等());
-        }
-        if (count == THREE) {
-            item.setKyufuShu3(shoShiharai.get種類());
-            item.setRiyu3(shoShiharai.get増減理由等());
-        }
-
-        return item;
-    }
-
     private RString get帳票制御汎用(ChohyoSeigyoHanyoManager 帳票制御汎用Manager, RString 項目名) {
         RString 設定値 = RString.EMPTY;
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId(),
@@ -349,23 +340,5 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
                     ReportIdDBC.DBC100002_2.getReportId(), KamokuCode.EMPTY, パターン番号_4, THREE, batchPram.getHakkoYMD()));
         }
         return item;
-    }
-
-    private static class DateComparator implements Comparator<ShokanKetteiTsuchiShoShiharai>, Serializable {
-
-        private static final long serialVersionUID = 4690372616865443573L;
-
-        @Override
-        public int compare(ShokanKetteiTsuchiShoShiharai o1, ShokanKetteiTsuchiShoShiharai o2) {
-            if (o1.get被保険者番号().equals(o2.get被保険者番号())) {
-                if (o1.get提供年月().equals(o2.get提供年月())) {
-                    return o1.get整理番号().compareTo(o2.get整理番号());
-                } else {
-                    return o1.get提供年月().compareTo(o2.get提供年月());
-                }
-            } else {
-                return o1.get被保険者番号().compareTo(o2.get被保険者番号());
-            }
-        }
     }
 }
