@@ -264,7 +264,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         ViewStateHolder.put(ViewStateKeys.償還払請求基本データ, 償還払請求基本);
         修正モードなど給付率初期化(償還払請求基本);
 
-        証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+        証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, false);
         div.getDdlSyomeisyo().setSelectedKey(償還払請求基本.get様式番号());
         ShokanShukei 償還払請求集計 = 住宅改修費支給申請.getShokanSyukei(償還払請求基本.get被保険者番号(),
                 償還払請求基本.getサービス提供年月(), 償還払請求基本.get整理番号(), 償還払請求基本.get事業者番号(),
@@ -451,7 +451,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 支給申請情報, 支払方法状態_修正);
         ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
         set住宅改修内容更新前データ();
-        証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+        証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, false);
         div.getBtnShokanKetteiJyoho().setDisabled(true);
         div.getJutakuKaishuShinseiContents().getShinsaKekkaPanel().setVisible(false);
         div.getJutakuKaishuShinseiContents().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setVisible(false);
@@ -482,7 +482,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         List<ShichosonResult> 元保険者リスト = 保険者.getHokensyaList(
                 被保険者番号, new FlexibleYearMonth(提供着工年月.getYearMonth().toDateString()));
         set保険者初期化(元保険者リスト);
-        証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+        証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, false);
         ViewStateHolder.put(ViewStateKeys.申請情報登録_更新前データ, (Serializable) get更新前データ());
         set住宅改修内容更新前データ();
         div.getBtnShokanKetteiJyoho().setDisabled(true);
@@ -893,12 +893,13 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
     /**
      * 証明書表示設定するメソッドです。
      *
-     * @param 住宅改修費支給申請 住宅改修費支給申請
-     * @param 被保険者番号 被保険者番号
-     * @param 画面モード 画面モード
+     * @param 住宅改修費支給申請 JutakukaishuSikyuShinseiManager
+     * @param 被保険者番号 HihokenshaNo
+     * @param 画面モード RString
+     * @param is提供着工年月切替Flag boolean
      */
     public void 証明書表示設定(JutakukaishuSikyuShinseiManager 住宅改修費支給申請, HihokenshaNo 被保険者番号,
-            RString 画面モード) {
+            RString 画面モード, boolean is提供着工年月切替Flag) {
         RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
         FlexibleYearMonth 提供着工年月 = new FlexibleYearMonth(画面提供着工年月.getYearMonth().toDateString());
         List<ShikibetsuNoKanri> 様式名称 = 住宅改修費支給申請.getYoshikiName(提供着工年月);
@@ -910,55 +911,60 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
         YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(被保険者番号, 提供着工年月);
+        set証明書DataSource(様式名称);
+        if (is提供着工年月切替Flag) {
+            set証明書DataSource空項目ある(様式名称);
+        }
         if (要介護認定情報 == null) {
-            List<KeyValueDataSource> 証明書ddl = new ArrayList<>();
-            証明書ddl.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-            if (!様式名称.isEmpty()) {
-                for (ShikibetsuNoKanri 識別番号 : 様式名称) {
-                    証明書ddl.add(new KeyValueDataSource(識別番号.get識別番号(), 識別番号.get識別番号()));
-                }
-            }
-            div.getDdlSyomeisyo().setDataSource(証明書ddl);
+            set証明書DataSource空項目ある(様式名称);
             div.getDdlSyomeisyo().setSelectedKey(RString.EMPTY);
         } else if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) < 0) {
-            set証明書DataSource(様式名称);
-            証明書表示設定平成18年04月以前(要介護認定情報);
+            証明書表示設定平成18年04月以前(要介護認定情報.get要介護認定状態区分コード(), is提供着工年月切替Flag);
         } else if (画面提供着工年月.toDateString().compareTo(制度改正施行年月日) >= 0) {
-            set証明書DataSource(様式名称);
-            証明書表示設定(画面モード, 要介護認定情報, 提供着工年月);
+            証明書表示設定(画面モード, 要介護認定情報.get要介護認定状態区分コード(), 提供着工年月, is提供着工年月切替Flag);
         }
     }
 
-    private void 証明書表示設定平成18年04月以前(YokaigoNinteiJyoho 要介護認定情報) {
-        if (要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護1.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護2.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護3.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護4.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護5.equals(要介護認定情報.get要介護認定状態区分コード())) {
+    private void set証明書DataSource空項目ある(List<ShikibetsuNoKanri> 様式名称) {
+        List<KeyValueDataSource> 証明書ddl = new ArrayList<>();
+        証明書ddl.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        if (!様式名称.isEmpty()) {
+            for (ShikibetsuNoKanri 識別番号 : 様式名称) {
+                証明書ddl.add(new KeyValueDataSource(識別番号.get識別番号(), 識別番号.get識別番号()));
+            }
+        }
+        div.getDdlSyomeisyo().setDataSource(証明書ddl);
+    }
+
+    private void 証明書表示設定平成18年04月以前(Code 要介護認定状態区分コード, boolean is提供着工年月切替Flag) {
+        if (要支援_経過的要介護.equals(要介護認定状態区分コード) || 要介護1.equals(要介護認定状態区分コード)
+                || 要介護2.equals(要介護認定状態区分コード) || 要介護3.equals(要介護認定状態区分コード)
+                || 要介護4.equals(要介護認定状態区分コード) || 要介護5.equals(要介護認定状態区分コード)) {
             div.getDdlSyomeisyo().setSelectedKey(証明書1);
             div.getDdlSyomeisyo().setDisabled(true);
+        } else if (is提供着工年月切替Flag) {
+            div.getDdlSyomeisyo().setSelectedKey(RString.EMPTY);
         } else {
             throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
         }
     }
 
-    private void 証明書表示設定(RString 画面モード, YokaigoNinteiJyoho 要介護認定情報, FlexibleYearMonth 提供着工年月) {
-        if (要支援1.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要支援2.equals(要介護認定情報.get要介護認定状態区分コード())) {
+    private void 証明書表示設定(RString 画面モード, Code 要介護認定状態区分コード, FlexibleYearMonth 提供着工年月,
+            boolean is提供着工年月切替Flag) {
+        if (要支援1.equals(要介護認定状態区分コード)
+                || 要支援2.equals(要介護認定状態区分コード)) {
             set証明書値(証明書2);
-        } else if ((要支援_経過的要介護.equals(要介護認定情報.get要介護認定状態区分コード())
-                && 提供着工年月.isBeforeOrEquals(平成21年03月))
-                || 要介護1.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護2.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護3.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護4.equals(要介護認定情報.get要介護認定状態区分コード())
-                || 要介護5.equals(要介護認定情報.get要介護認定状態区分コード())) {
+        } else if ((要支援_経過的要介護.equals(要介護認定状態区分コード) && 提供着工年月.isBeforeOrEquals(平成21年03月))
+                || 要介護1.equals(要介護認定状態区分コード) || 要介護2.equals(要介護認定状態区分コード)
+                || 要介護3.equals(要介護認定状態区分コード) || 要介護4.equals(要介護認定状態区分コード)
+                || 要介護5.equals(要介護認定状態区分コード)) {
             div.getDdlSyomeisyo().setSelectedKey(証明書1);
             div.getDdlSyomeisyo().setDisabled(false);
             if (!画面モード_登録.equals(画面モード) && !画面モード_事前申請.equals(画面モード)) {
                 div.getDdlSyomeisyo().setDisabled(true);
             }
+        } else if (is提供着工年月切替Flag) {
+            div.getDdlSyomeisyo().setSelectedKey(RString.EMPTY);
         } else {
             throw new ApplicationException(DbcErrorMessages.受給者登録なし.getMessage());
         }

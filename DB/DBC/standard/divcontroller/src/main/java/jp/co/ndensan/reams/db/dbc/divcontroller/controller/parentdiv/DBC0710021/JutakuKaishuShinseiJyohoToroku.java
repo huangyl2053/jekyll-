@@ -116,22 +116,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     }
 
     /**
-     * 提供（着工）年月変更後のメソッドです。
-     *
-     * @param div 住宅改修費支給申請_申請情報登録DIV
-     * @return ResponseData
-     */
-    public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_teikyoYMonFocus(
-            JutakuKaishuShinseiJyohoTorokuDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-        handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 画面の保存するメソッドです。
      *
      * @param div 住宅改修費支給申請_申請情報登録DIV
@@ -472,7 +456,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (画面提供着工年月 != null) {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
         }
         return ResponseData.of(div).respond();
     }
@@ -542,7 +526,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             div.getTxtKyufuritsu().setValue(給付率.value());
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
         }
         return ResponseData.of(div).respond();
     }
