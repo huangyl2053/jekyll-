@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyo08;
+package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyoshinsei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyo08.ShinsakaiShukeihyo08;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyo08.ShinsakaiShukeihyo08ReportSource;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinsei;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinseiReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -21,28 +21,28 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  *
  * @reamsid_L DBE-1450-080 dongyabin
  */
-public class Shinsakaishukeihyo08Editor implements IShinsakaishukeihyo08Editor {
+public class ShinsakaishukeihyoShinseiEditor implements IShinsakaishukeihyoShinseiEditor {
 
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private final ShinsakaiShukeihyo08 item;
+    private final ShinsakaiShukeihyoShinsei item;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link JohoTeikyoShiryoItem}
      */
-    protected Shinsakaishukeihyo08Editor(ShinsakaiShukeihyo08 item) {
+    protected ShinsakaishukeihyoShinseiEditor(ShinsakaiShukeihyoShinsei item) {
         this.item = item;
     }
 
     @Override
-    public ShinsakaiShukeihyo08ReportSource edit(ShinsakaiShukeihyo08ReportSource source) {
+    public ShinsakaiShukeihyoShinseiReportSource edit(ShinsakaiShukeihyoShinseiReportSource source) {
         return editSource(source);
     }
 
-    private ShinsakaiShukeihyo08ReportSource editSource(ShinsakaiShukeihyo08ReportSource source) {
+    private ShinsakaiShukeihyoShinseiReportSource editSource(ShinsakaiShukeihyoShinseiReportSource source) {
         source.title = item.getタイトル();
         RDateTime printdate = item.get発行日時();
         RStringBuilder printTimeStampSb = new RStringBuilder();

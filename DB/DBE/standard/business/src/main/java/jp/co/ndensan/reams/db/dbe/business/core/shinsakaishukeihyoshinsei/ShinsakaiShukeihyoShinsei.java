@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyo08;
+package jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyoshinsei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsakaiShukeihyo08 {
+public class ShinsakaiShukeihyoShinsei {
 
     private RString タイトル;
     private RString 市町村名称;

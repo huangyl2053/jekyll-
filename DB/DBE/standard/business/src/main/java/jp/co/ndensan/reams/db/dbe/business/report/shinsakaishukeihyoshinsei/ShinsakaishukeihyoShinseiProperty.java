@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyo08;
+package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyoshinsei;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyo08.ShinsakaiShukeihyo08ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinseiReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,16 +24,16 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  *
  * @reamsid_L DBE-1450-080 dongyabin
  */
-public class Shinsakaishukeihyo08Property extends ReportPropertyBase<ShinsakaiShukeihyo08ReportSource> {
+public class ShinsakaishukeihyoShinseiProperty extends ReportPropertyBase<ShinsakaiShukeihyoShinseiReportSource> {
 
     private static final ReportId ID = ReportIdDBE.DBE701008.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections.
-            unmodifiableList(Arrays.asList(new RString(ShinsakaiShukeihyo08ReportSource.ReportSourceFields.shichosonName.name())));
+            unmodifiableList(Arrays.asList(new RString(ShinsakaiShukeihyoShinseiReportSource.ReportSourceFields.shichosonName.name())));
 
     /**
      * インスタンスを生成します。
      */
-    public Shinsakaishukeihyo08Property() {
+    public ShinsakaishukeihyoShinseiProperty() {
         super(SubGyomuCode.DBE認定支援, ID);
     }
 
@@ -45,18 +45,18 @@ public class Shinsakaishukeihyo08Property extends ReportPropertyBase<ShinsakaiSh
      * @return Breakers<ShinsahanteinoHenkojokyoReportSource>
      */
     @Override
-    public Breakers<ShinsakaiShukeihyo08ReportSource> defineBreakers(
-            Breakers<ShinsakaiShukeihyo08ReportSource> breakers,
-            BreakerCatalog<ShinsakaiShukeihyo08ReportSource> catalog) {
+    public Breakers<ShinsakaiShukeihyoShinseiReportSource> defineBreakers(
+            Breakers<ShinsakaiShukeihyoShinseiReportSource> breakers,
+            BreakerCatalog<ShinsakaiShukeihyoShinseiReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
 
 
             PAGE_BREAK_KEYS) {
             @Override
-            public ReportLineRecord<ShinsakaiShukeihyo08ReportSource> occuredBreak(
-                    ReportLineRecord<ShinsakaiShukeihyo08ReportSource> currentRecord,
-                    ReportLineRecord<ShinsakaiShukeihyo08ReportSource> nextRecord,
+            public ReportLineRecord<ShinsakaiShukeihyoShinseiReportSource> occuredBreak(
+                    ReportLineRecord<ShinsakaiShukeihyoShinseiReportSource> currentRecord,
+                    ReportLineRecord<ShinsakaiShukeihyoShinseiReportSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
                 if (nextRecord == ReportLineRecord.LAST_RECORD) {
                     return currentRecord;

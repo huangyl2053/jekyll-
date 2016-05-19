@@ -3,35 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyo08;
+package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyoshinsei;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyo08.ShinsakaiShukeihyo08Body;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyo08.ShinsakaiShukeihyo08ReportSource;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinseiBody;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinseiReportSource;
 
 /**
  * 介護認定審査会集計表（申請区分別）のEditorです。
  *
  * @reamsid_L DBE-1450-070 dongyabin
  */
-public class Shinsakaishukeihyo08BodyEditor implements IShinsakaishukeihyo08BodyEditor {
+public class ShinsakaishukeihyoShinseiBodyEditor implements IShinsakaishukeihyoShinseiBodyEditor {
 
-    private final ShinsakaiShukeihyo08Body item;
+    private final ShinsakaiShukeihyoShinseiBody item;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link JohoTeikyoShiryoItem}
      */
-    protected Shinsakaishukeihyo08BodyEditor(ShinsakaiShukeihyo08Body item) {
+    protected ShinsakaishukeihyoShinseiBodyEditor(ShinsakaiShukeihyoShinseiBody item) {
         this.item = item;
     }
 
     @Override
-    public ShinsakaiShukeihyo08ReportSource edit(ShinsakaiShukeihyo08ReportSource source) {
+    public ShinsakaiShukeihyoShinseiReportSource edit(ShinsakaiShukeihyoShinseiReportSource source) {
         return editSource(source);
     }
 
-    private ShinsakaiShukeihyo08ReportSource editSource(ShinsakaiShukeihyo08ReportSource source) {
+    private ShinsakaiShukeihyoShinseiReportSource editSource(ShinsakaiShukeihyoShinseiReportSource source) {
         source.listShukeihyo1_1 = item.getListShukeihyo1_1();
         source.listShukeihyo1_2 = item.getListShukeihyo1_2();
         source.listShukeihyo1_3 = item.getListShukeihyo1_3();

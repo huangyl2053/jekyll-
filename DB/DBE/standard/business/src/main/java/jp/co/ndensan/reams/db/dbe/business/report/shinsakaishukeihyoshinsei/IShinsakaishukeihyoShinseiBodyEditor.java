@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyo08;
+package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishukeihyoshinsei;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyo08.ShinsakaiShukeihyo08ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyoshinsei.ShinsakaiShukeihyoShinseiReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBE-1450-080 dongyabin
  */
-public interface IShinsakaishukeihyo08Editor extends IReportEditor<ShinsakaiShukeihyo08ReportSource> {
+public interface IShinsakaishukeihyoShinseiBodyEditor extends IReportEditor<ShinsakaiShukeihyoShinseiReportSource> {
 
 }

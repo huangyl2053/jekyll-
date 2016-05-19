@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyo08;
+package jp.co.ndensan.reams.db.dbe.business.core.shinsakaishukeihyoshinsei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsakaiShukeihyo08Body {
+public class ShinsakaiShukeihyoShinseiBody {
 
     private final RString listShukeihyo1_1;
     private final RString listShukeihyo1_2;
@@ -48,7 +48,7 @@ public class ShinsakaiShukeihyo08Body {
      * @param listShukeihyo3_2 listShukeihyo3_2
      * @param listShukeihyo3_3 listShukeihyo3_3
      */
-    public ShinsakaiShukeihyo08Body(RString listShukeihyo1_1,
+    public ShinsakaiShukeihyoShinseiBody(RString listShukeihyo1_1,
             RString listShukeihyo1_2,
             RString listShukeihyo1_3,
             RString listShukeihyo1_4,

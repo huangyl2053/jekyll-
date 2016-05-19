@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyo08;
+package jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyoshinsei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBE-1450-080 dongyabin
  */
-public class ShinsakaiShukeihyo08ReportSource implements IReportSource {
+public class ShinsakaiShukeihyoShinseiReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "title", length = 30, order = 1)
