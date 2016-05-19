@@ -95,6 +95,10 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
         }
         if (!sets.isEmpty()) {
             List<RString> arrList = new ArrayList<>(sets);
+            arrList.remove(null);
+            if (arrList.isEmpty()) {
+                return flag;
+            }
             List<DbT3048ShokanFukushiYoguHanbaihiEntity> resultList = new ArrayList<>();
             if (!flag) {
                 resultList = 償還払請求福祉用具販売費Dac.select品目コード(被保険者番号, サービス提供年月, arrList, 整理番号);
