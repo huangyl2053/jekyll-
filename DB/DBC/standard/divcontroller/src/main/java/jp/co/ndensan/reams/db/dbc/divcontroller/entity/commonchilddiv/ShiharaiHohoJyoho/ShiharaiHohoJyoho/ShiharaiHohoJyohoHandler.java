@@ -69,6 +69,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 高額合算支給申請11 = new RString("DBCMN61011");
     private final RString 高額合算支給申請12 = new RString("DBCMN61012");
     private final RString 高額合算支給決定情報補正 = new RString("DBCMN62004");
+    private final RString 福祉用具購入費支給申請一括審査_決定 = new RString("DBCMN51002");
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
     private final ShiharaiHohoJyohoDiv div;
@@ -899,9 +900,12 @@ public class ShiharaiHohoJyohoHandler {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
 
-        if (償還払い状況照会.equals(menuID) || 福祉用具購入費支給申請.equals(menuID)
-                || 住宅改修費支給申請.equals(menuID) || 住宅改修費事前申請.equals(menuID)
-                || 償還払い費支給申請.equals(menuID)) {
+        if (償還払い状況照会.equals(menuID)
+                || 福祉用具購入費支給申請.equals(menuID)
+                || 住宅改修費支給申請.equals(menuID)
+                || 住宅改修費事前申請.equals(menuID)
+                || 償還払い費支給申請.equals(menuID)
+                || 福祉用具購入費支給申請一括審査_決定.equals(menuID)) {
 
             業務内区分コード = new KamokuCode(String.format("%03d", Integer.valueOf(KozaBunruiKubun.償還払い支給.getコード().toString())));
         }
