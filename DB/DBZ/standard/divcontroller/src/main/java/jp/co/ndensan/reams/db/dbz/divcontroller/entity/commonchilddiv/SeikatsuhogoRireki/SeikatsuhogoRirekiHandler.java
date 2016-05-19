@@ -53,17 +53,23 @@ public class SeikatsuhogoRirekiHandler {
             dgSeikatsuhogoRireki_Row row = new dgSeikatsuhogoRireki_Row();
             row.getTxtJukyushaNo().setValue(list.get受給者番号());
             row.getTxtKaishiYM().setValue(new RDate(list.get受給開始日().toString()));
-            row.getTxtHaishiYM().setValue(new RDate(list.get受給廃止日().toString()));
+            if (list.get受給廃止日() != null) {
+                row.getTxtHaishiYM().setValue(new RDate(list.get受給廃止日().toString()));
+            }
             row.setTxtHokenryoDairiNofuKubun(list.get納付区分());
-            row.getTxtHokenryoDairiNofuYM().setValue(new RDate(list.get納付年月().toString()));
+            if (list.get納付年月() != null) {
+                row.getTxtHokenryoDairiNofuYM().setValue(new RDate(list.get納付年月().toString()));
+            }
             if (list.get入退所区分() != null) {
                 row.setTxtKyugoshisetsuNyutaishoKubun(KyugoShisetsuNyuTaishoKubunType
                         .toValue(list.get入退所区分()).toRString());
             }
-            if (KyugoShisetsuNyuTaishoKubunType.退所.code().equals(list.get入退所区分())) {
+            if (KyugoShisetsuNyuTaishoKubunType.退所.code().equals(list.get入退所区分())
+                    && list.get入退所日() != null) {
                 row.getTxtKyugoshisetsuTaishoDate().setValue(new RDate(list.get入退所日().toString()));
             }
-            if (KyugoShisetsuNyuTaishoKubunType.入所.code().equals(list.get入退所区分())) {
+            if (KyugoShisetsuNyuTaishoKubunType.入所.code().equals(list.get入退所区分())
+                    && list.get入退所日() != null) {
                 row.getTxtKyugoshisetsuNyushoDate().setValue(new RDate(list.get入退所日().toString()));
             }
             if (!RString.isNullOrEmpty(list.get扶助種類())) {
@@ -97,20 +103,22 @@ public class SeikatsuhogoRirekiHandler {
      * @param 表示モード 表示モード
      */
     public void onbtn_HiyuoJi(RString 表示モード) {
-        dgSeikatsuhogoRireki_Row dgRow = div.getDgSeikatsuhogoRireki().getSelectedItems().get(0);
         SeikaatsuhogoDataModel dataModel = new SeikaatsuhogoDataModel();
-        dataModel.set表示モード(表示モード);
-        if (!表示モード_新規.equals(表示モード)) {
-            dataModel.set受給者番号(dgRow.getTxtJukyushaNo().getValue());
-            dataModel.set受給開始日(dgRow.getTxtKaishiYM().getValue());
-            dataModel.set受給廃止日(dgRow.getTxtHaishiYM().getValue());
-            dataModel.set納付区分(dgRow.getTxtHokenryoDairiNofuKubun());
-            dataModel.set納付年月(dgRow.getTxtHokenryoDairiNofuYM().getValue());
-            dataModel.set入退所区分(dgRow.getTxtKyugoshisetsuNyutaishoKubun());
-            dataModel.set入所日(dgRow.getTxtKyugoshisetsuNyushoDate().getValue());
-            dataModel.set退所日(dgRow.getTxtKyugoshisetsuTaishoDate().getValue());
-            dataModel.set扶助種類(dgRow.getTxtFujoShurui());
-            dataModel.set扶助種類コード(dgRow.getTxtFujoShuruiCode());
+        if (div.getDgSeikatsuhogoRireki().getDataSource() != null && !div.getDgSeikatsuhogoRireki().getDataSource().isEmpty()) {
+            dataModel.set表示モード(表示モード);
+            if (!表示モード_新規.equals(表示モード)) {
+                dgSeikatsuhogoRireki_Row dgRow = div.getDgSeikatsuhogoRireki().getSelectedItems().get(0);
+                dataModel.set受給者番号(dgRow.getTxtJukyushaNo().getValue());
+                dataModel.set受給開始日(dgRow.getTxtKaishiYM().getValue());
+                dataModel.set受給廃止日(dgRow.getTxtHaishiYM().getValue());
+                dataModel.set納付区分(dgRow.getTxtHokenryoDairiNofuKubun());
+                dataModel.set納付年月(dgRow.getTxtHokenryoDairiNofuYM().getValue());
+                dataModel.set入退所区分(dgRow.getTxtKyugoshisetsuNyutaishoKubun());
+                dataModel.set入所日(dgRow.getTxtKyugoshisetsuNyushoDate().getValue());
+                dataModel.set退所日(dgRow.getTxtKyugoshisetsuTaishoDate().getValue());
+                dataModel.set扶助種類(dgRow.getTxtFujoShurui());
+                dataModel.set扶助種類コード(dgRow.getTxtFujoShuruiCode());
+            }
         }
         div.setHdnDataPass(DataPassingConverter.serialize(dataModel));
     }

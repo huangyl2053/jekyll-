@@ -19,7 +19,7 @@
         <result property="ikenshoIraiKubun" column="DbT5301_ikenshoIraiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="selectNinnteiChousa" resultMap="resultMap_ShujiiIkenshoIraiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikenshoiraishokai.ShujiiIkenshoMapperParameter" fetchSize="500">
         SELECT
         DbT5101Nintei."ninteiShinseiYMD" AS DbT5101_ninteiShinseiYMD
         , DbT5101Nintei."ninteiShinseiShinseijiKubunCode" AS DbT5101_ninteiShinseiShinseijiKubunCode
@@ -67,7 +67,8 @@
         AND DbT5912Shujii."shichosonCode" = DbT7051Kosei."shichosonCode"
         WHERE
         DbT5101Nintei."hihokenshaNo" = #{hihokenshaNo}
-        AND DbT5101Nintei."zenYokaigoKubunCode" IN('01','04')
+        AND (DbT5101Nintei."shoriJotaiKubun" = #{通常}
+        OR DbT5101Nintei."shoriJotaiKubun" = #{延期})
         ORDER BY
         DbT5101Nintei."ninteiShinseiYMD" DESC
     </select>
