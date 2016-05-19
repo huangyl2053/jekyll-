@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.Shien
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
@@ -35,13 +34,10 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -478,19 +474,6 @@ public class KaigoHokenShikakushasho {
         entity.setHokenshaJusho(BusinessConfig.get(ConfigNameDBU.保険者情報_住所, SubGyomuCode.DBU介護統計報告));
         entity.setHokenshaName(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
         entity.setHokenshaTelno(BusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告));
-        RString 認証者電子公印種別コード;
-        if (帳票制御共通Entity.getDenshiKoinInjiUmu()) {
-            認証者電子公印種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
-        } else {
-            認証者電子公印種別コード = NinshoshaDenshikoinshubetsuCode.印の字.getコード();
-        }
-        INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-        INinshoshaSourceBuilder builder = builderCreator.create(
-                GyomuCode.DB介護保険,
-                認証者電子公印種別コード,
-                null,
-                null);
-        entity.setDenshiKoin(builder.buildSource().denshiKoin);
         return entity;
     }
 
