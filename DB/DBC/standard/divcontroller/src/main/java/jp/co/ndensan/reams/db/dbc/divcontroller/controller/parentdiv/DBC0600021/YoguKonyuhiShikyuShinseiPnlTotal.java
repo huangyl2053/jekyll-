@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -90,7 +91,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     private static final RString 参照 = new RString("参照");
     private static final RString 照会 = new RString("照会");
     private static final RString 審査 = new RString("審査");
+    private static final RString 品目コード = new RString("品目コード");
     private static final RString 決定情報 = new RString("決定情報の登録を続きます");
+    private static final RString 福祉用具購入費明細情報が0件 = new RString("福祉用具購入費明細情報が0件");
 
     /**
      * onLoad事件
@@ -544,13 +547,14 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         }
         if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getDataSource() == null
                 || div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getDataSource().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().
+                    replace(福祉用具購入費明細情報が0件.toString()));
         }
         if (!getHandler(div).is内容変更状態()) {
             return notChanges(div);
         }
         if (flag) {
-            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace("品目コード"));
+            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(品目コード.toString()));
         }
         ValidationMessageControlPairs validPairs;
         if (!ResponseHolder.isWarningIgnoredRequest() && !保存確認.equals(div.getCheckflag())) {
