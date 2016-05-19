@@ -3,10 +3,12 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosaku
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JigyoJyokyoHokokuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JisshiJokyoTokeiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoHeaderEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
@@ -73,5 +75,45 @@ public interface IHokokuShiryoSakuSeiMapper {
      * @return SinsakaiHanteiJyokyoHeaderEntityリスト
      */
     List<SinsakaiHanteiJyokyoHeaderEntity> getJotaikubumbetsuhanteiHeader(SinsakaiHanteiJyokyoMyBatisParameter parameter);
+
+    /**
+     * 審査判定の変更状況ヘッダ情報リストを取得します。
+     *
+     * @param parameter ShinsahanteinoHenkojokyoMyBatisParameter
+     * @return SinsakaiHanteiJyokyoHeaderEntityリスト
+     */
+    List<SinsakaiHanteiJyokyoHeaderEntity> getShinsahanteinoHenkojokyoHeader(ShinsahanteinoHenkojokyoMyBatisParameter parameter);
+
+    /**
+     * 審査判定の変更状況情報リストを取得します。
+     *
+     * @param parameter ShinsahanteinoHenkojokyoMyBatisParameter
+     * @return SinsakaiHanteiJyokyoEntityリスト
+     */
+    List<SinsakaiHanteiJyokyoEntity> getShinsahanteinoHenkojokyo(ShinsahanteinoHenkojokyoMyBatisParameter parameter);
+
+    /**
+     * 審査判定の変更状況情報リストを取得します。
+     *
+     * @param parameter ShinsahanteinoHenkojokyoMyBatisParameter
+     * @return SinsakaiHanteiJyokyoEntityリスト
+     */
+    List<SinsakaiHanteiJyokyoEntity> getShinsahanteinoHenkojokyoYukoKikanEntyo(ShinsahanteinoHenkojokyoMyBatisParameter parameter);
+
+    /**
+     * 介護認定審査会集計表（判定別）情報リストを取得します。
+     *
+     * @param parameter ShinsahanteinoHenkojokyoMyBatisParameter
+     * @return SinsakaiHanteiJyokyoHeaderEntityリスト
+     */
+    List<SinsakaiHanteiJyokyoHeaderEntity> getShinsakaishukeihyoHanteiBetsuHeader(ShinsahanteinoHenkojokyoMyBatisParameter parameter);
+
+    /**
+     * 審査判定の変更状況情報リストを取得します。
+     *
+     * @param parameter ShinsahanteinoHenkojokyoMyBatisParameter
+     * @return ShinsakaishukeihyoHanteiBetsuEntity
+     */
+    List<ShinsakaishukeihyoHanteiBetsuEntity> getShinsakaishukeihyoHanteiBetsu(SinsakaiHanteiJyokyoMyBatisParameter parameter);
 
 }
