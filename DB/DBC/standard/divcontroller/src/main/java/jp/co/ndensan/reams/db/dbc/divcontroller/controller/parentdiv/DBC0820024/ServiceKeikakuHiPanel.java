@@ -286,7 +286,7 @@ public class ServiceKeikakuHiPanel {
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         } else {
             boolean 変更 = false;
-            ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+            ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                     ShoukanharaihishinseikensakuParameter.class);
             FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
             if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
@@ -309,7 +309,7 @@ public class ServiceKeikakuHiPanel {
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnUpdate(ServiceKeikakuHiPanelDiv div) {
         ServiceKeikakuHiPanelHandler handler = getHandler(div);
         boolean 変更 = false;
-        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
@@ -384,7 +384,7 @@ public class ServiceKeikakuHiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                         ShoukanharaihishinseikensakuParameter.class);
                 FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
                 getHandler(div).登録モード変更処理(サービス年月);
