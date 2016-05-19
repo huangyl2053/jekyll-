@@ -87,7 +87,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             boolean is公印に掛ける = false;
             if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
                 is公印に掛ける = true;
@@ -130,7 +130,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             boolean is公印に掛ける = false;
             if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
                 is公印に掛ける = true;
@@ -171,7 +171,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             boolean is公印に掛ける = false;
             if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
                 is公印に掛ける = true;
@@ -212,7 +212,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             boolean is公印に掛ける = false;
             if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
                 is公印に掛ける = true;
@@ -255,7 +255,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             boolean is公印に掛ける = false;
             if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
                 is公印に掛ける = true;
@@ -298,7 +298,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             boolean is公印に掛ける = false;
             if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
                 is公印に掛ける = true;
@@ -341,7 +341,7 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             boolean is公印に掛ける = false;
             if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
                 is公印に掛ける = true;
