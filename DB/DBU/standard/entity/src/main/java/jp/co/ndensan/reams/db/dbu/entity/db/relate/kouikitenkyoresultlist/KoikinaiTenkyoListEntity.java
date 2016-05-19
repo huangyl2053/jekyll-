@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.kouikitenkyoresultlist;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
