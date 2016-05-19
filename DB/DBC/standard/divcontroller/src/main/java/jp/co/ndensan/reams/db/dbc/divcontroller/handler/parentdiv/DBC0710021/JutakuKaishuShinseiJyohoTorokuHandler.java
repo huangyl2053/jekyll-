@@ -637,18 +637,22 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         支給申請情報.setHihokenshaNo(事前申請情報.get被保険者番号());
         支給申請情報.setShikyushinseiServiceYM(事前申請情報.getサービス提供年月());
         支給申請情報.setShikyushinseiSeiriNo(事前申請情報.get整理番号());
-        if (!事前申請情報.get支払方法区分コード().isNullOrEmpty()) {
+        if (事前申請情報.get支払方法区分コード() != null) {
             支給申請情報.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(事前申請情報.get支払方法区分コード()));
         }
         支給申請情報.setShiharaiBasho(事前申請情報.get支払場所());
-        if (!事前申請情報.get支払期間開始年月日().isEmpty()) {
+        if (事前申請情報.get支払期間開始年月日() != null) {
             支給申請情報.setStartYMD(new RDate(事前申請情報.get支払期間開始年月日().toString()));
         }
-        if (!事前申請情報.get支払期間終了年月日().isEmpty()) {
+        if (事前申請情報.get支払期間終了年月日() != null) {
             支給申請情報.setEndYMD(new RDate(事前申請情報.get支払期間終了年月日().toString()));
         }
-        支給申請情報.setStartHHMM(new RTime(事前申請情報.get支払窓口開始時間()));
-        支給申請情報.setEndHHMM(new RTime(事前申請情報.get支払窓口終了時間()));
+        if (事前申請情報.get支払窓口開始時間() != null) {
+            支給申請情報.setStartHHMM(new RTime(事前申請情報.get支払窓口開始時間()));
+        }
+        if (事前申請情報.get支払窓口終了時間() != null) {
+            支給申請情報.setEndHHMM(new RTime(事前申請情報.get支払窓口終了時間()));
+        }
         支給申請情報.setKozaId(事前申請情報.get口座ID());
         支給申請情報.setKeiyakuNo(事前申請情報.get受領委任契約番号());
     }
@@ -659,7 +663,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         支給申請情報.setHihokenshaNo(申請情報.get被保険者番号());
         支給申請情報.setShikyushinseiServiceYM(申請情報.getサービス提供年月());
         支給申請情報.setShikyushinseiSeiriNo(申請情報.get整理番号());
-        if (!申請情報.get支払方法区分コード().isNullOrEmpty()) {
+        if (申請情報.get支払方法区分コード() != null) {
             支給申請情報.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(申請情報.get支払方法区分コード()));
         }
         支給申請情報.setShiharaiBasho(申請情報.get支払場所());
@@ -669,10 +673,10 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         if (申請情報.get支払期間終了年月日() != null) {
             支給申請情報.setEndYMD(new RDate(申請情報.get支払期間終了年月日().toString()));
         }
-        if (!申請情報.get支払窓口開始時間().isNullOrEmpty()) {
+        if (申請情報.get支払窓口開始時間() != null) {
             支給申請情報.setStartHHMM(new RTime(申請情報.get支払窓口開始時間()));
         }
-        if (!申請情報.get支払窓口終了時間().isNullOrEmpty()) {
+        if (申請情報.get支払窓口終了時間() != null) {
             支給申請情報.setEndHHMM(new RTime(申請情報.get支払窓口終了時間()));
         }
         支給申請情報.setKozaId(申請情報.get口座ID());
