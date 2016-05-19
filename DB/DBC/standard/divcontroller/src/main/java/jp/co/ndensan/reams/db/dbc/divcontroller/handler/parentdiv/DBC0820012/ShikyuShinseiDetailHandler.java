@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.ShikyuShinseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.pnlShinseiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012.ShikyuShinseiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteFath;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
@@ -35,9 +35,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -99,27 +99,47 @@ public final class ShikyuShinseiDetailHandler {
      * @param サービス年月 サービス年月
      * @param 整理番号 整理番号
      * @param 処理モード 処理モード
+     * @param 国保連共同処理受託区分_償還 RString
+     * @return ShokanShinsei 支給申請一覧情報
      */
-    public void load支給申請一覧情報(
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号,
-            RString 処理モード) {
+    public ShokanShinsei load支給申請一覧情報(
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
+            RString 整理番号, RString 処理モード, RString 国保連共同処理受託区分_償還) {
         div.getPanelHead().getTxtShoriMode().setValue(処理モード);
-        RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+
         if (MODEL_ADD.equals(処理モード)) {
-            if (受託なし.equals(config)) {
+            if (受託なし.equals(国保連共同処理受託区分_償還)) {
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(false);
-            } else if (受託あり.equals(config)) {
+            } else if (受託あり.equals(国保連共同処理受託区分_償還)) {
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
             }
             div.getPanelHead().getTxtSeiribango().setValue(整理番号);
             div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
-            return;
+            return null;
         }
 
-        ShokanShinsei 償還払支給申請 = get償還払支給申請(被保険者番号, サービス年月, 整理番号);
+        List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
+                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
+        if (支給申請一覧情報リスト.isEmpty()) {
+            return new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
+        }
+        return 支給申請一覧情報リスト.get(0);
+    }
+
+    /**
+     * 支給申請一覧情報をロードする。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
+     * @param 整理番号 整理番号
+     * @param 処理モード 処理モード
+     * @param 国保連共同処理受託区分_償還 RString
+     * @param 償還払支給申請 ShokanShinsei
+     */
+    public void set支給申請一覧情報(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月, RString 整理番号,
+            RString 処理モード, ShokanShinsei 償還払支給申請, RString 国保連共同処理受託区分_償還) {
         set申請共通エリア(償還払支給申請);
         if (MODEL_DEL.equals(処理モード)) {
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
@@ -127,14 +147,14 @@ public final class ShikyuShinseiDetailHandler {
         }
         set申請明細エリア(償還払支給申請, 処理モード);
 
-        if (!受託あり.equals(config)) {
+        if (!受託あり.equals(国保連共同処理受託区分_償還)) {
             return;
         }
         if (null != 償還払支給申請.get送付年月() && !償還払支給申請.get送付年月().isEmpty()) {
             ShokanHanteiKekka 償還払支給判定結果 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().
                     getSyokanbaraiketteKekka(被保険者番号, サービス年月, 整理番号);
             if (null != 償還払支給判定結果) {
-                個別設定(償還払支給判定結果, 被保険者番号, サービス年月, 整理番号);
+                個別設定(償還払支給判定結果, 被保険者番号, サービス年月, 整理番号, 償還払支給申請);
             } else {
                 set登録(Boolean.TRUE);
                 div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
@@ -150,7 +170,7 @@ public final class ShikyuShinseiDetailHandler {
 
     private void 個別設定(ShokanHanteiKekka 償還払支給判定結果, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
-            RString 整理番号) {
+            RString 整理番号, ShokanShinsei 償還払支給申請) {
         if (償還払支給判定結果.get支給_不支給決定区分().equals(ShikyuFushikyuKubun.不支給.getコード())) {
             div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
             div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
@@ -165,13 +185,12 @@ public final class ShikyuShinseiDetailHandler {
                 div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(false);
             } else {
-                個別設定_給付実績(給付実績基本情報リスト);
+                個別設定_給付実績(給付実績基本情報リスト, 償還払支給申請);
             }
         }
     }
 
-    private void 個別設定_給付実績(List<KyufujissekiKihonResult> 給付実績基本情報リスト) {
-        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
+    private void 個別設定_給付実績(List<KyufujissekiKihonResult> 給付実績基本情報リスト, ShokanShinsei 償還払支給申請) {
         if (給付実績基本情報リスト.size() == 1) {
             if (new Decimal(償還払支給申請.get保険給付額()).equals(給付実績基本情報リスト.get(0).
                     getEntity().get後保険請求額())) {
@@ -203,28 +222,19 @@ public final class ShikyuShinseiDetailHandler {
         div.getPnlShinsei().getTxtNumShiharaKingakuGk().setDisabled(flag);
     }
 
-    private ShokanShinsei get償還払支給申請(
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号) {
-        List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
-                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
-        if (支給申請一覧情報リスト.isEmpty()) {
-            return new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
-        }
-        ViewStateHolder.put(ViewStateKeys.償還払支給申請詳細データ, 支給申請一覧情報リスト.get(0));
-        return 支給申請一覧情報リスト.get(0);
-    }
-
     /**
      * 支給申請を登録する。
      *
      * @param 画面モード RString
+     * @param 償還払支給申請 ShokanShinsei
      * @return boolean 整理番号
      */
-    public RString insert(RString 画面モード) {
+    public RString insert(RString 画面モード, ShokanShinsei 償還払支給申請) {
         RString 整理番号 = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
-                insDbT3034ShokanShinsei(get画面データ(画面モード));
+                insDbT3034ShokanShinsei(get画面データ(画面モード, 償還払支給申請));
+        if (null != 整理番号 && !整理番号.isEmpty()) {
+            div.getPanelHead().getTxtSeiribango().setValue(整理番号);
+        }
         return 整理番号;
     }
 
@@ -232,25 +242,26 @@ public final class ShikyuShinseiDetailHandler {
      * 支給申請を更新する。
      *
      * @param 画面モード RString
+     * @param 償還払支給申請 ShokanShinsei
      * @return boolean 更新結果
      */
-    public boolean update(RString 画面モード) {
+    public boolean update(RString 画面モード, ShokanShinsei 償還払支給申請) {
         int i = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
-                updDbT3034ShokanShinsei(get画面データ(画面モード));
+                updDbT3034ShokanShinsei(get画面データ(画面モード, 償還払支給申請));
         return i != 0;
     }
 
     /**
      * 支給申請を削除する。
      *
+     * @param 識別コード ShikibetsuCode
      * @return boolean 削除結果
      */
-    public boolean delete() {
+    public boolean delete(ShikibetsuCode 識別コード) {
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号());
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(div.getPanelHead().
                 getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
         RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         int i = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
                 delDbT3034ShokanShinsei(被保険者番号, サービス年月, 整理番号, 識別コード);
         return i != 0;
@@ -259,10 +270,10 @@ public final class ShikyuShinseiDetailHandler {
     /**
      * 変更チェック処理()
      *
+     * @param 償還払支給申請 ShokanShinsei
      * @return boolean
      */
-    public boolean is変更あり() {
-        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
+    public boolean is変更あり(ShokanShinsei 償還払支給申請) {
         if (!償還払支給申請.get申請年月日().isEmpty() && 償還払支給申請.get申請年月日() != null) {
             if (div.getPnlShinsei().getTxtShinseiYMD().getValue() == null) {
                 return true;
@@ -460,10 +471,9 @@ public final class ShikyuShinseiDetailHandler {
         }
     }
 
-    private ShokanShinsei get画面データ(RString 画面モード) {
+    private ShokanShinsei get画面データ(RString 画面モード, ShokanShinsei 償還払支給申請) {
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号());
         RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
-        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
         if (MODEL_ADD.equals(画面モード)) {
             償還払支給申請 = new ShokanShinsei(被保険者番号,
                     new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth().toString()), 整理番号);
@@ -536,16 +546,18 @@ public final class ShikyuShinseiDetailHandler {
     }
 
     /**
-     * ViewStateに以下の情報を設定する
+     * Parameterに以下の情報を設定する
+     *
+     * @return ShokanShinsei 支給申請一覧情報
      */
-    public void putViewState() {
+    public ShikyuShinseiDetailParameter setParameter() {
         RString 処理モード = div.getPanelHead().getTxtShoriMode().getValue();
-        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号,
-                div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月,
-                div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, div.getPanelHead().getTxtSeiribango().getValue());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, div.getPnlShinsei().getTxtShinseiYMD().getValue().toDateString());
+        RString 被保険者番号 = div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号();
+        RYearMonth サービス提供年月 = div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth();
+        RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
+        RString 申請日 = div.getPnlShinsei().getTxtShinseiYMD().getValue().toDateString();
+        ShikyuShinseiDetailParameter parameter = new ShikyuShinseiDetailParameter(
+                処理モード, 被保険者番号, サービス提供年月, 整理番号, 申請日);
+        return parameter;
     }
 }

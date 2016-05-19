@@ -88,10 +88,7 @@ public class ShikyuShinseiDetailValidationHandler {
         if (pnlDiv.getTxtMulShinseiRiyu() == null) {
             return true;
         }
-        if (pnlDiv.getTxtNumShiharaKingakuGk() == null) {
-            return true;
-        }
-        return false;
+        return pnlDiv.getTxtNumShiharaKingakuGk() == null;
     }
 
     /**
@@ -124,9 +121,9 @@ public class ShikyuShinseiDetailValidationHandler {
         Decimal 保険請求金額 = div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().getValue();
         Decimal 自己負担額合計 = div.getPnlShinsei().getTxtNumHokenKyufuGaku().getValue();
         Decimal 支払金額合計 = div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue();
-        保険請求金額 = null == 保険請求金額 ? Decimal.ZERO : 保険請求金額;
-        自己負担額合計 = null == 自己負担額合計 ? Decimal.ZERO : 自己負担額合計;
-        支払金額合計 = null == 支払金額合計 ? Decimal.ZERO : 支払金額合計;
+        保険請求金額 = (保険請求金額 == null ? Decimal.ZERO : 保険請求金額);
+        自己負担額合計 = (自己負担額合計 == null ? Decimal.ZERO : 自己負担額合計);
+        支払金額合計 = (支払金額合計 == null ? Decimal.ZERO : 支払金額合計);
         if (!支払金額合計.equals(保険請求金額.add(自己負担額合計))) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrWarningMessages.相違, SHIBARAIKINGAKUGOKEI.toString(), GEKEKESANKEKKA.toString())));

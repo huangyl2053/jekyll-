@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820012;
 
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012StateName.削除モード;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012StateName.登録修正モード;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012TransitionEventName;
@@ -12,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.Shik
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012.ShikyuShinseiDetailHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012.ShikyuShinseiDetailValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012.ShikyuShinseiDetailParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -19,6 +22,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -30,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 償還払支給申請の支給申請を登録する画面Controllerです。
@@ -67,7 +72,14 @@ public class ShikyuShinseiDetail {
         ShikyuShinseiDetailHandler handler = getHandler(div);
         handler.load介護宛名情報(識別コード);
         handler.load介護資格系基本情報(識別コード);
-        handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 処理モード);
+        RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 処理モード, config);
+        ViewStateHolder.put(ViewStateKeys.償還払支給申請詳細データ, 償還払支給申請);
+        if (!MODEL_ADD.equals(処理モード)) {
+            handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 処理モード, 償還払支給申請, config);
+        }
+
         if (!MODEL_DEL.equals(処理モード)) {
             return ResponseData.of(div).setState(登録修正モード);
         } else {
@@ -92,7 +104,8 @@ public class ShikyuShinseiDetail {
                     return setAdd(div, 処理モード);
                 }
             } else if (MODEL_UPD.equals(処理モード)) {
-                boolean flag = getHandler(div).is変更あり();
+                ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
+                boolean flag = getHandler(div).is変更あり(償還払支給申請);
                 if (!flag) {
                     return isChange(div);
                 } else {
@@ -114,7 +127,8 @@ public class ShikyuShinseiDetail {
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnDelete(ShikyuShinseiDetailDiv div) {
         try {
             if (!ResponseHolder.isReRequest()) {
-                boolean flag = getHandler(div).delete();
+                ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+                boolean flag = getHandler(div).delete(識別コード);
                 if (flag) {
                     return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                             replace(MODEL_DEL.toString())).respond();
@@ -140,11 +154,10 @@ public class ShikyuShinseiDetail {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-
+        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
         if (!ResponseHolder.isReRequest()) {
-            RString 新整理番号 = getHandler(div).insert(処理モード);
+            RString 新整理番号 = getHandler(div).insert(処理モード, 償還払支給申請);
             if (null != 新整理番号 && !新整理番号.isEmpty()) {
-                div.getPanelHead().getTxtSeiribango().setValue(新整理番号);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                         replace(メッセージ_登録.toString())).respond();
             }
@@ -166,9 +179,9 @@ public class ShikyuShinseiDetail {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-
+        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
         if (!ResponseHolder.isReRequest()) {
-            boolean flag = getHandler(div).update(処理モード);
+            boolean flag = getHandler(div).update(処理モード, 償還払支給申請);
             if (flag) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                         replace(メッセージ_更新.toString())).respond();
@@ -210,7 +223,8 @@ public class ShikyuShinseiDetail {
         if (MODEL_ADD.equals(処理モード)) {
             flag = getHandler(div).is変更あり_ADD();
         } else {
-            flag = getHandler(div).is変更あり();
+            ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
+            flag = getHandler(div).is変更あり(償還払支給申請);
         }
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
@@ -245,7 +259,7 @@ public class ShikyuShinseiDetail {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.口座情報).respond();
     }
 
@@ -261,7 +275,7 @@ public class ShikyuShinseiDetail {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.サービス提供証明書).respond();
     }
 
@@ -277,8 +291,17 @@ public class ShikyuShinseiDetail {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.償還払決定情報).respond();
+    }
+
+    private void putViewState(ShikyuShinseiDetailDiv div) {
+        ShikyuShinseiDetailParameter parameter = getHandler(div).setParameter();
+        ViewStateHolder.put(ViewStateKeys.処理モード, parameter.get処理モード());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, parameter.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, parameter.get申請日());
     }
 
     private ShikyuShinseiDetailHandler getHandler(ShikyuShinseiDetailDiv div) {
