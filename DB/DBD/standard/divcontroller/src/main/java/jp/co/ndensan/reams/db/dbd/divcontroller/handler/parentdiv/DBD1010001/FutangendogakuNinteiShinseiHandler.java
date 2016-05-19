@@ -887,11 +887,15 @@ public class FutangendogakuNinteiShinseiHandler {
             }
             list.set(index, ninteiViewState);
         } else {
+            int 履歴番号 = 0;
+            if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
+                履歴番号 = 1;
+            }
             FutanGendogakuNintei futanGendogakuNintei
-                    = new FutanGendogakuNintei(get証記載保険者番号(div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(), 0);
+                    = new FutanGendogakuNintei(get証記載保険者番号(div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(), 履歴番号);
             FutanGendogakuNintei 申請情報 = 申請情報Builder(futanGendogakuNintei);
             if (list.isEmpty()) {
-                list.add(new FutanGendogakuNinteiViewState(申請情報, EntityDataState.Added, 0));
+                list.add(new FutanGendogakuNinteiViewState(申請情報, EntityDataState.Added, 履歴番号));
             } else {
                 list = sort申請情報ListBy申請日(list, 申請情報);
             }
