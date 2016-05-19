@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class TokubetsuChoshuKaishiPrintService {
 
     private static final int NUM0 = 0;
+    private static final int NUM1 = 1;
     private static final int NUM5 = 5;
 
     /**
@@ -97,21 +98,21 @@ public class TokubetsuChoshuKaishiPrintService {
                 } else {
                     break;
                 }
-                executereport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト,
-                        改頁項目リスト, reportSourceWriter);
             }
+            executereport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト,
+                    改頁項目リスト, reportSourceWriter);
         }
     }
 
     private void executereport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             RString 賦課年度, RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名,
             List<RString> 出力項目リスト, List<RString> 改頁項目リスト, ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
-        int i = 1;
+        int i = NUM1;
         for (EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu : 編集後本算定通知書共通情報) {
             TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(
                     editedhonsanteitsuchishokyotsu, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト, 改頁項目リスト, i);
             report.writeBy(reportSourceWriter);
-            i = i + 1;
+            i = i + NUM1;
         }
     }
 

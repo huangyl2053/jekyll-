@@ -117,7 +117,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
     private void listlowers(TokubetsuChoshuKaishiSource source) {
         source.titleChoshugaku = 本徴収額;
         if (num >= NUM0) {
-            source.listUpper_1 = new RString(num + NUM1);
+            source.listUpper_1 = new RString(num);
         }
         if (編集後本算定通知書共通情報 != null) {
             if (編集後本算定通知書共通情報.get編集後宛先() != null) {
