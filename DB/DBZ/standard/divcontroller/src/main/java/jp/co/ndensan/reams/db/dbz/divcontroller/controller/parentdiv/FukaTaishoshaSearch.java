@@ -221,7 +221,10 @@ public class FukaTaishoshaSearch {
         if (is全年度) {
             RString 被保険者番号 = RString.EMPTY;
             for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                RString 被保険者番号_絞り込み前 = RString.EMPTY;
+                if (entity.get賦課検索エンティティ().getHihokenshaNo() != null) {
+                    被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                }
                 if (!被保険者番号.equals(被保険者番号_絞り込み前)) {
                     list = list.added(entity);
                     被保険者番号 = 被保険者番号_絞り込み前;
@@ -232,9 +235,18 @@ public class FukaTaishoshaSearch {
             RString 賦課年度 = RString.EMPTY;
             RString 通知書番号 = RString.EMPTY;
             for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
-                RString 賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
-                RString 通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
+                RString 被保険者番号_絞り込み前 = RString.EMPTY;
+                RString 賦課年度_絞り込み前 = RString.EMPTY;
+                RString 通知書番号_絞り込み前 = RString.EMPTY;
+                if (entity.get賦課検索エンティティ().getHihokenshaNo() != null) {
+                    被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                }
+                if (entity.get賦課検索エンティティ().getFukaNendo() != null) {
+                    賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
+                }
+                if (entity.get賦課検索エンティティ().getTsuchishoNo() != null) {
+                    通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
+                }
                 if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
                         && 通知書番号.equals(通知書番号_絞り込み前))) {
                     list = list.added(entity);
