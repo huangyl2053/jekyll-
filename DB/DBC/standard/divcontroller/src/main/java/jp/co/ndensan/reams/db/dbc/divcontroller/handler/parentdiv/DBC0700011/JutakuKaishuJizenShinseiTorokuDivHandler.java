@@ -103,9 +103,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final int 住宅改修データなしコード = 1;
     private static final int 着工日不一致コード = 2;
     private static final int 対象住宅住所不一致コード = 3;
-    private static final RString 個人検索へ戻る = new RString("btnBackToSearch");
-    private static final RString 申請一覧へ戻る = new RString("btnBackToResult");
-    private static final RString 申請を保存する = new RString("btnSave");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
     private static final RString 行状態_削除 = new RString("削除");
     private static final RString 行状態_更新 = new RString("更新");
