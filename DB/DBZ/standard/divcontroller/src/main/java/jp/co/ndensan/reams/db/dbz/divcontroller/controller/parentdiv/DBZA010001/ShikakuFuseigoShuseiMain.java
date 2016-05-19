@@ -69,7 +69,7 @@ public class ShikakuFuseigoShuseiMain {
         business.setBusinessList(resultList.records());
         ViewStateHolder.put(ViewStateKeys.資格不整合_整合性チェックの情報_宛名, business);
         getHandler(div).load(resultList.records());
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBZA010001StateName.不整合一覧);
     }
 
     /**
@@ -126,8 +126,7 @@ public class ShikakuFuseigoShuseiMain {
                                         FuseigoRiyu.class).get名称().toString())).respond();
             }
         }
-        if (new RString(DbzInformationMessages.不整合解消済み.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return onLoad(div);
         }
         RString 台帳状態 = ViewStateHolder.get(ViewStateKeys.資格不整合_台帳状態, RString.class);
@@ -165,6 +164,15 @@ public class ShikakuFuseigoShuseiMain {
             div.getShikakuHenko().setDisabled(true);
             div.getSikakuShutoku().setDisabled(true);
         } else {
+            div.getShikakuShutokuJogaiSettei().setDisabled(false);
+            div.getTekiyoJogaiKaijo().setDisabled(false);
+            div.getTekiyoJogaiTekiyo().setDisabled(false);
+            div.getTatokuKaijo().setDisabled(false);
+            div.getTatokuTekiyo().setDisabled(false);
+            div.getShikakuSoshitsu().setDisabled(false);
+            div.getJushochiTokureiTekiyo().setDisabled(false);
+            div.getShikakuHenko().setDisabled(false);
+            div.getSikakuShutoku().setDisabled(false);
             getHandler(div).setMeisaiByDaichoType(DaichoType.被保険者.getコード());
         }
         return ResponseData.of(div).respond();
@@ -212,6 +220,7 @@ public class ShikakuFuseigoShuseiMain {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             if (div.getChkToTaishoGai().isAllSelected()) {
                 manager.saveAs対象外(shikakuFusei.get整合性チェック情報());
+                div.getShikakuFuseigoIchiran().setDisabled(false);
                 return onLoad(div);
             }
             getHandler(div).set修正後の情報(台帳種別);
@@ -231,7 +240,8 @@ public class ShikakuFuseigoShuseiMain {
                         shikakuFusei.get整合性チェック情報());
             }
         }
-        return ResponseData.of(div).respond();
+        div.getShikakuFuseigoIchiran().setDisabled(false);
+        return onLoad(div);
     }
 
     private void save修正後の情報By被保険者(ShikakuFuseigoBusiness shikakuFusei, ShikakuFuseigoShuseiMainDiv div) {
@@ -258,6 +268,7 @@ public class ShikakuFuseigoShuseiMain {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getShikakuFuseigoIchiran().setDisabled(false);
             return onLoad(div);
         }
         return ResponseData.of(div).respond();

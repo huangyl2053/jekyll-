@@ -53,6 +53,7 @@ public class ShikakuSeigoseiCheckJohoManager {
     private final TashichosonJushochiTokureiManager dbt1003manager;
     private final ShikakuShutokuJogaishaManager dbt1009manager;
     private final DbT1009ShikakuShutokuJogaishaDac dbt1009dac;
+    private static final int NUMBER_4 = 4;
 
     /**
      * コンストラクタです。
@@ -259,6 +260,6 @@ public class ShikakuSeigoseiCheckJohoManager {
     }
 
     private RString add枝番(RString 枝番) {
-        return new RString(Integer.parseInt(枝番.toString()) + 1);
+        return new RString(Integer.parseInt(枝番.trim().toString()) + 1).padZeroToLeft(NUMBER_4);
     }
 }
