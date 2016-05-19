@@ -949,7 +949,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 for (dgGaisyuList_Row row : gridList) {
                     ShokanJutakuKaishu tmpData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,
                             new JigyoshaNo(固定値_事業者番号), 様式番号, 固定値_明細番号, new RString(index++));
-                    tmpData.createBuilderForEdit().set住宅改修着工年月日(new FlexibleDate(new RDate(row.getTxtChakkoYoteibi()
+                    tmpData = tmpData.createBuilderForEdit().set住宅改修着工年月日(new FlexibleDate(new RDate(row.getTxtChakkoYoteibi()
                             .toString()).toDateString()))
                             .set住宅改修内容(row.getTxtKaishuNaiyo())
                             .set住宅改修事業者名(row.getTxtJigyosha())
