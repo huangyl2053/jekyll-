@@ -75,14 +75,14 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         reportSource.fukaNendo = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .fillType(FillType.BLANK).toDateString();
         reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
-        reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額(), 0);
+        reportSource.genmenMae = edit金額(更正前.get減免額());
         reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
         reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
-        reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(更正前.get確定保険料_年額(), 0);
+        reportSource.hokenGakuMae = edit金額(更正前.get確定保険料_年額());
         reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
-        reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get保険料率(), 0);
+        reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
         reportSource.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
-        reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免前保険料_年額(), 0);
+        reportSource.hokenSanshutsuMae = edit金額(更正前.get減免前保険料_年額());
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
         reportSource.hyojicode1 = 表示コード.get表示コード１();
         reportSource.hyojicode2 = 表示コード.get表示コード２();
@@ -130,6 +130,14 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
             tsuchibun1.append(new RString("以前にさかのぼって資格取得・更正した分"));
             reportSource.tsuchibun1 = tsuchibun1.toRString();
             reportSource.tsuchiKbn = new RString("（過年度）");
+        }
+    }
+
+    private RString edit金額(Decimal 金額) {
+        if (Decimal.ZERO.compareTo(金額) == 0) {
+            return RString.HALF_SPACE;
+        } else {
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
         }
     }
 
