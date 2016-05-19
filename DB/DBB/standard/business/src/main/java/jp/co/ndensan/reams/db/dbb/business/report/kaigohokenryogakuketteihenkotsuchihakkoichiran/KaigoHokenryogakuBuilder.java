@@ -16,17 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class KaigoHokenryogakuBuilder implements IKaigoHokenryogakuBuilder {
 
     private final IKaigoHokenryogakuEditor headerEditor;
-    private final IKaigoHokenryogakuEditor hyojiIchiranEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param headerEditor {@link IKarisanteiFukaDaichoEditor}
-     * @param hyojiIchiranEditor {@link IKarisanteiFukaDaichoEditor}
      */
-    public KaigoHokenryogakuBuilder(IKaigoHokenryogakuEditor headerEditor, IKaigoHokenryogakuEditor hyojiIchiranEditor) {
+    public KaigoHokenryogakuBuilder(IKaigoHokenryogakuEditor headerEditor) {
         this.headerEditor = headerEditor;
-        this.hyojiIchiranEditor = hyojiIchiranEditor;
     }
 
     /**
@@ -36,7 +33,7 @@ public class KaigoHokenryogakuBuilder implements IKaigoHokenryogakuBuilder {
      */
     @Override
     public KaigoHokenryogakuSource build() {
-        return ReportEditorJoiner.from(new KaigoHokenryogakuSource()).join(headerEditor).join(hyojiIchiranEditor).buildSource();
+        return ReportEditorJoiner.from(new KaigoHokenryogakuSource()).join(headerEditor).buildSource();
     }
 
 }
