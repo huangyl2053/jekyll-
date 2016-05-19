@@ -91,9 +91,6 @@ public class Honsanteifuka {
     private static final int 設定値_番号5 = 5;
     private static final int 設定値_番号6 = 6;
     private static final int 設定値_番号9 = 9;
-    private static final RString 括弧_左 = new RString("（");
-    private static final RString 定値_期 = new RString("期");
-    private static final RString 定値_前期 = new RString("前期");
     private static final int 定値_1期 = 1;
     private static final int 定値_2期 = 2;
     private static final int 定値_3期 = 3;
@@ -413,7 +410,6 @@ public class Honsanteifuka {
 
         RString 設定値 = 区分_ゼロ;
         RDate 運用日 = RDate.getNowDate();
-        出力期 = 出力期.split(括弧_左.toString()).get(0).replace(定値_前期, RString.EMPTY).replace(定値_期, RString.EMPTY);
         switch (Integer.parseInt(出力期.toString())) {
             case 定値_1期:
                 設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
@@ -530,7 +526,6 @@ public class Honsanteifuka {
     private RString get普徴期情報_納通連帳区分(RString 出力期) {
 
         RDate 運用日 = RDate.getNowDate();
-        出力期 = 出力期.split(括弧_左.toString()).get(0).replace(定値_前期, RString.EMPTY).replace(定値_期, RString.EMPTY);
         switch (Integer.parseInt(出力期.toString())) {
             case 定値_1期:
                 return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分1, 運用日, SubGyomuCode.DBB介護賦課);
