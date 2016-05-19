@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.db.dbc.service.report.kogakukaigoservicehi.KogakuKaig
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
-import jp.co.ndensan.reams.db.dbu.entity.kaigokakushushinseishohakko.KaigoKakushuShinseishoHakkoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigokakushushinseishohakko.KaigoKakushuShinseishoHakkoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
