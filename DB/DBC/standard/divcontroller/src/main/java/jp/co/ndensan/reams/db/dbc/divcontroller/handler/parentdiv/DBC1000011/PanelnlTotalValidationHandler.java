@@ -41,20 +41,17 @@ public class PanelnlTotalValidationHandler {
      */
     public ValidationMessageControlPairs validateCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (キー.equals(div.getShokanbaraiShikyuKetteiTsuchishoJoken().getRadUketsukebi().getSelectedKey())
-                && (div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtUketsukebi().getFromValue() == null
-                || div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtUketsukebi().getToValue() == null)) {
+        if (キー.equals(div.getRadUketsukebi().getSelectedKey()) && (div.getTxtUketsukebi().getFromValue() == null
+                || div.getTxtUketsukebi().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "受付日")));
         }
-        if (キー.equals(div.getShokanbaraiShikyuKetteiTsuchishoJoken().getRadKetteibi().getSelectedKey())
-                && (div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteibiJoken().getFromValue() == null
-                || div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteibiJoken().getToValue() == null)) {
+        if (キー.equals(div.getRadKetteibi().getSelectedKey()) && (div.getTxtKeteibiJoken().getFromValue() == null
+                || div.getTxtKeteibiJoken().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "抽出条件決定日")));
         }
-        if (キー.equals(div.getShokanbaraiShikyuKetteiTsuchishoJoken().getRadKetteishaUketsukeYM().getSelectedKey())
-                && div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteishaUketsukeYM().getDomain() == null) {
+        if (キー.equals(div.getRadKetteishaUketsukeYM().getSelectedKey()) && div.getTxtKeteishaUketsukeYM().getDomain() == null) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "決定者受付年月")));
         }
@@ -63,20 +60,18 @@ public class PanelnlTotalValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "決定通知書決定日")));
         }
-//        if (div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtUketsukebi().getFromValue() != null
-//                && div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtUketsukebi().getToValue() != null
-//                && div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtUketsukebi().getToValue()
-//                .isBefore(div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtUketsukebi().getFromValue())) {
-//            validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-//                    UrErrorMessages.必須, "受付日From", "受付日To")));
-//        }
-//        if (div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteibiJoken().getFromValue() != null
-//                && div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteibiJoken().getToValue() != null
-//                && div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteibiJoken().getToValue()
-//                .isBefore(div.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteibiJoken().getFromValue())) {
-//            validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
-//                    UrErrorMessages.必須, "抽出条件決定日From", "抽出条件決定日To")));
-//        }
+        if (div.getTxtUketsukebi().getFromValue() != null && div.getTxtUketsukebi().getToValue() != null
+                && div.getTxtUketsukebi().getToValue()
+                .isBefore(div.getTxtUketsukebi().getFromValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "受付日From", "受付日To")));
+        }
+        if (div.getTxtKeteibiJoken().getFromValue() != null && div.getTxtKeteibiJoken().getToValue() != null
+                && div.getTxtKeteibiJoken().getToValue()
+                .isBefore(div.getTxtKeteibiJoken().getFromValue())) {
+            validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
+                    UrErrorMessages.必須, "抽出条件決定日From", "抽出条件決定日To")));
+        }
         return validationMessages;
     }
 

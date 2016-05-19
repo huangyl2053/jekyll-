@@ -595,7 +595,7 @@ public class HihokenshaShikakuTeiseiManager {
      */
     public void checkShikakuShutoku(FlexibleDate 取得日, RString 取得事由コード, RString 被保区分コード, FlexibleDate 第1号資格取得年月日,
             IDateOfBirth 当該識別対象の生年月日) {
-        int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 第1号資格取得年月日).toString());
+        int age = Integer.valueOf(get年齢(当該識別対象の生年月日, 取得日).toString());
         if (ShikakuShutokuJiyu.年齢到達.getコード().equals(取得事由コード)) {
             FlexibleDate 年齢到達日 = getAge.get年齢到達日(AGE_65);
             if (取得日.isBefore(年齢到達日) || 年齢到達日.isBefore(取得日)) {
