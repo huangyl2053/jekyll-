@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -257,12 +258,12 @@ public class SaiChekkuhyo_292001Process extends BatchProcessBase<HomonChosaIrais
 
     private void update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = iHomonChosaIraishoMapper.get認定調査依頼情報(entity);
-        RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
+        RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (文字列1.equals(認定調査期限設定方法)) {
             switch (processParamter.getTeishutsuKigen().toString()) {
                 case "0":
                     int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.認定調査期限日数,
-                            SubGyomuCode.DBE認定支援).toString());
+                            RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
                     FlexibleDate 認定調査依頼日 = entity.get認定調査依頼年月日();
                     if (認定調査依頼日 != null && !認定調査依頼日.isEmpty()) {
                         dbT5201Entity.setNinteichosaKigenYMD(認定調査依頼日.plusDay(期限日数));
