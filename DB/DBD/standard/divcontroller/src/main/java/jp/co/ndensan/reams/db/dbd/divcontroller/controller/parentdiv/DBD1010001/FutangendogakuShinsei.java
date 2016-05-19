@@ -56,6 +56,7 @@ public class FutangendogakuShinsei {
         if (!ResponseHolder.isReRequest() && !getHandler(div).onLoad()) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
+        div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -101,8 +102,10 @@ public class FutangendogakuShinsei {
         div.getBtnDispSetaiJoho().setDisplayNone(false);
         div.getBtnCloseSetaiJoho().setDisplayNone(true);
         if (DBD1010001StateName.世帯情報From一覧.getName().equals(ResponseHolder.getState())) {
+            div.getShinseiDetail().setDisabled(true);
             return ResponseData.of(div).setState(DBD1010001StateName.一覧);
         } else {
+            div.getShinseiDetail().setDisabled(false);
             return ResponseData.of(div).setState(DBD1010001StateName.詳細);
         }
     }
@@ -115,6 +118,7 @@ public class FutangendogakuShinsei {
      */
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnAddShinsei(FutangendogakuShinseiDiv div) {
         getHandler(div).onClick_btnAddShinsei();
+        div.getShinseiDetail().setDisabled(false);
         return ResponseData.of(div).setState(DBD1010001StateName.詳細);
     }
 
@@ -126,6 +130,7 @@ public class FutangendogakuShinsei {
      */
     public ResponseData<FutangendogakuShinseiDiv> onSelectByModifyButton(FutangendogakuShinseiDiv div) {
         getHandler(div).onSelectByModifyButton();
+        div.getShinseiDetail().setDisabled(false);
         return ResponseData.of(div).setState(DBD1010001StateName.詳細);
     }
 
@@ -144,7 +149,8 @@ public class FutangendogakuShinsei {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
-        ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+        ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList
+                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         FutanGendogakuNintei futanGendogakuNintei = 申請一覧情報ArrayList.get(div.getDgShinseiList().getClickedRowId()).getFutanGendogakuNintei();
         if (申請メニューID.equals(ResponseHolder.getMenuID()) && !futanGendogakuNintei.get決定区分().isEmpty()
                 && !ViewStateHolder.get(ViewStateKeys.isReRequest, Boolean.class)) {
@@ -189,6 +195,7 @@ public class FutangendogakuShinsei {
     public ResponseData<FutangendogakuShinseiDiv> onClick_btnBackToShinseiList(FutangendogakuShinseiDiv div) {
         div.getShinseiList().setDisabled(false);
         div.setJotai(RString.EMPTY);
+        div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
 
@@ -207,6 +214,7 @@ public class FutangendogakuShinsei {
             return ResponseData.of(div).respond();
         }
         getHandler(div).onClick_btnShinseiKakutei();
+        div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
 
@@ -235,6 +243,7 @@ public class FutangendogakuShinsei {
             }
         }
         getHandler(div).onClick_btnShinseiKakutei();
+        div.getShinseiDetail().setDisabled(true);
         return ResponseData.of(div).setState(DBD1010001StateName.一覧);
     }
 
@@ -310,7 +319,9 @@ public class FutangendogakuShinsei {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<FutangendogakuShinseiDiv> onBlur_txtTekiyoYMD(FutangendogakuShinseiDiv div) {
-        div.getTxtYukoKigenYMD().setValue(FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue()));
+        if (div.getTxtTekiyoYMD().getValue().isValid()) {
+            div.getTxtYukoKigenYMD().setValue(FutangendogakuNinteiService.createInstance().estimate有効期限(div.getTxtTekiyoYMD().getValue()));
+        }
         return ResponseData.of(div).respond();
     }
 
