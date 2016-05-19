@@ -1,25 +1,26 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBA1030011;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 
 /**
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBA4020011の状態名定義クラスです
+ * DBA1030011のイベント名定義クラスです</br>
  *
  * @author 自動生成
  */
-public enum DBA4020011StateName implements IStateEnumerations {
+public enum DBA1030011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    NoChange(""),
-    他市町村住所特例者照会("他市町村住所特例者照会");
+    再検索("再検索"),
+    完了("完了"),
+    詳細へ("詳細へ");
 
     private final RString name;
 
-    private DBA4020011StateName(String name) {
+    private DBA1030011TransitionEventName(String name) {
         this.name = new RString(name);
     }
 
