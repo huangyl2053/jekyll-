@@ -589,6 +589,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getValue().getYearMonth().toDateString());
         YokaigoNinteiJyoho result = JutakuKaishuJizenShinsei.createInstance().getYokaigoNinteiJyoho(hihokenshaNo,
                 サービス提供年月);
+        if (result == null) {
+            throw new ApplicationException(DbcErrorMessages.要介護状態_事前申請不可.getMessage());
+        }
         Code 要介護認定状態区分コード = result.get要介護認定状態区分コード();
 
         List<RString> 要介護認定状態区分コードリスト = new ArrayList<>();
@@ -945,7 +948,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                             .set住宅改修事業者名(row.getTxtJigyosha())
                             .set住宅改修住宅住所(row.getTxtJutakuAddress())
                             .set改修金額(row.getTxtKaishuKingaku().isNullOrEmpty() ? 0 : Integer.parseInt(row.getTxtKaishuKingaku().toString()))
-                            .set住宅改修完成年月日(new FlexibleDate(row.getTxtKanseiYoteibi())).build();
+                            .set住宅改修完成年月日(new FlexibleDate(new RDate(row.getTxtKanseiYoteibi().toString()).toDateString())).build();
                     kaishuList.add(tmpData);
                 }
             }

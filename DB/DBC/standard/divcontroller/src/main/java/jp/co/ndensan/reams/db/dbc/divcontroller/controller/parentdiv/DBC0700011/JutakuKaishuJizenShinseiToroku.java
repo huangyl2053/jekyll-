@@ -475,7 +475,7 @@ public class JutakuKaishuJizenShinseiToroku {
     public void dataChangeCheck(JutakuKaishuJizenShinseiTorokuDiv div) {
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (!削除モード.equals(state)) {
+        if (!削除モード.equals(state) && !登録モード.equals(state)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
                 handler.画面データ変更有無();
             }
