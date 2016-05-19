@@ -56,9 +56,9 @@ public class NonyuTsuchishoCVSMultiCoverReport extends Report<NonyuTsuchishoCVSM
             }
         }
         if (作成フラグ) {
-            INonyuTsuchishoCVSMultiCoverEditor coverEditor = new NonyuTsuchishoCVSMultiCoverEditor(item);
-            INonyuTsuchishoCVSMultiCoverBuilder builder = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
-            reportSourceWriter.writeLine(builder);
+//            INonyuTsuchishoCVSMultiCoverEditor coverEditor = new NonyuTsuchishoCVSMultiCoverEditor(item);
+//            INonyuTsuchishoCVSMultiCoverBuilder builder = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
+//            reportSourceWriter.writeLine(builder);
 
         }
     }

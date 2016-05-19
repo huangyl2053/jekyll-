@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulticover;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -29,11 +29,11 @@ public class NonyuTsuchishoCVSMultiCoverBuilder implements INonyuTsuchishoCVSMul
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link NonyuTsuchishoCVSMultiCoverSource}
+     * @return {@link NonyuTsuchishoCVSMultiSource}
      */
     @Override
-    public NonyuTsuchishoCVSMultiCoverSource build() {
-        return ReportEditorJoiner.from(new NonyuTsuchishoCVSMultiCoverSource())
+    public NonyuTsuchishoCVSMultiSource build() {
+        return ReportEditorJoiner.from(new NonyuTsuchishoCVSMultiSource())
                 .join(coverEditor).buildSource();
     }
 
