@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -56,7 +57,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -180,7 +180,8 @@ public class HihokenshashoChohyoFinder {
             business.set有効期限2(RString.EMPTY);
             business.set被保険者番号(hihoken.get(i).get被保険者番号());
             List<HonninJohoEntity> honni = get本人情報(hihoken.get(i).get識別コード());
-            if (郵便番号表示有.equals(BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無))) {
+            if (郵便番号表示有.equals(DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無,
+                    RDate.getNowDate()))) {
                 business.set郵便番号(honni.get(0).getYubinNo().getEditedYubinNo());
             }
             RString gyoseiku = honni.get(0).getGyoseikuName();
@@ -210,7 +211,8 @@ public class HihokenshashoChohyoFinder {
                     set住所(business, sofusa.get(桁数_0), honni.get(桁数_0));
                 }
             }
-            if (氏名カナ表示有.equals(BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_氏名カナ表示有無))) {
+            if (氏名カナ表示有.equals(DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_氏名カナ表示有無,
+                    RDate.getNowDate()))) {
                 business.set氏名カナ(honni.get(0).getKanaMeisho());
             }
             business.set氏名(honni.get(0).getMeisho());
@@ -287,32 +289,32 @@ public class HihokenshashoChohyoFinder {
         }
         if (文字_0.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
             RStringBuilder builder = new RStringBuilder();
-            if (文字_1.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate()))) {
                 builder.append(association.get都道府県名());
             }
-            if (文字_1.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate()))) {
                 builder.append(RString.EMPTY);
             }
-            if (文字_1.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate()))) {
                 builder.append(RString.EMPTY);
             }
-            if (文字_1.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
                 builder.append(sofusa.getJusho());
                 builder.append(sofusa.getBanchi());
             }
-            if (文字_2.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法))) {
+            if (文字_2.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
                 builder.append(honni.getGyoseikuName());
                 builder.append(sofusa.getBanchi());
             }
-            if (文字_3.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法))) {
+            if (文字_3.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
                 builder.append(sofusa.getJusho());
                 builder.append(sofusa.getBanchi());
                 builder.append(honni.getGyoseikuName());
             }
-            if (文字_4.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法))) {
+            if (文字_4.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
                 builder.append(sofusa.getBanchi());
             }
-            if (文字_1.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, RDate.getNowDate()))) {
                 builder.append(半角スペース);
                 builder.append(sofusa.getKatagaki());
             }
@@ -687,7 +689,8 @@ public class HihokenshashoChohyoFinder {
 
     private void set生年月日(HihokenshashoChoBusiness business, HonninJohoEntity entity) {
         if (住民種別コード2.equals(entity.getJuminShubetsuCode()) || 住民種別コード4.equals(entity.getJuminShubetsuCode())) {
-            if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.西暦表示.getコード())) {
+            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate())
+                    .equals(GaikokujinSeinengappiHyojihoho.西暦表示.getコード())) {
                 business.set西暦年(entity.getSeinengappiYMD().seireki()
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).getYear());
                 business.set月(entity.getSeinengappiYMD().seireki()
@@ -698,7 +701,8 @@ public class HihokenshashoChohyoFinder {
                 business.set大正(星アイコン);
                 business.set昭和(星アイコン);
             }
-            if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())
+            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate())
+                    .equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())
                     && FALSE.equals(entity.getSeinengappiFushoKubun())) {
                 business.set年号(entity.getSeinengappiYMD().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).getEra());
@@ -711,7 +715,8 @@ public class HihokenshashoChohyoFinder {
                 business.set明治(星アイコン);
                 business.set大正(星アイコン);
             }
-            if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())
+            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate())
+                    .equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())
                     && TRUE.equals(entity.getSeinengappiFushoKubun())) {
                 business.set年号(RString.EMPTY);
                 business.set和暦年(RString.EMPTY);

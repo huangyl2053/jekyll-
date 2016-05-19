@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShikakuTokusoRireki;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.ShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -14,6 +16,20 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  * @reamsid_L DBA-0130-011 huangh
  */
 public class ShikakuTokusoRireki {
+
+    /**
+     * 資格得喪履歴の初期化処理します。
+     *
+     * @param div ShikakuTokusoRirekiDiv
+     * @return 資格得喪履歴div
+     */
+    public ResponseData<ShikakuTokusoRirekiDiv> initialize(ShikakuTokusoRirekiDiv div) {
+        if (div.getMode() != null) {
+            div.setMode_DisplayType(ShikakuTokusoRirekiDiv.DisplayType.valueOf(div.getMode().toString()));
+            div.initialize(new HihokenshaNo(div.getHdnHihokenshaNo()), new ShikibetsuCode(div.getHdnShikibetsuCode()));
+        }
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 削除ボタン押下時の処理です。<br/>
