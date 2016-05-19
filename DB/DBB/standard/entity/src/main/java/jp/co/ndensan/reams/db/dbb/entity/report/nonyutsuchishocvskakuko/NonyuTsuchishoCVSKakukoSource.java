@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti;
+package jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 帳票　保険料納入通知書（本算定）【コンビニマルチ収納タイプ】の項目を定義するクラスです。
+ * 保険料納入通知書（本算定）【コンビニ角公タイプ】の項目を定義するクラスです。
  *
- * @reamsid_L DBB-9110-110 huangh
+ * @reamsid_L DBB-9110-120 huangh
  */
-public class NonyuTsuchishoCVSMultiSource implements IReportSource {
+public class NonyuTsuchishoCVSKakukoSource implements IReportSource {
 
     @ReportItem(name = "listList1_1", length = 2, order = 1)
     public RString listList1_1;
@@ -522,9 +522,9 @@ public class NonyuTsuchishoCVSMultiSource implements IReportSource {
      */
     public enum Layouts {
 
-        DBB100061_NonyuTsuchishoCVSMultiCover(1),
+        DBB100059_NonyuTsuchishoCVSKakukoCover(1),
         DBB100026_NonyuTsuchishoCVSMultiNofusho(2),
-        DBB100062_NonyuTsuchishoCVSMultiRencho(3),
+        DBB100060_NonyuTsuchishoCVSKakukoRenchoCover(3),
         DBB100027_NonyuTsuchishoCVSMultiRenchoNofusho(4);
         private final int formGroupIndex;
 
