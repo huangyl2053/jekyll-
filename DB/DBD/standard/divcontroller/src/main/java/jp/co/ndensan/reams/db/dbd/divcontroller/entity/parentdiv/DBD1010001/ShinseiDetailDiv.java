@@ -43,28 +43,18 @@ public class ShinseiDetailDiv extends Panel {
     private TextBoxFlexibleDate txtYukoKigenYMD;
     @JsonProperty("ddlKyusochisha")
     private DropDownList ddlKyusochisha;
-    @JsonProperty("ddlRiyoshaFutanDankai")
-    private DropDownList ddlRiyoshaFutanDankai;
     @JsonProperty("ddlKyoshitsuShubetsu")
     private DropDownList ddlKyoshitsuShubetsu;
     @JsonProperty("chkKyokaiso")
     private CheckBoxList chkKyokaiso;
     @JsonProperty("chkGekihenKanwa")
     private CheckBoxList chkGekihenKanwa;
+    @JsonProperty("ddlRiyoshaFutanDankai")
+    private DropDownList ddlRiyoshaFutanDankai;
     @JsonProperty("lblFutanGendogaku")
     private Label lblFutanGendogaku;
-    @JsonProperty("ddlShokuhi")
-    private DropDownList ddlShokuhi;
-    @JsonProperty("ddlUnitGataKoshitsu")
-    private DropDownList ddlUnitGataKoshitsu;
-    @JsonProperty("ddlUnitGataJunKoshitsu")
-    private DropDownList ddlUnitGataJunKoshitsu;
-    @JsonProperty("ddlJuraiGataKoshitsuTokuyo")
-    private DropDownList ddlJuraiGataKoshitsuTokuyo;
-    @JsonProperty("ddlJuraiGataKoshitsuRoken")
-    private DropDownList ddlJuraiGataKoshitsuRoken;
-    @JsonProperty("ddlTashoshitsu")
-    private DropDownList ddlTashoshitsu;
+    @JsonProperty("FutanGendogaku")
+    private FutanGendogakuDiv FutanGendogaku;
     @JsonProperty("btnHiShoninRiyu")
     private ButtonDialog btnHiShoninRiyu;
     @JsonProperty("txtHiShoninRiyu")
@@ -247,24 +237,6 @@ public class ShinseiDetailDiv extends Panel {
     }
 
     /*
-     * getddlRiyoshaFutanDankai
-     * @return ddlRiyoshaFutanDankai
-     */
-    @JsonProperty("ddlRiyoshaFutanDankai")
-    public DropDownList getDdlRiyoshaFutanDankai() {
-        return ddlRiyoshaFutanDankai;
-    }
-
-    /*
-     * setddlRiyoshaFutanDankai
-     * @param ddlRiyoshaFutanDankai ddlRiyoshaFutanDankai
-     */
-    @JsonProperty("ddlRiyoshaFutanDankai")
-    public void setDdlRiyoshaFutanDankai(DropDownList ddlRiyoshaFutanDankai) {
-        this.ddlRiyoshaFutanDankai = ddlRiyoshaFutanDankai;
-    }
-
-    /*
      * getddlKyoshitsuShubetsu
      * @return ddlKyoshitsuShubetsu
      */
@@ -319,6 +291,24 @@ public class ShinseiDetailDiv extends Panel {
     }
 
     /*
+     * getddlRiyoshaFutanDankai
+     * @return ddlRiyoshaFutanDankai
+     */
+    @JsonProperty("ddlRiyoshaFutanDankai")
+    public DropDownList getDdlRiyoshaFutanDankai() {
+        return ddlRiyoshaFutanDankai;
+    }
+
+    /*
+     * setddlRiyoshaFutanDankai
+     * @param ddlRiyoshaFutanDankai ddlRiyoshaFutanDankai
+     */
+    @JsonProperty("ddlRiyoshaFutanDankai")
+    public void setDdlRiyoshaFutanDankai(DropDownList ddlRiyoshaFutanDankai) {
+        this.ddlRiyoshaFutanDankai = ddlRiyoshaFutanDankai;
+    }
+
+    /*
      * getlblFutanGendogaku
      * @return lblFutanGendogaku
      */
@@ -337,111 +327,21 @@ public class ShinseiDetailDiv extends Panel {
     }
 
     /*
-     * getddlShokuhi
-     * @return ddlShokuhi
+     * getFutanGendogaku
+     * @return FutanGendogaku
      */
-    @JsonProperty("ddlShokuhi")
-    public DropDownList getDdlShokuhi() {
-        return ddlShokuhi;
+    @JsonProperty("FutanGendogaku")
+    public FutanGendogakuDiv getFutanGendogaku() {
+        return FutanGendogaku;
     }
 
     /*
-     * setddlShokuhi
-     * @param ddlShokuhi ddlShokuhi
+     * setFutanGendogaku
+     * @param FutanGendogaku FutanGendogaku
      */
-    @JsonProperty("ddlShokuhi")
-    public void setDdlShokuhi(DropDownList ddlShokuhi) {
-        this.ddlShokuhi = ddlShokuhi;
-    }
-
-    /*
-     * getddlUnitGataKoshitsu
-     * @return ddlUnitGataKoshitsu
-     */
-    @JsonProperty("ddlUnitGataKoshitsu")
-    public DropDownList getDdlUnitGataKoshitsu() {
-        return ddlUnitGataKoshitsu;
-    }
-
-    /*
-     * setddlUnitGataKoshitsu
-     * @param ddlUnitGataKoshitsu ddlUnitGataKoshitsu
-     */
-    @JsonProperty("ddlUnitGataKoshitsu")
-    public void setDdlUnitGataKoshitsu(DropDownList ddlUnitGataKoshitsu) {
-        this.ddlUnitGataKoshitsu = ddlUnitGataKoshitsu;
-    }
-
-    /*
-     * getddlUnitGataJunKoshitsu
-     * @return ddlUnitGataJunKoshitsu
-     */
-    @JsonProperty("ddlUnitGataJunKoshitsu")
-    public DropDownList getDdlUnitGataJunKoshitsu() {
-        return ddlUnitGataJunKoshitsu;
-    }
-
-    /*
-     * setddlUnitGataJunKoshitsu
-     * @param ddlUnitGataJunKoshitsu ddlUnitGataJunKoshitsu
-     */
-    @JsonProperty("ddlUnitGataJunKoshitsu")
-    public void setDdlUnitGataJunKoshitsu(DropDownList ddlUnitGataJunKoshitsu) {
-        this.ddlUnitGataJunKoshitsu = ddlUnitGataJunKoshitsu;
-    }
-
-    /*
-     * getddlJuraiGataKoshitsuTokuyo
-     * @return ddlJuraiGataKoshitsuTokuyo
-     */
-    @JsonProperty("ddlJuraiGataKoshitsuTokuyo")
-    public DropDownList getDdlJuraiGataKoshitsuTokuyo() {
-        return ddlJuraiGataKoshitsuTokuyo;
-    }
-
-    /*
-     * setddlJuraiGataKoshitsuTokuyo
-     * @param ddlJuraiGataKoshitsuTokuyo ddlJuraiGataKoshitsuTokuyo
-     */
-    @JsonProperty("ddlJuraiGataKoshitsuTokuyo")
-    public void setDdlJuraiGataKoshitsuTokuyo(DropDownList ddlJuraiGataKoshitsuTokuyo) {
-        this.ddlJuraiGataKoshitsuTokuyo = ddlJuraiGataKoshitsuTokuyo;
-    }
-
-    /*
-     * getddlJuraiGataKoshitsuRoken
-     * @return ddlJuraiGataKoshitsuRoken
-     */
-    @JsonProperty("ddlJuraiGataKoshitsuRoken")
-    public DropDownList getDdlJuraiGataKoshitsuRoken() {
-        return ddlJuraiGataKoshitsuRoken;
-    }
-
-    /*
-     * setddlJuraiGataKoshitsuRoken
-     * @param ddlJuraiGataKoshitsuRoken ddlJuraiGataKoshitsuRoken
-     */
-    @JsonProperty("ddlJuraiGataKoshitsuRoken")
-    public void setDdlJuraiGataKoshitsuRoken(DropDownList ddlJuraiGataKoshitsuRoken) {
-        this.ddlJuraiGataKoshitsuRoken = ddlJuraiGataKoshitsuRoken;
-    }
-
-    /*
-     * getddlTashoshitsu
-     * @return ddlTashoshitsu
-     */
-    @JsonProperty("ddlTashoshitsu")
-    public DropDownList getDdlTashoshitsu() {
-        return ddlTashoshitsu;
-    }
-
-    /*
-     * setddlTashoshitsu
-     * @param ddlTashoshitsu ddlTashoshitsu
-     */
-    @JsonProperty("ddlTashoshitsu")
-    public void setDdlTashoshitsu(DropDownList ddlTashoshitsu) {
-        this.ddlTashoshitsu = ddlTashoshitsu;
+    @JsonProperty("FutanGendogaku")
+    public void setFutanGendogaku(FutanGendogakuDiv FutanGendogaku) {
+        this.FutanGendogaku = FutanGendogaku;
     }
 
     /*
@@ -704,6 +604,66 @@ public class ShinseiDetailDiv extends Panel {
     @JsonIgnore
     public void  setTxtSonota(TextBoxNum txtSonota) {
         this.getYochokinJoho().setTxtSonota(txtSonota);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlShokuhi() {
+        return this.getFutanGendogaku().getDdlShokuhi();
+    }
+
+    @JsonIgnore
+    public void  setDdlShokuhi(DropDownList ddlShokuhi) {
+        this.getFutanGendogaku().setDdlShokuhi(ddlShokuhi);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlUnitGataKoshitsu() {
+        return this.getFutanGendogaku().getDdlUnitGataKoshitsu();
+    }
+
+    @JsonIgnore
+    public void  setDdlUnitGataKoshitsu(DropDownList ddlUnitGataKoshitsu) {
+        this.getFutanGendogaku().setDdlUnitGataKoshitsu(ddlUnitGataKoshitsu);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlUnitGataJunKoshitsu() {
+        return this.getFutanGendogaku().getDdlUnitGataJunKoshitsu();
+    }
+
+    @JsonIgnore
+    public void  setDdlUnitGataJunKoshitsu(DropDownList ddlUnitGataJunKoshitsu) {
+        this.getFutanGendogaku().setDdlUnitGataJunKoshitsu(ddlUnitGataJunKoshitsu);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlJuraiGataKoshitsuTokuyo() {
+        return this.getFutanGendogaku().getDdlJuraiGataKoshitsuTokuyo();
+    }
+
+    @JsonIgnore
+    public void  setDdlJuraiGataKoshitsuTokuyo(DropDownList ddlJuraiGataKoshitsuTokuyo) {
+        this.getFutanGendogaku().setDdlJuraiGataKoshitsuTokuyo(ddlJuraiGataKoshitsuTokuyo);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlJuraiGataKoshitsuRoken() {
+        return this.getFutanGendogaku().getDdlJuraiGataKoshitsuRoken();
+    }
+
+    @JsonIgnore
+    public void  setDdlJuraiGataKoshitsuRoken(DropDownList ddlJuraiGataKoshitsuRoken) {
+        this.getFutanGendogaku().setDdlJuraiGataKoshitsuRoken(ddlJuraiGataKoshitsuRoken);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlTashoshitsu() {
+        return this.getFutanGendogaku().getDdlTashoshitsu();
+    }
+
+    @JsonIgnore
+    public void  setDdlTashoshitsu(DropDownList ddlTashoshitsu) {
+        this.getFutanGendogaku().setDdlTashoshitsu(ddlTashoshitsu);
     }
 
     // </editor-fold>

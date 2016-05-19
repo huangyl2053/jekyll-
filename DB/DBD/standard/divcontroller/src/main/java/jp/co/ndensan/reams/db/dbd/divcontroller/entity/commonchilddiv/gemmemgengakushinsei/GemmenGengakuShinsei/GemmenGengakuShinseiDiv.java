@@ -4,17 +4,18 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gemmemgen
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.ShinseiJoho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.StaticImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -30,8 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
  * @author 自動生成
  */
 public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShinseiDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -214,7 +214,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtShinseishaShimeiKana(TextBoxKana txtShinseishaShimeiKana) {
+    public void  setTxtShinseishaShimeiKana(TextBoxKana txtShinseishaShimeiKana) {
         this.getShinseisha().setTxtShinseishaShimeiKana(txtShinseishaShimeiKana);
     }
 
@@ -224,7 +224,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtCopyHonnin(Button txtCopyHonnin) {
+    public void  setTxtCopyHonnin(Button txtCopyHonnin) {
         this.getShinseisha().setTxtCopyHonnin(txtCopyHonnin);
     }
 
@@ -234,7 +234,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtShinseishaShimei(TextBoxAtenaMeisho txtShinseishaShimei) {
+    public void  setTxtShinseishaShimei(TextBoxAtenaMeisho txtShinseishaShimei) {
         this.getShinseisha().setTxtShinseishaShimei(txtShinseishaShimei);
     }
 
@@ -244,7 +244,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtShinseishaTsuzukigara(TextBox txtShinseishaTsuzukigara) {
+    public void  setTxtShinseishaTsuzukigara(TextBox txtShinseishaTsuzukigara) {
         this.getShinseisha().setTxtShinseishaTsuzukigara(txtShinseishaTsuzukigara);
     }
 
@@ -254,7 +254,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setImgYubinNoLabel(StaticImage imgYubinNoLabel) {
+    public void  setImgYubinNoLabel(StaticImage imgYubinNoLabel) {
         this.getShinseisha().setImgYubinNoLabel(imgYubinNoLabel);
     }
 
@@ -264,7 +264,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtShinseishaYubinNo(TextBoxYubinNo txtShinseishaYubinNo) {
+    public void  setTxtShinseishaYubinNo(TextBoxYubinNo txtShinseishaYubinNo) {
         this.getShinseisha().setTxtShinseishaYubinNo(txtShinseishaYubinNo);
     }
 
@@ -274,7 +274,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtShinseishaTelNo(TextBoxTelNo txtShinseishaTelNo) {
+    public void  setTxtShinseishaTelNo(TextBoxTelNo txtShinseishaTelNo) {
         this.getShinseisha().setTxtShinseishaTelNo(txtShinseishaTelNo);
     }
 
@@ -284,7 +284,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtShinseishaJusho(TextBoxJusho txtShinseishaJusho) {
+    public void  setTxtShinseishaJusho(TextBoxJusho txtShinseishaJusho) {
         this.getShinseisha().setTxtShinseishaJusho(txtShinseishaJusho);
     }
 
@@ -294,7 +294,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtJigyoshaCode(TextBoxCode txtJigyoshaCode) {
+    public void  setTxtJigyoshaCode(TextBoxCode txtJigyoshaCode) {
         this.getShinseiDaikoJigyosha().setTxtJigyoshaCode(txtJigyoshaCode);
     }
 
@@ -304,7 +304,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setBtnOpenJigyoshaGuide(ButtonDialog btnOpenJigyoshaGuide) {
+    public void  setBtnOpenJigyoshaGuide(ButtonDialog btnOpenJigyoshaGuide) {
         this.getShinseiDaikoJigyosha().setBtnOpenJigyoshaGuide(btnOpenJigyoshaGuide);
     }
 
@@ -314,7 +314,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
+    public void  setTxtJigyoshaName(TextBox txtJigyoshaName) {
         this.getShinseiDaikoJigyosha().setTxtJigyoshaName(txtJigyoshaName);
     }
 
@@ -324,7 +324,7 @@ public class GemmenGengakuShinseiDiv extends Panel implements IGemmenGengakuShin
     }
 
     @JsonIgnore
-    public void setDdlJigyoshaKubun(DropDownList ddlJigyoshaKubun) {
+    public void  setDdlJigyoshaKubun(DropDownList ddlJigyoshaKubun) {
         this.getShinseiDaikoJigyosha().setDdlJigyoshaKubun(ddlJigyoshaKubun);
     }
 
