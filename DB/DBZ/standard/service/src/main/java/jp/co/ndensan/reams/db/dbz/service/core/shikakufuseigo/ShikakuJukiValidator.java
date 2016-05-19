@@ -345,7 +345,7 @@ public class ShikakuJukiValidator {
             FlexibleDate 資格喪失年月日, RString 資格喪失事由コード,
             FlexibleDate 転出確定, FlexibleDate 転出予定,
             FuseigoRiyu 不整合理由) {
-        if (isNullOrEmpty(適用年月日) && !isNullOrEmpty(解除年月日) && isNullOrEmpty(資格喪失年月日)) {
+        if (!(!isNullOrEmpty(適用年月日) && isNullOrEmpty(解除年月日)) && isNullOrEmpty(資格喪失年月日)) {
             不整合理由 = FuseigoRiyu.資格取得者_転出者;
         }
         if (ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由コード)) {
