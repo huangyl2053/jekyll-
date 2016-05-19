@@ -125,6 +125,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     private final DbT7131KaigoServiceNaiyouDac 介護サービスDac;
     private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac 軽減率Dac;
     private final DbT4012HyojunFutangakuGemmenDac 標準負担額減免Dac;
+    private static final RString テーブル区分 = new RString("3");
     private static final int テーブル区分3 = 3;
     private static final int テーブル区分4 = 4;
     private static final int テーブル区分5 = 5;
@@ -1002,17 +1003,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             int 更新件数 = 0;
             if (entityList != null && !entityList.isEmpty()) {
                 for (DbT3053ShokanShukeiEntity entity : entityList) {
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.getサービス提供年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setShikyuKubunCode(parameter.get支給区分());
-                    entity.setSeikyugakuSagakuKingaku(parameter.get差額金額());
-                    entity.setDekidakaSeikyugakuSagaku(parameter.get差額金額());
-                    entity.setZougenRiyu(parameter.get増減理由等());
-                    entity.setHushikyuRiyu(parameter.get不支給理由等1());
-                    entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                    entity.setState(EntityDataState.Modified);
-                    更新件数 = 更新件数 + 償還払請求集計Dac.save(entity);
+                    更新件数 = 更新件数 + up償還払請求集計(entity, parameter, 決定情報一覧List);
                 }
             }
             if (更新件数 == 0 && 決定情報一覧List != null && !決定情報一覧List.isEmpty()) {
@@ -1034,6 +1025,33 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             manager.dealKyufujisseki(parameter.get画面モード(), parameter.get識別コード(),
                     entity, 修正前支給区分);
         }
+    }
+
+    private int up償還払請求集計(DbT3053ShokanShukeiEntity entity, SyokanbaraihiShikyuShinseiKetteParameter parameter,
+            List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List) {
+
+        int 更新件数 = 0;
+        if (決定情報一覧List != null && !決定情報一覧List.isEmpty()) {
+            for (SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧 : 決定情報一覧List) {
+                if (テーブル区分.equals(決定情報一覧.getテーブル区分()) && entity.getJigyoshaNo().equals(決定情報一覧.get事業者番号())
+                        && entity.getYoshikiNo().equals(決定情報一覧.get様式番号())
+                        && entity.getMeisaiNo().equals(決定情報一覧.get明細番号())
+                        && entity.getRenban().equals(決定情報一覧.get連番())) {
+                    entity.setHiHokenshaNo(parameter.get被保険者番号());
+                    entity.setServiceTeikyoYM(parameter.getサービス提供年月());
+                    entity.setSeiriNo(parameter.get整理番号());
+                    entity.setShikyuKubunCode(parameter.get支給区分());
+                    entity.setSeikyugakuSagakuKingaku(決定情報一覧.get差額金額());
+                    entity.setDekidakaSeikyugakuSagaku(決定情報一覧.get差額金額());
+                    entity.setZougenRiyu(parameter.get増減理由等());
+                    entity.setHushikyuRiyu(parameter.get不支給理由等1());
+                    entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
+                    entity.setState(EntityDataState.Modified);
+                    更新件数 = 更新件数 + 償還払請求集計Dac.save(entity);
+                }
+            }
+        }
+        return 更新件数;
     }
 
     private void 決定情報登録更新1(SyokanbaraihiShikyuShinseiKetteParameter parameter,
