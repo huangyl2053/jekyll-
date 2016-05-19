@@ -12,15 +12,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 合議体情報作成の抽象ValidationHandlerクラスです。
@@ -173,7 +174,7 @@ public class GogitaiJohoSakuseiValidationHandler {
      */
     public ValidationMessageControlPairs shinsainPersonNumCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        RString personNum = BusinessConfig.get(ConfigNameDBE.合議体最大委員数, SubGyomuCode.DBE認定支援);
+        RString personNum = DbBusinessConifg.get(ConfigNameDBE.合議体最大委員数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<dgShinsainList_Row> rowList = div.getDgShinsainList().getDataSource();
         if (Integer.parseInt(personNum.toString()) < rowList.size()) {
             validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体委員数が最大値を超過));

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBB-9110-050 huangh
  */
-public class KarisanteiNonyuTsuchishoCVSMultiBuilder implements IKarisanteiNonyuTsuchishoCVSMultiBuilder {
+public class KarisanteiNonyuTsuchishoCVSMultiCoverBuilder implements IKarisanteiNonyuTsuchishoCVSMultiCoverBuilder {
 
     private final IKarisanteiNonyuTsuchishoCVSMultiCoverEditor coverEditor;
 
@@ -22,7 +22,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiBuilder implements IKarisanteiNonyu
      *
      * @param coverEditor coverEditor
      */
-    public KarisanteiNonyuTsuchishoCVSMultiBuilder(IKarisanteiNonyuTsuchishoCVSMultiCoverEditor coverEditor) {
+    public KarisanteiNonyuTsuchishoCVSMultiCoverBuilder(IKarisanteiNonyuTsuchishoCVSMultiCoverEditor coverEditor) {
         this.coverEditor = coverEditor;
     }
 
