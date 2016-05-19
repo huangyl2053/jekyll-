@@ -62,6 +62,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 画面モード_審査 = new RString("審査モード");
     private static final RString 画面モード_照会 = new RString("照会モード");
     private static final RString モード_照会 = new RString("照会");
+    private static final RString モード_登録 = new RString("登録");
     private static final RString 画面モード_削除 = new RString("削除モード");
     private static final RString 画面モード_取消 = new RString("取消モード");
     private static final RString 画面モード_登録 = new RString("登録モード");
@@ -90,6 +91,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        ViewStateHolder.put(ViewStateKeys.処理モード, モード_登録);
 
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().onLoad(識別コード);
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().onLoad(識別コード);

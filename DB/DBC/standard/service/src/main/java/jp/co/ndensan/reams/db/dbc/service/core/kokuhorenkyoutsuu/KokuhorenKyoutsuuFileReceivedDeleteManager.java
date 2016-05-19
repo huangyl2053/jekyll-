@@ -35,7 +35,6 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
     private static final int 定数_3 = 3;
     private static final RString アンダーライン = new RString("_");
     private static final RString ドット = new RString(".");
-    private static final RString ERROR_MESSAGE = new RString("エントリ情報List");
 
     /**
      * 国保連情報取込共通処理（取込済ファイル削除）

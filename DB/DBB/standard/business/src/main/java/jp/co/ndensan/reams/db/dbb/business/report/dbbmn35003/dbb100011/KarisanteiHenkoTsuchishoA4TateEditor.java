@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100011.KarisanteiH
  *
  * @reamsid_L DBB-0820-050 xuyue
  */
-class KarisanteiHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenkoTsuchishoA4TateEditor {
+class KarisanteiHenkoTsuchishoA4TateEditor implements IKarisanteiHenkoTsuchishoA4TateEditor {
 
     private final KarisanteiHenkoTsuchishoA4TateItem item;
 
-    public KarisanteiHenkoTsuchishoA4TateBodyEditor(KarisanteiHenkoTsuchishoA4TateItem item) {
+    public KarisanteiHenkoTsuchishoA4TateEditor(KarisanteiHenkoTsuchishoA4TateItem item) {
         this.item = item;
 
     }
@@ -27,11 +27,8 @@ class KarisanteiHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenkoTsuchi
     }
 
     private KarisanteiHenkoTsuchishoA4TateReportSource editbody(KarisanteiHenkoTsuchishoA4TateReportSource source) {
-        // xy commentout
-//        INinshoshaSourceBuilderCreator creater = ReportSourceBuilders.ninshoshaSourceBuilder();
-//        NinshoshaSource builderSource1=creater.create(gyomuCD, RString.EMPTY, RDate.MAX, RString.EMPTY).buildSource();
-//        ISofubutsuAtesakiForShisetsuSourceBuilderCreator  sourceCreater = ReportSourceBuilders.sofubutsuAtesakiForShisetsuSourceBuilder();
-//        SofubutsuAtesakiSource builderSource2 = sourceCreater.create(null).buildSource();
+
+        source.bunshoNo = item.getBunshoNo();
         source.title1 = item.getTitle1();
         source.title2 = item.getTitle2();
         source.title3 = item.getTitle3();
@@ -66,6 +63,7 @@ class KarisanteiHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenkoTsuchi
         source.listKibetsu_6 = item.getListKibetsu_6();
         source.listKibetsu_7 = item.getListKibetsu_7();
         source.listKibetsu_8 = item.getListKibetsu_8();
+        source.listKibetsu_9 = item.getListKibetsu_9();
         source.bankCode = item.getBankCode();
         source.bankName = item.getBankName();
         source.korekaraTokuchoGimusha = item.getKorekaraTokuchoGimusha();
@@ -77,46 +75,47 @@ class KarisanteiHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenkoTsuchi
         source.choteiJiyu2 = item.getChoteiJiyu2();
         source.choteiJiyu3 = item.getChoteiJiyu3();
         source.choteiJiyu4 = item.getChoteiJiyu4();
-//        source.customerBarCode = builderSource2.customerBarCode;
-//        source.dainoKubunMei = builderSource2.dainoKubunMei;
-//        source.gyoseiku1 = builderSource2.gyoseiku;
-//        source.jusho1 = builderSource2.jusho1;
-//        source.jusho2 = builderSource2.jusho2;
-//        source.jusho3 = builderSource2.jusho3;
-//        source.jushoText = builderSource2.jushoText;
-//        source.kakkoLeft1 = builderSource2.kakkoLeft1;
-//        source.kakkoLeft2 = builderSource2.kakkoLeft2;
-//        source.kakkoRight1 = builderSource2.kakkoRight1;
-//        source.kakkoRight2 = builderSource2.kakkoRight2;
-//        source.katagaki1 = builderSource2.katagaki1;
-//        source.katagaki2 = builderSource2.katagaki2;
-//        source.katagakiSmall1 = builderSource2.katagakiSmall1;
-//        source.katagakiSmall2 = builderSource2.katagakiSmall2;
-//        source.katagakiText = builderSource2.katagakiText;
-//        source.meishoFuyo1 = builderSource2.meishoFuyo1;
-//        source.meishoFuyo2 = builderSource2.meishoFuyo2;
-//        source.samaBun1 = builderSource2.samaBun1;
-//        source.samaBun2 = builderSource2.samaBun2;
-//        source.samabunShimei1 = builderSource2.samabunShimei1;
-//        source.samabunShimei2 = builderSource2.samabunShimei2;
-//        source.samabunShimeiSmall1 = builderSource2.samabunShimeiSmall1;
-//        source.samabunShimeiSmall2 = builderSource2.samabunShimeiSmall2;
-//        source.samabunShimeiText = builderSource2.samabunShimeiText;
-//        source.shimei1 = builderSource2.shimei1;
-//        source.shimei2 = builderSource2.shimei2;
-//        source.shimeiSmall1 = builderSource2.shimeiSmall1;
-//        source.shimeiSmall2 = builderSource2.shimeiSmall2;
-//        source.shimeiText = builderSource2.shimeiText;
-//        source.yubinNo1 = builderSource2.yubinNo;
-//       source.denshiKoin =builderSource1.denshiKoin;
-//        source.hakkoYMD = builderSource1.hakkoYMD;
-//        source.koinMojiretsu = builderSource1.koinMojiretsu;
-//        source.koinShoryaku = builderSource1.koinShoryaku;
-//        source.ninshoshaShimeiKakenai = builderSource1.ninshoshaShimeiKakenai;
-//        source.ninshoshaShimeiKakeru = builderSource1.ninshoshaShimeiKakeru;
-//        source.ninshoshaYakushokuMei = builderSource1.ninshoshaYakushokuMei;
 
-        //to  do 「ビジネス設計_CompKaigoToiawasesaki_問合せ先」を利用する。
+        source.customerBarCode = item.getCustomerBarCode();
+        source.dainoKubunMei = item.getDainoKubunMei();
+        source.gyoseiku1 = item.getGyoseiku1();
+        source.jusho1 = item.getJusho1();
+        source.jusho2 = item.getJusho2();
+        source.jusho3 = item.getJusho3();
+        source.jushoText = item.getJushoText();
+        source.kakkoLeft1 = item.getKakkoLeft1();
+        source.kakkoLeft2 = item.getKakkoLeft2();
+        source.kakkoRight1 = item.getKakkoRight1();
+        source.kakkoRight2 = item.getKakkoRight2();
+        source.katagaki1 = item.getKatagaki1();
+        source.katagaki2 = item.getKatagaki2();
+        source.katagakiSmall1 = item.getKatagakiSmall1();
+        source.katagakiSmall2 = item.getKatagakiSmall2();
+        source.katagakiText = item.getKatagakiText();
+        source.meishoFuyo1 = item.getMeishoFuyo1();
+        source.meishoFuyo2 = item.getMeishoFuyo2();
+        source.samaBun1 = item.getSamaBun1();
+        source.samaBun2 = item.getSamaBun2();
+        source.samabunShimei1 = item.getSamabunShimei1();
+        source.samabunShimei2 = item.getSamabunShimei2();
+        source.samabunShimeiSmall1 = item.getSamabunShimeiSmall1();
+        source.samabunShimeiSmall2 = item.getSamabunShimeiSmall2();
+        source.samabunShimeiText = item.getSamabunShimeiText();
+        source.shimei1 = item.getShimei1();
+        source.shimei2 = item.getShimei2();
+        source.shimeiSmall1 = item.getShimeiSmall1();
+        source.shimeiSmall2 = item.getShimeiSmall2();
+        source.shimeiText = item.getShimeiText();
+        source.yubinNo1 = item.getYubinNo1();
+
+        source.denshiKoin = item.getDenshiKoin();
+        source.hakkoYMD = item.getHakkoYMD();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.koinShoryaku = item.getKoinShoryaku();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+
         source.choshaBushoName = item.getChoshaBushoName();
         source.naisenLabel = item.getNaisenLabel();
         source.naisenNo = item.getNaisenNo();
@@ -124,6 +123,7 @@ class KarisanteiHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenkoTsuchi
         source.tantoName = item.getTantoName();
         source.telNo = item.getTelNo();
         source.yubinBango = item.getYubinBango();
+
         return source;
     }
 

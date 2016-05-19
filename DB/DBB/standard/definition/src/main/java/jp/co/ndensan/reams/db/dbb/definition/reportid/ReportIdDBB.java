@@ -278,6 +278,14 @@ public enum ReportIdDBB {
      */
     DBB100010(new ReportId("DBB100010_KarisanteiHenkoTsuchishoB5Yoko"), new RString("仮算定額変更通知書【B5横タイプ】")),
     /**
+     * 仮算定額変更通知書【A4縦・特別徴収平準化通知タイプ】
+     */
+    DBB100013(new ReportId("DBB100013_KarisanteiHenjunkaHenkoTsuchishoA4Tate"), new RString("仮算定額変更通知書【A4縦・特別徴収平準化通知タイプ】")),
+    /**
+     * 仮算定額変更通知書【B5横・特別徴収平準化通知タイプ】
+     */
+    DBB100012(new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoB5Yoko"), new RString("仮算定額変更通知書【B5横・特別徴収平準化通知タイプ】")),
+    /**
      * 特別徴収開始通知書（仮算定）【B5横タイプ】
      */
     DBB100003(new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariB5"), new RString("特別徴収開始通知書（仮算定）【B5横タイプ】")),

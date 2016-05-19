@@ -15,19 +15,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl implements IKarisanteiHenjunkaHenkoTsuchishoA4TateBuilder {
 
-    private final IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor headerEditor;
     private final IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor;
 
-    public KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl(IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor headerEditor,
-            IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor) {
-        this.headerEditor = headerEditor;
+    public KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl(IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor) {
         this.hyojiBodyEditor = hyojiBodyEditor;
 
     }
 
     @Override
     public KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource build() {
-        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource()).
-                join(headerEditor).join(hyojiBodyEditor).buildSource();
+        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource())
+                .join(hyojiBodyEditor).buildSource();
     }
 }
