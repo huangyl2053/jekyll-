@@ -201,8 +201,12 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報
                 = 本算定決定通知書情報.get編集後本算定通知書共通情報();
         if (is特別徴収停止(本算定決定通知書情報)) {
-            reportSource.choteiNendo = 編集後本算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+            RString 調定年度 = 編集後本算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .fillType(FillType.BLANK).toDateString();
+            RStringBuilder 調定年度SB = new RStringBuilder();
+            調定年度SB.append(調定年度);
+            調定年度SB.append(new RString("年度"));
+            reportSource.choteiNendo = 調定年度SB.toRString();
             reportSource.title1 = RString.EMPTY;
             reportSource.title2 = RString.EMPTY;
             reportSource.title3 = new RString("介護保険料額変更通知書");
