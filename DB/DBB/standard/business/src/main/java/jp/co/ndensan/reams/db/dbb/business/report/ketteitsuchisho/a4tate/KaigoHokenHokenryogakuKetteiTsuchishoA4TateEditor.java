@@ -74,14 +74,14 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateEditor implements IKaigo
         reportSource.fukaNendo = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .fillType(FillType.BLANK).toDateString();
         reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
-        reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額(), 0);
+        reportSource.genmenMae = edit金額(更正前.get減免額());
         reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
         reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
-        reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(更正前.get確定保険料_年額(), 0);
+        reportSource.hokenGakuMae = edit金額(更正前.get確定保険料_年額());
         reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
-        reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get保険料率(), 0);
+        reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
         reportSource.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
-        reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免前保険料_年額(), 0);
+        reportSource.hokenSanshutsuMae = edit金額(更正前.get減免前保険料_年額());
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
         reportSource.hyojicode1 = 表示コード.get表示コード１();
         reportSource.hyojicode2 = 表示コード.get表示コード２();
@@ -92,8 +92,6 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateEditor implements IKaigo
         reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
         reportSource.kongoNofusubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
         reportSource.korekaraChoshuho = 更正後.get徴収方法();
-//        reportSource.korekaraTokuchoGimusha = 更正後.get特別徴収義務者();
-//        reportSource.korekaraTokuchoTaishoNenkin = 更正後.get特別徴収対象年金();
         reportSource.koseiNaiyo = new RString("年額保険料が");
         reportSource.koseiNaiyo2 = RString.EMPTY;
         reportSource.koseiRiyu = new RString("円に決定しました。");
@@ -102,8 +100,6 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateEditor implements IKaigo
         reportSource.kozaNo = 口座情報.get口座番号Or通帳記号番号();
         reportSource.kozaShurui = 口座情報.get口座種別略称();
         reportSource.nofuzumiGaku = decimalToRString(編集後本算定通知書共通情報.get納付済額_未到来期含む());
-        //reportSource.seibetsu = 編集後本算定通知書共通情報.get
-        //reportSource.setaiCode = 編集後本算定通知書共通情報.get世帯コード
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
         reportSource.shotokuKbnMae = 更正前.get保険料段階();
@@ -122,6 +118,14 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateEditor implements IKaigo
         reportSource.tokuchoGimusha = 更正後.get特別徴収義務者();
         reportSource.tokuchoTaishoNenkin = 更正後.get特別徴収対象年金();
         return reportSource;
+    }
+
+    private RString edit金額(Decimal 金額) {
+        if (Decimal.ZERO.compareTo(金額) == 0) {
+            return RString.HALF_SPACE;
+        } else {
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        }
     }
 
     private void set通知文1と通知区分(KaigoHokenHokenryogakuKetteiTsuchishoA4TateReportSource reportSource,
