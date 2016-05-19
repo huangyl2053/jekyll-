@@ -22,15 +22,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokanKetteiTsuchiShoMeisaiTempUpdateProcess extends BatchProcessBase<ShokanKetteiTsuchiShoMeisaiTempTableEntity> {
 
-    private static final RString 決定通知書明細情報取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get決定通知書明細情報");
+    private static final RString 金融機関と預金種別取得SQL = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+            + "shokanketteitsuchishoikkatsusakusei.IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.get金融機関と預金種別");
     private static final RString TABLE_償還払い支給不支給決定通知書明細情報 = new RString("ShokanKetteiTsuchiShoMeisaiTemp");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 償還払支給不支給決定通知書明細情報一時TBL;
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(決定通知書明細情報取得SQL);
+        return new BatchDbReader(金融機関と預金種別取得SQL);
     }
 
     @Override
@@ -47,17 +47,14 @@ public class ShokanKetteiTsuchiShoMeisaiTempUpdateProcess extends BatchProcessBa
     @Override
     protected void afterExecute() {
         IShokanKetteiTsuchiShoIkkatsuSakuseiMapper mapper = getMapper(IShokanKetteiTsuchiShoIkkatsuSakuseiMapper.class);
-        for (ShokanKetteiTsuchiShoMeisaiTempTableEntity entity : mapper.get金融機関と預金種別(FlexibleDate.getNowDate())) {
-            償還払支給不支給決定通知書明細情報一時TBL.insert(entity);
-        }
         for (ShokanKetteiTsuchiShoMeisaiTempTableEntity entity : mapper.get支店名称(FlexibleDate.getNowDate())) {
-            償還払支給不支給決定通知書明細情報一時TBL.insert(entity);
+            償還払支給不支給決定通知書明細情報一時TBL.update(entity);
         }
         for (ShokanKetteiTsuchiShoMeisaiTempTableEntity entity : mapper.get様式名称()) {
-            償還払支給不支給決定通知書明細情報一時TBL.insert(entity);
+            償還払支給不支給決定通知書明細情報一時TBL.update(entity);
         }
         for (ShokanKetteiTsuchiShoMeisaiTempTableEntity entity : mapper.getサービス種類()) {
-            償還払支給不支給決定通知書明細情報一時TBL.insert(entity);
+            償還払支給不支給決定通知書明細情報一時TBL.update(entity);
         }
     }
 }
