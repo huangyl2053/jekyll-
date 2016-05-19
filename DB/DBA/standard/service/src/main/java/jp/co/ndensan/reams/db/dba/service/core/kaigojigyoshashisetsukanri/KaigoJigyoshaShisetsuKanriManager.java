@@ -92,8 +92,7 @@ public class KaigoJigyoshaShisetsuKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaShisetsuKanriManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaShisetsuKanriManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaShisetsuKanriManager}のインスタンス
      */
     public static KaigoJigyoshaShisetsuKanriManager createInstance() {
         return InstanceProvider.create(KaigoJigyoshaShisetsuKanriManager.class);
@@ -108,9 +107,11 @@ public class KaigoJigyoshaShisetsuKanriManager {
     @Transaction
     public boolean checkKikanGorisei(KaigoJogaiTokureiParameter parameter) {
 
-        return parameter.getYukoShuryoYMD() == null || (parameter.getYukoShuryoYMD() != null
-                && parameter.getYukoKaishiYMD().isBeforeOrEquals(parameter.
-                        getYukoShuryoYMD()));
+        FlexibleDate yukoShuryoYMD = parameter.getYukoShuryoYMD();
+        if (yukoShuryoYMD != null && !yukoShuryoYMD.isEmpty()) {
+            return parameter.getYukoKaishiYMD().isBeforeOrEquals(yukoShuryoYMD);
+        }
+        return false;
     }
 
     /**
