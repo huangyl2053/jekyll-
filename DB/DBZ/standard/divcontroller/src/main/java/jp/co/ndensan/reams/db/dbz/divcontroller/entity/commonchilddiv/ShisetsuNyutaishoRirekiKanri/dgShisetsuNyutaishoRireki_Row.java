@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 19 21:29:44 CST 2016 
+ * Thu May 19 23:29:39 CST 2016 
  */
 
 
