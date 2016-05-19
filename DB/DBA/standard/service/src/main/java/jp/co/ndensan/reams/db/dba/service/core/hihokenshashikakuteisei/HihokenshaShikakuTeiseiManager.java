@@ -787,7 +787,6 @@ public class HihokenshaShikakuTeiseiManager {
     private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate ichigoShikakuShutokuYMD) {
         getAge = new AgeCalculator(dateOfBirth, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, ichigoShikakuShutokuYMD);
         return getAge.get年齢();
-
     }
 
     private static class DateComparator implements Comparator<DbT1001HihokenshaDaichoEntity>, Serializable {
