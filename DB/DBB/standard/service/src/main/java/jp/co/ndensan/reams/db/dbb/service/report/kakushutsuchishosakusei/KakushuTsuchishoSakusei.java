@@ -637,15 +637,15 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         if (ReportIdDBB.DBB100010.getReportId().equals(帳票ID)) {
             //パラメータ：通知書タイプ 文書番号 仮算定特徴開始通知書情報
             List<KarisanteiHenkoTsuchishoB5YokoItem> items = new ArrayList<>();
-            KarisanteiHenkoTsuchishoB5YokoReport report
-                    = KarisanteiHenkoTsuchishoB5YokoReport.createFrom(items);
+            KarisanteiHenkoTsuchishoB5YokoReport report = null; // TODO
+//                    = KarisanteiHenkoTsuchishoB5YokoReport.createFrom(items);
             //TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
             new Printer<KarisanteiHenkoTsuchishoB5YokoReportSource>().spool(null, report);
         } else {
             //パラメータ：通知書タイプ 文書番号 仮算定特徴開始通知書情報
             List<KarisanteiHenkoTsuchishoA4TateItem> items = new ArrayList<>();
-            KarisanteiHenkoTsuchishoA4TateReport report
-                    = KarisanteiHenkoTsuchishoA4TateReport.createFrom(items);
+            KarisanteiHenkoTsuchishoA4TateReport report = null; // TODO
+//                    = KarisanteiHenkoTsuchishoA4TateReport.createFrom(items);
             //TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
             new Printer<KarisanteiHenkoTsuchishoA4TateReportSource>().spool(null, report);
         }
