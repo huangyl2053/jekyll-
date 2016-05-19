@@ -542,6 +542,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return 保存処理(div);
         }
+        if (div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getDataSource() == null
+                || div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().getDataSource().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
         if (!getHandler(div).is内容変更状態()) {
             return notChanges(div);
         }
