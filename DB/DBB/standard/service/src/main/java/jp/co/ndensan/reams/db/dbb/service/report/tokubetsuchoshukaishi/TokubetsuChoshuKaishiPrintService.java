@@ -88,7 +88,7 @@ public class TokubetsuChoshuKaishiPrintService {
             List<RString> 出力項目リスト = new ArrayList();
             List<RString> 改頁項目リスト = new ArrayList();
             for (int i = NUM0; i < NUM5; i++) {
-                if (並び順.get設定項目リスト().size() > i) {
+                if (i < 並び順.get設定項目リスト().size()) {
                     出力項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
                     if (並び順.get設定項目リスト().get(i).is改頁項目()) {
                         改頁項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());

@@ -116,64 +116,56 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
 
     private void listlowers(TokubetsuChoshuKaishiSource source) {
         source.titleChoshugaku = 本徴収額;
-        if (num >= NUM0) {
+        if (NUM0 <= num) {
             source.listUpper_1 = new RString(num);
         }
         if (編集後本算定通知書共通情報 != null) {
             if (編集後本算定通知書共通情報.get編集後宛先() != null) {
                 source.listUpper_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
-            }
-            if (編集後本算定通知書共通情報.get編集後宛先() != null) {
                 source.listUpper_3 = 編集後本算定通知書共通情報.get編集後宛先().get町域();
-            }
-            if (編集後本算定通知書共通情報.get編集後宛先() != null) {
                 source.listUpper_4 = 編集後本算定通知書共通情報.get編集後宛先().get宛先行政区();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null) {
                 source.listUpper_5 = 編集後本算定通知書共通情報.get編集後個人().get生年月日();
-            }
-            if (編集後本算定通知書共通情報.get編集後個人() != null) {
                 source.listUpper_6 = 編集後本算定通知書共通情報.get編集後個人().get性別();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get世帯主名() != null) {
-                source.listUpper_7 = new RString(編集後本算定通知書共通情報.get編集後個人().get世帯主名().toString());
+                source.listUpper_7 = 編集後本算定通知書共通情報.get編集後個人().get世帯主名().value();
             }
             if (編集後本算定通知書共通情報.get通知書番号() != null) {
-                source.listLower_1 = new RString(編集後本算定通知書共通情報.get通知書番号().toString());
+                source.listLower_1 = 編集後本算定通知書共通情報.get通知書番号().value();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {
-                source.listLower_2 = new RString(編集後本算定通知書共通情報.get編集後個人().get世帯コード().toString());
+                source.listLower_2 = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
                 source.listLower_3 = new RString(編集後本算定通知書共通情報.get編集後個人().get名称().toString());
             }
             if (編集後本算定通知書共通情報.get更正後() != null) {
                 source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();
-            }
-            if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード() != null) {
-                source.listLower_5 = new RString(編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード().toString());
+                source.listLower_5 = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード();
             }
         }
     }
 
     private void set出力改頁(TokubetsuChoshuKaishiSource source) {
-        if (出力項目リスト.size() > NUM0) {
+        if (NUM0 < 出力項目リスト.size()) {
             source.shutsuryokujun1 = 出力項目リスト.get(NUM0);
             source.kaipage1 = 改頁項目リスト.get(NUM0);
         }
-        if (出力項目リスト.size() > NUM1) {
+        if (NUM1 < 出力項目リスト.size()) {
             source.shutsuryokujun2 = 出力項目リスト.get(NUM1);
             source.kaipage2 = 改頁項目リスト.get(NUM1);
         }
-        if (出力項目リスト.size() > NUM2) {
+        if (NUM2 < 出力項目リスト.size()) {
             source.shutsuryokujun3 = 出力項目リスト.get(NUM2);
             source.kaipage3 = 改頁項目リスト.get(NUM2);
         }
-        if (出力項目リスト.size() > NUM3) {
+        if (NUM3 < 出力項目リスト.size()) {
             source.shutsuryokujun4 = 出力項目リスト.get(NUM3);
             source.kaipage4 = 改頁項目リスト.get(NUM3);
         }
-        if (出力項目リスト.size() > NUM4) {
+        if (NUM4 < 出力項目リスト.size()) {
             source.shutsuryokujun5 = 出力項目リスト.get(NUM4);
             source.kaipage5 = 改頁項目リスト.get(NUM4);
         }
