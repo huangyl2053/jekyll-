@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GennendoDate;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GokeiChi;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.HihokenshaDaichoPsm;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi;
@@ -59,28 +58,6 @@ public interface ICreateTsukibetsuSuiihyoMapper {
     List<HihokenshaDaichoPsm> get被保険者台帳管理と宛名のデータ(CreateTsukibetsuSuiihyoMyBatisParameter parameter);
 
     /**
-     * 資格状況一時テーブルcreate処理です。
-     *
-     * @return int
-     */
-    int createTmpSikakuJyoukyou_Ichi();
-
-    /**
-     * 資格状況一時テーブルinsert処理です。
-     *
-     * @param entity 現年度データのEntityクラス
-     * @return int
-     */
-    int insertTmpSikakuJyoukyou_Ichi(HihokenshaDaichoPsm entity);
-
-    /**
-     * 資格状況一時テーブルdellert処理です。
-     *
-     * @return int
-     */
-    int dellertTmpSikakuJyoukyou_Ichi();
-
-    /**
      * 各月資格の取得します。
      *
      * @return List<HihokenshaDaichoPsm>
@@ -125,21 +102,6 @@ public interface ICreateTsukibetsuSuiihyoMapper {
      * @return List<GennendoDate>
      */
     List<GennendoDate> get減免部分のデータの取得(CreateTsukibetsuSuiihyoMyBatisParameter parameter);
-
-    /**
-     * 介護情報一時テーブルcreate処理です。
-     *
-     * @return int
-     */
-    int createTmpKayigoJyoho_Ichi();
-
-    /**
-     * 介護情報一時テーブルinsert処理です。
-     *
-     * @param entity 現年度データのEntityクラス
-     * @return int
-     */
-    int insertTmpKayigoJyoho_Ichi(GennendoDate entity);
 
     /**
      * 4月の人数金額の取得処理です。
@@ -286,21 +248,6 @@ public interface ICreateTsukibetsuSuiihyoMapper {
     List<NinsuKinkaku> get減免部分の人数と金額(CreateTsukibetsuSuiihyoMyBatisParameter parameter);
 
     /**
-     * 減免情報一時テーブルcreate処理です。
-     *
-     * @return int
-     */
-    int createTmpGemmenJyoho_Ichi();
-
-    /**
-     * 減免情報一時テーブルinsert処理です。
-     *
-     * @param entity 減免情報のEntityクラス
-     * @return int
-     */
-    int insertTmpGemmenJyoho_Ichi(GemmenJyoho entity);
-
-    /**
      * 減免部分合計の人数と金額の取得処理です。
      *
      * @param parameter 別推移表作成のMyBatis用パラメータクラス
@@ -323,21 +270,6 @@ public interface ICreateTsukibetsuSuiihyoMapper {
     List<GemmenJyoho> get該当段階の過年度の人数と金額合計();
 
     /**
-     * 項目小計一時テーブルcreate処理です。
-     *
-     * @return int
-     */
-    int createTmpKoumokuSyoukeyi_Ichi();
-
-    /**
-     * 項目小計一時テーブルinsert処理です。
-     *
-     * @param koumokuSyoukeyi 項目小計のEntityクラス
-     * @return int
-     */
-    int insertTmpKoumokuSyoukeyi_Ichi(KoumokuSyoukeyi koumokuSyoukeyi);
-
-    /**
      * 項目小計一時テーブルデータの取得処理です。
      *
      * @return List<KoumokuSyoukeyi>
@@ -352,21 +284,6 @@ public interface ICreateTsukibetsuSuiihyoMapper {
     List<KoumokuSyoukeyi> get項目小計一時テーブル合計データの取得();
 
     /**
-     * 項目合計一時テーブルcreate処理です。
-     *
-     * @return int
-     */
-    int createTmpKoumokuGoukey_Ichi();
-
-    /**
-     * 項目合計一時テーブルinsert処理です。
-     *
-     * @param gokeiChi 合計値Entityクラス
-     * @return int
-     */
-    int insertTmpKoumokuGoukey_Ichi(GokeiChi gokeiChi);
-
-    /**
      * 項目合計一時テーブルデータの取得処理です。
      *
      * @return List<KoumokuGoukey>
@@ -379,19 +296,4 @@ public interface ICreateTsukibetsuSuiihyoMapper {
      * @return KoumokuGoukey 合計部分合計値Entityクラス
      */
     KoumokuGoukey get項目合計一時テーブル合計データの取得();
-
-    /**
-     * 合計部分項目一時テーブルcreate処理です。
-     *
-     * @return int
-     */
-    int createTmpGokeyBubunKoumoku_Ichi();
-
-    /**
-     * 合計部分項目一時テーブルinsert処理です。
-     *
-     * @param koumokuGoukey 合計部分合計値Entityクラス
-     * @return int
-     */
-    int insertTmpGokeyBubunKoumoku_Ichi(KoumokuGoukey koumokuGoukey);
 }
