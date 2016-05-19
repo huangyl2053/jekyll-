@@ -10,7 +10,14 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.Characteristic
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）TokubetsuChoshuKaishiEditor
@@ -35,7 +42,10 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
     private final RString 特別徴収開始通知書 = new RString("特別徴収開始通知書（本算定）発行一覧表");
     private final RString 定値_10月 = new RString("10月");
     private final RString 定値_12月 = new RString("12月");
+    private final RString 定値_18 = new RString("18");
     private final RString 定値_2月 = new RString("2月");
+    private final RString 定値_作成 = new RString("作成");
+    private final RString 本徴収額 = new RString("本徴収額");
 
     /**
      * インスタンスを生成します。
@@ -74,7 +84,12 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
      * @param source TokubetsuChoshuKaishiSource
      */
     private void makeNonyuTsuchIchiranItemList(TokubetsuChoshuKaishiSource source) {
-        source.printTimeStamp = 帳票作成日時;
+        RDate date = new RDate(帳票作成日時.toString());
+        RTime time = RDate.getNowTime();
+        RString timeFormat = time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        source.printTimeStamp = new RString(date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()
+                + RString.HALF_SPACE + timeFormat + RString.HALF_SPACE + 定値_作成);
         source.title = 特別徴収開始通知書;
         source.hokenshaNo = 市町村コード;
         source.hokenshaName = 市町村名;
@@ -108,11 +123,11 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
      * @param source TokubetsuChoshuKaishiSource
      */
     private void listlowers(TokubetsuChoshuKaishiSource source) {
-        source.titleChoshugaku = new RString("本徴収額");
+        source.titleChoshugaku = 本徴収額;
         if ((num + 1) % SIZE != 0) {
             source.listUpper_1 = new RString(Integer.valueOf((num + 1) % SIZE).toString());
         } else {
-            source.listUpper_1 = new RString("18");
+            source.listUpper_1 = 定値_18;
         }
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
             source.listUpper_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
