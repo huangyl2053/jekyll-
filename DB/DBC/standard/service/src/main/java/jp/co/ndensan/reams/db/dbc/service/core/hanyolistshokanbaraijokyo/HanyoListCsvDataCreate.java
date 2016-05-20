@@ -425,12 +425,12 @@ public class HanyoListCsvDataCreate {
             csvEntity.set支払開始日(dataToRString(entity.get支給申請Entity().getShiharaiKaishiYMD(), parameter));
             csvEntity.set支払終了日(dataToRString(entity.get支給申請Entity().getShiharaiShuryoYMD(), parameter));
             FlexibleDate 支払開始日 = entity.get支給申請Entity().getShiharaiKaishiYMD();
-            FlexibleDate 支払終了日 = entity.get支給申請Entity().getShiharaiKaishiYMD();
-            if (支払開始日 != null) {
+            FlexibleDate 支払終了日 = entity.get支給申請Entity().getShiharaiShuryoYMD();
+            if (支払開始日 != null && !支払開始日.isEmpty()) {
                 DayOfWeek 支払開始曜日 = 支払開始日.getDayOfWeek();
                 csvEntity.set支払開始曜日(支払開始曜日 != null ? new RString(支払開始曜日.toString()) : RString.EMPTY);
             }
-            if (entity.get支給申請Entity().getShiharaiShuryoYMD() != null) {
+            if (支払終了日 != null && !支払終了日.isEmpty()) {
                 DayOfWeek 支払終了曜日 = 支払終了日.getDayOfWeek();
                 csvEntity.set支払終了曜日(支払終了曜日 != null ? new RString(支払終了曜日.toString()) : RString.EMPTY);
             }
