@@ -43,22 +43,31 @@ module DBZ {
 
                 public InputMode() {
                     this.controls.ddlTodokledeDaikoKubun().readOnly = false;
+                    this.controls.btnSetaiIchiran().disabled = false;
+                    this.controls.btnAtenaKensaku().disabled = false;
                     this.controls.btnZenkaiFukusha().disabled = false;
+                    this.controls.txtJigyoshaCode().readOnly = false;
+                    this.controls.btnJigyoshaGuide().disabled = false;
                     this.controls.txtShimei().readOnly = false;
                     this.controls.txtKanaShimei().readOnly = false;
                     this.controls.txtHonninKankeisei().readOnly = false;
                     this.controls.ccdZenkokuJushoInput().State().入力();
                     this.controls.ccdChoikiInput().State().入力();
-                    this.controls.txtYubinNo().readOnly = true;
+                    this.controls.txtYubinNo().readOnly = false;
                     this.controls.txtTelNo().readOnly = false;
                 }
 
                 public ShokaiMode() {
                     this.controls.ddlTodokledeDaikoKubun().readOnly = true;
+                    this.controls.btnSetaiIchiran().disabled = true;
+                    this.controls.btnAtenaKensaku().disabled = true;
                     this.controls.btnZenkaiFukusha().disabled = true;
+                    this.controls.txtJigyoshaCode().readOnly = true;
+                    this.controls.btnJigyoshaGuide().disabled = true;
                     this.controls.txtShimei().readOnly = true;
                     this.controls.txtKanaShimei().readOnly = true;
                     this.controls.txtHonninKankeisei().readOnly = true;
+                    this.controls.radKannaiKangai().disabled = true;
                     this.controls.ccdZenkokuJushoInput().State().照会();
                     this.controls.ccdChoikiInput().State().照会();
                     this.controls.txtYubinNo().readOnly = true;
@@ -97,12 +106,37 @@ module DBZ {
                 }
                 
                 public AtenaMode(): void {
-
-
+                    this.controls.ddlTodokledeDaikoKubun().readOnly = true;
+                    this.controls.btnSetaiIchiran().disabled = true;
+                    this.controls.btnAtenaKensaku().disabled = true;
+                    this.controls.btnZenkaiFukusha().disabled = true;
+                    this.controls.txtJigyoshaCode().readOnly = true;
+                    this.controls.btnJigyoshaGuide().disabled = true;
+                    this.controls.txtShimei().readOnly = true;
+                    this.controls.txtKanaShimei().readOnly = true;
+                    this.controls.txtHonninKankeisei().readOnly = true;
+                    this.controls.radKannaiKangai().disabled = true;
+                    this.controls.ccdZenkokuJushoInput().State().照会();
+                    this.controls.ccdChoikiInput().State().照会();
+                    this.controls.txtYubinNo().readOnly = true;
+                    this.controls.txtTelNo().readOnly = true;
                 }
 
                 public AtenaNonMode(): void {
-                
+                    this.controls.ddlTodokledeDaikoKubun().readOnly = true;
+                    this.controls.btnSetaiIchiran().disabled = true;
+                    this.controls.btnAtenaKensaku().disabled = true;
+                    this.controls.btnZenkaiFukusha().disabled = true;
+                    this.controls.txtJigyoshaCode().readOnly = true;
+                    this.controls.btnJigyoshaGuide().disabled = true;
+                    this.controls.txtShimei().readOnly = true;
+                    this.controls.txtKanaShimei().readOnly = true;
+                    this.controls.txtHonninKankeisei().readOnly = true;
+                    this.controls.radKannaiKangai().disabled = true;
+                    this.controls.ccdZenkokuJushoInput().State().照会();
+                    this.controls.ccdChoikiInput().State().照会();
+                    this.controls.txtYubinNo().readOnly = true;
+                    this.controls.txtTelNo().readOnly = true;
 
                 }
 
