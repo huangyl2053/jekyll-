@@ -126,6 +126,9 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
     private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac 軽減率Dac;
     private final DbT4012HyojunFutangakuGemmenDac 標準負担額減免Dac;
     private static final RString テーブル区分 = new RString("3");
+    private static final RString テーブル区分_6 = new RString("6");
+    private static final RString テーブル区分_7 = new RString("7");
+    private static final RString テーブル区分_8 = new RString("8");
     private static final int テーブル区分3 = 3;
     private static final int テーブル区分4 = 4;
     private static final int テーブル区分5 = 5;
@@ -1056,54 +1059,59 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
 
     private void 決定情報登録更新1(SyokanbaraihiShikyuShinseiKetteParameter parameter,
             SyokanbaraihiShikyuShinseiKetteEntity 決定情報一覧) {
-        if (サービス年月_200904.isBeforeOrEquals(parameter.getサービス提供年月())) {
-            List<DbT3047ShokanServicePlan200904Entity> dbt3047List
-                    = 償還払請求サービス計画200904Dac.select証明書削除(parameter.get被保険者番号(),
-                            parameter.getサービス提供年月(), parameter.get整理番号(), null, null, null);
-            if (dbt3047List != null && !dbt3047List.isEmpty()) {
-                for (DbT3047ShokanServicePlan200904Entity entity : dbt3047List) {
-                    entity.setShikyuKubunCode(parameter.get支給区分());
-                    entity.setZougenTen(parameter.get増減単位());
-                    entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    entity.setZougenRiyu(parameter.get増減理由等());
-                    entity.setFushikyuRiyu(parameter.get不支給理由等1());
-                    entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求サービス計画200904Dac.save(entity);
-                }
+
+        if (!テーブル区分_6.equals(決定情報一覧.getテーブル区分()) && !テーブル区分_7.equals(決定情報一覧.getテーブル区分())
+                && !テーブル区分_8.equals(決定情報一覧.getテーブル区分())) {
+            return;
+        }
+        if (サービス年月_200904.isBeforeOrEquals(parameter.getサービス提供年月())
+                && テーブル区分_6.equals(決定情報一覧.getテーブル区分())) {
+            DbT3047ShokanServicePlan200904Entity dbT3047entity
+                    = 償還払請求サービス計画200904Dac.selectByKey(parameter.get被保険者番号(),
+                            parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                            決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+            if (dbT3047entity != null) {
+                dbT3047entity.setShikyuKubunCode(parameter.get支給区分());
+                dbT3047entity.setZougenTen(parameter.get増減単位());
+                dbT3047entity.setSagakuKingaku(決定情報一覧.get差額金額());
+                dbT3047entity.setZougenRiyu(parameter.get増減理由等());
+                dbT3047entity.setFushikyuRiyu(parameter.get不支給理由等1());
+                dbT3047entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
+                dbT3047entity.setState(EntityDataState.Modified);
+                償還払請求サービス計画200904Dac.save(dbT3047entity);
             }
         } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月3))
-                && new FlexibleYearMonth(サービス年月1).isBeforeOrEquals(parameter.getサービス提供年月())) {
-            List<DbT3046ShokanServicePlan200604Entity> dbt3046List
-                    = 償還払請求サービス計画200604Dac.select証明書削除(parameter.get被保険者番号(),
-                            parameter.getサービス提供年月(), parameter.get整理番号(), null, null, null);
-            if (dbt3046List != null && !dbt3046List.isEmpty()) {
-                for (DbT3046ShokanServicePlan200604Entity entity : dbt3046List) {
-                    entity.setShikyuKubunCode(parameter.get支給区分());
-                    entity.setZougenTen(parameter.get増減単位());
-                    entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    entity.setZougenRiyu(parameter.get増減理由等());
-                    entity.setFushikyuRiyu(parameter.get不支給理由等1());
-                    entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求サービス計画200604Dac.save(entity);
-                }
+                && new FlexibleYearMonth(サービス年月1).isBeforeOrEquals(parameter.getサービス提供年月())
+                && テーブル区分_7.equals(決定情報一覧.getテーブル区分())) {
+            DbT3046ShokanServicePlan200604Entity dbT3046entity
+                    = 償還払請求サービス計画200604Dac.selectByKey(parameter.get被保険者番号(),
+                            parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                            決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+            if (dbT3046entity != null) {
+                dbT3046entity.setShikyuKubunCode(parameter.get支給区分());
+                dbT3046entity.setZougenTen(parameter.get増減単位());
+                dbT3046entity.setSagakuKingaku(決定情報一覧.get差額金額());
+                dbT3046entity.setZougenRiyu(parameter.get増減理由等());
+                dbT3046entity.setFushikyuRiyu(parameter.get不支給理由等1());
+                dbT3046entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
+                dbT3046entity.setState(EntityDataState.Modified);
+                償還払請求サービス計画200604Dac.save(dbT3046entity);
             }
-        } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月4))) {
-            List<DbT3045ShokanServicePlan200004Entity> dbt3045List
-                    = 償還払請求サービス計画200004Dac.select証明書削除(parameter.get被保険者番号(),
-                            parameter.getサービス提供年月(), parameter.get整理番号(), null, null, null);
-            if (dbt3045List != null && !dbt3045List.isEmpty()) {
-                for (DbT3045ShokanServicePlan200004Entity entity : dbt3045List) {
-                    entity.setShikyuKubunCode(parameter.get支給区分());
-                    entity.setZougenTen(parameter.get増減単位());
-                    entity.setSagakuKingaku(決定情報一覧.get差額金額());
-                    entity.setZougenRiyu(parameter.get増減理由等());
-                    entity.setFushikyuRiyu(parameter.get不支給理由等1());
-                    entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求サービス計画200004Dac.save(entity);
-                }
+        } else if (parameter.getサービス提供年月().isBeforeOrEquals(new FlexibleYearMonth(サービス年月4))
+                && テーブル区分_8.equals(決定情報一覧.getテーブル区分())) {
+            DbT3045ShokanServicePlan200004Entity dbT3045entity
+                    = 償還払請求サービス計画200004Dac.selectByKey(parameter.get被保険者番号(),
+                            parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
+                            決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
+            if (dbT3045entity != null) {
+                dbT3045entity.setShikyuKubunCode(parameter.get支給区分());
+                dbT3045entity.setZougenTen(parameter.get増減単位());
+                dbT3045entity.setSagakuKingaku(決定情報一覧.get差額金額());
+                dbT3045entity.setZougenRiyu(parameter.get増減理由等());
+                dbT3045entity.setFushikyuRiyu(parameter.get不支給理由等1());
+                dbT3045entity.setKounyuKaishuRireki(parameter.get不支給理由等2());
+                dbT3045entity.setState(EntityDataState.Modified);
+                償還払請求サービス計画200004Dac.save(dbT3045entity);
             }
         }
     }
