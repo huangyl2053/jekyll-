@@ -21,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBB-9999-012 cuilin
  */
-public class FukinitsuNokiKanri extends ParentModelBase<FukinitsuNokiKanriIdentifier, DbT2016FukinitsuNokiKanriEntity, FukinitsuNokiKanri> implements Serializable {
+public class FukinitsuNokiKanri extends ParentModelBase<FukinitsuNokiKanriIdentifier, DbT2016FukinitsuNokiKanriEntity, FukinitsuNokiKanri>
+        implements Serializable {
 
     private final DbT2016FukinitsuNokiKanriEntity entity;
     private final FukinitsuNokiKanriIdentifier id;
