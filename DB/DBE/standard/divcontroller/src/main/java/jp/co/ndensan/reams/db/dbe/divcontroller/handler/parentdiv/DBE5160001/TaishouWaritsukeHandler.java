@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.konicho.taishouwaritsuke.TaishouW
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
@@ -50,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 介護認定審査会対象者割付クラスです。
@@ -125,7 +125,7 @@ public class TaishouWaritsukeHandler {
      */
     public void 候補者一覧検索() {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
-        boolean is一次判定後 = 一次判定後.equals(BusinessConfig.get(DbeConfigKey.マスキングチェックタイミング, SubGyomuCode.DBE認定支援));
+        boolean is一次判定後 = 一次判定後.equals(DbBusinessConifg.get(DbeConfigKey.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         KohoshaIchiranMapperParameter parameter = KohoshaIchiranMapperParameter.createKohoshaIchiranMapperParameter(
                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), is一次判定後);
         List<KohoshaIchiran> ichiranList = finder.get候補者一覧(parameter);
@@ -181,7 +181,7 @@ public class TaishouWaritsukeHandler {
     public void 審査会順序を振りなおす() {
         div.getDgTaishoshaIchiran().init();
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
-        RString カスタムコンフィグの審査会順序 = BusinessConfig.get(DbeConfigKey.審査会順序, SubGyomuCode.DBE認定支援);
+        RString カスタムコンフィグの審査会順序 = DbBusinessConifg.get(DbeConfigKey.審査会順序, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         TaishouIchiranMapperParameter parameter;
         if (RString.isNullOrEmpty(カスタムコンフィグの審査会順序)) {
             parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
@@ -243,7 +243,7 @@ public class TaishouWaritsukeHandler {
     public boolean isオブザーバーチェックOK(dgWaritsukeKohoshaIchiran_Row row) {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         NinteiShinseiJoho shinseiJoho = finder.get申請書情報by申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        boolean is機関まで = BusinessConfig.get(DbeConfigKey.オブザーバーチェック, SubGyomuCode.DBE認定支援).equals(機関まで);
+        boolean is機関まで = DbBusinessConifg.get(DbeConfigKey.オブザーバーチェック, RDate.getNowDate(), SubGyomuCode.DBE認定支援).equals(機関まで);
         if (shinseiJoho != null) {
             CountShinsakaiWariateIinJohoMapperParameter param = CountShinsakaiWariateIinJohoMapperParameter.createCountKohoshaIchiranMapperParameter(
                     is機関まで,
