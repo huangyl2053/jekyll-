@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -62,7 +63,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -523,46 +523,46 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
         Tsuki 月別 = 期月.get月();
         RDate now = RDate.getNowDate();
         if (Tsuki._4月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置1, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._5月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置2, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._6月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置3, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._7月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置4, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._8月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置5, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._9月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置6, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._10月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置7, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._11月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置8, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._12月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置9, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._1月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置10, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._2月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置11, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._3月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置12, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki.翌年度4月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置13, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki.翌年度5月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_コンビニカット印字位置14, now, SubGyomuCode.DBB介護賦課);
         }
         return RString.EMPTY;
@@ -572,46 +572,46 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
         Tsuki 月別 = 期月.get月();
         RDate now = RDate.getNowDate();
         if (Tsuki._4月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置1, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._5月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置2, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._6月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置3, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._7月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置4, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._8月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置5, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._9月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置6, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._10月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置7, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._11月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置8, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._12月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置9, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._1月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置10, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._2月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置11, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._3月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置12, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki.翌年度4月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置13, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki.翌年度5月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_ブック開始位置14, now, SubGyomuCode.DBB介護賦課);
         }
         return RString.EMPTY;
@@ -722,46 +722,46 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko {
         Tsuki 月別 = 期月.get月();
         RDate now = RDate.getNowDate();
         if (Tsuki._4月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置1, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._5月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置2, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._6月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置3, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._7月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置4, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._8月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置5, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._9月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置6, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._10月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置7, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._11月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置8, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._12月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置9, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._1月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置10, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._2月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置11, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki._3月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置12, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki.翌年度4月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置13, now, SubGyomuCode.DBB介護賦課);
         } else if (Tsuki.翌年度5月.equals(月別)) {
-            return BusinessConfig.get(
+            return DbBusinessConifg.get(
                     ConfigNameDBB.普徴期情報_納付書の印字位置14, now, SubGyomuCode.DBB介護賦課);
         }
         return RString.EMPTY;
