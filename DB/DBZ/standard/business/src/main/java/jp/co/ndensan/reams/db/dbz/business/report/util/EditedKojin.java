@@ -67,6 +67,19 @@ public class EditedKojin {
     }
 
     /**
+     * 生年月日For帳票を返します。
+     *
+     * @return 生年月日For帳票
+     */
+    public RString get生年月日For帳票() {
+        if (個人.is日本人()) {
+            return 個人.get生年月日().toFlexibleDate().wareki().toDateString();
+        } else {
+            return 個人.get生年月日().toFlexibleDate().seireki().toDateString();
+        }
+    }
+
+    /**
      * 生年月日ForCsvを返します。
      *
      * @return 生年月日ForCsv
