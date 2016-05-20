@@ -1534,6 +1534,8 @@ public final class FutsuChoshuTotalHandler {
                 FuchoZanteiKeisanHoho.前年度_確定年額乗３分の４_今納期数.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_段階補正.getコード(),
                 FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_段階補正.get略称()));
+        賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_前年度所得_今年度賦課期日__今納期数_段階補正.getコード(),
+                FuchoZanteiKeisanHoho.今年度_基準年額_前年度所得_今年度賦課期日__今納期数_段階補正.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_一律.getコード(),
                 FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_一律.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.千代田区独自算定.getコード(),
