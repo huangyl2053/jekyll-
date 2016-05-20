@@ -83,7 +83,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_BtnYitiranSyuturyoku(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
             getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -223,10 +223,20 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                     getValidationHandler().主治医意見書作成依頼一覧選択行の完了処理事前チェック(validationMessages);
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
-                if ((row.getIkenshoIraiDay().getValue() == null && row.getIkenshoIraiKigen().getValue() == null)
-                        || row.getIkenshoIraiIkenshoShutsuryokuDay().getValue() == null
-                        || row.getIkenshoIraiIraishoHakkoDay().getValue() == null) {
-                    getValidationHandler().主治医意見書作成依頼一覧選択行の完了必須チェック(validationMessages);
+                if (row.getIkenshoIraiDay().getValue() == null) {
+                    getValidationHandler().依頼日が未確定の完了必須チェック(validationMessages);
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
+                if (row.getIkenshoIraiKigen().getValue() == null) {
+                    getValidationHandler().依頼期限が未確定の完了必須チェック(validationMessages);
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
+                if (row.getIkenshoIraiIkenshoShutsuryokuDay().getValue() == null) {
+                    getValidationHandler().意見書書発行日が未確定の完了必須チェック(validationMessages);
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
+                if (row.getIkenshoIraiIraishoHakkoDay().getValue() == null) {
+                    getValidationHandler().意見書出力年月日が未確定の完了必須チェック(validationMessages);
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
             }
