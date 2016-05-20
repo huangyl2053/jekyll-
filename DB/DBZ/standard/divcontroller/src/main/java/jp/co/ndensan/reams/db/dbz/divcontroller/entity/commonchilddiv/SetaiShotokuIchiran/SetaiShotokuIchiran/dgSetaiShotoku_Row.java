@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShot
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 11 18:22:54 JST 2015 
+ * Fri May 20 13:47:04 CST 2016 
  */
 
 
@@ -20,8 +20,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 
 public class dgSetaiShotoku_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
+    private RString hdnHihoNo;
+    private RString hdnShikibetsuCode;
     private RString txtKetsugo01;
     private RString txtShimei;
     private Button btnMemo;
@@ -42,6 +44,8 @@ public class dgSetaiShotoku_Row extends DataRow {
 
     public dgSetaiShotoku_Row() {
         super();
+        this.hdnHihoNo = RString.EMPTY;
+        this.hdnShikibetsuCode = RString.EMPTY;
         this.txtKetsugo01 = RString.EMPTY;
         this.txtShimei = RString.EMPTY;
         this.btnMemo = new Button();
@@ -59,6 +63,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.txtJukiIdoYMD = RString.EMPTY;
         this.txtJuteiYMD = RString.EMPTY;
         this.txtJukiIdoJiyu = RString.EMPTY;
+        this.setOriginalData("hdnHihoNo", hdnHihoNo);
+        this.setOriginalData("hdnShikibetsuCode", hdnShikibetsuCode);
         this.setOriginalData("txtKetsugo01", txtKetsugo01);
         this.setOriginalData("txtShimei", txtShimei);
         this.setOriginalData("btnMemo", btnMemo);
@@ -78,8 +84,10 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("txtJukiIdoJiyu", txtJukiIdoJiyu);
     }
 
-    public dgSetaiShotoku_Row(RString txtKetsugo01, RString txtShimei, Button btnMemo, RString txtKetsugo02, RString txtShubetsu, RString txtIdoYMD, RString txtJuminzeiGenmenMae, RString txtJuminzeiGenmenAto, RString txtJuminzei, RString txtGekihenTaishosha, RString txtKetsugo03, RString txtKetsugo04, RString txtTorokuGyomu, RString txtDougetsuService, RString txtJukiIdoYMD, RString txtJuteiYMD, RString txtJukiIdoJiyu) {
+    public dgSetaiShotoku_Row(RString hdnHihoNo, RString hdnShikibetsuCode, RString txtKetsugo01, RString txtShimei, Button btnMemo, RString txtKetsugo02, RString txtShubetsu, RString txtIdoYMD, RString txtJuminzeiGenmenMae, RString txtJuminzeiGenmenAto, RString txtJuminzei, RString txtGekihenTaishosha, RString txtKetsugo03, RString txtKetsugo04, RString txtTorokuGyomu, RString txtDougetsuService, RString txtJukiIdoYMD, RString txtJuteiYMD, RString txtJukiIdoJiyu) {
         super();
+        this.setOriginalData("hdnHihoNo", hdnHihoNo);
+        this.setOriginalData("hdnShikibetsuCode", hdnShikibetsuCode);
         this.setOriginalData("txtKetsugo01", txtKetsugo01);
         this.setOriginalData("txtShimei", txtShimei);
         this.setOriginalData("btnMemo", btnMemo);
@@ -97,6 +105,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("txtJukiIdoYMD", txtJukiIdoYMD);
         this.setOriginalData("txtJuteiYMD", txtJuteiYMD);
         this.setOriginalData("txtJukiIdoJiyu", txtJukiIdoJiyu);
+        this.hdnHihoNo = hdnHihoNo;
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
         this.txtKetsugo01 = txtKetsugo01;
         this.txtShimei = txtShimei;
         this.btnMemo = btnMemo;
@@ -114,6 +124,14 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.txtJukiIdoYMD = txtJukiIdoYMD;
         this.txtJuteiYMD = txtJuteiYMD;
         this.txtJukiIdoJiyu = txtJukiIdoJiyu;
+    }
+
+    public RString getHdnHihoNo() {
+        return hdnHihoNo;
+    }
+
+    public RString getHdnShikibetsuCode() {
+        return hdnShikibetsuCode;
     }
 
     public RString getTxtKetsugo01() {
@@ -182,6 +200,16 @@ public class dgSetaiShotoku_Row extends DataRow {
 
     public RString getTxtJukiIdoJiyu() {
         return txtJukiIdoJiyu;
+    }
+
+    public void setHdnHihoNo(RString hdnHihoNo) {
+        this.setOriginalData("hdnHihoNo", hdnHihoNo);
+        this.hdnHihoNo = hdnHihoNo;
+    }
+
+    public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
+        this.setOriginalData("hdnShikibetsuCode", hdnShikibetsuCode);
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
     }
 
     public void setTxtKetsugo01(RString txtKetsugo01) {

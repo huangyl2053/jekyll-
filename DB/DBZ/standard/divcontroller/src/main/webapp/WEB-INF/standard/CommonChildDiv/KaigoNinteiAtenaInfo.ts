@@ -63,36 +63,6 @@ module DBZ {
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
-                public NormalAddMode(): void {
-                    this.controls.txtShimei().readOnly = true;
-                    this.controls.txtBirthYMD().readOnly = true;
-                    this.controls.txtNenrei().readOnly = true;
-                    this.controls.txtSeibetsu().readOnly = true;
-                    this.controls.txtYubinNo().readOnly = true;
-                    this.controls.txtJusho().readOnly = true;
-                    this.controls.txtTelNo().readOnly = true;
-                }
-
-                public NormalUpdateMode(): void {
-                    this.controls.txtShimei().readOnly = true;
-                    this.controls.txtBirthYMD().readOnly = true;
-                    this.controls.txtNenrei().readOnly = true;
-                    this.controls.txtSeibetsu().readOnly = true;
-                    this.controls.txtYubinNo().readOnly = true;
-                    this.controls.txtJusho().readOnly = true;
-                    this.controls.txtTelNo().readOnly = true;
-                }
-
-                public SeihoAddMode(): void {
-                    this.controls.txtShimei().readOnly = true;
-                    this.controls.txtBirthYMD().readOnly = true;
-                    this.controls.txtNenrei().readOnly = true;
-                    this.controls.txtSeibetsu().readOnly = true;
-                    this.controls.txtYubinNo().readOnly = true;
-                    this.controls.txtJusho().readOnly = true;
-                    this.controls.txtTelNo().readOnly = true;
-                }
-
                 public SeihoUpdateMode(): void {
                     this.controls.txtShimei().readOnly = false;
                     this.controls.txtBirthYMD().readOnly = false;

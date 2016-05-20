@@ -88,7 +88,9 @@ public class HokenryoDankaiSettings {
     @Transaction
     public HokenryoDankaiList get保険料段階ListIn(FlexibleYear 賦課年度) {
         List<HokenryoDankai> serviceShuruiList = new ArrayList<>();
-        List<DbT2013HokenryoDankaiEntity> 賦課年度リスタ = 賦課年度dac.selectDankaiByFukaNendo(賦課年度);
+        IDbT2013HokenryoDankaiMapper dbT2013HokenryoDankaiMapper = mapperProvider.create(IDbT2013HokenryoDankaiMapper.class);
+        List<DbT2013HokenryoDankaiEntity> 賦課年度リスタ = dbT2013HokenryoDankaiMapper.getHokenryoDankaiKubun(賦課年度.toDateString());
+        
         if (賦課年度リスタ == null || 賦課年度リスタ.isEmpty()) {
             return new HokenryoDankaiList(serviceShuruiList);
         }
