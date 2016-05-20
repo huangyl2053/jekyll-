@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!-- @reamsid_L DBC-0980-550 zhangrui -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper">
     <select id="selectbyKeyUndeleted" resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenInterfaceUpdateMybaticParameter" fetchSize="500">
         select * from rgdb."DbT3104KokuhorenInterfaceKanri" As DbT3104 
         where DbT3104."shoriYM" = #{shoriYM} and DbT3104."kokanShikibetsuNo" = #{kokanShikibetsuNo}
     </select>
-    
     
     <!--テーブルDbT3104KokuhorenInterfaceKanriの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity" autoMapping="true">
@@ -55,7 +50,7 @@ and open the template in the editor.
     <insert id="create処理結果リスト一時TBL">
         CREATE TEMP TABLE "DbWT0002KokuhorenTorikomiError"
         (
-        "errorKubunCode" varchar(1),
+        "errorKubunCode" varchar(20),
         "shoHokanehshaNo" rgdb."DbUDD015ShoKisaiHokenshaNo",
         "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
         "key1" varchar(20),
@@ -74,7 +69,7 @@ and open the template in the editor.
         INSERT INTO "DbWT0002KokuhorenTorikomiError" 
         VALUES 
         (
-        #{エラー区分, typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+        #{エラー区分},
         #{証記載保険者番号},
         #{被保険者番号},
         #{キー1},
@@ -114,7 +109,7 @@ and open the template in the editor.
     </select>
     
     <resultMap id="resultMap_ShoriKekkaList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity" autoMapping="true">
-        <result property="エラー区分" column="errorKubunCode" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+        <result property="エラー区分" column="errorKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="shoHokanehshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="キー1" column="key1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

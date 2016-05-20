@@ -2,13 +2,15 @@ package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.entity.csv.SyoriKekkaListItijiCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -38,7 +41,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
 
     private final MapperProvider mapperProvider;
 
-    private static final RString 国保連情報取込エラーリストタイプ = new RString("国保連情報取込エラーリストタイプ");
+    private static final RString MSG_国保連情報取込エラーリストタイプ = new RString("国保連情報取込エラーリストタイプ");
+    private static final RString MSG_国保連情報取込エラー区分 = new RString("国保連情報取込エラー区分");
     private static final RString 出力ファイル名 = new RString("DBC900001_KokuhorenDataTorikomiKekkaIchiran.csv");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -48,11 +52,6 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
     private static final RString HEADER_被保険者番号 = new RString("被保険者番号");
     private static final RString HEADER_被保険者カナ氏名 = new RString("被保険者カナ氏名");
     private static final RString HEADER_被保険者氏名 = new RString("被保険者氏名");
-    private static final RString HEADER_キー1 = new RString("キー1");
-    private static final RString HEADER_キー2 = new RString("キー2");
-    private static final RString HEADER_キー3 = new RString("キー3");
-    private static final RString HEADER_キー4 = new RString("キー4");
-    private static final RString HEADER_キー5 = new RString("キー5");
     private static final RString HEADER_エラー内容 = new RString("エラー内容");
     private static final RString HEADER_備考 = new RString("備考");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900001"));
@@ -69,13 +68,24 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
     }
 
     /**
+     * 国保連情報取込共通処理（処理結果リスト作成）のコンストラクタ。
+     *
+     * @return KokuhorenKyoutsuuSyoriKekkaListSakuseiManager
+     */
+    public static KokuhorenKyoutsuuSyoriKekkaListSakuseiManager createInstance() {
+        return InstanceProvider.create(KokuhorenKyoutsuuSyoriKekkaListSakuseiManager.class);
+    }
+
+    /**
      * 国保連情報取込共通処理（処理結果リスト作成）
      *
      * @param エラーリストタイプ KokuhorenJoho_TorikomiErrorListType
      */
     public void create国保連情報データ取込処理結果リスト(KokuhorenJoho_TorikomiErrorListType エラーリストタイプ) {
-        requireNonNull(国保連情報取込エラーリストタイプ, UrSystemErrorMessages.値がnull.
-                getReplacedMessage(国保連情報取込エラーリストタイプ.toString()));
+        if (null == エラーリストタイプ) {
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
+                    MSG_国保連情報取込エラーリストタイプ.toString()));
+        }
         RString key1 = エラーリストタイプ.getキー1();
         RString key2 = エラーリストタイプ.getキー2();
         RString key3 = エラーリストタイプ.getキー3();
@@ -90,19 +100,19 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
         headerList.add(HEADER_被保険者カナ氏名);
         headerList.add(HEADER_被保険者氏名);
         if (!RString.isNullOrEmpty(key1)) {
-            headerList.add(HEADER_キー1);
+            headerList.add(key1);
         }
         if (!RString.isNullOrEmpty(key2)) {
-            headerList.add(HEADER_キー2);
+            headerList.add(key2);
         }
         if (!RString.isNullOrEmpty(key3)) {
-            headerList.add(HEADER_キー3);
+            headerList.add(key3);
         }
         if (!RString.isNullOrEmpty(key4)) {
-            headerList.add(HEADER_キー4);
+            headerList.add(key4);
         }
         if (!RString.isNullOrEmpty(key5)) {
-            headerList.add(HEADER_キー5);
+            headerList.add(key5);
         }
         headerList.add(HEADER_エラー内容);
         headerList.add(HEADER_備考);
@@ -121,7 +131,6 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                     RString 時刻 = currentTime.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
                     entity.set作成日時(new RString(年月日.concat(時刻.toString()).toString()));
                 }
-                entity.set処理名(data.getエラー区分().get処理名());
                 entity.set証記載保険者番号(data.get証記載保険者番号().getColumnValue());
                 entity.set被保険者番号(data.get被保険者番号().getColumnValue());
                 entity.set被保険者カナ氏名(data.get被保険者カナ氏名());
@@ -131,8 +140,16 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                 entity.setキー3(data.getキー3());
                 entity.setキー4(data.getキー4());
                 entity.setキー5(data.getキー5());
-                entity.setエラー内容(data.getエラー区分().getエラーメッセージ());
                 entity.set備考(data.get備考());
+                try {
+                    KokuhorenJoho_TorikomiErrorKubun エラー区分 = KokuhorenJoho_TorikomiErrorKubun.toValue(data.getエラー区分());
+                    entity.set処理名(エラー区分.get処理名());
+                    entity.setエラー内容(エラー区分.getエラーメッセージ());
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(KokuhorenKyoutsuuSyoriKekkaListSakuseiManager.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(
+                            MSG_国保連情報取込エラー区分.toString()));
+                }
                 csvEntityList.add(entity);
             }
 
@@ -149,7 +166,12 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                     .build();
             for (SyoriKekkaListItijiCSVEntity data : csvEntityList) {
                 List<RString> rList = new ArrayList<>();
-                rList.add(data.getエラー内容());
+                rList.add(getNotNull(data.get作成日時()));
+                rList.add(getNotNull(data.get処理名()));
+                rList.add(getNotNull(data.get証記載保険者番号()));
+                rList.add(getNotNull(data.get被保険者番号()));
+                rList.add(getNotNull(data.get被保険者カナ氏名()));
+                rList.add(getNotNull(data.get被保険者氏名()));
                 if (!RString.isNullOrEmpty(key1)) {
                     rList.add(getNotNull(data.getキー1()));
                 }
@@ -165,17 +187,10 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                 if (!RString.isNullOrEmpty(key5)) {
                     rList.add(getNotNull(data.getキー5()));
                 }
-                rList.add(getNotNull(data.get作成日時()));
+                rList.add(data.getエラー内容());
                 rList.add(getNotNull(data.get備考()));
-                rList.add(getNotNull(data.get処理名()));
-                rList.add(getNotNull(data.get被保険者カナ氏名()));
-                rList.add(getNotNull(data.get被保険者氏名()));
-                rList.add(getNotNull(data.get被保険者番号()));
-                rList.add(getNotNull(data.get証記載保険者番号()));
-
                 csvListWriter.writeLine(rList);
             }
-
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
             csvListWriter.close();
         }
