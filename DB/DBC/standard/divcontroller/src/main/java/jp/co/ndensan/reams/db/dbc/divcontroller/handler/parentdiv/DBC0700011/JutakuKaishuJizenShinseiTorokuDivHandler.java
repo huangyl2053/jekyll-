@@ -1000,12 +1000,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             List<ShokanJutakuKaishu> kaishuList = new ArrayList<>();
             List<dgGaisyuList_Row> gridList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                     .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
-            int index = 1;
+            int maxIndex = 最大連番を取得する(gridList);
             for (dgGaisyuList_Row tmpRow : gridList) {
                 if (行状態_更新.equals(tmpRow.getTxtJyotai()) || 行状態_削除.equals(tmpRow.getTxtJyotai())) {
                     ShokanJutakuKaishu oldData = 住宅改修レコードの取得(tmpRow);
                     ShokanJutakuKaishuBuilder shokanJutakuKaishuBuilder = oldData.createBuilderForEdit();
                     shokanJutakuKaishuBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
+                    shokanJutakuKaishuBuilder.set住宅改修内容(tmpRow.getTxtKaishuNaiyo());
                     shokanJutakuKaishuBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
                     shokanJutakuKaishuBuilder.set住宅改修着工年月日(new FlexibleDate(new RDate(tmpRow
                             .getTxtChakkoYoteibi().toString()).toDateString()));
@@ -1022,11 +1023,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     oldData = shokanJutakuKaishuBuilder.build();
                     kaishuList.add(oldData);
                 } else if (行状態_登録.equals(tmpRow.getTxtJyotai())) {
+                    maxIndex++;
                     ShokanJutakuKaishu addData = new ShokanJutakuKaishu(hihokenshaNo, サービス提供年月, 整理番号,
                             new JigyoshaNo(固定値_事業者番号), 様式番号, 固定値_明細番号,
-                            new RString(String.format(連番フォーマット.toString(), index++)));
+                            new RString(String.format(連番フォーマット.toString(), maxIndex)));
                     ShokanJutakuKaishuBuilder addDataBuilder = addData.createBuilderForEdit();
                     addDataBuilder.set住宅改修事業者名(tmpRow.getTxtJigyosha());
+                    addDataBuilder.set住宅改修内容(tmpRow.getTxtKaishuNaiyo());
                     addDataBuilder.set住宅改修住宅住所(tmpRow.getTxtJutakuAddress());
                     addDataBuilder.set住宅改修着工年月日(new FlexibleDate(new RDate(tmpRow.getTxtChakkoYoteibi()
                             .toString()).toDateString()));
@@ -1044,6 +1047,17 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             }
             return JutakuKaishuJizenShinsei.createInstance().updDBDate(updateData, kaishuList, 画面モード);
         }
+    }
+
+    private int 最大連番を取得する(List<dgGaisyuList_Row> gridList) {
+        int rtnIndex = 0;
+        for (dgGaisyuList_Row tmpRow : gridList) {
+            if (tmpRow.getTxtRenban() != null && !tmpRow.getTxtRenban().isEmpty()
+                    && Integer.parseInt(tmpRow.getTxtRenban().toString()) > rtnIndex) {
+                rtnIndex = Integer.parseInt(tmpRow.getTxtRenban().toString());
+            }
+        }
+        return rtnIndex;
     }
 
     private ShokanJutakuKaishu 住宅改修レコードの取得(dgGaisyuList_Row data) {

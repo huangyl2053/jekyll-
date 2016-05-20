@@ -547,7 +547,7 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
      */
     public ShokanJutakuKaishuJizenShinseiBuilder set住宅改修申請取消事由コード(RString 住宅改修申請取消事由コード) {
         requireNonNull(住宅改修申請取消事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修申請取消事由コード"));
-        entity.setKaishushinseiKubun(住宅改修申請取消事由コード);
+        entity.setKaishuShinseiTorikeshijiyuCode(住宅改修申請取消事由コード);
         return this;
     }
 
