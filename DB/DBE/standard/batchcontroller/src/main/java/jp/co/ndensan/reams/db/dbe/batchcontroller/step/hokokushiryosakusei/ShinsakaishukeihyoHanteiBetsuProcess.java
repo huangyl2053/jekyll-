@@ -101,12 +101,13 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<Sins
         set前回要介護4(審査会集計表);
         set前回要介護5(審査会集計表);
         set計();
+        ShinsakaishukeihyoReport report = new ShinsakaishukeihyoReport(shinsakaishukeihyo);
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
-        ShinsakaishukeihyoReport report = new ShinsakaishukeihyoReport(shinsakaishukeihyo);
-        report.writeBy(reportSourceWriter);
+        batchWriter.close();
     }
 
     private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
@@ -305,7 +306,7 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<Sins
     }
 
     private void set前回二次判定要介護4_計() {
-        shinsakaishukeihyo.set前回二次判定要介護3_計(new RString(
+        shinsakaishukeihyo.set前回二次判定要介護4_計(new RString(
                 Integer.parseInt(shinsakaishukeihyo.get前回二次判定要介護4_二次判定非該当().toString())
                 + Integer.parseInt(shinsakaishukeihyo.get前回二次判定要介護4_二次判定要支援1().toString())
                 + Integer.parseInt(shinsakaishukeihyo.get前回二次判定要介護4_二次判定要支援2().toString())
