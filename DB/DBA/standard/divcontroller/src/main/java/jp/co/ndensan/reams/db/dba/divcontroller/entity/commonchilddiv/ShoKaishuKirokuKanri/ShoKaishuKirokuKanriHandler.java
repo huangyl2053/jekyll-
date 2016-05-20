@@ -120,7 +120,7 @@ public class ShoKaishuKirokuKanriHandler {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
                     dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
-                    if (jigyoshaInput.get交付年月日() != null & jigyoshaInput.get交付年月日().isValid()) {
+                    if (jigyoshaInput.get交付年月日() != null && jigyoshaInput.get交付年月日().isValid()) {
                         dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
                     } else {
                         dgJigyoshaItiran.setKoufuDate(RString.EMPTY);
