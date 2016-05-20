@@ -545,40 +545,40 @@ FROM
          ON 今回主治医."shichosonCode" = 受給者台帳."shichosonCode"
          AND 今回主治医."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"
          AND 今回主治医."shujiiCode" = 今回申請."shujiiCode"
-  LEFT JOIN rgdb."DbT4116IchijiHanteiKekkaJoho" AS 今回一次判定結果 ON 今回一次判定結果."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
+  LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS 今回一次判定結果 ON 今回一次判定結果."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
   LEFT JOIN (
     SELECT
-      dbT4301."shinseishoKanriNo" ,dbT4301."ikenshoIraiRirekiNo", dbT4301."ikenshoSakuseiIraiYMD"
+      dbT5301."shinseishoKanriNo" ,dbT5301."ikenshoIraiRirekiNo", dbT5301."ikenshoSakuseiIraiYMD"
     FROM
-      rgdb."DbT4301ShujiiIkenshoIraiJoho" AS dbT4301 
+      rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301 
     WHERE
       NOT EXISTS (
         SELECT
           1 
         FROM
-          rgdb."DbT4301ShujiiIkenshoIraiJoho" AS dbT4301_2 
+          rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301_2 
         WHERE
-          dbT4301."shinseishoKanriNo" = dbT4301_2."shinseishoKanriNo" AND dbT4301."ikenshoIraiRirekiNo" <![CDATA[<]]> dbT4301_2."ikenshoIraiRirekiNo"
+          dbT5301."shinseishoKanriNo" = dbT5301_2."shinseishoKanriNo" AND dbT5301."ikenshoIraiRirekiNo" <![CDATA[<]]> dbT5301_2."ikenshoIraiRirekiNo"
           )
       ) AS 今回意見書作成依頼 ON 今回意見書作成依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
-      LEFT JOIN rgdb."DbT4302ShujiiIkenshoJoho" AS 今回意見書情報 ON 今回意見書情報."shinseishoKanriNo" = 今回意見書作成依頼."shinseishoKanriNo" 
+      LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS 今回意見書情報 ON 今回意見書情報."shinseishoKanriNo" = 今回意見書作成依頼."shinseishoKanriNo" 
       AND 今回意見書情報."ikenshoIraiRirekiNo" = 今回意見書作成依頼."ikenshoIraiRirekiNo"
       LEFT JOIN ( 
         SELECT
-          dbT4201."shinseishoKanriNo", dbT4201."ninteichosaIraiRirekiNo", dbT4201."ninteichosaIraiYMD"
+          dbT5201."shinseishoKanriNo", dbT5201."ninteichosaIraiRirekiNo", dbT5201."ninteichosaIraiYMD"
         FROM
-          rgdb."DbT4201NinteichosaIraiJoho" AS dbT4201 
+          rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201 
         WHERE
           NOT EXISTS ( 
             SELECT
               1 
             FROM
-              rgdb."DbT4201NinteichosaIraiJoho" AS dbT4201_2 
+              rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201_2 
             WHERE
-              dbT4201."shinseishoKanriNo" = dbT4201_2."shinseishoKanriNo" AND dbT4201."ninteichosaIraiRirekiNo" <![CDATA[<]]> dbT4201_2."ninteichosaIraiRirekiNo"
+              dbT5201."shinseishoKanriNo" = dbT5201_2."shinseishoKanriNo" AND dbT5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> dbT5201_2."ninteichosaIraiRirekiNo"
               )
           ) AS 今回調査依頼 ON 今回調査依頼."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
-          LEFT JOIN rgdb."DbT4203NinteichosahyoKihonChosa" AS 今回調査結果_基本
+          LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS 今回調査結果_基本
          ON 今回調査結果_基本."shinseishoKanriNo" = 今回調査依頼."shinseishoKanriNo"
          AND 今回調査結果_基本."ninteichosaRirekiNo" = 今回調査依頼."ninteichosaIraiRirekiNo" 
           LEFT JOIN ( 
@@ -587,21 +587,21 @@ FROM
             FROM
               ( 
                 SELECT
-                    dbT4202."shinseishoKanriNo",
-                    dbT4202."ninteichosaRirekiNo",
-                    dbT4202."ninteichosaJuryoYMD",
+                    dbT5202."shinseishoKanriNo",
+                    dbT5202."ninteichosaRirekiNo",
+                    dbT5202."ninteichosaJuryoYMD",
                     ROW_NUMBER() OVER (PARTITION BY "shinseishoKanriNo", "ninteichosaRirekiNo")
                    AS 概況調査_番号 
                 FROM
-                  rgdb."DbT4202NinteichosahyoGaikyoChosa" AS dbT4202
-              ) AS dbT4202_2
+                  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS dbT5202
+              ) AS dbT5202_2
             WHERE
-              dbT4202_2.概況調査_番号 = 1
+              dbT5202_2.概況調査_番号 = 1
           ) AS 今回調査結果_概況
          ON 今回調査結果_概況."shinseishoKanriNo" = 今回調査依頼."shinseishoKanriNo"
          AND 今回調査結果_概況."ninteichosaRirekiNo" = 今回調査依頼."ninteichosaIraiRirekiNo" 
           LEFT JOIN rgdb."DbT4123NinteiKeikakuJoho" AS 今回計画情報 ON 今回計画情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
-          LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" AS 今回結果情報 ON 今回結果情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
+          LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS 今回結果情報 ON 今回結果情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
           LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS 今回完了情報 ON 今回完了情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
           LEFT JOIN ( 
             SELECT
@@ -748,7 +748,7 @@ FROM
 WHERE
     1  =  1
 
-    <if test="Sakujyodatacyusyutsu==null">
+    <if test="isSakujyodatacyusyutsu==false">
         AND (受給者台帳."logicalDeletedFlag" = false)
     </if>
 
@@ -759,7 +759,7 @@ WHERE
         ))
     </if>
 
-    <if test="Shinseikeshidetacyusyutsu==null">
+    <if test="isShinseikeshidetacyusyutsu==false">
         AND    受給者台帳."dataKubun" NOT IN ('41','42','43','44','45','49')
     </if>
 
