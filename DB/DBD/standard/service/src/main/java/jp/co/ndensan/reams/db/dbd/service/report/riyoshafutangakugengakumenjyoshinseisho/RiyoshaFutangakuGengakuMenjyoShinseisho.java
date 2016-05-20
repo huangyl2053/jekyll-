@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyos
 import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
@@ -214,8 +215,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
         IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(entityList.get(0));
         DbT4001JukyushaDaichoEntity 受給者台帳情報 = 受給者台帳Dac.select受給者台帳情報(shikibetsuTaisho.get現全国地方公共団体コード(),
                 被保険者番号,
-                // TODO 内部QA：693 (「DBD介護受給Enum．有効無効区分．有効」不明)
-                Code.EMPTY);
+                new Code(YukoMukoKubun.有効.getコード()));
         if (受給者台帳情報.getKyuSochishaFlag()) {
             return new RString("（特別療養老人ホームの要介護旧措置入所者に関する認定申請）");
         }

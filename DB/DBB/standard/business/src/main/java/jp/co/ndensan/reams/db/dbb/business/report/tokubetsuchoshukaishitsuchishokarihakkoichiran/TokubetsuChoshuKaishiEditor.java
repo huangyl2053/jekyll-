@@ -139,7 +139,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
                 source.listLower_2 = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
-                source.listLower_3 = new RString(編集後本算定通知書共通情報.get編集後個人().get名称().toString());
+                source.listLower_3 = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
             }
             if (編集後本算定通知書共通情報.get更正後() != null) {
                 source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();

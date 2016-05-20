@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.shakaifukushihojinfutan;
+package jp.co.ndensan.reams.db.dbd.service.report.shakaifukushihojinfutan;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem;
-import jp.co.ndensan.reams.db.dba.business.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoProperty;
-import jp.co.ndensan.reams.db.dba.business.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource;
-import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
+import jp.co.ndensan.reams.db.dbd.business.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoProperty;
+import jp.co.ndensan.reams.db.dbd.business.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
+import jp.co.ndensan.reams.db.dbd.entity.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -60,6 +62,32 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
     private static final RString 生年月日不詳区分_FALG = new RString("0");
+    private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac dac;
+
+    /**
+     * コンストラクタです。
+     */
+    ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho() {
+        this.dac = InstanceProvider.create(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac.class);
+    }
+
+    /**
+     * 単体テスト用のコンストラクタです。
+     *
+     * @param dac DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac
+     */
+    ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac dac) {
+        this.dac = dac;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho}のインスタンス
+     */
+    public static ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho createInstance() {
+        return InstanceProvider.create(ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho.class);
+    }
 
     /**
      * 社会福祉法人等利用者負担軽減対象確認申請書帳票作成します。
@@ -165,6 +193,17 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
             yubinNoSb.append(郵便番号);
         }
         return yubinNoSb.toRString();
+    }
+
+    private RString get確認番号(HihokenshaKihonBusiness business) {
+        RString 確認番号 = RString.EMPTY;
+        if (business != null) {
+            List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> entityList = dac.get確認番号(business.get保険者番号(), business.get被保険者番号());
+            if (!entityList.isEmpty()) {
+                確認番号 = entityList.get(0).getKakuninNo();
+            }
+        }
+        return 確認番号;
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
