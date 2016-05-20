@@ -215,7 +215,7 @@ public class JigyoHokokuGeppoHoseiHako {
             出力市町村情報.add(new ShichosonCodeNameResult(
                     kyuShichosonCode.get旧市町村コード(),
                     kyuShichosonCode.get旧市町村名称(),
-                    new ShoKisaiHokenshaNo(kyuShichosonCode.get旧保険者番号().toString()),
+                    new ShoKisaiHokenshaNo(kyuShichosonCode.get旧保険者番号().getColumnValue()),
                     TokeiTaishoKubun.旧市町村分.getコード()));
         }
 
