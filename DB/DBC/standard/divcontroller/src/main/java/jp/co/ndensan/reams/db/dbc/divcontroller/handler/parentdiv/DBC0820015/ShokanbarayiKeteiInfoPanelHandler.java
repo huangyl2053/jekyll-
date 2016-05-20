@@ -354,7 +354,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             SyokanbaraihiShikyuShinseiKetteEntity entity = SyokanbaraihiShikyuShinseiKetteEntity.createSelectByKeyParam(
                     new JigyoshaNo(row.getJigyoshaNo()),
                     row.getYoshikiNo(),
-                    row.getJigyoshaNo(),
+                    row.getYoshikiNo(),
                     row.getMeisaiNo(),
                     row.getRenban(),
                     row.getSagakuKingaku().getValue().intValue(),
