@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranPrintService {
 
-    private final static RString 漢字_作成 = new RString("作成");
+    private static final RString 漢字_作成 = new RString("作成");
 
     /**
      * 保険料納入通知書（本算定現年度異動）発行一覧表 printメソッド

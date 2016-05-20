@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendoikkatsuhakko.HonSanteiIdoKanendoIkkatsuHakkoBatchParameter;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBBPR45002_保険料納入通知書（本算定過年度異動）発行一覧表 入力Entityです。
@@ -21,23 +20,42 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity {
 
-    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
-    private final HonSanteiIdoKanendoIkkatsuHakkoBatchParameter バッチパラメータ;
-    private final YMDHMS 調定日時;
+    private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
+    private final RString 調定年度;
+    private final RString 出力期;
+    private final RString 帳票作成日時;
+    private final RString 出力順ID;
+    private final RString 地方公共団体コード;
+    private final RString 市町村名;
+    private final int 連番;
+    private final List<RString> 納入対象賦課年度List;
 
     /**
      * コンストラクタです。
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsuのListです
-     * @param バッチパラメータ HonSanteiIdoKanendoIkkatsuHakkoBatchParameter
-     * @param 調定日時 YMDHMS
+     * @param 調定年度 RString
+     * @param 出力期 RString
+     * @param 帳票作成日時 RString
+     * @param 出力順ID RString
+     * @param 地方公共団体コード RString
+     * @param 市町村名 RString
+     * @param 連番 int
+     * @param 納入対象賦課年度List List<RString>
      */
     public HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity(
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
-            HonSanteiIdoKanendoIkkatsuHakkoBatchParameter バッチパラメータ, YMDHMS 調定日時) {
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            RString 調定年度, RString 出力期, RString 帳票作成日時,
+            RString 出力順ID, RString 地方公共団体コード, RString 市町村名, int 連番, List<RString> 納入対象賦課年度List) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
-        this.バッチパラメータ = バッチパラメータ;
-        this.調定日時 = 調定日時;
+        this.調定年度 = 調定年度;
+        this.出力期 = 出力期;
+        this.帳票作成日時 = 帳票作成日時;
+        this.出力順ID = 出力順ID;
+        this.地方公共団体コード = 地方公共団体コード;
+        this.市町村名 = 市町村名;
+        this.連番 = 連番;
+        this.納入対象賦課年度List = 納入対象賦課年度List;
     }
 
 }
