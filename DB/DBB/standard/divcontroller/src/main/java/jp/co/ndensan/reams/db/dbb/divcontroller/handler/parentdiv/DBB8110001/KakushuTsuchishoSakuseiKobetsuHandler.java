@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8110001;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ShutsuryokuHos
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.ShutsuryokuKeishiki;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.KakushuTsuchishoSakuseiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.dgChohyoSentaku_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoaderFinder;
@@ -37,10 +35,12 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -114,6 +113,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 期14 = new RString("14期");
     private static final RString 発行する = new RString("btnReportPublish");
     private static final RString ISPUBLISH = new RString("isPublish");
+    private static final RString 調定年度_KEY = new RString("調定年度");
+    private static final RString 賦課年度_KEY = new RString("賦課年度");
+    private static final RString 変更通知書帳票_略称 = new RString("変更通知書帳票略称");
+    private static final RString 減免通知書帳票_略称 = new RString("減免通知書帳票略称");
+    private static final RString 徴収猶予通知書帳票_略称 = new RString("徴収猶予通知書帳票略称");
 
     /**
      * コンストラクタです。
@@ -125,12 +129,12 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     }
 
     /**
-     * 調定パネル設定のメソッドます。
+     * 賦課の情報Map設定のメソッドます。
      *
      * @param 賦課の情報List List
+     * @return map 賦課の情報Map
      */
-    public void set調定パネル(ArrayList<FukaJoho> 賦課の情報List) {
-
+    public Map<RString, FukaJoho> put賦課の情報(ArrayList<FukaJoho> 賦課の情報List) {
         Collections.sort(賦課の情報List, new Comparator<FukaJoho>() {
             @Override
             public int compare(FukaJoho o1, FukaJoho o2) {
@@ -149,8 +153,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 map.put(new RString(調定日時.toString()), info);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.賦課の情報リスト, (Serializable) map);
+        return map;
+    }
 
+    /**
+     * 調定日時List設定のメソッドます。
+     *
+     * @param 賦課の情報List List
+     * @return 調定日時List List
+     */
+    public ArrayList<YMDHMS> put調定日時(ArrayList<FukaJoho> 賦課の情報List) {
         ArrayList<YMDHMS> 調定日時List = new ArrayList<>();
         for (FukaJoho 賦課の情報 : 賦課の情報List) {
             調定日時List.add(賦課の情報.get調定日時());
@@ -161,11 +173,20 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 return o2.compareTo(o1);
             }
         });
-        ViewStateHolder.put(ViewStateKeys.調定日時リスト, 調定日時List);
+        return 調定日時List;
+    }
+
+    /**
+     * 調定パネル設定のメソッドます。
+     *
+     * @param 賦課の情報List List
+     * @param 調定日時List List
+     * @return 年度Map Map
+     */
+    public Map<RString, FlexibleYear> set調定パネル(ArrayList<FukaJoho> 賦課の情報List, ArrayList<YMDHMS> 調定日時List) {
+
         FukaJoho 賦課の情報 = 賦課の情報List.get(0);
         set調定パネルの共通エリア(賦課の情報);
-        ViewStateHolder.put(ViewStateKeys.調定年度, 賦課の情報.get調定年度());
-        ViewStateHolder.put(ViewStateKeys.賦課年度, 賦課の情報.get賦課年度());
         FlexibleYear 賦課年度 = 賦課の情報.get賦課年度();
         FlexibleYear 調定年度 = 賦課の情報.get調定年度();
         if (賦課の情報List.size() == 1) {
@@ -235,10 +256,28 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 set普通徴収(更正前賦課の情報, 更正後賦課の情報, kanendoKi.get期月リスト());
             }
         }
-        List<RString> 発行する帳票リスト = KakushuTsuchishoSakusei.createInstance().get帳票リスト(賦課の情報);
-        if (発行する帳票リスト != null && !発行する帳票リスト.isEmpty()) {
-            set通知書作成パネル(発行する帳票リスト);
-        }
+        Map<RString, FlexibleYear> 年度Map = new HashMap<>();
+        年度Map.put(調定年度_KEY, 調定年度);
+        年度Map.put(賦課年度_KEY, 賦課年度);
+        return 年度Map;
+    }
+
+    /**
+     * 発行する帳票リスト取得する。
+     *
+     * @param 賦課の情報 FukaJoho
+     * @param 調定年度 FlexibleYear
+     * @param 賦課年度 FlexibleYear
+     * @param 発行する帳票リスト List<RString>
+     * @param 調定日時List List<YMDHMS>
+     * @return 帳票略称Map
+     */
+    public Map<RString, RString> put発行する帳票リスト(FukaJoho 賦課の情報,
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            List<RString> 発行する帳票リスト,
+            List<YMDHMS> 調定日時List) {
+        return set通知書作成パネル(発行する帳票リスト, 調定年度, 賦課年度, 調定日時List);
     }
 
     private void set調定パネルの共通エリア(FukaJoho 賦課の情報) {
@@ -1002,7 +1041,25 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
     }
 
-    private void set通知書作成パネル(List<RString> 発行する帳票リスト) {
+    /**
+     * 発行する帳票取得する。
+     *
+     * @param 発行する帳票リスト List<RString>
+     * @return 帳票略称Map
+     */
+    public Map<RString, RString> get発行する帳票(List<RString> 発行する帳票リスト) {
+        Map<RString, RString> map = new HashMap<>();
+        for (RString 帳票 : 発行する帳票リスト) {
+            RString 帳票略称 = TsuchiSho.valueOf(帳票.toString()).get略称();
+            map.put(帳票略称, 帳票);
+        }
+        return map;
+    }
+
+    private Map<RString, RString> set通知書作成パネル(List<RString> 発行する帳票リスト,
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            List<YMDHMS> 調定日時List) {
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         dgChohyoSentaku_Row row;
         boolean 特徴開始通知書Flag = false;
@@ -1016,7 +1073,10 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         boolean 調定事由Flag = false;
         List<RString> 帳票リスト = new ArrayList<>();
         int publishNumber = 0;
-        Map<RString, RString> map = new HashMap<>();
+
+        RString 変更通知書帳票略称 = RString.EMPTY;
+        RString 減免通知書帳票略称 = RString.EMPTY;
+        RString 徴収猶予通知書帳票略称 = RString.EMPTY;
         for (RString 帳票 : 発行する帳票リスト) {
             row = new dgChohyoSentaku_Row();
             RString 帳票略称 = TsuchiSho.valueOf(帳票.toString()).get略称();
@@ -1026,16 +1086,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 決定通知書Flag = true;
             } else if (変更通知書.equals(帳票略称) || 変更兼特別徴収中止通知書.equals(帳票略称)) {
                 変更通知書Flag = true;
-                ViewStateHolder.put(ViewStateKeys.変更通知書帳票略称, 帳票略称);
+                変更通知書帳票略称 = 帳票略称;
             } else if (納入通知書.equals(帳票略称)) {
                 set納入通知書制御情報(帳票);
                 納入通知書Flag = true;
             } else if (減免決定通知書.equals(帳票略称) || 減免取消通知書.equals(帳票略称)) {
                 減免通知書Flag = true;
-                ViewStateHolder.put(ViewStateKeys.減免通知書帳票略称, 帳票略称);
+                減免通知書帳票略称 = 帳票略称;
             } else if (猶予決定通知書.equals(帳票略称) || 猶予取消通知書.equals(帳票略称)) {
                 徴収猶予通知書Flag = true;
-                ViewStateHolder.put(ViewStateKeys.徴収猶予通知書帳票略称, 帳票略称);
+                徴収猶予通知書帳票略称 = 帳票略称;
             } else if (郵便振替納付書.equals(帳票略称)) {
                 郵振納付書Flag = true;
             } else if (賦課台帳.equals(帳票略称)) {
@@ -1050,10 +1110,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 帳票リスト.add(帳票略称);
                 publishNumber = publishNumber + NUM_1;
             }
-            map.put(帳票略称, 帳票);
         }
-        ViewStateHolder.put(ViewStateKeys.発行する帳票リスト, (Serializable) map);
-        List<YMDHMS> 調定日時List = ViewStateHolder.get(ViewStateKeys.調定日時リスト, List.class);
+        Map<RString, RString> 帳票略称Map = new HashMap<>();
+        帳票略称Map.put(変更通知書帳票_略称, 変更通知書帳票略称);
+        帳票略称Map.put(減免通知書帳票_略称, 減免通知書帳票略称);
+        帳票略称Map.put(徴収猶予通知書帳票_略称, 徴収猶予通知書帳票略称);
         RString 調定日時 = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().getSelectedKey();
         List<dgChohyoSentaku_Row> dgRowList = new ArrayList<>();
         dgRowList.addAll(rowList);
@@ -1070,7 +1131,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         div.setHdnPublishFlag(new RString(String.valueOf(publishNumber)));
         div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().setDataSource(dgRowList);
         set通知書(特徴開始通知書Flag, 決定通知書Flag, 変更通知書Flag, 納入通知書Flag, 減免通知書Flag, 徴収猶予通知書Flag,
-                郵振納付書Flag, 賦課台帳Flag, 調定事由Flag);
+                郵振納付書Flag, 賦課台帳Flag, 調定事由Flag, 調定年度, 賦課年度);
+        return 帳票略称Map;
     }
 
     private boolean is調定事由(RString 帳票) {
@@ -1088,7 +1150,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             boolean 徴収猶予通知書Flag,
             boolean 郵振納付書Flag,
             boolean 賦課台帳Flag,
-            boolean 調定事由Flag) {
+            boolean 調定事由Flag,
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度) {
         List<RString> key = new ArrayList<>();
         key.add(ISPUBLISH);
         if (!特徴開始通知書Flag) {
@@ -1122,7 +1186,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(true);
             div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(false);
         } else {
-            set納入通知書(key);
+            set納入通知書(key, 調定年度, 賦課年度);
         }
         if (!減免通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(true);
@@ -1206,7 +1270,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
     }
 
-    private void set納入通知書(List<RString> key) {
+    private void set納入通知書(List<RString> key, FlexibleYear 調定年度, FlexibleYear 賦課年度) {
 
         KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
         FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
@@ -1218,8 +1282,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setDataSource(keyValueDataSource);
         div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().getDdlNotsuShuturyokuKi().setSelectedKey(期月.get期());
-        FlexibleYear 調定年度 = ViewStateHolder.get(ViewStateKeys.調定年度, FlexibleYear.class);
-        FlexibleYear 賦課年度 = ViewStateHolder.get(ViewStateKeys.賦課年度, FlexibleYear.class);
         if (賦課年度.isBefore(調定年度)) {
             Noki 過年度納期 = FukaNokiResearcher.createInstance().get過年度納期(期月.get期AsInt());
             set発行日(過年度納期.get通知書発行日());
@@ -1243,10 +1305,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
      * 調定事由印字方法を変更のメソッドます。
      *
      * @param key 調定事由の印字方法
+     * @param map 賦課の情報
      */
-    public void onChange調定事由印字方法(RString key) {
+    public void onChange調定事由印字方法(RString key, Map<RString, FukaJoho> map) {
+        if (key.isEmpty()) {
+            key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu()
+                    .getRadKobetsuHakkoChoteiJiyu().getSelectedKey();
+        }
         if (KEY0.equals(key)) {
-            Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
             FukaJoho info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                     .getDdlInjiKouseiAto().getSelectedKey());
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(true);
@@ -1283,9 +1349,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
 
     /**
      * 更正前選択を変更のメソッドます。
+     *
+     * @param map 賦課の情報
      */
-    public void onChange更正前() {
-        Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
+    public void onChange更正前(Map<RString, FukaJoho> map) {
+
         FukaJoho 更正後Info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiAto().getSelectedKey());
         FukaJoho 更正前Info = map.get(div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
@@ -1308,10 +1376,13 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
 
     /**
      * 更正後選択を変更のメソッドます。
+     *
+     * @param map 賦課の情報
+     * @param 調定日時List List<YMDHMS>
+     * @return 更正後Info FukaJoho
      */
-    public void onChange更正後() {
-        Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
-        List<YMDHMS> 調定日時List = ViewStateHolder.get(ViewStateKeys.調定日時リスト, List.class);
+    public FukaJoho onChange更正後(Map<RString, FukaJoho> map, List<YMDHMS> 調定日時List) {
+
         RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiAto().getSelectedKey();
         List<YMDHMS> 更正後の調定日時 = new ArrayList<>();
@@ -1326,8 +1397,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             }
         }
         FukaJoho 更正後Info = map.get(更正後Key);
-        ViewStateHolder.put(ViewStateKeys.調定年度, 更正後Info.get調定年度());
-        ViewStateHolder.put(ViewStateKeys.賦課年度, 更正後Info.get賦課年度());
+        FlexibleYear 調定年度 = 更正後Info.get調定年度();
+        FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
         if (更正後の調定日時.size() == 1) {
             set調定パネルの共通エリア(更正後Info);
             List<KeyValueDataSource> 更正前DataSource = new ArrayList<>();
@@ -1337,8 +1408,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setDisabled(true);
             clear更正前賦課根拠();
             set更正後賦課根拠(更正後Info);
-            FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
-            FlexibleYear 調定年度 = 更正後Info.get調定年度();
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
                 set特別徴収(null, 更正後Info);
@@ -1370,8 +1439,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             clear更正後賦課根拠();
             set更正前賦課根拠(更正前Info);
             set更正後賦課根拠(更正後Info);
-            FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
-            FlexibleYear 調定年度 = 更正後Info.get調定年度();
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
                 set特別徴収(更正前Info, 更正後Info);
@@ -1381,26 +1448,24 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 set普通徴収(更正前Info, 更正後Info, kanendoKi.get期月リスト());
             }
         }
-        List<RString> 発行する帳票リスト = KakushuTsuchishoSakusei.createInstance().get帳票リスト(更正後Info);
-        if (発行する帳票リスト != null && !発行する帳票リスト.isEmpty()) {
-            set通知書作成パネル(発行する帳票リスト);
-        }
+        return 更正後Info;
     }
 
     /**
      * 発行処理のメソッドます。
      *
+     * @param map 賦課の情報
+     * @param 帳票Map 発行する帳票
      * @return SourceDataCollection
      */
-    public SourceDataCollection to発行処理() {
-        Map<RString, FukaJoho> map = ViewStateHolder.get(ViewStateKeys.賦課の情報リスト, Map.class);
+    public SourceDataCollection to発行処理(Map<RString, FukaJoho> map, Map<RString, RString> 帳票Map) {
+
         RString 更正前Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiMae().getSelectedKey();
         RString 更正後Key = div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku()
                 .getDdlInjiKouseiAto().getSelectedKey();
 
         KakushuTsuchishoParameter parameter = new KakushuTsuchishoParameter();
-        Map<RString, RString> 帳票Map = ViewStateHolder.get(ViewStateKeys.発行する帳票リスト, Map.class);
         List<RString> 発行する帳票List = new ArrayList<>();
         List<dgChohyoSentaku_Row> rowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
         for (dgChohyoSentaku_Row row : rowList) {
@@ -1691,144 +1756,160 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
 
     /**
      * 特徴開始通知書チェックのメソッドます。
+     *
+     * @param map 賦課の情報
      */
-    public void check特徴開始通知書() {
+    public void check特徴開始通知書(Map<RString, FukaJoho> map) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu()
                 .getChkPublishTokuKaishiTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(false);
-            set通知書(false, 特徴開始通知書);
+            set通知書(false, 特徴開始通知書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(true);
-            set通知書(true, 特徴開始通知書);
+            set通知書(true, 特徴開始通知書, map);
         }
     }
 
     /**
      * 決定通知書チェックのメソッドます。
+     *
+     * @param map 賦課の情報
      */
-    public void check決定通知書() {
+    public void check決定通知書(Map<RString, FukaJoho> map) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu()
                 .getChkPublishKetteiTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(false);
-            set通知書(false, 決定通知書);
+            set通知書(false, 決定通知書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(true);
-            set通知書(true, 決定通知書);
+            set通知書(true, 決定通知書, map);
         }
     }
 
     /**
      * 変更通知書チェックのメソッドます。
+     *
+     * @param map 賦課の情報
+     * @param 変更通知書略称 RString
      */
-    public void check変更通知書() {
+    public void check変更通知書(Map<RString, FukaJoho> map, RString 変更通知書略称) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu()
                 .getChkPublishHenkoTsuchiKobetsu().getSelectedKeys();
-        RString 変更通知書略称 = ViewStateHolder.get(ViewStateKeys.変更通知書帳票略称, RString.class);
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(false);
-            set通知書(false, 変更通知書略称);
+            set通知書(false, 変更通知書略称, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(true);
-            set通知書(true, 変更通知書略称);
+            set通知書(true, 変更通知書略称, map);
         }
     }
 
     /**
      * 納入通知書チェックのメソッドます。
+     *
+     * @param map 賦課の情報
      */
-    public void check納入通知書() {
+    public void check納入通知書(Map<RString, FukaJoho> map) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu()
                 .getChkPublishNotsuKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(false);
-            set通知書(false, 納入通知書);
+            set通知書(false, 納入通知書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(true);
-            set通知書(true, 納入通知書);
+            set通知書(true, 納入通知書, map);
         }
     }
 
     /**
      * 郵便納付書チェックのメソッドます。
+     *
+     * @param map 賦課の情報
      */
-    public void check郵便納付書() {
+    public void check郵便納付書(Map<RString, FukaJoho> map) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu()
                 .getChkPublishYufuriKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(false);
-            set通知書(false, 郵便振替納付書);
+            set通知書(false, 郵便振替納付書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(true);
-            set通知書(true, 郵便振替納付書);
+            set通知書(true, 郵便振替納付書, map);
         }
     }
 
     /**
      * 減免通知書チェックのメソッドます。
+     *
+     * @param map 賦課の情報
+     * @param 減免通知書略称 RString
      */
-    public void check減免通知書() {
+    public void check減免通知書(Map<RString, FukaJoho> map, RString 減免通知書略称) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu()
                 .getChkPublishGemmenTsuchiKobetsu().getSelectedKeys();
-        RString 減免通知書略称 = ViewStateHolder.get(ViewStateKeys.減免通知書帳票略称, RString.class);
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(false);
-            set通知書(false, 減免通知書略称);
+            set通知書(false, 減免通知書略称, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(true);
-            set通知書(true, 減免通知書略称);
+            set通知書(true, 減免通知書略称, map);
         }
     }
 
     /**
      * 徴収猶予通知書チェックのメソッドます。
+     *
+     * @param map 賦課の情報
+     * @param 徴収猶予通知書略称 RString
      */
-    public void check徴収猶予通知書() {
+    public void check徴収猶予通知書(Map<RString, FukaJoho> map, RString 徴収猶予通知書略称) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu()
                 .getChkPublishChoshuYuyoTsuchiKobetsu().getSelectedKeys();
-        RString 徴収猶予通知書略称 = ViewStateHolder.get(ViewStateKeys.徴収猶予通知書帳票略称, RString.class);
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(false);
-            set通知書(false, 徴収猶予通知書略称);
+            set通知書(false, 徴収猶予通知書略称, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(true);
-            set通知書(true, 徴収猶予通知書略称);
+            set通知書(true, 徴収猶予通知書略称, map);
         }
     }
 
     /**
      * 賦課台帳チェックのメソッドます。
+     *
+     * @param map 賦課の情報
      */
-    public void check賦課台帳() {
+    public void check賦課台帳(Map<RString, FukaJoho> map) {
         List<RString> publish = div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu()
                 .getChkPublishFukadaichoKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
             div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(false);
-            set通知書(false, 賦課台帳);
+            set通知書(false, 賦課台帳, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
             div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(true);
-            set通知書(true, 賦課台帳);
+            set通知書(true, 賦課台帳, map);
         }
     }
 
-    private void set通知書(boolean flag, RString 通知書) {
+    private void set通知書(boolean flag, RString 通知書, Map<RString, FukaJoho> map) {
         List<dgChohyoSentaku_Row> dgRowList = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getDataSource();
         List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
         rowList.addAll(dgRowList);
@@ -1860,8 +1941,19 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 && !div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().isIsOpen())) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(false);
         } else {
-            onChange調定事由印字方法(KEY0);
+            onChange調定事由印字方法(KEY0, map);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(true);
         }
+    }
+
+    /**
+     * ヘッダパネルのメソッドます。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param searchKey KaigoFukaKihonSearchKey
+     */
+    public void setヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey) {
+        div.getJuminFukaShokai().getCcdKaigoatena().onLoad(識別コード);
+        div.getJuminFukaShokai().getCcdFukaKihon().load(searchKey);
     }
 }

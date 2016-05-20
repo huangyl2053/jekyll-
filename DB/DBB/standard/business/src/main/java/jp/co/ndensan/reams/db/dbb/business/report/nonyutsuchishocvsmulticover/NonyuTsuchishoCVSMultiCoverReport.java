@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulticover;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiCoverSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -56,9 +56,9 @@ public class NonyuTsuchishoCVSMultiCoverReport extends Report<NonyuTsuchishoCVSM
             }
         }
         if (作成フラグ) {
-            INonyuTsuchishoCVSMultiCoverEditor coverEditor = new NonyuTsuchishoCVSMultiCoverEditor(item);
-            INonyuTsuchishoCVSMultiCoverBuilder builder = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
-            reportSourceWriter.writeLine(builder);
+//            INonyuTsuchishoCVSMultiCoverEditor coverEditor = new NonyuTsuchishoCVSMultiCoverEditor(item);
+//            INonyuTsuchishoCVSMultiCoverBuilder builder = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
+//            reportSourceWriter.writeLine(builder);
 
         }
     }

@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -191,7 +192,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         shoKyotsu.set通知書番号(賦課情報.get通知書番号());
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前 = get更正前(本算定通知書情報);
         shoKyotsu.set更正前(更正前);
-        EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection();
+        EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = get更正後(本算定通知書情報);
         shoKyotsu.set更正後(更正後);
         shoKyotsu.set減免額(賦課情報.get減免額());
         Decimal 確定保険料_年額 = 更正後.get確定保険料_年額();
@@ -299,7 +300,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection get更正前(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
         FukaJoho 更正前_賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
-        FukaJoho 更正後_賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前 = new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection();
         if (更正前_賦課情報.get算定年額保険料2() != null) {
             更正前.set保険料率(更正前_賦課情報.get算定年額保険料2());
@@ -345,10 +345,10 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 fillType(FillType.BLANK).toDateString());
         更正前.set生保開始日_西暦(更正前_賦課情報.get生保開始日().seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
-        更正前.set生保廃止日(更正後_賦課情報.get生保廃止日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+        更正前.set生保廃止日(更正前_賦課情報.get生保廃止日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
-        更正前.set生保廃止日_西暦(更正後_賦課情報.get生保廃止日().seireki().separator(Separator.SLASH).
+        更正前.set生保廃止日_西暦(更正前_賦課情報.get生保廃止日().seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
 
         更正前.set老齢開始日(更正前_賦課情報.get老年開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -370,7 +370,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前 = 本算定通知書情報.get対象者_追加含む_情報_更正前();
 
         if (対象者_追加含む_情報_更正前 != null && 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"),
+                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
             更正前.set特別徴収義務者(特別徴収義務者);
             更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
         }
@@ -378,7 +379,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         ChoshuHoho 徴収方法情報_更正前 = 本算定通知書情報.get徴収方法情報_更正前();
         RString 年金コード = 徴収方法情報_更正前.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), new Code(年金コード.substring(0, SIZE_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"), new Code(年金コード.substring(0, SIZE_3)));
             更正前.set特別徴収対象年金(特別徴収対象年金);
         }
         更正前.set特別徴収対象年金コード(年金コード);
@@ -391,6 +392,102 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             更正前.set徴収方法(new RString("特別徴収　普通徴収"));
         }
         return 更正前;
+    }
+
+    private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection get更正後(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
+        FukaJoho 更正後_賦課情報 = 本算定通知書情報.get賦課の情報_更正後().get賦課情報();
+        EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection();
+        if (更正後_賦課情報.get算定年額保険料2() != null) {
+            更正後.set保険料率(更正後_賦課情報.get算定年額保険料2());
+        } else {
+            更正後.set保険料率(更正後_賦課情報.get算定年額保険料1());
+        }
+        更正後.set減免前保険料_年額(更正後_賦課情報.get減免前介護保険料_年額());
+        更正後.set減免額(更正後_賦課情報.get減免額());
+        更正後.set確定保険料_年額(更正後_賦課情報.get確定介護保険料_年額());
+        if (!RString.isNullOrEmpty(更正後_賦課情報.get保険料算定段階2())) {
+            更正後.set保険料段階(edit段階(更正後_賦課情報.get保険料算定段階2()));
+        } else {
+            更正後.set保険料段階(edit段階(更正後_賦課情報.get保険料算定段階1()));
+        }
+        更正後.set保険料算定段階1(edit段階(更正後_賦課情報.get保険料算定段階1()));
+        更正後.set算定年額保険料1(更正後_賦課情報.get算定年額保険料1());
+        更正後.set月割開始年月1(更正後_賦課情報.get月割開始年月1().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set月割開始年月1_西暦(更正後_賦課情報.get月割開始年月1().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set月割終了年月1(更正後_賦課情報.get月割終了年月1().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set月割終了年月1_西暦(更正後_賦課情報.get月割終了年月1().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set保険料算定段階2(edit段階(更正後_賦課情報.get保険料算定段階2()));
+        更正後.set算定年額保険料2(更正後_賦課情報.get算定年額保険料2());
+        更正後.set月割開始年月2(更正後_賦課情報.get月割開始年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set月割開始年月2_西暦(更正後_賦課情報.get月割開始年月2().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set月割終了年月2(更正後_賦課情報.get月割終了年月2().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set月割終了年月2_西暦(更正後_賦課情報.get月割終了年月2().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        edit期間_自と期間_至(更正後, 更正後_賦課情報);
+        更正後.set市町村民税課税区分_本人(更正後_賦課情報.get課税区分());
+        更正後.set市町村民税課税区分_世帯(更正後_賦課情報.get世帯課税区分());
+        更正後.set合計所得金額(更正後_賦課情報.get合計所得金額());
+        更正後.set公的年金収入額(更正後_賦課情報.get公的年金収入額());
+        更正後.set生活保護扶助種類(更正後_賦課情報.get生活保護扶助種類());
+        更正後.set生保開始日(更正後_賦課情報.get生保開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set生保開始日_西暦(更正後_賦課情報.get生保開始日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set生保廃止日(更正後_賦課情報.get生保廃止日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set生保廃止日_西暦(更正後_賦課情報.get生保廃止日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+
+        更正後.set老齢開始日(更正後_賦課情報.get老年開始日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set老齢開始日_西暦(更正後_賦課情報.get老年開始日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set老齢廃止日(更正後_賦課情報.get老年廃止日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        更正後.set老齢廃止日_西暦(更正後_賦課情報.get老年廃止日().seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        List<CharacteristicsPhase> 特徴期別金額リスト = get特徴期別金額リスト(本算定通知書情報);
+        更正後.set特徴期別金額リスト(特徴期別金額リスト);
+        更正後.set特別徴収額合計(get特徴納付済額(本算定通知書情報.get賦課の情報_更正後().get賦課情報(), 1, SIZE_6));
+        List<UniversalPhase> 普徴期別金額リスト = get普徴期別金額リスト(本算定通知書情報);
+        更正後.set普徴期別金額リスト(普徴期別金額リスト);
+        更正後.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正後().get賦課情報(), 1, SIZE_14));
+        NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後 = 本算定通知書情報.get対象者_追加含む_情報_更正後();
+
+        if (対象者_追加含む_情報_更正後 != null && 対象者_追加含む_情報_更正後.getDT特別徴収義務者コード() != null) {
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"),
+                    対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value());
+            更正後.set特別徴収義務者(特別徴収義務者);
+            更正後.set特別徴収義務者コード(対象者_追加含む_情報_更正後.getDT特別徴収義務者コード().value().value());
+        }
+
+        ChoshuHoho 徴収方法情報_更正後 = 本算定通知書情報.get徴収方法情報_更正後();
+        RString 年金コード = 徴収方法情報_更正後.get本徴収_年金コード();
+        if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"), new Code(年金コード.substring(0, SIZE_3)));
+            更正後.set特別徴収対象年金(特別徴収対象年金);
+        }
+        更正後.set特別徴収対象年金コード(年金コード);
+        更正後.set口座区分(KozaKubun.toValue(更正後_賦課情報.get口座区分()));
+        if (特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
+            更正後.set徴収方法(new RString("普通徴収"));
+        } else if (!特徴期別金額リスト.isEmpty() && 普徴期別金額リスト.isEmpty()) {
+            更正後.set徴収方法(new RString("特別徴収"));
+        } else if (!特徴期別金額リスト.isEmpty() && !普徴期別金額リスト.isEmpty()) {
+            更正後.set徴収方法(new RString("特別徴収　普通徴収"));
+        }
+        return 更正後;
     }
 
     private void edit期間_自と期間_至(EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前, FukaJoho 更正前_賦課情報) {

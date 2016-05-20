@@ -4,6 +4,21 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_chkIkenshoSakuseiryoSeikyusho = function () {
+                return "onChange_chkIkenshoSakuseiryoSeikyusho";
+            };
+
+            Events.onChange_radJyushinKikan = function () {
+                return "onChange_radJyushinKikan";
+            };
+
+            Events.onChange_radTeishutsuKigen = function () {
+                return "onChange_radTeishutsuKigen";
+            };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
             return Events;
         })();
         ChosaIraishoAndChosahyoAndIkenshoPrint.Events = Events;

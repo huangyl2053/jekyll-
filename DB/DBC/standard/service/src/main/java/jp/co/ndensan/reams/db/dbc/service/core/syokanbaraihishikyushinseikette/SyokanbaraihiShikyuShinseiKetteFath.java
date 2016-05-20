@@ -195,7 +195,8 @@ public class SyokanbaraihiShikyuShinseiKetteFath {
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
 
         List<ShokanKihon> resultList = new ArrayList<>();
-        List<DbT3038ShokanKihonEntity> entityList = 償還払請求基本Dac.selectByKey(被保険者番号, サービス年月, 整理番号);
+        List<DbT3038ShokanKihonEntity> entityList
+                = 償還払請求基本Dac.select証明書削除(被保険者番号, サービス年月, 整理番号, null, null, null);
         if (entityList == null || entityList.isEmpty()) {
             return resultList;
         }

@@ -245,7 +245,39 @@ public enum ReportIdDBE {
     /**
      * 要介護認定主治医意見書記入用紙の帳票ＩＤです。
      */
-    DBE231001(new ReportId("DBE231001_ikenshokinyuyoshi"), new RString("要介護認定主治医意見書記入用紙"));
+    DBE231001(new ReportId("DBE231001_ikenshokinyuyoshi"), new RString("要介護認定主治医意見書記入用紙")),
+    /**
+     * 主治医意見書帳票ＩＤです。
+     */
+    DBE517151(new ReportId("DBE517151_Shujiiikensho"), new RString("主治医意見書")),
+    /**
+     * 一次判定結果ＩＤです。
+     */
+    DBE517181(new ReportId("DBE517181_IchijihanteikekkahyoA4"), new RString("一次判定結果")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091002(new ReportId("DBE091002_NinteiChosaJohohyo"), new RString("認定調査票情報_09B総合事業")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091012(new ReportId("DBE091012_NinteiChosaJohohyo"), new RString("認定調査票情報_09B")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091022(new ReportId("DBE091022_NinteiChosaJohohyo"), new RString("認定調査票情報_09A")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091032(new ReportId("DBE091032_06ANinteiChosaJohohyo"), new RString("認定調査票情報_06A")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091042(new ReportId("DBE091042_02ANinteiChosaJohohyo"), new RString("認定調査票情報_02A")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091052(new ReportId("DBE091052_99ANinteiChosaJohohyo"), new RString("認定調査票情報_99A"));
 
     private final ReportId reportId;
 

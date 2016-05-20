@@ -50,14 +50,14 @@ public class NinteiInputHandler {
         div.setHdnKoroshoIfShikibetsuCode(厚労省IFコード);
         NinteiInputFinder ninteiInputFinder = NinteiInputFinder.createInstance();
         if (SubGyomuCode.DBD介護受給.value().equals(subGyomuCode)) {
-            //DbT4101NinteiShinseiJohoBusiness dbt4101Ninteishinsei =
+            // TODO  内部QA：1186  Redmine：#85604( DbT4101NinteiShinseiJohoBusiness dbt4101Ninteishinsei =を使用されない)
             ninteiInputFinder.get要介護認定申請情報受給(申請書管理番号);
-            //DbT4102NinteiKekkaJohoBusiness dbt4102Ninteikekkajoho =
+            // TODO  内部QA：1186  Redmine：#85604( DbT4102NinteiKekkaJohoBusiness dbt4102Ninteikekkajoho =を使用されない)
             ninteiInputFinder.get要介護認定結果情報受給(申請書管理番号);
         } else if (SubGyomuCode.DBE認定支援.value().equals(subGyomuCode)) {
-            //NinteiShinseiJoho ninteiShinseiJoho =
+            // TODO  内部QA：1186  Redmine：#85604(NinteiShinseiJoho ninteiShinseiJoho =を使用されない)
             ninteiInputFinder.get要介護認定申請情報認定(申請書管理番号);
-            //DbT5102NinteiKekkaJohoBusiness dbt5102Ninteikekkajoho =
+            // TODO  内部QA：1186  Redmine：#85604(DbT5102NinteiKekkaJohoBusiness dbt5102Ninteikekkajoho =を使用されない)
             ninteiInputFinder.get要介護認定結果情報認定(申請書管理番号);
         }
         List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給, new CodeShubetsu("0002"));

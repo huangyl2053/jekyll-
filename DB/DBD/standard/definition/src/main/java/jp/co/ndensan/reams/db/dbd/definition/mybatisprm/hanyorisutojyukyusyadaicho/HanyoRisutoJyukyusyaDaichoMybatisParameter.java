@@ -55,12 +55,12 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
     private boolean is審査会回答日;
     private boolean is認定有効開始日;
     private boolean is認定有効終了日;
-    private boolean isCyusyutsunichifrom;
-    private boolean isCyusyutsunichito;
-    private boolean isIryokikancodefrom;
-    private boolean isIryokikancodefto;
-    private boolean isCyosaitakusakicodefrom;
-    private boolean isCyosaitakusakicodefto;
+    private boolean is抽出日from;
+    private boolean is抽出日to;
+    private boolean is医療機関コードfrom;
+    private boolean is医療機関コードto;
+    private boolean is調査委託先コードfrom;
+    private boolean is調査委託先コードto;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
 
@@ -129,22 +129,22 @@ public class HanyoRisutoJyukyusyaDaichoMybatisParameter implements IMyBatisParam
             RString cyosaitakusakicodefrom,
             RString cyosaitakusakicodefto) {
         if (cyusyutsunichifrom == null || cyusyutsunichifrom.isEmpty()) {
-            isCyusyutsunichifrom = true;
+            is抽出日from = true;
         }
         if (cyusyutsunichito == null || cyusyutsunichito.isEmpty()) {
-            isCyusyutsunichito = true;
+            is抽出日to = true;
         }
         if (RString.isNullOrEmpty(iryokikancodefrom)) {
-            isIryokikancodefrom = true;
+            is医療機関コードfrom = true;
         }
         if (RString.isNullOrEmpty(iryokikancodefto)) {
-            isIryokikancodefto = true;
+            is医療機関コードto = true;
         }
         if (RString.isNullOrEmpty(cyosaitakusakicodefrom)) {
-            this.isCyosaitakusakicodefrom = true;
+            this.is調査委託先コードfrom = true;
         }
         if (RString.isNullOrEmpty(cyosaitakusakicodefto)) {
-            this.isCyosaitakusakicodefto = true;
+            this.is調査委託先コードto = true;
         }
     }
 

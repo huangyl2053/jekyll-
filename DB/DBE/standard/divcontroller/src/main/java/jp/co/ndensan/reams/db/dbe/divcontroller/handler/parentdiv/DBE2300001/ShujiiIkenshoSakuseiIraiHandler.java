@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 主治医意見書作成依頼のHandlerクラスです。
@@ -78,7 +77,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
      */
     public void init(List<Shujiiikenshosakuseiirai> 申請者情報一覧) {
         set申請者一覧(申請者情報一覧);
-        if (主治医意見書作成期限設定方法_2.equals(BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, SubGyomuCode.DBE認定支援))) {
+        if (主治医意見書作成期限設定方法_2.equals(
+                DbBusinessConifg.get(ConfigNameDBE.主治医意見書作成期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             div.getRadkigen().setDisabled(true);
             div.getTxtkigenymd().setDisabled(true);
         } else {

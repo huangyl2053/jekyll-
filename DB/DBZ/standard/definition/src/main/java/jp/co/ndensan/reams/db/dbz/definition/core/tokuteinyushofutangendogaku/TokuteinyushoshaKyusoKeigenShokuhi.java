@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 特定入所者負担限度額_旧措軽減食費を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBA-9999-023 wangchao
  */
 public enum TokuteinyushoshaKyusoKeigenShokuhi {
 

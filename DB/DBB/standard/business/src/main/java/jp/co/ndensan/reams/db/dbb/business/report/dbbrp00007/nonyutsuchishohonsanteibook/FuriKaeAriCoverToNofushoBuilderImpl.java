@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007.nonyutsuchishohonsant
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
+ * 保険料納入通知書（本算定）【ブック（口振依頼あり通知書＋納付書）タイプ】のBuilderクラスです。
  *
- * @author xuyue
+ * @reamsid_L DBB-9110-100 xuyue
  */
 public class FuriKaeAriCoverToNofushoBuilderImpl implements IFuriKaeAriCoverToNofushoBuilder {
 

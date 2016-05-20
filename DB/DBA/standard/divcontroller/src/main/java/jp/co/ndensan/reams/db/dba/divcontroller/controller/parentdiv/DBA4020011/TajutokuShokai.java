@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA4020011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureidaicho.OtherAddressLedgerBusiness;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.DBA4020011StateName;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.DBA4020011TransitionEventName.完了;
 import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.DBA4020011TransitionEventName.検索条件;
 import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.DBA4020011TransitionEventName.該当者一覧;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.TajutokuShokaiDiv;
@@ -78,16 +76,6 @@ public class TajutokuShokai {
     }
 
     /**
-     * 「完了する」ボタンを押下します。
-     *
-     * @param div TajutokuShokaiDiv
-     * @return ResponseData<TajutokuShokaiDiv>
-     */
-    public ResponseData<TajutokuShokaiDiv> onClick_KanryouBtn(TajutokuShokaiDiv div) {
-        return ResponseData.of(div).forwardWithEventName(完了).respond();
-    }
-
-    /**
      * 処理実行の確認を発生します。
      *
      * @param div TajutokuShokaiDiv
@@ -112,7 +100,7 @@ public class TajutokuShokai {
      */
     public ResponseData<SourceDataCollection> onClick_HakkouBtn(TajutokuShokaiDiv div) {
         List<OtherAddressLedgerBusiness> list = finder.getTashichosonJushochiTokureiDaicho(key.get識別コード());
-        return ResponseData.of(service.print(getHandler().printTyouhyouData(list))).setState(DBA4020011StateName.完了状態);
+        return ResponseData.of(service.print(getHandler().printTyouhyouData(list))).respond();
     }
 
     /**

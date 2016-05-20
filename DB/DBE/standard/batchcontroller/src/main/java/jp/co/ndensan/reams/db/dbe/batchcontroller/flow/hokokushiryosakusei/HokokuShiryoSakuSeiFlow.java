@@ -4,6 +4,8 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.Jigyo
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JisshiJokyoTokeiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JotaikubumbetsuhanteiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.SinsakaiHanteiJyokyoProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei.HokokuShiryoSakuSeiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -22,6 +24,8 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     private static final String 認定実施状況統計 = "jissiJyokyoTokei";
     private static final String 審査判定状況出力 = "sinsaHanteiJyokyo";
     private static final String 状態区分別判定 = "jotaikubumbetsuhantei";
+    private static final String 審査判定変更状況 = "shinsahanteinoHenkojokyo";
+    private static final String 審査会集計表判定別 = "shinsakaishukeihyoHanteiBetsu";
 
     @Override
     protected void defineFlow() {
@@ -37,6 +41,8 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
         }
         if (getParameter().isSinsakaiKanrenTokei()) {
             executeStep(状態区分別判定);
+            executeStep(審査判定変更状況);
+            executeStep(審査会集計表判定別);
         }
     }
 
@@ -91,6 +97,28 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
     @Step(状態区分別判定)
     protected IBatchFlowCommand selectJotaikubumbetsuhantei() {
         return loopBatch(JotaikubumbetsuhanteiProcess.class)
+                .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
+    }
+
+    /**
+     * 審査判定の変更状況の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査判定変更状況)
+    protected IBatchFlowCommand selectShinsahanteinoHenkojokyo() {
+        return loopBatch(ShinsahanteinoHenkojokyoProcess.class)
+                .arguments(getParameter().toShinsahanteinoHenkojokyoProcessParameter()).define();
+    }
+
+    /**
+     * 審査判定の変更状況の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(審査会集計表判定別)
+    protected IBatchFlowCommand selectShinsakaishukeihyoHanteiBetsu() {
+        return loopBatch(ShinsakaishukeihyoHanteiBetsuProcess.class)
                 .arguments(getParameter().toSinsakaiHanteiJyokyoProcessParameter()).define();
     }
 

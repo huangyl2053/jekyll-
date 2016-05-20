@@ -29,7 +29,7 @@ public enum DbzSystemErrorMessages {
     private final int numOfReplacees;
 
     private DbzSystemErrorMessages(int no, String message) {
-        this.code = new RString(toCode("S", no));
+        this.code = new RString(toCode("DBZS", no));
         this.message = new RString(message);
         this.numOfReplacees = countNumOfReplaceesIn(message);
     }

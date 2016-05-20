@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 
 /**
  *
@@ -97,7 +97,6 @@ public class NonyuTsuchiShoDataHenshu {
         EditedKariSanteiTsuchiShoKyotsu 編集後納入通知書共通情報 = 賦課帳票共通項目編集.create仮算定通知書共通情報(仮算定通知書情報);
         List<SamantabhadraIncomeInformation> 普徴収入情報リスト = get普徴収入情報リスト(編集後納入通知書共通情報);
         List<UniversalPhase> 更正後普徴期別金額リスト = new ArrayList<>();
-        //TODO 口座区分
         KozaKubun 口座区分 = null;
         if (編集後納入通知書共通情報 != null && 編集後納入通知書共通情報.get更正後() != null) {
             更正後普徴期別金額リスト = 編集後納入通知書共通情報.get更正後().get更正後普徴期別金額リスト();
@@ -113,7 +112,6 @@ public class NonyuTsuchiShoDataHenshu {
         EditedAtesaki 編集後宛先 = null;
         EditedKojin 編集後個人 = null;
         TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
-        List<UniversalSignDeliveryInformation> 普徴納期情報リスト = new ArrayList<>();
         if (編集後納入通知書共通情報 != null) {
             if (編集後納入通知書共通情報.get調定年度() != null) {
                 調定年度 = 編集後納入通知書共通情報.get調定年度();
@@ -124,13 +122,13 @@ public class NonyuTsuchiShoDataHenshu {
             前年度情報有無 = 編集後納入通知書共通情報.get前年度情報有無();
             編集後宛先 = 編集後納入通知書共通情報.get編集後宛先();
             編集後個人 = 編集後納入通知書共通情報.get編集後個人();
-            if (編集後納入通知書共通情報.get普徴納期情報リスト() != null) {
-                普徴納期情報リスト = 編集後納入通知書共通情報.get普徴納期情報リスト();
-            }
         }
-        //TODO
+        List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();
+        if (仮算定通知書情報.get普徴納期情報リスト() != null) {
+            普徴納期情報リスト = 仮算定通知書情報.get普徴納期情報リスト();
+        }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト
-                = create納入通知書期情報(get普徴納期情報リストFrom編集後納入通知書共通情報(普徴納期情報リスト), 更正後普徴期別金額リスト,
+                = create納入通知書期情報(普徴納期情報リスト, 更正後普徴期別金額リスト,
                         口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度);
         SanteiNoKiso 算定基礎情報 = new SanteiNoKiso();
         SanteiKiso 算定の基礎1 = SanteiKiso.空白;
@@ -169,33 +167,6 @@ public class NonyuTsuchiShoDataHenshu {
         仮算定納入通知書情報Return.set編集範囲区分(編集範囲区分);
         仮算定納入通知書情報Return.set出力期リスト(出力期リスト);
         return 仮算定納入通知書情報Return;
-    }
-
-    private List<NokiJoho> get普徴納期情報リストFrom編集後納入通知書共通情報(List<UniversalSignDeliveryInformation> 普徴納期情報リスト) {
-        List<NokiJoho> 普徴納期情報リストReturn = new ArrayList<>();
-        for (UniversalSignDeliveryInformation 普徴納期情報 : 普徴納期情報リスト) {
-            NokiJoho 普徴納期情報Return = new NokiJoho();
-            普徴納期情報Return.set期月(普徴納期情報.get期月());
-            UrT0729NokiKanriEntity urt0729 = new UrT0729NokiKanriEntity();
-            普徴納期情報.get現年過年区分();
-            urt0729.setKanendoKubun(new RString("true").equals(普徴納期情報.get現年過年区分()));
-            if (普徴納期情報.get納期終了日() != null && !普徴納期情報.get納期終了日().isEmpty()) {
-                urt0729.setNokiShuryoYMD(new RDate(普徴納期情報.get納期終了日().toString()));
-            }
-            if (普徴納期情報.get納期開始日() != null && !普徴納期情報.get納期開始日().isEmpty()) {
-                urt0729.setNokiKaishiYMD(new RDate(普徴納期情報.get納期開始日().toString()));
-            }
-            if (普徴納期情報.get納期限() != null && !普徴納期情報.get納期限().isEmpty()) {
-                urt0729.setNokigenYMD(new RDate(普徴納期情報.get納期限().toString()));
-            }
-            if (普徴納期情報.get通知書発行日() != null) {
-                urt0729.setTsuchishoHakkoYMD(普徴納期情報.get通知書発行日());
-            }
-            Noki 納期 = new Noki(urt0729);
-            普徴納期情報Return.set納期(納期);
-            普徴納期情報リストReturn.add(普徴納期情報Return);
-        }
-        return 普徴納期情報リストReturn;
     }
 
     private HyojiCodes get表示コード(EditedKariSanteiTsuchiShoKyotsu 編集後納入通知書共通情報) {
@@ -258,8 +229,8 @@ public class NonyuTsuchiShoDataHenshu {
                 基礎.set金額(前年度情報有無 ? decimalToRString(前年度情報.get前年度最終期普徴期別介護保険料()) : 空白);
             } else {
                 基礎.set年度(編集後納入通知書共通情報.get賦課年度().toDateString());
-                //TODO
-                基礎.set金額(前年度情報有無 ? null : 空白);
+                基礎.set金額(前年度情報有無
+                        ? null == 編集後納入通知書共通情報.get更正後() ? 空白 : 編集後納入通知書共通情報.get更正後().get保険料率() : 空白);
             }
         }
         return 基礎;
@@ -294,7 +265,6 @@ public class NonyuTsuchiShoDataHenshu {
         HonSanteiTsuchiShoKyotsuKomokuHenshu 賦課帳票共通項目編集 = new HonSanteiTsuchiShoKyotsuKomokuHenshu();
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 賦課帳票共通項目編集.create本算定通知書共通情報(本算定通知書情報);
         List<UniversalPhase> 普徴期別金額リスト = new ArrayList<>();
-        //TODO 口座区分
         KozaKubun 口座区分 = null;
         FlexibleYear 調定年度 = FlexibleYear.EMPTY;
         FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
@@ -334,8 +304,11 @@ public class NonyuTsuchiShoDataHenshu {
             }
             編集後宛先 = 編集後本算定通知書共通情報.get編集後宛先();
         }
-        //TODO
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(null, 普徴期別金額リスト,
+        List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();
+        if (本算定通知書情報.get普徴納期情報リスト() != null) {
+            普徴納期情報リスト = 本算定通知書情報.get普徴納期情報リスト();
+        }
+        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = create納入通知書期情報(普徴納期情報リスト, 普徴期別金額リスト,
                 口座区分, 請求情報リスト, 納入通知書制御情報, 普徴収入情報リスト, 出力期リスト, 調定年度, 賦課年度);
         NofuShoKyotsu 納付書共通 = create納付書共通(
                 調定年度,
@@ -476,10 +449,12 @@ public class NonyuTsuchiShoDataHenshu {
         boolean is口座振替 = KozaKubun.口座振替.equals(口座区分);
         boolean is現金納付 = KozaKubun.現金納付.equals(口座区分);
         if (is該当する請求情報ある(請求情報)) {
-            納入通知書期情報.set収納機関番号表示用(請求情報.getMpn().get収納機関番号表示用());
-            納入通知書期情報.set納付番号(請求情報.getMpn().get納付番号());
-            納入通知書期情報.set確認番号(請求情報.getMpn().get確認番号());
-            納入通知書期情報.set納付区分(請求情報.getMpn().get納付区分());
+            if (請求情報.getMpn() != null) {
+                納入通知書期情報.set収納機関番号表示用(請求情報.getMpn().get収納機関番号表示用());
+                納入通知書期情報.set納付番号(請求情報.getMpn().get納付番号());
+                納入通知書期情報.set確認番号(請求情報.getMpn().get確認番号());
+                納入通知書期情報.set納付区分(請求情報.getMpn().get納付区分());
+            }
             if (is口座振替) {
                 納入通知書期情報.setOcrid(請求情報.getOcr().getOCRID());
                 OCRShutsuryokuHoho 口座振替のOCR出力方法 = 納入通知書制御情報.get口座振替のOCR出力方法();
@@ -513,6 +488,11 @@ public class NonyuTsuchiShoDataHenshu {
         set納付額欄(is現金納付, is口座振替, 納入通知書期情報, 納付額, 納入通知書制御情報);
         納入通知書期情報.set領収証書領収印欄(RyoshuinranHyojiKubun._口座振替_を印字する.equals(納入通知書制御情報.get領収証書領収印欄()) ? 口座振替 : 空白);
         納入通知書期情報.set納付書領収印欄(RyoshuinranHyojiKubun._口座振替_を印字する.equals(納入通知書制御情報.get納付書領収印欄()) ? 口座振替 : 空白);
+        set納入通知書期情報領収欄(納入通知書期情報, 納入通知書制御情報, 出力期);
+        return 納入通知書期情報;
+    }
+
+    private void set納入通知書期情報領収欄(NonyuTsuchiShoKiJoho 納入通知書期情報, NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, Kitsuki 出力期) {
         RString 領収日付印欄;
         RString 領収日付欄;
         RString 領収書日付欄期月;
@@ -540,7 +520,6 @@ public class NonyuTsuchiShoDataHenshu {
         納入通知書期情報.set領収日付印欄(領収日付印欄);
         納入通知書期情報.set領収日付欄(領収日付欄);
         納入通知書期情報.set領収書日付欄期月(領収書日付欄期月);
-        return 納入通知書期情報;
     }
 
     private void set納付額欄(boolean is現金納付, boolean is口座振替,
@@ -597,123 +576,123 @@ public class NonyuTsuchiShoDataHenshu {
         switch (月) {
             case 整数1:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数2:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数3:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数4:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数5:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数6:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数7:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数8:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数9:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数10:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数11:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数12:
                 過年度期情報_納付書の印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_納付書の印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_ブック開始位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_ブック開始位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニカット印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 過年度期情報_コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.過年度期情報_コンビニ連帳印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             default:
                 過年度期情報_納付書の印字位置 = RString.EMPTY;
@@ -737,130 +716,130 @@ public class NonyuTsuchiShoDataHenshu {
         RString コンビニ連帳印字位置 = RString.EMPTY;
         switch (月) {
             case 整数1:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置1, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数2:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置2, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数3:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置3, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数4:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置4, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数5:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置5, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数6:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置6, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数7:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置7, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数8:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置8, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数9:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置9, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数10:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置10, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数11:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置11, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数12:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置12, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数13:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置13, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             case 整数14:
-                納付書の印字位置 = BusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の印字位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                納付書の印字位置 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の印字位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 ブック開始位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_ブック開始位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニカット印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニカット印字位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 コンビニ連帳印字位置
-                        = BusinessConfig.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+                        = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_コンビニ連帳印字位置14, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 break;
             default:
                 break;

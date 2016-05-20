@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkat
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,10 +29,11 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
     private FlexibleYearMonth ketteishaUketsukeYM;
     private RString chusyuMode;
     private RString insho;
+    private RDate ketteiYMD;
 
     private ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter(FlexibleDate hurikomiYoteiYMD,
             FlexibleDate dataFrom, FlexibleDate dataTo, FlexibleDate hakkoYMD, FlexibleYearMonth ketteishaUketsukeYM,
-            RString chusyuMode, RString insho) {
+            RString chusyuMode, RString insho, RDate ketteiYMD) {
 
         this.hurikomiYoteiYMD = hurikomiYoteiYMD;
         this.dataFrom = dataFrom;
@@ -40,6 +42,7 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
         this.ketteishaUketsukeYM = ketteishaUketsukeYM;
         this.chusyuMode = chusyuMode;
         this.insho = insho;
+        this.ketteiYMD = ketteiYMD;
     }
 
     /**
@@ -65,6 +68,6 @@ public final class ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter implement
                 dataFrom, dataTo,
                 batchParamter.get発行日() == null ? null : new FlexibleDate(batchParamter.get発行日().toDateString()),
                 batchParamter.get決定者受付年月() == null ? null : new FlexibleYearMonth(batchParamter.get発行日().getYearMonth().toDateString()),
-                batchParamter.get抽出モード(), batchParamter.get印書());
+                batchParamter.get抽出モード(), batchParamter.get印書(), batchParamter.get決定日());
     }
 }

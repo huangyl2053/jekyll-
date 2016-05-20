@@ -30,7 +30,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 交付日
      */
     public RString get交付日() {
-        return FlexibleDate.getNowDate().getYearMonth().wareki().toDateString();
+        return FlexibleDate.getNowDate().wareki().toDateString();
     }
 
     /**

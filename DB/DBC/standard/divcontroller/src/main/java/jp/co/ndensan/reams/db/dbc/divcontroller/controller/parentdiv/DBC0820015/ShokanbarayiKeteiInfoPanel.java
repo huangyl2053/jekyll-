@@ -88,6 +88,7 @@ public class ShokanbarayiKeteiInfoPanel {
         }
         div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 登録);
         getHandler(div).initialize(被保険者番号, サービス年月, 整理番号);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).setState(DBC0820015StateName.削除モード);

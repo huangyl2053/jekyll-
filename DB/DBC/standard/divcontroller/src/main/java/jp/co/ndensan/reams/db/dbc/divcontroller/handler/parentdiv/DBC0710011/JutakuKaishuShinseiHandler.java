@@ -38,6 +38,9 @@ public final class JutakuKaishuShinseiHandler {
     private final RString 取消モード = new RString("取消モード");
     private final RString 削除モード = new RString("削除モード");
     private final RString 登録モード = new RString("登録モード");
+    private final RString 処理モード_修正 = new RString("修正");
+    private final RString 処理モード_取消 = new RString("取消");
+    private final RString 処理モード_削除 = new RString("削除");
 
     private JutakuKaishuShinseiHandler(JutakuKaishuShinseiDiv div) {
         this.div = div;
@@ -64,6 +67,7 @@ public final class JutakuKaishuShinseiHandler {
         List<dgJutakuKaishuShinseiList_Row> rows = new ArrayList<>();
         if (画面モード.equals(DBC0710011StateName.支給申請モード.getName())) {
             set支給申請一覧(manager, 被保険者番号, rows);
+            div.getJutakuKaishuShinseiList().getTxtServiceYM().setVisible(false);
         } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
             set事前申請一覧(manager, 被保険者番号, rows);
         }
@@ -96,8 +100,10 @@ public final class JutakuKaishuShinseiHandler {
         } else if (画面モード.equals(DBC0710011StateName.事前申請モード.getName())) {
             if (JutakukaishuShinseiKubun.事前申請.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 修正モード);
+                ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_修正);
             } else if (JutakukaishuShinseiKubun.取消.get名称().equals(申請区分)) {
                 ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
+                ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_取消);
             }
         }
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(div.getJutakuKaishuShinseiList()
@@ -119,6 +125,7 @@ public final class JutakuKaishuShinseiHandler {
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
                 .getClickedItem().getTxtSeiriNo().getValue());
         ViewStateHolder.put(ViewStateKeys.表示モード, 削除モード);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_削除);
     }
 
     /**
@@ -132,6 +139,7 @@ public final class JutakuKaishuShinseiHandler {
                 ViewStateKeys.整理番号, div.getJutakuKaishuShinseiList().getDgJutakuKaishuShinseiList()
                 .getClickedItem().getTxtSeiriNo().getValue());
         ViewStateHolder.put(ViewStateKeys.表示モード, 取消モード);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード_取消);
     }
 
     private void set事前申請一覧(JutakukaishuSikyuShinseiManager manager, HihokenshaNo 被保険者番号,

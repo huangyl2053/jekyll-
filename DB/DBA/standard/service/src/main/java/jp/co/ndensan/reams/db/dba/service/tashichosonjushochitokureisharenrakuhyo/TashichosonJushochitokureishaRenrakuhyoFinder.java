@@ -8,6 +8,11 @@ package jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuh
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoShijiDataEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
+import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -50,5 +55,17 @@ public class TashichosonJushochitokureishaRenrakuhyoFinder {
         entity.set入所年月日(parameter.get入所年月日());
         entity.set住所出力不要フラグ(parameter.is住所出力不要フラグ());
         return new TatokuKanrenChohyoShijiData(entity);
+    }
+
+    /**
+     * 文書番号取得。
+     *
+     * @param 帳票ID 帳票ID
+     * @return BunshoNo
+     */
+    public BunshoNo get文書番号取得(ReportId 帳票ID) {
+
+        IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
+        return bushoFineder.get文書番号管理(帳票ID, FlexibleDate.getNowDate());
     }
 }

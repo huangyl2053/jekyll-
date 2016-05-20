@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0110011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0110011.DBU0110011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0110011.DBU0110011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0110011.RoUReiFuKuShiNenKinDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -78,6 +81,10 @@ public class RoUReiFuKuShiNenKin {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
         }
+        if (画面状態のチェック(div)) {
+
+            throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+        }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getRoreiFukushiNenkinJohoList().getCcdRoreiFukushiNenkinRireki().click_Save();
@@ -98,7 +105,7 @@ public class RoUReiFuKuShiNenKin {
      */
     public ResponseData<RoUReiFuKuShiNenKinDiv> onClick_btnSearch(RoUReiFuKuShiNenKinDiv div) {
         RealInitialLocker.release(LOCKINGKEY);
-        return ResponseData.of(div).forwardWithEventName(DBU0110011TransitionEventName.検索条件).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0110011TransitionEventName.再検索).respond();
     }
 
     /**
@@ -108,9 +115,8 @@ public class RoUReiFuKuShiNenKin {
      * @return ResponseData<RoUReiFuKuShiNenKinDiv>
      */
     public ResponseData<RoUReiFuKuShiNenKinDiv> onClick_btnSearchiLan(RoUReiFuKuShiNenKinDiv div) {
-        // TODO QA1108
         RealInitialLocker.release(LOCKINGKEY);
-        return ResponseData.of(div).forwardWithEventName(DBU0110011TransitionEventName.検索条件).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0110011TransitionEventName.一覧戻る).respond();
     }
 
     /**
@@ -126,6 +132,21 @@ public class RoUReiFuKuShiNenKin {
 
     private void アクセスログ(AccessLogType type, ShikibetsuCode 識別コード) {
         AccessLogger.log(type, toPersonalData(識別コード));
+    }
+
+    private boolean 画面状態のチェック(RoUReiFuKuShiNenKinDiv div) {
+
+        boolean checkFlg = true;
+        List<datagridRireki_Row> rowList = div.getRoreiFukushiNenkinJohoList().
+                getCcdRoreiFukushiNenkinRireki().getDataGridList();
+        for (datagridRireki_Row row : rowList) {
+
+            if (!row.getJotai().isNullOrEmpty()) {
+                checkFlg = false;
+                break;
+            }
+        }
+        return checkFlg;
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード) {

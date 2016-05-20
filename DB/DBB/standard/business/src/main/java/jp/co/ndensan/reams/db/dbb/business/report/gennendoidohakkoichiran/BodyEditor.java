@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
@@ -27,23 +25,13 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor {
 
-    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
-    private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
-    private final RString 帳票作成日時;
-    private final RString 市町村コード;
-    private final RString 市町村名;
-
-    private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
-    private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int SIZE = 18;
+    private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
+    private final RString 出力期;
+    private final int 連番;
 
     private static final int 金融機関コード_START = 0;
     private static final int 金融機関コード_END = 4;
 
-    private static final RString 所得段階名 = new RString("所得段階");
     private static final RString 半角ハイフン = new RString("-");
     private static final RString アステリスク = new RString("*");
 
@@ -54,92 +42,57 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
      */
     public BodyEditor(HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
         this.編集後本算定通知書共通情報 = inputEntity.get編集後本算定通知書共通情報();
-        this.バッチパラメータ = inputEntity.getバッチパラメータ();
-        this.帳票作成日時 = inputEntity.get帳票作成日時();
-        this.市町村コード = inputEntity.get市町村コード();
-        this.市町村名 = inputEntity.get市町村名();
+        this.出力期 = inputEntity.get出力期();
+        this.連番 = inputEntity.get連番();
     }
 
     @Override
     public NonyuTsuchIchiranSource edit(NonyuTsuchIchiranSource source) {
-        for (int i = 0; i < 編集後本算定通知書共通情報.size(); i++) {
-            EditedHonSanteiTsuchiShoKyotsu 共通情報 = 編集後本算定通知書共通情報.get(i);
-            source.printTimeStamp = this.帳票作成日時;
-            source.nendo = this.バッチパラメータ.get賦課年度();
-            source.hokenshaNo = this.市町村コード;
-            source.hokenshaName = this.市町村名;
-            set出力帳票entities(source);
-            if (共通情報.get表示コード() != null) {
-                source.hyojicodeName1 = 共通情報.get表示コード().get表示コード名１();
-                source.hyojicodeName2 = 共通情報.get表示コード().get表示コード名２();
-                source.hyojicodeName3 = 共通情報.get表示コード().get表示コード名３();
-            }
-            source.shotokuDankaiTitle = 所得段階名;
-            Integer 連番 = (i - 1) % SIZE + 1;
-            source.listUpper_1 = new RString(連番.toString());
-            if (共通情報.get通知書番号() != null) {
-                source.listUpper_2 = new RString(共通情報.get通知書番号().toString());
-            }
-            if (共通情報.get被保険者番号() != null) {
-                source.listUpper_3 = 共通情報.get被保険者番号().value();
-            }
-            if (共通情報.get編集後個人() != null && 共通情報.get編集後個人().get世帯コード() != null) {
-                source.listUpper_4 = new RString(共通情報.get編集後個人().get世帯コード().toString());
-            }
-            if (共通情報.get表示コード() != null) {
-                source.listUpper_5 = 共通情報.get表示コード().get表示コード１();
-                source.listUpper_6 = 共通情報.get表示コード().get表示コード２();
-                source.listUpper_7 = 共通情報.get表示コード().get表示コード３();
-            }
-            if (共通情報.get編集後宛先() != null) {
-                source.listUpper_8 = 共通情報.get編集後宛先().get宛先行政区();
-            }
-            if (共通情報.get更正後() != null
-                    && 共通情報.get更正後().get確定保険料_年額() != null) {
-                source.listUpper_9 = new RString(共通情報.get更正後().get確定保険料_年額().toString());
-            }
-            setOtherValue(共通情報, source);
-            if ((共通情報.get編集後宛先() != null) && ((共通情報.get編集後宛先().get本人名称())
-                    != (共通情報.get編集後宛先().get宛先名称()))) {
-                source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE + 共通情報.get編集後宛先().get宛先名称().toString());
-            }
-            if (共通情報.get更正後() != null
-                    && 共通情報.get更正後().get生保開始日() != null) {
-                source.listUpper_13 = 共通情報.get更正後().get生保開始日();
-            }
+        EditedHonSanteiTsuchiShoKyotsu 共通情報 = 編集後本算定通知書共通情報;
 
-            RString 生活保護扶助名称 = null;
-            if (共通情報.get更正後() != null
-                    && 共通情報.get更正後().get生活保護扶助種類() != null) {
-                生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
-                        URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
-                        new Code(共通情報.get更正後().get生活保護扶助種類().toString())).getコード名称();
-            }
-            source.listUpper_14 = 生活保護扶助名称;
-            setListLowers(source, 共通情報);
-
+        source.listUpper_1 = new RString(Integer.valueOf(連番).toString());
+        if (共通情報.get通知書番号() != null) {
+            source.listUpper_2 = new RString(共通情報.get通知書番号().toString());
         }
+        if (共通情報.get被保険者番号() != null) {
+            source.listUpper_3 = 共通情報.get被保険者番号().value();
+        }
+        if (共通情報.get編集後個人() != null && 共通情報.get編集後個人().get世帯コード() != null) {
+            source.listUpper_4 = new RString(共通情報.get編集後個人().get世帯コード().toString());
+        }
+        if (共通情報.get表示コード() != null) {
+            source.listUpper_5 = 共通情報.get表示コード().get表示コード１();
+            source.listUpper_6 = 共通情報.get表示コード().get表示コード２();
+            source.listUpper_7 = 共通情報.get表示コード().get表示コード３();
+        }
+        if (共通情報.get編集後宛先() != null) {
+            source.listUpper_8 = 共通情報.get編集後宛先().get宛先行政区();
+        }
+        if (共通情報.get更正後() != null
+                && 共通情報.get更正後().get確定保険料_年額() != null) {
+            source.listUpper_9 = new RString(共通情報.get更正後().get確定保険料_年額().toString());
+        }
+        setOtherValue(共通情報, source);
+        if ((共通情報.get編集後宛先() != null) && !(共通情報.get編集後宛先().get本人名称().getName().toString()
+                .equals(共通情報.get編集後宛先().get宛先名称().getName().toString()))) {
+            source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE
+                    + 共通情報.get編集後宛先().get宛先名称().getName().toString());
+        }
+        if (共通情報.get更正後() != null
+                && 共通情報.get更正後().get生保開始日() != null) {
+            source.listUpper_13 = 共通情報.get更正後().get生保開始日();
+        }
+
+        RString 生活保護扶助名称 = null;
+        if (共通情報.get更正後() != null
+                && 共通情報.get更正後().get生活保護扶助種類() != null) {
+            生活保護扶助名称 = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                    URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),
+                    new Code(共通情報.get更正後().get生活保護扶助種類().toString())).getコード名称();
+        }
+        source.listUpper_14 = 生活保護扶助名称;
+        setListLowers(source, 共通情報);
         return source;
-    }
-
-    private void set出力帳票entities(NonyuTsuchIchiranSource source) {
-        if (バッチパラメータ.get出力帳票entity() != null) {
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_0) {
-                source.shutsuryokujun1 = バッチパラメータ.get出力帳票entity().get(NUM_0).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_1) {
-                source.shutsuryokujun2 = バッチパラメータ.get出力帳票entity().get(NUM_1).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_2) {
-                source.shutsuryokujun3 = バッチパラメータ.get出力帳票entity().get(NUM_2).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_3) {
-                source.shutsuryokujun4 = バッチパラメータ.get出力帳票entity().get(NUM_3).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票entity().size() > NUM_4) {
-                source.shutsuryokujun5 = バッチパラメータ.get出力帳票entity().get(NUM_4).get出力順ID();
-            }
-        }
     }
 
     /**
@@ -152,7 +105,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト()) {
-                if (entity.get期() == Integer.valueOf(バッチパラメータ.get出力期().toString())) {
+                if (entity.get期() == Integer.valueOf(出力期.toString())) {
                     source.listUpper_10 = new RString(entity.get金額().toString());
                 }
             }
@@ -161,7 +114,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
 
     private void setListLowers(NonyuTsuchIchiranSource source, EditedHonSanteiTsuchiShoKyotsu 共通情報) {
         if (共通情報.get編集後宛先() != null) {
-            source.listLower_1 = new RString(共通情報.get編集後宛先().get本人名称().toString());
+            source.listLower_1 = new RString(共通情報.get編集後宛先().get本人名称().getName().toString());
         }
         if (共通情報.get編集後宛先() != null) {
             source.listLower_2 = 共通情報.get編集後宛先().get郵便番号();
@@ -179,7 +132,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
         if (共通情報.get更正後() != null
                 && 共通情報.get更正後().get普徴期別金額リスト() != null) {
             for (UniversalPhase entity : 共通情報.get更正後().get普徴期別金額リスト()) {
-                if (entity.get期() == (Integer.valueOf(バッチパラメータ.get出力期().toString()) + 1)) {
+                if (entity.get期() == (Integer.valueOf(出力期.toString()) + 1)) {
                     source.listLower_6 = new RString(entity.get金額().toString());
                 }
             }

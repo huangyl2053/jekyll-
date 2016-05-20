@@ -29,7 +29,7 @@ public enum DbuQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbuQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("Q", no), message);
+        this.message = new QuestionMessage(toCode("DBUQ", no), message);
     }
 
     @Override

@@ -61,13 +61,46 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
     }
 
     /**
-     * 主治医意見書作成依頼一覧選択行の完了必須チェックを行います。
+     * 依頼期限が未確定の完了必須チェックを行います。
      *
      * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 主治医意見書作成依頼一覧選択行の完了必須チェック(ValidationMessageControlPairs pairs) {
-        pairs.add(new ValidationMessageControlPair(ShujiiIkenshoIraiTaishoIchiranMessages.主治医意見書作成依頼一覧選択行の完了必須チェック));
+    public ValidationMessageControlPairs 依頼期限が未確定の完了必須チェック(ValidationMessageControlPairs pairs) {
+        pairs.add(new ValidationMessageControlPair(ShujiiIkenshoIraiTaishoIchiranMessages.依頼期限が未確定の完了必須チェック));
+        return pairs;
+    }
+
+    /**
+     * 依頼日が未確定の完了必須チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 依頼日が未確定の完了必須チェック(ValidationMessageControlPairs pairs) {
+        pairs.add(new ValidationMessageControlPair(ShujiiIkenshoIraiTaishoIchiranMessages.依頼日が未確定の完了必須チェック));
+        return pairs;
+    }
+
+    /**
+     * 意見書書発行日が未確定の完了必須チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 意見書書発行日が未確定の完了必須チェック(ValidationMessageControlPairs pairs) {
+        pairs.add(new ValidationMessageControlPair(ShujiiIkenshoIraiTaishoIchiranMessages.意見書書発行日が未確定の完了必須チェック));
+        return pairs;
+    }
+
+    /**
+     * 意見書出力年月日が未確定の完了必須チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 意見書出力年月日が未確定の完了必須チェック(ValidationMessageControlPairs pairs) {
+        pairs.add(new ValidationMessageControlPair(ShujiiIkenshoIraiTaishoIchiranMessages.意見書出力年月日が未確定の完了必須チェック));
         return pairs;
     }
 
@@ -98,8 +131,14 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         主治医意見書作成依頼一覧データの存在チェック(UrErrorMessages.該当データなし),
         主治医意見書作成依頼一覧データの行選択チェック(UrErrorMessages.対象行を選択),
         主治医意見書作成依頼一覧選択行の完了処理事前チェック(DbzErrorMessages.理由付き完了不可, "意見書作成依頼先が未確定"),
-        主治医意見書作成依頼一覧選択行の完了必須チェック(DbzErrorMessages.理由付き完了不可,
-                "依頼日、依頼期限または意見書書発行日または意見書出力年月日が未確定"),
+        依頼期限が未確定の完了必須チェック(DbzErrorMessages.理由付き完了不可,
+                "依頼期限が未確定"),
+        依頼日が未確定の完了必須チェック(DbzErrorMessages.理由付き完了不可,
+                "依頼日が未確定"),
+        意見書書発行日が未確定の完了必須チェック(DbzErrorMessages.理由付き完了不可,
+                "意見書書発行日が未確定"),
+        意見書出力年月日が未確定の完了必須チェック(DbzErrorMessages.理由付き完了不可,
+                "意見書出力年月日が未確定"),
         医療機関_主治医が割りつけられていないチェック(DbeErrorMessages.帳票印刷不可, "医療機関・主治医が割りつけられていない"),
         主治医意見書作成依頼一覧データの複数行選択チェック(DbeErrorMessages.複数選択不可, "主治医意見書作成依頼一覧");
         private final Message message;

@@ -10,13 +10,14 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.Fuba
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBAM010011.FubanHohoMainHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBAM010011.FubanHohoMainValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 被保険者番号付番方法のクラスです。
@@ -38,7 +39,8 @@ public class FubanHohoMain {
      */
     public ResponseData<FubanHohoMainDiv> onLoad(FubanHohoMainDiv div) {
 
-        RString 変更可否区分 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法_変更可否区分, SubGyomuCode.DBA介護資格);
+        RString 変更可否区分 = DbBusinessConifg.get(ConfigNameDBA.被保険者番号付番方法_付番方法_変更可否区分, RDate.getNowDate(),
+                SubGyomuCode.DBA介護資格);
         if (new RString("0").equals(変更可否区分)) {
             throw new ApplicationException(UrErrorMessages.更新不可.getMessage().replace("被保険者番号付番方法は変更不可の設定"));
         } else if (new RString("1").equals(変更可否区分)) {

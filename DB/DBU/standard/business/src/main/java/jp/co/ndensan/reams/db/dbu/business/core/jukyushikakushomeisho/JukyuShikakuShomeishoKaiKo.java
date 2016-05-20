@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.business.core.jukyushikakushomeisho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,7 +24,7 @@ public class JukyuShikakuShomeishoKaiKo {
     private RString 認定審査会の意見等;
     private RString 備考;
     private RString 交付年月日;
-    private RDate 交付日;
+    private RString 交付日;
     private RString 申請日;
     private RString 申請状況区分;
     private RString 要介護状態区分;

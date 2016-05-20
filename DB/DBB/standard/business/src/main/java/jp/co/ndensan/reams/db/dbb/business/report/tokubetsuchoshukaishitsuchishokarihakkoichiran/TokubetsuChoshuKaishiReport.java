@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.nonyutsuchichiran.NonyuTsuchIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -20,35 +21,37 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSource> {
 
-    private final List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報;
-    private final NonyuTsuchIchiranBatchParameter バッチパラメータ;
+    private final EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu;
+    private final FlexibleYear 賦課年度;
     private final RString 市町村コード;
     private final RString 市町村名;
-    private final RString 帳票作成日時;
+    private final RDateTime 帳票作成日時;
     private final List<RString> 改頁項目リスト;
     private final List<RString> 出力項目リスト;
+    private final int num;
 
     /**
      * コンストラクタです。
      *
-     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
-     * @param バッチパラメータ TokubetsuChoshuKaishiParameter
-     * @param 帳票作成日時 RString
+     * @param editedhonsanteitsuchishokyotsu EditedHonSanteiTsuchiShoKyotsu
+     * @param 賦課年度 FlexibleYear
+     * @param 帳票作成日時 RDateTime
      * @param 市町村コード RString
      * @param 市町村名 RString
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
+     * @param num int
      */
-    public TokubetsuChoshuKaishiReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
-            NonyuTsuchIchiranBatchParameter バッチパラメータ,
-            RString 帳票作成日時, RString 市町村コード, RString 市町村名, List<RString> 出力項目リスト, List<RString> 改頁項目リスト) {
-        this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
-        this.バッチパラメータ = バッチパラメータ;
+    public TokubetsuChoshuKaishiReport(EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu, FlexibleYear 賦課年度,
+            RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, List<RString> 出力項目リスト, List<RString> 改頁項目リスト, int num) {
+        this.editedhonsanteitsuchishokyotsu = editedhonsanteitsuchishokyotsu;
+        this.賦課年度 = 賦課年度;
         this.帳票作成日時 = 帳票作成日時;
         this.市町村コード = 市町村コード;
         this.市町村名 = 市町村名;
         this.改頁項目リスト = 改頁項目リスト;
         this.出力項目リスト = 出力項目リスト;
+        this.num = num;
     }
 
     /**
@@ -57,11 +60,9 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
      */
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
-        for (int i = 0; i < 編集後本算定通知書共通情報.size(); i++) {
-            ITokubetsuChoshuKaishiEditor tokubetsuchoshukaishieditor = new TokubetsuChoshuKaishiEditor(
-                    編集後本算定通知書共通情報.get(i), バッチパラメータ, 出力項目リスト, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名, i);
-            TokubetsuChoshuKaishiBuilder builder = new TokubetsuChoshuKaishiBuilder(tokubetsuchoshukaishieditor);
-            reportSourceWriter.writeLine(builder);
-        }
+        ITokubetsuChoshuKaishiEditor tokubetsuchoshukaishieditor = new TokubetsuChoshuKaishiEditor(
+                editedhonsanteitsuchishokyotsu, 賦課年度, 出力項目リスト, 改頁項目リスト, 帳票作成日時, 市町村コード, 市町村名, num);
+        TokubetsuChoshuKaishiBuilder builder = new TokubetsuChoshuKaishiBuilder(tokubetsuchoshukaishieditor);
+        reportSourceWriter.writeLine(builder);
     }
 }

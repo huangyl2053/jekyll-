@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZA010001;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
@@ -35,7 +35,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuSeigoseiCheckJohoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -59,6 +61,7 @@ public class ShikakuFuseigoShuseiMainHandler {
     private static final int NUMBER_FLAG_2 = 2;
     private static final int NUMBER_FLAG_3 = 3;
     private static final int NUMBER_FLAG_4 = 4;
+    private final int 第１号被保険者到達基準年齢;
 
     /**
      * コンストラクタです。
@@ -68,6 +71,9 @@ public class ShikakuFuseigoShuseiMainHandler {
     public ShikakuFuseigoShuseiMainHandler(ShikakuFuseigoShuseiMainDiv div) {
         this.div = div;
         this.manager = ShikakuSeigoseiCheckJohoManager.createInstance();
+        第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConifg.get(
+                ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
     }
 
     /**
@@ -416,11 +422,15 @@ public class ShikakuFuseigoShuseiMainHandler {
         }
         div.getTxtUmareYmd().setValue(個人情報.get生年月日().toFlexibleDate());
         div.getTxtNenrei().setValue(個人情報.get年齢算出().get年齢());
-        div.getTxt1goTotatsuYmd().setValue(個人情報.get年齢算出().get年齢到達日(
-                new NenreiTotatsuKijunConfig().get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢)));
+        div.getTxt1goTotatsuYmd().setValue(個人情報.get年齢算出().get年齢到達日(第１号被保険者到達基準年齢));
         div.getTxtJukiTorokuJiyu().setValue(個人情報.get登録事由().get異動事由略称());
         div.getTxtTorokuIdoYmd().setValue(個人情報.get登録異動年月日());
         div.getTxtTorokuTodokedeYmd().setValue(個人情報.get登録届出年月日());
+        div.getTxtJukiShojoJiyu().setValue(個人情報.get消除事由().get異動事由略称());
+        div.getTxtShojoIdoYmd().setValue(個人情報.get消除異動年月日());
+        div.getTxtShojoTodokedeYmd().setValue(個人情報.get消除届出年月日());
+        div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
+        div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
             div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(JogaiTekiyoJiyu.toValue(現在の他特の情報.get適用除外適用事由コード()).get略称());
             div.getTxtCurrentTekiyoJogaiTekiyoYmd().setValue(現在の他特の情報.get適用年月日());
@@ -475,11 +485,15 @@ public class ShikakuFuseigoShuseiMainHandler {
         }
         div.getTxtUmareYmd().setValue(個人情報.get生年月日().toFlexibleDate());
         div.getTxtNenrei().setValue(個人情報.get年齢算出().get年齢());
-        div.getTxt1goTotatsuYmd().setValue(個人情報.get年齢算出().get年齢到達日(
-                new NenreiTotatsuKijunConfig().get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢)));
+        div.getTxt1goTotatsuYmd().setValue(個人情報.get年齢算出().get年齢到達日(第１号被保険者到達基準年齢));
         div.getTxtJukiTorokuJiyu().setValue(個人情報.get登録事由().get異動事由略称());
         div.getTxtTorokuIdoYmd().setValue(個人情報.get登録異動年月日());
         div.getTxtTorokuTodokedeYmd().setValue(個人情報.get登録届出年月日());
+        div.getTxtJukiShojoJiyu().setValue(個人情報.get消除事由().get異動事由略称());
+        div.getTxtShojoIdoYmd().setValue(個人情報.get消除異動年月日());
+        div.getTxtShojoTodokedeYmd().setValue(個人情報.get消除届出年月日());
+        div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
+        div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
             div.getTxtCurrentTatokuTekiyoJiyu().setValue(
                     TatokureiTekiyoJiyu.toValue(現在の他特の情報.get他市町村住所地特例適用事由コード()).get略称());
@@ -520,11 +534,15 @@ public class ShikakuFuseigoShuseiMainHandler {
         }
         div.getTxtUmareYmd().setValue(個人情報.get生年月日().toFlexibleDate());
         div.getTxtNenrei().setValue(個人情報.get年齢算出().get年齢());
-        div.getTxt1goTotatsuYmd().setValue(個人情報.get年齢算出().get年齢到達日(
-                new NenreiTotatsuKijunConfig().get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢)));
+        div.getTxt1goTotatsuYmd().setValue(個人情報.get年齢算出().get年齢到達日(第１号被保険者到達基準年齢));
         div.getTxtJukiTorokuJiyu().setValue(個人情報.get登録事由().get異動事由略称());
         div.getTxtTorokuIdoYmd().setValue(個人情報.get登録異動年月日());
         div.getTxtTorokuTodokedeYmd().setValue(個人情報.get登録届出年月日());
+        div.getTxtJukiShojoJiyu().setValue(個人情報.get消除事由().get異動事由略称());
+        div.getTxtShojoIdoYmd().setValue(個人情報.get消除異動年月日());
+        div.getTxtShojoTodokedeYmd().setValue(個人情報.get消除届出年月日());
+        div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
+        div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の資格の情報 != null) {
             div.getTxtCurrentShikakuShutokuJiyu().setValue(ShikakuShutokuJiyu.toValue(現在の資格の情報.get資格取得事由コード()).get名称());
             div.getTxtCurrentShikakuShutokuYmd().setValue(現在の資格の情報.get資格取得年月日());

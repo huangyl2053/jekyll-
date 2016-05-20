@@ -207,9 +207,13 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報) {
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報
                 = 本算定決定通知書情報.get編集後本算定通知書共通情報();
+        RString 調定年度 = 編集後本算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .fillType(FillType.BLANK).toDateString();
+        RStringBuilder 調定年度SB = new RStringBuilder();
+        調定年度SB.append(調定年度);
+        調定年度SB.append(new RString("年度"));
         if (is特別徴収停止(本算定決定通知書情報)) {
-            reportSource.choteiNendo = 編集後本算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .fillType(FillType.BLANK).toDateString();
+            reportSource.choteiNendo = 調定年度SB.toRString();
             reportSource.title1 = RString.EMPTY;
             reportSource.title2 = RString.EMPTY;
             reportSource.title3 = new RString("介護保険料額変更通知書");
@@ -218,8 +222,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             通知文1.append(new RString("年度分の介護保険料額を右のとおり変更しましたので通知します。"));
             reportSource.tsuchibun1 = 通知文1.toRString();
         } else {
-            reportSource.choteiNendo = 編集後本算定通知書共通情報.get調定年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .fillType(FillType.BLANK).toDateString();
+            reportSource.choteiNendo = 調定年度SB.toRString();
             reportSource.title1 = new RString("介護保険料額変更通知書兼");
             reportSource.title2 = new RString("特別徴収中止通知書");
             reportSource.title3 = RString.EMPTY;

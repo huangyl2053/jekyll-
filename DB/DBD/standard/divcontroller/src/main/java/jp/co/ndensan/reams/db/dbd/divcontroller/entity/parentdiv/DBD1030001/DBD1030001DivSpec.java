@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojink
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -152,14 +153,8 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 @Override
                 public boolean apply(DBD1030001Div div) {
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
-                    FlexibleDate 法施工日;
-                    RString 法施工日RString = BusinessConfig
-                    .get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-                    if (null == 法施工日RString || 法施工日RString.isEmpty()) {
-                        法施工日 = FlexibleDate.EMPTY;
-                    } else {
-                        法施工日 = new FlexibleDate(法施工日RString);
-                    }
+                    FlexibleDate 法施工日 = new FlexibleDate(DbBusinessConifg
+                            .get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
                     return 法施工日.isEmpty() || !適用開始日.isBefore(法施工日);
                 }
             },

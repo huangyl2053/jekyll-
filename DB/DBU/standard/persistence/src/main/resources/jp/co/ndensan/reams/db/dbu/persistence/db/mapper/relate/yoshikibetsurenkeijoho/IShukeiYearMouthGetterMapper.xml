@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBU-4050-030 suguangjun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.yoshikibetsurenkeijoho.IShukeiYearMouthGetterMapper">
+ <resultMap id="resultMap_JigyoHokokuTokeiDataEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
+     <result property="shukeiTaishoYSeireki" column="dbT7021Jigyo_shukeiTaishoYSeireki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+     <result property="shukeiTaishoM" column="dbT7021Jigyo_shukeiTaishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+     <result property="hyoNo" column="dbT7021Jigyo_hyoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+     <result property="shukeiNo" column="dbT7021Jigyo_shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+     <result property="hokokuYSeireki" column="dbT7021Jigyo_hokokuYSeireki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+     <result property="hokokuM" column="dbT7021Jigyo_hokokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+ </resultMap>
+        
+    <select id="selectCollectionDate1_10" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+        SELECT
+            dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM" AS "dbT7021Jigyo_shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo" AS "dbT7021Jigyo_shukeiNo"	
+        FROM
+            rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo	
+        WHERE
+            dbT7021Jigyo."hokokuYSeireki" = #{報告年}
+        AND
+            dbT7021Jigyo."hokokuM" = #{報告月}
+        AND	
+            dbT7021Jigyo."hyoNo" = '01'	
+        AND	
+            dbT7021Jigyo."shukeiNo" IN ('0200','0301','0302','0600','0702','0710','0720','0900','1002','1010','1020','1030','1040')
+        GROUP BY
+            dbT7021Jigyo."shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo"	
+        ORDER BY
+            dbT7021Jigyo."shukeiNo" DESC	
+        LIMIT
+            1	
+    </select>
+    
+     <select id="selectCollectionDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+         SELECT
+            dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM" AS "dbT7021Jigyo_shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo" AS "dbT7021Jigyo_shukeiNo"	
+        FROM
+            rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo	
+        WHERE
+            dbT7021Jigyo."hokokuYSeireki" = #{報告年}
+        AND
+            dbT7021Jigyo."hokokuM" = #{報告月}
+        AND	
+            dbT7021Jigyo."hyoNo" = '01'	
+        AND	
+            dbT7021Jigyo."shukeiNo" IN ('1200','1391','1392','1393','1400')
+        GROUP BY
+            dbT7021Jigyo."shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo"	
+        ORDER BY
+            dbT7021Jigyo."shukeiNo" DESC	
+        LIMIT
+            1
+     </select>
+     
+     <select id="selectReviewDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+         SELECT
+            dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM" AS "dbT7021Jigyo_shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo" AS "dbT7021Jigyo_shukeiNo"	
+        FROM
+            rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo	
+        WHERE
+            dbT7021Jigyo."hokokuYSeireki" = #{報告年}
+        AND
+            dbT7021Jigyo."hokokuM" = #{報告月}
+        AND	
+            dbT7021Jigyo."hyoNo" = '03'	
+        AND	
+            dbT7021Jigyo."shukeiNo" IN ('1200','1391','1392','1393','1400')
+        GROUP BY
+            dbT7021Jigyo."shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo"	
+        ORDER BY
+            dbT7021Jigyo."shukeiNo" DESC	
+        LIMIT
+            1
+     </select>
+     
+     <select id="selectDecisionDate12_14" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+         SELECT
+            dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM" AS "dbT7021Jigyo_shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo" AS "dbT7021Jigyo_shukeiNo"	
+        FROM
+            rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo	
+        WHERE
+            dbT7021Jigyo."hokokuYSeireki" = #{報告年}
+        AND
+            dbT7021Jigyo."hokokuM" = #{報告月}
+        AND	
+            dbT7021Jigyo."hyoNo" = '05'	
+        AND	
+            dbT7021Jigyo."shukeiNo" IN ('1200','1391','1392','1393','1400')
+        GROUP BY
+            dbT7021Jigyo."shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo"	
+        ORDER BY
+            dbT7021Jigyo."shukeiNo" DESC	
+        LIMIT
+            1
+     </select>
+     
+     <select id="selectCollectionDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+         SELECT
+            dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM" AS "dbT7021Jigyo_shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo" AS "dbT7021Jigyo_shukeiNo"	
+        FROM
+            rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo	
+        WHERE
+            dbT7021Jigyo."hokokuYSeireki" = #{報告年}
+        AND
+            dbT7021Jigyo."hokokuM" = #{報告月}
+        AND	
+            dbT7021Jigyo."hyoNo" = '02'	
+        AND	
+            dbT7021Jigyo."shukeiNo" IN (
+         '0101','0102','0103','0104','0201','0202','0203','0204','0301','0302',
+         '0303','0304','0401','0402','0403','0404','0105','0106','0205',
+         '0206','0701','0702','0703','0704','0705','0706','0707'
+         )
+        GROUP BY
+            dbT7021Jigyo."shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo"	
+        ORDER BY
+            dbT7021Jigyo."shukeiNo" DESC	
+        LIMIT
+            1
+     </select>
+     
+     <select id="selectReviewDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+         SELECT
+            dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM" AS "dbT7021Jigyo_shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo" AS "dbT7021Jigyo_shukeiNo"	
+        FROM
+            rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo	
+        WHERE
+            dbT7021Jigyo."hokokuYSeireki" = #{報告年}
+        AND
+            dbT7021Jigyo."hokokuM" = #{報告月}
+        AND	
+            dbT7021Jigyo."hyoNo" = '04'	
+        AND	
+            dbT7021Jigyo."shukeiNo" IN (
+         '0101','0102','0103','0104','0201','0202','0203','0204','0301','0302',
+         '0303','0304','0401','0402','0403','0404','0105','0106','0205',
+         '0206','0701','0702','0703','0704','0705','0706','0707'
+         )
+        GROUP BY
+            dbT7021Jigyo."shukeiTaishoYSeireki",	
+            dbT7021Jigyo."shukeiTaishoM",	
+            dbT7021Jigyo."shukeiNo" 	
+        ORDER BY
+            dbT7021Jigyo."shukeiNo" DESC	
+        LIMIT
+            1
+     </select>
+     
+     <select id="selectDecisionDate" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+         SELECT
+         dbT7021Jigyo."shukeiTaishoYSeireki" AS "dbT7021Jigyo_shukeiTaishoYSeireki",
+         dbT7021Jigyo."shukeiTaishoM" AS "dbT7021Jigyo_shukeiTaishoM",
+         dbT7021Jigyo."hyoNo" AS "dbT7021Jigyo_hyoNo",
+         dbT7021Jigyo."shukeiNo" AS "dbT7021Jigyo_shukeiNo"
+         FROM
+         rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo
+         WHERE
+         dbT7021Jigyo."hokokuYSeireki"= #{報告年}
+         AND
+         dbT7021Jigyo."hokokuM" = #{報告月}
+         AND
+         (
+         (
+         dbT7021Jigyo."hyoNo" = '06'
+         AND
+         dbT7021Jigyo."shukeiNo" IN ('0101','0102','0103','0104','0201','0202','0203','0204',
+         '0301','0302','0303','0304','0401','0402','0403','0404','0105',
+         '0106','0205','0206','0701','0702','0703','0704','0705','0706','0707')
+         )
+         OR
+         (
+         dbT7021Jigyo."hyoNo" = '07'
+         AND
+         dbT7021Jigyo."shukeiNo" IN ('0801','0802','0803','0804','0805')
+         )
+         )
+         GROUP BY
+         dbT7021Jigyo."shukeiTaishoYSeireki",
+         dbT7021Jigyo."shukeiTaishoM",
+         dbT7021Jigyo."hyoNo",
+         dbT7021Jigyo."shukeiNo"
+         ORDER BY
+         dbT7021Jigyo."hyoNo" DESC,
+         dbT7021Jigyo."shukeiNo" DESC
+         LIMIT
+         1
+     </select>
+     
+      <select id="selectKakoHokokuYM" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter"
+            resultMap="resultMap_JigyoHokokuTokeiDataEntity" fetchSize="500">
+          SELECT
+          dbT7021Jigyo."hokokuYSeireki" AS "dbT7021Jigyo_hokokuYSeireki",
+          dbT7021Jigyo."hokokuM" AS "dbT7021Jigyo_hokokuM"
+          FROM
+          rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021Jigyo
+          GROUP BY
+          dbT7021Jigyo."hokokuYSeireki",
+          dbT7021Jigyo."hokokuM"
+          ORDER BY
+          dbT7021Jigyo."hokokuYSeireki" DESC,
+          dbT7021Jigyo."hokokuM" DESC
+      </select>
+</mapper>

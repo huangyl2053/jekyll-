@@ -27,7 +27,6 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final RString 作成 = new RString("作成");
     private final HanteiKekkaIchiranA3Entity entity;
 
     /**
@@ -65,7 +64,6 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         printTimeStamp.append(String.format("%02d", entity.getPrintTimeStamp().getSecond()));
         printTimeStamp.append(DATE_秒);
         printTimeStamp.append(RString.HALF_SPACE);
-        printTimeStamp.append(作成);
         source.hakkoYMD = printTimeStamp.toRString();
         source.listHanteikekka_1 = new RString(String.valueOf(entity.get介護認定審査会審査順()));
         source.listHanteikekka_2 = entity.get市町村名称();

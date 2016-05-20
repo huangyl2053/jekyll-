@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch;
 
-import jp.co.ndensan.reams.db.dbe.entity.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

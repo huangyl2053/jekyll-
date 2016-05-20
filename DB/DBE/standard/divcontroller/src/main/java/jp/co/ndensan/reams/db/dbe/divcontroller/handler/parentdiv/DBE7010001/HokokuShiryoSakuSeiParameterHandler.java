@@ -5,11 +5,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE7010001.HokokuShiryoSakuSeiParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 報告資料発行画面のハンドラークラスです。
@@ -40,7 +40,7 @@ public class HokokuShiryoSakuSeiParameterHandler {
         div.getChkShutsuryokuChohyo().setSelectedItemsByKey(CHECKなし);
         div.getChkCsvShutsuryoku().setSelectedItemsByKey(CHECKなし);
         div.getTxtShuturyokuSaki().setValue(
-                BusinessConfig.get(ConfigNameDBE.県報告資料ファイル名称, SubGyomuCode.DBE認定支援));
+                DbBusinessConifg.get(ConfigNameDBE.県報告資料ファイル名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getChkHihokenshaKubun().setSelectedItemsByKey(CHECKなし);
         div.getRadKubun().setSelectedKey(KEY_対象年月);

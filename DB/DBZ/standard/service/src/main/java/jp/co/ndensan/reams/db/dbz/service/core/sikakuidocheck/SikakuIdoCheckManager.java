@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.sikakuidocheck.IS
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -241,7 +242,11 @@ public class SikakuIdoCheckManager {
             }
         }
         for (int k = 0; k < idokikanList.size() - 1; k++) {
-            if (idokikanList.get(k).getKaishiYMD().isBefore(idokikanList.get(k + 1).getShuryoYMD())) {
+            FlexibleDate shuryoYMD = idokikanList.get(k + 1).getShuryoYMD();
+            if (shuryoYMD == null || shuryoYMD.isEmpty()) {
+                shuryoYMD = FlexibleDate.MIN;
+            }
+            if (idokikanList.get(k).getKaishiYMD().isBefore(shuryoYMD)) {
                 checkFlag = false;
                 return checkFlag;
             }

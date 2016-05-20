@@ -8,16 +8,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteich
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInputDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 共有子Div「NinteiChosaIkkatsuInput」の抽象ValidationHandlerクラスです。
@@ -47,7 +48,7 @@ public class NinteiChosaIkkatsuInputValidationHandler {
         if (div.getChkDay().getSelectedItems().isEmpty()) {
             validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.validation曜日));
         }
-        RString 調査スケジュール最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
+        RString 調査スケジュール最大時間枠 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール最大時間枠, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!調査スケジュール最大時間枠.isNullOrEmpty()) {
             List<RString> list = new ArrayList<>();
             if (!div.getChkJikanwaku1().getSelectedKeys().isEmpty()) {

@@ -234,28 +234,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
                 ? RString.EMPTY : shiharai.get支払期間終了年月日().wareki().eraType(
                         EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                         Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        RStringBuilder 支払窓口開始時間Builder = new RStringBuilder();
-        if (!RString.isNullOrEmpty(shiharai.get支払窓口開始時間())) {
-            RTime 支払窓口開始時間 = new RTime(shiharai.get支払窓口開始時間());
-            支払窓口開始時間Builder.append(String.format("%02d", 支払窓口開始時間.getHour()));
-            支払窓口開始時間Builder.append(new RString("時"));
-            支払窓口開始時間Builder.append(String.format("%02d", 支払窓口開始時間.getMinute()));
-            支払窓口開始時間Builder.append(new RString("分"));
-            支払窓口開始時間Builder.append(String.format("%02d", 支払窓口開始時間.getSecond()));
-            支払窓口開始時間Builder.append(new RString("秒"));
-        }
-        item.setShiharaiStartHMS(支払窓口開始時間Builder.toRString());
-        RStringBuilder 支払窓口終了期間Builder = new RStringBuilder();
-        if (!RString.isNullOrEmpty(shiharai.get支払窓口終了期間())) {
-            RTime 支払窓口終了期間 = new RTime(shiharai.get支払窓口終了期間());
-            支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getHour()));
-            支払窓口終了期間Builder.append(new RString("時"));
-            支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getMinute()));
-            支払窓口終了期間Builder.append(new RString("分"));
-            支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getSecond()));
-            支払窓口終了期間Builder.append(new RString("秒"));
-        }
-        item.setShiharaiEndHMS(支払窓口終了期間Builder.toRString());
+        item.setShiharaiStartHMS(setDataTimeFomart(shiharai.get支払窓口開始時間()));
+        item.setShiharaiEndHMS(setDataTimeFomart(shiharai.get支払窓口終了期間()));
         if (!RString.isNullOrEmpty(shiharai.get支払窓口開始時間()) && !RString.isNullOrEmpty(shiharai.get支払窓口終了期間())) {
             item.setKaraFugo(KARA);
         }
@@ -418,5 +398,20 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
                     KamokuCode.EMPTY, FOUR, THREE, batchPram.getHakkoYMD()));
         }
         return item;
+    }
+
+    private RString setDataTimeFomart(RString time) {
+        if (RString.isNullOrEmpty(time)) {
+            return RString.EMPTY;
+        }
+        RStringBuilder 支払窓口終了期間Builder = new RStringBuilder();
+        RTime 支払窓口終了期間 = new RTime(time);
+        支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getHour()));
+        支払窓口終了期間Builder.append(new RString("時"));
+        支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getMinute()));
+        支払窓口終了期間Builder.append(new RString("分"));
+        支払窓口終了期間Builder.append(String.format("%02d", 支払窓口終了期間.getSecond()));
+        支払窓口終了期間Builder.append(new RString("秒"));
+        return 支払窓口終了期間Builder.toRString();
     }
 }

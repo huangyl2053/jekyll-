@@ -45,9 +45,9 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     private static final RString 参照 = new RString("参照");
     private static final RString 業務区分 = new RString("03");
     private static final RString 受託なし = new RString("1");
-    private static final RString 申請を保存する = new RString("Element3");
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
+    private static final int 定数_1 = 1;
     private static final int 定数_6 = 6;
 
     /**
@@ -88,7 +88,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
             div.getPanelTwo().getTxtSeiriBango().clearValue();
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
-                    被保険者番号, サービス年月, 整理番号, 業務区分, 登録);
+                    被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
             div.getPanelTwo().getBtnKouza().setDisabled(true);
             div.getPanelTwo().getTxtShoriMode().setValue(新規);
         }
@@ -224,10 +224,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalFuSyikyuriyu1(RString fuSyikyuriyu1, KetteJoho 決定情報) {
-        if (fuSyikyuriyu1 == null && 決定情報.getZougenRiyu() == null) {
+        if (fuSyikyuriyu1 == null && 決定情報.getHushikyuRiyu() == null) {
             return false;
         }
-        if (fuSyikyuriyu1 != null && fuSyikyuriyu1.equals(決定情報.getZougenRiyu())) {
+        if (fuSyikyuriyu1 != null && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
             return false;
         }
         return true;
@@ -343,12 +343,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 .getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue();
         int 増減単位 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
-        boolean flag = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete()
-                .getGridSetting().getColumn("sagakuKingaku").isVisible();
-        boolean 差額金額登録フラグ = true;
-        if (flag) {
-            差額金額登録フラグ = false;
-        }
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         // TODO viewStateのデータ取得
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
@@ -360,12 +354,18 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             SyokanbaraihiShikyuShinseiKetteEntity entity = SyokanbaraihiShikyuShinseiKetteEntity.createSelectByKeyParam(
                     new JigyoshaNo(row.getJigyoshaNo()),
                     row.getYoshikiNo(),
+                    row.getYoshikiNo(),
                     row.getMeisaiNo(),
                     row.getRenban(),
                     row.getSagakuKingaku().getValue().intValue(),
                     row.getTableKubun(),
                     Integer.valueOf(row.getUpdateCount().toString()));
             entityList.add(entity);
+        }
+        boolean flag = rowList.get(定数_1).getSagakuKingaku().isDisabled();
+        boolean 差額金額登録フラグ = true;
+        if (flag) {
+            差額金額登録フラグ = false;
         }
         SyokanbaraihiShikyuShinseiKetteParameter parameter = SyokanbaraihiShikyuShinseiKetteParameter.createSelectByKeyParam(
                 被保険者番号,

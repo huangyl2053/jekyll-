@@ -198,6 +198,9 @@ public class ShikakuJukiValidator {
      */
     public Map<RString, DbzErrorMessages> createValidationMessages(FuseigoRiyu 不整合理由, IKojin 個人情報) {
         Map<RString, DbzErrorMessages> retMap = new HashMap<>();
+        if (不整合理由 == null) {
+            return retMap;
+        }
         switch (不整合理由) {
             case 資格管理情報未登録者:
                 break;
@@ -209,9 +212,6 @@ public class ShikakuJukiValidator {
                 break;
             case 資格取得者_消除者:
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_職権削除);
-                break;
-            case 資格取得者_転出者:
-                setMsg(retMap, 個人情報);
                 break;
             case 資格取得者_死亡者:
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_死亡);
@@ -255,6 +255,7 @@ public class ShikakuJukiValidator {
             default:
                 break;
         }
+        setMsg(retMap, 個人情報, 不整合理由);
         return retMap;
     }
 
@@ -291,8 +292,8 @@ public class ShikakuJukiValidator {
         return createValidationMessages(checkFor他特不整合(個人情報, 他特の情報), 個人情報);
     }
 
-    private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報) {
-        if (isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
+    private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報, FuseigoRiyu 不整合理由) {
+        if (不整合理由 == FuseigoRiyu.資格取得者_転出者 && isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
             retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
         } else {
             retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
@@ -344,7 +345,7 @@ public class ShikakuJukiValidator {
             FlexibleDate 資格喪失年月日, RString 資格喪失事由コード,
             FlexibleDate 転出確定, FlexibleDate 転出予定,
             FuseigoRiyu 不整合理由) {
-        if (isNullOrEmpty(適用年月日) && !isNullOrEmpty(解除年月日) && isNullOrEmpty(資格喪失年月日)) {
+        if (!(!isNullOrEmpty(適用年月日) && isNullOrEmpty(解除年月日)) && isNullOrEmpty(資格喪失年月日)) {
             不整合理由 = FuseigoRiyu.資格取得者_転出者;
         }
         if (ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由コード)) {

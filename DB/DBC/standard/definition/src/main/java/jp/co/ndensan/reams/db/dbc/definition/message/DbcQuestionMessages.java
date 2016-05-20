@@ -37,7 +37,7 @@ public enum DbcQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbcQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("Q", no), message);
+        this.message = new QuestionMessage(toCode("DBCQ", no), message);
     }
 
     @Override

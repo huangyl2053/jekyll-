@@ -852,19 +852,21 @@ public final class FutsuChoshuTotalHandler {
                     || FuchokiJohoTsukiShoriKubun.普徴仮算定異動.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
                     || FuchokiJohoTsukiShoriKubun.本算定.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
                     || FuchokiJohoTsukiShoriKubun.本算定異動.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
-                    || FuchokiJohoTsukiShoriKubun.普徴仮算定.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
-                    || FuchokiJohoTsukiShoriKubun.普徴仮算定異動.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())) {
+                    || FuchokiJohoTsukiShoriKubun.現年随時.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
+                    || FuchokiJohoTsukiShoriKubun.随時.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())) {
                 普徴期情報_設定納期数 = 普徴期情報_設定納期数 + 数字_１;
             }
 
             update(row.getTxtTsukinoKi(), 普徴期情報_月の期.get(i));
             if (row.getSelected()) {
-                NokiManager nokiManager = new NokiManager();
-                Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                        new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
-                        GennenKanen.現年度,
-                        Integer.parseInt(row.getTxtKi().toString()));
-                save納期(noki, row);
+                if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
+                    NokiManager nokiManager = new NokiManager();
+                    Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                            new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
+                            GennenKanen.現年度,
+                            Integer.parseInt(row.getTxtKi().toString()));
+                    save納期(noki, row);
+                }
                 if (i == 数字_１２) {
                     update(FOURTEEN, 普通徴収_期別テーブル.get(i));
                 } else if (i == 数字_１３) {
@@ -889,7 +891,7 @@ public final class FutsuChoshuTotalHandler {
         }
         update(new RString(String.valueOf(普徴期情報_仮算定期数)), ConfigNameDBB.普徴期情報_仮算定期数);
         update(new RString(String.valueOf(普徴期情報_定例納期数)), ConfigNameDBB.普徴期情報_定例納期数);
-        update(new RString(String.valueOf(普徴期情報_設定納期数)), ConfigNameDBB.普徴期情報_定例納期数);
+        update(new RString(String.valueOf(普徴期情報_設定納期数)), ConfigNameDBB.普徴期情報_設定納期数);
         update(div.getFutsuChoshu().getDdlHasu().getSelectedKey(), ConfigNameDBB.普通徴収_期別端数);
         update(div.getFutsuChoshu().getDdlFukaHoho().getSelectedKey(), ConfigNameDBB.普通徴収_仮算定賦課方法);
         update(div.getFutsuChoshu().getDdlIdoHoho().getSelectedKey(), ConfigNameDBB.普通徴収_仮算定異動方法);
@@ -909,6 +911,20 @@ public final class FutsuChoshuTotalHandler {
                     set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
                     set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
                     set納期終了日(new RDate(row.getTxtNokigenEdYMD().getValue().toString())).build();
+            new NokiManager().save納期(noki);
+        }
+    }
+
+    private void save納期_過年度(Noki noki, dgKaNendoKibetsuJoho_Row row) {
+        if (!noki.get通知書発行日().equals(new RDate(row.getTxtHakkoYMD().getValue().toString()))
+                || !noki.get納期限().equals(new RDate(row.getTxtNokigenYMD().getValue().toString()))
+                || !noki.get納期開始日().equals(new RDate(row.getTxtNokigenStYMD().getValue().toString()))
+                || !noki.get納期終了日().equals(new RDate(row.getTxtNokigenEtYMD().getValue().toString()))) {
+            noki = noki.createBuilderForEdit().
+                    set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
+                    set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
+                    set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
+                    set納期終了日(new RDate(row.getTxtNokigenEtYMD().getValue().toString())).build();
             new NokiManager().save納期(noki);
         }
     }
@@ -941,21 +957,13 @@ public final class FutsuChoshuTotalHandler {
                 } else if (第５月.equals(row.getTxtTsuki())) {
                     update(row.getDdlSaiShutsu().getSelectedKey(), ConfigNameDBB.過年度期情報_過年度の歳出2);
                 }
-                NokiManager nokiManager = new NokiManager();
-                Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                        new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
-                        GennenKanen.過年度,
-                        Integer.parseInt(row.getTxtKi().toString()));
-                if (!noki.get通知書発行日().equals(new RDate(row.getTxtHakkoYMD().getValue().toString()))
-                        || !noki.get納期限().equals(new RDate(row.getTxtNokigenYMD().getValue().toString()))
-                        || !noki.get納期開始日().equals(new RDate(row.getTxtNokigenStYMD().getValue().toString()))
-                        || !noki.get納期終了日().equals(new RDate(row.getTxtNokigenEtYMD().getValue().toString()))) {
-                    noki = noki.createBuilderForEdit().
-                            set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
-                            set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
-                            set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
-                            set納期終了日(new RDate(row.getTxtNokigenEtYMD().getValue().toString())).build();
-                    new NokiManager().save納期(noki);
+                if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
+                    NokiManager nokiManager = new NokiManager();
+                    Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                            new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
+                            GennenKanen.過年度,
+                            Integer.parseInt(row.getTxtKi().toString()));
+                    save納期_過年度(noki, row);
                 }
             } else {
                 update(RString.EMPTY, 過年度_期別テーブル.get(i));
@@ -1526,6 +1534,8 @@ public final class FutsuChoshuTotalHandler {
                 FuchoZanteiKeisanHoho.前年度_確定年額乗３分の４_今納期数.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_段階補正.getコード(),
                 FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_段階補正.get略称()));
+        賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_前年度所得_今年度賦課期日__今納期数_段階補正.getコード(),
+                FuchoZanteiKeisanHoho.今年度_基準年額_前年度所得_今年度賦課期日__今納期数_段階補正.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_一律.getコード(),
                 FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_一律.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.千代田区独自算定.getコード(),

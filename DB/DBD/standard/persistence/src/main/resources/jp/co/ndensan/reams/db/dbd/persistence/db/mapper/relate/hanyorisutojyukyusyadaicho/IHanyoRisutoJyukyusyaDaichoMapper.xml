@@ -794,137 +794,137 @@ FROM
             
             <if test="is指定日範囲">
                 <if test="is認定日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                         AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                         AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is申請日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."jukyuShinseiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    受給者台帳."jukyuShinseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is調査依頼日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査依頼."ninteichosaIraiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    今回調査依頼."ninteichosaIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is調査実施予定日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                         AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaIraiYoteiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                         AND    今回計画情報."ninteichosaIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is調査実施日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査結果_概況."ninteichosaJisshiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    今回調査結果_概況."ninteichosaJisshiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is意見書依頼日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書作成依頼."ikenshoSakuseiIraiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    今回意見書作成依頼."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is意見書入手予定日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                         AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ikenshoSakuseiIraiYoteiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                         AND    今回計画情報."ikenshoSakuseiIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is意見書入手日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書情報."ikenshoJuryoYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    今回意見書情報."ikenshoJuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is審査会資料作成日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回結果情報."shinsakaiShiryoSakuseiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    今回結果情報."shinsakaiShiryoSakuseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is審査会回答予定日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaYoteiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    今回計画情報."ninteichosaYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is審査会回答日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND    #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is認定有効開始日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanKaishiYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
                 
                 <if test="is認定有効終了日">
-                    <if test="!isCyusyutsunichifrom">
+                    <if test="!is抽出日from">
                     AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
                     </if>
-                    <if test="!isCyusyutsunichito">
+                    <if test="!is抽出日to">
                     AND    受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
                     </if>
                 </if>
             </if>
             
             <if test="is医療機関コード範囲">
-                    <if test="!isIryokikancodefrom">
+                    <if test="!is医療機関コードfrom">
                     AND    #{iryokikancodefrom} <![CDATA[<=]]> 今回主治医医療機関."shujiiIryokikanCode"
                     </if>
-                    <if test="!isIryokikancodefto">
+                    <if test="!is医療機関コードto">
                     AND    今回主治医医療機関."shujiiIryokikanCode" <![CDATA[<=]]> #{iryokikancodefto}
                     </if>
             </if>
             
             <if test="is調査委託先コード範囲">
-                <if test="!isCyosaitakusakicodefrom">
+                <if test="!is調査委託先コードfrom">
                     AND    #{cyosaitakusakicodefrom} <![CDATA[<=]]> 今回調査委託先."ninteichosaItakusakiCode"
                 </if>
-                <if test="!isCyosaitakusakicodefto">
+                <if test="!is調査委託先コードto">
                     AND    今回調査委託先."ninteichosaItakusakiCode" <![CDATA[<=]]> #{cyosaitakusakicodefto}
                 </if>
             </if>

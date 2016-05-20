@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import lombok.Getter;
 
 /**
@@ -21,21 +20,27 @@ import lombok.Getter;
 public class ShikyuShinseiDetailParameter implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private final HihokenshaNo hiHokenshaNo;
-    private final FlexibleYearMonth serviceTeikyoYM;
-    private final RString seiriNo;
+    private final RString 処理モード;
+    private final RString 被保険者番号;
+    private final RYearMonth サービス提供年月;
+    private final RString 整理番号;
+    private final RString 申請日;
 
     /**
      * ShikyuShinseiDetailParameter
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @param サービス提供年月 FlexibleYearMonth
+     * @param 処理モード RString
+     * @param 被保険者番号 RString
+     * @param サービス提供年月 RYearMonth
      * @param 整理番号 RString
+     * @param 申請日 RString
      */
-    public ShikyuShinseiDetailParameter(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
-            RString 整理番号) {
-        this.hiHokenshaNo = 被保険者番号;
-        this.serviceTeikyoYM = サービス提供年月;
-        this.seiriNo = 整理番号;
+    public ShikyuShinseiDetailParameter(RString 処理モード, RString 被保険者番号, RYearMonth サービス提供年月,
+            RString 整理番号, RString 申請日) {
+        this.処理モード = 処理モード;
+        this.被保険者番号 = 被保険者番号;
+        this.サービス提供年月 = サービス提供年月;
+        this.整理番号 = 整理番号;
+        this.申請日 = 申請日;
     }
 }

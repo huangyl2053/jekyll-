@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 保険料納入通知書（本算定）【ブック（口振依頼あり通知書＋納付書）タイプ】の情報です。
  *
- * @author xuyue
+ * @reamsid_L DBB-9110-100 xuyue
  */
 @Setter
 @Getter

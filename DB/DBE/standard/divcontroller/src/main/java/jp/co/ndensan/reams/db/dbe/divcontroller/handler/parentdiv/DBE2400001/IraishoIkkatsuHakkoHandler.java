@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.Irai
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgNinteiChosaIraiTaishoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -191,7 +191,7 @@ public class IraishoIkkatsuHakkoHandler {
         if (!flag) {
             List<RString> shujiiIkenshoDisabledKeys = new ArrayList<>();
             List<RString> ocrDisabledKeys = new ArrayList<>();
-            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, SubGyomuCode.DBE認定支援))) {
+            if (OCR.equals(DbBusinessConifg.get(ConfigNameDBE.意見書用紙タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
                 shujiiIkenshoDisabledKeys.add(COMMON_SELECTED);
                 div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(shujiiIkenshoDisabledKeys);
             } else {
@@ -213,20 +213,21 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkNinteiChosahyoOcrShurui().setDisabled(flag);
         div.getChkNinteiChosaIraisho().setDisabled(flag);
         div.getChkNinteiChosahyoSonota().setDisabled(flag);
+        RDate 基準日 = RDate.getNowDate();
         if (!flag) {
             List<RString> ninteiChosahyoDisabledKeys = new ArrayList<>();
             List<RString> ocrDisabledKeys = new ArrayList<>();
-            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, SubGyomuCode.DBE認定支援))) {
+            if (OCR.equals(DbBusinessConifg.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
                 ninteiChosahyoDisabledKeys.add(COMMON_SELECTED);
             } else {
                 ocrDisabledKeys.add(COMMON_SELECTED);
             }
-            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
+            if (OCR.equals(DbBusinessConifg.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
                 ninteiChosahyoDisabledKeys.add(CHOHYO_CHECKED);
             } else {
                 ocrDisabledKeys.add(CHOHYO_CHECKED);
             }
-            if (OCR.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, SubGyomuCode.DBE認定支援))) {
+            if (OCR.equals(DbBusinessConifg.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
                 ninteiChosahyoDisabledKeys.add(SHUTSU_CHECKED);
             } else {
                 ocrDisabledKeys.add(SHUTSU_CHECKED);

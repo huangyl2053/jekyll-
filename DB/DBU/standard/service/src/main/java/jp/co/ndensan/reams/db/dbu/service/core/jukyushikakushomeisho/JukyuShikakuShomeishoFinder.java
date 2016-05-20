@@ -10,12 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKo;
 import jp.co.ndensan.reams.db.dbu.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoData;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.JukyuShikakuShomeishoMyBatisParameter;
-import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jukyushikakushomeisho.IJukyuShikakuShomeishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho.getShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
@@ -109,8 +110,7 @@ public class JukyuShikakuShomeishoFinder {
 
         edit被保険者(outEntity, inEntity);
 
-        outEntity.set被保険者異動予定日(new FlexibleDate(inEntity.get異動予定日()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        outEntity.set被保険者異動予定日(inEntity.get異動予定日());
 
         edit保険者番号(outEntity, inEntity.get被保険者番号());
 
@@ -261,7 +261,7 @@ public class JukyuShikakuShomeishoFinder {
 
     private void 外国人の場合生年月日編集(RString 年号, RString 日付,
             JukyuShikakuShomeishoDataEntity outEntity, RString 生年月日西暦, UaFt200FindShikibetsuTaishoEntity 宛名識別対象PSM) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig
+        RString 外国人表示制御_生年月日表示方法 = DbBusinessConifg
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード()
                 .equals(外国人表示制御_生年月日表示方法)) {
@@ -349,15 +349,14 @@ public class JukyuShikakuShomeishoFinder {
      * @param outEntity 受給資格証明書の帳票出力用データEntity
      * @param 交付日 交付日
      */
-    private JukyuShikakuShomeishoData edit認証者電子公印(JukyuShikakuShomeishoDataEntity outEntity, RDate 交付日) {
+    private JukyuShikakuShomeishoData edit認証者電子公印(JukyuShikakuShomeishoDataEntity outEntity, RString 交付日) {
         ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBA介護資格, new ReportId("DBE223001_NinteiChosaTokusokujo"));
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険,
-                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(交付日.toDateString()));
-        outEntity.set発行日(交付日.wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), new FlexibleDate(new RDate(交付日.toString()).toString()));
+        outEntity.set発行日(交付日);
         return new JukyuShikakuShomeishoData(outEntity, ninshosha, association, 帳票制御共通.get首長名印字位置(), 帳票制御共通.is電子公印印字有無());
     }
 
@@ -389,24 +388,14 @@ public class JukyuShikakuShomeishoFinder {
         }
         outEntity.set要介護状態区分(inEntity.get要介護状態区分());
 
-        FlexibleDate 有効期間の開始年月日
-                = null == inEntity.get有効期間の開始年月日() ? FlexibleDate.EMPTY : new FlexibleDate(inEntity.get有効期間の開始年月日());
-        FlexibleDate 有効期間の終了年月日
-                = null == inEntity.get有効期間の終了年月日() ? FlexibleDate.EMPTY : new FlexibleDate(inEntity.get有効期間の終了年月日());
-        outEntity.set認定の有効期間の開始年月日(有効期間の開始年月日
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-
-        outEntity.set認定の有効期間の終了年月日(有効期間の終了年月日
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        outEntity.set認定の有効期間の開始年月日(inEntity.get有効期間の開始年月日());
+        outEntity.set認定の有効期間の終了年月日(inEntity.get有効期間の終了年月日());
     }
 
     private void set申請状況And年月日(JukyuShikakuShomeishoDataEntity outEntity, JukyuShikakuShomeishoKaiKo inEntity, FlexibleDate 認定年月日) {
         if (inEntity.get申請日() != null && !inEntity.get申請日().isEmpty()) {
             outEntity.set申請状況(new RString("申請中"));
-            outEntity.set申請年月日(new FlexibleDate(inEntity.get申請日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            outEntity.set申請年月日(inEntity.get申請日());
             if (認定年月日 != null) {
                 outEntity.set認定年月日(認定年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -420,6 +409,7 @@ public class JukyuShikakuShomeishoFinder {
             outEntity.set申請状況(new RString("認定済"));
             outEntity.set申請年月日(RString.EMPTY);
             FlexibleDate ninteiYMD = dbT4001JukyushaDaichoEntity.getNinteiYMD();
+
             if (ninteiYMD != null) {
                 outEntity.set認定年月日(ninteiYMD.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString());

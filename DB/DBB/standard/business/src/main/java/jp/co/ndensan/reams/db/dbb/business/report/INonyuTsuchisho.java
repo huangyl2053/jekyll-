@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -17,13 +18,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9999-023 huangh
  */
-public abstract class INonyuTsuchisho<T extends IReportSource> {
+public abstract class INonyuTsuchisho<T extends IReportSource> extends Report<T> {
 
     /**
      * writeByメソッド
      *
      * @param writer writer
      */
+    @Override
     public abstract void writeBy(ReportSourceWriter<T> writer);
 
     /**

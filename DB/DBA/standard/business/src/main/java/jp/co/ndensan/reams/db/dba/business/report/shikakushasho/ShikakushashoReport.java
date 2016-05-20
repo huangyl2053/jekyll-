@@ -13,8 +13,8 @@ import lombok.NonNull;
 
 /**
  * 介護保険資格者証のReportです。
- * 
- * @reamsid_L DBU-0490-080  suguangjun
+ *
+ * @reamsid_L DBU-0490-080 suguangjun
  */
 public final class ShikakushashoReport extends Report<ShikakushashoReportSource> {
 
@@ -34,8 +34,13 @@ public final class ShikakushashoReport extends Report<ShikakushashoReportSource>
         this.bodyItemList = bodyItemList;
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param writer 介護保険資格者証
+     */
     @Override
-    protected void writeBy(ReportSourceWriter<ShikakushashoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<ShikakushashoReportSource> writer) {
         for (int i = 0; i < bodyItemList.size(); i++) {
             IShikakushashoEditor bodyEditor = new ShikakushashoBodyEditor(bodyItemList.get(i));
             IShikakushashoBuilder builder = new ShikakushashoBuilderImpl(bodyEditor);

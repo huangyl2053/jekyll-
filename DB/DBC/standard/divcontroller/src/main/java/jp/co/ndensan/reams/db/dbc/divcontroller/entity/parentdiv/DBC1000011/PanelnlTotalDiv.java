@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYearMonth;
 
 /**
  * PanelnlTotal のクラスファイル
@@ -34,10 +36,10 @@ public class PanelnlTotalDiv extends PanelBatchParameter {
      */
     @JsonProperty("ShokanbaraiShikyuKetteiTsuchishoJoken")
     private ShokanbaraiShikyuKetteiTsuchishoJokenDiv ShokanbaraiShikyuKetteiTsuchishoJoken;
-    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod")
-    private PaymentDateDiv KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod;
     @JsonProperty("PnlShokanbaraiShikyuKeteiTuchisho")
     private PnlShokanbaraiShikyuKeteiTuchishoDiv PnlShokanbaraiShikyuKeteiTuchisho;
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod")
+    private PaymentDateDiv KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod;
     @JsonProperty("ccdChohyoShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
@@ -66,15 +68,6 @@ public class PanelnlTotalDiv extends PanelBatchParameter {
     }
 
     /*
-     * getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod
-     * @return KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod
-     */
-    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod")
-    public IPaymentDateDiv getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod() {
-        return KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod;
-    }
-
-    /*
      * getPnlShokanbaraiShikyuKeteiTuchisho
      * @return PnlShokanbaraiShikyuKeteiTuchisho
      */
@@ -93,6 +86,15 @@ public class PanelnlTotalDiv extends PanelBatchParameter {
     }
 
     /*
+     * getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod
+     * @return KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod
+     */
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod")
+    public IPaymentDateDiv getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod() {
+        return KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod;
+    }
+
+    /*
      * getccdChohyoShutsuryokujun
      * @return ccdChohyoShutsuryokujun
      */
@@ -104,6 +106,86 @@ public class PanelnlTotalDiv extends PanelBatchParameter {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public TextBoxDateRange getTxtZenkaiTaishobi() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtZenkaiTaishobi();
+    }
+
+    @JsonIgnore
+    public void setTxtZenkaiTaishobi(TextBoxDateRange txtZenkaiTaishobi) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setTxtZenkaiTaishobi(txtZenkaiTaishobi);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadUketsukebi() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getRadUketsukebi();
+    }
+
+    @JsonIgnore
+    public void setRadUketsukebi(RadioButton radUketsukebi) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setRadUketsukebi(radUketsukebi);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtUketsukebi() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtUketsukebi();
+    }
+
+    @JsonIgnore
+    public void setTxtUketsukebi(TextBoxDateRange txtUketsukebi) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setTxtUketsukebi(txtUketsukebi);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKetteibi() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getRadKetteibi();
+    }
+
+    @JsonIgnore
+    public void setRadKetteibi(RadioButton radKetteibi) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setRadKetteibi(radKetteibi);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtKeteibiJoken() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteibiJoken();
+    }
+
+    @JsonIgnore
+    public void setTxtKeteibiJoken(TextBoxDateRange txtKeteibiJoken) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setTxtKeteibiJoken(txtKeteibiJoken);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKetteishaUketsukeYM() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getRadKetteishaUketsukeYM();
+    }
+
+    @JsonIgnore
+    public void setRadKetteishaUketsukeYM(RadioButton radKetteishaUketsukeYM) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setRadKetteishaUketsukeYM(radKetteishaUketsukeYM);
+    }
+
+    @JsonIgnore
+    public TextBoxYearMonth getTxtKeteishaUketsukeYM() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getTxtKeteishaUketsukeYM();
+    }
+
+    @JsonIgnore
+    public void setTxtKeteishaUketsukeYM(TextBoxYearMonth txtKeteishaUketsukeYM) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setTxtKeteishaUketsukeYM(txtKeteishaUketsukeYM);
+    }
+
+    @JsonIgnore
+    public PnlInnshoDiv getPnlInnsho() {
+        return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getPnlInnsho();
+    }
+
+    @JsonIgnore
+    public void setPnlInnsho(PnlInnshoDiv PnlInnsho) {
+        this.getShokanbaraiShikyuKetteiTsuchishoJoken().setPnlInnsho(PnlInnsho);
+    }
+
     @JsonIgnore
     public RadioButton getRadInnsho() {
         return this.getShokanbaraiShikyuKetteiTsuchishoJoken().getPnlInnsho().getRadInnsho();

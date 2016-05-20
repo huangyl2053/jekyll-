@@ -31,7 +31,7 @@ public enum DbdWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("W", no), message);
+        this.message = new WarningMessage(toCode("DBDW", no), message);
     }
 
     @Override
