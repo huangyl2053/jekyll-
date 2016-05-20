@@ -120,11 +120,7 @@ public class JyutakugaisyunaiyoList {
      * @return JyutakugaisyunaiyoListDivのResponseData
      */
     public ResponseData<JyutakugaisyunaiyoListDiv> onClick_ClearButton(JyutakugaisyunaiyoListDiv requestDiv) {
-        if (モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-            setPnlNyuryokuArea(モード_修正, requestDiv);
-        } else {
-            requestDiv = clear内容(requestDiv);
-        }
+        requestDiv = clear内容(requestDiv);
         requestDiv = clear制御非活性(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
