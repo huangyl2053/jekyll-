@@ -160,25 +160,11 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         int 非該当要介護5被保険者数 = get被保険者数(審査判定状況, コード_非該当, コード_要介護5);
         int 非該当計 = 非該当非該当被保険者数 + 非該当要支援1被保険者数 + 非該当要支援2被保険者数 + 非該当要介護1被保険者数
                 + 非該当要介護2被保険者数 + 非該当要介護3被保険者数 + 非該当要介護4被保険者数 + 非該当要介護5被保険者数;
-        RString 対象開始日 = RString.EMPTY;
-        RString 対象終了日 = RString.EMPTY;
-        if (paramter.isTaishoTsukiKubun()) {
-            FlexibleYearMonth 対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
-            対象開始日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 1).toDateString();
-            対象終了日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 対象年月.getLastDay()).toDateString();
-        } else if (paramter.isTaishoGeppiKubun()) {
-            if (!paramter.isEmptyTaishoGeppiFrom()) {
-                対象開始日 = paramter.getTaishoGeppiFrom();
-            }
-            if (!paramter.isEmptyTaishoGeppiTo()) {
-                対象終了日 = paramter.getTaishoGeppiTo();
-            }
-        }
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 current.getGogitaiMei(),
-                対象開始日,
-                対象終了日,
+                current.getShinsakaiKaisaiYMDMin(),
+                current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
@@ -771,11 +757,26 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         int 二次判定要介護4計 = Integer.parseInt(合計.getListHantei_8().toString());
         int 二次判定要介護5計 = Integer.parseInt(合計.getListHantei_9().toString());
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
+        RString 対象開始日 = RString.EMPTY;
+        RString 対象終了日 = RString.EMPTY;
+        if (paramter.isTaishoTsukiKubun()) {
+            FlexibleYearMonth 対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
+            対象開始日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 1).toDateString();
+            対象終了日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 対象年月.getLastDay()).toDateString();
+        } else if (paramter.isTaishoGeppiKubun()) {
+            if (!paramter.isEmptyTaishoGeppiFrom()) {
+                対象開始日 = paramter.getTaishoGeppiFrom();
+            }
+            if (!paramter.isEmptyTaishoGeppiTo()) {
+                対象終了日 = paramter.getTaishoGeppiTo();
+            }
+        }
+
         ShinsaHanteiJokyoItem 割合Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 current.getGogitaiMei(),
-                current.getShinsakaiKaisaiYMDMin(),
-                current.getShinsakaiKaisaiYMDMax(),
+                対象開始日,
+                対象終了日,
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
