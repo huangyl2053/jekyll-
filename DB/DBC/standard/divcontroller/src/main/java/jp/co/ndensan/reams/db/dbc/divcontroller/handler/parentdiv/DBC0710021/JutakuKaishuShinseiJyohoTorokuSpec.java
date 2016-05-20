@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakugai
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -174,7 +174,7 @@ public enum JutakuKaishuShinseiJyohoTorokuSpec implements IPredicate<JutakuKaish
                 申請日年月 = div.getJutakuKaishuShinseiContents().getShinseishaInfo()
                         .getTxtShinseiYMD().getValue().getYearMonth();
             }
-            RString 償還 = DbBusinessConifg.get(
+            RString 償還 = DbBusinessConfig.get(
                     ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             if (給付実績連動_受託なし.equals(償還) && ((申請日 == null)
                     || (!画面提供着工年月.getYearMonth().equals(申請日年月)))) {

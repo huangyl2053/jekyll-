@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.Heij
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.dgHeijunkaShoriKakunin1_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6.KaigoFukaTokuchoHeijunka6;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -68,8 +68,8 @@ public class HeijunkaKeisanHandler {
      */
     public void initialize() {
 
-        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().setDomain(調定年度);
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().setDomain(賦課年度);
 
@@ -114,21 +114,21 @@ public class HeijunkaKeisanHandler {
         div.getShoriJokyo().getHeijunkaShoriKakunin().getDgHeijunkaShoriKakunin1().setDataSource(処理状況データList);
 
         RString 減額 = RString.EMPTY;
-        RString 減額コンフィグ = DbBusinessConifg.
+        RString 減額コンフィグ = DbBusinessConfig.
                 get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString());
         if (平準化しない.toString().equals(減額コンフィグ.toString())) {
             減額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
         } else if (平準化するを判定し.toString().equals(減額コンフィグ.toString())) {
-            減額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConifg.
+            減額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
                     get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
         }
         RString 増額 = RString.EMPTY;
-        RString 増額コンフィグ = DbBusinessConifg.
+        RString 増額コンフィグ = DbBusinessConfig.
                 get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString());
         if (平準化しない.toString().equals(増額コンフィグ.toString())) {
             増額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
         } else if (平準化するを判定し.toString().equals(増額コンフィグ.toString())) {
-            増額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConifg.
+            増額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
                     get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
         }
         div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().setValue(増額);

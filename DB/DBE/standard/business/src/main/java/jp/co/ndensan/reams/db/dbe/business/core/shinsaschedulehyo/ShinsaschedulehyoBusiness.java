@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinsaschedulehyo;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.WeekRelateEntity;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun.広域連合;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -50,7 +50,7 @@ public class ShinsaschedulehyoBusiness {
         nendoBuilder.append(new FlexibleYear(年度).wareki().eraType(EraType.KANJI).toDateString());
         nendoBuilder.append(new RString("年度"));
         entity.setNendoWareki(nendoBuilder.toRString());
-        entity.setCityName(DbBusinessConifg.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        entity.setCityName(DbBusinessConfig.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         entity.setHakkoYMD(get印刷日時());
         set1月曜日(entity);
         set2月曜日(entity);

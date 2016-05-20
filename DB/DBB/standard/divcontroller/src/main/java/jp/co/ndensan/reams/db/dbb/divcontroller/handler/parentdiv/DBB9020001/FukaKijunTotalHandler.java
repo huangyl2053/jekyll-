@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020001.DBB9
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020001.FukaKijunTotalDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RankJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -72,7 +72,7 @@ public class FukaKijunTotalHandler {
      * 賦課年度の設定
      */
     public void 賦課年度の設定() {
-        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConifg.get(
+        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_調定年度, RDate.getNowDate()));
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
         ShoriDateKanri 新年度管理情報作成 = manager.get抽出調定日時(

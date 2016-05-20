@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.hihousyosai.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -476,7 +476,7 @@ public class HihosyosaiHandler {
 
     private boolean is合併市町村() {
         RDate 適用基準日 = RDate.getNowDate();
-        RString 合併市町村 = DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, 適用基準日, SubGyomuCode.DBU介護統計報告);
+        RString 合併市町村 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, 適用基準日, SubGyomuCode.DBU介護統計報告);
         return 合併情報区分.equals(合併市町村);
     }
 

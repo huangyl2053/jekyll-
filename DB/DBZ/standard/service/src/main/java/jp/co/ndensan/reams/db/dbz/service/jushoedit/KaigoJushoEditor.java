@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecur
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
@@ -124,13 +124,13 @@ public class KaigoJushoEditor {
             }
         }
         if (市町村共通.equals(帳票制御共通.getJushoHenshuKubun())) {
-            管内住所編集_都道府県名付与有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(),
+            管内住所編集_都道府県名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告);
-            管内住所編集_郡名付与有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            管内住所編集_市町村名付与有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate(),
+            管内住所編集_郡名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            管内住所編集_市町村名付与有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告);
-            管内住所編集_編集方法 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            住所編集_方書表示有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            管内住所編集_編集方法 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            住所編集_方書表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         }
         Association accociation = AssociationFinderFactory.createInstance().getAssociation();
         if (表示する.equals(管内住所編集_都道府県名付与有無)) {
@@ -184,15 +184,15 @@ public class KaigoJushoEditor {
             帳票用住所編集方法 = shichosonSecurity.get市町村情報().get帳票用住所編集方法();
             帳票用方書表示有無 = shichosonSecurity.get市町村情報().get帳票用方書表示有無();
         } else {
-            帳票用都道府県名称表示有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(),
+            帳票用都道府県名称表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告);
-            帳票用郡名称表示有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(),
+            帳票用郡名称表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告);
-            帳票用市町村名称表示有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate(),
+            帳票用市町村名称表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告);
-            帳票用住所編集方法 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+            帳票用住所編集方法 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
                     RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            帳票用方書表示有無 = DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
+            帳票用方書表示有無 = DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
                     RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         }
         if (表示する.equals(帳票用都道府県名称表示有無)) {

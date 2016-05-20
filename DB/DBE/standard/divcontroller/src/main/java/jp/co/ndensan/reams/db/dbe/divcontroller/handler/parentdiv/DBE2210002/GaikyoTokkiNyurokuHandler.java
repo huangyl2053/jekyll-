@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosairaijoh
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -72,7 +72,7 @@ public class GaikyoTokkiNyurokuHandler {
         div.getCcdChosaJisshishaJoho().intialize(model);
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
-        RString 概況調査テキストイメージ区分 = DbBusinessConifg.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(temp_申請書管理番号, temp_認定調査履歴番号, 概況調査テキストイメージ区分);
         if (gaikyoTokki != null) {
             div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());
@@ -126,7 +126,7 @@ public class GaikyoTokkiNyurokuHandler {
             }
 
             GaikyoTokkiManager manager = new GaikyoTokkiManager();
-            RString 概況調査テキストイメージ区分 = DbBusinessConifg.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(前回申請管理番号, 前回最大認定調査依頼履歴番号, 概況調査テキストイメージ区分);
             if (gaikyoTokki != null) {
                 div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());

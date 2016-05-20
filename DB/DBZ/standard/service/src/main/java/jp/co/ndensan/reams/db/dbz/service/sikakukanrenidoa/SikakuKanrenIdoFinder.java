@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakujiyushutoku.SikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
@@ -138,7 +138,7 @@ public class SikakuKanrenIdoFinder {
         List<ShikakuJiyuShutoku> 資格事由取得List = sikaku.
                 shikakuJiyuShutoku(new CodeShubetsu("0126"),
                         FlexibleDate.getNowDate(), 市町村セキュリティ.get導入形態コード().getKey(),
-                        DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+                        DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         for (ShikakuJiyuShutoku entity : 資格事由取得List) {
             HenkoJiyu list = new HenkoJiyu();
             list.setCode(entity.getCode());

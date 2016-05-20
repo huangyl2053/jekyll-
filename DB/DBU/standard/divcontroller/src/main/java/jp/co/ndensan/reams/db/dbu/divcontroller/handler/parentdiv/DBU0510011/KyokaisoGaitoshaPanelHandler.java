@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.Kyok
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dgKyokaisouGaitouItran_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
@@ -677,29 +677,29 @@ public class KyokaisoGaitoshaPanelHandler {
         if (申請日.isBefore(申請年月日)) {
             KeyValueDataSource 第1段階 = new KeyValueDataSource();
             第1段階.setValue(ConfigNameDBC.第1段階_高額介護サービス費支給_自己負担上限月額.get名称());
-            第1段階.setKey(DbBusinessConifg.get(ConfigNameDBC.第1段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
+            第1段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第1段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第2段階 = new KeyValueDataSource();
             第2段階.setValue(ConfigNameDBC.第2段階_高額介護サービス費支給_自己負担上限月額.get名称());
-            第2段階.setKey(DbBusinessConifg.get(ConfigNameDBC.第2段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
+            第2段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第2段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第3段階 = new KeyValueDataSource();
             第3段階.setValue(ConfigNameDBC.第3段階_高額介護サービス費支給_自己負担上限月額.get名称());
-            第3段階.setKey(DbBusinessConifg.get(ConfigNameDBC.第3段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
+            第3段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第3段階_高額介護サービス費支給_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             dataSourceList.add(第1段階);
             dataSourceList.add(第2段階);
             dataSourceList.add(第3段階);
         } else {
             KeyValueDataSource 第1段階 = new KeyValueDataSource();
             第1段階.setValue(ConfigNameDBC.第1段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
-            第1段階.setKey(DbBusinessConifg.get(ConfigNameDBC.第1段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
+            第1段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第1段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第2段階 = new KeyValueDataSource();
             第2段階.setValue(ConfigNameDBC.第2段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
-            第2段階.setKey(DbBusinessConifg.get(ConfigNameDBC.第2段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
+            第2段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第2段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第3段階 = new KeyValueDataSource();
             第3段階.setValue(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
-            第3段階.setKey(DbBusinessConifg.get(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
+            第3段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第3段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             KeyValueDataSource 第4段階 = new KeyValueDataSource();
             第4段階.setValue(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額.get名称());
-            第4段階.setKey(DbBusinessConifg.get(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
+            第4段階.setKey(DbBusinessConfig.get(ConfigNameDBC.第4段階_高額介護サービス費支給_201504以降_自己負担上限月額, 適用基準日, SubGyomuCode.DBC介護給付));
             dataSourceList.add(第1段階);
             dataSourceList.add(第2段階);
             dataSourceList.add(第3段階);

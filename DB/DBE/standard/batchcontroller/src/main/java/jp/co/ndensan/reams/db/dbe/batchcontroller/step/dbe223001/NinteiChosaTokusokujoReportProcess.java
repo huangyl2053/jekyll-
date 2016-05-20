@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoR
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001.IDbe223001RelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
@@ -174,14 +174,14 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         RString 帳票宛先敬称コード;
         RString tempP_宛名名称付与;
         try {
-            帳票宛先敬称コード = DbBusinessConifg.get(ConfigNameDBE.認定調査督促状_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            帳票宛先敬称コード = DbBusinessConfig.get(ConfigNameDBE.認定調査督促状_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             tempP_宛名名称付与 = ChohyoAtesakiKeisho.toValue(帳票宛先敬称コード).get名称();
         } catch (Exception e) {
             tempP_宛名名称付与 = RString.EMPTY;
         }
         RString title;
         try {
-            title = DbBusinessConifg.get(ConfigNameDBE.要介護認定調査督促状, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            title = DbBusinessConfig.get(ConfigNameDBE.要介護認定調査督促状, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         } catch (Exception e) {
             title = RString.EMPTY;
         }

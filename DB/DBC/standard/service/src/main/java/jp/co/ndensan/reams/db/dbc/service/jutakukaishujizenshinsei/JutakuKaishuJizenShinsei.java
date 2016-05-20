@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntit
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -208,7 +208,7 @@ public class JutakuKaishuJizenShinsei {
             return null;
         }
         RString 制度改正施行年月日
-                = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+                = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行年月 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (区分コード_01.equals(jyoho.get要介護認定状態区分コード())) {
             if (jyoho.is旧措置者フラグ()) {
@@ -370,7 +370,7 @@ public class JutakuKaishuJizenShinsei {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("?:要介護対象").evaluate());
         }
         RString 制度改正施行年月日
-                = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+                = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (サービス提供年月.isBefore(制度改正施行日)) {
             return 様式番号_21D1;
@@ -542,7 +542,7 @@ public class JutakuKaishuJizenShinsei {
      */
     public HokenKyufuRitsu getKyufuritsu(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
 
-        RString 初期表示_給付率 = DbBusinessConifg.get(ConfigNameDBC.初期表示_給付率, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RString 初期表示_給付率 = DbBusinessConfig.get(ConfigNameDBC.初期表示_給付率, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         HokenKyufuRitsu 給付率 = null;
         if (!初期表示_給付率.isNullOrEmpty()) {
             給付率 = new HokenKyufuRitsu(new Decimal(Integer.valueOf(初期表示_給付率.toString())));

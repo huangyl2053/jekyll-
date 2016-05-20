@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
@@ -1323,34 +1323,34 @@ public class NinteiChosainJikanMasterHandler {
         RDate 適用基準日 = RDate.getNowDate();
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_1:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠1, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠1, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_2:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠2, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠2, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_3:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠3, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠3, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_4:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠4, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠4, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_5:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠5, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠5, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_6:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠6, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠6, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_7:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠7, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠7, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_8:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠8, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠8, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_9:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠9, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠9, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             case 時間枠_10:
-                開始_終了時間 = DbBusinessConifg.get(ConfigNameDBE.調査スケジュール時間枠10, 適用基準日, SubGyomuCode.DBE認定支援);
+                開始_終了時間 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠10, 適用基準日, SubGyomuCode.DBE認定支援);
                 break;
             default:
                 break;

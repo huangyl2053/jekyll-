@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.business.core.hihokenshasho;
 
 import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho.IkkatsuHakkoBatchParameter;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -131,7 +131,7 @@ public final class KaigoHokenHihokenshashoIkkatsuSakusei {
                 発行日時の発行日,
                 発行日時の時分秒,
                 出力順ID,
-                DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ,
+                DbBusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ,
                         RDate.getNowDate(),
                         SubGyomuCode.DBU介護統計報告));
 

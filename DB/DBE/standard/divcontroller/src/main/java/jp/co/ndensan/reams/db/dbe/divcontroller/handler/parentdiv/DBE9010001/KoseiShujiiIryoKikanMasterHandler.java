@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.Shuj
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -65,7 +65,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
         div.getTxtSearchShujiiIryokikanMeisho().clearValue();
         div.getTxtSearchShujiiIryokikanKanaMeisho().clearValue();
-        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConifg.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
                 SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値")).toString()));
         div.getRadSearchJokyoFlag().setSelectedIndex(0);
         div.getDdlKikanMeisho().setSelectedKey(前方一致KEY);

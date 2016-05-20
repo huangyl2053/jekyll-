@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakik
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -53,7 +53,7 @@ public class SoNoTaKikanGuideHandler {
         div.getTxtSonotaKikanName().clearValue();
         div.getRadHaisi().setSelectedKey(含まない);
         set調査委託先区();
-        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数上限,
+        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getSelectIchiran().setIsOpen(false);
         div.getKensakuJoken().setIsOpen(true);

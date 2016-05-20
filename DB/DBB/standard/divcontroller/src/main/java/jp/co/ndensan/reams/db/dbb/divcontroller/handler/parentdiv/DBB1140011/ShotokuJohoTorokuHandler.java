@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.ShotokuJohoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.dgSetaiShotoku_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
@@ -450,7 +450,7 @@ public final class ShotokuJohoTorokuHandler {
         int index = 0;
         RString selectedIndex = new RString("key0");
         FlexibleYear 日付関連_所得年度
-                = new FlexibleYear(DbBusinessConifg.get(ConfigKeysHizuke.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+                = new FlexibleYear(DbBusinessConfig.get(ConfigKeysHizuke.日付関連_所得年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         for (FlexibleYear 年度 = 日付関連_所得年度; 基準年度.isBeforeOrEquals(年度); 年度 = 年度.minusYear(1)) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(new RString("key" + index));

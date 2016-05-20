@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.Hiho
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.HihokenshaShoBatchPrmHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.ValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -78,7 +78,7 @@ public class HihokenshaShoBatchPrm {
         getHandler(div).onLoad(resultList.records());
         NenreiToutatuYoteishaCheckListManager nenreiToutatuYoteishaManager
                 = InstanceProvider.create(NenreiToutatuYoteishaCheckListManager.class);
-        RString type = DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格);
+        RString type = DbBusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格);
         ReportId chohyoID = null;
         if (タイプ_A4横.equals(type)) {
             chohyoID = REPORTID_A4;
@@ -136,7 +136,7 @@ public class HihokenshaShoBatchPrm {
                 div.getTxtHakkoTime().getValue(),
                 // TODO  Redmine：#73393(帳票出力順の取得)
                 new RString("出力順ID"),
-                DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
+                DbBusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
         return ResponseData.of(param).respond();
     }
 

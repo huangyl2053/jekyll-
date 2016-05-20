@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho.getShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
@@ -261,7 +261,7 @@ public class JukyuShikakuShomeishoFinder {
 
     private void 外国人の場合生年月日編集(RString 年号, RString 日付,
             JukyuShikakuShomeishoDataEntity outEntity, RString 生年月日西暦, UaFt200FindShikibetsuTaishoEntity 宛名識別対象PSM) {
-        RString 外国人表示制御_生年月日表示方法 = DbBusinessConifg
+        RString 外国人表示制御_生年月日表示方法 = DbBusinessConfig
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード()
                 .equals(外国人表示制御_生年月日表示方法)) {

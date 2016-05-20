@@ -57,7 +57,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -201,7 +201,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
      */
     public void onLoad(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号, RString 画面モード) {
-        RString 償還 = DbBusinessConifg.get(
+        RString 償還 = DbBusinessConfig.get(
                 ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
 
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
@@ -473,7 +473,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
         div.getJutakuKaishuShinseiContents().getCcdShiharaiHohoJyoho().initialize(支給申請情報, 支払方法状態_登録);
         ShiharaiKekkaResult 最新住宅改修費支払結果 = 住宅改修費事前申請.getNewJutakuKaishuHi(被保険者番号);
         ViewStateHolder.put(ViewStateKeys.前回までの支払結果, 最新住宅改修費支払結果);
-        RString month = DbBusinessConifg.get(
+        RString month = DbBusinessConfig.get(
                 ConfigNameDBC.初期表示_償還支給申請登録初期, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         RDate 提供着工年月 = new RDate(
                 FlexibleDate.getNowDate().getYearMonth().minusMonth(Integer.parseInt(month.toString())).toString());
@@ -911,7 +911,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             throw new ApplicationException(
                     UrErrorMessages.存在しない.getMessage().replace(証明書様式内容_NULL.toString()));
         }
-        RString 制度改正施行年月日 = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正,
+        RString 制度改正施行年月日 = DbBusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         JutakuKaishuJizenShinsei 住宅改修費事前申請 = JutakuKaishuJizenShinsei.createInstance();
         YokaigoNinteiJyoho 要介護認定情報 = 住宅改修費事前申請.getYokaigoNinteiJyoho(被保険者番号, 提供着工年月);
@@ -1380,7 +1380,7 @@ public final class JutakuKaishuShinseiJyohoTorokuHandler {
             RString 支払窓口開始時間, RString 支払窓口終了時間, long 口座ID, RString 受領委任契約番号) {
         ShokanShinsei dbt3034 = new ShokanShinsei(引き継ぎ被保険者番号, new FlexibleYearMonth(
                 div.getTxtTeikyoYM().getValue().getYearMonth().toDateString()), div.getTxtSeiriNo().getValue());
-        RString 審査方法初期 = DbBusinessConifg.get(
+        RString 審査方法初期 = DbBusinessConfig.get(
                 ConfigNameDBC.償還支給申請書_審査方法初期表示, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         AtenaMeisho 画面理由書作成者 = div.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason()
                 .getTxtCreatorName().getDomain();

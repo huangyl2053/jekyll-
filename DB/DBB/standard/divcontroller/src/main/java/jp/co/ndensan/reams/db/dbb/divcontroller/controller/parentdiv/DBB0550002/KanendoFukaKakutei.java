@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.Kane
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550002.KanendoFukaKakuteiHandler;
 import jp.co.ndensan.reams.db.dbb.service.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -46,7 +46,7 @@ public class KanendoFukaKakutei {
      */
     public ResponseData<KanendoFukaKakuteiDiv> onLoad(KanendoFukaKakuteiDiv div) {
         HonsanteiIdoKanendoFukaKakutei fukaKakutei = InstanceProvider.create(HonsanteiIdoKanendoFukaKakutei.class);
-        RString choteiNendo = DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
+        RString choteiNendo = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         div.getTxtChoteiNendo().setDomain(new FlexibleYear(choteiNendo.toString()));
         ShoriDateKanri 異動処理日付 = fukaKakutei.getIdoKijunbi(div.getTxtChoteiNendo().getDomain());

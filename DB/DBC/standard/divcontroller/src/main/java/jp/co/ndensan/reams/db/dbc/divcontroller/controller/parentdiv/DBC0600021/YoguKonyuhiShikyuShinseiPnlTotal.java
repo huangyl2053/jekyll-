@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -222,7 +222,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
 
     private void onLoad国保連再送付(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
         ShokanShinsei shshResult = ViewStateHolder.get(ViewStateKeys.福祉償還払支給申請, ShokanShinsei.class);
-        RString 受託区分 = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (shshResult != null && shshResult.get送付年月() != null && 受託区分.equals(NUM2)) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getChkKokuhorenSend().setVisible(true);
@@ -233,7 +233,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     }
 
     private void onLoad審査方法(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
-        RString 受託区分 = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (受託区分 != null && 受託区分.equals(NUM1)) {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getYoguKonyuhiDetailInput().
@@ -707,7 +707,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
     }
 
     private void 償還払支給判定結果を取得する(YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
-        RString 受託区分 = DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         PnlTotalParameter parameter = ViewStateHolder.get(ViewStateKeys.支給申請情報検索キー,
                 PnlTotalParameter.class);
