@@ -100,6 +100,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private static final RString メッセージ引数_着工日 = new RString("着工日");
     private static final RString 初期化済み = new RString("true");
     private static final RString 固定値_事業者番号 = new RString("0000000000");
+    private static final RString 固定値_サービスコード = new RString("0000");
     private static final RString 固定値_明細番号 = new RString("0001");
     private static final int 住宅改修データなしコード = 1;
     private static final int 着工日不一致コード = 2;
@@ -966,7 +967,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                             .set住宅改修住宅住所(row.getTxtJutakuAddress())
                             .set改修金額(row.getTxtKaishuKingaku().isNullOrEmpty() ? 0 : Integer.parseInt(row.getTxtKaishuKingaku().toString()))
                             .set住宅改修完成年月日(new FlexibleDate(new RDate(row.getTxtKanseiYoteibi().toString()).toDateString()))
-                            .setサービスコード(new ServiceCode(insertData.getサービス種類コード().value()))
+                            .setサービスコード(new ServiceCode(insertData.getサービス種類コード().value().concat(固定値_サービスコード)))
                             .set事前申請サービス提供年月(insertData.getサービス提供年月())
                             .set事前申請整理番号(insertData.get整理番号())
                             .build();
@@ -1014,7 +1015,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                             .getTxtKanseiYoteibi().toString()).toDateString()));
                     shokanJutakuKaishuBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty() ? 0 : Integer
                             .parseInt(tmpRow.getTxtKaishuKingaku().toString()));
-                    shokanJutakuKaishuBuilder.setサービスコード(new ServiceCode(updateData.getサービス種類コード().value()));
+                    shokanJutakuKaishuBuilder.setサービスコード(new ServiceCode(updateData.getサービス種類コード().value()
+                            .concat(固定値_サービスコード)));
                     shokanJutakuKaishuBuilder.set事前申請サービス提供年月(updateData.getサービス提供年月());
                     shokanJutakuKaishuBuilder.set事前申請整理番号(updateData.get整理番号());
                     EntityDataState state = 行状態_更新.equals(tmpRow.getTxtJyotai()) ? EntityDataState.Modified
@@ -1037,7 +1039,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                             .toString()).toDateString()));
                     addDataBuilder.set改修金額(tmpRow.getTxtKaishuKingaku().isNullOrEmpty() ? 0
                             : Integer.parseInt(tmpRow.getTxtKaishuKingaku().toString()));
-                    addDataBuilder.setサービスコード(new ServiceCode(updateData.getサービス種類コード().value()));
+                    addDataBuilder.setサービスコード(new ServiceCode(updateData.getサービス種類コード().value()
+                            .concat(固定値_サービスコード)));
                     addDataBuilder.set事前申請サービス提供年月(updateData.getサービス提供年月());
                     addDataBuilder.set事前申請整理番号(updateData.get整理番号());
                     addDataBuilder.setステータス(EntityDataState.Added);

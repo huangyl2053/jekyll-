@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -45,12 +46,12 @@ public class TokubetsuChoshuKaishiPrintService {
      * 特別徴収開始通知書（本算定）発行一覧表(単一帳票出力用)
      *
      * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
-     * @param 賦課年度 RString
+     * @param 賦課年度 FlexibleYear
      * @param 出力順ID long
      * @param 帳票作成日時 RDateTime
      * @return SourceDataCollection
      */
-    public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, RString 賦課年度,
+    public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度,
             long 出力順ID, RDateTime 帳票作成日時) {
         try (ReportManager reportManager = new ReportManager()) {
             print(編集後本算定通知書共通情報, 賦課年度, 出力順ID, 帳票作成日時, reportManager);
@@ -62,12 +63,12 @@ public class TokubetsuChoshuKaishiPrintService {
      * 特別徴収開始通知書（本算定）発行一覧表の printメソッド(複数帳票出力用)
      *
      * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
-     * @param 賦課年度 RString
+     * @param 賦課年度 FlexibleYear
      * @param 出力順ID long
      * @param 帳票作成日時 RDateTime
      * @param reportManager ReportManager
      */
-    public void print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, RString 賦課年度, long 出力順ID,
+    public void print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度, long 出力順ID,
             RDateTime 帳票作成日時, ReportManager reportManager) {
         TokubetsuChoshuKaishiProperty property = new TokubetsuChoshuKaishiProperty();
         try (ReportAssembler<TokubetsuChoshuKaishiSource> assembler = createAssembler(property, reportManager)) {
@@ -105,7 +106,7 @@ public class TokubetsuChoshuKaishiPrintService {
     }
 
     private void executereport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
-            RString 賦課年度, RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名,
+            FlexibleYear 賦課年度, RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名,
             List<RString> 出力項目リスト, List<RString> 改頁項目リスト, ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
         int i = NUM1;
         for (EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu : 編集後本算定通知書共通情報) {

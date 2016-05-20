@@ -1,13 +1,29 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="../../d.ts/DBZCommonChildDiv.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+// <reference path="../d.ts/DBZCommonChildDiv.d.ts" />
 
 module DBE {
 
      export module ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         export class Events {
+
+            public static onChange_chkIkenshoSakuseiryoSeikyusho(): string {
+                return "onChange_chkIkenshoSakuseiryoSeikyusho";
+            }
+
+            public static onChange_radJyushinKikan(): string {
+                return "onChange_radJyushinKikan";
+            }
+
+            public static onChange_radTeishutsuKigen(): string {
+                return "onChange_radTeishutsuKigen";
+            }
+
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
 
         }
 
