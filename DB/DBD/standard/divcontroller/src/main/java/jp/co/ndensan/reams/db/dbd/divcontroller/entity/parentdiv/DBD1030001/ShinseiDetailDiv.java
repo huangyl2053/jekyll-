@@ -30,10 +30,10 @@ public class ShinseiDetailDiv extends Panel {
     private TextBoxMultiLine txtShinseiRiyu;
     @JsonProperty("ShoninJoho")
     private ShoninJohoDiv ShoninJoho;
-    @JsonProperty("btnShinseiKakutei")
-    private Button btnShinseiKakutei;
     @JsonProperty("btnShoninKakutei")
     private Button btnShoninKakutei;
+    @JsonProperty("btnShinseiKakutei")
+    private Button btnShinseiKakutei;
     @JsonProperty("btnBackToShinseiList")
     private Button btnBackToShinseiList;
     @JsonProperty("ccdShinseiJoho")
@@ -100,24 +100,6 @@ public class ShinseiDetailDiv extends Panel {
     }
 
     /*
-     * getbtnShinseiKakutei
-     * @return btnShinseiKakutei
-     */
-    @JsonProperty("btnShinseiKakutei")
-    public Button getBtnShinseiKakutei() {
-        return btnShinseiKakutei;
-    }
-
-    /*
-     * setbtnShinseiKakutei
-     * @param btnShinseiKakutei btnShinseiKakutei
-     */
-    @JsonProperty("btnShinseiKakutei")
-    public void setBtnShinseiKakutei(Button btnShinseiKakutei) {
-        this.btnShinseiKakutei = btnShinseiKakutei;
-    }
-
-    /*
      * getbtnShoninKakutei
      * @return btnShoninKakutei
      */
@@ -133,6 +115,24 @@ public class ShinseiDetailDiv extends Panel {
     @JsonProperty("btnShoninKakutei")
     public void setBtnShoninKakutei(Button btnShoninKakutei) {
         this.btnShoninKakutei = btnShoninKakutei;
+    }
+
+    /*
+     * getbtnShinseiKakutei
+     * @return btnShinseiKakutei
+     */
+    @JsonProperty("btnShinseiKakutei")
+    public Button getBtnShinseiKakutei() {
+        return btnShinseiKakutei;
+    }
+
+    /*
+     * setbtnShinseiKakutei
+     * @param btnShinseiKakutei btnShinseiKakutei
+     */
+    @JsonProperty("btnShinseiKakutei")
+    public void setBtnShinseiKakutei(Button btnShinseiKakutei) {
+        this.btnShinseiKakutei = btnShinseiKakutei;
     }
 
     /*
@@ -206,6 +206,16 @@ public class ShinseiDetailDiv extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkTokureiTaisho() {
+        return this.getShoninJoho().getChkTokureiTaisho();
+    }
+
+    @JsonIgnore
+    public void  setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
+        this.getShoninJoho().setChkTokureiTaisho(chkTokureiTaisho);
+    }
+
+    @JsonIgnore
     public DropDownList getDdlKeigenJiyu() {
         return this.getShoninJoho().getDdlKeigenJiyu();
     }
@@ -233,16 +243,6 @@ public class ShinseiDetailDiv extends Panel {
     @JsonIgnore
     public void  setTxtKeigenRitsuBunbo(TextBoxNum txtKeigenRitsuBunbo) {
         this.getShoninJoho().setTxtKeigenRitsuBunbo(txtKeigenRitsuBunbo);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkTokureiTaisho() {
-        return this.getShoninJoho().getChkTokureiTaisho();
-    }
-
-    @JsonIgnore
-    public void  setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
-        this.getShoninJoho().setChkTokureiTaisho(chkTokureiTaisho);
     }
 
     @JsonIgnore

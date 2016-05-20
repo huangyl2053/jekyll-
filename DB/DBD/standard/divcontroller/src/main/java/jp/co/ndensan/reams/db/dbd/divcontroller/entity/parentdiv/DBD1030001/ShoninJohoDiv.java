@@ -29,14 +29,14 @@ public class ShoninJohoDiv extends Panel {
     private TextBoxFlexibleDate txtTekiyoYMD;
     @JsonProperty("txtYukoKigenYMD")
     private TextBoxFlexibleDate txtYukoKigenYMD;
+    @JsonProperty("chkTokureiTaisho")
+    private CheckBoxList chkTokureiTaisho;
     @JsonProperty("ddlKeigenJiyu")
     private DropDownList ddlKeigenJiyu;
     @JsonProperty("txtKeigenRitsuBunshi")
     private TextBoxNum txtKeigenRitsuBunshi;
     @JsonProperty("txtKeigenRitsuBunbo")
     private TextBoxNum txtKeigenRitsuBunbo;
-    @JsonProperty("chkTokureiTaisho")
-    private CheckBoxList chkTokureiTaisho;
     @JsonProperty("chkKyotakuServiceGentei")
     private CheckBoxList chkKyotakuServiceGentei;
     @JsonProperty("chkKyojuhiShokuhiGentei")
@@ -129,6 +129,24 @@ public class ShoninJohoDiv extends Panel {
     }
 
     /*
+     * getchkTokureiTaisho
+     * @return chkTokureiTaisho
+     */
+    @JsonProperty("chkTokureiTaisho")
+    public CheckBoxList getChkTokureiTaisho() {
+        return chkTokureiTaisho;
+    }
+
+    /*
+     * setchkTokureiTaisho
+     * @param chkTokureiTaisho chkTokureiTaisho
+     */
+    @JsonProperty("chkTokureiTaisho")
+    public void setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
+        this.chkTokureiTaisho = chkTokureiTaisho;
+    }
+
+    /*
      * getddlKeigenJiyu
      * @return ddlKeigenJiyu
      */
@@ -180,24 +198,6 @@ public class ShoninJohoDiv extends Panel {
     @JsonProperty("txtKeigenRitsuBunbo")
     public void setTxtKeigenRitsuBunbo(TextBoxNum txtKeigenRitsuBunbo) {
         this.txtKeigenRitsuBunbo = txtKeigenRitsuBunbo;
-    }
-
-    /*
-     * getchkTokureiTaisho
-     * @return chkTokureiTaisho
-     */
-    @JsonProperty("chkTokureiTaisho")
-    public CheckBoxList getChkTokureiTaisho() {
-        return chkTokureiTaisho;
-    }
-
-    /*
-     * setchkTokureiTaisho
-     * @param chkTokureiTaisho chkTokureiTaisho
-     */
-    @JsonProperty("chkTokureiTaisho")
-    public void setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
-        this.chkTokureiTaisho = chkTokureiTaisho;
     }
 
     /*

@@ -4,10 +4,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -30,8 +27,6 @@ public class HosokuJohoDiv extends Panel {
     private Button btnDispSetaiJoho;
     @JsonProperty("btnCloseSetaiJoho")
     private Button btnCloseSetaiJoho;
-    @JsonProperty("SetaiJoho")
-    private SetaiJohoDiv SetaiJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -91,32 +86,6 @@ public class HosokuJohoDiv extends Panel {
     @JsonProperty("btnCloseSetaiJoho")
     public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
         this.btnCloseSetaiJoho = btnCloseSetaiJoho;
-    }
-
-    /*
-     * getSetaiJoho
-     * @return SetaiJoho
-     */
-    @JsonProperty("SetaiJoho")
-    public SetaiJohoDiv getSetaiJoho() {
-        return SetaiJoho;
-    }
-
-    /*
-     * setSetaiJoho
-     * @param SetaiJoho SetaiJoho
-     */
-    @JsonProperty("SetaiJoho")
-    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
-        this.SetaiJoho = SetaiJoho;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
-        return this.getSetaiJoho().getCcdSetaiShotokuIchiran();
     }
 
     // </editor-fold>
