@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.kanri;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
@@ -9,8 +10,8 @@ import jp.co.ndensan.reams.ur.urc.service.core.noki.nokikanri.NokiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -30,8 +31,8 @@ public class FukaNokiResearcher {
      */
     public FukaNokiResearcher(RYear 調定年度) {
         this.nokiManager = InstanceProvider.create(NokiManager.class);
-        this.調定年度 = 調定年度 != null ? 調定年度 : new RYear(BusinessConfig
-                .get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
+        this.調定年度 = 調定年度 != null ? 調定年度 : new RYear(DbBusinessConifg
+                .get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
     }
 
     /**
@@ -39,7 +40,8 @@ public class FukaNokiResearcher {
      */
     FukaNokiResearcher() {
         this.nokiManager = InstanceProvider.create(NokiManager.class);
-        this.調定年度 = new RYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
+        this.調定年度 = new RYear(DbBusinessConifg
+                .get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
     }
 
     /**
