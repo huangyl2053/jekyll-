@@ -187,9 +187,9 @@ public class FutangendogakuNinteiShinseiHandler {
         init申請理由DDL();
         init負担段階DDL();
         init居室種別DDL();
-        set申請情報エリア表示制御();
         clear申請情報エリア();
         onChange_radKetteiKubun();
+        set申請情報エリア表示制御();
         div.getDdlShokuhi().setDataSource(new ArrayList<KeyValueDataSource>());
         div.getDdlUnitGataKoshitsu().setDataSource(new ArrayList<KeyValueDataSource>());
         div.getDdlUnitGataJunKoshitsu().setDataSource(new ArrayList<KeyValueDataSource>());
