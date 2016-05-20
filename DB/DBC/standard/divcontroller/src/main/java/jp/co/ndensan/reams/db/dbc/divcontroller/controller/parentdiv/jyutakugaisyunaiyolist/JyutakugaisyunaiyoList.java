@@ -250,13 +250,13 @@ public class JyutakugaisyunaiyoList {
     }
 
     private JyutakugaisyunaiyoListDiv clear制御非活性(JyutakugaisyunaiyoListDiv div) {
-        div.getTxtKaisyunaiyo().setReadOnly(true);
+        div.getTxtKaisyunaiyo().setDisabled(true);
         div.getTxtJigyosya().setDisabled(true);
         div.getBtnHonnijyusyoCopy().setDisabled(true);
-        div.getTxtJyusyo().setReadOnly(true);
+        div.getTxtJyusyo().setDisabled(true);
         div.getTxtTyakkoyotebi().setDisabled(true);
-        div.getTxtKanseyotebi().setReadOnly(true);
-        div.getTxtKaisyukingaku().setReadOnly(true);
+        div.getTxtKanseyotebi().setDisabled(true);
+        div.getTxtKaisyukingaku().setDisabled(true);
         div.getBtnClear().setDisabled(true);
         div.getBtnDetailConfirm().setDisabled(true);
         return div;
