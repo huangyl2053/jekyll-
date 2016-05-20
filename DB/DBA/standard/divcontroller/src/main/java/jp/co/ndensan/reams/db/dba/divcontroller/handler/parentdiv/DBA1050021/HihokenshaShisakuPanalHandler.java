@@ -209,7 +209,10 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private boolean is合併市町村() {
-        RString 合併市町村 = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告);
+        RString 合併市町村 = BusinessConfig.get(
+                ConfigNameDBU.合併情報管理_合併情報区分,
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
         return 合併情報区分.equals(合併市町村);
     }
 
