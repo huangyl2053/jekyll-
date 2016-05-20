@@ -24,7 +24,7 @@ public class ShikakuTokusoRireki {
      * @return 資格得喪履歴div
      */
     public ResponseData<ShikakuTokusoRirekiDiv> initialize(ShikakuTokusoRirekiDiv div) {
-        if (div.getMode() != null) {
+        if (div.getMode() != null && !div.getMode().isEmpty()) {
             div.setMode_DisplayType(ShikakuTokusoRirekiDiv.DisplayType.valueOf(div.getMode().toString()));
             div.initialize(new HihokenshaNo(div.getHdnHihokenshaNo()), new ShikibetsuCode(div.getHdnShikibetsuCode()));
         }
