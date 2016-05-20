@@ -564,9 +564,9 @@ public final class ShikyuShinseiDetailHandler {
     public ShikyuShinseiDetailParameter setParameter() {
         RString 処理モード;
         if (MODEL_ADD.equals(div.getPanelHead().getTxtShoriMode().getValue())) {
-            処理モード = div.getPanelHead().getTxtShoriMode().getValue();
-        } else {
             処理モード = 登録モード;
+        } else {
+            処理モード = div.getPanelHead().getTxtShoriMode().getValue();
         }
         RYearMonth サービス提供年月 = div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth();
         RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
