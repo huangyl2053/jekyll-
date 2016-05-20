@@ -255,7 +255,7 @@ public class ShikakuSeigoseiCheckJohoManager {
         除外の情報修正後Builder.set入所通知発行日(除外の情報修正前.get入所通知発行日());
         除外の情報修正後Builder.set退所通知発行日(除外の情報修正前.get退所通知発行日());
         除外の情報修正後Builder.set変更通知発行日(除外の情報修正前.get変更通知発行日());
-        除外の情報修正後Builder.set論理削除フラグ(除外の情報修正前.is論理削除フラグ());
+        除外の情報修正後Builder.set論理削除フラグ(true);
         return 除外の情報修正後Builder.build();
     }
 
