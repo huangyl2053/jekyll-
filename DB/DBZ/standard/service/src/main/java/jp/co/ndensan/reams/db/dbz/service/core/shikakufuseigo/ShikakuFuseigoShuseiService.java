@@ -91,8 +91,12 @@ public class ShikakuFuseigoShuseiService {
         RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
             KoikiShikakuJukiValidator validator = KoikiShikakuJukiValidator.createInstance();
-            不整合理由 = validator.checkFor資格不整合(個人情報, 資格の情報,
-                    資格の情報 == null ? null : dbt1001manager.get資格の情報For資格不整合(被保険者番号, 資格の情報.get識別コード(), 資格の情報.get異動日()));
+            if (資格の情報 == null) {
+                不整合理由 = validator.checkFor資格不整合(個人情報, null, null);
+            } else {
+                不整合理由 = validator.checkFor資格不整合(個人情報, 資格の情報,
+                        dbt1001manager.get資格の情報For資格不整合(被保険者番号, 資格の情報.get識別コード(), 資格の情報.get異動日()));
+            }
         } else {
             ShikakuJukiValidator validator = ShikakuJukiValidator.createInstance();
             不整合理由 = validator.checkFor資格不整合(個人情報, 資格の情報);

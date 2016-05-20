@@ -68,7 +68,7 @@ public class KojinJokyoShokaiHandler {
     }
 
     private void getchkShiteii(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        if (kojinJokyoShokaiList.get(0).get指定医フラグ()) {
+        if (kojinJokyoShokaiList.get(0).is指定医フラグ()) {
             指定医フラグ.add(new RString("key0"));
             div.getChkShiteii().setSelectedItemsByKey(指定医フラグ);
         } else {

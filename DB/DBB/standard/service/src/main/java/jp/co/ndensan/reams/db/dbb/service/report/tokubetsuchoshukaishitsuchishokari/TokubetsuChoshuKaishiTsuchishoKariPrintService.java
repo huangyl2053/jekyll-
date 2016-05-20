@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -84,18 +85,20 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
             ChohyoSeigyoKyotsu 帳票制御共通 = 仮算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;
             if (!帳票制御共通.is電子公印印字有無()) {
                 is公印を省略 = true;
             }
+            FlexibleDate 発行日 = 仮算定通知書情報.get発行日();
+            発行日 = (null == 発行日 || 発行日.isEmpty()) ? new FlexibleDate(RDate.getNowDate().toString()) : 仮算定通知書情報.get発行日();
             NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                     認証者,
                     地方公共団体,
                     assembler.getImageFolderPath(),
-                    new RDate(仮算定通知書情報.get発行日().toString()),
+                    new RDate(発行日.toString()),
                     is公印に掛ける,
                     is公印を省略,
                     KenmeiFuyoKubunType.付与なし).buildSource();

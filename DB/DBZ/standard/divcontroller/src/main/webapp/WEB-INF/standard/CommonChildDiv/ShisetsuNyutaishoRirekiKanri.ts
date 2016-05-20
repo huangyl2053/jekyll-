@@ -201,23 +201,23 @@ module DBZ {
                 }
 
                 public モード1(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "1030";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1120";
                 }
 
                 public モード2(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "980";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1070";
                 }
 
                 public モード3(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "900";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "990";
                 }
 
                 public モード4(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "800";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "890";
                 }
 
                 public モード5(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "720";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "810";
                 }
             }
 

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -25,8 +24,6 @@ public class SetaiJohoDiv extends Panel {
      */
     @JsonProperty("ccdSetaiShotokuIchiran")
     private SetaiShotokuIchiranDiv ccdSetaiShotokuIchiran;
-    @JsonProperty("paraState")
-    private RString paraState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,24 +38,6 @@ public class SetaiJohoDiv extends Panel {
     @JsonProperty("ccdSetaiShotokuIchiran")
     public ISetaiShotokuIchiranDiv getCcdSetaiShotokuIchiran() {
         return ccdSetaiShotokuIchiran;
-    }
-
-    /*
-     * getparaState
-     * @return paraState
-     */
-    @JsonProperty("paraState")
-    public RString getParaState() {
-        return paraState;
-    }
-
-    /*
-     * setparaState
-     * @param paraState paraState
-     */
-    @JsonProperty("paraState")
-    public void setParaState(RString paraState) {
-        this.paraState = paraState;
     }
 
     // </editor-fold>

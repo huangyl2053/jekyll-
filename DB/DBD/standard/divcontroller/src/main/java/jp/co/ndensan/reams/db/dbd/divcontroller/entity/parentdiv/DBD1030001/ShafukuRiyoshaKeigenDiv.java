@@ -380,6 +380,16 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkTokureiTaisho() {
+        return this.getShinseiDetail().getShoninJoho().getChkTokureiTaisho();
+    }
+
+    @JsonIgnore
+    public void  setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
+        this.getShinseiDetail().getShoninJoho().setChkTokureiTaisho(chkTokureiTaisho);
+    }
+
+    @JsonIgnore
     public DropDownList getDdlKeigenJiyu() {
         return this.getShinseiDetail().getShoninJoho().getDdlKeigenJiyu();
     }
@@ -407,16 +417,6 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     @JsonIgnore
     public void  setTxtKeigenRitsuBunbo(TextBoxNum txtKeigenRitsuBunbo) {
         this.getShinseiDetail().getShoninJoho().setTxtKeigenRitsuBunbo(txtKeigenRitsuBunbo);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkTokureiTaisho() {
-        return this.getShinseiDetail().getShoninJoho().getChkTokureiTaisho();
-    }
-
-    @JsonIgnore
-    public void  setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
-        this.getShinseiDetail().getShoninJoho().setChkTokureiTaisho(chkTokureiTaisho);
     }
 
     @JsonIgnore
@@ -480,16 +480,6 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnShinseiKakutei() {
-        return this.getShinseiDetail().getBtnShinseiKakutei();
-    }
-
-    @JsonIgnore
-    public void  setBtnShinseiKakutei(Button btnShinseiKakutei) {
-        this.getShinseiDetail().setBtnShinseiKakutei(btnShinseiKakutei);
-    }
-
-    @JsonIgnore
     public Button getBtnShoninKakutei() {
         return this.getShinseiDetail().getBtnShoninKakutei();
     }
@@ -497,6 +487,16 @@ public class ShafukuRiyoshaKeigenDiv extends Panel {
     @JsonIgnore
     public void  setBtnShoninKakutei(Button btnShoninKakutei) {
         this.getShinseiDetail().setBtnShoninKakutei(btnShoninKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnShinseiKakutei() {
+        return this.getShinseiDetail().getBtnShinseiKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinseiKakutei(Button btnShinseiKakutei) {
+        this.getShinseiDetail().setBtnShinseiKakutei(btnShinseiKakutei);
     }
 
     @JsonIgnore

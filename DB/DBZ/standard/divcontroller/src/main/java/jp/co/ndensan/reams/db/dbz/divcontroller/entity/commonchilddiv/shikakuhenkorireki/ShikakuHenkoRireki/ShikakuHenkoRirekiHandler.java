@@ -141,7 +141,7 @@ public class ShikakuHenkoRirekiHandler {
             div.getDdlHenkoJiyu().setSelectedIndex(0);
         }
         if (isValueContains(div.getDdlHenkoSochimotoHokensha().getDataSource(), row.getSochimotoHokensha())) {
-            div.getDdlHenkoSochimotoHokensha().setSelectedValue(row.getSochimotoHokensha());
+            div.getDdlHenkoSochimotoHokensha().setSelectedKey(row.getSochimotoHokensha());
         } else {
             div.getDdlHenkoSochimotoHokensha().setSelectedIndex(0);
         }
@@ -270,9 +270,9 @@ public class ShikakuHenkoRirekiHandler {
         hihokenshaDaichoBuilder.set資格変更年月日(row.getHenkoDate().getValue());
         hihokenshaDaichoBuilder.set資格変更届出年月日(row.getHenkoTodokedeDate().getValue());
         hihokenshaDaichoBuilder.set資格変更事由コード(row.getHenkoJiyuKey());
-        hihokenshaDaichoBuilder.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedValue()));
+        hihokenshaDaichoBuilder.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedKey()));
         if (div.getDdlJuminJoho().getIsBlankLine()) {
-            hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedValue()));
+            hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedKey()));
         } else {
             hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(get市町村コード()));
             hihokenshaDaichoBuilder.set識別コード(new ShikibetsuCode(get識別コード()));
@@ -383,7 +383,6 @@ public class ShikakuHenkoRirekiHandler {
         処理日時.setValue(new FlexibleDate(sikakuKanrenIdo.get処理日時().getDate().toDateString()));
         TextBoxFlexibleDate 異動日 = new TextBoxFlexibleDate();
         異動日.setValue(sikakuKanrenIdo.get異動日());
-        RString 広住特措置元市町村コード = sikakuKanrenIdo.get広住特措置元市町村コード() == null ? RString.EMPTY : sikakuKanrenIdo.get広住特措置元市町村コード().getColumnValue();
         dgHenko_Row row = new dgHenko_Row(
                 RString.EMPTY,
                 変更日,
@@ -391,7 +390,7 @@ public class ShikakuHenkoRirekiHandler {
                 変更事由,
                 sikakuKanrenIdo.get住所地特例適用事由コード(),
                 sikakuKanrenIdo.get市町村名称(),
-                広住特措置元市町村コード,
+                sikakuKanrenIdo.get措置元保険者(),
                 sikakuKanrenIdo.get旧市町村名称(),
                 処理日時,
                 sikakuKanrenIdo.get被保険者番号().getColumnValue(),
@@ -433,9 +432,9 @@ public class ShikakuHenkoRirekiHandler {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         int count = 1;
         for (KoseiShichosonMaster koseiShichosonMaster : shichosonMasters) {
-            if (!RString.isNullOrEmpty(koseiShichosonMaster.getShoKisaiHokenshaNo().getColumnValue())) {
+            if (!RString.isNullOrEmpty(koseiShichosonMaster.getShichosonCode().getColumnValue())) {
                 dataSource.add(new KeyValueDataSource(
-                        new RString(String.valueOf(count)), koseiShichosonMaster.getShoKisaiHokenshaNo().getColumnValue()));
+                        koseiShichosonMaster.getShichosonCode().getColumnValue(), koseiShichosonMaster.getShichosonMeisho()));
                 count++;
             }
         }
@@ -446,11 +445,9 @@ public class ShikakuHenkoRirekiHandler {
         SikakuKanrenIdoFinder finder = SikakuKanrenIdoFinder.createInstance();
         List<GappeiShichoson> gappeiShichosons = finder.getGappeiShichosonList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        int count = 1;
         for (GappeiShichoson gappeiShichoson : gappeiShichosons) {
-            if (!RString.isNullOrEmpty(gappeiShichoson.get旧保険者番号().getColumnValue())) {
-                dataSource.add(new KeyValueDataSource(new RString(String.valueOf(count)), gappeiShichoson.get旧保険者番号().getColumnValue()));
-                count++;
+            if (!RString.isNullOrEmpty(gappeiShichoson.get旧市町村コード().getColumnValue())) {
+                dataSource.add(new KeyValueDataSource(gappeiShichoson.get旧市町村コード().getColumnValue(), gappeiShichoson.get旧市町村名称()));
             }
         }
         return dataSource;

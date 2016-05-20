@@ -1646,23 +1646,38 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
             }
         }
         通知書共通情報.setマスク口座情報(マスク済み口座);
-        通知書共通情報.set徴収方法情報_更正前(new ChoshuHoho(更正前entity.get介護徴収方法()));
-        通知書共通情報.set徴収方法情報_更正後(new ChoshuHoho(更正後entity.get介護徴収方法()));
+        set徴収方法情報(通知書共通情報, 更正前entity, 更正後entity);
+
         通知書共通情報.set対象者_追加含む_の情報_更正前(対象者_追加含む_の情報_更正前);
         通知書共通情報.set対象者_追加含む_の情報_更正後(対象者_追加含む_の情報_更正後);
         if (賦課の情報更正後 != null) {
             FukaJohoRelateEntity entity = new FukaJohoRelateEntity();
             entity.set介護賦課Entity(更正後entity.get介護賦課());
             entity.set介護期別RelateEntity(更正後entity.get介護期別RelateEntity());
-            通知書共通情報.set収入情報(get収入情報(賦課の情報更正後.get賦課情報(), entity, 更正後entity.get収入情報取得PSM()));
+            通知書共通情報.set収入情報(get収入情報(賦課の情報更正後.get賦課情報(), entity, 更正後entity));
         }
         通知書共通情報.set年度区分(年度区分);
         return 通知書共通情報;
     }
 
-    private ShunyuJoho get収入情報(FukaJoho 賦課の情報, FukaJohoRelateEntity 賦課,
-            List<TotalShunyuRelateEntity> 収入情報取得PSM) {
+    private void set徴収方法情報(KakushuTsuchishoCommonInfo 通知書共通情報, KakushuTsuchishoEntity 更正前entity,
+            KakushuTsuchishoEntity 更正後entity) {
 
+        if (更正前entity != null && 更正前entity.get介護徴収方法() != null) {
+            通知書共通情報.set徴収方法情報_更正前(new ChoshuHoho(更正前entity.get介護徴収方法()));
+        }
+        if (更正後entity != null && 更正後entity.get介護徴収方法() != null) {
+            通知書共通情報.set徴収方法情報_更正後(new ChoshuHoho(更正後entity.get介護徴収方法()));
+        }
+    }
+
+    private ShunyuJoho get収入情報(FukaJoho 賦課の情報, FukaJohoRelateEntity 賦課,
+            KakushuTsuchishoEntity 更正後entity) {
+
+        if (更正後entity == null) {
+            return null;
+        }
+        List<TotalShunyuRelateEntity> 収入情報取得PSM = 更正後entity.get収入情報取得PSM();
         if (収入情報取得PSM == null || 収入情報取得PSM.isEmpty() || 賦課 == null) {
             return null;
         }

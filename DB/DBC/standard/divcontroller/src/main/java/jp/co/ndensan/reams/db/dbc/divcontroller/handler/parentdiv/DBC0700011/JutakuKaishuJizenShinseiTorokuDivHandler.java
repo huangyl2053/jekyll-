@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJy
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakuKaishuShikyuGendogakuHantei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
+import jp.co.ndensan.reams.db.dbc.service.report.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiTsuchishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -267,14 +268,16 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             口座情報選択時(画面モード, data);
             div.setHidDataChangeFlg(RString.EMPTY);
         } else if (住宅改修情報.equals(selectedTab) && !初期化済み.equals(div.getHidJutakuKaisyuJyohoFlg())) {
-            if (div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().getValue() == null) {
-                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(サービス年月.toString()));
-            }
             住宅改修情報選択時(画面モード, 被保険者番号);
             div.setHidDataChangeFlg(RString.EMPTY);
         } else if (審査結果.equals(selectedTab) && !初期化済み.equals(div.getHidSeikyuSummaryFlg())) {
             if (!登録モード.equals(画面モード)) {
                 loadTabShinsaKakka(data, 画面モード);
+            } else {
+                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getRadJudgeKubun()
+                        .setSelectedKey(ShoninKubun.承認する.getコード());
+                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason()
+                        .setDisabled(true);
             }
             div.setHidSeikyuSummaryFlg(初期化済み);
             div.setHidDataChangeFlg(RString.EMPTY);
@@ -588,8 +591,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTotalPanel().getTxtRiyoshaFutanAmountNow().getValue());
         parameter.set住宅改修住宅住所(div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getTxtAddress().getDomain().value());
 
-        // TODO 疎通のため、コメント化になる。
-//        JutakuKaishuJizenShinseiTsuchishoManager.createInstance().createJutakuKaishuJizenShinseiTsuchisho(parameter);
+        JutakuKaishuJizenShinseiTsuchishoManager.createInstance().createJutakuKaishuJizenShinseiTsuchisho(parameter);
     }
 
     /**
@@ -1301,6 +1303,12 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     }
 
     private void 登録モード初期化() {
+        RDate 引継ぎサービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().setValue(引継ぎサービス年月);
+        給付率設定(被保険者番号);
+
+        div.getKaigoShikakuKihonShaPanel().getTxtServiceYM().setDisabled(true);
         div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                 .getJutakuKaishuJizenShoninKetteiTsuchisho().setIsPublish(false);
         div.getKaigoShikakuKihonShaPanel().getShinseishaInfo().getDdlShinseiTorikesuJiyu().setDisplayNone(true);
@@ -1461,9 +1469,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtJudgeYMD()
                         .setValue(new RDate(data.get判定決定年月日().toString()));
             }
-            div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getRadJudgeKubun()
-                    .setSelectedKey(data.get判定区分());
-            if (ShoninKubun.承認する.getコード().equals(data.get判定区分())) {
+            if (data.get判定区分() != null && !data.get判定区分().isEmpty()) {
+                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getRadJudgeKubun()
+                        .setSelectedKey(data.get判定区分());
+            } else {
+                div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getRadJudgeKubun()
+                        .setSelectedKey(ShoninKubun.承認する.getコード());
+            }
+            if (ShoninKubun.承認する.getコード().equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                    .getTabShinsaKakka().getRadJudgeKubun().getSelectedKey())) {
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtShoninCondition()
                         .setValue(data.get承認条件());
                 div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka().getTxtFushoninReason()

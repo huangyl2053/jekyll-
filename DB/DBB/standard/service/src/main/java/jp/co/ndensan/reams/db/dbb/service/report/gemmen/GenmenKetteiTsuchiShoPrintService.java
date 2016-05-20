@@ -109,22 +109,23 @@ public class GenmenKetteiTsuchiShoPrintService {
         GenmenKetteiTsuchiShoTateProperty property = new GenmenKetteiTsuchiShoTateProperty();
         try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoTateSource> assembler = createAssembler(property, reportManager)) {
             if (減免決定通知書情報 != null) {
-                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード, 発行日);
+                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
+                        発行日 == null || 発行日.isEmpty() ? FlexibleDate.getNowDate() : 発行日);
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免決定通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = true;
-                if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.
+                if (帳票制御共通 != null && 帳票制御共通.get首長名印字位置() != null && 帳票制御共通.
                         get首長名印字位置().equals(RSTRING_1)) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
-                if (!帳票制御共通.is電子公印印字有無()) {
+                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
                     is公印を省略 = false;
                 }
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         地方公共団体,
                         assembler.getImageFolderPath(),
-                        new RDate(発行日.toString()),
+                        発行日 == null || 発行日.isEmpty() ? RDate.getNowDate() : new RDate(発行日.toString()),
                         is公印に掛ける,
                         is公印を省略,
                         KenmeiFuyoKubunType.付与なし).buildSource();
@@ -154,21 +155,21 @@ public class GenmenKetteiTsuchiShoPrintService {
         try (ReportAssembler<KaigoHokenryoGenmenKetteiTsuchishoYokoSource> assembler = createAssembler(property, reportManager)) {
             if (減免決定通知書情報 != null) {
                 Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード,
-                        new FlexibleDate(発行日.toString()));
+                        発行日 == null || 発行日.isEmpty() ? FlexibleDate.getNowDate() : 発行日);
                 Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
                 ChohyoSeigyoKyotsu 帳票制御共通 = 減免決定通知書情報.get帳票制御共通();
                 boolean is公印に掛ける = false;
-                if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
+                if (帳票制御共通 != null && 帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                     is公印に掛ける = true;
                 }
                 boolean is公印を省略 = false;
-                if (!帳票制御共通.is電子公印印字有無()) {
+                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
                     is公印を省略 = true;
                 }
                 NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
                         地方公共団体,
                         assembler.getImageFolderPath(),
-                        new RDate(発行日.toString()),
+                        発行日 == null || 発行日.isEmpty() ? RDate.getNowDate() : new RDate(発行日.toString()),
                         is公印に掛ける,
                         is公印を省略,
                         KenmeiFuyoKubunType.付与なし).buildSource();

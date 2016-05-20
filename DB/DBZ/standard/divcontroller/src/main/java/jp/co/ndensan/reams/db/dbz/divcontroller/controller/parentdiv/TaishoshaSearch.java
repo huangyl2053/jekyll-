@@ -77,7 +77,9 @@ public class TaishoshaSearch {
     public ResponseData<TaishoshaSearchDiv> onLoad(TaishoshaSearchDiv div) {
 
         //AtenaFinderを初期化
-        div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().initialize();
+        IShikibetsuTaishoGyomuHanteiKey gyomuHanteiKey = ShikibetsuTaishoGyomuHanteiKeyFactory.
+                createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().load(gyomuHanteiKey);
 
         // TODO 保険者ドロップダウンの表示制御
         // div.getSearchCondition().getCcdSearchCondition().set保険者ドロップダウン();

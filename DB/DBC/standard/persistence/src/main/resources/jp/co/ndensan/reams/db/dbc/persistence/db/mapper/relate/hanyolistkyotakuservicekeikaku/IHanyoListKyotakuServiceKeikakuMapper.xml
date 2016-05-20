@@ -212,7 +212,9 @@
                             AND A. "max1" = (
                                 B. "taishoYM" || B. "rirekiNo") )
                 AND DbT3006."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
-                AND (DbT3006."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} OR DbT3006."tekiyoShuryoYMD" is null)
+                AND (DbT3006."tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} 
+                    OR DbT3006."tekiyoShuryoYMD" is null
+                    OR DbT3006."tekiyoShuryoYMD" = '')
             </if>
         </if>
      

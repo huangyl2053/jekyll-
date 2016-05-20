@@ -4,14 +4,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinder.AtenaFinderDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinder.IAtenaFinderDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.SaikinShorishaRireki.ISaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.SaikinShorishaRireki.SaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -25,8 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author 自動生成
  */
 public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,7 +44,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
     @JsonProperty("ButtonsForHihokenshaFinder")
     private ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder;
     @JsonProperty("ccdSaikinShorisha")
-    private KaigoSaikinShorishaRirekiDiv ccdSaikinShorisha;
+    private SaikinShorishaRirekiDiv ccdSaikinShorisha;
     @JsonProperty("btnHihokenshaFinderHyoji")
     private Button btnHihokenshaFinderHyoji;
 
@@ -50,44 +54,156 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getKaigoFinder
+     * @return KaigoFinder
+     */
     @JsonProperty("KaigoFinder")
     public KaigoFinderDiv getKaigoFinder() {
         return KaigoFinder;
     }
 
+    /*
+     * setKaigoFinder
+     * @param KaigoFinder KaigoFinder
+     */
     @JsonProperty("KaigoFinder")
     public void setKaigoFinder(KaigoFinderDiv KaigoFinder) {
         this.KaigoFinder = KaigoFinder;
     }
 
+    /*
+     * getccdAtenaFinder
+     * @return ccdAtenaFinder
+     */
     @JsonProperty("ccdAtenaFinder")
     public IAtenaFinderDiv getCcdAtenaFinder() {
         return ccdAtenaFinder;
     }
 
+    /*
+     * getButtonsForHihokenshaFinder
+     * @return ButtonsForHihokenshaFinder
+     */
     @JsonProperty("ButtonsForHihokenshaFinder")
     public ButtonsForHihokenshaFinderDiv getButtonsForHihokenshaFinder() {
         return ButtonsForHihokenshaFinder;
     }
 
+    /*
+     * setButtonsForHihokenshaFinder
+     * @param ButtonsForHihokenshaFinder ButtonsForHihokenshaFinder
+     */
     @JsonProperty("ButtonsForHihokenshaFinder")
     public void setButtonsForHihokenshaFinder(ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder) {
         this.ButtonsForHihokenshaFinder = ButtonsForHihokenshaFinder;
     }
 
+    /*
+     * getccdSaikinShorisha
+     * @return ccdSaikinShorisha
+     */
     @JsonProperty("ccdSaikinShorisha")
-    public IKaigoSaikinShorishaRirekiDiv getCcdSaikinShorisha() {
+    public ISaikinShorishaRirekiDiv getCcdSaikinShorisha() {
         return ccdSaikinShorisha;
     }
 
+    /*
+     * getbtnHihokenshaFinderHyoji
+     * @return btnHihokenshaFinderHyoji
+     */
     @JsonProperty("btnHihokenshaFinderHyoji")
     public Button getBtnHihokenshaFinderHyoji() {
         return btnHihokenshaFinderHyoji;
     }
 
+    /*
+     * setbtnHihokenshaFinderHyoji
+     * @param btnHihokenshaFinderHyoji btnHihokenshaFinderHyoji
+     */
     @JsonProperty("btnHihokenshaFinderHyoji")
     public void setBtnHihokenshaFinderHyoji(Button btnHihokenshaFinderHyoji) {
         this.btnHihokenshaFinderHyoji = btnHihokenshaFinderHyoji;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum 保険者 implements ICommonChildDivMode {
+
+        表示する("表示する"),
+        表示しない("表示しない");
+
+        private final String name;
+
+        private 保険者(final String name) {
+            this.name = name;
+        }
+
+        public static 保険者 getEnum(String str) {
+            保険者[] enumArray = 保険者.values();
+
+            for (保険者 enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 保険者 getMode_保険者() {
+        return (保険者) _CommonChildDivModeUtil.getMode( this.modes, 保険者.class );
+    }
+
+    public void setMode_保険者( 保険者 value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, 保険者.class , value );
+    }
+
+    public static enum 表示モード implements ICommonChildDivMode {
+
+        資格系("資格系"),
+        賦課系("賦課系");
+
+        private final String name;
+
+        private 表示モード(final String name) {
+            this.name = name;
+        }
+
+        public static 表示モード getEnum(String str) {
+            表示モード[] enumArray = 表示モード.values();
+
+            for (表示モード enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 表示モード getMode_表示モード() {
+        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
+    }
+
+    public void setMode_表示モード( 表示モード value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
     }
 
     // </editor-fold>
