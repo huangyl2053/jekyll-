@@ -28,7 +28,7 @@ public class SikakuKanrenIdoEntity implements IDbAccessable {
     private RString edaNo;
     private FlexibleDate shikakuHenkoYMD;
     private FlexibleDate shikakuHenkoTodokedeYMD;
-    private RString jushochitokureiTekiyoJiyuCode;
+    private RString shikakuHenkoJiyuCode;
     private LasdecCode shichosonCode;
     private RString shichosonMeisho;
     private LasdecCode koikinaiTokureiSochimotoShichosonCode;
