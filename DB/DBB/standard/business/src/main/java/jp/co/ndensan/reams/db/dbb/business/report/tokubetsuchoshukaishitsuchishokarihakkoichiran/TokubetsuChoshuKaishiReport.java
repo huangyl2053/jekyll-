@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchish
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -21,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSource> {
 
     private final EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu;
-    private final RString 賦課年度;
+    private final FlexibleYear 賦課年度;
     private final RString 市町村コード;
     private final RString 市町村名;
     private final RDateTime 帳票作成日時;
@@ -33,7 +34,7 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
      * コンストラクタです。
      *
      * @param editedhonsanteitsuchishokyotsu EditedHonSanteiTsuchiShoKyotsu
-     * @param 賦課年度 RString
+     * @param 賦課年度 FlexibleYear
      * @param 帳票作成日時 RDateTime
      * @param 市町村コード RString
      * @param 市町村名 RString
@@ -41,7 +42,7 @@ public class TokubetsuChoshuKaishiReport extends Report<TokubetsuChoshuKaishiSou
      * @param 改頁項目リスト List<RString>
      * @param num int
      */
-    public TokubetsuChoshuKaishiReport(EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu, RString 賦課年度,
+    public TokubetsuChoshuKaishiReport(EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu, FlexibleYear 賦課年度,
             RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, List<RString> 出力項目リスト, List<RString> 改頁項目リスト, int num) {
         this.editedhonsanteitsuchishokyotsu = editedhonsanteitsuchishokyotsu;
         this.賦課年度 = 賦課年度;
