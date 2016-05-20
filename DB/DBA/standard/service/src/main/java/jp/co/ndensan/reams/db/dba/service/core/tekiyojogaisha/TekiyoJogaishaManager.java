@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaRelate;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
@@ -44,6 +46,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -66,6 +69,9 @@ public class TekiyoJogaishaManager {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_適用登録 = new RString("適用登録モード");
     private static final RString 状態_解除 = new RString("解除モード");
+    private static final RString 登録不可 = new RString("0");
+    private static final RString 登録可能で資格喪失不要 = new RString("1");
+    private static final RString 登録可能で資格喪失必要 = new RString("2");
     private final MapperProvider mapperProvider;
     private final DbT1002TekiyoJogaishaDac 適用除外者Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
@@ -314,8 +320,8 @@ public class TekiyoJogaishaManager {
      * @param 変更前適用除外者情報 変更前適用除外者情報
      * @param 変更後適用除外者情報 変更後適用除外者情報
      * @param dbT1004Entity 介護保険施設入退所管理情報
-     * @param 識別コード 識別コード
      * @param 画面状態 画面状態
+     * @param 識別コード 識別コード
      */
     @Transaction
     public void saveTekiyoJogaisha(DbT1002TekiyoJogaishaEntity 変更前適用除外者情報,
@@ -324,15 +330,20 @@ public class TekiyoJogaishaManager {
             RString 画面状態,
             ShikibetsuCode 識別コード) {
         if (状態_適用登録.equals(画面状態)) {
-            HihokenshashikakusoshitsuManager.createInstance().shikakuSoshitsuCheck(識別コード, HihokenshaNo.EMPTY);
+            RString 登録可否判定 = tekiyoTorokuKahiHantei(識別コード, 変更後適用除外者情報.getTekiyoYMD());
+            if (登録不可.equals(登録可否判定)) {
+                throw new ApplicationException(DbzErrorMessages.他の期間情報との期間重複.getMessage());
+            }
             TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
             TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(dbT1004Entity);
-            HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
-                    識別コード,
-                    HihokenshaNo.EMPTY,
-                    変更後適用除外者情報.getTekiyoYMD(),
-                    ShikakuSoshitsuJiyu.除外者.getコード(),
-                    変更後適用除外者情報.getTekiyoTodokedeYMD());
+            if (登録可能で資格喪失必要.equals(登録可否判定)) {
+                HihokenshashikakusoshitsuManager.createInstance().saveHihokenshaShikakuSoshitsu(
+                        識別コード,
+                        HihokenshaNo.EMPTY,
+                        変更後適用除外者情報.getTekiyoYMD(),
+                        ShikakuSoshitsuJiyu.除外者.getコード(),
+                        変更後適用除外者情報.getTekiyoTodokedeYMD());
+            }
         } else if (状態_解除.equals(画面状態)) {
             TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
             TekiyoJogaishaManager.createInstance().regTekiyoJogaisha(変更後適用除外者情報);
@@ -352,6 +363,37 @@ public class TekiyoJogaishaManager {
         } else if (状態_削除.equals(画面状態)) {
             TekiyoJogaishaManager.createInstance().delTekiyoJogaisha(変更前適用除外者情報);
         }
+    }
+
+    /**
+     * 適用登録可否を判定します。
+     *
+     * @param 識別コード 識別コード
+     * @param 基準日 基準日
+     * @return 登録可否判定（0：登録不可、1：登録可能で資格喪失不要、2：登録可能で資格喪失必要）
+     */
+    public RString tekiyoTorokuKahiHantei(ShikibetsuCode 識別コード, FlexibleDate 基準日) {
+        RString 登録可否判定 = 登録不可;
+        HihokenshaShutokuJyoho 最新データ = HihokenshaShikakuShutokuManager.createInstance().getSaishinDeta(識別コード, HihokenshaNo.EMPTY);
+        if (最新データ != null) {
+            FlexibleDate 資格取得年月日 = 最新データ.get資格取得年月日();
+            FlexibleDate 資格喪失年月日 = 最新データ.get資格喪失年月日();
+            FlexibleDate 適用年月日 = 最新データ.get適用年月日();
+            FlexibleDate 解除年月日 = 最新データ.get解除年月日();
+            FlexibleDate 異動日 = 最新データ.get異動日();
+            if (資格取得年月日 != null && !資格取得年月日.isEmpty() && (資格喪失年月日 == null || 資格喪失年月日.isEmpty())
+                    && !(適用年月日 != null && !適用年月日.isEmpty() && (解除年月日 == null || 解除年月日.isEmpty()))
+                    && 異動日.isBeforeOrEquals(基準日)) {
+                登録可否判定 = 登録可能で資格喪失必要;
+            }
+            if (資格取得年月日 != null && !資格取得年月日.isEmpty() && 資格喪失年月日 != null && !資格喪失年月日.isEmpty()
+                    && 異動日.isBeforeOrEquals(基準日)) {
+                登録可否判定 = 登録可能で資格喪失不要;
+            }
+        } else {
+            登録可否判定 = 登録可能で資格喪失不要;
+        }
+        return 登録可否判定;
     }
 
     private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate shikakuShutokuYMD) {

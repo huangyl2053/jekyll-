@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -52,7 +51,6 @@ public class HihokenshaShokaiTotal {
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
     public ResponseData<HihokenshaShokaiTotalDiv> onLoad(HihokenshaShokaiTotalDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPublish"), false);
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();

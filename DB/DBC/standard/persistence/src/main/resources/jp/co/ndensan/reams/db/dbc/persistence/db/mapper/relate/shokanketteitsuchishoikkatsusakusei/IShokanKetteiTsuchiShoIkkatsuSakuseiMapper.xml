@@ -439,6 +439,7 @@
         SELECT
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3043ShokanShokujiHiyo."yoshikiNo" AS "yoshikiNo"
+        <!-- TODO QA1178確認中-->
         --,DbT3043ShokanShokujiHiyo.サービスコード AS "serviceCode"
         ,'' AS "serviceCode"
         ,DbT3043ShokanShokujiHiyo."tensuKingaku" AS "kaishuKingaku"

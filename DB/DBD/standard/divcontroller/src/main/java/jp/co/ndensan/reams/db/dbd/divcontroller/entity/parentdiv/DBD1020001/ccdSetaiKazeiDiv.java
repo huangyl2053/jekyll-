@@ -4,7 +4,12 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -21,14 +26,8 @@ public class ccdSetaiKazeiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtSetaiKazeiJokyo")
-    private TextBox txtSetaiKazeiJokyo;
-    @JsonProperty("btnShowSetaiJoho")
-    private Button btnShowSetaiJoho;
-    @JsonProperty("btnCloseSetaiJoho")
-    private Button btnCloseSetaiJoho;
-    @JsonProperty("btnShowGemmenJoho")
-    private ButtonDialog btnShowGemmenJoho;
+    @JsonProperty("Header")
+    private HeaderDiv Header;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,75 +36,84 @@ public class ccdSetaiKazeiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtSetaiKazeiJokyo
-     * @return txtSetaiKazeiJokyo
+     * getHeader
+     * @return Header
      */
-    @JsonProperty("txtSetaiKazeiJokyo")
+    @JsonProperty("Header")
+    public HeaderDiv getHeader() {
+        return Header;
+    }
+
+    /*
+     * setHeader
+     * @param Header Header
+     */
+    @JsonProperty("Header")
+    public void setHeader(HeaderDiv Header) {
+        this.Header = Header;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public HorizontalLine getLin1() {
+        return this.getHeader().getLin1();
+    }
+
+    @JsonIgnore
+    public void  setLin1(HorizontalLine lin1) {
+        this.getHeader().setLin1(lin1);
+    }
+
+    @JsonIgnore
     public TextBox getTxtSetaiKazeiJokyo() {
-        return txtSetaiKazeiJokyo;
+        return this.getHeader().getTxtSetaiKazeiJokyo();
     }
 
-    /*
-     * settxtSetaiKazeiJokyo
-     * @param txtSetaiKazeiJokyo txtSetaiKazeiJokyo
-     */
-    @JsonProperty("txtSetaiKazeiJokyo")
-    public void setTxtSetaiKazeiJokyo(TextBox txtSetaiKazeiJokyo) {
-        this.txtSetaiKazeiJokyo = txtSetaiKazeiJokyo;
+    @JsonIgnore
+    public void  setTxtSetaiKazeiJokyo(TextBox txtSetaiKazeiJokyo) {
+        this.getHeader().setTxtSetaiKazeiJokyo(txtSetaiKazeiJokyo);
     }
 
-    /*
-     * getbtnShowSetaiJoho
-     * @return btnShowSetaiJoho
-     */
-    @JsonProperty("btnShowSetaiJoho")
+    @JsonIgnore
     public Button getBtnShowSetaiJoho() {
-        return btnShowSetaiJoho;
+        return this.getHeader().getBtnShowSetaiJoho();
     }
 
-    /*
-     * setbtnShowSetaiJoho
-     * @param btnShowSetaiJoho btnShowSetaiJoho
-     */
-    @JsonProperty("btnShowSetaiJoho")
-    public void setBtnShowSetaiJoho(Button btnShowSetaiJoho) {
-        this.btnShowSetaiJoho = btnShowSetaiJoho;
+    @JsonIgnore
+    public void  setBtnShowSetaiJoho(Button btnShowSetaiJoho) {
+        this.getHeader().setBtnShowSetaiJoho(btnShowSetaiJoho);
     }
 
-    /*
-     * getbtnCloseSetaiJoho
-     * @return btnCloseSetaiJoho
-     */
-    @JsonProperty("btnCloseSetaiJoho")
+    @JsonIgnore
     public Button getBtnCloseSetaiJoho() {
-        return btnCloseSetaiJoho;
+        return this.getHeader().getBtnCloseSetaiJoho();
     }
 
-    /*
-     * setbtnCloseSetaiJoho
-     * @param btnCloseSetaiJoho btnCloseSetaiJoho
-     */
-    @JsonProperty("btnCloseSetaiJoho")
-    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
-        this.btnCloseSetaiJoho = btnCloseSetaiJoho;
+    @JsonIgnore
+    public void  setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
+        this.getHeader().setBtnCloseSetaiJoho(btnCloseSetaiJoho);
     }
 
-    /*
-     * getbtnShowGemmenJoho
-     * @return btnShowGemmenJoho
-     */
-    @JsonProperty("btnShowGemmenJoho")
+    @JsonIgnore
     public ButtonDialog getBtnShowGemmenJoho() {
-        return btnShowGemmenJoho;
+        return this.getHeader().getBtnShowGemmenJoho();
     }
 
-    /*
-     * setbtnShowGemmenJoho
-     * @param btnShowGemmenJoho btnShowGemmenJoho
-     */
-    @JsonProperty("btnShowGemmenJoho")
-    public void setBtnShowGemmenJoho(ButtonDialog btnShowGemmenJoho) {
-        this.btnShowGemmenJoho = btnShowGemmenJoho;
+    @JsonIgnore
+    public void  setBtnShowGemmenJoho(ButtonDialog btnShowGemmenJoho) {
+        this.getHeader().setBtnShowGemmenJoho(btnShowGemmenJoho);
+    }
+
+    @JsonIgnore
+    public IKaigoShikakuKihonDiv getCcdKaigoKihon() {
+        return this.getHeader().getCcdKaigoKihon();
+    }
+
+    @JsonIgnore
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return this.getHeader().getCcdAtenaInfo();
     }
 
     // </editor-fold>

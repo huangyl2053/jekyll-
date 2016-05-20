@@ -14,15 +14,19 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HyojiCodeResearcher;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -45,6 +49,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
     private static final int END_NUMBER = 15;
     private static final RString B5種別コード = new RString("DBB100081");
     private static final RString A4種別コード = new RString("DBB100082");
+    private static final RString RSTRING_1 = new RString("1");
 
     /**
      * printメソッド
@@ -63,13 +68,25 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty property
                     = new KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoProperty();
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, B5種別コード);
-                NinshoshaSource sourceBuilder = null;
-                if (発行日 != null) {
-                    sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                            徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, B5種別コード,
+                        発行日 == null ? FlexibleDate.getNowDate() : new FlexibleDate(発行日.toDateString()));
+                Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+                ChohyoSeigyoKyotsu 帳票制御共通 = 徴収猶予決定通知書情報.get帳票制御共通();
+                boolean is公印に掛ける = false;
+                boolean is公印を省略 = false;
+                if (帳票制御共通 != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                    is公印に掛ける = true;
                 }
+                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
+                    is公印を省略 = true;
+                }
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                        地方公共団体,
+                        assembler.getImageFolderPath(),
+                        発行日 == null ? RDate.getNowDate() : 発行日,
+                        is公印に掛ける,
+                        is公印を省略,
+                        KenmeiFuyoKubunType.付与なし).buildSource();
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 EditedAtesaki 編集後宛先 = get編集後宛先(徴収猶予決定通知書情報);
@@ -103,17 +120,28 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
             KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty property
                     = new KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateProperty();
             try (ReportAssembler<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaManager manager = new _NinshoshaManager();
-                Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, A4種別コード);
-                NinshoshaSource sourceBuilder = null;
-                if (発行日 != null) {
-                    sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
-                            徴収猶予決定通知書情報.get地方公共団体(), assembler.getImageFolderPath(), 発行日).buildSource();
+                Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, A4種別コード,
+                        発行日 == null ? FlexibleDate.getNowDate() : new FlexibleDate(発行日.toDateString()));
+                Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+                ChohyoSeigyoKyotsu 帳票制御共通 = 徴収猶予決定通知書情報.get帳票制御共通();
+                boolean is公印に掛ける = false;
+                boolean is公印を省略 = false;
+                if (帳票制御共通 != null && RSTRING_1.equals(帳票制御共通.get首長名印字位置())) {
+                    is公印に掛ける = true;
                 }
+                if (帳票制御共通 != null && !帳票制御共通.is電子公印印字有無()) {
+                    is公印を省略 = true;
+                }
+                NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(認証者,
+                        地方公共団体,
+                        assembler.getImageFolderPath(),
+                        発行日 == null ? RDate.getNowDate() : 発行日,
+                        is公印に掛ける,
+                        is公印を省略,
+                        KenmeiFuyoKubunType.付与なし).buildSource();
                 ReportSourceWriter<KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 EditedAtesaki 編集後宛先 = get編集後宛先(徴収猶予決定通知書情報);
-
                 for (int index = START_NUMBER; index < END_NUMBER; index++) {
                     HyojiCodes 表示コード = get表示コード(徴収猶予決定通知書情報);
 

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -111,9 +112,10 @@ public class KouzaInfoHandler {
 
     /**
      * 「申請情報」ボタン Handler処理です。
+     *
+     * @param 処理モード RString
      */
-    public void onClick_btnShinseiInfo() {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+    public void onClick_btnShinseiInfo(RString 処理モード) {
         if (登録.equals(処理モード)) {
             setViewState(修正);
         } else {
@@ -123,29 +125,30 @@ public class KouzaInfoHandler {
 
     /**
      * 「サービス提供証明書」ボタン Handler処理です。
+     *
+     * @param 処理モード RString
      */
-    public void onClick_btnServiceTeikyoShomeisyo() {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+    public void onClick_btnServiceTeikyoShomeisyo(RString 処理モード) {
         setViewState(処理モード);
     }
 
     /**
      * 「償還払決定情報」ボタン Handler処理です。
+     *
+     * @param 処理モード RString
      */
-    public void onClick_btnShokanbaraiKeiteInfo() {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+    public void onClick_btnShokanbaraiKeiteInfo(RString 処理モード) {
         setViewState(処理モード);
     }
 
     /**
      * 申請既存チェックです。
+     *
+     * @param 整理番号 RString
+     * @param サービス年月 FlexibleYearMonth
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void 申請既存チェック() {
-        ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
-        RString 整理番号 = parameter.getSeiriNp();
+    public void 申請既存チェック(RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
         List<ShokanShinsei> entity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         if (entity == null) {
@@ -281,12 +284,10 @@ public class KouzaInfoHandler {
     }
 
     private void setViewState(RString 処理モード) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleYearMonth サービス年月 = null;
-        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
-            サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toString());
-        }
-        RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
+                RYearMonth.class).toString());
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         ShoukanharaihishinseikensakuParameter parameter = new ShoukanharaihishinseikensakuParameter(
                 被保険者番号, サービス年月, 整理番号, null, null, null, null);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, parameter);

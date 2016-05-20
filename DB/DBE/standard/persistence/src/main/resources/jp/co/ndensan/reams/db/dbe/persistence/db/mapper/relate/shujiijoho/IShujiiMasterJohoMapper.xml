@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiijoho.IShujiiMasterJohoMapper">
-    <resultMap id="resultMap_ShujiiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiMasterRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_ShujiiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiijoho.ShujiiMasterRelateEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5912ShujiiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <id property="shujiiCode" column="dbT5912ShujiiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

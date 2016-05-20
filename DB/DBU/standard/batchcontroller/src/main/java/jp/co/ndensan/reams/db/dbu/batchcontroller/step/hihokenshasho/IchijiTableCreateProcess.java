@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.Hih
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIkkatsuHakkoMapper;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

@@ -23,7 +23,7 @@ public enum DbuSystemErrorMessages {
     private final RString message;
 
     private DbuSystemErrorMessages(int no, RString message) {
-        this.code = new RString(toCode("S", no));
+        this.code = new RString(toCode("DBUS", no));
         this.message = message;
     }
 

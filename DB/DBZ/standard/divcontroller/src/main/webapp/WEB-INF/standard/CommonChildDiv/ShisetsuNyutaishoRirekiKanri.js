@@ -171,23 +171,23 @@ var DBZ;
                     this.controls = controls;
                 }
                 表示widthサイズ.prototype.モード1 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "1030";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1120";
                 };
 
                 表示widthサイズ.prototype.モード2 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "980";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1070";
                 };
 
                 表示widthサイズ.prototype.モード3 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "900";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "990";
                 };
 
                 表示widthサイズ.prototype.モード4 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "800";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "890";
                 };
 
                 表示widthサイズ.prototype.モード5 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = "720";
+                    this.controls.dgShisetsuNyutaishoRireki().width = "810";
                 };
                 return 表示widthサイズ;
             })();

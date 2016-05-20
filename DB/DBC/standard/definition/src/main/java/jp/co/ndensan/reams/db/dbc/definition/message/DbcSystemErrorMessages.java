@@ -23,7 +23,7 @@ public enum DbcSystemErrorMessages {
     private final RString message;
 
     private DbcSystemErrorMessages(int no, RString message) {
-        this.code = new RString(toCode("S", no));
+        this.code = new RString(toCode("DBCS", no));
         this.message = message;
     }
 
@@ -44,7 +44,7 @@ public enum DbcSystemErrorMessages {
      */
     public RString getReplacedMessage(String... replacers) {
 
-         RString replacee = new RString("?");
+        RString replacee = new RString("?");
 
         if (getReplacerCount() != replacers.length) {
             throw new IllegalArgumentException("置換予定部分の数と、指定する置換文字列の数を一致させてください。");

@@ -268,6 +268,9 @@ public class HihokenshaDaichoManager {
 
         DbT1001HihokenshaDaichoEntity entity = mapperProvider.create(
                 IDbT1001HihokenshaDaichoMapper.class).get資格の情報(param);
+        if (entity == null) {
+            return null;
+        }
         entity.initializeMd5();
         return new HihokenshaDaicho(entity);
     }

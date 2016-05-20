@@ -107,11 +107,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnShowJizenShinsei(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理モード, モード_照会);
-        RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-        RString 整理番号 = div.getTxtSeiriNo().getValue();
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(
-                画面提供着工年月.getYearMonth().toDateString()));
-        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to住宅改修費事前申請登録).respond();
     }
 

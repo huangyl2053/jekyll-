@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.T
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
@@ -41,7 +42,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -61,10 +61,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChoshuKaishiTsuchishoPrintService {
 
-    private static final ReportId 帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
-    private static final RString 種別コード = new RString("0001");
-    private static final int INT_0 = 0;
-    private static final int INT_1 = 1;
+    private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString RSTRING_1 = new RString("1");
 
     /**
@@ -86,9 +83,9 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = 本算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;
@@ -129,9 +126,9 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = 本算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;
@@ -170,9 +167,9 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = 本算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;
@@ -211,9 +208,9 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = 本算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;
@@ -254,9 +251,9 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = 本算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;
@@ -297,9 +294,9 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = 本算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;
@@ -340,9 +337,9 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
             Ninshosha 認証者 = manager.get帳票認証者(GyomuCode.DB介護保険, 種別コード,
                     new FlexibleDate(本算定通知書情報.get発行日().toString()));
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBE認定支援, 帳票分類ID);
+            ChohyoSeigyoKyotsu 帳票制御共通 = 本算定通知書情報.get帳票制御共通();
             boolean is公印に掛ける = false;
-            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().substring(INT_0, INT_1).equals(RSTRING_1)) {
+            if (帳票制御共通.get首長名印字位置() != null && 帳票制御共通.get首長名印字位置().equals(RSTRING_1)) {
                 is公印に掛ける = true;
             }
             boolean is公印を省略 = false;

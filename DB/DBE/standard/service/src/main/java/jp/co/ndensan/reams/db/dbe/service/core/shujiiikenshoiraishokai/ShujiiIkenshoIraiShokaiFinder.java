@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoirai.ShujiiIkenshoIraiBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikenshoiraishokai.ShujiiIkenshoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoirai.ShujiiIkenshoIraiEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshoiraishokai.IShujiiIkenshoIraiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
@@ -63,7 +64,7 @@ public class ShujiiIkenshoIraiShokaiFinder {
     public SearchResult<ShujiiIkenshoIraiBusiness> getNinnteiChousa(HihokenshaNo 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         IShujiiIkenshoIraiMapper mapper = mapperProvider.create(IShujiiIkenshoIraiMapper.class);
-        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(被保険者番号);
+        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(ShujiiIkenshoMapperParameter.createParam(被保険者番号));
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<ShujiiIkenshoIraiBusiness>emptyList(), 0, false);
         }

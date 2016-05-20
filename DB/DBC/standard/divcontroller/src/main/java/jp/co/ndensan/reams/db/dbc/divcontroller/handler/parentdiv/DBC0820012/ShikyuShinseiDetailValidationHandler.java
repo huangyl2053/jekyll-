@@ -67,31 +67,28 @@ public class ShikyuShinseiDetailValidationHandler {
 
     private boolean is入力() {
         pnlShinseiDiv pnlDiv = div.getPnlShinsei();
-        if (pnlDiv.getTxtShinseiYMD() == null) {
+        if (pnlDiv.getTxtShinseiYMD().getValue() == null) {
             return true;
         }
-        if (pnlDiv.getTxtUketsukeYMD() == null) {
+        if (pnlDiv.getTxtUketsukeYMD().getValue() == null) {
             return true;
         }
-        if (pnlDiv.getTxtKisaiHokensyaBango() == null) {
+        if (pnlDiv.getTxtKisaiHokensyaBango().getValue().isNullOrEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtShimeikana() == null) {
+        if (pnlDiv.getTxtShimeikana().getDomain().isEmpty() || pnlDiv.getTxtShimeikana().getDomain() == null) {
             return true;
         }
-        if (pnlDiv.getTxtShimeiKanji() == null) {
+        if (pnlDiv.getTxtShimeiKanji().getDomain().isEmpty() || pnlDiv.getTxtShimeiKanji().getDomain() == null) {
             return true;
         }
-        if (pnlDiv.getTxtTelNo() == null) {
+        if (pnlDiv.getTxtTelNo().getDomain().isEmpty() || pnlDiv.getTxtTelNo().getDomain() == null) {
             return true;
         }
-        if (pnlDiv.getTxtMulShinseiRiyu() == null) {
+        if (pnlDiv.getTxtMulShinseiRiyu().getValue().isNullOrEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtNumShiharaKingakuGk() == null) {
-            return true;
-        }
-        return false;
+        return pnlDiv.getTxtNumShiharaKingakuGk().getValue() == null;
     }
 
     /**
@@ -124,9 +121,9 @@ public class ShikyuShinseiDetailValidationHandler {
         Decimal 保険請求金額 = div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().getValue();
         Decimal 自己負担額合計 = div.getPnlShinsei().getTxtNumHokenKyufuGaku().getValue();
         Decimal 支払金額合計 = div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue();
-        保険請求金額 = null == 保険請求金額 ? Decimal.ZERO : 保険請求金額;
-        自己負担額合計 = null == 自己負担額合計 ? Decimal.ZERO : 自己負担額合計;
-        支払金額合計 = null == 支払金額合計 ? Decimal.ZERO : 支払金額合計;
+        保険請求金額 = (保険請求金額 == null ? Decimal.ZERO : 保険請求金額);
+        自己負担額合計 = (自己負担額合計 == null ? Decimal.ZERO : 自己負担額合計);
+        支払金額合計 = (支払金額合計 == null ? Decimal.ZERO : 支払金額合計);
         if (!支払金額合計.equals(保険請求金額.add(自己負担額合計))) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrWarningMessages.相違, SHIBARAIKINGAKUGOKEI.toString(), GEKEKESANKEKKA.toString())));

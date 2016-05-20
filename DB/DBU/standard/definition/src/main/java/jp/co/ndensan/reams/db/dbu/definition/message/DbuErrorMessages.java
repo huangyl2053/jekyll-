@@ -29,7 +29,7 @@ public enum DbuErrorMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbuErrorMessages(int no, String message) {
-        this.message = new ErrorMessage(toCode("E", no), message);
+        this.message = new ErrorMessage(toCode("DBUE", no), message);
     }
 
     @Override

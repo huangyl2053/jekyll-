@@ -328,6 +328,9 @@ public class ServiceKeikakuHiPanelHandler {
         int flag = 0;
         ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
                 ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
+        if (entity200604 == null) {
+            return true;
+        }
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
         RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
@@ -365,6 +368,9 @@ public class ServiceKeikakuHiPanelHandler {
         int flag = 0;
         ShokanServicePlan200004Result entity200004 = ViewStateHolder.get(
                 ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
+        if (entity200004 == null) {
+            return true;
+        }
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
         RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();

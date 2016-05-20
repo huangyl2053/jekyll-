@@ -82,7 +82,7 @@ public class SikakuKanrenIdo {
      * @return 住所地特例適用事由コード
      */
     public RString get住所地特例適用事由コード() {
-        return entity.getJushochitokureiTekiyoJiyuCode();
+        return entity.getShikakuHenkoJiyuCode();
     }
 
     /**

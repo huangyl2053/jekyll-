@@ -46,7 +46,7 @@ public enum DbdErrorMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbdErrorMessages(int no, String message) {
-        this.message = new ErrorMessage(toCode("E", no), message);
+        this.message = new ErrorMessage(toCode("DBDE", no), message);
     }
 
     @Override

@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.createtsukibetsusuiihyo;
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.FutuChoushuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.GemmenReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.GokeyBubunKoumokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.GoukeyiReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.KoumokuGoukeyProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.KoumokuSyoukeyiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.TokubetuProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -24,12 +28,20 @@ public class CreateTsukibetsuSuiihyoFlow extends BatchFlowBase<CreateTsukibetsuS
     @Override
     protected void defineFlow() {
         executeStep(REPORT1_PROCESS);
-        executeStep(REPORT2_PROCESS);
+        executeStep(KOUMOKUSYOUKEYI_PROCESS);
+        executeStep(KOUMOKUGOUKEY_PROCESS);
+        executeStep(GOKEYBUBUNKOUMOKU_PROCESS);
+        executeStep(FUTUCHOUSHU_PROCESS);
+        executeStep(TOKUBETU_PROCESS);
         executeStep(GOUKEYIREPORT_PROCESS);
         executeStep(GEMMENREPORT_PROCESS);
     }
     private static final String REPORT1_PROCESS = "report1Process";
-    private static final String REPORT2_PROCESS = "report2Process";
+    private static final String KOUMOKUSYOUKEYI_PROCESS = "koumokuSyoukeyiProcess";
+    private static final String KOUMOKUGOUKEY_PROCESS = "koumokuGoukeyProcess";
+    private static final String GOKEYBUBUNKOUMOKU_PROCESS = "gokeyBubunKoumokuProcess";
+    private static final String FUTUCHOUSHU_PROCESS = "futuChoushuProcess";
+    private static final String TOKUBETU_PROCESS = "tokubetuProcess";
     private static final String GOUKEYIREPORT_PROCESS = "goukeyiReportProcess";
     private static final String GEMMENREPORT_PROCESS = "gemmenReportProcess";
 
@@ -45,11 +57,55 @@ public class CreateTsukibetsuSuiihyoFlow extends BatchFlowBase<CreateTsukibetsuS
     }
 
     /**
+     * koumokuSyoukeyiProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(KOUMOKUSYOUKEYI_PROCESS)
+    protected IBatchFlowCommand koumokuSyoukeyiProcess() {
+        return loopBatch(KoumokuSyoukeyiProcess.class)
+                .arguments(getParameter().toCreateTsukibetsuSuiihyoProcessParameter()).define();
+    }
+
+    /**
+     * koumokuGoukeyProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(KOUMOKUGOUKEY_PROCESS)
+    protected IBatchFlowCommand koumokuGoukeyProcess() {
+        return loopBatch(KoumokuGoukeyProcess.class)
+                .arguments(getParameter().toCreateTsukibetsuSuiihyoProcessParameter()).define();
+    }
+
+    /**
+     * gokeyBubunKoumokuProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(GOKEYBUBUNKOUMOKU_PROCESS)
+    protected IBatchFlowCommand gokeyBubunKoumokuProcess() {
+        return loopBatch(GokeyBubunKoumokuProcess.class)
+                .arguments(getParameter().toCreateTsukibetsuSuiihyoProcessParameter()).define();
+    }
+
+    /**
+     * futuChoushuProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(FUTUCHOUSHU_PROCESS)
+    protected IBatchFlowCommand futuChoushuProcess() {
+        return loopBatch(FutuChoushuProcess.class)
+                .arguments(getParameter().toCreateTsukibetsuSuiihyoProcessParameter()).define();
+    }
+
+    /**
      * tokubetuProcessです。
      *
      * @return IBatchFlowCommand
      */
-    @Step(REPORT2_PROCESS)
+    @Step(TOKUBETU_PROCESS)
     protected IBatchFlowCommand tokubetuProcess() {
         return loopBatch(TokubetuProcess.class)
                 .arguments(getParameter().toCreateTsukibetsuSuiihyoProcessParameter()).define();

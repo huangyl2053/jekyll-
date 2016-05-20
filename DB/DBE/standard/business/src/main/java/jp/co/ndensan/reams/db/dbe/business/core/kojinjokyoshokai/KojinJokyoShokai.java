@@ -345,7 +345,7 @@ public class KojinJokyoShokai {
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return entity.isShiteiiFlag();
     }
 

@@ -8,15 +8,19 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0400011
 import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitoutatuyoteishachecklist.NenreiToutatuYoteishaCheckListManager;
 import jp.co.ndensan.reams.db.dbu.business.core.hihokenshashoikkatsuhakko.HihokenshashoIkkatsuHakkoModel;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho.IkkatsuHakkoBatchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0400011.HihokenshaShoBatchPrmDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.HihokenshaShoBatchPrmHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0400011.ValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashoikkatsuhakko.HihokenshaShoBatchPrmFinder;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -25,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -75,7 +78,7 @@ public class HihokenshaShoBatchPrm {
         getHandler(div).onLoad(resultList.records());
         NenreiToutatuYoteishaCheckListManager nenreiToutatuYoteishaManager
                 = InstanceProvider.create(NenreiToutatuYoteishaCheckListManager.class);
-        RString type = BusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, SubGyomuCode.DBA介護資格);
+        RString type = DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格);
         ReportId chohyoID = null;
         if (タイプ_A4横.equals(type)) {
             chohyoID = REPORTID_A4;
@@ -114,8 +117,27 @@ public class HihokenshaShoBatchPrm {
      * @param div 介護保険被保険者証一括作成Div
      * @return ResponseData<HihokenshaShoBatchPrmDiv>
      */
-    public ResponseData<HihokenshaShoBatchPrmDiv> onClick_btnJikkou(HihokenshaShoBatchPrmDiv div) {
-        return ResponseData.of(div).respond();
+    public ResponseData<IkkatsuHakkoBatchParameter> onClick_btnJikkou(HihokenshaShoBatchPrmDiv div) {
+        IkkatsuHakkoBatchParameter param = new IkkatsuHakkoBatchParameter(
+                div.getRadShutsuryokuJoken().getSelectedKey(),
+                div.getTxtKonkaiChushutsuFromYMD() != null ? new FlexibleDate(div.getTxtKonkaiChushutsuFromYMD().getValue().toDateString())
+                : FlexibleDate.EMPTY,
+                div.getTxtKonkaiChushutsuFromTime().getValue(),
+                div.getTxtKonkaiChushutsuToYMD() != null ? new FlexibleDate(div.getTxtKonkaiChushutsuToYMD().getValue().toDateString())
+                : FlexibleDate.EMPTY,
+                div.getTxtKonkaiChushutsuToTime().getValue(),
+                div.getTxtKonkaiShoriKijunYMD() != null ? new FlexibleDate(div.getTxtKonkaiShoriKijunYMD().getValue().toDateString())
+                : FlexibleDate.EMPTY,
+                div.getTxtKonkaiShoriKijunTime().getValue(),
+                div.getTxtKofuYMD() != null ? new FlexibleDate(div.getTxtKofuYMD().getValue().toDateString()) : FlexibleDate.EMPTY,
+                div.getChkTest().getSelectedValues().get(0),
+                div.getChkSaiHakko().getSelectedValues().get(0),
+                div.getTxtHakkoYMD() != null ? new FlexibleDate(div.getTxtHakkoYMD().getValue().toDateString()) : FlexibleDate.EMPTY,
+                div.getTxtHakkoTime().getValue(),
+                // TODO  Redmine：#73393(帳票出力順の取得)
+                new RString("出力順ID"),
+                DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
+        return ResponseData.of(param).respond();
     }
 
     /**

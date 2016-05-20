@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -58,6 +59,8 @@ public class ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess extends BatchProcessBas
 
     @Override
     protected void process(DbT3036ShokanHanteiKekkaEntity entity) {
+        RDate 決定日 = parameter.getKetteiYMD();
+        entity.setKetteiYMD(new FlexibleDate(決定日.getYearValue(), 決定日.getMonthValue(), 決定日.getDayValue()));
         dbT3036Writer.update(entity);
     }
 

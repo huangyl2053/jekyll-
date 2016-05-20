@@ -76,8 +76,11 @@ public final class ShotokuJohoTorokuHandler {
     private static final RString 有り = new RString("有り");
     private static final RString 無し = new RString("無し");
     private static final RString コンマ = new RString(",");
+    private static final RString 漢字_平 = new RString("平");
+    private static final RString 漢字_成 = new RString("成");
 
     private static final int 所得引出_64歳 = 64;
+    private static final int 平成 = 1988;
 
     private final FukaTaishoshaKey viewStateData;
     private final SetaiinShotokuJohoFinder 世帯員所得情報Finder;
@@ -159,31 +162,25 @@ public final class ShotokuJohoTorokuHandler {
                 row.setTxtShubetsu(世帯員所得情報.get種別());
                 row.setTxtIdoYMD(世帯員所得情報.get住民情報_異動日().wareki().toDateString());
                 RString 課税区分_住民税減免前 = RString.EMPTY;
-                if (!RString.isNullOrEmpty(世帯員所得情報.get課税区分_住民税減免前())) {
-                    try {
-                        課税区分_住民税減免前 = KazeiKubun.toValue(世帯員所得情報.get課税区分_住民税減免前()).get名称();
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                try {
+                    課税区分_住民税減免前 = KazeiKubun.toValue(世帯員所得情報.get課税区分_住民税減免前()).get名称();
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 row.setTxtJuminzeiGenmenMae(課税区分_住民税減免前);
                 RString 課税区分_住民税減免後 = RString.EMPTY;
-                if (!RString.isNullOrEmpty(世帯員所得情報.get課税区分_住民税減免後())) {
-                    try {
-                        課税区分_住民税減免後 = KazeiKubun.toValue(世帯員所得情報.get課税区分_住民税減免後()).get名称();
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                try {
+                    課税区分_住民税減免後 = KazeiKubun.toValue(世帯員所得情報.get課税区分_住民税減免後()).get名称();
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 row.setTxtJuminzeiGenmenAto(課税区分_住民税減免後);
                 row.setTxtJuminzei(課税区分_住民税減免前);
                 RString 激変緩和措置区分 = RString.EMPTY;
-                if (!RString.isNullOrEmpty(世帯員所得情報.get激変緩和措置())) {
-                    try {
-                        激変緩和措置区分 = GekihenkanwaSochi.toValue(getNotNull(世帯員所得情報.get激変緩和措置())).get名称();
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                try {
+                    激変緩和措置区分 = GekihenkanwaSochi.toValue(getNotNull(世帯員所得情報.get激変緩和措置())).get名称();
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 row.setTxtGekihenTaishosha(激変緩和措置区分);
                 boolean is被保険者 = (null != 世帯員所得情報.get被保険者番号());
@@ -200,12 +197,10 @@ public final class ShotokuJohoTorokuHandler {
                     row.setTxtKetsugo04(年金収入額.concat(改行タグ).concat(年金所得額));
                 }
                 RString 登録業務 = RString.EMPTY;
-                if (!RString.isNullOrEmpty(世帯員所得情報.get登録業務())) {
-                    try {
-                        登録業務 = TorokuGyomu.toValue(世帯員所得情報.get登録業務()).get名称();
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                try {
+                    登録業務 = TorokuGyomu.toValue(世帯員所得情報.get登録業務()).get名称();
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 row.setTxtTorokuGyomu(登録業務.concat(改行タグ).concat(世帯員所得情報.get更正日().wareki().toDateString()));
                 row.setTxtJukiIdoYMD(世帯員所得情報.get住民情報_異動日().wareki().toDateString());
@@ -281,7 +276,7 @@ public final class ShotokuJohoTorokuHandler {
     public void set激変緩和表示制御情報TO世帯一覧() {
         FukaKeisanConfig fukaKeisanCfg = new FukaKeisanConfig();
         RString 住民税課税年度 = div.getSetaiShotokuInfo().getDdlSetaiIchiranKazeiNendo().getSelectedValue();
-        if (FlexibleYear.canConvert(住民税課税年度) && fukaKeisanCfg.get激変緩和期間().between(new FlexibleYear(住民税課税年度))) {
+        if (fukaKeisanCfg.get激変緩和期間().between(trans和暦to西暦(住民税課税年度))) {
             shotokuJohoGridSetting.getColumn("txtGekihenTaishosha").setVisible(true);
         } else {
             shotokuJohoGridSetting.getColumn("txtGekihenTaishosha").setVisible(false);
@@ -294,7 +289,7 @@ public final class ShotokuJohoTorokuHandler {
     public void set激変緩和表示制御情報TO内容登録() {
         FukaKeisanConfig fukaKeisanCfg = new FukaKeisanConfig();
         RString 住民税課税年度 = div.getSetaiShotokuInfo().getDdlSetaiIchiranKazeiNendo().getSelectedValue();
-        if (FlexibleYear.canConvert(住民税課税年度) && fukaKeisanCfg.get激変緩和期間().between(new FlexibleYear(住民税課税年度))) {
+        if (fukaKeisanCfg.get激変緩和期間().between(trans和暦to西暦(住民税課税年度))) {
             div.getShotokuJohoToroku().getDdlGekihenKanwa().setVisible(true);
             div.getShotokuJohoToroku().getDdlGekihenKanwa().setDisplayNone(false);
         } else {
@@ -484,6 +479,14 @@ public final class ShotokuJohoTorokuHandler {
 
     private RString removeComma(RString target) {
         return target.replace(コンマ.toString(), RString.EMPTY.toString());
+    }
+
+    private FlexibleYear trans和暦to西暦(RString 和暦str) {
+        和暦str = 和暦str.replace(漢字_平.toString(), RString.EMPTY.toString());
+        和暦str = 和暦str.replace(漢字_成.toString(), RString.EMPTY.toString());
+        Integer 西暦 = Integer.valueOf(和暦str.trim().toString()) + 平成;
+        FlexibleYear 西暦Year = new FlexibleYear(西暦.toString());
+        return 西暦Year;
     }
 
 }

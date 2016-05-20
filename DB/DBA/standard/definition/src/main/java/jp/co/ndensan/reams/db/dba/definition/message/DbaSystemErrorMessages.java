@@ -23,7 +23,7 @@ public enum DbaSystemErrorMessages {
     private final RString message;
 
     private DbaSystemErrorMessages(int no, RString message) {
-        this.code = new RString(toCode("S", no));
+        this.code = new RString(toCode("DBAS", no));
         this.message = message;
     }
 

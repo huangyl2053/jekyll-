@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.jukyushikakushomeisho;
 
-import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;

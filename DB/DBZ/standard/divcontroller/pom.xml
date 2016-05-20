@@ -122,6 +122,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>db#dbz</finalName>
         <plugins>
             <plugin>
                 <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>

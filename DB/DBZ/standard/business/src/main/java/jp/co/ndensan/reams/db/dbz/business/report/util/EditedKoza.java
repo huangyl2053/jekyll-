@@ -162,7 +162,7 @@ public class EditedKoza {
      * @return 金融機関コード
      */
     public RString get金融機関コード() {
-        if (口座 == null && 口座.get金融機関コード() == null) {
+        if (口座 == null || 口座.get金融機関コード() == null) {
             return RString.EMPTY;
         }
         return 口座.get金融機関コード().value();
@@ -198,7 +198,7 @@ public class EditedKoza {
      * @return 口座名義人漢字
      */
     public RString get口座名義人漢字() {
-        if (口座 == null && 口座.get支店コード() == null) {
+        if (口座 == null || 口座.get口座名義人漢字() == null) {
             return RString.EMPTY;
         }
         return 口座.get口座名義人漢字().value();
@@ -210,7 +210,7 @@ public class EditedKoza {
      * @return 支店コード
      */
     public RString get支店コード() {
-        if (口座 == null && 口座.get支店コード() == null) {
+        if (口座 == null || 口座.get支店コード() == null) {
             return RString.EMPTY;
         }
         return 口座.get支店コード().value();

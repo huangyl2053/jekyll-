@@ -28,7 +28,7 @@ public enum DbzWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbzWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("W", no), message);
+        this.message = new WarningMessage(toCode("DBZW", no), message);
     }
 
     @Override

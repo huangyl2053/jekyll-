@@ -32,7 +32,6 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
             + "IHanteiKekkaJohoShuturyokuMapper.getShinsakaiKekkaJoho");
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private HanteiKekkaJohoShuturyokuMybatisParameter mybatisParameter;
-    private IHanteiKekkaJohoShuturyokuMapper mapper;
     private ShinsakaiGijirokuEntity shinsakaiGijirokuEntity;
     private RDateTime システム時刻;
     private List<DbT5594ShinsakaiIinJohoEntity> 委員情報;

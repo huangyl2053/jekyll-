@@ -71,7 +71,6 @@ public class TekiyoJogaishaDaichoJohoFinder {
     private static final int 導入形態コード_LENGTH_1 = 1;
     private static final int 導入形態コード_LENGTH_3 = 3;
     private static final RString 広域 = new RString("11");
-    private static final RString 改行 = new RString("\r\n");
     private static final RString 状態 = new RString("適用除外者");
     private static final RString 性別_男 = new RString("1");
     private static final RString 男 = new RString("男");

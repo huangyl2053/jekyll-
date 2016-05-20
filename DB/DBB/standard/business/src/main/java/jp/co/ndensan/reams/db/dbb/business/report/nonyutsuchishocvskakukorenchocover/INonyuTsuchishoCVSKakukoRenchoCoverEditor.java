@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukorenchocover;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoRenchoCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -14,6 +14,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  * @reamsid_L DBB-9110-120 huangh
  *
  */
-public interface INonyuTsuchishoCVSKakukoRenchoCoverEditor extends IReportEditor<NonyuTsuchishoCVSKakukoRenchoCoverSource> {
+public interface INonyuTsuchishoCVSKakukoRenchoCoverEditor extends IReportEditor<NonyuTsuchishoCVSKakukoSource> {
 
 }

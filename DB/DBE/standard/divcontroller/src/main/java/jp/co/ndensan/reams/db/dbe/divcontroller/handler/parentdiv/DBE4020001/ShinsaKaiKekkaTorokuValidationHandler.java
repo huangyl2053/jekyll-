@@ -42,7 +42,7 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 存在チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.存在チェック));
         }
         return validPairs;
@@ -70,10 +70,10 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
     public ValidationMessageControlPairs 完了処理事前チェック(ValidationMessageControlPairs validPairs) {
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
-            if (データ.getNijihanteiKekkaToroku().getValue() != null) {
-                continue;
+            if (データ.getNijihanteiKekkaToroku().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.完了処理事前チェック));
+                break;
             }
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.完了処理事前チェック));
         }
         return validPairs;
     }

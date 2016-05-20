@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKa
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -31,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 介護認定審査会開催場所登録Divを制御クラスです。
@@ -55,7 +56,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @return ResponseData
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onLoad(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        RString 最大表示件数 = DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getShinsakaiKaisaibashokensaku().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
         div.getBtnTsuika().setDisabled(false);
@@ -70,7 +71,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnClear(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         div.getShinsakaiKaisaibashokensaku().getRadHyojiJoken().setSelectedKey(デフォルト検索条件);
-        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        RString 最大表示件数 = DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getShinsakaiKaisaibashokensaku().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         return ResponseData.of(div).respond();
     }

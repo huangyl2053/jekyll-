@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishokigoto;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoRenchoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport;
@@ -59,6 +61,25 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
         return null;
     }
 
+    /**
+     * 帳票を出力します。
+     *
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @return SourceDataCollection SourceDataCollection
+     */
+    public SourceDataCollection printDevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+        RString 帳票IDRString = RString.EMPTY;
+        if (仮算定納入通知書情報 != null && 仮算定納入通知書情報.get帳票ID() != null) {
+            帳票IDRString = 仮算定納入通知書情報.get帳票ID().getColumnValue();
+        }
+        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100014)) {
+            return print全てページDBB100014DevidedByPage(仮算定納入通知書情報);
+        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100015)) {
+            return print全てページDBB100015DevidedByPage(仮算定納入通知書情報);
+        }
+        return null;
+    }
+
     private SourceDataCollection print全てページDBB100015(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiHokenryoNonyuTsuchishoKigotoRenchoProperty property = new KarisanteiHokenryoNonyuTsuchishoKigotoRenchoProperty();
         try (ReportManager reportManager = new ReportManager()) {
@@ -75,6 +96,24 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
         }
     }
 
+    private SourceDataCollection print全てページDBB100015DevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+        KarisanteiHokenryoNonyuTsuchishoKigotoRenchoProperty property = new KarisanteiHokenryoNonyuTsuchishoKigotoRenchoProperty();
+        try (ReportManager reportManager = new ReportManager()) {
+            try (ReportAssembler<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                List<INonyuTsuchisho> reportList
+                        = KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
+                for (INonyuTsuchisho report : reportList) {
+                    report.writeBy(reportSourceWriter);
+                }
+            }
+            return reportManager.publish();
+        }
+    }
+
     private SourceDataCollection print全てページDBB100014(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
         KarisanteiHokenryoNonyuTsuchishoKigotoProperty property = new KarisanteiHokenryoNonyuTsuchishoKigotoProperty();
         try (ReportManager reportManager = new ReportManager()) {
@@ -86,6 +125,24 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
                 KarisanteiHokenryoNonyuTsuchishoKigotoReport report
                         = KarisanteiHokenryoNonyuTsuchishoKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
+            }
+            return reportManager.publish();
+        }
+    }
+
+    private SourceDataCollection print全てページDBB100014DevidedByPage(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報) {
+        KarisanteiHokenryoNonyuTsuchishoKigotoProperty property = new KarisanteiHokenryoNonyuTsuchishoKigotoProperty();
+        try (ReportManager reportManager = new ReportManager()) {
+            try (ReportAssembler<KarisanteiHokenryoNonyuTsuchishoKigotoSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoKigotoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+
+                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+                List<INonyuTsuchisho> reportList
+                        = KarisanteiHokenryoNonyuTsuchishoKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
+                for (INonyuTsuchisho report : reportList) {
+                    report.writeBy(reportSourceWriter);
+                }
             }
             return reportManager.publish();
         }

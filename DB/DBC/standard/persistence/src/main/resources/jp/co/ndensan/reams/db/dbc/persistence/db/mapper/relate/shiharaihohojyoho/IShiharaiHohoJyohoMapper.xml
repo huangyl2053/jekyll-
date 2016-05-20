@@ -22,6 +22,7 @@
         <result property="keiyakuJigyoshaName" column="DbT3077_keiyakuJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="keiyakuJigyoshaKanaName" column="DbT3077_keiyakuJigyoshaKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="shitenCode" column="DbT3077_shitenCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="kinyuKikanCode" column="DbT3077_kinyuKikanCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="kozaShubetsu" column="DbT3077_kozaShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaNo" column="DbT3077_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeiginin" column="DbT3077_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>

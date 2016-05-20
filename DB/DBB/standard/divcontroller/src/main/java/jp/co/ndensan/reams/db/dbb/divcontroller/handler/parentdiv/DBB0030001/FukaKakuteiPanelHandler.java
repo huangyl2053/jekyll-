@@ -7,16 +7,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0030001;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0030001.FukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -55,7 +56,9 @@ public class FukaKakuteiPanelHandler {
      */
     public void 賦課年度の設定() {
         div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().
-                setDomain(new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課).toString()));
+                setDomain(new FlexibleYear(DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度,
+                                        RDate.getNowDate(), SubGyomuCode.DBB介護賦課
+                                ).toString()));
     }
 
     /**
