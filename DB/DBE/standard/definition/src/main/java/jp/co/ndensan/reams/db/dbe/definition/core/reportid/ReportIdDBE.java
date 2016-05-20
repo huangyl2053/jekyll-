@@ -253,7 +253,31 @@ public enum ReportIdDBE {
     /**
      * 一次判定結果ＩＤです。
      */
-    DBE517181(new ReportId("DBE517181_IchijihanteikekkahyoA4"), new RString("一次判定結果"));
+    DBE517181(new ReportId("DBE517181_IchijihanteikekkahyoA4"), new RString("一次判定結果")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091002(new ReportId("DBE091002_NinteiChosaJohohyo"), new RString("認定調査票情報_09B総合事業")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091012(new ReportId("DBE091012_NinteiChosaJohohyo"), new RString("認定調査票情報_09B")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091022(new ReportId("DBE091022_NinteiChosaJohohyo"), new RString("認定調査票情報_09A")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091032(new ReportId("DBE091032_06ANinteiChosaJohohyo"), new RString("認定調査票情報_06A")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091042(new ReportId("DBE091042_02ANinteiChosaJohohyo"), new RString("認定調査票情報_02A")),
+    /**
+     * 認定調査票情報の帳票ＩＤです。
+     */
+    DBE091052(new ReportId("DBE091052_99ANinteiChosaJohohyo"), new RString("認定調査票情報_99A"));
 
     private final ReportId reportId;
 
