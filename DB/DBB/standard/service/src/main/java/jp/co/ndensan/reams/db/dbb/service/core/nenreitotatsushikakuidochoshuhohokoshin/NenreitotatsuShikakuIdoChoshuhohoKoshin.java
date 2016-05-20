@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.nenreitotatsushikakuidochoshuhohokoshin;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -27,8 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -47,8 +43,7 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     private static final RString 処理枝番 = new RString("00");
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 年度内連番 = new RString("00");
-    private static final RString CODESHUBETSU_被保険者 = new RString("0013");
-    private static final RString CODEMEISHO_被保険者 = new RString("１号被保険者到達");
+    private static final RString CODE = new RString("31");
     private final DbT7022ShoriDateKanriDac shoriDateKanriDac;
     private final DbT1001HihokenshaDaichoDac hihokenshaDaichoDac;
     private final DbV2001ChoshuHohoAliveDac choshuHohoAliveDac;
@@ -229,18 +224,9 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
         RString 被保険者区分コード = ShikakuKubun._１号.getコード();
         FlexibleDate 対象開始年月日 = entity.getTaishoKaishiYMD();
         FlexibleDate 対象終了年月日 = entity.getTaishoShuryoYMD();
-
-        List<UzT0007CodeEntity> 被保険者List
-                = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_被保険者.toString()), FlexibleDate.getNowDate());
-        DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity = null;
-        for (UzT0007CodeEntity uzT0007CodeEntity : 被保険者List) {
-            if (CODEMEISHO_被保険者.equals(uzT0007CodeEntity.getコード名称())) {
-
-                RString 異動事由コード = new RString(uzT0007CodeEntity.getコード().toString());
-                hihokenshaDaichoEntity = hihokenshaDaichoDac.selectHihokenjabango(被保険者区分コード,
-                        対象開始年月日, 対象終了年月日, 異動事由コード);
-            }
-        }
+        RString 異動事由コード = CODE;
+        DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity = hihokenshaDaichoDac.selectHihokenjabango(被保険者区分コード,
+                対象開始年月日, 対象終了年月日, 異動事由コード);
         return hihokenshaDaichoEntity;
     }
 
