@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.report.khcktb5yoko.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;

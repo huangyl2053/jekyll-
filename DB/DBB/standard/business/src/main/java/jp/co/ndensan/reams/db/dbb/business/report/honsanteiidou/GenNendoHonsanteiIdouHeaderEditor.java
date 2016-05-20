@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.honsanteiidou;
+package jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.gennendohonsanteiidou.GenNendoHonsanteiIdouSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou.GenNendoHonsanteiIdouSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 本算定異動（現年度）結果一覧表帳票HeaderEditorクラスです
@@ -36,11 +41,12 @@ public class GenNendoHonsanteiIdouHeaderEditor implements IGenNendoHonsanteiIdou
     private static final int NUM_12 = 11;
     private static final int NUM_13 = 12;
     private static final int NUM_14 = 13;
+    private static final RString SAKUSEI = new RString("作成");
 
     /**
      * インスタンスを生成します。
      *
-     * @param inputEntity {@link KanendoIdouKekkaIchiranInputEntity}
+     * @param inputEntity {@link GenendoIdouKekkaIchiranInputEntity}
      */
     protected GenNendoHonsanteiIdouHeaderEditor(GenendoIdouKekkaIchiranInputEntity inputEntity) {
         this.inputEntity = inputEntity;
@@ -48,6 +54,10 @@ public class GenNendoHonsanteiIdouHeaderEditor implements IGenNendoHonsanteiIdou
 
     @Override
     public GenNendoHonsanteiIdouSource edit(GenNendoHonsanteiIdouSource source) {
+        source.printTimeStamp = inputEntity.get調定日時().getDate().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
+                .concat(" " + inputEntity.get調定日時().getRDateTime().getTime()
+                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒) + " " + SAKUSEI);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
