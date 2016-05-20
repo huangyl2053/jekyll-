@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012.Shi
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012.ShikyuShinseiDetailValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012.ShikyuShinseiDetailParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -212,12 +213,12 @@ public class ShikyuShinseiDetail {
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnCancel(ShikyuShinseiDetailDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikyuShinseiDetailParameter parameter = getHandler(div).setParameter();
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (MODEL_DEL.equals(処理モード)) {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月,
-                    div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth().toDateString());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, div.getPanelHead().getTxtSeiribango().getValue());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
+            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
             return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
         }
         boolean flag;
@@ -242,9 +243,8 @@ public class ShikyuShinseiDetail {
             }
         }
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月,
-                div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth().toDateString());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, div.getPanelHead().getTxtSeiribango().getValue());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
     }
 
@@ -304,6 +304,12 @@ public class ShikyuShinseiDetail {
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, parameter.get申請日());
+        ShoukanharaihishinseikensakuParameter 償還払費申請検索 = new ShoukanharaihishinseikensakuParameter(
+                引継ぎデータ.get被保険者番号(),
+                new FlexibleYearMonth(parameter.getサービス提供年月().toString()),
+                parameter.get整理番号(), null,
+                null, null, null);
+        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, 償還払費申請検索);
     }
 
     private ShikyuShinseiDetailHandler getHandler(ShikyuShinseiDetailDiv div) {

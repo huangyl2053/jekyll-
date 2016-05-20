@@ -449,7 +449,7 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHaigushaShimeiKana().setDomain(futanGendogakuNintei.get配偶者氏名カナ());
             div.getTxtHaigushaShimei().setDomain(futanGendogakuNintei.get配偶者氏名());
 
-            if (futanGendogakuNintei.get配偶者生年月日() != null) {
+            if (futanGendogakuNintei.get配偶者生年月日() != null && futanGendogakuNintei.get配偶者生年月日().isValid()) {
                 div.getTxtHaigushaUmareYMD().setValue(new RDate(futanGendogakuNintei.get配偶者生年月日().toString()));
             }
             div.getTxtHaigushaRenrakusaki().setDomain(

@@ -62,7 +62,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     private static final RString 画面モード_審査 = new RString("審査モード");
     private static final RString 画面モード_照会 = new RString("照会モード");
     private static final RString モード_照会 = new RString("照会");
-    private static final RString モード_登録 = new RString("登録");
     private static final RString 画面モード_削除 = new RString("削除モード");
     private static final RString 画面モード_取消 = new RString("取消モード");
     private static final RString 画面モード_登録 = new RString("登録モード");
@@ -91,7 +90,6 @@ public class JutakuKaishuShinseiJyohoToroku {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        ViewStateHolder.put(ViewStateKeys.処理モード, モード_登録);
 
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().onLoad(識別コード);
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().onLoad(識別コード);
@@ -109,11 +107,6 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnShowJizenShinsei(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理モード, モード_照会);
-        RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-        RString 整理番号 = div.getTxtSeiriNo().getValue();
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(
-                画面提供着工年月.getYearMonth().toDateString()));
-        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to住宅改修費事前申請登録).respond();
     }
 
