@@ -104,7 +104,7 @@ public class HihokenshaShisakuPanal {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             資格異動訂正の保存処理(div);
             RealInitialLocker.release(前排他ロックキー);
-            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.資格異動訂正に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -209,7 +209,7 @@ public class HihokenshaShisakuPanal {
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onClick_btnBack(HihokenshaShisakuPanalDiv div) {
         RealInitialLocker.release(前排他ロックキー);
-        return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.資格異動訂正に戻る).respond();
+        return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
     }
 
     private HihokenshaShisakuPanalHandler getHandler(HihokenshaShisakuPanalDiv div) {
