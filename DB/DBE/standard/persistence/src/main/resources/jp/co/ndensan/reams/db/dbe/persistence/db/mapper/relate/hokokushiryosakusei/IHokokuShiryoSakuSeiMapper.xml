@@ -181,8 +181,6 @@
         </if>
         ORDER BY
         F."shichosonCode"
-        ,A."ninteiShinseiShinseijiKubunCode"
-        ,A."ninteiShinseiHoreiKubunCode"
         <if test="isShinseiji">
             ,A."ninteiShinseiShinseijiKubunCode"
         </if>
@@ -1048,7 +1046,6 @@
         ORDER BY D."nijiHanteiYokaigoJotaiKubunCode"
     </select>
 
-    <!--*************************************************************************************-->
     <select id="getShinsakaishukeihyoHanteiBetsuHeader"
             resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter"
@@ -1235,7 +1232,6 @@
         ORDER BY I."nijiHanteiYokaigoJotaiKubunCode"
         ,D."nijiHanteiYokaigoJotaiKubunCode"
     </select>
-    <!--*************************************************************************************-->
 
     <resultMap id="hokokushiryosakusei_JisshiJokyoTokei"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity"
