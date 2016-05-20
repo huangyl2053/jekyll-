@@ -248,14 +248,24 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
             }
             if (INDEX.equals(金融機関コード.substring(NUM0, NUM4))) {
                 口座情報 = 金融機関コード.substring(NUM0, NUM4).concat(RString.HALF_SPACE)
-                        .concat(通帳記号.substring(NUM0, NUM5)).concat(半角ハイフン)
-                        .concat(通帳番号.substring(NUM0, NUM8)).concat(RString.HALF_SPACE)
+                        .concat(NUM5 < 通帳記号.length() ? 通帳記号.substring(NUM0, 通帳記号.length())
+                                : 通帳記号.substring(NUM0, NUM5))
+                        .concat(半角ハイフン)
+                        .concat(NUM8 < 通帳番号.length() ? 通帳番号.substring(NUM0, 通帳番号.length())
+                                : 通帳番号.substring(NUM0, NUM8))
+                        .concat(RString.HALF_SPACE)
                         .concat(口座名義人漢字);
             } else {
                 口座情報 = 金融機関コード.substring(NUM0, NUM4).concat(半角ハイフン)
-                        .concat(支店コード.substring(NUM0, NUM3)).concat(RString.HALF_SPACE)
-                        .concat(口座種別.substring(NUM0, NUM2)).concat(半角ハイフン)
-                        .concat(口座番号.substring(NUM0, NUM7)).concat(RString.HALF_SPACE)
+                        .concat(NUM3 < 支店コード.length() ? 支店コード.substring(NUM0, 支店コード.length())
+                                : 支店コード.substring(NUM0, NUM3))
+                        .concat(RString.HALF_SPACE)
+                        .concat(NUM2 < 口座種別.length() ? 口座種別.substring(NUM0, 口座種別.length())
+                                : 口座種別.substring(NUM0, NUM2))
+                        .concat(半角ハイフン)
+                        .concat(NUM7 < 口座番号.length() ? 口座番号.substring(NUM0, 口座番号.length())
+                                : 口座番号.substring(NUM0, NUM7))
+                        .concat(RString.HALF_SPACE)
                         .concat(口座名義人漢字);
 
             }
