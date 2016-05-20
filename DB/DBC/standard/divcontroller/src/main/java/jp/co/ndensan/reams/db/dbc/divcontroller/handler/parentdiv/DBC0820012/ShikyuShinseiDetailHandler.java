@@ -160,6 +160,7 @@ public final class ShikyuShinseiDetailHandler {
                 個別設定(償還払支給判定結果, 被保険者番号, サービス年月, 整理番号, 償還払支給申請);
             } else {
                 set登録(Boolean.TRUE);
+                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(true);
                 div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
                 div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
@@ -184,6 +185,7 @@ public final class ShikyuShinseiDetailHandler {
                             被保険者番号, サービス年月, 整理番号, KyufuJissekiKubun.償還.getコード());
             if (null == 給付実績基本情報リスト) {
                 set登録(Boolean.TRUE);
+                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(true);
                 div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
                 div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(false);
@@ -466,6 +468,7 @@ public final class ShikyuShinseiDetailHandler {
         div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請.get支払金額合計());
         div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請.get保険給付額()));
         div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請.get利用者負担額()));
+        div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(false);
         if (償還払支給申請.is国保連再送付フラグ()) {
             List<KeyValueDataSource> items = div.getPnlShinsei().getChkKokuhorenSaiso().getDataSource();
             div.getPnlShinsei().getChkKokuhorenSaiso().setSelectedItems(items);
@@ -477,7 +480,6 @@ public final class ShikyuShinseiDetailHandler {
                 && null != 償還払支給申請.get送付年月() && !償還払支給申請.get送付年月().isEmpty()) {
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(true);
         } else {
-
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
         }
     }

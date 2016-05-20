@@ -76,13 +76,13 @@ public class ShikyuShinseiDetailValidationHandler {
         if (pnlDiv.getTxtKisaiHokensyaBango().getValue().isNullOrEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtShimeikana().getDomain().isEmpty() && pnlDiv.getTxtShimeikana().getDomain() == null) {
+        if (pnlDiv.getTxtShimeikana().getDomain().isEmpty() || pnlDiv.getTxtShimeikana().getDomain() == null) {
             return true;
         }
-        if (pnlDiv.getTxtShimeiKanji().getDomain().isEmpty() && pnlDiv.getTxtShimeiKanji().getDomain() == null) {
+        if (pnlDiv.getTxtShimeiKanji().getDomain().isEmpty() || pnlDiv.getTxtShimeiKanji().getDomain() == null) {
             return true;
         }
-        if (pnlDiv.getTxtTelNo().getDomain().isEmpty() && pnlDiv.getTxtTelNo().getDomain() != null) {
+        if (pnlDiv.getTxtTelNo().getDomain().isEmpty() || pnlDiv.getTxtTelNo().getDomain() == null) {
             return true;
         }
         if (pnlDiv.getTxtMulShinseiRiyu().getValue().isNullOrEmpty()) {
