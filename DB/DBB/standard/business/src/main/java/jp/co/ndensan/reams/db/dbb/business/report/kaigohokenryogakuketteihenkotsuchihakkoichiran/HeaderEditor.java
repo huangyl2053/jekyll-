@@ -34,14 +34,11 @@ public class HeaderEditor implements IKaigoHokenryogakuEditor {
 
     private final RString タイトル;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
-    private final int 出力期;
     private final RDateTime 帳票作成日時;
     private final Association 地方公共団体;
     private final List<RString> 並び順List;
     private final Decimal 連番;
-    private final RString 所得段階 = new RString("所得段階");
     private static final RString STRING_SAKUSEI = new RString("作成");
-    private static final RString START = new RString("*");
     private static final RString INDEX = new RString("9900");
     private static final RString 半角ハイフン = new RString("-");
     private static final int NUM0 = 0;
@@ -57,21 +54,19 @@ public class HeaderEditor implements IKaigoHokenryogakuEditor {
      * インスタンスを生成します。
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
-     * @param 出力期 int
      * @param 帳票作成日時 RDateTime
      * @param 地方公共団体 Association
      * @param 並び順List List<RString>
      * @param 連番 Decimal
+     * @param タイトル RString
      */
     protected HeaderEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            int 出力期,
             RDateTime 帳票作成日時,
             Association 地方公共団体,
             List<RString> 並び順List,
             Decimal 連番,
             RString タイトル) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
-        this.出力期 = 出力期;
         this.帳票作成日時 = 帳票作成日時;
         this.地方公共団体 = 地方公共団体;
         this.並び順List = 並び順List;
@@ -158,12 +153,11 @@ public class HeaderEditor implements IKaigoHokenryogakuEditor {
 
     private RString get作成日時(RDateTime 帳票作成日時) {
         RStringBuilder builder = new RStringBuilder();
-        RString 作成日時 = RString.EMPTY;
         RString 帳票作成日 = 帳票作成日時.getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
         RString 日時 = 帳票作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        作成日時 = builder.append(帳票作成日).append(RString.HALF_SPACE).append(日時)
+        RString 作成日時 = builder.append(帳票作成日).append(RString.HALF_SPACE).append(日時)
                 .append(RString.HALF_SPACE).append(STRING_SAKUSEI).toRString();
         return 作成日時;
     }
@@ -210,14 +204,24 @@ public class HeaderEditor implements IKaigoHokenryogakuEditor {
             }
             if (INDEX.equals(金融機関コード.substring(NUM0, NUM4))) {
                 口座情報 = 金融機関コード.substring(NUM0, NUM4).concat(RString.HALF_SPACE)
-                        .concat(通帳記号.substring(NUM0, NUM5)).concat(半角ハイフン)
-                        .concat(通帳番号.substring(NUM0, NUM8)).concat(RString.HALF_SPACE)
+                        .concat(NUM5 < 通帳記号.length() ? 通帳記号.substring(NUM0, 通帳記号.length())
+                                : 通帳記号.substring(NUM0, NUM5))
+                        .concat(半角ハイフン)
+                        .concat(NUM8 < 通帳番号.length() ? 通帳番号.substring(NUM0, 通帳番号.length())
+                                : 通帳番号.substring(NUM0, NUM8))
+                        .concat(RString.HALF_SPACE)
                         .concat(口座名義人漢字);
             } else {
                 口座情報 = 金融機関コード.substring(NUM0, NUM4).concat(半角ハイフン)
-                        .concat(支店コード.substring(NUM0, NUM3)).concat(RString.HALF_SPACE)
-                        .concat(口座種別.substring(NUM0, NUM2)).concat(半角ハイフン)
-                        .concat(口座番号.substring(NUM0, NUM7)).concat(RString.HALF_SPACE)
+                        .concat(NUM3 < 支店コード.length() ? 支店コード.substring(NUM0, 支店コード.length())
+                                : 支店コード.substring(NUM0, NUM3))
+                        .concat(RString.HALF_SPACE)
+                        .concat(NUM2 < 口座種別.length() ? 口座種別.substring(NUM0, 口座種別.length())
+                                : 口座種別.substring(NUM0, NUM2))
+                        .concat(半角ハイフン)
+                        .concat(NUM7 < 口座番号.length() ? 口座番号.substring(NUM0, 口座番号.length())
+                                : 口座番号.substring(NUM0, NUM7))
+                        .concat(RString.HALF_SPACE)
                         .concat(口座名義人漢字);
 
             }

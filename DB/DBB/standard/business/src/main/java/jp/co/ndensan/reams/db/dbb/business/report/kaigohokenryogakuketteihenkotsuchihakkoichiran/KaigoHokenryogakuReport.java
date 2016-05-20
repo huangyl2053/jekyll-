@@ -24,7 +24,6 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
 
     private final RString タイトル;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
-    private final int 出力期;
     private final RDateTime 帳票作成日時;
     private final Association 地方公共団体;
     private final List<RString> 並び順List;
@@ -34,7 +33,6 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
      * コンストラクタです。
      *
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
-     * @param 出力期 int
      * @param 帳票作成日時 RDateTime
      * @param 地方公共団体 Association
      * @param 並び順List List<RString>
@@ -42,14 +40,12 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
      * @param タイトル RString
      */
     public KaigoHokenryogakuReport(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            int 出力期,
             RDateTime 帳票作成日時,
             Association 地方公共団体,
             List<RString> 並び順List,
             Decimal 連番,
             RString タイトル) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
-        this.出力期 = 出力期;
         this.帳票作成日時 = 帳票作成日時;
         this.地方公共団体 = 地方公共団体;
         this.並び順List = 並び順List;
@@ -65,7 +61,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     @Override
     public void writeBy(ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter) {
         IKaigoHokenryogakuEditor editor
-                = new HeaderEditor(編集後本算定通知書共通情報, 出力期, 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
+                = new HeaderEditor(編集後本算定通知書共通情報, 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
         IKaigoHokenryogakuBuilder builder = new KaigoHokenryogakuBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }
