@@ -59,7 +59,7 @@ public class KouzaInfoPanel {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
                 RYearMonth.class).toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
 
         KouzaInfoHandler handler = getHandler(div);
         ShokanShinsei 支給申請情報 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
@@ -132,7 +132,7 @@ public class KouzaInfoPanel {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
                 RYearMonth.class).toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
         getHandler(div).onClick_btnServiceTeikyoShomeisyo(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.サービス提供証明書).respond();
@@ -149,7 +149,7 @@ public class KouzaInfoPanel {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
                 RYearMonth.class).toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         getHandler(div).申請既存チェック(整理番号, サービス年月, 被保険者番号);
         getHandler(div).onClick_btnShokanbaraiKeiteInfo(処理モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.償還払決定情報).respond();

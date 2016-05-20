@@ -50,7 +50,7 @@ public class ServiceTeikyoShomeishoPanel {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
                 RYearMonth.class).toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
 
         List<ShikibetsuNoKanri> 証明書リスト = SyokanbaraihiShikyuShinseiKetteManager
@@ -136,7 +136,7 @@ public class ServiceTeikyoShomeishoPanel {
     }
 
     /**
-     *
+     * 削除ボタンをクリックの処理内容です。
      *
      * @param div ServiceTeikyoShomeishoPanelDiv
      * @return 償還払費支給申請決定_サービス提供証明書(基本情報)画面

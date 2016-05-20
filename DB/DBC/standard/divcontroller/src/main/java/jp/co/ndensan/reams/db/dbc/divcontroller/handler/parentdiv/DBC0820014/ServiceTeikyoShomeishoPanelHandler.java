@@ -178,7 +178,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
             サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
         }
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         if (parameter == null) {
             ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
                     被保険者番号,
@@ -210,7 +210,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 処理モード 処理モード
      */
     public void putViewStateDown(RString 処理モード) {
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = null;
         if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
             サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
@@ -250,7 +250,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
                 RYearMonth.class).toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         List<ShokanShinsei> 支給申請一覧情報リスト = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         if (支給申請一覧情報リスト == null || 支給申請一覧情報リスト.isEmpty()) {
@@ -280,7 +280,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
                 RYearMonth.class).toString());
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, RString.class));
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         JigyoshaNo 事業者番号 = new JigyoshaNo(div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         RString 様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey();
         int 証明書件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(
