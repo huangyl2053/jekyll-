@@ -944,7 +944,7 @@ public class FutangendogakuNinteiShinseiHandler {
                             futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
                     fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, futanGendogakuNintei.get履歴番号() + 1);
                     FutanGendogakuNinteiViewState newNinteiViewState2
-                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Unchanged, fgn2.get履歴番号());
+                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Modified, fgn2.get履歴番号());
                     newList.add(newNinteiViewState2);
                 } else {
                     fgn2 = new FutanGendogakuNintei(
@@ -960,7 +960,7 @@ public class FutangendogakuNinteiShinseiHandler {
                             futanGendogakuNintei.get証記載保険者番号(), futanGendogakuNintei.get被保険者番号(), futanGendogakuNintei.get履歴番号() + 1);
                     fgn2 = copyFutanGendogakuNintei(futanGendogakuNintei, fgn2, futanGendogakuNintei.get履歴番号() + 1);
                     FutanGendogakuNinteiViewState newNinteiViewState2
-                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Unchanged, fgn2.get履歴番号());
+                            = new FutanGendogakuNinteiViewState(fgn2, EntityDataState.Modified, fgn2.get履歴番号());
                     newList.add(newNinteiViewState2);
                 } else {
                     fgn = new FutanGendogakuNintei(
@@ -1042,7 +1042,11 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getTxtYukaShoken().clearValue();
         div.getTxtSonota().clearValue();
         div.getRadKetteiKubun().setSelectedKey(SELECT_KEY0);
-        div.getTxtKetteiYMD().setValue(FlexibleDate.getNowDate());
+        if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            div.getTxtKetteiYMD().clearValue();
+        } else {
+            div.getTxtKetteiYMD().setValue(FlexibleDate.getNowDate());
+        }
         div.getTxtTekiyoYMD().clearValue();
         div.getTxtYukoKigenYMD().clearValue();
         init旧措置DDL();
