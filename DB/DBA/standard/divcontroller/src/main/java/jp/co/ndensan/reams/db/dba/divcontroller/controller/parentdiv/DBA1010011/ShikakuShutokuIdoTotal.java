@@ -150,6 +150,7 @@ public class ShikakuShutokuIdoTotal {
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuShutokuIdoTotalDiv div) {
         前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
         RealInitialLocker.release(前排他ロックキー);
+        createHandler(div).setパラメータ();
         return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.詳細へ).respond();
     }
 
@@ -310,7 +311,7 @@ public class ShikakuShutokuIdoTotal {
      */
     public static class ComparatorByShutokuDateSort implements Comparator, Serializable {
 
-        private static final long serialVersionUID = -4360646115909064130L;
+        private static final long serialVersionUID = 3584310998233164268L;
 
         @Override
         public int compare(Object arg0, Object arg1) {
@@ -331,6 +332,7 @@ public class ShikakuShutokuIdoTotal {
         public int ChangeStringToInt(String str) {
             return new Integer(str).intValue();
         }
+
     }
 
     private enum ShikakuShutokuIdoTotalErrorMessage implements IValidationMessage {
