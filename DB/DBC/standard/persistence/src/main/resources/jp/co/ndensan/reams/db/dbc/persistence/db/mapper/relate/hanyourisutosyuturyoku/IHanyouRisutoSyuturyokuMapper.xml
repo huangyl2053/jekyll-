@@ -116,7 +116,7 @@
         SELECT 1
         FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS a
         WHERE "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = a."hihokenshaNo"
-        AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     < a."rirekiNo"))
+        AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"))
         As  DbT3055
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.noDeleted_DbT3056KogakuShikyuShinsei" />) As DbT3056
@@ -146,7 +146,7 @@
         SELECT 1
         FROM rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS a
         WHERE "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo" = a."hihokenshaNo"
-        AND "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     < a."rirekiNo"
+        AND "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
         ))
         As DbT3054
         ON DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
@@ -157,7 +157,7 @@
         SELECT 1
         FROM rgdb."dbT3054KogakuKyufuTaishoshaMeisai" AS a
         WHERE "dbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo" = a."hihokenshaNo"
-        AND "dbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     < a."rirekiNo"
+        AND "dbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
         )
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" As DbV1001
         ON DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" = DbV1001."hihokenshaNo"
@@ -169,7 +169,7 @@
         SELECT 1
         FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS a
         WHERE "DbV1004HihokenshaShisetsuNyutaisho"."shikibetsuCode" = a."shikibetsuCode"
-        AND "DbV1004HihokenshaShisetsuNyutaisho"."rirekiNo"     < a."rirekiNo"
+        AND "DbV1004HihokenshaShisetsuNyutaisho"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
         ))
         As DbV1004
         ON DbV1001."shikibetsuCode" = DbV1004."shikibetsuCode"
