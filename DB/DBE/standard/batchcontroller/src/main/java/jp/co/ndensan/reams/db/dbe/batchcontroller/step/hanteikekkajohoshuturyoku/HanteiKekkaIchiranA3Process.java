@@ -83,16 +83,22 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         entity.set認定申請区分_法令(NinteiShinseiHoreiCode.toValue(entity.get認定申請区分_法令()).toRString());
         if (一次判定結果_認知症加算_1.equals(entity.getTb_一次判定結果_加算())) {
             entity.setTb_一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.getTb_一次判定結果()).get名称());
-        } else if (一次判定結果_認知症加算_2.equals(entity.getTb_一次判定結果_加算())
-                || 一次判定結果_認知症加算_3.equals(entity.getTb_一次判定結果_加算())) {
-            entity.setTb_一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.toValue(entity.getTb_一次判定結果()).get名称());
+        } else if (一次判定結果_認知症加算_2.equals(entity.getTb_一次判定結果_加算())) {
+            entity.setTb_一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.一段階の重度変更.get名称());
+        } else if (一次判定結果_認知症加算_3.equals(entity.getTb_一次判定結果_加算())) {
+            entity.setTb_一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.二段階の重度変更.get名称());
+        } else {
+            entity.setTb_一次判定結果(RString.EMPTY);
         }
         entity.setTb_二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.getTb_二次判定要介護状態区分()).get略称());
         if (一次判定結果_認知症加算_1.equals(entity.get一次判定結果_加算())) {
             entity.set一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果()).get名称());
-        } else if (一次判定結果_認知症加算_2.equals(entity.get一次判定結果_加算())
-                || 一次判定結果_認知症加算_3.equals(entity.get一次判定結果_加算())) {
-            entity.set一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.toValue(entity.get一次判定結果()).get名称());
+        } else if (一次判定結果_認知症加算_2.equals(entity.get一次判定結果_加算())) {
+            entity.set一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.一段階の重度変更.get名称());
+        } else if (一次判定結果_認知症加算_3.equals(entity.get一次判定結果_加算())) {
+            entity.set一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.二段階の重度変更.get名称());
+        } else {
+            entity.set一次判定結果(RString.EMPTY);
         }
         entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get略称());
         entity.set状態像内容(YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード()).get名称());
