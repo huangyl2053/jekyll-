@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -370,7 +371,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正前 = 本算定通知書情報.get対象者_追加含む_情報_更正前();
 
         if (対象者_追加含む_情報_更正前 != null && 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード() != null) {
-            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), 対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
+            RString 特別徴収義務者 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"),
+                    対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value());
             更正前.set特別徴収義務者(特別徴収義務者);
             更正前.set特別徴収義務者コード(対象者_追加含む_情報_更正前.getDT特別徴収義務者コード().value().value());
         }
@@ -378,7 +380,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         ChoshuHoho 徴収方法情報_更正前 = 本算定通知書情報.get徴収方法情報_更正前();
         RString 年金コード = 徴収方法情報_更正前.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(new CodeShubetsu("0047"), new Code(年金コード.substring(0, SIZE_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"), new Code(年金コード.substring(0, SIZE_3)));
             更正前.set特別徴収対象年金(特別徴収対象年金);
         }
         更正前.set特別徴収対象年金コード(年金コード);
