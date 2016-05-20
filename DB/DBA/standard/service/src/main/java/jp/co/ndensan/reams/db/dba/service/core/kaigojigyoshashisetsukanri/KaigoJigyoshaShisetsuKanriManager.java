@@ -108,10 +108,13 @@ public class KaigoJigyoshaShisetsuKanriManager {
     public boolean checkKikanGorisei(KaigoJogaiTokureiParameter parameter) {
 
         FlexibleDate yukoShuryoYMD = parameter.getYukoShuryoYMD();
+        boolean checkFlag = false;
         if (yukoShuryoYMD != null && !yukoShuryoYMD.isEmpty()) {
-            return parameter.getYukoKaishiYMD().isBeforeOrEquals(yukoShuryoYMD);
+            checkFlag = parameter.getYukoKaishiYMD().isBeforeOrEquals(yukoShuryoYMD);
+        } else {
+            checkFlag = true;
         }
-        return false;
+        return checkFlag;
     }
 
     /**

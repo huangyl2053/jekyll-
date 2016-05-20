@@ -95,7 +95,7 @@ public class JigyoshaTouroku {
                 事業者番号, 有効開始日, RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY);
         サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
                 事業者番号, 有効開始日, FlexibleDate.EMPTY, RDate.getNowDate().getYearMonth());
-        if (状態_追加.equals(初期_状態)) {
+        if (初期_状態 == null || 状態_追加.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態);
             return ResponseData.of(div).setState(DBA2010013StateName.追加状態);
         } else if (状態_修正.equals(初期_状態)) {
@@ -162,8 +162,12 @@ public class JigyoshaTouroku {
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnAddService(JigyoshaTourokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_追加);
-        ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号,
-                ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
+        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
+        } else {
+            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号,
+                    ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
+        }
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス追加).respond();
     }
 
@@ -192,7 +196,12 @@ public class JigyoshaTouroku {
     }
 
     private void set画面引数の設定(JigyoshaTourokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
+        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
+        } else {
+            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号,
+                    ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
+        }
         ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード,
                 div.getServiceJoho().getDgServiceList().getClickedItem().getServiceShuruiCode());
         ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日,
@@ -207,7 +216,7 @@ public class JigyoshaTouroku {
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnSave(JigyoshaTourokuDiv div) {
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
-        if (初期_状態.equals(状態_追加)) {
+        if (初期_状態 == null || 状態_追加.equals(初期_状態)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -217,7 +226,7 @@ public class JigyoshaTouroku {
                 RealInitialLocker.release(前排他ロックキー);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
-        } else if (初期_状態.equals(状態_修正)) {
+        } else if (状態_修正.equals(初期_状態)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -227,7 +236,7 @@ public class JigyoshaTouroku {
                 get事業者情報の更新処理(div);
                 return ResponseData.of(div).setState(DBA2010013StateName.完了状態);
             }
-        } else if (初期_状態.equals(状態_削除)) {
+        } else if (状態_削除.equals(初期_状態)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
             }

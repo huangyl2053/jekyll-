@@ -29,10 +29,10 @@ public class DBD1030001Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ShafukuRiyoshaKeigen")
     private ShafukuRiyoshaKeigenDiv ShafukuRiyoshaKeigen;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,15 +40,6 @@ public class DBD1030001Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
-    }
-
     /*
      * getShafukuRiyoshaKeigen
      * @return ShafukuRiyoshaKeigen
@@ -65,6 +56,15 @@ public class DBD1030001Div extends Panel {
     @JsonProperty("ShafukuRiyoshaKeigen")
     public void setShafukuRiyoshaKeigen(ShafukuRiyoshaKeigenDiv ShafukuRiyoshaKeigen) {
         this.ShafukuRiyoshaKeigen = ShafukuRiyoshaKeigen;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
@@ -166,6 +166,16 @@ public class DBD1030001Div extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkTokureiTaisho() {
+        return this.getShafukuRiyoshaKeigen().getShinseiDetail().getShoninJoho().getChkTokureiTaisho();
+    }
+
+    @JsonIgnore
+    public void  setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
+        this.getShafukuRiyoshaKeigen().getShinseiDetail().getShoninJoho().setChkTokureiTaisho(chkTokureiTaisho);
+    }
+
+    @JsonIgnore
     public DropDownList getDdlKeigenJiyu() {
         return this.getShafukuRiyoshaKeigen().getShinseiDetail().getShoninJoho().getDdlKeigenJiyu();
     }
@@ -193,16 +203,6 @@ public class DBD1030001Div extends Panel {
     @JsonIgnore
     public void  setTxtKeigenRitsuBunbo(TextBoxNum txtKeigenRitsuBunbo) {
         this.getShafukuRiyoshaKeigen().getShinseiDetail().getShoninJoho().setTxtKeigenRitsuBunbo(txtKeigenRitsuBunbo);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkTokureiTaisho() {
-        return this.getShafukuRiyoshaKeigen().getShinseiDetail().getShoninJoho().getChkTokureiTaisho();
-    }
-
-    @JsonIgnore
-    public void  setChkTokureiTaisho(CheckBoxList chkTokureiTaisho) {
-        this.getShafukuRiyoshaKeigen().getShinseiDetail().getShoninJoho().setChkTokureiTaisho(chkTokureiTaisho);
     }
 
     @JsonIgnore
@@ -266,16 +266,6 @@ public class DBD1030001Div extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnShinseiKakutei() {
-        return this.getShafukuRiyoshaKeigen().getShinseiDetail().getBtnShinseiKakutei();
-    }
-
-    @JsonIgnore
-    public void  setBtnShinseiKakutei(Button btnShinseiKakutei) {
-        this.getShafukuRiyoshaKeigen().getShinseiDetail().setBtnShinseiKakutei(btnShinseiKakutei);
-    }
-
-    @JsonIgnore
     public Button getBtnShoninKakutei() {
         return this.getShafukuRiyoshaKeigen().getShinseiDetail().getBtnShoninKakutei();
     }
@@ -283,6 +273,16 @@ public class DBD1030001Div extends Panel {
     @JsonIgnore
     public void  setBtnShoninKakutei(Button btnShoninKakutei) {
         this.getShafukuRiyoshaKeigen().getShinseiDetail().setBtnShoninKakutei(btnShoninKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnShinseiKakutei() {
+        return this.getShafukuRiyoshaKeigen().getShinseiDetail().getBtnShinseiKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinseiKakutei(Button btnShinseiKakutei) {
+        this.getShafukuRiyoshaKeigen().getShinseiDetail().setBtnShinseiKakutei(btnShinseiKakutei);
     }
 
     @JsonIgnore
