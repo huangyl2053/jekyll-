@@ -190,7 +190,14 @@ public class JigyoshaService {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && click_hai(div)) {
             RealInitialLocker.release(前排他ロックキー);
-            return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).respond();
+            RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
+            if (状態_追加.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_追加);
+            } else if (状態_修正.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_修正);
+            } else if (状態_削除.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_削除);
+            }
         }
         return ResponseData.of(div).respond();
     }
