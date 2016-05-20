@@ -274,7 +274,7 @@ WITH
                 rgdb."DbT4001JukyushaDaicho"
             ) AS 受給者台帳2 
           WHERE
-            受給者台帳2.受給者台帳_番号 = 1 AND 受給者台帳2."logicalDeletedFlag"= false
+            受給者台帳2.受給者台帳_番号 = 1
         ) 
 
 SELECT
@@ -531,17 +531,17 @@ FROM
   INNER JOIN rgdb."DbT4101NinteiShinseiJoho" AS 今回申請 ON 今回申請."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
   LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho" AS 今回申請届出 ON 今回申請届出."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
   LEFT JOIN 最新介護事業者 AS 申請届出事業者 ON 申請届出事業者."jigyoshaNo" = 今回申請届出."shinseiTodokedeDaikoJigyoshaNo" 
-  LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS 今回調査委託先 
+  LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" AS 今回調査委託先 
          ON 今回調査委託先."shichosonCode" = 受給者台帳."shichosonCode"
          AND 今回調査委託先."ninteichosaItakusakiCode" = 今回申請."ninteiChosaItakusakiCode"
-  LEFT JOIN rgdb."DbT5913ChosainJoho" AS 今回調査員 
+  LEFT JOIN rgdb."DbT4913ChosainJoho" AS 今回調査員 
          ON 今回調査員."shichosonCode" = 受給者台帳."shichosonCode" 
          AND 今回調査員."ninteiChosaItakusakiCode" = 今回申請."ninteiChosaItakusakiCode" 
          AND 今回調査員."ninteiChosainCode" = 今回申請."ninteiChosainCode"
-  LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS 今回主治医医療機関 
+  LEFT JOIN rgdb."DbT4911ShujiiIryoKikanJoho" AS 今回主治医医療機関 
          ON 今回主治医医療機関."shichosonCode" = 受給者台帳."shichosonCode" 
          AND 今回主治医医療機関."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"
-  LEFT JOIN rgdb."DbT5912ShujiiJoho" AS 今回主治医 
+  LEFT JOIN rgdb."DbT4912ShujiiJoho" AS 今回主治医 
          ON 今回主治医."shichosonCode" = 受給者台帳."shichosonCode"
          AND 今回主治医."shujiiIryokikanCode" = 今回申請."shujiiIryokikanCode"
          AND 今回主治医."shujiiCode" = 今回申請."shujiiCode"
@@ -716,23 +716,23 @@ FROM
             ON 自己作成."hihokenshaNo" = 居宅届出."hihokenshaNo" 
             AND 自己作成."taishoYM" = 居宅届出."taishoYM"
             AND 自己作成."rirekiNo" = 居宅届出."rirekiNo"
-          LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS 履歴情報 ON 履歴情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
+          LEFT JOIN rgdb."DbT4121ShinseiRirekiJoho" AS 履歴情報 ON 履歴情報."shinseishoKanriNo" = 受給者台帳."shinseishoKanriNo" 
           LEFT JOIN 受給者台帳枝番MAX AS 前回受給情報 ON 前回受給情報."shinseishoKanriNo" = 履歴情報."zenkaiShinseishoKanriNo" 
-          LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS 前回申請 ON 前回申請."shinseishoKanriNo" = 履歴情報."zenkaiShinseishoKanriNo" 
-          LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS 前回調査委託先 
+          LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" AS 前回申請 ON 前回申請."shinseishoKanriNo" = 履歴情報."zenkaiShinseishoKanriNo" 
+          LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" AS 前回調査委託先 
             ON 前回調査委託先."shichosonCode" = 前回受給情報."shichosonCode" 
             AND 前回調査委託先."ninteichosaItakusakiCode" = 前回申請."ninteiChosaItakusakiCode"
-          LEFT JOIN rgdb."DbT5913ChosainJoho" AS 前回調査員 
+          LEFT JOIN rgdb."DbT4913ChosainJoho" AS 前回調査員 
             ON 前回調査員."shichosonCode" = 前回受給情報."shichosonCode"
             AND 前回調査員."ninteiChosaItakusakiCode" = 前回申請."ninteiChosaItakusakiCode" 
             AND 前回調査員."ninteiChosainCode" = 前回申請."ninteiChosainCode"
-          LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS 前回履歴情報 ON 前回履歴情報."shinseishoKanriNo" = 履歴情報."zenkaiShinseishoKanriNo" 
+          LEFT JOIN rgdb."DbT4121ShinseiRirekiJoho" AS 前回履歴情報 ON 前回履歴情報."shinseishoKanriNo" = 履歴情報."zenkaiShinseishoKanriNo" 
           LEFT JOIN 受給者台帳枝番MAX AS 前々回受給情報 ON 前々回受給情報."shinseishoKanriNo" = 前回履歴情報."zenkaiShinseishoKanriNo" 
-          LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS 前々回申請 ON 前々回申請."shinseishoKanriNo" = 前回履歴情報."zenkaiShinseishoKanriNo" 
-          LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS 前々回調査委託先 
+          LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" AS 前々回申請 ON 前々回申請."shinseishoKanriNo" = 前回履歴情報."zenkaiShinseishoKanriNo" 
+          LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" AS 前々回調査委託先 
             ON 前々回調査委託先."shichosonCode" = 前々回受給情報."shichosonCode" 
             AND 前々回調査委託先."ninteichosaItakusakiCode" = 前々回申請."ninteiChosaItakusakiCode"
-          LEFT JOIN rgdb."DbT5913ChosainJoho" AS 前々回調査員 
+          LEFT JOIN rgdb."DbT4913ChosainJoho" AS 前々回調査員 
             ON 前々回調査員."shichosonCode" = 前々回受給情報."shichosonCode" 
             AND 前々回調査員."ninteiChosaItakusakiCode" = 前々回申請."ninteiChosaItakusakiCode" 
             AND 前々回調査員."ninteiChosainCode" = 前々回申請."ninteiChosainCode"
@@ -744,189 +744,194 @@ FROM
             WHERE
               受給者台帳枝番MAX."rirekiNo" = '0001'
           ) AS 初回受給情報 ON 初回受給情報."hihokenshaNo" = 受給者台帳."hihokenshaNo" 
-          INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS 初回申請 ON 初回申請."shinseishoKanriNo" = 初回受給情報."shinseishoKanriNo"
-                 AND
-                1  =  1
-                <if test="is直近認定">
-                    AND (    受給者台帳."rirekiNo"
-                             = ( SELECT  "rirekiNo"  FROM rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest 
-                                    WHERE 受給者台帳Newest."hihokenshaNo" = 受給者台帳."hihokenshaNo")
-                            AND    受給者台帳."logicalDeletedFlag" = false )
-                </if>
-                
-                <if test="is申請">
-                    AND (    受給者台帳."rirekiNo" = '0000'
-                            AND    受給者台帳."logicalDeletedFlag" = false )
-                </if>
-                
-                <if test="is両方">
-                    AND (    ( 受給者台帳."rirekiNo"
-                             = ( SELECT  "rirekiNo"  FROM rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest 
-                    WHERE 受給者台帳Newest."hihokenshaNo" = 受給者台帳."hihokenshaNo" )
-                        OR 受給者台帳."rirekiNo" = '0000'  )
-                        AND    受給者台帳."logicalDeletedFlag" = false )
-                </if>
-                
-                <if test="is全履歴">
-                    AND (    受給者台帳."logicalDeletedFlag" = false
+          INNER JOIN rgdb."DbT4101NinteiShinseiJoho" AS 初回申請 ON 初回申請."shinseishoKanriNo" = 初回受給情報."shinseishoKanriNo"
+WHERE
+    1  =  1
 
-                        
-                        <if test="isSakujyodatacyusyutsu">
-                            OR (受給者台帳."logicalDeletedFlag" = true
-                                AND ( 受給者台帳."sakujoJiyuCode" <![CDATA[<>]]> '' OR 受給者台帳."sakujoJiyuCode" <![CDATA[<>]]> '01')
-                            )
-                        </if>
-                    )
-                </if>
-                
-                <if test="isShinseikeshidetacyusyutsu">
-                    OR    (受給者台帳."logicalDeletedFlag" = false
-                    AND    受給者台帳."dataKubun" IN ('11','12','13','14','15','19') )
-                </if>
-            
-            <if test="is資格取得者のみ">
-                AND    (最新被保台帳."shikakuSoshitsuYMD" = '' OR 最新被保台帳."shikakuSoshitsuYMD" IS NULL)
+    <if test="Sakujyodatacyusyutsu==null">
+        AND (受給者台帳."logicalDeletedFlag" = false)
+    </if>
+
+    <if test="isSakujyodatacyusyutsu">
+        AND ((受給者台帳."logicalDeletedFlag" = false)
+        OR (受給者台帳."logicalDeletedFlag" = true
+            AND ( 受給者台帳."sakujoJiyuCode" <![CDATA[<>]]> '' OR 受給者台帳."sakujoJiyuCode" <![CDATA[<>]]> '01')
+        ))
+    </if>
+
+    <if test="Shinseikeshidetacyusyutsu==null">
+        AND    受給者台帳."dataKubun" NOT IN ('41','42','43','44','45','49')
+    </if>
+
+    <if test="isShinseikeshidetacyusyutsu">
+    </if>
+
+    <if test="is直近認定">
+        AND (    受給者台帳."rirekiNo"
+                 = ( SELECT  "rirekiNo"  FROM rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest 
+                        WHERE 受給者台帳Newest."hihokenshaNo" = 受給者台帳."hihokenshaNo")
+            )
+    </if>
+    
+    <if test="is申請">
+        AND (    受給者台帳."rirekiNo" = '0000'
+            )
+    </if>
+    
+    <if test="is両方">
+        AND (    ( 受給者台帳."rirekiNo"
+                 = ( SELECT  "rirekiNo"  FROM rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest 
+        WHERE 受給者台帳Newest."hihokenshaNo" = 受給者台帳."hihokenshaNo" )
+            OR 受給者台帳."rirekiNo" = '0000'  )
+            )
+    </if>
+    
+    <if test="is全履歴">
+    </if>
+   
+    <if test="is資格取得者のみ">
+        AND    (最新被保台帳."shikakuSoshitsuYMD" = '' OR 最新被保台帳."shikakuSoshitsuYMD" IS NULL)
+    </if>
+    
+    <if test="is資格喪失者のみ">
+        AND    (最新被保台帳."shikakuSoshitsuYMD" <![CDATA[<>]]> '' AND 最新被保台帳."shikakuSoshitsuYMD" IS NOT NULL)
+    </if>
+    
+    <if test="is指定日範囲">
+        <if test="is認定日">
+            <if test="!isCyusyutsunichifrom">
+                AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
             </if>
-            
-            <if test="is資格喪失者のみ">
-                AND    (最新被保台帳."shikakuSoshitsuYMD" <![CDATA[<>]]> '' AND 最新被保台帳."shikakuSoshitsuYMD" IS NOT NULL)
+            <if test="!isCyusyutsunichito">
+                AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
             </if>
-            
-            <if test="is指定日範囲">
-                <if test="is認定日">
-                    <if test="!is抽出日from">
-                        AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                        AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is申請日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."jukyuShinseiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    受給者台帳."jukyuShinseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is調査依頼日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査依頼."ninteichosaIraiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    今回調査依頼."ninteichosaIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is調査実施予定日">
-                    <if test="!is抽出日from">
-                        AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaIraiYoteiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                        AND    今回計画情報."ninteichosaIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is調査実施日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査結果_概況."ninteichosaJisshiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    今回調査結果_概況."ninteichosaJisshiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is意見書依頼日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書作成依頼."ikenshoSakuseiIraiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    今回意見書作成依頼."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is意見書入手予定日">
-                    <if test="!is抽出日from">
-                        AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ikenshoSakuseiIraiYoteiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                        AND    今回計画情報."ikenshoSakuseiIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is意見書入手日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書情報."ikenshoJuryoYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    今回意見書情報."ikenshoJuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is審査会資料作成日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回結果情報."shinsakaiShiryoSakuseiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    今回結果情報."shinsakaiShiryoSakuseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is審査会回答予定日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaYoteiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    今回計画情報."ninteichosaYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is審査会回答日">
-                    <if test="!is抽出日from">
-                    AND    #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is認定有効開始日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanKaishiYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
-                
-                <if test="is認定有効終了日">
-                    <if test="!is抽出日from">
-                    AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
-                    </if>
-                    <if test="!is抽出日to">
-                    AND    受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
-                    </if>
-                </if>
+        </if>
+        
+        <if test="is申請日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."jukyuShinseiYMD"
             </if>
-            
-            <if test="is医療機関コード範囲">
-                    <if test="!is医療機関コードfrom">
-                    AND    #{iryokikancodefrom} <![CDATA[<=]]> 今回主治医医療機関."shujiiIryokikanCode"
-                    </if>
-                    <if test="!is医療機関コードto">
-                    AND    今回主治医医療機関."shujiiIryokikanCode" <![CDATA[<=]]> #{iryokikancodefto}
-                    </if>
+            <if test="!isCyusyutsunichito">
+            AND    受給者台帳."jukyuShinseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
             </if>
-            
-            <if test="is調査委託先コード範囲">
-                <if test="!is調査委託先コードfrom">
-                    AND    #{cyosaitakusakicodefrom} <![CDATA[<=]]> 今回調査委託先."ninteichosaItakusakiCode"
-                </if>
-                <if test="!is調査委託先コードto">
-                    AND    今回調査委託先."ninteichosaItakusakiCode" <![CDATA[<=]]> #{cyosaitakusakicodefto}
-                </if>
+        </if>
+        
+        <if test="is調査依頼日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査依頼."ninteichosaIraiYMD"
             </if>
+            <if test="!isCyusyutsunichito">
+            AND    今回調査依頼."ninteichosaIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is調査実施予定日">
+            <if test="!isCyusyutsunichifrom">
+                AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaIraiYoteiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+                AND    今回計画情報."ninteichosaIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is調査実施日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回調査結果_概況."ninteichosaJisshiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    今回調査結果_概況."ninteichosaJisshiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is意見書依頼日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書作成依頼."ikenshoSakuseiIraiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    今回意見書作成依頼."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is意見書入手予定日">
+            <if test="!isCyusyutsunichifrom">
+                AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ikenshoSakuseiIraiYoteiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+                AND    今回計画情報."ikenshoSakuseiIraiYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is意見書入手日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回意見書情報."ikenshoJuryoYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    今回意見書情報."ikenshoJuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is審査会資料作成日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回結果情報."shinsakaiShiryoSakuseiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    今回結果情報."shinsakaiShiryoSakuseiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is審査会回答予定日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 今回計画情報."ninteichosaYoteiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    今回計画情報."ninteichosaYoteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is審査会回答日">
+            <if test="!isCyusyutsunichifrom">
+            AND    #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    受給者台帳."ninteiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is認定有効開始日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanKaishiYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+        
+        <if test="is認定有効終了日">
+            <if test="!isCyusyutsunichifrom">
+            AND     #{cyusyutsunichifrom} <![CDATA[<=]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
+            </if>
+            <if test="!isCyusyutsunichito">
+            AND    受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{cyusyutsunichito}
+            </if>
+        </if>
+    </if>
+    
+    <if test="is医療機関コード範囲">
+            <if test="!isIryokikancodefrom">
+            AND    #{iryokikancodefrom} <![CDATA[<=]]> 今回主治医医療機関."shujiiIryokikanCode"
+            </if>
+            <if test="!isIryokikancodefto">
+            AND    今回主治医医療機関."shujiiIryokikanCode" <![CDATA[<=]]> #{iryokikancodefto}
+            </if>
+    </if>
+    
+    <if test="is調査委託先コード範囲">
+        <if test="!isCyosaitakusakicodefrom">
+            AND    #{cyosaitakusakicodefrom} <![CDATA[<=]]> 今回調査委託先."ninteichosaItakusakiCode"
+        </if>
+        <if test="!isCyosaitakusakicodefto">
+            AND    今回調査委託先."ninteichosaItakusakiCode" <![CDATA[<=]]> #{cyosaitakusakicodefto}
+        </if>
+    </if>
     </select>
 </mapper>
