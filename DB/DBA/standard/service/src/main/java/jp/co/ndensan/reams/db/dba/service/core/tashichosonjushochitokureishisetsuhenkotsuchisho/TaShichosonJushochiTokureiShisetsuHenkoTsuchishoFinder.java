@@ -5,18 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsuhenkotsuchisho;
 
-import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TatokuKanrenChohyoHenkoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TatokuKanrenChohyoRenrakuhyoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TatokuKanrenChohyoRenrakuhyoMybatisParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoHenkoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoRenrakuhyoEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashihenkotsuchisho.ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dba.service.core.tajushochito.ShisetsuJyohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -158,29 +159,22 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         outEntity.set変更年月日(inBusiness.get入所年月日().
                 wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper henkoTsuchishoMapper
-                = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper.class);
-        List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> entityList
-                = henkoTsuchishoMapper.getTaShichosonJushochiTokureiShisetsuHenkoTsuchisho(inBusiness.getEntity());
-        if (entityList.size() >= 1 && entityList.get(0) != null) {
-            outEntity.set変更前施設名称(entityList.get(0).getJigyoshaMeisho());
-            outEntity.set変更前施設電話番号(entityList.get(0).getTelNo());
-            outEntity.set変更前施設FAX番号(entityList.get(0).getFaxNo());
-            if (entityList.get(0).getYubinNo() != null) {
-                outEntity.set変更前施設郵便番号(new YubinNo(entityList.get(0).getYubinNo().getEditedYubinNo()));
-            }
-            outEntity.set変更前施設住所(entityList.get(0).getJigyoshaJusho());
-        }
-        if (entityList.size() >= 2 && entityList.get(1) != null) {
-            outEntity.set変更後施設名称(entityList.get(1).getJigyoshaMeisho());
-            outEntity.set変更後施設電話番号(entityList.get(1).getTelNo());
-            outEntity.set変更後施設FAX番号(entityList.get(1).getFaxNo());
-            if (entityList.get(1).getYubinNo() != null) {
-                outEntity.set変更後施設郵便番号(new YubinNo(entityList.get(1).getYubinNo().getEditedYubinNo()));
-            }
-            outEntity.set変更後施設住所(entityList.get(1).getJigyoshaJusho());
-        }
-
+        Map<Integer, ShisetsuJyohoRelateEntity> 施設情報Map = ShisetsuJyohoFinder.createInstance().
+                getTaJushochiTokureiTekiyoJyoho(inBusiness.get識別コード(), inBusiness.get異動日(), inBusiness.get枝番());
+        ShisetsuJyohoRelateEntity 変更後施設情報 = 施設情報Map.get(1);
+        ShisetsuJyohoRelateEntity 変更前施設情報 = 施設情報Map.get(2);
+        outEntity.set変更前施設名称(変更前施設情報.get事業者名称());
+        outEntity.set変更前施設電話番号(変更前施設情報.get電話番号());
+        outEntity.set変更前施設FAX番号(変更前施設情報.getFax番号());
+        outEntity.set変更前施設郵便番号(!RString.isNullOrEmpty(変更前施設情報.get郵便番号())
+                ? new YubinNo(変更前施設情報.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
+        outEntity.set変更前施設住所(変更前施設情報.get事業者住所());
+        outEntity.set変更後施設名称(変更後施設情報.get事業者名称());
+        outEntity.set変更後施設電話番号(変更後施設情報.get電話番号());
+        outEntity.set変更後施設FAX番号(変更後施設情報.getFax番号());
+        outEntity.set変更後施設郵便番号(!RString.isNullOrEmpty(変更後施設情報.get郵便番号())
+                ? new YubinNo(変更後施設情報.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
+        outEntity.set変更後施設住所(変更後施設情報.get事業者住所());
         return new TatokuKanrenChohyoHenkoTsuchishoBusiness(outEntity);
     }
 
@@ -238,29 +232,21 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
             outEntity.set被保険者番号１０(被保険者番号.substring(INT9, INT10));
         }
 
-        ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper mapper
-                = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper.class);
-        TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity getEntity = mapper.setTatokuKanrenChohyoRenrakuhyo(inBusiness.getEntity());
-        if (getEntity != null) {
-            outEntity.set入所年月日(getEntity.get入所年月日().
-                    wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            outEntity.set施設名称(getEntity.get事業者名称());
-            outEntity.set施設電話番号(getEntity.get電話番号());
-            outEntity.set施設FAX番号(getEntity.getFax番号());
-            if (getEntity.get郵便番号() != null) {
-                outEntity.set施設郵便番号(getEntity.get郵便番号().getEditedYubinNo());
-            }
-            outEntity.set施設住所(getEntity.get事業者住所());
-        }
-
-        FlexibleDate 入所年月日 = FlexibleDate.EMPTY;
-        if (getEntity != null) {
-            入所年月日 = getEntity.get入所年月日();
-        }
+        Map<Integer, ShisetsuJyohoRelateEntity> 施設情報Map = ShisetsuJyohoFinder.createInstance().
+                getTaJushochiTokureiTekiyoJyoho(inBusiness.get識別コード(), inBusiness.get異動日(), inBusiness.get枝番());
+        ShisetsuJyohoRelateEntity 施設情報Entity = 施設情報Map.get(1);
+        outEntity.set入所年月日(施設情報Entity.get入所年月日().
+                wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        outEntity.set施設名称(施設情報Entity.get事業者名称());
+        outEntity.set施設電話番号(施設情報Entity.get電話番号());
+        outEntity.set施設FAX番号(施設情報Entity.getFax番号());
+        outEntity.set施設郵便番号(!RString.isNullOrEmpty(施設情報Entity.get郵便番号())
+                ? new YubinNo(施設情報Entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
+        outEntity.set施設住所(施設情報Entity.get事業者住所());
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        key.set基準日(入所年月日);
+        key.set基準日(施設情報Entity.get入所年月日());
         key.set識別コード(inBusiness.get識別コード());
 
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
