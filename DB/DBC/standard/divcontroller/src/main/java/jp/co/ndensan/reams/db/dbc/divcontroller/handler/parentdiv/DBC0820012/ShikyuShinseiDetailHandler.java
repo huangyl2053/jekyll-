@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
@@ -50,10 +51,12 @@ public final class ShikyuShinseiDetailHandler {
 
     private final ShikyuShinseiDetailDiv div;
     private static final RString MODEL_ADD = new RString("新規");
+    private static final RString 登録モード = new RString("登録");
     private static final RString MODEL_UPD = new RString("修正");
     private static final RString MODEL_DEL = new RString("削除");
     private static final RString 受託あり = new RString("2");
     private static final RString 受託なし = new RString("1");
+    private static final RString 整理番号_ADD = new RString("0000");
 
     /**
      * コンストラクタです。
@@ -417,6 +420,9 @@ public final class ShikyuShinseiDetailHandler {
         if (pnlDiv.getTxtShinseiYMD().getValue() != null) {
             return true;
         }
+        if (!ShinseishaKubun.本人.get名称().equals(pnlDiv.getRdoShinseisyaKubun().getSelectedValue())) {
+            return true;
+        }
         if (!pnlDiv.getTxtKisaiHokensyaBango().getValue().isNullOrEmpty()) {
             return true;
         }
@@ -460,25 +466,28 @@ public final class ShikyuShinseiDetailHandler {
         div.getPnlShinsei().getTxtNumShiharaKingakuGk().setValue(償還払支給申請.get支払金額合計());
         div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().setValue(new Decimal(償還払支給申請.get保険給付額()));
         div.getPnlShinsei().getTxtNumHokenKyufuGaku().setValue(new Decimal(償還払支給申請.get利用者負担額()));
-
-        if (MODEL_UPD.equals(処理モード) && !償還払支給申請.is国保連再送付フラグ()
-                && null != 償還払支給申請.get送付年月() && !償還払支給申請.get送付年月().isEmpty()) {
+        if (償還払支給申請.is国保連再送付フラグ()) {
             List<KeyValueDataSource> items = div.getPnlShinsei().getChkKokuhorenSaiso().getDataSource();
             div.getPnlShinsei().getChkKokuhorenSaiso().setSelectedItems(items);
+        } else {
+            List<KeyValueDataSource> items = new ArrayList<>();
+            div.getPnlShinsei().getChkKokuhorenSaiso().setSelectedItems(items);
+        }
+        if (MODEL_UPD.equals(処理モード) && !償還払支給申請.is国保連再送付フラグ()
+                && null != 償還払支給申請.get送付年月() && !償還払支給申請.get送付年月().isEmpty()) {
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(true);
         } else {
+
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
         }
     }
 
     private ShokanShinsei get画面データ(RString 画面モード, ShokanShinsei 償還払支給申請) {
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号());
-        RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
         if (MODEL_ADD.equals(画面モード)) {
             償還払支給申請 = new ShokanShinsei(被保険者番号,
-                    new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth().toString()), 整理番号);
+                    new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth().toString()), 整理番号_ADD);
         }
-
         償還払支給申請 = 償還払支給申請.createBuilderForEdit().
                 set証記載保険者番号(new ShoKisaiHokenshaNo(div.getPnlShinsei().getTxtKisaiHokensyaBango().getValue())).
                 set申請理由(div.getPnlShinsei().getTxtMulShinseiRiyu().getValue()).
@@ -551,13 +560,17 @@ public final class ShikyuShinseiDetailHandler {
      * @return ShokanShinsei 支給申請一覧情報
      */
     public ShikyuShinseiDetailParameter setParameter() {
-        RString 処理モード = div.getPanelHead().getTxtShoriMode().getValue();
-        RString 被保険者番号 = div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号();
+        RString 処理モード;
+        if (MODEL_ADD.equals(div.getPanelHead().getTxtShoriMode().getValue())) {
+            処理モード = div.getPanelHead().getTxtShoriMode().getValue();
+        } else {
+            処理モード = 登録モード;
+        }
         RYearMonth サービス提供年月 = div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth();
         RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
         RString 申請日 = div.getPnlShinsei().getTxtShinseiYMD().getValue().toDateString();
         ShikyuShinseiDetailParameter parameter = new ShikyuShinseiDetailParameter(
-                処理モード, 被保険者番号, サービス提供年月, 整理番号, 申請日);
+                処理モード, null, サービス提供年月, 整理番号, 申請日);
         return parameter;
     }
 }
