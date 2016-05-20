@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor {
 
     private static final RString SAKUSEI = new RString("作成");
-    private static final RString タイトル = new RString("介護保険　　特別徴収開始通知書（仮徴収）発行一覧表");
+    private static final RString タイトル = new RString("特別徴収開始通知書（仮徴収）発行一覧表");
     private static final RString NENDO = new RString("年度");
     private static final RString 徴収額タイトル = new RString("仮徴収額");
     private static final RString 仮徴収月4月 = new RString("4月");
@@ -100,8 +100,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         }
         source.title = タイトル;
         if (調定年度 != null && !調定年度.isEmpty()) {
-            source.nendo = 調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                    .fillType(FillType.BLANK).toDateString().concat(NENDO);
+            source.nendo = 調定年度.wareki().eraType(EraType.KANJI).toDateString();
         } else {
             source.nendo = RString.EMPTY;
         }
