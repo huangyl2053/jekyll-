@@ -5,23 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import lombok.NonNull;
 
 /**
@@ -32,14 +24,6 @@ import lombok.NonNull;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
         Report<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> {
-
-    private static final RString SAKUSEI = new RString("作成");
-    private static final RString タイトル = new RString("介護保険　　特別徴収開始通知書（仮徴収）発行一覧表");
-    private static final RString NENDO = new RString("年度");
-    private static final RString 徴収額タイトル = new RString("仮徴収額");
-    private static final RString 仮徴収月4月 = new RString("4月");
-    private static final RString 仮徴収月6月 = new RString("6月");
-    private static final RString 仮徴収月8月 = new RString("8月");
 
     private final List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList;
     private final RString 改頁1;
@@ -54,7 +38,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
     private final RString 出力順5;
     private final FlexibleYear 調定年度;
     private final YMDHMS 帳票作成日時;
-    private final List<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranItem> targets;
+    private final Association association;
 
     /**
      * コンストラクタです
@@ -72,12 +56,13 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
      * @param 出力順5 RString
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
+     * @param association Association
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport(
             List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList,
             RString 改頁1, RString 改頁2, RString 改頁3, RString 改頁4, RString 改頁5,
             RString 出力順1, RString 出力順2, RString 出力順3, RString 出力順4, RString 出力順5,
-            FlexibleYear 調定年度, YMDHMS 帳票作成日時) {
+            FlexibleYear 調定年度, YMDHMS 帳票作成日時, Association association) {
         this.編集後仮算定通知書共通情報entityList = 編集後仮算定通知書共通情報entityList;
         this.改頁1 = 改頁1;
         this.改頁2 = 改頁2;
@@ -91,7 +76,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
         this.出力順5 = 出力順5;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
-        this.targets = new ArrayList<>();
+        this.association = association;
     }
 
     /**
@@ -110,6 +95,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
      * @param 出力順5 RString
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
+     * @param association Association
      * @return TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport
      */
     public static TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport createForm(
@@ -125,70 +111,23 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport extends
             @NonNull RString 出力順4,
             @NonNull RString 出力順5,
             @NonNull FlexibleYear 調定年度,
-            @NonNull YMDHMS 帳票作成日時) {
+            @NonNull YMDHMS 帳票作成日時,
+            @NonNull Association association) {
         return new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport(編集後仮算定通知書共通情報entityList, 改頁1, 改頁2,
-                改頁3, 改頁4, 改頁5, 出力順1, 出力順2, 出力順3, 出力順4, 出力順5, 調定年度, 帳票作成日時);
+                改頁3, 改頁4, 改頁5, 出力順1, 出力順2, 出力順3, 出力順4, 出力順5, 調定年度, 帳票作成日時, association);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> writer) {
-        setItems();
-        for (TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranItem target : targets) {
-            ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor editor = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(target);
+        Integer 連番 = 0;
+        for (EditedKariSanteiTsuchiShoKyotsu target : 編集後仮算定通知書共通情報entityList) {
+            連番 = 連番 + 1;
+            ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor editor
+                    = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(target, 改頁1, 改頁2, 改頁3, 改頁4, 改頁5,
+                            出力順1, 出力順2, 出力順3, 出力順4, 出力順5, 調定年度, 帳票作成日時, 連番, association);
             ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranBuilder builder
                     = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranBuilder(editor);
             writer.writeLine(builder);
-        }
-    }
-
-    /**
-     * setItemsメソッド
-     */
-    private void setItems() {
-        Integer 連番 = 0;
-        for (EditedKariSanteiTsuchiShoKyotsu entity : 編集後仮算定通知書共通情報entityList) {
-            連番 = 連番 + 1;
-            TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranItem item = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranItem();
-            RString 帳票作成日 = 帳票作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            RString 帳票作成時 = 帳票作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            item.set作成日時(帳票作成日.concat(" " + 帳票作成時 + " " + SAKUSEI));
-            item.setタイトル(タイトル);
-            item.set年度(調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
-                    .fillType(FillType.BLANK).toDateString().concat(NENDO));
-            Association association = AssociationFinderFactory.createInstance().getAssociation();
-            item.set市町村コード(association.get地方公共団体コード().value());
-            item.set市町村名称(association.get市町村名());
-            item.set並び順１(出力順1);
-            item.set並び順２(出力順2);
-            item.set並び順３(出力順3);
-            item.set並び順４(出力順4);
-            item.set並び順５(出力順5);
-            item.set改頁１(改頁1);
-            item.set改頁２(改頁2);
-            item.set改頁３(改頁3);
-            item.set改頁４(改頁4);
-            item.set改頁５(改頁5);
-            item.set徴収額タイトル(徴収額タイトル);
-            item.set連番(new RString(連番.toString()));
-            item.set郵便番号(entity.get編集後宛先().get郵便番号());
-            item.set住所(entity.get編集後宛先().get編集後住所());
-            item.set行政区(entity.get編集後宛先().get宛先行政区());
-            item.set生年月日(entity.get編集後個人().get生年月日());
-            item.set性別(entity.get編集後個人().get性別());
-            item.set世帯主名(entity.get編集後個人().get世帯主名().value());
-            item.set通知書番号(entity.get通知書番号().value());
-            item.set世帯コード(entity.get編集後個人().get世帯コード().value());
-            item.set被保険者氏名(entity.get編集後個人().get名称().getName().value());
-            item.set特別徴収義務者(entity.get更正後().get更正後特別徴収義務者());
-            item.set特別徴対象年金(entity.get更正後().get更正後特別徴収対象年金());
-            item.set仮徴収月4月(仮徴収月4月);
-            item.set仮徴収額4月(DecimalFormatter.toコンマ区切りRString(entity.get更正後().get更正後特徴期別金額01(), 0));
-            item.set仮徴収月6月(仮徴収月6月);
-            item.set仮徴収額6月(DecimalFormatter.toコンマ区切りRString(entity.get更正後().get更正後特徴期別金額02(), 0));
-            item.set仮徴収月8月(仮徴収月8月);
-            item.set仮徴収額8月(DecimalFormatter.toコンマ区切りRString(entity.get更正後().get更正後特徴期別金額03(), 0));
-            targets.add(item);
         }
     }
 }
