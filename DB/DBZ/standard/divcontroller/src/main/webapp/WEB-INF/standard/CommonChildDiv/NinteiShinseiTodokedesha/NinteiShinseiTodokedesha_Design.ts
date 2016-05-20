@@ -18,6 +18,10 @@ module DBZ {
                 return "onClick_btnZenkaiFukusha";
             }
 
+            public static onChangeChkKannaiKangai(): string {
+                return "onChangeChkKannaiKangai";
+            }
+
         }
 
         export class Controls {
