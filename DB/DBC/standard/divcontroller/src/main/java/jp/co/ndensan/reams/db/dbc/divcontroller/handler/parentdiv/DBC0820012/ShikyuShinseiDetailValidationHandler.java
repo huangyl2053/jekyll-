@@ -67,28 +67,28 @@ public class ShikyuShinseiDetailValidationHandler {
 
     private boolean is入力() {
         pnlShinseiDiv pnlDiv = div.getPnlShinsei();
-        if (pnlDiv.getTxtShinseiYMD() == null) {
+        if (pnlDiv.getTxtShinseiYMD().getValue() == null) {
             return true;
         }
-        if (pnlDiv.getTxtUketsukeYMD() == null) {
+        if (pnlDiv.getTxtUketsukeYMD().getValue() == null) {
             return true;
         }
-        if (pnlDiv.getTxtKisaiHokensyaBango() == null) {
+        if (pnlDiv.getTxtKisaiHokensyaBango().getValue().isNullOrEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtShimeikana() == null) {
+        if (pnlDiv.getTxtShimeikana().getDomain().isEmpty() && pnlDiv.getTxtShimeikana().getDomain() == null) {
             return true;
         }
-        if (pnlDiv.getTxtShimeiKanji() == null) {
+        if (pnlDiv.getTxtShimeiKanji().getDomain().isEmpty() && pnlDiv.getTxtShimeiKanji().getDomain() == null) {
             return true;
         }
-        if (pnlDiv.getTxtTelNo() == null) {
+        if (pnlDiv.getTxtTelNo().getDomain().isEmpty() && pnlDiv.getTxtTelNo().getDomain() != null) {
             return true;
         }
-        if (pnlDiv.getTxtMulShinseiRiyu() == null) {
+        if (pnlDiv.getTxtMulShinseiRiyu().getValue().isNullOrEmpty()) {
             return true;
         }
-        return pnlDiv.getTxtNumShiharaKingakuGk() == null;
+        return pnlDiv.getTxtNumShiharaKingakuGk().getValue() == null;
     }
 
     /**
