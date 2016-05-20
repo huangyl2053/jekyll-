@@ -181,7 +181,7 @@ public class HihokenshashoChohyoFinder {
             business.set被保険者番号(hihoken.get(i).get被保険者番号());
             List<HonninJohoEntity> honni = get本人情報(hihoken.get(i).get識別コード());
             if (郵便番号表示有.equals(DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無,
-                    RDate.getNowDate()))) {
+                    RDate.getNowDate(), SubGyomuCode.DBA介護資格))) {
                 business.set郵便番号(honni.get(0).getYubinNo().getEditedYubinNo());
             }
             RString gyoseiku = honni.get(0).getGyoseikuName();
@@ -212,7 +212,7 @@ public class HihokenshashoChohyoFinder {
                 }
             }
             if (氏名カナ表示有.equals(DbBusinessConifg.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_氏名カナ表示有無,
-                    RDate.getNowDate()))) {
+                    RDate.getNowDate(), SubGyomuCode.DBA介護資格))) {
                 business.set氏名カナ(honni.get(0).getKanaMeisho());
             }
             business.set氏名(honni.get(0).getMeisho());
@@ -289,32 +289,40 @@ public class HihokenshashoChohyoFinder {
         }
         if (文字_0.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
             RStringBuilder builder = new RStringBuilder();
-            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate()))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(association.get都道府県名());
             }
-            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate()))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(RString.EMPTY);
             }
-            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate()))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(RString.EMPTY);
             }
-            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(sofusa.getJusho());
                 builder.append(sofusa.getBanchi());
             }
-            if (文字_2.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
+            if (文字_2.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(honni.getGyoseikuName());
                 builder.append(sofusa.getBanchi());
             }
-            if (文字_3.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
+            if (文字_3.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(sofusa.getJusho());
                 builder.append(sofusa.getBanchi());
                 builder.append(honni.getGyoseikuName());
             }
-            if (文字_4.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate()))) {
+            if (文字_4.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(sofusa.getBanchi());
             }
-            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, RDate.getNowDate()))) {
+            if (文字_1.equals(DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, RDate.getNowDate(),
+                    SubGyomuCode.DBU介護統計報告))) {
                 builder.append(半角スペース);
                 builder.append(sofusa.getKatagaki());
             }
@@ -689,7 +697,7 @@ public class HihokenshashoChohyoFinder {
 
     private void set生年月日(HihokenshashoChoBusiness business, HonninJohoEntity entity) {
         if (住民種別コード2.equals(entity.getJuminShubetsuCode()) || 住民種別コード4.equals(entity.getJuminShubetsuCode())) {
-            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate())
+            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)
                     .equals(GaikokujinSeinengappiHyojihoho.西暦表示.getコード())) {
                 business.set西暦年(entity.getSeinengappiYMD().seireki()
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).getYear());
@@ -701,7 +709,7 @@ public class HihokenshashoChohyoFinder {
                 business.set大正(星アイコン);
                 business.set昭和(星アイコン);
             }
-            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate())
+            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)
                     .equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())
                     && FALSE.equals(entity.getSeinengappiFushoKubun())) {
                 business.set年号(entity.getSeinengappiYMD().wareki().eraType(EraType.KANJI)
@@ -715,7 +723,7 @@ public class HihokenshashoChohyoFinder {
                 business.set明治(星アイコン);
                 business.set大正(星アイコン);
             }
-            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate())
+            if (DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)
                     .equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())
                     && TRUE.equals(entity.getSeinengappiFushoKubun())) {
                 business.set年号(RString.EMPTY);

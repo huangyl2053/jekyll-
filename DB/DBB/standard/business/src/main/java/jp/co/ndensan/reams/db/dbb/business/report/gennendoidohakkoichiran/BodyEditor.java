@@ -73,9 +73,10 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
             source.listUpper_9 = new RString(共通情報.get更正後().get確定保険料_年額().toString());
         }
         setOtherValue(共通情報, source);
-        if ((共通情報.get編集後宛先() != null) && ((共通情報.get編集後宛先().get本人名称())
-                != (共通情報.get編集後宛先().get宛先名称()))) {
-            source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE + 共通情報.get編集後宛先().get宛先名称().toString());
+        if ((共通情報.get編集後宛先() != null) && !(共通情報.get編集後宛先().get本人名称().getName().toString()
+                .equals(共通情報.get編集後宛先().get宛先名称().getName().toString()))) {
+            source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE
+                    + 共通情報.get編集後宛先().get宛先名称().getName().toString());
         }
         if (共通情報.get更正後() != null
                 && 共通情報.get更正後().get生保開始日() != null) {
@@ -113,7 +114,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
 
     private void setListLowers(NonyuTsuchIchiranSource source, EditedHonSanteiTsuchiShoKyotsu 共通情報) {
         if (共通情報.get編集後宛先() != null) {
-            source.listLower_1 = new RString(共通情報.get編集後宛先().get本人名称().toString());
+            source.listLower_1 = new RString(共通情報.get編集後宛先().get本人名称().getName().toString());
         }
         if (共通情報.get編集後宛先() != null) {
             source.listLower_2 = 共通情報.get編集後宛先().get郵便番号();

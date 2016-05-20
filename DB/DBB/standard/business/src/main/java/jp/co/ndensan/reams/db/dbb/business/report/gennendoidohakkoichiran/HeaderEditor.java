@@ -70,7 +70,7 @@ public class HeaderEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIch
 
     private void set出力帳票entities(NonyuTsuchIchiranSource source) {
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBB.DBB200016.getReportId(), Long.valueOf(出力順ID.toString()));
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200016.getReportId(), Long.valueOf(出力順ID.toString()));
         int i = 0;
         RString 並び順の１件目 = RString.EMPTY;
         RString 並び順の２件目 = RString.EMPTY;

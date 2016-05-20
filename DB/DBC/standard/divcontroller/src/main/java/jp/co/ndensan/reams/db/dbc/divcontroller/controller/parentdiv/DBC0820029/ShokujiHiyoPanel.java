@@ -62,26 +62,6 @@ public class ShokujiHiyoPanel {
      * @return ResponseData<ShokujiHiyoPanelDiv>
      */
     public ResponseData<ShokujiHiyoPanelDiv> onLoad(ShokujiHiyoPanelDiv div) {
-
-        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
-                new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
-                new RString("0000000004"),
-                new JigyoshaNo("0000000003"),
-                new RString("0004"),
-                new RString("0004"),
-                Decimal.TEN);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-
-        ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
-                new HihokenshaNo("000000004"),
-                new FlexibleYearMonth(new RString("200501")),
-                RDate.getNowDate(),
-                new RString("0000000004"),
-                new JigyoshaNo("0000000003"),
-                new RString("0004"),
-                new RString("0001"));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
         ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
@@ -95,15 +75,11 @@ public class ShokujiHiyoPanel {
         ViewStateHolder.put(ViewStateKeys.様式番号, 様式番号);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-
         ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
-
         SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
-
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {

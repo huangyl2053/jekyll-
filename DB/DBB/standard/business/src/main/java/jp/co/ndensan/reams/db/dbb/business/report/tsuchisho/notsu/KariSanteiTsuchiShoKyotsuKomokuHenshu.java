@@ -647,17 +647,17 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
 
         OrdinaryIncomeInformation 収入情報1 = new OrdinaryIncomeInformation();
         収入情報1.set期月(new TokuchoKiUtil().get期月リスト().get期の最初月(1));
-        収入情報1.set収入額(shunyuJoho.get特徴収入額01());
+        収入情報1.set収入額(shunyuJoho == null ? Decimal.ZERO : shunyuJoho.get特徴収入額01());
         収入情報リスト.add(収入情報1);
 
         OrdinaryIncomeInformation 収入情報2 = new OrdinaryIncomeInformation();
         収入情報2.set期月(new TokuchoKiUtil().get期月リスト().get期の最初月(期_2));
-        収入情報2.set収入額(shunyuJoho.get特徴収入額02());
+        収入情報2.set収入額(shunyuJoho == null ? Decimal.ZERO : shunyuJoho.get特徴収入額02());
         収入情報リスト.add(収入情報2);
 
         OrdinaryIncomeInformation 収入情報3 = new OrdinaryIncomeInformation();
         収入情報3.set期月(new TokuchoKiUtil().get期月リスト().get期の最初月(期_3));
-        収入情報3.set収入額(shunyuJoho.get特徴収入額03());
+        収入情報3.set収入額(shunyuJoho == null ? Decimal.ZERO : shunyuJoho.get特徴収入額03());
         収入情報リスト.add(収入情報3);
 
         return 収入情報リスト;

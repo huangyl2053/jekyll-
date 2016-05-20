@@ -187,9 +187,9 @@ public class FutangendogakuNinteiShinseiHandler {
         init申請理由DDL();
         init負担段階DDL();
         init居室種別DDL();
-        set申請情報エリア表示制御();
         clear申請情報エリア();
         onChange_radKetteiKubun();
+        set申請情報エリア表示制御();
         div.getDdlShokuhi().setDataSource(new ArrayList<KeyValueDataSource>());
         div.getDdlUnitGataKoshitsu().setDataSource(new ArrayList<KeyValueDataSource>());
         div.getDdlUnitGataJunKoshitsu().setDataSource(new ArrayList<KeyValueDataSource>());
@@ -449,7 +449,7 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHaigushaShimeiKana().setDomain(futanGendogakuNintei.get配偶者氏名カナ());
             div.getTxtHaigushaShimei().setDomain(futanGendogakuNintei.get配偶者氏名());
 
-            if (futanGendogakuNintei.get配偶者生年月日() != null) {
+            if (futanGendogakuNintei.get配偶者生年月日() != null && futanGendogakuNintei.get配偶者生年月日().isValid()) {
                 div.getTxtHaigushaUmareYMD().setValue(new RDate(futanGendogakuNintei.get配偶者生年月日().toString()));
             }
             div.getTxtHaigushaRenrakusaki().setDomain(
