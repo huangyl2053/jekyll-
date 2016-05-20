@@ -80,8 +80,8 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
             source.listUpper_9 = new RString(共通情報.get更正後().get確定保険料_年額().toString());
         }
         setOtherValue(共通情報, source);
-        if ((共通情報.get編集後宛先() != null) && ((共通情報.get編集後宛先().get本人名称())
-                != (共通情報.get編集後宛先().get宛先名称()))) {
+        if ((共通情報.get編集後宛先() != null) && !(共通情報.get編集後宛先().get本人名称().getName().toString()
+                .equals(共通情報.get編集後宛先().get宛先名称().getName().toString()))) {
             source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE
                     + 共通情報.get編集後宛先().get宛先名称().getName().toString());
         }
