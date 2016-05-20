@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigofukushi.KyotakuKaig
 import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigojutakukaishuhijizenshinseisho.KyotakuKaigoJutakuKaishuhiJizenShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyufuhikariireshinseisho.KyufuhiKariireShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyufuhikashitsukekinshokankigen.KyufuhiKashitsukekinShokankigenEnchoShinseisho;
-import jp.co.ndensan.reams.db.dba.service.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.shiharaihohohenkoshuryoshinseisho.ShiharaiHohoHenkoShuryoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.shikakushutokuidososhitsu.ShikakuShutokuIdoSoshitsuTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.shoukanbaraijuryoininbaraishinseishochohyo.ShoukanbaraiJuryoIninbaraiShinseishoChohyo;
@@ -35,6 +34,7 @@ import jp.co.ndensan.reams.db.dbc.service.report.daisanshakoiniyoruhigaitodokech
 import jp.co.ndensan.reams.db.dbc.service.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuJuryoIninShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
+import jp.co.ndensan.reams.db.dbd.service.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
 import jp.co.ndensan.reams.db.dbu.definition.core.kakujyusinseisyohakkou.HikitugiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.KakushuShinseishoHakkoDiv;
@@ -153,7 +153,8 @@ public class KakushuShinseishoHakkoHandler {
                     sourceData = todoke.createTokuteifutanGendogakuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.社会福祉法人等利用者負担軽減対象確認申請書.get名称().equals(row.getShinseisho())) {
-                    ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho todoke = new ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho();
+                    ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho todoke = ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho
+                            .createInstance();
                     sourceData = todoke.createShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoChohyo(被保険者番号, 識別コード);
                 }
                 if (ShinseishoChohyoShurui.特別地域加算減免_訪問介護等利用者負担減額対象確認申請書.get名称().equals(row.getShinseisho())) {
