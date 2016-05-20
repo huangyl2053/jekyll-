@@ -280,7 +280,7 @@
             ,DbT7130KaigoServiceShurui."serviceShuruiMeisho"  AS serviceName
             ,償還払決定一覧."shokujiTeikyohiSeikyugaku"      AS kounyuKingaku
             ,償還払決定一覧."shokujiTeikyohiSeikyugaku"      AS shiharaiKingaku
-            ,'5'             AS tableKbn
+            ,'4'             AS tableKbn
         </if>
         ,償還払決定一覧."sagakuKingaku"
         ,'0'             AS dekidakaKbn
