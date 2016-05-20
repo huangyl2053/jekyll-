@@ -34,12 +34,12 @@ public class HeaderDiv extends Panel {
     private HosokuJohoDiv HosokuJoho;
     @JsonProperty("Dialogs")
     private DialogsDiv Dialogs;
-    @JsonProperty("ccdKaigoShikakuKihon")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
-    @JsonProperty("ccdShisetsuNyushoInfo")
-    private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
+    @JsonProperty("ccdShisetsuNyushoInfo")
+    private ShisetSunyushoInfoDiv ccdShisetsuNyushoInfo;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,12 +102,12 @@ public class HeaderDiv extends Panel {
     }
 
     /*
-     * getccdKaigoShikakuKihon
-     * @return ccdKaigoShikakuKihon
+     * getccdAtenaInfo
+     * @return ccdAtenaInfo
      */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return ccdKaigoShikakuKihon;
+    @JsonProperty("ccdAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return ccdAtenaInfo;
     }
 
     /*
@@ -120,12 +120,12 @@ public class HeaderDiv extends Panel {
     }
 
     /*
-     * getccdAtenaInfo
-     * @return ccdAtenaInfo
+     * getccdKaigoShikakuKihon
+     * @return ccdKaigoShikakuKihon
      */
-    @JsonProperty("ccdAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return ccdAtenaInfo;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return ccdKaigoShikakuKihon;
     }
 
     /*

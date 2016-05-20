@@ -319,8 +319,8 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return this.getHeader().getCcdKaigoShikakuKihon();
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return this.getHeader().getCcdAtenaInfo();
     }
 
     @JsonIgnore
@@ -329,8 +329,8 @@ public class FutangendogakuShinseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return this.getHeader().getCcdAtenaInfo();
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getHeader().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore

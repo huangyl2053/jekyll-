@@ -45,6 +45,7 @@ public class FutangendogakuShinsei {
     private static final RString 承認メニューID = new RString("DBDMN22001");
     private final RString 文字列_申請情報を表示する = new RString("申請情報を表示する");
     private final RString 文字列_承認情報を表示する = new RString("承認情報を表示する");
+    private final RString 承認タイトル = new RString("負担限度額認定申請承認（個別）");
 
     /**
      * 画面初期化
@@ -57,7 +58,11 @@ public class FutangendogakuShinsei {
             return ResponseData.of(div).addMessage(DbdInformationMessages.受給共通_被保データなし.getMessage()).respond();
         }
         div.getShinseiDetail().setDisabled(true);
-        return ResponseData.of(div).respond();
+        if (申請メニューID.equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).respond();
+        } else {
+            return ResponseData.of(div).rootTitle(承認タイトル).respond();
+        }
     }
 
     /**
