@@ -211,9 +211,10 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnCancel(ShikyuShinseiDetailDiv div) {
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (MODEL_DEL.equals(処理モード)) {
-            ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号());
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月,
                     div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth().toDateString());
             ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, div.getPanelHead().getTxtSeiribango().getValue());
@@ -240,7 +241,7 @@ public class ShikyuShinseiDetail {
                 return ResponseData.of(div).respond();
             }
         }
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getPanelUp().getCcdKaigoShikakuKihon().get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月,
                 div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, div.getPanelHead().getTxtSeiribango().getValue());
@@ -296,9 +297,10 @@ public class ShikyuShinseiDetail {
     }
 
     private void putViewState(ShikyuShinseiDetailDiv div) {
+        TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikyuShinseiDetailParameter parameter = getHandler(div).setParameter();
         ViewStateHolder.put(ViewStateKeys.処理モード, parameter.get処理モード());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, parameter.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, 引継ぎデータ.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, parameter.get申請日());
