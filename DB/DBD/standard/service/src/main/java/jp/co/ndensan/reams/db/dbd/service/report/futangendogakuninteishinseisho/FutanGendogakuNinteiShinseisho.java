@@ -77,10 +77,12 @@ public class FutanGendogakuNinteiShinseisho {
      * @return 介護保険負担限度額認定申請書作成_帳票
      */
     public SourceDataCollection createFutanGendogakuNinteiShinseishoChohyo(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             createFutanGendogakuNinteiShinseishoChohyo(識別コード, 被保険者番号, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
+        return collection;
     }
 
     /**
