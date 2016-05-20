@@ -98,10 +98,12 @@ public class KarisanteiHenkoTsuchishoPrintService {
     }
 
     private SourceDataCollection print仮算定額変更B5横(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print仮算定額変更B5横(仮算定納入通知書情報, 文書番号, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
+        return collection;
     }
 
     private void print仮算定額変更B5横(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号, ReportManager reportManager) {
@@ -122,10 +124,12 @@ public class KarisanteiHenkoTsuchishoPrintService {
     }
 
     private SourceDataCollection print仮算定額変更A4縦(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print仮算定額変更A4縦(仮算定納入通知書情報, 文書番号, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
+        return collection;
     }
 
     private void print仮算定額変更A4縦(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号, ReportManager reportManager) {
@@ -146,10 +150,12 @@ public class KarisanteiHenkoTsuchishoPrintService {
     }
 
     private SourceDataCollection print特別徴収平準化B5横(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print特別徴収平準化B5横(仮算定納入通知書情報, 文書番号, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
+        return collection;
     }
 
     private void print特別徴収平準化B5横(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号, ReportManager reportManager) {
@@ -170,10 +176,12 @@ public class KarisanteiHenkoTsuchishoPrintService {
     }
 
     private SourceDataCollection print特別徴収平準化A4縦(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号) {
+        SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print特別徴収平準化A4縦(仮算定納入通知書情報, 文書番号, reportManager);
-            return reportManager.publish();
+            collection = reportManager.publish();
         }
+        return collection;
     }
 
     private void print特別徴収平準化A4縦(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, RString 文書番号, ReportManager reportManager) {
