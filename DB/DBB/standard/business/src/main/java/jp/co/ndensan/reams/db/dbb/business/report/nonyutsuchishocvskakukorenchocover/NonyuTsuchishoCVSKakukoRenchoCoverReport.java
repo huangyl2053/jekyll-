@@ -56,6 +56,9 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverReport extends Report<NonyuTsuchi
                 break;
             }
         }
+        if (作成フラグ) {
+            作成フラグ = false;
+        }
 //        if (作成フラグ) {
 //            INonyuTsuchishoCVSKakukoRenchoCoverEditor renchoCoverEditor = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item);
 //            INonyuTsuchishoCVSKakukoRenchoCoverBuilder builder = new NonyuTsuchishoCVSKakukoRenchoCoverBuilder(renchoCoverEditor);
