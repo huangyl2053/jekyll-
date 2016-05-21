@@ -55,6 +55,10 @@ public class NonyuTsuchishoCVSKakukoCoverReport extends Report<NonyuTsuchishoCVS
                 break;
             }
         }
+
+        if (作成フラグ) {
+            作成フラグ = false;
+        }
 //        if (作成フラグ) {
 //            INonyuTsuchishoCVSKakukoCoverEditor coverEditor = new NonyuTsuchishoCVSKakukoCoverEditor(item);
 //            INonyuTsuchishoCVSKakukoCoverBuilder builder = new NonyuTsuchishoCVSKakukoCoverBuilder(coverEditor);
