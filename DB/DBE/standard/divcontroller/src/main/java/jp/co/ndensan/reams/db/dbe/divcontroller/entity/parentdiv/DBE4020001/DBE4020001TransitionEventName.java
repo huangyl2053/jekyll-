@@ -15,7 +15,8 @@ public enum DBE4020001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     介護認定審査会審査結果登録_OCR_へ遷移する("介護認定審査会審査結果登録_OCR_へ遷移する"),
-    審査会対象者個別結果登録へ遷移する("審査会対象者個別結果登録へ遷移する");
+    審査会対象者個別結果登録へ遷移する("審査会対象者個別結果登録へ遷移する"),
+    処理完了("処理完了");
 
     private final RString name;
 
