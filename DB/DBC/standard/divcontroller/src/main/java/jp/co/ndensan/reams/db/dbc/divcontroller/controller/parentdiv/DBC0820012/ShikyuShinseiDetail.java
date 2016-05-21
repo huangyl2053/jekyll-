@@ -60,7 +60,9 @@ public class ShikyuShinseiDetail {
      */
     public ResponseData<ShikyuShinseiDetailDiv> onLoad(ShikyuShinseiDetailDiv div) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-
+        if (メッセージ_登録.equals(処理モード) || MODEL_ADD.equals(処理モード)) {
+            処理モード = MODEL_ADD;
+        }
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
@@ -96,6 +98,9 @@ public class ShikyuShinseiDetail {
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnUpdate(ShikyuShinseiDetailDiv div) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (メッセージ_登録.equals(処理モード) || MODEL_ADD.equals(処理モード)) {
+            処理モード = MODEL_ADD;
+        }
         try {
             if (MODEL_ADD.equals(処理モード)) {
                 boolean flag = getHandler(div).is変更あり_ADD();
