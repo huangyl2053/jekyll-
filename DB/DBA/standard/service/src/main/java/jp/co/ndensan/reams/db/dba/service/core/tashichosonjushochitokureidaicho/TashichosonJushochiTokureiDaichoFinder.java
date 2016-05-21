@@ -261,10 +261,16 @@ public class TashichosonJushochiTokureiDaichoFinder {
                     new事業者名称 = 事業者名称.getJigyoshaMeisho();
                 }
             }
-            RString 適用事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0008"),
-                    new Code(otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード()));
-            RString 解除事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0011"),
-                    new Code(otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード()));
+            RString 適用事由名称 = RString.EMPTY;
+            RString 解除事由名称 = RString.EMPTY;
+            if (otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード() != null) {
+                適用事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0008"),
+                        new Code(otherAddressInfFromDBEntity.get他市町村住所地特例適用事由コード()));
+            }
+            if (otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード() != null) {
+                解除事由名称 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0011"),
+                        new Code(otherAddressInfFromDBEntity.get他市町村住所地特例解除事由コード()));
+            }
             OtherAddressInfEntity otherAddressInfEntity = new OtherAddressInfEntity();
             set他市町村住所地特例者情報(otherAddressInfEntity, otherAddressInfFromDBEntity, no, 適用事由名称, 解除事由名称, new事業者名称);
             otherAddressInfEntityLst.add(otherAddressInfEntity);
