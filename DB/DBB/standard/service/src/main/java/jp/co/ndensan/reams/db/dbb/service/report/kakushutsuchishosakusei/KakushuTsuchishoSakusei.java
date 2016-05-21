@@ -1524,11 +1524,11 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
      */
     public KakushuTsuchishoCommonInfo search通知書共通情報(KakushuTsuchishoParameter parameter) {
 
-        if (is賦課の情報(parameter)) {
-            return null;
-        }
         FukaJoho 賦課の情報_更正後 = parameter.get賦課の情報_更正後();
         FukaJoho 賦課の情報_更正前 = parameter.get賦課の情報_更正前();
+        if (賦課の情報_更正後 == null) {
+            return null;
+        }
         GennenKanen 年度区分 = GennenKanen.過年度;
         if (賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())) {
             年度区分 = GennenKanen.現年度;
@@ -1561,12 +1561,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
                         賦課の情報_更正後.get履歴番号(), 賦課の情報_更正後.get調定日時(),
                         賦課の情報_更正後.get調定日時().getDate().toDateString(), 処理日, kozaSearchKey, list, 科目コード);
         KakushuTsuchishoEntity 更正後entity = mapper.get更正前後賦課の情報(更正後);
-        KakushuTsuchishoEntityParameter 更正前
-                = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正前.get調定年度(),
-                        賦課の情報_更正前.get賦課年度(), 賦課の情報_更正前.get通知書番号(),
-                        賦課の情報_更正前.get履歴番号(), 賦課の情報_更正前.get調定日時(),
-                        賦課の情報_更正前.get調定日時().getDate().toDateString(), 処理日, kozaSearchKey, list, 科目コード);
-        KakushuTsuchishoEntity 更正前entity = mapper.get更正前後賦課の情報(更正前);
+        KakushuTsuchishoEntity 更正前entity = get賦課の情報更正前(賦課の情報_更正前, 処理日, kozaSearchKey, list, 科目コード);
         FukaAtena 賦課の情報更正後 = get賦課の情報_宛名(更正後entity);
         FukaAtena 賦課の情報更正前 = get賦課の情報_宛名(更正前entity);
 
@@ -1659,10 +1654,19 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         return 通知書共通情報;
     }
 
-    private boolean is賦課の情報(KakushuTsuchishoParameter parameter) {
-        FukaJoho 賦課の情報_更正後 = parameter.get賦課の情報_更正後();
-        FukaJoho 賦課の情報_更正前 = parameter.get賦課の情報_更正前();
-        return 賦課の情報_更正後 == null || 賦課の情報_更正前 == null;
+    private KakushuTsuchishoEntity get賦課の情報更正前(FukaJoho 賦課の情報_更正前, RString 処理日, IKozaSearchKey kozaSearchKey,
+            List<KamokuCode> list, RString 科目コード) {
+
+        if (賦課の情報_更正前 == null) {
+            return null;
+        }
+        IKakushuTsuchishoSakuseiMapper mapper = mapperProvider.create(IKakushuTsuchishoSakuseiMapper.class);
+        KakushuTsuchishoEntityParameter 更正前
+                = KakushuTsuchishoEntityParameter.createSelectByKeyParam(賦課の情報_更正前.get調定年度(),
+                        賦課の情報_更正前.get賦課年度(), 賦課の情報_更正前.get通知書番号(),
+                        賦課の情報_更正前.get履歴番号(), 賦課の情報_更正前.get調定日時(),
+                        賦課の情報_更正前.get調定日時().getDate().toDateString(), 処理日, kozaSearchKey, list, 科目コード);
+        return mapper.get更正前後賦課の情報(更正前);
     }
 
     private void set徴収方法情報(KakushuTsuchishoCommonInfo 通知書共通情報, KakushuTsuchishoEntity 更正前entity,
