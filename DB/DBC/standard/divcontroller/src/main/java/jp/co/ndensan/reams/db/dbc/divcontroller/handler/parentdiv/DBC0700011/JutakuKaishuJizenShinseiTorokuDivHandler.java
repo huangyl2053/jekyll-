@@ -352,7 +352,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
             model.setサービス提供年月(flexibleYearMonth);
             model.set整理番号(seiriNo);
             model.set様式番号(yoshikiNo);
-            model.set状態((照会モード.equals(画面モード) || 削除モード.equals(画面モード)) ? 状態_参照 : 状態_登録);
+            model.set状態((照会モード.equals(画面モード) || 削除モード.equals(画面モード) || 取消モード.equals(画面モード))
+                    ? 状態_参照 : 状態_登録);
             model.set識別コード(識別コード);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho()
                     .getCcdJutakuJizenShinseiDetail().initialize(model);
