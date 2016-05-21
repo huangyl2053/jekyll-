@@ -5,10 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
 
@@ -37,28 +34,4 @@ public interface ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper {
      */
     TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis(
             TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter params);
-
-    /**
-     * 介護除外住所地特例対象施設情報の取得処理です。
-     *
-     * @param prm ShisetsuJyohoParameter
-     * @return ShisetsuJyohoRelateEntity
-     */
-    List<ShisetsuJyohoRelateEntity> selct他市町村住所地特例(ShisetsuJyohoParameter prm);
-
-    /**
-     * 事業者名称の取得処理です。
-     *
-     * @param prm ShisetsuJyohoParameter
-     * @return ShisetsuJyohoRelateEntity
-     */
-    ShisetsuJyohoRelateEntity get事業者名称_介護保険施設(ShisetsuJyohoParameter prm);
-
-    /**
-     * 事業者名称の取得処理です。
-     *
-     * @param prm ShisetsuJyohoParameter
-     * @return ShisetsuJyohoRelateEntity
-     */
-    ShisetsuJyohoRelateEntity get事業者名称_住所地特例対象施設(ShisetsuJyohoParameter prm);
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.ShisetsuJyohoParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashihenkotsuchisho.IShisetsuJyohoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
@@ -27,13 +27,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 施設情報の取得処理です。
+ * 介護除外住所地特例対象施設情報の取得処理です。
  *
- * @reamsid_L DBA-0200-020 linghuhang
+ * @reamsid_L DBA-0380-040 duanzhanli
  */
 public class ShisetsuJyohoFinder {
 
-    private static final RString 識別コード = new RString("識別コード");
+    private static final RString SHIKIBETSUCODE = new RString("識別コード");
     private final MapperProvider mapperProvider;
 
     /**
@@ -73,15 +73,15 @@ public class ShisetsuJyohoFinder {
      */
     @Transaction
     public Map<Integer, ShisetsuJyohoRelateEntity> getTaJushochiTokureiTekiyoJyoho(ShikibetsuCode 識別コード, FlexibleDate 異動日, RString 枝番) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
-        ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper mapper
-                = mapperProvider.create(ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper.class);
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(SHIKIBETSUCODE.toString()));
+        IShisetsuJyohoMapper mapper = mapperProvider.create(IShisetsuJyohoMapper.class);
         ShisetsuJyohoParameter parameter
                 = ShisetsuJyohoParameter.createParam_TaJushochi(
                         識別コード,
                         異動日,
                         枝番,
                         JigyoshaNo.EMPTY,
+                        JigyosyaType.住所地特例対象施設.getコード(),
                         DaichoType.他市町村住所地特例者.getコード());
         List<ShisetsuJyohoRelateEntity> 他市町村住所地特例情報リスト = mapper.selct他市町村住所地特例(parameter);
         List<ShisetsuJyohoRelateEntity> 適用情報リスト = new ArrayList<>();
@@ -100,7 +100,12 @@ public class ShisetsuJyohoFinder {
             if (介護保険施設.equals(地特例情報.get入所施設種類())) {
                 ShisetsuJyohoParameter iParameter
                         = ShisetsuJyohoParameter.createParam_TaJushochi(
-                                ShikibetsuCode.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, 地特例情報.get入所施設コード(), RString.EMPTY);
+                                ShikibetsuCode.EMPTY,
+                                FlexibleDate.EMPTY,
+                                RString.EMPTY,
+                                地特例情報.get入所施設コード(),
+                                RString.EMPTY,
+                                RString.EMPTY);
                 ShisetsuJyohoRelateEntity 事業者名称Entity = mapper.get事業者名称_介護保険施設(iParameter);
                 if (事業者名称Entity != null) {
                     地特例情報.set事業者名称(事業者名称Entity.get事業者名称());
@@ -113,8 +118,12 @@ public class ShisetsuJyohoFinder {
             }
             if (住所地特例対象施設.equals(地特例情報.get入所施設種類())) {
                 ShisetsuJyohoParameter iParameter = ShisetsuJyohoParameter.createParam_TaJushochi(
-                        ShikibetsuCode.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, 地特例情報.get入所施設コード(),
-                        JigyosyaType.住所地特例対象施設.getコード());
+                        ShikibetsuCode.EMPTY,
+                        FlexibleDate.EMPTY,
+                        RString.EMPTY,
+                        地特例情報.get入所施設コード(),
+                        JigyosyaType.住所地特例対象施設.getコード(),
+                        RString.EMPTY);
                 ShisetsuJyohoRelateEntity 事業者名称Entity = mapper.get事業者名称_住所地特例対象施設(iParameter);
                 if (事業者名称Entity != null) {
                     地特例情報.set事業者名称(事業者名称Entity.get事業者名称());
