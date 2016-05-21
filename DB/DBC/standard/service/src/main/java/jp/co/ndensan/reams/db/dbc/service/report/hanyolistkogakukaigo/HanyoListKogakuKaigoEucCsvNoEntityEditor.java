@@ -605,12 +605,8 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             csvEntity.set支払開始日(get日付項目(支払開始日, parameter));
             FlexibleDate 支払終了日 = entity.get支払期間終了年月日();
             csvEntity.set支払終了日(get日付項目(支払終了日, parameter));
-            csvEntity.set支払開始曜日(支払開始日 != null
-                                ? new RString(支払開始日.getDayOfWeek().toString())
-                                : RString.EMPTY);
-            csvEntity.set支払終了曜日(支払終了日 != null
-                                ? new RString(支払終了日.getDayOfWeek().toString())
-                                : RString.EMPTY);
+            csvEntity.set支払開始曜日(convertDayOfWeek(支払開始日));
+            csvEntity.set支払終了曜日(convertDayOfWeek(支払終了日));
             csvEntity.set支払開始時間(entity.get支払窓口開始時間());
             csvEntity.set支払終了時間(entity.get支払窓口終了時間());
             csvEntity.setサービス提供年月(get年月(entity.getサービス提供年月(), parameter));
@@ -650,6 +646,13 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
                                   : RString.EMPTY);
             }
         }
+    }
+
+    private RString convertDayOfWeek(FlexibleDate targetDate) {
+        return targetDate != null
+                && targetDate.isValid()
+               ? new RString(targetDate.getDayOfWeek().toString())
+               : RString.EMPTY;
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity,
