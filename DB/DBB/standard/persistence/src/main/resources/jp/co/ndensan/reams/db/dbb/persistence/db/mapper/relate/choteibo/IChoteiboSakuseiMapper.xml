@@ -53,8 +53,6 @@
         WHERE
         T."choteiNendo" = #{choteiNendo}
         AND T."fukaNendo" = #{fukaNendo}
-        AND #{chushutsuStYMD} <![CDATA[<=]]> T."choteiNichiji"
-        AND T."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
         GROUP BY
         T."choteiNendo",
         T."fukaNendo",
@@ -68,8 +66,6 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
-        AND #{chushutsuStYMD} <![CDATA[<=]]> A."choteiNichiji"
-        AND A."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
     </select>
 
     <!--期別情報一時テーブルを作成します -->

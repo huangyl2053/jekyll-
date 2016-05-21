@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter;
@@ -82,7 +82,7 @@ public class GappeiCityJohoBFinder {
      */
     public RString getGappeijohokubun() {
         RDate 適用基準日 = RDate.getNowDate();
-        return DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, 適用基準日, SubGyomuCode.DBU介護統計報告);
+        return DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, 適用基準日, SubGyomuCode.DBU介護統計報告);
     }
 
     /**

@@ -43,7 +43,7 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
-        <!-- ?½e?½X?½g -->
+        <!-- ?ï¿½e?ï¿½X?ï¿½g -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>
@@ -77,6 +77,10 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>

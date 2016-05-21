@@ -11,6 +11,10 @@ var DBZ;
             Events.onClick_btnZenkaiFukusha = function () {
                 return "onClick_btnZenkaiFukusha";
             };
+
+            Events.onChangeChkKannaiKangai = function () {
+                return "onChangeChkKannaiKangai";
+            };
             return Events;
         })();
         NinteiShinseiTodokedesha.Events = Events;

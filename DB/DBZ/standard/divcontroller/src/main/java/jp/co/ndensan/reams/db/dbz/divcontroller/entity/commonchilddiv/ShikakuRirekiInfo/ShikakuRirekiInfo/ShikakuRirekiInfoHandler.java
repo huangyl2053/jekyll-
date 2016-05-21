@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuTokusoJouho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
@@ -52,7 +52,7 @@ public class ShikakuRirekiInfoHandler {
         ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if ((DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ.get導入形態コード().getKey())
                 || DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ.get導入形態コード().getKey()))
-                && (合併無し.equals(DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
+                && (合併無し.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(12).setVisible(false);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(13).setVisible(false);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(14).setVisible(false);
@@ -60,14 +60,14 @@ public class ShikakuRirekiInfoHandler {
         }
         if ((DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ.get導入形態コード().getKey())
                 || DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ.get導入形態コード().getKey()))
-                && (合併有り.equals(DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
+                && (合併有り.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(12).setVisible(false);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(13).setVisible(false);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(14).setVisible(true);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(15).setVisible(false);
         }
         if ((DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ.get導入形態コード().getKey()))
-                && (合併有り.equals(DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
+                && (合併有り.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
 
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(12).setVisible(true);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(13).setVisible(true);
@@ -75,7 +75,7 @@ public class ShikakuRirekiInfoHandler {
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(15).setVisible(true);
         }
         if ((DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ.get導入形態コード().getKey()))
-                && (合併無し.equals(DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
+                && (合併無し.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告)))) {
 
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(12).setVisible(true);
             div.getDgShikakuRirekiInfo().getGridSetting().getColumns().get(13).setVisible(true);

@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho;
 
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -46,16 +43,16 @@ public class TatokuKanrenChohyoHenkoTsuchishoEntity {
     private RString 性別;
     private RString 変更年月日;
 
-    private AtenaMeisho 変更前施設名称;
-    private TelNo 変更前施設電話番号;
-    private TelNo 変更前施設FAX番号;
-    private YubinNo 変更前施設郵便番号;
+    private RString 変更前施設名称;
+    private RString 変更前施設電話番号;
+    private RString 変更前施設FAX番号;
+    private RString 変更前施設郵便番号;
     private RString 変更前施設住所;
 
-    private AtenaMeisho 変更後施設名称;
-    private TelNo 変更後施設電話番号;
-    private TelNo 変更後施設FAX番号;
-    private YubinNo 変更後施設郵便番号;
+    private RString 変更後施設名称;
+    private RString 変更後施設電話番号;
+    private RString 変更後施設FAX番号;
+    private RString 変更後施設郵便番号;
     private RString 変更後施設住所;
 
     private RString 電子公印;

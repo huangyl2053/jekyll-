@@ -13,7 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -168,7 +168,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
 
     private void setヘッダエリア() {
         RDate 適用基準日 = RDate.getNowDate();
-        div.getDdlChoteiNendo().setSelectedValue((DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課)));
+        div.getDdlChoteiNendo().setSelectedValue((DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課)));
         div.getTxtChoteiKijunYMD().setValue(RDate.getNowDate());
     }
 
@@ -183,10 +183,10 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
     private void set調定年度() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         RDate 適用基準日 = RDate.getNowDate();
-        RString 調定年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 当初年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_当初年度, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 遡及年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_遡及年度, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 所得年度 = DbBusinessConifg.get(ConfigNameDBB.日付関連_所得年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 遡及年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_遡及年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 所得年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, 適用基準日, SubGyomuCode.DBB介護賦課);
         KeyValueDataSource 調定年度Key = new KeyValueDataSource();
         調定年度Key.setKey(new RString("調定年度"));
         調定年度Key.setValue(調定年度);

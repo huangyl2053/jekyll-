@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.setaishotokuichiran;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv.DisplayMode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.dgSetaiShotoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.SetaiShotokuIchiranHandler;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -41,11 +42,13 @@ public class SetaiShotokuIchiran {
      * @return ResponseData<SetaiShotokuIchiranDiv>
      */
     public ResponseData<SetaiShotokuIchiranDiv> onClick_Saihyoji(SetaiShotokuIchiranDiv div) {
-        List<SetaiinShotoku> setaiinShotokuList = getHandler(div).get世帯員所得Data(new ShikibetsuCode(div.getTxtShikibetsuCode()), YMDHMS.now());
-        getHandler(div).set住民税減免前_後表示制御情報TO世帯一覧();
-        getHandler(div).set激変緩和表示制御情報TO世帯一覧();
-        getHandler(div).load世帯員所得一覧(setaiinShotokuList);
-        getHandler(div).set世帯一覧行選択制御();
+        SetaiShotokuIchiranHandler handler = getHandler(div);
+        List<SetaiinShotoku> setaiinShotokuList = handler.get世帯員所得Data(new ShikibetsuCode(div.getTxtShikibetsuCode()), YMDHMS.now());
+        handler.set住民税減免前_後表示制御情報TO世帯一覧();
+        handler.set激変緩和表示制御情報TO世帯一覧();
+        handler.load世帯員所得一覧(setaiinShotokuList);
+        handler.set世帯一覧行選択制御();
+        handler.accessLog(setaiinShotokuList);
         return ResponseData.of(div).respond();
     }
 
@@ -56,11 +59,13 @@ public class SetaiShotokuIchiran {
      * @return ResponseData<SetaiShotokuIchiranDiv>
      */
     public ResponseData<SetaiShotokuIchiranDiv> onClick_chkSetaiIchiranAll(SetaiShotokuIchiranDiv div) {
-        List<SetaiinShotoku> setaiinShotokuList = getHandler(div).set最新世帯員所得情報(new ShikibetsuCode(div.getTxtShikibetsuCode()));
-        getHandler(div).set住民税減免前_後表示制御情報TO世帯一覧();
-        getHandler(div).set激変緩和表示制御情報TO世帯一覧();
-        getHandler(div).load世帯員所得一覧(setaiinShotokuList);
-        getHandler(div).set世帯一覧行選択制御();
+        SetaiShotokuIchiranHandler handler = getHandler(div);
+        List<SetaiinShotoku> setaiinShotokuList = handler.set最新世帯員所得情報(new ShikibetsuCode(div.getTxtShikibetsuCode()));
+        handler.set住民税減免前_後表示制御情報TO世帯一覧();
+        handler.set激変緩和表示制御情報TO世帯一覧();
+        handler.load世帯員所得一覧(setaiinShotokuList);
+        handler.set世帯一覧行選択制御();
+        handler.accessLog(setaiinShotokuList);
         return ResponseData.of(div).respond();
     }
 
@@ -71,13 +76,20 @@ public class SetaiShotokuIchiran {
      * @return ResponseData<SetaiShotokuIchiranDiv>
      */
     public ResponseData<SetaiShotokuIchiranDiv> onClick_SetaiinSentaku(SetaiShotokuIchiranDiv div) {
-        DisplayMode mode = div.getMode_DisplayMode();
-        if (mode.equals(DisplayMode.ShotokuShokai)) {
-            div.setMode_DisplayMode(DisplayMode.ShotokuRirekiShokai);
-            List<KaigoShotokuAlive> 介護所得情報 = getHandler(div).get所得情報履歴(new ShikibetsuCode(div.getTxtShikibetsuCode()));
-            getHandler(div).set激変緩和表示制御情報TO所得履歴一覧();
-            getHandler(div).load所得情報履歴(介護所得情報);
+        if (!div.getMode_DisplayMode().equals(DisplayMode.ShotokuShokai)) {
+            return ResponseData.of(div).respond();
         }
+
+        div.setMode_DisplayMode(DisplayMode.ShotokuRirekiShokai);
+        dgSetaiShotoku_Row clickedItem = div.getDgSetaiShotoku().getClickedItem();
+        if (clickedItem == null) {
+            return ResponseData.of(div).respond();
+        }
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(clickedItem.getHdnShikibetsuCode());
+        SetaiShotokuIchiranHandler handler = getHandler(div);
+        List<KaigoShotokuAlive> 介護所得情報 = handler.get所得情報履歴(shikibetsuCode);
+        handler.set激変緩和表示制御情報TO所得履歴一覧();
+        handler.load所得情報履歴(介護所得情報);
         return ResponseData.of(div).respond();
     }
 

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA4020011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureidaicho.OtherAddressLedgerBusiness;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.DBA4020011TransitionEventName.完了;
 import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.DBA4020011TransitionEventName.検索条件;
 import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.DBA4020011TransitionEventName.該当者一覧;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4020011.TajutokuShokaiDiv;
@@ -74,16 +73,6 @@ public class TajutokuShokai {
                     key.get識別コード(), DaichoType.他市町村住所地特例者.getコード());
         }
         return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「完了する」ボタンを押下します。
-     *
-     * @param div TajutokuShokaiDiv
-     * @return ResponseData<TajutokuShokaiDiv>
-     */
-    public ResponseData<TajutokuShokaiDiv> onClick_KanryouBtn(TajutokuShokaiDiv div) {
-        return ResponseData.of(div).forwardWithEventName(完了).respond();
     }
 
     /**

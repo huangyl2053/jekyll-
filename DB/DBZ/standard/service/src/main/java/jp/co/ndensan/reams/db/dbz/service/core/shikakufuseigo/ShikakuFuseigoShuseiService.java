@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
@@ -201,7 +201,7 @@ public class ShikakuFuseigoShuseiService {
      * @return Map<RString, DbzErrorMessages>
      */
     public Map<RString, DbzErrorMessages> validate被保台帳整合(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
-        RString 保険者構成 = DbBusinessConifg.get(ConfigNameDBU.保険者情報_保険者構成, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 保険者構成 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者構成, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (HokenshaKosei.広域市町村.getコード().equals(保険者構成)) {
             KoikiShikakuJukiValidator validator = KoikiShikakuJukiValidator.createInstance();
             return validator.validate(個人情報, 資格の情報, dbt1001manager.get資格の情報For資格不整合(

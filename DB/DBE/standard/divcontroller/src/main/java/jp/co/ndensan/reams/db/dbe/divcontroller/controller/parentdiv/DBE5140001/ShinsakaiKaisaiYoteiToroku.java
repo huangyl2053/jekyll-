@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.Shinsa
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.GogitaiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -1207,52 +1207,52 @@ public class ShinsakaiKaisaiYoteiToroku {
         for (int i = 0; i < INDEX_10; i++) {
             時間枠.add(RString.EMPTY);
         }
-        RString 時間枠1 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠1, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠1 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠1, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠1)) {
             時間枠1 = 時間枠1.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_0, 時間枠1);
         }
-        RString 時間枠2 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠2, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠2 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠2, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠2)) {
             時間枠2 = 時間枠2.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_1, 時間枠2);
         }
-        RString 時間枠3 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠3, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠3 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠3, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠3)) {
             時間枠3 = 時間枠3.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_2, 時間枠3);
         }
-        RString 時間枠4 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠4, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠4 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠4, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠4)) {
             時間枠4 = 時間枠4.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_3, 時間枠4);
         }
-        RString 時間枠5 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠5, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠5 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠5, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠5)) {
             時間枠5 = 時間枠5.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_4, 時間枠5);
         }
-        RString 時間枠6 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠6, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠6 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠6, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠6)) {
             時間枠6 = 時間枠6.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_5, 時間枠6);
         }
-        RString 時間枠7 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠7, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠7 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠7, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠7)) {
             時間枠7 = 時間枠7.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_6, 時間枠7);
         }
-        RString 時間枠8 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠8, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠8 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠8, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠8)) {
             時間枠8 = 時間枠8.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_7, 時間枠8);
         }
-        RString 時間枠9 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠9, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠9 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠9, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠9)) {
             時間枠9 = 時間枠9.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_8, 時間枠9);
         }
-        RString 時間枠10 = DbBusinessConifg.get(ConfigNameDBE.審査会スケジュール時間枠10, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 時間枠10 = DbBusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠10, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠10)) {
             時間枠10 = 時間枠10.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_9, 時間枠10);

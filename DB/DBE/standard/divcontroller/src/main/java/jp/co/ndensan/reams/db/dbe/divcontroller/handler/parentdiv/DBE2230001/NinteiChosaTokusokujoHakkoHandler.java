@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusok
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DbeBusinessConfigKey;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -117,7 +117,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
 
     private void initializtion() {
         div.getHakkoJoken().getTxtKijunDay().setValue(FlexibleDate.getNowDate());
-        RString 認定調査督促期限日数 = DbBusinessConifg.get(DbeBusinessConfigKey.認定調査督促期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 認定調査督促期限日数 = DbBusinessConfig.get(DbeBusinessConfigKey.認定調査督促期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (Decimal.canConvert(認定調査督促期限日数)) {
             div.getYokaigoNinteiChosaTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(認定調査督促期限日数.toString()));
         }

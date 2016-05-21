@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -66,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -131,7 +131,6 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private RString 導入団体コード;
     private RString 市町村名;
     private List<ChoteiboItem> targets;
-    private KitsukiList 期月リスト_特徴;
     private KitsukiList 期月リスト_普徴;
     private Kitsuki 最終法定納期;
     @BatchWriter
@@ -227,8 +226,6 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private void init期月リスト(FlexibleYear 年度) {
-        TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil(年度);
-        期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(年度);
         期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         最終法定納期 = 期月リスト_普徴.get最終法定納期();
@@ -532,12 +529,12 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                     文字列_第.concat(String.valueOf(第6期)).concat(文字列_期),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                    期月リスト_特徴.get期の月(第1期).get(0).get月().get名称().replace(UNDERLINE, RString.EMPTY),
-                    期月リスト_特徴.get期の月(第2期).get(0).get月().get名称().replace(UNDERLINE, RString.EMPTY),
-                    期月リスト_特徴.get期の月(第3期).get(0).get月().get名称().replace(UNDERLINE, RString.EMPTY),
-                    期月リスト_特徴.get期の月(第4期).get(0).get月().get名称().replace(UNDERLINE, RString.EMPTY),
-                    期月リスト_特徴.get期の月(第5期).get(0).get月().get名称().replace(UNDERLINE, RString.EMPTY),
-                    期月リスト_特徴.get期の月(第6期).get(0).get月().get名称().replace(UNDERLINE, RString.EMPTY));
+                    Tsuki._4月.get名称().replace(UNDERLINE, RString.EMPTY),
+                    Tsuki._6月.get名称().replace(UNDERLINE, RString.EMPTY),
+                    Tsuki._8月.get名称().replace(UNDERLINE, RString.EMPTY),
+                    Tsuki._10月.get名称().replace(UNDERLINE, RString.EMPTY),
+                    Tsuki._12月.get名称().replace(UNDERLINE, RString.EMPTY),
+                    Tsuki._2月.get名称().replace(UNDERLINE, RString.EMPTY));
         }
         return new ChoteiboKitsukiTokuchoItem(
                 changeDecimalToRString(年度データ.get特別徴収の調定額の合計()),
@@ -555,12 +552,12 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
                 changeDecimalToRString(年度データ.get第4期の調定額の小計()),
                 changeDecimalToRString(年度データ.get第5期の調定額の小計()),
                 changeDecimalToRString(年度データ.get第6期の調定額の小計()),
-                get月As期By期月リスト(第1期, 期月リスト_特徴),
-                get月As期By期月リスト(第2期, 期月リスト_特徴),
-                get月As期By期月リスト(第3期, 期月リスト_特徴),
-                get月As期By期月リスト(第4期, 期月リスト_特徴),
-                get月As期By期月リスト(第5期, 期月リスト_特徴),
-                get月As期By期月リスト(第6期, 期月リスト_特徴));
+                Tsuki._4月.get名称().replace(UNDERLINE, RString.EMPTY),
+                Tsuki._6月.get名称().replace(UNDERLINE, RString.EMPTY),
+                Tsuki._8月.get名称().replace(UNDERLINE, RString.EMPTY),
+                Tsuki._10月.get名称().replace(UNDERLINE, RString.EMPTY),
+                Tsuki._12月.get名称().replace(UNDERLINE, RString.EMPTY),
+                Tsuki._2月.get名称().replace(UNDERLINE, RString.EMPTY));
     }
 
     private ChoteiboKitsukiFuchoItem makeChoteiboKitsukiFuchoItem(NendoDataEntity 年度データ) {
@@ -906,7 +903,7 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         段階表記 = 段階表記.substring(0, 段階表記.indexOf(文字列_段階));
         RString 段階 = 段階表記.replace(文字列_第, RString.EMPTY);
         段階 = 段階.replace(文字列_段階, RString.EMPTY).trim();
-        return Integer.parseInt(段階.toString());
+        return Integer.parseInt(段階.toString().concat("0"));
     }
 
     private List<ChoteiboDankaiItem> makeChoteiboDankaiItemList(List<NendoDataEntity> 年度データリスト) {
@@ -1303,7 +1300,9 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     private List<GokeiDataEntity> get合計データリスト() {
         List<GokeiDataEntity> 合計リスト = new ArrayList<>();
         List<GokeiBubunEntity> 合計部分情報リスト = choteiboSakuseiMapper.selectAll合計部分情報();
+        RLogger.info("【get合計データリスト】selectAll合計部分情報:" + String.valueOf(合計部分情報リスト.size()));
         List<GokeiBubunSoukeiEntity> 合計部分総計情報リスト = choteiboSakuseiMapper.selectAll合計部分総計情報();
+        RLogger.info("【get合計データリスト】selectAll合計部分総計情報:" + String.valueOf(合計部分総計情報リスト.size()));
         GokeiDataEntity 特別徴収合計データ = new GokeiDataEntity();
         List<DankaiShokeiEntity> 特別徴収合計の段階リスト = new ArrayList<>();
         特別徴収合計データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.code());
@@ -1339,9 +1338,13 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
         param.put(KEY_FUKANENDO.toString(), fukaNendo);
         List<NendoDataEntity> 年度データリスト = new ArrayList<>();
         List<KibetsuShokeiEntity> 期別小計リスト = choteiboSakuseiMapper.select期別小計情報(param);
+        RLogger.info("【get年度データリスト】select期別小計情報:" + String.valueOf(期別小計リスト.size()));
         List<DankaiShokeiEntity> 段階小計リスト = choteiboSakuseiMapper.select段階小計情報(param);
+        RLogger.info("【get年度データリスト】select段階小計情報:" + String.valueOf(段階小計リスト.size()));
         List<KibetsuGokeiEntity> 期別合計リスト = choteiboSakuseiMapper.select期別合計情報(param);
+        RLogger.info("【get年度データリスト】select期別合計情報:" + String.valueOf(期別合計リスト.size()));
         List<DankaiGokeiEntity> 段階合計リスト = choteiboSakuseiMapper.select段階合計情報(param);
+        RLogger.info("【get年度データリスト】select段階合計情報:" + String.valueOf(段階合計リスト.size()));
         NendoDataEntity 年度特別徴収データ = new NendoDataEntity();
         年度特別徴収データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.code());
         年度特別徴収データ.set調定年度(choteiNendo);

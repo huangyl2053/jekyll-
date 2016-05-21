@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper}のマッパーIFです。
@@ -29,4 +30,13 @@ public interface IDbT2013HokenryoDankaiMapper {
      * @return List<DbT2013HokenryoDankaiEntity>
      */
     List<DbT2013HokenryoDankaiEntity> getHokenryoDankai();
+    
+    /**
+     * {@link DbT2013HokenryoDankaiEntity}を取得します。
+     * 
+     * @param fukaNendo 賦課年度
+     * @return List<DbT2013HokenryoDankaiEntity>
+     */
+    List<DbT2013HokenryoDankaiEntity> getHokenryoDankaiKubun(RString fukaNendo);
+    
 }

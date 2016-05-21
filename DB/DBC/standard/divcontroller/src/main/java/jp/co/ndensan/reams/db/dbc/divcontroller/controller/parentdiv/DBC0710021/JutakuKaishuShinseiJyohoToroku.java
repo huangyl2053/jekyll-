@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -239,7 +239,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             set完了状態(div);
             return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
         } else if (is状態CheckTow(画面モード)) {
-            RString 償還 = DbBusinessConifg.get(
+            RString 償還 = DbBusinessConfig.get(
                     ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             if (給付実績連動_受託なし.equals(償還) && !確認_汎用) {
                 QuestionMessage message = new QuestionMessage(

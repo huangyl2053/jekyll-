@@ -73,14 +73,14 @@ public class KaigoNinteiAtenaInfoHandler {
         //隠し項目の処理タイプの値により、処理タイプモードを設定です。
         if (!RString.isNullOrEmpty(div.getHdnShoriType())) {
             switch (HdnShoriTypeStatus.toValue(div.getHdnShoriType())) {
-                case NomalAddMode:
-                    break;
-                case NomalUpdateMode:
-                    div.setMode_ShoriType(ShoriType.NormalUpdateMode);
-                    break;
-                case SeihoAddMode:
-                    div.setMode_ShoriType(ShoriType.SeihoAddMode);
-                    break;
+//                case NomalAddMode:
+//                    break;
+//                case NomalUpdateMode:
+//                    div.setMode_ShoriType(ShoriType.NormalUpdateMode);
+//                    break;
+//                case SeihoAddMode:
+//                    div.setMode_ShoriType(ShoriType.SeihoAddMode);
+//                    break;
                 case SeihoUpdateMode:
                     div.setMode_ShoriType(ShoriType.SeihoUpdateMode);
                     break;

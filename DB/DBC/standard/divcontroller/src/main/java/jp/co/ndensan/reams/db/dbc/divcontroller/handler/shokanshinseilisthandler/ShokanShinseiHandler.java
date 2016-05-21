@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShin
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinseiIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -112,7 +113,7 @@ public class ShokanShinseiHandler {
             div.getDgShinseiList().getGridSetting().getColumn(new RString("yoshikiNo")).setVisible(false);
         }
         if (状態_申請.equals(状態)) {
-            RString month = BusinessConfig.get(ConfigNameDBC.初期表示_償還支給申請登録初期, SubGyomuCode.DBC介護給付);
+            RString month = DbBusinessConfig.get(ConfigNameDBC.初期表示_償還支給申請登録初期, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             RDate yearMonth = RDate.getNowDate().minusMonth(Integer.parseInt(month.toString()));
             div.getTxtServiceYM().setValue(yearMonth);
             div.getTxtServiceYM().setVisible(true);

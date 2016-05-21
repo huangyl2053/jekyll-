@@ -404,8 +404,9 @@ public class HanyoListCsvDataCreate {
             csvEntity.set自己負担額(new RString(String.valueOf(entity.get支給申請Entity().getRiyoshaFutangaku())));
             csvEntity.set支払方法(entity.get支給申請Entity().getShiharaiHohoKubunCode());
             csvEntity.set国保連送付年月(monthToRString(国保連送付年月, parameter));
-            if (entity.get支給申請Entity().getKaishuShinseiKubun() != null && !entity.get支給申請Entity().getKaishuShinseiKubun().isEmpty()) {
-                JutakukaishuShinseiKubun 住宅改修申請区分 = JutakukaishuShinseiKubun.toValue(entity.get支給申請Entity().getKaishuShinseiKubun());
+            RString 申請状態 = entity.get支給申請Entity().getKaishuShinseiKubun();
+            if (申請状態 != null && !申請状態.isEmpty()) {
+                JutakukaishuShinseiKubun 住宅改修申請区分 = JutakukaishuShinseiKubun.toValue(申請状態);
                 csvEntity.set申請状態(住宅改修申請区分 != null ? 住宅改修申請区分.get名称() : RString.EMPTY);
             }
             if (entity.get支給住宅Entity() != null) {
@@ -425,12 +426,12 @@ public class HanyoListCsvDataCreate {
             csvEntity.set支払開始日(dataToRString(entity.get支給申請Entity().getShiharaiKaishiYMD(), parameter));
             csvEntity.set支払終了日(dataToRString(entity.get支給申請Entity().getShiharaiShuryoYMD(), parameter));
             FlexibleDate 支払開始日 = entity.get支給申請Entity().getShiharaiKaishiYMD();
-            FlexibleDate 支払終了日 = entity.get支給申請Entity().getShiharaiKaishiYMD();
-            if (支払開始日 != null) {
+            FlexibleDate 支払終了日 = entity.get支給申請Entity().getShiharaiShuryoYMD();
+            if (支払開始日 != null && !支払開始日.isEmpty()) {
                 DayOfWeek 支払開始曜日 = 支払開始日.getDayOfWeek();
                 csvEntity.set支払開始曜日(支払開始曜日 != null ? new RString(支払開始曜日.toString()) : RString.EMPTY);
             }
-            if (entity.get支給申請Entity().getShiharaiShuryoYMD() != null) {
+            if (支払終了日 != null && !支払終了日.isEmpty()) {
                 DayOfWeek 支払終了曜日 = 支払終了日.getDayOfWeek();
                 csvEntity.set支払終了曜日(支払終了曜日 != null ? new RString(支払終了曜日.toString()) : RString.EMPTY);
             }

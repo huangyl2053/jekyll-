@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
@@ -1427,7 +1427,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
      */
     public void set登録モード() {
         int 設定値 = 0;
-        RString 設定値の年月 = DbBusinessConifg.get(ConfigNameDBC.初期表示_償還支給申請登録初期,
+        RString 設定値の年月 = DbBusinessConfig.get(ConfigNameDBC.初期表示_償還支給申請登録初期,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (設定値の年月 != null && !設定値の年月.isEmpty()) {
             設定値 = Integer.valueOf(設定値の年月.toString());
@@ -1446,7 +1446,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
                 get保険者(new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
                                 getTxtTeikyoYM().getValue().getYearMonth().toString())));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSeiriNo().clearValue();
-        RString 給付率 = DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_保険給付率_標準給付率, RDate.getNowDate(),
+        RString 給付率 = DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_保険給付率_標準給付率, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(new Decimal(給付率.toString()));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtJigyoshaNo().setValue(NUM3);

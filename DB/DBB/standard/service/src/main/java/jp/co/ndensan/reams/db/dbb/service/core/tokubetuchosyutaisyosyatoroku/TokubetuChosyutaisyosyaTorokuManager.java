@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
@@ -332,7 +332,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
             return TokuchoStartMonth.特徴10月開始;
         }
         if (TokuchoHosokuMonth.特徴6月捕捉.equals(捕捉月)) {
-            RString result = DbBusinessConifg.get(ConfigKeysTokuchoHosoku.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+            RString result = DbBusinessConfig.get(ConfigKeysTokuchoHosoku.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
             if (new RString("12").equals(result)) {
                 return TokuchoStartMonth.特徴12月開始;
             }
@@ -341,7 +341,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
             }
         }
         if (TokuchoHosokuMonth.特徴8月捕捉.equals(捕捉月)) {
-            RString result = DbBusinessConifg.get(ConfigKeysTokuchoHosoku.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+            RString result = DbBusinessConfig.get(ConfigKeysTokuchoHosoku.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
             if (new RString("02").equals(result)) {
                 return TokuchoStartMonth.特徴2月開始;
             }

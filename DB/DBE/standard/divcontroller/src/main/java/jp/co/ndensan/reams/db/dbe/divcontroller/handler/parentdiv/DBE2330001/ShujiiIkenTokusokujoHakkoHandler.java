@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.Shuj
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikentokusokujo.ShujiiIkenTokusokujoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -66,8 +66,8 @@ public class ShujiiIkenTokusokujoHakkoHandler {
 
     private void initializtion() {
         div.getHakkoJoken().getTxtKijunDay().setValue(FlexibleDate.getNowDate());
-        RString 主治医意見書督促期限日数 = DbBusinessConifg.get(ConfigNameDBE.主治医意見書督促期限日数, RDate.getNowDate(),
-                SubGyomuCode.DBE認定支援) == null ? RString.EMPTY : DbBusinessConifg.get(ConfigNameDBE.主治医意見書督促期限日数,
+        RString 主治医意見書督促期限日数 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援) == null ? RString.EMPTY : DbBusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数,
                         RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (Decimal.canConvert(主治医意見書督促期限日数)) {
             div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(主治医意見書督促期限日数.toString()));

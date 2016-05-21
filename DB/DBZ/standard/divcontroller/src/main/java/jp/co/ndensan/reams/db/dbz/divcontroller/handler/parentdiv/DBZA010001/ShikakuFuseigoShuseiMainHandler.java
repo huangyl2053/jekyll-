@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZA010001;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
@@ -71,7 +71,7 @@ public class ShikakuFuseigoShuseiMainHandler {
     public ShikakuFuseigoShuseiMainHandler(ShikakuFuseigoShuseiMainDiv div) {
         this.div = div;
         this.manager = ShikakuSeigoseiCheckJohoManager.createInstance();
-        第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConifg.get(
+        第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConfig.get(
                 ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
     }

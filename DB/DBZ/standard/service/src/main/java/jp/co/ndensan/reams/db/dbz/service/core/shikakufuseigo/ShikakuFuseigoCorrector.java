@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
@@ -46,7 +46,7 @@ public class ShikakuFuseigoCorrector {
      * コンストラクタです。
      */
     ShikakuFuseigoCorrector() {
-        第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConifg.get(
+        第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConfig.get(
                 ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
     }

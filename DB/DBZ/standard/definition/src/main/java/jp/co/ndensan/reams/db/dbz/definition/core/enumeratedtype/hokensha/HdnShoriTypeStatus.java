@@ -22,27 +22,27 @@ public enum HdnShoriTypeStatus {
      * 処理タイプモードのNomalAddModeであることを表します。<br/>
      * コード:"1"
      */
-    NomalAddMode("1"),
+//    NomalAddMode("1"),
     /**
      * 処理タイプモードのNomalUpdateModeであることを表します。<br/>
      * コード:"2"
      */
-    NomalUpdateMode("2"),
+//    NomalUpdateMode("2"),
     /**
      * 処理タイプモードのSeihoAddModeであることを表します。<br/>
      * コード:"3"
      */
-    SeihoAddMode("3"),
+//    SeihoAddMode("3"),
     /**
      * 処理タイプモードのSeihoUpdateModeであることを表します。<br/>
      * コード:"4"
      */
-    SeihoUpdateMode("4"),
+    SeihoUpdateMode("1"),
     /**
      * 処理タイプモードのShokaiModeであることを表します。<br/>
      * コード:"4"
      */
-    ShokaiMode("5");
+    ShokaiMode("2");
 
     private final RString theCode;
 

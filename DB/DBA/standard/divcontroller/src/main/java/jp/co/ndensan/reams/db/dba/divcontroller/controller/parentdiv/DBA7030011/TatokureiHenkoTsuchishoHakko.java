@@ -50,7 +50,6 @@ public class TatokureiHenkoTsuchishoHakko {
 
     private static final RString 発行ボタン = new RString("btnReportPublish");
     private static final RString 発行チェックボタン = new RString("btnCheck");
-    private static final RString 完了ボタン = new RString("btnComplete");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
 
     /**
@@ -73,7 +72,6 @@ public class TatokureiHenkoTsuchishoHakko {
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100006.getReportId());
         createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
         return ResponseData.of(div).respond();
@@ -123,7 +121,6 @@ public class TatokureiHenkoTsuchishoHakko {
         TatokuKanrenChohyoShijiData business = 帳票発行指示データ作成(div, false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行チェックボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, false);
         TatokuKanrenChohyoHenkoTsuchishoBusiness tsuchishoBusiness = TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder
                 .createInstance().setTatokuKanrenChohyoTaishoTsuchisho(business);
         他市町村住所地特例の更新(createHandler(div).他特例施設変更通知書の編集(他市町村住所地特例, 識別コード));
@@ -219,14 +216,14 @@ public class TatokureiHenkoTsuchishoHakko {
         item.setBirthYMD(business.get誕生日());
         item.setSeibetsu(business.get性別());
         item.setBirthYMD(business.get変更年月日());
-        item.setHenkomaeShisetsuName(business.get変更前施設名称() == null ? RString.EMPTY : business.get変更前施設名称().value());
-        item.setHenkomaeShisetsuTelNo(business.get変更前施設電話番号() == null ? RString.EMPTY : business.get変更前施設電話番号().value());
-        item.setHenkomaeShisetsuFaxNo(business.get変更前施設FAX番号() == null ? RString.EMPTY : business.get変更前施設FAX番号().value());
+        item.setHenkomaeShisetsuName(business.get変更前施設名称());
+        item.setHenkomaeShisetsuTelNo(business.get変更前施設電話番号());
+        item.setHenkomaeShisetsuFaxNo(business.get変更前施設FAX番号());
         item.setHenkomaeShisetsuYubinNo(business.get変更前施設住所());
-        item.setHenkomaeShisetsuJusho(business.get変更後施設名称() == null ? RString.EMPTY : business.get変更後施設名称().value());
-        item.setHenkogoShisetsuName(business.get変更後施設名称() == null ? RString.EMPTY : business.get変更後施設名称().value());
-        item.setHenkogoShisetsuTelNo(business.get変更後施設電話番号() == null ? RString.EMPTY : business.get変更後施設電話番号().value());
-        item.setHenkogoShisetsuFaxNo(business.get変更後施設FAX番号() == null ? RString.EMPTY : business.get変更後施設FAX番号().value());
+        item.setHenkomaeShisetsuJusho(business.get変更後施設名称());
+        item.setHenkogoShisetsuName(business.get変更後施設名称());
+        item.setHenkogoShisetsuTelNo(business.get変更後施設電話番号());
+        item.setHenkogoShisetsuFaxNo(business.get変更後施設FAX番号());
         item.setHenkogoShisetsuYubinNo(business.get変更後施設住所());
         item.setHenkogoShisetsuJusho(business.get変更後施設住所());
         return item;

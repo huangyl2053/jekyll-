@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -237,7 +237,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().getHihokenshanotsukiban(識別コード);
         if (hihokenshaNo == null) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
-        } else if (任意手入力付番.equals(DbBusinessConifg.get(ConfigNameDBA.被保険者番号付番方法_付番方法, RDate.getNowDate(), SubGyomuCode.DBA介護資格))
+        } else if (任意手入力付番.equals(DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, RDate.getNowDate(), SubGyomuCode.DBA介護資格))
                 && hihokenshaNo.isEmpty()) {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtHihoNo().setDisplayNone(false);
         } else if (!hihokenshaNo.isEmpty()) {
@@ -338,12 +338,12 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
                 build.set資格取得年月日(row.getShutokuDate().getValue());
                 build.set市町村コード(get導入形態チェック());
                 build.set被保険者区分コード(RString.EMPTY);
-                if (合併あり.equals(DbBusinessConifg.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分,
+                if (合併あり.equals(DbBusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分,
                         RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                     IHistoryIterator<IShikibetsuTaisho> ite = div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv()
                             .getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().getAll();
                     build.set旧市町村コード(ite.previous().get旧全国地方公共団体コード());
-                } else if (合併なし.equals(DbBusinessConifg.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分,
+                } else if (合併なし.equals(DbBusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分,
                         RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                     build.set旧市町村コード(LasdecCode.EMPTY);
                 }
