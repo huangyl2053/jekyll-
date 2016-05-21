@@ -249,6 +249,7 @@ public class HihosyosaiHandler {
         div.getTxtSyoninichiji1().setValue(日期(得喪情報.getLastUpdateTimestamp()));
         if (得喪情報.getShikakuSoshitsuYMD() != null && !得喪情報.getShikakuSoshitsuYMD().isEmpty()) {
             div.getTxtSosichiYMD().setValue(new RDate(得喪情報.getShikakuSoshitsuYMD().toString()));
+            div.getTxtSyoninichiji2().setValue(日期(得喪情報.getLastUpdateTimestamp()));
         } else {
             div.getTxtSosichiYMD().setDisabled(true);
         }
@@ -263,7 +264,6 @@ public class HihosyosaiHandler {
         } else {
             div.getDdlSosichiJiyu().setDisabled(true);
         }
-        div.getTxtSyoninichiji2().setValue(日期(得喪情報.getLastUpdateTimestamp()));
     }
 
     private void 登録モード(ShikibetsuCode 識別コード) {
