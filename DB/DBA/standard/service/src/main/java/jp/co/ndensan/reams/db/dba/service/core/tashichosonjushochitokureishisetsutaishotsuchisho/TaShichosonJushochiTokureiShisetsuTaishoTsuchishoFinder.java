@@ -138,20 +138,23 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         Map<Integer, ShisetsuJyohoRelateEntity> 施設情報Map = ShisetsuJyohoFinder.createInstance().
                 getTaJushochiTokureiTekiyoJyoho(inBusiness.get識別コード(), inBusiness.get異動日(), inBusiness.get枝番());
         ShisetsuJyohoRelateEntity 施設情報Entity = 施設情報Map.get(1);
-        outEntity.set退所年月日(施設情報Entity.get退所年月日().
-                wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        outEntity.set退所事由(CodeMaster.getCodeMeisho(new CodeShubetsu("0011"), new Code(施設情報Entity.get退所事由())));
-        outEntity.set施設名称(施設情報Entity.get事業者名称());
-        outEntity.set施設電話番号(施設情報Entity.get電話番号());
-        outEntity.set施設FAX番号(施設情報Entity.getFax番号());
-        outEntity.set施設郵便番号(!RString.isNullOrEmpty(施設情報Entity.get郵便番号())
-                ? new YubinNo(施設情報Entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
-        outEntity.set施設住所(施設情報Entity.get事業者住所());
-
+        FlexibleDate 基準日 = FlexibleDate.EMPTY;
+        if (施設情報Entity != null) {
+            outEntity.set退所年月日(施設情報Entity.get退所年月日().
+                    wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            outEntity.set退所事由(CodeMaster.getCodeMeisho(new CodeShubetsu("0011"), new Code(施設情報Entity.get退所事由())));
+            outEntity.set施設名称(施設情報Entity.get事業者名称());
+            outEntity.set施設電話番号(施設情報Entity.get電話番号());
+            outEntity.set施設FAX番号(施設情報Entity.getFax番号());
+            outEntity.set施設郵便番号(!RString.isNullOrEmpty(施設情報Entity.get郵便番号())
+                    ? new YubinNo(施設情報Entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
+            outEntity.set施設住所(施設情報Entity.get事業者住所());
+            基準日 = 施設情報Entity.get退所年月日();
+        }
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        key.set基準日(施設情報Entity.get退所年月日());
+        key.set基準日(基準日);
         key.set識別コード(inBusiness.get識別コード());
 
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
