@@ -48,8 +48,6 @@ public class YoshikiNinonanaHoseiHandler {
     private static final Decimal 横番号_0003 = new Decimal("0003");
     private static final Decimal 縦番号_0001 = new Decimal("0001");
     private static final Decimal 縦番号_0002 = new Decimal("0002");
-    private static final Code 表番号_06 = new Code("06");
-    private static final Code 表番号_07 = new Code("07");
     private static final RString 様式種類_039 = new RString("039");
     private static final RString 様式種類_139 = new RString("139");
     private static final RString 様式種類_239 = new RString("239");
