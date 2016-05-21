@@ -1526,7 +1526,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
 
         FukaJoho 賦課の情報_更正後 = parameter.get賦課の情報_更正後();
         FukaJoho 賦課の情報_更正前 = parameter.get賦課の情報_更正前();
-        if (賦課の情報_更正後 == null) {
+        if (賦課の情報_更正後 == null || 賦課の情報_更正前 == null) {
             return null;
         }
         GennenKanen 年度区分 = GennenKanen.過年度;
