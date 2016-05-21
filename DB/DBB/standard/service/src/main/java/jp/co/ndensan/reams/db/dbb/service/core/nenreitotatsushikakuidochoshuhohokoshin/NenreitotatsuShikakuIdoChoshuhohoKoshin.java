@@ -82,7 +82,8 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
      */
     public static NenreitotatsuShikakuIdoChoshuhohoKoshin createInstance() {
         return InstanceProvider.create(NenreitotatsuShikakuIdoChoshuhohoKoshin.class);
@@ -204,10 +205,11 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     @Transaction
     public DbV2001ChoshuHohoEntity select被保険者徴収方法情報の取得(HihokenshaNo 被保険者番号) {
         RString nendo = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
-        if (nendo != null && !nendo.isEmpty()) {
-            賦課年度 = new FlexibleYear(nendo.toString());
+        if (nendo == null || nendo.isEmpty()) {
+            throw new SystemException(DbxErrorMessages.業務コンフィグなし.getMessage()
+                    .replace(ConfigNameDBB.日付関連_調定年度.name()).evaluate());
         }
+        FlexibleYear 賦課年度 = new FlexibleYear(nendo.toString());
         DbV2001ChoshuHohoEntity entity = choshuHohoAliveDac.selectChoshuhohonojohoAll(賦課年度, 被保険者番号);
 
         return entity;
