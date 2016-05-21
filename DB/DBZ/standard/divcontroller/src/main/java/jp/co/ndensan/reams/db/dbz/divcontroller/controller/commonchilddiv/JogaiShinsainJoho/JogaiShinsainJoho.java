@@ -30,13 +30,14 @@ public class JogaiShinsainJoho {
      */
     public ResponseData<JogaiShinsainJohoDiv> onLoad(JogaiShinsainJohoDiv div) {
         getHandler(div).画面項目にセットされている値をクリア();
+        set画面情報(div);
         return ResponseData.of(div).respond();
     }
 
     private void set画面情報(JogaiShinsainJohoDiv div) {
         RString 申請書管理番号 = div.getHdnShinseishoKanriNo();
         List<ShinsakaiIinRelateJoho> johoList = getService().get審査会委員一覧検索して審査会委員情報(申請書管理番号).records();
-        List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList();
+        List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
         for (ShinsakaiIinRelateJoho joho : johoList) {
             rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), 申請書管理番号, 申請書管理番号));
         }

@@ -110,7 +110,7 @@ public class ShinsakaiIinRelateJoho {
     /**
      * 担当地区コードを取得します。
      *
-     * @return
+     * @return 担当地区コード
      */
     public ChikuCode get担当地区コード() {
         return entity.getTantoChikuCode();
