@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.Fu
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
@@ -38,7 +39,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.kijunt.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
@@ -1229,7 +1229,9 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
      * @param hokenKyufuritsu HokenKyufuRitsu
      */
     public void get給付率(HokenKyufuRitsu hokenKyufuritsu) {
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(hokenKyufuritsu.value());
+        if (hokenKyufuritsu != null) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().setValue(hokenKyufuritsu.value());
+        }
     }
 
     /**
