@@ -110,6 +110,8 @@ public class ShotokuJohoTorokuTotal {
         if (div.getSetaiShotokuInfo().getChkSetaiIchiranAll().isAllSelected()) {
             getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         } else {
+            RDate kazeiNendo = new RDate(div.getSetaiShotokuInfo().getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString());
+            所得年度 = new FlexibleYear(kazeiNendo.getYear().toString());
             getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, false);
         }
         return ResponseData.of(div).respond();

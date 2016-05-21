@@ -32,8 +32,8 @@ public class ShotokuJohoTorokuValidationHandler {
     private static final RString 激変緩和対象者となっていない人メッセージ = new RString("激変緩和区分の登録をしなくても");
     private static final RString 年金収入額メッセージ = new RString("年金等所得≧年金等収入ですが、");
     private static final RString 住民種別_外国人 = new RString("外国人");
-    private static final RString 激変緩和措置区分_対象者 = new RString("対象");
-    private static final RString 激変緩和措置区分_なし = new RString("対象外");
+    private static final RString 激変緩和措置区分_対象者 = new RString("対象者");
+    private static final RString 激変緩和措置区分_なし = new RString("なし");
 
     /**
      * コンストラクタです。

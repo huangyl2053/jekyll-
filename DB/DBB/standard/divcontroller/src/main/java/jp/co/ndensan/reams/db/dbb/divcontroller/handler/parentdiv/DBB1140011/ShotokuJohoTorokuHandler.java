@@ -17,8 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.ShotokuJohoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.dgSetaiShotoku_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
@@ -78,6 +78,8 @@ public final class ShotokuJohoTorokuHandler {
     private static final RString コンマ = new RString(",");
     private static final RString 漢字_平 = new RString("平");
     private static final RString 漢字_成 = new RString("成");
+    private static final RString 激変緩和_対象 = new RString("対象者");
+    private static final RString 激変緩和_なし = new RString("なし");
 
     private static final int 所得引出_64歳 = 64;
     private static final int 平成 = 1988;
@@ -127,8 +129,8 @@ public final class ShotokuJohoTorokuHandler {
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
         div.getKaigoFukaKihon().load(searchKey);
         div.getKaigoAtenaInfo().onLoad(識別コード);
-        日付関連_所得年度コンフィグによる制御(div.getSetaiShotokuInfo().getTxtSetaiIchiranKazeiNendo().getDomain());
         load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
+        日付関連_所得年度コンフィグによる制御(div.getSetaiShotokuInfo().getTxtSetaiIchiranKazeiNendo().getDomain());
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));
     }
 
@@ -178,12 +180,13 @@ public final class ShotokuJohoTorokuHandler {
                 row.setTxtJuminzei(課税区分_住民税減免前);
                 RString 激変緩和措置区分 = RString.EMPTY;
                 try {
-                    激変緩和措置区分 = GekihenkanwaSochi.toValue(getNotNull(世帯員所得情報.get激変緩和措置())).get名称();
+                    GekihenkanwaSochi 激変緩和 = GekihenkanwaSochi.toValue(getNotNull(世帯員所得情報.get激変緩和措置()));
+                    激変緩和措置区分 = 激変緩和.equals(GekihenkanwaSochi.対象) ? 激変緩和.get名称() : RString.EMPTY;
                 } catch (IllegalArgumentException ex) {
                     Logger.getLogger(ShotokuJohoTorokuHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 row.setTxtGekihenTaishosha(激変緩和措置区分);
-                boolean is被保険者 = (null != 世帯員所得情報.get被保険者番号());
+                boolean is被保険者 = !RString.isNullOrEmpty(世帯員所得情報.get被保険者番号().value());
                 if (get金額表示Flg(世帯員所得情報.get生年月日(), is被保険者)) {
                     RString 合計所得金額 = (null == 世帯員所得情報.get合計所得金額()) ? RString.EMPTY
                             : editComma(new RString(世帯員所得情報.get合計所得金額().toString()));
@@ -226,13 +229,13 @@ public final class ShotokuJohoTorokuHandler {
         // かつ、住民税課税年度（ドロップダウン）の値の４月１日時点で６４歳未満
         // かつ、被保険者でない場合、以下の項目は空白で表示する。
         // 合計所得金額、年金収入額、年金所得額、課税所得額
-        return !syotokuKingakuHyojiKubun.equals(住民税減免前後表示区分_表示しない) || !has年齢到達From所得年度(生年月日) || is被保険者;
+        return !syotokuKingakuHyojiKubun.equals(住民税減免前後表示区分_表示しない) || has年齢到達From所得年度(生年月日) || is被保険者;
     }
 
     private boolean has年齢到達From所得年度(FlexibleDate 生年月日) {
         RDate 計算基準日 = new RDate(div.getSetaiShotokuInfo().getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString());
         計算基準日 = new RDate(計算基準日.getYearValue(), Month.APRIL.getValue(), 1);
-        return 生年月日.plusYear(所得引出_64歳).compareTo(new FlexibleDate(計算基準日.toDateString())) > 0;
+        return 生年月日.plusYear(所得引出_64歳).compareTo(new FlexibleDate(計算基準日.toDateString())) < 0;
 
     }
 
@@ -321,7 +324,8 @@ public final class ShotokuJohoTorokuHandler {
             div.getShotokuJohoToroku().getDdlJuminzei().setSelectedValue(selected_row.getTxtJuminzei());
         }
         if (!RString.isNullOrEmpty(selected_row.getTxtGekihenTaishosha())) {
-            div.getShotokuJohoToroku().getDdlGekihenKanwa().setSelectedValue(selected_row.getTxtGekihenTaishosha());
+            div.getShotokuJohoToroku().getDdlGekihenKanwa().setSelectedValue(
+                    selected_row.getTxtGekihenTaishosha().equals(激変緩和_対象) ? 激変緩和_対象 : 激変緩和_なし);
         }
         List<RString> ketsugo03List = selected_row.getTxtKetsugo03().split(改行タグ.toString());
         List<RString> ketsugo04List = selected_row.getTxtKetsugo04().split(改行タグ.toString());
@@ -353,7 +357,8 @@ public final class ShotokuJohoTorokuHandler {
         row.setTxtJuminzeiGenmenMae(div.getShotokuJohoToroku().getDdlJuminzeiGenmenMae().getSelectedValue());
         row.setTxtJuminzeiGenmenAto(div.getShotokuJohoToroku().getDdlJuminzeiGenmenAto().getSelectedValue());
         row.setTxtJuminzei(div.getShotokuJohoToroku().getDdlJuminzei().getSelectedValue());
-        row.setTxtGekihenTaishosha(div.getShotokuJohoToroku().getDdlGekihenKanwa().getSelectedValue());
+        row.setTxtGekihenTaishosha(div.getShotokuJohoToroku().getDdlGekihenKanwa().getSelectedValue().equals(激変緩和_対象)
+                ? 激変緩和_対象 : RString.EMPTY);
         row.setTxtKetsugo03(合計所得金額.concat(改行タグ).concat(課税所得額));
         row.setTxtKetsugo04(年金収入額.concat(改行タグ).concat(年金所得額));
         row.setRowState(RowState.Modified);
@@ -455,11 +460,11 @@ public final class ShotokuJohoTorokuHandler {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(new RString("key" + index));
             keyValue.setValue(new RString(年度.wareki().getYear().toString()));
-            index++;
             kazeiNendoList.add(keyValue);
             if (年度.equals(所得年度)) {
                 selectedIndex = new RString("key" + index);
             }
+            index++;
         }
         div.getDdlSetaiIchiranKazeiNendo().setDataSource(kazeiNendoList);
         div.getDdlSetaiIchiranKazeiNendo().setSelectedKey(selectedIndex);
