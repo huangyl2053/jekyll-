@@ -160,7 +160,6 @@ public final class ShikyuShinseiDetailHandler {
                 個別設定(償還払支給判定結果, 被保険者番号, サービス年月, 整理番号, 償還払支給申請);
             } else {
                 set登録(Boolean.TRUE);
-                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(true);
                 div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
                 div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
@@ -330,11 +329,11 @@ public final class ShikyuShinseiDetailHandler {
         }
 
         if (償還払支給申請.is国保連再送付フラグ()) {
-            if (!div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
+            if (div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
                 return true;
             }
         } else {
-            if (div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
+            if (!div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
                 return true;
             }
         }
