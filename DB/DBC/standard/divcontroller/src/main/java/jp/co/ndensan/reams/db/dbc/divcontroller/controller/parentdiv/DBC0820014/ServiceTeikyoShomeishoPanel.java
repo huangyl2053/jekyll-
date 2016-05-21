@@ -118,11 +118,7 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onClick_btnAdd(ServiceTeikyoShomeishoPanelDiv div) {
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        // TODO 南京の確認を待ち
-        if (!登録モード.equals(処理モード)) {
-            handler.証明書選択チェック();
-        }
+        handler.証明書選択チェック();
         handler.サービス提供証明書の存在チェック();
         handler.putViewStateDown(処理モード_登録);
         return ResponseData.of(div).forwardWithEventName(DBC0820014TransitionEventName.償還払い費支給申請).respond();

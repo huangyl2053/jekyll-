@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 public class DBB014003_FuchoKarisanteiTsuchishoHakkoFlow
         extends BatchFlowBase<FuchoKarisanteiTsuchishoHakkoBatchParameter> {
 
-    private static final String FUCHOKARISANTEITSUCHISHOHAKKOPROCESS = "FuchoKarisanteiTsuchishoHakkoProcess";
+    private static final String FUCHOKARISANTEITSUCHIPROCESS = "FuchoKarisanteiTsuchishoHakkoProcess";
 
     @Override
     protected void defineFlow() {
-        executeStep(FUCHOKARISANTEITSUCHISHOHAKKOPROCESS);
+        executeStep(FUCHOKARISANTEITSUCHIPROCESS);
     }
 
-//    @Step(FUCHOKARISANTEITSUCHISHOHAKKOPROCESS)
+//    @Step(FUCHOKARISANTEITSUCHIPROCESS)
 //    IBatchFlowCommand tableInsertProcess() {
 //        return loopBatch(FuchoKarisanteiTsuchishoHakkoProcess.class).arguments(getParameter().toProcessParam()).define();
 //    }
