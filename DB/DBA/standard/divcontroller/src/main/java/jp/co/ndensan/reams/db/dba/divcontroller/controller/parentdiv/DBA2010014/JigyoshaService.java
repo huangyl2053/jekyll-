@@ -151,18 +151,6 @@ public class JigyoshaService {
     }
 
     /**
-     * 登録保険者入力ガイドボタンを押します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<JigyoshaServiceDiv>
-     */
-    public ResponseData<JigyoshaServiceDiv> onClick_BtnHokenshaInputGuide(JigyoshaServiceDiv div) {
-        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setValue(div.getHokenshaNo());
-        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setValue(div.getHokenshaMeisho());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 基本情報を表示します。
      *
      * @param div 画面情報
