@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinsei
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
@@ -1033,7 +1032,7 @@ public class NinteiShinseiJohoBuilder {
      * キーが一致しない場合、新たに追加します。<br>
      *
      * @param 要介護認定1_5次判定結果情報 要介護認定1_5次判定結果情報
-     * @return {@link IchiGojiHanteiKekkaJohoBuilder}
+     * @return {@link NinteiShinseiJohoBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
     public NinteiShinseiJohoBuilder setIchiGojiHanteiKekkaJoho(IchiGojiHanteiKekkaJoho 要介護認定1_5次判定結果情報) {

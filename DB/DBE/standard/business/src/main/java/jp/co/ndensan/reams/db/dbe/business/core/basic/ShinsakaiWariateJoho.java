@@ -127,7 +127,7 @@ public class ShinsakaiWariateJoho
      *
      * @return 介護認定審査会審査順確定フラグ
      */
-    public boolean get介護認定審査会審査順確定フラグ() {
+    public boolean is介護認定審査会審査順確定フラグ() {
         return entity.getShinsakaiOrderKakuteiFlag();
     }
 
@@ -136,7 +136,7 @@ public class ShinsakaiWariateJoho
      *
      * @return 審査会自動割付フラグ
      */
-    public boolean get審査会自動割付フラグ() {
+    public boolean is審査会自動割付フラグ() {
         return entity.getShinsakaiJidoWaritsukeFlag();
     }
 
