@@ -1524,11 +1524,11 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
      */
     public KakushuTsuchishoCommonInfo search通知書共通情報(KakushuTsuchishoParameter parameter) {
 
-        FukaJoho 賦課の情報_更正後 = parameter.get賦課の情報_更正後();
-        FukaJoho 賦課の情報_更正前 = parameter.get賦課の情報_更正前();
-        if (賦課の情報_更正後 == null) {
+        if (is賦課の情報(parameter)) {
             return null;
         }
+        FukaJoho 賦課の情報_更正後 = parameter.get賦課の情報_更正後();
+        FukaJoho 賦課の情報_更正前 = parameter.get賦課の情報_更正前();
         GennenKanen 年度区分 = GennenKanen.過年度;
         if (賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())) {
             年度区分 = GennenKanen.現年度;
@@ -1657,6 +1657,12 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         通知書共通情報.set年度区分(年度区分);
         return 通知書共通情報;
+    }
+
+    private boolean is賦課の情報(KakushuTsuchishoParameter parameter) {
+        FukaJoho 賦課の情報_更正後 = parameter.get賦課の情報_更正後();
+        FukaJoho 賦課の情報_更正前 = parameter.get賦課の情報_更正前();
+        return 賦課の情報_更正後 == null || 賦課の情報_更正前 == null;
     }
 
     private void set徴収方法情報(KakushuTsuchishoCommonInfo 通知書共通情報, KakushuTsuchishoEntity 更正前entity,
