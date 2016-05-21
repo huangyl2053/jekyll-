@@ -247,11 +247,11 @@ public enum ReportIdDBE {
      */
     DBE231001(new ReportId("DBE231001_ikenshokinyuyoshi"), new RString("要介護認定主治医意見書記入用紙")),
     /**
-     * 主治医意見書帳票ＩＤです。
+     * 主治医意見書の帳票ＩＤです。
      */
-    DBE517151(new ReportId("DBE517151_Shujiiikensho"), new RString("主治医意見書")),
+    DBE517151(new ReportId("DBE517151_Shujiiikensho1A4"), new RString("主治医意見書")),
     /**
-     * 一次判定結果ＩＤです。
+     * 一次判定結果の帳票ＩＤです。
      */
     DBE517181(new ReportId("DBE517181_IchijihanteikekkahyoA4"), new RString("一次判定結果")),
     /**
