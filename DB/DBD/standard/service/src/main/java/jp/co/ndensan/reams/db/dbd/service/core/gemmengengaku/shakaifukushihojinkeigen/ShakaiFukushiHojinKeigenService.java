@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.S
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shakaifukushihojinkeigen.IShakaiFukushiHojinKeigenMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
@@ -36,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -99,13 +99,13 @@ public class ShakaiFukushiHojinKeigenService {
         }
         RString 有効期限RString;
         if (適用日.isBeforeOrEquals(new FlexibleDate(new RString("20050930")))) {
-            有効期限RString = BusinessConfig.get(ConfigNameDBD.減免期限_法人減免,
+            有効期限RString = DbBusinessConfig.get(ConfigNameDBD.減免期限_法人減免,
                     new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
         } else {
-            有効期限RString = BusinessConfig.get(ConfigNameDBD.減免期限_法人軽減,
+            有効期限RString = DbBusinessConfig.get(ConfigNameDBD.減免期限_法人軽減,
                     new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
         }
-        if (null == 有効期限RString || 有効期限RString.isEmpty()) {
+        if (有効期限RString.isEmpty()) {
             return FlexibleDate.EMPTY;
         }
         FlexibleDate 有効期限候補 = new FlexibleDate(new RString(String.valueOf(適用日.getYearValue())).concat(有効期限RString));
