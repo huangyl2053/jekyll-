@@ -379,7 +379,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         ChoshuHoho 徴収方法情報_更正前 = 本算定通知書情報.get徴収方法情報_更正前();
         RString 年金コード = 徴収方法情報_更正前.get本徴収_年金コード();
         if (!RString.isNullOrEmpty(年金コード) && SIZE_3 < 年金コード.length()) {
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"), new Code(年金コード.substring(0, SIZE_3)));
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), new Code(年金コード.substring(0, SIZE_3)));
             更正前.set特別徴収対象年金(特別徴収対象年金);
         }
         更正前.set特別徴収対象年金コード(年金コード);
