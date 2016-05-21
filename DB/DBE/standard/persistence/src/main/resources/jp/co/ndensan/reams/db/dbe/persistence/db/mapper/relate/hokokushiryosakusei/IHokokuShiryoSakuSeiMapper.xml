@@ -374,7 +374,6 @@
         </if>
         ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
-        ,COUNT(A."shinsakaiKaisaiNo") AS shinsakaiKaisaiNoCount
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
         ON A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"
