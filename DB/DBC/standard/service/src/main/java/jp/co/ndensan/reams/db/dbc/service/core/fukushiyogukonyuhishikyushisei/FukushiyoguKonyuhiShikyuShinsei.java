@@ -96,7 +96,6 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     private static final ServiceShuruiCode SERVICECODE_41 = new ServiceShuruiCode("41");
     private static final RString MSG_NAME_HIHOKENSHANO = new RString("被保険者番号");
     private static final RString MSG_NAME_SERVICETEIKYOYM = new RString("サービス提供年月");
-    private static final RString 連番 = new RString("1");
 
     /**
      * コンストラクタです。
