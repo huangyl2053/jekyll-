@@ -217,7 +217,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalZogenriyu(RString zogenriyu, KetteJoho 決定情報) {
-        if (zogenriyu.isEmpty() && 決定情報.getZougenRiyu() == null) {
+        if (zogenriyu.isEmpty() && 決定情報.getZougenRiyu().isEmpty()) {
             return false;
         }
         if (!zogenriyu.isEmpty() && zogenriyu.equals(決定情報.getZougenRiyu())) {
@@ -234,7 +234,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalFuSyikyuriyu1(RString fuSyikyuriyu1, KetteJoho 決定情報) {
-        if (fuSyikyuriyu1.isEmpty() && 決定情報.getHushikyuRiyu() == null) {
+        if (fuSyikyuriyu1.isEmpty() && 決定情報.getHushikyuRiyu().isEmpty()) {
             return false;
         }
         if (!fuSyikyuriyu1.isEmpty() && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
@@ -251,7 +251,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalfushikyuriyu2(RString fushikyuriyu2, KetteJoho 決定情報) {
-        if (fushikyuriyu2.isEmpty() && 決定情報.getZougenRiyu() == null) {
+        if (fushikyuriyu2.isEmpty() && 決定情報.getZougenRiyu().isEmpty()) {
             return false;
         }
         if (!fushikyuriyu2.isEmpty() && fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
