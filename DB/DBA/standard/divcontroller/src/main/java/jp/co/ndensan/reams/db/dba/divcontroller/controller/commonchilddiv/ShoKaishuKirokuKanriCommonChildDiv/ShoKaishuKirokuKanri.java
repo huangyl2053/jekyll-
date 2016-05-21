@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.ShoKaishuKirokuKanriCommonChildDiv;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriHandler;
@@ -12,13 +13,17 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuK
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 証回収記録管理のクラス。
@@ -29,6 +34,11 @@ public class ShoKaishuKirokuKanri {
 
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString 被保険者証 = new RString("被保険者証");
+    private static final RString CODESHUBETSU_0002 = new RString("0002");
+    private static final RString CODESHUBETSU_0003 = new RString("0003");
+    private static final RString CODESHUBETSU_0004 = new RString("0004");
+    private static final RString CODESHUBETSU_0005 = new RString("0005");
 
     /**
      * 選択ボタン。<br/>
@@ -41,14 +51,39 @@ public class ShoKaishuKirokuKanri {
         requestDiv.setMode_DisplayMode(ShoKaishuKirokuKanriDiv.DisplayMode.shokai_selected);
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
-        requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
-        requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
+        if (dgKoufuKaishuRow.getKoufuDate() != null && !dgKoufuKaishuRow.getKoufuDate().isEmpty()) {
+            requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
+        }
+        if (dgKoufuKaishuRow.getYukoKigen() != null && !dgKoufuKaishuRow.getYukoKigen().isEmpty()) {
+            requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
+        }
+        if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
+            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0002)));
+        } else {
+            requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0004)));
+        }
         requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
-        requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
+        if (dgKoufuKaishuRow.getKaishuDate() != null && !dgKoufuKaishuRow.getKaishuDate().isEmpty()) {
+            requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
+        }
+        if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
+            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0003)));
+        } else {
+            requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0005)));
+        }
         requestDiv.getPanelInput().getDdlKaisyuJiyu().setSelectedValue(dgKoufuKaishuRow.getKaishuJiyu());
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         return createResponseData(requestDiv);
+    }
+
+    private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
+        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        for (UzT0007CodeEntity codeValueObject : codeValueList) {
+            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
+        }
+        return dataSourceList;
     }
 
     /**
