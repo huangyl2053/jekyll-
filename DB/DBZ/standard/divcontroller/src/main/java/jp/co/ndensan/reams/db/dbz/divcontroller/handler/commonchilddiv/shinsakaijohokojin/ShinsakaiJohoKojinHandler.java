@@ -91,6 +91,7 @@ public class ShinsakaiJohoKojinHandler {
             }
             get審査会委員資格(dgShin, shinsakaij);
             dgShinlist.add(dgShin);
+            dgShin = new dgShinsakaiIin_Row();
         }
         return dgShinlist;
     }
@@ -156,6 +157,7 @@ public class ShinsakaiJohoKojinHandler {
             }
             get補欠審査会委員資格(dgHoketsu, kaijyouhou);
             dgHoketsulist.add(dgHoketsu);
+            dgHoketsu = new dgHoketsuShinsakai_Row();
         }
         return dgHoketsulist;
     }
