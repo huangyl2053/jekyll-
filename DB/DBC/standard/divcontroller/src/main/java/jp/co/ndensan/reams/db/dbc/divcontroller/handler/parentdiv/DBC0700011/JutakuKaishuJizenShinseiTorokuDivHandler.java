@@ -1194,7 +1194,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTabShinsaKakka().getRadJudgeKubun().getSelectedKey())) {
             builder.set承認条件(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtShoninCondition().getValue());
+            builder.set不承認理由(RString.EMPTY);
         } else {
+            builder.set承認条件(RString.EMPTY);
             builder.set不承認理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtFushoninReason().getValue());
         }
@@ -1316,7 +1318,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 .getTabShinsaKakka().getRadJudgeKubun().getSelectedKey())) {
             builder.set承認条件(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtShoninCondition().getValue());
+            builder.set不承認理由(RString.EMPTY);
         } else {
+            builder.set承認条件(RString.EMPTY);
             builder.set不承認理由(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
                     .getTxtFushoninReason().getValue());
         }
