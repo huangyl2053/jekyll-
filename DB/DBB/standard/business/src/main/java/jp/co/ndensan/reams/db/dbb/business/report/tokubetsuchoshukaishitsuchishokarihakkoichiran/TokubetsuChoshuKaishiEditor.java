@@ -98,7 +98,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         listlowers(source);
         source.listLower_6 = 定値_10月;
         if (編集後本算定通知書共通情報 != null && 編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.
-                get更正後().get普徴期別金額リスト() != null && !編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト().isEmpty()) {
+                get更正後().get特徴期別金額リスト() != null && !編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト().isEmpty()) {
             for (CharacteristicsPhase entity : 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト()) {
                 if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM4) {
                     source.listLower_7 = new RString(entity.get金額().toString());
@@ -146,7 +146,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
             }
             if (編集後本算定通知書共通情報.get更正後() != null) {
                 source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();
-                source.listLower_5 = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード();
+                source.listLower_5 = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金();
             }
         }
     }
