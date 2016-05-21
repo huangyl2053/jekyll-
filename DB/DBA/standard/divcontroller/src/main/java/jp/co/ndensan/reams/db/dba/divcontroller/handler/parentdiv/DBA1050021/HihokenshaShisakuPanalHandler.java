@@ -53,7 +53,7 @@ public class HihokenshaShisakuPanalHandler {
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
     private final CodeShubetsu 取得事由コード種別 = new CodeShubetsu("0007");
-    private final CodeShubetsu 喪失事由コード種別 = new CodeShubetsu("0011");
+    private final CodeShubetsu 喪失事由コード種別 = new CodeShubetsu("0010");
 
     /**
      * コンストラクタです。

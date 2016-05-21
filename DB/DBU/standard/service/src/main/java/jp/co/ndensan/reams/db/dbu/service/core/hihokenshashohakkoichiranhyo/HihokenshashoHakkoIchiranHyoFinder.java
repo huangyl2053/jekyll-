@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoik
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -131,7 +131,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
 
             ichiranyoShohakkoshaEntity.set作成日付(システム年日日.concat(システム時分秒).concat(作成));
             ichiranyoShohakkoshaEntity.setタイトル部分(タイトル);
-            ichiranyoShohakkoshaEntity.set保険者番号(DbBusinessConifg.get(
+            ichiranyoShohakkoshaEntity.set保険者番号(DbBusinessConfig.get(
                     ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             Association association = finder.getAssociation();
@@ -402,41 +402,41 @@ public class HihokenshashoHakkoIchiranHyoFinder {
     private RString set送付先住所の管内の市町村共通(RString 住所, RString 番地, RString 方書,
             RString 都道府県名, RString 郡名, RString 市町村名, RString 行政区名) {
         RString 送付先住所 = RString.EMPTY;
-        if (new RString("1").equals(DbBusinessConifg.get(
+        if (new RString("1").equals(DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(都道府県名);
         }
 
-        if (new RString("1").equals(DbBusinessConifg.get(
+        if (new RString("1").equals(DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(郡名);
         }
 
-        if (new RString("1").equals(DbBusinessConifg.get(
+        if (new RString("1").equals(DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(市町村名);
         }
 
-        if (住所_番地.equals(DbBusinessConifg.get(
+        if (住所_番地.equals(DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(住所.concat(番地));
-        } else if (行政区_番地.equals(DbBusinessConifg.get(
+        } else if (行政区_番地.equals(DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(行政区名.concat(番地));
         } else if (住所_番地_行政区.equals(
-                DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+                DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(住所.concat(番地).concat(括弧左).concat(行政区名).concat(括弧右));
-        } else if (番地のみ.equals(DbBusinessConifg.get(
+        } else if (番地のみ.equals(DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(番地);
         } else if (表示無し_住所は印字しない.equals(
-                DbBusinessConifg.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+                DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(RString.EMPTY);
         }
 
-        if (new RString("1").equals(DbBusinessConifg.get(
+        if (new RString("1").equals(DbBusinessConfig.get(
                 ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))
-                && !表示無し_住所は印字しない.equals(DbBusinessConifg.get(
+                && !表示無し_住所は印字しない.equals(DbBusinessConfig.get(
                                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             送付先住所 = 送付先住所.concat(全角スペース.concat(方書));
         }
@@ -488,7 +488,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString()).concat(作成));
 
         ichiranyoShohakkoshaEntity.setタイトル部分(タイトル);
-        ichiranyoShohakkoshaEntity.set保険者番号(DbBusinessConifg.get(
+        ichiranyoShohakkoshaEntity.set保険者番号(DbBusinessConfig.get(
                 ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();

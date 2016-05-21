@@ -25,7 +25,6 @@ public class KaigoNinteiShinsakaiScheduleBatchParamter extends BatchParameterBas
     private static final String SHINSAKAIKAISAIKIKANFROM = "shinsakaiKaisaiKikanFrom";
     private static final String SHINSAKAIKAISAIKIKANTO = "shinsakaiKaisaiKikanTo";
     private static final String NENDO = "shinsakaiKaisaiKikanTo";
-    private static final String SHINSAKAIIINCODE = "chohyoShutsuryokuKubun";
     private static final String CHOHYOSHUTSURYOKUKUBUN = "chohyoShutsuryokuKubun";
 
     @BatchParameter(key = SHINSAKAIKAISAIKIKANFROM, name = "介護認定審査会開催予定期間From")

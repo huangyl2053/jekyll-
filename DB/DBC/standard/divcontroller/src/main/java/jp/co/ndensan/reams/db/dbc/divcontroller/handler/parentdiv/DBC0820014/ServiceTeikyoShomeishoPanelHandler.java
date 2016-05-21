@@ -180,7 +180,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         FlexibleYearMonth サービス年月 = null;
-        if (div.getPanelTwo().getTxtServiceTeikyoYM() != null) {
+        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
             サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
         }
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();

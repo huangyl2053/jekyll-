@@ -1180,6 +1180,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
                                 parameter.getサービス提供年月(), parameter.get整理番号(), 決定情報一覧.get事業者番号(),
                                 決定情報一覧.get証明書コード(), 決定情報一覧.get明細番号(), 決定情報一覧.get連番());
                 if (dbT3045entity != null) {
+                    dbT3045entity.setShikyuKubunCode(parameter.get支給区分());
                     dbT3045entity.setSagakuKingaku(決定情報一覧.get差額金額());
                     dbT3045entity.setState(EntityDataState.Modified);
                     償還払請求サービス計画200004Dac.save(dbT3045entity);

@@ -75,6 +75,13 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
     }
 
     /**
+     * 削除状態、パネルを非活性するメソッドです。
+     */
+    public void disableMainPanel() {
+        div.setDisabled(true);
+    }
+
+    /**
      * 基本エリアの初期化するメソッドです。
      *
      * @param 引き継ぎデータ 引き継ぎデータ

@@ -20,12 +20,14 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.S
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -47,7 +49,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     private static final RString 受託なし = new RString("1");
 
     private final ShokanbarayiKeteiInfoPanelDiv div;
-    private static final int 定数_1 = 1;
+    private static final int 定数_0 = 0;
     private static final int 定数_6 = 6;
 
     /**
@@ -81,7 +83,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             RString 整理番号
     ) {
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+            RString 償還 = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            if (償還 == null || 償還.isEmpty()) {
+                throw new SystemException(DbxErrorMessages.業務コンフィグなし.getMessage()
+                        .replace(ConfigNameDBC.国保連共同処理受託区分_償還.name()).evaluate());
+            }
             if (受託なし.equals(償還)) {
                 div.getPanelTwo().getBtnShokanbariKeteiInfo().setDisabled(false);
             }
@@ -158,7 +164,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             if (!ketebi.equals(決定情報.getKetteiYMD())) {
                 return true;
             }
-        } else if ((決定情報 != null && 決定情報.getKetteiYMD() != null && ketebi == null) || (決定情報 == null && ketebi != null)) {
+        } else if (決定情報 != null && 決定情報.getKetteiYMD() != null && ketebi == null) {
+            return true;
+        }
+        if ((決定情報 == null && ketebi != null)
+                && !ketebi.equals(new FlexibleDate(RDate.getNowDate().toDateString()))) {
             return true;
         }
         return false;
@@ -207,10 +217,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalZogenriyu(RString zogenriyu, KetteJoho 決定情報) {
-        if (zogenriyu == null && 決定情報.getZougenRiyu() == null) {
+        if (zogenriyu.isEmpty() && 決定情報.getZougenRiyu().isEmpty()) {
             return false;
         }
-        if (zogenriyu != null && zogenriyu.equals(決定情報.getZougenRiyu())) {
+        if (!zogenriyu.isEmpty() && zogenriyu.equals(決定情報.getZougenRiyu())) {
             return false;
         }
         return true;
@@ -224,10 +234,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalFuSyikyuriyu1(RString fuSyikyuriyu1, KetteJoho 決定情報) {
-        if (fuSyikyuriyu1 == null && 決定情報.getHushikyuRiyu() == null) {
+        if (fuSyikyuriyu1.isEmpty() && 決定情報.getHushikyuRiyu().isEmpty()) {
             return false;
         }
-        if (fuSyikyuriyu1 != null && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
+        if (!fuSyikyuriyu1.isEmpty() && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
             return false;
         }
         return true;
@@ -241,10 +251,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalfushikyuriyu2(RString fushikyuriyu2, KetteJoho 決定情報) {
-        if (fushikyuriyu2 == null && 決定情報.getZougenRiyu() == null) {
+        if (fushikyuriyu2.isEmpty() && 決定情報.getZougenRiyu().isEmpty()) {
             return false;
         }
-        if (fushikyuriyu2 != null && fushikyuriyu2.equals(決定情報.getZougenRiyu())) {
+        if (!fushikyuriyu2.isEmpty() && fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
             return false;
         }
         return true;
@@ -277,12 +287,12 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 flag = true;
             }
             int zogentani = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
-            if (zogentani != 決定情報.getZougenten()) {
+            if (決定情報.getZougenten() != null && zogentani != 決定情報.getZougenten()) {
                 flag = true;
             }
             int shiharaikingakugoke = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getTxtShiharaikingakugoke()
                     .getValue().intValue();
-            if (shiharaikingakugoke != 決定情報.getShiharaiKingaku()) {
+            if (決定情報.getShiharaiKingaku() != null && shiharaikingakugoke != 決定情報.getShiharaiKingaku()) {
                 flag = true;
             }
         } else if (決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null
@@ -312,8 +322,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        // TODO viewStateのデータ取得
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(被保険者番号,
                 サービス年月, 整理番号, 識別コード);
     }
@@ -344,46 +353,46 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         int 増減単位 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        // TODO viewStateのデータ取得
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         List<SyokanbaraihiShikyuShinseiKetteEntity> entityList = new ArrayList<>();
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()
                 .getDgSyokanbaraikete().getDataSource();
-        for (dgSyokanbaraikete_Row row : rowList) {
-            SyokanbaraihiShikyuShinseiKetteEntity entity = SyokanbaraihiShikyuShinseiKetteEntity.createSelectByKeyParam(
-                    new JigyoshaNo(row.getJigyoshaNo()),
-                    row.getYoshikiNo(),
-                    row.getYoshikiNo(),
-                    row.getMeisaiNo(),
-                    row.getRenban(),
-                    row.getSagakuKingaku().getValue().intValue(),
-                    row.getTableKubun(),
-                    Integer.valueOf(row.getUpdateCount().toString()));
-            entityList.add(entity);
+        if (rowList != null && !rowList.isEmpty()) {
+            for (dgSyokanbaraikete_Row row : rowList) {
+                SyokanbaraihiShikyuShinseiKetteEntity entity = SyokanbaraihiShikyuShinseiKetteEntity.createSelectByKeyParam(
+                        new JigyoshaNo(row.getJigyoshaNo()),
+                        row.getYoshikiNo(),
+                        row.getYoshikiNo(),
+                        row.getMeisaiNo(),
+                        row.getRenban(),
+                        row.getSagakuKingaku().getValue().intValue(),
+                        row.getTableKubun(),
+                        Integer.valueOf(row.getUpdateCount().toString()));
+                entityList.add(entity);
+            }
+            boolean flag = rowList.get(定数_0).getSagakuKingaku().isDisabled();
+            boolean 差額金額登録フラグ = true;
+            if (flag) {
+                差額金額登録フラグ = false;
+            }
+            SyokanbaraihiShikyuShinseiKetteParameter parameter = SyokanbaraihiShikyuShinseiKetteParameter.createSelectByKeyParam(
+                    被保険者番号,
+                    サービス提供年月,
+                    整理番号,
+                    決定年月日,
+                    支給区分,
+                    支払金額合計,
+                    差額金額,
+                    増減理由等,
+                    不支給理由等1,
+                    不支給理由等2,
+                    増減単位,
+                    差額金額登録フラグ,
+                    画面モード,
+                    識別コード,
+                    entityList);
+            SyokanbaraihiShikyuShinseiKetteManager.createInstance().updKetteJoho(parameter);
         }
-        boolean flag = rowList.get(定数_1).getSagakuKingaku().isDisabled();
-        boolean 差額金額登録フラグ = true;
-        if (flag) {
-            差額金額登録フラグ = false;
-        }
-        SyokanbaraihiShikyuShinseiKetteParameter parameter = SyokanbaraihiShikyuShinseiKetteParameter.createSelectByKeyParam(
-                被保険者番号,
-                サービス提供年月,
-                整理番号,
-                決定年月日,
-                支給区分,
-                支払金額合計,
-                差額金額,
-                増減理由等,
-                不支給理由等1,
-                不支給理由等2,
-                増減単位,
-                差額金額登録フラグ,
-                画面モード,
-                識別コード,
-                entityList);
-        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updKetteJoho(parameter);
     }
 
 }

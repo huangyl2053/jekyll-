@@ -202,7 +202,7 @@ public class ShiharaiHohoJyoho {
                         createParam(new HihokenshaNo(div.getTxtKeiyakuNo().getValue()),
                                 支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
                                 支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),
-                                支給申請情報.getShiharaiBasho() == null ? RString.EMPTY : 支給申請情報.getShiharaiBasho()));
+                                支給申請情報.getKeiyakuNo() == null ? RString.EMPTY : 支給申請情報.getKeiyakuNo()));
         getHandler(div).受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);
         response.data = div;
         return response;

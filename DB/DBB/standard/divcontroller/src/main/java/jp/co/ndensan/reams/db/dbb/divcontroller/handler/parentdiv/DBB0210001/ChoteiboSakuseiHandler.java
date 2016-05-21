@@ -29,6 +29,7 @@ public final class ChoteiboSakuseiHandler {
     private final ChoteiboSakuseiDiv div;
     private static final FlexibleYear SHORI_START_NENDO = new FlexibleYear("1999");
     private static final int 四月 = 4;
+    private static final int INT_1 = 1;
 
     private ChoteiboSakuseiHandler(ChoteiboSakuseiDiv div) {
         this.div = div;
@@ -50,6 +51,9 @@ public final class ChoteiboSakuseiHandler {
     public void initialize() {
         HizukeConfig config = new HizukeConfig();
         FlexibleYear 処理年度 = config.get調定年度();
+        if (処理年度.isEmpty()) {
+            return;
+        }
         div.getDdlShoriNendo().setDataSource(createDropDownList(処理年度, SHORI_START_NENDO));
         div.getDdlShoriNendo().setSelectedKey(処理年度.toDateString());
 
@@ -58,7 +62,7 @@ public final class ChoteiboSakuseiHandler {
                 ShoriName.調定簿作成.toRString(),
                 処理年度);
         if (result == null) {
-            RDateTime dateTime = RDateTime.of(処理年度.getYearValue(), 四月, 1, 0, 0, 0);
+            RDateTime dateTime = RDateTime.of(処理年度.getYearValue(), 四月, INT_1, 0, 0, 0);
             div.getTxtChushutsuStYMD().setValue(dateTime.getDate());
             div.getTxtChushutsuStTime().setValue(dateTime.getTime());
         } else {

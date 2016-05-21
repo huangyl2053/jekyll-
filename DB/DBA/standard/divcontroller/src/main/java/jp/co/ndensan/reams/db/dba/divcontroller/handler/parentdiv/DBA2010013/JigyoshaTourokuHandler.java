@@ -59,7 +59,6 @@ public class JigyoshaTourokuHandler {
         } else if (状態_更新.equals(viewState)) {
             get画面初期の更新モードの表示制御();
             panelDiv.getServiceJigyoshaJoho().getTxtJigyoshaNo().setDisabled(true);
-            panelDiv.getServiceJigyoshaJoho().getBtnJigyoshaNoInputGuide().setDisabled(true);
         } else if (状態_削除.equals(viewState)) {
             get画面初期の削除モードの表示制御();
 

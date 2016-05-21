@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -47,7 +47,7 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
                 @Override
                 public boolean apply(FutangendogakuShinseiDiv div) {
                     FlexibleDate 法施行日 = new FlexibleDate(
-                            DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+                            DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
                     if (法施行日.isEmpty() || 適用開始日 == null || 適用開始日.isEmpty()) {
                         return false;

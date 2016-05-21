@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4020001;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001TransitionEventName;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -48,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 完了処理・審査会結果登録のコントローラです。
@@ -138,10 +142,9 @@ public class ShinsaKaiKekkaToroku {
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
-                RString 申請書管理番号リスト = div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo();
+                申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
                 前排他キーの解除();
-                return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).
-                        parameter(申請書管理番号リスト);
+                return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).respond();
             }
         }
         return ResponseData.of(div).respond();
@@ -248,7 +251,7 @@ public class ShinsaKaiKekkaToroku {
             申請時コード = NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード();
         }
         if (!RString.isNullOrEmpty(row.getShinseiKubunHorei())) {
-            法令コード = NinteiShinseiHoreiCode.valueOf(row.getYusenWaritsukesha().toString()).getコード();
+            法令コード = NinteiShinseiHoreiCode.valueOf(row.getShinseiKubunHorei().toString()).getコード();
         }
         if (!RString.isNullOrEmpty(row.getNyuryokuHoho())) {
             入力方法 = NijiHanteiKekkaInputHoho.valueOf(row.getNyuryokuHoho().toString()).getコード();
@@ -308,6 +311,16 @@ public class ShinsaKaiKekkaToroku {
             return YokaigoJotaiKubun09.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード).get名称();
         }
         return RString.EMPTY;
+    }
+
+    private void 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {
+        List<RString> 申請書管理番号リスト = new ArrayList<>();
+        for (dgNinteiTaskList_Row データ : 選択データ) {
+            申請書管理番号リスト.add(データ.getShinseishoKanriNo());
+        }
+        ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
+        shinseishoKanriNoList.setShinseishoKanriNoList(申請書管理番号リスト);
+        ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
     }
 
     private ShinsaKaiKekkaTorokuHandler getHandler(ShinsaKaiKekkaTorokuDiv div) {

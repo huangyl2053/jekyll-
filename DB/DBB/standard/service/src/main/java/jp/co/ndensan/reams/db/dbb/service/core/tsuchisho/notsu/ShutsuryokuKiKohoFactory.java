@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -69,7 +69,7 @@ public class ShutsuryokuKiKohoFactory {
      */
     public List<ShutsuryokuKiKoho> create出力期候補(boolean 期毎タイプフラグ, boolean is仮算定期間) {
         if (調定年度 == null) {
-            調定年度 = new FlexibleYear(DbBusinessConifg.get(
+            調定年度 = new FlexibleYear(DbBusinessConfig.get(
                     ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         }
         List<ShutsuryokuKiKoho> 出力期候補リスト = new ArrayList<>();

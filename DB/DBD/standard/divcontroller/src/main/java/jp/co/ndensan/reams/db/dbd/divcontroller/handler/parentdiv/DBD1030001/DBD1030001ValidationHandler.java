@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -396,7 +396,7 @@ public class DBD1030001ValidationHandler {
     }
 
     private FlexibleDate get制度改正施行日_平成１７年１０月改正() {
-        return new FlexibleDate(DbBusinessConifg.get(
+        return new FlexibleDate(DbBusinessConfig.get(
                 ConfigNameDBU.制度改正施行日_平成１７年１０月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
     }
 
@@ -427,12 +427,12 @@ public class DBD1030001ValidationHandler {
     }
 
     private FlexibleDate get特例措置期間開始日() {
-        return new FlexibleDate(DbBusinessConifg.get(
+        return new FlexibleDate(DbBusinessConfig.get(
                 ConfigNameDBD.社会福祉法人軽減_特例措置期間開始日, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
     }
 
     private FlexibleDate get特例措置期間終了日() {
-        return new FlexibleDate(DbBusinessConifg.get(
+        return new FlexibleDate(DbBusinessConfig.get(
                 ConfigNameDBD.社会福祉法人軽減_特例措置期間終了日, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
     }
 

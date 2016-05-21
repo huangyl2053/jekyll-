@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBE4010001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    審査会対象者個別割付へ遷移する("審査会対象者個別割付へ遷移する");
+    審査会対象者個別割付へ遷移する("審査会対象者個別割付へ遷移する"),
+    処理完了("処理完了");
 
     private final RString name;
 

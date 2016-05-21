@@ -61,6 +61,7 @@ public class KojinJokyoShokaiRelateEntity {
     private RString jigyoshaMeisho;
     private RString ninteiChosainCode;
     private RString chosainShimei;
+    private RString shichosonRenrakuJiko;
     private Code shinseiKubun;
     private RString hihokenshaNameKana;
     private FlexibleDate shinseiYMD;

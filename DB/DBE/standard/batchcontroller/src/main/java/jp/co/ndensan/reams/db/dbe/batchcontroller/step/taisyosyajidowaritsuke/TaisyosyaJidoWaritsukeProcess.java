@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoh
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taisyosyajidowaritsuke.ITaisyosyaJidoWaritsukeRelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -46,7 +46,7 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
     @Override
     protected void beforeExecute() {
         mapper = getMapper(ITaisyosyaJidoWaritsukeRelateMapper.class);
-        taisyosya = mapper.selectTaisyosya(一次判定後.equals(DbBusinessConifg.get(
+        taisyosya = mapper.selectTaisyosya(一次判定後.equals(DbBusinessConfig.get(
                 ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
         shinsakaiWaritsukeNinsu = paramter.getShinsakaiWaritsukeNinsu();
         shinsakaiJidoWariateTeiin = paramter.getShinsakaiJidoWariateTeiin();
@@ -110,7 +110,7 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                 要介護認定申請情報.getShujiiIryokikanCode(),
                 要介護認定申請情報.getShujiiCode(),
                 要介護認定申請情報.getNyushoShisetsuCode(),
-                オブザーバー_機関.equals(DbBusinessConifg.get(
+                オブザーバー_機関.equals(DbBusinessConfig.get(
                                 ConfigNameDBE.オブザーバーチェック, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
     }
 

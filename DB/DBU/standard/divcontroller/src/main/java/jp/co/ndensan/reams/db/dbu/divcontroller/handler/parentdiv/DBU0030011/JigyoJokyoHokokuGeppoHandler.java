@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -61,7 +61,7 @@ public class JigyoJokyoHokokuGeppoHandler {
     public void onLoad(List<JigyoHokokuTokei> kuTokeiList) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
-        RString 合併市町村 = DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 合併市町村 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (new Code(DonyuKeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
             div.getJikkoTanni().getRadHokenshaKyuShichoson().setVisible(false);
             div.getJikkoTanni().getRadKoikiKoseiShichoson().setVisible(false);
@@ -127,7 +127,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                     : new FlexibleDate(集計年月_11から14現物分.get(0).get集計年月().toDateString()));
         }
 
-        RString 一般状況集計方法 = DbBusinessConifg.get(ConfigNameDBU.事業状況報告_一般状況集計方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 一般状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (new RString("1").equals(一般状況集計方法)) {
             if (!審査年月_11から14償還分.isEmpty()) {
                 div.getTxtShukeiYM3().setValue(審査年月_11から14償還分.get(0).get集計年月() == null ? FlexibleDate.EMPTY
@@ -197,7 +197,7 @@ public class JigyoJokyoHokokuGeppoHandler {
             div.getTxtShukeiYM4().setValue(集計年月_決定状況現物分.get(0).get集計年月() == null ? FlexibleDate.EMPTY
                     : new FlexibleDate(集計年月_決定状況現物分.get(0).get集計年月().toDateString()));
         }
-        RString 保険給付集計方法 = DbBusinessConifg.get(ConfigNameDBU.事業状況報告_保険給付集計方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 保険給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (new RString("1").equals(保険給付集計方法)) {
             if (!審査年月_決定状況償還分.isEmpty()) {
                 div.getTxtShukeiYM5().setValue(審査年月_決定状況償還分.get(0).get集計年月() == null ? FlexibleDate.EMPTY

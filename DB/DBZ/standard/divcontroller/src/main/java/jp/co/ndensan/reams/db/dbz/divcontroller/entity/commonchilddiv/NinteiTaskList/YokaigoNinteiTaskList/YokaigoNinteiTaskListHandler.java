@@ -829,7 +829,7 @@ public class YokaigoNinteiTaskListHandler {
 
     private void 審査会登録モードの日付設定(dgNinteiTaskList_Row row, ShinSaKaiToRoKuBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
         if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
@@ -846,6 +846,9 @@ public class YokaigoNinteiTaskListHandler {
         if (business.get介護認定審査会開始予定時刻() != null && !business.get介護認定審査会開始予定時刻().isEmpty()) {
             row.getShinsakaiKaisaiJikan().setValue(RTime.of(Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(0, 2).toString()),
                     Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(2).toString())));
+        }
+        if (business.get認定調査完了年月日() != null && !business.get認定調査完了年月日().isEmpty()) {
+            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定調査完了年月日().toString()));
         }
     }
     private void 二次判定モード(List<NiJiHanTeiBusiness> 二次判定List) {

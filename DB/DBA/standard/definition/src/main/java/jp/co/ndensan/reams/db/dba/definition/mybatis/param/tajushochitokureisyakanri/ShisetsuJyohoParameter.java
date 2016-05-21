@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 施設情報のMyBatis用パラメータクラスです。
  *
- * @reamsid_L DBA-0200-020 linghuhang
+ * @reamsid_L DBA-0380-040 duanzhanli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -24,6 +24,7 @@ public final class ShisetsuJyohoParameter {
     private final RString edaNo;
     private final JigyoshaNo nyushoShisetsuCode;
     private final RString juushotiTokureitaishouShisetu;
+    private final RString psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -37,12 +38,14 @@ public final class ShisetsuJyohoParameter {
             FlexibleDate idoYMD,
             RString edaNo,
             JigyoshaNo nyushoShisetsuCode,
-            RString juushotiTokureitaishouShisetu) {
+            RString juushotiTokureitaishouShisetu,
+            RString psmShikibetsuTaisho) {
         this.shikibetsuCode = shikibetsuCode;
         this.idoYMD = idoYMD;
         this.edaNo = edaNo;
         this.nyushoShisetsuCode = nyushoShisetsuCode;
         this.juushotiTokureitaishouShisetu = juushotiTokureitaishouShisetu;
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
     /**
@@ -53,6 +56,7 @@ public final class ShisetsuJyohoParameter {
      * @param edaNo 枝番
      * @param nyushoShisetsuCode 入所施設コード
      * @param juushotiTokureitaishouShisetu 事業者種別
+     * @param psmShikibetsuTaisho 台帳種別
      * @return 他住所地特例者管理パラメータ
      */
     public static ShisetsuJyohoParameter createParam_TaJushochi(
@@ -60,12 +64,14 @@ public final class ShisetsuJyohoParameter {
             FlexibleDate idoYMD,
             RString edaNo,
             JigyoshaNo nyushoShisetsuCode,
-            RString juushotiTokureitaishouShisetu) {
+            RString juushotiTokureitaishouShisetu,
+            RString psmShikibetsuTaisho) {
         return new ShisetsuJyohoParameter(
                 shikibetsuCode,
                 idoYMD,
                 edaNo,
                 nyushoShisetsuCode,
-                juushotiTokureitaishouShisetu);
+                juushotiTokureitaishouShisetu,
+                psmShikibetsuTaisho);
     }
 }

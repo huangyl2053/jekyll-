@@ -160,7 +160,6 @@ public final class ShikyuShinseiDetailHandler {
                 個別設定(償還払支給判定結果, 被保険者番号, サービス年月, 整理番号, 償還払支給申請);
             } else {
                 set登録(Boolean.TRUE);
-                div.getPnlShinsei().getChkKokuhorenSaiso().setDisabled(true);
                 div.getPanelHead().getBtnKouzaInfo().setDisabled(false);
                 div.getPanelHead().getBtnServerteikyoShomeisyo().setDisabled(false);
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
@@ -330,11 +329,11 @@ public final class ShikyuShinseiDetailHandler {
         }
 
         if (償還払支給申請.is国保連再送付フラグ()) {
-            if (!div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
+            if (div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
                 return true;
             }
         } else {
-            if (div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
+            if (!div.getPnlShinsei().getChkKokuhorenSaiso().getSelectedItems().isEmpty()) {
                 return true;
             }
         }
@@ -573,6 +572,20 @@ public final class ShikyuShinseiDetailHandler {
         RString 申請日 = div.getPnlShinsei().getTxtShinseiYMD().getValue().toDateString();
         ShikyuShinseiDetailParameter parameter = new ShikyuShinseiDetailParameter(
                 処理モード, null, サービス提供年月, 整理番号, 申請日);
+        return parameter;
+    }
+
+    /**
+     * 「取消する」Parameterに以下の情報を設定する
+     *
+     * @return ShokanShinsei 支給申請一覧情報
+     */
+    public ShikyuShinseiDetailParameter btnCancel_SetParameter() {
+        RString 処理モード = div.getPanelHead().getTxtShoriMode().getValue();
+        RYearMonth サービス提供年月 = div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth();
+        RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
+        ShikyuShinseiDetailParameter parameter = new ShikyuShinseiDetailParameter(
+                処理モード, null, サービス提供年月, 整理番号, null);
         return parameter;
     }
 }

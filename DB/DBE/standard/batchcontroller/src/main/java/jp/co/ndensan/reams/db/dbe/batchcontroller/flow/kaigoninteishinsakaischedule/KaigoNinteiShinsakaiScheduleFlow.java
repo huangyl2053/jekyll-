@@ -23,8 +23,6 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
 
     private static final String SHINSAKAISCHEDULEHYO = "shinsakaischedulehyo";
     private static final String NENKAN = "nenkanReport";
-    private static final String CALL_KAGAMIFLOW = "kaigoNinteiShinsakaiScheduleKagamiFlow";
-    private static final RString SCHEDULEKAGAMIFLOW_FLOWID = new RString("KaigoNinteiShinsakaiScheduleKagamiFlow");
     private final RString 帳票出力区分1 = new RString("1");
     private final RString 帳票出力区分2 = new RString("2");
 

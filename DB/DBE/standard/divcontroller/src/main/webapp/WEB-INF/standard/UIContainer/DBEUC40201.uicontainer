@@ -24,7 +24,7 @@
      "layoutTitle": "完了処理・審査会結果登録",
      "eventName": "審査会対象者個別結果登録へ遷移する",
      "destroy": false,
-     "condition": "申請書管理番号リスト",
+     "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE4021001",
      "toLayoutTitle": "審査会対象者個別結果登録",

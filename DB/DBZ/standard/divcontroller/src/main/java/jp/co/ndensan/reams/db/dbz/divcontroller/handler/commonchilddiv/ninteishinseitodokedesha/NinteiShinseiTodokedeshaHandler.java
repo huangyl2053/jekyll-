@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -87,7 +88,8 @@ public class NinteiShinseiTodokedeshaHandler {
     private void setHidden(NinteiShinseiTodokedeshaDataPassModel model) {
         div.setHdnKeyAgeArrivalDay(AgeArrivalDay.当日.code());
         div.setHdnSerchYusenKubun(KensakuYusenKubun.住登内優先.code());
-        div.setHdnGyomuCode(_ControlDataHolder.getControlData().getSubGyomuCD().getColumnValue());
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        div.setHdnGyomuCode(controlData.getSubGyomuCD().getColumnValue());
         div.setHdnKeyDialog(new RString("1"));
         div.setHdnShinseishoKanriNo(model.get申請書管理番号());
         div.setHdnShikibetsuCode(model.get識別コード());

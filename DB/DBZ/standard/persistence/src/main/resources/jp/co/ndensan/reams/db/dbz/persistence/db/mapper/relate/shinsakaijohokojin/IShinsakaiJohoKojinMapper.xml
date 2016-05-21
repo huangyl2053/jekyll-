@@ -69,8 +69,8 @@ and open the template in the editor.
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS C
             ON C."gogitaiNo" = #{合議体番号}
             AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{システム日付} 
-            AND C."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> #{システム日付} 
-        LEFT JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
+            AND #{システム日付} <![CDATA[<=]]> C."gogitaiYukoKikanShuryoYMD"   
+        INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
             AND B."shinsakaiIinCode" = D."shinsakaiIinCode"
@@ -98,8 +98,8 @@ and open the template in the editor.
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS C
             ON C."gogitaiNo" = #{合議体番号}
             AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{システム日付} 
-            AND C."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> #{システム日付} 
-        LEFT JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
+            AND #{システム日付} <![CDATA[<=]]> C."gogitaiYukoKikanShuryoYMD"
+        INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
             AND B."shinsakaiIinCode" = D."shinsakaiIinCode"

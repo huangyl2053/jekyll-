@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig;
+package jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig;
 
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  *
  * @reamsid_L DBX-9999-023 liangbc
  */
-public final class DbBusinessConifg {
+public final class DbBusinessConfig {
 
-    private DbBusinessConifg() {
+    private DbBusinessConfig() {
     }
 
     /**

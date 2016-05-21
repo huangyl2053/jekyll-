@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ServiceJigyoshaJoho のクラスファイル 
  * 
- * 
+ * @author 自動生成
  */
 public class ServiceJigyoshaJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,8 +27,6 @@ public class ServiceJigyoshaJohoDiv extends Panel {
     private TextBoxFlexibleDate txtYukoShuryoYMD;
     @JsonProperty("txtJigyoshaNo")
     private TextBoxCode txtJigyoshaNo;
-    @JsonProperty("btnJigyoshaNoInputGuide")
-    private ButtonDialog btnJigyoshaNoInputGuide;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
     @JsonProperty("txtJigyoshaNameKana")
@@ -132,24 +130,6 @@ public class ServiceJigyoshaJohoDiv extends Panel {
     @JsonProperty("txtJigyoshaNo")
     public void setTxtJigyoshaNo(TextBoxCode txtJigyoshaNo) {
         this.txtJigyoshaNo = txtJigyoshaNo;
-    }
-
-    /*
-     * getbtnJigyoshaNoInputGuide
-     * @return btnJigyoshaNoInputGuide
-     */
-    @JsonProperty("btnJigyoshaNoInputGuide")
-    public ButtonDialog getBtnJigyoshaNoInputGuide() {
-        return btnJigyoshaNoInputGuide;
-    }
-
-    /*
-     * setbtnJigyoshaNoInputGuide
-     * @param btnJigyoshaNoInputGuide btnJigyoshaNoInputGuide
-     */
-    @JsonProperty("btnJigyoshaNoInputGuide")
-    public void setBtnJigyoshaNoInputGuide(ButtonDialog btnJigyoshaNoInputGuide) {
-        this.btnJigyoshaNoInputGuide = btnJigyoshaNoInputGuide;
     }
 
     /*

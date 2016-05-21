@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -95,7 +95,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosainSearch().getDdlkikankubun().getDataSource().clear();
         div.getChosainSearch().getDdlkikankubun().getDataSource().addAll(chosaKikanKubunCodes);
         clear();
-        RString データ出力件数閾値 = DbBusinessConifg.get(ConfigNameDBE.データ出力件数閾値, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString データ出力件数閾値 = DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         div.getChosainSearch().getTxtSaidaiHyojiKensu().setValue(new Decimal(データ出力件数閾値.toString()));
     }
 

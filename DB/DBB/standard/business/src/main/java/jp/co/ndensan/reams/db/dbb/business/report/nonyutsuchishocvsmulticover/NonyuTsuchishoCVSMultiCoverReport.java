@@ -56,10 +56,13 @@ public class NonyuTsuchishoCVSMultiCoverReport extends Report<NonyuTsuchishoCVSM
             }
         }
         if (作成フラグ) {
-//            INonyuTsuchishoCVSMultiCoverEditor coverEditor = new NonyuTsuchishoCVSMultiCoverEditor(item);
-//            INonyuTsuchishoCVSMultiCoverBuilder builder = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
-//            reportSourceWriter.writeLine(builder);
-
+            作成フラグ = false;
         }
+//        if (作成フラグ) {
+////            INonyuTsuchishoCVSMultiCoverEditor coverEditor = new NonyuTsuchishoCVSMultiCoverEditor(item);
+////            INonyuTsuchishoCVSMultiCoverBuilder builder = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
+////            reportSourceWriter.writeLine(builder);
+//
+//        }
     }
 }

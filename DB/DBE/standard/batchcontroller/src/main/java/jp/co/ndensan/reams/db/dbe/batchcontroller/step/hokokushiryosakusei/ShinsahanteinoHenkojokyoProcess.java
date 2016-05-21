@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiH
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsahanteinohenkojokyo.ShinsahanteinoHenkojokyoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -169,7 +169,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
         batisParameter.setShichosonCode(current.getShichosonCode());
         batisParameter.setNinteiShinseiKubun(認定申請区分);
         batisParameter.setJyotaiHenkoKubun(状態変更区分);
-        batisParameter.setJissiZumi(実施済.equals(DbBusinessConifg.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
+        batisParameter.setJissiZumi(実施済.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
         return mapper.getShinsahanteinoHenkojokyoYukoKikanEntyo(batisParameter);
     }
 

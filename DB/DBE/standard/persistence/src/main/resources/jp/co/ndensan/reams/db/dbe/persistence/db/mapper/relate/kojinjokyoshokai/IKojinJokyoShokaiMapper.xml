@@ -43,6 +43,7 @@
         <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosainCode" column="DbT5913_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosainShimei" column="DbT5913_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonRenrakuJiko" column="DbT5101Nintei_shichosonRenrakuJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         
         <result property="hihokenshaNo" column="DbT5101Nintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinseiKubun" column="DbT5101Nintei_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
@@ -195,7 +196,8 @@
                 DbT5910."ninteichosaItakusakiCode" AS "DbT5910_ninteichosaItakusakiCode",						
                 DbT5910."jigyoshaMeisho" AS "DbT5910_jigyoshaMeisho",						
                 DbT5913."ninteiChosainCode" AS "DbT5913_ninteiChosainCode",						
-                DbT5913."chosainShimei" AS "DbT5913_chosainShimei"																
+                DbT5913."chosainShimei" AS "DbT5913_chosainShimei",
+                DbT5101Nintei."shichosonRenrakuJiko" AS "DbT5101Nintei_shichosonRenrakuJiko"
 	FROM																	
 		rgdb."DbT5123NinteiKeikakuJoho" AS DbT5123Nintei																
 	INNER JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Nintei															

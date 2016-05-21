@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000011.Pane
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraishikyu.ShokanbaraiShikyuFinder;
 import jp.co.ndensan.reams.db.dbc.service.report.shoukanbaraisuuchishoikkatsusakusei.ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -72,7 +72,7 @@ public class PanelnlTotalHandler {
         div.getTxtUketsukebi().setToValue(RDate.getNowDate());
         div.getTxtKeteibiJoken().setToValue(RDate.getNowDate());
         div.getTxtKeteibiJoken().setReadOnly(true);
-        if (受託区分_2.equals(DbBusinessConifg.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate()))) {
+        if (受託区分_2.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate()))) {
             div.getTxtKeteishaUketsukeYM().setDomain(RDate.getNowDate().getYearMonth());
             div.getTxtKeteishaUketsukeYM().setDisplayNone(false);
             div.getRadKetteishaUketsukeYM().setDisplayNone(false);

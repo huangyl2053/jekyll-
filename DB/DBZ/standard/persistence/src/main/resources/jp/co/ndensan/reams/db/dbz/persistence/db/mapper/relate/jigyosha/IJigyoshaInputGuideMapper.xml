@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <!-- @reamsid_L DBA-0140-030 houtianpeng -->
+<!-- @reamsid_L DBA-0140-030 houtianpeng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.jigyosha.IJigyoshaInputGuideMapper">
 
     <resultMap id="resultMap_serviceJigyoshaInputGuideEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
@@ -95,16 +95,6 @@
                 AND
                 dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
             </if>
-            <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
-                AND
-                dbT7060Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
-                AND
-                dbT7060Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
-                AND
-                dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
-                AND
-                dbT7063Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
-            </if>
             <if test = "isJigyoshaName">
                 <if test = "isZennpouitti">
                     AND
@@ -186,12 +176,6 @@
                 AND
                 dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
             </if>
-            <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
-                AND
-                dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
-                AND
-                dbT1005Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
-            </if>
             <if test = "isJigyoshaName">
                 <if test = "isZennpouitti">
                     AND
@@ -241,13 +225,13 @@
         dbT1005Kaigo."isDeleted" <![CDATA[<>]]> TRUE
         AND
         <if test = "isKannaiKangaiKubun1Flg">
-        dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun1}
+            dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun1}
         </if>
         <if test = "isKannaiKangaiKubun2Flg">
-        dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun2}
+            dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun2}
         </if>
         <if test = "isKannaiKangaiKubunFlg">
-        dbT1005Kaigo."kannaiKangaiKubun" in (#{kannaiKangaiKubun1},#{kannaiKangaiKubun2})
+            dbT1005Kaigo."kannaiKangaiKubun" in (#{kannaiKangaiKubun1},#{kannaiKangaiKubun2})
         </if>
         AND
         dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
@@ -268,12 +252,6 @@
             <if test = "!isYukoKaishiYMDFromFlag and isYukoKaishiYMDToFlag">
                 AND
                 dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
-            </if>
-            <if test = "!isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
-                AND
-                dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate}
-                AND
-                dbT1005Kaigo."yukoShuryoYMD" <![CDATA[>=]]> #{systemdate}
             </if>
             <if test = "isJigyoshaName">
                 <if test = "isZennpouitti">

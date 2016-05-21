@@ -65,6 +65,8 @@
         AND
         DbT1001Hiho."shikakuHenkoYMD" IS NOT NULL
         AND
+        DbT1001Hiho."shikakuHenkoYMD" <![CDATA[<>]]> ''
+        AND
         DbT1001Hiho."shikakuShutokuYMD" = #{shikakuShutokuYMD}
         AND
         DbT1001Hiho."logicalDeletedFlag"<![CDATA[<>]]> true

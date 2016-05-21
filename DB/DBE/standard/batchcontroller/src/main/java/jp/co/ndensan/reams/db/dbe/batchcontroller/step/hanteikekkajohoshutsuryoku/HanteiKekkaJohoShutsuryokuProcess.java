@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshutsuryo
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KekkatsuchiTaishoshaIchiranReportSource;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun.広域連合;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -76,7 +76,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
     protected void afterExecute() {
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
             headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
-                    DbBusinessConifg.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
+                    DbBusinessConfig.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                     processPrm.getNijiHanteiYMDFrom(),
                     processPrm.getNijiHanteiYMDTo(),
                     RDate.getNowDate().toDateString(),

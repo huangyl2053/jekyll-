@@ -329,7 +329,39 @@
             resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter"
             fetchSize="500">
-        SELECT A."gogitaiNo"
+        SELECT S.* ,
+        (SELECT COUNT(1)
+         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" G
+         WHERE S.gogitaiNo = G."gogitaiNo"
+        <choose>
+            <when test="isTaishoTsukiKubun">
+                <if test="!isTaishoGeppiKubun">
+                    AND SUBSTR(G."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
+                </if>
+            </when>
+            <otherwise>
+                <if test="isTaishoGeppiKubun">
+                    <choose>
+                        <when test="!isEmptyTaishoGeppiFrom">
+                            <choose>
+                                <when test="!isEmptyTaishoGeppiTo">
+                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> G."shinsakaiKaisaiYMD"
+                                    AND G."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                </when>
+                                <otherwise>
+                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> G."shinsakaiKaisaiYMD"
+                                </otherwise>
+                            </choose>
+                        </when>
+                        <otherwise>
+                            AND G."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        </otherwise>
+                    </choose>
+                </if>
+            </otherwise>
+        </choose>) AS shinsakaiKaisaiNoCount
+        FROM
+        (SELECT A."gogitaiNo" AS gogitaiNo
         ,E."gogitaiMei"
         ,F."shichosonCode"
         ,F."shichosonMeisho"
@@ -342,7 +374,6 @@
         </if>
         ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
-        ,COUNT(A."shinsakaiKaisaiNo") AS shinsakaiKaisaiNoCount
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
         ON A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"
@@ -445,7 +476,7 @@
         </if>
         <if test="isHorei">
             ,C."ninteiShinseiHoreiKubunCode"
-        </if>
+        </if>) AS S
     </select>
 
     <select id="getSinsakaiHanteiJyokyo"

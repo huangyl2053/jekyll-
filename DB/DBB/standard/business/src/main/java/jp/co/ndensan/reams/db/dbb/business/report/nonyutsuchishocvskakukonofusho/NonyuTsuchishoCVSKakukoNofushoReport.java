@@ -55,6 +55,9 @@ public class NonyuTsuchishoCVSKakukoNofushoReport extends Report<NonyuTsuchishoC
                 break;
             }
         }
+        if (作成フラグ) {
+            作成フラグ = false;
+        }
 //        if (作成フラグ) {
 //            for (int i = 0; i < item.get納入通知書期情報リスト().size(); i++) {
 //                INonyuTsuchishoCVSKakukoNofushoEditor nofushoEditor = new NonyuTsuchishoCVSKakukoNofushoEditor(item);

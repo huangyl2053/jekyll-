@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbV2001ChoshuHohoAliveDac
 import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -204,10 +206,11 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     @Transaction
     public DbV2001ChoshuHohoEntity select被保険者徴収方法情報の取得(HihokenshaNo 被保険者番号) {
         RString nendo = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
-        if (nendo != null && !nendo.isEmpty()) {
-            賦課年度 = new FlexibleYear(nendo.toString());
+        if (nendo == null || nendo.isEmpty()) {
+            throw new SystemException(DbxErrorMessages.業務コンフィグなし.getMessage()
+                    .replace(ConfigNameDBB.日付関連_調定年度.name()).evaluate());
         }
+        FlexibleYear 賦課年度 = new FlexibleYear(nendo.toString());
         DbV2001ChoshuHohoEntity entity = choshuHohoAliveDac.selectChoshuhohonojohoAll(賦課年度, 被保険者番号);
 
         return entity;
