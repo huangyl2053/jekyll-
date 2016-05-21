@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -14,6 +15,7 @@ public class ShujiiikenshoReportSource implements IReportSource {
 
     @ReportItem(name = "hokenshaNo", length = 6, order = 2)
     public RString hokenshaNo;
+    @ReportExpandedInfo
     @ReportItem(name = "hihokenshaNo", length = 10, order = 11)
     public RString hihokenshaNo;
     @ReportItem(name = "hihokenshaName", length = 30, order = 1)
