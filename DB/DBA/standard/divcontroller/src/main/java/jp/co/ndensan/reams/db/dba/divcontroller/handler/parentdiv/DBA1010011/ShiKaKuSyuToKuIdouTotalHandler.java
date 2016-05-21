@@ -124,7 +124,6 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
             状態_被保履歴タブ = new RString("2");
             ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_被保履歴タブ, 状態_被保履歴タブ);
         }
-//        資格取得情報状態の設定(資格取得情報パネル初期のチェック());
         if (資格取得情報パネル初期のチェック()) {
             資格取得情報パネルの非活性初期化();
         } else {
