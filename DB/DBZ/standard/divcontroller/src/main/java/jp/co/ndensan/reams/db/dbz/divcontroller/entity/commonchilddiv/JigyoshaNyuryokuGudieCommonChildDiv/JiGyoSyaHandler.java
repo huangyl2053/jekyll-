@@ -427,9 +427,12 @@ public class JiGyoSyaHandler {
 
         if (!kenCodeJigyoshaInputGuide.records().isEmpty()) {
 
+            KeyValueDataSource KeyValue = new KeyValueDataSource();
+            KeyValue.setKey(RString.EMPTY);
+            KeyValue.setValue(RString.EMPTY);
+            dataSource.add(KeyValue);
             for (ZenkokuJushoItem entity : kenCodeJigyoshaInputGuide.records()) {
 
-                KeyValueDataSource KeyValue = new KeyValueDataSource();
                 KeyValue.setKey(entity.get都道府県コード());
                 KeyValue.setValue(entity.get都道府県コード().concat(new RString(":")).concat(entity.get都道府県名()));
 
