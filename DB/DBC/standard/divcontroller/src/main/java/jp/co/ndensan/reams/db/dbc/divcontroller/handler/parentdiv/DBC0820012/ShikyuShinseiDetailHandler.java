@@ -575,4 +575,18 @@ public final class ShikyuShinseiDetailHandler {
                 処理モード, null, サービス提供年月, 整理番号, 申請日);
         return parameter;
     }
+
+    /**
+     * 「取消する」Parameterに以下の情報を設定する
+     *
+     * @return ShokanShinsei 支給申請一覧情報
+     */
+    public ShikyuShinseiDetailParameter btnCancel_SetParameter() {
+        RString 処理モード = div.getPanelHead().getTxtShoriMode().getValue();
+        RYearMonth サービス提供年月 = div.getPanelHead().getTxtServiceTeikyoYM().getValue().getYearMonth();
+        RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
+        ShikyuShinseiDetailParameter parameter = new ShikyuShinseiDetailParameter(
+                処理モード, null, サービス提供年月, 整理番号, null);
+        return parameter;
+    }
 }

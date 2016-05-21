@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012.ShikyuShinseiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -35,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 償還払支給申請の支給申請を登録する画面Controllerです。
@@ -60,7 +60,9 @@ public class ShikyuShinseiDetail {
      */
     public ResponseData<ShikyuShinseiDetailDiv> onLoad(ShikyuShinseiDetailDiv div) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-
+        if (メッセージ_登録.equals(処理モード) || MODEL_ADD.equals(処理モード)) {
+            処理モード = MODEL_ADD;
+        }
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
@@ -73,7 +75,7 @@ public class ShikyuShinseiDetail {
         ShikyuShinseiDetailHandler handler = getHandler(div);
         handler.load介護宛名情報(識別コード);
         handler.load介護資格系基本情報(識別コード);
-        RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+        RString config = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 処理モード, config);
         ViewStateHolder.put(ViewStateKeys.償還払支給申請詳細データ, 償還払支給申請);
@@ -96,6 +98,9 @@ public class ShikyuShinseiDetail {
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnUpdate(ShikyuShinseiDetailDiv div) {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (メッセージ_登録.equals(処理モード) || MODEL_ADD.equals(処理モード)) {
+            処理モード = MODEL_ADD;
+        }
         try {
             if (MODEL_ADD.equals(処理モード)) {
                 boolean flag = getHandler(div).is変更あり_ADD();
@@ -213,8 +218,8 @@ public class ShikyuShinseiDetail {
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnCancel(ShikyuShinseiDetailDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikyuShinseiDetailParameter parameter = getHandler(div).setParameter();
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        ShikyuShinseiDetailParameter parameter = getHandler(div).btnCancel_SetParameter();
+        RString 処理モード = parameter.get処理モード();
         if (MODEL_DEL.equals(処理モード)) {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
             ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
