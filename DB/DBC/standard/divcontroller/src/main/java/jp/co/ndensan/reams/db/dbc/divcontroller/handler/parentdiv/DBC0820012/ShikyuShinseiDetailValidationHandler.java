@@ -101,7 +101,7 @@ public class ShikyuShinseiDetailValidationHandler {
         Decimal 保険請求金額 = div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().getValue();
         Decimal 自己負担額合計 = div.getPnlShinsei().getTxtNumHokenKyufuGaku().getValue();
         Decimal 支払金額合計 = div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue();
-        if (null == 保険請求金額 || null == 自己負担額合計) {
+        if (null == 保険請求金額 && null == 自己負担額合計) {
             return validPairs;
         }
         if (null == 支払金額合計) {
