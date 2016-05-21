@@ -312,8 +312,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        // TODO viewStateのデータ取得
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(被保険者番号,
                 サービス年月, 整理番号, 識別コード);
     }
@@ -344,9 +343,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         int 増減単位 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        // TODO viewStateのデータ取得
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         List<SyokanbaraihiShikyuShinseiKetteEntity> entityList = new ArrayList<>();
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()
                 .getDgSyokanbaraikete().getDataSource();
