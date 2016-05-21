@@ -433,12 +433,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         int 削除レコード数 = 0;
         int 著工日に対する年月不一致レコード = 0;
         int 対象住宅住所が不一致レコード = 0;
-        if (!gridList.get(0).getTxtChakkoYoteibi().isNullOrEmpty()) {
-            著工日に対する年月 = new FlexibleDate(new RDate(gridList.get(0).getTxtChakkoYoteibi().toString()).toDateString())
-                    .getYearMonth().toDateString();
-        }
-        if (!gridList.get(0).getTxtJutakuAddress().isNullOrEmpty()) {
-            対象住宅住所 = gridList.get(0).getTxtJutakuAddress();
+        for (dgGaisyuList_Row tmpRow : gridList) {
+            if (!行状態_削除.equals(tmpRow.getTxtJyotai())) {
+                著工日に対する年月 = new FlexibleDate(new RDate(tmpRow.getTxtChakkoYoteibi().toString()).toDateString())
+                        .getYearMonth().toDateString();
+                対象住宅住所 = tmpRow.getTxtJutakuAddress();
+                break;
+            }
         }
 
         for (dgGaisyuList_Row tmpRow : gridList) {
