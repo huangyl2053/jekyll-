@@ -156,93 +156,107 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-        RString nowBreakKey = RString.EMPTY;
-        if (entity.get支給申請Entity() != null) {
-            HihokenshaNo hihokenshaNo = entity.get支給申請Entity().getHiHokenshaNo();
-            FlexibleYearMonth serviceTeikyoYM = entity.get支給申請Entity().getServiceTeikyoYM();
-            JigyoshaNo shinseiJigyoshaNo = entity.get支給申請Entity().getShinseiJigyoshaNo();
-            if (hihokenshaNo != null && serviceTeikyoYM != null && shinseiJigyoshaNo != null) {
-                nowBreakKey = hihokenshaNo.value().concat(SPLIT)
-                        .concat(serviceTeikyoYM.toDateString()).concat(SPLIT)
-                        .concat(entity.get支給申請Entity().getSeiriNo()).concat(SPLIT)
-                        .concat(shinseiJigyoshaNo.value());
-            }
-        }
-
-        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
-            preBreakKey = nowBreakKey;
-            RString key3038 = RString.EMPTY;
-            if (entity.get請求基本List() != null && !entity.get請求基本List().isEmpty()) {
-                key3038 = nowBreakKey.concat(SPLIT).concat(entity.get請求基本List().get(0).getYoshikiNo())
-                        .concat(SPLIT).concat(entity.get請求基本List().get(0).getMeisaiNo());
-            }
-            mapFlag.put(key3038, true);
-            lstDbt3038List.addAll(entity.get請求基本List());
-            if (entity.get口座情報Entity() != null) {
-                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
-            }
-            preEntity = entity;
-            return;
-        }
-        if (!preBreakKey.equals(nowBreakKey)) {
-            preEntity.get請求基本List().clear();
-            preEntity.get請求基本List().addAll(lstDbt3038List);
-            List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
-
-            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-                lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
-            }
-            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-                kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
-                preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
-            }
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
-            連番 = 連番.add(Decimal.ONE);
-            personalDataList.add(toPersonalData(preEntity));
-            lstDbt3038List.clear();
-            lstDbt3038List.addAll(entity.get請求基本List());
-            lstKinyuKikanEntity.clear();
-            if (entity.get口座情報Entity() != null) {
-                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
-            }
-        }
-        preBreakKey = nowBreakKey;
-        preEntity = entity;
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 連番));
+        連番 = 連番.add(Decimal.ONE);
+        personalDataList.add(toPersonalData(entity));
     }
 
     @Override
     protected void afterExecute() {
-        if (preEntity == null && parameter.is項目名付加()) {
-            eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoCSVEntity());
-        }
-        if (preEntity != null && preEntity.get請求基本List() != null && !preEntity.get請求基本List().isEmpty()) {
-            preEntity.get請求基本List().clear();
-            preEntity.get請求基本List().addAll(lstDbt3038List);
-        }
-        List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
-
-        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-            lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
-        }
-        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-            kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
-            preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
-        }
-        if (preEntity != null) {
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
-            連番 = 連番.add(Decimal.ONE);
-            personalDataList.add(toPersonalData(preEntity));
-        }
-        eucCsvWriter.close();
-        if (personalDataList == null || personalDataList.isEmpty()) {
-            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
-        } else {
-            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
-        }
+        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         バッチ出力条件リストの出力();
     }
 
+//    @Override
+//    protected void process(HanyoListShokanbaraiJokyoEntity entity) {
+//        RString nowBreakKey = RString.EMPTY;
+//        if (entity.get支給申請Entity() != null) {
+//            HihokenshaNo hihokenshaNo = entity.get支給申請Entity().getHiHokenshaNo();
+//            FlexibleYearMonth serviceTeikyoYM = entity.get支給申請Entity().getServiceTeikyoYM();
+//            //JigyoshaNo shinseiJigyoshaNo = entity.get支給申請Entity().getShinseiJigyoshaNo();
+//            RString seiriNo = entity.get支給申請Entity().getSeiriNo();
+//            if (hihokenshaNo != null && serviceTeikyoYM != null && seiriNo != null) {
+//                nowBreakKey = hihokenshaNo.value().concat(SPLIT)
+//                        .concat(serviceTeikyoYM.toDateString()).concat(SPLIT)
+//                        .concat(entity.get支給申請Entity().getSeiriNo()).concat(SPLIT);
+//                        //.concat(shinseiJigyoshaNo.value());
+//            }
+//        }
+//
+//        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
+//            preBreakKey = nowBreakKey;
+//            RString key3038 = RString.EMPTY;
+//            if (entity.get請求基本List() != null && !entity.get請求基本List().isEmpty()) {
+//                key3038 = nowBreakKey.concat(SPLIT).concat(entity.get請求基本List().get(0).getYoshikiNo())
+//                        .concat(SPLIT).concat(entity.get請求基本List().get(0).getMeisaiNo());
+//            }
+//            mapFlag.put(key3038, true);
+//            lstDbt3038List.addAll(entity.get請求基本List());
+//            if (entity.get口座情報Entity() != null) {
+//                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+//            }
+//            preEntity = entity;
+//            //return;
+//        }
+//        //if (!preBreakKey.equals(nowBreakKey)) {
+//            preEntity.get請求基本List().clear();
+//            preEntity.get請求基本List().addAll(lstDbt3038List);
+//            List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
+//
+//            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+//                lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
+//            }
+//            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+//                kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
+//                preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
+//            }
+//            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+//            連番 = 連番.add(Decimal.ONE);
+//            personalDataList.add(toPersonalData(preEntity));
+//            lstDbt3038List.clear();
+//            lstDbt3038List.addAll(entity.get請求基本List());
+//            lstKinyuKikanEntity.clear();
+//            if (entity.get口座情報Entity() != null) {
+//                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+//            }
+//        //}
+//        preBreakKey = nowBreakKey;
+//        preEntity = entity;
+//    }
+//
+//    @Override
+//    protected void afterExecute() {
+//        if (preEntity == null && parameter.is項目名付加()) {
+//            eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoCSVEntity());
+//        }
+//        if (preEntity != null && preEntity.get請求基本List() != null && !preEntity.get請求基本List().isEmpty()) {
+//            preEntity.get請求基本List().clear();
+//            preEntity.get請求基本List().addAll(lstDbt3038List);
+//        }
+//        List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
+//
+//        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+//            lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
+//        }
+//        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+//            kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
+//            preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
+//        }
+//        if (preEntity != null) {
+//            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+//            連番 = 連番.add(Decimal.ONE);
+//            personalDataList.add(toPersonalData(preEntity));
+//        }
+//        eucCsvWriter.close();
+//        if (personalDataList == null || personalDataList.isEmpty()) {
+//            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+//        } else {
+//            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+//            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+//        }
+//        バッチ出力条件リストの出力();
+//    }
     private PersonalData toPersonalData(HanyoListShokanbaraiJokyoEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(CODE, 被保険者番号,
                 entity.get被保険者番号().value());
