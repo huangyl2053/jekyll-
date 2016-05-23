@@ -56,17 +56,18 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     private static final int NUM_10 = 10;
     private static final int NUM_11 = 11;
     private static final int NUM_12 = 12;
-    private static final int NUM_13 = 13;
-    private static final int NUM_14 = 14;
-    private static final int NUM_15 = 15;
+    private static final char CHAR_0 = '0';
 
-    private static final RString 現金 = new RString("現金");
-    private static final RString 口座 = new RString("口座");
+    private static final RString 現金 = new RString("0");
+    private static final RString 口座 = new RString("1");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString SAKUSEI = new RString("作成");
     private static final RString HYPHEN = new RString("-");
+    private static final RString 特別徴収 = new RString("特別徴収");
+    private static final RString 普通徴収 = new RString("普通徴収");
+    private static final RString 併用徴収 = new RString("併用徴収");
 
     /**
      * インスタンスを生成します。
@@ -82,7 +83,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         調定日時 = inputEntity.get調定日時();
         賦課年度 = inputEntity.get賦課年度();
         計算後情報_宛名_口座_更正前Entity = inputEntity.get計算後情報_宛名_口座_更正前Entity();
+        計算後情報_宛名_口座_更正前Entity.set更正前後区分(更正前後区分_更正前);
         計算後情報_宛名_口座_更正後Entity = inputEntity.get計算後情報_宛名_口座_更正後Entity();
+        計算後情報_宛名_口座_更正後Entity.set更正前後区分(更正前後区分_更正後);
         association = inputEntity.getAssociation();
         住所編集 = inputEntity.get住所編集();
 
@@ -108,9 +111,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         if (association.get地方公共団体コード() != null) {
             source.hokenshaNo = association.get地方公共団体コード().value();
         }
-        if (association.get市町村名() != null) {
-            source.hokenshaName = association.get市町村名();
-        }
+        source.hokenshaName = association.get市町村名();
         if (計算後情報_宛名_口座_更正後Entity != null) {
             if (計算後情報_宛名_口座_更正後Entity.get被保険者番号() != null) {
                 source.list1_1 = 計算後情報_宛名_口座_更正後Entity.get被保険者番号().value();
@@ -126,9 +127,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (計算後情報_宛名_口座_更正後Entity.get口座Entity() != null) {
                 kozaJoho(source);
             }
-            if (計算後情報_宛名_口座_更正後Entity.get調定事由1() != null) {
-                source.list1_6 = 計算後情報_宛名_口座_更正後Entity.get調定事由1();
-            }
+            source.list1_6 = 計算後情報_宛名_口座_更正後Entity.get調定事由1();
             if (計算後情報_宛名_口座_更正前Entity.get調定日時() != null) {
                 source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
             }
@@ -147,11 +146,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
             if (計算後情報_宛名_口座_更正前Entity.get口座区分() != null) {
                 RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
-                source.list2_17 = 口座区分 == 現金 ? 現金 : 口座;
+                source.list2_17 = 口座区分.equals(現金) ? 現金 : 口座;
             }
-            if (計算後情報_宛名_口座_更正後Entity.get調定事由2() != null) {
-                source.list2_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
-            }
+            source.list2_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
             if (計算後情報_宛名_口座_更正後Entity.get調定日時() != null) {
                 source.list3_1 = 計算後情報_宛名_口座_更正後Entity.get調定日時().getDate().wareki().toDateString();
             }
@@ -159,10 +156,10 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                 source.list3_2 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額(), 0);
             }
-            editAdd(source);
-            editProcess(source);
-            editHandle(source);
-            editMethod(source);
+            edit項目追加(source);
+            edit項目追加2(source);
+            edit項目追加3(source);
+            edit項目追加4(source);
         }
         return source;
     }
@@ -173,7 +170,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      * @param source GenNendoHonsanteiIdouSource
      * @return GenNendoHonsanteiIdouSource
      */
-    public GenNendoHonsanteiIdouSource editAdd(GenNendoHonsanteiIdouSource source) {
+    public GenNendoHonsanteiIdouSource edit項目追加(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity != null) {
 
             if (計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額() != null) {
@@ -187,11 +184,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             set月別取得段階(計算後情報_宛名_口座_更正後Entity, source);
             if (計算後情報_宛名_口座_更正後Entity.get口座区分() != null) {
                 RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
-                source.list3_17 = 口座区分 == 現金 ? 現金 : 口座;
+                source.list3_17 = 口座区分.equals(現金) ? 現金 : 口座;
             }
-            if (計算後情報_宛名_口座_更正後Entity.get調定事由3() != null) {
-                source.list3_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
-            }
+            source.list3_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
 
             if (計算後情報_宛名_口座_更正前Entity.get特徴期別金額01() != null) {
                 source.list4_1 = DecimalFormatter
@@ -247,7 +242,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      * @param source GenNendoHonsanteiIdouSource
      * @return GenNendoHonsanteiIdouSource
      */
-    public GenNendoHonsanteiIdouSource editProcess(GenNendoHonsanteiIdouSource source) {
+    public GenNendoHonsanteiIdouSource edit項目追加2(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity != null) {
             if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額06() != null) {
                 source.list4_12 = DecimalFormatter
@@ -285,41 +280,41 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                 source.list4_20 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額14(), 0);
             }
-            Decimal 本算定特徴期合計 = 計算後情報_宛名_口座_更正前Entity.get特徴期別金額01()
-                    .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02())
-                    .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03())
-                    .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額04())
-                    .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額05()
-                            .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額06()));
-            Decimal 本算定普徴期合計 = 計算後情報_宛名_口座_更正前Entity.get普徴期別金額01()
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05()
-                            .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06()))
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額08())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額09())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額10()
-                            .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額11()))
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額12())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額13())
-                    .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額14());
+            Decimal 本算定特徴期合計 = nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01())
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額04()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額05())
+                            .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額06())));
+            Decimal 本算定普徴期合計 = nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01())
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05())
+                            .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06())))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額08()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額09()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額10())
+                            .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額11())))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額12()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額13()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額14()));
             if ((本算定特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
                     && 本算定普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
                 source.list4_21 = RString.EMPTY;
             }
             if ((本算定特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
                     && 本算定普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
-                source.list4_21 = new RString("特別徴収");
+                source.list4_21 = 特別徴収;
             }
             if ((本算定特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
                     && 本算定普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
-                source.list4_21 = new RString("普通徴収");
+                source.list4_21 = 普通徴収;
             }
             if ((本算定特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
                     && 本算定普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
-                source.list4_21 = new RString("併用徴収");
+                source.list4_21 = 併用徴収;
             }
         }
         return source;
@@ -331,11 +326,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      * @param source GenNendoHonsanteiIdouSource
      * @return GenNendoHonsanteiIdouSource
      */
-    public GenNendoHonsanteiIdouSource editHandle(GenNendoHonsanteiIdouSource source) {
+    public GenNendoHonsanteiIdouSource edit項目追加3(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity != null) {
-            if (計算後情報_宛名_口座_更正後Entity.get調定事由4() != null) {
-                source.list4_22 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
-            }
+            source.list4_22 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
 
             if (計算後情報_宛名_口座_更正後Entity.get特徴期別金額01() != null) {
                 source.list5_1 = DecimalFormatter
@@ -411,7 +404,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      * @param source GenNendoHonsanteiIdouSource
      * @return GenNendoHonsanteiIdouSource
      */
-    public GenNendoHonsanteiIdouSource editMethod(GenNendoHonsanteiIdouSource source) {
+    public GenNendoHonsanteiIdouSource edit項目追加4(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity != null) {
             if (計算後情報_宛名_口座_更正後Entity.get普徴期別金額11() != null) {
                 source.list5_17 = DecimalFormatter
@@ -429,41 +422,41 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                 source.list5_20 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額14(), 0);
             }
-            Decimal 本算定後特徴期合計 = 計算後情報_宛名_口座_更正後Entity.get特徴期別金額01()
-                    .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02())
-                    .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03())
-                    .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額04())
-                    .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額05()
-                            .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額06()));
-            Decimal 本算定後普徴期合計 = 計算後情報_宛名_口座_更正後Entity.get普徴期別金額01()
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05()
-                            .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06()))
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額08())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額09())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額10()
-                            .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額11()))
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額12())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額13())
-                    .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額14());
+            Decimal 本算定後特徴期合計 = nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01())
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額04()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額05())
+                            .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額06())));
+            Decimal 本算定後普徴期合計 = nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01())
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05())
+                            .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06())))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額08()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額09()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額10())
+                            .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額11())))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額12()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額13()))
+                    .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額14()));
             if ((本算定後特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
                     && 本算定後普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
                 source.list5_21 = RString.EMPTY;
             }
             if ((本算定後特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
                     && 本算定後普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
-                source.list5_21 = new RString("特別徴収");
+                source.list5_21 = 特別徴収;
             }
             if ((本算定後特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
                     && 本算定後普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
-                source.list5_21 = new RString("普通徴収");
+                source.list5_21 = 普通徴収;
             }
             if ((本算定後特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
                     && 本算定後普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
-                source.list5_21 = new RString("併用徴収");
+                source.list5_21 = 併用徴収;
             }
             source.list5_22 = RString.EMPTY;
             source.shutsuryokujun1 = 並び順の１件目;
@@ -481,23 +474,26 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         int 開始月1 = 月割開始年月1.getMonthValue();
         FlexibleDate 月割終了年月1 = entity.get月割終了年月1();
         int 終了月1 = 月割終了年月1.getMonthValue();
-        RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2);
+        if (entity.get保険料算定段階1().length() > NUM_2) {
+            RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
+            set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
+        }
         FlexibleDate 月割開始年月2 = entity.get月割開始年月2();
         int 開始月2 = 月割開始年月2.getMonthValue();
         FlexibleDate 月割終了年月2 = entity.get月割終了年月2();
         int 終了月2 = 月割終了年月2.getMonthValue();
-        RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2);
-
-        set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
-        if (!月割開始年月2.isEmpty() && !月割終了年月2.isEmpty() && !保険料算定段階2.isEmpty()) {
-            set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
+        if (entity.get保険料算定段階2().length() > NUM_2) {
+            RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
+            if (!月割開始年月2.isEmpty() && !月割終了年月2.isEmpty() && !保険料算定段階2.isEmpty()) {
+                set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
+            }
         }
     }
 
     private void set月別取得段階(GenNendoHonsanteiIdouSource item, int 開始月, int 終了月,
             RString 保険料算定段階, RString 更正前後区分) {
         for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
-            int currentMonth = i;
+            int currentMonth = (i - 1) % NUM_12 + 1;
             if (更正前後区分_更正前.equals(更正前後区分)) {
                 set更正前_保険料算定段階(item, currentMonth, 保険料算定段階);
             } else if (更正前後区分_更正後.equals(更正前後区分)) {
@@ -545,15 +541,6 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             case NUM_12:
                 item.list2_13 = 保険料算定段階;
                 break;
-            case NUM_13:
-                item.list2_14 = 保険料算定段階;
-                break;
-            case NUM_14:
-                item.list2_15 = 保険料算定段階;
-                break;
-            case NUM_15:
-                item.list2_16 = 保険料算定段階;
-                break;
             default:
                 break;
         }
@@ -598,15 +585,6 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             case NUM_12:
                 item.list3_13 = 保険料算定段階;
                 break;
-            case NUM_13:
-                item.list3_14 = 保険料算定段階;
-                break;
-            case NUM_14:
-                item.list3_15 = 保険料算定段階;
-                break;
-            case NUM_15:
-                item.list3_16 = 保険料算定段階;
-                break;
             default:
                 break;
         }
@@ -616,33 +594,66 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         KozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正後Entity.get口座Entity();
         IKoza koza = new Koza(releteEntity);
         if (koza.get金融機関コード() != null) {
-            if (ゆうちょ銀行.equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4))) {
-                金融機関コードHander1(source);
+            if (ゆうちょ銀行.equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4)) && koza.get金融機関コード().value().length() > NUM_4) {
+                金融機関コードHander1(source, koza);
             } else {
-                金融機関コードHander2(source);
+                金融機関コードHander2(source, koza);
             }
         }
     }
 
-    private void 金融機関コードHander1(GenNendoHonsanteiIdouSource source) {
-        KozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正後Entity.get口座Entity();
-        IKoza koza = new Koza(releteEntity);
+    private void 金融機関コードHander1(GenNendoHonsanteiIdouSource source, IKoza koza) {
+        RString 金融機関コード = RString.EMPTY;
+        RString 通帳記号 = RString.EMPTY;
+        RString 通帳番号 = RString.EMPTY;
         if (koza.getEdited通帳記号() != null && koza.get通帳番号() != null && koza.get口座名義人漢字() != null) {
-            source.list1_5 = koza.get金融機関コード().value().substring(NUM_0, NUM_4).concat(RString.FULL_SPACE)
-                    .concat(koza.getEdited通帳記号().substring(NUM_0, NUM_5))
-                    .concat(HYPHEN).concat(koza.get通帳番号().substring(NUM_0, NUM_8))
+            if (koza.get金融機関コード().value().length() > NUM_4) {
+                金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
+            }
+            if (koza.getEdited通帳記号().length() > NUM_5) {
+                通帳記号 = koza.getEdited通帳記号().substring(NUM_0, NUM_5);
+            }
+            if (koza.get通帳番号().length() > NUM_8) {
+                通帳番号 = koza.get通帳番号().substring(NUM_0, NUM_8);
+            }
+            source.list1_5 = 金融機関コード.concat(RString.FULL_SPACE)
+                    .concat(通帳記号)
+                    .concat(HYPHEN).concat(通帳番号)
                     .concat(RString.FULL_SPACE).concat(koza.get口座名義人漢字().toString());
         }
     }
 
-    private void 金融機関コードHander2(GenNendoHonsanteiIdouSource source) {
-        KozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正後Entity.get口座Entity();
-        IKoza koza = new Koza(releteEntity);
+    private void 金融機関コードHander2(GenNendoHonsanteiIdouSource source, IKoza koza) {
+        RString 金融機関コード = RString.EMPTY;
+        RString 預金種別略称 = RString.EMPTY;
+        RString 支店コード = RString.EMPTY;
+        RString 口座番号 = RString.EMPTY;
         if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
-            source.list1_5 = koza.get金融機関コード().value().substring(NUM_0, NUM_4).concat(HYPHEN)
-                    .concat(koza.get支店コード().value().substring(NUM_0, NUM_3))//.concat(" " + koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2))
-                    .concat(HYPHEN).concat(koza.get口座番号().substring(NUM_0, NUM_7)).concat(RString.FULL_SPACE)
+            if (koza.get金融機関コード().value().length() > NUM_4) {
+                金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
+            }
+            if (koza.get支店コード().value().length() > NUM_3) {
+                支店コード = koza.getEdited通帳記号().substring(NUM_0, NUM_3);
+            }
+            if (koza.get預金種別().get預金種別略称().length() > NUM_2) {
+                預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
+            }
+            if (koza.get口座番号().length() > NUM_7) {
+                口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);
+            }
+            source.list1_5 = 金融機関コード.concat(HYPHEN)
+                    .concat(支店コード).concat(RString.FULL_SPACE)
+                    .concat(預金種別略称)
+                    .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
                     .concat(koza.get口座名義人漢字().toString());
         }
     }
+
+    private Decimal nullTOZero(Decimal 特徴普徴期別金額) {
+        if (特徴普徴期別金額 == null) {
+            return Decimal.ZERO;
+        }
+        return 特徴普徴期別金額;
+    }
+
 }
