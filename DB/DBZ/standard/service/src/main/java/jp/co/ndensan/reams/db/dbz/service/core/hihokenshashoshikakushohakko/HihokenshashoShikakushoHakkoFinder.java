@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -42,8 +43,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShi
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -553,43 +554,43 @@ public class HihokenshashoShikakushoHakkoFinder {
         if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         }
@@ -609,43 +610,43 @@ public class HihokenshashoShikakushoHakkoFinder {
         if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12001.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         }
@@ -664,43 +665,43 @@ public class HihokenshashoShikakushoHakkoFinder {
         if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 0) {
-            entity.set給付制限内容１(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容１(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 1) {
-            entity.set給付制限内容２(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容２(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         } else if (MENUID_DBUMN12002.equals(メニューID)
                 && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
                 && i == 2) {
-            entity.set給付制限内容３(BusinessConfig.
-                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set給付制限内容３(DbBusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
             entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
             entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         }
