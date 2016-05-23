@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishohonsanteibook;
+package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishobookfurikaeari;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,12 +18,15 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  *
  * @reamsid_L DBB-9110-100 xuyue
  */
-public class FuriKaeAriCoverToNofushoProperty extends ReportPropertyBase<FuriKaeAriCoverToNofushoReportSource> {
+public class NonyuTsuchishoBookFuriKaeAriProperty extends ReportPropertyBase<FuriKaeAriCoverToNofushoReportSource> {
 
     private static final List<RString> LAYOUT_BREAK_KEY = Collections.unmodifiableList(Arrays.
             asList(new RString(FuriKaeAriCoverToNofushoReportSource.LAYOUTBREAKITEM.toString())));
 
-    public FuriKaeAriCoverToNofushoProperty() {
+    /**
+     * コンストラクタです。
+     */
+    public NonyuTsuchishoBookFuriKaeAriProperty() {
         super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100055.getReportId());
     }
 
@@ -31,11 +34,10 @@ public class FuriKaeAriCoverToNofushoProperty extends ReportPropertyBase<FuriKae
     public Breakers<FuriKaeAriCoverToNofushoReportSource> defineBreakers(Breakers<FuriKaeAriCoverToNofushoReportSource> breakers,
             BreakerCatalog<FuriKaeAriCoverToNofushoReportSource> catalog) {
         return breakers.add(catalog.new SimpleLayoutBreaker(
-
-
             LAYOUT_BREAK_KEY) {
                 @Override
-            public ReportLineRecord<FuriKaeAriCoverToNofushoReportSource> occuredBreak(ReportLineRecord<FuriKaeAriCoverToNofushoReportSource> currentRecord,
+            public ReportLineRecord<FuriKaeAriCoverToNofushoReportSource> occuredBreak(
+                    ReportLineRecord<FuriKaeAriCoverToNofushoReportSource> currentRecord,
                     ReportLineRecord<FuriKaeAriCoverToNofushoReportSource> nextRecord, ReportDynamicChart dynamicChart) {
                 int layout = currentRecord.getSource().layoutBreakItem;
                 currentRecord.setFormGroupIndex(layout);

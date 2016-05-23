@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.dbbrp00007.nonyutsuchishohonsanteibook;
 
-import jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishohonsanteibook.FuriKaeAriCoverToNofushoProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishohonsanteibook.FuriKaeAriCoverToNofushoReport;
+import jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishobookfurikaeari.NonyuTsuchishoBookFuriKaeAriProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishobookfurikaeari.NonyuTsuchishoBookFuriKaeAriReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007.nonyutsuchishohonsanteibook.FuriKaeAriCoverToNofushoReportSource;
@@ -54,7 +54,6 @@ public class NonyuTsuchishoHonsanteiBookPrintService {
 
         if (編集範囲区分.equals(HenshuHaniKubun.全てのレイアウト.getコード())) {
             if (帳票ID.startsWith(REPORT_DBB100055)) {
-
                 return print全てページDBB100055(本算定納入通知書情報);
 
             } else if (帳票ID.startsWith(REPORT_DBB100057)) {
@@ -84,21 +83,71 @@ public class NonyuTsuchishoHonsanteiBookPrintService {
         return null;
     }
 
-    private SourceDataCollection print全てページDBB100055(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
+    /**
+     * 帳票を出力します。
+     *
+     * @param 本算定納入通知書情報 本算定納入通知書情報
+     * @param reportManager 帳票発行処理の制御機能
+     * @return SourceDataCollection SourceDataCollection
+     */
+    public SourceDataCollection print(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
 
-        FuriKaeAriCoverToNofushoProperty property = new FuriKaeAriCoverToNofushoProperty();
-        try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<FuriKaeAriCoverToNofushoReportSource> assembler = createAssembler(property, reportManager)) {
-                ReportSourceWriter<FuriKaeAriCoverToNofushoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+        RString 帳票ID = 本算定納入通知書情報.get帳票ID().getColumnValue();
+        RString 編集範囲区分 = 本算定納入通知書情報.get編集範囲区分().getコード();
 
-                NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
-                        new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                FuriKaeAriCoverToNofushoReport report = new FuriKaeAriCoverToNofushoReport(本算定納入通知書情報, ninshoshaSource);
-                report.writeBy(reportSourceWriter);
+        if (編集範囲区分.equals(HenshuHaniKubun.全てのレイアウト.getコード())) {
+            if (帳票ID.startsWith(REPORT_DBB100055)) {
+                return print全てページDBB100055(本算定納入通知書情報, reportManager);
+
+            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
+
+            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
+
+            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
+
             }
-            return reportManager.publish();
+        } else if (編集範囲区分.equals(HenshuHaniKubun.Coverのみ.getコード())) {
+            if (帳票ID.startsWith(REPORT_DBB100055)) {
+
+            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
+
+            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
+
+            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
+
+            }
+        } else if (編集範囲区分.equals(HenshuHaniKubun.Detailのみ.getコード())) {
+            if (帳票ID.startsWith(REPORT_DBB100055) || 帳票ID.startsWith(REPORT_DBB100056)) {
+
+            } else if (帳票ID.startsWith(REPORT_DBB100057) || 帳票ID.startsWith(REPORT_DBB100058)) {
+
+            }
         }
+        return null;
+    }
+
+    private SourceDataCollection print全てページDBB100055(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            print全てページDBB100055(本算定納入通知書情報, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+    }
+
+    private SourceDataCollection print全てページDBB100055(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
+
+        NonyuTsuchishoBookFuriKaeAriProperty property = new NonyuTsuchishoBookFuriKaeAriProperty();
+        try (ReportAssembler<FuriKaeAriCoverToNofushoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<FuriKaeAriCoverToNofushoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
+                    new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            NonyuTsuchishoBookFuriKaeAriReport report = new NonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報, ninshoshaSource);
+            report.writeBy(reportSourceWriter);
+        }
+        return reportManager.publish();
     }
 
     private <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(IReportProperty<T> property, ReportManager manager) {

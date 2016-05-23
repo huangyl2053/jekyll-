@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishohonsanteibook;
+package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishobookfurikaeari;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007.nonyutsuchishohonsanteibook.FuriKaeAriCoverToNofushoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  *
  * @reamsid_L DBB-9110-100 xuyue
  */
-public interface IFuriKaeAriCoverToNofushoBuilder extends IReportBuilder<FuriKaeAriCoverToNofushoReportSource> {
+public interface INonyuTsuchishoBookFuriKaeAriBuilder extends IReportBuilder<FuriKaeAriCoverToNofushoReportSource> {
 
 }
