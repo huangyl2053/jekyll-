@@ -902,7 +902,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(shoriName, ShoriName.特徴仮算定賦課.get名称()),
+                                eq(shoriName, ShoriName.仮算定異動賦課.get名称()),
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 調定年度),
                                 eq(shoriEdaban, 年度内連番_1))).

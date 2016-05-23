@@ -150,7 +150,9 @@ public class KariSanteiIdoFuka {
             entityList = 処理日付管理Dac.select処理状況_異動賦課(調定年度);
         } else if (定値_1.equals(遷移元区分)) {
             dbt = 処理日付管理Dac.select処理状況_異動通知書作成(調定年度);
-            entityList.add(dbt);
+            if (dbt != null) {
+                entityList.add(dbt);
+            }
         }
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
