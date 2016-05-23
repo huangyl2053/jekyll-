@@ -344,7 +344,7 @@ public class KariSanteiIdoFuka {
                 帳票ID = ReportIdDBB.DBB100019.getReportId();
             }
         } else if (定値_ブック.equals(納入通知書の型)) {
-            getブック帳票ID(調定年度, 帳票分類ID, 納通連帳区分);
+            帳票ID = getブック帳票ID(調定年度, 帳票分類ID, 納通連帳区分);
         } else if (定値_コンビニ収納.equals(納入通知書の型)) {
             帳票ID = getコンビニ収納帳票ID(調定年度, 帳票分類ID, 納通連帳区分);
         }
