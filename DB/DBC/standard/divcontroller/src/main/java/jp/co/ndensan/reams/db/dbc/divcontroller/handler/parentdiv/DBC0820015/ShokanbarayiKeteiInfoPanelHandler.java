@@ -144,11 +144,13 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      */
     public void putViewState() {
         ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
+        ShoukanharaihishinseikensakuParameter paramterOld = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+                ShoukanharaihishinseikensakuParameter.class);
+        FlexibleYearMonth サービス年月 = paramterOld.getServiceTeikyoYM();
+        RString 整理番号 = paramterOld.getSeiriNp();
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()
-                        .substring(0, 定数_6)),
-                div.getPanelTwo().getTxtSeiriBango().getValue(), null, null, null, null);
+                サービス年月, 整理番号, null, null, null, null);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
@@ -187,7 +189,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 return true;
             }
         } else if ((決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && rdoShikyukubunNew == null)
-                || (決定情報 == null && rdoShikyukubunNew != null)) {
+                || (決定情報 == null && !rdoShikyukubunNew.isEmpty())) {
             return true;
         }
         return false;
