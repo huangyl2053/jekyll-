@@ -22,31 +22,43 @@
         DISTINCT rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "dbT1001_hihokenshaNo"
         FROM
         rgdb."DbT1001HihokenshaDaicho"
+        <foreach  
+            collection="kobetsuKoikiunyoParameterList"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">  
         <where>
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            <if test="item != null and item != ''">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} AND
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="item == null and item == ''">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
-        ) AS dbT1001
+        </foreach>
         FULL JOIN
         (SELECT 
         DISTINCT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "dbT4001_hihokenshaNo"
         FROM
         rgdb."DbT4001JukyushaDaicho"
+        <foreach  
+            collection="kobetsuKoikiunyoParameterList"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">  
         <where>
-            rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '0'
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
-                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
-                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            <if test="item != null and item != ''">
+                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} AND
+                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
-                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            <if test="item == null and item == ''">
+                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
+        </foreach>
         ) AS dbT4001
         ON
         dbT1001."dbT1001_hihokenshaNo" = dbT4001."dbT4001_hihokenshaNo")
@@ -59,30 +71,46 @@
         DISTINCT rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "dbT1001Hihokensha_hihokenshaNo"
         FROM
         rgdb."DbT1001HihokenshaDaicho"
+       <foreach  
+            collection="kobetsuKoikiunyoParameterList"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">  
         <where>
-            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
-                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            <if test="item != null and item != ''">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} AND
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
             </if>
-            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            <if test="item == null and item == ''">
                 rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
             </if>
         </where>
+        </foreach>
         ) AS dbT1001Hihokensha
         FULL JOIN
         (SELECT 
         DISTINCT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "dbT4001Jukyusha_hihokenshaNo"
         FROM
         rgdb."DbT4001JukyushaDaicho"
-        where
+        WHERE
         rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '0'
-        <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
-            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
-            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
-        </if>
-        <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
-            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
-        </if>
+        <foreach  
+            collection="kobetsuKoikiunyoParameterList"
+            item="item"
+            open="("  
+            separator="OR"  
+            close=")">  
+        <where>
+            <if test="item != null and item != ''">
+                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{item.dateFrom} AND
+                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{item.dateTo}
+            </if>
+            <if test="item == null and item == ''">
+                rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            </if>
+        </where>
+        </foreach>
         ) AS dbT4001Jukyusha
         ON
         dbT1001Hihokensha."dbT1001Hihokensha_hihokenshaNo" = dbT4001Jukyusha."dbT4001Jukyusha_hihokenshaNo")
