@@ -113,6 +113,5 @@
             AND rgdb."DbT7022ShoriDateKanri"."shichosonCode" = #{item.shichosonCode}
         </foreach>
         ORDER BY rgdb."DbT7022ShoriDateKanri"."taishoShuryoTimestamp" DESC
-        LIMIT 1
     </select>
 </mapper>

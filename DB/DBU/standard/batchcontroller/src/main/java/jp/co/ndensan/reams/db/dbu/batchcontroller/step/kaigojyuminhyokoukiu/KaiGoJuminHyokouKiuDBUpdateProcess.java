@@ -50,7 +50,7 @@ public class KaiGoJuminHyokouKiuDBUpdateProcess extends BatchProcessBase<DbT7022
     protected void process(DbT7022ShoriDateKanriEntity entity) {
         isEmpty = false;
         entity.setKijunTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(0).getDateTo()));
-        xx(entity);
+        処理日更新処理(entity);
         entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(0).getDateTo()));
         tableWrite.update(entity);
         i++;
@@ -74,7 +74,7 @@ public class KaiGoJuminHyokouKiuDBUpdateProcess extends BatchProcessBase<DbT7022
         }
     }
 
-    private void xx(DbT7022ShoriDateKanriEntity entity) {
+    private void 処理日更新処理(DbT7022ShoriDateKanriEntity entity) {
         if (i <= parameter.getKobetsuKoikiunyoParameterList().size() - 1) {
             entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(i).getDateFrom()));
         }
