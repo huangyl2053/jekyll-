@@ -41,7 +41,6 @@ public class ServiceTeikyoShomeisho {
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         RString 決定日 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_決定日, RString.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(ViewStateHolder.get(
                 ViewStateKeys.償還払申請一覧_サービス年月, RString.class).toString())).getYearMonth().toDateString());
@@ -54,7 +53,7 @@ public class ServiceTeikyoShomeisho {
             div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         }
         List<ServiceTeikyoShomeishoResult> serviceTeikyoShomeishoList
-                = ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号, 様式番号);
+                = ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号);
         if (serviceTeikyoShomeishoList == null || serviceTeikyoShomeishoList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
