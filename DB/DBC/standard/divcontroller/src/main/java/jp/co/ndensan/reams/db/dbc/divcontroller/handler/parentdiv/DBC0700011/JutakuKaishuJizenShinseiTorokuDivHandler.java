@@ -533,7 +533,6 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         ShokanJutakuKaishuJizenShinsei data = ViewStateHolder.get(ViewStateKeys.償還払支給住宅改修事前申請情報,
                 ShokanJutakuKaishuJizenShinsei.class);
         if (修正モード.equals(画面モード)
-                && !出力チェックON
                 && new RString(data.get判定決定年月日().toString()).equals(div.getKaigoShikakuKihonShaPanel()
                         .getTabShinseiContents().getTabShinsaKakka().getTxtJudgeYMD().getValue().toDateString())
                 && data.get判定区分().equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabShinsaKakka()
@@ -978,6 +977,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     kaishuList.add(tmpData);
                 }
             }
+            ViewStateHolder.put(ViewStateKeys.償還払支給住宅改修事前申請情報, insertData);
             return JutakuKaishuJizenShinsei.createInstance().saveDBDate(insertData, kaishuList);
         } else if (削除モード.equals(画面モード)) {
             ShokanJutakuKaishuJizenShinsei deleteData = ViewStateHolder.get(ViewStateKeys.償還払支給住宅改修事前申請情報,
@@ -1278,7 +1278,8 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                         .concat(new RString(String.format(連番フォーマット.toString(), div.getKaigoShikakuKihonShaPanel()
                                                 .getTabKozaJyoho().getCcdJutakuKaishuJizenShinseiKoza().getEndHHMM().getMinute()))));
             }
-        } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード)) {
+        } else if (ShiharaiHohoKubun.口座払.getコード().equals(支払方法区分コード) && !div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
+                .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().isEmpty()) {
             builder.set口座ID(Long.valueOf(div.getKaigoShikakuKihonShaPanel().getTabKozaJyoho()
                     .getCcdJutakuKaishuJizenShinseiKoza().getKozaNo().toString()));
         } else if (ShiharaiHohoKubun.受領委任払.getコード().equals(支払方法区分コード)) {
