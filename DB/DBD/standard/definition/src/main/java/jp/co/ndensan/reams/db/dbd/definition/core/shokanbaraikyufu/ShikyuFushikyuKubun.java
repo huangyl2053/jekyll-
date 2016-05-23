@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun;
+package jp.co.ndensan.reams.db.dbd.definition.core.shokanbaraikyufu;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 支給不支給区分を表す列挙型です。
  *
- * @reamsid_L DBC-9999-023 wangchao
+ * @reamsid_L DBD-9999-023 wangchao
  */
 public enum ShikyuFushikyuKubun {
 

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core;
+package jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -10,6 +10,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ShiharaiHenkoShuryoShinseiShinsaKekkaKubun {
 
+    /**
+     * コード:00 名称:空 略称:定義なし
+     */
+    _空(RString.EMPTY.toString(), RString.EMPTY.toString()),
     /**
      * コード:1 名称:申請受理 略称:定義なし
      */
