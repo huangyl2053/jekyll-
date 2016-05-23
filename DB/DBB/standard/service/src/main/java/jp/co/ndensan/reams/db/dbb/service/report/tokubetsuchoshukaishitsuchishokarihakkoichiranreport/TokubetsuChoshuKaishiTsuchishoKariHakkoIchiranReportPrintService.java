@@ -5,13 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchishokarihakkoichiranreport;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.Property;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
@@ -31,36 +37,39 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReportPrintService {
 
+    private static final int NUM0 = 0;
+    private static final int NUM1 = 1;
+    private static final int NUM5 = 5;
+
     /**
-     * printメソッドします。
+     * 特別徴収開始通知書（仮算定）発行一覧表(単一帳票出力用)
      *
      * @param 編集後仮算定通知書共通情報entityList List<EditedKariSanteiTsuchiShoKyotsu>
-     * @param 改頁1 RString
-     * @param 改頁2 RString
-     * @param 改頁3 RString
-     * @param 改頁4 RString
-     * @param 改頁5 RString
-     * @param 出力順1 RString
-     * @param 出力順2 RString
-     * @param 出力順3 RString
-     * @param 出力順4 RString
-     * @param 出力順5 RString
+     * @param 出力順ID long
+     * @param 調定年度 FlexibleYear
+     * @param 帳票作成日時 YMDHMS
+     * @return SourceDataCollection
+     */
+    public SourceDataCollection printSingle(List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList,
+            long 出力順ID, FlexibleYear 調定年度, YMDHMS 帳票作成日時) {
+        try (ReportManager reportManager = new ReportManager()) {
+            print(編集後仮算定通知書共通情報entityList, 出力順ID, 調定年度, 帳票作成日時, reportManager);
+            return reportManager.publish();
+        }
+    }
+
+    /**
+     * 特別徴収開始通知書（仮算定）発行一覧表の printメソッド(複数帳票出力用)。
+     *
+     * @param 編集後仮算定通知書共通情報entityList List<EditedKariSanteiTsuchiShoKyotsu>
+     * @param 出力順ID long
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
      * @param reportManager ReportManager
      */
     public void print(
             List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList,
-            RString 改頁1,
-            RString 改頁2,
-            RString 改頁3,
-            RString 改頁4,
-            RString 改頁5,
-            RString 出力順1,
-            RString 出力順2,
-            RString 出力順3,
-            RString 出力順4,
-            RString 出力順5,
+            long 出力順ID,
             FlexibleYear 調定年度,
             YMDHMS 帳票作成日時,
             ReportManager reportManager) {
@@ -70,9 +79,45 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReportPrintService {
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             Association association = AssociationFinderFactory.createInstance().getAssociation();
-            TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReport.createForm(編集後仮算定通知書共通情報entityList,
-                    改頁1, 改頁2, 改頁3, 改頁4, 改頁5, 出力順1, 出力順2, 出力順3,
-                    出力順4, 出力順5, 調定年度, 帳票作成日時, association).writeBy(reportSourceWriter);
+            IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200001.getReportId(), 出力順ID);
+            if (並び順 == null || 並び順.get設定項目リスト() == null || 並び順.get設定項目リスト().isEmpty()) {
+                executereport(編集後仮算定通知書共通情報entityList, 調定年度, 帳票作成日時, association, new ArrayList(),
+                        new ArrayList(), reportSourceWriter);
+                return;
+            }
+            List<RString> 出力項目リスト = new ArrayList();
+            List<RString> 改頁項目リスト = new ArrayList();
+            for (int i = NUM0; i < NUM5; i++) {
+                if (i < 並び順.get設定項目リスト().size()) {
+                    出力項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
+                    if (並び順.get設定項目リスト().get(i).is改頁項目()) {
+                        改頁項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
+                    } else {
+                        改頁項目リスト.add(RString.EMPTY);
+                    }
+                } else {
+                    break;
+                }
+            }
+            executereport(編集後仮算定通知書共通情報entityList, 調定年度, 帳票作成日時, association, 出力項目リスト,
+                    改頁項目リスト, reportSourceWriter);
+
+        }
+    }
+
+    private void executereport(List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報entityList,
+            FlexibleYear 調定年度,
+            YMDHMS 帳票作成日時,
+            Association association,
+            List<RString> 出力項目リスト,
+            List<RString> 改頁項目リスト,
+            ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> reportSourceWriter) {
+        int i = NUM1;
+        for (EditedKariSanteiTsuchiShoKyotsu editedKariSanteiTsuchiShoKyotsu : 編集後仮算定通知書共通情報entityList) {
+            TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport.createForm(editedKariSanteiTsuchiShoKyotsu,
+                    調定年度, 帳票作成日時, association, 出力項目リスト, 改頁項目リスト, i).writeBy(reportSourceWriter);
+            i = i + NUM1;
         }
     }
 

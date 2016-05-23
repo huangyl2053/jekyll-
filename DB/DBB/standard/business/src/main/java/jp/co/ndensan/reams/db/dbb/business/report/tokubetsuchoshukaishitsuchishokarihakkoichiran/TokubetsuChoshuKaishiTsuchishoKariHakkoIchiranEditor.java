@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -27,65 +28,44 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
 
     private static final RString SAKUSEI = new RString("作成");
     private static final RString タイトル = new RString("特別徴収開始通知書（仮徴収）発行一覧表");
-    private static final RString NENDO = new RString("年度");
     private static final RString 徴収額タイトル = new RString("仮徴収額");
     private static final RString 仮徴収月4月 = new RString("4月");
     private static final RString 仮徴収月6月 = new RString("6月");
     private static final RString 仮徴収月8月 = new RString("8月");
-
+    private static final int NUM0 = 0;
+    private static final int NUM1 = 1;
+    private static final int NUM2 = 2;
+    private static final int NUM3 = 3;
+    private static final int NUM4 = 4;
     private final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity;
-    private final RString 改頁1;
-    private final RString 改頁2;
-    private final RString 改頁3;
-    private final RString 改頁4;
-    private final RString 改頁5;
-    private final RString 出力順1;
-    private final RString 出力順2;
-    private final RString 出力順3;
-    private final RString 出力順4;
-    private final RString 出力順5;
     private final FlexibleYear 調定年度;
     private final YMDHMS 帳票作成日時;
-    private final Integer 連番;
+    private final int 連番;
     private final Association association;
+    private final List<RString> 改頁項目リスト;
+    private final List<RString> 出力項目リスト;
 
     /**
      * コンストラクタです
      *
      * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
-     * @param 改頁1 RString
-     * @param 改頁2 RString
-     * @param 改頁3 RString
-     * @param 改頁4 RString
-     * @param 改頁5 RString
-     * @param 出力順1 RString
-     * @param 出力順2 RString
-     * @param 出力順3 RString
-     * @param 出力順4 RString
-     * @param 出力順5 RString
      * @param 調定年度 FlexibleYear
      * @param 帳票作成日時 YMDHMS
-     * @param 連番 Integer
+     * @param 連番 int
      * @param association Association
+     * @param 改頁項目リスト List<RString>
+     * @param 出力項目リスト List<RString>
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
-            RString 改頁1, RString 改頁2, RString 改頁3, RString 改頁4, RString 改頁5, RString 出力順1, RString 出力順2, RString 出力順3,
-            RString 出力順4, RString 出力順5, FlexibleYear 調定年度, YMDHMS 帳票作成日時, Integer 連番, Association association) {
+            FlexibleYear 調定年度, YMDHMS 帳票作成日時,
+            int 連番, Association association, List<RString> 改頁項目リスト, List<RString> 出力項目リスト) {
         this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
-        this.改頁1 = 改頁1;
-        this.改頁2 = 改頁2;
-        this.改頁3 = 改頁3;
-        this.改頁4 = 改頁4;
-        this.改頁5 = 改頁5;
-        this.出力順1 = 出力順1;
-        this.出力順2 = 出力順2;
-        this.出力順3 = 出力順3;
-        this.出力順4 = 出力順4;
-        this.出力順5 = 出力順5;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
         this.連番 = 連番;
         this.association = association;
+        this.改頁項目リスト = 改頁項目リスト;
+        this.出力項目リスト = 出力項目リスト;
     }
 
     @Override
@@ -94,76 +74,92 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
             RString 帳票作成日 = 帳票作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             RString 帳票作成時 = 帳票作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            source.printTimeStamp = 帳票作成日.concat(" " + 帳票作成時 + " " + SAKUSEI);
-        } else {
-            source.printTimeStamp = RString.EMPTY;
+            source.printTimeStamp = 帳票作成日.concat(RString.HALF_SPACE).concat(帳票作成時).concat(RString.HALF_SPACE).concat(SAKUSEI);
         }
         source.title = タイトル;
         if (調定年度 != null && !調定年度.isEmpty()) {
             source.nendo = 調定年度.wareki().eraType(EraType.KANJI).toDateString();
-        } else {
-            source.nendo = RString.EMPTY;
         }
         if (association != null) {
             source.hokenshaNo = association.get地方公共団体コード().value();
             source.hokenshaName = association.get市町村名();
-        } else {
-            source.hokenshaNo = RString.EMPTY;
-            source.hokenshaName = RString.EMPTY;
         }
-        source.shutsuryokujun1 = 出力順1;
-        source.shutsuryokujun2 = 出力順2;
-        source.shutsuryokujun3 = 出力順3;
-        source.shutsuryokujun4 = 出力順4;
-        source.shutsuryokujun5 = 出力順5;
-        source.kaipage1 = 改頁1;
-        source.kaipage2 = 改頁2;
-        source.kaipage3 = 改頁3;
-        source.kaipage4 = 改頁4;
-        source.kaipage5 = 改頁5;
+        set出力改頁(source);
         source.titleChoshugaku = 徴収額タイトル;
-        source.listUpper_1 = new RString(連番.toString());
+        source.listUpper_1 = new RString(連番);
         if (編集後仮算定通知書共通情報entity != null) {
-            source.listUpper_2 = 編集後仮算定通知書共通情報entity.get編集後宛先().get郵便番号();
-            source.listUpper_3 = 編集後仮算定通知書共通情報entity.get編集後宛先().get編集後住所();
-            source.listUpper_4 = 編集後仮算定通知書共通情報entity.get編集後宛先().get宛先行政区();
-            source.listUpper_5 = 編集後仮算定通知書共通情報entity.get編集後個人().get生年月日();
-            source.listUpper_6 = 編集後仮算定通知書共通情報entity.get編集後個人().get性別();
-            source.listUpper_7 = 編集後仮算定通知書共通情報entity.get編集後個人().get世帯主名().value();
+            set編集後宛先(source, 編集後仮算定通知書共通情報entity);
+            set編集後個人(source, 編集後仮算定通知書共通情報entity);
+            set更正後(source, 編集後仮算定通知書共通情報entity);
             source.listLower_1 = 編集後仮算定通知書共通情報entity.get通知書番号().value();
-            source.listLower_2 = 編集後仮算定通知書共通情報entity.get編集後個人().get世帯コード().value();
-            source.listLower_3 = 編集後仮算定通知書共通情報entity.get編集後個人().get名称().getName().value();
-            source.listLower_4 = 編集後仮算定通知書共通情報entity.get更正後().get更正後特別徴収義務者();
-            source.listLower_5 = 編集後仮算定通知書共通情報entity.get更正後().get更正後特別徴収対象年金();
             source.listLower_6 = 仮徴収月4月;
-            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
-                    get更正後特徴期別金額01(), 0);
             source.listLower_8 = 仮徴収月6月;
-            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
-                    get更正後特徴期別金額02(), 0);
             source.listLower_10 = 仮徴収月8月;
-            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
-                    get更正後特徴期別金額03(), 0);
-
-        } else {
-            source.listUpper_2 = RString.EMPTY;
-            source.listUpper_3 = RString.EMPTY;
-            source.listUpper_4 = RString.EMPTY;
-            source.listUpper_5 = RString.EMPTY;
-            source.listUpper_6 = RString.EMPTY;
-            source.listUpper_7 = RString.EMPTY;
-            source.listLower_1 = RString.EMPTY;
-            source.listLower_2 = RString.EMPTY;
-            source.listLower_3 = RString.EMPTY;
-            source.listLower_4 = RString.EMPTY;
-            source.listLower_5 = RString.EMPTY;
-            source.listLower_6 = 仮徴収月4月;
-            source.listLower_7 = RString.EMPTY;
-            source.listLower_8 = 仮徴収月6月;
-            source.listLower_9 = RString.EMPTY;
-            source.listLower_10 = 仮徴収月8月;
-            source.listLower_11 = RString.EMPTY;
         }
         return source;
     }
+
+    private void set出力改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
+        if (NUM0 < 出力項目リスト.size()) {
+            source.shutsuryokujun1 = 出力項目リスト.get(NUM0);
+            source.kaipage1 = 改頁項目リスト.get(NUM0);
+        }
+        if (NUM1 < 出力項目リスト.size()) {
+            source.shutsuryokujun2 = 出力項目リスト.get(NUM1);
+            source.kaipage2 = 改頁項目リスト.get(NUM1);
+        }
+        if (NUM2 < 出力項目リスト.size()) {
+            source.shutsuryokujun3 = 出力項目リスト.get(NUM2);
+            source.kaipage3 = 改頁項目リスト.get(NUM2);
+        }
+        if (NUM3 < 出力項目リスト.size()) {
+            source.shutsuryokujun4 = 出力項目リスト.get(NUM3);
+            source.kaipage4 = 改頁項目リスト.get(NUM3);
+        }
+        if (NUM4 < 出力項目リスト.size()) {
+            source.shutsuryokujun5 = 出力項目リスト.get(NUM4);
+            source.kaipage5 = 改頁項目リスト.get(NUM4);
+        }
+    }
+
+    private void set編集後宛先(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity) {
+        if (編集後仮算定通知書共通情報entity.get編集後宛先() != null) {
+            source.listUpper_2 = 編集後仮算定通知書共通情報entity.get編集後宛先().get郵便番号();
+            source.listUpper_3 = 編集後仮算定通知書共通情報entity.get編集後宛先().get町域();
+            source.listUpper_4 = 編集後仮算定通知書共通情報entity.get編集後宛先().get宛先行政区();
+        }
+    }
+
+    private void set編集後個人(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity) {
+        if (編集後仮算定通知書共通情報entity.get編集後個人() != null) {
+            source.listUpper_5 = 編集後仮算定通知書共通情報entity.get編集後個人().get生年月日();
+            source.listUpper_6 = 編集後仮算定通知書共通情報entity.get編集後個人().get性別();
+            if (編集後仮算定通知書共通情報entity.get編集後個人().get世帯主名() != null) {
+                source.listUpper_7 = 編集後仮算定通知書共通情報entity.get編集後個人().get世帯主名().value();
+            }
+            if (編集後仮算定通知書共通情報entity.get編集後個人().get世帯コード() != null) {
+                source.listLower_2 = 編集後仮算定通知書共通情報entity.get編集後個人().get世帯コード().value();
+            }
+            if (編集後仮算定通知書共通情報entity.get編集後個人().get名称() != null) {
+                source.listLower_3 = new RString(編集後仮算定通知書共通情報entity.get編集後個人().get名称().toString());
+            }
+        }
+    }
+
+    private void set更正後(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity) {
+        if (編集後仮算定通知書共通情報entity.get更正後() != null) {
+            source.listLower_4 = 編集後仮算定通知書共通情報entity.get更正後().get更正後特別徴収義務者();
+            source.listLower_5 = 編集後仮算定通知書共通情報entity.get更正後().get更正後特別徴収対象年金();
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
+                    get更正後特徴期別金額01(), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
+                    get更正後特徴期別金額02(), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
+                    get更正後特徴期別金額03(), 0);
+        }
+    }
+
 }
