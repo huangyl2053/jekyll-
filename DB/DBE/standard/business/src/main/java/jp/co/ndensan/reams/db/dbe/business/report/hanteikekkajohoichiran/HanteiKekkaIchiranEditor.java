@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkajohoichiran.Ha
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -43,7 +44,6 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        hakkoYMD.append(new RString(" 作成"));
         source.title = item.getTitle();
         source.taishoHokenshaName = item.get出力対象();
         source.hakkoYMD = hakkoYMD.toRString();
@@ -51,9 +51,14 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listNo_2 = new RString(item.get介護認定審査会審査順());
         source.listNo_3 = item.get認定申請区分_申請時();
         source.listNo_4 = item.get認定申請区分_法令();
-        source.listNo_5 = item.get認定申請日();
-        source.listNo_6 = item.get二次判定年月日();
-
+        source.listNo_5 = new RDate(item.get認定申請日().toString()).wareki().eraType(EraType.ALPHABET).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).
+                fillType(FillType.BLANK).toDateString();
+        source.listNo_6 = new RDate(item.get二次判定年月日().toString()).wareki().eraType(EraType.ALPHABET).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).
+                fillType(FillType.BLANK).toDateString();
         source.listHokenshaName_1 = item.get証記載保険者番号();
         source.listHokenshaNo_1 = item.get市町村名称();
         source.listHihokenshaNo_1 = item.get被保険者番号();
@@ -67,9 +72,16 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         RStringBuilder tempTokuteishippei_1 = new RStringBuilder(String.valueOf(item.get二次判定認定有効期間()));
         tempTokuteishippei_1
                 .append("ヵ月");
-        RStringBuilder tempTokuteishippei_2 = new RStringBuilder(item.get二次判定認定有効開始年月日());
+        RStringBuilder tempTokuteishippei_2 = new RStringBuilder(new RDate(item.get二次判定認定有効開始年月日().toString()).wareki()
+                .eraType(EraType.ALPHABET).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).
+                fillType(FillType.BLANK).toDateString());
         tempTokuteishippei_2.append("～")
-                .append(item.get二次判定認定有効終了年月日());
+                .append(new RDate(item.get二次判定認定有効終了年月日().toString()).wareki().eraType(EraType.ALPHABET).
+                        firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.PERIOD).
+                        fillType(FillType.BLANK).toDateString());
         source.listYukokikan_1 = tempTokuteishippei_1.toRString();
         source.listYukokikan_2 = item.get二号特定疾病コード();
         source.listTokuteishippei_1 = tempTokuteishippei_2.toRString();

@@ -17,8 +17,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class HanteikekkaKagamiProperty extends ReportPropertyBase<HanteikekkaKagamiReportSource> {
 
+    /**
+     * インスタンスを生成します。
+     */
     public HanteikekkaKagamiProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE525006.getReportId());
     }
-
 }
