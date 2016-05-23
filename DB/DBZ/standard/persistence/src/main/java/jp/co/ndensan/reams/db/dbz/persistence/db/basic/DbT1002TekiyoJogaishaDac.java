@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.idoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.tekiyoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -111,5 +112,24 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 適用除外者を全件返します。
+     *
+     * @param 適用年月日 適用年月日
+     * @param 識別コード 識別コード
+     * @return List<DbT1002TekiyoJogaishaEntity>
+     */
+    @Transaction
+    public List<DbT1002TekiyoJogaishaEntity> selectBy識別コードAnd適用年月日(FlexibleDate 適用年月日, ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1002TekiyoJogaisha.class).
+                where(
+                        and(eq(shikibetsuCode, 識別コード),
+                                eq(tekiyoYMD, 適用年月日))).
+                toList(DbT1002TekiyoJogaishaEntity.class);
     }
 }
