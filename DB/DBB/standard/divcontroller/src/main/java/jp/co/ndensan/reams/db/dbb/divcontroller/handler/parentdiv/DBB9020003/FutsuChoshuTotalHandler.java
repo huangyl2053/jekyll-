@@ -25,11 +25,11 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020003.dgKa
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukinitsuNokiKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
@@ -70,12 +70,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public final class FutsuChoshuTotalHandler {
 
     private final FutsuChoshuTotalDiv div;
+    private static final RString 現年度 = new RString("現年度");
     private static final RString 未作成 = new RString("未作成");
     private static final RString 作成済 = new RString("作成済");
     private static final RString 合併旧市町村表示区分_表示あり = new RString("1");
     private static final RString メッセージ = new RString("保険者が単一市町村または広域市町村ではないため処理の継続");
     private static final RString メッセージ_現年度 = new RString("現年度のxx月のyy");
     private static final RString メッセージ_過年度 = new RString("過年度のxx月のyy");
+    private static final RString メッセージ_正常 = new RString("システム管理登録_普通徴収保存処理は正常に行われました");
+    private static final RString MSG = new RString("調定年度：");
+    private static final RString MSG_NENNDO = new RString("年度");
     private static final RString 当行月 = new RString("xx");
     private static final RString セル名 = new RString("yy");
     private static final RString 発行日 = new RString("発行日");
@@ -132,7 +136,7 @@ public final class FutsuChoshuTotalHandler {
         ShoriDateKanri result = manager.get基準年月日(ShoriName.新年度管理情報作成.toRString(), 調定年度.plusYear(1));
         if (result == null) {
             新年度管理情報 = 未作成;
-        } else if (result.get基準年月日().isEmpty()) {
+        } else if (result.get基準年月日() == null || result.get基準年月日().isEmpty()) {
             新年度管理情報 = 未作成;
         } else {
             新年度管理情報 = 作成済;
@@ -612,13 +616,7 @@ public final class FutsuChoshuTotalHandler {
         div.getFutsuChoshu().getZanteiKeisanHoho().getTxtFukaHohoHelp().setValue(賦課方法説明);
     }
 
-    /**
-     * 現年度Gridの選択ON/OFFの制御
-     *
-     * @param list List<dgGenNendoKibetsuJoho_Row>
-     * @return List<dgGenNendoKibetsuJoho_Row>
-     */
-    public List<dgGenNendoKibetsuJoho_Row> set現年度Grid制御(List<dgGenNendoKibetsuJoho_Row> list) {
+    private List<dgGenNendoKibetsuJoho_Row> set現年度Grid制御(List<dgGenNendoKibetsuJoho_Row> list) {
         int rowId = 1;
         RString ki = 月の期_00;
         for (dgGenNendoKibetsuJoho_Row row : list) {
@@ -675,13 +673,7 @@ public final class FutsuChoshuTotalHandler {
         return list;
     }
 
-    /**
-     * 過年度Gridの選択ON/OFFの制御
-     *
-     * @param list List<dgGenNendoKibetsuJoho_Row>
-     * @return List<dgGenNendoKibetsuJoho_Row>
-     */
-    public List<dgKaNendoKibetsuJoho_Row> set過年度Grid制御(List<dgKaNendoKibetsuJoho_Row> list) {
+    private List<dgKaNendoKibetsuJoho_Row> set過年度Grid制御(List<dgKaNendoKibetsuJoho_Row> list) {
         int rowId = 1;
         RString ki = 月の期_00;
         for (dgKaNendoKibetsuJoho_Row row : list) {
@@ -745,28 +737,25 @@ public final class FutsuChoshuTotalHandler {
         return list;
     }
 
-    /**
-     * 現年度の発行日～納期（至）の入力チェック
-     */
-    public void 現年度入力チェック() {
+    private void 現年度入力チェック() {
         if (div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
             return;
         }
         for (dgGenNendoKibetsuJoho_Row row : div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getDataSource()) {
-            if (!row.getTxtKi().isNullOrEmpty()) {
-                if (row.getTxtHakkoYMD().getValue().isEmpty()) {
+            if (row.getTxtKi() != null && !row.getTxtKi().isEmpty()) {
+                if (row.getTxtHakkoYMD().getValue() == null || row.getTxtHakkoYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(row, null, 発行日).toString()));
                 }
-                if (row.getTxtNokigenYMD().getValue().isEmpty()) {
+                if (row.getTxtNokigenYMD().getValue() == null || row.getTxtNokigenYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(row, null, 納期限).toString()));
                 }
-                if (row.getTxtNokigenStYMD().getValue().isEmpty()) {
+                if (row.getTxtNokigenStYMD().getValue() == null || row.getTxtNokigenStYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(row, null, 納期限_自).toString()));
                 }
-                if (row.getTxtNokigenEdYMD().getValue().isEmpty()) {
+                if (row.getTxtNokigenEdYMD().getValue() == null || row.getTxtNokigenEdYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(row, null, 納期限_至).toString()));
                 }
@@ -774,28 +763,25 @@ public final class FutsuChoshuTotalHandler {
         }
     }
 
-    /**
-     * 過年度の発行日～納期（至）の入力チェック
-     */
-    public void 過年度入力チェック() {
+    private void 過年度入力チェック() {
         if (div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
             return;
         }
         for (dgKaNendoKibetsuJoho_Row row : div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getDataSource()) {
-            if (!row.getTxtKi().isNullOrEmpty()) {
-                if (row.getTxtHakkoYMD().getValue().isEmpty()) {
+            if (row.getTxtKi() != null && !row.getTxtKi().isEmpty()) {
+                if (row.getTxtHakkoYMD().getValue() == null || row.getTxtHakkoYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(null, row, 発行日).toString()));
                 }
-                if (row.getTxtNokigenYMD().getValue().isEmpty()) {
+                if (row.getTxtNokigenYMD().getValue() == null || row.getTxtNokigenYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(null, row, 納期限).toString()));
                 }
-                if (row.getTxtNokigenStYMD().getValue().isEmpty()) {
+                if (row.getTxtNokigenStYMD().getValue() == null || row.getTxtNokigenStYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(null, row, 納期_自).toString()));
                 }
-                if (row.getTxtNokigenEtYMD().getValue().isEmpty()) {
+                if (row.getTxtNokigenEtYMD().getValue() == null || row.getTxtNokigenEtYMD().getValue().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
                             replace(setメッセージ(null, row, 納期_至).toString()));
                 }
@@ -819,8 +805,10 @@ public final class FutsuChoshuTotalHandler {
 
     /**
      * 保存処理
+     *
+     * @return 調定年度
      */
-    public void set保存処理() {
+    public RString set保存処理() {
         List<Enum> 普通徴収_期別テーブル = create普通徴収_期別テーブル();
         List<Enum> 普徴期情報_月の期 = create普徴期情報_月の期();
         List<Enum> 普徴期情報_月処理区分 = create普徴期情報_月処理区分();
@@ -899,6 +887,7 @@ public final class FutsuChoshuTotalHandler {
         update(div.getFutsuChoshu().getRadHeichoSha().getSelectedKey(), ConfigNameDBB.普通徴収_仮算定併徴者普徴分徴収有無);
 
         save保存処理_過年度();
+        return div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedValue();
     }
 
     private void save納期(Noki noki, dgGenNendoKibetsuJoho_Row row) {
@@ -1561,6 +1550,64 @@ public final class FutsuChoshuTotalHandler {
         暫定併徴者普徴分徴収有無.add(new KeyValueDataSource(ZanteiHeichoshaFuchobunChoshuUmu.徴収しない.getコード(),
                 ZanteiHeichoshaFuchobunChoshuUmu.徴収しない.get名称()));
         return 暫定併徴者普徴分徴収有無;
+    }
+
+    /**
+     * 現年度と過年度入力チェック
+     */
+    public void 現年度と過年度入力チェック() {
+        if (現年度.equals(div.getFutsuChoshu().getTabFuCho().getSelectedItem().getTitle())) {
+            現年度入力チェック();
+            過年度入力チェック();
+        } else {
+            過年度入力チェック();
+            現年度入力チェック();
+        }
+    }
+
+    /**
+     * 過年度Gridの選択変更
+     */
+    public void change_dgKaNendoKibetsuJoho() {
+        set過年度Grid制御(div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getDataSource());
+    }
+
+    /**
+     * 現年度Gridの選択変更
+     */
+    public void change_dgGenNendoKibetsuJoho() {
+        set現年度Grid制御(div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getDataSource());
+    }
+
+    /**
+     * 完了Message
+     *
+     * @param 調定年度 RString
+     */
+    public void setMessage(RString 調定年度) {
+        RStringBuilder message = new RStringBuilder(MSG);
+        message.append(調定年度).append(MSG_NENNDO);
+        div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(message.toRString(), メッセージ_正常, RString.EMPTY, true);
+    }
+
+    /**
+     * 現年度期別情報Gridの「納付書の型」変更
+     */
+    public void change_現年度_納付書の型() {
+        List<dgGenNendoKibetsuJoho_Row> list = div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getDataSource();
+        dgGenNendoKibetsuJoho_Row row = div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getClickedItem();
+        list.set(div.getFutsuChoshu().getDgGenNendoKibetsuJoho().getClickedRowId(), set納付書の型変更(row));
+        div.getFutsuChoshu().getDgGenNendoKibetsuJoho().setDataSource(list);
+    }
+
+    /**
+     * 過年度期別情報Gridの「納付書の型」変更
+     */
+    public void change_過年度_納付書の型() {
+        List<dgKaNendoKibetsuJoho_Row> list = div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getDataSource();
+        dgKaNendoKibetsuJoho_Row row = div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getClickedItem();
+        list.set(div.getFutsuChoshu().getDgKaNendoKibetsuJoho().getClickedRowId(), set納付書の型変更_過年度(row));
+        div.getFutsuChoshu().getDgKaNendoKibetsuJoho().setDataSource(list);
     }
 
     /**
