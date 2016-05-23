@@ -27,7 +27,8 @@ public class TokubetsuChoshuKaishiProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiSource> {
 
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString(
-            TokubetsuChoshuKaishiSource.ReportSourceFields.listLower_1.name())));
+            TokubetsuChoshuKaishiSource.ReportSourceFields.listLower_1.name()), new RString(
+                    TokubetsuChoshuKaishiSource.ReportSourceFields.listLower_11.name())));
 
     /**
      * コンストラクタです。
@@ -41,7 +42,6 @@ public class TokubetsuChoshuKaishiProperty
             Breakers<TokubetsuChoshuKaishiSource> breakers,
             BreakerCatalog<TokubetsuChoshuKaishiSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
 
             PAGE_BREAK_KEYS) {
             @Override

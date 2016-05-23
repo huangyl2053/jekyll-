@@ -146,6 +146,24 @@ public class TokubetsuChoshuKaishiPrintService {
         @Override
         public int compare(EditedHonSanteiTsuchiShoKyotsu entity1, EditedHonSanteiTsuchiShoKyotsu entity2) {
             int flag = entity1.get通知書番号().compareTo(entity2.get通知書番号());
+            if (flag == 0) {
+                if (entity1.get編集後宛先() == null) {
+                    flag = 1;
+                } else if (entity2.get編集後宛先() == null) {
+                    flag = -1;
+                } else {
+                    flag = entity1.get編集後宛先().get郵便番号().compareTo(entity2.get編集後宛先().get郵便番号());
+                }
+            }
+            if (flag == 0) {
+                if (entity1.get編集後個人() == null) {
+                    flag = 1;
+                } else if (entity1.get編集後個人() == null) {
+                    flag = -1;
+                } else {
+                    flag = entity1.get編集後個人().get名称().getName().value().compareTo(entity2.get編集後個人().get名称().getName().value());
+                }
+            }
             return flag;
         }
     }
