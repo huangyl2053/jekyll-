@@ -239,7 +239,7 @@ public final class FukaShokaiController {
     public static Optional<HokenryoDankai> findZennendoHokenryoDankai(Fuka fuka) {
         FlexibleYear 前年度 = fuka.get賦課年度().minusYear(1);
 
-        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課(前年度, fuka.get賦課年度(), fuka.get通知書番号(), fuka.get履歴番号()));
+        Optional<Fuka> modeloid = Optional.ofNullable(new FukaManager().get介護賦課_賦課年度最新(前年度, fuka.get通知書番号()));
         if (!modeloid.isPresent()) {
             return Optional.empty();
         }
