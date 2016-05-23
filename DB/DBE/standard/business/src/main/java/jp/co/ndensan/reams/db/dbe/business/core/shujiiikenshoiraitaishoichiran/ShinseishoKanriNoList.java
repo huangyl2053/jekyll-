@@ -19,6 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinseishoKanriNoList implements Serializable {
 
-    private List<RString> shinseishoKanriNoList;
+    private List<RString> shinseishoKanriNoS;
 
 }

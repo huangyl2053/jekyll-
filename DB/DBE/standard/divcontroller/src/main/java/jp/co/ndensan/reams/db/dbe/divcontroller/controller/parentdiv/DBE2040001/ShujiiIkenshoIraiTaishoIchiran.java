@@ -186,7 +186,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 list.add(row.getShinseishoKanriNo());
             }
             ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
-            shinseishoKanriNoList.setShinseishoKanriNoList(list);
+            shinseishoKanriNoList.setShinseishoKanriNoS(list);
             ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
             前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).respond();

@@ -242,7 +242,7 @@ public class ShinsakaiToroku {
             申請書管理番号リスト.add(データ.getShinseishoKanriNo());
         }
         ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
-        shinseishoKanriNoList.setShinseishoKanriNoList(申請書管理番号リスト);
+        shinseishoKanriNoList.setShinseishoKanriNoS(申請書管理番号リスト);
         ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
     }
 
