@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class FukaTaishoshaSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,34 +34,58 @@ public class FukaTaishoshaSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getSearchCondition
+     * @return SearchCondition
+     */
     @JsonProperty("SearchCondition")
     public SearchConditionDiv getSearchCondition() {
         return SearchCondition;
     }
 
+    /*
+     * setSearchCondition
+     * @param SearchCondition SearchCondition
+     */
     @JsonProperty("SearchCondition")
     public void setSearchCondition(SearchConditionDiv SearchCondition) {
-        this.SearchCondition=SearchCondition;
+        this.SearchCondition = SearchCondition;
     }
 
+    /*
+     * getGaitoshaList
+     * @return GaitoshaList
+     */
     @JsonProperty("GaitoshaList")
     public GaitoshaListDiv getGaitoshaList() {
         return GaitoshaList;
     }
 
+    /*
+     * setGaitoshaList
+     * @param GaitoshaList GaitoshaList
+     */
     @JsonProperty("GaitoshaList")
     public void setGaitoshaList(GaitoshaListDiv GaitoshaList) {
-        this.GaitoshaList=GaitoshaList;
+        this.GaitoshaList = GaitoshaList;
     }
 
+    /*
+     * getbtnReSearchMode
+     * @return btnReSearchMode
+     */
     @JsonProperty("btnReSearchMode")
     public Button getBtnReSearchMode() {
         return btnReSearchMode;
     }
 
+    /*
+     * setbtnReSearchMode
+     * @param btnReSearchMode btnReSearchMode
+     */
     @JsonProperty("btnReSearchMode")
     public void setBtnReSearchMode(Button btnReSearchMode) {
-        this.btnReSearchMode=btnReSearchMode;
+        this.btnReSearchMode = btnReSearchMode;
     }
 
     // </editor-fold>

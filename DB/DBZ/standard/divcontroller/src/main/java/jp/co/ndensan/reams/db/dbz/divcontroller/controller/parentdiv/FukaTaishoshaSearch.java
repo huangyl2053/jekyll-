@@ -473,6 +473,7 @@ public class FukaTaishoshaSearch {
                     賦課検索.getHihokenshaNo() != null ? 賦課検索.getHihokenshaNo().value() : RString.EMPTY,
                     識別対象.get名称() != null ? (識別対象.get名称().getName() != null ? 識別対象.get名称().getName().value() : RString.EMPTY) : RString.EMPTY,
                     個人.get生年月日() != null ? new RString(個人.get生年月日().toFlexibleDate().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY,
+                    個人.get年齢算出().get年齢(),
                     個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
                     個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                     識別対象.get住所() != null ? ((識別対象.get住所().get住所() != null && 識別対象.get住所().get番地() != null)
