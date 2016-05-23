@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiin
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteiinput.NinteiInputFinder;
@@ -40,26 +40,21 @@ public class NinteiInputHandler {
     /**
      * 画面初期化処理します。
      *
-     * @param 申請書管理番号 申請書管理番号
-     * @param subGyomuCode subGyomuCode
-     * @param 厚労省IFコード 厚労省IFコード
+     * @param model NinteiInputDataPassModel
      */
-    public void initialize(ShinseishoKanriNo 申請書管理番号, RString subGyomuCode, RString 厚労省IFコード) {
-        div.setHdnShinseishoKanriNo(申請書管理番号 == null ? RString.EMPTY : 申請書管理番号.value());
-        div.setHdnDatabaseSubGyomuCode(subGyomuCode);
-        div.setHdnKoroshoIfShikibetsuCode(厚労省IFコード);
+    public void initialize(NinteiInputDataPassModel model) {
+        div.setHdnShinseishoKanriNo(model.get申請書管理番号() == null ? RString.EMPTY : model.get申請書管理番号().value());
+        div.getRadNinteiKubun().setSelectedValue(model.get認定区分());
+        div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
+        div.setHdnDatabaseSubGyomuCode(model.getSubGyomuCode());
+        div.setHdnKoroshoIfShikibetsuCode(model.get厚労省IFコード());
+        div.getTxtNinteiYMD().setValue(model.get認定年月日());
+        div.getTxtShinsakaiIken().setValue(model.get審査会意見());
+        div.getTxtYokaigodoCode().setValue(model.get要介護度コード());
+        div.getTxtYokaigodoName().setValue(model.get要介護度名称());
+        div.getTxtYukoKaishiYMD().setValue(model.get有効開始年月日());
+        div.getTxtYukoShuryoYMD().setValue(model.get有効終了年月日());
         NinteiInputFinder ninteiInputFinder = NinteiInputFinder.createInstance();
-        if (SubGyomuCode.DBD介護受給.value().equals(subGyomuCode)) {
-            // TODO  内部QA：1186  Redmine：#85604( DbT4101NinteiShinseiJohoBusiness dbt4101Ninteishinsei =を使用されない)
-            ninteiInputFinder.get要介護認定申請情報受給(申請書管理番号);
-            // TODO  内部QA：1186  Redmine：#85604( DbT4102NinteiKekkaJohoBusiness dbt4102Ninteikekkajoho =を使用されない)
-            ninteiInputFinder.get要介護認定結果情報受給(申請書管理番号);
-        } else if (SubGyomuCode.DBE認定支援.value().equals(subGyomuCode)) {
-            // TODO  内部QA：1186  Redmine：#85604(NinteiShinseiJoho ninteiShinseiJoho =を使用されない)
-            ninteiInputFinder.get要介護認定申請情報認定(申請書管理番号);
-            // TODO  内部QA：1186  Redmine：#85604(DbT5102NinteiKekkaJohoBusiness dbt5102Ninteikekkajoho =を使用されない)
-            ninteiInputFinder.get要介護認定結果情報認定(申請書管理番号);
-        }
         List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給, new CodeShubetsu("0002"));
         List<dgServiceIchiran_Row> rowList = new ArrayList<>();
         for (UzT0007CodeEntity entity : entityList) {
@@ -69,8 +64,14 @@ public class NinteiInputHandler {
             rowList.add(row);
         }
         div.getDgServiceIchiran().setDataSource(rowList);
-        List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(申請書管理番号).records();
+        List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(model.get申請書管理番号()).records();
         setSelect(rowList, jukyushaDaichoList);
+        if (!new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
+                && !new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
+                && !new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
+                && !new RString("TokushuShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))) {
+            div.getDgServiceIchiran().setReadOnly(true);
+        }
     }
 
     private void setSelect(List<dgServiceIchiran_Row> rowList, List<JukyushaDaicho> jukyushaDaichoList) {
