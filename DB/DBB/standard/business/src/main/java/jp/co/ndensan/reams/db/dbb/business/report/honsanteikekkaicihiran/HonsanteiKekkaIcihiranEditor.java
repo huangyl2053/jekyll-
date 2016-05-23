@@ -50,6 +50,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     private final RString 市町村コード;
     private final RString 市町村名;
     private final RString 住所編集;
+    private final List<RString> 出力順項目リスト;
+    private final List<RString> 改頁項目リスト;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -82,6 +84,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
      * @param 市町村コード RString
      * @param 市町村名 RString
      * @param 住所編集 RString
+     * @param 出力順項目リスト List<RString>
+     * @param 改頁項目リスト List<RString>
      */
     public HonsanteiKekkaIcihiranEditor(List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList,
             HonsanteiFukaExtraBatchParameter バッチパラメータ,
@@ -89,7 +93,9 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             RDate 調定日時,
             RString 市町村コード,
             RString 市町村名,
-            RString 住所編集) {
+            RString 住所編集,
+            List<RString> 出力順項目リスト,
+            List<RString> 改頁項目リスト) {
         this.計算後情報_宛名_口座EntityList = 計算後情報_宛名_口座EntityList;
         this.バッチパラメータ = バッチパラメータ;
         this.賦課年度 = 賦課年度;
@@ -97,6 +103,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         this.市町村コード = 市町村コード;
         this.市町村名 = 市町村名;
         this.住所編集 = 住所編集;
+        this.出力順項目リスト = 出力順項目リスト;
+        this.改頁項目リスト = 改頁項目リスト;
     }
 
     @Override
@@ -217,37 +225,37 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     }
 
     private RString set出力順() {
-        if (バッチパラメータ.get出力帳票一覧List() != null && !バッチパラメータ.get出力帳票一覧List().isEmpty()) {
-            if (バッチパラメータ.get出力帳票一覧List().size() > NUM_0) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_0).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_1) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_1).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_2) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_2).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_3) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_3).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_4) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_4).get出力順ID();
+        if (出力順項目リスト != null && !出力順項目リスト.isEmpty()) {
+            if (出力順項目リスト.size() > NUM_0) {
+                return 出力順項目リスト.get(NUM_0);
+            } else if (出力順項目リスト.size() > NUM_1) {
+                return 出力順項目リスト.get(NUM_1);
+            } else if (出力順項目リスト.size() > NUM_2) {
+                return 出力順項目リスト.get(NUM_2);
+            } else if (出力順項目リスト.size() > NUM_3) {
+                return 出力順項目リスト.get(NUM_3);
+            } else if (出力順項目リスト.size() > NUM_4) {
+                return 出力順項目リスト.get(NUM_4);
             }
         }
-        return null;
+        return RString.EMPTY;
     }
 
     private RString set改ページ() {
-        if (バッチパラメータ.get出力帳票一覧List() != null && !バッチパラメータ.get出力帳票一覧List().isEmpty()) {
-            if (バッチパラメータ.get出力帳票一覧List().size() > NUM_0) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_0).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_1) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_1).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_2) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_2).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_3) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_3).get出力順ID();
-            } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_4) {
-                return バッチパラメータ.get出力帳票一覧List().get(NUM_4).get出力順ID();
+        if (改頁項目リスト != null && !改頁項目リスト.isEmpty()) {
+            if (改頁項目リスト.size() > NUM_0) {
+                return 改頁項目リスト.get(NUM_0);
+            } else if (改頁項目リスト.size() > NUM_1) {
+                return 改頁項目リスト.get(NUM_1);
+            } else if (改頁項目リスト.size() > NUM_2) {
+                return 改頁項目リスト.get(NUM_2);
+            } else if (改頁項目リスト.size() > NUM_3) {
+                return 改頁項目リスト.get(NUM_3);
+            } else if (改頁項目リスト.size() > NUM_4) {
+                return 改頁項目リスト.get(NUM_4);
             }
         }
-        return null;
+        return RString.EMPTY;
     }
 
     private List<RString> set普徴期() {
