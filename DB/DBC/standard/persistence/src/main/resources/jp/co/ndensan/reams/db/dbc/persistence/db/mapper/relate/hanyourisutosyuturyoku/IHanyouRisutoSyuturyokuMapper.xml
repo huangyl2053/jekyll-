@@ -115,7 +115,8 @@
         AND NOT EXISTS (
         SELECT 1
         FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS a
-        WHERE "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = a."hihokenshaNo"
+        WHERE "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"  = a."hihokenshaNo"
+        AND "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = a."serviceTeikyoYM"
         AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"))
         As  DbT3055
         LEFT OUTER JOIN
