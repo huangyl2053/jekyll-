@@ -35,13 +35,13 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
     /**
      * コンストラクタです
      *
-     * @param 編集後仮算定通知書共通情報entity
-     * @param 調定年度
-     * @param 帳票作成日時
-     * @param association
-     * @param 改頁項目リスト
-     * @param 出力項目リスト
-     * @param 連番
+     * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
+     * @param 調定年度 FlexibleYear
+     * @param 帳票作成日時 YMDHMS
+     * @param association Association
+     * @param 改頁項目リスト List<RString>
+     * @param 出力項目リスト List<RString>
+     * @param 連番 int
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
@@ -68,7 +68,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
      * @param 改頁項目リスト List<RString>
      * @param 出力項目リスト List<RString>
      * @param 連番 int
-     * @return
+     * @return TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport
      */
     public static TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport createForm(
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
