@@ -130,7 +130,7 @@
         ORDER BY
           A."dbT1001HihokenshaDaicho_idoYMD" DESC
     </select>
-    <select id="ge広域運用識別コード情報の取得処理" 
+<!--    <select id="ge広域運用識別コード情報の取得処理" 
             resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter" fetchSize="500">
 	SELECT
@@ -144,5 +144,5 @@
         <foreach collection="市町村コード" item="code" open="(" separator="," close=")"> #{code} </foreach>
        AND 
         DbT1001."hihokenshaNo" = #{被保険者番号}
-	</select>
+	</select>-->
 </mapper>
