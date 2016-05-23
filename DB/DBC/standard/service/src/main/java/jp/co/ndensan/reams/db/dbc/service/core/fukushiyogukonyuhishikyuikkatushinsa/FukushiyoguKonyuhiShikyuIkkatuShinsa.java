@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.ShokanFukushiYoguHanbaihiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntity;
@@ -94,8 +95,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuIkkatuShinsa}
+     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuIkkatuShinsa}
      */
     public static FukushiyoguKonyuhiShikyuIkkatuShinsa createInstance() {
         return InstanceProvider.create(FukushiyoguKonyuhiShikyuIkkatuShinsa.class);
@@ -189,6 +189,10 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                         result.getEntity().get償還払請求基本Entity().getYoshikiNo(),
                         result.getEntity().get償還払請求基本Entity().getMeisaiNo()
                 );
+                DbT3038ShokanKihonEntity dbt3038Entity = null;
+                if (償還払請求基本情報entity != null) {
+                    dbt3038Entity = 償還払請求基本情報entity.toEntity();
+                }
 
                 List<ShokanFukushiYoguHanbaihi> 償還払請求福祉用具販売費リスト = sut.getShokanFukushiYoguHanbaihi(
                         result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
@@ -206,24 +210,36 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                         result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
                         result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
                         result.getEntity().get償還払請求基本Entity().getSeiriNo());
+                DbT3034ShokanShinseiEntity dbt3034Entity = null;
+                if (償還払支給申請情報entity != null) {
+                    dbt3034Entity = 償還払支給申請情報entity.toEntity();
+                }
 
                 ShokanHanteiKekka 償還払支給判定結果entity = sut.getShokanHanteiKekka(
                         result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
                         result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
                         result.getEntity().get償還払請求基本Entity().getSeiriNo());
+                DbT3036ShokanHanteiKekkaEntity dbt3036Entity = null;
+                if (償還払支給判定結果entity != null) {
+                    dbt3036Entity = 償還払支給判定結果entity.toEntity();
+                }
 
                 ShokanShukei 償還払請求集計entity = sut.getShokanShukei(
                         result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
                         result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
                         result.getEntity().get償還払請求基本Entity().getSeiriNo());
+                DbT3053ShokanShukeiEntity dbt3053Entity = null;
+                if (償還払請求集計entity != null) {
+                    dbt3053Entity = 償還払請求集計entity.toEntity();
+                }
 
                 manager.dealKyufujisseki(モード_審査,
                         result.getEntity().get識別コード(),
-                        償還払請求基本情報entity.toEntity(),
+                        dbt3038Entity,
                         dbT3048EntityList,
-                        償還払支給申請情報entity.toEntity(),
-                        償還払支給判定結果entity.toEntity(),
-                        償還払請求集計entity.toEntity(),
+                        dbt3034Entity,
+                        dbt3036Entity,
+                        dbt3053Entity,
                         null);
             }
         }
