@@ -757,26 +757,11 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
         int 二次判定要介護4計 = Integer.parseInt(合計.getListHantei_8().toString());
         int 二次判定要介護5計 = Integer.parseInt(合計.getListHantei_9().toString());
         int 合計計 = Integer.parseInt(合計.getListHantei_10().toString());
-        RString 対象開始日 = RString.EMPTY;
-        RString 対象終了日 = RString.EMPTY;
-        if (paramter.isTaishoTsukiKubun()) {
-            FlexibleYearMonth 対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
-            対象開始日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 1).toDateString();
-            対象終了日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 対象年月.getLastDay()).toDateString();
-        } else if (paramter.isTaishoGeppiKubun()) {
-            if (!paramter.isEmptyTaishoGeppiFrom()) {
-                対象開始日 = paramter.getTaishoGeppiFrom();
-            }
-            if (!paramter.isEmptyTaishoGeppiTo()) {
-                対象終了日 = paramter.getTaishoGeppiTo();
-            }
-        }
-
         ShinsaHanteiJokyoItem 割合Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 current.getGogitaiMei(),
-                対象開始日,
-                対象終了日,
+                get対象開始年月日(),
+                get対象終了年月日(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 current.getShoKisaiHokenshaNo(),
                 RDate.getNowDate().toDateString(),
@@ -817,6 +802,28 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 RString.EMPTY,
                 RString.EMPTY);
         return 割合Item;
+    }
+
+    private RString get対象開始年月日() {
+        RString 対象開始日 = RString.EMPTY;
+        if (paramter.isTaishoTsukiKubun()) {
+            FlexibleYearMonth 対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
+            対象開始日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 1).toDateString();
+        } else if (paramter.isTaishoGeppiKubun() && !paramter.isEmptyTaishoGeppiFrom()) {
+            対象開始日 = paramter.getTaishoGeppiFrom();
+        }
+        return 対象開始日;
+    }
+
+    private RString get対象終了年月日() {
+        RString 対象終了日 = RString.EMPTY;
+        if (paramter.isTaishoTsukiKubun()) {
+            FlexibleYearMonth 対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
+            対象終了日 = new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 対象年月.getLastDay()).toDateString();
+        } else if (paramter.isTaishoGeppiKubun() && !paramter.isEmptyTaishoGeppiTo()) {
+            対象終了日 = paramter.getTaishoGeppiTo();
+        }
+        return 対象終了日;
     }
 
     private ShinsaHanteiJokyoItem get判定件数(ShinsaHanteiJokyoItem 一次判定非該当,
