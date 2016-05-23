@@ -3,19 +3,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jul 22 19:04:52 JST 2015
+ * Mon May 23 15:09:29 JST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgGaitoshaList_Row のクラスファイル
- *
+ * dgGaitoshaList_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgGaitoshaList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
 
     private RString hihokenshaNo;
     private RString shikibetsuCode;
@@ -25,6 +29,7 @@ public class dgGaitoshaList_Row extends DataRow {
     private RString shimeiAndKanaShimsei;
     private RString gender;
     private RString birthDay;
+    private RString nenrei;
     private RString yubinNo;
     private RString jusho;
     private RString kojinNo;
@@ -41,14 +46,29 @@ public class dgGaitoshaList_Row extends DataRow {
         this.shimeiAndKanaShimsei = RString.EMPTY;
         this.gender = RString.EMPTY;
         this.birthDay = RString.EMPTY;
+        this.nenrei = RString.EMPTY;
         this.yubinNo = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.kojinNo = RString.EMPTY;
         this.juminJotai = RString.EMPTY;
         this.setaiCode = RString.EMPTY;
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.setOriginalData("hihokenshaKubun", hihokenshaKubun);
+        this.setOriginalData("shimei", shimei);
+        this.setOriginalData("kanaShimsei", kanaShimsei);
+        this.setOriginalData("shimeiAndKanaShimsei", shimeiAndKanaShimsei);
+        this.setOriginalData("gender", gender);
+        this.setOriginalData("birthDay", birthDay);
+        this.setOriginalData("nenrei", nenrei);
+        this.setOriginalData("yubinNo", yubinNo);
+        this.setOriginalData("jusho", jusho);
+        this.setOriginalData("kojinNo", kojinNo);
+        this.setOriginalData("juminJotai", juminJotai);
+        this.setOriginalData("setaiCode", setaiCode);
     }
 
-    public dgGaitoshaList_Row(RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, RString birthDay, RString yubinNo, RString jusho, RString kojinNo, RString juminJotai, RString setaiCode) {
+    public dgGaitoshaList_Row(RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, RString birthDay, RString nenrei, RString yubinNo, RString jusho, RString kojinNo, RString juminJotai, RString setaiCode) {
         super();
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
@@ -58,6 +78,7 @@ public class dgGaitoshaList_Row extends DataRow {
         this.setOriginalData("shimeiAndKanaShimsei", shimeiAndKanaShimsei);
         this.setOriginalData("gender", gender);
         this.setOriginalData("birthDay", birthDay);
+        this.setOriginalData("nenrei", nenrei);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("kojinNo", kojinNo);
@@ -71,6 +92,7 @@ public class dgGaitoshaList_Row extends DataRow {
         this.shimeiAndKanaShimsei = shimeiAndKanaShimsei;
         this.gender = gender;
         this.birthDay = birthDay;
+        this.nenrei = nenrei;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.kojinNo = kojinNo;
@@ -108,6 +130,10 @@ public class dgGaitoshaList_Row extends DataRow {
 
     public RString getBirthDay() {
         return birthDay;
+    }
+
+    public RString getNenrei() {
+        return nenrei;
     }
 
     public RString getYubinNo() {
@@ -168,6 +194,11 @@ public class dgGaitoshaList_Row extends DataRow {
     public void setBirthDay(RString birthDay) {
         this.setOriginalData("birthDay", birthDay);
         this.birthDay = birthDay;
+    }
+
+    public void setNenrei(RString nenrei) {
+        this.setOriginalData("nenrei", nenrei);
+        this.nenrei = nenrei;
     }
 
     public void setYubinNo(RString yubinNo) {

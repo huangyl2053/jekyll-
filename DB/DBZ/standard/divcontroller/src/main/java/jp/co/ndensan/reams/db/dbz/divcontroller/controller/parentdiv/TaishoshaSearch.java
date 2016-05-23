@@ -394,6 +394,7 @@ public class TaishoshaSearch {
                     ? 識別対象.get名称().getName().value().concat(識別対象.get名称().getKana().value()) : RString.EMPTY) : RString.EMPTY,
                     個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
                     個人.get生年月日() != null ? new RString(個人.get生年月日().toFlexibleDate().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY,
+                    個人.get年齢算出().get年齢(),
                     識別対象.get住所() != null ? (識別対象.get住所().get郵便番号() != null ? 識別対象.get住所().get郵便番号().getEditedYubinNo() : RString.EMPTY) : RString.EMPTY,
                     識別対象.get住所() != null ? ((識別対象.get住所().get住所() != null && 識別対象.get住所().get番地() != null)
                     ? 識別対象.get住所().get住所().concat(識別対象.get住所().get番地().getBanchi().value())
