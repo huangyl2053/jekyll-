@@ -803,7 +803,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager extends SyokanbaraihiShikyuS
             for (ShokanShakaiFukushiHojinKeigengaku entity : entityList) {
                 if (EntityDataState.Deleted.equals(entity.toEntity().getState())) {
                     償還払請求社会福祉法人軽減額Dac.delete(entity.toEntity());
-                } else {
+                } else if (!EntityDataState.Unchanged.equals(entity.toEntity().getState())) {
                     償還払請求社会福祉法人軽減額Dac.save(entity.toEntity());
                 }
             }
