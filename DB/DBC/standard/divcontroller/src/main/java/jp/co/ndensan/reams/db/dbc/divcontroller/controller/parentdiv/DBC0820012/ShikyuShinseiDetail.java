@@ -306,7 +306,7 @@ public class ShikyuShinseiDetail {
         ShikyuShinseiDetailParameter parameter = getHandler(div).setParameter();
         ViewStateHolder.put(ViewStateKeys.処理モード, parameter.get処理モード());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, 引継ぎデータ.get被保険者番号());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月());
+        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, parameter.get申請日());
         ShoukanharaihishinseikensakuParameter 償還払費申請検索 = new ShoukanharaihishinseikensakuParameter(

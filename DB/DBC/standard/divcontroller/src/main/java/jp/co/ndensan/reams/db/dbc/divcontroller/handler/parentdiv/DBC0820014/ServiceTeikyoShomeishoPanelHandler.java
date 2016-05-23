@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -254,8 +253,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
      */
     public Boolean 申請既存チェック() {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
-                RYearMonth.class).toString());
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
+                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                toString())).getYearMonth().toDateString());;
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         List<ShokanShinsei> 支給申請一覧情報リスト = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
@@ -284,8 +284,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
      */
     public Boolean サービス提供証明書の存在チェック() {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
-                RYearMonth.class).toString());
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
+                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         JigyoshaNo 事業者番号 = new JigyoshaNo(div.getPanelShinseiNaiyo().getCcdShisetsuJoho().getNyuryokuShisetsuKodo());
         RString 様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey();

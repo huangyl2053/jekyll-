@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -47,8 +46,9 @@ public class ServiceTeikyoShomeishoPanel {
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
-                RYearMonth.class).toString());
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
+                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         ServiceTeikyoShomeishoPanelHandler handler = getHandler(div);
 

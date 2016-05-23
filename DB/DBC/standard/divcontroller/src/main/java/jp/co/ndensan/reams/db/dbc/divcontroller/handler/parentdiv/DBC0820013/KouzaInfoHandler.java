@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -291,8 +290,9 @@ public class KouzaInfoHandler {
 
     private void setViewState(RString 処理モード) {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月,
-                RYearMonth.class).toString());
+        FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
+                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                toString())).getYearMonth().toDateString());
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         ShoukanharaihishinseikensakuParameter parameter = new ShoukanharaihishinseikensakuParameter(
                 被保険者番号, サービス年月, 整理番号, null, null, null, null);
