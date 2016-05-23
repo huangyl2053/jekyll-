@@ -143,7 +143,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(shikakuShutokuYMD, 取得日),
                                 not(eq(logicalDeletedFlag, true)),
-                                not(isNULL(jushochitokureiTekiyoYMD))
+                                not(isNULL(jushochitokureiTekiyoYMD)),
+                                not(eq(jushochitokureiTekiyoYMD, ""))
                         )).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(jushochitokureiKaijoYMD, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
@@ -171,7 +172,8 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                                 eq(shikibetsuCode, 識別コード),
                                 eq(shikakuShutokuYMD, 取得日),
                                 not(eq(logicalDeletedFlag, true)),
-                                not(isNULL(jushochitokureiTekiyoYMD))
+                                not(isNULL(jushochitokureiTekiyoYMD)),
+                                not(eq(jushochitokureiTekiyoYMD, ""))
                         )).
                 order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(jushochitokureiKaijoYMD, Order.DESC, NullsOrder.LAST)).
                 toList(DbT1001HihokenshaDaichoEntity.class);

@@ -142,6 +142,7 @@
         AND "shoKisaiHokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo")
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.noDeleted_DbT3054KogakuKyufuTaishoshaMeisai" />
+        <!-- 被保険者毎の最新を取得する。-->
         AND NOT EXISTS (
         SELECT 1
         FROM rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS a
@@ -152,13 +153,6 @@
         ON DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_serviceTeikyoYM" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
         AND DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_rirekiNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_rirekiNo"
-        <!-- 被保険者毎の最新を取得する。-->
-        AND NOT EXISTS (
-        SELECT 1
-        FROM rgdb."dbT3054KogakuKyufuTaishoshaMeisai" AS a
-        WHERE "dbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo" = a."hihokenshaNo"
-        AND "dbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
-        )
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" As DbV1001
         ON DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN (

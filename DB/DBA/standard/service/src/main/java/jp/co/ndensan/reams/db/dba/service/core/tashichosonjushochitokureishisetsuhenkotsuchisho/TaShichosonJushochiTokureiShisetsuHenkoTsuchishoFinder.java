@@ -163,18 +163,22 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 getTaJushochiTokureiTekiyoJyoho(inBusiness.get識別コード(), inBusiness.get異動日(), inBusiness.get枝番());
         ShisetsuJyohoRelateEntity 変更後施設情報 = 施設情報Map.get(1);
         ShisetsuJyohoRelateEntity 変更前施設情報 = 施設情報Map.get(2);
-        outEntity.set変更前施設名称(変更前施設情報.get事業者名称());
-        outEntity.set変更前施設電話番号(変更前施設情報.get電話番号());
-        outEntity.set変更前施設FAX番号(変更前施設情報.getFax番号());
-        outEntity.set変更前施設郵便番号(!RString.isNullOrEmpty(変更前施設情報.get郵便番号())
-                ? new YubinNo(変更前施設情報.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
-        outEntity.set変更前施設住所(変更前施設情報.get事業者住所());
-        outEntity.set変更後施設名称(変更後施設情報.get事業者名称());
-        outEntity.set変更後施設電話番号(変更後施設情報.get電話番号());
-        outEntity.set変更後施設FAX番号(変更後施設情報.getFax番号());
-        outEntity.set変更後施設郵便番号(!RString.isNullOrEmpty(変更後施設情報.get郵便番号())
-                ? new YubinNo(変更後施設情報.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
-        outEntity.set変更後施設住所(変更後施設情報.get事業者住所());
+        if (変更前施設情報 != null) {
+            outEntity.set変更前施設名称(変更前施設情報.get事業者名称());
+            outEntity.set変更前施設電話番号(変更前施設情報.get電話番号());
+            outEntity.set変更前施設FAX番号(変更前施設情報.getFax番号());
+            outEntity.set変更前施設郵便番号(!RString.isNullOrEmpty(変更前施設情報.get郵便番号())
+                    ? new YubinNo(変更前施設情報.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
+            outEntity.set変更前施設住所(変更前施設情報.get事業者住所());
+        }
+        if (変更後施設情報 != null) {
+            outEntity.set変更後施設名称(変更後施設情報.get事業者名称());
+            outEntity.set変更後施設電話番号(変更後施設情報.get電話番号());
+            outEntity.set変更後施設FAX番号(変更後施設情報.getFax番号());
+            outEntity.set変更後施設郵便番号(!RString.isNullOrEmpty(変更後施設情報.get郵便番号())
+                    ? new YubinNo(変更後施設情報.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
+            outEntity.set変更後施設住所(変更後施設情報.get事業者住所());
+        }
         return new TatokuKanrenChohyoHenkoTsuchishoBusiness(outEntity);
     }
 
@@ -235,18 +239,23 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         Map<Integer, ShisetsuJyohoRelateEntity> 施設情報Map = ShisetsuJyohoFinder.createInstance().
                 getTaJushochiTokureiTekiyoJyoho(inBusiness.get識別コード(), inBusiness.get異動日(), inBusiness.get枝番());
         ShisetsuJyohoRelateEntity 施設情報Entity = 施設情報Map.get(1);
-        outEntity.set入所年月日(施設情報Entity.get入所年月日().
-                wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        outEntity.set施設名称(施設情報Entity.get事業者名称());
-        outEntity.set施設電話番号(施設情報Entity.get電話番号());
-        outEntity.set施設FAX番号(施設情報Entity.getFax番号());
-        outEntity.set施設郵便番号(!RString.isNullOrEmpty(施設情報Entity.get郵便番号())
-                ? new YubinNo(施設情報Entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
-        outEntity.set施設住所(施設情報Entity.get事業者住所());
+        FlexibleDate 基準日 = FlexibleDate.EMPTY;
+        if (施設情報Entity != null) {
+            outEntity.set入所年月日(施設情報Entity.get入所年月日().
+                    wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            outEntity.set施設名称(施設情報Entity.get事業者名称());
+            outEntity.set施設電話番号(施設情報Entity.get電話番号());
+            outEntity.set施設FAX番号(施設情報Entity.getFax番号());
+            outEntity.set施設郵便番号(!RString.isNullOrEmpty(施設情報Entity.get郵便番号())
+                    ? new YubinNo(施設情報Entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY);
+            outEntity.set施設住所(施設情報Entity.get事業者住所());
+            基準日 = 施設情報Entity.get入所年月日();
+
+        }
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        key.set基準日(施設情報Entity.get入所年月日());
+        key.set基準日(基準日);
         key.set識別コード(inBusiness.get識別コード());
 
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();

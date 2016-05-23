@@ -171,7 +171,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             entity.getEntity().set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
             updList.add(entity);
         }
-        FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
+        //FukushiyoguKonyuhiShikyuIkkatuShinsa.createInstance().updShikyuShinsei(決定日, updList);
     }
 
     private void setグリッド(List<ShokanShinseiEntityResult> resultList) {

@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.TokubetsuChoshuKaishi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiReport;
@@ -108,6 +111,7 @@ public class TokubetsuChoshuKaishiPrintService {
     private void executereport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             FlexibleYear 賦課年度, RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名,
             List<RString> 出力項目リスト, List<RString> 改頁項目リスト, ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
+        Collections.sort(編集後本算定通知書共通情報, new EntityComparator());
         int i = NUM1;
         for (EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu : 編集後本算定通知書共通情報) {
             TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(
@@ -126,5 +130,23 @@ public class TokubetsuChoshuKaishiPrintService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private static class EntityComparator implements Comparator<EditedHonSanteiTsuchiShoKyotsu>, Serializable {
+
+        private static final long serialVersionUID = -224230396008236394L;
+
+        /**
+         * compare処理です。
+         *
+         * @param entity1 EditedHonSanteiTsuchiShoKyotsu
+         * @param entity2 EditedHonSanteiTsuchiShoKyotsu
+         * @return 結果
+         */
+        @Override
+        public int compare(EditedHonSanteiTsuchiShoKyotsu entity1, EditedHonSanteiTsuchiShoKyotsu entity2) {
+            int flag = entity1.get通知書番号().compareTo(entity2.get通知書番号());
+            return flag;
+        }
     }
 }

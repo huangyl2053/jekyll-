@@ -44,7 +44,6 @@ public class ServiceTeikyoShomeishoPanel {
      */
     public ResponseData<ServiceTeikyoShomeishoPanelDiv> onLoad(ServiceTeikyoShomeishoPanelDiv div) {
 
-        RString 様式番号 = new RString("1234");
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
@@ -58,7 +57,7 @@ public class ServiceTeikyoShomeishoPanel {
         RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class).toString());
         ShokanShinsei 償還払支給申請 = handler.get償還払支給申請(被保険者番号, サービス年月, 整理番号);
         List<ServiceTeikyoShomeishoResult> 証明書一覧情報 = ShokanbaraiJyokyoShokai
-                .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号, 様式番号);
+                .createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号);
 
         handler.load宛名と基本情報(識別コード, 被保険者番号);
         handler.loadボタンエリア(償還払支給申請.is国保連再送付フラグ());

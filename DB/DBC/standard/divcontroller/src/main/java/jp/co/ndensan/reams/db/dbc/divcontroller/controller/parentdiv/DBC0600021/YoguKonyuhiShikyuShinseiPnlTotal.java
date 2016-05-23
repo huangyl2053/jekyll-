@@ -34,13 +34,13 @@ import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.Fu
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -495,10 +495,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiPnlTotalDiv> onFocusout_txtRyosyuYMD(
             YoguKonyuhiShikyuShinseiPnlTotalDiv div) {
-        HokenKyufuRitsu 給付率 = JutakuKaishuJizenShinsei.createInstance().getKyufuritsu(
-                new HihokenshaNo(div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号()),
-                new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
-                        getPnlShinsesyaJoho().getTxtRyosyuYMD().getValue().getYearMonth().toString()));
+        HokenKyufuRitsu 給付率;
+        try {
+            給付率 = JutakuKaishuJizenShinsei.createInstance().getKyufuritsu(
+                    new HihokenshaNo(div.getKaigoCommonPanel().getCcdShikakuKihon().get被保険者番号()),
+                    new FlexibleYearMonth(div.getYoguKonyuhiShikyuShinseiContentsPanel().
+                            getPnlShinsesyaJoho().getTxtRyosyuYMD().getValue().getYearMonth().toString()));
+        } catch (Exception e) {
+            給付率 = null;
+        }
         getHandler(div).get給付率(給付率);
         ViewStateHolder.put(ViewStateKeys.給付率, new HokenKyufuRitsu(
                 div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtKyufuritsu().getValue()));

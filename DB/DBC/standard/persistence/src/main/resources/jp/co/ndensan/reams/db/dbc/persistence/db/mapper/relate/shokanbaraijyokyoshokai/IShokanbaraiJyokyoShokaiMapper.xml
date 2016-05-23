@@ -85,7 +85,6 @@
         BASIC."serviceTeikyoYM" = #{serviceTeikyoYM}
         AND BASIC."hiHokenshaNo" = #{hiHokenshaNo}
         AND BASIC."seiriNo" = #{seiriNo}
-        AND BASIC."yoshikiNo" = #{yoshikiNo}
         ORDER BY
         BASIC."jigyoshaNo" ASC
         ,KAIGOB."jigyoshaName" ASC

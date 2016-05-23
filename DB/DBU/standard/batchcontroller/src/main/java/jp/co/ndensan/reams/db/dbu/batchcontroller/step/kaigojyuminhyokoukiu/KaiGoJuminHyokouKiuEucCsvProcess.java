@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyokoukiu.KaiGoJuminHyokouKiuBatchParameter;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojuminhyo.KaigoJuminhyoMapperParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoEntity;
@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyumin
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiEucCSVDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyojiho.KaiGoJuminHyokouKiuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyokobetsukoikiunyobatchparametersakusei.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -65,10 +64,10 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyo."
-            + "IKaigoJuminhyoMapper.getKaigoJuminhyoEntity");
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojyuminhyokoukiu."
+            + "IkaigojyuminhyokoukiuMapper.getKaigoJuminhyoEntity");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("KaigoJuminhyoEucCsv"));
-    private KaiGoJuminHyokouKiuRelateEntity kaigojuminiEntity;
+    private KobetsuKoikiunyoParameter kaigojuminiEntity;
     List<KaigoJuminhyoKobetsuKoikiunyo> koikiunyoEntityList = new ArrayList<>();
     private KaiGoJuminHyokouKiuBatchParameter paramter;
     private IDbT7035RendoPatternMapper rendoPatternMapper;
@@ -94,34 +93,36 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
 
     @Override
     protected void initialize() {
-        kaigojuminiEntity = new KaiGoJuminHyokouKiuRelateEntity();
-        if (paramter == null) {
+        if (paramter.getKobetsuKoikiunyoParameterList().isEmpty()) {
             KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder 広域運用抽出期間情報リスト = new KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder();
             koikiunyoEntityList = 広域運用抽出期間情報リスト.getKoikiunyoChushutsukikanJohoList().records();
             for (KaigoJuminhyoKobetsuKoikiunyo entitylist : koikiunyoEntityList) {
-                kaigojuminiEntity.set市町村コード(entitylist.getShichosonCode());
-                kaigojuminiEntity.set日付FROM(entitylist.getTaishoKaishiTimestamp().getRDateTime());
-                kaigojuminiEntity.set日付TO(entitylist.getTaishoShuryoTimestamp().getRDateTime());
+                kaigojuminiEntity = new KobetsuKoikiunyoParameter();
+                kaigojuminiEntity.setShichosonCode(entitylist.getShichosonCode().value());
+                kaigojuminiEntity.setDateFrom(new RString(entitylist.getTaishoKaishiTimestamp().toString()));
+                kaigojuminiEntity.setDateTo(YMDHMS.now().getRDateTime());
+                //        if (kaigojuminiEntity.get日付TO().isBeforeOrEquals(kaigojuminiEntity.get日付FROM())) {
+                //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
+//        }
             }
-            processParameter.setShichosonCode(new RString(kaigojuminiEntity.get市町村コード().toString()));
-            processParameter.setDatefrom(kaigojuminiEntity.get日付FROM());
-            processParameter.setDateto(kaigojuminiEntity.get日付TO());
+            processParameter.getKobetsuKoikiunyoParameterList().add(kaigojuminiEntity);
 
+        } else {
+            for (int i = 0; i < paramter.getKobetsuKoikiunyoParameterList().size(); i++) {
+                rendoPatternMapper = getMapper(IDbT7035RendoPatternMapper.class);
+                dbT7035Entity = rendoPatternMapper.getRendoPatternEntity(new FlexibleDate(RDate.getNowDate().toDateString()));
+//                if (dbT7035Entity == null) {
+////                TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
+//                } else {
+                rendoPatternEntity = new RendoPatternEntity();
+                rendoPatternEntity.setSakiFormatVersion(dbT7035Entity.getMotoFormatVersion());
+                rendoPatternEntity.setSakiEncodeKeitai(dbT7035Entity.getSakiEncodeKeitai());
+                rendoPatternEntity.setCodeHenkanKubun(dbT7035Entity.getCodeHenkanKubun());
+                rendoPatternEntity.setRenkeiFileName(dbT7035Entity.getRenkeiFileName());
+                renkeiFileName = dbT7035Entity.getRenkeiFileName();
+//                }
+            }
         }
-//        if (kaigojuminiEntity.get日付TO().isBeforeOrEquals(kaigojuminiEntity.get日付FROM())) {
-        //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
-//        }
-        rendoPatternMapper = getMapper(IDbT7035RendoPatternMapper.class);
-        dbT7035Entity = rendoPatternMapper.getRendoPatternEntity(new FlexibleDate(RDate.getNowDate().toDateString()));
-//        if (dbT7035Entity == null) {
-        //TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
-//        }
-        rendoPatternEntity = new RendoPatternEntity();
-        rendoPatternEntity.setSakiFormatVersion(dbT7035Entity.getMotoFormatVersion());
-        rendoPatternEntity.setSakiEncodeKeitai(dbT7035Entity.getSakiEncodeKeitai());
-        rendoPatternEntity.setCodeHenkanKubun(dbT7035Entity.getCodeHenkanKubun());
-        rendoPatternEntity.setRenkeiFileName(dbT7035Entity.getRenkeiFileName());
-        renkeiFileName = dbT7035Entity.getRenkeiFileName();
         if (!RString.isNullOrEmpty(renkeiFileName)) {
             if (renkeiFileName.contains(日時)) {
                 renkeiFileName = renkeiFileName.replace(日時.toString(), new YMDHMS(RDate.getNowDateTime()).toString());
@@ -136,33 +137,28 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
 
     @Override
     protected IBatchReader createReader() {
-        processParameter.toKaiGoJuminHyokouKiuMapperParameter().getDatefrom();
-        processParameter.toKaiGoJuminHyokouKiuMapperParameter().getDateto();
-        KaigoJuminhyoMapperParameter mapperparmter = KaigoJuminhyoMapperParameter.
-                createParam_common(processParameter.toKaiGoJuminHyokouKiuMapperParameter().getDatefrom(),
-                        processParameter.toKaiGoJuminHyokouKiuMapperParameter().getDateto());
 
-        return new BatchDbReader(MYBATIS_SELECT_ID, mapperparmter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toKaiGoJuminHyokouKiuMapperParameter());
     }
     @BatchWriter
     private EucCsvWriter<IKaigoJuminhyoEucCsvEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void createWriter() {
-        if (rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.他社介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_固定長.getコード())) {
+        if (RenkeiDataFormatVersion.他社介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Other);
         }
-        if (rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.他社介護標準_ＣＳＶ版.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_ＣＳＶ版.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_ＣＳＶ版.getコード())) {
+        if (RenkeiDataFormatVersion.他社介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         }
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, new RString(rendoPatternEntity.getRenkeiFileName().toString()));
-        if (rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.他社介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.他社介護標準_ＣＳＶ版.getコード())) {
+        if (RenkeiDataFormatVersion.他社介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.他社介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())) {
             eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                     setEncode(getEncode(rendoPatternEntity.getSakiEncodeKeitai()))
                     .setDelimiter(EUC_WRITER_DELIMITER)
@@ -171,10 +167,10 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
                     .hasHeader(true).
                     build();
         }
-        if (rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_ＣＳＶ版.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_ＣＳＶ版.getコード())) {
+        if (RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())) {
             eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                     setEncode(getEncode(rendoPatternEntity.getSakiEncodeKeitai()))
                     .setDelimiter(EUC_WRITER_DELIMITER)
@@ -306,36 +302,46 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
 
     @Override
     protected void afterExecute() {
-        if (rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.他社介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.他社介護標準_ＣＳＶ版.getコード())) {
+        if (RenkeiDataFormatVersion.他社介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.他社介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())) {
             List<KaigoJyuminhyouTashajukiDateEntity> entityList = get介護住民票個別事項連携情報リストのIsEmpty(kaigoJuminhyoEntityList);
-            hachiCSVDataEntityList = finder.getKaigoJyuminhyouTashajukiHachiCSVData(entityList,
-                    processParameter.getShichosonCode(),
-                    rendoPatternEntity.getCodeHenkanKubun()).records();
-            get広域8桁CSVデータのCSV出力(hachiCSVDataEntityList);
+            for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
+                hachiCSVDataEntityList = finder.getKaigoJyuminhyouTashajukiHachiCSVData(entityList,
+                        processParameter.getKobetsuKoikiunyoParameterList().get(i).getShichosonCode(),
+                        rendoPatternEntity.getCodeHenkanKubun()).records();
+                get広域8桁CSVデータのCSV出力(hachiCSVDataEntityList);
+            }
         }
-        if (rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_ＣＳＶ版.getコード())) {
+        if (RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒ_ＮＥＴ介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())) {
 
             List<KaigoJyuminhyouTashajukiDateEntity> entityList = get介護住民票個別事項連携情報リストのIsEmpty(kaigoJuminhyoEntityList);
-            junitoJugoCSVDataEntityList
-                    = finder.getKaigoJyuminhyouKoikiunyoJuniCSVData(entityList, processParameter.getShichosonCode(),
-                            rendoPatternEntity.getCodeHenkanKubun()).records();
-            get広域12桁または15桁CSVデータのCSV出力(junitoJugoCSVDataEntityList);
+            for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
+                junitoJugoCSVDataEntityList
+                        = finder.getKaigoJyuminhyouKoikiunyoJuniCSVData(entityList,
+                                processParameter.getKobetsuKoikiunyoParameterList().get(i).getShichosonCode(),
+                                rendoPatternEntity.getCodeHenkanKubun()).records();
+                get広域12桁または15桁CSVデータのCSV出力(junitoJugoCSVDataEntityList);
+
+            }
         }
-        if (rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_固定長.getコード())
-                || rendoPatternEntity.getSakiFormatVersion().equals(RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_ＣＳＶ版.getコード())) {
+        if (RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_固定長.getコード().equals(rendoPatternEntity.getSakiFormatVersion())
+                || RenkeiDataFormatVersion.Ｒｅａｍｓ介護標準_ＣＳＶ版.getコード().equals(rendoPatternEntity.getSakiFormatVersion())) {
             List<KaigoJyuminhyouTashajukiDateEntity> entityList = get介護住民票個別事項連携情報リストのIsEmpty(kaigoJuminhyoEntityList);
-            junitoJugoCSVDataEntityList
-                    = finder.getKaigoJyuminhyouKoikiunyoJugoCSVData(entityList, processParameter.getShichosonCode(),
-                            rendoPatternEntity.getCodeHenkanKubun()).records();
-            get広域12桁または15桁CSVデータのCSV出力(junitoJugoCSVDataEntityList);
+            for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
+                junitoJugoCSVDataEntityList
+                        = finder.getKaigoJyuminhyouKoikiunyoJuniCSVData(entityList,
+                                processParameter.getKobetsuKoikiunyoParameterList().get(i).getShichosonCode(),
+                                rendoPatternEntity.getCodeHenkanKubun()).records();
+                get広域12桁または15桁CSVデータのCSV出力(junitoJugoCSVDataEntityList);
+
+            }
+            FilesystemName ファイル名称 = new FilesystemName(new RString(kaigojuminiEntity.getShichosonCode().toString())
+                    .concat(SofuRenkeiDataKyoyuFileName.介護個別事項異動情報_一定間隔.get名称()));
+            RString localWorkPath = Directory.createTmpDirectory();
+            setSharedFile(ファイル名称, localWorkPath);
+            manager.spool(eucFilePath);
         }
-        FilesystemName ファイル名称 = new FilesystemName(new RString(kaigojuminiEntity.get市町村コード().toString())
-                .concat(SofuRenkeiDataKyoyuFileName.介護個別事項異動情報_一定間隔.get名称()));
-        RString localWorkPath = Directory.createTmpDirectory();
-        setSharedFile(ファイル名称, localWorkPath);
-        manager.spool(eucFilePath);
     }
 
     private void setSharedFile(FilesystemName 共有ファイル名, RString path) {
@@ -401,9 +407,14 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
 
     private List<KaigoJyuminhyouTashajukiDateEntity> get介護住民票個別事項連携情報リストのIsEmpty(List<KaigoJuminhyoEntity> kaigoJuminhyoEntityList) {
         List<KaigoJyuminhyouTashajukiDateEntity> tashajukiDateEntity = new ArrayList<>();
+
         for (KaigoJuminhyoEntity entity : kaigoJuminhyoEntityList) {
+            List<RString> shichosonCode = new ArrayList<>();
+            for (KobetsuKoikiunyoParameter param : processParameter.getKobetsuKoikiunyoParameterList()) {
+                shichosonCode.add(param.getShichosonCode());
+            }
             KaiGoJuminHyokouKiuParameter parameter = KaiGoJuminHyokouKiuParameter
-                    .createParam_common(processParameter.getShichosonCode(), entity.getHihokenshaNo().value());
+                    .createParam_common(shichosonCode, entity.getHihokenshaNo().value());
             mapper = getMapper(IDbT1001HihokenshaDaichoMapper.class);
             List<DbT1001HihokenshaDaichoEntity> dbT1001DaichoEntityList
                     = mapper.ge広域運用識別コード情報の取得処理(parameter);

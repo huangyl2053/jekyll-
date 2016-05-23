@@ -77,7 +77,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         }
         Decimal 前回までの保険対象費用額 = 今までの保険者対象費用額;
 
-        if (今までの保険者対象費用額 != Decimal.ZERO && 整理番号 != null) {
+        if (今までの保険者対象費用額 != null && 今までの保険者対象費用額 != Decimal.ZERO && 整理番号 != null) {
             entity = sut.getShokanShiharaiKekka(被保険者番号,
                     サービス提供年月,
                     整理番号,
@@ -88,6 +88,9 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
             if (今回登録済みの保険対象費用額 != null) {
                 前回までの保険対象費用額 = 今までの保険者対象費用額.subtract(今回登録済みの保険対象費用額);
             }
+        }
+        if (前回までの保険対象費用額 == null) {
+            前回までの保険対象費用額 = Decimal.ZERO;
         }
         Decimal 保険対象費用額 = 前回までの保険対象費用額.add(今回の保険対象費用額);
         if (保険対象費用額.doubleValue() <= 支給限度額.doubleValue()) {

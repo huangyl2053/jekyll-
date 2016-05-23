@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyokoukiu;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護住民票個別事項連携情報作成【広域運用】のバッチのパラメータです。
@@ -22,20 +22,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 public class KaiGoJuminHyokouKiuBatchParameter extends BatchParameterBase {
 
-    private static final String SHICHOSOMCODE = "shichosonCode";
-    private static final String DATEFORM = "datefrom";
-    private static final String DATETO = "dateto";
+    private static final String SHICHOSOMCODE = "kobetsuKoikiunyoParameterList";
     @BatchParameter(key = SHICHOSOMCODE, name = "市町村コード")
-    private RString shichosonCode;
-    @BatchParameter(key = DATEFORM, name = "日付FROM")
-    private RDateTime datefrom;
-    @BatchParameter(key = DATETO, name = "日付TO")
-    private RDateTime dateto;
+    private List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList;
 
     /**
      * コンストラクタです。
      */
     public KaiGoJuminHyokouKiuBatchParameter() {
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param kobetsuKoikiunyoParameterList kobetsuKoikiunyoParameterList
+     */
+    public KaiGoJuminHyokouKiuBatchParameter(
+            List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {
+        this.kobetsuKoikiunyoParameterList = kobetsuKoikiunyoParameterList;
     }
 
     /**
@@ -45,8 +49,6 @@ public class KaiGoJuminHyokouKiuBatchParameter extends BatchParameterBase {
      */
     public KaiGoJuminHyokouKiuProcessParameter toKaiGoJuminHyokouKiuProcessParameter() {
         return new KaiGoJuminHyokouKiuProcessParameter(
-                this.shichosonCode,
-                this.datefrom,
-                this.dateto);
+                kobetsuKoikiunyoParameterList);
     }
 }

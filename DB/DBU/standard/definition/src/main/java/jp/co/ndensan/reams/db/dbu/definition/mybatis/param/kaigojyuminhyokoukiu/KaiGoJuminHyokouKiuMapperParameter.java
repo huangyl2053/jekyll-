@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
@@ -20,9 +20,7 @@ import lombok.Getter;
 @Getter
 public final class KaiGoJuminHyokouKiuMapperParameter implements IMyBatisParameter {
 
-    private final RString shichosonCode;
-    private final RDateTime datefrom;
-    private final RDateTime dateto;
+    private final List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList;
 
     /**
      * コンストラクタです。
@@ -31,28 +29,20 @@ public final class KaiGoJuminHyokouKiuMapperParameter implements IMyBatisParamet
      * @param taishoShuryoTimestamp 対象終了日時
      */
     private KaiGoJuminHyokouKiuMapperParameter(
-            RString shichosonCode,
-            RDateTime datefrom,
-            RDateTime dateto) {
+            List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {
 
-        this.shichosonCode = shichosonCode;
-        this.datefrom = datefrom;
-        this.dateto = dateto;
+        this.kobetsuKoikiunyoParameterList = kobetsuKoikiunyoParameterList;
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shichosonCode RString
-     * @param datefrom FlexibleDate
-     * @param dateto FlexibleDate
+     * @param kobetsuKoikiunyoParameterList kobetsuKoikiunyoParameterList
      * @return KaiGoJuminHyokouKiuMapperParameter
      */
     public static KaiGoJuminHyokouKiuMapperParameter createParam(
-            RString shichosonCode,
-            RDateTime datefrom,
-            RDateTime dateto) {
-        return new KaiGoJuminHyokouKiuMapperParameter(shichosonCode, datefrom, dateto);
+            List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {
+        return new KaiGoJuminHyokouKiuMapperParameter(kobetsuKoikiunyoParameterList);
     }
 
 }
