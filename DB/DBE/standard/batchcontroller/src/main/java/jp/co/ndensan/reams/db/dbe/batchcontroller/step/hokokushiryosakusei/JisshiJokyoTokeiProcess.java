@@ -33,6 +33,8 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
     private static final RString 審査会実施 = new RString("2");
     private static final RString 認定結果 = new RString("3");
     private static final RString タイトル = new RString("要介護認定実施状況統計");
+    private static final RString 開始年月日 = new RString("最初から");
+    private static final RString 終了年月日 = new RString("最終まで");
     private static final RString 申請受付数タイトル = new RString("申請受付人数");
     private static final RString 調査実施数タイトル = new RString("調査実施人数");
     private static final RString 審査会実施数タイトル = new RString("審査会開実施人数");
@@ -95,11 +97,11 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
                 jisshiJokyoTokei.set抽出開始年月日(parameter.getTaishoGeppiFrom());
                 jisshiJokyoTokei.set抽出終了年月日(parameter.getTaishoGeppiTo());
             } else if (parameter.isEmptyTaishoGeppiFrom()) {
-                jisshiJokyoTokei.set抽出開始年月日(RString.EMPTY);
+                jisshiJokyoTokei.set抽出開始年月日(開始年月日);
                 jisshiJokyoTokei.set抽出終了年月日(parameter.getTaishoGeppiTo());
             } else {
                 jisshiJokyoTokei.set抽出開始年月日(parameter.getTaishoGeppiFrom());
-                jisshiJokyoTokei.set抽出終了年月日(RString.EMPTY);
+                jisshiJokyoTokei.set抽出終了年月日(終了年月日);
             }
         }
     }
@@ -286,7 +288,7 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
     private void set保険者(List<JisshiJokyoTokeiEntity> list) {
         if (list != null && !list.isEmpty()) {
             jisshiJokyoTokei.set保険者番号(list.get(0).getShoKisaiHokenshaNo());
-            jisshiJokyoTokei.set保険者番号(list.get(0).getShichosonMeisho());
+            jisshiJokyoTokei.set保険者名(list.get(0).getShichosonMeisho());
         }
     }
 }
