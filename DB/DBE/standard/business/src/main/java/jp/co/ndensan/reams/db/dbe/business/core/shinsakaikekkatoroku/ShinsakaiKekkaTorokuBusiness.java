@@ -115,7 +115,7 @@ public class ShinsakaiKekkaTorokuBusiness {
      *
      * @return 審査会種類
      */
-    public boolean get審査会種類() {
+    public boolean is審査会種類() {
         return entity.is合議体精神科医存在フラグ();
     }
 

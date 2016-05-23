@@ -55,7 +55,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKyotsuHyojiArea().getTxtStutas().setValue(head.getステータス());
 
             List<KeyValueDataSource> selectedItem = new ArrayList<>();
-            if (head.get審査会種類()) {
+            if (head.is審査会種類()) {
                 selectedItem.add(new KeyValueDataSource(key0, key0));
             }
             div.getKyotsuHyojiArea().getChkShinsakaiShurui().setSelectedItems(selectedItem);

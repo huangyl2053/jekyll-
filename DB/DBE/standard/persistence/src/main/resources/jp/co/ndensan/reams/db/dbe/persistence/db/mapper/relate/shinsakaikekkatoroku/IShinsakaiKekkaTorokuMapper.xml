@@ -80,7 +80,7 @@
         ON 
             DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."shinseishoKanriNo"
          AND  
-            DbT5101NinteiShinseiJoho."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期}})
+            DbT5101NinteiShinseiJoho."shoriJotaiKubun" IN (#{処理状態区分_通常}, #{処理状態区分_延期})
          AND
             DbT5101NinteiShinseiJoho."logicalDeletedFlag" = false
         INNER JOIN 
@@ -159,8 +159,91 @@
         <result property="審査会意見種類" column="ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     </resultMap>
-
+    
     <select id="get審査会委員一覧更新_1"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"
+            resultMap="ResultMap_DbT5502ShinsakaiWariateJohoEntity" fetchSize="500">
+        SELECT
+             DbT5502ShinsakaiWariateJoho.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.noDeleted_DbT5502ShinsakaiWariateJoho" />) AS DbT5502ShinsakaiWariateJoho
+        INNER JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS DbT5101NinteiShinseiJoho
+        ON DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
+         AND  
+            DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+         AND
+            DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_logicalDeletedFlag" = false
+        INNER JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.noDeleted_DbT5105NinteiKanryoJoho" />) AS DbT5105NinteiKanryoJoho
+        ON DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ichijiHanteiKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_centerSoshinYMD" IS NOT NULL
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
+        ON 
+           DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo"
+        INNER JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.noDeleted_DbT5116IchijiHanteiKekkaJoho" />) AS DbT5116IchijiHanteiKekkaJoho
+        ON
+            DbT5116IchijiHanteiKekkaJoho."dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
+        LEFT JOIN
+               (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.noDeleted_DbT5102NinteiKekkaJoho" />) AS DbT5102NinteiKekkaJoho
+        ON
+               DbT5102NinteiKekkaJoho."dbT5102NinteiKekkaJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
+        LEFT JOIN
+               ( SELECT 
+                     DbT5116."dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode" AS "ichijiHanteiKekkaCode"
+                    ,DbT5502."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" AS "shinseishoKanriNo"
+                  FROM 
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.noDeleted_DbT5502ShinsakaiWariateJoho" />) AS DbT5502
+                  INNER JOIN
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.noDeleted_DbT5121ShinseiRirekiJoho" />) AS DbT5121
+                  ON
+                    DbT5121."dbT5121ShinseiRirekiJoho_shinseishoKanriNo" = DbT5502."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
+                  LEFT JOIN
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.noDeleted_DbT5116IchijiHanteiKekkaJoho" />) AS DbT5116
+                  ON
+                    DbT5116."dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" = DbT5121."dbT5121ShinseiRirekiJoho_zenkaiShinseishoKanriNo"
+               ) AS TB
+        ON
+            TB."shinseishoKanriNo" = TRIM(DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo")
+        <where>
+            TRIM(DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiNo") = TRIM(#{開催番号})
+        </where>
+       ORDER BY
+            DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinsakaiOrder"
+    </select>
+    
+   <resultMap id="ResultMap_DbT5502ShinsakaiWariateJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity" autoMapping="true">
+        <id property="shinsakaiKaisaiNo" column="dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shinseishoKanriNo" column="dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5502ShinsakaiWariateJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5502ShinsakaiWariateJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5502ShinsakaiWariateJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5502ShinsakaiWariateJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5502ShinsakaiWariateJoho_isDeleted" />
+        <result property="updateCount" column="dbT5502ShinsakaiWariateJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5502ShinsakaiWariateJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5502ShinsakaiWariateJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYMD" column="dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiWariateYMD" column="dbT5502ShinsakaiWariateJoho_shinsakaiWariateYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiOrder" column="dbT5502ShinsakaiWariateJoho_shinsakaiOrder" />
+        <result property="shinsakaiOrderKakuteiFlag" column="dbT5502ShinsakaiWariateJoho_shinsakaiOrderKakuteiFlag" />
+        <result property="shinsakaiJidoWaritsukeFlag" column="dbT5502ShinsakaiWariateJoho_shinsakaiJidoWaritsukeFlag" />
+        <result property="shinsakaiShiryoSakuseiYMD" column="dbT5502ShinsakaiWariateJoho_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiShiryoSofuYMD" column="dbT5502ShinsakaiWariateJoho_shinsakaiShiryoSofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hanteiKekkaCode" column="dbT5502ShinsakaiWariateJoho_hanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+
+    <select id="get審査会委員一覧情報更新_2"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"
             resultMap="resultMap_NinteiShinseiJoho" fetchSize="500">
         SELECT
@@ -173,7 +256,7 @@
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS DbT5101NinteiShinseiJoho
         ON DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
          AND  
-            DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期}})
+            DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
          AND
             DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_logicalDeletedFlag" = false
         INNER JOIN
@@ -191,7 +274,7 @@
         INNER JOIN
             rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         ON 
-            DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+           DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo"
         INNER JOIN 
             (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.noDeleted_DbT5116IchijiHanteiKekkaJoho" />) AS DbT5116IchijiHanteiKekkaJoho
         ON
@@ -211,90 +294,23 @@
                   ON
                     DbT5121."dbT5121ShinseiRirekiJoho_shinseishoKanriNo" = DbT5502."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
                   LEFT JOIN
-                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.noDeleted_DbT5121ShinseiRirekiJoho" />) AS DbT5116
+                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.noDeleted_DbT5116IchijiHanteiKekkaJoho" />) AS DbT5116
                   ON
                     DbT5116."dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" = DbT5121."dbT5121ShinseiRirekiJoho_zenkaiShinseishoKanriNo"
                ) AS TB
         ON
-            TB."shinseishoKanriNo" = DbT5502."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
+            TB."shinseishoKanriNo" = TRIM(DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo")
         <where>
-            TRIM(DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo") = TRIM(#{開催番号})
+            TRIM(DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiNo") = TRIM(#{開催番号})
         </where>
        ORDER BY
             DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinsakaiOrder"
     </select>
     
     <resultMap id="resultMap_NinteiShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity" autoMapping="true">
-        <id  column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"/>
         <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
         <collection property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.ResultMap_DbT5102NinteiKekkaJohoEntity" />
         <collection property="要介護認定完了情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
-    </resultMap>
-
-   <select id="get審査会委員一覧情報更新_2"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter"
-            resultMap="resultMap_YoteiJohoEntity" fetchSize="500">
-        SELECT
-            DbT5502ShinsakaiWariateJoho.*
-        FROM
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.noDeleted_DbT5502ShinsakaiWariateJoho" />) AS DbT5502ShinsakaiWariateJoho
-        INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS DbT5101NinteiShinseiJoho
-        ON DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
-         AND  
-            DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shoriJotaiKubun" = TRIM(#{処理区分})
-         AND
-            DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_logicalDeletedFlag" = false
-        INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.noDeleted_DbT5105NinteiKanryoJoho" />) AS DbT5105NinteiKanryoJoho
-        ON DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ikenshoTorokuKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ichijiHanteiKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD" IS NOT NULL
-            AND DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_centerSoshinYMD" IS NOT NULL
-        INNER JOIN
-            rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
-        ON 
-            DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-        INNER JOIN 
-            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.noDeleted_DbT5116IchijiHanteiKekkaJoho" />) AS DbT5116IchijiHanteiKekkaJoho
-        ON
-            DbT5116IchijiHanteiKekkaJoho."dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
-        LEFT JOIN
-               (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.noDeleted_DbT5102NinteiKekkaJoho" />) AS DbT5102NinteiKekkaJoho
-        ON
-               DbT5102NinteiKekkaJoho."dbT5102NinteiKekkaJoho_shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
-        LEFT JOIN
-               ( SELECT 
-                     DbT5116."dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode" AS "ichijiHanteiKekkaCode"
-                    ,DbT5502."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" AS "shinseishoKanriNo"
-                  FROM 
-                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.noDeleted_DbT5502ShinsakaiWariateJoho" />) AS DbT5502
-                  INNER JOIN
-                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.noDeleted_DbT5121ShinseiRirekiJoho" />) AS DbT5121
-                  ON
-                    DbT5121."dbT5121ShinseiRirekiJoho_shinseishoKanriNo" = DbT5502."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
-                  LEFT JOIN
-                    (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.noDeleted_DbT5121ShinseiRirekiJoho" />) AS DbT5116
-                  ON
-                    DbT5116."dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" = DbT5121."dbT5121ShinseiRirekiJoho_zenkaiShinseishoKanriNo"
-               ) AS TB
-        ON
-            TB."shinseishoKanriNo" = DbT5502."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo"
-        <where>
-            TRIM(DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo") = TRIM(#{開催番号})
-        </where>
-       ORDER BY
-            DbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinsakaiOrder"
-    </select>
-    
-    <resultMap id="resultMap_YoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity" autoMapping="true">
-        <collection property="介護認定審査会割当情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.noDeleted_DbT5502ShinsakaiWariateJoho"/>
     </resultMap>
 
     <select id="get連番" resultType="int" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
