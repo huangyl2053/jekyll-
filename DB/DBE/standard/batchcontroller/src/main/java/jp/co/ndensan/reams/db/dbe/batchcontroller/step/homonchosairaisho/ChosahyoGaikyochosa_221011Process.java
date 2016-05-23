@@ -184,11 +184,11 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
 
     @Override
     protected void afterExecute() {
-        バッチ出力条件リストの出力();
         if (itemList != null && !itemList.isEmpty()) {
             ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);
         }
+        バッチ出力条件リストの出力();
     }
 
     private ChosahyoGaikyochosaItem setItem(HomonChosaIraishoRelateEntity entity) {
@@ -265,9 +265,9 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
                 誕生日明治,
                 誕生日大正,
                 誕生日昭和,
-                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(0, INT3) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT3, INT4) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT5) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(0, INT4) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT6) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT6, INT8) : RString.EMPTY,
                 entity.get年齢(),
                 entity.get連絡先住所(),
                 entity.get連絡先郵便番号(),
@@ -278,9 +278,9 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
                 ? RensakusakiTsuzukigara.toValue(entity.get連絡先続柄()).get名称() : RString.EMPTY,
                 RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(0, INT3) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT3, INT4) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT4, INT5) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(0, INT4) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT4, INT6) : RString.EMPTY,
+                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT6, INT8) : RString.EMPTY,
                 YOKAIGOJOTAIKUBUN01.equals(entity.get前回要介護状態区分コード()) ? 記号 : RString.EMPTY,
                 要支援,
                 要支援詳細,

@@ -138,11 +138,11 @@ public class ChosahyoKihonchosaProcess extends BatchProcessBase<HomonChosaIraish
 
     @Override
     protected void afterExecute() {
-        バッチ出力条件リストの出力();
         if (itemList != null && !itemList.isEmpty()) {
             ChosahyoKihonchosaKatamenReport report = ChosahyoKihonchosaKatamenReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);
         }
+        バッチ出力条件リストの出力();
     }
 
     private ChosahyoKihonchosaKatamenItem setChosahyoKihonchosaKatamenItem(HomonChosaIraishoRelateEntity entity) {

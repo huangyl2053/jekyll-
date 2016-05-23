@@ -138,11 +138,11 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
 
     @Override
     protected void afterExecute() {
-        バッチ出力条件リストの出力();
         if (itemList != null && !itemList.isEmpty()) {
             ChosahyoTokkijikoReport report = ChosahyoTokkijikoReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);
         }
+        バッチ出力条件リストの出力();
     }
 
     private ChosahyoTokkijikoItem setItem(HomonChosaIraishoRelateEntity entity) {
