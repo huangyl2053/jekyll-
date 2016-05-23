@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.hanteikekkajohoichiran;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkajohoichiran.HanteiKekkaIchiranA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -19,32 +18,30 @@ import lombok.NonNull;
  */
 public class HanteiKekkaIchiranReport extends Report<HanteiKekkaIchiranA4ReportSource> {
 
-    private final List<HanteiKekkaIchiranEntity> itemList;
+    private final HanteiKekkaIchiranEntity item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定判定結果一覧のITEMリスト
+     * @param item 要介護認定判定結果一覧のITEM
      * @return 要介護認定結果通知書対象者一覧表のReport
      */
     public static HanteiKekkaIchiranReport createFrom(
-            @NonNull List<HanteiKekkaIchiranEntity> itemList) {
-        return new HanteiKekkaIchiranReport(itemList);
+            @NonNull HanteiKekkaIchiranEntity item) {
+        return new HanteiKekkaIchiranReport(item);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定判定結果一覧のITEMリスト
+     * @param item 要介護認定判定結果一覧のITEM
      */
-    protected HanteiKekkaIchiranReport(List<HanteiKekkaIchiranEntity> itemList) {
-        this.itemList = itemList;
+    protected HanteiKekkaIchiranReport(HanteiKekkaIchiranEntity item) {
+        this.item = item;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<HanteiKekkaIchiranA4ReportSource> reportSourceWriter) {
-        for (HanteiKekkaIchiranEntity item : itemList) {
-            reportSourceWriter.writeLine(new HanteiKekkaIchiranBuilder(new HanteiKekkaIchiranEditor(item)));
-        }
+        reportSourceWriter.writeLine(new HanteiKekkaIchiranBuilder(new HanteiKekkaIchiranEditor(item)));
     }
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.tekiyojogaishaidoteisei;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
+import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.tekiyojogaishaidoteisei.TekiyoJogaishaIdoTeiseiBusiness;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
@@ -27,7 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TekiyoJogaishaIdoTeiseiFinder {
 
     private static final RString DELETE = new RString("delete");
-    private static final RString 枝番_1 = new RString("1");
+    private static final RString 枝番_1 = new RString("0001");
+    private static final int 枝番_桁 = 4;
 
     /**
      * 適用除外者異動の訂正します。
@@ -67,10 +69,11 @@ public class TekiyoJogaishaIdoTeiseiFinder {
         if (is年月日が一致(現在の除外の情報.get異動日(), 修正後の除外の情報.get異動日())) {
             manager.save適用除外者(現在の除外の情報.createBuilderForEdit().set論理削除フラグ(true).build());
             int 枝番 = new Integer(現在の除外の情報.get枝番().toString()) + 1;
-            manager.save適用除外者(修正後の除外の情報.createBuilderForEdit().set枝番(new RString(String.valueOf(枝番))).build());
+            manager.save適用除外者(get追加適用除外者(修正後の除外の情報
+                    .createBuilderForEdit().set枝番(new RString(String.valueOf(枝番)).padLeft("0", 枝番_桁)).build()));
         } else {
             manager.save適用除外者(現在の除外の情報.createBuilderForEdit().set論理削除フラグ(true).build());
-            manager.save適用除外者(修正後の除外の情報);
+            manager.save適用除外者(get追加適用除外者(修正後の除外の情報));
         }
         更新件数 = 2;
         if (is年月日が一致(現在の除外の情報.get適用年月日(), 修正後の除外の情報.get適用年月日())
@@ -98,15 +101,64 @@ public class TekiyoJogaishaIdoTeiseiFinder {
                 dbT1002Entityクローン.setIdoYMD(修正後の除外の情報.get適用年月日());
                 dbT1002Entityクローン.setTekiyoTodokedeYMD(修正後の除外の情報.get適用届出年月日());
                 dbT1002Entityクローン.setTekiyoJogaiTekiyoJiyuCode(修正後の除外の情報.get適用除外適用事由コード());
-                dbT1002Entityクローン.setEdaNo(new RString(new Integer(dbT1002Entity.getEdaNo().toString()) + 1));
+                dbT1002Entityクローン.setEdaNo(new RString(new Integer(dbT1002Entity.getEdaNo().toString()) + 1).padLeft("0", 枝番_桁));
             }
             dbT1002Entity.setLogicalDeletedFlag(true);
             TekiyoJogaisha 更新適用除外者 = new TekiyoJogaisha(dbT1002Entity);
             manager.save適用除外者(更新適用除外者);
             TekiyoJogaisha 更新適用除外者クローン = new TekiyoJogaisha(dbT1002Entityクローン);
-            manager.save適用除外者(更新適用除外者クローン);
+            manager.save適用除外者(get追加適用除外者(更新適用除外者クローン));
         }
         return 更新件数 + dbT1002EntityList.size() * 2;
+    }
+
+    private TekiyoJogaisha get追加適用除外者(TekiyoJogaisha 適用除外者) {
+        TekiyoJogaisha new適用除外者 = new TekiyoJogaisha(適用除外者.get識別コード(), 適用除外者.get異動日(), 適用除外者.get枝番());
+        TekiyoJogaishaBuilder builder = new適用除外者.createBuilderForEdit();
+        if (適用除外者.get入所通知発行日() != null) {
+            builder.set入所通知発行日(適用除外者.get入所通知発行日());
+        }
+        if (適用除外者.get変更通知発行日() != null) {
+            builder.set変更通知発行日(適用除外者.get変更通知発行日());
+        }
+        if (適用除外者.get市町村コード() != null) {
+            builder.set市町村コード(適用除外者.get市町村コード());
+        }
+        if (適用除外者.get異動事由コード() != null) {
+            builder.set異動事由コード(適用除外者.get異動事由コード());
+        }
+        if (適用除外者.get異動日() != null) {
+            builder.set異動日(適用除外者.get異動日());
+        }
+        if (適用除外者.get解除受付年月日() != null) {
+            builder.set解除受付年月日(適用除外者.get解除受付年月日());
+        }
+        if (適用除外者.get解除届出年月日() != null) {
+            builder.set解除届出年月日(適用除外者.get解除届出年月日());
+        }
+        if (適用除外者.get解除年月日() != null) {
+            builder.set解除年月日(適用除外者.get解除年月日());
+        }
+        builder.set論理削除フラグ(適用除外者.is論理削除フラグ());
+        if (適用除外者.get退所通知発行日() != null) {
+            builder.set退所通知発行日(適用除外者.get退所通知発行日());
+        }
+        if (適用除外者.get適用受付年月日() != null) {
+            builder.set適用受付年月日(適用除外者.get適用受付年月日());
+        }
+        if (適用除外者.get適用届出年月日() != null) {
+            builder.set適用届出年月日(適用除外者.get適用届出年月日());
+        }
+        if (適用除外者.get適用年月日() != null) {
+            builder.set適用年月日(適用除外者.get適用年月日());
+        }
+        if (適用除外者.get適用除外解除事由コード() != null) {
+            builder.set適用除外解除事由コード(適用除外者.get適用除外解除事由コード());
+        }
+        if (適用除外者.get適用除外適用事由コード() != null) {
+            builder.set適用除外適用事由コード(適用除外者.get適用除外適用事由コード());
+        }
+        return builder.build();
     }
 
     private boolean is年月日が一致(FlexibleDate 現在の年月日, FlexibleDate 修正後の年月日) {

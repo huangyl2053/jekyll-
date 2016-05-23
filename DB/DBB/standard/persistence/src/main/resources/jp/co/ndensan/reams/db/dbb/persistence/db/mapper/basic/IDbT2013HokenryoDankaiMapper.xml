@@ -64,21 +64,21 @@
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.allColumns_DbT2013HokenryoDankai" />
         FROM
         rgdb."DbT2013HokenryoDankai"
-       WHERE
-           "DbT2013HokenryoDankai"."fukaNendo" = (SELECT 
-            MAX("DbT2013HokenryoDankai"."fukaNendo") FROM  rgdb."DbT2013HokenryoDankai"
-            )
+        WHERE
+        "DbT2013HokenryoDankai"."fukaNendo" = (SELECT
+        MAX("DbT2013HokenryoDankai"."fukaNendo") FROM  rgdb."DbT2013HokenryoDankai"
+        )
     </select>
-    
-    <select id="getHokenryoDankaiKubun" parameterType="RString" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
+
+    <select id="getHokenryoDankaiKubun" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultMap="ResultMap_DbT2013HokenryoDankaiEntity">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.allColumns_DbT2013HokenryoDankai" />
         FROM rgdb."DbT2013HokenryoDankai"
         WHERE "fukaNendo" = #{fukaNendo}
         AND   "dankaiKubun" != '000'
         AND   "dankaiIndex" = (SELECT MAX("dankaiIndex") FROM rgdb."DbT2013HokenryoDankai" a
-                               WHERE "DbT2013HokenryoDankai"."fukaNendo" = a."fukaNendo"
-                               AND   SUBSTRING("DbT2013HokenryoDankai"."dankaiKubun",1,2) = SUBSTRING(a."dankaiKubun",1,2))
+        WHERE "DbT2013HokenryoDankai"."fukaNendo" = a."fukaNendo"
+        AND   SUBSTRING("DbT2013HokenryoDankai"."dankaiKubun",1,2) = SUBSTRING(a."dankaiKubun",1,2))
         ORDER BY "dankaiIndex"
     </select>
 </mapper>

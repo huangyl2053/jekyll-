@@ -15,7 +15,6 @@ public enum DBA2040011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    照会適用解除("照会適用解除"),
     追加適用("追加適用"),
     追加解除("追加解除"),
     追加変更("追加変更"),
