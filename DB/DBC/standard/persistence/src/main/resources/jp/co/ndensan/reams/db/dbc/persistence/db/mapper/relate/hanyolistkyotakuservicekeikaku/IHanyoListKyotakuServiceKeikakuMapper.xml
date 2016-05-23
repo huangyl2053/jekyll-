@@ -244,9 +244,7 @@
                 rgdb. "DbT3006KyotakuKeikakuJigyoshaSakusei"
                 WHERE
                 "tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
-                AND ("tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日}
-                OR "tekiyoShuryoYMD" IS NULL
-                OR "tekiyoShuryoYMD" = '')
+                AND "tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} 
                 GROUP BY
                 "hihokenshaNo"
                 ) AS E
