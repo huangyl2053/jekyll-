@@ -150,13 +150,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_8) {
-                hachientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                hachientity.set識別コード(識別コード.padLeft(識別コード, 桁目_8));
             } else {
                 hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_8) {
-                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+                hachientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_8));
             } else {
                 hachientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_8));
@@ -173,13 +173,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_8) {
-                hachientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                hachientity.set識別コード(識別コード.padLeft(識別コード, 桁目_8));
             } else {
                 hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_8) {
-                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+                hachientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_8));
             } else {
                 hachientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_8));
@@ -193,13 +193,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_8) {
-                hachientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                hachientity.set識別コード(識別コード.padLeft(識別コード, 桁目_8));
             } else {
                 hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_8));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_8) {
-                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+                hachientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_8));
             } else {
                 hachientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_8));
@@ -332,13 +332,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_12) {
-                hachientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                hachientity.set識別コード(識別コード.padLeft(識別コード, 桁目_12));
             } else {
                 hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_12) {
-                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+                hachientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_12));
             } else {
                 hachientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_12));
@@ -357,13 +357,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_12) {
-                junientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                junientity.set識別コード(識別コード.padLeft(識別コード, 桁目_12));
             } else {
                 junientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_12) {
-                junientity.set識別コード(new RString(entity.get識別コード().toString()));
+                junientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_12));
             } else {
                 junientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_12));
@@ -405,13 +405,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_12) {
-                hachientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                hachientity.set識別コード(識別コード.padLeft(識別コード, 桁目_12));
             } else {
                 hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_12));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_12) {
-                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+                hachientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_12));
             } else {
                 hachientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_12));
@@ -507,13 +507,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_15) {
-                hachientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                hachientity.set識別コード(識別コード.padLeft(識別コード, 桁目_15));
             } else {
                 hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_15) {
-                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+                hachientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_15));
             } else {
                 hachientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_15));
@@ -532,13 +532,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_15) {
-                junientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                junientity.set識別コード(識別コード.padLeft(識別コード, 桁目_15));
             } else {
                 junientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_15) {
-                junientity.set識別コード(new RString(entity.get識別コード().toString()));
+                junientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_15));
             } else {
                 junientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_15));
@@ -580,13 +580,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (区分_1.equals(codeHenkanKubun)) {
             RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
             if (識別コード.length() <= 桁目_15) {
-                hachientity.set識別コード(識別コード.padLeft(識別コード, 件数_0));
+                hachientity.set識別コード(識別コード.padLeft(識別コード, 桁目_15));
             } else {
                 hachientity.set識別コード(識別コード.substring(識別コード.length() - 桁目_15));
             }
         } else if (区分_0.equals(codeHenkanKubun)) {
             if (entity.get識別コード().value().length() <= 桁目_15) {
-                hachientity.set識別コード(new RString(entity.get識別コード().toString()));
+                hachientity.set識別コード(entity.get識別コード().getColumnValue().padLeft(entity.get識別コード().getColumnValue(), 桁目_15));
             } else {
                 hachientity.set識別コード(new RString(entity.get識別コード().toString()).
                         substring(entity.get識別コード().value().length() - 桁目_15));
