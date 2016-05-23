@@ -83,28 +83,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         if (null != 計算後情報_宛名_口座_更正前Entity.get通知書番号()) {
             source.list1_1 = 計算後情報_宛名_口座_更正前Entity.get通知書番号().value();
         }
-        if (null != 計算後情報_宛名_口座_更正前Entity.get宛名Entity()) {
-            AtenaMeisho 氏名 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getKanjiShimei();
-            if (null != 氏名) {
-                source.list1_2 = 氏名.value();
-            }
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正前Entity.get宛名Entity());
-            if (null != kojin && null != kojin.get住所()) {
-                source.list1_3 = kojin.get住所().get住所();
-            }
-        }
-        if (null != 計算後情報_宛名_口座_更正前Entity.get口座Entity()) {
-            IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
-            if (null != koza.get金融機関コード()) {
-                source.list1_4 = koza.get金融機関コード().value();
-            }
-            //        source.list1_5 = koza.get預金種別().get預金種別略称();
-            source.list1_6 = koza.get口座番号();
-            if (null != koza.get口座名義人()) {
-                source.list3_19 = koza.get口座名義人().value();
-            }
-        }
-
+        set宛名口座_更正前(source);
         if (null != 計算後情報_宛名_口座_更正前Entity.get調定年度()) {
             source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度().toDateString();
         }
@@ -159,6 +138,30 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         source.list9_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
         source.list10_1 = RString.EMPTY;
         return source;
+    }
+
+    private void set宛名口座_更正前(KanendoIdouKekkaIchiranSource source) {
+        if (null != 計算後情報_宛名_口座_更正前Entity.get宛名Entity()) {
+            AtenaMeisho 氏名 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getKanjiShimei();
+            if (null != 氏名) {
+                source.list1_2 = 氏名.value();
+            }
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正前Entity.get宛名Entity());
+            if (null != kojin && null != kojin.get住所()) {
+                source.list1_3 = kojin.get住所().get住所();
+            }
+        }
+        if (null != 計算後情報_宛名_口座_更正前Entity.get口座Entity()) {
+            IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+            if (null != koza.get金融機関コード()) {
+                source.list1_4 = koza.get金融機関コード().value();
+            }
+            //        source.list1_5 = koza.get預金種別().get預金種別略称();
+            source.list1_6 = koza.get口座番号();
+            if (null != koza.get口座名義人()) {
+                source.list3_19 = koza.get口座名義人().value();
+            }
+        }
     }
 
     private void set特徴期別金額_更正前(KanendoIdouKekkaIchiranSource source) {
