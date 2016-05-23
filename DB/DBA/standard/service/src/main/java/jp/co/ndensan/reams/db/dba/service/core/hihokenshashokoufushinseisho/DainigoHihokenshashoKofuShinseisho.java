@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dba.business.report.hihokenshashokoufushinseisho.H
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashokoufushinseisho.HihokenshashokoufuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -128,7 +128,7 @@ public class DainigoHihokenshashoKofuShinseisho {
     }
 
     private static RString set生年月日(HihokenshaKihonBusiness entity) {
-        RString 外国人表示制御_生年月日表示方法 = DbBusinessConifg
+        RString 外国人表示制御_生年月日表示方法 = DbBusinessConfig
                 .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告
                 );
         RString 生年月日 = RString.EMPTY;
