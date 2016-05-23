@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -102,7 +102,7 @@ public enum FutangendogakuShinseiDivSpec implements IPredicate<FutangendogakuShi
 
                     List<dgShinseiList_Row> list = div.getDgShinseiList().getDataSource();
                     if (list == null || list.isEmpty()) {
-                        return false;
+                        return true;
                     }
                     FlexibleDate 適用日１;
                     FlexibleDate 適用日２;
