@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekk
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkajohoichiran.HanteiKekkaIchiranA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 要介護認定判定結果一覧のReportです。
@@ -24,19 +23,8 @@ public class HanteiKekkaIchiranReport extends Report<HanteiKekkaIchiranA4ReportS
      * インスタンスを生成します。
      *
      * @param item 要介護認定判定結果一覧のITEM
-     * @return 要介護認定結果通知書対象者一覧表のReport
      */
-    public static HanteiKekkaIchiranReport createFrom(
-            @NonNull HanteiKekkaIchiranEntity item) {
-        return new HanteiKekkaIchiranReport(item);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param item 要介護認定判定結果一覧のITEM
-     */
-    protected HanteiKekkaIchiranReport(HanteiKekkaIchiranEntity item) {
+    public HanteiKekkaIchiranReport(HanteiKekkaIchiranEntity item) {
         this.item = item;
     }
 

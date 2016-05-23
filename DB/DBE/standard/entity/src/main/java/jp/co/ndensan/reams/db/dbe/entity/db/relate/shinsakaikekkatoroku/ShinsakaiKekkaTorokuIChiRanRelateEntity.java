@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 介護認定審査会審査結果登録の対象者一覧内容検索情報RelateEntityクラスです。
  *
  * @reamsid_L DBE-0170-010 wangkun

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.Hanteikekka
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 介護認定審査判定結果（鑑）のReportです。
@@ -24,19 +23,8 @@ public class HanteikekkaKagamiReport extends Report<HanteikekkaKagamiReportSourc
      * インスタンスを生成します。
      *
      * @param item 介護認定審査判定結果（鑑）のITEM
-     * @return 要介護認定結果通知書対象者一覧表のReport
      */
-    public static HanteikekkaKagamiReport createFrom(
-            @NonNull HanteikekkaKagamiEntity item) {
-        return new HanteikekkaKagamiReport(item);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param item 介護認定審査判定結果（鑑）のITEM
-     */
-    protected HanteikekkaKagamiReport(HanteikekkaKagamiEntity item) {
+    public HanteikekkaKagamiReport(HanteikekkaKagamiEntity item) {
         this.item = item;
     }
 

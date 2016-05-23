@@ -17,6 +17,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class ShinsakaiGijirokuProperty extends ReportPropertyBase<ShinsakaiGijirokuReportSource> {
 
+    /**
+     * インスタンスを生成します。
+     */
     public ShinsakaiGijirokuProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE525003.getReportId());
     }
