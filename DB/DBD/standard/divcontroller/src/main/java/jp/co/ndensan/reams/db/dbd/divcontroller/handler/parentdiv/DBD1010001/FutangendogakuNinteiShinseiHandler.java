@@ -190,12 +190,6 @@ public class FutangendogakuNinteiShinseiHandler {
         clear申請情報エリア();
         onChange_radKetteiKubun();
         set申請情報エリア表示制御();
-        div.getDdlShokuhi().setDataSource(new ArrayList<KeyValueDataSource>());
-        div.getDdlUnitGataKoshitsu().setDataSource(new ArrayList<KeyValueDataSource>());
-        div.getDdlUnitGataJunKoshitsu().setDataSource(new ArrayList<KeyValueDataSource>());
-        div.getDdlJuraiGataKoshitsuTokuyo().setDataSource(new ArrayList<KeyValueDataSource>());
-        div.getDdlJuraiGataKoshitsuRoken().setDataSource(new ArrayList<KeyValueDataSource>());
-        div.getDdlTashoshitsu().setDataSource(new ArrayList<KeyValueDataSource>());
     }
 
     /**

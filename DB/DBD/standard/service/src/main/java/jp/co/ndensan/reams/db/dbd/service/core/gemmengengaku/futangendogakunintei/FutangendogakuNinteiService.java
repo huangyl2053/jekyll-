@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.HaiguuJohoEntity;
+import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.HaigushaKazeiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
@@ -17,9 +18,9 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendo
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -100,7 +101,7 @@ public class FutangendogakuNinteiService {
 
         List<FutanGendogakuNintei> 負担限度額認定申請の情報List = new ArrayList<>();
         FutanGendogakuNinteiShinseiMapperParameter 検索条件 = FutanGendogakuNinteiShinseiMapperParameter.createParam(
-                被保険者番号, FlexibleDate.EMPTY);
+                被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード());
         IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
         List<FutanGendogakuNinteiEntity> entityList = mapper.get負担限度額認定申請の情報List(検索条件);
         if (entityList != null && !entityList.isEmpty()) {
