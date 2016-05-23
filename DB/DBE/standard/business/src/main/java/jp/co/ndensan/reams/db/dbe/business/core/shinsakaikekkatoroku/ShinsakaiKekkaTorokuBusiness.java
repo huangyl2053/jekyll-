@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 介護認定審査会開催結果登録のヘッドエリア内容Businessです。
  *
  * @reamsid_L DBE-0170-010 wangkun
@@ -118,4 +118,14 @@ public class ShinsakaiKekkaTorokuBusiness {
     public boolean get審査会種類() {
         return entity.is合議体精神科医存在フラグ();
     }
+
+    /**
+     * ステータスを取得します。
+     *
+     * @return ステータス
+     */
+    public RString getステータス() {
+        return ShinsakaiShinchokuJokyo.toValue(entity.get進捗状況()).get名称();
+    }
+
 }

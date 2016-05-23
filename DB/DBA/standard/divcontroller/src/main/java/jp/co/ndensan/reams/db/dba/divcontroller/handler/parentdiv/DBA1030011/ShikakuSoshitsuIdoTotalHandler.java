@@ -46,7 +46,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006");
     private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007");
     private static final RString FIRSTREQUEST以外 = new RString("2");
-    public static final int FIRSTINDEX = 0;
+    private static final Integer FIRSTINDEX = new Integer(0);
     private static final RString 修正 = new RString("修正");
     private final RString 表示モード = new RString("HihokenrirekiNashiMode");
 

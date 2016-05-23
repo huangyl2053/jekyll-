@@ -40,7 +40,7 @@ public class ShinsakaiKekkaTorokuIChiRanRelateEntity {
     private Code 二次判定要介護状態区分コード;
     private RString 判定結果コード;
     private FlexibleDate 二次判定年月日;
-    private Code _２号特定疾病コード;
+    private Code コード_２号特定疾病コード;
     private Code 要介護状態像例コード;
     private FlexibleDate 二次判定認定有効開始年月日;
     private FlexibleDate 二次判定認定有効終了年月日;

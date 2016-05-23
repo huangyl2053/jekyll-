@@ -222,12 +222,10 @@ public class ShikakuShutokuIdoTotal {
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
         } else {
             Collections.sort(rowList, new ShikakuShutokuIdoTotal.ComparatorByDaNoSort());
-
             RString daNo = new RString("1");
             if (!rowList.isEmpty()) {
                 daNo = new RString(Integer.parseInt(rowList.get(rowList.size() - 1).getDaNo().trim().toString()) + 1);
             }
-
             row = new dgShikakuShutokuRireki_Row();
             row.setState(追加);
             row.setDaNo(daNo);
@@ -318,10 +316,10 @@ public class ShikakuShutokuIdoTotal {
             dgShikakuShutokuRireki_Row row0 = (dgShikakuShutokuRireki_Row) arg0;
             dgShikakuShutokuRireki_Row row1 = (dgShikakuShutokuRireki_Row) arg1;
 
-            if (ChangeStringToInt(row0.getShutokuDate().getValue().toString()) > ChangeStringToInt(row1.getShutokuDate().getValue().toString())) {
+            if (changeStringToInt(row0.getShutokuDate().getValue().toString()) > changeStringToInt(row1.getShutokuDate().getValue().toString())) {
                 return -1;
             } else {
-                if (ChangeStringToInt(row0.getShutokuDate().getValue().toString()) == ChangeStringToInt(row1.getShutokuDate().getValue().toString())) {
+                if (changeStringToInt(row0.getShutokuDate().getValue().toString()) == changeStringToInt(row1.getShutokuDate().getValue().toString())) {
                     return 0;
                 } else {
                     return 1;
@@ -329,10 +327,15 @@ public class ShikakuShutokuIdoTotal {
             }
         }
 
-        public int ChangeStringToInt(String str) {
+        /**
+         * StringをIntegerに変更する。
+         *
+         * @param str String
+         * @return Integer Integer
+         */
+        public Integer changeStringToInt(String str) {
             return new Integer(str).intValue();
         }
-
     }
 
     private enum ShikakuShutokuIdoTotalErrorMessage implements IValidationMessage {
