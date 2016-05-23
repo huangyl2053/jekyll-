@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChosaChiku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.NinteiChosaScheduleShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -28,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査スケジュール登録2のHanderクラスです。
@@ -384,7 +384,7 @@ public class NinteiChosaScheduleShosaiHander {
     }
 
     private void setChosaTimeFrameMemoDisabled(dgNinteiChosaSchedule_Row row) {
-        RString 最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
+        RString 最大時間枠 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_1.toString()) && row.getChosaTimeFrameMemo1().isVisible()) {
             row.getChosaTimeFrameMemo1().setDisabled(非活性);
         }

@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -107,28 +107,7 @@ public class JutakuKaishuShinseiJyohoToroku {
     public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_btnShowJizenShinsei(
             JutakuKaishuShinseiJyohoTorokuDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理モード, モード_照会);
-        RDate 画面提供着工年月 = div.getTxtTeikyoYM().getValue();
-        RString 整理番号 = div.getTxtSeiriNo().getValue();
-        ViewStateHolder.put(ViewStateKeys.サービス提供年月, new FlexibleYearMonth(
-                画面提供着工年月.getYearMonth().toDateString()));
-        ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to住宅改修費事前申請登録).respond();
-    }
-
-    /**
-     * 提供（着工）年月変更後のメソッドです。
-     *
-     * @param div 住宅改修費支給申請_申請情報登録DIV
-     * @return ResponseData
-     */
-    public ResponseData<JutakuKaishuShinseiJyohoTorokuDiv> onClick_teikyoYMonFocus(
-            JutakuKaishuShinseiJyohoTorokuDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-        handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -260,7 +239,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             set完了状態(div);
             return ResponseData.of(div).setState(DBC0710021StateName.KanryoMessage);
         } else if (is状態CheckTow(画面モード)) {
-            RString 償還 = DbBusinessConifg.get(
+            RString 償還 = DbBusinessConfig.get(
                     ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             if (給付実績連動_受託なし.equals(償還) && !確認_汎用) {
                 QuestionMessage message = new QuestionMessage(
@@ -472,7 +451,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (画面提供着工年月 != null) {
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
         }
         return ResponseData.of(div).respond();
     }
@@ -542,7 +521,7 @@ public class JutakuKaishuShinseiJyohoToroku {
             div.getTxtKyufuritsu().setValue(給付率.value());
             JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
             JutakukaishuSikyuShinseiManager 住宅改修費支給申請 = JutakukaishuSikyuShinseiManager.createInstance();
-            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード);
+            handler.証明書表示設定(住宅改修費支給申請, 被保険者番号, 画面モード, true);
         }
         return ResponseData.of(div).respond();
     }

@@ -143,6 +143,7 @@ public class DBD1030001 {
                 ViewStateHolder.put(DBD1030001ViewStateKey.is削除ReRequest, Boolean.TRUE);
                 return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_承認処理済みのため削除不可.getMessage()).respond();
             }
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }

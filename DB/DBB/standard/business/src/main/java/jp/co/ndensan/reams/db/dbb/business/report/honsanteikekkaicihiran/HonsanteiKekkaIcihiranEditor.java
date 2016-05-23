@@ -217,7 +217,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     }
 
     private RString set出力順() {
-        if (バッチパラメータ.get出力帳票一覧List().isEmpty() || バッチパラメータ.get出力帳票一覧List() != null) {
+        if (バッチパラメータ.get出力帳票一覧List() != null && !バッチパラメータ.get出力帳票一覧List().isEmpty()) {
             if (バッチパラメータ.get出力帳票一覧List().size() > NUM_0) {
                 return バッチパラメータ.get出力帳票一覧List().get(NUM_0).get出力順ID();
             } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_1) {
@@ -234,7 +234,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     }
 
     private RString set改ページ() {
-        if (バッチパラメータ.get出力帳票一覧List().isEmpty() || バッチパラメータ.get出力帳票一覧List() != null) {
+        if (バッチパラメータ.get出力帳票一覧List() != null && !バッチパラメータ.get出力帳票一覧List().isEmpty()) {
             if (バッチパラメータ.get出力帳票一覧List().size() > NUM_0) {
                 return バッチパラメータ.get出力帳票一覧List().get(NUM_0).get出力順ID();
             } else if (バッチパラメータ.get出力帳票一覧List().size() > NUM_1) {

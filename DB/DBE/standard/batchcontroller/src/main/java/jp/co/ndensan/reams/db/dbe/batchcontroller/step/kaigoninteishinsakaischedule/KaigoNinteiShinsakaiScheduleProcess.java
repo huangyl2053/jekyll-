@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaisukejuruhyo.ShinsakaisukejuruhyoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun.広域連合;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -27,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -74,7 +74,7 @@ public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoN
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
             ShinsakaisukejuruhyoHeadItem headItem = new ShinsakaisukejuruhyoHeadItem();
             headItem.set年度(RDate.getNowDate().wareki().eraType(EraType.KANJI).getYear());
-            headItem.set広域連合(BusinessConfig.get(広域連合, SubGyomuCode.DBE認定支援));
+            headItem.set広域連合(DbBusinessConfig.get(広域連合, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
             ShinsakaisukejuruhyoReport report = ShinsakaisukejuruhyoReport.createFrom(headItem, bodyItemList);
             report.writeBy(reportSourceWriter);
         }

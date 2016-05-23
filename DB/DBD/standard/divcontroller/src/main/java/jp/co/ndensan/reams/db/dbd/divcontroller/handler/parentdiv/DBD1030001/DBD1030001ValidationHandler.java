@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001.DBD1
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -30,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -396,17 +396,13 @@ public class DBD1030001ValidationHandler {
     }
 
     private FlexibleDate get制度改正施行日_平成１７年１０月改正() {
-        RString 制度改正施行日RString = BusinessConfig
-                .get(ConfigNameDBU.制度改正施行日_平成１７年１０月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (null == 制度改正施行日RString || 制度改正施行日RString.isEmpty()) {
-            return FlexibleDate.EMPTY;
-        }
-        return new FlexibleDate(制度改正施行日RString);
+        return new FlexibleDate(DbBusinessConfig.get(
+                ConfigNameDBU.制度改正施行日_平成１７年１０月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
     }
 
     private boolean is対象の被保険者が生活保護(DBD1030001Div div) {
-        return SeikatsuhogoManagerFactory.createInstance()
-                .get生活保護(get識別コードFromViewState(), GyomuCode.DB介護保険, div.getTxtShinseiYMD().getValue()) == null;
+        return SeikatsuhogoManagerFactory.createInstance().get生活保護(
+                get識別コードFromViewState(), GyomuCode.DB介護保険, div.getTxtShinseiYMD().getValue()) == null;
     }
 
     private boolean is入力内容がある(List<RString> 入力内容) {
@@ -431,21 +427,13 @@ public class DBD1030001ValidationHandler {
     }
 
     private FlexibleDate get特例措置期間開始日() {
-        RString 特例措置期間開始日RString = BusinessConfig
-                .get(ConfigNameDBD.社会福祉法人軽減_特例措置期間開始日, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-        if (null == 特例措置期間開始日RString || 特例措置期間開始日RString.isEmpty()) {
-            return FlexibleDate.EMPTY;
-        }
-        return new FlexibleDate(特例措置期間開始日RString);
+        return new FlexibleDate(DbBusinessConfig.get(
+                ConfigNameDBD.社会福祉法人軽減_特例措置期間開始日, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
     }
 
     private FlexibleDate get特例措置期間終了日() {
-        RString 特例措置期間終了日RString = BusinessConfig
-                .get(ConfigNameDBD.社会福祉法人軽減_特例措置期間終了日, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-        if (特例措置期間終了日RString.isEmpty()) {
-            return FlexibleDate.EMPTY;
-        }
-        return new FlexibleDate(特例措置期間終了日RString);
+        return new FlexibleDate(DbBusinessConfig.get(
+                ConfigNameDBD.社会福祉法人軽減_特例措置期間終了日, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
     }
 
     private static enum NoInputMessages implements IValidationMessage {

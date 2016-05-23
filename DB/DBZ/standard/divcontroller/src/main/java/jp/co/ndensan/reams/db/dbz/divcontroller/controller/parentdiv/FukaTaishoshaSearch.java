@@ -227,7 +227,10 @@ public class FukaTaishoshaSearch {
         if (is全年度) {
             RString 被保険者番号 = RString.EMPTY;
             for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                RString 被保険者番号_絞り込み前 = RString.EMPTY;
+                if (entity.get賦課検索エンティティ().getHihokenshaNo() != null) {
+                    被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                }
                 if (!被保険者番号.equals(被保険者番号_絞り込み前)) {
                     list = list.added(entity);
                     被保険者番号 = 被保険者番号_絞り込み前;
@@ -238,9 +241,18 @@ public class FukaTaishoshaSearch {
             RString 賦課年度 = RString.EMPTY;
             RString 通知書番号 = RString.EMPTY;
             for (FukaTaishoshaRelateEntity entity : result.records().toList()) {
-                RString 被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
-                RString 賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
-                RString 通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
+                RString 被保険者番号_絞り込み前 = RString.EMPTY;
+                RString 賦課年度_絞り込み前 = RString.EMPTY;
+                RString 通知書番号_絞り込み前 = RString.EMPTY;
+                if (entity.get賦課検索エンティティ().getHihokenshaNo() != null) {
+                    被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
+                }
+                if (entity.get賦課検索エンティティ().getFukaNendo() != null) {
+                    賦課年度_絞り込み前 = entity.get賦課検索エンティティ().getFukaNendo().toDateString();
+                }
+                if (entity.get賦課検索エンティティ().getTsuchishoNo() != null) {
+                    通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
+                }
                 if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
                         && 通知書番号.equals(通知書番号_絞り込み前))) {
                     list = list.added(entity);
@@ -461,6 +473,7 @@ public class FukaTaishoshaSearch {
                     賦課検索.getHihokenshaNo() != null ? 賦課検索.getHihokenshaNo().value() : RString.EMPTY,
                     識別対象.get名称() != null ? (識別対象.get名称().getName() != null ? 識別対象.get名称().getName().value() : RString.EMPTY) : RString.EMPTY,
                     個人.get生年月日() != null ? new RString(個人.get生年月日().toFlexibleDate().wareki().separator(Separator.PERIOD).toDateString().toString()) : RString.EMPTY,
+                    個人.get年齢算出().get年齢(),
                     個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
                     個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                     識別対象.get住所() != null ? ((識別対象.get住所().get住所() != null && 識別対象.get住所().get番地() != null)

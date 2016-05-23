@@ -71,7 +71,6 @@ public class TekiyoJogaishaDaichoJohoFinder {
     private static final int 導入形態コード_LENGTH_1 = 1;
     private static final int 導入形態コード_LENGTH_3 = 3;
     private static final RString 広域 = new RString("11");
-    private static final RString 改行 = new RString("\r\n");
     private static final RString 状態 = new RString("適用除外者");
     private static final RString 性別_男 = new RString("1");
     private static final RString 男 = new RString("男");
@@ -101,8 +100,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
      */
     public static TekiyoJogaishaDaichoJohoFinder createInstance() {
         return InstanceProvider.create(TekiyoJogaishaDaichoJohoFinder.class);
@@ -206,7 +204,10 @@ public class TekiyoJogaishaDaichoJohoFinder {
             TekiyoJogaiShisetuJyohoRelateEntity entity = shisetuJyohoList.get(i);
             entity.set連番(i + 1);
             RString 適用除外適用事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0009"), new Code(entity.get適用除外適用事由コード()));
-            RString 適用除外解除事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0012"), new Code(entity.get適用除外解除事由コード()));
+            RString 適用除外解除事由名称 = RString.EMPTY;
+            if (!RString.isNullOrEmpty(entity.get適用除外解除事由コード())) {
+                適用除外解除事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0012"), new Code(entity.get適用除外解除事由コード()));
+            }
             entity.set適用除外適用事由名称(RString.EMPTY);
             entity.set適用除外解除事由名称(RString.EMPTY);
             if (適用除外適用事由名称 != null && !適用除外適用事由名称.isEmpty()) {

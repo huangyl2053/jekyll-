@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.Seik
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -129,11 +130,11 @@ public class SeikyuGakuShukeiPanelHandler {
     public void set申請共通エリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
-            RString 申請日,
+            RDate 申請日,
             RString 明細番号,
             RString 証明書) {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
-        div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
+        div.getPanelHead().getTxtShinseiYMD().setValue(申請日);
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
@@ -389,10 +390,9 @@ public class SeikyuGakuShukeiPanelHandler {
      */
     public ValidationMessageControlPairs 入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.
-                get(ViewStateKeys.償還払費申請検索キー,
-                        ShoukanharaihishinseikensakuParameter.class);
-        RString 様式番号 = parameter.getYoshikiNo();
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        RString 様式番号 = meisaiPar.get様式番号();
         Decimal 限度額対象単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().getValue();
         Decimal 限度額対象外単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().getValue();
         Decimal 保険分単位合計 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue();
@@ -505,15 +505,14 @@ public class SeikyuGakuShukeiPanelHandler {
      * 保存処理
      */
     public void 保存処理() {
-        ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder.
-                get(ViewStateKeys.償還払費申請検索キー,
-                        ShoukanharaihishinseikensakuParameter.class);
-        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
-        RString 整理番号 = parameter.getSeiriNp();
-        RString 様式番号 = parameter.getYoshikiNo();
-        RString 明細番号 = parameter.getMeisaiNo();
-        JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
+        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
+        RString 整理番号 = meisaiPar.get整理番号();
+        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
+        RString 様式番号 = meisaiPar.get様式番号();
+        RString 明細番号 = meisaiPar.get明細番号();
         List<ShokanShukei> entityList = new ArrayList<>();
         List<dgdSeikyugakushukei_Row> dgrow = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
@@ -660,16 +659,14 @@ public class SeikyuGakuShukeiPanelHandler {
      * @param shikibetsuNoKanri ShikibetsuNoKanri
      */
     public void get制御(ShikibetsuNoKanri shikibetsuNoKanri) {
-
-        ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.
-                get(ViewStateKeys.償還払費申請検索キー,
-                        ShoukanharaihishinseikensakuParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
+        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ShoukanharaihishinseimeisaikensakuParameter.class);
+        HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
+        FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
+        RString 整理番号 = meisaiPar.get整理番号();
+        JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
+        RString 様式番号 = meisaiPar.get様式番号();
+        RString 明細番号 = meisaiPar.get明細番号();
         div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
         set基本情報ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -859,12 +856,11 @@ public class SeikyuGakuShukeiPanelHandler {
      * putViewState
      */
     public void putViewState() {
-        // TODO 支給申請画面のモード　
-        ViewStateHolder.put(ViewStateKeys.処理モード, "");
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()),
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),

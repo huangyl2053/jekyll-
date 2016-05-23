@@ -11,7 +11,7 @@
         <result property="edaNo" column="DbT1001Hiho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shikakuHenkoYMD" column="DbT1001Hiho_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shikakuHenkoTodokedeYMD" column="DbT1001Hiho_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="jushochitokureiTekiyoJiyuCode" column="DbT1001Hiho_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shikakuHenkoJiyuCode" column="DbT1001Hiho_shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shichosonCode" column="DbT7051KoseiShicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="shichosonMeisho" column="DbT7051KoseiShicho_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="koikinaiTokureiSochimotoShichosonCode" column="DbT7051Kosei_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
@@ -27,7 +27,7 @@
         DbT1001Hiho."edaNo" as "DbT1001Hiho_edaNo",
         DbT1001Hiho."shikakuHenkoYMD" as "DbT1001Hiho_shikakuHenkoYMD",
         DbT1001Hiho."shikakuHenkoTodokedeYMD" as "DbT1001Hiho_shikakuHenkoTodokedeYMD",
-        DbT1001Hiho."jushochitokureiTekiyoJiyuCode" as "DbT1001Hiho_jushochitokureiTekiyoJiyuCode",
+        DbT1001Hiho."shikakuHenkoJiyuCode" as "DbT1001Hiho_shikakuHenkoJiyuCode",
         DbT7051KoseiShicho."shichosonCode" as "DbT7051KoseiShicho_shichosonCode",
         DbT7051KoseiShicho."shichosonMeisho" as "DbT7051KoseiShicho_shichosonMeisho",
         DbT7051Kosei."shichosonCode" as "DbT7051Kosei_koikinaiTokureiSochimotoShichosonCode",
@@ -64,6 +64,8 @@
         </if>
         AND
         DbT1001Hiho."shikakuHenkoYMD" IS NOT NULL
+        AND
+        DbT1001Hiho."shikakuHenkoYMD" <![CDATA[<>]]> ''
         AND
         DbT1001Hiho."shikakuShutokuYMD" = #{shikakuShutokuYMD}
         AND

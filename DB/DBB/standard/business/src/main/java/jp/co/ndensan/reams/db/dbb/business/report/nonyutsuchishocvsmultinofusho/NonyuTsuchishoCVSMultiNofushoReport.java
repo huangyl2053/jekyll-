@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmultinofusho
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiNofushoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiNofushoSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -56,11 +56,14 @@ public class NonyuTsuchishoCVSMultiNofushoReport extends Report<NonyuTsuchishoCV
             }
         }
         if (作成フラグ) {
-            for (int i = 0; i < item.get納入通知書期情報リスト().size(); i++) {
-                INonyuTsuchishoCVSMultiNofushoEditor nofushoEditor = new NonyuTsuchishoCVSMultiNofushoEditor(item);
-                INonyuTsuchishoCVSMultiNofushoBuilder builder = new NonyuTsuchishoCVSMultiNofushoBuilder(nofushoEditor);
-                reportSourceWriter.writeLine(builder);
-            }
+            作成フラグ = false;
         }
+//        if (作成フラグ) {
+////            for (int i = 0; i < item.get納入通知書期情報リスト().size(); i++) {
+////                INonyuTsuchishoCVSMultiNofushoEditor nofushoEditor = new NonyuTsuchishoCVSMultiNofushoEditor(item);
+////                INonyuTsuchishoCVSMultiNofushoBuilder builder = new NonyuTsuchishoCVSMultiNofushoBuilder(nofushoEditor);
+////                reportSourceWriter.writeLine(builder);
+////            }
+//        }
     }
 }

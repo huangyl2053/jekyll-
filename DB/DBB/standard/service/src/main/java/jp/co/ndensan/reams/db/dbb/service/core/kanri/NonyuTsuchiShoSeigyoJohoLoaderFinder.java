@@ -31,11 +31,12 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.KariSanteiNonyuTsu
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kanri.INonyuTsuchiShoSeigyoJohoLoaderMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -121,7 +122,7 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
         NonyuTsuchiShoSeigyoJohoLoaderFinder nonyuTsuchiShoSeigyoJohoLoader
                 = InstanceProvider.create(NonyuTsuchiShoSeigyoJohoLoaderFinder.class);
         FlexibleYear 調定年度
-                = new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
+                = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         nonyuTsuchiShoSeigyoJohoLoader.調定年度 = 調定年度.isEmpty() ? new FlexibleYear("0000") : 調定年度;
         return nonyuTsuchiShoSeigyoJohoLoader;
     }

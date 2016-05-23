@@ -56,10 +56,8 @@ public class ServiceTeikyoShomeisho {
         List<ServiceTeikyoShomeishoResult> serviceTeikyoShomeishoList
                 = ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号, サービス年月, 整理番号, 様式番号);
         if (serviceTeikyoShomeishoList == null || serviceTeikyoShomeishoList.isEmpty()) {
-            // TODO 「OK」をクリックすれば、申請検索画面に遷移する
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        // TODO 詳細画面から遷移の場合
         getHandler(div).initialize(serviceTeikyoShomeishoList);
         getHandler(div).setヘッダ_エリア(new RDate(サービス年月.toString()), 整理番号);
         if (決定日.isNullOrEmpty()) {

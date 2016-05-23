@@ -54,17 +54,15 @@ public class JigyoshaTourokuHandler {
      * @param viewState 表示状態
      */
     public void initialize(RString viewState) {
-        if (viewState.equals(状態_追加)) {
+        if (RString.isNullOrEmpty(viewState) || 状態_追加.equals(viewState)) {
             get画面初期の追加モードの表示制御();
-
-        } else if (viewState.equals(状態_更新)) {
+        } else if (状態_更新.equals(viewState)) {
             get画面初期の更新モードの表示制御();
             panelDiv.getServiceJigyoshaJoho().getTxtJigyoshaNo().setDisabled(true);
-            panelDiv.getServiceJigyoshaJoho().getBtnJigyoshaNoInputGuide().setDisabled(true);
-        } else if (viewState.equals(状態_削除)) {
+        } else if (状態_削除.equals(viewState)) {
             get画面初期の削除モードの表示制御();
 
-        } else if (viewState.equals(状態_照会)) {
+        } else if (状態_照会.equals(viewState)) {
             get画面初期の照会モードの表示制御();
         }
     }
@@ -262,7 +260,7 @@ public class JigyoshaTourokuHandler {
         }
         panelDiv.getServiceJoho().getDgServiceList().setDataSource(サービス一覧データ);
     }
-    
+
     /**
      * 「再表示」ボタンを押下時、サービス一覧情報を設定します。
      *

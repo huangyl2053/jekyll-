@@ -271,21 +271,21 @@ public final class FukaShokaiController {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
 
-        RDateTime 対象終了日時;
-        if (modeloid.get().get対象終了日時() == null) {
-            対象終了日時 = RDateTime.MAX;
+        RDateTime 基準日時;
+        if (modeloid.get().get基準日時() == null || modeloid.get().get基準日時().isEmpty()) {
+            基準日時 = RDateTime.MAX;
         } else {
-            対象終了日時 = modeloid.get().get対象終了日時().getRDateTime();
+            基準日時 = modeloid.get().get基準日時().getRDateTime();
         }
 
         RDateTime 調定日時;
-        if (fuka.get調定日時() == null) {
+        if (fuka.get調定日時() == null || fuka.get調定日時().isEmpty()) {
             調定日時 = RDateTime.MAX;
         } else {
             調定日時 = fuka.get調定日時().getRDateTime();
         }
 
-        if (調定日時.isAfter(対象終了日時)) {
+        if (調定日時.isAfter(基準日時)) {
             return SanteiState.本算定;
         }
 

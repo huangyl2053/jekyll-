@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.tokucho.TokuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
@@ -203,7 +203,7 @@ public final class TokubetsuChoshuTotalHandler {
      * @param 調定年度 FlexibleYear
      */
     public void set市町村指定DDL(FlexibleYear 調定年度) {
-        FlexibleYear 不均一納期期限 = new FlexibleYear(DbBusinessConifg.get(ConfigNameDBB.ランク管理情報_不均一納期期限,
+        FlexibleYear 不均一納期期限 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.ランク管理情報_不均一納期期限,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         if (不均一納期期限.isBefore(調定年度)) {
             div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(false);
@@ -227,7 +227,7 @@ public final class TokubetsuChoshuTotalHandler {
 
     private Boolean is市町村指定DDL表示(ShichosonSecurityJoho 市町村セキュリティ情報) {
         if (DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            RString 合併情報区分 = DbBusinessConifg.get(ConfigNameDBU.合併情報管理_合併情報区分,
+            RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
                     RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
             if (合併情報区分_合併なし.equals(合併情報区分)) {
                 return false;
@@ -304,41 +304,41 @@ public final class TokubetsuChoshuTotalHandler {
         }
         RDate nowDate = RDate.getNowDate();
         rowList.add(create特別徴収期別情報Grid(調定年度, 四月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期1, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分1, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期1, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分1, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 五月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期2, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分2, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期2, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分2, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 六月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期3, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分3, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期3, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分3, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 七月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期4, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分4, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期4, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分4, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 八月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期5, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分5, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期5, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分5, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 九月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期6, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分6, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期6, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分6, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 十月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期7, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分7, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期7, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分7, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 十一月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期8, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分8, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期8, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分8, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 十二月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期9, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分9, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期9, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分9, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 一月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期10, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分10, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期10, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分10, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 二月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期11, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分11, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期11, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分11, nowDate, SubGyomuCode.DBB介護賦課)));
         rowList.add(create特別徴収期別情報Grid(調定年度, 三月, 期別List,
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期12, nowDate, SubGyomuCode.DBB介護賦課),
-                DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分12, nowDate, SubGyomuCode.DBB介護賦課)));
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期12, nowDate, SubGyomuCode.DBB介護賦課),
+                DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分12, nowDate, SubGyomuCode.DBB介護賦課)));
         div.getTokubetsuChoshu().getTplKibetsuHasuJoho().getKibetsuJohoHasu().getDgKibetsuJoho().setDataSource(rowList);
         チェック選択制御();
     }
@@ -395,12 +395,12 @@ public final class TokubetsuChoshuTotalHandler {
     private List<RString> create期別List() {
         List<RString> list = new ArrayList();
         RDate nowDate = RDate.getNowDate();
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特別徴収_期別テーブル1, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特別徴収_期別テーブル2, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特別徴収_期別テーブル3, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特別徴収_期別テーブル4, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特別徴収_期別テーブル5, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特別徴収_期別テーブル6, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別テーブル1, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別テーブル2, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別テーブル3, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別テーブル4, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別テーブル5, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別テーブル6, nowDate, SubGyomuCode.DBB介護賦課));
         return list;
     }
 
@@ -440,7 +440,7 @@ public final class TokubetsuChoshuTotalHandler {
         list.add(new KeyValueDataSource(HasuChoseiTani._1000.getコード(), HasuChoseiTani._1000.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getKibetsuHokenryo().getDdlHasu().setDataSource(list);
-        RString 端数 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_期別端数, RDate.getNowDate(),
+        RString 端数 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getKibetsuHokenryo().getDdlHasu().setSelectedKey(端数);
@@ -458,7 +458,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoHeijunkaKeisanHoho6Gatsu.年額より４月分を引いた額を５期で割る.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getDdlHeijunkaKeisanHoho().setDataSource(ddList);
-        RString 計算方法 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, nowDate,
+        RString 計算方法 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getDdlHeijunkaKeisanHoho().setSelectedKey(計算方法);
@@ -470,12 +470,12 @@ public final class TokubetsuChoshuTotalHandler {
                 .getHeijunka6GatsuKeisanHoho().getRadGengakuHeijunKa().setDataSource(radList);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getRadZogakuHeijunKa().setDataSource(radList);
-        RString 減額時平準化 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, nowDate,
+        RString 減額時平準化 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getRadGengakuHeijunKa().setSelectedKey(減額時平準化);
 
-        RString 増額時平準化 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, nowDate,
+        RString 増額時平準化 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getRadZogakuHeijunKa().setSelectedKey(増額時平準化);
@@ -493,7 +493,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoHeijunkaKeisanHoho8Gatsu.年額より特徴３期分を含まない仮徴収額を引いた額を４期で割る.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getDdlHeijunka8GatsuKeisanHoho().setDataSource(ddList);
-        RString 計算方法 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分, nowDate,
+        RString 計算方法 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getDdlHeijunka8GatsuKeisanHoho().setSelectedKey(計算方法);
@@ -505,12 +505,12 @@ public final class TokubetsuChoshuTotalHandler {
                 .getHeijunka8GatsuKeisanHoho().getRad8GatsuGengakuHeijunKa().setDataSource(radList);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getRad8GatsuZogakuHeijunKa().setDataSource(radList);
-        RString 減額時平準化 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分減額, nowDate,
+        RString 減額時平準化 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分減額, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getRad8GatsuGengakuHeijunKa().setSelectedKey(減額時平準化);
 
-        RString 増額時平準化 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分増額, nowDate,
+        RString 増額時平準化 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分増額, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getRad8GatsuZogakuHeijunKa().setSelectedKey(増額時平準化);
@@ -526,7 +526,7 @@ public final class TokubetsuChoshuTotalHandler {
                 FutsuChoshuKirikaeKeisanHoho.指定期以降重複させる.get名称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho().setDataSource(ddList);
-        RString 計算方法 = DbBusinessConifg.get(ConfigNameDBB.期割計算_普徴切替方法, RDate.getNowDate(),
+        RString 計算方法 = DbBusinessConfig.get(ConfigNameDBB.期割計算_普徴切替方法, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
 
         List<KeyValueDataSource> kiList = new ArrayList<>();
@@ -563,20 +563,20 @@ public final class TokubetsuChoshuTotalHandler {
     private List<RString> create普徴情報月処理区分List() {
         List<RString> list = new ArrayList<>();
         RDate nowDate = RDate.getNowDate();
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分1, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分2, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分3, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分4, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分5, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分6, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分7, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分8, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分9, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分10, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分11, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分12, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分13, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.普徴期情報_月処理区分14, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分1, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分2, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分3, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分4, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分5, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分6, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分7, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分8, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分9, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分10, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分11, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分12, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分13, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.普徴期情報_月処理区分14, nowDate, SubGyomuCode.DBB介護賦課));
         return list;
     }
 
@@ -589,7 +589,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiTsuki4GatsuHosoku._10月.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl4GatsuHosoku().setDataSource(gatsu04List);
-        RString key_04月捕捉 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, nowDate,
+        RString key_04月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl4GatsuHosoku().setSelectedKey(key_04月捕捉);
@@ -603,7 +603,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiTsuki6GatsuHosoku._04月.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl6GatsuHosoku().setDataSource(gatsu06List);
-        RString key_06月捕捉 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate,
+        RString key_06月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl6GatsuHosoku().setSelectedKey(key_06月捕捉);
@@ -617,7 +617,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiTsuki8GatsuHosoku._04月.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl8GatsuHosoku().setDataSource(gatsu08List);
-        RString key_08月捕捉 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, nowDate,
+        RString key_08月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl8GatsuHosoku().setSelectedKey(key_08月捕捉);
@@ -629,7 +629,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiTsuki10GatsuHosoku._04月.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl10GatsuHosoku().setDataSource(gatsu10List);
-        RString key_10月捕捉 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, nowDate,
+        RString key_10月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl10GatsuHosoku().setSelectedKey(key_10月捕捉);
@@ -641,7 +641,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiTsuki12GatsuHosoku._06月.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl12GatsuHosoku().setDataSource(gatsu12List);
-        RString key_12月捕捉 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, nowDate,
+        RString key_12月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl12GatsuHosoku().setSelectedKey(key_12月捕捉);
@@ -653,7 +653,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiTsuki2GatsuHosoku._08月.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl2GatsuHosoku().setDataSource(gatsu02List);
-        RString key_02月捕捉 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉, nowDate,
+        RString key_02月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl2GatsuHosoku().setSelectedKey(key_02月捕捉);
@@ -670,7 +670,7 @@ public final class TokubetsuChoshuTotalHandler {
                         TokuchoNengakuKijunNendo4Gatsu.翌年度.get名称(), 調定年度)));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl4GatsuKaishiNengakuKijunNendo().setDataSource(gatsu04List);
-        RString key_04月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_4月開始, nowDate,
+        RString key_04月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_4月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl4GatsuKaishiNengakuKijunNendo().setSelectedKey(key_04月開始);
@@ -684,7 +684,7 @@ public final class TokubetsuChoshuTotalHandler {
                         TokuchoNengakuKijunNendo6Gatsu.翌年度.get名称(), 調定年度)));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl6GatsuKaishiNengakuKijunNendo().setDataSource(gatsu06List);
-        RString key_06月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate,
+        RString key_06月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl6GatsuKaishiNengakuKijunNendo().setSelectedKey(key_06月開始);
@@ -698,7 +698,7 @@ public final class TokubetsuChoshuTotalHandler {
                         TokuchoNengakuKijunNendo8Gatsu.翌年度.get名称(), 調定年度)));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl8GatsuKaishiNengakuKijunNendo().setDataSource(gatsu08List);
-        RString key_08月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始, nowDate,
+        RString key_08月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl8GatsuKaishiNengakuKijunNendo().setSelectedKey(key_08月開始);
@@ -724,7 +724,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoIraikingakuKeisanHoho12Gatsu.年額除12乗本徴収月数除年金支給回数.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl12GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu12List);
-        RString key_12月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_12月開始, nowDate,
+        RString key_12月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_12月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl12GatsuKaishiIraiKingakuKeisanHoho().setSelectedKey(key_12月開始);
@@ -738,7 +738,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoIraikingakuKeisanHoho2Gatsu.年額除12乗本徴収月数除年金支給回数.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl2GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu02List);
-        RString key_02月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_2月開始, nowDate,
+        RString key_02月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_2月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl2GatsuKaishiIraiKingakuKeisanHoho().setSelectedKey(key_02月開始);
@@ -749,7 +749,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoIraikingakuKeisanHoho4Gatsu.年額除12乗仮徴収月数除年金支給回数.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl4GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu04List);
-        RString key_04月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始, nowDate,
+        RString key_04月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl4GatsuKaishiIraiKingakuKeisanHoho().setSelectedKey(key_04月開始);
@@ -763,7 +763,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoIraikingakuKeisanHoho6Gatsu.年額を納期数_5期_で割る.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl6GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu06List);
-        RString key_06月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate,
+        RString key_06月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl6GatsuKaishiIraiKingakuKeisanHoho().setSelectedKey(key_06月開始);
@@ -777,7 +777,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoIraikingakuKeisanHoho8Gatsu.年額を納期数_4期_で割る.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl8GatsuKaishiIraiKingakuKeisanHoho().setDataSource(gatsu08List);
-        RString key_08月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始, nowDate,
+        RString key_08月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl8GatsuKaishiIraiKingakuKeisanHoho().setSelectedKey(key_08月開始);
@@ -794,7 +794,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiMaeFucho6Gatsu.特別徴収開始前の仮算定納期で普通徴収する.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl6GatsuKaishiZenhan().setDataSource(gatsu06List);
-        RString key_06月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, nowDate,
+        RString key_06月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl6GatsuKaishiZenhan().setSelectedKey(key_06月開始);
@@ -808,7 +808,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiMaeFucho8Gatsu.特別徴収開始前の本算定納期で普通徴収する.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl8GatsuKaishiZenhan().setDataSource(gatsu08List);
-        RString key_08月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, nowDate,
+        RString key_08月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl8GatsuKaishiZenhan().setSelectedKey(key_08月開始);
@@ -822,7 +822,7 @@ public final class TokubetsuChoshuTotalHandler {
                 TokuchoKaishiMaeFucho10Gatsu.年度前半の本算定納期で普通徴収する.get略称()));
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl10GatsuKaishiZenhan().setDataSource(gatsu10List);
-        RString key_10月開始 = DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, nowDate,
+        RString key_10月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, nowDate,
                 SubGyomuCode.DBB介護賦課);
         div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl10GatsuKaishiZenhan().setSelectedKey(key_10月開始);
@@ -896,7 +896,7 @@ public final class TokubetsuChoshuTotalHandler {
                 暫定期数 = 暫定期数 + 1;
             }
         }
-        if (!new RString(String.valueOf(暫定期数)).equals(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_仮算定期数,
+        if (!new RString(String.valueOf(暫定期数)).equals(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_仮算定期数,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特徴期情報_仮算定期数,
                     new RString(String.valueOf(暫定期数)), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -916,7 +916,7 @@ public final class TokubetsuChoshuTotalHandler {
                 設定納期数 = 設定納期数 + 1;
             }
         }
-        if (!new RString(String.valueOf(設定納期数)).equals(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_設定納期数,
+        if (!new RString(String.valueOf(設定納期数)).equals(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_設定納期数,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特徴期情報_設定納期数,
                     new RString(String.valueOf(設定納期数)), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -957,18 +957,18 @@ public final class TokubetsuChoshuTotalHandler {
     private List<RString> create月の期List() {
         List<RString> list = new ArrayList();
         RDate nowDate = RDate.getNowDate();
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期1, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期2, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期3, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期4, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期5, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期6, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期7, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期8, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期9, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期10, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期11, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月の期12, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期1, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期2, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期3, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期4, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期5, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期6, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期7, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期8, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期9, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期10, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期11, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月の期12, nowDate, SubGyomuCode.DBB介護賦課));
         return list;
     }
 
@@ -989,18 +989,18 @@ public final class TokubetsuChoshuTotalHandler {
     private List<RString> create特徴情報月処理区分List() {
         List<RString> list = new ArrayList<>();
         RDate nowDate = RDate.getNowDate();
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分1, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分2, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分3, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分4, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分5, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分6, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分7, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分8, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分9, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分10, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分11, nowDate, SubGyomuCode.DBB介護賦課));
-        list.add(DbBusinessConifg.get(ConfigNameDBB.特徴期情報_月処理区分12, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分1, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分2, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分3, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分4, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分5, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分6, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分7, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分8, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分9, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分10, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分11, nowDate, SubGyomuCode.DBB介護賦課));
+        list.add(DbBusinessConfig.get(ConfigNameDBB.特徴期情報_月処理区分12, nowDate, SubGyomuCode.DBB介護賦課));
         return list;
     }
 
@@ -1057,7 +1057,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update平準化計算方法_6月分() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getDdlHeijunkaKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_平準化計算方法_6月分,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1067,7 +1067,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update平準化計算方法_6月分減額() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getRadGengakuHeijunKa().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_平準化計算方法_6月分減額,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1077,7 +1077,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update平準化計算方法_6月分増額() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka6GatsuKeisanHoho().getRadZogakuHeijunKa().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_平準化計算方法_6月分増額,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1087,7 +1087,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update平準化計算方法_8月分() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getDdlHeijunka8GatsuKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_平準化計算方法_8月分,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1097,7 +1097,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update平準化計算方法_8月分減額() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getRad8GatsuGengakuHeijunKa().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分減額, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分減額, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_平準化計算方法_8月分減額,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1107,7 +1107,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update平準化計算方法_8月分増額() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getHeijunka8GatsuKeisanHoho().getRad8GatsuZogakuHeijunKa().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分増額, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_平準化計算方法_8月分増額, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_平準化計算方法_8月分増額,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1117,7 +1117,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update普徴切替方法() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
                 .getFuchoKirikaeKeisanHoho().getDdlFuchoKirikaeKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.期割計算_普徴切替方法, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.期割計算_普徴切替方法, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             if (FutsuChoshuKirikaeKeisanHoho.指定期以降重複させる.getコード().equals(key)) {
                 RString 期のキー = div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho().getHasuHeijunkaJoho()
@@ -1134,7 +1134,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始月_4月捕捉() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl4GatsuHosoku().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始月_4月捕捉,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1144,7 +1144,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始月_6月捕捉() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl6GatsuHosoku().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始月_6月捕捉,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1154,7 +1154,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始月_8月捕捉() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl8GatsuHosoku().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始月_8月捕捉,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1164,7 +1164,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始月_10月捕捉() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl10GatsuHosoku().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始月_10月捕捉,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1174,7 +1174,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始月_12月捕捉() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl12GatsuHosoku().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始月_12月捕捉,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1184,7 +1184,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始月_2月捕捉() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getTokuchoKaishiTsuki().getDdl2GatsuHosoku().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始月_2月捕捉,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1194,7 +1194,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update年額基準年度_4月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl4GatsuKaishiNengakuKijunNendo().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_4月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_4月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_年額基準年度_4月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1204,7 +1204,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update年額基準年度_6月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl6GatsuKaishiNengakuKijunNendo().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_年額基準年度_6月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1214,7 +1214,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update年額基準年度_8月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKaishiTsukiKijunNendo()
                 .getNengakuKijunNendo().getDdl8GatsuKaishiNengakuKijunNendo().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_年額基準年度_8月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1224,7 +1224,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update依頼金額計算方法_12月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl12GatsuKaishiIraiKingakuKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_12月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_12月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_依頼金額計算方法_12月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1234,7 +1234,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update依頼金額計算方法_2月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl2GatsuKaishiIraiKingakuKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_2月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_2月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_依頼金額計算方法_2月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1244,7 +1244,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update依頼金額計算方法_4月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl4GatsuKaishiIraiKingakuKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_依頼金額計算方法_4月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1254,7 +1254,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update依頼金額計算方法_6月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl6GatsuKaishiIraiKingakuKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1264,7 +1264,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update依頼金額計算方法_8月開始() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getIraiKingakuKeisanHoho().getDdl8GatsuKaishiIraiKingakuKeisanHoho().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_依頼金額計算方法_8月開始,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1274,7 +1274,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始前普通徴収_6月() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl6GatsuKaishiZenhan().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1284,7 +1284,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始前普通徴収_8月() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl8GatsuKaishiZenhan().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
@@ -1294,7 +1294,7 @@ public final class TokubetsuChoshuTotalHandler {
     private void update特徴開始前普通徴収_10月() {
         RString key = div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().getKeisanHoho()
                 .getTokubetsuChoshuShinkishaZenhan().getDdl10GatsuKaishiZenhan().getSelectedKey();
-        if (!key.equals(DbBusinessConifg.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, RDate.getNowDate(),
+        if (!key.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月,
                     key, RString.EMPTY, RString.EMPTY, RDate.getNowDate());

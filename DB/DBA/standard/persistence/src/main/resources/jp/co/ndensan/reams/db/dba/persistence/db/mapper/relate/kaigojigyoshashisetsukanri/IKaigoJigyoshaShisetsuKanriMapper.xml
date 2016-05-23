@@ -173,7 +173,7 @@
             DbT1005."jigyoshaShubetsu"= #{事業者種別}
         <if test="有効開始日フラグ">
            AND
-            DbT7060."yukoKaishiYMD"<![CDATA[<>]]> #{yukoKaishiYMD}   
+            DbT1005."yukoKaishiYMD"<![CDATA[<>]]> #{yukoKaishiYMD}   
         </if>
     </select>
 </mapper>

@@ -69,6 +69,7 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 高額合算支給申請11 = new RString("DBCMN61011");
     private final RString 高額合算支給申請12 = new RString("DBCMN61012");
     private final RString 高額合算支給決定情報補正 = new RString("DBCMN62004");
+    private final RString 福祉用具購入費支給申請一括審査_決定 = new RString("DBCMN51002");
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
     private final ShiharaiHohoJyohoDiv div;
@@ -117,7 +118,7 @@ public class ShiharaiHohoJyohoHandler {
                 JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
                         getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
                                 createParam(支給申請情報.getHihokenshaNo(), 支給申請情報.
-                                        getShikyushinseiServiceYM(), 支給申請情報.getShikyushinseiSeiriNo(), 支給申請情報.getShiharaiBasho()));
+                                        getShikyushinseiServiceYM(), 支給申請情報.getShikyushinseiSeiriNo(), 支給申請情報.getKeiyakuNo()));
                 受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);
             }
         }
@@ -157,13 +158,18 @@ public class ShiharaiHohoJyohoHandler {
      * 画面口座IDを設定します。
      *
      * @param list 口座IDリスト
+     * @param 口座ID 口座ID
      * @return List<KeyValueDataSource>
      */
-    public List<KeyValueDataSource> set口座ID(List<KozaJohoPSM> list) {
+    public List<KeyValueDataSource> set口座ID(List<KozaJohoPSM> list,Long 口座ID) {
         List<KeyValueDataSource> 口座IDリスト = new ArrayList<>();
         for (KozaJohoPSM kozaId : list) {
-            RString 口座ID = new RString(String.valueOf(kozaId.get口座ID()));
-            口座IDリスト.add(new KeyValueDataSource(口座ID, 口座ID));
+            RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
+            口座IDリスト.add(new KeyValueDataSource(口座, 口座));
+        }
+        if (list == null || list.isEmpty()) {
+            RString 口座 = new RString(String.valueOf(口座ID));
+            口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
         return 口座IDリスト;
     }
@@ -565,6 +571,7 @@ public class ShiharaiHohoJyohoHandler {
      * @param kozaID 口座番号
      */
     public void 口座払いエリアの初期化(KozaJohoPSM 口座情報, Long kozaID) {
+        div.getDdlKozaID().setSelectedKey(new RString(String.valueOf(kozaID)));
         KinyuKikanCode 金融機関コード = 口座情報.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 口座情報.get金融機関コード();
         div.getTxtKinyuKikanCode().setDomain(金融機関コード);
@@ -609,6 +616,7 @@ public class ShiharaiHohoJyohoHandler {
      */
     public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報, JuryoininKeiyakuJigyosha 受領委任契約事業者) {
 
+        div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
         div.getTxtKeiyakuNo().setDisabled(false);
         div.getBtnSelect().setDisabled(false);
@@ -661,8 +669,8 @@ public class ShiharaiHohoJyohoHandler {
 
     private UzT0007CodeBusiness 預金種別に対する略称(RString 口座種別) {
 
-        return new UzT0007CodeBusiness(CodeMaster.getCode(預金種別, new Code(口座種別)) == null
-                ? new UzT0007CodeEntity() : CodeMaster.getCode(預金種別, new Code(口座種別)));
+        return new UzT0007CodeBusiness(CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)) == null
+                ? new UzT0007CodeEntity() : CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)));
     }
 
     private KinyuKikan 金融機関コードに対する名称(KinyuKikanCode 金融機関コード) {
@@ -891,7 +899,7 @@ public class ShiharaiHohoJyohoHandler {
     private void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
         List<KozaJohoPSM> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
                 .getKozaIDList(KozaParameter.createParam(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
-        div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト));
+        div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト,支給申請情報.getKozaId()));
     }
 
     private KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {
@@ -899,9 +907,12 @@ public class ShiharaiHohoJyohoHandler {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
 
-        if (償還払い状況照会.equals(menuID) || 福祉用具購入費支給申請.equals(menuID)
-                || 住宅改修費支給申請.equals(menuID) || 住宅改修費事前申請.equals(menuID)
-                || 償還払い費支給申請.equals(menuID)) {
+        if (償還払い状況照会.equals(menuID)
+                || 福祉用具購入費支給申請.equals(menuID)
+                || 住宅改修費支給申請.equals(menuID)
+                || 住宅改修費事前申請.equals(menuID)
+                || 償還払い費支給申請.equals(menuID)
+                || 福祉用具購入費支給申請一括審査_決定.equals(menuID)) {
 
             業務内区分コード = new KamokuCode(String.format("%03d", Integer.valueOf(KozaBunruiKubun.償還払い支給.getコード().toString())));
         }

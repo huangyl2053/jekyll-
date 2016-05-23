@@ -68,7 +68,7 @@ public class KojinJokyoShokaiHandler {
     }
 
     private void getchkShiteii(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        if (kojinJokyoShokaiList.get(0).get指定医フラグ()) {
+        if (kojinJokyoShokaiList.get(0).is指定医フラグ()) {
             指定医フラグ.add(new RString("key0"));
             div.getChkShiteii().setSelectedItemsByKey(指定医フラグ);
         } else {
@@ -170,7 +170,7 @@ public class KojinJokyoShokaiHandler {
             div.getTxtShinseiShubetsu().setValue(ShienShinseiKubun.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get要支援申請の区分().toString())).get名称());
         }
-        if (kojinJokyoShokaiList.get(0).get二号特定疾病コード() != null) {
+        if (kojinJokyoShokaiList.get(0).get二号特定疾病コード() != null && !kojinJokyoShokaiList.get(0).get二号特定疾病コード().isEmpty()) {
             div.getTxtTokuteiShippei().setValue(TokuteiShippei.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get二号特定疾病コード().toString())).toRString());
         }
@@ -184,7 +184,7 @@ public class KojinJokyoShokaiHandler {
             div.getTxtKaisaiDay().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get審査会開催年月日().toString()));
         }
-        if (kojinJokyoShokaiList.get(0).get処理状態区分() != null) {
+        if (kojinJokyoShokaiList.get(0).get処理状態区分() != null && !kojinJokyoShokaiList.get(0).get処理状態区分().isEmpty()) {
             div.getTxtShoriKubun().setValue(ShoriJotaiKubun.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get処理状態区分().toString())).get名称());
         }

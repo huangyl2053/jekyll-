@@ -219,12 +219,12 @@ public enum ReportIdDBB {
     /**
      * 介護保険料額変更兼特別徴収中止通知書【B5横タイプ】
      */
-    DBB100042(new ReportId("DBB100042_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoB5Yoko"),
+    DBB100042(new ReportId("DBB100042_KaigoHokenryogakuHenkoKenChushiTsuchishoB5Yoko"),
             new RString("介護保険料額変更兼特別徴収中止通知書【B5横タイプ】")),
     /**
      * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】
      */
-    DBB100043(new ReportId("DBB100043_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4Tate"),
+    DBB100043(new ReportId("DBB100043_KaigoHokenryogakuHenkoKenChushiTsuchishoA4Tate"),
             new RString("介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】")),
     /**
      * 特別徴収開始通知書（本算定）【B5横タイプ】
@@ -277,6 +277,14 @@ public enum ReportIdDBB {
      * 仮算定額変更通知書【B5横タイプ】
      */
     DBB100010(new ReportId("DBB100010_KarisanteiHenkoTsuchishoB5Yoko"), new RString("仮算定額変更通知書【B5横タイプ】")),
+    /**
+     * 仮算定額変更通知書【A4縦・特別徴収平準化通知タイプ】
+     */
+    DBB100013(new ReportId("DBB100013_KarisanteiHenjunkaHenkoTsuchishoA4Tate"), new RString("仮算定額変更通知書【A4縦・特別徴収平準化通知タイプ】")),
+    /**
+     * 仮算定額変更通知書【B5横・特別徴収平準化通知タイプ】
+     */
+    DBB100012(new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoB5Yoko"), new RString("仮算定額変更通知書【B5横・特別徴収平準化通知タイプ】")),
     /**
      * 特別徴収開始通知書（仮算定）【B5横タイプ】
      */

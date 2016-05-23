@@ -21,12 +21,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdenti
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -52,7 +50,6 @@ public class TatokureiHenkoTsuchishoHakko {
 
     private static final RString 発行ボタン = new RString("btnReportPublish");
     private static final RString 発行チェックボタン = new RString("btnCheck");
-    private static final RString 完了ボタン = new RString("btnComplete");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
 
     /**
@@ -62,7 +59,6 @@ public class TatokureiHenkoTsuchishoHakko {
      * @return ResponseData<TatokureiHenkoTsuchishoHakkoDiv>
      */
     public ResponseData<TatokureiHenkoTsuchishoHakkoDiv> onLoad(TatokureiHenkoTsuchishoHakkoDiv div) {
-
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
         div.getCcdKaigoAtenaInfo().onLoad(識別コード);
         div.getCcdKaigoShikakuJoho().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
@@ -75,7 +71,7 @@ public class TatokureiHenkoTsuchishoHakko {
         }
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100006.getReportId());
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, true);
+        createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
         return ResponseData.of(div).respond();
@@ -89,9 +85,8 @@ public class TatokureiHenkoTsuchishoHakko {
      */
     public ResponseData<TatokureiHenkoTsuchishoHakkoDiv> onClick_dgJushochiTokureiRireki(TatokureiHenkoTsuchishoHakkoDiv div) {
 
-        RString 文書番号取得 = get文書番号取得(ReportIdDBA.DBA100006.getReportId());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, false);
-        createHandler(div).適用情報の編集(文書番号取得);
+        createHandler(div).適用情報の編集();
         return ResponseData.of(div).respond();
     }
 
@@ -126,7 +121,6 @@ public class TatokureiHenkoTsuchishoHakko {
         TatokuKanrenChohyoShijiData business = 帳票発行指示データ作成(div, false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行チェックボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, false);
         TatokuKanrenChohyoHenkoTsuchishoBusiness tsuchishoBusiness = TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder
                 .createInstance().setTatokuKanrenChohyoTaishoTsuchisho(business);
         他市町村住所地特例の更新(createHandler(div).他特例施設変更通知書の編集(他市町村住所地特例, 識別コード));
@@ -188,8 +182,7 @@ public class TatokureiHenkoTsuchishoHakko {
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam().getValue(),
                                 ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード() == null
                                 ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード(),
-                                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号() == null
-                                ? RString.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号().value(),
+                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get措置保険者番号(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo() == null ? FlexibleDate.EMPTY
                                 : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get異動日()),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get枝番(),
@@ -223,22 +216,17 @@ public class TatokureiHenkoTsuchishoHakko {
         item.setBirthYMD(business.get誕生日());
         item.setSeibetsu(business.get性別());
         item.setBirthYMD(business.get変更年月日());
-        item.setHenkomaeShisetsuName(business.get変更前施設名称() == null ? RString.EMPTY : business.get変更前施設名称().value());
-        item.setHenkomaeShisetsuTelNo(business.get変更前施設電話番号() == null ? RString.EMPTY : business.get変更前施設電話番号().value());
-        item.setHenkomaeShisetsuFaxNo(business.get変更前施設FAX番号() == null ? RString.EMPTY : business.get変更前施設FAX番号().value());
+        item.setHenkomaeShisetsuName(business.get変更前施設名称());
+        item.setHenkomaeShisetsuTelNo(business.get変更前施設電話番号());
+        item.setHenkomaeShisetsuFaxNo(business.get変更前施設FAX番号());
         item.setHenkomaeShisetsuYubinNo(business.get変更前施設住所());
-        item.setHenkomaeShisetsuJusho(business.get変更後施設名称() == null ? RString.EMPTY : business.get変更後施設名称().value());
-        item.setHenkogoShisetsuName(business.get変更後施設名称() == null ? RString.EMPTY : business.get変更後施設名称().value());
-        item.setHenkogoShisetsuTelNo(business.get変更後施設電話番号() == null ? RString.EMPTY : business.get変更後施設電話番号().value());
-        item.setHenkogoShisetsuFaxNo(business.get変更後施設FAX番号() == null ? RString.EMPTY : business.get変更後施設FAX番号().value());
+        item.setHenkomaeShisetsuJusho(business.get変更後施設名称());
+        item.setHenkogoShisetsuName(business.get変更後施設名称());
+        item.setHenkogoShisetsuTelNo(business.get変更後施設電話番号());
+        item.setHenkogoShisetsuFaxNo(business.get変更後施設FAX番号());
         item.setHenkogoShisetsuYubinNo(business.get変更後施設住所());
         item.setHenkogoShisetsuJusho(business.get変更後施設住所());
         return item;
-    }
-
-    private RString get文書番号取得(ReportId reportId) {
-
-        return ReportUtil.get文書番号(SubGyomuCode.DBA介護資格, reportId, FlexibleDate.getNowDate());
     }
 
     private TatokureiHenkoTsuchishoHakkoHandler createHandler(TatokureiHenkoTsuchishoHakkoDiv div) {

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukorenchocover;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoRenchoCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -30,11 +30,11 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverBuilder implements INonyuTsuchish
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link NonyuTsuchishoCVSKakukoRenchoCoverSource}
+     * @return {@link NonyuTsuchishoCVSKakukoSource}
      */
     @Override
-    public NonyuTsuchishoCVSKakukoRenchoCoverSource build() {
-        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoRenchoCoverSource())
+    public NonyuTsuchishoCVSKakukoSource build() {
+        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoSource())
                 .join(renchoCoverEditor).buildSource();
     }
 

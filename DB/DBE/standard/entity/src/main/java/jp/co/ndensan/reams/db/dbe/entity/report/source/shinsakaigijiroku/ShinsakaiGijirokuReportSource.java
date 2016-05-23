@@ -5,6 +5,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 介護認定審査会議事録Editorです。
+ *
+ * @reamsid_L DBE-0170-040 wangkun
+ */
 public class ShinsakaiGijirokuReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

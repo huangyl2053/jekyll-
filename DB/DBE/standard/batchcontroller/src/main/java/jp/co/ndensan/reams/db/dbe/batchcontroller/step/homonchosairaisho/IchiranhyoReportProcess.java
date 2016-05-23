@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.Chosa
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
@@ -44,11 +45,11 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -86,6 +87,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査差異チェック表出力区分】");
     private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
+    private RDate 基準日;
     private RString 郵便番号;
     private RString 住所;
     private RString 機関名称;
@@ -105,6 +107,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     protected void initialize() {
         iHomonChosaIraishoMapper = getMapper(IHomonChosaIraishoMapper.class);
         ichiranhyoBodyItemList = new ArrayList<>();
+        基準日 = RDate.getNowDate();
     }
 
     @Override
@@ -180,12 +183,12 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
 
     private void update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = iHomonChosaIraishoMapper.get認定調査依頼情報(entity);
-        RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
+        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, 基準日, SubGyomuCode.DBE認定支援);
         if (文字列1.equals(認定調査期限設定方法)) {
             switch (processParamter.getTeishutsuKigen().toString()) {
                 case "0":
-                    int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.認定調査期限日数,
-                            SubGyomuCode.DBE認定支援).toString());
+                    int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数,
+                            基準日, SubGyomuCode.DBE認定支援).toString());
                     FlexibleDate 認定調査依頼日 = entity.get認定調査依頼年月日();
                     if (認定調査依頼日 != null && !認定調査依頼日.isEmpty()) {
                         dbT5201Entity.setNinteichosaKigenYMD(認定調査依頼日.plusDay(期限日数));
@@ -219,10 +222,10 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
 
     private RString set提出期限(HomonChosaIraishoRelateEntity entity) {
         RString 提出期限 = RString.EMPTY;
-        if (文字列1.equals(BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援))) {
+        if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
             if (文字列0.equals(processParamter.getTeishutsuKigen())) {
-                int 期限日数 = Integer.parseInt(BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                        SubGyomuCode.DBE認定支援).toString());
+                int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
+                        基準日, SubGyomuCode.DBE認定支援).toString());
                 提出期限 = entity.get認定調査依頼年月日() != null && !entity.get認定調査依頼年月日().isEmpty()
                         ? new RString(entity.get認定調査依頼年月日().plusDay(期限日数).toString()) : RString.EMPTY;
             } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
@@ -237,7 +240,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     }
 
     private RString get名称付与() {
-        RString key = BusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, SubGyomuCode.DBE認定支援);
+        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援);
         RString meishoFuyo = RString.EMPTY;
         if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             meishoFuyo = RString.EMPTY;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukonofusho;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoNofushoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -31,11 +31,11 @@ public class NonyuTsuchishoCVSKakukoNofushoBuilder implements INonyuTsuchishoCVS
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link NonyuTsuchishoCVSKakukoNofushoSource}
+     * @return {@link NonyuTsuchishoCVSKakukoSource}
      */
     @Override
-    public NonyuTsuchishoCVSKakukoNofushoSource build() {
-        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoNofushoSource()).join(nofushoEditor).buildSource();
+    public NonyuTsuchishoCVSKakukoSource build() {
+        return ReportEditorJoiner.from(new NonyuTsuchishoCVSKakukoSource()).join(nofushoEditor).buildSource();
 
     }
 

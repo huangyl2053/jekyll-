@@ -73,20 +73,32 @@ public class ShoKaishuKirokuKanriHandler {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
                     dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
-                    dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
+                    if (jigyoshaInput.get交付年月日() != null && jigyoshaInput.get交付年月日().isValid()) {
+                        dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
+                    } else {
+                        dgJigyoshaItiran.setKoufuDate(RString.EMPTY);
+                    }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
                         dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0002), new Code(jigyoshaInput.get交付事由())));
                     } else {
                         dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0004), new Code(jigyoshaInput.get交付事由())));
                     }
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
-                    dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
+                    if (jigyoshaInput.get回収年月日() != null && jigyoshaInput.get回収年月日().isValid()) {
+                        dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
+                    } else {
+                        dgJigyoshaItiran.setKaishuDate(RString.EMPTY);
+                    }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
                         dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0003), new Code(jigyoshaInput.get回収事由())));
                     } else {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get交付事由())));
                     }
-                    dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
+                    if (jigyoshaInput.get有効期限() != null && jigyoshaInput.get有効期限().isValid()) {
+                        dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
+                    } else {
+                        dgJigyoshaItiran.setYukoKigen(RString.EMPTY);
+                    }
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
@@ -108,7 +120,11 @@ public class ShoKaishuKirokuKanriHandler {
                 for (ShoKofuKaishu jigyoshaInput : businessList) {
                     dgKoufuKaishu_Row dgJigyoshaItiran = new dgKoufuKaishu_Row();
                     dgJigyoshaItiran.setKoufuType(CodeMaster.getCodeMeisho(new CodeShubetsu(CODESHUBETSU_0006), new Code(jigyoshaInput.get交付証種類())));
-                    dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
+                    if (jigyoshaInput.get交付年月日() != null && jigyoshaInput.get交付年月日().isValid()) {
+                        dgJigyoshaItiran.setKoufuDate(jigyoshaInput.get交付年月日().wareki().toDateString());
+                    } else {
+                        dgJigyoshaItiran.setKoufuDate(RString.EMPTY);
+                    }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
                         dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0002), new Code(jigyoshaInput.get交付事由())));
                     } else {
@@ -116,14 +132,22 @@ public class ShoKaishuKirokuKanriHandler {
                     }
                     dgJigyoshaItiran.setKoufuJiyuNo(jigyoshaInput.get交付事由());
                     dgJigyoshaItiran.setKofuRiyu(jigyoshaInput.get交付理由());
-                    dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
+                    if (jigyoshaInput.get回収年月日() != null && jigyoshaInput.get回収年月日().isValid()) {
+                        dgJigyoshaItiran.setKaishuDate((jigyoshaInput.get回収年月日().wareki().toDateString()));
+                    } else {
+                        dgJigyoshaItiran.setKaishuDate(RString.EMPTY);
+                    }
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
                         dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0003), new Code(jigyoshaInput.get回収事由())));
                     } else {
-                        dgJigyoshaItiran.setKoufuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get交付事由())));
                     }
                     dgJigyoshaItiran.setKaishuJiyuNo(jigyoshaInput.get回収事由());
-                    dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
+                    if (jigyoshaInput.get有効期限() != null && jigyoshaInput.get有効期限().isValid()) {
+                        dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
+                    } else {
+                        dgJigyoshaItiran.setYukoKigen(RString.EMPTY);
+                    }
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgJigyoshaItiran.setRirekiNo(new RString(jigyoshaInput.get履歴番号()));
                     dgJigyoshaItiran.setKoufuTypeNo(jigyoshaInput.get交付証種類());
@@ -150,7 +174,7 @@ public class ShoKaishuKirokuKanriHandler {
         List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(codeShubetsu);
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (UzT0007CodeEntity codeValueObject : codeValueList) {
-            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
+            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード略称()));
         }
         return dataSourceList;
     }

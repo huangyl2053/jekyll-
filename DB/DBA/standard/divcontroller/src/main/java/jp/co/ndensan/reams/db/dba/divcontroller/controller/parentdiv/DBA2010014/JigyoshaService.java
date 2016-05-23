@@ -151,18 +151,6 @@ public class JigyoshaService {
     }
 
     /**
-     * 登録保険者入力ガイドボタンを押します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<JigyoshaServiceDiv>
-     */
-    public ResponseData<JigyoshaServiceDiv> onClick_BtnHokenshaInputGuide(JigyoshaServiceDiv div) {
-        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaNo().setValue(div.getHokenshaNo());
-        div.getJigyoshaServiceKihon().getTxtTorokuHokenshaName().setValue(div.getHokenshaMeisho());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 基本情報を表示します。
      *
      * @param div 画面情報
@@ -190,7 +178,14 @@ public class JigyoshaService {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && click_hai(div)) {
             RealInitialLocker.release(前排他ロックキー);
-            return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).respond();
+            RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
+            if (状態_追加.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_追加);
+            } else if (状態_修正.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_修正);
+            } else if (状態_削除.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_削除);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -211,7 +206,14 @@ public class JigyoshaService {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(前排他ロックキー);
-            return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).respond();
+            RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
+            if (状態_追加.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_追加);
+            } else if (状態_修正.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_修正);
+            } else if (状態_削除.equals(画面状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_削除);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -260,7 +262,7 @@ public class JigyoshaService {
         }
         KaigoJogaiTokureiParameter サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
                 ViewStateHolder.get(ViewStateKeys.サービス登録_事業者番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.サービス登録_有効開始日, FlexibleDate.class), 
+                ViewStateHolder.get(ViewStateKeys.サービス登録_有効開始日, FlexibleDate.class),
                 FlexibleDate.EMPTY, RDate.getNowDate().getYearMonth());
         List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = getService().getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
         List<ServiceJohoBusiness> businessList = new ArrayList<>();

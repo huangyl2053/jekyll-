@@ -112,7 +112,6 @@ public class ServiceKeikakuHiPanelHandler {
      * @param 申請日 RDate
      * @param 事業者番号 JigyoshaNo
      * @param 明細番号 RString
-     * @param 証明書 RString
      * @param 様式番号 RString
      */
     public void set申請共通エリア(
@@ -120,13 +119,12 @@ public class ServiceKeikakuHiPanelHandler {
             RDate 申請日,
             JigyoshaNo 事業者番号,
             RString 明細番号,
-            RString 証明書,
             RString 様式番号) {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(申請日);
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisayiBango().setValue(明細番号);
-        div.getPanelHead().getTxtShomeisho().setValue(証明書);
+        div.getPanelHead().getTxtShomeisho().setValue(様式番号);
     }
 
     /**
@@ -328,6 +326,9 @@ public class ServiceKeikakuHiPanelHandler {
         int flag = 0;
         ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
                 ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
+        if (entity200604 == null) {
+            return true;
+        }
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
         RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();
@@ -365,6 +366,9 @@ public class ServiceKeikakuHiPanelHandler {
         int flag = 0;
         ShokanServicePlan200004Result entity200004 = ViewStateHolder.get(
                 ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
+        if (entity200004 == null) {
+            return true;
+        }
         RString 指定_基準該当事業者区分コード = div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().getSelectedKey();
         RDate 届出日 = div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().getValue();
         RString 審査方法区分コード = div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().getSelectedKey();

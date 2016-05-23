@@ -26,11 +26,16 @@ import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoPrope
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoRyoumenProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoRyoumenReport;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -64,16 +69,66 @@ public class NinteiChosaIraiPrintService {
      * @param 要介護認定調査依頼書List 要介護認定調査依頼書List
      */
     public void print要介護認定調査依頼書(List<ChosaIraishoHeadItem> 要介護認定調査依頼書List) {
-        List<ChosaIraishoReport> list = new ArrayList<>();
-        if (!要介護認定調査依頼書List.isEmpty()) {
-            list.add(ChosaIraishoReport.createFrom(要介護認定調査依頼書List));
-        }
         ChosaIraishoProperty property = new ChosaIraishoProperty();
         try (ReportAssembler<ChosaIraishoReportSource> assembler = createAssembler(property, reportManager)) {
-            for (ChosaIraishoReport report : list) {
-                ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                report.writeBy(reportSourceWriter);
+            ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(),
+                    FlexibleDate.getNowDate(), reportSourceWriter);
+            List<ChosaIraishoHeadItem> 要介護認定調査依頼書 = new ArrayList<>();
+            for (ChosaIraishoHeadItem item : 要介護認定調査依頼書List) {
+                item = new ChosaIraishoHeadItem(
+                        ninshoshaSource.hakkoYMD,
+                        ninshoshaSource.denshiKoin,
+                        ninshoshaSource.ninshoshaYakushokuMei,
+                        ninshoshaSource.ninshoshaYakushokuMei2,
+                        ninshoshaSource.ninshoshaYakushokuMei1,
+                        ninshoshaSource.koinMojiretsu,
+                        ninshoshaSource.ninshoshaShimeiKakeru,
+                        ninshoshaSource.ninshoshaShimeiKakenai,
+                        ninshoshaSource.koinShoryaku,
+                        item.getBunshoNo(),
+                        item.getYubinNo1(),
+                        item.getJushoText(),
+                        item.getKikanNameText(),
+                        item.getShimeiText(),
+                        item.getMeishoFuyo(),
+                        item.getCustomerBarCode(),
+                        item.getSonota(),
+                        item.getAtenaRenban(),
+                        item.getTitle(),
+                        item.getTsuchibun1(),
+                        item.getHihokenshaNo1(),
+                        item.getHihokenshaNo2(),
+                        item.getHihokenshaNo3(),
+                        item.getHihokenshaNo4(),
+                        item.getHihokenshaNo5(),
+                        item.getHihokenshaNo6(),
+                        item.getHihokenshaNo7(),
+                        item.getHihokenshaNo8(),
+                        item.getHihokenshaNo9(),
+                        item.getHihokenshaNo10(),
+                        item.getHihokenshaNameKana(),
+                        item.getBirthGengoMeiji(),
+                        item.getBirthGengoTaisho(),
+                        item.getBirthGengoShowa(),
+                        item.getBirthYMD(),
+                        item.getHihokenshaName(),
+                        item.getSeibetsuMan(),
+                        item.getSeibetsuWoman(),
+                        item.getYubinNo(),
+                        item.getJusho(),
+                        item.getTelNo(),
+                        item.getHomonChosasakiYubinNo(),
+                        item.getHomonChosasakiJusho(),
+                        item.getHomonChosasakiJushoName(),
+                        item.getHomonChosasakiTelNo(),
+                        item.getShinseiYMD(),
+                        item.getTeishutsuKigen(),
+                        item.getTsuchibun2());
+                要介護認定調査依頼書.add(item);
             }
+            ChosaIraishoReport report = ChosaIraishoReport.createFrom(要介護認定調査依頼書);
+            report.writeBy(reportSourceWriter);
         }
     }
 

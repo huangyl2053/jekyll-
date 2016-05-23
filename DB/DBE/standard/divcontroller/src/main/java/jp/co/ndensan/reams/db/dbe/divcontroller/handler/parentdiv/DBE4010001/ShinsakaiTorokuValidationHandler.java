@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -48,7 +48,7 @@ public class ShinsakaiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 存在チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.存在チェック));
         }
         return validPairs;
@@ -76,10 +76,10 @@ public class ShinsakaiTorokuValidationHandler {
     public ValidationMessageControlPairs 割付可能チェック(ValidationMessageControlPairs validPairs) {
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
-            if (データ.getShinsakaiwaritukeDay().getValue() == null) {
-                continue;
+            if (データ.getShinsakaiwaritukeDay().getValue() != null) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.割付可能チェック));
+                break;
             }
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.割付可能チェック));
         }
         return validPairs;
     }
@@ -93,10 +93,10 @@ public class ShinsakaiTorokuValidationHandler {
     public ValidationMessageControlPairs 完了処理事前チェック(ValidationMessageControlPairs validPairs) {
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
-            if (データ.getShinsakaiwaritukeDay().getValue() != null) {
-                continue;
+            if (データ.getShinsakaiwaritukeDay().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.完了処理事前チェック));
+                break;
             }
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.完了処理事前チェック));
         }
         return validPairs;
     }
@@ -110,10 +110,10 @@ public class ShinsakaiTorokuValidationHandler {
     public ValidationMessageControlPairs 完了済みデータチェック(ValidationMessageControlPairs validPairs) {
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
-            if (データ.getShinsakaiKanryoDay().getValue() == null) {
-                continue;
+            if (データ.getShinsakaiKanryoDay().getValue() != null) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.完了済みデータチェック));
+                break;
             }
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.完了済みデータチェック));
         }
         return validPairs;
     }
@@ -127,13 +127,13 @@ public class ShinsakaiTorokuValidationHandler {
     public ValidationMessageControlPairs マスキング完了チェック(ValidationMessageControlPairs validPairs) {
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         RDate 適用基準日 = RDate.getNowDate();
-        RString カスタム = DbBusinessConifg.get(ConfigNameDBE.マスキングチェックタイミング, 適用基準日, SubGyomuCode.DBE認定支援);
+        RString カスタム = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, 適用基準日, SubGyomuCode.DBE認定支援);
         if (介護認定審査会割当後.equals(カスタム)) {
             for (dgNinteiTaskList_Row データ : 選択データ) {
-                if (データ.getMaskingKanryoDay().getValue() != null) {
-                    continue;
+                if (データ.getMaskingKanryoDay().getValue() == null) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.マスキング完了チェック));
+                    break;
                 }
-                validPairs.add(new ValidationMessageControlPair(RRVMessages.マスキング完了チェック));
             }
         }
         return validPairs;

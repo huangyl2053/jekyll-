@@ -68,7 +68,7 @@ public class ShotokuJohoTorokuTotal {
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onDoubleClick_dgSetaiShotoku(ShotokuJohoTorokuTotalDiv div) {
         getHandler(div).sync世帯一覧To内容登録();
-        return ResponseData.of(div).setState(DBB1140011StateName.所得登録);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -83,7 +83,7 @@ public class ShotokuJohoTorokuTotal {
             return ResponseData.of(div).addValidationMessages(messages).respond();
         }
         getHandler(div).to世帯所得情報行();
-        return ResponseData.of(div).setState(DBB1140011StateName.初期状態);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -93,7 +93,9 @@ public class ShotokuJohoTorokuTotal {
      * @return 所得照会回答内容登録Divを持つResponseData
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnTorikeshi(ShotokuJohoTorokuTotalDiv div) {
-        return ResponseData.of(div).setState(DBB1140011StateName.初期状態);
+        div.getSetaiShotokuInfo().setDisplayNone(false);
+        div.getShotokuJohoToroku().setDisplayNone(true);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -105,12 +107,13 @@ public class ShotokuJohoTorokuTotal {
     public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_chkSetaiIchiranAll(ShotokuJohoTorokuTotalDiv div) {
         FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
         ShikibetsuCode 識別コード = viewStateData.get識別コード();
-        FlexibleYear 所得年度 = viewStateData.get賦課年度();
+        RString 所得Year = div.getDdlSetaiIchiranKazeiNendo().getSelectedValue();
+        FlexibleYear 所得年度 = new FlexibleYear(new RDate(所得Year.toString()).getYear().toString());
         YMDHMS 所得基準日時 = YMDHMS.now();
         if (div.getSetaiShotokuInfo().getChkSetaiIchiranAll().isAllSelected()) {
-            getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
-        } else {
             getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, false);
+        } else {
+            getHandler(div).load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         }
         return ResponseData.of(div).respond();
     }

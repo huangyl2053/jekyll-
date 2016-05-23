@@ -68,10 +68,9 @@ public enum ShotokuJohoTorokuSpec implements IPredicate<ShotokuJohoTorokuTotalDi
 
     private static class SpecHelper {
 
-        private static final RString 激変緩和措置区分_対象者 = new RString("対象");
-        private static final RString 激変緩和措置区分_なし = new RString("対象外");
+        private static final RString 激変緩和措置区分_対象者 = new RString("対象者");
+        private static final RString 激変緩和措置区分_なし = new RString("なし");
         private static final RString 住民税非課税区分_課税 = new RString("課税");
-        private static final RString 住民税非課税区分_課税以外 = new RString("課税以外");
         private static final Decimal 金額_125万 = new Decimal(1250000);
         private static final FlexibleDate 分割生年月日 = new FlexibleDate("19400102");
 
@@ -83,7 +82,7 @@ public enum ShotokuJohoTorokuSpec implements IPredicate<ShotokuJohoTorokuTotalDi
          */
         public static boolean check住民税非課税区分(ShotokuJohoTorokuTotalDiv div) {
             return !(div.getShotokuJohoToroku().getDdlGekihenKanwa().getSelectedValue().equals(激変緩和措置区分_対象者)
-                    && div.getShotokuJohoToroku().getDdlJuminzei().getSelectedValue().equals(住民税非課税区分_課税以外));
+                    && !div.getShotokuJohoToroku().getDdlJuminzei().getSelectedValue().equals(住民税非課税区分_課税));
         }
 
         /**

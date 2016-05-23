@@ -259,7 +259,7 @@
      "layoutName": "DBU0020071",
      "layoutTitle": "様式２件数、単位数補正、費用額、給付費補正",
      "eventName": "補正発行検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0020011",

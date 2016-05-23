@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 主治医意見書作成依頼のHandlerクラスです。
@@ -67,7 +66,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
                 div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード(),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
-        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
+        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告).toString()));
     }
 
@@ -78,7 +77,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
      */
     public void init(List<Shujiiikenshosakuseiirai> 申請者情報一覧) {
         set申請者一覧(申請者情報一覧);
-        if (主治医意見書作成期限設定方法_2.equals(BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, SubGyomuCode.DBE認定支援))) {
+        if (主治医意見書作成期限設定方法_2.equals(
+                DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             div.getRadkigen().setDisabled(true);
             div.getTxtkigenymd().setDisabled(true);
         } else {

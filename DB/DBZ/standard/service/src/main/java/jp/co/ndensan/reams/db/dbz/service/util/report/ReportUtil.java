@@ -190,7 +190,7 @@ public final class ReportUtil {
      * @param subGyomuCode サブ業務コード
      * @param reportId 帳票分類ID
      * @param kaisiYMD 開始年月日
-     * @param ninshoshaDenshikoinshubetsuCode 認証者電子公印種別コード
+     * @param denshikoinshubetsuCode 認証者電子公印種別コード
      * @param kenmeiFuyoKubunType 県郡名付与区分
      * @param reportSourceWriter ReportSourceWriter
      * @return 認証者情報
@@ -198,13 +198,13 @@ public final class ReportUtil {
     public static NinshoshaSource get認証者情報(SubGyomuCode subGyomuCode,
             ReportId reportId,
             FlexibleDate kaisiYMD,
-            RString ninshoshaDenshikoinshubetsuCode,
+            RString denshikoinshubetsuCode,
             KenmeiFuyoKubunType kenmeiFuyoKubunType,
             ReportSourceWriter reportSourceWriter) {
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(subGyomuCode, reportId);
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, ninshoshaDenshikoinshubetsuCode, kaisiYMD);
+        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, denshikoinshubetsuCode, kaisiYMD);
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         boolean is公印に掛ける = false;
         boolean is公印を省略 = false;

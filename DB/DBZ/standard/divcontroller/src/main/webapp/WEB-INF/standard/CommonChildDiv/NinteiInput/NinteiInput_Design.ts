@@ -16,6 +16,10 @@ module DBZ {
                 return "onClick_btnYokaigodoGuide";
             }
 
+            public static onClick_lostFocus(): string {
+                return "onClick_lostFocus";
+            }
+
             public static onClick_btnSixMonthLater(): string {
                 return "onClick_btnSixMonthLater";
             }

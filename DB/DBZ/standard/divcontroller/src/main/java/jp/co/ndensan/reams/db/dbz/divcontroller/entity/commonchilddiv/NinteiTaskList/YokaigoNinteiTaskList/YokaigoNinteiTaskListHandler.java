@@ -314,6 +314,7 @@ public class YokaigoNinteiTaskListHandler {
             if (business.get更新通知発行年月日() != null && !business.get更新通知発行年月日().isEmpty()) {
                 row.getKoshinTsuchiYMD().setValue(new RDate(business.get更新通知発行年月日().toString()));
             }
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(更新対象List.size())));
@@ -354,6 +355,7 @@ public class YokaigoNinteiTaskListHandler {
             if (business.get調査票等出力年月日() != null && !business.get調査票等出力年月日().isEmpty()) {
                 row.getChosaIraiDataShutsuryokuDay().setValue(new RDate(business.get調査票等出力年月日().toString()));
             }
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
 
             rowList.add(row);
@@ -425,6 +427,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
                     : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             調査依頼モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -506,6 +509,7 @@ public class YokaigoNinteiTaskListHandler {
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             row.setNyushoShisetsuCode(business.get入所施設コード() == null ? RString.EMPTY : business.get入所施設コード().value());
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             意見書依頼モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -581,6 +585,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setNinteiChosainCode(business.get調査員コード() == null
                     ? RString.EMPTY : business.get調査員コード().value());
             row.setChikuCode(business.get地区コード() == null ? RString.EMPTY : business.get地区コード());
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             調査入手モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -701,6 +706,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setIchijiHanteiKekka(一次判定結果の名称を取得する(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()));
             row.setIchijiHanteiWarningCode(business.get要介護認定一次判定警告コード() == null
                     ? RString.EMPTY : IchijiHanteiKeikoku.toValue(business.get要介護認定一次判定警告コード()).get名称());
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             一次判定モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -753,6 +759,7 @@ public class YokaigoNinteiTaskListHandler {
                 completeCount++;
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             マスキングモードの日付設定(row, business);
             rowList.add(row);
         }
@@ -811,6 +818,7 @@ public class YokaigoNinteiTaskListHandler {
                     : ShinsakaiYusenWaritsukeKubunCode.toValue(business.get介護認定審査会優先振分区分コード().getKey()).get名称());
             row.setKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY : business.get介護認定審査会開催番号());
             row.setGogitai(new RString(String.valueOf(business.get合議体番号())));
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             審査会登録モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -821,7 +829,7 @@ public class YokaigoNinteiTaskListHandler {
 
     private void 審査会登録モードの日付設定(dgNinteiTaskList_Row row, ShinSaKaiToRoKuBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
-            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
+            row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
         if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
@@ -830,14 +838,17 @@ public class YokaigoNinteiTaskListHandler {
             row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
         }
         if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
-            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
+            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
         }
         if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
-            row.getShinsakaiKaisaiDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
+            row.getShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催予定年月日().toString()));
         }
         if (business.get介護認定審査会開始予定時刻() != null && !business.get介護認定審査会開始予定時刻().isEmpty()) {
             row.getShinsakaiKaisaiJikan().setValue(RTime.of(Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(0, 2).toString()),
                     Integer.valueOf(business.get介護認定審査会開始予定時刻().substring(2).toString())));
+        }
+        if (business.get認定調査完了年月日() != null && !business.get認定調査完了年月日().isEmpty()) {
+            row.getChosahyoKanryoDay().setValue(new RDate(business.get認定調査完了年月日().toString()));
         }
     }
     private void 二次判定モード(List<NiJiHanTeiBusiness> 二次判定List) {
@@ -887,6 +898,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setNijiHanteiYokaigoJotaiKubunCode(business.get二次判定要介護状態区分コード() == null
                     ? RString.EMPTY : business.get二次判定要介護状態区分コード().value());
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(二次判定List.size())));
@@ -923,6 +935,7 @@ public class YokaigoNinteiTaskListHandler {
             if (business.getＩＦ送付年月日() != null && !business.getＩＦ送付年月日().isEmpty()) {
                 row.getCenterSoshinDay().setValue(new RDate(business.getＩＦ送付年月日().toString()));
             }
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(月例処理List.size())));

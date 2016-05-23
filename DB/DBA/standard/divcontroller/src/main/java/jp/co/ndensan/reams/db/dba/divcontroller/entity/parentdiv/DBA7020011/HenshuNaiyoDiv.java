@@ -53,6 +53,8 @@ public class HenshuNaiyoDiv extends Panel {
     private RString 枝番;
     @JsonProperty("入所日")
     private RString 入所日;
+    @JsonProperty("措置保険者番号")
+    private RString 措置保険者番号;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -283,6 +285,24 @@ public class HenshuNaiyoDiv extends Panel {
     @JsonProperty("入所日")
     public void set入所日(RString 入所日) {
         this.入所日 = 入所日;
+    }
+
+    /*
+     * get措置保険者番号
+     * @return 措置保険者番号
+     */
+    @JsonProperty("措置保険者番号")
+    public RString get措置保険者番号() {
+        return 措置保険者番号;
+    }
+
+    /*
+     * set措置保険者番号
+     * @param 措置保険者番号 措置保険者番号
+     */
+    @JsonProperty("措置保険者番号")
+    public void set措置保険者番号(RString 措置保険者番号) {
+        this.措置保険者番号 = 措置保険者番号;
     }
 
     // </editor-fold>

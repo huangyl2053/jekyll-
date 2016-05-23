@@ -24,6 +24,10 @@
             <artifactId>DbdPersistence</artifactId>
         </dependency>
         <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
         <!-- DBZ -->
         <!-- 公開系 -->
         <!-- テスト -->

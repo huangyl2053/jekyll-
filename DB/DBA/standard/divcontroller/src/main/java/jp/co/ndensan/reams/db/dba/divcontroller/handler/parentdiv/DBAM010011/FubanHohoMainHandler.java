@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.Hih
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.HihokenshaNoFubanHoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.FubanHohoMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,26 +80,30 @@ public class FubanHohoMainHandler {
         dataSource.add(motoJohoData2);
         dataSource.add(motoJohoData3);
         div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().setDataSource(dataSource);
-        div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().setSelectedKey(BusinessConfig.get(
-                ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格));
-        div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().setSelectedKey(BusinessConfig.get(
-                ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, SubGyomuCode.DBA介護資格));
-        RString 開始位置 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, SubGyomuCode.DBA介護資格);
+        div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().setSelectedKey(DbBusinessConfig.get(
+                ConfigNameDBA.被保険者番号付番方法_付番方法, RDate.getNowDate(), SubGyomuCode.DBA介護資格, LasdecCode.EMPTY, RString.EMPTY));
+        div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().setSelectedKey(DbBusinessConfig.get(
+                ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
+        RString 開始位置 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, RDate.getNowDate(),
+                SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getFubanMotoJoho().getTxtKaishiKetaIchi().setValue(RString.isNullOrEmpty(開始位置)
                 ? Decimal.ZERO : new Decimal(開始位置.toString()));
-        RString 有効桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, SubGyomuCode.DBA介護資格);
+        RString 有効桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数, RDate.getNowDate(),
+                SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().setValue(RString.isNullOrEmpty(有効桁数)
                 ? Decimal.ZERO : new Decimal(有効桁数.toString()));
-        RString 前付加桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数, SubGyomuCode.DBA介護資格);
+        RString 前付加桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数, RDate.getNowDate(),
+                SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().setValue(RString.isNullOrEmpty(前付加桁数)
                 ? Decimal.ZERO : new Decimal(前付加桁数.toString()));
-        div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().setValue(BusinessConfig.get(
-                ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, SubGyomuCode.DBA介護資格));
-        RString 後付加桁数 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, SubGyomuCode.DBA介護資格);
+        div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().setValue(DbBusinessConfig.get(
+                ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
+        RString 後付加桁数 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数, RDate.getNowDate(),
+                SubGyomuCode.DBA介護資格);
         div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().setValue(RString.isNullOrEmpty(後付加桁数)
                 ? Decimal.ZERO : new Decimal(後付加桁数.toString()));
-        div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().setValue(BusinessConfig.get(
-                ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, SubGyomuCode.DBA介護資格));
+        div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().setValue(DbBusinessConfig.get(
+                ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
     }
 
     /**

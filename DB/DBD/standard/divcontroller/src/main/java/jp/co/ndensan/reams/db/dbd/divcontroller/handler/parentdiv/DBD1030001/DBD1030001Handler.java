@@ -1438,7 +1438,7 @@ public class DBD1030001Handler {
      */
     public void onBlur_txtTekiyoYMD() {
         FlexibleDate 適用日 = div.getTxtTekiyoYMD().getValue();
-        if (null == 適用日 || 適用日.isEmpty()) {
+        if (null == 適用日 || !適用日.isValid() || 適用日.isEmpty()) {
             return;
         }
         FlexibleDate 有効期限 = ShakaiFukushiHojinKeigenService.createIntance().estimate有効期限(適用日);

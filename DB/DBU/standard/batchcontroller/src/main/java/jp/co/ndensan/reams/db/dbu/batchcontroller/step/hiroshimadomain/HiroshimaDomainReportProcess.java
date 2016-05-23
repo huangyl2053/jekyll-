@@ -17,10 +17,10 @@ import jp.co.ndensan.reams.db.dbu.business.core.koikinaitenkyoresultlist.Koikina
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hiroshimadomain.HiroshimaDomainProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.hiroshimadomain.HiroshimaDomainEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hiroshimadomain.HiroshimaDomainRelateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoCSVDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
-import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoListEntity;
-import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoResultEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kouikitenkyoresultlist.KoikinaiTenkyoCSVDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kouikitenkyoresultlist.KoikinaiTenkyoListEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kouikitenkyoresultlist.KoikinaiTenkyoResultEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;

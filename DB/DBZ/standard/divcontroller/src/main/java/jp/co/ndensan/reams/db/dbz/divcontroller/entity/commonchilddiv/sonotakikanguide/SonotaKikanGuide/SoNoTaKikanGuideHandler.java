@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakik
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuide;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -20,11 +22,10 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * SoNoTaKikanGuideHandler のクラスファイル。
- * 
+ *
  * @reamsid_L DBE-3000-050 wangkun
  */
 public class SoNoTaKikanGuideHandler {
@@ -52,43 +53,42 @@ public class SoNoTaKikanGuideHandler {
         div.getTxtSonotaKikanName().clearValue();
         div.getRadHaisi().setSelectedKey(含まない);
         set調査委託先区();
-        div.getTxtMaxDisp().setValue(new Decimal(BusinessConfig
-                .getConfigInfo(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).getConfigValue().toString()));
+        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getSelectIchiran().setIsOpen(false);
         div.getKensakuJoken().setIsOpen(true);
     }
 
     /**
      * その他機関選択ガイド一覧データを作成処理します。
+     *
      * @param businessList その他機関情報のビジネスリスト
      */
     public void set一覧データ(List<SoNoTaKikanGuide> businessList) {
         List<dgSonotaKikanIchiran_Row> rowList = new ArrayList();
         for (SoNoTaKikanGuide business : businessList) {
             rowList.add(new dgSonotaKikanIchiran_Row(business.getその他機関コード(),
-                    business.get機関名称(), business.get住所(), business.get電話番号(), 
+                    business.get機関名称(), business.get住所(), business.get電話番号(),
                     ChosaItakuKubunCode.toValue(business.get調査委託区分()).get名称()));
         }
         div.getDgSonotaKikanIchiran().setDataSource(rowList);
     }
 
     /**
-     * その他機関コードFromとその他機関コードToの大小関係チェックです。
-     * 面.その他機関コードFromと画面.その他機関コードTo両方とも入力される場合、
-     * その他機関コードFrom >その他機関コードToの時、エラーとする。
+     * その他機関コードFromとその他機関コードToの大小関係チェックです。 面.その他機関コードFromと画面.その他機関コードTo両方とも入力される場合、 その他機関コードFrom >その他機関コードToの時、エラーとする。
      *
      * @return ValidationMessageControlPairs バリデーション結果
      */
     public ValidationMessageControlPairs 大小関係チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty() 
+        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty()
                 && !div.getTxtSonotaKikanCodeto().getValue().isEmpty()
                 && div.getTxtSonotaKikanCodefrom().getValue().compareTo(div.getTxtSonotaKikanCodeto().getValue()) > 0) {
-              validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.大小関係が不正, "その他機関コード")));
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.大小関係が不正, "その他機関コード")));
         }
         return validPairs;
     }
-    
+
     /**
      * その他機関一覧データグリッドが0件の場合、エラーとする。
      *
@@ -98,11 +98,11 @@ public class SoNoTaKikanGuideHandler {
     public ValidationMessageControlPairs その他機関一覧データなしチェック(List<SoNoTaKikanGuide> businessList) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (businessList.isEmpty()) {
-             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし)));
-         }
-       return validPairs;
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし)));
+        }
+        return validPairs;
     }
-    
+
     private void set調査委託先区() {
         List<KeyValueDataSource> dropDownList = new ArrayList();
         dropDownList.add(new KeyValueDataSource(ChosaItakuKubunCode.保険者_市町村等.getコード(), ChosaItakuKubunCode.保険者_市町村等.get名称()));
@@ -117,8 +117,9 @@ public class SoNoTaKikanGuideHandler {
         div.getDdlChosaItakusakiKubun().setDataSource(dropDownList);
         div.getDdlChosaItakusakiKubun().setSelectedKey(RString.EMPTY);
     }
-    
+
     private static class IdocheckMessages implements IValidationMessage {
+
         private final Message message;
 
         public IdocheckMessages(IMessageGettable message, String... replacements) {

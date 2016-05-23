@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-0980-550 zhangrui -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper">
+    <select id="selectbyKeyUndeleted" resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenInterfaceUpdateMybaticParameter" fetchSize="500">
+        select * from rgdb."DbT3104KokuhorenInterfaceKanri" As DbT3104 
+        where DbT3104."shoriYM" = #{shoriYM} and DbT3104."kokanShikibetsuNo" = #{kokanShikibetsuNo}
+    </select>
+    
+    <!--テーブルDbT3104KokuhorenInterfaceKanriの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity" autoMapping="true">
+        <id property="shoriYM" column="dbT3104KokuhorenInterfaceKanri_shoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="kokanShikibetsuNo" column="dbT3104KokuhorenInterfaceKanri_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3104KokuhorenInterfaceKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3104KokuhorenInterfaceKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3104KokuhorenInterfaceKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3104KokuhorenInterfaceKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3104KokuhorenInterfaceKanri_isDeleted" />
+        <result property="updateCount" column="dbT3104KokuhorenInterfaceKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3104KokuhorenInterfaceKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3104KokuhorenInterfaceKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuTorikomiKubun" column="dbT3104KokuhorenInterfaceKanri_sofuTorikomiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriJotaiKubun" column="dbT3104KokuhorenInterfaceKanri_shoriJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriJisshiTimestamp" column="dbT3104KokuhorenInterfaceKanri_shoriJisshiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="chushutsuKaishiTimestamp" column="dbT3104KokuhorenInterfaceKanri_chushutsuKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="chushutsuShuryoTimestamp" column="dbT3104KokuhorenInterfaceKanri_chushutsuShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="saiShoriKanoKubun" column="dbT3104KokuhorenInterfaceKanri_saiShoriKanoKubun" />
+        <result property="shoriJikkoKaisu" column="dbT3104KokuhorenInterfaceKanri_shoriJikkoKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fileName1" column="dbT3104KokuhorenInterfaceKanri_fileName1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName2" column="dbT3104KokuhorenInterfaceKanri_fileName2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName3" column="dbT3104KokuhorenInterfaceKanri_fileName3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName4" column="dbT3104KokuhorenInterfaceKanri_fileName4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName5" column="dbT3104KokuhorenInterfaceKanri_fileName5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileKensu1" column="dbT3104KokuhorenInterfaceKanri_fileKensu1" />
+        <result property="fileKensu2" column="dbT3104KokuhorenInterfaceKanri_fileKensu2" />
+        <result property="fileKensu3" column="dbT3104KokuhorenInterfaceKanri_fileKensu3" />
+        <result property="fileKensu4" column="dbT3104KokuhorenInterfaceKanri_fileKensu4" />
+        <result property="fileKensu5" column="dbT3104KokuhorenInterfaceKanri_fileKensu5" />
+        <result property="saiShoriFukaKubun" column="dbT3104KokuhorenInterfaceKanri_saiShoriFukaKubun" />
+        <result property="ctrlRecordKensu" column="dbT3104KokuhorenInterfaceKanri_ctrlRecordKensu" />
+        <result property="ctrlShoriYM" column="dbT3104KokuhorenInterfaceKanri_ctrlShoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kagoCtrlRecordKensu" column="dbT3104KokuhorenInterfaceKanri_kagoCtrlRecordKensu" />
+        <result property="kagoCtrlShoriYM" column="dbT3104KokuhorenInterfaceKanri_kagoCtrlShoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="jissekiDataShinsaYM" column="dbT3104KokuhorenInterfaceKanri_jissekiDataShinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 処理結果リスト一時TBLを作成します。 -->
+    <insert id="create処理結果リスト一時TBL">
+        CREATE TEMP TABLE "DbWT0002KokuhorenTorikomiError"
+        (
+        "errorKubunCode" varchar(20),
+        "shoHokanehshaNo" rgdb."DbUDD015ShoKisaiHokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "key1" varchar(20),
+        "key2" varchar(20),
+        "key3" varchar(20),
+        "key4" varchar(20),
+        "key5" varchar(20),
+        "hihokenshaKanaShimei" varchar(80),
+        "hihokenshaShimei" varchar(20),
+        "biko" varchar(20)
+        )
+    </insert>
+    
+    <!--処理結果リスト一時テーブルに登録します-->
+    <insert id="insert処理結果リスト一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity">
+        INSERT INTO "DbWT0002KokuhorenTorikomiError" 
+        VALUES 
+        (
+        #{エラー区分},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{キー1},
+        #{キー2},
+        #{キー3},
+        #{キー4},
+        #{キー5},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{備考})
+    </insert>
+    
+    <select id="select処理結果リスト一時TBL" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
+        SELECT *
+        FROM "DbWT0002KokuhorenTorikomiError"
+        ORDER BY "errorKubunCode" ASC,
+                 "shoHokanehshaNo" ASC,
+                 "hihokenshaNo" ASC,
+                 "key1" ASC,
+                 "key2" ASC,
+                 "key3" ASC,
+                 "key4" ASC,
+                 "key5" ASC
+    </select>
+    
+    <select id="select処理結果リストUNIQUE" resultMap="resultMap_ShoriKekkaList" fetchSize="500">
+        SELECT *
+        FROM "DbWT0002KokuhorenTorikomiError" as TEMP
+        where TEMP.errorKubunCode = #{errorKubunCode} 
+        and TEMP.shoHokanehshaNo = #{shoHokanehshaNo}
+        and TEMP.hihokenshaNo = #{hihokenshaNo}
+        and TEMP.key1 = #{key1}
+        and TEMP.key2 = #{key2}
+        and TEMP.key3 = #{key3}
+        and TEMP.key4 = #{key4}
+        and TEMP.key5 = #{key5}
+    </select>
+    
+    <resultMap id="resultMap_ShoriKekkaList" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity" autoMapping="true">
+        <result property="エラー区分" column="errorKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shoHokanehshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="キー1" column="key1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー2" column="key2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー3" column="key3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー4" column="key4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー5" column="key5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者カナ氏名" column="hihokenshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="hihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    
+</mapper>

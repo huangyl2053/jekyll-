@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -58,16 +56,6 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onLoad(ShokanbarayiKeteiInfoPanelDiv div) {
-        // TODO viewStateのデータ取得
-        ShoukanharaihishinseikensakuParameter par = new ShoukanharaihishinseikensakuParameter(
-                new HihokenshaNo("000000003"),
-                new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000003"),
-                new JigyoshaNo("0000000003"),
-                new RString("0003"),
-                new RString("0003"),
-                Decimal.TEN);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         ShoukanharaihishinseikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
@@ -75,11 +63,10 @@ public class ShokanbarayiKeteiInfoPanel {
         RString 整理番号 = paramter.getSeiriNp();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0003"),
-                new FlexibleYearMonth(new RString("200501")));
-        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
-        ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151129"));
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(paramter.getYoshikiNo(),
+                paramter.getServiceTeikyoYM());
+        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);

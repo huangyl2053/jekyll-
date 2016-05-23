@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.NyushoShisetsuBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokenshikakushasho.KaigoHokenShikakushashoDataBusiness;
@@ -20,8 +21,8 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.Hoken
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokenshikakushasho.ShienJigyoshaDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigohokenshikakushasho.IKaigoHokenShikakushashoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
@@ -35,13 +36,10 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -50,10 +48,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -138,7 +136,7 @@ public class KaigoHokenShikakushasho {
      */
     public KaigoHokenShikakushashoDataBusiness setKaigoHokenShikakushasho(ShikakushashoHakkoBusiness business) {
         KaigoHokenShikakushashoDataBusiness dataEntity = new KaigoHokenShikakushashoDataBusiness();
-        dataEntity.setYukoKigen(business.get有効期限());
+        dataEntity.setYukoKigen(dateFormat(business.get有効期限()));
         dataEntity.setHihokenshaNo(business.get被保番号());
         帳票制御共通Entity = dbT7065dac.selectByKey(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100003.getReportId());
         HihokenshaDateEntity hihokenshaDateEntity = getHihokenshajouhou(business.get識別コード());
@@ -150,13 +148,13 @@ public class KaigoHokenShikakushasho {
         dataEntity.setBirthGengoShowa(hihokenshaDateEntity.getBirthGengoShowa());
         dataEntity.setBirthYMD(hihokenshaDateEntity.getBirthYMD());
         dataEntity.setSeibetsu(hihokenshaDateEntity.getSeibetsu());
-        dataEntity.setKofuYMD(business.get交付日());
+        dataEntity.setKofuYMD(dateFormat(business.get交付日()));
         dataEntity.setYokaigoJotaiKubun(business.get介護状態());
-        dataEntity.setNinteiYMD(business.get認定日());
-        dataEntity.setYukoKaishiYMD(business.get有効期間の開始日付());
-        dataEntity.setYukoShuryoYMD(business.get有効期間の終了日付());
-        dataEntity.setKubunShikyuYukoKaishiYMD(business.get区分支給限度額の有効開始日付());
-        dataEntity.setKubunShikyuYukoShuryoYMD(business.get区分支給限度額の有効終了日付());
+        dataEntity.setNinteiYMD(dateFormat(business.get認定日()));
+        dataEntity.setYukoKaishiYMD(dateFormat(business.get有効期間の開始日付()));
+        dataEntity.setYukoShuryoYMD(dateFormat(business.get有効期間の終了日付()));
+        dataEntity.setKubunShikyuYukoKaishiYMD(dateFormat(business.get区分支給限度額の有効開始日付()));
+        dataEntity.setKubunShikyuYukoShuryoYMD(dateFormat(business.get区分支給限度額の有効終了日付()));
         dataEntity.setKizyunngaku(business.get区分支給限度額の基準額());
         dataEntity.setTaniShurui(単位種類);
         dataEntity.setTani(固定文字_単位);
@@ -197,6 +195,10 @@ public class KaigoHokenShikakushasho {
         dataEntity.setTodokedeYMD3Asutarisuku(getShienJigyoshajouhou(business).getTodokedeYMD3Asutarisuku());
         dataEntity.setTodokedeYMD3Masshosen(getShienJigyoshajouhou(business).getTodokedeYMD3Masshosen());
         dataEntity.setNyushoShisetsuShurui(RString.EMPTY);
+        for (NyushoShisetsuBusiness nyushoShisetsuBusiness : business.get介護保険施設等の情報()) {
+            nyushoShisetsuBusiness.setShisetsuNyushoYMD(dateFormat(nyushoShisetsuBusiness.getShisetsuNyushoYMD()));
+            nyushoShisetsuBusiness.setShisetsuTaishoYMD(dateFormat(nyushoShisetsuBusiness.getShisetsuTaishoYMD()));
+        }
         dataEntity.setNyushoShisetsuDataList(business.get介護保険施設等の情報());
         dataEntity.setShisetsuNyusho(RString.EMPTY);
         dataEntity.setShisetsuNyuin(RString.EMPTY);
@@ -244,8 +246,8 @@ public class KaigoHokenShikakushasho {
             } else if (管外区分.equals(kannaiKangai)) {
                 RStringBuilder jushoSb = new RStringBuilder();
                 jushoSb.append(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get住所().get住所());
-                jushoSb.append(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get住所().get番地());
-                jushoSb.append(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get住所().get方書());
+                jushoSb.append(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get住所().get番地().getBanchi().value());
+                jushoSb.append(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get住所().get方書().value());
                 entity.setJusho(jushoSb.toRString());
             }
             entity.setHihokenshaNameKana(ShikibetsuTaishoFactory.createKojin(shikibetsuTaishoentity).get名称().getKana().getColumnValue());
@@ -278,57 +280,65 @@ public class KaigoHokenShikakushasho {
             }
             if (編集方法_1.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
                 住所.append(kojin.get住所().get住所());
-                住所.append(kojin.get住所().get番地());
+                住所.append(kojin.get住所().get番地().getBanchi().value());
             } else if (編集方法_2.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
                 住所.append(kojin.get行政区画().getGyoseiku().get名称());
-                住所.append(kojin.get住所().get番地());
+                住所.append(kojin.get住所().get番地().getBanchi().value());
             } else if (編集方法_3.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
                 住所.append(kojin.get住所().get住所());
-                住所.append(kojin.get住所().get番地());
+                住所.append(kojin.get住所().get番地().getBanchi().value());
                 住所.append(左括弧);
                 住所.append(kojin.get行政区画().getGyoseiku().get名称());
                 住所.append(右括弧);
             } else if (編集方法_4.equals(帳票制御共通Entity.getJushoHenshuChoikiHenshuHoho())) {
-                住所.append(kojin.get住所().get番地());
+                住所.append(kojin.get住所().get番地().getBanchi().value());
             }
             if (帳票制御共通Entity.getJushoHenshuKatagakiHyojiUmu()) {
-                住所.append(kojin.get住所().get方書());
+                住所.append(kojin.get住所().get方書().value());
             }
         } else if (市町村共通.equals(帳票制御共通Entity.getJushoHenshuKubun())) {
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(association.get都道府県名());
             }
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(association.get郡名());
             }
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(association.get市町村名());
             }
             if (編集方法_1.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get住所().get住所());
-                住所.append(kojin.get住所().get番地());
+                住所.append(kojin.get住所().get番地().getBanchi().value());
             } else if (編集方法_2.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get行政区画().getGyoseiku().get名称());
-                住所.append(kojin.get住所().get番地());
+                住所.append(kojin.get住所().get番地().getBanchi().value());
             } else if (編集方法_3.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
                 住所.append(kojin.get住所().get住所());
-                住所.append(kojin.get住所().get番地());
+                住所.append(kojin.get住所().get番地().getBanchi().value());
                 住所.append(左括弧);
                 住所.append(kojin.get行政区画().getGyoseiku().get名称());
                 住所.append(右括弧);
             } else if (編集方法_4.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                住所.append(kojin.get住所().get番地());
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+                住所.append(kojin.get住所().get番地().getBanchi().value());
             }
             if (表示する.equals(
-                    BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))) {
-                住所.append(kojin.get住所().get方書());
+                    DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
+                            RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
+                住所.append(kojin.get住所().get方書().value());
             }
         }
         return 住所.toRString();
@@ -356,7 +366,8 @@ public class KaigoHokenShikakushasho {
     }
 
     private RString set生年月日_外国人(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
+        RString 外国人表示制御_生年月日表示方法 = DbBusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
@@ -377,17 +388,14 @@ public class KaigoHokenShikakushasho {
         RString date = birthYMD.substring(0, INDEX_2);
         birthYMD = birthYMD.substring(INDEX_2);
         if (年号_明治.equals(date)) {
-            entity.setBirthGengoMeiji(年号_明治);
             entity.setBirthGengoTaisho(ダブルアスタリスク);
             entity.setBirthGengoShowa(ダブルアスタリスク);
         } else if (年号_大正.equals(date)) {
             entity.setBirthGengoMeiji(ダブルアスタリスク);
-            entity.setBirthGengoTaisho(年号_大正);
             entity.setBirthGengoShowa(ダブルアスタリスク);
         } else if (年号_昭和.equals(date)) {
             entity.setBirthGengoMeiji(ダブルアスタリスク);
             entity.setBirthGengoTaisho(ダブルアスタリスク);
-            entity.setBirthGengoShowa(年号_昭和);
         } else {
             entity.setBirthGengoMeiji(ダブルアスタリスク);
             entity.setBirthGengoTaisho(ダブルアスタリスク);
@@ -475,23 +483,14 @@ public class KaigoHokenShikakushasho {
     private HokenshaBangoMeishoInDataEntity getHokenshaBangoMeishoInjouhou(RString hihokenshaNo) {
         HokenshaBangoMeishoInDataEntity entity = new HokenshaBangoMeishoInDataEntity();
         entity.setHokenshaNo(hihokenshaNo);
-        entity.setHokenshaJusho(BusinessConfig.get(ConfigNameDBU.保険者情報_住所, SubGyomuCode.DBU介護統計報告));
-        entity.setHokenshaName(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
-        entity.setHokenshaTelno(BusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, SubGyomuCode.DBU介護統計報告));
-        RString 認証者電子公印種別コード;
-        if (帳票制御共通Entity.getDenshiKoinInjiUmu()) {
-            認証者電子公印種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
-        } else {
-            認証者電子公印種別コード = NinshoshaDenshikoinshubetsuCode.印の字.getコード();
-        }
-        INinshoshaSourceBuilderCreator builderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-        INinshoshaSourceBuilder builder = builderCreator.create(
-                GyomuCode.DB介護保険,
-                認証者電子公印種別コード,
-                null,
-                null);
-        entity.setDenshiKoin(builder.buildSource().denshiKoin);
+        entity.setHokenshaJusho(DbBusinessConfig.get(ConfigNameDBU.保険者情報_住所, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        entity.setHokenshaName(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        entity.setHokenshaTelno(DbBusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         return entity;
     }
 
+    private RString dateFormat(RString date) {
+        return RString.isNullOrEmpty(date) ? RString.EMPTY : new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
 }

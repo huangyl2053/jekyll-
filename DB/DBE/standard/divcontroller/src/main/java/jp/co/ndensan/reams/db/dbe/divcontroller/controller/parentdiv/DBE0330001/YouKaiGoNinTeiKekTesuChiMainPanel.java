@@ -18,22 +18,24 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 要介護認定結果通知（主治医）Divを制御クラスです。
  *
+ * @reamsid_L DBE-0220-010 wangkun
  */
 public class YouKaiGoNinTeiKekTesuChiMainPanel {
 
@@ -52,7 +54,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         LasdecCode lasdecCode = 市町村セキュリティ情報.get市町村情報().get市町村コード();
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(lasdecCode, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
-        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
 
         div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         div.getCcdShujiiIryokikanAndShujiiInput().setDisabled(false);
@@ -74,7 +76,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         LasdecCode lasdecCode = 市町村セキュリティ情報.get市町村情報().get市町村コード();
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(lasdecCode, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getRadKekkaTsuchiOutputTaisho().setSelectedKey(希望のみ);
-        RString 最大表示件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
+        RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         return ResponseData.of(div).respond();
     }

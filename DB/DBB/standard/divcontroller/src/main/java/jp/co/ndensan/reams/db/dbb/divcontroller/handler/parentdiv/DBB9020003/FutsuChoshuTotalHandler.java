@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKub
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
@@ -125,7 +125,7 @@ public final class FutsuChoshuTotalHandler {
      * 調定年度DDLの設定
      */
     public void set調定年度DDL() {
-        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConifg.get(
+        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課));
         RString 新年度管理情報;
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
@@ -208,7 +208,7 @@ public final class FutsuChoshuTotalHandler {
      */
     public void set市町村指定() {
         FlexibleYear 調定年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey());
-        FlexibleYear 不均一納期期限 = new FlexibleYear(DbBusinessConifg.get(
+        FlexibleYear 不均一納期期限 = new FlexibleYear(DbBusinessConfig.get(
                 ConfigNameDBB.ランク管理情報_不均一納期期限, システム日時, SubGyomuCode.DBB介護賦課));
 
         if (不均一納期期限.isBefore(調定年度)) {
@@ -230,7 +230,7 @@ public final class FutsuChoshuTotalHandler {
 
     private void 導入形態判定(ShichosonSecurityJoho 市町村セキュリティ情報, FlexibleYear 調定年度) {
         if (DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            RString 合併情報区分 = DbBusinessConifg.get(
+            RString 合併情報区分 = DbBusinessConfig.get(
                     ConfigNameDBU.合併情報管理_合併情報区分, システム日時, SubGyomuCode.DBU介護統計報告);
             if (ZERO.equals(合併情報区分)) {
                 div.getKonkaiShoriNaiyo().getDdlShichosonSelect().setVisible(false);
@@ -348,18 +348,18 @@ public final class FutsuChoshuTotalHandler {
         int i = 0;
         List<dgGenNendoKibetsuJoho_Row> list = create現年度期別情報Gird();
         for (dgGenNendoKibetsuJoho_Row row : list) {
-            initGird_現年度(DbBusinessConifg.get(普通徴収_期別テーブル.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_月の期.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_月処理区分.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_処理対象.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_納付書の型.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_納付書の印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_コンビニカット印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_コンビニ連帳印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_ブック開始位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_納通連帳区分.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_通知書プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(普徴期情報_口座対象者プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+            initGird_現年度(DbBusinessConfig.get(普通徴収_期別テーブル.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_月の期.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_月処理区分.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_処理対象.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_納付書の型.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_納付書の印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_コンビニカット印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_コンビニ連帳印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_ブック開始位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_納通連帳区分.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_通知書プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(普徴期情報_口座対象者プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
                     row);
             i = i + 1;
         }
@@ -370,20 +370,20 @@ public final class FutsuChoshuTotalHandler {
 
     private void set期別保険料() {
         div.getFutsuChoshu().getDdlHasu().setDataSource(set端数ddl());
-        div.getFutsuChoshu().getDdlHasu().setSelectedKey(DbBusinessConifg.get(ConfigNameDBB.普通徴収_期別端数,
+        div.getFutsuChoshu().getDdlHasu().setSelectedKey(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数,
                 システム日時, SubGyomuCode.DBB介護賦課));
     }
 
     private void set暫定計算方法() {
         div.getFutsuChoshu().getDdlFukaHoho().setDataSource(set賦課方法ddl());
-        div.getFutsuChoshu().getDdlFukaHoho().setSelectedKey(DbBusinessConifg.get(ConfigNameDBB.普通徴収_仮算定賦課方法,
+        div.getFutsuChoshu().getDdlFukaHoho().setSelectedKey(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法,
                 システム日時, SubGyomuCode.DBB介護賦課));
         RString 賦課方法説明 = CodeMaster.getCode(SubGyomuCode.DBB介護賦課, new CodeShubetsu(コード種別),
                 new Code(div.getFutsuChoshu().getZanteiKeisanHoho().getDdlFukaHoho().getSelectedKey()),
                 new FlexibleDate(システム日時.toDateString())).getコード名称();
         div.getFutsuChoshu().getZanteiKeisanHoho().getTxtFukaHohoHelp().setValue(賦課方法説明);
         div.getFutsuChoshu().getDdlIdoHoho().setDataSource(set異動方法ddl());
-        div.getFutsuChoshu().getDdlIdoHoho().setSelectedKey(DbBusinessConifg.get(ConfigNameDBB.普通徴収_仮算定異動方法,
+        div.getFutsuChoshu().getDdlIdoHoho().setSelectedKey(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動方法,
                 システム日時, SubGyomuCode.DBB介護賦課));
         List<KeyValueDataSource> 端数調整 = new ArrayList<>();
         端数調整.add(new KeyValueDataSource(ZanteiKeisanHasuChosei.あり.getコード(),
@@ -391,10 +391,10 @@ public final class FutsuChoshuTotalHandler {
         端数調整.add(new KeyValueDataSource(ZanteiKeisanHasuChosei.なし.getコード(),
                 ZanteiKeisanHasuChosei.なし.get略称()));
         div.getFutsuChoshu().getRadHasuChosei().setDataSource(端数調整);
-        div.getFutsuChoshu().getRadHasuChosei().setSelectedKey(DbBusinessConifg.get(ConfigNameDBB.普通徴収_仮算定端数調整有無,
+        div.getFutsuChoshu().getRadHasuChosei().setSelectedKey(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無,
                 システム日時, SubGyomuCode.DBB介護賦課));
         div.getFutsuChoshu().getRadHeichoSha().setDataSource(set暫定併徴者普徴分徴収有無());
-        div.getFutsuChoshu().getRadHeichoSha().setSelectedKey(DbBusinessConifg.get(ConfigNameDBB.普通徴収_仮算定併徴者普徴分徴収有無,
+        div.getFutsuChoshu().getRadHeichoSha().setSelectedKey(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定併徴者普徴分徴収有無,
                 システム日時, SubGyomuCode.DBB介護賦課));
     }
 
@@ -453,15 +453,15 @@ public final class FutsuChoshuTotalHandler {
         int i = 0;
         for (dgKaNendoKibetsuJoho_Row row : list) {
             initGird_過年度(
-                    DbBusinessConifg.get(過年度_期別テーブル.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_月の期.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_納付書の型.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_納付書の印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_コンビニカット印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_コンビニ連帳印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_ブック開始位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_通知書プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
-                    DbBusinessConifg.get(過年度期情報_口座対象者プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度_期別テーブル.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_月の期.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_納付書の型.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_納付書の印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_コンビニカット印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_コンビニ連帳印字位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_ブック開始位置.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_通知書プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
+                    DbBusinessConfig.get(過年度期情報_口座対象者プリント条件.get(i), システム日時, SubGyomuCode.DBB介護賦課),
                     row);
             i = i + 1;
         }
@@ -503,10 +503,10 @@ public final class FutsuChoshuTotalHandler {
         row.getDdlKozaTaishoshaOutput().setSelectedKey(過年度期情報_口座対象者プリント条件);
 
         if (第４月.equals(row.getTxtTsuki())) {
-            row.getDdlSaiShutsu().setSelectedKey(DbBusinessConifg.get(
+            row.getDdlSaiShutsu().setSelectedKey(DbBusinessConfig.get(
                     ConfigNameDBB.過年度期情報_過年度の歳出1, システム日時, SubGyomuCode.DBB介護賦課));
         } else if (第５月.equals(row.getTxtTsuki())) {
-            row.getDdlSaiShutsu().setSelectedKey(DbBusinessConifg.get(
+            row.getDdlSaiShutsu().setSelectedKey(DbBusinessConfig.get(
                     ConfigNameDBB.過年度期情報_過年度の歳出2, システム日時, SubGyomuCode.DBB介護賦課));
         } else {
             row.getDdlSaiShutsu().setDisabled(true);
@@ -704,11 +704,11 @@ public final class FutsuChoshuTotalHandler {
                 row.getDdlKozaTaishoshaOutput().setDisabled(false);
                 if (第４月.equals(row.getTxtTsuki())) {
                     row.getDdlSaiShutsu().setDisabled(false);
-                    row.getDdlSaiShutsu().setSelectedKey(DbBusinessConifg.get(
+                    row.getDdlSaiShutsu().setSelectedKey(DbBusinessConfig.get(
                             ConfigNameDBB.過年度期情報_過年度の歳出1, システム日時, SubGyomuCode.DBB介護賦課));
                 } else if (第５月.equals(row.getTxtTsuki())) {
                     row.getDdlSaiShutsu().setDisabled(false);
-                    row.getDdlSaiShutsu().setSelectedKey(DbBusinessConifg.get(
+                    row.getDdlSaiShutsu().setSelectedKey(DbBusinessConfig.get(
                             ConfigNameDBB.過年度期情報_過年度の歳出2, システム日時, SubGyomuCode.DBB介護賦課));
                 }
             } else {
@@ -852,19 +852,21 @@ public final class FutsuChoshuTotalHandler {
                     || FuchokiJohoTsukiShoriKubun.普徴仮算定異動.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
                     || FuchokiJohoTsukiShoriKubun.本算定.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
                     || FuchokiJohoTsukiShoriKubun.本算定異動.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
-                    || FuchokiJohoTsukiShoriKubun.普徴仮算定.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
-                    || FuchokiJohoTsukiShoriKubun.普徴仮算定異動.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())) {
+                    || FuchokiJohoTsukiShoriKubun.現年随時.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())
+                    || FuchokiJohoTsukiShoriKubun.随時.getコード().equals(row.getDdlTsukiShoriKbn().getSelectedKey())) {
                 普徴期情報_設定納期数 = 普徴期情報_設定納期数 + 数字_１;
             }
 
             update(row.getTxtTsukinoKi(), 普徴期情報_月の期.get(i));
             if (row.getSelected()) {
-                NokiManager nokiManager = new NokiManager();
-                Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                        new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
-                        GennenKanen.現年度,
-                        Integer.parseInt(row.getTxtKi().toString()));
-                save納期(noki, row);
+                if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
+                    NokiManager nokiManager = new NokiManager();
+                    Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                            new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
+                            GennenKanen.現年度,
+                            Integer.parseInt(row.getTxtKi().toString()));
+                    save納期(noki, row);
+                }
                 if (i == 数字_１２) {
                     update(FOURTEEN, 普通徴収_期別テーブル.get(i));
                 } else if (i == 数字_１３) {
@@ -889,7 +891,7 @@ public final class FutsuChoshuTotalHandler {
         }
         update(new RString(String.valueOf(普徴期情報_仮算定期数)), ConfigNameDBB.普徴期情報_仮算定期数);
         update(new RString(String.valueOf(普徴期情報_定例納期数)), ConfigNameDBB.普徴期情報_定例納期数);
-        update(new RString(String.valueOf(普徴期情報_設定納期数)), ConfigNameDBB.普徴期情報_定例納期数);
+        update(new RString(String.valueOf(普徴期情報_設定納期数)), ConfigNameDBB.普徴期情報_設定納期数);
         update(div.getFutsuChoshu().getDdlHasu().getSelectedKey(), ConfigNameDBB.普通徴収_期別端数);
         update(div.getFutsuChoshu().getDdlFukaHoho().getSelectedKey(), ConfigNameDBB.普通徴収_仮算定賦課方法);
         update(div.getFutsuChoshu().getDdlIdoHoho().getSelectedKey(), ConfigNameDBB.普通徴収_仮算定異動方法);
@@ -909,6 +911,20 @@ public final class FutsuChoshuTotalHandler {
                     set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
                     set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
                     set納期終了日(new RDate(row.getTxtNokigenEdYMD().getValue().toString())).build();
+            new NokiManager().save納期(noki);
+        }
+    }
+
+    private void save納期_過年度(Noki noki, dgKaNendoKibetsuJoho_Row row) {
+        if (!noki.get通知書発行日().equals(new RDate(row.getTxtHakkoYMD().getValue().toString()))
+                || !noki.get納期限().equals(new RDate(row.getTxtNokigenYMD().getValue().toString()))
+                || !noki.get納期開始日().equals(new RDate(row.getTxtNokigenStYMD().getValue().toString()))
+                || !noki.get納期終了日().equals(new RDate(row.getTxtNokigenEtYMD().getValue().toString()))) {
+            noki = noki.createBuilderForEdit().
+                    set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
+                    set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
+                    set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
+                    set納期終了日(new RDate(row.getTxtNokigenEtYMD().getValue().toString())).build();
             new NokiManager().save納期(noki);
         }
     }
@@ -941,21 +957,13 @@ public final class FutsuChoshuTotalHandler {
                 } else if (第５月.equals(row.getTxtTsuki())) {
                     update(row.getDdlSaiShutsu().getSelectedKey(), ConfigNameDBB.過年度期情報_過年度の歳出2);
                 }
-                NokiManager nokiManager = new NokiManager();
-                Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                        new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
-                        GennenKanen.過年度,
-                        Integer.parseInt(row.getTxtKi().toString()));
-                if (!noki.get通知書発行日().equals(new RDate(row.getTxtHakkoYMD().getValue().toString()))
-                        || !noki.get納期限().equals(new RDate(row.getTxtNokigenYMD().getValue().toString()))
-                        || !noki.get納期開始日().equals(new RDate(row.getTxtNokigenStYMD().getValue().toString()))
-                        || !noki.get納期終了日().equals(new RDate(row.getTxtNokigenEtYMD().getValue().toString()))) {
-                    noki = noki.createBuilderForEdit().
-                            set通知書発行日(new RDate(row.getTxtHakkoYMD().getValue().toString())).
-                            set納期限(new RDate(row.getTxtNokigenYMD().getValue().toString())).
-                            set納期開始日(new RDate(row.getTxtNokigenStYMD().getValue().toString())).
-                            set納期終了日(new RDate(row.getTxtNokigenEtYMD().getValue().toString())).build();
-                    new NokiManager().save納期(noki);
+                if (!div.getKonkaiShoriNaiyo().getDdlShichosonSelect().isVisible()) {
+                    NokiManager nokiManager = new NokiManager();
+                    Noki noki = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                            new RYear(div.getKonkaiShoriNaiyo().getDdlChoteiNendo().getSelectedKey()),
+                            GennenKanen.過年度,
+                            Integer.parseInt(row.getTxtKi().toString()));
+                    save納期_過年度(noki, row);
                 }
             } else {
                 update(RString.EMPTY, 過年度_期別テーブル.get(i));
@@ -968,7 +976,7 @@ public final class FutsuChoshuTotalHandler {
     }
 
     private void update(RString value, Enum key) {
-        if (!value.equals(DbBusinessConifg.get(key, システム日時, SubGyomuCode.DBB介護賦課))) {
+        if (!value.equals(DbBusinessConfig.get(key, システム日時, SubGyomuCode.DBB介護賦課))) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, key, value, RString.EMPTY,
                     RString.EMPTY, システム日時);
         }
@@ -1526,6 +1534,8 @@ public final class FutsuChoshuTotalHandler {
                 FuchoZanteiKeisanHoho.前年度_確定年額乗３分の４_今納期数.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_段階補正.getコード(),
                 FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_段階補正.get略称()));
+        賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_前年度所得_今年度賦課期日__今納期数_段階補正.getコード(),
+                FuchoZanteiKeisanHoho.今年度_基準年額_前年度所得_今年度賦課期日__今納期数_段階補正.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_一律.getコード(),
                 FuchoZanteiKeisanHoho.今年度_基準年額_今納期数_一律.get略称()));
         賦課方法.add(new KeyValueDataSource(FuchoZanteiKeisanHoho.千代田区独自算定.getコード(),

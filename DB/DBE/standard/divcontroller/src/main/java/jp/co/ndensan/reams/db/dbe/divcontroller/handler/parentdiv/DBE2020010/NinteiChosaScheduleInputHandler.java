@@ -8,15 +8,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020010;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.NinteiChosaScheduleInputDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査スケジュール登録10のHandlerクラスです。
@@ -444,35 +445,36 @@ public class NinteiChosaScheduleInputHandler {
 
     private RString get調査日時(RString 時間枠) {
         RString 調査日時 = RString.EMPTY;
+        RDate nowDate = RDate.getNowDate();
         if (枠数_1.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠1, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠1, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_2.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠2, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠2, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_3.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠3, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠3, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_4.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠4, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠4, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_5.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠5, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠5, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_6.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠6, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠6, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_7.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠7, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠7, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_8.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠8, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠8, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_9.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠9, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠9, nowDate, SubGyomuCode.DBE認定支援);
         }
         if (枠数_10.equals(時間枠)) {
-            調査日時 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠10, SubGyomuCode.DBE認定支援);
+            調査日時 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠10, nowDate, SubGyomuCode.DBE認定支援);
         }
         return 調査日時;
     }

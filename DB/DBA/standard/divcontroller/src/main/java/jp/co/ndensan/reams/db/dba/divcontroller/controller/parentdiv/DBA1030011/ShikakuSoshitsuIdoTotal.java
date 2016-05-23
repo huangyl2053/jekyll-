@@ -118,6 +118,7 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuSoshitsuIdoTotalDiv div) {
         RealInitialLocker.release(前排他ロックキー);
+        createHandler(div).setパラメータ();
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.詳細へ).respond();
     }
 

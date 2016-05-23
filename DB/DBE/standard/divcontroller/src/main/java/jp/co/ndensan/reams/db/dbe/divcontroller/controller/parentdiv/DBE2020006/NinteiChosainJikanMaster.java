@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.NinteiChosainJikanMasterHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.NinteiChosainJikanMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
@@ -583,15 +584,13 @@ public class NinteiChosainJikanMaster {
             break;
         }
         if (!ResponseHolder.isReRequest() && 編集内容Flag) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addMessage(DbQuestionMessages.入力内容の破棄.getMessage()).respond();
         } else {
             NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
             model.set設定年月(new FlexibleDate(div.getTxtSettingMonth().getValue().getYearMonth().toDateString()));
             div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(model));
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if (new RString(DbQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();

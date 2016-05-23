@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.db.dbu.service.core.kaigohokenshikakushasho.KaigoHoke
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshashikakuhakko.HihokenshaShikakuHakko.dgShuruiShikyuGendoKijunGaku_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -287,7 +286,7 @@ public class TotalHandler {
                 business.getJusho(), business.getHihokenshaNameKana(), business.getHihokenshaName(), business.getBirthGengoMeiji(),
                 business.getBirthGengoTaisho(), business.getBirthGengoShowa(), business.getSeibetsu(), business.getBirthYMD(),
                 business.getKofuYMD(), business.getYokaigoJotaiKubun(), business.getNinteiYMD(), business.getYukoKaishiYMD(),
-                business.getYukoShuryoYMD(), business.getTani(), business.getKubunShikyuYukoKaishiYMD(), business.getKubunShikyuYukoShuryoYMD(),
+                business.getYukoShuryoYMD(), business.getKizyunngaku(), business.getKubunShikyuYukoKaishiYMD(), business.getKubunShikyuYukoShuryoYMD(),
                 business.getTaniShurui(), business.getTani(), business.getShikyuGendoKizyungakuList(), business.getServiceShitei(),
                 business.getKyufuseigenDataList(), business.getJigyoshaName1(), business.getTodokedeYMD1(), business.getJigyoshaName2(),
                 business.getJigyoshaName2Asutarisuku(), business.getJigyoshaName2Masshosen(), business.getTodokedeYMD2(),
@@ -427,8 +426,8 @@ public class TotalHandler {
         JukyuShikakuShomeishoKaiKo param = new JukyuShikakuShomeishoKaiKo();
         param.set交付日(RString.isNullOrEmpty(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtKofubi().getValue()) ? null
-                : new RDate(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko().getJukyuSikakuShomeishoHakkoDiv()
-                        .getPnlJukyushaJoho1().getTxtKofubi().getValue().toString()));
+                : div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko().getJukyuSikakuShomeishoHakkoDiv()
+                .getPnlJukyushaJoho1().getTxtKofubi().getValue());
         param.set住所を印字(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getCblInji().isAllSelected());
         param.set備考(div.getJukyuSikakuShomeiHakko().getCcdJukyuSikakuShomeishoHakko()

@@ -26,12 +26,13 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.Tokkiji
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho.TokkijikoOCR_221043Process;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.IraishoIkkatsuHakkoBatchParamter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -48,6 +49,7 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
     private static final RString DBE221002 = new RString("DBE221002_ChosahyoKihonchosaKatamen.rse");
     private static final RString DBE221003 = new RString("DBE221003_ChosahyoKihonchosaRyomen.rse");
     private static final RString DBE221012 = new RString("DBE221012_chosahyoKihonchosa.rse");
+    private RDate 基準日 = RDate.getNowDate();
 
     private static final RString DBE221021 = new RString("DBE221021_chosahyoTokkijiko.rse");
     private static final RString DBE221022 = new RString("DBE221022_chosahyoTokkijiko.rse");
@@ -116,9 +118,9 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
     }
 
     private void call認定調査差異チェック表() {
-        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
             executeStep(SAICHEKKUHYO1);
-        } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, SubGyomuCode.DBE認定支援))) {
+        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
             executeStep(SAICHEKKUHYO2);
             executeStep(SAICHEKKUHYO3);
             executeStep(SAICHEKKUHYO4);
@@ -126,130 +128,130 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
     }
 
     private void call認定調査票OCR_概況調査() {
-        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目3,
-                    SubGyomuCode.DBE認定支援));
-        } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面3,
-                    SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目3,
+                    基準日, SubGyomuCode.DBE認定支援));
+        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面3,
+                    基準日, SubGyomuCode.DBE認定支援));
         }
     }
 
     private void call認定調査票OCR_特記事項() {
-        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート片面1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート片面2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート片面3,
-                        SubGyomuCode.DBE認定支援));
-            } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート両面1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート両面2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート両面3,
-                        SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート片面1,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート片面2,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート片面3,
+                        基準日, SubGyomuCode.DBE認定支援));
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート両面1,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート両面2,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート両面3,
+                        基準日, SubGyomuCode.DBE認定支援));
             }
         }
     }
 
     private void call認定調査票OCR_基本調査() {
-        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面1枚目1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面1枚目2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面1枚目3,
-                    SubGyomuCode.DBE認定支援));
-        } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート両面1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート両面2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート両面3,
-                    SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面1枚目1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面1枚目2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面1枚目3,
+                    基準日, SubGyomuCode.DBE認定支援));
+        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート両面1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート両面2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート両面3,
+                    基準日, SubGyomuCode.DBE認定支援));
         }
     }
 
     private void call認定調査票_概況調査() {
-        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面1枚目1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面1枚目2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面1枚目3,
-                    SubGyomuCode.DBE認定支援));
-        } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー両面1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー両面2,
-                    SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面1枚目1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面1枚目2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面1枚目3,
+                    基準日, SubGyomuCode.DBE認定支援));
+        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー両面1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー両面2,
+                    基準日, SubGyomuCode.DBE認定支援));
         }
     }
 
     private void call認定調査票_特記事項() {
-        if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))
-                && CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面3,
-                    SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))
+                && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面3,
+                    基準日, SubGyomuCode.DBE認定支援));
         }
-        if (CONFIGVALUE3.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))
-                && CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面3,
-                    SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))
+                && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面3,
+                    基準日, SubGyomuCode.DBE認定支援));
         }
-        if (CONFIGVALUE4.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自片面1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自片面2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自片面3,
-                        SubGyomuCode.DBE認定支援));
-            } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自両面1,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自両面2,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自両面3,
-                        SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE4.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自片面1,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自片面2,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自片面3,
+                        基準日, SubGyomuCode.DBE認定支援));
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自両面1,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自両面2,
+                        基準日, SubGyomuCode.DBE認定支援));
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自両面3,
+                        基準日, SubGyomuCode.DBE認定支援));
             }
         }
     }
 
     private void call認定調査票_基本調査() {
-        if (CONFIGVALUE1.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面1枚目1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面1枚目2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面1枚目3,
-                    SubGyomuCode.DBE認定支援));
-        } else if (CONFIGVALUE2.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, SubGyomuCode.DBE認定支援))) {
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー両面1,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー両面2,
-                    SubGyomuCode.DBE認定支援));
-            getExecuteStep(BusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー両面3,
-                    SubGyomuCode.DBE認定支援));
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面1枚目1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面1枚目2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面1枚目3,
+                    基準日, SubGyomuCode.DBE認定支援));
+        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー両面1,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー両面2,
+                    基準日, SubGyomuCode.DBE認定支援));
+            getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー両面3,
+                    基準日, SubGyomuCode.DBE認定支援));
         }
     }
 

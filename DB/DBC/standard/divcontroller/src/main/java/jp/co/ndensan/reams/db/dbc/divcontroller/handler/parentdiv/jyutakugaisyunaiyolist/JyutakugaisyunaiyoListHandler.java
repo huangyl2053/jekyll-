@@ -87,18 +87,18 @@ public class JyutakugaisyunaiyoListHandler {
             }
         }
         div.getTxtKaisyunaiyo().setValue(RString.EMPTY);
-        div.getTxtKaisyunaiyo().setReadOnly(true);
+        div.getTxtKaisyunaiyo().setDisabled(true);
         div.getTxtJigyosya().setValue(RString.EMPTY);
-        div.getTxtJigyosya().setReadOnly(true);
+        div.getTxtJigyosya().setDisabled(true);
         div.getBtnHonnijyusyoCopy().setDisabled(true);
         div.getTxtJyusyo().clearDomain();
-        div.getTxtJyusyo().setReadOnly(true);
+        div.getTxtJyusyo().setDisabled(true);
         div.getTxtTyakkoyotebi().clearValue();
-        div.getTxtTyakkoyotebi().setReadOnly(true);
+        div.getTxtTyakkoyotebi().setDisabled(true);
         div.getTxtKanseyotebi().clearValue();
-        div.getTxtKanseyotebi().setReadOnly(true);
+        div.getTxtKanseyotebi().setDisabled(true);
         div.getTxtKaisyukingaku().clearValue();
-        div.getTxtKaisyukingaku().setReadOnly(true);
+        div.getTxtKaisyukingaku().setDisabled(true);
         div.getBtnClear().setDisabled(true);
         div.getBtnDetailConfirm().setDisabled(true);
         this.get状態(状態, dgGaisyuListRow);

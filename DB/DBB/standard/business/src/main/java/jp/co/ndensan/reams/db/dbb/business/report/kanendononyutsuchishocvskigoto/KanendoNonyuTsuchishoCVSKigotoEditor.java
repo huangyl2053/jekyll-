@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvskigoto;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.kanendononyutsuchishocvskigoto.KanendoNonyuTsuchishoCVSKigotoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.kanendononyutsuchishocvskigoto.KanendoNonyuTsuchishoCVSKigotoSource;
 
 /**
  * 保険料納入通知書（本算定過年度）【コンビニ期毎タイプ】のEditorです。

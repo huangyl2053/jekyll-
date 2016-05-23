@@ -155,4 +155,88 @@ public class EditedKoza {
     public boolean isPresent() {
         return 口座 != null;
     }
+
+    /**
+     * 金融機関コードを返却します。
+     *
+     * @return 金融機関コード
+     */
+    public RString get金融機関コード() {
+        if (口座 == null || 口座.get金融機関コード() == null) {
+            return RString.EMPTY;
+        }
+        return 口座.get金融機関コード().value();
+    }
+
+    /**
+     * 通帳記号を返却します。
+     *
+     * @return 通帳記号
+     */
+    public RString get通帳記号() {
+        if (口座 == null) {
+            return RString.EMPTY;
+        }
+        return 口座.get通帳記号();
+    }
+
+    /**
+     * 通帳番号を返却します。
+     *
+     * @return 通帳番号
+     */
+    public RString get通帳番号() {
+        if (口座 == null) {
+            return RString.EMPTY;
+        }
+        return 口座.get通帳番号();
+    }
+
+    /**
+     * 口座名義人漢字を返却します。
+     *
+     * @return 口座名義人漢字
+     */
+    public RString get口座名義人漢字() {
+        if (口座 == null || 口座.get口座名義人漢字() == null) {
+            return RString.EMPTY;
+        }
+        return 口座.get口座名義人漢字().value();
+    }
+
+    /**
+     * 支店コードを返却します。
+     *
+     * @return 支店コード
+     */
+    public RString get支店コード() {
+        if (口座 == null || 口座.get支店コード() == null) {
+            return RString.EMPTY;
+        }
+        return 口座.get支店コード().value();
+    }
+
+    /**
+     * 口座番号を返却します。
+     *
+     * @return 口座番号
+     */
+    public RString get口座番号() {
+        if (口座 == null) {
+            return RString.EMPTY;
+        }
+        return 口座.get口座番号();
+    }
+
+    /**
+     * 預金種別略称を返却します。
+     *
+     * @return 預金種別略称
+     */
+    public RString get預金種別略称() {
+        if (口座 == null || 口座.get預金種別() == null) {
+            return RString.EMPTY;
+        }
+        return 口座.get預金種別().get預金種別略称();
+    }
 }

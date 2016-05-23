@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +21,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GennendoDate {
+@OnNextSchema("rgdb")
+public class GennendoDate extends DbTableEntityBase<GennendoDate> implements IDbAccessable {
 
     private RString choteiNendo;
     private RString fukaNendo;

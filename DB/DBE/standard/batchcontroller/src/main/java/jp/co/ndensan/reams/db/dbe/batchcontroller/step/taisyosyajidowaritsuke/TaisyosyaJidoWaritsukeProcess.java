@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoh
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taisyosyajidowaritsuke.ITaisyosyaJidoWaritsukeRelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -16,12 +17,12 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -45,8 +46,8 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
     @Override
     protected void beforeExecute() {
         mapper = getMapper(ITaisyosyaJidoWaritsukeRelateMapper.class);
-        taisyosya = mapper.selectTaisyosya(一次判定後.equals(BusinessConfig.get(
-                ConfigNameDBE.マスキングチェックタイミング, SubGyomuCode.DBE認定支援)));
+        taisyosya = mapper.selectTaisyosya(一次判定後.equals(DbBusinessConfig.get(
+                ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
         shinsakaiWaritsukeNinsu = paramter.getShinsakaiWaritsukeNinsu();
         shinsakaiJidoWariateTeiin = paramter.getShinsakaiJidoWariateTeiin();
         shinsakaiKaisaiNo = paramter.getShinsakaiKaisaiNo();
@@ -109,7 +110,8 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                 要介護認定申請情報.getShujiiIryokikanCode(),
                 要介護認定申請情報.getShujiiCode(),
                 要介護認定申請情報.getNyushoShisetsuCode(),
-                オブザーバー_機関.equals(BusinessConfig.get(ConfigNameDBE.オブザーバーチェック, SubGyomuCode.DBE認定支援)));
+                オブザーバー_機関.equals(DbBusinessConfig.get(
+                                ConfigNameDBE.オブザーバーチェック, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
     }
 
     private void insert介護認定審査会割付情報(RString shinsakaiKaisaiNo, TaisyosyaJidoWaritsukeEntity 対象者, FlexibleDate kaisaiYMD) {

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4010001;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuCsvEntity;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001.Shi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -45,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 完了処理・介護認定審査会登録のコントローラです。
@@ -64,6 +68,7 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onLoad(ShinsakaiTorokuDiv div) {
+        前排他キーのセット();
         getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
@@ -94,7 +99,7 @@ public class ShinsakaiToroku {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         try (CsvWriter<ShinsakaiTorokuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
             List<dgNinteiTaskList_Row> dataList = div.getCcdTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : dataList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -115,9 +120,6 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnShinsakai(ShinsakaiTorokuDiv div) {
-        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-        ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
-        ValidationMessageControlPairs validation = getValidationHandler(div).割付可能チェック(選択チェック);
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -126,12 +128,16 @@ public class ShinsakaiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
+            ValidationMessageControlPairs validation = getValidationHandler(div).割付可能チェック(選択チェック);
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
-                RString 申請書管理番号リスト = div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo();
+                申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
+                前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
-                        .parameter(申請書管理番号リスト);
+                        .parameter(new RString("申請書管理番号リスト"));
             }
         }
         return ResponseData.of(div).respond();
@@ -144,14 +150,7 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnShinsakaiToruku(ShinsakaiTorokuDiv div) {
-        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-        ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
-        ValidationMessageControlPairs 完了処理事前チェック = getValidationHandler(div).完了処理事前チェック(選択チェック);
-        ValidationMessageControlPairs 完了済みデータチェック = getValidationHandler(div).完了済みデータチェック(完了処理事前チェック);
-        ValidationMessageControlPairs validation = getValidationHandler(div).マスキング完了チェック(完了済みデータチェック);
-        if (validation.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validation).respond();
-        }
+
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -160,10 +159,14 @@ public class ShinsakaiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
+            ValidationMessageControlPairs 完了処理事前チェック = getValidationHandler(div).完了処理事前チェック(選択チェック);
+            ValidationMessageControlPairs 完了済みデータチェック = getValidationHandler(div).完了済みデータチェック(完了処理事前チェック);
+            ValidationMessageControlPairs validation = getValidationHandler(div).マスキング完了チェック(完了済みデータチェック);
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
-                前排他キーのセット();
                 getHandler(div).要介護認定完了更新();
                 前排他キーの解除();
                 div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
@@ -231,6 +234,16 @@ public class ShinsakaiToroku {
             return new RString(時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
         }
         return RString.EMPTY;
+    }
+
+    private void 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {
+        List<RString> 申請書管理番号リスト = new ArrayList<>();
+        for (dgNinteiTaskList_Row データ : 選択データ) {
+            申請書管理番号リスト.add(データ.getShinseishoKanriNo());
+        }
+        ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
+        shinseishoKanriNoList.setShinseishoKanriNoList(申請書管理番号リスト);
+        ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
     }
 
     private ShinsakaiTorokuHandler getHandler(ShinsakaiTorokuDiv div) {

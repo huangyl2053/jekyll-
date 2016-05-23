@@ -59,6 +59,10 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     private DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki;
     @JsonProperty("mode")
     private RString mode;
+    @JsonProperty("hdnHihokenshaNo")
+    private RString hdnHihokenshaNo;
+    @JsonProperty("hdnShikibetsuCode")
+    private RString hdnShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -118,6 +122,42 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     @JsonProperty("mode")
     public void setMode(RString mode) {
         this.mode = mode;
+    }
+
+    /*
+     * gethdnHihokenshaNo
+     * @return hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public RString getHdnHihokenshaNo() {
+        return hdnHihokenshaNo;
+    }
+
+    /*
+     * sethdnHihokenshaNo
+     * @param hdnHihokenshaNo hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
+        this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * gethdnShikibetsuCode
+     * @return hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public RString getHdnShikibetsuCode() {
+        return hdnShikibetsuCode;
+    }
+
+    /*
+     * sethdnShikibetsuCode
+     * @param hdnShikibetsuCode hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
     }
 
     /*

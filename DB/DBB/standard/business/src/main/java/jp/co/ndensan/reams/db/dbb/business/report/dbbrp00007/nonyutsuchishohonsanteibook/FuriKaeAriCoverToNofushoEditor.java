@@ -6,28 +6,15 @@
 package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007.nonyutsuchishohonsanteibook;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbrp00007.nonyutsuchishohonsanteibook.FuriKaeAriCoverToNofushoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 保険料納入通知書（本算定）【ブック（口振依頼あり通知書＋納付書）タイプ】のボディEditorです。
  *
- * @author xuyue
+ * @reamsid_L DBB-9110-100 xuyue
  */
 public class FuriKaeAriCoverToNofushoEditor implements IFuriKaeAriCoverToNofushoEditor {
 
     private final FuriKaeAriCoverToNofushoItem item;
-
-    private static final RString 次期以降 = new RString("次期以降");
-    private static final RString 円 = new RString("円");
-    private static final RString 期_4 = new RString("4");
-    private static final RString 期_5 = new RString("5");
-    private static final RString 期_6 = new RString("6");
-    private static final RString FORMAT_第X期 = new RString("第%d期");
-    private static final RString FORMAT_第XX期 = new RString("第%02d期");
-
-    private static final RString REPORT_DBB100055 = new RString("DBB100055");
-    private static final RString REPORT_DBB100056 = new RString("DBB100056");
-    private static final RString REPORT_DBB100057 = new RString("DBB100057");
-    private static final RString REPORT_DBB100058 = new RString("DBB100058");
 
     /**
      * インスタンスを生成します。
@@ -41,47 +28,10 @@ public class FuriKaeAriCoverToNofushoEditor implements IFuriKaeAriCoverToNofusho
     @Override
     public FuriKaeAriCoverToNofushoReportSource edit(FuriKaeAriCoverToNofushoReportSource source) {
         return editBody(source);
-
-//        RString 帳票ID = item.get帳票ID().getColumnValue();
-//        RString 編集範囲区分 = item.get編集範囲区分().getコード();
-//
-//        if (ShoriKubun.バッチ.getコード().equals(item.get処理区分().getコード())
-//                && HyojiUmu.表示しない.getコード().equals(item.get本算定納入通知書制御情報().get納入通知書制御情報().getコンビニ_ブック口座用納付書表示().getコード())) { // TODO  QA && item.get編集後本算定通知書共通情報().get更正後().get口座区分()
-//            編集範囲区分 = HenshuHaniKubun.Coverのみ.getコード();
-//        }
-//
-//        if (編集範囲区分.equals(HenshuHaniKubun.全てのレイアウト.getコード())) {
-//            if (REPORT_DBB100055.equals(帳票ID)) {
-//
-//            } else if (REPORT_DBB100057.equals(帳票ID)) {
-//
-//            } else if (REPORT_DBB100056.equals(帳票ID)) {
-//
-//            } else if (REPORT_DBB100058.equals(帳票ID)) {
-//
-//            }
-//        } else if (編集範囲区分.equals(HenshuHaniKubun.Coverのみ.getコード())) {
-//            if (REPORT_DBB100055.equals(帳票ID)) {
-//
-//            } else if (REPORT_DBB100057.equals(帳票ID)) {
-//
-//            } else if (REPORT_DBB100056.equals(帳票ID)) {
-//
-//            } else if (REPORT_DBB100058.equals(帳票ID)) {
-//
-//            }
-//        } else if (編集範囲区分.equals(HenshuHaniKubun.Detailのみ.getコード())) {
-//            if (REPORT_DBB100055.equals(帳票ID) || REPORT_DBB100056.equals(帳票ID)) {
-//
-//            } else if (REPORT_DBB100057.equals(帳票ID) || REPORT_DBB100058.equals(帳票ID)) {
-//
-//            }
-//        }
     }
 
     private FuriKaeAriCoverToNofushoReportSource editBody(FuriKaeAriCoverToNofushoReportSource source) {
         source.layoutBreakItem = item.getLayoutBreakItem();
-        // TODO
         source.ari_keisanMeisaishoNendo = item.getAri_keisanMeisaishoNendo();
         source.ari_keisanMeisaishoNendoBun = item.getAri_keisanMeisaishoNendoBun();
         source.ari_titleNendo = item.getAri_titleNendo();

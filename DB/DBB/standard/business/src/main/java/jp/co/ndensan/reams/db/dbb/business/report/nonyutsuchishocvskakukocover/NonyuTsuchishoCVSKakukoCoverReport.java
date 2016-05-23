@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakukocover;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoCoverSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoCoverSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -55,11 +55,15 @@ public class NonyuTsuchishoCVSKakukoCoverReport extends Report<NonyuTsuchishoCVS
                 break;
             }
         }
-        if (作成フラグ) {
-            INonyuTsuchishoCVSKakukoCoverEditor coverEditor = new NonyuTsuchishoCVSKakukoCoverEditor(item);
-            INonyuTsuchishoCVSKakukoCoverBuilder builder = new NonyuTsuchishoCVSKakukoCoverBuilder(coverEditor);
-            reportSourceWriter.writeLine(builder);
 
+        if (作成フラグ) {
+            作成フラグ = false;
         }
+//        if (作成フラグ) {
+//            INonyuTsuchishoCVSKakukoCoverEditor coverEditor = new NonyuTsuchishoCVSKakukoCoverEditor(item);
+//            INonyuTsuchishoCVSKakukoCoverBuilder builder = new NonyuTsuchishoCVSKakukoCoverBuilder(coverEditor);
+//            reportSourceWriter.writeLine(builder);
+//
+//        }
     }
 }

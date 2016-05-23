@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.core.saiketukekameisaijoho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbu.entity.SaiketukekaMeisaiJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,15 +17,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SaiketukekaMeisaiJohoData implements Serializable {
 
-    private final SaiketukekaMeisaiJoho entity;
+    private final DbT7001FufukuMoshitateEntity entity;
 
     /**
      * コンストラクタです。
      *
-     * @param saiketukekaMeisaiJoho 裁決結果明細情報
+     * @param entity 不服審査申立情報
      */
-    public SaiketukekaMeisaiJohoData(SaiketukekaMeisaiJoho saiketukekaMeisaiJoho) {
-        this.entity = saiketukekaMeisaiJoho;
+    public SaiketukekaMeisaiJohoData(DbT7001FufukuMoshitateEntity entity) {
+        this.entity = entity;
     }
 
     /**
@@ -34,7 +34,7 @@ public class SaiketukekaMeisaiJohoData implements Serializable {
      * @return 弁明書作成日
      */
     public FlexibleDate get弁明書作成日() {
-        return entity.get弁明書作成日();
+        return entity.getBemmeishoSakuseiYMD();
     }
 
     /**
@@ -43,7 +43,7 @@ public class SaiketukekaMeisaiJohoData implements Serializable {
      * @return 裁決結果
      */
     public RString get裁決結果() {
-        return entity.get裁決結果();
+        return entity.getSaiketsuKekka();
     }
 
     /**
@@ -52,7 +52,7 @@ public class SaiketukekaMeisaiJohoData implements Serializable {
      * @return 裁決理由
      */
     public RString get裁決理由() {
-        return entity.get裁決理由();
+        return entity.getSaiketsuRiyu();
     }
 
 }

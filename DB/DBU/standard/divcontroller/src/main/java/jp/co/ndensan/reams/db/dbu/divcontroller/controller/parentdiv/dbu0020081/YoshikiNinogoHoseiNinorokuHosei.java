@@ -61,6 +61,7 @@ public class YoshikiNinogoHoseiNinorokuHosei {
         if (修正_状態.equals(状態)) {
             return ResponseData.of(div).setState(DBU0020081StateName.修正状態);
         } else if (削除_状態.equals(状態)) {
+            handler.disableMainPanel();
             return ResponseData.of(div).setState(DBU0020081StateName.削除状態);
         }
         return ResponseData.of(div).respond();

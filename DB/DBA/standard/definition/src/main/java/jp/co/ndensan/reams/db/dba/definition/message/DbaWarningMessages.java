@@ -29,7 +29,7 @@ public enum DbaWarningMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbaWarningMessages(int no, String message) {
-        this.message = new WarningMessage(toCode("W", no), message);
+        this.message = new WarningMessage(toCode("DBAW", no), message);
     }
 
     @Override

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.FukaDaityouInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoCommonInfo;
 import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.KakushuTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
@@ -30,8 +31,11 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRel
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kakushutsuchishosakusei.IKakushuTsuchishoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
@@ -107,8 +111,6 @@ public class KakushuTsuchishoSakuseiFath {
     private static final RString 定値_ブック = new RString("ブックタイプ");
     private static final RString 定値_コンビニ収納 = new RString("コンビニ収納タイプ");
     private static final RString 定値_その他 = new RString("その他（カスタマイズ）");
-    private static final RString 括弧_左 = new RString("（");
-    private static final RString 定値_期 = new RString("期");
     private static final int 定値_1期 = 1;
     private static final int 定値_2期 = 2;
     private static final int 定値_3期 = 3;
@@ -612,49 +614,48 @@ public class KakushuTsuchishoSakuseiFath {
 
         RString 設定値 = 定値_0;
         RDate 運用日 = RDate.getNowDate();
-        出力期 = 出力期.split(括弧_左.toString()).get(0).replace(定値_期, RString.EMPTY);
         switch (Integer.parseInt(出力期.toString())) {
             case 定値_1期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_2期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型2, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型2, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_3期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型3, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型3, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_4期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型4, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型4, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_5期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型5, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型5, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_6期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型6, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型6, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_7期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型7, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型7, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_8期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型8, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型8, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_9期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型9, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型9, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_10期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型10, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型10, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_11期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型11, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型11, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_12期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型12, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型12, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_13期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型13, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型13, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_14期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型14, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型14, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             default:
                 break;
@@ -695,6 +696,28 @@ public class KakushuTsuchishoSakuseiFath {
             return null;
         }
         return new RDate(発行日.toString());
+    }
+
+    /**
+     * 発行日を取得メソッドです。
+     *
+     * @param 出力期 RString
+     * @return 出力期リスト List<Kitsuki>
+     */
+    public List<Kitsuki> get出力期リスト(RString 出力期) {
+
+        List<Kitsuki> 出力期リスト = new ArrayList<>();
+        KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
+        Kitsuki 期月 = koseiTsukiHantei.find更正月(RDate.getNowDate());
+        KitsukiList 期月リスト = fuchoKiUtil.get期月リスト().filteredLater期(期月.get期AsInt());
+        for (Kitsuki 期と月 : 期月リスト.toList()) {
+            if (出力期.equals(期と月.get期())) {
+                出力期リスト.add(期と月);
+                break;
+            }
+        }
+        return 出力期リスト;
     }
 
     /**

@@ -38,6 +38,7 @@
      <resultMap id="resultMap_KyufujissekiKihon"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.KyufujissekiKihonEntity"
                autoMapping="true">
+        <id column="row"/>
         <result property="審査年月" column="shinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="入力識別番号" column="inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
         <result property="証記載保険者番号" column="shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
@@ -53,7 +54,8 @@
     <select id="get給付実績基本情報"
             resultMap="resultMap_KyufujissekiKihon"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.KyufujissekiKihonParameter" fetchSize="500">
-        SELECT
+        SELECT ROW_NUMBER() over(order by B."shinsaYM" DESC)as row ,* FROM
+        ( SELECT
             A."shinsaYM",
             A."inputShikibetsuNo",
             A."shokisaiHokenshaNo",
@@ -110,7 +112,6 @@
             A."kyufuJissekiKubunCode",
             A."seiriNo",
             A."atoHokenSeikyugaku"
-        ORDER BY 
-            A."shinsaYM" DESC
+        ) as B
     </select>
 </mapper>

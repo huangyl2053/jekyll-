@@ -26,10 +26,10 @@ public class ShikakuKihonJohoDiv extends Panel {
      */
     @JsonProperty("TajutokuTekiyoJohoIchiran")
     private TajutokuTekiyoJohoIchiranDiv TajutokuTekiyoJohoIchiran;
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("ccdKaigoShikakuJoho")
     private KaigoShikakuKihonDiv ccdKaigoShikakuJoho;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,21 +56,21 @@ public class ShikakuKihonJohoDiv extends Panel {
     }
 
     /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
-    }
-
-    /*
      * getccdKaigoShikakuJoho
      * @return ccdKaigoShikakuJoho
      */
     @JsonProperty("ccdKaigoShikakuJoho")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuJoho() {
         return ccdKaigoShikakuJoho;
+    }
+
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
     }
 
     // </editor-fold>

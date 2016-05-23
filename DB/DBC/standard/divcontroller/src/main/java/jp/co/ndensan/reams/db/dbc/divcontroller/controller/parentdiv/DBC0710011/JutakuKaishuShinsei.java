@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.DBC0710011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710011.JutakuKaishuShinseiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710011.JutakuKaishuShinseiHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710011.JutakuKaishuShinseiValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -32,6 +34,7 @@ public class JutakuKaishuShinsei {
 
     private static final RString 申請区分事前申請 = new RString("1");
     private final RString 申請区分取消 = new RString("取消");
+    private final RString 事前申請モード = new RString("事前申請モード");
 
     /**
      * 画面ロードメソッド
@@ -60,8 +63,15 @@ public class JutakuKaishuShinsei {
      * @return 本画面
      */
     public ResponseData<JutakuKaishuShinseiDiv> onClick_btnAddShinsei(JutakuKaishuShinseiDiv div) {
+        if (事前申請モード.equals(ResponseHolder.getState())) {
+            ValidationMessageControlPairs valid = getValidationHandler(div).validate();
+            if (valid.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(valid).respond();
+            }
+        }
         JutakuKaishuShinseiHandler handler = getHandler(div);
         handler.setAddMode();
+        ViewStateHolder.put(ViewStateKeys.サービス年月, div.getJutakuKaishuShinseiList().getTxtServiceYM().getValue());
         return ResponseData.of(div).forwardWithEventName(DBC0710011TransitionEventName.to申請登録)
                 .parameter(ResponseHolder.getState());
     }
@@ -157,5 +167,9 @@ public class JutakuKaishuShinsei {
 
     private JutakuKaishuShinseiHandler getHandler(JutakuKaishuShinseiDiv div) {
         return JutakuKaishuShinseiHandler.of(div);
+    }
+
+    private JutakuKaishuShinseiValidationHandler getValidationHandler(JutakuKaishuShinseiDiv div) {
+        return JutakuKaishuShinseiValidationHandler.of(div);
     }
 }

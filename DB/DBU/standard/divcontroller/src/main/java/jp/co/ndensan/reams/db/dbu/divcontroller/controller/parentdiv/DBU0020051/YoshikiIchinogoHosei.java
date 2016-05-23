@@ -150,6 +150,8 @@ public class YoshikiIchinogoHosei {
         }
         if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020051StateName.完了状態);
         }
         return ResponseData.of(div).respond();

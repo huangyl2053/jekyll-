@@ -105,6 +105,17 @@ public class TekiyoJogaiRirekiHandler {
             div.getBtnInputClear().setDisabled(false);
             div.getBtnKakutei().setVisible(true);
             div.getBtnKakutei().setDisabled(false);
+            if (適用除外者情報 != null && !適用除外者情報.isEmpty()
+                    && (適用除外者情報.get(0).get解除年月日() == null
+                    || 適用除外者情報.get(0).get解除年月日().isEmpty())) {
+                div.getPanelTekiyoJokaiTekiInput().getTxtNyusyoDateInput().setDisabled(true);
+                div.getPanelTekiyoJokaiTekiInput().getTxtTekiyoDateInput().setDisabled(true);
+                div.getPanelTekiyoJokaiTekiInput().getTxtTkyoTododkDateIn().setDisabled(true);
+                div.getPanelTekiyoJokaiTekiInput().getDdlTekiyoJiyuInput().setDisabled(true);
+                div.getPanelTekiyoJokaiTekiInput().getCcdShisetsuJoho().setDisabled(true);
+                div.getBtnInputClear().setDisabled(true);
+                div.getBtnKakutei().setDisabled(true);
+            }
         } else if (状態_解除.equals(親画面状態)) {
             div.getBtnAdd().setVisible(true);
             div.getBtnAdd().setDisabled(true);

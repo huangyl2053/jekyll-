@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyok
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -21,11 +22,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 要介護認定結果通知一覧表のデータを作成します。
@@ -69,7 +70,7 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
 
     @Override
     protected void process(KekkatsuchiIchiranhyoEntity entity) {
-        entity.setShichosonName(BusinessConfig.get(ConfigNameDBE.判定結果情報出力_広域連合名称, SubGyomuCode.DBE認定支援));
+        entity.setShichosonName(DbBusinessConfig.get(ConfigNameDBE.判定結果情報出力_広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         entity.setShinsakaiNo(builder.toRString());
         entity.setPrintTimeStamp(システム時刻);
         entity.setSeibetsu(Seibetsu.toValue(entity.getSeibetsu()).get名称());

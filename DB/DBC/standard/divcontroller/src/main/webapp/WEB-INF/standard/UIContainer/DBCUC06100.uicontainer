@@ -53,6 +53,16 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0600021",
+     "layoutTitle": "福祉用具購入費支給申請登録",
+     "eventName": "処理終了",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

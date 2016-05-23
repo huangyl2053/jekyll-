@@ -345,7 +345,7 @@ public class KojinJokyoShokai {
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return entity.isShiteiiFlag();
     }
 
@@ -383,6 +383,15 @@ public class KojinJokyoShokai {
      */
     public RString get調査員氏名() {
         return entity.getChosainShimei();
+    }
+
+    /**
+     * 市町村連絡事項を返します。
+     *
+     * @return 市町村連絡事項
+     */
+    public RString get市町村連絡事項() {
+        return entity.getShichosonRenrakuJiko();
     }
 
     /**

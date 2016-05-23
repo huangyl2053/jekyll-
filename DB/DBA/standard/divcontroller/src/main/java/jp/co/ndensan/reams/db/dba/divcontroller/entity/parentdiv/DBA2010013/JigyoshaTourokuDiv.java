@@ -5,14 +5,12 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * JigyoshaTouroku のクラスファイル 
  * 
- * @reamsid_L DBA-0340-050 lijia
- * 
+ * @author 自動生成
  */
 public class JigyoshaTourokuDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
@@ -38,8 +36,6 @@ public class JigyoshaTourokuDiv extends Panel {
     private KaisetsushaJohoDiv KaisetsushaJoho;
     @JsonProperty("ServiceJoho")
     private ServiceJohoDiv ServiceJoho;
-    @JsonProperty("jigyoshaCode")
-    private RString jigyoshaCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -189,24 +185,6 @@ public class JigyoshaTourokuDiv extends Panel {
     @JsonProperty("ServiceJoho")
     public void setServiceJoho(ServiceJohoDiv ServiceJoho) {
         this.ServiceJoho = ServiceJoho;
-    }
-
-    /*
-     * getjigyoshaCode
-     * @return jigyoshaCode
-     */
-    @JsonProperty("jigyoshaCode")
-    public RString getJigyoshaCode() {
-        return jigyoshaCode;
-    }
-
-    /*
-     * setjigyoshaCode
-     * @param jigyoshaCode jigyoshaCode
-     */
-    @JsonProperty("jigyoshaCode")
-    public void setJigyoshaCode(RString jigyoshaCode) {
-        this.jigyoshaCode = jigyoshaCode;
     }
 
     // </editor-fold>

@@ -76,7 +76,7 @@ public class SeikatsuhogoRirekiFinder {
         ISeikatsuhogoRirekiMapper mapper = mapperProvider.create(ISeikatsuhogoRirekiMapper.class);
         SeikatsuhogoParameter parameter = SeikatsuhogoParameter.createParameter(識別コード, 業務コード);
         List<SeikatsuhogoRelateEntity> entityList = mapper.get生活保護履歴情報(parameter);
-        if (entityList != null) {
+        if (entityList != null && !entityList.isEmpty()) {
             List<SeikatsuhogoRelateEntity> list = new ArrayList<>();
             SeikatsuhogoRelateEntity relateEntity2 = new SeikatsuhogoRelateEntity();
             RStringBuilder shuruiCode = new RStringBuilder();

@@ -43,6 +43,10 @@ module DBC {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtTekiyoKikan"));
             }
 
+            public cbZanteiKubun(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("cbZanteiKubun"));
+            }
+
             public txtTaishoYM(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtTaishoYM"));
             }

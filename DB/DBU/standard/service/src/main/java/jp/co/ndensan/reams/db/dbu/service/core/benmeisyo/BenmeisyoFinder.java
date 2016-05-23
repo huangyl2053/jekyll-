@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeisyo.IBenmei
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShobunShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -51,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -108,7 +108,7 @@ public class BenmeisyoFinder {
     public BenmeisyoTyohyoDataEntity setBenmeisyoTyohyoData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日,
             ReportSourceWriter reportSourceWriter) {
         BenmeisyoTyohyoDataEntity benmeisyoTyohyoDataEntity = new BenmeisyoTyohyoDataEntity();
-        benmeisyoTyohyoDataEntity.set送付先郵便番号(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_郵便番号,
+        benmeisyoTyohyoDataEntity.set送付先郵便番号(DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_郵便番号, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告));
         benmeisyoTyohyoDataEntity.set送付先住所(get送付先住所());
         benmeisyoTyohyoDataEntity.set送付先名称(get送付先名称());
@@ -139,23 +139,23 @@ public class BenmeisyoFinder {
 
     private RString get送付先住所() {
         StringBuilder 送付先住所 = new StringBuilder();
-        送付先住所.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所１, SubGyomuCode.DBU介護統計報告));
-        送付先住所.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所２, SubGyomuCode.DBU介護統計報告));
-        送付先住所.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所３, SubGyomuCode.DBU介護統計報告));
+        送付先住所.append(DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所１, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        送付先住所.append(DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所２, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        送付先住所.append(DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_住所３, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         return new RString(送付先住所.toString());
     }
 
     private RString get送付先名称() {
         StringBuilder 送付先名称 = new StringBuilder();
-        送付先名称.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_名称１, SubGyomuCode.DBU介護統計報告));
-        送付先名称.append(BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_名称２, SubGyomuCode.DBU介護統計報告));
+        送付先名称.append(DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_名称１, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        送付先名称.append(DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_送付先情報_名称２, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         return new RString(送付先名称.toString());
     }
 
     private RString get文言(FlexibleDate 審査請求届出日) {
-        RString 文言１ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言１, SubGyomuCode.DBU介護統計報告);
-        RString 文言２ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言２, SubGyomuCode.DBU介護統計報告);
-        RString 文言３ = BusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言３, SubGyomuCode.DBU介護統計報告);
+        RString 文言１ = DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言１, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 文言２ = DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言２, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 文言３ = DbBusinessConfig.get(ConfigNameDBU.不服申し立て弁明書_定型文_文言３, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         StringBuilder 文言 = new StringBuilder();
         if (文言１.contains(文言_部分)) {
             RString 部分1 = 文言１.substring(0, 文言１.indexOf("@"));

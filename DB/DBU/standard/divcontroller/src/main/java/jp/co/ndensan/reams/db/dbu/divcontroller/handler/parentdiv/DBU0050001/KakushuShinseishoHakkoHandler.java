@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigofukushi.KyotakuKaig
 import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigojutakukaishuhijizenshinseisho.KyotakuKaigoJutakuKaishuhiJizenShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyufuhikariireshinseisho.KyufuhiKariireShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyufuhikashitsukekinshokankigen.KyufuhiKashitsukekinShokankigenEnchoShinseisho;
-import jp.co.ndensan.reams.db.dba.service.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.shiharaihohohenkoshuryoshinseisho.ShiharaiHohoHenkoShuryoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.shikakushutokuidososhitsu.ShikakuShutokuIdoSoshitsuTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.shoukanbaraijuryoininbaraishinseishochohyo.ShoukanbaraiJuryoIninbaraiShinseishoChohyo;
@@ -35,14 +34,14 @@ import jp.co.ndensan.reams.db.dbc.service.report.daisanshakoiniyoruhigaitodokech
 import jp.co.ndensan.reams.db.dbc.service.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuJuryoIninShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
+import jp.co.ndensan.reams.db.dbd.service.report.shakaifukushihojinfutan.ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho;
 import jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
-import jp.co.ndensan.reams.db.dbu.definition.core.kakujyusinseisyohakkou.HikitugiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.KakushuShinseishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.dgKakushushinsei_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -62,7 +61,7 @@ public class KakushuShinseishoHakkoHandler {
     private static final RString 給付 = new RString("給付");
     private static final int 申請書帳票種類 = 3;
     private final KakushuShinseishoHakkoDiv div;
-    private final HikitugiData data;
+    private final TaishoshaKey data;
 
     /**
      * コンストラクタです。
@@ -71,7 +70,7 @@ public class KakushuShinseishoHakkoHandler {
      */
     public KakushuShinseishoHakkoHandler(KakushuShinseishoHakkoDiv div) {
         this.div = div;
-        this.data = ViewStateHolder.get(ViewStateKeys.状態, HikitugiData.class);
+        this.data = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
     }
 
     /**
@@ -153,7 +152,8 @@ public class KakushuShinseishoHakkoHandler {
                     sourceData = todoke.createTokuteifutanGendogakuShinseishoChohyo(識別コード, 被保険者番号);
                 }
                 if (ShinseishoChohyoShurui.社会福祉法人等利用者負担軽減対象確認申請書.get名称().equals(row.getShinseisho())) {
-                    ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho todoke = new ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho();
+                    ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho todoke = ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho
+                            .createInstance();
                     sourceData = todoke.createShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoChohyo(被保険者番号, 識別コード);
                 }
                 if (ShinseishoChohyoShurui.特別地域加算減免_訪問介護等利用者負担減額対象確認申請書.get名称().equals(row.getShinseisho())) {
@@ -241,15 +241,15 @@ public class KakushuShinseishoHakkoHandler {
     }
 
     private RString get業務名称(RString 申請書帳票種類コード) {
-        RString 業務コード = 申請書帳票種類コード.substring(0, 申請書帳票種類);
+        RString 業務コード = 申請書帳票種類コード.substring(2, 申請書帳票種類);
         RString 業務名称;
-        if (SubGyomuCode.DBA介護資格.getColumnValue().equals(業務コード)) {
+        if (new RString("A").equals(業務コード)) {
             業務名称 = 資格;
-        } else if (SubGyomuCode.DBB介護賦課.getColumnValue().equals(業務コード)) {
+        } else if (new RString("B").equals(業務コード)) {
             業務名称 = 賦課;
-        } else if (SubGyomuCode.DBC介護給付.getColumnValue().equals(業務コード)) {
+        } else if (new RString("C").equals(業務コード)) {
             業務名称 = 給付;
-        } else if (SubGyomuCode.DBD介護受給.getColumnValue().equals(業務コード)) {
+        } else if (new RString("D").equals(業務コード)) {
             業務名称 = 受給;
         } else {
             業務名称 = 認定;

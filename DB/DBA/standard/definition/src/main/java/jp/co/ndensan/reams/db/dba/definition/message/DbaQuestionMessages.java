@@ -28,7 +28,7 @@ public enum DbaQuestionMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbaQuestionMessages(int no, String message) {
-        this.message = new QuestionMessage(toCode("Q", no), message);
+        this.message = new QuestionMessage(toCode("DBAQ", no), message);
     }
 
     @Override

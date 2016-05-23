@@ -17,12 +17,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -32,12 +31,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 被保険者資格詳細異動Handlerクラスです。
  *
- * @reamsid_L DBA-0340-050 lijia
+ * @reamsid_L DBA-0521-020 lijia
  *
  */
 public class HihokenshaShisakuPanalHandler {
@@ -51,6 +52,8 @@ public class HihokenshaShisakuPanalHandler {
     private final RString 合併情報区分 = new RString("1");
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
+    private final CodeShubetsu 取得事由コード種別 = new CodeShubetsu("0007");
+    private final CodeShubetsu 喪失事由コード種別 = new CodeShubetsu("0010");
 
     /**
      * コンストラクタです。
@@ -108,52 +111,15 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private void get取得事由() {
-        List<KeyValueDataSource> 取得事由リスト = new ArrayList<>();
-        KeyValueDataSource dateSource = new KeyValueDataSource();
-        dateSource.setKey(ShikakuShutokuJiyu.転入.getコード());
-        dateSource.setValue(ShikakuShutokuJiyu.転入.get名称());
-        取得事由リスト.add(dateSource);
-        KeyValueDataSource dateSource1 = new KeyValueDataSource();
-        dateSource1.setKey(ShikakuShutokuJiyu.年齢到達.getコード());
-        dateSource1.setValue(ShikakuShutokuJiyu.年齢到達.get名称());
-        取得事由リスト.add(dateSource1);
-        KeyValueDataSource dateSource2 = new KeyValueDataSource();
-        dateSource2.setKey(ShikakuShutokuJiyu.外国人.getコード());
-        dateSource2.setValue(ShikakuShutokuJiyu.外国人.get名称());
-        取得事由リスト.add(dateSource2);
-        KeyValueDataSource dateSource3 = new KeyValueDataSource();
-        dateSource3.setKey(ShikakuShutokuJiyu._２号申請.getコード());
-        dateSource3.setValue(ShikakuShutokuJiyu._２号申請.get名称());
-        取得事由リスト.add(dateSource3);
-        KeyValueDataSource dateSource4 = new KeyValueDataSource();
-        dateSource4.setKey(ShikakuShutokuJiyu.他特例居住.getコード());
-        dateSource4.setValue(ShikakuShutokuJiyu.他特例居住.get名称());
-        取得事由リスト.add(dateSource4);
-        KeyValueDataSource dateSource5 = new KeyValueDataSource();
-        dateSource5.setKey(ShikakuShutokuJiyu.除外者居住.getコード());
-        dateSource5.setValue(ShikakuShutokuJiyu.除外者居住.get名称());
-        取得事由リスト.add(dateSource5);
-        KeyValueDataSource dateSource6 = new KeyValueDataSource();
-        dateSource6.setKey(ShikakuShutokuJiyu.帰化.getコード());
-        dateSource6.setValue(ShikakuShutokuJiyu.帰化.get名称());
-        取得事由リスト.add(dateSource6);
-        KeyValueDataSource dateSource7 = new KeyValueDataSource();
-        dateSource7.setKey(ShikakuShutokuJiyu.国籍取得.getコード());
-        dateSource7.setValue(ShikakuShutokuJiyu.国籍取得.get名称());
-        取得事由リスト.add(dateSource7);
-        KeyValueDataSource dateSource8 = new KeyValueDataSource();
-        dateSource8.setKey(ShikakuShutokuJiyu.職権取得.getコード());
-        dateSource8.setValue(ShikakuShutokuJiyu.職権取得.get名称());
-        取得事由リスト.add(dateSource8);
-        KeyValueDataSource dateSource9 = new KeyValueDataSource();
-        dateSource9.setKey(ShikakuShutokuJiyu.施行時取得.getコード());
-        dateSource9.setValue(ShikakuShutokuJiyu.施行時取得.get名称());
-        取得事由リスト.add(dateSource9);
-        KeyValueDataSource dateSource10 = new KeyValueDataSource();
-        dateSource10.setKey(ShikakuShutokuJiyu.その他.getコード());
-        dateSource10.setValue(ShikakuShutokuJiyu.その他.get名称());
-        取得事由リスト.add(dateSource10);
-        panelDiv.getShikakuShosai().getDdlShutokuJiyu().setDataSource(取得事由リスト);
+        List<UzT0007CodeEntity> 取得事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, 取得事由コード種別);
+        List<KeyValueDataSource> keyValueList = new ArrayList<>();
+        for (UzT0007CodeEntity entity : 取得事由List) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(entity.getコード().getColumnValue());
+            keyValue.setValue(entity.getコード略称());
+            keyValueList.add(keyValue);
+        }
+        panelDiv.getShikakuShosai().getDdlShutokuJiyu().setDataSource(keyValueList);
     }
 
     private void get被保区分() {
@@ -188,8 +154,12 @@ public class HihokenshaShisakuPanalHandler {
         ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (介護導入形態 != null) {
             DonyuKeitaiCode 導入形態コード = 介護導入形態.get導入形態コード();
-            RString 所在保険者 = 資格得喪情報.getShozaiHokensha();
-            RString 措置元保険者 = 資格得喪情報.getSochimotoHokensha();
+            RString 所在保険者 = RString.EMPTY;
+            RString 措置元保険者 = RString.EMPTY;
+            if (資格得喪情報 != null) {
+                所在保険者 = 資格得喪情報.getShozaiHokensha();
+                措置元保険者 = 資格得喪情報.getSochimotoHokensha();
+            }
             List<Shichoson> 旧保険者情報 = 旧保険者取得(
                     RString.isNullOrEmpty(所在保険者) ? LasdecCode.EMPTY : new LasdecCode(所在保険者),
                     導入形態コード.getCode(),
@@ -206,36 +176,15 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private void get喪失事由() {
-        List<KeyValueDataSource> 喪失事由リスト = new ArrayList<>();
-        KeyValueDataSource dateSource = new KeyValueDataSource();
-        dateSource.setKey(ShikakuSoshitsuJiyu.転出.getCode());
-        dateSource.setValue(ShikakuSoshitsuJiyu.転出.getName());
-        喪失事由リスト.add(dateSource);
-        KeyValueDataSource dateSource1 = new KeyValueDataSource();
-        dateSource1.setKey(ShikakuSoshitsuJiyu.死亡.getCode());
-        dateSource1.setValue(ShikakuSoshitsuJiyu.死亡.getName());
-        喪失事由リスト.add(dateSource1);
-        KeyValueDataSource dateSource2 = new KeyValueDataSource();
-        dateSource2.setKey(ShikakuSoshitsuJiyu.除外者.getCode());
-        dateSource2.setValue(ShikakuSoshitsuJiyu.除外者.getName());
-        喪失事由リスト.add(dateSource2);
-        KeyValueDataSource dateSource3 = new KeyValueDataSource();
-        dateSource3.setKey(ShikakuSoshitsuJiyu.国籍喪失.getCode());
-        dateSource3.setValue(ShikakuSoshitsuJiyu.国籍喪失.getName());
-        喪失事由リスト.add(dateSource3);
-        KeyValueDataSource dateSource4 = new KeyValueDataSource();
-        dateSource4.setKey(ShikakuSoshitsuJiyu.他特例者.getCode());
-        dateSource4.setValue(ShikakuSoshitsuJiyu.他特例者.getName());
-        喪失事由リスト.add(dateSource4);
-        KeyValueDataSource dateSource5 = new KeyValueDataSource();
-        dateSource5.setKey(ShikakuSoshitsuJiyu.職権喪失.getCode());
-        dateSource5.setValue(ShikakuSoshitsuJiyu.職権喪失.getName());
-        喪失事由リスト.add(dateSource5);
-        KeyValueDataSource dateSource6 = new KeyValueDataSource();
-        dateSource6.setKey(ShikakuSoshitsuJiyu.その他.getCode());
-        dateSource6.setValue(ShikakuSoshitsuJiyu.その他.getName());
-        喪失事由リスト.add(dateSource6);
-        panelDiv.getShikakuShosai().getDdlSoshitsuJiyu().setDataSource(喪失事由リスト);
+        List<UzT0007CodeEntity> 喪失事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, 喪失事由コード種別);
+        List<KeyValueDataSource> keyValueList = new ArrayList<>();
+        for (UzT0007CodeEntity entity : 喪失事由List) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(entity.getコード().getColumnValue());
+            keyValue.setValue(entity.getコード略称());
+            keyValueList.add(keyValue);
+        }
+        panelDiv.getShikakuShosai().getDdlSoshitsuJiyu().setDataSource(keyValueList);
     }
 
     private void 表示と非表示() {
@@ -260,7 +209,10 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private boolean is合併市町村() {
-        RString 合併市町村 = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告);
+        RString 合併市町村 = BusinessConfig.get(
+                ConfigNameDBU.合併情報管理_合併情報区分,
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
         return 合併情報区分.equals(合併市町村);
     }
 
