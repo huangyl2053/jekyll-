@@ -43,7 +43,7 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-
+        hakkoYMD.append(new RString(" 作成"));
         source.title = item.getTitle();
         source.taishoHokenshaName = item.get出力対象();
         source.hakkoYMD = hakkoYMD.toRString();
@@ -54,7 +54,8 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listNo_5 = item.get認定申請日();
         source.listNo_6 = item.get二次判定年月日();
 
-        source.listHokenshaName_1 = new RStringBuilder(item.get証記載保険者番号()).append(item.get市町村名称()).toRString();
+        source.listHokenshaName_1 = item.get証記載保険者番号();
+        source.listHokenshaNo_1 = item.get市町村名称();
         source.listHihokenshaNo_1 = item.get被保険者番号();
         source.listHihokenshaNo_2 = item.get被保険者氏名();
         source.listHihokenshaNo_3 = item.getTb_一次判定結果();
@@ -65,11 +66,13 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
 
         RStringBuilder tempTokuteishippei_1 = new RStringBuilder(String.valueOf(item.get二次判定認定有効期間()));
         tempTokuteishippei_1
-                .append("ヵ月")
-                .append(item.get二次判定認定有効開始年月日())
-                .append("～")
+                .append("ヵ月");
+        RStringBuilder tempTokuteishippei_2 = new RStringBuilder(item.get二次判定認定有効開始年月日());
+        tempTokuteishippei_2.append("～")
                 .append(item.get二次判定認定有効終了年月日());
-        source.listTokuteishippei_1 = tempTokuteishippei_1.toRString();
+        source.listYukokikan_1 = tempTokuteishippei_1.toRString();
+        source.listYukokikan_2 = item.get二号特定疾病コード();
+        source.listTokuteishippei_1 = tempTokuteishippei_2.toRString();
         source.listTokuteishippei_2 = item.get二号特定疾病内容();
         source.listShinsakaiiken_1 = item.get介護認定審査会意見();
         return source;
