@@ -164,9 +164,14 @@ public class KihonInfoHandler {
         }
 
         if (!shokanKihon.get居宅サービス計画作成区分コード().isEmpty() && !自己作成.equals(shokanKihon.get居宅サービス計画作成区分コード())) {
-            div.getPanelKihon().getPanelKyotaku().getTxtJigyosha().setValue(shokanKihon.get事業者番号().value());
-            div.getPanelKihon().getPanelKyotaku().getTxtJigyoshaName().setValue(kaigoJigyoshaEntity.getEntity()
-                    .getJigyoshaName().value());
+            if (shokanKihon.get事業者番号() != null) {
+                div.getPanelKihon().getPanelKyotaku().getTxtJigyosha().setValue(shokanKihon.get事業者番号().value());
+            }
+            if (kaigoJigyoshaEntity != null && kaigoJigyoshaEntity.getEntity() != null && kaigoJigyoshaEntity.getEntity()
+                    .getJigyoshaName() != null) {
+                div.getPanelKihon().getPanelKyotaku().getTxtJigyoshaName().setValue(kaigoJigyoshaEntity.getEntity()
+                        .getJigyoshaName().value());
+            }
         }
         div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(shokanKihon.get保険給付率().value());
         if (!shokanKihon.get開始年月日().isEmpty()) {
