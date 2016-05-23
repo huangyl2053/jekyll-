@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SagakuReishoHa
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.SanteiKiso;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
@@ -44,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 
 /**
  *
@@ -98,7 +98,7 @@ public class NonyuTsuchiShoDataHenshu {
         List<SamantabhadraIncomeInformation> 普徴収入情報リスト = get普徴収入情報リスト(編集後納入通知書共通情報);
         List<UniversalPhase> 更正後普徴期別金額リスト = new ArrayList<>();
         KozaKubun 口座区分 = null;
-        if (編集後納入通知書共通情報 != null && 編集後納入通知書共通情報.get更正後() != null) {
+        if (編集後納入通知書共通情報.get更正後() != null) {
             更正後普徴期別金額リスト = 編集後納入通知書共通情報.get更正後().get更正後普徴期別金額リスト();
             口座区分 = 編集後納入通知書共通情報.get更正後().get更正後口座区分();
         }
@@ -108,21 +108,19 @@ public class NonyuTsuchiShoDataHenshu {
         }
         FlexibleYear 調定年度 = FlexibleYear.EMPTY;
         FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
-        Boolean 前年度情報有無 = false;
-        EditedAtesaki 編集後宛先 = null;
-        EditedKojin 編集後個人 = null;
         TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
-        if (編集後納入通知書共通情報 != null) {
-            if (編集後納入通知書共通情報.get調定年度() != null) {
-                調定年度 = 編集後納入通知書共通情報.get調定年度();
-            }
-            if (編集後納入通知書共通情報.get賦課年度() != null) {
-                賦課年度 = 編集後納入通知書共通情報.get賦課年度();
-            }
-            前年度情報有無 = 編集後納入通知書共通情報.get前年度情報有無();
-            編集後宛先 = 編集後納入通知書共通情報.get編集後宛先();
-            編集後個人 = 編集後納入通知書共通情報.get編集後個人();
+        if (編集後納入通知書共通情報.get調定年度() != null) {
+            調定年度 = 編集後納入通知書共通情報.get調定年度();
         }
+        if (編集後納入通知書共通情報.get賦課年度() != null) {
+            賦課年度 = 編集後納入通知書共通情報.get賦課年度();
+        }
+        if (編集後納入通知書共通情報.get通知書番号() != null) {
+            通知書番号 = 編集後納入通知書共通情報.get通知書番号();
+        }
+        Boolean 前年度情報有無 = 編集後納入通知書共通情報.get前年度情報有無();
+        EditedAtesaki 編集後宛先 = 編集後納入通知書共通情報.get編集後宛先();
+        EditedKojin 編集後個人 = 編集後納入通知書共通情報.get編集後個人();
         List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();
         if (仮算定通知書情報.get普徴納期情報リスト() != null) {
             普徴納期情報リスト = 仮算定通知書情報.get普徴納期情報リスト();
@@ -270,40 +268,37 @@ public class NonyuTsuchiShoDataHenshu {
         FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
         NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = new NonyuTsuchiShoSeigyoJoho();
         List<SamantabhadraIncomeInformation> 普徴収入情報リスト = new ArrayList<>();
-        EditedAtesaki 編集後宛先 = null;
         SetaiCode 世帯コード = SetaiCode.EMPTY;
         TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
         HyojiCodes 表示コード = new HyojiCodes();
-        if (編集後本算定通知書共通情報 != null) {
-            if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
-                普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
-            }
-            if (編集後本算定通知書共通情報.get更正後() != null) {
-                口座区分 = 編集後本算定通知書共通情報.get更正後().get口座区分();
-            }
-            if (編集後本算定通知書共通情報.get調定年度() != null) {
-                調定年度 = 編集後本算定通知書共通情報.get調定年度();
-            }
-            if (編集後本算定通知書共通情報.get賦課年度() != null) {
-                賦課年度 = 編集後本算定通知書共通情報.get賦課年度();
-            }
-            if (本算定納入通知書制御情報.get納入通知書制御情報() != null) {
-                納入通知書制御情報 = 本算定納入通知書制御情報.get納入通知書制御情報();
-            }
-            if (編集後本算定通知書共通情報.get普徴収入情報リスト() != null) {
-                普徴収入情報リスト = 編集後本算定通知書共通情報.get普徴収入情報リスト();
-            }
-            if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {
-                世帯コード = 編集後本算定通知書共通情報.get編集後個人().get世帯コード();
-            }
-            if (編集後本算定通知書共通情報.get通知書番号() != null) {
-                通知書番号 = 編集後本算定通知書共通情報.get通知書番号();
-            }
-            if (編集後本算定通知書共通情報.get表示コード() != null) {
-                表示コード = 編集後本算定通知書共通情報.get表示コード();
-            }
-            編集後宛先 = 編集後本算定通知書共通情報.get編集後宛先();
+        if (編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
+            普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
         }
+        if (編集後本算定通知書共通情報.get更正後() != null) {
+            口座区分 = 編集後本算定通知書共通情報.get更正後().get口座区分();
+        }
+        if (編集後本算定通知書共通情報.get調定年度() != null) {
+            調定年度 = 編集後本算定通知書共通情報.get調定年度();
+        }
+        if (編集後本算定通知書共通情報.get賦課年度() != null) {
+            賦課年度 = 編集後本算定通知書共通情報.get賦課年度();
+        }
+        if (本算定納入通知書制御情報.get納入通知書制御情報() != null) {
+            納入通知書制御情報 = 本算定納入通知書制御情報.get納入通知書制御情報();
+        }
+        if (編集後本算定通知書共通情報.get普徴収入情報リスト() != null) {
+            普徴収入情報リスト = 編集後本算定通知書共通情報.get普徴収入情報リスト();
+        }
+        if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {
+            世帯コード = 編集後本算定通知書共通情報.get編集後個人().get世帯コード();
+        }
+        if (編集後本算定通知書共通情報.get通知書番号() != null) {
+            通知書番号 = 編集後本算定通知書共通情報.get通知書番号();
+        }
+        if (編集後本算定通知書共通情報.get表示コード() != null) {
+            表示コード = 編集後本算定通知書共通情報.get表示コード();
+        }
+        EditedAtesaki 編集後宛先 = 編集後本算定通知書共通情報.get編集後宛先();
         List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();
         if (本算定通知書情報.get普徴納期情報リスト() != null) {
             普徴納期情報リスト = 本算定通知書情報.get普徴納期情報リスト();
