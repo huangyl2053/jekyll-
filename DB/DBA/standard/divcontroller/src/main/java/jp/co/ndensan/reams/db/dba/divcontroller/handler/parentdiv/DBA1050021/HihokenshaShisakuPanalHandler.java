@@ -77,15 +77,15 @@ public class HihokenshaShisakuPanalHandler {
         get宛名基本情報取得(識別コード);
         get資格系基本情報取得(被保番号);
         setドロップダウンリストの設定();
-        if (viewState.equals(状態_追加)) {
+        if (状態_追加.equals(viewState)) {
             get画面初期の追加更新モードの表示制御();
-        } else if (viewState.equals(状態_修正)) {
+        } else if (状態_修正.equals(viewState)) {
             get画面初期の追加更新モードの表示制御();
             set資格詳細情報設定(資格得喪情報, 被保番号, 識別コード, 資格得喪情報.getShutokuDate());
-        } else if (viewState.equals(状態_削除)) {
+        } else if (状態_削除.equals(viewState)) {
             get画面初期の削除照会モードの表示制御();
             set資格詳細情報設定(資格得喪情報, 被保番号, 識別コード, 資格得喪情報.getShutokuDate());
-        } else if (viewState.equals(状態_照会)) {
+        } else if (状態_照会.equals(viewState)) {
             get画面初期の削除照会モードの表示制御();
             set資格詳細情報設定(資格得喪情報, 被保番号, 識別コード, 資格得喪情報.getShutokuDate());
         }
