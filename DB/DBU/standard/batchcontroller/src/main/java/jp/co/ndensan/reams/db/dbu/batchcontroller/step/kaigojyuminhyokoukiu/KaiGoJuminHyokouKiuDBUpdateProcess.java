@@ -27,8 +27,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KaiGoJuminHyokouKiuDBUpdateProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.getEntity");
+            "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper"
+            + ".get処理日付管理マスタ登録処理");
     private boolean isEmpty = true;
+    private int i = 0;
     private KaiGoJuminHyokouKiuProcessParameter parameter;
 
     @BatchWriter
@@ -47,26 +49,35 @@ public class KaiGoJuminHyokouKiuDBUpdateProcess extends BatchProcessBase<DbT7022
     @Override
     protected void process(DbT7022ShoriDateKanriEntity entity) {
         isEmpty = false;
-        entity.setKijunTimestamp(new YMDHMS(parameter.getDateto()));
-        entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.getDatefrom()));
-        entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.getDateto()));
+        entity.setKijunTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(0).getDateTo()));
+        xx(entity);
+        entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(0).getDateTo()));
         tableWrite.update(entity);
+        i++;
     }
 
     @Override
     protected void afterExecute() {
         if (isEmpty) {
-            DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
-            entity.setSubGyomuCode(SubGyomuCode.DBU介護統計報告);
-            entity.setShichosonCode(new LasdecCode("000000"));
-            entity.setShoriName(new RString("介護住民票個別事項連携情報作成【広域運用】"));
-            entity.setNendo(new FlexibleYear("0000"));
-            entity.setNendoNaiRenban(new RString("0000"));
-            entity.setKijunTimestamp(new YMDHMS(parameter.getDateto().toString()));
-            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.getDatefrom().toString()));
-            entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.getDateto().toString()));
-            tableWrite.insert(entity);
+            for (int i = 0; i < parameter.getKobetsuKoikiunyoParameterList().size(); i++) {
+                DbT7022ShoriDateKanriEntity entity = new DbT7022ShoriDateKanriEntity();
+                entity.setSubGyomuCode(SubGyomuCode.DBU介護統計報告);
+                entity.setShichosonCode(new LasdecCode(parameter.getKobetsuKoikiunyoParameterList().get(i).getShichosonCode().toString()));
+                entity.setShoriName(new RString("介護住民票個別事項連携情報作成【広域運用】"));
+                entity.setNendo(new FlexibleYear("0000"));
+                entity.setNendoNaiRenban(new RString("0000"));
+                entity.setKijunTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(i).getDateTo().toString()));
+                entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(i).getDateFrom().toString()));
+                entity.setTaishoShuryoTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(i).getDateTo().toString()));
+                tableWrite.insert(entity);
+            }
         }
     }
 
+    private void xx(DbT7022ShoriDateKanriEntity entity) {
+        if (i <= parameter.getKobetsuKoikiunyoParameterList().size() - 1) {
+            entity.setTaishoKaishiTimestamp(new YMDHMS(parameter.getKobetsuKoikiunyoParameterList().get(i).getDateFrom()));
+        }
+
+    }
 }
