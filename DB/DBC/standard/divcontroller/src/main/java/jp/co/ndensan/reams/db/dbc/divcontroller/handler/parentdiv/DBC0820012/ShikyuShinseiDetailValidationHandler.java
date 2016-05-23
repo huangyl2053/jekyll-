@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.ShikyuShinseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.pnlShinseiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面入力のチェックHandler。
@@ -45,9 +43,10 @@ public class ShikyuShinseiDetailValidationHandler {
     /**
      * 申請既存チェック
      *
+     * @param 償還払支給申請 ShokanShinsei
      * @return バリデーション結果 ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validateFor申請既存チェック() {
+    public ValidationMessageControlPairs validateFor申請既存チェック(ShokanShinsei 償還払支給申請) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString 処理モード = div.getPanelHead().getTxtShoriMode().getValue();
         if (MODEL_ADD.equals(処理モード)) {
@@ -56,7 +55,6 @@ public class ShikyuShinseiDetailValidationHandler {
                         new IdocheckMessages(UrErrorMessages.存在しない, SHOUKANSIKYUUSINSEI.toString())));
             }
         } else {
-            ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
             if (償還払支給申請 == null) {
                 validPairs.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.存在しない, SHOUKANSIKYUUSINSEI.toString())));
@@ -73,19 +71,24 @@ public class ShikyuShinseiDetailValidationHandler {
         if (pnlDiv.getTxtUketsukeYMD().getValue() == null) {
             return true;
         }
-        if (pnlDiv.getTxtKisaiHokensyaBango().getValue().isNullOrEmpty()) {
+        if (pnlDiv.getTxtKisaiHokensyaBango().getValue() == null
+                || pnlDiv.getTxtKisaiHokensyaBango().getValue().isEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtShimeikana().getDomain().isEmpty() || pnlDiv.getTxtShimeikana().getDomain() == null) {
+        if (pnlDiv.getTxtShimeikana().getDomain() == null
+                || pnlDiv.getTxtShimeikana().getDomain().isEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtShimeiKanji().getDomain().isEmpty() || pnlDiv.getTxtShimeiKanji().getDomain() == null) {
+        if (pnlDiv.getTxtShimeiKanji().getDomain() == null
+                || pnlDiv.getTxtShimeiKanji().getDomain().isEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtTelNo().getDomain().isEmpty() || pnlDiv.getTxtTelNo().getDomain() == null) {
+        if (pnlDiv.getTxtTelNo().getDomain() == null
+                || pnlDiv.getTxtTelNo().getDomain().isEmpty()) {
             return true;
         }
-        if (pnlDiv.getTxtMulShinseiRiyu().getValue().isNullOrEmpty()) {
+        if (pnlDiv.getTxtMulShinseiRiyu().getValue() == null
+                || pnlDiv.getTxtMulShinseiRiyu().getValue().isEmpty()) {
             return true;
         }
         return pnlDiv.getTxtNumShiharaKingakuGk().getValue() == null;
