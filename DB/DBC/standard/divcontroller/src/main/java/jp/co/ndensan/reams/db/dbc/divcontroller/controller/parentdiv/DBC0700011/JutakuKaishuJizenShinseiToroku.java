@@ -322,6 +322,7 @@ public class JutakuKaishuJizenShinseiToroku {
             }
         }
         handler.支払結果の設定(hihokenshaNo);
+        handler.住宅改修データと限度額リセット値の保存();
         return ResponseData.of(div).respond();
     }
 

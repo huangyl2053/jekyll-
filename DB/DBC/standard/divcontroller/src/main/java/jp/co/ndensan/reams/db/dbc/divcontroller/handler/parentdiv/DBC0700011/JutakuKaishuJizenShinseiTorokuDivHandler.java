@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0700011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -866,7 +867,13 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     public void 住宅改修データと限度額リセット値の保存() {
         List<KeyValueDataSource> selectedItems = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
-        ViewStateHolder.put(ViewStateKeys.限度額リセット値, (ArrayList<KeyValueDataSource>) selectedItems);
+        List<RString> selectedKey = new ArrayList<>();
+        if (selectedItems != null && selectedItems.size() > 0) {
+            for (KeyValueDataSource tmpDataSource : selectedItems) {
+                selectedKey.add(tmpDataSource.getKey());
+            }
+        }
+        ViewStateHolder.put(ViewStateKeys.限度額リセット値, (Serializable) selectedKey);
         div.setHidTxtHiyoTotalNow(new RString(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtHiyoTotalNow().getValue().toString()));
         div.setHidTxtHokenTaishoHiyoNow(new RString(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
@@ -908,9 +915,15 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     private boolean 限度額リセット値変更有無チェック() {
         List<KeyValueDataSource> selectedItemsNew = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                 .getTabJutakuKaisyuJyoho().getTotalPanel().getChkResetInfo().getSelectedItems();
-        List<KeyValueDataSource> selectedItemsOld = ViewStateHolder.get(ViewStateKeys.限度額リセット値, List.class);
+        List<RString> selectedKeyNew = new ArrayList<>();
+        if (selectedItemsNew != null && selectedItemsNew.size() > 0) {
+            for (KeyValueDataSource tmpDataSource : selectedItemsNew) {
+                selectedKeyNew.add(tmpDataSource.getKey());
+            }
+        }
+        List<RString> selectedItemsOld = ViewStateHolder.get(ViewStateKeys.限度額リセット値, List.class);
 
-        if (!selectedItemsNew.equals(selectedItemsOld)) {
+        if (!selectedKeyNew.equals(selectedItemsOld)) {
             return true;
         }
         if (!div.getHidTxtHiyoTotalNow().equals(new RString(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
