@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchishokarihakkoichiranreport;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.Property;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport;
@@ -113,10 +115,24 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReportPrintService {
             List<RString> 出力項目リスト,
             List<RString> 改頁項目リスト,
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> reportSourceWriter) {
+        Collections.sort(編集後仮算定通知書共通情報entityList, new Comparator<EditedKariSanteiTsuchiShoKyotsu>() {
+            @Override
+            public int compare(EditedKariSanteiTsuchiShoKyotsu o1, EditedKariSanteiTsuchiShoKyotsu o2) {
+                int flag = o1.get通知書番号().compareTo(o2.get通知書番号());
+                if (0 == flag) {
+                    flag = o1.get更正後().get更正後特徴期別金額01().compareTo(o2.get更正後().get更正後特徴期別金額01());
+                    if (0 == flag) {
+                        flag = o1.get更正後().get更正後特徴期別金額02().compareTo(o1.get更正後().get更正後特徴期別金額02());
+                    }
+                }
+                return flag;
+            }
+        });
         int i = NUM1;
         for (EditedKariSanteiTsuchiShoKyotsu editedKariSanteiTsuchiShoKyotsu : 編集後仮算定通知書共通情報entityList) {
-            TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport.createForm(editedKariSanteiTsuchiShoKyotsu,
-                    調定年度, 帳票作成日時, association, 出力項目リスト, 改頁項目リスト, i).writeBy(reportSourceWriter);
+            TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport report = new TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(
+                    editedKariSanteiTsuchiShoKyotsu, 調定年度, 帳票作成日時, association, 出力項目リスト, 改頁項目リスト, i);
+            report.writeBy(reportSourceWriter);
             i = i + NUM1;
         }
     }

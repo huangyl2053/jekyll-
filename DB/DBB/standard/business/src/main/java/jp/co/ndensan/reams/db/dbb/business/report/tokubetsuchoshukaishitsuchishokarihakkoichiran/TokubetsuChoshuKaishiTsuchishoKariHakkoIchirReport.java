@@ -58,28 +58,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport extends
         this.連番 = 連番;
     }
 
-    /**
-     * createFormメソッド
-     *
-     * @param 編集後仮算定通知書共通情報entity EditedKariSanteiTsuchiShoKyotsu
-     * @param 調定年度 FlexibleYear
-     * @param 帳票作成日時 YMDHMS
-     * @param association Association
-     * @param 改頁項目リスト List<RString>
-     * @param 出力項目リスト List<RString>
-     * @param 連番 int
-     * @return TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport
-     */
-    public static TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport createForm(
-            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
-            FlexibleYear 調定年度, YMDHMS 帳票作成日時, Association association,
-            List<RString> 改頁項目リスト,
-            List<RString> 出力項目リスト,
-            int 連番) {
-        return new TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport(編集後仮算定通知書共通情報entity,
-                調定年度, 帳票作成日時, association, 改頁項目リスト, 出力項目リスト, 連番);
-    }
-
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> writer) {
         ITokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor editor
