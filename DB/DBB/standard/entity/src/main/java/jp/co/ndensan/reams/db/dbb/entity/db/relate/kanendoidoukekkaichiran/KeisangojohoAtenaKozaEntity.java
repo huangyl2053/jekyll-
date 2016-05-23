@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt310FindKozaEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KeisangojohoAtenaKozaEntity {
 
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
-    private UaFt310FindKozaEntity 口座Entity;
+    private KozaRelateEntity 口座Entity;
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
@@ -169,7 +169,7 @@ public class KeisangojohoAtenaKozaEntity {
      * @param 宛名Entity UaFt200FindShikibetsuTaishoEntity
      * @param 口座Entity UaFt310FindKozaEntity
      */
-    public KeisangojohoAtenaKozaEntity(DbT2015KeisangoJohoEntity 計算後情報, UaFt200FindShikibetsuTaishoEntity 宛名Entity, UaFt310FindKozaEntity 口座Entity) {
+    public KeisangojohoAtenaKozaEntity(DbT2015KeisangoJohoEntity 計算後情報, UaFt200FindShikibetsuTaishoEntity 宛名Entity, KozaRelateEntity 口座Entity) {
         this.宛名Entity = 宛名Entity;
         this.口座Entity = 口座Entity;
         this.調定年度 = 計算後情報.getChoteiNendo();

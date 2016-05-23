@@ -11,7 +11,12 @@ import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoI
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 HeaderEditorです。
@@ -37,6 +42,7 @@ public class HeaderEditor implements IKanendoIdouKekkaIchiranEditor {
     private static final int NUM_11 = 11;
     private static final int NUM_12 = 12;
     private static final int NUM_13 = 13;
+    private static final RString SAKUSEI = new RString("作成");
 
     /**
      * インスタンスを生成します。
@@ -49,7 +55,10 @@ public class HeaderEditor implements IKanendoIdouKekkaIchiranEditor {
 
     @Override
     public KanendoIdouKekkaIchiranSource edit(KanendoIdouKekkaIchiranSource source) {
-        source.printTimeStamp = inputEntity.get調定日時().toDateString();
+        source.printTimeStamp = inputEntity.get調定日時().getDate().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
+                .concat(" " + inputEntity.get調定日時().getRDateTime().getTime()
+                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒) + " " + SAKUSEI);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
