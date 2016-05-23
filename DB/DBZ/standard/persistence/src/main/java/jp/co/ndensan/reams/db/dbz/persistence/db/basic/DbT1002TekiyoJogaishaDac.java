@@ -123,6 +123,7 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
      */
     @Transaction
     public List<DbT1002TekiyoJogaishaEntity> selectBy識別コードAnd適用年月日(FlexibleDate 適用年月日, ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
