@@ -386,6 +386,15 @@ public class KojinJokyoShokai {
     }
 
     /**
+     * 市町村連絡事項を返します。
+     *
+     * @return 市町村連絡事項
+     */
+    public RString get市町村連絡事項() {
+        return entity.getShichosonRenrakuJiko();
+    }
+
+    /**
      * 被保険者番号を取得します。
      *
      * @return 被保険者番号

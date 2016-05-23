@@ -48,7 +48,6 @@ public class ShikakuKihonJoho {
 
     private static final RString 発行ボタン = new RString("btnReportPublish");
     private static final RString 発行チェックボタン = new RString("btnCheck");
-    private static final RString 完了ボタン = new RString("btnComplete");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
 
     /**
@@ -72,7 +71,6 @@ public class ShikakuKihonJoho {
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100007.getReportId());
         createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
         return ResponseData.of(div).respond();
@@ -130,7 +128,6 @@ public class ShikakuKihonJoho {
         TatokuKanrenChohyoShijiData business = 帳票発行指示データ作成(div, 住所出力不要フラグ);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行チェックボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
-        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了ボタン, false);
         TatokuKanrenChohyoRenrakuhyoBusiness renrakuhyoBusiness = TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder
                 .createInstance().setTatokuKanrenChohyoRenrakuhyo(business);
         他市町村住所地特例の更新(createHandler(div).他市町村住所地特例連絡票の編集(他市町村住所地特例, 識別コード));

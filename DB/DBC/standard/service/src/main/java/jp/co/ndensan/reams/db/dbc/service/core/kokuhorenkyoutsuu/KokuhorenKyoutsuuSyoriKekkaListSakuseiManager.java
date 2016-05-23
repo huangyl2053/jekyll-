@@ -130,6 +130,7 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                             .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                     RString 時刻 = currentTime.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
                     entity.set作成日時(new RString(年月日.concat(時刻.toString()).toString()));
+                    isFirst = false;
                 }
                 entity.set証記載保険者番号(data.get証記載保険者番号().getColumnValue());
                 entity.set被保険者番号(data.get被保険者番号().getColumnValue());

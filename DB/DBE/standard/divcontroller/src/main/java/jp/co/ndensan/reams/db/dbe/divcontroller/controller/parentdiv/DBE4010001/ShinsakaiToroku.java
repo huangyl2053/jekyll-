@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4010001;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuCsvEntity;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001.Shi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -45,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 完了処理・介護認定審査会登録のコントローラです。
@@ -130,10 +134,10 @@ public class ShinsakaiToroku {
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
-                RString 申請書管理番号リスト = div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo();
+                申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
                 前排他キーの解除();
                 return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
-                        .parameter(申請書管理番号リスト);
+                        .parameter(new RString("申請書管理番号リスト"));
             }
         }
         return ResponseData.of(div).respond();
@@ -230,6 +234,16 @@ public class ShinsakaiToroku {
             return new RString(時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
         }
         return RString.EMPTY;
+    }
+
+    private void 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {
+        List<RString> 申請書管理番号リスト = new ArrayList<>();
+        for (dgNinteiTaskList_Row データ : 選択データ) {
+            申請書管理番号リスト.add(データ.getShinseishoKanriNo());
+        }
+        ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
+        shinseishoKanriNoList.setShinseishoKanriNoList(申請書管理番号リスト);
+        ViewStateHolder.put(ViewStateKeys.主治医意見書依頼_申請書管理番号List, shinseishoKanriNoList);
     }
 
     private ShinsakaiTorokuHandler getHandler(ShinsakaiTorokuDiv div) {

@@ -116,7 +116,7 @@
         SELECT 1
         FROM rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS a
         WHERE "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" = a."hihokenshaNo"
-        AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     &lt; a."rirekiNo"))
+        AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"))
         As  DbT3055
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.noDeleted_DbT3056KogakuShikyuShinsei" />) As DbT3056
@@ -142,23 +142,17 @@
         AND "shoKisaiHokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo")
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.noDeleted_DbT3054KogakuKyufuTaishoshaMeisai" />
+        <!-- 被保険者毎の最新を取得する。-->
         AND NOT EXISTS (
         SELECT 1
         FROM rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS a
         WHERE "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo" = a."hihokenshaNo"
-        AND "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     &lt; a."rirekiNo"
+        AND "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
         ))
         As DbT3054
         ON DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_serviceTeikyoYM" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
         AND DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_rirekiNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_rirekiNo"
-        <!-- 被保険者毎の最新を取得する。-->
-        AND NOT EXISTS (
-        SELECT 1
-        FROM rgdb."dbT3054KogakuKyufuTaishoshaMeisai" AS a
-        WHERE "dbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo" = a."hihokenshaNo"
-        AND "dbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"     &lt; a."rirekiNo"
-        )
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" As DbV1001
         ON DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN (
@@ -169,7 +163,7 @@
         SELECT 1
         FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS a
         WHERE "DbV1004HihokenshaShisetsuNyutaisho"."shikibetsuCode" = a."shikibetsuCode"
-        AND "DbV1004HihokenshaShisetsuNyutaisho"."rirekiNo"     &lt; a."rirekiNo"
+        AND "DbV1004HihokenshaShisetsuNyutaisho"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"
         ))
         As DbV1004
         ON DbV1001."shikibetsuCode" = DbV1004."shikibetsuCode"

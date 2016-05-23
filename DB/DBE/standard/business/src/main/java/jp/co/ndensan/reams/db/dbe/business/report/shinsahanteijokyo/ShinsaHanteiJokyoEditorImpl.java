@@ -51,9 +51,9 @@ public class ShinsaHanteiJokyoEditorImpl implements IShinsaHanteiJokyoEditor {
     private ShinsaHanteiJokyoReportSource editSource(ShinsaHanteiJokyoReportSource source) {
         source.title = item.getTitle();
         source.gogitaiName = item.getGogitaiName();
-        source.kaisaiKaishiYMD = item.getKaisaiKaishiYMD() == null
+        source.kaisaiKaishiYMD = RString.isNullOrEmpty(item.getKaisaiKaishiYMD())
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getKaisaiKaishiYMD()));
-        source.kaisaiShuryoYMD = item.getKaisaiShuryoYMD() == null
+        source.kaisaiShuryoYMD = RString.isNullOrEmpty(item.getKaisaiShuryoYMD())
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getKaisaiShuryoYMD()));
         source.kaisaiCount = item.getKaisaiCount();
         source.hokenshaNo = item.getHokenshaNo();

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.Shin
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaitoroku.ShinsakaiTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
@@ -72,8 +72,8 @@ public class ShinsaKaiKekkaTorokuHandler {
 
     private void 活性非活性の設定() {
         RDate 適用基準日 = RDate.getNowDate();
-        RString モバイル審査会使用有無 = DbBusinessConifg.get(ConfigNameDBE.モバイル審査会使用有無, 適用基準日, SubGyomuCode.DBE認定支援);
-        RString 審査会結果OCR使用有無 = DbBusinessConifg.get(ConfigNameDBE.審査会結果OCR使用有無, 適用基準日, SubGyomuCode.DBE認定支援);
+        RString モバイル審査会使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会使用有無, 適用基準日, SubGyomuCode.DBE認定支援);
+        RString 審査会結果OCR使用有無 = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, 適用基準日, SubGyomuCode.DBE認定支援);
         if (使用.equals(モバイル審査会使用有無)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnMobileToroku"), false);
         } else {

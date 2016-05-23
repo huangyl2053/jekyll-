@@ -118,7 +118,7 @@ public class ShiharaiHohoJyohoHandler {
                 JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
                         getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
                                 createParam(支給申請情報.getHihokenshaNo(), 支給申請情報.
-                                        getShikyushinseiServiceYM(), 支給申請情報.getShikyushinseiSeiriNo(), 支給申請情報.getShiharaiBasho()));
+                                        getShikyushinseiServiceYM(), 支給申請情報.getShikyushinseiSeiriNo(), 支給申請情報.getKeiyakuNo()));
                 受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);
             }
         }
@@ -158,13 +158,18 @@ public class ShiharaiHohoJyohoHandler {
      * 画面口座IDを設定します。
      *
      * @param list 口座IDリスト
+     * @param 口座ID 口座ID
      * @return List<KeyValueDataSource>
      */
-    public List<KeyValueDataSource> set口座ID(List<KozaJohoPSM> list) {
+    public List<KeyValueDataSource> set口座ID(List<KozaJohoPSM> list,Long 口座ID) {
         List<KeyValueDataSource> 口座IDリスト = new ArrayList<>();
         for (KozaJohoPSM kozaId : list) {
-            RString 口座ID = new RString(String.valueOf(kozaId.get口座ID()));
-            口座IDリスト.add(new KeyValueDataSource(口座ID, 口座ID));
+            RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
+            口座IDリスト.add(new KeyValueDataSource(口座, 口座));
+        }
+        if (list == null || list.isEmpty()) {
+            RString 口座 = new RString(String.valueOf(口座ID));
+            口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
         return 口座IDリスト;
     }
@@ -566,6 +571,7 @@ public class ShiharaiHohoJyohoHandler {
      * @param kozaID 口座番号
      */
     public void 口座払いエリアの初期化(KozaJohoPSM 口座情報, Long kozaID) {
+        div.getDdlKozaID().setSelectedKey(new RString(String.valueOf(kozaID)));
         KinyuKikanCode 金融機関コード = 口座情報.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 口座情報.get金融機関コード();
         div.getTxtKinyuKikanCode().setDomain(金融機関コード);
@@ -610,6 +616,7 @@ public class ShiharaiHohoJyohoHandler {
      */
     public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報, JuryoininKeiyakuJigyosha 受領委任契約事業者) {
 
+        div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
         div.getTxtKeiyakuNo().setDisabled(false);
         div.getBtnSelect().setDisabled(false);
@@ -892,7 +899,7 @@ public class ShiharaiHohoJyohoHandler {
     private void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
         List<KozaJohoPSM> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
                 .getKozaIDList(KozaParameter.createParam(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
-        div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト));
+        div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト,支給申請情報.getKozaId()));
     }
 
     private KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kogakukaigoservicehi.KogakuKaigo
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -56,7 +56,7 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final RString ハイフン = new RString("-");
-    private static final RString 外国人 = DbBusinessConifg.get(ConfigNameDBU.外国人表示制御_生年月日表示方法,
+    private static final RString 外国人 = DbBusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法,
             RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     private static final int INDEX_3 = 3;
     private static RString 生年月日;

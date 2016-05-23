@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor {
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
-    private final RString 賦課年度;
+    private final FlexibleYear 賦課年度;
     private final List<RString> 出力項目リスト;
     private final List<RString> 改頁項目リスト;
     private final RDateTime 帳票作成日時;
@@ -52,7 +53,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
      * インスタンスを生成します。
      *
      * @param 編集後本算定通知書共通情報 List<EditedHonSanteiTsuchiShoKyotsu>
-     * @param 賦課年度 RString
+     * @param 賦課年度 FlexibleYear
      * @param 出力項目リスト List<RString>
      * @param 改頁項目リスト 改頁項目リスト
      * @param 帳票作成日時 RString
@@ -61,7 +62,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
      * @param num int
      */
     protected TokubetsuChoshuKaishiEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            RString 賦課年度, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
+            FlexibleYear 賦課年度, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
             RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, int num) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.賦課年度 = 賦課年度;
@@ -97,7 +98,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         listlowers(source);
         source.listLower_6 = 定値_10月;
         if (編集後本算定通知書共通情報 != null && 編集後本算定通知書共通情報.get更正後() != null && 編集後本算定通知書共通情報.
-                get更正後().get普徴期別金額リスト() != null && !編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト().isEmpty()) {
+                get更正後().get特徴期別金額リスト() != null && !編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト().isEmpty()) {
             for (CharacteristicsPhase entity : 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト()) {
                 if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM4) {
                     source.listLower_7 = new RString(entity.get金額().toString());
@@ -110,7 +111,9 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         }
         source.listLower_8 = 定値_12月;
         source.listLower_10 = 定値_2月;
-        source.nendo = 賦課年度;
+        if (賦課年度 != null) {
+            source.nendo = 賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString();
+        }
         set出力改頁(source);
     }
 
@@ -126,7 +129,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
                 source.listUpper_4 = 編集後本算定通知書共通情報.get編集後宛先().get宛先行政区();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null) {
-                source.listUpper_5 = 編集後本算定通知書共通情報.get編集後個人().get生年月日();
+                source.listUpper_5 = 編集後本算定通知書共通情報.get編集後個人().get生年月日For帳票();
                 source.listUpper_6 = 編集後本算定通知書共通情報.get編集後個人().get性別();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get世帯主名() != null) {
@@ -139,11 +142,11 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
                 source.listLower_2 = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
             }
             if (編集後本算定通知書共通情報.get編集後個人() != null && 編集後本算定通知書共通情報.get編集後個人().get名称() != null) {
-                source.listLower_3 = new RString(編集後本算定通知書共通情報.get編集後個人().get名称().toString());
+                source.listLower_3 = 編集後本算定通知書共通情報.get編集後個人().get名称().getName().value();
             }
             if (編集後本算定通知書共通情報.get更正後() != null) {
                 source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();
-                source.listLower_5 = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金コード();
+                source.listLower_5 = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金();
             }
         }
     }

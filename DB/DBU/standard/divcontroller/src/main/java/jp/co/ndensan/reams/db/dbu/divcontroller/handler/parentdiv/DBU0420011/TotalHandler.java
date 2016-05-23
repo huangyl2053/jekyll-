@@ -286,7 +286,7 @@ public class TotalHandler {
                 business.getJusho(), business.getHihokenshaNameKana(), business.getHihokenshaName(), business.getBirthGengoMeiji(),
                 business.getBirthGengoTaisho(), business.getBirthGengoShowa(), business.getSeibetsu(), business.getBirthYMD(),
                 business.getKofuYMD(), business.getYokaigoJotaiKubun(), business.getNinteiYMD(), business.getYukoKaishiYMD(),
-                business.getYukoShuryoYMD(), business.getTani(), business.getKubunShikyuYukoKaishiYMD(), business.getKubunShikyuYukoShuryoYMD(),
+                business.getYukoShuryoYMD(), business.getKizyunngaku(), business.getKubunShikyuYukoKaishiYMD(), business.getKubunShikyuYukoShuryoYMD(),
                 business.getTaniShurui(), business.getTani(), business.getShikyuGendoKizyungakuList(), business.getServiceShitei(),
                 business.getKyufuseigenDataList(), business.getJigyoshaName1(), business.getTodokedeYMD1(), business.getJigyoshaName2(),
                 business.getJigyoshaName2Asutarisuku(), business.getJigyoshaName2Masshosen(), business.getTodokedeYMD2(),

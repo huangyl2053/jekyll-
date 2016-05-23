@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.futanwariai.FutanwariaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -142,7 +142,7 @@ public enum RiyoshaFutangakuGengakuPanelDivSpec implements IPredicate<RiyoshaFut
                 @Override
                 public boolean apply(RiyoshaFutangakuGengakuPanelDiv div) {
                     FlexibleDate 適用日 = div.getTxtTekiyoYmd().getValue();
-                    RString 法施行日 = DbBusinessConifg.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+                    RString 法施行日 = DbBusinessConfig.get(ConfigNameDBU.介護保険法情報_介護保険施行日, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
                     if (!new FlexibleDate(法施行日).isBeforeOrEquals(適用日)) {
                         return false;
                     }

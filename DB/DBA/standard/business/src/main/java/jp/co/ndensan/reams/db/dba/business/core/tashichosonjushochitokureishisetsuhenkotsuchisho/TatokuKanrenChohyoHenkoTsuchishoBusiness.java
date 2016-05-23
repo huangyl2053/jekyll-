@@ -6,9 +6,6 @@
 package jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsuhenkotsuchisho;
 
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoHenkoTsuchishoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -259,7 +256,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更前施設名称
      */
-    public AtenaMeisho get変更前施設名称() {
+    public RString get変更前施設名称() {
         return entity.get変更前施設名称();
     }
 
@@ -268,7 +265,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更前施設電話番号
      */
-    public TelNo get変更前施設電話番号() {
+    public RString get変更前施設電話番号() {
         return entity.get変更前施設電話番号();
     }
 
@@ -277,7 +274,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更前施設FAX番号
      */
-    public TelNo get変更前施設FAX番号() {
+    public RString get変更前施設FAX番号() {
         return entity.get変更前施設FAX番号();
     }
 
@@ -286,7 +283,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更前施設郵便番号
      */
-    public YubinNo get変更前施設郵便番号() {
+    public RString get変更前施設郵便番号() {
         return entity.get変更前施設郵便番号();
     }
 
@@ -304,7 +301,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更後施設名称
      */
-    public AtenaMeisho get変更後施設名称() {
+    public RString get変更後施設名称() {
         return entity.get変更後施設名称();
     }
 
@@ -313,7 +310,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更後施設電話番号
      */
-    public TelNo get変更後施設電話番号() {
+    public RString get変更後施設電話番号() {
         return entity.get変更後施設電話番号();
     }
 
@@ -322,7 +319,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更後施設FAX番号
      */
-    public TelNo get変更後施設FAX番号() {
+    public RString get変更後施設FAX番号() {
         return entity.get変更後施設FAX番号();
     }
 
@@ -331,7 +328,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoBusiness {
      *
      * @return 変更後施設郵便番号
      */
-    public YubinNo get変更後施設郵便番号() {
+    public RString get変更後施設郵便番号() {
         return entity.get変更後施設郵便番号();
     }
 

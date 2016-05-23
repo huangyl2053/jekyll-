@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.Jutakuka
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -194,7 +194,7 @@ public final class MainPanelHandler {
                 決定年月日, 支給決定区分, 支払金額, 前回支払金額, 差額金額合計);
         ShokanShinsei dbt3034 = new ShokanShinsei(被保険者番号, サービス年月, 整理番号);
 
-        RString 国保連共同処理受託区分_償還 = DbBusinessConifg.get(
+        RString 国保連共同処理受託区分_償還 = DbBusinessConfig.get(
                 ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (受託なし.equals(国保連共同処理受託区分_償還)) {
             dbt3034 = dbt3034.createBuilderForEdit().set支給申請審査区分(ShikyushinseiShinsaKubun.審査済.getコード()).

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2014TsuchishoUchiwakeJokenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -408,46 +408,46 @@ public class KariSanteiIdoFuka {
         出力期 = 出力期.split(括弧_左.toString()).get(0).replace(定値_前期, RString.EMPTY).replace(定値_期, RString.EMPTY);
         switch (Integer.parseInt(出力期.toString())) {
             case 定値_1期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_2期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型2, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型2, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_3期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型3, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型3, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_4期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型4, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型4, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_5期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型5, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型5, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_6期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型6, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型6, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_7期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型7, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型7, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_8期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型8, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型8, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_9期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型9, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型9, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_10期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型10, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型10, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_11期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型11, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型11, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_12期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型12, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型12, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_13期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型13, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型13, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case 定値_14期:
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型14, 運用日, SubGyomuCode.DBB介護賦課);
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型14, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             default:
                 break;
@@ -481,33 +481,33 @@ public class KariSanteiIdoFuka {
         出力期 = 出力期.split(括弧_左.toString()).get(0).replace(定値_前期, RString.EMPTY).replace(定値_期, RString.EMPTY);
         switch (Integer.parseInt(出力期.toString())) {
             case 定値_1期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分1, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分1, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_2期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分2, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分2, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_3期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分3, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分3, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_4期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分4, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分4, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_5期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分5, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分5, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_6期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分6, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分6, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_7期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分7, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分7, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_8期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分8, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分8, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_9期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分9, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分9, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_10期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分10, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分10, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_11期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分11, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分11, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_12期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分12, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分12, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_13期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分13, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分13, 運用日, SubGyomuCode.DBB介護賦課);
             case 定値_14期:
-                return DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納通連帳区分14, 運用日, SubGyomuCode.DBB介護賦課);
+                return DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納通連帳区分14, 運用日, SubGyomuCode.DBB介護賦課);
             default:
                 return null;
         }

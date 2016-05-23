@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.Honsan
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoResult;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -295,59 +295,59 @@ public class HonsanteiIdoKanendo {
         RString 設定値;
         switch (算定期.toString()) {
             case "1":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型1,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型1,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",1");
             case "2":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型2,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型2,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",2");
             case "3":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型3,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型3,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",3");
             case "4":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型4,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型4,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",4");
             case "5":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型5,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型5,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",5");
             case "6":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型6,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型6,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",6");
             case "7":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型7,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型7,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",7");
             case "8":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型8,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型8,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",8");
             case "9":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型9,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型9,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",9");
             case "10":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型10,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型10,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",10");
             case "11":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型11,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型11,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",11");
             case "12":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型12,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型12,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",12");
             case "13":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型13,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型13,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",13");
             case "14":
-                設定値 = DbBusinessConifg.get(ConfigNameDBB.普徴期情報_納付書の型14,
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_納付書の型14,
                         RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
                 return new RString(設定値.toString() + ",14");
             default:

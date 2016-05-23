@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.S
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -79,7 +81,11 @@ public class ServiceTeikyoShomeishoPanelHandler {
      * @param 国保連送付フラグ 国保連送付フラグ
      */
     public void loadボタンエリア(Boolean 国保連送付フラグ) {
-        RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
+        RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (config == null || config.isEmpty()) {
+            throw new SystemException(DbxErrorMessages.業務コンフィグなし.getMessage()
+                    .replace(ConfigNameDBC.国保連共同処理受託区分_償還.name()).evaluate());
+        }
         if (受託なし.equals(config)) {
             div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(false);
         } else if (受託あり.equals(config) && 国保連送付フラグ) {
@@ -174,7 +180,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         FlexibleYearMonth サービス年月 = null;
-        if (div.getPanelTwo().getTxtServiceTeikyoYM() != null) {
+        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
             サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().getYearMonth().toString());
         }
         RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();

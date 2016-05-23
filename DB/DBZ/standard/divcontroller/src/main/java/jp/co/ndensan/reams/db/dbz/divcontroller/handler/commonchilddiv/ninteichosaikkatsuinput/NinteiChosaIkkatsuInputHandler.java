@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteich
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.ChkJikanwakuModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 共有子Div 「NinteiChosaIkkatsuInput」のhandlerクラスです。
@@ -94,7 +95,7 @@ public class NinteiChosaIkkatsuInputHandler {
         List<RString> keylist = new ArrayList<>();
         keylist.add(KEY_0);
         ChkJikanwakuModel chkJikanwakuModel = new ChkJikanwakuModel();
-        RString 調査スケジュール最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
+        RString 調査スケジュール最大時間枠 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_1) {
             set時間枠1(keylist, chkJikanwakuModel);
         }
@@ -131,7 +132,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠1(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠1 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠1, SubGyomuCode.DBE認定支援);
+        RString 時間枠1 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠1, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠1)) {
             List<RString> start = 時間枠1.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -148,7 +149,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠2(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠2 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠2, SubGyomuCode.DBE認定支援);
+        RString 時間枠2 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠2, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠2)) {
             List<RString> start = 時間枠2.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -165,7 +166,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠3(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠3 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠3, SubGyomuCode.DBE認定支援);
+        RString 時間枠3 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠3, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠3)) {
             List<RString> start = 時間枠3.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -182,7 +183,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠4(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠4 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠4, SubGyomuCode.DBE認定支援);
+        RString 時間枠4 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠4, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠4)) {
             List<RString> start = 時間枠4.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -199,7 +200,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠5(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠5 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠5, SubGyomuCode.DBE認定支援);
+        RString 時間枠5 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠5, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠5)) {
             List<RString> start = 時間枠5.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -216,7 +217,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠6(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠6 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠6, SubGyomuCode.DBE認定支援);
+        RString 時間枠6 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠6, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠6)) {
             List<RString> start = 時間枠6.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -233,7 +234,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠7(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠7 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠7, SubGyomuCode.DBE認定支援);
+        RString 時間枠7 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠7, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠7)) {
             List<RString> start = 時間枠7.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -250,7 +251,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠8(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠8 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠8, SubGyomuCode.DBE認定支援);
+        RString 時間枠8 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠8, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠8)) {
             List<RString> start = 時間枠8.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -267,7 +268,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠9(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠9 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠9, SubGyomuCode.DBE認定支援);
+        RString 時間枠9 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠9, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠9)) {
             List<RString> start = 時間枠9.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -284,7 +285,7 @@ public class NinteiChosaIkkatsuInputHandler {
     }
 
     private void set時間枠10(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
-        RString 時間枠10 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠10, SubGyomuCode.DBE認定支援);
+        RString 時間枠10 = DbBusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠10, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (!RString.isNullOrEmpty(時間枠10)) {
             List<RString> start = 時間枠10.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());

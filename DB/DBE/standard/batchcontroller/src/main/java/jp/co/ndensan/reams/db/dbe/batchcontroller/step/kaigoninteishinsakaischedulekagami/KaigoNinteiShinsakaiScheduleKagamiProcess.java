@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedulek
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaiiinwaritsuke.ShinsaschedulekagamiReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedulekagami.IKaigoNinteiShinsakaiScheduleKagamiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -100,13 +100,13 @@ public class KaigoNinteiShinsakaiScheduleKagamiProcess extends BatchProcessBase<
         RString customerBarCode = barcode.convertCustomerBarCode(entity.getYubinNo(), entity.getJushoText()).getCustomerBarCode();
         NinshoshaSource compNinshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(), reportSourceWriter);
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 1);
-        return new ShinsaschedulekagamiItem(DbBusinessConifg.get(ConfigNameDBE.介護認定審査会スケジュール表鑑,
+        return new ShinsaschedulekagamiItem(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会スケジュール表鑑,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 processParamter.getShinsakaiKaisaiKikanFrom(), processParamter.getShinsakaiKaisaiKikanTo(), compNinshosha.denshiKoin,
                 compNinshosha.hakkoYMD, compNinshosha.koinMojiretsu, compNinshosha.koinShoryaku, compNinshosha.ninshoshaShimeiKakeru,
                 compNinshosha.ninshoshaShimeiKakenai, compNinshosha.ninshoshaYakushokuMei, compNinshosha.ninshoshaYakushokuMei1,
                 compNinshosha.ninshoshaYakushokuMei2, 宛名連番, customerBarCode, entity.getYubinNo(), entity.getJushoText(), 宛名機関名,
-                entity.getShimeiText(), ChohyoAtesakiKeisho.toValue(DbBusinessConifg.get(
+                entity.getShimeiText(), ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(
                                 ConfigNameDBE.介護認定審査会スケジュール表鏡_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 通知文Map.get(1), 通知文Map.get(KEY));
     }

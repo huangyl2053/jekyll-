@@ -492,9 +492,9 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
 
     public static enum ShoriType implements ICommonChildDivMode {
 
-        NormalAddMode("NormalAddMode"),
-        NormalUpdateMode("NormalUpdateMode"),
-        SeihoAddMode("SeihoAddMode"),
+//        NormalAddMode("NormalAddMode"),
+//        NormalUpdateMode("NormalUpdateMode"),
+//        SeihoAddMode("SeihoAddMode"),
         SeihoUpdateMode("SeihoUpdateMode"),
         ShokaiMode("ShokaiMode");
 

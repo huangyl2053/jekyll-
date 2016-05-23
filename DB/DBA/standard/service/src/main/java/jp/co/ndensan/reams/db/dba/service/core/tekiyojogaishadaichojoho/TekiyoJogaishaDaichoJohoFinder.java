@@ -100,8 +100,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaDaichoJohoFinder}のインスタンス
      */
     public static TekiyoJogaishaDaichoJohoFinder createInstance() {
         return InstanceProvider.create(TekiyoJogaishaDaichoJohoFinder.class);
@@ -205,7 +204,10 @@ public class TekiyoJogaishaDaichoJohoFinder {
             TekiyoJogaiShisetuJyohoRelateEntity entity = shisetuJyohoList.get(i);
             entity.set連番(i + 1);
             RString 適用除外適用事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0009"), new Code(entity.get適用除外適用事由コード()));
-            RString 適用除外解除事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0012"), new Code(entity.get適用除外解除事由コード()));
+            RString 適用除外解除事由名称 = RString.EMPTY;
+            if (!RString.isNullOrEmpty(entity.get適用除外解除事由コード())) {
+                適用除外解除事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0012"), new Code(entity.get適用除外解除事由コード()));
+            }
             entity.set適用除外適用事由名称(RString.EMPTY);
             entity.set適用除外解除事由名称(RString.EMPTY);
             if (適用除外適用事由名称 != null && !適用除外適用事由名称.isEmpty()) {

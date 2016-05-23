@@ -74,6 +74,7 @@ public class NinteiChosaIraiPrintService {
             ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(),
                     FlexibleDate.getNowDate(), reportSourceWriter);
+            List<ChosaIraishoHeadItem> 要介護認定調査依頼書 = new ArrayList<>();
             for (ChosaIraishoHeadItem item : 要介護認定調査依頼書List) {
                 item = new ChosaIraishoHeadItem(
                         ninshoshaSource.hakkoYMD,
@@ -124,8 +125,9 @@ public class NinteiChosaIraiPrintService {
                         item.getShinseiYMD(),
                         item.getTeishutsuKigen(),
                         item.getTsuchibun2());
+                要介護認定調査依頼書.add(item);
             }
-            ChosaIraishoReport report = ChosaIraishoReport.createFrom(要介護認定調査依頼書List);
+            ChosaIraishoReport report = ChosaIraishoReport.createFrom(要介護認定調査依頼書);
             report.writeBy(reportSourceWriter);
         }
     }

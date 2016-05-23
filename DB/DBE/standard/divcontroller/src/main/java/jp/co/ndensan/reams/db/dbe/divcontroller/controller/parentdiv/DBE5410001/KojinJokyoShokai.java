@@ -80,8 +80,14 @@ public class KojinJokyoShokai {
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShichosonRenrakuJiko(KojinJokyoShokaiDiv div) {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
+        KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
+        KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
+        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
+                = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
         NinteiShinseiCodeModel shinseiCodeModel = new NinteiShinseiCodeModel();
-        shinseiCodeModel.set連絡事項(申請書管理番号);
+        if (!kojinJokyoShokaiList.isEmpty()) {
+            shinseiCodeModel.set連絡事項(kojinJokyoShokaiList.get(0).get市町村連絡事項());
+        }
         shinseiCodeModel.set表示モード(照会モード);
         ViewStateHolder.put(ViewStateKeys.モード, shinseiCodeModel);
         return ResponseData.of(div).respond();

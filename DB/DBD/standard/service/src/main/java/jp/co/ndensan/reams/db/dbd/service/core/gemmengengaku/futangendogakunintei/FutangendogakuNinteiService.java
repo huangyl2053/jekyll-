@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.fut
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -50,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -123,11 +123,8 @@ public class FutangendogakuNinteiService {
         if (適用日 == null || 適用日.isEmpty()) {
             return FlexibleDate.EMPTY;
         }
-        RString 減免期限_特定入所者 = BusinessConfig.get(ConfigNameDBD.減免期限_特定入所者,
+        RString 減免期限_特定入所者 = DbBusinessConfig.get(ConfigNameDBD.減免期限_特定入所者,
                 new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
-        if (null == 減免期限_特定入所者 || 減免期限_特定入所者.isEmpty()) {
-            return FlexibleDate.EMPTY;
-        }
         FlexibleDate 有効期限候補 = new FlexibleDate(
                 適用日.getYearValue(),
                 Integer.valueOf(減免期限_特定入所者.substring(0, 2).toString()),
@@ -838,6 +835,7 @@ public class FutangendogakuNinteiService {
     }
 
     private RString getBusinessConfig(ConfigNameDBD configName, FlexibleDate 適用日) {
-        return BusinessConfig.get(configName, new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
+        return DbBusinessConfig.get(
+                configName, new RDate(適用日.getYearValue(), 適用日.getMonthValue(), 適用日.getDayValue()), SubGyomuCode.DBD介護受給);
     }
 }

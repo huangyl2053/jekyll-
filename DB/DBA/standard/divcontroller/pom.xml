@@ -97,6 +97,10 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxService</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>db#dba</finalName>

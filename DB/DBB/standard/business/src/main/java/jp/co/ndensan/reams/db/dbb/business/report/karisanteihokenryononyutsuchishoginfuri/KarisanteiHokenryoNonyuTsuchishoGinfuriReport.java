@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchi
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchisho
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
@@ -27,7 +27,7 @@ import lombok.NonNull;
  *
  * @reamsid_L DBB-9110-030 wangjie2
  */
-public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> {
+public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends INonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> {
 
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
@@ -88,13 +88,17 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends Report<Karisa
     /**
      * devidedByPageメソッド
      *
-     * @return List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport>
+     * @return List<INonyuTsuchisho>
      */
-    public List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport> devidedByPage() {
-        // TODO
+    @Override
+    public List<INonyuTsuchisho> devidedByPage() {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
-        List<KarisanteiHokenryoNonyuTsuchishoGinfuriReport> reportLst = new ArrayList<>();
+        List<INonyuTsuchisho> reportLst = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストReport = new ArrayList<>();
+        if (null == 納入通知書期情報リスト) {
+            reportLst.add(getNewReport(納入通知書期情報リストReport));
+            return reportLst;
+        }
         int 銀振印字位置Para = 0;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();

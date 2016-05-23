@@ -15,12 +15,13 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7056GappeiShichosonDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import lombok.Getter;
 import lombok.Setter;
@@ -75,14 +76,16 @@ public final class KyuShichosonCode {
 
     private static KyuShichosonCodeJoho getTannitsuKyuShichosonCodeJoho(LasdecCode 市町村コード) {
         KyuShichosonCodeJoho shichosonCodeJoho = new KyuShichosonCodeJoho();
-        if (合併あり.equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+        if (合併あり.equals(
+                DbBusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             DbT7055GappeiJohoEntity 最新の地域番号 = 合併情報Dac.getSaisinNoTiikiNo(市町村コード);
             if (null == 最新の地域番号) {
                 shichosonCodeJoho = get合併市町村無し旧市町村コード情報();
             } else {
                 shichosonCodeJoho = get単一旧市町村コード情報(最新の地域番号);
             }
-        } else if (合併なし.equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+        } else if (合併なし.equals(
+                DbBusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             shichosonCodeJoho = get合併市町村無し旧市町村コード情報();
         }
         return shichosonCodeJoho;
@@ -90,14 +93,16 @@ public final class KyuShichosonCode {
 
     private static KyuShichosonCodeJoho getKouikiKyuShichosonCodeJoho(LasdecCode 市町村コード) {
         KyuShichosonCodeJoho shichosonCodeJoho = new KyuShichosonCodeJoho();
-        if (合併あり.equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+        if (合併あり.equals(
+                DbBusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             DbT7055GappeiJohoEntity 最新の地域番号 = 合併情報Dac.getSaisinNoTiikiNo(市町村コード);
             if (null == 最新の地域番号) {
                 shichosonCodeJoho = get合併市町村無し旧市町村コード情報();
             } else {
                 shichosonCodeJoho = get広域旧市町村コード情報(最新の地域番号);
             }
-        } else if (合併なし.equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+        } else if (合併なし.equals(
+                DbBusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))) {
             shichosonCodeJoho = get合併市町村無し旧市町村コード情報();
         }
         return shichosonCodeJoho;

@@ -527,17 +527,6 @@ public class JigyoshaTouroku {
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.完了).respond();
     }
 
-    /**
-     * 「事業者番号入力ガイド」ボタンの押下を処理です。
-     *
-     * @param div 事業者登録Div
-     * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
-     */
-    public ResponseData<JigyoshaTourokuDiv> onClick_btnDialog(JigyoshaTourokuDiv div) {
-        div.getServiceJigyoshaJoho().getTxtJigyoshaNo().setValue(div.getJigyoshaCode());
-        return ResponseData.of(div).respond();
-    }
-
     private JigyoshaTourokuHandler getHandler(JigyoshaTourokuDiv div) {
         return new JigyoshaTourokuHandler(div);
 

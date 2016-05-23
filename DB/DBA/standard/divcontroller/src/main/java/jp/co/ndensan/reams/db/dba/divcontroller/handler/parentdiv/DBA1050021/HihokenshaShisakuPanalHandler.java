@@ -53,7 +53,7 @@ public class HihokenshaShisakuPanalHandler {
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
     private final CodeShubetsu 取得事由コード種別 = new CodeShubetsu("0007");
-    private final CodeShubetsu 喪失事由コード種別 = new CodeShubetsu("0011");
+    private final CodeShubetsu 喪失事由コード種別 = new CodeShubetsu("0010");
 
     /**
      * コンストラクタです。
@@ -209,7 +209,10 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private boolean is合併市町村() {
-        RString 合併市町村 = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告);
+        RString 合併市町村 = BusinessConfig.get(
+                ConfigNameDBU.合併情報管理_合併情報区分,
+                RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告);
         return 合併情報区分.equals(合併市町村);
     }
 

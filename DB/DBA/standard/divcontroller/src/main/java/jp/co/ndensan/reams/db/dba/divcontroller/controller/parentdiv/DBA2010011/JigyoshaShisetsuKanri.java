@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011.Jigy
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -32,6 +33,7 @@ public class JigyoshaShisetsuKanri {
     private static final RString サービス事業者 = new RString("サービス事業者");
     private static final RString その他特例施設 = new RString("その他特例施設");
     private static final RString 適用除外施設 = new RString("適用除外施設");
+    private static final RString MENU_ID = new RString("DBAMN41004");
 
     /**
      * 介護事業者・施設管理Divを初期化します。
@@ -42,7 +44,11 @@ public class JigyoshaShisetsuKanri {
     public ResponseData<JigyoshaShisetsuKanriDiv> onLoad(JigyoshaShisetsuKanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.事業者施設選択入力ガイド_モード, 修正);
         JigyoshaMode mode = new JigyoshaMode();
-        div.getJigyoshaShurui().getRadJigyoshaShurui().setSelectedKey(サービス事業者モード);
+        if (MENU_ID.equals(UrControlDataFactory.createInstance().getMenuID())) {
+            div.getJigyoshaShurui().getRadJigyoshaShurui().setSelectedKey(その他特例施設モード);
+        } else {
+            div.getJigyoshaShurui().getRadJigyoshaShurui().setSelectedKey(サービス事業者モード);
+        }
         mode.setJigyoshaShubetsu(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().initialize(mode);

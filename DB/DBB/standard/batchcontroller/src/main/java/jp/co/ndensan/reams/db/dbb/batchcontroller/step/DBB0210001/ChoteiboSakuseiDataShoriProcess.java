@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.RLogger;
 
 /**
  * 調定簿作成一時テーブルのデータ処理
@@ -93,7 +94,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
     private static final RString 仮算定 = new RString("1");
     private IChoteiboSakuseiMapper choteiboSakuseiMapper;
     private ChoteiboProcessParameter parameter;
-
+    
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
@@ -239,6 +240,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHUSHUTSUSTYMD.toString(), 開始調定日時);
         param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
         List<KibetsuDataEntity> kibetsuData = choteiboSakuseiMapper.select期別のデータ(param);
+        RLogger.info("【insert期別情報一時テーブル】select期別のデータ:" + String.valueOf(kibetsuData.size()));
         for (KibetsuDataEntity entity : kibetsuData) {
             KibetsuEntity kibetsuEntity = new KibetsuEntity();
             kibetsuEntity.setChoteiNendo(entity.getChoteiNendo());
@@ -320,6 +322,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
                 SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), 調定年度);
         DbT7022ShoriDateKanriEntity shoriDateKanriData = choteiboSakuseiMapper.select処理日付(myBatisParameter);
         List<DankaiDataEntity> dogetsudankaiData = choteiboSakuseiMapper.select当月末の段階データ(param);
+        RLogger.info("【insert段階情報一時テーブル】select当月末の段階データ:" + String.valueOf(dogetsudankaiData.size()));
         for (DankaiDataEntity entity : dogetsudankaiData) {
             DanKaiEntity dankaiEntity = new DanKaiEntity();
             dankaiEntity.setChoteiNendo(entity.getChoteiNendo());
@@ -348,6 +351,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         }
 
         List<DankaiDataEntity> zengetsudankaiData = choteiboSakuseiMapper.select前月末の段階データ(param);
+        RLogger.info("【insert段階情報一時テーブル】select前月末の段階データ:" + String.valueOf(zengetsudankaiData.size()));
         for (DankaiDataEntity entity : zengetsudankaiData) {
             DanKaiEntity dankaiEntity = new DanKaiEntity();
             dankaiEntity.setChoteiNendo(entity.getChoteiNendo());
@@ -396,6 +400,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_DOGETSUFLG.toString(), 当月フラグ);
         param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<DankaiKensuEntity> dankaiKensu = choteiboSakuseiMapper.select所得段階の件数(param);
+        RLogger.info("【insert段階小計一時テーブル】select所得段階の件数:" + String.valueOf(dankaiKensu.size()));
         for (DankaiKensuEntity entity : dankaiKensu) {
             DankaiShokeiEntity dankaiShokeiEntity = new DankaiShokeiEntity();
             dankaiShokeiEntity.setChoteiNendo(調定年度);
@@ -430,6 +435,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<NaiheisyaKensuEntity> naiheisyaKensu = choteiboSakuseiMapper.select内併徴者数(param);
+        RLogger.info("【update内併徴者数】select内併徴者数:" + String.valueOf(naiheisyaKensu.size()));
         for (NaiheisyaKensuEntity entity : naiheisyaKensu) {
             choteiboSakuseiMapper.update内併徴者数(entity);
         }
@@ -441,6 +447,8 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<DankaiShokeiEntity> 増の調定額の小計リスト = choteiboSakuseiMapper.select増の調定額の小計(param);
         List<DankaiShokeiEntity> 減の調定額の小計リスト = choteiboSakuseiMapper.select減の調定額の小計(param);
+        RLogger.info("【update増減調定額の小計】select増の調定額の小計:" + String.valueOf(増の調定額の小計リスト.size()));
+        RLogger.info("【update増減調定額の小計】select減の調定額の小計:" + String.valueOf(減の調定額の小計リスト.size()));
         for (DankaiShokeiEntity 増の調定額の小計 : 増の調定額の小計リスト) {
             choteiboSakuseiMapper.update増の調定額の小計(増の調定額の小計);
         }
@@ -508,6 +516,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<KibetsuEntity> kiBetsuEntity = choteiboSakuseiMapper.select期別情報(param);
+        RLogger.info("【create期別リスト】select期別情報:" + String.valueOf(kiBetsuEntity.size()));
         for (KibetsuEntity entity : kiBetsuEntity) {
             Kibetsu kibetsu = Kibetsu.createParam(
                     entity.getChoteiNendo(),
@@ -551,6 +560,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<DanKaiEntity> danKaiList = choteiboSakuseiMapper.select段階情報(param);
+        RLogger.info("【create段階リスト】select段階情報:" + String.valueOf(danKaiList.size()));
         for (DanKaiEntity entity : danKaiList) {
             DanKai dankai = DanKai.createParam(entity.getChoteiNendo(),
                     entity.getFukaNendo(),
@@ -585,6 +595,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<KibetsuShokeiEntity> kibetsuShokeiList = choteiboSakuseiMapper.select期別小計情報(param);
+        RLogger.info("【create期別小計リスト】select期別小計情報:" + String.valueOf(kibetsuShokeiList.size()));
         for (KibetsuShokeiEntity entity : kibetsuShokeiList) {
             KibetsuShokei kibetsuShokei = KibetsuShokei.createParam(entity.getChoteiNendo(),
                     entity.getFukaNendo(),
@@ -622,6 +633,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<DankaiShokeiEntity> dankaiShokeiList = choteiboSakuseiMapper.select段階小計情報(param);
+        RLogger.info("【create段階小計リスト】select段階小計情報:" + String.valueOf(dankaiShokeiList.size()));
         for (DankaiShokeiEntity entity : dankaiShokeiList) {
             DankaiShokei dankaiShokei = DankaiShokei.createParam(entity.getChoteiNendo(),
                     entity.getFukaNendo(),
@@ -712,6 +724,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHOTEINENDO.toString(), 調定年度);
         param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<DankaiGokeiEntity> 段階合計リスト = choteiboSakuseiMapper.select段階合計From段階小計一時テーブル(param);
+        RLogger.info("【update調定額の合計】select段階合計From段階小計一時テーブル:" + String.valueOf(段階合計リスト.size()));
         for (DankaiGokeiEntity 段階合計 : 段階合計リスト) {
             choteiboSakuseiMapper.update段階合計情報(段階合計);
         }
@@ -735,6 +748,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHUSHUTSUSTYMD.toString(), 開始調定日時);
         param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
         List<GenmenEntity> denmenEntity = choteiboSakuseiMapper.select減免の件数と減免額(param);
+        RLogger.info("【update減免の件数と減免額】select減免の件数と減免額:" + String.valueOf(denmenEntity.size()));
         for (GenmenEntity entity : denmenEntity) {
             choteiboSakuseiMapper.update減免の件数と減免額(entity);
         }
@@ -754,10 +768,12 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
 
         List<SaishutsuKampuEntity> tmpTkEntity = choteiboSakuseiMapper.select特徴歳出還付情報(param);
+        RLogger.info("【update歳出還付の件数と金額】select特徴歳出還付情報:" + String.valueOf(tmpTkEntity.size()));
         for (SaishutsuKampuEntity entity : tmpTkEntity) {
             choteiboSakuseiMapper.update特徴歳出還付(entity);
         }
         List<SaishutsuKampuEntity> tmpFuEntity = choteiboSakuseiMapper.select普徴歳出還付情報(param);
+        RLogger.info("【update歳出還付の件数と金額】select普徴歳出還付情報:" + String.valueOf(tmpFuEntity.size()));
         for (SaishutsuKampuEntity entity : tmpFuEntity) {
             choteiboSakuseiMapper.update普徴歳出還付(entity);
         }
@@ -783,6 +799,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.特別徴収.code());
 
         List<TokuchoKibetusDataEntity> tokuchoKibetusDataList = choteiboSakuseiMapper.select特徴期別のデータ(param);
+        RLogger.info("【insert合計部分一時テーブル_特別徴収】select特徴期別のデータ:" + String.valueOf(tokuchoKibetusDataList.size()));
         for (TokuchoKibetusDataEntity entity : tokuchoKibetusDataList) {
             GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
             gokeiBubunEntity.setChoshuHouhou(entity.getChoshuHouhou());
@@ -818,7 +835,9 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.普通徴収.code());
 
         List<KibetsuShokeiEntity> kibetsuShokeiList = choteiboSakuseiMapper.select普徴期別小計情報(param);
+        RLogger.info("【insert合計部分一時テーブル_普通徴収】select普徴期別小計情報:" + String.valueOf(kibetsuShokeiList.size()));
         List<KibetsuShokeiGokeiEntity> kibetsuShokeiGokeiList = choteiboSakuseiMapper.select期別小計の合計情報(param);
+        RLogger.info("【insert合計部分一時テーブル_普通徴収】select期別小計の合計情報:" + String.valueOf(kibetsuShokeiGokeiList.size()));
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(当年度);
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil(当年度);
@@ -906,6 +925,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_DOGETSUFLG.toString(), 当月);
         param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<DangatsuDankaiDataEntity> dangatsuDankaiDataList = choteiboSakuseiMapper.select当月末の段階のデータ(param);
+        RLogger.info("【update当月末の段階のデータ】select当月末の段階のデータ:" + String.valueOf(dangatsuDankaiDataList.size()));
         for (DangatsuDankaiDataEntity entity : dangatsuDankaiDataList) {
             GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
             gokeiBubunEntity.setChoshuHouhou(entity.getChoshuHouhou());
@@ -944,6 +964,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_DOGETSUFLG.toString(), 前月);
         param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<ZengatsuDankaiDataEntity> zengatsuDankaiDataList = choteiboSakuseiMapper.select前月末の段階のデータ(param);
+        RLogger.info("【update前月末の段階のデータ】select前月末の段階のデータ:" + String.valueOf(zengatsuDankaiDataList.size()));
         for (ZengatsuDankaiDataEntity entity : zengatsuDankaiDataList) {
             GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
             gokeiBubunEntity.setChoshuHouhou(entity.getChoshuHouhou());
@@ -977,6 +998,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_KARISANFLG.toString(), 仮算フラグ);
         List<DankaiTksaiToFusaiKensuEntity> dankaiTksaiToFusaiKensuList
                 = choteiboSakuseiMapper.select段階の特徴と普徴者数(param);
+        RLogger.info("【update段階の特徴と普徴者数】select段階の特徴と普徴者数:" + String.valueOf(dankaiTksaiToFusaiKensuList.size()));
         for (DankaiTksaiToFusaiKensuEntity entity : dankaiTksaiToFusaiKensuList) {
             choteiboSakuseiMapper.update段階の特徴と普徴者数(entity);
         }
@@ -1001,6 +1023,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_ZENZENNENDO.toString(), 前々年度);
 
         List<KibetsuBubunDataEntity> kibetsuBubunDataList = choteiboSakuseiMapper.select期別部分のデータ(param);
+        RLogger.info("【insert合計部分総計一時テーブル】select期別部分のデータ:" + String.valueOf(kibetsuBubunDataList.size()));
         for (KibetsuBubunDataEntity entity : kibetsuBubunDataList) {
             GokeiBubunSoukeiEntity gokeiBubunSoukeiEntity = new GokeiBubunSoukeiEntity();
             gokeiBubunSoukeiEntity.setChoshuHouhou(entity.getChoshuHouhou());
@@ -1036,6 +1059,7 @@ public class ChoteiboSakuseiDataShoriProcess extends SimpleBatchProcessBase {
         param.put(KEY_ZENZENNENDO.toString(), 前々年度);
 
         List<SonotaBubunDataEntity> sonotaBubunDataList = choteiboSakuseiMapper.selectその他部分のデータ(param);
+        RLogger.info("【updateその他部分のデータ】selectその他部分のデータ:" + String.valueOf(sonotaBubunDataList.size()));
         for (SonotaBubunDataEntity entity : sonotaBubunDataList) {
             GokeiBubunSoukeiEntity gokeiBubunSoukeiEntity = new GokeiBubunSoukeiEntity();
             gokeiBubunSoukeiEntity.setChoshuHouhou(entity.getChoshuHouhou());

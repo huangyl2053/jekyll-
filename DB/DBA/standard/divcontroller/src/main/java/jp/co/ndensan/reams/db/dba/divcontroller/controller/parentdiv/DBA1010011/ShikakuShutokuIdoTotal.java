@@ -210,12 +210,6 @@ public class ShikakuShutokuIdoTotal {
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                 .getCcdShikakuTokusoRireki().getDataGridDataSource();
-        Collections.sort(rowList, new ShikakuShutokuIdoTotal.ComparatorByDaNoSort());
-
-        RString daNo = new RString("1");
-        if (!rowList.isEmpty()) {
-            daNo = new RString(Integer.parseInt(rowList.get(rowList.size() - 1).getDaNo().trim().toString()) + 1);
-        }
         if (row != null && !RString.isNullOrEmpty(row.getState())) {
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getTxtShutokuDate().getValue());
@@ -227,6 +221,13 @@ public class ShikakuShutokuIdoTotal {
                     .getShikakuShutokuInput().getDdlShikakuShutokuJiyu().getSelectedKey());
             div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridSelectItem(row);
         } else {
+            Collections.sort(rowList, new ShikakuShutokuIdoTotal.ComparatorByDaNoSort());
+
+            RString daNo = new RString("1");
+            if (!rowList.isEmpty()) {
+                daNo = new RString(Integer.parseInt(rowList.get(rowList.size() - 1).getDaNo().trim().toString()) + 1);
+            }
+
             row = new dgShikakuShutokuRireki_Row();
             row.setState(追加);
             row.setDaNo(daNo);
@@ -250,7 +251,6 @@ public class ShikakuShutokuIdoTotal {
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().setDataGridDataSource(sortList);
         createHandler(div).資格取得情報パネルの初期化();
         div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().setReadOnly(true);
-        div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().set追加するボタン(false);
         response.data = div;
         return response;
     }

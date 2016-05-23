@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 共有子Div「市町村連絡事項」の実装クラスです。
- * 
- * @reamsid_L DBE-1300-090  suguangjun
+ *
+ * @reamsid_L DBE-1300-090 suguangjun
  */
 public class NinteiShinseiShichosonHandler {
 
@@ -44,7 +44,7 @@ public class NinteiShinseiShichosonHandler {
             div.getTxtRenrakujiko().setDisabled(false);
         } else if (ShokaiMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());
-            div.getBtnModoru().setDisabled(false);
+            div.getBtnModoru().setDisabled(true);
             div.getBtnToroku().setDisabled(true);
             div.getTxtRenrakujiko().setDisabled(true);
         }

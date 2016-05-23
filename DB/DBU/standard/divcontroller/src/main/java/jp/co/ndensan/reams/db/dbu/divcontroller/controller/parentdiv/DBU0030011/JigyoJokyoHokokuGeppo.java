@@ -32,6 +32,7 @@ public class JigyoJokyoHokokuGeppo {
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onLoad(JigyoJokyoHokokuGeppoDiv div) {
         List<JigyoHokokuTokei> kuTokeiList = ShukeiYearMouthGetterFinder.createInstance().get過去報告年月().records();
         getHandler(div).onLoad(kuTokeiList);
+        getHandler(div).setRadKoikiKoseiShichoson();
         return ResponseData.of(div).respond();
     }
 
@@ -42,19 +43,21 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoDiv div) {
-        FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey());
-        ShukeiYearMouthGetterFinder getterFinder = ShukeiYearMouthGetterFinder.createInstance();
-        ShukeiYearMouthGetterParameter parameter = ShukeiYearMouthGetterParameter.createParam_common(yearMonth, FlexibleYear.EMPTY, RString.EMPTY);
-        List<JigyoHokokuTokei> 集計年月_一般状況1から10 = getterFinder.get集計年月_一般状況1から10(parameter).records();
-        List<JigyoHokokuTokei> 集計年月_11から14現物分 = getterFinder.get集計年月_一般状況11から14現物分(parameter).records();
-        List<JigyoHokokuTokei> 審査年月_11から14償還分 = getterFinder.get審査年月_一般状況11から14償還分(parameter).records();
-        List<JigyoHokokuTokei> 決定年月_11から14現物分 = getterFinder.get決定年月_一般状況11から14償還分(parameter).records();
-        List<JigyoHokokuTokei> 集計年月_決定状況現物分 = getterFinder.get集計年月_決定状況現物分(parameter).records();
-        List<JigyoHokokuTokei> 審査年月_決定状況償還分 = getterFinder.get審査年月_決定状況償還分(parameter).records();
-        List<JigyoHokokuTokei> 決定年月_決定状況償還分 = getterFinder.get決定年月_決定状況償還分(parameter).records();
-        getHandler(div).getShukeiYM(集計年月_一般状況1から10, 集計年月_11から14現物分, 審査年月_11から14償還分,
-                決定年月_11から14現物分, 集計年月_決定状況現物分, 審査年月_決定状況償還分, 決定年月_決定状況償還分);
-        getHandler(div).getShutsuryokuAll();
+        if (RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey())) {
+            FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey());
+            ShukeiYearMouthGetterFinder getterFinder = ShukeiYearMouthGetterFinder.createInstance();
+            ShukeiYearMouthGetterParameter parameter = ShukeiYearMouthGetterParameter.createParam_common(yearMonth, FlexibleYear.EMPTY, RString.EMPTY);
+            List<JigyoHokokuTokei> 集計年月_一般状況1から10 = getterFinder.get集計年月_一般状況1から10(parameter).records();
+            List<JigyoHokokuTokei> 集計年月_11から14現物分 = getterFinder.get集計年月_一般状況11から14現物分(parameter).records();
+            List<JigyoHokokuTokei> 審査年月_11から14償還分 = getterFinder.get審査年月_一般状況11から14償還分(parameter).records();
+            List<JigyoHokokuTokei> 決定年月_11から14現物分 = getterFinder.get決定年月_一般状況11から14償還分(parameter).records();
+            List<JigyoHokokuTokei> 集計年月_決定状況現物分 = getterFinder.get集計年月_決定状況現物分(parameter).records();
+            List<JigyoHokokuTokei> 審査年月_決定状況償還分 = getterFinder.get審査年月_決定状況償還分(parameter).records();
+            List<JigyoHokokuTokei> 決定年月_決定状況償還分 = getterFinder.get決定年月_決定状況償還分(parameter).records();
+            getHandler(div).getShukeiYM(集計年月_一般状況1から10, 集計年月_11から14現物分, 審査年月_11から14償還分,
+                    決定年月_11から14現物分, 集計年月_決定状況現物分, 審査年月_決定状況償還分, 決定年月_決定状況償還分);
+            getHandler(div).getShutsuryokuAll();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -76,7 +79,7 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_radHokenshaKyuShichoson(JigyoJokyoHokokuGeppoDiv div) {
-        getHandler(div).setShichosonSentaku();
+        getHandler(div).setRadHokenshaKyuShichoson();
         return ResponseData.of(div).respond();
     }
 
@@ -87,7 +90,7 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_radKoikiKoseiShichoson(JigyoJokyoHokokuGeppoDiv div) {
-        getHandler(div).setShichosonSentaku();
+        getHandler(div).setRadKoikiKoseiShichoson();
         return ResponseData.of(div).respond();
     }
 
@@ -126,5 +129,4 @@ public class JigyoJokyoHokokuGeppo {
     private JigyoJokyoHokokuGeppoHandler getHandler(JigyoJokyoHokokuGeppoDiv div) {
         return new JigyoJokyoHokokuGeppoHandler(div);
     }
-
 }

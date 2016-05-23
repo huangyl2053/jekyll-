@@ -91,6 +91,50 @@ public class KarisanteihokenryononyutsuchishoginfuriPrintService {
         }
     }
 
+    /**
+     * 帳票を出力します。
+     *
+     * @param 仮算定納入通知書情報 仮算定納入通知書情報
+     * @param reportManager 帳票発行処理の制御機能
+     */
+    public void print(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
+        RString 帳票IDRString = RString.EMPTY;
+        if (仮算定納入通知書情報 != null && 仮算定納入通知書情報.get帳票ID() != null) {
+            帳票IDRString = 仮算定納入通知書情報.get帳票ID().getColumnValue();
+        }
+        if (帳票IDRString.startsWith(帳票IDの先頭_DBB100018)) {
+            print全てページDBB100018(仮算定納入通知書情報, reportManager);
+        } else if (帳票IDRString.startsWith(帳票IDの先頭_DBB100019)) {
+            print全てページDBB100019(仮算定納入通知書情報, reportManager);
+        }
+    }
+
+    private void print全てページDBB100018(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
+        KarisanteiHokenryoNonyuTsuchishoGinfuriProperty property = new KarisanteiHokenryoNonyuTsuchishoGinfuriProperty();
+        try (ReportAssembler<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> reportSourceWriter = new ReportSourceWriter(assembler);
+
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            KarisanteiHokenryoNonyuTsuchishoGinfuriReport report
+                    = KarisanteiHokenryoNonyuTsuchishoGinfuriReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+            report.writeBy(reportSourceWriter);
+        }
+    }
+
+    private void print全てページDBB100019(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
+        KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoProperty property = new KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoProperty();
+        try (ReportAssembler<KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource> reportSourceWriter = new ReportSourceWriter(assembler);
+
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
+                    NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport report
+                    = KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+            report.writeBy(reportSourceWriter);
+        }
+    }
+
     private <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(IReportProperty<T> property, ReportManager manager) {
         ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
         for (BreakAggregator<? super T, ?> breaker : property.breakers()) {

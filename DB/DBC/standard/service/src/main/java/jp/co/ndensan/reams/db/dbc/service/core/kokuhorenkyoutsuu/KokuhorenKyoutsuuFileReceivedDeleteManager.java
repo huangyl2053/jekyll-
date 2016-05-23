@@ -6,7 +6,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -70,7 +70,7 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
             }
             SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(新ファイル名.toString()));
             sfd = SharedFile.defineSharedFile(sfd);
-            RString 保管日数 = DbBusinessConifg.get(ConfigNameDBC.国保連取込_取込ファイル_保管日数, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            RString 保管日数 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_取込ファイル_保管日数, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             RDate 自動削除日 = RDate.getNowDate().plusDay(Integer.valueOf(保管日数.toString()));
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(true).dateToDelete(自動削除日);
             SharedFile.copyToSharedFile(sfd, new FilesystemPath(保存先フォルダ), opts);

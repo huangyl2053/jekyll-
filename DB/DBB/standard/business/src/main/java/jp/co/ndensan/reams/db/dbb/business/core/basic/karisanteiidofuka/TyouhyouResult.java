@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TyouhyouEnt
  *
  * @reamsid_L DBB-0890-020 zhangrui
  */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TyouhyouResult implements Serializable {
 
     private final TyouhyouEntity entity;

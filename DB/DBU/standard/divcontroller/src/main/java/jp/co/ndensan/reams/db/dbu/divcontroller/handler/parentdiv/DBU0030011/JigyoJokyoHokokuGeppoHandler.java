@@ -14,12 +14,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 様式別連携情報作成処理です。
@@ -60,7 +61,7 @@ public class JigyoJokyoHokokuGeppoHandler {
     public void onLoad(List<JigyoHokokuTokei> kuTokeiList) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
-        RString 合併市町村 = BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告);
+        RString 合併市町村 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (new Code(DonyuKeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
             div.getJikkoTanni().getRadHokenshaKyuShichoson().setVisible(false);
             div.getJikkoTanni().getRadKoikiKoseiShichoson().setVisible(false);
@@ -126,7 +127,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                     : new FlexibleDate(集計年月_11から14現物分.get(0).get集計年月().toDateString()));
         }
 
-        RString 一般状況集計方法 = BusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, SubGyomuCode.DBU介護統計報告);
+        RString 一般状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (new RString("1").equals(一般状況集計方法)) {
             if (!審査年月_11から14償還分.isEmpty()) {
                 div.getTxtShukeiYM3().setValue(審査年月_11から14償還分.get(0).get集計年月() == null ? FlexibleDate.EMPTY
@@ -196,7 +197,7 @@ public class JigyoJokyoHokokuGeppoHandler {
             div.getTxtShukeiYM4().setValue(集計年月_決定状況現物分.get(0).get集計年月() == null ? FlexibleDate.EMPTY
                     : new FlexibleDate(集計年月_決定状況現物分.get(0).get集計年月().toDateString()));
         }
-        RString 保険給付集計方法 = BusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, SubGyomuCode.DBU介護統計報告);
+        RString 保険給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (new RString("1").equals(保険給付集計方法)) {
             if (!審査年月_決定状況償還分.isEmpty()) {
                 div.getTxtShukeiYM5().setValue(審査年月_決定状況償還分.get(0).get集計年月() == null ? FlexibleDate.EMPTY
@@ -388,14 +389,20 @@ public class JigyoJokyoHokokuGeppoHandler {
     }
 
     /**
-     * 市町村選択選択ダイアログボタンの処理です。
+     * 合併市町村用保険者選択ラジオボタンの処理です。
      */
-    public void setShichosonSentaku() {
+    public void setRadHokenshaKyuShichoson() {
         if (new RString("gappei").equals(div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey())) {
             div.getJikkoTanni().getBtnShichosonSentaku().setDisabled(true);
         } else {
             div.getJikkoTanni().getBtnShichosonSentaku().setDisabled(false);
         }
+    }
+
+    /**
+     * 広域構成市町村用保険者選択ラジオボタンの処理です。
+     */
+    public void setRadKoikiKoseiShichoson() {
         if (new RString("koiki").equals(div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey())) {
             div.getJikkoTanni().getBtnShichosonSentaku().setDisabled(true);
         } else {
