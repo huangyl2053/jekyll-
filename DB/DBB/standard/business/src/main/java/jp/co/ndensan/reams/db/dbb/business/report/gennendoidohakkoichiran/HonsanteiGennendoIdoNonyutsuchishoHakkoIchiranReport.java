@@ -28,7 +28,6 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport extends Report
     private final RString 出力順ID;
     private final RString 地方公共団体コード;
     private final RString 市町村名;
-    private static final int SIZE = 18;
 
     /**
      * コンストラクタです。
@@ -59,7 +58,7 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport extends Report
         int index = 0;
         for (EditedHonSanteiTsuchiShoKyotsu target : 編集後本算定通知書共通情報) {
             index++;
-            int 連番 = (index - 1) % SIZE + 1;
+            int 連番 = index;
             HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity
                     = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity(target,
                             賦課年度, 出力期, 帳票作成日時, 出力順ID, 地方公共団体コード, 市町村名, 連番);

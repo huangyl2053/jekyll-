@@ -5,17 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaTorokuKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt310FindKozaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -30,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
 
-    private final HonSanteiIdoKanendoFukaBatchParameter バッチパラメータ;
+    private final RString 出力順ID;
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
     private final YMDHMS 調定日時;
@@ -49,9 +43,14 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
     private static final int NUM_10 = 10;
     private static final int NUM_11 = 11;
     private static final int NUM_12 = 12;
-
+    private static final char CHAR_0 = '0';
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
+    private final RString 並び順の１件目;
+    private final RString 並び順の２件目;
+    private final RString 並び順の３件目;
+    private final RString 並び順の４件目;
+    private final RString 並び順の５件目;
 
     /**
      * インスタンスを生成します。
@@ -59,7 +58,12 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
      * @param inputEntity {@link KanendoIdouKekkaIchiranInputEntity}
      */
     protected BodyEditor(KanendoIdouKekkaIchiranInputEntity inputEntity) {
-        バッチパラメータ = inputEntity.getバッチパラメータ();
+        this.並び順の１件目 = inputEntity.get並び順の１件目();
+        this.並び順の２件目 = inputEntity.get並び順の２件目();
+        this.並び順の３件目 = inputEntity.get並び順の３件目();
+        this.並び順の４件目 = inputEntity.get並び順の４件目();
+        this.並び順の５件目 = inputEntity.get並び順の５件目();
+        出力順ID = inputEntity.get出力順ID();
         調定日時 = inputEntity.get調定日時();
         計算後情報_宛名_口座_更正前Entity = inputEntity.get計算後情報_宛名_口座_更正前Entity();
         計算後情報_宛名_口座_更正後Entity = inputEntity.get計算後情報_宛名_口座_更正後Entity();
@@ -68,8 +72,12 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
 
     @Override
     public KanendoIdouKekkaIchiranSource edit(KanendoIdouKekkaIchiranSource source) {
-        source.hokenshaNo = association.get地方公共団体コード().value();
-        source.hokenshaName = association.get市町村名();
+        if (association.get地方公共団体コード() != null) {
+            source.hokenshaNo = association.get地方公共団体コード().value();
+        }
+        if (association.get市町村名() != null) {
+            source.hokenshaName = association.get市町村名();
+        }
         set出力順And改ページ(source);
         source.list1_1 = 計算後情報_宛名_口座_更正前Entity.get通知書番号().value();
         AtenaMeisho 氏名 = 計算後情報_宛名_口座_更正前Entity.get宛名Entity().getKanjiShimei();
@@ -78,10 +86,10 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         }
         source.list1_3 = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座_更正前Entity
                 .get宛名Entity()).get住所().get住所();
-        source.list1_4 = 計算後情報_宛名_口座_更正前Entity.get口座Entity().get金融機関コード().value();
-        IKoza koza = to口座(計算後情報_宛名_口座_更正前Entity.get口座Entity());
-        source.list1_5 = koza.get預金種別().get預金種別略称();
-        source.list1_6 = 計算後情報_宛名_口座_更正前Entity.get口座Entity().get口座番号();
+        IKoza koza = new Koza(計算後情報_宛名_口座_更正前Entity.get口座Entity());
+        source.list1_4 = koza.get金融機関コード().value();
+//        source.list1_5 = koza.get預金種別().get預金種別略称();
+        source.list1_6 = koza.get口座番号();
         source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定年度().toDateString();
         source.list2_2 = 計算後情報_宛名_口座_更正前Entity.get賦課年度().toDateString();
         source.list2_3 = new RString(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額().toString());
@@ -89,7 +97,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         source.list2_5 = new RString(計算後情報_宛名_口座_更正前Entity.get減免額().toString());
         set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
         source.list2_18 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額().toString());
-        source.list2_19 = 計算後情報_宛名_口座_更正後Entity.get口座Entity().get金融機関名称();
+//        source.list2_19 = koza.get金融機関().get金融機関名称();
         source.list3_1 = 計算後情報_宛名_口座_更正後Entity.get調定年度().toDateString();
         source.list3_2 = 計算後情報_宛名_口座_更正後Entity.get賦課年度().toDateString();
         source.list2_3 = new RString(計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額().toString());
@@ -97,7 +105,8 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         source.list2_5 = new RString(計算後情報_宛名_口座_更正後Entity.get減免額().toString());
         set月別取得段階(計算後情報_宛名_口座_更正後Entity, source);
         source.list3_18 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴歳出還付額().toString());
-        source.list3_19 = 計算後情報_宛名_口座_更正後Entity.get口座Entity().get口座名義人().value();
+        source.list3_19 = koza.get口座名義人().value();
+
         source.list4_1 = 調定日時.wareki().toDateString();
         source.list4_2 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01().toString());
         source.list4_3 = new RString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02().toString());
@@ -159,7 +168,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         int 開始月2 = 月割開始年月2.getMonthValue();
         FlexibleDate 月割終了年月2 = entity.get月割終了年月2();
         int 終了月2 = 月割終了年月2.getMonthValue();
-        RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2);
+        RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
 
         set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
@@ -266,60 +275,11 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
     }
 
     private void set出力順And改ページ(KanendoIdouKekkaIchiranSource source) {
-        if (バッチパラメータ.get出力帳票List() != null && バッチパラメータ.get出力帳票List().isEmpty()) {
-            if (バッチパラメータ.get出力帳票List().size() > NUM_0) {
-                source.shutsuryokujun1 = バッチパラメータ.get出力帳票List().get(NUM_0).get出力順ID();
-                source.kaipage1 = バッチパラメータ.get出力帳票List().get(NUM_0).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票List().size() > NUM_1) {
-                source.shutsuryokujun2 = バッチパラメータ.get出力帳票List().get(NUM_1).get出力順ID();
-                source.kaipage2 = バッチパラメータ.get出力帳票List().get(NUM_1).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票List().size() > NUM_2) {
-                source.shutsuryokujun3 = バッチパラメータ.get出力帳票List().get(NUM_2).get出力順ID();
-                source.kaipage3 = バッチパラメータ.get出力帳票List().get(NUM_2).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票List().size() > NUM_3) {
-                source.shutsuryokujun4 = バッチパラメータ.get出力帳票List().get(NUM_3).get出力順ID();
-                source.kaipage4 = バッチパラメータ.get出力帳票List().get(NUM_3).get出力順ID();
-            }
-            if (バッチパラメータ.get出力帳票List().size() > NUM_4) {
-                source.shutsuryokujun5 = バッチパラメータ.get出力帳票List().get(NUM_4).get出力順ID();
-                source.kaipage5 = バッチパラメータ.get出力帳票List().get(NUM_4).get出力順ID();
-            }
-        }
-    }
-
-    private IKoza to口座(UaFt310FindKozaEntity uaFt310Entity) {
-        KozaRelateEntity relateEntity = new KozaRelateEntity();
-        UaT0310KozaEntity kozaEntity = new UaT0310KozaEntity();
-        uaFt310Entity.getサブ業務コード();
-        kozaEntity.setKozaId(uaFt310Entity.get口座ID().longValue());
-        kozaEntity.setKozaMeiginin(uaFt310Entity.get口座名義人());
-        kozaEntity.setKozaMeigininKanji(uaFt310Entity.get口座名義人漢字());
-        kozaEntity.setKozaMeigininShikibetsuCode(uaFt310Entity.get口座名義人識別コード());
-        kozaEntity.setKozaNo(uaFt310Entity.get口座番号());
-        kozaEntity.setKozaTorokuKubunCode(new KozaTorokuKubunCodeValue(uaFt310Entity.get口座登録区分コード()));
-        kozaEntity.setKozaTorokuYMD(new FlexibleDate(uaFt310Entity.get口座登録年月日().toDateString()));
-        kozaEntity.setKozaTorokuNo(uaFt310Entity.get口座登録番号());
-        kozaEntity.setKozaShuryoUketsukeYMD(new FlexibleDate(uaFt310Entity.get口座終了受付年月日().toDateString()));
-        kozaEntity.setKozaHyojiKubun(uaFt310Entity.get口座表示区分());
-        kozaEntity.setKozaKaishiUketsukeYMD(new FlexibleDate(uaFt310Entity.get口座開始受付年月日().toDateString()));
-        kozaEntity.setTemban(uaFt310Entity.get店番());
-        kozaEntity.setKinyuKikanShitenCode(uaFt310Entity.get支店コード());
-        kozaEntity.setKensakuyoMeiginin(uaFt310Entity.get検索用名義人());
-        kozaEntity.setGyomuKoyuKey(uaFt310Entity.get業務固有キー());
-        kozaEntity.setYotoKubun(new KozaYotoKubunCodeValue(uaFt310Entity.get用途区分()));
-        kozaEntity.setShuryoYMD(new FlexibleDate(uaFt310Entity.get終了年月日().toDateString()));
-        kozaEntity.setShikibetsuCode(uaFt310Entity.get識別コード());
-        kozaEntity.setTsuchoNo(uaFt310Entity.get通帳番号());
-        kozaEntity.setTsuchoKigo(uaFt310Entity.get通帳記号());
-        kozaEntity.setKinyuKikanCode(uaFt310Entity.get金融機関コード());
-        kozaEntity.setKaishiYMD(new FlexibleDate(uaFt310Entity.get開始年月日().toDateString()));
-        kozaEntity.setYokinShubetsu(uaFt310Entity.get預金種別());
-
-        relateEntity.setUaT0310KozaEntity(kozaEntity);
-        return new Koza(relateEntity);
+        source.shutsuryokujun1 = 並び順の１件目;
+        source.shutsuryokujun2 = 並び順の２件目;
+        source.shutsuryokujun3 = 並び順の３件目;
+        source.shutsuryokujun4 = 並び順の４件目;
+        source.shutsuryokujun5 = 並び順の５件目;
     }
 
 }

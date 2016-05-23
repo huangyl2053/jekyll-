@@ -9,14 +9,26 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KeisangojohoAtenaKozaKouseizengoEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 PrintService
@@ -26,21 +38,84 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
  */
 public class KanendoIdouKekkaIchiranPrintService {
 
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+
     /**
-     * 本算定異動（過年度）結果一覧表 printメソッド
+     * printメソッド(単一帳票出力用)
      *
-     * @param 更正前後EntityList KeisangojohoAtenaKozaKouseizengoEntityのList
-     * @param バッチパラメータ HonSanteiIdoKanendoFukaBatchParameter
+     * @param 更正前後EntityList List<KeisanjohoAtenaKozaKouseizengoEntity>
+     * @param 出力順ID RString
      * @param 調定日時 YMDHMS
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(List<KeisangojohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
-            HonSanteiIdoKanendoFukaBatchParameter バッチパラメータ, YMDHMS 調定日時) {
+    public SourceDataCollection printTaitsu(List<KeisangojohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
+            RString 出力順ID, YMDHMS 調定日時) {
+        try (ReportManager reportManager = new ReportManager()) {
+            printFukusu(更正前後EntityList, 出力順ID, 調定日時, reportManager);
+            return reportManager.publish();
+        }
+
+    }
+
+    /**
+     * 本算定異動（過年度）結果一覧表 printメソッド(複数帳票出力用)
+     *
+     * @param 更正前後EntityList KeisangojohoAtenaKozaKouseizengoEntityのList
+     * @param 出力順ID RString
+     * @param 調定日時 YMDHMS
+     * @param reportManager ReportManager
+     */
+    public void printFukusu(List<KeisangojohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
+            RString 出力順ID, YMDHMS 調定日時, ReportManager reportManager) {
         KanendoIdouKekkaIchiranProperty property = new KanendoIdouKekkaIchiranProperty();
         IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
         Association association = associationFinder.getAssociation();
-        return new Printer<KanendoIdouKekkaIchiranSource>().spool(property,
-                new KanendoIdouKekkaIchiranReport(更正前後EntityList, バッチパラメータ, 調定日時, association));
+        try (ReportAssembler<KanendoIdouKekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KanendoIdouKekkaIchiranSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200027.getReportId(),
+                            Long.valueOf(出力順ID.toString()));
+            int i = 0;
+            RString 並び順の１件目 = RString.EMPTY;
+            RString 並び順の２件目 = RString.EMPTY;
+            RString 並び順の３件目 = RString.EMPTY;
+            RString 並び順の４件目 = RString.EMPTY;
+            RString 並び順の５件目 = RString.EMPTY;
+            if (並び順 != null) {
+                for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                    if (i == INDEX_0) {
+                        並び順の１件目 = item.get項目名();
+                    } else if (i == INDEX_1) {
+                        並び順の２件目 = item.get項目名();
+                    } else if (i == INDEX_2) {
+                        並び順の３件目 = item.get項目名();
+                    } else if (i == INDEX_3) {
+                        並び順の４件目 = item.get項目名();
+                    } else if (i == INDEX_4) {
+                        並び順の５件目 = item.get項目名();
+                    }
+                    i = i + 1;
+                }
+            }
+            new KanendoIdouKekkaIchiranReport(更正前後EntityList, 出力順ID, 調定日時, association, 並び順の１件目, 並び順の２件目,
+                    並び順の３件目, 並び順の４件目, 並び順の５件目)
+                    .writeBy(reportSourceWriter);
+        }
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
     }
 
 }
