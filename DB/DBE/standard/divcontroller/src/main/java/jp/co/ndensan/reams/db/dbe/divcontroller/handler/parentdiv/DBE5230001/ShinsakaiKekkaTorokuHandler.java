@@ -48,8 +48,6 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKyotsuHyojiArea().getTxtShinsaTaishosha().setValue(new RString(head.get割付人数()));
             div.getKyotsuHyojiArea().getTxtShinsakaiKaijo().setValue(head.get審査会会場());
             div.getKyotsuHyojiArea().getTxtChiku().setValue(head.get審査会地区コード());
-            // TODO
-            //div.getKyotsuHyojiArea().getTxtShinsakaijoJusho().setValue(head.get審査会地区コード());
             div.getKyotsuHyojiArea().getTxtTaishoNinzu().setValue(new RString(head.get対象人数()));
             div.getKyotsuHyojiArea().getTxtKaisaiNichiji().setValue(head.get開催日());
             div.getKyotsuHyojiArea().getTxtKaisaiTimeRange().setFromValue(new RTime(head.get開催開始時間()));
