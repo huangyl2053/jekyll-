@@ -78,8 +78,11 @@ public class KouzaInfoPanel {
         param.setHihokenshaNo(支給申請情報.get被保険者番号());
         param.setShikyushinseiServiceYM(支給申請情報.getサービス提供年月());
         param.setShikyushinseiSeiriNo(支給申請情報.get整理番号());
-        param.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
         param.setKeiyakuNo(支給申請情報.get受領委任契約番号());
+        RString 支払方法区分コード = 支給申請情報.get支払方法区分コード();
+        if (支払方法区分コード != null || !支払方法区分コード.isEmpty()) {
+            param.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
+        }
         if (支給申請情報.get支払期間開始年月日() != null) {
             param.setStartYMD(new RDate(支給申請情報.get支払期間開始年月日().toString()));
         }
