@@ -684,11 +684,11 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 + toInt(一次判定要介護2.getListHantei_3()) + toInt(一次判定要介護3.getListHantei_3())
                 + toInt(一次判定要介護4.getListHantei_3()) + toInt(一次判定要介護5.getListHantei_3());
         int 変更者要支援2 = toInt(一次判定非該当.getListHantei_4()) + toInt(一次判定要支援1.getListHantei_4())
-                + toInt(一次判定要介護1.getListHantei_4())
+                //                + toInt(一次判定要介護1.getListHantei_4())
                 + toInt(一次判定要介護2.getListHantei_4()) + toInt(一次判定要介護3.getListHantei_4())
                 + toInt(一次判定要介護4.getListHantei_4()) + toInt(一次判定要介護5.getListHantei_4());
         int 変更者要介護1 = toInt(一次判定非該当.getListHantei_5()) + toInt(一次判定要支援1.getListHantei_5())
-                + toInt(一次判定要支援2.getListHantei_5())
+                //                + toInt(一次判定要支援2.getListHantei_5())
                 + toInt(一次判定要介護2.getListHantei_5()) + toInt(一次判定要介護3.getListHantei_5())
                 + toInt(一次判定要介護4.getListHantei_5()) + toInt(一次判定要介護5.getListHantei_5());
         int 変更者要介護2 = toInt(一次判定非該当.getListHantei_6()) + toInt(一次判定要支援1.getListHantei_6())
@@ -860,10 +860,10 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
     }
 
     private int get被保険者数(List<SinsakaiHanteiJyokyoEntity> 審査判定状況,
-            RString 要介護認定一次判定結果コード,
+            RString 要介護認定一次判定結果コード認知症加算,
             RString 二次判定要介護状態区分コード) {
         for (SinsakaiHanteiJyokyoEntity sinsakaiHanteiJyokyoEntity : 審査判定状況) {
-            if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaCode().value().equals(要介護認定一次判定結果コード)
+            if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaNinchishoKasanCode().value().equals(要介護認定一次判定結果コード認知症加算)
                     && sinsakaiHanteiJyokyoEntity.getNijiHanteiYokaigoJotaiKubunCode().value().equals(二次判定要介護状態区分コード)) {
                 return sinsakaiHanteiJyokyoEntity.getHihokenshaCount();
             }
