@@ -149,7 +149,7 @@ public class KouzaInfoHandler {
     public void 申請既存チェック(RString 整理番号, FlexibleYearMonth サービス年月, HihokenshaNo 被保険者番号) {
         List<ShokanShinsei> entity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
-        if (entity == null) {
+        if (entity == null || entity.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(償還払支給申請.toString()));
         }
     }
