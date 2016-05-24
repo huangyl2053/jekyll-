@@ -41,7 +41,7 @@ public class ShujiiIkenshoIraiHandler {
      */
     public void initialize() {
         HihokenshaNo hihokenshano = new HihokenshaNo(div.getHihokenshano());
-        div.getCcdKaigoShikakuKihon().onLoad(hihokenshano);
+//        div.getCcdKaigoShikakuKihon().onLoad(hihokenshano);
         ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
         List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(hihokenshano).records();
         init(認定調査情報);
@@ -60,13 +60,13 @@ public class ShujiiIkenshoIraiHandler {
                 row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(new RString(shujiiikenshoirai
                         .getNinteiShinseiCode().toString())).toRString());
             }
-            if (shujiiikenshoirai.getTorisageYMD() != null) {
+            if (shujiiikenshoirai.getTorisageYMD() != null && !shujiiikenshoirai.getTorisageYMD().isEmpty()) {
                 row.getNiteiTorisageDay().setValue(new RDate(shujiiikenshoirai.getTorisageYMD().toString()));
             }
-            if (shujiiikenshoirai.getNijiHanteiYMD() != null) {
+            if (shujiiikenshoirai.getNijiHanteiYMD() != null && !shujiiikenshoirai.getNijiHanteiYMD().isEmpty()) {
                 row.getNinteibi().setValue(new RDate(shujiiikenshoirai.getNijiHanteiYMD().toString()));
             }
-            if (shujiiikenshoirai.getNijiHanteiYokaigoJotaiCode() != null) {
+            if (shujiiikenshoirai.getNijiHanteiYokaigoJotaiCode() != null && !shujiiikenshoirai.getNijiHanteiYokaigoJotaiCode().isEmpty()) {
                 row.setYokaigodo(YokaigoJotaiKubun09.toValue(new RString(shujiiikenshoirai.getNijiHanteiYokaigoJotaiCode().toString())).get名称());
             }
             RStringBuilder nijiHantei = new RStringBuilder();
@@ -76,16 +76,16 @@ public class ShujiiIkenshoIraiHandler {
             row.setIryoKikanNumber(shujiiikenshoirai.getShujiiIryokikanCode());
             row.setIryoKikanMeisho(shujiiikenshoirai.getIryoKikanMeisho());
             row.setShujiiCode(shujiiikenshoirai.getShujiiCode());
-            if (shujiiikenshoirai.getShujiiName() != null) {
+            if (shujiiikenshoirai.getShujiiName() != null && !shujiiikenshoirai.getShujiiName().isEmpty()) {
                 row.setShujiiMeisho(new RString(shujiiikenshoirai.getShujiiName().toString()));
             }
-            if (shujiiikenshoirai.getIkenshoJuryoYMD() != null) {
+            if (shujiiikenshoirai.getIkenshoJuryoYMD() != null && !shujiiikenshoirai.getIkenshoJuryoYMD().isEmpty()) {
                 row.getIkenshoTorikomiDay().setValue(new RDate(shujiiikenshoirai.getIkenshoJuryoYMD().toString()));
             }
-            if (shujiiikenshoirai.getIkenshoKinyuYMD() != null) {
+            if (shujiiikenshoirai.getIkenshoKinyuYMD() != null && !shujiiikenshoirai.getIkenshoKinyuYMD().isEmpty()) {
                 row.getIkenshoKinyuDay().setValue(new RDate(shujiiikenshoirai.getIkenshoKinyuYMD().toString()));
             }
-            if (shujiiikenshoirai.getIkenshoIraiKubun() != null) {
+            if (shujiiikenshoirai.getIkenshoIraiKubun() != null && !shujiiikenshoirai.getIkenshoIraiKubun().isEmpty()) {
                 row.setIraiKubun(new RString(IkenshoIraiKubun.toValue(new RString(shujiiikenshoirai.getIkenshoIraiKubun().toString())).name()));
             }
             dataRowList.add(row);
