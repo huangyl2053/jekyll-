@@ -68,8 +68,8 @@
     </resultMap>
     <resultMap id="result_JiMuSyo" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiMuSyoEntity">
         <result property="temp_ninteiChosaYoteiYMD" column="temp_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="Temp_jigyoshaMeisho" column="Temp_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="Temp_ninteiChosaItakusakiCode" column="Temp_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="temp_jigyoshaMeisho" column="Temp_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="temp_ninteiChosaItakusakiCode" column="Temp_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="空きの午前イメージ" column="空きの午前イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="空きの午前件数" column="空きの午前件数"/>
         <result property="空きの午後イメージ" column="空きの午後イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
