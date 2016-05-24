@@ -44,8 +44,6 @@ public class Property extends
             BreakerCatalog<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
-
-
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> occuredBreak(

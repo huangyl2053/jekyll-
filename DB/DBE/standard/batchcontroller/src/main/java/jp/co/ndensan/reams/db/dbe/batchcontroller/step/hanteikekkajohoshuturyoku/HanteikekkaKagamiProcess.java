@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.hanteikekkakagami.HanteikekkaKagamiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
@@ -73,8 +74,9 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
                 SubGyomuCode.DBE認定支援, ID,
                 new FlexibleDate(システム時刻.getDate().toDateString()),
                 reportSourceWriter));
-        hanteikekkaKagamiEntity.setTsuchibun1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号).get(INDEX_1));
-        hanteikekkaKagamiEntity.setTsuchibun2(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号).get(INDEX_2));
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号);
+        hanteikekkaKagamiEntity.setTsuchibun1(通知文.get(INDEX_1));
+        hanteikekkaKagamiEntity.setTsuchibun2(通知文.get(INDEX_2));
         HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity);
         report.writeBy(reportSourceWriter);
     }

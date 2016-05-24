@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum DBC0820022TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    戻る("戻る"),
+    一覧に戻る("一覧に戻る"),
     基本情報("基本情報"),
     特定診療費("特定診療費"),
     サービス計画費("サービス計画費"),

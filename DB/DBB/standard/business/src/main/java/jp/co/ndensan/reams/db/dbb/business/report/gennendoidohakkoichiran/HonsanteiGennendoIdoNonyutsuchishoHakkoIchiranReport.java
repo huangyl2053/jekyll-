@@ -76,8 +76,10 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport extends Report
                     = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity(target,
                             賦課年度, 出力期, 帳票作成日時, 地方公共団体コード, 市町村名, 連番,
                             並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目);
-            IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor headerEditor = new HeaderEditor(inputEntity);
-            IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor bodyEditor = new BodyEditor(inputEntity);
+            IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor headerEditor
+                    = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranHeaderEditor(inputEntity);
+            IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor bodyEditor
+                    = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor(inputEntity);
             IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBuilder builder
                     = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);

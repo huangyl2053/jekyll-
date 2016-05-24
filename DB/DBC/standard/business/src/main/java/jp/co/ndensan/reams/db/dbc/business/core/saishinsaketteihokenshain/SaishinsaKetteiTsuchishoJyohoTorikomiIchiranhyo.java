@@ -11,12 +11,11 @@ import jp.co.ndensan.reams.db.dbc.business.report.saishinsaketteihokenshain.Sais
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaMeisaiPsmEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -27,12 +26,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -230,7 +227,7 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
         RString 被保険者 = RString.EMPTY;
         if (JuminShubetsu.住登外個人_外国人.getCode().equals(entity.getJuminShubetsuCode())
                 || JuminShubetsu.外国人.getCode().equals(entity.getJuminShubetsuCode())) {
-            RString code = get(ConfigNameDBU.外国人表示制御_氏名表示方法,
+            RString code = DbBusinessConfig.get(ConfigNameDBU.外国人表示制御_氏名表示方法,
                     RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
             if (INDEX_1.equals(code)) {
                 被保険者 = entity.getTsushomei();
@@ -242,42 +239,6 @@ public class SaishinsaKetteiTsuchishoJyohoTorikomiIchiranhyo {
         }
         return 被保険者;
 
-    }
-
-    /**
-     * 引数で指定したキー名称、適用基準日、サブ業務コードに対応するコンフィグ設定値を取得します。
-     * <p>
-     * 条件に該当するコンフィグが存在しない場合はnullを返す。</p>
-     *
-     * @param key 列挙型で定義されたキー名称
-     * @param effectiveDate 適用基準日
-     * @param subGyomu サブ業務コード
-     * @return キー名に対応する設定値
-     */
-    private RString get(Enum key, RDate effectiveDate, SubGyomuCode subGyomu) {
-        return get(key, effectiveDate, subGyomu, null, null);
-    }
-
-    /**
-     * 引数で指定したキー名称、適用基準日、サブ業務コード、地方公共団体コード、汎用キーワードに対応するコンフィグ設定値を取得します。
-     * <p>
-     * 条件に該当するコンフィグが存在しない場合はnullを返す。
-     * <p/>
-     *
-     * @param key 列挙型で定義されたキー名称
-     * @param effectiveDate 適用基準日
-     * @param subGyomuCode サブ業務コード
-     * @param lasdecCode 地方公共団体コード
-     * @param optionValue 汎用キーワード
-     * @return キー名に対応する設定値
-     */
-    private RString get(Enum key, RDate effectiveDate, SubGyomuCode subGyomuCode,
-            LasdecCode lasdecCode, RString optionValue) {
-        RString config = BusinessConfig.get(key, effectiveDate, subGyomuCode, lasdecCode, optionValue);
-        if (config == null) {
-            throw new SystemException(DbxErrorMessages.業務コンフィグなし.getMessage().replace(key.name()).evaluate());
-        }
-        return config;
     }
 
 }

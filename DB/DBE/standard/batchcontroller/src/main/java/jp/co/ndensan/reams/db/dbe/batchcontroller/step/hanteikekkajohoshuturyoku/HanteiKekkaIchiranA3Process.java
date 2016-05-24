@@ -50,6 +50,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
     private static final RString 一次判定結果_認知症加算_3 = new RString("3");
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private RDateTime システム時刻;
+    private int index;
 
     @BatchWriter
     private BatchReportWriter<HanteiKekkaIchiranA3ReportSource> batchReportWriter;
@@ -58,6 +59,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
     @Override
     protected void initialize() {
         システム時刻 = RDateTime.now();
+        index = 0;
     }
 
     @Override
@@ -79,7 +81,12 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
     protected void process(HanteiKekkaIchiranA3Entity entity) {
         entity.setTitle(REPORTNAME);
         entity.setPrintTimeStamp(システム時刻);
-        entity.set当前頁(reportSourceWriter.pageCount().value());
+        index = index + 1;
+        if (index % PAGECOUNT > 0) {
+            entity.set当前頁((index - (index % PAGECOUNT)) / PAGECOUNT + 1);
+        } else {
+            entity.set当前頁(index / PAGECOUNT);
+        }
         if (entity.getCount() % PAGECOUNT > 0) {
             entity.set総頁((entity.getCount() - (entity.getCount() % PAGECOUNT)) / PAGECOUNT + 1);
         } else {

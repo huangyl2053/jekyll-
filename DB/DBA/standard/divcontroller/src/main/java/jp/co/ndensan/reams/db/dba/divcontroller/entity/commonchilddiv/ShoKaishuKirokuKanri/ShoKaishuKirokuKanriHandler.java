@@ -36,6 +36,7 @@ public class ShoKaishuKirokuKanriHandler {
     private static final RString 状態_照会 = new RString("照会");
     private static final RString 状態_更新 = new RString("更新");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString 被保険者証 = new RString("被保険者証");
     private static final RString CODESHUBETSU_001 = new RString("001");
     private static final RString CODESHUBETSU_0002 = new RString("0002");
     private static final RString CODESHUBETSU_0003 = new RString("0003");
@@ -92,7 +93,7 @@ public class ShoKaishuKirokuKanriHandler {
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
                         dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0003), new Code(jigyoshaInput.get回収事由())));
                     } else {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get回収事由())));
                     }
                     if (jigyoshaInput.get有効期限() != null && jigyoshaInput.get有効期限().isValid()) {
                         dgJigyoshaItiran.setYukoKigen((jigyoshaInput.get有効期限().wareki().toDateString()));
@@ -140,7 +141,7 @@ public class ShoKaishuKirokuKanriHandler {
                     if (CODESHUBETSU_001.equals(jigyoshaInput.get交付証種類())) {
                         dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0003), new Code(jigyoshaInput.get回収事由())));
                     } else {
-                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get交付事由())));
+                        dgJigyoshaItiran.setKaishuJiyu(CodeMaster.getCodeRyakusho(new CodeShubetsu(CODESHUBETSU_0005), new Code(jigyoshaInput.get回収事由())));
                     }
                     dgJigyoshaItiran.setKaishuJiyuNo(jigyoshaInput.get回収事由());
                     if (jigyoshaInput.get有効期限() != null && jigyoshaInput.get有効期限().isValid()) {
@@ -229,12 +230,12 @@ public class ShoKaishuKirokuKanriHandler {
      */
     public void 状態の修正(RString 状態) {
         dgKoufuKaishu_Row dgKoufuKaishuRow = div.getDgKoufuKaishu().getSelectedItems().get(0);
-        if (CODESHUBETSU_001.equals(dgKoufuKaishuRow.getKoufuType())) {
+        if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
             div.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0002)));
         } else {
             div.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0004)));
         }
-        if (CODESHUBETSU_001.equals(dgKoufuKaishuRow.getKoufuType())) {
+        if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
             div.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0003)));
         } else {
             div.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0005)));

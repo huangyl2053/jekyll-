@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou.GenNendoHonsanteiIdouSource;
@@ -64,6 +66,18 @@ public class GenNendoHonsanteiIdouReport extends Report<GenNendoHonsanteiIdouSou
 
     @Override
     public void writeBy(ReportSourceWriter<GenNendoHonsanteiIdouSource> reportSourceWriter) {
+
+        Collections.sort(更正前後EntityList, new Comparator<KeisanjohoAtenaKozaKouseizengoEntity>() {
+            @Override
+            public int compare(KeisanjohoAtenaKozaKouseizengoEntity o1, KeisanjohoAtenaKozaKouseizengoEntity o2) {
+                int flag = o2.get計算後情報_宛名_口座_更正前Entity().get普徴期別金額01().compareTo(o1.get計算後情報_宛名_口座_更正後Entity().get普徴期別金額01());
+                if (0 == flag) {
+                    flag = o2.get計算後情報_宛名_口座_更正前Entity().get特徴期別金額01().compareTo(o1.get計算後情報_宛名_口座_更正後Entity().get特徴期別金額01());
+                }
+                return flag;
+            }
+        });
+
         for (KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity : 更正前後EntityList) {
             KeisanjohoAtenaKozaEntity 更正前Entity = 更正前後Entity.get計算後情報_宛名_口座_更正前Entity();
             KeisanjohoAtenaKozaEntity 更正後Entity = 更正前後Entity.get計算後情報_宛名_口座_更正後Entity();

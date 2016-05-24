@@ -17,13 +17,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * 帳票設計_DBBRP44002_1_保険料納入通知書（本算定現年度異動）発行一覧表 BodyEditorです。
+ * 帳票設計_DBBRP44002_1_保険料納入通知書（本算定現年度異動）発行一覧表 HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditorです。
  *
  * 帳票項目定義は帳票設計_DBBRP43002_2_保険料納入通知書（本算定）発行一覧表と同じです。
  *
  * @reamsid_L DBB-0880-050 zhangrui
  */
-public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor {
+public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchiranEditor {
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 出力期;
@@ -40,7 +40,7 @@ public class BodyEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIchir
      *
      * @param inputEntity HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity
      */
-    public BodyEditor(HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
+    public HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor(HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
         this.編集後本算定通知書共通情報 = inputEntity.get編集後本算定通知書共通情報();
         this.出力期 = inputEntity.get出力期();
         this.連番 = inputEntity.get連番();

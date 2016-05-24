@@ -5,18 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka;
 
-import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 
 /**
  * 出力帳票一覧のクラスです。
  *
- * @reamsid_L DBB-0890-020 zhangrui
+ * @reamsid_L DBB-0890-020 yangchenbing
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TyouhyouResult implements Serializable {
+public class TyouhyouResult {
 
     private final TyouhyouEntity entity;
 

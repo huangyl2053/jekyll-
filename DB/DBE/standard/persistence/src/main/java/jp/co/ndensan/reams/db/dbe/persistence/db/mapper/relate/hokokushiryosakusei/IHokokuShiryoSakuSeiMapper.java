@@ -4,10 +4,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JigyoJyokyoHokokuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JisshiJokyoTokeiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JigyoJyokyoHokokuHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoHeaderEntity;
@@ -115,5 +117,13 @@ public interface IHokokuShiryoSakuSeiMapper {
      * @return ShinsakaishukeihyoHanteiBetsuEntity
      */
     List<ShinsakaishukeihyoHanteiBetsuEntity> getShinsakaishukeihyoHanteiBetsu(SinsakaiHanteiJyokyoMyBatisParameter parameter);
+
+    /**
+     * 審査判定の変更状況情報リストを取得します。
+     *
+     * @param parameter ShinsakaiShukeihyoShinseiBetsuMyBatisParameter
+     * @return ShinsakaiShukeihyoShinseiBetsuEntity
+     */
+    List<ShinsakaiShukeihyoShinseiBetsuEntity> getShinsakaiShukeihyoShinseiBetsu(ShinsakaiShukeihyoShinseiBetsuMyBatisParameter parameter);
 
 }

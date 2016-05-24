@@ -95,8 +95,6 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReportPrintService {
                     出力項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
                     if (並び順.get設定項目リスト().get(i).is改頁項目()) {
                         改頁項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
-                    } else {
-                        改頁項目リスト.add(RString.EMPTY);
                     }
                 } else {
                     break;
