@@ -29,8 +29,8 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -66,14 +66,14 @@ public class HonsanteiKekkaIcihiranPrintService {
      * @param 計算後情報_宛名_口座EntityList List<KeisangojohoAtenaKozaEntity>
      * @param バッチパラメータ HonsanteiFukaExtraBatchParameter
      * @param 賦課年度 FlexibleYear
-     * @param 調定日時 RDate
+     * @param 調定日時 YMDHMS
      * @param 出力順ID Long
      * @return SourceDataCollection
      */
     public SourceDataCollection printHonsanteiKekkaIcihira(List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList,
             HonsanteiFukaExtraBatchParameter バッチパラメータ,
             FlexibleYear 賦課年度,
-            RDate 調定日時,
+            YMDHMS 調定日時,
             Long 出力順ID) {
 
         HonsanteiKekkaIcihiranProperty property = new HonsanteiKekkaIcihiranProperty();

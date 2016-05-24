@@ -9,8 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteiFukaExtraBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -25,7 +25,7 @@ public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranR
     private final List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList;
     private final HonsanteiFukaExtraBatchParameter バッチパラメータ;
     private final FlexibleYear 賦課年度;
-    private final RDate 調定日時;
+    private final YMDHMS 調定日時;
     private final RString 市町村コード;
     private final RString 市町村名;
     private final RString 住所編集;
@@ -38,7 +38,7 @@ public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranR
      * @param 計算後情報_宛名_口座EntityList List<KeisangojohoAtenaKozaEntity>
      * @param バッチパラメータ HonsanteiFukaBatchParameter
      * @param 賦課年度 FlexibleYear
-     * @param 調定日時 RDate
+     * @param 調定日時 YMDHMS
      * @param 市町村コード RString
      * @param 市町村名 RString
      * @param 住所編集 RString
@@ -48,7 +48,7 @@ public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranR
     public HonsanteiKekkaIcihiranReport(List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList,
             HonsanteiFukaExtraBatchParameter バッチパラメータ,
             FlexibleYear 賦課年度,
-            RDate 調定日時,
+            YMDHMS 調定日時,
             RString 市町村コード,
             RString 市町村名,
             RString 住所編集,
