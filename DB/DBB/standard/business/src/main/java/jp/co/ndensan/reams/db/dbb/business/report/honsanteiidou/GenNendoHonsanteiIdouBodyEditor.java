@@ -59,6 +59,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     private static final char CHAR_0 = '0';
 
     private static final RString 現金 = new RString("現金");
+    private static final RString 口座 = new RString("口座");
     private static final RString 現金_0 = new RString("0");
     private static final RString 口座_1 = new RString("1");
     private static final RString 更正前後区分_更正前 = new RString("1");
@@ -147,7 +148,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
             if (計算後情報_宛名_口座_更正前Entity.get口座区分() != null) {
                 RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
-                source.list2_17 = 口座区分.equals(現金_0) ? 現金 : 口座_1;
+                source.list2_17 = 口座区分.equals(現金_0) ? 現金 : 口座;
             }
             source.list2_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
             if (計算後情報_宛名_口座_更正後Entity.get調定日時() != null) {
@@ -184,8 +185,8 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             }
             set月別取得段階(計算後情報_宛名_口座_更正後Entity, source);
             if (計算後情報_宛名_口座_更正後Entity.get口座区分() != null) {
-                RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
-                source.list3_17 = 口座区分.equals(現金_0) ? 現金 : 口座_1;
+                RString 口座区分 = 計算後情報_宛名_口座_更正後Entity.get口座区分();
+                source.list3_17 = 口座区分.equals(口座_1) ? 口座 : 現金;
             }
             source.list3_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
 
