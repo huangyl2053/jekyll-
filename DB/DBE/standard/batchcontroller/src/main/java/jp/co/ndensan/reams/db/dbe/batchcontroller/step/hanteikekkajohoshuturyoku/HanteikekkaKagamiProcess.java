@@ -5,19 +5,26 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku;
 
+import jp.co.ndensan.reams.db.dbe.business.report.hanteikekkakagami.HanteikekkaKagamiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.HanteikekkaKagamiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護認定審査判定結果（鑑）のデータを作成します。
@@ -36,10 +43,10 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private RDateTime システム時刻;
 
-    // TODO 帳票について、未作成
-//    @BatchWriter
-//    private BatchReportWriter<HanteikekkaKagamiReportSource> batchReportWriter;
-//    private ReportSourceWriter<HanteikekkaKagamiReportSource> reportSourceWriter;
+    @BatchWriter
+    private BatchReportWriter<HanteikekkaKagamiReportSource> batchReportWriter;
+    private ReportSourceWriter<HanteikekkaKagamiReportSource> reportSourceWriter;
+
     @Override
     protected void initialize() {
         システム時刻 = RDateTime.now();
@@ -52,8 +59,8 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
 
     @Override
     protected void createWriter() {
-//        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
-//        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
@@ -62,14 +69,14 @@ public class HanteikekkaKagamiProcess extends BatchProcessBase<DbT5511ShinsakaiK
         hanteikekkaKagamiEntity.setPrintTimeStamp(システム時刻);
         hanteikekkaKagamiEntity.setShinsakaiKaisaiYMD(entity.getShinsakaiKaisaiYMD());
         hanteikekkaKagamiEntity.setGogitaiNo(entity.getGogitaiNo());
-//        hanteikekkaKagamiEntity.setNinshoshaSource(ReportUtil.get認証者情報(
-//                SubGyomuCode.DBE認定支援, ID,
-//                new FlexibleDate(システム時刻.getDate().toDateString()),
-//                reportSourceWriter));
+        hanteikekkaKagamiEntity.setNinshoshaSource(ReportUtil.get認証者情報(
+                SubGyomuCode.DBE認定支援, ID,
+                new FlexibleDate(システム時刻.getDate().toDateString()),
+                reportSourceWriter));
         hanteikekkaKagamiEntity.setTsuchibun1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号).get(INDEX_1));
         hanteikekkaKagamiEntity.setTsuchibun2(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号).get(INDEX_2));
-//        HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity);
-//        report.writeBy(reportSourceWriter);
+        HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity);
+        report.writeBy(reportSourceWriter);
     }
 
 }
