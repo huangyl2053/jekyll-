@@ -27,13 +27,25 @@ var DBC;
                     this.controls = controls;
                 }
                 GamenMode.prototype.ModifyMode = function () {
-                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = true;
-                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = true;
                 };
 
                 GamenMode.prototype.InquiryMode = function () {
-                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = false;
-                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = false;
+                    this.controls.btnZengetsuCopy().displayNone = true;
+
+                    this.controls.btnBeppyoMeisaiNew().displayNone = true;
+                    this.controls.btnBeppyoGokeiNew().displayNone = true;
+                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = true;
+
+                    this.controls.ServiceRiyohyoBeppyoMeisai().disabled = true;
+                    this.controls.btnCalcMeisai().displayNone = true;
+                    this.controls.btnBeppyoMeisaiKakutei().displayNone = true;
+
+                    this.controls.ServiceRiyohyoBeppyoGokei().disabled = true;
+                    this.controls.btnCalcGokei().displayNone = true;
+                    this.controls.btnBeppyoGokeiKakutei().displayNone = true;
+
+                    this.controls.btnDelete().displayNone = true;
+                    this.controls.btnSave().displayNone = true;
                 };
                 return GamenMode;
             })();
