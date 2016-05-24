@@ -171,7 +171,7 @@ public class ShiharaiHohoJyohoHandler {
             RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
-        if (list == null || list.isEmpty()) {
+        if (list.isEmpty()) {
             RString 口座 = new RString(String.valueOf(口座ID));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
