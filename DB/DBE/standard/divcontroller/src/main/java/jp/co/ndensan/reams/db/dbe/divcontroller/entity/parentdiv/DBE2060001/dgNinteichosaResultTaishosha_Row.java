@@ -1,9 +1,8 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001;
 
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、 コードが再生成されるときに損失したりします。 Fri Jun 27 16:20:35 JST 2014
  */
-
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
