@@ -42,12 +42,12 @@ public class PanelnlTotalValidationHandler {
     public ValidationMessageControlPairs validateCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (キー.equals(div.getRadUketsukebi().getSelectedKey()) && (div.getTxtUketsukebi().getFromValue() == null
-                || div.getTxtUketsukebi().getToValue() == null)) {
+                && div.getTxtUketsukebi().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "受付日")));
         }
         if (キー.equals(div.getRadKetteibi().getSelectedKey()) && (div.getTxtKeteibiJoken().getFromValue() == null
-                || div.getTxtKeteibiJoken().getToValue() == null)) {
+                && div.getTxtKeteibiJoken().getToValue() == null)) {
             validationMessages.add(new ValidationMessageControlPair(new PanelnlTotalValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "抽出条件決定日")));
         }
