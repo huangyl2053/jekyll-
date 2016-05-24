@@ -112,7 +112,9 @@
                     ) AS TB ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
             WHERE
                 dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
-            AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            <if test="isShoKisaiHokenshaNoFlag">
+                AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            </if>                  
             ORDER BY dbT5502."shinsakaiOrder") AS A
         LEFT JOIN 
         (SELECT
@@ -152,12 +154,16 @@
                 ) AS TB ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
             WHERE
                 dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
-            AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            <if test="isShoKisaiHokenshaNoFlag">
+                AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            </if>
             GROUP BY
                 dbT5502."shinsakaiKaisaiNo"
                 ,dbT7051."shoKisaiHokenshaNo") AS B
         ON A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"
-        AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        <if test="isShoKisaiHokenshaNoFlag">
+            AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        </if>
     </select>
     <resultMap id="resultMap_HanteiKekkaIchiranA3List" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity" autoMapping="true">
         <result property="介護認定審査会審査順" column="shinsakaiOrder" />

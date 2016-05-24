@@ -46,7 +46,7 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
      * @return HanteiKekkaJohoShuturyokuMybatisParameter
      */
     public HanteiKekkaJohoShuturyokuMybatisParameter toHanteiKekkaJohoShuturyokuMybatisParameter() {
-        return new HanteiKekkaJohoShuturyokuMybatisParameter(
+        return HanteiKekkaJohoShuturyokuMybatisParameter.creatParameter(
                 hakkouTyouhyou,
                 kaisaiBangou,
                 shoriJotaiKubun,

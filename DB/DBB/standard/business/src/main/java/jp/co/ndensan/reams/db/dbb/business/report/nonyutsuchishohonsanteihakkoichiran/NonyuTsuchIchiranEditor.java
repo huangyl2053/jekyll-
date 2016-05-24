@@ -27,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 帳票設計_DBBRP43002_2_保険料納入通知書（本算定）HeaderEditor
+ * 帳票設計_DBBRP43002_2_保険料納入通知書（本算定）NonyuTsuchIchiranEditor
  *
  * @reamsid_L DBB-0780-080 yangchenbing
  */
-public class HeaderEditor implements INonyuTsuchIchiranEditor {
+public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final int 出力期;
@@ -63,7 +63,7 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
      * @param 並び順List List<RString>
      * @param 連番 Decimal
      */
-    protected HeaderEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+    protected NonyuTsuchIchiranEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             int 出力期,
             RDateTime 帳票作成日時,
             Association 地方公共団体,
