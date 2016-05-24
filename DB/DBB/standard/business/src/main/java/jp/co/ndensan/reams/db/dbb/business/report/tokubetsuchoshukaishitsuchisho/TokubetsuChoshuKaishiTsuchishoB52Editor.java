@@ -11,6 +11,10 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSante
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52Source;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -53,9 +57,12 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
     @Override
     public TokubetsuChoshuKaishiTsuchishoB52Source edit(TokubetsuChoshuKaishiTsuchishoB52Source source) {
         if (編集後本算定通知書共通情報.get賦課年度() != null) {
-            source.nendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-            source.nendo2 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
-            source.nendo3 = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+            source.nendo = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            source.nendo2 = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            source.nendo3 = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         if (編集後本算定通知書共通情報.get通知書番号() != null) {
             source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
@@ -127,8 +134,11 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
     private void editorSource(TokubetsuChoshuKaishiTsuchishoB52Source source) {
         if (編集後本算定通知書共通情報.get更正後() != null) {
             if (編集後本算定通知書共通情報.get更正後().get期間_自() != null && 編集後本算定通知書共通情報.get更正後().get期間_至() != null) {
-                source.kikan = 編集後本算定通知書共通情報.get更正後().get期間_自().concat(TOKEN)
-                        .concat(編集後本算定通知書共通情報.get更正後().get期間_至());
+                RString 期間_自 = (new FlexibleYear(編集後本算定通知書共通情報.get更正後().get期間_自())).wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+                RString 期間_至 = (new FlexibleYear(編集後本算定通知書共通情報.get更正後().get期間_至())).wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+                source.kikan = 期間_自.concat(TOKEN).concat(期間_至);
             }
             source.tsukiSu1 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
             source.shotokuDankai = 編集後本算定通知書共通情報.get更正後().get保険料段階();
@@ -137,7 +147,8 @@ public class TokubetsuChoshuKaishiTsuchishoB52Editor implements ITokubetsuChoshu
             source.hokenryoGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
         }
         if (編集後本算定通知書共通情報.get賦課年度() != null) {
-            source.tsuchibunNendo = 編集後本算定通知書共通情報.get賦課年度().toDateString();
+            source.tsuchibunNendo = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         source.gekihenHeader = RString.EMPTY;
         source.gekihenMongon = RString.EMPTY;
