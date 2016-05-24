@@ -293,7 +293,7 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
     private void get年月日(RString 生年月日) {
         YY = RString.EMPTY;
         if (!RString.isNullOrEmpty(生年月日)) {
-            YY = new FlexibleYear(生年月日.substring(0, INT4)).wareki().eraType(EraType.KANJI).toDateString();
+            YY = new FlexibleYear(生年月日.substring(0, INT4)).wareki().eraType(EraType.KANJI).toDateString().substring(2, INT4);
         }
     }
 
