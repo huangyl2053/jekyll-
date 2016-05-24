@@ -108,8 +108,9 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             div.getPanelTwo().getTxtShoriMode().setValue(修正);
         }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
-            div.getPanelTwo().getTxtSeiriBango().clearValue();
+            div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
+                    .toDateString().toString()));
+            div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
                     被保険者番号, サービス年月, 整理番号, 業務区分, 照会);
             div.getPanelTwo().getBtnShinsei().setDisabled(true);
@@ -128,13 +129,17 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
         boolean flag = false;
-        int 件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(被保険者番号,
-                サービス年月, 整理番号, 事業者番号, 様式番号);
-        if (件数 == 0) {
-            flag = true;
+        List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv().getDgSyokanbaraikete()
+                .getDataSource();
+        for (dgSyokanbaraikete_Row row : rowList) {
+            JigyoshaNo 事業者番号 = new JigyoshaNo(row.getJigyoshaNo());
+            RString 様式番号 = row.getYoshikiNo();
+            int 件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(被保険者番号,
+                    サービス年月, 整理番号, 事業者番号, 様式番号);
+            if (件数 == 0) {
+                flag = true;
+            }
         }
         return flag;
     }
@@ -144,11 +149,20 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      */
     public void putViewState() {
         ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
+        FlexibleYearMonth サービス提供年月 = null;
+        RString 整理番号 = null;
+        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
+            サービス提供年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()
+                    .substring(定数_0, 定数_6));
+        }
+        if (div.getPanelTwo().getTxtSeiriBango().getValue() != null) {
+            整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
+        }
+
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()
-                        .substring(0, 定数_6)),
-                div.getPanelTwo().getTxtSeiriBango().getValue(), null, null, null, null);
+                サービス提供年月,
+                整理番号, null, null, null, null);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
@@ -187,7 +201,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 return true;
             }
         } else if ((決定情報 != null && 決定情報.getShikyuHushikyuKetteiKubun() != null && rdoShikyukubunNew == null)
-                || (決定情報 == null && rdoShikyukubunNew != null)) {
+                || (決定情報 == null && !rdoShikyukubunNew.isEmpty())) {
             return true;
         }
         return false;

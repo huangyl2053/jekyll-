@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class MainPanelHandler {
 
-    private static final RString レ点 = new RString("✔");
     private static final RString 対象申請者一覧 = new RString("対象申請者一覧");
     private static final RString 申請者 = new RString("申請者");
     private final YouKaiGoNinTeiKekTesuChiMainPanelDiv div;

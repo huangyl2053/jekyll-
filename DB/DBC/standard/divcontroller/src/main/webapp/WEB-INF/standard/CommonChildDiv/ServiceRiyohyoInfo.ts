@@ -14,19 +14,27 @@ module DBC
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
- 
+/*
             public priorities(): Array<string> {
-                return [];
+                return ["GamenMode"];
             }
-
+*/
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+
+            public GamenMode() {
+                return new Modes.GamenMode(this.controls);
+            } 
         }
         
         export module Modes {
             
-            export class ViewMode {
+            export class GamenMode {
                 private controls: Controls;
                 
                 constructor(controls: Controls) {
@@ -243,7 +251,3 @@ module DBC {
         }
     }
 }
-
-
-
-

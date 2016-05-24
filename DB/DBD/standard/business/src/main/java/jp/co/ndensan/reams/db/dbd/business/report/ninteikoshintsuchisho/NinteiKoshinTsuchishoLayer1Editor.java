@@ -56,8 +56,10 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
         source.hihokenshaNameKana = 編集後個人.get名称().getKana().getColumnValue();
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
         source.hihokenshaNo = item.get帳票情報() == null ? RString.EMPTY : item.get帳票情報().get被保険者番号().getColumnValue();
-        if (item.get通知書定型文List().size() < 1 || item.get帳票情報().get適用終了年月日() == null) {
+        if (item.get通知書定型文List().size() < 1) {
             source.tsuchibun = RString.EMPTY;
+        } else if (item.get帳票情報().get適用終了年月日() == null || !item.get帳票情報().get適用終了年月日().isValid()) {
+            source.tsuchibun = item.get通知書定型文List().get(1);
         } else {
             source.tsuchibun = item.get通知書定型文List().get(1).replace(
                     REPLACE_OLD, RStringUtil.convert半角to全角(new RString(item.get帳票情報().get適用終了年月日().getYear().toString())));

@@ -1,5 +1,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,7 +19,7 @@ public enum ShiharaiHenkoShuryoKubun {
     /**
      * コード:01 名称:差止措置終了依頼書受理 略称:定義なし
      */
-    差止措置終了依頼書受理("01", "差止措置終了依頼書受理"),
+    差止措置終了依頼書受理("01", "終了依頼書受理"),
     /**
      * コード:02 名称:弁明書受理 略称:定義なし
      */
@@ -79,5 +81,24 @@ public enum ShiharaiHenkoShuryoKubun {
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("支払方法変更終了区分"));
+    }
+
+    public static List<ShiharaiHenkoShuryoKubun> valuesAt償還払い化終了申請() {
+        List<ShiharaiHenkoShuryoKubun> list = new ArrayList<>();
+        list.add(ShiharaiHenkoShuryoKubun._空);
+        list.add(ShiharaiHenkoShuryoKubun.弁明書受理);
+        list.add(ShiharaiHenkoShuryoKubun.終了申請書受理);
+        list.add(ShiharaiHenkoShuryoKubun.職権);
+        list.add(ShiharaiHenkoShuryoKubun.その他);
+        return list;
+    }
+
+    public static List<ShiharaiHenkoShuryoKubun> valuesAt２号弁明書受理() {
+        List<ShiharaiHenkoShuryoKubun> list = new ArrayList<>();
+        list.add(ShiharaiHenkoShuryoKubun._空);
+        list.add(ShiharaiHenkoShuryoKubun.差止措置終了依頼書受理);
+        list.add(ShiharaiHenkoShuryoKubun.職権);
+        list.add(ShiharaiHenkoShuryoKubun.その他);
+        return list;
     }
 }

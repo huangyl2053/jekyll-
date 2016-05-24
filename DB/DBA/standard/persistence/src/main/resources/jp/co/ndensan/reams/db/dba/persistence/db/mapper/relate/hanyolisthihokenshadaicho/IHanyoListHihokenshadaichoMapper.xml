@@ -81,13 +81,21 @@
         LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = DbT1001."shikibetsuCode"
         WHERE 1 = 1
+        <!-- 被保険者毎の最新を取得する。-->
+        AND NOT EXISTS (
+        SELECT 1
+        FROM rgdb."DbT1001HihokenshaDaicho" As a
+        WHERE DbT1001."shikibetsuCode" = a."shikibetsuCode"
+        AND (DbT1001."idoYMD" || DbT1001."edaNo") <![CDATA[<]]> (a."idoYMD" || a."edaNo") )
         <if test="is直近">
             AND DbT1001."hihokenshaNo" IN ( SELECT dbT1001."hihokenshaNo"
             FROM(SELECT T1001.*,	
             ROW_NUMBER() OVER (PARTITION BY T1001."hihokenshaNo" ORDER BY T1001."idoYMD" DESC, T1001."edaNo" DESC) AS rrkno	
             FROM rgdb."DbT1001HihokenshaDaicho" AS T1001
-            WHERE	T1001."logicalDeletedFlag" = FALSE) AS dbT1001				
+            WHERE	T1001."logicalDeletedFlag" = FALSE) AS dbT1001
             WHERE dbT1001."rrkno" = 1)
+            <!-- 法施行日同日得喪データは出力しない。-->
+            AND NOT (DbT1001."shikakuShutokuYMD" = '20000401' AND DbT1001."shikakuSoshitsuYMD" = '20000401')
         </if>
         <if test="is基準日">
             <if test="is資格取得日">

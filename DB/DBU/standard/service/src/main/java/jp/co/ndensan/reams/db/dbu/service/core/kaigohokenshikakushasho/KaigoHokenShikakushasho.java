@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.KyufuseigenBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.NyushoShisetsuBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenshikakushasho.ShuruiShikyuGendoKizyunngakuBusiness;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
@@ -179,6 +180,10 @@ public class KaigoHokenShikakushasho {
             }
         }
         dataEntity.setServiceShitei(business.get種類の指定());
+        for (KyufuseigenBusiness 給付制限の情報 : business.get給付制限の情報()) {
+            給付制限の情報.setKyufuseigenKaishiYMD(dateFormat(給付制限の情報.getKyufuseigenKaishiYMD()));
+            給付制限の情報.setKyufuseigenShuryoYMD(dateFormat(給付制限の情報.getKyufuseigenShuryoYMD()));
+        }
         dataEntity.setKyufuseigenDataList(business.get給付制限の情報());
         dataEntity.setJigyoshaName1(getShienJigyoshajouhou(business).getJigyoshaName1());
         dataEntity.setTodokedeYMD1(getShienJigyoshajouhou(business).getTodokedeYMD1());

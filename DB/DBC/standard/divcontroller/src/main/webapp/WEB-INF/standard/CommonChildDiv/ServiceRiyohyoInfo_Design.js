@@ -36,6 +36,10 @@ var DBC;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtTekiyoKikan"));
             };
 
+            Controls.prototype.cbZanteiKubun = function () {
+                return new UZA.CheckBoxList(this.convFiledName("cbZanteiKubun"));
+            };
+
             Controls.prototype.txtTaishoYM = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtTaishoYM"));
             };
