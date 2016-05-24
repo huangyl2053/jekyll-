@@ -68,6 +68,7 @@ public class JutakuKaishuShinsei {
             if (valid.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(valid).respond();
             }
+            ViewStateHolder.put(ViewStateKeys.処理モード, null);
         }
         JutakuKaishuShinseiHandler handler = getHandler(div);
         handler.setAddMode();

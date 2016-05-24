@@ -23,10 +23,14 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity {
     private final RString 賦課年度;
     private final RString 出力期;
     private final RString 帳票作成日時;
-    private final RString 出力順ID;
     private final RString 地方公共団体コード;
     private final RString 市町村名;
     private final int 連番;
+    private final RString 並び順の１件目;
+    private final RString 並び順の２件目;
+    private final RString 並び順の３件目;
+    private final RString 並び順の４件目;
+    private final RString 並び順の５件目;
 
     /**
      * コンストラクタです。
@@ -35,23 +39,33 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity {
      * @param 賦課年度 RString
      * @param 出力期 RString
      * @param 帳票作成日時 RString
-     * @param 出力順ID RString
      * @param 地方公共団体コード RString
      * @param 市町村名 RString
      * @param 連番 int
+     * @param 並び順の１件目 RString
+     * @param 並び順の２件目 RString
+     * @param 並び順の３件目 RString
+     * @param 並び順の４件目 RString
+     * @param 並び順の５件目 RString
      */
     public HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranInputEntity(
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 賦課年度, RString 出力期, RString 帳票作成日時,
-            RString 出力順ID, RString 地方公共団体コード, RString 市町村名, int 連番) {
+            RString 地方公共団体コード, RString 市町村名, int 連番,
+            RString 並び順の１件目, RString 並び順の２件目,
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.賦課年度 = 賦課年度;
         this.出力期 = 出力期;
         this.帳票作成日時 = 帳票作成日時;
-        this.出力順ID = 出力順ID;
         this.地方公共団体コード = 地方公共団体コード;
         this.市町村名 = 市町村名;
         this.連番 = 連番;
+        this.並び順の１件目 = 並び順の１件目;
+        this.並び順の２件目 = 並び順の２件目;
+        this.並び順の３件目 = 並び順の３件目;
+        this.並び順の４件目 = 並び順の４件目;
+        this.並び順の５件目 = 並び順の５件目;
     }
 
 }
