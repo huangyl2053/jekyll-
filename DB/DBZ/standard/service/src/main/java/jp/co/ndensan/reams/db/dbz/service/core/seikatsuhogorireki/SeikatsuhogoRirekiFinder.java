@@ -81,6 +81,8 @@ public class SeikatsuhogoRirekiFinder {
             SeikatsuhogoRelateEntity relateEntity2 = new SeikatsuhogoRelateEntity();
             RStringBuilder shuruiCode = new RStringBuilder();
             RStringBuilder codeRyakusho = new RStringBuilder();
+            RStringBuilder teishiKaishi = new RStringBuilder();
+            RStringBuilder teishiShuryo = new RStringBuilder();
             RString builder = RString.EMPTY;
             for (SeikatsuhogoRelateEntity entity : entityList) {
                 SeikatsuhogoRelateEntity relateEntity = new SeikatsuhogoRelateEntity();
@@ -101,6 +103,14 @@ public class SeikatsuhogoRirekiFinder {
                     shuruiCode.append(entity.getFujoShuruiCode());
                     shuruiCode.append(連結);
                 }
+                if (!RString.isNullOrEmpty(entity.getJukyuTeishiKaishiYMD())) {
+                    teishiKaishi.append(entity.getJukyuTeishiKaishiYMD());
+                    teishiKaishi.append(連結);
+                }
+                if (!RString.isNullOrEmpty(entity.getJukyuTeishiShuryoYMD())) {
+                    teishiShuryo.append(entity.getJukyuTeishiShuryoYMD());
+                    teishiShuryo.append(連結);
+                }
                 if (!RString.isNullOrEmpty(entity.getFujoShuruiCode())
                         && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(コード種別, new Code(entity.getFujoShuruiCode())))) {
                     codeRyakusho.append(CodeMaster.getCodeRyakusho(コード種別, new Code(entity.getFujoShuruiCode())));
@@ -108,6 +118,8 @@ public class SeikatsuhogoRirekiFinder {
                 }
                 relateEntity.setFujoShuruiCode(shuruiCode.toRString());
                 relateEntity.setFujoShurui(codeRyakusho.toRString());
+                relateEntity.setJukyuTeishiShuryoYMD(teishiShuryo.toRString());
+                relateEntity.setJukyuTeishiKaishiYMD(teishiKaishi.toRString());
                 if (!builder.equals(getKiBuilder(entity)) && !RString.isNullOrEmpty(builder)) {
                     list.add(relateEntity2);
                 }
