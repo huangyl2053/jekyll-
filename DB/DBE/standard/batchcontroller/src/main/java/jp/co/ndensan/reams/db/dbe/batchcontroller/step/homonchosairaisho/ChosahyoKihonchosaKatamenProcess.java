@@ -132,10 +132,8 @@ public class ChosahyoKihonchosaKatamenProcess extends BatchProcessBase<HomonChos
         }
         RString hakkobi = processParamter.getHakkobi();
         if (!RString.isNullOrEmpty(hakkobi)) {
-            dbT5201Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(new FlexibleDate(hakkobi));
         } else {
-            dbT5201Entity.setIraishoShutsuryokuYMD(FlexibleDate.EMPTY);
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(FlexibleDate.EMPTY);
         }
         dbT5201EntityWriter.update(dbT5201Entity);
