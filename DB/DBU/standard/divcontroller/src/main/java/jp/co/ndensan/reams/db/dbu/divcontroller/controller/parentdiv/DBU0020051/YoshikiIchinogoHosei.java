@@ -115,6 +115,7 @@ public class YoshikiIchinogoHosei {
         if (null == 修正データリスト || 修正データリスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
+
         if (!getCheckHandler(div).is整合性チェック1() && !ResponseHolder.isReRequest()) {
             WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
                     UrWarningMessages.相違.getMessage().replace(要支援計.toString(), 合計計算結果.toString()).evaluate());
@@ -151,7 +152,7 @@ public class YoshikiIchinogoHosei {
         if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
+                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020051StateName.完了状態);
         }
         return ResponseData.of(div).respond();
