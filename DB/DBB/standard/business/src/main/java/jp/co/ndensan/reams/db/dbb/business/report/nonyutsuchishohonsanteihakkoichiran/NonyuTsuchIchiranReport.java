@@ -61,7 +61,7 @@ public class NonyuTsuchIchiranReport extends Report<NonyuTsuchIchiranSource> {
     @Override
     public void writeBy(ReportSourceWriter<NonyuTsuchIchiranSource> reportSourceWriter) {
         INonyuTsuchIchiranEditor headerEditor
-                = new HeaderEditor(編集後本算定通知書共通情報, 出力期, 帳票作成日時, 地方公共団体, 並び順List, 連番);
+                = new NonyuTsuchIchiranEditor(編集後本算定通知書共通情報, 出力期, 帳票作成日時, 地方公共団体, 並び順List, 連番);
         INonyuTsuchIchiranBuilder builder = new NonyuTsuchIchiranBuilder(headerEditor);
         reportSourceWriter.writeLine(builder);
     }

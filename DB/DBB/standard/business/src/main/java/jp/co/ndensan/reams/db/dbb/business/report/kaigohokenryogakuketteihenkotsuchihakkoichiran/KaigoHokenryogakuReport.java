@@ -61,7 +61,7 @@ public class KaigoHokenryogakuReport extends Report<KaigoHokenryogakuSource> {
     @Override
     public void writeBy(ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter) {
         IKaigoHokenryogakuEditor editor
-                = new HeaderEditor(編集後本算定通知書共通情報, 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
+                = new KaigoHokenryogakuEditor(編集後本算定通知書共通情報, 帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
         IKaigoHokenryogakuBuilder builder = new KaigoHokenryogakuBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

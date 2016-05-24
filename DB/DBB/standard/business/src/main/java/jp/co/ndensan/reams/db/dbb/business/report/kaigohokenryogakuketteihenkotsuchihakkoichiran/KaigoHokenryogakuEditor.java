@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBB-0780-120 yangchenbing
  */
-public class HeaderEditor implements IKaigoHokenryogakuEditor {
+public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
 
     private final RString タイトル;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
@@ -60,7 +60,7 @@ public class HeaderEditor implements IKaigoHokenryogakuEditor {
      * @param 連番 Decimal
      * @param タイトル RString
      */
-    protected HeaderEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+    protected KaigoHokenryogakuEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RDateTime 帳票作成日時,
             Association 地方公共団体,
             List<RString> 並び順List,
