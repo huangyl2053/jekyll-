@@ -151,7 +151,8 @@ public class HeaderEditor implements INonyuTsuchIchiranEditor {
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
-            source.listUpper_13 = 編集後本算定通知書共通情報.get更正後().get生保開始日();
+            RString 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日()).wareki().toDateString();
+            source.listUpper_13 = 生保開始日;
         }
 
         RString 生活保護扶助名称 = RString.EMPTY;

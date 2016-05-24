@@ -120,7 +120,8 @@ public class HeaderEditor implements IKaigoHokenryogakuEditor {
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
-            source.listUpper_11 = 編集後本算定通知書共通情報.get更正後().get生保開始日();
+            RString 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日()).wareki().toDateString();
+            source.listUpper_11 = 生保開始日;
         }
         RString 生活保護扶助名称 = RString.EMPTY;
         if (編集後本算定通知書共通情報.get更正後() != null
@@ -171,7 +172,7 @@ public class HeaderEditor implements IKaigoHokenryogakuEditor {
     private void listlowers(KaigoHokenryogakuSource source) {
         if (編集後本算定通知書共通情報.get編集後宛先() != null
                 && 編集後本算定通知書共通情報.get編集後宛先().get本人名称() != null) {
-            source.listLower_1 = new RString(編集後本算定通知書共通情報.get編集後宛先().get本人名称().toString());
+            source.listLower_1 = 編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName().value();
         }
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
             source.listLower_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
