@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.ichijihanteikekkahyoa4.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -14,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 一次判定結果のEditorです。
@@ -24,6 +27,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
 
     private final IchijihanteikekkahyoEntity item;
     private final int index;
+    private static final int ten = 10;
 
     /**
      * インスタンスを生成します。
@@ -43,6 +47,105 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
 
     private IchijihanteikekkahyoReportSource editSource(IchijihanteikekkahyoReportSource source) {
 
+        source.title = item.getタイトル();
+        source.sakuseiGengo = item.get作成日_元号();
+        source.sakuseiYY = item.get作成日_年();
+        source.sakuseiMM = item.get作成日_月();
+        source.sakuseiDD = item.get作成日_日();
+        source.shinseiGengo = item.get申請日_元号();
+        source.shinseiYY = item.get申請日_年();
+        source.shinseiMM = item.get申請日_月();
+        source.shinseiDD = item.get申請日_日();
+        source.chosaGengo = item.get調査日_元号();
+        source.chosaYY = item.get調査日_年();
+        source.chosaMM = item.get調査日_月();
+        source.chosaDD = item.get調査日_日();
+        source.shinsaGengo = item.get審査日_元号();
+        source.shinsaYY = item.get審査日_年();
+        source.shinsaMM = item.get審査日_月();
+        source.shinsaDD = item.get審査日_日();
+        source.gogitaiNo = item.get合議体番号();
+        source.shinseiCount = item.get審査順();
+        source.hihokenshaKubun = item.get被保険者区分();
+        source.shinseiKubun = item.get申請区分();
+        source.age = item.get年齢();
+        source.seibetsu = item.get性別();
+        source.shisetsuriyo = item.get現在の状況();
+        source.zenZenkaiNijihanteikekka = item.get前々回要介護度();
+        source.zenzenkaiYukokikan = item.get前々回認定有効期間();
+        source.zZenkaiNijiKaishiYMD = dateformat(item.get前々回認定有効期間開始年月日());
+        source.zZenkaiNijishuryoYMD = dateformat(item.get前々回認定有効期間終了年月日());
+        source.zenkaiNijihanteikekka = item.get前回要介護度();
+        source.zenkaiYukokikan = item.get前回認定有効期間();
+        source.zenkaiNijiKaishiYMD = dateformat(item.get前回認定有効期間開始年月日());
+        source.zenkaiNijishuryoYMD = dateformat(item.get前回認定有効期間終了年月日());
+        source.zenkaiNijihanteiDATE = dateformat(item.get前回認定日());
+        source.zenkaiJotaizo = item.get前回状態像();
+        source.kanriNo = item.get管理番号();
+        source.hihokenshaName = item.get氏名();
+        source.hihokenshaNo = item.get被保険者番号();
+        source.hokenshaNo = item.get保険者番号();
+        source.shozokuName = item.get所属();
+        source.shichosonName = item.get市町村名();
+        source.chosaItakusakiNo = item.get事業者番号();
+        source.chosaItakusakiName = item.get事業者名();
+        source.chosainNo = item.get認定調査員番号();
+        source.chosainName = item.get認定調査員氏名();
+        source.chosainShikaku = item.get認定調査員資格();
+        source.iryokikanNo = item.get医療機関番号();
+        source.iryokikanName = item.get医療機関名称();
+        source.ishiNo = item.get主治医番号();
+        source.ishiName = item.get主治医氏名();
+        source.ichijiHanteiKekka = item.get一次判定結果();
+        source.nijiHanteiKekka = item.get二次判定結果();
+        source.ｙukokikan = item.get認定有効期間();
+        source.nijihanteiKaishiYMD = dateformat(item.get認定有効期間開始年月日());
+        source.nijihanteishuryoYMD = dateformat(item.get認定有効期間終了年月日());
+        source.tokuteishippeiName = item.get特定疾病名();
+        source.jotaizo = item.get状態像名称();
+        source.kijunGokeiTime = item.get要介護認定等基準時間();
+        source.listkijunTime_1 = item.get要介護認定等基準時間_食事();
+        source.listkijunTime_2 = item.get要介護認定等基準時間_排泄();
+        source.listkijunTime_3 = item.get要介護認定等基準時間_移動();
+        source.listkijunTime_4 = item.get要介護認定等基準時間_清潔保持();
+        source.listkijunTime_5 = item.get要介護認定等基準時間_間接();
+        source.listkijunTime_6 = item.get要介護認定等基準時間_BPSD関連();
+        source.listkijunTime_7 = item.get要介護認定等基準時間_機能訓練();
+        source.listkijunTime_8 = item.get要介護認定等基準時間_医療関連();
+        source.listkijunTime_9 = item.get要介護認定等基準時間_認知症加算();
+        RString 警告コード = item.get警告コード();
+        RStringBuilder rstringBuilder = new RStringBuilder();
+        int len = 0;
+        while (-1 < 警告コード.indexOf("1", len)) {
+            int index1 = 警告コード.indexOf("1", len);
+            rstringBuilder.append(index1 + 1 < ten ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
+            rstringBuilder.append("、");
+            len = index1 + 1;
+        }
+        RString result = rstringBuilder.toRString().substring(0, rstringBuilder.toRString().length() - 1);
+        source.keikokuNo = result;
+        source.listChukanhyoka_1 = item.get中間評価項目得点第1群();
+        source.listChukanhyoka_2 = item.get中間評価項目得点第2群();
+        source.listChukanhyoka_3 = item.get中間評価項目得点第3群();
+        source.listChukanhyoka_4 = item.get中間評価項目得点第4群();
+        source.listChukanhyoka_5 = item.get中間評価項目得点第5群();
+        source.chosaNinchishoJiritsudo = item.get認定調査結果認知症高齢者自立度();
+        source.ikenNinchishoJiritsudo = item.get意見書認知症高齢者自立度();
+        RStringBuilder 蓋然性 = new RStringBuilder();
+        蓋然性.append(item.get認知症自立度Ⅱ以上の蓋然性());
+        蓋然性.append(new RString("%"));
+        source.manzensei = 蓋然性.toRString();
+        source.jotainoanteisei = item.get状態の安定性();
+        source.kyufukubun = item.get給付区分();
+        source.sabisuName = item.get現在のサービス利用状況名();
+        source.sabisuText = item.get現在のサービス状況();
+        editSource1(source);
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        return source;
+    }
+
+    private void editSource1(IchijihanteikekkahyoReportSource source) {
         if (index < item.get社会生活への適応1リスト().size()) {
             source.listGogun_1 = item.get社会生活への適応1リスト().get(index);
         }
@@ -154,99 +257,6 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         if (index < item.get精神_行動障害4リスト().size()) {
             source.listYongun_4 = item.get精神_行動障害4リスト().get(index);
         }
-        source.title = item.getタイトル();
-        source.sakuseiGengo = item.get作成日_元号();
-        source.sakuseiYY = item.get作成日_年();
-        source.sakuseiMM = item.get作成日_月();
-        source.sakuseiDD = item.get作成日_日();
-        source.shinseiGengo = item.get申請日_元号();
-        source.shinseiYY = item.get申請日_年();
-        source.shinseiMM = item.get申請日_月();
-        source.shinseiDD = item.get申請日_日();
-        source.chosaGengo = item.get調査日_元号();
-        source.chosaYY = item.get調査日_年();
-        source.chosaMM = item.get調査日_月();
-        source.chosaDD = item.get調査日_日();
-        source.shinsaGengo = item.get審査日_元号();
-        source.shinsaYY = item.get審査日_年();
-        source.shinsaMM = item.get審査日_月();
-        source.shinsaDD = item.get審査日_日();
-        source.gogitaiNo = item.get合議体番号();
-        source.shinseiCount = item.get審査順();
-        source.hihokenshaKubun = item.get被保険者区分();
-        source.shinseiKubun = item.get申請区分();
-        source.age = item.get年齢();
-        source.seibetsu = item.get性別();
-        source.shisetsuriyo = item.get現在の状況();
-        source.zenZenkaiNijihanteikekka = item.get前々回要介護度();
-        source.zenzenkaiYukokikan = item.get前々回認定有効期間();
-        source.zZenkaiNijiKaishiYMD = dateformat(item.get前々回認定有効期間開始年月日());
-        source.zZenkaiNijishuryoYMD = dateformat(item.get前々回認定有効期間終了年月日());
-        source.zenkaiNijihanteikekka = item.get前回要介護度();
-        source.zenkaiYukokikan = item.get前回認定有効期間();
-        source.zenkaiNijiKaishiYMD = dateformat(item.get前回認定有効期間開始年月日());
-        source.zenkaiNijishuryoYMD = dateformat(item.get前回認定有効期間終了年月日());
-        source.zenkaiNijihanteiDATE = dateformat(item.get前回認定日());
-        source.zenkaiJotaizo = item.get前回状態像();
-        source.kanriNo = item.get管理番号();
-        source.hihokenshaName = item.get氏名();
-        source.hihokenshaNo = item.get被保険者番号();
-        source.hokenshaNo = item.get保険者番号();
-        source.shozokuName = item.get所属();
-        source.shichosonName = item.get市町村名();
-        source.chosaItakusakiNo = item.get事業者番号();
-        source.chosaItakusakiName = item.get事業者名();
-        source.chosainNo = item.get認定調査員番号();
-        source.chosainName = item.get認定調査員氏名();
-        source.chosainShikaku = item.get認定調査員資格();
-        source.iryokikanNo = item.get医療機関番号();
-        source.iryokikanName = item.get医療機関名称();
-        source.ishiNo = item.get主治医番号();
-        source.ishiName = item.get主治医氏名();
-        source.ichijiHanteiKekka = item.get一次判定結果();
-        source.nijiHanteiKekka = item.get二次判定結果();
-        source.ｙukokikan = item.get認定有効期間();
-        source.nijihanteiKaishiYMD = dateformat(item.get認定有効期間開始年月日());
-        source.nijihanteishuryoYMD = dateformat(item.get認定有効期間終了年月日());
-        source.tokuteishippeiName = item.get特定疾病名();
-        source.jotaizo = item.get状態像名称();
-        source.kijunGokeiTime = item.get要介護認定等基準時間();
-        source.listkijunTime_1 = item.get要介護認定等基準時間_食事();
-        source.listkijunTime_2 = item.get要介護認定等基準時間_排泄();
-        source.listkijunTime_3 = item.get要介護認定等基準時間_移動();
-        source.listkijunTime_4 = item.get要介護認定等基準時間_清潔保持();
-        source.listkijunTime_5 = item.get要介護認定等基準時間_間接();
-        source.listkijunTime_6 = item.get要介護認定等基準時間_BPSD関連();
-        source.listkijunTime_7 = item.get要介護認定等基準時間_機能訓練();
-        source.listkijunTime_8 = item.get要介護認定等基準時間_医療関連();
-        source.listkijunTime_9 = item.get要介護認定等基準時間_認知症加算();
-        RString 警告コード = item.get警告コード();
-        StringBuilder stringBuilder = new StringBuilder();
-        int len = 0;
-        while (警告コード.indexOf("1", len) > -1) {
-            int index1 = 警告コード.indexOf("1", len);
-            stringBuilder.append(index1 + 1 < 10 ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
-            stringBuilder.append("、");
-            len = index1 + 1;
-        }
-        String result = stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1);
-        source.keikokuNo = new RString(result);
-        source.listChukanhyoka_1 = item.get中間評価項目得点第1群();
-        source.listChukanhyoka_2 = item.get中間評価項目得点第2群();
-        source.listChukanhyoka_3 = item.get中間評価項目得点第3群();
-        source.listChukanhyoka_4 = item.get中間評価項目得点第4群();
-        source.listChukanhyoka_5 = item.get中間評価項目得点第5群();
-        source.chosaNinchishoJiritsudo = item.get認定調査結果認知症高齢者自立度();
-        source.ikenNinchishoJiritsudo = item.get意見書認知症高齢者自立度();
-        RStringBuilder 蓋然性 = new RStringBuilder();
-        蓋然性.append(item.get認知症自立度Ⅱ以上の蓋然性());
-        蓋然性.append(new RString("%"));
-        source.manzensei = 蓋然性.toRString();
-        source.jotainoanteisei = item.get状態の安定性();
-        source.kyufukubun = item.get給付区分();
-        source.sabisuName = item.get現在のサービス利用状況名();
-        source.sabisuText = item.get現在のサービス状況();
-        return source;
     }
 
     private RString dateformat(RString date) {

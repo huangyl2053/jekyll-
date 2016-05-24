@@ -9,9 +9,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran.HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran.HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -31,6 +36,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranPrintService {
 
     private static final RString 漢字_作成 = new RString("作成");
+
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
 
     /**
      * 保険料納入通知書（本算定現年度異動）発行一覧表 printメソッド
@@ -52,11 +63,37 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranPrintService {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         RString 地方公共団体コード = association.get地方公共団体コード().value();
         RString 市町村名 = association.get市町村名();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200016.getReportId(),
+                        Long.valueOf(出力順ID.toString()));
+        int i = 0;
+        RString 並び順の１件目 = RString.EMPTY;
+        RString 並び順の２件目 = RString.EMPTY;
+        RString 並び順の３件目 = RString.EMPTY;
+        RString 並び順の４件目 = RString.EMPTY;
+        RString 並び順の５件目 = RString.EMPTY;
+        if (並び順 != null) {
+            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                if (i == INDEX_0) {
+                    並び順の１件目 = item.get項目名();
+                } else if (i == INDEX_1) {
+                    並び順の２件目 = item.get項目名();
+                } else if (i == INDEX_2) {
+                    並び順の３件目 = item.get項目名();
+                } else if (i == INDEX_3) {
+                    並び順の４件目 = item.get項目名();
+                } else if (i == INDEX_4) {
+                    並び順の５件目 = item.get項目名();
+                }
+                i = i + 1;
+            }
+        }
         HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranProperty property
                 = new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranProperty();
         return new Printer<NonyuTsuchIchiranSource>().spool(property,
                 new HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranReport(編集後本算定通知書共通情報, 賦課年度, 出力期,
-                        作成日時, 出力順ID, 地方公共団体コード, 市町村名));
+                        作成日時, 地方公共団体コード, 市町村名, 並び順の１件目, 並び順の２件目,
+                        並び順の３件目, 並び順の４件目, 並び順の５件目));
     }
 
 }
