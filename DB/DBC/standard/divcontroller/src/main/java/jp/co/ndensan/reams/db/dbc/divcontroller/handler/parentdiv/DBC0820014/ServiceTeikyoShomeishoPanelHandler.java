@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -110,7 +111,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         } else if (修正モード.equals(処理モード)) {
             set申請共通エリア(処理モード_修正, サービス年月, 整理番号);
         } else if (削除モード.equals(処理モード)) {
-            set申請共通エリア(処理モード_参照, null, null);
+            set申請共通エリア(処理モード_参照, サービス年月, 整理番号);
         }
     }
 
@@ -139,8 +140,14 @@ public class ServiceTeikyoShomeishoPanelHandler {
         List<dgdServiceTeikyoShomeisyo_Row> rowDataList = new ArrayList<>();
         for (ServiceTeikyoShomeishoResult 証明書情報 : 証明書一覧情報) {
             dgdServiceTeikyoShomeisyo_Row row = new dgdServiceTeikyoShomeisyo_Row();
-            row.setData1(証明書情報.getServiceTeikyoShomeisho().getJigyoshaNo().getColumnValue());
-            row.setData2(証明書情報.getServiceTeikyoShomeisho().getJigyoshaName().getColumnValue());
+            JigyoshaNo jigyoshaNo = 証明書情報.getServiceTeikyoShomeisho().getJigyoshaNo();
+            if (jigyoshaNo != null) {
+                row.setData1(jigyoshaNo.getColumnValue());
+            }
+            AtenaMeisho jigyoshaName = 証明書情報.getServiceTeikyoShomeisho().getJigyoshaName();
+            if (jigyoshaName != null) {
+                row.setData2(jigyoshaName.getColumnValue());
+            }
             row.setData3(証明書情報.getServiceTeikyoShomeisho().getMeisanNo());
             row.setData4(証明書情報.getServiceTeikyoShomeisho().getYoshikiNo());
             rowDataList.add(row);
@@ -232,7 +239,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
         }
         RString 様式番号;
         if (処理モード_登録.equals(処理モード)) {
-            様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedValue();
+            様式番号 = div.getPanelShinseiNaiyo().getDdlShomeisho().getSelectedKey();
         } else {
             様式番号 = row.getData4();
         }
