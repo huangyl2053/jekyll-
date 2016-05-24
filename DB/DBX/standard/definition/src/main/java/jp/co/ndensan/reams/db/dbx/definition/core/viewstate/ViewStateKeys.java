@@ -35,5 +35,13 @@ public enum ViewStateKeys {
     /**
      * isReRequest
      */
-    isReRequest;
+    isReRequest,
+    /**
+     * 申請書管理番号
+     */
+    申請書管理番号,
+    /**
+     * タスク一覧_要介護認定完了情報
+     */
+    タスク一覧_要介護認定完了情報;
 }
