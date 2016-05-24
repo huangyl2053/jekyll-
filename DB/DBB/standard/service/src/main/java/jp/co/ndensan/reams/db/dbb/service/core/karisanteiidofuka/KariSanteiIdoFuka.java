@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbb.service.core.karisanteiidofuka;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.BatchresultParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.KariSanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.TyouhyouResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2014TsuchishoUchiwakeJokenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -518,10 +518,10 @@ public class KariSanteiIdoFuka {
      * バッチ用パラメータ作成します。
      *
      * @param parameter parameter
-     * @return BatchresultParameter
+     * @return KarisanteiIdoFukaParameter
      */
-    public BatchresultParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
-        BatchresultParameter result = new BatchresultParameter();
+    public KarisanteiIdoFukaParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
+        KarisanteiIdoFukaParameter result = new KarisanteiIdoFukaParameter();
         result.set調定年度(parameter.get調定年度());
         result.set賦課年度(parameter.get賦課年度());
         result.set処理対象月(parameter.get処理対象());
