@@ -13,8 +13,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.IryoHokenJoho;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashikakuteisei.RoreiFukushiJoho;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshashisaku.HihokenshaShisaku;
 import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJoho;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashisaku.HihokenshaShisakuRelateEntity;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashisaku.IHihokenshaShisakuMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -32,16 +36,25 @@ import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParamete
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.sikakuidocheck.SikakuIdoCheckManager;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.db.dbz.service.shikakutokuso.ShikakuTokusoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -80,6 +93,7 @@ public class HihokenshaShikakuTeiseiManager {
     private KyuShichosonCodeJoho kyuShichosonCodeJoho;
     private final SikakuIdoCheckManager getIdoCheckManager;
     private AgeCalculator getAge;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
@@ -90,6 +104,7 @@ public class HihokenshaShikakuTeiseiManager {
         this.市町村情報取得Finder = InstanceProvider.create(KoikiShichosonJohoFinder.class);
         this.kyuShichosonCodeJoho = InstanceProvider.create(KyuShichosonCodeJoho.class);
         this.getIdoCheckManager = InstanceProvider.create(SikakuIdoCheckManager.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -98,12 +113,17 @@ public class HihokenshaShikakuTeiseiManager {
      * @param dac IHihokenshaShikakuTeiseiDac
      */
     HihokenshaShikakuTeiseiManager(DbT1001HihokenshaDaichoDac dac, HihokenshaShikakuShutokuManager getShutokuManager,
-            KoikiShichosonJohoFinder 市町村情報取得Finder, KyuShichosonCodeJoho kyuShichosonCodeJoho, SikakuIdoCheckManager getIdoCheckManager) {
+            KoikiShichosonJohoFinder 市町村情報取得Finder,
+            KyuShichosonCodeJoho kyuShichosonCodeJoho,
+            SikakuIdoCheckManager getIdoCheckManager,
+            MapperProvider mapperProvider
+    ) {
         this.dac = dac;
         this.getShutokuManager = getShutokuManager;
         this.市町村情報取得Finder = 市町村情報取得Finder;
         this.kyuShichosonCodeJoho = kyuShichosonCodeJoho;
         this.getIdoCheckManager = getIdoCheckManager;
+        this.mapperProvider = mapperProvider;
     }
 
     /**
@@ -771,6 +791,45 @@ public class HihokenshaShikakuTeiseiManager {
             }
         }
         return チェックNG;
+    }
+
+    /**
+     * 被保険者資格詳細異動用の宛名情報の取得です。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return 宛名情報 HihokenshaShisaku
+     */
+    public HihokenshaShisaku get宛名情報(ShikibetsuCode 識別コード) {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        ShikakuShutokuJogaishaKanriParameter parameter = new ShikakuShutokuJogaishaKanriParameter(
+                識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+        HihokenshaShisakuRelateEntity entity = mapperProvider.create(IHihokenshaShisakuMapper.class).get宛名情報(parameter);
+        if (entity == null) {
+            entity = new HihokenshaShisakuRelateEntity();
+        }
+        return new HihokenshaShisaku(entity);
+    }
+
+    /**
+     * 被保険者資格詳細異動用の宛名情報の取得です。
+     *
+     * @return 宛名情報 List<HihokenshaShisaku>
+     */
+    public List<HihokenshaShisaku> get宛名情報全て() {
+        IUaFt200FindShikibetsuTaishoFunctionMapper mapper = mapperProvider.create(IUaFt200FindShikibetsuTaishoFunctionMapper.class);
+        List<UaFt200FindShikibetsuTaishoEntity> entityList = mapper.select();
+        List<HihokenshaShisaku> businessList = new ArrayList<>();
+        for (UaFt200FindShikibetsuTaishoEntity entity : entityList) {
+            HihokenshaShisakuRelateEntity relateEntity = new HihokenshaShisakuRelateEntity();
+            relateEntity.setGenLasdecCode(entity.getGenLasdecCode());
+            relateEntity.setKyuLasdecCode(entity.getKyuLasdecCode());
+            HihokenshaShisaku business = new HihokenshaShisaku(relateEntity);
+            businessList.add(business);
+        }
+        return businessList;
     }
 
     private LasdecCode get旧市町村コード(DbT1001HihokenshaDaichoEntity entity, LasdecCode 旧市町村コード) {
