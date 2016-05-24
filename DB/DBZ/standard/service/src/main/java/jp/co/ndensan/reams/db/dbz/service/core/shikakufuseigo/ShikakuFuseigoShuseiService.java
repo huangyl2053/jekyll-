@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokenshakosei.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
@@ -146,6 +146,7 @@ public class ShikakuFuseigoShuseiService {
         }
         result.set不整合理由(不整合理由);
         result.set現在の除外の情報(除外の情報);
+        result.set個人(個人情報);
         result.set修正後の除外の情報(除外の情報修正後);
         if (除外の情報 == null) {
             result.set適用除外者台帳状態(new RString("未作成"));
@@ -181,6 +182,7 @@ public class ShikakuFuseigoShuseiService {
         }
         result.set不整合理由(不整合理由);
         result.set現在の他特の情報(他特の情報);
+        result.set個人(個人情報);
         result.set修正後の他特の情報(他特の情報修正後);
         if (他特の情報 == null) {
             result.set他市町村住所地特例台帳状態(new RString("未作成"));

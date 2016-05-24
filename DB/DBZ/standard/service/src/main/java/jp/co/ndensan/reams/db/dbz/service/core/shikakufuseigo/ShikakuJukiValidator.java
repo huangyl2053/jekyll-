@@ -116,7 +116,7 @@ public class ShikakuJukiValidator {
                 && (!個人情報.get生年月日().toFlexibleDate().isValid()
                 || 資格の情報.get資格変更年月日().compareTo(個人情報.get年齢算出().get年齢到達日(
                                 第１号被保険者到達基準年齢)) != 0)) {
-            不整合理由 = FuseigoRiyu.資格取得者_死亡者;
+            不整合理由 = FuseigoRiyu.資格変更者_１号被保険者到達;
         }
 
         return 不整合理由;
@@ -312,12 +312,12 @@ public class ShikakuJukiValidator {
         boolean flag2 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && !JogaiKaijoJiyu.除外者死亡.getコード().equals(解除事由);
         boolean flag3 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && !JogaiKaijoJiyu.職権解除.getコード().equals(消除事由);
+                && !JogaiKaijoJiyu.職権解除.getコード().equals(解除事由);
         boolean flag4 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && JogaiKaijoJiyu.除外者死亡.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         boolean flag5 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && JogaiKaijoJiyu.職権解除.getコード().equals(消除事由)
+                && JogaiKaijoJiyu.職権解除.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         return flag1 || flag2 || flag3 || flag4 || flag5;
     }
@@ -327,12 +327,12 @@ public class ShikakuJukiValidator {
         boolean flag2 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && !TatokureiKaijoJiyu.他特例死亡.getコード().equals(解除事由);
         boolean flag3 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && !TatokureiKaijoJiyu.職権解除.getコード().equals(消除事由);
+                && !TatokureiKaijoJiyu.職権解除.getコード().equals(解除事由);
         boolean flag4 = JukiIdoJiyu.死亡.get異動事由コード().equals(消除事由)
                 && TatokureiKaijoJiyu.他特例死亡.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         boolean flag5 = JukiIdoJiyu.職権消除.get異動事由コード().equals(消除事由)
-                && TatokureiKaijoJiyu.職権解除.getコード().equals(消除事由)
+                && TatokureiKaijoJiyu.職権解除.getコード().equals(解除事由)
                 && 解除年月日.compareTo(消除異動年月日.plusDay(1)) != 0;
         return flag1 || flag2 || flag3 || flag4 || flag5;
     }
