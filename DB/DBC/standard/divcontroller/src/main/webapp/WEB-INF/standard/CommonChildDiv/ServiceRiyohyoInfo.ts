@@ -41,13 +41,26 @@ module DBC
                     this.controls = controls;
                 }
                 public ModifyMode(): void {
-                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = true;
-                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = true;
                 }
                 
                 public InquiryMode(): void {
-                    this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = false;
-                    this.controls.ServiceRiyohyoBeppyoGokei().displayNone = false;
+                    // 前月コピーボタン
+                    this.controls.btnZengetsuCopy().displayNone =true;
+                    // 追加ボタン三つ
+                    this.controls.btnBeppyoMeisaiNew().displayNone =true;
+                    this.controls.btnBeppyoGokeiNew().displayNone =true;
+                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone =true;
+                    // 明細部分
+                    this.controls.ServiceRiyohyoBeppyoMeisai().disabled = true;
+                    this.controls.btnCalcMeisai().displayNone = true;
+                    this.controls.btnBeppyoMeisaiKakutei().displayNone = true;
+                    // 合計部分
+                    this.controls.ServiceRiyohyoBeppyoGokei().disabled = true;
+                    this.controls.btnCalcGokei().displayNone = true;
+                    this.controls.btnBeppyoGokeiKakutei().displayNone = true;
+                    // 削除ボタンと保存ボタン
+                    this.controls.btnDelete().displayNone = true;
+                    this.controls.btnSave().displayNone =true;
                 }
             }
         }
