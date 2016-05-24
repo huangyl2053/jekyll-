@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-9210-010 xuhao -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nenreitotatsushikakuidochoshuhohokoshin.INenreitotatsuShikakuIdoChoshuhohoKoshinMapper">
+    <!-- select被保険者番号 -->
+    <select id="selectHihokenjabango"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nenreitotatsushikakuidochoshuhohokoshin.NenreitotatsuShikakuIdoChoshuhohoKoshinMybatisParam"
+            resultMap="resultMap_DbT1001HihokenshaDaichoEntity" fetchSize="500">
+        <include refid="selectDbT1001HihokenshaDaichoEntity" />
+    </select>
+    <sql id="selectDbT1001HihokenshaDaichoEntity" >
+        SELECT temp."hihokenshaNo",
+        temp."ichigoShikakuShutokuYMD"
+        FROM
+        (SELECT "hihokenshaNo","ichigoShikakuShutokuYMD",
+        MAX("idoYMD" || "edaNo")
+        FROM rgdb."DbT1001HihokenshaDaicho"
+        WHERE "isDeleted" = FALSE
+        AND "hihokennshaKubunCode" = #{被保険者区分コード}
+        AND "idoYMD" <![CDATA[>=]]> #{対象開始年月日}
+        AND "idoYMD" <![CDATA[<=]]> #{対象終了年月日}
+        AND "idoJiyuCode" = #{異動事由コード}
+        GROUP BY "hihokenshaNo","ichigoShikakuShutokuYMD")AS temp
+    </sql>
+    <resultMap id="resultMap_DbT1001HihokenshaDaichoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="ichigoShikakuShutokuYMD" column="ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap> 
+</mapper>
+

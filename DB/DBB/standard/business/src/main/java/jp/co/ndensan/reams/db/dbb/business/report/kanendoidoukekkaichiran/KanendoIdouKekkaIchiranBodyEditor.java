@@ -19,12 +19,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 BodyEditorです。
+ * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 KanendoIdouKekkaIchiranBodyEditorです。
  *
  * @reamsid_L DBB-0910-030 zhangrui
  *
  */
-public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
+public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchiranEditor {
 
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
     private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
@@ -59,7 +59,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
      *
      * @param inputEntity {@link KanendoIdouKekkaIchiranInputEntity}
      */
-    protected BodyEditor(KanendoIdouKekkaIchiranInputEntity inputEntity) {
+    protected KanendoIdouKekkaIchiranBodyEditor(KanendoIdouKekkaIchiranInputEntity inputEntity) {
         this.並び順の１件目 = inputEntity.get並び順の１件目();
         this.並び順の２件目 = inputEntity.get並び順の２件目();
         this.並び順の３件目 = inputEntity.get並び順の３件目();
@@ -106,7 +106,6 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         if (null != 計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額()) {
             source.list2_18 = new RString(計算後情報_宛名_口座_更正後Entity.get特徴歳出還付額().toString());
         }
-//        source.list2_19 = koza.get金融機関().get金融機関名称();
         if (null != 計算後情報_宛名_口座_更正後Entity.get調定年度()) {
             source.list3_1 = 計算後情報_宛名_口座_更正後Entity.get調定年度().toDateString();
         }
@@ -159,8 +158,13 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
             if (null != koza.get金融機関コード()) {
                 source.list1_4 = koza.get金融機関コード().value();
             }
-            //        source.list1_5 = koza.get預金種別().get預金種別略称();
+            if (null != koza.get預金種別()) {
+                source.list1_5 = koza.get預金種別().get預金種別略称();
+            }
             source.list1_6 = koza.get口座番号();
+            if (null != koza.get金融機関()) {
+                source.list2_19 = koza.get金融機関().get金融機関名称();
+            }
             if (null != koza.get口座名義人()) {
                 source.list3_19 = koza.get口座名義人().value();
             }

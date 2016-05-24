@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka;
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * Entityクラスです。
  *
- * @reamsid_L DBB-0890-020 zhangrui
+ * @reamsid_L DBB-0890-020 yangchenbing
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TyouhyouEntity implements Serializable {
+public class TyouhyouEntity {
 
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;

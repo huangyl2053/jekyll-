@@ -5,20 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka;
 
-import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 出力帳票一覧のクラスです。
  *
- * @reamsid_L DBB-0890-020 zhangrui
+ * @reamsid_L DBB-0890-020 yangchenbing
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KariSanteiIdoParameter implements Serializable {
+public class KariSanteiIdoParameter {
 
     private RString 調定年度;
     private RString 賦課年度;

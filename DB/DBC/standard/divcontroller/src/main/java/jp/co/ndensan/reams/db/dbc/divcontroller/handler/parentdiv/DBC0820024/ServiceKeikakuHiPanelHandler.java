@@ -640,6 +640,9 @@ public class ServiceKeikakuHiPanelHandler {
 
     private int max連番(List<ShokanServicePlan200904Result> entity200904List) {
         int max連番 = 0;
+        if (entity200904List == null) {
+            return max連番;
+        }
         for (ShokanServicePlan200904Result entity200904 : entity200904List) {
             if (max連番 < Integer.valueOf(entity200904.getEntity().get連番().toString())) {
                 max連番 = Integer.valueOf(entity200904.getEntity().get連番().toString());

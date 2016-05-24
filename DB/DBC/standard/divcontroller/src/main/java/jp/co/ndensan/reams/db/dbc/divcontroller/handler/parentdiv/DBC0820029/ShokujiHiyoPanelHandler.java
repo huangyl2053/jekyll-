@@ -54,6 +54,7 @@ public class ShokujiHiyoPanelHandler {
     private static final int TWO = 2;
     private static final int THREE = 3;
     private static final int SEVEN = 7;
+    private static final int SIX = 6;
     private static final RString フォーマット = new RString("%02d");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
@@ -283,7 +284,8 @@ public class ShokujiHiyoPanelHandler {
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()),
+                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()
+                        .substring(0, SIX)),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),
