@@ -143,7 +143,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
                 source.listLower_2 = 編集後仮算定通知書共通情報entity.get編集後個人().get世帯コード().value();
             }
             if (編集後仮算定通知書共通情報entity.get編集後個人().get名称() != null) {
-                source.listLower_3 = new RString(編集後仮算定通知書共通情報entity.get編集後個人().get名称().toString());
+                source.listLower_3 = new RString(編集後仮算定通知書共通情報entity.get編集後個人().get名称().getName().toString());
             }
         }
     }

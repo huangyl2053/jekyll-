@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820013.Kou
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -80,7 +79,7 @@ public class KouzaInfoPanel {
         param.setShikyushinseiSeiriNo(支給申請情報.get整理番号());
         param.setKeiyakuNo(支給申請情報.get受領委任契約番号());
         RString 支払方法区分コード = 支給申請情報.get支払方法区分コード();
-        if (支払方法区分コード != null || !支払方法区分コード.isEmpty()) {
+        if (支払方法区分コード != null && !支払方法区分コード.isEmpty()) {
             param.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
         }
         if (支給申請情報.get支払期間開始年月日() != null) {
@@ -205,9 +204,15 @@ public class KouzaInfoPanel {
             }
             return createResponse(div);
         }
-        getHandler(div).保存_修正();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存ボタン, true);
-        return 保存処理(div, 処理モード);
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).保存_修正();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存ボタン, true);
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(処理モード.toString())).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return createResponse(div);
+        }
+        return createResponse(div);
     }
 
     /**
@@ -217,19 +222,15 @@ public class KouzaInfoPanel {
      * @return 償還払い費支給申請決定_口座情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnDelete(KouzaInfoPanelDiv div) {
-        getHandler(div).保存_削除();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
-        return 保存処理(div, 削除);
-    }
-
-    private ResponseData<KouzaInfoPanelDiv> 保存処理(KouzaInfoPanelDiv div, RString 状態) {
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+            getHandler(div).保存_削除();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を削除する, true);
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return createResponse(div);
         }
-        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage().replace(状態.toString())).respond();
+        return createResponse(div);
     }
 
     private KouzaInfoHandler getHandler(KouzaInfoPanelDiv div) {

@@ -97,7 +97,11 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         entity.setTitle(REPORTNAME);
         entity.set出力対象(出力対象);
         entity.setPrintTimeStamp(システム時刻);
-        entity.set当前頁(reportSourceWriter.pageCount().value());
+        if (index % PAGECOUNT > 0) {
+            entity.set当前頁((index - (index % PAGECOUNT)) / PAGECOUNT + 1);
+        } else {
+            entity.set当前頁(index / PAGECOUNT);
+        }
         if (entity.getCount() % PAGECOUNT > 0) {
             entity.set総頁((entity.getCount() - (entity.getCount() % PAGECOUNT)) / PAGECOUNT + 1);
         } else {

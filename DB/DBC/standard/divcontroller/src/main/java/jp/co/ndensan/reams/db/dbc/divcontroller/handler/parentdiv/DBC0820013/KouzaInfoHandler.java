@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -208,7 +209,7 @@ public class KouzaInfoHandler {
             RString 支払窓口開始時間 = RString.EMPTY;
             RTime 支払窓口開始時間div = 支払方法情報共有DIV.getStartHHMM();
             if (支払窓口開始時間div != null) {
-                支払窓口開始時間 = new RString(支払窓口開始時間div.toString());
+                支払窓口開始時間 = new RString(支払窓口開始時間div.toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             }
             RString 支払窓口終了時間 = RString.EMPTY;
             RTime 支払窓口終了時間div = 支払方法情報共有DIV.getEndHHMM();

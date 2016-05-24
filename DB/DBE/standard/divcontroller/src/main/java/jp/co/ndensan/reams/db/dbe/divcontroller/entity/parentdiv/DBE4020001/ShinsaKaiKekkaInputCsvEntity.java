@@ -19,241 +19,244 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinsaKaiKekkaInputCsvEntity {
 
     @CsvField(order = 1, name = "介護認定審査会開催番号")
-    private final RString shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     @CsvField(order = 2, name = "合議体番号")
-    private final RString gogitaiNo;
+    private RString gogitaiNo;
     @CsvField(order = 3, name = "介護認定審査会開催年月日")
-    private final RString shinsakaiKaisaiYMD;
+    private RString shinsakaiKaisaiYMD;
     @CsvField(order = 4, name = "介護認定審査会開始時刻")
-    private final RString shinsakaiKaishiTime;
+    private RString shinsakaiKaishiTime;
     @CsvField(order = 5, name = "介護認定審査会終了時刻")
-    private final RString shinsakaiShuryoTime;
+    private RString shinsakaiShuryoTime;
     @CsvField(order = 6, name = "介護認定審査会開催場所コード")
-    private final RString shinsakaiKaisaiBashoCode;
+    private RString shinsakaiKaisaiBashoCode;
     @CsvField(order = 7, name = "所要時間合計")
-    private final RString shoyoJikanGokei;
+    private RString shoyoJikanGokei;
     @CsvField(order = 8, name = "介護認定審査会実施人数")
-    private final RString shinsakaiJisshiNinzu;
+    private RString shinsakaiJisshiNinzu;
     @CsvField(order = 9, name = "介護認定審査会審査順")
-    private final RString shinsakaiOrder;
+    private RString shinsakaiOrder;
     @CsvField(order = 10, name = "判定結果コード")
-    private final RString hanteiKekkaCode;
+    private RString hanteiKekkaCode;
     @CsvField(order = 11, name = "二次判定年月日")
-    private final RString nijiHanteiYMD;
+    private RString nijiHanteiYMD;
     @CsvField(order = 12, name = "二次判定要介護状態区分コード")
-    private final RString nijiHanteiYokaigoJotaiKubunCode;
+    private RString nijiHanteiYokaigoJotaiKubunCode;
     @CsvField(order = 13, name = "二次判定認定有効期間")
-    private final RString nijiHanteiNinteiYukoKikan;
+    private RString nijiHanteiNinteiYukoKikan;
     @CsvField(order = 14, name = "二次判定認定有効開始年月日")
-    private final RString nijiHanteiNinteiYukoKaishiYMD;
+    private RString nijiHanteiNinteiYukoKaishiYMD;
     @CsvField(order = 15, name = "二次判定認定有効終了年月日")
-    private final RString nijiHanteiNinteiYukoShuryoYMD;
+    private RString nijiHanteiNinteiYukoShuryoYMD;
     @CsvField(order = 16, name = "介護認定審査会意見")
-    private final RString shinsakaiIken;
+    private RString shinsakaiIken;
     @CsvField(order = 17, name = "一次判定結果変更理由")
-    private final RString ichijiHanteiKekkaHenkoRiyu;
+    private RString ichijiHanteiKekkaHenkoRiyu;
     @CsvField(order = 18, name = "要介護状態像例コード")
-    private final RString yokaigoJotaizoReiCode;
+    private RString yokaigoJotaizoReiCode;
     @CsvField(order = 19, name = "認定審査会意見種類")
-    private final RString ninteishinsakaiIkenShurui;
+    private RString ninteishinsakaiIkenShurui;
     @CsvField(order = 20, name = "審査会メモ")
-    private final RString shinsakaiMemo;
+    private RString shinsakaiMemo;
     @CsvField(order = 21, name = "二次判定結果入力方法")
-    private final RString nijiHanteiKekkaInputHoho;
+    private RString nijiHanteiKekkaInputHoho;
     @CsvField(order = 22, name = "二次判定結果入力年月日")
-    private final RString nijiHanteiKekkaInputYMD;
+    private RString nijiHanteiKekkaInputYMD;
     @CsvField(order = 23, name = "認定申請区分（法令）コード")
-    private final RString ninteiShinseiHoreiKubunCode;
+    private RString ninteiShinseiHoreiKubunCode;
     @CsvField(order = 24, name = "要介護認定1.5次判定年月日")
-    private final RString ichiGojiHanteiYMD;
+    private RString ichiGojiHanteiYMD;
     @CsvField(order = 25, name = "要介護認定1.5次判定結果コード")
-    private final RString ichiGojiHanteiKekkaCode;
+    private RString ichiGojiHanteiKekkaCode;
     @CsvField(order = 26, name = "要介護認定1.5次判定結果コード（認知症加算）")
-    private final RString ichiGojiHanteiKekkaNinchishoKasanCode;
+    private RString ichiGojiHanteiKekkaNinchishoKasanCode;
     @CsvField(order = 27, name = "要介護認定等基準時間")
-    private final RString kijunJikan;
+    private RString kijunJikan;
     @CsvField(order = 28, name = "要介護認定等基準時間（食事）")
-    private final RString kijunJikanShokuji;
+    private RString kijunJikanShokuji;
     @CsvField(order = 29, name = "要介護認定等基準時間（排泄）")
-    private final RString kijunJikanHaisetsu;
+    private RString kijunJikanHaisetsu;
     @CsvField(order = 30, name = "要介護認定等基準時間（移動）")
-    private final RString kijunJikanIdo;
+    private RString kijunJikanIdo;
     @CsvField(order = 31, name = "要介護認定等基準時間（清潔保持）")
-    private final RString kijunJikanSeiketsuHoji;
+    private RString kijunJikanSeiketsuHoji;
     @CsvField(order = 32, name = "要介護認定等基準時間（間接ケア）")
-    private final RString kijunJikanKansetsuCare;
+    private RString kijunJikanKansetsuCare;
     @CsvField(order = 33, name = "要介護認定等基準時間（BPSD関連）")
-    private final RString kijunJikanBPSDKanren;
+    private RString kijunJikanBPSDKanren;
     @CsvField(order = 34, name = "要介護認定等基準時間（機能訓練）")
-    private final RString kijunJikanKinoKunren;
+    private RString kijunJikanKinoKunren;
     @CsvField(order = 35, name = "要介護認定等基準時間（医療関連）")
-    private final RString kijunJikanIryoKanren;
+    private RString kijunJikanIryoKanren;
     @CsvField(order = 36, name = "要介護認定等基準時間（認知症加算）")
-    private final RString kijunJikanNinchishoKasan;
+    private RString kijunJikanNinchishoKasan;
     @CsvField(order = 37, name = "中間評価項目得点第1群")
-    private final RString chukanHyokaKomoku1gun;
+    private RString chukanHyokaKomoku1gun;
     @CsvField(order = 38, name = "中間評価項目得点第2群")
-    private final RString chukanHyokaKomoku2gun;
+    private RString chukanHyokaKomoku2gun;
     @CsvField(order = 39, name = "中間評価項目得点第3群")
-    private final RString chukanHyokaKomoku3gun;
+    private RString chukanHyokaKomoku3gun;
     @CsvField(order = 40, name = "中間評価項目得点第4群")
-    private final RString chukanHyokaKomoku4gun;
+    private RString chukanHyokaKomoku4gun;
     @CsvField(order = 41, name = "中間評価項目得点第5群")
-    private final RString chukanHyokaKomoku5gun;
+    private RString chukanHyokaKomoku5gun;
     @CsvField(order = 42, name = "要介護認定1.5次判定警告コード")
-    private final RString ichiGojiHnateiKeikokuCode;
+    private RString ichiGojiHnateiKeikokuCode;
     @CsvField(order = 43, name = "要介護認定状態の安定性コード")
-    private final RString jotaiAnteiseiCode;
+    private RString jotaiAnteiseiCode;
     @CsvField(order = 44, name = "認知症自立度Ⅱ以上の蓋然性")
-    private final RString ninchishoJiritsudoIIijoNoGaizensei;
+    private RString ninchishoJiritsudoIIijoNoGaizensei;
     @CsvField(order = 45, name = "認知機能及び状態安定性から推定される給付区分コード")
-    private final RString suiteiKyufuKubunCode;
+    private RString suiteiKyufuKubunCode;
     @CsvField(order = 46, name = "申請書管理番号")
-    private final RString shinseishoKanriNo;
+    private RString shinseishoKanriNo;
     @CsvField(order = 47, name = "厚労省IF識別コード")
-    private final RString koroshoIfShikibetsuCode;
+    private RString koroshoIfShikibetsuCode;
     @CsvField(order = 48, name = "厚労省認定ソフトのバージョン")
-    private final RString koroshoIfShikibetsuName;
+    private RString koroshoIfShikibetsuName;
     @CsvField(order = 49, name = "証記載保険者番号")
-    private final RString shoKisaiHokenshaNo;
+    private RString shoKisaiHokenshaNo;
     @CsvField(order = 50, name = "被保険者番号")
-    private final RString hihokenshaNo;
+    private RString hihokenshaNo;
     @CsvField(order = 51, name = "認定申請年月日")
-    private final RString ninteiShinseiYMD;
+    private RString ninteiShinseiYMD;
     @CsvField(order = 52, name = "認定申請区分（申請時）コード")
-    private final RString ninteiShinseiShinseijiKubunCode;
+    private RString ninteiShinseiShinseijiKubunCode;
     @CsvField(order = 53, name = "認定申請区分（申請時）")
-    private final RString ninteiShinseiShinseijiKubunName;
+    private RString ninteiShinseiShinseijiKubunName;
     @CsvField(order = 54, name = "被保険者氏名")
-    private final RString hihokenshaName;
+    private RString hihokenshaName;
     @CsvField(order = 55, name = "被保険者氏名カナ")
-    private final RString hihokenshaKana;
+    private RString hihokenshaKana;
     @CsvField(order = 56, name = "生年月日")
-    private final RString seinengappiYMD;
+    private RString seinengappiYMD;
     @CsvField(order = 57, name = "年齢")
-    private final RString age;
+    private RString age;
     @CsvField(order = 58, name = "性別")
-    private final RString seibetsu;
+    private RString seibetsu;
     @CsvField(order = 59, name = "郵便番号")
-    private final RString yubinNo;
+    private RString yubinNo;
     @CsvField(order = 60, name = "住所")
-    private final RString jusho;
+    private RString jusho;
     @CsvField(order = 61, name = "電話番号")
-    private final RString telNo;
+    private RString telNo;
     @CsvField(order = 62, name = "保険者名")
-    private final RString hokenshaName;
+    private RString hokenshaName;
     @CsvField(order = 63, name = "一次判定年月日")
-    private final RString ichijiHanteiYMD;
+    private RString ichijiHanteiYMD;
     @CsvField(order = 64, name = "要介護認定一次判定結果コード")
-    private final RString ichijiHanteiKekkaCode;
+    private RString ichijiHanteiKekkaCode;
     @CsvField(order = 65, name = "認定調査依頼完了年月日")
-    private final RString ninteichosaKanryoYMD;
+    private RString ninteichosaKanryoYMD;
     @CsvField(order = 66, name = "認定調査依頼履歴番号")
-    private final RString ninteichosaIraiRirekiNo;
+    private RString ninteichosaIraiRirekiNo;
     @CsvField(order = 67, name = "認定調査委託先コード")
-    private final RString ninteiChosaItakusakiCode;
+    private RString ninteiChosaItakusakiCode;
     @CsvField(order = 68, name = "調査委託先")
-    private final RString ninteiChosaItakusakiName;
+    private RString ninteiChosaItakusakiName;
     @CsvField(order = 69, name = "認定調査員コード")
-    private final RString ninteiChosainCode;
+    private RString ninteiChosainCode;
     @CsvField(order = 70, name = "調査員氏名")
-    private final RString ninteiChosainName;
+    private RString ninteiChosainName;
     @CsvField(order = 71, name = "概況特記テキスト・イメージ区分コード")
-    private final RString gaikyoChosaTextImageKubun;
+    private RString gaikyoChosaTextImageKubun;
     @CsvField(order = 72, name = "概況特記テキスト・イメージ区分")
-    private final RString gaikyoChosaTextImageKubunName;
+    private RString gaikyoChosaTextImageKubunName;
     @CsvField(order = 73, name = "認定調査依頼区分コード")
-    private final RString ninteichousaIraiKubunCode;
+    private RString ninteichousaIraiKubunCode;
     @CsvField(order = 74, name = "認定調査依頼区分")
-    private final RString ninteichousaIraiKubunName;
+    private RString ninteichousaIraiKubunName;
     @CsvField(order = 75, name = "認定調査回数")
-    private final RString ninteichosaIraiKaisu;
+    private RString ninteichosaIraiKaisu;
     @CsvField(order = 76, name = "認定調査実施年月日")
-    private final RString ninteichosaJisshiYMD;
+    private RString ninteichosaJisshiYMD;
     @CsvField(order = 77, name = "認定調査受領年月日")
-    private final RString ninteichosaJuryoYMD;
+    private RString ninteichosaJuryoYMD;
     @CsvField(order = 78, name = "認定調査区分コード")
-    private final RString ninteiChosaKubunCode;
+    private RString ninteiChosaKubunCode;
     @CsvField(order = 79, name = "認定調査区分")
-    private final RString ninteiChosaKubunName;
+    private RString ninteiChosaKubunName;
     @CsvField(order = 80, name = "認定調査実施場所コード")
-    private final RString chosaJisshiBashoCode;
+    private RString chosaJisshiBashoCode;
     @CsvField(order = 81, name = "認定調査実施場所")
-    private final RString chosaJisshiBashoName;
+    private RString chosaJisshiBashoName;
     @CsvField(order = 82, name = "認定調査実施場所名称")
-    private final RString chosaJisshiBashoMeisho;
+    private RString chosaJisshiBashoMeisho;
     @CsvField(order = 83, name = "認定調査・サービス区分コード")
-    private final RString serviceKubunCode;
+    private RString serviceKubunCode;
     @CsvField(order = 84, name = "認定調査・サービス区分")
-    private final RString serviceKubunName;
+    private RString serviceKubunName;
     @CsvField(order = 85, name = "利用施設名")
-    private final RString riyoShisetsuShimei;
+    private RString riyoShisetsuShimei;
     @CsvField(order = 86, name = "利用施設住所")
-    private final RString riyoShisetsuJusho;
+    private RString riyoShisetsuJusho;
     @CsvField(order = 87, name = "利用施設電話番号")
-    private final RString riyoShisetsuTelNo;
+    private RString riyoShisetsuTelNo;
     @CsvField(order = 88, name = "利用施設郵便番号")
-    private final RString riyoShisetsuYubinNo;
+    private RString riyoShisetsuYubinNo;
     @CsvField(order = 89, name = "特記")
-    private final RString tokki;
+    private RString tokki;
     @CsvField(order = 90, name = "認定調査特記事項受付年月日")
-    private final RString tokkijikoUketsukeYMD;
+    private RString tokkijikoUketsukeYMD;
     @CsvField(order = 91, name = "認定調査特記事項受領年月日")
-    private final RString tokkijikoJuryoYMD;
+    private RString tokkijikoJuryoYMD;
     @CsvField(order = 92, name = "住宅改修（改修箇所）")
-    private final RString jutakuKaishu;
+    private RString jutakuKaishu;
     @CsvField(order = 93, name = "市町村特別給付サービス種類名")
-    private final RString tokubetsuKyufuService;
+    private RString tokubetsuKyufuService;
     @CsvField(order = 94, name = "介護保険給付以外の在宅サービス種類名")
-    private final RString zaitakuService;
+    private RString zaitakuService;
     @CsvField(order = 95, name = "概況特記事項（主訴）")
-    private final RString shuso;
+    private RString shuso;
     @CsvField(order = 96, name = "概況特記事項（家族状況）")
-    private final RString kazokuJokyo;
+    private RString kazokuJokyo;
     @CsvField(order = 97, name = "概況特記事項（居住環境）")
-    private final RString kyojuKankyo;
+    private RString kyojuKankyo;
     @CsvField(order = 98, name = "概況特記事項（機器・器械）")
-    private final RString kikaiKiki;
+    private RString kikaiKiki;
     @CsvField(order = 99, name = "認定調査特記事項番号")
-    private final RString ninteichosaTokkijikoNo;
+    private RString ninteichosaTokkijikoNo;
     @CsvField(order = 100, name = "認定調査特記事項連番")
-    private final RString ninteichosaTokkijikoRemban;
+    private RString ninteichosaTokkijikoRemban;
     @CsvField(order = 101, name = "原本マスク区分コード")
-    private final RString genponMaskKubun;
+    private RString genponMaskKubun;
     @CsvField(order = 102, name = "原本マスク区分")
-    private final RString genponMaskKubunName;
+    private RString genponMaskKubunName;
     @CsvField(order = 103, name = "特記事項")
-    private final RString tokkiJiko;
+    private RString tokkiJiko;
     @CsvField(order = 104, name = "サービスの状況連番")
-    private final RString serviceJokyoRemban;
+    private RString serviceJokyoRemban;
     @CsvField(order = 105, name = "サービスの状況")
-    private final RString serviceJokyo;
+    private RString serviceJokyo;
     @CsvField(order = 106, name = "サービスの状況フラグ連番")
-    private final RString serviceJokyoFlagRemban;
+    private RString serviceJokyoFlagRemban;
     @CsvField(order = 107, name = "サービスの状況フラグ")
-    private final RString serviceJokyoFlag;
+    private RString serviceJokyoFlag;
     @CsvField(order = 108, name = "記入項目連番")
-    private final RString serviceJokyoKinyuRemban;
+    private RString serviceJokyoKinyuRemban;
     @CsvField(order = 109, name = "サービスの状況記入")
-    private final RString serviceJokyoKinyu;
+    private RString serviceJokyoKinyu;
     @CsvField(order = 110, name = "施設利用連番")
-    private final RString shisetsuRiyoFlagRemban;
+    private RString shisetsuRiyoFlagRemban;
     @CsvField(order = 111, name = "施設利用フラグ")
-    private final RString shisetsuRiyoFlag;
+    private RString shisetsuRiyoFlag;
     @CsvField(order = 112, name = "認定調査・認知症高齢者の日常生活自立度コード")
-    private final RString ninchishoNichijoSeikatsuJiritsudoCode;
+    private RString ninchishoNichijoSeikatsuJiritsudoCode;
     @CsvField(order = 113, name = "認定調査・認知症高齢者の日常生活自立度")
-    private final RString ninchishoNichijoSeikatsuJiritsudoName;
+    private RString ninchishoNichijoSeikatsuJiritsudoName;
     @CsvField(order = 114, name = "認定調査・障害高齢者の日常生活自立度コード")
-    private final RString shogaiNichijoSeikatsuJiritsudoCode;
+    private RString shogaiNichijoSeikatsuJiritsudoCode;
     @CsvField(order = 115, name = "認定調査・障害高齢者の日常生活自立度")
-    private final RString shogaiNichijoSeikatsuJiritsudoName;
+    private RString shogaiNichijoSeikatsuJiritsudoName;
     @CsvField(order = 116, name = "調査項目連番")
-    private final RString researchItemRemban;
+    private RString researchItemRemban;
     @CsvField(order = 117, name = "調査項目文言")
-    private final RString researchItemBungen;
+    private RString researchItemBungen;
     @CsvField(order = 118, name = "内容")
-    private final RString researchItem;
+    private RString researchItem;
+
+    ShinsaKaiKekkaInputCsvEntity() {
+    }
 
     /**
      * コンストラクタです。
