@@ -71,7 +71,7 @@
         DISTINCT rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "dbT1001Hihokensha_hihokenshaNo"
         FROM
         rgdb."DbT1001HihokenshaDaicho"
-WHERE
+       WHERE
        <foreach  
             collection="kobetsuKoikiunyoParameterList"
             item="item"

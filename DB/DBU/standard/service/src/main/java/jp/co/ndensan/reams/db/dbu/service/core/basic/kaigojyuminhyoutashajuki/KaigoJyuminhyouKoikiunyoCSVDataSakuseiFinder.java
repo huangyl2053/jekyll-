@@ -37,22 +37,6 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_0 = new RString("0");
     private static final RString 連番用 = new RString("0");
-    private static final RString 市町村コード_初期化 = new RString("      ");
-    private static final RString 識別ＩＤ_初期化 = new RString("    ");
-    private static final RString システム日付_初期化 = new RString("              ");
-    private static final RString 区分_初期化 = new RString(" ");
-    private static final RString 連番_初期化 = new RString("       ");
-    private static final RString ＦＩＬＬＥＲ1_初期化 = new RString("        ");
-    private static final RString 被保険者番号_初期化 = new RString("          ");
-    private static final RString 識別コード_8桁初期化 = new RString("        ");
-    private static final RString 識別コード_12桁初期化 = new RString("            ");
-    private static final RString 識別コード_15桁初期化 = new RString("               ");
-    private static final RString 要介護状態区分ｺｰﾄﾞ_初期化 = new RString("  ");
-    private static final RString 年月日_初期化 = new RString("        ");
-    private static final RString 更新日時_8桁初期化 = new RString("              ");
-    private static final RString 更新日時_12桁初期化 = new RString("                 ");
-    private static final RString ＦＩＬＬＥＲ2_初期化 = new RString("    ");
-    private static final RString 削除フラグ_初期化 = new RString(" ");
 
     /**
      * コンストラクタです。
@@ -84,7 +68,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             hachilist = this.get8桁CSVデータ0(hachilist, shichosonCode);
         } else {
             hachilist = this.get8桁CSVデータ1(tashajyukiList, codeHenkanKubun, hachilist);
-            KaigoJyuminhyouTashajukiCSVDateEntity hachientity = this.getHachiCSVData(new KaigoJyuminhyouTashajukiCSVDateEntity());
+            KaigoJyuminhyouTashajukiCSVDateEntity hachientity = new KaigoJyuminhyouTashajukiCSVDateEntity();
             RString 最大連番 = hachilist.get(hachilist.size() - 1).get連番();
             RString 連番new = new RString(Integer.valueOf(最大連番.toString()) + 1);
             hachientity.set連番(連番new.padLeft(連番用, 桁目_7));
@@ -98,7 +82,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
     }
 
     private List<KaigoJyuminhyouTashajukiCSVDateEntity> get8桁CSVデータ0(List<KaigoJyuminhyouTashajukiCSVDateEntity> hachilist, RString shichosonCode) {
-        KaigoJyuminhyouTashajukiCSVDateEntity hachientity = this.getHachiCSVData(new KaigoJyuminhyouTashajukiCSVDateEntity());
+        KaigoJyuminhyouTashajukiCSVDateEntity hachientity = new KaigoJyuminhyouTashajukiCSVDateEntity();
         hachientity.set市町村コード(shichosonCode);
         hachientity.set識別ＩＤ(識別ＩＤ_DA01);
         hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
@@ -112,7 +96,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             RString codeHenkanKubun, List<KaigoJyuminhyouTashajukiCSVDateEntity> hachilist) {
         int 件数 = 件数_0;
         for (KaigoJyuminhyouTashajukiDateEntity entity : tashajyukiList) {
-            KaigoJyuminhyouTashajukiCSVDateEntity hachientity = this.getHachiCSVData(new KaigoJyuminhyouTashajukiCSVDateEntity());
+            KaigoJyuminhyouTashajukiCSVDateEntity hachientity = new KaigoJyuminhyouTashajukiCSVDateEntity();
             hachientity.set識別ＩＤ(識別ＩＤ_DA01);
             hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
             件数 = 件数 + 1;
@@ -122,26 +106,6 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             hachilist.add(hachientity);
         }
         return hachilist;
-    }
-
-    private KaigoJyuminhyouTashajukiCSVDateEntity getHachiCSVData(KaigoJyuminhyouTashajukiCSVDateEntity entity) {
-        entity.set市町村コード(市町村コード_初期化);
-        entity.set識別ＩＤ(識別ＩＤ_初期化);
-        entity.setタイムスタンプ(システム日付_初期化);
-        entity.set最終レコード区分(区分_初期化);
-        entity.set連番(連番_初期化);
-        entity.setＦＩＬＬＥＲ1(ＦＩＬＬＥＲ1_初期化);
-        entity.set被保険者番号(被保険者番号_初期化);
-        entity.set識別コード(識別コード_8桁初期化);
-        entity.set資格取得日(年月日_初期化);
-        entity.set資格喪失日(年月日_初期化);
-        entity.set受給認定年月日(年月日_初期化);
-        entity.set受給認定取消年月日(年月日_初期化);
-        entity.set資格区分(区分_初期化);
-        entity.set受給者区分(区分_初期化);
-        entity.set更新日時(更新日時_8桁初期化);
-        entity.setＦＩＬＬＥＲ2(ＦＩＬＬＥＲ2_初期化);
-        return entity;
     }
 
     private void 被保険者番号NULL以外の判定8桁(RString codeHenkanKubun,
@@ -287,7 +251,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             hachilist = this.get12桁CSVデータ0(hachilist, shichosonCode);
         } else {
             hachilist = this.get12桁CSVデータ1(tashajyukiList, codeHenkanKubun, hachilist);
-            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = this.getJuniCSVData(new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity());
+            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
             RString 最大連番 = hachilist.get(hachilist.size() - 1).get連番();
             RString 連番new = new RString(Integer.valueOf(最大連番.toString()) + 1);
             hachientity.set連番(連番new.padLeft(連番用, 桁目_7));
@@ -302,7 +266,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
 
     private List<KaigoJyuminhyouKoikiunyoJuniCSVDataEntity> get12桁CSVデータ0(List<KaigoJyuminhyouKoikiunyoJuniCSVDataEntity> hachilist,
             RString shichosonCode) {
-        KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = this.getJuniCSVData(new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity());
+        KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
         hachientity.set市町村コード(shichosonCode);
         hachientity.set識別ＩＤ(識別ＩＤ_AA65);
         hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
@@ -316,7 +280,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             RString codeHenkanKubun, List<KaigoJyuminhyouKoikiunyoJuniCSVDataEntity> hachilist) {
         int 件数 = 件数_0;
         for (KaigoJyuminhyouTashajukiDateEntity entity : tashajyukiList) {
-            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = this.getJuniCSVData(new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity());
+            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
             hachientity.set識別ＩＤ(識別ＩＤ_AA65);
             hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
             件数 = 件数 + 1;
@@ -460,30 +424,6 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         }
     }
 
-    private KaigoJyuminhyouKoikiunyoJuniCSVDataEntity getJuniCSVData(KaigoJyuminhyouKoikiunyoJuniCSVDataEntity entity) {
-        entity.set市町村コード(市町村コード_初期化);
-        entity.set識別ＩＤ(識別ＩＤ_初期化);
-        entity.setタイムスタンプ(システム日付_初期化);
-        entity.set最終レコード区分(区分_初期化);
-        entity.set連番(連番_初期化);
-        entity.set識別コード(識別コード_12桁初期化);
-        entity.set被保険者番号(被保険者番号_初期化);
-        entity.set資格取得日(年月日_初期化);
-        entity.set資格喪失日(年月日_初期化);
-        entity.set資格被保険者区分(区分_初期化);
-        entity.set住所地特例者区分(区分_初期化);
-        entity.set受給者区分(区分_初期化);
-        entity.set要介護状態区分コード(要介護状態区分ｺｰﾄﾞ_初期化);
-        entity.set認定有効開始日(年月日_初期化);
-        entity.set認定有効終了日(年月日_初期化);
-        entity.set受給認定年月日(年月日_初期化);
-        entity.set受給認定取消年月日(年月日_初期化);
-        entity.set削除フラグ(削除フラグ_初期化);
-        entity.set作成日時(更新日時_12桁初期化);
-        entity.set更新日時(更新日時_12桁初期化);
-        return entity;
-    }
-
     /**
      * 介護住民票個別事項連携情報作成【広域運用】バッチから取った入力パラメータにより、他社住基15桁CSVデータを作成します。
      *
@@ -499,7 +439,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             hachilist = this.get12桁CSVデータ0(hachilist, shichosonCode);
         } else {
             hachilist = this.get15桁CSVデータ1(tashajyukiList, codeHenkanKubun, hachilist);
-            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = this.getJugoCSVData(new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity());
+            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
             RString 最大連番 = hachilist.get(hachilist.size() - 1).get連番();
             RString 連番new = new RString(Integer.valueOf(最大連番.toString()) + 1);
             hachientity.set連番(連番new.padLeft(連番用, 桁目_7));
@@ -516,7 +456,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             RString codeHenkanKubun, List<KaigoJyuminhyouKoikiunyoJuniCSVDataEntity> hachilist) {
         int 件数 = 件数_0;
         for (KaigoJyuminhyouTashajukiDateEntity entity : tashajyukiList) {
-            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = this.getJugoCSVData(new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity());
+            KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
             hachientity.set識別ＩＤ(識別ＩＤ_AA65);
             hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
             件数 = 件数 + 1;
@@ -658,30 +598,6 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             hachientity.set作成日時(new RString(RDate.getNowDateTime().toString()));
             hachientity.set更新日時(new RString(RDate.getNowDateTime().toString()));
         }
-    }
-
-    private KaigoJyuminhyouKoikiunyoJuniCSVDataEntity getJugoCSVData(KaigoJyuminhyouKoikiunyoJuniCSVDataEntity entity) {
-        entity.set市町村コード(市町村コード_初期化);
-        entity.set識別ＩＤ(識別ＩＤ_初期化);
-        entity.setタイムスタンプ(システム日付_初期化);
-        entity.set最終レコード区分(区分_初期化);
-        entity.set連番(連番_初期化);
-        entity.set識別コード(識別コード_15桁初期化);
-        entity.set被保険者番号(被保険者番号_初期化);
-        entity.set資格取得日(年月日_初期化);
-        entity.set資格喪失日(年月日_初期化);
-        entity.set資格被保険者区分(区分_初期化);
-        entity.set住所地特例者区分(区分_初期化);
-        entity.set受給者区分(区分_初期化);
-        entity.set要介護状態区分コード(要介護状態区分ｺｰﾄﾞ_初期化);
-        entity.set認定有効開始日(年月日_初期化);
-        entity.set認定有効終了日(年月日_初期化);
-        entity.set受給認定年月日(年月日_初期化);
-        entity.set受給認定取消年月日(年月日_初期化);
-        entity.set削除フラグ(削除フラグ_初期化);
-        entity.set作成日時(更新日時_12桁初期化);
-        entity.set更新日時(更新日時_12桁初期化);
-        return entity;
     }
 
     /**
