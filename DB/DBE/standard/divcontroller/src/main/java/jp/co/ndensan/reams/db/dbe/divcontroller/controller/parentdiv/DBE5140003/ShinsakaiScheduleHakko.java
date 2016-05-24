@@ -116,11 +116,11 @@ public class ShinsakaiScheduleHakko {
     }
 
     private KaigoNinteiShinsakaiScheduleBatchParamter getParamter(ShinsakaiScheduleHakkoDiv div) {
-//        List<dgShinsakaiScheduleKagami_Row> rowList = div.getDgShinsakaiScheduleKagami().getSelectedItems();
-//        List<RString> 審査会委員コードリスト = new ArrayList<>();
-//        for (dgShinsakaiScheduleKagami_Row row : rowList) {
-//            審査会委員コードリスト.add(row.getShinsakaiIinCode());
-//        }
+        List<dgShinsakaiScheduleKagami_Row> rowList = div.getDgShinsakaiScheduleKagami().getSelectedItems();
+        List<RString> 審査会委員コードリスト = new ArrayList<>();
+        for (dgShinsakaiScheduleKagami_Row row : rowList) {
+            審査会委員コードリスト.add(row.getShinsakaiIinCode());
+        }
         RString nendoParameter = RString.EMPTY;
         RString kubun = new RString("1");
         if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
@@ -130,7 +130,7 @@ public class ShinsakaiScheduleHakko {
         return new KaigoNinteiShinsakaiScheduleBatchParamter(
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toDateString(),
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(),
-                nendoParameter, kubun);
+                nendoParameter, kubun, 審査会委員コードリスト);
     }
 
     private ValidationMessageControlPairs getCheck(ShinsakaiScheduleHakkoValidationHandler validationHandler) {
