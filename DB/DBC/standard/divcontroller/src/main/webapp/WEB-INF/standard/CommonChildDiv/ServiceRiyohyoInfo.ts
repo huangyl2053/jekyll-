@@ -14,11 +14,11 @@ module DBC
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
-/*
+
             public priorities(): Array<string> {
-                return ["GamenMode"];
+                return ["GamenMode","KaigoType"];
             }
-*/
+
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
@@ -29,6 +29,10 @@ module DBC
 
             public GamenMode() {
                 return new Modes.GamenMode(this.controls);
+            } 
+            
+            public KaigoType() {
+                return new Modes.KaigoType(this.controls);
             } 
         }
         
@@ -41,6 +45,23 @@ module DBC
                     this.controls = controls;
                 }
                 public ModifyMode(): void {
+                    // 前月コピーボタン
+                    this.controls.btnZengetsuCopy().displayNone = false;
+                    // 追加ボタン三つ
+                    this.controls.btnBeppyoMeisaiNew().displayNone = false;
+                    this.controls.btnBeppyoGokeiNew().displayNone = false;
+                    this.controls.btnBeppyoMeisaiGokeiNew().displayNone = false;
+                    // 明細部分
+                    this.controls.ServiceRiyohyoBeppyoMeisai().disabled = false;
+                    this.controls.btnCalcMeisai().displayNone = false;
+                    this.controls.btnBeppyoMeisaiKakutei().displayNone = false;
+                    // 合計部分
+                    this.controls.ServiceRiyohyoBeppyoGokei().disabled = false;
+                    this.controls.btnCalcGokei().displayNone = false;
+                    this.controls.btnBeppyoGokeiKakutei().displayNone = false;
+                    // 削除ボタンと保存ボタン
+                    this.controls.btnDelete().displayNone = false;
+                    this.controls.btnSave().displayNone =false;
                 }
                 
                 public InquiryMode(): void {
@@ -61,6 +82,25 @@ module DBC
                     // 削除ボタンと保存ボタン
                     this.controls.btnDelete().displayNone = true;
                     this.controls.btnSave().displayNone =true;
+                }
+            }
+            
+            export class KaigoType {
+                private controls: Controls;
+                
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+                
+                public kyoType(): void {
+                    this.controls.tbRiyoushaFudan().displayNone = true;
+                    this.controls.tbTeigakuRiyoushaFudan().displayNone = true;
+                    this.controls.cbZanteiKubun().displayNone = false;
+                }
+                public SogoType(): void {
+                    this.controls.tbRiyoushaFudan().displayNone = false;
+                    this.controls.tbTeigakuRiyoushaFudan().displayNone = false;
+                    this.controls.cbZanteiKubun().displayNone = true;
                 }
             }
         }
