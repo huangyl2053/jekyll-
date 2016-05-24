@@ -11,10 +11,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -96,9 +96,11 @@ public class JigyoJokyoHokokuGeppoHandler {
         kinyusha.add(dataSource);
         for (JigyoHokokuTokei jigyoHokokuTokei : kuTokeiList) {
             LinkedHashMap<RString, RString> linkedHashMap = jigyoHokokuTokei.get過去報告年月();
-            KeyValueDataSource data = new KeyValueDataSource(linkedHashMap.entrySet().iterator().next().getKey(),
-                    linkedHashMap.entrySet().iterator().next().getValue());
-            kinyusha.add(data);
+            if (linkedHashMap.entrySet().iterator().hasNext()) {
+                KeyValueDataSource data = new KeyValueDataSource(linkedHashMap.entrySet().iterator().next().getKey(),
+                        linkedHashMap.entrySet().iterator().next().getValue());
+                kinyusha.add(data);
+            }
         }
         div.getJikkoTanni().getDdlKakoHokokuYM().setDataSource(kinyusha);
     }
@@ -156,7 +158,8 @@ public class JigyoJokyoHokokuGeppoHandler {
         getShukeiYM5(集計年月_決定状況現物分, 審査年月_決定状況償還分, 決定年月_決定状況償還分);
     }
 
-    private void getShukeiYM1(List<JigyoHokokuTokei> 審査年月_11から14償還分, List<JigyoHokokuTokei> 決定年月_11から14現物分, RString 一般状況集計方法) {
+    private void getShukeiYM1(List<JigyoHokokuTokei> 審査年月_11から14償還分,
+            List<JigyoHokokuTokei> 決定年月_11から14現物分, RString 一般状況集計方法) {
         if (new RString("2").equals(一般状況集計方法)) {
             if (!決定年月_11から14現物分.isEmpty()) {
                 div.getTxtShukeiYM3().setValue(決定年月_11から14現物分.get(0).get集計年月() == null ? FlexibleDate.EMPTY
@@ -226,7 +229,8 @@ public class JigyoJokyoHokokuGeppoHandler {
         getShukeiYM5_1(審査年月_決定状況償還分, 決定年月_決定状況償還分, 保険給付集計方法);
     }
 
-    private void getShukeiYM5_1(List<JigyoHokokuTokei> 審査年月_決定状況償還分, List<JigyoHokokuTokei> 決定年月_決定状況償還分, RString 保険給付集計方法) {
+    private void getShukeiYM5_1(List<JigyoHokokuTokei> 審査年月_決定状況償還分,
+            List<JigyoHokokuTokei> 決定年月_決定状況償還分, RString 保険給付集計方法) {
         if (new RString("2").equals(保険給付集計方法)) {
             if (!決定年月_決定状況償還分.isEmpty()) {
                 div.getTxtShukeiYM5().setValue(決定年月_決定状況償還分.get(0).get集計年月() == null ? FlexibleDate.EMPTY
@@ -354,7 +358,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                 div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
             }
         }
-        if (new FlexibleDate("平26.07").isAfter(new FlexibleDate(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue()))) {
+        if ((new FlexibleDate(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())).isBefore(new FlexibleDate("平26.07"))) {
             div.getCblHokenKyufuGembutsu().setDisabled(true);
             div.getCblGassan2().setDisabled(true);
         }
