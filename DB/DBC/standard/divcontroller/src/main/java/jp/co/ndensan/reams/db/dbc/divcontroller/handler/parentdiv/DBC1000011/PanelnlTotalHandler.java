@@ -71,8 +71,29 @@ public class PanelnlTotalHandler {
         div.getRadUketsukebi().setSelectedKey(キー);
         div.getTxtUketsukebi().setToValue(RDate.getNowDate());
         div.getTxtKeteibiJoken().setToValue(RDate.getNowDate());
-        div.getTxtKeteibiJoken().setReadOnly(true);
-        if (受託区分_2.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate()))) {
+        if (抽出条件_1.equals(DbBusinessConfig.get(ConfigNameDBC.償還払支給不支給決定通知書一括作成_初期選択抽出条件, RDate.getNowDate(),
+                SubGyomuCode.DBC介護給付))) {
+            div.getRadUketsukebi().setSelectedKey(キー);
+            div.getTxtUketsukebi().setDisabled(false);
+            div.getTxtKeteibiJoken().setDisabled(true);
+            div.getTxtKeteishaUketsukeYM().setDisabled(true);
+        }
+        if (抽出条件_2.equals(DbBusinessConfig.get(ConfigNameDBC.償還払支給不支給決定通知書一括作成_初期選択抽出条件, RDate.getNowDate(),
+                SubGyomuCode.DBC介護給付))) {
+            div.getRadKetteibi().setSelectedKey(キー);
+            div.getTxtKeteibiJoken().setDisabled(false);
+            div.getTxtUketsukebi().setDisabled(true);
+            div.getTxtKeteishaUketsukeYM().setDisabled(true);
+        }
+        if (抽出条件_3.equals(DbBusinessConfig.get(ConfigNameDBC.償還払支給不支給決定通知書一括作成_初期選択抽出条件, RDate.getNowDate(),
+                SubGyomuCode.DBC介護給付))) {
+            div.getRadKetteishaUketsukeYM().setSelectedKey(キー);
+            div.getTxtKeteishaUketsukeYM().setDisabled(false);
+            div.getTxtUketsukebi().setDisabled(true);
+            div.getTxtKeteibiJoken().setDisabled(true);
+        }
+        if (受託区分_2.equals(DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(),
+                SubGyomuCode.DBC介護給付))) {
             div.getTxtKeteishaUketsukeYM().setDomain(RDate.getNowDate().getYearMonth());
             div.getTxtKeteishaUketsukeYM().setDisplayNone(false);
             div.getRadKetteishaUketsukeYM().setDisplayNone(false);
@@ -80,7 +101,6 @@ public class PanelnlTotalHandler {
             div.getTxtKeteishaUketsukeYM().setDisplayNone(true);
             div.getRadKetteishaUketsukeYM().setDisplayNone(true);
         }
-        div.getTxtKeteishaUketsukeYM().setDisabled(true);
         div.getRadInnsho().setSelectedKey(キー);
         div.getPnlShokanbaraiShikyuKeteiTuchisho().getTxtHakkobi().setValue(RDate.getNowDate());
         div.getPnlTestOutput().getRadKeteibiIkatsuKoushinnKubun().setSelectedKey(キー);
@@ -131,7 +151,6 @@ public class PanelnlTotalHandler {
         if (キー.equals(div.getRadKetteibi().getSelectedKey())) {
             div.getTxtUketsukebi().setDisabled(true);
             div.getTxtKeteishaUketsukeYM().setDisabled(true);
-            div.getTxtKeteibiJoken().setReadOnly(false);
             div.getTxtKeteibiJoken().setDisabled(false);
             div.getRadKetteishaUketsukeYM().setDisabled(false);
             ShoriDateKanri shori = ShokanbaraiShikyuFinder.createInstance()
@@ -171,7 +190,7 @@ public class PanelnlTotalHandler {
      *
      * @return ShoukanBaraiSuuchiShoIkatsuBatchParamter
      */
-    public ShoukanBaraiSuuchiShoIkatsuBatchParamter onClick_btnJikou() {
+    public ShoukanBaraiSuuchiShoIkatsuBatchParamter onClick_btnJikouBatch() {
         ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei shokanbarai = new ShokanbaraiShikyuFushikyuKetteiTsuchishoIkkatsuSakusei();
         ShoukanBaraiSuuchiShoIkatsuParamter paramter = new ShoukanBaraiSuuchiShoIkatsuParamter();
         if (キー.equals(div.getRadUketsukebi().getSelectedKey())) {

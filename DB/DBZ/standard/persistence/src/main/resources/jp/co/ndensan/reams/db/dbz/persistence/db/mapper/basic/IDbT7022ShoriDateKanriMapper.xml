@@ -110,7 +110,7 @@
             open="("  
             separator="OR"  
             close=")">  
-            AND rgdb."DbT7022ShoriDateKanri"."shichosonCode" = #{item.shichosonCode}
+             rgdb."DbT7022ShoriDateKanri"."shichosonCode" = #{item.shichosonCode}
         </foreach>
         ORDER BY rgdb."DbT7022ShoriDateKanri"."taishoShuryoTimestamp" DESC
     </select>-->

@@ -260,26 +260,35 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtYukoKigenYMD().setDisabled(true);
             div.getTxtYukoKigenYMD().clearValue();
             div.getDdlKyusochisha().setDisabled(true);
+            div.getDdlKyusochisha().setIsBlankLine(true);
             div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlRiyoshaFutanDankai().setDisabled(true);
+            div.getDdlRiyoshaFutanDankai().setIsBlankLine(true);
             div.getDdlRiyoshaFutanDankai().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlKyoshitsuShubetsu().setDisabled(true);
+            div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
             div.getDdlKyoshitsuShubetsu().setSelectedKey(SELECT_EMPTYKEY);
             div.getChkKyokaiso().setDisabled(true);
             div.getChkKyokaiso().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkGekihenKanwa().setDisabled(true);
             div.getChkGekihenKanwa().setSelectedItemsByKey(new ArrayList<RString>());
             div.getDdlShokuhi().setDisabled(true);
+            div.getDdlShokuhi().setIsBlankLine(true);
             div.getDdlShokuhi().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlUnitGataKoshitsu().setDisabled(true);
+            div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
             div.getDdlUnitGataKoshitsu().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlUnitGataJunKoshitsu().setDisabled(true);
+            div.getDdlUnitGataJunKoshitsu().setIsBlankLine(true);
             div.getDdlUnitGataJunKoshitsu().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
+            div.getDdlJuraiGataKoshitsuTokuyo().setIsBlankLine(true);
             div.getDdlJuraiGataKoshitsuTokuyo().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
+            div.getDdlJuraiGataKoshitsuRoken().setIsBlankLine(true);
             div.getDdlJuraiGataKoshitsuRoken().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlTashoshitsu().setDisabled(true);
+            div.getDdlTashoshitsu().setIsBlankLine(true);
             div.getDdlTashoshitsu().setSelectedKey(SELECT_EMPTYKEY);
             div.getBtnHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
@@ -1040,6 +1049,7 @@ public class FutangendogakuNinteiShinseiHandler {
 
     private void clear申請情報エリア() {
         div.getTxtShinseiYMD().clearValue();
+        div.getDdlShinseiRiyu().setIsBlankLine(true);
         div.getDdlShinseiRiyu().setSelectedKey(SELECT_EMPTYKEY);
         div.getRadHaigushaUmu().setSelectedKey(SELECT_KEY1);
         div.getTxtHaigushaShikibetsuCode().clearDomain();
@@ -1077,6 +1087,7 @@ public class FutangendogakuNinteiShinseiHandler {
         if (!申請メニューID.equals(ResponseHolder.getMenuID())) {
             div.getChkKyokaiso().setSelectedItemsByKey(dataSource);
         }
+        div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
         div.getDdlKyoshitsuShubetsu().setSelectedKey(SELECT_EMPTYKEY);
         div.getTxtHiShoninRiyu().clearValue();
     }

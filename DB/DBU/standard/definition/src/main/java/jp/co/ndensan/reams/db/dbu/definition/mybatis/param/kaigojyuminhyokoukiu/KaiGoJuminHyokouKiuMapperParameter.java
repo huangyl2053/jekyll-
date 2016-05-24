@@ -25,8 +25,6 @@ public final class KaiGoJuminHyokouKiuMapperParameter implements IMyBatisParamet
     /**
      * コンストラクタです。
      *
-     * @param taishoKaishiTimestamp 対象開始日時
-     * @param taishoShuryoTimestamp 対象終了日時
      */
     private KaiGoJuminHyokouKiuMapperParameter(
             List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {

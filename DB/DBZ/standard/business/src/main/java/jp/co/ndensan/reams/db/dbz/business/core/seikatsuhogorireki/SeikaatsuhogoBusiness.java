@@ -118,7 +118,7 @@ public class SeikaatsuhogoBusiness {
      *
      * @return 受給停止開始日
      */
-    public FlexibleDate get受給停止開始日() {
+    public RString get受給停止開始日() {
         return relateEntity.getJukyuTeishiKaishiYMD();
     }
 
@@ -127,7 +127,7 @@ public class SeikaatsuhogoBusiness {
      *
      * @return 受給停止終了日
      */
-    public FlexibleDate get受給停止終了日() {
+    public RString get受給停止終了日() {
         return relateEntity.getJukyuTeishiShuryoYMD();
     }
 

@@ -4,18 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * TokuchoKariChoteibo のクラスファイル 
- * 
- * @author 自動生成
+ * TokuchoKariChoteibo のクラスファイル
+ *
+ * @reamsid_L DBB-0790-010 yangchenbing
  */
 public class TokuchoKariChoteiboDiv extends PanelPublish {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -49,7 +53,7 @@ public class TokuchoKariChoteiboDiv extends PanelPublish {
 
     @JsonProperty("lblChoteiboFromDate")
     public void setLblChoteiboFromDate(Label lblChoteiboFromDate) {
-        this.lblChoteiboFromDate=lblChoteiboFromDate;
+        this.lblChoteiboFromDate = lblChoteiboFromDate;
     }
 
     @JsonProperty("lblChoteiboFromTime")
@@ -59,7 +63,7 @@ public class TokuchoKariChoteiboDiv extends PanelPublish {
 
     @JsonProperty("lblChoteiboFromTime")
     public void setLblChoteiboFromTime(Label lblChoteiboFromTime) {
-        this.lblChoteiboFromTime=lblChoteiboFromTime;
+        this.lblChoteiboFromTime = lblChoteiboFromTime;
     }
 
     @JsonProperty("txtChoteiboFromDate")
@@ -69,7 +73,7 @@ public class TokuchoKariChoteiboDiv extends PanelPublish {
 
     @JsonProperty("txtChoteiboFromDate")
     public void setTxtChoteiboFromDate(TextBoxDate txtChoteiboFromDate) {
-        this.txtChoteiboFromDate=txtChoteiboFromDate;
+        this.txtChoteiboFromDate = txtChoteiboFromDate;
     }
 
     @JsonProperty("txtChoteiboFromTime")
@@ -79,7 +83,7 @@ public class TokuchoKariChoteiboDiv extends PanelPublish {
 
     @JsonProperty("txtChoteiboFromTime")
     public void setTxtChoteiboFromTime(TextBoxTime txtChoteiboFromTime) {
-        this.txtChoteiboFromTime=txtChoteiboFromTime;
+        this.txtChoteiboFromTime = txtChoteiboFromTime;
     }
 
     @JsonProperty("lblChoteboTo")
@@ -89,7 +93,7 @@ public class TokuchoKariChoteiboDiv extends PanelPublish {
 
     @JsonProperty("lblChoteboTo")
     public void setLblChoteboTo(Label lblChoteboTo) {
-        this.lblChoteboTo=lblChoteboTo;
+        this.lblChoteboTo = lblChoteboTo;
     }
 
     @JsonProperty("ShutsuryokuJunTokuchoKariChoteibo")
