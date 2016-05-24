@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.sonotashiryo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryo;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定情報提供その他資料情報のEditorです。
@@ -33,6 +36,7 @@ public class SonoTashiryoBodyEditor implements ISonoTashiryoBodyEditor {
 
     private SonoTashiryoReportSource editSource(SonoTashiryoReportSource source) {
         source.hokenshaNo = item.get保険者番号();
+        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
         source.hihokenshaNo = item.get被保険者番号();
         source.hihokenshaName = item.get被保険者氏名();
         source.shinseiGengo = item.get申請日_元号();
