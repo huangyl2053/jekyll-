@@ -456,7 +456,7 @@ public class TotalHandler {
                 .getJukyuSikakuShomeishoHakkoDiv().getPnlJukyushaJoho1().getTxtfutanWariai().getValue());
         JukyuShikakuShomeishoFinder finder = JukyuShikakuShomeishoFinder.createInstance();
         JukyuShikakuShomeishoData business = finder.setJukyuShikakuShomeisho(param);
-        JukyuShikakuShomeishoBodyItem item = new JukyuShikakuShomeishoBodyItem(business.get保険者番号(), business.get被保険者フリガナ().value(),
+        JukyuShikakuShomeishoBodyItem item = new JukyuShikakuShomeishoBodyItem(business.get被保険者番号().getColumnValue(), business.get被保険者フリガナ().value(),
                 business.get被保険者氏名().value(), business.get年号_明治(), business.get年号_大正(),
                 business.get年号_昭和(), business.get被保険者生年月日(), business.get被保険者性別(), business.get被保険者住所_転出前(),
                 business.get被保険者住所_転出先予定(), business.get被保険者異動予定日(), business.get保険者番号(), business.get発行日(),
