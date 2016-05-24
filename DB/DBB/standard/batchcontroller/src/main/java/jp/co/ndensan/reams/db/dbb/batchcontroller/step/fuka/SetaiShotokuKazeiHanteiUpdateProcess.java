@@ -11,10 +11,11 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2005SetaiHaakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 世帯員把握（バッチ）クラスです。
@@ -33,8 +34,8 @@ public class SetaiShotokuKazeiHanteiUpdateProcess extends SimpleBatchProcessBase
         List<DbT2005SetaiHaakuTempEntity> list = mapper.selectNotNull();
         if (list == null || list.isEmpty()) {
             DbT2005SetaiHaakuTempEntity entity = new DbT2005SetaiHaakuTempEntity();
-            FlexibleYear 所得年度 = new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                    SubGyomuCode.DBB介護賦課));
+            FlexibleYear 所得年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                    RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
             entity.setShotokuNendo(所得年度);
             mapper.update世帯員把握入力Temp(entity);
         }
