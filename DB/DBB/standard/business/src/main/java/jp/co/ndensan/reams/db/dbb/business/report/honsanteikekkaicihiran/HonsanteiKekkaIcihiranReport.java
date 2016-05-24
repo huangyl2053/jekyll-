@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteiFukaExtraBatchParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranReportSource> {
 
     private final List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList;
-    private final HonsanteiFukaExtraBatchParameter バッチパラメータ;
     private final FlexibleYear 賦課年度;
     private final YMDHMS 調定日時;
     private final RString 市町村コード;
@@ -36,7 +34,6 @@ public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranR
      * コンストラクタです。
      *
      * @param 計算後情報_宛名_口座EntityList List<KeisangojohoAtenaKozaEntity>
-     * @param バッチパラメータ HonsanteiFukaBatchParameter
      * @param 賦課年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @param 市町村コード RString
@@ -46,7 +43,6 @@ public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranR
      * @param 改頁項目リスト List<RString>
      */
     public HonsanteiKekkaIcihiranReport(List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList,
-            HonsanteiFukaExtraBatchParameter バッチパラメータ,
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
             RString 市町村コード,
@@ -55,7 +51,6 @@ public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranR
             List<RString> 出力順項目リスト,
             List<RString> 改頁項目リスト) {
         this.計算後情報_宛名_口座EntityList = 計算後情報_宛名_口座EntityList;
-        this.バッチパラメータ = バッチパラメータ;
         this.賦課年度 = 賦課年度;
         this.調定日時 = 調定日時;
         this.市町村コード = 市町村コード;
@@ -68,7 +63,7 @@ public class HonsanteiKekkaIcihiranReport extends Report<HonsanteiKekkaIcihiranR
     @Override
     public void writeBy(ReportSourceWriter<HonsanteiKekkaIcihiranReportSource> writer) {
         IHonsanteiKekkaIcihiranEditor editor = new HonsanteiKekkaIcihiranEditor(
-                計算後情報_宛名_口座EntityList, バッチパラメータ, 賦課年度, 調定日時, 市町村コード, 市町村名, 住所編集, 出力順項目リスト, 改頁項目リスト);
+                計算後情報_宛名_口座EntityList, 賦課年度, 調定日時, 市町村コード, 市町村名, 住所編集, 出力順項目リスト, 改頁項目リスト);
         IHonsanteiKekkaIcihiranBuilder builder = new HonsanteiKekkaIcihiranBuilder(editor);
         writer.writeLine(builder);
     }
