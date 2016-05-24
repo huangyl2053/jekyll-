@@ -100,25 +100,35 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     }
 
     private void set出力改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
-        if (NUM0 < 出力項目リスト.size() && NUM0 < 改頁項目リスト.size()) {
+        if (NUM0 < 出力項目リスト.size()) {
             source.shutsuryokujun1 = 出力項目リスト.get(NUM0);
-            source.kaipage1 = 改頁項目リスト.get(NUM0);
+            if (NUM0 < 改頁項目リスト.size()) {
+                source.kaipage1 = 改頁項目リスト.get(NUM0);
+            }
         }
-        if (NUM1 < 出力項目リスト.size() && NUM1 < 改頁項目リスト.size()) {
+        if (NUM1 < 出力項目リスト.size()) {
             source.shutsuryokujun2 = 出力項目リスト.get(NUM1);
-            source.kaipage2 = 改頁項目リスト.get(NUM1);
+            if (NUM1 < 改頁項目リスト.size()) {
+                source.kaipage2 = 改頁項目リスト.get(NUM1);
+            }
         }
-        if (NUM2 < 出力項目リスト.size() && NUM2 < 改頁項目リスト.size()) {
+        if (NUM2 < 出力項目リスト.size()) {
             source.shutsuryokujun3 = 出力項目リスト.get(NUM2);
-            source.kaipage3 = 改頁項目リスト.get(NUM2);
+            if (NUM2 < 改頁項目リスト.size()) {
+                source.kaipage3 = 改頁項目リスト.get(NUM2);
+            }
         }
-        if (NUM3 < 出力項目リスト.size() && NUM3 < 改頁項目リスト.size()) {
+        if (NUM3 < 出力項目リスト.size()) {
             source.shutsuryokujun4 = 出力項目リスト.get(NUM3);
-            source.kaipage4 = 改頁項目リスト.get(NUM3);
+            if (NUM3 < 改頁項目リスト.size()) {
+                source.kaipage4 = 改頁項目リスト.get(NUM3);
+            }
         }
-        if (NUM4 < 出力項目リスト.size() && NUM4 < 改頁項目リスト.size()) {
+        if (NUM4 < 出力項目リスト.size()) {
             source.shutsuryokujun5 = 出力項目リスト.get(NUM4);
-            source.kaipage5 = 改頁項目リスト.get(NUM4);
+            if (NUM4 < 改頁項目リスト.size()) {
+                source.kaipage5 = 改頁項目リスト.get(NUM4);
+            }
         }
     }
 
