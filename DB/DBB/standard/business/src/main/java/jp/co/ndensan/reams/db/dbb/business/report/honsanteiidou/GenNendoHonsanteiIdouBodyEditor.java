@@ -474,7 +474,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         int 開始月1 = 月割開始年月1.getMonthValue();
         FlexibleDate 月割終了年月1 = entity.get月割終了年月1();
         int 終了月1 = 月割終了年月1.getMonthValue();
-        if (entity.get保険料算定段階1().length() > NUM_2) {
+        if (entity.get保険料算定段階1().length() >= NUM_2) {
             RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
             set月別取得段階(item, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         }
@@ -482,7 +482,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         int 開始月2 = 月割開始年月2.getMonthValue();
         FlexibleDate 月割終了年月2 = entity.get月割終了年月2();
         int 終了月2 = 月割終了年月2.getMonthValue();
-        if (entity.get保険料算定段階2().length() > NUM_2) {
+        if (entity.get保険料算定段階2().length() >= NUM_2) {
             RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);
             if (!月割開始年月2.isEmpty() && !月割終了年月2.isEmpty() && !保険料算定段階2.isEmpty()) {
                 set月別取得段階(item, 開始月2, 終了月2, 保険料算定段階2, 更正前後区分);
@@ -594,7 +594,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         KozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正後Entity.get口座Entity();
         IKoza koza = new Koza(releteEntity);
         if (koza.get金融機関コード() != null) {
-            if (ゆうちょ銀行.equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4)) && koza.get金融機関コード().value().length() > NUM_4) {
+            if (ゆうちょ銀行.equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4)) && koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コードHander1(source, koza);
             } else {
                 金融機関コードHander2(source, koza);
@@ -607,13 +607,13 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         RString 通帳記号 = RString.EMPTY;
         RString 通帳番号 = RString.EMPTY;
         if (koza.getEdited通帳記号() != null && koza.get通帳番号() != null && koza.get口座名義人漢字() != null) {
-            if (koza.get金融機関コード().value().length() > NUM_4) {
+            if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
             }
-            if (koza.getEdited通帳記号().length() > NUM_5) {
+            if (koza.getEdited通帳記号().length() >= NUM_5) {
                 通帳記号 = koza.getEdited通帳記号().substring(NUM_0, NUM_5);
             }
-            if (koza.get通帳番号().length() > NUM_8) {
+            if (koza.get通帳番号().length() >= NUM_8) {
                 通帳番号 = koza.get通帳番号().substring(NUM_0, NUM_8);
             }
             source.list1_5 = 金融機関コード.concat(RString.FULL_SPACE)
@@ -629,16 +629,16 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         RString 支店コード = RString.EMPTY;
         RString 口座番号 = RString.EMPTY;
         if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
-            if (koza.get金融機関コード().value().length() > NUM_4) {
+            if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
             }
-            if (koza.get支店コード().value().length() > NUM_3) {
+            if (koza.get支店コード().value().length() >= NUM_3) {
                 支店コード = koza.getEdited通帳記号().substring(NUM_0, NUM_3);
             }
-            if (koza.get預金種別().get預金種別略称().length() > NUM_2) {
+            if (koza.get預金種別().get預金種別略称().length() >= NUM_2) {
                 預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
             }
-            if (koza.get口座番号().length() > NUM_7) {
+            if (koza.get口座番号().length() >= NUM_7) {
                 口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);
             }
             source.list1_5 = 金融機関コード.concat(HYPHEN)
