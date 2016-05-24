@@ -85,10 +85,10 @@ public class KaigoJyuminhyouHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
         dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0);
         div.getKonkaiInfoInput().getTxtSofuShichoShon().setValue(dgRow.getTxtSakiShichoson().getValue());
-        div.getKonkaiInfoInput().getTxtZenkaiChushutsuFromYMD().setValue(dgRow.getTxtZenkaiSakuseiEdYMD().getValue());
-        div.getKonkaiInfoInput().getTxtZenkaiChushutsuFromTime().setValue(dgRow.getTxtZenkaiSakuseiEdTime().getValue());
-        div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().setValue(dgRow.getTxtZenkaiSakuseiStYMD().getValue());
-        div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().setValue(dgRow.getTxtZenkaiSakuseiStTime().getValue());
+        div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().setValue(dgRow.getTxtZenkaiSakuseiEdYMD().getValue());
+        div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().setValue(dgRow.getTxtZenkaiSakuseiEdTime().getValue());
+        div.getKonkaiInfoInput().getTxtZenkaiChushutsuFromYMD().setValue(dgRow.getTxtZenkaiSakuseiStYMD().getValue());
+        div.getKonkaiInfoInput().getTxtZenkaiChushutsuFromTime().setValue(dgRow.getTxtZenkaiSakuseiStTime().getValue());
         div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setValue(dgRow.getTxtKonkaiStSakuseiYMD().getValue());
         div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setValue(dgRow.getTxtKonkaiStSakuseiTime().getValue());
         List<RString> key = new ArrayList<>();
@@ -123,8 +123,9 @@ public class KaigoJyuminhyouHandler {
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setDisabled(true);
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setDisabled(true);
         } else {
-            div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().clearValue();
-            div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().clearValue();
+            dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0);
+            div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setValue(dgRow.getTxtKonkaiStSakuseiYMD().getValue());
+            div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setValue(dgRow.getTxtKonkaiStSakuseiTime().getValue());
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setDisabled(false);
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setDisabled(false);
         }

@@ -15,7 +15,8 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyokobetsu.Kaigojuminhyoko
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyokobetsu.IKaigoJuminhyoKobetsuMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -86,10 +87,8 @@ public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
         for (KaigoJuminhyoKobetsuParameter list : kobetsuLsit) {
             KobetsuKoikiunyoParameter batchParameter = new KobetsuKoikiunyoParameter();
             batchParameter.setDateTo(RDate.getNowDateTime());
-            RStringBuilder taishoShuryo = new RStringBuilder();
-            taishoShuryo.append(list.getKonkaiStSakuseiYMD());
-            taishoShuryo.append(list.getKonkaiStSakuseiTime());
-            batchParameter.setDateFrom(taishoShuryo.toRString());
+            batchParameter.setDateFrom(RDateTime.of(list.getKonkaiStSakuseiYMD().toDateString(),
+                    new RString(list.getKonkaiStSakuseiTime().toString())));
             batchParameterList.add(batchParameter);
         }
         return SearchResult.of(batchParameterList, 0, false);

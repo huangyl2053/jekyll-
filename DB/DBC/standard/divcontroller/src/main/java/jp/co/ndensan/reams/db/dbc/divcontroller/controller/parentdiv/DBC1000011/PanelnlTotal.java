@@ -115,7 +115,7 @@ public class PanelnlTotal {
      * @return ResponseData<PanelnlTotalDiv>
      */
     public ResponseData<ShoukanBaraiSuuchiShoIkatsuBatchParamter> onClick_batch(PanelnlTotalDiv div) {
-        ShoukanBaraiSuuchiShoIkatsuBatchParamter parameter = createHandler(div).onClick_btnJikou();
+        ShoukanBaraiSuuchiShoIkatsuBatchParamter parameter = createHandler(div).onClick_btnJikouBatch();
         return ResponseData.of(parameter).respond();
     }
 

@@ -7,23 +7,16 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * KobetsuJikoRenkeiInfoSakuseiKoiki のクラスファイル
- *
- * @reamsid_L DBU-0550-010 zhangzhiming
+ * KobetsuJikoRenkeiInfoSakuseiKoiki のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KobetsuJikoRenkeiInfoSakuseiKoikiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -66,7 +59,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgKobetsuJikoRenkeiInfoSakuseiKoik(DataGrid<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgKobetsuJikoRenkeiInfoSakuseiKoik) {
+    public void  setDgKobetsuJikoRenkeiInfoSakuseiKoik(DataGrid<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgKobetsuJikoRenkeiInfoSakuseiKoik) {
         this.getKobetsuJikoRenkeiInfoSakuseiKoikiBP().setDgKobetsuJikoRenkeiInfoSakuseiKoik(dgKobetsuJikoRenkeiInfoSakuseiKoik);
     }
 
@@ -76,7 +69,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKonkaiInfoInput(KonkaiInfoInputDiv KonkaiInfoInput) {
+    public void  setKonkaiInfoInput(KonkaiInfoInputDiv KonkaiInfoInput) {
         this.getKobetsuJikoRenkeiInfoSakuseiKoikiBP().setKonkaiInfoInput(KonkaiInfoInput);
     }
 
@@ -86,7 +79,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSofuShichoShon(TextBox txtSofuShichoShon) {
+    public void  setTxtSofuShichoShon(TextBox txtSofuShichoShon) {
         this.getKobetsuJikoRenkeiInfoSakuseiKoikiBP().getKonkaiInfoInput().setTxtSofuShichoShon(txtSofuShichoShon);
     }
 
@@ -96,7 +89,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTblkonkaiInfoInput(tblkonkaiInfoInputDiv tblkonkaiInfoInput) {
+    public void  setTblkonkaiInfoInput(tblkonkaiInfoInputDiv tblkonkaiInfoInput) {
         this.getKobetsuJikoRenkeiInfoSakuseiKoikiBP().getKonkaiInfoInput().setTblkonkaiInfoInput(tblkonkaiInfoInput);
     }
 
@@ -131,7 +124,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoikiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkZenken(CheckBoxList chkZenken) {
+    public void  setChkZenken(CheckBoxList chkZenken) {
         this.getKobetsuJikoRenkeiInfoSakuseiKoikiBP().getKonkaiInfoInput().getTblkonkaiInfoInput().getZenken().setChkZenken(chkZenken);
     }
 
