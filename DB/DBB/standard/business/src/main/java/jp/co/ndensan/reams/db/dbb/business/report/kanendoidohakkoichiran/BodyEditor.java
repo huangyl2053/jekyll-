@@ -30,16 +30,10 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
     private final int 連番;
 
     private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
-    private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int SIZE = 18;
 
     private static final int 金融機関コード_START = 0;
     private static final int 金融機関コード_END = 4;
 
-    private static final RString 所得段階名 = new RString("所得段階");
     private static final RString 半角ハイフン = new RString("-");
     private static final RString アステリスク = new RString("*");
 
@@ -80,8 +74,8 @@ public class BodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchira
             source.listUpper_9 = new RString(共通情報.get更正後().get確定保険料_年額().toString());
         }
         setOtherValue(共通情報, source);
-        if ((共通情報.get編集後宛先() != null) && !(共通情報.get編集後宛先().get本人名称().getName().toString()
-                .equals(共通情報.get編集後宛先().get宛先名称().getName().toString()))) {
+        if ((共通情報.get編集後宛先() != null) && !(共通情報.get編集後宛先().get本人名称()
+                .equals(共通情報.get編集後宛先().get宛先名称()))) {
             source.listUpper_12 = new RString(アステリスク.toString() + RString.FULL_SPACE
                     + 共通情報.get編集後宛先().get宛先名称().getName().toString());
         }

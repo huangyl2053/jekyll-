@@ -70,7 +70,13 @@ public class JisshiJokyoTokeiEditor implements IJisshiJokyoTokeiEditor {
     }
 
     private RString dateFormat(RString date) {
-        return RString.isNullOrEmpty(date) ? RString.EMPTY : new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        } else if (!FlexibleDate.canConvert(date)) {
+            return date;
+        } else {
+            return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
     }
 }

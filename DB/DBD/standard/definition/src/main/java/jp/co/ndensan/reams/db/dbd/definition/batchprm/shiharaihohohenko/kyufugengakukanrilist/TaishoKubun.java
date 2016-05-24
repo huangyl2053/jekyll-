@@ -20,9 +20,9 @@ public enum TaishoKubun {
      */
     全登録者("1", "全登録者"),
     /**
-     * コード：1 名称：全登録者以外
+     * コード：0 名称：全登録者以外
      */
-    全登録者以外("1", "全登録者以外");
+    全登録者以外("0", "全登録者以外");
 
     private final RString コード;
     private final RString 名称;

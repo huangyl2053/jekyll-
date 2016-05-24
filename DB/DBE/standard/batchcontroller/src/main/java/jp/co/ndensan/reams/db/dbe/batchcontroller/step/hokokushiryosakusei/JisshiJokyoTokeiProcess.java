@@ -93,7 +93,7 @@ public class JisshiJokyoTokeiProcess extends SimpleBatchProcessBase {
             jisshiJokyoTokei.set抽出開始年月日(new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 1).toDateString());
             jisshiJokyoTokei.set抽出終了年月日(new RDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 対象年月.getLastDay()).toDateString());
         } else {
-            if (!(parameter.isEmptyTaishoGeppiFrom() && parameter.isEmptyTaishoGeppiTo())) {
+            if (!parameter.isEmptyTaishoGeppiFrom() && !parameter.isEmptyTaishoGeppiTo()) {
                 jisshiJokyoTokei.set抽出開始年月日(parameter.getTaishoGeppiFrom());
                 jisshiJokyoTokei.set抽出終了年月日(parameter.getTaishoGeppiTo());
             } else if (parameter.isEmptyTaishoGeppiFrom()) {

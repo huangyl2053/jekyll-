@@ -6,34 +6,38 @@ var DBC;
                 this.fieldName = fieldName;
                 this.controls = new ServiceRiyohyoInfo.Controls(fieldName);
             }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
-
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ServiceRiyohyoInfo.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.GamenMode = function () {
+                return new Modes.GamenMode(this.controls);
             };
             return ModeController;
         })();
         ServiceRiyohyoInfo.ModeController = ModeController;
 
         (function (Modes) {
-            var ViewMode = (function () {
-                function ViewMode(controls) {
+            var GamenMode = (function () {
+                function GamenMode(controls) {
                     this.controls = controls;
                 }
-                ViewMode.prototype.ModifyMode = function () {
+                GamenMode.prototype.ModifyMode = function () {
                     this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = true;
                     this.controls.ServiceRiyohyoBeppyoGokei().displayNone = true;
                 };
 
-                ViewMode.prototype.InquiryMode = function () {
+                GamenMode.prototype.InquiryMode = function () {
                     this.controls.ServiceRiyohyoBeppyoMeisai().displayNone = false;
                     this.controls.ServiceRiyohyoBeppyoGokei().displayNone = false;
                 };
-                return ViewMode;
+                return GamenMode;
             })();
-            Modes.ViewMode = ViewMode;
+            Modes.GamenMode = GamenMode;
         })(ServiceRiyohyoInfo.Modes || (ServiceRiyohyoInfo.Modes = {}));
         var Modes = ServiceRiyohyoInfo.Modes;
     })(DBC.ServiceRiyohyoInfo || (DBC.ServiceRiyohyoInfo = {}));

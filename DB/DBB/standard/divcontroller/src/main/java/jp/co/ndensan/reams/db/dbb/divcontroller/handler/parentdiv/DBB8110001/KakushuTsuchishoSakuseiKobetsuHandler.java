@@ -1157,58 +1157,58 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         key.add(ISPUBLISH);
         if (!特徴開始通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setDisplayNone(true);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().getChkPublishTokuKaishiTsuchiKobetsu()
                     .setSelectedItemsByKey(key);
-            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setDisplayNone(false);
         }
         if (!決定通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setDisplayNone(true);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().getChkPublishKetteiTsuchiKobetsu()
                     .setSelectedItemsByKey(key);
-            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setDisplayNone(false);
         }
         if (!変更通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(true);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().getChkPublishHenkoTsuchiKobetsu()
                     .setSelectedItemsByKey(key);
-            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(false);
         }
         if (!納入通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setDisplayNone(true);
         } else {
             set納入通知書(key, 調定年度, 賦課年度);
         }
         if (!減免通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setDisplayNone(true);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().getChkPublishGemmenTsuchiKobetsu()
                     .setSelectedItemsByKey(key);
-            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setDisplayNone(false);
         }
         if (!徴収猶予通知書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setDisplayNone(true);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().getChkPublishChoshuYuyoTsuchiKobetsu()
                     .setSelectedItemsByKey(key);
-            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setDisplayNone(false);
         }
         if (!郵振納付書Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setDisplayNone(true);
         } else {
             KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
             FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
@@ -1222,16 +1222,16 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().getDdlYufuriShuturyokuKi().setSelectedKey(期月.get期());
             div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().getChkPublishYufuriKobetsu().setSelectedItemsByKey(key);
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setDisplayNone(false);
         }
         if (!賦課台帳Flag) {
             div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().setDisplayNone(true);
-            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setDisplayNone(true);
         } else {
             div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().getChkPublishFukadaichoKobetsu()
                     .setSelectedItemsByKey(key);
-            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setDisplayNone(false);
         }
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(調定事由Flag);
     }
@@ -1242,8 +1242,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .get仮算定納入通知書制御情報();
             set出力方式と出力形式(entity.get納入通知書制御情報().get単票発行_出力方式(),
                     entity.get納入通知書制御情報().get単票発行_出力形式());
-        }
-        if (保険料納入通知書_本算定.equals(帳票) || 保険料納入通知書_過年度.equals(帳票)) {
+        } else if (保険料納入通知書_本算定.equals(帳票) || 保険料納入通知書_過年度.equals(帳票)) {
             HonSanteiNonyuTsuchiShoSeigyoJoho entity = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance()
                     .get本算定納入通知書制御情報();
             set出力方式と出力形式(entity.get納入通知書制御情報().get単票発行_出力方式(),
@@ -1291,7 +1290,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         }
         div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(false);
         div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().getChkPublishNotsuKobetsu().setSelectedItemsByKey(key);
-        div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(true);
+        div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setDisplayNone(false);
     }
 
     private void set発行日(RDate 発行日) {
@@ -1335,6 +1334,8 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setValue(
                         ChoteiJiyuCode.toValue(info.get調定事由4()).get名称());
             }
+            div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu()
+                    .getRadKobetsuHakkoChoteiJiyu().setSelectedKey(key);
         } else if (KEY1.equals(key)) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(false);
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(false);
@@ -1764,11 +1765,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishTokuKaishiTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setDisplayNone(true);
             set通知書(false, 特徴開始通知書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().setDisplayNone(false);
             set通知書(true, 特徴開始通知書, map);
         }
     }
@@ -1783,11 +1784,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishKetteiTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setDisplayNone(true);
             set通知書(false, 決定通知書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().setDisplayNone(false);
             set通知書(true, 決定通知書, map);
         }
     }
@@ -1803,11 +1804,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishHenkoTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(true);
             set通知書(false, 変更通知書略称, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(false);
             set通知書(true, 変更通知書略称, map);
         }
     }
@@ -1822,11 +1823,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishNotsuKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setDisplayNone(true);
             set通知書(false, 納入通知書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().setDisplayNone(false);
             set通知書(true, 納入通知書, map);
         }
     }
@@ -1841,11 +1842,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishYufuriKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setDisplayNone(true);
             set通知書(false, 郵便振替納付書, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setDisplayNone(false);
             set通知書(true, 郵便振替納付書, map);
         }
     }
@@ -1861,11 +1862,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishGemmenTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setDisplayNone(true);
             set通知書(false, 減免通知書略称, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().setDisplayNone(false);
             set通知書(true, 減免通知書略称, map);
         }
     }
@@ -1881,11 +1882,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishChoshuYuyoTsuchiKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setDisplayNone(true);
             set通知書(false, 徴収猶予通知書略称, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().setDisplayNone(false);
             set通知書(true, 徴収猶予通知書略称, map);
         }
     }
@@ -1900,11 +1901,11 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 .getChkPublishFukadaichoKobetsu().getSelectedKeys();
         if (publish.isEmpty()) {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) - 1)));
-            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(false);
+            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setDisplayNone(true);
             set通知書(false, 賦課台帳, map);
         } else {
             div.setHdnPublishFlag(new RString(String.valueOf(Integer.parseInt(div.getHdnPublishFlag().toString()) + 1)));
-            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setIsOpen(true);
+            div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().setDisplayNone(false);
             set通知書(true, 賦課台帳, map);
         }
     }
@@ -1931,14 +1932,14 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, false);
         }
 
-        if ((div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().isIsOpen()
-                || div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsOpen())
-                && (!div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().isIsOpen()
-                && !div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().isIsOpen()
-                && !div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().isIsOpen()
-                && !div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().isIsOpen()
-                && !div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().isIsOpen()
-                && !div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().isIsOpen())) {
+        if ((!div.getTsuchishoSakuseiKobetsu().getKetteiTsuchiKobetsu().isDisplayNone()
+                || !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isDisplayNone())
+                && (div.getTsuchishoSakuseiKobetsu().getTokuKaishiTsuchiKobetsu().isDisplayNone()
+                && div.getTsuchishoSakuseiKobetsu().getNotsuKobetsu().isDisplayNone()
+                && div.getTsuchishoSakuseiKobetsu().getGemmenTsuchiKobetsu().isDisplayNone()
+                && div.getTsuchishoSakuseiKobetsu().getChoshuYuyoTsuchiKobetsu().isDisplayNone()
+                && div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().isDisplayNone()
+                && div.getTsuchishoSakuseiKobetsu().getFukadaichoKobetsu().isDisplayNone())) {
             div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(false);
         } else {
             onChange調定事由印字方法(KEY0, map);
@@ -1955,5 +1956,25 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     public void setヘッダパネル(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey searchKey) {
         div.getJuminFukaShokai().getCcdKaigoatena().onLoad(識別コード);
         div.getJuminFukaShokai().getCcdFukaKihon().load(searchKey);
+    }
+
+    /**
+     * 賦課の情報がNULLで、初期化のメソッドます。
+     */
+    public void set初期化() {
+        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setDisabled(true);
+        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setDisabled(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapTokuKaishiTsuchiKobetsu().setDisplayNone(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapKetteiTsuchiKobetsu().setDisplayNone(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapHenkoTsuchiKobetsu().setDisplayNone(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapNotsuKobetsu().setDisplayNone(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapGemmenTsuchiKobetsu().setDisplayNone(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapChoshuYuyoTsuchiKobetsu().setDisplayNone(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().setDisplayNone(true);
+        div.getTsuchishoSakuseiKobetsu().getWrapFukadaichoKobetsu().setDisplayNone(true);
+        div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoChoteiJiyu().setDisabled(true);
+        List<dgChohyoSentaku_Row> rowList = new ArrayList<>();
+        div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().setDataSource(rowList);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(発行する, true);
     }
 }

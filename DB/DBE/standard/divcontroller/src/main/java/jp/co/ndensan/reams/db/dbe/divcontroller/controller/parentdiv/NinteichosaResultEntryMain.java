@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.HihokenshaForNinteichosaResultDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0911Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060002.Kihonchosa0912Div;
