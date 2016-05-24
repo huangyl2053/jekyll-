@@ -19,12 +19,12 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
- * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 HeaderEditorです。
+ * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表 KanendoIdouKekkaIchiranHeaderEditorです。
  *
  * @reamsid_L DBB-0910-030 zhangrui
  *
  */
-public class HeaderEditor implements IKanendoIdouKekkaIchiranEditor {
+public class KanendoIdouKekkaIchiranHeaderEditor implements IKanendoIdouKekkaIchiranEditor {
 
     private final KanendoIdouKekkaIchiranInputEntity inputEntity;
 
@@ -49,7 +49,7 @@ public class HeaderEditor implements IKanendoIdouKekkaIchiranEditor {
      *
      * @param inputEntity {@link KanendoIdouKekkaIchiranInputEntity}
      */
-    protected HeaderEditor(KanendoIdouKekkaIchiranInputEntity inputEntity) {
+    protected KanendoIdouKekkaIchiranHeaderEditor(KanendoIdouKekkaIchiranInputEntity inputEntity) {
         this.inputEntity = inputEntity;
     }
 

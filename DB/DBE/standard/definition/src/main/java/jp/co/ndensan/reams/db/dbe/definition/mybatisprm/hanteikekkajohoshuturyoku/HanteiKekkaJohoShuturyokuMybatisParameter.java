@@ -23,6 +23,7 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
     private final RString kaisaiBangou;
     private final List<RString> shoriJotaiKubun;
     private final RString shoKisaiHokenshaNo;
+    private final boolean isShoKisaiHokenshaNoFlag;
 
     /**
      * コンストラクタです。
@@ -31,16 +32,44 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
      * @param kaisaiBangou 開催番号
      * @param shoriJotaiKubun 処理状態区分
      * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @param isShoKisaiHokenshaNoFlag 証記載保険者番号Flag
      */
-    public HanteiKekkaJohoShuturyokuMybatisParameter(
+    protected HanteiKekkaJohoShuturyokuMybatisParameter(
             RString hakkouTyouhyou,
             RString kaisaiBangou,
             List<RString> shoriJotaiKubun,
-            RString shoKisaiHokenshaNo) {
+            RString shoKisaiHokenshaNo,
+            boolean isShoKisaiHokenshaNoFlag) {
 
         this.hakkouTyouhyou = hakkouTyouhyou;
         this.kaisaiBangou = kaisaiBangou;
         this.shoriJotaiKubun = shoriJotaiKubun;
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.isShoKisaiHokenshaNoFlag = isShoKisaiHokenshaNoFlag;
+    }
+
+    /**
+     *
+     * @param hakkouTyouhyou 発行帳票
+     * @param kaisaiBangou 開催番号
+     * @param shoriJotaiKubun 処理状態区分
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @return HanteiKekkaJohoShuturyokuMybatisParameter
+     */
+    public static HanteiKekkaJohoShuturyokuMybatisParameter creatParameter(
+            RString hakkouTyouhyou,
+            RString kaisaiBangou,
+            List<RString> shoriJotaiKubun,
+            RString shoKisaiHokenshaNo) {
+        boolean isShoKisaiHokenshaNoFlag = false;
+        if (!RString.isNullOrEmpty(shoKisaiHokenshaNo)) {
+            isShoKisaiHokenshaNoFlag = true;
+        }
+        return new HanteiKekkaJohoShuturyokuMybatisParameter(
+                hakkouTyouhyou,
+                kaisaiBangou,
+                shoriJotaiKubun,
+                shoKisaiHokenshaNo,
+                isShoKisaiHokenshaNoFlag);
     }
 }

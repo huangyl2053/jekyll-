@@ -307,7 +307,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        div.getTxtTenban().setDisplayNone(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
@@ -452,6 +452,7 @@ public class ShiharaiHohoJyohoHandler {
     private void 償還払給付または高額給付の照会モード_窓口払いエリアの状態処理() {
 
         div.getTxtShiharaiBasho().setReadOnly(true);
+        div.getTxtTenban1().setDisplayNone(true);
         div.getTxtStartYMD().setReadOnly(true);
         div.getTxtEndYMD().setReadOnly(true);
         div.getTxtStartYobi().setReadOnly(true);

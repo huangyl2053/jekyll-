@@ -18,9 +18,10 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -78,10 +79,12 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.selectSpecific(max(idoYMD), max(edaNo)).
+        return accessor.select().
                 table(DbT1002TekiyoJogaisha.class).
                 where(
                         eq(shikibetsuCode, 識別コード)).
+                order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
     }
 

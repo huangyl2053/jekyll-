@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,8 +13,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -26,7 +25,7 @@ import org.junit.runner.RunWith;
 @Ignore
 public class KoseiShichosonMasterTest extends DbeTestBase {
 
-    private static DbT5051KoseiShichosonMasterEntity KoseiShichosonMasterEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+    private static DbT7051KoseiShichosonMasterEntity KoseiShichosonMasterEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static RString 市町村識別ID;
@@ -34,7 +33,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        市町村識別ID = DbT5051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
+//        市町村識別ID = DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
     }
 
     public static class 主キーコンストラクタテスト extends DbeTestBase {
@@ -43,7 +42,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            KoseiShichosonMasterEntity = DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity();
+//            KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
         }
 
 //TODO 主キー名を置換してください
@@ -54,7 +53,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
         }
 
         @Test
-        public void 指定したキーが保持するDbT5051KoseiShichosonMasterEntityにセットされている() {
+        public void 指定したキーが保持するDbT7051KoseiShichosonMasterEntityにセットされている() {
             sut = new KoseiShichosonMaster(市町村識別ID);
             assertThat(sut.get市町村識別ID(), is(市町村識別ID));
         }
@@ -72,7 +71,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            KoseiShichosonMasterEntity = DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity();
+//            KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
         }
 
         @Test(expected = NullPointerException.class)
@@ -82,7 +81,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
         }
 
         @Test
-        public void 指定したDbT5051KoseiShichosonMasterEntityのキー情報を識別子が持つ() {
+        public void 指定したDbT7051KoseiShichosonMasterEntityのキー情報を識別子が持つ() {
 
             sut = new KoseiShichosonMaster(KoseiShichosonMasterEntity);
 
@@ -96,7 +95,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            KoseiShichosonMasterEntity = DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity();
+//            KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
 
             sut = new KoseiShichosonMaster(KoseiShichosonMasterEntity);
         }
@@ -113,7 +112,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            KoseiShichosonMasterEntity = DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity();
+//            KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
 
             sut = new KoseiShichosonMaster(KoseiShichosonMasterEntity);
         }
@@ -130,7 +129,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            KoseiShichosonMasterEntity = DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity();
+//            KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
 
             sut = new KoseiShichosonMaster(KoseiShichosonMasterEntity);
         }
@@ -148,33 +147,33 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            KoseiShichosonMasterEntity = DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity();
+//            KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
 
         }
 
         @Test
-        public void KoseiShichosonMasterが保持するDbT5051KoseiShichosonMasterEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりKoseiShichosonMasterが保持するDbT5051KoseiShichosonMasterEntityのEntityDataStateがDeletedに指定されたKoseiShichosonMasterが返る() {
+        public void KoseiShichosonMasterが保持するDbT7051KoseiShichosonMasterEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりKoseiShichosonMasterが保持するDbT7051KoseiShichosonMasterEntityのEntityDataStateがDeletedに指定されたKoseiShichosonMasterが返る() {
             sut = TestSupport.setStateKoseiShichosonMaster(EntityDataState.Unchanged);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void KoseiShichosonMasterが保持するDbT5051KoseiShichosonMasterEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりKoseiShichosonMasterが保持するDbT5051KoseiShichosonMasterEntityのEntityDataStateがDeletedに指定されたKoseiShichosonMasterが返る() {
+        public void KoseiShichosonMasterが保持するDbT7051KoseiShichosonMasterEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりKoseiShichosonMasterが保持するDbT7051KoseiShichosonMasterEntityのEntityDataStateがDeletedに指定されたKoseiShichosonMasterが返る() {
             sut = TestSupport.setStateKoseiShichosonMaster(EntityDataState.Modified);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
-        public void KoseiShichosonMasterが保持するDbT5051KoseiShichosonMasterEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりKoseiShichosonMasterが保持するDbT5051KoseiShichosonMasterEntityのEntityDataStateがDeletedに指定されたKoseiShichosonMasterが返る() {
+        public void KoseiShichosonMasterが保持するDbT7051KoseiShichosonMasterEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりKoseiShichosonMasterが保持するDbT7051KoseiShichosonMasterEntityのEntityDataStateがDeletedに指定されたKoseiShichosonMasterが返る() {
             sut = TestSupport.setStateKoseiShichosonMaster(EntityDataState.Deleted);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test(expected = IllegalStateException.class)
-        public void KoseiShichosonMasterが保持するDbT5051KoseiShichosonMasterEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
+        public void KoseiShichosonMasterが保持するDbT7051KoseiShichosonMasterEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
             sut = TestSupport.setStateKoseiShichosonMaster(EntityDataState.Added);
             result = sut.deleted();
         }

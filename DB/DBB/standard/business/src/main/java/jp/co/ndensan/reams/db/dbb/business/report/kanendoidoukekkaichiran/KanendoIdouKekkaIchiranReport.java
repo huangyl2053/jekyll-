@@ -70,8 +70,8 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
             KanendoIdouKekkaIchiranInputEntity inputEntity = new KanendoIdouKekkaIchiranInputEntity(
                     更正前Entity, 更正後Entity, 出力順ID, 調定日時, association, 並び順の１件目,
                     並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List);
-            IKanendoIdouKekkaIchiranEditor headerEditor = new HeaderEditor(inputEntity);
-            IKanendoIdouKekkaIchiranEditor bodyEditor = new BodyEditor(inputEntity);
+            IKanendoIdouKekkaIchiranEditor headerEditor = new KanendoIdouKekkaIchiranHeaderEditor(inputEntity);
+            IKanendoIdouKekkaIchiranEditor bodyEditor = new KanendoIdouKekkaIchiranBodyEditor(inputEntity);
             IKanendoIdouKekkaIchiranBuilder builder = new KanendoIdouKekkaIchiranBuilder(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }

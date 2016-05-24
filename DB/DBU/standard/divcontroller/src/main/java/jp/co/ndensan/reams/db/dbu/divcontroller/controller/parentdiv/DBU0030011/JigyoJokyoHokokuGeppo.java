@@ -43,7 +43,7 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoDiv div) {
-        if (RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey())) {
+        if (!RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey())) {
             FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey());
             ShukeiYearMouthGetterFinder getterFinder = ShukeiYearMouthGetterFinder.createInstance();
             ShukeiYearMouthGetterParameter parameter = ShukeiYearMouthGetterParameter.createParam_common(yearMonth, FlexibleYear.EMPTY, RString.EMPTY);
@@ -68,7 +68,9 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_cblShutsuryokuAll(JigyoJokyoHokokuGeppoDiv div) {
-        getHandler(div).getCblShutsuryokuAll();
+        if (!RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())) {
+            getHandler(div).getCblShutsuryokuAll();
+        }
         return ResponseData.of(div).respond();
     }
 
