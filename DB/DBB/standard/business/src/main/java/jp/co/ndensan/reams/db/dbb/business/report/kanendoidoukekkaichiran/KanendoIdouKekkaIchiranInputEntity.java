@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -29,6 +30,7 @@ public class KanendoIdouKekkaIchiranInputEntity {
     private final RString 並び順の３件目;
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
+    private final List<RString> 改頁項目List;
 
     /**
      * コンストラクタです。
@@ -43,12 +45,13 @@ public class KanendoIdouKekkaIchiranInputEntity {
      * @param 並び順の３件目 RString
      * @param 並び順の４件目 RString
      * @param 並び順の５件目 RString
+     * @param 改頁項目List List<RString>
      */
     public KanendoIdouKekkaIchiranInputEntity(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity,
             KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity,
             RString 出力順ID, YMDHMS 調定日時, Association association,
             RString 並び順の１件目, RString 並び順の２件目,
-            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目) {
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List) {
         this.計算後情報_宛名_口座_更正前Entity = 計算後情報_宛名_口座_更正前Entity;
         this.計算後情報_宛名_口座_更正後Entity = 計算後情報_宛名_口座_更正後Entity;
         this.出力順ID = 出力順ID;
@@ -59,6 +62,7 @@ public class KanendoIdouKekkaIchiranInputEntity {
         this.並び順の３件目 = 並び順の３件目;
         this.並び順の４件目 = 並び順の４件目;
         this.並び順の５件目 = 並び順の５件目;
+        this.改頁項目List = 改頁項目List;
     }
 
 }

@@ -31,6 +31,7 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
     private final RString 並び順の３件目;
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
+    private final List<RString> 改頁項目List;
 
     /**
      * コンストラクタです。
@@ -44,10 +45,11 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
      * @param 並び順の３件目 RString
      * @param 並び順の４件目 RString
      * @param 並び順の５件目 RString
+     * @param 改頁項目List List<RString>
      */
     public KanendoIdouKekkaIchiranReport(List<KeisangojohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
             RString 出力順ID, YMDHMS 調定日時, Association association, RString 並び順の１件目, RString 並び順の２件目,
-            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目) {
+            RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目, List<RString> 改頁項目List) {
         this.更正前後EntityList = 更正前後EntityList;
         this.出力順ID = 出力順ID;
         this.調定日時 = 調定日時;
@@ -57,6 +59,7 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
         this.並び順の３件目 = 並び順の３件目;
         this.並び順の４件目 = 並び順の４件目;
         this.並び順の５件目 = 並び順の５件目;
+        this.改頁項目List = 改頁項目List;
     }
 
     @Override
@@ -66,7 +69,7 @@ public class KanendoIdouKekkaIchiranReport extends Report<KanendoIdouKekkaIchira
             KeisangojohoAtenaKozaEntity 更正後Entity = 更正前後Entity.get計算後情報_宛名_口座_更正後Entity();
             KanendoIdouKekkaIchiranInputEntity inputEntity = new KanendoIdouKekkaIchiranInputEntity(
                     更正前Entity, 更正後Entity, 出力順ID, 調定日時, association, 並び順の１件目,
-                    並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目);
+                    並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List);
             IKanendoIdouKekkaIchiranEditor headerEditor = new HeaderEditor(inputEntity);
             IKanendoIdouKekkaIchiranEditor bodyEditor = new BodyEditor(inputEntity);
             IKanendoIdouKekkaIchiranBuilder builder = new KanendoIdouKekkaIchiranBuilder(headerEditor, bodyEditor);

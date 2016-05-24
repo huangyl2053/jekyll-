@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.kanendoidoukekkaichiran;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranReport;
@@ -58,7 +59,6 @@ public class KanendoIdouKekkaIchiranPrintService {
             printFukusu(更正前後EntityList, 出力順ID, 調定日時, reportManager);
             return reportManager.publish();
         }
-
     }
 
     /**
@@ -80,6 +80,7 @@ public class KanendoIdouKekkaIchiranPrintService {
                     .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200027.getReportId(),
                             Long.valueOf(出力順ID.toString()));
             int i = 0;
+            List<RString> 改頁項目List = new ArrayList<>();
             RString 並び順の１件目 = RString.EMPTY;
             RString 並び順の２件目 = RString.EMPTY;
             RString 並び順の３件目 = RString.EMPTY;
@@ -87,6 +88,9 @@ public class KanendoIdouKekkaIchiranPrintService {
             RString 並び順の５件目 = RString.EMPTY;
             if (並び順 != null) {
                 for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                    if (item.is改頁項目()) {
+                        改頁項目List.add(item.get項目名());
+                    }
                     if (i == INDEX_0) {
                         並び順の１件目 = item.get項目名();
                     } else if (i == INDEX_1) {
@@ -102,7 +106,7 @@ public class KanendoIdouKekkaIchiranPrintService {
                 }
             }
             new KanendoIdouKekkaIchiranReport(更正前後EntityList, 出力順ID, 調定日時, association, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目)
+                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List)
                     .writeBy(reportSourceWriter);
         }
     }

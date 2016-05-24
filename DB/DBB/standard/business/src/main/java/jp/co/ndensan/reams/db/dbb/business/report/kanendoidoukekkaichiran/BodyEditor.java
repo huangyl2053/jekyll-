@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
@@ -51,6 +52,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
     private final RString 並び順の３件目;
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
+    private final List<RString> 改頁項目List;
 
     /**
      * インスタンスを生成します。
@@ -63,6 +65,7 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         this.並び順の３件目 = inputEntity.get並び順の３件目();
         this.並び順の４件目 = inputEntity.get並び順の４件目();
         this.並び順の５件目 = inputEntity.get並び順の５件目();
+        this.改頁項目List = inputEntity.get改頁項目List();
         調定日時 = inputEntity.get調定日時();
         計算後情報_宛名_口座_更正前Entity = inputEntity.get計算後情報_宛名_口座_更正前Entity();
         計算後情報_宛名_口座_更正前Entity.set更正前後区分(更正前後区分_更正前);
@@ -427,6 +430,23 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
         source.shutsuryokujun3 = 並び順の３件目;
         source.shutsuryokujun4 = 並び順の４件目;
         source.shutsuryokujun5 = 並び順の５件目;
+        if (null != 改頁項目List && !改頁項目List.isEmpty()) {
+            if (改頁項目List.size() > NUM_0) {
+                source.kaipage1 = 改頁項目List.get(NUM_0);
+            }
+            if (改頁項目List.size() > NUM_1) {
+                source.kaipage2 = 改頁項目List.get(NUM_1);
+            }
+            if (改頁項目List.size() > NUM_2) {
+                source.kaipage3 = 改頁項目List.get(NUM_2);
+            }
+            if (改頁項目List.size() > NUM_3) {
+                source.kaipage4 = 改頁項目List.get(NUM_3);
+            }
+            if (改頁項目List.size() > NUM_4) {
+                source.kaipage5 = 改頁項目List.get(NUM_4);
+            }
+        }
     }
 
 }
