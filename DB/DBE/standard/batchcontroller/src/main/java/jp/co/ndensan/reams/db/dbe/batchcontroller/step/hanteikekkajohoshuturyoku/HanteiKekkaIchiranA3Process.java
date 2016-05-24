@@ -44,6 +44,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getHanteiKekkaIchiranA3List");
     private static final RString REPORTNAME = new RString("認定審査会　判定結果一覧");
+    private static final int PAGECOUNT = 15;
     private static final RString 一次判定結果_認知症加算_1 = new RString("1");
     private static final RString 一次判定結果_認知症加算_2 = new RString("2");
     private static final RString 一次判定結果_認知症加算_3 = new RString("3");
@@ -78,6 +79,12 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
     protected void process(HanteiKekkaIchiranA3Entity entity) {
         entity.setTitle(REPORTNAME);
         entity.setPrintTimeStamp(システム時刻);
+        entity.set当前頁(reportSourceWriter.pageCount().value());
+        if (entity.getCount() % PAGECOUNT > 0) {
+            entity.set総頁((entity.getCount() - (entity.getCount() % PAGECOUNT)) / PAGECOUNT + 1);
+        } else {
+            entity.set総頁(entity.getCount() / PAGECOUNT);
+        }
         entity.set被保険者区分(HihokenshaKubunCode.toValue(entity.get被保険者区分()).get名称());
         entity.set認定申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時()).get名称());
         entity.set認定申請区分_法令(NinteiShinseiHoreiCode.toValue(entity.get認定申請区分_法令()).toRString());
