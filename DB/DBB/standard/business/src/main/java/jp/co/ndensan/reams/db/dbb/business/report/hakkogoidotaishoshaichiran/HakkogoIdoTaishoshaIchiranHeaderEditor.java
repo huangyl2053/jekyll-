@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.hakkogoidotaishoshaichiran.Hakko
  *
  * @reamsid_L DBB-0690-030 surun
  */
-public class HeaderEditor implements IHakkogoIdoTaishoshaIchiranEditor {
+public class HakkogoIdoTaishoshaIchiranHeaderEditor implements IHakkogoIdoTaishoshaIchiranEditor {
 
     private final HakkogoIdoTaishoshaIchiranItem item;
 
@@ -21,7 +21,7 @@ public class HeaderEditor implements IHakkogoIdoTaishoshaIchiranEditor {
      *
      * @param item HakkogoIdoTaishoshaIchiranItem
      */
-    public HeaderEditor(HakkogoIdoTaishoshaIchiranItem item) {
+    public HakkogoIdoTaishoshaIchiranHeaderEditor(HakkogoIdoTaishoshaIchiranItem item) {
         this.item = item;
     }
 
