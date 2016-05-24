@@ -26,9 +26,12 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class TokubetsuChoshuKaishiProperty
         extends ReportPropertyBase<TokubetsuChoshuKaishiSource> {
 
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString(
-            TokubetsuChoshuKaishiSource.ReportSourceFields.listLower_1.name()), new RString(
-                    TokubetsuChoshuKaishiSource.ReportSourceFields.listLower_11.name())));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(
+            Arrays.asList(new RString(TokubetsuChoshuKaishiSource.ReportSourceFields.kaipage1.name()),
+                    new RString(TokubetsuChoshuKaishiSource.ReportSourceFields.kaipage2.name()),
+                    new RString(TokubetsuChoshuKaishiSource.ReportSourceFields.kaipage3.name()),
+                    new RString(TokubetsuChoshuKaishiSource.ReportSourceFields.kaipage4.name()),
+                    new RString(TokubetsuChoshuKaishiSource.ReportSourceFields.kaipage5.name())));
 
     /**
      * コンストラクタです。

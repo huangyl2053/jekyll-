@@ -391,7 +391,7 @@ public class KinkyujiShisetuRyoyohiPanel {
      */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnGoukeiInfo(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.合計費用).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -426,7 +426,7 @@ public class KinkyujiShisetuRyoyohiPanel {
      */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnShokujiHiyo(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
-        return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.食事).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.食事費用).respond();
     }
 
     /**

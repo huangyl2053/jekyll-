@@ -43,6 +43,7 @@ public class TokubetsuChoshuKaishiPrintService {
 
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
+    private static final int NUM_1 = -1;
     private static final int NUM5 = 5;
 
     /**
@@ -96,8 +97,6 @@ public class TokubetsuChoshuKaishiPrintService {
                     出力項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
                     if (並び順.get設定項目リスト().get(i).is改頁項目()) {
                         改頁項目リスト.add(並び順.get設定項目リスト().get(i).get項目名());
-                    } else {
-                        改頁項目リスト.add(RString.EMPTY);
                     }
                 } else {
                     break;
@@ -141,25 +140,25 @@ public class TokubetsuChoshuKaishiPrintService {
          *
          * @param entity1 EditedHonSanteiTsuchiShoKyotsu
          * @param entity2 EditedHonSanteiTsuchiShoKyotsu
-         * @return 結果
+         * @return 結果 int
          */
         @Override
         public int compare(EditedHonSanteiTsuchiShoKyotsu entity1, EditedHonSanteiTsuchiShoKyotsu entity2) {
             int flag = entity1.get通知書番号().compareTo(entity2.get通知書番号());
-            if (flag == 0) {
+            if (flag == NUM0) {
                 if (entity1.get編集後宛先() == null) {
-                    flag = 1;
+                    flag = NUM1;
                 } else if (entity2.get編集後宛先() == null) {
-                    flag = -1;
+                    flag = NUM_1;
                 } else {
                     flag = entity1.get編集後宛先().get郵便番号().compareTo(entity2.get編集後宛先().get郵便番号());
                 }
             }
-            if (flag == 0) {
+            if (flag == NUM0) {
                 if (entity1.get編集後個人() == null) {
-                    flag = 1;
+                    flag = NUM1;
                 } else if (entity1.get編集後個人() == null) {
-                    flag = -1;
+                    flag = NUM_1;
                 } else {
                     flag = entity1.get編集後個人().get名称().getName().value().compareTo(entity2.get編集後個人().get名称().getName().value());
                 }

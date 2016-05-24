@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishukeihyoshinsei
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -58,12 +57,7 @@ public class ShinsakaishukeihyoShinseiEditor implements IShinsakaishukeihyoShins
         printTimeStampSb.append(DATE_秒);
         source.printTimeStamp = printTimeStampSb.toRString();
         source.shichosonName = item.get市町村名称();
-        source.chushutsuKikan = dateFormat(item.get抽出期間());
+        source.chushutsuKikan = item.get抽出期間();
         return source;
-    }
-
-    private RString dateFormat(RString date) {
-        return RString.isNullOrEmpty(date) ? RString.EMPTY : new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 }

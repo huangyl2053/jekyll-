@@ -302,7 +302,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKihoninfo(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.基本情報).respond();
     }
 
     /**
@@ -313,7 +313,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKyufuMeisai(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -324,7 +324,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnTokuteiShinryouhi(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.特定診療費).respond();
     }
 
     /**
@@ -335,7 +335,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnServiceKeikakuhi(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.サービス計画費).respond();
     }
 
     /**
@@ -346,7 +346,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnGokeiinfo(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -358,7 +358,7 @@ public class TokuteiNyushoshaHiyoPanel {
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKyufuhiMeisaiJutoku(
             TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -370,7 +370,7 @@ public class TokuteiNyushoshaHiyoPanel {
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKinkyujiShoteiShikan(
             TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -381,7 +381,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKinkyujiShisetsu(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -392,7 +392,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnShokujihiyo(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.食事費用).respond();
     }
 
     /**
@@ -403,7 +403,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnSeikyugaku(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.請求額集計).respond();
     }
 
     /**
@@ -414,6 +414,6 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnShafuku(TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.社福軽減額).respond();
     }
 }

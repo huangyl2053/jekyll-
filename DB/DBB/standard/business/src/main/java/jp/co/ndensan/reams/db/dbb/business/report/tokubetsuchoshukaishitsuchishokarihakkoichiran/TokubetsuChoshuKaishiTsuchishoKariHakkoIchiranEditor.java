@@ -53,19 +53,19 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
      * @param 帳票作成日時 YMDHMS
      * @param 連番 int
      * @param association Association
-     * @param 改頁項目リスト List<RString>
      * @param 出力項目リスト List<RString>
+     * @param 改頁項目リスト List<RString>
      */
     public TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity,
             FlexibleYear 調定年度, YMDHMS 帳票作成日時,
-            int 連番, Association association, List<RString> 改頁項目リスト, List<RString> 出力項目リスト) {
+            int 連番, Association association, List<RString> 出力項目リスト, List<RString> 改頁項目リスト) {
         this.編集後仮算定通知書共通情報entity = 編集後仮算定通知書共通情報entity;
         this.調定年度 = 調定年度;
         this.帳票作成日時 = 帳票作成日時;
         this.連番 = 連番;
         this.association = association;
-        this.改頁項目リスト = 改頁項目リスト;
         this.出力項目リスト = 出力項目リスト;
+        this.改頁項目リスト = 改頁項目リスト;
     }
 
     @Override
@@ -102,23 +102,33 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     private void set出力改頁(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source) {
         if (NUM0 < 出力項目リスト.size()) {
             source.shutsuryokujun1 = 出力項目リスト.get(NUM0);
-            source.kaipage1 = 改頁項目リスト.get(NUM0);
+            if (NUM0 < 改頁項目リスト.size()) {
+                source.kaipage1 = 改頁項目リスト.get(NUM0);
+            }
         }
         if (NUM1 < 出力項目リスト.size()) {
             source.shutsuryokujun2 = 出力項目リスト.get(NUM1);
-            source.kaipage2 = 改頁項目リスト.get(NUM1);
+            if (NUM1 < 改頁項目リスト.size()) {
+                source.kaipage2 = 改頁項目リスト.get(NUM1);
+            }
         }
         if (NUM2 < 出力項目リスト.size()) {
             source.shutsuryokujun3 = 出力項目リスト.get(NUM2);
-            source.kaipage3 = 改頁項目リスト.get(NUM2);
+            if (NUM2 < 改頁項目リスト.size()) {
+                source.kaipage3 = 改頁項目リスト.get(NUM2);
+            }
         }
         if (NUM3 < 出力項目リスト.size()) {
             source.shutsuryokujun4 = 出力項目リスト.get(NUM3);
-            source.kaipage4 = 改頁項目リスト.get(NUM3);
+            if (NUM3 < 改頁項目リスト.size()) {
+                source.kaipage4 = 改頁項目リスト.get(NUM3);
+            }
         }
         if (NUM4 < 出力項目リスト.size()) {
             source.shutsuryokujun5 = 出力項目リスト.get(NUM4);
-            source.kaipage5 = 改頁項目リスト.get(NUM4);
+            if (NUM4 < 改頁項目リスト.size()) {
+                source.kaipage5 = 改頁項目リスト.get(NUM4);
+            }
         }
     }
 

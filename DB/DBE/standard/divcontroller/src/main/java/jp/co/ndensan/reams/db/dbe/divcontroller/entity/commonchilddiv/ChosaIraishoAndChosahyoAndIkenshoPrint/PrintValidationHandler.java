@@ -102,10 +102,8 @@ public class PrintValidationHandler {
             }
 
             RString key = div.getRadTeishutsuKigen().getSelectedKey();
-            if (KEY2.equals(key)) {
-                if (div.getTxtKyotsuDay().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "共通日付"), div.getTxtKyotsuDay()));
-                }
+            if (KEY2.equals(key) && div.getTxtKyotsuDay().getValue() == null) {
+                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "共通日付"), div.getTxtKyotsuDay()));
             }
         }
         return validPairs;

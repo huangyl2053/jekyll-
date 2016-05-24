@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.ninteichosajohohyo02;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosajohohyo.NinteiChosaJohohyo02ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosajohohyo.NinteiChosaJohohyoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 認定調査票情報のEditorです。
@@ -43,6 +46,7 @@ public class NinteiChosaJohohyo02Editor implements INinteiChosaJohohyo02Editor {
 
     private NinteiChosaJohohyo02ReportSource editSource_02(NinteiChosaJohohyo02ReportSource source) {
         source.hokenshaNo = entity.get保険者番号();
+        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), entity.get被保険者番号());
         source.hihokenshaNo = entity.get被保険者番号();
         source.hihokenshaName = entity.get被保険者氏名();
         source.shinseiGengo = entity.get申請日_元号();

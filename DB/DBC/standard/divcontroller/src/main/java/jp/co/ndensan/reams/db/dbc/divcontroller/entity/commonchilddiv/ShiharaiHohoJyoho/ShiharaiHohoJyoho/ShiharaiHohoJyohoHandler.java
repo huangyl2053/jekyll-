@@ -187,6 +187,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanShitenCode().clearDomain();
         div.getTxtYokinShubetsu().clearValue();
         div.getTxtKozaNo().clearValue();
+        div.getTxtTenban().clearValue();
         div.getTxtKinyuKikanName().clearValue();
         div.getTxtMeigininKana().clearDomain();
         div.getTtxtMeigininKanji().clearDomain();
@@ -321,7 +322,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        div.getTxtTenban().setDisplayNone(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
@@ -335,7 +336,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        div.getTxtTenban().setDisplayNone(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
@@ -348,7 +349,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
-        div.getTxtTenban().setReadOnly(true);
+        div.getTxtTenban().setDisplayNone(true);
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
@@ -362,6 +363,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKeiyakuCode().setReadOnly(true);
         div.getTxtKeiyakuName().setReadOnly(true);
         div.getTxtKinyuKikanCode1().setReadOnly(true);
+        div.getTxtTenban1().setDisplayNone(true);
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
@@ -390,14 +392,13 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKeiyakuCode().setReadOnly(true);
             div.getTxtKeiyakuName().setReadOnly(true);
             div.getTxtKinyuKikanCode1().setReadOnly(true);
-            div.getTxtTenban().setReadOnly(true);
+            div.getTxtTenban1().setDisplayNone(true);
             div.getTxtKozaNo1().setReadOnly(true);
             div.getTxtKinyuKikanName1().setReadOnly(true);
             div.getTxtMeigininKana1().setReadOnly(true);
             div.getTxtMeigininKanji1().setReadOnly(true);
         }
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
-        div.getTxtTenban1().setReadOnly(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
     }
 
@@ -409,7 +410,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKeiyakuName().setReadOnly(true);
         div.getTxtKinyuKikanCode1().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
-        div.getTxtTenban1().setReadOnly(true);
+        div.getTxtTenban1().setDisplayNone(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
         div.getTxtKinyuKikanName1().setReadOnly(true);
@@ -500,6 +501,7 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
             div.getTxtKozaNo().setReadOnly(true);
+            div.getTxtTenban().setDisplayNone(true);
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
@@ -526,6 +528,7 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
             div.getTxtKozaNo().setReadOnly(true);
+            div.getTxtTenban().setDisplayNone(true);
             div.getTxtMeigininKana().setReadOnly(true);
             div.getTtxtMeigininKanji().setReadOnly(true);
         }
