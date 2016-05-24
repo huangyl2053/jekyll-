@@ -45,8 +45,8 @@ public class KagoKetteiKohifutanshaInReport extends
     @Override
     public void writeBy(ReportSourceWriter<KagoKetteiKohifutanshaInSource> writer) {
         for (KagoKetteiKohifutanshaInItem target : targets) {
-            IKagoKetteiKohifutanshaInEditor headerEditor = new HeaderEditor(target);
-            IKagoKetteiKohifutanshaInEditor bodyEditor = new BodyEditor(target);
+            IKagoKetteiKohifutanshaInEditor headerEditor = new KagoKetteiKohifutanshaInHeaderEditor(target);
+            IKagoKetteiKohifutanshaInEditor bodyEditor = new KagoKetteiKohifutanshaInBodyEditor(target);
             IKagoKetteiKohifutanshaInBuilder builder
                     = new KagoKetteiKohifutanshaInBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);

@@ -57,20 +57,20 @@ public class GenNendoHonsanteiIdouHeaderEditor implements IGenNendoHonsanteiIdou
                 期の表記.add(RString.EMPTY);
             }
         }
-        source.fuchoKi1 = 期の表記.get(NUM_1);
-        source.fuchoKi2 = 期の表記.get(NUM_2);
-        source.fuchoKi3 = 期の表記.get(NUM_3);
-        source.fuchoKi4 = 期の表記.get(NUM_4);
-        source.fuchoKi5 = 期の表記.get(NUM_5);
-        source.fuchoKi6 = 期の表記.get(NUM_6);
-        source.fuchoKi7 = 期の表記.get(NUM_7);
-        source.fuchoKi8 = 期の表記.get(NUM_8);
-        source.fuchoKi9 = 期の表記.get(NUM_9);
-        source.fuchoKi10 = 期の表記.get(NUM_10);
-        source.fuchoKi11 = 期の表記.get(NUM_11);
-        source.fuchoKi12 = 期の表記.get(NUM_12);
-        source.fuchoKi13 = 期の表記.get(NUM_13);
-        source.fuchoKi14 = 期の表記.get(NUM_14);
+        source.fuchoKi1 = 期の表記.get(NUM_14);
+        source.fuchoKi2 = 期の表記.get(NUM_13);
+        source.fuchoKi3 = 期の表記.get(NUM_12);
+        source.fuchoKi4 = 期の表記.get(NUM_11);
+        source.fuchoKi5 = 期の表記.get(NUM_10);
+        source.fuchoKi6 = 期の表記.get(NUM_9);
+        source.fuchoKi7 = 期の表記.get(NUM_8);
+        source.fuchoKi8 = 期の表記.get(NUM_7);
+        source.fuchoKi9 = 期の表記.get(NUM_6);
+        source.fuchoKi10 = 期の表記.get(NUM_5);
+        source.fuchoKi11 = 期の表記.get(NUM_4);
+        source.fuchoKi12 = 期の表記.get(NUM_3);
+        source.fuchoKi13 = 期の表記.get(NUM_2);
+        source.fuchoKi14 = 期の表記.get(NUM_1);
         return source;
     }
 }

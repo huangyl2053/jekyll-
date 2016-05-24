@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojyuminhyokoukiu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojuminhyo.KaigoJuminhyoMapperParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
 
 /**
@@ -23,6 +23,6 @@ public interface IkaigojyuminhyokoukiuMapper {
      * @param mapperParameter 介護住民票個別事項連携情報を特定するためのMyBatis用パラメータ
      * @return List<KaigoJuminhyoRelateEntity>
      */
-    List<KaigoJuminhyoRelateEntity> getKaigoJuminhyoEntity(KaigoJuminhyoMapperParameter mapperParameter);
+    List<KaigoJuminhyoRelateEntity> getKaigoJuminhyoEntity(KaiGoJuminHyokouKiuMapperParameter mapperParameter);
 
 }

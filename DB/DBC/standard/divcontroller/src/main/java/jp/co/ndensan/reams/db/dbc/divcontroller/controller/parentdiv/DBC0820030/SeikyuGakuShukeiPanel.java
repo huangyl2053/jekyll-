@@ -70,8 +70,7 @@ public class SeikyuGakuShukeiPanel {
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
         RDate 申請日 = meisaiPar.get申請日();
-        //TODO  給付率
-        Decimal 給付率 = new Decimal("20");
+        Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
         ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);

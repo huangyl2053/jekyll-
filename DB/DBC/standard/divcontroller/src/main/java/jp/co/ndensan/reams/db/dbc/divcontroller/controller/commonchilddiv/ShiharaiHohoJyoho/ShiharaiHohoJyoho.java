@@ -199,11 +199,11 @@ public class ShiharaiHohoJyoho {
         SikyuSinseiJyohoParameter 支給申請情報 = ViewStateHolder.get(ViewStateKeys.支給申請情報パラメータ, SikyuSinseiJyohoParameter.class);
         JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
                 getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
-                        createParam(new HihokenshaNo(div.getTxtKeiyakuNo().getValue()),
+                        createParam(支給申請情報.getHihokenshaNo() == null ? HihokenshaNo.EMPTY : new HihokenshaNo(支給申請情報.getHihokenshaNo().value()),
                                 支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
                                 支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),
-                                支給申請情報.getKeiyakuNo() == null ? RString.EMPTY : 支給申請情報.getKeiyakuNo()));
-        getHandler(div).受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);
+                                div.getTxtKeiyakuNo() == null ? RString.EMPTY : div.getTxtKeiyakuNo().getValue()));
+        getHandler(div).受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, RString.EMPTY);
         response.data = div;
         return response;
     }

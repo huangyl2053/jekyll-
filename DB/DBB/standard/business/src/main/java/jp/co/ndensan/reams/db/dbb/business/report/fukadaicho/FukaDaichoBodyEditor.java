@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
  *
  * @reamsid_L DBB-9100-030 surun
  */
-class BodyEditor implements IFukaDaichoEditor {
+class FukaDaichoBodyEditor implements IFukaDaichoEditor {
 
     private final FukaDaichoItem item;
 
-    protected BodyEditor(FukaDaichoItem item) {
+    protected FukaDaichoBodyEditor(FukaDaichoItem item) {
         this.item = item;
     }
 
