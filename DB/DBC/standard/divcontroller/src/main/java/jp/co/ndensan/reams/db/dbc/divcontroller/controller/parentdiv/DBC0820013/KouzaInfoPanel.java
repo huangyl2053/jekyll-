@@ -71,13 +71,9 @@ public class KouzaInfoPanel {
         } else if (修正.equals(処理モード)) {
             handler.load申請共通エリア(サービス年月, 整理番号, 修正);
         } else if (削除.equals(処理モード)) {
-            handler.load申請共通エリア(null, null, 参照);
+            handler.load申請共通エリア(サービス年月, 整理番号, 参照);
         }
         SikyuSinseiJyohoParameter param = new SikyuSinseiJyohoParameter();
-        if (登録.equals(処理モード)) {
-            div.getPnlCommon().getCcdShinseiNaiyo().initialize(param, 登録);
-            return ResponseData.of(div).setState(DBC0820013StateName.登録修正モード);
-        }
         param.setShikibetsuCode(識別コード);
         param.setHihokenshaNo(支給申請情報.get被保険者番号());
         param.setShikyushinseiServiceYM(支給申請情報.getサービス提供年月());
