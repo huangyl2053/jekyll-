@@ -193,8 +193,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnFree(KyuhuhiMeisaiJutokuPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
@@ -206,14 +205,12 @@ public class KyuhuhiMeisaiJutokuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る)
-                        .parameter(new RString("一覧に戻る"));
+                return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る)
-                    .parameter(new RString("一覧に戻る"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.一覧に戻る).respond();
         }
         return createResponse(div);
     }
@@ -289,7 +286,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKihonJoho(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.基本情報).respond();
     }
 
     /**
@@ -300,7 +297,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKyufuhiMeisai(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -311,7 +308,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnTokuteiShiryohi(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.特定診療費).respond();
     }
 
     /**
@@ -322,7 +319,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnServicePlanhi(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.サービス計画費).respond();
     }
 
     /**
@@ -333,7 +330,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnTokuteiNyushoshaHi(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.特定入所者費用).respond();
     }
 
     /**
@@ -344,18 +341,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnGokeiJoho(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
-    }
-
-    /**
-     * 「給付費明細（住特）」ボタン
-     *
-     * @param div KyuhuhiMeisaiJutokuPanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnJuToku(KyuhuhiMeisaiJutokuPanelDiv div) {
-        getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -366,7 +352,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKinkyujiShoteiShikan(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -377,7 +363,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnKinkyuShisetsuRyoyouhi(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -388,7 +374,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnShokujiHi(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.食事費用).respond();
     }
 
     /**
@@ -399,7 +385,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnShiseigakuShukei(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.請求額集計).respond();
     }
 
     /**
@@ -410,7 +396,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnShafukuGahenGaku(KyuhuhiMeisaiJutokuPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.社福軽減額).respond();
     }
 
     private KyuhuhiMeisaiJutokuPanelHandler getHandler(KyuhuhiMeisaiJutokuPanelDiv div) {
