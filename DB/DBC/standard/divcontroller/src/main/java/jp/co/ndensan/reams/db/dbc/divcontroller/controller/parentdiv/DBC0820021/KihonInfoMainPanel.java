@@ -51,6 +51,7 @@ public class KihonInfoMainPanel {
     private static final RString 基本情報 = new RString("基本情報");
     private static final RString 日数 = new RString("入所(院)実日数＋外泊日数");
     private static final RString 期間日数 = new RString("入所(院)日・退所(院)日の間に収まる日数");
+    private static final RString 固定明細番号 = new RString("0001");
     private static final int NUM_1 = 1;
 
     /**
@@ -76,13 +77,16 @@ public class KihonInfoMainPanel {
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
         ViewStateHolder.put(ViewStateKeys.申請年月日, 申請日);
         getHandler(div).put様式番号ViewState();
-
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
+                    被保険者番号, サービス年月, 申請日, 整理番号, 事業者番号, 様式番号, 固定明細番号);
+            ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
+        }
         ShoukanharaihishinseikensakuParameter 償還払費申請検索 = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 ShoukanharaihishinseikensakuParameter.class);
         SikibetuNokennsakuki sikibetuKey = new SikibetuNokennsakuki(償還払費申請検索.getYoshikiNo(),
                 償還払費申請検索.getServiceTeikyoYM());
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, sikibetuKey);
-
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
@@ -130,10 +134,12 @@ public class KihonInfoMainPanel {
             HokenKyufuRitsu 保険給付率 = JutakuKaishuJizenShinsei.createInstance().getKyufuritsu(被保険者番号, サービス年月);
             if (保険給付率 != null) {
                 div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(保険給付率.value());
+                ViewStateHolder.put(ViewStateKeys.給付率, 保険給付率.value());
             } else {
                 div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(null);
             }
         }
+
         return ResponseData.of(div).respond();
     }
 

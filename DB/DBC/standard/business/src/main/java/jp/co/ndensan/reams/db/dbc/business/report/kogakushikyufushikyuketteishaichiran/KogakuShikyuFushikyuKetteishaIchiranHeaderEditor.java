@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyufushikyukette
  *
  * @reamsid_L DBC-0980-500 surun
  */
-public class HeaderEditor implements IKogakuShikyuFushikyuKetteishaIchiranEditor {
+public class KogakuShikyuFushikyuKetteishaIchiranHeaderEditor implements IKogakuShikyuFushikyuKetteishaIchiranEditor {
 
     private final KogakuShikyuFushikyuKetteishaIchiranItem item;
 
@@ -21,7 +21,7 @@ public class HeaderEditor implements IKogakuShikyuFushikyuKetteishaIchiranEditor
      *
      * @param item KogakuShikyuFushikyuKetteishaIchiranItem
      */
-    public HeaderEditor(KogakuShikyuFushikyuKetteishaIchiranItem item) {
+    public KogakuShikyuFushikyuKetteishaIchiranHeaderEditor(KogakuShikyuFushikyuKetteishaIchiranItem item) {
         this.item = item;
     }
 
