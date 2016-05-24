@@ -6,12 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.gennendoidohakkoichiran;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,16 +21,16 @@ public class HeaderEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIch
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 賦課年度;
     private final RString 帳票作成日時;
-    private final RString 出力順ID;
     private final RString 地方公共団体コード;
     private final RString 市町村名;
 
-    private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
-    private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
     private static final RString 所得段階名 = new RString("所得段階");
+
+    private final RString 並び順の１件目;
+    private final RString 並び順の２件目;
+    private final RString 並び順の３件目;
+    private final RString 並び順の４件目;
+    private final RString 並び順の５件目;
 
     /**
      * コンストラクタです。
@@ -46,9 +41,13 @@ public class HeaderEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIch
         this.編集後本算定通知書共通情報 = inputEntity.get編集後本算定通知書共通情報();
         this.賦課年度 = inputEntity.get賦課年度();
         this.帳票作成日時 = inputEntity.get帳票作成日時();
-        this.出力順ID = inputEntity.get出力順ID();
         this.地方公共団体コード = inputEntity.get地方公共団体コード();
         this.市町村名 = inputEntity.get市町村名();
+        this.並び順の１件目 = inputEntity.get並び順の１件目();
+        this.並び順の２件目 = inputEntity.get並び順の２件目();
+        this.並び順の３件目 = inputEntity.get並び順の３件目();
+        this.並び順の４件目 = inputEntity.get並び順の４件目();
+        this.並び順の５件目 = inputEntity.get並び順の５件目();
     }
 
     @Override
@@ -69,30 +68,6 @@ public class HeaderEditor implements IHonsanteiGennendoIdoNonyutsuchishoHakkoIch
     }
 
     private void set出力帳票entities(NonyuTsuchIchiranSource source) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200016.getReportId(), Long.valueOf(出力順ID.toString()));
-        int i = 0;
-        RString 並び順の１件目 = RString.EMPTY;
-        RString 並び順の２件目 = RString.EMPTY;
-        RString 並び順の３件目 = RString.EMPTY;
-        RString 並び順の４件目 = RString.EMPTY;
-        RString 並び順の５件目 = RString.EMPTY;
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (i == NUM_0) {
-                    並び順の１件目 = item.get項目名();
-                } else if (i == NUM_1) {
-                    並び順の２件目 = item.get項目名();
-                } else if (i == NUM_2) {
-                    並び順の３件目 = item.get項目名();
-                } else if (i == NUM_3) {
-                    並び順の４件目 = item.get項目名();
-                } else if (i == NUM_4) {
-                    並び順の５件目 = item.get項目名();
-                }
-                i = i + 1;
-            }
-        }
         source.shutsuryokujun1 = 並び順の１件目;
         source.shutsuryokujun2 = 並び順の２件目;
         source.shutsuryokujun3 = 並び順の３件目;

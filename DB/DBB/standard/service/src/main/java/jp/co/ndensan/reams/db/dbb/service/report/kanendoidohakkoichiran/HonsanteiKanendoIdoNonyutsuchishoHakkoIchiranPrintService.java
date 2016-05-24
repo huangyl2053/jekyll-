@@ -64,7 +64,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
         RString 地方公共団体コード = association.get地方公共団体コード().value();
         RString 市町村名 = association.get市町村名();
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200027.getReportId(),
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200017.getReportId(),
                         Long.valueOf(出力順ID.toString()));
         int i = 0;
         RString 並び順の１件目 = RString.EMPTY;
