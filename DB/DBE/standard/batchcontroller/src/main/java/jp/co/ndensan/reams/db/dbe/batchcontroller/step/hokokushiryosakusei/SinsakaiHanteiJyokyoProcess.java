@@ -193,7 +193,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 RString.EMPTY,
                 toRString(非該当計 - 非該当非該当被保険者数),
                 非該当計 == 0 || 非該当計 == 非該当非該当被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(非該当計 - 非該当非該当被保険者数).divide(非該当計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(非該当計 - 非該当非該当被保険者数).divide(非該当計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -245,7 +245,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要支援1非該当被保険者数),
                 toRString(要支援1計 - 要支援1非該当被保険者数 - 要支援1要支援1被保険者数),
                 要支援1計 == 0 || 要支援1計 == 要支援1要支援1被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要支援1計 - 要支援1要支援1被保険者数).divide(要支援1計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(要支援1計 - 要支援1要支援1被保険者数).divide(要支援1計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -297,7 +297,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要支援2非該当被保険者数 + 要支援2要支援1被保険者数),
                 toRString(要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数),
                 要支援2計 == 0 || 要支援2計 == 要支援2要支援2被保険者数 + 要支援2要介護1被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数).divide(要支援2計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数).divide(要支援2計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -349,7 +349,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要介護1非該当被保険者数 + 要介護1要支援1被保険者数),
                 toRString(要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数),
                 要介護1計 == 0 || 要介護1計 == 要介護1要支援2被保険者数 + 要介護1要介護1被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護1計 - 要介護1要支援2被保険者数 - 要介護1要介護1被保険者数).divide(要介護1計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(要介護1計 - 要介護1要支援2被保険者数 - 要介護1要介護1被保険者数).divide(要介護1計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -401,7 +401,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要介護2非該当被保険者数 + 要介護2要支援1被保険者数 + 要介護2要支援2被保険者数 + 要介護2要介護1被保険者数),
                 toRString(要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数),
                 要介護2計 == 0 || 要介護2計 == 要介護2要介護2被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護2計 - 要介護2要介護2被保険者数).divide(要介護2計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(要介護2計 - 要介護2要介護2被保険者数).divide(要介護2計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -454,7 +454,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                         + 要介護3要支援2被保険者数 + 要介護3要介護1被保険者数 + 要介護3要介護2被保険者数),
                 toRString(要介護3要介護4被保険者数 + 要介護3要介護5被保険者数),
                 要介護3計 == 0 || 要介護3計 == 要介護3要介護3被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護3計 - 要介護3要介護3被保険者数).divide(要介護3計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(要介護3計 - 要介護3要介護3被保険者数).divide(要介護3計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -506,7 +506,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要介護4計 - 要介護4要介護4被保険者数 - 要介護4要介護5被保険者数),
                 toRString(要介護4要介護5被保険者数),
                 要介護4計 == 0 || 要介護4計 == 要介護4要介護4被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護4計 - 要介護4要介護4被保険者数).divide(要介護4計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(要介護4計 - 要介護4要介護4被保険者数).divide(要介護4計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -558,7 +558,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要介護5計 - 要介護5要介護5被保険者数),
                 RString.EMPTY,
                 要介護5計 == 0 || 要介護5計 == 要介護5要介護5被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護5計 - 要介護5要介護5被保険者数).divide(要介護5計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(要介護5計 - 要介護5要介護5被保険者数).divide(要介護5計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -659,7 +659,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 new RString(計軽度変更者数),
                 new RString(計重度変更者数),
                 計計 == 0 || 計判定変更者数 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(計判定変更者数).divide(計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(計判定変更者数).divide(計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -792,21 +792,21 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 計,
                 new RString("割合"),
                 合計計 == 0 || 二次判定非該当計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定非該当計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定非該当計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要支援1計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要支援1計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要支援1計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要支援2計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要支援2計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要支援2計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要介護1計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護1計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護1計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要介護2計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護2計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護2計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要介護3計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護3計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護3計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要介護4計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護4計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護4計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 合計計 == 0 || 二次判定要介護5計 == 0 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(二次判定要介護5計).divide(合計計).multiply(割合)) + パーセント),
+                        FORMAT.format(new Decimal(二次判定要介護5計).divide(合計計).multiply(割合).roundHalfUpTo(1)) + パーセント),
                 new RString("100%"),
                 RString.EMPTY,
                 RString.EMPTY,
