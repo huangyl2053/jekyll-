@@ -64,7 +64,6 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         printTimeStamp.append(DATE_分);
         printTimeStamp.append(String.format("%02d", entity.getPrintTimeStamp().getSecond()));
         printTimeStamp.append(DATE_秒);
-        printTimeStamp.append(RString.HALF_SPACE);
         source.hakkoYMD = printTimeStamp.toRString();
         RStringBuilder 頁数 = new RStringBuilder();
         頁数.append(entity.get当前頁());
