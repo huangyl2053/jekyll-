@@ -111,13 +111,13 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
             source.list3_2 = 計算後情報_宛名_口座_更正後Entity.get賦課年度().toDateString();
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額()) {
-            source.list2_3 = new RString(計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額().toString());
+            source.list3_3 = new RString(計算後情報_宛名_口座_更正後Entity.get確定介護保険料_年額().toString());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額()) {
-            source.list2_4 = new RString(計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額().toString());
+            source.list3_4 = new RString(計算後情報_宛名_口座_更正後Entity.get減免前介護保険料_年額().toString());
         }
         if (null != 計算後情報_宛名_口座_更正後Entity.get減免額()) {
-            source.list2_5 = new RString(計算後情報_宛名_口座_更正後Entity.get減免額().toString());
+            source.list3_5 = new RString(計算後情報_宛名_口座_更正後Entity.get減免額().toString());
         }
         set月別取得段階(計算後情報_宛名_口座_更正後Entity, source);
         if (null != 計算後情報_宛名_口座_更正後Entity.get普徴歳出還付額()) {
