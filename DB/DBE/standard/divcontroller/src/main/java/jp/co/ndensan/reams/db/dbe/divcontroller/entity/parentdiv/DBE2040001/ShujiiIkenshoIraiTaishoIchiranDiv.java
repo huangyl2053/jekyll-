@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTask
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -32,6 +33,8 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     private ikenshoiraiselectDiv ikenshoiraiselect;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
+    @JsonProperty("hiddenIuputModel")
+    private RString hiddenIuputModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,6 +97,24 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     }
 
     /*
+     * gethiddenIuputModel
+     * @return hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public RString getHiddenIuputModel() {
+        return hiddenIuputModel;
+    }
+
+    /*
+     * sethiddenIuputModel
+     * @param hiddenIuputModel hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public void setHiddenIuputModel(RString hiddenIuputModel) {
+        this.hiddenIuputModel = hiddenIuputModel;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -109,6 +130,16 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     @JsonIgnore
     public void  setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
         this.getIkenshoiraiselect().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIraishoToOutputDialog() {
+        return this.getIkenshoiraiselect().getBtnIraishoToOutputDialog();
+    }
+
+    @JsonIgnore
+    public void  setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
+        this.getIkenshoiraiselect().setBtnIraishoToOutputDialog(btnIraishoToOutputDialog);
     }
 
     @JsonIgnore
