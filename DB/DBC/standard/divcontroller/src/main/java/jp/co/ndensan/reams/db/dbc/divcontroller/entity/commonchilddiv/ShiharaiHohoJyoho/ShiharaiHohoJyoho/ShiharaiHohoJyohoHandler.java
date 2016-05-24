@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.Keiyak
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -117,9 +119,11 @@ public class ShiharaiHohoJyohoHandler {
                 div.getRadJyryoinin().setSelectedKey(支払方法区分.getコード());
                 JuryoininKeiyakuJigyosha 受領委任契約事業者 = ShiharaiHohoJyohoFinder.createInstance().
                         getKeiyakuJigyosya(new KeiyakushaParameter(null, null, null, null).
-                                createParam(支給申請情報.getHihokenshaNo(), 支給申請情報.
-                                        getShikyushinseiServiceYM(), 支給申請情報.getShikyushinseiSeiriNo(), 支給申請情報.getKeiyakuNo()));
-                受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者);
+                                createParam(支給申請情報.getHihokenshaNo() == null ? HihokenshaNo.EMPTY : new HihokenshaNo(支給申請情報.getHihokenshaNo().value()),
+                                        支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
+                                        支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),
+                                        div.getTxtKeiyakuNo() == null ? RString.EMPTY : div.getTxtKeiyakuNo().getValue()));
+                受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, new RString("初期"));
             }
         }
         if ((業務内区分コード.equals(new KamokuCode(償還払給付費)) || 業務内区分コード.equals(new KamokuCode(高額給付費)))) {
@@ -613,10 +617,14 @@ public class ShiharaiHohoJyohoHandler {
      *
      * @param 支給申請情報 支給申請情報
      * @param 受領委任契約事業者 受領委任契約事業者
+     * @param 表示フラグ 表示フラグ
      */
-    public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報, JuryoininKeiyakuJigyosha 受領委任契約事業者) {
+    public void 受領委任払いエリアの初期化(SikyuSinseiJyohoParameter 支給申請情報,
+            JuryoininKeiyakuJigyosha 受領委任契約事業者, RString 表示フラグ) {
 
-        div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
+        if (!表示フラグ.isNullOrEmpty()) {
+            div.getTxtKeiyakuNo().setValue(支給申請情報.getKeiyakuNo());
+        }
         div.getRadJyryoinin().setSelectedKey(new RString("3"));
         div.getTxtKeiyakuNo().setDisabled(false);
         div.getBtnSelect().setDisabled(false);
