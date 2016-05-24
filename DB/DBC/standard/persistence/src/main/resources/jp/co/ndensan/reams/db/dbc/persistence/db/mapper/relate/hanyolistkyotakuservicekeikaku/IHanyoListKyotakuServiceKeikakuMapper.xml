@@ -58,15 +58,21 @@
         DbT3005."rirekiNo"							AS dbT3005履歴番号,
         DbT3005."todokedeKubun"						AS dbT3005届出区分,
         DbT3005."todokedeYMD"						AS dbT3005届出年月日,
+
+        DbT3006."hihokenshaNo"                                          AS dbT3006被保険者番号,
         DbT3006."sakuseiKubunCode"                                          AS dbT3006作成区分コード,
         DbT3006."tekiyoKaishiYMD"						AS dbT3006適用開始年月日,
         DbT3006."tekiyoShuryoYMD"						AS dbT3006適用終了年月日,
+        DbT3006."jigyoshaHenkoYMD"                                      AS dbT3006事業者変更年月日,
+
+        DbT3007."hihokenshaNo"                                          AS dbT3007被保険者番号,
         DbT3007."sakuseiKubunCode"                                          AS dbT3007作成区分コード,
         DbT3007."tekiyoKaishiYMD"						AS dbT3007適用開始年月日,
         DbT3007."tekiyoShuryoYMD"						AS dbT3007適用終了年月日,
         DbT3007."keikakuSakuseiYMD"                                         AS dbT3007計画作成年月日,
         DbT3007."keikakuHenkoYMD"						AS dbT3007計画変更年月日,
         DbT3007."keikakuHenkoJiyu"                                          AS dbT3007変更理由,
+
         DbT3006."keikakuJigyoshaNo"                                         AS dbT3006計画事業者番号,
         DbT7060_Keikaku."jigyoshaName"					AS dbT7060_Keikaku事業者名称,
         DbT3006."itakusakiJigyoshaNo"					AS dbT3006委託先事業者番号,
@@ -244,7 +250,7 @@
                 rgdb. "DbT3006KyotakuKeikakuJigyoshaSakusei"
                 WHERE
                 "tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
-                AND "tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日} 
+                AND "tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日}
                 GROUP BY
                 "hihokenshaNo"
                 ) AS E
