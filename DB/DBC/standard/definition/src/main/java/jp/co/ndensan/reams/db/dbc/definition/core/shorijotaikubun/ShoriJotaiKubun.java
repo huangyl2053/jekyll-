@@ -23,9 +23,9 @@ public enum ShoriJotaiKubun {
      */
     終了("3", "終了"),
     /**
-     * コード:4 名称:処理なし 略称:定義なし
+     * コード:9 名称:処理なし 略称:定義なし
      */
-    処理なし("4", "処理なし");
+    処理なし("9", "処理なし");
 
     private final RString code;
     private final RString fullName;
