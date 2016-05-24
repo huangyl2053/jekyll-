@@ -27,7 +27,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
 
     private final IchijihanteikekkahyoEntity item;
     private final int index;
-    private static final int ten = 10;
+    private static final int TEN = 10;
 
     /**
      * インスタンスを生成します。
@@ -118,7 +118,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         int len = 0;
         while (-1 < 警告コード.indexOf("1", len)) {
             int index1 = 警告コード.indexOf("1", len);
-            rstringBuilder.append(index1 + 1 < ten ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
+            rstringBuilder.append(index1 + 1 < TEN ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
             rstringBuilder.append("、");
             len = index1 + 1;
         }
@@ -140,6 +140,8 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.sabisuName = item.get現在のサービス利用状況名();
         source.sabisuText = item.get現在のサービス状況();
         editSource1(source);
+        editSource2(source);
+        editSource3(source);
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
         return source;
@@ -200,6 +202,9 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         if (index < item.get主治医意見書項目1リスト().size()) {
             source.listshujiiikensho_1 = item.get主治医意見書項目1リスト().get(index);
         }
+    }
+
+    private void editSource2(IchijihanteikekkahyoReportSource source) {
         if (index < item.get主治医意見書項目2リスト().size()) {
             source.listshujiiikensho_2 = item.get主治医意見書項目2リスト().get(index);
         }
@@ -239,6 +244,10 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         if (index < item.get特別な医療3_2リスト().size()) {
             source.listtokubetsunaIryo1_2 = item.get特別な医療3_2リスト().get(index);
         }
+
+    }
+
+    private void editSource3(IchijihanteikekkahyoReportSource source) {
         if (index < item.get特別な医療4_1リスト().size()) {
             source.listtokubetsunaIryo2_1 = item.get特別な医療4_1リスト().get(index);
         }
