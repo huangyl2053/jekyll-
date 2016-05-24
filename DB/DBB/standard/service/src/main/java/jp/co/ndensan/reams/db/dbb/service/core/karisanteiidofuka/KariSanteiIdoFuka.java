@@ -57,7 +57,6 @@ public class KariSanteiIdoFuka {
     private static final RString 連帳 = new RString("1");
     private static final RString カット紙 = new RString("0");
     private static final RString 納入通知書 = new RString("納入通知書の帳票ID");
-    private static final RString 定値_DBB100014 = new RString(ReportIdDBB.DBB100014.getReportId().toString());
     private static final RString 定値_0 = new RString("0");
     private static final RString 表示しない = new RString("0");
     private static final RString 通常出力 = new RString("0");
@@ -226,7 +225,7 @@ public class KariSanteiIdoFuka {
             }
         } else if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())) {
             TyouhyouEntity 納入通知書entity = get納入通知書_帳票ID(調定年度, 算定期, 帳票分類ID, 出力順ID);
-            if (定値_DBB100014.equals(帳票分類ID.value())
+            if (保険料納入通知書_本算定_帳票分類ＩＤ.equals(帳票分類ID.value())
                     && 納入通知書entity == null) {
                 throw new ApplicationException(UrErrorMessages.存在しない
                         .getMessage().replace(納入通知書.toString()).evaluate());
