@@ -30,8 +30,8 @@ public class SeikatsuhogoRelateEntity {
     private FlexibleYearMonth kaigoRyoDairiNofuYM;
     private RString kyugoShisetsuNyuTaishoKubun;
     private FlexibleDate kyugoShisetsuNyutaishoYMD;
-    private FlexibleDate jukyuTeishiKaishiYMD;
-    private FlexibleDate jukyuTeishiShuryoYMD;
+    private RString jukyuTeishiKaishiYMD;
+    private RString jukyuTeishiShuryoYMD;
     private RString fujoShuruiCode;
     private RString fujoShurui;
 }
