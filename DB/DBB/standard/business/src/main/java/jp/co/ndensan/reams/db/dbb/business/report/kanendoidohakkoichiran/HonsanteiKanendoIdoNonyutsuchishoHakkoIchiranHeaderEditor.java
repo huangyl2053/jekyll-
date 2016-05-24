@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichi
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票設計_DBBPR45002_保険料納入通知書（本算定過年度異動）発行一覧表 HeaderEditorです。
+ * 帳票設計_DBBPR45002_保険料納入通知書（本算定過年度異動）発行一覧表 HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranHeaderEditorです。
  *
  * Sourceは帳票設計_DBBRP43002_2_保険料納入通知書（本算定）発行一覧表と同じです。
  *
  * @reamsid_L DBB-0920-050 zhangrui
  */
-public class HeaderEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor {
+public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranHeaderEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor {
 
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 調定年度;
@@ -38,7 +38,7 @@ public class HeaderEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchi
      *
      * @param inputEntity HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity
      */
-    public HeaderEditor(HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
+    public HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranHeaderEditor(HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
         this.編集後本算定通知書共通情報 = inputEntity.get編集後本算定通知書共通情報();
         this.調定年度 = inputEntity.get調定年度();
         this.帳票作成日時 = inputEntity.get帳票作成日時();
