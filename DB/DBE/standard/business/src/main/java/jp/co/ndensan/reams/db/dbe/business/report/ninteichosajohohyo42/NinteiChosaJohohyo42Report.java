@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class NinteiChosaJohohyo42Report extends Report<NinteiChosaJohohyo42ReportSource> {
 
     private final NinteiChosaJohohyoEntity entity;
-    private static final int ZERO = 0;
 
     /**
      * インスタンスを生成します。
@@ -37,7 +36,7 @@ public class NinteiChosaJohohyo42Report extends Report<NinteiChosaJohohyo42Repor
     @Override
     public void writeBy(ReportSourceWriter<NinteiChosaJohohyo42ReportSource> reportSourceWriter) {
         int maxCount = entity.getサービス区分リスト_42().size();
-        for (int i = ZERO; i < maxCount; i++) {
+        for (int i = 0; i < maxCount; i++) {
             INinteiChosaJohohyo42Editor editor = new NinteiChosaJohohyo42Editor(entity, i);
             INinteiChosaJohohyo42Builder builder = new NinteiChosaJohohyo42Builder(editor);
             reportSourceWriter.writeLine(builder);

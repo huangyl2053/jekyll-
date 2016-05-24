@@ -102,16 +102,16 @@ public class NinteiChosaJohohyo12Editor implements INinteiChosaJohohyo12Editor {
         }
         source.shinseikubunHorei = entity.get申請区分_法();
         source.tokubetsukyufuTxit = entity.get市町村特別給付();
-//        source.imgTokubetsukyufu = entity.get市町村特別給付イメージ();
+        source.imgTokubetsukyufu = entity.get市町村特別給付イメージ();
         source.zaitakusabisuTxit = entity.get介護保険給付外の在宅();
-//        source.imgZaitakusabisu = entity.get介護保険給付外の在宅イメージ();
+        source.imgZaitakusabisu = entity.get介護保険給付外の在宅イメージ();
         source.shisetsuriyo = entity.get施設利用();
         source.shisetsuNameTxit = entity.get施設名();
-//        source.imgShisetsuName = entity.get施設名イメージ();
+        source.imgShisetsuName = entity.get施設名イメージ();
         source.shisetsujushoTxit = entity.get施設住所();
-//        source.imgShisetsujusho = entity.get施設住所イメージ();
+        source.imgShisetsujusho = entity.get施設住所イメージ();
         source.shisetsuTxitTel = entity.get施設電話();
-//        source.imgShisetsuTel = entity.get施設電話イメージ();
+        source.imgShisetsuTel = entity.get施設電話イメージ();
         source.yubimNo = entity.get郵便番号();
         source.hihokenshaTelNo = entity.get電話();
         source.shinsaYMD = entity.get二次判定日();
@@ -131,7 +131,7 @@ public class NinteiChosaJohohyo12Editor implements INinteiChosaJohohyo12Editor {
         source.chosaJisshiYMD = entity.get調査実施日();
         source.chosaJisshiBasho = entity.get実施場所コード();
         source.chosaJisshiBashoTxit = entity.get実施場所名称();
-//        source.imgChosaJisshiBasho = entity.get実施場所イメージ();
+        source.imgChosaJisshiBasho = entity.get実施場所イメージ();
         source.chosainName = entity.get記入者();
         source.chosaItakusakiName = entity.get所属機関();
         return source;
