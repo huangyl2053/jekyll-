@@ -330,9 +330,15 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.SinsakaiHanteiJyokyoMyBatisParameter"
             fetchSize="500">
         SELECT S.* ,
-        (SELECT COUNT(1)
+        (SELECT COUNT (*) FROM (SELECT COUNT(G."shinsakaiKaisaiNo")
          FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" G
-         WHERE S.gogitaiNo = G."gogitaiNo"
+         INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+            ON G."shinsakaiKaisaiNo" = dbt5502."shinsakaiKaisaiNo"
+         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
+            ON dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+         WHERE 
+                S.gogitaiNo = G."gogitaiNo"
+            AND dbt5101."shoKisaiHokenshaNo" = S."shoKisaiHokenshaNo"
         <choose>
             <when test="isTaishoTsukiKubun">
                 <if test="!isTaishoGeppiKubun">
@@ -359,7 +365,9 @@
                     </choose>
                 </if>
             </otherwise>
-        </choose>) AS shinsakaiKaisaiNoCount
+        </choose>
+        Group BY G."shinsakaiKaisaiNo" ) AS shinsakaiIinCount
+        ) AS shinsakaiKaisaiNoCount
         FROM
         (SELECT A."gogitaiNo" AS gogitaiNo
         ,E."gogitaiMei"

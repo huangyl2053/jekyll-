@@ -296,8 +296,8 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数),
                 toRString(要支援2非該当被保険者数 + 要支援2要支援1被保険者数),
                 toRString(要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数),
-                要支援2計 == 0 || 要支援2計 == 要支援2要支援2被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要支援2計 - 要支援2要支援2被保険者数).divide(要支援2計).multiply(割合)) + パーセント),
+                要支援2計 == 0 || 要支援2計 == 要支援2要支援2被保険者数 + 要支援2要介護1被保険者数 ? 割合なし : new RString(
+                        FORMAT.format(new Decimal(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数).divide(要支援2計).multiply(割合)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
@@ -348,8 +348,8 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(要介護1計 - 要介護1要介護1被保険者数 - 要介護1要支援2被保険者数),
                 toRString(要介護1非該当被保険者数 + 要介護1要支援1被保険者数),
                 toRString(要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数),
-                要介護1計 == 0 || 要介護1計 == 要介護1要介護1被保険者数 ? 割合なし : new RString(
-                        FORMAT.format(new Decimal(要介護1計 - 要介護1要介護1被保険者数).divide(要介護1計).multiply(割合)) + パーセント),
+                要介護1計 == 0 || 要介護1計 == 要介護1要支援2被保険者数 + 要介護1要介護1被保険者数 ? 割合なし : new RString(
+                        FORMAT.format(new Decimal(要介護1計 - 要介護1要支援2被保険者数 - 要介護1要介護1被保険者数).divide(要介護1計).multiply(割合)) + パーセント),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
