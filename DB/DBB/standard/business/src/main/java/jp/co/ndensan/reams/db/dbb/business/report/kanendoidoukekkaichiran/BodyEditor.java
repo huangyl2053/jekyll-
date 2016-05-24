@@ -127,11 +127,11 @@ public class BodyEditor implements IKanendoIdouKekkaIchiranEditor {
             source.list3_18 = new RString(計算後情報_宛名_口座_更正後Entity.get普徴歳出還付額().toString());
         }
 
-        source.list4_1 = 調定日時.wareki().toDateString();
+        source.list4_1 = 調定日時.getDate().wareki().toDateString();
         set特徴期別金額_更正前(source);
         set普徴期別金額_更正前(source);
 
-        source.list5_1 = 調定日時.wareki().toDateString();
+        source.list5_1 = 調定日時.getDate().wareki().toDateString();
         set特徴期別金額_更正後(source);
         set普徴期別金額_更正後(source);
 

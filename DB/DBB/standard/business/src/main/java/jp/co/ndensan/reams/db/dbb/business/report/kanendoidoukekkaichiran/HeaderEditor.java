@@ -71,20 +71,20 @@ public class HeaderEditor implements IKanendoIdouKekkaIchiranEditor {
                 期の表記.add(RString.EMPTY);
             }
         }
-        source.listFuchoKi_1 = 期の表記.get(NUM_0);
-        source.listFuchoKi_2 = 期の表記.get(NUM_1);
-        source.listFuchoKi_3 = 期の表記.get(NUM_2);
-        source.listFuchoKi_4 = 期の表記.get(NUM_3);
-        source.listFuchoKi_5 = 期の表記.get(NUM_4);
-        source.listFuchoKi_6 = 期の表記.get(NUM_5);
-        source.listFuchoKi_7 = 期の表記.get(NUM_6);
-        source.listFuchoKi_8 = 期の表記.get(NUM_7);
-        source.listFuchoKi_9 = 期の表記.get(NUM_8);
-        source.listFuchoKi_10 = 期の表記.get(NUM_9);
-        source.listFuchoKi_11 = 期の表記.get(NUM_10);
-        source.listFuchoKi_12 = 期の表記.get(NUM_11);
-        source.listFuchoKi_13 = 期の表記.get(NUM_12);
-        source.listFuchoKi_14 = 期の表記.get(NUM_13);
+        source.listFuchoKi_1 = 期の表記.get(NUM_13);
+        source.listFuchoKi_2 = 期の表記.get(NUM_12);
+        source.listFuchoKi_3 = 期の表記.get(NUM_11);
+        source.listFuchoKi_4 = 期の表記.get(NUM_10);
+        source.listFuchoKi_5 = 期の表記.get(NUM_9);
+        source.listFuchoKi_6 = 期の表記.get(NUM_8);
+        source.listFuchoKi_7 = 期の表記.get(NUM_7);
+        source.listFuchoKi_8 = 期の表記.get(NUM_6);
+        source.listFuchoKi_9 = 期の表記.get(NUM_5);
+        source.listFuchoKi_10 = 期の表記.get(NUM_4);
+        source.listFuchoKi_11 = 期の表記.get(NUM_3);
+        source.listFuchoKi_12 = 期の表記.get(NUM_2);
+        source.listFuchoKi_13 = 期の表記.get(NUM_1);
+        source.listFuchoKi_14 = 期の表記.get(NUM_0);
         return source;
     }
 
