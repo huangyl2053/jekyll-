@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dba010011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.nenreitotatsushikakuidochoshuhohokoshin.NenreitotatsuShikakuIdoChoshuhohoKoshin;
@@ -30,13 +31,20 @@ public class ShikakuIdoChoshuhohoKoshinHihokenjaShutokuProcess extends SimpleBat
     protected void process() {
         DbT7022ShoriDateKanriEntity 処理日付管理Entity = choshuhohoKoshin.select年齢到達の異動被保険者取得();
         if (処理日付管理Entity != null) {
-            DbT1001HihokenshaDaichoEntity 被保険者台帳Entity = choshuhohoKoshin.select被保険者番号(処理日付管理Entity);
-            if (被保険者台帳Entity != null) {
-                DbV2001ChoshuHohoEntity 徴収方法Entity = choshuhohoKoshin.select被保険者徴収方法情報の取得(被保険者台帳Entity.getHihokenshaNo());
-                ChoshuHoho choshuHoho = choshuhohoKoshin.upd徴収方法更新(徴収方法Entity, 被保険者台帳Entity);
-                choshuhohoKoshin.upd徴収方法テーブル更新(choshuHoho);
+            List<DbT1001HihokenshaDaichoEntity> 被保険者台帳Entity = choshuhohoKoshin.select被保険者番号(処理日付管理Entity);
+            if (被保険者台帳Entity != null && !被保険者台帳Entity.isEmpty()) {
+                for (DbT1001HihokenshaDaichoEntity entity : 被保険者台帳Entity) {
+                    DbV2001ChoshuHohoEntity 徴収方法Entity = choshuhohoKoshin.select被保険者徴収方法情報の取得(entity.getHihokenshaNo());
+                    upd徴収方法更新(徴収方法Entity, entity);
+                }
             }
         }
+    }
 
+    private void upd徴収方法更新(DbV2001ChoshuHohoEntity 徴収方法Entity, DbT1001HihokenshaDaichoEntity daichoEntity) {
+        if (徴収方法Entity != null && daichoEntity != null) {
+            ChoshuHoho choshuHoho = choshuhohoKoshin.upd徴収方法更新(徴収方法Entity, daichoEntity);
+            choshuhohoKoshin.upd徴収方法テーブル更新(choshuHoho);
+        }
     }
 }

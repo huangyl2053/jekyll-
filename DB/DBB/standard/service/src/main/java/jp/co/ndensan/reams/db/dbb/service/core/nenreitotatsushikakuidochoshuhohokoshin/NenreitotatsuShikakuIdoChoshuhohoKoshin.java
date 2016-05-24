@@ -5,11 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.nenreitotatsushikakuidochoshuhohokoshin;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nenreitotatsushikakuidochoshuhohokoshin.NenreitotatsuShikakuIdoChoshuhohoKoshinMybatisParam;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nenreitotatsushikakuidochoshuhohokoshin.INenreitotatsuShikakuIdoChoshuhohoKoshinMapper;
+import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -17,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -47,16 +50,16 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     private static final RString 年度内連番 = new RString("00");
     private static final RString CODE = new RString("31");
     private final DbT7022ShoriDateKanriDac shoriDateKanriDac;
-    private final DbT1001HihokenshaDaichoDac hihokenshaDaichoDac;
     private final DbV2001ChoshuHohoAliveDac choshuHohoAliveDac;
     private final ChoshuHohoKoshin choshuHohoKoshin;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
     public NenreitotatsuShikakuIdoChoshuhohoKoshin() {
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         shoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
-        hihokenshaDaichoDac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         choshuHohoAliveDac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
         choshuHohoKoshin = InstanceProvider.create(ChoshuHohoKoshin.class);
     }
@@ -65,18 +68,18 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
      * テスト用コンストラクタです。
      *
      * @param shoriDateKanriDac shoriDateKanriDac
-     * @param hihokenshaDaichoDac hihokenshaDaichoDac
      * @param choshuHohoAliveDac choshuHohoAliveDac
      * @param choshuHohoKoshin choshuHohoKoshin
      * @param choshuHoho choshuHoho
      */
     NenreitotatsuShikakuIdoChoshuhohoKoshin(
+            MapperProvider mapperProvider,
             DbT7022ShoriDateKanriDac shoriDateKanriDac,
-            DbT1001HihokenshaDaichoDac hihokenshaDaichoDac,
             DbV2001ChoshuHohoAliveDac choshuHohoAliveDac,
-            ChoshuHohoKoshin choshuHohoKoshin) {
+            ChoshuHohoKoshin choshuHohoKoshin
+    ) {
+        this.mapperProvider = mapperProvider;
         this.shoriDateKanriDac = shoriDateKanriDac;
-        this.hihokenshaDaichoDac = hihokenshaDaichoDac;
         this.choshuHohoAliveDac = choshuHohoAliveDac;
         this.choshuHohoKoshin = choshuHohoKoshin;
     }
@@ -84,7 +87,8 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link FuchoKariSanteiFuka}のインスタンス
      */
     public static NenreitotatsuShikakuIdoChoshuhohoKoshin createInstance() {
         return InstanceProvider.create(NenreitotatsuShikakuIdoChoshuhohoKoshin.class);
@@ -223,14 +227,19 @@ public class NenreitotatsuShikakuIdoChoshuhohoKoshin {
      * @return DbT1001HihokenshaDaichoEntity
      */
     @Transaction
-    public DbT1001HihokenshaDaichoEntity select被保険者番号(DbT7022ShoriDateKanriEntity entity) {
+    public List<DbT1001HihokenshaDaichoEntity> select被保険者番号(DbT7022ShoriDateKanriEntity entity) {
         RString 被保険者区分コード = ShikakuKubun._１号.getコード();
         FlexibleDate 対象開始年月日 = entity.getTaishoKaishiYMD();
         FlexibleDate 対象終了年月日 = entity.getTaishoShuryoYMD();
         RString 異動事由コード = CODE;
-        DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity = hihokenshaDaichoDac.selectHihokenjabango(被保険者区分コード,
-                対象開始年月日, 対象終了年月日, 異動事由コード);
-        return hihokenshaDaichoEntity;
+        INenreitotatsuShikakuIdoChoshuhohoKoshinMapper mapper = mapperProvider.create(INenreitotatsuShikakuIdoChoshuhohoKoshinMapper.class);
+        NenreitotatsuShikakuIdoChoshuhohoKoshinMybatisParam param = new NenreitotatsuShikakuIdoChoshuhohoKoshinMybatisParam();
+        param.set被保険者区分コード(被保険者区分コード);
+        param.set対象開始年月日(対象開始年月日);
+        param.set対象終了年月日(対象終了年月日);
+        param.set異動事由コード(異動事由コード);
+
+        return mapper.selectHihokenjabango(param);
     }
 
     /**
