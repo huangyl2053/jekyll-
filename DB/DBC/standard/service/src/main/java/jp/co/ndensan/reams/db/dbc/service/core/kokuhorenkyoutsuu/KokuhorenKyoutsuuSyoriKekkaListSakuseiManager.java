@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaL
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -56,7 +55,6 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
     private static final RString HEADER_備考 = new RString("備考");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC900001"));
 
-    @BatchWriter
     private CsvListWriter csvListWriter;
 
     /**

@@ -250,6 +250,7 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getTxtHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().clearValue();
             if (is負担段階を設定) {
+                init負担段階DDL();
                 div.getDdlRiyoshaFutanDankai().setSelectedKey(
                         service.judge利用者負担段階(資格対象者.get被保険者番号(), 資格対象者.get識別コード()).getコード());
                 onChange_ddlRiyoshaFutanDankai();
@@ -263,33 +264,27 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getDdlKyusochisha().setIsBlankLine(true);
             div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
             div.getDdlRiyoshaFutanDankai().setDisabled(true);
-            div.getDdlRiyoshaFutanDankai().setIsBlankLine(true);
-            div.getDdlRiyoshaFutanDankai().setSelectedKey(SELECT_EMPTYKEY);
+            List<KeyValueDataSource> dataSources = new ArrayList<>();
+            dataSources.add(new KeyValueDataSource());
+            div.getDdlRiyoshaFutanDankai().setDataSource(dataSources);
             div.getDdlKyoshitsuShubetsu().setDisabled(true);
-            div.getDdlKyoshitsuShubetsu().setIsBlankLine(true);
-            div.getDdlKyoshitsuShubetsu().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlKyoshitsuShubetsu().setDataSource(dataSources);
             div.getChkKyokaiso().setDisabled(true);
             div.getChkKyokaiso().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkGekihenKanwa().setDisabled(true);
             div.getChkGekihenKanwa().setSelectedItemsByKey(new ArrayList<RString>());
             div.getDdlShokuhi().setDisabled(true);
-            div.getDdlShokuhi().setIsBlankLine(true);
-            div.getDdlShokuhi().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlShokuhi().setDataSource(dataSources);
             div.getDdlUnitGataKoshitsu().setDisabled(true);
-            div.getDdlUnitGataKoshitsu().setIsBlankLine(true);
-            div.getDdlUnitGataKoshitsu().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlUnitGataKoshitsu().setDataSource(dataSources);
             div.getDdlUnitGataJunKoshitsu().setDisabled(true);
-            div.getDdlUnitGataJunKoshitsu().setIsBlankLine(true);
-            div.getDdlUnitGataJunKoshitsu().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlUnitGataJunKoshitsu().setDataSource(dataSources);
             div.getDdlJuraiGataKoshitsuTokuyo().setDisabled(true);
-            div.getDdlJuraiGataKoshitsuTokuyo().setIsBlankLine(true);
-            div.getDdlJuraiGataKoshitsuTokuyo().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlJuraiGataKoshitsuTokuyo().setDataSource(dataSources);
             div.getDdlJuraiGataKoshitsuRoken().setDisabled(true);
-            div.getDdlJuraiGataKoshitsuRoken().setIsBlankLine(true);
-            div.getDdlJuraiGataKoshitsuRoken().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlJuraiGataKoshitsuRoken().setDataSource(dataSources);
             div.getDdlTashoshitsu().setDisabled(true);
-            div.getDdlTashoshitsu().setIsBlankLine(true);
-            div.getDdlTashoshitsu().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlTashoshitsu().setDataSource(dataSources);
             div.getBtnHiShoninRiyu().setDisabled(false);
             div.getTxtHiShoninRiyu().setDisabled(false);
         }

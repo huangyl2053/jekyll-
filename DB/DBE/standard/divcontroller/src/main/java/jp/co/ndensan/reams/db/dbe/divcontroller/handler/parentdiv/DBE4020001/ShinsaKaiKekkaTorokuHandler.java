@@ -95,11 +95,11 @@ public class ShinsaKaiKekkaTorokuHandler {
     private NinteiKekkaJoho set要介護認定結果情報(ShinsaKaiKekkaInputCsvEntity csvEntity) {
         NinteiKekkaJoho 要介護認定結果情報 = new NinteiKekkaJoho(new ShinseishoKanriNo(csvEntity.getShinseishoKanriNo()));
         return 要介護認定結果情報.createBuilderForEdit().
-                set二次判定年月日(new FlexibleDate(csvEntity.getNijiHanteiYMD()))
+                set二次判定年月日(new FlexibleDate(new RDate(csvEntity.getNijiHanteiYMD().toString()).toDateString()))
                 .set二次判定要介護状態区分コード(new Code(csvEntity.getNijiHanteiYokaigoJotaiKubunCode()))
                 .set二次判定認定有効期間(Integer.parseInt(csvEntity.getNijiHanteiNinteiYukoKikan().toString()))
-                .set二次判定認定有効開始年月日(new FlexibleDate(csvEntity.getNijiHanteiNinteiYukoKaishiYMD()))
-                .set二次判定認定有効終了年月日(new FlexibleDate(csvEntity.getNijiHanteiNinteiYukoShuryoYMD()))
+                .set二次判定認定有効開始年月日(new FlexibleDate(new RDate(csvEntity.getNijiHanteiNinteiYukoKaishiYMD().toString()).toDateString()))
+                .set二次判定認定有効終了年月日(new FlexibleDate(new RDate(csvEntity.getNijiHanteiNinteiYukoShuryoYMD().toString()).toDateString()))
                 .set介護認定審査会開催番号(csvEntity.getShinsakaiKaisaiNo())
                 .set介護認定審査会意見(csvEntity.getShinsakaiIken())
                 .set一次判定結果変更理由(csvEntity.getIchijiHanteiKekkaHenkoRiyu())
@@ -107,14 +107,14 @@ public class ShinsaKaiKekkaTorokuHandler {
                 .set認定審査会意見種類(csvEntity.getNinteishinsakaiIkenShurui())
                 .set審査会メモ(csvEntity.getShinsakaiMemo())
                 .set二次判定結果入力方法(new Code(csvEntity.getNijiHanteiKekkaInputHoho()))
-                .set二次判定結果入力年月日(new FlexibleDate(csvEntity.getNijiHanteiKekkaInputYMD()))
+                .set二次判定結果入力年月日(new FlexibleDate(new RDate(csvEntity.getNijiHanteiKekkaInputYMD().toString()).toDateString()))
                 .build();
     }
 
     private IchiGojiHanteiKekkaJoho set次判定結果情報(ShinsaKaiKekkaInputCsvEntity csvEntity) {
         IchiGojiHanteiKekkaJoho 要介護認定1_5次判定結果情報 = new IchiGojiHanteiKekkaJoho(new ShinseishoKanriNo(csvEntity.getShinseishoKanriNo()));
         return 要介護認定1_5次判定結果情報.createBuilderForEdit().
-                set要介護認定1_5次判定年月日(new FlexibleDate(csvEntity.getIchiGojiHanteiYMD()))
+                set要介護認定1_5次判定年月日(new FlexibleDate(new RDate(csvEntity.getIchiGojiHanteiYMD().toString()).toDateString()))
                 .set要介護認定1_5次判定結果コード(new Code(csvEntity.getIchiGojiHanteiKekkaCode()))
                 .set要介護認定1_5次判定結果コード_認知症加算_(new Code(csvEntity.getIchiGojiHanteiKekkaNinchishoKasanCode()))
                 .set要介護認定等基準時間(Integer.parseInt(csvEntity.getKijunJikan().toString()))

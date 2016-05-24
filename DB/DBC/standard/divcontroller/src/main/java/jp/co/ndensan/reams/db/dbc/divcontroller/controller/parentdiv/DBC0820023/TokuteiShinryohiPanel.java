@@ -442,7 +442,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKihoninfo(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.基本情報).respond();
     }
 
     /**
@@ -453,7 +453,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKyufuMeisai(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.給付費明細).respond();
     }
 
     /**
@@ -464,7 +464,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnServiceKeikakuhi(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費).respond();
     }
 
     /**
@@ -475,7 +475,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnTokuteinyushosha(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.特定入所者費用).respond();
     }
 
     /**
@@ -486,7 +486,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnGokeiinfo(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.合計情報).respond();
     }
 
     /**
@@ -497,7 +497,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKyufuhiMeisaiJutoku(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.給付費明細_住特).respond();
     }
 
     /**
@@ -508,7 +508,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKinkyujiShoteiShikan(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.緊急時_所定疾患).respond();
     }
 
     /**
@@ -519,7 +519,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKinkyujiShisetsu(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.緊急時施設療養費).respond();
     }
 
     /**
@@ -530,7 +530,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnShokujihiyo(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.食事費用).respond();
     }
 
     /**
@@ -541,7 +541,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnSeikyugaku(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.請求額集計).respond();
     }
 
     /**
@@ -552,7 +552,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnShafuku(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
-        return createResponse(div);
+        return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.社福軽減額).respond();
     }
 
     /**

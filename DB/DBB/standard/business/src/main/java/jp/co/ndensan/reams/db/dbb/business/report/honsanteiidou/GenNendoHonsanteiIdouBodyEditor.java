@@ -58,8 +58,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     private static final int NUM_12 = 12;
     private static final char CHAR_0 = '0';
 
-    private static final RString 現金 = new RString("0");
-    private static final RString 口座 = new RString("1");
+    private static final RString 現金 = new RString("現金");
+    private static final RString 現金_0 = new RString("0");
+    private static final RString 口座_1 = new RString("1");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
     private static final RString ゆうちょ銀行 = new RString("9900");
@@ -146,7 +147,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
             if (計算後情報_宛名_口座_更正前Entity.get口座区分() != null) {
                 RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
-                source.list2_17 = 口座区分.equals(現金) ? 現金 : 口座;
+                source.list2_17 = 口座区分.equals(現金_0) ? 現金 : 口座_1;
             }
             source.list2_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
             if (計算後情報_宛名_口座_更正後Entity.get調定日時() != null) {
@@ -184,7 +185,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             set月別取得段階(計算後情報_宛名_口座_更正後Entity, source);
             if (計算後情報_宛名_口座_更正後Entity.get口座区分() != null) {
                 RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
-                source.list3_17 = 口座区分.equals(現金) ? 現金 : 口座;
+                source.list3_17 = 口座区分.equals(現金_0) ? 現金 : 口座_1;
             }
             source.list3_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
 
@@ -632,8 +633,8 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
             }
-            if (koza.get支店コード().value().length() >= NUM_3) {
-                支店コード = koza.getEdited通帳記号().substring(NUM_0, NUM_3);
+            if (koza.get支店コード().value().length() >= NUM_5) {
+                支店コード = koza.getEdited通帳記号().substring(NUM_0, NUM_5);
             }
             if (koza.get預金種別().get預金種別略称().length() >= NUM_2) {
                 預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);

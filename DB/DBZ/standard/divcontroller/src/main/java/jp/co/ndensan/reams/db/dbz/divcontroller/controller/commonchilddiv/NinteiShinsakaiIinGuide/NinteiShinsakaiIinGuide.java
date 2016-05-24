@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定審査会委員ガイドのDivControllerです
@@ -209,8 +209,8 @@ public class NinteiShinsakaiIinGuide {
 
     private Decimal get最大取得件数上限() {
         Decimal 最大取得件数上限 = new Decimal(0);
-        if (BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
-            最大取得件数上限 = new Decimal(BusinessConfig.get(
+        if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
+            最大取得件数上限 = new Decimal(DbBusinessConfig.get(
                     ConfigNameDBU.検索制御_最大取得件数上限,
                     RDate.getNowDate(),
                     SubGyomuCode.DBU介護統計報告).toString());

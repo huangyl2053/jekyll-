@@ -37,5 +37,6 @@ public class ShujiiikenshoEntity {
     private RString 審査日_年;
     private RString 審査日_月;
     private RString 審査日_日;
-    private RString イメージファイル;
+    private RString イメージファイル1;
+    private RString イメージファイル2;
 }

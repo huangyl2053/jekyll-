@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.ichijihanteikekkahyoa4.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -14,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 一次判定結果のEditorです。
@@ -24,6 +27,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
 
     private final IchijihanteikekkahyoEntity item;
     private final int index;
+    private static final int TEN = 10;
 
     /**
      * インスタンスを生成します。
@@ -43,117 +47,6 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
 
     private IchijihanteikekkahyoReportSource editSource(IchijihanteikekkahyoReportSource source) {
 
-        if (index < item.get社会生活への適応1リスト().size()) {
-            source.listGogun_1 = item.get社会生活への適応1リスト().get(index);
-        }
-        if (index < item.get社会生活への適応2リスト().size()) {
-            source.listGogun_2 = item.get社会生活への適応2リスト().get(index);
-        }
-        if (index < item.get社会生活への適応3リスト().size()) {
-            source.listGogun_3 = item.get社会生活への適応3リスト().get(index);
-        }
-        if (index < item.get社会生活への適応4リスト().size()) {
-            source.listGogun_4 = item.get社会生活への適応4リスト().get(index);
-        }
-        if (index < item.get身体機能_起居動作1リスト().size()) {
-            source.listIchigun_1 = item.get身体機能_起居動作1リスト().get(index);
-        }
-        if (index < item.get身体機能_起居動作2リスト().size()) {
-            source.listIchigun_2 = item.get身体機能_起居動作2リスト().get(index);
-        }
-        if (index < item.get身体機能_起居動作3リスト().size()) {
-            source.listIchigun_3 = item.get身体機能_起居動作3リスト().get(index);
-        }
-        if (index < item.get身体機能_起居動作4リスト().size()) {
-            source.listIchigun_4 = item.get身体機能_起居動作4リスト().get(index);
-        }
-        if (index < item.get高齢者自立度リスト().size()) {
-            source.ｌistNichijoseikatsujiritsudo_1 = item.get高齢者自立度リスト().get(index);
-        }
-        if (index < item.get生活機能1リスト().size()) {
-            source.listNigun_1 = item.get生活機能1リスト().get(index);
-        }
-        if (index < item.get生活機能2リスト().size()) {
-            source.listNigun_2 = item.get生活機能2リスト().get(index);
-        }
-        if (index < item.get生活機能3リスト().size()) {
-            source.listNigun_3 = item.get生活機能3リスト().get(index);
-        }
-        if (index < item.get生活機能4リスト().size()) {
-            source.listNigun_4 = item.get生活機能4リスト().get(index);
-        }
-        if (index < item.get認知機能1リスト().size()) {
-            source.listSangun_1 = item.get認知機能1リスト().get(index);
-        }
-        if (index < item.get認知機能2リスト().size()) {
-            source.listSangun_2 = item.get認知機能2リスト().get(index);
-        }
-        if (index < item.get認知機能3リスト().size()) {
-            source.listSangun_3 = item.get認知機能3リスト().get(index);
-        }
-        if (index < item.get認知機能4リスト().size()) {
-            source.listSangun_4 = item.get認知機能4リスト().get(index);
-        }
-        if (index < item.get主治医意見書項目1リスト().size()) {
-            source.listshujiiikensho_1 = item.get主治医意見書項目1リスト().get(index);
-        }
-        if (index < item.get主治医意見書項目2リスト().size()) {
-            source.listshujiiikensho_2 = item.get主治医意見書項目2リスト().get(index);
-        }
-        if (index < item.get主治医意見書項目3リスト().size()) {
-            source.listshujiiikensho_3 = item.get主治医意見書項目3リスト().get(index);
-        }
-        if (index < item.get主治医意見書項目4リスト().size()) {
-            source.listshujiiikensho_4 = item.get主治医意見書項目4リスト().get(index);
-        }
-        if (index < item.get身体機能_起居動作リスト().size()) {
-            source.listtokki1_1 = item.get身体機能_起居動作リスト().get(index);
-        }
-        if (index < item.get生活機能リスト().size()) {
-            source.listtokki2_1 = item.get生活機能リスト().get(index);
-        }
-        if (index < item.get認知機能リスト().size()) {
-            source.listtokki3_1 = item.get認知機能リスト().get(index);
-        }
-        if (index < item.get精神_行動障害リスト().size()) {
-            source.listtokki4_1 = item.get精神_行動障害リスト().get(index);
-        }
-        if (index < item.get社会生活への適応リスト().size()) {
-            source.listtokki5_1 = item.get社会生活への適応リスト().get(index);
-        }
-        if (index < item.get特別な医療1リスト().size()) {
-            source.listtokki6_1 = item.get特別な医療1リスト().get(index);
-        }
-        if (index < item.get特別な医療2リスト().size()) {
-            source.listtokki7_1 = item.get特別な医療2リスト().get(index);
-        }
-        if (index < item.get日常生活自立度リスト().size()) {
-            source.listtokki8_1 = item.get日常生活自立度リスト().get(index);
-        }
-        if (index < item.get特別な医療3_1リスト().size()) {
-            source.listtokubetsunaIryo1_1 = item.get特別な医療3_1リスト().get(index);
-        }
-        if (index < item.get特別な医療3_2リスト().size()) {
-            source.listtokubetsunaIryo1_2 = item.get特別な医療3_2リスト().get(index);
-        }
-        if (index < item.get特別な医療4_1リスト().size()) {
-            source.listtokubetsunaIryo2_1 = item.get特別な医療4_1リスト().get(index);
-        }
-        if (index < item.get特別な医療4_2リスト().size()) {
-            source.listtokubetsunaIryo2_2 = item.get特別な医療4_2リスト().get(index);
-        }
-        if (index < item.get精神_行動障害1リスト().size()) {
-            source.listYongun_1 = item.get精神_行動障害1リスト().get(index);
-        }
-        if (index < item.get精神_行動障害2リスト().size()) {
-            source.listYongun_2 = item.get精神_行動障害2リスト().get(index);
-        }
-        if (index < item.get精神_行動障害3リスト().size()) {
-            source.listYongun_3 = item.get精神_行動障害3リスト().get(index);
-        }
-        if (index < item.get精神_行動障害4リスト().size()) {
-            source.listYongun_4 = item.get精神_行動障害4リスト().get(index);
-        }
         source.title = item.getタイトル();
         source.sakuseiGengo = item.get作成日_元号();
         source.sakuseiYY = item.get作成日_年();
@@ -221,16 +114,16 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.listkijunTime_8 = item.get要介護認定等基準時間_医療関連();
         source.listkijunTime_9 = item.get要介護認定等基準時間_認知症加算();
         RString 警告コード = item.get警告コード();
-        StringBuilder stringBuilder = new StringBuilder();
+        RStringBuilder rstringBuilder = new RStringBuilder();
         int len = 0;
-        while (警告コード.indexOf("1", len) > -1) {
+        while (-1 < 警告コード.indexOf("1", len)) {
             int index1 = 警告コード.indexOf("1", len);
-            stringBuilder.append(index1 + 1 < 10 ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
-            stringBuilder.append("、");
+            rstringBuilder.append(index1 + 1 < TEN ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
+            rstringBuilder.append("、");
             len = index1 + 1;
         }
-        String result = stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1);
-        source.keikokuNo = new RString(result);
+        RString result = rstringBuilder.toRString().substring(0, rstringBuilder.toRString().length() - 1);
+        source.keikokuNo = result;
         source.listChukanhyoka_1 = item.get中間評価項目得点第1群();
         source.listChukanhyoka_2 = item.get中間評価項目得点第2群();
         source.listChukanhyoka_3 = item.get中間評価項目得点第3群();
@@ -246,7 +139,133 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.kyufukubun = item.get給付区分();
         source.sabisuName = item.get現在のサービス利用状況名();
         source.sabisuText = item.get現在のサービス状況();
+        editSource1(source);
+        editSource2(source);
+        editSource3(source);
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
         return source;
+    }
+
+    private void editSource1(IchijihanteikekkahyoReportSource source) {
+        if (index < item.get社会生活への適応1リスト().size()) {
+            source.listGogun_1 = item.get社会生活への適応1リスト().get(index);
+        }
+        if (index < item.get社会生活への適応2リスト().size()) {
+            source.listGogun_2 = item.get社会生活への適応2リスト().get(index);
+        }
+        if (index < item.get社会生活への適応3リスト().size()) {
+            source.listGogun_3 = item.get社会生活への適応3リスト().get(index);
+        }
+        if (index < item.get社会生活への適応4リスト().size()) {
+            source.listGogun_4 = item.get社会生活への適応4リスト().get(index);
+        }
+        if (index < item.get身体機能_起居動作1リスト().size()) {
+            source.listIchigun_1 = item.get身体機能_起居動作1リスト().get(index);
+        }
+        if (index < item.get身体機能_起居動作2リスト().size()) {
+            source.listIchigun_2 = item.get身体機能_起居動作2リスト().get(index);
+        }
+        if (index < item.get身体機能_起居動作3リスト().size()) {
+            source.listIchigun_3 = item.get身体機能_起居動作3リスト().get(index);
+        }
+        if (index < item.get身体機能_起居動作4リスト().size()) {
+            source.listIchigun_4 = item.get身体機能_起居動作4リスト().get(index);
+        }
+        if (index < item.get高齢者自立度リスト().size()) {
+            source.ｌistNichijoseikatsujiritsudo_1 = item.get高齢者自立度リスト().get(index);
+        }
+        if (index < item.get生活機能1リスト().size()) {
+            source.listNigun_1 = item.get生活機能1リスト().get(index);
+        }
+        if (index < item.get生活機能2リスト().size()) {
+            source.listNigun_2 = item.get生活機能2リスト().get(index);
+        }
+        if (index < item.get生活機能3リスト().size()) {
+            source.listNigun_3 = item.get生活機能3リスト().get(index);
+        }
+        if (index < item.get生活機能4リスト().size()) {
+            source.listNigun_4 = item.get生活機能4リスト().get(index);
+        }
+        if (index < item.get認知機能1リスト().size()) {
+            source.listSangun_1 = item.get認知機能1リスト().get(index);
+        }
+        if (index < item.get認知機能2リスト().size()) {
+            source.listSangun_2 = item.get認知機能2リスト().get(index);
+        }
+        if (index < item.get認知機能3リスト().size()) {
+            source.listSangun_3 = item.get認知機能3リスト().get(index);
+        }
+        if (index < item.get認知機能4リスト().size()) {
+            source.listSangun_4 = item.get認知機能4リスト().get(index);
+        }
+        if (index < item.get主治医意見書項目1リスト().size()) {
+            source.listshujiiikensho_1 = item.get主治医意見書項目1リスト().get(index);
+        }
+    }
+
+    private void editSource2(IchijihanteikekkahyoReportSource source) {
+        if (index < item.get主治医意見書項目2リスト().size()) {
+            source.listshujiiikensho_2 = item.get主治医意見書項目2リスト().get(index);
+        }
+        if (index < item.get主治医意見書項目3リスト().size()) {
+            source.listshujiiikensho_3 = item.get主治医意見書項目3リスト().get(index);
+        }
+        if (index < item.get主治医意見書項目4リスト().size()) {
+            source.listshujiiikensho_4 = item.get主治医意見書項目4リスト().get(index);
+        }
+        if (index < item.get身体機能_起居動作リスト().size()) {
+            source.listtokki1_1 = item.get身体機能_起居動作リスト().get(index);
+        }
+        if (index < item.get生活機能リスト().size()) {
+            source.listtokki2_1 = item.get生活機能リスト().get(index);
+        }
+        if (index < item.get認知機能リスト().size()) {
+            source.listtokki3_1 = item.get認知機能リスト().get(index);
+        }
+        if (index < item.get精神_行動障害リスト().size()) {
+            source.listtokki4_1 = item.get精神_行動障害リスト().get(index);
+        }
+        if (index < item.get社会生活への適応リスト().size()) {
+            source.listtokki5_1 = item.get社会生活への適応リスト().get(index);
+        }
+        if (index < item.get特別な医療1リスト().size()) {
+            source.listtokki6_1 = item.get特別な医療1リスト().get(index);
+        }
+        if (index < item.get特別な医療2リスト().size()) {
+            source.listtokki7_1 = item.get特別な医療2リスト().get(index);
+        }
+        if (index < item.get日常生活自立度リスト().size()) {
+            source.listtokki8_1 = item.get日常生活自立度リスト().get(index);
+        }
+        if (index < item.get特別な医療3_1リスト().size()) {
+            source.listtokubetsunaIryo1_1 = item.get特別な医療3_1リスト().get(index);
+        }
+        if (index < item.get特別な医療3_2リスト().size()) {
+            source.listtokubetsunaIryo1_2 = item.get特別な医療3_2リスト().get(index);
+        }
+
+    }
+
+    private void editSource3(IchijihanteikekkahyoReportSource source) {
+        if (index < item.get特別な医療4_1リスト().size()) {
+            source.listtokubetsunaIryo2_1 = item.get特別な医療4_1リスト().get(index);
+        }
+        if (index < item.get特別な医療4_2リスト().size()) {
+            source.listtokubetsunaIryo2_2 = item.get特別な医療4_2リスト().get(index);
+        }
+        if (index < item.get精神_行動障害1リスト().size()) {
+            source.listYongun_1 = item.get精神_行動障害1リスト().get(index);
+        }
+        if (index < item.get精神_行動障害2リスト().size()) {
+            source.listYongun_2 = item.get精神_行動障害2リスト().get(index);
+        }
+        if (index < item.get精神_行動障害3リスト().size()) {
+            source.listYongun_3 = item.get精神_行動障害3リスト().get(index);
+        }
+        if (index < item.get精神_行動障害4リスト().size()) {
+            source.listYongun_4 = item.get精神_行動障害4リスト().get(index);
+        }
     }
 
     private RString dateformat(RString date) {
