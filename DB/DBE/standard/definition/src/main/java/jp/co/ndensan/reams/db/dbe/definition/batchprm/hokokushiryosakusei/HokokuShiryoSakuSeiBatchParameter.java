@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JigyoJyokyoHokokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.JisshiJokyoTokeiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -231,5 +232,27 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 null,
                 isSinseiKubunSinseitoki,
                 isSinseiKubunHorei);
+    }
+
+    /**
+     * ShinsakaiShukeihyoShinseiBetsuProcessParameterに転換します。
+     *
+     * @return ShinsakaiShukeihyoShinseiBetsuProcessParameter
+     */
+    public ShinsakaiShukeihyoShinseiBetsuProcessParameter toShinsakaiShukeihyoShinseiBetsuProcessParameter() {
+
+        return new ShinsakaiShukeihyoShinseiBetsuProcessParameter(
+                RString.isNullOrEmpty(hokensyaNo),
+                hokensyaNo,
+                hiHokensyaKubun,
+                -1 == gogitaiNo,
+                gogitaiNo,
+                isTaishoTsukiKubun,
+                isTaishoGeppiKubun,
+                taishoNendoYM,
+                RString.isNullOrEmpty(taishoGeppiFrom),
+                RString.isNullOrEmpty(taishoGeppiTo),
+                taishoGeppiFrom,
+                taishoGeppiTo);
     }
 }
