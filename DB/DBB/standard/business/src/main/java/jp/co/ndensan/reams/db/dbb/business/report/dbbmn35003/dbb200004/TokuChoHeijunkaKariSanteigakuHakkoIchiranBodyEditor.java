@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeij
  *
  * @reamsid_L DBB-0820-060 xuyue
  */
-class TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor
-        implements ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor {
+class TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor implements ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor {
 
     private final TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item;
 
@@ -23,13 +22,11 @@ class TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor
     }
 
     @Override
-    public TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource
-            edit(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource edit(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
         return editBody(source);
     }
 
-    private TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource
-            editBody(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
+    private TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource editBody(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
 
         source.listUpper_1 = item.getListUpper_1();
         source.listUpper_2 = item.getListUpper_2();

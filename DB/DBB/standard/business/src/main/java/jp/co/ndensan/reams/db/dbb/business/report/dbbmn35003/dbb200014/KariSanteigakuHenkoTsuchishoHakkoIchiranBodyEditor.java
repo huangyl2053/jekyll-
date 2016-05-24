@@ -49,11 +49,6 @@ class KariSanteigakuHenkoTsuchishoHakkoIchiranBodyEditor implements IKariSanteig
         source.listUpper_9 = item.getListUpper_9();
         source.listUpper_10 = item.getListUpper_10();
         source.listUpper_11 = item.getListUpper_11();
-        source.shutsuryokujun1 = item.getShutsuryokujun1();
-        source.shutsuryokujun2 = item.getShutsuryokujun2();
-        source.shutsuryokujun3 = item.getShutsuryokujun3();
-        source.shutsuryokujun4 = item.getShutsuryokujun4();
-        source.shutsuryokujun5 = item.getShutsuryokujun5();
         return source;
     }
 
