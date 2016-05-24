@@ -734,7 +734,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchKeyBreakBase<SinsakaiHante
                 toRString(変更者要介護3),
                 toRString(変更者要介護4),
                 toRString(変更者要介護5),
-                toRString(変更者非該当 + 変更者要支援1 + 変更者要支援2 + 変更者要介護1 + 変更者要介護2 + 変更者要介護3 + 変更者要介護4 + 変更者要介護5),
+                new RString(変更者非該当 + 変更者要支援1 + 変更者要支援2 + 変更者要介護1 + 変更者要介護2 + 変更者要介護3 + 変更者要介護4 + 変更者要介護5),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
