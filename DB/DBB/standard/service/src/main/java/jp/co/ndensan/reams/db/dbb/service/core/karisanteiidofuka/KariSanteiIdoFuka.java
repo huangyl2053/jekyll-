@@ -581,17 +581,15 @@ public class KariSanteiIdoFuka {
             return 特徴同定未完了;
         }
         List<DbT7022ShoriDateKanriEntity> 依頼金額計算list = 処理日付管理Dac.get依頼金額計算(調定年度);
-        //TODO QA738を待つ.
-        FlexibleYear 基準日時1 = new FlexibleYear("20160305");
-        FlexibleYear 基準日時2 = new FlexibleYear("20160305");
-        //TODO END
-        if (基準日時1.isEmpty()) {
+        YMDHMS 基準日時1 = 特徴対象者同定list.get(0).getKijunTimestamp();
+        if (基準日時1 == null || 基準日時1.isEmpty()) {
             return 特徴同定未完了;
         }
         if (依頼金額計算list.isEmpty()) {
             return 計算未完了;
         } else {
-            if (基準日時2.isEmpty()) {
+            YMDHMS 基準日時2 = 依頼金額計算list.get(0).getKijunTimestamp();
+            if (基準日時2 == null || 基準日時2.isEmpty()) {
                 return 計算未完了;
             } else {
                 return 計算完了;
