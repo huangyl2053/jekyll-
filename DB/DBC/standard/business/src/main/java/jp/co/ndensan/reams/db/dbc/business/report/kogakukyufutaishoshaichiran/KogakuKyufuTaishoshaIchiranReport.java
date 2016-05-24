@@ -43,8 +43,8 @@ public class KogakuKyufuTaishoshaIchiranReport extends Report<KogakuKyufuTaishos
     @Override
     public void writeBy(ReportSourceWriter<KogakuKyufuTaishoshaIchiranSource> writer) {
         for (KogakuKyufuTaishoshaIchiranItem target : targets) {
-            IKogakuKyufuTaishoshaIchiranEditor headerEditor = new HeaderEditor(target);
-            IKogakuKyufuTaishoshaIchiranEditor bodyEditor = new BodyEditor(target);
+            IKogakuKyufuTaishoshaIchiranEditor headerEditor = new KogakuKyufuTaishoshaIchiranHeaderEditor(target);
+            IKogakuKyufuTaishoshaIchiranEditor bodyEditor = new KogakuKyufuTaishoshaIchiranBodyEditor(target);
             IKogakuKyufuTaishoshaIchiranBuilder builder = new KogakuKyufuTaishoshaIchiranBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);
         }
