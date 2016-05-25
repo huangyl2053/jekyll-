@@ -53,6 +53,7 @@
         WHERE
         T."choteiNendo" = #{choteiNendo}
         AND T."fukaNendo" = #{fukaNendo}
+        AND T."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
         GROUP BY
         T."choteiNendo",
         T."fukaNendo",
@@ -66,6 +67,7 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
+        AND A."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
     </select>
 
     <!--期別情報一時テーブルを作成します -->
@@ -350,6 +352,12 @@
         AND A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
         AND A."karisanFlag" = #{karisanFlag}
+        <if test="dogetsuFlag==1">
+        AND A."dogetsusueChoteigaku" > 0
+        </if>
+        <if test="dogetsuFlag==0">
+        AND A."zengetsusueChoteigaku" > 0
+        </if>
         GROUP BY
         A."choteiNendo",
         A."fukaNendo",
@@ -425,7 +433,7 @@
         T."dankai",
         T."karisanFlag"
         FROM
-	(
+        (
         SELECT
         DISTINCT (Ta."hihokenshaNo"),
         Ta."choteiNendo",
@@ -439,7 +447,7 @@
         A."choteiNendo",
         A."fukaNendo",
         A."dankai",
-	A."choshuHouhou",
+        A."choshuHouhou",
         A."karisanFlag"
         FROM
         "TmpDankai" AS A
@@ -447,16 +455,17 @@
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
         AND A."dogetsuFlag" = 1
-	AND A."choshuHouhou"= '1'
-	AND A."karisanFlag" = #{karisanFlag}
-	) AS Ta,
-	(
-	SELECT
+        AND A."choshuHouhou"= '1'
+        AND A."karisanFlag" = #{karisanFlag}
+        AND COALESCE(A."dogetsusueChoteigaku",0) > 0
+        ) AS Ta,
+        (
+        SELECT
         B."hihokenshaNo",
         B."choteiNendo",
         B."fukaNendo",
         B."dankai",
-	B."choshuHouhou",
+        B."choshuHouhou",
         B."karisanFlag"
         FROM
         "TmpDankai" AS B
@@ -464,15 +473,16 @@
         B."choteiNendo" = #{choteiNendo}
         AND B."fukaNendo" = #{fukaNendo}
         AND B."dogetsuFlag" = 1
-	AND B."choshuHouhou"= '2'
-	AND B."karisanFlag" = #{karisanFlag}
-	) AS Tb
-	WHERE 
-	Ta."hihokenshaNo" = Tb."hihokenshaNo"
-	AND Ta."choteiNendo" = Tb."choteiNendo"
-	AND Ta."fukaNendo" = Tb."fukaNendo"
-	AND Ta."dankai" = Tb."dankai"
-	AND Ta."karisanFlag" = Tb."karisanFlag"
+        AND B."choshuHouhou"= '2'
+        AND B."karisanFlag" = #{karisanFlag}
+        AND COALESCE(B."dogetsusueChoteigaku",0) > 0
+        ) AS Tb
+        WHERE 
+        Ta."hihokenshaNo" = Tb."hihokenshaNo"
+        AND Ta."choteiNendo" = Tb."choteiNendo"
+        AND Ta."fukaNendo" = Tb."fukaNendo"
+        AND Ta."dankai" = Tb."dankai"
+        AND Ta."karisanFlag" = Tb."karisanFlag"
         )AS T
         GROUP BY
         T."choteiNendo",
@@ -511,65 +521,18 @@
     <!-- 該当段階の前月末と当月末の間に調定額の異動の判断 -->
     <select id="select増の調定額の小計" resultMap="resultMap_DankaiShokeiEntity_Fue" parameterType="java.util.Map" fetchSize="500">
         SELECT
-        COUNT(T."hihokenshaNo") AS "fueKensu",
-        T."choteiNendo",
-        T."fukaNendo",
-        T."choshuHouhou",
-        T."dankai",
-        T."karisanFlag",
-        SUM(T."dogetsusueChoteigaku") AS "fueChoteigakuCount"
-        FROM
-        (SELECT DISTINCT Tb."hihokenshaNo",
-        Tb."choteiNendo",
-        Tb."fukaNendo",
-        Tb."choshuHouhou",
-        Tb."dankai",
-        Tb."karisanFlag",
-        Tb."dogetsusueChoteigaku"
-        FROM
-        (SELECT
-        A."hihokenshaNo",
-        A."choteiNendo",
-        A."fukaNendo",
-        A."choshuHouhou",
-        A."dankai",
-        A."karisanFlag",
-        A."zengetsusueChoteigaku"
-        FROM
-        "TmpDankai" AS A
-        WHERE
-        A."choteiNendo" = #{choteiNendo}
-        AND A."fukaNendo" = #{fukaNendo}
-        ) AS Ta,
-        (SELECT
-        A."hihokenshaNo",
-        A."choteiNendo",
-        A."fukaNendo",
-        A."choshuHouhou",
-        A."dankai",
-        A."karisanFlag",
-        A."dogetsusueChoteigaku"
-        FROM 
-        "TmpDankai" AS A
-        WHERE
-        A."choteiNendo" = #{choteiNendo}
-        AND A."fukaNendo" = #{fukaNendo}
-        ) AS Tb
-        WHERE
-        Ta."hihokenshaNo" = Tb."hihokenshaNo"
-        AND Ta."choteiNendo" = Tb."choteiNendo"
-        AND Ta."fukaNendo" = Tb."fukaNendo"
-        AND Ta."choshuHouhou" = Tb."choshuHouhou"
-        AND Ta."dankai" = Tb."dankai"
-        AND Ta."karisanFlag" = Tb."karisanFlag"
-        AND Ta."zengetsusueChoteigaku" <![CDATA[<]]> Tb."dogetsusueChoteigaku"
-        ) AS T
-        GROUP BY
-        T."choteiNendo",
-        T."fukaNendo",
-        T."choshuHouhou",
-        T."dankai",
-        T."karisanFlag"
+        "choteiNendo",
+        "fukaNendo",
+        "choshuHouhou",
+        "dankai",
+        "karisanFlag",
+        COUNT(DISTINCT "hihokenshaNo") AS "fueKensu",
+        SUM("dogetsusueChoteigaku") AS "fueChoteigakuCount"
+        FROM "TmpDankai"
+        WHERE "choteiNendo" = #{choteiNendo}
+        AND   "fukaNendo" = #{fukaNendo}
+        AND   COALESCE("zengetsusueChoteigaku",0) <![CDATA[<]]> COALESCE("dogetsusueChoteigaku",0)
+        GROUP BY "choteiNendo", "fukaNendo", "dankai", "choshuHouhou", "karisanFlag"
     </select>
 
     <resultMap id="resultMap_DankaiShokeiEntity_Gen" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiShokeiEntity" autoMapping="true">
@@ -585,66 +548,19 @@
     <!-- 減部分の計算 -->
     <!-- 該当段階の前月末と当月末の間に調定額の異動の判断 -->
     <select id="select減の調定額の小計" resultMap="resultMap_DankaiShokeiEntity_Gen" parameterType="java.util.Map" fetchSize="500">
-        SELECT
-        COUNT(T."hihokenshaNo") AS "genKensu",
-        T."choteiNendo",
-        T."fukaNendo",
-        T."choshuHouhou",
-        T."dankai",
-        T."karisanFlag",
-        SUM(T."zengetsusueChoteigaku") AS "genChoteigakuCount"
-        FROM
-        (SELECT DISTINCT Ta."hihokenshaNo",
-        Ta."choteiNendo",
-        Ta."fukaNendo",
-        Ta."choshuHouhou",
-        Ta."dankai",
-        Ta."karisanFlag",
-        Ta."zengetsusueChoteigaku"
-        FROM
-        (SELECT
-        A."hihokenshaNo",
-        A."choteiNendo",
-        A."fukaNendo",
-        A."choshuHouhou",
-        A."dankai",
-        A."karisanFlag",
-        A."zengetsusueChoteigaku"
-        FROM
-        "TmpDankai" AS A
-        WHERE
-        A."choteiNendo" = #{choteiNendo}
-        AND A."fukaNendo" = #{fukaNendo}
-        ) AS Ta,
-        (SELECT
-        A."hihokenshaNo",
-        A."choteiNendo",
-        A."fukaNendo",
-        A."choshuHouhou",
-        A."dankai",
-        A."karisanFlag",
-        A."dogetsusueChoteigaku"
-        FROM 
-        "TmpDankai" AS A
-        WHERE
-        A."choteiNendo" = #{choteiNendo}
-        AND A."fukaNendo" = #{fukaNendo}
-        ) AS Tb
-        WHERE
-        Ta."hihokenshaNo" = Tb."hihokenshaNo"
-        AND Ta."choteiNendo" = Tb."choteiNendo"
-        AND Ta."fukaNendo" = Tb."fukaNendo"
-        AND Ta."choshuHouhou" = Tb."choshuHouhou"
-        AND Ta."dankai" = Tb."dankai"
-        AND Ta."karisanFlag" = Tb."karisanFlag"
-        AND Ta."zengetsusueChoteigaku" <![CDATA[>]]> Tb."dogetsusueChoteigaku"
-        ) AS T
-        GROUP BY
-        T."choteiNendo",
-        T."fukaNendo",
-        T."choshuHouhou",
-        T."dankai",
-        T."karisanFlag"
+        SELECT 
+            "choteiNendo", 
+            "fukaNendo", 
+            "dankai",
+            "choshuHouhou", 
+            "karisanFlag",
+            COUNT(DISTINCT "hihokenshaNo") AS "genKensu",
+            SUM("zengetsusueChoteigaku") AS "genChoteigakuCount"
+        FROM "TmpDankai"
+        WHERE "choteiNendo" = #{choteiNendo}
+        AND   "fukaNendo" = #{fukaNendo}
+        AND   COALESCE("zengetsusueChoteigaku",0) <![CDATA[>]]> COALESCE("dogetsusueChoteigaku",0)
+        GROUP BY "choteiNendo", "fukaNendo", "dankai", "choshuHouhou", "karisanFlag"
     </select>
 
     <!-- 段階小計一時テーブルに増の調定額の小計を更新します。 -->
@@ -1003,22 +919,16 @@
 
     <!-- 減免の件数と減免額の計算 -->
     <select id="select減免の件数と減免額" resultMap="resultMap_GenmenEntity" parameterType="java.util.Map" fetchSize="500">
-        SELECT
-        A."choteiNendo",
-        A."fukaNendo",
-        COUNT(DISTINCT A."tsuchishoNo") AS "genmenCount",
-        SUM(A."gemmenGaku") AS "genmenChoteigaku"
-        FROM
-        rgdb."DbT2002Fuka" AS A
-        WHERE
-        A."choteiNendo" = #{choteiNendo}
-        AND A."fukaNendo" = #{fukaNendo}
-        AND (#{chushutsuStYMD} <![CDATA[<=]]> A."choteiNichiji"
-        AND A."choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD}
-        )
-        GROUP BY
-        A."choteiNendo",
-        A."fukaNendo"
+        SELECT "choteiNendo", "fukaNendo", COUNT("tsuchishoNo") AS "genmenCount", SUM("gemmenGaku") AS "genmenChoteigaku"
+        FROM rgdb."DbT2002Fuka" a
+        WHERE "rirekiNo" = 
+            (SELECT MAX("rirekiNo") FROM rgdb."DbT2002Fuka" b WHERE a."choteiNendo" = b."choteiNendo" AND a."fukaNendo" = b."fukaNendo" AND a."tsuchishoNo" = b."tsuchishoNo")
+        AND "choteiNendo" = #{choteiNendo}
+        AND "fukaNendo" = #{fukaNendo}
+        AND "gemmenGaku" > 0
+        AND (#{chushutsuStYMD} <![CDATA[<=]]> "choteiNichiji"
+        AND "choteiNichiji" <![CDATA[<]]> #{chushutsuEdYMD})
+        GROUP BY "choteiNendo", "fukaNendo"
     </select>
 
     <!-- 期別合計一時テーブルに減免の件数と減免額の更新します。-->
