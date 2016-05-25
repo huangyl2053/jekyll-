@@ -23,6 +23,20 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
     void initialize(LasdecCode shichosonCode, ShinseishoKanriNo shinseishoKanriNo, SubGyomuCode gyomuCode);
 
     /**
+     * 画面にセットされた内容を設定します。
+     *
+     * @param shichosonCode 市町村コード
+     * @param shinseishoKanriNo 申請書管理番号
+     * @param gyomuCode サブ業務コード
+     * @param shujiiIryokikanCode 主治医医療機関コード
+     * @param iryoKikanMeisho 医療機関名称
+     * @param shujiiCode 主治医コード
+     * @param shujiiName 主治医氏名
+     */
+    void initialize(LasdecCode shichosonCode, ShinseishoKanriNo shinseishoKanriNo, SubGyomuCode gyomuCode, RString shujiiIryokikanCode,
+            RString iryoKikanMeisho, RString shujiiCode, RString shujiiName);
+
+    /**
      * 主治医コードを取得します
      *
      * @return RString

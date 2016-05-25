@@ -50,4 +50,5 @@ public class NinnteiRiriRelateEntity {
     private FlexibleDate ninteiShinsakaiKanryoYMD;
     private boolean johoteikyoDoiFlag;
     private boolean ikenshoDoiFlag;
+    private RString shichosonCode;
 }
