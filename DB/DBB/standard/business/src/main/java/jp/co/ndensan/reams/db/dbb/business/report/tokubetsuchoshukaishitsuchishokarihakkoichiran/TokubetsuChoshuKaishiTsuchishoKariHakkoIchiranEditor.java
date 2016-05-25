@@ -78,7 +78,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         }
         source.title = タイトル;
         if (調定年度 != null && !調定年度.isEmpty()) {
-            source.nendo = 調定年度.wareki().eraType(EraType.KANJI).toDateString();
+            source.nendo = 調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();
         }
         if (association != null) {
             source.hokenshaNo = association.get地方公共団体コード().value();
