@@ -134,9 +134,9 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
             source.tokuchoTaishonenkinName = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金();
             if (編集後本算定通知書共通情報.get更正後().get期間_自() != null && 編集後本算定通知書共通情報.get更正後().get期間_至() != null) {
                 RString 期間_自 = (new FlexibleDate(編集後本算定通知書共通情報.get更正後().get期間_自())).wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 RString 期間_至 = (new FlexibleDate(編集後本算定通知書共通情報.get更正後().get期間_至())).wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 source.kikan = 期間_自.concat(TOKEN).concat(期間_至);
             }
             source.tsukiSu1 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
