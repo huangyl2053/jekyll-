@@ -103,6 +103,7 @@
         (SELECT A."yukoKaishiYMD" FROM
         (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
         FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "jigyoshaNo" = DbT3006."keikakuJigyoshaNo"
         GROUP BY "jigyoshaNo") AS A)
         LEFT OUTER JOIN rgdb."DbT7060KaigoJigyosha"                                     AS DbT7060_Itaku
         ON DbT3006."itakusakiJigyoshaNo" = DbT7060_Itaku."jigyoshaNo"
@@ -110,6 +111,7 @@
         (SELECT A."yukoKaishiYMD" FROM
         (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
         FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "jigyoshaNo" = DbT3006."keikakuJigyoshaNo"
         GROUP BY "jigyoshaNo") AS A)
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho"                                   AS DbV1001
         ON DbT3005."hihokenshaNo" = DbV1001."hihokenshaNo"
