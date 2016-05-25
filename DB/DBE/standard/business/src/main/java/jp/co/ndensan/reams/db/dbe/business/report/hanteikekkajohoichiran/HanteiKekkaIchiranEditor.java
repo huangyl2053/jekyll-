@@ -65,8 +65,8 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString();
-        source.listHokenshaName_1 = item.get証記載保険者番号();
-        source.listHokenshaNo_1 = item.get市町村名称();
+        source.listHokenshaName_1 = item.get市町村名称();
+        source.listHokenshaNo_1 = item.get証記載保険者番号();
         source.listHihokenshaNo_1 = item.get被保険者番号();
         source.listHihokenshaNo_2 = item.get被保険者氏名();
         source.listHihokenshaNo_3 = item.getTb_一次判定結果();

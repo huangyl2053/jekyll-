@@ -121,8 +121,7 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
             FlexibleDate 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日());
-            source.listUpper_11 = 生保開始日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+            source.listUpper_11 = 生保開始日.wareki().toDateString();
         }
         RString 生活保護扶助名称 = RString.EMPTY;
         if (編集後本算定通知書共通情報.get更正後() != null
@@ -193,8 +192,8 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         RString 口座情報 = RString.EMPTY;
         if (編集後本算定通知書共通情報.get編集後口座() != null) {
             RString 金融機関コード = 編集後本算定通知書共通情報.get編集後口座().get金融機関コード();
-            RString 通帳記号 = 編集後本算定通知書共通情報.get編集後口座().get通帳記号();
-            RString 通帳番号 = 編集後本算定通知書共通情報.get編集後口座().get通帳番号();
+            RString 通帳記号 = 編集後本算定通知書共通情報.get編集後口座().getEdited通帳記号();
+            RString 通帳番号 = 編集後本算定通知書共通情報.get編集後口座().getEdited通帳番号();
             RString 口座名義人漢字 = 編集後本算定通知書共通情報.get編集後口座().get口座名義人漢字();
             RString 支店コード = 編集後本算定通知書共通情報.get編集後口座().get支店コード();
             RString 口座番号 = 編集後本算定通知書共通情報.get編集後口座().get口座番号();

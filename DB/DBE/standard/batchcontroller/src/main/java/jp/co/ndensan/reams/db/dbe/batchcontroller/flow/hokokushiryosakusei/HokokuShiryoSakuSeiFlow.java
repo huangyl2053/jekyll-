@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 報告資料作成のバッチフロークラスです。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBatchParameter> {
 

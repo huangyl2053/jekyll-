@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 /**
  * 被保険者台帳一覧表エディターのインターフェースクラスです。
  *
- * @reamsid_L DBA-0510-070 wangxiaodong
+ * @reamsid_L DBA-0510-070 wangxiaodong
  */
 public class HihokenshaDaichoHakkoIchiranhyoBodyEditor implements IHihokenshaDaichoHakkoIchiranhyoEditor {
 

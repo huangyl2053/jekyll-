@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 対象者自動割付のバッチフロークラスです。
  *
- * @reamsid_L DBE-1350-040 wangxiaodong
+ * @reamsid_L DBE-1350-040 wangxiaodong
  */
 public class TaisyosyaJidoWaritsukeFlow extends BatchFlowBase<TaisyosyaJidoWaritsukeBatchParameter> {
 

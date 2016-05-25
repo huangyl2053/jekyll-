@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJoh
 /**
  * 賦課の情報登録のマッパーインタフェースです。
  *
- * @reamsid_L DBB-9040-070 wangxiaodong
+ * @reamsid_L DBB-9040-070 wangxiaodong
  */
 public interface IFukaJohoTorokuMapper {
 
