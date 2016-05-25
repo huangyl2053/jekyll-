@@ -16,69 +16,80 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum NinteiShinseiShinseijiKubunCode {
 
     /**
-     * コード:1 名称:新規申請 略称:定義なし
+     * コード:1 名称:新規申請 略称:新規
      */
-    新規申請("1", "新規申請"),
+    新規申請("1", "新規申請", "新規"),
     /**
-     * コード:2 名称:更新申請 略称:定義なし
+     * コード:2 名称:更新申請 略称:更新
      */
-    更新申請("2", "更新申請"),
+    更新申請("2", "更新申請", "更新"),
     /**
-     * コード:3 名称:区分変更申請 略称:定義なし
+     * コード:3 名称:区分変更申請 略称:区変
      */
-    区分変更申請("3", "区分変更申請"),
+    区分変更申請("3", "区分変更申請", "区変"),
     /**
-     * コード:4 名称:職権 略称:定義なし
+     * コード:4 名称:職権 略称:職権
      */
-    職権("4", "職権"),
+    職権("4", "職権", "職権"),
     /**
-     * コード:5 名称:転入申請 略称:定義なし
+     * コード:5 名称:転入申請 略称:転入
      */
-    転入申請("5", "転入申請"),
+    転入申請("5", "転入申請", "転入"),
     /**
-     * コード:6 名称:資格喪失（死亡） 略称:定義なし
+     * コード:6 名称:資格喪失（死亡） 略称:喪失
      */
-    資格喪失_死亡("6", "資格喪失（死亡）"),
+    資格喪失_死亡("6", "資格喪失（死亡）", "喪失"),
     /**
      * コード:A 名称:新規申請（事前） 略称:定義なし
      */
-    新規申請_事前("A", "新規申請（事前）"),
+    新規申請_事前("A", "新規申請（事前）", ""),
     /**
      * コード:B 名称:更新申請（事前） 略称:定義なし
      */
-    更新申請_事前("B", "更新申請（事前）");
+    更新申請_事前("B", "更新申請（事前）", "");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private NinteiShinseiShinseijiKubunCode(String code, String fullname) {
+    private NinteiShinseiShinseijiKubunCode(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
-     * 要介護状態区分コード02のコードを返します。
+     * 申請区分（申請時）コードを返します。
      *
-     * @return 要介護状態区分コード02のコード
+     * @return 申請区分（申請時）コード
      */
     public RString getコード() {
         return code;
     }
 
     /**
-     * 要介護状態区分コード02の名称を返します。
+     * 申請区分（申請時）コードの名称を返します。
      *
-     * @return 要介護状態区分コード02の名称
+     * @return 申請区分（申請時）コードの名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 要介護状態区分コード02のコードと一致する内容を探します。
+     * 申請区分（申請時）コードの略称を返します。
      *
-     * @param code 要介護状態区分コード02のコード
-     * @return {@code code} に対応する要介護状態区分コード02
+     * @return 申請区分（申請時）コードの略称
+     */
+    public RString get略称() {
+        return shortName;
+    }
+
+    /**
+     * 申請区分（申請時）コードと一致する内容を探します。
+     *
+     * @param code 申請区分（申請時）コード
+     * @return {@code code} に対応する申請区分（申請時）コード
      */
     public static NinteiShinseiShinseijiKubunCode toValue(RString code) {
 

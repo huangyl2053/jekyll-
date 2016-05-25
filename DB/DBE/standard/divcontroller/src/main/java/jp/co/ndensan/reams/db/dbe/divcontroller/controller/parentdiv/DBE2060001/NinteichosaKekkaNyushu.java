@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2060001.Nin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2060001.NinteichosaKekkaNyushuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
@@ -166,7 +167,8 @@ public class NinteichosaKekkaNyushu {
             if (vallidation.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
             }
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号,
+                    new ShinseishoKanriNo(requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo()));
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.調査結果登録遷移).respond();
         }

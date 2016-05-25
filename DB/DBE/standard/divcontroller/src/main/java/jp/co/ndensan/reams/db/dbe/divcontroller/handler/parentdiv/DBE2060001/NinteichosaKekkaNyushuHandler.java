@@ -125,8 +125,8 @@ public class NinteichosaKekkaNyushuHandler {
                 set厚労省IF識別コード(new Code(csvEntity.getKoroshoIfShikibetsuCode())).
                 set認定調査依頼区分コード(new Code(csvEntity.getNinteichousaIraiKubunCode())).
                 set認定調査回数(Integer.parseInt(csvEntity.getNinteichosaIraiKaisu().toString())).
-                set認定調査実施年月日(new FlexibleDate(csvEntity.getNinteichosaJisshiYMD())).
-                set認定調査受領年月日(new FlexibleDate(csvEntity.getNinteichosaJuryoYMD())).
+                set認定調査実施年月日(dateFormart(csvEntity.getNinteichosaJisshiYMD())).
+                set認定調査受領年月日(dateFormart(csvEntity.getNinteichosaJuryoYMD())).
                 set認定調査区分コード(new Code(csvEntity.getNinteiChosaKubunCode())).
                 set認定調査委託先コード(new JigyoshaNo(csvEntity.getNinteiChosaItakusakiCode())).
                 set認定調査員コード(csvEntity.getNinteiChosainCode()).
@@ -138,8 +138,8 @@ public class NinteichosaKekkaNyushuHandler {
                 set利用施設電話番号(new TelNo(csvEntity.getRiyoShisetsuTelNo())).
                 set利用施設郵便番号(new YubinNo(csvEntity.getRiyoShisetsuYubinNo())).
                 set特記(csvEntity.getTokki()).
-                set認定調査特記事項受付年月日(new FlexibleDate(csvEntity.getTokkijikoUketsukeYMD())).
-                set認定調査特記事項受領年月日(new FlexibleDate(csvEntity.getTokkijikoJuryoYMD())).
+                set認定調査特記事項受付年月日(dateFormart(csvEntity.getTokkijikoUketsukeYMD())).
+                set認定調査特記事項受領年月日(dateFormart(csvEntity.getTokkijikoJuryoYMD())).
                 build();
     }
 
@@ -236,6 +236,10 @@ public class NinteichosaKekkaNyushuHandler {
                 set厚労省IF識別コード(new Code(csvEntity.getKoroshoIfShikibetsuCode())).
                 set施設利用フラグ(Boolean.getBoolean(csvEntity.getShisetsuRiyoFlag().toString())).
                 build();
+    }
+
+    private FlexibleDate dateFormart(RString 年月日) {
+        return RString.isNullOrEmpty(年月日) ? FlexibleDate.EMPTY : new FlexibleDate(new RDate(年月日.toString()).toDateString());
     }
 
 }

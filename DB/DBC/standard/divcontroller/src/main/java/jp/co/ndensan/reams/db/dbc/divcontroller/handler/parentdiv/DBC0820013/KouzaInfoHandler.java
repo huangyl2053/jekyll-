@@ -25,8 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -171,8 +171,24 @@ public class KouzaInfoHandler {
             i = i + checkObject(entityView.get支払場所(), 支払方法情報共有DIV.getShiharaiBasho());
             i = i + checkDate(支払方法情報共有DIV.getStartYMD(), entityView.get支払期間開始年月日());
             i = i + checkDate(支払方法情報共有DIV.getEndYMD(), entityView.get支払期間終了年月日());
-            i = i + checkRTime(支払方法情報共有DIV.getStartHHMM(), entityView.get支払窓口開始時間());
-            i = i + checkRTime(支払方法情報共有DIV.getEndHHMM(), entityView.get支払窓口終了時間());
+            RString 支払窓口開始時間 = null;
+            RTime 支払窓口開始時間div = 支払方法情報共有DIV.getStartHHMM();
+            if (支払窓口開始時間div != null) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(new RString(支払窓口開始時間div.getHour()));
+                builder.append(new RString(支払窓口開始時間div.getMinute()));
+                支払窓口開始時間 = builder.toRString();
+            }
+            i = i + checkObject(支払窓口開始時間, entityView.get支払窓口開始時間());
+            RString 支払窓口終了時間 = null;
+            RTime 支払窓口終了時間div = 支払方法情報共有DIV.getEndHHMM();
+            if (支払窓口終了時間div != null) {
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(new RString(支払窓口終了時間div.getHour()));
+                builder.append(new RString(支払窓口終了時間div.getMinute()));
+                支払窓口終了時間 = builder.toRString();
+            }
+            i = i + checkObject(支払窓口終了時間, entityView.get支払窓口終了時間());
             return i > 0;
         } else if (口座払_コード.equals(支払方法情報共有DIV.getShiharaiHohoRad())) {
             return !new RString(String.valueOf(entityView.get口座ID())).equals(支払方法情報共有DIV.getKozaID());
@@ -209,12 +225,18 @@ public class KouzaInfoHandler {
             RString 支払窓口開始時間 = RString.EMPTY;
             RTime 支払窓口開始時間div = 支払方法情報共有DIV.getStartHHMM();
             if (支払窓口開始時間div != null) {
-                支払窓口開始時間 = new RString(支払窓口開始時間div.toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(new RString(支払窓口開始時間div.getHour()));
+                builder.append(new RString(支払窓口開始時間div.getMinute()));
+                支払窓口開始時間 = builder.toRString();
             }
             RString 支払窓口終了時間 = RString.EMPTY;
             RTime 支払窓口終了時間div = 支払方法情報共有DIV.getEndHHMM();
             if (支払窓口終了時間div != null) {
-                支払窓口終了時間 = new RString(支払窓口終了時間div.toString());
+                RStringBuilder builder = new RStringBuilder();
+                builder.append(new RString(支払窓口終了時間div.getHour()));
+                builder.append(new RString(支払窓口終了時間div.getMinute()));
+                支払窓口終了時間 = builder.toRString();
             }
             entityView = entityView.createBuilderForEdit()
                     .set被保険者番号(被保険者番号)
@@ -312,12 +334,4 @@ public class KouzaInfoHandler {
         return 1;
     }
 
-    private int checkRTime(RTime rtime, RString str) {
-        if (rtime == null && str == null) {
-            return 0;
-        } else if (rtime != null && new RString(rtime.toString()).equals(str)) {
-            return 0;
-        }
-        return 1;
-    }
 }

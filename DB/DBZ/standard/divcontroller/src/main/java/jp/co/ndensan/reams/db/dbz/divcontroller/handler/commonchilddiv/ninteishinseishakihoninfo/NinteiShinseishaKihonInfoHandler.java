@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteish
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoManager;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -48,7 +48,7 @@ public class NinteiShinseishaKihonInfoHandler {
 
             div.getTxtHokenshaName().setValue(business.get市町村名称() == null ? RString.EMPTY : business.get市町村名称());
             div.getTxtHihokenshaKubun().setValue(business.get被保険者区分コード() == null
-                    ? RString.EMPTY : new RString(HihokenshaKubunCode.toValue(business.get被保険者区分コード()).name()));
+                    ? RString.EMPTY : HihokenshaKubunCode.toValue(business.get被保険者区分コード()).get名称());
             div.getTxtHihokenshaName().setValue(
                     business.get被保険者氏名() == null ? RString.EMPTY : new RString(business.get被保険者氏名().toString()));
             div.getTxtHihokenshaKana().setValue(
