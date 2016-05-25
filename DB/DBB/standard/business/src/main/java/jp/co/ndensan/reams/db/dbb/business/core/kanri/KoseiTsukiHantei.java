@@ -14,13 +14,13 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiHyoki;
 import jp.co.ndensan.reams.db.dbx.definition.core.TsukiShorkiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 更正月判定のクラスです。
@@ -86,7 +86,7 @@ public class KoseiTsukiHantei {
         if (SuitoSeiriTaishoNendo.現年度_増額減額.equals(出納整理対象年度)
                 || (SuitoSeiriTaishoNendo.現年度_減額のみ.equals(出納整理対象年度)
                 && ZogakuGengakuKubun.減額更正.equals(増額減額区分))) {
-            RString 調定年度 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課);
+            RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
             return new FuchoKiUtil(new FlexibleYear(調定年度).minusYear(1)).get期月リスト().get月の期(月);
         } else if ((SuitoSeiriTaishoNendo.現年度_減額のみ.equals(出納整理対象年度)
                 && ZogakuGengakuKubun.増額更正.equals(増額減額区分))
@@ -115,7 +115,7 @@ public class KoseiTsukiHantei {
     }
 
     private Tsuki get月(RDate 指定日) {
-        RString 更正月判定日数 = BusinessConfig.get(ConfigNameDBB.日付関連_更正月判定日数, 指定日, SubGyomuCode.DBB介護賦課);
+        RString 更正月判定日数 = DbBusinessConfig.get(ConfigNameDBB.日付関連_更正月判定日数, 指定日, SubGyomuCode.DBB介護賦課);
 
         int dayValue = 指定日.getDayValue();
         int lastDay = 指定日.getLastDay();
