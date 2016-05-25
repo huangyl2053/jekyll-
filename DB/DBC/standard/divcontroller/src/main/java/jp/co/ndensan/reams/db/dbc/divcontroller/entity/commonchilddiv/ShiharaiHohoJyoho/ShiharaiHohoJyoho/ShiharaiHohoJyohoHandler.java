@@ -130,11 +130,11 @@ public class ShiharaiHohoJyohoHandler {
 
             if (状態.equals(照会)) {
 
-                償還払給付または高額給付の照会モード();
+                償還払給付または高額給付の照会モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(登録)) {
 
-                償還払給付または高額給付の登録モード();
+                償還払給付または高額給付の登録モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(修正)) {
 
@@ -145,11 +145,11 @@ public class ShiharaiHohoJyohoHandler {
 
             if (状態.equals(照会)) {
 
-                高額合算の照会モード();
+                高額合算の照会モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(登録)) {
 
-                高額合算の登録モード();
+                高額合算の登録モード(支給申請情報.getShiharaiHohoKubun());
             }
             if (状態.equals(修正)) {
 
@@ -208,12 +208,12 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKanji1().clearDomain();
     }
 
-    private void 償還払給付または高額給付の照会モード() {
+    private void 償還払給付または高額給付の照会モード(ShiharaiHohoKubun 支払方法区分) {
 
         償還払給付または高額給付の照会モード_支払方法情報エリアの状態処理();
         償還払給付または高額給付の照会モード_窓口払いエリアの状態処理();
-        償還払給付または高額給付の照会モード_口座払いエリアの状態処理();
-        償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理();
+        償還払給付または高額給付の照会モード_口座払いエリアの状態処理(支払方法区分);
+        償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理(支払方法区分);
     }
 
     private void 償還払給付または高額給付の修正モード(ShiharaiHohoKubun 支払方法区分) {
@@ -224,27 +224,27 @@ public class ShiharaiHohoJyohoHandler {
         償還払給付または高額給付の修正モード_受領委任払いエリアの状態処理(支払方法区分);
     }
 
-    private void 償還払給付または高額給付の登録モード() {
+    private void 償還払給付または高額給付の登録モード(ShiharaiHohoKubun 支払方法区分) {
 
         償還払給付または高額給付の登録モード_支払方法情報エリアの状態処理();
         償還払給付または高額給付の登録モード_窓口払いエリアの状態処理();
-        償還払給付または高額給付の登録モード_口座払いエリアの状態処理();
-        償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理();
+        償還払給付または高額給付の登録モード_口座払いエリアの状態処理(支払方法区分);
+        償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理(支払方法区分);
     }
 
-    private void 高額合算の照会モード() {
+    private void 高額合算の照会モード(ShiharaiHohoKubun 支払方法区分) {
 
         高額合算の照会モード_支払方法情報エリアの状態処理();
         高額合算の照会モード_窓口払いエリアの状態処理();
-        高額合算の照会モード_口座払いエリアの状態処理();
+        高額合算の照会モード_口座払いエリアの状態処理(支払方法区分);
         div.setMode_PageMode(ShiharaiHohoJyohoDiv.PageMode.KogakuGassan);
     }
 
-    private void 高額合算の登録モード() {
+    private void 高額合算の登録モード(ShiharaiHohoKubun 支払方法区分) {
 
         高額合算の登録モード_支払方法情報エリアの状態処理();
         高額合算の登録モード_窓口払いエリアの状態処理();
-        高額合算の登録モード_口座払いエリアの状態処理();
+        高額合算の登録モード_口座払いエリアの状態処理(支払方法区分);
         div.setMode_PageMode(ShiharaiHohoJyohoDiv.PageMode.KogakuGassan);
     }
 
@@ -302,13 +302,16 @@ public class ShiharaiHohoJyohoHandler {
         div.getRadJyryoinin().setDisabled(false);
     }
 
-    private void 償還払給付または高額給付の照会モード_口座払いエリアの状態処理() {
+    private void 償還払給付または高額給付の照会モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setDisplayNone(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
@@ -316,13 +319,15 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtYokinShubetsu().setReadOnly(true);
     }
 
-    private void 償還払給付または高額給付の登録モード_口座払いエリアの状態処理() {
+    private void 償還払給付または高額給付の登録モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setDisplayNone(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
@@ -330,13 +335,15 @@ public class ShiharaiHohoJyohoHandler {
         div.getTtxtMeigininKanji().setReadOnly(true);
     }
 
-    private void 高額合算の登録モード_口座払いエリアの状態処理() {
+    private void 高額合算の登録モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
-        div.getTxtTenban().setDisplayNone(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtYokinShubetsu().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
@@ -344,26 +351,30 @@ public class ShiharaiHohoJyohoHandler {
         div.getTtxtMeigininKanji().setReadOnly(true);
     }
 
-    private void 高額合算の照会モード_口座払いエリアの状態処理() {
+    private void 高額合算の照会モード_口座払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getDdlKozaID().setDisabled(true);
         div.getBtnKozaToroku().setDisabled(true);
         div.getTxtKinyuKikanCode().setReadOnly(true);
-        div.getTxtTenban().setDisplayNone(true);
+        if (!ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
+            div.getTxtTenban().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanName().setReadOnly(true);
         div.getTxtKozaNo().setReadOnly(true);
         div.getTxtMeigininKana().setReadOnly(true);
         div.getTtxtMeigininKanji().setReadOnly(true);
     }
 
-    private void 償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理() {
+    private void 償還払給付または高額給付の照会モード_受領委任払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getTxtKeiyakuNo().setReadOnly(true);
         div.getBtnSelect().setDisabled(true);
         div.getTxtKeiyakuCode().setReadOnly(true);
         div.getTxtKeiyakuName().setReadOnly(true);
         div.getTxtKinyuKikanCode1().setReadOnly(true);
-        div.getTxtTenban1().setDisplayNone(true);
+        if (!ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
+            div.getTxtTenban1().setDisplayNone(true);
+        }
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
@@ -402,7 +413,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtYokinShubetsu1().setReadOnly(true);
     }
 
-    private void 償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理() {
+    private void 償還払給付または高額給付の登録モード_受領委任払いエリアの状態処理(ShiharaiHohoKubun 支払方法区分) {
 
         div.getTxtKeiyakuNo().setReadOnly(true);
         div.getBtnSelect().setDisabled(true);
@@ -410,7 +421,9 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKeiyakuName().setReadOnly(true);
         div.getTxtKinyuKikanCode1().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode1().setReadOnly(true);
-        div.getTxtTenban1().setDisplayNone(true);
+        if (!ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
+            div.getTxtTenban1().setDisplayNone(true);
+        }
         div.getTxtYokinShubetsu1().setReadOnly(true);
         div.getTxtKozaNo1().setReadOnly(true);
         div.getTxtKinyuKikanName1().setReadOnly(true);
@@ -453,7 +466,6 @@ public class ShiharaiHohoJyohoHandler {
     private void 償還払給付または高額給付の照会モード_窓口払いエリアの状態処理() {
 
         div.getTxtShiharaiBasho().setReadOnly(true);
-        div.getTxtTenban1().setDisplayNone(true);
         div.getTxtStartYMD().setReadOnly(true);
         div.getTxtEndYMD().setReadOnly(true);
         div.getTxtStartYobi().setReadOnly(true);
@@ -614,6 +626,7 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
         div.getTtxtMeigininKanji().setDomain(口座情報.get口座名義人漢字());
+        div.getTxtTenban().setReadOnly(true);
     }
 
     /**
@@ -637,8 +650,6 @@ public class ShiharaiHohoJyohoHandler {
                 ? AtenaMeisho.EMPTY : 受領委任契約事業者.get契約事業者名称());
         div.getTxtKinyuKikanCode1().setDomain(受領委任契約事業者.get金融機関コード() == null
                 ? KinyuKikanCode.EMPTY : 受領委任契約事業者.get金融機関コード());
-        div.getTxtKinyuKikanShitenCode1().setDomain(受領委任契約事業者.get支店コード() == null
-                ? KinyuKikanShitenCode.EMPTY : 受領委任契約事業者.get支店コード());
         KinyuKikan kinyuKikan = 金融機関コードに対する名称(受領委任契約事業者.get金融機関コード() == null
                 ? KinyuKikanCode.EMPTY : 受領委任契約事業者.get金融機関コード());
         KinyuKikanShiten kinyuKikanShiten = 支店コードまたは店番に対する名称(受領委任契約事業者.get金融機関コード() == null
@@ -656,7 +667,8 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanShitenCode1().setDisplayNone(false);
             div.getTxtYokinShubetsu1().setDisplayNone(false);
             div.getTxtTenban1().setDisplayNone(true);
-            div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
+            div.getTxtKinyuKikanShitenCode1().setDomain(受領委任契約事業者.get支店コード() == null
+                    ? KinyuKikanShitenCode.EMPTY : 受領委任契約事業者.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         }
         UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(受領委任契約事業者.get口座種別()));
@@ -668,6 +680,7 @@ public class ShiharaiHohoJyohoHandler {
                 ? AtenaKanaMeisho.EMPTY : 受領委任契約事業者.get口座名義人カナ());
         div.getTxtMeigininKanji1().setDomain(受領委任契約事業者.get口座名義人() == null
                 ? AtenaMeisho.EMPTY : 受領委任契約事業者.get口座名義人());
+        div.getTxtTenban1().setReadOnly(true);
     }
 
     private void 口座払いエリアの初期化Private(KinyuKikan kinyuKikan, KinyuKikanShiten kinyuKikanShiten) {

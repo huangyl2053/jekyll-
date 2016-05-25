@@ -121,12 +121,16 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.umareMeiji1 = joho.getUmareMeiji();
         source.umareTaisho1 = joho.getUmareTaisho();
         source.umareShowa1 = joho.getUmareShowa();
-        source.umareMm1 = get年月日の月_和暦(joho.getUmareYy());
-        source.umareDd1 = get年月日の日_和暦(joho.getUmareYy());
-        source.umareYy1 = get年月日の年_和暦(joho.getUmareYy());
-        source.umareYyyy1 = get年月日の年_西歴(joho.getUmareYy());
-        source.umareMmS1 = get年月日の月_西歴(joho.getUmareYy());
-        source.umareDdS1 = get年月日の日_西歴(joho.getUmareYy());
+        if (!RString.isNullOrEmpty(joho.getUmareYy())) {
+            source.umareYy1 = joho.getUmareYy();
+            source.umareMm1 = joho.getUmareMm1();
+            source.umareDd1 = joho.getUmareDd1();
+        }
+        if (!RString.isNullOrEmpty(joho.getUmareYyyy1())) {
+            source.umareYyyy1 = joho.getUmareYyyy1();
+            source.umareMmS1 = joho.getUmareMmS1();
+            source.umareDdS1 = joho.getUmareDdS1();
+        }
         source.saikofu11 = joho.getSaikofu1();
         source.saikofu21 = joho.getSaikofu12();
         source.shisetsuname11 = joho.getShisetsuname1();
@@ -234,12 +238,16 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         source.umareMeiji2 = joho.getUmareMeiji2();
         source.umareTaisho2 = joho.getUmareTaisho2();
         source.umareShowa2 = joho.getUmareShowa2();
-        source.umareMm2 = get年月日の月_和暦(joho.getUmareYy2());
-        source.umareDd2 = get年月日の日_和暦(joho.getUmareYy2());
-        source.umareMmS2 = get年月日の月_西歴(joho.getUmareYy2());
-        source.umareDdS2 = get年月日の日_西歴(joho.getUmareYy2());
-        source.umareYy2 = get年月日の年_和暦(joho.getUmareYy2());
-        source.umareYyyy2 = get年月日の年_西歴(joho.getUmareYy2());
+        if (!RString.isNullOrEmpty(joho.getUmareYy2())) {
+            source.umareYy2 = joho.getUmareYy2();
+            source.umareMm2 = joho.getUmareMm2();
+            source.umareDd2 = joho.getUmareDd2();
+        }
+        if (!RString.isNullOrEmpty(joho.getUmareYyyy2())) {
+            source.umareYyyy2 = joho.getUmareYyyy2();
+            source.umareMmS2 = joho.getUmareMmS2();
+            source.umareDdS2 = joho.getUmareDdS2();
+        }
         source.saikofu12 = joho.getSaikofu12();
         source.saikofu22 = joho.getSaikofu22();
         source.shisetsuname12 = joho.getShisetsuname12();

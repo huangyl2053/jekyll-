@@ -76,6 +76,11 @@ public class HihokenshashoB4PrintService {
         item.setUmareTaisho(itemOne.getUmareTaisho());
         item.setUmareShowa(itemOne.getUmareShowa());
         item.setUmareYy(itemOne.getUmareYy());
+        item.setUmareMm1(itemOne.getUmareMm());
+        item.setUmareDd1(itemOne.getUmareDd());
+        item.setUmareYyyy1(itemOne.getUmareYyyy());
+        item.setUmareMmS1(itemOne.getUmareMmS());
+        item.setUmareDdS1(itemOne.getUmareDdS());
         item.setSeibetsuMan(itemOne.getSeibetsuMan());
         item.setSeibetsuWoman(itemOne.getSeibetsuWoman());
         item.setKofuymdGengo(itemOne.getKofuymdGengo());
@@ -191,6 +196,11 @@ public class HihokenshashoB4PrintService {
         item.setUmareTaisho2(itemTwo.getUmareTaisho());
         item.setUmareShowa2(itemTwo.getUmareShowa());
         item.setUmareYy2(itemTwo.getUmareYy());
+        item.setUmareMm2(itemTwo.getUmareMm());
+        item.setUmareDd2(itemTwo.getUmareDd());
+        item.setUmareYyyy2(itemTwo.getUmareYyyy());
+        item.setUmareMmS2(itemTwo.getUmareMmS());
+        item.setUmareDdS2(itemTwo.getUmareDdS());
         item.setSeibetsuMan2(itemTwo.getSeibetsuMan());
         item.setSeibetsuWoman2(itemTwo.getSeibetsuWoman());
         item.setKofuymdGengo2(itemTwo.getKofuymdGengo());

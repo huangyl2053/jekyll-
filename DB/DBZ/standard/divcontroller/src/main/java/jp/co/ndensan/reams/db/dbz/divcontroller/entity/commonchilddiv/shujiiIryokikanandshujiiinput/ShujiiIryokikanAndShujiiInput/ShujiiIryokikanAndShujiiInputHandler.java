@@ -49,6 +49,29 @@ public class ShujiiIryokikanAndShujiiInputHandler {
     }
 
     /**
+     * 主治医医療機関＆主治医入力Divの初期化です。
+     *
+     * @param shichosonCode 市町村コード
+     * @param shinseishoKanriNo 申請書管理番号
+     * @param gyomuCode サブ業務コード
+     * @param shujiiIryokikanCode 主治医医療機関コード
+     * @param iryoKikanMeisho 医療機関名称
+     * @param shujiiCode 主治医コード
+     * @param shujiiName 主治医氏名
+     */
+    public void initialize(LasdecCode shichosonCode, ShinseishoKanriNo shinseishoKanriNo, SubGyomuCode gyomuCode, RString shujiiIryokikanCode,
+            RString iryoKikanMeisho, RString shujiiCode, RString shujiiName) {
+        div.getTxtIryoKikanCode().setValue(shujiiIryokikanCode);
+        div.getTxtIryoKikanName().setValue(iryoKikanMeisho);
+        div.getTxtShujiiCode().setValue(shujiiCode);
+        div.getTxtShujiiName().setValue(shujiiName);
+        div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());
+        div.setHdnShichosonCode(shichosonCode.value());
+        div.setHdnShinseishoKanriNo(shinseishoKanriNo.value());
+        div.setHdnSubGyomuModel(gyomuCode.value());
+    }
+
+    /**
      * 前回申請情報をセットします。
      *
      * @param 前回申請情報

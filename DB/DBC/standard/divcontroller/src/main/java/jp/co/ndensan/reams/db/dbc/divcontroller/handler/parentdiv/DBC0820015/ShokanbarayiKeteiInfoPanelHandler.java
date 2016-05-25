@@ -77,14 +77,14 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             FlexibleYearMonth サービス年月,
             RString 整理番号
     ) {
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
             div.getPanelTwo().getTxtSeiriBango().clearValue();
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
                     被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
             div.getPanelTwo().getTxtShoriMode().setValue(新規);
         }
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
                     .toDateString().toString()));
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
@@ -92,7 +92,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
             div.getPanelTwo().getTxtShoriMode().setValue(修正);
         }
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
                     .toDateString().toString()));
             div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
@@ -132,7 +132,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * putViewState
      */
     public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         FlexibleYearMonth サービス提供年月 = null;
         RString 整理番号 = null;
         if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
@@ -350,7 +349,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 .getShokanbaraiketteiJohoDiv().getTxtFushikyuriyu2().getValue();
         int 増減単位 = div.getCcdShokanbaraiketteiJoho()
                 .getShokanbaraiketteiJohoDiv().getTxtZogentani().getValue().intValue();
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         List<SyokanbaraihiShikyuShinseiKetteEntity> entityList = new ArrayList<>();
         List<dgSyokanbaraikete_Row> rowList = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()

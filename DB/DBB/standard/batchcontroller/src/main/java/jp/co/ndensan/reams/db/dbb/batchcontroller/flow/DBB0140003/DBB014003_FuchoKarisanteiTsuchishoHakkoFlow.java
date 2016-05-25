@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 /**
  * 普徴仮算定通知書一括発行Flow
  *
- * @reamsid_L DBC-0710-030 gongliang
+ * @reamsid_L DBB-0710-030 gongliang
  */
 public class DBB014003_FuchoKarisanteiTsuchishoHakkoFlow
         extends BatchFlowBase<FuchoKarisanteiTsuchishoHakkoBatchParameter> {

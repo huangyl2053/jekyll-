@@ -29,6 +29,11 @@ public class HihokenshashoB4Item {
     private final RString umareTaisho;
     private final RString umareShowa;
     private final RString umareYy;
+    private final RString umareMm;
+    private final RString umareDd;
+    private final RString umareYyyy;
+    private final RString umareMmS;
+    private final RString umareDdS;
     private final RString seibetsuMan;
     private final RString seibetsuWoman;
     private final RString kofuymdGengo;
@@ -143,7 +148,12 @@ public class HihokenshashoB4Item {
      * @param umareMeiji 明治
      * @param umareTaisho 大正
      * @param umareShowa 昭和
-     * @param umareYy 生年月日
+     * @param umareYy 生年月日の年(和暦)
+     * @param umareMm 生年月日の年(和暦)
+     * @param umareDd 生年月日の年(和暦)
+     * @param umareYyyy 生年月日の年(和暦)
+     * @param umareMmS 生年月日の年(和暦)
+     * @param umareDdS 生年月日の年(和暦)
      * @param seibetsuMan 男
      * @param seibetsuWoman 女
      * @param kofuymdGengo 交付年月日
@@ -256,6 +266,11 @@ public class HihokenshashoB4Item {
             RString umareTaisho,
             RString umareShowa,
             RString umareYy,
+            RString umareMm,
+            RString umareDd,
+            RString umareYyyy,
+            RString umareMmS,
+            RString umareDdS,
             RString seibetsuMan,
             RString seibetsuWoman,
             RString kofuymdGengo,
@@ -367,6 +382,11 @@ public class HihokenshashoB4Item {
         this.umareTaisho = umareTaisho;
         this.umareShowa = umareShowa;
         this.umareYy = umareYy;
+        this.umareMm = umareMm;
+        this.umareDd = umareDd;
+        this.umareYyyy = umareYyyy;
+        this.umareMmS = umareMmS;
+        this.umareDdS = umareDdS;
         this.seibetsuMan = seibetsuMan;
         this.seibetsuWoman = seibetsuWoman;
         this.kofuymdGengo = kofuymdGengo;

@@ -24,8 +24,8 @@ public class HanteiKekkaIchiranA4ReportSource implements IReportSource {
     public RString listYukokikan_1;
     @ReportItem(name = "listYukokikan_2", length = 2, order = 6)
     public RString listYukokikan_2;
-    @ReportItem(name = "listHokenshaNo_1", length = 6, order = 7)
-    public RString listHokenshaNo_1;
+    @ReportItem(name = "listHokenshaName_1", length = 6, order = 7)
+    public RString listHokenshaName_1;
     @ReportItem(name = "listNo_1", length = 3, order = 8)
     public RString listNo_1;
     @ReportItem(name = "listNo_2", length = 3, order = 9)
@@ -54,8 +54,8 @@ public class HanteiKekkaIchiranA4ReportSource implements IReportSource {
     public RString listHihokenshaNo_7;
     @ReportItem(name = "listShinsakaiiken_1", length = 100, order = 21)
     public RString listShinsakaiiken_1;
-    @ReportItem(name = "listHokenshaName_1", length = 7, order = 22)
-    public RString listHokenshaName_1;
+    @ReportItem(name = "listHokenshaNo_1", length = 7, order = 22)
+    public RString listHokenshaNo_1;
     @ReportItem(name = "listTokuteishippei_1", length = 19, order = 23)
     public RString listTokuteishippei_1;
     @ReportItem(name = "listTokuteishippei_2", length = 30, order = 24)

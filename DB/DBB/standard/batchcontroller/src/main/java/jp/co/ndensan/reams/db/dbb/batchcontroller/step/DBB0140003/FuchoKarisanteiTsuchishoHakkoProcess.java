@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB0140003;
 /**
  * 賦課情報の取得 一時テーブルへ登録です。
  *
- * @reamsid_L DBC-0710-030 gongliang
+ * @reamsid_L DBB-0710-030 gongliang
  */
 public class FuchoKarisanteiTsuchishoHakkoProcess {
 //extends BatchProcessBase<ShorijyokyoJoho>

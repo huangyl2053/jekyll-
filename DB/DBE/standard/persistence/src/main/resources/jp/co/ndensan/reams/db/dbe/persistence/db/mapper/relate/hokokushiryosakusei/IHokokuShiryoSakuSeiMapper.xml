@@ -1396,7 +1396,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiShinseijiKubunCode" IN('1', '2', '3', '5')
@@ -1444,7 +1444,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiShinseijiKubunCode" IN('1', '2', '3', '5')
@@ -1492,7 +1492,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiShinseijiKubunCode" IN('1', '2', '3', '5')
@@ -1540,7 +1540,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiShinseijiKubunCode" IN('1', '2', '3', '5')
@@ -1590,7 +1590,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiShinseijiKubunCode" IN('1', '2', '3', '5')
@@ -1638,7 +1638,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiHoreiKubunCode" IN('1', '2', '3')
@@ -1686,7 +1686,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiHoreiKubunCode" IN('1', '2', '3')
@@ -1734,7 +1734,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiHoreiKubunCode" IN('1', '2', '3')
@@ -1782,7 +1782,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiHoreiKubunCode" IN('1', '2', '3')
@@ -1832,7 +1832,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiHoreiKubunCode" IN('1', '2', '3')
@@ -1882,7 +1882,7 @@
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
         AND A."ninteiShinseiShinseijiKubunCode" IN('1', '2', '3')

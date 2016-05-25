@@ -68,7 +68,7 @@ public class TekiyoJogaishaIdoTeiseiFinder {
         int 更新件数;
         if (is年月日が一致(現在の除外の情報.get異動日(), 修正後の除外の情報.get異動日())) {
             manager.save適用除外者(現在の除外の情報.createBuilderForEdit().set論理削除フラグ(true).build());
-            int 枝番 = new Integer(現在の除外の情報.get枝番().toString()) + 1;
+            int 枝番 = Integer.parseInt(現在の除外の情報.get枝番().toString()) + 1;
             manager.save適用除外者(get追加適用除外者(修正後の除外の情報
                     .createBuilderForEdit().set枝番(new RString(String.valueOf(枝番)).padLeft("0", 枝番_桁)).build()));
         } else {
@@ -101,7 +101,7 @@ public class TekiyoJogaishaIdoTeiseiFinder {
                 dbT1002Entityクローン.setIdoYMD(修正後の除外の情報.get適用年月日());
                 dbT1002Entityクローン.setTekiyoTodokedeYMD(修正後の除外の情報.get適用届出年月日());
                 dbT1002Entityクローン.setTekiyoJogaiTekiyoJiyuCode(修正後の除外の情報.get適用除外適用事由コード());
-                dbT1002Entityクローン.setEdaNo(new RString(new Integer(dbT1002Entity.getEdaNo().toString()) + 1).padLeft("0", 枝番_桁));
+                dbT1002Entityクローン.setEdaNo(new RString(Integer.parseInt(dbT1002Entity.getEdaNo().toString()) + 1).padLeft("0", 枝番_桁));
             }
             dbT1002Entity.setLogicalDeletedFlag(true);
             TekiyoJogaisha 更新適用除外者 = new TekiyoJogaisha(dbT1002Entity);

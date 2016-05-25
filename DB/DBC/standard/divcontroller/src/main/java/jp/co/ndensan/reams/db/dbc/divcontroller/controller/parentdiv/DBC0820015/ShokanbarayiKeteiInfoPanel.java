@@ -76,7 +76,7 @@ public class ShokanbarayiKeteiInfoPanel {
         div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
         getHandler(div).initialize(被保険者番号, サービス年月, 整理番号);
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             return ResponseData.of(div).setState(DBC0820015StateName.削除モード);
         }
         List<dgSyokanbaraikete_Row> 決定情報登録_償還払決定一覧 = div.getCcdShokanbaraiketteiJoho().getShokanbaraiketteiJohoDiv()
@@ -99,7 +99,7 @@ public class ShokanbarayiKeteiInfoPanel {
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnShinsei(ShokanbarayiKeteiInfoPanelDiv div) {
         getHandler(div).putViewState();
-        RString 画面モード = div.getPanelTwo().getTxtShoriMode().getValue();
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         if (登録.equals(画面モード)) {
             ViewStateHolder.put(ViewStateKeys.画面モード, 修正);
             return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.申請情報).respond();
@@ -116,8 +116,6 @@ public class ShokanbarayiKeteiInfoPanel {
      * @return 画面DIV
      */
     public ResponseData<ShokanbarayiKeteiInfoPanelDiv> onClick_btnKouza(ShokanbarayiKeteiInfoPanelDiv div) {
-        RString 画面モード = div.getPanelTwo().getTxtShoriMode().getValue();
-        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
         return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.口座情報).respond();
     }
 
@@ -131,8 +129,6 @@ public class ShokanbarayiKeteiInfoPanel {
             ShokanbarayiKeteiInfoPanelDiv div) {
         if (getHandler(div).isチェック処理()) {
             getHandler(div).putViewState();
-            RString 画面モード = div.getPanelTwo().getTxtShoriMode().getValue();
-            ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
             return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.サービス提供証明書).respond();
         } else {
             throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(証明書.toString()));
@@ -151,7 +147,7 @@ public class ShokanbarayiKeteiInfoPanel {
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
         RString 整理番号 = paramter.getSeiriNp();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820015TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).get内容変更状態();
