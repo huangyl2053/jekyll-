@@ -192,8 +192,8 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         RString 口座情報 = RString.EMPTY;
         if (編集後本算定通知書共通情報.get編集後口座() != null) {
             RString 金融機関コード = 編集後本算定通知書共通情報.get編集後口座().get金融機関コード();
-            RString 通帳記号 = 編集後本算定通知書共通情報.get編集後口座().get通帳記号();
-            RString 通帳番号 = 編集後本算定通知書共通情報.get編集後口座().get通帳番号();
+            RString 通帳記号 = 編集後本算定通知書共通情報.get編集後口座().getEdited通帳記号();
+            RString 通帳番号 = 編集後本算定通知書共通情報.get編集後口座().getEdited通帳番号();
             RString 口座名義人漢字 = 編集後本算定通知書共通情報.get編集後口座().get口座名義人漢字();
             RString 支店コード = 編集後本算定通知書共通情報.get編集後口座().get支店コード();
             RString 口座番号 = 編集後本算定通知書共通情報.get編集後口座().get口座番号();

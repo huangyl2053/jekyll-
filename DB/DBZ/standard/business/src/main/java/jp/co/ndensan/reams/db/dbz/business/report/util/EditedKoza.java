@@ -173,11 +173,11 @@ public class EditedKoza {
      *
      * @return 通帳記号
      */
-    public RString get通帳記号() {
+    public RString getEdited通帳記号() {
         if (口座 == null) {
             return RString.EMPTY;
         }
-        return 口座.get通帳記号();
+        return 口座.getEdited通帳記号();
     }
 
     /**
@@ -185,11 +185,11 @@ public class EditedKoza {
      *
      * @return 通帳番号
      */
-    public RString get通帳番号() {
+    public RString getEdited通帳番号() {
         if (口座 == null) {
             return RString.EMPTY;
         }
-        return 口座.get通帳番号();
+        return 口座.getEdited通帳番号();
     }
 
     /**
