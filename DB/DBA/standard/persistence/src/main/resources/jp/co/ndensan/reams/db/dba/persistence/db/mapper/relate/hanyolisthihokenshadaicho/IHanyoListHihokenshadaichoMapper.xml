@@ -14,6 +14,15 @@
         <result property="shikakuSoshitsuJiyuCode" column="DbT1001_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="shikakuSoshitsuYMD" column="DbT1001_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shikakuSoshitsuTodokedeYMD" column="DbT1001_shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoJiyuCode" column="DbT1001_shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shikakuHenkoYMD" column="DbT1001_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoTodokedeYMD" column="DbT1001_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoJiyuCode" column="DbT1001_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jushochitokureiTekiyoYMD" column="DbT1001_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoTodokedeYMD" column="DbT1001_jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoJiyuCode" column="DbT1001_jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jushochitokureiKaijoYMD" column="DbT1001_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoTodokedeYMD" column="DbT1001_jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="hihokennshaKubunCode" column="DbT1001_hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jushochiTokureiFlag" column="DbT1001_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koikinaiJushochiTokureiFlag" column="DbT1001_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -32,6 +41,15 @@
         DbT1001."shikakuSoshitsuJiyuCode" AS "DbT1001_shikakuSoshitsuJiyuCode",
         DbT1001."shikakuSoshitsuYMD" AS "DbT1001_shikakuSoshitsuYMD",
         DbT1001."shikakuSoshitsuTodokedeYMD" AS "DbT1001_shikakuSoshitsuTodokedeYMD",
+        DbT1001."shikakuHenkoJiyuCode" AS "DbT1001_shikakuHenkoJiyuCode",
+        DbT1001."shikakuHenkoYMD" AS "DbT1001_shikakuHenkoYMD",
+        DbT1001."shikakuHenkoTodokedeYMD" AS "DbT1001_shikakuHenkoTodokedeYMD",
+        DbT1001."jushochitokureiTekiyoJiyuCode" AS "DbT1001_jushochitokureiTekiyoJiyuCode",
+        DbT1001."jushochitokureiTekiyoYMD" AS "DbT1001_jushochitokureiTekiyoYMD",
+        DbT1001."jushochitokureiTekiyoTodokedeYMD" AS "DbT1001_jushochitokureiTekiyoTodokedeYMD",
+        DbT1001."jushochitokureiKaijoJiyuCode" AS "DbT1001_jushochitokureiKaijoJiyuCode",
+        DbT1001."jushochitokureiKaijoYMD" AS "DbT1001_jushochitokureiKaijoYMD",
+        DbT1001."jushochitokureiKaijoTodokedeYMD" AS "DbT1001_jushochitokureiKaijoTodokedeYMD",
         DbT1001."hihokennshaKubunCode" AS "DbT1001_hihokennshaKubunCode",
         DbT1001."jushochiTokureiFlag" AS "DbT1001_jushochiTokureiFlag",
         DbT1001."koikinaiJushochiTokureiFlag" AS "DbT1001_koikinaiJushochiTokureiFlag",
