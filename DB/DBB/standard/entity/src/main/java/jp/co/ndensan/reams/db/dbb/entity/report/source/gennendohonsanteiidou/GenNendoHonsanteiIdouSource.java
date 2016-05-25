@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -21,6 +22,7 @@ public class GenNendoHonsanteiIdouSource implements IReportSource {
     public RString printTimeStamp;
     @ReportItem(name = "nendo", length = 4, order = 2)
     public RString nendo;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "hokenshaNo", length = 6, order = 3)
     public RString hokenshaNo;
     @ReportItem(name = "hokenshaName", length = 12, order = 4)

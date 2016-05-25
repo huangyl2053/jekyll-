@@ -107,8 +107,8 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         RString 帳票作成時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         RString 年度 = 賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .fillType(FillType.BLANK).getYear();
-        source.printTimeStamp = 帳票作成年月日.concat(RString.FULL_SPACE).concat(帳票作成時)
-                .concat(RString.FULL_SPACE).concat(SAKUSEI);
+        source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
+                .concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.nendo = 年度;
         if (association.get地方公共団体コード() != null) {
             source.hokenshaNo = association.get地方公共団体コード().value();
@@ -614,10 +614,10 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             } else {
                 金融機関コード = koza.get金融機関コード().value();
             }
-            if (koza.get通帳記号().length() >= NUM_5) {
-                通帳記号 = koza.get通帳記号().substring(NUM_0, NUM_5);
+            if (koza.getEdited通帳記号().length() >= NUM_5) {
+                通帳記号 = koza.getEdited通帳記号().substring(NUM_0, NUM_5);
             } else {
-                通帳記号 = koza.get通帳記号();
+                通帳記号 = koza.getEdited通帳記号();
             }
             if (koza.get通帳番号().length() >= NUM_8) {
                 通帳番号 = koza.get通帳番号().substring(NUM_0, NUM_8);
