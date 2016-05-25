@@ -169,19 +169,18 @@ public class KouzaInfoPanel {
         }
         Boolean 変更有無チェック = getHandler(div).変更有無チェック();
         if (!変更有無チェック) {
-            // TODO パラメータ：viewStateの保険者番号  viewStateの申請一覧検索キー
             return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.一覧に戻る).respond();
-        }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            // TODO パラメータ：viewStateの保険者番号  viewStateの申請一覧検索キー
-            return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.申請情報).respond();
+        } else {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.一覧に戻る).respond();
+            }
         }
         return createResponse(div);
     }
