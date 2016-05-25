@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * DbT0700ShunoKanriTempTableEntity項目定義クラスです。
  *
- * @reamsid_L DBB-9040-070 wangxiaodong
+ * @reamsid_L DBB-9040-070 wangxiaodong
  */
 @OnNextSchema("rgdb")
 public class DbT0700ShunoKanriTempTableEntity extends DbTableEntityBase<DbT0700ShunoKanriTempTableEntity> implements IDbAccessable {
