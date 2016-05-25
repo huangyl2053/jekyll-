@@ -83,10 +83,11 @@ public final class TokutyoKariSanteiFukaHandler {
      *
      */
     public void initialize() {
+        RDate nowDate = RDate.getNowDate();
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+                nowDate, SubGyomuCode.DBB介護賦課));
         FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
+                nowDate, SubGyomuCode.DBB介護賦課));
         div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().setDomain(調定年度);
         div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().setDomain(賦課年度);
         RString 遷移元区分 = RString.EMPTY;
@@ -111,17 +112,17 @@ public final class TokutyoKariSanteiFukaHandler {
         dgKanrijoho2_Row row1 = new dgKanrijoho2_Row();
         row1.setTxtKoumoku(年額基準年度);
         if (TokuchoNengakuKijunNendo6Gatsu.当年度.getコード().equals(
-                DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
+                DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate, SubGyomuCode.DBB介護賦課))) {
             row1.setTxtNaiyo(当年度.concat(定値_L).concat(new RString(調定年度.getYearValue() - 定値_1)).concat(定値_R));
         }
         if (TokuchoNengakuKijunNendo6Gatsu.翌年度.getコード().equals(
-                DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
+                DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate, SubGyomuCode.DBB介護賦課))) {
             row1.setTxtNaiyo(翌年度.concat(定値_L).concat(new RString(調定年度.getYearValue())).concat(定値_R));
         }
         dgKanrijoho2_Row row2 = new dgKanrijoho2_Row();
         row2.setTxtKoumoku(特徴開始計算方法6月);
         row2.setTxtNaiyo(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(DbBusinessConfig.get(
-                ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, RDate.getNowDate(), SubGyomuCode.DBB介護賦課)).get略称());
+                ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate, SubGyomuCode.DBB介護賦課)).get略称());
         list2.add(row1);
         list2.add(row2);
         div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDataSource(list2);
