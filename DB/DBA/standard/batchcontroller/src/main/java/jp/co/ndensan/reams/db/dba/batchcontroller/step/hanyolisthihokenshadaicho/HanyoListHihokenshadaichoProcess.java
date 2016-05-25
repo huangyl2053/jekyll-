@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoChushutsuHoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -620,7 +620,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     get略称(new CodeShubetsu("0010"), t.getShikakuShutokuJiyuCode()),
                     getパターン32(t.getShikakuSoshitsuYMD()),
                     getパターン32(t.getShikakuSoshitsuTodokedeYMD()),
-                    HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).toRString(),
+                    HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).get名称(),
                     new RString("1").equals(t.getJushochiTokureiFlag()) ? new RString("住特") : RString.EMPTY,
                     get証記載保険者番号(new RString("1").equals(t.getKoikinaiJushochiTokureiFlag()),
                             t.getKoikinaiTokureiSochimotoShichosonCode(), t.getShichosonCode()));
@@ -676,7 +676,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                     get略称(new CodeShubetsu("0010"), t.getShikakuShutokuJiyuCode()),
                     getYYYYMMDD(t.getShikakuSoshitsuYMD()),
                     getYYYYMMDD(t.getShikakuSoshitsuTodokedeYMD()),
-                    HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).toRString(),
+                    HihokenshaKubunCode.toValue(t.getHihokennshaKubunCode()).get名称(),
                     new RString("1").equals(t.getJushochiTokureiFlag()) ? new RString("住特") : RString.EMPTY,
                     get証記載保険者番号(new RString("1").equals(t.getKoikinaiJushochiTokureiFlag()),
                             t.getKoikinaiTokureiSochimotoShichosonCode(), t.getShichosonCode()));

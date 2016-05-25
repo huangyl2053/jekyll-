@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosairaishokai.NinteiChosaIraiShokaiMaster;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -87,8 +87,8 @@ public class NinteiChosaIraiShokaiHandler {
         List<KeyValueDataSource> dataSource = new ArrayList();
         for (NinteiShinseiShinseijiKubunCode seibetsu : NinteiShinseiShinseijiKubunCode.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(seibetsu.code());
-            keyValue.setValue(seibetsu.toRString());
+            keyValue.setKey(seibetsu.getコード());
+            keyValue.setValue(seibetsu.get名称());
             dataSource.add(keyValue);
         }
 

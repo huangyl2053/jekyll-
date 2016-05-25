@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.Saishi
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
@@ -129,7 +129,7 @@ public class HihokenshaDaichoKoshin {
                 || JuminJotai.転出者.コード().equals(entity.get住民状態コード())
                 || JuminJotai.消除者.コード().equals(entity.get住民状態コード())))
                 && (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
-                && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.code())
+                && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())
                 && 住所地特例フラグ_1.equals(saishinIdohiDataEntity.get住所地特例フラグ()))) {
 
             枝番 = hihokenshaManager.getSaidaiEdaban(saishinIdohiDataEntity.get被保険者番号(), age);
@@ -199,7 +199,7 @@ public class HihokenshaDaichoKoshin {
     private void updateHihokenshaDaicho(ShikakuIdoTaishoshaEntity entity, SaishinIdohiDataEntity saishinIdohiDataEntity, FlexibleDate age) {
         枝番 = hihokenshaManager.getSaidaiEdaban(saishinIdohiDataEntity.get被保険者番号(), age);
         if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() != null
-                && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.code())) {
+                && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())) {
 
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
             insertEn.setHihokenshaNo(saishinIdohiDataEntity.get被保険者番号());
@@ -219,7 +219,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setLogicalDeletedFlag(false);
             dbT1001Dac.save(insertEn);
         } else if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
-                && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.code())) {
+                && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())) {
 
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
             insertEn.setHihokenshaNo(saishinIdohiDataEntity.get被保険者番号());
