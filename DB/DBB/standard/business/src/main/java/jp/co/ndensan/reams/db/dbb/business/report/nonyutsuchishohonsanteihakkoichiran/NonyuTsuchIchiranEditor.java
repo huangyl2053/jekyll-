@@ -108,8 +108,8 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
     private void makeNonyuTsuchIchiranItemList(NonyuTsuchIchiranSource source) {
         source.printTimeStamp = get作成日時(帳票作成日時);
         source.nendo = 編集後本算定通知書共通情報.get賦課年度() != null
-                ? 編集後本算定通知書共通情報.get賦課年度().wareki()
-                .eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString() : RString.EMPTY;
+                ? 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString() : RString.EMPTY;
         source.hokenshaNo = 地方公共団体.get地方公共団体コード().value();
         source.hokenshaName = 地方公共団体.get市町村名();
         出力帳票entityss(source);
@@ -153,7 +153,7 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
                 && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
             FlexibleDate 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日());
             source.listUpper_13 = 生保開始日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
 
         RString 生活保護扶助名称 = RString.EMPTY;
