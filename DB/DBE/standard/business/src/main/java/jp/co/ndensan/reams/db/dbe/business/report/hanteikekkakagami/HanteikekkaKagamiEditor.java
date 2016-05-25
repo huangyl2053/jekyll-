@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.hanteikekkakagami;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.HanteikekkaKagamiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,10 +37,8 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
     public HanteikekkaKagamiReportSource edit(HanteikekkaKagamiReportSource source) {
         if (item != null) {
             editCompNinshosha(source);
-            // TODO  1209を待ち
-//            source.title = DbBusinessConfig
-//                    .get(ConfigNameDBE.介護認定審査会スケジュール表鑑, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            source.title = new RString("介護認定審査判定結果（鑑）");
+            source.title = DbBusinessConfig
+                    .get(ConfigNameDBE.介護認定審査判定結果_鑑, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             source.shinsakaiKaisaiYMD = item.getShinsakaiKaisaiYMD().seireki().
                     separator(Separator.JAPANESE).
                     fillType(FillType.ZERO).toDateString();
