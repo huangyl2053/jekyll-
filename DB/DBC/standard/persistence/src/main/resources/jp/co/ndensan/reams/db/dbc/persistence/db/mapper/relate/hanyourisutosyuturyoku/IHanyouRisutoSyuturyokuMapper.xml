@@ -143,13 +143,21 @@
         AND "shoKisaiHokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo")
         LEFT OUTER JOIN
         (SELECT
-        "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"            AS "dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo"
-        ,max("DbT3054KogakuKyufuTaishoshaMeisai"."kogakuKyufuKonkyo") AS "dbT3054KogakuKyufuTaishoshaMeisai_kogakuKyufuKonkyo"
+        "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"             AS "dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"         AS "dbT3054KogakuKyufuTaishoshaMeisai_serviceTeikyoYM"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"                AS "dbT3054KogakuKyufuTaishoshaMeisai_rirekiNo"
+        ,max("DbT3054KogakuKyufuTaishoshaMeisai"."kogakuKyufuKonkyo")  AS "dbT3054KogakuKyufuTaishoshaMeisai_kogakuKyufuKonkyo"
         FROM rgdb."DbT3054KogakuKyufuTaishoshaMeisai"
         GROUP BY "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"
-        ORDER BY "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo")
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"
+        ORDER BY "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
+        ,"DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo")
         As DbT3054
         ON DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
+        AND DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_serviceTeikyoYM" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
+        AND DbT3054."dbT3054KogakuKyufuTaishoshaMeisai_rirekiNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_rirekiNo"
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho" As DbV1001
         ON DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN (
