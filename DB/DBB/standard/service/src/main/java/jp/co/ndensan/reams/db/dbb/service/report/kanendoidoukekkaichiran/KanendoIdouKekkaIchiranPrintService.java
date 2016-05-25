@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.service.report.kanendoidoukekkaichiran;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranReport;
@@ -105,6 +107,7 @@ public class KanendoIdouKekkaIchiranPrintService {
                     i = i + 1;
                 }
             }
+            doSort(更正前後EntityList);
             new KanendoIdouKekkaIchiranReport(更正前後EntityList, 出力順ID, 調定日時, association, 並び順の１件目, 並び順の２件目,
                     並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List)
                     .writeBy(reportSourceWriter);
@@ -120,6 +123,28 @@ public class KanendoIdouKekkaIchiranPrintService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private void doSort(List<KeisangojohoAtenaKozaKouseizengoEntity> list) {
+        Collections.sort(list, new Comparator<KeisangojohoAtenaKozaKouseizengoEntity>() {
+            @Override
+            public int compare(KeisangojohoAtenaKozaKouseizengoEntity o1, KeisangojohoAtenaKozaKouseizengoEntity o2) {
+                if (null != o2.get計算後情報_宛名_口座_更正前Entity() && null != o1.get計算後情報_宛名_口座_更正前Entity()) {
+                    int flag = o2.get計算後情報_宛名_口座_更正前Entity().get通知書番号()
+                            .compareTo(o1.get計算後情報_宛名_口座_更正前Entity().get通知書番号());
+                    if (INDEX_0 == flag) {
+                        flag = o2.get計算後情報_宛名_口座_更正前Entity().get世帯員数()
+                                - o1.get計算後情報_宛名_口座_更正前Entity().get世帯員数();
+                        if (INDEX_0 == flag) {
+                            flag = o2.get計算後情報_宛名_口座_更正前Entity().get賦課年度()
+                                    .compareTo(o1.get計算後情報_宛名_口座_更正前Entity().get賦課年度());
+                        }
+                    }
+                    return flag;
+                }
+                return INDEX_0;
+            }
+        });
     }
 
 }

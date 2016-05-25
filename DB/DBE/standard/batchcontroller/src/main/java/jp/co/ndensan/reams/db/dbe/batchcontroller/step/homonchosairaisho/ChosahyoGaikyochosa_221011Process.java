@@ -149,7 +149,7 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
     private RString 所属機関コード10;
     private RString 所属機関コード11;
     private RString 所属機関コード12;
-    private RString YY;
+    private RString 年;
     private List<ChosahyoGaikyochosaItem> itemList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private HomonChosaIraishoProcessParamter processParamter;
@@ -267,7 +267,7 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
                 誕生日明治,
                 誕生日大正,
                 誕生日昭和,
-                YY,
+                年,
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT6) : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT6, INT8) : RString.EMPTY,
                 entity.get年齢(),
@@ -291,9 +291,9 @@ public class ChosahyoGaikyochosa_221011Process extends BatchProcessBase<HomonCho
     }
 
     private void get年月日(RString 生年月日) {
-        YY = RString.EMPTY;
+        年 = RString.EMPTY;
         if (!RString.isNullOrEmpty(生年月日)) {
-            YY = new FlexibleYear(生年月日.substring(0, INT4)).wareki().eraType(EraType.KANJI).toDateString().substring(2, INT4);
+            年 = new FlexibleYear(生年月日.substring(0, INT4)).wareki().eraType(EraType.KANJI).toDateString().substring(2, INT4);
         }
     }
 

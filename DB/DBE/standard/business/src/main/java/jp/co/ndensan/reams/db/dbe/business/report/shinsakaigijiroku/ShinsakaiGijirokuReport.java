@@ -36,14 +36,8 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
 
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaiGijirokuReportSource> reportSourceWriter) {
-
         get新規と更新と区変の件数(item);
-//            ShinsakaiGijirokuEditor editor = new ShinsakaiGijirokuEditor(data);
-//            ShinsakaiGijirokuBodyEditor bodyEditor = new ShinsakaiGijirokuBodyEditor(dataBody);
-//            ShinsakaiGijirokuBodyEditor2 bodyEditor2 = new ShinsakaiGijirokuBodyEditor2(editor);
-
-//            ShinsakaiGijirokuBuilder builder = new ShinsakaiGijirokuBuilder(editor, bodyEditor, bodyEditor2);
-//            reportSourceWriter.writeLine(builder);
+        get新規と更新と区変毎の件数毎の件数上(item);
     }
 
     private List<SanGyoumeYonJyoIchiRanEntity> get新規と更新と区変の件数(ShinsakaiGijirokuEntity item) {
@@ -86,7 +80,6 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
                 new RString(entity.get更新申請の一次判定要介護4数()),
                 new RString(entity.get更新申請の一次判定要介護5数()),
                 new RString(entity.get更新申請の一次判定再調査数())));
-        // TODO
         resultList.add(new SanGyoumeKuIchiRanEntity(new RString(entity.get二次判定_非該当()),
                 new RString(entity.get二次判定_要支１()),
                 new RString(entity.get二次判定_要支２()),
@@ -99,5 +92,4 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
 
         return resultList;
     }
-
 }

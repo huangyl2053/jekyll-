@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,12 +26,12 @@ public class KaigoJyuminhyouTashajukiCSVDateEntity {
     private RString 最終レコード区分;
     private RString 連番;
     private RString ＦＩＬＬＥＲ1;
-    private RString 被保険者番号;
+    private HihokenshaNo 被保険者番号;
     private RString 識別コード;
-    private RString 資格取得日;
-    private RString 資格喪失日;
-    private RString 受給認定年月日;
-    private RString 受給認定取消年月日;
+    private FlexibleDate 資格取得日;
+    private FlexibleDate 資格喪失日;
+    private FlexibleDate 受給認定年月日;
+    private FlexibleDate 受給認定取消年月日;
     private RString 資格区分;
     private RString 受給者区分;
     private RString 更新日時;

@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護賦課減免のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-012 xicongwang
  */
 public class DbT2004GemmenDac implements ISaveable<DbT2004GemmenEntity> {
 

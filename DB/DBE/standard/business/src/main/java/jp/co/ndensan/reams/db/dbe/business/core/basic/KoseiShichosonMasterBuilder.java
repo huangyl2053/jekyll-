@@ -413,4 +413,13 @@ public class KoseiShichosonMasterBuilder {
         entity.setUnyoKeitaiKubun(運用形態区分);
         return this;
     }
+
+    /**
+     * {@link KoseiShichosonMaster}のインスタンスを生成します。
+     *
+     * @return {@link KoseiShichosonMaster}のインスタンス
+     */
+    public KoseiShichosonMaster build() {
+        return new KoseiShichosonMaster(entity, id);
+    }
 }

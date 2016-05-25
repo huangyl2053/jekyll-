@@ -29,8 +29,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class KaiGoJuminHyokouKiuDBUpdateProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper"
-            + ".get処理日付管理マスタ登録処理");
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojyuminhyokoukiu."
+            + "IkaigojyuminhyokoukiuMapper.get処理日付管理マスタ登録処理");
     private boolean isEmpty = true;
     private int i = 0;
     private KaiGoJuminHyokouKiuProcessParameter parameter;

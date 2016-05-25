@@ -605,6 +605,20 @@ public class HihokenshaShikakuTeiseiManager {
     }
 
     /**
+     * 被保険者台帳管理資格訂正の削除処理です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 取得日 取得日
+     */
+    public void deleteHihokenshaShikakuTeisei(HihokenshaNo 被保険者番号, FlexibleDate 取得日) {
+        List<DbT1001HihokenshaDaichoEntity> dbT1001List = dac.selectByHihokenshaNo(被保険者番号, 取得日);
+        for (DbT1001HihokenshaDaichoEntity entity : dbT1001List) {
+            entity.setState(EntityDataState.Deleted);
+            dac.save(entity);
+        }
+    }
+
+    /**
      * 資格取得チェック処理です。
      *
      * @param 取得日 取得日

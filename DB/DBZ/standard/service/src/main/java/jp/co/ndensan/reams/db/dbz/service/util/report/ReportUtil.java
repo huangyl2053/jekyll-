@@ -252,7 +252,7 @@ public final class ReportUtil {
         ChohyoSeigyoKyotsuManager manager = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu kyotsu = manager.get帳票制御共通(subGyomuCode, reportBunruiId);
         if (kyotsu != null) {
-            kyotsu.get定型文文字サイズ();
+            return kyotsu.get定型文文字サイズ();
         }
         return RString.EMPTY;
     }

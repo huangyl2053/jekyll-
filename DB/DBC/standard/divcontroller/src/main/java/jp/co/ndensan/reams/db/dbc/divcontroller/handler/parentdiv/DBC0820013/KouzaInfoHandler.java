@@ -112,32 +112,32 @@ public class KouzaInfoHandler {
     /**
      * 「申請情報」ボタン Handler処理です。
      *
-     * @param 処理モード RString
+     * @param 画面モード RString
      */
-    public void onClick_btnShinseiInfo(RString 処理モード) {
-        if (登録.equals(処理モード)) {
+    public void onClick_btnShinseiInfo(RString 画面モード) {
+        if (登録.equals(画面モード)) {
             setViewState(修正);
         } else {
-            setViewState(処理モード);
+            setViewState(画面モード);
         }
     }
 
     /**
      * 「サービス提供証明書」ボタン Handler処理です。
      *
-     * @param 処理モード RString
+     * @param 画面モード RString
      */
-    public void onClick_btnServiceTeikyoShomeisyo(RString 処理モード) {
-        setViewState(処理モード);
+    public void onClick_btnServiceTeikyoShomeisyo(RString 画面モード) {
+        setViewState(画面モード);
     }
 
     /**
      * 「償還払決定情報」ボタン Handler処理です。
      *
-     * @param 処理モード RString
+     * @param 画面モード RString
      */
-    public void onClick_btnShokanbaraiKeiteInfo(RString 処理モード) {
-        setViewState(処理モード);
+    public void onClick_btnShokanbaraiKeiteInfo(RString 画面モード) {
+        setViewState(画面モード);
     }
 
     /**
@@ -304,7 +304,7 @@ public class KouzaInfoHandler {
         return 支給申請一覧情報リスト.get(0);
     }
 
-    private void setViewState(RString 処理モード) {
+    private void setViewState(RString 画面モード) {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
                 ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
@@ -313,7 +313,7 @@ public class KouzaInfoHandler {
         ShoukanharaihishinseikensakuParameter parameter = new ShoukanharaihishinseikensakuParameter(
                 被保険者番号, サービス年月, 整理番号, null, null, null, null);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, parameter);
-        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
+        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
     }
 
     private int checkObject(Object obj1, Object obj2) {

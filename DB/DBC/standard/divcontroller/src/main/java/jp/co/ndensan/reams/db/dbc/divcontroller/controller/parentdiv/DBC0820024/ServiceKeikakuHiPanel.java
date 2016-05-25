@@ -94,9 +94,9 @@ public class ServiceKeikakuHiPanel {
             return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
         }
         handler.set申請共通エリア(サービス年月, 申請日, 事業者番号, 明細番号, 様式番号);
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
-            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+            div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
             div.getPanelServiceKeikakuhiDown().setDisplayNone(true);
             List<ShokanServicePlan200904Result> entity200904List
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
@@ -213,15 +213,15 @@ public class ServiceKeikakuHiPanel {
     }
 
     /**
-     * 「取消する」ボタンを押下した際に実行します。
+     * サービス計画費登録エリアの「取消する」ボタンを押下した際に実行します。
      *
      * @param div ServiceKeikakuHiPanelDiv
      * @return 償還払い費支給申請決定_サービス提供証明書(サービス計画費)画面
      */
     public ResponseData<ServiceKeikakuHiPanelDiv> onClick_btnCancel(ServiceKeikakuHiPanelDiv div) {
         getHandler(div).clickクリア();
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
-        return ResponseData.of(div).forwardWithEventName(DBC0820024TransitionEventName.一覧に戻る).respond();
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
+        return createResponse(div);
     }
 
     /**
@@ -239,7 +239,7 @@ public class ServiceKeikakuHiPanel {
             getHandler(div).確定_削除();
         }
         getHandler(div).clickクリア();
-        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setIsOpen(false);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(true);
         return createResponse(div);
     }
 
