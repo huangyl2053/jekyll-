@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.daichoShubetsu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.nyushoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaisho.shikibetsuCode;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -40,6 +43,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     private static final RString MSG_識別コード = new RString("識別コード");
     @InjectSession
     private SqlSession session;
+    private static final int INT_3 = 3;
 
     /**
      * 主キーで介護保険施設入退所を取得します。
@@ -155,6 +159,30 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
                 where(and(eq(DbT1004ShisetsuNyutaisho.shikibetsuCode, 識別コード),
                                 eq(DbT1004ShisetsuNyutaisho.daichoShubetsu, 台帳種別))).
                 order(by(DbT1004ShisetsuNyutaisho.nyushoYMD)).
+                toList(DbT1004ShisetsuNyutaishoEntity.class);
+    }
+
+    /**
+     * 主キーで介護保険施設入退所を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return List<DbT1004ShisetsuNyutaishoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1004ShisetsuNyutaishoEntity> selectFor施設入退所データ(
+            ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1004ShisetsuNyutaisho.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(daichoShubetsu, DaichoType.被保険者.getCode()))).
+                order(by(taishoYMD, DESC)).
+                limit(INT_3).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);
     }
 }

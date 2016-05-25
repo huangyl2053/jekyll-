@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,5 +28,10 @@ public class KyotakuKeikakuTodokedeEntity implements IDbAccessable {
     private FlexibleYearMonth 対象年月;
     private Decimal 履歴番号;
     private FlexibleDate 届出年月日;
-    private RString 計画事業者番号;
+    private RString 居宅計画区分;
+    private FlexibleDate 適用開始年月日;
+    private FlexibleDate 適用終了年月日;
+    private JigyoshaNo 計画事業者番号;
+    private JigyoshaNo 委託先事業者番号;
+    private RString 居宅計画作成者名称;
 }

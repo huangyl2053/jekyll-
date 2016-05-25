@@ -6,19 +6,22 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.kanriKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.mukoKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.shoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.shuryoKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.tekiyoKaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenko.tekiyoShuryoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -28,6 +31,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
@@ -45,6 +49,7 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     @InjectSession
     private SqlSession session;
     private static final int NUM = 6;
+    private static final int INT_3 = 3;
 
     /**
      * 主キーで支払方法変更を取得します。
@@ -145,6 +150,27 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
                 where(
                         eq(hihokenshaNo, 被保険者番号)).
                 order(by(rirekiNo, DESC)).
+                toList(DbT4021ShiharaiHohoHenkoEntity.class);
+    }
+
+    /**
+     * 支払方法変更リストの取得。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbT4021ShiharaiHohoHenkoEntity>
+     */
+    @Transaction
+    public List<DbT4021ShiharaiHohoHenkoEntity> get支払方法変更For給付制限データ(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4021ShiharaiHohoHenko.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false),
+                                eq(mukoKubun, ShiharaiHenkoMukoKubun.有効.getコード()),
+                                eq(shuryoKubun, ShuryoKubun.EMPTY.code()),
+                                not(isNULL(tekiyoKaishiYMD)))).
+                order(by(kanriKubun, DESC), by(tekiyoKaishiYMD, DESC)).limit(INT_3).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }
 }
