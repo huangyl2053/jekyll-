@@ -181,7 +181,6 @@ public class RiyoshaFutangakuGengakuHandler {
         if (該当DB申請 != null) {
             証記載保険者番号 = 該当DB申請.get証記載保険者番号();
             履歴番号 = 該当DB申請.get履歴番号();
-
             boolean 変更あり = 申請情報_変更あり(該当DB申請);
             if (変更あり) {
                 state = EntityDataState.Modified;
@@ -246,7 +245,6 @@ public class RiyoshaFutangakuGengakuHandler {
         builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
 
         RiyoshaFutangakuGengakuViewState inputView = new RiyoshaFutangakuGengakuViewState(builder.build(), state, 履歴番号);
-
         ArrayList<RiyoshaFutangakuGengakuViewState> newViewStateList = new ArrayList<>();
         newViewStateList.add(inputView);
         for (RiyoshaFutangakuGengakuViewState existViewState : existsViewStateList) {
@@ -303,7 +301,6 @@ public class RiyoshaFutangakuGengakuHandler {
             row.setShoninShinaiRiyu(非承認理由);
             row.setHiddenShoKisaiHokenshaNo(証記載保険者番号.getColumnValue());
             row.setHiddenShinseiRirekiNo(new RString(履歴番号));
-
             newRowList.add(row);
         }
         Collections.sort(newRowList, new RiyoshaFutangakuGengakuRowComparator());
