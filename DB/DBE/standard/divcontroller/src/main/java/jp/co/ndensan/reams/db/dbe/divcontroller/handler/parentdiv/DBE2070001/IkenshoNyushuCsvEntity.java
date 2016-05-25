@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 主治医意見書入手一覧CSVEntityクラスです。
  *
- * @reamsid_L DBE-0020-060 lishengli
+ * @reamsid_L DBE-0330-010 lishengli
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
