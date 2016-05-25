@@ -174,9 +174,9 @@ public class ServiceTeikyoShomeishoPanelHandler {
     /**
      * ViewStateに情報を設定する。
      *
-     * @param 処理モード 処理モード
+     * @param 画面モード 画面モード
      */
-    public void putViewState(RString 処理モード) {
+    public void putViewState(RString 画面モード) {
         ShoukanharaihishinseikensakuParameter parameter = ViewStateHolder
                 .get(ViewStateKeys.償還払費申請検索キー, ShoukanharaihishinseikensakuParameter.class);
         FlexibleYearMonth サービス年月 = null;
@@ -207,7 +207,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                     parameter.getKyufuritsu());
             ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         }
-        ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
     }
 
     /**

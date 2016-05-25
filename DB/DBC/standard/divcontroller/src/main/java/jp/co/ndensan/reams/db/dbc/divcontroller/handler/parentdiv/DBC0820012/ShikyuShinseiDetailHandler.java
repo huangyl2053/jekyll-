@@ -101,16 +101,16 @@ public final class ShikyuShinseiDetailHandler {
      * @param 被保険者番号 被保険者番号
      * @param サービス年月 サービス年月
      * @param 整理番号 整理番号
-     * @param 処理モード 処理モード
+     * @param 画面モード 画面モード
      * @param 国保連共同処理受託区分_償還 RString
      * @return ShokanShinsei 支給申請一覧情報
      */
     public ShokanShinsei load支給申請一覧情報(
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
-            RString 整理番号, RString 処理モード, RString 国保連共同処理受託区分_償還) {
-        div.getPanelHead().getTxtShoriMode().setValue(処理モード);
+            RString 整理番号, RString 画面モード, RString 国保連共同処理受託区分_償還) {
+        div.getPanelHead().getTxtShoriMode().setValue(画面モード);
 
-        if (MODEL_ADD.equals(処理モード)) {
+        if (MODEL_ADD.equals(画面モード)) {
             if (受託なし.equals(国保連共同処理受託区分_償還)) {
                 div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(false);
             } else if (受託あり.equals(国保連共同処理受託区分_償還)) {
@@ -136,19 +136,19 @@ public final class ShikyuShinseiDetailHandler {
      * @param 被保険者番号 被保険者番号
      * @param サービス年月 サービス年月
      * @param 整理番号 整理番号
-     * @param 処理モード 処理モード
+     * @param 画面モード 画面モード
      * @param 国保連共同処理受託区分_償還 RString
      * @param 償還払支給申請 ShokanShinsei
      */
     public void set支給申請一覧情報(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 整理番号,
-            RString 処理モード, ShokanShinsei 償還払支給申請, RString 国保連共同処理受託区分_償還) {
+            RString 画面モード, ShokanShinsei 償還払支給申請, RString 国保連共同処理受託区分_償還) {
         set申請共通エリア(償還払支給申請);
-        if (MODEL_DEL.equals(処理モード)) {
+        if (MODEL_DEL.equals(画面モード)) {
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(false);
             div.getPnlShinsei().setDisabled(true);
         }
-        set申請明細エリア(償還払支給申請, 処理モード);
+        set申請明細エリア(償還払支給申請, 画面モード);
 
         if (!受託あり.equals(国保連共同処理受託区分_償還)) {
             return;
@@ -458,7 +458,7 @@ public final class ShikyuShinseiDetailHandler {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(償還払支給申請.getサービス提供年月().toString()));
     }
 
-    private void set申請明細エリア(ShokanShinsei 償還払支給申請, RString 処理モード) {
+    private void set申請明細エリア(ShokanShinsei 償還払支給申請, RString 画面モード) {
         if (償還払支給申請.get申請年月日() != null && !償還払支給申請.get申請年月日().isEmpty()) {
             div.getPnlShinsei().getTxtShinseiYMD().setValue(new RDate(償還払支給申請.get申請年月日().toString()));
         }
@@ -493,7 +493,7 @@ public final class ShikyuShinseiDetailHandler {
             div.getPnlShinsei().getChkKokuhorenSaiso().setSelectedItems(items);
         }
 
-        if (MODEL_UPD.equals(処理モード) && !償還払支給申請.is国保連再送付フラグ()
+        if (MODEL_UPD.equals(画面モード) && !償還払支給申請.is国保連再送付フラグ()
                 && null != 償還払支給申請.get送付年月() && !償還払支給申請.get送付年月().isEmpty()) {
             div.getPnlShinsei().getChkKokuhorenSaiso().setVisible(true);
         } else {

@@ -62,9 +62,9 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onLoad(ShikyuShinseiDetailDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (メッセージ_登録.equals(処理モード) || MODEL_ADD.equals(処理モード)) {
-            処理モード = MODEL_ADD;
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) {
+            画面モード = MODEL_ADD;
         }
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
@@ -80,13 +80,13 @@ public class ShikyuShinseiDetail {
         handler.load介護資格系基本情報(識別コード);
         RString config = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 処理モード, config);
+        ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, config);
         ViewStateHolder.put(ViewStateKeys.償還払支給申請詳細データ, 償還払支給申請);
-        if (!MODEL_ADD.equals(処理モード)) {
-            handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 処理モード, 償還払支給申請, config);
+        if (!MODEL_ADD.equals(画面モード)) {
+            handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, 償還払支給申請, config);
         }
 
-        if (!MODEL_DEL.equals(処理モード)) {
+        if (!MODEL_DEL.equals(画面モード)) {
             return ResponseData.of(div).setState(登録修正モード);
         } else {
             return ResponseData.of(div).setState(削除モード);
@@ -100,25 +100,25 @@ public class ShikyuShinseiDetail {
      * @return ResponseData<ShikyuShinseiDetailDiv>
      */
     public ResponseData<ShikyuShinseiDetailDiv> onClick_btnUpdate(ShikyuShinseiDetailDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (メッセージ_登録.equals(処理モード) || MODEL_ADD.equals(処理モード)) {
-            処理モード = MODEL_ADD;
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (メッセージ_登録.equals(画面モード) || MODEL_ADD.equals(画面モード)) {
+            画面モード = MODEL_ADD;
         }
         try {
-            if (MODEL_ADD.equals(処理モード)) {
+            if (MODEL_ADD.equals(画面モード)) {
                 boolean flag = getHandler(div).is変更あり_ADD();
                 if (!flag) {
                     return isChange(div);
                 } else {
-                    return setAdd(div, 処理モード);
+                    return setAdd(div, 画面モード);
                 }
-            } else if (MODEL_UPD.equals(処理モード)) {
+            } else if (MODEL_UPD.equals(画面モード)) {
                 ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
                 boolean flag = getHandler(div).is変更あり(償還払支給申請);
                 if (!flag) {
                     return isChange(div);
                 } else {
-                    return setUpd(div, 処理モード);
+                    return setUpd(div, 画面モード);
                 }
             }
         } catch (Exception e) {
@@ -153,7 +153,7 @@ public class ShikyuShinseiDetail {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<ShikyuShinseiDetailDiv> setAdd(ShikyuShinseiDetailDiv div, RString 処理モード) {
+    private ResponseData<ShikyuShinseiDetailDiv> setAdd(ShikyuShinseiDetailDiv div, RString 画面モード) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateFor支払金額合計未入力();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -165,7 +165,7 @@ public class ShikyuShinseiDetail {
         }
         ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
         if (!ResponseHolder.isReRequest()) {
-            RString 新整理番号 = getHandler(div).insert(処理モード, 償還払支給申請);
+            RString 新整理番号 = getHandler(div).insert(画面モード, 償還払支給申請);
             if (null != 新整理番号 && !新整理番号.isEmpty()) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                         replace(メッセージ_登録.toString())).respond();
@@ -178,7 +178,7 @@ public class ShikyuShinseiDetail {
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<ShikyuShinseiDetailDiv> setUpd(ShikyuShinseiDetailDiv div, RString 処理モード) {
+    private ResponseData<ShikyuShinseiDetailDiv> setUpd(ShikyuShinseiDetailDiv div, RString 画面モード) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateFor支払金額合計未入力();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -190,7 +190,7 @@ public class ShikyuShinseiDetail {
         }
         ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
         if (!ResponseHolder.isReRequest()) {
-            boolean flag = getHandler(div).update(処理モード, 償還払支給申請);
+            boolean flag = getHandler(div).update(画面モード, 償還払支給申請);
             if (flag) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                         replace(メッセージ_更新.toString())).respond();
@@ -304,7 +304,7 @@ public class ShikyuShinseiDetail {
     private void putViewState(ShikyuShinseiDetailDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikyuShinseiDetailParameter parameter = getHandler(div).setParameter();
-        ViewStateHolder.put(ViewStateKeys.処理モード, parameter.get処理モード());
+        ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get処理モード());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, 引継ぎデータ.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
         ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
@@ -318,11 +318,11 @@ public class ShikyuShinseiDetail {
     }
 
     private ValidationMessageControlPairs 申請既存チェック(ShikyuShinseiDetailDiv div) {
-        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         ShikyuShinseiDetailValidationHandler validationHandler = getValidationHandler(div);
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        if (!メッセージ_登録.equals(処理モード) && !MODEL_ADD.equals(処理モード)) {
+        if (!メッセージ_登録.equals(画面モード) && !MODEL_ADD.equals(画面モード)) {
             TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
             FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
