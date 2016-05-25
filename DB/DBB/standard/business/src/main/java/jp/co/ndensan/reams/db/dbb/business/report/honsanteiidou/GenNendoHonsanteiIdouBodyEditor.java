@@ -619,10 +619,10 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             } else {
                 通帳記号 = koza.getEdited通帳記号();
             }
-            if (koza.get通帳番号().length() >= NUM_8) {
-                通帳番号 = koza.get通帳番号().substring(NUM_0, NUM_8);
+            if (koza.getEdited通帳番号().length() >= NUM_8) {
+                通帳番号 = koza.getEdited通帳番号().substring(NUM_0, NUM_8);
             } else {
-                通帳番号 = koza.get通帳番号();
+                通帳番号 = koza.getEdited通帳番号();
             }
             source.list1_5 = 金融機関コード.concat(RString.FULL_SPACE)
                     .concat(通帳記号)
