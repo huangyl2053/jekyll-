@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 要介護認定事業状況報告の取得バッチクラスです。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 public class JigyoJyokyoHokokuProcess extends BatchKeyBreakBase<JigyoJyokyoHokokuEntity> {
 
