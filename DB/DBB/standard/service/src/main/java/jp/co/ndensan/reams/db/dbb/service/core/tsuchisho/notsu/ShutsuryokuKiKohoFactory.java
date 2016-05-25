@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 出力期を編集する処理クラスです。
  *
- * @reamsid_L DBB-9040-110 wangxiaodong
+ * @reamsid_L DBB-9040-110 wangxiaodong
  */
 public class ShutsuryokuKiKohoFactory {
 
