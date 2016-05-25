@@ -145,23 +145,23 @@ public class KojinJokyoShokaiHandler {
     }
 
     private void getKojinJokyoShokai2(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        if (kojinJokyoShokaiList.get(0).get認定申請区分申請時() != null) {
+        if (kojinJokyoShokaiList.get(0).get認定申請区分申請時() != null && !kojinJokyoShokaiList.get(0).get認定申請区分申請時().isEmpty()) {
             div.getTxtShinseiKubunShinseiji().setValue(NinteiShinseiShinseijiKubunCode.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分申請時().toString())).toRString());
         }
-        if (kojinJokyoShokaiList.get(0).get認定申請区分法令時() != null) {
+        if (kojinJokyoShokaiList.get(0).get認定申請区分法令時() != null && !kojinJokyoShokaiList.get(0).get認定申請区分法令時().isEmpty()) {
             div.getTxtShinseiKubunHorei().setValue(NinteiShinseiHoreiCode.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分法令時().toString())).toRString());
         }
-        if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null) {
+        if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
             div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun09.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().toString())).get名称());
         }
-        if (kojinJokyoShokaiList.get(0).get二次判定認定有効開始年月日() != null) {
+        if (kojinJokyoShokaiList.get(0).get二次判定認定有効開始年月日() != null && !kojinJokyoShokaiList.get(0).get二次判定認定有効開始年月日().isEmpty()) {
             div.getTxtNinteiYukoKikanFrom().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get二次判定認定有効開始年月日().toString()));
         }
-        if (kojinJokyoShokaiList.get(0).get二次判定認定有効終了年月日() != null) {
+        if (kojinJokyoShokaiList.get(0).get二次判定認定有効終了年月日() != null && !kojinJokyoShokaiList.get(0).get二次判定認定有効終了年月日().isEmpty()) {
             div.getTxtNinteiYukoKikanTo().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get二次判定認定有効終了年月日().toString()));
         }
