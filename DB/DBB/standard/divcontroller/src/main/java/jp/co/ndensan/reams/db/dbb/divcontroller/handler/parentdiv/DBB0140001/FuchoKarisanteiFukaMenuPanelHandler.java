@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -34,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 普徴仮算定賦課のHandlerです。
@@ -77,7 +77,7 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
      */
     public void load処理状況() {
         ShoriJokyoDiv 処理状況div = div.getMainPanelBatchParameter().getFuchoKarisanteiFukaKakunin().getShoriJokyo();
-        RString 調定年度 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, システム日時, SubGyomuCode.DBB介護賦課);
         処理状況div.getFuchoKarisanteiShoriNaiyo().getTxtChoteiNendo().setDomain(new RYear(調定年度));
         処理状況div.getFuchoKarisanteiShoriNaiyo().getTxtFukaNendo().setDomain(new RYear(調定年度));
         List<dgFuchoKarisanteiShoriKakunin_Row> dataSource = new ArrayList<>();
@@ -125,17 +125,17 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         dgKanrijoho2_Row row3 = new dgKanrijoho2_Row();
         dgKanrijoho2_Row row4 = new dgKanrijoho2_Row();
         row1.setTxtKoumoku(項目列_仮算定賦課方法);
-        RString 仮算定賦課方法code = BusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, システム日時, SubGyomuCode.DBB介護賦課);
+        RString 仮算定賦課方法code = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定賦課方法, システム日時, SubGyomuCode.DBB介護賦課);
         row1.setTxtNaiyo(FuchoZanteiKeisanHoho.toValue(仮算定賦課方法code).get名称());
         row2.setTxtKoumoku(項目列_端数調整有無);
-        RString 端数調整有無code = BusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, システム日時, SubGyomuCode.DBB介護賦課);
+        RString 端数調整有無code = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定端数調整有無, システム日時, SubGyomuCode.DBB介護賦課);
         row2.setTxtNaiyo(ZanteiKeisanHasuChosei.toValue(端数調整有無code).get名称());
         row3.setTxtKoumoku(項目列_納期限);
         // TODO QAあり　納期限の取得。
 //        FukaNokiResearcher.createInstance().get普徴納期ALL().get(0).get法定納期限();
 //        row3.setTxtNaiyo();
         row4.setTxtKoumoku(項目列_6月特徴開始者);
-        RString 列_6月特徴開始者code = BusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, システム日時, SubGyomuCode.DBB介護賦課);
+        RString 列_6月特徴開始者code = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_6月, システム日時, SubGyomuCode.DBB介護賦課);
         row4.setTxtNaiyo(TokuchoKaishiMaeFucho6Gatsu.toValue(列_6月特徴開始者code).get名称());
         dataSource.add(row1);
         dataSource.add(row2);
