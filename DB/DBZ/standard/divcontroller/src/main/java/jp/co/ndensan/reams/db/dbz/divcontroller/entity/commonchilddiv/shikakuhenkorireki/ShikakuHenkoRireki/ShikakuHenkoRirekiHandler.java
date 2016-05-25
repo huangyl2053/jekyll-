@@ -12,11 +12,11 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
@@ -395,7 +395,7 @@ public class ShikakuHenkoRirekiHandler {
                 処理日時,
                 sikakuKanrenIdo.get被保険者番号().getColumnValue(),
                 識別コード.getColumnValue(),
-                sikakuKanrenIdo.get市町村コード().getColumnValue(),
+                sikakuKanrenIdo.get市町村コード() == null ? RString.EMPTY : sikakuKanrenIdo.get市町村コード().getColumnValue(),
                 異動日,
                 sikakuKanrenIdo.get枝番().trim());
         return row;
