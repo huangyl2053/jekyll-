@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat May 14 14:08:11 CST 2016 
+ * Wed May 25 17:16:24 CST 2016 
  */
 
 
@@ -50,6 +50,7 @@ public class dgNinteiKekkaIchiran_Row extends DataRow {
     private Boolean ikenshoDoiFlag;
     private Boolean johoteikyoDoiFlag;
     private RString shinseishoKanriNo;
+    private RString shichosonCode;
 
     public dgNinteiKekkaIchiran_Row() {
         super();
@@ -81,6 +82,7 @@ public class dgNinteiKekkaIchiran_Row extends DataRow {
         this.ikenshoDoiFlag = false;
         this.johoteikyoDoiFlag = false;
         this.shinseishoKanriNo = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("shinseiKubunShinseiji", shinseiKubunShinseiji);
         this.setOriginalData("shinseiKubunHorei", shinseiKubunHorei);
@@ -109,9 +111,10 @@ public class dgNinteiKekkaIchiran_Row extends DataRow {
         this.setOriginalData("ikenshoDoiFlag", ikenshoDoiFlag);
         this.setOriginalData("johoteikyoDoiFlag", johoteikyoDoiFlag);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgNinteiKekkaIchiran_Row(TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate shinseiTorisageDay, TextBoxDate ninteiDay, RString yoKaigodo, RString yukoKikan, RString yukoKikanStartEnd, TextBoxDate ninteiChosaJisshiDay, TextBoxDate shujiiIkenshoJuryoDay, TextBoxDate kaigoNinteiShinsakaiKaisaiDay, TextBoxDate johoTeikyoShiryoShutsuryokuDay, TextBoxDate ninteiShinsakaiKanryoYMD, TextBoxDate ninteichosaIraiYMD, TextBoxDate ninteichosaJuryoYMD, RString ninteiChosaItakusakiCode, RString jigyoshaMeisho, RString ninteiChosainCode, RString chosainShimei, TextBoxDate ikenshoSakuseiIraiYMD, RString shujiiIryokikanCode, RString iryoKikanMeisho, RString shujiiCode, RString shujiiName, TextBoxDate shinsakaiKaisaiYoteiYMD, Boolean ikenshoDoiFlag, Boolean johoteikyoDoiFlag, RString shinseishoKanriNo) {
+    public dgNinteiKekkaIchiran_Row(TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate shinseiTorisageDay, TextBoxDate ninteiDay, RString yoKaigodo, RString yukoKikan, RString yukoKikanStartEnd, TextBoxDate ninteiChosaJisshiDay, TextBoxDate shujiiIkenshoJuryoDay, TextBoxDate kaigoNinteiShinsakaiKaisaiDay, TextBoxDate johoTeikyoShiryoShutsuryokuDay, TextBoxDate ninteiShinsakaiKanryoYMD, TextBoxDate ninteichosaIraiYMD, TextBoxDate ninteichosaJuryoYMD, RString ninteiChosaItakusakiCode, RString jigyoshaMeisho, RString ninteiChosainCode, RString chosainShimei, TextBoxDate ikenshoSakuseiIraiYMD, RString shujiiIryokikanCode, RString iryoKikanMeisho, RString shujiiCode, RString shujiiName, TextBoxDate shinsakaiKaisaiYoteiYMD, Boolean ikenshoDoiFlag, Boolean johoteikyoDoiFlag, RString shinseishoKanriNo, RString shichosonCode) {
         super();
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("shinseiKubunShinseiji", shinseiKubunShinseiji);
@@ -141,6 +144,7 @@ public class dgNinteiKekkaIchiran_Row extends DataRow {
         this.setOriginalData("ikenshoDoiFlag", ikenshoDoiFlag);
         this.setOriginalData("johoteikyoDoiFlag", johoteikyoDoiFlag);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.ninteiShinseiDay = ninteiShinseiDay;
         this.shinseiKubunShinseiji = shinseiKubunShinseiji;
         this.shinseiKubunHorei = shinseiKubunHorei;
@@ -169,6 +173,7 @@ public class dgNinteiKekkaIchiran_Row extends DataRow {
         this.ikenshoDoiFlag = ikenshoDoiFlag;
         this.johoteikyoDoiFlag = johoteikyoDoiFlag;
         this.shinseishoKanriNo = shinseishoKanriNo;
+        this.shichosonCode = shichosonCode;
     }
 
     public TextBoxDate getNinteiShinseiDay() {
@@ -281,6 +286,10 @@ public class dgNinteiKekkaIchiran_Row extends DataRow {
 
     public RString getShinseishoKanriNo() {
         return shinseishoKanriNo;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
     public void setNinteiShinseiDay(TextBoxDate ninteiShinseiDay) {
@@ -421,6 +430,11 @@ public class dgNinteiKekkaIchiran_Row extends DataRow {
     public void setShinseishoKanriNo(RString shinseishoKanriNo) {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>

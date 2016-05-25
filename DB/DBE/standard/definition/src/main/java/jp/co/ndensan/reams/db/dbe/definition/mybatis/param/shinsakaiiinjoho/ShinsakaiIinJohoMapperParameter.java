@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定審査会委員情報を特定するためのMyBatis用パラメータクラスです。
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

@@ -207,7 +207,7 @@ public class ServiceTeikyoShomeishoPanelHandler {
                     parameter.getKyufuritsu());
             ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         }
-        ViewStateHolder.put(ViewStateKeys.処理モード, 画面モード);
+        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
     }
 
     /**

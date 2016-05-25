@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinnteiR
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.dgNinteiKekkaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IsIkenshoDoiUmu;
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJ
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -122,9 +125,10 @@ public class YokaigoNinteiJohoTeikyoHandler {
                 row.setShujiiCode(business.get主治医コード());
                 row.setShujiiName(business.get主治医氏名());
                 row.getShinsakaiKaisaiYoteiYMD().setValue(getNull(business.get審査会開催予定日()));
-                row.setIkenshoDoiFlag(business.is情報提供への同意有無());
-                row.setJohoteikyoDoiFlag(business.is意見書同意フラグ());
+                row.setIkenshoDoiFlag(business.is意見書同意フラグ());
+                row.setJohoteikyoDoiFlag(business.is情報提供への同意有無());
                 row.setShinseishoKanriNo(business.get申請書管理番号());
+                row.setShichosonCode(business.get市町村コード());
                 ichiran_Row.add(row);
             }
         }
@@ -160,8 +164,8 @@ public class YokaigoNinteiJohoTeikyoHandler {
         div.getCcdChosaItakusakiAndChosainInput().setTxtChosainName(row.getChosainShimei());
         div.getNinteiKekkaShosai().getTxtIkenshoIraibi().setValue(row.getIkenshoSakuseiIraiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtIkenshoJuryobi().setValue(row.getShujiiIkenshoJuryoDay().getValue());
-        // 主治医医療機関／主治医入力共通部品 QA1171
-        //        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(LasdecCode.EMPTY, ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY);
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()), ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY, 
+                row.getShujiiIryokikanCode(), row.getIryoKikanMeisho(), row.getShujiiCode(), row.getShujiiName());
         div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(row.getShinsakaiKaisaiYoteiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(row.getKaigoNinteiShinsakaiKaisaiDay().getValue());
     }
