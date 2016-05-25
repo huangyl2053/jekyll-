@@ -1,3 +1,4 @@
+//CHECKSTYLE IGNORE FileLength FOR NEXT 2000 LINES
 package jp.co.ndensan.reams.db.dbe.entity.report.source.shinsaschedulehyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
