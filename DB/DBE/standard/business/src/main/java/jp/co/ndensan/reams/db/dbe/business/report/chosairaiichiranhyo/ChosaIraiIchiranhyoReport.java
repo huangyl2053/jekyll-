@@ -23,7 +23,6 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 認定調査依頼一覧表ヘッダのITEM
      * @param bodyItemList 認定調査依頼一覧表ボディのITEMリスト
      * @return 認定調査依頼一覧表のReport
      */
