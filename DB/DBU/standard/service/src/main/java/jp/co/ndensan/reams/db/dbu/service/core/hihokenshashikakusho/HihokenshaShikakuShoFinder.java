@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -145,7 +146,11 @@ public class HihokenshaShikakuShoFinder {
                 equals(導入形態コード.getKey()) || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             DbT7051KoseiShichosonMasterEntity 市町村コード = dbT7051KoseiShichosonMasterDac.
                     shichosonCode(hihokenshaShikakuParameter.getShoKisaiHokenshaNo());
-            hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
+            if (市町村コード != null) {
+                hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
+            } else {
+                hihokenshaShikakuShoDataEntity.setShichosonCode(LasdecCode.EMPTY);
+            }
         } else if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード.getKey())) {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();

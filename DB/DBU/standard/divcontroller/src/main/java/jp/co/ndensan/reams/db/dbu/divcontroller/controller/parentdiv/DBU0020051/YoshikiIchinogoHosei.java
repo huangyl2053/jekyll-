@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020051.Yos
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020051.YoshikiIchinogoHoseiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -115,47 +115,97 @@ public class YoshikiIchinogoHosei {
         if (null == 修正データリスト || 修正データリスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
+        return 修正データ更新(div, 修正データリスト, getCheckHandler(div).is整合性チェック1(),
+                getCheckHandler(div).is整合性チェック2(), getCheckHandler(div).is整合性チェック3());
+    }
 
-        if (!getCheckHandler(div).is整合性チェック1() && !ResponseHolder.isReRequest()) {
-            WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
-                    UrWarningMessages.相違.getMessage().replace(要支援計.toString(), 合計計算結果.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+    private ResponseData<YoshikiIchinogoHoseiDiv> 修正データ更新(
+            YoshikiIchinogoHoseiDiv div, List<JigyoHokokuTokeiData> 修正データ, boolean 予防要支援結果チェック,
+            boolean 介護要支援結果チェック, boolean 合計要支援結果チェック) {
+        if (!ResponseHolder.isReRequest() && 予防要支援結果チェック) {
+            div.set要支援計(RString.EMPTY);
+            return ResponseData.of(div).addMessage(
+                    UrWarningMessages.相違.getMessage().replace(
+                            要支援計.toString(), 合計計算結果.toString())).respond();
+        } else if (!ResponseHolder.isReRequest() && 介護要支援結果チェック) {
+            div.set要介護計(RString.EMPTY);
+            return ResponseData.of(div).addMessage(
+                    UrWarningMessages.相違.getMessage().replace(
+                            要介護計.toString(), 合計計算結果.toString())).respond();
+        } else if (!ResponseHolder.isReRequest() && 合計要支援結果チェック) {
+            div.set合計(RString.EMPTY);
+            return ResponseData.of(div).addMessage(
+                    UrWarningMessages.相違.getMessage().replace(
+                            合計.toString(), 要支援計と要介護計の合計計算結果.toString())).respond();
         }
-        if (!getCheckHandler(div).is整合性チェック2() && !ResponseHolder.isReRequest()) {
-            WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
-                    UrWarningMessages.相違.getMessage().replace(要介護計.toString(), 合計計算結果.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+
+        if (is要支援はい(予防要支援結果チェック, div)) {
+            div.set要支援計(RString.FULL_SPACE);
+            if (介護要支援結果チェック) {
+                return ResponseData.of(div).addMessage(
+                        UrWarningMessages.相違.getMessage().replace(
+                                要介護計.toString(), 合計計算結果.toString())).respond();
+            } else if (合計要支援結果チェック) {
+                return ResponseData.of(div).addMessage(
+                        UrWarningMessages.相違.getMessage().replace(
+                                合計.toString(), 要支援計と要介護計の合計計算結果.toString())).respond();
+            } else if (!修正データ.isEmpty()) {
+                return ResponseData.of(div).addMessage(
+                        new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                                UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
+            }
+        } else if (is要介護はい(介護要支援結果チェック, div)) {
+            div.set要介護計(RString.FULL_SPACE);
+            if (合計要支援結果チェック) {
+                return ResponseData.of(div).addMessage(
+                        UrWarningMessages.相違.getMessage().replace(
+                                合計.toString(), 要支援計と要介護計の合計計算結果.toString())).respond();
+            } else if (!修正データ.isEmpty()) {
+                return ResponseData.of(div).addMessage(
+                        new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                                UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
+            }
+        } else if (is合計はい(合計要支援結果チェック, div, 修正データ)) {
+            div.set合計(RString.FULL_SPACE);
+            return ResponseData.of(div).addMessage(
+                    new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                            UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
-        if (!getCheckHandler(div).is整合性チェック3() && !ResponseHolder.isReRequest()) {
-            WarningMessage message = new WarningMessage(UrWarningMessages.相違.getMessage().getCode(),
-                    UrWarningMessages.相違.getMessage().replace(合計.toString(),
-                            要支援計と要介護計の合計計算結果.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+
+        if (!ResponseHolder.isReRequest() && !修正データ.isEmpty()) {
+            return ResponseData.of(div).addMessage(
+                    new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                            UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).update(修正データリスト);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                    .replace(更新.toString())).respond();
-        }
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            JigyoHokokuGeppoHoseiHako.createInstance().updateJigyoHokokuGeppoEntity(
+                    修正データ);
             div.getPnlKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020051StateName.完了状態);
+        } else {
+            return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).respond();
+    }
+
+    private boolean is合計はい(boolean 合計要支援結果チェック, YoshikiIchinogoHoseiDiv div,
+            List<JigyoHokokuTokeiData> 修正データ) {
+        return new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && 合計要支援結果チェック && div.get合計().isNullOrEmpty() && !修正データ.isEmpty();
+    }
+
+    private boolean is要介護はい(boolean 介護要支援結果チェック, YoshikiIchinogoHoseiDiv div) {
+        return new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && 介護要支援結果チェック && div.get要介護計().isNullOrEmpty();
+    }
+
+    private boolean is要支援はい(boolean 予防要支援結果チェック, YoshikiIchinogoHoseiDiv div) {
+        return new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && 予防要支援結果チェック && div.get要支援計().isNullOrEmpty();
     }
 
     private YoshikiIchinogoHoseiHandler getHandler(YoshikiIchinogoHoseiDiv div) {

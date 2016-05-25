@@ -37,9 +37,9 @@ public class NonyuTsuchishoHonsanteiBookPrintService {
 
     private static final ReportId 帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final RString REPORT_DBB100055 = new RString("DBB100055");
-    private static final RString REPORT_DBB100056 = new RString("DBB100056");
-    private static final RString REPORT_DBB100057 = new RString("DBB100057");
-    private static final RString REPORT_DBB100058 = new RString("DBB100058");
+//    private static final RString REPORT_DBB100056 = new RString("DBB100056");
+//    private static final RString REPORT_DBB100057 = new RString("DBB100057");
+//    private static final RString REPORT_DBB100058 = new RString("DBB100058");
 
     /**
      * 帳票を出力します。
@@ -52,34 +52,37 @@ public class NonyuTsuchishoHonsanteiBookPrintService {
         RString 帳票ID = 本算定納入通知書情報.get帳票ID().getColumnValue();
         RString 編集範囲区分 = 本算定納入通知書情報.get編集範囲区分().getコード();
 
-        if (編集範囲区分.equals(HenshuHaniKubun.全てのレイアウト.getコード())) {
-            if (帳票ID.startsWith(REPORT_DBB100055)) {
-                return print全てページDBB100055(本算定納入通知書情報);
+        if (編集範囲区分.equals(HenshuHaniKubun.全てのレイアウト.getコード()) && 帳票ID.startsWith(REPORT_DBB100055)) {
+//            if (帳票ID.startsWith(REPORT_DBB100055)) {
+            return print全てページDBB100055(本算定納入通知書情報);
 
-            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
-
-            }
-        } else if (編集範囲区分.equals(HenshuHaniKubun.Coverのみ.getコード())) {
-            if (帳票ID.startsWith(REPORT_DBB100055)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
-
-            }
-        } else if (編集範囲区分.equals(HenshuHaniKubun.Detailのみ.getコード())) {
-            if (帳票ID.startsWith(REPORT_DBB100055) || 帳票ID.startsWith(REPORT_DBB100056)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100057) || 帳票ID.startsWith(REPORT_DBB100058)) {
-
-            }
+//            }
+//            else if (帳票ID.startsWith(REPORT_DBB100057)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
+//
+//            }
         }
+
+//        else if (編集範囲区分.equals(HenshuHaniKubun.Coverのみ.getコード())) {
+//            if (帳票ID.startsWith(REPORT_DBB100055)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
+//
+//            }
+//        } else if (編集範囲区分.equals(HenshuHaniKubun.Detailのみ.getコード())) {
+//            if (帳票ID.startsWith(REPORT_DBB100055) || 帳票ID.startsWith(REPORT_DBB100056)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100057) || 帳票ID.startsWith(REPORT_DBB100058)) {
+//
+//            }
+//        }
         return null;
     }
 
@@ -95,33 +98,34 @@ public class NonyuTsuchishoHonsanteiBookPrintService {
         RString 帳票ID = 本算定納入通知書情報.get帳票ID().getColumnValue();
         RString 編集範囲区分 = 本算定納入通知書情報.get編集範囲区分().getコード();
 
-        if (編集範囲区分.equals(HenshuHaniKubun.全てのレイアウト.getコード())) {
-            if (帳票ID.startsWith(REPORT_DBB100055)) {
-                return print全てページDBB100055(本算定納入通知書情報, reportManager);
+        if (編集範囲区分.equals(HenshuHaniKubun.全てのレイアウト.getコード()) && 帳票ID.startsWith(REPORT_DBB100055)) {
+//            if (帳票ID.startsWith(REPORT_DBB100055)) {
+            return print全てページDBB100055(本算定納入通知書情報, reportManager);
 
-            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
-
-            }
-        } else if (編集範囲区分.equals(HenshuHaniKubun.Coverのみ.getコード())) {
-            if (帳票ID.startsWith(REPORT_DBB100055)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
-
-            }
-        } else if (編集範囲区分.equals(HenshuHaniKubun.Detailのみ.getコード())) {
-            if (帳票ID.startsWith(REPORT_DBB100055) || 帳票ID.startsWith(REPORT_DBB100056)) {
-
-            } else if (帳票ID.startsWith(REPORT_DBB100057) || 帳票ID.startsWith(REPORT_DBB100058)) {
-
-            }
+//            }
+//            else if (帳票ID.startsWith(REPORT_DBB100057)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
+//
+//            }
+//        } else if (編集範囲区分.equals(HenshuHaniKubun.Coverのみ.getコード())) {
+//            if (帳票ID.startsWith(REPORT_DBB100055)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100057)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100056)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100058)) {
+//
+//            }
+//        } else if (編集範囲区分.equals(HenshuHaniKubun.Detailのみ.getコード())) {
+//            if (帳票ID.startsWith(REPORT_DBB100055) || 帳票ID.startsWith(REPORT_DBB100056)) {
+//
+//            } else if (帳票ID.startsWith(REPORT_DBB100057) || 帳票ID.startsWith(REPORT_DBB100058)) {
+//
+//            }
         }
         return null;
     }

@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.dgTo
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifuka.TokuchoKariSanteiFuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
@@ -30,11 +31,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 画面設計_DBBGM33001_特徴仮算定賦課
@@ -82,8 +83,11 @@ public final class TokutyoKariSanteiFukaHandler {
      *
      */
     public void initialize() {
-        FlexibleYear 調定年度 = new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
-        FlexibleYear 賦課年度 = new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
+        RDate nowDate = RDate.getNowDate();
+        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                nowDate, SubGyomuCode.DBB介護賦課));
+        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                nowDate, SubGyomuCode.DBB介護賦課));
         div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().setDomain(調定年度);
         div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().setDomain(賦課年度);
         RString 遷移元区分 = RString.EMPTY;
@@ -108,17 +112,17 @@ public final class TokutyoKariSanteiFukaHandler {
         dgKanrijoho2_Row row1 = new dgKanrijoho2_Row();
         row1.setTxtKoumoku(年額基準年度);
         if (TokuchoNengakuKijunNendo6Gatsu.当年度.getコード().equals(
-                BusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, SubGyomuCode.DBB介護賦課))) {
+                DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate, SubGyomuCode.DBB介護賦課))) {
             row1.setTxtNaiyo(当年度.concat(定値_L).concat(new RString(調定年度.getYearValue() - 定値_1)).concat(定値_R));
         }
         if (TokuchoNengakuKijunNendo6Gatsu.翌年度.getコード().equals(
-                BusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, SubGyomuCode.DBB介護賦課))) {
+                DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate, SubGyomuCode.DBB介護賦課))) {
             row1.setTxtNaiyo(翌年度.concat(定値_L).concat(new RString(調定年度.getYearValue())).concat(定値_R));
         }
         dgKanrijoho2_Row row2 = new dgKanrijoho2_Row();
         row2.setTxtKoumoku(特徴開始計算方法6月);
-        row2.setTxtNaiyo(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(BusinessConfig.get(
-                ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, SubGyomuCode.DBB介護賦課)).get略称());
+        row2.setTxtNaiyo(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(DbBusinessConfig.get(
+                ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate, SubGyomuCode.DBB介護賦課)).get略称());
         list2.add(row1);
         list2.add(row2);
         div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDataSource(list2);

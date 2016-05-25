@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaShubetsu;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -200,6 +202,27 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
         return accessor.select().
                 table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
                 where((eq(jigyoshaNo, 事業者番号)))
+                .toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+    }
+
+    /**
+     * 主キーで介護除外住所地特例対象施設を取得します。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @return DbT1005KaigoJogaiTokureiTaishoShisetsuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> selectJigyoshaJohoFor施設名取得(
+            JigyoshaNo 事業者番号) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage((事業者番号_事業者).toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
+                where(and(
+                                eq(jigyoshaShubetsu, JigyosyaType.住所地特例対象施設.getコード()),
+                                eq(jigyoshaNo, 事業者番号))).
+                order(by(yukoKaishiYMD, DESC))
                 .toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 }

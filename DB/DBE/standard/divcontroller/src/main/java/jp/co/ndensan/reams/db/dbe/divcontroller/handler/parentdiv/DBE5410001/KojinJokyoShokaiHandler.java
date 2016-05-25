@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.Koji
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TokuteiShippei;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -147,11 +147,11 @@ public class KojinJokyoShokaiHandler {
     private void getKojinJokyoShokai2(List<KojinJokyoShokai> kojinJokyoShokaiList) {
         if (kojinJokyoShokaiList.get(0).get認定申請区分申請時() != null) {
             div.getTxtShinseiKubunShinseiji().setValue(NinteiShinseiShinseijiKubunCode.
-                    toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分申請時().toString())).toRString());
+                    toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分申請時().toString())).get名称());
         }
         if (kojinJokyoShokaiList.get(0).get認定申請区分法令時() != null) {
             div.getTxtShinseiKubunHorei().setValue(NinteiShinseiHoreiCode.
-                    toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分法令時().toString())).toRString());
+                    toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分法令時().toString())).get名称());
         }
         if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null) {
             div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun09.
@@ -204,7 +204,7 @@ public class KojinJokyoShokaiHandler {
         KojinShinchokuJokyohyoJoho jokyohyoEntity = new KojinShinchokuJokyohyoJoho();
         jokyohyoEntity.setHihokenshaNo(kojinJokyoShokaiList.get(0).get被保険者番号());
         jokyohyoEntity.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(
-                kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue()).toRString());
+                kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue()).get名称());
         jokyohyoEntity.setHihokenshaNameKana(kojinJokyoShokaiList.get(0).get被保険者氏名カナ());
         jokyohyoEntity.setShinseiYMD(new RString(kojinJokyoShokaiList.get(0).get認定申請年月日().toString()));
         jokyohyoEntity.setSeibetsu(kojinJokyoShokaiList.get(0).get性別() == null ? RString.EMPTY

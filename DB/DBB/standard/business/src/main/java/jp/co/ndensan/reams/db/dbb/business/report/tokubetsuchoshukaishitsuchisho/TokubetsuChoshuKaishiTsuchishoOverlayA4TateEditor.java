@@ -12,7 +12,12 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.T
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -178,8 +183,11 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
         source.hokenryoGaku2Gatsu1 = set特徴期別金額(特徴期別金額6期);
         source.santeiKisoNendo1 = 編集後本算定通知書共通情報.get調定年度().toDateString();
         if (編集後本算定通知書共通情報.get更正後() != null) {
-            source.santeikisoKikan = 編集後本算定通知書共通情報.get更正後().get期間_自().concat(TOKEN)
-                    .concat(編集後本算定通知書共通情報.get更正後().get期間_至());
+            RString 期間_自 = (new FlexibleDate(編集後本算定通知書共通情報.get更正後().get期間_自())).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            RString 期間_至 = (new FlexibleDate(編集後本算定通知書共通情報.get更正後().get期間_至())).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.santeikisoKikan = 期間_自.concat(TOKEN).concat(期間_至);
             source.santeikisoTsukisu = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
             source.shotokuDankai1 = 編集後本算定通知書共通情報.get更正後().get保険料段階();
         }

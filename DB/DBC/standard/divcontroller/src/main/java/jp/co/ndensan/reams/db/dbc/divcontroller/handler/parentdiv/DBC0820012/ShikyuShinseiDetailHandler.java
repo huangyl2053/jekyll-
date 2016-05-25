@@ -470,7 +470,9 @@ public final class ShikyuShinseiDetailHandler {
         } else if (ShinseishaKubun.代理人.getコード().equals(償還払支給申請.get申請者区分())) {
             div.getPnlShinsei().getRdoShinseisyaKubun().setSelectedValue(ShinseishaKubun.代理人.get名称());
         }
-        div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(償還払支給申請.get証記載保険者番号().value());
+        if (償還払支給申請.get証記載保険者番号() != null && !償還払支給申請.get証記載保険者番号().isEmpty()) {
+            div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(償還払支給申請.get証記載保険者番号().value());
+        }
         if (償還払支給申請.get申請者氏名カナ() != null && !償還払支給申請.get申請者氏名カナ().isEmpty()) {
             div.getPnlShinsei().getTxtShimeikana().setDomain(new AtenaKanaMeisho(償還払支給申請.get申請者氏名カナ()));
         }

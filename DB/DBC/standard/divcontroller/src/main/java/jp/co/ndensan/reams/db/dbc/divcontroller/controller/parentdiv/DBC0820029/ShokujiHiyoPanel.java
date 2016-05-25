@@ -475,17 +475,6 @@ public class ShokujiHiyoPanel {
     }
 
     /**
-     * 「特定診療費」ボタン
-     *
-     * @param div ShokujiHiyoPanelDiv
-     * @return ResponseData<ShokujiHiyoPanelDiv>
-     */
-    public ResponseData<ShokujiHiyoPanelDiv> onClick_btnTokuteiShinryouhii(ShokujiHiyoPanelDiv div) {
-        getHandler(div).putViewState();
-        return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.特定診療費).respond();
-    }
-
-    /**
      * 「サービス計画費」ボタン
      *
      * @param div ShokujiHiyoPanelDiv

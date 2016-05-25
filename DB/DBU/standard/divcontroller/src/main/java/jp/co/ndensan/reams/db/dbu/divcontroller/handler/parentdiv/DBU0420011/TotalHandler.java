@@ -70,7 +70,8 @@ public class TotalHandler {
             div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号());
             div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
-                    .get被保険者番号(), MENUID_DBUMN12001);
+                    .get被保険者番号(), MENUID_DBUMN12001, ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
+                    .get識別コード());
         }
         if (MENUID_DBUMN12002.equals(ResponseHolder.getMenuID())) {
             div.getShikakuShaShoHakko().getBtnTainoInfo().setVisible(false);
@@ -79,7 +80,8 @@ public class TotalHandler {
             div.getAtenaShikakuInfo().getCcdKaigoShikakuKihon().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
                     .get被保険者番号());
             div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
-                    .get被保険者番号(), MENUID_DBUMN12002);
+                    .get被保険者番号(), MENUID_DBUMN12002, ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class)
+                    .get識別コード());
         }
         if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID())) {
             div.getAtenaShikakuInfo().getCcdKaigoAtenaInfo().onLoad(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());

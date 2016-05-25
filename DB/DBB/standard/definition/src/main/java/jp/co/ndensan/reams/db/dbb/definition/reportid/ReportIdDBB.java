@@ -360,7 +360,8 @@ public enum ReportIdDBB {
     /**
      * 特別徴収平準化仮算定額変更通知書発行一覧表の帳票ID
      */
-    DBB200004(new ReportId("DBB200004_TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakko"), new RString("特別徴収平準化仮算定額変更通知書発行一覧表")), // #86313 DBB200004_TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiran
+    // #86313
+    DBB200004(new ReportId("DBB200004_TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakko"), new RString("特別徴収平準化仮算定額変更通知書発行一覧表")),
     /**
      * 保険料納入通知書（本算定過年度異動）発行一覧表の帳票ID
      */

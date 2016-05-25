@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.I
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -171,7 +171,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 get和暦(entity.get認定申請年月日(), false),
-                NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).toRString(),
+                NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get名称(),
                 entity.get被保険者氏名(),
                 entity.get被保険者氏名カナ(),
                 Seibetsu.toValue(entity.get性別()).get名称(),

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.Hihokensho
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko.HihokenshashoShikakushoHakkoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -49,11 +50,12 @@ public class HihokenshaShikakuHakkoHandler {
      *
      * @param 被保険者番号 被保険者番号
      * @param メニューID
+     * @param 識別コード ShikibetsuCode
      */
-    public void initialize(HihokenshaNo 被保険者番号, RString メニューID) {
+    public void initialize(HihokenshaNo 被保険者番号, RString メニューID, ShikibetsuCode 識別コード) {
 
         HihokenshashoShikakushoHakkoFinder finder = HihokenshashoShikakushoHakkoFinder.createInstance();
-        HihokenshoShikakushoHakkoEntity entity = finder.被保険者証資格証発行情報取得(被保険者番号, メニューID);
+        HihokenshoShikakushoHakkoEntity entity = finder.被保険者証資格証発行情報取得(被保険者番号, メニューID, 識別コード);
 
         if (null == entity) {
             entity = new HihokenshoShikakushoHakkoEntity();

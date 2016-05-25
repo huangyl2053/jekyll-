@@ -46,7 +46,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006");
     private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007");
     private static final RString FIRSTREQUEST以外 = new RString("2");
-    private static final Integer FIRSTINDEX = new Integer(0);
+    private static final Integer FIRSTINDEX = Integer.valueOf("0");
     private static final RString 修正 = new RString("修正");
     private final RString 表示モード = new RString("HihokenrirekiNashiMode");
 
@@ -268,8 +268,8 @@ public class ShikakuSoshitsuIdoTotalHandler {
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_識別コード, 識別コード);
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_被保番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.資格異動の訂正_状態, 状態_照会);
-        dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain()
-                .getCcdShikakuTokusoRireki().getDataGridSelectItem();
+        dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().
+                getCcdShikakuTokusoRireki().getDataGridSelectItem();
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
         joho.setDaNo(row.getDaNo());
         joho.setHihokenshaKubun(row.getHihokenshaKubun());

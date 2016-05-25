@@ -129,7 +129,8 @@ public class NonyuTsuchishoBookFuriKaeAriReport extends Report<FuriKaeAriCoverTo
         writeBy(reportSourceWriter, itemList);
     }
 
-    private void writeBy(ReportSourceWriter<FuriKaeAriCoverToNofushoReportSource> reportSourceWriter, List<NonyuTsuchishoBookFuriKaeAriItem> itemList) {
+    private void writeBy(ReportSourceWriter<FuriKaeAriCoverToNofushoReportSource> reportSourceWriter,
+            List<NonyuTsuchishoBookFuriKaeAriItem> itemList) {
         for (NonyuTsuchishoBookFuriKaeAriItem target : itemList) {
             INonyuTsuchishoBookFuriKaeAriEditor tsuchishoEditor = new FuriKaeAriTsuchishoEditor(target);
             INonyuTsuchishoBookFuriKaeAriEditor nofushoEditor = new FuriKaeAriNofushoEditor(target);
