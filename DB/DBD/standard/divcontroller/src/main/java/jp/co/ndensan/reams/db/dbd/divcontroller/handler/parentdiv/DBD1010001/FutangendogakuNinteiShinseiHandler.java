@@ -256,16 +256,16 @@ public class FutangendogakuNinteiShinseiHandler {
                 onChange_ddlRiyoshaFutanDankai();
             }
         } else {
+            List<KeyValueDataSource> dataSources = new ArrayList<>();
+            dataSources.add(new KeyValueDataSource());
             div.getTxtTekiyoYMD().setDisabled(true);
             div.getTxtTekiyoYMD().clearValue();
             div.getTxtYukoKigenYMD().setDisabled(true);
             div.getTxtYukoKigenYMD().clearValue();
             div.getDdlKyusochisha().setDisabled(true);
             div.getDdlKyusochisha().setIsBlankLine(true);
-            div.getDdlKyusochisha().setSelectedKey(SELECT_EMPTYKEY);
+            div.getDdlKyusochisha().setDataSource(dataSources);
             div.getDdlRiyoshaFutanDankai().setDisabled(true);
-            List<KeyValueDataSource> dataSources = new ArrayList<>();
-            dataSources.add(new KeyValueDataSource());
             div.getDdlRiyoshaFutanDankai().setDataSource(dataSources);
             div.getDdlKyoshitsuShubetsu().setDisabled(true);
             div.getDdlKyoshitsuShubetsu().setDataSource(dataSources);
