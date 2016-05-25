@@ -43,6 +43,12 @@ public class KaigoNinteiShinsakaiScheduleBatchParamter extends BatchParameterBas
 
     /**
      * コンストラクタです。
+     */
+    public KaigoNinteiShinsakaiScheduleBatchParamter() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 介護認定審査会開催予定期間From 介護認定審査会開催予定期間From
      * @param 介護認定審査会開催予定期間To 介護認定審査会開催予定期間To
