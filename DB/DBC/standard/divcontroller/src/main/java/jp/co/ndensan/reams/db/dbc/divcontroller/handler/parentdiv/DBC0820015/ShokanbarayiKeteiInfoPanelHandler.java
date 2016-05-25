@@ -17,12 +17,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.Shok
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -81,19 +78,13 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             RString 整理番号
     ) {
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            RString 償還 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-            if (受託なし.equals(償還)) {
-                div.getPanelTwo().getBtnShokanbariKeteiInfo().setDisabled(false);
-            }
             div.getPanelTwo().getTxtServiceTeikyoYM().clearValue();
             div.getPanelTwo().getTxtSeiriBango().clearValue();
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
                     被保険者番号, サービス年月, 整理番号, 業務区分, 修正);
-            div.getPanelTwo().getBtnKouza().setDisabled(true);
             div.getPanelTwo().getTxtShoriMode().setValue(新規);
         }
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            div.getPanelTwo().getBtnKouza().setDisabled(true);
             div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki()
                     .toDateString().toString()));
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
@@ -107,7 +98,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
             div.getCcdShokanbaraiketteiJoho().loadInitialize(
                     被保険者番号, サービス年月, 整理番号, 業務区分, 照会);
-            div.getPanelTwo().getBtnShinsei().setDisabled(true);
             div.getPanelTwo().getTxtShoriMode().setValue(参照);
         }
     }
