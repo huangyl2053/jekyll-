@@ -91,7 +91,9 @@ public class ShokanShinseiHandler {
                     list_Row.setKetteiYMD(jigyoshaInput.get決定年月日().wareki().toDateString());
                 }
                 list_Row.setYoshikiNo(jigyoshaInput.get様式番号());
-                list_Row.setJigyoshaNo(jigyoshaInput.get事業者番号().value());
+                if (jigyoshaInput.get事業者番号() != null && !jigyoshaInput.get事業者番号().isEmpty()) {
+                    list_Row.setJigyoshaNo(jigyoshaInput.get事業者番号().value());
+                }
                 list_Row.setMeisaiNo(jigyoshaInput.get明細番号());
                 dgshinseilistrow.add(list_Row);
             }
