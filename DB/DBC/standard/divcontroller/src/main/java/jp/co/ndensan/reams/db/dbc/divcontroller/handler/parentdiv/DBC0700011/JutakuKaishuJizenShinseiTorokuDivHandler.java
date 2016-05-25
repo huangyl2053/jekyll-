@@ -426,6 +426,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                 && !selectedItems.contains(住宅住所変更)) {
             div.setHidLimitMsgDisplayedFlg(RString.EMPTY);
         }
+        div.setHidDataChangeFlg(非表示用フラグ_TRUE);
     }
 
     private int 住宅改修内容のレコードチェック(List<dgGaisyuList_Row> gridList,
@@ -1618,6 +1619,9 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         if (審査結果データ変更有無_承認(oldShinseiData)) {
             return;
         }
+        if (画面住宅改修グリッドデータ変更有無()) {
+            return;
+        }
         画面住宅改修データ変更有無();
     }
 
@@ -1739,6 +1743,27 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
     }
 
     /**
+     * 画面住宅改修グリッドデータ変更有無
+     *
+     * @return 変更有無
+     */
+    public boolean 画面住宅改修グリッドデータ変更有無() {
+        List<dgGaisyuList_Row> gridList = div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
+                .getTabJutakuKaisyuJyoho().getCcdJutakuJizenShinseiDetail().get住宅改修内容一覧();
+        if (gridList != null && gridList.size() > 0) {
+            for (dgGaisyuList_Row tmpRow : gridList) {
+                if (行状態_更新.equals(tmpRow.getTxtJyotai())
+                        || 行状態_削除.equals(tmpRow.getTxtJyotai())
+                        || 行状態_登録.equals(tmpRow.getTxtJyotai())) {
+                    div.setHidDataChangeFlg(非表示用フラグ_TRUE);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * 画面住宅改修データ変更有無
      */
     public void 画面住宅改修データ変更有無() {
@@ -1753,6 +1778,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     || !Decimal.ZERO.equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                             .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtRiyoshaFutanAmountMae().getValue())) {
                 div.setHidDataChangeFlg(非表示用フラグ_TRUE);
+                return;
             }
         } else {
             if (!oldKekkaData.get費用額合計().equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
@@ -1764,6 +1790,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     || !oldKekkaData.get利用者負担額().equals(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
                             .getTabJutakuKaisyuJyoho().getTotalPanel().getTxtRiyoshaFutanAmountMae().getValue())) {
                 div.setHidDataChangeFlg(非表示用フラグ_TRUE);
+                return;
             }
         }
 
