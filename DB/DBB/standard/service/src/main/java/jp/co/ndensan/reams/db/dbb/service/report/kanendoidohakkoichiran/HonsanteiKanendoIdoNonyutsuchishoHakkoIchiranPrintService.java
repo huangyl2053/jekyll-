@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.kanendoidohakkoichiran;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport;
@@ -88,12 +90,29 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
                 i = i + 1;
             }
         }
+        doSort(編集後本算定通知書共通情報);
         HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty property
                 = new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty();
         return new Printer<NonyuTsuchIchiranSource>().spool(property,
                 new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport(編集後本算定通知書共通情報, 調定年度, 出力期,
                         作成日時, 地方公共団体コード, 市町村名, 納入対象賦課年度List, 並び順の１件目, 並び順の２件目,
                         並び順の３件目, 並び順の４件目, 並び順の５件目));
+    }
+
+    private void doSort(List<EditedHonSanteiTsuchiShoKyotsu> list) {
+        Collections.sort(list, new Comparator<EditedHonSanteiTsuchiShoKyotsu>() {
+            @Override
+            public int compare(EditedHonSanteiTsuchiShoKyotsu o1, EditedHonSanteiTsuchiShoKyotsu o2) {
+                int flag = o2.get通知書番号().compareTo(o1.get通知書番号());
+                if (0 == flag) {
+                    flag = o2.get被保険者番号().compareTo(o1.get被保険者番号());
+                    if (0 == flag) {
+                        flag = o2.get今後納付すべき額().compareTo(o1.get今後納付すべき額());
+                    }
+                }
+                return flag;
+            }
+        });
     }
 
 }
