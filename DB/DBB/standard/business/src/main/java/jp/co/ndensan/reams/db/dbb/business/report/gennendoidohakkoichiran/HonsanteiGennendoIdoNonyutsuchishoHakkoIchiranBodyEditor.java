@@ -32,6 +32,14 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements
     private static final RString 半角ハイフン = new RString("-");
     private static final RString アステリスク = new RString("*");
 
+    private static final int NUM_0 = 0;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
+    private static final int NUM_7 = 7;
+    private static final int NUM_8 = 8;
+
     /**
      * コンストラクタです。
      *
@@ -137,21 +145,21 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements
         RStringBuilder builder = new RStringBuilder();
         EditedKoza 編集後口座 = 共通情報.get編集後口座();
         if (null != 編集後口座 && 編集後口座.isゆうちょ銀行()) {
-            builder.append(編集後口座.get金融機関コード());
+            builder.append(編集後口座.get金融機関コード().substringReturnAsPossible(NUM_0, NUM_4));
             builder.append(RString.FULL_SPACE);
-            builder.append(編集後口座.get通帳記号());
+            builder.append(編集後口座.get通帳記号().substringReturnAsPossible(NUM_0, NUM_5));
             builder.append(半角ハイフン);
-            builder.append(編集後口座.get通帳番号());
+            builder.append(編集後口座.get通帳番号().substringReturnAsPossible(NUM_0, NUM_8));
             builder.append(RString.FULL_SPACE);
             builder.append(編集後口座.get口座名義人漢字());
         } else if (null != 編集後口座 && !編集後口座.isゆうちょ銀行()) {
-            builder.append(編集後口座.get金融機関コード());
+            builder.append(編集後口座.get金融機関コード().substringReturnAsPossible(NUM_0, NUM_4));
             builder.append(半角ハイフン);
-            builder.append(編集後口座.get支店コード());
+            builder.append(編集後口座.get支店コード().substringReturnAsPossible(NUM_0, NUM_3));
             builder.append(RString.FULL_SPACE);
-            builder.append(編集後口座.get口座種別略称());
+            builder.append(編集後口座.get口座種別略称().substringReturnAsPossible(NUM_0, NUM_2));
             builder.append(半角ハイフン);
-            builder.append(編集後口座.get口座番号());
+            builder.append(編集後口座.get口座番号().substringReturnAsPossible(NUM_0, NUM_7));
             builder.append(RString.FULL_SPACE);
             builder.append(編集後口座.get口座名義人漢字());
         }
