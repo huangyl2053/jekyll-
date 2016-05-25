@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 介護認定審査会委員情報登録のコントローラです。
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class ShinsakaiIinJohoToroku {
 

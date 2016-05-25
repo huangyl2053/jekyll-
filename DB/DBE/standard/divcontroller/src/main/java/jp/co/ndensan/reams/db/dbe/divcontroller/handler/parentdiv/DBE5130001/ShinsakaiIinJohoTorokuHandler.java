@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 介護認定審査会委員情報のハンドラークラスです。
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class ShinsakaiIinJohoTorokuHandler {
 

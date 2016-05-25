@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 対象者自動割付_バッチ処理クラスパラメータクラスです。
  *
- * @reamsid_L DBE-1350-040 wangxiaodong
+ * @reamsid_L DBE-1350-040 wangxiaodong
  */
 @lombok.Getter
 @lombok.Setter

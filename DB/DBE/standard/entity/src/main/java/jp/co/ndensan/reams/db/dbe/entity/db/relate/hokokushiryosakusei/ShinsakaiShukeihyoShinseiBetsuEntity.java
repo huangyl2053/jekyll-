@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定審査会集計表（申請区分別）情報の情報です。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1450-020 wangxiaodong
  */
 @lombok.Getter
 @lombok.Setter
