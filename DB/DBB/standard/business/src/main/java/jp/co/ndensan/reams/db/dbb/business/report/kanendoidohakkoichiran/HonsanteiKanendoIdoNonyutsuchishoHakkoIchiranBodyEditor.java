@@ -31,9 +31,6 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
 
     private static final int NUM_0 = 0;
 
-    private static final int 金融機関コード_START = 0;
-    private static final int 金融機関コード_END = 4;
-
     private static final RString 半角ハイフン = new RString("-");
     private static final RString アステリスク = new RString("*");
 
@@ -135,20 +132,23 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
         RStringBuilder builder = new RStringBuilder();
         EditedKoza 編集後口座 = 共通情報.get編集後口座();
         if (null != 編集後口座 && 編集後口座.isゆうちょ銀行()) {
-            builder.append(編集後口座.get金融機関コードCombinedWith支店コード().substring(
-                    金融機関コード_START, 金融機関コード_END));
-            builder.append(RString.HALF_SPACE);
-            builder.append(編集後口座.get口座番号Or通帳記号番号());
-            builder.append(RString.HALF_SPACE);
-            builder.append(編集後口座.get口座名義人漢字優先());
+            builder.append(編集後口座.get金融機関コード());
+            builder.append(RString.FULL_SPACE);
+            builder.append(編集後口座.get通帳記号());
+            builder.append(半角ハイフン);
+            builder.append(編集後口座.get通帳番号());
+            builder.append(RString.FULL_SPACE);
+            builder.append(編集後口座.get口座名義人漢字());
         } else if (null != 編集後口座 && !編集後口座.isゆうちょ銀行()) {
-            builder.append(編集後口座.get金融機関コードCombinedWith支店コード());
-            builder.append(RString.HALF_SPACE);
+            builder.append(編集後口座.get金融機関コード());
+            builder.append(半角ハイフン);
+            builder.append(編集後口座.get支店コード());
+            builder.append(RString.FULL_SPACE);
             builder.append(編集後口座.get口座種別略称());
             builder.append(半角ハイフン);
-            builder.append(編集後口座.get口座番号Or通帳記号番号());
-            builder.append(RString.HALF_SPACE);
-            builder.append(編集後口座.get口座名義人漢字優先());
+            builder.append(編集後口座.get口座番号());
+            builder.append(RString.FULL_SPACE);
+            builder.append(編集後口座.get口座名義人漢字());
         }
         source.listLower_8 = builder.toRString();
     }

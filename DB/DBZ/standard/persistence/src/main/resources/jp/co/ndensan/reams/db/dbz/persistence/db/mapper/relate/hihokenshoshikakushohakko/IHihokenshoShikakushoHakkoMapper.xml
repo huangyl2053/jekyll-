@@ -22,29 +22,16 @@
         <result property="サービス種類名称" column="B_serviceShuruiMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <resultMap id="支払方法変更の情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity" autoMapping="true">
-        <result property="証記載保険者番号" column="ShiharaiHohoHenko_shoKisaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
-        <result property="被保険者番号" column="ShiharaiHohoHenko_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
-        <result property="管理区分" column="ShiharaiHohoHenko_kanriKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="履歴番号" column="ShiharaiHohoHenko_rirekiNo" />
-        <result property="登録区分" column="ShiharaiHohoHenko_torokuKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="適用開始年月日" column="ShiharaiHohoHenko_tekiyoKaishiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="適用終了年月日" column="ShiharaiHohoHenko_tekiyoShuryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-    </resultMap>
-
     <resultMap id="居宅給付計画届出情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity" autoMapping="true">
-        <result property="被保険者番号" column="KyotakuKeikakuTodokede_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
-        <result property="対象年月" column="KyotakuKeikakuTodokede_taishoYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
-        <result property="履歴番号" column="KyotakuKeikakuTodokede_rirekiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="届出年月日" column="KyotakuKeikakuTodokede_todokedeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-    </resultMap>
-
-    <resultMap id="介護保険施設入退所の情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity" autoMapping="true">
-        <result property="識別コード" column="ShisetsuNyutaisho_shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
-        <result property="入所施設種類" column="ShisetsuNyutaisho_nyushoShisetsuShurui"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="入所施設コード" column="ShisetsuNyutaisho_nyushoShisetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="入所年月日" column="ShisetsuNyutaisho_nyushoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="退所年月日" column="ShisetsuNyutaisho_taishoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="対象年月" column="taishoYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <result property="履歴番号" column="rirekiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="届出年月日" column="todokedeYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="居宅計画区分" column="kyotakuKeikaKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用開始年月日" column="tekiyoKaishiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用終了年月日" column="tekiyoShuryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="計画事業者番号" column="keikakuJigyoshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="委託先事業者番号" column="itakusakiJigyoshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
     </resultMap>
 
     <select id="被保険者証資格証発行情報取得" parameterType="jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter"
@@ -114,82 +101,62 @@
         A_serviceShuruiCode ASC
 
     </select>
-    <select id="支払方法変更の情報取得" resultMap="支払方法変更の情報取得ResultMap" fetchSize="500">
-
-        SELECT
-        A."shoKisaiHokenshaNo"  AS ShiharaiHohoHenko_shoKisaiHokenshaNo,
-        A."hihokenshaNo" AS ShiharaiHohoHenko_hihokenshaNo,
-        A."kanriKubun" AS ShiharaiHohoHenko_kanriKubun,
-        A."rirekiNo" AS ShiharaiHohoHenko_rirekiNo,
-        A."torokuKubun" AS ShiharaiHohoHenko_torokuKubun,
-        A."tekiyoKaishiYMD" AS ShiharaiHohoHenko_tekiyoKaishiYMD,
-        A."tekiyoShuryoYMD" AS ShiharaiHohoHenko_tekiyoShuryoYMD
-        FROM
-        (SELECT
-        ShiharaiHohoHenko."shoKisaiHokenshaNo",
-        ShiharaiHohoHenko."hihokenshaNo",
-        ShiharaiHohoHenko."kanriKubun",
-        ShiharaiHohoHenko."rirekiNo",
-        ShiharaiHohoHenko."torokuKubun",
-        ShiharaiHohoHenko."tekiyoKaishiYMD",
-        ShiharaiHohoHenko."tekiyoShuryoYMD",
-        row_number() over(partition by ShiharaiHohoHenko."shoKisaiHokenshaNo") as rank_number
-        FROM
-        rgdb."DbT4021ShiharaiHohoHenko" AS ShiharaiHohoHenko
-        WHERE
-        ShiharaiHohoHenko."tekiyoShuryoYMD" <![CDATA[>]]> ShiharaiHohoHenko."tekiyoKaishiYMD"
-        order by ShiharaiHohoHenko."tekiyoShuryoYMD"  desc,ShiharaiHohoHenko."tekiyoKaishiYMD" desc) AS A
-        WHERE (A.rank_number = 1 OR A.rank_number = 2 OR A.rank_number = 3)
-
-    </select>
 
     <select id="居宅給付計画届出情報取得" resultMap="居宅給付計画届出情報取得ResultMap" fetchSize="500">
-
         SELECT
-        A."hihokenshaNo" AS KyotakuKeikakuTodokede_hihokenshaNo,
-        A."taishoYM" AS KyotakuKeikakuTodokede_taishoYM,
-        A."rirekiNo" AS KyotakuKeikakuTodokede_rirekiNo,
-        A."todokedeYMD" AS KyotakuKeikakuTodokede_todokedeYMD
+        A."hihokenshaNo" AS hihokenshaNo,
+        A."taishoYM" AS taishoYM,
+        A."rirekiNo" AS rirekiNo,
+        A."todokedeYMD" AS todokedeYMD,
+        A."kyotakuKeikaKubun" AS kyotakuKeikaKubun,
+        A."tekiyoKaishiYMD" AS tekiyoKaishiYMD,
+        A."tekiyoShuryoYMD" AS tekiyoShuryoYMD,
+        A."keikakuJigyoshaNo" AS keikakuJigyoshaNo,
+        A."itakusakiJigyoshaNo" AS itakusakiJigyoshaNo
         FROM
         (SELECT
-        KyotakuKeikakuTodokede."hihokenshaNo",
-        KyotakuKeikakuTodokede."taishoYM",
-        KyotakuKeikakuTodokede."rirekiNo",
-        KyotakuKeikakuTodokede."todokedeYMD",
-        row_number() over(partition by KyotakuKeikakuTodokede."hihokenshaNo") as rank_number
+        KyotakuKeikakuTodokede."hihokenshaNo" AS "hihokenshaNo",
+        KyotakuKeikakuTodokede."taishoYM" AS "taishoYM",
+        KyotakuKeikakuTodokede."rirekiNo" AS "rirekiNo",
+        KyotakuKeikakuTodokede."todokedeYMD" AS "todokedeYMD",
+        '1' AS "kyotakuKeikaKubun",
+        KyotakuKeikakuJigyoshaSakusei."tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        KyotakuKeikakuJigyoshaSakusei."tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+        KyotakuKeikakuJigyoshaSakusei."keikakuJigyoshaNo" AS "keikakuJigyoshaNo",
+        KyotakuKeikakuJigyoshaSakusei."itakusakiJigyoshaNo" AS "itakusakiJigyoshaNo"
         FROM
         rgdb."DbT3005KyotakuKeikakuTodokede" AS KyotakuKeikakuTodokede
-        order by KyotakuKeikakuTodokede."taishoYM" desc, KyotakuKeikakuTodokede."rirekiNo" desc) AS A
+        INNER JOIN
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS KyotakuKeikakuJigyoshaSakusei
+        ON
+        KyotakuKeikakuTodokede."hihokenshaNo" = KyotakuKeikakuJigyoshaSakusei."hihokenshaNo"
+        AND KyotakuKeikakuTodokede."taishoYM" = KyotakuKeikakuJigyoshaSakusei."taishoYM"
+        AND KyotakuKeikakuTodokede."rirekiNo" = KyotakuKeikakuJigyoshaSakusei."rirekiNo"
         WHERE
-        (A.rank_number = 1 OR A.rank_number = 2 OR A.rank_number = 3)
-
-    </select>
-
-    <select id="介護保険施設入退所の情報取得" resultMap="介護保険施設入退所の情報取得ResultMap" fetchSize="500">
-
+        KyotakuKeikakuTodokede."hihokenshaNo" = #{被保険者番号}
+        UNION
         SELECT
-        A."shikibetsuCode" AS ShisetsuNyutaisho_shikibetsuCode,
-        A."nyushoShisetsuShurui" AS ShisetsuNyutaisho_nyushoShisetsuShurui,
-        A."nyushoShisetsuCode" AS ShisetsuNyutaisho_nyushoShisetsuCode,
-        A."nyushoYMD" AS ShisetsuNyutaisho_nyushoYMD,
-        A."taishoYMD" AS ShisetsuNyutaisho_taishoYMD
+        KyotakuKeikakuTodokede."hihokenshaNo" AS "hihokenshaNo",
+        KyotakuKeikakuTodokede."taishoYM" AS "taishoYM",
+        KyotakuKeikakuTodokede."rirekiNo" AS "rirekiNo",
+        KyotakuKeikakuTodokede."todokedeYMD" AS "todokedeYMD",
+        '2' AS "kyotakuKeikaKubun",
+        KyotakuKeikakuJigyoshaSakusei."tekiyoKaishiYMD",
+        KyotakuKeikakuJigyoshaSakusei."tekiyoShuryoYMD",
+        '' AS "keikakuJigyoshaNo",
+        '' AS "itakusakiJigyoshaNo"
         FROM
-        (SELECT
-        ShisetsuNyutaisho."shikibetsuCode",
-        ShisetsuNyutaisho."nyushoShisetsuShurui",
-        ShisetsuNyutaisho."nyushoShisetsuCode",
-        ShisetsuNyutaisho."nyushoYMD",
-        ShisetsuNyutaisho."taishoYMD",
-        row_number() over(partition by ShisetsuNyutaisho."shikibetsuCode") as rank_number
-        FROM
-        rgdb."DbT1004ShisetsuNyutaisho" AS ShisetsuNyutaisho
+        rgdb."DbT3005KyotakuKeikakuTodokede" AS KyotakuKeikakuTodokede
+        INNER JOIN
+        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS KyotakuKeikakuJigyoshaSakusei
+        ON
+        KyotakuKeikakuTodokede."hihokenshaNo" = KyotakuKeikakuJigyoshaSakusei."hihokenshaNo"
+        AND KyotakuKeikakuTodokede."taishoYM" = KyotakuKeikakuJigyoshaSakusei."taishoYM"
+        AND KyotakuKeikakuTodokede."rirekiNo" = KyotakuKeikakuJigyoshaSakusei."rirekiNo"
         WHERE
-        ShisetsuNyutaisho."daichoShubetsu" = '1'
-        AND ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> ShisetsuNyutaisho."nyushoYMD"
-        order by ShisetsuNyutaisho."taishoYMD" desc, ShisetsuNyutaisho."nyushoYMD" desc
-        ) AS A
-        WHERE
-        (A.rank_number = 1 OR A.rank_number = 2 OR A.rank_number = 3)
-
+        KyotakuKeikakuTodokede."hihokenshaNo" = #{被保険者番号}) AS A
+        ORDER BY A."tekiyoKaishiYMD"
+        LIMIT 3
     </select>
+
 </mapper>
