@@ -175,6 +175,27 @@ public class HihokenshaShisakuPanal {
     }
 
     /**
+     * 「資格異動の訂正を削除する」ボタンの押下を処理です。
+     *
+     * @param div 被保険者資格詳細異動Div
+     * @return ResponseData<HihokenshaShisakuPanalDiv> 被保険者資格詳細異動Div
+     */
+    public ResponseData<HihokenshaShisakuPanalDiv> onClick_btnDelete(HihokenshaShisakuPanalDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
+            FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
+            manager.deleteHihokenshaShikakuTeisei(被保険者番号, 取得日);
+            RealInitialLocker.release(前排他ロックキー);
+            return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 所在保険者部品連動処理します。
      *
      * @param div HihokenshaShisakuPanalDiv
