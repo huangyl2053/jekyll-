@@ -62,18 +62,17 @@ public class JigyoJokyoHokokuGeppoHandler {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(
                 GyomuBunrui.介護事務);
         RString 合併市町村 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (new Code(DonyuKeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
-            div.getJikkoTanni().getRadHokenshaKyuShichoson().setVisible(false);
-            div.getJikkoTanni().getRadKoikiKoseiShichoson().setVisible(false);
+        if (new Code(DonyuKeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード()) && 合併あり.equals(合併市町村)) {
+            div.getJikkoTanni().getRadHokenshaKyuShichoson().setVisible(true);
         } else {
             div.getJikkoTanni().getRadHokenshaKyuShichoson().setVisible(false);
-            div.getJikkoTanni().getRadKoikiKoseiShichoson().setVisible(true);
         }
-        if (合併あり.equals(合併市町村)) {
-            div.getJikkoTanni().getRadHokenshaKyuShichoson().setVisible(true);
+        if (new Code(DonyuKeitaiCode.事務広域.getCode()).equals(shichosonSecurityJoho.get導入形態コード())) {
+            div.getJikkoTanni().getRadKoikiKoseiShichoson().setVisible(true);
+        } else {
             div.getJikkoTanni().getRadKoikiKoseiShichoson().setVisible(false);
         }
-        if (new Code(DonyuKeitaiCode.事務単一.getCode()).equals(shichosonSecurityJoho.get導入形態コード()) || new RString("1").equals(合併市町村)) {
+        if (new Code(DonyuKeitaiCode.事務広域.getCode()).equals(shichosonSecurityJoho.get導入形態コード()) || 合併あり.equals(合併市町村)) {
             div.getJikkoTanni().getBtnShichosonSentaku().setDisabled(true);
         } else {
             div.getJikkoTanni().getBtnShichosonSentaku().setVisible(false);
@@ -140,17 +139,18 @@ public class JigyoJokyoHokokuGeppoHandler {
                         : 決定年月_11から14現物分.get(0).get集計年月().toDateString()));
             }
             if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu3())) {
-                div.getCblIppanShokan().setDisabled(false);
+                div.getRadShukeiType3().setDisabled(false);
                 div.getRadShukeiType3().setSelectedKey(審査年月);
             } else if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue()) && RString.isNullOrEmpty(div.getShukeiNengetsu3())) {
-                div.getCblIppanShokan().setDisabled(true);
+                div.getRadShukeiType3().setDisabled(true);
                 div.getRadShukeiType3().setSelectedKey(審査年月);
             } else if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu3())) {
-                div.getCblIppanShokan().setDisabled(true);
+                div.getRadShukeiType3().setDisabled(true);
                 div.getTxtShukeiYM3().setValue(new FlexibleDate(div.getShukeiNengetsu3()));
+                div.setShukeiNengetsu3(RString.EMPTY);
                 div.getRadShukeiType3().setSelectedKey(決定年月);
             } else {
-                div.getCblIppanShokan().setDisabled(true);
+                div.getRadShukeiType3().setDisabled(true);
                 div.getRadShukeiType3().setSelectedKey(審査年月);
             }
         }
@@ -170,19 +170,19 @@ public class JigyoJokyoHokokuGeppoHandler {
                         : 審査年月_11から14償還分.get(0).get集計年月().toDateString()));
             }
             if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu3())) {
-                div.getCblIppanShokan().setDisabled(false);
+                div.getRadShukeiType3().setDisabled(false);
                 div.getRadShukeiType3().setSelectedKey(決定年月);
             } else if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue()) && RString.isNullOrEmpty(div.getShukeiNengetsu3())) {
-                div.getCblIppanShokan().setDisabled(true);
+                div.getRadShukeiType3().setDisabled(true);
                 div.getRadShukeiType3().setSelectedKey(決定年月);
             } else if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM3().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu3())) {
-                div.getCblIppanShokan().setDisabled(true);
+                div.getRadShukeiType3().setDisabled(true);
                 div.getTxtShukeiYM3().setValue(new FlexibleDate(div.getShukeiNengetsu3()));
                 div.setShukeiNengetsu3(RString.EMPTY);
                 div.getRadShukeiType3().setSelectedKey(審査年月);
             } else {
-                div.getCblIppanShokan().setDisabled(true);
-                div.getRadShukeiType3().setSelectedKey(審査年月);
+                div.getRadShukeiType3().setDisabled(true);
+                div.getRadShukeiType3().setSelectedKey(決定年月);
             }
         }
     }
@@ -211,18 +211,18 @@ public class JigyoJokyoHokokuGeppoHandler {
                         : 決定年月_決定状況償還分.get(0).get集計年月().toDateString());
             }
             if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu5())) {
-                div.getCblHokenKyufuShokan().setDisabled(false);
+                div.getRadShukeiType5().setDisabled(false);
                 div.getRadShukeiType5().setSelectedKey(審査年月);
             } else if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue()) && RString.isNullOrEmpty(div.getShukeiNengetsu5())) {
-                div.getCblHokenKyufuShokan().setDisabled(true);
+                div.getRadShukeiType5().setDisabled(true);
                 div.getRadShukeiType5().setSelectedKey(審査年月);
             } else if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu5())) {
-                div.getCblHokenKyufuShokan().setDisabled(true);
+                div.getRadShukeiType5().setDisabled(true);
                 div.getTxtShukeiYM5().setValue(new FlexibleDate(div.getShukeiNengetsu5()));
                 div.setShukeiNengetsu5(RString.EMPTY);
                 div.getRadShukeiType5().setSelectedKey(決定年月);
             } else {
-                div.getCblHokenKyufuShokan().setDisabled(true);
+                div.getRadShukeiType5().setDisabled(true);
                 div.getRadShukeiType5().setSelectedKey(審査年月);
             }
         }
@@ -241,18 +241,18 @@ public class JigyoJokyoHokokuGeppoHandler {
                         : 審査年月_決定状況償還分.get(0).get集計年月().toDateString());
             }
             if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu5())) {
-                div.getCblHokenKyufuShokan().setDisabled(false);
+                div.getRadShukeiType5().setDisabled(false);
                 div.getRadShukeiType5().setSelectedKey(決定年月);
             } else if (!FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue()) && RString.isNullOrEmpty(div.getShukeiNengetsu5())) {
-                div.getCblHokenKyufuShokan().setDisabled(true);
+                div.getRadShukeiType5().setDisabled(true);
                 div.getRadShukeiType5().setSelectedKey(決定年月);
             } else if (FlexibleDate.EMPTY.equals(div.getTxtShukeiYM5().getValue()) && !RString.isNullOrEmpty(div.getShukeiNengetsu5())) {
-                div.getCblHokenKyufuShokan().setDisabled(true);
+                div.getRadShukeiType5().setDisabled(true);
                 div.getTxtShukeiYM5().setValue(new FlexibleDate(div.getShukeiNengetsu5()));
                 div.setShukeiNengetsu5(RString.EMPTY);
                 div.getRadShukeiType5().setSelectedKey(審査年月);
             } else {
-                div.getCblHokenKyufuShokan().setDisabled(true);
+                div.getRadShukeiType5().setDisabled(true);
                 div.getRadShukeiType5().setSelectedKey(決定年月);
             }
         }
@@ -262,30 +262,42 @@ public class JigyoJokyoHokokuGeppoHandler {
      * すべて選択チェックボックス処理です。
      */
     public void getCblShutsuryokuAll() {
-        List<RString> すべて選択 = new ArrayList<>();
-        すべて選択.add(ALL);
-        if (すべて選択.equals(div.getCblShutsuryokuAll().getSelectedKeys())) {
-            一般状況10.clear();
-            一般状況10.add(new RString("ippan1_11"));
-            div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
-            一般状況_合算.clear();
-            一般状況_合算.add(ALL);
-            div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
-            一般状況14_現物分.clear();
-            一般状況14_現物分.add(一般状況14);
-            div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
-            一般状況14_償還分.clear();
-            一般状況14_償還分.add(一般状況14);
-            div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
-            決定状況合算.clear();
-            決定状況合算.add(ALL);
-            div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
-            保険給付決定状況_現物分.clear();
-            保険給付決定状況_現物分.add(new RString("hokenKyufuGenbutsu"));
-            div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
-            決定状況合算_償還分.clear();
-            決定状況合算_償還分.add(new RString("hokenKyufuShokan"));
-            div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
+        if (div.getCblShutsuryokuAll().getSelectedKeys().contains(ALL)) {
+            if (!div.getCblIppan1to10().isDisabled()) {
+                一般状況10.clear();
+                一般状況10.add(new RString("ippan1_11"));
+                div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
+            }
+            if (!div.getCblGassan1().isDisabled()) {
+                一般状況_合算.clear();
+                一般状況_合算.add(ALL);
+                div.getCblGassan1().setSelectedItemsByKey(一般状況_合算);
+            }
+            if (!div.getCblIppanGembutsu().isDisabled()) {
+                一般状況14_現物分.clear();
+                一般状況14_現物分.add(一般状況14);
+                div.getCblIppanGembutsu().setSelectedItemsByKey(一般状況14_現物分);
+            }
+            if (!div.getCblIppanShokan().isDisabled()) {
+                一般状況14_償還分.clear();
+                一般状況14_償還分.add(一般状況14);
+                div.getCblIppanShokan().setSelectedItemsByKey(一般状況14_償還分);
+            }
+            if (!div.getCblGassan2().isDisabled()) {
+                決定状況合算.clear();
+                決定状況合算.add(ALL);
+                div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
+            }
+            if (!div.getCblHokenKyufuGembutsu().isDisabled()) {
+                保険給付決定状況_現物分.clear();
+                保険給付決定状況_現物分.add(new RString("hokenKyufuGenbutsu"));
+                div.getCblHokenKyufuGembutsu().setSelectedItemsByKey(保険給付決定状況_現物分);
+            }
+            if (!div.getCblHokenKyufuShokan().isDisabled()) {
+                決定状況合算_償還分.clear();
+                決定状況合算_償還分.add(new RString("hokenKyufuShokan"));
+                div.getCblHokenKyufuShokan().setSelectedItemsByKey(決定状況合算_償還分);
+            }
         } else {
             一般状況10.clear();
             div.getCblIppan1to10().setSelectedItemsByKey(一般状況10);
@@ -358,7 +370,7 @@ public class JigyoJokyoHokokuGeppoHandler {
                 div.getCblGassan2().setSelectedItemsByKey(決定状況合算);
             }
         }
-        if ((new FlexibleDate(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())).isBefore(new FlexibleDate("平26.07"))) {
+        if (new FlexibleDate("平26.07").isBeforeOrEquals((new FlexibleDate(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedValue())))) {
             div.getCblHokenKyufuGembutsu().setDisabled(true);
             div.getCblGassan2().setDisabled(true);
         }
@@ -426,5 +438,18 @@ public class JigyoJokyoHokokuGeppoHandler {
      */
     public void setShukeiType5() {
         div.getTxtShukeiYM5().setValue(new FlexibleDate(div.getShukeiNengetsu5()));
+    }
+
+    /**
+     * 集計年月テキストボックスのクリア処理です。
+     */
+    public void clearTxtShukeiYM() {
+        div.getTxtShukeiYM1().clearValue();
+        div.getTxtShukeiYM2().clearValue();
+        div.getTxtShukeiYM3().clearValue();
+        div.setShukeiNengetsu3(RString.EMPTY);
+        div.getTxtShukeiYM4().clearValue();
+        div.getTxtShukeiYM5().clearValue();
+        div.setShukeiNengetsu5(RString.EMPTY);
     }
 }

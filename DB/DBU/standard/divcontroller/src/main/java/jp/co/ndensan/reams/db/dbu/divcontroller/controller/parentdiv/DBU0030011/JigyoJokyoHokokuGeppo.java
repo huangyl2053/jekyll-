@@ -11,10 +11,13 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatis.param.yoshikibetsurenkeijoh
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoHandler;
 import jp.co.ndensan.reams.db.dbu.service.yoshikibetsurenkeijoho.ShukeiYearMouthGetterFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 様式別連携情報作成の処理です。
@@ -43,6 +46,7 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onChange_ddlKakoHokokuYM(JigyoJokyoHokokuGeppoDiv div) {
+        getHandler(div).clearTxtShukeiYM();
         if (!RString.isNullOrEmpty(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey())) {
             FlexibleYearMonth yearMonth = new FlexibleYearMonth(div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey());
             ShukeiYearMouthGetterFinder getterFinder = ShukeiYearMouthGetterFinder.createInstance();
@@ -125,6 +129,10 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onClick_btnShichosonSentaku(JigyoJokyoHokokuGeppoDiv div) {
+        KoseiShiChosonSelectorModel model = ViewStateHolder.get(ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        if (model != null) {
+            div.setShichosonCode(model.get市町村コード());
+        }
         return ResponseData.of(div).respond();
     }
 
