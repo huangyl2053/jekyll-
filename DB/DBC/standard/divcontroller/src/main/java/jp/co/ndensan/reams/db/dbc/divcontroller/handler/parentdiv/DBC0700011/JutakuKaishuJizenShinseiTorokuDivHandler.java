@@ -925,7 +925,7 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
         }
         List<RString> selectedItemsOld = ViewStateHolder.get(ViewStateKeys.限度額リセット値, List.class);
 
-        if (!selectedKeyNew.equals(selectedItemsOld)) {
+        if (selectedItemsOld != null && !selectedKeyNew.equals(selectedItemsOld)) {
             return true;
         }
         if (!div.getHidTxtHiyoTotalNow().equals(new RString(div.getKaigoShikakuKihonShaPanel().getTabShinseiContents()
@@ -1504,6 +1504,10 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     .getTxtHokenKyufuAmountNow().setValue(Decimal.valueOf(data.get給付額等_保険給付費額()));
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                     .getTxtRiyoshaFutanAmountNow().setValue(Decimal.valueOf(data.get給付額等_利用者自己負担額()));
+            div.setHidTxtHiyoTotalNow(new RString(data.get給付額等_費用額合計()));
+            div.setHidTxtHokenTaishoHiyoNow(new RString(data.get給付額等_保険対象費用額()));
+            div.setHidTxtHokenKyufuAmountNow(new RString(data.get給付額等_保険給付費額()));
+            div.setHidTxtRiyoshaFutanAmountNow(new RString(data.get給付額等_利用者自己負担額()));
         } else {
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                     .getTxtHiyoTotalNow().setValue(Decimal.ZERO);
@@ -1513,6 +1517,10 @@ public final class JutakuKaishuJizenShinseiTorokuDivHandler {
                     .getTxtHokenKyufuAmountNow().setValue(Decimal.ZERO);
             div.getKaigoShikakuKihonShaPanel().getTabShinseiContents().getTabJutakuKaisyuJyoho().getTotalPanel()
                     .getTxtRiyoshaFutanAmountNow().setValue(Decimal.ZERO);
+            div.setHidTxtHiyoTotalNow(new RString(Decimal.ZERO.toString()));
+            div.setHidTxtHokenTaishoHiyoNow(new RString(Decimal.ZERO.toString()));
+            div.setHidTxtHokenKyufuAmountNow(new RString(Decimal.ZERO.toString()));
+            div.setHidTxtRiyoshaFutanAmountNow(new RString(Decimal.ZERO.toString()));
         }
 
         ShokanJutakuKaishuJizenShinsei oldData = ViewStateHolder.get(ViewStateKeys.償還払支給住宅改修事前申請情報,
