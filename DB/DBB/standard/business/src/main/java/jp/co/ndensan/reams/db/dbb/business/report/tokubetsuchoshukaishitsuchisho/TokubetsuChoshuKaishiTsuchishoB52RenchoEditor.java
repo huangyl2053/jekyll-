@@ -14,9 +14,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -133,10 +131,8 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
             source.tokuchoGimushaName = 編集後本算定通知書共通情報.get更正後().get特別徴収義務者();
             source.tokuchoTaishonenkinName = 編集後本算定通知書共通情報.get更正後().get特別徴収対象年金();
             if (編集後本算定通知書共通情報.get更正後().get期間_自() != null && 編集後本算定通知書共通情報.get更正後().get期間_至() != null) {
-                RString 期間_自 = (new FlexibleDate(編集後本算定通知書共通情報.get更正後().get期間_自())).wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-                RString 期間_至 = (new FlexibleDate(編集後本算定通知書共通情報.get更正後().get期間_至())).wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                RString 期間_自 = 編集後本算定通知書共通情報.get更正後().get期間_自();
+                RString 期間_至 = 編集後本算定通知書共通情報.get更正後().get期間_至();
                 source.kikan = 期間_自.concat(TOKEN).concat(期間_至);
             }
             source.tsukiSu1 = 編集後本算定通知書共通情報.get更正後().get月数_ケ月();
