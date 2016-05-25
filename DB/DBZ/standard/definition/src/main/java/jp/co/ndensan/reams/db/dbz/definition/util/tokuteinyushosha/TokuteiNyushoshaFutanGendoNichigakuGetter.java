@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.definition.util.tokuteinyushosha;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 特定入所者負担限度額のクラスです。
@@ -46,13 +46,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -68,13 +68,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -90,13 +90,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -112,13 +112,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -134,13 +134,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -156,13 +156,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -178,13 +178,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -200,13 +200,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -222,13 +222,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減食費３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -244,13 +244,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -266,13 +266,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -288,13 +288,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -310,13 +310,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -332,13 +332,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -354,13 +354,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -376,13 +376,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -398,13 +398,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -420,13 +420,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -442,13 +442,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -464,13 +464,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -486,13 +486,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -508,13 +508,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -530,13 +530,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -552,13 +552,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -574,13 +574,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -596,13 +596,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -618,13 +618,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -640,13 +640,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減ユニット型準個室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -662,13 +662,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -684,13 +684,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -706,13 +706,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -728,13 +728,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -750,13 +750,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -772,13 +772,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -794,13 +794,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -816,13 +816,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -838,13 +838,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -860,13 +860,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養２の３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養２の３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養２の３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -882,13 +882,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減従個特養３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -904,13 +904,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -926,13 +926,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -948,13 +948,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_従個老健３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -970,13 +970,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -992,13 +992,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1014,13 +1014,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1036,13 +1036,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1058,13 +1058,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1080,13 +1080,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措置多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措置多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措置多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1102,13 +1102,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1124,13 +1124,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室２の１,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室２の１,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1146,13 +1146,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室２の２,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室２の２,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1168,13 +1168,13 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_旧措軽減多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else if (年月日_20120401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201204改正_旧措軽減多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室３,
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_旧措軽減多床室３,
                     new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
@@ -1190,9 +1190,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
 
@@ -1207,9 +1207,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_ユニット型準個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_ユニット型準個室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
 
@@ -1224,9 +1224,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個特養_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個特養_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
 
@@ -1241,9 +1241,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_従個老健_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_従個老健_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
 
@@ -1258,9 +1258,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_多床室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_多床室_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
 
@@ -1275,9 +1275,9 @@ public class TokuteiNyushoshaFutanGendoNichigakuGetter {
         if (基準日.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (年月日_20150401.isBeforeOrEquals(基準日)) {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_201504改正_食費_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         } else {
-            return BusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
+            return DbBusinessConfig.get(ConfigNameDBD.特定入所者負担限度額_食費_基準費用額, new RDate(基準日.toString()), SubGyomuCode.DBD介護受給);
         }
     }
 
