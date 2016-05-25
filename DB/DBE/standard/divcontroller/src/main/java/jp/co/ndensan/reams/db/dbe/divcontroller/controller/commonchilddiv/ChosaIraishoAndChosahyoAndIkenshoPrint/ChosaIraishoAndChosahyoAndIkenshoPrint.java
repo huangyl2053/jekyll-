@@ -136,9 +136,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (chk.contains(KEY0)) {
             printService.print要介護認定調査依頼書(getHandler(div).create認定調査依頼書印刷用パラメータ());
         }
-//        if (chk.contains(KEY1)) {
-//            //printService.print要介護認定調査依頼書(getHandler(div).create認定調査依頼書印刷用パラメータ());
-//        }
+        if (chk.contains(KEY1)) {
+            printService.print意見書作成依頼一覧表(getHandler(div).create意見書作成依頼一覧表_パラメータ());
+        }
         List<RString> chkChosahyo = div.getChkChosahyo().getSelectedKeys();
         if (chkChosahyo.contains(KEY0)) {
             call認定調査票_概況調査(div, printService);

@@ -12,6 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
+import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
@@ -73,8 +74,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString 元号_昭和 = new RString("昭和");
     private static final RString 記号 = new RString("✔");
     private static final RString HOUSI = new RString("*");
-    private static final RString ハイフン = new RString("-");
-    private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
     private static final RString 文字列3 = new RString("3");
@@ -492,113 +491,54 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      *
      * @return 認定調査依頼一覧表印刷用パラメータ
      */
-    public List<ChosaIraishoHeadItem> create認定調査依頼一覧表印刷用パラメータ() {
+    public List<ChosaIraiIchiranhyoBodyItem> create認定調査依頼一覧表印刷用パラメータ() {
         List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
-
-        List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
-        int 宛名連番 = 1;
-        RString タイトル = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         for (dgNinteiChosa_Row row : selectedItems) {
+            申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+        }
+        ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号リスト, RString.EMPTY);
 
-            ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
-                    = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
-
-            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
-                    .get認定調査依頼書(parameter).records();
-            if (!list.isEmpty()) {
-                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = list.get(0);
-                List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
-                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), FlexibleDate.getNowDate());
-                RString customerBarCode = ReportUtil.getCustomerBarCode(business.get調査委託先郵便番号(), business.get調査委託先住所());
-                RStringBuilder builder = new RStringBuilder();
-                builder.append("*");
-                builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
-                builder.append("#");
-                Map<Integer, RString> 通知文
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
-
-                RString 誕生日明治 = HOUSI;
-                RString 誕生日大正 = HOUSI;
-                RString 誕生日昭和 = HOUSI;
-                FlexibleDate seinengappiYMD = new FlexibleDate(business.get生年月日());
-                RString era = seinengappiYMD.wareki().eraType(EraType.KANJI).getEra();
-                RString 誕生日 = seinengappiYMD.wareki()
-                        .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-                if (元号_明治.equals(era)) {
-                    誕生日明治 = RString.EMPTY;
-                } else if (元号_大正.equals(era)) {
-                    誕生日大正 = RString.EMPTY;
-                } else if (元号_昭和.equals(era)) {
-                    誕生日昭和 = RString.EMPTY;
-                }
-                RString seibetsu = business.get性別();
-                RString 性別男 = RString.EMPTY;
-                RString 性別女 = RString.EMPTY;
-
-                if (Seibetsu.男.get名称().equals(seibetsu)) {
-                    性別女 = HOUSI;
-                } else {
-                    性別男 = HOUSI;
-                }
-                RString 認定申請年月日 = RString.EMPTY;
-                if (!RString.isNullOrEmpty(business.get認定申請年月日())) {
-                    認定申請年月日 = new FlexibleDate(business.get認定申請年月日()).wareki()
-                            .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                            separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-                }
-                ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        文書番号,
-                        business.get調査委託先郵便番号(),
-                        business.get調査委託先住所(),
-                        business.get事業者名称(),
-                        business.get調査員氏名(),
-                        get名称付与(),
-                        customerBarCode,
-                        business.get被保険者番号(),
-                        builder.toRString(),
-                        タイトル,
-                        通知文.get(1),
-                        被保険者番号リスト.get(0),
-                        被保険者番号リスト.get(1),
-                        被保険者番号リスト.get(2),
-                        被保険者番号リスト.get(INDEX_3),
-                        被保険者番号リスト.get(INDEX_4),
-                        被保険者番号リスト.get(INDEX_5),
-                        被保険者番号リスト.get(INDEX_6),
-                        被保険者番号リスト.get(INDEX_7),
-                        被保険者番号リスト.get(INDEX_8),
-                        被保険者番号リスト.get(INDEX_9),
-                        business.get被保険者氏名カナ(),
-                        誕生日明治,
-                        誕生日大正,
-                        誕生日昭和,
-                        誕生日.substring(2),
-                        business.get被保険者氏名(),
-                        性別男,
-                        性別女,
-                        new YubinNo(business.get郵便番号()).getEditedYubinNo(),
-                        business.get住所(),
-                        business.get郵便番号(),
-                        business.get訪問調査先郵便番号(),
-                        business.get訪問調査先住所(),
-                        business.get訪問調査先名称(),
-                        business.get訪問調査先電話番号(),
-                        認定申請年月日,
-                        set提出期限(business),
-                        通知文.get(2)
-                );
-                chosaIraishoHeadItemList.add(item);
-            }
+        List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                .get認定調査依頼書(parameter).records();
+        List<ChosaIraiIchiranhyoBodyItem> chosaIraishoHeadItemList = new ArrayList<>();
+        int 連番 = 1;
+        Map<Integer, RString> 通知文
+                = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220002.getReportId(), KamokuCode.EMPTY, 1);
+        for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
+            ChosaIraiIchiranhyoBodyItem item = new ChosaIraiIchiranhyoBodyItem(
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    business.get調査委託先郵便番号(),
+                    business.get調査委託先住所(),
+                    business.get事業者名称(),
+                    business.get調査員氏名(),
+                    get名称付与(),
+                    business.get事業者番号(),
+                    通知文.get(1),
+                    通知文.get(2),
+                    new RString(連番++),
+                    business.get調査員氏名(),
+                    business.get被保険者番号(),
+                    business.get認定申請年月日(),
+                    business.get認定申請区分_申請時_コード(),
+                    business.get被保険者氏名(),
+                    business.get被保険者氏名カナ(),
+                    Seibetsu.toValue(business.get性別()).get名称(),
+                    business.get生年月日(),
+                    business.get住所(),
+                    business.get電話番号(),
+                    set提出期限(business)
+            );
+            chosaIraishoHeadItemList.add(item);
         }
         return chosaIraishoHeadItemList;
     }
