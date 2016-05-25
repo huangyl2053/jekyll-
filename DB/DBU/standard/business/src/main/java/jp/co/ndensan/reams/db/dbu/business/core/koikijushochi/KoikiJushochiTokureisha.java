@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.core.koikijushochi;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.kensakuseigyo.KoikinaiJushochitokureiKensakuSeigyo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -33,8 +34,8 @@ public class KoikiJushochiTokureisha {
     public KoikinaiJutokuTaishoshaSql getShikibetsuCodeSql(LasdecCode 市町村コード) {
 
         KoikinaiJutokuTaishoshaSql koikinaiJutokuTaishoshaSql = new KoikinaiJutokuTaishoshaSql();
-        RString value = BusinessConfig.get(KoikinaiJushochitokureiKensakuSeigyo.広域内住所地特例者検索制御_措置元_措置先区分_介護共通,
-                SubGyomuCode.DBU介護統計報告);
+        RString value = DbBusinessConfig.get(KoikinaiJushochitokureiKensakuSeigyo.広域内住所地特例者検索制御_措置元_措置先区分_介護共通,
+                RDate.getNowDate(), SubGyomuCode.EMPTY);
 
         if (措置元.equals(value)) {
             koikinaiJutokuTaishoshaSql.set対象者SQL1(getSQL被保険者台帳の市町村コード取得(市町村コード));
