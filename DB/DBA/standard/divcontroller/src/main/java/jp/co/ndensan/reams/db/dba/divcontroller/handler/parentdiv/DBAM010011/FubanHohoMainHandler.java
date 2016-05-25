@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.Hih
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.FubanHohoMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -81,7 +80,7 @@ public class FubanHohoMainHandler {
         dataSource.add(motoJohoData3);
         div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().setDataSource(dataSource);
         div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().setSelectedKey(DbBusinessConfig.get(
-                ConfigNameDBA.被保険者番号付番方法_付番方法, RDate.getNowDate(), SubGyomuCode.DBA介護資格, LasdecCode.EMPTY, RString.EMPTY));
+                ConfigNameDBA.被保険者番号付番方法_付番方法, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
         div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().setSelectedKey(DbBusinessConfig.get(
                 ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報, RDate.getNowDate(), SubGyomuCode.DBA介護資格));
         RString 開始位置 = DbBusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, RDate.getNowDate(),
