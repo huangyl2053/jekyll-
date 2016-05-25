@@ -147,12 +147,13 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
         if ((編集後本算定通知書共通情報.get編集後宛先() != null) && ((編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName())
                 != (編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName()))) {
             source.listUpper_12 = START.concat(RString.FULL_SPACE)
-                    .concat(new RString(編集後本算定通知書共通情報.get編集後宛先().get宛先名称().toString()));
+                    .concat(new RString(編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName().toString()));
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
-            RString 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日()).wareki().toDateString();
-            source.listUpper_13 = 生保開始日;
+            FlexibleDate 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日());
+            source.listUpper_13 = 生保開始日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
 
         RString 生活保護扶助名称 = RString.EMPTY;
@@ -205,7 +206,7 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
     private void listlowers(NonyuTsuchIchiranSource source) {
         if (編集後本算定通知書共通情報.get編集後宛先() != null
                 && 編集後本算定通知書共通情報.get編集後宛先().get本人名称() != null) {
-            source.listLower_1 = new RString(編集後本算定通知書共通情報.get編集後宛先().get本人名称().toString());
+            source.listLower_1 = new RString(編集後本算定通知書共通情報.get編集後宛先().get本人名称().getName().toString());
         }
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
             source.listLower_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();

@@ -120,8 +120,9 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
-            RString 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日()).wareki().toDateString();
-            source.listUpper_11 = 生保開始日;
+            FlexibleDate 生保開始日 = new FlexibleDate(編集後本算定通知書共通情報.get更正後().get生保開始日());
+            source.listUpper_11 = 生保開始日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         RString 生活保護扶助名称 = RString.EMPTY;
         if (編集後本算定通知書共通情報.get更正後() != null

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyuikkatush
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.ShikyushinseiShinsaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.HihokenshaNoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.ShokanFukushiYoguHanbaihiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuh
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -141,7 +143,11 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
     public void updShikyuShinsei(FlexibleDate 決定日, List<ShokanShinseiEntityResult> 支給申請一括審査List) {
         if (支給申請一括審査List != null && !支給申請一括審査List.isEmpty()) {
             for (ShokanShinseiEntityResult result : 支給申請一括審査List) {
-
+                HihokenshaNoParameter parameter = new HihokenshaNoParameter(result.getEntity()
+                        .get償還払請求基本Entity().getHiHokenshaNo());
+                IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper mapper
+                        = mapperProvider.create(IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper.class);
+                DbT1001HihokenshaDaichoEntity 被保険者Entity = mapper.select識別コード(parameter);
                 DbT3034ShokanShinseiEntity dbT3034entity = result.getEntity().get償還払支給申請Entity();
                 dbT3034entity.setShikyuShinseiShinsaKubun(ShikyushinseiShinsaKubun.審査済.getコード());
                 dbT3034entity.setShinsaYMD(FlexibleDate.getNowDate());
@@ -232,15 +238,16 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                 if (償還払請求集計entity != null) {
                     dbt3053Entity = 償還払請求集計entity.toEntity();
                 }
-
-                manager.dealKyufujisseki(モード_審査,
-                        result.getEntity().get識別コード(),
-                        dbt3038Entity,
-                        dbT3048EntityList,
-                        dbt3034Entity,
-                        dbt3036Entity,
-                        dbt3053Entity,
-                        null);
+                if (被保険者Entity != null) {
+                    manager.dealKyufujisseki(モード_審査,
+                            被保険者Entity.getShikibetsuCode(),
+                            dbt3038Entity,
+                            dbT3048EntityList,
+                            dbt3034Entity,
+                            dbt3036Entity,
+                            dbt3053Entity,
+                            null);
+                }
             }
         }
     }

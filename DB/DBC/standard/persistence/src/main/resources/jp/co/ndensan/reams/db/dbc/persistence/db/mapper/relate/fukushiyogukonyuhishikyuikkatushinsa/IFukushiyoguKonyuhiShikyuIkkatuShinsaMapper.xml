@@ -67,5 +67,24 @@
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
         <association property="償還払支給申請Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
-    </resultMap>  
+    </resultMap> 
+    
+    <resultMap id="resultMap_HihokenshaNo" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">
+        <result property="shikibetsuCode" column="shikibetsuCode"
+            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap> 
+    
+    <select id="select識別コード"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.HihokenshaNoParameter"
+            resultMap="resultMap_HihokenshaNo" fetchSize="500">
+        <include refid="selectHihokenshaNo" />
+    </select>
+     <sql id="selectHihokenshaNo">
+         SELECT "shikibetsuCode"
+         FROM rgdb."DbT1001HihokenshaDaicho"
+         WHERE "hihokenshaNo" = #{被保険者番号}
+         ORDER BY "idoYMD" DESC,"edaNo" DESC
+         LIMIT(1)
+     </sql>
 </mapper>
