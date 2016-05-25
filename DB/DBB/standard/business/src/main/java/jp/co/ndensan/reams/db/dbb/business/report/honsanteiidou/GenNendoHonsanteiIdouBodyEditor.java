@@ -605,18 +605,24 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     }
 
     private void 金融機関コードHander1(GenNendoHonsanteiIdouSource source, IKoza koza) {
-        RString 金融機関コード = RString.EMPTY;
-        RString 通帳記号 = RString.EMPTY;
-        RString 通帳番号 = RString.EMPTY;
-        if (koza.getEdited通帳記号() != null && koza.get通帳番号() != null && koza.get口座名義人漢字() != null) {
+        RString 金融機関コード;
+        RString 通帳記号;
+        RString 通帳番号;
+        if (koza.get通帳記号() != null && koza.get通帳番号() != null && koza.get口座名義人漢字() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
+            } else {
+                金融機関コード = koza.get金融機関コード().value();
             }
-            if (koza.getEdited通帳記号().length() >= NUM_5) {
-                通帳記号 = koza.getEdited通帳記号().substring(NUM_0, NUM_5);
+            if (koza.get通帳記号().length() >= NUM_5) {
+                通帳記号 = koza.get通帳記号().substring(NUM_0, NUM_5);
+            } else {
+                通帳記号 = koza.get通帳記号();
             }
             if (koza.get通帳番号().length() >= NUM_8) {
                 通帳番号 = koza.get通帳番号().substring(NUM_0, NUM_8);
+            } else {
+                通帳番号 = koza.get通帳番号();
             }
             source.list1_5 = 金融機関コード.concat(RString.FULL_SPACE)
                     .concat(通帳記号)
@@ -626,22 +632,30 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     }
 
     private void 金融機関コードHander2(GenNendoHonsanteiIdouSource source, IKoza koza) {
-        RString 金融機関コード = RString.EMPTY;
-        RString 預金種別略称 = RString.EMPTY;
-        RString 支店コード = RString.EMPTY;
-        RString 口座番号 = RString.EMPTY;
+        RString 金融機関コード;
+        RString 預金種別略称;
+        RString 支店コード;
+        RString 口座番号;
         if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
+            } else {
+                金融機関コード = koza.get金融機関コード().value();
             }
             if (koza.get支店コード().value().length() >= NUM_5) {
-                支店コード = koza.getEdited通帳記号().substring(NUM_0, NUM_5);
+                支店コード = koza.get支店コード().value().substring(NUM_0, NUM_5);
+            } else {
+                支店コード = koza.get支店コード().value();
             }
             if (koza.get預金種別().get預金種別略称().length() >= NUM_2) {
                 預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
+            } else {
+                預金種別略称 = koza.get預金種別().get預金種別略称();
             }
             if (koza.get口座番号().length() >= NUM_7) {
                 口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);
+            } else {
+                口座番号 = koza.get口座番号();
             }
             source.list1_5 = 金融機関コード.concat(HYPHEN)
                     .concat(支店コード).concat(RString.FULL_SPACE)
