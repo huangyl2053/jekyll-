@@ -16,20 +16,16 @@ import java.util.List;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaIraiIchiranhyoReportJoho {
 
-    private final ChosaIraiIchiranhyoHeadItem headItem;
     private final List<ChosaIraiIchiranhyoBodyItem> bodyItemList;
 
     /**
      * コンストラクタを作成します。
      *
-     * @param headItem 認定調査依頼一覧情報ヘッダ
      * @param bodyItemList 認定調査依頼一覧情報ボディリスト
      */
     public ChosaIraiIchiranhyoReportJoho(
-            ChosaIraiIchiranhyoHeadItem headItem,
             List<ChosaIraiIchiranhyoBodyItem> bodyItemList) {
 
-        this.headItem = headItem;
         this.bodyItemList = bodyItemList;
     }
 }
