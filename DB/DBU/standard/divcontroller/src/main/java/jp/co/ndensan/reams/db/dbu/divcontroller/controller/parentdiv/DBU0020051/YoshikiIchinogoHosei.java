@@ -115,8 +115,8 @@ public class YoshikiIchinogoHosei {
         if (null == 修正データリスト || 修正データリスト.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
-        return 修正データ更新(div, 修正データリスト, getCheckHandler(div).is整合性チェック1(),
-                getCheckHandler(div).is整合性チェック2(), getCheckHandler(div).is整合性チェック3());
+        return 修正データ更新(div, 修正データリスト, !getCheckHandler(div).is整合性チェック1(),
+                !getCheckHandler(div).is整合性チェック2(), !getCheckHandler(div).is整合性チェック3());
     }
 
     private ResponseData<YoshikiIchinogoHoseiDiv> 修正データ更新(
