@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票「本算定賦課計算」の項目を定義するクラスです。
@@ -79,6 +81,7 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     public RString listUpper_4;
     @ReportItem(name = "listUpper_5", length = 15, order = 31)
     public RString listUpper_5;
+    @ReportPerson(id = "X")
     @ReportItem(name = "listUpper_6", length = 15, order = 32)
     public RString listUpper_6;
     @ReportItem(name = "listUpper_7", length = 11, order = 33)
@@ -89,6 +92,7 @@ public class HonsanteiKekkaIcihiranReportSource implements IReportSource {
     public RString listUpper_9;
     @ReportItem(name = "listUpper_10", length = 38, order = 36)
     public RString listUpper_10;
+    @ReportExpandedInfo(id = "X")
     @ReportItem(name = "listCenter_1", length = 10, order = 37)
     public RString listCenter_1;
     @ReportItem(name = "listCenter_2", length = 9, order = 38)
