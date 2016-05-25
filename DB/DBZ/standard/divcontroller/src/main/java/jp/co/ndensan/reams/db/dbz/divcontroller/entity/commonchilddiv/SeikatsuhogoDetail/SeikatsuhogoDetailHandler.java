@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuT
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -41,6 +42,7 @@ public class SeikatsuhogoDetailHandler {
     private static final RString 受給停止開始日 = new RString("txtTeishiKaishiYMD");
     private static final RString 受給停止終了日 = new RString("txtTeishiShuryoYMD");
     private static final String 連結 = "／";
+    private static final String カラ = "～";
     private final SeikatsuhogoDetailDiv div;
 
     /**
@@ -89,7 +91,29 @@ public class SeikatsuhogoDetailHandler {
                 div.getChkFujoShurui().setSelectedItemsByKey(扶助種類KEY);
             }
         }
-        // TODO SeikaatsuhogoDataModelにて、停止期間がありません。
+        if (!new RString(カラ).equals(生活保護受給Object.get受給停止期間())) {
+            List<RString> 受給停止期間 = 生活保護受給Object.get受給停止期間().split(連結);
+            List<RString> 停止終了日 = new ArrayList<>();
+            boolean 識別 = true;
+            for (RString 停止期間 : 受給停止期間) {
+                dgTeishiRireki_Row dataRow = new dgTeishiRireki_Row();
+                if (識別) {
+                    if (停止期間.contains(カラ)) {
+                        dataRow.getTxtTeishiKaishiYMD().setValue(new RDate(停止期間.split(カラ).get(0).toString()));
+                        停止終了日.add(停止期間.split(カラ).get(1));
+                        識別 = false;
+                    } else {
+                        dataRow.getTxtTeishiKaishiYMD().setValue(new RDate(停止期間.toString()));
+                    }
+                    div.getDgTeishiRireki().getDataSource().add(dataRow);
+                } else {
+                    停止終了日.add(停止期間);
+                }
+            }
+            for (int i = 0; i < div.getDgTeishiRireki().getDataSource().size(); i++) {
+                div.getDgTeishiRireki().getDataSource().get(i).getTxtTeishiShuryoYMD().setValue(new RDate(停止終了日.get(i).toString()));
+            }
+        }
     }
 
     /**

@@ -5,7 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SeikatsuhogoDetail;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -37,7 +42,8 @@ public class SeikatsuhogoDetailValidationHandler {
      */
     public ValidationMessageControlPairs validateForKakutei() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtTeishiShuryoYMD().getValue().isBefore(div.getTxtTeishiKaishiYMD().getValue())) {
+        if (div.getTxtTeishiShuryoYMD().getValue() != null
+                && div.getTxtTeishiShuryoYMD().getValue().isBefore(div.getTxtTeishiKaishiYMD().getValue())) {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate停止期間が不正_追加メッセージあり, div.getTxtTeishiShuryoYMD(), div.getTxtTeishiKaishiYMD()));
         }
@@ -56,7 +62,41 @@ public class SeikatsuhogoDetailValidationHandler {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate受給期間が不正_追加メッセージあり, div.getTxtJukyuKaishiYMD(), div.getTxtJukyuHaishiYMD()));
         }
-        // TODO SeikaatsuhogoDataModelにて、停止期間がありません,実装できない。
+        List<RString> 停止開始日List = new ArrayList<>();
+        List<RString> 停止終了日List = new ArrayList<>();
+        for (dgTeishiRireki_Row row : div.getDgTeishiRireki().getDataSource()) {
+            停止開始日List.add(row.getTxtTeishiKaishiYMD().getValue() == null
+                    ? RString.EMPTY : row.getTxtTeishiKaishiYMD().getValue().toDateString());
+            停止終了日List.add(row.getTxtTeishiShuryoYMD().getValue() == null
+                    ? RString.EMPTY : row.getTxtTeishiShuryoYMD().getValue().toDateString());
+        }
+        Collections.sort(停止開始日List, new Comparator<RString>() {
+            @Override
+            public int compare(RString r1, RString r2) {
+                return r1.compareTo(r2);
+            }
+        });
+        Collections.sort(停止終了日List, new Comparator<RString>() {
+            @Override
+            public int compare(RString r1, RString r2) {
+                return r1.compareTo(r2);
+            }
+        });
+        if (停止開始日List.get(0).compareTo(div.getTxtJukyuKaishiYMD().getValue().toDateString()) < 0) {
+            validPairs.add(new ValidationMessageControlPair(
+                    IdocheckMessages.Validate期間が不正, div.getTxtJukyuKaishiYMD(), div.getDgTeishiRireki()));
+        }
+        if (div.getTxtJukyuHaishiYMD().getValue() != null
+                && 停止終了日List.get(停止終了日List.size() - 1).compareTo(div.getTxtJukyuHaishiYMD().getValue().toDateString()) >= 0) {
+            validPairs.add(new ValidationMessageControlPair(
+                    IdocheckMessages.Validate期間が不正, div.getTxtJukyuHaishiYMD(), div.getDgTeishiRireki()));
+        }
+        if (div.getTxtTeishiShuryoYMD().getValue() != null
+                && !RString.isNullOrEmpty(停止開始日List.get(停止開始日List.size() - 1))
+                && RString.isNullOrEmpty(停止終了日List.get(0))) {
+            validPairs.add(new ValidationMessageControlPair(
+                    IdocheckMessages.Validate期間が不正, div.getTxtJukyuHaishiYMD(), div.getDgTeishiRireki()));
+        }
         return validPairs;
     }
 
