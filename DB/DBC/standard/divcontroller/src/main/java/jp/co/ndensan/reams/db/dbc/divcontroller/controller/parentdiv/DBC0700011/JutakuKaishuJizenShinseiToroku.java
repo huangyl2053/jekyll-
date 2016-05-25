@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0700011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
@@ -48,6 +49,7 @@ public class JutakuKaishuJizenShinseiToroku {
     private static final RString 登録モード = new RString("登録");
     private static final RString 削除モード = new RString("削除");
     private static final RString 照会モード = new RString("照会");
+    private static final RString 取消モード = new RString("取消");
     private static final RString 非表示用フラグ_TRUE = new RString("true");
     private static final RString 要介護状態区分_KEY = new RString("threeUp");
     private static final RString 要介護状態区分_VALUE = new RString("要介護状態区分３段階変更による");
@@ -391,7 +393,11 @@ public class JutakuKaishuJizenShinseiToroku {
 
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         boolean 入力チェック結果 = false;
-        if (!削除モード.equals(state)) {
+        List<RString> 処理モード = new ArrayList<>();
+        処理モード.add(削除モード);
+        処理モード.add(取消モード);
+
+        if (!処理モード.contains(state)) {
             入力チェック結果 = handler.入力チェック(state, hihokenshaNo);
         }
         if (入力チェック結果) {
@@ -411,7 +417,7 @@ public class JutakuKaishuJizenShinseiToroku {
         dataChangeCheck(div);
 
         boolean 確認対象変更有無チェック結果 = false;
-        if (!削除モード.equals(state)) {
+        if (!処理モード.contains(state)) {
             確認対象変更有無チェック結果 = handler.確認対象変更有無チェック();
         }
         if (確認対象変更有無チェック結果) {
@@ -481,7 +487,7 @@ public class JutakuKaishuJizenShinseiToroku {
     public void dataChangeCheck(JutakuKaishuJizenShinseiTorokuDiv div) {
         JutakuKaishuJizenShinseiTorokuDivHandler handler = getHandler(div);
         RString state = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (!削除モード.equals(state) && !登録モード.equals(state)) {
+        if (!削除モード.equals(state) && !登録モード.equals(state) && !取消モード.equals(state)) {
             if (!非表示用フラグ_TRUE.equals(div.getHidDataChangeFlg())) {
                 handler.画面データ変更有無();
             }
