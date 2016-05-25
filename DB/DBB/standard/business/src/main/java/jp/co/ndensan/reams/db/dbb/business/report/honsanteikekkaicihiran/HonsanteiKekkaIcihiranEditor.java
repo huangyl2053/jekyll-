@@ -332,7 +332,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         KozaRelateEntity releteEntity = entity.get口座Entity();
         IKoza koza = new Koza(releteEntity);
         if (koza.get金融機関コード() != null) {
-            if (ゆうちょ銀行.equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4)) && koza.get金融機関コード().value().length() >= NUM_4) {
+            if (koza.get金融機関コード().value().length() >= NUM_4 && ゆうちょ銀行
+                    .equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4))) {
                 金融機関コードHander1(source, koza);
             } else {
                 金融機関コードHander2(source, koza);
@@ -344,21 +345,21 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         RString 金融機関コード;
         RString 通帳記号;
         RString 通帳番号;
-        if (koza.get通帳記号() != null && koza.get通帳番号() != null && koza.get口座名義人漢字() != null) {
+        if (koza.getEdited通帳記号() != null && koza.getEdited通帳番号() != null && koza.get口座名義人漢字() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4) {
                 金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
             } else {
                 金融機関コード = koza.get金融機関コード().value();
             }
-            if (koza.get通帳記号().length() >= NUM_5) {
-                通帳記号 = koza.get通帳記号().substring(NUM_0, NUM_5);
+            if (koza.getEdited通帳記号().length() >= NUM_5) {
+                通帳記号 = koza.getEdited通帳記号().substring(NUM_0, NUM_5);
             } else {
-                通帳記号 = koza.get通帳記号();
+                通帳記号 = koza.getEdited通帳記号();
             }
             if (koza.get通帳番号().length() >= NUM_8) {
-                通帳番号 = koza.get通帳番号().substring(NUM_0, NUM_8);
+                通帳番号 = koza.getEdited通帳番号().substring(NUM_0, NUM_8);
             } else {
-                通帳番号 = koza.get通帳番号();
+                通帳番号 = koza.getEdited通帳番号();
             }
             source.listUpper_10 = 金融機関コード.concat(RString.FULL_SPACE)
                     .concat(通帳記号)
@@ -383,7 +384,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             } else {
                 支店コード = koza.get支店コード().value();
             }
-            if (koza.get預金種別().get預金種別略称().length() >= NUM_2) {
+            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
                 預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
             } else {
                 預金種別略称 = koza.get預金種別().get預金種別略称();
