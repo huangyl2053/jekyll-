@@ -255,6 +255,9 @@ public class ShinsaKaiKekkaInputCsvEntity {
     @CsvField(order = 118, name = "内容")
     private RString researchItem;
 
+    /**
+     * コンストラクタです。
+     */
     public ShinsaKaiKekkaInputCsvEntity() {
     }
 
