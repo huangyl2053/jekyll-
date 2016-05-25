@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.service.core.jukyushikakushomeishohakko;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.jukyushikakushomeishohakko.JukyuShikakuShomeishoModel;
@@ -332,9 +332,9 @@ public class JukyuShikakuShomeishoHakkoFinder {
         Map<Integer, RString> 通知文List = ReportUtil.get通知文(SubGyomuCode.DBA介護資格, new ReportId("DBA100004_JukyuShikakuShomeisho"),
                 KamokuCode.EMPTY, 1);
         RStringBuilder sb = new RStringBuilder();
-        Set<Integer> keySet = 通知文List.keySet();
-        for (Integer index : keySet) {
-            sb.append(通知文List.get(index));
+        Iterator<Map.Entry<Integer, RString>> keySet = 通知文List.entrySet().iterator();
+        while (keySet.hasNext()) {
+            sb.append(keySet.next().getValue());
         }
         return sb.toRString();
     }
