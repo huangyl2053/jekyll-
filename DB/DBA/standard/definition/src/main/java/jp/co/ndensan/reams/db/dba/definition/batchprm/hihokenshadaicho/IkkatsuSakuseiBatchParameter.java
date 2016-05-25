@@ -49,6 +49,13 @@ public class IkkatsuSakuseiBatchParameter extends BatchParameterBase {
     }
 
     /**
+     * コンストラクタです。<br/>
+     *
+     */
+    public IkkatsuSakuseiBatchParameter() {
+    }
+
+    /**
      * processのパラメータを生成します。
      *
      * @return processパラメータ
