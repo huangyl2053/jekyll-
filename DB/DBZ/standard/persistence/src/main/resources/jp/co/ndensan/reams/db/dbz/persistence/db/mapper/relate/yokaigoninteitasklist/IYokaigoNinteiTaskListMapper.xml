@@ -779,7 +779,7 @@
             INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
                 ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" 
-                ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+                ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER JOIN 
