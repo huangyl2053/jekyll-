@@ -235,17 +235,20 @@ public class FukaRirekiPanel {
         FukaShokaiKey atoRireki = ViewStateKeyCreator.createFukaShokaiKey(atoFuka, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
         ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, atoRireki);
 
-        if (履歴番号 == 1) {
-            ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前年度最終との比較(atoRireki));
-        } else {
-            Fuka maeFuka = manager.get介護賦課(
-                    choteiNendo,
-                    rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
-                    new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-                    履歴番号 - 1);
-            FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(maeFuka, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
-            ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
-        }
+        FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(manager.get介護賦課For任意対象比較(atoFuka.get調定年度(), atoFuka.get賦課年度(), atoFuka.get通知書番号(), atoFuka.get履歴番号()).get(), new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
+        ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
+//        ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, maeRireki);
+//        if (履歴番号 == 1) {
+//            ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前年度最終との比較(atoRireki));
+//        } else {
+//            Fuka maeFuka = manager.get介護賦課(
+//                    choteiNendo,
+//                    rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
+//                    new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
+//                    履歴番号 - 1);
+//            FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(maeFuka, new AtenaMeisho(kihonDiv.getCcdKaigoAtenaInfo().get氏名漢字()));
+//            ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
+//        }
 
 //        Optional<Fuka> value = fukaFinder.find賦課直近(
 //                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),

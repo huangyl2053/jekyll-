@@ -39,49 +39,50 @@ public class FukaHikakuTargets {
     }
 
     private static Optional<Fuka> findFukaBy任意比較(FukaManager manager, FukaShokaiKey key) {
-        return manager.get介護賦課For任意対象比較(key.get調定年度(), key.get賦課年度(), key.get被保険者番号(), key.get更正日時().getRDateTime());
+//        return manager.get介護賦課For任意対象比較(key.get調定年度(), key.get賦課年度(), key.get被保険者番号(), key.get更正日時().getRDateTime());
+        return manager.get介護賦課For任意対象比較(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号());
     }
 
     private static List<Fuka> find比較対象s(FukaHikakuInput fukaHikakuInput) {
         FukaManager manager = new FukaManager();
 
         Optional<Fuka> fuka1;
-        switch (fukaHikakuInput.getMode()) {
-            case 対象指定:
-                fuka1 = findFukaBy任意比較(manager, fukaHikakuInput.getFukaShokaiKey(0));
-                break;
-            default:
+//        switch (fukaHikakuInput.getMode()) {
+//            case 対象指定:
+//                fuka1 = findFukaBy任意比較(manager, fukaHikakuInput.getFukaShokaiKey(0));
+//                break;
+//            default:
                 fuka1 = findFukaBy(manager, fukaHikakuInput.getFukaShokaiKey(0));
-                break;
-        }
+//                break;
+//        }
 
         if (!fuka1.isPresent()) {
             return Collections.emptyList();
         }
         List<Fuka> list = new ArrayList<>();
         list.add(fuka1.get());
-        switch (fukaHikakuInput.getMode()) {
-            case 前年度最終:
-                Optional<Fuka> before = manager
-                        .find前年度賦課履歴(fuka1.get().get賦課年度(), fuka1.get().get被保険者番号())
-                        .getグループ化賦課履歴()
-                        .findFirst();
-                if (before.isPresent()) {
-                    list.add(before.get());
-                }
-                break;
-            case 対象指定:
-                Optional<Fuka> fuka2 = findFukaBy任意比較(manager, fukaHikakuInput.getFukaShokaiKey(1));
-                if (fuka2.isPresent()) {
-                    list.add(fuka2.get());
-                }
-                break;
-            default:
+//        switch (fukaHikakuInput.getMode()) {
+//            case 前年度最終:
+//                Optional<Fuka> before = manager
+//                        .find前年度賦課履歴(fuka1.get().get賦課年度(), fuka1.get().get被保険者番号())
+//                        .getグループ化賦課履歴()
+//                        .findFirst();
+//                if (before.isPresent()) {
+//                    list.add(before.get());
+//                }
+//                break;
+//            case 対象指定:
+//                Optional<Fuka> fuka2 = findFukaBy任意比較(manager, fukaHikakuInput.getFukaShokaiKey(1));
+//                if (fuka2.isPresent()) {
+//                    list.add(fuka2.get());
+//                }
+//                break;
+//            default:
                 Optional<Fuka> fuka3 = findFukaBy(manager, fukaHikakuInput.getFukaShokaiKey(1));
                 if (fuka3.isPresent()) {
                     list.add(fuka3.get());
                 }
-        }
+//        }
         return list;
     }
 
