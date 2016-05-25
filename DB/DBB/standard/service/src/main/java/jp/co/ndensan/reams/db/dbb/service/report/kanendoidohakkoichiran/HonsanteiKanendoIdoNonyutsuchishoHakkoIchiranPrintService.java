@@ -104,9 +104,9 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
             @Override
             public int compare(EditedHonSanteiTsuchiShoKyotsu o1, EditedHonSanteiTsuchiShoKyotsu o2) {
                 int flag = o2.get通知書番号().compareTo(o1.get通知書番号());
-                if (0 == flag) {
+                if (INDEX_0 == flag) {
                     flag = o2.get被保険者番号().compareTo(o1.get被保険者番号());
-                    if (0 == flag) {
+                    if (INDEX_0 == flag) {
                         flag = o2.get今後納付すべき額().compareTo(o1.get今後納付すべき額());
                     }
                 }
