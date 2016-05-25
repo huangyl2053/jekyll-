@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2060001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.ChosaInputCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.DBE2060001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.DBE2060001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.NinteichosaIraiListCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.NinteichosaKekkaNyushuDiv;
@@ -226,7 +227,7 @@ public class NinteichosaKekkaNyushu {
             requestDiv.getCcdKanryoMsg().setMessage(
                     new RString("完了処理・認定調査結果入手の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.処理完了).respond();
+            return ResponseData.of(requestDiv).setState(DBE2060001StateName.完了);
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -237,8 +238,8 @@ public class NinteichosaKekkaNyushu {
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 row.getNinteiShinseiDay().getValue() != null
-                ? row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.KANJI).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード(),
                 NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).get名称(),
                 row.getNinteiChosaItakusakiCode(),
@@ -247,19 +248,19 @@ public class NinteichosaKekkaNyushu {
                 row.getKonkaiChosain(),
                 row.getHokensha(),
                 row.getChosahyoDataNyuryokuDay().getValue() != null
-                ? row.getChosahyoDataNyuryokuDay().getValue().wareki().eraType(EraType.KANJI).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosahyoDataNyuryokuDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaTokusokuHakkoDay().getValue() != null
-                ? row.getChosaTokusokuHakkoDay().getValue().wareki().eraType(EraType.KANJI).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosaTokusokuHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaTokusokuHoho(),
                 new RString(row.getChosaTokusokuCount().getValue().toString()),
                 row.getChosaTokusokuLiit().getValue() != null
-                ? row.getChosaTokusokuLiit().getValue().wareki().eraType(EraType.KANJI).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosaTokusokuLiit().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosahyoKanryoDay().getValue() != null
-                ? row.getChosahyoKanryoDay().getValue().wareki().eraType(EraType.KANJI).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosahyoKanryoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
+                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChikuCode(),
                 row.getChosaTokusokuChiku());
         return data;
