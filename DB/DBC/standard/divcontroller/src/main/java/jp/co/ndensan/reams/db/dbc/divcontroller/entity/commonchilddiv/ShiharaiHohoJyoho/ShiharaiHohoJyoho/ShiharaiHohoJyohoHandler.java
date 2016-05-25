@@ -122,7 +122,7 @@ public class ShiharaiHohoJyohoHandler {
                                 createParam(支給申請情報.getHihokenshaNo() == null ? HihokenshaNo.EMPTY : new HihokenshaNo(支給申請情報.getHihokenshaNo().value()),
                                         支給申請情報.getShikyushinseiServiceYM() == null ? FlexibleYearMonth.EMPTY : 支給申請情報.getShikyushinseiServiceYM(),
                                         支給申請情報.getShikyushinseiSeiriNo() == null ? RString.EMPTY : 支給申請情報.getShikyushinseiSeiriNo(),
-                                        div.getTxtKeiyakuNo() == null ? RString.EMPTY : div.getTxtKeiyakuNo().getValue()));
+                                        支給申請情報.getKeiyakuNo() == null ? RString.EMPTY : 支給申請情報.getKeiyakuNo()));
                 受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, new RString("初期"));
             }
         }
@@ -606,10 +606,10 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtYokinShubetsu().setDisplayNone(false);
             div.getTxtTenban().setDisplayNone(true);
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(口座情報.get預金種別()));
+        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(口座情報.get預金種別()));
         if (uzT0007CodeBusiness != null) {
 
-            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード略称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード略称());
+            div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
         }
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
@@ -659,9 +659,9 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtKinyuKikanShitenCode().setDomain(受領委任契約事業者.get支店コード());
             口座払いエリアの初期化Private(kinyuKikan, kinyuKikanShiten);
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する略称(nullToEmpty(受領委任契約事業者.get口座種別()));
+        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(受領委任契約事業者.get口座種別()));
         if (uzT0007CodeBusiness != null) {
-            div.getTxtYokinShubetsu1().setValue(uzT0007CodeBusiness.getコード略称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード略称());
+            div.getTxtYokinShubetsu1().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
         }
         div.getTxtKozaNo1().setValue(nullToEmpty(受領委任契約事業者.get口座番号()));
         div.getTxtMeigininKana1().setDomain(受領委任契約事業者.get口座名義人カナ() == null
@@ -679,7 +679,7 @@ public class ShiharaiHohoJyohoHandler {
         }
     }
 
-    private UzT0007CodeBusiness 預金種別に対する略称(RString 口座種別) {
+    private UzT0007CodeBusiness 預金種別に対する名称(RString 口座種別) {
 
         return new UzT0007CodeBusiness(CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)) == null
                 ? new UzT0007CodeEntity() : CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, 預金種別, new Code(口座種別)));
@@ -906,6 +906,43 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanName1().setReadOnly(true);
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
+    }
+
+    /**
+     * 開始日と終了日の整合性チェック
+     *
+     * @return エラー
+     */
+    public boolean 開始日と終了日の整合性チェック() {
+
+        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(div.getTxtStartYMD().getValue().toDateString())
+                    && !RString.isNullOrEmpty(div.getTxtEndYMD().getValue().toDateString())
+                    && (!div.getTxtStartYMD().getValue().isBeforeOrEquals(div.getTxtEndYMD().getValue()))) {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 開始時間と終了時間の整合性チェック
+     *
+     * @return エラー
+     */
+    public boolean 開始時間と終了時間の整合性チェック() {
+
+        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(div.getTxtStartYMD().getValue().toDateString())
+                    && !RString.isNullOrEmpty(div.getTxtEndYMD().getValue().toDateString())
+                    && (div.getTxtStartYMD().getValue().equals(div.getTxtEndYMD().getValue()))
+                    && (div.getTxtStartHHMM().getValue().isAfter(div.getTxtEndHHMM().getValue()))) {
+
+                return true;
+            }
+        }
+        return false;
     }
 
     private void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {

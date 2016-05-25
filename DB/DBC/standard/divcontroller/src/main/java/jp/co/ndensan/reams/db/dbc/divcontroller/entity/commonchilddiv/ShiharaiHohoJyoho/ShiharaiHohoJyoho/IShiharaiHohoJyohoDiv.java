@@ -77,4 +77,18 @@ public interface IShiharaiHohoJyohoDiv extends ICommonChildDivBaseProperties {
      * @return RString
      */
     public RString getKozaID();
+
+    /**
+     * 開始日と終了日の整合性チェック。
+     *
+     * @return boolean
+     */
+    public boolean 開始日と終了日の整合性チェック();
+
+    /**
+     * 開始時間と終了時間の整合性チェック。
+     *
+     * @return boolean
+     */
+    public boolean 開始時間と終了時間の整合性チェック();
 }
