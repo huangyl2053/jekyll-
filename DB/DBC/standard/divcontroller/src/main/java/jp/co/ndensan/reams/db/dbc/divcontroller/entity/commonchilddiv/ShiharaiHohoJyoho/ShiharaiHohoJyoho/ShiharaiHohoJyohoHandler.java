@@ -526,7 +526,6 @@ public class ShiharaiHohoJyohoHandler {
 
         if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
 
-            div.getDdlKozaID().setReadOnly(true);
             div.getBtnKozaToroku().setDisabled(false);
             div.getTxtKinyuKikanCode().setReadOnly(true);
             div.getTxtKinyuKikanName().setReadOnly(true);
@@ -919,43 +918,6 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKinyuKikanName1().setReadOnly(true);
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
-    }
-
-    /**
-     * 開始日と終了日の整合性チェック
-     *
-     * @return エラー
-     */
-    public boolean 開始日と終了日の整合性チェック() {
-
-        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
-            if (!RString.isNullOrEmpty(div.getTxtStartYMD().getValue().toDateString())
-                    && !RString.isNullOrEmpty(div.getTxtEndYMD().getValue().toDateString())
-                    && (!div.getTxtStartYMD().getValue().isBeforeOrEquals(div.getTxtEndYMD().getValue()))) {
-
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 開始時間と終了時間の整合性チェック
-     *
-     * @return エラー
-     */
-    public boolean 開始時間と終了時間の整合性チェック() {
-
-        if (!div.getRadMadoguti().getSelectedKey().isNullOrEmpty()) {
-            if (!RString.isNullOrEmpty(div.getTxtStartYMD().getValue().toDateString())
-                    && !RString.isNullOrEmpty(div.getTxtEndYMD().getValue().toDateString())
-                    && (div.getTxtStartYMD().getValue().equals(div.getTxtEndYMD().getValue()))
-                    && (div.getTxtStartHHMM().getValue().isAfter(div.getTxtEndHHMM().getValue()))) {
-
-                return true;
-            }
-        }
-        return false;
     }
 
     private void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
