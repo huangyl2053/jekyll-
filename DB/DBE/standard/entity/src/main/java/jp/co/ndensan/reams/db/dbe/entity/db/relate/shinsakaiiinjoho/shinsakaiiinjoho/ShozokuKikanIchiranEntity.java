@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 所属機関一覧情報Entityクラスです。
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 @lombok.Setter
 @lombok.Getter

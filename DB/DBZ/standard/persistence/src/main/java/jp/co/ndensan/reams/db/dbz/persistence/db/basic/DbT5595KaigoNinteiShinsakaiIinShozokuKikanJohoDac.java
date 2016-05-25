@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護認定審査会委員所属機関情報のデータアクセスクラスです。
  *
- * @reamsid_L DBE-0110-010 wangxiaodong
+ * @reamsid_L DBE-0110-010 wangxiaodong
  */
 public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac implements ISaveable<DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity> {
 
