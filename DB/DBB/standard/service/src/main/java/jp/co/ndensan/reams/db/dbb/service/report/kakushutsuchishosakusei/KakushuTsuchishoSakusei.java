@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.henkokenchushitsuchisho.KaigoH
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.HokenryoNonyuTsuchishoBookItem;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport;
-import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho;
@@ -59,7 +58,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.Kakus
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kakushutsuchishosakusei.KakushuTsuchishoFindEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishoginfuri.KarisanteiHokenryoNonyuTsuchishoGinfuriSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2006ChoshuYuyoDac;
@@ -77,6 +75,7 @@ import jp.co.ndensan.reams.db.dbb.service.report.gemmen.GenmenKetteiTsuchiShoPri
 import jp.co.ndensan.reams.db.dbb.service.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteifukadaicho.KarisanteiFukaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteihenkotsuchisho.KarisanteiHenkoTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishoginfuri.KarisanteihokenryononyutsuchishoginfuriPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService;
@@ -712,9 +711,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         if (ReportIdDBB.DBB100014.getReportId().equals(帳票ID)) {
             new KarisanteiHokenryoNonyuTsuchishoKigotoPrintService().print(仮算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID)) {
-            KarisanteiHokenryoNonyuTsuchishoGinfuriReport report
-                    = KarisanteiHokenryoNonyuTsuchishoGinfuriReport.createFrom(仮算定納入通知書情報, null);
-            new Printer<KarisanteiHokenryoNonyuTsuchishoGinfuriSource>().spool(null, report);
+            new KarisanteihokenryononyutsuchishoginfuriPrintService().print(仮算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100021.getReportId().equals(帳票ID)) {
             HokenryoNonyuTsuchishoBookItem item = new HokenryoNonyuTsuchishoBookItem(仮算定納入通知書情報, null);
             KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport report
