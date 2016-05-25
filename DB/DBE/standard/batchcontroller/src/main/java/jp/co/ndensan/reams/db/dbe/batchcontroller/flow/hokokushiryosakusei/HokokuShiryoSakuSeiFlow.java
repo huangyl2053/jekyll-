@@ -77,7 +77,7 @@ public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBa
      */
     @Step(認定実施状況統計)
     protected IBatchFlowCommand selectJisshiJokyoTokei() {
-        return simpleBatch(JisshiJokyoTokeiProcess.class)
+        return loopBatch(JisshiJokyoTokeiProcess.class)
                 .arguments(getParameter().toJisshiJokyoTokeiProcessParameter()).define();
     }
 
