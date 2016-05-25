@@ -31,6 +31,11 @@ public class HihokenshashoB4BodyItem {
     private RString umareTaisho;
     private RString umareShowa;
     private RString umareYy;
+    private RString umareMm1;
+    private RString umareDd1;
+    private RString umareYyyy1;
+    private RString umareMmS1;
+    private RString umareDdS1;
     private RString seibetsuMan;
     private RString seibetsuWoman;
     private RString kofuymdGengo;
@@ -143,6 +148,11 @@ public class HihokenshashoB4BodyItem {
     private RString umareTaisho2;
     private RString umareShowa2;
     private RString umareYy2;
+    private RString umareMm2;
+    private RString umareDd2;
+    private RString umareYyyy2;
+    private RString umareMmS2;
+    private RString umareDdS2;
     private RString seibetsuMan2;
     private RString seibetsuWoman2;
     private RString kofuymdGengo2;

@@ -248,7 +248,8 @@ public class TotalHandler {
         for (HihokenshashoChoBusiness item : business) {
             HihokenshashoB4Item bodyItem = new HihokenshashoB4Item(item.get有効期限1(), item.get被保険者番号(), item.get郵便番号(),
                     item.get行政区1(), item.get行政区2(), item.get住所(), item.get氏名カナ(), item.get氏名(), item.get明治(),
-                    item.get大正(), item.get昭和(), item.get生年月日(), item.get男(), item.get女(),
+                    item.get大正(), item.get昭和(), item.get和暦年(), item.get月(),
+                    item.get日(), item.get西暦年(), item.get月(), item.get日(), item.get男(), item.get女(),
                     item.get交付年月日(), item.get再交付(), item.get保険者NO1(), item.get保険者NO2(), item.get保険者NO3(),
                     item.get保険者NO4(), item.get保険者NO5(), item.get保険者NO6(), item.get要介護認定区分(), item.get認定年月日(),
                     item.get認定有効期間開始年月日(), item.get認定有効期間終了年月日(), item.get訪問期間開始年月日(), item.get訪問期間終了年月日(),
