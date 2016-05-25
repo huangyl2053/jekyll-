@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEditor {
 
-    private final List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList;
+    private final KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity;
     private final FlexibleYear 賦課年度;
     private final YMDHMS 調定日時;
     private final RString 市町村コード;
@@ -49,6 +49,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     private final RString 住所編集;
     private final List<RString> 出力順項目リスト;
     private final List<RString> 改頁項目リスト;
+    private static final int NUM_負1 = -1;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -65,18 +66,19 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     private static final char CHAR_0 = '0';
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
-    private static final RString 半角ハイフン = new RString("_");
     private final RString 特別徴収 = new RString("特別徴収");
     private final RString 普通徴収 = new RString("普通徴収");
     private final RString 併用徴収 = new RString("併用徴収");
     private final RString 本算定賦課なし = new RString("本算定賦課なし");
     private final RString 本算定前半普徴 = new RString("本算定前半普徴");
     private static final RString 作成 = new RString("作成");
+    private static final RString ゆうちょ銀行 = new RString("9900");
+    private static final RString HYPHEN = new RString("-");
 
     /**
      * コンストラクタです。
      *
-     * @param 計算後情報_宛名_口座EntityList List<KeisangojohoAtenaKozaEntity>
+     * @param 計算後情報_宛名_口座Entity KeisangojohoAtenaKozaEntity
      * @param 賦課年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @param 市町村コード RString
@@ -85,7 +87,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
      * @param 出力順項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
      */
-    public HonsanteiKekkaIcihiranEditor(List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座EntityList,
+    public HonsanteiKekkaIcihiranEditor(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity,
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
             RString 市町村コード,
@@ -93,7 +95,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             RString 住所編集,
             List<RString> 出力順項目リスト,
             List<RString> 改頁項目リスト) {
-        this.計算後情報_宛名_口座EntityList = 計算後情報_宛名_口座EntityList;
+        this.計算後情報_宛名_口座Entity = 計算後情報_宛名_口座Entity;
         this.賦課年度 = 賦課年度;
         this.調定日時 = 調定日時;
         this.市町村コード = 市町村コード;
@@ -109,22 +111,20 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     }
 
     private HonsanteiKekkaIcihiranReportSource editSource(HonsanteiKekkaIcihiranReportSource source) {
-        for (KeisangojohoAtenaKozaEntity entity : 計算後情報_宛名_口座EntityList) {
 
-            editorSource_partONE(entity, source);
-            editorSource_partTWO(entity, source);
-            editorSource_partTHREE(entity, source);
-        }
+        editorSource_partONE(計算後情報_宛名_口座Entity, source);
+        editorSource_partTWO(計算後情報_宛名_口座Entity, source);
+        editorSource_partTHREE(計算後情報_宛名_口座Entity, source);
         return source;
     }
 
-    private void editorSource_partONE(KeisangojohoAtenaKozaEntity entity, HonsanteiKekkaIcihiranReportSource source) {
+    private void editorSource_partONE(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity, HonsanteiKekkaIcihiranReportSource source) {
         if (調定日時 != null) {
             RString 帳票作成年月日 = 調定日時.getRDateTime().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             RString 帳票作成時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            source.printTimeStamp = 帳票作成年月日.concat(RString.FULL_SPACE).concat(帳票作成時)
-                    .concat(RString.FULL_SPACE).concat(作成);
+            source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
+                    .concat(RString.HALF_SPACE).concat(作成);
         }
         if (賦課年度 != null) {
             source.nendo = 賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
@@ -148,15 +148,15 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         source.fuchoKi11 = 期の表記.get(NUM_10);
         source.fuchoKi12 = 期の表記.get(NUM_11);
 
-        if (entity.get通知書番号() != null) {
-            source.listUpper_1 = new RString(entity.get通知書番号().toString());
+        if (計算後情報_宛名_口座Entity.get通知書番号() != null) {
+            source.listUpper_1 = new RString(計算後情報_宛名_口座Entity.get通知書番号().toString());
         }
-        AtenaMeisho 氏名 = entity.get宛名Entity().getKanjiShimei();
+        AtenaMeisho 氏名 = 計算後情報_宛名_口座Entity.get宛名Entity().getKanjiShimei();
         if (氏名 != null) {
             source.listUpper_2 = 氏名.value();
         }
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
-        FlexibleDate 生年月日 = entity.get宛名Entity().getSeinengappiYMD();
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座Entity.get宛名Entity());
+        FlexibleDate 生年月日 = 計算後情報_宛名_口座Entity.get宛名Entity().getSeinengappiYMD();
         if (生年月日 != null) {
             if (宛名.is日本人()) {
                 source.listUpper_3 = 生年月日.wareki().toDateString();
@@ -167,22 +167,22 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         if (宛名.get性別() != null) {
             source.listUpper_4 = 宛名.get性別().code();
         }
-        if (entity.get世帯コード() != null) {
-            source.listUpper_5 = entity.get世帯コード().value();
+        if (計算後情報_宛名_口座Entity.get世帯コード() != null) {
+            source.listUpper_5 = 計算後情報_宛名_口座Entity.get世帯コード().value();
         }
-        if (entity.get識別コード() != null) {
-            source.listUpper_6 = entity.get識別コード().value();
+        if (計算後情報_宛名_口座Entity.get識別コード() != null) {
+            source.listUpper_6 = 計算後情報_宛名_口座Entity.get識別コード().value();
         }
-        ChoikiCode 町域コード = entity.get宛名Entity().getChoikiCode();
+        ChoikiCode 町域コード = 計算後情報_宛名_口座Entity.get宛名Entity().getChoikiCode();
         if (町域コード != null) {
             source.listUpper_7 = 町域コード.value();
         }
-        YubinNo 郵便番号 = entity.get宛名Entity().getYubinNo();
+        YubinNo 郵便番号 = 計算後情報_宛名_口座Entity.get宛名Entity().getYubinNo();
         if (郵便番号 != null) {
             source.listUpper_8 = 郵便番号.value();
         }
         source.listUpper_9 = 住所編集;
-        source.listUpper_10 = set口座の情報(entity);
+        kozaJoho(source, 計算後情報_宛名_口座Entity);
 
     }
 
@@ -328,31 +328,76 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         return 期の表記;
     }
 
-    private RString set口座の情報(KeisangojohoAtenaKozaEntity entity) {
-
+    private void kozaJoho(HonsanteiKekkaIcihiranReportSource source, KeisangojohoAtenaKozaEntity entity) {
         KozaRelateEntity releteEntity = entity.get口座Entity();
-        IKoza 口座 = new Koza(releteEntity);
-        RString 金融機関コード = RString.EMPTY;
-        RString 口座名義人漢字 = RString.EMPTY;
-        if (口座.get金融機関コード() != null) {
-            金融機関コード = 口座.get金融機関コード().value().substring(NUM_0, NUM_4);
+        IKoza koza = new Koza(releteEntity);
+        if (koza.get金融機関コード() != null) {
+            if (ゆうちょ銀行.equals(koza.get金融機関コード().value().substring(NUM_0, NUM_4)) && koza.get金融機関コード().value().length() >= NUM_4) {
+                金融機関コードHander1(source, koza);
+            } else {
+                金融機関コードHander2(source, koza);
+            }
         }
-        if (口座.get口座名義人漢字() != null) {
-            口座名義人漢字 = 口座.get口座名義人漢字().value();
+    }
+
+    private void 金融機関コードHander1(HonsanteiKekkaIcihiranReportSource source, IKoza koza) {
+        RString 金融機関コード;
+        RString 通帳記号;
+        RString 通帳番号;
+        if (koza.get通帳記号() != null && koza.get通帳番号() != null && koza.get口座名義人漢字() != null) {
+            if (koza.get金融機関コード().value().length() >= NUM_4) {
+                金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
+            } else {
+                金融機関コード = koza.get金融機関コード().value();
+            }
+            if (koza.get通帳記号().length() >= NUM_5) {
+                通帳記号 = koza.get通帳記号().substring(NUM_0, NUM_5);
+            } else {
+                通帳記号 = koza.get通帳記号();
+            }
+            if (koza.get通帳番号().length() >= NUM_8) {
+                通帳番号 = koza.get通帳番号().substring(NUM_0, NUM_8);
+            } else {
+                通帳番号 = koza.get通帳番号();
+            }
+            source.listUpper_10 = 金融機関コード.concat(RString.FULL_SPACE)
+                    .concat(通帳記号)
+                    .concat(HYPHEN).concat(通帳番号)
+                    .concat(RString.FULL_SPACE).concat(koza.get口座名義人漢字().toString());
         }
-        if (口座.isゆうちょ銀行()) {
-            RString 通帳記号 = 口座.get通帳記号().substringReturnAsPossible(NUM_0, NUM_5);
-            RString 通帳番号 = 口座.get通帳番号().substringReturnAsPossible(NUM_0, NUM_8);
-            return 金融機関コード.concat(RString.FULL_SPACE).concat(通帳記号).concat(半角ハイフン).concat(通帳番号)
-                    .concat(RString.FULL_SPACE).concat(口座名義人漢字);
-        } else {
+    }
 
-            RString 支店コード = 口座.get支店コード().getColumnValue().substringReturnAsPossible(NUM_0, NUM_3);
-            RString 口座種別 = 口座.get預金種別().get預金種別略称().substringReturnAsPossible(NUM_0, NUM_2);
-            RString 口座番号 = 口座.get口座番号().substringReturnAsPossible(NUM_0, NUM_7);
-            return 金融機関コード.concat(半角ハイフン).concat(支店コード).concat(RString.FULL_SPACE).concat(口座種別)
-                    .concat(半角ハイフン).concat(口座番号).concat(RString.FULL_SPACE).concat(口座名義人漢字);
-
+    private void 金融機関コードHander2(HonsanteiKekkaIcihiranReportSource source, IKoza koza) {
+        RString 金融機関コード;
+        RString 預金種別略称;
+        RString 支店コード;
+        RString 口座番号;
+        if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
+            if (koza.get金融機関コード().value().length() >= NUM_4) {
+                金融機関コード = koza.get金融機関コード().value().substring(NUM_0, NUM_4);
+            } else {
+                金融機関コード = koza.get金融機関コード().value();
+            }
+            if (koza.get支店コード().value().length() >= NUM_5) {
+                支店コード = koza.get支店コード().value().substring(NUM_0, NUM_5);
+            } else {
+                支店コード = koza.get支店コード().value();
+            }
+            if (koza.get預金種別().get預金種別略称().length() >= NUM_2) {
+                預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
+            } else {
+                預金種別略称 = koza.get預金種別().get預金種別略称();
+            }
+            if (koza.get口座番号().length() >= NUM_7) {
+                口座番号 = koza.get口座番号().substring(NUM_0, NUM_7);
+            } else {
+                口座番号 = koza.get口座番号();
+            }
+            source.listUpper_10 = 金融機関コード.concat(HYPHEN)
+                    .concat(支店コード).concat(RString.FULL_SPACE)
+                    .concat(預金種別略称)
+                    .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
+                    .concat(koza.get口座名義人漢字().toString());
         }
     }
 
@@ -370,11 +415,11 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
                 .add(nullTOZero(entity.get普徴期別金額14()));
         if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return RString.EMPTY;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 特別徴収;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1) {
             return 普通徴収;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1) {
             return 併用徴収;
         } else {
             return RString.EMPTY;
@@ -395,11 +440,11 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
                 .add(nullTOZero(entity.get普徴期別金額14()));
         if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 本算定賦課なし;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 本算定前半普徴;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) == NUM_負1) {
             return RString.EMPTY;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_1) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) == NUM_負1) {
             return RString.EMPTY;
         } else {
             return RString.EMPTY;
@@ -451,40 +496,40 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             int currentMonth, RString 保険料算定段階) {
         switch (currentMonth) {
             case NUM_1:
-                source.listCenter_9 = 保険料算定段階;
-                break;
-            case NUM_2:
-                source.listCenter_10 = 保険料算定段階;
-                break;
-            case NUM_3:
-                source.listCenter_11 = 保険料算定段階;
-                break;
-            case NUM_4:
-                source.listCenter_12 = 保険料算定段階;
-                break;
-            case NUM_5:
-                source.listCenter_13 = 保険料算定段階;
-                break;
-            case NUM_6:
-                source.listCenter_14 = 保険料算定段階;
-                break;
-            case NUM_7:
-                source.listCenter_15 = 保険料算定段階;
-                break;
-            case NUM_8:
-                source.listCenter_16 = 保険料算定段階;
-                break;
-            case NUM_9:
-                source.listCenter_17 = 保険料算定段階;
-                break;
-            case NUM_10:
                 source.listCenter_18 = 保険料算定段階;
                 break;
-            case NUM_11:
+            case NUM_2:
                 source.listCenter_19 = 保険料算定段階;
                 break;
-            case NUM_12:
+            case NUM_3:
                 source.listCenter_20 = 保険料算定段階;
+                break;
+            case NUM_4:
+                source.listCenter_9 = 保険料算定段階;
+                break;
+            case NUM_5:
+                source.listCenter_10 = 保険料算定段階;
+                break;
+            case NUM_6:
+                source.listCenter_11 = 保険料算定段階;
+                break;
+            case NUM_7:
+                source.listCenter_12 = 保険料算定段階;
+                break;
+            case NUM_8:
+                source.listCenter_13 = 保険料算定段階;
+                break;
+            case NUM_9:
+                source.listCenter_14 = 保険料算定段階;
+                break;
+            case NUM_10:
+                source.listCenter_15 = 保険料算定段階;
+                break;
+            case NUM_11:
+                source.listCenter_16 = 保険料算定段階;
+                break;
+            case NUM_12:
+                source.listCenter_17 = 保険料算定段階;
                 break;
             default:
                 break;
@@ -495,40 +540,40 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             int currentMonth, RString 保険料算定段階) {
         switch (currentMonth) {
             case NUM_1:
-                source.listCenter_9 = 保険料算定段階;
-                break;
-            case NUM_2:
-                source.listCenter_10 = 保険料算定段階;
-                break;
-            case NUM_3:
-                source.listCenter_11 = 保険料算定段階;
-                break;
-            case NUM_4:
-                source.listCenter_12 = 保険料算定段階;
-                break;
-            case NUM_5:
-                source.listCenter_13 = 保険料算定段階;
-                break;
-            case NUM_6:
-                source.listCenter_14 = 保険料算定段階;
-                break;
-            case NUM_7:
-                source.listCenter_15 = 保険料算定段階;
-                break;
-            case NUM_8:
-                source.listCenter_16 = 保険料算定段階;
-                break;
-            case NUM_9:
-                source.listCenter_17 = 保険料算定段階;
-                break;
-            case NUM_10:
                 source.listCenter_18 = 保険料算定段階;
                 break;
-            case NUM_11:
+            case NUM_2:
                 source.listCenter_19 = 保険料算定段階;
                 break;
-            case NUM_12:
+            case NUM_3:
                 source.listCenter_20 = 保険料算定段階;
+                break;
+            case NUM_4:
+                source.listCenter_9 = 保険料算定段階;
+                break;
+            case NUM_5:
+                source.listCenter_10 = 保険料算定段階;
+                break;
+            case NUM_6:
+                source.listCenter_11 = 保険料算定段階;
+                break;
+            case NUM_7:
+                source.listCenter_12 = 保険料算定段階;
+                break;
+            case NUM_8:
+                source.listCenter_13 = 保険料算定段階;
+                break;
+            case NUM_9:
+                source.listCenter_14 = 保険料算定段階;
+                break;
+            case NUM_10:
+                source.listCenter_15 = 保険料算定段階;
+                break;
+            case NUM_11:
+                source.listCenter_16 = 保険料算定段階;
+                break;
+            case NUM_12:
+                source.listCenter_17 = 保険料算定段階;
                 break;
             default:
                 break;

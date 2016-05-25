@@ -83,23 +83,23 @@ public class HonsanteiKekkaIcihiranPrintService {
         List<RString> 出力順項目リスト = get出力順(出力順ID);
         List<RString> 改頁項目リスト = get改頁項目(出力順ID);
 
-        RString 住所編集 = RString.EMPTY;
+        List<RString> 住所編集リスト = new ArrayList<>();
         for (KeisangojohoAtenaKozaEntity entity : 計算後情報_宛名_口座EntityList) {
 
             IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             JushoHenshu jushoHenshu = JushoHenshu.createInstance();
             ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-            住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            RString 住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            住所編集リスト.add(住所編集);
         }
 
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<HonsanteiKekkaIcihiranReportSource> assembler = createAssembler(property, reportManager);) {
+            try (ReportAssembler<HonsanteiKekkaIcihiranReportSource> assembler = createAssembler(property, reportManager)) {
 
                 ReportSourceWriter<HonsanteiKekkaIcihiranReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 new HonsanteiKekkaIcihiranReport(
                         計算後情報_宛名_口座EntityList, 賦課年度, 調定日時,
-                        市町村コード, 市町村名, 住所編集, 出力順項目リスト, 改頁項目リスト).writeBy(reportSourceWriter);
-
+                        市町村コード, 市町村名, 住所編集リスト, 出力順項目リスト, 改頁項目リスト).writeBy(reportSourceWriter);
             }
             return reportManager.publish();
         }
