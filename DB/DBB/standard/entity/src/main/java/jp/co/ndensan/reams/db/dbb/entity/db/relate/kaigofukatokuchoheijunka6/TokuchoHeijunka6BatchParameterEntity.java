@@ -39,7 +39,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 調定年度のsetメソッドです。
      *
-     * @param 調定年度
+     * @param 調定年度 調定年度
      */
     public void set調定年度(FlexibleYear 調定年度) {
         this.調定年度 = 調定年度;
@@ -57,7 +57,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 賦課年度のsetメソッドです。
      *
-     * @param 賦課年度
+     * @param 賦課年度 賦課年度
      */
     public void set賦課年度(FlexibleYear 賦課年度) {
         this.賦課年度 = 賦課年度;
@@ -75,7 +75,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 増額平準化方法のsetメソッドです。
      *
-     * @param 増額平準化方法
+     * @param 増額平準化方法 増額平準化方法
      */
     public void set増額平準化方法(RString 増額平準化方法) {
         this.増額平準化方法 = 増額平準化方法;
@@ -93,7 +93,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 減額平準化方法のsetメソッドです。
      *
-     * @param 減額平準化方法
+     * @param 減額平準化方法 減額平準化方法
      */
     public void set減額平準化方法(RString 減額平準化方法) {
         this.減額平準化方法 = 減額平準化方法;
@@ -111,7 +111,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 帳票グループのsetメソッドです。
      *
-     * @param 帳票グループ
+     * @param 帳票グループ 帳票グループ
      */
     public void set帳票グループ(RString 帳票グループ) {
         this.帳票グループ = 帳票グループ;
@@ -129,7 +129,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 出力帳票entityのsetメソッドです。
      *
-     * @param 出力帳票entity
+     * @param 出力帳票entity 出力帳票entity
      */
     public void set出力帳票entity(List<ShuturyokuChohuoEntity> 出力帳票entity) {
         this.出力帳票entity = 出力帳票entity;
@@ -147,7 +147,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 出力対象指示フラグのsetメソッドです。
      *
-     * @param 出力対象指示フラグ
+     * @param 出力対象指示フラグ 出力対象指示フラグ
      */
     public void set出力対象指示フラグ(RString 出力対象指示フラグ) {
         this.出力対象指示フラグ = 出力対象指示フラグ;
@@ -165,7 +165,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 発行日のsetメソッドです。
      *
-     * @param 発行日
+     * @param 発行日 発行日
      */
     public void set発行日(FlexibleDate 発行日) {
         this.発行日 = 発行日;
@@ -183,7 +183,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     /**
      * 文書番号のsetメソッドです。
      *
-     * @param 文書番号
+     * @param 文書番号 文書番号
      */
     public void set文書番号(RString 文書番号) {
         this.文書番号 = 文書番号;
