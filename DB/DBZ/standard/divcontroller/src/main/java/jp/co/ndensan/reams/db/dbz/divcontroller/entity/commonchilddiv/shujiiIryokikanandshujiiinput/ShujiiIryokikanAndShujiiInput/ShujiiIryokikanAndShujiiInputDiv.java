@@ -421,7 +421,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     @JsonIgnore
     public void initialize(LasdecCode shichosonCode, ShinseishoKanriNo shinseishoKanriNo, SubGyomuCode gyomuCode, RString shujiiIryokikanCode,
             RString iryoKikanMeisho, RString shujiiCode, RString shujiiName) {
-        createHandler().initialize(shichosonCode, shinseishoKanriNo, gyomuCode);
+        createHandler().initialize(shichosonCode, shinseishoKanriNo, gyomuCode, shujiiIryokikanCode, iryoKikanMeisho, shujiiCode, shujiiName);
     }
 
     @JsonIgnore
